@@ -829,7 +829,7 @@
     <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"新增 PIN、圖案、密碼或輕掃"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"滑動"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"圖案"</string>
-    <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN 碼"</string>
+    <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"密碼"</string>
     <string name="unlock_disable_frp_warning_title" msgid="2545569051372893686">"要移除所有裝置解鎖方式嗎？"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"要移除設定檔保護功能嗎？"</string>
@@ -1029,6 +1029,10 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"連接外部顯示屏以開始使用，你亦可嘗試使用其他連接線"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"更多選項"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"按住並拖曳即可重新安排顯示屏位置"</string>
+    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
+    <skip />
+    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"鏡像內置顯示屏"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"要使用新設定嗎？"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"如顯示畫面不如預期，你可還原至先前的設定"</string>
@@ -2211,14 +2215,14 @@
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"捲動速度"</string>
     <string name="mouse_scrolling_speed_make_faster_description" msgid="3542691986036109618">"調高捲動速度"</string>
     <string name="mouse_scrolling_speed_make_slower_description" msgid="349335653732016736">"調低捲動速度"</string>
-    <string name="mouse_pointer_speed_make_faster_desc" msgid="7764518379488092305">"加快游標速度"</string>
-    <string name="mouse_pointer_speed_make_slower_desc" msgid="5833674987434163839">"調慢游標速度"</string>
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7764518379488092305">"調高游標速度"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="5833674987434163839">"調低游標速度"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"調換滑鼠主按鈕"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"將滑鼠左鍵當右鍵使用"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"游標加速"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"滑鼠移動得越快，游標就越遠"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"「<xliff:g id="KEYBOARD_NAME">%s</xliff:g>」的滑鼠鍵"</string>
-    <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"使用「<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>」鍵移動滑鼠游標"</string>
+    <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"使用「<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>」鍵即可移動滑鼠游標"</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"使用「<xliff:g id="CLICK_LABEL">%s</xliff:g>」鍵即可按一下滑鼠主要按鍵"</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"使用「<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>」鍵即可按住滑鼠主要按鍵"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"使用「<xliff:g id="RELEASE_LABEL">%s</xliff:g>」鍵即可放開滑鼠主要按鍵"</string>
@@ -2235,7 +2239,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"觸控板"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"觸控板及滑鼠"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"滑鼠"</string>
-    <string name="mouse_settings_summary" msgid="2593803007491750229">"游標速度、自訂按鈕"</string>
+    <string name="mouse_settings_summary" msgid="2593803007491750229">"游標速度、按鈕自訂"</string>
     <string name="trackpad_settings_summary" msgid="2984582991609553396">"游標速度、手勢"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"點按"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"輕按並拖曳即可移動項目"</string>
@@ -2247,19 +2251,19 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"點擊右下角"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"點擊觸控板右下角，即可查看更多選項"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"游標速度"</string>
-    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2954555994130361440">"加快游標速度"</string>
-    <string name="trackpad_pointer_speed_make_slower_desc" msgid="3071350599514464670">"調慢游標速度"</string>
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2954555994130361440">"調高游標速度"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="3071350599514464670">"調低游標速度"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"使用三指輕按"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"觸控板加速"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"在觸控板上移動得越快，游標就移動得越遠"</string>
     <string name="pointer_fill_style" msgid="561690299676235020">"游標顏色"</string>
-    <string name="pointer_fill_style_black_button" msgid="5831307568100774564">"將游標填滿樣式變更為黑色"</string>
-    <string name="pointer_fill_style_green_button" msgid="3395040005347840735">"將游標填滿樣式變更為綠色"</string>
-    <string name="pointer_fill_style_red_button" msgid="7785934621403739261">"將游標填滿樣式變更為紅色"</string>
-    <string name="pointer_fill_style_pink_button" msgid="7220230518307764408">"將游標填滿樣式變更為粉紅色"</string>
-    <string name="pointer_fill_style_blue_button" msgid="667409695278072650">"將游標填滿樣式變更為藍色"</string>
-    <string name="pointer_fill_style_purple_button" msgid="5559838766704731345">"將游標填滿樣式變更為紫色"</string>
-    <string name="pointer_stroke_style" msgid="6646072538968241128">"游標輪廓顏色"</string>
+    <string name="pointer_fill_style_black_button" msgid="5831307568100774564">"將游標填滿樣式轉做黑色"</string>
+    <string name="pointer_fill_style_green_button" msgid="3395040005347840735">"將游標填滿樣式轉做綠色"</string>
+    <string name="pointer_fill_style_red_button" msgid="7785934621403739261">"將游標填滿樣式轉做紅色"</string>
+    <string name="pointer_fill_style_pink_button" msgid="7220230518307764408">"將游標填滿樣式轉做粉紅色"</string>
+    <string name="pointer_fill_style_blue_button" msgid="667409695278072650">"將游標填滿樣式轉做藍色"</string>
+    <string name="pointer_fill_style_purple_button" msgid="5559838766704731345">"將游標填滿樣式轉做紫色"</string>
+    <string name="pointer_stroke_style" msgid="6646072538968241128">"游標邊框顏色"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"白色"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"黑色"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"無"</string>
@@ -2301,7 +2305,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"最近使用的應用程式"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"通知"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"快速設定"</string>
-    <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"選擇<xliff:g id="CORNER">%1$s</xliff:g>的快速鍵"</string>
+    <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"選擇<xliff:g id="CORNER">%1$s</xliff:g>的捷徑"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"左下角"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"右下角"</string>
     <string name="action_corner_top_left_name" msgid="8077670910600032291">"左上角"</string>
@@ -2335,7 +2339,7 @@
     <string name="speech_preference_summary" msgid="5190362663352347487">"控制語音識別和輸出"</string>
     <string name="pointer_speed" msgid="5284291781349402396">"游標速度"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"游標大小"</string>
-    <string name="pointer_scale_decrease_content_description" msgid="4410507171942820948">"縮小游標比例"</string>
+    <string name="pointer_scale_decrease_content_description" msgid="4410507171942820948">"縮細游標比例"</string>
     <string name="pointer_scale_increase_content_description" msgid="8832991916962669031">"放大游標比例"</string>
     <string name="pointer_scale_keywords" msgid="8939432511048322072">"比例, 大小, 游標比例, 游標大小, 大滑鼠游標, 大, 顯眼"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"遊戲控制器"</string>
@@ -2927,6 +2931,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"電池用量"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"查看過去 24 小時的使用情況"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"查看上次充滿電後的使用情況"</string>
+    <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"應用程式電池用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"詳細使用狀況"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"調整電力使用"</string>
@@ -3485,6 +3491,8 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"你是此裝置上的唯一管理員，因此你的使用者個人檔案無法刪除。如要刪除你的使用者個人檔案，你可以指派另一位使用者為管理員，或前往 [系統] &gt; [重設選項] &gt; [清除所有資料] (回復原廠設定) 清除裝置上的所有資料。"</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"無法移除管理員權限"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"你是此裝置上的唯一管理員使用者。如果你不希望繼續擔任管理員，你需要先指派另一位使用者為管理員。"</string>
+    <!-- no translation found for add_user_summary_action_restricted (6276344792683243643) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"緊急資料"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>的相關資訊和聯絡資料"</string>
     <string name="open_app_button" msgid="5025229765547191710">"開啟「<xliff:g id="APP_NAME">%1$s</xliff:g>」"</string>
@@ -5951,7 +5959,7 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"家長監控設定"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"數碼基本規則和裝置使用時間限制"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"設定 PIN"</string>
-    <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"設定家長監護 PIN 碼"</string>
+    <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"設定家長監控 PIN"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"監管功能, 家長監控, 家長, 監管 PIN, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"管理 PIN"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"家長監控 PIN"</string>
@@ -5999,6 +6007,8 @@
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"刪除並關閉"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>動畫"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"無法開啟控制項"</string>
+    <!-- no translation found for supervision_setup_multi_profile_error_title (7538001161488140882) -->
+    <skip />
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"發生問題"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"請稍後再試"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"返回"</string>
@@ -6030,6 +6040,10 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"查看擁有位置存取權的應用程式和服務"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"「身分檢查」可配搭更多應用程式使用"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"「身分檢查」能防止他人未經授權存取你的應用程式。現適用於任何使用「指紋解鎖」或「面孔解鎖」的應用程式。"</string>
+    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
+    <skip />
+    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
+    <skip />
     <string name="identity_check_view_details" msgid="8752343542345818128">"查看詳情"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"無法檢查設定"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"暫時沒有資料"</string>
@@ -6054,5 +6068,11 @@
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"正在配對"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"已連結「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"掃瞄裝置"</string>
-    <string name="satellite_tile_label" msgid="1098132989724404617">"人造衛星"</string>
+    <string name="satellite_tile_label" msgid="1098132989724404617">"衛星"</string>
+    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
+    <skip />
 </resources>

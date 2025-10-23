@@ -357,7 +357,7 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"화면 자동 잠금 시간 경과 후 잠금"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"시간 제한 경과 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>후"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>에 의해 잠금 해제로 유지되는 경우를 제외하고 시간 제한 경과 후 즉시"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>에 의해 잠금 해제된 경우를 제외하고 자동 잠금 시간 경과 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> 후"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>에 의해 잠금 해제된 경우를 제외하고 자동 잠금 시간 이후 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> 경과 시"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"잠금 화면에 텍스트 추가"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"없음"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"예: Joe의 Android"</string>
@@ -596,7 +596,7 @@
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"센서에 손가락을 올리고 진동이 느껴지면 떼세요."</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"지문이 센서에 완전히 닿도록 손가락을 대고 진동이 느껴질 때까지 기다리세요."</string>
     <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"버튼을 누르지 말고 진동이 느껴질 때까지 손가락을 센서 위에 올려두세요.\n\n진동이 느껴질 때마다 손가락을 조금씩만 움직이세요. 이렇게 하면 지문을 더 많이 캡처할 수 있습니다."</string>
-    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"지문 센서 길게 터치하기"</string>
+    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"지문 센서 길게 터치"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"손가락을 뗀 후 다시 터치하세요"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"한 번 더 하세요"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"지문 인식 아이콘을 따라가세요"</string>
@@ -701,7 +701,7 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"비공개 스페이스 자동 잠금"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"일정 시간 동안 기기를 사용하지 않은 경우 비공개 스페이스를 자동으로 잠글 수 있습니다."</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"기기가 잠길 때마다"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"화면 자동 잠금 시간 후 5분 경과"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"화면 자동 잠금 시간 이후 5분 경과 시"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"기기를 다시 시작한 후에만"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"비공개 스페이스 숨기기"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"잠겨 있을 때 비공개 스페이스 숨기기"</string>
@@ -954,7 +954,7 @@
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"연락처 및 통화 기록 액세스 허용"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"연락처 및 통화 기록에 대한 액세스도 허용"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"정보는 전화 알림 등에 사용됩니다."</string>
-    <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"페어링 코드를 확인하세요"</string>
+    <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"페어링 코드 확인"</string>
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"이 코드가 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>에 표시된 코드와 일치하는지 확인하세요.\n\n보안을 위해 이 코드를 어디에도 입력하지 마세요."</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>에 연결할 수 없습니다."</string>
@@ -1029,6 +1029,10 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"시작하려면 외부 디스플레이를 연결하거나 다른 케이블을 사용해 보세요."</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"옵션 더보기"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"길게 터치한 후 드래그하여 디스플레이를 재정렬하세요."</string>
+    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
+    <skip />
+    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"내장 디스플레이 미러링"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"새 설정을 사용하시겠습니까?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"디스플레이가 원하는 대로 작동하지 않으면 이전 설정으로 되돌릴 수 있습니다."</string>
@@ -2211,17 +2215,14 @@
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"스크롤 속도"</string>
     <string name="mouse_scrolling_speed_make_faster_description" msgid="3542691986036109618">"스크롤 속도 높이기"</string>
     <string name="mouse_scrolling_speed_make_slower_description" msgid="349335653732016736">"스크롤 속도 낮추기"</string>
-    <!-- no translation found for mouse_pointer_speed_make_faster_desc (7764518379488092305) -->
-    <skip />
-    <!-- no translation found for mouse_pointer_speed_make_slower_desc (5833674987434163839) -->
-    <skip />
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7764518379488092305">"커서 속도 높이기"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="5833674987434163839">"커서 속도 낮추기"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"기본 마우스 버튼 전환"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"왼쪽 마우스 버튼을 오른쪽 버튼으로 사용합니다"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"커서 가속"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"마우스를 더 빠르게 움직이면 커서가 더 멀리 이동합니다"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"<xliff:g id="KEYBOARD_NAME">%s</xliff:g>의 마우스 키"</string>
-    <!-- no translation found for mouse_keys_directional_summary (4579525566659216785) -->
-    <skip />
+    <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"\"<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>\" 키를 사용하여 마우스 커서를 이동합니다."</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"\"<xliff:g id="CLICK_LABEL">%s</xliff:g>\" 키를 사용하여 기본 마우스 버튼을 클릭합니다."</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"\"<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>\" 키를 사용하여 기본 마우스 버튼을 길게 누릅니다."</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"\"<xliff:g id="RELEASE_LABEL">%s</xliff:g>\" 키를 사용하여 기본 마우스 버튼을 놓습니다."</string>
@@ -2238,10 +2239,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"터치패드"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"터치패드 및 마우스"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"마우스"</string>
-    <!-- no translation found for mouse_settings_summary (2593803007491750229) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (2984582991609553396) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="2593803007491750229">"커서 속도, 버튼 맞춤설정"</string>
+    <string name="trackpad_settings_summary" msgid="2984582991609553396">"커서 속도, 동작"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"탭하여 클릭"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"탭하고 드래그하여 항목 이동"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"손가락으로 터치패드를 두 번 탭한 후 드래그하여 객체를 움직이세요"</string>
@@ -2252,29 +2251,19 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"오른쪽 하단 클릭"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"더 많은 옵션을 확인하려면 터치패드 오른쪽 하단을 클릭합니다"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"커서 속도"</string>
-    <!-- no translation found for trackpad_pointer_speed_make_faster_desc (2954555994130361440) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed_make_slower_desc (3071350599514464670) -->
-    <skip />
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2954555994130361440">"커서 속도 높이기"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="3071350599514464670">"커서 속도 낮추기"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"세 손가락으로 탭하기 사용"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"터치패드 가속"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"터치패드에서 더 빠르게 움직이면 커서가 더 멀리 이동합니다"</string>
-    <!-- no translation found for pointer_fill_style (561690299676235020) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_black_button (5831307568100774564) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_green_button (3395040005347840735) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_red_button (7785934621403739261) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_pink_button (7220230518307764408) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_blue_button (667409695278072650) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_purple_button (5559838766704731345) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (6646072538968241128) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="561690299676235020">"커서 색상"</string>
+    <string name="pointer_fill_style_black_button" msgid="5831307568100774564">"커서 채움 스타일을 검은색으로 변경"</string>
+    <string name="pointer_fill_style_green_button" msgid="3395040005347840735">"커서 채움 스타일을 초록색으로 변경"</string>
+    <string name="pointer_fill_style_red_button" msgid="7785934621403739261">"커서 채움 스타일을 빨간색으로 변경"</string>
+    <string name="pointer_fill_style_pink_button" msgid="7220230518307764408">"커서 채움 스타일을 분홍색으로 변경"</string>
+    <string name="pointer_fill_style_blue_button" msgid="667409695278072650">"커서 채움 스타일을 파란색으로 변경"</string>
+    <string name="pointer_fill_style_purple_button" msgid="5559838766704731345">"커서 채움 스타일을 보라색으로 변경"</string>
+    <string name="pointer_stroke_style" msgid="6646072538968241128">"커서 획 색상"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"흰색"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"검은색"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"없음"</string>
@@ -2348,13 +2337,10 @@
     <string name="speech_category_title" msgid="5995161659186229742">"음성"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"음성"</string>
     <string name="speech_preference_summary" msgid="5190362663352347487">"음성 인식 및 출력 제어"</string>
-    <!-- no translation found for pointer_speed (5284291781349402396) -->
-    <skip />
+    <string name="pointer_speed" msgid="5284291781349402396">"커서 속도"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"커서 크기"</string>
-    <!-- no translation found for pointer_scale_decrease_content_description (4410507171942820948) -->
-    <skip />
-    <!-- no translation found for pointer_scale_increase_content_description (8832991916962669031) -->
-    <skip />
+    <string name="pointer_scale_decrease_content_description" msgid="4410507171942820948">"커서 크기 줄이기"</string>
+    <string name="pointer_scale_increase_content_description" msgid="8832991916962669031">"커서 크기 늘리기"</string>
     <string name="pointer_scale_keywords" msgid="8939432511048322072">"크기 조절, 크기, 포인터 크기 조절, 포인터 크기, 대형 마우스 포인터, 대형, 눈에 띄는"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"게임 컨트롤러"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"진동 리디렉션"</string>
@@ -2645,8 +2631,8 @@
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30초"</string>
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1분"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2분"</string>
-    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"조치를 취할 시간(접근성 기능 시간 제한)"</string>
-    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"조치를 취할 시간(접근성 기능 시간 제한) 정보"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"행동을 취할 시간(접근성 기능 시간 제한)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"행동을 취할 시간(접근성 기능 시간 제한) 정보"</string>
     <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"행동을 취할 시간(접근성 기능 시간 제한)에 관해 자세히 알아보기"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"행동을 취할 시간"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"시간 환경설정은 앱에 따라 지원되지 않을 수도 있습니다."</string>
@@ -2945,6 +2931,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"배터리 사용량"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"지난 24시간 동안의 사용량 보기"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"마지막으로 완전히 충전한 이후 사용량 보기"</string>
+    <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"앱 배터리 사용량"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"사용 세부정보"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"전원 사용 조절"</string>
@@ -3459,8 +3447,7 @@
     <string name="user_owner" msgid="2079206733011361994">"소유자"</string>
     <string name="user_admin" msgid="4024553191395768119">"관리자"</string>
     <string name="user_you" msgid="3070562015202859996">"나(<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_edit_button (2362042403252020360) -->
-    <skip />
+    <string name="user_edit_button" msgid="2362042403252020360">"수정"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"더 이상 사용자를 추가할 수 없습니다. 새 사용자를 추가하려면 기존 사용자를 삭제하세요."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"제한된 프로필은 계정을 추가할 수 없습니다."</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"이 기기에서 <xliff:g id="USER_NAME">%1$s</xliff:g>님 삭제"</string>
@@ -3504,6 +3491,8 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"사용자는 이 기기의 유일한 관리자이므로 사용자 프로필을 삭제할 수 없습니다. 사용자 프로필을 삭제하려면 시스템 &gt; 재설정 옵션 &gt; 모든 데이터 삭제(초기화)로 이동하여 다른 사용자를 관리자로 만들거나 기기에서 모든 데이터를 삭제하세요."</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"관리자 권한을 삭제할 수 없음"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"사용자는 이 기기의 유일한 관리자입니다. 관리자 자격을 포기하고 싶다면 먼저 다른 사용자를 관리자로 만들어야 합니다."</string>
+    <!-- no translation found for add_user_summary_action_restricted (6276344792683243643) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"긴급 상황 정보"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>님의 정보 및 연락처"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> 열기"</string>
@@ -4893,8 +4882,7 @@
     <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
     <skip />
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"버튼 순서"</string>
-    <!-- no translation found for keywords_button_navigation_settings_order (2256307328114139152) -->
-    <skip />
+    <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"버튼 순서, 버튼 이동, 왼손 모드, 오른손 모드"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"뒤로"</string>
     <string name="navbar_home_button" msgid="951459586446869883">"홈"</string>
     <string name="navbar_recent_button" msgid="6005580570601162420">"최근"</string>
@@ -5971,8 +5959,7 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"자녀 보호 기능"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"디지털 기기 사용 규칙 및 기기 사용 시간 한도"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN 설정"</string>
-    <!-- no translation found for supervision_set_up_pin_preference_title (4191271096152722137) -->
-    <skip />
+    <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"자녀 보호 기능 PIN 설정"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"감독, 자녀 보호 기능, 부모, 감독 PIN, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"PIN 관리"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"자녀 보호 기능 PIN"</string>
@@ -6017,10 +6004,11 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"PIN을 삭제할 수 없음"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN을 삭제할 수 없습니다"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"PIN을 삭제하는 중에 오류가 발생했습니다."</string>
-    <!-- no translation found for supervision_delete_and_turn_off_button_label (2749633624475583720) -->
-    <skip />
+    <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"삭제 및 사용 중지"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> 애니메이션"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"컨트롤을 사용 설정할 수 없음"</string>
+    <!-- no translation found for supervision_setup_multi_profile_error_title (7538001161488140882) -->
+    <skip />
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"문제가 발생했습니다"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"나중에 다시 시도하세요."</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"뒤로"</string>
@@ -6052,6 +6040,10 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"위치에 액세스할 수 있는 앱과 서비스 보기"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"더 많은 앱에서 본인 확인 사용 가능"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"본인 확인은 앱에 대한 무단 액세스를 방지합니다. 이제 지문 또는 얼굴 인식 잠금 해제를 사용하는 모든 앱에서 본인 확인을 사용할 수 있습니다."</string>
+    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
+    <skip />
+    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
+    <skip />
     <string name="identity_check_view_details" msgid="8752343542345818128">"세부정보 보기"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"설정을 확인할 수 없습니다."</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"아직 정보가 없습니다."</string>
@@ -6076,6 +6068,11 @@
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"페어링"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 연결됨"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"기기 스캔"</string>
-    <!-- no translation found for satellite_tile_label (1098132989724404617) -->
+    <string name="satellite_tile_label" msgid="1098132989724404617">"위성"</string>
+    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
     <skip />
 </resources>

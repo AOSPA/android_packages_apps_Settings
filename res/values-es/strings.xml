@@ -1029,6 +1029,10 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Conecta una pantalla externa para empezar o prueba con otro cable"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Más opciones"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Mantén pulsadas y arrastra las pantallas para reorganizarlas"</string>
+    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
+    <skip />
+    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Proyectar pantalla integrada"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"¿Usar nuevos ajustes?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Si la pantalla no funciona como quieres, puedes volver a los ajustes anteriores"</string>
@@ -2211,17 +2215,14 @@
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Velocidad de desplazamiento"</string>
     <string name="mouse_scrolling_speed_make_faster_description" msgid="3542691986036109618">"Aumentar velocidad de desplazamiento"</string>
     <string name="mouse_scrolling_speed_make_slower_description" msgid="349335653732016736">"Reducir velocidad de desplazamiento"</string>
-    <!-- no translation found for mouse_pointer_speed_make_faster_desc (7764518379488092305) -->
-    <skip />
-    <!-- no translation found for mouse_pointer_speed_make_slower_desc (5833674987434163839) -->
-    <skip />
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7764518379488092305">"Aumentar velocidad del cursor"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="5833674987434163839">"Reducir velocidad del cursor"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Cambiar botón principal del ratón"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Usa el botón izquierdo del ratón como el derecho"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Aceleración de cursor"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"Si haces movimientos más rápidos con el ratón, el cursor se moverá más lejos"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Teclas de ratón para <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
-    <!-- no translation found for mouse_keys_directional_summary (4579525566659216785) -->
-    <skip />
+    <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"Usa las teclas <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> para mover el cursor del ratón"</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"Usa la tecla <xliff:g id="CLICK_LABEL">%s</xliff:g> para hacer clic en el botón principal del ratón"</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"Usa la tecla <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> para mantener pulsado el botón principal del ratón"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Usa la tecla <xliff:g id="RELEASE_LABEL">%s</xliff:g> para soltar el botón principal del ratón"</string>
@@ -2238,10 +2239,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Panel táctil"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Panel táctil y ratón"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Ratón"</string>
-    <!-- no translation found for mouse_settings_summary (2593803007491750229) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (2984582991609553396) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="2593803007491750229">"Velocidad cursor, personaliz. botones"</string>
+    <string name="trackpad_settings_summary" msgid="2984582991609553396">"Velocidad del cursor, gestos"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tocar para hacer clic"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Tocar y arrastrar para mover elementos"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Da dos toques y arrastra por el panel táctil para mover objetos"</string>
@@ -2252,29 +2251,19 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic en la esquina inferior derecha"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Haz clic en la esquina inferior derecha del panel táctil para ver más opciones"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Velocidad del cursor"</string>
-    <!-- no translation found for trackpad_pointer_speed_make_faster_desc (2954555994130361440) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed_make_slower_desc (3071350599514464670) -->
-    <skip />
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2954555994130361440">"Aumentar velocidad del cursor"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="3071350599514464670">"Reducir velocidad del cursor"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Usar toque con tres dedos"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Aceleración del panel táctil"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Si haces movimientos más rápidos en el panel táctil, el cursor se moverá más lejos"</string>
-    <!-- no translation found for pointer_fill_style (561690299676235020) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_black_button (5831307568100774564) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_green_button (3395040005347840735) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_red_button (7785934621403739261) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_pink_button (7220230518307764408) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_blue_button (667409695278072650) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_purple_button (5559838766704731345) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (6646072538968241128) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="561690299676235020">"Color del cursor"</string>
+    <string name="pointer_fill_style_black_button" msgid="5831307568100774564">"Cambiar relleno del cursor a negro"</string>
+    <string name="pointer_fill_style_green_button" msgid="3395040005347840735">"Cambiar relleno del cursor a verde"</string>
+    <string name="pointer_fill_style_red_button" msgid="7785934621403739261">"Cambiar relleno del cursor a rojo"</string>
+    <string name="pointer_fill_style_pink_button" msgid="7220230518307764408">"Cambiar relleno del cursor a rosa"</string>
+    <string name="pointer_fill_style_blue_button" msgid="667409695278072650">"Cambiar relleno del cursor a azul"</string>
+    <string name="pointer_fill_style_purple_button" msgid="5559838766704731345">"Cambiar relleno del cursor a morado"</string>
+    <string name="pointer_stroke_style" msgid="6646072538968241128">"Color del trazo del cursor"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Blanco"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Negro"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Ninguno"</string>
@@ -2313,7 +2302,7 @@
     <string name="action_corner_top_right_title" msgid="4995999693840776032">"Esquina superior derecha"</string>
     <string name="action_corner_action_none" msgid="5203163099950649999">"Ninguna"</string>
     <string name="action_corner_action_home" msgid="6779642573582379579">"Inicio"</string>
-    <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Apps recientes"</string>
+    <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Aplicaciones recientes"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notificaciones"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Ajustes rápidos"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Elige un acceso directo para la <xliff:g id="CORNER">%1$s</xliff:g>"</string>
@@ -2348,13 +2337,10 @@
     <string name="speech_category_title" msgid="5995161659186229742">"Voz"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"Voz"</string>
     <string name="speech_preference_summary" msgid="5190362663352347487">"Controla el reconocimiento y la salida de voz"</string>
-    <!-- no translation found for pointer_speed (5284291781349402396) -->
-    <skip />
+    <string name="pointer_speed" msgid="5284291781349402396">"Velocidad del cursor"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"Tamaño del cursor"</string>
-    <!-- no translation found for pointer_scale_decrease_content_description (4410507171942820948) -->
-    <skip />
-    <!-- no translation found for pointer_scale_increase_content_description (8832991916962669031) -->
-    <skip />
+    <string name="pointer_scale_decrease_content_description" msgid="4410507171942820948">"Reducir escala del cursor"</string>
+    <string name="pointer_scale_increase_content_description" msgid="8832991916962669031">"Aumentar escala del cursor"</string>
     <string name="pointer_scale_keywords" msgid="8939432511048322072">"escala, tamaño, escala del puntero, tamaño del puntero, cursor del ratón grande, grande, perceptible"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Mandos de videojuegos"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redirigir vibración"</string>
@@ -2694,8 +2680,8 @@
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Ajustes de navegación"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibración y vibración al pulsar"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Controla la intensidad de la vibración en distintos usos"</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"Activado / Controla los niveles de vibración de llamadas, notificaciones y alarmas"</string>
-    <string name="accessibility_vibration_settings_state_off" msgid="113565506991847845">"Desactivado / Controla los niveles de vibración de llamadas, notificaciones y alarmas"</string>
+    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"Activadas / Controla los niveles de vibración de llamadas, notificaciones y alarmas"</string>
+    <string name="accessibility_vibration_settings_state_off" msgid="113565506991847845">"Desactivadas / Controla los niveles de vibración de llamadas, notificaciones y alarmas"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Ajuste inhabilitado porque el dispositivo está en silencio"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Llamadas"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notificaciones y alarmas"</string>
@@ -2735,7 +2721,7 @@
     <string name="captioning_appearance_summary" msgid="4620682807315588019">"Tamaño del texto: <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Más opciones"</string>
     <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Personaliza el tamaño y el estilo de los subtítulos para que sea más fácil leerlos"</string>
-    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Estas preferencias de subtítulos no pueden usarse en todas las apps multimedia"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Estas preferencias de subtítulos no pueden usarse en todas las aplicaciones multimedia"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Botón de accesibilidad"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Deslizar hacia arriba con dos dedos desde la parte inferior"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Mantener teclas de volumen"</string>
@@ -2945,6 +2931,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Uso de batería"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Consulta el uso durante las últimas 24 horas"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Uso desde la última carga completa"</string>
+    <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Uso de batería de la aplicación"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalles de uso"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Cómo reducir el uso de la batería"</string>
@@ -3459,8 +3447,7 @@
     <string name="user_owner" msgid="2079206733011361994">"Propietario"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrador"</string>
     <string name="user_you" msgid="3070562015202859996">"Tú (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_edit_button (2362042403252020360) -->
-    <skip />
+    <string name="user_edit_button" msgid="2362042403252020360">"Editar"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"No puedes añadir más usuarios. Quita un usuario para añadir otro."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Los perfiles restringidos no pueden añadir cuentas"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Eliminar a <xliff:g id="USER_NAME">%1$s</xliff:g> de este dispositivo"</string>
@@ -3504,6 +3491,8 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Eres el único administrador de este dispositivo, por lo que tu perfil de usuario no se puede eliminar. Si quieres eliminarlo, puedes asignar el rol de administrador a otro usuario o borrar todos los datos del dispositivo yendo a Sistema &gt; Opciones de restablecimiento &gt; Volver al estado de fábrica (borrar todo)."</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"No se pueden quitar los privilegios de administrador"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Eres el único usuario administrador de este dispositivo. Si ya no quieres ser administrador, primero debes asignar ese rol a otro usuario."</string>
+    <!-- no translation found for add_user_summary_action_restricted (6276344792683243643) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Información de emergencia"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Información y contactos de <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Abrir <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4893,8 +4882,7 @@
     <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
     <skip />
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Orden de los botones"</string>
-    <!-- no translation found for keywords_button_navigation_settings_order (2256307328114139152) -->
-    <skip />
+    <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Orden de los botones, mover botones, modo para usuarios zurdos, modo para usuarios diestros"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Atrás"</string>
     <string name="navbar_home_button" msgid="951459586446869883">"Inicio"</string>
     <string name="navbar_recent_button" msgid="6005580570601162420">"Recientes"</string>
@@ -5971,8 +5959,7 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Controles parentales"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Reglas digitales básicas y límites de tiempo de pantalla"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Configurar PIN"</string>
-    <!-- no translation found for supervision_set_up_pin_preference_title (4191271096152722137) -->
-    <skip />
+    <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Configura un PIN para los controles parentales"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"supervisión, controles parentales, padres, PIN de supervisión, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Gestionar el PIN"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN de controles parentales"</string>
@@ -6017,10 +6004,11 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"No se puede eliminar el PIN"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"El PIN no se puede eliminar"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Se ha producido un error al eliminar el PIN."</string>
-    <!-- no translation found for supervision_delete_and_turn_off_button_label (2749633624475583720) -->
-    <skip />
+    <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Eliminar y desactivar"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animación de <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"No se pueden activar los controles"</string>
+    <!-- no translation found for supervision_setup_multi_profile_error_title (7538001161488140882) -->
+    <skip />
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Se ha producido un error"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Inténtalo de nuevo más tarde"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Volver"</string>
@@ -6052,6 +6040,10 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Consulta las apps y servicios que tienen acceso a tu ubicación"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Verificación de identidad funciona con más apps"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Verificación de identidad evita el acceso no deseado a tus apps. Ya está disponible en cualquier app que use Desbloqueo con huella digital o Desbloqueo facial."</string>
+    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
+    <skip />
+    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
+    <skip />
     <string name="identity_check_view_details" msgid="8752343542345818128">"Ver detalles"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"No se han podido comprobar los ajustes"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Aún no hay información"</string>
@@ -6076,6 +6068,11 @@
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Emparejamiento"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> conectado"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Analizar dispositivo"</string>
-    <!-- no translation found for satellite_tile_label (1098132989724404617) -->
+    <string name="satellite_tile_label" msgid="1098132989724404617">"Satélite"</string>
+    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
     <skip />
 </resources>

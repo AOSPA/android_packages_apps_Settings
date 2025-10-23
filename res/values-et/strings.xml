@@ -1029,6 +1029,10 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Alustamiseks ühendage väline ekraan või proovige kasutada muud kaablit."</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Rohkem valikuid"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Kuvade ümberkorraldamiseks hoidke all ja lohistage."</string>
+    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
+    <skip />
+    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Sisseehitatud ekraani peegeldamine"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Kas kasutada uusi seadeid?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Kui teie ekraan ei tööta soovitud viisil, saate taastada eelmised sätted"</string>
@@ -1514,7 +1518,7 @@
     <string name="screensaver_settings_summary_postured" msgid="6346392320858994892">"Kui on püsti"</string>
     <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"Kui on püsti ja laeb"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Sees / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
-    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Välja"</string>
+    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Väljas"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"Millal kuvada?"</string>
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Vähese valguse režiim"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Tõstke äratamiseks"</string>
@@ -1927,11 +1931,11 @@
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Kas unustasite mustri?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Kas unustasite PIN-koodi?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="4983618652824112610">"Teie muster kinnitab teie isikut."</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="45398445305933355">"Teie PIN-kood kinnitab teie isikut"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1263500907003586594">"Teie parool kinnitab teie isikut"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="45398445305933355">"Teie PIN-kood kinnitab teie isikut."</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="1263500907003586594">"Teie parool kinnitab teie isikut."</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="2552062474449423029">"Teie töökoha muster kinnitab teie isikut."</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6556640367641079244">"Teie töökoha PIN-kood kinnitab teie isikut"</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5700270644291633820">"Teie töökoha parool kinnitab teie isikut"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6556640367641079244">"Teie töökoha PIN-kood kinnitab teie isikut."</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5700270644291633820">"Teie töökoha parool kinnitab teie isikut."</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Lisaturvalisuse jaoks kasutage seadme mustrit"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Lisaturvalisuse jaoks sisestage oma seadme PIN-kood"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Lisaturvalisuse jaoks sisestage oma seadme parool"</string>
@@ -2211,17 +2215,14 @@
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Kerimiskiirus"</string>
     <string name="mouse_scrolling_speed_make_faster_description" msgid="3542691986036109618">"Kerimise kiiremaks muutmine"</string>
     <string name="mouse_scrolling_speed_make_slower_description" msgid="349335653732016736">"Kerimise aeglasemaks muutmine"</string>
-    <!-- no translation found for mouse_pointer_speed_make_faster_desc (7764518379488092305) -->
-    <skip />
-    <!-- no translation found for mouse_pointer_speed_make_slower_desc (5833674987434163839) -->
-    <skip />
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7764518379488092305">"Kursori kiiremaks muutmine"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="5833674987434163839">"Kursori aeglasemaks muutmine"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Esmase hiirenupu vahetus"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Kasutage hiire vasakut nuppu parema nupuna"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Kursori kiirendus"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"Hiire kiirem liigutamine viib kursori kaugemale"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Hiire klahvid klaviatuuri <xliff:g id="KEYBOARD_NAME">%s</xliff:g> jaoks"</string>
-    <!-- no translation found for mouse_keys_directional_summary (4579525566659216785) -->
-    <skip />
+    <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"Kasutage hiirekursori liigutamiseks klahve <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>."</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"Kasutage klahvi „<xliff:g id="CLICK_LABEL">%s</xliff:g>” hiire põhinupul klõpsamiseks"</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"Kasutage klahvi „<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>” hiire põhinupu pikalt vajutamiseks"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Kasutage klahvi „<xliff:g id="RELEASE_LABEL">%s</xliff:g>” hiire põhinupu vabastamiseks"</string>
@@ -2238,10 +2239,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Puuteplaat"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Puuteplaat ja hiir"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Hiir"</string>
-    <!-- no translation found for mouse_settings_summary (2593803007491750229) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (2984582991609553396) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="2593803007491750229">"Kursori kiirus, nuppude kohandamine"</string>
+    <string name="trackpad_settings_summary" msgid="2984582991609553396">"Kursori kiirus, liigutused"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Klõpsamiseks puudutamine"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Üksuste liigutamine neid lohistades"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Teisaldamiseks topeltpuudutage ja lohistage puuteplaadil"</string>
@@ -2252,29 +2251,19 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Paremas allnurgas klõpsamine"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Lisavalikute jaoks klõpsake puuteplaadi paremas allnurgas"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Kursori kiirus"</string>
-    <!-- no translation found for trackpad_pointer_speed_make_faster_desc (2954555994130361440) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed_make_slower_desc (3071350599514464670) -->
-    <skip />
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2954555994130361440">"Kursori kiiremaks muutmine"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="3071350599514464670">"Kursori aeglasemaks muutmine"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Kolme sõrmega puudutamise kasutamine"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Puuteplaadi kiirendamine"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Puuteplaadil sõrme kiiremini liigutamine viib kursori kaugemale"</string>
-    <!-- no translation found for pointer_fill_style (561690299676235020) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_black_button (5831307568100774564) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_green_button (3395040005347840735) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_red_button (7785934621403739261) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_pink_button (7220230518307764408) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_blue_button (667409695278072650) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_purple_button (5559838766704731345) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (6646072538968241128) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="561690299676235020">"Kursori värv"</string>
+    <string name="pointer_fill_style_black_button" msgid="5831307568100774564">"Kursori sisu mustaks muutmine"</string>
+    <string name="pointer_fill_style_green_button" msgid="3395040005347840735">"Kursori sisu roheliseks muutmine"</string>
+    <string name="pointer_fill_style_red_button" msgid="7785934621403739261">"Kursori sisu punaseks muutmine"</string>
+    <string name="pointer_fill_style_pink_button" msgid="7220230518307764408">"Kursori sisu roosaks muutmine"</string>
+    <string name="pointer_fill_style_blue_button" msgid="667409695278072650">"Kursori sisu siniseks muutmine"</string>
+    <string name="pointer_fill_style_purple_button" msgid="5559838766704731345">"Kursori sisu lillaks muutmine"</string>
+    <string name="pointer_stroke_style" msgid="6646072538968241128">"Kursori kontuuri värv"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Valge"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Must"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Puudub"</string>
@@ -2348,13 +2337,10 @@
     <string name="speech_category_title" msgid="5995161659186229742">"Kõne"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"Kõne"</string>
     <string name="speech_preference_summary" msgid="5190362663352347487">"Kõnetuvastuse ja -väljundi haldamine"</string>
-    <!-- no translation found for pointer_speed (5284291781349402396) -->
-    <skip />
+    <string name="pointer_speed" msgid="5284291781349402396">"Kursori kiirus"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"Kursori suurus"</string>
-    <!-- no translation found for pointer_scale_decrease_content_description (4410507171942820948) -->
-    <skip />
-    <!-- no translation found for pointer_scale_increase_content_description (8832991916962669031) -->
-    <skip />
+    <string name="pointer_scale_decrease_content_description" msgid="4410507171942820948">"Kursori väiksemaks muutmine"</string>
+    <string name="pointer_scale_increase_content_description" msgid="8832991916962669031">"Kursori suuremaks muutmine"</string>
     <string name="pointer_scale_keywords" msgid="8939432511048322072">"suurus, kursori suurus, suur hiirekursor, suur, märgatav"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Mängukontroller"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Vibreerimise ümbersuunamine"</string>
@@ -2945,6 +2931,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Akukasutus"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Kasutus viimase 24 tunni jooksul"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Kasutamine pärast viimast täislaadimist"</string>
+    <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Rakenduse akukasutus"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Kasuta detaile"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Reguleerige energiakasutust"</string>
@@ -3459,8 +3447,7 @@
     <string name="user_owner" msgid="2079206733011361994">"Omanik"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administraator"</string>
     <string name="user_you" msgid="3070562015202859996">"Teie (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_edit_button (2362042403252020360) -->
-    <skip />
+    <string name="user_edit_button" msgid="2362042403252020360">"Muuda"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Rohkem kasutajaid ei saa lisada. Uue lisamiseks eemaldage mõni kasutaja."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Piiratud profiilid ei saa kontosid lisada"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Kustuta seadmest <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3504,6 +3491,8 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Olete selles seadmes ainuke administraator, seega ei saa teie kasutajaprofiili kustutada. Kui soovite oma kasutajaprofiili kustutada, saate mõne teise kasutaja administraatoriks määrata või kustutada seadmest kõik andmed, tehes valikud Süsteem &gt; Lähtestamise valikud &gt; Kustuta kõik andmed (tehaseseadetele lähtestamine)."</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Ei saa administraatoriõigusi eemaldada"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Olete selles seadmes ainuke administraatoriõigustega kasutaja. Kui te ei soovi enam administraator olla, peate esmalt mõne teise kasutaja administraatoriks määrama."</string>
+    <!-- no translation found for add_user_summary_action_restricted (6276344792683243643) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Hädaabiteave"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Kasutaja <xliff:g id="USER_NAME">%1$s</xliff:g> teave ja kontaktid"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Ava <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4893,8 +4882,7 @@
     <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
     <skip />
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Nuppude järjestus"</string>
-    <!-- no translation found for keywords_button_navigation_settings_order (2256307328114139152) -->
-    <skip />
+    <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Nuppude järjestus, nuppude teisaldamine, vasakukäeliste režiim, paremakäeliste režiim"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Tagasi"</string>
     <string name="navbar_home_button" msgid="951459586446869883">"Avaleht"</string>
     <string name="navbar_recent_button" msgid="6005580570601162420">"Hiljutised"</string>
@@ -5971,8 +5959,7 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Vanemlik järelevalve"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Digitaalse tegevuse põhireeglid ja ekraaniaja piirangud"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN-koodi seadistamine"</string>
-    <!-- no translation found for supervision_set_up_pin_preference_title (4191271096152722137) -->
-    <skip />
+    <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Vanemliku järelevalve PIN-koodi seadistamine"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"järelevalve, vanemlik järelevalve, vanemad, järelevalve pin-kood, pin-kood"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"PIN-koodi haldamine"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Vanemliku järelevalve PIN-kood"</string>
@@ -6017,10 +6004,11 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"PIN-koodi ei saa kustutada"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN-koodi ei saa kustutada"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"PIN-koodi kustutamisel ilmnes viga."</string>
-    <!-- no translation found for supervision_delete_and_turn_off_button_label (2749633624475583720) -->
-    <skip />
+    <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Kustuta PIN ja lülita järelevalve välja"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animatsioon"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Vanemlikku järelevalvet ei saa sisse lülitada."</string>
+    <!-- no translation found for supervision_setup_multi_profile_error_title (7538001161488140882) -->
+    <skip />
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Midagi läks valesti."</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Proovige hiljem uuesti."</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Mine tagasi"</string>
@@ -6052,6 +6040,10 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Vaadake rakendusi ja teenuseid, mis pääsevad asukohale juurde."</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Identiteedikontroll töötab enamate rakendustega"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Identiteedikontroll takistab soovimatut juurdepääsu teie rakendustele. Nüüd on see saadaval kõigi rakendustega, mis kasutavad sõrmejälje või näoga avamist."</string>
+    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
+    <skip />
+    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
+    <skip />
     <string name="identity_check_view_details" msgid="8752343542345818128">"Kuva üksikasjad"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"Seadeid ei õnnestunud kontrollida"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Teavet ei ole veel"</string>
@@ -6076,6 +6068,11 @@
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Sidumine"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> on ühendatud"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Skanni seadet"</string>
-    <!-- no translation found for satellite_tile_label (1098132989724404617) -->
+    <string name="satellite_tile_label" msgid="1098132989724404617">"Satelliit"</string>
+    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
     <skip />
 </resources>

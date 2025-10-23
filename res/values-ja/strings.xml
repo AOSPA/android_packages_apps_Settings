@@ -1029,6 +1029,10 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"外部ディスプレイを接続して使い始めるか、別のケーブルをお試しください"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"その他のオプション"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"ディスプレイを並べ替えるには長押ししてドラッグします"</string>
+    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
+    <skip />
+    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"内蔵ディスプレイをミラーリングする"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"新しい設定を使用しますか？"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"ディスプレイが想定どおりに動作しない場合は、以前の設定に戻すことができます"</string>
@@ -2927,6 +2931,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"バッテリー使用量"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"過去 24 時間の使用状況を確認できます"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"前回のフル充電以降の使用を表示"</string>
+    <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"アプリのバッテリー使用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"使用状況の詳細"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"消費電力の調整"</string>
@@ -3485,6 +3491,7 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"このデバイスの管理者はあなただけなので、ユーザー プロフィールを削除することはできません。ユーザー プロフィールを削除する場合は、別のユーザーを管理者に指定するか、[システム] &gt; [リセット オプション] &gt; [すべてのデータを消去（初期設定にリセット）] に移動してデバイスからすべてのデータを消去してください。"</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"管理者権限を削除できません"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"このデバイスの管理者ユーザーはあなただけです。管理者をやめる場合は、まず別のユーザーを管理者に指定してください。"</string>
+    <string name="add_user_summary_action_restricted" msgid="6276344792683243643">"仕事用ポリシーによりブロックされています"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"緊急時情報"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>の情報と連絡先"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g>を開く"</string>
@@ -4867,12 +4874,10 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"感度を上げると、画面の端付近でのアプリの操作に影響することがあります。"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"「戻る」の感度"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"ジェスチャー ナビゲーション"</string>
-    <!-- no translation found for gesture_settings_button_description (7916105652019436751) -->
-    <skip />
+    <string name="gesture_settings_button_description" msgid="7916105652019436751">"ジェスチャー ナビゲーションの設定"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"デモを試す"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ボタン ナビゲーション"</string>
-    <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
-    <skip />
+    <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"ボタン ナビゲーションの設定"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"ボタンの順序"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"ボタンの順序, ボタンの移動, 左手モード, 右手モード"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"戻る"</string>
@@ -5999,6 +6004,7 @@
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"削除して無効にする"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> のアニメーション"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"コントロールを有効にできません"</string>
+    <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"コントロールを使用できません"</string>
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"エラーが発生しました"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"しばらくしてからもう一度お試しください"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"戻る"</string>
@@ -6015,21 +6021,18 @@
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"自動入力、通知など"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"プライバシー管理"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"権限、管理"</string>
-    <!-- no translation found for app_security_subpage_title (397183486243670441) -->
-    <skip />
+    <string name="app_security_subpage_title" msgid="397183486243670441">"アプリのセキュリティ"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"デバイスのロック解除"</string>
-    <!-- no translation found for account_security_subpage_title (3676085534746127966) -->
-    <skip />
-    <!-- no translation found for device_finders_subpage_title (2390688647994924006) -->
-    <skip />
-    <!-- no translation found for system_and_updates_subpage_title (5274185686741552322) -->
-    <skip />
-    <!-- no translation found for cellular_network_security_subpage_title (1191202157978621337) -->
-    <skip />
+    <string name="account_security_subpage_title" msgid="3676085534746127966">"アカウントのセキュリティ"</string>
+    <string name="device_finders_subpage_title" msgid="2390688647994924006">"デバイスの検索"</string>
+    <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"システムとアップデート"</string>
+    <string name="cellular_network_security_subpage_title" msgid="1191202157978621337">"モバイル ネットワークのセキュリティ"</string>
     <string name="location_settings" msgid="6833222354060094170">"位置情報へのアクセス"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"位置情報にアクセスできるアプリとサービスを確認"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"ID チェックがさらに多くのアプリで利用できるようになりました"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"ID チェックにより、アプリへの不要なアクセスを防ぐことができます。指紋認証または顔認証を使用するアプリで、この機能を利用できるようになりました。"</string>
+    <string name="identity_check_watch_notification_title" msgid="5559702400315647907">"ID チェックとスマートウォッチ"</string>
+    <string name="identity_check_watch_notification_summary" msgid="3200144847521451493">"スマートウォッチを接続すると、ID チェック機能により、アプリへの不要なアクセスを防ぐため本人確認が強化されます"</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"詳細を表示"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"設定を確認できませんでした"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"まだ情報がありません"</string>
@@ -6041,11 +6044,9 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
     <string name="safety_center_device_finders_search_terms" msgid="2703625009760905100"></string>
-    <!-- no translation found for safety_center_system_and_updates_summary (6301092688146734950) -->
-    <skip />
+    <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"アップデート"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <!-- no translation found for safety_center_cellular_network_security_summary (4746047200732665728) -->
-    <skip />
+    <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"ネットワークの種類、暗号化、通知の管理"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"アラートを開く"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"アラートを閉じる"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"削除したアラート"</string>
@@ -6055,4 +6056,10 @@
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> を接続しました"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"デバイスをスキャン"</string>
     <string name="satellite_tile_label" msgid="1098132989724404617">"衛星"</string>
+    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
+    <skip />
 </resources>

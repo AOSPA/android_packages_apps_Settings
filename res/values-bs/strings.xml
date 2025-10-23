@@ -1029,6 +1029,10 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Da započnete, povežite vanjski ekran ili pokušajte koristiti drugi kabl"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Više opcija"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Zadržite i prevucite da promijenite redoslijed ekrana"</string>
+    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
+    <skip />
+    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Preslikaj ugrađeni ekran"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Koristiti nove postavke?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Ako ekran ne radi kako želite, možete vratiti prethodne postavke"</string>
@@ -2211,17 +2215,14 @@
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Brzina klizanja"</string>
     <string name="mouse_scrolling_speed_make_faster_description" msgid="3542691986036109618">"Ubrzajte klizanje"</string>
     <string name="mouse_scrolling_speed_make_slower_description" msgid="349335653732016736">"Usporite klizanje"</string>
-    <!-- no translation found for mouse_pointer_speed_make_faster_desc (7764518379488092305) -->
-    <skip />
-    <!-- no translation found for mouse_pointer_speed_make_slower_desc (5833674987434163839) -->
-    <skip />
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7764518379488092305">"Ubrzavanje kursora"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="5833674987434163839">"Usporavanje kursora"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Zamijeni primarno dugme miša"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Koristite lijevo dugme miša kao desno dugme"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Ubrzanje kursora"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"Brži pokreti miša će pomjerati kursor dalje"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Tipke za miš – <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
-    <!-- no translation found for mouse_keys_directional_summary (4579525566659216785) -->
-    <skip />
+    <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"Upotrijebite tipke \"<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>\" da pomjerate kursor miša"</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"Upotrijebite tipku \"<xliff:g id="CLICK_LABEL">%s</xliff:g>\" da kliknete na primarno dugme miša"</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"Upotrijebite tipku \"<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>\" da pritisnete i zadržite primarno dugme miša"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Upotrijebite tipku \"<xliff:g id="RELEASE_LABEL">%s</xliff:g>\" da pustite primarno dugme miša"</string>
@@ -2238,10 +2239,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Dodirna površina"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Dodirna podloga i miš"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Miš"</string>
-    <!-- no translation found for mouse_settings_summary (2593803007491750229) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (2984582991609553396) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="2593803007491750229">"Brzina kursora, prilagođavanje dugmadi"</string>
+    <string name="trackpad_settings_summary" msgid="2984582991609553396">"Brzina kursora, pokreti"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Dodir za klik"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Pomicanje dodirom i prevlačenjem"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Dvaput dodirnite i prevucite na podlozi da premjestite predmete"</string>
@@ -2252,29 +2251,19 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klik u donjem desnom uglu"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Kliknite u donjem desnom uglu dodirne podloge za više opcija"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Brzina kursora"</string>
-    <!-- no translation found for trackpad_pointer_speed_make_faster_desc (2954555994130361440) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed_make_slower_desc (3071350599514464670) -->
-    <skip />
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2954555994130361440">"Ubrzavanje kursora"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="3071350599514464670">"Usporavanje kursora"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Korištenje dodira s tri prsta"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Ubrzanje na dodirnoj podlozi"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Brži pokreti na dodirnoj podlozi će pomjerati kursor dalje"</string>
-    <!-- no translation found for pointer_fill_style (561690299676235020) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_black_button (5831307568100774564) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_green_button (3395040005347840735) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_red_button (7785934621403739261) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_pink_button (7220230518307764408) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_blue_button (667409695278072650) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_purple_button (5559838766704731345) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (6646072538968241128) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="561690299676235020">"Boja kursora"</string>
+    <string name="pointer_fill_style_black_button" msgid="5831307568100774564">"Promjena ispune kursora u crnu"</string>
+    <string name="pointer_fill_style_green_button" msgid="3395040005347840735">"Promjena ispune kursora u zelenu"</string>
+    <string name="pointer_fill_style_red_button" msgid="7785934621403739261">"Promjena ispune kursora u crvenu"</string>
+    <string name="pointer_fill_style_pink_button" msgid="7220230518307764408">"Promjena ispune kursora u ružičastu"</string>
+    <string name="pointer_fill_style_blue_button" msgid="667409695278072650">"Promjena ispune kursora u plavu"</string>
+    <string name="pointer_fill_style_purple_button" msgid="5559838766704731345">"Promjena ispune kursora u ljubičastu"</string>
+    <string name="pointer_stroke_style" msgid="6646072538968241128">"Boja poteza kursora"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Bijela"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Crna"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Ništa"</string>
@@ -2348,13 +2337,10 @@
     <string name="speech_category_title" msgid="5995161659186229742">"Govor"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"Govor"</string>
     <string name="speech_preference_summary" msgid="5190362663352347487">"Upravljajte prepoznavanjem govora i rezultatom"</string>
-    <!-- no translation found for pointer_speed (5284291781349402396) -->
-    <skip />
+    <string name="pointer_speed" msgid="5284291781349402396">"Brzina kursora"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"Veličina kursora"</string>
-    <!-- no translation found for pointer_scale_decrease_content_description (4410507171942820948) -->
-    <skip />
-    <!-- no translation found for pointer_scale_increase_content_description (8832991916962669031) -->
-    <skip />
+    <string name="pointer_scale_decrease_content_description" msgid="4410507171942820948">"Smanjivanje veličine kursora"</string>
+    <string name="pointer_scale_increase_content_description" msgid="8832991916962669031">"Povećavanje veličine kursora"</string>
     <string name="pointer_scale_keywords" msgid="8939432511048322072">"skala, veličina, skala pokazivača, veličina pokazivača, veliki pokazivač miša, veliko, uočljivo"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Kontroler za igre"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Preusmjeravanje vibracije"</string>
@@ -2945,6 +2931,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Potrošnja baterije"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Prikaz potrošnje u posljednja 24 sata"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Prikaz potrošnje od posljednjeg potpunog punjenja"</string>
+    <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Potrošnja baterije za aplikaciju"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalji o upotrebi"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Podesite potrošnju energije"</string>
@@ -3459,8 +3447,7 @@
     <string name="user_owner" msgid="2079206733011361994">"Vlasnik"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrator"</string>
     <string name="user_you" msgid="3070562015202859996">"Vi (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_edit_button (2362042403252020360) -->
-    <skip />
+    <string name="user_edit_button" msgid="2362042403252020360">"Uređivanje"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Ne možete dodati više korisnika. Uklonite korisnika da dodate novog."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Ograničeni profili ne mogu dodati račune"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Izbrišite <xliff:g id="USER_NAME">%1$s</xliff:g> sa uređaja"</string>
@@ -3504,6 +3491,8 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Jedini ste administrator na uređaju, pa se vaš korisnički profil ne može izbrisati. Ako želite izbrisati korisnički profil, možete postaviti drugog korisnika kao administratora ili potpuno izbrisati se podatke s uređaja odlaskom u Postavke &gt; Vrati opcije na zadano &gt; Potpuno izbriši sve podatke (vraćanje na fabričke postavke)."</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Nije moguće ukloniti administratorska prava"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Jedini ste administrator na uređaju. Ako više ne želite biti administrator, prvo morate postaviti drugog korisnika kao administratora."</string>
+    <!-- no translation found for add_user_summary_action_restricted (6276344792683243643) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Informacije za hitne slučajeve"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informacije i kontakti za korisnika <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Otvorit aplikaciju <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4893,8 +4882,7 @@
     <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
     <skip />
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Redoslijed dugmadi"</string>
-    <!-- no translation found for keywords_button_navigation_settings_order (2256307328114139152) -->
-    <skip />
+    <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Redoslijed dugmadi, premještanje dugmadi, način rada za lijevu ruku, način rada za desnu ruku"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Nazad"</string>
     <string name="navbar_home_button" msgid="951459586446869883">"Početna stranica"</string>
     <string name="navbar_recent_button" msgid="6005580570601162420">"Nedavno"</string>
@@ -5972,8 +5960,7 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Roditeljski nadzor"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Osnovna digitalna pravila i ograničenja vremena korištenja uređaja"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Postavite PIN"</string>
-    <!-- no translation found for supervision_set_up_pin_preference_title (4191271096152722137) -->
-    <skip />
+    <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Postavite PIN za roditeljski nadzor"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"nadzor, roditeljski nadzor, roditelji, pin za nadzor, pin"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Upravljajte PIN-om"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN za roditeljski nadzor"</string>
@@ -6018,10 +6005,11 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Nije moguće izbrisati PIN"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN se ne može izbrisati"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Došlo je do greške prilikom pokušaja brisanja PIN-a."</string>
-    <!-- no translation found for supervision_delete_and_turn_off_button_label (2749633624475583720) -->
-    <skip />
+    <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Izbriši i isključi"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animacija funkcije <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Nije moguće uključiti nadzor"</string>
+    <!-- no translation found for supervision_setup_multi_profile_error_title (7538001161488140882) -->
+    <skip />
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Nešto nije uredu"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Pokušajte ponovo kasnije"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Nazad"</string>
@@ -6053,6 +6041,10 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Vidite aplikacije i usluge koje imaju pristup lokaciji"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Provjera identiteta funkcionira s više aplikacija"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Provjera identiteta sprečava neželjeni pristup aplikacijama. Sada je dostupna s bilo kojom aplikacijom koja koristi otključavanje otiskom prsta ili licem."</string>
+    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
+    <skip />
+    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
+    <skip />
     <string name="identity_check_view_details" msgid="8752343542345818128">"Pogledajte detalje"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"Provjera postavki nije uspjela"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Još uvijek nema informacija"</string>
@@ -6077,6 +6069,11 @@
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Uparivanje"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Uređaj <xliff:g id="DEVICE_NAME">%1$s</xliff:g> je povezan"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Skeniraj uređaj"</string>
-    <!-- no translation found for satellite_tile_label (1098132989724404617) -->
+    <string name="satellite_tile_label" msgid="1098132989724404617">"Satelit"</string>
+    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
     <skip />
 </resources>

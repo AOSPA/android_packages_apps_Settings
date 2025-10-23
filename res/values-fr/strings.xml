@@ -1029,6 +1029,10 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Connectez un écran externe pour commencer ou essayez d\'utiliser un autre câble"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Autres options"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Appuyez de manière prolongée et faites glisser pour réorganiser les écrans"</string>
+    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
+    <skip />
+    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Dupliquer l\'écran intégré"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Utiliser les nouveaux paramètres ?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Si votre écran ne fonctionne pas comme vous le souhaitez, vous pouvez rétablir vos paramètres précédents"</string>
@@ -2399,7 +2403,7 @@
     <string name="display_category_title" msgid="6638191682294461408">"Affichage"</string>
     <string name="accessibility_color_and_motion_title" msgid="1085072332445818494">"Couleur et mouvement"</string>
     <string name="accessibility_color_and_motion_subtext" msgid="1150281881647191503">"Thème sombre, correction des couleurs, suppression des animations"</string>
-    <string name="accessibility_pointer_and_touchpad_title" msgid="5703454643194245909">"Accessibilité du curseur et du pavé tactile"</string>
+    <string name="accessibility_pointer_and_touchpad_title" msgid="5703454643194245909">"Accessibilité curseur et pavé tactile"</string>
     <string name="accessibility_pointer_and_touchpad_summary" msgid="8588221231953604340">"Taille, couleur, type"</string>
     <string name="accessibility_pointer_color_customization_title" msgid="2841888132681075999">"Couleur du curseur"</string>
     <string name="accessibility_pointer_title" msgid="7427650233669997010">"Curseur"</string>
@@ -2927,6 +2931,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Utilisation de la batterie"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Voir l\'utilisation des dernières 24 h"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Voir l\'utilisation depuis la dernière recharge complète"</string>
+    <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Utilisation de la batterie par l\'appli"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Détails d\'utilisation"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajuster la consommation"</string>
@@ -3485,6 +3491,8 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Vous êtes le seul administrateur sur cet appareil. Vous ne pouvez donc pas supprimer votre profil utilisateur. Si vous souhaitez supprimer votre profil utilisateur, vous pouvez désigner un autre utilisateur comme administrateur ou effacer toutes les données de l\'appareil en accédant à Système &gt; Options de réinitialisation &gt; Effacer toutes les données (rétablir la configuration d\'usine)."</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Impossible de retirer les droits d\'administrateur"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Vous êtes le seul administrateur sur cet appareil. Si vous ne souhaitez plus être administrateur, vous devez d\'abord désigner un autre utilisateur comme administrateur."</string>
+    <!-- no translation found for add_user_summary_action_restricted (6276344792683243643) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Informations d\'urgence"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informations et contacts pour <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Ouvrir <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -5043,7 +5051,7 @@
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Utilisez &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Les nouveaux mots de passe, clés d\'accès et autres infos seront désormais enregistrés ici. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; peut utiliser ce qui est affiché à l\'écran pour déterminer ce qui peut être saisi automatiquement."</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"Service préféré pour la gestion des mots de passe, des clés d\'accès et de la saisie automatique"</string>
     <string name="credman_picker_title_new" msgid="4292105803864397398">"Service préféré"</string>
-    <string name="credman_picker_page_summary" msgid="4633938046738617332">"Choisissez votre service préféré pour enregistrer les données de connexion et les suggestions de saisie automatique"</string>
+    <string name="credman_picker_page_summary" msgid="4633938046738617332">"Choisissez le service que vous préférez utiliser pour enregistrer les données de connexion et les suggestions de saisie automatique"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Désactiver %1$s ?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Désactiver ce service ?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Les infos enregistrées telles que les mots de passe, clés d\'accès, modes de paiement et autres ne seront pas renseignées quand vous vous connecterez. Pour utiliser vos infos enregistrées, choisissez un mot de passe, une clé d\'accès ou un service de données."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Mots de passe, clés d\'accès et comptes"</string>
@@ -5999,6 +6007,8 @@
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Supprimer et désactiver"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animation <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Impossible d\'activer les commandes"</string>
+    <!-- no translation found for supervision_setup_multi_profile_error_title (7538001161488140882) -->
+    <skip />
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Un problème est survenu"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Réessayez plus tard"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Retour"</string>
@@ -6030,6 +6040,10 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Voir les applis et services ayant accès aux données de localisation"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"La vérification de l\'identité fonctionne avec plus d\'applis"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"La vérification de l\'identité empêche les accès indésirables à vos applis. Désormais disponible avec n\'importe quelle appli utilisant le déverrouillage par empreinte digitale ou par reconnaissance faciale."</string>
+    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
+    <skip />
+    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
+    <skip />
     <string name="identity_check_view_details" msgid="8752343542345818128">"Afficher les détails"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"Impossible de vérifier les paramètres"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Aucune info pour l\'instant"</string>
@@ -6055,4 +6069,10 @@
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> connecté"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Analyser l\'appareil"</string>
     <string name="satellite_tile_label" msgid="1098132989724404617">"Satellite"</string>
+    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
+    <skip />
 </resources>
