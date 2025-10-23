@@ -947,8 +947,11 @@
     <!-- Safety Center safety source ID of a backup source. -->
     <string name="config_safety_center_backup_source_id" translatable="false"></string>
 
+    <!-- Safety Center safety source ID of an advanced protection source. -->
+    <string name="config_safety_center_advanced_protection_source_id" translatable="false"></string>
+
     <!-- Comma separated list of Safety Center safety source IDs to show in the same task as Safety Center -->
-    <string name="config_same_task_safety_source_ids" translatable="false">AdvancedProtection,AndroidAccessibility,AndroidAppFunctionAccess,AndroidBackgroundLocation,AndroidBiometrics,AndroidFaceUnlock,AndroidFingerprintUnlock,AndroidHealthConnect,AndroidLockScreen,AndroidPrivateSpace,AndroidNotificationListener,AndroidPermissionAutoRevoke,AndroidPrivacyAppDataSharingUpdates,AndroidWearUnlock,AndroidWorkPolicyInfo</string>
+    <string name="config_same_task_safety_source_ids" translatable="false">AndroidAccessibility,AndroidAppFunctionAccess,AndroidBackgroundLocation,AndroidBiometrics,AndroidFaceUnlock,AndroidFingerprintUnlock,AndroidHealthConnect,AndroidLockScreen,AndroidPrivateSpace,AndroidNotificationListener,AndroidPermissionAutoRevoke,AndroidPrivacyAppDataSharingUpdates,AndroidWearUnlock,AndroidWorkPolicyInfo</string>
 
     <!-- Resolutions shown on external display (for native resolutions only). There must be an even
          number of values, each pair being width x height. If empty, all resolutions are supported. -->
