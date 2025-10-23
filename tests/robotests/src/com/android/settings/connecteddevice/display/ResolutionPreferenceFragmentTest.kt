@@ -142,6 +142,9 @@ class ResolutionPreferenceFragmentTest : ExternalDisplayTestBase() {
         (topPref.getPreference(1) as SelectorWithWidgetPreference).onClick()
         shadowOf(Looper.getMainLooper()).idle()
 
+        mListener.update(display.id)
+        mHandler.flush()
+
         verify(mMockedInjector)
             .setUserPreferredDisplayMode(
                 display.id,
@@ -164,7 +167,10 @@ class ResolutionPreferenceFragmentTest : ExternalDisplayTestBase() {
         val newMode = display.supportedModes[1]
 
         val bundle = Bundle()
-        bundle.putBoolean(ResolutionChangeDialogFragment.KEY_CONFIRMED, true)
+        bundle.putParcelable(
+            ResolutionChangeDialogFragment.KEY_CONFIRMED,
+            ResolutionChangeConfirmationState.ACCEPT,
+        )
         bundle.putParcelable(ResolutionChangeDialogFragment.KEY_NEW_MODE, newMode)
         fragment.setFragmentResult(ResolutionChangeDialogFragment.KEY_RESULT, bundle)
         shadowOf(Looper.getMainLooper()).idle()
@@ -187,7 +193,10 @@ class ResolutionPreferenceFragmentTest : ExternalDisplayTestBase() {
         shadowOf(Looper.getMainLooper()).idle()
 
         val bundle = Bundle()
-        bundle.putBoolean(ResolutionChangeDialogFragment.KEY_CONFIRMED, false)
+        bundle.putParcelable(
+            ResolutionChangeDialogFragment.KEY_CONFIRMED,
+            ResolutionChangeConfirmationState.REVERT,
+        )
         bundle.putParcelable(ResolutionChangeDialogFragment.KEY_EXISTING_MODE, existingMode)
         fragment.setFragmentResult(ResolutionChangeDialogFragment.KEY_RESULT, bundle)
         shadowOf(Looper.getMainLooper()).idle()
