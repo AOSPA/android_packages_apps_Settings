@@ -140,3 +140,6 @@ const val KEY_PIN_MEDIA_PLAYER = "pin_media_player"
 
 /** Contract key for the "Show media on lock screen. */
 const val KEY_SHOW_MEDIA_ON_LOCK_SCREEN = "show_media_on_lock_screen"
+
+/** Contract key for the "Power button ends call" settings. */
+const val KEY_POWER_BUTTON_ENDS_CALL = "incall_power_button_behavior"
