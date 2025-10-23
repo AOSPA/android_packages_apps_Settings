@@ -298,7 +298,7 @@ public class EnabledNetworkModePreferenceController extends
         private boolean mLteEnabled;
         private int mSelectedEntry;
         private int mSubId;
-        private String mSummary;
+        private String mSummary = "";
 
         private List<String> mEntries = new ArrayList<>();
         private List<Integer> mEntriesValue = new ArrayList<>();
