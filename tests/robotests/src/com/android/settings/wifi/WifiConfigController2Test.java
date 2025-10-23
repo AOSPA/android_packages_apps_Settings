@@ -54,7 +54,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -66,6 +65,7 @@ import com.android.settings.wifi.details2.WifiPrivacyPreferenceController;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.wifitrackerlib.WifiEntry;
 
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
@@ -237,7 +237,7 @@ public class WifiConfigController2Test {
     @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
     public void saveSharedField() {
         createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
-        final Switch sharedSwitch = mView.findViewById(R.id.share_wifi_network);
+        final MaterialSwitch sharedSwitch = mView.findViewById(R.id.share_wifi_network);
         assertThat(sharedSwitch).isNotNull();
         assertThat(sharedSwitch.getVisibility()).isEqualTo(View.VISIBLE);
 
@@ -250,9 +250,9 @@ public class WifiConfigController2Test {
     @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
     public void editConfigurationFieldState() {
         createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
-        final Switch editConfigurationSwitch =
+        final MaterialSwitch editConfigurationSwitch =
                 mView.findViewById(R.id.edit_wifi_network_configuration);
-        final Switch sharedSwitch = mView.findViewById(R.id.share_wifi_network);
+        final MaterialSwitch sharedSwitch = mView.findViewById(R.id.share_wifi_network);
 
         assertThat(editConfigurationSwitch).isNotNull();
 
