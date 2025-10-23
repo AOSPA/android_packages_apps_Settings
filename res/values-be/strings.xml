@@ -1029,6 +1029,10 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Каб пачаць, падключыцеся да знешняга дысплэя ці паспрабуйце выкарыстаць іншы кабель"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Дадатковыя параметры"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Націсніце і перацягніце, каб змяніць парадак дысплэяў"</string>
+    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
+    <skip />
+    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Адлюстроўваць убудаваны дысплэй"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Прымяніць новыя налады?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Калі выява на дысплэі вас не задавальняе, вы можаце вярнуцца да папярэдніх налад"</string>
@@ -2211,17 +2215,14 @@
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Хуткасць прагортвання"</string>
     <string name="mouse_scrolling_speed_make_faster_description" msgid="3542691986036109618">"Паскорыць гартанне"</string>
     <string name="mouse_scrolling_speed_make_slower_description" msgid="349335653732016736">"Запаволіць гартанне"</string>
-    <!-- no translation found for mouse_pointer_speed_make_faster_desc (7764518379488092305) -->
-    <skip />
-    <!-- no translation found for mouse_pointer_speed_make_slower_desc (5833674987434163839) -->
-    <skip />
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7764518379488092305">"Паскорыць курсор"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="5833674987434163839">"Запаволіць курсор"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Змяніць асноўную кнопку мышы"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Прызначце для левай кнопкі мышы функцыі правай"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Паскарэнне курсора"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"Больш хуткія рухі мышшу будуць перамяшчаць курсор на большую адлегласць"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Клавішы кіравання мышшу \"<xliff:g id="KEYBOARD_NAME">%s</xliff:g>\""</string>
-    <!-- no translation found for mouse_keys_directional_summary (4579525566659216785) -->
-    <skip />
+    <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"Каб перамясціць курсор мышы, скарыстайце клавішы \"<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>\""</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"Каб націснуць асноўную кнопку мышы, скарыстайце клавішу \"<xliff:g id="CLICK_LABEL">%s</xliff:g>\""</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"Каб націснуць і ўтрымліваць асноўную кнопку мышы, скарыстайце клавішу \"<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>\""</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Каб адпусціць асноўную кнопку мышы, скарыстайце клавішу \"<xliff:g id="RELEASE_LABEL">%s</xliff:g>\""</string>
@@ -2238,10 +2239,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Сэнсарная панэль"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Сэнсарная панэль і мыш"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Мыш"</string>
-    <!-- no translation found for mouse_settings_summary (2593803007491750229) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (2984582991609553396) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="2593803007491750229">"Хуткасць курсора, налады кнопак"</string>
+    <string name="trackpad_settings_summary" msgid="2984582991609553396">"Хуткасць курсора, жэсты"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Націсканне дотыкам"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Перацягваць элементы дотыкам"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Перацягванне аб’екта двайным націсканнем на сэнсарную панэль"</string>
@@ -2252,29 +2251,19 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Націсканне ў ніжнім правым вугле"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Каб адкрыць дадатковыя параметры, націсніце ў ніжнім правым вугле сэнсарнай панэлі"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Хуткасць курсора"</string>
-    <!-- no translation found for trackpad_pointer_speed_make_faster_desc (2954555994130361440) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed_make_slower_desc (3071350599514464670) -->
-    <skip />
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2954555994130361440">"Паскорыць курсор"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="3071350599514464670">"Запаволіць курсор"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Выкарыстоўваць націсканне трыма пальцамі"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Паскарэнне сэнсарнай панэлі"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Больш хуткія рухі па сэнсарнай панэлі будуць перамяшчаць курсор на большую адлегласць"</string>
-    <!-- no translation found for pointer_fill_style (561690299676235020) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_black_button (5831307568100774564) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_green_button (3395040005347840735) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_red_button (7785934621403739261) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_pink_button (7220230518307764408) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_blue_button (667409695278072650) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_purple_button (5559838766704731345) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (6646072538968241128) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="561690299676235020">"Колер курсора"</string>
+    <string name="pointer_fill_style_black_button" msgid="5831307568100774564">"Змяніць стыль заліўкі курсора на чорны"</string>
+    <string name="pointer_fill_style_green_button" msgid="3395040005347840735">"Змяніць стыль заліўкі курсора на зялёны"</string>
+    <string name="pointer_fill_style_red_button" msgid="7785934621403739261">"Змяніць стыль заліўкі курсора на чырвоны"</string>
+    <string name="pointer_fill_style_pink_button" msgid="7220230518307764408">"Змяніць стыль заліўкі курсора на ружовы"</string>
+    <string name="pointer_fill_style_blue_button" msgid="667409695278072650">"Змяніць стыль заліўкі курсора на сіні"</string>
+    <string name="pointer_fill_style_purple_button" msgid="5559838766704731345">"Змяніць стыль заліўкі курсора на фіялетавы"</string>
+    <string name="pointer_stroke_style" msgid="6646072538968241128">"Колер контуру курсора"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Белы"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Чорны"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Няма"</string>
@@ -2348,13 +2337,10 @@
     <string name="speech_category_title" msgid="5995161659186229742">"Маўленне"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"Маўленне"</string>
     <string name="speech_preference_summary" msgid="5190362663352347487">"Кіраваць распазнаваннем маўлення і вывадам"</string>
-    <!-- no translation found for pointer_speed (5284291781349402396) -->
-    <skip />
+    <string name="pointer_speed" msgid="5284291781349402396">"Хуткасць курсора"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"Памер курсора"</string>
-    <!-- no translation found for pointer_scale_decrease_content_description (4410507171942820948) -->
-    <skip />
-    <!-- no translation found for pointer_scale_increase_content_description (8832991916962669031) -->
-    <skip />
+    <string name="pointer_scale_decrease_content_description" msgid="4410507171942820948">"Паменшыць памер курсора"</string>
+    <string name="pointer_scale_increase_content_description" msgid="8832991916962669031">"Павялічыць памер курсора"</string>
     <string name="pointer_scale_keywords" msgid="8939432511048322072">"маштаб, памер, маштаб паказальніка, памер паказальніка, вялікі паказальнік мышы, вялікі, заўважны"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Прылада кiравання гульнёй"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Перанакіраванне вібрасігналу"</string>
@@ -2945,6 +2931,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Выкарыстанне зараду"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Выкарыстанне за апошнія 24 гадзіны"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Ужыванне пасля апошняй поўнай зарадкі"</string>
+    <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Выкарыстанне зараду праграмамі"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Падрабязнасці выкарыстання"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Адрэгуляваць спажыванне энергіі"</string>
@@ -3459,8 +3447,7 @@
     <string name="user_owner" msgid="2079206733011361994">"Уладальнік"</string>
     <string name="user_admin" msgid="4024553191395768119">"Адміністратар"</string>
     <string name="user_you" msgid="3070562015202859996">"Вы (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_edit_button (2362042403252020360) -->
-    <skip />
+    <string name="user_edit_button" msgid="2362042403252020360">"Змяніць"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Вы больш не можаце дадаваць карыстальнікаў. Выдаліце аднаго з карыстальнікаў, каб дадаць новага."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Уладальнiкi профіляў з абмежаваннямi не могуць дадаваць уліковыя запісы"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Выдаліць <xliff:g id="USER_NAME">%1$s</xliff:g> з гэтай прылады"</string>
@@ -3504,6 +3491,8 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Вы адзіны адміністратар на гэтай прыладзе, таму ваш профіль карыстальніка немагчыма выдаліць. Калі вы хочаце выдаліць свой профіль карыстальніка, вы можаце прызначыць іншага карыстальніка адміністратарам або сцерці ўсе даныя з прылады, перайшоўшы ў раздзел \"Сістэма &gt; Параметры скіду &gt; Сцерці ўсе даныя (скінуць да заводскіх налад)\"."</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Не ўдаецца скасаваць правы адміністратара"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Вы адзіны адміністратар на гэтай прыладзе. Калі вы больш не хочаце быць адміністратарам, спачатку трэба прызначыць адміністратарам іншага карыстальніка."</string>
+    <!-- no translation found for add_user_summary_action_restricted (6276344792683243643) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Даныя для экстранных сітуацый"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Інфармацыя і кантакты карыстальніка <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Адкрыць праграму \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
@@ -4893,8 +4882,7 @@
     <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
     <skip />
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Парадак кнопак"</string>
-    <!-- no translation found for keywords_button_navigation_settings_order (2256307328114139152) -->
-    <skip />
+    <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Парадак кнопак, перамяшчэнне кнопак, рэжым для левай рукі, рэжым для правай рукі"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Назад"</string>
     <string name="navbar_home_button" msgid="951459586446869883">"Галоўны экран"</string>
     <string name="navbar_recent_button" msgid="6005580570601162420">"Нядаўнія"</string>
@@ -5973,8 +5961,7 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Бацькоўскі кантроль"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Правілы карыстання лічбавым змесцівам і ліміты часу карыстання прыладай"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Задаць PIN-код"</string>
-    <!-- no translation found for supervision_set_up_pin_preference_title (4191271096152722137) -->
-    <skip />
+    <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Наладзьце PIN-код для бацькоўскага кантролю"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"кантроль, бацькоўскі кантроль, бацькі, PIN-код бацькоўскага кантролю, PIN-код"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Кіруйце PIN-кодам"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN-код для бацькоўскага кантролю"</string>
@@ -6019,10 +6006,11 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Не ўдаецца выдаліць PIN-код"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Не ўдаецца выдаліць PIN-код"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Падчас спробы выдаліць PIN-код адбылася памылка."</string>
-    <!-- no translation found for supervision_delete_and_turn_off_button_label (2749633624475583720) -->
-    <skip />
+    <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Выдаліць і выключыць"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>: анімацыя"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Не ўдаецца ўключыць налады"</string>
+    <!-- no translation found for supervision_setup_multi_profile_error_title (7538001161488140882) -->
+    <skip />
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Адбылася памылка"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Паўтарыце спробу пазней"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Назад"</string>
@@ -6054,6 +6042,10 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Праглядзець праграмы і сэрвісы, у якіх ёсць доступ да даных месцазнаходжання"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Функцыя праверкі асобы працуе з большай колькасцю праграм"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Функцыя праверкі асобы прадухіляе непажаданы доступ да праграм. Цяпер яна працуе з усімі праграмамі, якія выкарыстоўваюць разблакіроўку па адбітку пальца або распазнаванне твару."</string>
+    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
+    <skip />
+    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
+    <skip />
     <string name="identity_check_view_details" msgid="8752343542345818128">"Праглядзець падрабязныя звесткі"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"Не ўдалося праверыць налады"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Пакуль няма інфармацыі"</string>
@@ -6078,6 +6070,11 @@
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Ідзе спалучэнне"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Прылада \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" падключана"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Сканіраваць прыладу"</string>
-    <!-- no translation found for satellite_tile_label (1098132989724404617) -->
+    <string name="satellite_tile_label" msgid="1098132989724404617">"Спадарожнік"</string>
+    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
     <skip />
 </resources>

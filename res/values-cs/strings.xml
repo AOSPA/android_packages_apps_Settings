@@ -429,7 +429,7 @@
     <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7055780282999744813">"Nastavte odemknutí obličejem znovu"</string>
     <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4421818770682557621">"Nastavte odemknutí obličejem znovu"</string>
     <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="3584740139535177961">"Vylepšení zabezpečení a výkonu"</string>
-    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Nastavte odemknutí obličejem"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Nastavte si odemykání obličejem"</string>
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Pokud chcete odemknutí obličejem nastavit znovu, smažte stávající model obličeje.\n\nModel obličeje bude trvale a bezpečně smazán.\n\nPo smazání budete k odemykání telefonu a ověřování v aplikacích používat PIN, gesto nebo heslo."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Pokud chcete odemknutí obličejem nastavit znovu, smažte stávající model obličeje.\n\nModel obličeje bude trvale a bezpečně smazán.\n\nPo smazání budete k odemykání telefonu a ověřování v aplikacích používat otisk prstu, PIN, gesto nebo heslo."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Pomocí odemknutí obličejem"</string>
@@ -1029,6 +1029,10 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Začněte připojením externího displeje nebo zkuste použít jiný kabel"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Další možnosti"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Uspořádání displejů můžete změnit přetažením"</string>
+    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
+    <skip />
+    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Zrcadlit vestavěný displej"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Použít nová nastavení?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Pokud váš displej nefunguje, jak chcete, můžete se vrátit k předchozímu nastavení."</string>
@@ -2211,17 +2215,14 @@
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Rychlost posouvání"</string>
     <string name="mouse_scrolling_speed_make_faster_description" msgid="3542691986036109618">"Zrychlit posouvání"</string>
     <string name="mouse_scrolling_speed_make_slower_description" msgid="349335653732016736">"Zpomalit posouvání"</string>
-    <!-- no translation found for mouse_pointer_speed_make_faster_desc (7764518379488092305) -->
-    <skip />
-    <!-- no translation found for mouse_pointer_speed_make_slower_desc (5833674987434163839) -->
-    <skip />
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7764518379488092305">"Zrychlit kurzor"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="5833674987434163839">"Zpomalit kurzor"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Zaměnit primární tlačítko myši"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Používat levé tlačítko myši jako pravé"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Zrychlení kurzoru"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"Rychlejší pohyby myši posunou kurzor dál"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Klávesy klávesnice <xliff:g id="KEYBOARD_NAME">%s</xliff:g> k ovládání myši"</string>
-    <!-- no translation found for mouse_keys_directional_summary (4579525566659216785) -->
-    <skip />
+    <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"Klávesami <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> můžete pohybovat kurzorem myši"</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"Klávesou „<xliff:g id="CLICK_LABEL">%s</xliff:g>“ kliknete na primární tlačítko myši"</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"Klávesou „<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>“ podržíte primární tlačítko myši"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Klávesou „<xliff:g id="RELEASE_LABEL">%s</xliff:g>“ uvolníte primární tlačítko myši"</string>
@@ -2238,10 +2239,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad a myš"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Myš"</string>
-    <!-- no translation found for mouse_settings_summary (2593803007491750229) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (2984582991609553396) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="2593803007491750229">"Rychlost kurzoru, přizpůsobení tlačítek"</string>
+    <string name="trackpad_settings_summary" msgid="2984582991609553396">"Rychlost kurzoru, gesta"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Kliknutí klepnutím"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Klepnutím a přetažením přesouvat položky"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Objekty můžete přesouvat dvojitým klepnutím a tažením prstem po touchpadu"</string>
@@ -2252,29 +2251,19 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Kliknutí pravým tlačítkem dole"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Kliknutím na pravý dolní roh touchpadu zobrazíte další možnosti"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Rychlost kurzoru"</string>
-    <!-- no translation found for trackpad_pointer_speed_make_faster_desc (2954555994130361440) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed_make_slower_desc (3071350599514464670) -->
-    <skip />
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2954555994130361440">"Zrychlit kurzor"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="3071350599514464670">"Zpomalit kurzor"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Používat klepnutí třemi prsty"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Zrychlení touchpadu"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Rychlejší pohyby na touchpadu posunou kurzor dále"</string>
-    <!-- no translation found for pointer_fill_style (561690299676235020) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_black_button (5831307568100774564) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_green_button (3395040005347840735) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_red_button (7785934621403739261) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_pink_button (7220230518307764408) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_blue_button (667409695278072650) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_purple_button (5559838766704731345) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (6646072538968241128) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="561690299676235020">"Barva kurzoru"</string>
+    <string name="pointer_fill_style_black_button" msgid="5831307568100774564">"Změnit vyplnění kurzoru na černé"</string>
+    <string name="pointer_fill_style_green_button" msgid="3395040005347840735">"Změnit vyplnění kurzoru na zelené"</string>
+    <string name="pointer_fill_style_red_button" msgid="7785934621403739261">"Změnit vyplnění kurzoru na červené"</string>
+    <string name="pointer_fill_style_pink_button" msgid="7220230518307764408">"Změnit vyplnění kurzoru na růžové"</string>
+    <string name="pointer_fill_style_blue_button" msgid="667409695278072650">"Změnit vyplnění kurzoru na modré"</string>
+    <string name="pointer_fill_style_purple_button" msgid="5559838766704731345">"Změnit vyplnění kurzoru na fialové"</string>
+    <string name="pointer_stroke_style" msgid="6646072538968241128">"Barva obrysu kurzoru"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Bílá"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Černá"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Žádná"</string>
@@ -2348,13 +2337,10 @@
     <string name="speech_category_title" msgid="5995161659186229742">"Řeč"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"Řeč"</string>
     <string name="speech_preference_summary" msgid="5190362663352347487">"Ovládání rozpoznávání řeči a výstupu"</string>
-    <!-- no translation found for pointer_speed (5284291781349402396) -->
-    <skip />
+    <string name="pointer_speed" msgid="5284291781349402396">"Rychlost kurzoru"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"Velikost kurzoru"</string>
-    <!-- no translation found for pointer_scale_decrease_content_description (4410507171942820948) -->
-    <skip />
-    <!-- no translation found for pointer_scale_increase_content_description (8832991916962669031) -->
-    <skip />
+    <string name="pointer_scale_decrease_content_description" msgid="4410507171942820948">"Zmenšit kurzor"</string>
+    <string name="pointer_scale_increase_content_description" msgid="8832991916962669031">"Zvětšit kurzor"</string>
     <string name="pointer_scale_keywords" msgid="8939432511048322072">"měřítko, velikost, měřítko ukazatele, velikost ukazatele, velký ukazatel myši, velký, viditelný"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Herní ovladače"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Vibrace při přesměrování"</string>
@@ -2945,6 +2931,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Využití baterie"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Využití za posledních 24 hodin"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Zobrazit využití od posledního úplného nabití"</string>
+    <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Využití baterie aplikací"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Podrobnosti využívání"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Upravit spotřebu energie"</string>
@@ -3459,8 +3447,7 @@
     <string name="user_owner" msgid="2079206733011361994">"Vlastník"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrátor"</string>
     <string name="user_you" msgid="3070562015202859996">"Vy (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_edit_button (2362042403252020360) -->
-    <skip />
+    <string name="user_edit_button" msgid="2362042403252020360">"Upravit"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Nemůžete přidat žádné další uživatele. Chcete-li přidat nového, některého odstraňte."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Pomocí omezených profilů nelze přidávat účty."</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Smazat <xliff:g id="USER_NAME">%1$s</xliff:g> ze zařízení"</string>
@@ -3504,6 +3491,8 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Jste jediný administrátor na tomto zařízení, takže váš uživatelský profil nelze smazat. Pokud chcete smazat svůj uživatelský profil, můžete jiného uživatele nastavit jako administrátora nebo vymazat všechna data ze zařízení v sekci Systém &gt; Možnosti resetování &gt; Vymazat všechna data (resetovat do továrního nastavení)."</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Administrátorská práva nelze odebrat"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Jste jediný administrátor na tomto zařízení. Pokud už nechcete být administrátorem, musíte nejprve administrátorská práva předat jinému uživateli."</string>
+    <!-- no translation found for add_user_summary_action_restricted (6276344792683243643) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Nouzové informace"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informace a kontakty uživatele <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Otevřít aplikaci <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4893,8 +4882,7 @@
     <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
     <skip />
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Pořadí tlačítek"</string>
-    <!-- no translation found for keywords_button_navigation_settings_order (2256307328114139152) -->
-    <skip />
+    <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Pořadí tlačítek, přesunutí tlačítek, režim pro leváky, režim pro praváky"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Zpět"</string>
     <string name="navbar_home_button" msgid="951459586446869883">"Plocha"</string>
     <string name="navbar_recent_button" msgid="6005580570601162420">"Poslední"</string>
@@ -5973,8 +5961,7 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Rodičovská kontrola"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Digitální pravidla a limity času stráveného na zařízení"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Nastavit PIN"</string>
-    <!-- no translation found for supervision_set_up_pin_preference_title (4191271096152722137) -->
-    <skip />
+    <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Nastavte PIN rodičovské kontroly"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"dohled, rodičovská kontrola, rodiče, pin pro dohled, pin"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Spravovat kód PIN"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN rodičovské kontroly"</string>
@@ -6019,10 +6006,11 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"PIN nelze smazat"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN nelze smazat"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Při pokusu o smazání PINu došlo k chybě."</string>
-    <!-- no translation found for supervision_delete_and_turn_off_button_label (2749633624475583720) -->
-    <skip />
+    <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Smazat a vypnout"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animace funkce <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Nelze zapnout ovládání"</string>
+    <!-- no translation found for supervision_setup_multi_profile_error_title (7538001161488140882) -->
+    <skip />
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Něco se pokazilo"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Zkuste to znovu později"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Zpět"</string>
@@ -6054,6 +6042,10 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Seznam aplikací a služeb, které mají přístup k poloze"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Ověření totožnosti funguje s více aplikacemi"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Ověření totožnosti brání nežádoucímu přístupu k vašim aplikacím. Teď je k dispozici u všech aplikací s odemykáním pomocí obličeje nebo otisku prstu."</string>
+    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
+    <skip />
+    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
+    <skip />
     <string name="identity_check_view_details" msgid="8752343542345818128">"Zobrazit podrobnosti"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"Nastavení nelze zkontrolovat"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Zatím žádné údaje"</string>
@@ -6078,6 +6070,11 @@
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Párování"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> je připojeno"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Zkontrolovat zařízení"</string>
-    <!-- no translation found for satellite_tile_label (1098132989724404617) -->
+    <string name="satellite_tile_label" msgid="1098132989724404617">"Satelitní připojení"</string>
+    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
     <skip />
 </resources>

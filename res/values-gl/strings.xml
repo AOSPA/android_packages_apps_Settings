@@ -1029,6 +1029,10 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Conecta unha pantalla externa para comezar ou proba cun cable diferente"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Máis opcións"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Mantén premido e arrastra para reordenar as pantallas"</string>
+    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
+    <skip />
+    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Replicar pantalla integrada"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Queres usar a nova configuración?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Se a pantalla non funciona como queres, podes volver á configuración anterior"</string>
@@ -2211,17 +2215,14 @@
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Velocidade do desprazamento"</string>
     <string name="mouse_scrolling_speed_make_faster_description" msgid="3542691986036109618">"Acelerar o desprazamento"</string>
     <string name="mouse_scrolling_speed_make_slower_description" msgid="349335653732016736">"Minorar o desprazamento"</string>
-    <!-- no translation found for mouse_pointer_speed_make_faster_desc (7764518379488092305) -->
-    <skip />
-    <!-- no translation found for mouse_pointer_speed_make_slower_desc (5833674987434163839) -->
-    <skip />
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7764518379488092305">"Aumentar a velocidade do cursor"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="5833674987434163839">"Reducir a velocidade do cursor"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Cambiar botón principal do rato"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Usa o botón esquerdo do rato como se fose o dereito"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Aceleración do cursor"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"Os movementos rápidos co rato desprazarán o cursor máis lonxe"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Teclas do rato para <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
-    <!-- no translation found for mouse_keys_directional_summary (4579525566659216785) -->
-    <skip />
+    <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"Usa as teclas <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> para mover o cursor do rato"</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"Usa a tecla <xliff:g id="CLICK_LABEL">%s</xliff:g> para facer clic no botón principal do rato"</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"Usa a tecla <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> para manter premido o botón principal do rato"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Usa a tecla <xliff:g id="RELEASE_LABEL">%s</xliff:g> para soltar o botón principal do rato"</string>
@@ -2238,10 +2239,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Panel táctil"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Panel táctil e rato"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Rato"</string>
-    <!-- no translation found for mouse_settings_summary (2593803007491750229) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (2984582991609553396) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="2593803007491750229">"Velocidade cursor, personalización"</string>
+    <string name="trackpad_settings_summary" msgid="2984582991609553396">"Velocidade do cursor, xestos"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Toque para facer clic"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Tocar e arrastrar para mover elementos"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Toca dúas veces e arrastra o dedo no panel táctil para mover obxectos"</string>
@@ -2252,29 +2251,19 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic na esquina inferior dereita"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Fai clic na esquina inferior dereita do panel para ver máis opcións"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Velocidade do cursor"</string>
-    <!-- no translation found for trackpad_pointer_speed_make_faster_desc (2954555994130361440) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed_make_slower_desc (3071350599514464670) -->
-    <skip />
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2954555994130361440">"Aumentar a velocidade do cursor"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="3071350599514464670">"Reducir a velocidade do cursor"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Usar o toque con tres dedos"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Aceleración do panel táctil"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Os movementos rápidos no panel táctil desprazan o cursor máis lonxe"</string>
-    <!-- no translation found for pointer_fill_style (561690299676235020) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_black_button (5831307568100774564) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_green_button (3395040005347840735) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_red_button (7785934621403739261) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_pink_button (7220230518307764408) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_blue_button (667409695278072650) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_purple_button (5559838766704731345) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (6646072538968241128) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="561690299676235020">"Cor do cursor"</string>
+    <string name="pointer_fill_style_black_button" msgid="5831307568100774564">"Cambiar o recheo do cursor a negro"</string>
+    <string name="pointer_fill_style_green_button" msgid="3395040005347840735">"Cambiar o recheo do cursor a verde"</string>
+    <string name="pointer_fill_style_red_button" msgid="7785934621403739261">"Cambiar o recheo do cursor a vermello"</string>
+    <string name="pointer_fill_style_pink_button" msgid="7220230518307764408">"Cambiar o recheo do cursor a rosa"</string>
+    <string name="pointer_fill_style_blue_button" msgid="667409695278072650">"Cambiar o recheo do cursor a azul"</string>
+    <string name="pointer_fill_style_purple_button" msgid="5559838766704731345">"Cambiar o recheo do cursor a morado"</string>
+    <string name="pointer_stroke_style" msgid="6646072538968241128">"Cor do trazo do cursor"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Branco"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Negro"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Ningún"</string>
@@ -2348,13 +2337,10 @@
     <string name="speech_category_title" msgid="5995161659186229742">"Voz"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"Voz"</string>
     <string name="speech_preference_summary" msgid="5190362663352347487">"Controla a saída e o recoñecemento de voz"</string>
-    <!-- no translation found for pointer_speed (5284291781349402396) -->
-    <skip />
+    <string name="pointer_speed" msgid="5284291781349402396">"Velocidade do cursor"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"Tamaño do cursor"</string>
-    <!-- no translation found for pointer_scale_decrease_content_description (4410507171942820948) -->
-    <skip />
-    <!-- no translation found for pointer_scale_increase_content_description (8832991916962669031) -->
-    <skip />
+    <string name="pointer_scale_decrease_content_description" msgid="4410507171942820948">"Reducir o tamaño do cursor"</string>
+    <string name="pointer_scale_increase_content_description" msgid="8832991916962669031">"Aumentar o tamaño do cursor"</string>
     <string name="pointer_scale_keywords" msgid="8939432511048322072">"escala, tamaño, escala do punteiro, tamaño do punteiro, punteiro grande do rato, grande, visible"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Mando do xogo"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redirixir vibración"</string>
@@ -2865,7 +2851,7 @@
     <string name="keywords_accessibility" msgid="8593989878379366798">"visión, audición, cegueira, xordeira, motricidade, destreza, asistencial, asistencia, facilidade de uso, facilidade de acceso, man, axuda"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"Lupa de ventá, zoom, ampliación, visión reducida, aumentar tamaño, agrandar"</string>
     <string name="keywords_talkback" msgid="2816435437095102527"></string>
-    <string name="keywords_live_caption" msgid="1667203998080567556">"Subtítulos, subtitulado, Transcrición instantánea, problemas auditivos, perda de audición, subtitulado en tempo real, CART, conversión de voz a texto, subtítulo"</string>
+    <string name="keywords_live_caption" msgid="1667203998080567556">"Subtítulos, subtítulos descritivos, Transcrición instantánea, problemas auditivos, perda de audición, subtitulado en tempo real, CART, conversión de voz a texto, subtítulo"</string>
     <string name="keywords_live_transcribe" msgid="3226990195174890997"></string>
     <string name="keywords_sound_notifications" msgid="8183107485754075413"></string>
     <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
@@ -2947,6 +2933,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Uso da batería"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Consulta o uso das últimas 24 horas"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Uso desde a última carga completa"</string>
+    <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Uso da batería para a aplicación"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalles de uso"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Axustar uso de enerxía"</string>
@@ -3461,8 +3449,7 @@
     <string name="user_owner" msgid="2079206733011361994">"Persoa propietaria"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrador"</string>
     <string name="user_you" msgid="3070562015202859996">"Ti (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_edit_button (2362042403252020360) -->
-    <skip />
+    <string name="user_edit_button" msgid="2362042403252020360">"Editar"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Non podes engadir máis usuarios. Para poder meter un novo, debes quitar algún dos que xa teñas."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Os perfís restrinxidos non poden engadir contas"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Eliminar a <xliff:g id="USER_NAME">%1$s</xliff:g> do dispositivo"</string>
@@ -3506,6 +3493,8 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Es a única persoa con acceso de administración neste dispositivo, e por iso o teu perfil de usuario non se pode eliminar. Se queres suprimilo, podes designar outra persoa administradora ou borrar todos os datos do dispositivo en Sistema &gt; Opcións de restablecemento &gt; Borrar todos os datos (restablecemento de fábrica)."</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Non se poden quitar os privilexios de xestión"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Es a única persoa con acceso de administración neste dispositivo. Se non queres seguir séndoo, o primeiro que tes que facer é designar outra persoa administradora."</string>
+    <!-- no translation found for add_user_summary_action_restricted (6276344792683243643) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Información de emerxencia"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Información e contactos de: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Abrir <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4020,8 +4009,8 @@
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Mostrar notificacións vistas"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Mostrar iconas de notificacións vistas"</string>
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"Mostrar notificacións silenciadas"</string>
-    <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"Mostrar contido delicado"</string>
-    <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"Mostrar contido delicado do perfil de traballo"</string>
+    <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"Mostrar contido confidencial"</string>
+    <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"Mostrar contido confidencial do perfil de traballo"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Notificacións do perfil"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Notificacións"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"Notificacións de aplicacións"</string>
@@ -4895,8 +4884,7 @@
     <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
     <skip />
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Orde dos botóns"</string>
-    <!-- no translation found for keywords_button_navigation_settings_order (2256307328114139152) -->
-    <skip />
+    <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Orde dos botóns, mover botóns, modo para persoas zurdas, modo para persoas destras"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Volver"</string>
     <string name="navbar_home_button" msgid="951459586446869883">"Inicio"</string>
     <string name="navbar_recent_button" msgid="6005580570601162420">"Recentes"</string>
@@ -5973,8 +5961,7 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Controis parentais"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Normas dixitais básicas e límites de tempo diante da pantalla"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Configura un PIN"</string>
-    <!-- no translation found for supervision_set_up_pin_preference_title (4191271096152722137) -->
-    <skip />
+    <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Configurar un PIN de controis parentais"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"supervisión, controis parentais, pais, nais, responsables, pin de supervisión, pin"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Xestionar PIN"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN dos controis parentais"</string>
@@ -6019,10 +6006,11 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Non se pode eliminar o PIN"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Non se puido eliminar o PIN"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Produciuse un erro ao tentar eliminar o PIN."</string>
-    <!-- no translation found for supervision_delete_and_turn_off_button_label (2749633624475583720) -->
-    <skip />
+    <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Eliminar e desactivar"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animación de <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Non se poden activar os controis"</string>
+    <!-- no translation found for supervision_setup_multi_profile_error_title (7538001161488140882) -->
+    <skip />
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Produciuse un erro"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Téntao de novo máis tarde"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Volver"</string>
@@ -6054,6 +6042,10 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Consulta as aplicacións e os servizos que teñen acceso á localización"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Comprobación de identidade está dispoñible en máis aplicacións"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Comprobación de identidade evita que calquera poida acceder ás túas aplicacións. Agora está dispoñible en todas as aplicacións que usen o desbloqueo facial ou dactilar."</string>
+    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
+    <skip />
+    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
+    <skip />
     <string name="identity_check_view_details" msgid="8752343542345818128">"Ver detalles"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"Non se puideron comprobar as opcións de configuración"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Aínda non hai información"</string>
@@ -6078,6 +6070,11 @@
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Vinculando"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Dispositivo conectado: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Analizar dispositivo"</string>
-    <!-- no translation found for satellite_tile_label (1098132989724404617) -->
+    <string name="satellite_tile_label" msgid="1098132989724404617">"Satélite"</string>
+    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
     <skip />
 </resources>

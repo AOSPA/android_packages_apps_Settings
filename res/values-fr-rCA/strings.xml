@@ -1029,6 +1029,10 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Connectez un écran externe pour commencer ou essayez d\'utiliser un autre câble"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Autres options"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Maintenez le doigt sur les écrans et faites-les glisser pour les réorganiser"</string>
+    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
+    <skip />
+    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Dupliquer l\'écran intégré"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Utiliser les nouveaux paramètres?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Si votre écran ne fonctionne pas comme vous le souhaitez, vous pouvez rétablir vos paramètres précédents"</string>
@@ -2211,17 +2215,14 @@
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Vitesse de défilement"</string>
     <string name="mouse_scrolling_speed_make_faster_description" msgid="3542691986036109618">"Rendre le défilement plus rapide"</string>
     <string name="mouse_scrolling_speed_make_slower_description" msgid="349335653732016736">"Ralentir le défilement"</string>
-    <!-- no translation found for mouse_pointer_speed_make_faster_desc (7764518379488092305) -->
-    <skip />
-    <!-- no translation found for mouse_pointer_speed_make_slower_desc (5833674987434163839) -->
-    <skip />
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7764518379488092305">"Accélérer le curseur"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="5833674987434163839">"Ralentir le curseur"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Inverser les boutons principaux de la souris"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Utilisez le bouton gauche de la souris comme bouton droit"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Accélération du curseur"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"Des mouvements plus rapides avec votre souris déplaceront le curseur plus loin"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Touches de souris pour <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
-    <!-- no translation found for mouse_keys_directional_summary (4579525566659216785) -->
-    <skip />
+    <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"Utilisez les touches « <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> » pour déplacer le curseur de la souris"</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"Utilisez la touche « <xliff:g id="CLICK_LABEL">%s</xliff:g> » pour cliquer sur le bouton principal de la souris"</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"Utilisez la touche « <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> » pour maintenir le bouton principal de la souris enfoncé"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Utilisez la touche « <xliff:g id="RELEASE_LABEL">%s</xliff:g> » pour relâcher le bouton principal de la souris"</string>
@@ -2238,10 +2239,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Pavé tactile"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Pavé tactile et souris"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Souris"</string>
-    <!-- no translation found for mouse_settings_summary (2593803007491750229) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (2984582991609553396) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="2593803007491750229">"Vitesse du curseur, personnalisation des boutons"</string>
+    <string name="trackpad_settings_summary" msgid="2984582991609553396">"Vitesse du curseur, gestes"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Toucher pour cliquer"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Toucher des éléments et les faire glisser pour les déplacer"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Touchez deux fois le pavé tactile et faites glisser votre doigt dessus pour déplacer des objets"</string>
@@ -2252,29 +2251,19 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic en bas à droite"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Cliquez dans le coin inférieur droit du pavé tactile pour plus d\'options"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Vitesse du curseur"</string>
-    <!-- no translation found for trackpad_pointer_speed_make_faster_desc (2954555994130361440) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed_make_slower_desc (3071350599514464670) -->
-    <skip />
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2954555994130361440">"Accélérer le curseur"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="3071350599514464670">"Ralentir le curseur"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Utiliser le toucher à trois doigts"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Accélération du pavé tactile"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Des mouvements plus rapides sur votre pavé tactile déplaceront le curseur plus loin"</string>
-    <!-- no translation found for pointer_fill_style (561690299676235020) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_black_button (5831307568100774564) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_green_button (3395040005347840735) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_red_button (7785934621403739261) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_pink_button (7220230518307764408) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_blue_button (667409695278072650) -->
-    <skip />
-    <!-- no translation found for pointer_fill_style_purple_button (5559838766704731345) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (6646072538968241128) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="561690299676235020">"Couleur du curseur"</string>
+    <string name="pointer_fill_style_black_button" msgid="5831307568100774564">"Modifier le style du curseur à noir"</string>
+    <string name="pointer_fill_style_green_button" msgid="3395040005347840735">"Modifier le style du curseur à vert"</string>
+    <string name="pointer_fill_style_red_button" msgid="7785934621403739261">"Modifier le style du curseur à rouge"</string>
+    <string name="pointer_fill_style_pink_button" msgid="7220230518307764408">"Modifier le style du curseur à rose"</string>
+    <string name="pointer_fill_style_blue_button" msgid="667409695278072650">"Modifier le style du curseur à bleu"</string>
+    <string name="pointer_fill_style_purple_button" msgid="5559838766704731345">"Modifier le style du curseur à violet"</string>
+    <string name="pointer_stroke_style" msgid="6646072538968241128">"Couleur du trait du curseur"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Blanc"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Noir"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Aucun"</string>
@@ -2348,13 +2337,10 @@
     <string name="speech_category_title" msgid="5995161659186229742">"Parole"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"Voix"</string>
     <string name="speech_preference_summary" msgid="5190362663352347487">"Contrôlez la reconnaissance/sortie vocale"</string>
-    <!-- no translation found for pointer_speed (5284291781349402396) -->
-    <skip />
+    <string name="pointer_speed" msgid="5284291781349402396">"Vitesse du curseur"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"Taille du curseur"</string>
-    <!-- no translation found for pointer_scale_decrease_content_description (4410507171942820948) -->
-    <skip />
-    <!-- no translation found for pointer_scale_increase_content_description (8832991916962669031) -->
-    <skip />
+    <string name="pointer_scale_decrease_content_description" msgid="4410507171942820948">"Diminuer l\'échelle du curseur"</string>
+    <string name="pointer_scale_increase_content_description" msgid="8832991916962669031">"Augmenter l\'échelle du curseur"</string>
     <string name="pointer_scale_keywords" msgid="8939432511048322072">"échelle, taille, Échelle du pointeur, Taille du pointeur, Grand pointeur de souris, grand, perceptible"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Manette de jeu"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Rediriger les vibrations"</string>
@@ -2945,6 +2931,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Utilisation de la pile"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Voir utilisation des dernières 24 heures"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Utilisation depuis la recharge complète"</string>
+    <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Utilisation de la pile par les applis"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Détails d\'utilisation"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajuster la consommation"</string>
@@ -3459,8 +3447,7 @@
     <string name="user_owner" msgid="2079206733011361994">"Propriétaire"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrateur"</string>
     <string name="user_you" msgid="3070562015202859996">"Vous (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_edit_button (2362042403252020360) -->
-    <skip />
+    <string name="user_edit_button" msgid="2362042403252020360">"Modifier"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Vous ne pouvez plus ajouter d’utilisateurs. Retirez un utilisateur pour en ajouter un nouveau."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Les profils limités ne peuvent pas ajouter de compte."</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Supp. <xliff:g id="USER_NAME">%1$s</xliff:g> de l\'appareil"</string>
@@ -3504,6 +3491,8 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Vous êtes le seul administrateur sur cet appareil, votre profil utilisateur ne peut donc pas être supprimé. Si vous souhaitez supprimer votre profil utilisateur, vous pouvez désigner un autre utilisateur comme administrateur ou effacer toutes les données de l\'appareil en accédant à Système &gt; Options de réinitialisation &gt; Effacer toutes les données (rétablir les paramètres par défaut)."</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Impossible de retirer les privilèges d\'administrateur"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Vous êtes le seul utilisateur administrateur sur cet appareil. Si vous ne souhaitez plus être administrateur, vous devez d\'abord désigner un autre utilisateur comme administrateur."</string>
+    <!-- no translation found for add_user_summary_action_restricted (6276344792683243643) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Coordonnées d\'urgence"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Information et contacts pour <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Ouvrir <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4893,8 +4882,7 @@
     <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
     <skip />
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Ordre des boutons"</string>
-    <!-- no translation found for keywords_button_navigation_settings_order (2256307328114139152) -->
-    <skip />
+    <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Ordre des boutons, déplacer les boutons, mode Gaucher, mode Droitier"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Retour"</string>
     <string name="navbar_home_button" msgid="951459586446869883">"Accueil"</string>
     <string name="navbar_recent_button" msgid="6005580570601162420">"Récents"</string>
@@ -5971,8 +5959,7 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Contrôles parentaux"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Règles de base numériques et limites de temps d\'utilisation des écrans"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Configurez un NIP"</string>
-    <!-- no translation found for supervision_set_up_pin_preference_title (4191271096152722137) -->
-    <skip />
+    <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Configurer un NIP des contrôles parentaux"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"supervision, contrôles parentaux, parents, nip de supervision, nip"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Gérer votre NIP"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"NIP des contrôles parentaux"</string>
@@ -6017,10 +6004,11 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Impossible de supprimer le NIP"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Le NIP ne peut pas être supprimé"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Une erreur s\'est produite lors de la tentative de suppression du NIP."</string>
-    <!-- no translation found for supervision_delete_and_turn_off_button_label (2749633624475583720) -->
-    <skip />
+    <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Supprimer et désactiver"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animation <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Impossible d\'activer les contrôles"</string>
+    <!-- no translation found for supervision_setup_multi_profile_error_title (7538001161488140882) -->
+    <skip />
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Un problème est survenu"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Réessayer plus tard"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Retour"</string>
@@ -6052,6 +6040,10 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Voyez les applis et les services qui ont accès à votre position"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"La Vérification d\'identité fonctionne avec plus d\'applis"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"La Vérification d\'identité empêche les accès indésirables à vos applis. Maintenant offerte avec n\'importe quelle appli qui utilise le Déverrouillage par empreinte digitale ou par reconnaissance faciale."</string>
+    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
+    <skip />
+    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
+    <skip />
     <string name="identity_check_view_details" msgid="8752343542345818128">"Afficher les détails"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"Impossible de vérifier les paramètres"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Aucun renseignement pour le moment"</string>
@@ -6076,6 +6068,11 @@
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Association en cours…"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Appareil <xliff:g id="DEVICE_NAME">%1$s</xliff:g> connecté"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Analyser l\'appareil"</string>
-    <!-- no translation found for satellite_tile_label (1098132989724404617) -->
+    <string name="satellite_tile_label" msgid="1098132989724404617">"Satellite"</string>
+    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
     <skip />
 </resources>
