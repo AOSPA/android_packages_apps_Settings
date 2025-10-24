@@ -65,6 +65,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.app.UnlaunchableAppActivity;
@@ -653,6 +654,14 @@ public class TrustedCredentialsFragment extends ObservableFragment
                     : mHideListLayoutParams);
             mContainerView.setLayoutParams(mIsListExpanded ? mShowLayoutParams
                     : mHideContainerLayoutParams);
+
+            TextView title = mHeaderView.findViewById(android.R.id.title);
+            String description = getString(mIsListExpanded
+                            ?
+                            R.string.trusted_credentials_category_content_description_to_collapse
+                            : R.string.trusted_credentials_category_content_description_to_expand,
+                    title.getText());
+            title.setContentDescription(description);
         }
 
         // Get group indicator from styles of ExpandableListView
@@ -663,7 +672,13 @@ public class TrustedCredentialsFragment extends ObservableFragment
             Drawable groupIndicator = a.getDrawable(
                     com.android.internal.R.styleable.ExpandableListView_groupIndicator);
             a.recycle();
-            return groupIndicator;
+
+            int tint = Utils.getColorAttrDefaultColor(
+                    getActivity(), android.R.attr.colorControlNormal);
+            var wrapped = DrawableCompat.wrap(groupIndicator);
+            DrawableCompat.setTint(wrapped.mutate(), tint);
+
+            return wrapped;
         }
 
         private Bundle saveState() {
@@ -1039,7 +1054,7 @@ public class TrustedCredentialsFragment extends ObservableFragment
                     }
                 }
             } catch (CertificateEncodingException | SecurityException | IllegalStateException
-                    | RemoteException e) {
+                     | RemoteException e) {
                 Log.w(TAG, "Error while toggling alias " + mCertHolder.mAlias, e);
                 return false;
             }

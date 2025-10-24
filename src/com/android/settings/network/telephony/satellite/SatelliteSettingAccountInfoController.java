@@ -133,6 +133,7 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
                the check icon with guidance that satellite is included in user's mobile plan */
         messagingPreference.setTitle(R.string.title_have_satellite_plan);
         messagingPreference.setSummary(null);
+        messagingPreference.setOnPreferenceClickListener(null);
         if (mIsDataAvailable && mDataMode > SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED) {
             Preference connectivityPreference = mScreen.findPreference(
                     PREF_KEY_YOUR_SATELLITE_DATA_PLAN);

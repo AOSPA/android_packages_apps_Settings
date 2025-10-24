@@ -18,26 +18,29 @@ package com.android.settings.bluetooth;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.Application;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
-import android.content.Context;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
@@ -47,7 +50,6 @@ import org.robolectric.annotation.Config;
 })
 public abstract class BluetoothDetailsControllerTestBase {
 
-    protected Context mContext;
     private LifecycleOwner mLifecycleOwner;
     protected Lifecycle mLifecycle;
     protected DeviceConfig mDeviceConfig;
@@ -56,25 +58,29 @@ public abstract class BluetoothDetailsControllerTestBase {
     protected BluetoothAdapter mBluetoothAdapter;
     protected PreferenceScreen mScreen;
     protected PreferenceManager mPreferenceManager;
+    protected ActivityScenario<EmptyFragmentActivity> mActivityScenario;
+    protected FragmentActivity mActivity;
+
+    protected Application mContext = ApplicationProvider.getApplicationContext();
 
     @Mock
     protected BluetoothDeviceDetailsFragment mFragment;
     @Mock
     protected CachedBluetoothDevice mCachedDevice;
     @Mock
-    protected FragmentActivity mActivity;
-    @Mock
     protected BluetoothClass mBluetoothDeviceClass;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
         mPreferenceManager = new PreferenceManager(mContext);
         mScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mDeviceConfig = makeDefaultDeviceConfig();
         when(mFragment.getActivity()).thenReturn(mActivity);
-        when(mActivity.getApplicationContext()).thenReturn(mContext);
+
+        mActivityScenario = ActivityScenario.launch(EmptyFragmentActivity.class);
+        mActivityScenario.onActivity(activity -> mActivity = activity);
+
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
@@ -82,6 +88,14 @@ public abstract class BluetoothDetailsControllerTestBase {
         mLifecycle = spy(new Lifecycle(mLifecycleOwner));
         mBluetoothManager = mContext.getSystemService(BluetoothManager.class);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
+    }
+
+    @After
+    public void cleanUp() {
+        mActivity = null;
+        if (mActivityScenario != null) {
+            mActivityScenario.close();
+        }
     }
 
     protected static class DeviceConfig {

@@ -24,6 +24,8 @@ import com.android.settings.applications.appcompat.UserAspectRatioBackupHelper;
 import com.android.settings.applications.appcompat.UserAspectRatioManager;
 import com.android.settings.flags.Flags;
 import com.android.settings.i18n.RegionalCustomizationFeatureProvider;
+import com.android.settings.inputmethod.TouchpadThreeFingerTapLaunchingAppBackupHelper;
+import com.android.settings.inputmethod.TouchpadThreeFingerTapUtils;
 import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.shortcut.ShortcutsUpdater;
@@ -38,6 +40,8 @@ public class SettingsBackupHelper extends BackupAgentHelper {
             "AccessibilityAppearanceSettingsBackup";
     public static final String MOVEMENT_BACKUP_HELPER = "MovementSettingsBackup";
     private static final String USER_ASPECT_RATIO_BACKUP_HELPER = "UserAspectRatioSettingsBackup";
+    private static final String TOUCHPAD_THREE_FINGER_TAP_LAUNCHING_APP_BACKUP_HELPER =
+            "TouchpadThreeFingerTapLaunchingAppBackup";
 
     @Override
     public void onCreate() {
@@ -81,6 +85,15 @@ public class SettingsBackupHelper extends BackupAgentHelper {
             if (com.android.window.flags.Flags.backupAndRestoreForUserAspectRatioSettings()) {
                 addHelper(USER_ASPECT_RATIO_BACKUP_HELPER, userAspectRatioBackupHelper);
             }
+        }
+
+        if (Flags.threeFingerTapAppLaunch()) {
+            String key = TouchpadThreeFingerTapUtils.getFileToBackup();
+            final TouchpadThreeFingerTapLaunchingAppBackupHelper launchingAppBackupHelper =
+                    new TouchpadThreeFingerTapLaunchingAppBackupHelper(this, key);
+            addHelper(
+                    TOUCHPAD_THREE_FINGER_TAP_LAUNCHING_APP_BACKUP_HELPER,
+                    launchingAppBackupHelper);
         }
     }
 

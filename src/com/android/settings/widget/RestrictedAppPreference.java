@@ -16,12 +16,14 @@
 
 package com.android.settings.widget;
 
+import android.app.admin.EnforcingAdmin;
 import android.content.Context;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceViewHolder;
 
@@ -94,8 +96,21 @@ public class RestrictedAppPreference extends AppPreference implements
         }
     }
 
+    /**
+     * @deprecated Use {@link #setDisabledByAdmin(EnforcingAdmin)} instead.
+     */
+    @Deprecated
     public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
         if (mHelper.setDisabledByAdmin(admin)) {
+            notifyChanged();
+        }
+    }
+
+    /**
+     * Sets the preference disabled by admin. If admin is null, sets it enabled.
+     */
+    public void setDisabledByAdmin(@Nullable EnforcingAdmin admin) {
+        if (mHelper.setDisabledByEnforcingAdmin(admin)) {
             notifyChanged();
         }
     }
@@ -104,6 +119,9 @@ public class RestrictedAppPreference extends AppPreference implements
         return mHelper.isDisabledByAdmin();
     }
 
+    /**
+     * Returns whether this preference is disabled by Enhanced Confirmation Mode.
+     */
     public boolean isDisabledByEcm() {
         return mHelper.isDisabledByEcm();
     }

@@ -23,6 +23,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
 import android.app.supervision.SupervisionManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -31,6 +32,7 @@ import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
@@ -145,6 +147,7 @@ public class FaceStatusUtilsTest {
 
     @Test
     @RequiresFlagsDisabled(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
+    @DisableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
     public void getDisabledAdmin_whenFaceDisabled_returnsEnforcedAdmin() {
         when(mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(USER_HANDLE))
                 .thenReturn(COMPONENT_NAME);
@@ -159,6 +162,7 @@ public class FaceStatusUtilsTest {
 
     @Test
     @EnableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
+    @DisableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
     public void getDisabledAdmin_whenFaceDisabled_returnsRestriction() {
         when(mSupervisionManager.isSupervisionEnabledForUser(USER_ID)).thenReturn(true);
         when(mSupervisionManager.getActiveSupervisionAppPackage()).thenReturn("supervision.pkg");
@@ -172,10 +176,52 @@ public class FaceStatusUtilsTest {
     }
 
     @Test
+    @DisableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
     public void getDisabledAdmin_withFaceEnabled_returnsNull() {
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
 
         assertThat(mFaceStatusUtils.getDisablingAdmin()).isNull();
+    }
+
+    @Test
+    @RequiresFlagsDisabled(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
+    @EnableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED,
+            android.app.admin.flags.Flags.FLAG_SET_KEYGUARD_DISABLED_FEATURES_COEXISTENCE})
+    public void getEnforcingAdmin_whenFaceDisabled_returnsEnforcingAdmin() {
+        when(mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(USER_HANDLE))
+                .thenReturn(COMPONENT_NAME);
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
+                .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FACE);
+
+        final EnforcingAdmin admin = mFaceStatusUtils.getEnforcingAdmin();
+
+        assertThat(admin).isNotNull();
+        assertThat(admin.getComponentName()).isEqualTo(COMPONENT_NAME);
+    }
+
+    @Test
+    @EnableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED,
+            android.app.admin.flags.Flags.FLAG_SET_KEYGUARD_DISABLED_FEATURES_COEXISTENCE,
+            android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS})
+    public void getEnforcingAdmin_whenFaceDisabled_returnsAdmin() {
+        final String supervisionPkg = "supervision.pkg";
+        when(mSupervisionManager.isSupervisionEnabledForUser(USER_ID)).thenReturn(true);
+        when(mSupervisionManager.getActiveSupervisionAppPackage()).thenReturn(supervisionPkg);
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(null)).thenReturn(
+                DevicePolicyManager.KEYGUARD_DISABLE_FACE);
+
+        final EnforcingAdmin admin = mFaceStatusUtils.getEnforcingAdmin();
+
+        assertThat(admin).isNotNull();
+    }
+
+    @Test
+    @EnableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED,
+            android.app.admin.flags.Flags.FLAG_SET_KEYGUARD_DISABLED_FEATURES_COEXISTENCE})
+    public void getEnforcingAdmin_withFaceEnabled_returnsNull() {
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
+
+        assertThat(mFaceStatusUtils.getEnforcingAdmin()).isNull();
     }
 
     @Test

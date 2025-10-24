@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.screenmagnification.ui.MagnificationPreferenceFragment;
+import com.android.settings.accessibility.screenmagnification.ui.MagnificationTopIntroPreference;
 import com.android.settingslib.widget.SettingsThemeHelper;
 import com.android.settingslib.widget.TopIntroPreference;
 
@@ -62,8 +63,6 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
                         finish();
                     });
         }
-
-        hidePreferenceSettingComponents();
     }
 
     @Override
@@ -77,9 +76,10 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
     /**
      * Hide the magnification preference settings in the SuW's vision settings.
      */
-    private void hidePreferenceSettingComponents() {
-        // Intro
-        TopIntroPreference topIntroPreference = findPreference("top_intro");
+    @Override
+    protected void configureTopIntroVisibility() {
+        TopIntroPreference topIntroPreference = findPreference(
+                MagnificationTopIntroPreference.KEY);
         if (topIntroPreference != null) {
             topIntroPreference.setVisible(false);
         }

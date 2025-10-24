@@ -50,7 +50,8 @@ abstract class BaseTextReadingScreen : PreferenceScreenMixin {
 
     // There are multi-entrypoint to this screen. We only want the [TextReadingScreen] searchable to
     // prevent showing duplicate entries in the search results.
-    override fun isIndexable(context: Context): Boolean = false
+    override val indexable
+        get() = false
 
     override fun isFlagEnabled(context: Context) = Flags.catalystTextReadingScreen()
 
@@ -91,9 +92,8 @@ open class TextReadingScreen : BaseTextReadingScreen() {
 
     override val key: String = KEY
 
-    override fun isIndexable(context: Context): Boolean {
-        return true
-    }
+    override val indexable
+        get() = true
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
         return makeLaunchIntent(

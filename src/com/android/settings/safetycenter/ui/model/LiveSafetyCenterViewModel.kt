@@ -30,6 +30,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.map
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.android.settingslib.safetycenter.SafetyCenterDataTransformer
+import com.android.settingslib.safetycenter.SafetyCenterUiData
 import kotlin.reflect.KClass
 
 /**
@@ -40,14 +42,16 @@ import kotlin.reflect.KClass
  */
 class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
 
+    private val _safetyCenterLiveData = SafetyCenterLiveData()
+    private val _errorLiveData = MutableLiveData<SafetyCenterErrorDetails>()
+
+    override val safetyCenterUiLiveData: LiveData<SafetyCenterUiData> =
+        _safetyCenterLiveData.map { data -> SafetyCenterDataTransformer.transform(data) }
+
     override val statusUiLiveData: LiveData<StatusUiData>
         get() = safetyCenterUiLiveData.map { StatusUiData(it) }
 
-    override val safetyCenterUiLiveData: LiveData<SafetyCenterData> by this::_safetyCenterLiveData
     override val errorLiveData: LiveData<SafetyCenterErrorDetails> by this::_errorLiveData
-
-    private val _safetyCenterLiveData = SafetyCenterLiveData()
-    private val _errorLiveData = MutableLiveData<SafetyCenterErrorDetails>()
 
     private val safetyCenterManager = app.getSystemService(SafetyCenterManager::class.java)!!
 
@@ -83,8 +87,8 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
     }
 
     @RequiresPermission(Manifest.permission.MANAGE_SAFETY_CENTER)
-    override fun getCurrentSafetyCenterDataAsUiData(): SafetyCenterData =
-        safetyCenterManager.safetyCenterData
+    override fun getCurrentSafetyCenterDataAsUiData(): SafetyCenterUiData =
+        SafetyCenterDataTransformer.transform(safetyCenterManager.safetyCenterData)
 
     @RequiresPermission(Manifest.permission.MANAGE_SAFETY_CENTER)
     override fun rescan() {

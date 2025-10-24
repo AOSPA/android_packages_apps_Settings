@@ -29,7 +29,8 @@ class AmbientDisplayTopIntroPreference : PreferenceMetadata, PreferenceBinding {
     override val title: Int
         get() = R.string.doze_always_on_summary_long
 
-    override fun createWidget(context: Context) = TopIntroPreference(context)
+    override val indexable
+        get() = false
 
-    override fun isIndexable(context: Context) = false
+    override fun createWidget(context: Context) = TopIntroPreference(context)
 }

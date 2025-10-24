@@ -20,10 +20,14 @@ import android.content.Context
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.accessibility.colorcorrection.data.ColorCorrectionModeDataStore
+import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.BooleanValuePreferenceBinding
 import com.android.settingslib.widget.SelectorWithWidgetPreference
@@ -40,7 +44,9 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference
 sealed class ModePreference(private val storage: ColorCorrectionModeDataStore) :
     BooleanValuePreference,
     BooleanValuePreferenceBinding,
-    SelectorWithWidgetPreference.OnClickListener {
+    SelectorWithWidgetPreference.OnClickListener,
+    PreferenceLifecycleProvider {
+    private var mainSettingObserver: KeyedObserver<String?>? = null
 
     override fun storage(context: Context): KeyValueStore = storage
 
@@ -69,6 +75,31 @@ sealed class ModePreference(private val storage: ColorCorrectionModeDataStore) :
             setTitleMaxLines(4)
             setOnClickListener(this@ModePreference)
         }
+
+    override fun isEnabled(context: Context): Boolean {
+        return SettingsSecureStore.get(context).getBoolean(ColorCorrectionMainSwitchPreference.KEY)
+            ?: false
+    }
+
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        mainSettingObserver =
+            KeyedObserver<String?> { _, _ -> context.notifyPreferenceChange(key) }
+                .apply {
+                    SettingsSecureStore.get(context)
+                        .addObserver(
+                            ColorCorrectionMainSwitchPreference.KEY,
+                            this,
+                            HandlerExecutor.main,
+                        )
+                }
+    }
+
+    override fun onDestroy(context: PreferenceLifecycleContext) {
+        mainSettingObserver?.run {
+            SettingsSecureStore.get(context)
+                .removeObserver(ColorCorrectionMainSwitchPreference.KEY, this)
+        }
+    }
 
     override fun onRadioButtonClicked(emiter: SelectorWithWidgetPreference) {
         emiter.isChecked = true

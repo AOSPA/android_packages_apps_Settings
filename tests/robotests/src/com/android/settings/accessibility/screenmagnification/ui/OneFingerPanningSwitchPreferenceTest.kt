@@ -34,6 +34,8 @@ import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW
 import com.google.common.truth.Truth.assertThat
@@ -64,6 +66,28 @@ class OneFingerPanningSwitchPreferenceTest {
     fun getTitle() {
         assertThat(preference.title)
             .isEqualTo(R.string.accessibility_magnification_one_finger_panning_title)
+    }
+
+    @Test
+    fun getReadPermissions_returnsSettingsSecureStoreReadPermissions() {
+        assertThat(preference.getReadPermissions(context))
+            .isEqualTo(SettingsSecureStore.getReadPermissions())
+    }
+
+    @Test
+    fun getWritePermissions_returnsSettingsSecureStoreWritePermissions() {
+        assertThat(preference.getWritePermissions(context))
+            .isEqualTo(SettingsSecureStore.getWritePermissions())
+    }
+
+    @Test
+    fun getReadPermit_returnsAllow() {
+        assertThat(preference.getReadPermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @Test
+    fun getWritePermit_returnsAllow() {
+        assertThat(preference.getWritePermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
     }
 
     @Test
@@ -103,9 +127,7 @@ class OneFingerPanningSwitchPreferenceTest {
 
         assertThat(preference.getSummary(context))
             .isEqualTo(
-                context.getString(
-                    R.string.accessibility_magnification_one_finger_panning_summary
-                )
+                context.getString(R.string.accessibility_magnification_one_finger_panning_summary)
             )
     }
 
@@ -115,9 +137,7 @@ class OneFingerPanningSwitchPreferenceTest {
 
         assertThat(preference.getSummary(context))
             .isEqualTo(
-                context.getString(
-                    R.string.accessibility_magnification_one_finger_panning_summary
-                )
+                context.getString(R.string.accessibility_magnification_one_finger_panning_summary)
             )
     }
 
@@ -150,9 +170,11 @@ class OneFingerPanningSwitchPreferenceTest {
     )
     fun performClick(settingsEnabled: Boolean, expectedChecked: Boolean) {
         MagnificationCapabilities.setCapabilities(context, MagnificationMode.ALL)
-        getStorage().setBoolean(
-            Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED, settingsEnabled
-        )
+        getStorage()
+            .setBoolean(
+                Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED,
+                settingsEnabled,
+            )
         val preferenceWidget = createOneFingerPanningWidget()
         assertThat(preferenceWidget.isChecked).isEqualTo(settingsEnabled)
 
@@ -160,8 +182,9 @@ class OneFingerPanningSwitchPreferenceTest {
 
         assertThat(preferenceWidget.isChecked).isEqualTo(expectedChecked)
         assertThat(
-            getStorage().getBoolean(Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED)
-        ).isEqualTo(expectedChecked)
+                getStorage().getBoolean(Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED)
+            )
+            .isEqualTo(expectedChecked)
     }
 
     @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
@@ -205,9 +228,9 @@ class OneFingerPanningSwitchPreferenceTest {
         try {
             activityController =
                 ActivityController.of(
-                    ComponentActivity(),
-                    Intent().apply { putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard) },
-                )
+                        ComponentActivity(),
+                        Intent().apply { putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard) },
+                    )
                     .create()
                     .start()
                     .postCreate(null)

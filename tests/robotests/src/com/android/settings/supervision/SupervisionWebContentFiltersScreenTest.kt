@@ -135,7 +135,7 @@ class SupervisionWebContentFiltersScreenTest {
 
     @Test
     fun isIndexable() {
-        assertThat(supervisionWebContentFiltersScreen.isIndexable(context)).isTrue()
+        assertThat(supervisionWebContentFiltersScreen.indexable).isTrue()
     }
 
     @Test

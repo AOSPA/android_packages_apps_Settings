@@ -15,25 +15,31 @@
  */
 package com.android.settings.appfunctions.intents
 
+import com.android.settings.appfunctions.DeviceStateAppFunctionType.GET_UNCATEGORIZED
 import com.android.settings.appfunctions.providers.StaticIntent
+import com.android.settings.appfunctions.providers.StaticIntents
 
-fun getSecurityIntents(): List<StaticIntent> =
-    listOf(
-        StaticIntent(
-            description = "Security & privacy: This intent opens the main security settings page.",
-            intentUri =
-                "intent:#Intent;action=android.settings.SECURITY_SETTINGS;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description =
-                "Device Unlock: This intent opens the settings page for device unlock options (e.g., PIN, password, fingerprint).",
-            intentUri =
-                "intent:#Intent;action=android.intent.action.SAFETY_CENTER;S.android.safetycenter.extra.SAFETY_SOURCES_GROUP_ID=AndroidLockScreenSources;end",
-        ),
-        StaticIntent(
-            description =
-                "System & Updates: This intent opens the settings page for system updates and security patches.",
-            intentUri =
-                "intent:#Intent;action=android.intent.action.SAFETY_CENTER;S.android.safetycenter.extra.SAFETY_SOURCES_GROUP_ID=GoogleUpdateSources;end",
+fun getSecurityIntents() =
+    StaticIntents(
+        GET_UNCATEGORIZED,
+        listOf(
+            StaticIntent(
+                description =
+                    "Security & privacy: This intent opens the main security settings page.",
+                intentUri =
+                    "intent:#Intent;action=android.settings.SECURITY_SETTINGS;package=com.android.settings;end",
+            ),
+            StaticIntent(
+                description =
+                    "Device Unlock: This intent opens the settings page for device unlock options (e.g., PIN, password, fingerprint).",
+                intentUri =
+                    "intent:#Intent;action=android.intent.action.SAFETY_CENTER;S.android.safetycenter.extra.SAFETY_SOURCES_GROUP_ID=AndroidLockScreenSources;end",
+            ),
+            StaticIntent(
+                description =
+                    "System & Updates: This intent opens the settings page for system updates and security patches.",
+                intentUri =
+                    "intent:#Intent;action=android.intent.action.SAFETY_CENTER;S.android.safetycenter.extra.SAFETY_SOURCES_GROUP_ID=GoogleUpdateSources;end",
+            ),
         ),
     )

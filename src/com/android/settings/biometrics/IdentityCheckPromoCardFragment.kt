@@ -19,6 +19,7 @@ package com.android.settings.biometrics
 import android.content.DialogInterface
 import android.content.DialogInterface.OnDismissListener
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,13 +79,14 @@ class IdentityCheckPromoCardFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?,
     ): View {
         val view = inflater.inflate(R.layout.identity_check_promo_card, container, false)
+        val summaryView = view.findViewById<TextView>(R.id.summary)
+        summaryView.movementMethod = LinkMovementMethod.getInstance()
         val action = arguments?.getString(KEY_INTENT_ACTION)
         if (
             action.equals(IdentityCheckSafetySource.ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS) &&
                 context!!.resources.getBoolean(R.bool.config_show_identity_check_watch_promo)
         ) {
             val titleView = view.findViewById<TextView>(R.id.title)
-            val summaryView = view.findViewById<TextView>(R.id.summary)
             val promoCardTitle = context!!.getString(R.string.identity_check_watch_promo_card_title)
             val promoCardSummary =
                 context!!.getString(R.string.identity_check_promo_card_watch_summary)

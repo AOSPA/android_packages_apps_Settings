@@ -29,7 +29,7 @@ import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.ButtonPreference
 
 /** Represents a preference item for sending feedback within a preference screen. */
-class FeedbackButtonPreference(feedbackManagerProvider: () -> FeedbackManager) :
+open class FeedbackButtonPreference(feedbackManagerProvider: () -> FeedbackManager) :
     PreferenceMetadata,
     PreferenceBinding,
     PreferenceLifecycleProvider,
@@ -44,7 +44,7 @@ class FeedbackButtonPreference(feedbackManagerProvider: () -> FeedbackManager) :
     override val icon: Int
         get() = R.drawable.ic_feedback
 
-    private val feedbackManager: FeedbackManager by lazy { feedbackManagerProvider.invoke() }
+    protected val feedbackManager: FeedbackManager by lazy { feedbackManagerProvider.invoke() }
 
     override fun isAvailable(context: Context): Boolean =
         !context.isInSetupWizard() && feedbackManager.isAvailable()
@@ -57,7 +57,7 @@ class FeedbackButtonPreference(feedbackManagerProvider: () -> FeedbackManager) :
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)
         context.findPreference<ButtonPreference>(key)?.apply {
-            setOrder(Integer.MAX_VALUE)
+            order = Integer.MAX_VALUE
             setOnClickListener { view ->
                 view.context.startActivityForResult(
                     key,

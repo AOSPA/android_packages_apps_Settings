@@ -31,6 +31,7 @@ import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.SwitchWidgetController;
+import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -82,7 +83,8 @@ public class MultiUserSwitchBarControllerTest {
 
         new MultiUserSwitchBarController(mContext, mSwitchWidgetController, null);
         verify(mSwitchWidgetController).setChecked(false);
-        verify(mSwitchWidgetController).setDisabledByAdmin(any());
+        verify(mSwitchWidgetController).setDisabledByAdmin(
+                any(RestrictedLockUtils.EnforcedAdmin.class));
     }
 
     @Test
@@ -93,7 +95,8 @@ public class MultiUserSwitchBarControllerTest {
 
         verify(mSwitchWidgetController).setChecked(false);
         verify(mSwitchWidgetController).setEnabled(false);
-        verify(mSwitchWidgetController, never()).setDisabledByAdmin(any());
+        verify(mSwitchWidgetController, never()).setDisabledByAdmin(any(
+                RestrictedLockUtils.EnforcedAdmin.class));
     }
 
     @Test
@@ -115,7 +118,8 @@ public class MultiUserSwitchBarControllerTest {
         final MultiUserSwitchBarController controller = new MultiUserSwitchBarController(mContext,
                 mSwitchWidgetController, null);
 
-        verify(mSwitchWidgetController, never()).setDisabledByAdmin(any());
+        verify(mSwitchWidgetController, never()).setDisabledByAdmin(any(
+                RestrictedLockUtils.EnforcedAdmin.class));
     }
 
     @Test
@@ -126,7 +130,8 @@ public class MultiUserSwitchBarControllerTest {
         mUserManager.switchUser(10);
         new MultiUserSwitchBarController(mContext, mSwitchWidgetController, null);
 
-        verify(mSwitchWidgetController, never()).setDisabledByAdmin(any());
+        verify(mSwitchWidgetController, never()).setDisabledByAdmin(any(
+                RestrictedLockUtils.EnforcedAdmin.class));
         verify(mSwitchWidgetController).setEnabled(false);
     }
 
@@ -136,7 +141,8 @@ public class MultiUserSwitchBarControllerTest {
                 UserManager.DISALLOW_USER_SWITCH, false);
         new MultiUserSwitchBarController(mContext, mSwitchWidgetController, null);
 
-        verify(mSwitchWidgetController, never()).setDisabledByAdmin(any());
+        verify(mSwitchWidgetController, never()).setDisabledByAdmin(any(
+                RestrictedLockUtils.EnforcedAdmin.class));
         verify(mSwitchWidgetController).setEnabled(true);
     }
 }

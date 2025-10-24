@@ -102,6 +102,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreference;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
@@ -128,6 +129,33 @@ public class ChooseLockGeneric extends SettingsActivity {
 
     /* package */ Class<? extends Fragment> getFragmentClass() {
         return ChooseLockGenericFragment.class;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (Flags.chooseAScreenLockSupportExpressive()) {
+            if (ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext())) {
+                ThemeHelper.trySetSuwTheme(this);
+            }
+            setContentView(R.layout.choose_lock_generic_glif);
+        }
+    }
+
+    @Override
+    protected boolean isToolbarEnabled() {
+        return !(Flags.chooseAScreenLockSupportExpressive());
+    }
+
+    /**
+     * Applying GlifLayout in expressive style
+     * @param title the GlifLayout title.
+     */
+    public void setGlifLayoutTitle(String title) {
+        final GlifLayout glifLayout = findViewById(R.id.main_content);
+        if (glifLayout != null) {
+            glifLayout.setHeaderText(title);
+        }
     }
 
     public static class InternalActivity extends ChooseLockGeneric {
@@ -234,6 +262,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         private final ArrayList<AbstractPreferenceController> mUnlockSettingsControllers =
                 new ArrayList<>();
 
+        private boolean mUseExpressive;
+
         @Override
         public int getMetricsCategory() {
             return SettingsEnums.CHOOSE_LOCK_GENERIC;
@@ -242,6 +272,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            mUseExpressive = ThemeHelper.shouldApplyGlifExpressiveStyle(getContext());
             final Activity activity = getActivity();
             final Bundle arguments = getArguments();
             if (!WizardManagerHelper.isDeviceProvisioned(activity)
@@ -382,34 +413,59 @@ public class ChooseLockGeneric extends SettingsActivity {
                 return;
             }
             final boolean updateExistingLock;
+            String title;
             if (mIsManagedProfile) {
                 // Going from unified challenge -> separate challenge is considered as adding
                 // a new lock to the profile, while if the profile already has a separate challenge
                 // it's an update.
                 updateExistingLock = mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId);
                 if (updateExistingLock) {
-                    getActivity().setTitle(mDpm.getResources().getString(
+                    title = mDpm.getResources().getString(
                             LOCK_SETTINGS_UPDATE_PROFILE_LOCK_TITLE,
                             () -> getString(mExtraLockScreenTitleResId != -1
                                     ? mExtraLockScreenTitleResId
-                                    : R.string.lock_settings_picker_update_profile_lock_title)));
+                                    : R.string.lock_settings_picker_update_profile_lock_title));
+
+                    setTitleIfSupportedExpressive(title);
                 } else {
-                    getActivity().setTitle(mDpm.getResources().getString(
+                    title = mDpm.getResources().getString(
                             LOCK_SETTINGS_NEW_PROFILE_LOCK_TITLE,
                             () -> getString(mExtraLockScreenTitleResId != -1
                                     ? mExtraLockScreenTitleResId
-                                    : R.string.lock_settings_picker_new_profile_lock_title)));
+                                    : R.string.lock_settings_picker_new_profile_lock_title));
+                    setTitleIfSupportedExpressive(title);
                 }
             } else if (mExtraLockScreenTitleResId != -1) {
                 // Show customized screen lock title if it is passed as an extra in the intent.
-                getActivity().setTitle(mExtraLockScreenTitleResId);
+                title = getString(mExtraLockScreenTitleResId);
+                setTitleIfSupportedExpressive(title);
             } else {
                 updateExistingLock = mLockPatternUtils.isSecure(mUserId);
                 if (updateExistingLock) {
-                    getActivity().setTitle(R.string.lock_settings_picker_update_lock_title);
+                    title = getString(R.string.lock_settings_picker_update_lock_title);
                 } else {
-                    getActivity().setTitle(R.string.lock_settings_picker_new_lock_title);
+                    title =  getString(R.string.lock_settings_picker_new_lock_title);
                 }
+                setTitleIfSupportedExpressive(title);
+            }
+        }
+
+        private void setTitleIfSupportedExpressive(String title) {
+            if (Flags.chooseAScreenLockSupportExpressive()) {
+                setTitle(title);
+            } else {
+                getActivity().setTitle(title);
+            }
+        }
+
+        private void setTitle(String title) {
+            final Activity activity = getActivity();
+            if (activity instanceof ChooseLockGeneric) {
+                final ChooseLockGeneric outerActivity = (ChooseLockGeneric) activity;
+                outerActivity.setGlifLayoutTitle(title);
+            } else {
+                throw new IllegalStateException(
+                        "The fragment must be hosted by a ChooseLockGeneric activity.");
             }
         }
 
@@ -459,7 +515,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
             } else {
                 textView.setText("");
-                if (ThemeHelper.shouldApplyGlifExpressiveStyle(getContext())) {
+                if (mUseExpressive) {
                     textView.setVisibility(View.GONE);
                 }
             }

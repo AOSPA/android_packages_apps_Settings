@@ -17,11 +17,11 @@
 package com.android.settings.safetycenter.ui.model
 
 import android.app.Application
-import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterErrorDetails
 import android.safetycenter.SafetyCenterIssue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.android.settingslib.safetycenter.SafetyCenterUiData
 
 /**
  * Defines the abstract contract for a ViewModel that provides data for the Safety Center UI.
@@ -34,13 +34,13 @@ abstract class SafetyCenterViewModel(protected val app: Application) : AndroidVi
     abstract val statusUiLiveData: LiveData<StatusUiData>
 
     /** Exposes the complete, detailed data for rendering the Safety Center UI. */
-    abstract val safetyCenterUiLiveData: LiveData<SafetyCenterData>
+    abstract val safetyCenterUiLiveData: LiveData<SafetyCenterUiData>
 
     /** Exposes any errors reported by the Safety Center framework. */
     abstract val errorLiveData: LiveData<SafetyCenterErrorDetails>
 
-    /** Returns the [SafetyCenterData] currently stored by the Safety Center service. */
-    abstract fun getCurrentSafetyCenterDataAsUiData(): SafetyCenterData
+    /** Returns the [SafetyCenterUiData] currently stored by the Safety Center service. */
+    abstract fun getCurrentSafetyCenterDataAsUiData(): SafetyCenterUiData
 
     /** Triggers a request to refresh all safety sources. */
     abstract fun rescan()

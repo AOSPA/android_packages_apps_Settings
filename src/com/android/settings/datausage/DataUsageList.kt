@@ -17,6 +17,7 @@
 package com.android.settings.datausage
 
 import android.app.settings.SettingsEnums
+import android.content.Context
 import android.content.Intent
 import android.net.NetworkPolicy
 import android.net.NetworkTemplate
@@ -42,6 +43,7 @@ import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.widget.LayoutPreference
 import kotlin.jvm.optionals.getOrNull
 
+// LINT.IfChange
 /**
  * Panel showing data usage history across various networks, including options to inspect based on
  * usage cycle and control through [NetworkPolicy].
@@ -150,6 +152,10 @@ open class DataUsageList : DashboardFragment() {
 
     override fun getLogTag() = TAG
 
+    override fun getPreferenceScreenBindingKey(context: Context): String {
+        return DataUsageListScreen.KEY
+    }
+
     private fun processArgument() {
         arguments?.let {
             subId = it.getInt(EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
@@ -221,3 +227,4 @@ open class DataUsageList : DashboardFragment() {
         @VisibleForTesting const val KEY_WARNING = "warning"
     }
 }
+// LINT.ThenChange(DataUsageListScreen.kt)

@@ -49,6 +49,9 @@ open class FlashNotificationsScreen :
     override val highlightMenuKey: Int
         get() = R.string.menu_key_accessibility
 
+    override val indexable
+        get() = true
+
     override val keywords: Int
         get() = R.string.flash_notifications_keywords
 
@@ -79,8 +82,6 @@ open class FlashNotificationsScreen :
 
     override fun isAvailable(context: Context): Boolean =
         FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_FLASH_NOTIFICATIONS)
-
-    override fun isIndexable(context: Context): Boolean = true
 
     override fun getSummary(context: Context): CharSequence? {
         return when (FlashNotificationsUtil.getFlashNotificationsState(context)) {

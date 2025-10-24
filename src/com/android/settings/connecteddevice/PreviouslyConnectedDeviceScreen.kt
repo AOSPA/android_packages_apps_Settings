@@ -55,6 +55,9 @@ open class PreviouslyConnectedDeviceScreen :
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider,
     DevicePreferenceCallback {
+
+    private val bluetoothAdapter: BluetoothAdapter? by lazy { BluetoothAdapter.getDefaultAdapter() }
+
     override val key: String
         get() = KEY
 
@@ -93,22 +96,30 @@ open class PreviouslyConnectedDeviceScreen :
 
     override fun onStart(context: PreferenceLifecycleContext) {
         super.onStart(context)
-        val filter = IntentFilter().apply { addAction(BluetoothAdapter.ACTION_STATE_CHANGED) }
-        val preferenceLifecycleContext = context
-        bluetoothStateReceiver =
-            object : BroadcastReceiver() {
-                override fun onReceive(context: Context?, intent: Intent?) {
-                    preferenceLifecycleContext.notifyPreferenceChange(KEY)
+        if (isEntryPoint(context)) {
+            val filter = IntentFilter().apply { addAction(BluetoothAdapter.ACTION_STATE_CHANGED) }
+            val preferenceLifecycleContext = context
+            bluetoothStateReceiver =
+                object : BroadcastReceiver() {
+                    override fun onReceive(context: Context?, intent: Intent?) {
+                        preferenceLifecycleContext.notifyPreferenceChange(KEY)
+                    }
                 }
+            context.registerReceiver(bluetoothStateReceiver, filter, Context.RECEIVER_EXPORTED)
+        } else if (isContainer(context)) {
+            if (bluetoothAdapter?.isEnabled == false) {
+                bluetoothAdapter?.enable()
             }
-        context.registerReceiver(bluetoothStateReceiver, filter, Context.RECEIVER_EXPORTED)
+        }
     }
 
     override fun onStop(context: PreferenceLifecycleContext) {
         super.onStop(context)
-        bluetoothStateReceiver?.let {
-            context.unregisterReceiver(it)
-            bluetoothStateReceiver = null
+        if (isEntryPoint(context)) {
+            bluetoothStateReceiver?.let {
+                context.unregisterReceiver(it)
+                bluetoothStateReceiver = null
+            }
         }
     }
 

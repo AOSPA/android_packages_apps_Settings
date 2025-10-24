@@ -63,6 +63,7 @@ public class CdmaSubscriptionPreferenceController extends CdmaBasePreferenceCont
         if (mode != TelephonyManager.CDMA_SUBSCRIPTION_UNKNOWN) {
             listPreference.setValue(Integer.toString(mode));
         }
+        listPreference.setEnabled(!mIsAirplaneModeOn);
     }
 
     @Override

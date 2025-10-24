@@ -29,6 +29,7 @@ import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -42,6 +43,7 @@ open class DataSaverScreen(context: Context) :
     PreferenceScreenMixin,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
+    PreferenceIndexableProvider,
     PreferenceLifecycleProvider {
 
     private val dataSaverStore = DataSaverMainSwitchPreference.createDataStore(context)
@@ -88,12 +90,16 @@ open class DataSaverScreen(context: Context) :
     override fun hasCompleteHierarchy() = false
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        keyedObserver = KeyedObserver { _, _ -> context.notifyPreferenceChange(KEY) }
-        dataSaverStore.addObserver(DATA_SAVER_KEY, keyedObserver, HandlerExecutor.main)
+        if (isEntryPoint(context)) {
+            keyedObserver = KeyedObserver { _, _ -> context.notifyPreferenceChange(KEY) }
+            dataSaverStore.addObserver(DATA_SAVER_KEY, keyedObserver, HandlerExecutor.main)
+        }
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
-        dataSaverStore.removeObserver(DATA_SAVER_KEY, keyedObserver)
+        if (isEntryPoint(context)) {
+            dataSaverStore.removeObserver(DATA_SAVER_KEY, keyedObserver)
+        }
     }
 
     companion object {

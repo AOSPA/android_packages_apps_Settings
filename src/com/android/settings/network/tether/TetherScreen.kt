@@ -83,7 +83,10 @@ open class TetherScreen :
         makeLaunchIntent(context, TetherSettingsActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) { if (Flags.catalystTetherSettings()) +WifiHotspotScreen.KEY }
+        preferenceHierarchy(context) {
+            if (Flags.catalystTetherSettings()) +WifiHotspotScreen.KEY
+            if (Flags.catalystTetherSettings26q1()) +BluetoothTetherSwitchPreference()
+        }
 
     companion object {
         const val KEY = "tether_settings"

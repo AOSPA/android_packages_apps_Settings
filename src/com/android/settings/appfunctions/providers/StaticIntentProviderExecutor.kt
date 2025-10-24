@@ -26,10 +26,21 @@ import com.android.settings.appfunctions.intents.getModesIntents
 import com.android.settings.appfunctions.intents.getNotificationsIntents
 import com.android.settings.appfunctions.intents.getOtherIntents
 import com.android.settings.appfunctions.intents.getSecurityIntents
+import com.android.settings.appfunctions.intents.getStorageIntents
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 /** A simple data class to represent a static Intent URI + description. */
 @Keep data class StaticIntent(val description: String, val intentUri: String)
+
+/**
+ * A data class to store a [StaticIntent] list and the [DeviceStateAppFunctionType] this list is
+ * associated with.
+ */
+@Keep
+data class StaticIntents(
+    val appFunctionType: DeviceStateAppFunctionType,
+    val intents: List<StaticIntent>,
+)
 
 /**
  * A [DeviceStateExecutor] that provides a static list of device states from a list of
@@ -39,38 +50,36 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDev
  * and an intent URI. It will only provide states if the [requestAppFunctionType] matches the app
  * function this provider is configured with.
  *
- * @param staticIntents The list of [StaticIntent]s to provide.
- * @param appFunctionType The [DeviceStateAppFunctionType] this provider is associated with.
+ * @param staticIntents The list of [StaticIntents] to provide.
  */
 @Keep
-class StaticIntentProviderExecutor(
-    val staticIntents: List<StaticIntent>,
-    private val appFunctionType: DeviceStateAppFunctionType,
-) : DeviceStateExecutor {
+class StaticIntentProviderExecutor(val staticIntents: List<StaticIntents>) : DeviceStateExecutor {
     override suspend fun execute(
         appFunctionType: DeviceStateAppFunctionType,
         params: GenericDocument?,
     ): DeviceStateProviderExecutorResult {
-        if (appFunctionType != this@StaticIntentProviderExecutor.appFunctionType) {
-            return DeviceStateProviderExecutorResult(emptyList())
-        }
-
         val states =
-            staticIntents.map {
-                PerScreenDeviceStates(
-                    description = it.description,
-                    intentUri = it.intentUri,
-                    deviceStateItems = emptyList(),
-                )
-            }
+            staticIntents
+                .filter { appFunctionType == it.appFunctionType }
+                .flatMap { staticIntents: StaticIntents ->
+                    staticIntents.intents.map {
+                        PerScreenDeviceStates(
+                            description = it.description,
+                            intentUri = it.intentUri,
+                        )
+                    }
+                }
         return DeviceStateProviderExecutorResult(states)
     }
 }
 
-fun getAllIntents(): List<StaticIntent> =
-    getAppsIntents() +
-        getNotificationsIntents() +
-        getModesIntents() +
-        getSecurityIntents() +
-        getAccessibilityIntents() +
-        getOtherIntents()
+fun getAllIntents(): List<StaticIntents> =
+    listOf(
+        getAppsIntents(),
+        getNotificationsIntents(),
+        getModesIntents(),
+        getStorageIntents(),
+        getSecurityIntents(),
+        getAccessibilityIntents(),
+        getOtherIntents(),
+    )

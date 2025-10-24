@@ -25,11 +25,13 @@ import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TopIntroPreference
 
 // LINT.IfChange
-class FlashNotificationsTopIntroPreference : PreferenceMetadata,
-    PreferenceTitleProvider,
-    PreferenceBinding {
+class FlashNotificationsTopIntroPreference :
+    PreferenceMetadata, PreferenceTitleProvider, PreferenceBinding {
     override val key: String
         get() = "flash_notifications_intro"
+
+    override val indexable
+        get() = false
 
     override fun createWidget(context: Context) = TopIntroPreference(context)
 
@@ -40,7 +42,5 @@ class FlashNotificationsTopIntroPreference : PreferenceMetadata,
             context.getString(R.string.flash_notifications_intro_without_camera_flash)
         }
     }
-
-    override fun isIndexable(context: Context): Boolean = false
 }
 // LINT.ThenChange(/src/com/android/settings/accessibility/FlashNotificationsIntroPreferenceController.java)

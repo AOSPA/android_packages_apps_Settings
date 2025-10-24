@@ -62,6 +62,9 @@ class ColorCorrectionScreen :
     override val highlightMenuKey: Int
         get() = R.string.menu_key_accessibility
 
+    override val indexable
+        get() = true
+
     override val keywords: Int
         get() = R.string.keywords_color_correction
 
@@ -69,8 +72,6 @@ class ColorCorrectionScreen :
 
     override fun fragmentClass(): Class<out Fragment>? =
         ToggleDaltonizerPreferenceFragment::class.java
-
-    override fun isIndexable(context: Context) = true
 
     override fun isFlagEnabled(context: Context) = Flags.catalystDaltonizer()
 
@@ -84,7 +85,7 @@ class ColorCorrectionScreen :
             R.string.daltonizer_state_off,
         )
 
-    override fun onStart(context: PreferenceLifecycleContext) {
+    override fun onCreate(context: PreferenceLifecycleContext) {
         if (isEntryPoint(context)) {
             val observer =
                 KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(bindingKey) }
@@ -94,7 +95,7 @@ class ColorCorrectionScreen :
         }
     }
 
-    override fun onStop(context: PreferenceLifecycleContext) {
+    override fun onDestroy(context: PreferenceLifecycleContext) {
         if (isEntryPoint(context)) {
             settingsKeyedObserver?.let {
                 val storage = SettingsSecureStore.get(context)

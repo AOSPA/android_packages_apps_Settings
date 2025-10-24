@@ -43,7 +43,7 @@ class TextReadingScreenOnAccessibilityTest : SettingsCatalystTestCase() {
 
     @Test
     fun isIndexable() {
-        assertThat(preferenceScreenCreator.isIndexable(context)).isFalse()
+        assertThat(preferenceScreenCreator.indexable).isFalse()
     }
 
     @Test

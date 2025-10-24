@@ -83,17 +83,21 @@ open class ColorModeScreen :
         makeLaunchIntent(context, ColorModeActivity::class.java, metadata?.key)
 
     override fun onStart(context: PreferenceLifecycleContext) {
-        val observer = KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(KEY) }
-        settingsKeyedObserver = observer
-        val storage = SettingsSystemStore.get(context)
-        storage.addObserver(DISPLAY_COLOR_MODE, observer, HandlerExecutor.main)
+        if (isEntryPoint(context)) {
+            val observer = KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(KEY) }
+            settingsKeyedObserver = observer
+            val storage = SettingsSystemStore.get(context)
+            storage.addObserver(DISPLAY_COLOR_MODE, observer, HandlerExecutor.main)
+        }
     }
 
     override fun onStop(context: PreferenceLifecycleContext) {
-        settingsKeyedObserver?.let {
-            val storage = SettingsSystemStore.get(context)
-            storage.removeObserver(DISPLAY_COLOR_MODE, it)
-            settingsKeyedObserver = null
+        if (isEntryPoint(context)) {
+            settingsKeyedObserver?.let {
+                val storage = SettingsSystemStore.get(context)
+                storage.removeObserver(DISPLAY_COLOR_MODE, it)
+                settingsKeyedObserver = null
+            }
         }
     }
 

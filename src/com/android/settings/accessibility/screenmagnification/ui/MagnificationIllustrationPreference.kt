@@ -31,6 +31,9 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = false
+
     override fun createWidget(context: Context): IllustrationPreference {
         val lottieResId =
             if (SettingsThemeHelper.isExpressiveTheme(context)) {
@@ -54,8 +57,6 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
             }
         }
     }
-
-    override fun isIndexable(context: Context) = false
 
     companion object {
         const val KEY = "animated_image"

@@ -29,6 +29,7 @@ import com.android.settings.deviceinfo.DeviceNamePreference
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoScreen
 import com.android.settings.deviceinfo.imei.ImeiPreference
+import com.android.settings.deviceinfo.imei.getImeiList
 import com.android.settings.deviceinfo.simstatus.SimEidPreference
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
@@ -96,8 +97,9 @@ open class MyDeviceInfoScreen :
                         +SimEidPreference(context) order 31
                     }
                     val activeModemCount = context.activeModemCount
+                    val imeiList = context.getImeiList
                     for (i in 0 until activeModemCount) {
-                        +ImeiPreference(context, i, activeModemCount) order (i + 33)
+                        +ImeiPreference(context, i, activeModemCount, imeiList) order (i + 33)
                     }
                     if (Flags.catalystFirmwareVersion()) +FirmwareVersionScreen.KEY order 42
                 }
@@ -107,6 +109,7 @@ open class MyDeviceInfoScreen :
 
     companion object {
         const val KEY = "my_device_info_pref_screen"
+
         internal const val BASIC_INFO_CATEGORY = "basic_info_category"
         internal const val DEVICE_DETAIL_CATEGORY = "device_detail_category"
     }

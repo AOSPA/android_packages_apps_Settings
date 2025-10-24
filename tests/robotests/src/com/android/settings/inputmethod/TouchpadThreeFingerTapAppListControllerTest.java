@@ -39,6 +39,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -57,6 +58,7 @@ import android.os.UserHandle;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowSystemSettings;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
@@ -120,10 +122,12 @@ public class TouchpadThreeFingerTapAppListControllerTest {
     private TouchpadThreeFingerTapAppListController mController;
     private InputGestureData mCustomInputGesture;
     private LauncherApps.Callback mLauncherAppsCallback;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setup() {
         mContentResolver = mContext.getContentResolver();
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new TouchpadThreeFingerTapAppListController(
                 mContext, PREF_KEY,
                 mMockLauncherApps, mMockInputManager, mMockSharedPreferences, mMockContentObserver);
@@ -257,6 +261,12 @@ public class TouchpadThreeFingerTapAppListControllerTest {
         List<SelectorWithWidgetPreference> prefs = captor.getAllValues();
         assertThat(prefs.get(0).isChecked()).isTrue();
         assertThat(prefs.get(1).isChecked()).isFalse();
+
+        // The app selection metrics is tracked
+        verify(mFeatureFactory.metricsFeatureProvider).action(any(),
+                        eq(SettingsEnums.ACTION_TOUCHPAD_THREE_FINGER_TAP_LAUNCHING_APP),
+                        eq(expectedApp.getPackageName()));
+
     }
 
     private void verifySharedPrefEdited(ComponentName launchingApp) {

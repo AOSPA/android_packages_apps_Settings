@@ -36,6 +36,9 @@ class AmbientDisplayIllustration(context: Context) : PreferenceMetadata, Prefere
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = false
+
     override fun createWidget(context: Context) = IllustrationPreference(context)
 
     override fun dependencies(context: Context) =
@@ -47,8 +50,6 @@ class AmbientDisplayIllustration(context: Context) : PreferenceMetadata, Prefere
         preference.isSelectable = false
         updateImage(preference.context)
     }
-
-    override fun isIndexable(context: Context) = false
 
     private fun updateImage(context: Context) {
         val isWallpaperEnabled = storage.getBoolean(DOZE_ALWAYS_ON_WALLPAPER_ENABLED) == true

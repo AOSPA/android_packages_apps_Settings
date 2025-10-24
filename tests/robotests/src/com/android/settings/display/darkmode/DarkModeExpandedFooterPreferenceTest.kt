@@ -66,13 +66,7 @@ class DarkModeExpandedFooterPreferenceTest {
 
     @Test
     fun isIndexable() {
-        assertThat(preference.isIndexable(context)).isFalse()
-    }
-
-    @Test
-    fun getTitle() {
-        assertThat(preference.title)
-            .isEqualTo(R.string.accessibility_dark_theme_preference_footer_content)
+        assertThat(preference.indexable).isFalse()
     }
 
     @EnableFlags(Flags.FLAG_FORCE_INVERT_COLOR)

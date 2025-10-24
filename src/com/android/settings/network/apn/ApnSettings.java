@@ -78,6 +78,7 @@ import java.util.Map;
 import java.util.Set;
 
 /** Handle each different apn setting. */
+// LINT.IfChange
 public class ApnSettings extends RestrictedDashboardFragment
         implements Preference.OnPreferenceChangeListener {
     static final String TAG = "ApnSettings";
@@ -184,8 +185,7 @@ public class ApnSettings extends RestrictedDashboardFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         final Activity activity = getActivity();
-        mSubId = activity.getIntent().getIntExtra(SUB_ID,
-                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mSubId = activity.getIntent().getIntExtra(SUB_ID, getSubIdFromBindingArgs());
         mIntentFilter = new IntentFilter(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
         mPreferredApnRepository = new PreferredApnRepository(activity, mSubId);
         mSubscriptionManager =  getSystemService(SubscriptionManager.class);
@@ -232,7 +232,7 @@ public class ApnSettings extends RestrictedDashboardFragment
 
         mPreferredApnRepository.collectPreferredApn(viewLifecycleOwner, (preferredApn) -> {
             mPreferredApnKey = preferredApn;
-            final PreferenceGroup apnPreferenceList = findPreference(APN_LIST);
+            final PreferenceGroup apnPreferenceList = getPreferenceScreen();
             for (int i = 0; i < apnPreferenceList.getPreferenceCount(); i++) {
                 ApnPreference apnPreference = (ApnPreference) apnPreferenceList.getPreference(i);
                 apnPreference.setIsChecked(apnPreference.getKey().equals(preferredApn));
@@ -279,6 +279,19 @@ public class ApnSettings extends RestrictedDashboardFragment
         return null;
     }
 
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return ApnSettingsScreen.KEY;
+    }
+
+    private int getSubIdFromBindingArgs() {
+        final Bundle args = getPreferenceScreenBindingArgs(requireContext());
+        if (args == null) {
+            return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        }
+        return args.getInt(SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+    }
+
     private void fillList() {
         final Uri simApnUri = Uri.withAppendedPath(Telephony.Carriers.SIM_APN_URI,
                 String.valueOf(mSubId));
@@ -305,7 +318,7 @@ public class ApnSettings extends RestrictedDashboardFragment
                 Telephony.Carriers.DEFAULT_SORT_ORDER);
 
         if (cursor != null) {
-            final PreferenceGroup apnPrefList = findPreference(APN_LIST);
+            final PreferenceGroup apnPrefList = getPreferenceScreen();
             apnPrefList.removeAll();
 
             final ArrayList<ApnPreference> apnList = new ArrayList<ApnPreference>();
@@ -638,3 +651,4 @@ public class ApnSettings extends RestrictedDashboardFragment
         showDialog(DIALOG_RESTORE_DEFAULTAPN);
     }
 }
+// LINT.ThenChange(ApnSettingsScreen.kt)

@@ -18,7 +18,6 @@ package com.android.settings.connecteddevice.display
 
 import android.content.Context
 import android.graphics.PixelFormat
-import android.graphics.Rect
 import android.hardware.display.DisplayManager
 import android.hardware.display.DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED
 import android.hardware.display.DisplayManager.EVENT_TYPE_DISPLAY_ADDED
@@ -41,7 +40,6 @@ import android.view.Display.INVALID_DISPLAY
 import android.view.DisplayInfo
 import android.view.IWindowManager
 import android.view.SurfaceControl
-import android.view.SurfaceView
 import android.view.View
 import android.view.ViewManager
 import android.view.WindowManager
@@ -80,7 +78,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         context?.getSystemService(DisplayManager::class.java)
     }
 
-    val desktopState: DesktopState? by lazy { context?.let { DesktopState.fromContext(it) } }
+    val desktopState: DesktopState? by lazy { context?.let { DesktopState.getInstance(it) } }
 
     /** The window manager instance, or null if it cannot be retrieved. */
     val windowManager: IWindowManager? by lazy { WindowManagerGlobal.getWindowManagerService() }
@@ -130,11 +128,22 @@ open class ConnectedDisplayInjector(open val context: Context?) {
             display.displayId,
             display.uniqueId ?: "",
             display.name,
-            display.mode,
+            getDisplayMode(display),
             display.supportedModes.asList(),
             isEnabled,
             isConnectedDisplay,
         )
+
+    private fun getDisplayMode(display: Display): Display.Mode {
+        val userPreferredMode = display.userPreferredDisplayMode
+        if (
+            userPreferredMode != null &&
+                (userPreferredMode.flags and Display.Mode.FLAG_SIZE_OVERRIDE) != 0
+        ) {
+            return userPreferredMode
+        }
+        return display.mode
+    }
 
     /**
      * This is not limited to displays that are going to be included in the topology, but also
@@ -151,51 +160,6 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         return !sysProp.isEmpty() &&
             display.type == Display.TYPE_VIRTUAL &&
             sysProp == display.ownerPackageName
-    }
-
-    /**
-     * Reparents surface to the SurfaceControl of wallpaperView, so that view will render `surface`.
-     * Any surfaces which may be parented to wallpaperView already should be passed in oldSurfaces
-     * and they will be removed from the wallpaperView's hierarchy and released.
-     *
-     * TODO(b/426102638): In mirroring mode, area outside the letterbox will be translucent, causing
-     *   display behind to be shown. This can possibly be fixed by adding another surface with just
-     *   empty opaque background
-     */
-    open fun updateSurfaceView(
-        oldSurfaces: List<SurfaceControl>,
-        surface: SurfaceControl,
-        wallpaperView: SurfaceView,
-        surfaceScale: Float,
-        surfaceSize: Size,
-        cornerRadiusPx: Float,
-        isMirroringOtherDisplay: Boolean,
-    ) {
-        // TODO(426163319): Move this calculation to DisplayBlock to properly test the calculations
-        val t = SurfaceControl.Transaction()
-        t.reparent(surface, wallpaperView.surfaceControl)
-
-        // Calculate the final (scaled) dimensions of the wallpaper content
-        val scaledSurfaceWidth = surfaceSize.width * surfaceScale
-        val scaledSurfaceHeight = surfaceSize.height * surfaceScale
-        // Calculate the top-left position needed to center the surface within the wallpaperView
-        val positionX = (wallpaperView.width - scaledSurfaceWidth) / 2f
-        val positionY = (wallpaperView.height - scaledSurfaceHeight) / 2f
-        val destinationCrop = Rect(0, 0, surfaceSize.width, surfaceSize.height)
-
-        t.setScale(surface, surfaceScale, surfaceScale)
-        t.setPosition(surface, positionX, positionY)
-        t.setCrop(surface, destinationCrop)
-        // Corner radius should not be applied when display is letterboxed
-        if (!isMirroringOtherDisplay) {
-            // Corner radius has to be set on the original surface size, so apply a inverse scale
-            // here.
-            t.setCornerRadius(surface, cornerRadiusPx / surfaceScale)
-        }
-
-        oldSurfaces.forEach { t.remove(it) }
-        t.apply()
-        oldSurfaces.forEach { it.release() }
     }
 
     /** @return all displays including disabled. */
@@ -408,6 +372,10 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     open fun unregisterTopologyListener(listener: Consumer<DisplayTopology>) {
         displayManager?.unregisterTopologyListener(listener)
     }
+
+    open fun createSurfaceTransaction() = SurfaceControl.Transaction()
+
+    open fun getSurfaceControlBuilder() = SurfaceControl.Builder()
 
     private companion object {
         private const val TAG = "ConnectedDisplayInjector"

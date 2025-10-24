@@ -41,7 +41,6 @@ import com.android.settings.spa.network.startSatelliteWarningDialogFlow
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.RestrictedPreference
 import com.android.settingslib.datastore.HandlerExecutor
-import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -63,8 +62,6 @@ open class MobileNetworkListScreen(context: Context) :
     PreferenceRestrictionMixin,
     OnPreferenceClickListener {
 
-    private val airplaneModeDataStore = AirplaneModePreference.createDataStore(context)
-    private lateinit var airplaneModeObserver: KeyedObserver<String>
     private var subscriptionInfoList: List<SubscriptionInfo>? = null
     private var onSubscriptionsChangedListener: OnSubscriptionsChangedListener? = null
 
@@ -106,7 +103,6 @@ open class MobileNetworkListScreen(context: Context) :
 
     override fun isEnabled(context: Context) =
         super<PreferenceRestrictionMixin>.isEnabled(context) &&
-            airplaneModeDataStore.getBoolean(AirplaneModePreference.KEY) == false &&
             (getSelectableSubscriptionInfoList(context).isNotEmpty() ||
                 EuiccRepository(context).showEuiccSettings())
 
@@ -147,27 +143,27 @@ open class MobileNetworkListScreen(context: Context) :
     }
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        val executor = HandlerExecutor.main
-        val observer = KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(KEY) }
-        airplaneModeObserver = observer
-        airplaneModeDataStore.addObserver(AirplaneModePreference.KEY, observer, executor)
-        context.getSystemService(SubscriptionManager::class.java)?.let {
-            val listener =
-                object : OnSubscriptionsChangedListener() {
-                    override fun onSubscriptionsChanged() {
-                        subscriptionInfoList = null // invalid cache
-                        context.notifyPreferenceChange(KEY)
+        if (isEntryPoint(context)) {
+            val executor = HandlerExecutor.main
+            context.getSystemService(SubscriptionManager::class.java)?.let {
+                val listener =
+                    object : OnSubscriptionsChangedListener() {
+                        override fun onSubscriptionsChanged() {
+                            subscriptionInfoList = null // invalid cache
+                            context.notifyPreferenceChange(KEY)
+                        }
                     }
-                }
-            it.addOnSubscriptionsChangedListener(executor, listener)
-            onSubscriptionsChangedListener = listener
+                it.addOnSubscriptionsChangedListener(executor, listener)
+                onSubscriptionsChangedListener = listener
+            }
         }
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
-        airplaneModeDataStore.removeObserver(AirplaneModePreference.KEY, airplaneModeObserver)
-        context.getSystemService(SubscriptionManager::class.java)?.apply {
-            onSubscriptionsChangedListener?.let { removeOnSubscriptionsChangedListener(it) }
+        if (isEntryPoint(context)) {
+            context.getSystemService(SubscriptionManager::class.java)?.apply {
+                onSubscriptionsChangedListener?.let { removeOnSubscriptionsChangedListener(it) }
+            }
         }
     }
 
@@ -190,6 +186,9 @@ open class MobileNetworkListScreen(context: Context) :
                     }
                 }
             }
+            +SimCallsPreference() order +130
+            +SimSmsPreference() order +140
+            +SimMobileDataPreference() order +150
         }
 
     companion object {

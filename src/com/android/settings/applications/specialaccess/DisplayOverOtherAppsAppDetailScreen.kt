@@ -22,8 +22,6 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.UserManager
 import android.provider.Settings.ACTION_MANAGE_APP_OVERLAY_PERMISSION
@@ -31,6 +29,8 @@ import androidx.core.net.toUri
 import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
+import com.android.settings.applications.getPackageInfoWithPermissions
+import com.android.settings.applications.isPermissionRequested
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
@@ -54,6 +54,9 @@ open class DisplayOverOtherAppsAppDetailScreen(context: Context, arguments: Bund
     override val op
         get() = AppOpsManager.OP_SYSTEM_ALERT_WINDOW
 
+    override val permission: String?
+        get() = PERMISSION
+
     override val setModeByUid: Boolean?
         get() = false // set op mode by package
 
@@ -71,7 +74,7 @@ open class DisplayOverOtherAppsAppDetailScreen(context: Context, arguments: Bund
     override fun isAvailable(context: Context) =
         super.isAvailable(context) &&
             !UserManager.get(context).isManagedProfile &&
-            hasOverlayPermission(context, packageInfo?.applicationInfo)
+            displayOverOtherAppsFilter(context, packageInfo?.applicationInfo)
 
     override fun getMetricsCategory() = SettingsEnums.SYSTEM_ALERT_WINDOW_APPS
 
@@ -89,25 +92,25 @@ open class DisplayOverOtherAppsAppDetailScreen(context: Context, arguments: Bund
 
     companion object {
         const val KEY = "special_access_draw_overlay_app_detail"
+        const val PERMISSION = SYSTEM_ALERT_WINDOW
 
         @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
 
         fun parameters(context: Context, showSystemApp: Boolean) =
-            parameters(context, showSystemApp, ::hasOverlayPermission)
+            parameters(context, showSystemApp, ::displayOverOtherAppsFilter)
 
-        fun hasOverlayPermission(context: Context, appInfo: ApplicationInfo?): Boolean {
+        fun displayOverOtherAppsFilter(context: Context, appInfo: ApplicationInfo?): Boolean {
             if (appInfo == null) return false
-            try {
-                val packageInfo: PackageInfo =
-                    context.packageManager.getPackageInfo(
-                        appInfo.packageName,
-                        PackageManager.GET_PERMISSIONS,
-                    )
-                val requestedPermissions = packageInfo.requestedPermissions
-                return requestedPermissions?.contains(SYSTEM_ALERT_WINDOW) == true
-            } catch (e: Exception) {
-                return false
-            }
+            val packageInfo =
+                context.getPackageInfoWithPermissions(appInfo.packageName) ?: return false
+
+            val isAppExempted =
+                appInfo.packageName in
+                    context.resources.getStringArray(
+                        R.array.display_over_apps_permission_change_exempt
+                    ) && appInfo.isSystemApp
+
+            return !isAppExempted && isPermissionRequested(packageInfo, PERMISSION)
         }
     }
 }

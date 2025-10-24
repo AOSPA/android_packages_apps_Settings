@@ -17,6 +17,7 @@
 package com.android.settings.accessibility.textreading.ui
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import androidx.preference.Preference
 import com.android.internal.accessibility.AccessibilityShortcutController
@@ -234,12 +235,8 @@ internal class FontSizePreference(context: Context, @EntryPoint private val entr
         }
 
         // TODO (b/287728819): Move tooltip showing to SystemUI
-        // Since the lifecycle of the PreferenceMetadata is independent of that of the preference,
-        // doing null check on slider is a temporary solution for the case that slider view
-        // is not ready when we would like to show the tooltip. If the slider is not ready,
-        // we give up showing the tooltip and also do not reshow it in the future.
-        val slider = preference.slider
-        if (slider != null) {
+        val decorView = (context as? Activity)?.window?.peekDecorView()
+        if (decorView != null) {
             val tooltipContent =
                 context.getText(R.string.accessibility_font_scaling_auto_added_qs_tooltip_content)
             val tooltipWindow: AccessibilityQuickSettingsTooltipWindow =
@@ -248,7 +245,7 @@ internal class FontSizePreference(context: Context, @EntryPoint private val entr
                 tooltipContent,
                 R.drawable.accessibility_auto_added_qs_tooltip_illustration,
             )
-            tooltipWindow.showAtTopCenter(slider)
+            tooltipWindow.showAtTopCenter(decorView)
         }
         AccessibilityQuickSettingUtils.optInValueToSharedPreferences(context, tileComponentName)
         preference.needsQSTooltipReshow = false

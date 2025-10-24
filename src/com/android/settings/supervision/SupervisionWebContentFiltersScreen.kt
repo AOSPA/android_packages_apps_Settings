@@ -20,6 +20,8 @@ import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
+import android.content.pm.PackageManager.NameNotFoundException
+import android.util.Log
 import androidx.annotation.RequiresPermission
 import androidx.preference.PreferenceGroup
 import androidx.preference.SwitchPreferenceCompat
@@ -34,6 +36,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.supervision.SupervisionLog.TAG
 import com.android.settingslib.utils.StringUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -76,6 +79,9 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
     override val title: Int
         get() = R.string.supervision_web_content_filters_title
 
+    override val indexable
+        get() = true
+
     override val keywords: Int
         get() = R.string.supervision_web_content_filters_keywords
 
@@ -88,15 +94,17 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
         get() = R.string.menu_key_supervision
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        supervisionClient = getSupervisionClient(context)
-        addSupportedApps(context)
+        if (isContainer(context)) {
+            supervisionClient = getSupervisionClient(context)
+            addSupportedApps(context)
+        }
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
-        supervisionClient?.close()
+        if (isContainer(context)) {
+            supervisionClient?.close()
+        }
     }
-
-    override fun isIndexable(context: Context) = true
 
     override fun hasCompleteHierarchy() = true
 
@@ -179,13 +187,17 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
             for (supportedApp in supportedApps) {
                 val packageName = supportedApp.packageName
                 if (packageName != null) {
-                    SupervisionSupportedAppPreference(
-                            supportedApp.title,
-                            supportedApp.summary,
-                            packageName,
-                        )
-                        .createWidget(context)
-                        .let { addPreference(it) }
+                    try {
+                        SupervisionSupportedAppPreference(
+                                supportedApp.title,
+                                supportedApp.summary,
+                                packageName,
+                            )
+                            .createWidget(context)
+                            .let { addPreference(it) }
+                    } catch (e: NameNotFoundException) {
+                        Log.d(TAG, "Package not found for supported app, skipping: $packageName", e)
+                    }
                 }
             }
         }

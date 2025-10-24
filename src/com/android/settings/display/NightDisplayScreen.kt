@@ -119,7 +119,8 @@ internal class NightDisplayTopIntroPreference :
     override val title: Int
         get() = R.string.night_display_text
 
-    override fun isIndexable(context: Context) = false
+    override val indexable
+        get() = false
 
     override fun createWidget(context: Context) = TopIntroPreference(context)
 

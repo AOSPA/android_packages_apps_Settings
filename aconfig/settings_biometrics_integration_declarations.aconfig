@@ -45,3 +45,13 @@ flag {
   }
 }
 
+flag {
+  name: "choose_a_screen_lock_support_expressive"
+  namespace: "biometrics_integration"
+  description: "This flag controls whether the Choose a screen lock page support expressive style"
+  bug: "437291252"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}
+

@@ -184,7 +184,7 @@ open class TabbedDisplayPreferenceFragment(
             .beginTransaction()
             .replace(
                 R.id.selected_display_preference_container,
-                SelectedDisplayPreferenceFragment(),
+                SelectedDisplayPreferenceFragment(viewModel),
             )
             .commit()
     }

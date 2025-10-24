@@ -62,6 +62,7 @@ import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSetti
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
 import com.android.settingslib.spa.widget.ui.LinearLoadingBar
+import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.CardPreference
 import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.SegmentedButtonPreference
@@ -522,9 +523,43 @@ abstract class BluetoothDetailsConfigurableFragment :
             }
 
             is DeviceSettingPreferenceModel.HelpPreference -> {}
+
+            is DeviceSettingPreferenceModel.BannerPreference -> {
+                val pref =
+                    existedPref as? BannerMessagePreference
+                        ?: BannerMessagePreference(requireContext())
+                pref.apply {
+                    setAttentionLevel(BannerMessagePreference.AttentionLevel.NORMAL)
+                    key = prefKey
+                    order = prefOrder
+                    title = model.title
+                    summary = model.message
+                    icon = getDrawable(model.icon, false)
+                    if (model.positiveButton != null && model.positiveButton.action != null) {
+                        setPositiveButtonText(model.positiveButton.label)
+                        setPositiveButtonOnClickListener {
+                            model.positiveButton.action?.let { triggerAction(it) }
+                        }
+                        setPositiveButtonEnabled(true)
+                        setPositiveButtonVisible(true)
+                    }
+                    if (model.negativeButton != null && model.negativeButton.action != null) {
+                        setNegativeButtonText(model.negativeButton.label)
+                        setNegativeButtonOnClickListener {
+                            model.negativeButton.action?.let { triggerAction(it) }
+                        }
+                        setNegativeButtonEnabled(true)
+                        setNegativeButtonVisible(true)
+                    }
+                }
+                container.addPreference(pref)
+            }
         }
 
-    private fun getDrawable(deviceSettingIcon: DeviceSettingIcon?): Drawable? =
+    private fun getDrawable(
+        deviceSettingIcon: DeviceSettingIcon?,
+        applyTint: Boolean = true,
+    ): Drawable? =
         when (deviceSettingIcon) {
             is DeviceSettingIcon.BitmapIcon ->
                 deviceSettingIcon.bitmap.toDrawable(requireContext().resources)
@@ -532,13 +567,15 @@ abstract class BluetoothDetailsConfigurableFragment :
             is DeviceSettingIcon.ResourceIcon -> context?.getDrawable(deviceSettingIcon.resId)
             null -> null
         }?.apply {
-            setTint(
-                requireContext()
-                    .getColor(
-                        com.android.settingslib.widget.theme.R.color
-                            .settingslib_materialColorOnSurfaceVariant
-                    )
-            )
+            if (applyTint) {
+                setTint(
+                    requireContext()
+                        .getColor(
+                            com.android.settingslib.widget.theme.R.color
+                                .settingslib_materialColorOnSurfaceVariant
+                        )
+                )
+            }
         }
 
     @Composable

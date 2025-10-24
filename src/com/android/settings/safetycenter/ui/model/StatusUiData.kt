@@ -16,8 +16,9 @@
 
 package com.android.settings.safetycenter.ui.model
 
-import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterStatus
+import com.android.settingslib.safetycenter.SafetyCenterUiData
+import com.android.settingslib.widget.StatusBannerPreference.BannerStatus
 
 /**
  * A data class that holds the high-level status information needed by the UI.
@@ -27,7 +28,33 @@ import android.safetycenter.SafetyCenterStatus
 data class StatusUiData(val status: SafetyCenterStatus) {
     /**
      * A convenience constructor to create an instance of [StatusUiData] directly from a
-     * [SafetyCenterData] object.
+     * [SafetyCenterUiData] object.
      */
-    constructor(safetyCenterData: SafetyCenterData) : this(safetyCenterData.status)
+    constructor(safetyCenterUiData: SafetyCenterUiData) : this(safetyCenterUiData.status)
+
+    val title: CharSequence by status::title
+    val summary: CharSequence by status::summary
+    val severityLevel: Int by status::severityLevel
+
+    val isRefreshInProgress: Boolean
+        get() =
+            when (status.refreshStatus) {
+                SafetyCenterStatus.REFRESH_STATUS_FULL_RESCAN_IN_PROGRESS,
+                SafetyCenterStatus.REFRESH_STATUS_DATA_FETCH_IN_PROGRESS -> true
+                else -> false
+            }
+
+    val bannerStatus: BannerStatus
+        get() {
+            return if (isRefreshInProgress) {
+                BannerStatus.LOW
+            } else {
+                when (severityLevel) {
+                    SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK -> BannerStatus.LOW
+                    SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_RECOMMENDATION -> BannerStatus.MEDIUM
+                    SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING -> BannerStatus.HIGH
+                    else -> BannerStatus.GENERIC
+                }
+            }
+        }
 }

@@ -45,7 +45,7 @@ class ColorCorrectionPreviewPreferenceTest {
 
     @Test
     fun isIndexable_returnFalse() {
-        assertThat(preference.isIndexable(appContext)).isFalse()
+        assertThat(preference.indexable).isFalse()
     }
 
     @Test

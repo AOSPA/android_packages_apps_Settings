@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Android Open Source Project
+ * Copyright 2025 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,80 +21,100 @@ import android.graphics.PointF
 import android.os.Handler
 import android.util.Size
 import android.view.SurfaceControl
-import android.view.SurfaceView
 import android.widget.FrameLayout
 import androidx.test.core.app.ApplicationProvider
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentCaptor
+import org.mockito.Mockito.any
+import org.mockito.Mockito.anyFloat
+import org.mockito.Mockito.eq
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.never
+import org.mockito.Mockito.reset
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class DisplayBlockTest {
-    val context = ApplicationProvider.getApplicationContext<Context>()
-    val injector = TestInjector(context)
-    val block = DisplayBlock(injector)
-    val parentView = FrameLayout(context)
+    private val context = ApplicationProvider.getApplicationContext<Context>()
+    private lateinit var injector: TestInjector
+    private lateinit var block: DisplayBlock
+    private lateinit var parentView: FrameLayout
 
-    class TestInjector(context: Context) : ConnectedDisplayInjector(context) {
-        /**
-         * Return value to use for wallpaper(), by display ID. If an ID is missing, null will be
-         * returned.
-         */
+    private lateinit var mockTransaction: SurfaceControl.Transaction
+
+    @Before
+    fun setUp() {
+        mockTransaction = mock(SurfaceControl.Transaction::class.java)
+        injector = TestInjector(context, mockTransaction)
+        block = DisplayBlock(injector)
+        parentView = FrameLayout(context)
+
+        parentView.addView(block)
+
+        // Stub the chained methods to return the mock itself.
+        `when`(mockTransaction.reparent(any(), any())).thenReturn(mockTransaction)
+        `when`(mockTransaction.setScale(any(), anyFloat(), anyFloat())).thenReturn(mockTransaction)
+        `when`(mockTransaction.setPosition(any(), anyFloat(), anyFloat()))
+            .thenReturn(mockTransaction)
+        `when`(mockTransaction.setCrop(any(), any())).thenReturn(mockTransaction)
+        `when`(mockTransaction.setCornerRadius(any(), anyFloat())).thenReturn(mockTransaction)
+        `when`(mockTransaction.remove(any())).thenReturn(mockTransaction)
+    }
+
+    class TestInjector(context: Context, private val mockTransaction: SurfaceControl.Transaction) :
+        ConnectedDisplayInjector(context) {
+
         var wallpapers = mutableMapOf<Int, SurfaceControl>()
-        val updateLog = StringBuilder()
-
         internal val testHandler = TestHandler(context.mainThreadHandler)
 
         override val handler: Handler
             get() = testHandler
 
-        override fun updateSurfaceView(
-            oldSurfaces: List<SurfaceControl>,
-            surface: SurfaceControl,
-            wallpaperView: SurfaceView,
-            surfaceScale: Float,
-            surfaceSize: Size,
-            cornerRadiusPx: Float,
-            isMirroringOtherDisplay: Boolean,
-        ) {
-            // TODO(b/425848523): Validate individual properties instead of a combined toString
-            updateLog
-                .append("oldSurfaces: $oldSurfaces, surface: $surface, surfaceScale: ")
-                .append("%.2f, surfaceSize: $surfaceSize\n".format(surfaceScale))
+        override fun createSurfaceTransaction(): SurfaceControl.Transaction {
+            return mockTransaction
         }
 
-        override fun wallpaper(DISPLAY_ID: Int): SurfaceControl? = wallpapers.remove(DISPLAY_ID)
+        override fun getSurfaceControlBuilder(): SurfaceControl.Builder {
+            return object : SurfaceControl.Builder() {
+                override fun build(): SurfaceControl {
+                    val mockSurfaceControl = mock(SurfaceControl::class.java)
+                    `when`(mockSurfaceControl.isValid()).thenReturn(true)
+                    return mockSurfaceControl
+                }
+            }
+        }
+
+        override fun wallpaper(displayId: Int): SurfaceControl? = wallpapers.remove(displayId)
     }
 
     @Test
     fun normalUpdateFlow() {
-        val wallpaper42 = SurfaceControl.Builder().setName("wallpaper42").build()
-
-        injector.wallpapers.put(DISPLAY_ID, wallpaper42)
-
-        parentView.addView(block)
+        val wallpaper = SurfaceControl.Builder().setName("wallpaper").build()
+        injector.wallpapers[DISPLAY_ID] = wallpaper
         block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
         injector.testHandler.flush()
 
         block.updateSurfaceView()
         injector.testHandler.flush()
 
-        assertThat(injector.updateLog.toString())
-            .isEqualTo(
-                "oldSurfaces: [], surface: $wallpaper42, surfaceScale: 0.50, " +
-                    "surfaceSize: $DISPLAY_SIZE\n"
-            )
+        verify(mockTransaction).reparent(eq(wallpaper), any())
+        verify(mockTransaction).setScale(eq(wallpaper), eq(0.5f), eq(0.5f))
+        verify(mockTransaction, never()).remove(any())
+        verify(mockTransaction).apply()
     }
 
     @Test
     fun resetTwiceBeforeSurfaceUpdate() {
         val wallpaperA = SurfaceControl.Builder().setName("wallpaperA").build()
         val wallpaperB = SurfaceControl.Builder().setName("wallpaperB").build()
+        injector.wallpapers[DISPLAY_ID] = wallpaperA
 
-        injector.wallpapers.put(DISPLAY_ID, wallpaperA)
-
-        parentView.addView(block)
         block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.25f, DISPLAY_SIZE)
 
         // Should not have fetched wallpaper info yet. Replace wallpaper setting with wallpaperB.
@@ -109,10 +129,169 @@ class DisplayBlockTest {
         injector.testHandler.flush()
         assertThat(injector.wallpapers.get(DISPLAY_ID)).isNull()
 
-        assertThat(injector.updateLog.toString())
-            .isEqualTo(
-                "oldSurfaces: [], surface: $wallpaperB, surfaceScale: 0.40, surfaceSize: $DISPLAY_SIZE\n"
-            )
+        verify(mockTransaction).reparent(eq(wallpaperB), any())
+        verify(mockTransaction).setScale(eq(wallpaperB), eq(0.4f), eq(0.4f))
+        // wallpaperA is never rendered, so it never becomes an "old surface" and remove() should
+        // not be called.
+        verify(mockTransaction, never()).remove(any())
+        verify(mockTransaction).apply()
+    }
+
+    @Test
+    fun resetWithUnchangedSizeCausesImmediateUpdate() {
+        val wallpaperA = SurfaceControl.Builder().setName("wallpaperA").build()
+        val wallpaperB = SurfaceControl.Builder().setName("wallpaperB").build()
+
+        injector.wallpapers[DISPLAY_ID] = wallpaperA
+        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
+        injector.testHandler.flush()
+        block.updateSurfaceView()
+        injector.testHandler.flush()
+
+        verify(mockTransaction).reparent(eq(wallpaperA), any())
+        verify(mockTransaction).setScale(eq(wallpaperA), eq(0.5f), eq(0.5f))
+        verify(mockTransaction).apply()
+
+        applyRequestedSize()
+        reset(mockTransaction)
+
+        // Same size and scale as before, but a new wallpaper and different position in parent view.
+        injector.wallpapers[DISPLAY_ID] = wallpaperB
+        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(60f, 10f), PointF(70f, 20f), 0.5f, DISPLAY_SIZE)
+        injector.testHandler.flush()
+        verify(mockTransaction).reparent(eq(wallpaperB), any())
+        verify(mockTransaction).setScale(eq(wallpaperB), eq(0.5f), eq(0.5f))
+        verify(mockTransaction).remove(eq(wallpaperA))
+        verify(mockTransaction).apply()
+
+        applyRequestedSize()
+        reset(mockTransaction)
+
+        // Repeat the pattern, but with a new scale and reverting back to wallpaperA.
+        injector.wallpapers.put(DISPLAY_ID, wallpaperA)
+        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(60f, 30f), PointF(70f, 40f), 0.2f, DISPLAY_SIZE)
+        injector.testHandler.flush()
+
+        verify(mockTransaction).reparent(eq(wallpaperA), any())
+        verify(mockTransaction).setScale(eq(wallpaperA), eq(0.2f), eq(0.2f))
+        verify(mockTransaction).remove(eq(wallpaperB))
+        verify(mockTransaction).apply()
+    }
+
+    @Test
+    fun retryIfWallpaperNotReady() {
+        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
+        injector.testHandler.flush()
+        block.updateSurfaceView()
+        injector.testHandler.flush()
+
+        verify(mockTransaction, never()).apply()
+
+        val wallpaper = SurfaceControl.Builder().setName("wallpaper").build()
+        injector.wallpapers[DISPLAY_ID] = wallpaper
+        // One wait to resume the deferred retry
+        injector.testHandler.flush()
+        // One wait to wait for task posted to main thread to run
+        injector.testHandler.flush()
+
+        verify(mockTransaction).reparent(eq(wallpaper), any())
+        verify(mockTransaction).setScale(eq(wallpaper), eq(0.5f), eq(0.5f))
+        verify(mockTransaction).apply()
+    }
+
+    @Test
+    fun renderSurfaceView_calculatesCenteringPositionCorrectly() {
+        val wallpaper = SurfaceControl.Builder().setName("wallpaper").build()
+        injector.wallpapers[DISPLAY_ID] = wallpaper
+        val surfaceScale = 0.25f
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(0f, 0f),
+            PointF(0f, 0f),
+            surfaceScale,
+            DISPLAY_SIZE,
+        )
+
+        block.updateSurfaceView()
+        injector.testHandler.flush()
+
+        val wallpaperViewWidth = block.wallpaperView.width.toFloat()
+        val wallpaperViewHeight = block.wallpaperView.height.toFloat()
+        val scaledSurfaceWidth = DISPLAY_SIZE.width * surfaceScale
+        val scaledSurfaceHeight = DISPLAY_SIZE.height * surfaceScale
+        val expectedPosX = (wallpaperViewWidth - scaledSurfaceWidth) / 2f
+        val expectedPosY = (wallpaperViewHeight - scaledSurfaceHeight) / 2f
+
+        verify(mockTransaction).setPosition(eq(wallpaper), eq(expectedPosX), eq(expectedPosY))
+    }
+
+    @Test
+    fun renderSurfaceView_calculatesCornerRadiusCorrectly() {
+        val wallpaper = SurfaceControl.Builder().setName("wallpaper").build()
+        injector.wallpapers[DISPLAY_ID] = wallpaper
+        val surfaceScale = 0.5f
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(0f, 0f),
+            PointF(0f, 0f),
+            surfaceScale,
+            DISPLAY_SIZE,
+        )
+
+        block.updateSurfaceView()
+        injector.testHandler.flush()
+
+        val expectedRadius = block.cornerRadiusPx.toFloat() / surfaceScale
+        verify(mockTransaction).setCornerRadius(eq(wallpaper), eq(expectedRadius))
+    }
+
+    @Test
+    fun renderSurfaceView_inMirroringMode_doesNotSetCornerRadius() {
+        val wallpaper = SurfaceControl.Builder().setName("wallpaper").build()
+        injector.wallpapers[MIRRORED_DISPLAY_ID] = wallpaper
+        block.reset(
+            DISPLAY_ID,
+            MIRRORED_DISPLAY_ID,
+            PointF(0f, 0f),
+            PointF(0f, 0f),
+            0.5f,
+            DISPLAY_SIZE,
+        )
+
+        block.updateSurfaceView()
+        injector.testHandler.flush()
+
+        verify(mockTransaction, never()).setCornerRadius(any(), anyFloat())
+    }
+
+    @Test
+    fun renderSurfaceView_inMirroringMode_createsAndShowsBackground() {
+        val wallpaper = SurfaceControl.Builder().setName("wallpaper").build()
+        injector.wallpapers[MIRRORED_DISPLAY_ID] = wallpaper
+        block.reset(
+            DISPLAY_ID,
+            MIRRORED_DISPLAY_ID,
+            PointF(0f, 0f),
+            PointF(0f, 0f),
+            0.5f,
+            DISPLAY_SIZE,
+        )
+
+        block.updateSurfaceView()
+        injector.testHandler.flush()
+
+        val surfaceCaptor = ArgumentCaptor.forClass(SurfaceControl::class.java)
+        // Verify both the wallpaper and backgroundSurface is reparented
+        verify(mockTransaction, times(2))
+            .reparent(surfaceCaptor.capture(), eq(block.wallpaperView.surfaceControl))
+        val backgroundSurface = surfaceCaptor.allValues.get(1)
+
+        verify(mockTransaction).setAlpha(eq(backgroundSurface), eq(0.5f))
+        verify(mockTransaction).show(eq(backgroundSurface))
+
+        verify(mockTransaction).setLayer(eq(wallpaper), eq(1))
     }
 
     private fun applyRequestedSize() {
@@ -120,75 +299,11 @@ class DisplayBlockTest {
         block.bottom = block.top + block.layoutParams.height
     }
 
-    @Test
-    fun resetWithUnchangedSizeCausesImmediateUpdate() {
-        val wallpaperX = SurfaceControl.Builder().setName("wallpaperX").build()
-        val wallpaperY = SurfaceControl.Builder().setName("wallpaperY").build()
-
-        injector.wallpapers.put(DISPLAY_ID, wallpaperX)
-
-        parentView.addView(block)
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
-        injector.testHandler.flush()
-        block.updateSurfaceView()
-        injector.testHandler.flush()
-
-        assertThat(injector.updateLog.toString())
-            .isEqualTo(
-                "oldSurfaces: [], surface: $wallpaperX, surfaceScale: 0.50, " +
-                    "surfaceSize: $DISPLAY_SIZE\n"
-            )
-        applyRequestedSize()
-        injector.updateLog.setLength(0)
-
-        // Same size and scale as before, but a new wallpaper and different position in parent view.
-        injector.wallpapers.put(DISPLAY_ID, wallpaperY)
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(60f, 10f), PointF(70f, 20f), 0.5f, DISPLAY_SIZE)
-        injector.testHandler.flush()
-        assertThat(injector.updateLog.toString())
-            .isEqualTo(
-                "oldSurfaces: [$wallpaperX], surface: $wallpaperY, surfaceScale: 0.50, " +
-                    "surfaceSize: $DISPLAY_SIZE\n"
-            )
-        applyRequestedSize()
-        injector.updateLog.setLength(0)
-
-        // Repeat the pattern, but with a new scale and reverting back to wallpaperX.
-        injector.wallpapers.put(DISPLAY_ID, wallpaperX)
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(60f, 30f), PointF(70f, 40f), 0.2f, DISPLAY_SIZE)
-        injector.testHandler.flush()
-        assertThat(injector.updateLog.toString())
-            .isEqualTo(
-                "oldSurfaces: [$wallpaperY], surface: $wallpaperX, surfaceScale: 0.20, " +
-                    "surfaceSize: $DISPLAY_SIZE\n"
-            )
-    }
-
-    @Test
-    fun retryIfWallpaperNotReady() {
-        val wallpaperW = SurfaceControl.Builder().setName("wallpaperW").build()
-
-        parentView.addView(block)
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
-        injector.testHandler.flush()
-        block.updateSurfaceView()
-        injector.testHandler.flush()
-
-        assertThat(injector.updateLog.toString()).isEqualTo("")
-        injector.wallpapers.put(DISPLAY_ID, wallpaperW)
-        // One wait to resume the deferred retry
-        injector.testHandler.flush()
-        // One wait to wait for task posted to main thread to run
-        injector.testHandler.flush()
-        assertThat(injector.updateLog.toString())
-            .isEqualTo(
-                "oldSurfaces: [], surface: $wallpaperW, surfaceScale: 0.50, " +
-                    "surfaceSize: $DISPLAY_SIZE\n"
-            )
-    }
-
     private companion object {
-        private val DISPLAY_ID = 42
-        private var DISPLAY_SIZE = Size(1280, 720)
+        private const val DISPLAY_ID = 123
+        private const val MIRRORED_DISPLAY_ID = 456
+        private val DISPLAY_SIZE = Size(1280, 720)
+        private const val BLOCK_WIDTH = 200
+        private const val BLOCK_HEIGHT = 300
     }
 }

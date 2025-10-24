@@ -16,6 +16,8 @@
 
 package com.android.settings.widget;
 
+import android.app.admin.EnforcingAdmin;
+
 import androidx.preference.Preference;
 
 import com.android.settings.dashboard.DashboardFragment;
@@ -103,6 +105,10 @@ public class GenericSwitchController extends SwitchWidgetController implements
         return false;
     }
 
+    /**
+     * @deprecated Use {@link #setDisabledByAdmin(EnforcingAdmin)} instead.
+     */
+    @Deprecated
     @Override
     public void setDisabledByAdmin(EnforcedAdmin admin) {
         if (mPreference instanceof PrimarySwitchPreference) {
@@ -110,5 +116,22 @@ public class GenericSwitchController extends SwitchWidgetController implements
         } else if (mPreference instanceof RestrictedSwitchPreference) {
             ((RestrictedSwitchPreference) mPreference).setDisabledByAdmin(admin);
         }
+    }
+
+    @Override
+    public void setDisabledByAdmin(EnforcingAdmin admin) {
+        // PrimarySwitchPreference and RestrictedSwitchPreference already get restriction from XML
+        // attributes.
+        if (mPreference instanceof PrimarySwitchPreference) {
+            ((PrimarySwitchPreference) mPreference).setDisabledByAdmin(admin);
+        } else if (mPreference instanceof RestrictedSwitchPreference) {
+            ((RestrictedSwitchPreference) mPreference).setDisabledByAdmin(admin);
+        }
+    }
+
+    @Override
+    public void setRestriction(String restriction) {
+        // This is no-op. RestrictedSwitchPreference already get restriction from XML attributes.
+        // PrimarySwitchPreference doesn't show the restriction on the UI.
     }
 }

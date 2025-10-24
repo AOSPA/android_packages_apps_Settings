@@ -17,18 +17,21 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothStatusCodes;
+import android.content.Intent;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.PreferenceCategory;
 
-import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsDashboardFragment;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsHelper;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamsHelper;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
@@ -43,8 +46,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +62,7 @@ public class BluetoothDetailsAudioSharingControllerTest extends BluetoothDetails
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private LocalBluetoothManager mLocalManager;
+
     @Mock private AudioStreamsHelper mAudioStreamsHelper;
     @Mock private BluetoothLeBroadcastReceiveState mBroadcastReceiveState;
 
@@ -71,7 +77,7 @@ public class BluetoothDetailsAudioSharingControllerTest extends BluetoothDetails
         ShadowAudioStreamsHelper.setUseMock(mAudioStreamsHelper);
         mController =
                 new BluetoothDetailsAudioSharingController(
-                        mContext, mFragment, mLocalManager, mCachedDevice, mLifecycle);
+                        mActivity, mFragment, mLocalManager, mCachedDevice, mLifecycle);
         mContainer = new PreferenceCategory(mContext);
         mContainer.setKey(mController.getPreferenceKey());
         mScreen.addPreference(mContainer);
@@ -102,7 +108,7 @@ public class BluetoothDetailsAudioSharingControllerTest extends BluetoothDetails
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
-    public void connected_showOnePreference() {
+    public void connected_clickFindAudioStreamForNonActiveDevice_becomeActive() {
         when(mCachedDevice.isConnectedLeAudioDevice()).thenReturn(true);
         when(mCachedDevice.isConnectedLeAudioBroadcastAssistantDevice()).thenReturn(true);
         when(mCachedDevice.isActiveDevice(BluetoothProfile.LE_AUDIO)).thenReturn(false);
@@ -111,10 +117,7 @@ public class BluetoothDetailsAudioSharingControllerTest extends BluetoothDetails
                         .getLeAudioBroadcastAssistantProfile()
                         .getAllSources(mDevice))
                 .thenReturn(List.of());
-        when(mLocalManager
-                .getProfileManager()
-                .getLeAudioBroadcastProfile()
-                .isEnabled(mDevice))
+        when(mLocalManager.getProfileManager().getLeAudioBroadcastProfile().isEnabled(mDevice))
                 .thenReturn(true);
         mShadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
@@ -122,11 +125,15 @@ public class BluetoothDetailsAudioSharingControllerTest extends BluetoothDetails
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
 
         showScreen(mController);
+        mContainer.getPreference(1).performClick();
+        ShadowApplication shadowApplication = Shadows.shadowOf(mContext);
+        Intent startedIntent = shadowApplication.getNextStartedActivity();
 
         assertThat(mContainer.isVisible()).isTrue();
-        assertThat(mContainer.getPreferenceCount()).isEqualTo(1);
-        assertThat(mContainer.getPreference(0).getTitle())
-                .isEqualTo(mContext.getString(R.string.audio_sharing_title));
+        assertThat(mContainer.getPreferenceCount()).isEqualTo(2);
+        verify(mCachedDevice).setActive();
+        assertThat(startedIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(AudioStreamsDashboardFragment.class.getName());
     }
 
     @Test
@@ -136,14 +143,11 @@ public class BluetoothDetailsAudioSharingControllerTest extends BluetoothDetails
         when(mCachedDevice.isConnectedLeAudioBroadcastAssistantDevice()).thenReturn(true);
         when(mCachedDevice.isActiveDevice(BluetoothProfile.LE_AUDIO)).thenReturn(true);
         when(mLocalManager
-                .getProfileManager()
-                .getLeAudioBroadcastAssistantProfile()
-                .getAllSources(mDevice))
+                        .getProfileManager()
+                        .getLeAudioBroadcastAssistantProfile()
+                        .getAllSources(mDevice))
                 .thenReturn(List.of());
-        when(mLocalManager
-                .getProfileManager()
-                .getLeAudioBroadcastProfile()
-                .isEnabled(mDevice))
+        when(mLocalManager.getProfileManager().getLeAudioBroadcastProfile().isEnabled(mDevice))
                 .thenReturn(false);
         mShadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
@@ -166,14 +170,11 @@ public class BluetoothDetailsAudioSharingControllerTest extends BluetoothDetails
         bisSyncState.add(1L);
         when(mBroadcastReceiveState.getBisSyncState()).thenReturn(bisSyncState);
         when(mLocalManager
-                .getProfileManager()
-                .getLeAudioBroadcastAssistantProfile()
-                .getAllSources(mDevice))
+                        .getProfileManager()
+                        .getLeAudioBroadcastAssistantProfile()
+                        .getAllSources(mDevice))
                 .thenReturn(List.of(mBroadcastReceiveState));
-        when(mLocalManager
-                .getProfileManager()
-                .getLeAudioBroadcastProfile()
-                .isEnabled(mDevice))
+        when(mLocalManager.getProfileManager().getLeAudioBroadcastProfile().isEnabled(mDevice))
                 .thenReturn(false);
         mShadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);

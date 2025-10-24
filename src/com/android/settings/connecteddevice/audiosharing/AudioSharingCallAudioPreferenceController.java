@@ -409,15 +409,13 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
         if (lead != null) {
             String addr = lead.getDevice().getAnonymizedAddress();
             Log.d(TAG, "Set call audio device: " + addr);
-            if (!mIsAudioModeOngoingCall.get()) {
-                LeAudioProfile leaProfile =
-                        mBtManager == null
-                                ? null
-                                : mBtManager.getProfileManager().getLeAudioProfile();
-                if (leaProfile != null) {
-                    leaProfile.setBroadcastToUnicastFallbackGroup(groupId);
-                }
-            } else {
+            LeAudioProfile leaProfile =
+                    mBtManager == null ? null : mBtManager.getProfileManager().getLeAudioProfile();
+            if (leaProfile != null) {
+                leaProfile.setBroadcastToUnicastFallbackGroup(groupId);
+            }
+            if (mIsAudioModeOngoingCall.get()) {
+                Log.d(TAG, "Set call audio device during call, set active for: " + addr);
                 lead.setActive();
             }
             AudioSharingUtils.setUserPreferredPrimary(mContext, lead);

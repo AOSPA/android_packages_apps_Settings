@@ -18,6 +18,8 @@ package com.android.settings.connecteddevice.display
 
 import android.graphics.Outline
 import android.graphics.PointF
+import android.graphics.Rect
+import android.os.Bundle
 import android.os.Trace
 import android.util.Log
 import android.util.Size
@@ -26,6 +28,8 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
 import android.view.ViewOutlineProvider
+import android.view.accessibility.AccessibilityNodeInfo
+import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction
 import android.widget.FrameLayout
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
@@ -35,8 +39,10 @@ import kotlin.time.Duration.Companion.milliseconds
 /** Represents a draggable block in the topology pane. */
 class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injector.context!!) {
     @VisibleForTesting
-    val highlightPx = context.resources.getDimensionPixelSize(R.dimen.display_block_highlight_width)
-    val cornerRadiusPx =
+    internal val highlightPx =
+        context.resources.getDimensionPixelSize(R.dimen.display_block_highlight_width)
+    @VisibleForTesting
+    internal val cornerRadiusPx =
         context.resources.getDimensionPixelSize(R.dimen.display_block_corner_radius)
 
     // Id of the logical display this DisplayBlock represents
@@ -61,6 +67,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     // the new surface is put in place. This list can have more than one item because we may get
     // two reset calls before we get a single surfaceChange callback.
     private val oldSurfaces = mutableListOf<SurfaceControl>()
+    private var letterboxBackgroundSurface: SurfaceControl? = null
     private var wallpaperSurface: SurfaceControl? = null
 
     private val updateSurfaceView = Runnable { updateSurfaceView() }
@@ -86,6 +93,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         View(context).apply {
             background = context.getDrawable(R.drawable.display_block_background)
         }
+
     @VisibleForTesting
     val selectionMarkerView =
         View(context).apply {
@@ -103,10 +111,15 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
             y = value.y - highlightPx
         }
 
+    var onA11yMoveListener: ((direction: Direction) -> Unit)? = null
+
     init {
         isScrollContainer = false
         isVerticalScrollBarEnabled = false
         isHorizontalScrollBarEnabled = false
+
+        isFocusable = true
+        isScreenReaderFocusable = true
 
         // Prevents shadow from appearing around edge of button.
         stateListAnimator = null
@@ -161,22 +174,62 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         renderSurfaceView(fetchedSurface)
     }
 
+    /**
+     * Reparents surface to the SurfaceControl of wallpaperView, so that view will render `surface`.
+     * Any surfaces which may be parented to wallpaperView already should be passed in oldSurfaces
+     * and they will be removed from the wallpaperView's hierarchy and released.
+     */
     private fun renderSurfaceView(surface: SurfaceControl) {
         val surfaceScale = surfaceScale ?: return
         val surfaceSize = surfaceSize ?: return
         val isMirroringOtherDisplay = logicalDisplayId != displayIdToShowWallpaper
 
         Trace.beginSection("Settings Wallpaper renderSurfaceView display#$displayIdToShowWallpaper")
-        injector.updateSurfaceView(
-            oldSurfaces,
-            surface,
-            wallpaperView,
-            surfaceScale,
-            surfaceSize,
-            cornerRadiusPx.toFloat(),
-            isMirroringOtherDisplay,
-        )
+
+        val t = injector.createSurfaceTransaction()
+        t.reparent(surface, wallpaperView.surfaceControl)
+
+        // Calculate the final (scaled) dimensions of the wallpaper content
+        val scaledSurfaceWidth = surfaceSize.width * surfaceScale
+        val scaledSurfaceHeight = surfaceSize.height * surfaceScale
+        // Calculate the top-left position needed to center the surface within the wallpaperView
+        val positionX = (wallpaperView.width - scaledSurfaceWidth) / 2f
+        val positionY = (wallpaperView.height - scaledSurfaceHeight) / 2f
+        val destinationCrop = Rect(0, 0, surfaceSize.width, surfaceSize.height)
+
+        t.setScale(surface, surfaceScale, surfaceScale)
+        t.setPosition(surface, positionX, positionY)
+        t.setCrop(surface, destinationCrop)
+        if (isMirroringOtherDisplay) {
+            // In mirroring mode, area outside the letterbox will be translucent, causing display
+            // behind to be spilling over. The workaround here is to add another black background
+            // surface behind the original wallpaper surface
+            val backgroundSurface =
+                injector
+                    .getSurfaceControlBuilder()
+                    .setName("Letterbox background display#$logicalDisplayId")
+                    .setColorLayer()
+                    .build()
+            letterboxBackgroundSurface = backgroundSurface
+
+            t.reparent(backgroundSurface, wallpaperView.surfaceControl)
+            // Set main wallpaper surface to be on top of the background
+            t.setLayer(surface, 1)
+
+            t.setAlpha(backgroundSurface, 0.5f)
+            t.show(backgroundSurface)
+        } else {
+            // Corner radius should only be applied when display is not letterboxed, and has to be
+            // set on the original surface size, so apply a inverse scale here.
+            t.setCornerRadius(surface, cornerRadiusPx.toFloat() / surfaceScale)
+            letterboxBackgroundSurface = null
+        }
+
+        oldSurfaces.forEach { t.remove(it) }
+        t.apply()
+        oldSurfaces.forEach { it.release() }
         oldSurfaces.clear()
+
         Trace.endSection()
     }
 
@@ -211,14 +264,23 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         surfaceSize: Size,
     ) {
         wallpaperSurface?.let { oldSurfaces.add(it) }
+        letterboxBackgroundSurface?.let { oldSurfaces.add(it) }
         injector.handler.removeCallbacks(updateSurfaceView)
         wallpaperSurface = null
+        letterboxBackgroundSurface = null
         positionInPane = topLeft
 
         this.logicalDisplayId = logicalDisplayId
         this.displayIdToShowWallpaper = displayIdToShowWallpaper
         this.surfaceScale = surfaceScale
         this.surfaceSize = surfaceSize
+
+        val displayDevice = injector.getDisplay(logicalDisplayId)
+        contentDescription =
+            context.getString(
+                R.string.external_display_topology_display_block_content_description,
+                displayDevice?.name ?: "Display $logicalDisplayId",
+            )
 
         val newWidth = (bottomRight.x - topLeft.x).toInt()
         val newHeight = (bottomRight.y - topLeft.y).toInt()
@@ -263,6 +325,65 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
 
         // The other two child views are MATCH_PARENT by default so will resize to fill up the
         // FrameLayout.
+    }
+
+    override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {
+        super.onInitializeAccessibilityNodeInfo(info)
+        // Add custom actions for moving the display block
+        info.addAction(
+            AccessibilityAction(
+                R.id.action_move_display_block_up,
+                context.getString(R.string.external_display_topology_a11y_action_move_up),
+            )
+        )
+        info.addAction(
+            AccessibilityAction(
+                R.id.action_move_display_block_down,
+                context.getString(R.string.external_display_topology_a11y_action_move_down),
+            )
+        )
+        info.addAction(
+            AccessibilityAction(
+                R.id.action_move_display_block_left,
+                context.getString(R.string.external_display_topology_a11y_action_move_left),
+            )
+        )
+        info.addAction(
+            AccessibilityAction(
+                R.id.action_move_display_block_right,
+                context.getString(R.string.external_display_topology_a11y_action_move_right),
+            )
+        )
+    }
+
+    override fun performAccessibilityAction(action: Int, arguments: Bundle?): Boolean {
+        if (onA11yMoveListener == null) {
+            return super.performAccessibilityAction(action, arguments)
+        }
+
+        when (action) {
+            R.id.action_move_display_block_up -> {
+                onA11yMoveListener?.invoke(Direction.UP)
+                return true
+            }
+
+            R.id.action_move_display_block_down -> {
+                onA11yMoveListener?.invoke(Direction.DOWN)
+                return true
+            }
+
+            R.id.action_move_display_block_left -> {
+                onA11yMoveListener?.invoke(Direction.LEFT)
+                return true
+            }
+
+            R.id.action_move_display_block_right -> {
+                onA11yMoveListener?.invoke(Direction.RIGHT)
+                return true
+            }
+
+            else -> return super.performAccessibilityAction(action, arguments)
+        }
     }
 
     private companion object {

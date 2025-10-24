@@ -33,9 +33,11 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
@@ -43,6 +45,7 @@ class AlwaysOnSwitchPreference :
     SwitchPreference(KEY, R.string.accessibility_screen_magnification_always_on_title),
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider,
+    PreferenceIndexableProvider,
     PreferenceLifecycleProvider,
     KeyedObserver<String?> {
 
@@ -53,6 +56,18 @@ class AlwaysOnSwitchPreference :
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 
     override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
+
+    override fun getReadPermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int = ReadWritePermit.ALLOW
+
+    override fun getWritePermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)
@@ -72,8 +87,8 @@ class AlwaysOnSwitchPreference :
 
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() &&
-                context.isWindowMagnificationSupported() &&
-                isAlwaysOnSupported(context)
+            context.isWindowMagnificationSupported() &&
+            isAlwaysOnSupported(context)
     }
 
     override fun isIndexable(context: Context): Boolean {

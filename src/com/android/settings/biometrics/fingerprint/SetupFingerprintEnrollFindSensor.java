@@ -33,6 +33,7 @@ import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSensor {
@@ -77,11 +78,17 @@ public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSenso
 
         @NonNull
         public AlertDialog.Builder onCreateDialogBuilder() {
-            return new AlertDialog.Builder(getActivity(), R.style.Theme_AlertDialog)
-                    .setTitle(R.string.setup_fingerprint_enroll_skip_title)
+            AlertDialog.Builder builder;
+            if (Flags.setupfingerprintenrollfindsensorSkipdialogTheme()) {
+                builder = new AlertDialog.Builder(getActivity());
+            } else {
+                builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AlertDialog);
+            }
+            builder.setTitle(R.string.setup_fingerprint_enroll_skip_title)
                     .setPositiveButton(R.string.skip_anyway_button_label, this)
                     .setNegativeButton(R.string.go_back_button_label, this)
                     .setMessage(R.string.setup_fingerprint_enroll_skip_after_adding_lock_text);
+            return builder;
         }
 
         @Override

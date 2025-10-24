@@ -38,12 +38,11 @@ class PersistentAfterRestartsPreference(
 
     private var settingsKeyedObserver: KeyedObserver<String?>? = null
 
-    override fun isIndexable(context: Context): Boolean {
-        // The term `restarts` is usually used for indicating restarting devices.
-        // Therefore, We wouldn't want `Keep on after device restarts` preference in the Extra Dim
-        // shows up as the search result when the user searches `restart`
-        return false
-    }
+    // The term `restarts` is usually used for indicating restarting devices.
+    // Therefore, We wouldn't want `Keep on after device restarts` preference in the Extra Dim
+    // shows up as the search result when the user searches `restart`
+    override val indexable
+        get() = false
 
     override fun isEnabled(context: Context): Boolean = extraDimStorage.getBoolean(KEY) == true
 

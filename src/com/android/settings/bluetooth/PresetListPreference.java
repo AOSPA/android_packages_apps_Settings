@@ -18,6 +18,8 @@ package com.android.settings.bluetooth;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -31,17 +33,54 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.settings.CustomListPreference;
 import com.android.settings.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- * A preference of hearing device preset list which will refresh the selected item in the dialog
- * when value is changed.
+ * A preference for hearing device presets that refreshes the selected item in the dialog
+ * when its value is changed.
+ *
+ * <p>This class extends {@link CustomListPreference} to provide a custom dialog with
+ * a selectable list of presets. It manages a custom adapter, ensuring the UI stays consistent
+ * with the underlying data.
  */
 public class PresetListPreference extends CustomListPreference {
 
     @Nullable
     private PresetArrayAdapter mAdapter;
+    private DialogInterface.OnClickListener mWrapperListener;
+    private boolean mIsItemClickedInDialog = false;
 
     public PresetListPreference(@NonNull Context context) {
         super(context, null);
+    }
+
+    @Nullable
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        final Parcelable superState = super.onSaveInstanceState();
+        return new SavedState(superState, getEntries(), getEntryValues(), getValue());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@Nullable Parcelable state) {
+        if (state instanceof SavedState myState) {
+            super.onRestoreInstanceState(myState.getSuperState());
+            setEntries(myState.mEntryNames);
+            setEntryValues(myState.mEntryValues);
+            setValue(myState.mValue);
+        } else {
+            super.onRestoreInstanceState(state);
+        }
+    }
+
+    @Override
+    public void setEntries(CharSequence[] entries) {
+        super.setEntries(entries);
+        if (mAdapter != null) {
+            mAdapter.updateList(Arrays.stream(entries).toList());
+        }
     }
 
     @Override
@@ -57,7 +96,23 @@ public class PresetListPreference extends CustomListPreference {
             DialogInterface.OnClickListener listener) {
         mAdapter = new PresetArrayAdapter(builder.getContext(), getEntries(),
                 getSelectedValueIndex());
-        builder.setAdapter(mAdapter, listener);
+        mWrapperListener = (dialog, which) -> {
+            mIsItemClickedInDialog = true;
+            listener.onClick(dialog, which);
+        };
+        mIsItemClickedInDialog = false;
+        builder.setAdapter(mAdapter, mWrapperListener);
+    }
+
+    @Override
+    protected void onDialogClosed(boolean positiveResult) {
+        if (!mIsItemClickedInDialog) {
+            // The dialog was dismissed without user interaction and the entries maybe updated when
+            // the dialog is shown. Make sure to update the selected index manually to ensure the
+            // CustomListPreferenceDialogFragment.mClickedDialogEntryIndex is synced with the remote
+            // active preset value and avoid potential index out of bound exception.
+            mWrapperListener.onClick(null, getSelectedValueIndex());
+        }
     }
 
     @VisibleForTesting
@@ -75,7 +130,11 @@ public class PresetListPreference extends CustomListPreference {
 
         public PresetArrayAdapter(@NonNull Context context, @NonNull CharSequence[] objects,
                 int selectedIndex) {
-            super(context, R.layout.preset_dialog_singlechoice, R.id.text1, objects);
+            // The constructor with an array argument creates a fixed-size list which is immutable.
+            // To allow for future modifications like adding or clearing, the array is first
+            // converted to a mutable ArrayList.
+            super(context, R.layout.preset_dialog_singlechoice, R.id.text1,
+                    new ArrayList<>(Arrays.asList(objects)));
             mSelectedIndex = selectedIndex;
         }
 
@@ -97,10 +156,64 @@ public class PresetListPreference extends CustomListPreference {
 
         /**
          * Updates the selected index.
+         *
+         * @param index The new selected index.
          */
         public void setSelectedIndex(int index) {
             mSelectedIndex = index;
             notifyDataSetChanged();
         }
+
+        /**
+         * Updates the list of entries and refreshes the adapter.
+         *
+         * @param list The new list of entries.
+         */
+        public void updateList(List<CharSequence> list) {
+            clear();
+            addAll(list);
+            notifyDataSetChanged();
+        }
+    }
+
+    private static class SavedState extends BaseSavedState {
+        CharSequence[] mEntryNames;
+        CharSequence[] mEntryValues;
+        String mValue;
+
+        SavedState(Parcelable superState, CharSequence[] entryNames, CharSequence[] entryValues,
+                String value) {
+            super(superState);
+            this.mEntryNames = entryNames;
+            this.mEntryValues = entryValues;
+            this.mValue = value;
+        }
+
+        private SavedState(Parcel in) {
+            super(in);
+            this.mEntryNames = in.readCharSequenceArray();
+            this.mEntryValues = in.readCharSequenceArray();
+            this.mValue = in.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeCharSequenceArray(this.mEntryNames);
+            out.writeCharSequenceArray(this.mEntryValues);
+            out.writeString(this.mValue);
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<>() {
+            @Override
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            @Override
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
     }
 }

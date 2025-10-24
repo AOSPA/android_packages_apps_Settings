@@ -15,32 +15,42 @@
  */
 package com.android.settings.appfunctions.intents
 
+import com.android.settings.appfunctions.DeviceStateAppFunctionType.GET_NOTIFICATIONS
 import com.android.settings.appfunctions.providers.StaticIntent
+import com.android.settings.appfunctions.providers.StaticIntents
 
-fun getNotificationsIntents(): List<StaticIntent> =
-    listOf(
-        StaticIntent(
-            description =
-                "Notification history: Settings to see the history of notifications received.",
-            intentUri =
-                "intent:#Intent;action=android.settings.NOTIFICATION_HISTORY;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description =
-                "Conversations: Settings to manage and customize how conversations are displayed in notifications.",
-            intentUri =
-                "intent:#Intent;action=android.settings.CONVERSATION_SETTINGS;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description =
-                "Bubbles: Settings to manage and customize how bubbles are displayed for notifications.",
-            intentUri =
-                "intent:#Intent;action=android.settings.NOTIFICATION_BUBBLE_SETTINGS;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description =
-                "Notification read, reply & control: Settings to manage apps that can read, reply and control notifications.",
-            intentUri =
-                "intent:#Intent;action=android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS;package=com.android.settings;end",
+fun getNotificationsIntents() =
+    StaticIntents(
+        GET_NOTIFICATIONS,
+        listOf(
+            StaticIntent(
+                description = "Notifications: Settings to manage and customize notifications.",
+                intentUri =
+                    "intent:#Intent;action=android.settings.NOTIFICATION_SETTINGS;package=com.android.settings;end",
+            ),
+            StaticIntent(
+                description =
+                    "Notification history: Settings to see the history of notifications received.",
+                intentUri =
+                    "intent:#Intent;action=android.settings.NOTIFICATION_HISTORY;package=com.android.settings;end",
+            ),
+            StaticIntent(
+                description =
+                    "Conversations: Settings to manage and customize how conversations are displayed in notifications.",
+                intentUri =
+                    "intent:#Intent;action=android.settings.CONVERSATION_SETTINGS;package=com.android.settings;end",
+            ),
+            StaticIntent(
+                description =
+                    "Bubbles: Settings to manage and customize how bubbles are displayed for notifications.",
+                intentUri =
+                    "intent:#Intent;action=android.settings.NOTIFICATION_BUBBLE_SETTINGS;package=com.android.settings;end",
+            ),
+            StaticIntent(
+                description =
+                    "Notification read, reply & control: Settings to manage apps that can read, reply and control notifications.",
+                intentUri =
+                    "intent:#Intent;action=android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS;package=com.android.settings;end",
+            ),
         ),
     )

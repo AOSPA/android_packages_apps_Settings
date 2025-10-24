@@ -18,7 +18,10 @@ package com.android.settings.applications
 
 import android.content.Context
 import android.content.pm.PackageInfo
+import android.content.pm.PackageInfo.REQUESTED_PERMISSION_GRANTED
+import android.content.pm.PackageManager
 import android.content.pm.PackageManager.NameNotFoundException
+import android.os.UserHandle
 import com.android.settingslib.utils.applications.PackageObservable
 
 /** Provides [PackageInfo] for given package. */
@@ -42,3 +45,40 @@ fun Context.getPackageInfo(packageName: String) =
     } catch (_: NameNotFoundException) {
         null
     }
+
+/** Returns [PackageInfo] of given package with activities flags set, null if not found. */
+fun Context.getPackageInfoWithActivities(packageName: String) =
+    try {
+        packageManager.getPackageInfoAsUser(
+            packageName,
+            PackageManager.GET_ACTIVITIES,
+            UserHandle.myUserId(),
+        )
+    } catch (_: Exception) {
+        null
+    }
+
+/** Returns [PackageInfo] of given package with permissions flags set, null if not found. */
+fun Context.getPackageInfoWithPermissions(packageName: String) =
+    try {
+        packageManager.getPackageInfoAsUser(
+            packageName,
+            PackageManager.GET_PERMISSIONS,
+            UserHandle.myUserId(),
+        )
+    } catch (_: Exception) {
+        null
+    }
+
+/** Returns true if the permission was requested for the given package, false otherwise. */
+fun isPermissionRequested(packageInfo: PackageInfo?, permission: String): Boolean =
+    packageInfo?.requestedPermissions?.let { permission in it } ?: false
+
+/** Returns true if the permission was granted for the given package, false otherwise. */
+fun isPermissionGranted(packageInfo: PackageInfo?, permission: String): Boolean {
+    val index = packageInfo?.requestedPermissions?.indexOf(permission) ?: return false
+
+    val flags = packageInfo.requestedPermissionsFlags?.getOrNull(index) ?: return false
+
+    return (flags and REQUESTED_PERMISSION_GRANTED) != 0
+}

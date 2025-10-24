@@ -15,6 +15,7 @@
  */
 package com.android.settings.datausage
 
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.os.Bundle
 import androidx.core.net.toUri
@@ -27,20 +28,29 @@ import org.robolectric.Shadows.shadowOf
 
 class DataUsageAppDetailScreenTest : SettingsCatalystTestCase() {
     init {
-        shadowOf(appContext.packageManager)
-            .installPackage(PackageInfo().apply { packageName = "com.test.package" })
+        val shadowPackageManager = shadowOf(appContext.packageManager)
+        val packageInfo =
+            PackageInfo().apply {
+                packageName = TEST_PACKAGE_NAME
+                applicationInfo =
+                    ApplicationInfo().apply {
+                        packageName = TEST_PACKAGE_NAME
+                        nonLocalizedLabel = TEST_APP_LABEL
+                    }
+            }
+        shadowPackageManager.installPackage(packageInfo)
     }
 
     private val preferenceScreenCreatorWithInvalidPackage =
         DataUsageAppDetailScreen(
             appContext,
-            Bundle().apply { putString("app", "com.invalid.package") },
+            Bundle().apply { putString("app", INVALID_PACKAGE_NAME) },
         )
 
     override val preferenceScreenCreator =
         DataUsageAppDetailScreen(
             appContext,
-            Bundle().apply { putString("app", "com.test.package") },
+            Bundle().apply { putString("app", TEST_PACKAGE_NAME) },
         )
 
     override val flagName: String
@@ -55,12 +65,30 @@ class DataUsageAppDetailScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
+    fun getTitle_whenPackageIsValid_returnsAppLabel() {
+        // Act: Get the title from the screen creator for a valid package.
+        val title = preferenceScreenCreator.getTitle(appContext)
+
+        // Assert: The title should match the label set in the test setup.
+        assertThat(title).isEqualTo(TEST_APP_LABEL)
+    }
+
+    @Test
+    fun getTitle_whenPackageIsInvalid_returnsNull() {
+        // Act: Get the title from the screen creator for an invalid package.
+        val title = preferenceScreenCreatorWithInvalidPackage.getTitle(appContext)
+
+        // Assert: The title should be null as the app info cannot be found.
+        assertThat(title).isNull()
+    }
+
+    @Test
     fun getLaunchIntent_correctActivity() {
         val underTest = preferenceScreenCreator.getLaunchIntent(appContext, null)
 
         assertThat(underTest.getComponent()?.getClassName())
             .isEqualTo(AppDataUsageActivity::class.java.getName())
-        assertThat(underTest.data).isEqualTo("package:com.test.package".toUri())
+        assertThat(underTest.data).isEqualTo("package:$TEST_PACKAGE_NAME".toUri())
     }
 
     @Test
@@ -69,9 +97,20 @@ class DataUsageAppDetailScreenTest : SettingsCatalystTestCase() {
             preferenceScreenCreator.getLaunchIntent(appContext, TestMetadata("testBindingKey"))
 
         assertThat(underTest.getBundleExtra("settingslib:binding_screen_args")?.getString("app"))
-            .isEqualTo("com.test.package")
+            .isEqualTo(TEST_PACKAGE_NAME)
         assertThat(underTest.getStringExtra(":settings:fragment_args_key"))
             .isEqualTo("testBindingKey")
+    }
+
+    @Test
+    fun getLaunchIntent_whenPackageIsInvalid_dataIsCorrect() {
+        // Act: Get the launch intent with an invalid package name.
+        val underTest = preferenceScreenCreatorWithInvalidPackage.getLaunchIntent(appContext, null)
+
+        // Assert: The intent component and data URI should still be correctly formed.
+        assertThat(underTest.getComponent()?.getClassName())
+            .isEqualTo(AppDataUsageActivity::class.java.getName())
+        assertThat(underTest.data).isEqualTo("package:$INVALID_PACKAGE_NAME".toUri())
     }
 
     @Test
@@ -82,6 +121,12 @@ class DataUsageAppDetailScreenTest : SettingsCatalystTestCase() {
     @Test
     fun isAvailable_whenPackageIsInvalid_isFalse() {
         assertThat(preferenceScreenCreatorWithInvalidPackage.isAvailable(appContext)).isFalse()
+    }
+
+    companion object {
+        private const val TEST_PACKAGE_NAME = "com.test.package"
+        private const val TEST_APP_LABEL = "Test App"
+        private const val INVALID_PACKAGE_NAME = "com.invalid.package"
     }
 }
 

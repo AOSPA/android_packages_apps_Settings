@@ -15,41 +15,46 @@
  */
 package com.android.settings.appfunctions.intents
 
+import com.android.settings.appfunctions.DeviceStateAppFunctionType.GET_UNCATEGORIZED
 import com.android.settings.appfunctions.providers.StaticIntent
+import com.android.settings.appfunctions.providers.StaticIntents
 
-fun getOtherIntents(): List<StaticIntent> =
-    listOf(
-        StaticIntent(
-            description = "Pair new device: Settings to pair a new Bluetooth device.",
-            intentUri =
-                "intent:#Intent;action=android.settings.BLUETOOTH_PAIRING_SETTINGS;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description =
-                "Saved devices: Settings to show the list of previously connected Bluetooth devices.",
-            intentUri =
-                "intent:#Intent;action=com.android.settings.PREVIOUSLY_CONNECTED_DEVICE;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description =
-                "Cast: Settings to configure Cast options to send screen or media to other devices.",
-            intentUri =
-                "intent:#Intent;action=android.settings.CAST_SETTINGS;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description =
-                "Wallpaper & Style: Settings to change the wallpaper and style of the device.",
-            intentUri =
-                "intent:#Intent;component=com.android.settings/.wallpaper.StyleSuggestionActivity;end",
-        ),
-        StaticIntent(
-            description = "Backup: Settings to configure the backup options for the device.",
-            intentUri =
-                "intent:#Intent;action=com.android.settings.BACKUP_SETTINGS;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description =
-                "Send feedback about this device: Intent to generate a report that you can share with the device manufacturer.",
-            intentUri = "intent:#Intent;action=android.intent.action.BUG_REPORT;end",
+fun getOtherIntents() =
+    StaticIntents(
+        GET_UNCATEGORIZED,
+        listOf(
+            StaticIntent(
+                description = "Pair new device: Settings to pair a new Bluetooth device.",
+                intentUri =
+                    "intent:#Intent;action=android.settings.BLUETOOTH_PAIRING_SETTINGS;package=com.android.settings;end",
+            ),
+            StaticIntent(
+                description =
+                    "Saved devices: Settings to show the list of previously connected Bluetooth devices.",
+                intentUri =
+                    "intent:#Intent;action=com.android.settings.PREVIOUSLY_CONNECTED_DEVICE;package=com.android.settings;end",
+            ),
+            StaticIntent(
+                description =
+                    "Cast: Settings to configure Cast options to send screen or media to other devices.",
+                intentUri =
+                    "intent:#Intent;action=android.settings.CAST_SETTINGS;package=com.android.settings;end",
+            ),
+            StaticIntent(
+                description =
+                    "Wallpaper & Style: Settings to change the wallpaper and style of the device.",
+                intentUri =
+                    "intent:#Intent;component=com.android.settings/.wallpaper.StyleSuggestionActivity;end",
+            ),
+            StaticIntent(
+                description = "Backup: Settings to configure the backup options for the device.",
+                intentUri =
+                    "intent:#Intent;action=com.android.settings.BACKUP_SETTINGS;package=com.android.settings;end",
+            ),
+            StaticIntent(
+                description =
+                    "Send feedback about this device: Intent to generate a report that you can share with the device manufacturer.",
+                intentUri = "intent:#Intent;action=android.intent.action.BUG_REPORT;end",
+            ),
         ),
     )

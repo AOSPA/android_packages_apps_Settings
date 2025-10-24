@@ -15,12 +15,13 @@
   ~
   -->
 
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
 
     <item>
         <shape android:shape="rectangle">
             <stroke
-                android:color="@color/display_topology_background_color"
+                android:color="@androidprv:color/materialColorSurfaceDim"
                 android:width="@dimen/display_block_padding" />
             <corners android:radius="@dimen/display_block_corner_radius" />
         </shape>

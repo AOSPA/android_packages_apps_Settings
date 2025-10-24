@@ -33,14 +33,15 @@ class IntroPreference(private val serviceInfo: AccessibilityServiceInfo) :
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = false
+
     override fun getTitle(context: Context): CharSequence? =
         serviceInfo.loadIntro(context.packageManager)
 
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && !TextUtils.isEmpty(getTitle(context))
     }
-
-    override fun isIndexable(context: Context): Boolean = false
 
     override fun createWidget(context: Context) = TopIntroPreference(context)
 

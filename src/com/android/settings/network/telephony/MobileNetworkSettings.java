@@ -22,15 +22,12 @@
 
 package com.android.settings.network.telephony;
 
-import static com.android.settings.network.MobileNetworkListFragment.collectAirplaneModeAndFinishIfOn;
-
 import static android.telephony.AccessNetworkConstants.TRANSPORT_TYPE_WWAN;
 import static android.telephony.ims.feature.ImsFeature.FEATURE_MMTEL;
 import static android.telephony.ims.stub.ImsRegistrationImplBase.REGISTRATION_TECH_CROSS_SIM;
 import static android.telephony.NetworkRegistrationInfo.DOMAIN_PS;
 
 import static com.qti.extphone.ExtPhoneCallbackListener.EVENT_ON_CIWLAN_CONFIG_CHANGE;
-
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
@@ -73,6 +70,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.CarrierWifiTogglePreferenceController;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.network.SubscriptionUtil;
@@ -491,23 +489,32 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
         }
 
-        use(MobileNetworkSwitchController.class).init(mSubId);
+        if (!isCatalystEnabled() || !Flags.deeplinkNetworkAndInternet25q4()) {
+            use(MobileNetworkSwitchController.class).init(mSubId);
+        }
         use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
-        use(BillingCyclePreferenceController.class).init(mSubId);
+        if (!isCatalystEnabled() || !Flags.deeplinkNetworkAndInternet25q4()) {
+            use(BillingCyclePreferenceController.class).init(mSubId);
+        }
         use(MmsMessagePreferenceController.class).init(mSubId);
         use(DataDuringCallsPreferenceController.class).init(mSubId);
         // CrossSimCallingViewModel is responsible for maintaining the correct cross sim calling
         // settings (backup calling).
         new ViewModelProvider(this).get(CrossSimCallingViewModel.class);
         use(AutoDataSwitchPreferenceController.class).init(mSubId);
-        use(DisabledSubscriptionController.class).init(mSubId);
+        if (!isCatalystEnabled() || !Flags.deeplinkNetworkAndInternet25q4()) {
+            use(DisabledSubscriptionController.class).init(mSubId);
+        }
         use(DeleteSimProfilePreferenceController.class).init(mSubId);
         use(DisableSimFooterPreferenceController.class).init(mSubId);
         use(NrDisabledInDsdsFooterPreferenceController.class).init(mSubId);
 
-        use(MobileNetworkSpnPreferenceController.class).init(this, mSubId);
-        use(MobileNetworkPhoneNumberPreferenceController.class).init(mSubId);
-        use(MobileNetworkImeiPreferenceController.class).init(this, mSubId);
+        if (!isCatalystEnabled() || !Flags.deeplinkNetworkAndInternet25q4()) {
+            use(MobileNetworkSpnPreferenceController.class).init(this, mSubId);
+            use(MobileNetworkPhoneNumberPreferenceController.class).init(mSubId);
+            use(MobileNetworkImeiPreferenceController.class).init(this, mSubId);
+            use(ApnPreferenceController.class).init(mSubId);
+        }
 
         final MobileDataPreferenceController mobileDataPreferenceController =
                 use(MobileDataPreferenceController.class);
@@ -534,9 +541,12 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(ApnPreferenceController.class).init(mSubId);
         use(UserPLMNPreferenceController.class).init(mSubId);
         use(CarrierPreferenceController.class).init(mSubId);
-        use(DataUsagePreferenceController.class).init(mSubId);
+        if (!isCatalystEnabled() || !Flags.deeplinkNetworkAndInternet25q4()) {
+            use(DataUsagePreferenceController.class).init(mSubId);
+            use(EnabledNetworkModePreferenceController.class)
+                    .init(mSubId, getParentFragmentManager());
+        }
         use(PreferredNetworkModePreferenceController.class).init(getLifecycle(), mSubId);
-        use(EnabledNetworkModePreferenceController.class).init(mSubId, getParentFragmentManager());
         use(DataServiceSetupPreferenceController.class).init(mSubId);
         use(Enable2gPreferenceController.class).init(mSubId);
         use(CarrierWifiTogglePreferenceController.class).init(getLifecycle(), mSubId);
@@ -630,7 +640,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        collectAirplaneModeAndFinishIfOn(this);
 
         LifecycleOwner viewLifecycleOwner = getViewLifecycleOwner();
         new SubscriptionRepository(requireContext())
@@ -639,6 +648,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                         Log.d(LOG_TAG, "Due to subscription not visible, closes page");
                         finishFragment();
                     }
+                    return Unit.INSTANCE;
+                });
+        new AirplaneModeRepository(requireContext()).collectAirplaneModeChanged(viewLifecycleOwner,
+                (isAirplaneModeOn) -> {
+                    notifyAirplaneModeForPreferences(isAirplaneModeOn);
                     return Unit.INSTANCE;
                 });
     }
@@ -851,6 +865,22 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         final Bundle bundle = new Bundle();
         bundle.putInt(Settings.EXTRA_SUB_ID, getSubId());
         return bundle;
+    }
+
+    @VisibleForTesting
+    void notifyAirplaneModeForPreferences(boolean isAirplaneModeOn) {
+        // notify preferences' airplaneModeCallback
+        List<AbstractPreferenceController> allPreferencesList =
+                getPreferenceControllersAsList();
+        Log.d(LOG_TAG, "notifyAirplaneModeForPreferences");
+
+        for (AbstractPreferenceController subPreference : allPreferencesList) {
+            if (subPreference instanceof AirplaneModeChangedCallback) {
+                ((AirplaneModeChangedCallback) subPreference)
+                        .notifyAirplaneModeChanged(isAirplaneModeOn);
+            }
+        }
+        updatePreferenceStates();
     }
 
     private int getSubId() {

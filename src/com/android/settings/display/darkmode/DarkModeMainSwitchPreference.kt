@@ -35,6 +35,9 @@ class DarkModeMainSwitchPreference(private val dataStore: DarkModeStorage) :
     override val title: Int
         get() = R.string.dark_theme_main_switch_title
 
+    override val indexable
+        get() = false
+
     override fun storage(context: Context): KeyValueStore = dataStore
 
     override fun getReadPermissions(context: Context) = DarkModeStorage.getReadPermissions()
@@ -49,8 +52,6 @@ class DarkModeMainSwitchPreference(private val dataStore: DarkModeStorage) :
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
-
-    override fun isIndexable(context: Context) = false
 
     companion object {
         const val KEY = "dark_ui_activated"

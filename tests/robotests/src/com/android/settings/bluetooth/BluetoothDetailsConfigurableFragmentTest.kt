@@ -48,6 +48,7 @@ import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSetti
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.ToggleModel
+import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.CardPreference
 import com.android.settingslib.widget.SegmentedButtonPreference
 import com.google.common.truth.Truth.assertThat
@@ -458,6 +459,44 @@ class BluetoothDetailsConfigurableFragmentTest {
                     )
             }
         }
+
+    @Test
+    fun setPreferenceDisplayOrderToMainFragment_banner_useBannerPreference() = buildFragment {
+        testScope.runTest {
+            whenever(repository.getDeviceSettingsConfig(cachedDevice))
+                .thenReturn(
+                    DeviceSettingConfigModel(
+                        listOf(
+                            DeviceSettingConfigItemModel.AppProvidedItem(456, highlighted = false)
+                        ),
+                        listOf(),
+                        null,
+                    )
+                )
+            val intent = Intent("test_intent")
+            whenever(repository.getDeviceSetting(cachedDevice, 456))
+                .thenReturn(
+                    flowOf(
+                        DeviceSettingModel.BannerPreference(
+                            cachedDevice = cachedDevice,
+                            id = 456,
+                            title = "title",
+                            message = "message",
+                            icon = null,
+                            positiveButton = null,
+                            negativeButton = null,
+                        )
+                    )
+                )
+
+            fragment.requestUpdateLayout(FragmentTypeModel.DeviceDetailsMainFragment)
+            runCurrent()
+
+            assertThat(getDisplayedKeys()).containsExactly("DEVICE_SETTING_456")
+            assertThat(getDisplayedPreferences()[0])
+                .isInstanceOf(BannerMessagePreference::class.java)
+        }
+    }
 
     private fun buildFragment(address: String? = DEVICE_ADDRESS, r: (() -> Unit)) {
         ActivityScenario.launch(EmptyFragmentActivity::class.java).use { activityScenario ->

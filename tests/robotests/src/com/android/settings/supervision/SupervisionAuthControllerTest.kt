@@ -34,6 +34,7 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
+import org.robolectric.shadows.ShadowLooper
 import org.robolectric.shadows.ShadowSystemClock
 
 @RunWith(AndroidJUnit4::class)
@@ -54,6 +55,7 @@ class SupervisionAuthControllerTest {
             on { getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION) } doReturn
                 listOf(SUPERVISION_PACKAGE_NAME)
         }
+        ShadowLooper.idleMainLooper()
     }
 
     @Test
@@ -78,6 +80,7 @@ class SupervisionAuthControllerTest {
 
         val authController = SupervisionAuthController.getInstance(mockContext)
         authController.startSession(TASK_ID)
+        ShadowLooper.idleMainLooper()
         assertThat(authController.isSessionActive(TASK_ID)).isTrue()
     }
 
@@ -92,10 +95,12 @@ class SupervisionAuthControllerTest {
         val authController = SupervisionAuthController.getInstance(mockContext)
         authController.startSession(TASK_ID)
         authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
         assertThat(authController.isSessionActive(TASK_ID)).isTrue()
 
         mockTask.stub { on { taskInfo } doReturn NOT_FOCUSED_SUPERVISION_DASHBOARD_TASK_INFO }
         authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
         assertThat(authController.isSessionActive(TASK_ID)).isFalse()
     }
 
@@ -103,6 +108,7 @@ class SupervisionAuthControllerTest {
     fun taskScreenLocked_sessionInvalidated() {
         val authController = SupervisionAuthController.getInstance(mockContext)
         authController.startSession(TASK_ID)
+        ShadowLooper.idleMainLooper()
         assertThat(authController.isSessionActive(TASK_ID)).isTrue()
 
         val broadcastReceiverCaptor = argumentCaptor<BroadcastReceiver>()
@@ -112,6 +118,7 @@ class SupervisionAuthControllerTest {
 
         val screenOffReceiver: BroadcastReceiver = broadcastReceiverCaptor.firstValue
         screenOffReceiver.onReceive(mockContext, Intent(Intent.ACTION_SCREEN_OFF))
+        ShadowLooper.idleMainLooper()
         assertThat(authController.isSessionActive(TASK_ID)).isFalse()
         verify(mockContext).unregisterReceiver(screenOffReceiver)
     }
@@ -127,10 +134,12 @@ class SupervisionAuthControllerTest {
         val authController = SupervisionAuthController.getInstance(mockContext)
         authController.startSession(TASK_ID)
         authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
         assertThat(authController.isSessionActive(TASK_ID)).isTrue()
 
         mockTask.stub { on { taskInfo } doReturn FOCUSED_OTHER_SETTINGS_TASK_INFO }
         authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
         assertThat(authController.isSessionActive(TASK_ID)).isFalse()
     }
 
@@ -138,10 +147,12 @@ class SupervisionAuthControllerTest {
     fun supervisionSessionTimesOut_sessionInvalidated() {
         val authController = SupervisionAuthController.getInstance(mockContext)
         authController.startSession(TASK_ID)
+        ShadowLooper.idleMainLooper()
         assertThat(authController.isSessionActive(TASK_ID)).isTrue()
 
         val timeoutMillis = SupervisionAuthController.SESSION_TIMEOUT_MILLIS + 1
         ShadowSystemClock.advanceBy(Duration.ofMillis(timeoutMillis))
+        ShadowLooper.idleMainLooper()
 
         assertThat(authController.isSessionActive(TASK_ID)).isFalse()
     }
@@ -157,10 +168,12 @@ class SupervisionAuthControllerTest {
         val authController = SupervisionAuthController.getInstance(mockContext)
         authController.startSession(TASK_ID)
         authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
         assertThat(authController.isSessionActive(TASK_ID)).isTrue()
 
         mockTask.stub { on { taskInfo } doReturn FOCUSED_OTHER_SETTINGS_TASK_INFO }
         authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
         assertThat(authController.isSessionActive(TASK_ID)).isFalse()
     }
 

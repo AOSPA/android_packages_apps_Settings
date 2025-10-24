@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.flags.Flags.FLAG_CATALYST_ACCESSIBILITY_COLOR_AND_MOTION;
 import static com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -85,8 +84,7 @@ public class ColorAndMotionFragmentTest {
         assertThat(keys).containsAtLeastElementsIn(niks);
     }
 
-    @RequiresFlagsDisabled(
-            {FLAG_CATALYST_SETTINGS_SEARCH, FLAG_CATALYST_ACCESSIBILITY_COLOR_AND_MOTION})
+    @RequiresFlagsDisabled(FLAG_CATALYST_SETTINGS_SEARCH)
     @Test
     public void getXmlResourcesToIndex_returnXmlResource() {
         List<SearchIndexableResource> indexableResources =
@@ -98,8 +96,7 @@ public class ColorAndMotionFragmentTest {
                 R.xml.accessibility_color_and_motion);
     }
 
-    @RequiresFlagsEnabled(
-            {FLAG_CATALYST_SETTINGS_SEARCH, FLAG_CATALYST_ACCESSIBILITY_COLOR_AND_MOTION})
+    @RequiresFlagsEnabled(FLAG_CATALYST_SETTINGS_SEARCH)
     @Test
     public void getXmlResourcesToIndex_returnNull() {
         assertThat(ColorAndMotionFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(

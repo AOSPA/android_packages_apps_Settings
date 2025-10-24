@@ -50,7 +50,7 @@ class A11yActivitySettingsPreferenceTest {
     @Test
     fun isIndexable_returnFalse() {
         val preference = A11yActivitySettingPreference(mock())
-        assertThat(preference.isIndexable(context)).isFalse()
+        assertThat(preference.indexable).isFalse()
     }
 
     @Test

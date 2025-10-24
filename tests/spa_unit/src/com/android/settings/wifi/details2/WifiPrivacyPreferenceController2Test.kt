@@ -18,8 +18,9 @@ package com.android.settings.wifi.details2
 
 import android.content.Context
 import android.content.ContextWrapper
-import android.os.UserManager
 import android.net.wifi.WifiConfiguration
+import android.os.UserHandle.PER_USER_RANGE
+import android.os.UserManager
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.preference.ListPreference
@@ -34,8 +35,6 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.anyBoolean
-import org.mockito.Mockito.anyString
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
@@ -176,13 +175,15 @@ class WifiPrivacyPreferenceController2Test {
     @Test
     @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
     fun displayPreference_networkOwned() {
-        mockWifiEntry.stub { on { getWifiConfiguration() } doReturn mockWifiConfiguration }
-        mockWifiConfiguration.creatorUid = 1
-        userManager = mock { on { getUserCount() } doReturn 3 }
+        if (UserManager.isHeadlessSystemUserMode()) {
+            mockWifiEntry.stub { on { getWifiConfiguration() } doReturn mockWifiConfiguration }
+            mockWifiConfiguration.creatorUid = PER_USER_RANGE * 10
+            userManager = mock { on { getUserCount() } doReturn 3 }
 
-        controller.updateState(preference)
+            controller.updateState(preference)
 
-        assertThat(preference.isEnabled()).isTrue()
+            assertThat(preference.isEnabled()).isTrue()
+        }
     }
 
     @Test

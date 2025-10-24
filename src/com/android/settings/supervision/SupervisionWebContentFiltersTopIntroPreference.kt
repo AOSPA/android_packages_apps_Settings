@@ -28,9 +28,10 @@ class SupervisionWebContentFiltersTopIntroPreference : PreferenceMetadata, Prefe
     override val title: Int
         get() = R.string.supervision_web_content_filters_top_intro
 
-    override fun createWidget(context: Context) = TopIntroPreference(context)
+    override val indexable
+        get() = false
 
-    override fun isIndexable(context: Context) = false
+    override fun createWidget(context: Context) = TopIntroPreference(context)
 
     companion object {
         const val KEY = "supervision_web_content_filters_intro"

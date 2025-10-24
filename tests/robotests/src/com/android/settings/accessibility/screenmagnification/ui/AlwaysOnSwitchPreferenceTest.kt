@@ -37,6 +37,8 @@ import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
 import com.android.settings.testutils.shadow.ShadowDeviceConfig
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW
 import com.google.common.truth.Truth.assertThat
@@ -69,6 +71,28 @@ class AlwaysOnSwitchPreferenceTest {
     fun getTitle() {
         assertThat(preference.title)
             .isEqualTo(R.string.accessibility_screen_magnification_always_on_title)
+    }
+
+    @Test
+    fun getReadPermissions_returnsSettingsSecureStoreReadPermissions() {
+        assertThat(preference.getReadPermissions(context))
+            .isEqualTo(SettingsSecureStore.getReadPermissions())
+    }
+
+    @Test
+    fun getWritePermissions_returnsSettingsSecureStoreWritePermissions() {
+        assertThat(preference.getWritePermissions(context))
+            .isEqualTo(SettingsSecureStore.getWritePermissions())
+    }
+
+    @Test
+    fun getReadPermit_returnsAllow() {
+        assertThat(preference.getReadPermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @Test
+    fun getWritePermit_returnsAllow() {
+        assertThat(preference.getWritePermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
     }
 
     @Test
@@ -108,9 +132,7 @@ class AlwaysOnSwitchPreferenceTest {
 
         assertThat(preference.getSummary(context))
             .isEqualTo(
-                context.getString(
-                    R.string.accessibility_screen_magnification_always_on_summary
-                )
+                context.getString(R.string.accessibility_screen_magnification_always_on_summary)
             )
     }
 
@@ -120,9 +142,7 @@ class AlwaysOnSwitchPreferenceTest {
 
         assertThat(preference.getSummary(context))
             .isEqualTo(
-                context.getString(
-                    R.string.accessibility_screen_magnification_always_on_summary
-                )
+                context.getString(R.string.accessibility_screen_magnification_always_on_summary)
             )
     }
 
@@ -151,9 +171,11 @@ class AlwaysOnSwitchPreferenceTest {
     )
     fun performClick(settingsEnabled: Boolean, expectedChecked: Boolean) {
         MagnificationCapabilities.setCapabilities(context, MagnificationMode.ALL)
-        getStorage().setBoolean(
-            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED, settingsEnabled
-        )
+        getStorage()
+            .setBoolean(
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED,
+                settingsEnabled,
+            )
         val preferenceWidget = createAlwaysOnWidget()
         assertThat(preferenceWidget.isChecked).isEqualTo(settingsEnabled)
 
@@ -161,8 +183,10 @@ class AlwaysOnSwitchPreferenceTest {
 
         assertThat(preferenceWidget.isChecked).isEqualTo(expectedChecked)
         assertThat(
-            getStorage().getBoolean(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED)
-        ).isEqualTo(expectedChecked)
+                getStorage()
+                    .getBoolean(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED)
+            )
+            .isEqualTo(expectedChecked)
     }
 
     @Test
@@ -177,7 +201,6 @@ class AlwaysOnSwitchPreferenceTest {
                 "{supportAlwaysOn: true, inSetupWizard: false, supportWindowMag: true, expectedAvailable: true}",
                 "{supportAlwaysOn: true, inSetupWizard: true, supportWindowMag: false, expectedAvailable: false}",
                 "{supportAlwaysOn: true, inSetupWizard: true, supportWindowMag: true, expectedAvailable: false}",
-
             ]
     )
     fun isAvailable(
@@ -199,9 +222,9 @@ class AlwaysOnSwitchPreferenceTest {
         try {
             activityController =
                 ActivityController.of(
-                    ComponentActivity(),
-                    Intent().apply { putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard) },
-                )
+                        ComponentActivity(),
+                        Intent().apply { putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard) },
+                    )
                     .create()
                     .start()
                     .postCreate(null)

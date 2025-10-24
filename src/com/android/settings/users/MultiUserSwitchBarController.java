@@ -16,6 +16,7 @@
 
 package com.android.settings.users;
 
+import android.app.admin.flags.Flags;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -60,15 +61,32 @@ public class MultiUserSwitchBarController implements SwitchWidgetController.OnSw
         mUserCapabilities.updateAddUserCapabilities(mContext);
         mSwitchBar.setChecked(mUserCapabilities.mUserSwitcherEnabled);
 
-        RestrictedLockUtils.EnforcedAdmin enforcedAdmin = RestrictedLockUtilsInternal
-                .checkIfRestrictionEnforced(mContext, UserManager.DISALLOW_USER_SWITCH,
-                        UserHandle.myUserId());
-        if (enforcedAdmin != null) {
-            mSwitchBar.setDisabledByAdmin(enforcedAdmin);
+        if (Flags.policyTransparencyRefactorEnabled()) {
+            if (!mUserCapabilities.mDisallowSwitchUser && mUserCapabilities.mIsMain) {
+                mSwitchBar.setEnabled(true);
+            } else if (mUserCapabilities.mDisallowSwitchUser
+                    && !mUserCapabilities.mDisallowSwitchUserRestrictionEnforcementInfo
+                    .isOnlyEnforcedBySystem()) {
+                mSwitchBar.setRestriction(UserManager.DISALLOW_USER_SWITCH);
+                mSwitchBar.setDisabledByAdmin(
+                        mUserCapabilities.mDisallowSwitchUserRestrictionEnforcementInfo
+                                .getMostImportantEnforcingAdmin());
+            } else {
+                mSwitchBar.setEnabled(false);
+            }
         } else {
-            mSwitchBar.setEnabled(mUserCapabilities.mIsMain
-                    && !mUserCapabilities.mDisallowSwitchUser);
+            RestrictedLockUtils.EnforcedAdmin enforcedAdmin = RestrictedLockUtilsInternal
+                    .checkIfRestrictionEnforced(mContext, UserManager.DISALLOW_USER_SWITCH,
+                            UserHandle.myUserId());
+            if (enforcedAdmin != null) {
+                mSwitchBar.setDisabledByAdmin(enforcedAdmin);
+            } else {
+                mSwitchBar.setEnabled(mUserCapabilities.mIsMain
+                        && !mUserCapabilities.mDisallowSwitchUser);
+            }
         }
+
+
     }
 
     @Override

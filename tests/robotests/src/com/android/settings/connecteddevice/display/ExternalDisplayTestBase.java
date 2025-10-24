@@ -28,14 +28,26 @@ import static com.android.settings.flags.Flags.FLAG_ROTATION_CONNECTED_DISPLAY_S
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
+import android.app.ActivityManager;
+import android.app.ActivityTaskManager;
+import android.app.admin.DevicePolicyIdentifiers;
+import android.app.admin.DevicePolicyManager;
+import android.app.admin.DevicePolicyResourcesManager;
+import android.app.admin.DpcAuthority;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Resources;
 import android.hardware.display.DisplayTopology;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.view.Display.Mode;
 
 import androidx.preference.PreferenceManager;
@@ -69,6 +81,12 @@ public class ExternalDisplayTestBase {
     PreferenceScreen mPreferenceScreen;
     List<DisplayDevice> mDisplays;
     DisplayTopology mDisplayTopology;
+    @Mock
+    ActivityManager mActivityManager;
+    @Mock
+    ActivityTaskManager mActivityTaskManager;
+    @Mock
+    DevicePolicyManager mDevicePolicyManager;
 
     /**
      * Setup.
@@ -103,6 +121,8 @@ public class ExternalDisplayTestBase {
         }).when(mMockedInjector).registerDisplayListener(any());
         doReturn(0).when(mMockedInjector).getDisplayUserRotation(anyInt());
         doReturn(mContext).when(mMockedInjector).getContext();
+
+        setupMockDpm();
     }
 
     DisplayDevice includeBuiltinDisplay() {
@@ -169,5 +189,27 @@ public class ExternalDisplayTestBase {
                 display -> mDisplayTopology.addDisplay(display.getId(), /* logicalWidth= */
                         123, /* logicalHeight= */ 456, /* logicalDensity= */ 789));
         doReturn(mDisplayTopology).when(mMockedInjector).getDisplayTopology();
+    }
+
+    private void setupMockDpm() {
+        final EnforcingAdmin enforcingAdmin =
+                new EnforcingAdmin(
+                        "pkg.test",
+                        DpcAuthority.DPC_AUTHORITY,
+                        UserHandle.of(UserHandle.myUserId()),
+                        new ComponentName("admin", "adminclass"));
+
+        PolicyEnforcementInfo mockPolicyInfo = mock(PolicyEnforcementInfo.class);
+        DevicePolicyResourcesManager mockPolicyResourcesManager =
+                mock(DevicePolicyResourcesManager.class);
+
+        doReturn(enforcingAdmin).when(mockPolicyInfo).getMostImportantEnforcingAdmin();
+        doReturn(mockPolicyInfo)
+                .when(mDevicePolicyManager)
+                .getEnforcingAdminsForPolicy(
+                        eq(DevicePolicyIdentifiers.LOCK_TASK_POLICY), anyInt());
+        doReturn("").when(mockPolicyResourcesManager).getString(any(), any());
+        doReturn(mockPolicyResourcesManager).when(mDevicePolicyManager).getResources();
+
     }
 }

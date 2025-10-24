@@ -49,7 +49,7 @@ class IntroPreferenceTest {
 
     @Test
     fun isIndexable_returnsFalse() {
-        assertThat(preference.isIndexable(appContext)).isFalse()
+        assertThat(preference.indexable).isFalse()
     }
 
     @Test

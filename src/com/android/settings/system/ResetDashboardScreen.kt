@@ -18,13 +18,21 @@ package com.android.settings.system
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.os.UserManager
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.ResetDashboardActivity
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.factory_reset.Flags as FactoryResetFlags
 import com.android.settings.flags.Flags
+import com.android.settings.restriction.UserRestrictions
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.RestrictedPreference
+import com.android.settingslib.datastore.HandlerExecutor
+import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -32,7 +40,8 @@ import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ResetDashboardScreen.KEY)
-open class ResetDashboardScreen : PreferenceScreenMixin, PreferenceAvailabilityProvider {
+open class ResetDashboardScreen :
+    PreferenceScreenMixin, PreferenceAvailabilityProvider, PreferenceLifecycleProvider {
     override val key: String
         get() = KEY
 
@@ -62,8 +71,44 @@ open class ResetDashboardScreen : PreferenceScreenMixin, PreferenceAvailabilityP
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {}
 
+    private var factoryResetRestrictionObserver: KeyedObserver<String>? = null
+
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        super.onCreate(context)
+        if (!FactoryResetFlags.fixFactoryResetPreferenceOnRestrictionChange()) return
+        val restrictedPreference: RestrictedPreference =
+            context.findPreference(FACTORY_RESET_KEY) ?: return
+        factoryResetRestrictionObserver = KeyedObserver { _, _ ->
+            restrictedPreference.checkRestrictionAndSetDisabled(
+                UserManager.DISALLOW_FACTORY_RESET
+            )
+            context.notifyPreferenceChange(FACTORY_RESET_KEY)
+        }
+        val userRestrictions = UserRestrictions.get(context)
+        userRestrictions.addObserver(
+            UserManager.DISALLOW_FACTORY_RESET,
+            factoryResetRestrictionObserver!!,
+            HandlerExecutor.main,
+        )
+    }
+
+    override fun onDestroy(context: PreferenceLifecycleContext) {
+        super.onDestroy(context)
+        if (FactoryResetFlags.fixFactoryResetPreferenceOnRestrictionChange()) {
+            if (factoryResetRestrictionObserver != null) {
+                val userRestrictions = UserRestrictions.get(context)
+                userRestrictions.removeObserver(
+                    UserManager.DISALLOW_FACTORY_RESET,
+                    factoryResetRestrictionObserver!!,
+                )
+                factoryResetRestrictionObserver = null
+            }
+        }
+    }
+
     companion object {
         const val KEY = "reset_dashboard"
+        const val FACTORY_RESET_KEY = "factory_reset"
     }
 }
 // LINT.ThenChange(

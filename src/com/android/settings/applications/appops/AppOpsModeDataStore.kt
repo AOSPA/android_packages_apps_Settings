@@ -22,6 +22,8 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.UserHandle
 import com.android.settings.applications.PackageInfoProvider
+import com.android.settings.applications.getPackageInfoWithPermissions
+import com.android.settings.applications.isPermissionGranted
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
@@ -40,14 +42,17 @@ import com.android.settingslib.utils.appops.removeAppOpsModeObserver
  * @param context context
  * @param packageInfoProvider provider of package info
  * @param op app op to observe
+ * @param permission permission to check in case of default op mode
  * @param setModeByUid whether to set op mode by uid (true) or by package (false), a null value
  *   means automatic detection by [android.app.AppOpsManager.opIsUidAppOpPermission]
+ * @param modeForDisabled op mode to be used in case of disabled
  */
 class AppOpsModeDataStore(
     private val preferenceKey: String,
     private val context: Context,
     private val packageInfoProvider: PackageInfoProvider,
     private val op: Int,
+    private val permission: String?,
     private val setModeByUid: Boolean?,
     private val modeForDisabled: Int = AppOpsManager.MODE_ERRORED,
 ) : AbstractKeyedDataObservable<String>(), KeyValueStore, KeyedObserver<String> {
@@ -60,11 +65,21 @@ class AppOpsModeDataStore(
     override fun contains(key: String) = key == preferenceKey
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : Any> getValue(key: String, valueType: Class<T>) =
-        (packageInfoProvider.packageInfo?.applicationInfo?.let {
-            appOpsManager.checkOpNoThrow(op, it.uid, it.packageName)
-        } == AppOpsManager.MODE_ALLOWED)
-            as T
+    override fun <T : Any> getValue(key: String, valueType: Class<T>): T =
+        packageInfoProvider.packageInfo?.applicationInfo?.let { appInfo ->
+            when (appOpsManager.checkOpNoThrow(op, appInfo.uid, appInfo.packageName)) {
+                AppOpsManager.MODE_ALLOWED -> true
+                AppOpsManager.MODE_DEFAULT -> {
+                    if (permission == null) {
+                        false
+                    } else {
+                        val packageInfo = context.getPackageInfoWithPermissions(appInfo.packageName)
+                        isPermissionGranted(packageInfo, permission)
+                    }
+                }
+                else -> false
+            }
+        } as T
 
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
         val appInfo = packageInfoProvider.packageInfo?.applicationInfo ?: return

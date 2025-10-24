@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth.ui.viewmodel
 
 import android.app.Application
-import android.bluetooth.BluetoothAdapter
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -77,8 +76,9 @@ class BluetoothDeviceDetailsViewModel(
         if (settingId == DeviceSettingId.DEVICE_SETTING_ID_MORE_SETTINGS) {
             return flowOf(DeviceSettingPreferenceModel.MoreSettingsPreference(settingId))
         }
-        return deviceSettingRepository.getDeviceSetting(cachedDevice, settingId)
-            .map { it?.toPreferenceModel() }
+        return deviceSettingRepository.getDeviceSetting(cachedDevice, settingId).map {
+            it?.toPreferenceModel()
+        }
     }
 
     private fun DeviceSettingModel.toPreferenceModel(): DeviceSettingPreferenceModel? {
@@ -128,6 +128,15 @@ class BluetoothDeviceDetailsViewModel(
                     onSelectedChange = { newState ->
                         updateState(DeviceSettingStateModel.MultiTogglePreferenceState(newState))
                     },
+                )
+            is DeviceSettingModel.BannerPreference ->
+                DeviceSettingPreferenceModel.BannerPreference(
+                    id = id,
+                    title = title,
+                    message = message,
+                    icon = icon,
+                    positiveButton = positiveButton,
+                    negativeButton = negativeButton,
                 )
             is DeviceSettingModel.Unknown -> null
         }

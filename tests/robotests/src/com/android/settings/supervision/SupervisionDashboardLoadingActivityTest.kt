@@ -26,13 +26,19 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.overlay.FeatureFactory
+import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.drawer.DashboardCategory
+import com.android.settingslib.ipc.MessengerService
+import com.android.settingslib.ipc.MessengerServiceRule
+import com.android.settingslib.ipc.PermissionChecker
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -42,6 +48,7 @@ import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Assert.fail
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -49,12 +56,19 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.stub
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowPackageManager
 import org.robolectric.shadows.ShadowRoleManager
+
+private val fakePreferenceDataApi = TestPreferenceDataApiImp()
+
+class FakeSupervisionMessengerService :
+    MessengerService(listOf(fakePreferenceDataApi), PermissionChecker { _, _, _ -> true })
 
 @Config(shadows = [SettingsShadowResources::class])
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
+@LooperMode(LooperMode.Mode.INSTRUMENTATION_TEST)
 class SupervisionDashboardLoadingActivityTest {
 
     private lateinit var activityScenario: ActivityScenario<SupervisionDashboardLoadingActivity>
@@ -64,6 +78,12 @@ class SupervisionDashboardLoadingActivityTest {
     private val testSupervisionPackage = "com.google.android.test.supervision"
     private val testDispatcher = UnconfinedTestDispatcher()
     private val testScope = TestScope(testDispatcher)
+
+    @get:Rule
+    val serviceRule =
+        MessengerServiceRule<SupervisionMessengerClient>(
+            FakeSupervisionMessengerService::class.java
+        )
 
     @Before
     fun setUp() {
@@ -82,10 +102,24 @@ class SupervisionDashboardLoadingActivityTest {
 
         applicationContext = ApplicationProvider.getApplicationContext<Context>()
         shadowPackageManager = shadowOf(applicationContext.packageManager)
+
+        fakePreferenceDataApi.preferenceData =
+            mapOf(
+                SupervisionPromoFooterPreference.KEY to
+                    PreferenceData(icon = 1, title = "Title 1", summary = "Summary 1"),
+                SupervisionAocFooterPreference.KEY to
+                    PreferenceData(icon = 2, title = "Title 2", summary = "Summary 2"),
+            )
+        ShadowRoleManager.addRoleHolder(
+            RoleManager.ROLE_SYSTEM_SUPERVISION,
+            testSupervisionPackage,
+            Process.myUserHandle(),
+        )
     }
 
     @After
     fun tearDown() {
+        ShadowRoleManager.reset()
         activityScenario.close()
         Dispatchers.resetMain()
     }
@@ -100,8 +134,10 @@ class SupervisionDashboardLoadingActivityTest {
             advanceUntilIdle()
 
             activityScenario.onActivity { activity ->
-                val nexActivity = shadowOf(activity).nextStartedActivity
-                assertThat(nexActivity.component?.className)
+                runBlocking { delay(2000L) }
+                advanceUntilIdle()
+                val nextActivity = shadowOf(activity).nextStartedActivity
+                assertThat(nextActivity.component?.className)
                     .isEqualTo(SupervisionDashboardActivity::class.java.name)
                 assertThat(activity.isFinishing).isTrue()
             }
@@ -117,8 +153,8 @@ class SupervisionDashboardLoadingActivityTest {
 
             activityScenario.onActivity { activity ->
                 activity.finish()
-                val nexActivity = shadowOf(activity).nextStartedActivity
-                assertThat(nexActivity).isNull()
+                val nextActivity = shadowOf(activity).nextStartedActivity
+                assertThat(nextActivity).isNull()
             }
 
             assertThat(activityScenario.result.resultCode).isEqualTo(Activity.RESULT_CANCELED)
@@ -161,6 +197,8 @@ class SupervisionDashboardLoadingActivityTest {
                 advanceUntilIdle()
 
                 activityScenario.onActivity { activity ->
+                    runBlocking { delay(2000L) }
+                    advanceUntilIdle()
                     val nextActivity = shadowOf(activity).nextStartedActivity
                     assertThat(nextActivity.component?.className)
                         .isEqualTo(SupervisionDashboardActivity::class.java.name)

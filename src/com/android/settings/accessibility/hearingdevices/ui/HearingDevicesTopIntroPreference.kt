@@ -32,6 +32,9 @@ class HearingDevicesTopIntroPreference(
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = false
+
     override fun createWidget(context: Context) = TopIntroPreference(context)
 
     override fun getTitle(context: Context): CharSequence? {
@@ -51,8 +54,6 @@ class HearingDevicesTopIntroPreference(
     }
 
     override fun isAvailable(context: Context): Boolean = helper.isHearingAidSupported
-
-    override fun isIndexable(context: Context): Boolean = false
 
     companion object {
         const val KEY = "hearing_device_intro"

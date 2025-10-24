@@ -26,8 +26,10 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
+import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.companion.CompanionDeviceManager;
@@ -102,7 +104,8 @@ public class BluetoothDeviceDetailsFragmentTest {
         doReturn(new int[] {TEST_DEVICE_ID}).when(mInputManager).getInputDeviceIds();
         doReturn(TEST_ADDRESS).when(mInputManager).getInputDeviceBluetoothAddress(TEST_DEVICE_ID);
 
-        ShadowApplication shadowApplication = ShadowApplication.getInstance();
+        ShadowApplication shadowApplication =
+                shadowOf((Application) ApplicationProvider.getApplicationContext());
         shadowApplication.setSystemService(
                 Context.COMPANION_DEVICE_SERVICE, mCompanionDeviceManager);
         shadowApplication.setSystemService(Context.INPUT_SERVICE, mInputManager);

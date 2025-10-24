@@ -147,6 +147,11 @@ public class ExternalDisplayUpdater {
                 return context.getString(R.string.external_display_on);
             }
         }
+        if (mInjector.getFlags().displayTopologyPaneInDisplayList()) {
+            // In the new DisplayTopology settings, connected display settings should be hidden
+            // when there's no enabled connected displays
+            return null;
+        }
         return allDisplays.isEmpty() ? null : context.getString(R.string.external_display_off);
     }
 

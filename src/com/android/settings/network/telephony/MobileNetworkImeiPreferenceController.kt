@@ -49,6 +49,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+// LINT.IfChange
 /** Preference controller for "IMEI" */
 class MobileNetworkImeiPreferenceController(context: Context, key: String) :
     TelephonyBasePreferenceController(context, key) {
@@ -206,3 +207,4 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
         private const val TAG = "MobileNetworkImeiPreferenceController"
     }
 }
+// LINT.ThenChange(MobileNetworkImeiPreference.kt)

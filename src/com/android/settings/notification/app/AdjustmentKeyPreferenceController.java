@@ -51,7 +51,8 @@ public class AdjustmentKeyPreferenceController extends
 
     @Override
     public boolean isAvailable() {
-        return isAvailable(mKey, mBackend, mAppRow.pkg, mAppRow.uid) && super.isAvailable();
+        return mAppRow != null && isAvailable(mKey, mBackend, mAppRow.pkg, mAppRow.uid)
+                && super.isAvailable();
     }
 
     static boolean isAvailable(String key, NotificationBackend backend, String pkg, int uid) {

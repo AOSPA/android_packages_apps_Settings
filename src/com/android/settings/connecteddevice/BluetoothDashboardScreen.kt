@@ -58,7 +58,7 @@ open class BluetoothDashboardScreen : PreferenceScreenMixin {
         preferenceHierarchy(context) {
             val bluetoothDataStore = BluetoothPreference.createDataStore(context)
             +BluetoothPreference(bluetoothDataStore)
-            if (Flags.catalystBluetoothDashboardScreen25q4()) {
+            if (Flags.deeplinkConnectedDevices25q4()) {
                 +BluetoothDeviceRenamePreference(bluetoothDataStore)
             }
             +BluetoothFooterPreference(bluetoothDataStore)

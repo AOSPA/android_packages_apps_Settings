@@ -18,10 +18,8 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.content.Intent;
 
 import androidx.preference.Preference;
@@ -33,11 +31,10 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 
 /** Tests for {@link BluetoothDetailsHearingDeviceSettingsController}. */
 @RunWith(RobolectricTestRunner.class)
@@ -47,8 +44,6 @@ public class BluetoothDetailsHearingDeviceSettingsControllerTest extends
     @Rule
     public final MockitoRule mockito = MockitoJUnit.rule();
 
-    @Captor
-    private ArgumentCaptor<Intent> mIntentArgumentCaptor;
     private BluetoothDetailsHearingDeviceSettingsController mController;
 
     @Override
@@ -83,13 +78,13 @@ public class BluetoothDetailsHearingDeviceSettingsControllerTest extends
 
         mController.onPreferenceClick(hearingDeviceSettingsPreference);
 
-        assertStartActivityWithExpectedFragment(mActivity,
-                AccessibilityHearingAidsFragment.class.getName());
+        assertStartActivityWithExpectedFragment(AccessibilityHearingAidsFragment.class.getName());
     }
 
-    private void assertStartActivityWithExpectedFragment(Context mockContext, String fragmentName) {
-        verify(mockContext).startActivity(mIntentArgumentCaptor.capture());
-        assertThat(mIntentArgumentCaptor.getValue()
+    private void assertStartActivityWithExpectedFragment(String fragmentName) {
+        Intent startedIntent = Shadows.shadowOf(mContext).getNextStartedActivity();
+
+        assertThat(startedIntent
                 .getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(fragmentName);
     }

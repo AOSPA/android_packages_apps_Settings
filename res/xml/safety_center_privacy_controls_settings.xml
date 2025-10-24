@@ -21,45 +21,53 @@
         android:key="privacy_manage_perms"
         android:title="@string/app_permissions"
         android:summary="@string/runtime_permissions_summary_control_app_access"
-        settings:controller="com.android.settings.privacy.ManagePermissionsPreferenceController"/>
+        settings:controller="com.android.settings.privacy.ManagePermissionsPreferenceController"
+        android:order="10" />
 
     <PreferenceCategory
         android:key="privacy_controls_page"
-        android:title="@string/privacy_controls_title">
-    <!-- Camera toggle -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="privacy_camera_toggle"
-        android:title="@string/camera_toggle_title"
-        android:summary="@string/perm_toggle_description"
-        settings:controller="com.android.settings.privacy.CameraToggleController"/>
+        android:title="@string/privacy_controls_title"
+        android:order="30">
 
-    <!-- Microphone toggle -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="privacy_mic_toggle"
-        android:title="@string/mic_toggle_title"
-        android:summary="@string/mic_toggle_description"
-        settings:controller="com.android.settings.privacy.MicToggleController"/>
+        <!-- Camera toggle -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="privacy_camera_toggle"
+            android:title="@string/camera_toggle_title"
+            android:summary="@string/perm_toggle_description"
+            settings:controller="com.android.settings.privacy.CameraToggleController"
+            android:order="40" />
 
-    <!-- Clipboard access notifications -->
-    <SwitchPreferenceCompat
-        android:key="show_clip_access_notification"
-        android:title="@string/show_clip_access_notification"
-        android:summary="@string/show_clip_access_notification_summary"
-        settings:controller="com.android.settings.privacy.ShowClipAccessNotificationPreferenceController"/>
+        <!-- Microphone toggle -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="privacy_mic_toggle"
+            android:title="@string/mic_toggle_title"
+            android:summary="@string/mic_toggle_description"
+            settings:controller="com.android.settings.privacy.MicToggleController"
+            android:order="50" />
 
-    <!-- Show passwords -->
-    <SwitchPreferenceCompat
-        android:key="show_password"
-        android:title="@string/show_password"
-        android:summary="@string/show_password_summary"
-        settings:controller="com.android.settings.security.ShowPasswordPreferenceController"/>
+        <!-- Clipboard access notifications -->
+        <SwitchPreferenceCompat
+            android:key="show_clip_access_notification"
+            android:title="@string/show_clip_access_notification"
+            android:summary="@string/show_clip_access_notification_summary"
+            settings:controller="com.android.settings.privacy.ShowClipAccessNotificationPreferenceController"
+            android:order="60" />
 
-    <!-- Location settings -->
-    <Preference
-        android:key="privacy_location_access"
-        android:title="@string/location_settings"
-        android:summary="@string/location_settings_subtitle"
-        android:fragment="com.android.settings.location.LocationSettings">
-    </Preference>
+        <!-- Show passwords -->
+        <SwitchPreferenceCompat
+            android:key="show_password"
+            android:title="@string/show_password"
+            android:summary="@string/show_password_summary"
+            settings:controller="com.android.settings.security.ShowPasswordPreferenceController"
+            android:order="70" />
+
+        <!-- Location settings -->
+        <Preference
+            android:key="privacy_location_access"
+            android:title="@string/location_settings"
+            android:summary="@string/location_settings_subtitle"
+            android:fragment="com.android.settings.location.LocationSettings"
+            android:order="80">
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>
