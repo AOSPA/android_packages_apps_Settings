@@ -150,7 +150,7 @@ public class BiometricEnrollActivityTest {
         final Intent intent = getIntent(true /* useInternal */, null);
         LockPatternChecker.verifyCredential(new LockPatternUtils(mContext),
                 LockscreenCredential.createPin(TEST_PIN), UserHandle.myUserId(),
-                LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE, (response, timeoutMs) -> {
+                LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE, response -> {
                     assertThat(response.containsGatekeeperPasswordHandle()).isTrue();
                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
                             response.getGatekeeperPasswordHandle());
@@ -172,7 +172,7 @@ public class BiometricEnrollActivityTest {
         final Intent intent = getFaceEnrollFirstIntent();
         LockPatternChecker.verifyCredential(new LockPatternUtils(mContext),
                 LockscreenCredential.createPin(TEST_PIN), UserHandle.myUserId(),
-                LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE, (response, timeoutMs) -> {
+                LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE, response -> {
                     assertThat(response.containsGatekeeperPasswordHandle()).isTrue();
                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
                             response.getGatekeeperPasswordHandle());

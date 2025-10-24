@@ -77,7 +77,7 @@
                     android:layout_below="@+id/app_title"
                     android:layout_alignStart="@+id/app_title"
                     android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:textColor="@color/materialColorOnSurfaceVariant"
                     android:maxLines="10"/>
             </RelativeLayout>
         </LinearLayout>
@@ -115,7 +115,7 @@
                 android:paddingTop="2dp"
                 android:gravity="center"
                 android:accessibilityLiveRegion="polite"
-                android:textColor="?android:attr/textColorSecondary"/>
+                android:textColor="@color/materialColorOnSurfaceVariant"/>
         </LinearLayout>
 
         <LinearLayout

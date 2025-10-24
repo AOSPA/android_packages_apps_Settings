@@ -175,7 +175,8 @@ public class AudioStreamMediaServiceTest {
         ReflectionHelpers.setField(mAudioStreamMediaService, "mBase", mContext);
         when(mAudioStreamMediaService.getSystemService(anyString()))
                 .thenReturn(mMediaSessionManager);
-        when(mMediaSessionManager.createSession(any(), anyString(), any())).thenReturn(mISession);
+        when(mMediaSessionManager.createSession(any(), anyString(), any(), any()))
+                .thenReturn(mISession);
         try {
             when(mISession.getController()).thenReturn(mISessionController);
         } catch (RemoteException e) {

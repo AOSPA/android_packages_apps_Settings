@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/remoteauth_settings_device_horizontal_margin"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/materialColorOnSurface"
                 android:textSize="@dimen/remoteauth_device_name_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/add_icon"
@@ -80,7 +80,7 @@
             android:layout_marginTop="@dimen/remoteauth_settings_top_margin"
             android:textSize="@dimen/remoteauth_fragment_subtitle_text_size"
             android:text="@string/security_settings_remoteauth_settings_info_footer"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/materialColorOnSurface" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
             android:layout_marginTop="@dimen/remoteauth_settings_top_margin"
             android:textSize="@dimen/remoteauth_fragment_subtitle_text_size"
             android:text="@string/security_settings_remoteauth_settings_learn_more"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/materialColorOnSurface" />
 
     </LinearLayout>
 

@@ -62,6 +62,9 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                 lifeCycleContext?.notifyPreferenceChange(KEY)
                 lifeCycleContext?.notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
                 lifeCycleContext?.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+                if (Flags.enableSupervisionSettingsUiUpdates()) {
+                    lifeCycleContext?.notifyPreferenceChange(SupervisionSetUpPinPreference.KEY)
+                }
             }
         }
 
@@ -126,6 +129,9 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                 +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2) order 0
             }
             +UntitledPreferenceCategoryMetadata("pin_management_group") order 100 += {
+                if (Flags.enableSupervisionSettingsUiUpdates()) {
+                    +SupervisionSetUpPinPreference() order 5
+                }
                 +SupervisionPinManagementScreen.KEY order 10
             }
             +UntitledPreferenceCategoryMetadata("footer_group") order 300 += {

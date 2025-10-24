@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="@color/materialColorOnSurface"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:paddingTop="16dp"/>
     <TextView
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textColor="@color/materialColorOnSurfaceVariant"
         android:paddingTop="16dp"
         android:lineSpacingMultiplier="1.2"/>
     <TextView
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textColor="@color/materialColorOnSurfaceVariant"
         android:lineSpacingMultiplier="1.2"
         android:paddingTop="16dp"/>
 </LinearLayout>

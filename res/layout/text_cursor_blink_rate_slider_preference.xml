@@ -56,7 +56,7 @@
             android:layout_gravity="start"
             android:textAlignment="viewStart"
             android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="@color/materialColorOnSurfaceVariant"
             android:maxLines="10"/>
 
         <include
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|top"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="@color/materialColorOnSurfaceVariant"
                 android:gravity="start"
                 android:layout_weight="1"/>
 
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|top"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="@color/materialColorOnSurfaceVariant"
                 android:gravity="end"
                 android:layout_weight="1"/>
         </LinearLayout>

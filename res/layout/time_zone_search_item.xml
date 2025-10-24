@@ -62,7 +62,7 @@
             android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
             android:maxLines="10"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="@color/materialColorOnSurfaceVariant"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/current_time"
             app:layout_constraintStart_toEndOf="@+id/selected_radio_button"
@@ -75,7 +75,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="@color/materialColorOnSurfaceVariant"
             app:layout_constraintBottom_toBottomOf="@id/summary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_goneMarginBottom="0dp" />

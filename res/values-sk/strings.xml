@@ -248,14 +248,10 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Presunúť nadol"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Odstrániť"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Presunúť na začiatok"</string>
-    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
-    <skip />
-    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"Presunúť jazyk <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> nahor"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"Presunúť jazyk <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> nadol"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"Odstrániť jazyk <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"Presunúť jazyk <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> na začiatok"</string>
     <string name="action_label_menu_option" msgid="6881627571783854975">"Upraviť zoznam jazykov systému (<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>)"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"krajina, územie"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"počasie, stupne celzia, stupne, teplota, celzius, fahrenheit"</string>
@@ -316,8 +312,7 @@
     <string name="apply" msgid="7834684883190163536">"Použiť"</string>
     <string name="share" msgid="8502235338607613795">"Zdieľať"</string>
     <string name="add" msgid="8335206931421683426">"Pridať"</string>
-    <!-- no translation found for verify (6452664472920137535) -->
-    <skip />
+    <string name="verify" msgid="6452664472920137535">"Overiť"</string>
     <string name="remove" msgid="1028414219245072102">"Odstrániť"</string>
     <string name="process" msgid="2614220641928709668">"Spracovať"</string>
     <!-- no translation found for dismiss (7878176050401175851) -->
@@ -4105,14 +4100,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Nástroj na usporiadanie upozornení"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Zoskupte upozornenia s nižšou prioritou a vypnite ich zvuk"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Správa aplikácií pre nástroj na usporiadanie upozornení"</string>
-    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
-    <skip />
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Rozbaľovať balíky"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automaticky"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Vždy rozbaľovať"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Nikdy nerozbaľovať"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Používať na aplikácie v pracovnom profile"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Pomocné služby VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Žiadne nainštalované aplikácie nežiadali, aby boli spúšťané ako pomocné služby VR."</string>
@@ -4390,7 +4381,7 @@
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Otvárať podporované odkazy"</string>
     <string name="app_launch_open_in_app" msgid="2208182888681699512">"V aplikácii"</string>
     <string name="app_launch_open_in_browser" msgid="766170191853009756">"V prehliadači"</string>
-    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Vyberte, ako sa majú v tejto aplikácii otvárať webové odkazy"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Vyberte, ako sa majú otvárať webové odkazy pre túto aplikáciu"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"Odkazy na otvorenie v tejto aplikácii"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Podporované odkazy"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Ďalšie predvolené predvoľby"</string>
@@ -5295,8 +5286,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Podporované aplikácie vo vašom telefóne"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM kartu sa nepodarilo pridať"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Pred pridaním SIM karty ukončite pripojenie k satelitu"</string>
-    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
-    <skip />
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Po pripojení cez Bluetooth sa bude režim v lietadle synchronizovať medzi podporovanými zariadeniami, ako sú telefón a hodinky."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Názvy prístupových bodov"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nie je k dispozícii pri pripojení k operátorovi <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5671,7 +5661,7 @@
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
     <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Používať Thread"</string>
     <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread vám pomáha pripájať sa k zariadeniam inteligentnej domácnosti a zvyšovať účinnosť aj výkon.\n\nKeď je táto možnosť zapnutá, toto zariadenie sa môže pripojiť k sieti Thread, čo vám umožní ovládať podporované zariadenia Matter týmto telefónom."</string>
-    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Ďalšie informácie o sieti Thread"</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Ďalšie informácie o protokole Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Prístup ku kamere"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Prístup k mikrofónu"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Pre aplikácie a služby"</string>
@@ -5977,14 +5967,10 @@
     <string name="supervision_pin_updated" msgid="660463938258442344">"Kód PIN bol aktualizovaný"</string>
     <string name="supervision_pin_changed" msgid="4822686882868075710">"Kód PIN bol zmenený"</string>
     <string name="supervision_pin_deleted" msgid="368631223166018476">"Kód PIN bol odstránený"</string>
-    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
-    <skip />
+    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"Overenie údajov na obnovenie"</string>
+    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"Váš účet na obnovenie nebol overený. Ak chcete účet overiť, musíte zadať jeho heslo."</string>
+    <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Pridanie údajov na obnovenie"</string>
+    <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Ak zabudnete kód PIN, môžete ho resetovať pomocou svojho účtu"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Odstrániť kód PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Pridať e‑mail na obnovenie"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Overenie e‑mailu"</string>
@@ -6055,6 +6041,5 @@
     <skip />
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Páruje sa"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> je pripojené"</string>
-    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
-    <skip />
+    <string name="safety_center_rescan_button" msgid="1290673104206018701">"Skontrolovať zariadenie"</string>
 </resources>

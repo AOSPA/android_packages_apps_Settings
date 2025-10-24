@@ -35,21 +35,19 @@ import com.android.internal.widget.LockscreenCredential
 import com.android.internal.widget.VerifyCredentialResponse
 import com.android.settings.biometrics2.utils.LockScreenUtil
 import com.google.common.truth.Truth.assertThat
+import java.io.IOException
 import org.junit.After
 import org.junit.Assume
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.io.IOException
 
 @Ignore
 @RunWith(AndroidJUnit4::class)
 class FingerprintEnrollmentActivityTest {
 
-    private val context: Context by lazy {
-        InstrumentationRegistry.getInstrumentation().context
-    }
+    private val context: Context by lazy { InstrumentationRegistry.getInstrumentation().context }
 
     private val fingerprintManager: FingerprintManager by lazy {
         context.getSystemService(FingerprintManager::class.java)!!
@@ -83,15 +81,17 @@ class FingerprintEnrollmentActivityTest {
                     val prop = list[0]
                     canAssumeUdfps = prop.isAnyUdfpsType
                     canAssumeSfps = prop.isAnySidefpsType
-                    enrollingPageTitle = if (canAssumeUdfps) {
-                        UDFPS_ENROLLING_TITLE
-                    } else if (canAssumeSfps) {
-                        SFPS_ENROLLING_TITLE
-                    } else {
-                        RFPS_ENROLLING_TITLE
-                    }
+                    enrollingPageTitle =
+                        if (canAssumeUdfps) {
+                            UDFPS_ENROLLING_TITLE
+                        } else if (canAssumeSfps) {
+                            SFPS_ENROLLING_TITLE
+                        } else {
+                            RFPS_ENROLLING_TITLE
+                        }
                 }
-            })
+            }
+        )
         var i: Long = 0
         while (i < IDLE_TIMEOUT && !fingerprintPropCallbackLaunched) {
             Thread.sleep(100L)
@@ -124,11 +124,12 @@ class FingerprintEnrollmentActivityTest {
         val intent = newActivityIntent(false)
         context.startActivity(intent)
         assertThat(
-            device.wait(
-                Until.hasObject(By.text("Choose your backup screen lock method")),
-                IDLE_TIMEOUT
+                device.wait(
+                    Until.hasObject(By.text("Choose your backup screen lock method")),
+                    IDLE_TIMEOUT,
+                )
             )
-        ).isTrue()
+            .isTrue()
     }
 
     @Test
@@ -181,9 +182,7 @@ class FingerprintEnrollmentActivityTest {
 
         // FindUdfps page
         assertThat(device.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
-        val lottie = device.findObject(
-            By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie")
-        )
+        val lottie = device.findObject(By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie"))
         assertThat(lottie).isNotNull()
         assertThat(lottie.isClickable).isTrue()
         val startBtn = device.findObject(By.text("Start"))
@@ -249,9 +248,7 @@ class FingerprintEnrollmentActivityTest {
 
         // FindSfps page
         assertThat(device.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
-        val lottie = device.findObject(
-            By.res(SETTINGS_PACKAGE_NAME,"illustration_lottie")
-        )
+        val lottie = device.findObject(By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie"))
         assertThat(lottie).isNotNull()
 
         // We don't have view which can be clicked to run to next page, stop at here.
@@ -279,16 +276,15 @@ class FingerprintEnrollmentActivityTest {
 
         // FindRfps page
         assertThat(device.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
-        val lottie = device.findObject(
-            By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie")
-        )
+        val lottie = device.findObject(By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie"))
         if (lottie == null) {
             // FindSfps page shall have an animation view if no lottie view
             assertThat(
-                device.findObject(
-                    By.res(SETTINGS_PACKAGE_NAME, "fingerprint_sensor_location_animation")
+                    device.findObject(
+                        By.res(SETTINGS_PACKAGE_NAME, "fingerprint_sensor_location_animation")
+                    )
                 )
-            ).isNotNull()
+                .isNotNull()
         }
     }
 
@@ -371,7 +367,8 @@ class FingerprintEnrollmentActivityTest {
         doItLaterBtn.click()
 
         // SkipSetupFindFpsDialog
-        assertThat(device.wait(Until.hasObject(By.text("Skip fingerprint?")), IDLE_TIMEOUT)).isTrue()
+        assertThat(device.wait(Until.hasObject(By.text("Skip fingerprint?")), IDLE_TIMEOUT))
+            .isTrue()
         val skipAnywayBtn = device.findObject(By.text("Skip anyway"))
         assertThat(skipAnywayBtn).isNotNull()
         assertThat(skipAnywayBtn.isClickable).isTrue()
@@ -409,7 +406,8 @@ class FingerprintEnrollmentActivityTest {
         doItLaterBtn.click()
 
         // SkipSetupFindFpsDialog
-        assertThat(device.wait(Until.hasObject(By.text("Skip fingerprint?")), IDLE_TIMEOUT)).isTrue()
+        assertThat(device.wait(Until.hasObject(By.text("Skip fingerprint?")), IDLE_TIMEOUT))
+            .isTrue()
         val goBackBtn = device.findObject(By.text("Go back"))
         assertThat(goBackBtn).isNotNull()
         assertThat(goBackBtn.isClickable).isTrue()
@@ -432,11 +430,12 @@ class FingerprintEnrollmentActivityTest {
         val intent = newActivityIntent(false)
         context.startActivity(intent)
         assertThat(
-            device.wait(
-                Until.hasObject(By.text("Enter your device PIN to continue")),
-                IDLE_TIMEOUT
+                device.wait(
+                    Until.hasObject(By.text("Enter your device PIN to continue")),
+                    IDLE_TIMEOUT,
+                )
             )
-        ).isTrue()
+            .isTrue()
     }
 
     @Test
@@ -467,9 +466,7 @@ class FingerprintEnrollmentActivityTest {
         // Enrolling screen
         device.waitForIdle()
         assertThat(device.wait(Until.hasObject(By.text(enrollingPageTitle)), IDLE_TIMEOUT)).isTrue()
-        val lottie = device.findObject(
-            By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie")
-        )
+        val lottie = device.findObject(By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie"))
         assertThat(lottie).isNotNull()
         lottie.click()
         lottie.click()
@@ -477,12 +474,7 @@ class FingerprintEnrollmentActivityTest {
 
         // IconTouchDialog
         device.waitForIdle()
-        assertThat(
-            device.wait(
-                Until.hasObject(By.text("Touch the sensor instead")),
-                IDLE_TIMEOUT
-            )
-        )
+        assertThat(device.wait(Until.hasObject(By.text("Touch the sensor instead")), IDLE_TIMEOUT))
             .isTrue()
         val okButton = device.findObject(By.text("OK"))
         assertThat(okButton).isNotNull()
@@ -510,9 +502,7 @@ class FingerprintEnrollmentActivityTest {
         // Enrolling screen
         device.waitForIdle()
         assertThat(device.wait(Until.hasObject(By.text(enrollingPageTitle)), IDLE_TIMEOUT)).isTrue()
-        val lottie = device.findObject(
-            By.res(SETTINGS_PACKAGE_NAME, "fingerprint_progress_bar")
-        )
+        val lottie = device.findObject(By.res(SETTINGS_PACKAGE_NAME, "fingerprint_progress_bar"))
         assertThat(lottie).isNotNull()
         lottie.click()
         lottie.click()
@@ -521,11 +511,12 @@ class FingerprintEnrollmentActivityTest {
         // IconTouchDialog
         device.waitForIdle()
         assertThat(
-            device.wait(
-                Until.hasObject(By.text("Whoops, that\u2019s not the sensor")),
-                IDLE_TIMEOUT
+                device.wait(
+                    Until.hasObject(By.text("Whoops, that\u2019s not the sensor")),
+                    IDLE_TIMEOUT,
+                )
             )
-        ).isTrue()
+            .isTrue()
         val okButton = device.findObject(By.text("OK"))
         assertThat(okButton).isNotNull()
         okButton.click()
@@ -551,9 +542,7 @@ class FingerprintEnrollmentActivityTest {
 
         // FindUdfps page
         assertThat(device.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
-        val lottie = device.findObject(
-            By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie")
-        )
+        val lottie = device.findObject(By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie"))
         assertThat(lottie).isNotNull()
         assertThat(lottie.isClickable).isTrue()
         val startBtn = device.findObject(By.text("Start"))
@@ -591,9 +580,7 @@ class FingerprintEnrollmentActivityTest {
 
         // FindUdfps page (landscape)
         assertThat(device.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
-        val lottie = device.findObject(
-            By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie")
-        )
+        val lottie = device.findObject(By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie"))
         assertThat(lottie).isNotNull()
         assertThat(lottie.isClickable).isTrue()
         val startBtn = device.findObject(By.text("Start"))
@@ -627,9 +614,7 @@ class FingerprintEnrollmentActivityTest {
 
         // FindUdfps page
         assertThat(device.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
-        val lottie = device.findObject(
-            By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie")
-        )
+        val lottie = device.findObject(By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie"))
         assertThat(lottie).isNotNull()
         assertThat(lottie.isClickable).isTrue()
         val startBtn = device.findObject(By.text("Start"))
@@ -656,9 +641,7 @@ class FingerprintEnrollmentActivityTest {
 
         // FindSfps page
         assertThat(device.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
-        val lottie = device.findObject(
-            By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie")
-        )
+        val lottie = device.findObject(By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie"))
         assertThat(lottie).isNotNull()
 
         // We don't have view which can be clicked to run to next page, stop at here.
@@ -680,22 +663,15 @@ class FingerprintEnrollmentActivityTest {
 
         // FindRfps page
         assertThat(device.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
-        val lottie = device.findObject(
-            By.res(
-                SETTINGS_PACKAGE_NAME,
-                "illustration_lottie"
-            )
-        )
+        val lottie = device.findObject(By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie"))
         if (lottie == null) {
             // FindSfps page shall have an animation view if no lottie view
             assertThat(
-                device.findObject(
-                    By.res(
-                        SETTINGS_PACKAGE_NAME,
-                        "fingerprint_sensor_location_animation"
+                    device.findObject(
+                        By.res(SETTINGS_PACKAGE_NAME, "fingerprint_sensor_location_animation")
                     )
                 )
-            ).isNotNull()
+                .isNotNull()
         }
     }
 
@@ -734,14 +710,17 @@ class FingerprintEnrollmentActivityTest {
         val lockscreenCredential = LockscreenCredential.createPin(TEST_PIN)
         val userId = UserHandle.myUserId()
         val onVerifyCallback =
-            LockPatternChecker.OnVerifyCallback { response: VerifyCredentialResponse, _: Int ->
+            LockPatternChecker.OnVerifyCallback { response: VerifyCredentialResponse ->
                 val intent = newActivityIntent(isSuw)
                 intent.putExtra(EXTRA_KEY_GK_PW_HANDLE, response.gatekeeperPasswordHandle)
                 context.startActivity(intent)
             }
         LockPatternChecker.verifyCredential(
-            lockPatternUtils, lockscreenCredential,
-            userId, LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE, onVerifyCallback
+            lockPatternUtils,
+            lockscreenCredential,
+            userId,
+            LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE,
+            onVerifyCallback,
         )
     }
 
@@ -750,15 +729,18 @@ class FingerprintEnrollmentActivityTest {
         val lockscreenCredential = LockscreenCredential.createPin(TEST_PIN)
         val userId = UserHandle.myUserId()
         val onVerifyCallback =
-            LockPatternChecker.OnVerifyCallback { response: VerifyCredentialResponse, _: Int ->
+            LockPatternChecker.OnVerifyCallback { response: VerifyCredentialResponse ->
                 val intent = newActivityIntent(false)
                 intent.putExtra(EXTRA_SKIP_INTRO, true)
                 intent.putExtra(EXTRA_KEY_GK_PW_HANDLE, response.gatekeeperPasswordHandle)
                 context.startActivity(intent)
             }
         LockPatternChecker.verifyCredential(
-            lockPatternUtils, lockscreenCredential,
-            userId, LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE, onVerifyCallback
+            lockPatternUtils,
+            lockscreenCredential,
+            userId,
+            LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE,
+            onVerifyCallback,
         )
     }
 
@@ -767,15 +749,18 @@ class FingerprintEnrollmentActivityTest {
         val lockscreenCredential = LockscreenCredential.createPin(TEST_PIN)
         val userId = UserHandle.myUserId()
         val onVerifyCallback =
-            LockPatternChecker.OnVerifyCallback { response: VerifyCredentialResponse, _: Int ->
+            LockPatternChecker.OnVerifyCallback { response: VerifyCredentialResponse ->
                 val intent = newActivityIntent(false)
                 intent.putExtra(EXTRA_SKIP_FIND_SENSOR, true)
                 intent.putExtra(EXTRA_KEY_GK_PW_HANDLE, response.gatekeeperPasswordHandle)
                 context.startActivity(intent)
             }
         LockPatternChecker.verifyCredential(
-            lockPatternUtils, lockscreenCredential,
-            userId, LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE, onVerifyCallback
+            lockPatternUtils,
+            lockscreenCredential,
+            userId,
+            LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE,
+            onVerifyCallback,
         )
     }
 
@@ -783,7 +768,7 @@ class FingerprintEnrollmentActivityTest {
         val intent = Intent()
         intent.setClassName(
             SETTINGS_PACKAGE_NAME,
-            if (isSuw) SUW_ACTIVITY_CLASS_NAME else ACTIVITY_CLASS_NAME
+            if (isSuw) SUW_ACTIVITY_CLASS_NAME else ACTIVITY_CLASS_NAME,
         )
         if (isSuw) {
             intent.putExtra(EXTRA_IS_SETUP_FLOW, true)

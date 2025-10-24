@@ -35,6 +35,7 @@ import org.xmlpull.v1.XmlPullParser
  */
 object SafetyCenterSubpageRegistry {
     private const val TAG = "SCSubpageRegistry"
+    private const val STRING_RES_PREFIX = "@"
     private const val ATTR_SAFETY_SOURCE = "safetySource"
     private const val TAG_SAFETY_SOURCE_PREFERENCE =
         "com.android.settingslib.safetycenter.SafetySourcePreference"
@@ -42,19 +43,49 @@ object SafetyCenterSubpageRegistry {
 
     /** Enum representing the unique keys for each subpage. */
     enum class SubpageKey {
-        DEVICE_UNLOCK
+        APP_SECURITY,
+        DEVICE_UNLOCK,
+        ACCOUNT_SECURITY,
+        DEVICE_FINDERS,
+        SYSTEM_AND_UPDATES,
+        CELLULAR_NETWORK_SECURITY,
+        PRIVACY_CONTROLS,
     }
 
     /** Maps Subpage key to its XML resource containing SafetySourcePreference tags. */
     private val subpageXmlResources =
-        mapOf(SubpageKey.DEVICE_UNLOCK to R.xml.safety_center_device_unlock_subpage)
+        mapOf(
+            SubpageKey.APP_SECURITY to R.xml.safety_center_app_security_subpage,
+            SubpageKey.DEVICE_UNLOCK to R.xml.safety_center_device_unlock_subpage,
+            SubpageKey.ACCOUNT_SECURITY to R.xml.safety_center_account_security_subpage,
+            SubpageKey.DEVICE_FINDERS to R.xml.safety_center_device_finders_subpage,
+            SubpageKey.SYSTEM_AND_UPDATES to R.xml.safety_center_system_and_updates_subpage,
+            SubpageKey.CELLULAR_NETWORK_SECURITY to
+                R.xml.safety_center_cellular_network_security_subpage,
+            SubpageKey.PRIVACY_CONTROLS to R.xml.safety_center_privacy_controls_settings,
+        )
 
     /**
      * Maps Subpage key to a List of safety source IDs that ONLY provide issues, not full entries.
      * These are not defined in the XML.
      */
     private val subpageIssueOnlySources =
-        mapOf<SubpageKey, List<String>>(SubpageKey.DEVICE_UNLOCK to emptyList())
+        mapOf<SubpageKey, List<String>>(
+            SubpageKey.APP_SECURITY to emptyList(),
+            SubpageKey.DEVICE_UNLOCK to listOf("AndroidIdentityCheck"),
+            SubpageKey.ACCOUNT_SECURITY to emptyList(),
+            SubpageKey.DEVICE_FINDERS to emptyList(),
+            SubpageKey.SYSTEM_AND_UPDATES to emptyList(),
+            SubpageKey.CELLULAR_NETWORK_SECURITY to emptyList(),
+            SubpageKey.PRIVACY_CONTROLS to
+                listOf(
+                    "AndroidAccessibility",
+                    "AndroidNotificationListener",
+                    "AndroidBackgroundLocation",
+                    "AndroidPermissionAutoRevoke",
+                    "AndroidCertificateTransparency",
+                ),
+        )
 
     // Cache to store parsed safety source IDs from XML
     private val parsedSubpageSafetySourcesCache = mutableMapOf<SubpageKey, List<String>>()
@@ -91,9 +122,27 @@ object SafetyCenterSubpageRegistry {
         return subpageIssueOnlySources[subpageKey] ?: emptyList()
     }
 
+    private fun parseSafetySourceAttribute(context: Context, sourceIdAttr: String?): String? {
+        if (sourceIdAttr.isNullOrBlank()) {
+            return null
+        }
+
+        return if (sourceIdAttr.startsWith(STRING_RES_PREFIX)) {
+            try {
+                val resId = sourceIdAttr.substring(1).toInt()
+                context.getString(resId)
+            } catch (e: Exception) {
+                Log.e(TAG, "Could not get string for $sourceIdAttr", e)
+                null
+            }
+        } else {
+            sourceIdAttr
+        }
+    }
+
     /**
      * Parses an XML preference screen to extract safetySource attributes from
-     * SafetySourcePreference tags.
+     * SafetySourcePreference tags. It resolves string references.
      */
     private fun parseSafetySourcesFromXml(context: Context, @XmlRes xmlResId: Int): List<String> {
         val safetySourceIds = mutableListOf<String>()
@@ -105,10 +154,17 @@ object SafetyCenterSubpageRegistry {
                         eventType == XmlPullParser.START_TAG &&
                             parser.name == TAG_SAFETY_SOURCE_PREFERENCE
                     ) {
-                        val sourceId =
+                        val sourceIdAttr =
                             parser.getAttributeValue(RES_AUTO_NAMESPACE, ATTR_SAFETY_SOURCE)
-                        if (!sourceId.isNullOrBlank()) {
-                            safetySourceIds.add(sourceId)
+                        parseSafetySourceAttribute(context, sourceIdAttr)?.let {
+                            if (it.isNotBlank()) {
+                                safetySourceIds.add(it)
+                            } else {
+                                Log.w(
+                                    TAG,
+                                    "Parsed safety source ID is blank for attribute: $sourceIdAttr",
+                                )
+                            }
                         }
                     }
                     eventType = parser.next()

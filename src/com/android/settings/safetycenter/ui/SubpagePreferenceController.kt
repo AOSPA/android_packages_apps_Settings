@@ -45,7 +45,7 @@ import kotlin.math.max
 // Suppressing MissingPermission lint: The Settings app holds the MANAGE_SAFETY_CENTER permission,
 // which is required by the SafetyCenterManager APIs used by the ViewModel.
 @SuppressLint("MissingPermission")
-class SubpagePreferenceController(context: Context, preferenceKey: String) :
+open class SubpagePreferenceController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
 
     private var preference: Preference? = null
@@ -101,6 +101,14 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
         this.defaultSummaryResId = resId
     }
 
+    protected open fun setIcon(preference: Preference, icon: Drawable?) {
+        preference.icon = icon
+    }
+
+    protected open fun setVisibility(preference: Preference, isVisible: Boolean) {
+        preference.isVisible = isVisible
+    }
+
     override fun getAvailabilityStatus(): Int {
         return AVAILABLE
     }
@@ -108,6 +116,15 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)
+        preference?.let { setVisibility(it, false) }
+    }
+
+    override fun updateState(preference: Preference?) {
+        super.updateState(preference)
+        val model = viewModel
+        if (preference != null && model != null) {
+            updatePreferenceUi(preference, model.getCurrentSafetyCenterDataAsUiData())
+        }
     }
 
     /**
@@ -124,7 +141,7 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
         val highestSeverityIssueOnlySafetySourceIssue =
             relatedIssueOnlySafetySourcesData.maxByOrNull { it.severityLevel }
 
-        preference.icon = getSubpageIcon(subpageMaxSeverity, relatedSafetySourcesData)
+        setIcon(preference, getSubpageIcon(subpageMaxSeverity, relatedSafetySourcesData))
         preference.summary =
             getSubpageSummary(
                 data,
@@ -132,6 +149,7 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
                 highestSeverityIssueOnlySafetySourceIssue,
                 subpageMaxSeverity,
             )
+        setVisibility(preference, relatedSafetySourcesData.isNotEmpty())
         Log.d(TAG, "[$preferenceKey] UI updated with max severity: $subpageMaxSeverity")
     }
 

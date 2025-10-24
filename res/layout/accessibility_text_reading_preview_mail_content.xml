@@ -43,7 +43,7 @@
                 android:text="@string/accessibility_text_reading_preview_mail_subject"
                 android:textSize="14sp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="?android:attr/textColorPrimary"/>
+                android:textColor="@color/materialColorOnSurface"/>
 
             <TextView
                 android:id="@+id/from"
@@ -53,7 +53,7 @@
                 android:paddingTop="11dp"
                 android:textSize="12sp"
                 android:text="@string/accessibility_text_reading_preview_mail_from"
-                android:textColor="?android:attr/textColorSecondary"/>
+                android:textColor="@color/materialColorOnSurfaceVariant"/>
 
             <TextView
                 android:id="@+id/content"
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
                 android:text="@string/accessibility_text_reading_preview_mail_content"
-                android:textColor="?android:attr/textColorPrimary"/>
+                android:textColor="@color/materialColorOnSurface"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

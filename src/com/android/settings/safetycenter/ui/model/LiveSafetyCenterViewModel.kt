@@ -18,6 +18,7 @@ package com.android.settings.safetycenter.ui.model
 
 import android.Manifest
 import android.app.Application
+import android.permission.flags.Flags
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterErrorDetails
 import android.safetycenter.SafetyCenterIssue
@@ -124,6 +125,19 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
     @RequiresPermission(Manifest.permission.MANAGE_SAFETY_CENTER)
     override fun dismissIssue(issue: SafetyCenterIssue) {
         safetyCenterManager.dismissSafetyCenterIssue(issue.id)
+    }
+
+    @RequiresPermission(Manifest.permission.MANAGE_SAFETY_CENTER)
+    override fun executeIssueAction(
+        issue: SafetyCenterIssue,
+        action: SafetyCenterIssue.Action,
+        launchTaskId: Int,
+    ) {
+        if (Flags.openSafetyCenterApis()) {
+            safetyCenterManager.executeSafetyCenterIssueAction(issue.id, action.id, launchTaskId)
+        } else {
+            safetyCenterManager.executeSafetyCenterIssueAction(issue.id, action.id)
+        }
     }
 }
 

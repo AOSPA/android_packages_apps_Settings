@@ -60,4 +60,17 @@ abstract class SafetyCenterViewModel(protected val app: Application) : AndroidVi
      * @param issue The issue to be dismissed by the framework.
      */
     abstract fun dismissIssue(issue: SafetyCenterIssue)
+
+    /**
+     * Executes the given [action] to address the [issue].
+     *
+     * @param issue The issue the action belongs to.
+     * @param action The action to execute.
+     * @param launchTaskId The task ID to launch the action in.
+     */
+    abstract fun executeIssueAction(
+        issue: SafetyCenterIssue,
+        action: SafetyCenterIssue.Action,
+        launchTaskId: Int,
+    )
 }

@@ -248,14 +248,10 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Flytt ned"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Fjern"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Flytt til toppen"</string>
-    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
-    <skip />
-    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"Flytt <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> opp"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"Flytt <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> ned"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"Fjern <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"Flytt <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> til toppen"</string>
     <string name="action_label_menu_option" msgid="6881627571783854975">"Endre systemspråklisten, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"land, territorium"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"vær, grader, temperatur, celsius, fahrenheit"</string>
@@ -3834,7 +3830,7 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Endre"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Tidsplaner"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Tidsplan"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Tidspunkt for auto-påslåing"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Når skal den aktiveres automatisk?"</string>
     <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Aktivitetsoversikt"</string>
     <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Slå på under aktiviteter for"</string>
     <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Der invitasjonssvaret er"</string>
@@ -4105,14 +4101,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Varselorganisering"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Gruppér og kutt lyden for varsler med lavere prioritet"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Administrer apper for varselorganisering"</string>
-    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
-    <skip />
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Utvidelse av pakke"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automatisk"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Vis alltid"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Aldri vis"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Bruk på apper i jobbprofilen"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Hjelpetjenester for VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ingen av de installerte appene har bedt om å bli kjørt som hjelpetjeneste for VR."</string>
@@ -5295,8 +5287,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Støttede apper på telefonen"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Kan ikke legge til SIM-kort"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Avslutt satellittilkoblingen før du legger til et SIM-kort"</string>
-    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
-    <skip />
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Når støttede enheter er koblet sammen via Bluetooth, synkroniseres flymodus mellom dem, for eksempel telefoner og klokker"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Navn på tilgangspunkt"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Utilgjengelig når du er koblet til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>

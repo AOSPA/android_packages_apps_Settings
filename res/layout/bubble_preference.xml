@@ -46,7 +46,7 @@
             android:fontFamily="@*android:string/config_headlineFontFamily"
             android:minHeight="56dp"
             android:text="@string/bubble_app_setting_all"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="@color/materialColorOnSurfaceVariant" />
 
         <RadioButton
             android:id="@+id/bubble_selected"
@@ -57,7 +57,7 @@
             android:fontFamily="@*android:string/config_headlineFontFamily"
             android:minHeight="56dp"
             android:text="@string/bubble_app_setting_selected"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="@color/materialColorOnSurfaceVariant" />
 
         <RadioButton
             android:id="@+id/bubble_none"
@@ -68,6 +68,6 @@
             android:fontFamily="@*android:string/config_headlineFontFamily"
             android:minHeight="56dp"
             android:text="@string/bubble_app_setting_none"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="@color/materialColorOnSurfaceVariant" />
     </RadioGroup>
 </LinearLayout>
