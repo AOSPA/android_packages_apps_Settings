@@ -374,6 +374,9 @@ public class WifiConfigController2 implements TextWatcher,
             mEditConfigurationSwitch.setChecked(editConfigDefault);
 
             mSharedSwitch.setOnCheckedChangeListener(this);
+            if (mMode == WifiConfigUiBase2.MODE_LOGIN_SCREEN) {
+                setSharedNetworkFieldsInvisible();
+            }
         }
 
         if (mWifiEntry == null) { // new network
@@ -452,14 +455,9 @@ public class WifiConfigController2 implements TextWatcher,
 
             if (mMode == WifiConfigUiBase2.MODE_MODIFY) {
                 mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
-            } else if (mMode == WifiConfigUiBase2.MODE_CONNECT) {
+            } else if (mMode == WifiConfigUiBase2.MODE_CONNECT
+                    || mMode == WifiConfigUiBase2.MODE_LOGIN_SCREEN) {
                 mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
-            } else if (mMode == WifiConfigUiBase2.MODE_LOGIN_SCREEN) {
-                mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
-                mSharedNetworkLoginScreenWarning.setVisibility(View.VISIBLE);
-                mView.findViewById(R.id.sharing_toggle_fields).setVisibility(View.GONE);
-                mView.findViewById(R.id.edit_wifi_network_configuration_fields)
-                        .setVisibility(View.GONE);
             } else {
                 final String signalLevel = getSignalString();
 
@@ -1435,6 +1433,13 @@ public class WifiConfigController2 implements TextWatcher,
 
     private void setEapMethodInvisible() {
         mView.findViewById(R.id.eap).setVisibility(View.GONE);
+    }
+
+    private void setSharedNetworkFieldsInvisible() {
+        mSharedNetworkLoginScreenWarning.setVisibility(View.VISIBLE);
+        mView.findViewById(R.id.sharing_toggle_fields).setVisibility(View.GONE);
+        mView.findViewById(R.id.edit_wifi_network_configuration_fields)
+                .setVisibility(View.GONE);
     }
 
     private void showIpConfigFields() {
