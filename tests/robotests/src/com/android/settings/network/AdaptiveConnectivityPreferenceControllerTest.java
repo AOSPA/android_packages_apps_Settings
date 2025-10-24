@@ -185,4 +185,30 @@ public class AdaptiveConnectivityPreferenceControllerTest {
         assertThat(mController.getSummary()).isEqualTo(
                 mContext.getString(R.string.adaptive_connectivity_switch_off));
     }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void getSummary_newSettingsNotSet_fallbackToEnabled_shouldShowOn() {
+        // When the new settings are not set, the controller should fall back to the old global
+        // setting. Set the old setting to ON.
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 1);
+
+        // Verify the summary shows "On".
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.adaptive_connectivity_switch_on));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void getSummary_newSettingsNotSet_fallbackToDisabled_shouldShowOff() {
+        // When the new settings are not set, the controller should fall back to the old global
+        // setting. Set the old setting to OFF.
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 0);
+
+        // Verify the summary shows "Off".
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.adaptive_connectivity_switch_off));
+    }
 }
