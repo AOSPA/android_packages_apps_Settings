@@ -16,13 +16,24 @@
 package com.android.settings.supervision
 
 import android.app.Activity
+import android.app.role.RoleManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
+import android.content.Intent
+import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import android.provider.Settings
 import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
+import androidx.preference.PreferenceGroup
+import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
@@ -37,10 +48,14 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Answers.CALLS_REAL_METHODS
+import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.kotlin.UseConstructor.Companion.withArguments
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.robolectric.annotation.LooperMode
@@ -52,8 +67,13 @@ class SupervisionDashboardScreenTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 
-    private val mockLifeCycleContext = mock<PreferenceLifecycleContext>()
+    private val mockLifeCycleContext =
+        mock<PreferenceLifecycleContext>(
+            useConstructor = withArguments(context),
+            defaultAnswer = CALLS_REAL_METHODS,
+        )
     private val mockSupervisionManager = mock<SupervisionManager>()
+    private val mockRoleManager = mock<RoleManager>()
 
     @get:Rule val setFlagsRule = SetFlagsRule()
 
@@ -68,6 +88,7 @@ class SupervisionDashboardScreenTest {
         mockLifeCycleContext.stub {
             on { preferenceScreenKey } doReturn preferenceScreenCreator.bindingKey
             on { getSystemService(SupervisionManager::class.java) } doReturn mockSupervisionManager
+            on { getSystemService(RoleManager::class.java) } doReturn mockRoleManager
         }
     }
 
@@ -197,5 +218,78 @@ class SupervisionDashboardScreenTest {
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionSetUpPinPreference.KEY)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_supervisionSettingsUiUpdatesEnabled_nonEmptySupervisionAppsList_supervisionAppsGroupVisible() {
+        val testPackageName = "com.android.settings.test"
+        val testLabel = "testLabel"
+        val testActivity = "com.android.settings.test.TestActivity"
+        val testIcon = ColorDrawable(Color.RED)
+
+        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn listOf(testPackageName) }
+
+        val testActivityInfo =
+            mock<ActivityInfo>() {
+                on { loadIcon(any()) } doReturn testIcon
+                on { loadLabel(any()) } doReturn testLabel
+            }
+        testActivityInfo.packageName = testPackageName
+        testActivityInfo.name = testActivity
+        val resolveInfoList = listOf(ResolveInfo().apply { activityInfo = testActivityInfo })
+        val mockPackageManager =
+            mock<PackageManager> {
+                on { queryIntentActivities(any<Intent>(), anyInt()) } doReturn resolveInfoList
+            }
+        mockLifeCycleContext.stub { on { packageManager } doReturn mockPackageManager }
+        val supervisionAppsGroup = PreferenceCategory(context)
+        PreferenceManager(context)
+            .createPreferenceScreen(context)
+            .addPreference(supervisionAppsGroup)
+        mockLifeCycleContext.stub {
+            on {
+                findPreference<PreferenceGroup>(
+                    SupervisionDashboardScreen.ACTIVE_SUPERVISION_APPS_GROUP
+                )
+            } doReturn supervisionAppsGroup
+        }
+
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+
+        assertThat(supervisionAppsGroup.isVisible).isTrue()
+        assertThat(supervisionAppsGroup.preferenceCount).isEqualTo(1)
+        assertThat(supervisionAppsGroup.getPreference(0).intent?.action)
+            .isEqualTo(Settings.MANAGE_SUPERVISION_APP_SETTINGS)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_supervisionSettingsUiUpdatesDisabled_emptySupervisionAppsList_supervisionAppsGroupIsNotVisible() {
+        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn emptyList() }
+        val supervisionAppsGroup = PreferenceCategory(context, null)
+        mockLifeCycleContext.stub {
+            on {
+                findPreference<PreferenceGroup>(
+                    SupervisionDashboardScreen.ACTIVE_SUPERVISION_APPS_GROUP
+                )
+            } doReturn supervisionAppsGroup
+        }
+
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+
+        assertThat(supervisionAppsGroup.isVisible).isFalse()
+        assertThat(supervisionAppsGroup.preferenceCount).isEqualTo(0)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_supervisionSettingsUiUpdatesDisabled_doNotAttemptToLoadSupervisionAppsList() {
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+
+        verify(mockLifeCycleContext, never())
+            .findPreference<PreferenceGroup>(
+                SupervisionDashboardScreen.ACTIVE_SUPERVISION_APPS_GROUP
+            )
     }
 }
