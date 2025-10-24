@@ -104,9 +104,17 @@ class SupervisionPinManagementScreenTest {
     }
 
     @Test
-    fun getTitle() {
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun getTitle_withoutUiUpdates() {
         assertThat(supervisionPinManagementScreen.title)
             .isEqualTo(R.string.supervision_pin_management_preference_title)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun getTitle() {
+        assertThat(supervisionPinManagementScreen.title)
+            .isEqualTo(R.string.supervision_manage_pin_preference_title)
     }
 
     @Test
