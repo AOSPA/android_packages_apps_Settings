@@ -91,15 +91,15 @@ class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) :
     override fun enableDefaultDisplayInTopologySwitchBugfix(): Boolean =
         enableDefaultDisplayInTopologySwitchBugfixFlag.isTrue
 
-    private val enableResolutionApplyConfirmationBugfix =
+    private val enableResolutionConfirmDialogBugfix =
         DesktopExperienceFlag(
-            featureFlagsImpl::enableResolutionApplyConfirmationBugfix,
+            featureFlagsImpl::enableResolutionConfirmDialogBugfix,
             /* shouldOverrideByDevOption= */ false,
-            Flags.FLAG_ENABLE_RESOLUTION_APPLY_CONFIRMATION_BUGFIX,
+            Flags.FLAG_ENABLE_RESOLUTION_CONFIRM_DIALOG_BUGFIX,
         )
 
-    override fun enableResolutionApplyConfirmationBugfix(): Boolean =
-        enableResolutionApplyConfirmationBugfix.isTrue
+    override fun enableResolutionConfirmDialogBugfix(): Boolean =
+        enableResolutionConfirmDialogBugfix.isTrue
 
     private val enableDisplayBlockArrowMovementBugfixFlag =
         DesktopExperienceFlag(
