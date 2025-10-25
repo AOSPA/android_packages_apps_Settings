@@ -38,13 +38,19 @@ object MSDLPlayerWrapper {
      * This function is only meant to be called once during initialization of the client app
      *
      * @param context The context in which the player is created. Used to access system services.
+     * @param explicitPlayer An explicit player to use. It should only be set for testing purposes.
      */
-    fun createPlayer(context: Context) {
-        if (::internalPlayer.isInitialized) return
+    @JvmOverloads
+    fun createPlayer(context: Context, explicitPlayer: MSDLPlayer? = null) {
+        if (explicitPlayer != null) {
+            internalPlayer = explicitPlayer
+        } else {
+            if (::internalPlayer.isInitialized) return
 
-        val vibratorManager =
-            context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-        internalPlayer = MSDLPlayer.createPlayer(vibratorManager.defaultVibrator)
+            val vibratorManager =
+                context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+            internalPlayer = MSDLPlayer.createPlayer(vibratorManager.defaultVibrator)
+        }
     }
 
     @JvmOverloads
