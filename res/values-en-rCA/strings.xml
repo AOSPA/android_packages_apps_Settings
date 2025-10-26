@@ -1029,10 +1029,8 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Connect an external display to get started, or try using a different cable"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"More options"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Hold and drag to rearrange displays"</string>
-    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
-    <skip />
-    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
-    <skip />
+    <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Tap to show navigation arrows"</string>
+    <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Tap arrows to rearrange displays"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Mirror built-in display"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Use new settings?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"If your display isn’t working as you’d like, you can revert to your previous settings"</string>
@@ -1042,6 +1040,10 @@
     <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"Move down"</string>
     <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"Move left"</string>
     <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"Move right"</string>
+    <string name="external_display_topology_a11y_display_moved_up" msgid="2006298475752942395">"Display: %1$s moved up"</string>
+    <string name="external_display_topology_a11y_display_moved_down" msgid="6028544722984648702">"Display: %1$s moved down"</string>
+    <string name="external_display_topology_a11y_display_moved_left" msgid="5308110789317472437">"Display: %1$s moved left"</string>
+    <string name="external_display_topology_a11y_display_moved_right" msgid="3802527156765844475">"Display: %1$s moved right"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirror"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Enable wireless display"</string>
@@ -1325,6 +1327,7 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / Compatible with many devices"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / Compatible with few devices"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2.4 and 5 GHz / Compatible with most devices"</string>
+    <string name="wifi_hotspot_speed_summary_2g_and_6g" msgid="5903589948734876821">"2.4 and 6 GHz / Compatible with most devices"</string>
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Choose a frequency for your hotspot. The frequency affects the connection speed and what types of devices can find your hotspot."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Preferred frequency"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
@@ -1335,6 +1338,8 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Fast speeds. This dual-band hotspot is compatible with most devices."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Fastest speeds. Compatible with few devices."</string>
+    <string name="wifi_hotspot_speed_2g_6g" msgid="7660263835445953086">"2.4 and 6 GHz"</string>
+    <string name="wifi_hotspot_speed_2g_6g_summary" msgid="5013590436817464652">"Fastest speeds. This dual-band hotspot is compatible with most devices."</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Not available in your country or region"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"If your preferred frequency isn\'t available, your hotspot may use a different one. Hotspot security settings may change if you change the frequency."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Not available with 6 GHz"</string>
@@ -5959,6 +5964,7 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Set up a parental controls PIN"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"supervision, parental controls, parents, supervision pin, pin"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Manage your PIN"</string>
+    <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Manage parental controls PIN"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Parental controls PIN"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Parent PIN, Parental controls PIN"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Add recovery email"</string>

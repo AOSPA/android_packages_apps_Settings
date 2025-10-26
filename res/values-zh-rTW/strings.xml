@@ -538,7 +538,7 @@
     <string name="security_settings_remoteauth_enroll_introduction_more" msgid="1644105894631257595">"顯示更多"</string>
     <string name="security_settings_remoteauth_enroll_introduction_how_title" msgid="6604152528267830349">"運作方式"</string>
     <string name="security_settings_remoteauth_enroll_introduction_info_lock_open" msgid="8570511335628725116">"你的智慧手錶必須處於解鎖狀態，並戴在手腕上，而且要在這支手機的連線範圍內。如果智慧手錶已戴在手腕上，就不必再解鎖智慧手錶。"</string>
-    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" msgid="4298855831154039694">"手機解鎖後，手錶上會顯示通知。如果不小心解鎖手機，只要輕觸通知，即可再次鎖定。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" msgid="4298855831154039694">"手機解鎖時，手錶上也會顯示通知。如果是意外解鎖手機，只要輕觸手錶上的通知，即可再次鎖定。"</string>
     <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title" msgid="7974976673323638524">"一切由你掌控"</string>
     <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"你隨時可以前往「設定」中的「智慧手錶解鎖」移除手錶"</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"輕觸通知"</string>
@@ -749,10 +749,10 @@
     <string name="private_space_exit_label" msgid="2358175237993013881">"結束"</string>
     <string name="private_space_error_description" msgid="6591005734266923120">"私人空間目前無法使用。\n查看可能的原因"</string>
     <string name="private_space_error_causes_text" msgid="1649162505129365620">"查看可能原因"</string>
-    <string name="private_space_lockscreen_title" msgid="5785259588888586366">"要選擇新的私人空間鎖定方式嗎？"</string>
-    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"你可以專為私人空間設定新的鎖定方式，也可以直接使用裝置的螢幕鎖定方式"</string>
+    <string name="private_space_lockscreen_title" msgid="5785259588888586366">"要為私人空間設定新的鎖定方式嗎？"</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"你可以為私人空間設定一個新的鎖定方式，也可以直接使用裝置的螢幕鎖定方式"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"使用螢幕鎖定功能"</string>
-    <string name="private_space_set_lock_label" msgid="1790408277477408475">"選擇新的鎖定方式"</string>
+    <string name="private_space_set_lock_label" msgid="1790408277477408475">"選用新的鎖定方式"</string>
     <string name="private_space_wait_screen_title" msgid="1535431437075585381">"請稍候…"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"大功告成！"</string>
     <string name="private_space_access_text" msgid="4433988836344567888">"如要尋找私人空間，請前往應用程式清單並向下捲動畫面"</string>
@@ -1042,6 +1042,14 @@
     <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"向下移"</string>
     <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"向左移"</string>
     <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"向右移"</string>
+    <!-- no translation found for external_display_topology_a11y_display_moved_up (2006298475752942395) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_down (6028544722984648702) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_left (5308110789317472437) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_right (3802527156765844475) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"鏡像"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"啟用無線螢幕分享"</string>
@@ -1325,6 +1333,8 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz/與許多裝置相容"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz/與少數裝置相容"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2.4 和 5 GHz/與大多數的裝置相容"</string>
+    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
+    <skip />
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"選擇熱點的頻率。頻率會影響連線速度，以及能找到熱點的裝置類型。"</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"偏好的頻率"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
@@ -1335,6 +1345,10 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"網速很快，這種雙頻無線基地台與大多數的裝置相容。"</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"網速最快，與少數裝置相容。"</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
+    <skip />
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"你所在的國家/地區無法使用這項功能"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"如果偏好的頻率無法使用，熱點可能會改用其他頻率。如果變更頻率，熱點的安全性設定也可能跟著改變。"</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"不適用於 6 GHz"</string>
@@ -1930,9 +1944,9 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"忘記密碼了嗎？"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"忘記解鎖圖案了嗎？"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"忘記 PIN 碼了嗎？"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="4983618652824112610">"必須畫出解鎖圖案驗證身分"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="45398445305933355">"必須輸入 PIN 碼驗證身分"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1263500907003586594">"必須輸入密碼驗證身分"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="4983618652824112610">"畫出解鎖圖案以驗證身分"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="45398445305933355">"輸入 PIN 碼以驗證身分"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="1263500907003586594">"輸入密碼以驗證身分"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="2552062474449423029">"必須畫出工作資料夾解鎖圖案驗證身分"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6556640367641079244">"必須輸入工作資料夾 PIN 碼驗證身分"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5700270644291633820">"必須輸入工作資料夾密碼驗證身分"</string>
@@ -2353,7 +2367,7 @@
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"實體鍵盤配置"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"個人字典"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"工作用的個人字典"</string>
-    <string name="user_dict_settings_summary" msgid="4939694372338975081">"新增要在應用程式 (例如拼字檢查工具) 中使用的字詞"</string>
+    <string name="user_dict_settings_summary" msgid="4939694372338975081">"新增要在拼字檢查工具等應用程式中使用的字詞"</string>
     <string name="user_dict_settings_add_menu_title" msgid="8046882347281382968">"新增"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="3485845465134083084">"新增至字典"</string>
     <string name="user_dict_settings_add_screen_title" msgid="1866408024073475379">"詞組"</string>
@@ -2721,7 +2735,7 @@
     <string name="captioning_appearance_summary" msgid="4620682807315588019">"文字大小：<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"更多選項"</string>
     <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"自訂字幕大小及樣式，閱讀起來更輕鬆"</string>
-    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"部分媒體應用程式可能不支援這些字幕偏好設定"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"部分媒體應用程式可能不支援這類字幕偏好設定"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"無障礙工具按鈕"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"以兩指從底部向上滑動"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"按住音量鍵"</string>
@@ -3491,8 +3505,7 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"你是這部裝置唯一的管理員，因此無法刪除自己的使用者設定檔。如要刪除，可以將其他使用者設為管理員，或前往「系統」&gt;「重設選項」&gt;「清除所有資料 (恢復原廠設定)」，清除裝置上的所有資料。"</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"無法移除管理員權限"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"你是這部裝置的唯一管理員使用者。如果不想再擔任管理員，請先將管理員權限授予其他使用者。"</string>
-    <!-- no translation found for add_user_summary_action_restricted (6276344792683243643) -->
-    <skip />
+    <string name="add_user_summary_action_restricted" msgid="6276344792683243643">"公司政策禁止這項操作"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"緊急資訊"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>的相關資訊和聯絡資料"</string>
     <string name="open_app_button" msgid="5025229765547191710">"開啟「<xliff:g id="APP_NAME">%1$s</xliff:g>」"</string>
@@ -4875,12 +4888,10 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"如果你調高敏感度，可能會影響螢幕邊緣的應用程式手勢操作。"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"偵測「返回」手勢的敏感度"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"手勢操作"</string>
-    <!-- no translation found for gesture_settings_button_description (7916105652019436751) -->
-    <skip />
+    <string name="gesture_settings_button_description" msgid="7916105652019436751">"手勢操作設定"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"立即試用"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"按鈕操作"</string>
-    <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
-    <skip />
+    <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"按鈕操作設定"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"按鈕順序"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"按鈕順序, 移動按鈕, 左手模式, 右手模式"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"返回"</string>
@@ -5051,7 +5062,7 @@
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;要使用「&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;」嗎？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; 從現在起，新的密碼、密碼金鑰和其他資訊都會儲存在這裡。「&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;」可能會根據畫面內容判斷可自動填入的資訊。"</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"密碼、密碼金鑰和自動填入的偏好服務"</string>
     <string name="credman_picker_title_new" msgid="4292105803864397398">"偏好的服務"</string>
-    <string name="credman_picker_page_summary" msgid="4633938046738617332">"選擇偏好的服務來儲存用於登入和自動填入建議的資料"</string>
+    <string name="credman_picker_page_summary" msgid="4633938046738617332">"選擇偏好的服務，儲存登入及自動填入建議的相關資料"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"要停用「%1$s」嗎？"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;要關閉這項服務嗎？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; 當你登入後，系統將不會填入密碼、密碼金鑰、付款方式等其他已儲存的資訊。如要使用已儲存的資訊，請選擇所需的密碼、密碼金鑰或資料服務。"</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"密碼、密碼金鑰和帳戶"</string>
@@ -5063,7 +5074,7 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"變更"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"最多只能開啟 5 項服務"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"關閉至少 1 項服務並新增其他服務"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"選擇你想使用的服務，來儲存用於登入及自動填入建議的資料。如果也想讓其他服務提供建議，請開啟所需服務。"</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"選擇你想使用的服務，以便儲存登入及自動填入建議的資料。如果也想收到其他服務提供的建議，請開啟相關服務。"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"「%1$s」會根據畫面內容判斷要自動填入的資訊。"</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"密碼、密碼金鑰和資料服務限制"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"一次最多可選取 5 個密碼、密碼金鑰和資料服務。如要新增其他服務，請先停用其中一項服務。"</string>
@@ -5928,7 +5939,7 @@
     <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"聆聽 Auracast 廣播"</string>
     <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"關閉音訊分享功能，即可找到音訊串流"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"尋找音訊串流"</string>
-    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"聆聽裝置分享的音訊，或是鄰近的 Auracast 廣播"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"聆聽正在分享音訊的裝置，或鄰近的 Auracast 廣播"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"音訊裝置"</string>
     <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"連線至相容耳機"</string>
     <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"鄰近的音訊串流"</string>
@@ -5962,6 +5973,8 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"設定家長監護 PIN 碼"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"監護, 家長監護, 家長, 監護 PIN 碼, PIN 碼"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"管理 PIN 碼"</string>
+    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
+    <skip />
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"家長監護 PIN 碼"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"家長 PIN 碼, 家長監護 PIN 碼"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"新增備援電子郵件地址"</string>
@@ -6007,8 +6020,7 @@
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"刪除並關閉"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>動畫"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"無法開啟監護功能"</string>
-    <!-- no translation found for supervision_setup_multi_profile_error_title (7538001161488140882) -->
-    <skip />
+    <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"無法使用控制選項"</string>
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"發生錯誤"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"請稍後再試"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"返回"</string>
@@ -6025,17 +6037,12 @@
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"自動填入、通知等等"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"隱私權控制項"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"權限、控制選項"</string>
-    <!-- no translation found for app_security_subpage_title (397183486243670441) -->
-    <skip />
+    <string name="app_security_subpage_title" msgid="397183486243670441">"應用程式安全性"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"裝置解鎖"</string>
-    <!-- no translation found for account_security_subpage_title (3676085534746127966) -->
-    <skip />
-    <!-- no translation found for device_finders_subpage_title (2390688647994924006) -->
-    <skip />
-    <!-- no translation found for system_and_updates_subpage_title (5274185686741552322) -->
-    <skip />
-    <!-- no translation found for cellular_network_security_subpage_title (1191202157978621337) -->
-    <skip />
+    <string name="account_security_subpage_title" msgid="3676085534746127966">"帳戶安全性"</string>
+    <string name="device_finders_subpage_title" msgid="2390688647994924006">"裝置尋找工具"</string>
+    <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"系統與更新"</string>
+    <string name="cellular_network_security_subpage_title" msgid="1191202157978621337">"行動網路安全性"</string>
     <string name="location_settings" msgid="6833222354060094170">"位置資訊存取權"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"查看可存取位置資訊的應用程式與服務"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"「身分驗證」支援更多應用程式"</string>
@@ -6055,11 +6062,9 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
     <string name="safety_center_device_finders_search_terms" msgid="2703625009760905100"></string>
-    <!-- no translation found for safety_center_system_and_updates_summary (6301092688146734950) -->
-    <skip />
+    <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"更新"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <!-- no translation found for safety_center_cellular_network_security_summary (4746047200732665728) -->
-    <skip />
+    <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"網路類型、加密、通知控制選項"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"顯示較多警示"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"顯示較少警示"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"已關閉的警示"</string>

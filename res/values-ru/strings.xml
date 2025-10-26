@@ -699,7 +699,7 @@
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Выбрать другой способ разблокировки частного пространства?"</string>
     <string name="private_space_new_lock_message" msgid="3117703578905489206">"Вам понадобится ввести PIN-код, графический ключ или пароль на следующем экране."</string>
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Автоматически блокировать частное пространство"</string>
-    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Можно сделать так, чтобы частное пространство автоматически блокировалось, если вы не используете устройство какое-то время."</string>
+    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Частное пространство может автоматически блокироваться, если вы не используете устройство какое-то время."</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Каждый раз при блокировке устройства"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"Через 5 минут после отключения экрана"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Только после перезапуска устройства"</string>
@@ -750,7 +750,7 @@
     <string name="private_space_error_description" msgid="6591005734266923120">"Частное пространство недоступно\nВозможные причины"</string>
     <string name="private_space_error_causes_text" msgid="1649162505129365620">"Возможные причины"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Выбрать другой способ разблокировки частного пространства?"</string>
-    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Вы можете установить отдельный способ разблокировки для частного пространства или использовать тот, что настроен для экрана."</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Вы можете установить отдельный способ разблокировки для частного пространства или использовать тот, который настроен для экрана."</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Использовать способ, настроенный для экрана"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Выбрать другой способ"</string>
     <string name="private_space_wait_screen_title" msgid="1535431437075585381">"Подождите…"</string>
@@ -826,7 +826,7 @@
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Продолжить без фейсконтроля"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Продолжить без настройки отпечатка пальца или фейсконтроля"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Нет"</string>
-    <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"Добавьте способ разблокировки экрана"</string>
+    <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"Добавить способ разблокировки экрана"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Провести по экрану"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Графический ключ"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN-код"</string>
@@ -1042,6 +1042,14 @@
     <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"Переместить вниз"</string>
     <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"Переместить влево"</string>
     <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"Переместить вправо"</string>
+    <!-- no translation found for external_display_topology_a11y_display_moved_up (2006298475752942395) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_down (6028544722984648702) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_left (5308110789317472437) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_right (3802527156765844475) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"дублирование"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Включить"</string>
@@ -1325,6 +1333,8 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 ГГц (совместима со многими устройствами)"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 ГГц (совместима с несколькими устройствами)"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2,4 и 5 ГГц (совместима с большинством устройств)"</string>
+    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
+    <skip />
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Выберите диапазон частот для точки доступа. От него зависит, на какой скорости будут передаваться данные и какие типы устройств смогут находить точку доступа."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Предпочтительный диапазон"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 ГГц"</string>
@@ -1335,6 +1345,10 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Высокая скорость. Эта двухдиапазонная точка доступа совместима с большинством устройств."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 ГГц"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Максимальная скорость. Точка доступа совместима с несколькими устройствами."</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
+    <skip />
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Недоступна в вашей стране или вашем регионе"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Когда предпочтительный диапазон частот недоступен, точка доступа может использовать другой. Если вы измените диапазон, для точки могут быть выбраны другие настройки безопасности."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Недоступно на частоте 6 ГГц"</string>
@@ -2680,8 +2694,8 @@
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Настройки навигации"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Вибрация и виброотклик"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Менять силу вибрации в различных ситуациях"</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"Включено/Управляйте уровнями вибрации для звонков, уведомлений и будильников"</string>
-    <string name="accessibility_vibration_settings_state_off" msgid="113565506991847845">"Отключено/Управляйте уровнями вибрации для звонков, уведомлений и будильников"</string>
+    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"Включено/Настройка вибрации для звонков, уведомлений и будильников"</string>
+    <string name="accessibility_vibration_settings_state_off" msgid="113565506991847845">"Отключено/Настройка вибрации для звонков, уведомлений и будильников"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Отключено, так как устройство переведено в бесшумный режим"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Звонки"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Уведомления и будильники"</string>
@@ -3782,7 +3796,7 @@
     <string name="emergency_tone_alert" msgid="1977698889522966589">"Тональный сигнал"</string>
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"Вибрация"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"Звуки при включении устройства"</string>
-    <string name="sound_patterns_category_title" msgid="4290495769747444271">"Звуковые модели"</string>
+    <string name="sound_patterns_category_title" msgid="4290495769747444271">"Мелодии и сигналы"</string>
     <string name="sound_audio_category_title" msgid="3445871661303518618">"Аудио"</string>
     <string name="system_sounds_and_vibrations_category_title" msgid="4162079598490981456">"Системные звуки и вибрация"</string>
     <string name="work_profile_sound_category_title" msgid="1708926655170323454">"Звуки в рабочем профиле"</string>
@@ -4932,7 +4946,7 @@
     <string name="account_sync_title" msgid="7036067017433297574">"Синхронизация аккаунта"</string>
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"Синхронизация включена для некоторых элементов (<xliff:g id="ID_1">%1$d</xliff:g> из <xliff:g id="ID_2">%2$d</xliff:g>)"</string>
     <string name="account_sync_summary_all_on" msgid="2953682111836599841">"Включена синхронизация всех элементов"</string>
-    <string name="account_sync_summary_all_off" msgid="6378301874540507884">"Синхронизация отключена для всех элементов"</string>
+    <string name="account_sync_summary_all_off" msgid="6378301874540507884">"Синхронизация отключена для всех типов данных"</string>
     <string name="enterprise_privacy_settings" msgid="786350385374794180">"Информация об управляемом устройстве"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5471858290610344646">"Изменения и настройки, управляемые организацией"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="1315413275836515937">"Настройки, доступные организации \"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g>\", и внесенные ею изменения"</string>
@@ -5926,8 +5940,8 @@
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Чтобы слушать аудиопоток \"<xliff:g id="STREAM_NAME">%1$s</xliff:g>\", другие пользователи могут подключить совместимые наушники к своим устройствам Android, а затем отсканировать QR-код."</string>
     <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Послушать трансляцию Auracast"</string>
     <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Чтобы начать поиск аудиопотоков, отключите передачу аудио"</string>
-    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Поиск аудиопотока"</string>
-    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Подключитесь к устройству, отправляющему аудио, или трансляции Auracast поблизости."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Поиск аудио"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Вы можете слушать трансляцию Auracast или звук с устройства поблизости."</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Ваше аудиоустройство"</string>
     <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Подключите совместимые наушники"</string>
     <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Аудиопотоки рядом"</string>
@@ -5961,6 +5975,8 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Установите PIN-код для родительского контроля"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"родительский контроль, родители, PIN-код родительского контроля, PIN-код"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Управление PIN-кодом"</string>
+    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
+    <skip />
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN-код для родительского контроля"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN-код родителя, PIN-код родительского контроля"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Добавить резервный адрес электронной почты"</string>
@@ -6033,10 +6049,8 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Приложения и сервисы, которым доступны сведения о местоположении"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Проверка личности теперь поддерживается в большем количестве приложений"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Проверка личности предотвращает несанкционированный доступ к вашим приложениям. Ею теперь можно пользоваться в любом приложении, которое поддерживает разблокировку по отпечатку пальца или фейсконтроль."</string>
-    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
-    <skip />
+    <string name="identity_check_watch_notification_title" msgid="5559702400315647907">"Проверка личности и часы"</string>
+    <string name="identity_check_watch_notification_summary" msgid="3200144847521451493">"Если вы подключите часы, у вас будет больше способов подтверждать свою личность, чтобы защищать свои приложения от посторонних."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Подробнее"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"Не удалось проверить параметры."</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Данных пока нет"</string>
@@ -6060,10 +6074,7 @@
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" подключено"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Сканировать устройство"</string>
     <string name="satellite_tile_label" msgid="1098132989724404617">"Спутник"</string>
-    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
-    <skip />
-    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
-    <skip />
-    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
-    <skip />
+    <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Работает"</string>
+    <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Доступен"</string>
+    <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Недоступен"</string>
 </resources>
