@@ -47,7 +47,7 @@
             android:paddingVertical="14dp"
             android:drawablePadding="9dp"
             style="@style/TouchpadButtonCancel"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:text="@string/gesture_button_skip"/>
 
         <Button
@@ -61,7 +61,7 @@
             android:paddingVertical="14dp"
             android:drawablePadding="9dp"
             style="@style/TouchpadButtonCancel"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:text="@string/gesture_button_restart"/>
 
         <LinearLayout
@@ -82,7 +82,7 @@
             android:paddingVertical="14dp"
             android:drawablePadding="9dp"
             style="@style/TouchpadButtonDone"
-            android:textColor="@androidprv:color/materialColorOnPrimary"
+            android:textColor="@color/materialColorOnPrimary"
             android:text="@string/gesture_button_next"/>
 
         <Button
@@ -96,7 +96,7 @@
             android:paddingVertical="14dp"
             android:drawablePadding="9dp"
             style="@style/TouchpadButtonDone"
-            android:textColor="@androidprv:color/materialColorOnPrimary"
+            android:textColor="@color/materialColorOnPrimary"
             android:text="@string/gesture_button_done"/>
     </RelativeLayout>
 

@@ -16,9 +16,8 @@
   -->
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:shape="oval">
-    <solid android:color="@androidprv:color/materialColorPrimaryContainer" />
+    <solid android:color="@color/materialColorPrimaryContainer" />
     <size
         android:width="@dimen/display_block_arrow_size"
         android:height="@dimen/display_block_arrow_size" />

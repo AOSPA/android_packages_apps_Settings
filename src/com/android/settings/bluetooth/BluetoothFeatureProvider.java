@@ -93,4 +93,8 @@ public interface BluetoothFeatureProvider {
             @BluetoothDiagnosisEntryPoint int entryPoint,
             @Nullable CachedBluetoothDevice device,
             int metricsCategory);
+
+    /** Send broadcast when connection failure happens. */
+    void notifyConnectionFailureTimeChange(
+            @NonNull Context context, @NonNull CachedBluetoothDevice device, long timestamp);
 }

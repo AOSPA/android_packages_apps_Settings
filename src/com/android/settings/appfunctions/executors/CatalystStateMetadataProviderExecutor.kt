@@ -26,6 +26,7 @@ import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateMetadataProviderExecutorResult
 import com.android.settingslib.graph.PreferenceGetterFlags
+import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.toProto
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
@@ -142,7 +143,7 @@ class CatalystStateMetadataProviderExecutor(
                     sensitivity = sensitivityLevel,
                     writable = metadataProto.readWritePermit == ReadWritePermit.ALLOW,
                     // TODO: properly expose possible values
-                    possibleValues = metadataProto.valueDescriptor.toString(),
+                    possibleValues = metadataProto.valueDescriptor.toDeviceStateString(),
                     hintText = config?.hintText(englishContext, metadata),
                 )
             )
@@ -173,5 +174,20 @@ class CatalystStateMetadataProviderExecutor(
         private const val TAG = "CatalystStateMetadataProviderExecutor"
         private const val MAX_PARALLELISM = 3
         private val PER_SCREEN_TIMEOUT_MS = 5.seconds
+
+        /** Returns an LLM readable string describing the value type. */
+        internal fun PreferenceValueDescriptorProto.toDeviceStateString(): String =
+            when (typeCase) {
+                PreferenceValueDescriptorProto.TypeCase.BOOLEAN_TYPE -> "BOOL"
+                PreferenceValueDescriptorProto.TypeCase.FLOAT_TYPE -> "FLOAT"
+                PreferenceValueDescriptorProto.TypeCase.LONG_TYPE -> "LONG"
+                PreferenceValueDescriptorProto.TypeCase.RANGE_VALUE -> {
+                    val range = rangeValue
+                    val stepString = if (range.hasStep() && range.step != 0) ", step=${range.step}" else ""
+                    "INTEGER(min=${range.min}, max=${range.max}$stepString)"
+                }
+                else -> ""
+            }
+
     }
 }

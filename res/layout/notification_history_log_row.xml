@@ -54,7 +54,7 @@
             android:visibility="invisible"
             android:layout_toEndOf="@id/title"
             android:layout_toStartOf="@id/timestamp"
-            android:tint="?android:attr/textColorSecondary"
+            android:tint="@color/materialColorOnSurfaceVariant"
             android:src="@drawable/ic_notifications_alert"/>
 
         <DateTimeView
@@ -81,7 +81,7 @@
         android:paddingTop="4dp"
         android:layout_marginStart="16dp"
         android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textColor="@color/materialColorOnSurfaceVariant"
         android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
         android:textAlignment="viewStart"
         android:paddingBottom="16dp" />

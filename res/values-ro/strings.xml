@@ -248,14 +248,10 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Mută în jos"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Elimină"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Mută la început"</string>
-    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
-    <skip />
-    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"Mută <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> în sus"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"Mută <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> în jos"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"Elimină <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"Mută <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> la început"</string>
     <string name="action_label_menu_option" msgid="6881627571783854975">"Editează lista de limbi de sistem, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"țara, teritoriul"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"vreme, centigrad, grade, temperatură, celsius, fahrenheit"</string>
@@ -316,12 +312,10 @@
     <string name="apply" msgid="7834684883190163536">"Aplică"</string>
     <string name="share" msgid="8502235338607613795">"Distribuie"</string>
     <string name="add" msgid="8335206931421683426">"Adaugă"</string>
-    <!-- no translation found for verify (6452664472920137535) -->
-    <skip />
+    <string name="verify" msgid="6452664472920137535">"Confirmă"</string>
     <string name="remove" msgid="1028414219245072102">"Elimină"</string>
     <string name="process" msgid="2614220641928709668">"Proces"</string>
-    <!-- no translation found for dismiss (7878176050401175851) -->
-    <skip />
+    <string name="dismiss" msgid="7878176050401175851">"Închide"</string>
     <string name="settings_label" msgid="943294133671632976">"Setări"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Setări"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Comandă rapidă pentru setări"</string>
@@ -4105,14 +4099,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Organizator de notificări"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Grupează notificările cu prioritate redusă și dezactivează sunetul lor"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Gestionează aplicațiile pentru organizatorul de notificări"</string>
-    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
-    <skip />
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Extinderea grupurilor"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automat"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Extinde întotdeauna"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Nu extinde niciodată"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Aplică pentru aplicațiile din profilul de serviciu"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicii de ajutor pentru RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nicio aplicație instalată nu a solicitat să fie rulată ca un serviciu de ajutor pentru RV."</string>
@@ -5295,8 +5285,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Aplicații acceptate pe telefon"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Nu se poate adăuga un SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Oprește conexiunea prin satelit înainte să adaugi un SIM"</string>
-    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
-    <skip />
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Când sunt conectate prin Bluetooth, modul Avion se va sincroniza pe dispozitivele acceptate, cum ar fi telefonul și ceasul"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Numele punctelor de acces"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponibil când este conectat la <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5976,14 +5965,10 @@
     <string name="supervision_pin_updated" msgid="660463938258442344">"Codul PIN a fost actualizat"</string>
     <string name="supervision_pin_changed" msgid="4822686882868075710">"Codul PIN a fost schimbat"</string>
     <string name="supervision_pin_deleted" msgid="368631223166018476">"Codul PIN a fost șters"</string>
-    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
-    <skip />
+    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"Confirmă informațiile de recuperare"</string>
+    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"Contul de recuperare nu a fost confirmat. Pentru a confirma, va trebui să introduci parola contului."</string>
+    <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Adaugă informații de recuperare"</string>
+    <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Dacă uiți codul PIN, poți folosi contul pentru a-l reseta"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Șterge codul PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Adaugă o adresă de e-mail pentru recuperare"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Confirmă adresa de e-mail"</string>
@@ -6042,18 +6027,12 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
-    <skip />
-    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
-    <skip />
-    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
-    <skip />
-    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
-    <skip />
-    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
-    <skip />
+    <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Mai multe alerte"</string>
+    <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Mai puține alerte"</string>
+    <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Alerte respinse"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Închizi alerta?"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Examinează oricând setările de securitate și confidențialitate, ca să adaugi mai multă protecție"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Se asociază"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> s-a conectat"</string>
-    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
-    <skip />
+    <string name="safety_center_rescan_button" msgid="1290673104206018701">"Scanează dispozitivul"</string>
 </resources>

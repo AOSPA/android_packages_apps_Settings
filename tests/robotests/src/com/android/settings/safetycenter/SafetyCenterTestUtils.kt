@@ -74,6 +74,28 @@ object SafetyCenterTestUtils {
         return builder.build()
     }
 
+    fun createIssueAction(
+        id: String,
+        label: String,
+        willResolve: Boolean = false,
+        hasConfirmation: Boolean = false,
+        pendingIntent: PendingIntent = TEST_PENDING_INTENT,
+    ): SafetyCenterIssue.Action {
+        val builder =
+            SafetyCenterIssue.Action.Builder(id, label, pendingIntent).setWillResolve(willResolve)
+        if (hasConfirmation) {
+            builder.setConfirmationDialogDetails(
+                SafetyCenterIssue.Action.ConfirmationDialogDetails(
+                    "Title",
+                    "Text",
+                    "Accept",
+                    "Deny",
+                )
+            )
+        }
+        return builder.build()
+    }
+
     fun createIssue(
         id: String,
         title: String = "Issue Title $id",
@@ -81,6 +103,9 @@ object SafetyCenterTestUtils {
         userHandle: UserHandle = USER_PERSONAL,
         sourceIds: Set<String>,
         severity: Int = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION,
+        actions: List<SafetyCenterIssue.Action> = emptyList(),
+        isDismissible: Boolean = true,
+        shouldConfirmDismissal: Boolean = true,
     ): SafetyCenterIssue {
         val builder =
             if (Flags.openSafetyCenterApis()) {
@@ -88,17 +113,24 @@ object SafetyCenterTestUtils {
             } else {
                 SafetyCenterIssue.Builder(id, title, summary)
             }
-        return builder.setSeverityLevel(severity).build()
+        return builder
+            .setSeverityLevel(severity)
+            .setActions(actions)
+            .setDismissible(isDismissible)
+            .setShouldConfirmDismissal(shouldConfirmDismissal)
+            .build()
     }
 
     fun createScData(
         entries: List<SafetyCenterEntry> = emptyList(),
         activeIssues: List<SafetyCenterIssue> = emptyList(),
+        dismissedIssues: List<SafetyCenterIssue> = emptyList(),
         status: SafetyCenterStatus = DEFAULT_STATUS,
     ): SafetyCenterData {
         val builder = SafetyCenterData.Builder(status)
         entries.forEach { builder.addEntryOrGroup(SafetyCenterEntryOrGroup(it)) }
         activeIssues.forEach { builder.addIssue(it) }
+        dismissedIssues.forEach { builder.addDismissedIssue(it) }
         return builder.build()
     }
 }

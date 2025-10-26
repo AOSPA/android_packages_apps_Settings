@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/sim_label_padding"
                 android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/materialColorOnSurface"
                 android:text="@string/mobile_network_sim_name_label"/>
 
             <EditText
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/sim_label_padding"
                 android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/materialColorOnSurface"
                 android:text="@string/mobile_network_sim_color_label"/>
 
         </LinearLayout>
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/sim_label_padding"
                 android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/materialColorOnSurface"
                 android:text="@string/status_operator"
                 android:visibility="gone"/>
 
@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/sim_label_padding"
                 android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/materialColorOnSurface"
                 android:text="@string/status_number_sim_status"
                 android:visibility="gone"/>
 

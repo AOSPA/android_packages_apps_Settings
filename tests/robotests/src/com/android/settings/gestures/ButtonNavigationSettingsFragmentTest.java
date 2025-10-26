@@ -26,9 +26,10 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.view.accessibility.Flags;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -43,7 +44,7 @@ import org.robolectric.shadows.ShadowPackageManager;
 @RunWith(RobolectricTestRunner.class)
 public class ButtonNavigationSettingsFragmentTest {
     @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private ButtonNavigationSettingsFragment mFragment;
 
@@ -53,7 +54,7 @@ public class ButtonNavigationSettingsFragmentTest {
     }
 
     @Test
-    @DisableFlags({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
+    @RequiresFlagsDisabled({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
             com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH})
     public void searchIndexer_getResources_isNotNull() {
         assertThat(ButtonNavigationSettingsFragment.SEARCH_INDEX_DATA_PROVIDER
@@ -61,7 +62,7 @@ public class ButtonNavigationSettingsFragmentTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
+    @RequiresFlagsEnabled({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
             com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH})
     public void searchIndexer_getResources_isNull() {
         assertThat(ButtonNavigationSettingsFragment.SEARCH_INDEX_DATA_PROVIDER
@@ -69,7 +70,7 @@ public class ButtonNavigationSettingsFragmentTest {
     }
 
     @Test
-    @DisableFlags({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
+    @RequiresFlagsDisabled({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
             com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH})
     public void getNonIndexableKeys_twoAndThreeButtonNavigationNotAvailable_allKeysNonIndexable() {
         assertThat(ButtonNavigationSettingsFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
@@ -77,7 +78,7 @@ public class ButtonNavigationSettingsFragmentTest {
     }
 
     @Test
-    @DisableFlags({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
+    @RequiresFlagsDisabled({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
             com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH})
     public void getNonIndexableKeys_twoButtonNavigationAvailable_allKeysExceptAnimIndexable() {
         addPackageToPackageManager(ApplicationProvider.getApplicationContext(),
@@ -88,7 +89,7 @@ public class ButtonNavigationSettingsFragmentTest {
     }
 
     @Test
-    @DisableFlags({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
+    @RequiresFlagsDisabled({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
             com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH})
     public void getNonIndexableKeys_threeButtonNavigationAvailable_allKeysExceptAnimIndexable() {
         addPackageToPackageManager(ApplicationProvider.getApplicationContext(),

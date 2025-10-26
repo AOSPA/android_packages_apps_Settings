@@ -67,6 +67,7 @@ import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.internal.widget.TextViewInputDisabler;
+import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.Utils;
@@ -593,7 +594,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 @LockPatternUtils.VerifyFlag int flags) {
             final int localEffectiveUserId = mEffectiveUserId;
             final int localUserId = mUserId;
-            final LockPatternChecker.OnVerifyCallback onVerifyCallback = (response, timeoutMs) -> {
+            final LockPatternChecker.OnVerifyCallback onVerifyCallback = response -> {
+                final int timeoutMs = response.getTimeout();
                 mPendingLockCheck = null;
                 final boolean matched = response.isMatched();
                 if (matched && mReturnCredentials) {
@@ -625,7 +627,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     localEffectiveUserId,
                     new LockPatternChecker.OnCheckCallback() {
                         @Override
-                        public void onChecked(boolean matched, int timeoutMs) {
+                        public void onChecked(VerifyCredentialResponse response) {
+                            final boolean matched = response.isMatched();
+                            final int timeoutMs = response.getTimeout();
                             mPendingLockCheck = null;
                             if (matched && isInternalActivity() && mReturnCredentials) {
                                 intent.putExtra(

@@ -67,7 +67,7 @@
             android:hyphenationFrequency="normalFast"
             android:lineBreakWordStyle="phrase"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?android:attr/textColorSecondary"/>
+            android:textColor="@color/materialColorOnSurfaceVariant"/>
 
         <TextView
             android:id="@+id/appendix"
@@ -76,7 +76,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="@color/materialColorOnSurfaceVariant"
             android:visibility="gone"/>
 
         <ProgressBar

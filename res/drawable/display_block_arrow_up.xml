@@ -16,7 +16,6 @@
   -->
 
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:width="@dimen/display_block_arrow_size"
     android:height="@dimen/display_block_arrow_size"
     android:viewportWidth="24"
@@ -26,6 +25,6 @@
             android:pathData="M0,0h24v24h-24z"/>
         <path
             android:pathData="M8.2,14C8.05,14 7.925,13.95 7.825,13.85C7.742,13.75 7.7,13.633 7.7,13.5C7.7,13.467 7.75,13.35 7.85,13.15L11.475,9.525C11.558,9.442 11.642,9.383 11.725,9.35C11.808,9.317 11.9,9.3 12,9.3C12.1,9.3 12.192,9.317 12.275,9.35C12.358,9.383 12.442,9.442 12.525,9.525L16.15,13.15C16.2,13.2 16.233,13.258 16.25,13.325C16.283,13.375 16.3,13.433 16.3,13.5C16.3,13.633 16.25,13.75 16.15,13.85C16.067,13.95 15.95,14 15.8,14H8.2Z"
-            android:fillColor="@androidprv:color/materialColorOnPrimaryContainer"/>
+            android:fillColor="@color/materialColorOnPrimaryContainer"/>
     </group>
 </vector>

@@ -23,6 +23,7 @@ import android.os.UserHandle
 import android.os.UserManager
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
+import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.permission.flags.Flags as PermissionFlags
 import com.android.settings.core.BasePreferenceController
@@ -91,6 +92,17 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
             safetySourceId = requireNotNull(it.safetySource)
             profileType = it.profile
             it.isVisible = false
+        }
+    }
+
+    override fun updateState(preference: Preference?) {
+        super.updateState(preference)
+        val model = viewModel
+        if (preference != null && model != null) {
+            updatePreferenceUi(
+                preference as SafetySourcePreference,
+                model.getCurrentSafetyCenterDataAsUiData(),
+            )
         }
     }
 
