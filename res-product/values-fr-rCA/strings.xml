@@ -171,7 +171,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8772005555323461143">"Vous et votre enfant pouvez supprimer les images et le modèle de son empreinte digitale ou désactiver le Déverrouillage par empreinte digitale en tout temps dans Paramètres. Les images et les modèles d\'empreinte digitale sont stockés sur la tablette jusqu\'à ce qu\'ils soient supprimés."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7254955922685507093">"Vous et votre enfant pouvez supprimer les images et le modèle de son empreinte digitale ou désactiver le Déverrouillage par empreinte digitale en tout temps dans Paramètres. Les images et les modèles d\'empreinte digitale sont stockés sur l\'appareil jusqu\'à ce qu\'ils soient supprimés."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="desktop" msgid="7254955922685507093">"Vous et votre enfant pouvez supprimer les images et le modèle de son empreinte digitale ou désactiver le Déverrouillage par empreinte digitale en tout temps dans Paramètres. Les images et les modèles d\'empreinte digitale sont stockés sur l\'appareil jusqu\'à ce qu\'ils soient supprimés."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="6838578698434849838">"Votre téléphone peut être déverrouillé même si vous ne le voulez pas, par exemple si quelqu\'un le tient contre votre doigt"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="6838578698434849838">"Votre téléphone peut être déverrouillé même si vous ne le voulez pas, par exemple si quelqu\'un le tient contre votre doigt."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7796353046744228477">"Votre tablette peut être déverrouillée même lorsque vous n\'en avez pas l\'intention, par exemple si quelqu\'un la tient contre votre doigt"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="5075445491909690772">"Votre appareil peut être déverrouillé même lorsque vous n\'en avez pas l\'intention, par exemple si quelqu\'un le tient contre votre doigt"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="desktop" msgid="5075445491909690772">"Votre appareil peut être déverrouillé même lorsque vous n\'en avez pas l\'intention, par exemple si quelqu\'un le tient contre votre doigt"</string>
@@ -504,6 +504,12 @@
     <skip />
     <!-- no translation found for device_supervision_features_title (5041758196166273467) -->
     <skip />
+    <!-- no translation found for supervision_apps_managing_this_device_title (8369485156586947413) -->
+    <skip />
+    <!-- no translation found for supervision_apps_managing_this_device_title (1795086998459265754) -->
+    <skip />
+    <!-- no translation found for supervision_apps_managing_this_device_title (3365839381660880395) -->
+    <skip />
     <string name="supervision_pin_length_message" product="default" msgid="7142997986515800901">"{count,plural, =1{Entrez un NIP d\'au moins # chiffre. Vous l\'utiliserez pour gérer les commandes sur ce téléphone.}one{Entrez un NIP d\'au moins # chiffre. Vous l\'utiliserez pour gérer les commandes sur ce téléphone.}other{Entrez un NIP d\'au moins # chiffres. Vous l\'utiliserez pour gérer les commandes sur ce téléphone.}}"</string>
     <string name="supervision_pin_length_message" product="tablet" msgid="1772471880165492225">"{count,plural, =1{Entrez un NIP d\'au moins # chiffre. Vous l\'utiliserez pour gérer les commandes sur cette tablette.}one{Entrez un NIP d\'au moins # chiffre. Vous l\'utiliserez pour gérer les commandes sur cette tablette.}other{Entrez un NIP d\'au moins # chiffres. Vous l\'utiliserez pour gérer les commandes sur cette tablette.}}"</string>
     <string name="supervision_pin_length_message" product="desktop" msgid="7689193597679628648">"{count,plural, =1{Entrez un NIP d\'au moins # chiffre. Vous l\'utiliserez pour gérer les commandes sur cet appareil.}one{Entrez un NIP d\'au moins # chiffre. Vous l\'utiliserez pour gérer les commandes sur cet appareil.}other{Entrez un NIP d\'au moins # chiffres. Vous l\'utiliserez pour gérer les commandes sur cet appareil.}}"</string>
@@ -519,14 +525,11 @@
     <string name="supervision_multi_profile_error_message" product="default" msgid="4185376425933293903">"Comme il existe plusieurs profils sur ce téléphone, les contrôles parentaux ne peuvent pas être activés."</string>
     <string name="supervision_multi_profile_error_message" product="tablet" msgid="5021937906206996760">"Comme il existe plusieurs profils sur cette tablette, les contrôles parentaux ne peuvent pas être activés."</string>
     <string name="supervision_multi_profile_error_message" product="desktop" msgid="7222938263475617299">"Comme il existe plusieurs profils sur cet appareil, les contrôles parentaux ne peuvent pas être activés."</string>
-    <!-- no translation found for supervision_setup_multi_profile_error_message (7949405920898610718) -->
-    <skip />
-    <!-- no translation found for supervision_setup_multi_profile_error_message (6028864049946511965) -->
-    <skip />
-    <!-- no translation found for supervision_setup_multi_profile_error_message (3447724427845313093) -->
-    <skip />
-    <string name="auto_rotate_summary_a11y" product="default" msgid="2813368383309985185">"Lorsque vous orientez votre téléphone entre les modes portrait et paysage"</string>
-    <string name="auto_rotate_summary_a11y" product="tablet" msgid="4708833814245913981">"Lorsque vous orientez votre tablette entre les modes portrait et paysage"</string>
+    <string name="supervision_setup_multi_profile_error_message" product="default" msgid="7949405920898610718">"Il y a plusieurs profils sur ce téléphone"</string>
+    <string name="supervision_setup_multi_profile_error_message" product="tablet" msgid="6028864049946511965">"Il y a plusieurs profils sur cette tablette"</string>
+    <string name="supervision_setup_multi_profile_error_message" product="desktop" msgid="3447724427845313093">"Il y a plusieurs profils sur cet appareil"</string>
+    <string name="auto_rotate_summary_a11y" product="default" msgid="2813368383309985185">"Lorsque vous orientez votre téléphone entre les modes Portrait et Paysage"</string>
+    <string name="auto_rotate_summary_a11y" product="tablet" msgid="4708833814245913981">"Lorsque vous orientez votre tablette entre les modes Portrait et Paysage"</string>
     <string name="auto_rotate_summary_a11y" product="desktop" msgid="1342493478927297535">"Lorsque vous basculez votre appareil entre les modes portrait et paysage"</string>
     <string name="daltonizer_feature_summary" product="default" msgid="3940653889277283702">"Ajustez l\'affichage des couleurs sur votre téléphone"</string>
     <string name="daltonizer_feature_summary" product="tablet" msgid="4006596881671077623">"Ajustez l\'affichage des couleurs sur votre tablette"</string>
@@ -543,7 +546,7 @@
     <string name="audio_sharing_dialog_share_more_content" product="tablet" msgid="7742344946644657414">"La musique et les vidéos de cette tablette peuvent être lues sur les écouteurs que vous connectez"</string>
     <string name="audio_sharing_dialog_share_more_content" product="device" msgid="3409470560712324580">"La musique et les vidéos de cet appareil peuvent être lues sur les écouteurs que vous connectez"</string>
     <string name="audio_sharing_dialog_share_more_content" product="desktop" msgid="3409470560712324580">"La musique et les vidéos de cet appareil peuvent être lues sur les écouteurs que vous connectez"</string>
-    <string name="audio_streams_dialog_no_le_device_subtitle" product="default" msgid="1388450179345665604">"Pour écouter un flux audio, connectez d\'abord des écouteurs prenant en charge l\'appli LE Audio à ce téléphone."</string>
+    <string name="audio_streams_dialog_no_le_device_subtitle" product="default" msgid="1388450179345665604">"Pour écouter un flux audio, connectez d\'abord à ce téléphone des écouteurs prenant en charge LE Audio."</string>
     <string name="audio_streams_dialog_no_le_device_subtitle" product="tablet" msgid="6577207951269720001">"Pour écouter un flux audio, connectez d\'abord des écouteurs prenant en charge l\'appli LE Audio à cette tablette."</string>
     <string name="audio_streams_dialog_no_le_device_subtitle" product="device" msgid="6192141045820029654">"Pour écouter un flux audio, connectez d\'abord des écouteurs prenant en charge l\'appli LE Audio à cet appareil."</string>
     <string name="audio_streams_dialog_no_le_device_subtitle" product="desktop" msgid="6192141045820029654">"Pour écouter un flux audio, connectez d\'abord des écouteurs prenant en charge l\'appli LE Audio à cet appareil."</string>
