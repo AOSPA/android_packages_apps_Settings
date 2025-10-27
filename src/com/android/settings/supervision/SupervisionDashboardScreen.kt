@@ -215,6 +215,8 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
         const val KEY = "top_level_supervision"
         internal const val SUPERVISION_DYNAMIC_GROUP_1 = "supervision_features_group_1"
         internal const val SUPERVISION_DYNAMIC_GROUP_2 = "supervision_features_group_2"
+        internal val FEATURE_GROUP_KEYS =
+            listOf(SUPERVISION_DYNAMIC_GROUP_1, SUPERVISION_DYNAMIC_GROUP_2)
         internal const val ACTIVE_SUPERVISION_APPS_GROUP = "active_supervision_apps_group"
     }
 }

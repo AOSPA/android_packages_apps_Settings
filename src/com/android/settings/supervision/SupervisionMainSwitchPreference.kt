@@ -234,6 +234,11 @@ class SupervisionMainSwitchPreference(
         preference: Preference?,
         isChecked: Boolean,
     ) {
+        if (Flags.enableSupervisionSettingsUiUpdates()) {
+            // Preferences should not be disabled in the new UI.
+            return
+        }
+
         preference?.parent?.forEachRecursively {
             if (it.parent?.key == SupervisionDashboardScreen.SUPERVISION_DYNAMIC_GROUP_1) {
                 it.isEnabled = isChecked
