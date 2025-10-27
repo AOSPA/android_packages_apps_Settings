@@ -723,7 +723,7 @@
     <string name="private_space_deleted" msgid="7692240901492540053">"プライベート スペースを削除しました"</string>
     <string name="private_space_delete_failed" msgid="7705795653796174741">"プライベート スペースを削除できませんでした"</string>
     <string name="private_space_unlocked" msgid="9091600948712932046">"プライベート スペースのロックを解除しました"</string>
-    <string name="no_device_lock_title" msgid="1078223464721029954">"画面ロックの設定"</string>
+    <string name="no_device_lock_title" msgid="1078223464721029954">"画面ロックを設定"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"プライベート スペースを使用するには、このデバイスで画面ロックを設定してください"</string>
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"画面ロックを設定"</string>
     <string name="no_device_lock_cancel" msgid="4412602160321228863">"キャンセル"</string>
@@ -748,7 +748,7 @@
     <string name="private_space_error_description" msgid="6591005734266923120">"プライベート スペースを利用できません。\n考えられる原因を表示する"</string>
     <string name="private_space_error_causes_text" msgid="1649162505129365620">"考えられる原因を表示する"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"プライベート スペースのロックを新しく設定しますか？"</string>
-    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"プライベート スペース専用のロックを新しく設定するか、デバイスのロック解除と同じロックを使用することができます"</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"プライベート スペース専用のロックを新しく設定するか、デバイスの画面ロックをそのまま使用することができます"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"画面ロックを使用"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"新しいロックを設定"</string>
     <string name="private_space_wait_screen_title" msgid="1535431437075585381">"お待ちください…"</string>
@@ -777,7 +777,7 @@
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"仕事用プロファイルのロック解除や、購入の承認、仕事用アプリへのログインに、指紋を使用できなくなります。"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"暗号化"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"暗号化されています"</string>
-    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"画面ロックの設定"</string>
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"画面ロックを設定"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"セキュリティを強化するために、このデバイスの PIN、パターン、またはパスワードを設定してください。"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"画面ロックを設定"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"画面ロックを設定"</string>
@@ -1040,6 +1040,14 @@
     <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"下に移動"</string>
     <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"左に移動"</string>
     <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"右に移動"</string>
+    <!-- no translation found for external_display_topology_a11y_display_moved_up (2006298475752942395) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_down (6028544722984648702) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_left (5308110789317472437) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_right (3802527156765844475) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ミラー"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ワイヤレス ディスプレイの有効化"</string>
@@ -1323,6 +1331,8 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / 対応デバイスは多数"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / 対応デバイスはまだ少数"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2.4 / 5 GHz / ほとんどのデバイスに対応"</string>
+    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
+    <skip />
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"アクセス ポイントの周波数を選択してください。周波数によって接続速度と対応デバイスが異なります。"</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"優先周波数"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
@@ -1333,6 +1343,10 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"高速です。このデュアルバンドのアクセス ポイントはほとんどのデバイスに対応しています。"</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"速度が最も速くなります。対応デバイスはまだ少数です。"</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
+    <skip />
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"お住まいの国や地域では利用できません"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"優先周波数を利用できない状況では、別の周波数を使用することがあります。周波数を変更すると、アクセス ポイントのセキュリティ設定も変わる場合があります。"</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"6 GHz には対応していません"</string>
@@ -1902,13 +1916,13 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"指紋認証にはパターンが必要です"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"セキュリティ強化のため、PIN を設定してください"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"指紋認証には PIN が必要です"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="4988519671035171367">"デバイスのパスワードを入力してください"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="4988519671035171367">"デバイスのパスワードを入力"</string>
     <string name="lockpassword_reenter_your_password_header" msgid="7257189484651655897">"パスワードをもう一度入力してください"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"仕事用パスワードをもう一度入力してください"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"仕事用のパスワードを入力"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="2473024535487015289">"デバイスのパターンを入力"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"仕事用のパターンを入力"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="541025103892074808">"デバイスの PIN を入力してください"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="541025103892074808">"デバイスの PIN を入力"</string>
     <string name="lockpassword_reenter_your_pin_header" msgid="373337443492549650">"PIN をもう一度入力してください"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"仕事用 PIN をもう一度入力してください"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"仕事用の PIN を入力"</string>
@@ -2422,7 +2436,7 @@
     <string name="color_contrast_about_title" msgid="5939566801408667867">"色のコントラストについて"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"画面を暗くする"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"操作のコントロール"</string>
-    <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"タイミングの調節"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"タイミングを調節"</string>
     <string name="accessibility_tap_assistance_subtext" msgid="1805279944665087799">"長押しする時間、操作までの時間"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"システム操作"</string>
     <string name="accessibility_system_controls_subtext" msgid="2722046038429586174">"ナビゲーション モード、片手モード、画面の回転"</string>
@@ -2763,7 +2777,7 @@
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"接続可能な補聴器"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"補聴器が表示されない場合"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"他のデバイスを見る"</string>
-    <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"音声の調整"</string>
+    <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"音声を調整"</string>
     <string name="accessibility_audio_adjustment_subtext" msgid="2190523175597700025">"モノラル音声、オーディオ バランス"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"音声による説明"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"対応する映画や番組にて、画面の表示内容の説明を読み上げます"</string>
@@ -5909,7 +5923,7 @@
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"現在再生しています"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"ストリームを一時停止"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"受信を停止"</string>
-    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"対応するヘッドフォンの接続"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"対応するヘッドフォンを接続"</string>
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"TalkBack を一時的に OFF にする"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"音声ストリームの再生中は TalkBack を使用できません。聞き取りを開始するには、TalkBack を OFF にしてください。"</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"OFF にする"</string>
@@ -5957,6 +5971,8 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"保護者による使用制限の PIN の設定"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"管理機能, 保護者による使用制限, 保護者, 管理機能用の PIN, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"PIN の管理"</string>
+    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
+    <skip />
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"保護者による使用制限の PIN"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"保護者用 PIN, 保護者による使用制限の PIN"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"再設定用のメールアドレスの追加"</string>
@@ -6054,10 +6070,7 @@
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> を接続しました"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"デバイスをスキャン"</string>
     <string name="satellite_tile_label" msgid="1098132989724404617">"衛星"</string>
-    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
-    <skip />
-    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
-    <skip />
-    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
-    <skip />
+    <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"ON"</string>
+    <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"利用可能"</string>
+    <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"利用不可"</string>
 </resources>

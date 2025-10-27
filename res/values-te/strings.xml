@@ -56,7 +56,7 @@
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"ఎప్పుడూ ఆన్ చేయవద్దు"</string>
     <string name="sleep_on_fold_summary" msgid="4191753338303043456">"మీరు మీ డివైజ్‌ను ఫోల్డ్ చేసినప్పుడు ముందు వైపు డిస్‌ప్లే ఆఫ్ అవుతుంది, లాక్ అవుతుంది"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"ఆటో-రొటేట్‌ను ఉపయోగించండి"</string>
-    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"\'ముఖ గుర్తింపు\' ఆటో-రొటేట్ ఖచ్చితత్వాన్ని మెరుగుపరచడానికి, ముందు వైపు ఉన్న కెమెరాను ఉపయోగిస్తుంది. ఇమేజ్‌లు ఎప్పుడూ స్టోర్ చేయబడవు లేదా Googleకు పంపబడవు."</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"ఆటో-రొటేట్ ఖచ్చితత్వాన్ని మెరుగుపరచడానికి, \'ముఖ గుర్తింపు\' (ఫేస్ డిటెక్ష‌న్‌) ముందు వైపు ఉన్న కెమెరాను ఉపయోగిస్తుంది. ఇమేజ్‌లను ఎప్పుడూ స్టోర్ చేయడం లేదా Googleకు పంప‌డం జ‌ర‌గ‌దు."</string>
     <string name="bluetooth" msgid="8898478620943459654">"బ్లూటూత్"</string>
     <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"సమీపంలోని అన్ని బ్లూటూత్ పరికరాలకు (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>) కనిపించేలా చేయి"</string>
     <string name="bluetooth_is_discoverable_always" msgid="8122823110652921674">"సమీపంలోని అన్ని బ్లూటూత్ పరికరాలకు కనిపించేలా చేయి"</string>
@@ -1040,6 +1040,14 @@
     <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"కిందికి జరపండి"</string>
     <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"ఎడమ వైపుగా జరపండి"</string>
     <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"కుడి వైపుగా జరపండి"</string>
+    <!-- no translation found for external_display_topology_a11y_display_moved_up (2006298475752942395) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_down (6028544722984648702) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_left (5308110789317472437) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_right (3802527156765844475) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"మిర్రర్"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"వైర్‌లెస్ ప్రదర్శనను ప్రారంభించండి"</string>
@@ -1323,6 +1331,8 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / అనేక పరికరాలతో అనుకూలమైనది"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / కొన్ని పరికరాలతో అనుకూలమైనది"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2.4 ఇంకా 5 GHz / దాదాపు అన్ని డివైజ్‌‌‌లకు అనుకూలమైనది"</string>
+    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
+    <skip />
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"మీ హాట్‌స్పాట్ కోసం ఫ్రీక్వెన్సీని ఎంచుకోండి. కనెక్షన్ వేగాన్ని, మీ హాట్‌స్పాట్‌ను ఏ రకమైన డివైజ్‌లు కనుగొనగలవు అనేది ఫ్రీక్వెన్సీ ప్రభావితం చేస్తుంది."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"ప్రాధాన్య ఫ్రీక్వెన్సీ"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
@@ -1333,6 +1343,10 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"వేగవంతమైన Wi-Fi హాట్‌స్పాట్. ఈ డ్యూయల్-బ్యాండ్ హాట్‌స్పాట్ చాలా డివైజ్‌లకు అనుకూలంగా ఉంటుంది."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"అత్యంత వేగవంతమైన Wi-Fi హాట్‌స్పాట్. కొన్ని పరికరాలతో అనుకూలమైనది."</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
+    <skip />
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"మీ దేశంలో లేదా ప్రాంతంలో అందుబాటులో లేదు"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"మీ ప్రాధాన్య ఫ్రీక్వెన్సీ అందుబాటులో లేకుంటే, మీ హాట్‌స్పాట్ వేరొక దానిని ఉపయోగించవచ్చు. మీరు ఫ్రీక్వెన్సీని మార్చినట్లయితే, హాట్‌స్పాట్ సెక్యూరిటీ సెట్టింగ్‌లు మారవచ్చు."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"6 GHzతో అందుబాటులో లేదు"</string>
@@ -2334,7 +2348,7 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"యూజర్ ఎంచుకున్నది: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"స్పీచ్"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"స్పీచ్"</string>
-    <string name="speech_preference_summary" msgid="5190362663352347487">"స్పీచ్ రికగ్నిషన్‌, అవుట్‌పుట్‌ నియంత్రించండి"</string>
+    <string name="speech_preference_summary" msgid="5190362663352347487">"స్పీచ్ రికగ్నిషన్‌ &amp; అవుట్‌పుట్‌ కంట్రోల్స్"</string>
     <string name="pointer_speed" msgid="5284291781349402396">"కర్సర్ వేగం"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"కర్సర్ సైజ్"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4410507171942820948">"కర్సర్ స్కేల్‌ను తగ్గించండి"</string>
@@ -2729,7 +2743,7 @@
     <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"దీన్ని ఉపయోగించడానికి, యాక్సెసిబిలిటీ ఫీచర్ పేజీలో %1$s షార్ట్‌కట్‌ను ఆన్ చేయండి"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"కొనసాగించండి"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"హియరింగ్ డివైజ్‌‌‌లు"</string>
-    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA, LE ఆడియో వినికిడి పరికరాలు, కోక్లియర్ ఇంప్లాంట్‌లు, అలాగే ఇతర యాంప్లిఫికేషన్ పరికరాలను సెటప్ చేసి, మేనేజ్ చేయండి"</string>
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA, LE ఆడియో వినికిడి డివైజ్‌లు, కోక్లియర్ ఇంప్లాంట్‌లు, అలాగే ఇతర యాంప్లిఫికేషన్ డివైజ్‌ల‌ను సెటప్ చేసి, మేనేజ్ చేయండి"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"ASHA హియరింగ్ డివైజ్‌‌‌లు, కోక్లియర్ ఇంప్లాంట్‌లు, అలాగే ఇతర యాంప్లిఫికేషన్ డివైజ్‌‌‌లను సెటప్ చేసి, మేనేజ్ చేయండి"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"LE ఆడియో వినికిడి పరికరాలు, కోక్లియర్ ఇంప్లాంట్‌లు, అలాగే ఇతర యాంప్లిఫికేషన్ పరికరాలను సెటప్ చేసి, మేనేజ్ చేయండి"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3534747218670001784">"వినికిడి డివైజ్‌లు ఇంకా ఇతర యాంప్లిఫికేషన్ డివైజ్‌లను సెటప్ చేయండి, మేనేజ్ చేయండి"</string>
@@ -2761,8 +2775,8 @@
     <string name="accessibility_hearing_device_pairing_asha_only_intro" msgid="5679230908462987522">"ఈ పేజీలో ASHA వినికిడి డివైజ్‌లను పెయిర్ చేసే అవకాశం మీకు ఉంటుంది. మీ వినికిడి డివైజ్ ఆన్ చేసి ఉందని, పెయిర్ చేయడానికి సిద్ధంగా ఉందని నిర్ధారించుకోండి."</string>
     <string name="accessibility_hearing_device_pairing_hap_only_intro" msgid="2233661046254311681">"ఈ పేజీలో LE ఆడియో వినికిడి డివైజ్‌లను పెయిర్ చేసే అవకాశం మీకు ఉంటుంది. మీ వినికిడి డివైజ్ ఆన్ చేసి ఉందని, పెయిర్ చేయడానికి సిద్ధంగా ఉందని నిర్ధారించుకోండి."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"అందుబాటులో హియరింగ్ డివైజ్‌‌‌లు"</string>
-    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"మీ వినికిడి పరికరం కనిపించలేదా?"</string>
-    <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"మరిన్ని పరికరాలను చూడండి"</string>
+    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"మీ హియ‌రింగ్‌ డివైజ్‌ కనిపించలేదా?"</string>
+    <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"మరిన్ని డివైజ్‌ల‌ను చూడండి"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"ఆడియో సర్దుబాటు"</string>
     <string name="accessibility_audio_adjustment_subtext" msgid="2190523175597700025">"మోనో ఆడియో, ఆడియో బ్యాలెన్స్"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"ఆడియో వివరణ"</string>
@@ -5957,6 +5971,8 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"తల్లిదండ్రుల కంట్రోల్స్ PINను సెటప్ చేయండి"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"పర్యవేక్షణ, తల్లిదండ్రుల కంట్రోల్స్, తల్లిదండ్రులు, పర్యవేక్షణ PIN, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"మీ PINను మేనేజ్ చేయండి"</string>
+    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
+    <skip />
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"తల్లిదండ్రుల కంట్రోల్స్ PIN"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"తల్లి/తండ్రి PIN, తల్లిదండ్రుల కంట్రోల్స్ PIN"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"రికవరీ ఈమెయిల్‌ను జోడించండి"</string>
@@ -6029,10 +6045,8 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"లొకేషన్‌కు యాక్సెస్ ఉన్న యాప్‌లను, సర్వీస్‌లను చూడండి"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"ఐడెంటిటీ చెక్ మరిన్ని యాప్‌లలో పని చేస్తుంది"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"ఐడెంటిటీ చెక్, మీ యాప్‌ల్లోకి ఇతరులెవరూ రాకుండా అడ్డుకుంటుంది. ఈ ఫీచర్ ప్రస్తుతం, వేలిముద్రను లేదా ఫేస్ అన్‌లాక్‌ను ఉపయోగించే అన్ని యాప్‌ల్లో అందుబాటులో ఉంది."</string>
-    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
-    <skip />
+    <string name="identity_check_watch_notification_title" msgid="5559702400315647907">"ఐడెంటిటీ చెక్, మీ వాచ్"</string>
+    <string name="identity_check_watch_notification_summary" msgid="3200144847521451493">"కనెక్ట్ అయిన వాచ్‌తో, ఐడెంటిటీ చెక్ యాప్‌లకు అవాంఛిత యాక్సెస్ లేకుండా చేయడానికి ఇది మీరేనని వెరిఫై చేయడం కోసం మరిన్ని మార్గాలను యాడ్ చేస్తుంది"</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"వివరాలను చూడండి"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"సెట్టింగ్‌లను చెక్ చేయడం సాధ్యపడలేదు"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"ఇంకా ఏ సమాచారం లేదు"</string>
@@ -6056,10 +6070,7 @@
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> కనెక్ట్ అయింది"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"డివైజ్‌ను స్కాన్ చేయండి"</string>
     <string name="satellite_tile_label" msgid="1098132989724404617">"ఉపగ్రహం"</string>
-    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
-    <skip />
-    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
-    <skip />
-    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
-    <skip />
+    <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"ఆన్‌లో ఉంది"</string>
+    <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"అందుబాటులో ఉంది"</string>
+    <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"అందుబాటులో లేదు"</string>
 </resources>
