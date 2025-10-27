@@ -32,6 +32,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 /** Unit test for [ResolutionRefreshRatePreferenceViewModel] */
@@ -73,6 +74,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
 
         assertThat(state.currentActiveMode).isEqualTo(mode)
         assertThat(state.pendingMode).isEqualTo(mode)
+        assertThat(state.confirmationDialogEvent).isNull()
 
         assertThat(state.topResolutionItems)
             .containsExactly(
@@ -173,5 +175,62 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
 
         assertThat(state.pendingMode).isEqualTo(targetModeAt50Hz)
         assertThat(state.currentActiveMode).isEqualTo(currentActiveMode)
+    }
+
+    @Test
+    fun onApplyClicked_setsConfirmationEventAndStartsPreview() {
+        setupViewModel()
+        viewModel.onResolutionSelected(viewModel.uiState.value!!.moreResolutionItems.first())
+        val uiState = viewModel.uiState.value!!
+        val pendingMode = uiState.pendingMode
+        val currentActiveMode = uiState.currentActiveMode
+
+        viewModel.onApplyClicked()
+        val updatedStated = viewModel.uiState.value!!
+
+        assertThat(updatedStated.confirmationDialogEvent).isNotNull()
+        assertThat(updatedStated.confirmationDialogEvent?.newMode).isEqualTo(pendingMode)
+        assertThat(updatedStated.confirmationDialogEvent?.existingMode).isEqualTo(currentActiveMode)
+        verify(mMockedInjector).setUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID, pendingMode, false)
+    }
+
+    @Test
+    fun onConfirmationResult_confirmed_setsModePermanentlyAndUpdatescurrentActiveMode() {
+        setupViewModel()
+        viewModel.onResolutionSelected(viewModel.uiState.value!!.moreResolutionItems.first())
+        val uiState = viewModel.uiState.value!!
+        val pendingMode = uiState.pendingMode
+        viewModel.onApplyClicked()
+
+        viewModel.onConfirmationResult(true)
+        val updatedState = viewModel.uiState.value!!
+
+        // The original mode should now be the new pending mode
+        assertThat(updatedState.currentActiveMode).isEqualTo(pendingMode)
+        // The pending mode should be synced to the new original mode
+        assertThat(updatedState.pendingMode).isEqualTo(pendingMode)
+        // The dialog event should be cleared
+        assertThat(updatedState.confirmationDialogEvent).isNull()
+        verify(mMockedInjector).setUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID, pendingMode, true)
+    }
+
+    @Test
+    fun onConfirmationResult_canceled_resetsHardwareAndRevertsPendingMode() {
+        setupViewModel()
+        val uiState = viewModel.uiState.value!!
+        val currentActiveMode = uiState.currentActiveMode
+        viewModel.onResolutionSelected(uiState.moreResolutionItems.first())
+        viewModel.onApplyClicked()
+
+        viewModel.onConfirmationResult(false)
+        val updatedState = viewModel.uiState.value!!
+
+        // The original mode should remain unchanged
+        assertThat(updatedState.currentActiveMode).isEqualTo(currentActiveMode)
+        // The pending mode should be reverted back to the original mode
+        assertThat(updatedState.pendingMode).isEqualTo(currentActiveMode)
+        // The dialog event should be cleared
+        assertThat(updatedState.confirmationDialogEvent).isNull()
+        verify(mMockedInjector).resetUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID)
     }
 }
