@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.app.Activity
+import android.app.Application
 import android.app.role.RoleManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
@@ -58,6 +59,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.LooperMode
 
 @RunWith(AndroidJUnit4::class)
@@ -152,6 +154,71 @@ class SupervisionDashboardScreenTest {
             )
 
             assertThat(childPreference.isEnabled).isFalse()
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun clickDashboardPreference_withSupervisionDisabled_launchesSetupSupervisionActivity() {
+        shadowOf(context as Application)
+            .setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
+
+        preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
+            val dashboardFragment = fragment as SupervisionDashboardFragment
+            val childPreference =
+                fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
+
+            // With supervision disabled, the preference click should redirect to
+            // SetupSupervisionActivity after refreshDashboardTiles is called.
+            mockSupervisionManager.stub { on { isSupervisionEnabled } doReturn false }
+            dashboardFragment.refreshDashboardTiles("test")
+
+            childPreference.performClick()
+
+            val intent = shadowOf(fragment.activity).nextStartedActivity
+            assertThat(intent.component?.className)
+                .isEqualTo(SetupSupervisionActivity::class.java.name)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun refreshDashboardTiles_withSupervisionEnabled_restoresOriginalListener() {
+        shadowOf(context as Application)
+            .setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
+
+        preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
+            val dashboardFragment = fragment as SupervisionDashboardFragment
+            val childPreference =
+                fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
+
+            // Store the original listener.
+            mockSupervisionManager.stub { on { isSupervisionEnabled } doReturn true }
+            dashboardFragment.refreshDashboardTiles("enables supervision")
+            val originalListener = childPreference.onPreferenceClickListener
+
+            // With supervision disabled, the preference click listener should be updated.
+            mockSupervisionManager.stub { on { isSupervisionEnabled } doReturn false }
+            dashboardFragment.refreshDashboardTiles("disables supervision")
+            assertThat(childPreference.onPreferenceClickListener)
+                .isNotSameInstanceAs(originalListener)
+
+            // With supervision enabled, the preference click listener should be restored.
+            mockSupervisionManager.stub { on { isSupervisionEnabled } doReturn true }
+            dashboardFragment.refreshDashboardTiles("enables supervision again")
+            assertThat(childPreference.onPreferenceClickListener).isSameInstanceAs(originalListener)
+        }
+    }
+
+    @Test
+    fun getPreferenceScreenBindingKey_returnsScreenKey() {
+        preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
+            assertThat(
+                    (fragment as SupervisionDashboardFragment).getPreferenceScreenBindingKey(
+                        mockLifeCycleContext
+                    )
+                )
+                .isEqualTo(SupervisionDashboardScreen.KEY)
         }
     }
 
