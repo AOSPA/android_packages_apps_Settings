@@ -172,8 +172,11 @@ public interface PowerUsageFeatureProvider {
     /** Whether the device is under the battery defender mode */
     boolean isBatteryDefend(BatteryInfo info);
 
-    /** Whether the battery usage reattribute is eabled or not. */
+    /** Whether the battery usage reattribute is enabled or not. */
     boolean isBatteryUsageReattributeEnabled();
+
+    /** Whether the battery advance info is enabled or not. */
+    boolean isBatteryAdvanceInfoEnabled();
 
     /** Collect and process battery reattribute data if needed. */
     boolean processBatteryReattributeData(
