@@ -15,10 +15,12 @@
  */
 package com.android.settings.supervision
 
+import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import android.platform.test.annotations.EnableFlags
 import androidx.core.net.toUri
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
@@ -142,11 +144,7 @@ class SupervisionPromoFooterPreferenceTest {
         testScope.runTest {
             val promoPreference =
                 SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
-            preferenceData =
-                PreferenceData(
-                    action = "Test Action",
-                    intentData = "url",
-                )
+            preferenceData = PreferenceData(action = "Test Action", intentData = "url")
 
             mockPackageManager.stub {
                 on { queryIntentActivitiesAsUser(any(), any<Int>(), any<Int>()) }
@@ -196,5 +194,31 @@ class SupervisionPromoFooterPreferenceTest {
             val intent = preference.intent!!
             assertThat(intent.action).isEqualTo("Test Action")
             assertThat(intent.data).isEqualTo(intentData.toUri())
+        }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onResume_notifyParentOnVisibilityChange() =
+        testScope.runTest {
+            val promoPreference =
+                SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
+
+            val intentData = "https://www.familylink.com"
+            preferenceData =
+                PreferenceData(
+                    title = "Test Title",
+                    action = "Test Action",
+                    intentData = intentData,
+                )
+
+            mockPackageManager.stub {
+                on { queryIntentActivitiesAsUser(any(), any<Int>(), any<Int>()) }
+                    .thenReturn(listOf(ResolveInfo()))
+            }
+            promoPreference.onCreate(preferenceLifecycleContext)
+            promoPreference.onResume(preferenceLifecycleContext)
+            promoPreference.bind(preference, mock())
+            verify(preferenceLifecycleContext, times(1))
+                .notifyPreferenceChange(SupervisionDashboardScreen.AVAILABLE_SUPERVISION_APPS_GROUP)
         }
 }
