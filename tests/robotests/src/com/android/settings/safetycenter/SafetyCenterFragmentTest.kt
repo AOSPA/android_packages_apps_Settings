@@ -42,11 +42,14 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
+import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_ACTION
+import com.android.settings.safetycenter.SafetyCenterTestUtils.USER_PERSONAL
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createEntry
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssue
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssueAction
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createScData
 import com.android.settings.safetycenter.ui.SafetyCenterFragment
+import com.android.settingslib.safetycenter.SafetySourcePreference
 import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.BannerMessagePreferenceGroup
 import com.android.settingslib.widget.preference.banner.R as BannerR
@@ -58,6 +61,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowDrawable
 import org.robolectric.shadows.ShadowLooper
@@ -605,13 +609,45 @@ class SafetyCenterFragmentTest {
         }
     }
 
+    // Tests for safety source directly displayed on the main page
+
+    @Test
+    fun workPolicyInfo_whenEntryExists_isVisibleAndClickable() {
+        val entry =
+            createEntry(
+                id = "workPolicyInfoEntry",
+                title = "Your work policy info",
+                userHandle = USER_PERSONAL,
+                sourceId = ANDROID_WORK_POLICY_INFO_SOURCE_ID,
+                summary = "Settings managed by your IT admin",
+            )
+
+        runTest(createScData(listOf(entry))) { fragment ->
+            val preference =
+                fragment.findPreference<SafetySourcePreference>(
+                    ANDROID_WORK_POLICY_INFO_PREFERENCE_KEY
+                )
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.title.toString()).isEqualTo(entry.title)
+            assertThat(preference?.summary.toString()).isEqualTo(entry.summary)
+
+            preference?.performClick()
+            ShadowLooper.idleMainLooper()
+            val startedIntent = shadowOf(mApplication).nextStartedActivity
+            assertThat(startedIntent).isNotNull()
+            assertThat(startedIntent.action).isEqualTo(TEST_ACTION)
+        }
+    }
+
     companion object {
         private const val DEVICE_UNLOCK_KEY = "device_unlock_subpage"
         private const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
         private const val ANDROID_LOCK_SCREEN_SOURCE_ID = "AndroidLockScreen"
         private const val ANDROID_HEALTH_CONNECT_SOURCE_ID = "AndroidHealthConnect"
+        private const val ANDROID_WORK_POLICY_INFO_SOURCE_ID = "AndroidWorkPolicyInfo"
         private const val ANDROID_A11Y_SOURCES_ID = "AndroidAccessibility"
         private const val SAFETY_ISSUES_BANNER_KEY = "issues_banner_group"
+        private const val ANDROID_WORK_POLICY_INFO_PREFERENCE_KEY = "work_policy_info"
         private val DEFAULT_DEVICE_UNLOCK_SUMMARY_RES = R.string.safety_center_device_unlock_summary
         private val DEFAULT_PRIVACY_CONTROLS_SUMMARY_RES = R.string.privacy_sources_summary
     }
