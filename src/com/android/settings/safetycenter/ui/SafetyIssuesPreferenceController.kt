@@ -107,7 +107,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
      */
     fun setSubpageSafetySourcesAndIllustration(
         sources: List<String>,
-        illustrationPref: IllustrationPreference,
+        illustrationPref: IllustrationPreference?,
     ) {
         this.isSubpage = true
         this.relatedSafetySources = sources
@@ -123,7 +123,6 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
         super.displayPreference(screen)
         bannerGroup = screen.findPreference(preferenceKey)
         bannerGroup?.let {
-            it.isVisible = false
             // Set titles for the expand/collapse buttons
             it.title =
                 mContext.getString(R.string.safety_center_issues_banner_group_expandable_title)
