@@ -273,6 +273,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public boolean isBatteryAdvanceInfoEnabled() {
+        return false;
+    }
+
+    @Override
     public boolean processBatteryReattributeData(
             @NonNull Context context,
             @NonNull Map<Long, BatteryDiffData> batteryDiffDataMap,

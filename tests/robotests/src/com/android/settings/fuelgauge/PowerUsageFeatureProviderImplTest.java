@@ -209,4 +209,9 @@ public class PowerUsageFeatureProviderImplTest {
 
         assertThat(mPowerFeatureProvider.isBatteryDefend(mBatteryInfo)).isTrue();
     }
+
+    @Test
+    public void isBatteryAdvanceInfoEnabled_returnFalse() {
+        assertThat(mPowerFeatureProvider.isBatteryAdvanceInfoEnabled()).isFalse();
+    }
 }
