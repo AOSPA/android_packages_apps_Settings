@@ -19,7 +19,14 @@ package com.android.settings.connecteddevice.display
 import android.app.settings.SettingsEnums
 import android.icu.text.NumberFormat
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
@@ -28,20 +35,23 @@ import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.SettingsPreferenceFragment
 import com.android.settings.Utils
+import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceViewModel.ConfirmationDialogEvent
 import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceViewModel.RefreshRateItem
 import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceViewModel.ResolutionItem
 import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceViewModel.UiState
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 import java.util.Locale
+import kotlin.properties.Delegates
 
 class ResolutionRefreshRatePreferenceFragment(
     private val testViewModel: ResolutionRefreshRatePreferenceViewModel? = null
-) : SettingsPreferenceFragment() {
+) : SettingsPreferenceFragment(), MenuProvider {
 
     private lateinit var viewModel: ResolutionRefreshRatePreferenceViewModel
     private lateinit var topOptionsPreference: PreferenceCategory
     private lateinit var moreOptionsPreference: PreferenceCategory
     private lateinit var refreshRatePreference: PreferenceCategory
+    private var displayId: Int by Delegates.notNull()
 
     private val resolutionFormatter =
         NumberFormat.getNumberInstance(Locale.getDefault()).apply { isGroupingUsed = false }
@@ -58,7 +68,7 @@ class ResolutionRefreshRatePreferenceFragment(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val displayId = arguments?.getInt(DISPLAY_ID_ARG, INVALID_DISPLAY) ?: INVALID_DISPLAY
+        displayId = arguments?.getInt(DISPLAY_ID_ARG, INVALID_DISPLAY) ?: INVALID_DISPLAY
         if (displayId == INVALID_DISPLAY) {
             finish()
             return
@@ -87,10 +97,12 @@ class ResolutionRefreshRatePreferenceFragment(
         }
         addPreferencesFromResource(R.xml.external_display_resolution_refresh_rate_settings)
         setupPreferences()
+        setupConfirmationResultListener()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             if (state == null) {
@@ -98,6 +110,9 @@ class ResolutionRefreshRatePreferenceFragment(
                 return@observe
             }
             update(state)
+            if (state.confirmationDialogEvent != null) {
+                showDialog(state.confirmationDialogEvent)
+            }
         }
     }
 
@@ -207,6 +222,75 @@ class ResolutionRefreshRatePreferenceFragment(
         }
     }
 
+    private fun showDialog(dialogInfo: ConfirmationDialogEvent) {
+        if (
+            (getParentFragmentManager().findFragmentByTag(ResolutionChangeDialogFragment.TAG) !=
+                null)
+        ) {
+            return
+        }
+        logInfo("Showing dialog to confirm resolution/refresh rate change")
+        val dialog =
+            ResolutionChangeDialogFragment.newInstance(dialogInfo.newMode, dialogInfo.existingMode)
+        dialog.show(parentFragmentManager, ResolutionChangeDialogFragment.TAG)
+    }
+
+    private fun setupConfirmationResultListener() {
+        parentFragmentManager.setFragmentResultListener(
+            ResolutionChangeDialogFragment.KEY_RESULT,
+            this,
+        ) { _, bundle ->
+            val confirmed =
+                bundle.getParcelable(
+                    ResolutionChangeDialogFragment.KEY_CONFIRMED,
+                    ResolutionChangeConfirmationState::class.java,
+                )
+            when (confirmed) {
+                ResolutionChangeConfirmationState.ACCEPT -> viewModel.onConfirmationResult(true)
+                ResolutionChangeConfirmationState.REVERT -> viewModel.onConfirmationResult(false)
+                else -> {
+                    logError("Unexpected confirmed state $confirmed, this should never happen")
+                }
+            }
+        }
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        val applyItem = menu.add(Menu.NONE, Menu.FIRST, 0, R.string.apply)
+        applyItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+        applyItem.setActionView(R.layout.resolution_change_apply_button)
+        val actionView = applyItem.actionView
+        if (actionView == null) {
+            logError("Missing action view even after setActionView(), this should never happen")
+            return
+        }
+        actionView
+            .findViewById<Button>(R.id.resolution_change_apply_button_view)
+            .setOnClickListener { viewModel.onApplyClicked() }
+    }
+
+    override fun onPrepareMenu(menu: Menu) {
+        if (viewModel.uiState.value == null) {
+            // If state is null, fragment will exit on ViewModel#observe
+            logWarn("Missing UiState, fragment will exit")
+            return
+        }
+        val applyItem = menu.findItem(Menu.FIRST)
+        val actionView = applyItem.actionView
+        if (actionView == null) {
+            logError("Missing action view even after setActionView(), this should never happen")
+            return
+        }
+
+        val isVisible =
+            viewModel.uiState.value?.let { it.pendingMode.modeId != it.currentActiveMode.modeId }
+                ?: false
+        val applyButton: Button = actionView.findViewById(R.id.resolution_change_apply_button_view)
+        applyButton.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean = false
+
     private fun ResolutionItem.toReadableString(): String {
         val formattedWidth = resolutionFormatter.format(this.physicalWidth)
         val formattedHeight = resolutionFormatter.format(this.physicalHeight)
@@ -217,6 +301,18 @@ class ResolutionRefreshRatePreferenceFragment(
         return refreshRateFormatter.format(this.refreshRate)
     }
 
+    private fun logInfo(message: String) {
+        Log.i(TAG, "[Display#$displayId] $message")
+    }
+
+    private fun logWarn(message: String) {
+        Log.d(TAG, "[Display#$displayId] $message")
+    }
+
+    private fun logError(message: String) {
+        Log.e(TAG, "[Display#$displayId] $message")
+    }
+
     companion object {
 
         const val MORE_OPTIONS_KEY = "more_options"
@@ -224,5 +320,6 @@ class ResolutionRefreshRatePreferenceFragment(
         const val REFRESH_RATE_OPTIONS_KEY = "refresh_rate_options"
         const val DISPLAY_ID_ARG = "display_id"
         const val INVALID_DISPLAY = -1
+        private const val TAG = "ResRefreshRatePref"
     }
 }

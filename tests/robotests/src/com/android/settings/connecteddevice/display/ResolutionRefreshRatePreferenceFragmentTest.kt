@@ -19,6 +19,11 @@ package com.android.settings.connecteddevice.display
 import android.app.Application
 import android.os.Bundle
 import android.os.Looper
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.Button
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.preference.PreferenceCategory
@@ -36,6 +41,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.robolectric.Shadows.shadowOf
 
@@ -210,5 +218,145 @@ class ResolutionRefreshRatePreferenceFragmentTest : ExternalDisplayTestBase() {
 
         val modeAt50Hz = externalDisplay.supportedModes.find { it.modeId == refreshRateModeId }
         assertThat(viewModel.uiState.value?.pendingMode).isEqualTo(modeAt50Hz)
+    }
+
+    @Test
+    fun applyButton_initialState_isHidden() {
+        launchFragment()
+
+        scenario.onFragment { fragment ->
+            val (applyButton, menu) = getApplyButtonAndMenuFromFragment(fragment)
+            fragment.onPrepareMenu(menu)
+            assertThat(applyButton.visibility).isEqualTo(View.INVISIBLE)
+        }
+    }
+
+    @Test
+    fun applyButton_whenStateIsPending_isVisible() {
+        launchFragment()
+        val newResolutionItem =
+            ResolutionRefreshRatePreferenceViewModel.ResolutionItem(
+                physicalWidth = 800,
+                physicalHeight = 600,
+            )
+        viewModel.onResolutionSelected(newResolutionItem)
+        shadowOf(Looper.getMainLooper()).idle()
+
+        scenario.onFragment { fragment ->
+            val (applyButton, menu) = getApplyButtonAndMenuFromFragment(fragment)
+            fragment.onPrepareMenu(menu)
+            assertThat(applyButton.visibility).isEqualTo(View.VISIBLE)
+        }
+    }
+
+    @Test
+    fun applyButton_onClick_callsViewModelOnApplyClicked() {
+        launchFragment()
+        val width = 800
+        val height = 600
+        val pendingMode =
+            externalDisplay.supportedModes.find {
+                it.physicalWidth == width && it.physicalHeight == height
+            }!!
+        val newResolutionItem =
+            ResolutionRefreshRatePreferenceViewModel.ResolutionItem(width, height)
+        viewModel.onResolutionSelected(newResolutionItem)
+        shadowOf(Looper.getMainLooper()).idle()
+
+        scenario.onFragment { fragment ->
+            val (applyButton, _) = getApplyButtonAndMenuFromFragment(fragment)
+            applyButton.performClick()
+        }
+        shadowOf(Looper.getMainLooper()).idle()
+
+        // Dialog is opened and pendingMode is set temporarily
+        scenario.onFragment { fragment ->
+            assertThat(
+                    fragment.parentFragmentManager.findFragmentByTag(
+                        ResolutionChangeDialogFragment.TAG
+                    )
+                )
+                .isNotNull()
+        }
+        shadowOf(Looper.getMainLooper()).idle()
+        verify(mMockedInjector)
+            .setUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID, pendingMode, /* storeMode= */ false)
+    }
+
+    @Test
+    fun onConfirmationResult_accept_updatesViewModelAndInjector() {
+        launchFragment()
+        val width = 640
+        val height = 480
+        val pendingMode =
+            externalDisplay.supportedModes.find {
+                it.physicalWidth == width && it.physicalHeight == height
+            }!!
+        scenario.onFragment { f ->
+            f.preferenceScreen
+                .findPreference<SelectorWithWidgetPreference>("${width}x$height")!!
+                .performClick()
+        }
+        shadowOf(Looper.getMainLooper()).idle()
+        val bundle =
+            Bundle().apply {
+                putParcelable(
+                    ResolutionChangeDialogFragment.KEY_CONFIRMED,
+                    ResolutionChangeConfirmationState.ACCEPT,
+                )
+            }
+
+        scenario.onFragment { fragment ->
+            fragment.setFragmentResult(ResolutionChangeDialogFragment.KEY_RESULT, bundle)
+        }
+        shadowOf(Looper.getMainLooper()).idle()
+
+        // currentActiveMode is updated to match the pendingMode that has just been set
+        assertThat(viewModel.uiState.value?.currentActiveMode).isEqualTo(pendingMode)
+        verify(mMockedInjector)
+            .setUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID, pendingMode, /* storeMode= */ true)
+    }
+
+    @Test
+    fun onConfirmationResult_revert_updatesViewModelAndInjector() {
+        launchFragment()
+        val currentActiveMode = viewModel.uiState.value!!.currentActiveMode
+        scenario.onFragment { f ->
+            f.preferenceScreen
+                .findPreference<SelectorWithWidgetPreference>("640x480")!!
+                .performClick()
+        }
+        shadowOf(Looper.getMainLooper()).idle()
+        val bundle =
+            Bundle().apply {
+                putParcelable(
+                    ResolutionChangeDialogFragment.KEY_CONFIRMED,
+                    ResolutionChangeConfirmationState.REVERT,
+                )
+            }
+
+        scenario.onFragment { fragment ->
+            fragment.setFragmentResult(ResolutionChangeDialogFragment.KEY_RESULT, bundle)
+        }
+        shadowOf(Looper.getMainLooper()).idle()
+
+        // pendingMode is reverted back to currentActiveMode
+        assertThat(viewModel.uiState.value?.pendingMode).isEqualTo(currentActiveMode)
+        verify(mMockedInjector).resetUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID)
+    }
+
+    private fun getApplyButtonAndMenuFromFragment(
+        fragment: ResolutionRefreshRatePreferenceFragment
+    ): Pair<Button, Menu> {
+        val menu = mock<Menu>()
+        val applyButton = Button(fragment.requireContext())
+        val mockActionView = mock<View>()
+        val mockMenuItem = mock<MenuItem>()
+        whenever(mockActionView.findViewById<Button>(any())).thenReturn(applyButton)
+        whenever(mockMenuItem.actionView).thenReturn(mockActionView)
+        whenever(menu.add(Menu.NONE, Menu.FIRST, 0, R.string.apply)).thenReturn(mockMenuItem)
+        whenever(menu.findItem(Menu.FIRST)).thenReturn(mockMenuItem)
+        fragment.onCreateMenu(menu, mock())
+        return Pair(applyButton, menu)
     }
 }
