@@ -118,7 +118,11 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         boolean showDualBand = mWifiHotspotRepository.isDualBand() && available;
         if (mCurrentSecurityType == SECURITY_TYPE_WPA3_OWE ||
             mCurrentSecurityType == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
-            mSpeedInfo2g5g.mIsVisible = false;
+            if (!mWifiHotspotRepository.isEnhancedOpenOweOnlyEnabled()) {
+                mSpeedInfo2g5g.mIsVisible = false;
+            } else {
+                mSpeedInfo2g5g.mIsVisible = showDualBand;
+            }
         } else {
             log("on5gAvailableChanged(), showDualBand:" + showDualBand);
             mSpeedInfo2g5g.mIsVisible = showDualBand;
@@ -141,9 +145,11 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
        log("onSecurityTypeChanged(), securityType:" + securityType);
        if (securityType == SECURITY_TYPE_WPA3_OWE ||
            securityType == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
-           mSpeedInfo2g5g.mIsVisible = false;
-           if (mSpeedInfo2g5g.mIsChecked) {
-               mSpeedInfo2g.mIsChecked = true;
+           if (!mWifiHotspotRepository.isEnhancedOpenOweOnlyEnabled()) {
+               mSpeedInfo2g5g.mIsVisible = false;
+               if (mSpeedInfo2g5g.mIsChecked) {
+                   mSpeedInfo2g.mIsChecked = true;
+               }
            }
        }
        updateSpeedInfoMapData();
