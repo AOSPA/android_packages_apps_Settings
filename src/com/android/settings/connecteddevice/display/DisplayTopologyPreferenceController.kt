@@ -529,7 +529,7 @@ class DisplayTopologyPreferenceController(
                         displayId,
                     )
             }
-        paneContent.announceForAccessibility(announcement)
+        paneContent.stateDescription = announcement
     }
 
     private fun onBlockTouchDown(
