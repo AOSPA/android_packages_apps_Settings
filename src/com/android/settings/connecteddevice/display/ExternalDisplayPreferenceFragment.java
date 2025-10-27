@@ -560,7 +560,6 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             logger.updateResolution(mode.getPhysicalWidth(), mode.getPhysicalHeight());
         }
         if (DesktopExperienceFlags.ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT.isTrue()
-                && DesktopExperienceFlags.ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG.isTrue()
                 && mInjector.isProjectedModeEnabled()) {
             addConnectionPreference(refresh, display, position);
         }
