@@ -22,7 +22,10 @@ import static com.android.settings.core.instrumentation.SettingsStatsLog.AUTO_RE
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -44,6 +47,7 @@ import android.os.UserManager;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
@@ -52,7 +56,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationFeatureProvider;
-import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -120,6 +123,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     private Intent mAppLaunchIntent;
     private ApplicationsState.Session mSession;
     private RestrictedLockUtils.EnforcedAdmin mAppsControlDisallowedAdmin;
+    @Nullable
+    private EnforcingAdmin mAppsControlEnforcingAdmin;
     private PreferenceScreen mScreen;
 
     private long mSessionId;
@@ -189,10 +194,22 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     @Override
     public void onResume() {
         if (isAvailable()) {
-            mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
-                    mActivity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
-            mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-                    mActivity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                PolicyEnforcementInfo appsControlEnforcementInfo = mActivity.getSystemService(
+                        DevicePolicyManager.class).getEnforcingAdminsForPolicy(
+                        DevicePolicyIdentifiers.getIdentifierForUserRestriction(
+                                UserManager.DISALLOW_APPS_CONTROL), mUserId);
+                mAppsControlEnforcingAdmin =
+                        appsControlEnforcementInfo.getMostImportantEnforcingAdmin();
+                mAppsControlDisallowedBySystem =
+                        appsControlEnforcementInfo.isEnforcedBySystem();
+            } else {
+                mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
+                        mActivity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
+                mAppsControlDisallowedAdmin =
+                        RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                                mActivity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
+            }
 
             if (!refreshUi()) {
                 setIntentAndFinish(false);
@@ -229,15 +246,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                 mFragment.startActivityForResult(uninstallDaIntent, mRequestRemoveDeviceAdmin);
                 return;
             }
-            RestrictedLockUtils.EnforcedAdmin admin =
-                    RestrictedLockUtilsInternal.checkIfUninstallBlocked(mActivity,
-                            packageName, mUserId);
-            boolean uninstallBlockedBySystem = mAppsControlDisallowedBySystem ||
-                    RestrictedLockUtilsInternal.hasBaseUserRestriction(mActivity, packageName,
-                            mUserId);
-            if (admin != null && !uninstallBlockedBySystem) {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mActivity, admin);
-            } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+            if (!showAdminSupportDialogIfRestricted(packageName)
+                    && (mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
                 if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
                     showDialogInner(ButtonActionDialogFragment.DialogType.DISABLE);
                 } else if (mAppEntry.info.enabled) {
@@ -264,6 +274,31 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                 uninstallPkg(packageName, false);
             }
         }
+
+        private boolean showAdminSupportDialogIfRestricted(String packageName) {
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                PolicyEnforcementInfo restrictionEnforcementInfo =
+                        RestrictedLockUtilsInternal.checkIfUninstallBlockedByAdminOrSystem(
+                                mActivity, packageName, mUserId);
+                EnforcingAdmin admin = restrictionEnforcementInfo.getMostImportantEnforcingAdmin();
+                if (admin != null && !restrictionEnforcementInfo.isEnforcedBySystem()) {
+                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mActivity, admin, null);
+                    return true;
+                }
+                return false;
+            }
+            RestrictedLockUtils.EnforcedAdmin admin =
+                    RestrictedLockUtilsInternal.checkIfUninstallBlocked(mActivity, packageName,
+                            mUserId);
+            boolean uninstallBlockedBySystem = mAppsControlDisallowedBySystem
+                    || RestrictedLockUtilsInternal.hasBaseUserRestriction(mActivity, packageName,
+                    mUserId);
+            if (admin != null && !uninstallBlockedBySystem) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mActivity, admin);
+                return true;
+            }
+            return false;
+        }
     }
 
     private class ForceStopButtonListener implements View.OnClickListener {
@@ -280,12 +315,21 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                         RestrictedLockUtilsInternal.getDeviceOwner(mActivity));
                 return;
             }
-            if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
-                        mActivity, mAppsControlDisallowedAdmin);
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                if (mAppsControlEnforcingAdmin != null && !mAppsControlDisallowedBySystem) {
+                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mActivity,
+                            mAppsControlEnforcingAdmin, UserManager.DISALLOW_APPS_CONTROL);
+                    return;
+                }
             } else {
-                showDialogInner(ButtonActionDialogFragment.DialogType.FORCE_STOP);
+                // TODO(b/414733570): Remove mAppsControlDisallowedAdmin as part of flag cleanup.
+                if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
+                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mActivity,
+                            mAppsControlDisallowedAdmin);
+                    return;
+                }
             }
+            showDialogInner(ButtonActionDialogFragment.DialogType.FORCE_STOP);
         }
     }
 
@@ -488,7 +532,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                 if (overlayInfo != null && overlayInfo.isEnabled()) {
                     ApplicationsState.AppEntry targetEntry =
                             mState.getEntry(overlayInfo.targetPackageName,
-                                            UserHandle.getUserId(mAppEntry.info.uid));
+                                    UserHandle.getUserId(mAppEntry.info.uid));
                     if (targetEntry != null) {
                         enabled = false;
                     }

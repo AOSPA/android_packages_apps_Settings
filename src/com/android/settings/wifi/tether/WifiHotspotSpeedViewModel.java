@@ -18,6 +18,7 @@ package com.android.settings.wifi.tether;
 
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_5GHZ;
+import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_6GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_5GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_6GHZ;
 
@@ -31,6 +32,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.repository.WifiHotspotRepository;
 
@@ -58,6 +60,7 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
     protected SpeedInfo mSpeedInfo5g = new SpeedInfo(false, true, false);
     protected SpeedInfo mSpeedInfo2g5g = new SpeedInfo(false, true, true);
     protected SpeedInfo mSpeedInfo6g = new SpeedInfo(false, true, true);
+    protected SpeedInfo mSpeedInfo2g6g = new SpeedInfo(false, true, true);
 
     protected final Observer<Boolean> m6gAvailableObserver = a -> on6gAvailableChanged(a);
     protected final Observer<Boolean> m5gAvailableObserver = a -> on5gAvailableChanged(a);
@@ -88,6 +91,13 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         mSpeedInfo6g.mIsEnabled = available;
         mSpeedInfo6g.mSummary = getApplication()
                 .getString(available ? RES_SPEED_6G_SUMMARY : RES_SUMMARY_UNAVAILABLE);
+
+        boolean showDualBand = mWifiHotspotRepository.isDualBand()
+                && available
+                && Flags.enable2And6GhzHotspotSpeed();
+        log("on6gAvailableChanged(), showDualBand:" + showDualBand);
+        mSpeedInfo2g6g.mIsVisible = showDualBand;
+        mSpeedInfo6g.mIsVisible = !showDualBand;
         updateSpeedInfoMapData();
     }
 
@@ -111,6 +121,7 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         mSpeedInfo5g.mIsChecked = speedType.equals(SPEED_5GHZ);
         mSpeedInfo2g5g.mIsChecked = speedType.equals(SPEED_2GHZ_5GHZ);
         mSpeedInfo6g.mIsChecked = speedType.equals(SPEED_6GHZ);
+        mSpeedInfo2g6g.mIsChecked = speedType.equals(SPEED_2GHZ_6GHZ);
         updateSpeedInfoMapData();
     }
 
@@ -138,6 +149,7 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         mSpeedInfoMap.put(SPEED_5GHZ, mSpeedInfo5g);
         mSpeedInfoMap.put(SPEED_2GHZ_5GHZ, mSpeedInfo2g5g);
         mSpeedInfoMap.put(SPEED_6GHZ, mSpeedInfo6g);
+        mSpeedInfoMap.put(SPEED_2GHZ_6GHZ, mSpeedInfo2g6g);
         if (mSpeedInfoMapData != null) {
             mSpeedInfoMapData.setValue(mSpeedInfoMap);
         }

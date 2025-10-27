@@ -41,6 +41,9 @@ import static com.android.settings.search.actionbar.SearchMenuController.MENU_SE
 import android.annotation.StringRes;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.admin.DevicePolicyIdentifiers;
+import android.app.admin.DevicePolicyManager;
+import android.app.admin.PolicyEnforcementInfo;
 import android.app.settings.SettingsEnums;
 import android.app.usage.IUsageStatsManager;
 import android.content.Context;
@@ -920,16 +923,7 @@ public class ManageApplications extends InstrumentedFragment
             mShowSystem = !mShowSystem;
             mApplications.rebuild();
         } else if (i == R.id.reset_app_preferences) {
-            final boolean appsControlDisallowedBySystem =
-                    RestrictedLockUtilsInternal.hasBaseUserRestriction(getActivity(),
-                            UserManager.DISALLOW_APPS_CONTROL, UserHandle.myUserId());
-            final RestrictedLockUtils.EnforcedAdmin appsControlDisallowedAdmin =
-                    RestrictedLockUtilsInternal.checkIfRestrictionEnforced(getActivity(),
-                            UserManager.DISALLOW_APPS_CONTROL, UserHandle.myUserId());
-            if (appsControlDisallowedAdmin != null && !appsControlDisallowedBySystem) {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
-                        getActivity(), appsControlDisallowedAdmin);
-            } else {
+            if (!showAdminSupportDetailsIfRestrictedByAdmin()) {
                 mResetAppsHelper.buildResetDialog();
             }
             return true;
@@ -976,6 +970,39 @@ public class ManageApplications extends InstrumentedFragment
         }
         updateOptionsMenu();
         return true;
+    }
+
+    private boolean showAdminSupportDetailsIfRestrictedByAdmin() {
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            DevicePolicyManager dpm = getActivity().getSystemService(DevicePolicyManager.class);
+            if (dpm == null) {
+                return false;
+            }
+            PolicyEnforcementInfo policyEnforcementInfo = dpm.getEnforcingAdminsForPolicy(
+                    DevicePolicyIdentifiers.getIdentifierForUserRestriction(
+                            UserManager.DISALLOW_APPS_CONTROL), UserHandle.myUserId());
+            if (policyEnforcementInfo.getMostImportantEnforcingAdmin() != null
+                    && !policyEnforcementInfo.isEnforcedBySystem()) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
+                        policyEnforcementInfo.getMostImportantEnforcingAdmin(),
+                        null);
+                return true;
+            }
+            return false;
+        }
+
+        final boolean appsControlDisallowedBySystem =
+                RestrictedLockUtilsInternal.hasBaseUserRestriction(getActivity(),
+                        UserManager.DISALLOW_APPS_CONTROL, UserHandle.myUserId());
+        final RestrictedLockUtils.EnforcedAdmin appsControlDisallowedAdmin =
+                RestrictedLockUtilsInternal.checkIfRestrictionEnforced(getActivity(),
+                        UserManager.DISALLOW_APPS_CONTROL, UserHandle.myUserId());
+        if (appsControlDisallowedAdmin != null && !appsControlDisallowedBySystem) {
+            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                    getActivity(), appsControlDisallowedAdmin);
+            return true;
+        }
+        return false;
     }
 
     @Override

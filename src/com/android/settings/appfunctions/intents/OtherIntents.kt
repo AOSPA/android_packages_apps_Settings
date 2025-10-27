@@ -56,5 +56,9 @@ fun getOtherIntents() =
                     "Send feedback about this device: Intent to generate a report that you can share with the device manufacturer.",
                 intentUri = "intent:#Intent;action=android.intent.action.BUG_REPORT;end",
             ),
+            StaticIntent(
+                description = "Factory reset: Settings to erase all data from the device.",
+                intentUri = "intent:#Intent;action=com.android.settings.action.FACTORY_RESET;end",
+            ),
         ),
     )

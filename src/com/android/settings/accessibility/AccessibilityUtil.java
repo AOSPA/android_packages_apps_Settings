@@ -131,8 +131,8 @@ public final class AccessibilityUtil {
     public static CharSequence getSummary(
             Context context, String settingsSecureKey, @StringRes int enabledString,
             @StringRes int disabledString) {
-        boolean enabled = Settings.Secure.getInt(context.getContentResolver(),
-                settingsSecureKey, State.OFF) == State.ON;
+        boolean enabled = Settings.Secure.getIntForUser(context.getContentResolver(),
+                settingsSecureKey, State.OFF, context.getUserId()) == State.ON;
         return context.getResources().getText(enabled ? enabledString : disabledString);
     }
 
@@ -157,15 +157,15 @@ public final class AccessibilityUtil {
 
     /** Determines if a gesture navigation bar is being used. */
     public static boolean isGestureNavigateEnabled(Context context) {
-        return Settings.Secure.getInt(context.getContentResolver(),
-                Settings.Secure.NAVIGATION_MODE, -1)
+        return Settings.Secure.getIntForUser(context.getContentResolver(),
+                Settings.Secure.NAVIGATION_MODE, -1, context.getUserId())
                 == NAV_BAR_MODE_GESTURAL;
     }
 
     /** Determines if a accessibility floating menu is being used. */
     public static boolean isFloatingMenuEnabled(Context context) {
-        return Settings.Secure.getInt(context.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, /* def= */ -1)
+        return Settings.Secure.getIntForUser(context.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, /* def= */ -1, context.getUserId())
                 == ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
     }
 
@@ -279,17 +279,6 @@ public final class AccessibilityUtil {
      */
     public static boolean isSystemApp(@NonNull AccessibilityServiceInfo info) {
         return info.getResolveInfo().serviceInfo.applicationInfo.isSystemApp();
-    }
-
-    /**
-     * Bypasses the timeout restriction if volume key shortcut assigned.
-     *
-     * @param context the current context.
-     */
-    public static void skipVolumeShortcutDialogTimeoutRestriction(Context context) {
-        Settings.Secure.putInt(context.getContentResolver(),
-                Settings.Secure.SKIP_ACCESSIBILITY_SHORTCUT_DIALOG_TIMEOUT_RESTRICTION, /*
-                    true */ 1);
     }
 
     /**

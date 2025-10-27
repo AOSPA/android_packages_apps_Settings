@@ -44,6 +44,14 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowSystemClock;
+
+import java.time.Duration;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowDeviceConfig.class})
@@ -155,6 +163,52 @@ public class ActiveUnlockContentListenerTest {
                         FakeContentProvider.KEY_SUMMARY);
 
         assertThat(contentListener.subscribe()).isFalse();
+    }
+
+    @Test
+    public void getStringWithTimeout_returnsNull() throws Exception {
+        ShadowSystemClock.reset();
+        String content = "abc";
+        int timeOutSeconds = 1;
+        CountDownLatch unblockCallable = new CountDownLatch(1);
+
+        Callable<String> callable =
+                () -> {
+                    unblockCallable.await(); // Blocks until countDown() is called
+                    return content;
+                };
+
+        // Call getStringWithTimeout in a separate thread, as it will block on future.get().
+        ExecutorService testExecutor = Executors.newSingleThreadExecutor();
+        Future<String> result = testExecutor.submit(() ->
+                ActiveUnlockContentListener.getStringWithTimeout(
+                    "logTag", callable, timeOutSeconds));
+
+        // Advance the system clock past the timeout duration. This will cause the future.get()
+        // inside getStringWithTimeout to throw a TimeoutException.
+        ShadowSystemClock.advanceBy(Duration.ofSeconds(timeOutSeconds + 1));
+        idleMainLooper();
+
+        // The method should have caught the TimeoutException and returned null.
+        assertThat(result.get()).isNull();
+
+        // Clean up: unblock the callable so the background thread can finish.
+        unblockCallable.countDown();
+        testExecutor.shutdown();
+    }
+
+    @Test
+    public void getStringWithoutTimeout_returnsExpectedValue() {
+        String content = "abc";
+        Callable<String> callable =
+                new Callable<String>() {
+                    @Override
+                    public String call() throws Exception {
+                        return content;
+                    }};
+        assertThat(
+            ActiveUnlockContentListener.getStringWithTimeout(
+                 "logTag", callable, 2)).isEqualTo(content);
     }
 
     private void updateContent(String content) {

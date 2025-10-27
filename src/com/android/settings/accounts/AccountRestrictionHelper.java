@@ -52,6 +52,12 @@ public class AccountRestrictionHelper {
         if (preference == null) {
             return;
         }
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            // When the flag is enabled, RestrictedPreference handles all cases. We don't need to
+            // handle the organization owned device case.
+            preference.checkRestrictionAndSetDisabled(userRestriction, userId);
+            return;
+        }
         if (hasBaseUserRestriction(userRestriction, userId)) {
             if (userRestriction.equals(DISALLOW_REMOVE_MANAGED_PROFILE)
                     && isOrganizationOwnedDevice()) {

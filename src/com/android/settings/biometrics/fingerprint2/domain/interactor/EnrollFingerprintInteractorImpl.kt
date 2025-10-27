@@ -41,6 +41,8 @@ class EnrollFingerprintInteractorImpl(
   private val userRepo: UserRepo,
   private val fingerprintManager: FingerprintManager,
   private val fingerprintFlow: FingerprintFlow,
+  private val enabledInitialRemaining: Boolean = false,
+  private val initialRemaining: Int = 0,
 ) : EnrollFingerprintInteractor {
   private val enrollRequestOutstanding = MutableStateFlow(false)
 
@@ -69,7 +71,7 @@ class EnrollFingerprintInteractorImpl(
           // This is sort of an implementation detail, but unfortunately the API isn't
           // very expressive. If anything we should look at changing the FingerprintManager API.
           if (totalSteps == null) {
-            totalSteps = remaining + 1
+            totalSteps = if (enabledInitialRemaining) initialRemaining else remaining + 1
           }
 
           trySend(FingerEnrollState.EnrollProgress(remaining, totalSteps!!)).onFailure { error ->

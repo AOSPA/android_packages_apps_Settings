@@ -30,6 +30,7 @@ import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.EnforcingAdmin;
 import android.app.admin.PolicyEnforcementInfo;
+import android.app.admin.SystemAuthority;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -1584,7 +1585,15 @@ public class UserSettings extends SettingsPreferenceFragment
             }
             // A restriction can be enforced by the system or an admin.
             if (mUserCaps.mDisallowAddUserRestrictionEnforcementInfo.isOnlyEnforcedBySystem()) {
-                mAddGuest.setEnabled(false);
+                if (Flags.showPolicyTransparencyForSystemRestrictions()) {
+                    mAddGuest.setDisabledByAdmin(
+                            mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
+                                    .getMostImportantEnforcingAdmin());
+                    mAddGuest.setSummary(getPrefContext().getString(
+                            R.string.add_user_summary_action_restricted));
+                } else {
+                    mAddGuest.setEnabled(false);
+                }
             } else {
                 mAddGuest.setDisabledByAdmin(
                         mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
@@ -1601,7 +1610,14 @@ public class UserSettings extends SettingsPreferenceFragment
                     final UserManager.EnforcingUser enforcingUser = enforcingUsers.get(0);
                     final int restrictionSource = enforcingUser.getUserRestrictionSource();
                     if (restrictionSource == UserManager.RESTRICTION_SOURCE_SYSTEM) {
-                        mAddGuest.setEnabled(false);
+                        if (Flags.showPolicyTransparencyForSystemRestrictions()) {
+                            mAddGuest.setDisabledByAdmin(new EnforcingAdmin("android",
+                                    new SystemAuthority("system"), UserHandle.CURRENT));
+                            mAddGuest.setSummary(getPrefContext().getString(
+                                    R.string.add_user_summary_action_restricted));
+                        } else {
+                            mAddGuest.setEnabled(false);
+                        }
                     } else {
                         mAddGuest.setVisible(false);
                     }
@@ -1654,7 +1670,15 @@ public class UserSettings extends SettingsPreferenceFragment
                             mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
                                     .getMostImportantEnforcingAdmin());
                 } else {
-                    addUser.setEnabled(false);
+                    if (Flags.showPolicyTransparencyForSystemRestrictions()) {
+                        addUser.setDisabledByAdmin(
+                                mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
+                                        .getMostImportantEnforcingAdmin());
+                        addUser.setSummary(context.getString(
+                                R.string.add_user_summary_action_restricted));
+                    } else {
+                        addUser.setEnabled(false);
+                    }
                 }
             } else {
                 addUser.setVisible(false);
@@ -1691,7 +1715,15 @@ public class UserSettings extends SettingsPreferenceFragment
                     final int restrictionSource = enforcingUser.getUserRestrictionSource();
                     if (restrictionSource == UserManager.RESTRICTION_SOURCE_SYSTEM) {
                         addUser.setVisible(true);
-                        addUser.setEnabled(false);
+                        if (Flags.showPolicyTransparencyForSystemRestrictions()) {
+                            addUser.setDisabledByAdmin(
+                                    new EnforcingAdmin("android", new SystemAuthority("system"),
+                                            UserHandle.CURRENT));
+                            addUser.setSummary(context.getString(
+                                    R.string.add_user_summary_action_restricted));
+                        } else {
+                            addUser.setEnabled(false);
+                        }
                     } else {
                         addUser.setVisible(false);
                     }

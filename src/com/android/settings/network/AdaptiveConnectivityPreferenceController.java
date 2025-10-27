@@ -17,12 +17,14 @@
 package com.android.settings.network;
 
 import android.content.Context;
+import android.content.ContentResolver;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.flags.Flags;
 
 /**
  * {@link BasePreferenceController} that shows Adaptive connectivity on/off state.
@@ -46,9 +48,23 @@ public class AdaptiveConnectivityPreferenceController extends BasePreferenceCont
 
     @Override
     public CharSequence getSummary() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 1) == 1
-                ? mContext.getString(R.string.adaptive_connectivity_switch_on)
-                : mContext.getString(R.string.adaptive_connectivity_switch_off);
+        final ContentResolver resolver = mContext.getContentResolver();
+        boolean isEnabled = Settings.Secure.getInt(resolver,
+            Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 1) == 1;
+
+        if (Flags.enableAdaptiveConnectivityToggleSwitches()) {
+            final int wifiSetting = Settings.Secure.getInt(resolver,
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, -1);
+            final int mobileSetting = Settings.Secure.getInt(resolver,
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED, -1);
+
+            if (wifiSetting != -1 || mobileSetting != -1) {
+                isEnabled = (wifiSetting == 1) || (mobileSetting == 1);
+            }
+        }
+
+        return mContext.getString(isEnabled
+            ? R.string.adaptive_connectivity_switch_on
+            : R.string.adaptive_connectivity_switch_off);
     }
 }

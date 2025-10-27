@@ -34,11 +34,13 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresPermission
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.android.internal.widget.LockPatternUtils
 import com.android.settings.R
 import com.android.settings.password.ChooseLockGeneric
+import com.android.settingslib.HelpUtils
 import com.android.settingslib.collapsingtoolbar.R.drawable.settingslib_expressive_icon_back as EXPRESSIVE_BACK_ICON
 import com.android.settingslib.supervision.SupervisionLog
 import com.android.settingslib.widget.SettingsThemeHelper
@@ -71,6 +73,11 @@ class SetupSupervisionActivity : FragmentActivity() {
             handleSetLockResult(result)
         }
 
+    private val confirmSupervisionCredentialsLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            handleConfirmSupervisionCredentialsResult(result)
+        }
+
     private val setupRecoveryLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             handlePinRecoveryResult(result)
@@ -79,12 +86,55 @@ class SetupSupervisionActivity : FragmentActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (isSupervisingCredentialSet) {
+        if (!Flags.enableSupervisionSettingsUiUpdates()) {
+            if (isSupervisingCredentialSet) {
+                setResult(RESULT_CANCELED)
+                finish()
+                return
+            }
+
+            if (savedInstanceState == null) {
+                // Set up loading screen before enabling supervision
+                setTheme(R.style.Theme_Settings)
+                setContentView(R.layout.supervision_dashboard_loading_screen)
+                enableSupervision()
+            }
+            return
+        }
+
+        val supervisionManager = getSystemService(SupervisionManager::class.java)
+        val platformCredentialExists = isSupervisingCredentialSet
+
+        if (supervisionManager?.isSupervisionEnabled() == true && platformCredentialExists) {
+            // Nothing to set up if we don't need to enable supervision or create a platform
+            // credential.
             setResult(RESULT_CANCELED)
             finish()
+            return
         }
+
+        // If there are profiles other than the main profile and the supervising profile,
+        // block enabling supervision. Those other profiles could allow the user to bypass
+        // supervision.
+        if (hasMultipleNonSupervisingProfiles()) {
+            showMultiProfileErrorDialog()
+            return
+        }
+
+        if (platformCredentialExists) {
+            // Supervision is not enabled but platform credentials are set, so confirm
+            // credentials then enable supervision.
+            confirmSupervisionCredentialsLauncher.launch(
+                Intent(this, ConfirmSupervisionCredentialsActivity::class.java).apply {
+                    putExtra(ConfirmSupervisionCredentialsActivity.EXTRA_FORCE_CONFIRMATION, true)
+                }
+            )
+            return
+        }
+
         if (savedInstanceState == null) {
             // Set up loading screen before enabling supervision
+            setTheme(R.style.Theme_Settings)
             setContentView(R.layout.supervision_dashboard_loading_screen)
             enableSupervision()
         }
@@ -101,7 +151,7 @@ class SetupSupervisionActivity : FragmentActivity() {
             }
         }
 
-        if (isSupervisingCredentialSet) {
+        if (!Flags.enableSupervisionSettingsUiUpdates() && isSupervisingCredentialSet) {
             setResult(RESULT_OK)
             finish()
         }
@@ -165,6 +215,16 @@ class SetupSupervisionActivity : FragmentActivity() {
         return userHandle
     }
 
+    private fun handleConfirmSupervisionCredentialsResult(result: ActivityResult) {
+        if (result.resultCode == RESULT_OK) {
+            setResult(RESULT_OK)
+            getSystemService(SupervisionManager::class.java)?.setSupervisionEnabled(true)
+        } else {
+            setResult(RESULT_CANCELED)
+        }
+        finish()
+    }
+
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, INTERACT_ACROSS_USERS])
     private fun startChooseLockActivity(userHandle: UserHandle) {
         val intent =
@@ -223,5 +283,48 @@ class SetupSupervisionActivity : FragmentActivity() {
                 action = SupervisionPinRecoveryActivity.ACTION_SETUP
             }
         setupRecoveryLauncher.launch(intent)
+    }
+
+    private fun hasMultipleNonSupervisingProfiles(): Boolean {
+        val userManager = getSystemService(UserManager::class.java) ?: return false
+
+        val supervisingProfileHandle: UserHandle? = supervisingUserHandle
+        val nonSupervisingProfilesCount =
+            userManager.userProfiles.count { it != supervisingProfileHandle }
+
+        // More than one profile remains (the main user + at least one other)
+        return nonSupervisingProfilesCount > 1
+    }
+
+    private fun showMultiProfileErrorDialog() {
+        if (SettingsThemeHelper.isExpressiveTheme(this)) {
+            setTheme(R.style.Transparent_Expressive)
+        }
+        AlertDialog.Builder(this)
+            .setTitle(R.string.supervision_setup_multi_profile_error_title)
+            .setMessage(R.string.supervision_setup_multi_profile_error_message)
+            .setPositiveButton(android.R.string.ok) { _, _ -> null }
+            .setNeutralButton(R.string.learn_more) { _, _ -> onSupervisionUnavailableLearnMore() }
+            .setOnDismissListener { multiProfileErrorDialogDismiss() }
+            .show()
+    }
+
+    private fun multiProfileErrorDialogDismiss() {
+        setResult(RESULT_CANCELED)
+        finish()
+    }
+
+    private fun onSupervisionUnavailableLearnMore() {
+        val intent =
+            HelpUtils.getHelpIntent(
+                this,
+                getString(R.string.supervision_unavailable_learn_more_link),
+                this::class.java.name,
+            )
+        if (intent != null) {
+            startActivity(intent)
+        } else {
+            Log.w(SupervisionLog.TAG, "HelpIntent is null")
+        }
     }
 }

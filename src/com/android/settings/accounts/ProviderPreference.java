@@ -18,6 +18,7 @@ package com.android.settings.accounts;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+import android.app.admin.EnforcingAdmin;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
@@ -47,8 +48,15 @@ public class ProviderPreference extends RestrictedPreference {
     }
 
     public void checkAccountManagementAndSetDisabled(int userId) {
-        EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfAccountManagementDisabled(
-                getContext(), getAccountType(), userId);
-        setDisabledByAdmin(admin);
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            EnforcingAdmin admin =
+                    RestrictedLockUtilsInternal.checkIfAccountManagementDisabledByAdmin(
+                            getContext(), getAccountType(), userId);
+            setDisabledByAdmin(admin);
+        } else {
+            EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfAccountManagementDisabled(
+                    getContext(), getAccountType(), userId);
+            setDisabledByAdmin(admin);
+        }
     }
 }
