@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Copyright (C) 2024 The Android Open Source Project
+    Copyright (C) 2025 The Android Open Source Project
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/supervision_supported_apps_entry_point"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -33,14 +32,31 @@
       android:id="@+id/supervision_supported_apps_entry_point_icon_2"
       android:layout_width="32dp"
       android:layout_height="32dp"
-      android:layout_marginStart="12dp"
+      android:layout_marginStart="8dp"
       android:visibility="gone"
       android:scaleType="fitCenter"/>
   <ImageView
       android:id="@+id/supervision_supported_apps_entry_point_icon_3"
       android:layout_width="32dp"
       android:layout_height="32dp"
-      android:layout_marginStart="12dp"
+      android:layout_marginStart="8dp"
       android:visibility="gone"
       android:scaleType="fitCenter"/>
+  <FrameLayout
+          android:id="@+id/supervision_supported_apps_entry_point_remaining_apps_icon"
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          android:layout_marginStart="8dp"
+          android:visibility="gone"
+          android:background="@drawable/supervision_circle_background_for_icon"
+          android:gravity="center">
+
+          <TextView
+              android:id="@+id/supervision_supported_apps_entry_point_remaining_apps_count"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textAppearance="@style/TextAppearance.SettingsLib.BodySmall.Emphasized"
+              android:textColor="@color/materialColorOnSurfaceVariant"
+              android:layout_gravity="center" />
+  </FrameLayout>
 </LinearLayout>

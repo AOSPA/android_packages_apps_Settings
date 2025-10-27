@@ -22,7 +22,9 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.preference.PreferenceViewHolder
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -49,7 +51,22 @@ class SupervisionWebContentFiltersSupportedAppsEntryPointPreferenceTest {
                     title = "Supported app",
                     summary = "App summary",
                     packageName = "com.android.chrome",
-                )
+                ),
+                SupportedApp(
+                    title = "Supported app 2",
+                    summary = "App summary 2",
+                    packageName = "com.android.chrome",
+                ),
+                SupportedApp(
+                    title = "Supported app 3",
+                    summary = "App summary 3",
+                    packageName = "com.android.chrome",
+                ),
+                SupportedApp(
+                    title = "Supported app 4",
+                    summary = "App summary 4",
+                    packageName = "com.android.chrome",
+                ),
             ),
         )
     private val iconDrawable: ColorDrawable = ColorDrawable(Color.RED)
@@ -92,6 +109,19 @@ class SupervisionWebContentFiltersSupportedAppsEntryPointPreferenceTest {
         assertThat(icon?.visibility).isEqualTo(View.VISIBLE)
         assertThat(icon?.drawable).isEqualTo(iconDrawable)
         assertThat(icon?.colorFilter).isNull()
+        val remainingAppsIcon =
+            holder.itemView.findViewById<FrameLayout>(
+                R.id.supervision_supported_apps_entry_point_remaining_apps_icon
+            )
+        assertThat(remainingAppsIcon).isNotNull()
+        assertThat(remainingAppsIcon.visibility).isEqualTo(View.VISIBLE)
+        assertThat(remainingAppsIcon.background?.colorFilter).isNull()
+        val remainingAppsCount =
+            holder.itemView.findViewById<TextView>(
+                R.id.supervision_supported_apps_entry_point_remaining_apps_count
+            )
+        assertThat(remainingAppsCount).isNotNull()
+        assertThat(remainingAppsCount.text).isEqualTo("+1")
     }
 
     @Test
@@ -114,5 +144,55 @@ class SupervisionWebContentFiltersSupportedAppsEntryPointPreferenceTest {
         assertThat(icon?.visibility).isEqualTo(View.VISIBLE)
         assertThat(icon?.drawable).isEqualTo(iconDrawable)
         assertThat(icon?.colorFilter).isNotNull()
+        val remainingAppsIcon =
+            holder.itemView.findViewById<FrameLayout>(
+                R.id.supervision_supported_apps_entry_point_remaining_apps_icon
+            )
+        assertThat(remainingAppsIcon).isNotNull()
+        assertThat(remainingAppsIcon.visibility).isEqualTo(View.VISIBLE)
+        assertThat(remainingAppsIcon.background?.colorFilter).isNotNull()
+        val remainingAppsCount =
+            holder.itemView.findViewById<TextView>(
+                R.id.supervision_supported_apps_entry_point_remaining_apps_count
+            )
+        assertThat(remainingAppsCount).isNotNull()
+        assertThat(remainingAppsCount.text).isEqualTo("+1")
+    }
+
+    @Test
+    fun lessThanThreeSupportedApps_remainingAppIconIsInvisible() {
+        val preferenceWithOneApp =
+            SupervisionWebContentFiltersSupportedAppsEntryPointPreference(
+                context,
+                listOf(
+                    SupportedApp(
+                        title = "Supported app",
+                        summary = "App summary",
+                        packageName = "com.android.chrome",
+                    )
+                ),
+            )
+        val holder =
+            PreferenceViewHolder.createInstanceForTests(
+                LayoutInflater.from(context)
+                    .inflate(
+                        R.layout.supervision_supported_apps_entry_point_preference,
+                        /* root= */ null,
+                    )
+            )
+        preferenceWithOneApp.onBindViewHolder(holder)
+        val icon =
+            holder.itemView.findViewById<ImageView?>(
+                R.id.supervision_supported_apps_entry_point_icon_1
+            )
+        assertThat(icon).isNotNull()
+        assertThat(icon?.visibility).isEqualTo(View.VISIBLE)
+        assertThat(icon?.drawable).isEqualTo(iconDrawable)
+        val remainingAppsIcon =
+            holder.itemView.findViewById<FrameLayout>(
+                R.id.supervision_supported_apps_entry_point_remaining_apps_icon
+            )
+        assertThat(remainingAppsIcon).isNotNull()
+        assertThat(remainingAppsIcon.visibility).isEqualTo(View.GONE)
     }
 }
