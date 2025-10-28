@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import com.android.settings.R
+import com.android.settings.core.SubSettingLauncher
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.input.gamecontroller.GameControllerUtils.EXTRA_INPUT_DEVICE_IDENTIFIER
 import com.android.settings.search.BaseSearchIndexProvider
@@ -62,7 +63,7 @@ class GameControllerListFragment : DashboardFragment() {
 
         // Don't repeat the autoselection.
         if (isAutoSelection(bundle, inputDeviceIdentifier)) {
-            // TODO(b/435503326): Link device specific-setting fragment
+            showGameControllerFragment(inputDeviceIdentifier!!)
         }
     }
 
@@ -101,12 +102,22 @@ class GameControllerListFragment : DashboardFragment() {
                     title = controller.name
                     setIcon(R.drawable.ic_default_controller)
                     setOnPreferenceClickListener {
-                        // TODO(b/435503326): Link device specific-setting fragment
+                        showGameControllerFragment(controller.inputDeviceIdentifier)
                         true
                     }
                 }
             category.addPreference(pref)
         }
+    }
+
+    private fun showGameControllerFragment(inputDeviceIdentifier: InputDeviceIdentifier) {
+        val args =
+            Bundle().apply { putParcelable(EXTRA_INPUT_DEVICE_IDENTIFIER, inputDeviceIdentifier) }
+        SubSettingLauncher(context)
+            .setSourceMetricsCategory(metricsCategory)
+            .setDestination(GameControllerFragment::class.java.name)
+            .setArguments(args)
+            .launch()
     }
 
     companion object {
