@@ -4558,6 +4558,13 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".network.telephony.NetworkChangeNotification"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.telephony.action.2G_DISABLED_BY_CARRIER"/>
+            </intent-filter>
+        </receiver>
+
         <service android:name=".sim.PrimarySubscriptionListChangedService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
