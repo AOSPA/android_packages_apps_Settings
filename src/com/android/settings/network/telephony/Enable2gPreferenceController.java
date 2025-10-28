@@ -182,14 +182,17 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
      * Get the {@link com.android.settings.core.BasePreferenceController.AvailabilityStatus} for
      * this preference given a {@code subId}.
      * <p>
-     * A return value of {@link #AVAILABLE} denotes that the 2g status can be updated for this
+     * A return value of {@link #AVAILABLE} denotes that the 2G status can be updated for this
      * particular subscription.
-     * We return {@link #AVAILABLE} if the following conditions are met and {@link
-     * #CONDITIONALLY_UNAVAILABLE} otherwise.
+     *
+     * Otherwise,
      * <ul>
-     *     <li>The subscription is usable {@link SubscriptionManager#isUsableSubscriptionId}</li>
-     *     <li>The device supports
-     *     <a href="https://cs.android.com/android/platform/superproject/+/master:hardware/interfaces/radio/1.6/IRadio.hal">Radio HAL version 1.6 or greater</a> </li>
+     *     <li>{@link CONDITIONALLY_UNAVAILABLE} is returned if the subscription is invalid
+     *     ({@link SubscriptionManager#isUsableSubscriptionId}).</li>
+     *     <li>{@link UNSUPPORTED_ON_DEVICE} is returned if the modem doesn't support 2G network
+     *     mode or the HAL doesn't support
+     *     <a href="https://cs.android.com/android/platform/superproject/+/master:hardware/interfaces/radio/1.6/IRadio.hal">Radio HAL version 1.6</a>
+     *      or greater.</li>
      * </ul>
      */
     @Override
@@ -198,11 +201,19 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
             Log.w(LOG_TAG, "getAvailabilityStatus: Telephony manager not yet initialized");
             return CONDITIONALLY_UNAVAILABLE;
         }
-        boolean visible =
-                SubscriptionManager.isUsableSubscriptionId(subId)
-                        && mTelephonyManager.isRadioInterfaceCapabilitySupported(
-                        mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
-        return visible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        if ((mTelephonyManager.getSupportedRadioAccessFamily() & BITMASK_2G) == 0) {
+            Log.w(LOG_TAG, "getAvailabilityStatus: 2G unsupported");
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        if (!mTelephonyManager.isRadioInterfaceCapabilitySupported(
+                    mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK)) {
+            Log.w(LOG_TAG, "getAvailabilityStatus: allowed network types bitmask unsupported");
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        return AVAILABLE;
     }
 
     /**

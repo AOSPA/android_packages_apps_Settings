@@ -17,6 +17,7 @@ package com.android.settings.network.telephony;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -31,6 +32,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Looper;
+import android.telephony.RadioAccessFamily;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -91,8 +93,21 @@ public final class Enable2gPreferenceControllerTest {
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
 
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
+        doReturn(true).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
+                mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
+        doReturn((long) RadioAccessFamily.getRafFromNetworkType(
+                    TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA)) // 2G+3G+4G
+                .when(mTelephonyManager)
+                .getSupportedRadioAccessFamily();
+
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        doReturn(true).when(mInvalidTelephonyManager).isRadioInterfaceCapabilitySupported(
+                mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
+        doReturn((long) RadioAccessFamily.getRafFromNetworkType(
+                    TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA)) // 2G+3G+4G
+                .when(mInvalidTelephonyManager)
+                .getSupportedRadioAccessFamily();
 
         mController = new Enable2gPreferenceController(mContext, PREFERENCE_KEY);
 
@@ -111,18 +126,27 @@ public final class Enable2gPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_capabilityNotSupported_returnUnavailable() {
+    public void getAvailabilityStatus_capabilityNotSupported_returnUnsupported() {
         doReturn(false).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
                 mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_2gUnsupported_returnUnsupported() {
+        doReturn((long) RadioAccessFamily.getRafFromNetworkType(
+                    TelephonyManager.NETWORK_MODE_NR_LTE_WCDMA)) // 3G+4G+5G (No 2G)
+                .when(mTelephonyManager)
+                .getSupportedRadioAccessFamily();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                Enable2gPreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
     public void getAvailabilityStatus_returnAvailable() {
-        doReturn(true).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
-                mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
-
+        // Use defaults
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
