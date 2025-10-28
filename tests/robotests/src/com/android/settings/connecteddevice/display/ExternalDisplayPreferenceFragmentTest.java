@@ -35,6 +35,7 @@ import static com.android.settings.connecteddevice.display.ExternalDisplayPrefer
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY_SUMMARY_RESOURCE;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
+import static com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING;
 import static com.android.window.flags.Flags.FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -863,6 +864,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
     }
 
     @Test
+    @DisableFlags({FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING})
     public void testSearchIndexProvider_getXmlResourcesToIndex() {
         final Indexable.SearchIndexProvider provider =
                 ExternalDisplayPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER;
@@ -876,6 +878,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
     }
 
     @Test
+    @DisableFlags({FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING})
     public void testSearchIndexProvider_getRawIndexData() {
         final Indexable.SearchIndexProvider provider =
                 ExternalDisplayPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER;
@@ -889,6 +892,17 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
                 mContext.getString(R.string.keywords_external_display_settings));
         assertThat(indexData.getFirst().title).isEqualTo(
                 mContext.getString(EXTERNAL_DISPLAY_TITLE_RESOURCE));
+    }
+
+    @Test
+    @EnableFlags({FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING})
+    public void testSearchIndexProvider_flagOn_emptyRawIndexData() {
+        final Indexable.SearchIndexProvider provider =
+                ExternalDisplayPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER;
+
+        final List<SearchIndexableRaw> indexData = provider.getRawDataToIndex(
+                mContext, /* enabled= */ true);
+        assertThat(indexData).isEmpty();
     }
 
     @NonNull
