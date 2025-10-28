@@ -49,10 +49,7 @@ class SupervisionWebContentFiltersActivity :
     @RequiresPermission(MANAGE_USERS)
     public override fun onResume() {
         super.onResume()
-        if (
-            Flags.enableWebContentFiltersScreenSearchRedirection() &&
-                getSystemService(SupervisionManager::class.java)?.isSupervisionEnabled != true
-        ) {
+        if (getSystemService(SupervisionManager::class.java)?.isSupervisionEnabled != true) {
             startActivity(
                 makeLaunchIntent(
                     this,
