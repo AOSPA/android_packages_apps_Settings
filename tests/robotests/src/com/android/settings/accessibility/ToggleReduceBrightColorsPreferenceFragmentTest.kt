@@ -36,6 +36,7 @@ import com.android.settings.accessibility.extradim.ui.ExtraDimScreen
 import com.android.settings.testutils.XmlTestUtils
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settings.testutils.shadow.SettingsShadowResources
+import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.testutils.shadow.ShadowColorDisplayManager
 import com.android.settingslib.widget.IllustrationPreference
 import com.android.settingslib.widget.SliderPreference
@@ -61,9 +62,11 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
         Shadow.extract(context.getSystemService(ColorDisplayManager::class.java))
     private var fragScenario: FragmentScenario<ToggleReduceBrightColorsPreferenceFragment>? = null
     private var fragment: ToggleReduceBrightColorsPreferenceFragment? = null
+    private lateinit var settingsStore: SettingsSecureStore
 
     @Before
     fun setup() {
+        settingsStore = SettingsSecureStore.get(context)
         setReduceBrightColorsAvailable(true)
     }
 
@@ -201,7 +204,7 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
 
     @Test
     fun onResume_extraDimOn_mainSwitchIsChecked() {
-        shadowColorDisplayManager.setReduceBrightColorsActivated(true)
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, true)
 
         launchFragment()
 
@@ -247,7 +250,7 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
 
     @Test
     fun onResume_extraDimOn_intensityAndPersistentPrefsAreEnabled() {
-        shadowColorDisplayManager.setReduceBrightColorsActivated(true)
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, true)
 
         launchFragment()
 
@@ -260,11 +263,7 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
         shadowColorDisplayManager.setReduceBrightColorsActivated(true)
         val intensitySetting = 20
         val expectedSliderPosition = 80 // Max(100) - settingsValue
-        Settings.Secure.putInt(
-            context.contentResolver,
-            Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL,
-            intensitySetting,
-        )
+        settingsStore.setInt(Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL, intensitySetting)
 
         launchFragment()
 
@@ -275,11 +274,8 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
     fun changeSliderValue_intensitySettingsReflectsValue() {
         shadowColorDisplayManager.setReduceBrightColorsActivated(true)
         val intensitySetting = 20
-        Settings.Secure.putInt(
-            context.contentResolver,
-            Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL,
-            intensitySetting,
-        )
+        settingsStore.setInt(Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL, intensitySetting)
+
         val newIntensitySetting = 40
         val newSliderPosition = 60 // Max - settingsValue
         launchFragment()
@@ -300,12 +296,8 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
 
     @Test
     fun onResume_persistentOn_switchIsChecked() {
-        shadowColorDisplayManager.setReduceBrightColorsActivated(true)
-        Settings.Secure.putInt(
-            context.contentResolver,
-            Settings.Secure.REDUCE_BRIGHT_COLORS_PERSIST_ACROSS_REBOOTS,
-            1,
-        )
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, true)
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_PERSIST_ACROSS_REBOOTS, true)
 
         launchFragment()
         val persistentPref = getPersistentToggle()

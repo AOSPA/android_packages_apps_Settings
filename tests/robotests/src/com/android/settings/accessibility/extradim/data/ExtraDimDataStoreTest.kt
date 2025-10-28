@@ -19,7 +19,6 @@ package com.android.settings.accessibility.extradim.data
 import android.Manifest
 import android.content.Context
 import android.hardware.display.ColorDisplayManager
-import android.provider.Settings
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settingslib.datastore.HandlerExecutor
@@ -45,10 +44,12 @@ class ExtraDimDataStoreTest {
     private lateinit var shadowColorDisplayManager: ShadowColorDisplayManager
     private lateinit var dataStore: ExtraDimDataStore
     private lateinit var appContext: Context
+    private lateinit var settingsStore: SettingsSecureStore
 
     @Before
     fun setUp() {
         appContext = ApplicationProvider.getApplicationContext()
+        settingsStore = SettingsSecureStore.get(appContext)
         dataStore = ExtraDimDataStore(appContext)
         shadowColorDisplayManager =
             Shadow.extract(appContext.getSystemService(ColorDisplayManager::class.java))
@@ -56,13 +57,13 @@ class ExtraDimDataStoreTest {
 
     @Test
     fun getValue_extraDimEnabled_returnTrue() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = true
+        settingsStore.setBoolean(ExtraDimDataStore.SETTING_KEY, true)
         assertThat(dataStore.getBoolean(ExtraDimDataStore.SETTING_KEY)).isTrue()
     }
 
     @Test
     fun getValue_extraDimDisabled_returnFalse() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = false
+        settingsStore.setBoolean(ExtraDimDataStore.SETTING_KEY, false)
         assertThat(dataStore.getBoolean(ExtraDimDataStore.SETTING_KEY)).isFalse()
     }
 
@@ -101,7 +102,7 @@ class ExtraDimDataStoreTest {
         val observer = createTestObserver { _, _ -> observerCalled = true }
         dataStore.addObserver(ExtraDimDataStore.SETTING_KEY, observer, HandlerExecutor.main)
 
-        Settings.Secure.putInt(appContext.contentResolver, ExtraDimDataStore.SETTING_KEY, 1)
+        settingsStore.setBoolean(ExtraDimDataStore.SETTING_KEY, true)
         ShadowLooper.idleMainLooper()
 
         assertThat(observerCalled).isTrue()
