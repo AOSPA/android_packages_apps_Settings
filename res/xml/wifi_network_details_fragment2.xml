@@ -107,6 +107,7 @@
           android:key="edit_configuration"
           android:icon="@drawable/ic_network_manage_24dp"
           android:title="@string/wifi_allow_edit_configuration_title"
+          android:summary="@string/wifi_allow_edit_configuration_summary"
           settings:isPreferenceVisible="true"/>
 
         <com.android.settings.spa.preference.ComposePreference

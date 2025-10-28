@@ -448,19 +448,35 @@
             style="@style/wifi_item"
             android:visibility="gone">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/share_wifi_network"
-                style="@style/wifi_item_label"/>
+                android:orientation="vertical">
 
-            <Switch
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wifi_share_preference_title"
+                    style="@style/wifi_item_label"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/wifi_share_preference_summary"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
+            </LinearLayout>
+
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/share_wifi_network"
+                style="@style/SettingslibSwitchStyle.Expressive"
+                android:theme="@style/Theme.Material3.DynamicColors.DayNight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:summary="@string/share_wifi_network_summary"
-                android:gravity="center_vertical" />
+                android:padding="8dp"
+                android:layout_weight="0"
+                android:clickable="true" />
         </LinearLayout>
 
         <LinearLayout
@@ -472,18 +488,35 @@
             style="@style/wifi_item"
             android:visibility="gone">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/edit_wifi_network_configuration"
-                style="@style/wifi_item_label"/>
+                android:orientation="vertical">
 
-            <Switch
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wifi_allow_edit_configuration_title"
+                    style="@style/wifi_item_label"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/wifi_allow_edit_configuration_summary"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
+            </LinearLayout>
+
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/edit_wifi_network_configuration"
+                style="@style/SettingslibSwitchStyle.Expressive"
+                android:theme="@style/Theme.Material3.DynamicColors.DayNight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical" />
+                android:padding="8dp"
+                android:layout_weight="0"
+                android:clickable="true" />
         </LinearLayout>
 
         <LinearLayout android:id="@+id/hidden_settings_field"

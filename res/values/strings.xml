@@ -2697,18 +2697,20 @@
     <string name="wifi_conflict_dialog_confirm">Confirm</string>
     <!-- Label for the conflict wifi dialog cancel button -->
     <string name="wifi_conflict_dialog_cancel">Cancel</string>
-    <!-- Title for the preference to share a network with other users on the same device -->
-    <string name="wifi_share_preference_title">This is a shared network</string>
-    <!-- Summary for the preference to share a network with other users on the same device -->
-    <string name="wifi_share_preference_summary">All users with the exception of guest users, will be able to view, edit and delete this network</string>
+    <!-- Title for the preference to share a network with other users on the same device [CHAR LIMIT=30] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
+    <string name="wifi_share_preference_title">Share network</string>
+    <!-- Summary for the preference to share a network with other users on the same device [CHAR LIMIT=NONE] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
+    <string name="wifi_share_preference_summary">Other users on this device can access this network</string>
     <!-- Alert dialog title, informing the user to switch to the conflicting network.  [CHAR LIMIT=250] -->
     <string name="wifi_conflict_dialog_title">Switch to <xliff:g id="shared">%1$s</xliff:g> \"<xliff:g id="network_name">%2$s</xliff:g>\" network?</string>
     <!-- Alert dialog summary, informing the user to switch to the conflicting network.  [CHAR LIMIT=250] -->
     <string name="wifi_conflict_dialog_message">You\'re currently connected to a <xliff:g id="shared">%1$s</xliff:g> network with the same name. When you switch, you\'ll disconnect from the <xliff:g id="shared">%2$s</xliff:g> network and then reconnect to the <xliff:g id="private">%3$s</xliff:g> network. You may temporarily have no internet.</string>
     <!-- Hint for unchanged fields -->
     <string name="wifi_unchanged">(unchanged)</string>
-    <!-- Label for the check box to allow other device users to edit network details -->
-    <string name="wifi_allow_edit_configuration_title">Allow other users to edit network configuration</string>
+    <!-- Label for the check box to allow other device users to edit network details [CHAR LIMIT=30] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
+    <string name="wifi_allow_edit_configuration_title">Allow users to edit network</string>
+    <!-- Label for the check box to allow other device users to edit network details [CHAR LIMIT=NONE] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
+    <string name="wifi_allow_edit_configuration_summary">Other users can make changes to this network</string>
     <!-- Hint for unspecified fields -->
     <string name="wifi_unspecified">Please select</string>
     <!-- Hint for multiple certificates being added to the configuration -->
@@ -2738,11 +2740,6 @@
     <string name="wifi_field_required">*required</string>
     <!-- Message to inform user, the network can only be configured at a shared network.  [CHAR LIMIT=250] -->
     <string name="wifi_shared_network_login_screen_warning">This is a shared network. You can change this setting once logged in.</string>
-    <!-- Label for the share wifi network toggle. [CHAR LIMIT=250] -->
-    <string name="share_wifi_network">Share this network with other device users</string>
-    <!-- Label for the share wifi network summary. [CHAR LIMIT=NONE] -->
-    <string name="share_wifi_network_summary">All users on this device can view and connect to a shared network. Administrators can delete a shared network. Learn more</string>
-    <string name="edit_wifi_network_configuration">Allow other users to edit network configuration</string>
     <string name="edit_wifi_network_non_owner_message">Contact the admin of this device to make changes to this network.</string>
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
