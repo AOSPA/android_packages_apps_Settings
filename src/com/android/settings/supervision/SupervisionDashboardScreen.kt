@@ -66,10 +66,11 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
 
             private fun refreshPreferences() {
                 lifeCycleContext?.notifyPreferenceChange(KEY)
-                lifeCycleContext?.notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
                 lifeCycleContext?.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
                 if (Flags.enableSupervisionSettingsUiUpdates()) {
                     lifeCycleContext?.notifyPreferenceChange(SupervisionSetUpPinPreference.KEY)
+                } else {
+                    lifeCycleContext?.notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
                 }
             }
         }
@@ -148,13 +149,6 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
             val supervisionClient = getSupervisionClient(context)
             if (Flags.enableSupervisionSettingsUiUpdates()) {
                 +SupervisionRecoveryBannerPreference() order -250
-            }
-            +SupervisionMainSwitchPreference(context, supervisionClient) order -200
-            if (!Flags.enableSupervisionSettingsUiUpdates()) {
-                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
-                    +SupervisionWebContentFiltersScreen.KEY order 100
-                }
-            } else {
                 +NonIndexablePreferenceCategory(
                     SUPERVISION_DYNAMIC_GROUP_1,
                     R.string.device_supervision_features_title,
@@ -162,6 +156,11 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                 +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2) order 10 += {
                     +SupervisionAppStoreFiltersScreen.KEY order -100
                     +SupervisionWebContentFiltersScreen.KEY order -50
+                }
+            } else {
+                +SupervisionMainSwitchPreference(context, supervisionClient) order -200
+                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
+                    +SupervisionWebContentFiltersScreen.KEY order 100
                 }
             }
             +UntitledPreferenceCategoryMetadata("pin_management_group") order 100 += {
