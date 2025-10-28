@@ -16,6 +16,7 @@
 
 package com.android.settings.localepicker;
 
+import static com.android.settings.localepicker.LocaleUtils.getFirstTranslatedLocalePosition;
 import static com.android.settings.localepicker.LocaleUtils.getUserLocaleList;
 import static com.android.settings.localepicker.LocaleUtils.mayAppendUnicodeTags;
 import static com.android.settings.localepicker.RegionAndNumberingSystemPickerFragment.EXTRA_IS_NUMBERING_SYSTEM;
@@ -381,6 +382,11 @@ public abstract class LocalePickerBaseListPreferenceController extends
         LocaleList.setDefault(localeList);
         LocalePicker.updateLocales(localeList);
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ADD_LANGUAGE);
+        mMetricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_GET_SYSTEM_LANGUAGE_POSITION,
+                getFirstTranslatedLocalePosition(feedItemList));
+        mMetricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_GET_LANGUAGE_LIST_SIZE, feedItemList.size());
         returnToParentFrame();
         ((Activity) mContext).finish();
     }
