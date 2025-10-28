@@ -29,6 +29,13 @@
         android:key="available_devices"
         android:title="@string/bluetooth_preference_found_media_devices"/>
 
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="no_device_button"
+        android:title="@string/bluetooth_pairing_no_device_button_message"
+        android:icon="@drawable/ic_help_expressive"
+        settings:buttonPreferenceSize="large"
+        settings:buttonPreferenceType="tonal"/>
+
     <com.android.settingslib.widget.FooterPreference/>
 
 </PreferenceScreen>
