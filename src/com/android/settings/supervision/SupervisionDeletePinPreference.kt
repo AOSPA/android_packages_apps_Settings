@@ -22,6 +22,7 @@ import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.UserManager
 import android.util.Log
 import android.widget.Toast
@@ -33,6 +34,8 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.spa.network.getActivity
+import com.android.settings.supervision.SupervisionHelper.KEY_RECOVERY_BANNER_DISMISSED
+import com.android.settings.supervision.SupervisionHelper.SHARED_PREFS_NAME
 import com.android.settingslib.HelpUtils
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -214,8 +217,13 @@ class SupervisionDeletePinPreference() :
         }
     }
 
+    @VisibleForTesting
     fun deleteSupervisionData(lifecycleContext: PreferenceLifecycleContext) {
         if (lifeCycleContext.deleteSupervisionData()) {
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                clearBannerDismissalState(lifecycleContext)
+            }
+
             if (Flags.enableSupervisionPinSnackbarsToastMessage()) {
                 Toast.makeText(
                         lifeCycleContext,
@@ -233,21 +241,30 @@ class SupervisionDeletePinPreference() :
         }
     }
 
-    /*
-    * Programmatically trigger back press to properly return to the supervision
-    * dashboard with a correct back stack.
-    *
-    * <p> Called when delete pin dialog confirmation button is clicked.
-    */
+    /**
+     * Programmatically trigger back press to properly return to the supervision dashboard with a
+     * correct back stack.
+     *
+     * <p> Called when delete pin dialog confirmation button is clicked.
+     */
     fun navigateToDashboard(lifecycleContext: PreferenceLifecycleContext) {
         val activity =
-            (lifeCycleContext.baseContext.getActivity()
-                    as? androidx.activity.ComponentActivity)
+            (lifeCycleContext.baseContext.getActivity() as? androidx.activity.ComponentActivity)
         activity?.onBackPressedDispatcher?.onBackPressed()
     }
 
     fun logAction(lifecycleContext: PreferenceLifecycleContext, action: Int) {
         FeatureFactory.featureFactory.metricsFeatureProvider.action(lifeCycleContext, action)
+    }
+
+    /**
+     * Resets the persistent dismissal state for the Supervision Recovery Banner. This ensures the
+     * banner reappears again if the user deletes and sets a PIN again.
+     */
+    private fun clearBannerDismissalState(context: Context) {
+        val prefs: SharedPreferences =
+            context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit().remove(KEY_RECOVERY_BANNER_DISMISSED).commit()
     }
 
     companion object {

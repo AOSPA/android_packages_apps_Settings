@@ -73,13 +73,6 @@ class SupervisionRecoveryBannerPreferenceTest {
                     USER_SERVICE -> mockUserManager
                     else -> super.getSystemService(name)
                 }
-
-            override fun getSharedPreferences(name: String, mode: Int): SharedPreferences {
-                if (name == SHARED_PREFS_NAME) {
-                    return sharedPrefs
-                }
-                return super.getSharedPreferences(name, mode)
-            }
         }
     private val mockLifeCycleContext =
         mock<PreferenceLifecycleContext>(
