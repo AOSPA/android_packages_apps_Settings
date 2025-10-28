@@ -434,7 +434,8 @@ class SafetyCenterFragmentTest {
             assertThat(bannerGroup?.isVisible).isTrue()
             assertThat(bannerGroup?.preferenceCount).isEqualTo(1)
 
-            val banner = bannerGroup?.findPreference<BannerMessagePreference>(activeIssue.id)
+            val banner =
+                bannerGroup?.findPreference<BannerMessagePreference>("active_${activeIssue.id}")
             assertThat(banner).isNotNull()
             assertThat(banner?.title.toString()).isEqualTo(activeIssue.title)
             assertThat(banner?.summary.toString()).isEqualTo(activeIssue.summary)
@@ -581,9 +582,12 @@ class SafetyCenterFragmentTest {
             // 3 active issues, 1 expand preference, 1 collapse preference
             assertThat(bannerGroup?.preferenceCount).isEqualTo(5)
 
-            val banner1 = bannerGroup?.findPreference<BannerMessagePreference>("issue1")
-            val banner2 = bannerGroup?.findPreference<BannerMessagePreference>("issue2")
-            val banner3 = bannerGroup?.findPreference<BannerMessagePreference>("issue3")
+            val banner1 =
+                bannerGroup?.findPreference<BannerMessagePreference>("active_${issue1.id}")
+            val banner2 =
+                bannerGroup?.findPreference<BannerMessagePreference>("active_${issue2.id}")
+            val banner3 =
+                bannerGroup?.findPreference<BannerMessagePreference>("active_${issue3.id}")
 
             // Initially collapsed
             assertThat(banner1?.isVisible).isTrue()
