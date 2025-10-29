@@ -19,13 +19,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/enable_supervision_dialog_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView android:id="@+id/supervision_activation_message"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         android:paddingTop="12dp"
