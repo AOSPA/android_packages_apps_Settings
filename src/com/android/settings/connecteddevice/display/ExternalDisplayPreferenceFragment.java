@@ -26,6 +26,7 @@ import static com.android.settings.Utils.createAccessibleSequence;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE;
+import static com.android.settings.flags.Flags.showTabbedConnectedDisplaySetting;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -61,7 +62,6 @@ import com.android.settings.accessibility.TextReadingPreferenceFragment;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.SettingsStatsLog;
-import com.android.settings.flags.FeatureFlagsImpl;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
@@ -876,6 +876,9 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 public @NonNull List<SearchIndexableRaw> getRawDataToIndex(@NonNull Context context,
                         boolean enabled) {
                     List<SearchIndexableRaw> rawData = new ArrayList<>();
+                    if (showTabbedConnectedDisplaySetting()) {
+                        return rawData;
+                    }
                     SearchIndexableRaw indexInfo = new SearchIndexableRaw(context);
                     indexInfo.key = "external_display_screen_title";
                     indexInfo.title = context.getString(EXTERNAL_DISPLAY_TITLE_RESOURCE);
@@ -885,6 +888,10 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                             R.string.connected_devices_dashboard_title);
                     rawData.add(indexInfo);
                     return rawData;
+                }
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !showTabbedConnectedDisplaySetting();
                 }
             };
 
