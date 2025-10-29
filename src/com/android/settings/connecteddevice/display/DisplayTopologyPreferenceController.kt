@@ -27,6 +27,8 @@ import android.util.Size
 import android.view.Display.DEFAULT_DISPLAY
 import android.view.MotionEvent
 import android.view.View
+import android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+import android.view.View.IMPORTANT_FOR_ACCESSIBILITY_YES
 import android.widget.FrameLayout
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
@@ -439,6 +441,11 @@ class DisplayTopologyPreferenceController(
                     }
                 }
             }
+        }
+        if (isMirroring) {
+            paneContent.importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+        } else {
+            paneContent.importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
         }
         paneContent.removeViews(newBounds.size, displayBlocks.size)
         timesRefreshedBlocks++
