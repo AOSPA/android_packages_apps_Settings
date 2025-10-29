@@ -174,10 +174,19 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                     ACTIVE_SUPERVISION_APPS_GROUP,
                     R.string.supervision_apps_managing_this_device_title,
                 ) order 200
-            }
-            +UntitledPreferenceCategoryMetadata("footer_group") order 300 += {
-                +SupervisionPromoFooterPreference(supervisionClient) order 30
-                +SupervisionAocFooterPreference(supervisionClient) order 40
+                +AutoHidingPreferenceCategory(
+                    AVAILABLE_SUPERVISION_APPS_GROUP,
+                    R.string.supervision_available_apps_title,
+                ) order 300 +=
+                    {
+                        +SupervisionPromoFooterPreference(supervisionClient) order 30
+                    }
+                +SupervisionAocFooterPreference(supervisionClient) order 400
+            } else {
+                +UntitledPreferenceCategoryMetadata("footer_group") order 300 += {
+                    +SupervisionPromoFooterPreference(supervisionClient) order 30
+                    +SupervisionAocFooterPreference(supervisionClient) order 40
+                }
             }
         }
 
@@ -217,5 +226,7 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
         internal val FEATURE_GROUP_KEYS =
             listOf(SUPERVISION_DYNAMIC_GROUP_1, SUPERVISION_DYNAMIC_GROUP_2)
         internal const val ACTIVE_SUPERVISION_APPS_GROUP = "active_supervision_apps_group"
+
+        internal const val AVAILABLE_SUPERVISION_APPS_GROUP = "available_supervision_apps_group"
     }
 }

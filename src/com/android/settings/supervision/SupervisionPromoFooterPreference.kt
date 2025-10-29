@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
@@ -46,6 +47,8 @@ class SupervisionPromoFooterPreference(
     private var initialized = false
 
     private var preferenceData: PreferenceData? = null
+
+    private var lifeCycleContext: PreferenceLifecycleContext? = null
 
     override val key: String
         get() = KEY
@@ -96,6 +99,13 @@ class SupervisionPromoFooterPreference(
         // and the action has to be valid for the preference to be visible.
         preference.isVisible =
             intent != null && (preferenceData?.title != null || preferenceData?.summary != null)
+        if (Flags.enableSupervisionSettingsUiUpdates()) {
+            updateParentVisibility(lifeCycleContext)
+        }
+    }
+
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        this.lifeCycleContext = context
     }
 
     override fun onResume(context: PreferenceLifecycleContext) {
@@ -122,6 +132,10 @@ class SupervisionPromoFooterPreference(
 
     private fun Intent.isValid(context: Context) =
         context.packageManager.queryIntentActivitiesAsUser(this, 0, context.userId).isNotEmpty()
+
+    private fun updateParentVisibility(context: PreferenceLifecycleContext?) {
+        context?.notifyPreferenceChange(SupervisionDashboardScreen.AVAILABLE_SUPERVISION_APPS_GROUP)
+    }
 
     companion object {
         const val KEY = "promo_footer"
