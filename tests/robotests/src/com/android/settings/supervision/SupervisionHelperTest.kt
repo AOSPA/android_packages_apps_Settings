@@ -17,6 +17,7 @@ package com.android.settings.supervision
 
 import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
+import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
 import android.content.ComponentName
 import android.content.Context
@@ -46,9 +47,11 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadows.ShadowDevicePolicyManager
 import org.robolectric.shadows.ShadowPackageManager
+import org.robolectric.shadows.ShadowServiceManager
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionHelperTest {
@@ -57,8 +60,9 @@ class SupervisionHelperTest {
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockUserManager = mock<UserManager>()
     private val mockResources = mock<Resources>()
-    private val context = contextOf(mockRoleManager)
+    private val mockISupervisionManager = mock<ISupervisionManager>()
 
+    private val context = contextOf(mockRoleManager)
     private lateinit var packageManager: PackageManager
     private lateinit var shadowPackageManager: ShadowPackageManager
 
@@ -72,6 +76,11 @@ class SupervisionHelperTest {
         shadowPackageManager = shadowOf(packageManager)
         dpm = applicationContext.getSystemService(DevicePolicyManager::class.java)
         shadowDpm = shadowOf(dpm) as ShadowDevicePolicyManager
+        ShadowServiceManager.addBinderService(
+            Context.SUPERVISION_SERVICE,
+            ISupervisionManager::class.java,
+            mockISupervisionManager,
+        )
     }
 
     @Test
@@ -404,6 +413,20 @@ class SupervisionHelperTest {
         shadowDpm.setProfileOwner(null)
 
         assertThat(context.isSupervisionPackageProfileOwner()).isFalse()
+    }
+
+    @Test
+    fun isMissingRecoveryMethod_hasValidMethod_returnsFalse() {
+        whenever(mockISupervisionManager.hasValidRecoveryMethod(any())).thenReturn(true)
+
+        assertThat(context.isMissingRecoveryMethod()).isFalse()
+    }
+
+    @Test
+    fun isMissingRecoveryMethod_noValidMethod_returnsTrue() {
+        whenever(mockISupervisionManager.hasValidRecoveryMethod(any())).thenReturn(false)
+
+        assertThat(context.isMissingRecoveryMethod()).isTrue()
     }
 
     private fun setUpMessengerServiceComponent(packageName: String, disabled: Boolean) {
