@@ -23,6 +23,7 @@ import android.os.Bundle
 import android.provider.Telephony
 import android.telephony.CarrierConfigManager
 import android.util.Log
+import com.android.internal.telephony.flags.Flags
 import com.android.settings.R
 import com.android.settings.network.apn.ApnTypes.getPreSelectedApnType
 import com.android.settings.network.apn.ApnTypes.getReadOnlyApnTypes
@@ -52,7 +53,7 @@ data class ApnData(
     val newApn: Boolean = false,
     val subId: Int = -1,
     val validEnabled: Boolean = false,
-    val customizedConfig: CustomizedConfig = CustomizedConfig()
+    val customizedConfig: CustomizedConfig = CustomizedConfig(),
 ) {
     fun getContentValueMap(context: Context): Map<String, Any> = mapOf(
         Telephony.Carriers.NAME to name,
@@ -94,6 +95,7 @@ data class CustomizedConfig(
     val defaultApnTypes: List<String>? = null,
     val defaultApnProtocol: String = "",
     val defaultApnRoamingProtocol: String = "",
+    val disallowedApnStrings: List<String>? = null,
 )
 
 /**
@@ -172,12 +174,15 @@ fun validateAndSaveApnData(
  * @return An error message if the apn data is invalid, otherwise return null.
  */
 fun validateApnData(apnData: ApnData, context: Context): String? {
-    val errorMsg: String? = when {
-        apnData.name.isEmpty() -> context.resources.getString(R.string.error_name_empty)
-        apnData.apn.isEmpty() -> context.resources.getString(R.string.error_apn_empty)
-        apnData.apnType.isEmpty() -> context.resources.getString(R.string.error_apn_type_empty)
-        else -> validateMMSC(true, apnData.mmsc, context) ?: isItemExist(apnData, context)
-    }
+    val errorMsg: String? =
+        when {
+            apnData.name.isEmpty() -> context.resources.getString(R.string.error_name_empty)
+            apnData.apn.isEmpty() -> context.resources.getString(R.string.error_apn_empty)
+            apnData.apnType.isEmpty() -> context.resources.getString(R.string.error_apn_type_empty)
+            containsDisallowedApnName(apnData) ->
+                context.resources.getString(R.string.error_disallow_adding_apn)
+            else -> validateMMSC(true, apnData.mmsc, context) ?: isItemExist(apnData, context)
+        }
     return errorMsg?.also { Log.d(TAG, "APN data not valid, reason: $it") }
 }
 
@@ -202,7 +207,8 @@ fun getCarrierCustomizedConfig(
         CarrierConfigManager.KEY_APN_SETTINGS_DEFAULT_APN_TYPES_STRING_ARRAY,
         CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_PROTOCOL_STRING,
         CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_ROAMING_PROTOCOL_STRING,
-        CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL
+        CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL,
+        CarrierConfigManager.KEY_DISALLOW_ADDING_APN_STRING_ARRAY,
     )
     val customizedConfig = CustomizedConfig(
         readOnlyApnTypes = b.getReadOnlyApnTypes(),
@@ -219,6 +225,9 @@ fun getCarrierCustomizedConfig(
             CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_ROAMING_PROTOCOL_STRING
         ) ?: "",
         isAddApnAllowed = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL),
+        disallowedApnStrings = b.getStringArray(
+            CarrierConfigManager.KEY_DISALLOW_ADDING_APN_STRING_ARRAY
+        )?.toList(),
     )
     if (customizedConfig.readOnlyApnTypes.isNotEmpty()) {
         log("read only APN type: " + customizedConfig.readOnlyApnTypes)
@@ -269,6 +278,26 @@ fun validateMMSC(validEnabled: Boolean, mmsc: String, context: Context): String?
     return if (validEnabled && mmsc != "" && !mmsc.matches(Regex("^https?:\\/\\/.+")))
         context.resources.getString(R.string.error_mmsc_valid)
     else null
+}
+
+fun containsDisallowedApnName(apnData: ApnData): Boolean {
+    if (!Flags.enableCarrierConfigApnStringRestriction()) {
+        return false
+    }
+    val disallowedApns = apnData.customizedConfig.disallowedApnStrings
+    val apn = apnData.apn
+    if (disallowedApns.isNullOrEmpty() || apn.isEmpty()) return false
+    for (disallowedApnString in disallowedApns) {
+        if (apn.contains(disallowedApnString)) {
+            Log.d(
+                TAG,
+                "containsDisallowedApnName: true apn($apn)" +
+                    " contains carrier disallowed APN $disallowedApnString",
+            )
+            return true
+        }
+    }
+    return false
 }
 
 fun validateName(validEnabled: Boolean, name: String, context: Context): String? {
