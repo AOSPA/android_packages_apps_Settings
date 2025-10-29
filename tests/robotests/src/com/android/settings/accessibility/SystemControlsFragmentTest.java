@@ -36,6 +36,7 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 /** Tests for {@link SystemControlsFragment}. */
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowKeyCharacterMap.class})
 public class SystemControlsFragmentTest {
@@ -76,3 +77,4 @@ public class SystemControlsFragmentTest {
         assertThat(keys).containsAtLeastElementsIn(niks);
     }
 }
+// LINT.ThenChange(SystemControlsScreenTest.kt)
