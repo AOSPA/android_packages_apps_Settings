@@ -44,11 +44,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
-import android.security.Flags;
 
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
@@ -58,7 +53,6 @@ import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -72,9 +66,6 @@ import org.robolectric.util.ReflectionHelpers;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class})
 public class ExternalSourcesDetailsTest {
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
-
     @Mock
     private Context mContext;
     @Mock
@@ -268,45 +259,6 @@ public class ExternalSourcesDetailsTest {
         assertThat(mSwitchPref.isDisabledByAdmin()).isTrue();
     }
 
-    @RequiresFlagsDisabled(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSTALL_UNKNOWN_SOURCES)
-    @Test
-    public void getPreferenceSummary_restrictedBySystem_adminString() {
-        when(mUserManager.getUserRestrictionSource(DISALLOW_INSTALL_UNKNOWN_SOURCES, mUserHandle))
-                .thenReturn(RESTRICTION_SOURCE_SYSTEM);
-        when(mContext
-                .getString(com.android.settingslib.widget.restricted.R.string.disabled_by_admin))
-                .thenReturn("disabled_by_admin");
-
-        CharSequence summary = ExternalSourcesDetails.getPreferenceSummary(mContext, mAppEntry);
-
-        assertEquals("disabled_by_admin", summary.toString());
-    }
-
-    @RequiresFlagsDisabled(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSTALL_UNKNOWN_SOURCES)
-    @Test
-    public void getPreferenceSummary_restrictedByProfileOwner_disabledString() {
-        when(mUserManager.getUserRestrictionSource(DISALLOW_INSTALL_UNKNOWN_SOURCES, mUserHandle))
-                .thenReturn(RESTRICTION_SOURCE_PROFILE_OWNER);
-        when(mContext.getString(com.android.settingslib.R.string.disabled)).thenReturn("disabled");
-
-        CharSequence summary = ExternalSourcesDetails.getPreferenceSummary(mContext, mAppEntry);
-
-        assertEquals("disabled", summary.toString());
-    }
-
-    @RequiresFlagsDisabled(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSTALL_UNKNOWN_SOURCES)
-    @Test
-    public void getPreferenceSummary_restrictedByDeviceOwner_disabledString() {
-        when(mUserManager.getUserRestrictionSource(DISALLOW_INSTALL_UNKNOWN_SOURCES, mUserHandle))
-                .thenReturn(RESTRICTION_SOURCE_DEVICE_OWNER);
-        when(mContext.getString(com.android.settingslib.R.string.disabled)).thenReturn("disabled");
-
-        CharSequence summary = ExternalSourcesDetails.getPreferenceSummary(mContext, mAppEntry);
-
-        assertEquals("disabled", summary.toString());
-    }
-
-    @RequiresFlagsEnabled(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSTALL_UNKNOWN_SOURCES)
     @Test
     public void getPreferenceSummary_baseRestricted_disabledString() {
         when(mUserManager.hasBaseUserRestriction(DISALLOW_INSTALL_UNKNOWN_SOURCES, mUserHandle))
@@ -318,7 +270,6 @@ public class ExternalSourcesDetailsTest {
         assertEquals("disabled", summary.toString());
     }
 
-    @RequiresFlagsEnabled(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSTALL_UNKNOWN_SOURCES)
     @Test
     public void getPreferenceSummary_restrictedOnUser_adminString() {
         when(mUserManager.hasUserRestrictionForUser(DISALLOW_INSTALL_UNKNOWN_SOURCES, mUserHandle))
@@ -332,7 +283,6 @@ public class ExternalSourcesDetailsTest {
         assertEquals("disabled_by_admin", summary.toString());
     }
 
-    @RequiresFlagsEnabled(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSTALL_UNKNOWN_SOURCES)
     @Test
     public void getPreferenceSummary_restrictedGloballyByAdmin_adminString() {
         final EnforcingAdmin nonAdvancedProtectionEnforcingAdmin = new EnforcingAdmin("test.pkg",
@@ -352,7 +302,6 @@ public class ExternalSourcesDetailsTest {
         assertEquals("disabled_by_admin", summary.toString());
     }
 
-    @RequiresFlagsEnabled(Flags.FLAG_AAPM_FEATURE_DISABLE_INSTALL_UNKNOWN_SOURCES)
     @Test
     public void getPreferenceSummary_restrictedGloballyByAdvancedProtection_disabledString() {
         final EnforcingAdmin advancedProtectionEnforcingAdmin = new EnforcingAdmin("test.pkg",

@@ -4954,8 +4954,7 @@
             android:taskAffinity="com.android.settings.security"
             android:excludeFromRecents="true"
             android:exported="false"
-            android:launchMode="singleTop"
-            android:featureFlag="android.security.aapm_api">
+            android:launchMode="singleTop">
             <intent-filter android:priority="1">
                 <action android:name="android.security.advancedprotection.action.SHOW_ADVANCED_PROTECTION_SUPPORT_DIALOG" />
                 <category android:name="android.intent.category.DEFAULT" />
