@@ -112,6 +112,11 @@
         settings:controller="com.android.settings.spa.app.specialaccess.WriteSystemPreferencesPreferenceController" />
 
     <Preference
+        android:key="computer_control_automation"
+        android:title="@string/computer_control_automation_page_title"
+        settings:controller="com.android.settings.spa.app.specialaccess.ComputerControlAutomationPreferenceController" />
+
+    <Preference
         android:key="picture_in_picture"
         android:title="@string/picture_in_picture_title"
         android:order="-1100"
