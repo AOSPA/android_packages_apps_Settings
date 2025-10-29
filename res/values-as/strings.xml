@@ -68,6 +68,8 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"নতুন নাম দিয়ক"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"ডিভাইচৰ সংযোগ বিছিন্ন কৰিবনে?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"নতুন ডিভাইচ পেয়াৰ কৰক"</string>
+    <!-- no translation found for bluetooth_pairing_no_device_button_message (6429917002249666051) -->
+    <skip />
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ব্লুটুথ"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"কাইলৈ স্বয়ংক্ৰিয়ভাৱে অন কৰক"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"যদি আপুনি ব্লুটুথ অফ কৰে, তেন্তে পাছদিনা ই পুনৰ অন হয়"</string>
@@ -134,7 +136,6 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"বাৰ্তা এক্সেছ কৰাৰ অনুৰোধ"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"অন্য ডিভাইচে “<xliff:g id="DEVICE_NAME">^1</xliff:g>” হিচাপে দেখা পাব"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"অইন ডিভাইচৰ সৈতে সংযোগ কৰিবলৈ ব্লুটুথ অন কৰক।"</string>
-    <string name="shared_network_footer" msgid="5178404860420039168">"এই নেটৱৰ্কটোত সালসলনি কৰিবলৈ নেটৱৰ্কৰ গৰাকী বা ডিভাইচৰ প্ৰশাসকৰ সৈতে যোগাযোগ কৰক।"</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"আপোনাৰ ডিভাইচসমূহ"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"নতুন ডিভাইচ পেয়াৰ কৰক"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"ব্লুটুথ A2DP হাৰ্ডৱেৰ অফল\'ড অক্ষম কৰক"</string>
@@ -1027,10 +1028,8 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"আৰম্ভ কৰিবলৈ এক বাহ্যিক ডিছপ্লে‘ ব্যৱহাৰ কৰক বা আন এডাল কে‘বল ব্যৱহাৰ কৰি চাওক"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"অধিক বিকল্প"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"ডিছপ্লে’সমূহ পুনৰ সজাবলৈ ধৰি ৰাখি টানি আনক"</string>
-    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
-    <skip />
-    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
-    <skip />
+    <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"নেভিগেশ্বনৰ কাঁড়চিহ্ন দেখুৱাবলৈ টিপক"</string>
+    <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"ডিছপ্লে’সমূহ পুনৰ সজাবলৈ কাঁড়চিহ্নত টিপক"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"বিল্ট-ইন ডিছপ্লে’ মিৰ’ৰ কৰক"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"নতুন ছেটিং ব্যৱহাৰ কৰিবনে?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"যদি আপোনাৰ ডিছপ্লে’ই আপুনি বিচৰা ধৰণে কাম কৰা নাই, তেন্তে আপুনি আপোনাৰ পূৰ্বৱৰ্তী ছেটিংসমূহলৈ উভতি যাব পাৰে"</string>
@@ -1040,14 +1039,10 @@
     <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"তললৈ নিয়ক"</string>
     <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"বাওঁফাললৈ নিয়ক"</string>
     <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"সোঁফাললৈ নিয়ক"</string>
-    <!-- no translation found for external_display_topology_a11y_display_moved_up (2006298475752942395) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_display_moved_down (6028544722984648702) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_display_moved_left (5308110789317472437) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_display_moved_right (3802527156765844475) -->
-    <skip />
+    <string name="external_display_topology_a11y_display_moved_up" msgid="2006298475752942395">"ডিছপ্লে’: %1$s ওপৰলৈ স্থানান্তৰ কৰা হৈছে"</string>
+    <string name="external_display_topology_a11y_display_moved_down" msgid="6028544722984648702">"ডিছপ্লে’: %1$s তললৈ স্থানান্তৰ কৰা হৈছে"</string>
+    <string name="external_display_topology_a11y_display_moved_left" msgid="5308110789317472437">"ডিছপ্লে’: %1$s বাওঁফালে স্থানান্তৰ কৰা হৈছে"</string>
+    <string name="external_display_topology_a11y_display_moved_right" msgid="3802527156765844475">"ডিছপ্লে’: %1$s সোঁফালে স্থানান্তৰ কৰা হৈছে"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"আইনা"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"বেতাঁৰ ডিছপ্লে’ সক্ষম কৰক"</string>
@@ -1213,12 +1208,17 @@
     <string name="private_message" msgid="5897966950396765392">"ব্যক্তিগত"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"নিশ্চিত কৰক"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"বাতিল কৰক"</string>
-    <string name="wifi_share_preference_title" msgid="6346200020322308703">"এইটো এটা শ্বেয়াৰ কৰা নে’টৱৰ্ক"</string>
-    <string name="wifi_share_preference_summary" msgid="4356010425167713046">"অতিথি ব্যৱহাৰকাৰীৰ বাহিৰে আটাইবোৰ ব্যৱহাৰকাৰীয়ে, এই নেটৱৰ্কটো চাব, সম্পাদনা কৰিব আৰু মচিব পাৰিব"</string>
+    <!-- no translation found for wifi_share_preference_title (2000847347515149059) -->
+    <skip />
+    <!-- no translation found for wifi_share_preference_summary (3642772041628058748) -->
+    <skip />
     <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"<xliff:g id="SHARED">%1$s</xliff:g> \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" নেটৱৰ্কলৈ সলনি কৰিবনে?"</string>
     <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"আপুনি বৰ্তমান একেটা নামেৰে <xliff:g id="SHARED_0">%1$s</xliff:g> নেটৱৰ্কৰ সৈতে সংযুক্ত। আপুনি সলনি কৰিলে, আপোনাৰ <xliff:g id="SHARED_1">%2$s</xliff:g> নেটৱৰ্কৰ সৈতে সংযোগ বিচ্ছিন্ন হ’ব আৰু <xliff:g id="PRIVATE">%3$s</xliff:g> নেটৱৰ্কৰ সৈতে পুনৰ সংযোগ স্থাপন হ’ব। আপোনাৰ ওচৰত হয়তো অস্থায়ীভাৱে ইণ্টাৰনেট নাই।"</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(সালসলনি নাই)"</string>
-    <string name="wifi_allow_edit_configuration_title" msgid="3928254385019370063">"অন্য ব্যৱহাৰকাৰীসকলক নেটৱৰ্ক কনফিগাৰেশ্বন সম্পাদনা কৰিবলৈ দিয়ক"</string>
+    <!-- no translation found for wifi_allow_edit_configuration_title (701463165569293) -->
+    <skip />
+    <!-- no translation found for wifi_allow_edit_configuration_summary (2133654391010089827) -->
+    <skip />
     <string name="wifi_unspecified" msgid="4561964943472312208">"অনুগ্ৰহ কৰি বাছনি কৰক"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(একাধিক প্ৰমাণপত্ৰ যোগ কৰা হৈছে)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"ছিষ্টেমৰ প্ৰমাণপত্ৰ ব্যৱহাৰ কৰক"</string>
@@ -1232,11 +1232,10 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"অনুমতি দিয়ক"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"প্ৰত্যাখ্যান কৰক"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*আৱশ্যকীয়"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"এইটো এটা শ্বেয়াৰ কৰা নে’টৱৰ্ক। আপুনি লগ ইন কৰিলে এই ছেটিংটো সলনি কৰিব পাৰে।"</string>
-    <string name="share_wifi_network" msgid="4064997404339571584">"অন্য ডিভাইচ ব্যৱহাৰকাৰীসকলৰ সৈতে এই নে’টৱৰ্কটো শ্বেয়াৰ কৰক"</string>
-    <string name="share_wifi_network_summary" msgid="4316236421149769333">"এই ডিভাইচৰ সকলো ব্যৱহাৰকাৰীয়ে এটা শ্বেয়াৰ কৰা নে’টৱৰ্ক চাব আৰু সংযোগ কৰিব পাৰে। প্ৰশাসকসকলে কোনো শ্বেয়াৰ কৰা নে’টৱৰ্ক মচিব পাৰে। অধিক জানক"</string>
-    <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"অন্য ব্যৱহাৰকাৰীসকলক নেটৱৰ্ক কনফিগাৰেশ্বন সম্পাদনা কৰিবলৈ দিয়ক"</string>
-    <string name="edit_wifi_network_non_owner_message" msgid="4291718452228643581">"এই নেটৱৰ্কত পৰিবৰ্তন কৰিবলৈ এই ডিভাইচৰ প্ৰশাসকৰ সৈতে যোগাযোগ কৰক।"</string>
+    <!-- no translation found for wifi_shared_network_login_screen_warning (8298716960537761436) -->
+    <skip />
+    <!-- no translation found for edit_wifi_network_non_owner_message (4387650403845968672) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"এই নেটৱৰ্কটোত ইণ্টাৰনেট নাই। সংযোজিত কৰি ৰাখেনে?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"সীমিত ইণ্টাৰনেট সংযোগৰ বাবে কিছুমান এপ্ আৰু সেৱাই কাম নকৰিবও পাৰে। যিকোনো উপায়েৰে ব্যৱহাৰ কৰিবনে?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"এইটো নেটৱৰ্কৰ বাবে পুনৰাই নুসুধিব"</string>
@@ -1331,8 +1330,7 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"৫ গিগাহাৰ্টজ / বেছিভাগ ডিভাইচৰ সৈতে সুসংগত"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"৬ গিগাহাৰ্টজ / কেইটামান ডিভাইচৰ সৈতে সুসংগত"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"২.৪ আৰু ৫ গিগাহাৰ্টজ / বেছিভাগ ডিভাইচৰ সৈতে সুসংগত"</string>
-    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
-    <skip />
+    <string name="wifi_hotspot_speed_summary_2g_and_6g" msgid="5903589948734876821">"২.৪ আৰু ৬ গিগাহাৰ্টজ / বেছিভাগ ডিভাইচৰ সৈতে সুসংগত"</string>
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"আপোনাৰ হ\'টস্প\'টৰ বাবে এটা ফ্ৰিকুৱেন্সী বাছনি কৰক। ফ্ৰিকুৱেন্সীটোৱে সংযোগৰ গতি আৰু আপোনাৰ ডিভাইচটো কোন প্ৰকাৰৰ ডিভাইচে বিচাৰি পাব পাৰে, সেই ক্ষেত্ৰত প্ৰভাৱ পেলায়।"</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"অগ্ৰাধিকাৰ দিয়া ফ্ৰিকুৱেন্সী"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"২.৪ গিগাহাৰ্টজ"</string>
@@ -1343,10 +1341,8 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"দ্ৰুত গতি। এই ডুৱেল বেণ্ড হ’টস্প’টটো বেছিভাগ ডিভাইচৰ সৈতে সুসংগত।"</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"৬ গিগাহাৰ্টজ"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"দ্ৰুততম গতি। কেইটামান ডিভাইচৰ সৈতে সুসংগত।"</string>
-    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
-    <skip />
+    <string name="wifi_hotspot_speed_2g_6g" msgid="7660263835445953086">"২.৪ আৰু ৬ গিগাহাৰ্টজ"</string>
+    <string name="wifi_hotspot_speed_2g_6g_summary" msgid="5013590436817464652">"দ্ৰুততম গতি। এই ডুৱেল বেণ্ড হ’টস্প’টটো বেছিভাগ ডিভাইচৰ সৈতে সুসংগত।"</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"আপোনাৰ দেশ অথবা অঞ্চলত উপলব্ধ নহয়"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"যদি আপুনি অগ্ৰাধিকাৰ দিয়া ফ্ৰিকুৱেন্সীটো উপলব্ধ নহয়, আপোনাৰ হ\'টস্প\'টে অন্য এটা ব্যৱহাৰ কৰিব পাৰে। আপুনি ফ্ৰিকুৱেন্সীটো সলনি কৰিলে হ\'টস্প\'টৰ সুৰক্ষাৰ ছেটিংটো সলনি হ\'ব পাৰে।"</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"৬ গিগাহাৰ্টজৰ সৈতে উপলব্ধ নহয়"</string>
@@ -2248,6 +2244,8 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"কৰ্মস্থানৰ প্ৰ’ফাইল আৰু সঁজুলি"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"কৰ্মস্থানৰ বাবে অন-স্ক্ৰীন কীব’ৰ্ড"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ডিফ’ল্ট"</string>
+    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
+    <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"টাচ্চপেড"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"টাচ্চপেড আৰু মাউছ"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"মাউছ"</string>
@@ -2312,7 +2310,7 @@
     <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"একেবাৰে তলৰ সোঁফালৰ কোণ"</string>
     <string name="action_corner_top_left_title" msgid="4633975226092344210">"একেবাৰে ওপৰৰ বাওঁফালৰ কোণ"</string>
     <string name="action_corner_top_right_title" msgid="4995999693840776032">"একেবাৰে ওপৰৰ সোঁফালৰ কোণ"</string>
-    <string name="action_corner_action_none" msgid="5203163099950649999">"নাই"</string>
+    <string name="action_corner_action_none" msgid="5203163099950649999">"একো নাই"</string>
     <string name="action_corner_action_home" msgid="6779642573582379579">"গৃহপৃষ্ঠা"</string>
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"শেহতীয়া এপ্‌"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"জাননী"</string>
@@ -2646,7 +2644,7 @@
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"কার্য কৰাৰ সময় (সাধ্য সুবিধা সময় উকলিব)"</string>
     <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"কার্যব্যৱস্থা ল’বলৈ লগা সময় (সাধ্য সুবিধাৰ সময় ওকলা)ৰ বিষয়ে"</string>
     <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"কার্যব্যৱস্থা ল’বলৈ লগা সময় (সাধ্য সুবিধাৰ সময় ওকলা)ৰ বিষয়ে অধিক জানক"</string>
-    <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"কার্যপন্থা লোৱাৰ সময়"</string>
+    <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"কাৰ্যব্যৱস্থা লোৱাৰ সময়"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"এই সময়ৰ অগ্ৰাধিকাৰসমূহ আটাইবোৰ মিডিয়া এপে সমৰ্থন নকৰে"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"আপোনাক কোনো কাৰ্যপন্থা গ্ৰহণ কৰিবলৈ কোৱা অস্থায়ী বাৰ্তা কিমান সময় প্ৰদৰ্শন কৰিব খোজে সেয়া বাছনি কৰক"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"স্পৰ্শ কৰি হেঁচি ধৰি থকাৰ সময়"</string>
@@ -2945,6 +2943,10 @@
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"অন্তিমবাৰ সম্পূৰ্ণৰূপে চাৰ্জ হোৱাৰ পাছত হোৱা ব্যৱহাৰ চাওক"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
+    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
+    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
+    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
+    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"এপৰ বেটাৰীৰ ব্যৱহাৰ"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"ব্যৱহাৰৰ বিৱৰণ"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"পাৱাৰৰ ব্যৱহাৰ খাপ খুৱাওক"</string>
@@ -3488,7 +3490,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"অতিথিৰ কাৰ্যকলাপ মচিবনে?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"এতিয়া এই অতিথিৰ ছেশ্বনৰ এপ্ আৰু ডেটা মচা হ’ব আৰু আপুনি অতিথি ম’ডৰ পৰা প্ৰতিবাৰ বাহিৰ হওঁতে ভৱিষ্যতে কৰা আটাইবোৰ অতিথিৰ কাৰ্যকলাপ মচা হ’ব।"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"মচক, আলহী, কাৰ্যকলাপ, আঁতৰাওক, ডেটা, ভিজিটৰ, মোহাৰক"</string>
-    <string name="enable_guest_calling" msgid="4620657197834392094">"অতিথিক ফল কল কৰিবলৈ অনুমতি দিয়ক"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"অতিথিক ফ’ন কল কৰিবলৈ অনুমতি দিয়ক"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"এইগৰাকী অতিথি ব্যৱহাৰকাৰীৰ সৈতে কলৰ ইতিহাস শ্বেয়াৰ কৰা হ’ব"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"ফ\'ন কল আৰু এছএমএছ অন কৰক"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"এই ব্যৱহাৰকাৰীগৰাকীক এগৰাকী প্ৰশাসক বনাওক"</string>
@@ -4329,6 +4331,8 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"কেলেণ্ডাৰৰ অনুষ্ঠান"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"শোৱাৰ সময়ৰ ৰুটিন"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"গাড়ী চলাই থাকোঁতে"</string>
+    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
+    <skip />
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"এপৰ ছেটিং"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"<xliff:g id="APP_NAME">%1$s</xliff:g>ত তথ্য আৰু ছেটিং"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"<xliff:g id="APP_NAME">%1$s</xliff:g>এ পৰিচালনা কৰা"</string>
@@ -4345,6 +4349,8 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"মনোযোগ দিবলৈ আপোনাৰ ডিভাইচৰ পৰা বিভ্ৰান্তি বা বাধা অৱৰোধ কৰক"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"নীৰৱ পৰিৱেশৰ বাবে আটাইবোৰ বিভ্ৰান্তি আঁতৰাওক"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"পৃথক ব্যৱহাৰকাৰীৰ বাবে ডিভাইচৰ অভিজ্ঞতা আৰু ছেটিঙৰ ব্যক্তিগতকৰণ কৰক"</string>
+    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
+    <skip />
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"কেৱল গুৰুত্বপূৰ্ণ লোক আৰু এপ্‌সমূহক আপোনাৰ লগত যোগাযোগ কৰিবলৈ অনুমতি দি বাধা কম কৰক"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"নিয়মীয়া সময়সূচী অনুসৰণ কৰা এটা ম’ড ছেট কৰক"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"আপোনাৰ দিনটোৰ কাৰ্যক্ৰমৰ সৈতে আপোনাৰ ডিভাইচটো ছিংক কৰি ৰাখক"</string>
@@ -4353,6 +4359,8 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"নিমজ্জিত হৈ পৰিবলৈ মনোনিৱেশ কৰক"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"সৌজন্যতাই গুৰুত্ব লাভ কৰা মূহুৰ্তবোৰৰ বাবে"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"আপোনাক যত্ন সহকাৰে ৰখাত সহায় কৰিবলৈ নিৰ্দেশিত ব্যৱহাৰ"</string>
+    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
+    <skip />
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"আপোনাৰ মনোযোগ নিয়ন্ত্ৰণ কৰক"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"সকীয়নি"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"বন্ধ কৰক"</string>
@@ -4566,7 +4574,7 @@
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimize"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"আপোনাৰ বেটাৰী খৰকৈ শেষ কৰিব পাৰে। এপ্‌টোক নেপথ্যত বেটাৰী ব্যৱহাৰ কৰাত আৰু বাধা দিয়া নহ’ব।"</string>
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"বেটাৰীৰ অৱস্থা উন্নত কৰাৰ বাবে পৰামৰ্শ দিয়া হৈছে"</string>
-    <string name="app_list_preference_none" msgid="1635406344616653756">"এটাও নহয়"</string>
+    <string name="app_list_preference_none" msgid="1635406344616653756">"এটাও নাই"</string>
     <string name="work_profile_usage_access_warning" msgid="7579246573371327219">"এই এপৰ বাবে এপে ব্যৱহাৰ কৰা ডেটা অফ কৰিলেও আপোনাৰ প্ৰশাসকক আপোনাৰ কৰ্মস্থানৰ প্ৰ’ফাইলত থকা এপ্‌সমূহৰ ডেটা ব্যৱহাৰ ট্ৰেক কৰাত বাধা নিদিয়ে"</string>
     <string name="draw_overlay" msgid="7902083260500573027">"অন্য এপ্‌সমূহত দেখুৱাওক"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"অন্য এপ্‌সমূহত দেখুৱাওক"</string>
@@ -5971,8 +5979,7 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"অভিভাৱকীয় নিয়ন্ত্ৰণৰ পিন ছেট আপ কৰক"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"তদাৰক, অভিভাৱকীয় নিয়ন্ত্ৰণ, অভিভাৱক, তদাৰক কৰাৰ পিন, পিন"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"আপোনাৰ পিন পৰিচালনা কৰক"</string>
-    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
-    <skip />
+    <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"অভিভাৱকীয় নিয়ন্ত্ৰণৰ পিন পৰিচালনা কৰক"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"অভিভাৱকীয় নিয়ন্ত্ৰণৰ পিন"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"অভিভাৱকৰ পিন, অভিভাৱকীয় নিয়ন্ত্ৰণৰ পিন"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"একাউণ্ট পুনৰুদ্ধাৰৰ বাবে ছেট কৰা ইমেইল যোগ দিয়ক"</string>
@@ -6045,10 +6052,8 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"অৱস্থানৰ এক্সেছ থকা এপ্‌ আৰু সেৱাসমূহ চাওক"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"পৰিচয় পৰীক্ষা কৰাৰ সুবিধাটোৱে অধিক এপৰ সৈতে কাম কৰে"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"পৰিচয় পৰীক্ষা কৰাৰ সুবিধাটোৱে আপোনাৰ এপলৈ অনাকাংক্ষিত এক্সেছ ৰোধ কৰে। এতিয়া ফিংগাৰপ্ৰিণ্ট বা ফে’চ আনলক ব্যৱহাৰ কৰা যিকোনো এপৰ সৈতে উপলব্ধ।"</string>
-    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
-    <skip />
+    <string name="identity_check_watch_notification_title" msgid="5559702400315647907">"পৰিচয় পৰীক্ষা কৰাৰ সুবিধা আৰু আপোনাৰ ঘড়ী"</string>
+    <string name="identity_check_watch_notification_summary" msgid="3200144847521451493">"এটা সংযোগ কৰি ৰখা ঘড়ীৰ জৰিয়তে, পৰিচয় পৰীক্ষা কৰাৰ সুবিধাই এয়া আপুনি বুলি সত্যাপন কৰাৰ আৰু আপোনাৰ এপৰ অনাকাংক্ষিত এক্সেছ ৰোধ কৰে"</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"সবিশেষ চাওক"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"ছেটিং পৰীক্ষা কৰিব পৰা নগ’ল"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"এতিয়ালৈকে কোনো তথ্য নাই"</string>
@@ -6068,14 +6073,13 @@
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"অগ্ৰাহ্য কৰা সতৰ্কবাৰ্তা"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"এই সতৰ্কবাৰ্তাটো অগ্ৰাহ্য কৰিবনে?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"অধিক সুৰক্ষা যোগ দিবলৈ যিকোনো সময়তে আপোনাৰ সুৰক্ষা সম্পৰ্কীয় আৰু গোপনীয়তাৰ ছেটিং পৰ্যালোচনা কৰক"</string>
+    <!-- no translation found for safety_center_resolved_issue_fallback (223765674640909183) -->
+    <skip />
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"পেয়াৰ কৰি থকা হৈছে"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> সংযোগ কৰা হৈছে"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"ডিভাইচ স্কেন কৰক"</string>
     <string name="satellite_tile_label" msgid="1098132989724404617">"উপগ্ৰহ"</string>
-    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
-    <skip />
-    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
-    <skip />
-    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
-    <skip />
+    <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"অন আছে"</string>
+    <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"উপলব্ধ"</string>
+    <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"উপলব্ধ নহয়"</string>
 </resources>
