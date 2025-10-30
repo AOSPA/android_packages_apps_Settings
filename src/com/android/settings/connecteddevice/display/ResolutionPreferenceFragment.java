@@ -43,6 +43,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.util.ToBooleanFunction;
 import com.android.settings.R;
@@ -142,6 +143,11 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         }
         mInjector.registerDisplayListener(mListener);
         scheduleUpdate();
+        final RecyclerView recyclerView = getListView();
+        if (recyclerView != null) {
+            // A11y is announced on the individual resolution selections
+            recyclerView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        }
     }
 
     @Override
@@ -232,9 +238,7 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
             mMoreOptionsPreference.setPersistent(false);
             mMoreOptionsPreference.setTitle(MORE_OPTIONS_TITLE_RESOURCE);
             mMoreOptionsPreference.setOnExpandButtonClickListener(
-                    () -> {
-                        mMoreOptionsExpanded = true;
-                    });
+                    () -> mMoreOptionsExpanded = true);
             mMoreOptionsPreference.setKey(MORE_OPTIONS_KEY);
             screen.addPreference(mMoreOptionsPreference);
         } else {
