@@ -37,6 +37,8 @@ import com.android.settingslib.supervision.SupervisionLog.TAG
 object SupervisionHelper {
     const val INSTALL_SUPERVISION_APP_ACTION =
         "android.app.supervision.action.INSTALL_SUPERVISION_APP"
+    const val SHARED_PREFS_NAME = "supervision_settings_prefs"
+    const val KEY_RECOVERY_BANNER_DISMISSED = "supervision_recovery_banner_dismissed"
 }
 
 val Context.isSupervisingCredentialSet: Boolean
