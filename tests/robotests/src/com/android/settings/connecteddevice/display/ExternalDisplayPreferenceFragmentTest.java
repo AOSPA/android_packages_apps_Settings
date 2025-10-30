@@ -36,7 +36,6 @@ import static com.android.settings.connecteddevice.display.ExternalDisplayPrefer
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
 import static com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING;
-import static com.android.window.flags.Flags.FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
@@ -232,39 +231,8 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
 
     @Test
     @UiThreadTest
-    @DisableFlags(FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG)
+    @EnableFlags({FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT})
     public void testShowDisplayControlsDisabled() {
-        doReturn(List.of(
-                        createExternalDisplay(DisplayIsEnabled.NO),
-                        createOverlayDisplay(DisplayIsEnabled.YES)))
-                .when(mMockedInjector).getDisplays();
-        initFragment();
-        mHandler.flush();
-
-        assertDisplayListCount(2);
-        Preference pref;
-        for (int disp = 0; disp < 2; disp++) {
-            pref = mPreferenceScreen.findPreference(
-                    PrefBasics.EXTERNAL_DISPLAY_RESOLUTION.keyForNth(disp));
-            assertWithMessage("resolution " + disp).that(pref.isEnabled()).isEqualTo(disp == 1);
-
-            pref = mPreferenceScreen.findPreference(
-                    PrefBasics.EXTERNAL_DISPLAY_ROTATION.keyForNth(disp));
-            assertWithMessage("rotation " + disp).that(pref.isEnabled()).isEqualTo(disp == 1);
-
-            pref = mPreferenceScreen.findPreference(
-                    PrefBasics.EXTERNAL_DISPLAY_SIZE.keyForNth(disp));
-            assertWithMessage("size " + disp).that(pref.isEnabled()).isEqualTo(disp == 1);
-        }
-    }
-
-    @Test
-    @UiThreadTest
-    @EnableFlags({
-            FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT,
-            FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG,
-    })
-    public void testShowDisplayControlsDisabled_updatedDialogEnabled() {
         doReturn(List.of(
                 createExternalDisplay(DisplayIsEnabled.NO),
                 createOverlayDisplay(DisplayIsEnabled.YES)))
@@ -330,35 +298,8 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
 
     @Test
     @UiThreadTest
-    @DisableFlags(FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG)
+    @EnableFlags({FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT})
     public void testShowEnabledDisplay_OnlyOneDisplayAvailable_displaySizeDisabled() {
-        mFlags.setFlag(FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING, false);
-        // Only one display available
-        doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getDisplays();
-        // Init
-        initFragment();
-        mHandler.flush();
-        assertDisplayListCount(1);
-        var category = getExternalDisplayCategory(0);
-        var pref = category.findPreference(PrefBasics.EXTERNAL_DISPLAY_RESOLUTION.keyForNth(0));
-        assertThat(pref).isNotNull();
-        pref = category.findPreference(PrefBasics.EXTERNAL_DISPLAY_ROTATION.keyForNth(0));
-        assertThat(pref).isNotNull();
-        var footerPref = category.findPreference(PrefBasics.FOOTER.key);
-        assertThat(footerPref).isNotNull();
-        var sizePref = category.findPreference(PrefBasics.EXTERNAL_DISPLAY_SIZE.keyForNth(0));
-        assertThat(sizePref).isNull();
-        assertThat("" + footerPref.getTitle())
-                .isEqualTo(getText(EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE));
-    }
-
-    @Test
-    @UiThreadTest
-    @EnableFlags({
-            FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT,
-            FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG,
-    })
-    public void testShowEnabledDisplay_OnlyOneDisplayAvailable_displaySizeDisabled_updatedDialog() {
         mFlags.setFlag(FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING, false);
         // Only one display available
         doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getDisplays();
@@ -428,33 +369,8 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
 
     @Test
     @UiThreadTest
-    @DisableFlags(FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG)
+    @EnableFlags({FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT})
     public void testShowOneEnabledDisplay_FewAvailable() {
-        initFragment();
-        verify(mMockedInjector, never()).getDisplays();
-        mHandler.flush();
-        verify(mMockedInjector, never()).getDisplay(anyInt());
-        verify(mMockedInjector).getDisplays();
-        var pref = mPreferenceScreen.findPreference(
-                PrefBasics.EXTERNAL_DISPLAY_RESOLUTION.keyForNth(0));
-        assertThat(pref).isNotNull();
-        pref = mPreferenceScreen.findPreference(PrefBasics.EXTERNAL_DISPLAY_ROTATION.keyForNth(0));
-        assertThat(pref).isNotNull();
-        var footerPref = mPreferenceScreen.findPreference(PrefBasics.FOOTER.key);
-        // No footer for showing multiple displays.
-        assertThat(footerPref).isNull();
-        var sizePref = mPreferenceScreen.findPreference(
-                PrefBasics.EXTERNAL_DISPLAY_SIZE.keyForNth(0));
-        assertThat(sizePref).isNotNull();
-    }
-
-    @Test
-    @UiThreadTest
-    @EnableFlags({
-            FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT,
-            FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG,
-    })
-    public void testShowOneEnabledDisplay_FewAvailable_updatedDialogEnabled() {
         initFragment();
         verify(mMockedInjector, never()).getDisplays();
         mHandler.flush();
@@ -478,42 +394,8 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
 
     @Test
     @UiThreadTest
-    @DisableFlags(FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG)
+    @EnableFlags({FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT})
     public void testShowDisabledDisplay() {
-        initFragment();
-        var disabledDisplays = List.of(
-                createExternalDisplay(DisplayIsEnabled.NO),
-                createOverlayDisplay(DisplayIsEnabled.NO));
-        doReturn(disabledDisplays).when(mMockedInjector).getDisplays();
-        mHandler.flush();
-        verify(mMockedInjector, never()).getDisplay(anyInt());
-        verify(mMockedInjector).getDisplays();
-        var category = getExternalDisplayCategory(0);
-        var mainPref = (MainSwitchPreference) category.findPreference(
-                PrefBasics.EXTERNAL_DISPLAY_USE.keyForNth(0));
-        assertThat(mainPref).isNotNull();
-        assertThat("" + mainPref.getTitle()).isEqualTo(
-                getText(PrefBasics.EXTERNAL_DISPLAY_USE.titleResource));
-        assertThat(mainPref.isChecked()).isFalse();
-        assertThat(mainPref.isEnabled()).isTrue();
-        assertThat(mainPref.getOnPreferenceChangeListener()).isNotNull();
-        var pref = category.findPreference(PrefBasics.EXTERNAL_DISPLAY_RESOLUTION.keyForNth(0));
-        assertThat(pref.isEnabled()).isFalse();
-        pref = category.findPreference(PrefBasics.EXTERNAL_DISPLAY_ROTATION.keyForNth(0));
-        assertThat(pref.isEnabled()).isFalse();
-        var footerPref = category.findPreference(PrefBasics.FOOTER.key);
-        assertThat(footerPref).isNull();
-        var sizePref = category.findPreference(PrefBasics.EXTERNAL_DISPLAY_SIZE.keyForNth(0));
-        assertThat(sizePref.isEnabled()).isFalse();
-    }
-
-    @Test
-    @UiThreadTest
-    @EnableFlags({
-            FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT,
-            FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG,
-    })
-    public void testShowDisabledDisplay_updatedDialogEnabled() {
         initFragment();
         var disabledDisplays = List.of(
                 createExternalDisplay(DisplayIsEnabled.NO),
@@ -597,10 +479,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
 
     @Test
     @UiThreadTest
-    @EnableFlags({
-            FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT,
-            FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG,
-    })
+    @EnableFlags({FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT})
     public void testDisplayConnectionPreference() {
         final int[] savedPreference = {EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_ASK};
         doAnswer(invocation -> savedPreference[0])
@@ -775,10 +654,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
 
     @Test
     @UiThreadTest
-    @EnableFlags({
-            FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT,
-            FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG,
-    })
+    @EnableFlags({FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT})
     public void testAddConnectionPreference_notProjectedMode_notAdding() {
         doReturn(false).when(mMockedInjector).isProjectedModeEnabled();
         initFragment();
@@ -823,10 +699,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
 
     @Test
     @UiThreadTest
-    @EnableFlags({
-            FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT,
-            FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG,
-    })
+    @EnableFlags({FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT})
     public void testLockTaskModeLocked_disableConnectionPreference() {
         mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
         ExternalDisplayPreferenceFragment fragment = initFragment();
@@ -843,10 +716,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
 
     @Test
     @UiThreadTest
-    @EnableFlags({
-            FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT,
-            FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG,
-    })
+    @EnableFlags({FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT})
     public void testLockTaskModeNone_enableConnectionPreference() {
         mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
         ExternalDisplayPreferenceFragment fragment = initFragment();
