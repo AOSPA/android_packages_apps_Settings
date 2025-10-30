@@ -134,7 +134,6 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
         mAddLanguagePreference.setOnClickListener(v -> {
             FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .logSettingsTileClick(INDEX_KEY_ADD_LANGUAGE, getMetricsCategory());
-            mMetricsFeatureProvider.action(getContext(), SettingsEnums.ACTION_ADD_LANGUAGE);
             new SubSettingLauncher(getContext())
                     .setDestination(SystemLocalePickerFragment.class.getName())
                     .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
