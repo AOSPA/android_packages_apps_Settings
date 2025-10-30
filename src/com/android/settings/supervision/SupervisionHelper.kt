@@ -18,8 +18,8 @@ package com.android.settings.supervision
 import android.app.KeyguardManager
 import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
+import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
-import android.app.supervision.SupervisionRecoveryInfo.STATE_VERIFIED
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -27,6 +27,7 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager.MATCH_ALL
 import android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS
 import android.content.res.Resources
+import android.os.ServiceManager
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
@@ -200,16 +201,15 @@ fun Context.readSystemSupervisionPackageNameFromResources(): String? {
 
 /** Checks if there's valid recovery method */
 fun Context.isMissingRecoveryMethod(): Boolean {
-    return !hasAlternativeCredentialConfirmationMethod() && !isPinRecoveryEmailVerified()
-}
-
-/** Checks for alternative authentication methods */
-private fun Context.hasAlternativeCredentialConfirmationMethod(): Boolean {
-    // TODO(b/446025922): add real implementation
+    val supervisionManager =
+        ISupervisionManager.Stub.asInterface(ServiceManager.getService(Context.SUPERVISION_SERVICE))
+    if (supervisionManager != null) {
+        return try {
+            !supervisionManager.hasValidRecoveryMethod(userId)
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to check if the user has verified recovery method.", e)
+            false
+        }
+    }
     return false
-}
-
-private fun Context.isPinRecoveryEmailVerified(): Boolean {
-    return getSystemService(SupervisionManager::class.java)?.getSupervisionRecoveryInfo()?.state ==
-        STATE_VERIFIED
 }
