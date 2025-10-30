@@ -907,7 +907,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                         && mWifiEntry.isSharedWithOtherUsers()
                         && mUserManager.getUserCount() > 1) {
             showConfirmForgetDialog(
-                    R.string.shared_wifi_forget_dialog_title,
+                    R.string.wifi_forget_dialog_title,
                     mContext.getString(
                         R.string.shared_wifi_forget_dialog_message,
                         mWifiEntry.getTitle()));
