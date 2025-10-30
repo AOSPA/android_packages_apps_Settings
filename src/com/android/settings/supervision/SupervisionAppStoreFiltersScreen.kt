@@ -24,10 +24,13 @@ import android.content.pm.PackageManager
 import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
+import androidx.preference.PreferenceGroup
 import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.supervision.SupervisionLog.TAG
@@ -39,7 +42,7 @@ class SupervisionAppStoreFiltersActivity :
 
 @ProvidePreferenceScreen(SupervisionAppStoreFiltersScreen.KEY)
 open class SupervisionAppStoreFiltersScreen :
-    PreferenceScreenMixin, PreferenceAvailabilityProvider {
+    PreferenceScreenMixin, PreferenceAvailabilityProvider, PreferenceLifecycleProvider {
 
     override fun isAvailable(context: Context) = Flags.enableAppStoreFiltersScreen()
 
@@ -58,6 +61,18 @@ open class SupervisionAppStoreFiltersScreen :
     override fun getMetricsCategory() = SettingsEnums.SUPERVISION_APP_STORE_FILTERS
 
     override fun hasCompleteHierarchy() = true
+
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        if (isContainer(context)) {
+            val preferenceGroup =
+                context.findPreference<PreferenceGroup>(SUPERVISION_APP_STORE_FILTERS_GROUP)
+            preferenceGroup?.let { group ->
+                group.removeAll()
+                val appStorePrefs = getAppStoreFiltersEntries(context)
+                appStorePrefs.forEach { pref -> group.addPreference(pref) }
+            }
+        }
+    }
 
     @VisibleForTesting
     internal fun getAppStoreFiltersEntries(context: Context): List<Preference> {
@@ -90,6 +105,7 @@ open class SupervisionAppStoreFiltersScreen :
                             this.icon = appIcon
                             this.key = packageName
                             this.intent = Intent().setClassName(packageName, activityInfo.name)
+                            this.widgetLayoutResource = R.layout.preference_widget_open_in_new
                         }
                     appStorePreferences.add(preference)
                 } else {
@@ -108,7 +124,7 @@ open class SupervisionAppStoreFiltersScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +SupervisionAppStoreFiltersTopIntroPreference() order -100
-            +UntitledPreferenceCategoryMetadata(SUPERVISION_APP_STORE_FILTERS_GROUP) order 0 += {}
+            +UntitledPreferenceCategoryMetadata(SUPERVISION_APP_STORE_FILTERS_GROUP) order 0
             +SupervisionAppStoreFiltersFooterPreference() order 100
         }
 
