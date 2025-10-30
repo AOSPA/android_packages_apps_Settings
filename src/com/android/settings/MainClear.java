@@ -311,7 +311,8 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle(R.string.dsu_is_running);
                 builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {}
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
                 });
                 AlertDialog dsuAlertdialog = builder.create();
                 dsuAlertdialog.show();
@@ -355,7 +356,8 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         if (mScrollView != null) {
             mScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
         }
-        mScrollView = mContentView.findViewById(R.id.main_clear_scrollview);
+        mScrollView = mContentView.findViewById(
+                com.google.android.setupdesign.R.id.sud_scroll_view);
 
         /*
          * If the external storage is emulated, it will be erased with a factory
@@ -434,7 +436,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     @VisibleForTesting
     boolean showAnySubscriptionInfo(Context context) {
         return (context != null) && (Utils.isMobileDataCapable(context)
-                                         || Utils.isVoiceCapable(context));
+                || Utils.isVoiceCapable(context));
     }
 
     /**
