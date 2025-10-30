@@ -32,8 +32,6 @@ import android.Manifest;
 import android.app.Flags;
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.annotation.Nullable;
@@ -78,28 +76,18 @@ public class PromotedNotificationsPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_UI_RICH_ONGOING)
-    public void testIsAvailable_flagOff() {
-        installMyPackage(new String[] { POST_PROMOTED_NOTIFICATIONS });
-        assertThat(mPrefController.isAvailable()).isFalse();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_UI_RICH_ONGOING)
     public void testIsAvailable_zeroPermissionsRequested_isFalse() {
         installMyPackage(null);
         assertThat(mPrefController.isAvailable()).isFalse();
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_UI_RICH_ONGOING)
     public void testIsAvailable_permissionNotRequested_isFalse() {
         installMyPackage(new String[] { Manifest.permission.ACCESS_COARSE_LOCATION });
         assertThat(mPrefController.isAvailable()).isFalse();
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_UI_RICH_ONGOING)
     public void testIsAvailable_permissionRequested_isTrue() {
         installMyPackage(new String[] { POST_PROMOTED_NOTIFICATIONS });
         assertThat(mPrefController.isAvailable()).isTrue();
@@ -113,7 +101,6 @@ public class PromotedNotificationsPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_UI_RICH_ONGOING)
     public void testChecked_canBePromoted() {
         mAppRow.canBePromoted = true;
         mPrefController.onResume(mAppRow, null, null, null, null, null, null);
@@ -128,7 +115,6 @@ public class PromotedNotificationsPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_UI_RICH_ONGOING)
     public void testOnPreferenceChange_noChange() {
         mAppRow.canBePromoted = true;
         mPrefController.onResume(mAppRow, null, null, null, null, null, null);
@@ -139,7 +125,6 @@ public class PromotedNotificationsPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_UI_RICH_ONGOING)
     public void testOnPreferenceChange_changeOnAndOff() {
         mAppRow.canBePromoted = true;
         mPrefController.onResume(mAppRow, null, null, null, null, null, null);

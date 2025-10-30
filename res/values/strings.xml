@@ -6900,6 +6900,11 @@
     <!-- Preference summary for advanced battery usage, since last full charge [CHAR LIMIT=40] -->
     <string name="advanced_battery_preference_summary">View usage since last full charge</string>
 
+    <!-- Title for the battery advance info tip [CHAR LIMIT=NONE] -->
+    <string name="battery_advance_info"></string>
+    <!-- Preference summary for advanced battery loading usage [CHAR LIMIT=NONE] -->
+    <string name="battery_advance_preference_loading_summary"></string>
+
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="battery_details_title">App battery usage</string>
     <!-- Subtitle for application/subsystem details -->
@@ -8223,6 +8228,9 @@
     <string name="user_revoke_last_admin_title">Can’t remove admin privileges</string>
     <!-- Message for the warning dialog when the user tries to revoke the admin status from the last admin user [CHAR LIMIT=none] -->
     <string name="user_revoke_last_admin_message">You are the only admin user on this device. If you no longer want to be an admin, you need to make another user an admin first. </string>
+    <!-- User settings summary for a restricted profile [CHAR LIMIT=50] -->
+    <string name="add_user_summary_action_restricted">Blocked by work policy</string>
+
     <!-- Title for the emergency info preference [CHAR LIMIT=40] -->
     <string name="emergency_info_title">Emergency information</string>
     <!-- Summary for the emergency info preference [CHAR LIMIT=40] -->
@@ -15155,11 +15163,6 @@
     <string name="supervision_delete_pin_error_header">PIN can not be deleted</string>
     <!-- Message in dialog that informs the user that an error occurred while trying to delete the PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_error_message">An error occurred while trying to delete the PIN.</string>
-    <!-- TODO(b/450908334): Set strings as translatable once copy is finalized. -->
-    <!-- Title on a dialog that informs the user that they cannot delete the PIN because multiple users are supervised [CHAR_LIMIT=NONE]-->
-    <string name="supervision_cant_delete_pin_multi_user_switch_message" product="default" translatable="false">To delete your parental controls PIN, you must turn off controls for all users on this phone.\nYou may turn off controls for the current user, but the PIN can\u2019t be deleted until you also go to other users and turn off controls.</string>
-    <string name="supervision_cant_delete_pin_multi_user_switch_message" product="desktop" translatable="false">To delete your parental controls PIN, you must turn off controls for all users on this device.\nYou may turn off controls for the current user, but the PIN can\u2019t be deleted until you also go to other users and turn off controls.</string>
-    <string name="supervision_cant_delete_pin_multi_user_switch_message" product="tablet" translatable="false">To delete your parental controls PIN, you must turn off controls for all users on this tablet.\nYou may turn off controls for the current user, but the PIN can\u2019t be deleted until you also go to other users and turn off controls.</string>
     <!-- Button label on a dialog to turn off controls for the current user [CHAR LIMIT=NONE] -->
     <string name="supervision_turn_off_controls_button_label" translatable="false">Turn off controls for this user</string>
     <!-- Title on a dialog that confirms whether the user wants to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
@@ -15173,6 +15176,8 @@
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
     <!-- Title on dialog that informs the user that controls cannot be enabled due to a multi-profile conflict. [CHAR LIMIT=NONE] -->
     <string name="supervision_multi_profile_error_title">Can\u2019t turn on controls</string>
+    <!-- Title on dialog that informs the user that controls cannot be used due to a multi-profile conflict. [CHAR LIMIT=NONE] -->
+    <string name="supervision_setup_multi_profile_error_title">Can\u2019t use controls</string>
     <!-- Learn more link for when device supervision is unavailable. [CHAR LIMIT=NONE]-->
     <string name="supervision_unavailable_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_unavailable</string>
     <!-- Title on generic error screen that informs the user that controls cannot be enabled. [CHAR LIMIT=NONE] -->
@@ -15242,6 +15247,10 @@
     <string name="identity_check_notification_title">Identity Check works with more apps</string>
     <!-- Summary for promo notification for Identity Check -->
     <string name="identity_check_notification_summary">Identity Check prevents unwanted access to your apps. Now available with any app that uses Fingerprint or Face Unlock.</string>
+    <!-- Title for promo notification for Identity Check integration with watch ranging -->
+    <string name="identity_check_watch_notification_title">Identity Check and your watch</string>
+    <!-- Summary for promo notification for Identity Check integration with watch ranging -->
+    <string name="identity_check_watch_notification_summary">With a connected watch, Identity Check adds more ways to verify it’s you to prevent unwanted access to apps</string>
     <!-- Identity Check promo notification button text -->
     <string name="identity_check_view_details">View details</string>
 
@@ -15294,4 +15303,10 @@
 
     <!-- Label for the satellite tile [CHAR LIMIT=40] [SCREENSHOT=screen/36JFTB2VAFC4hrJ] -->
     <string name="satellite_tile_label">Satellite</string>
+    <!-- Subtitle for the satellite tile when NTN mode is active on the device. [CHAR LIMIT=40] -->
+    <string name="satellite_tile_subtitle_on">On</string>
+    <!-- Subtitle for the satellite tile when the device is eligible for NTN. [CHAR LIMIT=40] -->
+    <string name="satellite_tile_subtitle_available">Available</string>
+    <!-- Subtitle for the satellite tile when the device is not eligible for NTN. [CHAR LIMIT=40] -->
+    <string name="satellite_tile_subtitle_not_available">Not available</string>
 </resources>

@@ -48,8 +48,6 @@ import android.content.pm.PackageManager;
 import android.os.HandlerThread;
 import android.os.Process;
 import android.os.RemoteException;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -57,9 +55,7 @@ import android.platform.test.flag.junit.SetFlagsRule;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.testutils.FakeInstantSource;
 import com.android.settings.testutils.FakeSharedPreferences;
-import com.android.window.flags.Flags;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -121,8 +117,7 @@ public class UserAspectRatioBackupManagerTest {
         setupMockSharedPreferences();
 
         mBackupManager = new UserAspectRatioBackupManager(mContext, mMockIPackageManager,
-                mMockPackageManager, mLogger, broadcastHandlerThread.getThreadHandler(),
-                new FakeInstantSource());
+                mMockPackageManager, mLogger);
         mBackupManager.populateAvailableUserAspectRatioSettingOptions(new int[] {
                 USER_MIN_ASPECT_RATIO_FULLSCREEN,
                 USER_MIN_ASPECT_RATIO_SPLIT_SCREEN,
@@ -197,21 +192,6 @@ public class UserAspectRatioBackupManagerTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_RESTORE_USER_ASPECT_RATIO_SETTINGS_USING_SERVICE)
-    public void testRestore_appNotInstalled_aspectRatioStored() throws Exception {
-        final byte[] out = writeTestPayload(DEFAULT_PACKAGE_ASPECT_RATIO_MAP);
-        // Backed up app is not installed on the restore device.
-        setUpInstalledPackages(List.of());
-
-        mBackupManager.stageAndApplyRestoredPayload(out);
-
-        verifyNothingRestored();
-        assertEquals(USER_MIN_ASPECT_RATIO_FULLSCREEN, mFakeSharedPreferences.getInt(
-                DEFAULT_PACKAGE_NAME, USER_MIN_ASPECT_RATIO_UNSET));
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_RESTORE_USER_ASPECT_RATIO_SETTINGS_USING_SERVICE)
     public void testRestore_appNotInstalled_delegateRestoreToService() throws Exception {
         final byte[] out = writeTestPayload(DEFAULT_PACKAGE_ASPECT_RATIO_MAP);
         // Backed up app is not installed on the restore device.
@@ -245,23 +225,6 @@ public class UserAspectRatioBackupManagerTest {
         mBackupManager.stageAndApplyRestoredPayload(out);
 
         verifyNothingRestored();
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_RESTORE_USER_ASPECT_RATIO_SETTINGS_USING_SERVICE)
-    public void testPackageAdded_aspectRatioRestored() throws Exception {
-        final byte[] out = writeTestPayload(DEFAULT_PACKAGE_ASPECT_RATIO_MAP);
-        // Backed up app is not installed on the restore device.
-        setUpInstalledPackages(List.of());
-        // Restored data should be stored and wait until package is installed.
-        mBackupManager.stageAndApplyRestoredPayload(out);
-
-        setUpInstalledPackages(List.of(DEFAULT_PACKAGE_NAME));
-        mBackupManager.mPackageMonitor.onPackageAdded(DEFAULT_PACKAGE_NAME, DEFAULT_USER_ID);
-
-        // User aspect ratio is restored.
-        verify(mMockIPackageManager).setUserMinAspectRatio(DEFAULT_PACKAGE_NAME,
-                DEFAULT_USER_ID, USER_MIN_ASPECT_RATIO_FULLSCREEN);
     }
 
     @Test

@@ -48,6 +48,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.collection.ArrayMap;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
@@ -68,7 +69,6 @@ import com.android.settingslib.mobile.MobileMappings.Config;
 import com.android.settingslib.mobile.TelephonyIcons;
 import com.android.settingslib.net.SignalStrengthUtil;
 import com.android.wifitrackerlib.WifiEntry;
-import com.android.wifitrackerlib.WifiPickerTracker;
 
 import java.util.Collections;
 import java.util.List;
@@ -83,7 +83,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         LifecycleObserver, SubscriptionsChangeListener.SubscriptionsChangeListenerClient,
         MobileDataEnabledListener.Client, DataConnectivityListener.Client,
         SignalStrengthListener.Callback, TelephonyDisplayInfoListener.Callback,
-        TelephonyCallback.CarrierNetworkListener, WifiPickerTracker.WifiPickerTrackerCallback {
+        TelephonyCallback.CarrierNetworkListener {
     private static final String TAG = "SubscriptionsPrefCntrlr";
 
     private UpdateListener mUpdateListener;
@@ -96,8 +96,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     private DataConnectivityListener mConnectivityListener;
     private SignalStrengthListener mSignalStrengthListener;
     private TelephonyDisplayInfoListener mTelephonyDisplayInfoListener;
-    @VisibleForTesting
-    WifiPickerTrackerHelper mWifiPickerTrackerHelper;
+    private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
+    private final Observer<Integer> mUpdateObserver = i -> update();
     private final WifiManager mWifiManager;
     private boolean mCarrierNetworkChangeMode;
 
@@ -165,7 +165,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mSignalStrengthListener = new SignalStrengthListener(context, this);
         mTelephonyDisplayInfoListener = new TelephonyDisplayInfoListener(context, this);
         lifecycle.addObserver(this);
-        mWifiPickerTrackerHelper = new WifiPickerTrackerHelper(lifecycle, context, this);
         mSubsPrefCtrlInjector = createSubsPrefCtrlInjector();
         mConfig = mSubsPrefCtrlInjector.getConfig(mContext);
     }
@@ -191,6 +190,10 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mSignalStrengthListener.resume();
         mTelephonyDisplayInfoListener.resume();
         registerReceiver();
+        if (mWifiPickerTrackerHelper != null) {
+            mWifiPickerTrackerHelper.mWifiState.observeForever(mUpdateObserver);
+            mWifiPickerTrackerHelper.mWifiEntriesChangedReason.observeForever(mUpdateObserver);
+        }
         update();
     }
 
@@ -202,6 +205,10 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mSignalStrengthListener.pause();
         mTelephonyDisplayInfoListener.pause();
         unRegisterReceiver();
+        if (mWifiPickerTrackerHelper != null) {
+            mWifiPickerTrackerHelper.mWifiState.removeObserver(mUpdateObserver);
+            mWifiPickerTrackerHelper.mWifiEntriesChangedReason.removeObserver(mUpdateObserver);
+        }
     }
 
     @Override
@@ -495,24 +502,11 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         update();
     }
 
-    @Override
-    public void onNumSavedNetworksChanged() {
-        //Do nothing
-    }
-
-    @Override
-    public void onNumSavedSubscriptionsChanged() {
-        //Do nothing
-    }
-
-    @Override
-    public void onWifiStateChanged() {
-        update();
-    }
-
-    @Override
-    public void onWifiEntriesChanged() {
-        update();
+    /**
+     * Set WifiPickerTrackerHelper.
+     */
+    public void setWifiPickerTrackerHelper(WifiPickerTrackerHelper helper) {
+        mWifiPickerTrackerHelper = helper;
     }
 
     @VisibleForTesting

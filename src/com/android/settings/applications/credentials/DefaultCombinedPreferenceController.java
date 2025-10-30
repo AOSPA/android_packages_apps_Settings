@@ -161,8 +161,16 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
                 CombinedProviderInfo.getTopProvider(getAllProviders(userId));
 
         // Apply device admin restrictions to top provider.
-        if (topProvider != null
-                && topProvider.getDeviceAdminRestrictions(mContext, userId) != null) {
+        boolean isDisabledByAdmin;
+        if (topProvider == null) {
+            isDisabledByAdmin = false;
+        } else if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            isDisabledByAdmin = topProvider.getAdminRestrictionsOnCredentialManager(mContext,
+                    userId) != null;
+        } else {
+            isDisabledByAdmin = topProvider.getDeviceAdminRestrictions(mContext, userId) != null;
+        }
+        if (isDisabledByAdmin) {
             // This case means, the provider is blocked by device admin, but settings' storage has
             // not be cleared correctly. So clean the storage here.
             removePrimaryProvider();

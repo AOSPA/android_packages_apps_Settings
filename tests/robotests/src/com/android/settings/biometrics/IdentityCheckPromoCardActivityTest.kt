@@ -47,10 +47,25 @@ class IdentityCheckPromoCardActivityTest {
 
     @Test
     fun launchActivity_showsDialog() {
+        resetPromoCardShownValues()
         ActivityScenario.launch<IdentityCheckPromoCardActivity>(getIntent()).use {
             onView(withId(R.id.bottom_sheet)).inRoot(isDialog()).check(matches(isDisplayed()))
         }
         assertThat(hasPromoCardBeenShown()).isTrue()
+        assertThat(hasWatchPromoCardBeenShown()).isFalse()
+    }
+
+    @Test
+    fun launchActivityWithWatchAction_showsDialog() {
+        resetPromoCardShownValues()
+        ActivityScenario.launch<IdentityCheckPromoCardActivity>(
+                getIntent(IdentityCheckSafetySource.ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS)
+            )
+            .use {
+                onView(withId(R.id.bottom_sheet)).inRoot(isDialog()).check(matches(isDisplayed()))
+            }
+        assertThat(hasPromoCardBeenShown()).isTrue()
+        assertThat(hasWatchPromoCardBeenShown()).isTrue()
     }
 
     @Test
@@ -100,11 +115,30 @@ class IdentityCheckPromoCardActivityTest {
     private fun getIntent(action: String = "") =
         Intent(context, IdentityCheckPromoCardActivity::class.java).setAction(action)
 
-    private fun hasPromoCardBeenShown(): Boolean {
-        return Settings.Secure.getInt(
+    private fun resetPromoCardShownValues() {
+        Settings.Secure.putInt(
+            context.contentResolver,
+            Settings.Secure.IDENTITY_CHECK_WATCH_PROMO_CARD_SHOWN,
+            0,
+        )
+        Settings.Secure.putInt(
+            context.contentResolver,
+            Settings.Secure.IDENTITY_CHECK_PROMO_CARD_SHOWN,
+            0,
+        )
+    }
+
+    private fun hasWatchPromoCardBeenShown(): Boolean =
+        Settings.Secure.getInt(
+            context.contentResolver,
+            Settings.Secure.IDENTITY_CHECK_WATCH_PROMO_CARD_SHOWN,
+            0,
+        ) == 1
+
+    private fun hasPromoCardBeenShown(): Boolean =
+        Settings.Secure.getInt(
             context.contentResolver,
             Settings.Secure.IDENTITY_CHECK_PROMO_CARD_SHOWN,
             0,
         ) == 1
-    }
 }
