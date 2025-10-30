@@ -47,6 +47,14 @@ class SafetyCenterFragment : DashboardFragment() {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
     }
 
+    private var focusedIssueKey: FocusedIssueKey? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        focusedIssueKey =
+            SafetyCenterIntentParser.getFocusedIssueKeyFromIntent(requireActivity().intent)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         if (requireActivity().isChangingConfigurations) {
@@ -87,9 +95,12 @@ class SafetyCenterFragment : DashboardFragment() {
 
     private fun setupSafetyIssuesPreferenceController(owner: LifecycleOwner) {
         Log.d(TAG, "Setting Up the safety issues preference controller")
-        safetyIssuesPreferenceController?.setViewModelAndLifecycle(viewModel, owner)
-        safetyIssuesPreferenceController?.setFragmentManager(childFragmentManager)
-        safetyIssuesPreferenceController?.setActivityTaskId(requireActivity().taskId)
+        safetyIssuesPreferenceController?.apply {
+            setViewModelAndLifecycle(viewModel, owner)
+            this.fragmentManager = childFragmentManager
+            this.activityTaskId = requireActivity().taskId
+            this.focusedIssueKey = this@SafetyCenterFragment.focusedIssueKey
+        }
     }
 
     private fun setupSubpagePreferenceControllers(owner: LifecycleOwner) {
