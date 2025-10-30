@@ -200,7 +200,7 @@ fun Context.readSystemSupervisionPackageNameFromResources(): String? {
 }
 
 /** Checks if there's valid recovery method */
-fun Context.isMissingRecoveryMethod(): Boolean {
+fun Context.shouldDisplayPinRecoveryReminders(): Boolean {
     val supervisionManager =
         ISupervisionManager.Stub.asInterface(ServiceManager.getService(Context.SUPERVISION_SERVICE))
     if (supervisionManager != null) {
