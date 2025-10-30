@@ -75,6 +75,7 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     private lateinit var mSupervisingUser: UserHandle
     @VisibleForTesting var mProfileStarted = false
     private var mBiometricPromptShown = false
+    private var mUserStateChangeReceiverRegistered = false
     private lateinit var mApprovalMethods: List<ResolveInfo>
 
     private val externalApprovalResultLauncher =
@@ -145,6 +146,27 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             finish()
         }
 
+    /**
+     * Registers a listener for results from [ApprovalMethodChooserDialogFragment]. When a result is
+     * received, it sets the activity's result and finishes.
+     */
+    private fun registerApprovalMethodChooserResultListener() {
+        supportFragmentManager.setFragmentResultListener(
+            ApprovalMethodChooserDialogFragment.REQUEST_KEY_APPROVAL_RESULT,
+            this,
+        ) { requestKey, bundle ->
+            if (requestKey == ApprovalMethodChooserDialogFragment.REQUEST_KEY_APPROVAL_RESULT) {
+                val resultCode =
+                    bundle.getInt(
+                        ApprovalMethodChooserDialogFragment.BUNDLE_KEY_RESULT_CODE,
+                        RESULT_CANCELED,
+                    )
+                setResult(resultCode)
+                finish()
+            }
+        }
+    }
+
     @RequiresPermission(
         allOf = [USE_BIOMETRIC_INTERNAL, SET_BIOMETRIC_DIALOG_ADVANCED, INTERACT_ACROSS_USERS_FULL]
     )
@@ -156,14 +178,18 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             )
             return
         }
-        val supervisingUser = supervisingUserHandle
-        if (supervisingUser == null) {
-            errorHandler("No supervising user exists, cannot verify credentials.")
-            return
+
+        if (!Flags.enableSupervisionSettingsUiUpdates() || isSupervisingCredentialSet) {
+            val supervisingUser = supervisingUserHandle
+            if (supervisingUser == null) {
+                errorHandler("No supervising user exists, cannot verify credentials.")
+                return
+            }
+            mSupervisingUser = supervisingUser
+            val intentFilter = IntentFilter().apply { addAction(Intent.ACTION_USER_STOPPED) }
+            registerReceiver(userStateChangeReceiver, intentFilter, RECEIVER_NOT_EXPORTED)
+            mUserStateChangeReceiverRegistered = true
         }
-        mSupervisingUser = supervisingUser
-        val intentFilter = IntentFilter().apply { addAction(Intent.ACTION_USER_STOPPED) }
-        registerReceiver(userStateChangeReceiver, intentFilter, RECEIVER_NOT_EXPORTED)
 
         if (savedInstanceState != null) {
             mProfileStarted = savedInstanceState.getBoolean(KEY_PROFILE_STARTED, mProfileStarted)
@@ -176,9 +202,7 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
                 if (Flags.enableSupervisionSettingsUiUpdates()) {
                     val binder = ServiceManager.getService("supervision")
                     val supervisionManager = ISupervisionManager.Stub.asInterface(binder)
-                    supervisionManager.querySupervisionApprovalActivities(
-                        mSupervisingUser.identifier
-                    )
+                    supervisionManager.querySupervisionApprovalActivities(userId)
                 } else {
                     emptyList()
                 }
@@ -220,7 +244,7 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
                     }
 
                     else -> {
-                        // TODO(b/444529517): shows the bottom sheet for multiple methods
+                        showApprovalMethodChooser()
                     }
                 }
             } else {
@@ -261,12 +285,24 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     @VisibleForTesting
     public override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(userStateChangeReceiver)
+        if (mUserStateChangeReceiverRegistered) {
+            unregisterReceiver(userStateChangeReceiver)
+        }
         // Do not stop the profile on configuration change, since the authentication session in
         // BiometricPrompt is still active.
         if (mProfileStarted && isFinishing) {
             tryStopProfile()
         }
+    }
+
+    private fun showApprovalMethodChooser() {
+        registerApprovalMethodChooserResultListener()
+        val chooserFragment =
+            ApprovalMethodChooserDialogFragment.newInstance(
+                mApprovalMethods,
+                intent.extras ?: Bundle(),
+            )
+        chooserFragment.show(supportFragmentManager, "ApprovalMethodChooser")
     }
 
     @RequiresPermission(allOf = [USE_BIOMETRIC_INTERNAL, SET_BIOMETRIC_DIALOG_ADVANCED])
@@ -396,7 +432,6 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     companion object {
         // If true, force confirmation of supervision credentials, regardless of active auth session
         @VisibleForTesting const val EXTRA_FORCE_CONFIRMATION = "force_confirmation"
-
         // Whether the supervising profile was started by this activity
         const val KEY_PROFILE_STARTED = "profile_started"
         const val KEY_BIOMETRIC_PROMPT_SHOWN = "biometric_prompt_shown"
