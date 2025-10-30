@@ -20,8 +20,13 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
+import android.view.View
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.view.AccessibilityDelegateCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat.AccessibilityActionCompat
 import com.android.settings.R
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
@@ -39,6 +44,8 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     private var enableAnimation = true
     private var cycleRunnable: Runnable? = null
     private var currentCyclingTextState = CyclingTextState.DRAG
+    private var currentState: State = State.NO_HINT
+    private var isPausedByUser = false
 
     private enum class State {
         NO_HINT,
@@ -51,10 +58,35 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         TAP,
     }
 
-    private var currentState: State = State.NO_HINT
+    init {
+        ViewCompat.setAccessibilityDelegate(
+            this,
+            object : AccessibilityDelegateCompat() {
+                override fun onInitializeAccessibilityNodeInfo(
+                    host: View,
+                    info: AccessibilityNodeInfoCompat,
+                ) {
+                    super.onInitializeAccessibilityNodeInfo(host, info)
+                    info.contentDescription = text
+                    info.removeAction(
+                        AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK
+                    )
+                    info.addAction(
+                        AccessibilityActionCompat(
+                            AccessibilityNodeInfoCompat.ACTION_CLICK,
+                            context.getString(R.string.external_display_pause_topology_hint),
+                        )
+                    )
+                }
+            },
+        )
+
+        setOnClickListener({ handleTap() })
+    }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
+        setOnClickListener(null)
         stopCycling()
         animate().cancel()
     }
@@ -85,12 +117,34 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         stopCycling()
 
         when (currentState) {
-            State.NO_HINT -> animateTextChange("")
-            State.ARROWS_SHOWN ->
+            State.NO_HINT -> {
+                animateTextChange("")
+                setVisibility(GONE)
+            }
+            State.ARROWS_SHOWN -> {
+                setVisibility(VISIBLE)
                 animateTextChange(
                     context.getString(R.string.external_display_tap_arrows_to_rearrange)
                 )
-            State.DEFAULT_CYCLING -> startCycling()
+            }
+            State.DEFAULT_CYCLING -> {
+                setVisibility(VISIBLE)
+                startCycling()
+            }
+        }
+    }
+
+    fun handleTap() {
+        // Pause/resume functionality is only active in the default cycling state
+        if (currentState != State.DEFAULT_CYCLING) return
+        isPausedByUser = !isPausedByUser
+
+        if (!isPausedByUser) {
+            // Resumed
+            startCycling()
+        } else {
+            // Paused
+            stopCycling()
         }
     }
 
