@@ -57,6 +57,11 @@ class SupervisionPinRecoveryPreference :
         if (!Flags.enableSupervisionPinRecoveryScreen()) {
             return false
         }
+
+        if (Flags.enableSupervisionSettingsUiUpdates()) {
+            return context.canLaunchPinRecovery()
+        }
+
         return context
             .getSystemService(SupervisionManager::class.java)
             ?.getSupervisionRecoveryInfo() != null

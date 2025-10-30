@@ -223,8 +223,8 @@ fun Context.canLaunchPinRecovery(): Boolean {
             supervisionManager.canLaunchPinRecovery(userId)
         } catch (e: Exception) {
             Log.e(TAG, "Failed to check if recovery configuration is available for launch.", e)
-            true
+            false
         }
     }
-    return true
+    return false
 }
