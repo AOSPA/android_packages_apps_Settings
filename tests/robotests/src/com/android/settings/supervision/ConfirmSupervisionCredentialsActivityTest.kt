@@ -30,6 +30,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.pm.ApplicationInfo
 import android.content.pm.ResolveInfo
 import android.content.pm.UserInfo
 import android.hardware.biometrics.BiometricManager
@@ -286,7 +287,7 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     @Test
-    fun onCreate_noSupervisingCredential_startSetupActivity() {
+    fun onCreate_noSupervisingCredential_flagDisabled_startSetupActivity() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }
@@ -310,6 +311,85 @@ class ConfirmSupervisionCredentialsActivityTest {
 
         assertThat(mActivity.isFinishing).isTrue()
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
+    }
+
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    @Test
+    fun onCreate_noSupervisingCredential_noApprovalMethods_startsSetup() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(emptyList())
+
+        mActivityController.setup()
+
+        assertThat(mActivity.isFinishing).isFalse()
+        val nextActivity = shadowActivity.nextStartedActivity
+        assertThat(nextActivity.component?.className)
+            .isEqualTo(SetupSupervisionActivity::class.java.name)
+    }
+
+    @Test
+    fun onCreate_noSupervisingCredential_oneApprovalMethod_launchesMethodDirectly() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+        val resolveInfo =
+            ResolveInfo().apply {
+                activityInfo =
+                    ActivityInfo().apply {
+                        packageName = "com.example.approval"
+                        name = "ApprovalActivity"
+                    }
+            }
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(listOf(resolveInfo))
+
+        mActivityController.setup()
+
+        assertThat(mActivity.isFinishing).isFalse()
+        val nextActivity = shadowActivity.nextStartedActivity
+        assertThat(nextActivity.action)
+            .isEqualTo(SupervisionManager.ACTION_CONFIRM_SUPERVISION_APPROVAL)
+        assertThat(nextActivity.component?.className).isEqualTo("ApprovalActivity")
+    }
+
+    @Test
+    fun onCreate_noSupervisingCredential_multipleApprovalMethods_showsChooser() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+        val applicationInfo = ApplicationInfo().apply { packageName = "com.example.approval" }
+        val resolveInfo1 =
+            ResolveInfo().apply {
+                activityInfo =
+                    ActivityInfo().apply {
+                        packageName = "com.example.approval"
+                        name = "ApprovalActivity1"
+                        nonLocalizedLabel = "method 1"
+                        this.applicationInfo = applicationInfo
+                    }
+            }
+        val resolveInfo2 =
+            ResolveInfo().apply {
+                activityInfo =
+                    ActivityInfo().apply {
+                        packageName = "com.example.approval"
+                        name = "ApprovalActivity2"
+                        nonLocalizedLabel = "method 2"
+                        this.applicationInfo = applicationInfo
+                    }
+            }
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(listOf(resolveInfo1, resolveInfo2))
+
+        mActivityController.setup()
+
+        assertThat(mActivity.isFinishing).isFalse()
+        val dialog = mActivity.supportFragmentManager.findFragmentByTag("ApprovalMethodChooser")
+        assertThat(dialog).isInstanceOf(ApprovalMethodChooserDialogFragment::class.java)
+        assertThat(dialog?.isAdded).isTrue()
     }
 
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
@@ -475,6 +555,7 @@ class ConfirmSupervisionCredentialsActivityTest {
     fun getBiometricPrompt_withApprovalMethods_showsFallbackOptions() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
         val activityInfo1 =
             ActivityInfo().apply {
                 packageName = "pkg"
