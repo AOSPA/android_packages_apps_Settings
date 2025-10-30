@@ -19,15 +19,27 @@ import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.flags.Flags
 import android.content.Context
+import android.content.Intent
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.BannerMessagePreference
 
 class SupervisionRecoveryBannerPreference :
-    PreferenceMetadata, PreferenceBinding, PreferenceAvailabilityProvider {
+    PreferenceMetadata,
+    PreferenceBinding,
+    PreferenceAvailabilityProvider,
+    PreferenceLifecycleProvider {
+
+    private lateinit var lifeCycleContext: PreferenceLifecycleContext
+    private lateinit var setUpRecoveryLauncher: ActivityResultLauncher<Intent>
+
     override val key: String
         get() = KEY
 
@@ -38,8 +50,25 @@ class SupervisionRecoveryBannerPreference :
         if (!Flags.enableSupervisionSettingsUiUpdates()) {
             return false
         }
+        // If PIN is deleted, banner should also match the behavior and disappear
+        if (!context.isSupervisingCredentialSet) {
+            return false
+        }
         val missingRecovery = context.isMissingRecoveryMethod()
         return missingRecovery && !isDismissed()
+    }
+
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        lifeCycleContext = context
+        setUpRecoveryLauncher =
+            context.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                lifeCycleContext.notifyPreferenceChange(KEY)
+                lifeCycleContext.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+            }
+    }
+
+    override fun onResume(context: PreferenceLifecycleContext) {
+        lifeCycleContext?.notifyPreferenceChange(KEY)
     }
 
     // This method sets up the preference instance and its basic structure.
@@ -63,11 +92,7 @@ class SupervisionRecoveryBannerPreference :
         val banner = preference as BannerMessagePreference
         val context = banner.context
 
-        val supervisionManager = context.getSystemService(SupervisionManager::class.java)
-        val recoveryInfo = supervisionManager?.getSupervisionRecoveryInfo()
-        val hasAccount = hasAccountNameSet(recoveryInfo)
-        val state = recoveryInfo?.state
-        val showVerifyFlow = hasAccount && state == SupervisionRecoveryInfo.STATE_PENDING
+        val showVerifyFlow = shouldShowVerifyFlow(context)
         val titleRes =
             if (showVerifyFlow) R.string.supervision_recovery_banner_title_verify
             else R.string.supervision_recovery_banner_title_add
@@ -79,9 +104,7 @@ class SupervisionRecoveryBannerPreference :
         banner.setTitle(titleRes)
         banner.setSummary(summaryRes)
         banner.setPositiveButtonText(buttonTextRes)
-        banner.setPositiveButtonOnClickListener {
-            // TODO(b/446025922): Implement action to launch Add/Verify flow.
-        }
+        banner.setPositiveButtonOnClickListener { onPositiveButtonClick(banner, showVerifyFlow) }
     }
 
     private fun hasAccountNameSet(info: SupervisionRecoveryInfo?): Boolean {
@@ -91,6 +114,29 @@ class SupervisionRecoveryBannerPreference :
     private fun isDismissed(): Boolean {
         // TODO(b/446025922): Implement real dismiss logic
         return false
+    }
+
+    private fun onPositiveButtonClick(preference: Preference, isVerificationFlow: Boolean) {
+        val context = preference.context
+        val intent = Intent(context, SupervisionPinRecoveryActivity::class.java)
+
+        if (isVerificationFlow) {
+            // It's a "verify" flow
+            intent.action = SupervisionPinRecoveryActivity.ACTION_POST_SETUP_VERIFY
+        } else {
+            // It's an "add" flow
+            intent.action = SupervisionPinRecoveryActivity.ACTION_SETUP_VERIFIED
+        }
+        setUpRecoveryLauncher.launch(intent)
+    }
+
+    // Checks the SupervisionManager state to determine if the Verify flow should be shown.
+    private fun shouldShowVerifyFlow(context: Context): Boolean {
+        val supervisionManager = context.getSystemService(SupervisionManager::class.java)
+        val recoveryInfo = supervisionManager?.getSupervisionRecoveryInfo()
+        val hasAccount = hasAccountNameSet(recoveryInfo)
+        val state = recoveryInfo?.state
+        return hasAccount && state == SupervisionRecoveryInfo.STATE_PENDING
     }
 
     companion object {

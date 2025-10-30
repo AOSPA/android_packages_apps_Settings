@@ -340,9 +340,9 @@
     <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="5326017162943304749">"La tablet tiene que estar cargada"</string>
     <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8041162611685970218">"El teléfono tiene que estar cargado"</string>
     <string name="storage_wizard_migrate_v2_checklist_battery" product="desktop" msgid="3166603241842968388">"Mantén este dispositivo cargado"</string>
-    <string name="main_clear_desc" product="tablet" msgid="5778614597513856716">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" de tu tablet, como:\n\n"<li>"Tu cuenta de Google"</li>\n<li>"Los ajustes y los datos de apps y del sistema"</li>\n<li>"Las apps descargadas"</li></string>
-    <string name="main_clear_desc" product="default" msgid="1888412491866186706">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" de tu teléfono, como:\n\n"<li>"Tu cuenta de Google"</li>\n<li>"Los ajustes y los datos de apps y del sistema"</li>\n<li>"Las apps descargadas"</li></string>
-    <string name="main_clear_desc" product="desktop" msgid="405802272460355609">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" de tu dispositivo, como:\n\n"<li>"Tu cuenta de Google"</li>\n<li>"Los ajustes y los datos de apps y del sistema"</li>\n<li>"Las apps descargadas"</li></string>
+    <string name="main_clear_desc" product="tablet" msgid="5778614597513856716">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" de tu tablet, como:\n\n"<li>"Tu cuenta de Google"</li>\n<li>"Los ajustes y los datos de aplicaciones y del sistema"</li>\n<li>"Las aplicaciones descargadas"</li></string>
+    <string name="main_clear_desc" product="default" msgid="1888412491866186706">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" de tu teléfono, como:\n\n"<li>"Tu cuenta de Google"</li>\n<li>"Los ajustes y los datos de aplicaciones y del sistema"</li>\n<li>"Las aplicaciones descargadas"</li></string>
+    <string name="main_clear_desc" product="desktop" msgid="405802272460355609">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" de tu dispositivo, como:\n\n"<li>"Tu cuenta de Google"</li>\n<li>"Los ajustes y los datos de aplicaciones y del sistema"</li>\n<li>"Las aplicaciones descargadas"</li></string>
     <string name="main_clear_accounts" product="default" msgid="3604029744509330786">\n\n"Has iniciado sesión en estas cuentas:\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="7750368595882863399">\n\n"Hay otros usuarios presentes en este dispositivo.\n"</string>
     <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="5834269984459195918">\n\n"Para eliminar la música, las imágenes y otros datos de usuario, debes borrar el "<b>"almacenamiento USB"</b>"."</string>
@@ -371,7 +371,7 @@
     <string name="about_settings" product="desktop" msgid="7595574154492383452">"Información del dispositivo"</string>
     <string name="about_settings" product="emulator" msgid="1099246296173401003">"Información sobre el dispositivo emulado"</string>
     <string name="install_all_warning" product="tablet" msgid="1732116924846572063">"Tu tablet y tus datos personales son más vulnerables a los ataques de apps desconocidas. Al instalar apps de esta fuente, aceptas ser responsable de cualquier daño que sufra tu tablet o la pérdida de datos que se pueda derivar de su uso."</string>
-    <string name="install_all_warning" product="default" msgid="4597256179485325694">"Tu teléfono y tus datos personales son más vulnerables a los ataques de apps desconocidas. Al instalar apps de esta fuente, aceptas ser responsable de cualquier daño que sufra tu teléfono o la pérdida de datos que se pueda derivar de su uso."</string>
+    <string name="install_all_warning" product="default" msgid="4597256179485325694">"Tu teléfono y tus datos personales son más vulnerables a los ataques de aplicaciones desconocidas. Al instalar aplicaciones de esta fuente, aceptas ser responsable de cualquier daño que sufra tu teléfono o la pérdida de datos que se pueda derivar de su uso."</string>
     <string name="install_all_warning" product="device" msgid="6293002353591632851">"Tu dispositivo y tus datos personales son más vulnerables a los ataques de apps desconocidas. Al instalar apps de esta fuente, aceptas ser responsable de cualquier daño que sufra tu dispositivo o de la pérdida de datos que se pueda derivar de su uso."</string>
     <string name="install_all_warning" product="desktop" msgid="6293002353591632851">"Tu dispositivo y tus datos personales son más vulnerables a los ataques de apps desconocidas. Al instalar apps de esta fuente, aceptas ser responsable de cualquier daño que sufra tu dispositivo o de la pérdida de datos que se pueda derivar de su uso."</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="6321057186549848774">"Si detienes este servicio, es posible que algunas funciones del tablet dejen de funcionar correctamente hasta que reinicies el dispositivo."</string>
@@ -481,12 +481,9 @@
     <string name="lockscreen_trivial_controls_summary" product="default" msgid="42562533085885152">"Sin desbloquear tu teléfono"</string>
     <string name="lockscreen_trivial_controls_summary" product="tablet" msgid="9052068482124729345">"Sin desbloquear tu tablet"</string>
     <string name="lockscreen_trivial_controls_summary" product="desktop" msgid="8183513643394359332">"Sin desbloquear tu dispositivo"</string>
-    <!-- no translation found for device_supervision_features_title (8612616791672564436) -->
-    <skip />
-    <!-- no translation found for device_supervision_features_title (8301949957844501200) -->
-    <skip />
-    <!-- no translation found for device_supervision_features_title (5041758196166273467) -->
-    <skip />
+    <string name="device_supervision_switch_title" product="default" msgid="5711051584668311080">"Controles para este teléfono"</string>
+    <string name="device_supervision_switch_title" product="tablet" msgid="5400384750840247844">"Controles para esta tablet"</string>
+    <string name="device_supervision_switch_title" product="desktop" msgid="2140192989162020111">"Controles para este dispositivo"</string>
     <string name="supervision_pin_length_message" product="default" msgid="7142997986515800901">"{count,plural, =1{Introduce un PIN que tenga al menos # dígito. Lo usarás para gestionar los controles en este teléfono.}other{Introduce un PIN que tenga al menos # dígitos. Lo usarás para gestionar los controles en este teléfono.}}"</string>
     <string name="supervision_pin_length_message" product="tablet" msgid="1772471880165492225">"{count,plural, =1{Introduce un PIN que tenga al menos # dígito. Lo usarás para gestionar los controles en esta tablet.}other{Introduce un PIN que tenga al menos # dígitos. Lo usarás para gestionar los controles en esta tablet.}}"</string>
     <string name="supervision_pin_length_message" product="desktop" msgid="7689193597679628648">"{count,plural, =1{Introduce un PIN que tenga al menos # dígito. Lo usarás para gestionar los controles en este dispositivo.}other{Introduce un PIN que tenga al menos # dígitos. Lo usarás para gestionar los controles en este dispositivo.}}"</string>

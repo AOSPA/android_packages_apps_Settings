@@ -346,10 +346,17 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         RestrictedSelectorWithWidgetPreference rp = (RestrictedSelectorWithWidgetPreference) pref;
 
         // Apply policy transparency.
-        rp.setDisabledByAdmin(
-                credmanAppInfo
-                        .getCombinedProviderInfo()
-                        .getDeviceAdminRestrictions(getContext(), getUser()));
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            rp.setDisabledByAdmin(
+                    credmanAppInfo
+                            .getCombinedProviderInfo()
+                            .getAdminRestrictionsOnCredentialManager(getContext(), getUser()));
+        } else {
+            rp.setDisabledByAdmin(
+                    credmanAppInfo
+                            .getCombinedProviderInfo()
+                            .getDeviceAdminRestrictions(getContext(), getUser()));
+        }
     }
 
     @Override
@@ -385,7 +392,15 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
         if (topProvider != null) {
             // Apply device admin restrictions to top provider.
-            if (topProvider.getDeviceAdminRestrictions(getContext(), userId) != null) {
+            boolean isDisabledByAdmin;
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                isDisabledByAdmin = topProvider.getAdminRestrictionsOnCredentialManager(
+                        getContext(), userId) != null;
+            } else {
+                isDisabledByAdmin = topProvider.getDeviceAdminRestrictions(getContext(), userId)
+                        != null;
+            }
+            if (isDisabledByAdmin) {
                 return "";
             }
 

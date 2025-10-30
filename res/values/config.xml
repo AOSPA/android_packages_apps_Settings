@@ -922,7 +922,9 @@
          R.string.identity_check_watch_issue_card_title
          R.string.identity_check_watch_issue_card_summary
          R.string.identity_check_watch_promo_card_title
-         R.string.identity_check_promo_card_watch_summary -->
+         R.string.identity_check_promo_card_watch_summary
+         R.string.identity_check_watch_notification_title
+         R.string.identity_check_watch_notification_summary -->
     <bool name="config_show_identity_check_watch_promo">false</bool>
 
     <!-- Safety Center safety source ID of an app security source. -->
@@ -961,5 +963,11 @@
     <!-- Resolutions shown on external display (for native resolutions only). There must be an even
          number of values, each pair being width x height. If empty, all resolutions are supported. -->
     <integer-array name="config_resolutionsShownOnExternalDisplay" translatable="false"/>
+
+    <!-- Whether to enable using init_enroll_remaining in the enroll progress logic -->
+    <bool name="config_init_fingerprint_enroll_remaining">false</bool>
+
+    <!-- The initial value for remaining in enroll progress -->
+    <integer name="init_fingerprint_enroll_remaining">0</integer>
 
 </resources>

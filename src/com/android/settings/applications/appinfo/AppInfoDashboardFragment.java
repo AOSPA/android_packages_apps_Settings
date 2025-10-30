@@ -23,7 +23,9 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import android.app.Activity;
 import android.app.AppOpsManager;
 import android.app.KeyguardManager;
+import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.PolicyEnforcementInfo;
 import android.app.ecm.EnhancedConfirmationManager;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
@@ -112,6 +114,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     private static final boolean localLOGV = false;
 
+    private PolicyEnforcementInfo mAppsControlEnforcementInfo;
     private EnforcedAdmin mAppsControlDisallowedAdmin;
     private boolean mAppsControlDisallowedBySystem;
 
@@ -278,10 +281,18 @@ public class AppInfoDashboardFragment extends DashboardFragment
     public void onResume() {
         super.onResume();
         final Activity activity = getActivity();
-        mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-                activity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
-        mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
-                activity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            mAppsControlEnforcementInfo = activity.getSystemService(
+                    DevicePolicyManager.class).getEnforcingAdminsForPolicy(
+                    DevicePolicyIdentifiers.getIdentifierForUserRestriction(
+                            UserManager.DISALLOW_APPS_CONTROL), mUserId);
+            mAppsControlDisallowedBySystem = mAppsControlEnforcementInfo.isEnforcedBySystem();
+        } else {
+            mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                    activity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
+            mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
+                    activity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
+        }
 
         if (!refreshUi()) {
             setIntentAndFinish(true, true);
@@ -423,8 +434,15 @@ public class AppInfoDashboardFragment extends DashboardFragment
         uninstallAllUsersItem.setVisible(
                 shouldShowUninstallForAll(mAppEntry) && !mAppsControlDisallowedBySystem);
         if (uninstallAllUsersItem.isVisible()) {
-            RestrictedLockUtilsInternal.setMenuItemAsDisabledByAdmin(getActivity(),
-                    uninstallAllUsersItem, mAppsControlDisallowedAdmin);
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                RestrictedLockUtilsInternal.setMenuItemAsDisabledByAdmin(getActivity(),
+                        uninstallAllUsersItem,
+                        mAppsControlEnforcementInfo.getMostImportantEnforcingAdmin(),
+                        null);
+            } else {
+                RestrictedLockUtilsInternal.setMenuItemAsDisabledByAdmin(getActivity(),
+                        uninstallAllUsersItem, mAppsControlDisallowedAdmin);
+            }
         }
         menu.findItem(ACCESS_RESTRICTED_SETTINGS).setVisible(shouldShowAccessRestrictedSettings());
         mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
@@ -436,8 +454,15 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 && !mAppsControlDisallowedBySystem
                 && !uninstallUpdateDisabled);
         if (uninstallUpdatesItem.isVisible()) {
-            RestrictedLockUtilsInternal.setMenuItemAsDisabledByAdmin(getActivity(),
-                    uninstallUpdatesItem, mAppsControlDisallowedAdmin);
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                RestrictedLockUtilsInternal.setMenuItemAsDisabledByAdmin(getActivity(),
+                        uninstallUpdatesItem,
+                        mAppsControlEnforcementInfo.getMostImportantEnforcingAdmin(),
+                        null);
+            } else {
+                RestrictedLockUtilsInternal.setMenuItemAsDisabledByAdmin(getActivity(),
+                        uninstallUpdatesItem, mAppsControlDisallowedAdmin);
+            }
         }
     }
 

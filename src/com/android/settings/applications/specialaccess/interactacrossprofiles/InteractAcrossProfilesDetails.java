@@ -25,6 +25,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.HOW_TO_DI
 import static android.app.admin.DevicePolicyResources.Strings.Settings.INSTALL_IN_PERSONAL_PROFILE_TO_CONNECT_PROMPT;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.INSTALL_IN_WORK_PROFILE_TO_CONNECT_PROMPT;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.ONLY_CONNECT_TRUSTED_APPS;
+import static android.app.admin.DpcAuthority.DPC_AUTHORITY;
 import static android.content.pm.PackageManager.MATCH_DIRECT_BOOT_AWARE;
 import static android.content.pm.PackageManager.MATCH_DIRECT_BOOT_UNAWARE;
 import static android.provider.Settings.ACTION_MANAGE_CROSS_PROFILE_ACCESS;
@@ -38,8 +39,10 @@ import android.app.ActionBar;
 import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyEventLogger;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
 import android.app.admin.flags.Flags;
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -477,8 +480,16 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         mSwitchPref.setTitle(R.string.interact_across_profiles_switch_disabled);
         if (!isCrossProfilePackageAllowlisted(mPackageName)) {
             mInstallBanner.setVisible(false);
-            mSwitchPref.setDisabledByAdmin(RestrictedLockUtils.getProfileOrDeviceOwner(
-                    mContext, mWorkProfile));
+            // Cross profile package can only be set with profile owner permission.
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                ComponentName profileOwnerComponent = mDpm.getProfileOwnerAsUser(mWorkProfile);
+                EnforcingAdmin admin = new EnforcingAdmin(profileOwnerComponent.getPackageName(),
+                        DPC_AUTHORITY, mWorkProfile, profileOwnerComponent);
+                mSwitchPref.setDisabledByAdmin(admin);
+            } else {
+                mSwitchPref.setDisabledByAdmin(RestrictedLockUtils.getProfileOrDeviceOwner(
+                        mContext, mWorkProfile));
+            }
             return true;
         }
         mSwitchPref.setEnabled(false);

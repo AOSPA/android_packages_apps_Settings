@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.credentials;
 
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -262,6 +264,21 @@ public final class CombinedProviderInfo {
         return RestrictedLockUtilsInternal.checkIfApplicationCanBeCredentialManagerProvider(
                 context.createContextAsUser(UserHandle.of(userId), /* flags= */ 0),
                 packageName);
+    }
+
+    /** Returns whether this credential manager entry has admin restriction. */
+    @Nullable
+    public EnforcingAdmin getAdminRestrictionsOnCredentialManager(Context context, int userId) {
+        final String packageName = getPackageName();
+        if (TextUtils.isEmpty(packageName)) {
+            return null;
+        }
+
+        PolicyEnforcementInfo enforcementInfo =
+                RestrictedLockUtilsInternal.checkIfApplicationCanBeCredentialManagerProvider(
+                        context, packageName, userId);
+
+        return enforcementInfo.getMostImportantEnforcingAdmin();
     }
 
     /** Returns the provider that gets the top spot. */

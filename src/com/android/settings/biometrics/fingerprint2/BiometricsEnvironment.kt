@@ -22,6 +22,7 @@ import android.view.accessibility.AccessibilityManager
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import com.android.internal.widget.LockPatternUtils
+import com.android.settings.R
 import com.android.settings.SettingsApplication
 import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint2.data.repository.DebuggingRepository
@@ -125,7 +126,13 @@ class BiometricsEnvironment(
     GenerateChallengeInteractorImpl(fingerprintManager, userRepo, gateKeeperPasswordProvider)
 
   fun createFingerprintEnrollInteractor(): EnrollFingerprintInteractor =
-    EnrollFingerprintInteractorImpl(userRepo, fingerprintManager, Settings)
+    EnrollFingerprintInteractorImpl(
+        userRepo,
+        fingerprintManager,
+        Settings,
+        context.resources.getBoolean(R.bool.config_init_fingerprint_enroll_remaining),
+        context.resources.getInteger(R.integer.init_fingerprint_enroll_remaining)
+    )
 
   fun createFingerprintsEnrolledInteractor(): EnrolledFingerprintsInteractorImpl =
     EnrolledFingerprintsInteractorImpl(fingerprintEnrollmentRepository)

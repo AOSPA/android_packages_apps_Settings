@@ -25,18 +25,25 @@ import android.content.Context
 import android.content.pm.UserInfo
 import android.os.UserHandle
 import android.os.UserManager
+import android.os.UserManager.USER_TYPE_FULL_SYSTEM
+import android.os.UserManager.USER_TYPE_PROFILE_MANAGED
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
+import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.password.ChooseLockGeneric
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -47,11 +54,14 @@ import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowContextImpl
 import org.robolectric.shadows.ShadowKeyguardManager
+import org.robolectric.shadows.ShadowLooper
 
 @RunWith(AndroidJUnit4::class)
+@Config(shadows = [ShadowAlertDialogCompat::class])
 class SetupSupervisionActivityTest {
     private val context = ApplicationProvider.getApplicationContext<Context>()
 
@@ -59,6 +69,8 @@ class SetupSupervisionActivityTest {
     private val mockUserManager = mock<UserManager>()
 
     private lateinit var shadowKeyguardManager: ShadowKeyguardManager
+
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
     @Before
     fun setUp() {
@@ -148,7 +160,8 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
-    fun onCreate_existingSupervisingLock_finishes() {
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_withoutUiUpdates_existingSupervisingLock_canceled() {
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
 
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
@@ -159,7 +172,79 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
-    fun onResume_existingSupervisingLock_finishes() {
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_existingSupervisedUserAndExistingSupervisingLock_canceled() {
+        mockSupervisionManager.stub { on { isSupervisionEnabled } doReturn true }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_existingSupervisingLock_startsConfirmCredentialsActivity() {
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+
+        ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                val nextActivity = shadowOf(activity).nextStartedActivity
+                assertThat(nextActivity.component?.className)
+                    .isEqualTo(ConfirmSupervisionCredentialsActivity::class.java.name)
+            }
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onConfirmCredentialsResult_ok_setsResultOkAndEnablesSupervision() {
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivityForResult.intent,
+                    RESULT_OK,
+                    null,
+                )
+
+                assertThat(activity.isFinishing).isTrue()
+            }
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_OK)
+        }
+        verify(mockSupervisionManager).setSupervisionEnabled(true)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onConfirmCredentialsResult_canceled_setsResultCanceled() {
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivityForResult.intent,
+                    RESULT_CANCELED,
+                    null,
+                )
+
+                assertThat(activity.isFinishing).isTrue()
+            }
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
+        }
+        verify(mockSupervisionManager, never()).setSupervisionEnabled(true)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onResume_withoutUiUpdates_existingSupervisingLock_finishes() {
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
@@ -171,6 +256,22 @@ class SetupSupervisionActivityTest {
 
             scenario.onActivity { activity -> assertThat(activity.isFinishing).isTrue() }
             assertThat(scenario.result.resultCode).isEqualTo(RESULT_OK)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onResume_existingSupervisingLock_doesNotFinish() {
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            scenario.moveToState(Lifecycle.State.STARTED)
+
+            shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+            scenario.moveToState(Lifecycle.State.RESUMED)
+
+            scenario.onActivity { activity -> assertThat(activity.isFinishing).isFalse() }
         }
     }
 
@@ -287,6 +388,38 @@ class SetupSupervisionActivityTest {
         }
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_multipleProfilesExist_showsErrorDialog() {
+        mockUserManager.stub {
+            on { userProfiles } doReturn
+                listOf(
+                    MAIN_USER.userHandle,
+                    WORK_PROFILE.userHandle,
+                    SUPERVISING_USER_INFO.userHandle,
+                )
+            on { getUserInfo(MAIN_USER.id) } doReturn MAIN_USER
+            on { getUserInfo(WORK_PROFILE.id) } doReturn WORK_PROFILE
+            on { getUserInfo(SUPERVISING_USER_INFO.id) } doReturn SUPERVISING_USER_INFO
+        }
+
+        ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                val dialog = ShadowAlertDialogCompat.getLatestAlertDialog()
+                assertThat(dialog).isNotNull()
+                assertThat(ShadowAlertDialogCompat.shadowOf(dialog).title)
+                    .isEqualTo(
+                        context.getString(R.string.supervision_setup_multi_profile_error_title)
+                    )
+
+                dialog?.getButton(AlertDialog.BUTTON_POSITIVE)?.performClick()
+                ShadowLooper.idleMainLooper()
+
+                assertThat(activity.isFinishing).isTrue()
+            }
+        }
+    }
+
     private companion object {
         const val SUPERVISING_USER_ID = 5
         val SUPERVISING_USER_INFO =
@@ -297,5 +430,7 @@ class SetupSupervisionActivityTest {
                 /* flags */ 0,
                 USER_TYPE_PROFILE_SUPERVISING,
             )
+        private val MAIN_USER = UserInfo(0, "Main", null, 0, USER_TYPE_FULL_SYSTEM)
+        private val WORK_PROFILE = UserInfo(11, "Work", null, 0, USER_TYPE_PROFILE_MANAGED)
     }
 }

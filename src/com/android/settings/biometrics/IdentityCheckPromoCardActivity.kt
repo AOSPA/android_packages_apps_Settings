@@ -19,6 +19,7 @@ package com.android.settings.biometrics
 import android.os.Bundle
 import android.provider.Settings
 import androidx.fragment.app.FragmentActivity
+import com.android.settings.safetycenter.IdentityCheckSafetySource
 
 /** Activity that shows the Identity Check promo card using [IdentityCheckPromoCardFragment]. */
 class IdentityCheckPromoCardActivity : FragmentActivity() {
@@ -27,6 +28,14 @@ class IdentityCheckPromoCardActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
 
         Settings.Secure.putInt(contentResolver, Settings.Secure.IDENTITY_CHECK_PROMO_CARD_SHOWN, 1)
+
+        if (intent.action.equals(IdentityCheckSafetySource.ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS)) {
+            Settings.Secure.putInt(
+                contentResolver,
+                Settings.Secure.IDENTITY_CHECK_WATCH_PROMO_CARD_SHOWN,
+                1,
+            )
+        }
 
         val bottomSheetFragment =
             supportFragmentManager.findFragmentByTag(BOTTOM_SHEET_FRAGMENT_TAG)

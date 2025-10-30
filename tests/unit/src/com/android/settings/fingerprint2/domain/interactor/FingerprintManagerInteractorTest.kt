@@ -162,7 +162,8 @@ class FingerprintManagerInteractorTest {
     canEnrollFingerprintsInteractorUnderTest =
       CanEnrollFingerprintsInteractorImpl(fingerprintEnrollRepo)
 
-    enrollInteractorUnderTest = EnrollFingerprintInteractorImpl(userRepo, fingerprintManager, flow)
+    enrollInteractorUnderTest = EnrollFingerprintInteractorImpl(
+      userRepo, fingerprintManager, flow, false, 0)
   }
 
   @Test

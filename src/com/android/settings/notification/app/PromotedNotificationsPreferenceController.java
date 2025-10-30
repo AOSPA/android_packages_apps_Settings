@@ -16,7 +16,6 @@
 package com.android.settings.notification.app;
 
 import android.Manifest;
-import android.app.Flags;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -47,9 +46,6 @@ public class PromotedNotificationsPreferenceController extends
 
     @Override
     public boolean isAvailable() {
-        if (!Flags.uiRichOngoing()) {
-            return false;
-        }
         return super.isAvailable() && isPermissionRequested();
     }
 
