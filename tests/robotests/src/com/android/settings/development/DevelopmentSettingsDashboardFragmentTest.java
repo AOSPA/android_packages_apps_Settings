@@ -234,7 +234,6 @@ public class DevelopmentSettingsDashboardFragmentTest {
 
     @Test
     @Config(shadows = ShadowIdentityCheckBiometricErrorDialog.class)
-    @Ignore("b/354820314")
     public void onActivityResult_requestBiometricPrompt_showErrorDialog() {
         when(mDashboard.getContext()).thenReturn(mContext);
 
@@ -381,7 +380,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         static boolean sShown;
         @Implementation
         public static void showBiometricErrorDialog(FragmentActivity fragmentActivity,
-                Utils.BiometricStatus errorCode) {
+                Utils.BiometricStatus errorCode, boolean twoFactorAuthentication) {
             sShown = true;
         }
     }
