@@ -106,10 +106,19 @@ object SafetyCenterTestUtils {
         actions: List<SafetyCenterIssue.Action> = emptyList(),
         isDismissible: Boolean = true,
         shouldConfirmDismissal: Boolean = true,
+        safetySourceIssueId: String = "source_issue_id_$id",
     ): SafetyCenterIssue {
         val builder =
             if (Flags.openSafetyCenterApis()) {
-                SafetyCenterIssue.Builder(id, title, summary, userHandle, sourceIds, "type_$id")
+                SafetyCenterIssue.Builder(
+                    id,
+                    title,
+                    summary,
+                    userHandle,
+                    sourceIds,
+                    "type_$id",
+                    safetySourceIssueId,
+                )
             } else {
                 SafetyCenterIssue.Builder(id, title, summary)
             }
