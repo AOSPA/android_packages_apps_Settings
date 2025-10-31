@@ -24,6 +24,7 @@ import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
 import android.hardware.display.ColorDisplayManager;
@@ -32,6 +33,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings.Secure;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -174,6 +176,18 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
 
         mViewPager.setAdapter(new ColorPagerAdapter(mPageList));
 
+        int pageMarginPx;
+        try {
+            TypedArray resolvedAttribute = getContext().getTheme().obtainStyledAttributes(
+                    new int[]{android.R.attr.listPreferredItemPaddingStart});
+            pageMarginPx = resolvedAttribute.getDimensionPixelSize(0, 0);
+            resolvedAttribute.recycle();
+        } catch (NullPointerException | Resources.NotFoundException e) {
+            pageMarginPx = (int) (16 * getResources().getDisplayMetrics().density);
+            Log.w(getTag(), "addViewPager: Exception message: " + e.getMessage());
+        }
+
+        mViewPager.setPageMargin(pageMarginPx);
         mViewArrowPrevious = preview.findViewById(R.id.arrow_previous);
         mViewArrowPrevious.setOnClickListener(v -> {
             final int previousPos = mViewPager.getCurrentItem() - 1;
