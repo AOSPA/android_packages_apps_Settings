@@ -379,9 +379,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
                 result.remove(mManager.getProfileManager().getLeAudioProfile());
             }
         }
-        if (leAudioSupported && !classicAudioSupported && !hearingAidSupported) {
-            mIsLeAudioOnlyDevice = true;
-        }
+        mIsLeAudioOnlyDevice = leAudioSupported && !classicAudioSupported && !hearingAidSupported;
         Log.d(TAG, "getProfiles:Map:" + mProfileDeviceMap);
         return result;
     }
