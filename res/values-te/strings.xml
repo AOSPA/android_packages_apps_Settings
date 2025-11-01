@@ -68,6 +68,8 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"పేరు మార్చండి"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"పరికరం డిస్‌కనెక్ట్ చేయాలా?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"కొత్త డివైజ్‌ను పెయిర్ చేయండి"</string>
+    <!-- no translation found for bluetooth_pairing_no_device_button_message (6429917002249666051) -->
+    <skip />
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"బ్లూటూత్"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"రేపు ఆటోమేటిక్‌గా ఆన్ చేయండి"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"మీరు బ్లూటూత్‌ను ఆఫ్ చేస్తే, మర్నాడు అది మళ్లీ ఆన్ అవుతుంది"</string>
@@ -134,7 +136,6 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"సందేశ యాక్సెస్ రిక్వెస్ట్‌"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"ఇతర డివైజ్‌లకు \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\' లాగా కనిపిస్తుంది"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"ఇతర పరికరాలతో కనెక్ట్ చేయడానికి బ్లూటూత్‌ను ఆన్ చేయండి"</string>
-    <string name="shared_network_footer" msgid="5178404860420039168">"ఈ నెట్‌వర్క్‌లో మార్పులు చేయడానికి నెట్‌వర్క్ ఓనర్‌ను లేదా డివైజ్ అడ్మిన్‌ను సంప్రదించండి."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"మీ పరికరాలు"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"కొత్త పరికరాన్ని పెయిర్ చేయండి"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"బ్లూటూత్ A2DP హార్డ్‌వేర్ ఆఫ్‌లోడ్‌ను డిజేబుల్ చేయండి"</string>
@@ -1027,10 +1028,8 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"ప్రారంభించడానికి ఎక్స్‌టర్నల్ డిస్‌ప్లేను కనెక్ట్ చేయండి లేదా వేరే కేబుల్‌ను ఉపయోగించి చూడండి"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"మరిన్ని ఆప్షన్‌లు"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"డిస్‌ప్లేల వరుస మార్చడానికి పట్టుకొని, లాగండి"</string>
-    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
-    <skip />
-    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
-    <skip />
+    <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"నావిగేషన్ బాణాలను చూపడానికి ట్యాప్ చేయండి"</string>
+    <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"డిస్‌ప్లేలను మళ్లీ అమర్చడానికి బాణాలను ట్యాప్ చేయండి"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"మిర్రర్ బిల్ట్-ఇన్ డిస్‌ప్లే"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"కొత్త సెట్టింగ్‌లను ఉపయోగించాలా?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"మీ డిస్‌ప్లే మీరు కోరుకున్న విధంగా పనిచేయకపోతే, మీరు మీ మునుపటి సెట్టింగ్‌లకు తిరిగి మారవచ్చు"</string>
@@ -1040,14 +1039,10 @@
     <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"కిందికి జరపండి"</string>
     <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"ఎడమ వైపుగా జరపండి"</string>
     <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"కుడి వైపుగా జరపండి"</string>
-    <!-- no translation found for external_display_topology_a11y_display_moved_up (2006298475752942395) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_display_moved_down (6028544722984648702) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_display_moved_left (5308110789317472437) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_display_moved_right (3802527156765844475) -->
-    <skip />
+    <string name="external_display_topology_a11y_display_moved_up" msgid="2006298475752942395">"డిస్‌ప్లే: %1$s పైకి తరలించారు"</string>
+    <string name="external_display_topology_a11y_display_moved_down" msgid="6028544722984648702">"డిస్‌ప్లే: %1$s కిందికి తరలించారు"</string>
+    <string name="external_display_topology_a11y_display_moved_left" msgid="5308110789317472437">"డిస్‌ప్లే: %1$s ఎడమ వైపునకు తరలించారు"</string>
+    <string name="external_display_topology_a11y_display_moved_right" msgid="3802527156765844475">"డిస్‌ప్లే: %1$s కుడి వైపునకు తరలించారు"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"మిర్రర్"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"వైర్‌లెస్ ప్రదర్శనను ప్రారంభించండి"</string>
@@ -1213,12 +1208,17 @@
     <string name="private_message" msgid="5897966950396765392">"ప్రైవేట్"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"నిర్ధారించండి"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"రద్దు చేయండి"</string>
-    <string name="wifi_share_preference_title" msgid="6346200020322308703">"ఇది షేర్ చేసిన నెట్‌వర్క్"</string>
-    <string name="wifi_share_preference_summary" msgid="4356010425167713046">"గెస్ట్ యూజర్‌లు తప్ప, అందరు యూజర్‌లు ఈ నెట్‌వర్క్‌ను చూడగలరు, ఎడిట్ చేయగలరు, తొలగించగలరు"</string>
+    <!-- no translation found for wifi_share_preference_title (2000847347515149059) -->
+    <skip />
+    <!-- no translation found for wifi_share_preference_summary (3642772041628058748) -->
+    <skip />
     <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"<xliff:g id="SHARED">%1$s</xliff:g> \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" నెట్‌వర్క్‌కు స్విచ్ అవ్వాలా?"</string>
     <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"మీరు ప్రస్తుతం అదే పేరుతో ఉన్న <xliff:g id="SHARED_0">%1$s</xliff:g> నెట్‌వర్క్‌కు కనెక్ట్ అయ్యారు. మీరు స్విచ్ అయినప్పుడు, మీరు <xliff:g id="SHARED_1">%2$s</xliff:g> నెట్‌వర్క్ నుండి డిస్‌కనెక్ట్ చేయబడి, ఆపై <xliff:g id="PRIVATE">%3$s</xliff:g> నెట్‌వర్క్‌కు తిరిగి కనెక్ట్ అవుతారు. మీకు తాత్కాలికంగా ఇంటర్నెట్ లేకపోవచ్చు."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(మారలేదు)"</string>
-    <string name="wifi_allow_edit_configuration_title" msgid="3928254385019370063">"నెట్‌వర్క్ కాన్ఫిగరేషన్‌ను ఎడిట్ చేయడానికి ఇతర యూజర్‌లకు అనుమతినివ్వండి"</string>
+    <!-- no translation found for wifi_allow_edit_configuration_title (701463165569293) -->
+    <skip />
+    <!-- no translation found for wifi_allow_edit_configuration_summary (2133654391010089827) -->
+    <skip />
     <string name="wifi_unspecified" msgid="4561964943472312208">"దయచేసి ఎంచుకోండి"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(బహుళ ప్రమాణపత్రాలు జోడించబడ్డాయి)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"సిస్టమ్ సర్టిఫికెట్‌లను ఉపయోగించండి"</string>
@@ -1232,11 +1232,10 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"అనుమతించండి"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"తిరస్కరించు"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*అవసరం"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"ఇది షేర్ చేసిన నెట్‌వర్క్. మీరు లాగిన్ అయిన తర్వాత ఈ సెట్టింగ్‌ను మార్చవచ్చు."</string>
-    <string name="share_wifi_network" msgid="4064997404339571584">"ఈ నెట్‌వర్క్‌ను ఇతర డివైజ్ యూజర్‌లతో షేర్ చేయండి"</string>
-    <string name="share_wifi_network_summary" msgid="4316236421149769333">"ఈ డివైజ్‌లోని యూజర్‌లందరూ షేర్ చేసుకునే నెట్‌వర్క్‌ను చూడగలరు, కనెక్ట్ అవ్వగలరు. అడ్మినిస్ట్రేటర్‌లు షేర్ చేసుకునే నెట్‌వర్క్‌ను తొలగించగలరు. మరింత తెలుసుకోండి"</string>
-    <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"నెట్‌వర్క్ కాన్ఫిగరేషన్‌ను ఎడిట్ చేయడానికి ఇతర యూజర్‌లకు అనుమతినివ్వండి"</string>
-    <string name="edit_wifi_network_non_owner_message" msgid="4291718452228643581">"ఈ డివైజ్ అడ్మిన్‌ను సంప్రదించి ఈ నెట్‌వర్క్‌కు మార్పులు చేయండి."</string>
+    <!-- no translation found for wifi_shared_network_login_screen_warning (8298716960537761436) -->
+    <skip />
+    <!-- no translation found for edit_wifi_network_non_owner_message (4387650403845968672) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"ఈ నెట్‌వర్క్‌కు ఇంటర్నెట్ యాక్సెస్ లేదు. కనెక్ట్ చేసి ఉంచాలా?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"పరిమిత కనెక్టివిటీ కారణంగా కొన్ని యాప్‌లు, సేవలు పని చేయకపోవచ్చు. ఏదేమైనా ఉపయోగించాలా?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"ఈ నెట్‌వర్క్ కోసం మళ్లీ అడగవద్దు"</string>
@@ -1331,8 +1330,7 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / అనేక పరికరాలతో అనుకూలమైనది"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / కొన్ని పరికరాలతో అనుకూలమైనది"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2.4 ఇంకా 5 GHz / దాదాపు అన్ని డివైజ్‌‌‌లకు అనుకూలమైనది"</string>
-    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
-    <skip />
+    <string name="wifi_hotspot_speed_summary_2g_and_6g" msgid="5903589948734876821">"2.4 ఇంకా 6 GHz / దాదాపు అన్ని డివైజ్‌లకు అనుకూలమైనది"</string>
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"మీ హాట్‌స్పాట్ కోసం ఫ్రీక్వెన్సీని ఎంచుకోండి. కనెక్షన్ వేగాన్ని, మీ హాట్‌స్పాట్‌ను ఏ రకమైన డివైజ్‌లు కనుగొనగలవు అనేది ఫ్రీక్వెన్సీ ప్రభావితం చేస్తుంది."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"ప్రాధాన్య ఫ్రీక్వెన్సీ"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
@@ -1343,10 +1341,8 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"వేగవంతమైన Wi-Fi హాట్‌స్పాట్. ఈ డ్యూయల్-బ్యాండ్ హాట్‌స్పాట్ చాలా డివైజ్‌లకు అనుకూలంగా ఉంటుంది."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"అత్యంత వేగవంతమైన Wi-Fi హాట్‌స్పాట్. కొన్ని పరికరాలతో అనుకూలమైనది."</string>
-    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
-    <skip />
+    <string name="wifi_hotspot_speed_2g_6g" msgid="7660263835445953086">"2.4, 6 GHz"</string>
+    <string name="wifi_hotspot_speed_2g_6g_summary" msgid="5013590436817464652">"అత్యంత వేగవంతమైన Wi-Fi హాట్‌స్పాట్. ఈ డ్యూయల్-బ్యాండ్ హాట్‌స్పాట్ చాలాా డివైజ్‌లకు అనుకూలంగా ఉంటుంది."</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"మీ దేశంలో లేదా ప్రాంతంలో అందుబాటులో లేదు"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"మీ ప్రాధాన్య ఫ్రీక్వెన్సీ అందుబాటులో లేకుంటే, మీ హాట్‌స్పాట్ వేరొక దానిని ఉపయోగించవచ్చు. మీరు ఫ్రీక్వెన్సీని మార్చినట్లయితే, హాట్‌స్పాట్ సెక్యూరిటీ సెట్టింగ్‌లు మారవచ్చు."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"6 GHzతో అందుబాటులో లేదు"</string>
@@ -2203,7 +2199,7 @@
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"అనుకూల విలువ"</string>
     <string name="input_setting_bounce_keys_seekbar_desc" msgid="4575595566548124309">"బౌన్స్ కీ పరిమితి సమయం"</string>
     <string name="input_setting_slow_keys_seekbar_desc" msgid="2171726970136563995">"స్లో కీ పరిమితి సమయం"</string>
-    <string name="slow_keys" msgid="2891452895499690837">"నిదానంగా పనిచేసే కీలు"</string>
+    <string name="slow_keys" msgid="2891452895499690837">"స్లో కీలు"</string>
     <string name="slow_keys_summary" msgid="3852534180402969185">"కీని రిజిస్టర్ చేయడానికి ముందు, మీరు దానిని హోల్డ్ చేసి ఉంచాల్సిన సమయాన్ని మార్చండి"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"స్టిక్కీ కీలు"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"షార్ట్‌కట్‌ల కోసం కీలను కలిపి హోల్డ్ చేయడానికి బదులు ఒకసారి ఒక కీని నొక్కండి"</string>
@@ -2248,6 +2244,8 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"కార్యాలయ ప్రొఫైల్ కీబోర్డ్‌లు &amp; సాధనాలు"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"ఆఫీస్ కోసం స్క్రీన్‌పై కీబోర్డ్"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ఆటోమేటిక్ సెట్టింగ్"</string>
+    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
+    <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"టచ్‌ప్యాడ్"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"టచ్‌ప్యాడ్ &amp; మౌస్"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"మౌస్"</string>
@@ -2349,7 +2347,7 @@
     <string name="speech_category_title" msgid="5995161659186229742">"స్పీచ్"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"స్పీచ్"</string>
     <string name="speech_preference_summary" msgid="5190362663352347487">"స్పీచ్ రికగ్నిషన్‌ &amp; అవుట్‌పుట్‌ కంట్రోల్స్"</string>
-    <string name="pointer_speed" msgid="5284291781349402396">"కర్సర్ వేగం"</string>
+    <string name="pointer_speed" msgid="5284291781349402396">"కర్సర్ స్పీడ్"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"కర్సర్ సైజ్"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4410507171942820948">"కర్సర్ స్కేల్‌ను తగ్గించండి"</string>
     <string name="pointer_scale_increase_content_description" msgid="8832991916962669031">"కర్సర్ స్కేల్‌ను పెంచండి"</string>
@@ -2945,6 +2943,10 @@
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"చివరి ఫుల్ ఛార్జ్ వినియోగాన్ని చూడండి"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
+    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
+    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
+    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
+    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"యాప్ బ్యాటరీ వినియోగం"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"వినియోగ వివరాలు"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"శక్తి వినియోగాన్ని సర్దుబాటు చేయండి"</string>
@@ -4329,6 +4331,8 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"క్యాలెండర్ ఈవెంట్‌లు"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"నిద్రించే సమయ రొటీన్"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"డ్రైవింగ్‌లో ఉన్నప్పుడు"</string>
+    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
+    <skip />
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"యాప్ సెట్టింగ్‌లు"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"<xliff:g id="APP_NAME">%1$s</xliff:g>లో సమాచారం, సెట్టింగ్‌లు"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"<xliff:g id="APP_NAME">%1$s</xliff:g> ద్వారా మేనేజ్ చేయబడుతోంది"</string>
@@ -4345,6 +4349,8 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"దృష్టి సారించేందుకు మీ డివైజ్ నుండి వచ్చే పరధ్యానాలను లేదా అంతరాయాలను బ్లాక్ చేయండి"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"నిశ్శబ్ద వాతావరణం కోసం అన్ని పరధ్యానాలను తొలగించండి"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"వేర్వేరు యూజర్‌ల కోసం డివైజ్‌ ఎక్స్‌పీరియన్స్‌లను, సెట్టింగ్‌లను వ్యక్తిగతీకరించండి"</string>
+    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
+    <skip />
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"అంతరాయాలను సాధ్యమైనంతగా తగ్గించండి. ముఖ్యమైన వ్యక్తులు, యాప్‌లు మాత్రమే మిమ్మల్ని కాంటాక్ట్ చేసేందుకు అనుమతించండి"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"రెగ్యులర్ షెడ్యూల్‌ను ఫాలో అయ్యే మోడ్‌ను సెట్ చేయండి"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"రోజువారీ ఈవెంట్‌లతో మీ పరికరాన్ని సింక్‌లో ఉంచండి"</string>
@@ -4353,6 +4359,8 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"ఫుల్ ఫోకస్‌తో, ఫుల్ కాన్‌సెన్‌ట్రేషన్‌తో ఉండండి"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"మీరు వ్యూహాత్మకంగా వ్యవహరించాల్సిన పరిస్థితుల కోసం"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"మిమ్మల్ని సురక్షితంగా ఉంచడంలో సహాయపడటానికి సూచనలను అనుసరించండి"</string>
+    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
+    <skip />
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"మీ దృష్టిని కంట్రోల్ చేయండి"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"హెచ్చరిక"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"మూసివేయండి"</string>
@@ -5505,7 +5513,7 @@
     <string name="error_pending_updates" msgid="7196832772265874760">"కెర్నెల్ అప్‌డేట్ విఫలమైంది. ఏవైనా అప్‌డేట్‌లు పెండింగ్‌లో ఉన్నాయేమో చెక్ చేసి, పెండింగ్‌లో ఉంటే కనుక వాటిని ఇన్‌స్టాల్ చేయండి."</string>
     <string name="error_ota_failed" msgid="4762376085470989653">"కెర్నెల్ అప్‌డేట్ విఫలమైంది. OTAను వర్తింపజేసేటప్పుడు ఎర్రర్ ఏర్పడింది."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"బగ్ రిపోర్ట్‌ హ్యాండ్లర్"</string>
-    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"మీ డివైజ్‌లో బగ్ రిపోర్ట్ షార్ట్‌కట్‌ను ఏ యాప్ నిర్వహించాలో నిర్ణయిస్తుంది."</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"మీ డివైజ్‌లో బగ్ రిపోర్ట్ షార్ట్‌కట్‌ను ఏ యాప్ హ్యాండిల్ చేయాలో నిర్ణయిస్తుంది."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"వ్యక్తిగతం"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"వర్క్"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"సిస్టమ్ ఆటోమేటిక్ సెట్టింగ్"</string>
@@ -5971,8 +5979,7 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"తల్లిదండ్రుల కంట్రోల్స్ PINను సెటప్ చేయండి"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"పర్యవేక్షణ, తల్లిదండ్రుల కంట్రోల్స్, తల్లిదండ్రులు, పర్యవేక్షణ PIN, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"మీ PINను మేనేజ్ చేయండి"</string>
-    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
-    <skip />
+    <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"తల్లిదండ్రుల కంట్రోల్స్ PINను మేనేజ్ చేయండి"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"తల్లిదండ్రుల కంట్రోల్స్ PIN"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"తల్లి/తండ్రి PIN, తల్లిదండ్రుల కంట్రోల్స్ PIN"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"రికవరీ ఈమెయిల్‌ను జోడించండి"</string>
@@ -6066,6 +6073,8 @@
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"విస్మరించబడిన అలర్ట్‌లు"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"ఈ అలర్ట్‌ను విస్మరించాలా?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"మరింత రక్షణను జోడించడానికి, మీ సెక్యూరిటీ, గోప్యతా సెట్టింగ్‌లను ఎప్పుడైనా సరే రివ్యూ చేయండి"</string>
+    <!-- no translation found for safety_center_resolved_issue_fallback (223765674640909183) -->
+    <skip />
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"పెయిరింగ్"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> కనెక్ట్ అయింది"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"డివైజ్‌ను స్కాన్ చేయండి"</string>
