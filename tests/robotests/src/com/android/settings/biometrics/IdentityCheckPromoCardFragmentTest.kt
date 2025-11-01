@@ -19,6 +19,8 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.DialogInterface.OnDismissListener
 import android.os.Bundle
+import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import androidx.fragment.app.testing.launchFragment
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.core.app.ApplicationProvider
@@ -70,7 +72,11 @@ class IdentityCheckPromoCardFragmentTest {
     @Test
     fun launchFragment_watchPromoCard_checkContent() {
         val watchTitleString = context.getString(R.string.identity_check_watch_promo_card_title)
-        val watchSummaryString = context.getString(R.string.identity_check_promo_card_watch_summary)
+        val watchSummaryString =
+            context
+                .getString(R.string.identity_check_promo_card_watch_summary)
+                .parseAsHtml(HtmlCompat.FROM_HTML_MODE_COMPACT)
+                .toString()
         val shouldShowWatchStrings =
             context.resources.getBoolean(R.bool.config_show_identity_check_watch_promo)
         val expectedTitle =
