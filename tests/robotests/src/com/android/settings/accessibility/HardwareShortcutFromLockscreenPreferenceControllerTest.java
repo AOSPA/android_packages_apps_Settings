@@ -32,6 +32,7 @@ import android.view.accessibility.AccessibilityManager;
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 
@@ -117,5 +118,33 @@ public class HardwareShortcutFromLockscreenPreferenceControllerTest {
         mShadowAccessibilityManager.setAccessibilityShortcutTargets(HARDWARE, List.of("Foo"));
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getSummary_whenAvailable_shouldReturnAvailableSummary() {
+        // Setup: Make the controller available by setting a hardware shortcut target.
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(HARDWARE, List.of("Foo"));
+        final String expectedSummary = mContext.getString(
+                R.string.accessibility_shortcut_description);
+
+        // Action: Get the summary.
+        final CharSequence summary = mController.getSummary();
+
+        // Assertion: Verify the summary is the one for the available state.
+        assertThat(summary.toString()).isEqualTo(expectedSummary);
+    }
+
+    @Test
+    public void getSummary_whenUnavailable_shouldReturnUnavailableSummary() {
+        // Setup: Make the controller unavailable by having no hardware shortcut targets.
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(HARDWARE, List.of());
+        final String expectedSummary = mContext.getString(
+                R.string.a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary);
+
+        // Action: Get the summary.
+        final CharSequence summary = mController.getSummary();
+
+        // Assertion: Verify the summary is the one for the unavailable state.
+        assertThat(summary.toString()).isEqualTo(expectedSummary);
     }
 }
