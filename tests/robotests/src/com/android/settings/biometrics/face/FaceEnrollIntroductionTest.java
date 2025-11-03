@@ -17,9 +17,12 @@
 package com.android.settings.biometrics.face;
 
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
+import static android.hardware.biometrics.BiometricManager.Authenticators.IDENTITY_CHECK;
+import static android.hardware.biometrics.BiometricManager.BIOMETRIC_ERROR_IDENTITY_CHECK_NOT_ACTIVE;
 import static android.util.DisplayMetrics.DENSITY_DEFAULT;
 import static android.util.DisplayMetrics.DENSITY_XXXHIGH;
 
+import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_NEXT_LAUNCHED;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_LAUNCHED_POSTURE_GUIDANCE;
 import static com.android.settings.biometrics.BiometricUtils.DEVICE_POSTURE_CLOSED;
@@ -44,6 +47,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.Flags;
 import android.hardware.face.Face;
 import android.hardware.face.FaceEnrollOptions;
 import android.hardware.face.FaceManager;
@@ -52,6 +57,7 @@ import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.face.IFaceAuthenticatorsRegisteredCallback;
 import android.os.Looper;
 import android.os.UserHandle;
+import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -68,6 +74,7 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.MultiBiometricEnrollHelper;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
@@ -102,7 +109,9 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.ShadowBiometricManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,6 +126,7 @@ import java.util.List;
         SettingsShadowResources.class,
         ShadowAlertDialogCompat.class,
         FaceEnrollIntroductionTest.ShadowSettingsThemeHelper.class,
+        ShadowBiometricManager.class,
 })
 public class FaceEnrollIntroductionTest {
 
@@ -134,6 +144,7 @@ public class FaceEnrollIntroductionTest {
     private FakeFeatureFactory mFakeFeatureFactory;
     private ShadowUserManager mUserManager;
     private Resources mResources;
+    private ShadowBiometricManager mBiometricManager;
 
     enum GateKeeperAction {CALL_SUPER, RETURN_BYTE_ARRAY, THROW_CREDENTIAL_NOT_MATCH}
 
@@ -191,12 +202,18 @@ public class FaceEnrollIntroductionTest {
         public String getLaunchedFromPackage() {
             return getPackageName();
         }
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         ShadowUtils.setFaceManager(mFaceManager);
+        mContext = spy(ApplicationProvider.getApplicationContext());
         mUserManager = ShadowUserManager.getShadow();
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
 
@@ -235,7 +252,6 @@ public class FaceEnrollIntroductionTest {
 
         when(mFakeFeatureFactory.mFaceFeatureProvider.getPostureGuidanceIntent(any())).thenReturn(
                 null /* Simulate no posture intent */);
-        mContext = spy(ApplicationProvider.getApplicationContext());
         mUserManager.addUserProfile(new UserHandle(0));
         mController = Robolectric.buildActivity(
                 TestFaceEnrollIntroduction.class, testIntent);
@@ -263,7 +279,6 @@ public class FaceEnrollIntroductionTest {
         when(mFakeFeatureFactory.mFaceFeatureProvider.getPostureGuidanceIntent(any())).thenReturn(
                 testIntent);
 
-        mContext = spy(ApplicationProvider.getApplicationContext());
         mUserManager.addUserProfile(new UserHandle(0));
         mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, testIntent);
         mSpyActivity = (FaceEnrollIntroduction) spy(mController.get());
@@ -285,6 +300,12 @@ public class FaceEnrollIntroductionTest {
         }).when(mFaceManager).generateChallenge(anyInt(), any());
         mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
         mActivity = (TestFaceEnrollIntroduction) mController.get();
+    }
+
+    private void setupActivityForIdentityCheck() {
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class);
+        mActivity  = (TestFaceEnrollIntroduction) mController.setup().get();
+        mBiometricManager = Shadow.extract(mContext.getSystemService(BiometricManager.class));
     }
 
     private GlifLayout getGlifLayout(Activity activity) {
@@ -683,7 +704,6 @@ public class FaceEnrollIntroductionTest {
         // Enroll a face for one user
         setFaceManagerToHaveWithUserId(1, 0);
 
-        mContext = spy(ApplicationProvider.getApplicationContext());
         mResources = spy(mContext.getResources());
         when(mResources.getInteger(R.integer.suw_max_faces_enrollable)).thenReturn(1);
 
@@ -768,5 +788,60 @@ public class FaceEnrollIntroductionTest {
         assertThat(intent.hasExtra(MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL)).isFalse();
         assertThat(intent.hasExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE)).isFalse();
         assertThat(intent.hasExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FINGERPRINT)).isFalse();
+    }
+
+    @Test
+    public void onActivityResult_identityCheckActive_heckConfirmCredentialActivityStarted() {
+        setupActivityForIdentityCheck();
+
+        mBiometricManager.setAuthenticatorType(IDENTITY_CHECK);
+        mBiometricManager.setCanAuthenticate(true);
+
+        mActivity.onActivityResult(
+                CONFIRM_REQUEST,
+                Activity.RESULT_OK,
+                new Intent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L));
+
+        final Intent nextStartedActivity = Shadows.shadowOf(mActivity)
+                .getNextStartedActivity();
+
+        assertThat(nextStartedActivity.getComponent().getClassName())
+                .isEqualTo(ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
+    }
+
+    @Test
+    @RequiresFlagsEnabled({Flags.FLAG_BP_FALLBACK_OPTIONS})
+    public void onActivityResult_identityCheckActiveAndHardwareError_checkConfirmCredentialActivityStarted() {
+        setupActivityForIdentityCheck();
+        mBiometricManager.setAuthenticatorType(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
+
+        mActivity.onActivityResult(
+                CONFIRM_REQUEST,
+                Activity.RESULT_OK,
+                new Intent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L));
+
+        final Intent nextStartedActivity = Shadows.shadowOf(mActivity)
+                .getNextStartedActivity();
+
+        assertThat(nextStartedActivity.getComponent().getClassName())
+                .isEqualTo(ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
+    }
+
+    @Test
+    @RequiresFlagsEnabled({Flags.FLAG_BP_FALLBACK_OPTIONS})
+    public void onActivityResult_identityCheckActiveNotActive_noConfirmCredentialActivityStarted() {
+        setupActivityForIdentityCheck();
+        mBiometricManager.setAuthenticatorType(BIOMETRIC_ERROR_IDENTITY_CHECK_NOT_ACTIVE);
+
+        mActivity.onActivityResult(
+                CONFIRM_REQUEST,
+                Activity.RESULT_OK,
+                new Intent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L));
+
+        final Intent nextStartedActivity = Shadows.shadowOf(mActivity)
+                .getNextStartedActivity();
+
+        assertThat(nextStartedActivity.getComponent().getClassName())
+                .isNotEqualTo(ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
     }
 }

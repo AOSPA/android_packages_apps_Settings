@@ -18,7 +18,10 @@ package com.android.settings.biometrics.fingerprint;
 
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 import static android.content.Intent.EXTRA_USER_ID;
+import static android.hardware.biometrics.BiometricManager.Authenticators.IDENTITY_CHECK;
+import static android.hardware.biometrics.BiometricManager.BIOMETRIC_ERROR_IDENTITY_CHECK_NOT_ACTIVE;
 
+import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHALLENGE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN;
@@ -30,15 +33,19 @@ import static com.google.common.truth.Truth.assertWithMessage;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.ComponentInfoInternal;
+import android.hardware.biometrics.Flags;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintEnrollOptions;
@@ -46,18 +53,22 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Looper;
+import android.os.RemoteException;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.internal.widget.ILockSettings;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.GatekeeperPasswordProvider;
 import com.android.settings.biometrics.MultiBiometricEnrollHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
@@ -75,16 +86,24 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowBiometricManager;
+import org.robolectric.shadows.ShadowServiceManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowBiometricManager.class,
+})
 public class FingerprintEnrollIntroductionTest {
 
     @Mock private LockPatternUtils mLockPatternUtils;
     @Mock private FingerprintManager mFingerprintManager;
     @Mock private UserManager mUserManager;
+    @Mock private ILockSettings mLockSettings;
 
     private GatekeeperPasswordProvider mGatekeeperPasswordProvider;
 
@@ -92,13 +111,14 @@ public class FingerprintEnrollIntroductionTest {
 
     private TestFingerprintEnrollIntroduction mFingerprintEnrollIntroduction;
     private ActivityController<TestFingerprintEnrollIntroduction> mController;
+    private ShadowBiometricManager mBiometricManager;
 
     private static final int MAX_ENROLLMENTS = 5;
     private static final byte[] EXPECTED_TOKEN = new byte[] { 10, 20, 30, 40 };
     private static final long EXPECTED_CHALLENGE = 9876L;
 
     @Before
-    public void setUp() {
+    public void setUp() throws RemoteException {
         MockitoAnnotations.initMocks(this);
         mGatekeeperPasswordProvider = new GatekeeperPasswordProvider(mLockPatternUtils);
 
@@ -115,6 +135,11 @@ public class FingerprintEnrollIntroductionTest {
                         true /* resetLockoutRequiresHardwareAuthToken */);
         final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
         props.add(prop);
+        mBiometricManager = Shadow.extract(mContext.getSystemService(BiometricManager.class));
+        ShadowServiceManager.addBinderService("lock_settings", ILockSettings.class, mLockSettings);
+        when(mLockSettings.verifyGatekeeperPasswordHandle(anyLong(), anyLong(), anyInt()))
+                .thenAnswer((Answer<VerifyCredentialResponse>) invocation ->
+                        newGoodCredential(invocation.getArgument(0), EXPECTED_TOKEN));
         when(mFingerprintManager.getSensorPropertiesInternal()).thenReturn(props);
 
         when(mUserManager.getCredentialOwnerProfile(anyInt())).thenAnswer(
@@ -124,6 +149,7 @@ public class FingerprintEnrollIntroductionTest {
                 .thenAnswer((Answer<VerifyCredentialResponse>) invocation ->
                         newGoodCredential(invocation.getArgument(0), EXPECTED_TOKEN));
         doNothing().when(mLockPatternUtils).removeGatekeeperPasswordHandle(anyLong());
+        doReturn(mBiometricManager).when(mContext).getSystemService(BiometricManager.class);
     }
 
     void setupFingerprintEnrollIntroWith(@NonNull Intent intent) {
@@ -372,6 +398,59 @@ public class FingerprintEnrollIntroductionTest {
         assertThat(intent.hasExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FINGERPRINT)).isFalse();
     }
 
+    @Test
+    public void onActivityResult_identityCheckActive_checkCredentialActivity() {
+        mBiometricManager.setAuthenticatorType(IDENTITY_CHECK);
+        mBiometricManager.setCanAuthenticate(true);
+
+        setupFingerprintEnrollIntroWith(newTokenOnlyIntent());
+        mController.resume();
+
+        mFingerprintEnrollIntroduction.onActivityResult(
+                CONFIRM_REQUEST,
+                Activity.RESULT_OK, newGkPwHandleAndFromSettingsIntent());
+
+        final Intent nextStartedActivity = Shadows.shadowOf(mFingerprintEnrollIntroduction)
+                .getNextStartedActivity();
+        assertThat(nextStartedActivity.getComponent().getClassName())
+                .isEqualTo(ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
+    }
+
+    @Test
+    @RequiresFlagsEnabled({Flags.FLAG_BP_FALLBACK_OPTIONS})
+    public void onActivityResult_identityCheckActiveAndHardwareError_checkCredentialActivity() {
+        mBiometricManager.setAuthenticatorType(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
+
+        setupFingerprintEnrollIntroWith(newTokenOnlyIntent());
+        mController.resume();
+
+        mFingerprintEnrollIntroduction.onActivityResult(
+                CONFIRM_REQUEST,
+                Activity.RESULT_OK, newGkPwHandleAndFromSettingsIntent());
+
+        final Intent nextStartedActivity = Shadows.shadowOf(mFingerprintEnrollIntroduction)
+                .getNextStartedActivity();
+        assertThat(nextStartedActivity.getComponent().getClassName())
+                .isEqualTo(ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
+    }
+
+    @Test
+    @RequiresFlagsEnabled({Flags.FLAG_BP_FALLBACK_OPTIONS})
+    public void onActivityResult_identityCheckActiveNotActive_noActivityStarted() {
+        mBiometricManager.setAuthenticatorType(BIOMETRIC_ERROR_IDENTITY_CHECK_NOT_ACTIVE);
+
+        setupFingerprintEnrollIntroWith(newTokenOnlyIntent());
+        mController.resume();
+
+        mFingerprintEnrollIntroduction.onActivityResult(
+                CONFIRM_REQUEST,
+                Activity.RESULT_OK, newGkPwHandleAndFromSettingsIntent());
+
+        final Intent nextStartedActivity = Shadows.shadowOf(mFingerprintEnrollIntroduction)
+                .getNextStartedActivity();
+        assertThat(nextStartedActivity).isNull();
+    }
+
     private Intent newTokenOnlyIntent() {
         return new Intent()
                 .putExtra(EXTRA_KEY_CHALLENGE_TOKEN, new byte[] { 1 });
@@ -482,5 +561,9 @@ public class FingerprintEnrollIntroductionTest {
             super.onNextButtonClick(null);
         }
 
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
