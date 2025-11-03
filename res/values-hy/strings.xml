@@ -68,8 +68,7 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Վերանվանել"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Անջատե՞լ սարքը:"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Զուգակցել նոր սարք"</string>
-    <!-- no translation found for bluetooth_pairing_no_device_button_message (6429917002249666051) -->
-    <skip />
+    <string name="bluetooth_pairing_no_device_button_message" msgid="6429917002249666051">"Չե՞ք կարողանում գտնել ձեր սարքը"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Ավտոմատ միացնել վաղը"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Եթե անջատեք Bluetooth-ը, հաջորդ օրը այն նորից կմիանա"</string>
@@ -1027,6 +1026,8 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Էկրան միացված չէ"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Սկսելու համար միացրեք արտաքին էկրան կամ օգտագործեք այլ մալուխ"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Այլ ընտրանքներ"</string>
+    <!-- no translation found for external_display_pause_topology_hint (1128908588539457600) -->
+    <skip />
     <string name="external_display_topology_hint" msgid="885396727047321347">"Պահեք և քաշեք՝ էկրանները վերադասավորելու համար"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Հպեք՝ նավիգացիայի սլաքները ցուցադրելու համար"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Հպեք սլաքներին՝ էկրանները վերադասավորելու համար"</string>
@@ -1206,19 +1207,18 @@
     <string name="retry" msgid="7542103800274026915">"Կրկնել"</string>
     <string name="shared_message" msgid="2104244057926025072">"ընդհանուր օգտագործման"</string>
     <string name="private_message" msgid="5897966950396765392">"փակ"</string>
-    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Հաստատել"</string>
+    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
+    <skip />
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Չեղարկել"</string>
-    <!-- no translation found for wifi_share_preference_title (2000847347515149059) -->
+    <string name="wifi_share_preference_title" msgid="2000847347515149059">"Կիսվել ցանցով"</string>
+    <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Այս սարքի մյուս օգտատերերը կարող են օգտվել այս ցանցից"</string>
+    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
     <skip />
-    <!-- no translation found for wifi_share_preference_summary (3642772041628058748) -->
+    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
     <skip />
-    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"Միանա՞լ «<xliff:g id="NETWORK_NAME">%2$s</xliff:g>» <xliff:g id="SHARED">%1$s</xliff:g> ցանցին"</string>
-    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"Ներկայումս դուք միացած եք նույն անունով <xliff:g id="SHARED_0">%1$s</xliff:g> ցանցի։ Երբ փոխեք ցանցը, դուք կանջատվեք <xliff:g id="SHARED_1">%2$s</xliff:g> ցանցից, ապա կմիանաք <xliff:g id="PRIVATE">%3$s</xliff:g> ցանցին։ Այդ ընթացքում ինտերնետ կապը հնարավոր է, որ ժամանակավորապես ընդհատվի։"</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(անփոփոխ)"</string>
-    <!-- no translation found for wifi_allow_edit_configuration_title (701463165569293) -->
-    <skip />
-    <!-- no translation found for wifi_allow_edit_configuration_summary (2133654391010089827) -->
-    <skip />
+    <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Թույլատրել ցանցի փոփոխումը"</string>
+    <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Այլ օգտատերեր կարող են փոփոխություններ կատարել այս ցանցում"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Ընտրեք"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Ավելացվել են մի քանի վկայագրեր)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Օգտագործել համակարգի հավաստագրերը"</string>
@@ -1232,10 +1232,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Թույլատրել"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Մերժել"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*պարտադիր է"</string>
-    <!-- no translation found for wifi_shared_network_login_screen_warning (8298716960537761436) -->
-    <skip />
-    <!-- no translation found for edit_wifi_network_non_owner_message (4387650403845968672) -->
-    <skip />
+    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Սա ընդհանուր օգտագործման ցանց է։ Փոփոխություններ անելու համար մուտք գործեք հաշիվ։"</string>
+    <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Փոփոխություններ անելու համար կապվեք ցանցի սեփականատիրոջ կամ սարքի ադմինիստրատորի հետ։"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Այս ցանցը չունի կապ համացանցին: Մնա՞լ միացված:"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Որոշ հավելվածներ և ծառայություններ կարող են չաշխատել սահմանափակ կապի պատճառով։ Շարունակե՞լ։"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Չհարցնել այլևս այս ցանցի համար"</string>
@@ -1255,8 +1253,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Չհաջողվեց պահել ցանցը"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Չեղարկել"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Հեռացնե՞լ ցանցը"</string>
-    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"Ջնջե՞լ սարքի բոլոր օգտատերերի համար"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"«<xliff:g id="NETWORK_NAME">%1$s</xliff:g>» ցանցն օգտագործում են այս սարքի այլ օգտատերեր։ Նրանց բոլորին անհրաժեշտ կլինի նորից կարգավորել ցանցին միացումը։ Դեռ ուզո՞ւմ եք ջնջել այն։"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 ցանց}one{# ցանց}other{# ցանց}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 բաժանորդագրություն}one{# բաժանորդագրություն}other{# բաժանորդագրություն}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 ցանց և բաժանորդագրություն}one{# ցանց և բաժանորդագրություն}other{# ցանց և բաժանորդագրություն}}"</string>
@@ -1330,8 +1328,7 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 ԳՀց / Համատեղելի է շատ սարքերի հետ"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 ԳՀց / Համատեղելի է քիչ սարքերի հետ"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2,4 և 5 ԳՀց / Համատեղելի է սարքերի մեծամասնության հետ"</string>
-    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
-    <skip />
+    <string name="wifi_hotspot_speed_summary_2g_and_6g" msgid="5903589948734876821">"2,4 և 6 ԳՀց / Համատեղելի է սարքերի մեծամասնության հետ"</string>
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Ընտրեք հաճախականություն ձեր թեժ կետի համար։ Հաճախականությունից է կախված միացման արագությունը և այն, թե ինչ տեսակի սարքեր կկարողանան միանալ ձեր թեժ կետին։"</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Նախընտրելի հաճախականություն"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 ԳՀց"</string>
@@ -1342,10 +1339,8 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Բարձր արագություններ։ Այս երկդիապազոն թեժ կետը համատեղելի է սարքերի մեծամասնության հետ։"</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 ԳՀց"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Ամենաբարձր արագություններ։ Համատեղելի է քիչ սարքերի հետ։"</string>
-    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
-    <skip />
+    <string name="wifi_hotspot_speed_2g_6g" msgid="7660263835445953086">"2,4 և 6 ԳՀց"</string>
+    <string name="wifi_hotspot_speed_2g_6g_summary" msgid="5013590436817464652">"Ամենաբարձր արագություններ։ Այս երկդիապազոն թեժ կետը համատեղելի է սարքերի մեծամասնության հետ։"</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Ձեր երկրում/տարածաշրջանում հասանելի չէ"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Երբ նախընտրելի հաճախականությունը հասանելի չէ, ձեր թեժ կետը կարող է օգտագործել այլ հաճախականություն։ Եթե փոխեք հաճախականությունը, թեժ կետի անվտանգության կարգավորումները կարող են փոխվել։"</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Հասանելի չէ 6 ԳՀց հաճախականությամբ"</string>
@@ -2203,9 +2198,9 @@
     <string name="input_setting_bounce_keys_seekbar_desc" msgid="4575595566548124309">"Կրկնվող սեղմման անտեսման սահմանային ժամանակը"</string>
     <string name="input_setting_slow_keys_seekbar_desc" msgid="2171726970136563995">"Երկար սեղմման սահմանային ժամանակը"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Դանդաղ ստեղներ"</string>
-    <string name="slow_keys_summary" msgid="3852534180402969185">"Սահմանեք այն ժամանակը, երբ պետք է սեղմած պահեք ստեղնը, մինչև հրամանը կատարվի"</string>
+    <string name="slow_keys_summary" msgid="3852534180402969185">"Նշել, թե որքան ժամանակ պետք է սեղմած պահեք կոճակը, որպեսզի հրամանը կատարվի"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Կպչուն ստեղներ"</string>
-    <string name="sticky_keys_summary" msgid="1844953803625480623">"Դյուրանցումների համար միաժամանակ սեղմեք մեկ ստեղն, այլ ոչ թե միասին սեղմած պահեք մի քանիսը"</string>
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"Դյուրանցումների համար ստեղները հերթով սեղմել, ոչ թե միաժամանակ մի քանիսը"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Մկնիկի ստեղներ"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Կառավարել մկնիկը ստեղների միջոցով"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Մկնիկի ստեղների դյուրանցումներ"</string>
@@ -2741,7 +2736,10 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Եռակի հպեք էկրանին"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Հատուկ կարգավորումների դյուրանցումների փոփոխում"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Ընտրեք դյուրանցում հետևյալ գործառույթների համար՝ %1$s"</string>
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"Այս պարամետրը օգտագործելու համար միացրեք «%1$s» գործառույթի դյուրանցումը հատուկ գործառույթների էջում"</string>
+    <!-- no translation found for a11y_button_shortcut_unassigned_setting_unavailable_summary (8268632664568192689) -->
+    <skip />
+    <!-- no translation found for a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary (2232737783140069174) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Շարունակել"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Լսողական սարքեր"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Կարգավորեք և կառավարեք ASHA-ի և LE Audio-ի աջակցմամբ լսողական սարքերը, կոխլեար իմպլանտները և ձայնն ուժեղացնող այլ սարքեր"</string>
@@ -3168,7 +3166,8 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Ավտոմատ կերպով ընտրում է լավագույն կապը՝ մարտկոցի աշխատաժամանակը երկարացնելու համար"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Բջջային ցանցի անվտանգություն"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Ցանցի տեսակը, գաղտնագրում, ծանուցումների կառավարում"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Այս կարգավորումները օգնում են պաշտպանել ձեր զանգերը, հաղորդագրությունները և տվյալները հնացած կամ չգաղտնագրված ցանցերից, որոնք կարող են հանգեցնել ձեր տվյալների գողության կամ հետագծման"</string>
+    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
+    <skip />
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Բջջային ցանցի անվտանգություն"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Ծանուցումներ"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Ցանցային ծանուցումներ"</string>
@@ -5982,8 +5981,7 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Կարգավորեք PIN կոդ ծնողական վերահսկողության համար"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"վերահսկողություն, ծնողական վերահսկողություն, ծնողներ, ծնողական վերահսկողության pin կոդ, pin"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Կառավարեք ձեր PIN կոդը"</string>
-    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
-    <skip />
+    <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Կառավարել ծնողական վերահսկողության PIN կոդը"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Ծնողական վերահսկողության PIN կոդ"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Ծնողի PIN կոդ, ծնողական վերահսկողության PIN կոդ"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Ավելացնել հաշվի վերականգնման հասցե"</string>
@@ -6016,6 +6014,8 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Որոնման արդյունքներ"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Զտել մեծահասակների համար նախատեսված որոնման արդյունքները"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Միացված է # հավելված}one{Միացված է # հավելված}other{Միացված է # հավելված}}"</string>
+    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Երբ այս կարգավորումներն անջատված են, հաշվի այլ կարգավորումներ նախկինի պես կարող են կիրառվել։"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Մուտքագրեք ծնողական վերահսկողության PIN կոդը"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Սահմանեք ծնողական վերահսկողության PIN կոդ"</string>
@@ -6033,6 +6033,12 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Սխալ առաջացավ"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Փորձեք ավելի ուշ"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Վերադառնալ"</string>
+    <!-- no translation found for supervision_available_apps_title (886352413031517863) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Ինքնության ստուգումն աշխատում է ավելի շատ հավելվածների հետ"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Ինքնության ստուգումը կանխում է անցանկալի մուտքը ձեր հավելվածներ։ Այժմ հասանելի է ցանկացած հավելվածով, որն օգտագործում է մատնահետքով կամ դեմքով ապակողպում։"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Դիտել մանրամասները"</string>
@@ -6077,8 +6083,7 @@
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Փակված ծանուցումներ"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Փակե՞լ այս ծանուցումը"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Պաշտպանությունն ուժեղացնելու համար ցանկացած ժամանակ ստուգեք ձեր անվտանգության և գաղտնիության կարգավորումները"</string>
-    <!-- no translation found for safety_center_resolved_issue_fallback (223765674640909183) -->
-    <skip />
+    <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Գործողությունն ավարտված է"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Զուգակցում"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"«<xliff:g id="DEVICE_NAME">%1$s</xliff:g>» սարքը կապակցված է"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Սկանավորել սարքը"</string>

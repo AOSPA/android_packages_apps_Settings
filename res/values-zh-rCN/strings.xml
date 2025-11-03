@@ -68,8 +68,7 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"重命名"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"要断开与该设备的连接吗？"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"与新设备配对"</string>
-    <!-- no translation found for bluetooth_pairing_no_device_button_message (6429917002249666051) -->
-    <skip />
+    <string name="bluetooth_pairing_no_device_button_message" msgid="6429917002249666051">"找不到设备？"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"蓝牙"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"明天自动开启"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"蓝牙关闭后会在第二天重新开启"</string>
@@ -1027,6 +1026,8 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"未连接任何显示器"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"请连接外接显示器以开始使用，或尝试使用其他数据线"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"更多选项"</string>
+    <!-- no translation found for external_display_pause_topology_hint (1128908588539457600) -->
+    <skip />
     <string name="external_display_topology_hint" msgid="885396727047321347">"按住并拖动即可重新排列显示屏"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"点按即可显示导航箭头"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"点按箭头即可重新排列显示屏"</string>
@@ -1206,19 +1207,18 @@
     <string name="retry" msgid="7542103800274026915">"重试"</string>
     <string name="shared_message" msgid="2104244057926025072">"共享"</string>
     <string name="private_message" msgid="5897966950396765392">"私有"</string>
-    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"确认"</string>
+    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
+    <skip />
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"取消"</string>
-    <!-- no translation found for wifi_share_preference_title (2000847347515149059) -->
+    <string name="wifi_share_preference_title" msgid="2000847347515149059">"共享网络"</string>
+    <string name="wifi_share_preference_summary" msgid="3642772041628058748">"此设备上的其他用户可以访问此网络"</string>
+    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
     <skip />
-    <!-- no translation found for wifi_share_preference_summary (3642772041628058748) -->
+    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
     <skip />
-    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"要切换到<xliff:g id="SHARED">%1$s</xliff:g>的“<xliff:g id="NETWORK_NAME">%2$s</xliff:g>”网络吗？"</string>
-    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"您当前连接的<xliff:g id="SHARED_0">%1$s</xliff:g>网络与先前连接的网络同名。切换时，系统会先断开与<xliff:g id="SHARED_1">%2$s</xliff:g>网络的连接，然后重新连接到<xliff:g id="PRIVATE">%3$s</xliff:g>网络。您可能暂时无法连接到互联网。"</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"（未更改）"</string>
-    <!-- no translation found for wifi_allow_edit_configuration_title (701463165569293) -->
-    <skip />
-    <!-- no translation found for wifi_allow_edit_configuration_summary (2133654391010089827) -->
-    <skip />
+    <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"允许用户修改网络"</string>
+    <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"其他用户可以更改此网络"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"请选择"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"（已添加多份证书）"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"使用系统证书"</string>
@@ -1232,10 +1232,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"允许"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"拒绝"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*必填"</string>
-    <!-- no translation found for wifi_shared_network_login_screen_warning (8298716960537761436) -->
-    <skip />
-    <!-- no translation found for edit_wifi_network_non_owner_message (4387650403845968672) -->
-    <skip />
+    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"这是共享网络。您需要登录才能进行更改。"</string>
+    <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"如需更改，请联系网络所有者或设备管理员。"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"使用此网络将无法访问互联网。要继续保持连接吗？"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"部分应用和服务可能会因网络连接受限而无法正常使用。仍要使用吗？"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"对于此网络不再询问"</string>
@@ -1255,8 +1253,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"无法保存网络"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"取消"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"要取消保存网络吗？"</string>
-    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"要取消保存所有设备用户吗？"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"“<xliff:g id="NETWORK_NAME">%1$s</xliff:g>”已被此设备上的其他用户使用，使用此网络的所有用户都需要重新设置网络。仍要取消保存此网络吗？"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 个网络}other{# 个网络}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 项订阅}other{# 项订阅}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 个网络和订阅}other{# 个网络和订阅}}"</string>
@@ -2738,7 +2736,10 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"点按屏幕三次"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"修改无障碍快捷方式"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"为%1$s选择快捷键"</string>
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"如需使用此功能，请在无障碍功能页面上开启%1$s快捷方式"</string>
+    <!-- no translation found for a11y_button_shortcut_unassigned_setting_unavailable_summary (8268632664568192689) -->
+    <skip />
+    <!-- no translation found for a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary (2232737783140069174) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"继续"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"助听装置"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"设置和管理 ASHA 和 LE 音频助听器、人工耳蜗及其他扩音设备"</string>
@@ -3165,7 +3166,8 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"自动选择信号最好的网络连接，延长电池续航时间"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"移动网络安全"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"网络类型、加密、通知控制选项"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"这些设置有助于保护您的通话、消息和数据，以防他人利用过时或未加密的网络窃取或监视您的数据"</string>
+    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
+    <skip />
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"移动网络安全"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"通知"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"网络通知"</string>
@@ -6012,6 +6014,8 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"搜索结果"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"滤除含露骨内容的搜索结果"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{针对 # 款应用}other{针对 # 款应用}}"</string>
+    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"关闭这些设置后，其他账号设置可能仍起作用。"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"输入家长控制 PIN 码"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"设置家长控制 PIN 码"</string>
@@ -6029,6 +6033,12 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"出了点问题"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"请稍后重试"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"返回"</string>
+    <!-- no translation found for supervision_available_apps_title (886352413031517863) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"身份检查功能可用于更多应用"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"身份检查功能可阻止他人在未经授权的情况下访问您的应用。现在，所有使用指纹或人脸解锁的应用都支持此功能。"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"查看详情"</string>
@@ -6073,8 +6083,7 @@
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"忽略的提醒"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"要忽略此提醒吗？"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"您可以随时查看安全和隐私设置并加强保护"</string>
-    <!-- no translation found for safety_center_resolved_issue_fallback (223765674640909183) -->
-    <skip />
+    <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"操作完成"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"正在配对"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"已连接“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"扫描设备"</string>

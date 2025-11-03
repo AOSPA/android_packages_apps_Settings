@@ -1026,6 +1026,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Nenhum ecrã ligado"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Ligue um ecrã externo para começar ou experimente usar um cabo diferente"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Mais opções"</string>
+    <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"Pausar animação cíclica do texto da instrução"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Toque sem soltar e arraste para reorganizar os ecrãs"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Toque para mostrar as setas de navegação"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Toque nas setas para reorganizar os ecrãs"</string>
@@ -1205,12 +1206,15 @@
     <string name="retry" msgid="7542103800274026915">"Repetir"</string>
     <string name="shared_message" msgid="2104244057926025072">"partilhado"</string>
     <string name="private_message" msgid="5897966950396765392">"privado"</string>
-    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Confirmar"</string>
+    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
+    <skip />
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Cancelar"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"Partilhar rede"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Outros utilizadores neste dispositivo podem aceder a esta rede"</string>
-    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"Mudar para a rede <xliff:g id="SHARED">%1$s</xliff:g> \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\"?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"De momento, tem ligação estabelecida a uma rede <xliff:g id="SHARED_0">%1$s</xliff:g> com o mesmo nome. Quando mudar, vai desligar-se da rede <xliff:g id="SHARED_1">%2$s</xliff:g> e, em seguida, vai ser estabelecer ligação novamente à rede <xliff:g id="PRIVATE">%3$s</xliff:g>. Pode ficar temporariamente sem Internet."</string>
+    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
+    <skip />
     <string name="wifi_unchanged" msgid="8026045290856150191">"(sem alteração)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Permitir que os utilizadores editem a rede"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Outros utilizadores podem fazer alterações a esta rede"</string>
@@ -1248,8 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Não foi possível guardar a rede"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Cancelar"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Esqueceu-se da rede?"</string>
-    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"Esquecer todos os utilizadores do dispositivo?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"A rede <xliff:g id="NETWORK_NAME">%1$s</xliff:g> é usada por outros utilizadores neste dispositivo e todos os utilizadores desta rede vão ter de a configurar novamente. Ainda quer esquecer?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 rede}other{# redes}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 subscrição}other{# subscrições}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 rede e subscrição}other{# redes e subscrições}}"</string>
@@ -2237,8 +2241,7 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclados e ferramentas do perfil de trabalho"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Teclado no ecrã para trabalho"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Predefinição"</string>
-    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
-    <skip />
+    <string name="game_controller_settings_title" msgid="4322385924018377909">"Comandos de jogos"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad e rato"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Rato"</string>
@@ -2731,7 +2734,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tocar três vezes no ecrã."</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Edite os atalhos de acessibilidade"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Escolha o atalho para %1$s"</string>
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"Para usar esta funcionalidade, ative o atalho %1$s na página de uma funcionalidade de acessibilidade"</string>
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary" msgid="8268632664568192689">"Para usar esta função, ative o atalho do botão Acessibilidade na página de uma funcionalidade de acessibilidade"</string>
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary" msgid="2232737783140069174">"Para usar esta função, ative o atalho das teclas de volume na página de uma funcionalidade de acessibilidade"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuar"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Dispositivos auditivos"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configure e faça a gestão dos dispositivos auditivos ASHA e LE Audio, implantes cocleares e outros dispositivos de amplificação"</string>
@@ -3158,7 +3162,8 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Seleciona automaticamente a melhor ligação de rede para prolongar a autonomia da bateria"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Segurança de redes móveis"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tipo de rede, encriptação, controlos de notificação"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Estas definições ajudam a proteger as suas chamadas, mensagens e dados de redes desatualizadas ou não encriptadas que podem sujeitar os seus dados a roubo ou vigilância"</string>
+    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
+    <skip />
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Segurança de redes móveis"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notificações"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Notificações de redes"</string>
@@ -4324,8 +4329,7 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Eventos de calendário"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rotina da hora de dormir"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Durante a condução"</string>
-    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
-    <skip />
+    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"Em transportes públicos"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Definições da app"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informações e definições na app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Gerido pela app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4342,8 +4346,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Bloqueie as distrações ou interrupções do seu dispositivo para manter a concentração"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimine todas as distrações para um ambiente tranquilo"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalize as experiências e as definições do dispositivo para diferentes utilizadores"</string>
-    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
-    <skip />
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Desfrute de uma melhor viagem de transportes públicos com ajustes automáticos das definições"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimize as interrupções permitindo apenas que as pessoas e apps importantes entrem em contacto consigo"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Defina um modo que siga um horário regular"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Mantenha o seu dispositivo sincronizado com os eventos do seu dia"</string>
@@ -4352,8 +4355,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Concentre-se para manter o foco"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Para momentos em que a cortesia é importante"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Utilização guiada para ajudar a ficar em segurança"</string>
-    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
-    <skip />
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Otimize o seu dispositivo para uma experiência de transportes públicos mais fluida"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Controle a sua atenção"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Aviso"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Fechar"</string>
@@ -5937,7 +5939,7 @@
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Para ouvir a stream <xliff:g id="STREAM_NAME">%1$s</xliff:g>, as outras pessoas podem ligar auscultadores compatíveis ao respetivo dispositivo Android. Em seguida, podem ler este código QR."</string>
     <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Ouça a transmissão Auracast"</string>
     <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Desative a partilha de áudio para encontrar streams de áudio"</string>
-    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Encontre uma stream"</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Encontre uma stream de áudio"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Ouça um dispositivo que esteja a partilhar o áudio ou uma transmissão Auracast nas proximidades"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"O seu dispositivo de áudio"</string>
     <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Ligue auscultadores compatíveis"</string>
@@ -6005,6 +6007,8 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Resultados da pesquisa"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtrar resultados da pesquisa explícitos"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Em # app}other{Em # apps}}"</string>
+    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Quando estas definições estão desativadas, podem continuar a aplicar-se outras definições da conta."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Introduza o PIN dos controlos parentais"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Defina um PIN de controlos parentais"</string>
@@ -6022,6 +6026,11 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Algo correu mal"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Tente mais tarde"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Voltar"</string>
+    <string name="supervision_available_apps_title" msgid="886352413031517863">"Apps e serviços disponíveis"</string>
+    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"A Verificação de identidade funciona com mais apps"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"A Verificação de identidade impede o acesso indesejado às suas apps. Já disponível com qualquer app que use o Desbloqueio facial ou por impressão digital."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Ver detalhes"</string>

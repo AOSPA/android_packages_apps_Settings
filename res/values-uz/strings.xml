@@ -68,8 +68,7 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Qayta nomlash"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Qurilma uzib qo‘yilsinmi?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Yangi qurilmani juftlash"</string>
-    <!-- no translation found for bluetooth_pairing_no_device_button_message (6429917002249666051) -->
-    <skip />
+    <string name="bluetooth_pairing_no_device_button_message" msgid="6429917002249666051">"Qurilmangiz topilmadimi?"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Ertaga avtomatik yoqilsin"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Agar Bluetoothni oʻchirsangiz, u ertasi kuni yana yonadi"</string>
@@ -1027,6 +1026,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Hech qanday displey ulanmagan"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Ishni boshlash uchun tashqi displeyni ulang yoki boshqa kabeldan foydalaning"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Yana"</string>
+    <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"Bildirgi matn yuklanishi animatsiyasini pauza qilish"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Displeylarni qayta tartiblash uchun ushlab torting"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Yoʻnalish strelkalarini chiqarish uchun bosing"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Displeylarni qayta tartiblash uchun strelka tugmalarini bosing"</string>
@@ -1206,19 +1206,18 @@
     <string name="retry" msgid="7542103800274026915">"Qaytadan"</string>
     <string name="shared_message" msgid="2104244057926025072">"ommaga ochiq"</string>
     <string name="private_message" msgid="5897966950396765392">"yopiq"</string>
-    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Tasdiqlash"</string>
+    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
+    <skip />
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Bekor qilish"</string>
-    <!-- no translation found for wifi_share_preference_title (2000847347515149059) -->
+    <string name="wifi_share_preference_title" msgid="2000847347515149059">"Tarmoqni ulashish"</string>
+    <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Qurilmaning boshqa foydalanuvchilari bu tarmoqdan foydalanishi mumkin"</string>
+    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
     <skip />
-    <!-- no translation found for wifi_share_preference_summary (3642772041628058748) -->
+    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
     <skip />
-    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"“<xliff:g id="NETWORK_NAME">%2$s</xliff:g>” (<xliff:g id="SHARED">%1$s</xliff:g>) tarmoqqa almashtirilsinmi?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"Hozir bir xil nomli (<xliff:g id="SHARED_0">%1$s</xliff:g>) tarmoqqa ulangansiz. Almashtirsangiz, “<xliff:g id="SHARED_1">%2$s</xliff:g>” tarmoqdan uzilasiz va “<xliff:g id="PRIVATE">%3$s</xliff:g>” tarmoqqa ulanasiz. Internet vaqtincha uzilib qolishi mumkin."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(o‘zgartirilmagan)"</string>
-    <!-- no translation found for wifi_allow_edit_configuration_title (701463165569293) -->
-    <skip />
-    <!-- no translation found for wifi_allow_edit_configuration_summary (2133654391010089827) -->
-    <skip />
+    <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Foydalanuvchilar bu tarmoqni tahrirlashiga ruxsat"</string>
+    <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Boshqa foydalanuvchilar bu tarmoqqa oʻzgartirish kiritishi mumkin"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Tanlang"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Bir nechta sertifikatlar qo‘shildi)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Tizim sertifikatlaridan foydalanish"</string>
@@ -1232,10 +1231,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Ruxsat berish"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Rad etish"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*majburiy"</string>
-    <!-- no translation found for wifi_shared_network_login_screen_warning (8298716960537761436) -->
-    <skip />
-    <!-- no translation found for edit_wifi_network_non_owner_message (4387650403845968672) -->
-    <skip />
+    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Bu umumiy tarmoq. Oʻzgartirish kiritish uchun hisobga kirishingiz kerak."</string>
+    <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Oʻzgartirish kiritish uchun tarmoq egasi yoki qurilma administratoriga murojaat qiling."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Bu tarmoqda internet aloqasi yo‘q. Shu tarmoqda qolasizmi?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Ayrim ilova va xizmatlar cheklangan aloqada ishlamasligi mumkin. Baribir davom etilsinmi?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Bu tarmoq uchun boshqa so‘ralmasin"</string>
@@ -1255,8 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Tarmoqni saqlamadi"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Bekor qilish"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Tarmoq unutilsinmi?"</string>
-    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"Barcha qurilma foydalanuvchilari olib tashlansinmi?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> ushbu qurilmadagi boshqa foydalanuvchilar tomonidan ishlatiladi va ushbu tarmoqning barcha foydalanuvchilari uni qayta sozlashlari kerak boʻladi. Baribir olib tashlansinmi?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 ta tarmoq}other{# ta tarmoq}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 ta obuna}other{# ta obuna}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 ta tarmoq va obuna}other{# ta tarmoq va obuna}}"</string>
@@ -2738,7 +2735,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Ekran ustiga uch marta bosing"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Qulayliklarni tezkor ishga tushirish"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"%1$s uchun buyruq tanlang"</string>
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"Buni ishlatish uchun qulayliklar funksiyasi sahifasida %1$s yorligʻini yoqing"</string>
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary" msgid="8268632664568192689">"Bundan foydalanish uchun qulaylik funksiyasi sahifasida qulaylik tugmasi yorligʻini yoqing"</string>
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary" msgid="2232737783140069174">"Bundan foydalanish uchun qulaylik funksiyasi sahifasida tovush tugmalari yorligʻini yoqing"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Davom etish"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Eshitish qurilmalari"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA va LE Audio eshitish qurilmalari, koxlear implantlar va boshqa kuchaytiruvchi qurilmalarni sozlash va boshqarish"</string>
@@ -3165,7 +3163,8 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Batareya quvvatini uzaytirish uchun eng yaxshi tarmoq aloqasini avtomatik tanlaydi"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Mobil tarmoq xavfsizligi"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tarmoq turi, shifrlash, bildirishnomalar boshqaruvi"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Bu sozlamalar chaqiruvlar, xabarlar va maʼlumotlaringizni eski yoki shifrlanmagan tarmoqlardan himoyalashga yordam beradi, bu esa maʼlumotlar oʻgʻirlanishi yoki kuzatuvga olib kelishi mumkin"</string>
+    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
+    <skip />
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Mobil tarmoq xavfsizligi"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Bildirishnomalar"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Tarmoq bildirishnomalari"</string>
@@ -5419,7 +5418,7 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Quvvatlash gʻilofi"</string>
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Chap: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"O‘ng: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Jild: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Quti: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Batareya, chap: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Batareya, oʻng: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Batareya, gʻilofda: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
@@ -6012,6 +6011,8 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Qidiruv natijalari"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Behayo qidiruv natijalarini filtrlash"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{# ta ilovada}other{# ta ilovada}}"</string>
+    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Bu sozlamalar faolsizlantirilsa, boshqa hisob sozlamalari tatbiq etilishi mumkin."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Ota-ona nazorati PIN kodini kiriting"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Ota-ona nazorati PIN kodini sozlash"</string>
@@ -6029,6 +6030,11 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Xatolik yuz berdi"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Keyinroq qayta urining"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Orqaga"</string>
+    <string name="supervision_available_apps_title" msgid="886352413031517863">"Mavjud ilova va xizmatlar"</string>
+    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Kimlik tekshiruvi endi koʻproq ilovalarda ishlaydi"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Kimlik tekshiruvi ilovalar ruxsatsiz ochilishini cheklaydi. Endi Barmoq izi yoki Yuz bilan ochish mumkin istalgan ilovada ishlaydi."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Tafsilotlar"</string>
@@ -6073,8 +6079,7 @@
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Ogohlantirishlar yopildi"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Bu ogohlantirish yopilsinmi?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Himoyani kuchaytirish uchun xavfsizlik va maxfiylik sozlamalarini istalgan vaqt tekshiring"</string>
-    <!-- no translation found for safety_center_resolved_issue_fallback (223765674640909183) -->
-    <skip />
+    <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Amal bajarildi"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Juftlanmoqda"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ulandi"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Qurilmani skanerlash"</string>
