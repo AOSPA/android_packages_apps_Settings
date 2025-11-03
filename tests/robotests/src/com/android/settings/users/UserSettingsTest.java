@@ -20,7 +20,6 @@ import static android.os.UserManager.SWITCHABILITY_STATUS_OK;
 import static android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED;
 import static android.multiuser.Flags.FLAG_SHOW_POLICY_TRANSPARENCY_FOR_SYSTEM_RESTRICTIONS;
 
-import static com.android.settings.flags.Flags.FLAG_HIDE_USER_LIST_FOR_NON_ADMINS;
 import static com.android.settings.flags.Flags.FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF;
 import static com.android.settings.testutils.DevicePolicyUtils.DPC_ADMIN;
 import static com.android.settings.testutils.DevicePolicyUtils.SYSTEM_ADMIN;
@@ -1074,82 +1073,6 @@ public class UserSettingsTest {
         assertThat(adminPref).isSameInstanceAs(mMePreference);
         assertThat(adminPref.shouldHideSecondTarget()).isFalse();
         assertThat(secondaryPref.shouldHideSecondTarget()).isTrue();
-    }
-
-    @Test
-    @EnableFlags(FLAG_HIDE_USER_LIST_FOR_NON_ADMINS)
-    public void
-            updateUserList_nonAdminUsersWithSwitchingDisabledAndFeatureEnabled_userListIsHidden() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen,
-                true);
-        mUserCapabilities.mIsAdmin = false;
-        givenUsers(getAdminUser(false), getSecondaryUser(true));
-
-        mFragment.updateUserList();
-
-        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
-        verify(mFragment.mUserListCategory, times(1)).addPreference(captor.capture());
-
-        UserPreference secondaryPref = captor.getAllValues().get(0);
-        assertThat(secondaryPref).isSameInstanceAs(mMePreference);
-    }
-
-    @Test
-    @EnableFlags(FLAG_HIDE_USER_LIST_FOR_NON_ADMINS)
-    public void updateUserList_adminUsersWithSwitchingDisabledAndFeatureEnabled_userListIsShown() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen,
-                true);
-        mUserCapabilities.mIsAdmin = true;
-        givenUsers(getAdminUser(true), getSecondaryUser(false));
-
-        mFragment.updateUserList();
-
-        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
-        verify(mFragment.mUserListCategory, times(2)).addPreference(captor.capture());
-
-        List<UserPreference> userPrefs = captor.getAllValues();
-        UserPreference adminPref = userPrefs.get(0);
-        UserPreference secondaryPref = userPrefs.get(1);
-
-        assertThat(userPrefs.size()).isEqualTo(2);
-        assertThat(adminPref).isSameInstanceAs(mMePreference);
-        assertThat(secondaryPref.getUserId()).isEqualTo(INACTIVE_SECONDARY_USER_ID);
-        assertThat(secondaryPref.getTitle()).isEqualTo(SECONDARY_USER_NAME);
-        assertThat(secondaryPref.getIcon()).isNotNull();
-        assertThat(secondaryPref.getKey()).isEqualTo("id=" + INACTIVE_SECONDARY_USER_ID);
-        assertThat(secondaryPref.isEnabled()).isEqualTo(true);
-        assertThat(secondaryPref.isSelectable()).isEqualTo(true);
-        assertThat(secondaryPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
-    }
-
-    @Test
-    @DisableFlags(FLAG_HIDE_USER_LIST_FOR_NON_ADMINS)
-    public void
-            updateUserList_nonAdminUsersWithSwitchingDisabledAndFeatureDisabled_userListIsShown() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen, true);
-        mUserCapabilities.mIsAdmin = false;
-        givenUsers(getAdminUser(false), getSecondaryUser(true));
-
-        mFragment.updateUserList();
-
-        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
-        verify(mFragment.mUserListCategory, times(2)).addPreference(captor.capture());
-
-        List<UserPreference> userPrefs = captor.getAllValues();
-        UserPreference secondaryPref = userPrefs.get(0);
-        UserPreference adminPref = userPrefs.get(1);
-
-        assertThat(secondaryPref).isSameInstanceAs(mMePreference);
-        assertThat(adminPref.getUserId()).isEqualTo(INACTIVE_ADMIN_USER_ID);
-        assertThat(adminPref.getTitle()).isEqualTo(ADMIN_USER_NAME);
-        assertThat(adminPref.getIcon()).isNotNull();
-        assertThat(adminPref.getKey()).isEqualTo("id=" + INACTIVE_ADMIN_USER_ID);
-        assertThat(adminPref.isEnabled()).isEqualTo(true);
-        assertThat(adminPref.isSelectable()).isEqualTo(true);
-        assertThat(adminPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
     @Test

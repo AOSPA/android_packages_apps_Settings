@@ -16,7 +16,6 @@
 
 package com.android.settings.users;
 
-import static com.android.settings.flags.Flags.hideUserListForNonAdmins;
 import static com.android.settings.flags.Flags.showAddUsersFromSigninToggle;
 import static com.android.settings.flags.Flags.showUserDetailsSettingsForSelf;
 import static com.android.settingslib.Utils.getColorAttrDefaultColor;
@@ -1326,21 +1325,10 @@ public class UserSettings extends SettingsPreferenceFragment
 
         boolean canOpenUserDetails =
                 isCurrentUserAdmin() || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
-        boolean shouldShowOnlySelf =
-                hideUserListForNonAdmins()
-                        && !isCurrentUserAdmin()
-                        && getPrefContext()
-                                .getResources()
-                                .getBoolean(
-                                        com.android.internal.R.bool
-                                                .config_userSwitchingMustGoThroughLoginScreen);
         for (UserInfo user : users) {
             if (user.isGuest()) {
                 // Guest user is added to guest category via updateGuestCategory
                 // and not to user list so skip guest here
-                continue;
-            }
-            if (shouldShowOnlySelf && user.id != UserHandle.myUserId()) {
                 continue;
             }
             UserPreference pref;
