@@ -17,6 +17,8 @@
 package com.android.settings.deviceinfo.simstatus
 
 import android.content.Context
+import android.telephony.CellInfo
+import android.telephony.CellSignalStrength
 import android.telephony.ServiceState
 import android.telephony.SignalStrength
 import android.telephony.TelephonyCallback
@@ -42,13 +44,16 @@ class SignalStrengthRepository(
     },
 ) {
     fun signalStrengthDisplayFlow(subId: Int): Flow<String> =
-        serviceStateFlowFactory(subId).flatMapLatest { serviceState ->
-            if (Utils.isInService(serviceState)) {
-                signalStrengthFlow(subId).map { it.displayString() }
-            } else {
-                flowOf("0")
+        serviceStateFlowFactory(subId)
+            .flatMapLatest { serviceState ->
+                if (Utils.isInService(serviceState)) {
+                    signalStrengthFlow(subId).map { it.displayString() }
+                } else {
+                    flowOf("0")
+                }
             }
-        }.conflate().flowOn(Dispatchers.Default)
+            .conflate()
+            .flowOn(Dispatchers.Default)
 
     /** Creates an instance of a cold Flow for [SignalStrength] of given [subId]. */
     private fun signalStrengthFlow(subId: Int): Flow<SignalStrength> =
@@ -63,16 +68,17 @@ class SignalStrengthRepository(
         }
 
     private fun SignalStrength.displayString() =
-        context.getString(R.string.sim_signal_strength, signalDbm(), signalAsu())
+        signalValues().let { context.getString(R.string.sim_signal_strength, it.first, it.second) }
 
     private companion object {
         private const val TAG = "SignalStrengthRepo"
 
+        private fun CellSignalStrength.isAvailable(): Boolean =
+            dbm != -1 && dbm != CellInfo.UNAVAILABLE && asuLevel != -1 && asuLevel != 99
 
-        private fun SignalStrength.signalDbm(): Int =
-            cellSignalStrengths.firstOrNull { it.dbm != -1 }?.dbm ?: 0
+        private fun CellSignalStrength.signalValues(): Pair<Int, Int> = Pair(dbm, asuLevel)
 
-        private fun SignalStrength.signalAsu(): Int =
-            cellSignalStrengths.firstOrNull { it.asuLevel != -1 }?.asuLevel ?: 0
+        private fun SignalStrength.signalValues(): Pair<Int, Int> =
+            cellSignalStrengths.firstOrNull { it.isAvailable() }?.signalValues() ?: Pair(0, 99)
     }
 }
