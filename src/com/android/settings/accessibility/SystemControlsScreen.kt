@@ -58,7 +58,7 @@ open class SystemControlsScreen : PreferenceScreenMixin {
     override fun fragmentClass(): Class<out Fragment>? = SystemControlsFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +PowerButtonEndsCallPreference() }
 
     companion object {
         const val KEY = "system_controls_preference_screen"
