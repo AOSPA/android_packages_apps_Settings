@@ -20,7 +20,9 @@ import android.content.pm.PackageManager.MATCH_UNINSTALLED_PACKAGES
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import com.android.settings.R
@@ -44,8 +46,29 @@ class SupervisionWebContentFiltersSupportedAppsEntryPointPreference(
                 R.id.supervision_supported_apps_entry_point_icon_2,
                 R.id.supervision_supported_apps_entry_point_icon_3,
             )
+        val matrix = ColorMatrix()
+        matrix.setSaturation(0.0f)
+        val grayScaleFilter = ColorMatrixColorFilter(matrix)
         for ((index, supportedApp) in supportedApps.withIndex()) {
             if (index == iconIds.size) {
+                (holder.findViewById(
+                        R.id.supervision_supported_apps_entry_point_remaining_apps_count
+                    ) as? TextView)
+                    ?.apply {
+                        text =
+                            context.getString(
+                                R.string.supervision_remaining_supported_apps_count,
+                                supportedApps.size - 3,
+                            )
+                    }
+                (holder.findViewById(
+                        R.id.supervision_supported_apps_entry_point_remaining_apps_icon
+                    ) as? FrameLayout)
+                    ?.apply {
+                        visibility = View.VISIBLE
+                        alpha = if (isEnabled) ENABLED_ALPHA else DISABLED_ALPHA
+                        background?.colorFilter = if (isEnabled) null else grayScaleFilter
+                    }
                 break
             }
 
@@ -60,10 +83,7 @@ class SupervisionWebContentFiltersSupportedAppsEntryPointPreference(
                     contentDescription = supportedApp.title
                     visibility = View.VISIBLE
                     if (!isEnabled) {
-                        val matrix = ColorMatrix()
-                        matrix.setSaturation(0.0f)
-                        val filter = ColorMatrixColorFilter(matrix)
-                        colorFilter = filter
+                        colorFilter = grayScaleFilter
                         alpha = DISABLED_ALPHA
                     } else {
                         colorFilter = null

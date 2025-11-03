@@ -186,7 +186,7 @@ public class SettingsActivity extends SettingsBaseActivity
     private int mInitialTitleResId;
 
     private boolean mBatteryPresent = true;
-    private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -206,7 +206,7 @@ public class SettingsActivity extends SettingsBaseActivity
     private Button mNextButton;
 
     // Categories
-    private ArrayList<DashboardCategory> mCategories = new ArrayList<>();
+    private final ArrayList<DashboardCategory> mCategories = new ArrayList<>();
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
 
@@ -415,12 +415,12 @@ public class SettingsActivity extends SettingsBaseActivity
 
         // TODO: move Settings's ActivityEmbeddingUtils to SettingsLib.
         return !com.android.settingslib.activityembedding.ActivityEmbeddingUtils
-                        .shouldHideNavigateUpButton(this, isSecondLayerPage);
+                .shouldHideNavigateUpButton(this, isSecondLayerPage);
     }
 
     private boolean isSubSettings(Intent intent) {
         return this instanceof SubSettings ||
-            intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
+                intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
     }
 
     private boolean shouldShowMultiPaneDeepLink(Intent intent) {
@@ -467,16 +467,12 @@ public class SettingsActivity extends SettingsBaseActivity
             return false;
         }
 
-        if (TextUtils.equals(intent.getAction(), Intent.ACTION_CREATE_SHORTCUT)) {
-            // Returns false to show full screen for Intent.ACTION_CREATE_SHORTCUT because
-            // - Launcher startActivityForResult for Intent.ACTION_CREATE_SHORTCUT and activity
-            //   stack starts from launcher, CreateShortcutActivity will not follows SplitPaitRule
-            //   registered by Settings.
-            // - There is no CreateShortcutActivity entry point from Settings app UI.
-            return false;
-        }
-
-        return true;
+        // Returns false to show full screen for Intent.ACTION_CREATE_SHORTCUT because
+        // - Launcher startActivityForResult for Intent.ACTION_CREATE_SHORTCUT and activity
+        //   stack starts from launcher, CreateShortcutActivity will not follows SplitPaitRule
+        //   registered by Settings.
+        // - There is no CreateShortcutActivity entry point from Settings app UI.
+        return !TextUtils.equals(intent.getAction(), Intent.ACTION_CREATE_SHORTCUT);
     }
 
     /** Returns the initial calling package name that launches the activity. */
@@ -831,7 +827,7 @@ public class SettingsActivity extends SettingsBaseActivity
         // Final step, refresh categories.
         if (somethingChanged) {
             Log.d(LOG_TAG, "Enabled state changed for some tiles, reloading all categories "
-                    + changedList.toString());
+                    + changedList);
             mCategoryMixin.updateCategories();
         } else {
             Log.d(LOG_TAG, "No enabled state changed, skipping updateCategory call");

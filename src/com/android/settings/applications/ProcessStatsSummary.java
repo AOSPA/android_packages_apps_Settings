@@ -20,7 +20,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.icu.text.MessageFormat;
 import android.os.Bundle;
-import android.os.Flags;
 import android.provider.Settings;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
@@ -84,20 +83,12 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
         // enabled. Otherwise, it can immediately be hidden.
         mForceEnablePssProfiling =
                 (SwitchPreference) findPreference(KEY_FORCE_ENABLE_PSS_PROFILING);
-        if (Flags.removeAppProfilerPssCollection()) {
-            mForceEnablePssProfiling.setOnPreferenceClickListener(this);
-            // Make the toggle reflect the current state of the global setting.
-            mForceEnablePssProfiling.setChecked(isPssProfilingForceEnabled(getContext()));
-        } else {
-            mForceEnablePssProfiling.setVisible(false);
-        }
+        mForceEnablePssProfiling.setOnPreferenceClickListener(this);
+        // Make the toggle reflect the current state of the global setting.
+        mForceEnablePssProfiling.setChecked(isPssProfilingForceEnabled(getContext()));
     }
 
     private void refreshPreferences() {
-        // The memory fields should be static if the flag is not enabled.
-        if (!Flags.removeAppProfilerPssCollection()) {
-            return;
-        }
         mMemoryInfoPrefCategory.setVisible(mForceEnablePssProfiling.isChecked());
     }
 
@@ -107,7 +98,7 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
         refreshPreferences();
 
         // If PSS collection is not enabled, none of the following work needs to be done.
-        if (Flags.removeAppProfilerPssCollection() && !isPssProfilingForceEnabled(context)) {
+        if (!isPssProfilingForceEnabled(context)) {
             return;
         }
 

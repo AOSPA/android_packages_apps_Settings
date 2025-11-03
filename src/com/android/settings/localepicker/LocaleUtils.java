@@ -282,6 +282,20 @@ public class LocaleUtils {
         return result;
     }
 
+    public static int getFirstTranslatedLocalePosition(
+            List<LocaleStore.LocaleInfo> localeInfoList) {
+        // If no system language in the list than we should count its position as 0
+        // For example:
+        // 1) Cantonese, Fulah -> return 0
+        // 2) Fulah, English (US) -> return 2
+        for (int i = 0; i < localeInfoList.size(); i++) {
+            if (localeInfoList.get(i).isTranslated()) {
+                return i + 1;
+            }
+        }
+        return 0;
+    }
+
     public static LocaleStore.LocaleInfo mayAppendUnicodeTags(
             LocaleStore.LocaleInfo localeInfo, String recordTags) {
         if (TextUtils.isEmpty(recordTags) || TextUtils.equals("und", recordTags)) {

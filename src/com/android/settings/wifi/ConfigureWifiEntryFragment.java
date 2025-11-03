@@ -37,6 +37,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
@@ -86,7 +87,10 @@ public class ConfigureWifiEntryFragment extends InstrumentedFragment implements 
             @Override
             public void onUpdated() {
                 if (mWifiEntry.getConnectedState() == CONNECTED_STATE_CONNECTED) {
-                    getActivity().finish();
+                    FragmentActivity activity = getActivity();
+                    if (activity != null) {
+                        activity.finish();
+                    }
                 }
             }
         });

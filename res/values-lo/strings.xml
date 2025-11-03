@@ -68,6 +68,8 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"ປ່ຽນຊື່"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"ຕັດການເຊື່ອມຕໍ່ອຸປະກອນຫຼືບໍ່?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"ຈັບຄູ່ອຸປະກອນໃໝ່"</string>
+    <!-- no translation found for bluetooth_pairing_no_device_button_message (6429917002249666051) -->
+    <skip />
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"ເປີດໂດຍອັດຕະໂນມັດໃນມື້ອື່ນ"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"ຫາກທ່ານປິດ Bluetooth, ອຸປະກອນຈະເປີດອີກຄັ້ງໃນມື້ຕໍ່ໄປ"</string>
@@ -134,7 +136,6 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"ຮ້ອງຂໍການເຂົ້າເຖິງຂໍ້ຄວາມ"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"ສະແດງເປັນ \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\' ໃຫ້ອຸປະກອນອື່ນເຫັນ"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"ກະລຸນາເປີດໃຊ້ Bluetooth ເພື່ອເຊື່ອມຕໍ່ຫາອຸປະກອນອື່ນ."</string>
-    <string name="shared_network_footer" msgid="5178404860420039168">"ກະລຸນາຕິດຕໍ່ເຈົ້າຂອງເຄືອຂ່າຍ ຫຼື ຜູ້ເບິ່ງແຍງລະບົບອຸປະກອນເພື່ອດຳເນີນການປ່ຽນແປງເຄືອຂ່າຍນີ້."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"ອຸປະກອນຂອງທ່ານ"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"ຈັບຄູ່ອຸປະກອນໃໝ່"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"ປິດການອອບໂຫຼດຮາດແວ Bluetooth A2DP"</string>
@@ -143,8 +144,6 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"ທ່ານຕ້ອງຣີສະຕາດອຸປະກອນຂອງທ່ານເພື່ອປ່ຽນການຕັ້ງຄ່ານີ້."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"ຣີສະຕາດ"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"ຍົກເລີກ"</string>
-    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"ປິດການນຳໃຊ້ສຽງ Bluetooth LE"</string>
-    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"ປິດການນຳໃຊ້ຄຸນສົມບັດສຽງ Bluetooth LE ຫາກອຸປະກອນຮອງຮັບຄວາມສາມາດຂອງຮາດແວສຽງ LE."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"ໂໝດສຽງ Bluetooth LE"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"ສະແດງການສະຫຼັບສຽງ LE ໃນລາຍລະອຽດອຸປະກອນ"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"ຂ້າມລາຍຊື່ອະນຸຍາດສຽງ Bluetooth LE"</string>
@@ -1029,10 +1028,8 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"ເຊື່ອມຕໍ່ຫາໜ້າຈໍພາຍນອກເພື່ອເລີ່ມຕົ້ນ ຫຼື ລອງໃຊ້ສາຍອື່ນ"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"ຕົວເລືອກເພີ່ມເຕີມ"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"ກົດຄ້າງແລ້ວລາກເພື່ອຈັດຮຽງຈໍສະແດງຜົນຄືນໃໝ່"</string>
-    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
-    <skip />
-    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
-    <skip />
+    <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"ແຕະເພື່ອສະແດງລູກສອນນຳທາງ"</string>
+    <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"ແຕະລູກສອນເພື່ອຈັດຮຽງຈໍສະແດງຜົນຄືນໃໝ່"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"ສະທ້ອນການສະແດງຜົນທີ່ມີໃນຕົວ"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"ໃຊ້ການຕັ້ງຄ່າໃໝ່ບໍ?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"ຫາກຈໍສະແດງຜົນຂອງທ່ານບໍ່ເຮັດວຽກຕາມທີ່ທ່ານຕ້ອງການ, ທ່ານສາມາດແປງກັບຄືນໄປໃຊ້ການຕັ້ງຄ່າກ່ອນໜ້າຂອງທ່ານໄດ້"</string>
@@ -1042,6 +1039,10 @@
     <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"ຍ້າຍລົງ"</string>
     <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"ຍ້າຍໄປທາງຊ້າຍ"</string>
     <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"ຍ້າຍໄປທາງຂວາ"</string>
+    <string name="external_display_topology_a11y_display_moved_up" msgid="2006298475752942395">"ຈໍສະແດງຜົນ: %1$s ເລື່ອນຂຶ້ນແລ້ວ"</string>
+    <string name="external_display_topology_a11y_display_moved_down" msgid="6028544722984648702">"ຈໍສະແດງຜົນ: %1$s ເລື່ອນລົງແລ້ວ"</string>
+    <string name="external_display_topology_a11y_display_moved_left" msgid="5308110789317472437">"ຈໍສະແດງຜົນ: %1$s ເລື່ອນໄປທາງຊ້າຍແລ້ວ"</string>
+    <string name="external_display_topology_a11y_display_moved_right" msgid="3802527156765844475">"ຈໍສະແດງຜົນ: %1$s ເລື່ອນໄປທາງຂວາແລ້ວ"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ແວ່ນສະທ້ອນ"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ເປີດໃຊ້ງານການສະແດງພາບໄຮ້ສາຍ"</string>
@@ -1207,12 +1208,17 @@
     <string name="private_message" msgid="5897966950396765392">"ສ່ວນຕົວ"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"ຢືນຢັນ"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"ຍົກເລີກ"</string>
-    <string name="wifi_share_preference_title" msgid="6346200020322308703">"ເຄືອຂ່າຍນີ້ແມ່ນເຄືອຂ່າຍທີ່ແບ່ງປັນ"</string>
-    <string name="wifi_share_preference_summary" msgid="4356010425167713046">"ຜູ້ໃຊ້ທຸກຄົນຍົກເວັ້ນຜູ້ໃຊ້ແຂກຈະສາມາດເບິ່ງ, ແກ້ໄຂ ແລະ ລຶບເຄືອຂ່າຍນີ້ໄດ້"</string>
+    <!-- no translation found for wifi_share_preference_title (2000847347515149059) -->
+    <skip />
+    <!-- no translation found for wifi_share_preference_summary (3642772041628058748) -->
+    <skip />
     <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"ປ່ຽນເປັນເຄືອຂ່າຍ \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" <xliff:g id="SHARED">%1$s</xliff:g> ບໍ?"</string>
     <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"ຕອນນີ້ທ່ານເຊື່ອມຕໍ່ຢູ່ກັບເຄືອຂ່າຍ <xliff:g id="SHARED_0">%1$s</xliff:g> ທີ່ມີຊື່ດຽວກັນ. ເມື່ອທ່ານປ່ຽນ, ທ່ານຈະຕ້ອງຍົກເລີກການເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍ <xliff:g id="SHARED_1">%2$s</xliff:g> ແລ້ວເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍ <xliff:g id="PRIVATE">%3$s</xliff:g> ອີກຄັ້ງ. ທ່ານອາດບໍ່ມີອິນເຕີເນັດຊົ່ວຄາວ."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(ບໍ່ມີການປ່ຽນແປງ)"</string>
-    <string name="wifi_allow_edit_configuration_title" msgid="3928254385019370063">"ອະນຸຍາດໃຫ້ຜູ້ໃຊ້ຄົນອື່ນແກ້ໄຂການຕັ້ງຄ່າເຄືອຂ່າຍ"</string>
+    <!-- no translation found for wifi_allow_edit_configuration_title (701463165569293) -->
+    <skip />
+    <!-- no translation found for wifi_allow_edit_configuration_summary (2133654391010089827) -->
+    <skip />
     <string name="wifi_unspecified" msgid="4561964943472312208">"ກະລຸນາເລືອກ"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(ເພີ່ມຫຼາຍໃບຢັ້ງຢືນແລ້ວ)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"ໃຊ້ໃບຮັບຮອງລະບົບ"</string>
@@ -1226,11 +1232,10 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"ອະ​ນຸ​ຍາດ​"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"ປະ​ຕິ​ເສດ"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*ຕ້ອງລະບຸ"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"ນີ້ແມ່ນເຄືອຂ່າຍທີ່ແບ່ງປັນ. ທ່ານສາມາດປ່ຽນແປງການຕັ້ງຄ່ານີ້ໄດ້ເມື່ອເຂົ້າສູ່ລະບົບແລ້ວ."</string>
-    <string name="share_wifi_network" msgid="4064997404339571584">"ແບ່ງປັນເຄືອຂ່າຍນີ້ກັບຜູ້ໃຊ້ອຸປະກອນອື່ນ"</string>
-    <string name="share_wifi_network_summary" msgid="4316236421149769333">"ຜູ້ໃຊ້ທັງໝົດຢູ່ອຸປະກອນນີ້ສາມາດເບິ່ງ ແລະ ເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍທີ່ໄດ້ແບ່ງປັນ. ຜູ້ເບິ່ງແຍງລະບົບສາມາດລຶບເຄືອຂ່າຍທີ່ໄດ້ແບ່ງປັນ. ສຶກສາເພີ່ມເຕີມ"</string>
-    <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"ອະນຸຍາດໃຫ້ຜູ້ໃຊ້ອື່ນແກ້ໄຂການຕັ້ງຄ່າເຄືອຂ່າຍ"</string>
-    <string name="edit_wifi_network_non_owner_message" msgid="4291718452228643581">"ຕິດຕໍ່ຜູ້ເບິ່ງແຍງຂອງອຸປະກອນນີ້ເພື່ອດຳເນີນການປ່ຽນແປງຕໍ່ກັບເຄືອຂ່າຍນີ້."</string>
+    <!-- no translation found for wifi_shared_network_login_screen_warning (8298716960537761436) -->
+    <skip />
+    <!-- no translation found for edit_wifi_network_non_owner_message (4387650403845968672) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"ເຄືອຂ່າຍນີ້ບໍ່ມີການເຂົ້າເຖິງອິນເຕີເນັດ. ສືບຕໍ່ເຊື່ອມຕໍ່ບໍ?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"ບາງແອັບ ແລະ ບາງບໍລິການອາດບໍ່ສາມາດໃຊ້ໄດ້ເນື່ອງຈາກມີການເຊື່ອມຕໍ່ທີ່ຈຳກັດ. ຢືນຢັນການນຳໃຊ້ບໍ?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"ຢ່າ​ຖາມ​ອີກ​ສຳ​ລັບ​ເຄືອ​ຂ່າຍ​ນີ້"</string>
@@ -1325,6 +1330,8 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / ສາມາດເຂົ້າກັນໄດ້ກັບອຸປະກອນຈຳນວນຫຼາຍ"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / ສາມາດເຂົ້າກັນໄດ້ກັບອຸປະກອນຈຳນວນໜ້ອຍ"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2.4 ແລະ 5 GHz / ສາມາດເຂົ້າກັນໄດ້ກັບອຸປະກອນສ່ວນໃຫຍ່"</string>
+    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
+    <skip />
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"ເລືອກຄວາມຖີ່ສຳລັບຮັອດສະປອດຂອງທ່ານ. ຄວາມຖີ່ມີຜົນຕໍ່ຄວາມໄວໃນການເຊື່ອມຕໍ່ ແລະ ປະເພດອຸປະກອນທີ່ສາມາດຊອກຫາຮັອດສະປອດຂອງທ່ານໄດ້."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"ຄວາມຖີ່ທີ່ຕ້ອງການ"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
@@ -1335,6 +1342,10 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"ຄວາມໄວສູງ. ຮັອດສະປອດແບບຄື້ນຄູ່ນີ້ສາມາດເຂົ້າກັນໄດ້ກັບອຸປະກອນສ່ວນໃຫຍ່."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"ຄວາມໄວສູງສຸດ. ສາມາດເຂົ້າກັນໄດ້ກັບອຸປະກອນຈຳນວນໜ້ອຍ."</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
+    <skip />
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"ບໍ່ມີໃຫ້ນຳໃຊ້ໃນປະເທດ ຫຼື ພາກພື້ນຂອງທ່ານ"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"ຫາກບໍ່ມີຄວາມຖີ່ທີ່ທ່ານຕ້ອງການ, ຮັອດສະປອດຂອງທ່ານອາດໃຊ້ຄວາມຖີ່ອື່ນ. ການຕັ້ງຄ່າຄວາມປອດໄພຮັອດສະປອດອາດປ່ຽນແປງຫາກທ່ານປ່ຽນຄວາມຖີ່."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"ບໍ່ສາມາດໃຊ້ໄດ້ກັບ 6 GHz"</string>
@@ -2236,6 +2247,8 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"ແປ້ນພິມໂປຣໄຟລ໌ວຽກ ແລະ ເຄື່ອງມື"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"ແປ້ນພິມໃນໜ້າຈໍສຳລັບວຽກ"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ຄ່າເລີ່ມຕົ້ນ"</string>
+    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
+    <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"ແຜ່ນສຳຜັດ"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"ແຜ່ນສຳຜັດ ແລະ ເມົ້າ"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"ເມົ້າ"</string>
@@ -2933,6 +2946,10 @@
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"ເບິ່ງການນຳໃຊ້ຕັ້ງແຕ່ສາກຈົນເຕັມຫຼ້າສຸດ"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
+    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
+    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
+    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
+    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"ການໃຊ້ແບັດເຕີຣີຂອງແອັບ"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"ໃຊ້ລາຍລະອຽດ"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"ປັບແຕ່ງການໃຊ້ພະລັງງານ"</string>
@@ -3491,8 +3508,7 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"ທ່ານເປັນຜູ້ເບິ່ງແຍງລະບົບພຽງຄົນດຽວໃນອຸປະກອນນີ້ ດັ່ງນັ້ນຈຶ່ງບໍ່ສາມາດລຶບໂປຣໄຟລ໌ຜູ້ໃຊ້ຂອງທ່ານໄດ້. ຫາກທ່ານຕ້ອງການລຶບໂປຣໄຟລ໌ຜູ້ໃຊ້ຂອງທ່ານ, ທ່ານສາມາດກຳນົດໃຫ້ຜູ້ໃຊ້ຄົນອື່ນເປັນຜູ້ເບິ່ງແຍງລະບົບ ຫຼື ລຶບຂໍ້ມູນທັງໝົດອອກຈາກອຸປະກອນໄດ້ໂດຍເຂົ້າໄປລະບົບ &gt; ຕົວເລືອກການຣີເຊັດ &gt; ລຶບຂໍ້ມູນທັງໝົດ (ຣີເຊັດເປັນຄ່າຈາກໂຮງງານ)."</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"ບໍ່ສາມາດລຶບສິດທິຜູ້ເບິ່ງແຍງລະບົບອອກໄດ້"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"ທ່ານເປັນຜູ້ໃຊ້ຜູ້ເບິ່ງແຍງລະບົບພຽງຄົນດຽວໃນອຸປະກອນນີ້. ຫາກທ່ານບໍ່ຕ້ອງການເປັນຜູ້ເບິ່ງແຍງລະບົບອີກຕໍ່ໄປ, ທ່ານຕ້ອງກຳນົດໃຫ້ຜູ້ໃຊ້ຄົນອື່ນເປັນຜູ້ເບິ່ງແຍງລະບົບກ່ອນ."</string>
-    <!-- no translation found for add_user_summary_action_restricted (6276344792683243643) -->
-    <skip />
+    <string name="add_user_summary_action_restricted" msgid="6276344792683243643">"ຖືກບລັອກໂດຍນະໂຍບາຍບ່ອນເຮັດວຽກ"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"ຂໍ້ມູນສຸກເສີນ"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"ຂໍ້ມູນ ແລະ ລາຍຊື່ຜູ້ຕິດຕໍ່ສຳລັບ <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"ເປີດ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4318,6 +4334,8 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"ນັດໝາຍປະຕິທິນ"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"ສິ່ງທີ່ເຮັດປະຈຳໃນເວລານອນ"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"ໃນຂະນະຂັບລົດ"</string>
+    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
+    <skip />
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"ການຕັ້ງຄ່າແອັບ"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"ຂໍ້ມູນ ແລະ ການຕັ້ງຄ່າໃນ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"ຈັດການໂດຍ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4334,6 +4352,8 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"ບລັອກສິ່ງລົບກວນ ຫຼື ສິ່ງຂັດຈັງຫວະຈາກອຸປະກອນຂອງທ່ານເພື່ອໃຫ້ມີສະມາທິຫຼາຍຂຶ້ນ"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"ກຳຈັດສິ່ງລົບກວນທັງໝົດເພື່ອສະພາບແວດລ້ອມທີ່ງຽບສະຫງົບ"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"ປັບແຕ່ງປະສົບການໃນການໃຊ້ອຸປະກອນ ແລະ ການຕັ້ງຄ່າສຳລັບຜູ້ໃຊ້ທີ່ແຕກຕ່າງກັນໃຫ້ເປັນແບບສ່ວນຕົວ"</string>
+    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
+    <skip />
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"ຫຼຸດການລົບກວນໂດຍການອະນຸຍາດສະເພາະບຸກຄົນ ແລະ ແອັບທີ່ສຳຄັນເທົ່ານັ້ນໃນການຕິດຕໍ່ຫາທ່ານ"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"ຕັ້ງຄ່າໂໝດທີ່ເປັນໄປຕາມກຳນົດເວລາປົກກະຕິ"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"ຊິ້ງອຸປະກອນຂອງທ່ານກັບນັດໝາຍປະຈຳວັນຂອງທ່ານ"</string>
@@ -4342,6 +4362,8 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"ເພີ່ມສະມາທິເພື່ອຕັ້ງໃຈກັບສິ່ງທີ່ຕ້ອງເຮັດ"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"ສຳລັບເວລາທີ່ມາລະຍາດເປັນເລື່ອງສຳຄັນ"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"ການນຳໃຊ້ແບບມີຄຳແນະນຳເພື່ອຊ່ວຍທ່ານໄດ້ຮັບການເບິ່ງແຍງຢ່າງດີ"</string>
+    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
+    <skip />
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"ຄວບຄຸມຄວາມສົນໃຈຂອງທ່ານ"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"ຄໍາເຕືອນ"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"ປິດ"</string>
@@ -4875,12 +4897,10 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"ຄວາມລະອຽດອ່ອນທີ່ສູງຂຶ້ນອາດຂັດແຍ່ງກັບທ່າທາງແອັບໃດໆທີ່ມີຢູ່ຂອບຈໍ."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"ຄວາມໄວຂອງການເລື່ອນກັບຫຼັງ"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"ການນຳທາງແບບທ່າທາງ"</string>
-    <!-- no translation found for gesture_settings_button_description (7916105652019436751) -->
-    <skip />
+    <string name="gesture_settings_button_description" msgid="7916105652019436751">"ການຕັ້ງຄ່າການນຳທາງແບບທ່າທາງ"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"ລອງໃຊ້ການສາທິດ"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ການນຳທາງແບບປຸ່ມ"</string>
-    <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
-    <skip />
+    <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"ການຕັ້ງຄ່າການນຳທາງປຸ່ມ"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"ລຳດັບຂອງປຸ່ມ"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"ລຳດັບປຸ່ມ, ຍ້າຍປຸ່ມ, ໂໝດມືຊ້າຍ, ໂໝດມືຂວາ"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"ກັບຄືນ"</string>
@@ -5962,6 +5982,8 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"ຕັ້ງຄ່າ PIN ການຄວບຄຸມຂອງພໍ່ແມ່"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"ການເບິ່ງແຍງກວດກາ, ການຄວບຄຸມຂອງພໍ່ແມ່, ຜູ້ປົກຄອງ, PIN ການເບິ່ງແຍງກວດກາ, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"ຈັດການ PIN ຂອງທ່ານ"</string>
+    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
+    <skip />
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN ການຄວບຄຸມຂອງພໍ່ແມ່"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN ຜູ້ປົກຄອງ, PIN ການຄວບຄຸມຂອງພໍ່ແມ່"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"ເພີ່ມອີເມວກູ້ຂໍ້ມູນ"</string>
@@ -6007,8 +6029,7 @@
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"ລຶບ ແລະ ປິດ"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"ອະນິເມຊັນ <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"ບໍ່ສາມາດເປີດການຄວບຄຸມໄດ້"</string>
-    <!-- no translation found for supervision_setup_multi_profile_error_title (7538001161488140882) -->
-    <skip />
+    <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"ບໍ່ສາມາດໃຊ້ການຄວບຄຸມໄດ້"</string>
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"ມີບາງຢ່າງຜິດພາດເກີດຂຶ້ນ"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"ກັບຄືນ"</string>
@@ -6025,25 +6046,18 @@
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"ການຕື່ມຂໍ້ມູນອັດຕະໂນມັດ, ການແຈ້ງເຕືອນ ແລະ ອື່ນໆ"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"ການຄວບຄຸມຄວາມເປັນສ່ວນຕົວ"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"ການອະນຸຍາດ, ການຄວບຄຸມ"</string>
-    <!-- no translation found for app_security_subpage_title (397183486243670441) -->
-    <skip />
+    <string name="app_security_subpage_title" msgid="397183486243670441">"ຄວາມປອດໄພຂອງແອັບ"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"ການປົດລັອກອຸປະກອນ"</string>
-    <!-- no translation found for account_security_subpage_title (3676085534746127966) -->
-    <skip />
-    <!-- no translation found for device_finders_subpage_title (2390688647994924006) -->
-    <skip />
-    <!-- no translation found for system_and_updates_subpage_title (5274185686741552322) -->
-    <skip />
-    <!-- no translation found for cellular_network_security_subpage_title (1191202157978621337) -->
-    <skip />
+    <string name="account_security_subpage_title" msgid="3676085534746127966">"ຄວາມປອດໄພຂອງບັນຊີ"</string>
+    <string name="device_finders_subpage_title" msgid="2390688647994924006">"ຕົວຊອກຫາອຸປະກອນ"</string>
+    <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"ລະບົບ ແລະ ການອັບເດດ"</string>
+    <string name="cellular_network_security_subpage_title" msgid="1191202157978621337">"ຄວາມປອດໄພເຄືອຂ່າຍມືຖື"</string>
     <string name="location_settings" msgid="6833222354060094170">"ສິດເຂົ້າເຖິງສະຖານທີ່"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"ເບິ່ງແອັບ ແລະ ບໍລິການທີ່ມີສິດເຂົ້າເຖິງສະຖານທີ່"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"ການກວດສອບຕົວຕົນເຮັດວຽກຮ່ວມກັບແອັບອື່ນໆອີກ"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"ການກວດສອບຕົວຕົນຈະປ້ອງກັນການເຂົ້າເຖິງແອັບຂອງທ່ານທີ່ບໍ່ພຶງປະສົງ. ຕອນນີ້ພ້ອມນຳໃຊ້ກັບທຸກແອັບທີ່ໃຊ້ການປົດລັອກດ້ວຍລາຍນິ້ວມື ຫຼື ການປົດລັອກດ້ວຍໜ້າ."</string>
-    <!-- no translation found for identity_check_watch_notification_title (5559702400315647907) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_notification_summary (3200144847521451493) -->
-    <skip />
+    <string name="identity_check_watch_notification_title" msgid="5559702400315647907">"ການກວດສອບຕົວຕົນ ແລະ ໂມງຂອງທ່ານ"</string>
+    <string name="identity_check_watch_notification_summary" msgid="3200144847521451493">"ເມື່ອເຊື່ອມຕໍ່ໂມງແລ້ວ, ການກວດສອບຕົວຕົນຈະເພີ່ມວິທີອື່ນໆໃນການຢັ້ງຢືນວ່າແມ່ນທ່ານເພື່ອປ້ອງກັນການເຂົ້າເຖິງແອັບທີ່ບໍ່ພຶງປະສົງ"</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"ເບິ່ງລາຍລະອຽດ"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"ກວດສອບການຕັ້ງຄ່າບໍ່ໄດ້"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"ບໍ່ມີຂໍ້ມູນເທື່ອ"</string>
@@ -6055,24 +6069,21 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
     <string name="safety_center_device_finders_search_terms" msgid="2703625009760905100"></string>
-    <!-- no translation found for safety_center_system_and_updates_summary (6301092688146734950) -->
-    <skip />
+    <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"ອັບເດດ"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <!-- no translation found for safety_center_cellular_network_security_summary (4746047200732665728) -->
-    <skip />
+    <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"ປະເພດເຄືອຂ່າຍ, ການເຂົ້າລະຫັດ, ການຄວບຄຸມການແຈ້ງເຕືອນ"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"ແຈ້ງເຕືອນເພີ່ມເຕີມ"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"ແຈ້ງເຕືອນໜ້ອຍລົງ"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"ການແຈ້ງເຕືອນທີ່ປິດໄປແລ້ວ"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"ປິດແຈ້ງເຕືອນນີ້ບໍ?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"ກວດສອບການຕັ້ງຄ່າການຮັກສາຄວາມປອດໄພ ແລະ ຄວາມເປັນສ່ວນຕົວຂອງທ່ານໄດ້ທຸກເວລາເພື່ອເພີ່ມການປ້ອງກັນເພີ່ມເຕີມ"</string>
+    <!-- no translation found for safety_center_resolved_issue_fallback (223765674640909183) -->
+    <skip />
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"ກຳລັງຈັບຄູ່"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"ເຊື່ອມຕໍ່ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ແລ້ວ"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"ສະແກນອຸປະກອນ"</string>
     <string name="satellite_tile_label" msgid="1098132989724404617">"ດາວທຽມ"</string>
-    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
-    <skip />
-    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
-    <skip />
-    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
-    <skip />
+    <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"ເປີດ"</string>
+    <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"ພ້ອມນຳໃຊ້"</string>
+    <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"ບໍ່ພ້ອມນຳໃຊ້"</string>
 </resources>

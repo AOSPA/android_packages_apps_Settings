@@ -24,9 +24,6 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.Bundle
-import android.platform.test.annotations.RequiresFlagsEnabled
-import android.platform.test.flag.junit.CheckFlagsRule
-import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.security.Flags
 import android.security.advancedprotection.AdvancedProtectionManager
 import android.security.advancedprotection.AdvancedProtectionManager.FEATURE_ID_DISALLOW_CELLULAR_2G
@@ -56,14 +53,10 @@ import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-@RequiresFlagsEnabled(Flags.FLAG_AAPM_API)
 @RunWith(AndroidJUnit4::class)
 class ActionDisabledByAdvancedProtectionDialogTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ActionDisabledByAdvancedProtectionDialog>()
-
-    @get:Rule
-    val checkFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
     private val mockPackageManager = mock<PackageManager>()
 

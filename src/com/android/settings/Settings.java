@@ -126,6 +126,7 @@ public class Settings extends SettingsActivity {
     public static class PhysicalKeyboardLayoutPickerActivity extends SettingsActivity {
         /* empty */
     }
+    public static class GameControllerActivity extends SettingsActivity { /* empty */ }
     public static class InputMethodAndSubtypeEnablerActivity extends SettingsActivity { /* empty */ }
     public static class SpellCheckersSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the language settings. */

@@ -21,11 +21,17 @@ import android.app.Application
 import android.app.KeyguardManager
 import android.app.role.RoleManager.ROLE_SYSTEM_SUPERVISION
 import android.app.settings.SettingsEnums
+import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
+import android.app.supervision.flags.Flags
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
+import android.content.pm.ApplicationInfo
+import android.content.pm.ResolveInfo
 import android.content.pm.UserInfo
 import android.hardware.biometrics.BiometricManager
 import android.os.Build
@@ -34,6 +40,8 @@ import android.os.Process
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
@@ -63,6 +71,7 @@ import org.robolectric.shadows.ShadowBinder
 import org.robolectric.shadows.ShadowContextImpl
 import org.robolectric.shadows.ShadowKeyguardManager
 import org.robolectric.shadows.ShadowRoleManager
+import org.robolectric.shadows.ShadowServiceManager
 
 @RunWith(AndroidJUnit4::class)
 class ConfirmSupervisionCredentialsActivityTest {
@@ -70,6 +79,9 @@ class ConfirmSupervisionCredentialsActivityTest {
     private val mockUserManager = mock<UserManager>()
     private val mockActivityManager = mock<ActivityManager>()
     private val mockSupervisionManager = mock<SupervisionManager>()
+    private val mockISupervisionManager = mock<ISupervisionManager>()
+
+    @get:Rule val setFlagsRule = SetFlagsRule()
     private val context = ApplicationProvider.getApplicationContext<Context>()
     private val currentUser = context.user
 
@@ -87,6 +99,13 @@ class ConfirmSupervisionCredentialsActivityTest {
         ShadowRoleManager.reset()
         setUpActivity(forceConfirm = false)
         SupervisionAuthController.sInstance = null
+        ShadowServiceManager.addBinderService(
+            Context.SUPERVISION_SERVICE,
+            ISupervisionManager::class.java,
+            mockISupervisionManager,
+        )
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(emptyList())
     }
 
     @Test
@@ -182,7 +201,9 @@ class ConfirmSupervisionCredentialsActivityTest {
         val outState = Bundle()
         mActivityController.saveInstanceState(outState)
         assertThat(
-                outState.getBoolean(ConfirmSupervisionCredentialsActivity.KEY_BIOMETRIC_PROMPT_SHOWN)
+                outState.getBoolean(
+                    ConfirmSupervisionCredentialsActivity.KEY_BIOMETRIC_PROMPT_SHOWN
+                )
             )
             .isTrue()
     }
@@ -264,8 +285,9 @@ class ConfirmSupervisionCredentialsActivityTest {
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
     }
 
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     @Test
-    fun onCreate_noSupervisingCredential_startSetupActivity() {
+    fun onCreate_noSupervisingCredential_flagDisabled_startSetupActivity() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }
@@ -278,6 +300,99 @@ class ConfirmSupervisionCredentialsActivityTest {
             .isEqualTo(SetupSupervisionActivity::class.java.name)
     }
 
+    @Test
+    fun onCreate_noSupervisingCredential_noApprovalMethods_finish() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mockActivityManager.stub { on { startProfile(any()) } doReturn true }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+
+        mActivityController.setup()
+
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
+    }
+
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    @Test
+    fun onCreate_noSupervisingCredential_noApprovalMethods_startsSetup() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(emptyList())
+
+        mActivityController.setup()
+
+        assertThat(mActivity.isFinishing).isFalse()
+        val nextActivity = shadowActivity.nextStartedActivity
+        assertThat(nextActivity.component?.className)
+            .isEqualTo(SetupSupervisionActivity::class.java.name)
+    }
+
+    @Test
+    fun onCreate_noSupervisingCredential_oneApprovalMethod_launchesMethodDirectly() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+        val resolveInfo =
+            ResolveInfo().apply {
+                activityInfo =
+                    ActivityInfo().apply {
+                        packageName = "com.example.approval"
+                        name = "ApprovalActivity"
+                    }
+            }
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(listOf(resolveInfo))
+
+        mActivityController.setup()
+
+        assertThat(mActivity.isFinishing).isFalse()
+        val nextActivity = shadowActivity.nextStartedActivity
+        assertThat(nextActivity.action)
+            .isEqualTo(SupervisionManager.ACTION_CONFIRM_SUPERVISION_APPROVAL)
+        assertThat(nextActivity.component?.className).isEqualTo("ApprovalActivity")
+    }
+
+    @Test
+    fun onCreate_noSupervisingCredential_multipleApprovalMethods_showsChooser() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+        val applicationInfo = ApplicationInfo().apply { packageName = "com.example.approval" }
+        val resolveInfo1 =
+            ResolveInfo().apply {
+                activityInfo =
+                    ActivityInfo().apply {
+                        packageName = "com.example.approval"
+                        name = "ApprovalActivity1"
+                        nonLocalizedLabel = "method 1"
+                        this.applicationInfo = applicationInfo
+                    }
+            }
+        val resolveInfo2 =
+            ResolveInfo().apply {
+                activityInfo =
+                    ActivityInfo().apply {
+                        packageName = "com.example.approval"
+                        name = "ApprovalActivity2"
+                        nonLocalizedLabel = "method 2"
+                        this.applicationInfo = applicationInfo
+                    }
+            }
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(listOf(resolveInfo1, resolveInfo2))
+
+        mActivityController.setup()
+
+        assertThat(mActivity.isFinishing).isFalse()
+        val dialog = mActivity.supportFragmentManager.findFragmentByTag("ApprovalMethodChooser")
+        assertThat(dialog).isInstanceOf(ApprovalMethodChooserDialogFragment::class.java)
+        assertThat(dialog?.isAdded).isTrue()
+    }
+
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     @Test
     fun onCreate_onStartSetupActivity_onDestroy_notStopProfile() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
@@ -310,10 +425,8 @@ class ConfirmSupervisionCredentialsActivityTest {
 
         // Act: Simulate the USER_STOPPED broadcast for the supervising user
         val intent =
-            Intent(Intent.ACTION_USER_STOPPED).putExtra(
-                Intent.EXTRA_USER_HANDLE,
-                SUPERVISING_USER_ID
-            )
+            Intent(Intent.ACTION_USER_STOPPED)
+                .putExtra(Intent.EXTRA_USER_HANDLE, SUPERVISING_USER_ID)
         shadowOf(ApplicationProvider.getApplicationContext<Application>())
             .getReceiversForIntent(intent)
             .first()
@@ -327,7 +440,9 @@ class ConfirmSupervisionCredentialsActivityTest {
         val outState = Bundle()
         mActivityController.saveInstanceState(outState)
         assertThat(
-                outState.getBoolean(ConfirmSupervisionCredentialsActivity.KEY_BIOMETRIC_PROMPT_SHOWN)
+                outState.getBoolean(
+                    ConfirmSupervisionCredentialsActivity.KEY_BIOMETRIC_PROMPT_SHOWN
+                )
             )
             .isTrue()
     }
@@ -347,10 +462,8 @@ class ConfirmSupervisionCredentialsActivityTest {
 
         // Act: Simulate the USER_STOPPED broadcast
         val intent =
-            Intent(Intent.ACTION_USER_STOPPED).putExtra(
-                Intent.EXTRA_USER_HANDLE,
-                SUPERVISING_USER_ID
-            )
+            Intent(Intent.ACTION_USER_STOPPED)
+                .putExtra(Intent.EXTRA_USER_HANDLE, SUPERVISING_USER_ID)
         shadowOf(ApplicationProvider.getApplicationContext<Application>())
             .getReceiversForIntent(intent)
             .first()
@@ -376,10 +489,8 @@ class ConfirmSupervisionCredentialsActivityTest {
 
         // Act: Simulate USER_STOPPED broadcast for a different user
         val intent =
-            Intent(Intent.ACTION_USER_STOPPED).putExtra(
-                Intent.EXTRA_USER_HANDLE,
-                SUPERVISING_USER_ID + 1
-            )
+            Intent(Intent.ACTION_USER_STOPPED)
+                .putExtra(Intent.EXTRA_USER_HANDLE, SUPERVISING_USER_ID + 1)
         shadowOf(ApplicationProvider.getApplicationContext<Application>())
             .getReceiversForIntent(intent)
             .first()
@@ -392,8 +503,11 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     fun getBiometricPrompt_recoveryEmailExist_showForgotPinButton() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         val recoveryInfo = SupervisionRecoveryInfo("email", "default", STATE_PENDING, null)
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
+        mActivityController.setup()
 
         val biometricPrompt = mActivity.getBiometricPrompt()
 
@@ -422,7 +536,10 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     fun getBiometricPrompt_recoveryInfoEmpty_noForgotPinButton() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
+        mActivityController.setup()
 
         val biometricPrompt = mActivity.getBiometricPrompt()
 
@@ -432,6 +549,92 @@ class ConfirmSupervisionCredentialsActivityTest {
         assertThat(biometricPrompt.allowedAuthenticators)
             .isEqualTo(BiometricManager.Authenticators.DEVICE_CREDENTIAL)
         assertThat(biometricPrompt.getFallbackOptions()).isEmpty()
+    }
+
+    @Test
+    fun getBiometricPrompt_withApprovalMethods_showsFallbackOptions() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+        val activityInfo1 =
+            ActivityInfo().apply {
+                packageName = "pkg"
+                name = "Activity1"
+            }
+        val resolveInfo1 =
+            ResolveInfo().apply {
+                activityInfo = activityInfo1
+                nonLocalizedLabel = "Method 1"
+            }
+        val activityInfo2 =
+            ActivityInfo().apply {
+                packageName = "pkg"
+                name = "Activity2"
+            }
+        val resolveInfo2 =
+            ResolveInfo().apply {
+                activityInfo = activityInfo2
+                nonLocalizedLabel = "Method 2"
+            }
+        val approvalMethods = listOf(resolveInfo1, resolveInfo2)
+        val componentName = ComponentName("pkg", "test")
+        val extras = Bundle().apply { putBoolean("key_boolean", true) }
+        val intentWithExtras = Intent().putExtras(extras)
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(approvalMethods)
+        setUpActivity(forceConfirm = false, intent = intentWithExtras)
+        mActivityController.setup()
+
+        val biometricPrompt = mActivity.getBiometricPrompt()
+
+        val fallbackOptions = biometricPrompt.getFallbackOptions()
+        assertThat(fallbackOptions).isNotNull()
+        assertThat(fallbackOptions).hasSize(2)
+        assertThat(fallbackOptions.map { it.getText().toString() })
+            .containsExactly("Method 1", "Method 2")
+
+        mActivity.onApprovalMethodsClicked(componentName)
+
+        val startedActivity = shadowActivity.nextStartedActivity
+        assertThat(startedActivity).isNotNull()
+        assertThat(startedActivity.action)
+            .isEqualTo(SupervisionManager.ACTION_CONFIRM_SUPERVISION_APPROVAL)
+        assertThat(startedActivity.extras?.getBoolean("key_boolean")).isTrue()
+    }
+
+    @Test
+    fun getBiometricPrompt_noApprovalMethods_showsNoFallbackOptions() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mActivityController.setup()
+        val biometricPrompt = mActivity.getBiometricPrompt()
+
+        val fallbackOptions = biometricPrompt.getFallbackOptions()
+        assertThat(fallbackOptions).isEmpty()
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun getBiometricPrompt_flagDisabled_withApprovalMethods_showsNoFallbackOptions() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        val activityInfo1 =
+            ActivityInfo().apply {
+                packageName = "pkg"
+                name = "Activity1"
+            }
+        val resolveInfo1 =
+            ResolveInfo().apply {
+                activityInfo = activityInfo1
+                nonLocalizedLabel = "Method 1"
+            }
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(listOf(resolveInfo1))
+        mActivityController.setup()
+        val biometricPrompt = mActivity.getBiometricPrompt()
+        val fallbackOptions = biometricPrompt.getFallbackOptions()
+
+        assertThat(fallbackOptions).isEmpty()
     }
 
     @Test
@@ -446,24 +649,23 @@ class ConfirmSupervisionCredentialsActivityTest {
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
     }
 
-    private fun setUpActivity(forceConfirm: Boolean) {
+    private fun setUpActivity(forceConfirm: Boolean, intent: Intent = Intent()) {
         // Note, we have to use ActivityController (instead of ActivityScenario) in order to access
         // the activity before it is created, so we can set up various mocked responses before they
         // are referenced in onCreate.
         if (forceConfirm) {
-            val intent = Intent().putExtra(EXTRA_FORCE_CONFIRMATION, true)
-            mActivityController =
-                Robolectric.buildActivity(ConfirmSupervisionCredentialsActivity::class.java, intent)
-        } else {
-            mActivityController =
-                Robolectric.buildActivity(ConfirmSupervisionCredentialsActivity::class.java)
+            intent.putExtra(EXTRA_FORCE_CONFIRMATION, true)
         }
+        mActivityController =
+            Robolectric.buildActivity(ConfirmSupervisionCredentialsActivity::class.java, intent)
         mActivity = mActivityController.get()
 
         shadowActivity = shadowOf(mActivity)
         shadowActivity.setCallingPackage(callingPackage)
         shadowKeyguardManager = shadowOf(mActivity.getSystemService(KeyguardManager::class.java))
         Shadow.extract<ShadowContextImpl>(mActivity.baseContext).apply {
+            // Mock the ISupervisionManager service
+            setSystemService(Context.SUPERVISION_SERVICE, mockISupervisionManager.asBinder())
             setSystemService(Context.ACTIVITY_SERVICE, mockActivityManager)
             setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
             setSystemService(Context.USER_SERVICE, mockUserManager)

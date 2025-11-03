@@ -1391,7 +1391,7 @@ public class WifiDetailPreferenceController2Test {
         verify(mMockMetricsFeatureProvider, never())
                 .action(mMockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
         verify(mController).showConfirmForgetDialog(
-                R.string.shared_wifi_forget_dialog_title,
+                R.string.wifi_forget_dialog_title,
                 mContext.getString(R.string.shared_wifi_forget_dialog_message, label));
     }
 

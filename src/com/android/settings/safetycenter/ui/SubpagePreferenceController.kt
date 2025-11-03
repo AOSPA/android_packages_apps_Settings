@@ -170,7 +170,7 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
     }
 
     private fun getRelatedSafetySourcesData(data: SafetyCenterUiData): List<SafetyCenterEntry> {
-        val entries = data.getEntriesForSources(relatedSafetySources)
+        val entries = data.getDynamicEntriesForSources(relatedSafetySources)
         Log.d(
             TAG,
             "[$preferenceKey] Found ${entries.size} entries for sources: $relatedSafetySources",

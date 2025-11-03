@@ -158,6 +158,9 @@ android_library {
         "device_policy_aconfig_flags",
         "keyboard_flags",
     ],
+    lint: {
+        baseline_filename: "lint-baseline.xml",
+    },
 }
 
 platform_compat_config {

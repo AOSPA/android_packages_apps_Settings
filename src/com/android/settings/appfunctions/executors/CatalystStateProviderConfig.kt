@@ -307,6 +307,8 @@ private fun getCatalystScreenConfigs() =
             enabled = true,
             screenKey = ConversationListScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+            additionalDescription =
+                ": Settings to manage and customize how conversations are displayed in notifications.",
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = DateTimeSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoScreen.KEY),
@@ -336,6 +338,8 @@ private fun getCatalystScreenConfigs() =
             enabled = true,
             screenKey = BubbleNotificationScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+            additionalDescription =
+                ": Settings to manage and customize how bubbles are displayed for notifications.",
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = ResetDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DisplayOverOtherAppsAppListScreen.KEY),
@@ -346,6 +350,8 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = InteractAcrossProfilesAppListScreen.KEY,
+            additionalDescription =
+                ": Apps that share permissions and can access each other's data between personal and work profiles.",
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = PictureInPictureAppListScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiControlAppListScreen.KEY),
@@ -384,9 +390,25 @@ private fun getCatalystScreenConfigs() =
             screenKey = WifiHotspotScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
-        PerScreenCatalystConfig(enabled = true, screenKey = WifiDisplayScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = AppsNotificationAccessScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = PreviouslyConnectedDeviceScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = WifiDisplayScreen.KEY,
+            additionalDescription =
+                ": Settings to configure Cast options to send screen or media to other devices.",
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = AppsNotificationAccessScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+            additionalDescription =
+                ": Settings to manage apps that can read, reply and control notifications.",
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = PreviouslyConnectedDeviceScreen.KEY,
+            additionalDescription =
+                ": Settings to show the list of previously connected Bluetooth devices.",
+        ),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = ButtonNavigationSettingsScreen.KEY,

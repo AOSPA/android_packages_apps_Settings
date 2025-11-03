@@ -26,6 +26,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.shadows.ShadowSystemProperties
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner::class)
 class SystemControlsPreferenceControllerTest {
 
@@ -62,3 +63,4 @@ class SystemControlsPreferenceControllerTest {
         private const val SUPPORT_ONE_HANDED_MODE: String = "ro.support_one_handed_mode"
     }
 }
+// LINT.ThenChange(SystemControlsScreenTest.kt)

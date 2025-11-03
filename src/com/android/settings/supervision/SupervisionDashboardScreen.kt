@@ -66,10 +66,11 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
 
             private fun refreshPreferences() {
                 lifeCycleContext?.notifyPreferenceChange(KEY)
-                lifeCycleContext?.notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
                 lifeCycleContext?.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
                 if (Flags.enableSupervisionSettingsUiUpdates()) {
                     lifeCycleContext?.notifyPreferenceChange(SupervisionSetUpPinPreference.KEY)
+                } else {
+                    lifeCycleContext?.notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
                 }
             }
         }
@@ -148,13 +149,6 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
             val supervisionClient = getSupervisionClient(context)
             if (Flags.enableSupervisionSettingsUiUpdates()) {
                 +SupervisionRecoveryBannerPreference() order -250
-            }
-            +SupervisionMainSwitchPreference(context, supervisionClient) order -200
-            if (!Flags.enableSupervisionSettingsUiUpdates()) {
-                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
-                    +SupervisionWebContentFiltersScreen.KEY order 100
-                }
-            } else {
                 +NonIndexablePreferenceCategory(
                     SUPERVISION_DYNAMIC_GROUP_1,
                     R.string.device_supervision_features_title,
@@ -162,6 +156,11 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                 +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2) order 10 += {
                     +SupervisionAppStoreFiltersScreen.KEY order -100
                     +SupervisionWebContentFiltersScreen.KEY order -50
+                }
+            } else {
+                +SupervisionMainSwitchPreference(context, supervisionClient) order -200
+                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
+                    +SupervisionWebContentFiltersScreen.KEY order 100
                 }
             }
             +UntitledPreferenceCategoryMetadata("pin_management_group") order 100 += {
@@ -175,10 +174,19 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                     ACTIVE_SUPERVISION_APPS_GROUP,
                     R.string.supervision_apps_managing_this_device_title,
                 ) order 200
-            }
-            +UntitledPreferenceCategoryMetadata("footer_group") order 300 += {
-                +SupervisionPromoFooterPreference(supervisionClient) order 30
-                +SupervisionAocFooterPreference(supervisionClient) order 40
+                +AutoHidingPreferenceCategory(
+                    AVAILABLE_SUPERVISION_APPS_GROUP,
+                    R.string.supervision_available_apps_title,
+                ) order 300 +=
+                    {
+                        +SupervisionPromoFooterPreference(supervisionClient) order 30
+                    }
+                +SupervisionAocFooterPreference(supervisionClient) order 400
+            } else {
+                +UntitledPreferenceCategoryMetadata("footer_group") order 300 += {
+                    +SupervisionPromoFooterPreference(supervisionClient) order 30
+                    +SupervisionAocFooterPreference(supervisionClient) order 40
+                }
             }
         }
 
@@ -215,6 +223,10 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
         const val KEY = "top_level_supervision"
         internal const val SUPERVISION_DYNAMIC_GROUP_1 = "supervision_features_group_1"
         internal const val SUPERVISION_DYNAMIC_GROUP_2 = "supervision_features_group_2"
+        internal val FEATURE_GROUP_KEYS =
+            listOf(SUPERVISION_DYNAMIC_GROUP_1, SUPERVISION_DYNAMIC_GROUP_2)
         internal const val ACTIVE_SUPERVISION_APPS_GROUP = "active_supervision_apps_group"
+
+        internal const val AVAILABLE_SUPERVISION_APPS_GROUP = "available_supervision_apps_group"
     }
 }
