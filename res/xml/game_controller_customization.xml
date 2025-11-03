@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Copyright 2025 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="game_controller_remapping">
+    <PreferenceCategory
+        android:key="game_controller_key_remapping"
+        android:title="@string/game_controller_key_remapping">
+
+        <Preference
+            android:icon="@drawable/ic_controller_button_a"
+            android:key="controller_button_a"
+            android:title="@string/game_controller_button_a" />
+        <Preference
+            android:icon="@drawable/ic_controller_button_b"
+            android:key="controller_button_b"
+            android:title="@string/game_controller_button_b" />
+        <Preference
+            android:icon="@drawable/ic_controller_button_x"
+            android:key="controller_button_x"
+            android:title="@string/game_controller_button_x" />
+        <Preference
+            android:icon="@drawable/ic_controller_button_y"
+            android:key="controller_button_y"
+            android:title="@string/game_controller_button_y" />
+        <Preference
+            android:icon="@drawable/ic_controller_button_l1"
+            android:key="controller_button_l1"
+            android:title="@string/game_controller_button_l1" />
+        <Preference
+            android:icon="@drawable/ic_controller_button_r1"
+            android:key="controller_button_r1"
+            android:title="@string/game_controller_button_r1" />
+        <Preference
+            android:icon="@drawable/ic_controller_button_l2"
+            android:key="controller_button_l2"
+            android:title="@string/game_controller_button_l2" />
+        <Preference
+            android:icon="@drawable/ic_controller_button_r2"
+            android:key="controller_button_r2"
+            android:title="@string/game_controller_button_r2" />
+        <Preference
+            android:icon="@drawable/ic_controller_button_thumbl"
+            android:key="controller_button_thumbl"
+            android:title="@string/game_controller_button_thumbl" />
+        <Preference
+            android:icon="@drawable/ic_controller_button_thumbr"
+            android:key="controller_button_thumbr"
+            android:title="@string/game_controller_button_thumbr" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="game_controller_axis_remapping"
+        android:title="@string/game_controller_stick_remapping">
+
+        <Preference
+            android:icon="@drawable/ic_controller_dpad"
+            android:key="controller_dpad"
+            android:title="@string/game_controller_dpad" />
+        <Preference
+            android:icon="@drawable/ic_controller_left_stick"
+            android:key="controller_stick_left"
+            android:title="@string/game_controller_stick_left" />
+        <Preference
+            android:icon="@drawable/ic_controller_right_stick"
+            android:key="controller_stick_right"
+            android:title="@string/game_controller_stick_right" />
+    </PreferenceCategory>
+</PreferenceScreen>
