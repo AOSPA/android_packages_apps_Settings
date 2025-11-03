@@ -1324,7 +1324,11 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         boolean canOpenUserDetails =
-                isCurrentUserAdmin() || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
+                isCurrentUserAdmin()
+                        || (canSwitchUserNow()
+                                && !mUserCaps.mDisallowSwitchUser
+                                && mUserCaps.mUserSwitchingUiEnabled);
+
         for (UserInfo user : users) {
             if (user.isGuest()) {
                 // Guest user is added to guest category via updateGuestCategory
@@ -1501,7 +1505,10 @@ public class UserSettings extends SettingsPreferenceFragment
         UserPreference pref = null;
         boolean isGuestAlreadyCreated = false;
         boolean canOpenUserDetails =
-                isCurrentUserAdmin() || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
+                isCurrentUserAdmin()
+                        || (canSwitchUserNow()
+                                && !mUserCaps.mDisallowSwitchUser
+                                && mUserCaps.mUserSwitchingUiEnabled);
 
         mGuestUserCategory.removeAll();
         mGuestUserCategory.setVisible(false);
