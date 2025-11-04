@@ -19,6 +19,7 @@ import android.app.Activity
 import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
 import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.UserInfo
@@ -26,11 +27,15 @@ import android.os.UserManager
 import android.os.UserManager.USER_TYPE_FULL_SECONDARY
 import android.os.UserManager.USER_TYPE_FULL_SYSTEM
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.google.common.truth.Truth.assertThat
 import java.util.function.Consumer
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.KArgumentCaptor
@@ -57,6 +62,8 @@ import org.robolectric.shadows.ShadowRoleManager
 @Config(shadows = [SettingsShadowResources::class])
 @RunWith(RobolectricTestRunner::class)
 class DisableSupervisionActivityTest {
+    @get:Rule val setFlagsRule = SetFlagsRule()
+
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockUserManager = mock<UserManager>()
     private val mockRoleManager = mock<RoleManager>()
@@ -175,6 +182,7 @@ class DisableSupervisionActivityTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onCreate_multipleSupervisedUsers_disablesSupervisionAndKeepsData() {
         mockRoleManager.stub {
             on { getRoleHolders(RoleManager.ROLE_SUPERVISION) } doReturn listOf(CALLING_PACKAGE)
@@ -190,6 +198,28 @@ class DisableSupervisionActivityTest {
         verify(mockSupervisionManager).setSupervisionEnabled(false)
         verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
         verify(mockUserManager, never()).removeUserEvenWhenDisallowed(any<Int>())
+        verifyRemoveSupervisionRole(/* times= */ 1).firstValue.accept(true) // Role removal succeeds
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
+        assertThat(mActivity.isFinishing).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_multipleSupervisedUsers_disablesSupervisionAndDeletesData() {
+        mockRoleManager.stub {
+            on { getRoleHolders(RoleManager.ROLE_SUPERVISION) } doReturn listOf(CALLING_PACKAGE)
+        }
+        mockSupervisionManager.stub {
+            on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
+            on { isSupervisionEnabledForUser(SECONDARY_USER_ID) } doReturn true
+            on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
+        }
+
+        mActivityController.create()
+
+        verify(mockSupervisionManager).setSupervisionEnabled(false)
+        verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
+        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
         verifyRemoveSupervisionRole(/* times= */ 1).firstValue.accept(true) // Role removal succeeds
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
         assertThat(mActivity.isFinishing).isTrue()

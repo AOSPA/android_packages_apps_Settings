@@ -15030,13 +15030,19 @@
     <!-- Message in dialog that informs the user that an error occurred while trying to delete the PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_error_message">An error occurred while trying to delete the PIN.</string>
     <!-- Button label on a dialog to turn off controls for the current user [CHAR LIMIT=NONE] -->
-    <string name="supervision_turn_off_controls_button_label" translatable="false">Turn off controls for this user</string>
+    <string name="supervision_turn_off_controls_button_label">Turn off controls for this user</string>
     <!-- Title on a dialog that confirms whether the user wants to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_turn_off_controls_confirm_header" translatable="false">Delete PIN &amp; turn off controls?</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header">Delete PIN &amp; turn off controls?</string>
     <!-- Message on a dialog that confirms whether the user wants to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_turn_off_controls_confirm_message" translatable="false">Your parental controls PIN will be deleted. Any controls you set up will be turned off.</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message">Your parental controls PIN will be deleted. Any controls you set up will be turned off.</string>
     <!-- Button label on a dialog to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_and_turn_off_button_label">Delete and turn off</string>
+    <!-- Button label on manage PIN screen to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_turn_off_controls_button_label">Delete PIN &amp; turn off controls</string>
+    <!-- Button label on a dialog to delete the PIN [CHAR_LIMIT=NONE] -->
+    <string name="supervision_delete_button_label">Delete</string>
+    <!-- Message on the can't delete pin dialog that shows the role holders requiring the PIN [CHAR_LIMIT=NONE] -->
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message">Your parental controls PIN is being used by:\n\n<xliff:g id="role_holder_bullet_list">%1$s</xliff:g></string>
     <!-- Learn more link for device supervision PIN. [CHAR LIMIT=NONE]-->
     <string name="supervision_pin_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_pin</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>

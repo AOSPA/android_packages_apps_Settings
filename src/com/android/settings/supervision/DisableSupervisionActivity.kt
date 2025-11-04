@@ -64,7 +64,7 @@ class DisableSupervisionActivity : FragmentActivity() {
         // If there are no other supervision apps, we can disable supervision.
         if (otherSupervisionApps.isEmpty()) {
             // Delete supervision data if possible (i.e single supervised user).
-            if (!deleteSupervisionData()) {
+            if (!deleteSupervisionData(disableSupervision = true)) {
                 // Only disable supervision, in case we can't delete data.
                 supervisionManager.setSupervisionEnabled(false)
             }
