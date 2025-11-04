@@ -215,6 +215,7 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
         return Preference(context, /* attrs= */ null).apply {
             setIcon(activityInfo.loadIcon(context.packageManager))
             setTitle(activityInfo.loadLabel(context.packageManager))
+            setWidgetLayoutResource(R.layout.preference_external_action_icon)
             intent = targetIntent.setClassName(packageName, activityInfo.name)
         }
     }
