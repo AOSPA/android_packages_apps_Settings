@@ -37,6 +37,10 @@ open class SystemDashboardScreen : PreferenceScreenMixin, PreferenceIconProvider
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.top_level_system_purpose
+
     override val title: Int
         get() = R.string.header_category_system
 

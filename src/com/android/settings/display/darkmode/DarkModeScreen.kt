@@ -176,6 +176,10 @@ open class DarkModeScreen(context: Context) : BaseDarkModeScreen(context) {
     override val key
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.dark_ui_mode_purpose
+
     companion object {
         const val KEY = "dark_ui_mode"
     }
@@ -185,6 +189,10 @@ open class DarkModeScreen(context: Context) : BaseDarkModeScreen(context) {
 open class DarkModeScreenOnAccessibility(context: Context) : BaseDarkModeScreen(context) {
     override val key
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.dark_ui_mode_accessibility_purpose
 
     override val icon: Int
         get() = R.drawable.ic_dark_ui

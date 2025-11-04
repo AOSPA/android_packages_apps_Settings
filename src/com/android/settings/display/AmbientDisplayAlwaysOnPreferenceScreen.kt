@@ -84,6 +84,10 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.ambient_display_always_on_screen_purpose
+
     override val keywords: Int
         get() = R.string.keywords_always_show_time_info
 

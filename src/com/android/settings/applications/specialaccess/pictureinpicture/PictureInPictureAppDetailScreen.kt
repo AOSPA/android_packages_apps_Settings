@@ -55,6 +55,10 @@ open class PictureInPictureAppDetailScreen : SpecialAccessAppDetailScreen {
     override val key
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.special_access_picture_in_picture_app_detail_purpose
+
     override val bindingKey
         get() = "$KEY-$packageName"
 
