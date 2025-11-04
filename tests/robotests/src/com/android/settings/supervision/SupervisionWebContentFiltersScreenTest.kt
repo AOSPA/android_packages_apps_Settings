@@ -509,7 +509,6 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN_SEARCH_REDIRECTION)
     fun redirectToSupervisionDashboard_whenSupervisionIsNotEnabled() {
         mockSupervisionManager.stub { on { isSupervisionEnabled } doReturn false }
         ActivityScenario.launch(SupervisionWebContentFiltersActivity::class.java).use { scenario ->
