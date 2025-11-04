@@ -32,16 +32,12 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.FakeFeatureFlagsImpl;
-import android.content.pm.FeatureFlags;
-import android.content.pm.Flags;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.ApplicationInfoFlags;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.platform.test.flag.junit.SetFlagsRule;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -89,9 +85,6 @@ public final class InstalledAppCounterTest {
     @Mock
     private PackageManager mPackageManager;
 
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-
     private int mInstalledAppCount = -1;
     private ApplicationInfo mApp1;
     private ApplicationInfo mApp2;
@@ -101,13 +94,9 @@ public final class InstalledAppCounterTest {
     private ApplicationInfo mApp6;
     private ApplicationInfo mApp7;
 
-    private FakeFeatureFlagsImpl mFakeFeatureFlags;
-
     @Before
     public void setUp() {
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
-        mFakeFeatureFlags = new FakeFeatureFlagsImpl();
-        mFakeFeatureFlags.setFlag(Flags.FLAG_ARCHIVING, true);
 
         mApp1 = buildInfo(MAIN_USER_APP_UID, APP_1,
                 ApplicationInfo.FLAG_UPDATED_SYSTEM_APP, 0 /* targetSdkVersion */);
@@ -209,28 +198,6 @@ public final class InstalledAppCounterTest {
     }
 
     @Test
-    public void testCountInstalledApps_archivingDisabled() {
-        when(mUserManager.getProfiles(UserHandle.myUserId())).thenReturn(List.of(
-                new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN)));
-        // The user has four apps installed:
-        // * app2 is a user-installed app. It should be counted.
-        // * app7 is a user-archived app. It should not be counted.
-        when(mPackageManager.getInstalledApplicationsAsUser(
-                argThat(isApplicationInfoFlagsEqualTo(
-                        ApplicationInfoFlags.of(
-                                PackageManager.GET_DISABLED_COMPONENTS
-                                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                                        | PackageManager.MATCH_ANY_USER))),
-                eq(MAIN_USER_ID))).thenReturn(Arrays.asList(mApp2));
-
-        mFakeFeatureFlags.setFlag(Flags.FLAG_ARCHIVING, false);
-        mSetFlagsRule.disableFlags(com.android.settings.flags.Flags.FLAG_APP_ARCHIVING);
-        // Count the number of all apps installed, irrespective of install reason.
-        count(InstalledAppCounter.IGNORE_INSTALL_REASON, mFakeFeatureFlags);
-        assertThat(mInstalledAppCount).isEqualTo(1);
-    }
-
-    @Test
     public void testCountInstalledApps_archivingEnabled() {
         when(mUserManager.getProfiles(UserHandle.myUserId())).thenReturn(List.of(
                 new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN)));
@@ -247,7 +214,7 @@ public final class InstalledAppCounterTest {
                 eq(MAIN_USER_ID))).thenReturn(Arrays.asList(mApp2, mApp7));
 
         // Count the number of all apps installed, irrespective of install reason.
-        count(InstalledAppCounter.IGNORE_INSTALL_REASON, mFakeFeatureFlags);
+        count(InstalledAppCounter.IGNORE_INSTALL_REASON);
         assertThat(mInstalledAppCount).isEqualTo(2);
     }
 
@@ -263,10 +230,10 @@ public final class InstalledAppCounterTest {
         }
     }
 
-    private void count(int installReason, FeatureFlags featureFlags) {
+    private void count(int installReason) {
         mInstalledAppCount = -1;
         final InstalledAppCounterTestable counter =
-                new InstalledAppCounterTestable(installReason, featureFlags);
+                new InstalledAppCounterTestable(installReason);
         counter.executeInForeground();
     }
 
@@ -322,10 +289,6 @@ public final class InstalledAppCounterTest {
     private class InstalledAppCounterTestable extends InstalledAppCounter {
         private InstalledAppCounterTestable(int installReason) {
             super(mContext, installReason, mPackageManager);
-        }
-
-        private InstalledAppCounterTestable(int installReason, FeatureFlags featureFlags) {
-            super(mContext, installReason, mPackageManager, featureFlags);
         }
 
         @Override

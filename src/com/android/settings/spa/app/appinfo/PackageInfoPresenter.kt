@@ -21,8 +21,6 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.FeatureFlags as PmFeatureFlags
-import android.content.pm.FeatureFlagsImpl as PmFeatureFlagsImpl
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.UserHandle
@@ -61,7 +59,6 @@ class PackageInfoPresenter(
     val userId: Int,
     private val coroutineScope: CoroutineScope,
     private val packageManagers: IPackageManagers = PackageManagers,
-    private val featureFlags: PmFeatureFlags = PmFeatureFlagsImpl(),
 ) {
     private val metricsFeatureProvider = featureFactory.metricsFeatureProvider
     private val userHandle = UserHandle.of(userId)
@@ -222,8 +219,7 @@ class PackageInfoPresenter(
                 PackageManager.MATCH_ANY_USER.toLong() or
                     PackageManager.MATCH_DISABLED_COMPONENTS.toLong() or
                     PackageManager.GET_PERMISSIONS.toLong() or
-                    if (isArchivingEnabled(featureFlags)) PackageManager.MATCH_ARCHIVED_PACKAGES
-                    else 0,
+                    if (isArchivingEnabled()) PackageManager.MATCH_ARCHIVED_PACKAGES else 0,
             userId = userId,
         )
 }
