@@ -40,7 +40,7 @@ import java.util.List;
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class BundlePreferenceFragment extends DashboardFragment {
 
-    private static final String BUNDLE_CATEGORY_KEY = "enabled_settings";
+    static final String BUNDLE_CATEGORY_KEY = "enabled_settings";
 
     @Override
     public int getMetricsCategory() {
