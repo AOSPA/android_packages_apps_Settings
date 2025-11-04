@@ -46,7 +46,7 @@ class ExtraDimDataStore(private val context: Context) :
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
-        return colorDisplayManager?.isReduceBrightColorsActivated as? T
+        return settingsSecureStore.getBoolean(SETTING_KEY) as? T
     }
 
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {

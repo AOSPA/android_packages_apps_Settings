@@ -58,11 +58,14 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
         FUNCTIONS_MAP.put(UsbManager.FUNCTION_NONE, R.string.usb_use_charging_only);
     }
 
-    @Nullable private PreferenceCategory mProfilesContainer;
+    @Nullable
+    private PreferenceCategory mProfilesContainer;
     private TetheringManager mTetheringManager;
     private Handler mHandler;
-    @VisibleForTesting OnStartTetheringCallback mOnStartTetheringCallback;
-    @VisibleForTesting long mPreviousFunction;
+    @VisibleForTesting
+    OnStartTetheringCallback mOnStartTetheringCallback;
+    @VisibleForTesting
+    long mPreviousFunction;
 
     public UsbDetailsFunctionsController(
             Context context, UsbDetailsFragment fragment, UsbBackend backend) {
@@ -234,7 +237,18 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
         @Override
         public void onTetheringFailed(int error) {
             Log.w(TAG, "onTetheringFailed() error : " + error);
-            mUsbBackend.setCurrentFunctions(mPreviousFunction);
+            long currentOption = mUsbBackend.getCurrentFunctions();
+            Integer titleId = FUNCTIONS_MAP.get(currentOption);
+            if (titleId != null) {
+                getProfilePreference(UsbBackend.usbFunctionsToString(currentOption), titleId)
+                        .setChecked(true);
+            } else {
+                Log.e(TAG, "onTetheringFailed() failed to find title for currentOption: "
+                        + currentOption);
+            }
+
+            getProfilePreference(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_RNDIS),
+                    R.string.usb_use_tethering).setChecked(false);
         }
     }
 }

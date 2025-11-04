@@ -144,6 +144,8 @@
     <string name="bluetooth_disconnect_title">Disconnect device?</string>
     <!-- Title for bluetooth pairing item [CHAR LIMIT=60] -->
     <string name="bluetooth_pairing_pref_title">Pair new device</string>
+    <!-- Message on the button when can't find the device [CHAR LIMIT=60] -->
+    <string name="bluetooth_pairing_no_device_button_message">Can\'t find your device?</string>
     <!-- Keywords for bluetooth pairing item [CHAR LIMIT=30] -->
     <string name="keywords_add_bt_device">bluetooth</string>
     <!-- Title for bluetooth auto on toggle [CHAR LIMIT=60] -->
@@ -301,9 +303,6 @@
     <!-- Footer description for discoverable mode in bluetooth off state [CHAR LIMIT=none] -->
     <string name="bluetooth_off_footer">Turn on Bluetooth to connect to other devices.</string>
 
-    <!-- Footer description for shared network [CHAR LIMIT=none] -->
-    <string name="shared_network_footer">Contact the network owner or a device admin to make changes to this network.</string>
-
     <!-- Title for paired device group [CHAR LIMIT=none] -->
     <string name="bluetooth_paired_device_title">Your devices</string>
     <!-- Title for pairing bluetooth device page [CHAR LIMIT=none] -->
@@ -322,10 +321,6 @@
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_hw_offload_dialog_cancel">Cancel</string>
 
-    <!-- Setting toggle title for disabling Bluetooth LE Audio feature. [CHAR LIMIT=40] -->
-    <string name="bluetooth_disable_leaudio">Disable Bluetooth LE audio</string>
-    <!-- Summary of toggle for disabling Bluetooth LE audio [CHAR LIMIT=none]-->
-    <string name="bluetooth_disable_leaudio_summary">Disables Bluetooth LE audio feature if the device supports LE audio hardware capabilities.</string>
     <!-- Setting toggle title for switch Bluetooth LE Audio mode. [CHAR LIMIT=40] -->
     <string name="bluetooth_leaudio_mode">Bluetooth LE Audio mode</string>
     <!-- Setting toggle title for enabling Bluetooth LE Audio toggle in Device Details. [CHAR LIMIT=40] -->
@@ -2309,8 +2304,12 @@
     <string name="external_display_no_display_connected_screen_summary">Connect an external display to get started, or try using a different cable</string>
     <!-- External Display settings. More resolution options -->
     <string name="external_display_more_options_title">More options</string>
-    <!-- External Display settings. -->
+    <!-- External Display settings. Default topology hint. -->
     <string name="external_display_topology_hint">Hold and drag to rearrange displays</string>
+    <!-- External Display settings. DisplayTopology panel hint to indicate that display blocks can be tapped again to show arrows (that can be used to move and rearrange displays) -->
+    <string name="external_display_tap_to_show_arrows">Tap to show navigation arrows</string>
+    <!-- External Display settings. DisplayTopology panel hint to indicate that arrows can be tapped to move display block in the desired direction -->
+    <string name="external_display_tap_arrows_to_rearrange">Tap arrows to rearrange displays</string>
     <!-- External Display settings. -->
     <string name="external_display_mirroring_title">Mirror built-in display</string>
     <!-- External Display settings. Dialog title to confirm if resolution change wants to be applied (change was first temporarily applied while showing dialog). -->
@@ -2329,6 +2328,14 @@
     <string name="external_display_topology_a11y_action_move_left">Move left</string>
     <!-- External Display settings. Display topology a11y -->
     <string name="external_display_topology_a11y_action_move_right">Move right</string>
+    <!-- External Display settings. Display topology a11y -->
+    <string name="external_display_topology_a11y_display_moved_up">Display: %1$s moved up</string>
+    <!-- External Display settings. Display topology a11y -->
+    <string name="external_display_topology_a11y_display_moved_down">Display: %1$s moved down</string>
+    <!-- External Display settings. Display topology a11y -->
+    <string name="external_display_topology_a11y_display_moved_left">Display: %1$s moved left</string>
+    <!-- External Display settings. Display topology a11y -->
+    <string name="external_display_topology_a11y_display_moved_right">Display: %1$s moved right</string>
 
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Google Cast</string>
@@ -2711,18 +2718,20 @@
     <string name="wifi_conflict_dialog_confirm">Confirm</string>
     <!-- Label for the conflict wifi dialog cancel button -->
     <string name="wifi_conflict_dialog_cancel">Cancel</string>
-    <!-- Title for the preference to share a network with other users on the same device -->
-    <string name="wifi_share_preference_title">This is a shared network</string>
-    <!-- Summary for the preference to share a network with other users on the same device -->
-    <string name="wifi_share_preference_summary">All users with the exception of guest users, will be able to view, edit and delete this network</string>
+    <!-- Title for the preference to share a network with other users on the same device [CHAR LIMIT=30] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
+    <string name="wifi_share_preference_title">Share network</string>
+    <!-- Summary for the preference to share a network with other users on the same device [CHAR LIMIT=NONE] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
+    <string name="wifi_share_preference_summary">Other users on this device can access this network</string>
     <!-- Alert dialog title, informing the user to switch to the conflicting network.  [CHAR LIMIT=250] -->
     <string name="wifi_conflict_dialog_title">Switch to <xliff:g id="shared">%1$s</xliff:g> \"<xliff:g id="network_name">%2$s</xliff:g>\" network?</string>
     <!-- Alert dialog summary, informing the user to switch to the conflicting network.  [CHAR LIMIT=250] -->
     <string name="wifi_conflict_dialog_message">You\'re currently connected to a <xliff:g id="shared">%1$s</xliff:g> network with the same name. When you switch, you\'ll disconnect from the <xliff:g id="shared">%2$s</xliff:g> network and then reconnect to the <xliff:g id="private">%3$s</xliff:g> network. You may temporarily have no internet.</string>
     <!-- Hint for unchanged fields -->
     <string name="wifi_unchanged">(unchanged)</string>
-    <!-- Label for the check box to allow other device users to edit network details -->
-    <string name="wifi_allow_edit_configuration_title">Allow other users to edit network configuration</string>
+    <!-- Label for the check box to allow other device users to edit network details [CHAR LIMIT=30] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
+    <string name="wifi_allow_edit_configuration_title">Allow users to edit network</string>
+    <!-- Label for the check box to allow other device users to edit network details [CHAR LIMIT=NONE] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
+    <string name="wifi_allow_edit_configuration_summary">Other users can make changes to this network</string>
     <!-- Hint for unspecified fields -->
     <string name="wifi_unspecified">Please select</string>
     <!-- Hint for multiple certificates being added to the configuration -->
@@ -2750,14 +2759,10 @@
     <string name="wifi_scan_always_confirm_deny">Deny</string>
     <!-- Error message displayed below the Wi-Fi EditText when the filed is required. [CHAR LIMIT=NONE] -->
     <string name="wifi_field_required">*required</string>
-    <!-- Message to inform user, the network can only be configured at a shared network.  [CHAR LIMIT=250] -->
-    <string name="wifi_shared_network_login_screen_warning">This is a shared network. You can change this setting once logged in.</string>
-    <!-- Label for the share wifi network toggle. [CHAR LIMIT=250] -->
-    <string name="share_wifi_network">Share this network with other device users</string>
-    <!-- Label for the share wifi network summary. [CHAR LIMIT=NONE] -->
-    <string name="share_wifi_network_summary">All users on this device can view and connect to a shared network. Administrators can delete a shared network. Learn more</string>
-    <string name="edit_wifi_network_configuration">Allow other users to edit network configuration</string>
-    <string name="edit_wifi_network_non_owner_message">Contact the admin of this device to make changes to this network.</string>
+    <!-- Message to inform headless system user, the network can only be configured after they log in. [CHAR LIMIT=NONE] [SCREENSHOT=screen/35ZTCRoD2K22W2P] -->
+    <string name="wifi_shared_network_login_screen_warning">This is a shared network. You need to sign in to make changes.</string>
+    <!-- Message to inform user, the network can only be configured by device admin or network owner. Will be used as both a tooltip and footer description. [CHAR LIMIT=NONE] [SCREENSHOT=screen/6MYkFQCPvtEAtHz] -->
+    <string name="edit_wifi_network_non_owner_message">Contact the network owner or device admin to make changes.</string>
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no internet access. Stay connected?</string>
@@ -2982,6 +2987,7 @@
     <string name="wifi_hotspot_speed_summary_6g">6 GHz / Compatible with few devices</string>
     <!-- Summary for Wifi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_summary_2g_and_5g">2.4 and 5 GHz / Compatible with most devices</string>
+    <string name="wifi_hotspot_speed_summary_2g_and_6g">2.4 and 6 GHz / Compatible with most devices</string>
     <!-- Top introduction on the Wi-Fi hotspot speed settings, summarizes options available for Wi-Fi hotspot bands. [CHAR LIMIT=NONE] -->
     <string name="wifi_hotspot_speed_intro">Choose a frequency for your hotspot. The frequency affects the connection speed and what types of devices can find your hotspot.</string>
     <!-- Category title on the radio button of the Wi-Fi hotspot speed. [CHAR LIMIT=NONE] -->
@@ -3002,6 +3008,10 @@
     <string name="wifi_hotspot_speed_6g">6 GHz</string>
     <!-- Summary for radio button of the Wi-Fi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_6g_summary">Fastest speeds. Compatible with few devices.</string>
+    <!-- Title for radio button of the Wi-Fi hotspot speed to 2.4 GHz and 6 GHz bands [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_2g_6g">2.4 and 6 GHz</string>
+    <!-- Summary for radio button of the Wi-Fi hotspot speed to 2.4 GHz and 6 GHz bands [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_2g_6g_summary">Fastest speeds. This dual-band hotspot is compatible with most devices.</string>
     <!-- Summary for the Wi-Fi hotspot speed unavailable [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_summary_unavailable">Not available in your country or region</string>
     <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
@@ -15070,6 +15080,8 @@
     <string name="keywords_supervision_settings">supervision, parental controls, parents, supervision pin, pin</string>
     <!-- Title for supervision PIN management settings entry [CHAR LIMIT=60] -->
     <string name="supervision_pin_management_preference_title">Manage your PIN</string>
+    <!-- Title for supervision PIN management settings entry [CHAR LIMIT=60] -->
+    <string name="supervision_manage_pin_preference_title">Manage parental controls PIN</string>
     <!-- Title for supervision PIN management settings screen [CHAR LIMIT=60] -->
     <string name="supervision_pin_management_screen_title">Parental controls PIN</string>
     <!-- Search keywords for supervision PIN management settings entry [CHAR LIMIT=NONE] -->
@@ -15292,6 +15304,9 @@
     <string name="safety_center_issue_card_dismiss_confirmation_title">Dismiss this alert?</string>
     <!-- Message for a dialog confirming if a user wants to dismiss a safety center issue [CHAR LIMIT=NONE] -->
     <string name="safety_center_issue_card_dismiss_confirmation_message">Review your security and privacy settings any time to add more protection</string>
+    <!-- Issue resolution confirmation text [CHAR LIMIT=NONE]-->
+    <string name="safety_center_resolved_issue_fallback">Action complete</string>
+
 
     <!-- Positive button text for the passkey dialog to show the state when accept pairing [CHAR LIMIT=30] -->
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text">Pairing</string>

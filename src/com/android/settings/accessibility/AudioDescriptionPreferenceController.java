@@ -22,7 +22,6 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.content.Context;
-import android.os.UserHandle;
 import android.provider.Settings;
 
 import com.android.settings.R;
@@ -44,7 +43,7 @@ public class AudioDescriptionPreferenceController extends TogglePreferenceContro
         return Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 ENABLED_ACCESSIBILITY_AUDIO_DESCRIPTION_BY_DEFAULT,
                 OFF /* default */,
-                UserHandle.USER_CURRENT) == ON;
+                mContext.getUserId()) == ON;
     }
 
     @Override
@@ -52,7 +51,7 @@ public class AudioDescriptionPreferenceController extends TogglePreferenceContro
         return Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 ENABLED_ACCESSIBILITY_AUDIO_DESCRIPTION_BY_DEFAULT,
                 isChecked ? ON : OFF,
-                UserHandle.USER_CURRENT);
+                mContext.getUserId());
     }
 
     @Override

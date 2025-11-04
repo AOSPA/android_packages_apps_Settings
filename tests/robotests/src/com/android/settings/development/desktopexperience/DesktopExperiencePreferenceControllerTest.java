@@ -214,25 +214,50 @@ public class DesktopExperiencePreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
+    public void updateState_whenContentModeDisabledAndDesktopModeNotEligible_checkEnabled() {
+        mDesktopState.setDeviceEligibleForDesktopMode(false);
+        SwitchPreference pref = new SwitchPreference(mContext);
+
+        mController.updateState(pref);
+
+        assertThat(pref.isEnabled()).isTrue();
+        assertThat(pref.isChecked()).isFalse();
+    }
+
+    @Test
     @EnableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
-    public void updateState_whenContentModeEnabled_checkDisabled() {
+    public void updateState_whenContentModeEnabledAndDesktopModeEligible_checkEnabled() {
+        mDesktopState.setDeviceEligibleForDesktopMode(false);
+        SwitchPreference pref = new SwitchPreference(mContext);
+
+        mController.updateState(pref);
+
+        assertThat(pref.isEnabled()).isTrue();
+        assertThat(pref.isChecked()).isFalse();
+    }
+
+    @Test
+    @DisableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
+    public void updateState_whenContentModeDisabledAndDesktopModeEligible_checkEnabled() {
+        mDesktopState.setDeviceEligibleForDesktopMode(true);
+        SwitchPreference pref = new SwitchPreference(mContext);
+
+        mController.updateState(pref);
+
+        assertThat(pref.isEnabled()).isTrue();
+        assertThat(pref.isChecked()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
+    public void updateState_whenContentModeEnabledAndDesktopModeEligible_checkDisabled() {
+        mDesktopState.setDeviceEligibleForDesktopMode(true);
         SwitchPreference pref = new SwitchPreference(mContext);
 
         mController.updateState(pref);
 
         assertThat(pref.isEnabled()).isFalse();
         assertThat(pref.isChecked()).isTrue();
-    }
-
-    @Test
-    @EnableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
-    public void updateState_whenContentModeEnabledAndCanShowDesktopModeDevOption_checkEnabled() {
-        SwitchPreference pref = new SwitchPreference(mContext);
-        mDesktopState.setCanShowDesktopModeDevOption(true);
-
-        mController.updateState(pref);
-
-        assertThat(pref.isEnabled()).isTrue();
-        assertThat(pref.isChecked()).isFalse();
     }
 }

@@ -19,7 +19,12 @@ import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
+import android.content.Intent
+import android.provider.Settings
+import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.preference.Preference
+import androidx.preference.PreferenceGroup
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
@@ -29,6 +34,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.supervision.SupervisionLog
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
 
@@ -73,6 +79,29 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
             this.lifeCycleContext = context
             supervisionManager = context.getSystemService(SupervisionManager::class.java)
             supervisionManager?.registerSupervisionListener(supervisionListener)
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                var supervisionAppCount = 0
+                val supervisionAppsGroup =
+                    context.findPreference<PreferenceGroup>(ACTIVE_SUPERVISION_APPS_GROUP)?.apply {
+                        for (supervisionApp in context.supervisionRoleHolders) {
+                            try {
+                                addPreference(
+                                    createSupervisionAppPreference(context, supervisionApp)
+                                )
+                                // Increment the count on successfully adding the preference
+                                supervisionAppCount++
+                            } catch (e: Exception) {
+                                Log.e(
+                                    SupervisionLog.TAG,
+                                    "Error displaying supervision app preference for: $supervisionApp",
+                                    e,
+                                )
+                            }
+                        }
+                    }
+                // Set the visibility of the entire group based on whether any apps were found.
+                supervisionAppsGroup?.isVisible = supervisionAppCount > 0
+            }
         }
     }
 
@@ -121,18 +150,31 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                 +SupervisionRecoveryBannerPreference() order -250
             }
             +SupervisionMainSwitchPreference(context, supervisionClient) order -200
-            +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
-                +SupervisionAppStoreFiltersScreen.KEY order 50
-                +SupervisionWebContentFiltersScreen.KEY order 100
-            }
-            if (Flags.enableSupervisionSettingsUiUpdates()) {
-                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2) order 0
+            if (!Flags.enableSupervisionSettingsUiUpdates()) {
+                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
+                    +SupervisionWebContentFiltersScreen.KEY order 100
+                }
+            } else {
+                +NonIndexablePreferenceCategory(
+                    SUPERVISION_DYNAMIC_GROUP_1,
+                    R.string.device_supervision_features_title,
+                ) order -100
+                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2) order 10 += {
+                    +SupervisionAppStoreFiltersScreen.KEY order -100
+                    +SupervisionWebContentFiltersScreen.KEY order -50
+                }
             }
             +UntitledPreferenceCategoryMetadata("pin_management_group") order 100 += {
                 if (Flags.enableSupervisionSettingsUiUpdates()) {
                     +SupervisionSetUpPinPreference() order 5
                 }
                 +SupervisionPinManagementScreen.KEY order 10
+            }
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                +NonIndexablePreferenceCategory(
+                    ACTIVE_SUPERVISION_APPS_GROUP,
+                    R.string.supervision_apps_managing_this_device_title,
+                ) order 200
             }
             +UntitledPreferenceCategoryMetadata("footer_group") order 300 += {
                 +SupervisionPromoFooterPreference(supervisionClient) order 30
@@ -146,9 +188,35 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
     private fun getSupervisionClient(context: Context) =
         supervisionClient ?: SupervisionMessengerClient(context).also { supervisionClient = it }
 
+    /** Creates a Preference item for a specific supervision app package. */
+    private fun createSupervisionAppPreference(context: Context, packageName: String): Preference {
+        val packageManager = context.packageManager
+        val targetIntent =
+            Intent(Settings.MANAGE_SUPERVISION_APP_SETTINGS).apply {
+                addCategory(Intent.CATEGORY_DEFAULT)
+                setPackage(packageName)
+            }
+        val resolveInfoList = packageManager.queryIntentActivities(targetIntent, 0)
+        if (resolveInfoList.isEmpty()) {
+            throw IllegalStateException(
+                "No activity found for details action in package: $packageName"
+            )
+        }
+
+        val activityInfo = resolveInfoList.first().activityInfo
+        return Preference(context, /* attrs= */ null).apply {
+            setIcon(activityInfo.loadIcon(context.packageManager))
+            setTitle(activityInfo.loadLabel(context.packageManager))
+            intent = targetIntent.setClassName(packageName, activityInfo.name)
+        }
+    }
+
     companion object {
         const val KEY = "top_level_supervision"
         internal const val SUPERVISION_DYNAMIC_GROUP_1 = "supervision_features_group_1"
         internal const val SUPERVISION_DYNAMIC_GROUP_2 = "supervision_features_group_2"
+        internal val FEATURE_GROUP_KEYS =
+            listOf(SUPERVISION_DYNAMIC_GROUP_1, SUPERVISION_DYNAMIC_GROUP_2)
+        internal const val ACTIVE_SUPERVISION_APPS_GROUP = "active_supervision_apps_group"
     }
 }

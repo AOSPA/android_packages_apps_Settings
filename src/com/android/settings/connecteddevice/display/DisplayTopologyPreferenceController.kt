@@ -28,7 +28,6 @@ import android.view.Display.DEFAULT_DISPLAY
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
 import com.android.settings.core.instrumentation.SettingsStatsLog
@@ -46,7 +45,7 @@ class DisplayTopologyPreferenceController(
 ) {
     @VisibleForTesting lateinit var paneContent: FrameLayout
     @VisibleForTesting lateinit var paneHolder: FrameLayout
-    @VisibleForTesting lateinit var topologyHint: TextView
+    @VisibleForTesting lateinit var topologyHint: TopologyHintTextView
 
     /**
      * How many physical pixels to move in pane coordinates (Pythagorean distance) before a drag is
@@ -139,7 +138,7 @@ class DisplayTopologyPreferenceController(
     )
 
     /** Binds the views from the concrete implementation (Preference or View). */
-    fun bindViews(holder: FrameLayout, content: FrameLayout, hint: TextView) {
+    fun bindViews(holder: FrameLayout, content: FrameLayout, hint: TopologyHintTextView) {
         if (this::paneContent.isInitialized && this.paneContent != content) {
             this.paneContent.removeOnLayoutChangeListener(paneContentLayoutListener)
         }
@@ -172,6 +171,11 @@ class DisplayTopologyPreferenceController(
     }
 
     fun selectDisplay(displayId: Int, showDisplayArrows: Boolean = false) {
+        if (!this::paneContent.isInitialized) {
+            // ViewModel from fragments outlive the fragment and view reconfigurations, ensure View
+            // has been setup
+            return
+        }
         if (showDisplayArrows && displayId == selectedDisplayId) {
             setDisplayToShowArrows(displayId)
         } else {
@@ -197,7 +201,7 @@ class DisplayTopologyPreferenceController(
         if (topology == null) {
             // This occurs when no topology is active.
             // TODO(b/352648432): show main display or mirrored displays rather than an empty pane.
-            topologyHint.text = ""
+            topologyHint.updateState(arrowsShown = false, displayCount = 0)
             paneContent.removeAllViews()
             topologyInfo = null
             return
@@ -221,12 +225,10 @@ class DisplayTopologyPreferenceController(
         }
         val topologyBounds = topology.absoluteBounds
         // Step 1
-        topologyHint.text =
-            if (topologyBounds.size() > 1) {
-                context.getString(R.string.external_display_topology_hint)
-            } else {
-                ""
-            }
+        topologyHint.updateState(
+            arrowsShown = (showArrowMovementDisplayId != -1),
+            displayCount = topologyBounds.size(),
+        )
         // Step 2
         val oldBounds = topologyInfo?.positions
         val newBounds = buildList {
@@ -278,7 +280,7 @@ class DisplayTopologyPreferenceController(
             return
         }
         // Step 1
-        topologyHint.text = ""
+        topologyHint.updateState(arrowsShown = false, displayCount = 0)
         // Step 2
         val logicalDisplaySizeFetcher = LogicalDisplaySizeFetcher(injector, emptyMap())
         val newBounds = processDisplayBoundsMirroringMode(logicalDisplaySizeFetcher)
@@ -500,6 +502,34 @@ class DisplayTopologyPreferenceController(
 
         onBlockTouchUp(upEvent)
         upEvent.recycle()
+
+        val announcement =
+            when (direction) {
+                Direction.UP ->
+                    context.getString(
+                        R.string.external_display_topology_a11y_display_moved_up,
+                        displayId,
+                    )
+
+                Direction.DOWN ->
+                    context.getString(
+                        R.string.external_display_topology_a11y_display_moved_down,
+                        displayId,
+                    )
+
+                Direction.LEFT ->
+                    context.getString(
+                        R.string.external_display_topology_a11y_display_moved_left,
+                        displayId,
+                    )
+
+                Direction.RIGHT ->
+                    context.getString(
+                        R.string.external_display_topology_a11y_display_moved_right,
+                        displayId,
+                    )
+            }
+        paneContent.stateDescription = announcement
     }
 
     private fun onBlockTouchDown(
@@ -649,6 +679,10 @@ class DisplayTopologyPreferenceController(
             return
         }
         showArrowMovementDisplayId = displayId
+        topologyHint.updateState(
+            arrowsShown = (showArrowMovementDisplayId != -1),
+            displayCount = topologyInfo?.positions?.size ?: 0,
+        )
 
         val displayTopology = injector.displayTopology
         if (displayTopology == null || !displayTopology.allNodesIdMap().containsKey(displayId)) {

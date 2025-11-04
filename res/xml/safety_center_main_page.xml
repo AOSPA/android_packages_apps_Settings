@@ -72,10 +72,25 @@
             android:summary="@string/permissions_usage_summary"
             android:title="@string/permissions_usage_title"
             settings:controller="com.android.settings.privacy.PrivacyHubPreferenceController" />
+        <com.android.settingslib.safetycenter.SafetySourcePreference
+            android:key="private_space"
+            settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+            settings:safetySource="AndroidPrivateSpace"
+            settings:profile="personal_profile" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="more_security_privacy_category"
         android:title="@string/more_security_privacy_category_title">
+        <com.android.settingslib.safetycenter.SafetySourcePreference
+            android:key="advanced_protection"
+            settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+            settings:safetySource="@string/config_safety_center_advanced_protection_source_id"
+            settings:profile="personal_profile" />
+        <com.android.settingslib.safetycenter.SafetySourcePreference
+            android:key="work_policy_info"
+            settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+            settings:safetySource="AndroidWorkPolicyInfo"
+            settings:profile="personal_profile" />
         <Preference
             android:key="safety_center_more_security_privacy"
             android:summary="@string/more_security_privacy_summary"

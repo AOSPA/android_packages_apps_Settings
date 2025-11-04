@@ -29,6 +29,7 @@ import androidx.annotation.Nullable;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
+import com.android.internal.widget.VerifyCredentialResponse;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -193,11 +194,10 @@ public class ShadowLockPatternUtils {
     }
 
     @Implementation
-    public boolean checkCredential(
+    public VerifyCredentialResponse checkCredential(
             @NonNull LockscreenCredential credential, int userId,
-            @Nullable LockPatternUtils.CheckCredentialProgressCallback progressCallback)
-            throws LockPatternUtils.RequestThrottledException {
-        return true;
+            @Nullable LockPatternUtils.CheckCredentialProgressCallback progressCallback) {
+        return VerifyCredentialResponse.OK;
     }
 
     public static void setRequiredPasswordComplexity(int userHandle, int complexity) {
@@ -256,20 +256,10 @@ public class ShadowLockPatternUtils {
      * @return the millis since boot of the lockout end time.
      */
     @Implementation
-    public long setLockoutAttemptDeadline(int userId, int deadline) {
-        long lockoutEndTimeMs = SystemClock.elapsedRealtime() + (long) deadline;
-        sUserToLockoutEndTimeMap.put(userId, Duration.ofMillis(lockoutEndTimeMs));
-        return lockoutEndTimeMs;
-    }
-
-    /**
-     * Gets the lockout end time for a given user.
-     *
-     * @return the millis since boot of the lockout end time.
-     */
-    @Implementation
-    public long getLockoutAttemptDeadline(int userId) {
-        return getLockoutEndTime(userId).toMillis();
+    public Duration setLockoutAttemptDeadline(int userId, Duration deadline) {
+        Duration lockoutEndTime = Duration.ofMillis(SystemClock.elapsedRealtime()).plus(deadline);
+        sUserToLockoutEndTimeMap.put(userId, lockoutEndTime);
+        return lockoutEndTime;
     }
 
     /**

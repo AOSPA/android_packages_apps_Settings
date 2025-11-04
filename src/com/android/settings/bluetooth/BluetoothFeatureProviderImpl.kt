@@ -28,6 +28,7 @@ import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSe
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepositoryImpl
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableSet
+import java.util.function.Consumer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
@@ -66,12 +67,12 @@ open class BluetoothFeatureProviderImpl : BluetoothFeatureProvider {
         scope: CoroutineScope,
     ): DeviceSettingRepository = DeviceSettingRepositoryImpl(context, scope, Dispatchers.IO)
 
-    override fun getBluetoothDiagnosisAlertDialog(
+    override fun buildBluetoothDiagnosisAlertDialog(
         context: Context,
         entryPoint: Int,
         device: CachedBluetoothDevice?,
-        metricsCategory: Int,
-    ): AlertDialog? = null
+        onDialogBuilt: Consumer<AlertDialog>,
+    ) {}
 
     override fun notifyConnectionFailureTimeChange(
         context: Context,

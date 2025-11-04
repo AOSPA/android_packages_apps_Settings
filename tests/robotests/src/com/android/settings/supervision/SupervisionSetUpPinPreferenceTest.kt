@@ -23,15 +23,20 @@ import android.content.pm.UserInfo
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.platform.test.flag.junit.SetFlagsRule
+import androidx.fragment.app.testing.EmptyFragmentActivity
+import androidx.preference.Preference
+import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
+import org.robolectric.Shadows.shadowOf
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionSetUpPinPreferenceTest {
@@ -87,6 +92,22 @@ class SupervisionSetUpPinPreferenceTest {
     fun getTitle() {
         assertThat(supervisionSetUpPinPreference.title)
             .isEqualTo(R.string.supervision_set_up_pin_preference_title)
+    }
+
+    @Test
+    fun onPreferenceClick_launchesCorrectIntent() {
+        ActivityScenario.launch(EmptyFragmentActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                val widget: Preference = supervisionSetUpPinPreference.createAndBindWidget(activity)
+
+                val result = supervisionSetUpPinPreference.onPreferenceClick(widget)
+
+                assertThat(result).isTrue()
+                val intent = shadowOf(activity).nextStartedActivity
+                assertThat(intent.component?.className)
+                    .isEqualTo(SetupSupervisionActivity::class.java.name)
+            }
+        }
     }
 
     private companion object {

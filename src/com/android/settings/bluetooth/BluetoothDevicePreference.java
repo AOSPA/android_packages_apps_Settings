@@ -104,6 +104,11 @@ public final class BluetoothDevicePreference extends GearPreference {
     /* Talk-back descriptions for various BT icons */
     Resources mResources;
     final BluetoothDevicePreferenceCallback mCallback;
+
+    private long mLastBondingFailureTimeMillis = -1;
+    private long mLastConnectionFailureTimeMillis = -1;
+    private View mItemView;
+
     @VisibleForTesting
     final BluetoothAdapter.OnMetadataChangedListener mMetadataListener =
             new BluetoothAdapter.OnMetadataChangedListener() {
@@ -115,6 +120,10 @@ public final class BluetoothDevicePreference extends GearPreference {
                     onPreferenceAttributesChanged();
                 }
             };
+
+    @NonNull
+    private final BluetoothFeatureProvider mBluetoothFeatureProvider =
+            FeatureFactory.getFeatureFactory().getBluetoothFeatureProvider();
 
     private class BluetoothDevicePreferenceCallback implements CachedBluetoothDevice.Callback {
 
@@ -157,6 +166,8 @@ public final class BluetoothDevicePreference extends GearPreference {
         }
 
         mCachedDevice = cachedDevice;
+        mLastBondingFailureTimeMillis = mCachedDevice.getBondFailureTimeMillis();
+        mLastConnectionFailureTimeMillis = mCachedDevice.getConnectionFailureTimeMillis();
         mCachedDeviceGroup = new HashSet<>(
                 Utils.findAllCachedBluetoothDevicesByGroupId(mLocalBtManager, mCachedDevice));
         mCallback = new BluetoothDevicePreferenceCallback();
@@ -396,6 +407,58 @@ public final class BluetoothDevicePreference extends GearPreference {
             notifyHierarchyChanged();
         }
         Log.d(TAG, "onPreferenceAttributesChanged, complete updating for device " + mCachedDevice.getName());
+
+        getContext().getMainExecutor().execute(() -> {
+            // Show the alert dialog if pairing or connection fails.
+            // Run this on main thread in order to make sure the dialog only appear once
+            if (BluetoothUtils.isBluetoothDiagnosisAvailable(getContext())) {
+                if (mCachedDevice.getBondFailureTimeMillis() != mLastBondingFailureTimeMillis
+                        && BluetoothUtils.showPairingFailure(mCachedDevice)) {
+                    ThreadUtils.postOnBackgroundThread(() -> {
+                        mBluetoothFeatureProvider.buildBluetoothDiagnosisAlertDialog(
+                                getContext(),
+                                BluetoothDiagnosisEntryPoint.ENTRY_POINT_CAN_NOT_PAIR,
+                                mCachedDevice,
+                                result -> {
+                                    if (result != null && mItemView.isShown()) {
+                                        Log.d(
+                                                TAG,
+                                                "Showing bonding failure alert dialog for "
+                                                        + mCachedDevice.getAddress()
+                                                        + " at "
+                                                        + mCachedDevice.getBondFailureTimeMillis());
+                                        getContext().getMainExecutor().execute(result::show);
+                                    }
+                                });
+                    });
+                } else if (mCachedDevice.getConnectionFailureTimeMillis()
+                        != mLastConnectionFailureTimeMillis
+                        && BluetoothUtils.showConnectionFailure(mCachedDevice)) {
+                    ThreadUtils.postOnBackgroundThread(() -> {
+                        mBluetoothFeatureProvider.buildBluetoothDiagnosisAlertDialog(
+                                getContext(),
+                                BluetoothDiagnosisEntryPoint.ENTRY_POINT_CAN_NOT_CONNECT,
+                                mCachedDevice,
+                                result -> {
+                                    if (result != null && mItemView.isShown()) {
+                                        Log.d(
+                                                TAG,
+                                                "Showing connection failure alert dialog for "
+                                                        + mCachedDevice.getAddress()
+                                                        + " at "
+                                                        + mCachedDevice
+                                                                .getConnectionFailureTimeMillis()
+                                        );
+                                        getContext().getMainExecutor().execute(result::show);
+                                }
+                            });
+                    });
+                }
+                mLastBondingFailureTimeMillis = mCachedDevice.getBondFailureTimeMillis();
+                mLastConnectionFailureTimeMillis =
+                        mCachedDevice.getConnectionFailureTimeMillis();
+            }
+        });
     }
 
     @Override
@@ -424,6 +487,7 @@ public final class BluetoothDevicePreference extends GearPreference {
                     getContext().getResources().getDimension(R.dimen.bt_icon_elevation));
         }
         super.onBindViewHolder(view);
+        mItemView = view.itemView;
     }
 
     @Override
@@ -534,7 +598,7 @@ public final class BluetoothDevicePreference extends GearPreference {
     private String getConnectionSummary() {
         String summary = null;
         // TODO: Move the logic into CachedBluetoothDevice when SystemUI is supported.
-        if (BluetoothUtils.isBluetoothDiagnosisAvailable(getContext())) {
+        if (BluetoothUtils.isBluetoothDiagnosisAvailable(getContext()) && !mCachedDevice.isBusy()) {
             if (BluetoothUtils.showPairingFailure(mCachedDevice)) {
                 return getContext()
                         .getString(com.android.settingslib.R.string.bluetooth_pairing_failure);

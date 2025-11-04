@@ -20,6 +20,7 @@ import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.preference.Preference
@@ -39,6 +40,7 @@ class SupervisionRecoveryBannerPreference :
 
     private lateinit var lifeCycleContext: PreferenceLifecycleContext
     private lateinit var setUpRecoveryLauncher: ActivityResultLauncher<Intent>
+    private lateinit var prefs: SharedPreferences
 
     override val key: String
         get() = KEY
@@ -50,7 +52,7 @@ class SupervisionRecoveryBannerPreference :
         if (!Flags.enableSupervisionSettingsUiUpdates()) {
             return false
         }
-        // If PIN is deleted, banner should also match the behavior and disappear
+        ensurePrefsInitialized(context)
         if (!context.isSupervisingCredentialSet) {
             return false
         }
@@ -60,6 +62,7 @@ class SupervisionRecoveryBannerPreference :
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         lifeCycleContext = context
+        ensurePrefsInitialized(context)
         setUpRecoveryLauncher =
             context.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 lifeCycleContext.notifyPreferenceChange(KEY)
@@ -78,11 +81,6 @@ class SupervisionRecoveryBannerPreference :
 
             // Add the dismiss 'X' button
             setDismissButtonVisible(true)
-            setDismissButtonOnClickListener {
-                // TODO(b/446025922): Implement logic to store in shared prefs after user dismissed
-                // it).
-                isVisible = false
-            }
             setPositiveButtonVisible(true)
         }
     }
@@ -105,6 +103,12 @@ class SupervisionRecoveryBannerPreference :
         banner.setSummary(summaryRes)
         banner.setPositiveButtonText(buttonTextRes)
         banner.setPositiveButtonOnClickListener { onPositiveButtonClick(banner, showVerifyFlow) }
+
+        banner.setDismissButtonOnClickListener {
+            persistDismissalState(true)
+            banner.isVisible = false
+            lifeCycleContext.notifyPreferenceChange(KEY)
+        }
     }
 
     private fun hasAccountNameSet(info: SupervisionRecoveryInfo?): Boolean {
@@ -112,8 +116,11 @@ class SupervisionRecoveryBannerPreference :
     }
 
     private fun isDismissed(): Boolean {
-        // TODO(b/446025922): Implement real dismiss logic
-        return false
+        return prefs.getBoolean(KEY_BANNER_DISMISSED, false)
+    }
+
+    private fun persistDismissalState(dismissed: Boolean) {
+        prefs.edit().putBoolean(KEY_BANNER_DISMISSED, dismissed).commit()
     }
 
     private fun onPositiveButtonClick(preference: Preference, isVerificationFlow: Boolean) {
@@ -139,7 +146,15 @@ class SupervisionRecoveryBannerPreference :
         return hasAccount && state == SupervisionRecoveryInfo.STATE_PENDING
     }
 
+    private fun ensurePrefsInitialized(context: Context) {
+        if (!::prefs.isInitialized) {
+            prefs = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+        }
+    }
+
     companion object {
         const val KEY = "supervision_pin_recovery_banner"
+        private const val SHARED_PREFS_NAME = "supervision_settings_prefs"
+        private const val KEY_BANNER_DISMISSED = "supervision_recovery_banner_dismissed"
     }
 }

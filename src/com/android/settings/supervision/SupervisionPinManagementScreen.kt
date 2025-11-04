@@ -54,7 +54,10 @@ class SupervisionPinManagementScreen :
         get() = ACTION_SUPERVISION_MANAGE_PIN
 
     override val title: Int
-        get() = R.string.supervision_pin_management_preference_title
+        get() =
+            if (Flags.enableSupervisionSettingsUiUpdates())
+                R.string.supervision_manage_pin_preference_title
+            else R.string.supervision_pin_management_preference_title
 
     override val screenTitle: Int
         get() = R.string.supervision_pin_management_screen_title

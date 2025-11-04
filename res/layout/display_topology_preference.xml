@@ -49,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:paddingTop="16dp">
-        <TextView
+        <com.android.settings.connecteddevice.display.TopologyHintTextView
             android:id="@+id/topology_hint"
             android:background="@drawable/display_topology_background"
             android:paddingHorizontal="5dp"

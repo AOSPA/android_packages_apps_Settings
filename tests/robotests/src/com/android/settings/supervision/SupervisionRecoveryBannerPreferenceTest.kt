@@ -24,6 +24,7 @@ import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.UserInfo
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
@@ -62,6 +63,7 @@ class SupervisionRecoveryBannerPreferenceTest {
     private val mockKeyguardManager = mock<KeyguardManager>()
     private val mockUserManager = mock<UserManager>()
     private val mockActivityResultLauncher = mock<ActivityResultLauncher<Intent>>()
+    private lateinit var sharedPrefs: SharedPreferences
     private val context =
         object : ContextWrapper(appContext) {
             override fun getSystemService(name: String): Any =
@@ -71,6 +73,13 @@ class SupervisionRecoveryBannerPreferenceTest {
                     USER_SERVICE -> mockUserManager
                     else -> super.getSystemService(name)
                 }
+
+            override fun getSharedPreferences(name: String, mode: Int): SharedPreferences {
+                if (name == SHARED_PREFS_NAME) {
+                    return sharedPrefs
+                }
+                return super.getSharedPreferences(name, mode)
+            }
         }
     private val mockLifeCycleContext =
         mock<PreferenceLifecycleContext>(
@@ -81,6 +90,9 @@ class SupervisionRecoveryBannerPreferenceTest {
 
     @Before
     fun setUp() {
+        sharedPrefs = appContext.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+        sharedPrefs.edit().clear().commit()
+        preference = SupervisionRecoveryBannerPreference()
         whenever(
                 mockLifeCycleContext.registerForActivityResult(
                     any<ActivityResultContracts.StartActivityForResult>(),
@@ -184,6 +196,55 @@ class SupervisionRecoveryBannerPreferenceTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun isAvailable_previouslyDismissed_returnsFalse() {
+        sharedPrefs.edit().putBoolean(KEY_BANNER_DISMISSED, true).commit()
+        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(null)
+        assertThat(preference.isAvailable(context)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun isAvailable_noDismissalRecord_returnsTrue() {
+        sharedPrefs.edit().remove(KEY_BANNER_DISMISSED).commit()
+        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(null)
+        assertThat(preference.isAvailable(context)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun dismissButton_persistsDismissedStateAndHidesBanner() {
+        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(null)
+        val banner = preference.createAndBindWidget<BannerMessagePreference>(context)
+        val dismissButton =
+            banner
+                .inflateViewHolder()
+                .itemView
+                .findViewById<android.widget.ImageButton>(R.id.banner_dismiss_btn)
+
+        assertThat(sharedPrefs.getBoolean(KEY_BANNER_DISMISSED, false)).isFalse()
+        assertThat(banner.isVisible).isTrue()
+        dismissButton.performClick()
+        assertThat(sharedPrefs.getBoolean(KEY_BANNER_DISMISSED, false)).isTrue()
+        assertThat(banner.isVisible).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun dismissButton_notifiesPreferenceChange() {
+        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(null)
+        val banner = preference.createAndBindWidget<BannerMessagePreference>(context)
+        val dismissButton =
+            banner
+                .inflateViewHolder()
+                .itemView
+                .findViewById<android.widget.ImageButton>(R.id.banner_dismiss_btn)
+
+        dismissButton.performClick()
+        verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionRecoveryBannerPreference.KEY)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun bind_noRecoveryInfo_setsAddFlowUIAndLaunchesAction() {
         whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(null)
         val widget: Preference = preference.createAndBindWidget(context)
@@ -241,5 +302,7 @@ class SupervisionRecoveryBannerPreferenceTest {
                 /* flags */ 0,
                 USER_TYPE_PROFILE_SUPERVISING,
             )
+        private const val SHARED_PREFS_NAME = "supervision_settings_prefs"
+        private const val KEY_BANNER_DISMISSED = "supervision_recovery_banner_dismissed"
     }
 }
