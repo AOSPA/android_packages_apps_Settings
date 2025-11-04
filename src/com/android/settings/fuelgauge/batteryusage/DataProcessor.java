@@ -791,13 +791,38 @@ public final class DataProcessor {
             final long eventTime = event.getTimestamp();
 
             if (event.getType() == AppUsageEventType.ACTIVITY_RESUMED) {
-                // If there is an existing start time, simply ignore this start event.
-                // If there was no start time, then start a new period.
-                if (!pendingUsagePeriod.hasStartTime()) {
+                if (pendingUsagePeriod.hasStartTime()) {
+                    // If there is an existing start time that is further back than the max usage
+                    // duration, then close the previous usage period and start a new one.
+                    // Otherwise, simply ignore this start event.
+                    if (isStartTimeEarlierThanQueryBufferDuration(
+                            pendingUsagePeriod.getStartTime(), eventTime)) {
+                        pendingUsagePeriod.setEndTime(
+                                getEndTimeForIncompleteUsagePeriod(pendingUsagePeriod, eventTime));
+                        validateAndAddToPeriodList(
+                                usagePeriodList, pendingUsagePeriod.build(), startTime, endTime);
+                        pendingUsagePeriod.clear();
+                        pendingUsagePeriod.setStartTime(eventTime);
+                    }
+                } else {
+                    // If there was no start time, then start a new period.
                     pendingUsagePeriod.setStartTime(eventTime);
                 }
             } else if (event.getType() == AppUsageEventType.ACTIVITY_STOPPED) {
+                // If there is an existing start time longer than the max query buffer duration,
+                // close the previous usage period by adding a default end time to match the
+                // start event. Treat current end event as an unmatched event.
+                if (pendingUsagePeriod.hasStartTime()
+                        && isStartTimeEarlierThanQueryBufferDuration(
+                                pendingUsagePeriod.getStartTime(), eventTime)) {
+                    pendingUsagePeriod.setEndTime(
+                            getEndTimeForIncompleteUsagePeriod(pendingUsagePeriod, eventTime));
+                    validateAndAddToPeriodList(
+                            usagePeriodList, pendingUsagePeriod.build(), startTime, endTime);
+                    pendingUsagePeriod.clear();
+                }
                 pendingUsagePeriod.setEndTime(eventTime);
+                // If there's no start time, then add one for the default duration.
                 if (!pendingUsagePeriod.hasStartTime()) {
                     pendingUsagePeriod.setStartTime(
                             getStartTimeForIncompleteUsagePeriod(pendingUsagePeriod));
@@ -818,10 +843,11 @@ public final class DataProcessor {
                 }
             }
         }
-        // If there exists unclosed period, the stop event might happen in the next time
-        // slot. Use the endTime for the period.
+        // If there exists unclosed period, since we already fetched events with query buffer,
+        // the stop event will not happened in the [endTime, endTime + buffer).
         if (pendingUsagePeriod.hasStartTime() && pendingUsagePeriod.getStartTime() < endTime) {
-            pendingUsagePeriod.setEndTime(endTime);
+            pendingUsagePeriod.setEndTime(
+                    getEndTimeForIncompleteUsagePeriod(pendingUsagePeriod, endTime));
             validateAndAddToPeriodList(
                     usagePeriodList, pendingUsagePeriod.build(), startTime, endTime);
             pendingUsagePeriod.clear();
@@ -1031,6 +1057,11 @@ public final class DataProcessor {
         final Map<String, List<AppUsagePeriod>> packageNameMap = usagePeriodMap.get(userId);
         packageNameMap.computeIfAbsent(packageName, key -> new ArrayList<>());
         packageNameMap.get(packageName).addAll(usagePeriodList);
+    }
+
+    private static boolean isStartTimeEarlierThanQueryBufferDuration(
+            final long startTime, final long eventTime) {
+        return startTime + DatabaseUtils.USAGE_QUERY_BUFFER_HOURS < eventTime;
     }
 
     /** Returns the start time that gives {@code usagePeriod} the default usage duration. */
