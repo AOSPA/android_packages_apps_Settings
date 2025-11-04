@@ -4861,6 +4861,33 @@
                 android:value="@string/menu_key_apps"/>
         </activity-alias>
 
+        <activity-alias android:name="ScreenAutomationAppListIntent"
+            android:exported="true"
+            android:targetActivity=".spa.SpaBridgeActivity">
+            <intent-filter>
+                <action android:name="android.settings.action.SCREEN_AUTOMATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                android:value="ComputerControlPermissionPage"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
+        <activity-alias android:name="ScreenAutomationAppDetailIntent"
+            android:exported="true"
+            android:targetActivity=".spa.SpaAppBridgeActivity">
+            <intent-filter>
+                <action android:name="android.settings.action.SCREEN_AUTOMATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                android:value="ComputerControlAppInfoPage"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
         <activity
             android:name="Settings$AlarmsAndRemindersActivity"
             android:exported="true"
