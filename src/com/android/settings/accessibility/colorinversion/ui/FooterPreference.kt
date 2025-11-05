@@ -30,6 +30,9 @@ class FooterPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.toggle_inversion_preference_html_description_purpose
+
     override fun getTitle(context: Context): CharSequence? {
         return Html.fromHtml(
             context.getString(R.string.accessibility_display_inversion_preference_subtitle),

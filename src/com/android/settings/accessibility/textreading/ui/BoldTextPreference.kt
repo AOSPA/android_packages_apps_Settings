@@ -29,7 +29,11 @@ import com.android.settingslib.preference.SwitchPreferenceBinding
 
 /** Preference metadata for the bold text toggle preference. */
 class BoldTextPreference(context: Context, @EntryPoint private val entryPoint: Int) :
-    SwitchPreference(key = KEY, title = R.string.force_bold_text), SwitchPreferenceBinding {
+    SwitchPreference(
+        key = KEY,
+        purpose = R.string.font_weight_adjustment_purpose,
+        title = R.string.force_bold_text,
+    ), SwitchPreferenceBinding {
 
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 

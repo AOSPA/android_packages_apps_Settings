@@ -31,6 +31,9 @@ class SupervisionPinManagementFooterPreference : FooterPreferenceMetadata, Foote
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.pin_management_footer_purpose
+
     override val title: Int = R.string.device_supervision_pin_management_footer
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {

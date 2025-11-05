@@ -28,7 +28,11 @@ class ExtraDimMainSwitchPreference(
     context: Context,
     private val storage: ExtraDimDataStore = ExtraDimDataStore(context),
 ) :
-    SwitchPreference(key = KEY, title = R.string.reduce_bright_colors_switch_title),
+    SwitchPreference(
+        key = KEY,
+        purpose = R.string.reduce_bright_colors_switch_purpose,
+        title = R.string.reduce_bright_colors_switch_title
+    ),
     MainSwitchPreferenceBinding {
 
     override fun storage(context: Context): KeyValueStore = storage

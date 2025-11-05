@@ -44,6 +44,9 @@ class MagnificationFooterPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.magnification_preference_screen_html_description_purpose
+
     override val indexable
         get() = false
 

@@ -110,6 +110,9 @@ class DeuteranomalyModePreference(storage: ColorCorrectionModeDataStore) : ModeP
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.daltonizer_mode_deuteranomaly_purpose
+
     override val title: Int
         get() = R.string.daltonizer_mode_deuteranomaly_title
 
@@ -124,6 +127,9 @@ class DeuteranomalyModePreference(storage: ColorCorrectionModeDataStore) : ModeP
 class ProtanomalyModePreference(storage: ColorCorrectionModeDataStore) : ModePreference(storage) {
     override val key: String
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.daltonizer_mode_protanomaly_purpose
 
     override val title: Int
         get() = R.string.daltonizer_mode_protanomaly_title
@@ -140,6 +146,9 @@ class TritanomalyModePreference(storage: ColorCorrectionModeDataStore) : ModePre
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.daltonizer_mode_tritanomaly_purpose
+
     override val title: Int
         get() = R.string.daltonizer_mode_tritanomaly_title
 
@@ -154,6 +163,9 @@ class TritanomalyModePreference(storage: ColorCorrectionModeDataStore) : ModePre
 class GrayscaleModePreference(storage: ColorCorrectionModeDataStore) : ModePreference(storage) {
     override val key: String
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.daltonizer_mode_grayscale_purpose
 
     override val title: Int
         get() = R.string.daltonizer_mode_grayscale_title

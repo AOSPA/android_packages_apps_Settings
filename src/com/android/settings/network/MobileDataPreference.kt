@@ -37,9 +37,10 @@ import kotlinx.coroutines.runBlocking
 
 class MobileDataPreference :
     SwitchPreference(
-        KEY,
-        R.string.mobile_data_settings_title,
-        R.string.mobile_data_settings_summary,
+        key = KEY,
+        purpose = R.string.mobile_data_purpose,
+        title = R.string.mobile_data_settings_title,
+        summary = R.string.mobile_data_settings_summary,
     ),
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider {

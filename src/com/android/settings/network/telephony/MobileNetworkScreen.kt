@@ -137,7 +137,8 @@ private constructor(
                     } else {
                         +(BillingCycleScreen.KEY args arguments!!) order 115
                     }
-                    +UntitledPreferenceCategoryMetadata("apn_and_protection_container") += {
+                    +UntitledPreferenceCategoryMetadata("apn_and_protection_container",
+                            R.string.mobile_network_apn_and_protection_purpose) += {
                         if (CatalystFlags.catalystUseKeyParameters()) {
                             val newParameters =
                                 ApnSettingsScreen.parametersSchema.prepare(

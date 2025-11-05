@@ -44,7 +44,10 @@ import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /** Web content filters search filter preference. */
 class SupervisionSafeSearchSwitchPreference(private val dataStore: SupervisionSafeSearchDataStore) :
-    SwitchPreference(KEY),
+    SwitchPreference(
+        key = KEY,
+        purpose = R.string.web_content_filters_search_filter_purpose,
+    ),
     SwitchPreferenceBinding,
     Preference.OnPreferenceChangeListener,
     PreferenceLifecycleProvider {

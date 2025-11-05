@@ -143,7 +143,7 @@ open class SupervisionAppStoreFiltersScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +SupervisionAppStoreFiltersTopIntroPreference() order -100
-            +UntitledPreferenceCategoryMetadata(SUPERVISION_APP_STORE_FILTERS_GROUP) order 0
+            +UntitledPreferenceCategoryMetadata(SUPERVISION_APP_STORE_FILTERS_GROUP, purpose = R.string.supervision_app_store_filters_group_purpose) order 0
             +SupervisionAppStoreFiltersFooterPreference() order 100
         }
 

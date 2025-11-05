@@ -63,6 +63,9 @@ class AddDevicePreference(context: Context) :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.hearing_device_add_bt_devices_purpose
+
     override val icon: Int
         get() = R.drawable.ic_add_24dp
 

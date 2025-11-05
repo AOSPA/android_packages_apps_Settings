@@ -117,12 +117,14 @@ open class ColorInversionScreen :
             +ColorInversionMainSwitchPreference(context)
             +PreferenceCategory(
                 key = "general_categories",
+                purpose = R.string.general_categories_purpose,
                 title = R.string.accessibility_screen_option,
             ) +=
                 {
                     +AccessibilityShortcutPreference(
                         context = context,
                         key = "color_inversion_shortcut_key",
+                        purpose = R.string.color_inversion_shortcut_key_purpose,
                         title = R.string.accessibility_display_inversion_shortcut_title,
                         componentName = COLOR_INVERSION_COMPONENT_NAME,
                         featureName = R.string.accessibility_display_inversion_preference_title,

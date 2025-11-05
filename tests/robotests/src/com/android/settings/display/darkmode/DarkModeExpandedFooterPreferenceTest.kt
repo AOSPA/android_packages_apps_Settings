@@ -91,6 +91,8 @@ class DarkModeExpandedFooterPreferenceTest {
                 object : FooterPreferenceMetadata {
                     override val key: String
                         get() = DarkModeCustomModesFooterPreference.KEY
+                    override val purpose: Int
+                        get() = R.string.dark_theme_custom_bedtime_footer_purpose
                 }
             SettingsShadowResources.overrideResource(R.string.help_url_dark_theme_link, helpLink)
 

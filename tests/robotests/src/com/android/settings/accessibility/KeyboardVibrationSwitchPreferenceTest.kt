@@ -62,7 +62,7 @@ class KeyboardVibrationSwitchPreferenceTest {
                 }
         }
 
-    private val preference = KeyboardVibrationSwitchPreference(context, "some_key")
+    private val preference = KeyboardVibrationSwitchPreference(context, "some_key", 0)
 
     @Before
     fun setUp() {

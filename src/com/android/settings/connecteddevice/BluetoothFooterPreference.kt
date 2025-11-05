@@ -37,6 +37,9 @@ class BluetoothFooterPreference(private val bluetoothDataStore: BluetoothDataSto
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.bluetooth_screen_footer_purpose
+
     override fun dependencies(context: Context) = arrayOf(BluetoothPreference.KEY)
 
     override fun intent(context: Context): Intent? = subSettingLauncher(context).toIntent()

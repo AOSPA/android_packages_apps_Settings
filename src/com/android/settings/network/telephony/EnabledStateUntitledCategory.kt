@@ -24,6 +24,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.UntitledPreferenceCategory
+import com.android.settings.R
 
 // LINT.IfChange
 class EnabledStateUntitledCategory(val subId: Int) :
@@ -35,6 +36,9 @@ class EnabledStateUntitledCategory(val subId: Int) :
 
     override val key: String
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.enabled_state_container_purpose
 
     override fun createWidget(context: Context) = UntitledPreferenceCategory(context)
 

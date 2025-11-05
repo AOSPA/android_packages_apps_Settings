@@ -38,6 +38,9 @@ class IntensityPreference(
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.reduce_bright_colors_level_purpose
+
     override val title: Int
         get() = R.string.reduce_bright_colors_intensity_preference_title
 

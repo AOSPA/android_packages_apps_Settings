@@ -45,6 +45,9 @@ class FirmwareVersionDetailPreference :
     override val key: String
         get() = "os_firmware_version"
 
+    override val purpose: Int
+        get() = R.string.os_firmware_version_purpose
+
     override val title: Int
         get() = R.string.firmware_version
 

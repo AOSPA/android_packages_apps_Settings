@@ -128,8 +128,9 @@ class HearingDevicePreferenceCategoryTest {
 
     class TestHearingDevicePreferenceCategory(
         override val key: String = "test_key",
+        override val purpose: Int = 0,
         override val title: Int = 0,
-    ) : HearingDevicePreferenceCategory(key, title) {
+    ) : HearingDevicePreferenceCategory(key, purpose, title) {
         override fun createDeviceUpdater(context: Context) = mock<BluetoothDeviceUpdater>()
 
         fun prepareForTest() {

@@ -42,7 +42,11 @@ import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
 class AlwaysOnSwitchPreference :
-    SwitchPreference(KEY, R.string.accessibility_screen_magnification_always_on_title),
+    SwitchPreference(
+        KEY,
+        R.string.accessibility_magnification_always_on_enabled_purpose,
+        R.string.accessibility_screen_magnification_always_on_title
+    ),
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider,
     PreferenceIndexableProvider,

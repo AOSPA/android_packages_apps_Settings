@@ -48,6 +48,9 @@ class SupervisionPinRecoveryPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.supervision_pin_recovery_purpose
+
     override val title: Int
         get() = R.string.supervision_add_forgot_pin_preference_title
 

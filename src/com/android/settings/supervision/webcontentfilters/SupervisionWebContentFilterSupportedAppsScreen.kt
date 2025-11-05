@@ -135,7 +135,7 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +UntitledPreferenceCategoryMetadata(SUPPORTED_APPS_GROUP)
+            +UntitledPreferenceCategoryMetadata(SUPPORTED_APPS_GROUP, R.string.supported_apps_group_purpose)
             +SupervisionWebContentFiltersFooterPreference()
         }
 

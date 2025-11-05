@@ -61,6 +61,9 @@ class MobileNetworkMainSwitchPreference(
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.use_sim_switch_catalyst_purpose
+
     override val title: Int
         get() = R.string.mobile_network_use_sim_on
 

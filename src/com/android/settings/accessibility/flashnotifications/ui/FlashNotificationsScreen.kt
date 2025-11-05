@@ -76,7 +76,10 @@ open class FlashNotificationsScreen :
         preferenceHierarchy(context) {
             +FlashNotificationsTopIntroPreference()
             +FlashNotificationsIllustrationPreference()
-            +UntitledPreferenceCategoryMetadata(CATEGORY_KEY) += {
+            +UntitledPreferenceCategoryMetadata(
+                CATEGORY_KEY,
+                purpose = R.string.flash_notifications_category_purpose
+            ) += {
                 +CameraFlashSwitchPreference()
                 +ScreenFlashSwitchPreference()
             }

@@ -36,9 +36,14 @@ import com.android.settingslib.preference.SwitchPreferenceBinding
 class KeyboardVibrationSwitchPreference(
     context: Context,
     key: String,
+    purpose: Int,
     private val mainSwitchPreferenceKey: String = VIBRATE_ON,
 ) :
-    SwitchPreference(key = key, title = R.string.accessibility_keyboard_vibration_title),
+    SwitchPreference(
+        key = key,
+        purpose = purpose,
+        title = R.string.accessibility_keyboard_vibration_title,
+    ),
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
     OnPreferenceChangeListener,

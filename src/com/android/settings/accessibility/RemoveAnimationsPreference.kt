@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.SwitchPreference
 class RemoveAnimationsPreference :
     SwitchPreference(
         KEY,
+        R.string.animator_duration_scale_purpose,
         R.string.accessibility_disable_animations,
         R.string.accessibility_disable_animations_summary,
     ),

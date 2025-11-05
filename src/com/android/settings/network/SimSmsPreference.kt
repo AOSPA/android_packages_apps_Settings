@@ -38,6 +38,9 @@ class SimSmsPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.sim_sms_preference_key_purpose
+
     override val title: Int
         get() = R.string.primary_sim_texts_title
 

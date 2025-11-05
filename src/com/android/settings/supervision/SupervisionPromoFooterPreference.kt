@@ -53,6 +53,9 @@ class SupervisionPromoFooterPreference(
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.promo_footer_purpose
+
     // Non indexable as the metadata (title, summary, etc.) is provided by another app with IPC
     override val indexable
         get() = false

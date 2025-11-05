@@ -104,6 +104,9 @@ class StartTimePreference(uiModeManager: UiModeManager) :
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.dark_theme_start_time_purpose
+
     override val title
         get() = R.string.night_display_start_time_title
 
@@ -135,6 +138,9 @@ class EndTimePreference(uiModeManager: UiModeManager) :
 
     override val key
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.dark_theme_end_time_purpose
 
     override val title
         get() = R.string.night_display_end_time_title

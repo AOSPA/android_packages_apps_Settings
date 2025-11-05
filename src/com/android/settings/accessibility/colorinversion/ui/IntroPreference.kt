@@ -26,6 +26,9 @@ class IntroPreference : PreferenceMetadata, PreferenceBinding {
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.toggle_inversion_preference_top_intro_purpose
+
     override val title: Int
         get() = R.string.accessibility_display_inversion_preference_intro_text
 

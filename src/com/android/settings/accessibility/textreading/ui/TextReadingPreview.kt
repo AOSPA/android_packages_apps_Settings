@@ -46,6 +46,9 @@ internal class TextReadingPreview(
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.preview_purpose
+
     private var previewPagerAdapter: PreviewPagerAdapter? = null
     private val displaySize: Flow<DisplaySize> by lazy { displaySizeProvider.invoke() }
     private val fontSize: Flow<FontSize> by lazy { fontSizeProvider.invoke() }

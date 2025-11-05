@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
  */
 class LaunchAppInfoPreference(
     override val key: String,
+    override val purpose: Int,
     override val title: Int = R.string.application_info_label,
     private val packageName: String,
 ) : PreferenceMetadata, PreferenceAvailabilityProvider {
