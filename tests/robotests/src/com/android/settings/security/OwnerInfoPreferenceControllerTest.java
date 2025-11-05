@@ -16,8 +16,10 @@
 package com.android.settings.security;
 
 import static com.android.settings.security.OwnerInfoPreferenceController.KEY_OWNER_INFO;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 
 import static com.google.common.truth.Truth.assertThat;
+import android.app.admin.EnforcingAdmin;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -28,6 +30,9 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.ComponentName;
+import android.app.admin.UnknownAuthority;
+import android.os.UserHandle;
 import android.content.Context;
 
 import androidx.fragment.app.FragmentManager;
@@ -42,6 +47,8 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import static android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,12 +58,17 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
+import android.platform.test.flag.junit.SetFlagsRule;
+import org.junit.Rule;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowFragment.class,
+        ShadowDevicePolicyManager.class,
 })
 public class OwnerInfoPreferenceControllerTest {
+
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private ObservablePreferenceFragment mFragment;
@@ -72,14 +84,19 @@ public class OwnerInfoPreferenceControllerTest {
     private RestrictedPreference mPreference;
     @Mock
     private LockPatternUtils mLockPatternUtils;
+    @Mock
+    private EnforcingAdmin mEnforcingAdmin;
 
     private Context mContext;
     private OwnerInfoPreferenceController mController;
+
+    private ShadowDevicePolicyManager mShadowDevicePolicyManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mShadowDevicePolicyManager = ShadowDevicePolicyManager.getShadow();
 
         when(mFragment.isAdded()).thenReturn(true);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
@@ -101,6 +118,15 @@ public class OwnerInfoPreferenceControllerTest {
 
     @Test
     public void onResume_shouldUpdateEnableState() {
+        mSetFlagsRule.disableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED);
+        mController.onResume();
+
+        verify(mController).updateEnableState();
+    }
+
+    @Test
+    public void onResume_shouldUpdateEnableState_enforcingAdmin() {
+        mSetFlagsRule.enableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED);
         mController.onResume();
 
         verify(mController).updateEnableState();
@@ -108,6 +134,15 @@ public class OwnerInfoPreferenceControllerTest {
 
     @Test
     public void onResume_shouldUpdateSummary() {
+        mSetFlagsRule.disableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED);
+        mController.onResume();
+
+        verify(mController).updateSummary();
+    }
+
+    @Test
+    public void onResume_shouldUpdateSummary_enforcingAdmin() {
+        mSetFlagsRule.enableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED);
         mController.onResume();
 
         verify(mController).updateSummary();
@@ -151,7 +186,8 @@ public class OwnerInfoPreferenceControllerTest {
     }
 
     @Test
-    public void updateEnableState_deviceOwnerInfoEnabled_shouldSetDisabledByAdmin() {
+    public void updateEnableState_deviceOwnerInfoEnabled_shouldSetDisabled_enforcedAdmin() {
+        mSetFlagsRule.disableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED);
         doReturn(true).when(mController).isDeviceOwnerInfoEnabled();
         doReturn(mock(EnforcedAdmin.class)).when(mController).getDeviceOwner();
         mController.displayPreference(mScreen);
@@ -162,7 +198,23 @@ public class OwnerInfoPreferenceControllerTest {
     }
 
     @Test
-    public void updateEnableState_lockScreenDisabled_shouldDisablePreference() {
+    public void updateEnableState_deviceOwnerInfoEnabled_shouldSetDisabled_enforcingAdmin() {
+        mSetFlagsRule.enableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED);
+        doReturn(true).when(mController).isDeviceOwnerInfoEnabled();
+        mEnforcingAdmin = new EnforcingAdmin("test.pkg",
+                UnknownAuthority.UNKNOWN_AUTHORITY, UserHandle.of(UserHandle.myUserId()),
+                new ComponentName("", ""));
+        doReturn(mEnforcingAdmin).when(mController).getDeviceOwnerEnforcingAdmin();
+        mController.displayPreference(mScreen);
+
+        mController.updateEnableState();
+
+        verify(mPreference).setDisabledByAdmin(mEnforcingAdmin);
+    }
+
+    @Test
+    public void updateEnableState_lockScreenDisabled_shouldDisablePreference_enforcedAdmin() {
+        mSetFlagsRule.disableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED);
         doReturn(false).when(mController).isDeviceOwnerInfoEnabled();
         doReturn(true).when(mLockPatternUtils).isLockScreenDisabled(anyInt());
         mController.displayPreference(mScreen);
@@ -173,7 +225,20 @@ public class OwnerInfoPreferenceControllerTest {
     }
 
     @Test
-    public void updateEnableState_lockScreenEnabled_shouldEnablePreference() {
+    public void updateEnableState_lockScreenDisabled_shouldDisablePreference_enforcingAdmin() {
+        mSetFlagsRule.enableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED);
+        doReturn(false).when(mController).isDeviceOwnerInfoEnabled();
+        doReturn(true).when(mLockPatternUtils).isLockScreenDisabled(anyInt());
+        mController.displayPreference(mScreen);
+
+        mController.updateEnableState();
+
+        verify(mPreference).setEnabled(false);
+    }
+
+    @Test
+    public void updateEnableState_lockScreenEnabled_shouldEnablePreference_enforcedAdmin() {
+        mSetFlagsRule.disableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED);
         doReturn(false).when(mController).isDeviceOwnerInfoEnabled();
         doReturn(false).when(mLockPatternUtils).isLockScreenDisabled(anyInt());
         mController.displayPreference(mScreen);
@@ -184,7 +249,39 @@ public class OwnerInfoPreferenceControllerTest {
     }
 
     @Test
-    public void handlePreferenceTreeClick_shouldLaunchOwnerInfoSettings() {
+    public void updateEnableState_lockScreenEnabled_shouldEnablePreference_enforcingAdmin()
+    {
+        mSetFlagsRule.enableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED);
+        doReturn(false).when(mController).isDeviceOwnerInfoEnabled();
+        doReturn(false).when(mLockPatternUtils).isLockScreenDisabled(anyInt());
+        mController.displayPreference(mScreen);
+
+        mController.updateEnableState();
+
+        verify(mPreference).setEnabled(true);
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_shouldLaunchOwnerInfoSettings_enforcedAdmin() {
+        mSetFlagsRule.disableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED);
+        final RestrictedPreference preference = new RestrictedPreference(mContext);
+        preference.setKey(KEY_OWNER_INFO);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(preference);
+        doReturn(false).when(mController).isDeviceOwnerInfoEnabled();
+        doReturn(false).when(mLockPatternUtils).isLockScreenDisabled(anyInt());
+        mController.displayPreference(mScreen);
+        mController.updateEnableState();
+
+        mController.handlePreferenceTreeClick(preference);
+
+        verify(mFragment.getFragmentManager().beginTransaction())
+                .add(any(OwnerInfoSettings.class), anyString());
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_shouldLaunchOwnerInfoSettings_enforcingAdmin()
+    {
+        mSetFlagsRule.enableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED);
         final RestrictedPreference preference = new RestrictedPreference(mContext);
         preference.setKey(KEY_OWNER_INFO);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(preference);
