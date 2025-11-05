@@ -416,17 +416,17 @@ class SupervisionHelperTest {
     }
 
     @Test
-    fun isMissingRecoveryMethod_hasValidMethod_returnsFalse() {
+    fun shouldDisplayPinRecoveryReminders_hasValidRecoveryMethod_returnsFalse() {
         whenever(mockISupervisionManager.hasValidRecoveryMethod(any())).thenReturn(true)
 
-        assertThat(context.isMissingRecoveryMethod()).isFalse()
+        assertThat(context.shouldDisplayPinRecoveryReminders()).isFalse()
     }
 
     @Test
-    fun isMissingRecoveryMethod_noValidMethod_returnsTrue() {
+    fun shouldDisplayPinRecoveryReminders_noValidRecoveryMethod_returnsTrue() {
         whenever(mockISupervisionManager.hasValidRecoveryMethod(any())).thenReturn(false)
 
-        assertThat(context.isMissingRecoveryMethod()).isTrue()
+        assertThat(context.shouldDisplayPinRecoveryReminders()).isTrue()
     }
 
     private fun setUpMessengerServiceComponent(packageName: String, disabled: Boolean) {

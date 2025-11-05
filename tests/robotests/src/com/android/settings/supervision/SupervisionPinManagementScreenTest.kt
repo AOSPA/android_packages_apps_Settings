@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.app.KeyguardManager
+import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
@@ -46,18 +47,22 @@ import com.android.settings.R
 import com.android.settingslib.preference.launchFragmentScenario
 import com.android.settingslib.widget.FooterPreference
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.ShadowServiceManager
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionPinManagementScreenTest {
     private val mockKeyguardManager = mock<KeyguardManager>()
     private val mockUserManager = mock<UserManager>()
     private val mockSupervisionManager = mock<SupervisionManager>()
+    private val mockISupervisionManager = mock<ISupervisionManager>()
 
     @get:Rule val setFlagsRule = SetFlagsRule()
 
@@ -73,6 +78,15 @@ class SupervisionPinManagementScreenTest {
         }
 
     private val supervisionPinManagementScreen = SupervisionPinManagementScreen()
+
+    @Before
+    fun setUp() {
+        ShadowServiceManager.addBinderService(
+            Context.SUPERVISION_SERVICE,
+            ISupervisionManager::class.java,
+            mockISupervisionManager,
+        )
+    }
 
     @Test
     fun key() {
@@ -130,6 +144,7 @@ class SupervisionPinManagementScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun getDescription_recoveryInfoMissing_addPinRecovery() {
         whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(null)
 
@@ -142,7 +157,25 @@ class SupervisionPinManagementScreenTest {
     }
 
     @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun getDescription_shouldShowPinRecoveryRemindersAndrecoveryInfoMissing_addPinRecovery() {
+        whenever(mockISupervisionManager.hasValidRecoveryMethod(any())).thenReturn(false)
+        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(null)
+
+        assertThat(supervisionPinManagementScreen.getSummary(context))
+            .isEqualTo(
+                context.getString(R.string.supervision_pin_management_preference_summary_add)
+            )
+        assertThat(supervisionPinManagementScreen.getIcon(context))
+            .isEqualTo(R.drawable.exclamation_icon)
+    }
+
+    @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun getDescription_recoveryNotVerified_verifyPinRecovery() {
         val recoveryInfo =
             SupervisionRecoveryInfo(
@@ -164,7 +197,49 @@ class SupervisionPinManagementScreenTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun getDescription_shouldShowPinRecoveryRemindersAndRecoveryNotVerified_verifyPinRecovery() {
+        whenever(mockISupervisionManager.hasValidRecoveryMethod(any())).thenReturn(false)
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_PENDING,
+                /* accountData */ null,
+            )
+        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(recoveryInfo)
+
+        assertThat(supervisionPinManagementScreen.getSummary(context))
+            .isEqualTo(
+                context.getString(
+                    R.string.supervision_pin_management_preference_summary_verify_recovery
+                )
+            )
+        assertThat(supervisionPinManagementScreen.getIcon(context))
+            .isEqualTo(R.drawable.exclamation_icon)
+    }
+
+    @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun getDescription_shouldNotShowPinRecoveryReminders_noSummary() {
+        whenever(mockISupervisionManager.hasValidRecoveryMethod(any())).thenReturn(true)
+
+        assertThat(supervisionPinManagementScreen.getSummary(context)).isNull()
+        assertThat(supervisionPinManagementScreen.getIcon(context))
+            .isEqualTo(R.drawable.ic_pin_outline)
+    }
+
+    @Test
+    @DisableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
     fun getDescription_recoveryFlagDisabled_noSummary() {
         whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(null)
 
@@ -175,6 +250,7 @@ class SupervisionPinManagementScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun getDescription_recoverySetup_noSummary() {
         val recoveryInfo =
             SupervisionRecoveryInfo(

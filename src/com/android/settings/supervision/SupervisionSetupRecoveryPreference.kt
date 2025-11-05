@@ -15,7 +15,6 @@
  */
 package com.android.settings.supervision
 
-import android.annotation.DrawableRes
 import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ADD_RECOVERY
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_VERIFY_RECOVERY
@@ -28,11 +27,13 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.DrawableRes
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.supervision.SupervisionUpdateRecoveryEmailPreference.Companion.asMaskedEmail
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -51,6 +52,7 @@ class SupervisionSetupRecoveryPreference :
     PreferenceBinding,
     PreferenceSummaryProvider,
     PreferenceTitleProvider,
+    PreferenceIconProvider,
     Preference.OnPreferenceClickListener {
 
     private lateinit var lifeCycleContext: PreferenceLifecycleContext
@@ -72,8 +74,16 @@ class SupervisionSetupRecoveryPreference :
         return accountNameToVerify(context)?.asMaskedEmail()
     }
 
-    override val icon: Int
-        @DrawableRes get() = R.drawable.exclamation_icon
+    @DrawableRes
+    override fun getIcon(context: Context): Int {
+        if (
+            Flags.enableSupervisionSettingsUiUpdates() &&
+                !context.shouldDisplayPinRecoveryReminders()
+        ) {
+            return 0
+        }
+        return R.drawable.exclamation_icon
+    }
 
     override fun isAvailable(context: Context): Boolean {
         if (!Flags.enableSupervisionPinRecoveryScreen()) {
