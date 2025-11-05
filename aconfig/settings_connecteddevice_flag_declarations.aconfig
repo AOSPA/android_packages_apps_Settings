@@ -57,16 +57,6 @@ flag {
 }
 
 flag {
-    name: "enable_default_display_in_topology_switch_bugfix"
-    namespace: "lse_desktop_experience"
-    description: "Add switch in the settings page to include default display in display topology"
-    bug: "420885578"
-    metadata {
-        purpose: PURPOSE_BUGFIX
-    }
-}
-
-flag {
     name: "enable_resolution_confirm_dialog_bugfix"
     namespace: "lse_desktop_experience"
     description: "Shows dialog to let user confirms if the resolution selected should be persisted"

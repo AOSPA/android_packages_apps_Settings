@@ -291,10 +291,6 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         DisplayManagerGlobal.getInstance().resetUserPreferredDisplayMode(displayId)
     }
 
-    open fun isDefaultDisplayInTopologyFlagEnabled(): Boolean =
-        android.window.DesktopExperienceFlags.ENABLE_DEFAULT_DISPLAY_IN_TOPOLOGY_SWITCH.isTrue() &&
-            flags.enableDefaultDisplayInTopologySwitchBugfix()
-
     open var displayTopology: DisplayTopology?
         get() = displayManager?.displayTopology
         set(value) {
