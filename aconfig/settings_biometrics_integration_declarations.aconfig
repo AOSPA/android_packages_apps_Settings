@@ -36,16 +36,6 @@ flag {
 }
 
 flag {
-  name: "msdl_feedback"
-  namespace: "biometrics_integration"
-  description: "This flag controls whether MSDL haptic feedback is delivered in Settings, especially for the bouncer pattern"
-  bug: "406774575"
-  metadata {
-      purpose: PURPOSE_BUGFIX
-  }
-}
-
-flag {
   name: "remove_protection_layout"
   namespace: "biometrics_integration"
   description: "This flag controls whether remove protection layout in biometrics settings"

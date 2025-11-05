@@ -22,6 +22,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.accessibility.extradim.data.ExtraDimDataStore
 import com.android.settings.testutils.SettingsStoreRule
+import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.testutils.shadow.ShadowColorDisplayManager
@@ -43,10 +44,12 @@ class ExtraDimMainSwitchPreferenceTest {
     private lateinit var shadowColorDisplayManager: ShadowColorDisplayManager
     private lateinit var appContext: Context
     private lateinit var preference: ExtraDimMainSwitchPreference
+    private lateinit var settingsStore: SettingsSecureStore
 
     @Before
     fun setUp() {
         appContext = ApplicationProvider.getApplicationContext()
+        settingsStore = SettingsSecureStore.get(appContext)
         preference = ExtraDimMainSwitchPreference(appContext)
         shadowColorDisplayManager =
             Shadow.extract(appContext.getSystemService(ColorDisplayManager::class.java))
@@ -54,7 +57,7 @@ class ExtraDimMainSwitchPreferenceTest {
 
     @Test
     fun bindWidget_featureOn_toggleIsChecked() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = true
+        settingsStore.setBoolean(ExtraDimDataStore.SETTING_KEY, true)
         val widget = preference.createAndBindWidget<MainSwitchPreference>(appContext)
 
         assertThat(widget.isChecked).isTrue()
@@ -62,7 +65,7 @@ class ExtraDimMainSwitchPreferenceTest {
 
     @Test
     fun bindWidget_featureOff_toggleIsNotChecked() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = false
+        settingsStore.setBoolean(ExtraDimDataStore.SETTING_KEY, false)
         val widget = preference.createAndBindWidget<MainSwitchPreference>(appContext)
 
         assertThat(widget.isChecked).isFalse()
@@ -70,21 +73,19 @@ class ExtraDimMainSwitchPreferenceTest {
 
     @Test
     fun turnOnFeature_reduceBrightColorsIsActivated() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = false
+        settingsStore.setBoolean(ExtraDimDataStore.SETTING_KEY, false)
         val widget = preference.createAndBindWidget<MainSwitchPreference>(appContext)
 
         widget.performClick()
-
         assertThat(shadowColorDisplayManager.isReduceBrightColorsActivated).isTrue()
     }
 
     @Test
     fun turnOffFeature_reduceBrightColorIsDeactivated() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = true
+        settingsStore.setBoolean(ExtraDimDataStore.SETTING_KEY, true)
         val widget = preference.createAndBindWidget<MainSwitchPreference>(appContext)
 
         widget.performClick()
-
         assertThat(shadowColorDisplayManager.isReduceBrightColorsActivated).isFalse()
     }
 

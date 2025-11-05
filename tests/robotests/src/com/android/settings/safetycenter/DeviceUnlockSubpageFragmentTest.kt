@@ -503,7 +503,8 @@ class DeviceUnlockSubpageFragmentTest {
                 fragment.findPreference<BannerMessagePreferenceGroup>(DEVICE_UNLOCK_ISSUES_KEY)
             val illustration =
                 fragment.findPreference<IllustrationPreference>(DEVICE_UNLOCK_ILLUSTRATION_KEY)
-            val banner = bannerGroup?.findPreference<BannerMessagePreference>(activeIssue.id)
+            val banner =
+                bannerGroup?.findPreference<BannerMessagePreference>("active_${activeIssue.id}")
 
             assertThat(bannerGroup?.isVisible).isTrue()
             assertThat(illustration?.isVisible).isFalse()
@@ -528,7 +529,10 @@ class DeviceUnlockSubpageFragmentTest {
                 fragment.findPreference<BannerMessagePreferenceGroup>(DEVICE_UNLOCK_ISSUES_KEY)
             val illustration =
                 fragment.findPreference<IllustrationPreference>(DEVICE_UNLOCK_ILLUSTRATION_KEY)
-            val banner = bannerGroup?.findPreference<BannerMessagePreference>(dismissedIssue.id)
+            val banner =
+                bannerGroup?.findPreference<BannerMessagePreference>(
+                    "dismissed_${dismissedIssue.id}"
+                )
 
             assertThat(bannerGroup?.isVisible).isTrue()
             assertThat(illustration?.isVisible).isTrue()
@@ -564,9 +568,12 @@ class DeviceUnlockSubpageFragmentTest {
                 fragment.findPreference<BannerMessagePreferenceGroup>(DEVICE_UNLOCK_ISSUES_KEY)
             val illustration =
                 fragment.findPreference<IllustrationPreference>(DEVICE_UNLOCK_ILLUSTRATION_KEY)
-            val activeBanner = bannerGroup?.findPreference<BannerMessagePreference>(activeIssue.id)
+            val activeBanner =
+                bannerGroup?.findPreference<BannerMessagePreference>("active_${activeIssue.id}")
             val dismissedBanner =
-                bannerGroup?.findPreference<BannerMessagePreference>(dismissedIssue.id)
+                bannerGroup?.findPreference<BannerMessagePreference>(
+                    "dismissed_${dismissedIssue.id}"
+                )
 
             assertThat(bannerGroup?.isVisible).isTrue()
             assertThat(illustration?.isVisible).isFalse()
@@ -596,9 +603,9 @@ class DeviceUnlockSubpageFragmentTest {
             val bannerGroup =
                 fragment.findPreference<BannerMessagePreferenceGroup>(DEVICE_UNLOCK_ISSUES_KEY)
             val relevantBanner =
-                bannerGroup?.findPreference<BannerMessagePreference>(relevantIssue.id)
+                bannerGroup?.findPreference<BannerMessagePreference>("active_${relevantIssue.id}")
             val irrelevantBanner =
-                bannerGroup?.findPreference<BannerMessagePreference>(irrelevantIssue.id)
+                bannerGroup?.findPreference<BannerMessagePreference>("active_${irrelevantIssue.id}")
 
             assertThat(bannerGroup?.isVisible).isTrue()
             assertThat(bannerGroup?.preferenceCount).isEqualTo(1)
@@ -636,7 +643,11 @@ class DeviceUnlockSubpageFragmentTest {
 
             val bannerGroup =
                 fragment.findPreference<BannerMessagePreferenceGroup>(DEVICE_UNLOCK_ISSUES_KEY)
-            assertThat(bannerGroup?.findPreference<BannerMessagePreference>(activeIssue.id))
+            assertThat(
+                    bannerGroup?.findPreference<BannerMessagePreference>(
+                        "dismissed_${activeIssue.id}"
+                    )
+                )
                 .isNotNull()
 
             onView(withId(ButtonR.id.settingslib_number_button)).perform(click())
@@ -667,7 +678,11 @@ class DeviceUnlockSubpageFragmentTest {
 
             val bannerGroup =
                 fragment.findPreference<BannerMessagePreferenceGroup>(DEVICE_UNLOCK_ISSUES_KEY)
-            assertThat(bannerGroup?.findPreference<BannerMessagePreference>(activeIssue.id))
+            assertThat(
+                    bannerGroup?.findPreference<BannerMessagePreference>(
+                        "dismissed_${activeIssue.id}"
+                    )
+                )
                 .isNotNull()
 
             onView(withId(ButtonR.id.settingslib_number_button)).perform(click())
@@ -708,8 +723,6 @@ class DeviceUnlockSubpageFragmentTest {
 
             val bannerGroup =
                 fragment.findPreference<BannerMessagePreferenceGroup>(DEVICE_UNLOCK_ISSUES_KEY)
-            assertThat(bannerGroup?.findPreference<BannerMessagePreference>(activeIssue.id))
-                .isNull()
             assertThat(bannerGroup?.isVisible).isFalse()
             val illustration =
                 fragment.findPreference<IllustrationPreference>(DEVICE_UNLOCK_ILLUSTRATION_KEY)
@@ -782,8 +795,6 @@ class DeviceUnlockSubpageFragmentTest {
 
             val bannerGroup =
                 fragment.findPreference<BannerMessagePreferenceGroup>(DEVICE_UNLOCK_ISSUES_KEY)
-            assertThat(bannerGroup?.findPreference<BannerMessagePreference>(activeIssue.id))
-                .isNull()
             assertThat(bannerGroup?.isVisible).isFalse()
             val illustration =
                 fragment.findPreference<IllustrationPreference>(DEVICE_UNLOCK_ILLUSTRATION_KEY)
@@ -803,9 +814,12 @@ class DeviceUnlockSubpageFragmentTest {
             val bannerGroup =
                 fragment.findPreference<BannerMessagePreferenceGroup>(DEVICE_UNLOCK_ISSUES_KEY)
             assertThat(bannerGroup?.isVisible).isTrue()
-            val banner1 = bannerGroup?.findPreference<BannerMessagePreference>("issue1")
-            val banner2 = bannerGroup?.findPreference<BannerMessagePreference>("issue2")
-            val banner3 = bannerGroup?.findPreference<BannerMessagePreference>("issue3")
+            val banner1 =
+                bannerGroup?.findPreference<BannerMessagePreference>("active_${issue1.id}")
+            val banner2 =
+                bannerGroup?.findPreference<BannerMessagePreference>("active_${issue2.id}")
+            val banner3 =
+                bannerGroup?.findPreference<BannerMessagePreference>("active_${issue3.id}")
 
             // Initially collapsed
             assertThat(banner1?.isVisible).isTrue()

@@ -20,18 +20,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.safetycenter.SafetyCenterIssue
 import android.util.Log
-import android.view.View
-import android.widget.LinearLayout
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.safetycenter.SafetyCenterSeverityConverter
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
 import com.android.settingslib.safetycenter.SafetyCenterUiData
-import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.BannerMessagePreferenceGroup
 import com.android.settingslib.widget.IllustrationPreference
 
@@ -50,6 +46,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
     BasePreferenceController(context, preferenceKey) {
 
     private var bannerGroup: BannerMessagePreferenceGroup? = null
+    private var bannerGroupManager: SafetyIssuesBannerGroupManager? = null
     private var viewModel: LiveSafetyCenterViewModel? = null
     private var fragmentManager: FragmentManager? = null
     private var activityTaskId: Int? = null
@@ -107,7 +104,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
      */
     fun setSubpageSafetySourcesAndIllustration(
         sources: List<String>,
-        illustrationPref: IllustrationPreference,
+        illustrationPref: IllustrationPreference?,
     ) {
         this.isSubpage = true
         this.relatedSafetySources = sources
@@ -123,7 +120,6 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
         super.displayPreference(screen)
         bannerGroup = screen.findPreference(preferenceKey)
         bannerGroup?.let {
-            it.isVisible = false
             // Set titles for the expand/collapse buttons
             it.title =
                 mContext.getString(R.string.safety_center_issues_banner_group_expandable_title)
@@ -147,28 +143,72 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
         }
     }
 
-    private fun updatePreferenceUi(group: BannerMessagePreferenceGroup, data: SafetyCenterUiData) =
-        if (isSubpage) {
-            updateIssuesInSubpage(group, data)
-        } else {
-            updateIssuesInMainPage(group, data)
+    /**
+     * Updates the UI of the [BannerMessagePreferenceGroup] with the provided [SafetyCenterUiData].
+     *
+     * @param group The [BannerMessagePreferenceGroup] to be updated.
+     * @param data The [SafetyCenterUiData] containing the latest safety issues.
+     */
+    private fun updatePreferenceUi(group: BannerMessagePreferenceGroup, data: SafetyCenterUiData) {
+        ensureBannerGroupManagerInitialized(group)
+        val bannerGroupManager = this.bannerGroupManager
+        if (bannerGroupManager == null) {
+            Log.w(TAG, "Skipping banner update, SafetyIssuesBannerGroupManager not initialized.")
+            return
         }
+
+        if (isSubpage) {
+            updateIssuesInSubpage(group, data, bannerGroupManager)
+        } else {
+            updateIssuesInMainPage(group, data, bannerGroupManager)
+        }
+    }
+
+    /**
+     * Creates an instance of [SafetyIssuesBannerGroupManager] if it hasn't been created yet and all
+     * necessary dependencies are available.
+     *
+     * @param bannerGroup The [BannerMessagePreferenceGroup] to be managed.
+     */
+    private fun ensureBannerGroupManagerInitialized(bannerGroup: BannerMessagePreferenceGroup) {
+        if (this.bannerGroupManager == null) {
+            val viewModel = this.viewModel
+            val fragmentManager = this.fragmentManager
+            val activityTaskId = this.activityTaskId
+
+            if (viewModel != null && fragmentManager != null && activityTaskId != null) {
+                Log.d(TAG, "Creating new SafetyIssuesBannerGroupManager instance.")
+                this.bannerGroupManager =
+                    SafetyIssuesBannerGroupManager(
+                        mContext,
+                        bannerGroup,
+                        viewModel,
+                        fragmentManager,
+                        activityTaskId,
+                    )
+            } else {
+                Log.w(
+                    TAG,
+                    "Failed to create SafetyIssuesBannerGroupManager. Missing ViewModel, FragmentManager, or ActivityTaskId.",
+                )
+            }
+        }
+    }
 
     /** Updates the [BannerMessagePreferenceGroup] with all active issues for the main page. */
     private fun updateIssuesInMainPage(
         bannerGroup: BannerMessagePreferenceGroup,
         data: SafetyCenterUiData,
+        bannerGroupManager: SafetyIssuesBannerGroupManager,
     ) {
-        bannerGroup.removeAll()
         val activeIssues = data.getActiveIssues()
-
-        if (activeIssues.isEmpty()) {
-            Log.d(TAG, "[$preferenceKey] No active issues for main page, hiding bannerGroup")
-            bannerGroup.isVisible = false
-            return
-        }
         Log.d(TAG, "[$preferenceKey] Updating main page with ${activeIssues.size} active issues")
-        updateBannerGroup(bannerGroup, activeIssues, dismissedIssues = emptyList())
+        bannerGroupManager.updateBannerGroup(
+            newActiveIssues = activeIssues,
+            newDismissedIssues = emptyList(),
+            resolvedIssues = data.resolvedIssues,
+        )
+        bannerGroup.isVisible = !activeIssues.isEmpty()
     }
 
     /**
@@ -178,146 +218,22 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
     private fun updateIssuesInSubpage(
         bannerGroup: BannerMessagePreferenceGroup,
         data: SafetyCenterUiData,
+        bannerGroupManager: SafetyIssuesBannerGroupManager,
     ) {
-        bannerGroup.removeAll()
         val activeIssues = data.getActiveIssuesForSources(relatedSafetySources)
         val dismissedIssues = data.getDismissedIssuesForSources(relatedSafetySources)
-        illustrationPreference?.isVisible = activeIssues.isEmpty()
-
-        if (activeIssues.isEmpty() && dismissedIssues.isEmpty()) {
-            Log.d(TAG, "[$preferenceKey] No issues for subpage, hiding bannerGroup")
-            bannerGroup.isVisible = false
-            return
-        }
-
         Log.d(
             TAG,
             "[$preferenceKey] Updating subpage with ${activeIssues.size} active, ${dismissedIssues.size} dismissed issues.",
         )
-        updateBannerGroup(bannerGroup, activeIssues, dismissedIssues)
-    }
+        bannerGroupManager.updateBannerGroup(
+            newActiveIssues = activeIssues,
+            newDismissedIssues = dismissedIssues,
+            resolvedIssues = data.resolvedIssues,
+        )
 
-    /** Populates the [BannerMessagePreferenceGroup] with the given active and dismissed issues. */
-    private fun updateBannerGroup(
-        bannerGroup: BannerMessagePreferenceGroup,
-        activeIssues: List<SafetyCenterIssue>,
-        dismissedIssues: List<SafetyCenterIssue>,
-    ) {
-        activeIssues.forEach { issue ->
-            bannerGroup.addPreference(createBannerForIssue(issue, isDismissed = false))
-        }
-
-        if (dismissedIssues.isNotEmpty()) {
-            bannerGroup.addSubsection(
-                mContext.getString(R.string.safety_center_dismissed_issues_subsection_title)
-            )
-            dismissedIssues.forEach { issue ->
-                bannerGroup.addSubsectionPreference(createBannerForIssue(issue, isDismissed = true))
-            }
-        }
-        bannerGroup.isVisible = true
-    }
-
-    /**
-     * Creates and configures a [BannerMessagePreference] for a given [SafetyCenterIssue].
-     *
-     * @param issue The issue to display.
-     * @param isDismissed Whether the issue is in the dismissed list.
-     */
-    private fun createBannerForIssue(
-        issue: SafetyCenterIssue,
-        isDismissed: Boolean,
-    ): BannerMessagePreference {
-        return BannerMessagePreference(mContext).apply {
-            key = issue.id
-            title = issue.title
-            summary = issue.summary
-            setHeader(issue.attributionTitle)
-            setSubtitle(issue.subtitle)
-            setAttentionLevel(
-                SafetyCenterSeverityConverter.toBannerAttentionLevel(issue.severityLevel)
-            )
-            setButtonOrientation(LinearLayout.VERTICAL)
-
-            configureActionButtons(this, issue)
-            configureDismissButton(this, issue, isDismissed)
-        }
-    }
-
-    /** Configures the action buttons for the banner based on the issue's actions. */
-    private fun configureActionButtons(banner: BannerMessagePreference, issue: SafetyCenterIssue) {
-        val primaryAction = issue.actions.getOrNull(0)
-        if (primaryAction != null) {
-            banner.setPositiveButtonText(primaryAction.label)
-            banner.setPositiveButtonEnabled(!primaryAction.isInFlight)
-            banner.setPositiveButtonVisible(true)
-            banner.setPositiveButtonOnClickListener(
-                ActionButtonOnClickListener(issue, primaryAction, banner)
-            )
-        } else {
-            banner.setPositiveButtonVisible(false)
-            banner.setPositiveButtonOnClickListener(null)
-        }
-
-        val secondaryAction = issue.actions.getOrNull(1)
-        if (secondaryAction != null) {
-            banner.setNegativeButtonText(secondaryAction.label)
-            banner.setNegativeButtonEnabled(!secondaryAction.isInFlight)
-            banner.setNegativeButtonVisible(true)
-            banner.setNegativeButtonOnClickListener(
-                ActionButtonOnClickListener(issue, secondaryAction, banner)
-            )
-        } else {
-            banner.setNegativeButtonVisible(false)
-            banner.setNegativeButtonOnClickListener(null)
-        }
-    }
-
-    private inner class ActionButtonOnClickListener(
-        private val issue: SafetyCenterIssue,
-        private val action: SafetyCenterIssue.Action,
-        private val banner: BannerMessagePreference,
-    ) : View.OnClickListener {
-        override fun onClick(v: View?) {
-            if (action.confirmationDialogDetails != null) {
-                ConfirmActionDialogFragment.newInstance(issue, action, activityTaskId!!)
-                    .showNow(fragmentManager!!, /* tag= */ null)
-            } else {
-                if (action.willResolve()) {
-                    banner.setPositiveButtonEnabled(false)
-                    banner.setNegativeButtonEnabled(false)
-                }
-                viewModel?.executeIssueAction(issue, action, activityTaskId!!)
-            }
-        }
-    }
-
-    /** Configures the dismiss button visibility and click listener. */
-    private fun configureDismissButton(
-        banner: BannerMessagePreference,
-        issue: SafetyCenterIssue,
-        isDismissed: Boolean,
-    ) {
-        if (issue.isDismissible && !isDismissed) {
-            banner.setDismissButtonVisible(true)
-            banner.setDismissButtonOnClickListener {
-                if (issue.shouldConfirmDismissal()) {
-                    showDismissConfirmationDialog(issue)
-                } else {
-                    viewModel?.dismissIssue(issue)
-                }
-            }
-        } else {
-            banner.setDismissButtonVisible(false)
-            banner.setDismissButtonOnClickListener(null)
-        }
-    }
-
-    /** Shows a confirmation dialog before dismissing an issue. */
-    private fun showDismissConfirmationDialog(issue: SafetyCenterIssue) {
-        Log.d(TAG, "[$preferenceKey] Showing dismiss confirmation for issue: ${issue.id}")
-        ConfirmDismissalDialogFragment.newInstance(issue)
-            .showNow(fragmentManager!!, /* tag= */ null)
+        illustrationPreference?.isVisible = activeIssues.isEmpty()
+        bannerGroup.isVisible = !(activeIssues.isEmpty() && dismissedIssues.isEmpty())
     }
 
     companion object {

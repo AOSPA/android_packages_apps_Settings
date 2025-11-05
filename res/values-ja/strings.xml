@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"この設定を変更するには、デバイスの再起動が必要です。"</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"再起動"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"キャンセル"</string>
-    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audio を無効にする"</string>
-    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"デバイスが LE オーディオ ハードウェア機能に対応している場合に、Bluetooth LE Audio 機能を無効にします。"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio モード"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"LE Audio の切替をデバイスの詳細に表示"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth LE Audio の許可リストを回避"</string>
@@ -725,7 +723,7 @@
     <string name="private_space_deleted" msgid="7692240901492540053">"プライベート スペースを削除しました"</string>
     <string name="private_space_delete_failed" msgid="7705795653796174741">"プライベート スペースを削除できませんでした"</string>
     <string name="private_space_unlocked" msgid="9091600948712932046">"プライベート スペースのロックを解除しました"</string>
-    <string name="no_device_lock_title" msgid="1078223464721029954">"画面ロックの設定"</string>
+    <string name="no_device_lock_title" msgid="1078223464721029954">"画面ロックを設定"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"プライベート スペースを使用するには、このデバイスで画面ロックを設定してください"</string>
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"画面ロックを設定"</string>
     <string name="no_device_lock_cancel" msgid="4412602160321228863">"キャンセル"</string>
@@ -750,7 +748,7 @@
     <string name="private_space_error_description" msgid="6591005734266923120">"プライベート スペースを利用できません。\n考えられる原因を表示する"</string>
     <string name="private_space_error_causes_text" msgid="1649162505129365620">"考えられる原因を表示する"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"プライベート スペースのロックを新しく設定しますか？"</string>
-    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"プライベート スペース専用のロックを新しく設定するか、デバイスのロック解除と同じロックを使用することができます"</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"プライベート スペース専用のロックを新しく設定するか、デバイスの画面ロックをそのまま使用することができます"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"画面ロックを使用"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"新しいロックを設定"</string>
     <string name="private_space_wait_screen_title" msgid="1535431437075585381">"お待ちください…"</string>
@@ -779,7 +777,7 @@
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"仕事用プロファイルのロック解除や、購入の承認、仕事用アプリへのログインに、指紋を使用できなくなります。"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"暗号化"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"暗号化されています"</string>
-    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"画面ロックの設定"</string>
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"画面ロックを設定"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"セキュリティを強化するために、このデバイスの PIN、パターン、またはパスワードを設定してください。"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"画面ロックを設定"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"画面ロックを設定"</string>
@@ -1029,6 +1027,10 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"外部ディスプレイを接続して使い始めるか、別のケーブルをお試しください"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"その他のオプション"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"ディスプレイを並べ替えるには長押ししてドラッグします"</string>
+    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
+    <skip />
+    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"内蔵ディスプレイをミラーリングする"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"新しい設定を使用しますか？"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"ディスプレイが想定どおりに動作しない場合は、以前の設定に戻すことができます"</string>
@@ -1038,6 +1040,14 @@
     <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"下に移動"</string>
     <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"左に移動"</string>
     <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"右に移動"</string>
+    <!-- no translation found for external_display_topology_a11y_display_moved_up (2006298475752942395) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_down (6028544722984648702) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_left (5308110789317472437) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_display_moved_right (3802527156765844475) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ミラー"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ワイヤレス ディスプレイの有効化"</string>
@@ -1321,6 +1331,8 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / 対応デバイスは多数"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / 対応デバイスはまだ少数"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2.4 / 5 GHz / ほとんどのデバイスに対応"</string>
+    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
+    <skip />
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"アクセス ポイントの周波数を選択してください。周波数によって接続速度と対応デバイスが異なります。"</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"優先周波数"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
@@ -1331,6 +1343,10 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"高速です。このデュアルバンドのアクセス ポイントはほとんどのデバイスに対応しています。"</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"速度が最も速くなります。対応デバイスはまだ少数です。"</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
+    <skip />
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"お住まいの国や地域では利用できません"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"優先周波数を利用できない状況では、別の周波数を使用することがあります。周波数を変更すると、アクセス ポイントのセキュリティ設定も変わる場合があります。"</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"6 GHz には対応していません"</string>
@@ -1900,13 +1916,13 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"指紋認証にはパターンが必要です"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"セキュリティ強化のため、PIN を設定してください"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"指紋認証には PIN が必要です"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="4988519671035171367">"デバイスのパスワードを入力してください"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="4988519671035171367">"デバイスのパスワードを入力"</string>
     <string name="lockpassword_reenter_your_password_header" msgid="7257189484651655897">"パスワードをもう一度入力してください"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"仕事用パスワードをもう一度入力してください"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"仕事用のパスワードを入力"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="2473024535487015289">"デバイスのパターンを入力"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"仕事用のパターンを入力"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="541025103892074808">"デバイスの PIN を入力してください"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="541025103892074808">"デバイスの PIN を入力"</string>
     <string name="lockpassword_reenter_your_pin_header" msgid="373337443492549650">"PIN をもう一度入力してください"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"仕事用 PIN をもう一度入力してください"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"仕事用の PIN を入力"</string>
@@ -2420,7 +2436,7 @@
     <string name="color_contrast_about_title" msgid="5939566801408667867">"色のコントラストについて"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"画面を暗くする"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"操作のコントロール"</string>
-    <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"タイミングの調節"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"タイミングを調節"</string>
     <string name="accessibility_tap_assistance_subtext" msgid="1805279944665087799">"長押しする時間、操作までの時間"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"システム操作"</string>
     <string name="accessibility_system_controls_subtext" msgid="2722046038429586174">"ナビゲーション モード、片手モード、画面の回転"</string>
@@ -2761,7 +2777,7 @@
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"接続可能な補聴器"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"補聴器が表示されない場合"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"他のデバイスを見る"</string>
-    <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"音声の調整"</string>
+    <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"音声を調整"</string>
     <string name="accessibility_audio_adjustment_subtext" msgid="2190523175597700025">"モノラル音声、オーディオ バランス"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"音声による説明"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"対応する映画や番組にて、画面の表示内容の説明を読み上げます"</string>
@@ -2927,6 +2943,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"バッテリー使用量"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"過去 24 時間の使用状況を確認できます"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"前回のフル充電以降の使用を表示"</string>
+    <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"アプリのバッテリー使用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"使用状況の詳細"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"消費電力の調整"</string>
@@ -3485,6 +3503,7 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"このデバイスの管理者はあなただけなので、ユーザー プロフィールを削除することはできません。ユーザー プロフィールを削除する場合は、別のユーザーを管理者に指定するか、[システム] &gt; [リセット オプション] &gt; [すべてのデータを消去（初期設定にリセット）] に移動してデバイスからすべてのデータを消去してください。"</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"管理者権限を削除できません"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"このデバイスの管理者ユーザーはあなただけです。管理者をやめる場合は、まず別のユーザーを管理者に指定してください。"</string>
+    <string name="add_user_summary_action_restricted" msgid="6276344792683243643">"仕事用ポリシーによりブロックされています"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"緊急時情報"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>の情報と連絡先"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g>を開く"</string>
@@ -4870,12 +4889,10 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"感度を上げると、画面の端付近でのアプリの操作に影響することがあります。"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"「戻る」の感度"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"ジェスチャー ナビゲーション"</string>
-    <!-- no translation found for gesture_settings_button_description (7916105652019436751) -->
-    <skip />
+    <string name="gesture_settings_button_description" msgid="7916105652019436751">"ジェスチャー ナビゲーションの設定"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"デモを試す"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ボタン ナビゲーション"</string>
-    <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
-    <skip />
+    <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"ボタン ナビゲーションの設定"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"ボタンの順序"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"ボタンの順序, ボタンの移動, 左手モード, 右手モード"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"戻る"</string>
@@ -5909,7 +5926,7 @@
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"現在再生しています"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"ストリームを一時停止"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"受信を停止"</string>
-    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"対応するヘッドフォンの接続"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"対応するヘッドフォンを接続"</string>
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"TalkBack を一時的に OFF にする"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"音声ストリームの再生中は TalkBack を使用できません。聞き取りを開始するには、TalkBack を OFF にしてください。"</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"OFF にする"</string>
@@ -5957,6 +5974,8 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"保護者による使用制限の PIN の設定"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"管理機能, 保護者による使用制限, 保護者, 管理機能用の PIN, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"PIN の管理"</string>
+    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
+    <skip />
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"保護者による使用制限の PIN"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"保護者用 PIN, 保護者による使用制限の PIN"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"再設定用のメールアドレスの追加"</string>
@@ -6002,6 +6021,7 @@
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"削除して無効にする"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> のアニメーション"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"コントロールを有効にできません"</string>
+    <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"コントロールを使用できません"</string>
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"エラーが発生しました"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"しばらくしてからもう一度お試しください"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"戻る"</string>
@@ -6018,21 +6038,18 @@
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"自動入力、通知など"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"プライバシー管理"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"権限、管理"</string>
-    <!-- no translation found for app_security_subpage_title (397183486243670441) -->
-    <skip />
+    <string name="app_security_subpage_title" msgid="397183486243670441">"アプリのセキュリティ"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"デバイスのロック解除"</string>
-    <!-- no translation found for account_security_subpage_title (3676085534746127966) -->
-    <skip />
-    <!-- no translation found for device_finders_subpage_title (2390688647994924006) -->
-    <skip />
-    <!-- no translation found for system_and_updates_subpage_title (5274185686741552322) -->
-    <skip />
-    <!-- no translation found for cellular_network_security_subpage_title (1191202157978621337) -->
-    <skip />
+    <string name="account_security_subpage_title" msgid="3676085534746127966">"アカウントのセキュリティ"</string>
+    <string name="device_finders_subpage_title" msgid="2390688647994924006">"デバイスの検索"</string>
+    <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"システムとアップデート"</string>
+    <string name="cellular_network_security_subpage_title" msgid="1191202157978621337">"モバイル ネットワークのセキュリティ"</string>
     <string name="location_settings" msgid="6833222354060094170">"位置情報へのアクセス"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"位置情報にアクセスできるアプリとサービスを確認"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"ID チェックがさらに多くのアプリで利用できるようになりました"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"ID チェックにより、アプリへの不要なアクセスを防ぐことができます。指紋認証または顔認証を使用するアプリで、この機能を利用できるようになりました。"</string>
+    <string name="identity_check_watch_notification_title" msgid="5559702400315647907">"ID チェックとスマートウォッチ"</string>
+    <string name="identity_check_watch_notification_summary" msgid="3200144847521451493">"スマートウォッチを接続すると、ID チェック機能により、アプリへの不要なアクセスを防ぐため本人確認が強化されます"</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"詳細を表示"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"設定を確認できませんでした"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"まだ情報がありません"</string>
@@ -6044,11 +6061,9 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
     <string name="safety_center_device_finders_search_terms" msgid="2703625009760905100"></string>
-    <!-- no translation found for safety_center_system_and_updates_summary (6301092688146734950) -->
-    <skip />
+    <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"アップデート"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <!-- no translation found for safety_center_cellular_network_security_summary (4746047200732665728) -->
-    <skip />
+    <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"ネットワークの種類、暗号化、通知の管理"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"アラートを開く"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"アラートを閉じる"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"削除したアラート"</string>
@@ -6058,4 +6073,7 @@
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> を接続しました"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"デバイスをスキャン"</string>
     <string name="satellite_tile_label" msgid="1098132989724404617">"衛星"</string>
+    <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"ON"</string>
+    <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"利用可能"</string>
+    <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"利用不可"</string>
 </resources>

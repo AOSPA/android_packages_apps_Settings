@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Turite paleisti įrenginį iš naujo, kad galėtumėte pakeisti šį nustatymą."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Paleisti iš naujo"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Atšaukti"</string>
-    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"„Bluetooth LE Audio“ išjungimas"</string>
-    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Jei įrenginys palaiko „LE Audio“ aparatinės įrangos galimybes, išjungiama funkcija „Bluetooth LE Audio“."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"„Bluetooth LE Audio“ režimas"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Rodyti „LE Audio“ jungiklį įrenginio informacijoje"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"„Bluetooth LE Audio“ leidžiamųjų sąrašo išskyrimas"</string>
@@ -1029,6 +1027,8 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Prijunkite išorinį ekraną, kad pradėtumėte, arba bandykite naudoti kitą laidą"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Daugiau parinkčių"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Laikykite ir vilkite, kad pertvarkytumėte ekranus"</string>
+    <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Palieskite, kad būtų rodomos naršymo rodyklės"</string>
+    <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Palieskite rodykles, kad pertvarkytumėte ekranus"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Įtaisytojo ekrano vaizdo bendrinimas"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Naudoti naujus nustatymus?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Jei ekranas neveikia taip, kaip norėtumėte, galite grįžti prie ankstesnių nustatymų"</string>
@@ -1038,6 +1038,10 @@
     <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"Perkelti žemyn"</string>
     <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"Perkelti kairėn"</string>
     <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"Perkelti dešinėn"</string>
+    <string name="external_display_topology_a11y_display_moved_up" msgid="2006298475752942395">"Ekranas: „%1$s“ perkeltas aukštyn"</string>
+    <string name="external_display_topology_a11y_display_moved_down" msgid="6028544722984648702">"Ekranas: „%1$s“ perkeltas žemyn"</string>
+    <string name="external_display_topology_a11y_display_moved_left" msgid="5308110789317472437">"Ekranas: „%1$s“ perkeltas kairėn"</string>
+    <string name="external_display_topology_a11y_display_moved_right" msgid="3802527156765844475">"Ekranas: „%1$s“ perkeltas dešinėn"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ekrano vaizdo bendrinimas"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Įgalinti belaidį rodymą"</string>
@@ -1321,6 +1325,8 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / suderinama su daug įrenginių"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / suderinama su keliais įrenginiais"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2,4 ir 5 GHz / suderinama su dauguma įrenginių"</string>
+    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
+    <skip />
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Pasirinkite viešosios interneto prieigos taško dažnį. Dažnis turi įtakos prisijungimo greičiui ir kokie įrenginiai gali aptikti viešosios interneto prieigos tašką."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Pageidaujamas dažnis"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 GHz"</string>
@@ -1331,6 +1337,10 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Didelis greitis. Šis dviejų dažnio juostų viešosios interneto prieigos taškas suderinamas su dauguma įrenginių."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Didžiausias greitis. Suderinama su keliais įrenginiais."</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
+    <skip />
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Nepasiekiama jūsų šalyje ar regione"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Jei pageidaujamas dažnis nepasiekiamas, viešosios interneto prieigos taškas gali naudoti kitą dažnį. Pakeitus dažnį gali pasikeisti viešosios interneto prieigos taško saugos nustatymai."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Nepasiekiama su 6 GHz"</string>
@@ -2927,6 +2937,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Akumuliatoriaus energijos vartojimas"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Naudojimo per pastar. 24 val. peržiūra"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Žr. akum. lygį nuo paskutinio įkrovimo"</string>
+    <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Programos akumuliatoriaus energijos vartojimas"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Išsami naudojimo informacija"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Reguliuoti maitinimo naudojimą"</string>
@@ -3485,6 +3497,7 @@
     <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Esate vienintelis administratorius šiame įrenginyje, todėl naudotojo profilio ištrinti negalima. Jei norite ištrinti naudotojo profilį, galite paskirti kitą naudotoją administratoriumi arba ištrinti visus įrenginio duomenis apsilankę skiltyje „Sistema“ &gt; „Nust. parinkt. iš naujo“ &gt; „Ištrinti visus duomenis (atkurti gamyklinius nustatymus)“."</string>
     <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Nepavyko pašalinti administratoriaus privilegijų"</string>
     <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Esate vienintelis naudotojas administratorius šiame įrenginyje. Jei nebenorite būti administratorius, pirmiausia turite paskirti administratoriumi kitą naudotoją."</string>
+    <string name="add_user_summary_action_restricted" msgid="6276344792683243643">"Užblokuota vadovaujantis darbo politika"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Kritinės padėties informacija"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> informacija ir kontaktai"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Atidaryti „<xliff:g id="APP_NAME">%1$s</xliff:g>“"</string>
@@ -4870,12 +4883,10 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Didesnis jautrumas gali būti nesuderinamas su visais programų gestais palei ekrano kraštus."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Grįžtamasis jautrumas"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Naršymas gestais"</string>
-    <!-- no translation found for gesture_settings_button_description (7916105652019436751) -->
-    <skip />
+    <string name="gesture_settings_button_description" msgid="7916105652019436751">"Naršymo gestais nustatymai"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Išbandyti demonstracinę versiją"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Naršymas mygtukais"</string>
-    <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
-    <skip />
+    <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Naršymo mygtukais nustatymai"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Mygtukų tvarka"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Mygtukų tvarka, mygtukų perkėlimas, režimas kairiarankiams, režimas dešiniarankiams"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Atgal"</string>
@@ -5959,6 +5970,8 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Tėvų kontrolės PIN kodo nustatymas"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"priežiūra, tėvų kontrolė, tėvai, priežiūros PIN kodas, PIN kodas"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"PIN kodo tvarkymas"</string>
+    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
+    <skip />
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Tėvų kontrolės PIN kodas"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Tėvų PIN kodas, tėvų kontrolės PIN kodas"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Pridėkite atkūrimo el. pašto adresą"</string>
@@ -6004,6 +6017,7 @@
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Ištrinti ir išjungti"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"„<xliff:g id="FEATURE">%1$s</xliff:g>“ animacija"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Nepavyko įjungti valdiklių"</string>
+    <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Negalima naudoti valdiklių"</string>
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Kažkas nepavyko"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Vėliau bandykite dar kartą"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Grįžti"</string>
@@ -6020,21 +6034,18 @@
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Automatinis pildymas, pranešimai ir kt."</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Privatumo valdikliai"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Leidimai, valdikliai"</string>
-    <!-- no translation found for app_security_subpage_title (397183486243670441) -->
-    <skip />
+    <string name="app_security_subpage_title" msgid="397183486243670441">"Programų sauga"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Įrenginio atrakinimo funkcija"</string>
-    <!-- no translation found for account_security_subpage_title (3676085534746127966) -->
-    <skip />
-    <!-- no translation found for device_finders_subpage_title (2390688647994924006) -->
-    <skip />
-    <!-- no translation found for system_and_updates_subpage_title (5274185686741552322) -->
-    <skip />
-    <!-- no translation found for cellular_network_security_subpage_title (1191202157978621337) -->
-    <skip />
+    <string name="account_security_subpage_title" msgid="3676085534746127966">"Paskyros sauga"</string>
+    <string name="device_finders_subpage_title" msgid="2390688647994924006">"Įrenginio paieška"</string>
+    <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"Sistema ir naujiniai"</string>
+    <string name="cellular_network_security_subpage_title" msgid="1191202157978621337">"Mobiliojo ryšio tinklo sauga"</string>
     <string name="location_settings" msgid="6833222354060094170">"Prieiga prie vietovės"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Peržiūrėkite programas ir paslaugas, kurios gali pasiekti vietovės duomenis"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Tapatybės patikra veikia su daugiau programų"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Tapatybės patikra apsaugo nuo nepageidaujamos prieigos prie programų. Dabar pasiekiama bet kurioje programoje, kurioje naudojamas atrakinimas piršto atspaudu arba pagal veidą."</string>
+    <string name="identity_check_watch_notification_title" msgid="5559702400315647907">"Tapatybės patikra ir laikrodis"</string>
+    <string name="identity_check_watch_notification_summary" msgid="3200144847521451493">"Kai laikrodis prijungtas, Tapatybės patikra prideda daugiau būdų, kaip patvirtinti jūsų tapatybę, kad būtų išvengta nepageidaujamos prieigos prie programų"</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Žr. išsamią informaciją"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"Nepavyko patikrinti nustatymų"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Kol kas informacijos nėra"</string>
@@ -6046,11 +6057,9 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
     <string name="safety_center_device_finders_search_terms" msgid="2703625009760905100"></string>
-    <!-- no translation found for safety_center_system_and_updates_summary (6301092688146734950) -->
-    <skip />
+    <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"Naujiniai"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <!-- no translation found for safety_center_cellular_network_security_summary (4746047200732665728) -->
-    <skip />
+    <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"Tinklo tipas, šifruotė, pranešimų valdikliai"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Daugiau įspėjimų"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Mažiau įspėjimų"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Uždaryti įspėjimai"</string>
@@ -6060,4 +6069,10 @@
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Prijungta: „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Nuskaityti įrenginį"</string>
     <string name="satellite_tile_label" msgid="1098132989724404617">"Palydovas"</string>
+    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
+    <skip />
+    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
+    <skip />
 </resources>

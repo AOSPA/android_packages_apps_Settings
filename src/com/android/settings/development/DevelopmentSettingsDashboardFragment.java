@@ -511,11 +511,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                         BluetoothLeAudioHwOffloadPreferenceController.class);
         leAudioController.onRebootDialogConfirmed();
 
-        final BluetoothLeAudioPreferenceController leAudioFeatureController =
-                getDevelopmentOptionsController(
-                        BluetoothLeAudioPreferenceController.class);
-        leAudioFeatureController.onRebootDialogConfirmed();
-
         final BluetoothLeAudioModePreferenceController leAudioModeController =
                 getDevelopmentOptionsController(
                         BluetoothLeAudioModePreferenceController.class);
@@ -532,11 +527,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                         BluetoothLeAudioHwOffloadPreferenceController.class);
         leAudioController.onRebootDialogCanceled();
-
-        final BluetoothLeAudioPreferenceController leAudioFeatureController =
-                getDevelopmentOptionsController(
-                        BluetoothLeAudioPreferenceController.class);
-        leAudioFeatureController.onRebootDialogCanceled();
 
         final BluetoothLeAudioModePreferenceController leAudioModeController =
                 getDevelopmentOptionsController(
@@ -762,7 +752,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
         controllers.add(new BluetoothMapVersionPreferenceController(context));
-        controllers.add(new BluetoothLeAudioPreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioModePreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioDeviceDetailsPreferenceController(context));
         controllers.add(new BluetoothLeAudioAllowListPreferenceController(context));

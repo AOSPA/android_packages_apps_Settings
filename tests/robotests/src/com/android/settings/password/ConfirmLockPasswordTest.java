@@ -25,7 +25,7 @@ import static com.android.settings.password.TestUtils.LOCKOUT_RESULT;
 import static com.android.settings.password.TestUtils.NO_REMAINING_ATTEMPTS_RESULT;
 import static com.android.settings.password.TestUtils.PACKAGE_NAME;
 import static com.android.settings.password.TestUtils.SERVICE_NAME;
-import static com.android.settings.password.TestUtils.TIMEOUT_MS;
+import static com.android.settings.password.TestUtils.TIMEOUT;
 import static com.android.settings.password.TestUtils.VALID_REMAINING_ATTEMPTS;
 import static com.android.settings.password.TestUtils.buildConfirmDeviceCredentialBaseActivity;
 import static com.android.settings.password.TestUtils.createRemoteLockscreenValidationIntent;
@@ -82,6 +82,8 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplicationPackageManager;
 import org.robolectric.util.ReflectionHelpers;
+
+import java.time.Duration;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -244,7 +246,7 @@ public class ConfirmLockPasswordTest {
         mCallbackCaptor.getValue().onSuccess(GUESS_VALID_RESULT);
 
         verify(mCredentialCheckResultTracker).setResult(
-                eq(true), any(), eq(0), eq(fragment.mEffectiveUserId));
+                eq(true), any(), eq(Duration.ZERO), eq(fragment.mEffectiveUserId));
         assertThat(mLockPatternUtils.isSecure(fragment.mEffectiveUserId)).isTrue();
         assertThat(fragment.mRemoteLockscreenValidationFragment.getLockscreenCredential()).isNull();
     }
@@ -271,7 +273,7 @@ public class ConfirmLockPasswordTest {
         mCallbackCaptor.getValue().onSuccess(GUESS_VALID_RESULT);
 
         verify(mCredentialCheckResultTracker).setResult(
-                eq(true), any(), eq(0), eq(fragment.mEffectiveUserId));
+                eq(true), any(), eq(Duration.ZERO), eq(fragment.mEffectiveUserId));
         assertThat(mLockPatternUtils.isSecure(fragment.mEffectiveUserId)).isFalse();
         assertThat(fragment.mRemoteLockscreenValidationFragment.getLockscreenCredential()).isNull();
     }
@@ -297,7 +299,7 @@ public class ConfirmLockPasswordTest {
         mCallbackCaptor.getValue().onSuccess(GUESS_INVALID_RESULT);
 
         verify(mCredentialCheckResultTracker).setResult(
-                eq(false), any(), eq(0), eq(fragment.mEffectiveUserId));
+                eq(false), any(), eq(Duration.ZERO), eq(fragment.mEffectiveUserId));
         assertThat(mLockPatternUtils.isSecure(fragment.mEffectiveUserId)).isFalse();
     }
 
@@ -322,7 +324,7 @@ public class ConfirmLockPasswordTest {
         mCallbackCaptor.getValue().onSuccess(LOCKOUT_RESULT);
 
         verify(mCredentialCheckResultTracker).setResult(
-                eq(false), any(), eq(TIMEOUT_MS), eq(fragment.mEffectiveUserId));
+                eq(false), any(), eq(TIMEOUT), eq(fragment.mEffectiveUserId));
         assertThat(mLockPatternUtils.isSecure(fragment.mEffectiveUserId)).isFalse();
     }
 
@@ -348,7 +350,7 @@ public class ConfirmLockPasswordTest {
 
         assertThat(activity.isFinishing()).isTrue();
         verify(mCredentialCheckResultTracker, never())
-                .setResult(anyBoolean(), any(), anyInt(), anyInt());
+                .setResult(anyBoolean(), any(), any(), anyInt());
         assertThat(mLockPatternUtils.isSecure(fragment.mEffectiveUserId)).isFalse();
     }
 

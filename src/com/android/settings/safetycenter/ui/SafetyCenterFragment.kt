@@ -64,6 +64,7 @@ class SafetyCenterFragment : DashboardFragment() {
         setupStatusBannerController(viewLifecycleOwner)
         setupSafetyIssuesPreferenceController(viewLifecycleOwner)
         setupSubpagePreferenceControllers(viewLifecycleOwner)
+        setupSafetySourcePreferenceControllers(viewLifecycleOwner)
     }
 
     override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> {
@@ -149,6 +150,17 @@ class SafetyCenterFragment : DashboardFragment() {
                             lifecycleOwner = owner,
                         )
                 }
+            }
+        }
+    }
+
+    private fun setupSafetySourcePreferenceControllers(owner: LifecycleOwner) {
+        Log.d(TAG, "Setting up the safety source preference controllers")
+        val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
+        for (controller in allControllers) {
+            if (controller is SafetySourcePreferenceController) {
+                controller.setViewModelAndLifecycle(viewModel, owner)
+                controller.setActivityTaskId(requireActivity().taskId)
             }
         }
     }

@@ -19,6 +19,7 @@ package com.android.settings.safetycenter.ui
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
@@ -40,13 +41,23 @@ class PrivacyControlsFragment : DashboardFragment() {
 
     private val TAG = "PrivacyControlsFragment"
 
+    private var safetyIssuesPreferenceController: SafetyIssuesPreferenceController? = null
     private val viewModel: LiveSafetyCenterViewModel by viewModels {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupSafetyIssuesPreferenceController(viewLifecycleOwner)
         setupSafetySourcePreferenceControllers(viewLifecycleOwner)
+    }
+
+    override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> {
+        val controllers = mutableListOf<AbstractPreferenceController>()
+        safetyIssuesPreferenceController =
+            SafetyIssuesPreferenceController(context, PRIVACY_CONTROLS_ISSUES_KEY)
+        controllers.add(safetyIssuesPreferenceController!!)
+        return controllers
     }
 
     private fun setupSafetySourcePreferenceControllers(owner: LifecycleOwner) {
@@ -59,6 +70,23 @@ class PrivacyControlsFragment : DashboardFragment() {
         }
     }
 
+    private fun setupSafetyIssuesPreferenceController(owner: LifecycleOwner) {
+        Log.d(TAG, "Setting up the safety issues preference controller")
+        safetyIssuesPreferenceController?.setViewModelAndLifecycle(viewModel, owner)
+        safetyIssuesPreferenceController?.setFragmentManager(childFragmentManager)
+        safetyIssuesPreferenceController?.setActivityTaskId(requireActivity().taskId)
+
+        val safetySourceIds =
+            SafetyCenterSubpageRegistry.getAllSafetySourceIds(
+                requireContext(),
+                SafetyCenterSubpageRegistry.SubpageKey.PRIVACY_CONTROLS,
+            )
+        safetyIssuesPreferenceController?.setSubpageSafetySourcesAndIllustration(
+            safetySourceIds,
+            illustrationPref = null,
+        )
+    }
+
     override fun getLogTag(): String = TAG
 
     override fun getPreferenceScreenResId(): Int {
@@ -68,6 +96,9 @@ class PrivacyControlsFragment : DashboardFragment() {
     override fun getMetricsCategory(): Int = SettingsEnums.SAFETY_CENTER
 
     companion object {
+
+        private const val PRIVACY_CONTROLS_ISSUES_KEY = "privacy_controls_issues_banner_group"
+
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER =
             object : BaseSearchIndexProvider(R.xml.safety_center_privacy_controls_settings) {

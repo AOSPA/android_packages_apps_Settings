@@ -445,10 +445,22 @@ public class UsbDetailsFunctionsControllerTest {
 
     @Test
     public void onTetheringFailed_resetPreviousFunctions() {
+        when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
+
+        mDetailsFunctionsController.refresh(
+                true, UsbManager.FUNCTION_NCM, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+        List<SelectorWithWidgetPreference> prefs = getRadioPreferences();
+
+        assertThat(prefs.get(1).getKey())
+                .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_RNDIS));
+        assertThat(prefs.get(1).isChecked()).isTrue();
+
         mDetailsFunctionsController.mPreviousFunction = UsbManager.FUNCTION_PTP;
 
         mDetailsFunctionsController.mOnStartTetheringCallback.onTetheringFailed(0);
 
-        verify(mUsbBackend).setCurrentFunctions(UsbManager.FUNCTION_PTP);
+        assertThat(prefs.get(1).getKey())
+                .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_RNDIS));
+        assertThat(prefs.get(1).isChecked()).isFalse();
     }
 }

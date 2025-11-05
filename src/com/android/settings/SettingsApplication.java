@@ -134,9 +134,7 @@ public class SettingsApplication extends Application {
 
         registerActivityLifecycleCallbacks(new DeveloperOptionsActivityLifecycle());
 
-        if (Flags.msdlFeedback()) {
-            MSDLPlayerWrapper.INSTANCE.createPlayer(this);
-        }
+        MSDLPlayerWrapper.INSTANCE.createPlayer(this);
     }
 
     /** Returns the factories of preference screen metadata. */

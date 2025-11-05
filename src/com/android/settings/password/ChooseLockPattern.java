@@ -617,7 +617,7 @@ public class ChooseLockPattern extends SettingsActivity {
             mHeaderText.setMinLines(2);
             mDefaultHeaderColorList = mHeaderText.getTextColors();
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
-            if (Flags.msdlFeedback()) {
+            if (mExternalHapticsPlayer != null) {
                 mLockPatternView.setExternalHapticsPlayer(mExternalHapticsPlayer);
             }
             mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
@@ -688,7 +688,7 @@ public class ChooseLockPattern extends SettingsActivity {
                 setRightButtonEnabled(false);
                 mSaveAndFinishWorker.setListener(this);
             }
-            if (mLockPatternView != null && Flags.msdlFeedback()) {
+            if (mLockPatternView != null && mExternalHapticsPlayer != null) {
                 mLockPatternView.setExternalHapticsPlayer(mExternalHapticsPlayer);
             }
         }
