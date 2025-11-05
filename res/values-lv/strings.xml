@@ -976,6 +976,8 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"Neizdevās izveidot savienojumu ar ierīci “<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Ierīces dati"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Tastatūras iestatījumi"</string>
+    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
+    <skip />
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Citi iestatījumi"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Aparātprogrammatūras atjauninājumi, par u. c."</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Padomi un atbalsts"</string>
@@ -1026,8 +1028,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Nav pievienots neviens displejs"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Lai sāktu darbu, pievienojiet ārējo displeju vai izmantojiet citu kabeli."</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Citas iespējas"</string>
-    <!-- no translation found for external_display_pause_topology_hint (1128908588539457600) -->
-    <skip />
+    <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"Pārtraukt norādes teksta ciklisko animāciju"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Lai pārkārtotu displejus, turiet un velciet tos."</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Pieskarieties, lai tiktu rādītas navigācijas bultiņas."</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Pieskarieties bultiņām, lai pārkārtotu displejus."</string>
@@ -1210,7 +1211,7 @@
     <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
     <skip />
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Atcelt"</string>
-    <string name="wifi_share_preference_title" msgid="2000847347515149059">"Tīkla kopīgošana"</string>
+    <string name="wifi_share_preference_title" msgid="2000847347515149059">"Kopīgot tīklu"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Citi šīs ierīces lietotāji var piekļūt šim tīklam"</string>
     <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
     <skip />
@@ -2242,7 +2243,36 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatūras un rīki darba profilā"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Ekrāna tastatūra darbam"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Noklusējums"</string>
-    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
+    <string name="game_controller_settings_title" msgid="4322385924018377909">"Spēļu vadāmierīces"</string>
+    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
+    <skip />
+    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
+    <skip />
+    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
     <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"Skārienpaliktnis"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Skārienpaliktnis un pele"</string>
@@ -2736,10 +2766,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Trīsreiz pieskarieties ekrānam"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Pieejamības saīšņu rediģēšana"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Izvēlieties saīsni funkcijai %1$s"</string>
-    <!-- no translation found for a11y_button_shortcut_unassigned_setting_unavailable_summary (8268632664568192689) -->
-    <skip />
-    <!-- no translation found for a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary (2232737783140069174) -->
-    <skip />
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary" msgid="8268632664568192689">"Lai to izmantotu, pieejamības funkciju lapā ieslēdziet pieejamības pogas īsinājumtaustiņu."</string>
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary" msgid="2232737783140069174">"Lai to izmantotu, pieejamības funkciju lapā ieslēdziet skaļuma pogu īsinājumtaustiņu."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Turpināt"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Dzirdes aparāti"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Iestatiet un pārvaldiet ASHA un LE Audio dzirdes aparātus, kohleāros implantus un citas skaņas pastiprināšanas ierīces."</string>
@@ -4333,8 +4361,7 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Kalendāra pasākumi"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Gulēšanas laiks"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Braukšanas laikā"</string>
-    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
-    <skip />
+    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"Sabiedriskajā transportā"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Lietotnes iestatījumi"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informācija un iestatījumi lietotnē <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Pārvalda <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4351,8 +4378,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Bloķējiet traucējumus no ierīces, lai varētu koncentrēties."</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Novērsiet visus traucēkļus, lai radītu klusu vidi."</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalizējiet ierīces lietošanas iespējas un iestatījumus dažādiem lietotājiem."</string>
-    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
-    <skip />
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Jums būs ērtāk izmantot sabiedrisko transportu ar automātiskajiem iestatījumiem."</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Samaziniet traucēkļus, atļaujot paziņojumus tikai no svarīgām kontaktpersonām un lietotnēm."</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Iestatiet režīmu, kas ņem vērā parasto grafiku"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Pielāgojiet ierīces darbību atbilstoši dienā plānotajiem pasākumiem"</string>
@@ -4361,8 +4387,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Noskaņojieties produktīvam darbam"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Netraucētai mirkļu baudīšanai"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Pārvaldīts lietojums jūsu drošībai"</string>
-    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
-    <skip />
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Optimizējiet ierīci, lai uzlabotu pieredzi, braucot sabiedriskajā transportā"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Parūpējieties, lai nekas nenovērš jūsu uzmanību"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Brīdinājums"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Aizvērt"</string>
@@ -4589,6 +4614,18 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Atļaut piekļuvi visu failu pārvaldībai"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Atļaujiet šai lietotnei lasīt, pārveidot un dzēst visus failus šajā ierīcē vai pievienotajās atmiņas ierīcēs. Ja piešķirsiet atļauju, lietotne varēs piekļūt failiem, jums par to nezinot."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Var piekļūt visiem failiem"</string>
+    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Pilnekrāna paziņojumi"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Atļaut pilnekrāna paziņojumus no šīs lietotnes"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Atļaujiet šai lietotnei rādīt paziņojumus pilnekrāna režīmā, kad ierīce ir bloķēta. Lietotnes var šādi izcelt signālus, ienākošos zvanus vai citus svarīgus paziņojumus."</string>
@@ -6034,8 +6071,7 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Radās problēma"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Vēlāk mēģiniet vēlreiz."</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Atpakaļ"</string>
-    <!-- no translation found for supervision_available_apps_title (886352413031517863) -->
-    <skip />
+    <string name="supervision_available_apps_title" msgid="886352413031517863">"Pieejamās lietotnes un pakalpojumi"</string>
     <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
     <skip />
     <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->

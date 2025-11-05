@@ -976,6 +976,7 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"„<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“ nepavyko prisijungti"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Išsami įrenginio info."</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Klaviatūros nustatymai"</string>
+    <string name="bluetooth_device_game_controller_settings_preference_title" msgid="291778307796320923">"Žaidimų valdiklio nustatymai"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Daugiau nustatymų"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Programinės aparatinės įrangos naujiniai, informacija ir kt."</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Patarimai ir palaikymas"</string>
@@ -2241,8 +2242,22 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Darbo profilio klaviatūros ir įrankiai"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Darbui skirta ekrano klaviatūra"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Numatytasis"</string>
-    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
-    <skip />
+    <string name="game_controller_settings_title" msgid="4322385924018377909">"Žaidimų valdikliai"</string>
+    <string name="game_controller_key_remapping" msgid="8150376475022555386">"Raktai"</string>
+    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"Ašys"</string>
+    <string name="game_controller_button_a" msgid="2138420373137111774">"Mygtukas"</string>
+    <string name="game_controller_button_b" msgid="2093089857164437480">"B mygtukas"</string>
+    <string name="game_controller_button_x" msgid="3428801081204194655">"X mygtukas"</string>
+    <string name="game_controller_button_y" msgid="4596061542299533516">"Y mygtukas"</string>
+    <string name="game_controller_button_l1" msgid="4428713182602902434">"L1 mygtukas"</string>
+    <string name="game_controller_button_r1" msgid="6271978600831912659">"R1 mygtukas"</string>
+    <string name="game_controller_button_l2" msgid="4168716287264803566">"L2 mygtukas"</string>
+    <string name="game_controller_button_r2" msgid="4361909018228151006">"R2 mygtukas"</string>
+    <string name="game_controller_button_thumbl" msgid="609311480262927654">"Kairiosios vairasvirtės paspaudimas"</string>
+    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"Dešiniosios vairasvirtės paspaudimas"</string>
+    <string name="game_controller_dpad" msgid="5352745621298140827">"Keturkryptis valdiklis"</string>
+    <string name="game_controller_stick_left" msgid="1591700901162153956">"Kairioji vairasvirtė"</string>
+    <string name="game_controller_stick_right" msgid="1418791636252375110">"Dešinioji vairasvirtė"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Jutiklinė dalis"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Jutiklinė dalis ir pelė"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Pelė"</string>
@@ -3163,8 +3178,7 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Automatiškai pasirenkamas geriausias tinklo ryšys, kad akumuliatorius veiktų ilgiau"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Mobiliojo ryšio tinklo apsauga"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tinklo tipas, šifruotė, pranešimų valdikliai"</string>
-    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="4190908521080878539">"Šie nustatymai padeda apsaugoti skambučius, pranešimus ir duomenis nuo pasenusių ar nešifruotų tinklų, kuriuose gali įvykti duomenų vagystė ar gali būti stebimi duomenys."</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Mobiliojo ryšio tinklo apsauga"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Pranešimai"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Tinklo pranešimai"</string>
@@ -4330,8 +4344,7 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Kalendoriaus įvykiai"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Laiko miegoti veiksmų seka"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Vairuojant"</string>
-    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
-    <skip />
+    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"Kelionės viešuoju transportu metu"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Programos nustatymai"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informacija ir nustatymai programoje „<xliff:g id="APP_NAME">%1$s</xliff:g>“"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Tvarko „<xliff:g id="APP_NAME">%1$s</xliff:g>“"</string>
@@ -4348,8 +4361,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Blokuokite dėmesį blaškančius ar trikdančius elementus įrenginyje, kad sutelktumėte dėmesį"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Pašalinkite visus dėmesį blaškančius elementus, kad užtikrintumėte tylią aplinką"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Suasmeninkite įrenginio funkcijas ir nustatymus skirtingiems naudotojams"</string>
-    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
-    <skip />
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Mėgaukitės patogesnėmis kelionėmis viešuoju transportu naudodami automatinius nustatymų koregavimus"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Sumažinkite trikdžius leisdami tik svarbiems žmonėms ir programoms jus pasiekti"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Nustatykite režimą, atitinkantį įprastą tvarkaraštį"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Sinchronizuokite įrenginį su dienos įvykiais"</string>
@@ -4358,8 +4370,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Susikaupkite ir nesiblaškykite"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Tiems momentams, kai svarbus mandagumas"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Naudojimas su nurodymais, kad išlaikytumėte gerą būseną"</string>
-    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
-    <skip />
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Optimizuokite įrenginį, kad viešojo transporto funkcija veiktų sklandžiau"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Valdykite dėmesį"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Perspėjimas"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Uždaryti"</string>
@@ -4586,6 +4597,18 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Leisti pasiekti ir tvarkyti visus failus"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Šiai programai leidžiama nuskaityti, keisti ir ištrinti visus failus, esančius šiame įrenginyje ar bet kurioje prijungtoje saugykloje. Jei suteiksite leidimą, programa gali pasiekti failus jūsų tiksliai neinformavus."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Gali pasiekti visus failus"</string>
+    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Pranešimai viso ekrano režimu"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Leisti pranešimus viso ekrano režimu iš šios programos"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Leiskite šiai programai rodyti pranešimus viso ekrano režimu, kai įrenginys užrakintas. Programos gali juos naudoti, kad paryškintų įspėjimus, gaunamuosius skambučius ar kitus skubius pranešimus."</string>
