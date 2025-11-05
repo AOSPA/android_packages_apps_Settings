@@ -20,6 +20,7 @@ package com.android.settings.security;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.content.Context;
+import android.os.UserHandle;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -30,12 +31,16 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 
+import com.android.settings.security.MemtagPreferenceUtils;
+
 public class MemtagPreferenceController extends TogglePreferenceController {
     private Preference mPreference;
     private Fragment mFragment;
+    private MemtagPreferenceUtils mMemtagPreferenceUtils;
 
     public MemtagPreferenceController(Context context, String key) {
         super(context, key);
+        mMemtagPreferenceUtils = new MemtagPreferenceUtils(context);
     }
 
     public void setFragment(Fragment fragment) {
@@ -83,17 +88,24 @@ public class MemtagPreferenceController extends TogglePreferenceController {
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfMteIsDisabled(mContext);
-        if (admin != null) {
-            // Make sure this is disabled even if the user directly goes to this
-            // page via the android.settings.ADVANCED_MEMORY_PROTECTION_SETTINGS intent.
-            ((RestrictedSwitchPreference) preference).setDisabledByAdmin(admin);
-        }
+        // Make sure this is disabled even if the user directly goes to this
+        // page via the android.settings.ADVANCED_MEMORY_PROTECTION_SETTINGS intent.
+        setAdminRestriction((RestrictedSwitchPreference) preference);
         refreshSummary(preference);
     }
 
     @Override
     public CharSequence getSummary() {
         return mContext.getResources().getString(MemtagHelper.getSummary());
+    }
+
+    private void setAdminRestriction(RestrictedSwitchPreference preference) {
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            preference.setDisabledByAdmin(
+                mMemtagPreferenceUtils.getMemtagEnforcingAdmin());
+        } else {
+            preference.setDisabledByAdmin(
+                RestrictedLockUtilsInternal.checkIfMteIsDisabled(mContext));
+        }
     }
 }
