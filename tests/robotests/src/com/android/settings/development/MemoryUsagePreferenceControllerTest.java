@@ -16,6 +16,7 @@
 
 package com.android.settings.development;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -23,18 +24,25 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
+import android.provider.Settings;
+import android.text.format.Formatter;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.applications.ProcStatsData;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
 public class MemoryUsagePreferenceControllerTest {
@@ -48,12 +56,14 @@ public class MemoryUsagePreferenceControllerTest {
     @Mock
     private ProcStatsData.MemInfo mMemInfo;
 
+    private Context mContext;
     private MemoryUsagePreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mController = spy(new MemoryUsagePreferenceController(RuntimeEnvironment.application));
+        mContext = RuntimeEnvironment.application;
+        mController = spy(new MemoryUsagePreferenceController(mContext));
         doReturn(mProcStatsData).when(mController).getProcStatsData();
         doNothing().when(mController).setDuration();
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -66,5 +76,40 @@ public class MemoryUsagePreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setSummary(anyString());
+    }
+
+    @Test
+    public void updateState_whenPssProfilingDisabled_shouldSetDisabledSummary() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.FORCE_ENABLE_PSS_PROFILING, 0);
+        final String expectedSummary = mContext.getString(R.string.pss_profiling_disabled);
+
+        mController.updateState(mPreference);
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+
+        final ArgumentCaptor<String> summaryCaptor = ArgumentCaptor.forClass(String.class);
+        verify(mPreference).setSummary(summaryCaptor.capture());
+        assertThat(summaryCaptor.getValue()).isEqualTo(expectedSummary);
+    }
+
+    @Test
+    public void updateState_whenPssProfilingEnabled_shouldSetMemorySummary() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.FORCE_ENABLE_PSS_PROFILING, 1);
+        mMemInfo.realUsedRam = 1024L * 1024 * 1000; // 1GB
+        mMemInfo.realTotalRam = 1024L * 1024 * 2000; // 2GB
+        final String usedResult = Formatter.formatShortFileSize(mContext,
+                (long) mMemInfo.realUsedRam);
+        final String totalResult = Formatter.formatShortFileSize(mContext,
+                (long) mMemInfo.realTotalRam);
+        final String expectedSummary = mContext.getString(R.string.memory_summary, usedResult,
+                totalResult);
+
+        mController.updateState(mPreference);
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+
+        final ArgumentCaptor<String> summaryCaptor = ArgumentCaptor.forClass(String.class);
+        verify(mPreference).setSummary(summaryCaptor.capture());
+        assertThat(summaryCaptor.getValue()).isEqualTo(expectedSummary);
     }
 }
