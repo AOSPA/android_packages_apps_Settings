@@ -114,6 +114,21 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
         mHighlightBackgroundRes = R.drawable.preference_background_highlighted;
     }
 
+    public HighlightablePreferenceGroupAdapter(
+            @NonNull PreferenceGroup preferenceGroup,
+            @Nullable String key,
+            boolean highlightRequested,
+            java.util.Map<String, com.android.settingslib.widget.FooterData> footerDataMap) {
+        super(preferenceGroup, footerDataMap);
+
+        mHighlightKey = key;
+        mHighlightRequested = highlightRequested;
+        mContext = preferenceGroup.getContext();
+        final TypedValue outValue = new TypedValue();
+        mNormalBackgroundRes = R.drawable.preference_background;
+        mHighlightBackgroundRes = R.drawable.preference_background_highlighted;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull PreferenceViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
