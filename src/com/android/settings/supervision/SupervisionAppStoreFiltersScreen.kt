@@ -75,7 +75,7 @@ open class SupervisionAppStoreFiltersScreen :
     }
 
     @VisibleForTesting
-    internal fun getAppStoreFiltersEntries(context: Context): List<Preference> {
+    internal fun getAppStoreFiltersEntries(context: PreferenceLifecycleContext): List<Preference> {
         val packageManager = context.packageManager
         val intent = Intent(ACTION_VIEW_APP_FILTER_SETTINGS)
 
@@ -104,8 +104,13 @@ open class SupervisionAppStoreFiltersScreen :
                             this.title = appLabel
                             this.icon = appIcon
                             this.key = packageName
-                            this.intent = Intent().setClassName(packageName, activityInfo.name)
                             this.widgetLayoutResource = R.layout.preference_widget_open_in_new
+
+                            setOnPreferenceClickListener { pref ->
+                                val intent = Intent().setClassName(packageName, activityInfo.name)
+                                context.startActivityForResult(intent, 0, null)
+                                true
+                            }
                         }
                     appStorePreferences.add(preference)
                 } else {
