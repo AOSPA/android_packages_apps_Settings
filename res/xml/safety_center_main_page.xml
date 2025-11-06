@@ -15,7 +15,8 @@
   limitations under the License.
   -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto">
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/safety_center_title">
     <com.android.settingslib.widget.StatusBannerPreference
         android:key="safety_center_status_banner"
         settings:controller="com.android.settings.safetycenter.ui.StatusBannerPreferenceController" />

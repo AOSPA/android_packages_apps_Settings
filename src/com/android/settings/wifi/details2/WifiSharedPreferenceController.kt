@@ -76,21 +76,19 @@ class WifiSharedPreferenceController(
                     R.string.wifi_conflict_dialog_title,
                     if (shared) mContext.getString(R.string.shared_message)
                     else mContext.getString(R.string.private_message),
-                    ssid,
                 )
             )
             .setMessage(
                 mContext.getString(
                     R.string.wifi_conflict_dialog_message,
-                    if (shared) mContext.getString(R.string.private_message)
-                    else mContext.getString(R.string.shared_message),
-                    if (shared) mContext.getString(R.string.private_message)
-                    else mContext.getString(R.string.shared_message),
                     if (shared) mContext.getString(R.string.shared_message)
                     else mContext.getString(R.string.private_message),
+                    ssid,
+                    if (shared) mContext.getString(R.string.private_message)
+                    else mContext.getString(R.string.shared_message),
                 )
             )
-            .setPositiveButton(mContext.getString(R.string.wifi_conflict_dialog_confirm)) {
+            .setPositiveButton(mContext.getString(R.string.wifi_conflict_dialog_switch)) {
                 dialog: DialogInterface,
                 which: Int ->
                 launchNetworkDetailsPage(mContext, key, metricsCategory)

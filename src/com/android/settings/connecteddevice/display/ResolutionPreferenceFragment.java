@@ -379,7 +379,7 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         }
         // Don't show confirmation dialog for synthetic mode
         boolean isSyntheticMode = (mode.getFlags() & Mode.FLAG_SIZE_OVERRIDE) != 0;
-        if (isSyntheticMode || !enableResolutionApplyConfirmation()) {
+        if (isSyntheticMode || !enableResolutionConfirmDialog()) {
             mInjector.setUserPreferredDisplayMode(display.getId(), mode, /* storeMode= */ true);
 
             ExternalDisplaySettingsLoggerStore.ExternalDisplayMetricsLogger logger =
@@ -522,7 +522,7 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
     }
 
     private void setupResolutionApplyConfirmationHandler() {
-        if (!enableResolutionApplyConfirmation()) {
+        if (!enableResolutionConfirmDialog()) {
             return;
         }
         getParentFragmentManager()
@@ -582,10 +582,10 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
                         });
     }
 
-    private boolean enableResolutionApplyConfirmation() {
+    private boolean enableResolutionConfirmDialog() {
         if (mInjector == null) {
             return false;
         }
-        return mInjector.getFlags().enableResolutionApplyConfirmationBugfix();
+        return mInjector.getFlags().enableResolutionConfirmDialogBugfix();
     }
 }

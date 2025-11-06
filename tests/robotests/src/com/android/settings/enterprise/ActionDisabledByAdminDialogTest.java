@@ -181,7 +181,6 @@ public class ActionDisabledByAdminDialogTest {
         assertEquals(null, mDialog.getRestrictionFromIntent(null));
     }
 
-    @RequiresFlagsEnabled(android.security.Flags.FLAG_AAPM_API)
     // TODO(b/414733570): When the flag is fully rolled out and ready for clean-up, use the
     //  testcase with the feature flag enabled instead and delete this one.
     @RequiresFlagsDisabled(Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
@@ -218,7 +217,6 @@ public class ActionDisabledByAdminDialogTest {
         assertEquals(FLAG_ACTIVITY_NEW_TASK, launchedIntent.getFlags());
     }
 
-    @RequiresFlagsEnabled(android.security.Flags.FLAG_AAPM_API)
     @EnableFlags(Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     @Test
     public void testGetAdminDetailsFromIntent_policyTransparencyEnabled_aapm_launchesNewDialog() {
@@ -257,7 +255,6 @@ public class ActionDisabledByAdminDialogTest {
         assertEquals(FLAG_ACTIVITY_NEW_TASK, launchedIntent.getFlags());
     }
 
-    @RequiresFlagsEnabled(android.security.Flags.FLAG_AAPM_API)
     @EnableFlags(Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     @Test
     public void testGetAdminDetailsFromIntent_policyTransparencyRefactorEnabled_dpcAdmin() {
@@ -288,7 +285,6 @@ public class ActionDisabledByAdminDialogTest {
         verify(mDialog, never()).startActivityAsUser(any(), any());
     }
 
-    @RequiresFlagsEnabled(android.security.Flags.FLAG_AAPM_API)
     // TODO(b/414733570): When the flag is fully rolled out and ready for clean-up, use the
     //  testcase with the feature flag enabled instead.
     @RequiresFlagsDisabled(Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)

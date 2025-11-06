@@ -25,6 +25,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.SharedPreferences
 import android.content.pm.UserInfo
 import android.net.Uri
 import android.os.UserManager
@@ -43,6 +44,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.supervision.SupervisionHelper.KEY_RECOVERY_BANNER_DISMISSED
+import com.android.settings.supervision.SupervisionHelper.SHARED_PREFS_NAME
 import com.android.settings.testutils.MetricsRule
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -97,6 +100,7 @@ class SupervisionDeletePinPreferenceTest {
             defaultAnswer = CALLS_REAL_METHODS,
         )
     private lateinit var activity: ComponentActivity
+    private lateinit var sharedPrefs: SharedPreferences
     private var backPressedCalled = false
 
     @Before
@@ -106,6 +110,9 @@ class SupervisionDeletePinPreferenceTest {
         activity = activityController.create().start().resume().get()
         activity.setTheme(R.style.Theme_AppCompat)
         activity.onBackPressedDispatcher.addCallback(activity) { backPressedCalled = true }
+
+        sharedPrefs = appContext.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+        sharedPrefs.edit().clear().commit()
 
         mockLifeCycleContext.stub {
             on { findPreference<Any>(SupervisionDeletePinPreference.KEY) } doReturn widget
@@ -259,8 +266,7 @@ class SupervisionDeletePinPreferenceTest {
     }
 
     @Test
-    @DisableFlags(
-        Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE    )
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
     fun onPinConfirmed_currentUserSupervised_deletesSupervisionData_flagDisabled_noToast() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
@@ -336,6 +342,21 @@ class SupervisionDeletePinPreferenceTest {
 
         verify(metricsRule.metricsFeatureProvider)
             .action(mockLifeCycleContext, ACTION_SUPERVISION_DELETE_PIN)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun deleteSupervisionData_clearsBannerDismissalState() {
+        mockUserManager.stub {
+            on { users } doReturn listOf(SUPERVISING_PROFILE)
+            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn true
+        }
+        sharedPrefs.edit().putBoolean(KEY_RECOVERY_BANNER_DISMISSED, true).commit()
+        assertThat(sharedPrefs.getBoolean(KEY_RECOVERY_BANNER_DISMISSED, false)).isTrue()
+
+        preference.deleteSupervisionData(mockLifeCycleContext)
+
+        assertThat(sharedPrefs.contains(KEY_RECOVERY_BANNER_DISMISSED)).isFalse()
     }
 
     @Test

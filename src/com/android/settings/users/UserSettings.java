@@ -17,6 +17,7 @@
 package com.android.settings.users;
 
 import static com.android.settings.flags.Flags.hideUserListForNonAdmins;
+import static com.android.settings.flags.Flags.showAddUsersFromSigninToggle;
 import static com.android.settings.flags.Flags.showUserDetailsSettingsForSelf;
 import static com.android.settingslib.Utils.getColorAttrDefaultColor;
 
@@ -709,7 +710,16 @@ public class UserSettings extends SettingsPreferenceFragment
     private void onUserCreated(UserInfo userInfo, Context context) {
         hideUserCreatingDialog();
         mAddingUser = false;
-        openUserDetails(userInfo, true, context);
+        if (showAddUsersFromSigninToggle()
+                && getPrefContext()
+                        .getResources()
+                        .getBoolean(
+                                com.android.internal.R.bool
+                                        .config_userSwitchingMustGoThroughLoginScreen)) {
+            switchToUserId(userInfo.id);
+        } else {
+            openUserDetails(userInfo, true, context);
+        }
     }
 
     private void hideUserCreatingDialog() {

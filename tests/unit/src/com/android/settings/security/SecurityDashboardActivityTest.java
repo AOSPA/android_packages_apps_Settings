@@ -30,6 +30,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -37,10 +40,13 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
+import com.android.settings.flags.Flags;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
+import com.android.settings.safetycenter.ui.SafetyCenterFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -52,12 +58,13 @@ public class SecurityDashboardActivityTest {
     private static final String ALTERNATIVE_FRAGMENT_CLASSNAME = "AlternativeFragmentClassname";
     private static final String DEFAULT_FRAGMENT_CLASSNAME = "DefaultFragmentClassname";
 
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
     private Settings.SecurityDashboardActivity mActivity;
     private Intent mDefaultIntent;
 
-    @Mock
-    private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
+    @Mock private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
     @Before
     public void setUp() {
@@ -68,26 +75,35 @@ public class SecurityDashboardActivityTest {
 
         mDefaultIntent = new Intent();
         mDefaultIntent.setAction(android.provider.Settings.ACTION_SECURITY_SETTINGS);
-        mDefaultIntent.setClass(InstrumentationRegistry.getInstrumentation().getTargetContext(),
+        mDefaultIntent.setClass(
+                InstrumentationRegistry.getInstrumentation().getTargetContext(),
                 Settings.SecurityDashboardActivity.class);
         mDefaultIntent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, DEFAULT_FRAGMENT_CLASSNAME);
-        InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
-            try {
-                mActivity =
-                        spy((Settings.SecurityDashboardActivity) InstrumentationRegistry
-                                .getInstrumentation().newActivity(
-                                        getClass().getClassLoader(),
-                                        Settings.SecurityDashboardActivity.class.getName(),
-                                        mDefaultIntent));
-            } catch (Exception e) {
-                throw new RuntimeException(e); // nothing to do
-            }
-        });
+        InstrumentationRegistry.getInstrumentation()
+                .runOnMainSync(
+                        () -> {
+                            try {
+                                mActivity =
+                                        spy(
+                                            (Settings.SecurityDashboardActivity)
+                                                InstrumentationRegistry.getInstrumentation()
+                                                        .newActivity(
+                                                                getClass().getClassLoader(),
+                                                                Settings
+                                                                        .SecurityDashboardActivity
+                                                                        .class
+                                                                        .getName(),
+                                                                mDefaultIntent));
+                            } catch (Exception e) {
+                                throw new RuntimeException(e); // nothing to do
+                            }
+                        });
         doNothing().when(mActivity).startActivity(any(Intent.class));
 
         PackageManager pm = mock(PackageManager.class);
         doReturn(pm).when(mActivity).getPackageManager();
         doReturn("com.android.permissioncontroller").when(pm).getPermissionControllerPackageName();
+        doReturn("com.android.settings").when(mActivity).getPackageName();
     }
 
     @Test
@@ -134,7 +150,8 @@ public class SecurityDashboardActivityTest {
 
     @Test
     @UiThreadTest
-    public void onCreate_whenSafetyCenterEnabled_redirectsToSafetyCenter() {
+    @DisableFlags(Flags.FLAG_ENABLE_SAFETY_CENTER_NEW_UI)
+    public void onCreate_whenSafetyCenterEnabled_oldUi_redirectsToSafetyCenter() {
         when(mSafetyCenterManagerWrapper.isEnabled(any(Context.class))).thenReturn(true);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
 
@@ -142,6 +159,21 @@ public class SecurityDashboardActivityTest {
 
         verify(mActivity).startActivity(intentCaptor.capture());
         assertThat(intentCaptor.getValue().getAction()).isEqualTo(Intent.ACTION_SAFETY_CENTER);
+    }
+
+    @Test
+    @UiThreadTest
+    @EnableFlags(Flags.FLAG_ENABLE_SAFETY_CENTER_NEW_UI)
+    public void onCreate_whenSafetyCenterEnabled_newUi_redirectsToSafetyCenter() {
+        when(mSafetyCenterManagerWrapper.isEnabled(any(Context.class))).thenReturn(true);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+
+        mActivity.handleSafetyCenterRedirection();
+
+        verify(mActivity).startActivity(intentCaptor.capture());
+        assertThat(intentCaptor.getValue().getAction()).isEqualTo(Intent.ACTION_MAIN);
+        assertThat(intentCaptor.getValue().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(SafetyCenterFragment.class.getName());
     }
 
     @Test

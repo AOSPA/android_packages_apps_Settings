@@ -204,6 +204,23 @@ public class ProfileSelectFragmentTest {
     }
 
     @Test
+    public void getTabId_bundleWithoutUserId_usesActivityUserId() {
+        // Arrange: Set up a work profile user and mock the activity to return its user ID.
+        final int workUserId = 10;
+        final Set<Integer> profileIds = new HashSet<>();
+        profileIds.add(workUserId);
+        mUserManager.setManagedProfiles(profileIds);
+        when(mActivity.getUserId()).thenReturn(workUserId);
+
+        // Act: Call getTabId with a bundle that does not contain EXTRA_USER_ID.
+        // This should fall back to using the activity's user ID.
+        final int tabId = mFragment.getTabId(mActivity, new Bundle());
+
+        // Assert: The returned tab should be the work tab.
+        assertThat(tabId).isEqualTo(WORK_TAB);
+    }
+
+    @Test
     public void testGetFragments_whenPrivateDisabled_returnsOneFragment() {
         mUserManager.addProfile(new UserInfo(0, PRIMARY_USER_NAME, null, FLAG_MAIN | FLAG_FULL,
                 USER_TYPE_FULL_SYSTEM));

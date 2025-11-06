@@ -85,32 +85,19 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     public static CharSequence getPreferenceSummary(Context context, AppEntry entry) {
         final UserHandle userHandle = UserHandle.getUserHandleForUid(entry.info.uid);
         final UserManager um = UserManager.get(context);
-        if (android.security.Flags.aapmFeatureDisableInstallUnknownSources()) {
-            if (um.hasBaseUserRestriction(DISALLOW_INSTALL_UNKNOWN_SOURCES, userHandle)) {
+        if (um.hasBaseUserRestriction(DISALLOW_INSTALL_UNKNOWN_SOURCES, userHandle)) {
+            return context.getString(com.android.settingslib.R.string.disabled);
+        } else if (um.hasUserRestrictionForUser(DISALLOW_INSTALL_UNKNOWN_SOURCES, userHandle)) {
+            return context.getString(
+                    com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
+        } else if (um.hasUserRestrictionForUser(DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
+                userHandle)) {
+            if (RestrictedLockUtilsInternal.isPolicyEnforcedByAdvancedProtection(context,
+                    DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY, userHandle.getIdentifier())) {
                 return context.getString(com.android.settingslib.R.string.disabled);
-            } else if (um.hasUserRestrictionForUser(DISALLOW_INSTALL_UNKNOWN_SOURCES, userHandle)) {
+            } else {
                 return context.getString(
                         com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
-            } else if (um.hasUserRestrictionForUser(DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
-                    userHandle)) {
-                if (RestrictedLockUtilsInternal.isPolicyEnforcedByAdvancedProtection(context,
-                        DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY, userHandle.getIdentifier())) {
-                    return context.getString(com.android.settingslib.R.string.disabled);
-                } else {
-                    return context.getString(
-                            com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
-                }
-            }
-        } else {
-            final int userRestrictionSource = um.getUserRestrictionSource(
-                    DISALLOW_INSTALL_UNKNOWN_SOURCES, userHandle)
-                    | um.getUserRestrictionSource(
-                            UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY, userHandle);
-            if ((userRestrictionSource & UserManager.RESTRICTION_SOURCE_SYSTEM) != 0) {
-                return context.getString(
-                        com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
-            } else if (userRestrictionSource != 0) {
-                return context.getString(com.android.settingslib.R.string.disabled);
             }
         }
         final InstallAppsState appsState = new AppStateInstallAppsBridge(context, null, null)

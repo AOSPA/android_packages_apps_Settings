@@ -26,6 +26,8 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import com.android.settings.R
 import com.android.settings.safetycenter.IdentityCheckSafetySource
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -89,7 +91,9 @@ class IdentityCheckPromoCardFragment : BottomSheetDialogFragment() {
             val titleView = view.findViewById<TextView>(R.id.title)
             val promoCardTitle = context!!.getString(R.string.identity_check_watch_promo_card_title)
             val promoCardSummary =
-                context!!.getString(R.string.identity_check_promo_card_watch_summary)
+                context!!
+                    .getString(R.string.identity_check_promo_card_watch_summary)
+                    .parseAsHtml(HtmlCompat.FROM_HTML_MODE_COMPACT)
             titleView.text = promoCardTitle
             summaryView.text = promoCardSummary
         }

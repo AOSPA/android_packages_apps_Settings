@@ -138,7 +138,7 @@ class SupervisionWebContentFiltersBrowserSupportedAppsScreenTest {
         browserSupportedAppsScreen.launchFragmentScenario().onFragment { fragment ->
             InstrumentationRegistry.getInstrumentation().waitForIdleSync()
             val preferenceGroup = fragment.findPreference<PreferenceGroup>(SUPPORTED_APPS_GROUP)
-            assertThat(preferenceGroup?.preferenceCount).isEqualTo(1)
+            assertThat(preferenceGroup?.preferenceCount).isEqualTo(4)
             val preference = preferenceGroup?.getPreference(0)
             assertThat(preference?.title).isEqualTo("Supported app")
             assertThat(preference?.summary).isEqualTo("App summary")
