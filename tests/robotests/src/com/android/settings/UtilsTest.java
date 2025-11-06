@@ -23,6 +23,7 @@ import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_DISPLAY
 import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_OUTER_PRIMARY;
 
 import static com.android.internal.hidden_from_bootclasspath.android.hardware.devicestate.feature.flags.Flags.FLAG_DEVICE_STATE_PROPERTY_MIGRATION;
+import static com.android.settings.flags.Flags.FLAG_HIDE_DREAM_SETTING_IN_DEMO_MODE;
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_AUTHENTICATORS;
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_HIDE_BACKGROUND;
@@ -80,6 +81,7 @@ import android.os.storage.VolumeInfo;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Settings;
 import android.util.IconDrawableFactory;
 import android.widget.EditText;
 import android.widget.ScrollView;
@@ -374,6 +376,73 @@ public class UtilsTest {
         when(mockUserManager.isUserForeground()).thenReturn(false);
 
         assertThat(Utils.canCurrentUserDream(mockContext)).isFalse();
+    }
+
+    @Test
+    @EnableFlags(FLAG_HIDE_DREAM_SETTING_IN_DEMO_MODE)
+    public void areDreamsAvailableToCurrentUser_hideSettingInDemoMode_returnFalse() {
+        Resources mockResources = mock(Resources.class);
+        when(mContext.getResources()).thenReturn(mockResources);
+        when(mockResources.getBoolean(R.bool.config_hide_dream_setting_in_demo_mode))
+                .thenReturn(true);
+
+        // Mock demo mode:
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVICE_DEMO_MODE, 1);
+
+        assertThat(Utils.areDreamsAvailableToCurrentUser(mContext)).isFalse();
+
+        // Clean up to default value:
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVICE_DEMO_MODE, 0);
+    }
+
+    @Test
+    @DisableFlags(FLAG_HIDE_DREAM_SETTING_IN_DEMO_MODE)
+    public void shouldHideDreamsInDemoMode_disableFlag_returnFalse() {
+        Resources mockResources = mock(Resources.class);
+        when(mContext.getResources()).thenReturn(mockResources);
+        when(mockResources.getBoolean(R.bool.config_hide_dream_setting_in_demo_mode))
+                .thenReturn(true);
+
+        // Mock demo mode:
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVICE_DEMO_MODE, 1);
+
+        assertThat(Utils.shouldHideDreamsInDemoMode(mContext)).isFalse();
+
+        // Clean up to default value:
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVICE_DEMO_MODE, 0);
+    }
+
+    @Test
+    @EnableFlags(FLAG_HIDE_DREAM_SETTING_IN_DEMO_MODE)
+    public void shouldHideDreamsInDemoMode_notDemoMode_returnFalse() {
+        Resources mockResources = mock(Resources.class);
+        when(mContext.getResources()).thenReturn(mockResources);
+        when(mockResources.getBoolean(R.bool.config_hide_dream_setting_in_demo_mode))
+                .thenReturn(true);
+        assertThat(UserManager.isDeviceInDemoMode(mContext)).isFalse();
+
+        assertThat(Utils.shouldHideDreamsInDemoMode(mContext)).isFalse();
+    }
+
+    @Test
+    @EnableFlags(FLAG_HIDE_DREAM_SETTING_IN_DEMO_MODE)
+    public void areDreamsAvailableToCurrentUser_notHideSettingInDemoMode_returnTrue() {
+        assertThat(mContext.getResources()
+                .getBoolean(R.bool.config_hide_dream_setting_in_demo_mode)).isFalse();
+
+        // Mock demo mode:
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVICE_DEMO_MODE, 1);
+
+        assertThat(Utils.areDreamsAvailableToCurrentUser(mContext)).isTrue();
+
+        // Clean up to default value:
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVICE_DEMO_MODE, 0);
     }
 
     @Test
