@@ -20,6 +20,7 @@ import android.app.Activity.RESULT_OK
 import android.app.Application
 import android.app.KeyguardManager
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ENABLE_SUPERVISION
+import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
@@ -57,12 +58,14 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowContextImpl
 import org.robolectric.shadows.ShadowKeyguardManager
 import org.robolectric.shadows.ShadowLooper
+import org.robolectric.shadows.ShadowServiceManager
 
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowAlertDialogCompat::class])
@@ -73,6 +76,7 @@ class SetupSupervisionActivityTest {
     private val mockUserManager = mock<UserManager>()
 
     private lateinit var shadowKeyguardManager: ShadowKeyguardManager
+    private val mockISupervisionManager = mock<ISupervisionManager>()
 
     @get:Rule val metricsRule = MetricsRule()
     @get:Rule val setFlagsRule = SetFlagsRule()
@@ -87,6 +91,11 @@ class SetupSupervisionActivityTest {
 
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+        ShadowServiceManager.addBinderService(
+            Context.SUPERVISION_SERVICE,
+            ISupervisionManager::class.java,
+            mockISupervisionManager,
+        )
     }
 
     @Test
@@ -306,8 +315,12 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
     fun onSetLockResult_startsRecoveryActivity() {
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(true)
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
         ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
@@ -396,8 +409,12 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
-    fun onPinRecoveryResult_finishesOk() {
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun canLaunchPinRecovery_onPinRecoveryResult_finishesOk() {
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(true)
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
@@ -413,7 +430,39 @@ class SetupSupervisionActivityTest {
                     null,
                 )
 
+                // PIN recovery set up activity was invoked
+                val nextActivity = shadowActivity.nextStartedActivity
+                assertThat(nextActivity.component?.className)
+                    .isEqualTo(SupervisionPinRecoveryActivity::class.java.name)
+
                 // PIN recovery result.
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivityForResult.intent,
+                    RESULT_OK,
+                    null,
+                )
+
+                assertThat(activity.isFinishing).isTrue()
+            }
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_OK)
+        }
+    }
+
+    @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun canNotLaunchPinRecovery_finishesWithoutStartingPinRecovery() {
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(false)
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+                // Set PIN result.
                 shadowActivity.receiveResult(
                     shadowActivity.nextStartedActivityForResult.intent,
                     RESULT_OK,

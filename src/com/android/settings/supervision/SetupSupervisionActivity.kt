@@ -308,8 +308,13 @@ class SetupSupervisionActivity : FragmentActivity() {
             )
         }
 
-        // Start PIN recovery setup
-        startPinRecoveryActivity()
+        // Start PIN recovery setup when pin recovery can be launched
+        if (!Flags.enableSupervisionSettingsUiUpdates() || canLaunchPinRecovery()) {
+            startPinRecoveryActivity()
+        } else {
+            setResult(RESULT_OK)
+            finish()
+        }
     }
 
     private fun handlePinRecoveryResult(result: ActivityResult) {
