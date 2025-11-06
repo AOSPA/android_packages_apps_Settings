@@ -27,4 +27,20 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="illustration" />
 
+    <!-- The try demo button. -->
+    <Preference
+        android:layout_marginTop="16dp"
+        android:key="try_a_demo_button"
+        android:title="@string/try_a_demo"
+        android:summary="@string/see_how_it_works"
+        android:icon="@drawable/ic_satellite_demo"
+        android:visible="false"
+        android:widgetLayout="@layout/preference_widget_forward_arrow" />
+
+    <!-- The footer preference. -->
+    <com.android.settingslib.widget.FooterPreference
+        android:key="footer"
+        android:selectable="false"
+        android:paddingBottom="16dp" />
+
 </PreferenceScreen>
