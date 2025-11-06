@@ -231,7 +231,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                     LockPatternUtils.PASSWORD_TYPE_KEY,
                     DevicePolicyManager.PASSWORD_QUALITY_NUMERIC,
                 )
-                putExtra(Intent.EXTRA_USER_ID, supervisingUserHandle?.identifier)
+                putExtra(Intent.EXTRA_USER_ID, supervisingUserHandle()?.identifier)
             }
         setPinLauncher.launch(intent)
     }
@@ -272,7 +272,9 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
     )
     private fun resetSupervisionUser(): Boolean {
         val userManager = getSystemService(UserManager::class.java)
-        supervisingUserHandle?.let { userManager.removeUserEvenWhenDisallowed(it.identifier) }
+        userManager?.supervisingUserHandle()?.let {
+            userManager.removeUserEvenWhenDisallowed(it.identifier)
+        }
         val userInfo =
             userManager.createProfileForUserEvenWhenDisallowed(
                 /* name= */ "Supervising",

@@ -89,7 +89,7 @@ class SetupSupervisionActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
 
         if (!Flags.enableSupervisionSettingsUiUpdates()) {
-            if (isSupervisingCredentialSet) {
+            if (isSupervisingCredentialSet()) {
                 setResult(RESULT_CANCELED)
                 finish()
                 return
@@ -105,7 +105,7 @@ class SetupSupervisionActivity : FragmentActivity() {
         }
 
         val supervisionManager = getSystemService(SupervisionManager::class.java)
-        val platformCredentialExists = isSupervisingCredentialSet
+        val platformCredentialExists = isSupervisingCredentialSet()
 
         if (supervisionManager?.isSupervisionEnabled() == true && platformCredentialExists) {
             // Nothing to set up if we don't need to enable supervision or create a platform
@@ -153,7 +153,7 @@ class SetupSupervisionActivity : FragmentActivity() {
             }
         }
 
-        if (!Flags.enableSupervisionSettingsUiUpdates() && isSupervisingCredentialSet) {
+        if (!Flags.enableSupervisionSettingsUiUpdates() && isSupervisingCredentialSet()) {
             setResult(RESULT_OK)
             finish()
         }
@@ -195,7 +195,7 @@ class SetupSupervisionActivity : FragmentActivity() {
     @RequiresPermission(anyOf = [CREATE_USERS, MANAGE_USERS])
     private fun setupSupervisingUser(): UserHandle? {
         val userManager = getSystemService(UserManager::class.java)
-        var userHandle = userManager.supervisingUserHandle
+        var userHandle = userManager.supervisingUserHandle()
         // If a supervising profile does not already exist on the device, create one
         if (userHandle == null) {
             val userInfo =
@@ -245,7 +245,7 @@ class SetupSupervisionActivity : FragmentActivity() {
     }
 
     private fun handleSetLockResult(result: ActivityResult) {
-        val supervisingUser = supervisingUserHandle
+        val supervisingUser = supervisingUserHandle()
         if (supervisingUser == null) {
             Log.w(SupervisionLog.TAG, "No supervising user handle found after lock setup.")
             setResult(RESULT_CANCELED)
@@ -305,7 +305,7 @@ class SetupSupervisionActivity : FragmentActivity() {
     private fun hasMultipleNonSupervisingProfiles(): Boolean {
         val userManager = getSystemService(UserManager::class.java) ?: return false
 
-        val supervisingProfileHandle: UserHandle? = supervisingUserHandle
+        val supervisingProfileHandle: UserHandle? = userManager.supervisingUserHandle()
         val nonSupervisingProfilesCount =
             userManager.userProfiles.count { it != supervisingProfileHandle }
 

@@ -78,7 +78,7 @@ class SupervisionPinManagementScreen :
     // observer/listener mechanism on change.
     override fun dependencies(context: Context) = arrayOf(SupervisionSetupRecoveryPreference.KEY)
 
-    override fun isAvailable(context: Context) = context.isSupervisingCredentialSet
+    override fun isAvailable(context: Context) = context.isSupervisingCredentialSet()
 
     override fun getSummary(context: Context): CharSequence? {
         if (
