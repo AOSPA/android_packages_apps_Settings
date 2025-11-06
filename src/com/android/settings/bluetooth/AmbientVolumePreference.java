@@ -123,7 +123,11 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
         updateVolumeIcon();
 
         mExpandIcon = holder.itemView.requireViewById(R.id.expand_icon);
-        mExpandIcon.setOnClickListener(v -> {
+        View expandIconView = holder.itemView.findViewById(com.android.internal.R.id.widget_frame);
+        if (expandIconView == null) {
+            expandIconView = mExpandIcon;
+        }
+        expandIconView.setOnClickListener(v -> {
             if (!isControlExpandable()) {
                 return;
             }
