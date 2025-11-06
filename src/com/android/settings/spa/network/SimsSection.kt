@@ -35,6 +35,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.network.SatelliteRepository
 import com.android.settings.network.SatelliteWarningDialogActivity
 import com.android.settings.network.SatelliteWarningDialogActivity.Companion.CUSTOM_CONTENT_BUTTON_NAME
 import com.android.settings.network.SatelliteWarningDialogActivity.Companion.CUSTOM_CONTENT_DESCRIPTION
@@ -69,39 +70,43 @@ fun SimsSection(subscriptionInfoList: List<SubscriptionInfo>) {
 @Composable
 private fun SimPreference(subInfo: SubscriptionInfo) {
     val context = LocalContext.current
-    val checked = remember(subInfo.subscriptionId) {
-        SubscriptionRepository(context).isSubscriptionEnabledFlow(subInfo.subscriptionId)
-    }.collectAsStateWithLifecycle(initialValue = false)
+    val checked =
+        remember(subInfo.subscriptionId) {
+                SubscriptionRepository(context).isSubscriptionEnabledFlow(subInfo.subscriptionId)
+            }
+            .collectAsStateWithLifecycle(initialValue = false)
     val phoneNumber = phoneNumber(subInfo)
-    val isConvertedPsim by remember(subInfo) {
-        flow {
-            emit(SubscriptionUtil.isConvertedPsimSubscription(subInfo))
-        }
-    }.collectAsStateWithLifecycle(initialValue = false)
+    val isConvertedPsim by
+        remember(subInfo) { flow { emit(SubscriptionUtil.isConvertedPsimSubscription(subInfo)) } }
+            .collectAsStateWithLifecycle(initialValue = false)
     val subscriptionActivationRepository = remember { SubscriptionActivationRepository(context) }
-    val isActivationChangeable by remember {
-        subscriptionActivationRepository.isActivationChangeableFlow()
-    }.collectAsStateWithLifecycle(initialValue = false)
+    val isActivationChangeable by
+        remember { subscriptionActivationRepository.isActivationChangeableFlow() }
+            .collectAsStateWithLifecycle(initialValue = false)
     val coroutineScope = rememberCoroutineScope()
     RestrictedTwoTargetSwitchPreference(
-        model = object : SwitchPreferenceModel {
-            override val title = subInfo.displayName.toString()
-            override val summary = {
-                if (isConvertedPsim) {
-                    context.getString(R.string.sim_category_converted_sim)
-                } else {
-                    phoneNumber.value ?: ""
+        model =
+            object : SwitchPreferenceModel {
+                override val title = subInfo.displayName.toString()
+                override val summary = {
+                    if (isConvertedPsim) {
+                        context.getString(R.string.sim_category_converted_sim)
+                    } else {
+                        phoneNumber.value ?: ""
+                    }
                 }
-            }
-            override val icon = @Composable { SimIcon(subInfo.isEmbedded) }
-            override val changeable = { isActivationChangeable && !isConvertedPsim }
-            override val checked = { checked.value }
-            override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
-                coroutineScope.launch {
-                    subscriptionActivationRepository.setActive(subInfo.subscriptionId, newChecked)
+                override val icon = @Composable { SimIcon(subInfo.isEmbedded) }
+                override val changeable = { isActivationChangeable && !isConvertedPsim }
+                override val checked = { checked.value }
+                override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
+                    coroutineScope.launch {
+                        subscriptionActivationRepository.setActive(
+                            subInfo.subscriptionId,
+                            newChecked,
+                        )
+                    }
                 }
-            }
-        },
+            },
         restrictions = Restrictions(keys = listOf(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)),
         primaryEnabled = { !isConvertedPsim },
     ) {
@@ -117,9 +122,8 @@ private fun SimIcon(isEmbedded: Boolean) {
 @Composable
 fun phoneNumber(subInfo: SubscriptionInfo): State<String?> {
     val context = LocalContext.current
-    return remember(subInfo) {
-        context.phoneNumberFlow(subInfo)
-    }.collectAsStateWithLifecycle(initialValue = null)
+    return remember(subInfo) { context.phoneNumberFlow(subInfo) }
+        .collectAsStateWithLifecycle(initialValue = null)
 }
 
 @Composable
@@ -128,13 +132,23 @@ private fun AddSim() {
     val isShow by
         remember { EuiccRepository(context).showEuiccSettingsFlow() }
             .collectAsStateWithLifecycle(initialValue = false)
+
+    val isSatelliteSessionStarted by
+        remember { SatelliteRepository(context).getIsSessionStartedFlow() }
+            .collectAsStateWithLifecycle(initialValue = false)
     if (isShow) {
         RestrictedPreference(
             model =
                 object : PreferenceModel {
                     override val title = stringResource(id = R.string.mobile_network_list_add_more)
                     override val icon = @Composable { SettingsIcon(Icons.Outlined.Add) }
-                    override val onClick = { startAddSimFlow(context) }
+                    override val onClick = {
+                        if (isSatelliteSessionStarted) {
+                            startSatelliteWarningDialogFlow(context)
+                        } else {
+                            startAddSimFlow(context)
+                        }
+                    }
                 },
             restrictions = Restrictions(keys = listOf(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)),
         )
@@ -143,18 +157,26 @@ private fun AddSim() {
 
 fun startAddSimFlow(context: Context) = context.startActivity(getAddSimIntent())
 
-fun getAddSimIntent() = Intent(EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION).apply {
-    setPackage(Utils.PHONE_PACKAGE_NAME)
-    putExtra(EuiccManager.EXTRA_FORCE_PROVISION, true)
-}
+fun getAddSimIntent() =
+    Intent(EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION).apply {
+        setPackage(Utils.PHONE_PACKAGE_NAME)
+        putExtra(EuiccManager.EXTRA_FORCE_PROVISION, true)
+    }
 
-fun startSatelliteWarningDialogFlow(context: Context) = context.startActivity(getSatelliteWarningDialogIntent(context))
+fun startSatelliteWarningDialogFlow(context: Context) =
+    context.startActivity(getSatelliteWarningDialogIntent(context))
 
-fun getSatelliteWarningDialogIntent(context: Context) = Intent(context,
-    SatelliteWarningDialogActivity::class.java).apply {
-    val content = HashMap<Int, String>()
-    content.put(CUSTOM_CONTENT_TITLE, context.getString(R.string.title_satellite_dialog_for_sim_restriction))
-    content.put(CUSTOM_CONTENT_DESCRIPTION, context.getString(R.string.description_satellite_dialog_for_sim_restriction))
-    content.put(CUSTOM_CONTENT_BUTTON_NAME, context.getString(R.string.okay))
-    putExtra(SatelliteWarningDialogActivity.EXTRA_TYPE_OF_SATELLITE_CUSTOMIZED_CONTENT, content)
-}
+fun getSatelliteWarningDialogIntent(context: Context) =
+    Intent(context, SatelliteWarningDialogActivity::class.java).apply {
+        val content = HashMap<Int, String>()
+        content.put(
+            CUSTOM_CONTENT_TITLE,
+            context.getString(R.string.title_satellite_dialog_for_sim_restriction),
+        )
+        content.put(
+            CUSTOM_CONTENT_DESCRIPTION,
+            context.getString(R.string.description_satellite_dialog_for_sim_restriction),
+        )
+        content.put(CUSTOM_CONTENT_BUTTON_NAME, context.getString(R.string.okay))
+        putExtra(SatelliteWarningDialogActivity.EXTRA_TYPE_OF_SATELLITE_CUSTOMIZED_CONTENT, content)
+    }
