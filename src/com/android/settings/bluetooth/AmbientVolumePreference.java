@@ -119,7 +119,7 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
 
         mVolumeIcon = holder.itemView.requireViewById(com.android.internal.R.id.icon);
         mVolumeIcon.getDrawable().mutate().setTint(getContext().getColor(
-                com.android.internal.R.color.materialColorOnPrimaryContainer));
+                com.android.internal.R.color.materialColorOnSurface));
         updateVolumeIcon();
 
         mExpandIcon = holder.itemView.requireViewById(R.id.expand_icon);
