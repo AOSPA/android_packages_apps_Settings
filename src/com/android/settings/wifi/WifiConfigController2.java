@@ -369,13 +369,20 @@ public class WifiConfigController2 implements TextWatcher,
                         .getBoolean(R.bool.config_allow_edit_network_configuration_by_default);
 
             mSharedSwitch.setChecked(sharedDefault);
-            mSharedSwitch.setEnabled(mIsNetworkEditable);
+            boolean canModifyShareSettings =
+                    WifiUtils.isSharedFieldEditable(mWifiEntry, mContext);
+            mSharedSwitch.setEnabled(canModifyShareSettings);
             mEditConfigurationSwitch.setChecked(editConfigDefault);
-            mEditConfigurationSwitch.setEnabled(sharedDefault && mIsNetworkEditable);
+            mEditConfigurationSwitch.setEnabled(sharedDefault
+                    && canModifyShareSettings);
 
             mSharedSwitch.setOnCheckedChangeListener(this);
-            if (mMode == WifiConfigUiBase2.MODE_LOGIN_SCREEN) {
+            if (WifiUtils.isAtLoginScreen(mContext)
+                    || mMode == WifiConfigUiBase2.MODE_MODIFY) {
                 setSharedNetworkFieldsInvisible();
+            }
+            if (WifiUtils.isAtLoginScreen(mContext)) {
+                mSharedNetworkLoginScreenWarning.setVisibility(View.VISIBLE);
             }
         }
 
@@ -455,8 +462,7 @@ public class WifiConfigController2 implements TextWatcher,
 
             if (mMode == WifiConfigUiBase2.MODE_MODIFY) {
                 mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
-            } else if (mMode == WifiConfigUiBase2.MODE_CONNECT
-                    || mMode == WifiConfigUiBase2.MODE_LOGIN_SCREEN) {
+            } else if (mMode == WifiConfigUiBase2.MODE_CONNECT) {
                 mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
             } else {
                 final String signalLevel = getSignalString();
@@ -1440,7 +1446,6 @@ public class WifiConfigController2 implements TextWatcher,
     }
 
     private void setSharedNetworkFieldsInvisible() {
-        mSharedNetworkLoginScreenWarning.setVisibility(View.VISIBLE);
         mView.findViewById(R.id.sharing_toggle_fields).setVisibility(View.GONE);
         mView.findViewById(R.id.edit_wifi_network_configuration_fields)
                 .setVisibility(View.GONE);
