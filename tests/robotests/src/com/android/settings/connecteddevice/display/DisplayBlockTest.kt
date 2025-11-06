@@ -23,6 +23,8 @@ import android.util.Size
 import android.view.SurfaceControl
 import android.view.SurfaceView
 import android.view.View
+import android.view.accessibility.AccessibilityNodeInfo
+import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction
 import android.widget.FrameLayout
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
@@ -366,6 +368,173 @@ class DisplayBlockTest {
             assertThat(arrowButtonView.parent).isEqualTo(block)
             assertThat(arrowButtonView.visibility).isEqualTo(View.GONE)
         }
+    }
+
+    @Test
+    fun setArrowVisible_updatesVisibilityBasedOnMovability() {
+        // Setup: Define which directions are movable
+        val arrowMovement =
+            ArrowMovement(
+                mapOf(
+                    Direction.UP to true,
+                    Direction.DOWN to false,
+                    Direction.LEFT to true,
+                    Direction.RIGHT to false
+                )
+            )
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(10f, 10f),
+            PointF(20f, 20f),
+            0.5f,
+            DISPLAY_SIZE,
+            arrowMovement,
+        )
+
+        // Action: Set arrows to be visible
+        block.setArrowVisible(true)
+
+        // Assertions for visible arrows based on movability
+        assertThat(block.arrowButtons[Direction.UP]?.visibility).isEqualTo(View.VISIBLE)
+        assertThat(block.arrowButtons[Direction.LEFT]?.visibility).isEqualTo(View.VISIBLE)
+        assertThat(block.arrowButtons[Direction.DOWN]?.visibility).isEqualTo(View.GONE)
+        assertThat(block.arrowButtons[Direction.RIGHT]?.visibility).isEqualTo(View.GONE)
+
+        // Action: Set arrows to be invisible
+        block.setArrowVisible(false)
+
+        // Assertions: All arrows should be gone regardless of movability
+        assertThat(block.arrowButtons[Direction.UP]?.visibility).isEqualTo(View.GONE)
+        assertThat(block.arrowButtons[Direction.DOWN]?.visibility).isEqualTo(View.GONE)
+        assertThat(block.arrowButtons[Direction.LEFT]?.visibility).isEqualTo(View.GONE)
+        assertThat(block.arrowButtons[Direction.RIGHT]?.visibility).isEqualTo(View.GONE)
+    }
+
+    @Test
+    fun onInitializeAccessibilityNodeInfo_addsAndRemovesActionsForMovableDirections() {
+        // Setup: Define which directions are movable
+        val arrowMovement =
+            ArrowMovement(
+                mapOf(
+                    Direction.UP to true,
+                    Direction.DOWN to false,
+                    Direction.LEFT to true,
+                    Direction.RIGHT to false
+                )
+            )
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(10f, 10f),
+            PointF(20f, 20f),
+            0.5f,
+            DISPLAY_SIZE,
+            arrowMovement,
+        )
+        val mockNodeInfo = mock(AccessibilityNodeInfo::class.java)
+
+        // Action
+        block.onInitializeAccessibilityNodeInfo(mockNodeInfo)
+
+        // Verification for added actions (movable directions)
+        val addActionCaptor = ArgumentCaptor.forClass(AccessibilityAction::class.java)
+        verify(mockNodeInfo, times(2)).addAction(addActionCaptor.capture())
+        val addedActionIds = addActionCaptor.allValues.map { it.id }
+        assertThat(addedActionIds)
+            .containsExactly(
+                R.id.action_move_display_block_up,
+                R.id.action_move_display_block_left
+            )
+            .inOrder()
+
+        // Verification for removed actions (non-movable directions)
+        val removeActionCaptor = ArgumentCaptor.forClass(AccessibilityAction::class.java)
+        verify(mockNodeInfo, times(2)).removeAction(removeActionCaptor.capture())
+        val removedActionIds = removeActionCaptor.allValues.map { it.id }
+        assertThat(removedActionIds)
+            .containsExactly(
+                R.id.action_move_display_block_down,
+                R.id.action_move_display_block_right
+            )
+            .inOrder()
+    }
+
+    @Test
+    fun onInitializeAccessibilityNodeInfo_removesAllActionsWhenImmovable() {
+        // Setup: Block is immovable
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(10f, 10f),
+            PointF(20f, 20f),
+            0.5f,
+            DISPLAY_SIZE,
+            ArrowMovement.immovable(),
+        )
+        val mockNodeInfo = mock(AccessibilityNodeInfo::class.java)
+
+        // Action
+        block.onInitializeAccessibilityNodeInfo(mockNodeInfo)
+
+        // Verification: No actions should be added
+        verify(mockNodeInfo, never()).addAction(any(AccessibilityAction::class.java))
+
+        // Verification: All directional actions should be removed
+        val removeActionCaptor = ArgumentCaptor.forClass(AccessibilityAction::class.java)
+        verify(mockNodeInfo, times(4)).removeAction(removeActionCaptor.capture())
+        val removedActionIds = removeActionCaptor.allValues.map { it.id }
+        assertThat(removedActionIds)
+            .containsExactly(
+                R.id.action_move_display_block_up,
+                R.id.action_move_display_block_down,
+                R.id.action_move_display_block_left,
+                R.id.action_move_display_block_right
+            )
+            .inOrder()
+    }
+
+    @Test
+    fun onInitializeAccessibilityNodeInfo_addsAllActionsWhenFullyMovable() {
+        // Setup: Block is fully movable
+        val arrowMovement =
+            ArrowMovement(
+                mapOf(
+                    Direction.UP to true,
+                    Direction.DOWN to true,
+                    Direction.LEFT to true,
+                    Direction.RIGHT to true
+                )
+            )
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(10f, 10f),
+            PointF(20f, 20f),
+            0.5f,
+            DISPLAY_SIZE,
+            arrowMovement,
+        )
+        val mockNodeInfo = mock(AccessibilityNodeInfo::class.java)
+
+        // Action
+        block.onInitializeAccessibilityNodeInfo(mockNodeInfo)
+
+        // Verification: No actions should be removed
+        verify(mockNodeInfo, never()).removeAction(any(AccessibilityAction::class.java))
+
+        // Verification: All directional actions should be added
+        val addActionCaptor = ArgumentCaptor.forClass(AccessibilityAction::class.java)
+        verify(mockNodeInfo, times(4)).addAction(addActionCaptor.capture())
+        val addedActionIds = addActionCaptor.allValues.map { it.id }
+        assertThat(addedActionIds)
+            .containsExactly(
+                R.id.action_move_display_block_up,
+                R.id.action_move_display_block_down,
+                R.id.action_move_display_block_left,
+                R.id.action_move_display_block_right
+            )
+            .inOrder()
     }
 
     private fun applyRequestedSize() {
