@@ -19,6 +19,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.PersistableBundle
 import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC
+import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID
+import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
 import android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT
 import android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL
 import androidx.lifecycle.testing.TestLifecycleOwner
@@ -47,6 +49,9 @@ class SatelliteSettingPreferenceControllerTest {
     private var mockSatelliteRepository =
         mock<SatelliteRepository>().stub {
             on { isSatelliteAccessConfigurationForCurrentLocationFlow(TEST_SUB_ID) }
+                .thenReturn(flowOf(true))
+            on { requestIsSupportedFlow() }.thenReturn(flowOf(true))
+            on { carrierRoamingNtnAvailableServicesChangedFlow(TEST_SUB_ID) }
                 .thenReturn(flowOf(true))
         }
     private val context: Context = ApplicationProvider.getApplicationContext()
@@ -89,9 +94,13 @@ class SatelliteSettingPreferenceControllerTest {
     }
 
     @Test
-    fun isVisible_outOfFence_disabled() = runBlocking {
+    fun isVisible_connectionManualTypeAndoutOfFence_disabled() = runBlocking {
         val carrierConfigs = PersistableBundle()
         carrierConfigs.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
+        carrierConfigs.putInt(
+            KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+            CARRIER_ROAMING_NTN_CONNECT_MANUAL,
+        )
         whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any()))
             .thenReturn(carrierConfigs)
         whenever(
@@ -114,53 +123,87 @@ class SatelliteSettingPreferenceControllerTest {
     }
 
     @Test
-    fun onViewCreated_satelliteAccessChanges_updatesPreferenceEnabledState() = runBlocking {
-        // This test verifies that the preference's enabled state is dynamically updated
-        // when the isSatelliteAccessConfigurationForCurrentLocationFlow emits new values,
-        // which is the core behavior of using .collect { ... } on the flow.
-
-        // Arrange: Set up carrier configs to make the preference visible.
+    fun isVisible_connectionHybridTypeAndoutOfFence_disabled() = runBlocking {
         val carrierConfigs = PersistableBundle()
         carrierConfigs.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
+        carrierConfigs.putInt(
+            KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+            CARRIER_ROAMING_NTN_CONNECT_HYBRID,
+        )
         whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any()))
             .thenReturn(carrierConfigs)
-
-        // Arrange: Use a MutableStateFlow to control the satellite access value, allowing
-        // us to emit new values during the test. Start with satellite access being disabled.
-        val isSatelliteAccessAllowedFlow = MutableStateFlow(false)
         whenever(
                 mockSatelliteRepository.isSatelliteAccessConfigurationForCurrentLocationFlow(
                     TEST_SUB_ID
                 )
             )
-            .thenReturn(isSatelliteAccessAllowedFlow)
+            .thenReturn(flowOf(false))
 
-        // Arrange: Initialize the controller and display the preference.
+        preference.key = controller.preferenceKey
+
         controller.initialize(TEST_SUB_ID)
         preferenceScreen.addPreference(preference)
+
         controller.displayPreference(preferenceScreen)
-
-        // Act: Trigger the flow collection.
         controller.onViewCreated(TestLifecycleOwner())
-        delay(100) // Allow the coroutine to collect the initial value.
+        delay(100)
 
-        // Assert: The preference should be disabled with the initial value of 'false'.
-        assertThat(preference.isEnabled).isFalse()
-
-        // Act: Emit 'true' from the flow, simulating entering a satellite coverage area.
-        isSatelliteAccessAllowedFlow.value = true
-        delay(100) // Allow the coroutine to collect the new value.
-
-        // Assert: The preference should now be enabled.
-        assertThat(preference.isEnabled).isTrue()
-
-        // Act: Emit 'false' again, simulating leaving the coverage area.
-        isSatelliteAccessAllowedFlow.value = false
-        delay(100) // Allow the coroutine to collect the new value.
-
-        // Assert: The preference should be disabled again.
-        assertThat(preference.isEnabled).isFalse()
+        assertThat(preference.isEnabled).isEqualTo(false)
     }
+
+    @Test
+    fun onViewCreated_satelliteAccessChangesWithManualConnectionType_updatesPreferenceEnabledState() =
+        runBlocking {
+            // This test verifies that the preference's enabled state is dynamically updated
+            // when the isSatelliteAccessConfigurationForCurrentLocationFlow emits new values,
+            // which is the core behavior of using .collect { ... } on the flow.
+
+            // Arrange: Set up carrier configs to make the preference visible.
+            val carrierConfigs = PersistableBundle()
+            carrierConfigs.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
+            carrierConfigs.putInt(
+                KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_MANUAL,
+            )
+            whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any()))
+                .thenReturn(carrierConfigs)
+
+            // Arrange: Use a MutableStateFlow to control the satellite access value, allowing
+            // us to emit new values during the test. Start with satellite access being disabled.
+            val isSatelliteAccessAllowedFlow = MutableStateFlow(false)
+            whenever(
+                    mockSatelliteRepository.isSatelliteAccessConfigurationForCurrentLocationFlow(
+                        TEST_SUB_ID
+                    )
+                )
+                .thenReturn(isSatelliteAccessAllowedFlow)
+
+            // Arrange: Initialize the controller and display the preference.
+            controller.initialize(TEST_SUB_ID)
+            preferenceScreen.addPreference(preference)
+            controller.displayPreference(preferenceScreen)
+
+            // Act: Trigger the flow collection.
+            controller.onViewCreated(TestLifecycleOwner())
+            delay(100) // Allow the coroutine to collect the initial value.
+
+            // Assert: The preference should be disabled with the initial value of 'false'.
+            assertThat(preference.isEnabled).isFalse()
+
+            // Act: Emit 'true' from the flow, simulating entering a satellite coverage area.
+            isSatelliteAccessAllowedFlow.value = true
+            delay(100) // Allow the coroutine to collect the new value.
+
+            // Assert: The preference should now be enabled.
+            assertThat(preference.isEnabled).isTrue()
+
+            // Act: Emit 'false' again, simulating leaving the coverage area.
+            isSatelliteAccessAllowedFlow.value = false
+            delay(100) // Allow the coroutine to collect the new value.
+
+            // Assert: The preference should be disabled again.
+            assertThat(preference.isEnabled).isFalse()
+        }
 
     @Test
     fun isVisible_satelliteIsNotSupported_inVisible() = runBlocking {

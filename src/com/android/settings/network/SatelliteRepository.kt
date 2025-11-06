@@ -233,7 +233,7 @@ open class SatelliteRepository(private val context: Context) {
     }
 
     /** Gets result of [CarrierRoamingNtnListener.onCarrierRoamingNtnAvailableServicesChanged]. */
-    fun carrierRoamingNtnAvailableServicesChangedFlow(subId: Int): Flow<Boolean> =
+    open fun carrierRoamingNtnAvailableServicesChangedFlow(subId: Int): Flow<Boolean> =
         context.telephonyCallbackFlow(subId) {
             object : TelephonyCallback(), CarrierRoamingNtnListener {
                 override fun onCarrierRoamingNtnAvailableServicesChanged(
@@ -253,7 +253,7 @@ open class SatelliteRepository(private val context: Context) {
         }
 
     /** Gets result of [SatelliteManager.requestIsSupported]. */
-    fun requestIsSupportedFlow(): Flow<Boolean> {
+    open fun requestIsSupportedFlow(): Flow<Boolean> {
         val satelliteManager: SatelliteManager? =
             context.getSystemService(SatelliteManager::class.java)
         if (satelliteManager == null) {
