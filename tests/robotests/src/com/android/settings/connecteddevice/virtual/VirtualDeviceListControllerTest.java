@@ -16,6 +16,7 @@
 package com.android.settings.connecteddevice.virtual;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -29,6 +30,7 @@ import android.companion.AssociationInfo;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.util.ArrayMap;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
@@ -104,7 +106,22 @@ public class VirtualDeviceListControllerTest {
     }
     @Test
     public void getAvailabilityStatus_available() {
+        mController.mVirtualDeviceUpdater = mock(VirtualDeviceUpdater.class);
+        ArrayMap<String, VirtualDeviceWrapper> devices = mock(ArrayMap.class);
+        mController.mVirtualDeviceUpdater.mDevices = devices;
+        when(devices.size()).thenReturn(1);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_unavailable() {
+        mController.mVirtualDeviceUpdater = mock(VirtualDeviceUpdater.class);
+        ArrayMap<String, VirtualDeviceWrapper> devices = mock(ArrayMap.class);
+        mController.mVirtualDeviceUpdater.mDevices = devices;
+        when(devices.size()).thenReturn(0);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
