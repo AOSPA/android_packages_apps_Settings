@@ -23,6 +23,7 @@ import android.permission.flags.Flags
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import android.provider.Settings
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterEntry
 import android.safetycenter.SafetyCenterIssue
@@ -43,7 +44,9 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.Settings
+import com.android.settings.Settings.EXTRA_SHOW_FRAGMENT
+import com.android.settings.Settings.SafetyCenterActivity
+import com.android.settings.SubSettings
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_ACTION
 import com.android.settings.safetycenter.SafetyCenterTestUtils.USER_PERSONAL
@@ -53,7 +56,9 @@ import com.android.settings.safetycenter.SafetyCenterTestUtils.createFocusedInte
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssue
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssueAction
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createScData
+import com.android.settings.safetycenter.ui.PrivacyControlsFragment
 import com.android.settings.safetycenter.ui.SafetyCenterFragment
+import com.android.settings.safetycenter.ui.SafetyCenterSubpageRegistry
 import com.android.settingslib.safetycenter.SafetySourcePreference
 import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.BannerMessagePreferenceGroup
@@ -106,7 +111,7 @@ class SafetyCenterFragmentTest {
         testBlock: (SafetyCenterFragment) -> Unit,
     ) {
         shadowSafetyCenterManager.setSafetyCenterData(data)
-        ActivityScenario.launch<Settings.SafetyCenterActivity>(intent).use { scenario ->
+        ActivityScenario.launch<SafetyCenterActivity>(intent).use { scenario ->
             scenario.onActivity { activity ->
                 ShadowLooper.idleMainLooper()
 
@@ -699,7 +704,7 @@ class SafetyCenterFragmentTest {
                 severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION,
             )
         val intent = Intent("android.intent.action.MAIN")
-        intent.setClass(mApplication, Settings.SafetyCenterActivity::class.java)
+        intent.setClass(mApplication, SafetyCenterActivity::class.java)
 
         runTestWithIntent(intent, createScData(activeIssues = listOf(issue1, issue2))) { fragment ->
             val bannerGroup =
@@ -1055,6 +1060,65 @@ class SafetyCenterFragmentTest {
             assertThat(preference?.summary.toString())
                 .isEqualTo(expectedDefaultNetworkSecuritySummary())
             assertIconResource(preference, R.drawable.ic_safety_info)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun launchWithSafetyCenterAction_withGroupId_startsSubSettingsWithFragment() {
+        shadowSafetyCenterManager.setSafetyCenterData(EMPTY_SC_DATA)
+        val testGroupId =
+            mApplication.getString(R.string.config_safety_center_lock_screen_subpage_id)
+        val startIntent =
+            Intent(Intent.ACTION_SAFETY_CENTER).apply {
+                putExtra(SafetyCenterManager.EXTRA_SAFETY_SOURCES_GROUP_ID, testGroupId)
+                setClass(
+                    ApplicationProvider.getApplicationContext(),
+                    SafetyCenterActivity::class.java,
+                )
+            }
+
+        ActivityScenario.launch<SafetyCenterActivity>(startIntent).use { scenario ->
+            scenario.onActivity { activity ->
+                val nextIntent = shadowOf(activity).nextStartedActivity
+
+                assertThat(nextIntent).isNotNull()
+                assertThat(nextIntent.component?.className).isEqualTo(SubSettings::class.java.name)
+                val extras = nextIntent.extras
+                assertThat(extras).isNotNull()
+                val expectedFragmentClass =
+                    SafetyCenterSubpageRegistry.getSubpageFragmentClassNameFor(
+                        activity,
+                        testGroupId,
+                    )
+                assertThat(extras?.getString(EXTRA_SHOW_FRAGMENT)).isEqualTo(expectedFragmentClass)
+            }
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun launchWithPrivacyControlsAction_startsSubSettingsWithFragment() {
+        shadowSafetyCenterManager.setSafetyCenterData(EMPTY_SC_DATA)
+        val startIntent =
+            Intent(Settings.ACTION_PRIVACY_CONTROLS).apply {
+                setClass(
+                    ApplicationProvider.getApplicationContext(),
+                    SafetyCenterActivity::class.java,
+                )
+            }
+
+        ActivityScenario.launch<SafetyCenterActivity>(startIntent).use { scenario ->
+            scenario.onActivity { activity ->
+                val nextIntent = shadowOf(activity).nextStartedActivity
+
+                assertThat(nextIntent).isNotNull()
+                assertThat(nextIntent.component?.className).isEqualTo(SubSettings::class.java.name)
+                val extras = nextIntent.extras
+                assertThat(extras).isNotNull()
+                assertThat(extras?.getString(EXTRA_SHOW_FRAGMENT))
+                    .isEqualTo(PrivacyControlsFragment::class.qualifiedName)
+            }
         }
     }
 

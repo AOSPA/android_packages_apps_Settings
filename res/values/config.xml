@@ -953,6 +953,21 @@
     <!-- Comma separated list of Safety Center safety source IDs to show in the same task as Safety Center -->
     <string name="config_same_task_safety_source_ids" translatable="false">AndroidAccessibility,AndroidAppFunctionAccess,AndroidBackgroundLocation,AndroidBiometrics,AndroidFaceUnlock,AndroidFingerprintUnlock,AndroidHealthConnect,AndroidLockScreen,AndroidPrivateSpace,AndroidNotificationListener,AndroidPermissionAutoRevoke,AndroidPrivacyAppDataSharingUpdates,AndroidWearUnlock,AndroidWorkPolicyInfo</string>
 
+    <!-- Safety Center subpage ID for the app security subpage. -->
+    <string name="config_safety_center_app_security_subpage_id" translatable="false"></string>
+    <!-- Safety Center subpage ID for the accounts subpage. -->
+    <string name="config_safety_center_accounts_subpage_id" translatable="false"></string>
+    <!-- Safety Center subpage ID for the device finders subpage. -->
+    <string name="config_safety_center_device_finders_subpage_id" translatable="false"></string>
+    <!-- Safety Center subpage ID for the updates subpage. -->
+    <string name="config_safety_center_updates_subpage_id" translatable="false"></string>
+    <!-- Safety Center subpage ID for the lock screen subpage. -->
+    <string name="config_safety_center_lock_screen_subpage_id" translatable="false">AndroidLockScreenSources</string>
+    <!-- Safety Center subpage ID for the network_security subpage. -->
+    <string name="config_safety_center_network_security_subpage_id" translatable="false">AndroidCellularNetworkSecuritySources</string>
+    <!-- Safety Center subpage ID for the updates subpage. -->
+    <string name="config_safety_center_privacy_controls_subpage_id" translatable="false">AndroidPrivacySources</string>
+
     <!-- Resolutions shown on external display (for native resolutions only). There must be an even
          number of values, each pair being width x height. If empty, all resolutions are supported. -->
     <integer-array name="config_resolutionsShownOnExternalDisplay" translatable="false"/>
