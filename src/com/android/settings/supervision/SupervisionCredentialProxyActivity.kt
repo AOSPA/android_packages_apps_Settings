@@ -49,7 +49,7 @@ class SupervisionCredentialProxyActivity : FragmentActivity() {
         // Post the heavy logic to run after the current drawing pass.
         // This allows the activity transition animation to run smoothly first.
         window.decorView.post {
-            val supervisingUser = supervisingUserHandle
+            val supervisingUser = supervisingUserHandle()
             if (supervisingUser == null) {
                 errorHandler("SupervisingUserHandle is null")
                 return@post
@@ -87,7 +87,7 @@ class SupervisionCredentialProxyActivity : FragmentActivity() {
             errorHandler("Unexpected request code: $requestCode")
             return
         }
-        val supervisingUser = supervisingUserHandle
+        val supervisingUser = supervisingUserHandle()
         if (supervisingUser == null) {
             errorHandler("Cannot stop supervising profile because it does not exist.")
             return

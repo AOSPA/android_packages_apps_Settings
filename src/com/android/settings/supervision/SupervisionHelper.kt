@@ -42,18 +42,18 @@ object SupervisionHelper {
     const val KEY_RECOVERY_BANNER_DISMISSED = "supervision_recovery_banner_dismissed"
 }
 
-val Context.isSupervisingCredentialSet: Boolean
-    get() {
-        val supervisingUserId = supervisingUserHandle?.identifier ?: return false
-        return getSystemService(KeyguardManager::class.java)?.isDeviceSecure(supervisingUserId) ==
-            true
-    }
+fun Context.isSupervisingCredentialSet(
+    supervisingUserHandle: UserHandle? = supervisingUserHandle()
+): Boolean {
+    val supervisingUserId = supervisingUserHandle?.identifier ?: return false
+    return getSystemService(KeyguardManager::class.java)?.isDeviceSecure(supervisingUserId) == true
+}
 
-val Context.supervisingUserHandle: UserHandle?
-    get() = getSystemService(UserManager::class.java).supervisingUserHandle
+fun Context.supervisingUserHandle(): UserHandle? =
+    getSystemService(UserManager::class.java).supervisingUserHandle()
 
-val UserManager?.supervisingUserHandle: UserHandle?
-    get() = this?.users?.firstOrNull { it.userType == USER_TYPE_PROFILE_SUPERVISING }?.userHandle
+fun UserManager?.supervisingUserHandle(): UserHandle? =
+    this?.getUsers()?.firstOrNull { it.userType == USER_TYPE_PROFILE_SUPERVISING }?.userHandle
 
 /** Returns the package name of the system supervision app, or null if not found. */
 val Context.systemSupervisionPackageName: String?
@@ -140,7 +140,7 @@ fun Context.deleteSupervisionData(): Boolean {
         return false
     }
 
-    val supervisingUser = supervisingUserHandle?.identifier
+    val supervisingUser = userManager.supervisingUserHandle()?.identifier
     if (supervisingUser == null) {
         Log.e(TAG, "Can't delete supervision data; supervising user does not exist.")
         return false

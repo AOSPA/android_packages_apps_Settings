@@ -94,7 +94,8 @@ class SupervisionChangePinPreference :
     }
 
     override fun onPreferenceClick(preference: Preference): Boolean {
-        if (!preference.context.isSupervisingCredentialSet) {
+        val supervisingUserHandle = preference.context.supervisingUserHandle()
+        if (!preference.context.isSupervisingCredentialSet(supervisingUserHandle)) {
             Log.w(TAG, "Supervising credential not set")
             return false
         }
@@ -104,7 +105,7 @@ class SupervisionChangePinPreference :
                     LockPatternUtils.PASSWORD_TYPE_KEY,
                     DevicePolicyManager.PASSWORD_QUALITY_NUMERIC,
                 )
-                putExtra(Intent.EXTRA_USER_ID, preference.context.supervisingUserHandle?.identifier)
+                putExtra(Intent.EXTRA_USER_ID, supervisingUserHandle?.identifier)
             }
         changePinLauncher.launch(intent)
         return true
