@@ -976,6 +976,7 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"เชื่อมต่อ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ไม่สำเร็จ"</string>
     <string name="device_details_title" msgid="1155622417516195481">"รายละเอียดอุปกรณ์"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"การตั้งค่าแป้นพิมพ์"</string>
+    <string name="bluetooth_device_game_controller_settings_preference_title" msgid="291778307796320923">"การตั้งค่าเกมคอนโทรลเลอร์"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"การตั้งค่าเพิ่มเติม"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"การอัปเดตเฟิร์มแวร์ เกี่ยวกับ และอื่นๆ"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"เคล็ดลับและการสนับสนุน"</string>
@@ -1026,8 +1027,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"ไม่มีจอแสดงผลเชื่อมต่ออยู่"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"เชื่อมต่อจอแสดงผลภายนอกเพื่อเริ่มต้นใช้งาน หรือลองใช้สายเคเบิลอื่น"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"ตัวเลือกเพิ่มเติม"</string>
-    <!-- no translation found for external_display_pause_topology_hint (1128908588539457600) -->
-    <skip />
+    <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"หยุดภาพเคลื่อนไหวแบบวนรอบของข้อความคำแนะนำชั่วคราว"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"กดค้างแล้วลากเพื่อจัดเรียงจอแสดงผลใหม่"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"แตะเพื่อแสดงลูกศรนำทาง"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"แตะลูกศรเพื่อจัดเรียงจอแสดงผลใหม่"</string>
@@ -2242,8 +2242,22 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"แป้นพิมพ์และเครื่องมือของโปรไฟล์งาน"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"แป้นพิมพ์บนหน้าจอสำหรับการทำงาน"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ค่าเริ่มต้น"</string>
-    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
-    <skip />
+    <string name="game_controller_settings_title" msgid="4322385924018377909">"เกมคอนโทรลเลอร์"</string>
+    <string name="game_controller_key_remapping" msgid="8150376475022555386">"คีย์"</string>
+    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"แกน"</string>
+    <string name="game_controller_button_a" msgid="2138420373137111774">"ปุ่ม A"</string>
+    <string name="game_controller_button_b" msgid="2093089857164437480">"ปุ่ม B"</string>
+    <string name="game_controller_button_x" msgid="3428801081204194655">"ปุ่ม X"</string>
+    <string name="game_controller_button_y" msgid="4596061542299533516">"ปุ่ม Y"</string>
+    <string name="game_controller_button_l1" msgid="4428713182602902434">"ปุ่ม L1"</string>
+    <string name="game_controller_button_r1" msgid="6271978600831912659">"ปุ่ม R1"</string>
+    <string name="game_controller_button_l2" msgid="4168716287264803566">"ปุ่ม L2"</string>
+    <string name="game_controller_button_r2" msgid="4361909018228151006">"ปุ่ม R2"</string>
+    <string name="game_controller_button_thumbl" msgid="609311480262927654">"คลิกปุ่มแท่งซ้าย"</string>
+    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"คลิกปุ่มแท่งขวา"</string>
+    <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
+    <string name="game_controller_stick_left" msgid="1591700901162153956">"ปุ่มแท่งซ้าย"</string>
+    <string name="game_controller_stick_right" msgid="1418791636252375110">"ปุ่มแท่งขวา"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"ทัชแพด"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"ทัชแพดและเมาส์"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"เมาส์"</string>
@@ -2736,10 +2750,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"แตะหน้าจอ 3 ครั้ง"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"แก้ไขทางลัดสำหรับการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"เลือกแป้มพิมพ์ลัดสำหรับ %1$s"</string>
-    <!-- no translation found for a11y_button_shortcut_unassigned_setting_unavailable_summary (8268632664568192689) -->
-    <skip />
-    <!-- no translation found for a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary (2232737783140069174) -->
-    <skip />
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary" msgid="8268632664568192689">"หากต้องการใช้ฟีเจอร์นี้ ให้เปิดทางลัดปุ่มการช่วยเหลือพิเศษในหน้าฟีเจอร์การช่วยเหลือพิเศษ"</string>
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary" msgid="2232737783140069174">"หากต้องการใช้ฟีเจอร์นี้ ให้เปิดทางลัดปุ่มปรับระดับเสียงในหน้าฟีเจอร์การช่วยเหลือพิเศษ"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"ต่อไป"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"เครื่องช่วยฟัง"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ตั้งค่าและจัดการเครื่องช่วยฟังของ ASHA และ LE Audio, ประสาทหูเทียม และอุปกรณ์ขยายเสียงอื่นๆ"</string>
@@ -3166,8 +3178,7 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"เลือกการเชื่อมต่อเครือข่ายที่ดีที่สุดโดยอัตโนมัติเพื่อยืดระยะเวลาการใช้งานแบตเตอรี่"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"การรักษาความปลอดภัยของเครือข่ายมือถือ"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"ประเภทเครือข่าย การเข้ารหัส ส่วนควบคุมการแจ้งเตือน"</string>
-    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="4190908521080878539">"การตั้งค่าเหล่านี้จะช่วยปกป้องการโทร ข้อความ และข้อมูลของคุณจากเครือข่ายที่ล้าสมัยหรือไม่ได้เข้ารหัสซึ่งเสี่ยงต่อการถูกรวบรวมหรือขโมยข้อมูลได้"</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"การรักษาความปลอดภัยของเครือข่ายมือถือ"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"การแจ้งเตือน"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"การแจ้งเตือนเกี่ยวกับเครือข่าย"</string>
@@ -4333,8 +4344,7 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"กิจกรรมในปฏิทิน"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"กิจวัตรเข้านอน"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"ขณะขับรถ"</string>
-    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
-    <skip />
+    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"ขณะเดินทางด้วยขนส่งสาธารณะ"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"การตั้งค่าแอป"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"ข้อมูลและการตั้งค่าใน <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"จัดการโดย <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4351,8 +4361,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"บล็อกสิ่งที่ทำให้ไขว้เขวหรือการรบกวนจากอุปกรณ์เพื่อให้มีสมาธิ"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"ขจัดสิ่งที่ทำให้ไขว้เขวทั้งหมดเพื่อสภาพแวดล้อมที่เงียบ"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"ปรับเปลี่ยนประสบการณ์การใช้งานและการตั้งค่าอุปกรณ์ในแบบของผู้ใช้แต่ละคน"</string>
-    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
-    <skip />
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"เดินทางด้วยระบบขนส่งสาธารณะได้สะดวกยิ่งขึ้นโดยการปรับการตั้งค่าอัตโนมัติ"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"ลดการรบกวนโดยอนุญาตให้มีเพียงผู้คนและแอปที่สำคัญเท่านั้นที่ติดต่อคุณได้"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"ตั้งค่าโหมดที่จะทำตามกำหนดการประจำ"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"ซิงค์อุปกรณ์กับกิจกรรมประจำวันของคุณ"</string>
@@ -4361,8 +4370,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"จดจ่อกับสิ่งที่ทำ"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"สำหรับช่วงเวลาที่มารยาทเป็นเรื่องสำคัญ"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"การใช้งานแบบแนะนำเพื่อช่วยให้คุณสบายใจ"</string>
-    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
-    <skip />
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"ปรับแต่งอุปกรณ์เพื่อรับประสบการณ์การเดินทางด้วยระบบขนส่งสาธารณะที่ราบรื่นยิ่งขึ้น"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"ควบคุมความสนใจของคุณ"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"คำเตือน"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"ปิด"</string>
@@ -4589,6 +4597,18 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"อนุญาตให้เข้าถึงเพื่อจัดการไฟล์ทั้งหมด"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"อนุญาตให้แอปนี้อ่าน แก้ไข และลบไฟล์ทั้งหมดในอุปกรณ์นี้หรือวอลุ่มของพื้นที่เก็บข้อมูลใดๆ ที่เชื่อมต่อ หากได้รับอนุญาต ​แอปอาจเข้าถึงไฟล์ได้โดยที่คุณไม่ทราบอย่างชัดแจ้ง"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"เข้าถึงไฟล์ทั้งหมดได้"</string>
+    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"การแจ้งเตือนแบบเต็มหน้าจอ"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"อนุญาตให้แอปนี้แสดงการแจ้งเตือนแบบเต็มหน้าจอ"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"อนุญาตให้แอปนี้แสดงการแจ้งเตือนได้เต็มหน้าจอเมื่ออุปกรณ์ล็อกอยู่ แอปอาจใช้การแจ้งเตือนเหล่านี้เพื่อให้เห็นการปลุก สายเรียกเข้า หรือการแจ้งเตือนอื่นๆ ที่เร่งด่วนได้อย่างเด่นชัด"</string>
@@ -6033,8 +6053,7 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"เกิดข้อผิดพลาด"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"ลองอีกครั้งในภายหลัง"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"ย้อนกลับ"</string>
-    <!-- no translation found for supervision_available_apps_title (886352413031517863) -->
-    <skip />
+    <string name="supervision_available_apps_title" msgid="886352413031517863">"แอปและบริการที่พร้อมใช้งาน"</string>
     <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
     <skip />
     <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->

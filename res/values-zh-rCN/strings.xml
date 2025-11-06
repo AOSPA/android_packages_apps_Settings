@@ -976,6 +976,8 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"无法连接“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”"</string>
     <string name="device_details_title" msgid="1155622417516195481">"设备详细信息"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"键盘设置"</string>
+    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
+    <skip />
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"更多设置"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"固件更新、耳机信息等"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"提示和支持"</string>
@@ -1026,8 +1028,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"未连接任何显示器"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"请连接外接显示器以开始使用，或尝试使用其他数据线"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"更多选项"</string>
-    <!-- no translation found for external_display_pause_topology_hint (1128908588539457600) -->
-    <skip />
+    <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"暂停提示文字循环动画"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"按住并拖动即可重新排列显示屏"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"点按即可显示导航箭头"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"点按箭头即可重新排列显示屏"</string>
@@ -2242,7 +2243,36 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"工作资料键盘和工具"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"工作用的屏幕键盘"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"默认"</string>
-    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
+    <string name="game_controller_settings_title" msgid="4322385924018377909">"游戏控制器"</string>
+    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
+    <skip />
+    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
+    <skip />
+    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
     <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"触控板"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"触控板和鼠标"</string>
@@ -2617,7 +2647,7 @@
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"时间"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"标准"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"标准版深色主题"</string>
-    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"为设备和支持深色主题的应用开启深色主题"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"为设备和支持深色主题的应用开启深色主题。"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"扩展"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"扩展版深色主题"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"自动将深色主题应用于大多数不支持深色主题的应用。这样做可以提升无障碍和阅读体验，但可能会导致某些应用无法正常显示。"</string>
@@ -2736,10 +2766,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"点按屏幕三次"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"修改无障碍快捷方式"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"为%1$s选择快捷键"</string>
-    <!-- no translation found for a11y_button_shortcut_unassigned_setting_unavailable_summary (8268632664568192689) -->
-    <skip />
-    <!-- no translation found for a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary (2232737783140069174) -->
-    <skip />
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary" msgid="8268632664568192689">"如需使用此功能，请在无障碍功能页面上开启“无障碍”按钮快捷方式"</string>
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary" msgid="2232737783140069174">"如需使用此功能，请在无障碍功能页面上开启音量键快捷方式"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"继续"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"助听装置"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"设置和管理 ASHA 和 LE 音频助听器、人工耳蜗及其他扩音设备"</string>
@@ -4333,8 +4361,7 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"日历活动"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"“睡觉”日常安排"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"驾车时"</string>
-    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
-    <skip />
+    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"乘坐公交时"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"应用设置"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"“<xliff:g id="APP_NAME">%1$s</xliff:g>”中的信息和设置"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"由“<xliff:g id="APP_NAME">%1$s</xliff:g>”管理"</string>
@@ -4351,8 +4378,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"屏蔽来自设备的干扰/打扰，聚精会神"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"消除所有干扰，打造安静的环境"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"针对不同用户提供个性化设备体验和设置"</string>
-    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
-    <skip />
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"自动调整设置，获得更舒适的公交体验"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"仅允许来自重要联系人和应用的通知，尽量减少干扰"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"设置一个遵循固定时间表的模式"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"让设备与您当天的活动保持同步"</string>
@@ -4361,8 +4387,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"集中注意力，心无旁骛"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"适用于需要注重礼节的场合"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"借助“引导使用”功能，保持安心无忧"</string>
-    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
-    <skip />
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"优化您的设备，获得更顺畅的公交体验"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"掌控您的注意力"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"警告"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"关闭"</string>
@@ -4392,7 +4417,7 @@
     <string name="memtag_off" msgid="4835589640091709019">"关闭"</string>
     <string name="memtag_on_pending" msgid="1592053425431532361">"重启后才能开启"</string>
     <string name="memtag_off_pending" msgid="1543177181383593726">"重启后才能关闭"</string>
-    <string name="memtag_force_off" msgid="1143468955988138470">"目前已为您的设备强制关闭此功能"</string>
+    <string name="memtag_force_off" msgid="1143468955988138470">"您的设备目前无法使用此功能"</string>
     <string name="memtag_force_on" msgid="3254349938627883664">"始终为您的设备开启此功能"</string>
     <string name="memtag_footer" msgid="8480784485124271376">"您需要重启设备，才能开启或关闭高级内存保护功能。开启该功能后，设备运行速度可能会变慢。"</string>
     <string name="memtag_reboot_title" msgid="1413471876903578769">"要重启设备吗？"</string>
@@ -4589,6 +4614,18 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"授予管理所有文件的权限"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"允许此应用读取、修改和删除此设备或任何已连接的存储设备上的所有文件。如果您授予该权限，应用无需明确通知您即可访问文件。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以访问所有文件"</string>
+    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"全屏通知"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"允许此应用显示全屏通知"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"允许此应用在设备锁定时全屏显示通知。应用可利用全屏通知突出显示闹钟、来电或其他紧急通知。"</string>
@@ -5634,7 +5671,7 @@
     <string name="category_name_color" msgid="937514550918977151">"颜色"</string>
     <string name="category_name_display_controls" msgid="7046581691184725216">"其他显示控件"</string>
     <string name="category_name_general" msgid="7737273712848115886">"常规"</string>
-    <string name="dark_theme_main_switch_title" msgid="4570920398981775904">"使用深色主题"</string>
+    <string name="dark_theme_main_switch_title" msgid="4570920398981775904">"启用深色主题"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"启用蓝牙"</string>
     <string name="hdr_brightness_main_switch_title" msgid="1850974699921514297">"启用 HDR 亮度增强"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"使用“阻止响铃”"</string>
@@ -6033,8 +6070,7 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"出了点问题"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"请稍后重试"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"返回"</string>
-    <!-- no translation found for supervision_available_apps_title (886352413031517863) -->
-    <skip />
+    <string name="supervision_available_apps_title" msgid="886352413031517863">"可用的应用和服务"</string>
     <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
     <skip />
     <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
