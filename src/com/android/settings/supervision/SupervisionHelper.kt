@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
 import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -127,7 +128,7 @@ fun Context.areAnyUsersExceptCurrentSupervised(
  * Disables supervision, deletes the supervising profile and recovery info. Returns whether all
  * supervision data was deleted.
  */
-fun Context.deleteSupervisionData(): Boolean {
+fun Context.deleteSupervisionData(disableSupervision: Boolean): Boolean {
     val userManager = getSystemService(UserManager::class.java)
     val supervisionManager = getSystemService(SupervisionManager::class.java)
     if (userManager == null || supervisionManager == null) {
@@ -135,7 +136,10 @@ fun Context.deleteSupervisionData(): Boolean {
         return false
     }
 
-    if (areAnyUsersExceptCurrentSupervised(supervisionManager, userManager)) {
+    if (
+        !Flags.enableSupervisionSettingsUiUpdates() &&
+            areAnyUsersExceptCurrentSupervised(supervisionManager, userManager)
+    ) {
         Log.e(TAG, "Can't delete supervision data; one or more users on the device are supervised.")
         return false
     }
@@ -146,7 +150,10 @@ fun Context.deleteSupervisionData(): Boolean {
         return false
     }
 
-    supervisionManager.setSupervisionEnabled(false)
+    if (disableSupervision) {
+        supervisionManager.setSupervisionEnabled(false)
+    }
+
     supervisionManager.setSupervisionRecoveryInfo(null)
     return userManager.removeUserEvenWhenDisallowed(supervisingUser)
 }
