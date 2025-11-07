@@ -329,7 +329,10 @@ public class WifiHotspotRepository {
             mSpeedType.setValue(SPEED_UNKNOWN);
             return;
         }
-        int keyBand = config.getBand();
+        int keyBand = 0;
+        for (int i = 0; i < config.getChannels().size(); i++) {
+            keyBand |= config.getChannels().keyAt(i);
+        }
         log("updateSpeedType(), getBand():" + keyBand);
         if (!is5gAvailable()) {
             keyBand &= ~BAND_5GHZ;
