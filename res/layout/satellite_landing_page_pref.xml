@@ -37,6 +37,14 @@
         android:visible="false"
         android:widgetLayout="@layout/preference_widget_forward_arrow" />
 
+    <!-- Container for satellite apps. -->
+    <PreferenceCategory
+        android:key="satellite_apps_preference_category"
+        android:title="@string/satellite_apps_title">
+        <com.android.settings.spa.preference.ComposePreference
+            android:key="satellite_apps_list"/>
+    </PreferenceCategory>
+
     <!-- The footer preference. -->
     <com.android.settingslib.widget.FooterPreference
         android:key="footer"

@@ -17,9 +17,10 @@
 package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.app.Application
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.net.NetworkInfo
+import android.content.Intent
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.os.PersistableBundle
 import android.provider.Settings
 import android.telephony.CarrierConfigManager
@@ -28,11 +29,13 @@ import android.telephony.SubscriptionManager
 import android.telephony.satellite.SatelliteManager
 import android.view.View
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.preference.Preference
-import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.android.settings.spa.preference.ComposePreference
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.IllustrationPreference
@@ -41,14 +44,14 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
-import org.robolectric.shadows.ShadowApplication
-import org.robolectric.shadows.ShadowNetworkCapabilities
-import org.robolectric.shadows.ShadowNetworkInfo
 import org.robolectric.shadows.ShadowSatelliteManager
 import org.robolectric.shadows.ShadowSubscriptionManager
 import org.robolectric.util.ReflectionHelpers
@@ -62,11 +65,14 @@ import org.robolectric.util.ReflectionHelpers
 @RunWith(RobolectricTestRunner::class)
 class SatelliteLandingPageFragmentTest {
     private lateinit var context: Application
-    private lateinit var shadowApplication: ShadowApplication
     private lateinit var shadowSatelliteManager: ShadowSatelliteManager
+    private val SUB_ID = 1
 
     @Mock private lateinit var subInfo: SubscriptionInfo
-    private val SUB_ID = 1
+    @Mock private lateinit var packageManager: PackageManager
+    @Mock private lateinit var appsRepository: SatelliteAppsRepository
+
+    private lateinit var fragmentFactory: FragmentFactory
 
     private companion object {
         private const val KEY_ILLUSTRATION = "illustration"
@@ -77,17 +83,30 @@ class SatelliteLandingPageFragmentTest {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        context = ApplicationProvider.getApplicationContext<Application>()
+        context = RuntimeEnvironment.getApplication()
         context.setTheme(R.style.Theme_Settings)
+
         shadowSatelliteManager =
             Shadow.extract(context.getSystemService(SatelliteManager::class.java))
         ShadowSubscriptionManager.setActiveDataSubscriptionId(SUB_ID)
         `when`(subInfo.subscriptionId).thenReturn(SUB_ID)
         val subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
         shadowOf(subscriptionManager).setActiveSubscriptionInfoList(listOf(subInfo))
-        shadowApplication = shadowOf(context)
+
         val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
         shadowOf(carrierConfigManager).setConfigForSubId(SUB_ID, PersistableBundle())
+
+        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(listOf())
+        `when`(appsRepository.getAppsPackagesForNbNtnLandingPage()).thenReturn(listOf())
+        `when`(appsRepository.getEmergencySosIntent()).thenReturn(null)
+        `when`(appsRepository.getSettingsIntent()).thenReturn(null)
+
+        fragmentFactory =
+            object : FragmentFactory() {
+                override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
+                    return SatelliteLandingPageFragment(packageManager, appsRepository)
+                }
+            }
     }
 
     @Test
@@ -139,7 +158,7 @@ class SatelliteLandingPageFragmentTest {
             demoButton!!.performClick()
         }
 
-        val startedIntent = shadowApplication.nextStartedActivity
+        val startedIntent = shadowOf(context).nextStartedActivity
         assertThat(startedIntent).isNotNull()
         assertThat(startedIntent.action)
             .isEqualTo("com.google.android.apps.stargate.ACTION_ESOS_DEMO")
@@ -184,7 +203,7 @@ class SatelliteLandingPageFragmentTest {
                 .onClick(learnMoreView)
         }
 
-        val startedIntent = shadowApplication.nextStartedActivity
+        val startedIntent = shadowOf(context).nextStartedActivity
         assertThat(startedIntent).isNotNull()
         assertThat(startedIntent.action).isEqualTo(Settings.ACTION_SATELLITE_SETTING)
         assertThat(startedIntent.hasExtra("sub_id")).isTrue()
@@ -192,10 +211,74 @@ class SatelliteLandingPageFragmentTest {
             .isTrue()
     }
 
+    @Test
+    fun satelliteApps_whenHasApps_listIsVisible() {
+        setLteNtnSupported(true) // for LTE page
+        val lteAppPackages = listOf("com.app1")
+        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(lteAppPackages)
+        setupPackageManagerForApp("com.app1", "App1", Intent("app1.intent"))
+
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment ->
+            val appsList: ComposePreference? =
+                fragment.findPreference<ComposePreference>("satellite_apps_list")
+            assertThat(appsList).isNotNull()
+            assertThat(appsList!!.isVisible).isTrue()
+        }
+    }
+
+    @Test
+    fun satelliteApps_whenHasApps_listHasCorrectItems() {
+        setLteNtnSupported(true) // for LTE page
+        val lteAppPackages = listOf("com.app1", "com.app2")
+        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(lteAppPackages)
+        setupPackageManagerForApp("com.app1", "App1", Intent("app1.intent"))
+        setupPackageManagerForApp("com.app2", "App2", Intent("app2.intent"))
+
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment: SatelliteLandingPageFragment ->
+            val satelliteAppItems: List<SatelliteAppItem> =
+                fragment.viewModel.satelliteAppItems.value
+            assertThat(satelliteAppItems).hasSize(2)
+            assertThat(satelliteAppItems[0].getAppLabel(packageManager)).isEqualTo("App1")
+            assertThat(satelliteAppItems[1].getAppLabel(packageManager)).isEqualTo("App2")
+        }
+    }
+
+    @Test
+    fun satelliteApps_whenNoApps_listIsHidden() {
+        setLteNtnSupported(true) // for LTE page
+        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(emptyList())
+        // Also ensure SOS and Settings apps are not available
+        `when`(appsRepository.getEmergencySosIntent()).thenReturn(null)
+        `when`(appsRepository.getSettingsIntent()).thenReturn(null)
+
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment ->
+            val appsList = fragment.findPreference<ComposePreference>("satellite_apps_list")
+            assertThat(appsList).isNotNull()
+            assertThat(appsList!!.isVisible).isFalse()
+        }
+    }
+
     private fun launchFragment(): FragmentScenario<SatelliteLandingPageFragment> {
-        return launchFragmentInContainer<SatelliteLandingPageFragment>(
-            themeResId = R.style.Theme_Settings
+        return launchFragmentInContainer(
+            themeResId = R.style.Theme_Settings,
+            factory = fragmentFactory,
         )
+    }
+
+    private fun setupPackageManagerForApp(packageName: String, appName: String, intent: Intent) {
+        val appInfo = mock(ApplicationInfo::class.java)
+        `when`(appInfo.loadLabel(packageManager)).thenReturn(appName)
+        `when`(appInfo.loadIcon(packageManager)).thenReturn(mock(Drawable::class.java))
+        // Use doReturn for methods that can throw checked exceptions to avoid Mockito issues.
+        doReturn(appInfo).`when`(packageManager).getApplicationInfo(packageName, 0)
+        doReturn(mock(Drawable::class.java)).`when`(packageManager).getApplicationIcon(packageName)
+        `when`(packageManager.getLaunchIntentForPackage(packageName)).thenReturn(intent)
     }
 
     /**
@@ -218,35 +301,5 @@ class SatelliteLandingPageFragmentTest {
             }
         val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
         shadowOf(carrierConfigManager).setConfigForSubId(SUB_ID, config)
-    }
-
-    /**
-     * Configures the test environment to simulate Wi-Fi connection status.
-     *
-     * @param isConnected `true` to simulate that Wi-Fi is connected, `false` otherwise.
-     */
-    private fun setWifiConnected(isConnected: Boolean) {
-        val connectivityManager: ConnectivityManager =
-            context.getSystemService(ConnectivityManager::class.java)!!
-        val shadowConnectivityManager = shadowOf(connectivityManager)
-        if (isConnected) {
-            val networkInfo =
-                ShadowNetworkInfo.newInstance(
-                    NetworkInfo.DetailedState.CONNECTED,
-                    ConnectivityManager.TYPE_WIFI,
-                    0, /* subType */
-                    true, /* isAvailable */
-                    true, /* isConnected */
-                )
-            shadowConnectivityManager.setActiveNetworkInfo(networkInfo)
-            val activeNetwork = connectivityManager.activeNetwork
-
-            val capabilities = ShadowNetworkCapabilities.newInstance()
-            shadowOf(capabilities).addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
-            shadowOf(capabilities).addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-            shadowConnectivityManager.setNetworkCapabilities(activeNetwork!!, capabilities)
-        } else {
-            shadowConnectivityManager.setActiveNetworkInfo(null)
-        }
     }
 }
