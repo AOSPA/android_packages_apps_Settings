@@ -650,6 +650,61 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
     }
 
     @Test
+    public void leAudioOnlyDevice_becomesDualMode_showLeAudioToggle() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_HIDE_LE_AUDIO_TOGGLE_FOR_LE_AUDIO_ONLY_DEVICE);
+        setupDevice(makeDefaultDeviceConfig());
+        // Initially, it's an LE Audio only device.
+        addLeAudioProfileToDevice(false);
+
+        showScreen(mController);
+
+        // The LE Audio toggle should be hidden for an LE Audio only device.
+        List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
+        assertThat(switches).hasSize(1);
+        assertThat(switches.get(0).isVisible()).isFalse();
+
+        // Now, add a classic audio profile, making it a dual-mode device.
+        addA2dpProfileToDevice(false, false, false);
+        // Trigger a refresh to re-evaluate the profiles.
+        mController.onDeviceAttributesChanged();
+
+        // The LE Audio toggle should now be visible. The A2DP toggle should not be visible.
+        switches = getProfileSwitches(false);
+        assertThat(switches).hasSize(1);
+        assertThat(switches.get(0).getKey()).isEqualTo(mLeAudioProfile.toString());
+        assertThat(switches.get(0).isVisible()).isTrue();
+    }
+
+    @Test
+    public void dualModeDevice_becomesLeAudioOnly_hideLeAudioToggle() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_HIDE_LE_AUDIO_TOGGLE_FOR_LE_AUDIO_ONLY_DEVICE);
+        setupDevice(makeDefaultDeviceConfig());
+        // Initially, it's a dual-mode device.
+        addLeAudioProfileToDevice(false);
+        addA2dpProfileToDevice(false, false, false);
+
+        showScreen(mController);
+
+        // The LE Audio toggle should be visible for a dual-mode device.
+        List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
+        assertThat(switches).hasSize(1);
+        assertThat(switches.get(0).getKey()).isEqualTo(mLeAudioProfile.toString());
+        assertThat(switches.get(0).isVisible()).isTrue();
+
+        // Now, remove the classic audio profile, making it an LE Audio only device.
+        mConnectableProfiles.remove(mA2dpProfile);
+        when(mCachedDevice.getRemovedProfiles()).thenReturn(List.of(mA2dpProfile));
+
+        // Trigger a refresh to re-evaluate the profiles.
+        mController.onDeviceAttributesChanged();
+
+        // The LE Audio toggle should now be hidden.
+        SwitchPreferenceCompat leAudioPref = mScreen.findPreference(mLeAudioProfile.toString());
+        assertThat(leAudioPref).isNotNull();
+        assertThat(leAudioPref.isVisible()).isFalse();
+    }
+
+    @Test
     public void ashaHearingAid_hideAshaToggle() {
         setupDevice(makeDefaultDeviceConfig());
         addHearingAidProfileToDevice(true);
