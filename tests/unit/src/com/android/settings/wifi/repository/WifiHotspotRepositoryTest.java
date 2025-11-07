@@ -17,6 +17,7 @@
 package com.android.settings.wifi.repository;
 
 import static android.net.TetheringManager.TETHERING_WIFI;
+import static android.net.TetheringManager.TETHER_ERROR_SERVICE_UNAVAIL;
 import static android.net.wifi.SoftApConfiguration.BAND_2GHZ;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
@@ -763,6 +764,17 @@ public class WifiHotspotRepositoryTest {
 
         mRepository.mSoftApCallback.onStateChanged(WIFI_AP_STATE_ENABLED, 0);
 
+        assertThat(mRepository.mIsRestarting).isFalse();
+    }
+
+    @Test
+    public void onTetheringFailed_isRestarting_stopTetheringAndSetRestartingFalse() {
+        mRepository.mIsRestarting = true;
+        mRepository.startTethering();
+
+        mRepository.mStartTetheringCallback.onTetheringFailed(TETHER_ERROR_SERVICE_UNAVAIL);
+
+        verify(mTetheringManager).stopTethering(TETHERING_WIFI);
         assertThat(mRepository.mIsRestarting).isFalse();
     }
 
