@@ -75,3 +75,10 @@ flag {
         purpose: PURPOSE_BUGFIX
     }
 }
+
+flag {
+  name: "enable_resolution_refresh_rate_setting"
+  namespace: "lse_desktop_experience"
+  description: "Show refresh rate options together with resolution options."
+  bug: "454516501"
+}
