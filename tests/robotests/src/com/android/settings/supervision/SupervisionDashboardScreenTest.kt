@@ -416,8 +416,11 @@ class SupervisionDashboardScreenTest {
 
         assertThat(supervisionAppsGroup.isVisible).isTrue()
         assertThat(supervisionAppsGroup.preferenceCount).isEqualTo(1)
-        assertThat(supervisionAppsGroup.getPreference(0).intent?.action)
+        val preference = supervisionAppsGroup.getPreference(0)
+        assertThat(preference.intent?.action)
             .isEqualTo(Settings.MANAGE_SUPERVISION_APP_SETTINGS)
+        assertThat(preference.widgetLayoutResource)
+            .isEqualTo(R.layout.preference_external_action_icon)
     }
 
     @Test
