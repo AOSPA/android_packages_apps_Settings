@@ -20,6 +20,7 @@ import static android.app.AutomaticZenRule.TYPE_BEDTIME;
 import static android.app.AutomaticZenRule.TYPE_DRIVING;
 import static android.app.AutomaticZenRule.TYPE_SCHEDULE_CALENDAR;
 import static android.app.AutomaticZenRule.TYPE_SCHEDULE_TIME;
+import static android.app.AutomaticZenRule.TYPE_TRANSIT;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -145,6 +146,7 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
         @StringRes int title = switch (mode.getType()) {
             case TYPE_BEDTIME -> R.string.zen_mode_trigger_title_bedtime;
             case TYPE_DRIVING -> R.string.zen_mode_trigger_title_driving;
+            case TYPE_TRANSIT -> R.string.zen_mode_trigger_title_transit;
             default -> R.string.zen_mode_trigger_title_generic;
         };
 
@@ -180,6 +182,8 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
             icon = com.android.internal.R.drawable.ic_zen_mode_type_schedule_time; // Clock
         } else if (mode.getType() == TYPE_DRIVING && configurationIntent != null) {
             icon = R.drawable.ic_zen_mode_trigger_with_settings; // Gear
+        } else if (mode.getType() == TYPE_TRANSIT) {
+            icon = com.android.internal.R.drawable.ic_zen_mode_icon_train; // Train
         } else {
             icon = configurationIntent != null ? R.drawable.ic_zen_mode_trigger_with_activity
                     : R.drawable.ic_zen_mode_trigger_without_activity;

@@ -68,6 +68,7 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Mudar o nome"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Quer desl. o dispositivo?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Sincronizar novo dispositivo"</string>
+    <string name="bluetooth_pairing_no_device_button_message" msgid="6429917002249666051">"Não encontra o seu dispositivo?"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Ativar automaticamente amanhã"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Se desativar o Bluetooth, este é reativado no dia seguinte"</string>
@@ -134,7 +135,6 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Pedido de acesso a mensagens"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Visível como \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" para outros dispositivos"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Ative o Bluetooth para ligar a outros dispositivos."</string>
-    <string name="shared_network_footer" msgid="5178404860420039168">"Contacte o proprietário da rede ou um administrador do dispositivo para fazer alterações a esta rede."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Os seus dispositivos"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Sincronizar novo dispositivo"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Desativar descarga de hardware de Bluetooth A2DP"</string>
@@ -1207,12 +1207,13 @@
     <string name="private_message" msgid="5897966950396765392">"privado"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Confirmar"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Cancelar"</string>
-    <string name="wifi_share_preference_title" msgid="6346200020322308703">"Esta é uma rede partilhada"</string>
-    <string name="wifi_share_preference_summary" msgid="4356010425167713046">"Todos os utilizadores, com exceção dos utilizadores convidados, vão poder ver, editar e eliminar esta rede"</string>
+    <string name="wifi_share_preference_title" msgid="2000847347515149059">"Partilhar rede"</string>
+    <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Outros utilizadores neste dispositivo podem aceder a esta rede"</string>
     <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"Mudar para a rede <xliff:g id="SHARED">%1$s</xliff:g> \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\"?"</string>
     <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"De momento, tem ligação estabelecida a uma rede <xliff:g id="SHARED_0">%1$s</xliff:g> com o mesmo nome. Quando mudar, vai desligar-se da rede <xliff:g id="SHARED_1">%2$s</xliff:g> e, em seguida, vai ser estabelecer ligação novamente à rede <xliff:g id="PRIVATE">%3$s</xliff:g>. Pode ficar temporariamente sem Internet."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(sem alteração)"</string>
-    <string name="wifi_allow_edit_configuration_title" msgid="3928254385019370063">"Permitir que outros utilizadores editem a configuração de rede"</string>
+    <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Permitir que os utilizadores editem a rede"</string>
+    <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Outros utilizadores podem fazer alterações a esta rede"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Selecione"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Vários certificados adicionados)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Usar certificados do sistema"</string>
@@ -1226,11 +1227,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Permitir"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Recusar"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* obrigatório"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"Esta é uma rede partilhada. Pode alterar esta definição depois de iniciar sessão."</string>
-    <string name="share_wifi_network" msgid="4064997404339571584">"Partilhar esta rede com outros utilizadores do dispositivo"</string>
-    <string name="share_wifi_network_summary" msgid="4316236421149769333">"Todos os utilizadores neste dispositivo podem ver e ligar-se a uma rede partilhada. Os administradores podem eliminar uma rede partilhada. Saiba mais"</string>
-    <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Permitir que outros utilizadores editem a configuração de rede"</string>
-    <string name="edit_wifi_network_non_owner_message" msgid="4291718452228643581">"Contacte o administrador deste dispositivo para alterar esta rede."</string>
+    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Esta é uma rede partilhada. Tem de iniciar sessão para fazer alterações."</string>
+    <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Contacte o proprietário da rede ou o administrador do dispositivo para fazer alterações."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Esta rede não tem acesso à Internet. Quer manter a ligação?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Algumas aplicações e serviços podem não funcionar devido a conetividade limitada. Usar mesmo assim?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Não perguntar novamente para esta rede"</string>
@@ -1325,8 +1323,7 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz/compatível com muitos dispositivos"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz/compatível com alguns dispositivos"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2,4 e 5 GHz/compatível com a maioria dos dispositivos"</string>
-    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
-    <skip />
+    <string name="wifi_hotspot_speed_summary_2g_and_6g" msgid="5903589948734876821">"2,4 e 6 GHz/compatível com a maioria dos dispositivos"</string>
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Escolha uma frequência para a zona Wi-Fi. A frequência afeta a velocidade da ligação e os tipos de dispositivos que podem encontrar a zona Wi-Fi."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Frequência preferida"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 GHz"</string>
@@ -1337,10 +1334,8 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Velocidades rápidas. Esta zona Wi-Fi de banda dupla é compatível com a maioria dos dispositivos."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"As velocidades mais rápidas. Compatível com alguns dispositivos."</string>
-    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
-    <skip />
+    <string name="wifi_hotspot_speed_2g_6g" msgid="7660263835445953086">"2,4 e 6 GHz"</string>
+    <string name="wifi_hotspot_speed_2g_6g_summary" msgid="5013590436817464652">"As velocidades mais rápidas. Esta zona Wi-Fi de banda dupla é compatível com a maioria dos dispositivos."</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Não disponível no seu país ou região"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Se a sua frequência preferida não estiver disponível, a zona Wi-Fi pode usar outra. As definições de segurança da zona Wi-Fi podem mudar se alterar a frequência."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Não disponível com 6 GHz"</string>
@@ -2242,6 +2237,8 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclados e ferramentas do perfil de trabalho"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Teclado no ecrã para trabalho"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Predefinição"</string>
+    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
+    <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad e rato"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Rato"</string>
@@ -2939,6 +2936,10 @@
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Veja utilização desde o último carregamento completo"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
+    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
+    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
+    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
+    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Utilização da bateria pelas apps"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Usar detalhes"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajustar utilização de energia"</string>
@@ -4326,6 +4327,8 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Eventos de calendário"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rotina da hora de dormir"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Durante a condução"</string>
+    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
+    <skip />
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Definições da app"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informações e definições na app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Gerido pela app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4342,6 +4345,8 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Bloqueie as distrações ou interrupções do seu dispositivo para manter a concentração"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimine todas as distrações para um ambiente tranquilo"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalize as experiências e as definições do dispositivo para diferentes utilizadores"</string>
+    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
+    <skip />
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimize as interrupções permitindo apenas que as pessoas e apps importantes entrem em contacto consigo"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Defina um modo que siga um horário regular"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Mantenha o seu dispositivo sincronizado com os eventos do seu dia"</string>
@@ -4350,6 +4355,8 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Concentre-se para manter o foco"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Para momentos em que a cortesia é importante"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Utilização guiada para ajudar a ficar em segurança"</string>
+    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
+    <skip />
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Controle a sua atenção"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Aviso"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Fechar"</string>
@@ -5968,8 +5975,7 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Configure um PIN de controlos parentais"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"supervisão, controlos parentais, pais, PIN de supervisão, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Gerir o seu PIN"</string>
-    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
-    <skip />
+    <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Faça a gestão do PIN dos controlos parentais"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN de controlos parentais"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN parental, PIN de controlos parentais"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Adicione o email de recuperação"</string>
@@ -6063,6 +6069,7 @@
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Alertas ignorados"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Ignorar este alerta?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Reveja as suas definições de privacidade e segurança em qualquer altura para adicionar mais proteção"</string>
+    <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Ação concluída"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Sincronização"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ligado"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Analisar dispositivo"</string>

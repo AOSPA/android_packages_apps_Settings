@@ -68,6 +68,8 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Атын өзгерту"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Құрылғы ажыратылсын ба?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Жаңа құрылғымен жұптау"</string>
+    <!-- no translation found for bluetooth_pairing_no_device_button_message (6429917002249666051) -->
+    <skip />
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Ертең автоматты түрде қосу"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Bluetooth-ты өшірсеңіз, ол келесі күні қайта қосылады."</string>
@@ -134,7 +136,6 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Хабарға кіру өтініші"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Басқа құрылғыларға \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" атымен көрінеді."</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Басқа құрылғыларға қосылу үшін Bluetooth функциясын қосыңыз."</string>
-    <string name="shared_network_footer" msgid="5178404860420039168">"Бұл желіге өзгерістер енгізу үшін желі иесіне немесе құрылғы әкімшісіне хабарласыңыз."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Құрылғыларыңыз"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Жаңа құрылғымен жұптау"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Bluetooth A2DP жабдық жүктемесін азайтуды өшіру"</string>
@@ -1027,10 +1028,8 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Жұмысты бастау үшін сыртқы дисплей жалғаңыз немесе басқа кабель пайдаланып көріңіз."</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Басқа опциялар"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Дисплейлердің ретін өзгерту үшін басып тұрып, сүйреңіз"</string>
-    <!-- no translation found for external_display_tap_to_show_arrows (5173026632711056564) -->
-    <skip />
-    <!-- no translation found for external_display_tap_arrows_to_rearrange (8603187508788001297) -->
-    <skip />
+    <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Навигацияның бағыт пернелерін көрсету үшін түртіңіз"</string>
+    <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Дисплейлердің ретін өзгерту үшін бағыт пернелерін түртіңіз."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Ендірілген дисплейдің көшірмесі"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Жаңа параметрлерді пайдалану қажет пе?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Дисплей ойдағыдай істемесе, алдыңғы параметрлерге қайтаруға болады."</string>
@@ -1040,14 +1039,10 @@
     <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"Төмен жылжыту"</string>
     <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"Солға жылжыту"</string>
     <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"Оңға жылжыту"</string>
-    <!-- no translation found for external_display_topology_a11y_display_moved_up (2006298475752942395) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_display_moved_down (6028544722984648702) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_display_moved_left (5308110789317472437) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_display_moved_right (3802527156765844475) -->
-    <skip />
+    <string name="external_display_topology_a11y_display_moved_up" msgid="2006298475752942395">"Дисплей: %1$s жоғары жылжытылды"</string>
+    <string name="external_display_topology_a11y_display_moved_down" msgid="6028544722984648702">"Дисплей: %1$s төмен жылжытылды"</string>
+    <string name="external_display_topology_a11y_display_moved_left" msgid="5308110789317472437">"Дисплей: %1$s солға жылжытылды"</string>
+    <string name="external_display_topology_a11y_display_moved_right" msgid="3802527156765844475">"Дисплей: %1$s оңға жылжытылды"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"айна"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Сымсыз дисплейді қосу"</string>
@@ -1213,12 +1208,17 @@
     <string name="private_message" msgid="5897966950396765392">"жеке"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Растау"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Бас тарту"</string>
-    <string name="wifi_share_preference_title" msgid="6346200020322308703">"Бұл – ортақ желі"</string>
-    <string name="wifi_share_preference_summary" msgid="4356010425167713046">"Қонақ пайдаланушыларды қоспағанда барлық пайдаланушы бұл желіні көре алады, өзгерте алады және жоя алады"</string>
+    <!-- no translation found for wifi_share_preference_title (2000847347515149059) -->
+    <skip />
+    <!-- no translation found for wifi_share_preference_summary (3642772041628058748) -->
+    <skip />
     <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"<xliff:g id="SHARED">%1$s</xliff:g> \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" желісіне ауыстыру қажет пе?"</string>
     <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"Қазір <xliff:g id="SHARED_0">%1$s</xliff:g> желісіне сол атпен қосылғансыз. Ауыстырсаңыз, <xliff:g id="SHARED_1">%2$s</xliff:g> желісінен ажыратылып, <xliff:g id="PRIVATE">%3$s</xliff:g> желісіне қайта қосыласыз. Интернет уақытша үзілуі мүмкін."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(өзгермеген)"</string>
-    <string name="wifi_allow_edit_configuration_title" msgid="3928254385019370063">"Басқа пайдаланушыларға желі конфигурациясын өзгертуге рұқсат беру"</string>
+    <!-- no translation found for wifi_allow_edit_configuration_title (701463165569293) -->
+    <skip />
+    <!-- no translation found for wifi_allow_edit_configuration_summary (2133654391010089827) -->
+    <skip />
     <string name="wifi_unspecified" msgid="4561964943472312208">"Таңдаңыз"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Бірнеше сертификат қосылды)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Жүйелік сертификаттарды пайдалану"</string>
@@ -1232,11 +1232,10 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Рұқсат беру"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Тыйым салу"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*міндетті"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"Бұл – ортақ желі. Бұл параметрді аккаунтқа кіргеннен кейін өзгертуге болады."</string>
-    <string name="share_wifi_network" msgid="4064997404339571584">"Бұл желіні басқа құрылғы пайдаланушыларымен бөлісу"</string>
-    <string name="share_wifi_network_summary" msgid="4316236421149769333">"Бұл құрылғыдағы барлық пайдаланушы ортақ желіні көріп, оған қосыла алады. Әкімшілер ортақ желіні жоя алады. Толық ақпарат"</string>
-    <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Басқа пайдаланушыларға желі конфигурациясын өзгертуге рұқсат беру"</string>
-    <string name="edit_wifi_network_non_owner_message" msgid="4291718452228643581">"Бұл желіге өзгерістер енгізу үшін осы құрылғының әкімшісіне хабарласыңыз."</string>
+    <!-- no translation found for wifi_shared_network_login_screen_warning (8298716960537761436) -->
+    <skip />
+    <!-- no translation found for edit_wifi_network_non_owner_message (4387650403845968672) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"Бұл желіде интернет байланысы жоқ. Қосулы қалдырасыз ба?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Қосылу мүмкіндігі шектеулі. Кейбір қолданбалар мен қызметтер істемейді. Бәрібір пайдаланылсын ба?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Осы желі үшін енді сұралмасын"</string>
@@ -1331,8 +1330,7 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 ГГц/Құрылғының бірнешеуімен үйлесімді"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 ГГц/Құрылғының кейбірімен үйлесімді"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2,4 және 5 ГГц/Құрылғының көбісімен үйлесімді"</string>
-    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
-    <skip />
+    <string name="wifi_hotspot_speed_summary_2g_and_6g" msgid="5903589948734876821">"2,4 және 6 ГГц / құрылғылардың көпшілігімен үйлесімді"</string>
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Хотспот жиілігін таңдаңыз. Жиілік байланыс жылдамдығына және хотспотты таба алатын құрылғы түрлеріне әсер етеді."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Таңдалған жиілік"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 ГГц"</string>
@@ -1343,10 +1341,8 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Қатты жылдамдық. Бұл екі жолақты хотспот құрылғының көбіcімен үйлесімді."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 ГГц"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Ең қатты жылдамдық. Құрылғының кейбірімен үйлесімді."</string>
-    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
-    <skip />
+    <string name="wifi_hotspot_speed_2g_6g" msgid="7660263835445953086">"2,4 және 6 ГГц"</string>
+    <string name="wifi_hotspot_speed_2g_6g_summary" msgid="5013590436817464652">"Ең қатты жылдамдық. Бұл екі жолақты хотспот құрылғылардың көпшілігімен үйлесімді."</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Еліңізде не аймағыңызда қолжетімсіз."</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Таңдалған жиілік қолжетімсіз болса, хотспот басқасын пайдалануы мүмкін. Жиілікті өзгертсеңіз, хотспоттың қауіпсіздік параметрлері де өзгеруі мүмкін."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"6 ГГц жиілігімен қолдану мүмкін емес."</string>
@@ -2248,6 +2244,8 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Жұмыс профилі пернетақталары және құралдары"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Жұмысқа арналған экрандағы пернетақта"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Әдепкі"</string>
+    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
+    <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"Сенсорлық тақта"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Сенсорлық тақта мен тінтуір"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Тінтуір"</string>
@@ -2945,6 +2943,10 @@
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Соңғы рет толық зарядталғаннан бергі пайдалану мәліметін көру"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
+    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
+    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
+    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
+    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Қолданбаның батарея шығындау көрсеткіші"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Қолдану деректері"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Қуат қолданысын бейімдеу"</string>
@@ -4332,6 +4334,8 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Күнтізбедегі іс-шаралар"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Ұйқы режимі"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Көлік жүргізгенде"</string>
+    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
+    <skip />
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Қолданба параметрлері"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Ақпарат пен параметрлерді қолданбада (<xliff:g id="APP_NAME">%1$s</xliff:g>) көруге болады."</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"<xliff:g id="APP_NAME">%1$s</xliff:g> басқарады"</string>
@@ -4348,6 +4352,8 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Зейін қою үшін құрылғыдағы алаңдататын не мазалайтын хабарландыруларды өшіріп қойыңыз."</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Айналада тыныш болуы үшін, алаңдататын нәрселердің барлығын өшіріп тастаңыз."</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Әр пайдаланушы үшін құрылғы мүмкіндіктері мен параметрлерін жекелендіріңіз."</string>
+    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
+    <skip />
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Тек маңызды адамдар мен қолданбалардан хабарландыру алуға рұқсат беріп, мазалайтын нәрселерді азайтыңыз."</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Кәдімгі кесте бойынша істейтін режим орнатыңыз."</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Құрылғыңызды күн іс-шараларымен синхрондаңыз."</string>
@@ -4356,6 +4362,8 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Зонаға өту үшін зейін қою"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Сыпайылық маңызды болатын сәттер үшін"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Қауіпсіздікті қамтамасыз етуге көмектесетін пайдалану нұсқаулығы"</string>
+    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
+    <skip />
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Назарын бақылау"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Ескерту"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Жабу"</string>
@@ -5974,8 +5982,7 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Ата-ана бақылауының PIN кодын реттеу"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"қадағалау, ата-ана бақылауы, ата-ана, қадағалау PIN коды, PIN коды"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"PIN кодын реттеу"</string>
-    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
-    <skip />
+    <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Ата-ана бақылауының PIN кодын реттеу"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Ата-ана бақылауының PIN коды"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Ата-ананың PIN коды, ата-ана бақылауының PIN коды"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Қалпына келтіру электрондық мекенжайын қосыңыз"</string>
@@ -6069,14 +6076,13 @@
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Жабылған хабарландырулар"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Бұл хабарландыруды жабу керек пе?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Қорғаныс деңгейін арттыру үшін қауіпсіздік пен құпиялық параметрлерін кез келген уақытта қарап шығыңыз."</string>
+    <!-- no translation found for safety_center_resolved_issue_fallback (223765674640909183) -->
+    <skip />
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Жұптау"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> жалғанды"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Құрылғыны сканерлеу"</string>
     <string name="satellite_tile_label" msgid="1098132989724404617">"Жерсерік"</string>
-    <!-- no translation found for satellite_tile_subtitle_on (5612034043378102400) -->
-    <skip />
-    <!-- no translation found for satellite_tile_subtitle_available (3218752171363246978) -->
-    <skip />
-    <!-- no translation found for satellite_tile_subtitle_not_available (422078851110512104) -->
-    <skip />
+    <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Қосулы"</string>
+    <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Қолжетімді"</string>
+    <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Қолжетімді емес"</string>
 </resources>

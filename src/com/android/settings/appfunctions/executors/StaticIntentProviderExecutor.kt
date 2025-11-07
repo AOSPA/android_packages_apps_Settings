@@ -20,7 +20,6 @@ import android.app.appsearch.GenericDocument
 import androidx.annotation.Keep
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
-import com.android.settings.appfunctions.intents.getAccessibilityIntents
 import com.android.settings.appfunctions.intents.getAppsIntents
 import com.android.settings.appfunctions.intents.getModesIntents
 import com.android.settings.appfunctions.intents.getNotificationsIntents
@@ -80,6 +79,5 @@ fun getAllIntents(): List<StaticIntents> =
         getModesIntents(),
         getStorageIntents(),
         getSecurityIntents(),
-        getAccessibilityIntents(),
         getOtherIntents(),
     )

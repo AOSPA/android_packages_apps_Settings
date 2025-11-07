@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.display
 
 import android.content.Context
 import android.os.Looper
+import android.view.View
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.testutils.shadow.SettingsShadowResources
@@ -131,9 +132,11 @@ class TopologyHintTextViewTest {
     fun stateTransition_toNoHint_clearsText() {
         hintView.updateState(arrowsShown = true, displayCount = 2)
         assertThat(hintView.text.toString()).isEqualTo(ARROWS_SHOWN_HINT)
+        assertThat(hintView.visibility).isEqualTo(View.VISIBLE)
 
         hintView.updateState(arrowsShown = false, displayCount = 1)
         assertThat(hintView.text.toString()).isEmpty()
+        assertThat(hintView.visibility).isEqualTo(View.GONE)
     }
 
     @Test

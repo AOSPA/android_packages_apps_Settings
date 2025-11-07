@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.app.KeyguardManager
+import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
@@ -54,6 +55,7 @@ import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.robolectric.shadows.ShadowServiceManager
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionRecoveryBannerPreferenceTest {
@@ -63,6 +65,7 @@ class SupervisionRecoveryBannerPreferenceTest {
     private val mockKeyguardManager = mock<KeyguardManager>()
     private val mockUserManager = mock<UserManager>()
     private val mockActivityResultLauncher = mock<ActivityResultLauncher<Intent>>()
+    private val mockISupervisionManager = mock<ISupervisionManager>()
     private lateinit var sharedPrefs: SharedPreferences
     private val context =
         object : ContextWrapper(appContext) {
@@ -73,13 +76,6 @@ class SupervisionRecoveryBannerPreferenceTest {
                     USER_SERVICE -> mockUserManager
                     else -> super.getSystemService(name)
                 }
-
-            override fun getSharedPreferences(name: String, mode: Int): SharedPreferences {
-                if (name == SHARED_PREFS_NAME) {
-                    return sharedPrefs
-                }
-                return super.getSharedPreferences(name, mode)
-            }
         }
     private val mockLifeCycleContext =
         mock<PreferenceLifecycleContext>(
@@ -103,6 +99,11 @@ class SupervisionRecoveryBannerPreferenceTest {
         preference.onCreate(mockLifeCycleContext)
         whenever(mockUserManager.users).thenReturn(listOf(SUPERVISING_USER_INFO))
         whenever(mockKeyguardManager.isDeviceSecure(any())).thenReturn(true)
+        ShadowServiceManager.addBinderService(
+            Context.SUPERVISION_SERVICE,
+            ISupervisionManager::class.java,
+            mockISupervisionManager,
+        )
     }
 
     @Test
@@ -127,6 +128,7 @@ class SupervisionRecoveryBannerPreferenceTest {
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun recoveryPending_showsVerifyFlowText() {
         setSupervisionRecoveryInfo(STATE_PENDING)
+        setHasValidRecoveryMethod(false)
         preference.createAndBindWidget<BannerMessagePreference>(context).also { banner ->
             assertThat(banner.getTitle())
                 .isEqualTo(context.getString(R.string.supervision_recovery_banner_title_verify))
@@ -142,6 +144,7 @@ class SupervisionRecoveryBannerPreferenceTest {
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun recoveryVerified_isNotAvailable() {
         setSupervisionRecoveryInfo(STATE_VERIFIED)
+        setHasValidRecoveryMethod(true)
 
         assertThat(preference.isAvailable(context)).isFalse()
     }
@@ -158,6 +161,7 @@ class SupervisionRecoveryBannerPreferenceTest {
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun flagDisabled_recoveryPending_isNotAvailable() {
         setSupervisionRecoveryInfo(STATE_PENDING)
+        setHasValidRecoveryMethod(false)
 
         assertThat(preference.isAvailable(context)).isFalse()
     }
@@ -166,6 +170,7 @@ class SupervisionRecoveryBannerPreferenceTest {
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun flagDisabled_recoveryVerified_isNotAvailable() {
         setSupervisionRecoveryInfo(STATE_VERIFIED)
+        setHasValidRecoveryMethod(true)
 
         assertThat(preference.isAvailable(context)).isFalse()
     }
@@ -182,6 +187,7 @@ class SupervisionRecoveryBannerPreferenceTest {
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun isAvailable_recoveryPending_noAlternativeApprovalMethods_returnsTrue() {
         setSupervisionRecoveryInfo(STATE_PENDING)
+        setHasValidRecoveryMethod(false)
 
         assertThat(preference.isAvailable(context)).isTrue()
     }
@@ -261,6 +267,7 @@ class SupervisionRecoveryBannerPreferenceTest {
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun bind_recoveryPending_setsVerifyFlowUIAndLaunchesAction() {
         setSupervisionRecoveryInfo(STATE_PENDING)
+        setHasValidRecoveryMethod(false)
         val widget: Preference = preference.createAndBindWidget(context)
         val positiveButton =
             (widget as BannerMessagePreference)
@@ -269,6 +276,11 @@ class SupervisionRecoveryBannerPreferenceTest {
                 .findViewById<Button>(R.id.banner_positive_btn)
         positiveButton.performClick()
         verifyPinRecoveryActivityStarted(SupervisionPinRecoveryActivity.ACTION_POST_SETUP_VERIFY)
+    }
+
+    private fun setHasValidRecoveryMethod(hasValidRecoveryMethod: Boolean) {
+        whenever(mockISupervisionManager.hasValidRecoveryMethod(any()))
+            .thenReturn(hasValidRecoveryMethod)
     }
 
     private fun setSupervisionRecoveryInfo(@SupervisionRecoveryInfo.State state: Int) {

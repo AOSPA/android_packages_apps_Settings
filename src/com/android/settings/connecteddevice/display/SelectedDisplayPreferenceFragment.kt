@@ -112,9 +112,7 @@ open class SelectedDisplayPreferenceFragment(
                 ViewModelProvider(requireParentFragment())
                     .get(DisplayPreferenceViewModel::class.java)
         }
-        shouldShowDisplayConnectionPref =
-            DesktopExperienceFlags.ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG.isTrue() &&
-                viewModel.injector.isProjectedModeEnabled()
+        shouldShowDisplayConnectionPref = viewModel.injector.isProjectedModeEnabled()
         numberFormatter.isGroupingUsed = false
         setup()
     }

@@ -370,8 +370,8 @@ public class WifiConfigController2 implements TextWatcher,
 
             mSharedSwitch.setChecked(sharedDefault);
             mSharedSwitch.setEnabled(mIsNetworkEditable);
-            mEditConfigurationSwitch.setEnabled(sharedDefault && mIsNetworkEditable);
             mEditConfigurationSwitch.setChecked(editConfigDefault);
+            mEditConfigurationSwitch.setEnabled(sharedDefault && mIsNetworkEditable);
 
             mSharedSwitch.setOnCheckedChangeListener(this);
             if (mMode == WifiConfigUiBase2.MODE_LOGIN_SCREEN) {
@@ -642,7 +642,11 @@ public class WifiConfigController2 implements TextWatcher,
 
         if (com.android.settings.connectivity.Flags.wifiMultiuser()) {
             config.shared = mSharedSwitch.isChecked();
-            // TODO: set allowEditConfig once the API is ready.
+            if (!config.shared) {
+                config.setAllowedToUpdateByOtherUsers(false);
+            } else {
+                config.setAllowedToUpdateByOtherUsers(mEditConfigurationSwitch.isChecked());
+            }
         }
 
         switch (mWifiEntrySecurity) {

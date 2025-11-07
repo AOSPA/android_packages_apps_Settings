@@ -2304,6 +2304,8 @@
     <string name="external_display_no_display_connected_screen_summary">Connect an external display to get started, or try using a different cable</string>
     <!-- External Display settings. More resolution options -->
     <string name="external_display_more_options_title">More options</string>
+    <!-- External Display settings. Topology rearrangement hint (hold and drag / tap to show arrows) will be alternatively shown / 5s. Tapping on the text itself will pause the hint cycling animation -->
+    <string name="external_display_pause_topology_hint">Pause hint text cycling animation</string>
     <!-- External Display settings. Default topology hint. -->
     <string name="external_display_topology_hint">Hold and drag to rearrange displays</string>
     <!-- External Display settings. DisplayTopology panel hint to indicate that display blocks can be tapped again to show arrows (that can be used to move and rearrange displays) -->
@@ -2714,18 +2716,18 @@
     <string name="shared_message">shared</string>
     <!-- Label for the private wifi message -->
     <string name="private_message">private</string>
-    <!-- Label for the conflict wifi dialog confirm button -->
-    <string name="wifi_conflict_dialog_confirm">Confirm</string>
-    <!-- Label for the conflict wifi dialog cancel button -->
+    <!-- Label for the conflict wifi dialog switch button [CHAR LIMIT=12] [SCREENSHOT=screen/WDcGQEccdjdc5es] -->
+    <string name="wifi_conflict_dialog_switch">Switch</string>
+    <!-- Label for the conflict wifi dialog cancel button [CHAR LIMIT=12] [SCREENSHOT=screen/WDcGQEccdjdc5es] -->
     <string name="wifi_conflict_dialog_cancel">Cancel</string>
     <!-- Title for the preference to share a network with other users on the same device [CHAR LIMIT=30] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
     <string name="wifi_share_preference_title">Share network</string>
     <!-- Summary for the preference to share a network with other users on the same device [CHAR LIMIT=NONE] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
     <string name="wifi_share_preference_summary">Other users on this device can access this network</string>
-    <!-- Alert dialog title, informing the user to switch to the conflicting network.  [CHAR LIMIT=250] -->
-    <string name="wifi_conflict_dialog_title">Switch to <xliff:g id="shared">%1$s</xliff:g> \"<xliff:g id="network_name">%2$s</xliff:g>\" network?</string>
-    <!-- Alert dialog summary, informing the user to switch to the conflicting network.  [CHAR LIMIT=250] -->
-    <string name="wifi_conflict_dialog_message">You\'re currently connected to a <xliff:g id="shared">%1$s</xliff:g> network with the same name. When you switch, you\'ll disconnect from the <xliff:g id="shared">%2$s</xliff:g> network and then reconnect to the <xliff:g id="private">%3$s</xliff:g> network. You may temporarily have no internet.</string>
+    <!-- Alert dialog title, informing the user to switch to the conflicting network which already has the desired share toggle value. [CHAR LIMIT=30] [SCREENSHOT=screen/WDcGQEccdjdc5es] -->
+    <string name="wifi_conflict_dialog_title">Switch to <xliff:g id="shared">%1$s</xliff:g> network?</string>
+    <!-- Alert dialog summary, informing the user to switch to the conflicting network which already has the desired share toggle value. [CHAR LIMIT=NONE] [SCREENSHOT=screen/WDcGQEccdjdc5es]-->
+    <string name="wifi_conflict_dialog_message">A <xliff:g id="shared">%1$s</xliff:g> network with the name \"<xliff:g id="network_name">%2$s</xliff:g>\" already exists. If you switch to the <xliff:g id="shared">%1$s</xliff:g> network, you will leave your <xliff:g id="private">%3$s</xliff:g> network and you may temporarily have no internet.</string>
     <!-- Hint for unchanged fields -->
     <string name="wifi_unchanged">(unchanged)</string>
     <!-- Label for the check box to allow other device users to edit network details [CHAR LIMIT=30] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
@@ -2800,10 +2802,8 @@
     <string name="wifi_cancel">Cancel</string>
     <!-- Dialog title for forget confirmation dialog -->
     <string name="wifi_forget_dialog_title">Forget network?</string>
-    <!-- Dialog title for forget confirmation dialog on shared wifi network -->
-    <string name="shared_wifi_forget_dialog_title">Forget all device users?</string>
-    <!-- Dialog summary for forget confirmation dialog on shared wifi network -->
-    <string name="shared_wifi_forget_dialog_message"><xliff:g id="network_name">%1$s</xliff:g> is used by other users on this device, and all users of this network will need to set it up again. Still want to forget?</string>
+    <!-- Dialog summary for forget confirmation dialog on shared wifi network [CHAR LIMIT=NONE] [SCREENSHOT=screen/8VTjf4rnDw8CZKw] -->
+    <string name="shared_wifi_forget_dialog_message"><xliff:g id="network_name">%1$s</xliff:g> will be removed for all users on this device</string>
 
     <!-- Wi-Fi Advanced Settings -->
     <skip />
@@ -5262,6 +5262,8 @@
     <!-- Summary text for none selected keyboard default layout -->
     <string name="keyboard_default_layout">Default</string>
 
+    <!-- Title for the button to trigger the 'Game Controller settings' page if only connected with a game controller. [CHAR LIMIT=35] -->
+    <string name="game_controller_settings_title">Game Controllers</string>
     <!-- Title for the button to trigger the 'trackpad settings' page if only connect with a touchpad. [CHAR LIMIT=35] -->
     <string name="trackpad_settings">Touchpad</string>
     <!-- Title for the button to trigger the 'trackpad settings' page if connect with a touchpad and a mouse. [CHAR LIMIT=35] -->
@@ -6413,9 +6415,10 @@
     <string name="accessibility_shortcut_edit_screen_title">Edit accessibility shortcuts</string>
     <!-- Prompt for editing the shortcuts of multiple accessibility features. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_screen_prompt">Choose your shortcut for %1$s</string>
-    <!-- Summary to display when a shortcut setting is disabled, due to the shortcut being unassigned -->
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary">To use this, turn on the %1$s shortcut on an accessibility feature\'s page</string>
-
+    <!-- Summary to display when a shortcut setting is disabled, due to the "accessibility button" shortcut being unassigned. The "accessibility button" is the same as @string/accessibility_shortcut_edit_summary_software -->
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary">To use this, turn on the accessibility button shortcut on an accessibility feature\'s page</string>
+    <!-- Summary to display when a shortcut setting is disabled, due to the "volume keys" shortcut being unassigned. The "volume keys" is the same as @string/accessibility_shortcut_hardware_keyword -->
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary">To use this, turn on the volume keys shortcut on an accessibility feature\'s page</string>
     <!-- Button text for the accessibility dialog continue to the next screen for hearing aid. [CHAR LIMIT=32] -->
     <string name="accessibility_hearingaid_instruction_continue_button">Continue</string>
     <!-- Title for the accessibility preference for hearing devices. [CHAR LIMIT=35] -->
@@ -6914,6 +6917,11 @@
     <string name="battery_advance_info"></string>
     <!-- Preference summary for advanced battery loading usage [CHAR LIMIT=NONE] -->
     <string name="battery_advance_preference_loading_summary"></string>
+    <!-- Description of battery advance info profile results [CHAR LIMIT=NONE] -->
+    <string name="battery_advance_info_profile_result_1"></string>
+    <string name="battery_advance_info_profile_result_2"></string>
+    <string name="battery_advance_info_profile_result_3"></string>
+    <string name="battery_advance_info_profile_result_4"></string>
 
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="battery_details_title">App battery usage</string>
@@ -7449,7 +7457,7 @@
     <string name="cellular_security_summary">Network type, encryption, notification controls</string>
 
     <!-- Summary of Cellular network security settings page in Network & Internet. [CHAR LIMIT=NONE]-->
-    <string name="cellular_security_top_intro">These settings help protect your calls, messages, and data from outdated or unencrypted networks that could expose you to data theft or surveillance</string>
+    <string name="cellular_security_top_intro">These settings help protect your calls, messages, and data from outdated or unencrypted networks that could expose you to data theft or surveillance.</string>
 
     <!-- Title of cellular security settings page [CHAR LIMIT=60]-->
     <string name="cellular_security_settings_title">Mobile network security</string>
@@ -10645,6 +10653,8 @@
     <string name="zen_mode_trigger_title_bedtime">Bedtime routine</string>
     <!-- Modes: Trigger title for modes of type DRIVING. [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_driving">While driving</string>
+    <!-- Modes: Trigger title for modes of type TRANSIT. [CHAR LIMIT=30] -->
+    <string name="zen_mode_trigger_title_transit">While transiting</string>
     <!-- Modes: Generic trigger title for modes of other types [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_generic">App settings</string>
     <!-- Modes: Generic trigger summary for modes where the owner app did not provide a triggerDescription but did provide a configurationActivity to call [CHAR LIMIT=60] -->
@@ -10679,6 +10689,8 @@
     <string name="zen_mode_blurb_theater">Eliminate all distractions for a quiet environment</string>
     <!-- Modes: Blurb for a mode of type MANAGED. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_managed">Personalize device experiences and settings for different users</string>
+    <!-- Modes: Blurb for a mode of type TRANSIT. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_blurb_transit">Enjoy a better transit ride with automatic settings adjustments</string>
     <!-- Modes: Blurb for modes that are not of a specific type (OTHER, UNKNOWN). [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_generic">Minimize interruptions by only allowing important people and apps to reach you</string>
 
@@ -10696,6 +10708,8 @@
     <string name="zen_mode_inspiration_theater">For moments when courtesy counts</string>
     <!-- Modes: Inspirational text for a mode of type MANAGED. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_inspiration_managed">Guided usage to help you stay in good hands</string>
+    <!-- Modes: Inspirational text for a mode of type TRANSIT. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_inspiration_transit">Optimize your device for a smoother public transit experience</string>
     <!-- Modes: Inspirational text for modes that are not of a specific type (OTHER, UNKNOWN). [CHAR LIMIT=NONE] -->
     <string name="zen_mode_inspiration_generic">Take control of your attention</string>
 
@@ -15151,6 +15165,8 @@
         =1      {On # app}
         other   {On # apps}
         }</string>
+    <!-- Floating text for supported apps entry point icon, which displays the number of remaining supported apps. [CHAR LIMIT=10] -->
+    <string name="supervision_remaining_supported_apps_count">+<xliff:g id="count" example="2">%d</xliff:g></string>
     <!-- Title for web content filters footer. [CHAR LIMIT=NONE]-->
     <string name="supervision_web_content_filters_footer_title">When these settings are off, other account settings may still apply.</string>
     <!-- Learn more link for web content filters footer. [CHAR LIMIT=NONE]-->
@@ -15198,6 +15214,13 @@
     <string name="supervision_generic_error_page_message">Try again later</string>
     <!-- Button label on generic error screen bottom that the user can click to retry to enable controls. [CHAR LIMIT=NONE] -->
     <string name="supervision_generic_error_page_button_label">Go back</string>
+    <!-- Title displayed on supervision dashboard to show available apps and services to manage the device. [CHAR LIMIT=NONE] -->
+    <string name="supervision_available_apps_title">Available apps &amp; services</string>
+
+    <!-- Auth method chooser dialog title text. [CHAR LIMIT=80] -->
+    <string name="supervision_approval_method_chooser_title">Choose a verification method</string>
+    <!-- Auth method chooser dialog description text. [CHAR LIMIT=NONE] -->
+    <string name="supervision_approval_method_chooser_description">You must verify you\u2019re a parent</string>
 
     <!-- Light theme customization for Face Education lottie illustration. Not translatable. -->
     <string-array name="face_education_illustration" translatable="false">

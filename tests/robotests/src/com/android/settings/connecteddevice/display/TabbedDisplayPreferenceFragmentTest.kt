@@ -27,11 +27,13 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.core.SettingsBaseActivity
 import com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING
 import com.android.settings.testutils.InstantTaskExecutorRule
 import com.android.settingslib.collapsingtoolbar.widget.ScrollableToolbarItemLayout
+import com.android.settingslib.search.Indexable
 import com.google.android.material.appbar.AppBarLayout
 import com.google.common.truth.Truth.assertThat
 import kotlin.test.assertNull
@@ -319,6 +321,21 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         // It's expected to be null here to let parent view to handle the next focus (which will
         // naturally be moved to Toolbar items
         assertNull(nextFocus)
+    }
+
+    @Test
+    fun searchIndexProvider_getRawIndexData() {
+        val provider: Indexable.SearchIndexProvider =
+            TabbedDisplayPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
+
+        val indexData = provider.getRawDataToIndex(mContext, /* enabled= */ true)
+        assertThat(indexData).hasSize(1)
+        assertThat(indexData.first().screenTitle)
+            .contains(mContext.getString(R.string.connected_devices_dashboard_title))
+        assertThat(indexData.first().keywords)
+            .isEqualTo(mContext.getString(R.string.keywords_external_display_settings))
+        assertThat(indexData.first().title)
+            .isEqualTo(mContext.getString(R.string.external_display_settings_title))
     }
 
     private fun initFragment(): TestableTabbedDisplayPreferenceFragment {

@@ -38,6 +38,7 @@ import android.provider.Settings.Global
 import android.text.Spanned
 import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.preference.Preference
@@ -283,7 +284,7 @@ class SupervisionWebContentFiltersScreenTest {
             val summaryString =
                 StringUtil.getIcuPluralsString(
                     context,
-                    1,
+                    4,
                     R.string.supervision_web_content_filters_switch_summary,
                 )
             InstrumentationRegistry.getInstrumentation().waitForIdleSync()
@@ -295,7 +296,7 @@ class SupervisionWebContentFiltersScreenTest {
 
             val broswerFilterGroup: PreferenceGroup =
                 fragment.findPreference("browser_filters_group")!!
-            assertThat(broswerFilterGroup.preferenceCount).isEqualTo(2)
+            assertThat(broswerFilterGroup.preferenceCount).isEqualTo(5)
 
             val supportedApp: Preference = broswerFilterGroup.getPreference(1)
 
@@ -314,7 +315,7 @@ class SupervisionWebContentFiltersScreenTest {
             val title =
                 StringUtil.getIcuPluralsString(
                     context,
-                    1,
+                    4,
                     R.string.supervision_web_content_filters_switch_summary,
                 )
             InstrumentationRegistry.getInstrumentation().waitForIdleSync()
@@ -357,6 +358,19 @@ class SupervisionWebContentFiltersScreenTest {
             assertThat(icon.visibility).isEqualTo(View.VISIBLE)
             assertThat(icon.drawable).isEqualTo(iconDrawable)
             assertThat(icon.colorFilter).isNotNull()
+            val remainingAppsIcon =
+                viewHolder.itemView.findViewById<FrameLayout>(
+                    R.id.supervision_supported_apps_entry_point_remaining_apps_icon
+                )
+            assertThat(remainingAppsIcon).isNotNull()
+            assertThat(remainingAppsIcon.visibility).isEqualTo(View.VISIBLE)
+            assertThat(remainingAppsIcon.background?.colorFilter).isNotNull()
+            val remainingAppsCount =
+                viewHolder.itemView.findViewById<TextView>(
+                    R.id.supervision_supported_apps_entry_point_remaining_apps_count
+                )
+            assertThat(remainingAppsCount).isNotNull()
+            assertThat(remainingAppsCount.text).isEqualTo("+1")
         }
     }
 
@@ -407,6 +421,19 @@ class SupervisionWebContentFiltersScreenTest {
             assertThat(icon.visibility).isEqualTo(View.VISIBLE)
             assertThat(icon.drawable).isEqualTo(iconDrawable)
             assertThat(icon.colorFilter).isNull()
+            val remainingAppsIcon =
+                viewHolder.itemView.findViewById<FrameLayout>(
+                    R.id.supervision_supported_apps_entry_point_remaining_apps_icon
+                )
+            assertThat(remainingAppsIcon).isNotNull()
+            assertThat(remainingAppsIcon.visibility).isEqualTo(View.VISIBLE)
+            assertThat(remainingAppsIcon.background?.colorFilter).isNull()
+            val remainingAppsCount =
+                viewHolder.itemView.findViewById<TextView>(
+                    R.id.supervision_supported_apps_entry_point_remaining_apps_count
+                )
+            assertThat(remainingAppsCount).isNotNull()
+            assertThat(remainingAppsCount.text).isEqualTo("+1")
         }
     }
 

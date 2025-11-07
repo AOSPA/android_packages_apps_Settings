@@ -34,6 +34,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.safetycenter.SafetyCenterManager;
+import android.telephony.RadioAccessFamily;
 import android.telephony.TelephonyManager;
 
 import androidx.preference.Preference;
@@ -189,7 +190,11 @@ public final class CellularSecurityPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_isRadioInterfaceCapabilitySupported() {
+    public void getAvailabilityStatus_radioInterfaceCapabilitySupported_2gSupported() {
+        doReturn((long) RadioAccessFamily.getRafFromNetworkType(
+                    TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA)) // 2G+3G+4G
+                .when(mTelephonyManager)
+                .getSupportedRadioAccessFamily();
         doReturn(true).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
                 TelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
         doReturn(false).when(mTelephonyManager).isNullCipherNotificationsEnabled();
@@ -201,7 +206,11 @@ public final class CellularSecurityPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_isRadioInterfaceCapabilityNotSupported() {
+    public void getAvailabilityStatus_radioInterfaceCapability_notSupported() {
+        doReturn((long) RadioAccessFamily.getRafFromNetworkType(
+                    TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA)) // 2G+3G+4G
+                .when(mTelephonyManager)
+                .getSupportedRadioAccessFamily();
         doThrow(new UnsupportedOperationException("test")).when(mTelephonyManager)
                 .isNullCipherNotificationsEnabled();
         doThrow(new UnsupportedOperationException("test")).when(mTelephonyManager)
@@ -213,7 +222,11 @@ public final class CellularSecurityPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_isRadioInterfaceCapabilitySupported_throwException() {
+    public void getAvailabilityStatus_radioInterfaceCapabilitySupported_throwException() {
+        doReturn((long) RadioAccessFamily.getRafFromNetworkType(
+                    TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA)) // 2G+3G+4G
+                .when(mTelephonyManager)
+                .getSupportedRadioAccessFamily();
         doThrow(new UnsupportedOperationException("test")).when(mTelephonyManager)
                 .isRadioInterfaceCapabilitySupported(
                         TelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
@@ -225,8 +238,25 @@ public final class CellularSecurityPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
+    @Test
+    public void getAvailabilityStatus_radioCapabilitySupported_2gNotSupported() {
+        doReturn(true).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
+                TelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
+        doReturn((long) RadioAccessFamily.getRafFromNetworkType(
+                    TelephonyManager.NETWORK_MODE_NR_LTE_WCDMA)) // 3G+4G+5G (No 2G)
+                .when(mTelephonyManager)
+                .getSupportedRadioAccessFamily();
+        doThrow(new UnsupportedOperationException("test")).when(mTelephonyManager)
+                .isNullCipherNotificationsEnabled();
+        doThrow(new UnsupportedOperationException("test")).when(mTelephonyManager)
+                .isNullCipherAndIntegrityPreferenceEnabled();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
     private void initControllerAndPreference() {
         mController = new CellularSecurityPreferenceController(mContext, PREF_KEY);
+
 
         mPreference = spy(new Preference(mContext));
         mPreference.setKey(PREF_KEY);
