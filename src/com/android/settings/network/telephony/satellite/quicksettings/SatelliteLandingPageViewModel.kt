@@ -39,11 +39,7 @@ class SatelliteLandingPageViewModel(
     private val _satelliteAppItems = MutableStateFlow<List<SatelliteAppItem>>(emptyList())
     val satelliteAppItems: StateFlow<List<SatelliteAppItem>> = _satelliteAppItems
 
-    init {
-        loadSatelliteAppItems()
-    }
-
-    private fun loadSatelliteAppItems() {
+    fun loadSatelliteAppItems() {
         val pm = packageManager
         val items = mutableListOf<SatelliteAppItem>()
 

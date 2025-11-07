@@ -20,8 +20,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.provider.DeviceConfig
 import android.provider.Settings
 import android.telephony.SubscriptionManager
+import android.telephony.satellite.SatelliteManager
 import android.util.Log
 import com.android.settings.R
 
@@ -34,10 +36,16 @@ open class SatelliteAppsRepository(private val context: Context) {
         private const val EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting"
         private const val EXTRA_SUB_ID = "sub_id"
+        private const val OVERRIDE_SATELLITE_APPS_FOR_LTE_LANDING_PAGE_WITH_CONFIG_KEY =
+            "override_satellite_apps_for_lte_landing_page_with_config"
+        private const val DEFAULT_OVERRIDE_SATELLITE_APPS_FOR_LTE_LANDING_PAGE_WITH_CONFIG_VALUE =
+            false
     }
 
     /** Returns the intent for the Emergency SOS app. */
     open fun getEmergencySosIntent(): Intent? {
+        // TODO(434793872): Add a config for the emergency number. Note that the emergency number
+        // may be different in different countries.
         val sosIntent = Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:911"))
         if (sosIntent.resolveActivity(context.packageManager) == null) {
             Log.d(TAG, "Intent for Emergency SOS cannot be resolved.")
@@ -67,12 +75,26 @@ open class SatelliteAppsRepository(private val context: Context) {
 
     /** Returns the list of satellite app package names for the LTE-based landing page. */
     open fun getAppsPackagesForLteLandingPage(): List<String> {
-        // TODO(b/434793872): Instead of reading from the config, use getSatelliteDataOptimizedApps
-        // API.
+        val overrideSatelliteAppsForLteLandingPageWithConfig =
+            DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_TELEPHONY,
+                OVERRIDE_SATELLITE_APPS_FOR_LTE_LANDING_PAGE_WITH_CONFIG_KEY,
+                DEFAULT_OVERRIDE_SATELLITE_APPS_FOR_LTE_LANDING_PAGE_WITH_CONFIG_VALUE,
+            )
+        Log.d(
+            TAG,
+            "getAppsPackagesForLteLandingPage: overrideSatelliteAppsForLteLandingPageWithConfig=$overrideSatelliteAppsForLteLandingPageWithConfig",
+        )
+
         val packages =
-            context.resources
-                .getStringArray(R.array.config_satellite_apps_for_lte_landing_page)
-                .toList()
+            if (overrideSatelliteAppsForLteLandingPageWithConfig) {
+                context.resources
+                    .getStringArray(R.array.config_satellite_apps_for_lte_landing_page)
+                    .toList()
+            } else {
+                // By default, use the satellite data optimized apps from SatelliteManager.
+                getSatelliteDataOptimizedApps(context)
+            }
         return packages.filter { it.isNotEmpty() && isPackageInstalled(it) }
     }
 
@@ -84,5 +106,18 @@ open class SatelliteAppsRepository(private val context: Context) {
             Log.d(TAG, "$packageName is not installed.")
             false
         }
+    }
+
+    private fun getSatelliteDataOptimizedApps(context: Context): List<String> {
+        val satelliteManager = context.getSystemService(SatelliteManager::class.java)
+        if (satelliteManager == null) {
+            return emptyList()
+        }
+        try {
+            return satelliteManager.getSatelliteDataOptimizedApps()
+        } catch (e: IllegalStateException) {
+            Log.d(TAG, "getSatelliteDataOptimizedApps failed due to $e")
+        }
+        return emptyList()
     }
 }

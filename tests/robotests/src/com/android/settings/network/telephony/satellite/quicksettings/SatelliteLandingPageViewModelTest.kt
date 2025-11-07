@@ -184,6 +184,7 @@ class SatelliteLandingPageViewModelTest {
 
     private fun createViewModelAndGetItems(): List<SatelliteAppItem> {
         val viewModel = SatelliteLandingPageViewModel(context, appsRepository, packageManager)
+        viewModel.loadSatelliteAppItems()
         return viewModel.satelliteAppItems.value!!
     }
 

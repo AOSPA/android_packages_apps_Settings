@@ -38,6 +38,13 @@ import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.IllustrationPreference
 import com.android.settingslib.widget.SettingsBasePreferenceFragment
 
+/**
+ * A fragment that displays the satellite landing page.
+ *
+ * This fragment is displayed when the user taps on the satellite quick settings tile. It displays a
+ * list of satellite-optimized apps and a footer with more information about satellite services. The
+ * content of the landing page is determined by the NTN type.
+ */
 class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
 
     private lateinit var packageManager: PackageManager
@@ -82,6 +89,16 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
         Log.d(TAG, "onViewCreated: activeSubId: $activeSubId")
 
         addIllustrationPreference()
+        updateLandingPageContent()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateLandingPageContent()
+    }
+
+    private fun updateLandingPageContent() {
+        viewModel.loadSatelliteAppItems()
         setUpTryADemoButton()
         setUpSatelliteAppsContent()
         setUpFooterPreference()

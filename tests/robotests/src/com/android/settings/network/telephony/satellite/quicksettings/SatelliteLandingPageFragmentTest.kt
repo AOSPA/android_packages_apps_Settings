@@ -33,6 +33,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.lifecycle.Lifecycle
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.spa.preference.ComposePreference
@@ -78,6 +79,12 @@ class SatelliteLandingPageFragmentTest {
         private const val KEY_ILLUSTRATION = "illustration"
         private const val KEY_TRY_A_DEMO_BUTTON = "try_a_demo_button"
         private const val KEY_FOOTER = "footer"
+        private const val APP1_PACKAGE = "com.app1"
+        private const val APP1_NAME = "App1"
+        private const val APP1_INTENT_ACTION = "app1.intent.action"
+        private const val APP2_PACKAGE = "com.app2"
+        private const val APP2_NAME = "App2"
+        private const val APP2_INTENT_ACTION = "app2.intent.action"
     }
 
     @Before
@@ -214,9 +221,9 @@ class SatelliteLandingPageFragmentTest {
     @Test
     fun satelliteApps_whenHasApps_listIsVisible() {
         setLteNtnSupported(true) // for LTE page
-        val lteAppPackages = listOf("com.app1")
+        val lteAppPackages = listOf(APP1_PACKAGE)
         `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(lteAppPackages)
-        setupPackageManagerForApp("com.app1", "App1", Intent("app1.intent"))
+        setupPackageManagerForApp(APP1_PACKAGE, APP1_NAME, Intent(APP1_INTENT_ACTION))
 
         val scenario = launchFragment()
 
@@ -231,10 +238,10 @@ class SatelliteLandingPageFragmentTest {
     @Test
     fun satelliteApps_whenHasApps_listHasCorrectItems() {
         setLteNtnSupported(true) // for LTE page
-        val lteAppPackages = listOf("com.app1", "com.app2")
+        val lteAppPackages = listOf(APP1_PACKAGE, APP2_PACKAGE)
         `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(lteAppPackages)
-        setupPackageManagerForApp("com.app1", "App1", Intent("app1.intent"))
-        setupPackageManagerForApp("com.app2", "App2", Intent("app2.intent"))
+        setupPackageManagerForApp(APP1_PACKAGE, APP1_NAME, Intent(APP1_INTENT_ACTION))
+        setupPackageManagerForApp(APP2_PACKAGE, APP2_NAME, Intent(APP2_INTENT_ACTION))
 
         val scenario = launchFragment()
 
@@ -242,8 +249,8 @@ class SatelliteLandingPageFragmentTest {
             val satelliteAppItems: List<SatelliteAppItem> =
                 fragment.viewModel.satelliteAppItems.value
             assertThat(satelliteAppItems).hasSize(2)
-            assertThat(satelliteAppItems[0].getAppLabel(packageManager)).isEqualTo("App1")
-            assertThat(satelliteAppItems[1].getAppLabel(packageManager)).isEqualTo("App2")
+            assertThat(satelliteAppItems[0].getAppLabel(packageManager)).isEqualTo(APP1_NAME)
+            assertThat(satelliteAppItems[1].getAppLabel(packageManager)).isEqualTo(APP2_NAME)
         }
     }
 
@@ -262,6 +269,55 @@ class SatelliteLandingPageFragmentTest {
             assertThat(appsList).isNotNull()
             assertThat(appsList!!.isVisible).isFalse()
         }
+    }
+
+    @Test
+    fun satelliteApps_appItemHasCorrectIntent() {
+        setLteNtnSupported(true) // for LTE page
+        val lteAppPackages = listOf(APP1_PACKAGE)
+        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(lteAppPackages)
+        val app1Intent = Intent(APP1_INTENT_ACTION)
+        setupPackageManagerForApp(APP1_PACKAGE, APP1_NAME, app1Intent)
+
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment ->
+            val satelliteAppItems = fragment.viewModel.satelliteAppItems.value
+            assertThat(satelliteAppItems).hasSize(1)
+            assertThat(satelliteAppItems[0].intent).isEqualTo(app1Intent)
+        }
+    }
+
+    @Test
+    fun onResume_updatesContentWhenAppListChanges() {
+        setLteNtnSupported(true) // for LTE page
+        // Setup initial app (App1) details for PackageManager
+        setupPackageManagerForApp(APP1_PACKAGE, APP1_NAME, Intent(APP1_INTENT_ACTION))
+        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(listOf(APP1_PACKAGE))
+        val scenario = launchFragment()
+        // Verify initial UI
+        scenario.onFragment { fragment -> assertAppsListContent(fragment, listOf(APP1_NAME)) }
+        // Change the underlying data by re-mocking the repository to return App2
+        setupPackageManagerForApp(APP2_PACKAGE, APP2_NAME, Intent(APP2_INTENT_ACTION))
+        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(listOf(APP2_PACKAGE))
+
+        // Trigger onResume lifecycle method to force UI update
+        scenario.moveToState(Lifecycle.State.STARTED)
+        scenario.moveToState(Lifecycle.State.RESUMED)
+
+        // Verify UI is updated
+        scenario.onFragment { fragment -> assertAppsListContent(fragment, listOf(APP2_NAME)) }
+    }
+
+    private fun assertAppsListContent(
+        fragment: SatelliteLandingPageFragment,
+        expectedAppNames: List<String>,
+    ) {
+        val appsList = fragment.findPreference<ComposePreference>("satellite_apps_list")!!
+        assertThat(appsList.isVisible).isEqualTo(expectedAppNames.isNotEmpty())
+        val satelliteAppItems = fragment.viewModel.satelliteAppItems.value
+        val actualAppNames = satelliteAppItems.map { it.getAppLabel(packageManager) }
+        assertThat(actualAppNames).containsExactlyElementsIn(expectedAppNames).inOrder()
     }
 
     private fun launchFragment(): FragmentScenario<SatelliteLandingPageFragment> {

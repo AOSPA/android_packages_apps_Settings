@@ -25,7 +25,9 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.content.res.Resources
 import android.net.Uri
+import android.provider.DeviceConfig
 import android.provider.Settings
+import android.telephony.satellite.SatelliteManager
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -39,6 +41,8 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowSatelliteManager
 
 @RunWith(RobolectricTestRunner::class)
 class SatelliteAppsRepositoryTest {
@@ -46,6 +50,13 @@ class SatelliteAppsRepositoryTest {
 
     @Mock private lateinit var packageManager: PackageManager
     @Mock private lateinit var resources: Resources
+
+    private companion object {
+        private const val APP1_PACKAGE = "com.app1"
+        private const val APP2_PACKAGE = "com.app2"
+        private const val OVERRIDE_SATELLITE_APPS_FOR_LTE_LANDING_PAGE_WITH_CONFIG =
+            "override_satellite_apps_for_lte_landing_page_with_config"
+    }
 
     private lateinit var satelliteAppsRepository: SatelliteAppsRepository
 
@@ -60,35 +71,41 @@ class SatelliteAppsRepositoryTest {
 
     @Test
     fun getAppsPackagesForNbNtnLandingPage_returnsCorrectPackages() {
-        setupPackageManagerForApps(installedApps = listOf("com.app1", "com.app2"))
+        setupPackageManagerForApps(installedApps = listOf(APP1_PACKAGE, APP2_PACKAGE))
         `when`(resources.getStringArray(R.array.config_satellite_apps_for_nbntn_landing_page))
-            .thenReturn(arrayOf("com.app1", "com.app2"))
+            .thenReturn(arrayOf(APP1_PACKAGE, APP2_PACKAGE))
 
         val packages = satelliteAppsRepository.getAppsPackagesForNbNtnLandingPage()
 
-        assertThat(packages).containsExactly("com.app1", "com.app2").inOrder()
+        assertThat(packages).containsExactly(APP1_PACKAGE, APP2_PACKAGE).inOrder()
     }
 
     @Test
     fun getAppsPackagesForLteLandingPage_returnsCorrectPackages() {
-        setupPackageManagerForApps(installedApps = listOf("com.app1", "com.app2"))
+        DeviceConfig.setProperty(
+            DeviceConfig.NAMESPACE_TELEPHONY,
+            OVERRIDE_SATELLITE_APPS_FOR_LTE_LANDING_PAGE_WITH_CONFIG,
+            "true",
+            false,
+        )
+        setupPackageManagerForApps(installedApps = listOf(APP1_PACKAGE, APP2_PACKAGE))
         `when`(resources.getStringArray(R.array.config_satellite_apps_for_lte_landing_page))
-            .thenReturn(arrayOf("com.app1", "com.app2"))
+            .thenReturn(arrayOf(APP1_PACKAGE, APP2_PACKAGE))
 
         val packages = satelliteAppsRepository.getAppsPackagesForLteLandingPage()
 
-        assertThat(packages).containsExactly("com.app1", "com.app2").inOrder()
+        assertThat(packages).containsExactly(APP1_PACKAGE, APP2_PACKAGE).inOrder()
     }
 
     @Test
     fun getAppsPackagesForNbNtnLandingPage_oneAppNotInstalled_returnsOnlyInstalledApps() {
-        setupPackageManagerForApps(installedApps = listOf("com.app1"))
+        setupPackageManagerForApps(installedApps = listOf(APP1_PACKAGE))
         `when`(resources.getStringArray(R.array.config_satellite_apps_for_nbntn_landing_page))
-            .thenReturn(arrayOf("com.app1", "com.app2"))
+            .thenReturn(arrayOf(APP1_PACKAGE, APP2_PACKAGE))
 
         val packages = satelliteAppsRepository.getAppsPackagesForNbNtnLandingPage()
 
-        assertThat(packages).containsExactly("com.app1")
+        assertThat(packages).containsExactly(APP1_PACKAGE)
     }
 
     @Test
@@ -170,6 +187,24 @@ class SatelliteAppsRepositoryTest {
         val result = satelliteAppsRepository.getSettingsIntent()
 
         assertThat(result).isNull()
+    }
+
+    @Test
+    fun getAppsPackagesForLteLandingPage_useSatelliteDataOptimizedApps_returnsOptimizedApps() {
+        setupPackageManagerForApps(installedApps = listOf(APP1_PACKAGE, APP2_PACKAGE))
+        DeviceConfig.setProperty(
+            DeviceConfig.NAMESPACE_TELEPHONY,
+            OVERRIDE_SATELLITE_APPS_FOR_LTE_LANDING_PAGE_WITH_CONFIG,
+            "false",
+            false,
+        )
+        val shadowSatelliteManager: ShadowSatelliteManager =
+            Shadow.extract(context.getSystemService(SatelliteManager::class.java))
+        shadowSatelliteManager.setSatelliteDataOptimizedApps(listOf(APP1_PACKAGE))
+
+        val apps = satelliteAppsRepository.getAppsPackagesForLteLandingPage()
+
+        assertThat(apps).containsExactly(APP1_PACKAGE)
     }
 
     private fun setupPackageManagerForApps(installedApps: List<String>) {
