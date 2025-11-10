@@ -18,8 +18,7 @@ package com.android.settings.spa.app.appinfo
 
 import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
-import android.content.pm.FeatureFlags as PmFeatureFlags
-import android.content.pm.FeatureFlagsImpl as PmFeatureFlagsImpl
+import android.os.Build
 import android.os.Bundle
 import android.os.UserHandle
 import android.util.FeatureFlagUtils
@@ -39,6 +38,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppPreference
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
+import com.android.settings.spa.app.specialaccess.ComputerControlAutomationAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
@@ -122,13 +122,11 @@ object AppInfoSettingsProvider : SettingsPageProvider {
 @Composable
 private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
     val packageInfoState = packageInfoPresenter.flow.collectAsStateWithLifecycle()
-    val featureFlags: PmFeatureFlags = PmFeatureFlagsImpl()
     RegularScaffold(
         title = stringResource(R.string.application_info_label),
         actions = {
             packageInfoState.value?.applicationInfo?.let { app ->
-                if (isArchivingEnabled(featureFlags))
-                    TopBarAppLaunchButton(packageInfoPresenter, app)
+                if (isArchivingEnabled()) TopBarAppLaunchButton(packageInfoPresenter, app)
                 AppInfoSettingsMoreOptions(packageInfoPresenter, app)
             }
         },
@@ -172,6 +170,9 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             InteractAcrossProfilesDetailsPreference(app)
             AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
             WriteSystemPreferencesAppListProvider.InfoPageEntryItem(app)
+            if (android.companion.virtualdevice.flags.Flags.computerControlAccess()) {
+                ComputerControlAutomationAppListProvider.InfoPageEntryItem(app)
+            }
             Enable16KbAppCompatPreference(app, packageInfoPresenter)
             UsageDataAppListProvider.InfoPageEntryItem(app)
         }
@@ -183,5 +184,5 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
     }
 }
 
-fun isArchivingEnabled(featureFlags: PmFeatureFlags) =
-    featureFlags.archiving() || Flags.appArchiving()
+fun isArchivingEnabled() =
+    Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM || Flags.appArchiving()

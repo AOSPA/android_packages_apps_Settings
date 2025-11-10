@@ -19,19 +19,17 @@ import static com.android.settingslib.wifi.WifiUtils.getHotspotIconResource;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
 
@@ -50,14 +48,6 @@ public class WifiEntryPreference extends RestrictedPreference implements
         WifiEntry.WifiEntryCallback,
         View.OnClickListener {
 
-    private static final int[] STATE_SECURED = {
-            R.attr.state_encrypted
-    };
-
-    private static final int[] FRICTION_ATTRS = {
-            R.attr.wifi_friction
-    };
-
     // These values must be kept within [WifiEntry.WIFI_LEVEL_MIN, WifiEntry.WIFI_LEVEL_MAX]
     private static final int[] WIFI_CONNECTION_STRENGTH = {
             R.string.accessibility_no_wifi,
@@ -67,8 +57,6 @@ public class WifiEntryPreference extends RestrictedPreference implements
             R.string.accessibility_wifi_signal_full
     };
 
-    // StateListDrawable to display secured lock / metered "$" icon
-    @Nullable private final StateListDrawable mFrictionSld;
     private final WifiUtils.InternetIconInjector mIconInjector;
     private WifiEntry mWifiEntry;
     private int mLevel = -1;
@@ -87,7 +75,6 @@ public class WifiEntryPreference extends RestrictedPreference implements
         int layoutResId = SettingsThemeHelper.isExpressiveTheme(getContext())
                 ? R.layout.preference_access_point_expressive : R.layout.preference_access_point;
         setLayoutResource(layoutResId);
-        mFrictionSld = getFrictionStateListDrawable();
         mIconInjector = iconInjector;
         setWifiEntry(wifiEntry);
     }
@@ -127,10 +114,11 @@ public class WifiEntryPreference extends RestrictedPreference implements
         view.findViewById(com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider)
                 .setVisibility(View.INVISIBLE);
 
+        final LinearLayout endIcons = (LinearLayout) view.findViewById(
+                com.android.settings.R.id.wifi_end_icons);
+
         // Enable the icon button when the help string in this WifiEntry is not null.
         final ImageButton imageButton = (ImageButton) view.findViewById(R.id.icon_button);
-        final ImageView frictionImageView = (ImageView) view.findViewById(
-                R.id.friction_icon);
         if (mWifiEntry.getHelpUriString() != null
                 && mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_DISCONNECTED) {
             final Drawable drawablehelp = getDrawable(R.drawable.ic_help);
@@ -141,37 +129,49 @@ public class WifiEntryPreference extends RestrictedPreference implements
             imageButton.setOnClickListener(this);
             imageButton.setContentDescription(
                     getContext().getText(R.string.help_label));
-
-            if (frictionImageView != null) {
-                frictionImageView.setVisibility(View.GONE);
-            }
-        } else if (displaySharedIcon()) {
-            if (frictionImageView != null) {
-                frictionImageView.setVisibility(View.VISIBLE);
-                final Drawable drawableShared =
-                        getDrawable(com.android.settings.R.drawable.ic_share);
-                drawableShared.setTintList(
-                        Utils.getColorAttr(getContext(), android.R.attr.colorControlNormal));
-                ((ImageView) frictionImageView).setImageDrawable(drawableShared);
-            }
-
-            if (imageButton != null) {
-                imageButton.setVisibility(View.VISIBLE);
-                bindFrictionImage(imageButton);
-            }
-        } else {
-            imageButton.setVisibility(View.GONE);
-
-            if (frictionImageView != null) {
-                frictionImageView.setVisibility(View.VISIBLE);
-                bindFrictionImage(frictionImageView);
-            }
+        } else if (endIcons != null) {
+            updateEndIcons(endIcons);
         }
     }
 
+    @VisibleForTesting
+    void updateEndIcons(LinearLayout endIcons) {
+        endIcons.removeAllViews();
+        // The shared icon should precede the lock icon to match the mocks.
+        if (displaySharedIcon()) {
+            ImageView sharedIcon =
+                    addIcon(endIcons,
+                            com.android.settings.R.drawable.ic_group_24dp);
+            sharedIcon.setTooltipText(getContext().getString(
+                    com.android.settings.R.string.wifi_shared_network_icon_message));
+        }
+        if ((mWifiEntry.getSecurity() != WifiEntry.SECURITY_NONE)
+                && (mWifiEntry.getSecurity() != WifiEntry.SECURITY_OWE)) {
+            addIcon(endIcons,
+                    com.android.settings.R.drawable.ic_friction_lock_closed);
+        }
+    }
+
+    private ImageView addIcon(LinearLayout endIcons, @DrawableRes int drawableId) {
+        ImageView icon = new ImageView(getContext());
+        icon.setImageDrawable(getDrawable(drawableId));
+        icon.setImageTintList(Utils.getColorAttr(getContext(),
+                android.R.attr.colorControlNormal));
+        ((View) icon).setMinimumWidth(
+                getContext().getResources().getDimensionPixelSize(
+                        com.android.settings.R.dimen.wifi_end_icon_min_width)
+        );
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        endIcons.addView(icon, layoutParams);
+        return icon;
+    }
+
     private boolean displaySharedIcon() {
-        if (!com.android.settings.connectivity.Flags.wifiMultiuser()
-                || mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED) {
+        if (!com.android.settings.connectivity.Flags.wifiMultiuser()) {
             return false;
         }
 
@@ -269,35 +269,6 @@ public class WifiEntryPreference extends RestrictedPreference implements
         setIconWithTint(getContext().getDrawable(getHotspotIconResource(deviceType)));
     }
 
-    @Nullable
-    private StateListDrawable getFrictionStateListDrawable() {
-        TypedArray frictionSld;
-        try {
-            frictionSld = getContext().getTheme().obtainStyledAttributes(FRICTION_ATTRS);
-        } catch (Resources.NotFoundException e) {
-            // Fallback for platforms that do not need friction icon resources.
-            frictionSld = null;
-        }
-        return frictionSld != null ? (StateListDrawable) frictionSld.getDrawable(0) : null;
-    }
-
-    /**
-     * Binds the friction icon drawable using a StateListDrawable.
-     *
-     * <p>Friction icons will be rebound when notifyChange() is called, and therefore
-     * do not need to be managed in refresh()</p>.
-     */
-    private void bindFrictionImage(ImageView frictionImageView) {
-        if (frictionImageView == null || mFrictionSld == null) {
-            return;
-        }
-        if ((mWifiEntry.getSecurity() != WifiEntry.SECURITY_NONE)
-                && (mWifiEntry.getSecurity() != WifiEntry.SECURITY_OWE)) {
-            mFrictionSld.setState(STATE_SECURED);
-        }
-        frictionImageView.setImageDrawable(mFrictionSld.getCurrent());
-    }
-
     /**
      * Helper method to generate content description string.
      */
@@ -331,7 +302,7 @@ public class WifiEntryPreference extends RestrictedPreference implements
 
     @Override
     protected int getSecondTargetResId() {
-        return R.layout.access_point_friction_widget;
+        return com.android.settings.R.layout.preference_end_icons_container;
     }
 
     @Override

@@ -25,6 +25,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 
+// LINT.IfChange
 public class PowerButtonEndsCallPreferenceController extends TogglePreferenceController {
 
     public PowerButtonEndsCallPreferenceController(Context context, String preferenceKey) {
@@ -58,3 +59,4 @@ public class PowerButtonEndsCallPreferenceController extends TogglePreferenceCon
         return R.string.menu_key_accessibility;
     }
 }
+// LINT.ThenChange(PowerButtonEndsCallPreference.kt)

@@ -15,11 +15,13 @@
  */
 package com.android.settings.supervision
 
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_SET_UP_PIN_ENTRY
 import android.content.Context
 import android.content.Intent
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceClickListener
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
@@ -37,7 +39,7 @@ class SupervisionSetUpPinPreference :
     override val title: Int
         get() = R.string.supervision_set_up_pin_preference_title
 
-    override fun isAvailable(context: Context) = !context.isSupervisingCredentialSet
+    override fun isAvailable(context: Context) = !context.isSupervisingCredentialSet()
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
@@ -45,9 +47,12 @@ class SupervisionSetUpPinPreference :
     }
 
     override fun onPreferenceClick(preference: Preference): Boolean {
-        // TODO: b/452614376 - Add metrics logging.
-        val intent =
-            Intent(preference.context, SetupSupervisionActivity::class.java)
+        FeatureFactory.featureFactory.metricsFeatureProvider.action(
+            preference.context,
+            ACTION_SUPERVISION_SET_UP_PIN_ENTRY,
+        )
+
+        val intent = Intent(preference.context, SetupSupervisionActivity::class.java)
         preference.context.startActivity(intent)
         return true
     }

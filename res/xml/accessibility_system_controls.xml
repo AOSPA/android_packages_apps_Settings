@@ -43,8 +43,7 @@
         settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController"/>
 
     <SwitchPreferenceCompat
-        android:key="toggle_power_button_ends_call_preference"
-        android:persistent="false"
+        android:key="incall_power_button_behavior"
         android:title="@string/accessibility_power_button_ends_call_prerefence_title"
         settings:controller="com.android.settings.accessibility.PowerButtonEndsCallPreferenceController"/>
 

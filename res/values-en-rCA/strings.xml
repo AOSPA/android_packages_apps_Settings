@@ -976,6 +976,7 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> failed to connect"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Device details"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Keyboard settings"</string>
+    <string name="bluetooth_device_game_controller_settings_preference_title" msgid="291778307796320923">"Game Controller settings"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"More settings"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Firmware updates, about, and more"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Tips &amp; support"</string>
@@ -1026,6 +1027,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"No display connected"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Connect an external display to get started, or try using a different cable"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"More options"</string>
+    <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"Pause hint text cycling animation"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Hold and drag to rearrange displays"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Tap to show navigation arrows"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Tap arrows to rearrange displays"</string>
@@ -1205,12 +1207,12 @@
     <string name="retry" msgid="7542103800274026915">"Retry"</string>
     <string name="shared_message" msgid="2104244057926025072">"shared"</string>
     <string name="private_message" msgid="5897966950396765392">"private"</string>
-    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Confirm"</string>
+    <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"Switch"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Cancel"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"Share network"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Other users on this device can access this network"</string>
-    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"Switch to <xliff:g id="SHARED">%1$s</xliff:g> \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" network?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"You\'re currently connected to a <xliff:g id="SHARED_0">%1$s</xliff:g> network with the same name. When you switch, you\'ll disconnect from the <xliff:g id="SHARED_1">%2$s</xliff:g> network and then reconnect to the <xliff:g id="PRIVATE">%3$s</xliff:g> network. You may temporarily have no internet."</string>
+    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"Switch to <xliff:g id="SHARED">%1$s</xliff:g> network?"</string>
+    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"A <xliff:g id="SHARED_0">%1$s</xliff:g> network with the name \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" already exists. If you switch to the <xliff:g id="SHARED_1">%1$s</xliff:g> network, you will leave your <xliff:g id="PRIVATE">%3$s</xliff:g> network and you may temporarily have no internet."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(unchanged)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Allow users to edit network"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Other users can make changes to this network"</string>
@@ -1248,8 +1250,7 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Failed to save network"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Cancel"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Forget network?"</string>
-    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"Forget all device users?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> is used by other users on this device, and all users of this network will need to set it up again. Still want to forget?"</string>
+    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> will be removed for all users on this device"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 network}other{# networks}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 subscription}other{# subscriptions}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 network &amp; subscription}other{# networks &amp; subscriptions}}"</string>
@@ -2237,8 +2238,22 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Work profile keyboards &amp; tools"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"On-screen keyboard for work"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Default"</string>
-    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
-    <skip />
+    <string name="game_controller_settings_title" msgid="4322385924018377909">"Game Controllers"</string>
+    <string name="game_controller_key_remapping" msgid="8150376475022555386">"Keys"</string>
+    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"Axes"</string>
+    <string name="game_controller_button_a" msgid="2138420373137111774">"A Button"</string>
+    <string name="game_controller_button_b" msgid="2093089857164437480">"B Button"</string>
+    <string name="game_controller_button_x" msgid="3428801081204194655">"X Button"</string>
+    <string name="game_controller_button_y" msgid="4596061542299533516">"Y Button"</string>
+    <string name="game_controller_button_l1" msgid="4428713182602902434">"L1 Button"</string>
+    <string name="game_controller_button_r1" msgid="6271978600831912659">"R1 Button"</string>
+    <string name="game_controller_button_l2" msgid="4168716287264803566">"L2 Button"</string>
+    <string name="game_controller_button_r2" msgid="4361909018228151006">"R2 Button"</string>
+    <string name="game_controller_button_thumbl" msgid="609311480262927654">"Left Stick Click"</string>
+    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"Right Stick Click"</string>
+    <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
+    <string name="game_controller_stick_left" msgid="1591700901162153956">"Left Stick"</string>
+    <string name="game_controller_stick_right" msgid="1418791636252375110">"Right Stick"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad &amp; mouse"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Mouse"</string>
@@ -2731,7 +2746,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Triple tap screen"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Edit accessibility shortcuts"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Choose your shortcut for %1$s"</string>
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"To use this, turn on the %1$s shortcut on an accessibility feature\'s page"</string>
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary" msgid="8268632664568192689">"To use this, turn on the accessibility button shortcut on an accessibility feature\'s page"</string>
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary" msgid="2232737783140069174">"To use this, turn on the volume keys shortcut on an accessibility feature\'s page"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continue"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Hearing devices"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Set up and manage ASHA and LE Audio hearing aids, cochlear implants, and other amplification devices"</string>
@@ -3158,7 +3174,7 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Automatically selects the best network connection to extend your battery life"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Mobile network security"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Network type, encryption, notification controls"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"These settings help protect your calls, messages, and data from outdated or unencrypted networks that could expose you to data theft or surveillance"</string>
+    <string name="cellular_security_top_intro" msgid="4190908521080878539">"These settings help protect your calls, messages, and data from outdated or unencrypted networks that could expose you to data theft or surveillance."</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Mobile network security"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notifications"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Network notifications"</string>
@@ -4324,8 +4340,7 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Calendar events"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Bedtime routine"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"While driving"</string>
-    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
-    <skip />
+    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"While transiting"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"App settings"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Info and settings in <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Managed by <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4342,8 +4357,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Block distractions or interruptions from your device to gain focus"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Eliminate all distractions for a quiet environment"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalize device experiences and settings for different users"</string>
-    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
-    <skip />
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Enjoy a better transit ride with automatic settings adjustments"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimize interruptions by only allowing important people and apps to reach you"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Set a mode that follows a regular schedule"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Keep your device in sync with your day’s events"</string>
@@ -4352,8 +4366,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Gain focus to get in the zone"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"For moments when courtesy counts"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Guided usage to help you stay in good hands"</string>
-    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
-    <skip />
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Optimize your device for a smoother public transit experience"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Take control of your attention"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Warning"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Close"</string>
@@ -4580,6 +4593,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Allow access to manage all files"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Allow this app to read, modify and delete all files on this device or any connected storage volumes. If granted, app may access files without your explicit knowledge."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Can access all files"</string>
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Screen automation"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Allow this app to fully automate other apps"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"This app will able control your apps. Apps being controlled can’t be used while screen automation is ongoing, but you can always stop it."</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Ask every time"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Always allowed"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Don’t allow"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Full-screen notifications"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Allow full-screen notifications from this app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Allow this app to show notifications that take up the full screen when the device is locked. Apps may use these to highlight alarms, incoming calls, or other urgent notifications."</string>
@@ -6005,6 +6024,7 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Search results"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filter out explicit search results"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{On # app}other{On # apps}}"</string>
+    <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"When these settings are off, other account settings may still apply."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Enter parental controls PIN"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Set a parental controls PIN"</string>
@@ -6022,6 +6042,9 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Something went wrong"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Try again later"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Go back"</string>
+    <string name="supervision_available_apps_title" msgid="886352413031517863">"Available apps &amp; services"</string>
+    <string name="supervision_approval_method_chooser_title" msgid="7759309575598126099">"Choose a verification method"</string>
+    <string name="supervision_approval_method_chooser_description" msgid="7574494762555726167">"You must verify you’re a parent"</string>
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Identity Check works with more apps"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Identity Check prevents unwanted access to your apps. Now available with any app that uses Fingerprint or Face Unlock."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"View details"</string>

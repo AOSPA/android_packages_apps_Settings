@@ -346,6 +346,9 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
                     lifecycle));
             controllers.add(new BluetoothDetailsExtraOptionsController(context, this, cachedDevice,
                     lifecycle));
+            controllers.add(
+                    new BluetoothDetailsGameControllerPreferenceController(context, cachedDevice,
+                            lifecycle));
             BluetoothDetailsHearingDeviceController hearingDeviceController =
                     new BluetoothDetailsHearingDeviceController(context, this,
                             localBluetoothManager,

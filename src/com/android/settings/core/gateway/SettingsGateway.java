@@ -129,6 +129,7 @@ import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.PowerMenuSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.gestures.SystemNavigationGestureSettings;
+import com.android.settings.input.gamecontroller.GameControllerFragment;
 import com.android.settings.input.gamecontroller.GameControllerListFragment;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.KeyboardSettings;
@@ -250,6 +251,7 @@ public class SettingsGateway {
             AvailableVirtualKeyboardFragment.class.getName(),
             LanguageSettings.class.getName(),
             KeyboardSettings.class.getName(),
+            GameControllerFragment.class.getName(),
             GameControllerListFragment.class.getName(),
             ModifierKeysSettings.class.getName(),
             NewKeyboardLayoutEnabledLocalesFragment.class.getName(),

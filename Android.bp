@@ -133,6 +133,7 @@ android_library {
         "SettingsLibMetadata-processor",
         "androidx.room_room-compiler-plugin",
     ],
+    kotlin_plugins: ["kotlin-parcelize-compiler-plugin"],
 
     errorprone: {
         extra_check_modules: ["//external/nullaway:nullaway_plugin"],

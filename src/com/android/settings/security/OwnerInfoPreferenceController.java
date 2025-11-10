@@ -15,15 +15,22 @@
  */
 package com.android.settings.security;
 
+import android.app.admin.DevicePolicyManager;
 import android.app.admin.EnforcingAdmin;
+import android.app.admin.DpcAuthority;
+import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.util.Preconditions;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.ObservablePreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -46,6 +53,8 @@ public class OwnerInfoPreferenceController extends AbstractPreferenceController
     private final ObservablePreferenceFragment mParent;
     private RestrictedPreference mOwnerInfoPref;
 
+    @NonNull private final DevicePolicyManager mDpm;
+
     // Container fragment should implement this in order to show the correct summary
     public interface OwnerInfoCallback {
         void onOwnerInfoUpdated();
@@ -58,11 +67,13 @@ public class OwnerInfoPreferenceController extends AbstractPreferenceController
         if (parent != null) {
             parent.getSettingsLifecycle().addObserver(this);
         }
+        mDpm = context.getSystemService(DevicePolicyManager.class);
+        Preconditions.checkState(mDpm != null, "DevicePolicyManager is not available.");
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mOwnerInfoPref  = screen.findPreference(KEY_OWNER_INFO);
+        mOwnerInfoPref = screen.findPreference(KEY_OWNER_INFO);
     }
 
     @Override
@@ -95,8 +106,7 @@ public class OwnerInfoPreferenceController extends AbstractPreferenceController
             return;
         }
         if (isDeviceOwnerInfoEnabled()) {
-            EnforcedAdmin admin = getDeviceOwner();
-            mOwnerInfoPref.setDisabledByAdmin(admin);
+            setAdminRestriction();
         } else {
             mOwnerInfoPref.setDisabledByAdmin((EnforcingAdmin) null);
             mOwnerInfoPref.setEnabled(!mLockPatternUtils.isLockScreenDisabled(MY_USER_ID));
@@ -114,6 +124,16 @@ public class OwnerInfoPreferenceController extends AbstractPreferenceController
                     : mContext.getString(
                         com.android.settings.R.string.owner_info_settings_summary));
             }
+        }
+    }
+
+    private void setAdminRestriction() {
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            final EnforcingAdmin admin = getDeviceOwnerEnforcingAdmin();
+            mOwnerInfoPref.setDisabledByAdmin(admin);
+        } else {
+            final EnforcedAdmin admin = getDeviceOwner();
+            mOwnerInfoPref.setDisabledByAdmin(admin);
         }
     }
 
@@ -141,5 +161,22 @@ public class OwnerInfoPreferenceController extends AbstractPreferenceController
     @VisibleForTesting
     EnforcedAdmin getDeviceOwner() {
         return RestrictedLockUtilsInternal.getDeviceOwner(mContext);
+    }
+
+    @VisibleForTesting
+    @Nullable
+    protected EnforcingAdmin getDeviceOwnerEnforcingAdmin() {
+        ComponentName adminComponent = mDpm.getDeviceOwnerComponentOnAnyUser();
+        if (adminComponent == null) {
+            return null;
+        }
+        UserHandle adminUser = mDpm.getDeviceOwnerUser();
+        EnforcingAdmin admin =
+            new EnforcingAdmin(
+                adminComponent.getPackageName(),
+                DpcAuthority.DPC_AUTHORITY,
+                adminUser,
+                adminComponent);
+        return admin;
     }
 }

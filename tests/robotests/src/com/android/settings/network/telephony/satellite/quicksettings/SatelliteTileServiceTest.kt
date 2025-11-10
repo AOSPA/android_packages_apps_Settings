@@ -16,6 +16,7 @@
 
 package com.android.settings.network.telephony.satellite.quicksettings
 
+import android.app.PendingIntent
 import android.content.Context
 import android.service.quicksettings.Tile
 import android.telephony.TelephonyCallback
@@ -27,16 +28,20 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
+import org.mockito.ArgumentMatchers.any
 import org.mockito.Captor
 import org.mockito.Mock
 import org.mockito.Mockito.any
+import org.mockito.Mockito.doNothing
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.spy
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows.shadowOf
 
 @RunWith(RobolectricTestRunner::class)
 class SatelliteTileServiceTest {
@@ -46,6 +51,7 @@ class SatelliteTileServiceTest {
     @Mock private lateinit var telephonyManager: TelephonyManager
 
     @Captor private lateinit var telephonyCallbackCaptor: ArgumentCaptor<TelephonyCallback>
+    @Captor private lateinit var pendingIntentCaptor: ArgumentCaptor<PendingIntent>
 
     private lateinit var context: Context
     private lateinit var service: SatelliteTileService
@@ -153,6 +159,19 @@ class SatelliteTileServiceTest {
         service.updateTile()
 
         assertTileIsInactiveAndNotAvailable()
+    }
+
+    @Test
+    fun onClick_startsActivity() {
+        doNothing().`when`(service).startActivityAndCollapse(any(PendingIntent::class.java))
+
+        service.onClick()
+
+        verify(service).startActivityAndCollapse(pendingIntentCaptor.capture())
+        val capturedIntent = shadowOf(pendingIntentCaptor.value).savedIntent
+        assertThat(capturedIntent).isNotNull()
+        assertThat(capturedIntent.component?.className)
+            .isEqualTo(SatelliteLandingPageActivity::class.java.name)
     }
 
     private fun getTelephonyCallback(): TelephonyCallback {

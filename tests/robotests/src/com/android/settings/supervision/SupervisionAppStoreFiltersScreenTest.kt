@@ -172,7 +172,7 @@ class SupervisionAppStoreFiltersScreenTest {
         val anotherAppWithPermissionPackage = "com.example.anothergoodapp"
         val anotherAppWithPermissionLabel = "Another Good App Store"
         val anotherAppWithPermissionClass = "com.example.anothergoodapp.AppFilterSettingsActivity"
-        val anotherappWithPermissionIconId = R.drawable.ic_apps_library
+        val anotherAppWithPermissionIconId = R.drawable.ic_apps_alt
 
         addAppStoreActivity(
             componentName = ComponentName(appWithPermissionPackage, appWithPermissionClass),
@@ -191,7 +191,7 @@ class SupervisionAppStoreFiltersScreenTest {
                 ComponentName(anotherAppWithPermissionPackage, anotherAppWithPermissionClass),
             label = anotherAppWithPermissionLabel,
             hasInstallPackagesPermission = true,
-            iconId = anotherappWithPermissionIconId,
+            iconId = anotherAppWithPermissionIconId,
         )
 
         // check to see that correct app stores are added to the UI
@@ -208,18 +208,55 @@ class SupervisionAppStoreFiltersScreenTest {
             val pref1 = preferenceGroup.findPreference<Preference>(appWithPermissionPackage)
             assertThat(pref1).isNotNull()
             assertThat(pref1!!.title.toString()).isEqualTo(appWithPermissionLabel)
-            assertThat(pref1.intent?.component?.packageName).isEqualTo(appWithPermissionPackage)
-            assertThat(pref1.intent?.component?.className).isEqualTo(appWithPermissionClass)
+            assertThat(pref1.key.toString()).isEqualTo(appWithPermissionPackage)
+            assertThat(pref1.icon).isNotNull()
 
             val pref2 = preferenceGroup.findPreference<Preference>(anotherAppWithPermissionPackage)
             assertThat(pref2).isNotNull()
             assertThat(pref2!!.title.toString()).isEqualTo(anotherAppWithPermissionLabel)
-            assertThat(pref2.intent?.component?.packageName)
-                .isEqualTo(anotherAppWithPermissionPackage)
-            assertThat(pref2.intent?.component?.className).isEqualTo(anotherAppWithPermissionClass)
+            assertThat(pref2.key.toString()).isEqualTo(anotherAppWithPermissionPackage)
+            assertThat(pref2.icon).isNotNull()
 
             val badPref = preferenceGroup.findPreference<Preference>(appWithoutPermissionPackage)
             assertThat(badPref).isNull()
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_APP_STORE_FILTERS_SCREEN)
+    fun onAppStorePreferenceClick_launchesIntent() {
+        val appPackage = "com.example.appstore"
+        val appClass = "com.example.appstore.SettingsActivity"
+        val appLabel = "My App Store"
+
+        addAppStoreActivity(
+            componentName = ComponentName(appPackage, appClass),
+            label = appLabel,
+            hasInstallPackagesPermission = true,
+            iconId = R.drawable.ic_apps_library,
+        )
+
+        supervisionAppStoreFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val preferenceGroup =
+                fragment.findPreference<PreferenceGroup>(
+                    SupervisionAppStoreFiltersScreen.SUPERVISION_APP_STORE_FILTERS_GROUP
+                )
+            assertThat(preferenceGroup).isNotNull()
+
+            val pref = preferenceGroup!!.findPreference<Preference>(appPackage)
+            assertThat(pref).isNotNull()
+
+            pref!!.performClick()
+
+            val shadowActivity = shadowOf(fragment.requireActivity())
+            val nextIntentResult = shadowActivity.nextStartedActivityForResult
+
+            assertThat(nextIntentResult).isNotNull()
+            val startedIntent = nextIntentResult.intent
+            assertThat(startedIntent).isNotNull()
+
+            assertThat(startedIntent.component?.packageName).isEqualTo(appPackage)
+            assertThat(startedIntent.component?.className).isEqualTo(appClass)
         }
     }
 

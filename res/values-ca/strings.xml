@@ -68,8 +68,7 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Canvia el nom"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Vols desconnectar el dispositiu?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Vincula un dispositiu nou"</string>
-    <!-- no translation found for bluetooth_pairing_no_device_button_message (6429917002249666051) -->
-    <skip />
+    <string name="bluetooth_pairing_no_device_button_message" msgid="6429917002249666051">"No trobes el dispositiu?"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Activa automàticament demà"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Si desactives el Bluetooth, es tornarà a activar l\'endemà"</string>
@@ -977,6 +976,8 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> no s\'ha pogut connectar"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalls del dispositiu"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Configuració de teclat"</string>
+    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
+    <skip />
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Més opcions"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Actualitzacions de microprogramari, informació i més"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Ajuda i consells"</string>
@@ -1027,6 +1028,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"No hi ha cap pantalla connectada"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Connecta una pantalla externa per començar o prova d\'utilitzar un altre cable"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Més opcions"</string>
+    <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"Posa en pausa l\'animació de cicle de text d\'ajuda"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Mantén premut i arrossega per reorganitzar les pantalles"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Toca per mostrar les fletxes de navegació"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Toca les fletxes per reorganitzar les pantalles"</string>
@@ -1206,19 +1208,18 @@
     <string name="retry" msgid="7542103800274026915">"Torna-ho a provar"</string>
     <string name="shared_message" msgid="2104244057926025072">"compartit"</string>
     <string name="private_message" msgid="5897966950396765392">"privat"</string>
-    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Confirma"</string>
+    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
+    <skip />
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Cancel·la"</string>
-    <!-- no translation found for wifi_share_preference_title (2000847347515149059) -->
+    <string name="wifi_share_preference_title" msgid="2000847347515149059">"Comparteix la xarxa"</string>
+    <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Els altres usuaris d\'aquest dispositiu poden accedir a aquesta xarxa"</string>
+    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
     <skip />
-    <!-- no translation found for wifi_share_preference_summary (3642772041628058748) -->
+    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
     <skip />
-    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"Vols canviar a la xarxa <xliff:g id="SHARED">%1$s</xliff:g> \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\"?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"Actualment tens connexió a una xarxa <xliff:g id="SHARED_0">%1$s</xliff:g> amb el mateix nom. En canviar, et desconnectaràs de la xarxa <xliff:g id="SHARED_1">%2$s</xliff:g> i, a continuació, et tornaràs a connectar a la xarxa <xliff:g id="PRIVATE">%3$s</xliff:g>. És possible que no tinguis Internet temporalment."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(sense canvis)"</string>
-    <!-- no translation found for wifi_allow_edit_configuration_title (701463165569293) -->
-    <skip />
-    <!-- no translation found for wifi_allow_edit_configuration_summary (2133654391010089827) -->
-    <skip />
+    <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Permet que els usuaris editin la xarxa"</string>
+    <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Altres usuaris poden fer canvis en aquesta xarxa"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Selecciona"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(S\'han afegit diversos certificats)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Utilitza certificats del sistema"</string>
@@ -1232,10 +1233,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Permet"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Denega"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* obligatori"</string>
-    <!-- no translation found for wifi_shared_network_login_screen_warning (8298716960537761436) -->
-    <skip />
-    <!-- no translation found for edit_wifi_network_non_owner_message (4387650403845968672) -->
-    <skip />
+    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Aquesta és una xarxa compartida. Has d\'iniciar la sessió per fer canvis."</string>
+    <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Contacta amb el propietari de la xarxa o amb l\'administrador del dispositiu per fer canvis."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Aquesta xarxa no té accés a Internet. Vols mantenir-hi la connexió?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Alguns serveis i aplicacions poden no funcionar amb una connectivitat limitada. Utilitzar igualment?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"No ho tornis a preguntar en aquesta xarxa"</string>
@@ -1255,8 +1254,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"No s\'ha pogut desar la xarxa"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Cancel·la"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Vols que s\'oblidi la xarxa?"</string>
-    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"Vols oblidar tots els usuaris del dispositiu?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"Altres usuaris d\'aquest dispositiu utilitzen <xliff:g id="NETWORK_NAME">%1$s</xliff:g> i tots els usuaris d\'aquesta xarxa hauran de tornar-la a configurar. Vols oblidar-te\'n igualment?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 xarxa}other{# xarxes}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 subscripció}other{# subscripcions}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 xarxa i subscripció}other{# xarxes i subscripcions}}"</string>
@@ -2244,7 +2243,36 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclats i eines del perfil de treball"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Teclat en pantalla per a la feina"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Predeterminat"</string>
-    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
+    <string name="game_controller_settings_title" msgid="4322385924018377909">"Comandaments de joc"</string>
+    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
+    <skip />
+    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
+    <skip />
+    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
     <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"Ratolí tàctil"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Ratolí tàctil i ratolí"</string>
@@ -2738,7 +2766,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tres tocs a la pantalla"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Edita les dreceres d\'accessibilitat"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Tria la drecera per a %1$s"</string>
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"Per utilitzar-la, activa la drecera %1$s a la pàgina d\'una funció d\'accessibilitat"</string>
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary" msgid="8268632664568192689">"Per utilitzar-la, activa la drecera del botó d\'accessibilitat a la pàgina d\'una funció d\'accessibilitat"</string>
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary" msgid="2232737783140069174">"Per utilitzar-la, activa la drecera de les tecles de volum a la pàgina d\'una funció d\'accessibilitat"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continua"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Audiòfons"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configura i gestiona els audiòfons compatibles amb ASHA o LE Audio, els implants coclears i altres dispositius d\'amplificació"</string>
@@ -3167,7 +3196,8 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Selecciona automàticament la millor connexió de xarxa per allargar la durada de la bateria"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Seguretat de xarxes mòbils"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tipus de xarxa, encriptació, controls de notificacions"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Aquesta configuració ajuda a protegir les trucades, els missatges i les dades de xarxes obsoletes o no encriptades que podrien exposar-te al robatori de dades o a la vigilància"</string>
+    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
+    <skip />
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Seguretat de xarxes mòbils"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notificacions"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Notificacions de la xarxa"</string>
@@ -4333,8 +4363,7 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Esdeveniments del calendari"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rutina Hora de dormir"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Mentre condueixes"</string>
-    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
-    <skip />
+    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"Durant el trajecte en transport públic"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Configuració de l\'aplicació"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informació i configuració a <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Gestionat per <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4351,8 +4380,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Bloqueja les distraccions o les interrupcions del dispositiu per no perdre la concentració"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimina totes les distraccions per aconseguir un entorn tranquil"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalitza les experiències i la configuració del dispositiu per a diferents usuaris"</string>
-    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
-    <skip />
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Gaudeix d\'un millor trajecte en transport públic amb ajustos automàtics de la configuració"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimitza les interrupcions permetent que només les persones i aplicacions importants es posin en contacte amb tu"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Configura un mode que segueixi una programació regular"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Mantén el dispositiu sincronitzat amb els esdeveniments del dia"</string>
@@ -4361,8 +4389,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Concentra\'t per evitar distraccions"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Per als moments en què la cortesia és important"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Ús guiat per ajudar-te a estar en bones mans"</string>
-    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
-    <skip />
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Optimitza el dispositiu per gaudir d\'una experiència més fluida amb el transport públic"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Pren el control de la teva atenció"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Advertiment"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Tanca"</string>
@@ -4385,7 +4412,7 @@
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Bloqueja el dispositiu en deixar de fixar"</string>
     <string name="confirm_sim_deletion_title" msgid="7262127071183428893">"Confirma que vols esborrar l\'eSIM"</string>
     <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Verifica la teva identitat abans d\'esborrar una eSIM"</string>
-    <string name="memtag_title" msgid="5096176296797727201">"Protec. avançada de memòria beta"</string>
+    <string name="memtag_title" msgid="5096176296797727201">"Protecció avançada de memòria beta"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"Protecció avançada de la memòria"</string>
     <string name="memtag_intro" msgid="579408691329568953">"Aquesta funció beta t\'ajuda a protegir aquest dispositiu d\'errors que poden posar en perill la teva seguretat."</string>
     <string name="memtag_on" msgid="824938319141503923">"Activat"</string>
@@ -4589,6 +4616,18 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Permet l\'accés per gestionar tots els fitxers"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permet que aquesta aplicació llegeixi, modifiqui i suprimeixi tots els fitxers d\'aquest dispositiu o de qualsevol volum d\'emmagatzematge connectat. L\'aplicació podrà accedir als fitxers sense el teu coneixement explícit."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pot accedir a tots els fitxers"</string>
+    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificacions de pantalla completa"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permet les notificacions de pantalla completa d\'aquesta aplicació"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permet que aquesta aplicació mostri notificacions que ocupen tota la pantalla quan el dispositiu està bloquejat. Les aplicacions poden utilitzar aquesta opció per destacar alarmes, trucades entrants o altres notificacions urgents."</string>
@@ -6014,6 +6053,8 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Resultats de la cerca"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtra els resultats de cerca explícits"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{En # aplicació}other{En # aplicacions}}"</string>
+    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Quan aquestes opcions de configuració estan desactivades, és possible que s\'apliquin altres opcions de configuració del compte."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Introdueix el PIN dels controls parentals"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Defineix un PIN per als controls parentals"</string>
@@ -6031,6 +6072,11 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Hi ha hagut un error"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Torna-ho a provar més tard"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Torna"</string>
+    <string name="supervision_available_apps_title" msgid="886352413031517863">"Aplicacions i serveis disponibles"</string>
+    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Comprovació d\'identitat funciona amb més aplicacions"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Comprovació d\'identitat impedeix l\'accés no desitjat a les teves aplicacions. Ara està disponible amb qualsevol aplicació que utilitzi Desbloqueig amb empremta digital o Desbloqueig facial."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Mostra els detalls"</string>
@@ -6075,8 +6121,7 @@
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Alertes ignorades"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Vols ignorar aquesta alerta?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Revisa la configuració de seguretat i privadesa en qualsevol moment per afegir més protecció"</string>
-    <!-- no translation found for safety_center_resolved_issue_fallback (223765674640909183) -->
-    <skip />
+    <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Acció completa"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"S\'està vinculant"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> connectat"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Analitza el dispositiu"</string>

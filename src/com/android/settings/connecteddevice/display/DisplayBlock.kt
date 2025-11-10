@@ -27,6 +27,7 @@ import android.view.Gravity
 import android.view.SurfaceControl
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.view.TouchDelegate
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.view.accessibility.AccessibilityNodeInfo
@@ -45,12 +46,15 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     @VisibleForTesting
     internal val highlightPx =
         context.resources.getDimensionPixelSize(R.dimen.display_block_highlight_width)
+
     @VisibleForTesting
     internal val cornerRadiusPx =
         context.resources.getDimensionPixelSize(R.dimen.display_block_corner_radius)
+
     @VisibleForTesting
     internal val arrowSizePx =
         context.resources.getDimensionPixelSize(R.dimen.display_block_arrow_size)
+
     private val arrowTappableAreaSizePx =
         context.resources.getDimensionPixelSize(R.dimen.display_block_arrow_tappable_area_size)
 
@@ -81,6 +85,30 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
 
     private val updateSurfaceView = Runnable { updateSurfaceView() }
 
+    private val a11yActionMoveUp =
+        AccessibilityAction(
+            R.id.action_move_display_block_up,
+            context.getString(R.string.external_display_topology_a11y_action_move_up),
+        )
+
+    private val a11yActionMoveDown =
+        AccessibilityAction(
+            R.id.action_move_display_block_down,
+            context.getString(R.string.external_display_topology_a11y_action_move_down),
+        )
+
+    private val a11yActionMoveLeft =
+        AccessibilityAction(
+            R.id.action_move_display_block_left,
+            context.getString(R.string.external_display_topology_a11y_action_move_left),
+        )
+
+    private val a11yActionMoveRight =
+        AccessibilityAction(
+            R.id.action_move_display_block_right,
+            context.getString(R.string.external_display_topology_a11y_action_move_right),
+        )
+
     private val holderCallback =
         object : SurfaceHolder.Callback {
             override fun surfaceCreated(h: SurfaceHolder) {}
@@ -96,6 +124,31 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
 
             override fun surfaceDestroyed(h: SurfaceHolder) {}
         }
+
+    private val layoutChangeListener = OnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+        touchDelegate =
+            TouchDelegateComposite(this).apply {
+                arrowButtons.values.forEach { arrowButton ->
+                    // Get the button's bounds relative to this DisplayBlock
+                    val bounds = Rect()
+                    arrowButton.getHitRect(bounds)
+
+                    // Expand the bounds to at least 48dp - centered on the button's current center
+                    val width = bounds.width()
+                    val height = bounds.height()
+
+                    val extraWidth = (arrowTappableAreaSizePx - width).coerceAtLeast(0)
+                    val extraHeight = (arrowTappableAreaSizePx - height).coerceAtLeast(0)
+
+                    // Only add a TouchDelegate if the bounds need to be expanded.
+                    if (extraWidth > 0 || extraHeight > 0) {
+                        // inset by negative to expands the rect
+                        bounds.inset(-extraWidth / 2, -extraHeight / 2)
+                        add(TouchDelegate(bounds, arrowButton))
+                    }
+                }
+            }
+    }
 
     private val wallpaperView = SurfaceView(context).apply { id = R.id.display_block_wallpaper }
     private val backgroundView =
@@ -144,12 +197,15 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
                 createArrowButtons(properties).also { arrowButtonView -> addView(arrowButtonView) }
             }
 
+        addOnLayoutChangeListener(layoutChangeListener)
+
         wallpaperView.holder.addCallback(holderCallback)
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         setTouchListener(null)
+        removeOnLayoutChangeListener(layoutChangeListener)
         onA11yMoveListener = null
     }
 
@@ -265,8 +321,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
 
     fun setArrowVisible(visible: Boolean) {
         arrowButtons.forEach { (direction, buttonView) ->
-            val isMovable = arrowMovement.directionMapping[direction] ?: false
-            buttonView.visibility = if (isMovable && visible) VISIBLE else GONE
+            buttonView.visibility = if (isMovable(direction) && visible) VISIBLE else GONE
         }
     }
 
@@ -439,31 +494,30 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
 
     override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {
         super.onInitializeAccessibilityNodeInfo(info)
-        // Add custom actions for moving the display block
-        info.addAction(
-            AccessibilityAction(
-                R.id.action_move_display_block_up,
-                context.getString(R.string.external_display_topology_a11y_action_move_up),
-            )
-        )
-        info.addAction(
-            AccessibilityAction(
-                R.id.action_move_display_block_down,
-                context.getString(R.string.external_display_topology_a11y_action_move_down),
-            )
-        )
-        info.addAction(
-            AccessibilityAction(
-                R.id.action_move_display_block_left,
-                context.getString(R.string.external_display_topology_a11y_action_move_left),
-            )
-        )
-        info.addAction(
-            AccessibilityAction(
-                R.id.action_move_display_block_right,
-                context.getString(R.string.external_display_topology_a11y_action_move_right),
-            )
-        )
+        // Add custom actions for moving the display block, only if can move selected direction
+        if (isMovable(Direction.UP)) {
+            info.addAction(a11yActionMoveUp)
+        } else {
+            info.removeAction(a11yActionMoveUp)
+        }
+
+        if (isMovable(Direction.DOWN)) {
+            info.addAction(a11yActionMoveDown)
+        } else {
+            info.removeAction(a11yActionMoveDown)
+        }
+
+        if (isMovable(Direction.LEFT)) {
+            info.addAction(a11yActionMoveLeft)
+        } else {
+            info.removeAction(a11yActionMoveLeft)
+        }
+
+        if (isMovable(Direction.RIGHT)) {
+            info.addAction(a11yActionMoveRight)
+        } else {
+            info.removeAction(a11yActionMoveRight)
+        }
     }
 
     override fun performAccessibilityAction(action: Int, arguments: Bundle?): Boolean {
@@ -495,6 +549,8 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
             else -> return super.performAccessibilityAction(action, arguments)
         }
     }
+
+    private fun isMovable(direction: Direction) = arrowMovement.directionMapping[direction] ?: false
 
     private companion object {
         private data class ArrowButtonProperties(

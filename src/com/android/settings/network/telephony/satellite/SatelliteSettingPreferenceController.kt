@@ -26,7 +26,6 @@ import android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TY
 import android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL
 import android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL
 import android.telephony.SubscriptionManager
-import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -55,8 +54,6 @@ constructor(
 
     private lateinit var preference: Preference
     private var mCarrierConfigs: PersistableBundle = PersistableBundle.EMPTY
-    private val carrierId =
-        context.getSystemService(TelephonyManager::class.java)!!.simSpecificCarrierId
 
     /**
      * Set subId for Satellite Settings page.
@@ -79,9 +76,6 @@ constructor(
                 preference.isVisible = false
                 return@launch
             }
-            satelliteRepository
-                .isSatelliteAccessConfigurationForCurrentLocationFlow(mSubId)
-                .collect { it -> preference.isEnabled = it }
 
             val carrierRoamingNtnConnectedType =
                 mCarrierConfigs.getInt(
@@ -137,6 +131,9 @@ constructor(
                 satelliteRepository.carrierRoamingNtnAvailableServicesChangedFlow(mSubId).first()
         ) {
             preference.setSummary(R.string.satellite_setting_enabled_summary)
+            satelliteRepository
+                .isSatelliteAccessConfigurationForCurrentLocationFlow(mSubId)
+                .collect { it -> preference.isEnabled = it }
             return true
         }
         return false

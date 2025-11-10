@@ -68,8 +68,7 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"เปลี่ยนชื่อ"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"เลิกเชื่อมต่ออุปกรณ์ไหม"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"จับคู่อุปกรณ์ใหม่"</string>
-    <!-- no translation found for bluetooth_pairing_no_device_button_message (6429917002249666051) -->
-    <skip />
+    <string name="bluetooth_pairing_no_device_button_message" msgid="6429917002249666051">"หากไม่พบอุปกรณ์ของคุณ"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"บลูทูธ"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"เปิดอัตโนมัติในวันพรุ่งนี้"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"หากปิดบลูทูธ อุปกรณ์จะเปิดบลูทูธอีกครั้งในวันถัดไป"</string>
@@ -977,6 +976,7 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"เชื่อมต่อ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ไม่สำเร็จ"</string>
     <string name="device_details_title" msgid="1155622417516195481">"รายละเอียดอุปกรณ์"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"การตั้งค่าแป้นพิมพ์"</string>
+    <string name="bluetooth_device_game_controller_settings_preference_title" msgid="291778307796320923">"การตั้งค่าเกมคอนโทรลเลอร์"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"การตั้งค่าเพิ่มเติม"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"การอัปเดตเฟิร์มแวร์ เกี่ยวกับ และอื่นๆ"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"เคล็ดลับและการสนับสนุน"</string>
@@ -1027,6 +1027,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"ไม่มีจอแสดงผลเชื่อมต่ออยู่"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"เชื่อมต่อจอแสดงผลภายนอกเพื่อเริ่มต้นใช้งาน หรือลองใช้สายเคเบิลอื่น"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"ตัวเลือกเพิ่มเติม"</string>
+    <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"หยุดภาพเคลื่อนไหวแบบวนรอบของข้อความคำแนะนำชั่วคราว"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"กดค้างแล้วลากเพื่อจัดเรียงจอแสดงผลใหม่"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"แตะเพื่อแสดงลูกศรนำทาง"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"แตะลูกศรเพื่อจัดเรียงจอแสดงผลใหม่"</string>
@@ -1206,19 +1207,18 @@
     <string name="retry" msgid="7542103800274026915">"ลองอีกครั้ง"</string>
     <string name="shared_message" msgid="2104244057926025072">"แชร์"</string>
     <string name="private_message" msgid="5897966950396765392">"ส่วนตัว"</string>
-    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"ยืนยัน"</string>
+    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
+    <skip />
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"ยกเลิก"</string>
-    <!-- no translation found for wifi_share_preference_title (2000847347515149059) -->
+    <string name="wifi_share_preference_title" msgid="2000847347515149059">"แชร์เครือข่าย"</string>
+    <string name="wifi_share_preference_summary" msgid="3642772041628058748">"ผู้ใช้รายอื่นในอุปกรณ์นี้จะเข้าถึงเครือข่ายนี้ได้"</string>
+    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
     <skip />
-    <!-- no translation found for wifi_share_preference_summary (3642772041628058748) -->
+    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
     <skip />
-    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"เปลี่ยนเป็นเครือข่าย \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" <xliff:g id="SHARED">%1$s</xliff:g>ไหม"</string>
-    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"ขณะนี้คุณเชื่อมต่ออยู่กับเครือข่าย<xliff:g id="SHARED_0">%1$s</xliff:g>ที่มีชื่อเดียวกัน เมื่อเปลี่ยน คุณจะต้องยกเลิกการเชื่อมต่อกับเครือข่าย<xliff:g id="SHARED_1">%2$s</xliff:g> แล้วเชื่อมต่อกับเครือข่าย<xliff:g id="PRIVATE">%3$s</xliff:g>อีกครั้ง คุณอาจไม่มีอินเทอร์เน็ตชั่วคราว"</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(ไม่เปลี่ยน)"</string>
-    <!-- no translation found for wifi_allow_edit_configuration_title (701463165569293) -->
-    <skip />
-    <!-- no translation found for wifi_allow_edit_configuration_summary (2133654391010089827) -->
-    <skip />
+    <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"อนุญาตให้ผู้ใช้แก้ไขเครือข่าย"</string>
+    <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"ผู้ใช้รายอื่นเปลี่ยนแปลงเครือข่ายนี้ได้"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"โปรดเลือก"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(เพิ่มใบรับรองหลายใบแล้ว)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"ใช้ใบรับรองของระบบ"</string>
@@ -1232,10 +1232,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"อนุญาต"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"ปฏิเสธ"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*ต้องระบุ"</string>
-    <!-- no translation found for wifi_shared_network_login_screen_warning (8298716960537761436) -->
-    <skip />
-    <!-- no translation found for edit_wifi_network_non_owner_message (4387650403845968672) -->
-    <skip />
+    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"เครือข่ายนี้คือเครือข่ายที่ใช้ร่วมกัน คุณต้องลงชื่อเข้าใช้เพื่อทำการเปลี่ยนแปลง"</string>
+    <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"โปรดติดต่อเจ้าของเครือข่ายหรือผู้ดูแลระบบอุปกรณ์เพื่อทำการเปลี่ยนแปลง"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"เครือข่ายนี้ไม่มีการเข้าถึงอินเทอร์เน็ต ยังต้องการเชื่อมต่ออยู่ไหม"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"แอปและบริการบางรายการอาจไม่ทำงานเนื่องจากมีการเชื่อมต่อจำกัด ใช้ต่อไปไหม"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"ไม่ต้องถามอีกสำหรับเครือข่ายนี้"</string>
@@ -1255,8 +1253,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"ไม่สามารถบันทึกเครือข่าย"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"ยกเลิก"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"ไม่จำเครือข่ายใช่ไหม"</string>
-    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"เลิกจำผู้ใช้อุปกรณ์ทั้งหมดใช่ไหม"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"ผู้ใช้อื่นบนอุปกรณ์นี้ใช้ <xliff:g id="NETWORK_NAME">%1$s</xliff:g> แล้ว และผู้ใช้ทั้งหมดของเครือข่ายนี้จะต้องตั้งค่าอีกครั้ง ยังคงต้องการเลิกจำไหม"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 เครือข่าย}other{# เครือข่าย}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{การสมัครใช้บริการ 1 รายการ}other{การสมัครใช้บริการ # รายการ}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{เครือข่ายและการสมัครใช้บริการ 1 รายการ}other{เครือข่ายและการสมัครใช้บริการ # รายการ}}"</string>
@@ -2244,8 +2242,22 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"แป้นพิมพ์และเครื่องมือของโปรไฟล์งาน"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"แป้นพิมพ์บนหน้าจอสำหรับการทำงาน"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ค่าเริ่มต้น"</string>
-    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
-    <skip />
+    <string name="game_controller_settings_title" msgid="4322385924018377909">"เกมคอนโทรลเลอร์"</string>
+    <string name="game_controller_key_remapping" msgid="8150376475022555386">"คีย์"</string>
+    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"แกน"</string>
+    <string name="game_controller_button_a" msgid="2138420373137111774">"ปุ่ม A"</string>
+    <string name="game_controller_button_b" msgid="2093089857164437480">"ปุ่ม B"</string>
+    <string name="game_controller_button_x" msgid="3428801081204194655">"ปุ่ม X"</string>
+    <string name="game_controller_button_y" msgid="4596061542299533516">"ปุ่ม Y"</string>
+    <string name="game_controller_button_l1" msgid="4428713182602902434">"ปุ่ม L1"</string>
+    <string name="game_controller_button_r1" msgid="6271978600831912659">"ปุ่ม R1"</string>
+    <string name="game_controller_button_l2" msgid="4168716287264803566">"ปุ่ม L2"</string>
+    <string name="game_controller_button_r2" msgid="4361909018228151006">"ปุ่ม R2"</string>
+    <string name="game_controller_button_thumbl" msgid="609311480262927654">"คลิกปุ่มแท่งซ้าย"</string>
+    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"คลิกปุ่มแท่งขวา"</string>
+    <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
+    <string name="game_controller_stick_left" msgid="1591700901162153956">"ปุ่มแท่งซ้าย"</string>
+    <string name="game_controller_stick_right" msgid="1418791636252375110">"ปุ่มแท่งขวา"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"ทัชแพด"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"ทัชแพดและเมาส์"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"เมาส์"</string>
@@ -2738,7 +2750,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"แตะหน้าจอ 3 ครั้ง"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"แก้ไขทางลัดสำหรับการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"เลือกแป้มพิมพ์ลัดสำหรับ %1$s"</string>
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"หากต้องการใช้ฟีเจอร์นี้ ให้เปิดทางลัด %1$s ในหน้าฟีเจอร์การช่วยเหลือพิเศษ"</string>
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary" msgid="8268632664568192689">"หากต้องการใช้ฟีเจอร์นี้ ให้เปิดทางลัดปุ่มการช่วยเหลือพิเศษในหน้าฟีเจอร์การช่วยเหลือพิเศษ"</string>
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary" msgid="2232737783140069174">"หากต้องการใช้ฟีเจอร์นี้ ให้เปิดทางลัดปุ่มปรับระดับเสียงในหน้าฟีเจอร์การช่วยเหลือพิเศษ"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"ต่อไป"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"เครื่องช่วยฟัง"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ตั้งค่าและจัดการเครื่องช่วยฟังของ ASHA และ LE Audio, ประสาทหูเทียม และอุปกรณ์ขยายเสียงอื่นๆ"</string>
@@ -3165,7 +3178,7 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"เลือกการเชื่อมต่อเครือข่ายที่ดีที่สุดโดยอัตโนมัติเพื่อยืดระยะเวลาการใช้งานแบตเตอรี่"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"การรักษาความปลอดภัยของเครือข่ายมือถือ"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"ประเภทเครือข่าย การเข้ารหัส ส่วนควบคุมการแจ้งเตือน"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"การตั้งค่าเหล่านี้จะช่วยปกป้องการโทร ข้อความ และข้อมูลของคุณจากเครือข่ายที่ล้าสมัยหรือไม่ได้เข้ารหัสซึ่งเสี่ยงต่อการถูกรวบรวมหรือขโมยข้อมูลได้"</string>
+    <string name="cellular_security_top_intro" msgid="4190908521080878539">"การตั้งค่าเหล่านี้จะช่วยปกป้องการโทร ข้อความ และข้อมูลของคุณจากเครือข่ายที่ล้าสมัยหรือไม่ได้เข้ารหัสซึ่งเสี่ยงต่อการถูกรวบรวมหรือขโมยข้อมูลได้"</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"การรักษาความปลอดภัยของเครือข่ายมือถือ"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"การแจ้งเตือน"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"การแจ้งเตือนเกี่ยวกับเครือข่าย"</string>
@@ -4331,8 +4344,7 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"กิจกรรมในปฏิทิน"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"กิจวัตรเข้านอน"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"ขณะขับรถ"</string>
-    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
-    <skip />
+    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"ขณะเดินทางด้วยขนส่งสาธารณะ"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"การตั้งค่าแอป"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"ข้อมูลและการตั้งค่าใน <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"จัดการโดย <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4349,8 +4361,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"บล็อกสิ่งที่ทำให้ไขว้เขวหรือการรบกวนจากอุปกรณ์เพื่อให้มีสมาธิ"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"ขจัดสิ่งที่ทำให้ไขว้เขวทั้งหมดเพื่อสภาพแวดล้อมที่เงียบ"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"ปรับเปลี่ยนประสบการณ์การใช้งานและการตั้งค่าอุปกรณ์ในแบบของผู้ใช้แต่ละคน"</string>
-    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
-    <skip />
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"เดินทางด้วยระบบขนส่งสาธารณะได้สะดวกยิ่งขึ้นโดยการปรับการตั้งค่าอัตโนมัติ"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"ลดการรบกวนโดยอนุญาตให้มีเพียงผู้คนและแอปที่สำคัญเท่านั้นที่ติดต่อคุณได้"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"ตั้งค่าโหมดที่จะทำตามกำหนดการประจำ"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"ซิงค์อุปกรณ์กับกิจกรรมประจำวันของคุณ"</string>
@@ -4359,8 +4370,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"จดจ่อกับสิ่งที่ทำ"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"สำหรับช่วงเวลาที่มารยาทเป็นเรื่องสำคัญ"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"การใช้งานแบบแนะนำเพื่อช่วยให้คุณสบายใจ"</string>
-    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
-    <skip />
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"ปรับแต่งอุปกรณ์เพื่อรับประสบการณ์การเดินทางด้วยระบบขนส่งสาธารณะที่ราบรื่นยิ่งขึ้น"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"ควบคุมความสนใจของคุณ"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"คำเตือน"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"ปิด"</string>
@@ -4587,6 +4597,18 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"อนุญาตให้เข้าถึงเพื่อจัดการไฟล์ทั้งหมด"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"อนุญาตให้แอปนี้อ่าน แก้ไข และลบไฟล์ทั้งหมดในอุปกรณ์นี้หรือวอลุ่มของพื้นที่เก็บข้อมูลใดๆ ที่เชื่อมต่อ หากได้รับอนุญาต ​แอปอาจเข้าถึงไฟล์ได้โดยที่คุณไม่ทราบอย่างชัดแจ้ง"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"เข้าถึงไฟล์ทั้งหมดได้"</string>
+    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"การแจ้งเตือนแบบเต็มหน้าจอ"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"อนุญาตให้แอปนี้แสดงการแจ้งเตือนแบบเต็มหน้าจอ"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"อนุญาตให้แอปนี้แสดงการแจ้งเตือนได้เต็มหน้าจอเมื่ออุปกรณ์ล็อกอยู่ แอปอาจใช้การแจ้งเตือนเหล่านี้เพื่อให้เห็นการปลุก สายเรียกเข้า หรือการแจ้งเตือนอื่นๆ ที่เร่งด่วนได้อย่างเด่นชัด"</string>
@@ -6012,6 +6034,8 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"ผลการค้นหา"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"กรองผลการค้นหาที่อาจไม่เหมาะสมออก"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{เปิดอยู่ # แอป}other{เปิดอยู่ # แอป}}"</string>
+    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"เมื่อปิดการตั้งค่าเหล่านี้ การตั้งค่าบัญชีอื่นๆ อาจยังคงมีผล"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"ป้อน PIN การควบคุมโดยผู้ปกครอง"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"ตั้งค่า PIN การควบคุมโดยผู้ปกครอง"</string>
@@ -6029,6 +6053,11 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"เกิดข้อผิดพลาด"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"ลองอีกครั้งในภายหลัง"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"ย้อนกลับ"</string>
+    <string name="supervision_available_apps_title" msgid="886352413031517863">"แอปและบริการที่พร้อมใช้งาน"</string>
+    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"การตรวจสอบตัวตนทำงานร่วมกับแอปอื่นๆ อีก"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"การตรวจสอบตัวตนจะป้องกันการเข้าถึงแอปของคุณโดยไม่พึงประสงค์ ตอนนี้พร้อมใช้งานกับทุกแอปที่ใช้การปลดล็อกด้วยลายนิ้วมือหรือใบหน้า"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"ดูรายละเอียด"</string>
@@ -6073,8 +6102,7 @@
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"การแจ้งเตือนที่ปิดไป"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"ปิดการแจ้งเตือนนี้ใช่ไหม"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"ตรวจสอบการตั้งค่าการรักษาความปลอดภัยและความเป็นส่วนตัวได้ทุกเมื่อเพื่อเพิ่มการป้องกัน"</string>
-    <!-- no translation found for safety_center_resolved_issue_fallback (223765674640909183) -->
-    <skip />
+    <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"การดำเนินการเสร็จสมบูรณ์"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"กำลังจับคู่"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"เชื่อมต่อ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> แล้ว"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"สแกนอุปกรณ์"</string>

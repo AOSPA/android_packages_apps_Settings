@@ -23,6 +23,9 @@ import static android.view.View.VISIBLE;
 
 import static androidx.core.view.accessibility.AccessibilityEventCompat.TYPE_VIEW_ACCESSIBILITY_FOCUSED;
 
+import android.annotation.AttrRes;
+import android.annotation.ColorInt;
+import android.annotation.DrawableRes;
 import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.app.INotificationManager;
@@ -31,6 +34,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -41,6 +46,7 @@ import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 import android.util.Slog;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +56,7 @@ import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
 
+import androidx.core.graphics.ColorUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,6 +68,7 @@ import com.android.internal.widget.NotificationExpandButton;
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.MainSwitchBar;
 
@@ -162,7 +170,7 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
             int textColor = getResources().getColor(
                     com.android.internal.R.color.materialColorOnSurface, getTheme());
             int pillColor = getResources().getColor(
-                    com.android.internal.R.color.customColorSurfaceEffect3, getTheme());
+                    com.android.internal.R.color.surface_effect_3, getTheme());
             expand.setDefaultPillColor(pillColor);
             expand.setDefaultTextColor(textColor);
             expand.setExpanded(false);

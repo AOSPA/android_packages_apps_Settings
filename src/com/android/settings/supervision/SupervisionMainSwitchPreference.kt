@@ -74,7 +74,7 @@ class SupervisionMainSwitchPreference(
         get() = R.string.device_supervision_features_title
 
     override fun getSummary(context: Context): CharSequence? =
-        if (!context.isSupervisingCredentialSet) {
+        if (!context.isSupervisingCredentialSet()) {
             context.getString(R.string.device_supervision_switch_no_pin_summary)
         } else {
             null
@@ -190,7 +190,8 @@ class SupervisionMainSwitchPreference(
         if (newValue) {
             val userManager = preference.context.getSystemService(UserManager::class.java)
             if (userManager != null) {
-                val supervisingProfileHandle: UserHandle? = preference.context.supervisingUserHandle
+                val supervisingProfileHandle: UserHandle? =
+                    preference.context.supervisingUserHandle()
                 val nonSupervisingProfiles =
                     userManager.userProfiles.filter { it != supervisingProfileHandle }
 
@@ -210,7 +211,7 @@ class SupervisionMainSwitchPreference(
 
         // If supervision is being toggled but either the supervising profile hasn't been
         // created or the credentials aren't set, launch SetupSupervisionActivity.
-        if (!preference.context.isSupervisingCredentialSet) {
+        if (!preference.context.isSupervisingCredentialSet()) {
             pendingNewValue = newValue
             val intent = Intent(lifeCycleContext, SetupSupervisionActivity::class.java)
             lifeCycleContext.startActivityForResult(intent, REQUEST_CODE_SET_UP_SUPERVISION, null)

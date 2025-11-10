@@ -78,10 +78,14 @@ class SupervisionPinManagementScreen :
     // observer/listener mechanism on change.
     override fun dependencies(context: Context) = arrayOf(SupervisionSetupRecoveryPreference.KEY)
 
-    override fun isAvailable(context: Context) = context.isSupervisingCredentialSet
+    override fun isAvailable(context: Context) = context.isSupervisingCredentialSet()
 
     override fun getSummary(context: Context): CharSequence? {
-        if (!Flags.enableSupervisionPinRecoveryScreen()) {
+        if (
+            !Flags.enableSupervisionPinRecoveryScreen() ||
+                (Flags.enableSupervisionSettingsUiUpdates() &&
+                    !context.shouldDisplayPinRecoveryReminders())
+        ) {
             return null
         }
         val recoveryInfo =
@@ -101,6 +105,10 @@ class SupervisionPinManagementScreen :
 
     // TODO(b/409837094): get icon with dynamic color.
     override fun getIcon(context: Context): Int {
+        if (Flags.enableSupervisionSettingsUiUpdates()) {
+            return if (context.shouldDisplayPinRecoveryReminders()) R.drawable.exclamation_icon
+            else R.drawable.ic_pin_outline
+        }
         if (Flags.enableSupervisionPinRecoveryScreen()) {
             val recoveryInfo =
                 context

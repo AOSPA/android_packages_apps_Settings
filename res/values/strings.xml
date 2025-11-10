@@ -2183,6 +2183,8 @@
     <string name="device_details_title">Device details</string>
     <!-- Title for keyboard settings preferences. [CHAR LIMIT=50] -->
     <string name="bluetooth_device_keyboard_settings_preference_title">Keyboard settings</string>
+    <!-- Title for game controller settings preferences. [CHAR LIMIT=50] -->
+    <string name="bluetooth_device_game_controller_settings_preference_title">Game Controller settings</string>
     <!-- Title for more settings preferences. [CHAR LIMIT=50] -->
     <string name="bluetooth_device_more_settings_preference_title">More settings</string>
     <!-- Title for more settings summary. [CHAR LIMIT=50] -->
@@ -2741,6 +2743,8 @@
     <string name="wifi_shared_network_login_screen_warning">This is a shared network. You need to sign in to make changes.</string>
     <!-- Message to inform user, the network can only be configured by device admin or network owner. Will be used as both a tooltip and footer description. [CHAR LIMIT=NONE] [SCREENSHOT=screen/6MYkFQCPvtEAtHz] -->
     <string name="edit_wifi_network_non_owner_message">Contact the network owner or device admin to make changes.</string>
+    <!-- Message displayed when a user hovers over the shared network icon. [CHAR LIMIT=NONE] [SCREENSHOT=screen/87w2B9komPHTVSK]-->
+    <string name="wifi_shared_network_icon_message">All users on this device can access this network.</string>
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no internet access. Stay connected?</string>
@@ -4042,6 +4046,8 @@
     <string name="error_mnc_not23">MNC field must be 2 or 3 digits.</string>
     <!-- APN error dialog messages: -->
     <string name="error_adding_apn_type">Carrier does not allow adding APNs of type %s.</string>
+    <!-- APN error dialog messages: -->
+    <string name="error_disallow_adding_apn">Carrier doesn\'t allow adding this APN.</string>
     <!-- APN error messages: -->
     <string name="error_mmsc_valid">MMSC field must be valid.</string>
     <!-- The message of dialog indicated restoring default APN settings in progress -->
@@ -5175,6 +5181,37 @@
 
     <!-- Title for the button to trigger the 'Game Controller settings' page if only connected with a game controller. [CHAR LIMIT=35] -->
     <string name="game_controller_settings_title">Game Controllers</string>
+    <!-- Title for the preference category for key remapping for game controllers. [CHAR LIMIT=35] -->
+    <string name="game_controller_key_remapping">Keys</string>
+    <!-- Title for the preference category for stick remapping for game controllers. [CHAR LIMIT=35] -->
+    <string name="game_controller_stick_remapping">Axes</string>
+    <!-- Title for the preference category for button A remapping. Button A is typical game controller button with "A" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_a">A Button</string>
+    <!-- Title for the preference category for button B remapping. Button B is typical game controller button with "B" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_b">B Button</string>
+    <!-- Title for the preference category for button X remapping. Button X is typical game controller button with "X" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_x">X Button</string>
+    <!-- Title for the preference category for button Y remapping. Button Y is typical game controller button with "Y" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_y">Y Button</string>
+    <!-- Title for the preference category for button L1 remapping. Button L1 is typical game controller trigger with "L1" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_l1">L1 Button</string>
+    <!-- Title for the preference category for button R1 remapping. Button R1 is typical game controller trigger with "R1" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_r1">R1 Button</string>
+    <!-- Title for the preference category for button L2 remapping. Button L2 is typical game controller trigger with "L2" printed on it.[CHAR LIMIT=35] -->
+    <string name="game_controller_button_l2">L2 Button</string>
+    <!-- Title for the preference category for button R2 remapping. Button R2 is typical game controller trigger with "R2" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_r2">R2 Button</string>
+    <!-- Title for the preference category for button thumbl remapping. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_thumbl">Left Stick Click</string>
+    <!-- Title for the preference category for button thumbr remapping. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_thumbr">Right Stick Click</string>
+    <!-- Title for the preference category for dpad remapping. [CHAR LIMIT=35] -->
+    <string name="game_controller_dpad">D-pad</string>
+    <!-- Title for the preference category for left stick remapping. [CHAR LIMIT=35] -->
+    <string name="game_controller_stick_left">Left Stick</string>
+    <!-- Title for the preference category for right stick remapping. [CHAR LIMIT=35] -->
+    <string name="game_controller_stick_right">Right Stick</string>
+
     <!-- Title for the button to trigger the 'trackpad settings' page if only connect with a touchpad. [CHAR LIMIT=35] -->
     <string name="trackpad_settings">Touchpad</string>
     <!-- Title for the button to trigger the 'trackpad settings' page if connect with a touchpad and a mouse. [CHAR LIMIT=35] -->
@@ -7181,7 +7218,7 @@
     <!-- Process Stats strings -->
     <skip />
     <!-- Description of battery information footer text. [CHAR LIMIT=NONE] -->
-    <string name="battery_cycle_count_footer">Due to quality inspections before shipping, the cycle count may not be zero on first use</string>
+    <string name="battery_cycle_count_footer">Due to factory inspections before shipping, it may show that your device was used before you set it up and the cycle count may not be zero, which is normal</string>
 
     <!-- [CHAR LIMIT=NONE] Activity title for Process Stats summary -->
     <string name="process_stats_summary_title">Process Stats</string>
@@ -11269,6 +11306,19 @@
     <!-- Label for showing apps that can manage external storage[CHAR LIMIT=45] -->
     <string name="filter_manage_external_storage">Can access all files</string>
 
+    <!-- Computer control automation settings title [CHAR LIMIT=40] [SCREENSHOT=screen/3gqAyPwhuTgdoh5] -->
+    <string name="computer_control_automation_page_title">Screen automation</string>
+    <!-- Label for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/3gqAyPwhuTgdoh5] -->
+    <string name="computer_control_automation_switch_title">Allow this app to fully automate other apps</string>
+    <!-- Description for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/3gqAyPwhuTgdoh5] -->
+    <string name="computer_control_automation_footer_description">This app will able control your apps. Apps being controlled can\u2019t be used while screen automation is ongoing, but you can always stop it.</string>
+    <!-- Preference summary text for an app when computer control access must be confirmed every time. [CHAR LIMIT=45] [SCREENSHOT=screen/4HoRqQaeUTunirH] -->
+    <string name="computer_control_automation_ask_every_time">Ask every time</string>
+    <!-- Preference summary text for an app when computer control access is always allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/4HoRqQaeUTunirH] -->
+    <string name="computer_control_automation_always_allowed">Always allowed</string>
+    <!-- Preference summary text for an app when computer control access is not allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/4HoRqQaeUTunirH] -->
+    <string name="computer_control_automation_dont_allow">Don\u2019t allow</string>
+
     <!-- Manage full screen intent permission title [CHAR LIMIT=40] -->
     <string name="full_screen_intent_title">Full-screen notifications</string>
 
@@ -12119,6 +12169,9 @@
     <!-- Content description for button that brings the user to the Gesture Navigation settings page.-->
     <string name="gesture_settings_button_description">Gesture navigation settings</string>
 
+    <!-- Hint text for clicking a button that opens the Gesture Navigation settings page.-->
+    <string name="gesture_settings_extra_button_hint">open gesture navigation settings</string>
+
     <!-- Title for the screen to show the gesture navigation tutorial [CHAR LIMIT=80] -->
     <string name="gesture_navigation_tutorial_title">Try a demo</string>
 
@@ -12127,6 +12180,9 @@
 
     <!-- Content description for button that brings the user to the Button Navigation settings page.-->
     <string name="button_navigation_settings_button_description">Button navigation settings</string>
+
+    <!-- Hint text for clicking a button that opens the Button Navigation settings page.-->
+    <string name="button_navigation_settings_extra_button_hint">open button navigation settings</string>
 
     <!-- Title text for changing the order of the navbar buttons -->
     <string name="button_navigation_settings_order_title">Button order</string>
@@ -14864,6 +14920,10 @@
     <string name="supervision_settings_title">Parental controls</string>
     <!-- Description for Supervision settings menu entry [CHAR LIMIT=NONE] -->
     <string name="supervision_settings_summary">Digital ground rules &amp; screen time limits</string>
+    <!-- Title for the introduction screen of the parental controls PIN setup flow. [CHAR LIMIT=NONE] -->
+    <string name="supervision_intro_title">Create a parental controls PIN for this device</string>
+    <!-- Description for the introduction screen of the parental controls PIN setup flow. [CHAR LIMIT=NONE] -->
+    <string name="supervision_intro_description">You\u2019ll use this PIN to manage parental controls settings and apps on this device.\n\nYou can edit or delete the PIN from Android Settings &gt; Parental Controls.</string>
     <!-- Description of device supervision toggle when PIN has never been set up [CHAR LIMIT=NONE] -->
     <string name="device_supervision_switch_no_pin_summary">Set up PIN</string>
     <!-- Title for supervision set up PIN entry [CHAR LIMIT=60] -->
@@ -14878,18 +14938,18 @@
     <string name="supervision_pin_management_screen_title">Parental controls PIN</string>
     <!-- Search keywords for supervision PIN management settings entry [CHAR LIMIT=NONE] -->
     <string name="supervision_pin_management_preference_keywords">Parent PIN, Parental controls PIN</string>
-    <!-- Description for supervision PIN management settings entry, in the case of adding a PIN recovery method[CHAR LIMIT=NONE] -->
-    <string name="supervision_pin_management_preference_summary_add">Add recovery email</string>
-    <!-- Description for supervision PIN management settings entry, in the case of verifying the PIN recovery method[CHAR LIMIT=NONE] -->
-    <string name="supervision_pin_management_preference_summary_verify_recovery">Verify recovery email</string>
+    <!-- Description for supervision PIN management settings entry, in the case of adding a PIN recovery method[CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=2247921267270577374] -->
+    <string name="supervision_pin_management_preference_summary_add">Add recovery info</string>
+    <!-- Description for supervision PIN management settings entry, in the case of verifying the PIN recovery method[CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=5072554239108915119] -->
+    <string name="supervision_pin_management_preference_summary_verify_recovery">Verify recovery info</string>
     <!-- Title for supervision change PIN setting entry [CHAR LIMIT=60] -->
     <string name="supervision_change_pin_preference_title">Change PIN</string>
     <!-- Title for supervision forgot PIN setting entry [CHAR LIMIT=60] -->
     <string name="supervision_add_forgot_pin_preference_title">Forgot PIN</string>
     <!-- Label for the fallback option button "Forgot PIN?" on the authentication prompt [CHAR LIMIT=60] -->
     <string name="supervision_auth_prompt_forgot_pin_button_label">Forgot PIN?</string>
-    <!-- Title for supervision update PIN recovery email setting entry [CHAR LIMIT=60] -->
-    <string name="supervision_update_recovery_email_preference_title">Update recovery email</string>
+    <!-- Title for supervision update PIN recovery email setting entry [CHAR LIMIT=60] [BACKUP_MESSAGE_ID=2057393838251915087] -->
+    <string name="supervision_update_recovery_email_preference_title">Update recovery info</string>
     <!-- Toast message for supervision recovery email added [CHAR LIMIT=NONE] -->
     <string name="supervision_recovery_email_added">Recovery email added</string>
     <!-- Toast message for supervision recovery email verified [CHAR LIMIT=NONE] -->
@@ -14912,10 +14972,10 @@
     <string name="supervision_recovery_banner_summary_add">If you forget your PIN, you can use your account to reset it</string>
     <!-- Title for supervision delete pin setting entry [CHAR LIMIT=60] -->
     <string name="supervision_delete_pin_preference_title">Delete PIN</string>
-    <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
-    <string name="supervision_add_pin_recovery_title">Add recovery email</string>
-    <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
-    <string name="supervision_verify_pin_recovery_title">Verify your email</string>
+    <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=3487098027604685794] -->
+    <string name="supervision_add_pin_recovery_title">Add recovery info</string>
+    <!-- Title for verifying supervision PIN recovery setting entry [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=3166602415814821497] -->
+    <string name="supervision_verify_pin_recovery_title">Verify recovery info</string>
     <!-- Title for app store filters entry [CHAR LIMIT=60] -->
     <string name="supervision_app_store_filters_title">App store filters</string>
     <!-- Top intro for app store filters [CHAR LIMIT=NONE] -->
@@ -14924,8 +14984,8 @@
     <string name="supervision_app_store_filters_footer_content">Each app may block different types of content. App stores not listed must be managed separately. </string>
     <!-- Learn more link for app store filters footer. [CHAR LIMIT=NONE]-->
     <string name="supervision_app_store_filters_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_app_store_filters</string>
-    <!-- Title for web content filters entry [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_title">Website content filters</string>
+    <!-- Title for web content filters entry [CHAR LIMIT=60] [BACKUP_MESSAGE_ID=2412562442507104921] -->
+    <string name="supervision_web_content_filters_title">Web content filters</string>
     <!-- Search keywords for web content filters entry [CHAR LIMIT=NONE] -->
     <string name="supervision_web_content_filters_keywords">Website filters, Block sites, Browser filters, Block explicit sites, Filter sites, Block search results, Filter explicit search results, content restrictions</string>
     <!-- Top intro for web content filters [CHAR LIMIT=NONE] -->
@@ -14970,13 +15030,19 @@
     <!-- Message in dialog that informs the user that an error occurred while trying to delete the PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_error_message">An error occurred while trying to delete the PIN.</string>
     <!-- Button label on a dialog to turn off controls for the current user [CHAR LIMIT=NONE] -->
-    <string name="supervision_turn_off_controls_button_label" translatable="false">Turn off controls for this user</string>
+    <string name="supervision_turn_off_controls_button_label">Turn off controls for this user</string>
     <!-- Title on a dialog that confirms whether the user wants to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_turn_off_controls_confirm_header" translatable="false">Delete PIN &amp; turn off controls?</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header">Delete PIN &amp; turn off controls?</string>
     <!-- Message on a dialog that confirms whether the user wants to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_turn_off_controls_confirm_message" translatable="false">Your parental controls PIN will be deleted. Any controls you set up will be turned off.</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message">Your parental controls PIN will be deleted. Any controls you set up will be turned off.</string>
     <!-- Button label on a dialog to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_and_turn_off_button_label">Delete and turn off</string>
+    <!-- Button label on manage PIN screen to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_turn_off_controls_button_label">Delete PIN &amp; turn off controls</string>
+    <!-- Button label on a dialog to delete the PIN [CHAR_LIMIT=NONE] -->
+    <string name="supervision_delete_button_label">Delete</string>
+    <!-- Message on the can't delete pin dialog that shows the role holders requiring the PIN [CHAR_LIMIT=NONE] -->
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message">Your parental controls PIN is being used by:\n\n<xliff:g id="role_holder_bullet_list">%1$s</xliff:g></string>
     <!-- Learn more link for device supervision PIN. [CHAR LIMIT=NONE]-->
     <string name="supervision_pin_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_pin</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
@@ -15125,4 +15191,10 @@
     <string name="satellite_tile_subtitle_available">Available</string>
     <!-- Subtitle for the satellite tile when the device is not eligible for NTN. [CHAR LIMIT=40] -->
     <string name="satellite_tile_subtitle_not_available">Not available</string>
+    <!-- Title for the satellite landing page. [CHAR LIMIT=40] -->
+    <string name="satellite_connectivity_title">Satellite connectivity</string>
+    <!-- Top intro for the satellite landing page. [CHAR LIMIT=NONE] -->
+    <string name="satellite_connectivity_topintro">Stay connected when you don\'t have a mobile or Wi-Fi network</string>
+    <!-- Label for the satellite landing page activity. [CHAR LIMIT=NONE] -->
+    <string name="satellite_landing_page_label">Satellite Landing Page</string>
 </resources>

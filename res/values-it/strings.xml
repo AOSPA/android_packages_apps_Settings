@@ -976,6 +976,8 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"Connessione di <xliff:g id="DEVICE_NAME">%1$s</xliff:g> non riuscita"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Dettagli dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Impostazioni tastiera"</string>
+    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
+    <skip />
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Altre impostazioni"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Aggiornamenti firmware, informazioni e altro"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Suggerimenti e assistenza"</string>
@@ -1026,6 +1028,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Nessun display connesso"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Per iniziare, collega un display esterno o prova a usare un altro cavo"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Altre opzioni"</string>
+    <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"Metti in pausa l\'animazione di rotazione del testo del suggerimento"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Tieni premuto e trascina per riordinare i display"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Tocca per visualizzare le frecce di navigazione"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Tocca le frecce per riordinare i display"</string>
@@ -1205,12 +1208,12 @@
     <string name="retry" msgid="7542103800274026915">"Riprova"</string>
     <string name="shared_message" msgid="2104244057926025072">"condivisa"</string>
     <string name="private_message" msgid="5897966950396765392">"privata"</string>
-    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Conferma"</string>
+    <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"Cambia"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Annulla"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"Condividi rete"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Altri utenti su questo dispositivo possono accedere a questa rete"</string>
-    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"Vuoi passare alla rete <xliff:g id="SHARED">%1$s</xliff:g> \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\"?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"Al momento hai eseguito la connessione a una rete <xliff:g id="SHARED_0">%1$s</xliff:g> con lo stesso nome. Quando fai il cambio, ti disconnetterai da <xliff:g id="SHARED_1">%2$s</xliff:g> per poi riconnetterti alla rete <xliff:g id="PRIVATE">%3$s</xliff:g>. Potresti rimanere temporaneamente senza connessione a internet."</string>
+    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"Passare alla rete <xliff:g id="SHARED">%1$s</xliff:g>?"</string>
+    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"Esiste già una rete <xliff:g id="SHARED_0">%1$s</xliff:g> con il nome \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\". Se passi alla rete <xliff:g id="SHARED_1">%1$s</xliff:g>, lascerai la rete <xliff:g id="PRIVATE">%3$s</xliff:g> e potresti rimanere temporaneamente senza connessione a internet."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(invariata)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Consenti agli utenti di modificare la rete"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Altri utenti possono apportare modifiche a questa rete"</string>
@@ -1248,8 +1251,7 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Impossibile salvare la rete"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Annulla"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Vuoi eliminare la rete?"</string>
-    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"Vuoi eliminare tutti gli utenti del dispositivo?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> è utilizzato da altri utenti su questo dispositivo e tutti gli utenti di questa rete dovranno configurarlo di nuovo. Vuoi comunque dimenticare?"</string>
+    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"La rete <xliff:g id="NETWORK_NAME">%1$s</xliff:g> verrà rimossa per tutti gli utenti su questo dispositivo"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 rete}other{# reti}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 abbonamento}other{# abbonamenti}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 rete e 1 abbonamento}other{# reti e # abbonamenti}}"</string>
@@ -1323,8 +1325,7 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz/Compatibile con tanti dispositivi"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz/Compatibile con pochi dispositivi"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2,4 e 5 GHz/Compatibile con la maggior parte dei dispositivi"</string>
-    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
-    <skip />
+    <string name="wifi_hotspot_speed_summary_2g_and_6g" msgid="5903589948734876821">"2,4 e 6 GHz/Compatibile con la maggior parte dei dispositivi"</string>
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Scegli una frequenza per l\'hotspot. La frequenza influisce sulla velocità di connessione e sui tipi di dispositivi che possono trovare il tuo hotspot."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Frequenza preferita"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 GHz"</string>
@@ -1335,10 +1336,8 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Velocità elevate. Questo hotspot dual-band è compatibile con la maggior parte dei dispositivi."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Velocità massime. Compatibile con pochi dispositivi."</string>
-    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
-    <skip />
+    <string name="wifi_hotspot_speed_2g_6g" msgid="7660263835445953086">"2,4 e 6 GHz"</string>
+    <string name="wifi_hotspot_speed_2g_6g_summary" msgid="5013590436817464652">"Velocità massime. Questo hotspot dual-band è compatibile con la maggior parte dei dispositivi."</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Non disponibile nel tuo paese o nella tua regione"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Se la tua frequenza preferita non è disponibile, l\'hotspot potrebbe utilizzarne una diversa. Le impostazioni di sicurezza dell\'hotspot potrebbero cambiare se modifichi la frequenza."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Non disponibile con 6 GHz"</string>
@@ -2240,7 +2239,36 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastiere e strumenti del profilo di lavoro"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Tastiera sullo schermo per il lavoro"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Predefinito"</string>
-    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
+    <string name="game_controller_settings_title" msgid="4322385924018377909">"Controller di gioco"</string>
+    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
+    <skip />
+    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
+    <skip />
+    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
     <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad e mouse"</string>
@@ -2734,7 +2762,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tocca tre volte lo schermo"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Modificare le scorciatoie di accessibilità"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Scegli la scorciatoia per %1$s"</string>
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"Per utilizzare questa funzionalità, attiva la scorciatoia di %1$s nella pagina di una funzione di accessibilità"</string>
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary" msgid="8268632664568192689">"Per utilizzare questa funzionalità, attiva la scorciatoia del pulsante Accessibilità nella pagina di una funzione di accessibilità"</string>
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary" msgid="2232737783140069174">"Per utilizzare questa funzionalità, attiva la scorciatoia dei tasti del volume nella pagina di una funzione di accessibilità"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continua"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Protesi uditive"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configura e gestisci apparecchi acustici, impianti cocleari e altri dispositivi di amplificazione ASHA e LE Audio"</string>
@@ -3161,7 +3190,8 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Seleziona automaticamente la migliore connessione di rete per prolungare la durata della batteria"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Sicurezza di rete mobile"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tipo di rete, crittografia, controlli di notifica"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Queste impostazioni ti aiutano a proteggere le tue chiamate, i tuoi messaggi e i tuoi dati da reti obsolete o non criptate che potrebbero esporti a furti di dati o sorveglianza"</string>
+    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
+    <skip />
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Sicurezza di rete mobile"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notifiche"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Notifiche della rete"</string>
@@ -4327,8 +4357,7 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Eventi nel calendario"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Routine Buonanotte"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Durante la guida"</string>
-    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
-    <skip />
+    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"Durante il tragitto"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Impostazioni app"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informazioni e impostazioni in <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Funzionalità gestita dall\'app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4345,8 +4374,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Elimina le distrazioni e le interruzioni dal tuo dispositivo per ottenere la concentrazione"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimina tutte le distrazioni per un ambiente tranquillo"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalizza le esperienze e le impostazioni sui dispositivi per i vari utenti"</string>
-    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
-    <skip />
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Sfrutta le regolazioni delle impostazioni automatiche durante i tuoi spostamenti sui mezzi"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Riduci al minimo le interruzioni consentendo solo alle app e alle persone importanti di raggiungerti"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Imposta una modalità che segua una programmazione regolare"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Mantieni il dispositivo sincronizzato con gli eventi della giornata"</string>
@@ -4355,8 +4383,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Concentrati per entrare nella zona"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Per i momenti in cui la cortesia è importante"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Utilizzo guidato per aiutarti a rimanere in buone mani"</string>
-    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
-    <skip />
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Ottimizza il tuo dispositivo per un\'esperienza di spostamento più fluida sui mezzi pubblici"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Assumi il controllo della tua attenzione"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Avviso"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Chiudi"</string>
@@ -4583,6 +4610,18 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Consenti l\'accesso per gestire tutti i file"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Consenti a questa app di leggere, modificare ed eliminare tutti i file memorizzati su questo dispositivo o su qualsiasi volume di archiviazione collegato. Se concedi l\'autorizzazione, l\'app potrà accedere ai file senza informarti."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Possono accedere a tutti i file"</string>
+    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notifiche a schermo intero"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Consenti notifiche a schermo intero di questa app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Consenti a questa app di mostrare notifiche a schermo intero quando il dispositivo è bloccato. L\'app potrebbe usarle per mettere in evidenza sveglie, chiamate in arrivo o altre notifiche urgenti."</string>
@@ -5975,8 +6014,7 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Configura un PIN del Controllo genitori"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"supervisione, controllo genitori, genitori, PIN di supervisione, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Gestisci il PIN"</string>
-    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
-    <skip />
+    <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Gestisci il PIN del Controllo genitori"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN del Controllo genitori"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN del genitore, PIN del Controllo genitori"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Aggiungi email di recupero"</string>
@@ -6009,6 +6047,7 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Risultati di ricerca"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtra i risultati di ricerca espliciti"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Su # app}other{Su # app}}"</string>
+    <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Quando queste impostazioni sono disattivate, potrebbero comunque essere applicate altre impostazioni dell\'account."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Inserisci il PIN del Controllo genitori"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Imposta un PIN del Controllo genitori"</string>
@@ -6026,6 +6065,9 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Si è verificato un problema"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Riprova più tardi"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Indietro"</string>
+    <string name="supervision_available_apps_title" msgid="886352413031517863">"App e servizi disponibili"</string>
+    <string name="supervision_approval_method_chooser_title" msgid="7759309575598126099">"Scegli un metodo di verifica"</string>
+    <string name="supervision_approval_method_chooser_description" msgid="7574494762555726167">"Devi confermare di essere un genitore"</string>
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"La Verifica dell\'identità funziona con più app"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"La Verifica dell\'identità impedisce l\'accesso indesiderato alle tue app. Ora disponibile con qualsiasi app che utilizza lo Sblocco con l\'Impronta o con il Volto."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Visualizza dettagli"</string>

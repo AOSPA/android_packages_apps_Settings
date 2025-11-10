@@ -38,33 +38,53 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.SearchIndexableResource;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.Flags;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceViewHolder;
+import androidx.test.core.app.ActivityScenario;
 
 import com.android.internal.R;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.utils.CandidateInfoExtra;
 import com.android.settingslib.search.SearchIndexableRaw;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
 public class SystemNavigationGestureSettingsTest {
+    @Rule
+    public SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
     private SystemNavigationGestureSettings mSettings;
@@ -77,18 +97,37 @@ public class SystemNavigationGestureSettingsTest {
     private OverlayInfo mOverlayInfoEnabled;
     @Mock
     private OverlayInfo mOverlayInfoDisabled;
+    private ShadowPackageManager mShadowPackageManager;
+
+    private SelectorWithWidgetPreference mSelectorWithWidgetPreference;
+    private ActivityScenario<FragmentActivity> mScenario;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(RuntimeEnvironment.getApplication());
+        mShadowPackageManager = shadowOf(mContext.getPackageManager());
         mSettings = new SystemNavigationGestureSettings();
+
+        mSelectorWithWidgetPreference = new SelectorWithWidgetPreference(mContext);
+        View preferenceView = LayoutInflater.from(mContext)
+                .inflate(mSelectorWithWidgetPreference.getLayoutResource(), null /* root */);
+        PreferenceViewHolder preferenceViewHolder =
+                PreferenceViewHolder.createInstanceForTests(preferenceView);
+        mSelectorWithWidgetPreference.onBindViewHolder(preferenceViewHolder);
 
         when(mOverlayInfoDisabled.isEnabled()).thenReturn(false);
         when(mOverlayInfoEnabled.isEnabled()).thenReturn(true);
         when(mOverlayManager.getOverlayInfo(any(), anyInt())).thenReturn(mOverlayInfoDisabled);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
+    }
+
+    @After
+    public void tearDown() {
+        if (mScenario != null) {
+            mScenario.close();
+        }
     }
 
     @Test
@@ -152,5 +191,69 @@ public class SystemNavigationGestureSettingsTest {
         mSettings.setCurrentSystemNavigationMode(mOverlayManager, KEY_SYSTEM_NAV_3BUTTONS);
         verify(mOverlayManager, times(1)).setEnabledExclusiveInCategory(
                 NAV_BAR_MODE_3BUTTON_OVERLAY, USER_CURRENT);
+    }
+
+    @Test
+    public void initializeA11yNode_gestureNav_hasCustomClickAction() {
+        PreferenceViewHolder preferenceViewHolder = setUpFragmentWithViewHolder();
+
+        bindPreferenceExtra(KEY_SYSTEM_NAV_GESTURAL, preferenceViewHolder);
+
+        View widget = preferenceViewHolder.findViewById(
+                com.android.settingslib.widget.preference.selector.R.id.selector_extra_widget);
+        AccessibilityNodeInfo info = new AccessibilityNodeInfo();
+        widget.onInitializeAccessibilityNodeInfo(info);
+
+        assertThat(info.getActionList()).contains(new AccessibilityNodeInfo.AccessibilityAction(
+                AccessibilityNodeInfo.ACTION_CLICK, mContext.getString(
+                com.android.settings.R.string.gesture_settings_extra_button_hint)));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION)
+    public void initializeA11yNode_buttonNav_hasCustomClickAction() {
+        PreferenceViewHolder preferenceViewHolder = setUpFragmentWithViewHolder();
+
+        bindPreferenceExtra(KEY_SYSTEM_NAV_3BUTTONS, preferenceViewHolder);
+
+        View widget = preferenceViewHolder.findViewById(
+                com.android.settingslib.widget.preference.selector.R.id.selector_extra_widget);
+        AccessibilityNodeInfo info = new AccessibilityNodeInfo();
+        widget.onInitializeAccessibilityNodeInfo(info);
+
+        assertThat(info.getActionList()).contains(new AccessibilityNodeInfo.AccessibilityAction(
+                AccessibilityNodeInfo.ACTION_CLICK, mContext.getString(
+                com.android.settings.R.string.button_navigation_settings_extra_button_hint)));
+    }
+
+    private CandidateInfoExtra getMockCandidateInfo(String key) {
+        CandidateInfoExtra info = Mockito.mock(CandidateInfoExtra.class);
+        when(info.loadSummary()).thenReturn("");
+        when(info.getKey()).thenReturn(key);
+
+        assertThat(info).isInstanceOf(CandidateInfoExtra.class);
+        return info;
+    }
+
+    private void bindPreferenceExtra(String key, PreferenceViewHolder preferenceViewHolder) {
+        CandidateInfoExtra infoExtra = getMockCandidateInfo(key);
+        mSettings.bindPreferenceExtra(mSelectorWithWidgetPreference, null,
+                infoExtra, null, null);
+        // Call onBindViewHolder after bindPreferenceExtra to force extra widget to populate
+        mSelectorWithWidgetPreference.onBindViewHolder(preferenceViewHolder);
+    }
+
+    private PreferenceViewHolder setUpFragmentWithViewHolder() {
+        mShadowPackageManager.addActivityIfNotPresent(
+                new ComponentName(mContext, FragmentActivity.class));
+        mScenario = ActivityScenario.launch(FragmentActivity.class);
+        mScenario.onActivity(
+                activity -> activity.getSupportFragmentManager().beginTransaction()
+                        .add(mSettings, "TAG").commitNow()
+        );
+        mSelectorWithWidgetPreference = new SelectorWithWidgetPreference(mContext);
+        View view = LayoutInflater.from(mContext)
+                .inflate(mSelectorWithWidgetPreference.getLayoutResource(), /* root= */ null);
+        return PreferenceViewHolder.createInstanceForTests(view);
     }
 }

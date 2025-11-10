@@ -34,13 +34,13 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.ResolveInfo
 import android.content.pm.UserInfo
 import android.hardware.biometrics.BiometricManager
-import android.os.Build
 import android.os.Bundle
 import android.os.Process
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -64,7 +64,6 @@ import org.mockito.kotlin.whenever
 import org.robolectric.Robolectric
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
-import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowBinder
@@ -257,7 +256,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    @Config(sdk = [Build.VERSION_CODES.BAKLAVA])
     fun onCreate_callerIsSystemUid_doesNotFinish() {
         ShadowBinder.setCallingUid(
             UserHandle.getUid(/* userId= */ 2, /* appId= */ Process.SYSTEM_UID)
@@ -272,7 +270,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    @Config(sdk = [Build.VERSION_CODES.BAKLAVA])
     fun onCreate_callerIsUnknownUid_finish() {
         ShadowBinder.setCallingUid(Process.NOBODY_UID)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
@@ -502,7 +499,8 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    fun getBiometricPrompt_recoveryEmailExist_showForgotPinButton() {
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun getBiometricPrompt_recoveryEmailExist_showForgotPinButton_flagDisabled() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         val recoveryInfo = SupervisionRecoveryInfo("email", "default", STATE_PENDING, null)
@@ -535,10 +533,62 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    fun getBiometricPrompt_recoveryInfoEmpty_noForgotPinButton() {
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun getBiometricPrompt_recoveryEmailExist_showForgotPinButton_flagEnabled() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        setCanLaunchPinRecovery(true)
+        mActivityController.setup()
+
+        val biometricPrompt = mActivity.getBiometricPrompt()
+
+        assertThat(biometricPrompt.title)
+            .isEqualTo(mActivity.getString(R.string.supervision_full_screen_pin_verification_title))
+        assertThat(biometricPrompt.isConfirmationRequired).isTrue()
+        assertThat(biometricPrompt.allowedAuthenticators)
+            .isEqualTo(BiometricManager.Authenticators.DEVICE_CREDENTIAL)
+
+        val fallbackOptions = biometricPrompt.getFallbackOptions()
+        assertThat(fallbackOptions).isNotNull()
+        assertThat(fallbackOptions).hasSize(1)
+
+        val forgotPinOption =
+            fallbackOptions.find {
+                it.getText().toString() ==
+                    mActivity.getString(R.string.supervision_auth_prompt_forgot_pin_button_label)
+            }
+        assertThat(forgotPinOption).isNotNull()
+        assertThat(forgotPinOption!!.getIconType()).isEqualTo(BiometricManager.ICON_TYPE_ACCOUNT)
+
+        mActivity.onForgotPinFallbackClicked()
+        verify(metricsRule.metricsFeatureProvider)
+            .action(mActivity, SettingsEnums.ACTION_SUPERVISION_FORGOT_PIN_DURING_PIN_INVOCATION)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun getBiometricPrompt_recoveryInfoEmpty_noForgotPinButton_flagDisabled() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
+        mActivityController.setup()
+
+        val biometricPrompt = mActivity.getBiometricPrompt()
+
+        assertThat(biometricPrompt.title)
+            .isEqualTo(mActivity.getString(R.string.supervision_full_screen_pin_verification_title))
+        assertThat(biometricPrompt.isConfirmationRequired).isTrue()
+        assertThat(biometricPrompt.allowedAuthenticators)
+            .isEqualTo(BiometricManager.Authenticators.DEVICE_CREDENTIAL)
+        assertThat(biometricPrompt.getFallbackOptions()).isEmpty()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun getBiometricPrompt_recoveryInfoEmpty_noForgotPinButton_flagEnabled() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        setCanLaunchPinRecovery(false)
         mActivityController.setup()
 
         val biometricPrompt = mActivity.getBiometricPrompt()
@@ -670,6 +720,10 @@ class ConfirmSupervisionCredentialsActivityTest {
             setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
             setSystemService(Context.USER_SERVICE, mockUserManager)
         }
+    }
+
+    private fun setCanLaunchPinRecovery(canLaunch: Boolean) {
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(canLaunch)
     }
 
     private companion object {

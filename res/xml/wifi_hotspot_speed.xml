@@ -53,7 +53,8 @@
         <com.android.settingslib.widget.SelectorWithWidgetPreference
             android:key="wifi_hotspot_speed_2g_6g"
             android:title="@string/wifi_hotspot_speed_2g_6g"
-            android:summary="@string/wifi_hotspot_speed_2g_6g_summary"/>
+            android:summary="@string/wifi_hotspot_speed_2g_6g_summary"
+            settings:isPreferenceVisible="false"/>
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference

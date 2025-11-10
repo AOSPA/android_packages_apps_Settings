@@ -16,7 +16,6 @@
 
 package com.android.settings.users;
 
-import static com.android.settings.flags.Flags.hideUserListForNonAdmins;
 import static com.android.settings.flags.Flags.showAddUsersFromSigninToggle;
 import static com.android.settings.flags.Flags.showUserDetailsSettingsForSelf;
 import static com.android.settingslib.Utils.getColorAttrDefaultColor;
@@ -1011,6 +1010,7 @@ public class UserSettings extends SettingsPreferenceFragment
                     getActivity(),
                     this::startActivityForResult,
                     canCreateAdminUser(),
+                    canEditUserInfo(),
                     (userName, userIcon, iconPath, isAdmin) -> {
                         mPendingUserIcon = userIcon;
                         mPendingUserName = userName;
@@ -1040,6 +1040,13 @@ public class UserSettings extends SettingsPreferenceFragment
         } else {
             return UserManager.isMultipleAdminEnabled();
         }
+    }
+
+    private boolean canEditUserInfo() {
+        return !showAddUsersFromSigninToggle()
+                || !getPrefContext()
+                        .getResources()
+                        .getBoolean(com.android.internal.R.bool.config_enableUserInfoSetupInSuw);
     }
 
     @Override
@@ -1325,22 +1332,15 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         boolean canOpenUserDetails =
-                isCurrentUserAdmin() || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
-        boolean shouldShowOnlySelf =
-                hideUserListForNonAdmins()
-                        && !isCurrentUserAdmin()
-                        && getPrefContext()
-                                .getResources()
-                                .getBoolean(
-                                        com.android.internal.R.bool
-                                                .config_userSwitchingMustGoThroughLoginScreen);
+                isCurrentUserAdmin()
+                        || (canSwitchUserNow()
+                                && !mUserCaps.mDisallowSwitchUser
+                                && mUserCaps.mUserSwitchingUiEnabled);
+
         for (UserInfo user : users) {
             if (user.isGuest()) {
                 // Guest user is added to guest category via updateGuestCategory
                 // and not to user list so skip guest here
-                continue;
-            }
-            if (shouldShowOnlySelf && user.id != UserHandle.myUserId()) {
                 continue;
             }
             UserPreference pref;
@@ -1513,7 +1513,10 @@ public class UserSettings extends SettingsPreferenceFragment
         UserPreference pref = null;
         boolean isGuestAlreadyCreated = false;
         boolean canOpenUserDetails =
-                isCurrentUserAdmin() || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
+                isCurrentUserAdmin()
+                        || (canSwitchUserNow()
+                                && !mUserCaps.mDisallowSwitchUser
+                                && mUserCaps.mUserSwitchingUiEnabled);
 
         mGuestUserCategory.removeAll();
         mGuestUserCategory.setVisible(false);
@@ -1851,8 +1854,12 @@ public class UserSettings extends SettingsPreferenceFragment
             if (mUserCaps.mCanAddRestrictedProfile) {
                 showDialog(DIALOG_CHOOSE_USER_TYPE);
             } else {
-                startActivityForResult(CreateUserActivity.createIntentForStart(getActivity(),
-                                canCreateAdminUser(), Utils.FILE_PROVIDER_AUTHORITY),
+                startActivityForResult(
+                        CreateUserActivity.createIntentForStart(
+                                getActivity(),
+                                canCreateAdminUser(),
+                                canEditUserInfo(),
+                                Utils.FILE_PROVIDER_AUTHORITY),
                         REQUEST_ADD_USER);
             }
             return true;
