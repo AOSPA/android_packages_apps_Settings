@@ -16,7 +16,7 @@
 
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
- * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -73,7 +73,7 @@ public class ImeiInfoDialogController {
         mSubscriptionInfo = context.getSystemService(SubscriptionManager.class)
                 .getActiveSubscriptionInfoForSimSlotIndex(slotId);
         TelephonyManager tm = context.getSystemService(TelephonyManager.class);
-        mIsDsdsToSsConfigValid = TelephonyUtils.isDsdsToSsConfigValid();
+        mIsDsdsToSsConfigValid = TelephonyUtils.isDsdsToSsConfigValid(context);
         if (mSubscriptionInfo != null) {
             mTelephonyManager = context.getSystemService(TelephonyManager.class)
                     .createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());

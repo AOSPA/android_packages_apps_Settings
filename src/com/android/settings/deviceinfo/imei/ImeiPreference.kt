@@ -14,13 +14,23 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.deviceinfo.imei
 
 import android.content.Context
+import android.telephony.TelephonyManager
+import android.text.TextUtils
 import android.util.Log
+import android.util.Pair;
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.network.telephony.TelephonyUtils
 import com.android.settings.wifi.utils.activeModemCount
 import com.android.settings.wifi.utils.isAdminUser
 import com.android.settings.wifi.utils.telephonyManager
@@ -32,6 +42,8 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.preference.PreferenceBindingPlaceholder
+
+import com.qti.extphone.QtiImeiInfo;
 
 /** Preference to show IMEI information for single and multi modem devices. */
 class ImeiPreference(
@@ -52,6 +64,11 @@ class ImeiPreference(
 
     override val key: String
         get() = KEY_PREFIX + "${index + 1}"
+
+    init {
+        Log.d(TAG, "init index = " + index)
+        TelephonyUtils.connectExtTelephonyService(context)
+    }
 
     override fun isAvailable(context: Context): Boolean =
         context.isAdminUser == true &&
@@ -74,12 +91,13 @@ class ImeiPreference(
             }
     }
 
-    private fun Context.getFormattedTitle(): String =
-        if (activeModemCount <= 1) {
-            getString(R.string.status_imei)
-        } else {
-            getString(R.string.imei_multi_sim, index + 1)
+    private fun Context.getFormattedTitle(): String {
+        val slotCount = TelephonyUtils.getSlotsCount(this)
+        if (slotCount <= 1) {
+            return getString(R.string.status_imei)
         }
+        return getString(R.string.imei_multi_sim, index + 1)
+    }
 
     private fun getFormattedSummary(): String {
         return when {
@@ -108,14 +126,15 @@ val Context.getImeiList: List<String>
         telephonyManager?.let {
             var primaryImei = String()
             try {
-                primaryImei = it.primaryImei
+                primaryImei = getPrimaryImei()
             } catch (exception: Exception) {
                 Log.e(ImeiPreference.TAG, "PrimaryImei not available.", exception)
             }
             var imeiListFromSlot: List<String> = buildList {
-                for (slotIndex in 0..activeModemCount - 1) {
+                val slotCount = TelephonyUtils.getSlotsCount(this@getImeiList)
+                for (slotIndex in 0..slotCount - 1) {
                     try {
-                        val slotImei = it.getImei(slotIndex)
+                        val slotImei = getImeiForSlot(slotIndex)
                         add(slotImei ?: String())
                     } catch (exception: Exception) {
                         Log.e(ImeiPreference.TAG, "Slot[$slotIndex] imei not available.", exception)
@@ -135,3 +154,66 @@ val Context.getImeiList: List<String>
             addAll(imeiListFromSlot)
         }
     }
+
+private val Context.isMinHalVersion2_1: Boolean
+    private get() {
+        val radioVersion: Pair<Int, Int> = telephonyManager?.getHalVersion(
+                TelephonyManager.HAL_SERVICE_MODEM)?: Pair(0, 0)
+        val halVersion = makeRadioVersion(radioVersion.first, radioVersion.second)
+        return halVersion > makeRadioVersion(2, 0)
+    }
+
+private fun Context.getImeiForSlot(slot: Int): String {
+    var imei = String()
+    var qtiImeiInfo: Array<QtiImeiInfo?>? = null
+    try {
+        if (isMinHalVersion2_1 && !TelephonyUtils.isDsdsToSsConfigValid(this)) {
+            imei = telephonyManager?.getImei(slot) ?: String()
+        } else {
+            qtiImeiInfo = TelephonyUtils.getImeiInfo()
+            if (qtiImeiInfo != null) {
+                for (i in qtiImeiInfo.indices) {
+                    if (qtiImeiInfo[i] != null && qtiImeiInfo[i]!!.getSlotId() == slot) {
+                        imei = qtiImeiInfo[i]!!.getImei()
+                        break
+                    }
+                }
+            }
+            if (TextUtils.isEmpty(imei)) {
+                imei = telephonyManager?.getImei(slot) ?: String()
+            }
+        }
+    } catch (exception: Exception) {
+        Log.e(ImeiPreference.TAG, "Imei not available. " + exception)
+    }
+    return imei
+}
+
+fun Context.getPrimaryImei(): String {
+    var primaryImei = String()
+    var qtiImeiInfo: Array<QtiImeiInfo?>? = null
+    try {
+        if (isMinHalVersion2_1 && !TelephonyUtils.isDsdsToSsConfigValid(this)) {
+            primaryImei = telephonyManager?.primaryImei ?: String()
+        } else {
+            qtiImeiInfo = TelephonyUtils.getImeiInfo()
+            if (qtiImeiInfo != null) {
+                for (i in qtiImeiInfo.indices) {
+                    if (qtiImeiInfo[i] != null
+                            && qtiImeiInfo[i]!!.getImeiType() == QtiImeiInfo.IMEI_TYPE_PRIMARY) {
+                        primaryImei = qtiImeiInfo[i]!!.getImei()
+                        break
+                    }
+                }
+            }
+        }
+    } catch (exception: Exception) {
+        Log.e(ImeiPreference.TAG, "PrimaryImei not available. " + exception)
+    }
+    return primaryImei
+}
+
+private fun makeRadioVersion(major: Int, minor: Int): Int {
+    if (major < 0 || minor < 0) return 0
+    return major * 100 + minor
+}
