@@ -28,8 +28,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.preference.Preference;
-
-import com.android.settings.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.notification.NotificationBackend;
@@ -83,17 +81,14 @@ public class BlockPreferenceController extends NotificationPreferenceController
                 // an exception is thrown if you try to add the listener twice
             }
             bar.setDisabledByAdmin(mAdmin);
-
-            if (Flags.notificationUseDpcPolicy()) {
-                EnforcedAdmin admin = RestrictedLockUtils.getProfileOrDeviceOwner(mContext,
-                        mContext.getUser());
-                DevicePolicyManager devicePolicyManager = mContext.getSystemService(
-                        DevicePolicyManager.class);
-                if (admin != null
-                        && devicePolicyManager.getPermissionPolicy(admin.component)
+            EnforcedAdmin admin = RestrictedLockUtils.getProfileOrDeviceOwner(
+                    mContext, mContext.getUser());
+            DevicePolicyManager devicePolicyManager = mContext.getSystemService(
+                    DevicePolicyManager.class);
+            if (admin != null
+                    && devicePolicyManager.getPermissionPolicy(admin.component)
                             != DevicePolicyManager.PERMISSION_POLICY_PROMPT) {
-                    bar.setDisabledByAdmin(admin);
-                }
+                bar.setDisabledByAdmin(admin);
             }
 
             if (mChannel != null && (!isChannelBlockable() || !isChannelConfigurable(mChannel))) {
