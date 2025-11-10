@@ -186,15 +186,18 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             mFirstStarted = false;
             FeatureFactory.getFeatureFactory().getSearchFeatureProvider().sendPreIndexIntent(
                     getContext());
-        } else if (mIsEmbeddingActivityEnabled && isOnlyOneActivityInTask()
-                && !isActivityEmbedded()) {
+        }
+        super.onStart();
+    }
+
+    void setDefaultHighlightIfNeeded() {
+        if (isOnlyOneActivityInTask() && !isActivityEmbedded()) {
             // Set default highlight menu key for 1-pane homepage since it will show the placeholder
             // page once changing back to 2-pane.
             Log.i(TAG, "Set default menu key");
             setHighlightMenuKey(getString(SettingsHomepageActivity.DEFAULT_HIGHLIGHT_MENU_KEY),
                     /* scrollNeeded= */ false);
         }
-        super.onStart();
     }
 
     private boolean isOnlyOneActivityInTask() {
