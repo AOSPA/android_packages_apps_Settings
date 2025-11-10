@@ -141,7 +141,13 @@ open class DoubleTapPowerScreen(context: Context) :
         makeLaunchIntent(context, DoubleTapPowerSettingsActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) {
+            if (Flags.catalystMigration26q2()) {
+                if (!context.isNonLaunchWalletOrNonMultiTargetDoubleTap()) {
+                    +DoubleTapPowerMainSwitchPreference()
+                }
+            }
+        }
 
     private fun Context.isNonLaunchWalletOrNonMultiTargetDoubleTap(): Boolean =
         !launchWalletOptionOnPowerDoubleTap() ||

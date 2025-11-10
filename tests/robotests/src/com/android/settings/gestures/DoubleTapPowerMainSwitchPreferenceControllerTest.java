@@ -38,6 +38,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+// LINT.IfChange
 @RunWith(AndroidJUnit4.class)
 public class DoubleTapPowerMainSwitchPreferenceControllerTest {
 
@@ -101,3 +102,4 @@ public class DoubleTapPowerMainSwitchPreferenceControllerTest {
                 .isFalse();
     }
 }
+// LINT.ThenChange(DoubleTapPowerMainSwitchPreferenceTest.kt)
