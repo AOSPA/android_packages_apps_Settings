@@ -28,7 +28,10 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.core.BasePreferenceController.AVAILABLE
+import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE
 import com.android.wifitrackerlib.WifiEntry
+import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -53,16 +56,18 @@ class CertificateDetailsPreferenceControllerTest {
     }
     private val controller = CertificateDetailsPreferenceController(context, TEST_KEY)
 
-    private val mockCertificateInfo = mock<WifiEntry.CertificateInfo> {
-        it.validationMethod =
-            WifiEntry.CertificateInfo.CERTIFICATE_VALIDATION_METHOD_USING_INSTALLED_ROOTCA
-        it.caCertificateAliases = arrayOf(MOCK_CA)
-    }
+    private val mockCertificateInfo = mock<WifiEntry.CertificateInfo>()
     private val mockWifiEntry =
         mock<WifiEntry> { on { certificateInfo } doReturn mockCertificateInfo }
 
     @Before
     fun setUp() {
+        // Default setup for a network with one installed CA certificate
+        mockCertificateInfo.apply {
+            validationMethod =
+                WifiEntry.CertificateInfo.CERTIFICATE_VALIDATION_METHOD_USING_INSTALLED_ROOTCA
+            caCertificateAliases = arrayOf(MOCK_CA)
+        }
         controller.setWifiEntry(mockWifiEntry)
     }
 
@@ -90,6 +95,119 @@ class CertificateDetailsPreferenceControllerTest {
         }
 
         composeTestRule.onNodeWithText(context.getString(R.string.one_cacrt)).assertIsDisplayed()
+    }
+
+    @Test
+    @RequiresFlagsEnabled(com.android.wifi.flags.Flags.FLAG_ANDROID_V_WIFI_API)
+    fun summary_withMultipleCaCertificates_isCorrect() {
+        // GIVEN a wifi entry with multiple installed CA certificates
+        mockCertificateInfo.caCertificateAliases = arrayOf(MOCK_CA, "MOCK_CA_2")
+
+        // WHEN the content is composed
+        composeTestRule.setContent {
+            CompositionLocalProvider(LocalContext provides context) {
+                controller.Content()
+            }
+        }
+
+        // THEN the summary indicates the number of certificates
+        val expectedSummary = context.getString(R.string.wifi_certificate_summary_Certificates, 2)
+        composeTestRule.onNodeWithText(expectedSummary).assertIsDisplayed()
+    }
+
+    @Test
+    @RequiresFlagsEnabled(com.android.wifi.flags.Flags.FLAG_ANDROID_V_WIFI_API)
+    fun summary_withSystemCertificate_isCorrect() {
+        // GIVEN a wifi entry using a system certificate
+        mockCertificateInfo.validationMethod =
+            WifiEntry.CertificateInfo.CERTIFICATE_VALIDATION_METHOD_USING_SYSTEM_CERTIFICATE
+
+        // WHEN the content is composed
+        composeTestRule.setContent {
+            CompositionLocalProvider(LocalContext provides context) {
+                controller.Content()
+            }
+        }
+
+        // THEN the correct summary is displayed
+        composeTestRule.onNodeWithText(context.getString(R.string.wifi_certificate_summary_system))
+            .assertIsDisplayed()
+    }
+
+    @Test
+    @RequiresFlagsEnabled(com.android.wifi.flags.Flags.FLAG_ANDROID_V_WIFI_API)
+    fun summary_withCertificatePinning_isCorrect() {
+        // GIVEN a wifi entry using certificate pinning
+        mockCertificateInfo.validationMethod =
+            WifiEntry.CertificateInfo.CERTIFICATE_VALIDATION_METHOD_USING_CERTIFICATE_PINNING
+
+        // WHEN the content is composed
+        composeTestRule.setContent {
+            CompositionLocalProvider(LocalContext provides context) {
+                controller.Content()
+            }
+        }
+
+        // THEN the correct summary is displayed
+        composeTestRule.onNodeWithText(context.getString(R.string.wifi_certificate_summary_pinning))
+            .assertIsDisplayed()
+    }
+
+    @Test
+    @RequiresFlagsEnabled(com.android.wifi.flags.Flags.FLAG_ANDROID_V_WIFI_API)
+    fun summary_whenCertificateInfoIsNull_isCorrect() {
+        // GIVEN a wifi entry with null certificate info (verifies NPE fix)
+        whenever(mockWifiEntry.certificateInfo).thenReturn(null)
+
+        // WHEN the content is composed
+        composeTestRule.setContent {
+            CompositionLocalProvider(LocalContext provides context) {
+                controller.Content()
+            }
+        }
+
+        // THEN the default summary for pinning is shown, as validationMethod is null
+        composeTestRule.onNodeWithText(context.getString(R.string.wifi_certificate_summary_pinning))
+            .assertIsDisplayed()
+    }
+
+    @Test
+    @RequiresFlagsEnabled(com.android.wifi.flags.Flags.FLAG_ANDROID_V_WIFI_API)
+    fun getAvailabilityStatus_isAvailableForAllValidMethods() {
+        // System certificate
+        mockCertificateInfo.validationMethod =
+            WifiEntry.CertificateInfo.CERTIFICATE_VALIDATION_METHOD_USING_SYSTEM_CERTIFICATE
+        assertThat(controller.availabilityStatus).isEqualTo(AVAILABLE)
+
+        // Installed root CA
+        mockCertificateInfo.validationMethod =
+            WifiEntry.CertificateInfo.CERTIFICATE_VALIDATION_METHOD_USING_INSTALLED_ROOTCA
+        assertThat(controller.availabilityStatus).isEqualTo(AVAILABLE)
+
+        // Certificate pinning
+        mockCertificateInfo.validationMethod =
+            WifiEntry.CertificateInfo.CERTIFICATE_VALIDATION_METHOD_USING_CERTIFICATE_PINNING
+        assertThat(controller.availabilityStatus).isEqualTo(AVAILABLE)
+    }
+
+    @Test
+    @RequiresFlagsEnabled(com.android.wifi.flags.Flags.FLAG_ANDROID_V_WIFI_API)
+    fun getAvailabilityStatus_isUnavailableForInvalidMethod() {
+        // GIVEN an unknown validation method
+        mockCertificateInfo.validationMethod = -1
+
+        // THEN the controller is unavailable
+        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
+    }
+
+    @Test
+    @RequiresFlagsEnabled(com.android.wifi.flags.Flags.FLAG_ANDROID_V_WIFI_API)
+    fun getAvailabilityStatus_whenCertificateInfoIsNull_isUnavailable() {
+        // GIVEN a wifi entry with null certificate info (verifies NPE fix)
+        whenever(mockWifiEntry.certificateInfo).thenReturn(null)
+
+        // THEN the controller is unavailable
+        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
     }
 
     private companion object {
