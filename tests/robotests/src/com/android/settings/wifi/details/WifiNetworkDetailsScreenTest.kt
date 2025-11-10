@@ -19,6 +19,7 @@ import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,11 +28,10 @@ import org.junit.runner.RunWith
 class WifiNetworkDetailsScreenTest : SettingsCatalystTestCase() {
 
     override val preferenceScreenCreator =
-        WifiNetworkDetailsScreen(
-            appContext,
+        createScreen(
             Bundle().apply {
                 putString(WifiNetworkDetailsScreen.KEY_ARGUMENT_WIFI_ENTRY_KEY, "test_key")
-            },
+            }
         )
 
     override val flagName: String
@@ -42,6 +42,13 @@ class WifiNetworkDetailsScreenTest : SettingsCatalystTestCase() {
         assertThat(preferenceScreenCreator.key).isEqualTo(WifiNetworkDetailsScreen.KEY)
     }
 
-    @Test
-    override fun migration() {}
+    private fun createScreen(args: Bundle): WifiNetworkDetailsScreen {
+        return if (CatalystFlags.catalystUseKeyParameters()) {
+            WifiNetworkDetailsScreen(WifiNetworkDetailsScreen.parametersSchema.prepare(args))
+        } else {
+            WifiNetworkDetailsScreen(args)
+        }
+    }
+
+    @Test override fun migration() {}
 }
