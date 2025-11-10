@@ -374,6 +374,75 @@ public final class DataProcessorTest {
     }
 
     @Test
+    public void generateAppUsagePeriodMap_withScreenOffEvents_returnExpectedResult() {
+        final long startTime = Duration.ofHours(4).toMillis();
+        final long endTime = Duration.ofHours(6).toMillis();
+        final long queryBuffer = DatabaseUtils.USAGE_QUERY_BUFFER_HOURS;
+        final String packageName = "com.android.settings";
+        DataProcessor.sDebug = true;
+        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
+                List.of(
+                        new BatteryLevelData.PeriodBatteryLevelData(
+                                /* batteryLevelMap= */ Map.of(startTime, 100, endTime, 100),
+                                /* timestamps= */ List.of(startTime, endTime),
+                                /* isStartTimestamp= */ false)
+                );
+        List<AppUsageEvent> eventList = null;
+        Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> result = null;
+        List<AppUsagePeriod> periods = null;
+
+        // Screen off event after the usage period
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        startTime + 10L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        endTime - 30L,
+                        AppUsageEventType.ACTIVITY_STOPPED,
+                        endTime - 20L,
+                        AppUsageEventType.SCREEN_NON_INTERACTIVE
+                )
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                        mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(1);
+        assertAppUsagePeriod(periods.get(0), startTime + 10L, endTime - 30L);
+
+        // Screen off event after a single start event
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        endTime - 30L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        endTime - 20L,
+                        AppUsageEventType.SCREEN_NON_INTERACTIVE,
+                        endTime - 10L,
+                        AppUsageEventType.DEVICE_SHUTDOWN
+                )
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(1);
+        assertAppUsagePeriod(periods.get(0), endTime - 30L, endTime - 20L);
+    }
+
+    @Test
     public void generateAppUsagePeriodMap_withSingleEvent_returnExpectedResult() {
         final long startTime = Duration.ofHours(4).toMillis();
         final long endTime = Duration.ofHours(6).toMillis();
@@ -411,6 +480,7 @@ public final class DataProcessorTest {
                 startTime + 2L + DURATION_FOR_UNMATCHED_EVENT);
 
         // Single end event
+        // Single end event
         eventList = new ArrayList<>();
         appendAppUsageEventList(
                 eventList,
@@ -438,6 +508,21 @@ public final class DataProcessorTest {
                 /* instanceId= */ 2,
                 packageName,
                 Map.of(endTime - 2L, AppUsageEventType.DEVICE_SHUTDOWN)
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        assertThat(result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)).isNull();
+
+        // Single screen off event
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(endTime - 2L, AppUsageEventType.SCREEN_NON_INTERACTIVE)
         );
 
         result = DataProcessor.generateAppUsagePeriodMap(
@@ -579,10 +664,14 @@ public final class DataProcessorTest {
         Event event3 = getUsageEvent(Event.ACTIVITY_STOPPED, /* timestamp= */ 3);
         Event event4 = getUsageEvent(Event.DEVICE_SHUTDOWN, /* timestamp= */ 4);
         Event event5 = getUsageEvent(Event.ACTIVITY_RESUMED, /* timestamp= */ 5);
+        Event event6 = getUsageEvent(Event.SCREEN_INTERACTIVE, /* timestamp= */ 6);
+        Event event7 = getUsageEvent(Event.SCREEN_NON_INTERACTIVE, /* timestamp= */ 7);
         event5.mPackage = null;
         List<Event> events1 = new ArrayList<>();
         events1.add(event1);
         events1.add(event2);
+        events1.add(event6);
+        events1.add(event7);
         List<Event> events2 = new ArrayList<>();
         events2.add(event3);
         events2.add(event4);
@@ -598,13 +687,16 @@ public final class DataProcessorTest {
         final List<AppUsageEvent> appUsageEventList =
                 DataProcessor.generateAppUsageEventListFromUsageEvents(mContext, appUsageEvents);
 
-        assertThat(appUsageEventList).hasSize(3);
+        assertThat(appUsageEventList).hasSize(4);
         assertAppUsageEvent(
                 appUsageEventList.get(0), AppUsageEventType.ACTIVITY_RESUMED, /* timestamp= */ 2);
         assertAppUsageEvent(
-                appUsageEventList.get(1), AppUsageEventType.ACTIVITY_STOPPED, /* timestamp= */ 3);
+                appUsageEventList.get(1),
+                AppUsageEventType.SCREEN_NON_INTERACTIVE, /* timestamp= */ 7);
         assertAppUsageEvent(
-                appUsageEventList.get(2), AppUsageEventType.DEVICE_SHUTDOWN, /* timestamp= */ 4);
+                appUsageEventList.get(2), AppUsageEventType.ACTIVITY_STOPPED, /* timestamp= */ 3);
+        assertAppUsageEvent(
+                appUsageEventList.get(3), AppUsageEventType.DEVICE_SHUTDOWN, /* timestamp= */ 4);
     }
 
     @Test
@@ -2386,6 +2478,8 @@ public final class DataProcessorTest {
                 buildAppUsageEvent(AppUsageEventType.DEVICE_SHUTDOWN, /* timestamp= */ 1));
         appUsageEvents.add(
                 buildAppUsageEvent(AppUsageEventType.DEVICE_SHUTDOWN, /* timestamp= */ 2));
+        appUsageEvents.add(
+                buildAppUsageEvent(AppUsageEventType.SCREEN_NON_INTERACTIVE, /* timestamp= */ 3));
 
         assertThat(
                         DataProcessor.buildAppUsagePeriodList(
@@ -2426,13 +2520,27 @@ public final class DataProcessorTest {
         appUsageEvents.add(
                 buildAppUsageEvent(AppUsageEventType.ACTIVITY_RESUMED, /* timestamp= */ 700000));
         appUsageEvents.add(
-                buildAppUsageEvent(AppUsageEventType.DEVICE_SHUTDOWN, /* timestamp= */ 800000));
+                buildAppUsageEvent(AppUsageEventType.DEVICE_SHUTDOWN, /* timestamp= */ 799999));
+        // There exists start event when device screen off event happens. Screen off is later than
+        // default complete time.
+        appUsageEvents.add(
+                buildAppUsageEvent(AppUsageEventType.ACTIVITY_RESUMED, /* timestamp= */ 800000));
+        appUsageEvents.add(
+                buildAppUsageEvent(
+                        AppUsageEventType.SCREEN_NON_INTERACTIVE, /* timestamp= */ 899999));
         // There exists start event when device shutdown event happens. Shutdown is earlier than
         // default complete time.
         appUsageEvents.add(
                 buildAppUsageEvent(AppUsageEventType.ACTIVITY_RESUMED, /* timestamp= */ 900000));
         appUsageEvents.add(
                 buildAppUsageEvent(AppUsageEventType.DEVICE_SHUTDOWN, /* timestamp= */ 910000));
+        // There exists start event when device screen off event happens. Screen off is earlier than
+        // default complete time.
+        appUsageEvents.add(
+                buildAppUsageEvent(AppUsageEventType.ACTIVITY_RESUMED, /* timestamp= */ 920000));
+        appUsageEvents.add(
+                buildAppUsageEvent(
+                        AppUsageEventType.SCREEN_NON_INTERACTIVE, /* timestamp= */ 930000));
         // There exists start event when the period ends.
         appUsageEvents.add(
                 buildAppUsageEvent(AppUsageEventType.ACTIVITY_RESUMED, /* timestamp= */ 1000000));
@@ -2440,14 +2548,16 @@ public final class DataProcessorTest {
         final List<AppUsagePeriod> appUsagePeriodList =
                 DataProcessor.buildAppUsagePeriodListPerInstance(appUsageEvents, 100000, 1100000);
 
-        assertThat(appUsagePeriodList).hasSize(7);
+        assertThat(appUsagePeriodList).hasSize(9);
         assertAppUsagePeriod(appUsagePeriodList.get(0), 100000, 120000);
         assertAppUsagePeriod(appUsagePeriodList.get(1), 150000, 200000);
         assertAppUsagePeriod(appUsagePeriodList.get(2), 300000, 500000);
         assertAppUsagePeriod(appUsagePeriodList.get(3), 570000, 600000);
         assertAppUsagePeriod(appUsagePeriodList.get(4), 700000, 730000);
-        assertAppUsagePeriod(appUsagePeriodList.get(5), 900000, 910000);
-        assertAppUsagePeriod(appUsagePeriodList.get(6), 1000000, 1030000);
+        assertAppUsagePeriod(appUsagePeriodList.get(5), 800000, 830000);
+        assertAppUsagePeriod(appUsagePeriodList.get(6), 900000, 910000);
+        assertAppUsagePeriod(appUsagePeriodList.get(7), 920000, 930000);
+        assertAppUsagePeriod(appUsagePeriodList.get(8), 1000000, 1030000);
     }
 
     @Test

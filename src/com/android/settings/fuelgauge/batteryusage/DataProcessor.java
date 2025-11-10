@@ -328,6 +328,7 @@ public final class DataProcessor {
                     case Event.ACTIVITY_RESUMED:
                     case Event.ACTIVITY_STOPPED:
                     case Event.DEVICE_SHUTDOWN:
+                    case Event.SCREEN_NON_INTERACTIVE:
                         final String taskRootClassName = event.getTaskRootClassName();
                         if (!TextUtils.isEmpty(taskRootClassName)
                                 && ignoreScreenOnTimeTaskRootSet.contains(taskRootClassName)) {
@@ -724,7 +725,8 @@ public final class DataProcessor {
                     usageEventsByInstanceId.put(instanceId, new ArrayList<>());
                 }
                 usageEventsByInstanceId.get(instanceId).add(event);
-            } else if (eventType == AppUsageEventType.DEVICE_SHUTDOWN) {
+            } else if (eventType == AppUsageEventType.DEVICE_SHUTDOWN
+                    || eventType == AppUsageEventType.SCREEN_NON_INTERACTIVE) {
                 // Track device-wide events in their own list as they affect any app.
                 deviceEvents.add(event);
             }
@@ -831,7 +833,8 @@ public final class DataProcessor {
                 validateAndAddToPeriodList(
                         usagePeriodList, pendingUsagePeriod.build(), startTime, endTime);
                 pendingUsagePeriod.clear();
-            } else if (event.getType() == AppUsageEventType.DEVICE_SHUTDOWN) {
+            } else if (event.getType() == AppUsageEventType.DEVICE_SHUTDOWN
+                    || event.getType() == AppUsageEventType.SCREEN_NON_INTERACTIVE) {
                 // The end event might be lost when device is shutdown. Use the estimated end
                 // time for the period.
                 if (pendingUsagePeriod.hasStartTime()) {
@@ -1114,7 +1117,8 @@ public final class DataProcessor {
                             .setEventTypes(
                                     Event.ACTIVITY_RESUMED,
                                     Event.ACTIVITY_STOPPED,
-                                    Event.DEVICE_SHUTDOWN
+                                    Event.DEVICE_SHUTDOWN,
+                                    Event.SCREEN_NON_INTERACTIVE
                             )
                             .build();
             events = usageStatsManager.queryEventsWithFilter(usageEventsQuery, callingPackage);
