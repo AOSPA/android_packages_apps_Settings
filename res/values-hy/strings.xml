@@ -976,8 +976,7 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"Չհաջողվեց միացնել «<xliff:g id="DEVICE_NAME">%1$s</xliff:g>» սարքը"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Սարքի տվյալներ"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Ստեղնաշարի կարգավորումներ"</string>
-    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
-    <skip />
+    <string name="bluetooth_device_game_controller_settings_preference_title" msgid="291778307796320923">"Խաղային բարձակի կարգավորումներ"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Այլ կարգավորումներ"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Ներկառուցված ծրագրի թարմացումներ, տվյալներ և այլն"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Խորհուրդներ և օգնություն"</string>
@@ -1232,6 +1231,8 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*պարտադիր է"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Սա ընդհանուր օգտագործման ցանց է։ Փոփոխություններ անելու համար մուտք գործեք հաշիվ։"</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Փոփոխություններ անելու համար կապվեք ցանցի սեփականատիրոջ կամ սարքի ադմինիստրատորի հետ։"</string>
+    <!-- no translation found for wifi_shared_network_icon_message (8937015463026388043) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"Այս ցանցը չունի կապ համացանցին: Մնա՞լ միացված:"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Որոշ հավելվածներ և ծառայություններ կարող են չաշխատել սահմանափակ կապի պատճառով։ Շարունակե՞լ։"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Չհարցնել այլևս այս ցանցի համար"</string>
@@ -1755,6 +1756,8 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC դաշտը պետք է 3 նիշ ունենա:"</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC դաշտը պետք է լինի առնվազն 2 կամ 3 թվանշան:"</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Օպերատորը չի թույլատրում ավելացնել %s տեսակի APN-ներ:"</string>
+    <!-- no translation found for error_disallow_adding_apn (4053023049932971602) -->
+    <skip />
     <string name="error_mmsc_valid" msgid="8380951905485647380">"MMSC-ի դաշտը պետք է վավեր լինի։"</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Կանխադրված APN կարգավորումների վերականգնում:"</string>
     <string name="menu_restore" msgid="4310539620115151551">"Վերականգնել կանխադրվածները"</string>
@@ -2240,36 +2243,21 @@
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Էկրանային ստեղնաշար աշխատանքի համար"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Կանխադրված"</string>
     <string name="game_controller_settings_title" msgid="4322385924018377909">"Խաղային բարձակներ"</string>
-    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
-    <skip />
-    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
-    <skip />
-    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
-    <skip />
+    <string name="game_controller_key_remapping" msgid="8150376475022555386">"Ստեղներ"</string>
+    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"Առանցքներ"</string>
+    <string name="game_controller_button_a" msgid="2138420373137111774">"A կոճակ"</string>
+    <string name="game_controller_button_b" msgid="2093089857164437480">"B կոճակ"</string>
+    <string name="game_controller_button_x" msgid="3428801081204194655">"X կոճակ"</string>
+    <string name="game_controller_button_y" msgid="4596061542299533516">"Y կոճակ"</string>
+    <string name="game_controller_button_l1" msgid="4428713182602902434">"L1 կոճակ"</string>
+    <string name="game_controller_button_r1" msgid="6271978600831912659">"R1 կոճակ"</string>
+    <string name="game_controller_button_l2" msgid="4168716287264803566">"L2 կոճակ"</string>
+    <string name="game_controller_button_r2" msgid="4361909018228151006">"R2 կոճակ"</string>
+    <string name="game_controller_button_thumbl" msgid="609311480262927654">"Ձախ սթիքի սեղմում"</string>
+    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"Աջ սթիքի սեղմում"</string>
+    <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
+    <string name="game_controller_stick_left" msgid="1591700901162153956">"Ձախ սթիք"</string>
+    <string name="game_controller_stick_right" msgid="1418791636252375110">"Աջ սթիք"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Հպահարթակ"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Հպահարթակ և մկնիկ"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Մկնիկ"</string>
@@ -3116,7 +3104,8 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Համակարգեր"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"<xliff:g id="PERCENTAGE">%1$s</xliff:g>-ից քիչ"</string>
-    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Առաքումից առաջ որակի ստուգումների պատճառով լիցքավորման շրջափուլերի թիվը կարող է զրո չլինել առաջին օգտագործման ժամանակ"</string>
+    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Գործընթացի վիճակագրություն"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Ընթացիկ գործընթացների տեխնիկական վիճակագրություն"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Օգտագործվող հիշողություն"</string>
@@ -3190,8 +3179,7 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Ավտոմատ կերպով ընտրում է լավագույն կապը՝ մարտկոցի աշխատաժամանակը երկարացնելու համար"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Բջջային ցանցի անվտանգություն"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Ցանցի տեսակը, գաղտնագրում, ծանուցումների կառավարում"</string>
-    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="4190908521080878539">"Այս կարգավորումները օգնում են պաշտպանել ձեր զանգերը, հաղորդագրությունները և տվյալները հնացած կամ չգաղտնագրված ցանցերից, որոնք կարող են հանգեցնել ձեր տվյալների գողության կամ հետագծման։"</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Բջջային ցանցի անվտանգություն"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Ծանուցումներ"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Ցանցային ծանուցումներ"</string>
@@ -4930,9 +4918,13 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Էկրանի եզրերի զգայունությունը"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Ժեստերով նավիգացիա"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"Ժեստերով նավիգացիայի կարգավորումներ"</string>
+    <!-- no translation found for gesture_settings_extra_button_hint (5061056396437804198) -->
+    <skip />
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Փորձեք դեմո տարբերակը"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Կոճակների միջոցով նավիգացիա"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Կոճակների միջոցով նավիգացիայի կարգավորումներ"</string>
+    <!-- no translation found for button_navigation_settings_extra_button_hint (6471481336598365780) -->
+    <skip />
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Կոճակների դասավորություն"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Կոճակների դասավորություն, կոճակների տեղափոխում, ձախ ձեռքի ռեժիմ, աջ ձեռքի ռեժիմ"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Հետ"</string>
@@ -6010,6 +6002,10 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>։ Կարգավորեք սարքի տվյալները"</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Ծնողական վերահսկողություն"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Հիմնական կանոններ և սարքի օգտագործման ժամանակի սահմանափակում"</string>
+    <!-- no translation found for supervision_intro_title (2686370837216266390) -->
+    <skip />
+    <!-- no translation found for supervision_intro_description (101353421249918460) -->
+    <skip />
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Նշել PIN կոդ"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Կարգավորեք PIN կոդ ծնողական վերահսկողության համար"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"վերահսկողություն, ծնողական վերահսկողություն, ծնողներ, ծնողական վերահսկողության pin կոդ, pin"</string>
@@ -6017,12 +6013,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Կառավարել ծնողական վերահսկողության PIN կոդը"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Ծնողական վերահսկողության PIN կոդ"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Ծնողի PIN կոդ, ծնողական վերահսկողության PIN կոդ"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Ավելացնել հաշվի վերականգնման հասցե"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Հաստատել վերականգնման հասցեն"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Ավելացնել հաշվի վերականգնման հասցե"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Հաստատել վերականգնման հասցեն"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Փոխել PIN կոդը"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Մոռացել եմ PIN կոդը"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Մոռացե՞լ եք PIN կոդը"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Թարմացնել հաշվի վերականգնման հասցեն"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Թարմացնել հաշվի վերականգնման հասցեն"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Վերականգնման հասցեն ավելացվեց"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Վերականգնման հասցեն հաստատվեց"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Վերականգնման հասցեն թարմացվեց"</string>
@@ -6034,12 +6030,12 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Ավելացրեք մուտքի վերականգնման տվյալներ"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Եթե մոռացել եք ձեր PIN կոդը, կարող եք ձեր հաշվի միջոցով վերականգնել այն"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Ջնջել PIN կոդը"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Ավելացրեք հաշվի վերականգնման հասցե"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Հաստատեք ձեր էլ․ հասցեն"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Ավելացրեք հաշվի վերականգնման հասցե"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Հաստատեք ձեր էլ․ հասցեն"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"App Store-ի զտիչներ"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Զտել հավելվածները բովանդակության տարիքային սահմանափակման հիման վրա"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Յուրաքանչյուր հավելված կարող է արգելափակել որոշակի տեսակի բովանդակություն։ Հավելվածների խանութները, որոնք նշված չեն ցանկում, անհրաժեշտ է առանձին կառավարել։"</string>
-    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Կայքի բովանդակության զտիչներ"</string>
+    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Վեբ բովանդակության զտիչներ"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Կայքերի զտիչներ, արգելափակել կայքեր, դիտարկիչի զտիչներ, արգելափակել մեծահասակների համար նախատեսված կայքերը, զտել կայքերը, արգելափակել որոնման արդյունքները, զտել մեծահասակների համար նախատեսված որոնման արդյունքները, բովանդակության սահմանափակումներ"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Օգնեք ձեր հեռախոսում զտել մեծահասակների համար նախատեսված բովանդակությունը որոշ հավելվածներում և դիտարկիչներում։ Մեծահասակների համար նախատեսված բովանդակությունը նախկինի պես կարող է ցուցադրվել այլ հավելվածներում, սարքերում և դիտարկիչներում։"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Վեբ կայքեր"</string>
@@ -6058,7 +6054,19 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Հնարավոր չէ ջնջել PIN կոդը"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Չհաջողվեց ջնջել PIN կոդը"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"PIN կոդը ջնջելիս սխալ առաջացավ։"</string>
+    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
+    <skip />
+    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
+    <skip />
+    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
+    <skip />
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Ջնջել և անջատել"</string>
+    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
+    <skip />
+    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
+    <skip />
+    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> Անիմացիա"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Հնարավոր չէ միացնել ծնողական վերահսկողությունը"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Հնարավոր չէ օգտագործել կառավարման տարրերը"</string>
@@ -6120,4 +6128,10 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Միացված է"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Հասանելի է"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Հասանելի չէ"</string>
+    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
+    <skip />
+    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
+    <skip />
+    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
+    <skip />
 </resources>

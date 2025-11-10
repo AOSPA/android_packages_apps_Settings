@@ -1207,15 +1207,12 @@
     <string name="retry" msgid="7542103800274026915">"Repetir"</string>
     <string name="shared_message" msgid="2104244057926025072">"partilhado"</string>
     <string name="private_message" msgid="5897966950396765392">"privado"</string>
-    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
-    <skip />
+    <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"Mudar"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Cancelar"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"Partilhar rede"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Outros utilizadores neste dispositivo podem aceder a esta rede"</string>
-    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
-    <skip />
-    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
-    <skip />
+    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"Mudar para a rede <xliff:g id="SHARED">%1$s</xliff:g>?"</string>
+    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"Já existe uma rede <xliff:g id="SHARED_0">%1$s</xliff:g> com o nome \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\". Se mudar para a rede <xliff:g id="SHARED_1">%1$s</xliff:g>, sai da sua rede <xliff:g id="PRIVATE">%3$s</xliff:g> e pode ficar temporariamente sem Internet."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(sem alteração)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Permitir que os utilizadores editem a rede"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Outros utilizadores podem fazer alterações a esta rede"</string>
@@ -1234,6 +1231,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"* obrigatório"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Esta é uma rede partilhada. Tem de iniciar sessão para fazer alterações."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Contacte o proprietário da rede ou o administrador do dispositivo para fazer alterações."</string>
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Outros utilizadores neste dispositivo podem aceder a esta rede."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Esta rede não tem acesso à Internet. Quer manter a ligação?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Algumas aplicações e serviços podem não funcionar devido a conetividade limitada. Usar mesmo assim?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Não perguntar novamente para esta rede"</string>
@@ -1253,8 +1251,7 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Não foi possível guardar a rede"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Cancelar"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Esqueceu-se da rede?"</string>
-    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
-    <skip />
+    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"A rede <xliff:g id="NETWORK_NAME">%1$s</xliff:g> vai ser removida para todos os utilizadores neste dispositivo"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 rede}other{# redes}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 subscrição}other{# subscrições}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 rede e subscrição}other{# redes e subscrições}}"</string>
@@ -1758,6 +1755,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"O campo MCC tem de ter 3 dígitos."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"O campo MNC tem de ter 2 ou 3 dígitos."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"O operador não permite a adição de APNs do tipo %s."</string>
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"A operadora não permite a adição deste APN."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"O campo MMSC tem de ser válido."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"A restaurar predefinições de APN"</string>
     <string name="menu_restore" msgid="4310539620115151551">"Repor predefinição"</string>
@@ -3104,7 +3102,8 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Ver por sistemas"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"menos de <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Devido a inspeções de qualidade antes do envio, a contagem de ciclos pode não ser zero na primeira utilização"</string>
+    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estatísticas do Processo"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estatísticas de peritos acerca dos processos em execução"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Utilização da memória"</string>
@@ -4597,18 +4596,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Permitir acesso para gerir todos os ficheiros"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permita que esta app leia, modifique e elimine todos os ficheiros neste dispositivo ou em qualquer volume de armazenamento ligado. Se a autorização for concedida, a app poderá aceder aos ficheiros sem o seu conhecimento explícito."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pode aceder a todos os ficheiros"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatização do ecrã"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Permitir que esta app automatize totalmente outras apps"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Esta app vai poder controlar as suas apps. Não é possível usar as apps que estão a ser controladas enquanto a automatização do ecrã está em curso, mas pode sempre pará-la."</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Perguntar sempre"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Sempre permitido"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Não permitir"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificações em ecrã inteiro"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permitir notificações desta app em ecrã inteiro"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permita que esta app mostre notificações que ocupam o ecrã inteiro quando o dispositivo está bloqueado. As apps podem usá-las para destacar alarmes, chamadas recebidas ou outras notificações urgentes."</string>
@@ -4917,9 +4910,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilidade para voltar atrás"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Navegação por gestos"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"Definições de navegação por gestos"</string>
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"abrir definições de navegação por gestos"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Experimente uma demonstração"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navegação com botões"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Definições de navegação com botões"</string>
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"abrir definições de navegação com botões"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Ordem dos botões"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Ordem dos botões, mover botões, modo para canhotos, modo para destros"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Anterior"</string>
@@ -5997,6 +5992,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Configure o detalhe do dispositivo."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Controlos parentais"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Regras digitais fundamentais e limites de tempo ao ecrã"</string>
+    <string name="supervision_intro_title" msgid="2686370837216266390">"Crie um PIN de controlos parentais para este dispositivo"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"Vai usar este PIN para gerir as definições dos controlos parentais e as apps neste dispositivo.\n\nPode editar ou eliminar o PIN em Definições do Android &gt; Controlos parentais."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Configurar PIN"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Configure um PIN de controlos parentais"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"supervisão, controlos parentais, pais, PIN de supervisão, PIN"</string>
@@ -6004,12 +6001,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Faça a gestão do PIN dos controlos parentais"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN de controlos parentais"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN parental, PIN de controlos parentais"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Adicione o email de recuperação"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Valide o email de recuperação"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Adicione o email de recuperação"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Valide o email de recuperação"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Alterar PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Esqueci-me do PIN"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Esqueceu-se do PIN?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Atualize o email de recuperação"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Atualize o email de recuperação"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Email de recuperação adicionado"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Email de recuperação validado"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Email de recuperação atualizado"</string>
@@ -6021,12 +6018,12 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Adicione informações de recuperação"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Se se esquecer do PIN, pode usar a sua conta para o repor"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Eliminar PIN"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Adicionar email de recuperação"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Valide o seu email"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Adicionar email de recuperação"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Valide o seu email"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtros da loja de apps"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtre apps com base na maturidade do respetivo conteúdo"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Cada app pode bloquear diferentes tipos de conteúdo. As lojas de apps não apresentadas têm de ser geridas separadamente."</string>
-    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtros de conteúdo do site"</string>
+    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtros de conteúdo da Web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtros de Websites, bloquear sites, filtros do navegador, bloquear sites explícitos, filtrar sites, bloquear resultados da pesquisa, filtrar resultados da pesquisa explícitos, restrições de conteúdo"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Ajude a filtrar conteúdo explícito em algumas apps e navegadores neste telemóvel. O conteúdo explícito pode continuar a ser apresentado noutras apps, dispositivos ou navegadores."</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Websites"</string>
@@ -6034,8 +6031,7 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Resultados da pesquisa"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtrar resultados da pesquisa explícitos"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Em # app}other{Em # apps}}"</string>
-    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
-    <skip />
+    <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"Mais <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Quando estas definições estão desativadas, podem continuar a aplicar-se outras definições da conta."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Introduza o PIN dos controlos parentais"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Defina um PIN de controlos parentais"</string>
@@ -6046,7 +6042,19 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Não é possível eliminar o PIN"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Não é possível eliminar o PIN"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Ocorreu um erro ao tentar eliminar o PIN."</string>
+    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
+    <skip />
+    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
+    <skip />
+    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
+    <skip />
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Eliminar e desativar"</string>
+    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
+    <skip />
+    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
+    <skip />
+    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animação de <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Não é possível ativar os controlos"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Não é possível usar os controlos"</string>
@@ -6054,10 +6062,8 @@
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Tente mais tarde"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Voltar"</string>
     <string name="supervision_available_apps_title" msgid="886352413031517863">"Apps e serviços disponíveis"</string>
-    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
-    <skip />
-    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
-    <skip />
+    <string name="supervision_approval_method_chooser_title" msgid="7759309575598126099">"Escolha um método de validação"</string>
+    <string name="supervision_approval_method_chooser_description" msgid="7574494762555726167">"Tem de validar que é um dos pais"</string>
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"A Verificação de identidade funciona com mais apps"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"A Verificação de identidade impede o acesso indesejado às suas apps. Já disponível com qualquer app que use o Desbloqueio facial ou por impressão digital."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Ver detalhes"</string>
@@ -6110,4 +6116,10 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Ativado"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Disponível"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Não disponível"</string>
+    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
+    <skip />
+    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
+    <skip />
+    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
+    <skip />
 </resources>
