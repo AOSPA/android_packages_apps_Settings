@@ -44,6 +44,7 @@ import com.android.settings.R
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_ACTION
 import com.android.settings.safetycenter.SafetyCenterTestUtils.USER_PERSONAL
+import com.android.settings.safetycenter.SafetyCenterTestUtils.USER_WORK_PROFILE
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createEntry
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssue
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssueAction
@@ -105,6 +106,10 @@ class SafetyCenterFragmentTest {
         return mApplication.getString(DEFAULT_DEVICE_UNLOCK_SUMMARY_RES)
     }
 
+    private fun expectedDefaultNetworkSecuritySummary(): String {
+        return mApplication.getString(DEFAULT_NETWORK_SECURITY_SUMMARY_RES)
+    }
+
     private fun expectedDefaultPrivacyControlsSummary(): String {
         return mApplication.getString(DEFAULT_PRIVACY_CONTROLS_SUMMARY_RES)
     }
@@ -161,16 +166,59 @@ class SafetyCenterFragmentTest {
 
     @Test
     @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
-    fun deviceUnlockPref_withOkEntryAndNoIssues_usesDefaultSummaryAndInfoIcon() {
-        val entry =
+    fun deviceUnlockPref_withOkEntriesAndNoIssues_usesSourceListSummaryAndInfoIcon() {
+        val entry1 =
             createEntry(
-                id = "TestEntry",
-                title = "Entry with Severity Level OK",
+                id = "TestEntry1",
+                title = "Entry1",
                 sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
                 severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
             )
+        val entry2 =
+            createEntry(
+                id = "TestEntry2",
+                title = "Entry2",
+                sourceId = ANDROID_FACE_UNLOCK_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+            )
+        val entry3 =
+            createEntry(
+                id = "TestEntry3",
+                title = "Entry3",
+                sourceId = ANDROID_FACE_UNLOCK_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+                userHandle = USER_WORK_PROFILE,
+            )
 
-        runTest(createScData(entries = listOf(entry))) { fragment ->
+        runTest(createScData(entries = listOf(entry1, entry2, entry3))) { fragment ->
+            val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.summary.toString()).isEqualTo("Entry1, Entry2")
+            assertIconResource(preference, R.drawable.ic_safety_info)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun deviceUnlockPref_withOkWorkEntriesAndNoIssues_usesSourceListSummaryAndInfoIcon() {
+        val entry1 =
+            createEntry(
+                id = "TestEntry1",
+                title = "Entry1",
+                sourceId = ANDROID_FINGERPRINT_UNLOCK_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+                userHandle = USER_WORK_PROFILE,
+            )
+        val entry2 =
+            createEntry(
+                id = "TestEntry2",
+                title = "Entry2",
+                sourceId = ANDROID_FACE_UNLOCK_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+                userHandle = USER_WORK_PROFILE,
+            )
+
+        runTest(createScData(entries = listOf(entry1, entry2))) { fragment ->
             val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
             assertThat(preference?.isVisible).isTrue()
             assertThat(preference?.summary.toString())
@@ -249,11 +297,11 @@ class SafetyCenterFragmentTest {
 
     @Test
     @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
-    fun deviceUnlockPref_withUnspecifiedEntryAndNoIconType_usesDefaultSummaryAndEmptyIcon() {
+    fun deviceUnlockPref_withUnspecifiedEntryAndNoIconType_usesSourceListSummaryAndEmptyIcon() {
         val entry =
             createEntry(
                 id = "TestEntry",
-                title = "Entry with Severity Level Unspecified",
+                title = "Entry",
                 sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
                 severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNSPECIFIED,
                 iconType = SafetyCenterEntry.SEVERITY_UNSPECIFIED_ICON_TYPE_NO_ICON,
@@ -262,8 +310,7 @@ class SafetyCenterFragmentTest {
         runTest(createScData(entries = listOf(entry))) { fragment ->
             val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
             assertThat(preference?.isVisible).isTrue()
-            assertThat(preference?.summary.toString())
-                .isEqualTo(expectedDefaultDeviceUnlockSummary())
+            assertThat(preference?.summary.toString()).isEqualTo("Entry")
             assertIconResource(preference, R.drawable.ic_safety_empty)
         }
     }
@@ -643,16 +690,57 @@ class SafetyCenterFragmentTest {
         }
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun networkSecurityPref_withOkEntriesAndNoIssues_usesDefaultSummaryAndInfoIcon() {
+        val entry1 =
+            createEntry(
+                id = "TestEntry1",
+                title = "Entry1",
+                sourceId = ANDROID_NETWORK_SECURITY_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+            )
+        val entry2 =
+            createEntry(
+                id = "TestEntry2",
+                title = "Entry2",
+                sourceId = ANDROID_NETWORK_SECURITY_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+            )
+        val entry3 =
+            createEntry(
+                id = "TestEntry3",
+                title = "Entry3",
+                sourceId = ANDROID_NETWORK_SECURITY_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+                userHandle = USER_WORK_PROFILE,
+            )
+
+        runTest(createScData(entries = listOf(entry1, entry2, entry3))) { fragment ->
+            val preference = fragment.findPreference<Preference>(NETWORK_SECURITY_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.summary.toString())
+                .isEqualTo(expectedDefaultNetworkSecuritySummary())
+            assertIconResource(preference, R.drawable.ic_safety_info)
+        }
+    }
+
     companion object {
         private const val DEVICE_UNLOCK_KEY = "device_unlock_subpage"
+        private const val NETWORK_SECURITY_KEY = "cellular_network_security_subpage"
         private const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
         private const val ANDROID_LOCK_SCREEN_SOURCE_ID = "AndroidLockScreen"
+        private const val ANDROID_FACE_UNLOCK_SOURCE_ID = "AndroidFaceUnlock"
+        private const val ANDROID_FINGERPRINT_UNLOCK_SOURCE_ID = "AndroidFingerprintUnlock"
+        private const val ANDROID_NETWORK_SECURITY_SOURCE_ID = "AndroidCellularNetworkSecurity"
         private const val ANDROID_HEALTH_CONNECT_SOURCE_ID = "AndroidHealthConnect"
         private const val ANDROID_WORK_POLICY_INFO_SOURCE_ID = "AndroidWorkPolicyInfo"
         private const val ANDROID_A11Y_SOURCES_ID = "AndroidAccessibility"
         private const val SAFETY_ISSUES_BANNER_KEY = "issues_banner_group"
         private const val ANDROID_WORK_POLICY_INFO_PREFERENCE_KEY = "work_policy_info"
         private val DEFAULT_DEVICE_UNLOCK_SUMMARY_RES = R.string.safety_center_device_unlock_summary
+        private val DEFAULT_NETWORK_SECURITY_SUMMARY_RES =
+            R.string.safety_center_cellular_network_security_summary
         private val DEFAULT_PRIVACY_CONTROLS_SUMMARY_RES = R.string.privacy_sources_summary
     }
 }

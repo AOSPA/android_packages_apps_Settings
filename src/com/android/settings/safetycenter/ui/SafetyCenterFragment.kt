@@ -183,13 +183,11 @@ class SafetyCenterFragment : DashboardFragment() {
         @StringRes summaryResId: Int,
         lifecycleOwner: LifecycleOwner,
     ) {
-        controller.setRelatedSafetySources(
+        controller.relatedSafetySources =
             SafetyCenterSubpageRegistry.getXmlSafetySourceIds(requireContext(), subpageKey)
-        )
-        controller.setRelatedIssueOnlySafetySources(
+        controller.relatedIssueOnlySafetySources =
             SafetyCenterSubpageRegistry.getIssueOnlySafetySourceIds(subpageKey)
-        )
-        controller.setDefaultSummaryResId(summaryResId)
+        controller.defaultSummaryResId = summaryResId
         controller.setViewModelAndLifecycle(viewModel, lifecycleOwner)
     }
 

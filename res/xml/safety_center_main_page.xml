@@ -36,7 +36,7 @@
             android:key="device_unlock_subpage"
             android:title="@string/device_unlock_subpage_title"
             android:fragment="com.android.settings.safetycenter.ui.DeviceUnlockSubpageFragment"
-            settings:controller="com.android.settings.safetycenter.ui.SubpagePreferenceController"/>
+            settings:controller="com.android.settings.safetycenter.ui.SourceListSubpagePreferenceController"/>
         <Preference
             android:key="account_security_subpage"
             android:title="@string/account_security_subpage_title"
@@ -47,7 +47,7 @@
             android:key="device_finders_subpage"
             android:title="@string/device_finders_subpage_title"
             android:fragment="com.android.settings.safetycenter.ui.DeviceFindersSubpageFragment"
-            settings:controller="com.android.settings.safetycenter.ui.SubpagePreferenceController"/>
+            settings:controller="com.android.settings.safetycenter.ui.SourceListSubpagePreferenceController"/>
 
         <Preference
             android:key="system_and_updates_subpage"
