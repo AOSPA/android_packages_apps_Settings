@@ -48,6 +48,18 @@
         settings:safetySource="@string/config_safety_center_app_protection_service_source_id"
         settings:profile="personal_profile" />
 
+    <com.android.settingslib.safetycenter.SafetySourcePreference
+        android:key="app_protection_service_work"
+        settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:safetySource="@string/config_safety_center_app_protection_service_source_id"
+        settings:profile="work_profile" />
+
+    <com.android.settingslib.safetycenter.SafetySourcePreference
+        android:key="app_protection_service_private"
+        settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:safetySource="@string/config_safety_center_app_protection_service_source_id"
+        settings:profile="private_profile" />
+
     <com.android.settingslib.widget.FooterPreference
         android:key="app_security_footer"
         android:title="@string/safety_center_app_security_footer"
