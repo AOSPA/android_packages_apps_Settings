@@ -71,20 +71,19 @@ class PrivacyControlsFragment : DashboardFragment() {
     }
 
     private fun setupSafetyIssuesPreferenceController(owner: LifecycleOwner) {
-        Log.d(TAG, "Setting up the safety issues preference controller")
-        safetyIssuesPreferenceController?.setViewModelAndLifecycle(viewModel, owner)
-        safetyIssuesPreferenceController?.setFragmentManager(childFragmentManager)
-        safetyIssuesPreferenceController?.setActivityTaskId(requireActivity().taskId)
+        Log.d(TAG, "Setting Up the safety issues preference controller")
+        safetyIssuesPreferenceController?.apply {
+            setViewModelAndLifecycle(viewModel, owner)
+            this.fragmentManager = childFragmentManager
+            this.activityTaskId = requireActivity().taskId
 
-        val safetySourceIds =
-            SafetyCenterSubpageRegistry.getAllSafetySourceIds(
-                requireContext(),
-                SafetyCenterSubpageRegistry.SubpageKey.PRIVACY_CONTROLS,
-            )
-        safetyIssuesPreferenceController?.setSubpageSafetySourcesAndIllustration(
-            safetySourceIds,
-            illustrationPref = null,
-        )
+            val safetySourceIds =
+                SafetyCenterSubpageRegistry.getAllSafetySourceIds(
+                    requireContext(),
+                    SafetyCenterSubpageRegistry.SubpageKey.PRIVACY_CONTROLS,
+                )
+            setSubpageSafetySourcesAndIllustration(safetySourceIds, illustrationPref = null)
+        }
     }
 
     override fun getLogTag(): String = TAG

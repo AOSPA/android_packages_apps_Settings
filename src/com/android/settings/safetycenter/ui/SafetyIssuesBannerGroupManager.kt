@@ -49,20 +49,31 @@ class SafetyIssuesBannerGroupManager(
      * Updates the [bannerGroup] with the latest lists of active and dismissed [SafetyCenterIssue]s.
      * Banners are created, updated, or removed to reflect the current state.
      *
+     * This method also handles the potential reordering of active issues if a [focusedIssueKey] is
+     * provided, ensuring the focused issue is prioritized in the display. The number of visible
+     * preferences in the collapsed state of the [bannerGroup] is adjusted accordingly.
+     *
      * @param newActiveIssues A list of currently active [SafetyCenterIssue]s.
      * @param newDismissedIssues A list of currently dismissed [SafetyCenterIssue]s.
      * @param resolvedIssues A map where keys are issue IDs and values are action IDs that have been
      *   successfully resolved.
+     * @param focusedIssueKey An optional key identifying a specific issue to bring to the user's
+     *   attention. If provided and found, this issue will be reordered to the top or second
+     *   position in the active issues list.
      */
     fun updateBannerGroup(
         newActiveIssues: List<SafetyCenterIssue>,
         newDismissedIssues: List<SafetyCenterIssue>,
         resolvedIssues: Map<String, String>,
+        focusedIssueKey: FocusedIssueKey?,
     ) {
-        val newActiveIssueKeys = newActiveIssues.map { getActiveBannerKey(it.id) }.toSet()
+        val reorderResult = calculateReorderedIssues(newActiveIssues, focusedIssueKey)
+        val reorderedNewActiveIssues = reorderResult.issues
+        bannerGroup.visiblePreferencesWhenCollapsedCount = reorderResult.visibleCountWhenCollapsed
+        val newActiveIssueKeys = reorderedNewActiveIssues.map { getActiveBannerKey(it.id) }.toSet()
         removeStaleBanners(currentActiveIssueBanners, newActiveIssueKeys)
         createOrUpdateBanners(
-            newActiveIssues,
+            reorderedNewActiveIssues,
             currentActiveIssueBanners,
             isDismissed = false,
             resolvedIssues,
@@ -84,6 +95,84 @@ class SafetyIssuesBannerGroupManager(
         } else {
             bannerGroup.removeSubsection()
         }
+    }
+
+    /**
+     * Calculates the reordered list of active [SafetyCenterIssue]s to prioritize the issue matching
+     * the [focusedIssueKey] and determines the number of items to show when collapsed.
+     *
+     * The focused issue is moved to the top of the list (index 0) if it has the highest severity or
+     * if the list is empty. Otherwise, it's placed at index 1.
+     *
+     * @param issues The original list of active [SafetyCenterIssue]s, sorted by severity.
+     * @param focusedIssueKey The key identifying the issue to be prioritized.
+     * @return A [ReorderedIssuesResult] containing the new list and the count of visible items when
+     *   collapsed.
+     */
+    private fun calculateReorderedIssues(
+        issues: List<SafetyCenterIssue>,
+        focusedIssueKey: FocusedIssueKey?,
+    ): ReorderedIssuesResult {
+        if (focusedIssueKey == null || issues.isEmpty() || issues.size == 1) {
+            return ReorderedIssuesResult(issues, VISIBLE_COUNT_DEFAULT)
+        }
+
+        val mutableIssueList = issues.toMutableList()
+        val focusedIssue = findAndRemoveFocusedIssue(mutableIssueList, focusedIssueKey)
+
+        if (focusedIssue == null) {
+            Log.w(TAG, "Focused issue not found: $focusedIssueKey")
+            return ReorderedIssuesResult(issues, VISIBLE_COUNT_DEFAULT)
+        }
+
+        Log.d(TAG, "Found focused issue: $focusedIssueKey")
+        return if (focusedIssue.severityLevel >= mutableIssueList[0].severityLevel) {
+            mutableIssueList.add(0, focusedIssue)
+            Log.d(TAG, "Focused issue is of highest severity, placed at top of the list.")
+            ReorderedIssuesResult(mutableIssueList, VISIBLE_COUNT_DEFAULT)
+        } else {
+            mutableIssueList.add(1, focusedIssue)
+            Log.d(
+                TAG,
+                "Focused issue is not of highest severity, placed at second position in the list.",
+            )
+            ReorderedIssuesResult(mutableIssueList, VISIBLE_COUNT_FOCUSED_SECOND)
+        }
+    }
+
+    /**
+     * Finds the focused issue in the list, removes it, and returns it.
+     *
+     * @param issues The mutable list of issues to search within.
+     * @param focusedIssueKey The key of the issue to find.
+     * @return The found and removed [SafetyCenterIssue], or null if not found.
+     */
+    private fun findAndRemoveFocusedIssue(
+        issues: MutableList<SafetyCenterIssue>,
+        focusedIssueKey: FocusedIssueKey,
+    ): SafetyCenterIssue? {
+        val index = issues.indexOfFirst { matchesFocusedIssue(it, focusedIssueKey) }
+        return if (index != -1) {
+            issues.removeAt(index)
+        } else {
+            null
+        }
+    }
+
+    /**
+     * Checks if the given [SafetyCenterIssue] matches the provided [FocusedIssueKey].
+     *
+     * @param issue The [SafetyCenterIssue] to check.
+     * @param focusedIssueKey The [FocusedIssueKey] to match against.
+     * @return True if the issue matches the key, false otherwise.
+     */
+    private fun matchesFocusedIssue(
+        issue: SafetyCenterIssue,
+        focusedIssueKey: FocusedIssueKey,
+    ): Boolean {
+        return issue.safetySourceIssueId == focusedIssueKey.sourceIssueId &&
+            issue.safetySourceIds.contains(focusedIssueKey.sourceId) &&
+            issue.user == focusedIssueKey.userHandle
     }
 
     /**
@@ -143,6 +232,20 @@ class SafetyIssuesBannerGroupManager(
     }
 
     /**
+     * Holds the result of the issue reordering logic, including the reordered list and the number
+     * of issues to display when the banner group is collapsed.
+     *
+     * @property issues The potentially reordered list of [SafetyCenterIssue]s.
+     * @property visibleCountWhenCollapsed The number of preferences to show in the
+     *   [BannerMessagePreferenceGroup] when it is in its collapsed state. This count is adjusted
+     *   based on whether an issue was focused and its severity.
+     */
+    private data class ReorderedIssuesResult(
+        val issues: List<SafetyCenterIssue>,
+        val visibleCountWhenCollapsed: Int,
+    )
+
+    /**
      * Why we prefix keys: Banner keys must be unique within the PreferenceGroup. Since the same
      * issue ID can exist in either the active or dismissed state, we prefix the issue ID to
      * distinguish between the BannerMessagePreference instances representing each state.
@@ -153,5 +256,7 @@ class SafetyIssuesBannerGroupManager(
 
     private companion object {
         const val TAG = "SafetyIssuesBannerMgr"
+        private const val VISIBLE_COUNT_DEFAULT = 1
+        private const val VISIBLE_COUNT_FOCUSED_SECOND = 2
     }
 }

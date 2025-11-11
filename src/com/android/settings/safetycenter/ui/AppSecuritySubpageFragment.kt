@@ -71,21 +71,20 @@ class AppSecuritySubpageFragment : DashboardFragment() {
 
     private fun setupSafetyIssuesPreferenceController(owner: LifecycleOwner) {
         Log.d(TAG, "Setting Up the safety issues preference controller")
-        safetyIssuesPreferenceController?.setViewModelAndLifecycle(viewModel, owner)
-        safetyIssuesPreferenceController?.setFragmentManager(childFragmentManager)
-        safetyIssuesPreferenceController?.setActivityTaskId(requireActivity().taskId)
+        safetyIssuesPreferenceController?.apply {
+            setViewModelAndLifecycle(viewModel, owner)
+            this.fragmentManager = childFragmentManager
+            this.activityTaskId = requireActivity().taskId
 
-        val illustrationPreference: IllustrationPreference =
-            findPreference(APP_SECURITY_ILLUSTRATION_KEY)!!
-        val safetySourceIds =
-            SafetyCenterSubpageRegistry.getAllSafetySourceIds(
-                requireContext(),
-                SafetyCenterSubpageRegistry.SubpageKey.APP_SECURITY,
-            )
-        safetyIssuesPreferenceController?.setSubpageSafetySourcesAndIllustration(
-            safetySourceIds,
-            illustrationPreference,
-        )
+            val illustrationPreference: IllustrationPreference =
+                findPreference(APP_SECURITY_ILLUSTRATION_KEY)!!
+            val safetySourceIds =
+                SafetyCenterSubpageRegistry.getAllSafetySourceIds(
+                    requireContext(),
+                    SafetyCenterSubpageRegistry.SubpageKey.APP_SECURITY,
+                )
+            setSubpageSafetySourcesAndIllustration(safetySourceIds, illustrationPreference)
+        }
     }
 
     private fun setupSafetySourcePreferenceControllers(owner: LifecycleOwner) {
