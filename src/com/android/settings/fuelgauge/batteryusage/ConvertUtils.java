@@ -503,6 +503,8 @@ public final class ConvertUtils {
                 return AppUsageEventType.ACTIVITY_STOPPED;
             case Event.DEVICE_SHUTDOWN:
                 return AppUsageEventType.DEVICE_SHUTDOWN;
+            case Event.SCREEN_NON_INTERACTIVE:
+                return AppUsageEventType.SCREEN_NON_INTERACTIVE;
             default:
                 return AppUsageEventType.UNKNOWN;
         }
