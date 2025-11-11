@@ -52,6 +52,9 @@ open class SupervisionAppStoreFiltersScreen :
     override val title: Int
         get() = R.string.supervision_app_store_filters_title
 
+    override val summary: Int
+        get() = R.string.supervision_app_store_filters_summary
+
     override val icon: Int
         get() = R.drawable.ic_apps_library
 
