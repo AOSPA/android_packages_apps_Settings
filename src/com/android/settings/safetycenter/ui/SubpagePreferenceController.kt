@@ -49,10 +49,10 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
     BasePreferenceController(context, preferenceKey) {
 
     private var preference: Preference? = null
-    private var relatedSafetySources: List<String> = emptyList()
-    private var relatedIssueOnlySafetySources: List<String> = emptyList()
+    var relatedSafetySources: List<String> = emptyList()
+    var relatedIssueOnlySafetySources: List<String> = emptyList()
     private var viewModel: LiveSafetyCenterViewModel? = null
-    @StringRes private var defaultSummaryResId: Int? = null
+    @StringRes var defaultSummaryResId: Int? = null
 
     /**
      * Sets the ViewModel instance for this controller and registers the observer to update the
@@ -72,33 +72,6 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
             Log.d(TAG, "[$preferenceKey] safetyCenterUiLiveData observer notified")
             preference?.let { updatePreferenceUi(it, data) }
         }
-    }
-
-    /**
-     * Sets the list of related safety source IDs for this subpage.
-     *
-     * @param relatedSafetySources The list of safety source IDs.
-     */
-    fun setRelatedSafetySources(relatedSafetySources: List<String>) {
-        this.relatedSafetySources = relatedSafetySources
-    }
-
-    /**
-     * Sets the list of related safety source IDs for this subpage, which only provide issues.
-     *
-     * @param relatedIssueOnlySafetySources The list of safety source IDs.
-     */
-    fun setRelatedIssueOnlySafetySources(relatedIssueOnlySafetySources: List<String>) {
-        this.relatedIssueOnlySafetySources = relatedIssueOnlySafetySources
-    }
-
-    /**
-     * Sets the resource ID to be used as the default summary for this subpage preference.
-     *
-     * @param resId The string resource ID.
-     */
-    fun setDefaultSummaryResId(@StringRes resId: Int) {
-        this.defaultSummaryResId = resId
     }
 
     protected open fun setIcon(preference: Preference, icon: Drawable?) {
@@ -252,7 +225,7 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
                 TAG,
                 "[$preferenceKey] getSubpageSummary: Null max severity, returning default summary",
             )
-            return getDefaultSubpageSummary()
+            return getDefaultSubpageSummary(relatedSafetySourcesData)
         }
 
         when (subpageMaxSeverity) {
@@ -283,10 +256,10 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
                     return highestSeverityIssueOnlySafetySourceIssue.title
                 }
 
-                return getDefaultSubpageSummary()
+                return getDefaultSubpageSummary(relatedSafetySourcesData)
             }
             SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNSPECIFIED -> {
-                return getDefaultSubpageSummary()
+                return getDefaultSubpageSummary(relatedSafetySourcesData)
             }
             SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN -> {
                 val hasError =
@@ -306,7 +279,7 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
                     TAG,
                     "[$preferenceKey] Unexpected maxSeverity $subpageMaxSeverity, returning default summary",
                 )
-                return getDefaultSubpageSummary()
+                return getDefaultSubpageSummary(relatedSafetySourcesData)
             }
         }
     }
@@ -318,7 +291,9 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
         return data.getActiveIssuesForSources(listOf(entry.safetySourceId!!)).isNotEmpty()
     }
 
-    private fun getDefaultSubpageSummary(): CharSequence {
+    protected open fun getDefaultSubpageSummary(
+        safetySourceEntries: List<SafetyCenterEntry>
+    ): CharSequence {
         return defaultSummaryResId?.let { mContext.getString(it) } ?: ""
     }
 
