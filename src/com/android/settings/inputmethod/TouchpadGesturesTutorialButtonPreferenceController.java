@@ -16,8 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import static com.android.systemui.shared.Flags.newTouchpadGesturesTutorial;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -83,17 +81,11 @@ public class TouchpadGesturesTutorialButtonPreferenceController extends BasePref
 
     private void showTouchpadGestureEducation() {
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_LEARN_TOUCHPAD_GESTURE_CLICK);
-        if (newTouchpadGesturesTutorial()) {
-            Intent intent = new Intent(TUTORIAL_ACTION)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    .setPackage(Utils.SYSTEMUI_PACKAGE_NAME);
-            // touchpad tutorial must be started as system user as it needs to have access to state
-            // of user 0 sysui instance
-            mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
-        } else {
-            TouchpadGestureDialogFragment fragment = new TouchpadGestureDialogFragment();
-            fragment.setTargetFragment(mParent, 0);
-            fragment.show(mParent.getActivity().getSupportFragmentManager(), GESTURE_DIALOG_TAG);
-        }
+        Intent intent = new Intent(TUTORIAL_ACTION)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .setPackage(Utils.SYSTEMUI_PACKAGE_NAME);
+        // touchpad tutorial must be started as system user as it needs to have access to state
+        // of user 0 sysui instance
+        mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
     }
 }
