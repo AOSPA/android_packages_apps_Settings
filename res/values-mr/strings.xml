@@ -976,8 +976,7 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> कनेक्‍ट करता आले नाही"</string>
     <string name="device_details_title" msgid="1155622417516195481">"डिव्हाइस तपशील"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"कीबोर्ड सेटिंग्ज"</string>
-    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
-    <skip />
+    <string name="bluetooth_device_game_controller_settings_preference_title" msgid="291778307796320923">"गेम कंट्रोलर सेटिंग्ज"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"आणखी सेटिंग्ज"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"फर्मवेअर अपडेट, याविषयी आणि आणखी बरेच काही"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"टिपा आणि सपोर्ट"</string>
@@ -1208,15 +1207,12 @@
     <string name="retry" msgid="7542103800274026915">"पुन्हा प्रयत्न करा"</string>
     <string name="shared_message" msgid="2104244057926025072">"शेअर केले"</string>
     <string name="private_message" msgid="5897966950396765392">"खाजगी"</string>
-    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
-    <skip />
+    <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"स्विच करा"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"रद्द करा"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"नेटवर्क शेअर करा"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"या डिव्हाइसवरील इतर वापरकर्ते हे नेटवर्क ॲक्सेस करू शकतात"</string>
-    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
-    <skip />
-    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
-    <skip />
+    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"<xliff:g id="SHARED">%1$s</xliff:g> नेटवर्कवर स्विच करायचे आहे का?"</string>
+    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"\"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" नावाचे <xliff:g id="SHARED_0">%1$s</xliff:g> नेटवर्क आधीपासून अस्तित्वात आहे. तुम्ही <xliff:g id="SHARED_1">%1$s</xliff:g> नेटवर्कवर स्विच केल्यास, तुम्ही तुमचे <xliff:g id="PRIVATE">%3$s</xliff:g> नेटवर्क सोडाल आणि तुमच्याकडे कदाचित तात्पुरते इंटरनेट नसेल."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(बदल केलेला नाही)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"वापरकर्त्यांना नेटवर्क संपादित करू द्या"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"इतर वापरकर्ते या नेटवर्कमध्ये बदल करू शकतात"</string>
@@ -1235,6 +1231,8 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*आवश्यक आहे"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"हे शेअर केलेले नेटवर्क आहे. बदल करण्यासाठी तुम्हाला साइन इन करावे लागेल."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"बदल करण्यासाठी नेटवर्क मालकाशी किंवा डिव्हाइसच्या ॲडमिनशी संपर्क साधा."</string>
+    <!-- no translation found for wifi_shared_network_icon_message (8937015463026388043) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"या नेटवर्कवर इंटरनेट अ‍ॅक्सेस नाही. कनेक्‍ट केलेले राहायचे?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"मर्यादित कनेक्टिव्हिटीमुळे कदाचित काही अ‍ॅप्स आणि सेवा काम करणार नाहीत. तरीही वापरायचे?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"या नेटर्वकसाठी पुन्हा विचारू नका"</string>
@@ -1254,8 +1252,7 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"नेटवर्क सेव्ह करण्यात अयशस्वी"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"रद्द करा"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"हे नेटवर्क नको?"</string>
-    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
-    <skip />
+    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"या डिव्हाइसवरील सर्व वापरकर्त्यांसाठी <xliff:g id="NETWORK_NAME">%1$s</xliff:g> काढून टाकले जाईल"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{एक नेटवर्क}other{# नेटवर्क}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{एक सदस्यत्व}other{# सदस्यत्वे}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{एक नेटवर्क आणि सदस्यत्व}other{# नेटवर्क आणि सदस्यत्वे}}"</string>
@@ -1759,6 +1756,8 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC फील्ड 3 अंकी असणे आवश्यक आहे."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC फील्ड 2 किंवा 3 अंकी असणे आवश्यक आहे."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"%s प्रकारचे APN जोडण्‍याची अनुमती वाहक देत नाही."</string>
+    <!-- no translation found for error_disallow_adding_apn (4053023049932971602) -->
+    <skip />
     <string name="error_mmsc_valid" msgid="8380951905485647380">"MMSC फील्ड योग्य असणे आवश्यक आहे."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"डीफॉल्ट APN सेटिंग्ज पुनर्संचयित करत आहे."</string>
     <string name="menu_restore" msgid="4310539620115151551">"डीफॉल्टवर रीसेट करा"</string>
@@ -2244,36 +2243,21 @@
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"ऑफिसमध्ये वापरण्यायोग्य ऑन-स्क्रीन कीबोर्ड"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"डीफॉल्ट"</string>
     <string name="game_controller_settings_title" msgid="4322385924018377909">"गेम कंट्रोलर"</string>
-    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
-    <skip />
-    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
-    <skip />
-    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
-    <skip />
+    <string name="game_controller_key_remapping" msgid="8150376475022555386">"की"</string>
+    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"अक्ष"</string>
+    <string name="game_controller_button_a" msgid="2138420373137111774">"A बटण"</string>
+    <string name="game_controller_button_b" msgid="2093089857164437480">"B बटण"</string>
+    <string name="game_controller_button_x" msgid="3428801081204194655">"X बटण"</string>
+    <string name="game_controller_button_y" msgid="4596061542299533516">"Y बटण"</string>
+    <string name="game_controller_button_l1" msgid="4428713182602902434">"L1 बटण"</string>
+    <string name="game_controller_button_r1" msgid="6271978600831912659">"R1 बटण"</string>
+    <string name="game_controller_button_l2" msgid="4168716287264803566">"L2 बटण"</string>
+    <string name="game_controller_button_r2" msgid="4361909018228151006">"R2 बटण"</string>
+    <string name="game_controller_button_thumbl" msgid="609311480262927654">"डावे स्टिक क्लिक"</string>
+    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"उजवे स्टिक क्लिक"</string>
+    <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
+    <string name="game_controller_stick_left" msgid="1591700901162153956">"डावे स्टिक"</string>
+    <string name="game_controller_stick_right" msgid="1418791636252375110">"उजवे स्टिक"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"टचपॅड"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"टचपॅड आणि माउस"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"माउस"</string>
@@ -3120,7 +3104,8 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"सिस्टीमनुसार पहा"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> हून कमी"</string>
-    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"शिपिंगपूर्वीच्या गुणवत्ता तपासण्यांमुळे, चक्राची संख्या पहिल्या वापराच्या वेळी शून्य असू शकत नाही"</string>
+    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"प्रक्रिया आकडेवारी"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"चालत असलेल्या प्रक्रियांबद्दल गीकी आकडेवारी"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"मेमरी वापर"</string>
@@ -3194,8 +3179,7 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"तुमची बॅटरी लाइफ वाढवण्यासाठी आपोआप सर्वोत्तम नेटवर्क कनेक्शन निवडते"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"मोबाइल नेटवर्क सुरक्षा"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"नेटवर्क प्रकार, एन्क्रिप्शन, नोटिफिकेशन नियंत्रणे"</string>
-    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="4190908521080878539">"या सेटिंग्ज तुमचा डेटा चोरू शकणाऱ्या किंवा तुमच्यावर लक्ष ठेवणाऱ्या कालबाह्य अथवा एन्क्रिप्ट न केलेल्या नेटवर्कपासून तुमचे कॉल, मेसेज आणि डेटा यांचे संरक्षण करण्यात मदत करतात."</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"मोबाइल नेटवर्क सुरक्षा"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"नोटिफिकेशन"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"नेटवर्कसंबंधित नोटिफिकेशन"</string>
@@ -4934,9 +4918,13 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"मागे जा बटणाची संवेदनशीलता"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"जेश्चर नेव्हिगेशन"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"जेश्चर नेव्हिगेशन सेटिंग्ज"</string>
+    <!-- no translation found for gesture_settings_extra_button_hint (5061056396437804198) -->
+    <skip />
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"डेमो वापरून पहा"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"बटण नेव्हिगेशन"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"बटण नेव्हिगेशन सेटिंग्ज"</string>
+    <!-- no translation found for button_navigation_settings_extra_button_hint (6471481336598365780) -->
+    <skip />
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"बटणांचा क्रम"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"बटणाचा क्रम, बटणे हलवा, लेफ्ट-हँड मोड, राइट हँड मोड"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"मागे जा"</string>
@@ -6014,6 +6002,10 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. डिव्हाइसचे तपशील कॉन्फिगर करा."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"पालक नियंत्रणे"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"मूलभूत डिजिटल नियम आणि स्क्रीन वेळेच्या मर्यादा"</string>
+    <!-- no translation found for supervision_intro_title (2686370837216266390) -->
+    <skip />
+    <!-- no translation found for supervision_intro_description (101353421249918460) -->
+    <skip />
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"पिन सेट करा"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"पालक नियंत्रणे पिन सेट करा"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"पर्यवेक्षण, पालक नियंत्रणे, पालक, पर्यवेक्षण पिन, पिन."</string>
@@ -6021,12 +6013,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"पालक नियंत्रणे पिन व्यवस्थापित करा"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"पालक नियंत्रणे पिन"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"पालक पिन, पालक नियंत्रणे करण्यासाठी असणारा पिन"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"रिकव्हरी ईमेल जोडा"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"रिकव्हरी ईमेलची पडताळणी करा"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"रिकव्हरी ईमेल जोडा"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"रिकव्हरी ईमेलची पडताळणी करा"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"पिन बदला"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"पिन विसरलात"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"पिन विसरला आहात का?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"रिकव्हरी ईमेल अपडेट करा"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"रिकव्हरी ईमेल अपडेट करा"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"रिकव्हरी ईमेल जोडला"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"रिकव्हरी ईमेलची पडताळणी केली"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"रिकव्हरी ईमेल अपडेट केला"</string>
@@ -6038,12 +6030,12 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"रिकव्‍हरी माहिती जोडा"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"तुम्ही तुमचा पिन विसरल्यास, तो रीसेट करण्यासाठी तुम्ही तुमचे खाते वापरू शकता"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"पिन हटवा"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"रिकव्हरी ईमेल जोडा"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"तुमच्या ईमेलची पडताळणी करा"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"रिकव्हरी ईमेल जोडा"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"तुमच्या ईमेलची पडताळणी करा"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"अ‍ॅप स्टोअर फिल्टर"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"ॲप्सना त्यांच्या आशयाच्या प्रौढता पातळीनुसार फिल्टर करा"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"प्रत्येक ॲप विविध प्रकारचा आशय ब्लॉक करू शकते. सूचीबद्ध नसलेली ॲप स्टोअर स्वतंत्रपणे व्यवस्थापित करणे आवश्यक आहे."</string>
-    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"वेबसाइट आशय फिल्टर"</string>
+    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"वेब आशय फिल्टर"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"वेबसाइट फिल्टर, साइट ब्लॉक करणे, ब्राउझर फिल्टर, भडक साइट ब्लॉक करणे, साइट फिल्टर करणे, शोध परिणाम ब्लॉक करणे, भडक शोध परिणाम फिल्टर करणे, आशयासंबंधी निर्बंध"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"या फोनवरील काही ॲप्स आणि ब्राउझर यांवरील भडक आशय फिल्टर करण्यास मदत करा. तरीही, इतर अ‍ॅप्स, डिव्हाइस किंवा ब्राउझर यांवर भडक आशय दिसू शकतो."</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"वेबसाइट"</string>
@@ -6051,8 +6043,7 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"शोध परिणाम"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"लैंगिकदृष्ट्या भडक असलेले शोध परिणाम फिल्टर करा"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{# ॲपवर}other{# ॲप्सवर}}"</string>
-    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
-    <skip />
+    <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"ही सेटिंग्ज बंद असली, तरीही इतर खाते सेटिंग्ज लागू होऊ शकतात."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"पालक नियंत्रणे पिन एंटर करा"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"पालक नियंत्रणे पिन सेट करा"</string>
@@ -6063,7 +6054,19 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"पिन हटवू शकत नाही"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"पिन हटवता येणार नाही"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"पिन हटवण्याचा प्रयत्न करताना एरर आली."</string>
+    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
+    <skip />
+    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
+    <skip />
+    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
+    <skip />
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"हटवा आणि बंद करा"</string>
+    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
+    <skip />
+    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
+    <skip />
+    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> अ‍ॅनिमेशन"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"नियंत्रणे सुरू करू शकत नाही"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"नियंत्रणे वापरू शकत नाही"</string>
@@ -6071,10 +6074,8 @@
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"नंतर पुन्हा प्रयत्न करा"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"मागे जा"</string>
     <string name="supervision_available_apps_title" msgid="886352413031517863">"उपलब्ध ॲप्स आणि सेवा"</string>
-    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
-    <skip />
-    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
-    <skip />
+    <string name="supervision_approval_method_chooser_title" msgid="7759309575598126099">"पडताळणी पद्धत निवडा"</string>
+    <string name="supervision_approval_method_chooser_description" msgid="7574494762555726167">"तुम्ही पालक असल्याची पडताळणी करणे आवश्यक आहे"</string>
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"ओळख तपासणी आणखी अ‍ॅप्ससह काम करते"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"ओळख तपासणी तुमच्या अ‍ॅप्सचा नको असलेला अ‍ॅक्सेस प्रतिबंधित करते. आता फिंगरप्रिंट किंवा फेस अनलॉक वापरणाऱ्या कोणत्याही अ‍ॅपसह उपलब्ध आहे."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"तपशील पहा"</string>
@@ -6127,4 +6128,10 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"सुरू आहे"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"उपलब्ध आहे"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"उपलब्ध नाही"</string>
+    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
+    <skip />
+    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
+    <skip />
+    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
+    <skip />
 </resources>
