@@ -20,8 +20,6 @@ import static android.bluetooth.AudioInputControl.MUTE_DISABLED;
 import static android.bluetooth.AudioInputControl.MUTE_MUTED;
 import static android.bluetooth.AudioInputControl.MUTE_NOT_MUTED;
 import static android.view.View.GONE;
-import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
-import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_YES;
 import static android.view.View.VISIBLE;
 
 import static com.android.settings.bluetooth.BluetoothDetailsAmbientVolumePreferenceController.KEY_AMBIENT_VOLUME_SLIDER;
@@ -29,7 +27,6 @@ import static com.android.settingslib.bluetooth.HearingAidInfo.DeviceSide.SIDE_L
 import static com.android.settingslib.bluetooth.HearingAidInfo.DeviceSide.SIDE_RIGHT;
 
 import android.content.Context;
-import android.util.ArrayMap;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -44,12 +41,12 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.hearingdevices.ui.AmbientVolumeUi;
 import com.android.settingslib.widget.Expandable;
 import com.android.settingslib.widget.SettingsThemeHelper;
-import com.android.settingslib.widget.SliderPreference;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.primitives.Ints;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -75,20 +72,18 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     @Nullable
     private View mExpandIcon;
     @Nullable
-    private View mVolumeIconFrame;
-    @Nullable
     private ImageView mVolumeIcon;
 
-    private final BiMap<Integer, SliderPreference> mSideToSliderMap = HashBiMap.create();
-    private final Map<Integer, Integer> mSideToMuteStateMap = new ArrayMap<>();
+    private final BiMap<Integer, AmbientVolumeSliderPreference> mSideToSliderMap =
+            HashBiMap.create();
     private boolean mExpandable = true;
     private boolean mExpanded = false;
-    private int mVolumeLevel = AMBIENT_VOLUME_LEVEL_DEFAULT;
     private int mMetricsCategory;
 
     private final OnPreferenceChangeListener mPreferenceChangeListener =
             (slider, v) -> {
-                if (slider instanceof SliderPreference && v instanceof final Integer value) {
+                if (slider instanceof AmbientVolumeSliderPreference
+                        && v instanceof final Integer value) {
                     final Integer side = mSideToSliderMap.inverse().get(slider);
                     if (side != null) {
                         logMetrics(METRIC_KEY_AMBIENT_SLIDER, side);
@@ -125,22 +120,6 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
         mVolumeIcon = holder.itemView.requireViewById(com.android.internal.R.id.icon);
         mVolumeIcon.getDrawable().mutate().setTint(getContext().getColor(
                 com.android.internal.R.color.materialColorOnPrimaryContainer));
-        mVolumeIconFrame = holder.itemView.requireViewById(R.id.icon_frame);
-        int volumeIconBackgroundResId = SettingsThemeHelper.isExpressiveTheme(getContext())
-                ? R.drawable.ambient_icon_background_expressive
-                : R.drawable.ambient_icon_background;
-        mVolumeIconFrame.setBackgroundResource(volumeIconBackgroundResId);
-        mVolumeIconFrame.setOnClickListener(v -> {
-            if (!isMutable()) {
-                return;
-            }
-            int updatedMuteState = isMuted() ? MUTE_NOT_MUTED : MUTE_MUTED;
-            setSliderMuteState(SIDE_UNIFIED, updatedMuteState);
-            logMetrics(METRIC_KEY_AMBIENT_MUTE, isMuted() ? 1 : 0);
-            if (mListener != null) {
-                mListener.onAmbientVolumeIconClick();
-            }
-        });
         updateVolumeIcon();
 
         mExpandIcon = holder.itemView.requireViewById(R.id.expand_icon);
@@ -188,51 +167,18 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     }
 
     @Override
-    public boolean isMutable() {
-        return mSideToMuteStateMap.values().stream().anyMatch(mute -> mute != MUTE_DISABLED);
-    }
-
-    @Override
-    public boolean isMuted() {
-        return mSideToMuteStateMap.values().stream().allMatch(mute -> mute == MUTE_MUTED);
-    }
-
-    @Override
     public void setSliderMuteState(int side, int muteState) {
-        if (side == SIDE_UNIFIED) {
-            // propagate the mute state to all other sliders
-            mSideToSliderMap.keySet().forEach(s -> {
-                if (s != SIDE_UNIFIED) {
-                    setSliderMuteState(s, muteState);
-                }
-            });
-        } else {
-            SliderPreference slider = mSideToSliderMap.get(side);
-            if (slider != null) {
-                mSideToMuteStateMap.put(side, muteState);
-                if (muteState == MUTE_MUTED) {
-                    slider.setValue(slider.getMin());
-                }
-                SliderPreference unifiedSlider = mSideToSliderMap.get(SIDE_UNIFIED);
-                if (isMuted() && unifiedSlider != null) {
-                    unifiedSlider.setValue(unifiedSlider.getMin());
-                }
-                updateVolumeLevel();
-            }
+        AmbientVolumeSliderPreference slider = mSideToSliderMap.get(side);
+        if (slider != null) {
+            slider.setMuteState(muteState);
+            updateMuteStateFromSide(side);
         }
     }
 
     @Override
     public int getSliderMuteState(int side) {
-        if (side == SIDE_UNIFIED) {
-            if (!isMutable()) {
-                return MUTE_DISABLED;
-            } else {
-                return isMuted() ? MUTE_MUTED : MUTE_NOT_MUTED;
-            }
-        } else {
-            return mSideToMuteStateMap.getOrDefault(side, MUTE_DISABLED);
-        }
+        AmbientVolumeSliderPreference slider = mSideToSliderMap.get(side);
+        return slider == null ? MUTE_DISABLED : slider.getMuteState();
     }
 
     @Override
@@ -247,7 +193,7 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
 
         if (!mSideToSliderMap.isEmpty()) {
             for (int side : VALID_SIDES) {
-                final SliderPreference slider = mSideToSliderMap.get(side);
+                final AmbientVolumeSliderPreference slider = mSideToSliderMap.get(side);
                 if (slider != null && findPreference(slider.getKey()) == null) {
                     addPreference(slider);
                 }
@@ -258,32 +204,35 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
 
     @Override
     public void setSliderEnabled(int side, boolean enabled) {
-        SliderPreference slider = mSideToSliderMap.get(side);
+        AmbientVolumeSliderPreference slider = mSideToSliderMap.get(side);
         if (slider != null) {
             slider.setEnabled(enabled);
-            if (!enabled) {
-                slider.setValue(slider.getMin());
-            }
-            updateVolumeLevel();
+            updateVolumeIcon();
         }
     }
 
     @Override
     public void setSliderValue(int side, int value) {
-        SliderPreference slider = mSideToSliderMap.get(side);
-        if (slider != null && slider.getValue() != value) {
+        AmbientVolumeSliderPreference slider = mSideToSliderMap.get(side);
+        if (slider != null && slider.getValue() != value && slider.getMin() <= value
+                && slider.getMax() >= value) {
             slider.setValue(value);
-            updateVolumeLevel();
+            updateVolumeIcon();
         }
     }
 
     @Override
     public void setSliderRange(int side, int min, int max) {
-        SliderPreference slider = mSideToSliderMap.get(side);
+        AmbientVolumeSliderPreference slider = mSideToSliderMap.get(side);
         if (slider != null) {
             slider.setMin(min);
             slider.setMax(max);
         }
+    }
+
+    /** Sets the metrics category. */
+    public void setMetricsCategory(int category) {
+        mMetricsCategory = category;
     }
 
     private void updateLayout() {
@@ -294,43 +243,29 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
                 slider.setVisible(mExpanded);
             }
         });
-        updateVolumeLevel();
-    }
-
-    /** Sets the metrics category. */
-    public void setMetricsCategory(int category) {
-        mMetricsCategory = category;
-    }
-
-    private int getMetricsCategory() {
-        return mMetricsCategory;
-    }
-
-    private void updateVolumeLevel() {
-        int leftLevel, rightLevel;
-        if (isControlExpanded()) {
-            leftLevel = getVolumeLevel(SIDE_LEFT);
-            rightLevel = getVolumeLevel(SIDE_RIGHT);
-        } else {
-            final int unifiedLevel = getVolumeLevel(SIDE_UNIFIED);
-            leftLevel = unifiedLevel;
-            rightLevel = unifiedLevel;
-        }
-        mVolumeLevel = Ints.constrainToRange(leftLevel * 5 + rightLevel,
-                AMBIENT_VOLUME_LEVEL_MIN, AMBIENT_VOLUME_LEVEL_MAX);
         updateVolumeIcon();
     }
 
-    private int getVolumeLevel(int side) {
-        SliderPreference slider = mSideToSliderMap.get(side);
-        if (slider == null || !slider.isEnabled()) {
-            return 0;
+    private void updateVolumeIcon() {
+        int leftLevel, rightLevel;
+        if (isControlExpanded()) {
+            AmbientVolumeSliderPreference leftSlider = mSideToSliderMap.get(SIDE_LEFT);
+            AmbientVolumeSliderPreference rightSlider = mSideToSliderMap.get(SIDE_RIGHT);
+            leftLevel = leftSlider == null ? 0 : leftSlider.getVolumeLevel();
+            rightLevel = rightSlider == null ? 0 : rightSlider.getVolumeLevel();
+        } else {
+            AmbientVolumeSliderPreference unifiedSlider = mSideToSliderMap.get(SIDE_UNIFIED);
+            final int unifiedLevel = unifiedSlider == null ? 0 : unifiedSlider.getVolumeLevel();
+            leftLevel = unifiedLevel;
+            rightLevel = unifiedLevel;
         }
-        final double min = slider.getMin();
-        final double max = slider.getMax();
-        final double levelGap = (max - min) / 4.0;
-        final int value = slider.getValue();
-        return (int) Math.ceil((value - min) / levelGap);
+        int volumeLevel = Ints.constrainToRange(
+                leftLevel * AMBIENT_VOLUME_LEVEL_NUMBER + rightLevel,
+                AMBIENT_VOLUME_LEVEL_MIN,
+                AMBIENT_VOLUME_LEVEL_MAX);
+        if (mVolumeIcon != null) {
+            mVolumeIcon.setImageLevel(volumeLevel);
+        }
     }
 
     private void updateExpandIcon() {
@@ -349,55 +284,73 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
         }
     }
 
-    private void updateVolumeIcon() {
-        if (mVolumeIcon == null || mVolumeIconFrame == null) {
-            return;
+    private void updateMuteStateFromSide(int side) {
+        if (side == SIDE_UNIFIED) {
+            // propagate the mute state to all other sliders
+            mSideToSliderMap.forEach((entrySide, entrySlider) -> {
+                if (entrySide != SIDE_UNIFIED) {
+                    entrySlider.setMuteState(getSliderMuteState(SIDE_UNIFIED));
+                }
+            });
+        } else {
+            AmbientVolumeSliderPreference unifiedSlider = mSideToSliderMap.get(SIDE_UNIFIED);
+            if (unifiedSlider != null) {
+                List<AmbientVolumeSliderPreference> sideSliders =
+                        mSideToSliderMap.entrySet().stream()
+                                .filter(entry -> entry.getKey() != SIDE_UNIFIED)
+                                .map(Map.Entry::getValue)
+                                .toList();
+                if (sideSliders.stream().anyMatch(s -> s.getMuteState() == MUTE_NOT_MUTED)) {
+                    unifiedSlider.setMuteState(MUTE_NOT_MUTED);
+                } else if (sideSliders.stream().allMatch(s -> s.getMuteState() == MUTE_DISABLED)) {
+                    unifiedSlider.setMuteState(MUTE_DISABLED);
+                } else {
+                    unifiedSlider.setMuteState(MUTE_MUTED);
+                }
+            }
         }
-        mVolumeIcon.setImageLevel(mVolumeLevel);
-        if (isMutable()) {
-            final int stringRes = isMuted() ? R.string.bluetooth_ambient_volume_unmute
-                    : R.string.bluetooth_ambient_volume_mute;
-            mVolumeIcon.setContentDescription(getContext().getString(stringRes));
-            mVolumeIconFrame.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
-        }  else {
-            mVolumeIcon.setContentDescription(null);
-            mVolumeIconFrame.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
-        }
+        updateVolumeIcon();
     }
 
     private void createSlider(int side, int order) {
         if (mSideToSliderMap.containsKey(side)) {
             return;
         }
-        SliderPreference slider = new SliderPreference(getContext());
+        int titleResId = 0;
+        int contentResId;
+        if (side == SIDE_LEFT) {
+            titleResId = R.string.bluetooth_ambient_volume_control_left;
+            contentResId = R.string.bluetooth_ambient_volume_control_left_description;
+        } else if (side == SIDE_RIGHT) {
+            titleResId = R.string.bluetooth_ambient_volume_control_right;
+            contentResId = R.string.bluetooth_ambient_volume_control_right_description;
+        } else {
+            contentResId = R.string.bluetooth_ambient_volume_control_description;
+        }
+        String title = titleResId == 0 ? null : getContext().getString(titleResId);
+        String content = contentResId == 0 ? null : getContext().getString(contentResId);
+
+        AmbientVolumeSliderPreference slider = new AmbientVolumeSliderPreference(getContext());
         slider.setKey(KEY_AMBIENT_VOLUME_SLIDER + "_" + side);
         slider.setOrder(order);
+        slider.setTitle(title);
+        slider.setSliderContentDescription(content);
         slider.setOnPreferenceChangeListener(mPreferenceChangeListener);
-        if (side == SIDE_LEFT) {
-            slider.setTitle(
-                    getContext().getString(R.string.bluetooth_ambient_volume_control_left));
-            slider.setSliderContentDescription(getContext().getString(
-                    R.string.bluetooth_ambient_volume_control_left_description));
-        } else if (side == SIDE_RIGHT) {
-            slider.setTitle(
-                    getContext().getString(R.string.bluetooth_ambient_volume_control_right));
-            slider.setSliderContentDescription(getContext().getString(
-                    R.string.bluetooth_ambient_volume_control_right_description));
-        } else {
-            slider.setSliderContentDescription(getContext().getString(
-                    R.string.bluetooth_ambient_volume_control_description));
-        }
-        mSideToSliderMap.put(side, slider);
-    }
+        slider.setOnMuteIconClickListener((v) -> {
+            updateMuteStateFromSide(side);
 
-    @VisibleForTesting
-    Map<Integer, SliderPreference> getSliders() {
-        return mSideToSliderMap;
+            boolean muted = slider.getMuteState() == MUTE_MUTED;
+            logMetrics(METRIC_KEY_AMBIENT_MUTE, muted ? 1 : 0);
+            if (mListener != null) {
+                mListener.onSliderMuteChange(side, muted);
+            }
+        });
+        mSideToSliderMap.put(side, slider);
     }
 
     private void logMetrics(String key, int value) {
         FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().changed(
-                getMetricsCategory(), key, value);
+                mMetricsCategory, key, value);
     }
 
     @Override
@@ -407,5 +360,10 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
         // Should always return true for AmbientVolumePreference as it always shows at least one
         // child preference no matter in collapsed or expanded mode.
         return true;
+    }
+
+    @VisibleForTesting
+    Map<Integer, AmbientVolumeSliderPreference> getSliders() {
+        return mSideToSliderMap;
     }
 }
