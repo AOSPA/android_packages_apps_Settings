@@ -51,5 +51,6 @@
     <com.android.settingslib.widget.FooterPreference
         android:key="app_security_footer"
         android:title="@string/safety_center_app_security_footer"
-        android:selectable="false" />
+        android:selectable="false"
+        settings:searchable="false" />
 </PreferenceScreen>

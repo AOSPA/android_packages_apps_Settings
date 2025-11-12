@@ -15,7 +15,6 @@
  */
 package com.android.settings.safetycenter.ui
 
-import android.annotation.StringRes
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Bundle
@@ -31,6 +30,7 @@ import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFacto
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.search.SearchIndexableRaw
 
 /**
  * Fragment for the Safety Center UI.
@@ -109,58 +109,7 @@ class SafetyCenterFragment : DashboardFragment() {
 
         for (controller in allControllers) {
             if (controller is SubpagePreferenceController) {
-                when (controller.preferenceKey) {
-                    APP_SECURITY_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.APP_SECURITY,
-                            summaryResId = R.string.safety_center_app_security_summary,
-                            lifecycleOwner = owner,
-                        )
-                    DEVICE_UNLOCK_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.DEVICE_UNLOCK,
-                            summaryResId = R.string.safety_center_device_unlock_summary,
-                            lifecycleOwner = owner,
-                        )
-                    ACCOUNT_SECURITY_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.ACCOUNT_SECURITY,
-                            summaryResId = R.string.safety_center_account_security_summary,
-                            lifecycleOwner = owner,
-                        )
-                    DEVICE_FINDERS_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.DEVICE_FINDERS,
-                            summaryResId = R.string.safety_center_device_finders_summary,
-                            lifecycleOwner = owner,
-                        )
-                    SYSTEM_AND_UPDATES_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.SYSTEM_AND_UPDATES,
-                            summaryResId = R.string.safety_center_system_and_updates_summary,
-                            lifecycleOwner = owner,
-                        )
-                    CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey =
-                                SafetyCenterSubpageRegistry.SubpageKey.CELLULAR_NETWORK_SECURITY,
-                            summaryResId = R.string.safety_center_cellular_network_security_summary,
-                            lifecycleOwner = owner,
-                        )
-                    PRIVACY_CONTROLS_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.PRIVACY_CONTROLS,
-                            summaryResId = R.string.privacy_sources_summary,
-                            lifecycleOwner = owner,
-                        )
-                }
+                initializeSubpagePreferenceController(controller, owner)
             }
         }
     }
@@ -190,35 +139,66 @@ class SafetyCenterFragment : DashboardFragment() {
 
     private fun initializeSubpagePreferenceController(
         controller: SubpagePreferenceController,
-        subpageKey: SafetyCenterSubpageRegistry.SubpageKey,
-        @StringRes summaryResId: Int,
         lifecycleOwner: LifecycleOwner,
     ) {
+        val preferenceKey = controller.preferenceKey
         controller.relatedSafetySources =
-            SafetyCenterSubpageRegistry.getXmlSafetySourceIds(requireContext(), subpageKey)
+            SafetyCenterSubpageRegistry.getXmlSafetySourceIds(requireContext(), preferenceKey)
         controller.relatedIssueOnlySafetySources =
-            SafetyCenterSubpageRegistry.getIssueOnlySafetySourceIds(subpageKey)
-        controller.defaultSummaryResId = summaryResId
+            SafetyCenterSubpageRegistry.getIssueOnlySafetySourceIds(preferenceKey)
+        controller.defaultSummaryResId =
+            SafetyCenterSubpageRegistry.getDefaultSummaryResId(preferenceKey)
         controller.setViewModelAndLifecycle(viewModel, lifecycleOwner)
     }
 
     companion object {
         private const val TAG = "SafetyCenterFragment"
         private const val SAFETY_ISSUES_BANNER_KEY = "issues_banner_group"
-        private const val APP_SECURITY_SUBPAGE_KEY = "app_security_subpage"
-        private const val DEVICE_UNLOCK_SUBPAGE_KEY = "device_unlock_subpage"
-        private const val ACCOUNT_SECURITY_SUBPAGE_KEY = "account_security_subpage"
-        private const val DEVICE_FINDERS_SUBPAGE_KEY = "device_finders_subpage"
-        private const val SYSTEM_AND_UPDATES_SUBPAGE_KEY = "system_and_updates_subpage"
-        private const val CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY =
-            "cellular_network_security_subpage"
-        private const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
+
+        fun initializeSubpagePrefControllerForSearchIndex(
+            context: Context,
+            controller: SubpagePreferenceController,
+        ) {
+            val preferenceKey = controller.preferenceKey
+            controller.relatedSafetySources =
+                SafetyCenterSubpageRegistry.getXmlSafetySourceIds(context, preferenceKey)
+        }
 
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =
             object : BaseSearchIndexProvider(R.xml.safety_center_main_page) {
                 protected override fun isPageSearchEnabled(context: Context?): Boolean {
                     return Flags.enableSafetyCenterNewUi()
+                }
+
+                override fun getDynamicRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableRaw> {
+                    val rawData = super.getDynamicRawDataToIndex(context, enabled).toMutableList()
+
+                    // Add dynamic data for SafetySourcePreferences on the main page
+                    rawData.addAll(
+                        SafetyCenterSearchIndexUtils.getDynamicRawDataForIndexingFromXml(
+                            context,
+                            R.xml.safety_center_main_page,
+                            R.string.safety_center_title,
+                        )
+                    )
+                    return rawData
+                }
+
+                override fun getPreferenceControllers(
+                    context: Context?
+                ): MutableList<AbstractPreferenceController?> {
+                    val allControllers = super.getPreferenceControllers(context)
+
+                    for (controller in allControllers) {
+                        if (controller is SubpagePreferenceController) {
+                            initializeSubpagePrefControllerForSearchIndex(context!!, controller)
+                        }
+                    }
+                    return allControllers
                 }
             }
     }

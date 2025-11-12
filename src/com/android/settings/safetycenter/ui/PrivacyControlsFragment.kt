@@ -31,6 +31,7 @@ import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFacto
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.search.SearchIndexableRaw
 
 /**
  * Fragment that displays various privacy controls. This fragment is a sub-page of the main Safety
@@ -80,7 +81,7 @@ class PrivacyControlsFragment : DashboardFragment() {
             val safetySourceIds =
                 SafetyCenterSubpageRegistry.getAllSafetySourceIds(
                     requireContext(),
-                    SafetyCenterSubpageRegistry.SubpageKey.PRIVACY_CONTROLS,
+                    SafetyCenterSubpageRegistry.PRIVACY_CONTROLS_SUBPAGE_KEY,
                 )
             setSubpageSafetySourcesAndIllustration(safetySourceIds, illustrationPref = null)
         }
@@ -103,6 +104,20 @@ class PrivacyControlsFragment : DashboardFragment() {
             object : BaseSearchIndexProvider(R.xml.safety_center_privacy_controls_settings) {
                 public override fun isPageSearchEnabled(context: Context): Boolean {
                     return Flags.enableSafetyCenterNewUi()
+                }
+
+                override fun getDynamicRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableRaw> {
+                    val rawData = super.getDynamicRawDataToIndex(context, enabled).toMutableList()
+                    rawData.addAll(
+                        SafetyCenterSearchIndexUtils.getDynamicRawDataForIndexingSubpage(
+                            context,
+                            SafetyCenterSubpageRegistry.PRIVACY_CONTROLS_SUBPAGE_KEY,
+                        )
+                    )
+                    return rawData
                 }
             }
     }

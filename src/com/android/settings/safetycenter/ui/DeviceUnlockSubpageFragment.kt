@@ -31,6 +31,7 @@ import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFacto
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.search.SearchIndexableRaw
 import com.android.settingslib.widget.IllustrationPreference
 
 /** Fragment for displaying device unlock subpage within the Safety Center in Settings. */
@@ -81,7 +82,7 @@ class DeviceUnlockSubpageFragment : DashboardFragment() {
             val safetySourceIds =
                 SafetyCenterSubpageRegistry.getAllSafetySourceIds(
                     requireContext(),
-                    SafetyCenterSubpageRegistry.SubpageKey.DEVICE_UNLOCK,
+                    SafetyCenterSubpageRegistry.DEVICE_UNLOCK_SUBPAGE_KEY,
                 )
             setSubpageSafetySourcesAndIllustration(safetySourceIds, illustrationPreference)
         }
@@ -116,6 +117,20 @@ class DeviceUnlockSubpageFragment : DashboardFragment() {
             object : BaseSearchIndexProvider(R.xml.safety_center_device_unlock_subpage) {
                 override fun isPageSearchEnabled(context: Context?): Boolean {
                     return Flags.enableSafetyCenterNewUi()
+                }
+
+                override fun getDynamicRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableRaw> {
+                    val rawData = super.getDynamicRawDataToIndex(context, enabled).toMutableList()
+                    rawData.addAll(
+                        SafetyCenterSearchIndexUtils.getDynamicRawDataForIndexingSubpage(
+                            context,
+                            SafetyCenterSubpageRegistry.DEVICE_UNLOCK_SUBPAGE_KEY,
+                        )
+                    )
+                    return rawData
                 }
             }
     }

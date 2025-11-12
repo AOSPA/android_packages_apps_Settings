@@ -18,134 +18,207 @@ package com.android.settings.safetycenter.ui
 
 import android.content.Context
 import android.util.Log
+import androidx.annotation.StringRes
 import androidx.annotation.XmlRes
 import com.android.settings.R
+import com.android.settingslib.safetycenter.SafetySourcePreference
 import org.xmlpull.v1.XmlPullParser
 
 /**
  * Registry for Safety Center subpage configurations.
  *
- * This object acts as a single source of truth for:
- * - Mapping subpage keys to their preference XML resources.
- * - Extracting safety source IDs from <SafetySourcePreference> tags within those XMLs.
- * - Defining issue-only safety source IDs associated with each subpage.
- *
- * Note: This object is not designed to be thread-safe. It is intended to be accessed only from the
- * main thread, as is typical for UI-related components and PreferenceFragment lifecycles.
+ * This object serves as the central point for:
+ * - Defining preference key constants for all subpages.
+ * - Mapping preference keys to their [SubpageConfig] (XML, title, summary, issue-only sources).
+ * - Parsing subpage XMLs to extract configurations from [SafetySourcePreference] tags.
+ * - Providing utility functions to retrieve lists of source IDs related to a subpage.
  */
 object SafetyCenterSubpageRegistry {
     private const val TAG = "SCSubpageRegistry"
     private const val STRING_RES_PREFIX = "@"
-    private const val ATTR_SAFETY_SOURCE = "safetySource"
+    private const val NS_ANDROID = "http://schemas.android.com/apk/res/android"
+    private const val NS_SETTINGS = "http://schemas.android.com/apk/res-auto"
     private const val TAG_SAFETY_SOURCE_PREFERENCE =
         "com.android.settingslib.safetycenter.SafetySourcePreference"
-    private const val RES_AUTO_NAMESPACE = "http://schemas.android.com/apk/res-auto"
+    private const val ATTR_KEY = "key"
+    private const val ATTR_SAFETY_SOURCE = "safetySource"
+    private const val ATTR_PROFILE = "profile"
 
-    /** Enum representing the unique keys for each subpage. */
-    enum class SubpageKey {
-        APP_SECURITY,
-        DEVICE_UNLOCK,
-        ACCOUNT_SECURITY,
-        DEVICE_FINDERS,
-        SYSTEM_AND_UPDATES,
-        CELLULAR_NETWORK_SECURITY,
-        PRIVACY_CONTROLS,
-    }
-
-    /** Maps Subpage key to its XML resource containing SafetySourcePreference tags. */
-    private val subpageXmlResources =
-        mapOf(
-            SubpageKey.APP_SECURITY to R.xml.safety_center_app_security_subpage,
-            SubpageKey.DEVICE_UNLOCK to R.xml.safety_center_device_unlock_subpage,
-            SubpageKey.ACCOUNT_SECURITY to R.xml.safety_center_account_security_subpage,
-            SubpageKey.DEVICE_FINDERS to R.xml.safety_center_device_finders_subpage,
-            SubpageKey.SYSTEM_AND_UPDATES to R.xml.safety_center_system_and_updates_subpage,
-            SubpageKey.CELLULAR_NETWORK_SECURITY to
-                R.xml.safety_center_cellular_network_security_subpage,
-            SubpageKey.PRIVACY_CONTROLS to R.xml.safety_center_privacy_controls_settings,
-        )
+    // Subpage Preference Keys
+    const val APP_SECURITY_SUBPAGE_KEY = "app_security_subpage"
+    const val DEVICE_UNLOCK_SUBPAGE_KEY = "device_unlock_subpage"
+    const val ACCOUNT_SECURITY_SUBPAGE_KEY = "account_security_subpage"
+    const val DEVICE_FINDERS_SUBPAGE_KEY = "device_finders_subpage"
+    const val SYSTEM_AND_UPDATES_SUBPAGE_KEY = "system_and_updates_subpage"
+    const val CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY = "cellular_network_security_subpage"
+    const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
 
     /**
-     * Maps Subpage key to a List of safety source IDs that ONLY provide issues, not full entries.
-     * These are not defined in the XML.
+     * Configuration map for each subpage, keyed by the preference key string. Provides the XML
+     * resource, title resource, default summary resource, and any issue-only sources.
      */
-    private val subpageIssueOnlySources =
-        mapOf<SubpageKey, List<String>>(
-            SubpageKey.APP_SECURITY to emptyList(),
-            SubpageKey.DEVICE_UNLOCK to listOf("AndroidIdentityCheck"),
-            SubpageKey.ACCOUNT_SECURITY to emptyList(),
-            SubpageKey.DEVICE_FINDERS to emptyList(),
-            SubpageKey.SYSTEM_AND_UPDATES to emptyList(),
-            SubpageKey.CELLULAR_NETWORK_SECURITY to emptyList(),
-            SubpageKey.PRIVACY_CONTROLS to
-                listOf(
-                    "AndroidAccessibility",
-                    "AndroidNotificationListener",
-                    "AndroidBackgroundLocation",
-                    "AndroidPermissionAutoRevoke",
-                    "AndroidCertificateTransparency",
+    val subpageConfigs =
+        mapOf(
+            APP_SECURITY_SUBPAGE_KEY to
+                SubpageConfig(
+                    R.xml.safety_center_app_security_subpage,
+                    R.string.app_security_subpage_title,
+                    R.string.safety_center_app_security_summary,
+                ),
+            DEVICE_UNLOCK_SUBPAGE_KEY to
+                SubpageConfig(
+                    R.xml.safety_center_device_unlock_subpage,
+                    R.string.device_unlock_subpage_title,
+                    R.string.safety_center_device_unlock_summary,
+                    listOf("AndroidIdentityCheck"),
+                ),
+            ACCOUNT_SECURITY_SUBPAGE_KEY to
+                SubpageConfig(
+                    R.xml.safety_center_account_security_subpage,
+                    R.string.account_security_subpage_title,
+                    R.string.safety_center_account_security_summary,
+                ),
+            DEVICE_FINDERS_SUBPAGE_KEY to
+                SubpageConfig(
+                    R.xml.safety_center_device_finders_subpage,
+                    R.string.device_finders_subpage_title,
+                    R.string.safety_center_device_finders_summary,
+                ),
+            SYSTEM_AND_UPDATES_SUBPAGE_KEY to
+                SubpageConfig(
+                    R.xml.safety_center_system_and_updates_subpage,
+                    R.string.system_and_updates_subpage_title,
+                    R.string.safety_center_system_and_updates_summary,
+                ),
+            CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY to
+                SubpageConfig(
+                    R.xml.safety_center_cellular_network_security_subpage,
+                    R.string.cellular_network_security_subpage_title,
+                    R.string.safety_center_cellular_network_security_summary,
+                ),
+            PRIVACY_CONTROLS_SUBPAGE_KEY to
+                SubpageConfig(
+                    R.xml.safety_center_privacy_controls_settings,
+                    R.string.privacy_sources_title,
+                    R.string.privacy_sources_summary,
+                    listOf(
+                        "AndroidAccessibility",
+                        "AndroidNotificationListener",
+                        "AndroidBackgroundLocation",
+                        "AndroidPermissionAutoRevoke",
+                        "AndroidCertificateTransparency",
+                    ),
                 ),
         )
 
-    // Cache to store parsed safety source IDs from XML
-    private val parsedSubpageSafetySourcesCache = mutableMapOf<SubpageKey, List<String>>()
+    /**
+     * Gets the XML resource ID for a given [preferenceKey].
+     *
+     * @param preferenceKey The string key for the subpage.
+     * @return The XML resource ID, or null if not found.
+     */
+    @XmlRes fun getXmlResId(preferenceKey: String): Int? = subpageConfigs[preferenceKey]?.xmlResId
 
     /**
-     * Gets all safety source IDs (from XML and issue-only) for a given subpage key, Results from
-     * XML parsing are cached.
+     * Gets the title string resource ID for a given [preferenceKey].
      *
-     * @param context Context to access resources.
-     * @param subpageKey The enum key identifying the subpage.
-     * @return A distinct List of all safety source IDs.
+     * @param preferenceKey The string key for the subpage.
+     * @return The title string resource ID, or null if not found.
      */
-    fun getAllSafetySourceIds(context: Context, subpageKey: SubpageKey): List<String> {
-        val xmlSources = getXmlSafetySourceIds(context, subpageKey)
-        val issueOnlySources = getIssueOnlySafetySourceIds(subpageKey)
+    @StringRes
+    fun getTitleResId(preferenceKey: String): Int? = subpageConfigs[preferenceKey]?.titleResId
+
+    /**
+     * Gets the default summary string resource ID for a given [preferenceKey].
+     *
+     * @param preferenceKey The string key for the subpage.
+     * @return The default summary string resource ID, or null if not found.
+     */
+    @StringRes
+    fun getDefaultSummaryResId(preferenceKey: String): Int? =
+        subpageConfigs[preferenceKey]?.defaultSummaryResId
+
+    /**
+     * Retrieves the list of safety source IDs that only provide issues for the given
+     * [preferenceKey].
+     *
+     * @param preferenceKey The string key for the subpage.
+     * @return A list of issue-only safety source IDs.
+     */
+    fun getIssueOnlySafetySourceIds(preferenceKey: String): List<String> =
+        subpageConfigs[preferenceKey]?.issueOnlySources ?: emptyList()
+
+    /**
+     * Retrieves all safety source IDs associated with a given [preferenceKey], including those
+     * defined in the XML and those providing only issues.
+     *
+     * @param context Context to access resources for XML parsing.
+     * @param preferenceKey The string key identifying the subpage.
+     * @return A distinct list of all safety source IDs.
+     */
+    fun getAllSafetySourceIds(context: Context, preferenceKey: String): List<String> {
+        val xmlSources = getXmlSafetySourceIds(context, preferenceKey)
+        val issueOnlySources = getIssueOnlySafetySourceIds(preferenceKey)
         return (xmlSources + issueOnlySources).distinct()
     }
 
-    /** Gets safety source IDs defined in the subpage's XML. */
-    fun getXmlSafetySourceIds(context: Context, subpageKey: SubpageKey): List<String> {
-        return parsedSubpageSafetySourcesCache.getOrPut(subpageKey) {
-            val xmlResId = subpageXmlResources[subpageKey]
-            if (xmlResId == null) {
-                Log.w(TAG, "No XML resource found for subpage key: $subpageKey")
-                emptyList()
-            } else {
-                parseSafetySourcesFromXml(context, xmlResId)
-            }
-        }
-    }
-
-    /** Gets issue-only safety source IDs for the subpage. */
-    fun getIssueOnlySafetySourceIds(subpageKey: SubpageKey): List<String> {
-        return subpageIssueOnlySources[subpageKey] ?: emptyList()
-    }
-
-    private fun parseSafetySourceAttribute(context: Context, sourceIdAttr: String?): String? {
-        if (sourceIdAttr.isNullOrBlank()) {
-            return null
-        }
-
-        return if (sourceIdAttr.startsWith(STRING_RES_PREFIX)) {
-            try {
-                val resId = sourceIdAttr.substring(1).toInt()
-                context.getString(resId)
-            } catch (e: Exception) {
-                Log.e(TAG, "Could not get string for $sourceIdAttr", e)
-                null
-            }
-        } else {
-            sourceIdAttr
-        }
+    /**
+     * Retrieves safety source IDs defined within [SafetySourcePreference] tags in the subpage's
+     * XML.
+     *
+     * @param context Context to access resources for XML parsing.
+     * @param preferenceKey The string key identifying the subpage.
+     * @return A distinct list of safety source IDs from the XML.
+     */
+    fun getXmlSafetySourceIds(context: Context, preferenceKey: String): List<String> {
+        return getXmlSafetySourcePrefConfigs(context, preferenceKey).map { it.sourceId }.distinct()
     }
 
     /**
-     * Parses an XML preference screen to extract safetySource attributes from
-     * SafetySourcePreference tags. It resolves string references.
+     * Parses the XML associated with the [preferenceKey] and returns a list of
+     * [SafetySourcePrefConfig] objects.
+     *
+     * @param context Context to access resources.
+     * @param preferenceKey The string key identifying the subpage.
+     * @return A list of [SafetySourcePrefConfig] extracted from the XML.
      */
-    private fun parseSafetySourcesFromXml(context: Context, @XmlRes xmlResId: Int): List<String> {
-        val safetySourceIds = mutableListOf<String>()
+    fun getXmlSafetySourcePrefConfigs(
+        context: Context,
+        preferenceKey: String,
+    ): List<SafetySourcePrefConfig> {
+        val xmlResId = getXmlResId(preferenceKey)
+        return if (xmlResId == null) {
+            Log.w(TAG, "No XML resource found for subpage key: $preferenceKey")
+            emptyList()
+        } else {
+            parseSafetySourcePreferencesFromXml(context, xmlResId)
+        }
+    }
+
+    private fun resolveStringAttribute(context: Context, attrValue: String?): String? {
+        if (attrValue.isNullOrBlank()) return null
+        return if (attrValue.startsWith(STRING_RES_PREFIX)) {
+            try {
+                val resId = attrValue.substring(1).toInt()
+                context.getString(resId)
+            } catch (e: Exception) {
+                Log.e(TAG, "Could not resolve string resource: $attrValue", e)
+                null
+            }
+        } else {
+            attrValue
+        }
+    }
+
+    private fun resolveProfileAttribute(attrValue: String?): Int {
+        return attrValue?.toIntOrNull() ?: SafetySourcePreference.Profile.PERSONAL.intValue
+    }
+
+    fun parseSafetySourcePreferencesFromXml(
+        context: Context,
+        @XmlRes xmlResId: Int,
+    ): List<SafetySourcePrefConfig> {
+        val safetySourcePrefConfigs = mutableListOf<SafetySourcePrefConfig>()
         try {
             context.resources.getXml(xmlResId).use { parser ->
                 var eventType = parser.eventType
@@ -154,25 +227,64 @@ object SafetyCenterSubpageRegistry {
                         eventType == XmlPullParser.START_TAG &&
                             parser.name == TAG_SAFETY_SOURCE_PREFERENCE
                     ) {
-                        val sourceIdAttr =
-                            parser.getAttributeValue(RES_AUTO_NAMESPACE, ATTR_SAFETY_SOURCE)
-                        parseSafetySourceAttribute(context, sourceIdAttr)?.let {
-                            if (it.isNotBlank()) {
-                                safetySourceIds.add(it)
-                            } else {
-                                Log.w(
-                                    TAG,
-                                    "Parsed safety source ID is blank for attribute: $sourceIdAttr",
-                                )
-                            }
+                        val keyAttr = parser.getAttributeValue(NS_ANDROID, ATTR_KEY)
+                        val sourceIdAttr = parser.getAttributeValue(NS_SETTINGS, ATTR_SAFETY_SOURCE)
+                        val profileAttr = parser.getAttributeValue(NS_SETTINGS, ATTR_PROFILE)
+
+                        val key = resolveStringAttribute(context, keyAttr)
+                        val sourceId = resolveStringAttribute(context, sourceIdAttr)
+                        val profile =
+                            SafetySourcePreference.Profile.fromIntValue(
+                                resolveProfileAttribute(profileAttr)
+                            )
+
+                        if (key != null && sourceId != null) {
+                            safetySourcePrefConfigs.add(
+                                SafetySourcePrefConfig(key, sourceId, profile)
+                            )
+                        } else {
+                            Log.w(
+                                TAG,
+                                "Skipping SafetySourcePreference: key=$key, sourceId=$sourceId in $xmlResId",
+                            )
                         }
                     }
                     eventType = parser.next()
                 }
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Error parsing Safety Sources from XML $xmlResId", e)
+            Log.e(TAG, "Error parsing SafetySourcePreferences from XML $xmlResId", e)
         }
-        return safetySourceIds.distinct()
+        return safetySourcePrefConfigs
     }
 }
+
+/**
+ * Data class holding the parsed configuration from a [SafetySourcePreference] tag in XML.
+ *
+ * @property key The unique preference key (from `android:key`).
+ * @property sourceId The Safety Center source ID (from `settings:safetySource`).
+ * @property profile The user profile type associated with this preference (from
+ *   `settings:profile`).
+ */
+data class SafetySourcePrefConfig(
+    val key: String,
+    val sourceId: String,
+    val profile: SafetySourcePreference.Profile,
+)
+
+/**
+ * Configuration for a single Safety Center subpage.
+ *
+ * @property xmlResId The resource ID of the XML layout for this subpage.
+ * @property titleResId The string resource ID for the title of this subpage.
+ * @property defaultSummaryResId The string resource ID for the default summary of this subpage.
+ * @property issueOnlySources A list of safety source IDs that only contribute issues to this
+ *   subpage.
+ */
+data class SubpageConfig(
+    @XmlRes val xmlResId: Int,
+    @StringRes val titleResId: Int,
+    @StringRes val defaultSummaryResId: Int,
+    val issueOnlySources: List<String> = emptyList(),
+)
