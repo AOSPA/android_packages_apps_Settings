@@ -16,6 +16,7 @@
 package com.android.settings.accessibility
 
 import android.content.Context
+import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.view.accessibility.AccessibilityManager
@@ -144,6 +145,7 @@ class MagnificationPreferenceControllerTest {
             )
     }
 
+    @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
     @EnableFlags(com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
     @Test
     fun getSummary_keyGestureShortcut_returnShortcutOffWithSummary() {
@@ -157,6 +159,24 @@ class MagnificationPreferenceControllerTest {
                 context.getString(
                     SettingsLibR.string.preference_summary_default_combination,
                     context.getText(R.string.generic_accessibility_feature_shortcut_off),
+                    context.getText(R.string.magnification_feature_summary),
+                )
+            )
+    }
+
+    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    fun getSummary_keyGestureShortcut_returnShortcutOnWithSummary() {
+        shadowAccessibilityManager.setAccessibilityShortcutTargets(
+            KEY_GESTURE,
+            listOf(MAGNIFICATION_CONTROLLER_NAME),
+        )
+
+        assertThat(controller.summary.toString())
+            .isEqualTo(
+                context.getString(
+                    SettingsLibR.string.preference_summary_default_combination,
+                    context.getText(R.string.accessibility_summary_shortcut_enabled),
                     context.getText(R.string.magnification_feature_summary),
                 )
             )

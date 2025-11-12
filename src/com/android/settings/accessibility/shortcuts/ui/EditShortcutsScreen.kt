@@ -145,7 +145,9 @@ private constructor(
             if (shortcutTargets.isEmpty()) return@preferenceHierarchy
             val advancedPreference = AdvancedPreference(shortcutTargets)
 
+            // LINT.IfChange(shortcut_type_ui_order)
             +IntroPreference(shortcutTargets)
+            +KeyboardShortcutPreference(context, shortcutTargets)
             +QuickSettingsShortcutPreference(context, shortcutTargets)
             +FloatingButtonShortcutPreference(context, shortcutTargets)
             +GestureShortcutPreference(context, shortcutTargets)
@@ -158,6 +160,7 @@ private constructor(
                 shortcutTargets,
                 expandableStateProvider = { advancedPreference.expandableState },
             )
+            // LINT.ThenChange(/src/com/android/settings/accessibility/AccessibilityUtil.java:shortcut_type_ui_order)
         }
 
     override fun getMetricsCategory(): Int {
@@ -171,7 +174,7 @@ private constructor(
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.edit_shortcuts_screen_purpose
 
