@@ -183,13 +183,13 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
                         relatedSafetySourcesData.find { it.severityLevel == subpageMaxSeverity }
                     selectSeverityUnspecifiedIconResId(entryForIcon?.severityUnspecifiedIconType)
                 }
-                SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN -> null
+                SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN -> R.drawable.ic_safety_null_state
                 else -> {
                     Log.e(
                         TAG,
                         "[$preferenceKey] getSubpageIcon: Unknown maxSeverity level '$subpageMaxSeverity'",
                     )
-                    null
+                    R.drawable.ic_safety_null_state
                 }
             }
         return iconResId?.let {
@@ -204,12 +204,14 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
         return when (severityUnspecifiedIconType) {
             SafetyCenterEntry.SEVERITY_UNSPECIFIED_ICON_TYPE_NO_ICON -> R.drawable.ic_safety_empty
             SafetyCenterEntry.SEVERITY_UNSPECIFIED_ICON_TYPE_PRIVACY -> R.drawable.ic_privacy
+            SafetyCenterEntry.SEVERITY_UNSPECIFIED_ICON_TYPE_NO_RECOMMENDATION ->
+                R.drawable.ic_safety_null_state
             else -> {
                 Log.e(
                     TAG,
                     "[$preferenceKey] Unknown SeverityNoneIconType: $severityUnspecifiedIconType",
                 )
-                null
+                R.drawable.ic_safety_null_state
             }
         }
     }

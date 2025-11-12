@@ -354,7 +354,7 @@ class SafetyCenterFragmentTest {
             assertThat(preference?.isVisible).isTrue()
             assertThat(preference?.summary.toString())
                 .isEqualTo(mApplication.getString(R.string.safety_center_refresh_error))
-            assertThat(preference?.icon).isNull()
+            assertIconResource(preference, R.drawable.ic_safety_null_state)
         }
     }
 
