@@ -15,8 +15,6 @@
  */
 package com.android.settings.security;
 
-import static android.view.contentprotection.flags.Flags.FLAG_MANAGE_DEVICE_POLICY_ENABLED;
-
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.security.ContentProtectionTogglePreferenceController.KEY_CONTENT_PROTECTION_PREFERENCE;
 
@@ -60,8 +58,6 @@ public class ContentProtectionTogglePreferenceControllerTest {
 
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-
     private final Context mContext = ApplicationProvider.getApplicationContext();
 
    @Mock private PreferenceScreen mMockPreferenceScreen;
@@ -101,18 +97,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void constructor_flagDisabled_doesNotFetchData() {
-        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
-        mController = new TestContentProtectionTogglePreferenceController();
-
-        assertThat(mController.mCounterGetManagedProfile).isEqualTo(0);
-        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(0);
-        assertThat(mController.mCounterGetContentProtectionPolicy).isEqualTo(0);
-    }
-
-    @Test
-    public void constructor_flagEnabled_fetchesData() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void constructor_fetchesData() {
         mController = new TestContentProtectionTogglePreferenceController();
 
         assertThat(mController.mCounterGetManagedProfile).isEqualTo(1);
@@ -147,19 +132,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void isChecked_enforcedAdmin_flagDisabled_false() {
-        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
-        mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
-        Settings.Global.putInt(mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, 1);
-        setupForUpdateState();
-        mController.updateState(mMockSwitchPreference);
-
-        assertThat(mController.isChecked()).isFalse();
-    }
-
-    @Test
-    public void isChecked_enforcedAdmin_flagEnabled_policyDisabled_false() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void isChecked_enforcedAdmin_policyDisabled_false() {
         mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
         Settings.Global.putInt(mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, 1);
@@ -169,8 +142,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void isChecked_enforcedAdmin_flagEnabled_policyEnabled_true() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void isChecked_enforcedAdmin_policyEnabled_true() {
         mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_ENABLED;
         Settings.Global.putInt(
@@ -181,8 +153,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void isChecked_enforcedAdmin_flagEnabled_policyNotControlled_readsSettingsTrue() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void isChecked_enforcedAdmin_policyNotControlled_readsSettingsTrue() {
         mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY;
         Settings.Global.putInt(mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, 1);
@@ -192,8 +163,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void isChecked_enforcedAdmin_flagEnabled_policyNotControlled_readsSettingsFalse() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void isChecked_enforcedAdmin_policyNotControlled_readsSettingsFalse() {
         mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY;
         Settings.Global.putInt(
@@ -204,8 +174,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void isChecked_enforcedAdmin_flagEnabled_policyNotControlled_readsSettingsDefaultTrue() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void isChecked_enforcedAdmin_policyNotControlled_readsSettingsDefaultTrue() {
         mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY;
         mController = new TestContentProtectionTogglePreferenceController();
@@ -223,34 +192,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_flagDisabled_noEnforcedAdmin() {
-        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
-        setupForUpdateState();
-
-        mController.updateState(mMockSwitchPreference);
-
-        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
-        verify(mMockSwitchPreference, never()).setDisabledByAdmin(
-                any(RestrictedLockUtils.EnforcedAdmin.class));
-        verify(mMockSwitchPreference, never()).setEnabled(false);
-    }
-
-    @Test
-    public void updateState_flagDisabled_enforcedAdmin() {
-        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
-        mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
-        setupForUpdateState();
-
-        mController.updateState(mMockSwitchPreference);
-
-        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
-        verify(mMockSwitchPreference).setDisabledByAdmin(mEnforcedAdmin);
-        verify(mMockSwitchPreference, never()).setEnabled(false);
-    }
-
-    @Test
-    public void updateState_flagEnabled_noEnforcedAdmin_policyDisabled() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void updateState_noEnforcedAdmin_policyDisabled() {
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
         setupForUpdateState();
 
@@ -263,8 +205,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_flagEnabled_noEnforcedAdmin_policyEnabled() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void updateState_noEnforcedAdmin_policyEnabled() {
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_ENABLED;
         setupForUpdateState();
 
@@ -277,9 +218,8 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_flagEnabled_noEnforcedAdmin_nonAdminUser_switchBarDisabled() {
+    public void updateState_noEnforcedAdmin_nonAdminUser_switchBarDisabled() {
         mShadowUserManager.setIsAdminUser(false);
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_ENABLED;
         setupForUpdateState();
 
@@ -289,9 +229,8 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_flagEnabled_noEnforcedAdmin_adminUser_switchBarEnabled() {
+    public void updateState_noEnforcedAdmin_adminUser_switchBarEnabled() {
         mShadowUserManager.setIsAdminUser(true);
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_ENABLED;
         setupForUpdateState();
 
@@ -302,8 +241,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_flagEnabled_noEnforcedAdmin_policyNotControlled() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void updateState_noEnforcedAdmin_policyNotControlled() {
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY;
         setupForUpdateState();
 
@@ -316,8 +254,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_flagEnabled_enforcedAdmin_policyDisabled() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void updateState_enforcedAdmin_policyDisabled() {
         mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
         setupForUpdateState();
@@ -330,8 +267,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_flagEnabled_enforcedAdmin_policyEnabled() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void updateState_enforcedAdmin_policyEnabled() {
         mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_ENABLED;
         setupForUpdateState();
@@ -344,8 +280,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_flagEnabled_enforcedAdmin_policyNotControlled() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void updateState_enforcedAdmin_policyNotControlled() {
         mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY;
         setupForUpdateState();
