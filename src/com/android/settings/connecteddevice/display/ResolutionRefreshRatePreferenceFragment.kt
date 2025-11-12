@@ -29,6 +29,7 @@ import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceScreen
@@ -104,14 +105,17 @@ class ResolutionRefreshRatePreferenceFragment(
         super.onViewCreated(view, savedInstanceState)
         activity?.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-        viewModel.uiState.observe(viewLifecycleOwner) { state ->
+        viewModel.uiState.distinctUntilChanged().observe(viewLifecycleOwner) { state ->
             if (state == null) {
                 finishFragment()
                 return@observe
             }
             update(state)
-            if (state.confirmationDialogEvent != null) {
-                showDialog(state.confirmationDialogEvent)
+        }
+        viewModel.confirmationDialogEvent.distinctUntilChanged().observe(viewLifecycleOwner) {
+            confirmationDialogEvent ->
+            if (confirmationDialogEvent != null) {
+                showDialog(confirmationDialogEvent)
             }
         }
     }
