@@ -105,6 +105,10 @@
           settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController" />
     </com.android.settingslib.widget.UntitledPreferenceCategory>
 
+    <com.android.settingslib.widget.UntitledPreferenceCategory
+        android:key="bluetooth_diagnostics_category">
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
+
     <com.android.settingslib.widget.FooterPreference
         android:key="discoverable_footer"
         android:title="@string/bluetooth_off_footer"
