@@ -2767,6 +2767,8 @@
     <string name="wifi_shared_network_login_screen_warning">This is a shared network. You need to sign in to make changes.</string>
     <!-- Message to inform user, the network can only be configured by device admin or network owner. Will be used as both a tooltip and footer description. [CHAR LIMIT=NONE] [SCREENSHOT=screen/6MYkFQCPvtEAtHz] -->
     <string name="edit_wifi_network_non_owner_message">Contact the network owner or device admin to make changes.</string>
+    <!-- Message displayed when a user hovers over the shared network icon. [CHAR LIMIT=NONE] [SCREENSHOT=screen/87w2B9komPHTVSK]-->
+    <string name="wifi_shared_network_icon_message">All users on this device can access this network.</string>
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no internet access. Stay connected?</string>
@@ -12275,6 +12277,9 @@
     <!-- Content description for button that brings the user to the Gesture Navigation settings page.-->
     <string name="gesture_settings_button_description">Gesture navigation settings</string>
 
+    <!-- Hint text for clicking a button that opens the Gesture Navigation settings page.-->
+    <string name="gesture_settings_extra_button_hint">open gesture navigation settings</string>
+
     <!-- Title for the screen to show the gesture navigation tutorial [CHAR LIMIT=80] -->
     <string name="gesture_navigation_tutorial_title">Try a demo</string>
 
@@ -12283,6 +12288,9 @@
 
     <!-- Content description for button that brings the user to the Button Navigation settings page.-->
     <string name="button_navigation_settings_button_description">Button navigation settings</string>
+
+    <!-- Hint text for clicking a button that opens the Button Navigation settings page.-->
+    <string name="button_navigation_settings_extra_button_hint">open button navigation settings</string>
 
     <!-- Title text for changing the order of the navbar buttons -->
     <string name="button_navigation_settings_order_title">Button order</string>

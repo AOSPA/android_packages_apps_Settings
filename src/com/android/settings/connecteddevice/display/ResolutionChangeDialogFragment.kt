@@ -39,7 +39,7 @@ import kotlin.time.Duration.Companion.seconds
 class ResolutionChangeDialogFragment : DialogFragment() {
 
     private var countdownTimer: CountDownTimer? = null
-    private var isConfirmed = false
+    private var confirmState: ResolutionChangeConfirmationState? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -58,12 +58,12 @@ class ResolutionChangeDialogFragment : DialogFragment() {
                 setMessage(R.string.external_display_resolution_change_dialog_description)
                 setPositiveButton(R.string.external_display_resolution_change_dialog_confirm) { _, _
                     ->
-                    isConfirmed = true
+                    confirmState = ResolutionChangeConfirmationState.ACCEPT
                     Log.i(TAG, "Change was confirmed, keep updated resolution")
                     parentFragmentManager.setFragmentResult(
                         KEY_RESULT,
                         Bundle().apply {
-                            putBoolean(KEY_CONFIRMED, true)
+                            putParcelable(KEY_CONFIRMED, confirmState)
                             putParcelable(
                                 KEY_NEW_MODE,
                                 arguments?.getParcelable(KEY_NEW_MODE, Mode::class.java),
@@ -79,14 +79,24 @@ class ResolutionChangeDialogFragment : DialogFragment() {
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        if (isConfirmed) {
+        if (confirmState == ResolutionChangeConfirmationState.ACCEPT) {
             return
+        }
+        // There are 2 scenarios to handle with this extra state check
+        // 1. onStop -> onDismiss: Triggered when dialog is shown on the same display the resolution
+        // change happened, causing fragment and dialog shown to be abruptly dismissed, in this case
+        // keep it as NO_ACTION so that dialog can be reshown
+        // 2. onDismiss -> onStop: Normal cancellation path from either clicking cancel button or
+        // clicking outside dialog or back button. Set as REVERT to notify fragment to cancel
+        // changes
+        if (confirmState == null) {
+            confirmState = ResolutionChangeConfirmationState.REVERT
         }
         Log.i(TAG, "Dialog was dismissed, cancelling update")
         parentFragmentManager.setFragmentResult(
             KEY_RESULT,
             Bundle().apply {
-                putBoolean(KEY_CONFIRMED, false)
+                putParcelable(KEY_CONFIRMED, confirmState)
                 putParcelable(
                     KEY_EXISTING_MODE,
                     arguments?.getParcelable(KEY_EXISTING_MODE, Mode::class.java),
@@ -110,6 +120,7 @@ class ResolutionChangeDialogFragment : DialogFragment() {
         countdownTimer = null
         // Cancel to ensure resolution change is reverted even on device rotation or when settings
         // got minimized
+        confirmState = ResolutionChangeConfirmationState.NO_ACTION
         dismissAllowingStateLoss()
     }
 
@@ -145,6 +156,7 @@ class ResolutionChangeDialogFragment : DialogFragment() {
                     }
 
                     override fun onFinish() {
+                        confirmState = ResolutionChangeConfirmationState.REVERT
                         dialog?.dismiss()
                     }
                 }
