@@ -30,6 +30,8 @@ import com.android.settings.spa.app.backgroundinstall.BackgroundInstalledAppsPag
 import com.android.settings.spa.app.battery.BatteryOptimizationModeAppListPageProvider
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
+import com.android.settings.spa.app.specialaccess.ComputerControlAppInfoPageProvider
+import com.android.settings.spa.app.specialaccess.ComputerControlAutomationAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppListProvider
@@ -126,6 +128,8 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             NetworkCellularGroupProvider(),
             WifiPrivacyPageProvider,
             PrintSettingsPageProvider,
+            ComputerControlAutomationAppListProvider,
+            ComputerControlAppInfoPageProvider,
         )
 
     override val logger =

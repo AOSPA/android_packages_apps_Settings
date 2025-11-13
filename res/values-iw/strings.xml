@@ -68,8 +68,7 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"שינוי השם"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"לנתק את המכשיר?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"התאמה של מכשיר חדש"</string>
-    <!-- no translation found for bluetooth_pairing_no_device_button_message (6429917002249666051) -->
-    <skip />
+    <string name="bluetooth_pairing_no_device_button_message" msgid="6429917002249666051">"לא מצאת את המכשיר שלך?"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"הפעלה אוטומטית ביום הבא"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"‏כיבית את ה-Bluetooth? הוא יפעיל את עצמו מחדש למחרת"</string>
@@ -1027,6 +1026,8 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"אין מסך מחובר"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"כדי להתחיל, צריך לחבר מסך חיצוני או להשתמש בכבל אחר"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"אפשרויות נוספות"</string>
+    <!-- no translation found for external_display_pause_topology_hint (1128908588539457600) -->
+    <skip />
     <string name="external_display_topology_hint" msgid="885396727047321347">"כדי לשנות את סדר התצוגות, לוחצים לחיצה ארוכה על תצוגה וגוררים אותה"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"צריך ללחוץ כדי לראות את חיצי הניווט"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"כדי לשנות את סדר התצוגות צריך ללחוץ על החיצים"</string>
@@ -1206,19 +1207,18 @@
     <string name="retry" msgid="7542103800274026915">"ניסיון נוסף"</string>
     <string name="shared_message" msgid="2104244057926025072">"משותפת"</string>
     <string name="private_message" msgid="5897966950396765392">"פרטית"</string>
-    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"אישור"</string>
+    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
+    <skip />
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"ביטול"</string>
-    <!-- no translation found for wifi_share_preference_title (2000847347515149059) -->
+    <string name="wifi_share_preference_title" msgid="2000847347515149059">"שיתוף הרשת"</string>
+    <string name="wifi_share_preference_summary" msgid="3642772041628058748">"משתמשים אחרים במכשיר הזה יכולים לגשת לרשת הזו"</string>
+    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
     <skip />
-    <!-- no translation found for wifi_share_preference_summary (3642772041628058748) -->
+    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
     <skip />
-    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"לעבור לרשת ה<xliff:g id="SHARED">%1$s</xliff:g> \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\"?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"כרגע התחברת לרשת <xliff:g id="SHARED_0">%1$s</xliff:g> עם אותו שם. כדי לעבור רשת, צריך להתנתק מהרשת <xliff:g id="SHARED_1">%2$s</xliff:g> ולהתחבר מחדש לרשת <xliff:g id="PRIVATE">%3$s</xliff:g>. ייתכן שלא יהיה לך חיבור לאינטרנט באופן זמני."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(ללא שינוי)"</string>
-    <!-- no translation found for wifi_allow_edit_configuration_title (701463165569293) -->
-    <skip />
-    <!-- no translation found for wifi_allow_edit_configuration_summary (2133654391010089827) -->
-    <skip />
+    <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"המשתמשים יכולים לערוך את הרשת"</string>
+    <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"משתמשים אחרים יכולים לבצע שינויים ברשת הזו"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"צריך לבחור"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(נוספו מספר אישורים)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"שימוש באישורי מערכת"</string>
@@ -1232,10 +1232,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"כן, זה בסדר"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"דחייה"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*חובה"</string>
-    <!-- no translation found for wifi_shared_network_login_screen_warning (8298716960537761436) -->
-    <skip />
-    <!-- no translation found for edit_wifi_network_non_owner_message (4387650403845968672) -->
-    <skip />
+    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"הרשת הזו משותפת. כדי לבצע שינויים, צריך להיכנס לחשבון."</string>
+    <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"כדי לבצע שינויים, צריך לפנות לבעלים של הרשת או לאדמין של המכשיר."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"אין לרשת הזו חיבור לאינטרנט. האם להישאר מחובר?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"ייתכן שחלק מהאפליקציות והשירותים לא יפעלו עקב קישוריות מוגבלת. להשתמש בכל זאת?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"אל תשאל שוב בשביל הרשת הזו"</string>
@@ -1255,8 +1253,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"נכשל הניסיון לשמור את הרשת"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"ביטול"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"למחוק את הרשת?"</string>
-    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"להסיר את כל המשתמשים במכשיר?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"הרשת <xliff:g id="NETWORK_NAME">%1$s</xliff:g> נמצאת בשימוש של משתמשים אחרים במכשיר הזה, וכל המשתמשים ברשת הזו יצטרכו להגדיר אותה מחדש. להמשיך בכל זאת?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{רשת אחת}one{# רשתות}two{# רשתות}other{# רשתות}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{מינוי אחד}one{# מינויים}two{# מינויים}other{# מינויים}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{רשת ומינוי}one{# רשתות ומינויים}two{# רשתות ומינויים}other{# רשתות ומינויים}}"</string>
@@ -2337,7 +2335,7 @@
     <string name="keyboard_repeat_keys_increase_delay_desc" msgid="9131810864682287872">"הארכת משך ההשהיה"</string>
     <string name="keyboard_repeat_keys_decrease_delay_desc" msgid="6762794746507398346">"הפחתת משך ההשהיה"</string>
     <string name="keyboard_repeat_keys_delay_title" msgid="5954595732341624638">"קצב החזרה"</string>
-    <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"לחץ לחיצה ארוכה על מקש כדי לחזור על התו שלו. כדי לסיים, פשוט הפסק ללחוץ על המקש"</string>
+    <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"לחיצה ארוכה על מקש תקליד את התו שלו עד הפסקת הלחיצה על המקש"</string>
     <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"הגברת קצב החזרה"</string>
     <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"הורדת קצב החזרה"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"פריסה של <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
@@ -2738,7 +2736,10 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"מסך של לחיצה שלוש פעמים"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"עריכת קיצורי הדרך לנגישות"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"‏בחירת קיצור הדרך עבור %1$s"</string>
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"‏כדי להשתמש באפשרות הזו, צריך להפעיל את קיצור הדרך \"%1$s\" בדף של תכונות הנגישות"</string>
+    <!-- no translation found for a11y_button_shortcut_unassigned_setting_unavailable_summary (8268632664568192689) -->
+    <skip />
+    <!-- no translation found for a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary (2232737783140069174) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"המשך"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"מכשירי שמיעה"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"‏הגדרה וניהול של מכשירי שמיעה, שתלי שבלול ומכשירי הגברה אחרים שעומדים בתקן של ASHA ו-LE Audio"</string>
@@ -3143,7 +3144,7 @@
     <string name="tts_sliders_title" msgid="6901146958648426181">"קצב הדיבור וגובה הקול"</string>
     <string name="tts_engine_section_title" msgid="5115035218089228451">"מנוע"</string>
     <string name="tts_install_voice_title" msgid="5133545696447933812">"קולות"</string>
-    <string name="tts_spoken_language" msgid="4652894245474520872">"שפה מדוברת"</string>
+    <string name="tts_spoken_language" msgid="4652894245474520872">"שפת הדיבור"</string>
     <string name="tts_install_voices_title" msgid="6505257816336165782">"התקנת צלילים"</string>
     <string name="tts_install_voices_text" msgid="902408506519246362">"המשך אל האפליקציה <xliff:g id="TTS_APP_NAME">%s</xliff:g> כדי להתקין צלילים"</string>
     <string name="tts_install_voices_open" msgid="919034855418197668">"פתיחת האפליקציה"</string>
@@ -3165,7 +3166,8 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"המערכת בוחרת באופן אוטומטי את החיבור הטוב ביותר לרשת כדי להאריך את חיי הסוללה"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"אבטחת הרשת הסלולרית"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"סוג הרשת, הצפנה, ניהול התראות"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"ההגדרות האלו עוזרות להגן על השיחות, ההודעות והנתונים שלך מפני רשתות מיושנות או לא מוצפנות שעלולות לחשוף אותך לגניבת נתונים או למעקב"</string>
+    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
+    <skip />
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"אבטחת הרשת הסלולרית"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"התראות"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"התראות רשת"</string>
@@ -4864,7 +4866,7 @@
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"שינוי הארנק שמוגדר כברירת המחדל"</string>
     <string name="keywords_double_tap_power" msgid="1238828843085517844">"תנועות, קיצור דרך"</string>
     <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"ביצוע תשלום, תשלומים"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"סיבוב מהיר של הטלפון פעמיים כדי לעבור למצב סלפי במצלמה"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"סיבוב לסלפי במצלמה"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"מעבר בין מסכים"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"ניווט באמצעות 2 כפתורים"</string>
@@ -6016,6 +6018,8 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"תוצאות חיפוש"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"סינון תוצאות חיפוש בוטות"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{באפליקציה אחת}one{ב-# אפליקציות}two{ב-# אפליקציות}other{ב-# אפליקציות}}"</string>
+    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"גם אם ההגדרות האלה מושבות, יכול להיות שהגדרות אחרות בחשבון עדיין בתוקף."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"הזנת קוד אימות לאמצעי בקרת ההורים"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"הגדרת קוד אימות לאמצעי בקרת ההורים"</string>
@@ -6033,6 +6037,12 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"משהו השתבש"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"אפשר לנסות שוב אחר כך"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"חזרה"</string>
+    <!-- no translation found for supervision_available_apps_title (886352413031517863) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"התכונה \"בדיקת הזהות\" פועלת עם יותר אפליקציות"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"התכונה \"בדיקת הזהות\" מונעת גישה לא רצויה לאפליקציות שלך. עכשיו אפשר להשתמש בה בכל אפליקציה שמשתמשת בטביעת אצבע או בפתיחה בזיהוי פנים."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"עיון בפרטים"</string>
@@ -6077,8 +6087,7 @@
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"התראות שנסגרו"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"לסגור את ההתראה הזו?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"אפשר לבדוק את הגדרות הפרטיות והאבטחה בכל שלב כדי להוסיף עוד שכבת הגנה"</string>
-    <!-- no translation found for safety_center_resolved_issue_fallback (223765674640909183) -->
-    <skip />
+    <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"הפעולה הושלמה"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"התאמה"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"המכשיר <xliff:g id="DEVICE_NAME">%1$s</xliff:g> מחובר"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"סריקת המכשיר"</string>

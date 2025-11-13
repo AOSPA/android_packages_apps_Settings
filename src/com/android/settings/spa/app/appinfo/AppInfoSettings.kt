@@ -39,6 +39,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppPreference
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
+import com.android.settings.spa.app.specialaccess.ComputerControlAutomationAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
@@ -172,6 +173,9 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             InteractAcrossProfilesDetailsPreference(app)
             AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
             WriteSystemPreferencesAppListProvider.InfoPageEntryItem(app)
+            if (android.companion.virtualdevice.flags.Flags.computerControlAccess()) {
+                ComputerControlAutomationAppListProvider.InfoPageEntryItem(app)
+            }
             Enable16KbAppCompatPreference(app, packageInfoPresenter)
             UsageDataAppListProvider.InfoPageEntryItem(app)
         }

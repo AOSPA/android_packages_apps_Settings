@@ -68,8 +68,7 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Renomear"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Desconectar dispositivo?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Parear novo dispositivo"</string>
-    <!-- no translation found for bluetooth_pairing_no_device_button_message (6429917002249666051) -->
-    <skip />
+    <string name="bluetooth_pairing_no_device_button_message" msgid="6429917002249666051">"Não encontrou seu dispositivo?"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Ativar automaticamente amanhã"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Se você desativar o Bluetooth, ele será reativado no dia seguinte"</string>
@@ -276,7 +275,7 @@
     <string name="thursday_first_day_of_week" msgid="3035885630945594833">"Quinta-feira"</string>
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"Sexta-feira"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Sábado"</string>
-    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Se um app não oferecer suporte a preferências regionais, ele usará as configurações padrão de localidade."</string>
+    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Se um determinado app não oferecer suporte a preferências regionais, ele usará as configurações padrão do local."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Saiba mais sobre as preferências de idioma."</string>
     <string name="metric_measurement_system" msgid="7489725697268321541">"Métrico"</string>
     <string name="us_measurement_system" msgid="8406695347890345490">"EUA"</string>
@@ -516,17 +515,17 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Rosto e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Rosto, impressão digital e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Rosto, impressões digitais e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"A verificação de identidade está ativada e exige uma biometria"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"A confirmação de identidade está ativada e exige uma biometria"</string>
     <string name="go_to_settings" msgid="4394928396153474179">"Acesse as Configurações"</string>
-    <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"A verificação de identidade está ativada e não confirmou sua identidade"</string>
+    <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"A confirmação de identidade está ativada e não confirmou que é você"</string>
     <string name="identity_check_lockout_error_description_1" msgid="4882147327291296884">"A biometria falhou muitas vezes. Bloqueie e desbloqueie o dispositivo para tentar de novo."</string>
     <string name="identity_check_lockout_error_two_factor_auth_description_1" msgid="8369894114882274736">"A biometria falhou muitas vezes. Tente de novo."</string>
-    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"Você pode gerenciar a verificação de identidade nas configurações da proteção contra roubo. Acesse as Configurações"</string>
+    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"Você pode gerenciar a confirmação de identidade nas configurações da proteção contra roubo. Acesse as Configurações"</string>
     <string name="identity_check_general_error_title" msgid="5073929400896102674">"É necessário usar a biometria para continuar"</string>
-    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"A verificação de identidade está ativada e exige biometria, mas o sensor de impressão digital ou reconhecimento facial está indisponível\n"<ul><li>"Verifique se a câmera está ligada e tente de novo"</li>\n<li>"Você pode desativar a verificação de identidade usando sua Conta do Google"</li></ul></string>
+    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"A confirmação de identidade está ativada e exige biometria, mas o sensor de impressão digital ou reconhecimento facial está indisponível\n"<ul><li>"Verifique se a câmera está ligada e tente de novo"</li>\n<li>"Você pode desativar a confirmação de identidade usando sua Conta do Google"</li></ul></string>
     <string name="identity_check_biometric_error_cancel" msgid="3353689146211669291">"Cancelar"</string>
     <string name="identity_check_biometric_error_ok" msgid="4535306787363107304">"OK"</string>
-    <string name="go_to_identity_check" msgid="5215846637575231800">"Ir para a verificação de identidade"</string>
+    <string name="go_to_identity_check" msgid="5215846637575231800">"Ir para a confirmação de identidade"</string>
     <string name="identity_check_lockout_error_lock_screen" msgid="3021787511681444051">"Tela de bloqueio"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Desbloqueio do Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Relógio adicionado"</string>
@@ -1027,6 +1026,8 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Nenhuma tela conectada"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Conecte uma tela externa para começar ou tente usar um cabo diferente"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Mais opções"</string>
+    <!-- no translation found for external_display_pause_topology_hint (1128908588539457600) -->
+    <skip />
     <string name="external_display_topology_hint" msgid="885396727047321347">"Pressione e arraste para reorganizar as telas"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Toque para mostrar as setas de navegação"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Toque nas setas para reorganizar as telas"</string>
@@ -1206,19 +1207,18 @@
     <string name="retry" msgid="7542103800274026915">"Repetir"</string>
     <string name="shared_message" msgid="2104244057926025072">"compartilhada"</string>
     <string name="private_message" msgid="5897966950396765392">"particular"</string>
-    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Confirmar"</string>
+    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
+    <skip />
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Cancelar"</string>
-    <!-- no translation found for wifi_share_preference_title (2000847347515149059) -->
+    <string name="wifi_share_preference_title" msgid="2000847347515149059">"Compartilhar rede"</string>
+    <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Outros usuários deste dispositivo podem acessar esta rede"</string>
+    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
     <skip />
-    <!-- no translation found for wifi_share_preference_summary (3642772041628058748) -->
+    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
     <skip />
-    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"Mudar para a rede \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" <xliff:g id="SHARED">%1$s</xliff:g>?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"Você já se conectou a uma rede <xliff:g id="SHARED_0">%1$s</xliff:g> com o mesmo nome. Ao fazer a troca, você vai se desconectar da rede <xliff:g id="SHARED_1">%2$s</xliff:g> e se reconectar à <xliff:g id="PRIVATE">%3$s</xliff:g>. Talvez você fique sem conexão de Internet temporariamente."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(sem alteração)"</string>
-    <!-- no translation found for wifi_allow_edit_configuration_title (701463165569293) -->
-    <skip />
-    <!-- no translation found for wifi_allow_edit_configuration_summary (2133654391010089827) -->
-    <skip />
+    <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Permitir que os usuários editem a rede"</string>
+    <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Outros usuários podem fazer mudanças nesta rede"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Selecionar"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"Vários certificados adicionados"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Usar certificados do sistema"</string>
@@ -1232,10 +1232,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Permitir"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Negar"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*campo obrigatório"</string>
-    <!-- no translation found for wifi_shared_network_login_screen_warning (8298716960537761436) -->
-    <skip />
-    <!-- no translation found for edit_wifi_network_non_owner_message (4387650403845968672) -->
-    <skip />
+    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Esta é uma rede compartilhada. Sua conta precisa estar conectada para você fazer mudanças."</string>
+    <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Entre em contato com o proprietário da rede ou o admin do dispositivo para fazer mudanças."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Esta rede não tem acesso à Internet. Permanecer conectado?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Alguns apps e serviços podem não funcionar devido à conectividade limitada. Usar mesmo assim?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Não perguntar novamente para esta rede"</string>
@@ -1255,8 +1253,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Falha ao salvar a rede"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Cancelar"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Esquecer a rede?"</string>
-    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"Esquecer para todos os usuários do dispositivo?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"A rede <xliff:g id="NETWORK_NAME">%1$s</xliff:g> é usada por outros usuários neste dispositivo, e todos eles precisarão configurá-la novamente. Quer mesmo esquecer?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 rede}one{# rede}other{# redes}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 assinatura}one{# assinatura}other{# assinaturas}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 rede e assinatura}one{# rede e assinatura}other{# redes e assinaturas}}"</string>
@@ -1775,7 +1773,7 @@
     <string name="reset_esim_title" msgid="4194570573425902754">"Limpar eSIMs"</string>
     <string name="reset_esim_desc" msgid="6125192435907740751">"Essa ação não cancela seu plano de serviço móvel. Para um chip de substituição, entre em contato com a operadora."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Redefinir configurações"</string>
-    <string name="reset_network_final_desc" msgid="5304365082065278425">"Redefinir todas as configurações de rede? Não é possível desfazer essa ação."</string>
+    <string name="reset_network_final_desc" msgid="5304365082065278425">"Você quer mesmo redefinir todas as configurações de rede? Não será possível desfazer essa ação."</string>
     <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Você quer mesmo redefinir todas as configurações de rede e apagar os eSIMs salvos? Não é possível desfazer essa ação."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Redefinir configurações"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Redefinir?"</string>
@@ -2244,8 +2242,7 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclados e ferramentas de perfil de trabalho"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Teclado na tela para o trabalho"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Padrão"</string>
-    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
-    <skip />
+    <string name="game_controller_settings_title" msgid="4322385924018377909">"Controles de jogos"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad e mouse"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Mouse"</string>
@@ -2645,7 +2642,7 @@
     <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Sobre o tempo para agir (tempo limite de acessibilidade)"</string>
     <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Saiba mais sobre o tempo para agir (tempo limite de acessibilidade)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Tempo para agir"</string>
-    <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Nem todos os apps têm suporte para esta preferência"</string>
+    <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Nem todos os apps oferecem suporte a esta preferência"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Escolha por quanto tempo mostrar mensagens temporárias que solicitam uma ação"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Atraso ao tocar e pressionar"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversão de cores"</string>
@@ -2731,14 +2728,17 @@
     <string name="captioning_appearance_summary" msgid="4620682807315588019">"Tamanho do texto: <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Mais opções"</string>
     <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Personalize o tamanho e estilo da legenda para facilitar a leitura"</string>
-    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Nem todos os apps de mídia têm suporte a essas preferências de legenda"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Nem todos os apps de mídia oferecem suporte a estas preferências de legenda"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Botão de acessibilidade"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Deslizar de baixo para cima com dois dedos"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Mantenha as teclas de volume pressionadas"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tocar na tela três vezes"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Editar atalhos de acessibilidade"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Escolha o atalho para %1$s"</string>
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"Quer usar esse recurso? Em uma página de recursos de acessibilidade, ative o seguinte atalho: %1$s"</string>
+    <!-- no translation found for a11y_button_shortcut_unassigned_setting_unavailable_summary (8268632664568192689) -->
+    <skip />
+    <!-- no translation found for a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary (2232737783140069174) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuar"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Aparelhos auditivos"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configure e gerencie aparelhos auditivos ASHA e LE Audio, implantes cocleares e outros dispositivos de amplificação de som"</string>
@@ -3165,7 +3165,8 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Seleciona automaticamente a melhor conexão de rede para prolongar a duração da bateria"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Segurança da rede móvel"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tipo de rede, criptografia, controles de notificação"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Essas configurações ajudam a proteger suas ligações, mensagens e dados de redes desatualizadas ou não criptografadas que podem expor você a roubo de dados ou vigilância cibernética"</string>
+    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
+    <skip />
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Segurança da rede móvel"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notificações"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Notificações de rede"</string>
@@ -4331,8 +4332,7 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Eventos da agenda"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rotina hora de dormir"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Ao dirigir"</string>
-    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
-    <skip />
+    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"Quando em trânsito"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Configurações do app"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informações e configurações em <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Gerenciado por <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4349,8 +4349,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Bloqueie distrações ou interrupções de seu dispositivo para manter o foco"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimine todas as distrações para ter um ambiente silencioso"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalize as experiências e configurações do dispositivo para diferentes usuários"</string>
-    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
-    <skip />
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Aproveite melhor o transporte público com ajustes automáticos de configurações"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimize interrupções permitindo que apenas pessoas e apps importantes entrem em contato com você"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Defina um modo que siga uma programação regular"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Mantenha seu dispositivo sincronizado com os eventos do dia"</string>
@@ -4359,8 +4358,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Concentre-se para entrar no clima"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Para momentos em que a cortesia é importante"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Uso guiado para garantir sua segurança"</string>
-    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
-    <skip />
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Otimize seu dispositivo para uma experiência mais tranquila no transporte público"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Controle sua atenção"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Alerta"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Fechar"</string>
@@ -5513,7 +5511,7 @@
     <string name="error_pending_updates" msgid="7196832772265874760">"Falha ao atualizar o kernel. Confira e instale as atualizações pendentes."</string>
     <string name="error_ota_failed" msgid="4762376085470989653">"Falha ao atualizar o kernel. Ocorreu um erro ao aplicar a atualização OTA."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Gerenciador de relatórios de bugs"</string>
-    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina qual app gerencia o atalho para o Relatório de bug no dispositivo."</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina qual app gerencia o atalho para o relatório de bugs no dispositivo."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Pessoais"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Trabalho"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Padrão do sistema"</string>
@@ -6012,6 +6010,8 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Resultados da pesquisa"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtrar resultados da pesquisa com conteúdo explícito"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Compatível com # app}one{Compatível com # app}other{Compatível com # apps}}"</string>
+    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Quando essas configurações são desativadas, outras configurações da conta ainda podem ser aplicadas."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Digite o PIN dos controles da família"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Definir um PIN dos controles da família"</string>
@@ -6029,15 +6029,21 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Algo deu errado"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Tente de novo mais tarde"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Voltar"</string>
-    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"A Confirmação de Identidade funciona com mais apps"</string>
-    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"A Confirmação de Identidade impede o acesso indesejado aos seus apps. Agora disponível com qualquer app que use o Desbloqueio Facial ou por impressão digital."</string>
+    <!-- no translation found for supervision_available_apps_title (886352413031517863) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
+    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"A confirmação de identidade funciona com mais apps"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"A confirmação de identidade impede o acesso indesejado aos seus apps. Agora disponível com qualquer aplicativo que use o desbloqueio facial ou por impressão digital."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Mostrar detalhes"</string>
-    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"A Confirmação de Identidade funciona com mais apps"</string>
-    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Atualizações:\n"<ul><li>"A Confirmação de Identidade adiciona proteção a qualquer app que use o Desbloqueio Facial ou por impressão digital"</li>\n<li>"Com o tempo, esse recurso poderá adicionar mais formas de verificar sua identidade e proteger apps no seu dispositivo. "<a href="https://support.google.com/android?p=identity_check">"Saiba mais sobre quando e onde você tem proteção"</a></li></ul></string>
-    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Confirmação de Identidade e relógio"</string>
-    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Com um relógio conectado, a Confirmação de Identidade adiciona mais formas de verificar sua identidade para impedir o acesso indesejado a apps"</string>
-    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Confirmação de Identidade e relógio"</string>
-    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Atualizações:\n"<ul><li>"Ao conectar um relógio, você pode usar a biometria ou o PIN para acessar apps quando não estiver em um lugar de confiança"</li>\n<li>"Com o tempo, a Confirmação de Identidade poderá adicionar mais formas de verificar sua identidade e proteger apps no seu dispositivo. "<a href="https://support.google.com/android?p=identity_check">"Saiba mais sobre quando e onde você tem proteção"</a></li></ul></string>
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"A confirmação de identidade funciona com mais apps"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Atualizações:\n"<ul><li>"A confirmação de identidade adiciona proteção a qualquer app que use o desbloqueio facial ou por impressão digital"</li>\n<li>"Com o tempo, esse recurso poderá adicionar mais formas de verificar sua identidade e proteger apps no seu dispositivo. "<a href="https://support.google.com/android?p=identity_check">"Saiba mais sobre quando e onde você tem proteção"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Confirmação de identidade e relógio"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Com um relógio conectado, a confirmação de identidade adiciona mais formas de verificar sua identidade para impedir o acesso indesejado a apps"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Confirmação de identidade e relógio"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Atualizações:\n"<ul><li>"Ao conectar um relógio, você pode usar a biometria ou o PIN para acessar apps quando não estiver em um lugar de confiança"</li>\n<li>"Com o tempo, a confirmação de identidade poderá adicionar mais formas de verificar sua identidade e proteger apps no seu dispositivo. "<a href="https://support.google.com/android?p=identity_check">"Saiba mais sobre quando e onde você tem proteção"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Outras configurações"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Preenchimento automático, notificações e mais"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Controles de privacidade"</string>
@@ -6050,10 +6056,10 @@
     <string name="cellular_network_security_subpage_title" msgid="1191202157978621337">"Segurança da rede celular"</string>
     <string name="location_settings" msgid="6833222354060094170">"Acesso ao local"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Veja apps e serviços que têm acesso à localização"</string>
-    <string name="identity_check_notification_title" msgid="8004343932775654492">"A Confirmação de Identidade funciona com mais apps"</string>
-    <string name="identity_check_notification_summary" msgid="3762060079941053730">"A Confirmação de Identidade impede o acesso indesejado aos seus apps. Agora disponível com qualquer aplicativo que use o Desbloqueio Facial ou por impressão digital."</string>
-    <string name="identity_check_watch_notification_title" msgid="5559702400315647907">"Confirmação de Identidade e seu relógio"</string>
-    <string name="identity_check_watch_notification_summary" msgid="3200144847521451493">"Com um relógio conectado, a Confirmação de Identidade traz mais formas de comprovar que é mesmo você e impedir o acesso indesejado a apps"</string>
+    <string name="identity_check_notification_title" msgid="8004343932775654492">"A confirmação de identidade funciona com mais apps"</string>
+    <string name="identity_check_notification_summary" msgid="3762060079941053730">"A confirmação de identidade impede o acesso indesejado aos seus apps. Agora disponível com qualquer aplicativo que use o desbloqueio facial ou por impressão digital."</string>
+    <string name="identity_check_watch_notification_title" msgid="5559702400315647907">"Confirmação de identidade e seu relógio"</string>
+    <string name="identity_check_watch_notification_summary" msgid="3200144847521451493">"Com um relógio conectado, a confirmação de identidade traz mais formas de comprovar que é mesmo você e impedir o acesso indesejado a apps"</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Mostrar detalhes"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"Não foi possível verificar as configurações"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Ainda não há informações"</string>
@@ -6073,8 +6079,7 @@
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Alertas dispensados"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Dispensar esse alerta?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Revise suas configurações de segurança e privacidade a qualquer momento para aumentar a proteção"</string>
-    <!-- no translation found for safety_center_resolved_issue_fallback (223765674640909183) -->
-    <skip />
+    <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Ação concluída"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Pareando"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Dispositivo conectado: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Verificar dispositivo"</string>

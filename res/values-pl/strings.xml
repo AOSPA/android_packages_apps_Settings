@@ -68,8 +68,7 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Zmień nazwę"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Rozłączyć urządzenie?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Sparuj nowe urządzenie"</string>
-    <!-- no translation found for bluetooth_pairing_no_device_button_message (6429917002249666051) -->
-    <skip />
+    <string name="bluetooth_pairing_no_device_button_message" msgid="6429917002249666051">"Nie możesz znaleźć urządzenia?"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Automatycznie włącz jutro"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Gdy wyłączysz Bluetooth, następnego dnia włączy się ponownie"</string>
@@ -1027,6 +1026,8 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Nie podłączono wyświetlacza"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Aby rozpocząć, podłącz wyświetlacz zewnętrzny lub użyj innego kabla"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Więcej opcji"</string>
+    <!-- no translation found for external_display_pause_topology_hint (1128908588539457600) -->
+    <skip />
     <string name="external_display_topology_hint" msgid="885396727047321347">"Przytrzymaj i przeciągnij, aby zmienić kolejność wyświetlaczy"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Kliknij, aby wyświetlić strzałki nawigacji"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Kliknij strzałki, aby zmienić układ wyświetlaczy"</string>
@@ -1206,19 +1207,18 @@
     <string name="retry" msgid="7542103800274026915">"Ponów"</string>
     <string name="shared_message" msgid="2104244057926025072">"udostępnioną"</string>
     <string name="private_message" msgid="5897966950396765392">"prywatną"</string>
-    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Potwierdź"</string>
+    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
+    <skip />
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Anuluj"</string>
-    <!-- no translation found for wifi_share_preference_title (2000847347515149059) -->
+    <string name="wifi_share_preference_title" msgid="2000847347515149059">"Udostępnij sieć"</string>
+    <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Inni użytkownicy tego urządzenia mają dostęp do tej sieci"</string>
+    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
     <skip />
-    <!-- no translation found for wifi_share_preference_summary (3642772041628058748) -->
+    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
     <skip />
-    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"Przełączyć się na <xliff:g id="SHARED">%1$s</xliff:g> sieć „<xliff:g id="NETWORK_NAME">%2$s</xliff:g>”?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"Obecnie masz połączenie z <xliff:g id="SHARED_0">%1$s</xliff:g> siecią o tej samej nazwie. Po przełączeniu utracisz połączenie z <xliff:g id="SHARED_1">%2$s</xliff:g> siecią i połączysz się z siecią <xliff:g id="PRIVATE">%3$s</xliff:g>. Możesz chwilowo nie mieć dostępu do internetu."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(nie zmieniono)"</string>
-    <!-- no translation found for wifi_allow_edit_configuration_title (701463165569293) -->
-    <skip />
-    <!-- no translation found for wifi_allow_edit_configuration_summary (2133654391010089827) -->
-    <skip />
+    <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Zezwalaj na edytowanie sieci"</string>
+    <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Inni użytkownicy mogą wprowadzać zmiany w tej sieci"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Wybierz"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Dodano wiele certyfikatów)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Używaj certyfikatów systemowych"</string>
@@ -1232,10 +1232,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Zezwól"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Odrzuć"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* wymagane"</string>
-    <!-- no translation found for wifi_shared_network_login_screen_warning (8298716960537761436) -->
-    <skip />
-    <!-- no translation found for edit_wifi_network_non_owner_message (4387650403845968672) -->
-    <skip />
+    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"To jest udostępniona sieć. Aby wprowadzić zmiany, musisz się zalogować."</string>
+    <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Aby wprowadzić zmiany, skontaktuj się z właścicielem sieci lub administratorem urządzenia."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Ta sieć nie ma dostępu do internetu. Nadal chcesz się z nią łączyć?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Niektóre aplikacje i usługi mogą nie działać z powodu ograniczonej łączności. Użyć mimo to?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Nie pytaj ponownie o tę sieć"</string>
@@ -1255,8 +1253,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Nie udało się zapisać sieci"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Anuluj"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Zapomnieć sieć?"</string>
-    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"Zapomnieć tę sieć u wszystkich użytkowników urządzenia?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"Z sieci <xliff:g id="NETWORK_NAME">%1$s</xliff:g> korzystają inni użytkownicy tego urządzenia i wszyscy będą musieli skonfigurować ją ponownie. Chcesz zapomnieć tę sieć mimo to?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 sieć}few{# sieci}many{# sieci}other{# sieci}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 subskrypcja}few{# subskrypcje}many{# subskrypcji}other{# subskrypcji}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 sieć i abonament}few{# sieci i abonamenty}many{# sieci i abonamentów}other{# sieci i abonamentu}}"</string>
@@ -1395,7 +1393,7 @@
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Włączony"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Aktywuj Połączenia przez Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Włącz Połączenia przez Wi-Fi"</string>
-    <string name="wifi_disconnected_from" msgid="5249576734324159708">"Rozłączono z siecią <xliff:g id="SSID">%1$s</xliff:g>"</string>
+    <string name="wifi_disconnected_from" msgid="5249576734324159708">"Odłączono sieć <xliff:g id="SSID">%1$s</xliff:g>"</string>
     <string name="sound_settings" msgid="7622986039384531304">"Dźwięk i wibracje"</string>
     <string name="account_settings" msgid="255404935489127404">"Konta"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Konta profili służbowych – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
@@ -2738,7 +2736,10 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Trzykrotnie kliknij ekran"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Edytowanie skrótów ułatwień dostępu"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Wybierz skrót dla: %1$s"</string>
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"Aby z niego korzystać, włącz skrót %1$s na stronie ułatwień dostępu"</string>
+    <!-- no translation found for a11y_button_shortcut_unassigned_setting_unavailable_summary (8268632664568192689) -->
+    <skip />
+    <!-- no translation found for a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary (2232737783140069174) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Dalej"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Urządzenia słuchowe"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Skonfiguruj aparaty słuchowe, implanty ślimakowe i inne urządzenia wzmacniające dźwięk, które obsługują protokoły ASHA i LE Audio, oraz zarządzaj nimi"</string>
@@ -3165,7 +3166,8 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Automatycznie wybiera najlepsze połączenie sieciowe w celu wydłużenia czasu pracy na baterii"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Bezpieczeństwo sieci komórkowej"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Typ sieci, szyfrowanie, ustawienia powiadomień"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Te ustawienia pomagają chronić Twoje połączenia, wiadomości i dane przed przestarzałymi lub niezaszyfrowanymi sieciami, które mogłyby narazić Cię na kradzież danych lub inwigilację"</string>
+    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
+    <skip />
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Bezpieczeństwo sieci komórkowej"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Powiadomienia"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Powiadomienia dotyczące sieci"</string>
@@ -6017,6 +6019,8 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Wyniki wyszukiwania"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Odfiltrowuj wyniki wyszukiwania dla pełnoletnich"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{W # aplikacji}few{W # aplikacjach}many{W # aplikacjach}other{W # aplikacji}}"</string>
+    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Po wyłączeniu tych ustawień nadal mogą obowiązywać inne ustawienia konta."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Wpisz kod PIN do kontroli rodzicielskiej"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Ustaw PIN kontroli rodzicielskiej"</string>
@@ -6034,6 +6038,12 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Coś poszło nie tak"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Spróbuj ponownie później"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Wróć"</string>
+    <!-- no translation found for supervision_available_apps_title (886352413031517863) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Potwierdzenie tożsamości działa z większą liczbą aplikacji"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Potwierdzenie tożsamości zapobiega niepożądanemu dostępowi do Twoich aplikacji. Teraz funkcja ta jest dostępna w każdej aplikacji korzystającej z odblokowywania przez rozpoznawanie twarzy lub odcisk palca."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Wyświetl szczegóły"</string>
@@ -6078,8 +6088,7 @@
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Zamknięte alerty"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Zamknąć ten alert?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Zajrzyj do ustawień zabezpieczeń i prywatności, aby zwiększyć bezpieczeństwo"</string>
-    <!-- no translation found for safety_center_resolved_issue_fallback (223765674640909183) -->
-    <skip />
+    <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Działanie ukończone"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Paruję"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Urządzenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> połączone"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Przeskanuj urządzenie"</string>

@@ -68,8 +68,7 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Преименувај"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Да прекине врската со уредот?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Спарете нов уред"</string>
-    <!-- no translation found for bluetooth_pairing_no_device_button_message (6429917002249666051) -->
-    <skip />
+    <string name="bluetooth_pairing_no_device_button_message" msgid="6429917002249666051">"Не може да се најде уредот?"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Автоматски вклучи го утре"</string>
     <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Ако го исклучите Bluetooth, ќе се вклучи пак следниот ден"</string>
@@ -1027,6 +1026,8 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Не е поврзан екран"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Поврзете надворешен екран за да започнете или обидете се со друг кабел"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Повеќе опции"</string>
+    <!-- no translation found for external_display_pause_topology_hint (1128908588539457600) -->
+    <skip />
     <string name="external_display_topology_hint" msgid="885396727047321347">"Задржете и повлечете за преуредување на екраните"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Допрете за да се прикажат стрелките за навигација"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Допрете ги стрелките за да ги прераспоредите екраните"</string>
@@ -1206,19 +1207,18 @@
     <string name="retry" msgid="7542103800274026915">"Обиди се повторно"</string>
     <string name="shared_message" msgid="2104244057926025072">"споделено"</string>
     <string name="private_message" msgid="5897966950396765392">"приватно"</string>
-    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Потврди"</string>
+    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
+    <skip />
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Откажи"</string>
-    <!-- no translation found for wifi_share_preference_title (2000847347515149059) -->
+    <string name="wifi_share_preference_title" msgid="2000847347515149059">"Споделете ја мрежата"</string>
+    <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Другите корисници на уредов може да пристапуваат до мрежава"</string>
+    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
     <skip />
-    <!-- no translation found for wifi_share_preference_summary (3642772041628058748) -->
+    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
     <skip />
-    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"Да се префрли на <xliff:g id="SHARED">%1$s</xliff:g> мрежа „<xliff:g id="NETWORK_NAME">%2$s</xliff:g>“?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"Во моментов сте поврзани на <xliff:g id="SHARED_0">%1$s</xliff:g> мрежа со истото име. Кога ќе се префрлите, ќе се исклучите од <xliff:g id="SHARED_1">%2$s</xliff:g> мрежа, па ќе се поврзете повторно на <xliff:g id="PRIVATE">%3$s</xliff:g> мрежа. Може да немате интернет привремено."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(непроменето)"</string>
-    <!-- no translation found for wifi_allow_edit_configuration_title (701463165569293) -->
-    <skip />
-    <!-- no translation found for wifi_allow_edit_configuration_summary (2133654391010089827) -->
-    <skip />
+    <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Дозволете измени на мрежата"</string>
+    <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Другите корисници може да вршат промени во мрежава"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Изберете"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Додадени се повеќе сертификати)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Користи системски сертификати"</string>
@@ -1232,10 +1232,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Дозволи"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Одбиј"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*задолжително"</string>
-    <!-- no translation found for wifi_shared_network_login_screen_warning (8298716960537761436) -->
-    <skip />
-    <!-- no translation found for edit_wifi_network_non_owner_message (4387650403845968672) -->
-    <skip />
+    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Ова е споделена мрежа. Треба да се најавите за да вршите промени."</string>
+    <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Контактирајте со сопственикот на мрежата или администраторот на уредот за да извршите промени."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Мрежава нема пристап на интернет. Сакате да останете поврзани?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Некои апликации и услуги можеби нема да работат поради ограничена поврзливост. Сепак да се користи?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Не прашувај повторно во оваа мрежа"</string>
@@ -1255,8 +1253,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Не успеа да се зачува мрежата"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Откажи"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Дали да се заборави мрежата?"</string>
-    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"Да се заборават сите корисници на уредот?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"Мрежата <xliff:g id="NETWORK_NAME">%1$s</xliff:g> ја користат други корисници на овој уред и сите корисници на оваа мрежа ќе треба повторно да ја постават. Сѐ уште сакате да се заборави?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 мрежа}one{# мрежа}other{# мрежи}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 претплата}one{# претплата}other{# претплати}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 мрежа и претплата}one{# мрежа и претплата}other{# мрежи и претплати}}"</string>
@@ -1330,8 +1328,7 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / Компатибилна со многу уреди"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / Компатибилна со малку уреди"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2,4 и 5 GHz / Компатибилна со повеќето уреди"</string>
-    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_6g (5903589948734876821) -->
-    <skip />
+    <string name="wifi_hotspot_speed_summary_2g_and_6g" msgid="5903589948734876821">"2,4 и 6 GHz / Компатибилна со повеќето уреди"</string>
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Изберете фреквенција за вашата точка на пристап. Фреквенцијата влијае на брзината на врската и на типовите уреди кои можат да ја најдат вашата точка на пристап."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Претпочитана фреквенција"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 GHz"</string>
@@ -1342,10 +1339,8 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Големи брзини. Оваа точка на пристап со двоен опсег е компатибилна со повеќето уреди."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Најголеми брзини. Компатибилна со малку уреди."</string>
-    <!-- no translation found for wifi_hotspot_speed_2g_6g (7660263835445953086) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g_6g_summary (5013590436817464652) -->
-    <skip />
+    <string name="wifi_hotspot_speed_2g_6g" msgid="7660263835445953086">"2,4 и 6 GHz"</string>
+    <string name="wifi_hotspot_speed_2g_6g_summary" msgid="5013590436817464652">"Најголеми брзини. Оваа точка на пристап со двоен опсег е компатибилна со повеќето уреди."</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Не е достапна во вашата земја или регион"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Ако вашата претпочитана фреквенција не е достапна, вашата точка на пристап може да користи друга фреквенција. Поставките за безбедност на точката на пристап може да се променат ако ја промените фреквенцијата."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Не е достапно со 6 GHz"</string>
@@ -2604,7 +2599,7 @@
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Големина"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Избледува кога не се користи"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Избледува по неколку секунди, па може полесно да го видите екранот"</string>
-    <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Провидно кога не се користи"</string>
+    <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Провидност кога не се користи"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Провидно"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Непровидно"</string>
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Недостапно во „Режим на копче на лента за навигација“"</string>
@@ -2741,7 +2736,10 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Троен допир на екранот"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Изменување на кратенките за пристапност"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Изберете ја вашата кратенка за %1$s"</string>
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"За да го користите ова, вклучете ја кратенката %1$s на страницата на функцијата за пристапност"</string>
+    <!-- no translation found for a11y_button_shortcut_unassigned_setting_unavailable_summary (8268632664568192689) -->
+    <skip />
+    <!-- no translation found for a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary (2232737783140069174) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Продолжи"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Слушни апарати"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Поставете ги и управувајте со слушните помагала, кохлеарните импланти и другите уреди за засилување со ASHA и LE Audio"</string>
@@ -3168,7 +3166,8 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Автоматски ја избира најдобрата мрежна врска за да го продолжи траењето на батеријата"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Безбедност на мобилната мрежа"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Тип мрежа, шифрирање, контроли за известувања"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Овие поставки помагаат да се заштитат вашите повици, пораки и податоци од застарени или нешифрирани мрежи што може да ве изложат на ризик од кражба на податоците или надзор"</string>
+    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
+    <skip />
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Безбедност на мобилната мрежа"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Известувања"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Известувања за мрежата"</string>
@@ -5985,8 +5984,7 @@
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Поставете PIN за родителски контроли"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"надзор, родителски контроли, родители, игличка за надзор, игличка"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Управувајте со PIN-кодот"</string>
-    <!-- no translation found for supervision_manage_pin_preference_title (4699676657525668391) -->
-    <skip />
+    <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Управување со PIN-кодот за родителски контроли"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN за родителски контроли"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN на родител, PIN на родителски контроли"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Додајте е-пошта за враќање"</string>
@@ -6019,6 +6017,8 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Резултати од пребарување"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Филтрирај експлицитни резултати од пребарување"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Во # апликација}one{Во # апликација}other{Во # апликации}}"</string>
+    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Кога се исклучени поставкиве, сѐ уште може да важат другите поставки за сметката."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Внесете го PIN-кодот за родителските контроли"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Поставете PIN-код за родителски контроли"</string>
@@ -6036,6 +6036,12 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Нешто тргна наопаку"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Обидете се повторно подоцна"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Врати се назад"</string>
+    <!-- no translation found for supervision_available_apps_title (886352413031517863) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
+    <skip />
+    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"„Проверка на идентитетот“ функционира со повеќе апликации"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"„Проверка на идентитетот“ спречува несакан пристап до вашите апликации. Отсега достапна со која било апликација што користи „Отклучување со отпечаток“ или „Отклучување со лик“."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Прикажи ги деталите"</string>
@@ -6080,8 +6086,7 @@
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Отфрлени предупредувања"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Да се отфрли предупредувањево?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Прегледајте ги поставките за безбедност и приватност кога било за да додадете поголема заштита"</string>
-    <!-- no translation found for safety_center_resolved_issue_fallback (223765674640909183) -->
-    <skip />
+    <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Дејството е завршено"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Се спарува"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Поврзано: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Скенирај го уредот"</string>
