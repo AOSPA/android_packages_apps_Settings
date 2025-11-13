@@ -22,6 +22,8 @@ import androidx.fragment.app.Fragment
 import com.android.settings.applications.AppListScreen
 import com.android.settings.applications.CatalystAppListFragment
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,7 +35,16 @@ abstract class SpecialAccessAppListScreen : AppListScreen() {
 
     abstract val appDetailScreenKey: String
 
+    @Deprecated(
+        message =
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use appDetailKeyParameters instead."
+    )
     abstract fun appDetailParameters(context: Context, hierarchyType: Boolean): Flow<Bundle>
+
+    abstract fun appDetailKeyParameters(
+        context: Context,
+        hierarchyType: Boolean,
+    ): Flow<KeyParameters>
 
     override fun fragmentClass(): Class<out Fragment>? = CatalystAppListFragment::class.java
 
@@ -50,9 +61,16 @@ abstract class SpecialAccessAppListScreen : AppListScreen() {
         preferenceHierarchy(context) {
             addAsync(coroutineScope, Dispatchers.Default) {
                 val screenKey = appDetailScreenKey
-                appDetailParameters(context, hierarchyType)
-                    .onEmpty { +NoAppPreference() }
-                    .collect { +(screenKey args it) }
+
+                if (CatalystFlags.catalystUseKeyParameters()) {
+                    appDetailKeyParameters(context, hierarchyType)
+                        .onEmpty { +NoAppPreference() }
+                        .collect { +(screenKey withParameters it) }
+                } else {
+                    appDetailParameters(context, hierarchyType)
+                        .onEmpty { +NoAppPreference() }
+                        .collect { +(screenKey args it) }
+                }
             }
         }
 }
