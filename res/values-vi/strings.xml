@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Sử dụng <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> bắt đầu vào <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Sử dụng <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Không có giờ tiết kiệm ánh sáng ban ngày."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Giờ mùa hè"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Giờ chuẩn"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Chọn theo khu vực"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Chọn theo độ lệch GMT"</string>
@@ -1231,8 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*bắt buộc"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Đây là mạng dùng chung. Bạn cần đăng nhập để thực hiện thay đổi."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Hãy liên hệ với chủ sở hữu mạng hoặc quản trị viên thiết bị để thực hiện thay đổi."</string>
-    <!-- no translation found for wifi_shared_network_icon_message (8937015463026388043) -->
-    <skip />
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Tất cả người dùng trên thiết bị này có thể truy cập vào mạng này."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Mạng này không có quyền truy cập Internet. Giữ kết nối?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Một số ứng dụng và dịch vụ có thể không hoạt động do khả năng kết nối giới hạn. Vẫn sử dụng?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Không hỏi lại cho mạng này"</string>
@@ -1252,7 +1253,7 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Không thể lưu mạng"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Hủy"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Xóa mạng?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> của tất cả người dùng sẽ bị xoá trên thiết bị này"</string>
+    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"Mạng <xliff:g id="NETWORK_NAME">%1$s</xliff:g> sẽ bị xoá cho tất cả người dùng trên thiết bị này"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 mạng}other{# mạng}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 gói thuê bao}other{# gói thuê bao}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 mạng và gói thuê bao}other{# mạng và gói thuê bao}}"</string>
@@ -1756,8 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"Trường MCC phải có 3 chữ số."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"Trường MNC phải có 2 hoặc 3 chữ số."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Nhà cung cấp dịch vụ không cho phép thêm APN thuộc loại %s."</string>
-    <!-- no translation found for error_disallow_adding_apn (4053023049932971602) -->
-    <skip />
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"Nhà mạng không cho phép thêm APN này."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"Trường MMSC phải hợp lệ."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Đang khôi phục cài đặt APN mặc định."</string>
     <string name="menu_restore" msgid="4310539620115151551">"Đặt lại về mặc định"</string>
@@ -1845,7 +1845,7 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Các yêu cầu gần đây về vị trí"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Vị trí của hồ sơ công việc"</string>
     <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Vị trí dành cho không gian riêng tư"</string>
-    <string name="location_app_level_permissions" msgid="907206607664629759">"Quyền truy cập thông tin vị trí cho ứng dụng"</string>
+    <string name="location_app_level_permissions" msgid="907206607664629759">"Quyền truy cập thông tin vị trí của ứng dụng"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Dịch vụ vị trí hiện đang tắt"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{#/{total} ứng dụng có quyền truy cập vào thông tin vị trí}other{#/{total} ứng dụng có quyền truy cập vào thông tin vị trí}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Quyền truy cập gần đây"</string>
@@ -2636,6 +2636,12 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Giao diện tối mở rộng"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Tự động áp dụng giao diện tối cho hầu hết các ứng dụng không hỗ trợ giao diện tối. Điều này có thể cải thiện khả năng tiếp cận và khả năng đọc, nhưng có thể khiến một số ứng dụng hiển thị không chính xác."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"buộc đảo ngược, đảo màu, độ tương phản"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Xóa hiệu ứng động"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Giảm chuyển động trên màn hình"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Tốc độ nhấp nháy con trỏ văn bản"</string>
@@ -3104,8 +3110,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Xem theo hệ thống"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"chưa đến <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Do quy trình kiểm tra tại nhà máy trước khi vận chuyển, nên có thể thiết bị của bạn đã được sử dụng trước khi bạn thiết lập và số chu kỳ có thể không phải là 0. Đây là điều bình thường"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Số liệu thống kê về quy trình"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Số liệu thống kê chi tiết về các quy trình đang chạy"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Mức sử dụng bộ nhớ"</string>
@@ -4598,18 +4603,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Cho phép truy cập để quản lý tất cả các tệp"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Cho phép ứng dụng này đọc, sửa đổi và xóa tất cả các tệp trên thiết bị này hoặc bất kỳ thiết bị lưu trữ nào đã kết nối. Nếu bạn cho phép, ứng dụng có thể truy cập vào các tệp mà không cần thông báo rõ ràng cho bạn."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Có thể truy cập vào tất cả các tệp"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Tự động hoá màn hình"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Cho phép ứng dụng này tự động hoá hoàn toàn các ứng dụng khác"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Ứng dụng này sẽ có thể kiểm soát các ứng dụng của bạn. Bạn không thể dùng các ứng dụng được kiểm soát trong khi quá trình tự động hoá màn hình đang diễn ra, nhưng bạn có thể dừng quá trình này bất cứ lúc nào."</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Luôn hỏi"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Luôn cho phép"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Không cho phép"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Thông báo toàn màn hình"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Cho phép ứng dụng này hiện thông báo toàn màn hình"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Cho phép ứng dụng hiện các thông báo chiếm toàn màn hình khi thiết bị ở trạng thái khoá. Các ứng dụng có thể dùng những thông báo này để làm nổi bật chuông báo, cuộc gọi đến hoặc thông báo khẩn cấp khác."</string>
@@ -4918,13 +4917,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Độ nhạy với cử chỉ quay lại"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Điều hướng bằng cử chỉ"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"Cài đặt thao tác bằng cử chỉ"</string>
-    <!-- no translation found for gesture_settings_extra_button_hint (5061056396437804198) -->
-    <skip />
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"mở trang cài đặt thao tác bằng cử chỉ"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Dùng thử bản minh hoạ"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Thao tác bằng nút"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Cài đặt thao tác bằng nút"</string>
-    <!-- no translation found for button_navigation_settings_extra_button_hint (6471481336598365780) -->
-    <skip />
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"mở trang cài đặt thao tác bằng nút"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Thứ tự nút"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Thứ tự nút, Di chuyển nút, chế độ thuận tay trái, chế độ thuận tay phải"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Quay lại"</string>
@@ -6002,10 +5999,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Định cấu hình thông tin chi tiết về thiết bị."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Chế độ kiểm soát của cha mẹ"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Quy tắc cơ bản về việc sử dụng thiết bị kỹ thuật số và giới hạn thời gian sử dụng thiết bị"</string>
-    <!-- no translation found for supervision_intro_title (2686370837216266390) -->
-    <skip />
-    <!-- no translation found for supervision_intro_description (101353421249918460) -->
-    <skip />
+    <string name="supervision_intro_title" msgid="2686370837216266390">"Tạo mã PIN cho chế độ kiểm soát của cha mẹ trên thiết bị này"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"Bạn sẽ dùng mã PIN này để quản lý chế độ kiểm soát của cha mẹ và các ứng dụng trên thiết bị này.\n\nBạn có thể chỉnh sửa hoặc xoá mã PIN trong phần Cài đặt Android &gt; Chế độ kiểm soát của cha mẹ."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Thiết lập mã PIN"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Thiết lập mã PIN cho chế độ kiểm soát của cha mẹ"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"giám sát, chế độ kiểm soát của cha mẹ, cha mẹ, mã pin giám sát, mã pin"</string>
@@ -6013,12 +6008,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Quản lý mã PIN cho chế độ kiểm soát của cha mẹ"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Mã PIN cho chế độ kiểm soát của cha mẹ"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Mã PIN dành cho cha mẹ, mã PIN cho chế độ kiểm soát của cha mẹ"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Thêm email khôi phục"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Xác minh email khôi phục"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Thêm thông tin khôi phục"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Xác minh thông tin khôi phục"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Thay đổi mã PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Quên mã PIN"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Bạn quên mã PIN?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Cập nhật email khôi phục"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Cập nhật thông tin khôi phục"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Đã thêm email khôi phục"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Đã xác minh email khôi phục"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Đã cập nhật email khôi phục"</string>
@@ -6030,11 +6025,14 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Thêm thông tin khôi phục"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Nếu quên mã PIN, bạn có thể dùng tài khoản của mình để đặt lại"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Xoá mã PIN"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Thêm email khôi phục"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Xác minh email của bạn"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Thêm thông tin khôi phục"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Xác minh thông tin khôi phục"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Bộ lọc theo cửa hàng ứng dụng"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Lọc ứng dụng dựa trên nội dung theo độ tuổi"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Mỗi ứng dụng có thể chặn nhiều loại nội dung. Các cửa hàng ứng dụng không có trong danh sách phải được quản lý riêng."</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Bộ lọc nội dung trên web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Bộ lọc trang web, Chặn trang web, Bộ lọc trình duyệt, Chặn trang web có nội dung phản cảm, Lọc trang web, Chặn kết quả tìm kiếm, Lọc kết quả tìm kiếm có nội dung phản cảm, giới hạn nội dung"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Giúp lọc nội dung phản cảm trên một số ứng dụng và trình duyệt trên điện thoại này. Nội dung phản cảm có thể vẫn hiển thị trên các ứng dụng, thiết bị hoặc trình duyệt khác."</string>
@@ -6054,19 +6052,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Không xoá được mã PIN"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Không xoá được mã PIN"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Đã xảy ra lỗi khi cố gắng xoá mã PIN."</string>
-    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
-    <skip />
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"Tắt chế độ kiểm soát đối với người dùng này"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"Xoá mã PIN và tắt chế độ kiểm soát?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"Mã PIN cho chế độ kiểm soát của cha mẹ sẽ bị xoá. Mọi chế độ kiểm soát mà bạn thiết lập sẽ bị tắt."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Xoá và tắt"</string>
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
-    <skip />
-    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
-    <skip />
-    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
-    <skip />
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Xoá mã PIN và tắt chế độ kiểm soát"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"Xoá"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Mã PIN cho chế độ kiểm soát của cha mẹ đang được dùng bởi:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Ảnh động <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Không bật được chế độ kiểm soát"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Không dùng được các chế độ kiểm soát"</string>
@@ -6128,10 +6120,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Đang bật"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Có thể dùng"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Không dùng được"</string>
-    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
-    <skip />
-    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
-    <skip />
-    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
-    <skip />
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"Kết nối vệ tinh"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Luôn kết nối khi bạn không có mạng di động hoặc mạng Wi-Fi"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"Trang đích của vệ tinh"</string>
 </resources>

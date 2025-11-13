@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Часовой пояс: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> с <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>"</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>, без перехода на летнее время."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Летнее время"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Стандартное время"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Регион"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Выбрать по разнице с GMT"</string>
@@ -1231,8 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"* Обязательное поле."</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Эта сеть – общая. Чтобы вносить изменения, войдите в аккаунт."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Чтобы внести изменения, обратитесь к владельцу сети или администратору устройства."</string>
-    <!-- no translation found for wifi_shared_network_icon_message (8937015463026388043) -->
-    <skip />
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Эта сеть доступна всем пользователям устройства"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Эта сеть Wi-Fi не подключена к Интернету. Использовать ее?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Некоторые приложения и сервисы могут не работать, так как подключение к сети ограничено. Продолжить?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Больше не спрашивать для этой сети"</string>
@@ -1756,8 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"Поле MCC должно содержать 3 цифры."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"Поле MNC должно содержать 2 или 3 цифры."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Оператор запретил добавлять точки доступа этого типа (%s)."</string>
-    <!-- no translation found for error_disallow_adding_apn (4053023049932971602) -->
-    <skip />
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"Оператор связи запретил добавлять эту точку доступа."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"Значение в поле MMSC недействительно."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Восстановление настроек APN по умолчанию..."</string>
     <string name="menu_restore" msgid="4310539620115151551">"Сбросить настройки"</string>
@@ -2233,7 +2233,7 @@
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"Чтобы нажать и удерживать основную кнопку мыши, используйте клавишу \"<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>\"."</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Чтобы отпустить основную кнопку мыши, используйте клавишу \"<xliff:g id="RELEASE_LABEL">%s</xliff:g>\"."</string>
     <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"Чтобы включить или отключить режим прокрутки, нажмите \"<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>\". Когда он работает, клавиши <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> позволяют прокручивать экран вверх, вниз, влево и вправо."</string>
-    <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"Нажать вспомогательную кнопку мыши можно, используя клавишу \"<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>\"."</string>
+    <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"Чтобы нажать вспомогательную кнопку мыши, используйте клавишу \"<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>\"."</string>
     <string name="mouse_keys_acceleration_seekbar_title" msgid="2329098889930361504">"Ускорение"</string>
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"Быстро"</string>
     <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"Медленно"</string>
@@ -2636,6 +2636,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Тёмная тема с расширенными параметрами"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Включать тёмную тему в тех приложениях, где она не поддерживается. Будет проще использовать их и читать текст, но интерфейс может показываться некорректно."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"принудительная инверсия, инверсия цветов, контрастность"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Расширенная тёмная тема"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Настройки расширенной тёмной темы"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Открыть настройки расширенной тёмной темы"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Убрать анимации"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Уменьшить количество движений на экране"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Мигание текстового курсора"</string>
@@ -3104,8 +3107,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Системные сервисы"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"менее <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Поскольку на заводе устройство проверяют перед поставкой, в информации о нем может быть указано, что оно уже использовалось до настройки, а количество циклов зарядки может быть больше нуля. Это нормально."</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика процессов"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Статистика запущенных процессов"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Использование памяти"</string>
@@ -4912,13 +4914,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Чувствительность для жеста \"Назад\""</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Навигация с помощью жестов"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"Настройки навигации с помощью жестов"</string>
-    <!-- no translation found for gesture_settings_extra_button_hint (5061056396437804198) -->
-    <skip />
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"Открыть настройки навигации с помощью жестов"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Как использовать жесты"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Навигация с помощью кнопок"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Настройки навигации с помощью кнопок"</string>
-    <!-- no translation found for button_navigation_settings_extra_button_hint (6471481336598365780) -->
-    <skip />
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"Открыть настройки навигации с помощью кнопок"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Порядок кнопок"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Порядок кнопок, переместить кнопки, режим для левшей, режим для правшей"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Назад"</string>
@@ -5998,10 +5998,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Настройка сведений об устройстве."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Родительский контроль"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Основные правила использования устройств и ограничение экранного времени"</string>
-    <!-- no translation found for supervision_intro_title (2686370837216266390) -->
-    <skip />
-    <!-- no translation found for supervision_intro_description (101353421249918460) -->
-    <skip />
+    <string name="supervision_intro_title" msgid="2686370837216266390">"Создайте PIN-код для родительского контроля на этом устройстве"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"Этот PIN-код потребуется для управления приложениями и настройками родительского контроля на этом устройстве.\n\nВы можете изменить или удалить PIN-код в разделе \"Родительский контроль\" настроек Android."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Задать PIN-код"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Установите PIN-код для родительского контроля"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"родительский контроль, родители, PIN-код родительского контроля, PIN-код"</string>
@@ -6009,12 +6007,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Управление PIN-кодом для родительского контроля"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN-код для родительского контроля"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN-код родителя, PIN-код родительского контроля"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Добавить резервный адрес электронной почты"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Подтвердите резервный адрес электронной почты"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Добавьте данные для восстановления доступа"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Подтвердите данные для восстановления доступа"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Изменить PIN-код"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Забыли PIN-код?"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Забыли PIN-код?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Обновить резервный адрес электронной почты"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Обновить данные для восстановления доступа"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Резервный адрес электронной почты добавлен."</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Резервный адрес электронной почты подтвержден."</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Резервный адрес электронной почты обновлен."</string>
@@ -6026,11 +6024,14 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Добавьте данные для восстановления доступа"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Если вы забудете PIN-код, его можно будет сбросить в аккаунте"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Удалить PIN-код"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Добавить резервный адрес электронной почты"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Подтвердить адрес электронной почты"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Добавить данные для восстановления доступа"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Подтвердить данные для восстановления доступа"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Фильтры магазина приложений"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Фильтруйте приложения по возрастному ограничению для контента."</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"В зависимости от приложения могут блокироваться разные типы контента. Магазины приложений, не указанные в списке, нужно настраивать отдельно."</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Фильтры веб-контента"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Фильтры сайтов, заблокировать сайты, фильтры браузера, заблокировать сайты для взрослых, отфильтровать сайты, заблокировать результаты поиска, отфильтровать результаты поиска для взрослых, ограничения на контент"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Помогите отфильтровывать контент для взрослых в некоторых приложениях и браузерах на этом телефоне. Возможно, такие материалы будут по-прежнему показываться в других приложениях, браузерах и на других устройствах."</string>
@@ -6050,19 +6051,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Не удалось удалить PIN-код"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Невозможно удалить PIN-код"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"При удалении произошла ошибка."</string>
-    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
-    <skip />
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"Отключить настройки для этого пользователя"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"Удалить PIN-код и отключить настройки?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"PIN-код родительского контроля будет удален, а все заданные настройки – отключены."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Удалить и отключить"</string>
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
-    <skip />
-    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
-    <skip />
-    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
-    <skip />
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Удалить PIN-код и отключить настройки"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"Удалить"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Кто использует PIN-код родительского контроля:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> (анимация)"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Не удается включить родительский контроль"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Элементы управления недоступны"</string>
@@ -6124,10 +6119,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Включено"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Доступно"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Недоступно"</string>
-    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
-    <skip />
-    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
-    <skip />
-    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
-    <skip />
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"Спутниковая связь"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Оставайтесь на связи, даже если нет доступа к мобильной сети или Wi-Fi."</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"Целевая страница спутниковой связи"</string>
 </resources>

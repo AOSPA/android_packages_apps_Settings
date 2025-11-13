@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Používa <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> sa začína <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Používa <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nepoužíva letný čas."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Letný čas"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Štandardný čas"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Vybrať podľa oblasti"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Vybrať podľa posunu od GMT"</string>
@@ -1205,8 +1207,8 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Pridajte zariadenie do tejto siete pomocou QR kódu"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR kód nie je platný formát"</string>
     <string name="retry" msgid="7542103800274026915">"Skúsiť znova"</string>
-    <string name="shared_message" msgid="2104244057926025072">"zdieľanej"</string>
-    <string name="private_message" msgid="5897966950396765392">"súkromnej"</string>
+    <string name="shared_message" msgid="2104244057926025072">"zdieľaná"</string>
+    <string name="private_message" msgid="5897966950396765392">"súkromná"</string>
     <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"Prepnúť"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Zrušiť"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"Zdieľať sieť"</string>
@@ -1231,8 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"* Povinné."</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Toto je zdieľaná sieť. Ak ju chcete meniť, musíte sa prihlásiť."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Ak chcete vykonať zmeny, kontaktujte vlastníka siete alebo správcu zariadenia."</string>
-    <!-- no translation found for wifi_shared_network_icon_message (8937015463026388043) -->
-    <skip />
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Túto sieť môžu využívať všetci používatelia tohto zariadenia."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Táto sieť nemá prístup k internetu. Zachovať pripojenie?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Niektoré aplikácie a služby nemusia fungovať z dôvodu obmedzeného pripojenia. Chcete sieť napriek tomu použiť?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Nabudúce sa na túto sieť nepýtať"</string>
@@ -1756,8 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"Pole MCC musí obsahovať 3 číslice."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"Pole MNC musí obsahovať 2 alebo 3 číslice."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Operátor zakázal pridávanie názvov prístupového bodu typu %s."</string>
-    <!-- no translation found for error_disallow_adding_apn (4053023049932971602) -->
-    <skip />
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"Operátor nepovoľuje pridanie tohto prístupového bodu."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"Pole MMSC musí byť platné."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Prebieha obnovovanie predvolených nastavení názvu prístupového bodu (APN)."</string>
     <string name="menu_restore" msgid="4310539620115151551">"Resetovať na predvolené"</string>
@@ -1784,7 +1784,7 @@
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Odstrániť súkromný priestor"</string>
     <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Ak máte v zariadení súkromný priestor, bude natrvalo odstránený a účet Google doň pridaný bude vymazaný. \n\nOkrem toho budú z "<b>"interného úložiska"</b>" telefónu natrvalo odstránené všetky aplikácie vo vašom priestore vrátane ich dát."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Vymazať údaje (obnoviť výrobné nastavenia)"</string>
-    <string name="main_clear_short_title" msgid="4752094765533020696">"Vymazať údaje (obnoviť výrobné nastavenia)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"Vymazať všetky údaje (obnoviť výrobné nastavenia)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Hudba"</li>\n<li>"Fotky"</li>\n<li>"Iné údaje používateľa"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM karty"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Nezruší sa tým vaša tarifa mobilných služieb."</string>
@@ -2636,6 +2636,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Rozšírený tmavý motív"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Automaticky sa začne používať tmavý motív vo väčšine aplikácií, ktoré ho nepodporujú. Môže to zlepšiť dostupnosť a čitateľnosť, ale môže to spôsobiť, že niektoré aplikácie budú obsah zobrazovať nesprávne."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"vynútená inverzia, inverzia farieb, kontrast"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Rozšírený tmavý motív"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Nastavenia rozšíreného tmavého motívu"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Otvorte nastavenia rozšíreného tmavého motívu"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Odstrániť animácie"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Obmedziť pohyb na obrazovke"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Blikanie textového kurzora"</string>
@@ -3104,8 +3107,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Zobraziť podľa systémov"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"menej ako <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Pred odoslaním sa vykonáva kontrola vo výrobe, preto sa môže zobrazovať, že zariadenie bolo predtým, než ste ho nastavili, použité. Počet cyklov navyše nemusí byť nulový, čo je ale normálne."</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Štatistiky procesov"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Podrobné štatistiky spustených procesov"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Využitie pamäte"</string>
@@ -4598,18 +4600,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Povoliť prístup na správu všetkých súborov"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Povoľte tejto aplikácii čítať, upravovať a odstraňovať všetky súbory v tomto zariadení alebo akýchkoľvek pripojených úložiskách. Po udelení tohto povolenia bude môcť aplikácia používať súbory bez vášho vedomia."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Má prístup k všetkým súborom"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatizácia obrazovky"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Povoľte tejto aplikácii v plnej miere automatizovať iné aplikácie"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Táto aplikácia bude môcť ovládať vaše iné aplikácie. Ovládané aplikácie sa nebudú dať používať počas prebiehajúcej automatizácie obrazovky, ale kedykoľvek to budete môcť zastaviť."</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Vždy sa opýtať"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Vždy povolená"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Nepovoliť"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Upozornenia na celej obrazovke"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Povoliť zobrazovanie upozornení z tejto aplikácie na celej obrazovke"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Povoľte tejto aplikácii zobrazovať upozornenia na celú obrazovku, keď bude zariadenie uzamknuté. Aplikácie vás môžu pomocou nich informovať o budíkoch, prichádzajúcich hovoroch a ďalších dôležitých upozorneniach."</string>
@@ -4918,13 +4914,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Citlivosť prechádzania späť"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Navigácia gestami"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"Nastavenia navigácie gestami"</string>
-    <!-- no translation found for gesture_settings_extra_button_hint (5061056396437804198) -->
-    <skip />
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"otvoriť nastavenia navigácie gestami"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Vyskúšať ukážku"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigácia tlačidlami"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Nastavenia navigácie tlačidlami"</string>
-    <!-- no translation found for button_navigation_settings_extra_button_hint (6471481336598365780) -->
-    <skip />
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"otvoriť nastavenia navigácie tlačidlami"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Poradie tlačidiel"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Poradie tlačidiel, presunúť tlačidlá, režim pre ľavákov, režim pre pravákov"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Späť"</string>
@@ -6004,10 +5998,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Nakonfigurujte podrobnosti o zariadení."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Rodičovská kontrola"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Základné digitálne pravidlá a limity času používania"</string>
-    <!-- no translation found for supervision_intro_title (2686370837216266390) -->
-    <skip />
-    <!-- no translation found for supervision_intro_description (101353421249918460) -->
-    <skip />
+    <string name="supervision_intro_title" msgid="2686370837216266390">"Vytvorte pre toto zariadenie PIN rodičovskej kontroly"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"Pomocou tohto kódu PIN budete spravovať nastavenia rodičovskej kontroly a aplikácie v tomto zariadení.\n\nPIN môžete upraviť alebo odstrániť v sekcii Nastavenia Androidu &gt; Rodičovská kontrola."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Nastaviť kód PIN"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Nastavte PIN rodičovskej kontroly"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"dohľad, rodičovská kontrola, rodičia, pin dohľadu, pin"</string>
@@ -6015,12 +6007,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Správa kódu PIN rodičovskej kontroly"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN rodičovskej kontroly"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN rodiča, PIN rodičovskej kontroly"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Pridať e‑mail na obnovenie"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Overiť e‑mail na obnovenie"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Pridanie údajov na obnovenie"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Overenie údajov na obnovenie"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Zmeniť kód PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Zabudnutý kód PIN"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Zabudli ste PIN?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Aktualizácia e‑mailu na obnovenie"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Aktualizácia údajov na obnovenie"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"E‑mail na obnovenie bol pridaný"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"E‑mail na obnovenie bol overený"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"E‑mail na obnovenie bol aktualizovaný"</string>
@@ -6032,11 +6024,14 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Pridanie údajov na obnovenie"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Ak zabudnete kód PIN, môžete ho resetovať pomocou svojho účtu"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Odstrániť kód PIN"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Pridať e‑mail na obnovenie"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Overenie e‑mailu"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Pridanie údajov na obnovenie"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Overenie údajov na obnovenie"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtre obchodu s aplikáciami"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtrujte aplikácie podľa toho, pre akú vekovú skupinu je ich obsah určený"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Každá aplikácia môže blokovať rôzne typy obsahu. Obchody s aplikáciami, ktoré nie sú uvedené, musia byť spravované samostatne."</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtre webového obsahu"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtre webov, blokovať weby, filtre prehliadača, blokovať explicitné weby, filtrovať weby, blokovať výsledky vyhľadávania, filtrovať explicitné výsledky vyhľadávania, obmedzenia obsahu"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Môžete filtrovať explicitný obsah v niektorých aplikáciách a prehliadačoch v tomto telefóne. Explicitný obsah sa môže naďalej zobrazovať v iných aplikáciách, zariadeniach alebo prehliadačoch."</string>
@@ -6056,19 +6051,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"PIN sa nedá odstrániť"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Kód PIN sa nedá odstrániť"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Pri pokuse o odstránenie kódu PIN sa vyskytla chyba."</string>
-    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
-    <skip />
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"Vypnúť ovládanie pre tohto používateľa"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"Chcete odstrániť PIN a vypnúť ovládanie?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"Váš kód PIN rodičovskej kontroly bude odstránený. Všetky ovládacie prvky, ktoré ste nastavili, sa vypnú."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Odstrániť a vypnúť"</string>
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
-    <skip />
-    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
-    <skip />
-    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
-    <skip />
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Odstrániť PIN a vypnúť ovládanie"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"Odstrániť"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Váš kód PIN rodičovskej kontroly používa:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animácia <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Ovládanie sa nedá zapnúť"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Ovládanie sa nedá použiť"</string>
@@ -6130,10 +6119,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Zapnuté"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"K dispozícii"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Nie je k dispozícii"</string>
-    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
-    <skip />
-    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
-    <skip />
-    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
-    <skip />
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"Pripojenie cez satelit"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Zostaňte v spojení, keď nemáte k dispozícii mobilnú sieť ani Wi‑Fi"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"Vstupná stránka pripojenia cez satelit"</string>
 </resources>

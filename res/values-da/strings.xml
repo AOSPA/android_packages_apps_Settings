@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Anvender <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> starter <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Bruger <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Ingen sommertid/vintertid."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Sommertid"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standardtid"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Vælg efter region"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Vælg efter GMT-forskydning"</string>
@@ -1231,8 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*skal angives"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Dette er et delt netværk. Du skal logge ind for at foretage ændringer."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Kontakt ejeren af netværket eller enhedsadministratoren for at foretage ændringer."</string>
-    <!-- no translation found for wifi_shared_network_icon_message (8937015463026388043) -->
-    <skip />
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Alle brugere på denne enhed kan få adgang til dette netværk."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Dette netværk har ingen internetadgang. Vil du bruge netværket alligevel?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Nogle apps og tjenester fungerer muligvis ikke pga. begrænset forbindelse. Skal de bruges alligevel?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Spørg ikke igen for dette netværk"</string>
@@ -1756,8 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC-feltet skal indeholde 3 tal."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC-feltet skal indeholde 2 eller 3 tal."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Mobilselskabet tillader ikke, at du tilføjer adgangspunkter af typen %s."</string>
-    <!-- no translation found for error_disallow_adding_apn (4053023049932971602) -->
-    <skip />
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"Mobilselskabet tillader ikke, at du tilføjer dette APN."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"MMSC-feltet skal være gyldigt."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Gendannelse af standardindstillingerne for APN."</string>
     <string name="menu_restore" msgid="4310539620115151551">"Nulstil til standard"</string>
@@ -2636,6 +2636,12 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Udvidet Mørkt tema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Mørkt tema anvendes automatisk i de fleste apps, der ikke understøtter det. Dette kan forbedre tilgængeligheden og læsbarheden, men nogle apps vises muligvis forkert."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"tving ombytning, ombytning af farver, kontrast"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Fjern animationer"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Begrænser bevægelse på skærmen"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Blinkende tekstmarkør"</string>
@@ -3104,8 +3110,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Vis efter systemer"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"Mindre end <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"mindre end <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Da enheder tjekkes på fabrikken inden afsendelse, kan du muligvis se, at din enhed er blevet brugt, før du konfigurerede den, og cyklusantallet er muligvis ikke nul, hvilket er normalt"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Processtatistikker"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Nørdede statistikker om kørende processer"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"hukommelse brugt"</string>
@@ -4598,18 +4603,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Tillad admin­istrations­adgang til alle filer"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Giv denne app tilladelse til at læse, ændre og slette alle filer på denne enhed eller andre tilsluttede lagringsløsninger. Hvis du giver tilladelse til dette, kan appen få adgang til dine filer, uden du specifikt bliver gjort opmærksom på det."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Kan få adgang til alle filer"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Skærmautomatisering"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Tillad, at denne app fuldt ud automatiserer andre apps"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Denne app kan styre dine apps. De apps, der styres, kan ikke bruges, mens skærmautomatisering er i gang, men du kan altid stoppe den."</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Spørg hver gang"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Altid tilladt"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Tillad ikke"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notifikationer i fuld skærm"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Tillad notifikationer i fuld skærm fra denne app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Tillad appen at vise notifikationer, der fylder hele skærmen, når enheden er låst. Apps kan benytte denne mulighed til at fremhæve alarmer, indgående opkald og andre presserende notifikationer."</string>
@@ -4918,13 +4917,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Følsomhed for bevægelse fra kant"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Navigation med bevægelser"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"Indstillinger for navigation med bevægelser"</string>
-    <!-- no translation found for gesture_settings_extra_button_hint (5061056396437804198) -->
-    <skip />
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"åbn indstillinger for navigation med bevægelser"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Prøv en demo"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigation med knapper"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Indstillinger for navigation med knapper"</string>
-    <!-- no translation found for button_navigation_settings_extra_button_hint (6471481336598365780) -->
-    <skip />
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"åbn indstillinger for navigation med knapper"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Rækkefølge af knapper"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Rækkefølge af knapper, flyt knapper, venstrehåndstilstand, højrehåndstilstand"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Tilbage"</string>
@@ -6002,10 +5999,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Konfigurer enhedsoplysninger."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Børnesikring"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Digitale spilleregler og grænser for skærmtid"</string>
-    <!-- no translation found for supervision_intro_title (2686370837216266390) -->
-    <skip />
-    <!-- no translation found for supervision_intro_description (101353421249918460) -->
-    <skip />
+    <string name="supervision_intro_title" msgid="2686370837216266390">"Opret en pinkode til børnesikring for denne enhed"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"Du skal bruge denne pinkode til at administrere indstillingerne for børnesikring og apps på denne enhed.\n\nDu kan redigere eller slette pinkoden under Android-indstillinger &gt; Børnesikring."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Opret pinkode"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Konfigurer en pinkode til børnesikring"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"forældrestyring, børnesikring, forældre, pinkode til forældrestyring, pinkode"</string>
@@ -6013,12 +6008,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Administrer pinkode til børnesikring"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Pinkode til børnesikring"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Forælderpinkode, pinkode til børnesikring"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Tilføj mailadresse til gendannelse"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Verificer mailadresse til gendannelse"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Tilføj oplysninger til kontogendannelse"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Verificer oplysninger til kontogendannelse"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Skift pinkode"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Har du glemt pinkoden?"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Har du glemt pinkoden?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Opdater mailadresse til gendannelse"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Opdater oplysninger til kontogendannelse"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"En mailadresse til gendannelse er tilføjet"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Mailadressen til gendannelse er bekræftet"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Mailadressen til gendannelse er opdateret"</string>
@@ -6030,11 +6025,14 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Tilføj oplysninger til kontogendannelse"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Hvis du glemmer din pinkode, kan du bruge din konto til at nulstille den"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Slet pinkode"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Tilføj mailadresse til gendannelse"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verificer din mailadresse"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Tilføj oplysninger til kontogendannelse"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verificer oplysninger til kontogendannelse"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtre i appbutik"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtrér apps baseret på indholdets aldersgrænse"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Hver app kan blokere forskellige typer indhold. Appbutikker, der ikke er angivet, skal administreres separat."</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Indholdsfiltre til webindhold"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Websitefiltre, blokere websites, browserfiltre, blokere eksplicitte websites, filtrere websites, blokere søgeresultater, filtrere eksplicitte søgeresultater, indholdsbegrænsninger"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Hjælper med at bortfiltrere eksplicit indhold i nogle apps og browsere på denne telefon. Eksplicit indhold kan stadig vises i andre apps, på andre enheder eller i andre browsere."</string>
@@ -6054,19 +6052,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Pinkoden kan ikke slettes"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Pinkoden kan ikke slettes"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Der opstod en fejl under forsøget på at slette pinkoden."</string>
-    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
-    <skip />
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"Deaktiver børnesikring for denne bruger"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"Vil du slette pinkoden og deaktivere børnesikring?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"Din pinkode til børnesikring slettes. Eventuelle indstillinger, du har konfigureret, deaktiveres."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Slet og deaktiver"</string>
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
-    <skip />
-    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
-    <skip />
-    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
-    <skip />
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Slet pinkode, og deaktiver børnesikring"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"Slet"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Din pinkode til børnesikring bruges af:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animation af <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Indstillingerne kan ikke aktiveres"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Indstillingerne kan ikke anvendes"</string>
@@ -6128,10 +6120,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Til"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Tilgængelig"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Ikke tilgængelig"</string>
-    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
-    <skip />
-    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
-    <skip />
-    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
-    <skip />
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"Satellitforbindelse"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Hold forbindelsen, når du ikke har adgang til et mobil- eller Wi-Fi-netværk"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"Satellitlandingsside"</string>
 </resources>

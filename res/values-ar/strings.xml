@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"يتم استخدام <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"يبدأ <xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> بحلول <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"تستخدم <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. وليس هناك توقيت صيفي."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"التوقيت الصيفي"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"التوقيت الرسمي"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"تحديد حسب المنطقة"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"الاختيار حسب فرق توقيت غرينتش"</string>
@@ -1231,8 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*مطلوب"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"هذه شبكة مشترَكة. ويجب تسجيل الدخول لإجراء تغييرات."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"يُرجى التواصل مع مالك الشبكة أو مشرف الجهاز لإجراء تغييرات."</string>
-    <!-- no translation found for wifi_shared_network_icon_message (8937015463026388043) -->
-    <skip />
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"سيتمكّن جميع المستخدمين على هذا الجهاز من الوصول إلى هذه الشبكة."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"لا توفِّر هذه الشبكة اتصالاً بالإنترنت. هل تريد متابعة الاتصال؟"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"قد لا تعمل بعض التطبيقات والخدمات بسبب قيود على إمكانية الاتصال. هل تريد استخدامها على أي حال؟"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"عدم السؤال مرة أخرى لهذه الشبكة"</string>
@@ -1756,8 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"‏يجب أن يكون حقل MCC من ثلاثة أرقام."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"‏يجب أن يتكون حقل MNC من رقمين أو ثلاثة أرقام."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"‏لا يسمح مشغّل شبكة الجوّال بإضافة APN من النوع %s."</string>
-    <!-- no translation found for error_disallow_adding_apn (4053023049932971602) -->
-    <skip />
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"‏لا يسمح مشغّل شبكة الجوّال بإضافة اسم نقطة الوصول (APN) هذا."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"‏يجب أن يكون حقل MMSC صالحًا."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"‏جارٍ استعادة إعدادات APN التلقائية."</string>
     <string name="menu_restore" msgid="4310539620115151551">"إعادة الضبط على الإعداد التلقائي"</string>
@@ -2228,11 +2228,11 @@
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"تسريع المؤشر"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"تؤدي الحركات السريعة باستخدام الماوس إلى تحريك المؤشر بعيدًا"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"مفاتيح الماوس في \"<xliff:g id="KEYBOARD_NAME">%s</xliff:g>\""</string>
-    <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"‏يمكن استخدام المفاتيح \"‎<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>\" لتحريك مؤشّر الماوس"</string>
+    <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"‏استخدِم المفاتيح \"‎<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>\" لتحريك مؤشّر الماوس"</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"استخدِم مفتاح \"<xliff:g id="CLICK_LABEL">%s</xliff:g>\" للنقر على زر الماوس الأساسي"</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"استخدِم مفتاح \"<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>\" للضغط مع الاستمرار على زر الماوس الأساسي"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"استخدِم مفتاح \"<xliff:g id="RELEASE_LABEL">%s</xliff:g>\" لتحرير زر الماوس الأساسي"</string>
-    <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"‏استخدِم مفتاح \"<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>\" لتغيير اتجاه التمرير، ما سيجعل مفاتيح \"‎<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>\" تؤدي إلى الانتقال للأعلى أو الأسفل أو اليسار أو اليمين"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"‏استخدِم مفتاح \"<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>\" لتغيير اتجاه التمرير، وبالتالي سيؤدي الضغط على مفاتيح \"‎<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>\" إلى الانتقال للأعلى أو الأسفل أو اليسار أو اليمين"</string>
     <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"استخدِم مفتاح \"<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>\" للنقر على زر الماوس الثانوي"</string>
     <string name="mouse_keys_acceleration_seekbar_title" msgid="2329098889930361504">"التسارع"</string>
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"سريع"</string>
@@ -2636,6 +2636,12 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"المظهر الداكن الموسَّع"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"يتم تطبيق \"المظهر الداكن\" تلقائيًا على معظم التطبيقات التي لا تتوافق معه، ما يؤدي إلى تحسين تسهيل الاستخدام وإمكانية القراءة، ولكن قد يتسبب في عرض بعض التطبيقات بشكل غير صحيح."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"فرض قلب الألوان، قلب الألوان، التباين"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"إزالة الصور المتحركة"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"تقليل الحركة على الشاشة"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"وميض مؤشر النص"</string>
@@ -3104,8 +3110,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"العرض حسب الأنظمة"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"‏أقل من ‎<xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"بسبب فحوصات الجودة التي يتم إجراؤها في المصنع قبل الشحن، قد يظهر أن جهازك استُخدِم قبل إعداده وأنّه تم شحن البطارية عدة مرات، وهذا أمر طبيعي"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"إحصاءات العمليات"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"الإحصائيات التقنية حول العمليات الجارية"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"استخدام الذاكرة"</string>
@@ -4598,18 +4603,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"السماح بالوصول إلى كل الملفات لإدارتها"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"يسمح هذا الإعداد لهذا التطبيق بقراءة كل الملفات وتعديلها وحذفها من هذا الجهاز أو أي وحدات تخزين متصلة. في حال تفعيله، يمكن أن يصل التطبيق إلى الملفات بدون إعلامك بذلك."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"يمكن الوصول إلى كل الملفات"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"التشغيل الآلي للشاشة"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"السماح لهذا التطبيق بتشغيل تطبيقات أخرى بالكامل آليًا"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"سيتمكّن هذا التطبيق من التحكّم في تطبيقاتك. لا يمكن استخدام التطبيقات التي يتم التحكّم فيها أثناء عملية التشغيل الآلي للشاشة، ولكن يمكنك إيقاف هذه العملية متى شئت."</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"السؤال في كل مرّة"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"مسموح باستخدامه دومًا"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"عدم السماح"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"عرض الإشعارات بملء الشاشة"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"السماح بعرض الإشعارات ملء الشاشة من هذا التطبيق"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"يتم السماح لهذا التطبيق بعرض إشعارات بملء الشاشة عندما يكون الجهاز مُقفَلاً. قد تستخدم التطبيقات هذا الإذن لإبراز المنبّهات أو المكالمات الواردة أو غيرها من الإشعارات العاجلة."</string>
@@ -4918,13 +4917,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"حساسية الرجوع"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"التنقُّل بالإيماءات"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"إعدادات التنقُّل بالإيماءات"</string>
-    <!-- no translation found for gesture_settings_extra_button_hint (5061056396437804198) -->
-    <skip />
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"فتح إعدادات \"التنقّل بالإيماءات\""</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"مشاهدة عرض توضيحي"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"التنقل باستخدام الأزرار"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"إعدادات التنقّل باستخدام الأزرار"</string>
-    <!-- no translation found for button_navigation_settings_extra_button_hint (6471481336598365780) -->
-    <skip />
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"فتح إعدادات \"التنقّل باستخدام الأزرار\""</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"ترتيب الأزرار"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"ترتيب الأزرار، نقل الأزرار، وضع استخدام اليد اليسرى، وضع استخدام اليد اليمنى"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"رجوع"</string>
@@ -5977,7 +5974,7 @@
     <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"للعثور على رسائل البث الصوتي، يُرجى إيقاف ميزة \"مشاركة الصوت\""</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"البحث عن بث صوتي"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"‏يمكنك الاستماع إلى صوت تتم مشاركته من أحد الأجهزة أو إلى رسالة بث قريبة تتوافق مع تقنية Auracast"</string>
-    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"الجهاز السماعي"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"جهازك الصوتي"</string>
     <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"ربط سماعات الرأس المتوافقة"</string>
     <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"البث الصوتي القريب"</string>
     <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"مسح رمز الاستجابة السريعة ضوئيًا"</string>
@@ -6006,10 +6003,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. ضبط تفاصيل الجهاز"</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"أدوات رقابة الأهل"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"القواعد الرقمية الأساسية والمدة القصوى للنظر إلى الشاشة"</string>
-    <!-- no translation found for supervision_intro_title (2686370837216266390) -->
-    <skip />
-    <!-- no translation found for supervision_intro_description (101353421249918460) -->
-    <skip />
+    <string name="supervision_intro_title" msgid="2686370837216266390">"إنشاء رقم تعريف شخصي لأدوات رقابة الأهل على هذا الجهاز"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"‏يساعدك رقم التعريف الشخصي هذا في إدارة إعدادات أدوات رقابة الأهل والتطبيقات على هذا الجهاز.\n\nيمكنك تعديل رقم التعريف الشخصي أو حذفه من \"إعدادات Android\"‏ &gt; \"أدوات رقابة الأهل\"."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"إعداد رقم التعريف الشخصي"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"ضبط رقم تعريف شخصي لأدوات رقابة الأهل"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"إشراف، أدوات رقابة الأهل، الأهل، رقم التعريف الشخصي للإشراف، رقم التعريف الشخصي"</string>
@@ -6017,12 +6012,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"إدارة رقم التعريف الشخصي لأدوات رقابة الأهل"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"رقم التعريف الشخصي لأدوات رقابة الأهل"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"رقم التعريف الشخصي للوالدَين، رقم التعريف الشخصي لأدوات رقابة الأهل"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"إضافة عنوان البريد الإلكتروني المخصّص لاسترداد الحساب"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"تأكيد عنوان البريد الإلكتروني المخصّص لاسترداد الحساب"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"إضافة معلومات استرداد الحساب"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"تأكيد معلومات استرداد الحساب"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"تغيير رقم التعريف الشخصي"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"نسيتُ رقم التعريف الشخصي"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"هل نسيت رقم التعريف الشخصي؟"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"تعديل عنوان البريد الإلكتروني المخصّص لاسترداد الحساب"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"تعديل معلومات استرداد الحساب"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"تمت إضافة البريد الإلكتروني المخصّص لاسترداد الحساب"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"تم تأكيد البريد الإلكتروني المخصّص لاسترداد الحساب"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"تم تعديل البريد الإلكتروني المخصّص لاسترداد الحساب"</string>
@@ -6034,11 +6029,14 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"إضافة معلومات استرداد الحساب"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"في حال نسيان رقم التعريف الشخصي، يمكنك استخدام حسابك لإعادة ضبطه"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"حذف رقم التعريف الشخصي"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"إضافة عنوان البريد الإلكتروني المخصّص لاسترداد الحساب"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"تأكيد عنوان البريد الإلكتروني"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"إضافة معلومات استرداد الحساب"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"تأكيد معلومات استرداد الحساب"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"فلاتر متجر التطبيقات"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"فلترة التطبيقات استنادًا إلى مدى ملاءمة محتواها"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"قد يحظر كل تطبيق أنواعًا مختلفة من المحتوى. ويجب إدارة متاجر التطبيقات غير المُدرَجة بشكلٍ منفصل."</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"فلاتر محتوى الويب"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"فلاتر المواقع الإلكترونية، حظر المواقع الإلكترونية، فلاتر المتصفّح، حظر المواقع الإلكترونية التي تتضمّن محتوى فاضحًا، فلترة المواقع الإلكترونية، حظر نتائج البحث، فلترة نتائج البحث الفاضحة، قيود المحتوى"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"تفلتر المحتوى الفاضح في بعض التطبيقات والمتصفّحات على هذا الهاتف. وقد يستمر ظهور المحتوى الفاضح على تطبيقات أو أجهزة أو متصفّحات أخرى."</string>
@@ -6058,19 +6056,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"يتعذّر حذف رقم التعريف الشخصي"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"يتعذّر حذف رقم التعريف الشخصي"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"حدث خطأ أثناء محاولة حذف رقم التعريف الشخصي."</string>
-    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
-    <skip />
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"إيقاف أدوات رقابة الأهل لهذا المستخدم"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"حذف رقم التعريف الشخصي وإيقاف أدوات رقابة الأهل؟"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"سيتم حذف رقم التعريف الشخصي وإيقاف أي أدوات رقابة تم إعدادها."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"الحذف والإيقاف"</string>
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
-    <skip />
-    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
-    <skip />
-    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
-    <skip />
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"حذف رقم التعريف الشخصي وإيقاف أدوات رقابة الأهل"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"حذف"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"يتم استخدام رقم التعريف الشخصي لأدوات رقابة الأهل من قِبل:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"صورة متحركة لميزة \"<xliff:g id="FEATURE">%1$s</xliff:g>\""</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"يتعذّر تفعيل عناصر التحكّم"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"يتعذّر استخدام عناصر التحكّم"</string>
@@ -6132,10 +6124,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"مفعّل"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"متاح"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"غير متاح"</string>
-    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
-    <skip />
-    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
-    <skip />
-    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
-    <skip />
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"إمكانية الاتصال بالقمر الصناعي"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"‏يمكنك البقاء على اتصال حتى في حال عدم توفّر شبكة جوال أو Wi-Fi"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"صفحة القمر الصناعي المقصودة"</string>
 </resources>

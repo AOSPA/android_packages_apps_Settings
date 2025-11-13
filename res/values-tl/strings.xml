@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Ginagamit ang <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"Magsisimula ang <xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> sa <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Gumagamit ng <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Walang daylight savings time."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Daylight savings time"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standard time"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Pumili ayon sa rehiyon"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Pumili ayon sa offset ng GMT"</string>
@@ -1231,8 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*kailangan"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Isa itong naka-share na network. Kailangan mong mag-sign in para makagawa ng mga pagbabago."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Makipag-ugnayan sa may-ari ng network o admin ng device para gumawa ng mga pagbabago."</string>
-    <!-- no translation found for wifi_shared_network_icon_message (8937015463026388043) -->
-    <skip />
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Maa-access ng lahat ng user sa device na ito ang network na ito."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Walang access sa internet ang network na ito. Manatiling nakakonekta?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Baka hindi gumana ang ilang app at serbisyo dahil sa limitadong koneksyon. Gamitin pa rin?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Huwag nang tanungin muli sa network na ito"</string>
@@ -1756,8 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"Dapat na 3 digit ang field na MCC."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"Dapat na 2 o 3 digit ang field ng MNC."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Hindi pinapayagan ng carrier ang pagdaragdag ng mga APN na %s ang uri."</string>
-    <!-- no translation found for error_disallow_adding_apn (4053023049932971602) -->
-    <skip />
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"Hindi pinapayagan ng carrier ang pagdaragdag ng APN na ito."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"Valid dapat ang field ng MMSC."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Nire-restore ang default na mga setting ng APN"</string>
     <string name="menu_restore" msgid="4310539620115151551">"I-reset sa default"</string>
@@ -2636,6 +2636,12 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Na-expand na madilim na tema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Awtomatikong inilalapat ang dark theme sa karamihan sa mga app na hindi ito sinusuportahan. Mapapahusay nito ang accessibility at readability, pero posibleng magdulot ito ng maling display sa ilang app."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"sapilitang pag-invert, pag-invert ng kulay, contrast"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Alisin ang mga animation"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Bawasan ang paggalaw sa screen"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Pag-blink ng cursor ng text"</string>
@@ -3104,8 +3110,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Tingnan ayon sa mga system"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"mas mababa sa <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Dahil sa mga inspeksyon sa pabrika bago ang pagpapadala, posibleng lumabas na ginamit ang iyong device bago mo ito na-set up at posibleng hindi zero ang bilang ng cycle, na kung saan ito ay normal"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Stats ng Proseso"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Mahahalagang istatistika tungkol sa mga tumatakbong proseso"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memory na ginamit"</string>
@@ -4598,18 +4603,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Payagan para mapamahalaan ang lahat ng file"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Payagan ang app na ito na basahin, baguhin, at i-delete ang lahat ng file sa device na ito o sa anumang nakakonektang storage volume. Kung pagbibigyan ito, puwedeng mag-access ng mga file ang app nang hindi mo nalalaman."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Makaka-access sa lahat ng file"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Pag-automate ng screen"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Payagan ang app na ito na ganap na i-automate ang iba pang app"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Makokontrol ng app na ito ang iyong mga app. Hindi magagamit ang mga app na kinokontrol habang isinasagawa ang pag-automate ng screen, pero puwede mo itong ihinto anumang oras."</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Magtanong palagi"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Palaging pinapayagan"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Huwag payagan"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Mga full-screen na notification"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Payagan ang mga full-screen na notification mula sa app na ito"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Payagan ang app na ito na magpakita ng mga notification na sakop ang buong screen kapag naka-lock ang device. Puwedeng gamitin ng mga app ang mga ito para mag-highlight ng mga alarm, papasok na tawag, o iba pang agarang notification."</string>
@@ -4918,13 +4917,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Pagkasensitibo sa Likod"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Navigation Gamit ang Galaw"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"Mga setting ng navigation gamit ang galaw"</string>
-    <!-- no translation found for gesture_settings_extra_button_hint (5061056396437804198) -->
-    <skip />
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"buksan ang mga setting ng navigation gamit ang galaw"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Sumubok ng demo"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Button na pag-navigate"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Mga setting ng button na pag-navigate"</string>
-    <!-- no translation found for button_navigation_settings_extra_button_hint (6471481336598365780) -->
-    <skip />
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"buksan ang mga setting ng button na pag-navigate"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Pagkakaayos ng button"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Pagkakasunod-sunod ng button, Ilipat ang mga button, left-hand mode, right-hand mode"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Bumalik"</string>
@@ -6002,10 +5999,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. I-configure ang detalye ng device."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Parental controls"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Mga digital na panuntunan at limitasyon sa tagal ng paggamit"</string>
-    <!-- no translation found for supervision_intro_title (2686370837216266390) -->
-    <skip />
-    <!-- no translation found for supervision_intro_description (101353421249918460) -->
-    <skip />
+    <string name="supervision_intro_title" msgid="2686370837216266390">"Gumawa ng PIN ng parental controls para sa device na ito"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"Gagamitin mo ang PIN na ito para pamahalaan ang mga setting ng parental controls at app sa device na ito.\n\nPuwede mong i-edit o i-delete ang PIN sa Mga Setting ng Android at Parental Controls."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Mag-set up ng PIN"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Mag-set up ng PIN ng parental controls"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"pamamahala, parental controls, mga magulang, pin ng pamamahala, pin"</string>
@@ -6013,12 +6008,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Pamahalaan ang PIN ng parental controls"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN ng parental controls"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN ng Magulang, PIN ng Parental controls"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Magdagdag ng email sa pag-recover"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"I-verify ang email sa pag-recover"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Magdagdag ng impormasyon sa pag-recover"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"I-verify ang impormasyon sa pag-recover"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Palitan ang PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Nakalimutan ang PIN"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Nakalimutan ang PIN?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"I-update ang email sa pag-recover"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"I-update ang impormasyon sa pag-recover"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Nagdagdag ng email sa pag-recover"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Na-verify ang email sa pag-recover"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Na-update ang email sa pag-recover"</string>
@@ -6030,11 +6025,14 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Magdagdag ng impormasyon sa pag-recover"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Kung nakalimutan mo ang iyong PIN, puwede mong gamitin ang account mo para i-reset ito"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"I-delete ang PIN"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Magdagdag ng email sa pag-recover"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"I-verify ang iyong email"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Magdagdag ng impormasyon sa pag-recover"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"I-verify ang impormasyon sa pag-recover"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Mga filter ng app store"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Fini-filter ang mga app batay sa maturity ng kanilang content"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Maaaring i-block ng bawat app ang iba\'t ibang uri ng content. Dapat na pinamamahalaan nang hiwalay ang mga app store na hindi nakalista."</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Mga filter ng content sa web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Mga filter ng website, I-block ang mga site, Mga filter ng browser, I-block ang mga explicit na site, I-filter ang mga site, I-block ang mga resulta ng paghahanap, I-filter ang mga explicit na resulta ng paghahanap, mga paghihigpit sa content"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Tumulong sa pag-filter ng explicit na content sa ilang app at browser sa teleponong ito. Posibleng may lumabas pa ring explicit na content sa iba pang app, device, o browser."</string>
@@ -6054,19 +6052,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Hindi ma-delete ang PIN"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Hindi puwedeng i-delete ang PIN"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Nagka-error habang sinusubukang i-delete ang PIN."</string>
-    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
-    <skip />
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"I-off ang mga kontrol para sa user na ito"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"I-delete ang PIN at i-off ang mga kontrol?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"Made-delete ang PIN ng iyong parental controls. Io-off ang anumang kontrol na na-set up mo."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"I-delete at i-off"</string>
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
-    <skip />
-    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
-    <skip />
-    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
-    <skip />
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"I-delete ang PIN at i-off ang mga kontrol"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"I-delete"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Ginagamit ng mga sumusunod ang iyong PIN ng parental controls:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animation"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Hindi ma-on ang mga control"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Hindi magamit ang mga kontrol"</string>
@@ -6128,10 +6120,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Naka-on"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Available"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Hindi available"</string>
-    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
-    <skip />
-    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
-    <skip />
-    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
-    <skip />
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"Koneksyon sa satellite"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Manatiling konektado kapag wala kang mobile o Wi-Fi network"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"Landing Page ng Satellite"</string>
 </resources>

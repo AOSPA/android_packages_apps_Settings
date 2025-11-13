@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> колдонулат. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> башталат."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> колдонулууда. Жайкы убакытка өтпөйт."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Жайкы убакыт"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Стандарттык убакыт"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Аймак боюнча тандоо"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"GMT айырмасы боюнча тандоо"</string>
@@ -1207,12 +1209,12 @@
     <string name="retry" msgid="7542103800274026915">"Кайталоо"</string>
     <string name="shared_message" msgid="2104244057926025072">"бөлүшүлгөн"</string>
     <string name="private_message" msgid="5897966950396765392">"купуя"</string>
-    <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"Которулуу"</string>
+    <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"Ооба"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Жокко чыгаруу"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"Тармак менен бөлүшүү"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Бул түзмөктөгү башка колдонуучулар бул тармакка кире алышат"</string>
-    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"<xliff:g id="SHARED">%1$s</xliff:g> тармакка которулсунбу?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"\"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" деп аталган <xliff:g id="SHARED_0">%1$s</xliff:g> тармагы мурунтан эле бар. Эгер <xliff:g id="SHARED_1">%1$s</xliff:g> тармагына которулсаңыз, <xliff:g id="PRIVATE">%3$s</xliff:g> тармагынан чыгып, убактылуу Интернетке туташпай калышыңыз мүмкүн."</string>
+    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"<xliff:g id="SHARED">%1$s</xliff:g> тармакка которуласызбы?"</string>
+    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"\"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" деген <xliff:g id="SHARED_0">%1$s</xliff:g> тармак мурунтан эле бар. Эгер <xliff:g id="SHARED_1">%1$s</xliff:g> тармакка которулсаңыз, <xliff:g id="PRIVATE">%3$s</xliff:g> тармактан чыгып, Интернет байланышы жоголуп кетиши мүмкүн."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(өзгөрүүсүз)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Колдонуучуларга тармакты түзөтүүгө уруксат берүү"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Башка колдонуучулар бул тармакка өзгөртүүлөрдү киргизе алышат"</string>
@@ -1231,8 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*милдеттүү"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Бул жалпы тармак. Өзгөртүүлөрдү киргизүү үчүн аккаунтуңузга киришиңиз керек."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Өзгөртүүлөрдү киргизүү үчүн тармактын ээсине же түзмөктүн администраторуна кайрылыңыз."</string>
-    <!-- no translation found for wifi_shared_network_icon_message (8937015463026388043) -->
-    <skip />
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Бул түзмөктөгү бардык колдонуучулар бул тармакка кире алышат."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Бул тармак Интернетке туташпай турат. Аны колдоно бересизби?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Байланыш чектелген, андыктан айрым колдонмолор жана кызматтар иштебей калышы мүмкүн. Колдоносузбу?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Бул тармак үчүн экинчи сураба"</string>
@@ -1756,8 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC талаасы 3 орундуу болууга тийиш."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC талаасы 2 же 3 орундуу болууга тийиш."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Байланыш оператору %s түрүндөгү APN\'дерди кошууга уруксат бербейт."</string>
-    <!-- no translation found for error_disallow_adding_apn (4053023049932971602) -->
-    <skip />
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"Байланыш оператору бул APN\'ди кошууга тыюу салат."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"MMSC талаасы жарактуу болушу керек."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Демейки APN тууралоолорун кайтарууда."</string>
     <string name="menu_restore" msgid="4310539620115151551">"Баштапкы абалга келтирүү"</string>
@@ -2636,6 +2636,12 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Кеңейтилген караңгы тема"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Караңгы теманы колдоого албаган колдонмолорго автоматтык түрдө колдонот. Бул жеткиликтүүлүктү жана окууну жакшыртат, бирок кээ бир колдонмолор туура эмес көрүнүшү мүмкүн."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"Мажбурлап инверсиялоо, түстөрдү инверсиялоо, контраст"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Анимацияларды алып салуу"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Экрандагы кыймыл азаят"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Курсордун бүлбүлдөшү"</string>
@@ -3104,8 +3110,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Системалар боюнча иргөө"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"төмөнкүдөн азыраак: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Жөнөтүүнүн алдында түзмөктүн сапаты текшерилгендиктен, аны тууралоодон мурун колдонулганын жана батареяны кубаттоо циклдеринин саны нөл эмес экенин көрсөтүшү мүмкүн. Бул кадимки көрүнүш"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Процесстин статистикасы"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Иштеп жаткан процесстердин өзгөчө статистикасы"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Эс системанын пайдаланылышы"</string>
@@ -4598,18 +4603,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Бардык файлдарды башкарууга уруксат берүү"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Бул колдонмого түзмөктөгү жана башка байланышкан сактагычтардагы бардык файлдарды көрүп, өзгөртүп жана өчүрүүгө уруксат бересизби? Колдонмо файлдарды сизге айтпай пайдалана алат."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Бардык файлдарга мүмкүнчүлүк бар"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Экранды автоматташтыруу"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Бул колдонмого башка колдонмолорду толук автоматташтырууга уруксат берүү"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Бул колдонмо колдонмолоруңузду көзөмөлдөй алат. Экранды автоматташтыруу учурунда көзөмөлдөнүп жаткан колдонмолорду пайдаланууга болбойт, бирок аны каалаган убакта токтото аласыз."</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Ар дайым суралсын"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Ар дайым уруксат берилген"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Тыюу салуу"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Толук экрандагы билдирмелер"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Бул колдонмого толук экрандагы билдирмелерди көрсөтүүгө уруксат берүү"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Бул колдонмого түзмөк кулпуланып турганда толук экрандагы билдирмелерди көрсөтүүгө уруксат бериңиз. Колдонмолор муну ойготкучтарды, кирүүчү чалууларды же башка шашылыш билдирмелерди көрсөтүү үчүн колдонушат."</string>
@@ -4918,13 +4917,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Фонду сезгичтиги"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Жаңсап чабыттоо"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"Жаңсап чабыттоо параметрлери"</string>
-    <!-- no translation found for gesture_settings_extra_button_hint (5061056396437804198) -->
-    <skip />
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"жаңсап чабыттоо параметрлерин ачуу"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Демо версиясын колдонуп көрүү"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Баскычтар менен чабыттоо"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Баскычтар менен чабыттоо параметрлери"</string>
-    <!-- no translation found for button_navigation_settings_extra_button_hint (6471481336598365780) -->
-    <skip />
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"баскычтар менен өтүү параметрлерин ачуу"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Баскыч ирети"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Баскычтардын ирети, Баскычтарды жылдыруу, сол кол режими, оң кол режими"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Артка"</string>
@@ -6002,10 +5999,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Түзмөктүн чоо-жайын конфигурациялаңыз."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Ата-эненин көзөмөлү"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Түзмөктү пайдалануу эрежелери жана түзмөктү колдонуу убакытын чектөө"</string>
-    <!-- no translation found for supervision_intro_title (2686370837216266390) -->
-    <skip />
-    <!-- no translation found for supervision_intro_description (101353421249918460) -->
-    <skip />
+    <string name="supervision_intro_title" msgid="2686370837216266390">"Бул түзмөк үчүн ата-эненин көзөмөлүнүн PIN кодун түзүңүз"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"Бул PIN кодду ушул түзмөктөгү ата-эненин көзөмөлүнүн параметрлерин жана колдонмолорду тескөө үчүн колдоносуз.\n\nPIN кодду Android параметрлери &gt; Ата-эненин көзөмөлү бөлүмүнөн түзөтүп же өчүрө аласыз."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN кодду тууралоо"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Ата-эненин көзөмөлүнүн PIN кодун тууралоо"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"көзөмөлдөө, ата-эненин көзөмөлү, ата-эне, көзөмөлдөө pin коду, pin код"</string>
@@ -6013,12 +6008,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Ата-эненин көзөмөлүнүн PIN кодун тескөө"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Ата-эненин көзөмөлүнүн PIN коду"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Ата-эненин PIN коду, Ата-эненин көзөмөлүнүн PIN коду"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Калыбына келтирүүчү электрондук почта кошуу"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Калыбына келтирүүчү электрондук почтаны ырастоо"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Аккаунтка кирүү мүмкүнчүлүгүн калыбына келтирүүчү маалыматты кошуңуз"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Аккаунтка кирүү мүмкүнчүлүгүн калыбына келтирүүчү маалыматты ырастаңыз"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PIN кодду өзгөртүү"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN кодду унутуп койдуңузбу?"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"PIN кодду унутуп койдуңузбу?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Калыбына келтирүүчү электрондук почтаны жаңыртуу"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Аккаунтка кирүү мүмкүнчүлүгүн калыбына келтирүүчү маалыматты жаңыртуу"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Калыбына келтирүүчү электрондук почта кошулду"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Калыбына келтирүүчү электрондук почта ырасталды"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Калыбына келтирүүчү электрондук почта жаңырды"</string>
@@ -6030,11 +6025,14 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Аккаунтка кирүү мүмкүнчүлүгүн калыбына келтирүүчү маалыматты кошуңуз"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Эгер PIN кодуңузду унутуп калсаңыз, аны баштапкы абалга келтирүү үчүн аккаунтуңузду колдонсоңуз болот"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN кодду өчүрүү"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Калыбына келтирүүчү электрондук почта кошуу"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Электрондук почтаңызды ырастаңыз"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Аккаунтка кирүү мүмкүнчүлүгүн калыбына келтирүүчү маалыматты кошуңуз"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Аккаунтка кирүү мүмкүнчүлүгүн калыбына келтирүүчү маалыматты ырастаңыз"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Колдонмолор дүкөнүнүн чыпкалары"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Колдонмолорду контентке коюлган курактык чектөө боюнча чыпкалаңыз"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Ар бир колдонмо контенттин ар кандай түрлөрүн бөгөттөшү мүмкүн. Көрсөтүлбөгөн колдонмо дүкөндөрү өзүнчө тескелиши керек."</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Интернетте жарыяланган нерселердин чыпкасы"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Вебсайттын чыпкалары, Сайттарды бөгөттөө, Серепчинин чыпкалары, Ачык-айкын сексуалдык мүнөздөгү сайттарды бөгөттөө, Сайттарды чыпкалоо, Табылган нерселерди бөгөттөө, Ачык-айкын сексуалдык мүнөздөгү табылган нерселерди чыпкалоо, орунсуз нерселерди жашыруу"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Бул телефондогу айрым колдонмолордо жана серепчилерде уят материалдарды чыпкалоого жардам бериңиз. Мындай материалдар башка колдонмолордо, түзмөктөрдө же серепчилерде көрсөтүлө бериши мүмкүн."</string>
@@ -6054,19 +6052,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"PIN кодду өчүрүүгө болбойт"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN код өчүрүлгөн жок"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"PIN кодду өчүрүү учурунда ката кетти."</string>
-    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
-    <skip />
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"Бул колдонуучу үчүн башкаруу элементтерин өчүрүү"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"PIN кодду жок кылып, башкаруу элементтерин өчүрөсүзбү?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"Ата-эненин көзөмөлүнүн PIN коду биротоло өчүрүлөт. Туураланган бардык башкаруу элементтери өчүрүлөт."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Жок кылуу жана өчүрүү"</string>
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
-    <skip />
-    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
-    <skip />
-    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
-    <skip />
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"PIN кодду жок кылып жана башкаруу элементтерин өчүрүү"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"Өчүрүү"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Ата-эненин көзөмөлүнүн PIN кодун төмөнкүлөр колдонуп жатышат:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> анимациясы"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Башкаруу элементтери күйгүзүлбөй жатат"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Башкаруу элементтерин колдонууга болбойт"</string>
@@ -6128,10 +6120,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Күйүк"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Жеткиликтүү"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Жеткиликтүү эмес"</string>
-    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
-    <skip />
-    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
-    <skip />
-    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
-    <skip />
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"Спутник байланышы"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Мобилдик Интернет же Wi-Fi тармагы жок болсо да, байланышта болуңуз"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"Спутниктин баштапкы бети"</string>
 </resources>

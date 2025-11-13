@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"यसले <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> प्रयोग गर्छ। <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="TRANSITION_DATE">%2$s</xliff:g> मा <xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> सुरु हुन्छ।"</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> प्रयोग गर्छ। दिवाप्रकाश बचत समय छैन।"</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"दिवाप्रकाश बचत समय"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"डिफल्ट समय"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"क्षेत्रका आधारमा चयन गर्नुहोस्"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"GMT अफसेटअनुसार चयन गर्नुहोस्"</string>
@@ -1231,8 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*अनिवार्य"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"यो साझा नेटवर्क हो। परिवर्तनहरू गर्न तपाईंले साइन इन गर्नु पर्ने हुन्छ।"</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"परिवर्तनहरू गर्न नेटवर्कका मालिक वा डिभाइसका एड्मिनलाई सम्पर्क गर्नुहोस्।"</string>
-    <!-- no translation found for wifi_shared_network_icon_message (8937015463026388043) -->
-    <skip />
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"यो डिभाइसका सबै प्रयोगकर्ताहरू यो नेटवर्क एक्सेस गर्न सक्छन्।"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"यो नेटवर्कसँग इन्टरनेटमाथि पहुँच छैन। जडान भइरहने हो?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"इन्टरनेट जडान सीमित हुँदा कतिपय एप तथा सेवाहरूले काम नगर्न सक्छन्। अघि बढ्नुहोस्"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"यस नेटवर्कको लागि फेरि नसोध्नुहोस्"</string>
@@ -1756,8 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC क्षेत्र कम से कम ३ अङ्कको हुनु पर्छ।"</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC क्षेत्रमा २ वा ३ अंकहरू हुनुपर्दछ"</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"सेवा प्रदायकले %s प्रकारका APN हरू थप्ने अनुमति दिँदैन।"</string>
-    <!-- no translation found for error_disallow_adding_apn (4053023049932971602) -->
-    <skip />
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"सेवा प्रदायकले यो APN हाल्ने अनुमति दिँदैन।"</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"MMSC फिल्ड अनिवार्य रूपमा वैध हुनु पर्छ।"</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"डिफल्ट APN सेटिङहरू पुनःप्राप्त गर्दै।"</string>
     <string name="menu_restore" msgid="4310539620115151551">"रिसेट गरी डिफल्ट बनाउनुहोस्"</string>
@@ -2636,6 +2636,12 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"एक्स्पान्ड गरिएको अँध्यारो थिम"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"अँध्यारो थिम प्रयोग गर्न नमिल्ने अधिकांश एपहरूमा अँध्यारो थिम स्वतः लागू गर्छ। यसले सर्वसुलभता र पठनीयताको गुणस्तर सुधार गर्न सक्छ तर केही एपहरू सही तरिकाले नदेखिन सक्छन्।"</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"फोर्स इन्भर्ट, कलर इन्भर्सन, कन्ट्रास्ट"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"एनिमेसन हटाउनुहोस्"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"स्क्रिनमा चाल कम गर्नुहोस्"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"टेक्स्टको कर्सर पिलिक पिलिक हुने सुविधा"</string>
@@ -3104,8 +3110,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"सिस्टमअनुसार हेर्नुहोस्"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> भन्दा कम"</string>
-    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"ढुवानी गरिनुअघि डिभाइसको जाँच गरिने भएकाले तपाईंले आफ्नो डिभाइस सेटअप गर्नुअघि नै उक्त डिभाइस प्रयोग गरिएको थियो जस्तो देखिन सक्छ र साइकल काउन्ट शून्य नहुन सक्छ तर यो सामान्य कुरा हो"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"प्रक्रिया तथ्याङ्क"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"चालु रहने प्रक्रियाहरूको बारेको geeky तथ्याङ्क"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"मेमोरी प्रयोग"</string>
@@ -4598,18 +4603,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"सबै फाइलहरू व्यवस्थापन गर्ने एक्सेस दिनुहोस्"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"यो एपलाई यो डिभाइस वा जोडिएको कुनै भण्डारणमा रहेका सबै फाइलहरू पढ्ने, परिमार्जन गर्ने तथा मेट्ने अनुमति दिनुहोस्। अनुमति दिइएका खण्डमा यो एपले तपाईंको स्पष्ट अनुमतिविनै फाइलहरू एक्सेस गर्नसक्छ।"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"सबै फाइलहरूमाथि पहुँच राख्न सक्छ।"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"स्क्रिन अटोमेसन"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"यो एपलाई अन्य एपहरू पूर्ण रूपमा अटोमेट गर्न दिनुहोस्"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"यो एपले तपाईंका एपहरू नियन्त्रण गर्न सक्ने छ। स्क्रिन अटोमेसन चलिरहेका बेला नियन्त्रण गरिएका एपहरू प्रयोग गर्न मिल्दैन तर तपाईं जुनसुकै बेला स्क्रिन अटोमेसन रोक्न सक्नुहुन्छ।"</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"प्रत्येक पटक सोध्नुहोस्"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"सधैँ अनुमति दिनुहोस्"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"अनुमति नदिनुहोस्"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"फुल स्क्रिनमा नोटिफिकेसनहरू देखाउने अनुमति"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"यो एपलाई नोटिफिकेसनहरू फुल स्क्रिनमा देखाउने अनुमति दिनुहोस्"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"यो एपलाई डिभाइस लक भएका बेला फुल स्क्रिन ढाक्ने खालका सूचनाहरू देखाउने अनुमति दिनुहोस्। एपहरूले अलार्म, आगमन कल वा अन्य महत्त्वपूर्ण सूचनाहरू हाइलाइट गर्ने प्रयोजनका लागि फुल स्क्रिनमा सूचनाहरू देखाउन सक्छन्।"</string>
@@ -4918,13 +4917,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"पछाडिको भागको संवेदनशीलता"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"जेस्चर नेभिगेसन"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"जेस्चर नेभिगेसनसम्बन्धी सेटिङ"</string>
-    <!-- no translation found for gesture_settings_extra_button_hint (5061056396437804198) -->
-    <skip />
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"जेस्चर नेभिगेसनसम्बन्धी सेटिङ खोल्नुहोस्"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"डेमो हेर्नुहोस्"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"बटन नेभिगेसन"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"बटन नेभिगेसनसम्बन्धी सेटिङ"</string>
-    <!-- no translation found for button_navigation_settings_extra_button_hint (6471481336598365780) -->
-    <skip />
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"बटन नेभिगेसनसम्बन्धी सेटिङ खोल्नुहोस्"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"बटनको क्रम"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"बटनको क्रम, बटनहरू सार्ने, बायाँ हाते मोड, दायाँ हाते मोड"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"पछाडि जानुहोस्"</string>
@@ -6002,10 +5999,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>। डिभाइसको विवरण कन्फिगर गर्नुहोस्।"</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"अभिभावकीय नियन्त्रणहरू"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"आधारभूत डिजिटल नियम तथा स्क्रिन टाइमसम्बन्धी सीमाहरू"</string>
-    <!-- no translation found for supervision_intro_title (2686370837216266390) -->
-    <skip />
-    <!-- no translation found for supervision_intro_description (101353421249918460) -->
-    <skip />
+    <string name="supervision_intro_title" msgid="2686370837216266390">"यो डिभाइसका लागि अभिभावकीय नियन्त्रणहरूको PIN बनाउनुहोस्"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"तपाईं यो PIN प्रयोग गरेर यो डिभाइसमा भएका अभिभावकीय नियन्त्रणसम्बन्धी सेटिङ र एपहरू व्यवस्थापन गर्न सक्नुहुन्छ।\n\nतपाईं Android का सेटिङ &gt; अभिभावकीय नियन्त्रणहरूमा गई यो PIN परिवर्तन गर्न वा मेटाउन सक्नुहुन्छ।"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN सेटअप गर्नुहोस्"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"अभिभावकीय नियन्त्रणरूको PIN सेटअप गर्नुहोस्"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"सुपरिवेक्षण, अभिभावकीय नियन्त्रणहरू, अभिभावकहरू, सुपरिवेक्षण pin, pin"</string>
@@ -6013,12 +6008,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"अभिभावकीय नियन्त्रणहरूको PIN व्यवस्थापन गर्नुहोस्"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"अभिभावकीय नियन्त्रणहरूका लागि प्रयोग गरिने PIN"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"अभिभावकको PIN, अभिभावकीय नियन्त्रणहरूको PIN"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"रिकभरी इमेल ठेगाना हाल्नुहोस्"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"रिकभरी इमेल ठेगाना पुष्टि गर्नुहोस्"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"रिकभर गर्ने विकल्पसम्बन्धी जानकारी हाल्नुहोस्"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"रिकभर गर्ने विकल्पसम्बन्धी जानकारी पुष्टि गर्नुहोस्"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PIN परिवर्तन गर्नुहोस्"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN बिर्सेँ"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"PIN बिर्सनुभयो?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"रिकभरी इमेल ठेगाना बदल्नुहोस्"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"रिकभर गर्ने विकल्पसम्बन्धी जानकारी परिवर्तन गर्नुहोस्"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"रिकभरी इमेल हालिएको छ"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"रिकभरी इमेल पुष्टि गरिएको छ"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"रिकभरी इमेल अपडेट गरिएको छ"</string>
@@ -6030,11 +6025,14 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"खाता रिकभर गर्ने विकल्पसम्बन्धी जानकारी हाल्नुहोस्"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"तपाईंले आफ्नो PIN बिर्सनुभयो भने तपाईं आफ्नो खाता प्रयोग गरी यसलाई रिसेट गर्न सक्नुहुन्छ"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN मेटाउनुहोस्"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"रिकभरी इमेल ठेगाना हाल्नुहोस्"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"आफ्नो इमेल ठेगाना पुष्टि गर्नुहोस्"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"रिकभर गर्ने विकल्पसम्बन्धी जानकारी हाल्नुहोस्"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"रिकभर गर्ने विकल्पसम्बन्धी जानकारी पुष्टि गर्नुहोस्"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"एप स्टोरका फिल्टरहरू"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"एपमा समावेश गरिएका सामग्री उमेर सुहाउँदो छन् कि छैनन् भन्ने कुराको मूल्याङ्कनका आधारमा एपहरू फिल्टर गर्नुहोस्"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"प्रत्येक एपले फरक फरक खालका सामग्री ब्लक गर्न सक्छ। सूचीबद्ध नगरिएका एप स्टोरहरू अनिवार्य रूपमा छुट्टै व्यवस्थापन गर्नु पर्ने हुन्छ।"</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"वेब कन्टेन्टसम्बन्धी फिल्टरहरू"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"वेबसाइटसम्बन्धी फिल्टरहरू, साइटहरू ब्लक गर्नुहोस्, ब्राउजरसम्बन्धी फिल्टरहरू, अश्लील साइटहरू ब्लक गर्नुहोस्, साइटहरू फिल्टर गर्नुहोस्, खोज परिणामहरू ब्लक गर्नुहोस्, अश्लील खोज परिणामहरू फिल्टर गर्नुहोस्, कन्टेन्टसम्बन्धी प्रतिबन्धहरू"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"यो फोनमा भएका केही एप र ब्राउजरहरूमा अश्लील कन्टेन्ट फिल्टर गर्न मद्दत गर्छ। अन्य एप, डिभाइस वा ब्राउजरहरूमा भने अझै पनि अश्लील कन्टेन्ट देखिन सक्छ।"</string>
@@ -6054,19 +6052,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"PIN मेटाउन सकिएन"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"यो PIN मेटाउन सकिएन"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"यो PIN मेटाउने प्रयास गर्दै गर्दा कुनै त्रुटि भयो।"</string>
-    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
-    <skip />
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"यी प्रयोगकर्ताका हकमा अभिभावकीय नियन्त्रणहरू अफ गर्नुहोस्"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"PIN मेटाउने र अभिभावकीय नियन्त्रणहरू अफ गर्ने हो?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"तपाईंका अभिभावकीय नियन्त्रणहरूको PIN मेटाइने छ। तपाईंले सेटअप गर्नुभएका सबै अभिभावकीय नियन्त्रणहरू अफ गरिने छन्।"</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"मेटाउनुहोस् र अफ गर्नुहोस्"</string>
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
-    <skip />
-    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
-    <skip />
-    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
-    <skip />
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"PIN मेटाउनुहोस् र अभिभावकीय नियन्त्रणहरू अफ गर्नुहोस्"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"मेटाउनुहोस्"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"निम्न प्रयोगकर्ताहरू तपाईंका अभिभावकीय नियन्त्रणहरूको PIN प्रयोग गरिरहेका छन्:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> को एनिमेसन"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"कन्ट्रोलहरू अन गर्न सकिएनन्"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"कन्ट्रोलहरू प्रयोग गर्न मिल्दैन"</string>
@@ -6128,10 +6120,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"अन छ"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"उपलब्ध छ"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"उपलब्ध छैन"</string>
-    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
-    <skip />
-    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
-    <skip />
-    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
-    <skip />
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"स्याटलाइट कनेक्टिभिटी"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"मोबाइल वा Wi-Fi नेटवर्कको एक्सेस नहुँदा पनि कनेक्ट भइराख्नुहोस्"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"स्याटलाइटको ल्यान्डिङ पेज"</string>
 </resources>
