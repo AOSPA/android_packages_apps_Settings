@@ -16,10 +16,10 @@
 
 package com.android.settings.network.apn
 
-import android.telephony.TelephonyManager.NETWORK_TYPE_BITMASK_CDMA
 import android.telephony.TelephonyManager.NETWORK_TYPE_BITMASK_EDGE
 import android.telephony.TelephonyManager.NETWORK_TYPE_BITMASK_HSPAP
 import android.telephony.TelephonyManager.NETWORK_TYPE_BITMASK_HSUPA
+import android.telephony.TelephonyManager.NETWORK_TYPE_BITMASK_NR
 import androidx.compose.runtime.mutableStateOf
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settingslib.spa.widget.editor.SettingsDropdownCheckOption
@@ -34,22 +34,23 @@ class ApnNetworkTypesTest {
     fun getNetworkTypeOptions() {
         val networkTypeOptions =
             ApnNetworkTypes.getNetworkTypeOptions(
-                NETWORK_TYPE_BITMASK_EDGE xor NETWORK_TYPE_BITMASK_CDMA
+                NETWORK_TYPE_BITMASK_EDGE xor NETWORK_TYPE_BITMASK_NR
             )
 
         assertThat(networkTypeOptions.single { it.text == "EDGE" }.selected.value).isTrue()
-        assertThat(networkTypeOptions.single { it.text == "CDMA" }.selected.value).isTrue()
         assertThat(networkTypeOptions.single { it.text == "GPRS" }.selected.value).isFalse()
+        assertThat(networkTypeOptions.single { it.text == "NR" }.selected.value).isTrue()
     }
 
     @Test
     fun optionsToNetworkType() {
-        val options = listOf(
-            SettingsDropdownCheckOption(text = "", selected = mutableStateOf(false)),
-            SettingsDropdownCheckOption(text = "", selected = mutableStateOf(true)),
-            SettingsDropdownCheckOption(text = "", selected = mutableStateOf(false)),
-            SettingsDropdownCheckOption(text = "", selected = mutableStateOf(true)),
-        )
+        val options =
+            listOf(
+                SettingsDropdownCheckOption(text = "", selected = mutableStateOf(false)),
+                SettingsDropdownCheckOption(text = "", selected = mutableStateOf(true)),
+                SettingsDropdownCheckOption(text = "", selected = mutableStateOf(false)),
+                SettingsDropdownCheckOption(text = "", selected = mutableStateOf(true)),
+            )
 
         val networkType = ApnNetworkTypes.optionsToNetworkType(options)
 
