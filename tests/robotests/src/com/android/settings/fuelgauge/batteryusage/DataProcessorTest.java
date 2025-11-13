@@ -443,6 +443,76 @@ public final class DataProcessorTest {
     }
 
     @Test
+    public void generateAppUsagePeriodMap_withFlipDeviceEventList_returnExpectedResult() {
+        final long startTime = Duration.ofHours(4).toMillis();
+        final long endTime = Duration.ofHours(6).toMillis();
+        final String packageName = "com.android.settings";
+        DataProcessor.sDebug = true;
+        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
+                List.of(
+                        new BatteryLevelData.PeriodBatteryLevelData(
+                                /* batteryLevelMap= */ Map.of(startTime, 100, endTime, 100),
+                                /* timestamps= */ List.of(startTime, endTime),
+                                /* isStartTimestamp= */ false)
+                );
+        List<AppUsageEvent> eventList = null;
+        Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> result = null;
+        List<AppUsagePeriod> periods = null;
+
+        // Stop event is soon after the screen-off event.
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        startTime + 1L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        endTime - 30L,
+                        AppUsageEventType.SCREEN_NON_INTERACTIVE,
+                        endTime - 10L,
+                        AppUsageEventType.ACTIVITY_STOPPED
+                )
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(1);
+        assertAppUsagePeriod(periods.get(0), startTime + 1L, endTime - 10L);
+
+        // Stop event is far away from the last screen-off event, so there's no flip tolerate.
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        startTime + 1L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        startTime + 30L,
+                        AppUsageEventType.SCREEN_NON_INTERACTIVE,
+                        endTime - 10L,
+                        AppUsageEventType.ACTIVITY_STOPPED
+                )
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(2);
+        assertAppUsagePeriod(periods.get(0), startTime + 1L, startTime + 30L);
+        assertAppUsagePeriod(periods.get(1),
+                endTime - 10L - DURATION_FOR_UNMATCHED_EVENT, endTime - 10L);
+    }
+
+    @Test
     public void generateAppUsagePeriodMap_withSingleEvent_returnExpectedResult() {
         final long startTime = Duration.ofHours(4).toMillis();
         final long endTime = Duration.ofHours(6).toMillis();
