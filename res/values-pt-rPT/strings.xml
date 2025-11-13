@@ -976,6 +976,7 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"O dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g> não conseguiu estabelecer ligação"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalhes do dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Definições do teclado"</string>
+    <string name="bluetooth_device_game_controller_settings_preference_title" msgid="291778307796320923">"Definições do comando de jogos"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Mais definições"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Atualizações de firmware, informações e muito mais"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Dicas e apoio técnico"</string>
@@ -2242,6 +2243,21 @@
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Teclado no ecrã para trabalho"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Predefinição"</string>
     <string name="game_controller_settings_title" msgid="4322385924018377909">"Comandos de jogos"</string>
+    <string name="game_controller_key_remapping" msgid="8150376475022555386">"Teclas"</string>
+    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"Eixos"</string>
+    <string name="game_controller_button_a" msgid="2138420373137111774">"Botão A"</string>
+    <string name="game_controller_button_b" msgid="2093089857164437480">"Botão B"</string>
+    <string name="game_controller_button_x" msgid="3428801081204194655">"Botão X"</string>
+    <string name="game_controller_button_y" msgid="4596061542299533516">"Botão Y"</string>
+    <string name="game_controller_button_l1" msgid="4428713182602902434">"Botão L1"</string>
+    <string name="game_controller_button_r1" msgid="6271978600831912659">"Botão R1"</string>
+    <string name="game_controller_button_l2" msgid="4168716287264803566">"Botão L2"</string>
+    <string name="game_controller_button_r2" msgid="4361909018228151006">"Botão R2"</string>
+    <string name="game_controller_button_thumbl" msgid="609311480262927654">"Clique no stick esquerdo"</string>
+    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"Clique no stick direito"</string>
+    <string name="game_controller_dpad" msgid="5352745621298140827">"Botão direcional"</string>
+    <string name="game_controller_stick_left" msgid="1591700901162153956">"Stick esquerdo"</string>
+    <string name="game_controller_stick_right" msgid="1418791636252375110">"Stick direito"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad e rato"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Rato"</string>
@@ -3162,8 +3178,7 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Seleciona automaticamente a melhor ligação de rede para prolongar a autonomia da bateria"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Segurança de redes móveis"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tipo de rede, encriptação, controlos de notificação"</string>
-    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="4190908521080878539">"Estas definições ajudam a proteger as suas chamadas, mensagens e dados de redes desatualizadas ou não encriptadas que podem sujeitar os seus dados a roubo ou vigilância."</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Segurança de redes móveis"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notificações"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Notificações de redes"</string>
@@ -4585,6 +4600,18 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Permitir acesso para gerir todos os ficheiros"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permita que esta app leia, modifique e elimine todos os ficheiros neste dispositivo ou em qualquer volume de armazenamento ligado. Se a autorização for concedida, a app poderá aceder aos ficheiros sem o seu conhecimento explícito."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pode aceder a todos os ficheiros"</string>
+    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificações em ecrã inteiro"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permitir notificações desta app em ecrã inteiro"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permita que esta app mostre notificações que ocupam o ecrã inteiro quando o dispositivo está bloqueado. As apps podem usá-las para destacar alarmes, chamadas recebidas ou outras notificações urgentes."</string>

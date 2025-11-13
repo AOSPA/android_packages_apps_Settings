@@ -27,6 +27,7 @@ import android.view.Gravity
 import android.view.SurfaceControl
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.view.TouchDelegate
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.view.accessibility.AccessibilityNodeInfo
@@ -124,6 +125,31 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
             override fun surfaceDestroyed(h: SurfaceHolder) {}
         }
 
+    private val layoutChangeListener = OnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+        touchDelegate =
+            TouchDelegateComposite(this).apply {
+                arrowButtons.values.forEach { arrowButton ->
+                    // Get the button's bounds relative to this DisplayBlock
+                    val bounds = Rect()
+                    arrowButton.getHitRect(bounds)
+
+                    // Expand the bounds to at least 48dp - centered on the button's current center
+                    val width = bounds.width()
+                    val height = bounds.height()
+
+                    val extraWidth = (arrowTappableAreaSizePx - width).coerceAtLeast(0)
+                    val extraHeight = (arrowTappableAreaSizePx - height).coerceAtLeast(0)
+
+                    // Only add a TouchDelegate if the bounds need to be expanded.
+                    if (extraWidth > 0 || extraHeight > 0) {
+                        // inset by negative to expands the rect
+                        bounds.inset(-extraWidth / 2, -extraHeight / 2)
+                        add(TouchDelegate(bounds, arrowButton))
+                    }
+                }
+            }
+    }
+
     private val wallpaperView = SurfaceView(context).apply { id = R.id.display_block_wallpaper }
     private val backgroundView =
         View(context).apply {
@@ -171,12 +197,15 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
                 createArrowButtons(properties).also { arrowButtonView -> addView(arrowButtonView) }
             }
 
+        addOnLayoutChangeListener(layoutChangeListener)
+
         wallpaperView.holder.addCallback(holderCallback)
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         setTouchListener(null)
+        removeOnLayoutChangeListener(layoutChangeListener)
         onA11yMoveListener = null
     }
 

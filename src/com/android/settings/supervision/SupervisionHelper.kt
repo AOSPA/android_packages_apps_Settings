@@ -213,3 +213,18 @@ fun Context.shouldDisplayPinRecoveryReminders(): Boolean {
     }
     return false
 }
+
+/** Checks if the PIN recovery flow can be launched */
+fun Context.canLaunchPinRecovery(): Boolean {
+    val supervisionManager =
+        ISupervisionManager.Stub.asInterface(ServiceManager.getService(Context.SUPERVISION_SERVICE))
+    if (supervisionManager != null) {
+        return try {
+            supervisionManager.canLaunchPinRecovery(userId)
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to check if recovery configuration is available for launch.", e)
+            false
+        }
+    }
+    return false
+}

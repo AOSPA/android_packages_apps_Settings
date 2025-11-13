@@ -349,7 +349,12 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
         }
 
         val supportSupervisionRecovery =
-            getSystemService(SupervisionManager::class.java)?.getSupervisionRecoveryInfo() != null
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                this.canLaunchPinRecovery()
+            } else {
+                getSystemService(SupervisionManager::class.java)?.getSupervisionRecoveryInfo() !=
+                    null
+            }
 
         if (supportSupervisionRecovery) {
             val listener =

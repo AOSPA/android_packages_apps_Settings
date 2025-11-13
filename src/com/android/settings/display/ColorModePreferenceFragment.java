@@ -47,11 +47,13 @@ import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -401,6 +403,34 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
                             ColorModeUtils.getAvailableColorModes(context);
                     return availableColorModes != null && availableColorModes.length > 0
                             && !ColorDisplayManager.areAccessibilityTransformsEnabled(context);
+                }
+
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(
+                        Context context, boolean enabled) {
+                    if (!isPageSearchEnabled(context)) {
+                        return Collections.emptyList();
+                    }
+
+                    final List<SearchIndexableRaw> rawData = new ArrayList<>();
+                    final Resources res = context.getResources();
+                    final String screenTitle = context.getString(R.string.color_mode_title);
+
+                    final Map<Integer, String> colorModesToSummaries =
+                            ColorModeUtils.getColorModeMapping(res);
+
+                    for (int colorMode : ColorModeUtils.getAvailableColorModes(context)) {
+                        String modeName = colorModesToSummaries.get(colorMode);
+                        if (modeName != null) {
+                            SearchIndexableRaw raw = new SearchIndexableRaw(context);
+                            raw.key = KEY_COLOR_MODE_PREFIX + colorMode;
+                            raw.title = modeName;
+                            raw.screenTitle = screenTitle;
+                            raw.className = ColorModePreferenceFragment.class.getName();
+                            rawData.add(raw);
+                        }
+                    }
+                    return rawData;
                 }
             };
 }

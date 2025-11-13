@@ -219,7 +219,7 @@
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Выбрать язык для отдельных приложений можно в их настройках."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Подробнее о языках приложений…"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"Новый регион – %s. Сохранить изменение?"</string>
-    <string name="desc_notice_device_region_change" msgid="6702773189066944100">"Язык системы будет изменен на %s."</string>
+    <string name="desc_notice_device_region_change" msgid="6702773189066944100">"%s останется языком системы."</string>
     <string name="desc_notice_device_region_change_for_preferred_language" msgid="408517366942324267">"Предпочитаемым языком будет не %2$s, а %1$s."</string>
     <string name="title_change_system_locale" msgid="4102991236063984803">"Сменить язык системы на %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Добавить %s в предпочтительные языки?"</string>
@@ -976,6 +976,8 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"Не удалось подключить устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Об устройстве"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Настройки клавиатуры"</string>
+    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
+    <skip />
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Дополнительные настройки"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Обновление встроенного ПО, сведения и не только"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Помощь и советы"</string>
@@ -2242,6 +2244,36 @@
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Экранная клавиатура для работы"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"По умолчанию"</string>
     <string name="game_controller_settings_title" msgid="4322385924018377909">"Игровые контроллеры"</string>
+    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
+    <skip />
+    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
+    <skip />
+    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
+    <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"Сенсорная панель"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Сенсорная панель и мышь"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Мышь"</string>
@@ -3951,7 +3983,7 @@
     <string name="notification_ai_features_title" msgid="2241618579100257538">"Управление с помощью ИИ"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"Краткие пересказы уведомлений"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Получайте краткие пересказы длинных сообщений"</string>
-    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Использовать краткие пересказы уведомлений"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Краткие пересказы уведомлений"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Получайте краткие пересказы длинных сообщений и групповых чатов.\n\nФункция использует ИИ на вашем устройстве. Искусственный интеллект иногда может ошибаться. Ваши сообщения никогда не отправляются в Google."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Вы не будете получать краткие пересказы уведомлений из этих приложений"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Управление приложениями"</string>
@@ -4349,7 +4381,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Заблокируйте то, что отвлекает, чтобы сфокусироваться на важном"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Добейтесь тишины, заблокировав все отвлекающие факторы"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Персонализируйте устройство и его настройки для разных пользователей"</string>
-    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Пользуйтесь общественным транспортом с комфортом благодаря автоматической настройке параметров."</string>
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"С автоизменением настроек вам будет удобнее пользоваться общественным транспортом."</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Выберите важные контакты и приложения, чтобы не отвлекаться на остальное."</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Настройте режим, который работает по расписанию"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Настройте работу устройства с учетом мероприятий в календаре"</string>
@@ -4358,7 +4390,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Сосредоточьтесь и войдите в состояние потока"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Соблюдайте тишину, когда этого требует этикет"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Передайте управление устройством в надежные руки"</string>
-    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Оптимизируйте устройство для более удобного использования в общественном транспорте."</string>
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Оптимизируйте устройство, чтобы им было удобнее пользоваться в общественном транспорте."</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Управляйте своим вниманием"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Уведомление"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Закрыть"</string>
@@ -4585,6 +4617,18 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Разрешить доступ к управлению всеми файлами"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Приложение сможет читать, изменять и удалять все файлы на этом устройстве и любых подключенных носителях. Доступ к файлам будет осуществляться без дополнительного уведомления."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Приложения, имеющие доступ ко всем файлам"</string>
+    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Уведомления в полноэкранном режиме"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Разрешить этому приложению отправлять уведомления в полноэкранном режиме"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Разрешить уведомлениям от этого приложения занимать весь экран, когда устройство заблокировано. Так приложение сможет сообщать о будильниках, входящих вызовах и других срочных уведомлениях."</string>
@@ -5632,7 +5676,7 @@
     <string name="category_name_color" msgid="937514550918977151">"Цвет"</string>
     <string name="category_name_display_controls" msgid="7046581691184725216">"Другие настройки экрана"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Общие"</string>
-    <string name="dark_theme_main_switch_title" msgid="4570920398981775904">"Использовать тёмную тему"</string>
+    <string name="dark_theme_main_switch_title" msgid="4570920398981775904">"Тёмная тема"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Использовать Bluetooth"</string>
     <string name="hdr_brightness_main_switch_title" msgid="1850974699921514297">"Улучшенная яркость HDR"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Отключение звука звонка"</string>

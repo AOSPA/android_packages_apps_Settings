@@ -455,7 +455,7 @@
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"Fingeraftryk"</string>
     <string name="security_settings_fingerprint_title" msgid="7564944192711394896">"Fingeraftryk"</string>
     <string name="security_settings_fingerprint_description" msgid="629796299137157167"></string>
-    <string name="security_settings_category_use_fingerprint" msgid="4273932435979772330">"Brug fingeraftryk til"</string>
+    <string name="security_settings_category_use_fingerprint" msgid="4273932435979772330">"Brug fingeraftryk til at"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingeraftryk"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Når du bruger fingeroplåsning"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingeraftryk til arbejdsprofil"</string>
@@ -976,6 +976,8 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"Der kunne ikke oprettes forbindelse til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Enhedsoplysninger"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Tastaturindstillinger"</string>
+    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
+    <skip />
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Flere indstillinger"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Firmwareopdateringer, om m.m."</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Tips og support"</string>
@@ -1026,8 +1028,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Der er ikke tilsluttet en skærm"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Tilslut en ekstern skærm for at komme i gang, eller prøv at bruge et andet kabel"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Flere valgmuligheder"</string>
-    <!-- no translation found for external_display_pause_topology_hint (1128908588539457600) -->
-    <skip />
+    <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"Sæt den gentagne animation for hjælpetekst på pause"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Hold fingeren nede og træk for at omarrangere skærmene."</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Tryk for at få vist navigationspile"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Tryk på pilene for at omarrangere skærmene"</string>
@@ -2242,7 +2243,36 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatur og værktøjer for arbejdsprofil"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Skærmtastatur til arbejdsprofil"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Standard"</string>
-    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
+    <string name="game_controller_settings_title" msgid="4322385924018377909">"Spilcontrollere"</string>
+    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
+    <skip />
+    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
+    <skip />
+    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
     <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchplade"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchplade og mus"</string>
@@ -2736,10 +2766,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tryk tre gange på skærmen"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Rediger genveje til hjælpefunktioner"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Vælg din genvej til %1$s"</string>
-    <!-- no translation found for a11y_button_shortcut_unassigned_setting_unavailable_summary (8268632664568192689) -->
-    <skip />
-    <!-- no translation found for a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary (2232737783140069174) -->
-    <skip />
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary" msgid="8268632664568192689">"Hvis du vil benytte denne, skal du aktivere genvejen til knappen til hjælpefunktioner på siden for en hjælpefunktion"</string>
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary" msgid="2232737783140069174">"Hvis du vil benytte denne, skal du aktivere genvejen til lydstyrkeknapperne på siden for en hjælpefunktion"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Fortsæt"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Høreapparater"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Konfigurer og administrer høreapparater, der understøtter ASHA og LE-lyd, cochlearimplantater og andre enheder til lydforstærkning"</string>
@@ -4336,8 +4364,7 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Kalenderbegivenheder"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rutinen Sengetid"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Under kørsel"</string>
-    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
-    <skip />
+    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"Under transport"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Appindstillinger"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Oplysninger og indstillinger i <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Administreres af <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4354,8 +4381,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Bloker forstyrrelser eller afbrydelser fra din enhed, så du bedre kan koncentrere dig"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Fjern alle forstyrrelser for at få ro"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Tilpas brugeroplevelser og indstillinger på enheden til forskellige brugere"</string>
-    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
-    <skip />
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Få en bedre rejse med offentlig transport ved hjælp af automatiske justeringer af indstillinger"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimer afbrydelser ved kun at tillade, at vigtige personer og apps kan få fat på dig"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Indstil en tilstand, der følger en fast tidsplan"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Hold din enhed synkroniseret med dagens begivenheder"</string>
@@ -4364,8 +4390,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Hold fokus på det, der betyder noget"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Til øjeblikke, hvor du skal udvise høflighed"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Guidet brug, som holder dig sikker"</string>
-    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
-    <skip />
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Optimer din enhed for at få en bedre oplevelse med offentlig transport"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Hold opmærksomheden på det vigtigste"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Advarsel"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Luk"</string>
@@ -4592,6 +4617,18 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Tillad admin­istrations­adgang til alle filer"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Giv denne app tilladelse til at læse, ændre og slette alle filer på denne enhed eller andre tilsluttede lagringsløsninger. Hvis du giver tilladelse til dette, kan appen få adgang til dine filer, uden du specifikt bliver gjort opmærksom på det."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Kan få adgang til alle filer"</string>
+    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notifikationer i fuld skærm"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Tillad notifikationer i fuld skærm fra denne app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Tillad appen at vise notifikationer, der fylder hele skærmen, når enheden er låst. Apps kan benytte denne mulighed til at fremhæve alarmer, indgående opkald og andre presserende notifikationer."</string>
@@ -6036,8 +6073,7 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Noget gik galt"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Prøv igen senere"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Gå tilbage"</string>
-    <!-- no translation found for supervision_available_apps_title (886352413031517863) -->
-    <skip />
+    <string name="supervision_available_apps_title" msgid="886352413031517863">"Tilgængelige apps og tjenester"</string>
     <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
     <skip />
     <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->

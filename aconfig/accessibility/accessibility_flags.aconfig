@@ -136,6 +136,16 @@ flag {
 }
 
 flag {
+  name: "enable_magnification_mode_chooser_fragment"
+  namespace: "accessibility"
+  description: "Enables the magnification mode chooser fragment instead of the legacy dialog UI."
+  bug: "456047460"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
+}
+
+flag {
   name: "never_restrict_accessibility_activity"
   namespace: "accessibility"
   description: "Stops possibly restricting AccessibilityActivityPreferences"

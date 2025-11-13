@@ -429,6 +429,20 @@ class SupervisionHelperTest {
         assertThat(context.shouldDisplayPinRecoveryReminders()).isTrue()
     }
 
+    @Test
+    fun canLaunchPinRecovery_whenRecoveryFlowIsLaunchable_returnsTrue() {
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(true)
+
+        assertThat(context.canLaunchPinRecovery()).isTrue()
+    }
+
+    @Test
+    fun canLaunchPinRecovery_whenRecoveryFlowIsNotConfigured_returnsFalse() {
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(false)
+
+        assertThat(context.canLaunchPinRecovery()).isFalse()
+    }
+
     private fun setUpMessengerServiceComponent(packageName: String, disabled: Boolean) {
         val serviceComponentName = ComponentName(packageName, "FakeSupervisionMessengerService")
         val intentFilter =

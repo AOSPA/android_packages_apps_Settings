@@ -160,4 +160,29 @@ public class AccessibilityButtonPreferenceControllerTest {
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
+
+    @Test
+    public void getSummary_whenAvailable_returnsEmptyString() {
+        // Scenario: The controller is available because a software shortcut target exists.
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(SOFTWARE, List.of("Foo"));
+
+        // Action: Get the summary from the controller.
+        final CharSequence summary = mController.getSummary();
+
+        // Assertion: The summary should be an empty string when the setting is available.
+        assertThat(summary.toString()).isEmpty();
+    }
+
+    @Test
+    public void getSummary_whenUnavailable_returnsUnavailableSummary() {
+        // Scenario: The controller is unavailable because no software shortcut targets exist.
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(SOFTWARE, List.of());
+
+        // Action: Get the summary from the controller.
+        final CharSequence summary = mController.getSummary();
+
+        // Assertion: The summary should indicate that the setting is unavailable.
+        assertThat(summary.toString()).isEqualTo(mContext.getString(
+                R.string.a11y_button_shortcut_unassigned_setting_unavailable_summary));
+    }
 }

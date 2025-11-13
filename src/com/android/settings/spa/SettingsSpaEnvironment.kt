@@ -46,6 +46,7 @@ import com.android.settings.spa.app.specialaccess.UsageDataAppListProvider
 import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.app.specialaccess.WriteSystemPreferencesAppListProvider
+import com.android.settings.spa.app.specialaccess.runIfComputerControlEnabled
 import com.android.settings.spa.app.storage.StorageAppListPageProvider
 import com.android.settings.spa.core.instrumentation.SpaLogMetricsProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
@@ -128,9 +129,14 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             NetworkCellularGroupProvider(),
             WifiPrivacyPageProvider,
             PrintSettingsPageProvider,
-            ComputerControlAutomationAppListProvider,
-            ComputerControlAppInfoPageProvider,
-        )
+        ).runIfComputerControlEnabled {
+            plus(
+                arrayOf(
+                    ComputerControlAutomationAppListProvider,
+                    ComputerControlAppInfoPageProvider,
+                )
+            )
+        }
 
     override val logger =
         if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_ENABLE_SPA_METRICS))

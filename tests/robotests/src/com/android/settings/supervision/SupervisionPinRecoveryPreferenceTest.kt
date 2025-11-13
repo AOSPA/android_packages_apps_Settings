@@ -17,6 +17,7 @@ package com.android.settings.supervision
 
 import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_FORGOT_PIN
+import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
@@ -52,6 +53,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.robolectric.shadows.ShadowServiceManager
 import org.robolectric.shadows.ShadowToast
 
 @RunWith(AndroidJUnit4::class)
@@ -59,6 +61,7 @@ class SupervisionPinRecoveryPreferenceTest {
 
     private val appContext: Context = ApplicationProvider.getApplicationContext()
     private val mockSupervisionManager = mock<SupervisionManager>()
+    private val mockISupervisionManager = mock<ISupervisionManager>()
     private val mockPinRecoveryLauncher = mock<ActivityResultLauncher<Intent>>()
     private val preference = SupervisionPinRecoveryPreference()
     private val mContext =
@@ -89,6 +92,11 @@ class SupervisionPinRecoveryPreferenceTest {
             )
             .thenReturn(mockPinRecoveryLauncher)
         preference.onCreate(mockLifeCycleContext)
+        ShadowServiceManager.addBinderService(
+            Context.SUPERVISION_SERVICE,
+            ISupervisionManager::class.java,
+            mockISupervisionManager,
+        )
     }
 
     @Test
@@ -105,8 +113,25 @@ class SupervisionPinRecoveryPreferenceTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun flagDisabled_SettingsUiUpdates_recoveryNotExist_notAvailable() {
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
+
+        assertThat(preference.isAvailable(mContext)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun flagEnabled_SettingsUiUpdates_recoveryNotExist_notAvailable() {
+        setCanLaunchPinRecovery(false)
+
+        assertThat(preference.isAvailable(mContext)).isFalse()
+    }
+
+    @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
-    fun flagEnabled_recoveryInfoExist_isAvailable() {
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun pinRecoveryScreenEnabled_uiUpdatesDisabled_recoveryInfoExist_isAvailable() {
         val recoveryInfo =
             SupervisionRecoveryInfo(
                 /* accountName */ "email",
@@ -120,8 +145,39 @@ class SupervisionPinRecoveryPreferenceTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun flagDisabled_SettingsUiUpdates_recoveryInfoExist_isAvailable() {
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_PENDING,
+                /* accountData */ null,
+            )
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
+
+        assertThat(preference.isAvailable(mContext)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun flagEnabled_SettingsUiUpdates_recoveryInfoExist_isAvailable() {
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_PENDING,
+                /* accountData */ null,
+            )
+        setCanLaunchPinRecovery(true)
+
+        assertThat(preference.isAvailable(mContext)).isTrue()
+    }
+
+    @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
-    fun flagEnabled_recoveryVerified_isAvailable() {
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun pinRecoveryScreenEnabled_uiUpdatesDisabled_recoveryVerified_isAvailable() {
         val recoveryInfo =
             SupervisionRecoveryInfo(
                 /* accountName */ "email",
@@ -130,6 +186,36 @@ class SupervisionPinRecoveryPreferenceTest {
                 /* accountData */ null,
             )
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
+
+        assertThat(preference.isAvailable(mContext)).isTrue()
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun flagDisabled_SettingsUiUpdates_recoveryVerified_isAvailable() {
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_VERIFIED,
+                /* accountData */ null,
+            )
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
+
+        assertThat(preference.isAvailable(mContext)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun flagEnabled_SettingsUiUpdates_recoveryVerified_isAvailable() {
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_VERIFIED,
+                /* accountData */ null,
+            )
+        setCanLaunchPinRecovery(true)
 
         assertThat(preference.isAvailable(mContext)).isTrue()
     }
@@ -183,6 +269,10 @@ class SupervisionPinRecoveryPreferenceTest {
     fun onRecoveryFlowComplete_flowCanceled_noToast() {
         preference.onRecoveryFlowComplete(ActivityResult(Activity.RESULT_CANCELED, null))
         assertThat(ShadowToast.getTextOfLatestToast()).isNull()
+    }
+
+    private fun setCanLaunchPinRecovery(canLaunch: Boolean) {
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(canLaunch)
     }
 
     private fun verifyPinRecoveryActivityStarted(expectedAction: String) {

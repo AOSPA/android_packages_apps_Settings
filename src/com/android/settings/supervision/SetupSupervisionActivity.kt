@@ -21,6 +21,7 @@ import android.Manifest.permission.INTERACT_ACROSS_USERS_FULL
 import android.Manifest.permission.MANAGE_USERS
 import android.app.KeyguardManager
 import android.app.admin.DevicePolicyManager
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ENABLE_SUPERVISION
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Intent
@@ -39,6 +40,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.android.internal.widget.LockPatternUtils
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import com.android.settings.password.ChooseLockGeneric
 import com.android.settingslib.HelpUtils
 import com.android.settingslib.collapsingtoolbar.R.drawable.settingslib_expressive_icon_back as EXPRESSIVE_BACK_ICON
@@ -219,6 +221,10 @@ class SetupSupervisionActivity : FragmentActivity() {
         if (result.resultCode == RESULT_OK) {
             setResult(RESULT_OK)
             getSystemService(SupervisionManager::class.java)?.setSupervisionEnabled(true)
+            FeatureFactory.featureFactory.metricsFeatureProvider.action(
+                this,
+                ACTION_SUPERVISION_ENABLE_SUPERVISION,
+            )
         } else {
             setResult(RESULT_CANCELED)
         }
@@ -257,9 +263,20 @@ class SetupSupervisionActivity : FragmentActivity() {
         // Enable device supervision
         val supervisionManager = getSystemService(SupervisionManager::class.java)
         supervisionManager?.setSupervisionEnabled(true)
+        if (Flags.enableSupervisionSettingsUiUpdates()) {
+            FeatureFactory.featureFactory.metricsFeatureProvider.action(
+                this,
+                ACTION_SUPERVISION_ENABLE_SUPERVISION,
+            )
+        }
 
-        // Start PIN recovery setup
-        startPinRecoveryActivity()
+        // Start PIN recovery setup when pin recovery can be launched
+        if (!Flags.enableSupervisionSettingsUiUpdates() || canLaunchPinRecovery()) {
+            startPinRecoveryActivity()
+        } else {
+            setResult(RESULT_OK)
+            finish()
+        }
     }
 
     private fun handlePinRecoveryResult(result: ActivityResult) {

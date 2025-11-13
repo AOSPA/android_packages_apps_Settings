@@ -114,6 +114,9 @@ object ComputerControlAutomationAppListProvider : SettingsPageProvider {
     @Composable
     fun InfoPageEntryItem(app: ApplicationInfo) {
         val model = remember(::ComputerControlAutomationAppListModel)
+        if (!app.hasRequestPermission(model.permission)) {
+            return
+        }
         val context = LocalContext.current
         Preference(
             object : PreferenceModel {

@@ -976,6 +976,8 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"Povezivanje uređaja <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nije uspjelo"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Pojedinosti o uređaju"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Postavke tipkovnice"</string>
+    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
+    <skip />
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Više postavki"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Ažuriranja firmwarea, informacije i drugo"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Savjeti i podrška"</string>
@@ -1026,8 +1028,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Nije povezan nijedan zaslon"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Priključite vanjski zaslon da biste započeli ili pokušajte upotrijebiti drugi kabel"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Više opcija"</string>
-    <!-- no translation found for external_display_pause_topology_hint (1128908588539457600) -->
-    <skip />
+    <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"Pauziraj animaciju teksta savjeta koja se ponavlja"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Zadržite i povucite da biste promijenili raspored zaslona"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Dodirnite za prikaz strelica za navigaciju"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Dodirnite strelice da biste promijenili raspored zaslona"</string>
@@ -1497,7 +1498,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Upotrijebite tamnu pozadinu da bi vam bilo ugodnije gledati zaslon i da bi se smanjila potrošnja baterije na nekim zaslonima. Ako imate raspored, vaša će se tema promijeniti kad je zaslon isključen."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tamna tema trenutačno prati raspored načina rada za spavanje"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Postavke načina rada za spavanje"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Načini rada mogu uključiti i tamnu temu}=1{{mode_1} uključuje i tamnu temu}=2{{mode_1} i {mode_2} uključuju i tamnu temu}=3{{mode_1}, {mode_2} i {mode_3} uključuju i tamnu temu}one{{mode_1}, {mode_2} i još # način uključuju i tamnu temu}few{{mode_1}, {mode_2} i još # načina uključuju i tamnu temu}other{{mode_1}, {mode_2} i još # načina uključuju i tamnu temu}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Načini rada također mogu uključiti tamnu temu}=1{{mode_1} također uključuje tamnu temu}=2{{mode_1} i {mode_2} također uključuju tamnu temu}=3{{mode_1}, {mode_2} i {mode_3} također uključuju tamnu temu}one{{mode_1}, {mode_2} i još # način također uključuju tamnu temu}few{{mode_1}, {mode_2} i još # načina također uključuju tamnu temu}other{{mode_1}, {mode_2} i još # načina također uključuju tamnu temu}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Postavke načina rada"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Posvijetlite te proširite raspon boja i jasnoću za slike i videozapise s visokim dinamičkim rasponom (HDR). HDR sadržaj izgledat će svjetlije."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Automatsko isključivanje zaslona"</string>
@@ -2242,7 +2243,36 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tipkovnice i alati radnog profila"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Zaslonska tipkovnica za posao"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Zadano"</string>
-    <!-- no translation found for game_controller_settings_title (4322385924018377909) -->
+    <string name="game_controller_settings_title" msgid="4322385924018377909">"Kontroleri za videoigre"</string>
+    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
+    <skip />
+    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
+    <skip />
+    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
     <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"Dodirna podloga"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Dodirna podloga i miš"</string>
@@ -2736,10 +2766,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Triput dodirnite zaslon"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Uredite prečac pristupačnosti"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Odaberite prečace za značajke %1$s"</string>
-    <!-- no translation found for a11y_button_shortcut_unassigned_setting_unavailable_summary (8268632664568192689) -->
-    <skip />
-    <!-- no translation found for a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary (2232737783140069174) -->
-    <skip />
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary" msgid="8268632664568192689">"Da biste to upotrebljavali, uključite prečac gumba za pristupačnost na stranici značajke pristupačnosti"</string>
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary" msgid="2232737783140069174">"Da biste to upotrebljavali, uključite prečac tipki za glasnoću na stranici značajke pristupačnosti"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Nastavi"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Slušna pomagala"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Postavite slušna pomagala s protokolom ASHA i LE Audio, umjetne pužnice i druge uređaje za pojačavanje zvuka te upravljajte njima"</string>
@@ -4336,8 +4364,7 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Događaji iz kalendara"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rutina prije spavanja"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Tijekom vožnje"</string>
-    <!-- no translation found for zen_mode_trigger_title_transit (5778914231980939940) -->
-    <skip />
+    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"U javnom prijevozu"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Postavke aplikacija"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Podaci i postavke u aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Upravlja <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4354,8 +4381,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Blokirajte smetnje ili prekide koji dolaze s vašeg uređaja kako biste se usredotočili"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Uklonite sva ometanja za tiho okruženje"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalizirajte doživljaje i postavke uređaja za različite korisnike"</string>
-    <!-- no translation found for zen_mode_blurb_transit (38808687370288052) -->
-    <skip />
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Uživajte u boljem doživljaju javnog prijevoza uz automatsko prilagođavanje postavki"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Za manje ometanja dopustite da vam se prikažu samo obavijesti važnih kontakata i aplikacija"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Postavite način koji prati uobičajeni raspored"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Sinkronizirajte uređaj s dnevnim događajima"</string>
@@ -4364,8 +4390,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Usredotočite se da biste se usmjerili na uspjeh"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Za trenutke u kojima je ljubaznost važna"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Vođeni način upotrebe koji će vam pomoći da ostanete u dobrim rukama"</string>
-    <!-- no translation found for zen_mode_inspiration_transit (773274920037562216) -->
-    <skip />
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Optimizirajte uređaj za lakše putovanje javnim prijevozom"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Preuzmite kontrolu nad svojom pažnjom"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Upozorenje"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Zatvori"</string>
@@ -4592,6 +4617,18 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Dopusti pristup za upravljanje svim datotekama"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Dopustite toj aplikaciji čitanje, izmjenu i brisanje svih datoteka na ovom uređaju ili drugim povezanim uređajima za pohranu. Ako date to dopuštenje, aplikacija može pristupati datotekama bez vašeg znanja."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Može pristupiti svim datotekama"</string>
+    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Obavijesti na cijelom zaslonu"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Dopusti obavijesti te aplikacije na cijelom zaslonu"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Omogućuje toj aplikaciji da prikazuje obavijesti koje zauzimaju cijeli zaslon kad je uređaj zaključan. Aplikacije na taj način mogu istaknuti alarme, dolazne pozive ili druge hitne obavijesti."</string>
@@ -6037,8 +6074,7 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Nešto nije u redu"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Pokušajte ponovno kasnije"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Natrag"</string>
-    <!-- no translation found for supervision_available_apps_title (886352413031517863) -->
-    <skip />
+    <string name="supervision_available_apps_title" msgid="886352413031517863">"Dostupne aplikacije i usluge"</string>
     <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
     <skip />
     <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
