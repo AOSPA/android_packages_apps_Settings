@@ -83,12 +83,6 @@
         android:summary="@string/summary_placeholder"
         android:title="@string/print_settings" />
 
-    <com.android.settingslib.widget.UntitledPreferenceCategory
-        android:key="virtual_device_list"
-        android:order="99"
-        settings:controller="com.android.settings.connecteddevice.virtual.VirtualDeviceListController"
-        settings:searchable="true"/>
-
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="uwb_settings"
         android:order="100"
@@ -97,6 +91,11 @@
         settings:controller="com.android.settings.uwb.UwbPreferenceController"
         settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_ultra_wideband_radio" />
+
+    <com.android.settingslib.widget.UntitledPreferenceCategory
+        android:key="virtual_device_list"
+        android:order="99"
+        settings:controller="com.android.settings.connecteddevice.virtual.VirtualDeviceListController" />
 
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"

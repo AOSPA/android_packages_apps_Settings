@@ -771,7 +771,12 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         @Override
         public void accept(List<SplitInfo> splitInfoList) {
-            if (!splitInfoList.isEmpty() && !mIsSplitUpdatedUI && !mActivity.isFinishing()
+            if (splitInfoList.isEmpty()) {
+                TopLevelSettings fragment = mActivity.mMainFragment;
+                if (fragment != null) {
+                    fragment.setDefaultHighlightIfNeeded();
+                }
+            } else if (!mIsSplitUpdatedUI && !mActivity.isFinishing()
                     && ActivityEmbeddingUtils.isAlreadyEmbedded(mActivity)) {
                 mIsSplitUpdatedUI = true;
                 mActivity.updateHomepageUI();

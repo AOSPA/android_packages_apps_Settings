@@ -26,7 +26,7 @@
         settings:controller="com.android.settings.gestures.DoubleTapPowerIllustrationPreferenceController"/>
 
     <com.android.settingslib.widget.MainSwitchPreference
-        android:key="gesture_double_tap_power_enabled_main_switch"
+        android:key="double_tap_power_button_gesture_enabled"
         android:title="@string/double_tap_power_enabled"
         settings:keywords="@string/keywords_double_tap_power"
         settings:controller="com.android.settings.gestures.DoubleTapPowerMainSwitchPreferenceController"/>

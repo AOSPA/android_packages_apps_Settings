@@ -29,6 +29,10 @@ import com.android.settings.network.telephony.wificalling.WifiCallingRepository
 import com.android.settings.utils.getSubId
 import com.android.settings.utils.putSubId
 import com.android.settings.wifi.calling.WifiCallingSettingsForSub.EXTRA_SUB_ID
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.KeyParametersSchema
+import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -42,10 +46,28 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 
 @ProvidePreferenceScreen(WifiCallingScreen.KEY, parameterized = true, parameterizedMigration = true)
-open class WifiCallingScreen(override val arguments: Bundle) :
-    PreferenceScreenMixin, PreferenceAvailabilityProvider {
+open class WifiCallingScreen
+private constructor(
+    @Deprecated(
+        "This property will be removed once the catalyst framework stops passing the arguments as a bundle. Use the keyParameters instead."
+    )
+    final override val arguments: Bundle?,
+    final override val keyParameters: KeyParameters?,
+) : PreferenceScreenMixin, PreferenceAvailabilityProvider {
 
-    private val subId = arguments.getSubId(EXTRA_SUB_ID, getDefaultSubscriptionId())
+    private val subId: Int =
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            keyParameters!![EXTRA_SUB_ID]?.toInt() ?: getDefaultSubscriptionId()
+        } else {
+            arguments!!.getSubId(EXTRA_SUB_ID, getDefaultSubscriptionId())
+        }
+
+    @Deprecated(
+        "This constructor will be removed once the catalyst framework stops passing the arguments as a bundle. Use the other constructor instead."
+    )
+    constructor(args: Bundle) : this(args, null)
+
+    constructor(keyParameters: KeyParameters) : this(null, keyParameters)
 
     override val key: String
         get() = KEY
@@ -72,15 +94,32 @@ open class WifiCallingScreen(override val arguments: Bundle) :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) { +WifiCallingMainSwitchPreference(subId) }
 
-    companion object {
+    companion object : ParameterizedPreferenceScreenArgumentsFactory {
         const val KEY = "wifi_calling"
 
-        /**
-         * Provides arguments to generate [WifiCallingScreen].
-         *
-         * This method is used by annotation processor to produce
-         * `PreferenceScreenMetadataParameterizedFactory`).
-         */
+        @JvmStatic
+        override val parametersSchema = KeyParametersSchema {
+            parameter(EXTRA_SUB_ID, "The subscription ID", required = true)
+        }
+
+        @JvmStatic
+        override fun keyParameters(context: Context): Flow<KeyParameters> {
+            // TODO (b/457649430): when the catalyst framework stops passing the arguments as a
+            // bundle: replace the parameters(context) call to the actual implementation,
+            // or make this function the primary implementation and the legacy parameters() should
+            // call this one.
+            return parameters(context).map { bundle ->
+                if (bundle.isEmpty) {
+                    parametersSchema.prepareEmpty()
+                } else {
+                    parametersSchema.prepare(bundle)
+                }
+            }
+        }
+
+        @Deprecated(
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use keyParameters instead."
+        )
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> {
             fun Int.toArguments() = Bundle(1).also { it.putSubId(EXTRA_SUB_ID, this) }
