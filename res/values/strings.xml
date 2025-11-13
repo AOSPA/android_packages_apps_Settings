@@ -7307,7 +7307,7 @@
     <!-- Process Stats strings -->
     <skip />
     <!-- Description of battery information footer text. [CHAR LIMIT=NONE] -->
-    <string name="battery_cycle_count_footer">Due to quality inspections before shipping, the cycle count may not be zero on first use</string>
+    <string name="battery_cycle_count_footer">Due to factory inspections before shipping, it may show that your device was used before you set it up and the cycle count may not be zero, which is normal</string>
 
     <!-- [CHAR LIMIT=NONE] Activity title for Process Stats summary -->
     <string name="process_stats_summary_title">Process Stats</string>
@@ -15142,6 +15142,10 @@
     <string name="supervision_settings_title">Parental controls</string>
     <!-- Description for Supervision settings menu entry [CHAR LIMIT=NONE] -->
     <string name="supervision_settings_summary">Digital ground rules &amp; screen time limits</string>
+    <!-- Title for the introduction screen of the parental controls PIN setup flow. [CHAR LIMIT=NONE] -->
+    <string name="supervision_intro_title">Create a parental controls PIN for this device</string>
+    <!-- Description for the introduction screen of the parental controls PIN setup flow. [CHAR LIMIT=NONE] -->
+    <string name="supervision_intro_description">You\u2019ll use this PIN to manage parental controls settings and apps on this device.\n\nYou can edit or delete the PIN from Android Settings &gt; Parental Controls.</string>
     <!-- Description of device supervision toggle when PIN has never been set up [CHAR LIMIT=NONE] -->
     <string name="device_supervision_switch_no_pin_summary">Set up PIN</string>
     <!-- Title for supervision set up PIN entry [CHAR LIMIT=60] -->
@@ -15156,18 +15160,18 @@
     <string name="supervision_pin_management_screen_title">Parental controls PIN</string>
     <!-- Search keywords for supervision PIN management settings entry [CHAR LIMIT=NONE] -->
     <string name="supervision_pin_management_preference_keywords">Parent PIN, Parental controls PIN</string>
-    <!-- Description for supervision PIN management settings entry, in the case of adding a PIN recovery method[CHAR LIMIT=NONE] -->
-    <string name="supervision_pin_management_preference_summary_add">Add recovery email</string>
-    <!-- Description for supervision PIN management settings entry, in the case of verifying the PIN recovery method[CHAR LIMIT=NONE] -->
-    <string name="supervision_pin_management_preference_summary_verify_recovery">Verify recovery email</string>
+    <!-- Description for supervision PIN management settings entry, in the case of adding a PIN recovery method[CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=2247921267270577374] -->
+    <string name="supervision_pin_management_preference_summary_add">Add recovery info</string>
+    <!-- Description for supervision PIN management settings entry, in the case of verifying the PIN recovery method[CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=5072554239108915119] -->
+    <string name="supervision_pin_management_preference_summary_verify_recovery">Verify recovery info</string>
     <!-- Title for supervision change PIN setting entry [CHAR LIMIT=60] -->
     <string name="supervision_change_pin_preference_title">Change PIN</string>
     <!-- Title for supervision forgot PIN setting entry [CHAR LIMIT=60] -->
     <string name="supervision_add_forgot_pin_preference_title">Forgot PIN</string>
     <!-- Label for the fallback option button "Forgot PIN?" on the authentication prompt [CHAR LIMIT=60] -->
     <string name="supervision_auth_prompt_forgot_pin_button_label">Forgot PIN?</string>
-    <!-- Title for supervision update PIN recovery email setting entry [CHAR LIMIT=60] -->
-    <string name="supervision_update_recovery_email_preference_title">Update recovery email</string>
+    <!-- Title for supervision update PIN recovery email setting entry [CHAR LIMIT=60] [BACKUP_MESSAGE_ID=2057393838251915087] -->
+    <string name="supervision_update_recovery_email_preference_title">Update recovery info</string>
     <!-- Toast message for supervision recovery email added [CHAR LIMIT=NONE] -->
     <string name="supervision_recovery_email_added">Recovery email added</string>
     <!-- Toast message for supervision recovery email verified [CHAR LIMIT=NONE] -->
@@ -15190,10 +15194,10 @@
     <string name="supervision_recovery_banner_summary_add">If you forget your PIN, you can use your account to reset it</string>
     <!-- Title for supervision delete pin setting entry [CHAR LIMIT=60] -->
     <string name="supervision_delete_pin_preference_title">Delete PIN</string>
-    <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
-    <string name="supervision_add_pin_recovery_title">Add recovery email</string>
-    <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
-    <string name="supervision_verify_pin_recovery_title">Verify your email</string>
+    <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=3487098027604685794] -->
+    <string name="supervision_add_pin_recovery_title">Add recovery info</string>
+    <!-- Title for verifying supervision PIN recovery setting entry [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=3166602415814821497] -->
+    <string name="supervision_verify_pin_recovery_title">Verify recovery info</string>
     <!-- Title for app store filters entry [CHAR LIMIT=60] -->
     <string name="supervision_app_store_filters_title">App store filters</string>
     <!-- Top intro for app store filters [CHAR LIMIT=NONE] -->
@@ -15248,13 +15252,19 @@
     <!-- Message in dialog that informs the user that an error occurred while trying to delete the PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_error_message">An error occurred while trying to delete the PIN.</string>
     <!-- Button label on a dialog to turn off controls for the current user [CHAR LIMIT=NONE] -->
-    <string name="supervision_turn_off_controls_button_label" translatable="false">Turn off controls for this user</string>
+    <string name="supervision_turn_off_controls_button_label">Turn off controls for this user</string>
     <!-- Title on a dialog that confirms whether the user wants to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_turn_off_controls_confirm_header" translatable="false">Delete PIN &amp; turn off controls?</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header">Delete PIN &amp; turn off controls?</string>
     <!-- Message on a dialog that confirms whether the user wants to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_turn_off_controls_confirm_message" translatable="false">Your parental controls PIN will be deleted. Any controls you set up will be turned off.</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message">Your parental controls PIN will be deleted. Any controls you set up will be turned off.</string>
     <!-- Button label on a dialog to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_and_turn_off_button_label">Delete and turn off</string>
+    <!-- Button label on manage PIN screen to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_turn_off_controls_button_label">Delete PIN &amp; turn off controls</string>
+    <!-- Button label on a dialog to delete the PIN [CHAR_LIMIT=NONE] -->
+    <string name="supervision_delete_button_label">Delete</string>
+    <!-- Message on the can't delete pin dialog that shows the role holders requiring the PIN [CHAR_LIMIT=NONE] -->
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message">Your parental controls PIN is being used by:\n\n<xliff:g id="role_holder_bullet_list">%1$s</xliff:g></string>
     <!-- Learn more link for device supervision PIN. [CHAR LIMIT=NONE]-->
     <string name="supervision_pin_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_pin</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
@@ -15403,4 +15413,10 @@
     <string name="satellite_tile_subtitle_available">Available</string>
     <!-- Subtitle for the satellite tile when the device is not eligible for NTN. [CHAR LIMIT=40] -->
     <string name="satellite_tile_subtitle_not_available">Not available</string>
+    <!-- Title for the satellite landing page. [CHAR LIMIT=40] -->
+    <string name="satellite_connectivity_title">Satellite connectivity</string>
+    <!-- Top intro for the satellite landing page. [CHAR LIMIT=NONE] -->
+    <string name="satellite_connectivity_topintro">Stay connected when you don\'t have a mobile or Wi-Fi network</string>
+    <!-- Label for the satellite landing page activity. [CHAR LIMIT=NONE] -->
+    <string name="satellite_landing_page_label">Satellite Landing Page</string>
 </resources>

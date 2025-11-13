@@ -179,13 +179,15 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             return
         }
 
-        if (!Flags.enableSupervisionSettingsUiUpdates() || isSupervisingCredentialSet) {
-            val supervisingUser = supervisingUserHandle
+        val supervisingUser = supervisingUserHandle()
+        val isSupervisingCredentialSet = isSupervisingCredentialSet(supervisingUser)
+        if (!Flags.enableSupervisionSettingsUiUpdates()) {
             if (supervisingUser == null) {
                 errorHandler("No supervising user exists, cannot verify credentials.")
                 return
             }
-            mSupervisingUser = supervisingUser
+        } else if (isSupervisingCredentialSet) {
+            mSupervisingUser = supervisingUser!!
             val intentFilter = IntentFilter().apply { addAction(Intent.ACTION_USER_STOPPED) }
             registerReceiver(userStateChangeReceiver, intentFilter, RECEIVER_NOT_EXPORTED)
             mUserStateChangeReceiverRegistered = true
@@ -415,7 +417,7 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
 
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
     private fun tryStopProfile() {
-        val supervisingUser = supervisingUserHandle
+        val supervisingUser = supervisingUserHandle()
         if (supervisingUser == null) {
             Log.w(TAG, "Cannot stop supervising profile because it does not exist.")
             return

@@ -39,7 +39,7 @@ class SupervisionSetUpPinPreference :
     override val title: Int
         get() = R.string.supervision_set_up_pin_preference_title
 
-    override fun isAvailable(context: Context) = !context.isSupervisingCredentialSet
+    override fun isAvailable(context: Context) = !context.isSupervisingCredentialSet()
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)

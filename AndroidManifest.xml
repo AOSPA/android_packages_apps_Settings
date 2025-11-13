@@ -6235,6 +6235,14 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 android:value="android.service.quicksettings.CATEGORY_CONNECTIVITY" />
         </service>
 
+        <activity
+            android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteLandingPageActivity"
+            android:label="@string/satellite_landing_page_label"
+            android:exported="false"
+            android:theme="@style/SatelliteLandingPageTheme"
+            android:taskAffinity=".network.telephony.satellite.quicksettings.SatelliteLandingPageActivity">
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
 
     </application>

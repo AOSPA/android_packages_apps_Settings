@@ -31,6 +31,7 @@ import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -46,6 +47,10 @@ import com.android.settingslib.HelpUtils
 import com.android.settingslib.collapsingtoolbar.R.drawable.settingslib_expressive_icon_back as EXPRESSIVE_BACK_ICON
 import com.android.settingslib.supervision.SupervisionLog
 import com.android.settingslib.widget.SettingsThemeHelper
+import com.google.android.setupcompat.template.FooterBarMixin
+import com.google.android.setupcompat.template.FooterButton
+import com.google.android.setupdesign.GlifLayout
+import com.google.android.setupdesign.util.ThemeHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -89,7 +94,7 @@ class SetupSupervisionActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
 
         if (!Flags.enableSupervisionSettingsUiUpdates()) {
-            if (isSupervisingCredentialSet) {
+            if (isSupervisingCredentialSet()) {
                 setResult(RESULT_CANCELED)
                 finish()
                 return
@@ -105,7 +110,7 @@ class SetupSupervisionActivity : FragmentActivity() {
         }
 
         val supervisionManager = getSystemService(SupervisionManager::class.java)
-        val platformCredentialExists = isSupervisingCredentialSet
+        val platformCredentialExists = isSupervisingCredentialSet()
 
         if (supervisionManager?.isSupervisionEnabled() == true && platformCredentialExists) {
             // Nothing to set up if we don't need to enable supervision or create a platform
@@ -135,10 +140,43 @@ class SetupSupervisionActivity : FragmentActivity() {
         }
 
         if (savedInstanceState == null) {
-            // Set up loading screen before enabling supervision
-            setTheme(R.style.Theme_Settings)
-            setContentView(R.layout.supervision_dashboard_loading_screen)
-            enableSupervision()
+            // Default path: start the supervision credential creation flow.
+            ThemeHelper.trySetSuwTheme(this)
+            setContentView(R.layout.supervision_setup_introduction)
+
+            val layout = findViewById<GlifLayout?>(R.id.supervision_setup_introduction)
+            val iconDrawable = getDrawable(R.drawable.ic_account_child_invert_48)!!
+            iconDrawable.mutate()
+            iconDrawable.setTintList(layout?.getPrimaryColor())
+            layout?.setIcon(iconDrawable)
+
+            val footer = layout?.getMixin(FooterBarMixin::class.java)
+            footer?.setPrimaryButton(
+                FooterButton.Builder(this)
+                    .setText(R.string.next_label)
+                    .setButtonType(FooterButton.ButtonType.NEXT)
+                    .setListener {
+                        // Show loading indicator while waiting for the supervising profile to be
+                        // created.
+                        layout?.setProgressBarShown(true)
+
+                        // Hide the buttons while waiting for the supervising profile to be created.
+                        footer?.getButtonContainer()?.setVisibility(View.GONE)
+
+                        enableSupervision()
+                    }
+                    .build()
+            )
+            footer?.setSecondaryButton(
+                FooterButton.Builder(this)
+                    .setText(R.string.cancel)
+                    .setButtonType(FooterButton.ButtonType.CANCEL)
+                    .setListener {
+                        setResult(RESULT_CANCELED)
+                        finish()
+                    }
+                    .build()
+            )
         }
     }
 
@@ -153,7 +191,7 @@ class SetupSupervisionActivity : FragmentActivity() {
             }
         }
 
-        if (!Flags.enableSupervisionSettingsUiUpdates() && isSupervisingCredentialSet) {
+        if (!Flags.enableSupervisionSettingsUiUpdates() && isSupervisingCredentialSet()) {
             setResult(RESULT_OK)
             finish()
         }
@@ -195,7 +233,7 @@ class SetupSupervisionActivity : FragmentActivity() {
     @RequiresPermission(anyOf = [CREATE_USERS, MANAGE_USERS])
     private fun setupSupervisingUser(): UserHandle? {
         val userManager = getSystemService(UserManager::class.java)
-        var userHandle = userManager.supervisingUserHandle
+        var userHandle = userManager.supervisingUserHandle()
         // If a supervising profile does not already exist on the device, create one
         if (userHandle == null) {
             val userInfo =
@@ -245,7 +283,7 @@ class SetupSupervisionActivity : FragmentActivity() {
     }
 
     private fun handleSetLockResult(result: ActivityResult) {
-        val supervisingUser = supervisingUserHandle
+        val supervisingUser = supervisingUserHandle()
         if (supervisingUser == null) {
             Log.w(SupervisionLog.TAG, "No supervising user handle found after lock setup.")
             setResult(RESULT_CANCELED)
@@ -305,7 +343,7 @@ class SetupSupervisionActivity : FragmentActivity() {
     private fun hasMultipleNonSupervisingProfiles(): Boolean {
         val userManager = getSystemService(UserManager::class.java) ?: return false
 
-        val supervisingProfileHandle: UserHandle? = supervisingUserHandle
+        val supervisingProfileHandle: UserHandle? = userManager.supervisingUserHandle()
         val nonSupervisingProfilesCount =
             userManager.userProfiles.count { it != supervisingProfileHandle }
 
