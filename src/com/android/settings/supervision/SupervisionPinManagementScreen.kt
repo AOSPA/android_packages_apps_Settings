@@ -75,8 +75,14 @@ class SupervisionPinManagementScreen :
 
     // There is an implicit dependency on SupervisionSetupRecoveryPreference due to `getSummary`,
     // which can be removed if `SupervisionManager.supervisionRecoveryInfo` supports
-    // observer/listener mechanism on change.
-    override fun dependencies(context: Context) = arrayOf(SupervisionSetupRecoveryPreference.KEY)
+    // observer/listener mechanism on change. Similarly, the `isAvailable` is dependent on
+    // `SupervisionPinRecoveryPreference` and `SupervisionDeletePinPreference`.
+    override fun dependencies(context: Context) =
+        arrayOf(
+            SupervisionSetupRecoveryPreference.KEY,
+            SupervisionPinRecoveryPreference.KEY,
+            SupervisionDeletePinPreference.KEY,
+        )
 
     override fun isAvailable(context: Context) = context.isSupervisingCredentialSet()
 
