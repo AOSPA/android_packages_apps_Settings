@@ -346,7 +346,9 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
         if (TextUtils.equals(preference.getKey(), KEY_SHARED_TOGGLE)) {
             final Preference editConfigPreference = findPreference(KEY_EDIT_CONFIG_TOGGLE);
             if (editConfigPreference instanceof TwoStatePreference) {
-                editConfigPreference.setEnabled(((TwoStatePreference) preference).isChecked());
+                editConfigPreference.setEnabled(
+                        ((TwoStatePreference) preference).isChecked()
+                        && mWifiDetailPreferenceController2.canModifyShareSettings());
             }
         }
         return handled;
@@ -430,9 +432,14 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
 
         final Preference sharedPreference = screen.findPreference(KEY_SHARED_TOGGLE);
         final Preference editConfigPreference = screen.findPreference(KEY_EDIT_CONFIG_TOGGLE);
-
+        if (sharedPreference != null) {
+            sharedPreference.setEnabled(
+                    mWifiDetailPreferenceController2.canModifyShareSettings());
+        }
         if (editConfigPreference != null && sharedPreference instanceof TwoStatePreference) {
-            editConfigPreference.setEnabled(((TwoStatePreference) sharedPreference).isChecked());
+            editConfigPreference.setEnabled(
+                    ((TwoStatePreference) sharedPreference).isChecked()
+                    && mWifiDetailPreferenceController2.canModifyShareSettings());
         }
     }
 

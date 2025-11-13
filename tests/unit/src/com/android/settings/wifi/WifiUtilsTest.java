@@ -27,6 +27,7 @@ import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.os.Process;
 import android.os.UserManager;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -202,7 +203,7 @@ public class WifiUtilsTest {
     public void isNetworkEditable_ownedNetwork() {
         final WifiEntry wifiEntry = mock(WifiEntry.class);
         final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
-        wifiConfiguration.creatorUid = 0;
+        wifiConfiguration.creatorUid = Process.myUid();
         when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
         when(wifiEntry.isModifiableByOtherUsers()).thenReturn(false);
 
@@ -222,7 +223,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    public void isNetworkEditable_nowOwnedNetwork_multipleUser_networkModifiable() {
+    public void isNetworkEditable_notOwnedNetwork_multipleUser_networkModifiable() {
         final WifiEntry wifiEntry = mock(WifiEntry.class);
         final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
         wifiConfiguration.creatorUid = Integer.MAX_VALUE;
@@ -234,11 +235,61 @@ public class WifiUtilsTest {
     }
 
     @Test
+    public void isNetworkEditable_guestUser_multipleUser_networkModifiable() {
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
+        wifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
+        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(true);
+        when(WifiUtils.isGuestUser(mContext)).thenReturn(true);
+        when(mUserManager.getUserCount()).thenReturn(3);
+
+        assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isFalse();
+    }
+
+    @Test
     public void isNetworkEditable_nullWifiConfiguration_returnsTrue() {
         final WifiEntry wifiEntry = mock(WifiEntry.class);
         when(wifiEntry.isModifiableByOtherUsers()).thenReturn(false);
         when(wifiEntry.getWifiConfiguration()).thenReturn(null);
 
         assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isTrue();
+    }
+
+    @Test
+    public void isSharedFieldEditable_ownedNetwork() {
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
+        when(WifiUtils.isGuestUser(mContext)).thenReturn(false);
+        wifiConfiguration.creatorUid = Process.myUid();
+        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
+        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(false);
+
+        assertThat(WifiUtils.isSharedFieldEditable(wifiEntry, mContext)).isTrue();
+    }
+
+    @Test
+    public void isSharedFieldEditable_notOwnedNetwork_multipleUser() {
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
+        when(WifiUtils.isGuestUser(mContext)).thenReturn(false);
+        wifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
+        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(true);
+        when(mUserManager.getUserCount()).thenReturn(3);
+
+        assertThat(WifiUtils.isSharedFieldEditable(wifiEntry, mContext)).isFalse();
+    }
+
+    @Test
+    public void isSharedFieldEditable_ownedNetwork_guestUser_multipleUser() {
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
+        wifiConfiguration.creatorUid = Process.myUid();
+        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
+        when(WifiUtils.isGuestUser(mContext)).thenReturn(true);
+        when(mUserManager.getUserCount()).thenReturn(3);
+
+        assertThat(WifiUtils.isSharedFieldEditable(wifiEntry, mContext)).isFalse();
     }
 }
