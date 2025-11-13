@@ -31,6 +31,7 @@ import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFacto
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.search.SearchIndexableRaw
 import com.android.settingslib.widget.IllustrationPreference
 
 /**
@@ -85,7 +86,7 @@ class CellularNetworkSecuritySubpageFragment : DashboardFragment() {
             val safetySourceIds =
                 SafetyCenterSubpageRegistry.getAllSafetySourceIds(
                     requireContext(),
-                    SafetyCenterSubpageRegistry.SubpageKey.CELLULAR_NETWORK_SECURITY,
+                    SafetyCenterSubpageRegistry.CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY,
                 )
             setSubpageSafetySourcesAndIllustration(safetySourceIds, illustrationPreference)
         }
@@ -123,6 +124,20 @@ class CellularNetworkSecuritySubpageFragment : DashboardFragment() {
                 BaseSearchIndexProvider(R.xml.safety_center_cellular_network_security_subpage) {
                 override fun isPageSearchEnabled(context: Context?): Boolean {
                     return Flags.enableSafetyCenterNewUi()
+                }
+
+                override fun getDynamicRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableRaw> {
+                    val rawData = super.getDynamicRawDataToIndex(context, enabled).toMutableList()
+                    rawData.addAll(
+                        SafetyCenterSearchIndexUtils.getDynamicRawDataForIndexingSubpage(
+                            context,
+                            SafetyCenterSubpageRegistry.CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY,
+                        )
+                    )
+                    return rawData
                 }
             }
     }

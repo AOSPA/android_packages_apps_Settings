@@ -31,6 +31,7 @@ import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFacto
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.search.SearchIndexableRaw
 import com.android.settingslib.widget.IllustrationPreference
 
 /** Fragment for displaying System and Updates subpage within the Safety Center in Settings. */
@@ -81,7 +82,7 @@ class SystemAndUpdatesSubpageFragment : DashboardFragment() {
             val safetySourceIds =
                 SafetyCenterSubpageRegistry.getAllSafetySourceIds(
                     requireContext(),
-                    SafetyCenterSubpageRegistry.SubpageKey.SYSTEM_AND_UPDATES,
+                    SafetyCenterSubpageRegistry.SYSTEM_AND_UPDATES_SUBPAGE_KEY,
                 )
             setSubpageSafetySourcesAndIllustration(safetySourceIds, illustrationPreference)
         }
@@ -116,6 +117,20 @@ class SystemAndUpdatesSubpageFragment : DashboardFragment() {
             object : BaseSearchIndexProvider(R.xml.safety_center_system_and_updates_subpage) {
                 override fun isPageSearchEnabled(context: Context?): Boolean {
                     return Flags.enableSafetyCenterNewUi()
+                }
+
+                override fun getDynamicRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableRaw> {
+                    val rawData = super.getDynamicRawDataToIndex(context, enabled).toMutableList()
+                    rawData.addAll(
+                        SafetyCenterSearchIndexUtils.getDynamicRawDataForIndexingSubpage(
+                            context,
+                            SafetyCenterSubpageRegistry.SYSTEM_AND_UPDATES_SUBPAGE_KEY,
+                        )
+                    )
+                    return rawData
                 }
             }
     }

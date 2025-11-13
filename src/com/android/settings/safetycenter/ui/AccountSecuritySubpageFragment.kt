@@ -31,6 +31,7 @@ import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFacto
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.search.SearchIndexableRaw
 import com.android.settingslib.widget.IllustrationPreference
 
 /** Fragment for displaying Account Security subpage within the Safety Center in Settings. */
@@ -81,7 +82,7 @@ class AccountSecuritySubpageFragment : DashboardFragment() {
             val safetySourceIds =
                 SafetyCenterSubpageRegistry.getAllSafetySourceIds(
                     requireContext(),
-                    SafetyCenterSubpageRegistry.SubpageKey.ACCOUNT_SECURITY,
+                    SafetyCenterSubpageRegistry.ACCOUNT_SECURITY_SUBPAGE_KEY,
                 )
             setSubpageSafetySourcesAndIllustration(safetySourceIds, illustrationPreference)
         }
@@ -116,6 +117,20 @@ class AccountSecuritySubpageFragment : DashboardFragment() {
             object : BaseSearchIndexProvider(R.xml.safety_center_account_security_subpage) {
                 override fun isPageSearchEnabled(context: Context?): Boolean {
                     return Flags.enableSafetyCenterNewUi()
+                }
+
+                override fun getDynamicRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableRaw> {
+                    val rawData = super.getDynamicRawDataToIndex(context, enabled).toMutableList()
+                    rawData.addAll(
+                        SafetyCenterSearchIndexUtils.getDynamicRawDataForIndexingSubpage(
+                            context,
+                            SafetyCenterSubpageRegistry.ACCOUNT_SECURITY_SUBPAGE_KEY,
+                        )
+                    )
+                    return rawData
                 }
             }
     }
