@@ -27,7 +27,9 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceGroup
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.supervision.appstorefilters.SupervisionAppStoreFiltersScreen
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.appstorefilters
 
 import android.content.Context
 import com.android.settings.R
@@ -27,7 +27,6 @@ class SupervisionAppStoreFiltersTopIntroPreference : PreferenceMetadata, Prefere
 
     override val title: Int
         get() = R.string.supervision_app_store_filters_top_intro
-
 
     override val indexable: Boolean
         get() = false
