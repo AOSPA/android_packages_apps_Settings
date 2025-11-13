@@ -45,6 +45,7 @@ import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.metadata.KeyParameters;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -171,6 +172,16 @@ public class MobileNetworkSettingsTest {
         assertThat(args.containsKey(Settings.EXTRA_SUB_ID)).isTrue();
         // Verify it's not stored as a String
         assertThat(args.getString(Settings.EXTRA_SUB_ID)).isNull();
+    }
+
+    @Test
+    public void getPreferenceScreenBindingKeyParameters_returnsCorrectKeyParameters() {
+        KeyParameters keyParameters = mFragment.getPreferenceScreenBindingKeyParameters(mContext);
+
+        assertThat(keyParameters).isNotNull();
+        assertThat(keyParameters.get(Settings.EXTRA_SUB_ID)).isEqualTo(
+                String.valueOf(SUBSCRIPTION_ID)
+        );
     }
 
     public static class TestPreferenceController extends TelephonyBasePreferenceController {
