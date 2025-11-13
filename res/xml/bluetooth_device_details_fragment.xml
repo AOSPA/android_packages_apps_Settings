@@ -113,6 +113,9 @@
         android:title="@string/bluetooth_device_keyboard_settings_preference_title"
         settings:controller="com.android.settings.inputmethod.KeyboardSettingsPreferenceController"/>
 
+    <com.android.settingslib.widget.ChainedPreferenceGroup
+        android:key="game_controller_settings"/>
+
     <com.android.settingslib.widget.FooterPreference
         android:key="device_details_footer"
         settings:searchable="false"

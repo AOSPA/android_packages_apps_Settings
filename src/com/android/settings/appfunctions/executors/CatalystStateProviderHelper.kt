@@ -20,6 +20,7 @@ import android.content.Context
 import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateItemConfig
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenCoordinate
@@ -59,18 +60,28 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
 
     val hierarchies =
         if (PreferenceScreenRegistry.isParameterized(context, screenKey)) {
-            PreferenceScreenRegistry.getParameters(context, screenKey).toList().map {
-                getPreferenceHierarchy(
-                    context,
-                    PreferenceScreenCoordinate(screenKey, it),
-                    settingConfigMap,
-                )
+            if (CatalystFlags.catalystUseKeyParameters()) {
+                PreferenceScreenRegistry.getKeyParameters(context, screenKey).toList().map {
+                    getPreferenceHierarchy(
+                        context,
+                        PreferenceScreenCoordinate(screenKey, it),
+                        settingConfigMap,
+                    )
+                }
+            } else {
+                PreferenceScreenRegistry.getParameters(context, screenKey).toList().map {
+                    getPreferenceHierarchy(
+                        context,
+                        PreferenceScreenCoordinate(screenKey, it),
+                        settingConfigMap,
+                    )
+                }
             }
         } else {
             listOf(
                 getPreferenceHierarchy(
                     context,
-                    PreferenceScreenCoordinate(screenKey, null),
+                    PreferenceScreenCoordinate(screenKey),
                     settingConfigMap,
                 )
             )
