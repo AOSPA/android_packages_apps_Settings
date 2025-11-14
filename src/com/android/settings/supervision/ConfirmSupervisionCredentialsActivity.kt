@@ -80,12 +80,7 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
 
     private val externalApprovalResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode != RESULT_OK) {
-                setResult(RESULT_CANCELED)
-            } else {
-                setResult(RESULT_OK)
-            }
-            finish()
+            onResultCode(result.resultCode)
         }
 
     private val userStateChangeReceiver =
@@ -125,13 +120,7 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             }
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
-                val authController =
-                    SupervisionAuthController.getInstance(
-                        this@ConfirmSupervisionCredentialsActivity
-                    )
-                authController.startSession(taskId)
-                setResult(RESULT_OK)
-                finish()
+                setSuccessfulAuthenticationResultAndFinish()
             }
 
             override fun onAuthenticationFailed() {
@@ -161,8 +150,7 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
                         ApprovalMethodChooserDialogFragment.BUNDLE_KEY_RESULT_CODE,
                         RESULT_CANCELED,
                     )
-                setResult(resultCode)
-                finish()
+                onResultCode(resultCode)
             }
         }
     }
@@ -397,6 +385,23 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
                 action = SupervisionPinRecoveryActivity.ACTION_RECOVERY
             }
         getResultLauncher.launch(intent)
+    }
+
+    private fun setSuccessfulAuthenticationResultAndFinish() {
+        val authController =
+            SupervisionAuthController.getInstance(this@ConfirmSupervisionCredentialsActivity)
+        authController.startSession(taskId)
+        setResult(RESULT_OK)
+        finish()
+    }
+
+    private fun onResultCode(resultCode: Int) {
+        if (resultCode == RESULT_OK) {
+            setSuccessfulAuthenticationResultAndFinish()
+        } else {
+            setResult(RESULT_CANCELED)
+            finish()
+        }
     }
 
     private fun callerHasSupervisionRole(): Boolean {
