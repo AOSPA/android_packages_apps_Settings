@@ -35,6 +35,7 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.preference.PreferenceViewHolder;
@@ -55,6 +56,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,8 +107,14 @@ public class WifiEntryPreferenceTest {
     private static final String MOCK_TITLE = "title";
     private static final String MOCK_SUMMARY = "summary";
     private static final String FAKE_URI_STRING = "fakeuri";
+    private static final int LOCK_ICON_RES_ID =
+            com.android.settings.R.drawable.ic_friction_lock_closed;
+    private static final int SHARED_ICON_RES_ID =
+            com.android.settings.R.drawable.ic_group_24dp;
 
-    WifiEntryPreference mPref;
+    private WifiEntryPreference mPref;
+    private View mView;
+    private PreferenceViewHolder mHolder;
 
     @Before
     public void setUp() {
@@ -140,6 +148,10 @@ public class WifiEntryPreferenceTest {
                 .thenReturn(mMockShowXDrawable4);
 
         mPref = spy(new WifiEntryPreference(mContext, mMockWifiEntry, mMockIconInjector));
+        final LayoutInflater inflater = LayoutInflater.from(mContext);
+        mView = inflater.inflate(mPref.getLayoutResource(),
+                new LinearLayout(mContext), false);
+        mHolder = PreferenceViewHolder.createInstanceForTests(mView);
     }
 
     @Test
@@ -260,113 +272,117 @@ public class WifiEntryPreferenceTest {
     @Test
     public void notNull_whenGetHelpUriString_shouldSetImageButtonVisible() {
         when(mMockWifiEntry.getHelpUriString()).thenReturn(FAKE_URI_STRING);
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(mPref.getLayoutResource(), new LinearLayout(mContext),
-                false);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(view);
 
-        mPref.onBindViewHolder(holder);
+        mPref.onBindViewHolder(mHolder);
 
-        assertThat(view.findViewById(R.id.icon_button).getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mView.findViewById(
+                R.id.icon_button).getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test
     public void helpButton_whenGetHelpUriStringNotNull_shouldSetCorrectContentDescription() {
         when(mMockWifiEntry.getHelpUriString()).thenReturn(FAKE_URI_STRING);
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(mPref.getLayoutResource(), new LinearLayout(mContext),
-                false);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(view);
 
-        mPref.onBindViewHolder(holder);
+        mPref.onBindViewHolder(mHolder);
 
-        assertThat(view.findViewById(R.id.icon_button).getContentDescription()).isEqualTo(
+        assertThat(mView.findViewById(
+                R.id.icon_button).getContentDescription()).isEqualTo(
                 mContext.getString(R.string.help_label));
     }
 
     @Test
     public void subscriptionEntry_shouldSetImageButtonGone() {
         when(mMockWifiEntry.isSubscription()).thenReturn(true);
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(mPref.getLayoutResource(), new LinearLayout(mContext),
-                false);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(view);
+        mPref.onBindViewHolder(mHolder);
 
-        mPref.onBindViewHolder(holder);
+        assertThat(mView.findViewById(
+                R.id.icon_button).getVisibility()).isEqualTo(View.GONE);
+    }
 
-        assertThat(view.findViewById(R.id.icon_button).getVisibility()).isEqualTo(View.GONE);
+    @Test
+    public void pskNetwork_shouldSetLockIcon() {
+        mMockWifiConfig.shared = true;
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mMockWifiConfig);
+        when(mMockWifiEntry.getHelpUriString()).thenReturn(null);
+        when(mMockWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_PSK);
+        LinearLayout endIcons = new LinearLayout(mContext);
+
+        mPref.updateEndIcons(endIcons);
+
+        assertThat(endIcons.getChildCount()).isEqualTo(1);
+        final ImageView endIcon = (ImageView) endIcons.getChildAt(0);
+        assertThat(Shadows.shadowOf(
+                endIcon.getDrawable()).getCreatedFromResId()).isEqualTo(
+                LOCK_ICON_RES_ID);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
     public void sharedNetwork_shouldSetSharedIcon() {
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(mPref.getLayoutResource(), new LinearLayout(mContext),
-                false);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(view);
         mMockWifiConfig.shared = true;
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mMockWifiConfig);
         when(mMockWifiEntry.getHelpUriString()).thenReturn(null);
-        when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_DISCONNECTED);
         when(mMockUserManager.getUserCount()).thenReturn(3);
+        LinearLayout endIcons = new LinearLayout(mContext);
 
-        mPref.onBindViewHolder(holder);
+        mPref.updateEndIcons(endIcons);
 
-        assertThat(view.findViewById(R.id.icon_button).getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(endIcons.getChildCount()).isEqualTo(1);
+        final ImageView endIcon = (ImageView) endIcons.getChildAt(0);
+        assertThat(Shadows.shadowOf(
+                endIcon.getDrawable()).getCreatedFromResId()).isEqualTo(
+                SHARED_ICON_RES_ID);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void sharedPskNetwork_shouldSetSharedIconAndLockIcon() {
+        mMockWifiConfig.shared = true;
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mMockWifiConfig);
+        when(mMockWifiEntry.getHelpUriString()).thenReturn(null);
+        when(mMockWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_PSK);
+        when(mMockUserManager.getUserCount()).thenReturn(3);
+        LinearLayout endIcons = new LinearLayout(mContext);
+
+        mPref.updateEndIcons(endIcons);
+
+        assertThat(endIcons.getChildCount()).isEqualTo(2);
+        final ImageView firstEndIcon = (ImageView) endIcons.getChildAt(0);
+        final ImageView secondEndIcon = (ImageView) endIcons.getChildAt(1);
+        assertThat(Shadows.shadowOf(
+                firstEndIcon.getDrawable()).getCreatedFromResId()).isEqualTo(
+                SHARED_ICON_RES_ID);
+        assertThat(Shadows.shadowOf(
+                secondEndIcon.getDrawable()).getCreatedFromResId()).isEqualTo(
+                LOCK_ICON_RES_ID);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
     public void sharedNetwork_singleUser_shouldNotSetSharedIcon() {
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(mPref.getLayoutResource(), new LinearLayout(mContext),
-                false);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(view);
         mMockWifiConfig.shared = true;
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mMockWifiConfig);
         when(mMockWifiEntry.getHelpUriString()).thenReturn(null);
-        when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_DISCONNECTED);
         when(mMockUserManager.getUserCount()).thenReturn(1);
+        LinearLayout endIcons = new LinearLayout(mContext);
 
-        mPref.onBindViewHolder(holder);
+        mPref.updateEndIcons(endIcons);
 
-        assertThat(view.findViewById(R.id.icon_button).getVisibility()).isEqualTo(View.GONE);
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
-    public void sharedNetwork_connectedState_shouldNotSetSharedIcon() {
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(mPref.getLayoutResource(), new LinearLayout(mContext),
-                false);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(view);
-        mMockWifiConfig.shared = true;
-        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mMockWifiConfig);
-        when(mMockWifiEntry.getHelpUriString()).thenReturn(null);
-        when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
-        when(mMockUserManager.getUserCount()).thenReturn(3);
-
-        mPref.onBindViewHolder(holder);
-
-        assertThat(view.findViewById(R.id.icon_button).getVisibility()).isEqualTo(View.GONE);
+        assertThat(endIcons.getChildCount()).isEqualTo(0);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
     public void sharedNetwork_notShared_shouldNotSetSharedIcon() {
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(mPref.getLayoutResource(), new LinearLayout(mContext),
-                false);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(view);
         mMockWifiConfig.shared = false;
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mMockWifiConfig);
         when(mMockWifiEntry.getHelpUriString()).thenReturn(null);
-        when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_DISCONNECTED);
         when(mMockUserManager.getUserCount()).thenReturn(3);
+        LinearLayout endIcons = new LinearLayout(mContext);
 
-        mPref.onBindViewHolder(holder);
+        mPref.updateEndIcons(endIcons);
 
-        assertThat(view.findViewById(R.id.icon_button).getVisibility()).isEqualTo(View.GONE);
+        assertThat(endIcons.getChildCount()).isEqualTo(0);
     }
 
     @Test

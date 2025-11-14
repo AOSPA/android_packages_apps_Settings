@@ -16,6 +16,8 @@
 
 package com.android.settings.network.telephony.satellite.quicksettings
 
+import android.app.PendingIntent
+import android.content.Intent
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import android.telephony.TelephonyCallback
@@ -79,7 +81,19 @@ open class SatelliteTileService : TileService() {
 
     override fun onClick() {
         super.onClick()
-        // TODO(b/434793872): Create PendingIntent to launch SatelliteLandingPageActivity.
+        unlockAndRun {
+            // Create PendingIntent to launch SatelliteLandingPageActivity.
+            val intent = Intent(this, SatelliteLandingPageActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val pendingIntent =
+                PendingIntent.getActivity(
+                    this,
+                    REQUEST_CODE_SATELLITE_LANDING_PAGE,
+                    intent,
+                    PendingIntent.FLAG_IMMUTABLE,
+                )
+            startActivityAndCollapse(pendingIntent)
+        }
     }
 
     override fun onDestroy() {
@@ -111,9 +125,15 @@ open class SatelliteTileService : TileService() {
             }
         }
         qsTile.updateTile()
+
+        Log.i(
+            TAG,
+            "updateTile: New State: ${qsTile.subtitle}, isCarrierRoamingNtnModeActive: $isCarrierRoamingNtnModeActive, isCarrierRoamingNtnEligible: $isCarrierRoamingNtnEligible",
+        )
     }
 
     companion object {
         private const val TAG = "SatelliteTileService"
+        private const val REQUEST_CODE_SATELLITE_LANDING_PAGE = 1987
     }
 }

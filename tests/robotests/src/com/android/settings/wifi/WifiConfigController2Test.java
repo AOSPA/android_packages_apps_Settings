@@ -42,6 +42,7 @@ import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiManager;
 import android.os.Looper;
+import android.os.Process;
 import android.os.UserManager;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -355,7 +356,7 @@ public class WifiConfigController2Test {
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = 1;
+        mockWifiConfig.creatorUid = Process.myUid();
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
@@ -400,11 +401,98 @@ public class WifiConfigController2Test {
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = 1;
+        mockWifiConfig.creatorUid = Process.myUid();
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View proxySettingsSpinner = mView.findViewById(R.id.proxy_settings);
         assertThat(proxySettingsSpinner.isEnabled()).isEqualTo(true);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void checkFieldsState_networkNotEditable_allFieldsDisabled() {
+        when(mUserManager.getUserCount()).thenReturn(2);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
+        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+
+        // Check sharing switches
+        final MaterialSwitch sharedSwitch = mView.findViewById(R.id.share_wifi_network);
+        final MaterialSwitch editConfigSwitch =
+                mView.findViewById(R.id.edit_wifi_network_configuration);
+        assertThat(sharedSwitch.isEnabled()).isFalse();
+        assertThat(editConfigSwitch.isEnabled()).isFalse();
+
+        // Check static IP fields
+        final Spinner ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
+        ipSettingsSpinner.setSelection(STATIC_IP);
+        mController.onItemSelected(ipSettingsSpinner, null, STATIC_IP, 0);
+        assertThat(mView.findViewById(R.id.ipaddress).isEnabled()).isFalse();
+        assertThat(mView.findViewById(R.id.gateway).isEnabled()).isFalse();
+        assertThat(mView.findViewById(R.id.network_prefix_length).isEnabled()).isFalse();
+        assertThat(mView.findViewById(R.id.dns1).isEnabled()).isFalse();
+        assertThat(mView.findViewById(R.id.dns2).isEnabled()).isFalse();
+
+        // Check static proxy fields
+        final Spinner proxySettingsSpinner = mView.findViewById(R.id.proxy_settings);
+        proxySettingsSpinner.setSelection(WifiConfigController2.PROXY_STATIC);
+        mController.onItemSelected(proxySettingsSpinner, null, WifiConfigController2.PROXY_STATIC,
+                0);
+        assertThat(mView.findViewById(R.id.proxy_hostname).isEnabled()).isFalse();
+        assertThat(mView.findViewById(R.id.proxy_port).isEnabled()).isFalse();
+        assertThat(mView.findViewById(R.id.proxy_exclusionlist).isEnabled()).isFalse();
+
+        // Check PAC proxy field
+        proxySettingsSpinner.setSelection(WifiConfigController2.PROXY_PAC);
+        mController.onItemSelected(proxySettingsSpinner, null, WifiConfigController2.PROXY_PAC, 0);
+        assertThat(mView.findViewById(R.id.proxy_pac).isEnabled()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void checkFieldsState_networkEditable_allFieldsEnabled() {
+        when(mUserManager.getUserCount()).thenReturn(2);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
+        mockWifiConfig.creatorUid = Process.myUid();
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+
+        // Check sharing switches
+        final MaterialSwitch sharedSwitch = mView.findViewById(R.id.share_wifi_network);
+        final MaterialSwitch editConfigSwitch =
+                mView.findViewById(R.id.edit_wifi_network_configuration);
+        assertThat(sharedSwitch.isEnabled()).isTrue();
+        // Default state of shared switch is true, so edit switch should be enabled.
+        assertThat(editConfigSwitch.isEnabled()).isTrue();
+
+        // Check static IP fields
+        final Spinner ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
+        ipSettingsSpinner.setSelection(STATIC_IP);
+        mController.onItemSelected(ipSettingsSpinner, null, STATIC_IP, 0);
+        assertThat(mView.findViewById(R.id.ipaddress).isEnabled()).isTrue();
+        assertThat(mView.findViewById(R.id.gateway).isEnabled()).isTrue();
+        assertThat(mView.findViewById(R.id.network_prefix_length).isEnabled()).isTrue();
+        assertThat(mView.findViewById(R.id.dns1).isEnabled()).isTrue();
+        assertThat(mView.findViewById(R.id.dns2).isEnabled()).isTrue();
+
+        // Check static proxy fields
+        final Spinner proxySettingsSpinner = mView.findViewById(R.id.proxy_settings);
+        proxySettingsSpinner.setSelection(WifiConfigController2.PROXY_STATIC);
+        mController.onItemSelected(proxySettingsSpinner, null, WifiConfigController2.PROXY_STATIC,
+                0);
+        assertThat(mView.findViewById(R.id.proxy_hostname).isEnabled()).isTrue();
+        assertThat(mView.findViewById(R.id.proxy_port).isEnabled()).isTrue();
+        assertThat(mView.findViewById(R.id.proxy_exclusionlist).isEnabled()).isTrue();
+
+        // Check PAC proxy field
+        proxySettingsSpinner.setSelection(WifiConfigController2.PROXY_PAC);
+        mController.onItemSelected(proxySettingsSpinner, null, WifiConfigController2.PROXY_PAC, 0);
+        assertThat(mView.findViewById(R.id.proxy_pac).isEnabled()).isTrue();
     }
 
     @Test

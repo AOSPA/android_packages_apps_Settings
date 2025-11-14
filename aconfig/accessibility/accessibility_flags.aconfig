@@ -115,6 +115,13 @@ flag {
 }
 
 flag {
+    name: "enable_edt_app_exceptions"
+    namespace: "accessibility"
+    description: "Allow users to opt-out selected apps from Expanded Dark Theme."
+    bug: "448469020"
+}
+
+flag {
   name: "enable_magnification_cursor_following_dialog"
   namespace: "accessibility"
   description: "Decides whether to show the magnification cursor following dialog in Settings app."
@@ -126,6 +133,16 @@ flag {
   namespace: "accessibility"
   description: "Decides whether to show the magnification focus following dialog in Settings app."
   bug: "388336111"
+}
+
+flag {
+  name: "enable_magnification_mode_chooser_fragment"
+  namespace: "accessibility"
+  description: "Enables the magnification mode chooser fragment instead of the legacy dialog UI."
+  bug: "456047460"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
 }
 
 flag {

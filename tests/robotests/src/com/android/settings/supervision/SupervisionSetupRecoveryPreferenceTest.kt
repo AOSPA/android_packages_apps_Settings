@@ -18,6 +18,7 @@ package com.android.settings.supervision
 import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ADD_RECOVERY
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_VERIFY_RECOVERY
+import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
@@ -53,6 +54,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.robolectric.shadows.ShadowServiceManager
 import org.robolectric.shadows.ShadowToast
 
 @RunWith(AndroidJUnit4::class)
@@ -61,6 +63,7 @@ class SupervisionSetupRecoveryPreferenceTest {
     private val appContext: Context = ApplicationProvider.getApplicationContext()
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockActivityResultLauncher = mock<ActivityResultLauncher<Intent>>()
+    private val mockISupervisionManager = mock<ISupervisionManager>()
 
     @get:Rule val metricsRule = MetricsRule()
     @get:Rule val setFlagsRule = SetFlagsRule()
@@ -90,6 +93,11 @@ class SupervisionSetupRecoveryPreferenceTest {
             )
             .thenReturn(mockActivityResultLauncher)
         preference.onCreate(mockLifeCycleContext)
+        ShadowServiceManager.addBinderService(
+            Context.SUPERVISION_SERVICE,
+            ISupervisionManager::class.java,
+            mockISupervisionManager,
+        )
     }
 
     @Test
@@ -134,6 +142,20 @@ class SupervisionSetupRecoveryPreferenceTest {
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
         assertThat(preference.getSummary(context)).isEqualTo("t••t@gmail.com")
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun getIcon_shouldDisplayPinRecoveryReminders_exclamationIconExists() {
+        whenever(mockISupervisionManager.hasValidRecoveryMethod(any())).thenReturn(false)
+        assertThat(preference.getIcon(context)).isEqualTo(R.drawable.exclamation_icon)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun getIcon_shouldNotDisplayPinRecoveryReminders_exclamationIconDoesNotExist() {
+        whenever(mockISupervisionManager.hasValidRecoveryMethod(any())).thenReturn(true)
+        assertThat(preference.getIcon(context)).isEqualTo(0)
     }
 
     @Test

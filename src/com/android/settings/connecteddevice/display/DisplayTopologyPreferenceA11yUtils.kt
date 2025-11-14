@@ -17,10 +17,13 @@
 package com.android.settings.connecteddevice.display
 
 import android.graphics.PointF
+import android.graphics.Rect
 import android.hardware.display.DisplayTopology
 import android.hardware.display.DisplayTopologyGraph
 import android.view.InputDevice
 import android.view.MotionEvent
+import android.view.TouchDelegate
+import android.view.View
 
 const val A11Y_DRAG_STEPS = 10
 const val A11Y_MOVE_DISTANCE_DP = 16f
@@ -158,5 +161,30 @@ fun calculateDisplayArrowMovement(graph: DisplayTopologyGraph): Map<Int, ArrowMo
         val visibilities = states.mapValues { (_, state) -> state.canMove && !state.isBlocked }
 
         currentId to ArrowMovement(visibilities)
+    }
+}
+
+// Copied from {@code com.android.internal.widget.ConversationLayout}
+class TouchDelegateComposite(view: View) : TouchDelegate(Rect(), view) {
+    private val mDelegates = ArrayList<TouchDelegate>()
+
+    fun add(delegate: TouchDelegate) {
+        mDelegates.add(delegate)
+    }
+
+    fun clear() {
+        mDelegates.clear()
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        val x = event.x
+        val y = event.y
+        for (delegate in mDelegates) {
+            event.setLocation(x, y)
+            if (delegate.onTouchEvent(event)) {
+                return true
+            }
+        }
+        return false
     }
 }

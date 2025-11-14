@@ -21,6 +21,7 @@ import android.util.FeatureFlagUtils
 import com.android.settings.network.apn.ApnEditPageProvider
 import com.android.settings.print.PrintSettingsPageProvider
 import com.android.settings.spa.about.AboutPhonePageProvider
+import com.android.settings.spa.accessibility.ForceDarkAppExceptionsPageProvider
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppsPageProvider
@@ -30,6 +31,8 @@ import com.android.settings.spa.app.backgroundinstall.BackgroundInstalledAppsPag
 import com.android.settings.spa.app.battery.BatteryOptimizationModeAppListPageProvider
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
+import com.android.settings.spa.app.specialaccess.ComputerControlAppInfoPageProvider
+import com.android.settings.spa.app.specialaccess.ComputerControlAutomationAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppListProvider
@@ -44,6 +47,7 @@ import com.android.settings.spa.app.specialaccess.UsageDataAppListProvider
 import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.app.specialaccess.WriteSystemPreferencesAppListProvider
+import com.android.settings.spa.app.specialaccess.runIfComputerControlEnabled
 import com.android.settings.spa.app.storage.StorageAppListPageProvider
 import com.android.settings.spa.core.instrumentation.SpaLogMetricsProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
@@ -99,34 +103,43 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
 
     open fun settingsPageProviders() =
         listOf(
-            HomePageProvider,
-            AppsMainPageProvider,
-            AllAppListPageProvider,
-            AppInfoSettingsProvider,
-            SpecialAppAccessPageProvider,
-            NotificationMainPageProvider,
-            AppListNotificationsPageProvider.AllApps,
-            AppListNotificationsPageProvider.ExcludeClassification,
-            AppListNotificationsPageProvider.ExcludeSummarization,
-            SystemMainPageProvider,
-            LanguageAndInputPageProvider,
-            AppLanguagesPageProvider,
-            UsageStatsPageProvider,
-            PlatformCompatAppListPageProvider,
-            BackgroundInstalledAppsPageProvider,
-            UserAspectRatioAppsPageProvider,
-            CloneAppInfoSettingsProvider,
-            NetworkAndInternetPageProvider,
-            AboutPhonePageProvider,
-            StorageAppListPageProvider.Apps,
-            StorageAppListPageProvider.Games,
-            ApnEditPageProvider,
-            SimOnboardingPageProvider,
-            BatteryOptimizationModeAppListPageProvider,
-            NetworkCellularGroupProvider(),
-            WifiPrivacyPageProvider,
-            PrintSettingsPageProvider,
-        )
+                HomePageProvider,
+                AppsMainPageProvider,
+                AllAppListPageProvider,
+                AppInfoSettingsProvider,
+                SpecialAppAccessPageProvider,
+                NotificationMainPageProvider,
+                AppListNotificationsPageProvider.AllApps,
+                AppListNotificationsPageProvider.ExcludeClassification,
+                AppListNotificationsPageProvider.ExcludeSummarization,
+                SystemMainPageProvider,
+                LanguageAndInputPageProvider,
+                AppLanguagesPageProvider,
+                UsageStatsPageProvider,
+                PlatformCompatAppListPageProvider,
+                BackgroundInstalledAppsPageProvider,
+                UserAspectRatioAppsPageProvider,
+                CloneAppInfoSettingsProvider,
+                NetworkAndInternetPageProvider,
+                AboutPhonePageProvider,
+                StorageAppListPageProvider.Apps,
+                StorageAppListPageProvider.Games,
+                ApnEditPageProvider,
+                SimOnboardingPageProvider,
+                BatteryOptimizationModeAppListPageProvider,
+                NetworkCellularGroupProvider(),
+                WifiPrivacyPageProvider,
+                PrintSettingsPageProvider,
+                ForceDarkAppExceptionsPageProvider,
+            )
+            .runIfComputerControlEnabled {
+                plus(
+                    arrayOf(
+                        ComputerControlAutomationAppListProvider,
+                        ComputerControlAppInfoPageProvider,
+                    )
+                )
+            }
 
     override val logger =
         if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_ENABLE_SPA_METRICS))

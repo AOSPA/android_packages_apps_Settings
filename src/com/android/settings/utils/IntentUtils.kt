@@ -22,6 +22,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
+import com.android.settingslib.metadata.KeyParameters
 
 /**
  * Returns the [Intent] to start given settings activity and highlight a specific preference.
@@ -42,12 +43,31 @@ fun makeLaunchIntent(context: Context, activityClass: Class<out Activity>, key: 
  * @param arguments arguments of the parameterized screen
  * @param key preference key to locate
  */
+@Deprecated(
+    "Use makeLaunchIntent(context: Context, activityClass: Class<out Activity>, arguments: KeyParameters, key: String?) instead"
+)
 fun makeLaunchIntent(
     context: Context,
     activityClass: Class<out Activity>,
     arguments: Bundle,
     key: String?,
 ) = createIntent(context, activityClass).apply { highlightPreference(arguments, key) }
+
+/**
+ * Returns the [Intent] to start given settings activity that is parameterized screen and then
+ * highlight a specific preference.
+ *
+ * @param context context
+ * @param activityClass activity to start
+ * @param keyParameters arguments of the parameterized screen
+ * @param key preference key to locate
+ */
+fun makeLaunchIntent(
+    context: Context,
+    activityClass: Class<out Activity>,
+    keyParameters: KeyParameters,
+    key: String?,
+) = createIntent(context, activityClass).apply { highlightPreference(keyParameters, key) }
 
 private fun createIntent(context: Context, activityClass: Class<out Activity>) =
     Intent(context, activityClass).apply {
@@ -63,8 +83,22 @@ private fun createIntent(context: Context, activityClass: Class<out Activity>) =
  * @param arguments arguments of the parameterized screen
  * @param key preference to highlight
  */
+@Deprecated(
+    "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use [highlightPreference(arguments: KeyParameters, key: String?)] instead"
+)
 fun Intent.highlightPreference(arguments: Bundle, key: String?) {
     putExtra(EXTRA_BINDING_SCREEN_ARGS, arguments)
+    if (key != null) putExtra(EXTRA_FRAGMENT_ARG_KEY, key)
+}
+
+/**
+ * Sets the intent extra to highlight given preference on a parameterized screen.
+ *
+ * @param keyParameters arguments of the parameterized screen
+ * @param key preference to highlight
+ */
+fun Intent.highlightPreference(keyParameters: KeyParameters, key: String?) {
+    putExtra(EXTRA_BINDING_SCREEN_ARGS, keyParameters.toBundle())
     if (key != null) putExtra(EXTRA_FRAGMENT_ARG_KEY, key)
 }
 

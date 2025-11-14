@@ -4911,6 +4911,33 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 android:value="@string/menu_key_apps"/>
         </activity-alias>
 
+        <activity-alias android:name="ScreenAutomationAppListIntent"
+            android:exported="true"
+            android:targetActivity=".spa.SpaBridgeActivity">
+            <intent-filter>
+                <action android:name="android.settings.action.SCREEN_AUTOMATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                android:value="ComputerControlPermissionPage"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
+        <activity-alias android:name="ScreenAutomationAppDetailIntent"
+            android:exported="true"
+            android:targetActivity=".spa.SpaAppBridgeActivity">
+            <intent-filter>
+                <action android:name="android.settings.action.SCREEN_AUTOMATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                android:value="ComputerControlAppInfoPage"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
         <activity
             android:name="Settings$AlarmsAndRemindersActivity"
             android:exported="true"
@@ -6207,6 +6234,14 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             <meta-data android:name="android.service.quicksettings.TILE_CATEGORY"
                 android:value="android.service.quicksettings.CATEGORY_CONNECTIVITY" />
         </service>
+
+        <activity
+            android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteLandingPageActivity"
+            android:label="@string/satellite_landing_page_label"
+            android:exported="false"
+            android:theme="@style/SatelliteLandingPageTheme"
+            android:taskAffinity=".network.telephony.satellite.quicksettings.SatelliteLandingPageActivity">
+        </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
 

@@ -19,6 +19,8 @@ import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.app.Application
 import android.app.KeyguardManager
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ENABLE_SUPERVISION
+import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
@@ -39,8 +41,10 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.password.ChooseLockGeneric
+import com.android.settings.testutils.MetricsRule
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
-import com.google.android.material.progressindicator.LinearProgressIndicator
+import com.google.android.setupcompat.template.FooterBarMixin
+import com.google.android.setupdesign.GlifLayout
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -49,16 +53,19 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.anyOrNull
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowContextImpl
 import org.robolectric.shadows.ShadowKeyguardManager
 import org.robolectric.shadows.ShadowLooper
+import org.robolectric.shadows.ShadowServiceManager
 
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowAlertDialogCompat::class])
@@ -69,7 +76,9 @@ class SetupSupervisionActivityTest {
     private val mockUserManager = mock<UserManager>()
 
     private lateinit var shadowKeyguardManager: ShadowKeyguardManager
+    private val mockISupervisionManager = mock<ISupervisionManager>()
 
+    @get:Rule val metricsRule = MetricsRule()
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     @Before
@@ -82,6 +91,11 @@ class SetupSupervisionActivityTest {
 
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+        ShadowServiceManager.addBinderService(
+            Context.SUPERVISION_SERVICE,
+            ISupervisionManager::class.java,
+            mockISupervisionManager,
+        )
     }
 
     @Test
@@ -90,11 +104,11 @@ class SetupSupervisionActivityTest {
 
         ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
-                val progressBar =
-                    activity.findViewById<LinearProgressIndicator>(R.id.linearProgressIndicator)
+                val layout = activity.findViewById<GlifLayout>(R.id.supervision_setup_introduction)
+                val footer = layout.getMixin(FooterBarMixin::class.java)
+                footer.getPrimaryButtonView().performClick()
 
-                assertThat(progressBar).isNotNull()
-                assertThat(progressBar.visibility).isEqualTo(View.VISIBLE)
+                assertThat(layout.isProgressBarShown).isTrue()
             }
         }
     }
@@ -111,6 +125,8 @@ class SetupSupervisionActivityTest {
 
         ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
+                clickNextOnIntroductionScreen(activity)
+
                 assertThat(shadowOf(activity).nextStartedActivity.component?.className)
                     .isEqualTo(ChooseLockGeneric::class.java.name)
 
@@ -132,6 +148,8 @@ class SetupSupervisionActivityTest {
     fun onCreate_existingSupervisingUser_startSetPinActivity() {
         ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
+                clickNextOnIntroductionScreen(activity)
+
                 assertThat(shadowOf(activity).nextStartedActivity.component?.className)
                     .isEqualTo(ChooseLockGeneric::class.java.name)
 
@@ -154,7 +172,7 @@ class SetupSupervisionActivityTest {
 
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
             scenario ->
-            assertThat(scenario.state).isEqualTo(Lifecycle.State.RESUMED)
+            scenario.onActivity { activity -> clickNextOnIntroductionScreen(activity) }
             assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
         }
     }
@@ -222,6 +240,27 @@ class SetupSupervisionActivityTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onConfirmCredentialsResult_ok_logsMetrics() {
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivityForResult.intent,
+                    RESULT_OK,
+                    null,
+                )
+
+                verify(metricsRule.metricsFeatureProvider)
+                    .action(eq(activity), eq(ACTION_SUPERVISION_ENABLE_SUPERVISION))
+            }
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onConfirmCredentialsResult_canceled_setsResultCanceled() {
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
 
@@ -276,12 +315,17 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
     fun onSetLockResult_startsRecoveryActivity() {
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(true)
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
         ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
+                clickNextOnIntroductionScreen(activity)
                 val shadowActivity = shadowOf(activity)
                 shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
                 shadowActivity.receiveResult(
@@ -299,10 +343,36 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun onSetLockResult_logsMetrics() {
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+
+        ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                clickNextOnIntroductionScreen(activity)
+                val shadowActivity = shadowOf(activity)
+                shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivityForResult.intent,
+                    RESULT_OK,
+                    null,
+                )
+
+                verify(metricsRule.metricsFeatureProvider)
+                    .action(eq(activity), eq(ACTION_SUPERVISION_ENABLE_SUPERVISION))
+            }
+        }
+    }
+
+    @Test
     fun onSetLockResult_supervisingUserNull_canceled() {
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
             scenario ->
             scenario.onActivity { activity ->
+                clickNextOnIntroductionScreen(activity)
                 mockUserManager.stub { on { users } doReturn emptyList() }
 
                 val shadowActivity = shadowOf(activity)
@@ -324,6 +394,7 @@ class SetupSupervisionActivityTest {
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
             scenario ->
             scenario.onActivity { activity ->
+                clickNextOnIntroductionScreen(activity)
                 val shadowActivity = shadowOf(activity)
                 shadowActivity.receiveResult(
                     shadowActivity.nextStartedActivityForResult.intent,
@@ -339,13 +410,18 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
-    fun onPinRecoveryResult_finishesOk() {
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun canLaunchPinRecovery_onPinRecoveryResult_finishesOk() {
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(true)
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
             scenario ->
             scenario.onActivity { activity ->
+                clickNextOnIntroductionScreen(activity)
                 val shadowActivity = shadowOf(activity)
                 shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
                 // Set PIN result.
@@ -355,7 +431,40 @@ class SetupSupervisionActivityTest {
                     null,
                 )
 
+                // PIN recovery set up activity was invoked
+                val nextActivity = shadowActivity.nextStartedActivity
+                assertThat(nextActivity.component?.className)
+                    .isEqualTo(SupervisionPinRecoveryActivity::class.java.name)
+
                 // PIN recovery result.
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivityForResult.intent,
+                    RESULT_OK,
+                    null,
+                )
+
+                assertThat(activity.isFinishing).isTrue()
+            }
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_OK)
+        }
+    }
+
+    @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun canNotLaunchPinRecovery_finishesWithoutStartingPinRecovery() {
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(false)
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            scenario.onActivity { activity ->
+                clickNextOnIntroductionScreen(activity)
+                val shadowActivity = shadowOf(activity)
+                shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+                // Set PIN result.
                 shadowActivity.receiveResult(
                     shadowActivity.nextStartedActivityForResult.intent,
                     RESULT_OK,
@@ -379,6 +488,7 @@ class SetupSupervisionActivityTest {
 
         ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
+                clickNextOnIntroductionScreen(activity)
                 val nextStartedActivity = shadowOf(activity).nextStartedActivity
                 assertThat(nextStartedActivity.component?.className)
                     .isEqualTo(SupervisionErrorActivity::class.java.name)
@@ -418,6 +528,66 @@ class SetupSupervisionActivityTest {
                 assertThat(activity.isFinishing).isTrue()
             }
         }
+    }
+
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onIntroductionScreen_nextButton_enablesSupervision() {
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+        mockUserManager.stub {
+            on { users } doReturn emptyList()
+            on {
+                createProfileForUserEvenWhenDisallowed(any(), any(), any(), any(), anyOrNull())
+            } doReturn SUPERVISING_USER_INFO
+        }
+
+        ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                clickNextOnIntroductionScreen(activity)
+
+                val layout =
+                    activity.findViewById<com.google.android.setupdesign.GlifLayout>(
+                        R.id.supervision_setup_introduction
+                    )
+                assertThat(layout.isProgressBarShown).isTrue()
+
+                assertThat(shadowOf(activity).nextStartedActivity.component?.className)
+                    .isEqualTo(ChooseLockGeneric::class.java.name)
+            }
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onIntroductionScreen_cancelButton_finishesActivity() {
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+        mockUserManager.stub { on { users } doReturn emptyList() }
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            scenario.onActivity { activity ->
+                val layout =
+                    activity.findViewById<com.google.android.setupdesign.GlifLayout>(
+                        R.id.supervision_setup_introduction
+                    )
+                val footer =
+                    layout.getMixin(
+                        com.google.android.setupcompat.template.FooterBarMixin::class.java
+                    )
+                footer.getSecondaryButtonView().performClick()
+
+                assertThat(activity.isFinishing).isTrue()
+            }
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
+        }
+    }
+
+    private fun clickNextOnIntroductionScreen(activity: SetupSupervisionActivity) {
+        val layout = activity.findViewById<GlifLayout>(R.id.supervision_setup_introduction)
+        val footer = layout.getMixin(FooterBarMixin::class.java)
+        footer.getPrimaryButtonView().performClick()
+        ShadowLooper.idleMainLooper()
     }
 
     private companion object {

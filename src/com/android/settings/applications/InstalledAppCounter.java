@@ -17,14 +17,11 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.FeatureFlags;
-import android.content.pm.FeatureFlagsImpl;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 
 import java.util.List;
 
@@ -37,15 +34,9 @@ public abstract class InstalledAppCounter extends AppCounter {
 
     private final int mInstallReason;
 
-    public InstalledAppCounter(@NonNull Context context, int installReason,
-            @NonNull PackageManager packageManager) {
-        this(context, installReason, packageManager, new FeatureFlagsImpl());
-    }
-
-    @VisibleForTesting
-    InstalledAppCounter(@NonNull Context context, int installReason,
-            @NonNull PackageManager packageManager, @NonNull FeatureFlags featureFlags) {
-        super(context, packageManager, featureFlags);
+    public InstalledAppCounter(
+            @NonNull Context context, int installReason, @NonNull PackageManager packageManager) {
+        super(context, packageManager);
         mInstallReason = installReason;
     }
 

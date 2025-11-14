@@ -1,0 +1,9 @@
+package: "com.android.settings.flags"
+container: "system_ext"
+
+flag {
+    name: "rearrange_haptics_settings_26q2"
+    namespace: "android_settings"
+    description: "Flag used for haptics settings rearrangement in 26Q2"
+    bug: "452552590"
+}

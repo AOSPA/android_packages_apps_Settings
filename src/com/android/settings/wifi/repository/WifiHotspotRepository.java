@@ -694,7 +694,8 @@ public class WifiHotspotRepository {
         }, RESTART_INTERVAL_MS);
     }
 
-    private void startTethering() {
+    @VisibleForTesting
+    void startTethering() {
         if (mStartTetheringCallback == null) {
             mStartTetheringCallback = new StartTetheringCallback();
         }
@@ -753,7 +754,8 @@ public class WifiHotspotRepository {
         }
     }
 
-    private class StartTetheringCallback implements TetheringManager.StartTetheringCallback {
+    @VisibleForTesting
+    class StartTetheringCallback implements TetheringManager.StartTetheringCallback {
         @Override
         public void onTetheringStarted() {
             log("onTetheringStarted()");
@@ -761,7 +763,13 @@ public class WifiHotspotRepository {
 
         @Override
         public void onTetheringFailed(int error) {
-            log("onTetheringFailed(), error:" + error);
+            Log.e(TAG, "onTetheringFailed(), error:" + error);
+            if (isRestarting()) {
+                Log.w(TAG, "Stop tethering due to restart failure!");
+                stopTethering();
+                refresh();
+                setRestarting(false);
+            }
         }
     }
 

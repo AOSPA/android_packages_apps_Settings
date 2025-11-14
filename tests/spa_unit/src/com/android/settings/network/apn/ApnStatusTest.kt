@@ -18,42 +18,145 @@ package com.android.settings.network.apn
 
 import android.content.Context
 import android.os.PersistableBundle
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Telephony
 import android.telephony.CarrierConfigManager
 import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.internal.telephony.flags.Flags
 import com.google.common.truth.Truth.assertThat
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class ApnStatusTest {
     private val apnData = ApnData(subId = 1)
 
-    private val configManager = mock<CarrierConfigManager> {
-        val p = PersistableBundle()
-        p.putBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL, true)
-        on {
-            getConfigForSubId(
-                apnData.subId,
-                CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY,
-                CarrierConfigManager.KEY_READ_ONLY_APN_FIELDS_STRING_ARRAY,
-                CarrierConfigManager.KEY_APN_SETTINGS_DEFAULT_APN_TYPES_STRING_ARRAY,
-                CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_PROTOCOL_STRING,
-                CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_ROAMING_PROTOCOL_STRING,
-                CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL
+    @get:Rule val setFlagsRule = SetFlagsRule()
+
+    private val configManager =
+        mock<CarrierConfigManager> {
+            val p = PersistableBundle()
+            p.putBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL, true)
+            p.putStringArray(
+                CarrierConfigManager.KEY_DISALLOW_ADDING_APN_STRING_ARRAY,
+                arrayOf(".au-net.ne.jp"),
             )
-        } doReturn p
-    }
+            on {
+                getConfigForSubId(
+                    apnData.subId,
+                    CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY,
+                    CarrierConfigManager.KEY_READ_ONLY_APN_FIELDS_STRING_ARRAY,
+                    CarrierConfigManager.KEY_APN_SETTINGS_DEFAULT_APN_TYPES_STRING_ARRAY,
+                    CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_PROTOCOL_STRING,
+                    CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_ROAMING_PROTOCOL_STRING,
+                    CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL,
+                    CarrierConfigManager.KEY_DISALLOW_ADDING_APN_STRING_ARRAY,
+                )
+            } doReturn p
+        }
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Test
     fun getCarrierCustomizedConfig_test() {
         assert(getCarrierCustomizedConfig(apnData, configManager).isAddApnAllowed)
+    }
+
+    @Test
+    fun getCarrierCustomizedConfigForDisallowedApn_test() {
+        assertThat(
+                getCarrierCustomizedConfig(apnData, configManager)
+                    .disallowedApnStrings
+                    .isNullOrEmpty()
+            )
+            .isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_CARRIER_CONFIG_APN_STRING_RESTRICTION)
+    fun validateApnDataForDisallowedApn_test() {
+        var apnData = ApnData(subId = 1, apn = "au5gtrg.au-net.ne.jp")
+        apnData =
+            apnData.copy(customizedConfig = getCarrierCustomizedConfig(apnData, configManager))
+        assertThat(containsDisallowedApnName(apnData)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_CARRIER_CONFIG_APN_STRING_RESTRICTION)
+    fun validateApnDataForAllowedApn_test() {
+        val apnData = ApnData(apn = "airtelgprs.com")
+        assertThat(containsDisallowedApnName(apnData)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_CARRIER_CONFIG_APN_STRING_RESTRICTION)
+    fun validateApnForDisallowedApn_nullArray_test() {
+        val p = PersistableBundle()
+        p.putBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL, true)
+        // KEY_DISALLOW_ADDING_APN_STRING_ARRAY is not set, defaults to null.
+        whenever(
+            configManager.getConfigForSubId(
+                apnData.subId,
+                CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY,
+                CarrierConfigManager.KEY_READ_ONLY_APN_FIELDS_STRING_ARRAY,
+                CarrierConfigManager.KEY_APN_SETTINGS_DEFAULT_APN_TYPES_STRING_ARRAY,
+                CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_PROTOCOL_STRING,
+                CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_ROAMING_PROTOCOL_STRING,
+                CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL,
+                CarrierConfigManager.KEY_DISALLOW_ADDING_APN_STRING_ARRAY,
+            )
+        )
+            .thenReturn(p)
+
+        var apnData = ApnData(subId = 1, apn = "au5gtrg.au-net.ne.jp")
+        apnData =
+            apnData.copy(customizedConfig = getCarrierCustomizedConfig(apnData, configManager))
+        assertThat(containsDisallowedApnName(apnData)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_CARRIER_CONFIG_APN_STRING_RESTRICTION)
+    fun validateApnForDisallowedApn_emptyArray_test() {
+        val p = PersistableBundle()
+        p.putBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL, true)
+        // KEY_DISALLOW_ADDING_APN_STRING_ARRAY is empty array.
+        p.putStringArray(
+            CarrierConfigManager.KEY_DISALLOW_ADDING_APN_STRING_ARRAY,
+            emptyArray<String>()
+        )
+        whenever(
+            configManager.getConfigForSubId(
+                apnData.subId,
+                CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY,
+                CarrierConfigManager.KEY_READ_ONLY_APN_FIELDS_STRING_ARRAY,
+                CarrierConfigManager.KEY_APN_SETTINGS_DEFAULT_APN_TYPES_STRING_ARRAY,
+                CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_PROTOCOL_STRING,
+                CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_ROAMING_PROTOCOL_STRING,
+                CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL,
+                CarrierConfigManager.KEY_DISALLOW_ADDING_APN_STRING_ARRAY,
+            )
+        )
+            .thenReturn(p)
+
+        var apnData = ApnData(subId = 1, apn = "au5gtrg.au-net.ne.jp")
+        apnData =
+            apnData.copy(customizedConfig = getCarrierCustomizedConfig(apnData, configManager))
+        assertThat(containsDisallowedApnName(apnData)).isFalse()
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_CARRIER_CONFIG_APN_STRING_RESTRICTION)
+    fun validateApnDataForDisabledFlag_test() {
+        val apnData = ApnData(apn = "au5gtrg.au-net.ne.jp")
+        assertThat(containsDisallowedApnName(apnData)).isFalse()
     }
 
     @Test

@@ -35,6 +35,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.network.SatelliteRepository
 import com.android.settings.network.SatelliteWarningDialogActivity
 import com.android.settings.network.SatelliteWarningDialogActivity.Companion.CUSTOM_CONTENT_BUTTON_NAME
 import com.android.settings.network.SatelliteWarningDialogActivity.Companion.CUSTOM_CONTENT_DESCRIPTION
@@ -129,13 +130,22 @@ private fun AddSim() {
     val isShow by
         remember { EuiccRepository(context).showEuiccSettingsFlow() }
             .collectAsStateWithLifecycle(initialValue = false)
+    val isSatelliteSessionStarted by
+        remember { SatelliteRepository(context).getIsSessionStartedFlow() }
+            .collectAsStateWithLifecycle(initialValue = false)
     if (isShow) {
         RestrictedPreference(
             model =
                 object : PreferenceModel {
                     override val title = stringResource(id = R.string.mobile_network_list_add_more)
                     override val icon = @Composable { SettingsIcon(Icons.Outlined.Add) }
-                    override val onClick = { startAddSimFlow(context) }
+                    override val onClick = {
+                        if (isSatelliteSessionStarted) {
+                            startSatelliteWarningDialogFlow(context)
+                        } else {
+                            startAddSimFlow(context)
+                        }
+                    }
                 },
             restrictions = Restrictions(keys = listOf(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)),
         )

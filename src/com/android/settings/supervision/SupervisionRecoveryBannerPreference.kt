@@ -53,10 +53,10 @@ class SupervisionRecoveryBannerPreference :
             return false
         }
         ensurePrefsInitialized(context)
-        if (!context.isSupervisingCredentialSet) {
+        if (!context.isSupervisingCredentialSet()) {
             return false
         }
-        val missingRecovery = context.isMissingRecoveryMethod()
+        val missingRecovery = context.shouldDisplayPinRecoveryReminders()
         return missingRecovery && !isDismissed()
     }
 
