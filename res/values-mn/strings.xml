@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>-г ашигладаг. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>-д эхэлнэ."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> ашиглаж байна. Зуны цагийн хэмнэлт байхгүй."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Зуны цаг"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Стандарт цаг"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Бүс нутгаар сонгох"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"GMT-н зөрүүгээр сонгох"</string>
@@ -1231,8 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*шаардлагатай"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Энэ нь дундын сүлжээ юм. Та өөрчлөлт хийхийн тулд нэвтрэх шаардлагатай."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Өөрчлөлт хийхийн тулд сүлжээний өмчлөгч, төхөөрөмжийн админтай холбогдоно уу."</string>
-    <!-- no translation found for wifi_shared_network_icon_message (8937015463026388043) -->
-    <skip />
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Энэ төхөөрөмж дээрх бүх хэрэглэгч энэ сүлжээнд хандах боломжтой."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Энэ сүлжээ нь интернетэд холбогдоогүй байна. Цааш үргэлжлүүлэн ашиглах уу?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Зарим апп болон үйлчилгээ хязгаарлагдмал холболтын улмаас ажиллахгүй байж болзошгүй. Үүнийг ямар ч үед ашиглах уу?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Энэ сүлжээнд дахин бүү асуу"</string>
@@ -1756,8 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC талбар 3 цифртэй байх ёстой."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC талбар 2 буюу 3 цифртэй байх ёстой."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Оператор компани нь %s төрлийн APN нэмэхийг зөвшөөрдөггүй."</string>
-    <!-- no translation found for error_disallow_adding_apn (4053023049932971602) -->
-    <skip />
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"Оператор компани энэ APN-г нэмэхийг зөвшөөрдөггүй."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"MMSC талбар хүчинтэй байх ёстой."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Үндсэн APN тохиргоог сэргээж байна"</string>
     <string name="menu_restore" msgid="4310539620115151551">"Өгөгдмөл болгож шинэчлэх"</string>
@@ -2636,6 +2636,12 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Өргөтгөсөн бараан загвар"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Бараан загварыг дэмждэггүй ихэнх аппад автоматаар ашиглана. Энэ нь хүртээмж, уншигдах байдлыг сайжруулж болох ч зарим аппыг буруу харуулж болзошгүй."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"албадан урвуулах, өнгө урвуулах, ялгарал"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Анимацийг хасах"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Дэлгэц дээрх хөдөлгөөнийг багасгах"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Текстийн курсорын анивчих хурд"</string>
@@ -3104,8 +3110,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Системүүдээр харах"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"<xliff:g id="PERCENTAGE">%1$s</xliff:g>-с бага"</string>
-    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Тээвэрлэхээс өмнөх үйлдвэрийн шалгалтын улмаас таны төхөөрөмжийг тохируулахаас өмнө ашигласан бөгөөд мөчлөгийн тоо тэг биш байж болзошгүй ба энэ нь хэвийн зүйл юм"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Процессын статус"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Ажиллаж байгаа процессуудын талаарх статус"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Санах ойн ашиглалт"</string>
@@ -4598,18 +4603,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Бүх файлыг удирдахын тулд хандахыг зөвшөөрөх"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Энэ аппад энэ төхөөрөмж дээрх эсвэл холбогдсон дурын хадгалах сангийн бүх файлыг унших, өөрчлөх болон устгахыг зөвшөөрөх. Зөвшөөрөл олгогдсон бол апп нь танд тодорхойлон мэдэгдэлгүйгээр файлд хандаж болзошгүй."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Бүх файлд хандах боломжтой"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Дэлгэцийн автоматжуулалт"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Энэ аппад бусад аппыг бүрэн автоматжуулахыг зөвшөөрөх"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Энэ апп таны аппуудыг хянах боломжтой болно. Дэлгэцийн автоматжуулалт үргэлжилж байхад хянаж буй аппуудыг ашиглах боломжгүй боловч та үүнийг хүссэн үедээ зогсоох боломжтой."</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Тухай бүрд асуух"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Үргэлж зөвшөөрсөн"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Бүү зөвшөөр"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Бүтэн дэлгэцийн мэдэгдэл"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Энэ аппаас бүтэн дэлгэцийн мэдэгдлийг зөвшөөрөх"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Төхөөрөмжийг түгжээтэй үед энэ аппад бүтэн дэлгэцийг эзлэх мэдэгдэл харуулахыг зөвшөөрнө үү. Сэрүүлэг, ирсэн дуудлага эсвэл бусад яаралтай мэдэгдлийг онцлоход аппууд эдгээрийг ашиглаж магадгүй."</string>
@@ -4918,13 +4917,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Арын мэдрэгшил"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Зангааны навигац"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"Зангааны навигацын тохиргоо"</string>
-    <!-- no translation found for gesture_settings_extra_button_hint (5061056396437804198) -->
-    <skip />
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"зангааны навигацын тохиргоог нээх"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Демог туршиж үзэх"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Товчлуурт навигац"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Товчны навигацын тохиргоо"</string>
-    <!-- no translation found for button_navigation_settings_extra_button_hint (6471481336598365780) -->
-    <skip />
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"товчны навигацын тохиргоог нээх"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Товчны дараалал"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Товчны дараалал, Товчнуудыг зөөх, зүүн гарын горим, баруун гарын горим"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Буцах"</string>
@@ -6002,10 +5999,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Төхөөрөмжийн дэлгэрэнгүй мэдээллийг тохируулна уу."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Эцэг эхийн хяналт"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Дижитал үндсэн дүрэм, дэлгэцийн цагийн хязгаар"</string>
-    <!-- no translation found for supervision_intro_title (2686370837216266390) -->
-    <skip />
-    <!-- no translation found for supervision_intro_description (101353421249918460) -->
-    <skip />
+    <string name="supervision_intro_title" msgid="2686370837216266390">"Энэ төхөөрөмжид эцэг эхийн хяналтын ПИН үүсгэх"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"Та энэ ПИН-г энэ төхөөрөмж дээрх эцэг эхийн хяналтын тохиргоо, аппыг удирдахад ашиглана.\n\nТа ПИН-г Android-н Тохиргоо &gt; Эцэг эхийн хяналтаас засаж, устгах боломжтой."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"ПИН тохируулах"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Эцэг эхийн хяналтын ПИН-г тохируулах"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"хяналт, эцэг эхийн хяналт, эцэг эх, хяналтын ПИН, ПИН"</string>
@@ -6013,12 +6008,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Эцэг эхийн хяналтын ПИН-г удирдах"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Эцэг эхийн хяналтын ПИН"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Эцэг эхийн ПИН, Эцэг эхийн хяналтын ПИН"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Сэргээх имэйл хаяг нэмэх"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Сэргээх имэйл хаягийг баталгаажуулах"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Сэргээх мэдээлэл нэмэх"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Сэргээх мэдээллийг баталгаажуулах"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"ПИН өөрчлөх"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"ПИН-г мартсан"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"ПИН-ээ мартсан уу?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Сэргээх имэйл хаягийг шинэчлэх"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Сэргээх мэдээллийг шинэчлэх"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Сэргээх имэйл хаяг нэмсэн"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Сэргээх имэйл хаягийг баталгаажуулсан"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Сэргээх имэйл хаягийг шинэчилсэн"</string>
@@ -6030,11 +6025,14 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Сэргээх мэдээлэл нэмээрэй"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Хэрэв та ПИН-ээ мартвал үүнийг шинэчлэхэд бүртгэлээ ашиглах боломжтой"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"ПИН-г устгах"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Сэргээх имэйл хаяг нэмэх"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Имэйлээ баталгаажуулах"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Сэргээх мэдээлэл нэмэх"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Сэргээх мэдээллийг баталгаажуулах"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Аппын дэлгүүрийн шүүлтүүр"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Аппуудыг контентынх нь насны ангилалд тулгуурлан шүүнэ үү"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Апп бүр өөр өөр төрлийн контентыг блоклох боломжтой. Жагсаалтад ороогүй аппын дэлгүүрүүдийг тусад нь удирдах ёстой."</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Веб контентын шүүлтүүр"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Вебсайтын шүүлтүүр, Сайтыг блоклох, Хөтчийн шүүлтүүр, Насанд хүрэгчдийн сайтыг блоклох, Сайтыг шүүх, Хайлтын илэрцийг блоклох, Насанд хүрэгчдийн хайлтын илэрцийг шүүх, контентын хязгаарлалт"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Энэ утсан дээрх зарим, хөтөч дээрх насанд хүрэгчдийн контентыг шүүхэд тусална уу. Бусад апп, төхөөрөмж, хөтөч дээр насанд хүрэгчдийн контентыг харуулсаар байж магадгүй."</string>
@@ -6054,19 +6052,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"ПИН-г устгах боломжгүй"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"ПИН-г устгах боломжгүй"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"ПИН-г устгахаар оролдож байхад алдаа гарлаа."</string>
-    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
-    <skip />
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"Энэ хэрэглэгчийн хяналтыг унтраах"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"ПИН-г устгаж, хяналтыг унтраах уу?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"Таны эцэг эхийн хяналтын ПИН-г устгана. Таны тохируулсан аливаа хяналтыг унтраана."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Устгаад, унтраах"</string>
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
-    <skip />
-    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
-    <skip />
-    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
-    <skip />
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"ПИН-г устгаж, хяналтыг унтраах"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"Устгах"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Таны эцэг эхийн хяналтын ПИН-г дараах ашиглаж байна:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>-н хөдөлгөөнт зураг"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Тохиргоог асаах боломжгүй"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Тохиргоог ашиглах боломжгүй"</string>
@@ -6128,10 +6120,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Асаалттай"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Боломжтой"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Боломжгүй"</string>
-    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
-    <skip />
-    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
-    <skip />
-    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
-    <skip />
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"Хиймэл дагуулын холболт"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Танд хөдөлгөөнт холбооны, Wi-Fi сүлжээ байхгүй үед холбоотой байгаарай"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"Хиймэл дагуулын газардах хуудас"</string>
 </resources>

@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Usa o fuso horário <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"O horário <xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> começa a <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Utiliza <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Sem mudança de hora."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Mudança de hora"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Hora padrão"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Selecionar por região"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Selec. por diferença para GMT"</string>
@@ -2253,7 +2255,7 @@
     <string name="game_controller_button_r2" msgid="4361909018228151006">"Botão R2"</string>
     <string name="game_controller_button_thumbl" msgid="609311480262927654">"Clique no stick esquerdo"</string>
     <string name="game_controller_button_thumbr" msgid="6734424131770099471">"Clique no stick direito"</string>
-    <string name="game_controller_dpad" msgid="5352745621298140827">"Botão direcional"</string>
+    <string name="game_controller_dpad" msgid="5352745621298140827">"Teclado direcional"</string>
     <string name="game_controller_stick_left" msgid="1591700901162153956">"Stick esquerdo"</string>
     <string name="game_controller_stick_right" msgid="1418791636252375110">"Stick direito"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
@@ -2634,6 +2636,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Tema escuro expandido"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Aplica automaticamente o tema escuro à maioria das apps que não são compatíveis com este. Pode melhorar a acessibilidade e a legibilidade, mas algumas apps podem ser apresentadas incorretamente."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"inversão forçada, inversão de cores, contraste"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema escuro expandido"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Definições do tema escuro expandido"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Abrir definições do tema escuro expandido"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remover animações"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduz o movimento no ecrã"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Cursor de texto intermitente"</string>
@@ -3102,8 +3107,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Ver por sistemas"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"menos de <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Devido a inspeções de fábrica antes do envio, pode mostrar que o seu dispositivo foi usado antes de o configurar e a contagem de ciclos pode não ser zero, o que é normal"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estatísticas do Processo"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estatísticas de peritos acerca dos processos em execução"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Utilização da memória"</string>
@@ -6001,12 +6005,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Faça a gestão do PIN dos controlos parentais"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN de controlos parentais"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN parental, PIN de controlos parentais"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Adicione o email de recuperação"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Valide o email de recuperação"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Adicione informações de recuperação"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Valide as informações de recuperação"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Alterar PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Esqueci-me do PIN"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Esqueceu-se do PIN?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Atualize o email de recuperação"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Atualize as informações de recuperação"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Email de recuperação adicionado"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Email de recuperação validado"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Email de recuperação atualizado"</string>
@@ -6018,11 +6022,14 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Adicione informações de recuperação"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Se se esquecer do PIN, pode usar a sua conta para o repor"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Eliminar PIN"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Adicionar email de recuperação"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Valide o seu email"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Adicione informações de recuperação"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Valide as informações de recuperação"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtros da loja de apps"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtre apps com base na maturidade do respetivo conteúdo"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Cada app pode bloquear diferentes tipos de conteúdo. As lojas de apps não apresentadas têm de ser geridas separadamente."</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtros de conteúdo da Web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtros de Websites, bloquear sites, filtros do navegador, bloquear sites explícitos, filtrar sites, bloquear resultados da pesquisa, filtrar resultados da pesquisa explícitos, restrições de conteúdo"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Ajude a filtrar conteúdo explícito em algumas apps e navegadores neste telemóvel. O conteúdo explícito pode continuar a ser apresentado noutras apps, dispositivos ou navegadores."</string>
@@ -6042,19 +6049,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Não é possível eliminar o PIN"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Não é possível eliminar o PIN"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Ocorreu um erro ao tentar eliminar o PIN."</string>
-    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
-    <skip />
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"Desativar controlos para este utilizador"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"Eliminar o PIN e desativar os controlos?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"O PIN dos controlos parentais vai ser eliminado. Todos os controlos que configurou vão ser desativados."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Eliminar e desativar"</string>
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
-    <skip />
-    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
-    <skip />
-    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
-    <skip />
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Eliminar PIN e desativar controlos"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"Eliminar"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"O PIN dos controlos parentais está a ser usado por:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animação de <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Não é possível ativar os controlos"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Não é possível usar os controlos"</string>
@@ -6116,10 +6117,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Ativado"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Disponível"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Não disponível"</string>
-    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
-    <skip />
-    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
-    <skip />
-    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
-    <skip />
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"Conetividade por satélite"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Mantenha-se em contacto quando não tiver uma rede móvel ou Wi-Fi"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"Página de destino do satélite"</string>
 </resources>

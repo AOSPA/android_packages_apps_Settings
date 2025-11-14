@@ -343,8 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Uses <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> starts on <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Uses <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. No daylight savings time."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Daylight savings time"</string>
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Uses <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. No daylight saving time."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Daylight saving time"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standard time"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Select by region"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Select by GMT offset"</string>
@@ -2634,6 +2634,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Expanded dark theme"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Automatically applies dark theme to most apps that don\'t support it. This can improve accessibility and readability, but may cause some apps to display incorrectly."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"force invert, colour inversion, contrast"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Expanded dark theme"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Expanded dark theme settings"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Open expanded dark theme settings"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remove animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduce movement on the screen"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Text cursor blinking"</string>
@@ -6021,7 +6024,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verify recovery info"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"App store filters"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filter apps based on the maturity of their content"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Each app may block different types of content. App stores not listed must be managed separately."</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Each store rates content differently. An app’s rating may vary across stores."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filter apps by content ratings"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Web content filters"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Website filters, Block sites, Browser filters, Block explicit sites, Filter sites, Block search results, Filter explicit search results, content restrictions"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Help filter explicit content on some apps and browsers on this phone. Explicit content may still show on other apps, devices, or browsers."</string>

@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Naudojama: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> prasideda <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Naudojama: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Vasaros laikas nenaudojamas."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Vasaros laikas"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standartinis laikas"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Pasirinkti pagal regioną"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Pasirinkti pagal GMT nuokrypį"</string>
@@ -1231,8 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"* būtina užpildyti"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Tai yra bendrinamas tinklas. Jei norite atlikti pakeitimus, turite prisijungti."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Jei norite atlikti pakeitimų, susisiekite su tinklo savininku arba įrenginio administratoriumi."</string>
-    <!-- no translation found for wifi_shared_network_icon_message (8937015463026388043) -->
-    <skip />
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Visi šio įrenginio naudotojai gali pasiekti šį tinklą."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Šiame tinkle nėra interneto ryšio. Likti prisijungus?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Kai kurios programos ir paslaugos gali neveikti dėl riboto ryšio. Vis tiek naudoti?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Daugiau neklausti šiame tinkle"</string>
@@ -1756,8 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"MKC lauke turi būti įvesti 3 skaitmenys."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC lauke turi būti įvesti 2 ar 3 skaitmenys."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Operatorius neleidžia pridėti %s tipo APN."</string>
-    <!-- no translation found for error_disallow_adding_apn (4053023049932971602) -->
-    <skip />
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"Operatorius neleidžia pridėti šio APN."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"MMSC laukas turi būti galiojantis."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Atkuriami numatytieji APN nustatymai."</string>
     <string name="menu_restore" msgid="4310539620115151551">"Nustatyti iš naujo į numatytuosius nust."</string>
@@ -2636,6 +2636,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Išplėstinė tamsioji tema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Automatiškai taiko tamsiąją temą daugumai programų, kurios jos nepalaiko. Tai gali pagerinti pritaikomumą ir skaitymą, bet kai kurios programos gali būti rodomos netinkamai."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"priverstinė inversija, spalvų inversija, kontrastas"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Išplėstinė tamsioji tema"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Išplėstinės tamsiosios temos nustatymai"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Atidaryti išplėstinės tamsiosios temos nustatymus"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Pašalinti animacijas"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Sumažinkite judėjimą ekrane"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Teksto žymeklio mirksėjimas"</string>
@@ -4911,13 +4914,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Grįžtamasis jautrumas"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Naršymas gestais"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"Naršymo gestais nustatymai"</string>
-    <!-- no translation found for gesture_settings_extra_button_hint (5061056396437804198) -->
-    <skip />
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"atidaryti naršymo gestais nustatymus"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Išbandyti demonstracinę versiją"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Naršymas mygtukais"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Naršymo mygtukais nustatymai"</string>
-    <!-- no translation found for button_navigation_settings_extra_button_hint (6471481336598365780) -->
-    <skip />
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"atidaryti naršymo mygtukais nustatymus"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Mygtukų tvarka"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Mygtukų tvarka, mygtukų perkėlimas, režimas kairiarankiams, režimas dešiniarankiams"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Atgal"</string>
@@ -5997,10 +5998,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"„<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“. Konfigūruoti išsamią įrenginio informaciją."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Tėvų kontrolė"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Pagrindinės skaitmeninės taisyklės ir įrenginio naudojimo laiko apribojimai"</string>
-    <!-- no translation found for supervision_intro_title (2686370837216266390) -->
-    <skip />
-    <!-- no translation found for supervision_intro_description (101353421249918460) -->
-    <skip />
+    <string name="supervision_intro_title" msgid="2686370837216266390">"Sukurkite šio įrenginio tėvų kontrolės PIN kodą"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"Šį PIN kodą naudosite tėvų kontrolės nustatymams ir programoms tvarkyti šiame įrenginyje.\n\nPIN kodą galite redaguoti arba ištrinti skiltyje „Android“ nustatymai“ &gt; „Tėvų kontrolė“."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Nustatyti PIN kodą"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Tėvų kontrolės PIN kodo nustatymas"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"priežiūra, tėvų kontrolė, tėvai, priežiūros PIN kodas, PIN kodas"</string>
@@ -6029,7 +6028,10 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Atkūrimo informacijos patvirtinimas"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Programų parduotuvės filtrai"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtruokite programas pagal jų turinio brandą"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Kiekviena programa gali blokuoti skirtingų tipų turinį. Nepateiktos programų parduotuvės turi būti tvarkomos atskirai."</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Žiniatinklio turinio filtrai"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Svetainių filtrai, blokuojamos svetainės, naršyklės filtrai, blokuoti nepadoraus turinio svetaines, filtruoti svetaines, blokuoti paieškos rezultatus, filtruoti nepadoraus turinio paieškos rezultatus, turinio apribojimai"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Padėkite filtruoti nepadorų turinį kai kuriose programose ir naršyklėse šiame telefone. Nepadorus turinys vis tiek gali būti rodomas kitose programose, įrenginiuose ar naršyklėse."</string>

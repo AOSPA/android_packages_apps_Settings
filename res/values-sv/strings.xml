@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Använder <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> börjar den <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> används. Sommartid gäller inte."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Sommartid"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standardtid"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Välj efter område"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Välj efter GMT-förskjutning"</string>
@@ -1231,8 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*obligatoriskt"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Detta är ett delat nätverk. Du måste logga in för att göra ändringar."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Kontakta nätverksägaren eller enhetsadministratören om du vill göra ändringar."</string>
-    <!-- no translation found for wifi_shared_network_icon_message (8937015463026388043) -->
-    <skip />
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Alla användare på enheten kan komma åt det här nätverket."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Nätverket är inte anslutet till internet. Vill du fortsätta använda nätverket?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Anslutningen är begränsad. Vissa appar och tjänster kanske inte fungerar. Vill du använda den ändå?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Fråga inte igen för det här nätverket"</string>
@@ -1756,8 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC-fältet måste bestå av 3 siffror."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC-fältet måste vara 2 eller 3 siffror"</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Operatören tillåter inte att du lägger till APN:er av typen %s."</string>
-    <!-- no translation found for error_disallow_adding_apn (4053023049932971602) -->
-    <skip />
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"Operatören tillåter inte att du lägger till detta APN."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"MMSC-fältet måste vara giltigt."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Återställer standardinställningar för APN."</string>
     <string name="menu_restore" msgid="4310539620115151551">"Återställ standardinst."</string>
@@ -2636,6 +2636,12 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Utökat mörkt tema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Tillämpar automatiskt mörkt tema i de flesta appar utan stöd för det. Detta kan förbättra tillgängligheten och läsbarheten, men vissa appar kan visas felaktigt."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"tvinga invertering, inverterade färger, kontrast"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Ta bort animationer"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Minska rörelse på skärmen"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Blinkinställningar för textmarkören"</string>
@@ -3104,8 +3110,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Visa efter system"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"mindre än <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_cycle_count_footer (682194266909198784) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"På grund av fabriksinspektioner före leverans kan det synas att enheten har använts innan du konfigurerade den och antalet cykler kanske inte är noll, vilket är normalt"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Processtatistik"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Nördig statistik om processer som körs"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Minnesanvändning"</string>
@@ -4598,18 +4603,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Tillåt hanteringsåtkomst för alla filer"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Tillåt att den här appen får läsa, redigera och radera alla filer på enheten och eventuella anslutna lagringsutrymmen. Om du beviljar behörigheten kan appen komma åt filer utan att du informeras."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Har åtkomst till alla filer"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Skärmautomatisering"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Tillåt att den här appen automatiserar andra appar helt"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Den här appen kommer att kunna styra dina appar. Appar som styrs kan inte användas medan skärmautomatisering pågår, men du kan alltid stoppa den."</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Fråga varje gång"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Tillåt alltid"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Tillåt inte"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Aviseringar i helskärm"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Tillåt aviseringar i helskärm från den här appen"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Tillåt att den här appen visar aviseringar som täcker hela skärmen när enheten är låst. Sådana aviseringar kan användas i appar för att lyfta fram alarm, inkommande samtal och andra brådskande aviseringar."</string>
@@ -4918,13 +4917,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Känslighet för tillbaka-rörelsen"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Navigering med rörelser"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"Inställningar för navigering med rörelser"</string>
-    <!-- no translation found for gesture_settings_extra_button_hint (5061056396437804198) -->
-    <skip />
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"öppna inställningarna för navigering med rörelser"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Testa en demo"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigering med knappar"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Inställningar för knappnavigering"</string>
-    <!-- no translation found for button_navigation_settings_extra_button_hint (6471481336598365780) -->
-    <skip />
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"öppna inställningarna för navigering med knappar"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Knappordning"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Knappordning, Flytta knappar, vänsterhandsläge, högerhandsläge"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Tillbaka"</string>
@@ -6002,10 +5999,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Konfigurera enhetsinformation."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Föräldrakontroller"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Digitala regler och gränser för skärmtid"</string>
-    <!-- no translation found for supervision_intro_title (2686370837216266390) -->
-    <skip />
-    <!-- no translation found for supervision_intro_description (101353421249918460) -->
-    <skip />
+    <string name="supervision_intro_title" msgid="2686370837216266390">"Skapa en pinkod för föräldrakontroller för den här enheten"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"Du använder den här pinkoden för att hantera inställningar för föräldrakontroller och appar på den här enheten.\n\nDu kan redigera eller radera pinkoden i Android-inställningarna &gt; Föräldrakontroller."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Ställ in pinkod"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Ställ in en pinkod för föräldrakontroller"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"kontroll, föräldrakontroller, föräldrar, pinkod för föräldrakontroll, pinkod"</string>
@@ -6013,12 +6008,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Hantera pinkod för föräldrakontroller"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Pinkod för föräldrakontroller"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Pinkod för förälder, pinkod för föräldrakontroller"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Lägg till en återställningsadress"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Verifiera återställningsadressen"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Lägg till återställningsuppgifter"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Verifiera återställningsuppgifter"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Byt pinkod"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Glömt pinkoden"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Har du glömt pinkoden?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Uppdatera återställningsadressen"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Uppdatera återställningsuppgifterna"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"En återställningsadress har lagts till"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Återställningsadressen har verifierats"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Återställningsadressen har uppdaterats"</string>
@@ -6030,11 +6025,14 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Lägg till återställningsuppgifter"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Om du glömmer pinkoden kan du återställa den med ditt konto"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Radera pinkod"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Lägg till en återställningsadress"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verifiera din e-postadress"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Lägg till återställningsuppgifter"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verifiera återställningsuppgifter"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Appbutiksfilter"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtrera appar utifrån innehållets åldersgräns"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Varje app kan blockera olika typer av innehåll. Appbutiker som inte finns med i listan måste hanteras separat."</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Webbinnehållsfilter"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Webbplatsfilter, blockera webbplatser, webbläsarfilter, blockera explicita webbplatser, filtrera webbplatser, blockera sökresultat, filtrera explicita sökresultat, innehållsbegränsningar"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Hjälp till att filtrera bort explicit innehåll i vissa appar och webbläsare på den här telefonen. Explicit innehåll kan fortfarande visas i andra appar, enheter eller webbläsare."</string>
@@ -6054,19 +6052,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Det går inte att radera pinkoden"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Pinkoden kan inte raderas"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Ett fel uppstod när du försökte radera pinkoden."</string>
-    <!-- no translation found for supervision_turn_off_controls_button_label (3167081374549512327) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_header (3406690808634716382) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_confirm_message (6469268717329098248) -->
-    <skip />
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"Inaktivera kontrollerna för den här användaren"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"Vill du radera pinkoden och inaktivera kontrollerna?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"Pinkoden för föräldrakontroller raderas. Alla kontroller som du har ställt in inaktiveras."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Radera och inaktivera"</string>
-    <!-- no translation found for supervision_delete_pin_turn_off_controls_button_label (1069413044624006425) -->
-    <skip />
-    <!-- no translation found for supervision_delete_button_label (8096648247610708181) -->
-    <skip />
-    <!-- no translation found for supervision_cant_delete_pin_multiple_role_holders_message (926001793311679905) -->
-    <skip />
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Radera pinkod och inaktivera kontroller"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"Radera"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Pinkoden för föräldrakontroller används av:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animering för <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Det går inte att aktivera kontrollerna"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Det går inte att använda kontrollerna"</string>
@@ -6128,10 +6120,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"På"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Tillgänglig"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Inte tillgänglig"</string>
-    <!-- no translation found for satellite_connectivity_title (5919956632912518626) -->
-    <skip />
-    <!-- no translation found for satellite_connectivity_topintro (8310270194233472980) -->
-    <skip />
-    <!-- no translation found for satellite_landing_page_label (534906205317274253) -->
-    <skip />
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"Satellitanslutning"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Håll kontakten när du inte har något mobil- eller wifi-nätverk"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"Målsida för satellit"</string>
 </resources>
