@@ -18,11 +18,14 @@ package com.android.settings.network
 
 import android.Manifest.permission.READ_PRIVILEGED_PHONE_STATE
 import android.app.Activity
+import android.app.Application
 import android.app.settings.SettingsEnums.SETTINGS_NETWORK_CATEGORY
 import android.companion.AssociationInfo
 import android.companion.AssociationRequest
 import android.companion.CompanionDeviceManager
-import android.content.Context
+import android.companion.CompanionDeviceManager.FEATURE_CROSS_DEVICE_SYNC
+import android.companion.Flags.FLAG_ENABLE_DATA_SYNC
+import android.content.Context.COMPANION_DEVICE_SERVICE
 import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager.FEATURE_LEANBACK
@@ -38,7 +41,7 @@ import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.ext.truth.content.IntentSubject.assertThat
-import com.android.server.connectivity.Flags
+import com.android.server.connectivity.Flags.FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES
 import com.android.settings.R
 import com.android.settings.contract.KEY_AIRPLANE_MODE
 import com.android.settings.core.PreferenceScreenMixin
@@ -63,6 +66,8 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowContextImpl
 
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [SettingsShadowResources::class])
@@ -71,7 +76,7 @@ class AirplaneModePreferenceTest {
     @get:Rule(order = 1) val settingsStoreRule = SettingsStoreRule()
     @get:Rule(order = 2) val setFlagsRule = SetFlagsRule()
 
-    private val context = ApplicationProvider.getApplicationContext<Context>()
+    private val context = ApplicationProvider.getApplicationContext<Application>()
 
     private val airplaneModePreference = AirplaneModePreference()
     private val airplaneModeDataStore = AirplaneModePreference.createDataStore(context)
@@ -270,7 +275,7 @@ class AirplaneModePreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES)
+    @EnableFlags(FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES, FLAG_ENABLE_DATA_SYNC)
     fun airplaneModeTogglePreference_isAvailable_noPairedWatch() {
         val preference = AirplaneModeTogglePreference()
 
@@ -278,7 +283,7 @@ class AirplaneModePreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES)
+    @EnableFlags(FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES, FLAG_ENABLE_DATA_SYNC)
     fun airplaneModeTogglePreference_isAvailable_hasPairedWatch() {
         val preference = AirplaneModeTogglePreference()
         addWatchAssociation()
@@ -287,7 +292,7 @@ class AirplaneModePreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES)
+    @EnableFlags(FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES, FLAG_ENABLE_DATA_SYNC)
     fun airplaneModeDetailsPreference_isAvailable_hasPairedWatch() {
         val preference = AirplaneModeDetailsPreference()
         addWatchAssociation()
@@ -296,7 +301,7 @@ class AirplaneModePreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES)
+    @EnableFlags(FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES, FLAG_ENABLE_DATA_SYNC)
     fun airplaneModeDetailsPreference_isAvailable_noPairedWatch() {
         val preference = AirplaneModeDetailsPreference()
 
@@ -320,14 +325,28 @@ class AirplaneModePreferenceTest {
     }
 
     private fun addWatchAssociation() {
-        shadowOf(context.getSystemService(CompanionDeviceManager::class.java))
-            .addAssociation(
-                AssociationInfo.Builder(1, UserHandle.myUserId(), context.packageName)
-                    .setDeviceProfile(AssociationRequest.DEVICE_PROFILE_WATCH)
-                    .setDisplayName("Smart Watch")
-                    .setMetadata(PersistableBundle())
-                    .build()
-            )
+        val mockCompanionDeviceManager =
+            mock<CompanionDeviceManager> {
+                on { allAssociations } doReturn
+                    listOf(
+                        AssociationInfo.Builder(1, UserHandle.myUserId(), context.packageName)
+                            .setDeviceProfile(AssociationRequest.DEVICE_PROFILE_WATCH)
+                            .setDisplayName("Smart Watch")
+                            .setMetadata(
+                                PersistableBundle().apply {
+                                    putPersistableBundle(
+                                        FEATURE_CROSS_DEVICE_SYNC,
+                                        PersistableBundle().apply {
+                                            putBoolean(APM_SYNC_SUPPORTED, true)
+                                        },
+                                    )
+                                }
+                            )
+                            .build()
+                    )
+            }
+        Shadow.extract<ShadowContextImpl>(context.baseContext)
+            .setSystemService(COMPANION_DEVICE_SERVICE, mockCompanionDeviceManager)
     }
 
     private fun getSwitchPreference(): SwitchPreferenceCompat =
