@@ -70,9 +70,6 @@ public final class LockScreenSafetySource {
             return;
         }
 
-        final int userId = UserHandle.myUserId();
-        final RestrictedLockUtils.EnforcedAdmin admin =
-                RestrictedLockUtilsInternal.checkIfPasswordQualityIsSet(context, userId);
         final PendingIntent pendingIntent =
                 createPendingIntent(
                         context,
@@ -81,8 +78,8 @@ public final class LockScreenSafetySource {
                         REQUEST_CODE_SCREEN_LOCK);
         final IconAction gearMenuIconAction =
                 createGearMenuIconAction(context, screenLockPreferenceDetailsUtils);
-        final boolean lockScreenAllowedByAdmin =
-                !screenLockPreferenceDetailsUtils.isPasswordQualityManaged(userId, admin);
+        final boolean lockScreenAllowedByAdmin = isLockScreenAllowedByAdmin(context,
+                screenLockPreferenceDetailsUtils);
         final boolean isLockPatternSecure = screenLockPreferenceDetailsUtils.isLockPatternSecure();
         final int severityLevel =
                 lockScreenAllowedByAdmin
@@ -111,6 +108,19 @@ public final class LockScreenSafetySource {
 
         SafetyCenterManagerWrapper.get()
                 .setSafetySourceData(context, SAFETY_SOURCE_ID, safetySourceData, safetyEvent);
+    }
+
+    private static boolean isLockScreenAllowedByAdmin(Context context,
+            ScreenLockPreferenceDetailsUtils screenLockPreferenceDetailsUtils) {
+        final int userId = UserHandle.myUserId();
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            return screenLockPreferenceDetailsUtils.getPasswordQualityManagedEnforcingAdmin(userId)
+                    == null;
+        } else {
+            final RestrictedLockUtils.EnforcedAdmin admin =
+                    RestrictedLockUtilsInternal.checkIfPasswordQualityIsSet(context, userId);
+            return !screenLockPreferenceDetailsUtils.isPasswordQualityManaged(userId, admin);
+        }
     }
 
     private static String getScreenLockSummary(

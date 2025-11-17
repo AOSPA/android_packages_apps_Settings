@@ -411,7 +411,7 @@ public final class Utils {
                             + " set LE profile enabled: "
                             + enable);
             leAudioProfile.setEnabled(leAudioDevice.getDevice(), enable);
-            if (asha != null) {
+            if (asha != null && leAudioDevice.getProfiles().contains(asha)) {
                 asha.setEnabled(leAudioDevice.getDevice(), !enable);
             }
             if (broadcastAssistant != null) {

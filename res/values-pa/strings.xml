@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ। <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> ਨੂੰ ਸ਼ੁਰੂ ਹੋਵੇਗਾ।"</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> ਦੀ ਵਰਤੋਂ ਹੋ ਰਹੀ ਹੈ। ਚਾਨਣ ਬਚਾਊ ਸਮਾਂ ਲਾਗੂ ਨਹੀਂ ਹੈ।"</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"ਦਿਨ ਦੀ ਰੌਸ਼ਨੀ ਸੰਬੰਧੀ ਬਚਤ ਸਮਾਂ"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"ਮਿਆਰੀ ਸਮਾਂ"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"ਖੇਤਰ ਮੁਤਾਬਕ ਚੁਣੋ"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"GMT ਆਫ਼ਸੈੱਟ ਮੁਤਾਬਕ ਚੁਣੋ"</string>
@@ -1231,6 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*ਲੋੜੀਂਦਾ"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"ਇਹ ਸਾਂਝਾ ਕੀਤਾ ਗਿਆ ਨੈੱਟਵਰਕ ਹੈ। ਤਬਦੀਲੀਆਂ ਕਰਨ ਲਈ, ਤੁਹਾਨੂੰ ਸਾਈਨ-ਇਨ ਕਰਨ ਦੀ ਲੋੜ ਪਵੇਗੀ।"</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"ਤਬਦੀਲੀਆਂ ਕਰਨ ਲਈ, ਨੈੱਟਵਰਕ ਦੇ ਮਾਲਕ ਜਾਂ ਡੀਵਾਈਸ ਦੇ ਪ੍ਰਸ਼ਾਸਕ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"</string>
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"ਇਸ ਡੀਵਾਈਸ \'ਤੇ ਮੌਜੂਦ ਸਾਰੇ ਵਰਤੋਂਕਾਰ ਇਸ ਨੈੱਟਵਰਕ ਤੱਕ ਪਹੁੰਚ ਕਰ ਸਕਦੇ ਹਨ।"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"ਇਸ ਨੈੱਟਵਰਕ ਕੋਲ ਕੋਈ ਇੰਟਰਨੈਟ ਪਹੁੰਚ ਨਹੀਂ ਹੈ। ਕੀ ਕਨੈਕਟ ਰਹਿਣਾ ਹੈ?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"ਸ਼ਾਇਦ ਕੁਝ ਐਪਾਂ ਅਤੇ ਸੇਵਾਵਾਂ ਸੀਮਤ ਕਨੈਕਟੀਵਿਟੀ ਹੋਣ ਕਰਕੇ ਕੰਮ ਨਾ ਕਰਨ। ਕੀ ਫਿਰ ਵੀ ਵਰਤਣਾ ਹੈ?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"ਇਸ ਨੈੱਟਵਰਕ ਲਈ ਦੁਬਾਰਾ ਨਾ ਆਖੋ"</string>
@@ -1754,6 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC ਖੇਤਰ 3 ਅੰਕਾਂ ਦਾ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ।"</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC ਖੇਤਰ 2 ਜਾਂ 3 ਅੰਕਾਂ ਦਾ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ।"</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"ਕੈਰੀਅਰ %s ਕਿਸਮ ਦੇ APNs ਨੂੰ ਸ਼ਾਮਲ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਦਿੰਦਾ।"</string>
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"ਕੈਰੀਅਰ ਇਸ APN ਨੂੰ ਸ਼ਾਮਲ ਕਰਨ ਦੀ ਆਗਿਆ ਨਹੀਂ ਦਿੰਦਾ।"</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"MMSC ਖੇਤਰ ਦਾ ਵੈਧ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ।"</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"ਪੂਰਵ-ਨਿਰਧਾਰਤ APN ਸੈਟਿੰਗਾਂ ਰੀਸਟੋਰ ਕਰ ਰਿਹਾ ਹੈ।"</string>
     <string name="menu_restore" msgid="4310539620115151551">"ਪੂਰਵ-ਨਿਰਧਾਰਿਤ \'ਤੇ ਰੀਸੈੱਟ ਕਰੋ"</string>
@@ -2240,7 +2244,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ਪੂਰਵ-ਨਿਰਧਾਰਿਤ"</string>
     <string name="game_controller_settings_title" msgid="4322385924018377909">"ਗੇਮ ਕੰਟਰੋਲਰ"</string>
     <string name="game_controller_key_remapping" msgid="8150376475022555386">"ਕੁੰਜੀਆਂ"</string>
-    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"ਧੁਰੇ"</string>
+    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"ਐਕਸਿਸ"</string>
     <string name="game_controller_button_a" msgid="2138420373137111774">"A ਬਟਨ"</string>
     <string name="game_controller_button_b" msgid="2093089857164437480">"B ਬਟਨ"</string>
     <string name="game_controller_button_x" msgid="3428801081204194655">"X ਬਟਨ"</string>
@@ -2249,8 +2253,8 @@
     <string name="game_controller_button_r1" msgid="6271978600831912659">"R1 ਬਟਨ"</string>
     <string name="game_controller_button_l2" msgid="4168716287264803566">"L2 ਬਟਨ"</string>
     <string name="game_controller_button_r2" msgid="4361909018228151006">"R2 ਬਟਨ"</string>
-    <string name="game_controller_button_thumbl" msgid="609311480262927654">"ਖੱਬੀ ਸਟਿੱਕ \'ਤੇ ਕਲਿੱਕ ਕਰੋ"</string>
-    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"ਸੱਜੀ ਸਟਿੱਕ \'ਤੇ ਕਲਿੱਕ ਕਰੋ"</string>
+    <string name="game_controller_button_thumbl" msgid="609311480262927654">"ਖੱਬੀ ਸਟਿੱਕ ਕਲਿੱਕ"</string>
+    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"ਸੱਜੀ ਸਟਿੱਕ ਕਲਿੱਕ"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"ਡੀ-ਪੈਡ"</string>
     <string name="game_controller_stick_left" msgid="1591700901162153956">"ਖੱਬੀ ਸਟਿੱਕ"</string>
     <string name="game_controller_stick_right" msgid="1418791636252375110">"ਸੱਜੀ ਸਟਿੱਕ"</string>
@@ -2632,6 +2636,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"ਵਿਸਤ੍ਰਿਤ ਗੂੜ੍ਹਾ ਥੀਮ"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"ਉਨ੍ਹਾਂ ਜ਼ਿਆਦਾਤਰ ਐਪਾਂ \'ਤੇ ਗੂੜ੍ਹਾ ਥੀਮ ਲਾਗੂ ਕਰਦਾ ਹੈ ਜੋ ਇਸਦਾ ਸਮਰਥਨ ਨਹੀਂ ਕਰਦੀਆਂ। ਇਸ ਨਾਲ ਪਹੁੰਚਯੋਗਤਾ ਅਤੇ ਪੜ੍ਹਨਯੋਗਤਾ ਵਿੱਚ ਸੁਧਾਰ ਹੋ ਸਕਦਾ ਹੈ, ਪਰ ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਕੁਝ ਐਪਾਂ ਸਹੀ ਤਰ੍ਹਾਂ ਦਿਖਾਈ ਨਾ ਦੇਣ।"</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"ਜ਼ਬਰਦਸਤੀ ਪਲਟਾਓ, ਰੰਗ ਪਲਟਨਾ, ਕੰਟ੍ਰਾਸਟ"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"ਵਿਸਤ੍ਰਿਤ ਗੂੜ੍ਹਾ ਥੀਮ"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"ਵਿਸਤ੍ਰਿਤ ਗੂੜ੍ਹੇ ਥੀਮ ਦੀਆਂ ਸੈਟਿੰਗਾਂ"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"ਵਿਸਤ੍ਰਿਤ ਗੂੜ੍ਹੇ ਥੀਮ ਦੀਆਂ ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ਐਨੀਮੇਸ਼ਨਾਂ ਹਟਾਓ"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"ਸਕ੍ਰੀਨ \'ਤੇ ਹਿਲਜੁਲ ਨੂੰ ਘਟਾਓ"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"ਲਿਖਤ ਕਰਸਰ ਦੀ ਬਲਿੰਕਿੰਗ"</string>
@@ -3100,7 +3107,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"ਸਿਸਟਮਾਂ ਮੁਤਾਬਕ ਦੇਖੋ"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> ਤੋਂ ਘੱਟ"</string>
-    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"ਸ਼ਿੱਪ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਕੁਆਲਿਟੀ ਜਾਂਚਾਂ ਦੇ ਕਾਰਨ, ਪਹਿਲੀ ਵਾਰ ਵਰਤੇ ਜਾਣ \'ਤੇ ਸਾਈਕਲ ਕਾਊਂਟ ਸ਼ਾਇਦ ਜ਼ੀਰੋ ਨਾ ਹੋਵੇ"</string>
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"ਸ਼ਿੱਪ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਫੈਕਟਰੀ ਜਾਂਚਾਂ ਦੇ ਕਾਰਨ, ਇਹ ਦਿਖਾ ਸਕਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਵੱਲੋਂ ਇਸਦਾ ਸੈੱਟਅੱਪ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਤੁਹਾਡੇ ਡੀਵਾਈਸ ਦੀ ਵਰਤੋਂ ਕੀਤੀ ਗਈ ਸੀ ਅਤੇ ਚੱਕਰਾਂ ਦੀ ਗਿਣਤੀ ਸ਼ਾਇਦ ਜ਼ੀਰੋ ਨਾ ਹੋਵੇ, ਜੋ ਕਿ ਆਮ ਗੱਲ ਹੈ"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"ਪ੍ਰਕਿਰਿਆ ਸਟੈਟਸ"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"ਚੱਲ ਰਹੀਆਂ ਪ੍ਰਕਿਰਿਆਵਾਂ ਬਾਰੇ Geeky ਸਟੈਟਸ"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"ਮੈਮਰੀ ਵਰਤੋਂ"</string>
@@ -4593,18 +4600,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"ਸਾਰੀਆਂ ਫ਼ਾਈਲਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ ਦਿਓ"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"ਇਸ ਐਪ ਨੂੰ ਇਸ ਡੀਵਾਈਸ ਜਾਂ ਇਸ ਨਾਲ ਕਨੈਕਟ ਕਿਸੇ ਵੀ ਸਟੋਰੇਜ ਭਾਗ ਦੀਆਂ ਸਾਰੀਆਂ ਫ਼ਾਈਲਾਂ ਨੂੰ ਪੜ੍ਹਨ, ਸੋਧਣ ਅਤੇ ਮਿਟਾਉਣ ਦੀ ਆਗਿਆ ਦਿਓ। ਜੇ ਇਜਾਜ਼ਤ ਦਿੱਤੀ ਜਾਂਦੀ ਹੈ, ਤਾਂ ਐਪ ਤੁਹਾਨੂੰ ਸੂਚਿਤ ਕੀਤੇ ਬਿਨਾਂ ਫ਼ਾਈਲਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰ ਸਕਦੀ ਹੈ।"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"ਇਹ ਸਾਰੀਆਂ ਫ਼ਾਈਲਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰ ਸਕਦੀ ਹੈ"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"ਸਕ੍ਰੀਨ ਆਟੋਮੇਸ਼ਨ"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"ਇਸ ਐਪ ਨੂੰ ਹੋਰ ਐਪਾਂ ਨੂੰ ਪੂਰੀ ਤਰ੍ਹਾਂ ਸਵੈਚਲਿਤ ਕਰਨ ਦੀ ਆਗਿਆ ਦਿਓ"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"ਇਹ ਐਪ ਤੁਹਾਡੀਆਂ ਐਪਾਂ ਨੂੰ ਕੰਟਰੋਲ ਕਰ ਸਕੇਗੀ। ਕੰਟਰੋਲ ਕੀਤੀਆਂ ਜਾਣ ਵਾਲੀਆਂ ਐਪਾਂ ਦੀ ਵਰਤੋਂ ਸਕ੍ਰੀਨ ਆਟੋਮੇਸ਼ਨ ਦੌਰਾਨ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ, ਪਰ ਤੁਸੀਂ ਇਸਨੂੰ ਕਿਸੇ ਵੀ ਵੇਲੇ ਰੋਕ ਸਕਦੇ ਹੋ।"</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"ਹਰ ਵਾਰ ਪੁੱਛੋ"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"ਹਮੇਸ਼ਾਂ ਇਜਾਜ਼ਤ ਹੈ"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"ਆਗਿਆ ਨਾ ਦਿਓ"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"ਪੂਰੀ-ਸਕ੍ਰੀਨ ਵਾਲੀਆਂ ਸੂਚਨਾਵਾਂ"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ਇਸ ਐਪ ਤੋਂ ਸੂਚਨਾਵਾਂ ਨੂੰ ਪੂਰੀ-ਸਕ੍ਰੀਨ \'ਤੇ ਦਿਖਾਉਣ ਦੀ ਆਗਿਆ ਦਿਓ"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"ਇਸ ਐਪ ਨੂੰ ਉਹ ਸੂਚਨਾਵਾਂ ਦਿਖਾਉਣ ਦੀ ਆਗਿਆ ਦਿਓ ਜੋ ਡੀਵਾਈਸ ਲਾਕ ਹੋਣ \'ਤੇ ਪੂਰੀ ਸਕ੍ਰੀਨ ਵਿੱਚ ਦਿਖਾਈ ਦਿੰਦੀਆਂ ਹਨ। ਐਪਾਂ ਇਨ੍ਹਾਂ ਦੀ ਵਰਤੋਂ ਅਲਾਰਮਾਂ, ਇਨਕਮਿੰਗ ਕਾਲਾਂ ਜਾਂ ਹੋਰ ਜ਼ਰੂਰੀ ਸੂਚਨਾਵਾਂ ਨੂੰ ਉਜਾਗਰ ਕਰਨ ਲਈ ਕਰ ਸਕਦੀਆਂ ਹਨ।"</string>
@@ -4913,9 +4914,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"\'ਪਿੱਛੇ\' ਸੰਬੰਧੀ ਸੰਵੇਦਨਸ਼ੀਲਤਾ"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"ਇਸ਼ਾਰਾ ਨੈਵੀਗੇਸ਼ਨ"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"ਇਸ਼ਾਰਾ ਨੈਵੀਗੇਸ਼ਨ ਸੰਬੰਧੀ ਸੈਟਿੰਗਾਂ"</string>
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"ਇਸ਼ਾਰਾ ਨੈਵੀਗੇਸ਼ਨ ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"ਡੈਮੋ ਵਰਤ ਕੇ ਦੇਖੋ"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ਬਟਨ ਨੈਵੀਗੇਸ਼ਨ"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"ਬਟਨ ਨੈਵੀਗੇਸ਼ਨ ਸੰਬੰਧੀ ਸੈਟਿੰਗਾਂ"</string>
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"ਬਟਨ ਨੈਵੀਗੇਸ਼ਨ ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"ਬਟਨਾਂ ਦਾ ਕ੍ਰਮ"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"ਬਟਨ ਦਾ ਕ੍ਰਮ, ਬਟਨਾਂ ਨੂੰ ਕਿਸੇ ਦੂਜੀ ਥਾਂ \'ਤੇ ਲਿਜਾਉਣਾ, ਖੱਬੇ ਹੱਥ ਵਾਲਾ ਮੋਡ, ਸੱਜੇ ਹੱਥ ਵਾਲਾ ਮੋਡ"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"ਪਿੱਛੇ"</string>
@@ -5540,7 +5543,7 @@
     <string name="power_menu_setting_name" msgid="2394440932633137229">"ਪਾਵਰ ਬਟਨ ਨੂੰ ਦਬਾ ਕੇ ਰੱਖੋ"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"ਪਹੁੰਚ ਲਈ ਪਾਵਰ ਬਟਨ ਨੂੰ ਦਬਾ ਕੇ ਰੱਖੋ"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"ਪਾਵਰ ਮੀਨੂ"</string>
-    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ਡਿਜੀਟਲ ਸਹਾਇਕ"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ਡਿਜੀਟਲ ਅਸਿਸਟੈਂਟ"</string>
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"ਡਿਜੀਟਲ ਸਹਾਇਕ ਤੱਕ ਪਹੁੰਚ ਕਰੋ"</string>
     <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"ਪਾਵਰ ਮੀਨੂ ਤੱਕ ਪਹੁੰਚ ਕਰੋ"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"ਵਰਤਣ ਲਈ, ਪਹਿਲਾਂ ਸਕ੍ਰੀਨ ਲਾਕ ਸੈੱਟ ਕਰੋ"</string>
@@ -5993,6 +5996,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. ਡੀਵਾਈਸ ਦੇ ਵੇਰਵੇ ਦਾ ਸੰਰੂਪਣ ਕਰੋ।"</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"ਮਾਪਿਆਂ ਦੇ ਕੰਟਰੋਲ"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"ਡਿਜੀਟਲ ਬੁਨਿਆਦੀ ਨਿਯਮ ਅਤੇ ਸਕ੍ਰੀਨ ਸਮੇਂ ਸੰਬੰਧੀ ਸੀਮਾਵਾਂ"</string>
+    <string name="supervision_intro_title" msgid="2686370837216266390">"ਇਸ ਡੀਵਾਈਸ ਲਈ ਮਾਪਿਆਂ ਦੇ ਕੰਟਰੋਲਾਂ ਸੰਬੰਧੀ ਪਿੰਨ ਬਣਾਓ"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"ਤੁਸੀਂ ਇਸ ਡੀਵਾਈਸ \'ਤੇ ਮਾਪਿਆਂ ਦੇ ਕੰਟਰੋਲਾਂ ਸੰਬੰਧੀ ਸੈਟਿੰਗਾਂ ਅਤੇ ਐਪਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ ਲਈ ਇਸ ਪਿੰਨ ਦੀ ਵਰਤੋਂ ਕਰੋਗੇ।\n\nਤੁਸੀਂ Android ਸੈਟਿੰਗਾਂ ਅਤੇ ਮਾਪਿਆਂ ਦੇ ਕੰਟਰੋਲਾਂ ਤੋਂ ਪਿੰਨ ਦਾ ਸੰਪਾਦਨ ਕਰ ਸਕਦੇ ਹੋ ਜਾਂ ਇਸਨੂੰ ਮਿਟਾ ਸਕਦੇ ਹੋ।"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"ਪਿੰਨ ਦਾ ਸੈੱਟਅੱਪ ਕਰੋ"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"ਮਾਪਿਆਂ ਦੇ ਕੰਟਰੋਲਾਂ ਲਈ ਪਿੰਨ ਦਾ ਸੈੱਟਅੱਪ ਕਰੋ"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"ਨਿਗਰਾਨੀ, ਮਾਪਿਆਂ ਦੇ ਕੰਟਰੋਲ, ਮਾਂ-ਪਿਓ, ਨਿਗਰਾਨੀ ਪਿੰਨ, ਪਿੰਨ"</string>
@@ -6000,12 +6005,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"ਮਾਪਿਆਂ ਦੇ ਕੰਟਰੋਲਾਂ ਸੰਬੰਧੀ ਪਿੰਨ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"ਮਾਪਿਆਂ ਦੇ ਕੰਟਰੋਲਾਂ ਸੰਬੰਧੀ ਪਿੰਨ"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"ਮਾਂ-ਪਿਓ ਵੱਲੋਂ ਸੈੱਟ ਕੀਤਾ ਪਿੰਨ, ਮਾਪਿਆਂ ਦੇ ਕੰਟਰੋਲਾਂ ਦਾ ਪਿੰਨ"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"ਰਿਕਵਰੀ ਈਮੇਲ ਸ਼ਾਮਲ ਕਰੋ"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"ਰਿਕਵਰੀ ਈਮੇਲ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"ਰਿਕਵਰੀ ਜਾਣਕਾਰੀ ਸ਼ਾਮਲ ਕਰੋ"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"ਰਿਕਵਰੀ ਜਾਣਕਾਰੀ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"ਪਿੰਨ ਬਦਲੋ"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"ਪਿੰਨ ਭੁੱਲ ਗਏ"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"ਕੀ ਪਿੰਨ ਭੁੱਲ ਗਏ ਹੋ?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"ਰਿਕਵਰੀ ਈਮੇਲ ਅੱਪਡੇਟ ਕਰੋ"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"ਰਿਕਵਰੀ ਜਾਣਕਾਰੀ ਨੂੰ ਅੱਪਡੇਟ ਕਰੋ"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"ਰਿਕਵਰੀ ਈਮੇਲ ਸ਼ਾਮਲ ਕੀਤੀ ਗਈ"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"ਰਿਕਵਰੀ ਈਮੇਲ ਦੀ ਪੁਸ਼ਟੀ ਕੀਤੀ ਗਈ"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"ਰਿਕਵਰੀ ਈਮੇਲ ਅੱਪਡੇਟ ਕੀਤੀ ਗਈ"</string>
@@ -6017,12 +6022,15 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"ਰਿਕਵਰੀ ਜਾਣਕਾਰੀ ਸ਼ਾਮਲ ਕਰੋ"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"ਜੇ ਤੁਸੀਂ ਆਪਣਾ ਪਿੰਨ ਭੁੱਲ ਜਾਂਦੇ ਹੋ, ਤਾਂ ਤੁਸੀਂ ਇਸਨੂੰ ਰੀਸੈੱਟ ਕਰਨ ਲਈ ਆਪਣੇ ਖਾਤੇ ਦੀ ਵਰਤੋਂ ਕਰ ਸਕਦੇ ਹੋ"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"ਪਿੰਨ ਮਿਟਾਓ"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"ਰਿਕਵਰੀ ਈਮੇਲ ਸ਼ਾਮਲ ਕਰੋ"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"ਆਪਣੀ ਈਮੇਲ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"ਰਿਕਵਰੀ ਜਾਣਕਾਰੀ ਸ਼ਾਮਲ ਕਰੋ"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"ਰਿਕਵਰੀ ਜਾਣਕਾਰੀ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"ਐਪ ਸਟੋਰ ਸੰਬੰਧੀ ਫਿਲਟਰ"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"ਉਨ੍ਹਾਂ ਦੀ ਸਮੱਗਰੀ ਦੀ ਪਰਿਪੱਕਤਾ ਦੇ ਆਧਾਰ \'ਤੇ ਐਪਾਂ ਨੂੰ ਫਿਲਟਰ ਕਰੋ"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"ਹਰੇਕ ਐਪ ਵੱਖ-ਵੱਖ ਕਿਸਮਾਂ ਦੀ ਸਮੱਗਰੀ ਨੂੰ ਬਲਾਕ ਕਰ ਸਕਦੀ ਹੈ। ਜੋ ਐਪ ਸਟੋਰ ਸੂਚੀਬੱਧ ਨਹੀਂ ਹਨ, ਉਨ੍ਹਾਂ ਨੂੰ ਵੱਖਰੇ ਤਰੀਕੇ ਨਾਲ ਪ੍ਰਬੰਧਿਤ ਕੀਤਾ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ।"</string>
-    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"ਵੈੱਬਸਾਈਟ ਸਮੱਗਰੀ ਫਿਲਟਰ"</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
+    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ਵੈੱਬ ਸਮੱਗਰੀ ਫਿਲਟਰ"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"ਵੈੱਬਸਾਈਟ ਫਿਲਟਰ, ਸਾਈਟਾਂ ਬਲਾਕ ਕਰੋ, ਬ੍ਰਾਊਜ਼ਰ ਫਿਲਟਰ, ਅਸ਼ਲੀਲ ਸਾਈਟਾਂ ਬਲਾਕ ਕਰੋ, ਸਾਈਟਾਂ ਫਿਲਟਰ ਕਰੋ, ਖੋਜ ਨਤੀਜੇ ਬਲਾਕ ਕਰੋ, ਅਸ਼ਲੀਲ ਖੋਜ ਨਤੀਜੇ ਫਿਲਟਰ ਕਰੋ, ਸਮੱਗਰੀ ਸੰਬੰਧੀ ਪਾਬੰਦੀਆਂ"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"ਇਹ ਇਸ ਫ਼ੋਨ \'ਤੇ ਕੁਝ ਐਪਾਂ ਅਤੇ ਬ੍ਰਾਊਜ਼ਰਾਂ \'ਤੇ ਅਸ਼ਲੀਲ ਸਮੱਗਰੀ ਨੂੰ ਫਿਲਟਰ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਦੇ ਹਨ। ਪਰ ਹਾਲੇ ਵੀ ਹੋਰ ਐਪਾਂ, ਡੀਵਾਈਸਾਂ ਜਾਂ ਬ੍ਰਾਊਜ਼ਰਾਂ \'ਤੇ ਅਸ਼ਲੀਲ ਸਮੱਗਰੀ ਦਿੱਖ ਸਕਦੀ ਹੈ।"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"ਵੈੱਬਸਾਈਟਾਂ"</string>
@@ -6041,7 +6049,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"ਪਿੰਨ ਨੂੰ ਮਿਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"ਪਿੰਨ ਨੂੰ ਮਿਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"ਪਿੰਨ ਨੂੰ ਮਿਟਾਉਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਨ ਵੇਲੇ ਕੋਈ ਗੜਬੜ ਹੋ ਗਈ।"</string>
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"ਇਸ ਵਰਤੋਂਕਾਰ ਲਈ ਕੰਟਰੋਲਾਂ ਨੂੰ ਬੰਦ ਕਰੋ"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"ਕੀ ਪਿੰਨ ਨੂੰ ਮਿਟਾਉਣਾ ਅਤੇ ਕੰਟਰੋਲਾਂ ਨੂੰ ਬੰਦ ਕਰਨਾ ਹੈ?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"ਤੁਹਾਡੇ ਮਾਪਿਆਂ ਦੇ ਕੰਟਰੋਲਾਂ ਸੰਬੰਧੀ ਪਿੰਨ ਨੂੰ ਮਿਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ। ਤੁਹਾਡੇ ਵੱਲੋਂ ਸੈੱਟਅੱਪ ਕੀਤੇ ਗਏ ਸਾਰੇ ਕੰਟਰੋਲ ਬੰਦ ਹੋ ਜਾਣਗੇ।"</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"ਮਿਟਾਓ ਅਤੇ ਬੰਦ ਕਰੋ"</string>
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"ਪਿੰਨ ਮਿਟਾਓ ਅਤੇ ਕੰਟਰੋਲਾਂ ਨੂੰ ਬੰਦ ਕਰੋ"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"ਮਿਟਾਓ"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"ਤੁਹਾਡੇ ਮਾਪਿਆਂ ਦੇ ਕੰਟਰੋਲਾਂ ਸੰਬੰਧੀ ਪਿੰਨ ਦੀ ਵਰਤੋਂ ਇਨ੍ਹਾਂ ਵੱਲੋਂ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> ਐਨੀਮੇਸ਼ਨ"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"ਕੰਟਰੋਲ ਚਾਲੂ ਨਹੀਂ ਕੀਤੇ ਜਾ ਸਕਦੇ"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"ਕੰਟਰੋਲਾਂ ਦੀ ਵਰਤੋਂ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ"</string>
@@ -6103,4 +6117,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"ਚਾਲੂ ਹੈ"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"ਉਪਲਬਧ ਹੈ"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"ਉਪਲਬਧ ਨਹੀਂ ਹੈ"</string>
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"ਸੈਟੇਲਾਈਟ ਕਨੈਕਟੀਵਿਟੀ"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"ਮੋਬਾਈਲ ਜਾਂ ਵਾਈ-ਫਾਈ ਨੈੱਟਵਰਕ ਨਾ ਹੋਣ \'ਤੇ ਵੀ ਕਨੈਕਟ ਰਹੋ"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"ਸੈਟੇਲਾਈਟ ਲੈਂਡਿੰਗ ਪੰਨਾ"</string>
 </resources>

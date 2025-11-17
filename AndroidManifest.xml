@@ -2997,6 +2997,10 @@
             <meta-data
                 android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_supervision" />
+            <intent-filter>
+                <action android:name="android.settings.action.MANAGE_SUPERVISION_CREDENTIAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".supervision.ConfirmSupervisionCredentialsActivity"
@@ -6141,6 +6145,8 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.telephony.action.CARRIER_CONFIG_CHANGED"/>
+                <action android:name="android.telephony.action.SIM_CARD_STATE_CHANGED"/>
             </intent-filter>
         </receiver>
 

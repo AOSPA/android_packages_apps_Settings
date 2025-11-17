@@ -97,6 +97,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
 import java.util.List;
+import java.util.Locale;
 
 /** Unit tests for {@link ExternalDisplayPreferenceFragment}.  */
 @RunWith(AndroidJUnit4.class)
@@ -535,6 +536,31 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         assertThat(pref.getOnPreferenceClickListener().onPreferenceClick(pref)).isTrue();
         assertThat(mResolutionSelectorDisplayId).isEqualTo(displayId);
         verify(mMockedMetricsLogger).writePreferenceClickMetric(pref);
+    }
+
+    @Test
+    @UiThreadTest
+    public void testDisplayResolutionPreference_formatsNumberForLocale() {
+        Locale originalLocale = Locale.getDefault();
+        try {
+            // Set locale to one that uses non-arabic digits to test number formatting.
+            Locale.setDefault(new Locale("bn"));
+
+            // Re-initialize fragment to pick up new locale for NumberFormatter.
+            mFragment = null;
+            initFragment();
+            mHandler.flush();
+
+            var category = getExternalDisplayCategory(0);
+            var pref = category.findPreference(PrefBasics.EXTERNAL_DISPLAY_RESOLUTION.keyForNth(0));
+
+            // The display resolution is 1920x1080 from the test setup.
+            // In Bengali, 1920 is ১৯২০ and 1080 is ১০৮০.
+            // This verifies that NumberFormatter is used and respects the locale.
+            assertThat(pref.getSummary().toString()).isEqualTo("১৯২০ x ১০৮০");
+        } finally {
+            Locale.setDefault(originalLocale);
+        }
     }
 
     @Test

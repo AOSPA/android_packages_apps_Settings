@@ -39,6 +39,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.android.settings.R
+import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.preference.launchFragmentScenario
 import com.android.settingslib.widget.FooterPreference
@@ -68,6 +69,12 @@ class SupervisionAppStoreFiltersScreenTest {
     fun getTitle() {
         assertThat(supervisionAppStoreFiltersScreen.getPreferenceTitle(context))
             .isEqualTo("App store filters")
+    }
+
+    @Test
+    fun getSummary() {
+        assertThat(supervisionAppStoreFiltersScreen.getPreferenceSummary(context))
+            .isEqualTo("Filter apps by content ratings")
     }
 
     @Test

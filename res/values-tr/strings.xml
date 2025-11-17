@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> kullanılır. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g>, <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> tarihinde başlıyor"</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> saat dilimini kullanır. Yaz saati uygulaması yoktur."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Yaz saati uygulaması"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standart saat"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Bölgeye göre seç"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"GMT farkına göre seç"</string>
@@ -976,8 +978,7 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> bağlanamadı"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Cihaz ayrıntıları"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Klavye ayarları"</string>
-    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
-    <skip />
+    <string name="bluetooth_device_game_controller_settings_preference_title" msgid="291778307796320923">"Oyun kumandası ayarları"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Diğer ayarlar"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Donanım yazılımı güncellemesi, hakkında ve fazlası"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"İpuçları ve destek"</string>
@@ -1208,15 +1209,12 @@
     <string name="retry" msgid="7542103800274026915">"Tekrar dene"</string>
     <string name="shared_message" msgid="2104244057926025072">"paylaşılan"</string>
     <string name="private_message" msgid="5897966950396765392">"gizli"</string>
-    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
-    <skip />
+    <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"Android\'e"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"İptal"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"Ağı paylaşın"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Bu cihazdaki diğer kullanıcılar bu ağa erişebilir"</string>
-    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
-    <skip />
-    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
-    <skip />
+    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"<xliff:g id="SHARED">%1$s</xliff:g> ağına geçilsin mi?"</string>
+    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"\"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" adlı bir <xliff:g id="SHARED_0">%1$s</xliff:g> ağı zaten var. <xliff:g id="SHARED_1">%1$s</xliff:g> ağına geçerseniz <xliff:g id="PRIVATE">%3$s</xliff:g> ağınızdan ayrılırsınız ve geçici olarak internet bağlantınız kesilebilir."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(değişmedi)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Kullanıcıların ağı düzenlemesine izin ver"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Diğer kullanıcılar bu ağda değişiklik yapabilir"</string>
@@ -1235,6 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*zorunlu"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Bu, ortak bir ağdır. Değişiklik yapmak için oturum açmanız gerekir."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Değişiklik yapmak için ağ sahibi veya cihaz yöneticisiyle iletişime geçin."</string>
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Bu cihazdaki tüm kullanıcılar bu ağa erişebilir"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Bu ağda internet erişimi yok. Bağlı kalınsın mı?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Bazı uygulamalar ve hizmetler, sınırlı bağlantı nedeniyle çalışmayabilir. Yine de kullanılsın mı?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Bu ağ için bir daha sorma"</string>
@@ -1254,8 +1253,7 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Ağ kaydedilemedi"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"İptal"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Ağ unutulsun mu?"</string>
-    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
-    <skip />
+    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>, bu cihazdaki tüm kullanıcılar için kaldırılacak"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 ağ}other{# ağ}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 abonelik}other{# abonelik}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 ağ ve abonelik}other{# ağ ve abonelik}}"</string>
@@ -1759,6 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC alanındaki değer 3 rakamdan oluşmalıdır."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC alanındaki değer 2 veya 3 rakamdan oluşmalıdır."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Operatör %s türünde APN eklenmesine izin vermiyor."</string>
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"Operatör bu APN\'nin eklenmesine izin vermiyor."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"MMSC alanı geçerli olmalıdır."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Varsayılan APN ayarları geri yükleniyor."</string>
     <string name="menu_restore" msgid="4310539620115151551">"Varsayılana sıfırla"</string>
@@ -2244,36 +2243,21 @@
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"İş için dokunmatik klavye"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Varsayılan"</string>
     <string name="game_controller_settings_title" msgid="4322385924018377909">"Oyun Kumandaları"</string>
-    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
-    <skip />
-    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
-    <skip />
-    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
-    <skip />
+    <string name="game_controller_key_remapping" msgid="8150376475022555386">"Anahtarlar"</string>
+    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"Eksen"</string>
+    <string name="game_controller_button_a" msgid="2138420373137111774">"A düğmesi"</string>
+    <string name="game_controller_button_b" msgid="2093089857164437480">"B Düğmesi"</string>
+    <string name="game_controller_button_x" msgid="3428801081204194655">"X Düğmesi"</string>
+    <string name="game_controller_button_y" msgid="4596061542299533516">"Y Düğmesi"</string>
+    <string name="game_controller_button_l1" msgid="4428713182602902434">"L1 Düğmesi"</string>
+    <string name="game_controller_button_r1" msgid="6271978600831912659">"R1 Düğmesi"</string>
+    <string name="game_controller_button_l2" msgid="4168716287264803566">"L2 Düğmesi"</string>
+    <string name="game_controller_button_r2" msgid="4361909018228151006">"R2 Düğmesi"</string>
+    <string name="game_controller_button_thumbl" msgid="609311480262927654">"Sol Çubuk Tıklaması"</string>
+    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"Sağ Çubuk Tıklaması"</string>
+    <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
+    <string name="game_controller_stick_left" msgid="1591700901162153956">"Sol Çubuk"</string>
+    <string name="game_controller_stick_right" msgid="1418791636252375110">"Sağ Çubuk"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Dokunmatik alan"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Dokunmatik alan ve fare"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Fare"</string>
@@ -2652,6 +2636,12 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Genişletilmiş koyu tema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Koyu temayı desteklemeyen çoğu uygulamada koyu temayı otomatik uygular. Bu, erişilebilirliği ve okunabilirliği artırırken bazı uygulamalarda hatalı görünüme yol açabilir."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"zorla ters çevirme, rengi ters çevirme, kontrast"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animasyonları kaldır"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Ekrandaki hareketliliği azaltır"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Metin imlecinin yanıp sönmesi"</string>
@@ -3121,7 +3111,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Sistem bazında göster"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> oranından az"</string>
-    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Kargolanmadan önce yapılan kalite denetimleri nedeniyle şarj döngü sayısı ilk kullanımda sıfır olmayabilir"</string>
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Kargoya verilmeden önce yapılan fabrika denetimleri nedeniyle cihazınızın siz kurmadan önce kullanıldığını ve şarj döngü sayısının sıfır olmadığını görebilirsiniz. Bu normal bir durumdur."</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"İşlem İstatistikleri"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Meraklısı için, çalışan işlemlerle ilgili istatistikler"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Bellek kullanımı"</string>
@@ -3195,8 +3185,7 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Pil ömrünüzü uzatmak için en iyi ağ bağlantısını otomatik olarak seçer"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Mobil ağ güvenliği"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Ağ türü, şifreleme, bildirim kontrolleri"</string>
-    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="4190908521080878539">"Bu ayarlar; aramalarınızı, mesajlarınızı ve verilerinizi veri hırsızlığı ya da izleme riskine açık hale getirebilecek eski veya şifrelenmemiş ağlara karşı korumanıza yardımcı olur."</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Mobil ağ güvenliği"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Bildirimler"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Ağ bildirimleri"</string>
@@ -4615,18 +4604,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Tüm dosyaları yönetme erişimine izin ver"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Bu uygulamanın, bu cihazdaki veya cihaza bağlı depolama birimlerindeki tüm dosyaları okumasına, değiştirmesine ve silmesine izin verin. İzin verilirse uygulama size açıkça bildirmeden dosyalara erişebilir."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Tüm dosyalara erişebilir"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Ekran otomasyonu"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Bu uygulamanın diğer uygulamaları tamamen otomatik hale getirmesine izin ver"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Bu uygulama, uygulamalarınızı kontrol edebilecek. Ekran otomasyonu devam ederken kontrol edilen uygulamalar kullanılamaz ancak otomasyonu istediğiniz zaman durdurabilirsiniz."</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Her zaman sor"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Her zaman izin veriliyor"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"İzin verme"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Tam ekran bildirimler"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Bu uygulamanın tam ekran bildirim göstermesine izin ver"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Cihaz kilitliyken bu uygulamanın tüm ekranı kaplayan bildirimler göstermesine izin verin. Uygulamalar bunu alarmları, gelen aramaları ve diğer acil bildirimleri göstermek için kullanabilir."</string>
@@ -4935,9 +4918,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Geri Gitme Hassasiyeti"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Hareketle Gezinme"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"Hareketle gezinme ayarları"</string>
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"hareketle gezinme ayarlarını aç"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Deneyin"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Düğmeli gezinme"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Düğmeyle gezinme ayarları"</string>
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"düğmeyle gezinme ayarlarını aç"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Düğme sırası"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Düğme sırası, Düğmeleri taşı, Sol el modu, Sağ el modu"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Geri"</string>
@@ -6015,6 +6000,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Cihaz ayrıntılarını yapılandırın."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Ebeveyn denetimleri"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Dijital temel kurallar ve ekran süresi sınırları"</string>
+    <string name="supervision_intro_title" msgid="2686370837216266390">"Bu cihaz için ebeveyn denetimleri PIN\'i oluşturun"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"Bu cihazdaki ebeveyn denetimi ayarlarını ve uygulamaları yönetmek için bu PIN\'i kullanacaksınız.\n\nPIN\'i Android Ayarları &gt; Ebeveyn Denetimleri bölümünden düzenleyebilir veya silebilirsiniz."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN ayarlayın"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Ebeveyn denetimleri PIN\'i ayarlayın"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"gözetim, ebeveyn denetimleri, ebeveynler, gözetim PIN\'i, PIN"</string>
@@ -6022,12 +6009,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Ebeveyn denetimleri PIN\'ini yönetin"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Ebeveyn denetimleri PIN\'i"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Ebeveyn PIN\'i, ebeveyn denetimleri PIN\'i"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Kurtarma e-postası ekle"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Kurtarma e-postasını doğrulayın"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Kurtarma bilgileri ekleyin"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Kurtarma bilgilerini doğrulayın"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PIN\'i değiştir"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN\'i unuttum"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"PIN\'inizi mi unuttunuz?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Kurtarma e-postasını güncelleme"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Kurtarma bilgilerini güncelleyin"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Kurtarma e-postası eklendi"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Kurtarma e-postası doğrulandı"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Kurtarma e-postası güncellendi"</string>
@@ -6039,12 +6026,15 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Kurtarma bilgileri ekleyin"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"PIN\'inizi unutursanız hesabınızı kullanarak sıfırlayabilirsiniz"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN\'i sil"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Kurtarma e-postası ekleyin"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"E-postanızı doğrulayın"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Kurtarma bilgileri ekleyin"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Kurtarma bilgilerini doğrulayın"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Uygulama mağazası filtreleri"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Uygulamaları, içeriklerinin yetişkinlik derecesine göre filtreleyin"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Her uygulama farklı içerik türlerini engelleyebilir. Listelenmeyen uygulama mağazaları ayrı olarak yönetilmelidir."</string>
-    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Web sitesi içerik filtreleri"</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
+    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Web içeriği filtreleri"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Web sitesi filtreleri, siteleri engelle, tarayıcı filtreleri, uygunsuz siteleri engelle, siteleri filtrele, arama sonuçlarını engelle, uygunsuz arama sonuçlarını filtrele, içerik kısıtlamaları"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Bu telefondaki bazı uygulamalarda ve tarayıcılarda uygunsuz içeriğin filtrelenmesine yardımcı olun. Uygunsuz içerikler diğer uygulamalarda, cihazlarda veya tarayıcılarda görünmeye devam edebilir."</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Web siteleri"</string>
@@ -6052,8 +6042,7 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Arama sonuçları"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Uygunsuz arama sonuçlarını filtrele"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Açık # uygulama}other{Açık # uygulama}}"</string>
-    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
-    <skip />
+    <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Bu ayarlar kapalıyken diğer hesap ayarları geçerli olmaya devam edebilir."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Ebeveyn denetimleri PIN\'ini girin"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Ebeveyn denetimleri PIN\'i ayarlayın"</string>
@@ -6064,7 +6053,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"PIN silinemiyor"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN silinemiyor"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"PIN\'i silmeye çalışırken bir hata oluştu."</string>
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"Bu kullanıcı için denetimleri devre dışı bırak"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"PIN silinsin ve denetimler kapatılsın mı?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"Ebeveyn denetimleri PIN\'iniz silinir. Ayarladığınız tüm denetimler devre dışı bırakılır."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Sil ve devre dışı bırak"</string>
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"PIN\'i sil ve denetimleri kapat"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"Sil"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Ebeveyn denetimleri PIN\'iniz şu kullanıcı tarafından kullanılıyor:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animasyonu"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Denetimler açılamıyor"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Kontroller kullanılamıyor"</string>
@@ -6072,10 +6067,8 @@
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Daha sonra tekrar deneyin"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Geri dön"</string>
     <string name="supervision_available_apps_title" msgid="886352413031517863">"Kullanılabilir uygulama ve hizmetler"</string>
-    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
-    <skip />
-    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
-    <skip />
+    <string name="supervision_approval_method_chooser_title" msgid="7759309575598126099">"Bir doğrulama yöntemi seçin"</string>
+    <string name="supervision_approval_method_chooser_description" msgid="7574494762555726167">"Ebeveyn olduğunuzu doğrulamanız gerekiyor"</string>
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Kimlik Kontrolü daha fazla uygulamada kullanılabilir"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Kimlik Kontrolü, uygulamalarınıza istenmeyen erişimi engeller. Artık Parmak İzi veya Yüz Tanıma Kilidi özelliği olan tüm uygulamalarda kullanılabilir."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Ayrıntıları göster"</string>
@@ -6128,4 +6121,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Açık"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Kullanılabilir"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Kullanılamaz"</string>
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"Uydu bağlantısı"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Mobil veya kablosuz ağa bağlı olmadığınızda iletişimi koruyun"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"Uydu Açılış Sayfası"</string>
 </resources>

@@ -49,10 +49,10 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
     BasePreferenceController(context, preferenceKey) {
 
     private var preference: Preference? = null
-    private var relatedSafetySources: List<String> = emptyList()
-    private var relatedIssueOnlySafetySources: List<String> = emptyList()
+    var relatedSafetySources: List<String> = emptyList()
+    var relatedIssueOnlySafetySources: List<String> = emptyList()
     private var viewModel: LiveSafetyCenterViewModel? = null
-    @StringRes private var defaultSummaryResId: Int? = null
+    @StringRes var defaultSummaryResId: Int? = null
 
     /**
      * Sets the ViewModel instance for this controller and registers the observer to update the
@@ -72,33 +72,6 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
             Log.d(TAG, "[$preferenceKey] safetyCenterUiLiveData observer notified")
             preference?.let { updatePreferenceUi(it, data) }
         }
-    }
-
-    /**
-     * Sets the list of related safety source IDs for this subpage.
-     *
-     * @param relatedSafetySources The list of safety source IDs.
-     */
-    fun setRelatedSafetySources(relatedSafetySources: List<String>) {
-        this.relatedSafetySources = relatedSafetySources
-    }
-
-    /**
-     * Sets the list of related safety source IDs for this subpage, which only provide issues.
-     *
-     * @param relatedIssueOnlySafetySources The list of safety source IDs.
-     */
-    fun setRelatedIssueOnlySafetySources(relatedIssueOnlySafetySources: List<String>) {
-        this.relatedIssueOnlySafetySources = relatedIssueOnlySafetySources
-    }
-
-    /**
-     * Sets the resource ID to be used as the default summary for this subpage preference.
-     *
-     * @param resId The string resource ID.
-     */
-    fun setDefaultSummaryResId(@StringRes resId: Int) {
-        this.defaultSummaryResId = resId
     }
 
     protected open fun setIcon(preference: Preference, icon: Drawable?) {
@@ -210,13 +183,13 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
                         relatedSafetySourcesData.find { it.severityLevel == subpageMaxSeverity }
                     selectSeverityUnspecifiedIconResId(entryForIcon?.severityUnspecifiedIconType)
                 }
-                SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN -> null
+                SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN -> R.drawable.ic_safety_null_state
                 else -> {
                     Log.e(
                         TAG,
                         "[$preferenceKey] getSubpageIcon: Unknown maxSeverity level '$subpageMaxSeverity'",
                     )
-                    null
+                    R.drawable.ic_safety_null_state
                 }
             }
         return iconResId?.let {
@@ -231,12 +204,14 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
         return when (severityUnspecifiedIconType) {
             SafetyCenterEntry.SEVERITY_UNSPECIFIED_ICON_TYPE_NO_ICON -> R.drawable.ic_safety_empty
             SafetyCenterEntry.SEVERITY_UNSPECIFIED_ICON_TYPE_PRIVACY -> R.drawable.ic_privacy
+            SafetyCenterEntry.SEVERITY_UNSPECIFIED_ICON_TYPE_NO_RECOMMENDATION ->
+                R.drawable.ic_safety_null_state
             else -> {
                 Log.e(
                     TAG,
                     "[$preferenceKey] Unknown SeverityNoneIconType: $severityUnspecifiedIconType",
                 )
-                null
+                R.drawable.ic_safety_null_state
             }
         }
     }
@@ -252,7 +227,7 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
                 TAG,
                 "[$preferenceKey] getSubpageSummary: Null max severity, returning default summary",
             )
-            return getDefaultSubpageSummary()
+            return getDefaultSubpageSummary(relatedSafetySourcesData)
         }
 
         when (subpageMaxSeverity) {
@@ -283,10 +258,10 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
                     return highestSeverityIssueOnlySafetySourceIssue.title
                 }
 
-                return getDefaultSubpageSummary()
+                return getDefaultSubpageSummary(relatedSafetySourcesData)
             }
             SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNSPECIFIED -> {
-                return getDefaultSubpageSummary()
+                return getDefaultSubpageSummary(relatedSafetySourcesData)
             }
             SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN -> {
                 val hasError =
@@ -306,7 +281,7 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
                     TAG,
                     "[$preferenceKey] Unexpected maxSeverity $subpageMaxSeverity, returning default summary",
                 )
-                return getDefaultSubpageSummary()
+                return getDefaultSubpageSummary(relatedSafetySourcesData)
             }
         }
     }
@@ -318,8 +293,28 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
         return data.getActiveIssuesForSources(listOf(entry.safetySourceId!!)).isNotEmpty()
     }
 
-    private fun getDefaultSubpageSummary(): CharSequence {
+    protected open fun getDefaultSubpageSummary(
+        safetySourceEntries: List<SafetyCenterEntry>
+    ): CharSequence {
         return defaultSummaryResId?.let { mContext.getString(it) } ?: ""
+    }
+
+    override fun updateNonIndexableKeys(keys: MutableList<String>) {
+        val uiData = SafetyCenterSearchIndexUtils.getCurrentSafetyCenterData(mContext)
+        if (uiData == null) {
+            Log.d(TAG, "[$preferenceKey] No SafetyCenterUiData, adding to non-indexable keys")
+            keys.add(preferenceKey)
+            return
+        }
+
+        val relatedSafetySourcesData = getRelatedSafetySourcesData(uiData)
+        if (relatedSafetySourcesData.isEmpty()) {
+            Log.d(
+                TAG,
+                "[$preferenceKey] No related entries for subpage, adding to non-indexable keys",
+            )
+            keys.add(preferenceKey)
+        }
     }
 
     companion object {

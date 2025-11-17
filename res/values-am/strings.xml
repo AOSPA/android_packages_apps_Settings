@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>ን ይጠቀማል። <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> ላይ ይጀምራል።"</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>ን ይጠቀማል። ምንም የቀን ብርሃን ቁጠባ ሰዓት የለም።"</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"የቀን ብርሃን ቁጠባዎች ጊዜ"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"መደበኛ ሰዓት"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"በክልል ምረጥ"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"በጂኤምቲ ማካካሻ ይምረጡ"</string>
@@ -976,8 +978,7 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ማገናኘት አልተሳካም"</string>
     <string name="device_details_title" msgid="1155622417516195481">"የመሣሪያ ዝርዝሮች"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"የቁልፍ ሰሌዳ ቅንብሮች"</string>
-    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
-    <skip />
+    <string name="bluetooth_device_game_controller_settings_preference_title" msgid="291778307796320923">"የጨዋታ መቆጣጠሪያ ቅንብሮች"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"ተጨማሪ ቅንብሮች"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"የፈርምዌር ዝማኔዎች፣ ስለ እና ሌሎችም"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"ጠቃሚ ምክሮች እና ድጋፍ"</string>
@@ -1208,15 +1209,12 @@
     <string name="retry" msgid="7542103800274026915">"እንደገና ይሞክሩ"</string>
     <string name="shared_message" msgid="2104244057926025072">"ተጋርቷል"</string>
     <string name="private_message" msgid="5897966950396765392">"የግል"</string>
-    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
-    <skip />
+    <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"ማብሪያ/ማጥፊያ"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"ይቅር"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"አውታረ መረብን አጋራ"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"በዚህ መሣሪያ ላይ ያሉ ሌሎች ተጠቃሚዎች ይህን አውታረ መረብ መድረስ ይችላሉ"</string>
-    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
-    <skip />
-    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
-    <skip />
+    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"ወደ <xliff:g id="SHARED">%1$s</xliff:g> አውታረ መረብ ይቀየር?"</string>
+    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"«<xliff:g id="NETWORK_NAME">%2$s</xliff:g>» የሚል ስም ያለው የ<xliff:g id="SHARED_0">%1$s</xliff:g> አውታረ መረብ አስቀድሞ አለ። ወደ <xliff:g id="SHARED_1">%1$s</xliff:g> አውታረ መረብ ከቀየሩ፣ የእርስዎን <xliff:g id="PRIVATE">%3$s</xliff:g> አውታረ መረብ ይተዋሉ እና በጊዜያዊነት በይነመረብ ላይኖርዎት ይችላል።"</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(ያልተለወጠ)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"ተጠቃሚዎች አውታረ መረብን እንዲያርትዑ ፍቀድ"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"ሌሎች ተጠቃሚዎች በዚህ አውታረ መረብ ላይ ለውጦችን ማድረግ ይችላሉ"</string>
@@ -1235,6 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*የሚያስፈልግ"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"ይህ የተጋራ አውታረ መረብ ነው። ለውጦችን ለማድረግ በመለያ መግባት ያስፈልግዎታል።"</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"ለውጦችን ለማድረግ የአውታረ መረብ ባለቤቱን ወይም የመሣሪያ አስተዳዳሪውን ያነጋግሩ።"</string>
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"በዚህ መሣሪያ ላይ ያሉ ሁሉም ተጠቃሚዎች ይህን አውታረ መረብ መድረስ ይችላሉ"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"ይህ አውታረ መረብ ምንም የበይነመረብ መዳረሻ የለውም። እንደተገናኘ ይቆይ?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"አንዳንድ መተግበሪያዎች እና አገልግሎቶች በተገደበ ግንኙነት ምክንያት ላይሠሩ አይችሉም። ለማንኛውም ይጠቀም?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"ለዚህ አውታረመረብ ዳግመኛ አትጠይቅ"</string>
@@ -1254,15 +1253,14 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"አውታረ መረብ ማስቀመጥ አልተሳካም"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"ይቅር"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"አውታረ መረብ ይረሳ?"</string>
-    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
-    <skip />
+    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> በዚህ መሣሪያ ላይ ላሉ ሁሉም ተጠቃሚዎች ይወገዳል"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 አውታረ መረብ}one{# አውታረ መረብ}other{# አውታረ መረቦች}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 የደንበኝነት ምዝገባ}one{# የደንበኝነት ምዝገባ}other{# የደንበኝነት ምዝገባዎች}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 አውታረ መረብ እና የደንበኝነት ምዝገባ}one{# አውታረ መረብ እና የደንበኝነት ምዝገባ}other{# አውታረ መረቦች እና የደንበኝነት ምዝገባዎች}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"ኤስኤስአይዲ"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"የመሣሪያ ማክ አድራሻ"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"የዘፈቀደ የተደረገ የማክ አድራሻ"</string>
-    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"የዘፈቀደ የተደረገ የMAC አድራሻ (ለመጨረሻ ጊዜ ጥቅም ላይ የዋለው)"</string>
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"የዘፈቀደ የተደረገ የማክ አድራሻ (ለመጨረሻ ጊዜ ጥቅም ላይ የዋለው)"</string>
     <string name="wifi_certificate_summary_Certificates" msgid="7849788154375655654">"<xliff:g id="NUMBER">%d</xliff:g> የእውቅና ማረጋገጫዎች"</string>
     <string name="wifi_certificate_summary_system" msgid="6521297326433133669">"የስርዓት የእውቅና ማረጋገጫ"</string>
     <string name="wifi_certificate_summary_pinning" msgid="5901067790901727957">"የእውቅና ማረጋገጫን መሰካት"</string>
@@ -1759,6 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"የMCC መስክ 3 አሀዝ መሆን አለበት።"</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"የMNC መስክ 2 ወይም 3 አሀዝ መሆን አለበት።"</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"የአገልግሎት አቅራቢ ዓይነታቸው %s የሆኑ ኤፒኤንዎችን ማከልን አይፈቅድም።"</string>
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"አገልግሎት አቅራቢው ይህን ኤፒኤን ማከል አይፈቅድም።"</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"የኤምኤምኤስሲ መስክ ትክክለኛ መሆን አለበት።"</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"ነባሪ የAPN ቅንብሮችን እነበረበት ይመልሱ"</string>
     <string name="menu_restore" msgid="4310539620115151551">"ወደ ነባሪ ዳግም አስጀምር"</string>
@@ -2244,36 +2243,21 @@
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"ታይታ የቁልፍ ሰሌዳ ለሥራ"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ነባሪ"</string>
     <string name="game_controller_settings_title" msgid="4322385924018377909">"የጨዋታ መቆጣጠሪያዎች"</string>
-    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
-    <skip />
-    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
-    <skip />
-    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
-    <skip />
+    <string name="game_controller_key_remapping" msgid="8150376475022555386">"ቁልፎች"</string>
+    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"ዘንጎች"</string>
+    <string name="game_controller_button_a" msgid="2138420373137111774">"A አዝራር"</string>
+    <string name="game_controller_button_b" msgid="2093089857164437480">"B አዝራር"</string>
+    <string name="game_controller_button_x" msgid="3428801081204194655">"X አዝራር"</string>
+    <string name="game_controller_button_y" msgid="4596061542299533516">"Y አዝራር"</string>
+    <string name="game_controller_button_l1" msgid="4428713182602902434">"L1 አዝራር"</string>
+    <string name="game_controller_button_r1" msgid="6271978600831912659">"R1 አዝራር"</string>
+    <string name="game_controller_button_l2" msgid="4168716287264803566">"L2 አዝራር"</string>
+    <string name="game_controller_button_r2" msgid="4361909018228151006">"R2 አዝራር"</string>
+    <string name="game_controller_button_thumbl" msgid="609311480262927654">"የግራ ዘንግ ጠቅታ"</string>
+    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"የቀኝ ዘንግ ጠቅታ"</string>
+    <string name="game_controller_dpad" msgid="5352745621298140827">"D-ሰሌዳ"</string>
+    <string name="game_controller_stick_left" msgid="1591700901162153956">"የግራ ዘንግ"</string>
+    <string name="game_controller_stick_right" msgid="1418791636252375110">"የቀኝ ዘንግ"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"የመዳሰሻ ሰሌዳ"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"የመዳሰሻ ሰሌዳ እና መዳፊት"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"መዳፊት"</string>
@@ -2652,6 +2636,12 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"የተዘረጋ ጠቆር ያለ ገጽታ"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"ጠቆር ያለ ገጽታን ለማይደግፋት አብዛኛዎቹ መተግበሪያዎች በራስ-ሰር ተግባራዊ ያደርጋል። ይህ ተደራሽነትን ሊያሻሸል ይችላል፣ ነገር ግን አንዳንድ መተግበሪያዎች በትክክል እንዳይታዩ ሊያደርግ ይችላል።"</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"መገልበጥን ማስገደድ፣ ተቃራኒ ቀለም፣ ንጽጽር"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"እነማዎችን ያስወግዱ"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"በማያ ገጹ ላይ ያለውን እንቅስቃሴ ቀንስ"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"የጽሑፍ ጠቋሚ ብልጭ ድርግም"</string>
@@ -3120,7 +3110,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"በሥርዓቶች ይመልከቱ"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"ከ<xliff:g id="PERCENTAGE">%1$s</xliff:g> ያነሰ"</string>
-    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"ከመላክ በፊት ባሉ የጥራት ፍተሻዎች ምክንያት በመጀመሪያው ጥቅም ላይ የዑደቱ ቁጠር ዜሮ ላይሆን ይችላል"</string>
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"ከመላክ በፊት ባሉ የፋብሪካ ፍተሻዎች ምክንያት መሣሪያዎን ከማዋቀርዎ በፊት ጥቅም ላይ እንደዋለ ሊያሳይ ይችላል እና የዑደት ቆጠራው ዜሮ ላይሆን ይችላል፣ ይህም የተለመደ ነው"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"የሂደት ስታትስቲክስ"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"እያሄዱ ስላሉ ሂደቶች ያሉ ዝርዝር ስታትስቲክስ"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"የማህደረ ትውስታ አጠቃቀም"</string>
@@ -3194,8 +3184,7 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"የባትሪ ዕድሜዎን ለማራዘም ምርጡን የአውታረ መረብ ግንኙነት በራስ-ሰር ይመርጣል"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"የተንቀሳቃሽ ስልክ አውታረ መረብ ደኅንነት"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"የአውታረ መረብ ዓይነት፣ ምስጠራ፣ የማሳወቂያ መቆጣጠሪያዎች"</string>
-    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="4190908521080878539">"እነዚህ ቅንብሮች የእርስዎን ጥሪዎች፣ መልዕክቶች እና ውሂብ እርስዎን ለውሂብ ስርቆት ወይም ክትትል ሊያጋልጡ ከሚችሉ ጊዜ ያለፈባቸው ወይም ካልተመሠጠሩ አውታረ መረቦች ለመጠበቅ ያግዛሉ።"</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"የተንቀሳቃሽ ስልክ አውታረ መረብ ደኅንነት"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"ማሳወቂያዎች"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"የአውታረ መረብ ማሳወቂያዎች"</string>
@@ -4614,18 +4603,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"ሁሉንም ፋይሎች ለማስተዳደር መዳረሻ ፍቀድ"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"ይህ መተግበሪያ በዚህ መሣሪያ ላይ ወይም በማናቸውም የተገናኙ የማከማቻ መጠኖች ላይ ሁሉንም ፋይሎች እንዲያነብ፣ እንዲያሻሽል እና እንዲሰርዝ ይፍቀዱ። ፈቃድ ከተሰጠ፣ መተግበሪያ ያለ የእርስዎ ግልፅ የሆነ ዕውቀት ፋይሎችን መድረስ ይችላል።"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"ሁሉንም ፋይሎች መድረስ ይችላል"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"የማያ ገጽ አውቶሜሽን"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"ይህ መተግበሪያ ሌሎች መተግበሪያዎችን ሙሉ በሙሉ በራስ-ሰር እንዲያከናውን ይፍቀዱ"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"ይህ መተግበሪያ መተግበሪያዎችዎን መቆጣጠር ይችላል። የማያ ገጽ አውቶሜሽን በመካሄድ ላይ እያለ ቁጥጥር እየተደረገባቸው ያሉ መተግበሪያዎች ጥቅም ላይ መዋል አይችሉም፣ ነገር ግን ሁልጊዜም ሊያቆሙት ይችላሉ።"</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"ሁልጊዜ ጠይቅ"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"ሁልጊዜ ተፈቅዶለታል"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"አትፍቀድ"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"የሙሉ መስኮት ማሳያ ማሳወቂያዎች"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ከዚህ መተግበሪያ የሙሉ መስኮት ማሳያ ማሳወቂያዎችን ይፍቀዱ"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"ይህ መተግበሪያ መሣሪያው በሚቆለፍበት ጊዜ ሙሉ ገጽ ዕይታውን የሚይዙ ማሳወቂያዎችን እንዲያሳይ ይፍቀዱለት። መተግበሪያዎች ማንቂያዎችን፣ ገቢ ጥሪዎችን ወይም ሌሎች አስቸኳይ ማሳወቂያዎችን ለማድመቅ እነዚህን ሊጠቀሙ ይችላሉ።"</string>
@@ -4934,9 +4917,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"የጀርባ ትብነት"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"የእጅ ምልክት ዳሰሳ"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"የእጅ ምልክት ዳሰሳ ቅንብሮች"</string>
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"የእጅ ምልክት ዳሰሳ ቅንብሮችን ክፈት"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"ቅንጭብ ማሳያን ይሞክሩ"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"የአዝራር ዳሰሳ"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"የአዝራር ዳሰሳ ቅንብሮች"</string>
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"የአዝራር ዳሰሳ ቅንብሮችን ክፈት"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"አዝራር ትዕዛዝ"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"የአዝራር ቅደም ተከተል፣ የእንቅስቃሴ አዝራሮችን፣ የግራ እጅ ሁነታ፣ የቀኝ እጅ ሁነታ"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"ተመለስ"</string>
@@ -6014,6 +5999,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>። የመሣሪያ ዝርዝር ያዋቅሩ።"</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"የወላጅ መቆጣጠሪያዎች"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"ዲጂታል መሠረታዊ ሕጎች እና የማያ ገፅ ጊዜ ገደቦች"</string>
+    <string name="supervision_intro_title" msgid="2686370837216266390">"ለዚህ መሣሪያ የወላጅ መቆጣጠሪያዎች ፒን ይፍጠሩ"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"በዚህ መሣሪያ ላይ የወላጅ መቆጣጠሪያዎች ቅንብሮችን እና መተግበሪያዎችን ለማስተዳደር ይህን ፒን ይጠቀማሉ።\n\nፒኑን ከAndroid ቅንብሮች &gt; የወላጅ መቆጣጠሪያዎች አርትዕ ማድረግ ወይም መሰረዝ ይችላሉ።"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"ፒን አዋቅር"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"የወላጅ መቆጣጠሪያዎች ፒን ያዋቅሩ"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"ክትትል፣ የወላጅ መቆጣጠሪያዎች፣ ወላጆች፣ የክትትል ፒን፣ ፒን"</string>
@@ -6021,12 +6008,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"የወላጅ መቆጣጠሪያዎች ፒን ያስተዳድሩ"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"የወላጅ መቆጣጠሪያዎች ፒን"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"የወላጅ ፒን፣ የወላጅ መቆጣጠሪያዎች ፒን"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"የመልሶ ማግኛ ኢሜይል ያክሉ"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"የመልሶ ማግኛ ኢሜይልን ያረጋግጡ"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"የመልሶ ማግኛ መረጃ ያክሉ"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"የመልሶ ማግኛ መረጃ ያረጋግጡ"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"ፒን ይቀይሩ"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"ፒን ረሳሁ"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"ፒን ረስተዋል?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"መልሶ ማግኛ ኢሜይልን ያዘምኑ"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"የመልሶ ማግኛ መረጃን ያዘምኑ"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"መልሶ ማግኛ ኢሜይል ታክሏል"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"መልሶ ማግኛ ኢሜይል ተረጋግጧል"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"መልሶ ማግኛ ኢሜይል ተዘምኗል"</string>
@@ -6038,12 +6025,15 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"የመልሶ ማግኛ መረጃ ያክሉ"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"ፒንዎን ከረሱ እሱን ዳግም ለማስጀመር መለያዎን መጠቀም ይችላሉ"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"ፒንን ሰርዝ"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"የመልሶ ማግኛ ኢሜይል ያክሉ"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"ኢሜይልዎን ያረጋግጡ"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"የመልሶ ማግኛ መረጃ ያክሉ"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"የመልሶ ማግኛ መረጃ ያረጋግጡ"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"የመተግበሪያ መደብር ማጣሪያዎች"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"በይዘታቸው ብስለት መሰረት መተግበሪያዎችን ያጣሩ"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"እያንዳንዱ መተግበሪያ የተለያዩ የይዘት ዓይነቶችን ሊያግድ ይችላል። ያልተዘረዘሩ የመተግበሪያ መደብሮች ለየብቻ መተዳደር አለባቸው።"</string>
-    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"የድር ጣቢያ ይዘት ማጣሪያዎች"</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
+    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"የድር የይዘት ማጣሪያዎች"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"የድር ጣቢያ ማጣሪያዎች፣ ጣቢያዎች አግድ፣ የአሳሽ ማጣሪያዎች፣ ግልፅ ጣቢያዎችን አግድ፣ ጣቢያዎችን አጣራ፣ የፍለጋ ውጤቶችን አግድ፣ ግልፅ የፍለጋ ውጤቶችን አጣራ፣ የይዘት ገደቦች"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"በዚህ ስልክ ላይ በአንዳንድ መተግበሪያዎች እና አሳሾች ላይ ግልፅ ይዘትን ለማጣራት ያግዙ። ግልፅ ይዘት አሁንም በሌሎች መተግበሪያዎች፣ መሣሪያዎች ወይም አሳሾች ላይ ሊታይ ይችላል።"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"ድር ጣቢያዎች"</string>
@@ -6051,8 +6041,7 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"የፍለጋ ውጤቶች"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"ግልፅ የፍለጋ ውጤቶችን ያጣሩ"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{በ# መተግበሪያ}one{በ# መተግበሪያ}other{በ# መተግበሪያዎች}}"</string>
-    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
-    <skip />
+    <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"እነዚህ ቅንብሮች ሲጠፉ፣ ሌሎች የመለያ ቅንብሮች አሁንም ሊተገበሩ ይችላሉ።"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"የወላጅ መቆጣጠሪያዎች ፒን ያስገቡ"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"የወላጅ መቆጣጠሪያዎች ፒን ያቀናብሩ"</string>
@@ -6063,7 +6052,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"ፒንን መሰረዝ አይቻልም"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"ፒን ሊሰረዝ አይችልም"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"ፒን መሰረዝ በመሞከር ላይ ሳለ ስሕተት ተከስቷል።"</string>
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"ለእኚህ ተጠቃሚ መቆጣጠሪያዎችን አጥፋ"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"ፒን ይሰረዝ እና መቆጣጠሪያዎች ይጥፉ?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"የእርስዎ የወላጅ መቆጣጠሪያዎች ፒን ይሰረዛል። ያዋቀሯቸው ማናቸውም መቆጣጠሪያዎች ይጠፋሉ።"</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"ሰርዝ እና አጥፋ"</string>
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"ፒን ሰርዝ እና መቆጣጠሪያዎችን አጥፋ"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"ሰርዝ"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"የወላጅ መቆጣጠሪያዎች ፒንዎ በሚከተለው ጥቅም ላይ እየዋለ ነው፦\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> እነማ"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"መቆጣጠሪያዎችን ማብራት አይቻልም"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"መቆጣጠሪያዎችን መጠቀም አይቻልም"</string>
@@ -6071,10 +6066,8 @@
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"ቆይተው እንደገና ይሞክሩ"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"ወደኋላ ተመለስ"</string>
     <string name="supervision_available_apps_title" msgid="886352413031517863">"የሚገኙ መተግበሪያዎች እና አገልግሎቶች"</string>
-    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
-    <skip />
-    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
-    <skip />
+    <string name="supervision_approval_method_chooser_title" msgid="7759309575598126099">"የማረጋገጫ መንገድ ይምረጡ"</string>
+    <string name="supervision_approval_method_chooser_description" msgid="7574494762555726167">"ወላጅ መሆንዎን ማረጋገጥ አለብዎት"</string>
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"የማንነት ማረጋገጫ ከተጨማሪ መተግበሪያዎች ጋር ይሠራል"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"የማንነት ማረጋገጫ ከመተግበሪያዎችዎ ላይ ያልተፈለገ መዳረሻን ይከላከላል። አሁን የጣት አሻራ ወይም በመልክ መክፈት ከሚጠቀም ማንኛውም መተግበሪያ ጋር ይገኛል።"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"ዝርዝሮችን አሳይ"</string>
@@ -6127,4 +6120,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"በርቷል"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"ይገኛል"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"አይገኝም"</string>
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"የሳተላይት ግንኙነት"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"የተንቀሳቃሽ ስልክ ወይም የWi-Fi አውታረ መረብ በማይኖርዎት ጊዜ እንደተገናኙ ይቆዩ"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"የሳተላይት ማረፊያ ገጽ"</string>
 </resources>

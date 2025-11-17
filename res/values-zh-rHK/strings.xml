@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"使用<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>。<xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g>將從 <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>開始。"</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"使用<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>。沒有夏令時間。"</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"夏令時間"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"標準時間"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"按地區選取"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"按 GMT 時差選取"</string>
@@ -976,8 +978,7 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」無法連線"</string>
     <string name="device_details_title" msgid="1155622417516195481">"裝置詳情"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"鍵盤設定"</string>
-    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
-    <skip />
+    <string name="bluetooth_device_game_controller_settings_preference_title" msgid="291778307796320923">"遊戲控制器設定"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"更多設定"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"韌體更新、資料及更多"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"貼士和支援"</string>
@@ -1208,15 +1209,12 @@
     <string name="retry" msgid="7542103800274026915">"重試"</string>
     <string name="shared_message" msgid="2104244057926025072">"共用"</string>
     <string name="private_message" msgid="5897966950396765392">"私人"</string>
-    <!-- no translation found for wifi_conflict_dialog_switch (5896926117413068886) -->
-    <skip />
+    <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"切換"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"取消"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"分享網絡"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"此裝置的其他使用者可存取此網絡"</string>
-    <!-- no translation found for wifi_conflict_dialog_title (2462232406209378294) -->
-    <skip />
-    <!-- no translation found for wifi_conflict_dialog_message (6900269406213437763) -->
-    <skip />
+    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"要切換至<xliff:g id="SHARED">%1$s</xliff:g>網絡嗎？"</string>
+    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"已有名為「<xliff:g id="NETWORK_NAME">%2$s</xliff:g>」的<xliff:g id="SHARED_0">%1$s</xliff:g>網絡。如果你切換至該<xliff:g id="SHARED_1">%1$s</xliff:g>網絡，就會離開<xliff:g id="PRIVATE">%3$s</xliff:g>網絡，並可能暫時無法連線至互聯網。"</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(未變更)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"允許使用者編輯網絡"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"其他使用者可對此網絡作出變更"</string>
@@ -1235,6 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*必填"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"這是共用網絡。你需要登入才能作出變更。"</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"如要作出變更，請聯絡網絡擁有者或裝置管理員。"</string>
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"此裝置的所有使用者皆可存取此網絡。"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"此網絡並未連接互聯網，你仍要保持連線嗎？"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"由於連線受限，部分應用程式和服務可能無法運作。仍要使用？"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"不要再問我是否使用此網絡"</string>
@@ -1254,8 +1253,7 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"無法儲存網絡"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"取消"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"要移除此網絡嗎？"</string>
-    <!-- no translation found for shared_wifi_forget_dialog_message (8239531688427507193) -->
-    <skip />
+    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"系統將為此裝置上所有使用者移除「<xliff:g id="NETWORK_NAME">%1$s</xliff:g>」"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 個網絡}other{# 個網絡}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 個訂閱}other{# 個訂閱}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 個網絡和訂閱}other{# 個網絡和訂閱}}"</string>
@@ -1759,6 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC 欄位必須為 3 位數。"</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC 欄位必須要有 2 或 3 位數。"</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"流動網絡供應商不允許新增 %s 類型的 APN。"</string>
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"流動網絡供應商不允許新增此 APN。"</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"請在 MMSC 欄位輸入有效的值。"</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"正在還原預設 APN 設定。"</string>
     <string name="menu_restore" msgid="4310539620115151551">"重設回預設值"</string>
@@ -2244,36 +2243,21 @@
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"工作用屏幕鍵盤"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"預設"</string>
     <string name="game_controller_settings_title" msgid="4322385924018377909">"遊戲控制器"</string>
-    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
-    <skip />
-    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
-    <skip />
-    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
-    <skip />
+    <string name="game_controller_key_remapping" msgid="8150376475022555386">"鍵"</string>
+    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"軸"</string>
+    <string name="game_controller_button_a" msgid="2138420373137111774">"A 鍵"</string>
+    <string name="game_controller_button_b" msgid="2093089857164437480">"B 鍵"</string>
+    <string name="game_controller_button_x" msgid="3428801081204194655">"X 鍵"</string>
+    <string name="game_controller_button_y" msgid="4596061542299533516">"Y 鍵"</string>
+    <string name="game_controller_button_l1" msgid="4428713182602902434">"L1 鍵"</string>
+    <string name="game_controller_button_r1" msgid="6271978600831912659">"R1 鍵"</string>
+    <string name="game_controller_button_l2" msgid="4168716287264803566">"L2 鍵"</string>
+    <string name="game_controller_button_r2" msgid="4361909018228151006">"R2 鍵"</string>
+    <string name="game_controller_button_thumbl" msgid="609311480262927654">"按一下左搖桿"</string>
+    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"按一下右搖桿"</string>
+    <string name="game_controller_dpad" msgid="5352745621298140827">"十字鍵"</string>
+    <string name="game_controller_stick_left" msgid="1591700901162153956">"左搖桿"</string>
+    <string name="game_controller_stick_right" msgid="1418791636252375110">"右搖桿"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"觸控板"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"觸控板及滑鼠"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"滑鼠"</string>
@@ -2652,6 +2636,12 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"擴展深色主題背景"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"自動在大部分未支援此功能的應用程式中套用深色主題背景，這有助提升無障礙和閱讀體驗，但可能會令部分應用程式無法正確顯示。"</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"強制反轉, 色彩反轉, 對比度"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"移除動畫"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"減少畫面上的動態效果"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"文字游標閃動"</string>
@@ -3120,7 +3110,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"按系統查看"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"少過 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"由於出貨前需要進行品質檢查，因此你首次使用時的週期數未必是零"</string>
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"由於出貨前需要進行原廠檢查，因此你可能看到裝置在設定前已使用，且週期數可能不是零。這是正常現象"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"程序統計資料"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"執行中程序的技術統計資料"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"記憶體用量"</string>
@@ -3194,8 +3184,7 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"自動選取最佳的網絡連線以延長電池壽命"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"流動網絡安全"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"網絡類型、加密、通知控制項"</string>
-    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="4190908521080878539">"這些設定可保護你的通話、訊息和資料，以免有人利用過時或未加密的網絡竊取或監視你的資料。"</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"流動網絡安全"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"通知"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"網絡通知"</string>
@@ -4614,18 +4603,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"允許存取以管理所有檔案"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"允許此應用程式讀取、修改和刪除此裝置或任何已連接儲存磁區上的所有檔案。如獲得權限，應用程式可能會在你不知情的情況下存取檔案。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可存取所有檔案"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"螢幕自動化操作"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"允許此應用程式完全自動化操作其他應用程式"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"此應用程式將可控制你的應用程式。螢幕自動化操作進行期間，你無法使用受控制的應用程式，但可隨時停止操作。"</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"每次都詢問"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"一律允許"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"不允許"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"全螢幕通知"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"允許此應用程式的全螢幕通知"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"允許此應用程式在裝置上鎖時顯示全螢幕通知。應用程式可能會利用這些通知突顯鬧鐘、來電或其他緊急通知。"</string>
@@ -4934,9 +4917,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"返回手勢的敏感度"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"手勢導覽"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"手勢導覽設定"</string>
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"開啟手勢導覽設定"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"試用示範"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"按鈕導覽"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"按鈕導覽設定"</string>
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"開啟按鈕導覽設定"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"按鈕次序"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"按鈕順序, 移動按鈕, 左手模式, 右手模式"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"返回"</string>
@@ -6014,6 +5999,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>。設定裝置詳細資料。"</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"家長監控設定"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"數碼基本規則和裝置使用時間限制"</string>
+    <string name="supervision_intro_title" msgid="2686370837216266390">"為此裝置建立家長監控 PIN"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"你將使用此 PIN 管理此裝置上的家長監控設定和應用程式。\n\n你可以在 Android「設定」&gt; [家長監控設定] 中編輯或刪除 PIN。"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"設定 PIN"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"設定家長監控 PIN"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"監管功能, 家長監控, 家長, 監管 PIN, PIN"</string>
@@ -6021,12 +6008,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"管理家長監控 PIN"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"家長監控 PIN"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"家長 PIN, 家長監控 PIN"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"新增備援電郵地址"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"驗證備援電郵地址"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"新增備援資料"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"驗證備援資料"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"變更 PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"忘記 PIN"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"忘記 PIN？"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"更新備援電郵地址"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"更新備援資料"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"已新增備援電郵地址"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"已驗證備援電郵地址"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"已更新備援電郵地址"</string>
@@ -6038,12 +6025,15 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"新增備援資料"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"如你忘記 PIN，可使用帳戶重設"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"刪除 PIN"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"新增備援電郵地址"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"驗證電郵地址"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"新增備援資料"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"驗證備援資料"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"應用程式商店篩選器"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"根據內容分級篩選應用程式"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"每款應用程式封鎖的內容類型可能不同。未列出的應用程式商店必須分開管理。"</string>
-    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"網站內容篩選器"</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
+    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"網絡內容篩選器"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"網站篩選器, 封鎖網站, 瀏覽器篩選器, 封鎖露骨色情網站, 篩選網站, 封鎖搜尋結果, 篩選鎖露骨色情搜尋結果, 內容限制"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"協助在此手機的部分應用程式和瀏覽器過濾露骨色情內容。其他應用程式、裝置或瀏覽器可能仍會顯示露骨色情內容。"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"網站"</string>
@@ -6051,8 +6041,7 @@
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"搜尋結果"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"過濾露骨色情的搜尋結果"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{已在 # 個應用程式開啟}other{已在 # 個應用程式開啟}}"</string>
-    <!-- no translation found for supervision_remaining_supported_apps_count (579669653237937862) -->
-    <skip />
+    <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"關閉這些設定後，其他帳戶設定可能仍然有效。"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"輸入家長監控設定 PIN"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"設定家長監控設定 PIN"</string>
@@ -6063,7 +6052,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"無法刪除 PIN"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN 不可刪除"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"嘗試刪除 PIN 時發生錯誤。"</string>
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"關閉此使用者的監控設定"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"要刪除 PIN 並關閉控制項嗎？"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"家長監控 PIN 將會刪除。你設定的任何監控設定將會關閉。"</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"刪除並關閉"</string>
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"刪除 PIN 並關閉控制項"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"刪除"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"以下使用者正在使用你的家長監控 PIN：\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>動畫"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"無法開啟控制項"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"無法使用控制項"</string>
@@ -6071,10 +6066,8 @@
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"請稍後再試"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"返回"</string>
     <string name="supervision_available_apps_title" msgid="886352413031517863">"可用的應用程式和服務"</string>
-    <!-- no translation found for supervision_approval_method_chooser_title (7759309575598126099) -->
-    <skip />
-    <!-- no translation found for supervision_approval_method_chooser_description (7574494762555726167) -->
-    <skip />
+    <string name="supervision_approval_method_chooser_title" msgid="7759309575598126099">"選取一個驗證方法"</string>
+    <string name="supervision_approval_method_chooser_description" msgid="7574494762555726167">"你必須驗證家長身分"</string>
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"「身分檢查」可配搭更多應用程式使用"</string>
     <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"「身分檢查」能防止他人未經授權存取你的應用程式。現適用於任何使用「指紋解鎖」或「面孔解鎖」的應用程式。"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"查看詳情"</string>
@@ -6127,4 +6120,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"已開啟"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"可供使用"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"無法使用"</string>
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"衛星連接"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"在沒有流動網絡或 Wi-Fi 網絡時保持連線"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"衛星到達網頁"</string>
 </resources>

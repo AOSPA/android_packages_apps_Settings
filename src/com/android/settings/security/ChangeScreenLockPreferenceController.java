@@ -16,6 +16,7 @@
 
 package com.android.settings.security;
 
+import android.app.admin.EnforcingAdmin;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -49,7 +50,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
     protected final int mUserId = UserHandle.myUserId();
     protected final int mProfileChallengeUserId;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private final ScreenLockPreferenceDetailsUtils mScreenLockPreferenceDetailUtils;
+    protected final ScreenLockPreferenceDetailsUtils mScreenLockPreferenceDetailUtils;
 
     protected RestrictedPreference mPreference;
 
@@ -92,11 +93,19 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
         }
 
         updateSummary(preference, mUserId);
-        disableIfPasswordQualityManaged(mUserId);
-        if (!mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId)) {
-            // PO may disallow to change password for the profile, but screen lock and managed
-            // profile's lock is the same. Disable main "Screen lock" menu.
-            disableIfPasswordQualityManaged(mProfileChallengeUserId);
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            // No need to check for managed profile or parent as this method handles it all.
+            EnforcingAdmin passwordQualityEnforcingAdmin =
+                    mScreenLockPreferenceDetailUtils.getPasswordQualityManagedEnforcingAdmin(
+                            mUserId);
+            mPreference.setDisabledByAdmin(passwordQualityEnforcingAdmin);
+        } else {
+            disableIfPasswordQualityManaged(mUserId);
+            if (!mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId)) {
+                // PO may disallow to change password for the profile, but screen lock and managed
+                // profile's lock is the same. Disable main "Screen lock" menu.
+                disableIfPasswordQualityManaged(mProfileChallengeUserId);
+            }
         }
     }
 

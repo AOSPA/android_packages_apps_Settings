@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo.simstatus
 
 import android.content.Context
+import android.telephony.CellInfo
 import android.telephony.CellSignalStrengthCdma
 import android.telephony.CellSignalStrengthGsm
 import android.telephony.CellSignalStrengthLte
@@ -140,6 +141,87 @@ class SignalStrengthRepositoryTest {
         val signalStrength = repository.signalStrengthDisplayFlow(SUB_ID).firstWithTimeoutOrNull()
 
         assertThat(signalStrength).isEqualTo("50 dBm 51 asu")
+    }
+
+    @Test
+    fun signalStrengthDisplayFlow_unavailableRsrp() = runBlocking {
+        // Verifies behavior when the RSRP level is unavailable, as mentioned in the changelist.
+        serviceState.state = ServiceState.STATE_IN_SERVICE
+        signalStrength = SignalStrength(
+            CellSignalStrengthCdma(),
+            CellSignalStrengthGsm(),
+            CellSignalStrengthWcdma(),
+            CellSignalStrengthTdscdma(),
+            mock<CellSignalStrengthLte> {
+                on { isValid } doReturn true
+                on { dbm } doReturn CellInfo.UNAVAILABLE
+                on { asuLevel } doReturn 99
+            },
+            CellSignalStrengthNr(),
+        )
+
+        val signalStrength = repository.signalStrengthDisplayFlow(SUB_ID).firstWithTimeoutOrNull()
+
+        // Expect the fallback string when signal strength is unavailable.
+        assertThat(signalStrength).isEqualTo("0 dBm 99 asu")
+    }
+
+    @Test
+    fun signalStrengthDisplayFlow_firstSignalUnavailable() = runBlocking {
+        // Verifies that the first available signal is chosen when preceding signals are unavailable.
+        serviceState.state = ServiceState.STATE_IN_SERVICE
+        signalStrength = SignalStrength(
+            CellSignalStrengthCdma(),
+            CellSignalStrengthGsm(),
+            mock<CellSignalStrengthWcdma> {
+                on { isValid } doReturn true
+                on { dbm } doReturn 40
+                on { asuLevel } doReturn 41
+            },
+            CellSignalStrengthTdscdma(),
+            mock<CellSignalStrengthLte> {
+                on { isValid } doReturn true
+                on { dbm } doReturn -1 // Unavailable dbm
+                on { asuLevel } doReturn 51
+            },
+            CellSignalStrengthNr(),
+        )
+
+        val signalStrength = repository.signalStrengthDisplayFlow(SUB_ID).firstWithTimeoutOrNull()
+
+        // Expect the values from the first available signal (WCDMA), as LTE is unavailable.
+        assertThat(signalStrength).isEqualTo("40 dBm 41 asu")
+    }
+
+    @Test
+    fun signalStrengthDisplayFlow_allSignalsUnavailable() = runBlocking {
+        // Verifies behavior when all provided cell signal strengths are unavailable.
+        serviceState.state = ServiceState.STATE_IN_SERVICE
+        signalStrength = SignalStrength(
+            mock<CellSignalStrengthCdma> {
+                on { isValid } doReturn true
+                on { dbm } doReturn -1
+                on { asuLevel } doReturn -1
+            },
+            mock<CellSignalStrengthGsm> {
+                on { isValid } doReturn true
+                on { dbm } doReturn CellInfo.UNAVAILABLE
+                on { asuLevel } doReturn 0
+            },
+            mock<CellSignalStrengthWcdma> {
+                on { isValid } doReturn true
+                on { dbm } doReturn 40
+                on { asuLevel } doReturn 99 // Unavailable asuLevel
+            },
+            CellSignalStrengthTdscdma(),
+            CellSignalStrengthLte(),
+            CellSignalStrengthNr(),
+        )
+
+        val signalStrength = repository.signalStrengthDisplayFlow(SUB_ID).firstWithTimeoutOrNull()
+
+        // Expect the fallback string when all signals are unavailable.
+        assertThat(signalStrength).isEqualTo("0 dBm 99 asu")
     }
 
     private companion object {

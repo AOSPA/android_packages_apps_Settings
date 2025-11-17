@@ -18,11 +18,17 @@ package com.android.settings.supervision
 import android.Manifest
 import android.app.admin.DevicePolicyManager
 import android.app.settings.SettingsEnums
+import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.EXTRA_SUPERVISION_RECOVERY_INFO
+import android.app.supervision.flags.Flags
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.pm.ResolveInfo
 import android.os.Bundle
+import android.os.ServiceManager
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
@@ -92,22 +98,94 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
     }
 
     private fun startVerification() {
-        val recoveryIntent =
-            SupervisionIntentProvider.getPinRecoveryIntent(
-                this,
-                SupervisionIntentProvider.PinRecoveryAction.VERIFY,
-            )
-        if (recoveryIntent != null) {
+        if (Flags.enableSupervisionSettingsUiUpdates()) {
             val supervisionManager = getSystemService(SupervisionManager::class.java)
             val recoveryInfo = supervisionManager?.getSupervisionRecoveryInfo()
 
-            recoveryIntent.apply {
-                // Pass along any available recovery information.
-                putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, recoveryInfo)
-                verificationLauncher.launch(this)
+            // If there is a recovery email set, default to the existing email recovery flow.
+            if (recoveryInfo != null) {
+                val verifiedEmailRecoveryIntent =
+                    SupervisionIntentProvider.getPinRecoveryIntent(
+                        this,
+                        SupervisionIntentProvider.PinRecoveryAction.VERIFY,
+                    )
+                if (verifiedEmailRecoveryIntent != null) {
+                    verifiedEmailRecoveryIntent.apply {
+                        putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, recoveryInfo)
+                        verificationLauncher.launch(this)
+                    }
+                    return
+                }
+            }
+
+            // Get other approval methods
+            val binder = ServiceManager.getService(Context.SUPERVISION_SERVICE)
+            val iSupervisionManager = ISupervisionManager.Stub.asInterface(binder)
+            val approvalMethods =
+                iSupervisionManager.querySupervisionApprovalActivities(getUserId())
+
+            when (approvalMethods.size) {
+                0 -> {
+                    handleError("No supervision recovery methods available.")
+                }
+                1 -> {
+                    // If there's only one supervision authentication method, go directly to that
+                    // method.
+                    val resolveInfo = approvalMethods[0]
+                    val activityInfo = resolveInfo.activityInfo
+                    val intent =
+                        Intent(SupervisionManager.ACTION_CONFIRM_SUPERVISION_APPROVAL).apply {
+                            component = ComponentName(activityInfo.packageName, activityInfo.name)
+                            putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, recoveryInfo)
+                        }
+                    verificationLauncher.launch(intent)
+                }
+                else -> {
+                    // If there are multiple available supervision methods, show a picker UI.
+                    showApprovalMethodChooser(approvalMethods)
+                }
             }
         } else {
-            handleError("No activity found for VERIFY PIN recovery.")
+            // Original logic when flag is off
+            val emailRecoveryIntent =
+                SupervisionIntentProvider.getPinRecoveryIntent(
+                    this,
+                    SupervisionIntentProvider.PinRecoveryAction.VERIFY,
+                )
+            if (emailRecoveryIntent != null) {
+                val supervisionManager = getSystemService(SupervisionManager::class.java)
+                val recoveryInfo = supervisionManager?.getSupervisionRecoveryInfo()
+
+                emailRecoveryIntent.apply {
+                    putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, recoveryInfo)
+                    verificationLauncher.launch(this)
+                }
+            } else {
+                handleError("No supervision recovery methods available.")
+            }
+        }
+    }
+
+    private fun showApprovalMethodChooser(approvalMethods: List<ResolveInfo>) {
+        registerApprovalMethodChooserResultListener()
+        val chooserFragment =
+            ApprovalMethodChooserDialogFragment.newInstance(approvalMethods, Bundle())
+        chooserFragment.show(supportFragmentManager, "ApprovalMethodChooser")
+    }
+
+    private fun registerApprovalMethodChooserResultListener() {
+        supportFragmentManager.setFragmentResultListener(
+            ApprovalMethodChooserDialogFragment.REQUEST_KEY_APPROVAL_RESULT,
+            this,
+        ) { requestKey, bundle ->
+            if (requestKey == ApprovalMethodChooserDialogFragment.REQUEST_KEY_APPROVAL_RESULT) {
+                val resultCode =
+                    bundle.getInt(
+                        ApprovalMethodChooserDialogFragment.BUNDLE_KEY_RESULT_CODE,
+                        RESULT_CANCELED,
+                    )
+                onVerification(resultCode, null)
+            }
         }
     }
 

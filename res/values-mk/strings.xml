@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Користи <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> почнува на <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Користи <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Без летно сметање на времето."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Летно сметање на времето"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Стандардно време"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Изберете според регион"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Изберете по присп. според GMT"</string>
@@ -976,8 +978,7 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> не можеше да се поврзе"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Детали за уредот"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Поставки за тастатурата"</string>
-    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
-    <skip />
+    <string name="bluetooth_device_game_controller_settings_preference_title" msgid="291778307796320923">"Поставки за контролер за игри"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Повеќе поставки"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Ажурирања за фирмверот, информации и друго"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Совети и поддршка"</string>
@@ -1232,6 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"*задолжително"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Ова е споделена мрежа. Треба да се најавите за да вршите промени."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Контактирајте со сопственикот на мрежата или администраторот на уредот за да извршите промени."</string>
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Сите корисници на уредов може да пристапуваат до мрежава."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Мрежава нема пристап на интернет. Сакате да останете поврзани?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Некои апликации и услуги можеби нема да работат поради ограничена поврзливост. Сепак да се користи?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Не прашувај повторно во оваа мрежа"</string>
@@ -1755,6 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"Полето MNC мора да биде 3 цифри."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"Полето MNC мора да биде 2 или 3 бројни места."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Операторот не дозволува додавање APN од типот %s."</string>
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"Операторот не дозволува да се додаде ова APN."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"Полето за MMSC мора да биде важечко."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Враќање стандардни поставки за APN."</string>
     <string name="menu_restore" msgid="4310539620115151551">"Ресетирај на стандардни вредности"</string>
@@ -2240,36 +2243,21 @@
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Тастатура на екран за работа"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Стандарден"</string>
     <string name="game_controller_settings_title" msgid="4322385924018377909">"Контролери за игри"</string>
-    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
-    <skip />
-    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
-    <skip />
-    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
-    <skip />
+    <string name="game_controller_key_remapping" msgid="8150376475022555386">"Копчиња"</string>
+    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"Оски"</string>
+    <string name="game_controller_button_a" msgid="2138420373137111774">"Копче A"</string>
+    <string name="game_controller_button_b" msgid="2093089857164437480">"Копче B"</string>
+    <string name="game_controller_button_x" msgid="3428801081204194655">"Копче X"</string>
+    <string name="game_controller_button_y" msgid="4596061542299533516">"Копче Y"</string>
+    <string name="game_controller_button_l1" msgid="4428713182602902434">"Копче L1"</string>
+    <string name="game_controller_button_r1" msgid="6271978600831912659">"Копче R1"</string>
+    <string name="game_controller_button_l2" msgid="4168716287264803566">"Копче L2"</string>
+    <string name="game_controller_button_r2" msgid="4361909018228151006">"Копче R2"</string>
+    <string name="game_controller_button_thumbl" msgid="609311480262927654">"Кликнување на левата палка"</string>
+    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"Кликнување на десната палка"</string>
+    <string name="game_controller_dpad" msgid="5352745621298140827">"Навигациски копчиња"</string>
+    <string name="game_controller_stick_left" msgid="1591700901162153956">"Лева палка"</string>
+    <string name="game_controller_stick_right" msgid="1418791636252375110">"Десна палка"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Допирна подлога"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Подлога за допир и глувче"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Глувче"</string>
@@ -2648,6 +2636,12 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Проширена „Темна тема“"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Автоматски ја применува темната тема на повеќето апликации што не ја поддржуваат. Ова може да ја подобри пристапноста и читливоста, но може да предизвика одредени апликации да се прикажуваат неправилно."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"присилна инверзија, инверзија на боите, контраст"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Отстрани анимации"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Го намалува движењето на екранот"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Трепкање на курсорот за текст"</string>
@@ -3116,7 +3110,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Прикажи по системи"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"помалку од <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Поради контроли на квалитетот пред испораката, бројот на циклуси при првото користење може да не биде нула"</string>
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Поради фабричките контроли пред испораката, нормално е да се прикаже дека уредот бил користен пред да го поставите и бројот на циклуси да не биде нула"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика на процес"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Паметна статистика за процеси кои се извршуваат"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Употреба на меморија"</string>
@@ -3190,8 +3184,7 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Автоматски ја избира најдобрата мрежна врска за да го продолжи траењето на батеријата"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Безбедност на мобилната мрежа"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Тип мрежа, шифрирање, контроли за известувања"</string>
-    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="4190908521080878539">"Овие поставки помагаат да се заштитат вашите повици, пораки и податоци од застарени или нешифрирани мрежи што може да ве изложат на ризик од кражба на податоците или надзор."</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Безбедност на мобилната мрежа"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Известувања"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Известувања за мрежата"</string>
@@ -4042,7 +4035,7 @@
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Скриј чувствителни работни содржини"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Кога уредот е заклучен, како сакате да се прикажуваат известувањата на профилот?"</string>
     <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"Прикажи на заклучениот екран"</string>
-    <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Што да се прикажува на заклучен екран"</string>
+    <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Што да се прикажува на заклучениот екран"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Прикажувај прегледани известувања"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Прикажувај икони за прегледани известувања"</string>
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"Прикажувај безгласни известувања"</string>
@@ -4610,18 +4603,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Дозволи пристап за управување со сите датотеки"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Дозволете ѝ на апликацијава да ги чита, менува и брише сите датотеки на уредов или на поврзаните мемориски уреди. Ако ѝ дозволите, апликацијата може да пристапува до датотеките без ваше изречно знаење."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Може да пристапува до сите датотеки"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Автоматизација на екранот"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Дозволете ѝ на апликацијава целосно да автоматизира други апликации"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Апликацијава ќе може да ги контролира вашите апликации. Апликациите што се контролираат не може да се користат додека трае автоматизацијата на екранот, но секогаш може да ја сопрете."</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Прашувај секогаш"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Секогаш дозволено"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Не дозволувај"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Известувања на цел екран"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Дозволи известувања на цел екран од апликацијава"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Дозволете апликацијава да прикажува известувања што го заземаат целиот екран кога уредот е заклучен. Апликациите може да ги користат овие известувања за да ги истакнуваат алармите, дојдовните повици или други итни известувања."</string>
@@ -4930,9 +4917,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Чувствителност на задната страна"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Навигација со движења"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"Поставки за навигација со движења"</string>
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"отвори ги поставките за навигација со движења"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Испробајте демо"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Навигација со копчиња"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Поставки за навигација со копчиња"</string>
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"отвори ги поставките за навигација со копчиња"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Редослед на копчињата"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Редослед на копчиња, преместување копчиња, режим за лева рака, режим за десна рака"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Назад"</string>
@@ -6010,6 +5999,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Конфигурирајте ги деталите за уредот."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Родителски контроли"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Дигитални правила и ограничувања на времето поминато на уредот"</string>
+    <string name="supervision_intro_title" msgid="2686370837216266390">"Создајте PIN за родителски контроли за уредов"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"Ќе го користите овој PIN за да управувате со поставките за родителски контроли и апликациите на уредов.\n\nМоже да го измените или да го избришете PIN-кодот од „Поставки за Android &gt; Родителски контроли“."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Поставете PIN-код"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Поставете PIN за родителски контроли"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"надзор, родителски контроли, родители, игличка за надзор, игличка"</string>
@@ -6017,12 +6008,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"Управување со PIN-кодот за родителски контроли"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN за родителски контроли"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN на родител, PIN на родителски контроли"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Додајте е-пошта за враќање"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Потврдете ја е-поштата за враќање"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"Додајте податоци за враќање"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"Потврдете ги податоците за враќање"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Променете го PIN-кодот"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Го заборавив PIN-кодот"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Го заборавивте PIN-кодот?"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Ажурирајте ја е-поштата за враќање"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"Ажурирајте ги податоците за враќање"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Додадена е е-пошта за враќање"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Е-поштата за враќање е потврдена"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Е-поштата за враќање е ажурирана"</string>
@@ -6034,12 +6025,15 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Додајте податоци за враќање"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Ако го заборавите PIN-кодот, може да ја користите сметката за да го ресетирате"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Избришете го PIN-кодот"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Додајте е-пошта за враќање"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Потврдете ја е-поштата"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Додајте податоци за враќање"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Потврдете ги податоците за враќање"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Филтри за продавница за апликации"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Филтрирајте ги апликациите според категоризацијата на содржините"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Секоја апликација може да блокира различни видови содржини. Со продавниците за апликации што не се наведени мора да се управува одделно."</string>
-    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Филтри за содржини на веб-сајтови"</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
+    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Филтри за веб-содржини"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Филтри на веб-сајтови, блокирање сајтови, филтри на прелистувачи, блокирање експлицитни сајтови, филтрирање сајтови, блокирање резултати од пребарување, филтрирање експлицитни резултати од пребарување, ограничувања за содржини"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Помогнете да се филтрираат експлицитни содржини на некои апликации и прелистувачи на телефонов. Експлицитните содржини сѐ уште може да се прикажуваат на други апликации, уреди или прелистувачи."</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Веб-сајтови"</string>
@@ -6058,7 +6052,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Не може да се избрише PIN-кодот"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN-кодот не може да се избрише"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Се јави грешка при бришењето на PIN-кодот."</string>
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"Исклучете ги контролите за корисников"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"Да се избрише PIN-кодот и да се исклучат контролите?"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"Вашиот PIN-код за родителските контроли ќе се избрише. Сите контроли што ќе ги поставите ќе се исклучат."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Избриши и исклучи"</string>
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Избриши го PIN-кодот и исклучи ги контролите"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"Избриши"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Вашиот PIN за родителски контроли го користат:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Анимација на <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Не може да се вклучат контролите"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Не може да се користат контролите"</string>
@@ -6120,4 +6120,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"Вклучено"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Достапно"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Не е достапно"</string>
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"Сателитска врска"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Останете поврзани кога немате мобилна или Wi-Fi мрежа"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"Целна страница на сателитот"</string>
 </resources>

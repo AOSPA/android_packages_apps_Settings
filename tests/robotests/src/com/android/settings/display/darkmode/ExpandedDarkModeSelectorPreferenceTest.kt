@@ -17,9 +17,14 @@
 package com.android.settings.display.darkmode
 
 import android.content.Context
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
+import android.view.accessibility.AccessibilityNodeInfo
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.android.settings.accessibility.Flags
 import com.android.settings.testutils.SettingsStoreRule
+import com.android.settings.testutils.inflateViewHolder
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.SelectorWithWidgetPreference
@@ -33,6 +38,7 @@ import org.robolectric.RobolectricTestParameterInjector
 @RunWith(RobolectricTestParameterInjector::class)
 class ExpandedDarkModeSelectorPreferenceTest {
     @get:Rule val settingsStoreRule = SettingsStoreRule()
+    @get:Rule val setFlagsRule = SetFlagsRule()
     private val context = ApplicationProvider.getApplicationContext<Context>()
     private val preference = ExpandedDarkModeSelectorPreference(DarkThemeModeStorage(context))
 
@@ -91,6 +97,31 @@ class ExpandedDarkModeSelectorPreferenceTest {
         assertThat(darkThemeModeStorage.getBoolean(preference.key)).isEqualTo(true)
         assertThat(darkThemeModeStorage.settingsStore.getBoolean(DarkThemeModeStorage.KEY))
             .isEqualTo(true)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_EDT_APP_EXCEPTIONS)
+    fun expandedDarkThemeExtraWidget_hasCustomContentDescriptionAndClickActionAndHint() {
+        val widget: SelectorWithWidgetPreference = preference.createAndBindWidget(context)
+        widget.inflateViewHolder()
+        val gearWidget = widget.extraWidget
+        val info = gearWidget!!.createAccessibilityNodeInfo()
+
+        assertThat(info.getActionList())
+            .contains(
+                AccessibilityNodeInfo.AccessibilityAction(
+                    AccessibilityNodeInfo.ACTION_CLICK,
+                    context.getString(
+                        R.string.accessibility_expanded_dark_theme_exceptions_gear_hint
+                    ),
+                )
+            )
+        assertThat(gearWidget.contentDescription)
+            .isEqualTo(
+                context.getString(
+                    R.string.accessibility_expanded_dark_theme_exceptions_gear_content_description
+                )
+            )
     }
 
     private fun getStorage(): KeyValueStore = preference.storage(context)

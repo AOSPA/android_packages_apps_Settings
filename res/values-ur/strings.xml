@@ -343,8 +343,10 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> استعمال کرتا ہے۔ <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> کو شروع ہوتا ہے۔"</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> کا استعمال کرتا ہے۔ ڈے لائٹ سیونگز کا وقت نہیں ہے۔"</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"ڈے لائٹ سیونگز کا وقت"</string>
+    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
+    <skip />
+    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
+    <skip />
     <string name="zone_time_type_standard" msgid="6865420715430680352">"معیاری وقت"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"علاقہ کے لحاظ سے منتخب کریں"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"‏بذریعہ GMT آفسیٹ منتخب کریں"</string>
@@ -976,8 +978,7 @@
     <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"‫<xliff:g id="DEVICE_NAME">%1$s</xliff:g> منسلک ہونے میں ناکام"</string>
     <string name="device_details_title" msgid="1155622417516195481">"آلہ کی تفصیلات"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"کی بورڈ کی ترتیبات"</string>
-    <!-- no translation found for bluetooth_device_game_controller_settings_preference_title (291778307796320923) -->
-    <skip />
+    <string name="bluetooth_device_game_controller_settings_preference_title" msgid="291778307796320923">"گیم کنٹرولر کی ترتیبات"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"مزید ترتیبات"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"فرم ویئر اپ ڈیٹس، تعارف اور مزید بہت کچھ"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"تجاویز اور سپورٹ"</string>
@@ -1213,7 +1214,7 @@
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"نیٹ ورک کا اشتراک کریں"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"اس آلہ پر موجود دیگر صارفین اس نیٹ ورک تک رسائی حاصل کر سکتے ہیں"</string>
     <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"‫<xliff:g id="SHARED">%1$s</xliff:g> نیٹ ورک پر سوئچ کریں؟"</string>
-    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"‫\"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" نام والا <xliff:g id="SHARED_0">%1$s</xliff:g> نیٹ ورک پہلے سے موجود ہے۔ اگر آپ <xliff:g id="SHARED_1">%1$s</xliff:g> نیٹ ورک پر سوئچ کرتے ہیں تو آپ اپنا <xliff:g id="PRIVATE">%3$s</xliff:g> نیٹ ورک چھوڑ دیں گے اور ہو سکتا ہے کہ آپ کے پاس عارضی طور پر انٹرنیٹ نہ ہو سکتا۔"</string>
+    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"‫\"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" نام والا <xliff:g id="SHARED_0">%1$s</xliff:g> نیٹ ورک پہلے سے موجود ہے۔ اگر آپ <xliff:g id="SHARED_1">%1$s</xliff:g> نیٹ ورک پر سوئچ کرتے ہیں تو آپ اپنا <xliff:g id="PRIVATE">%3$s</xliff:g> نیٹ ورک چھوڑ دیں گے اور ہو سکتا ہے کہ آپ کے پاس عارضی طور پر انٹرنیٹ نہ ہو۔"</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(غیر تبدیل شدہ)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"صارفین کو نیٹ ورک میں ترمیم کرنے کی اجازت دیں"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"دیگر صارفین اس نیٹ ورک میں تبدیلیاں کر سکتے ہیں"</string>
@@ -1232,6 +1233,7 @@
     <string name="wifi_field_required" msgid="6312381745503042588">"‫*درکار ہے"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"یہ ایک مشترکہ نیٹ ورک ہے۔ تبدیلیاں کرنے کے لیے آپ کو سائن ان کرنا ہوگا۔"</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"تبدیلیاں کرنے کے لیے نیٹ ورک کے مالک یا آلہ کے منتظم سے رابطہ کریں۔"</string>
+    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"اس آلے پر موجود تمام صارفین اس نیٹ ورک تک رسائی حاصل کر سکتے ہیں۔"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"اس نیٹ ورک کو انٹرنیٹ تک رسائی نہیں ہے۔ منسلک رہیں؟"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"ہو سکتا ہے محدود کنیکٹوٹی کی وجہ سے کچھ ایپس اور سروسز کام نہ کریں۔ بہر حال استعمال کریں؟"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"اس نیٹ ورک کیلئے دوبارہ نہ پوچھیں"</string>
@@ -1755,6 +1757,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"‏MCC فیلڈ میں لازمی طور پر 3 ہندسے ہونے چاہئیں۔"</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"‏MNC فیلڈ میں لازمی طور پر 2 یا 3 ہندسے ہونے چاہئیں۔"</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"‏کیریئر APNs کی قسم ‎%s‎ کو شامل کرنے کی اجازت نہیں دیتا ہے۔"</string>
+    <string name="error_disallow_adding_apn" msgid="4053023049932971602">"‏کیریئر اس APN کو شامل کرنے کی اجازت نہیں دیتا ہے۔"</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"‏MMSC فیلڈ کا درست ہونا ضروری ہے۔"</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"‏ڈیفالٹ APN ترتیبات بحال ہو رہی ہیں۔"</string>
     <string name="menu_restore" msgid="4310539620115151551">"ڈیفالٹ پر دوبارہ ترتیب دیں"</string>
@@ -2240,36 +2243,21 @@
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"کام کے ليے آن اسکرین کی بورڈ"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ڈیفالٹ"</string>
     <string name="game_controller_settings_title" msgid="4322385924018377909">"گیم کنٹرولرز"</string>
-    <!-- no translation found for game_controller_key_remapping (8150376475022555386) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_remapping (3892105088002351215) -->
-    <skip />
-    <!-- no translation found for game_controller_button_a (2138420373137111774) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (2093089857164437480) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (3428801081204194655) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (4596061542299533516) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (4428713182602902434) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (6271978600831912659) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (4168716287264803566) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (4361909018228151006) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (609311480262927654) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (6734424131770099471) -->
-    <skip />
-    <!-- no translation found for game_controller_dpad (5352745621298140827) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_left (1591700901162153956) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1418791636252375110) -->
-    <skip />
+    <string name="game_controller_key_remapping" msgid="8150376475022555386">"کلیدیں"</string>
+    <string name="game_controller_stick_remapping" msgid="3892105088002351215">"محور"</string>
+    <string name="game_controller_button_a" msgid="2138420373137111774">"‏‫A بٹن"</string>
+    <string name="game_controller_button_b" msgid="2093089857164437480">"‏‫B بٹن"</string>
+    <string name="game_controller_button_x" msgid="3428801081204194655">"‏‫X بٹن"</string>
+    <string name="game_controller_button_y" msgid="4596061542299533516">"‏‫Y بٹن"</string>
+    <string name="game_controller_button_l1" msgid="4428713182602902434">"‏‫L1 بٹن"</string>
+    <string name="game_controller_button_r1" msgid="6271978600831912659">"‏‫R1 بٹن"</string>
+    <string name="game_controller_button_l2" msgid="4168716287264803566">"‏‫L2 بٹن"</string>
+    <string name="game_controller_button_r2" msgid="4361909018228151006">"‏‫R2 بٹن"</string>
+    <string name="game_controller_button_thumbl" msgid="609311480262927654">"بائیں اسٹک پر کلک کریں"</string>
+    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"دائیں اسٹک پر کلک کریں"</string>
+    <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
+    <string name="game_controller_stick_left" msgid="1591700901162153956">"بائیں اسٹک"</string>
+    <string name="game_controller_stick_right" msgid="1418791636252375110">"دائیں اسٹک"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"ٹچ پیڈ"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"ٹچ پیڈ اور ماؤس"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"ماؤس"</string>
@@ -2648,6 +2636,12 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"پھیلائی ہوئی گہری تھیم"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"خودکار طور پر گہری تھیم ان زیادہ تر ایپس پر لاگو کرتا ہے جو اسے سپورٹ نہیں کرتیں۔ یہ ایکسیسبیلٹی اور پڑھنے میں آسانی کو بہتر بنا سکتا ہے، لیکن کچھ ایپس کو غلط طور پر دکھانے کا باعث بھی بن سکتا ہے۔"</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"فورس انوَرٹ، رنگوں کی تقلیب، کنٹراسٹ"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"اینیمیشنز ہٹائیں"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"اسکرین پر حرکت کو کم کریں"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"ٹیکسٹ کرسر بلنکنگ"</string>
@@ -3116,7 +3110,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"سسٹمز کے لحاظ سے دیکھیں"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> سے کم"</string>
-    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"شپنگ سے پہلے معیار کے معائنوں کی وجہ سے، سائیکل کی تعداد پہلے استعمال پر صفر نہیں ہوسکتی ہے"</string>
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"شپنگ سے پہلے فیکٹری کے معائنوں کی وجہ سے، یہ ظاہر ہو سکتا ہے کہ آپ کے آلے کو آپ کے سیٹ اپ کرنے سے پہلے استعمال کیا گیا تھا اور سائیکل کی تعداد صفر نہیں ہو سکتی ہے، جو کہ معمول کی بات ہے"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"پروسیس اعداد و شمار"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"جاری پروسیسز کے بارے میں مفید اعداد و شمار"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"میموری کا استعمال"</string>
@@ -3190,8 +3184,7 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"آپ کی بیٹری لائف کو بڑھانے کے لیے خودکار طور پر بہترین نیٹ ورک کنکشن کا انتخاب کرتا ہے"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"موبائل نیٹ ورک سیکیورٹی"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"نیٹ ورک کی قسم، مرموز کاری، نوٹیفکیشن کنٹرولز"</string>
-    <!-- no translation found for cellular_security_top_intro (4190908521080878539) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="4190908521080878539">"یہ ترتیبات آپ کی کالز، پیغامات اور ڈیٹا کو پرانے یا غیر مرموز کردہ نیٹ ورکس سے بچانے میں مدد کرتی ہیں جن سے آپ کو ڈیٹا کی چوری یا نگرانی کا سامنا کرنا پڑ سکتا ہے"</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"موبائل نیٹ ورک سیکیورٹی"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"اطلاعات"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"نیٹ ورک کی اطلاعات"</string>
@@ -4610,18 +4603,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"سبھی فائلز کا نظم کرنے کیلئے رسائی کی اجازت دیں"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"اس ایپ کو اس آلہ یا کسی منسلک اسٹوریج والیوم کی تمام فائلز کو پڑھنے، اس میں ترمیم کرنے اور حذف کرنے کی اجازت دیں۔ اگر اجازت دی گئی تو ایپ آپ کو بتائے بغیر فائلز تک رسائی حاصل کر سکتی ہے۔"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"سبھی فائلز تک رسائی حاصل کی جا سکتی ہے"</string>
-    <!-- no translation found for computer_control_automation_page_title (8338485752259445405) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_switch_title (8090259186522366153) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_description (7038289408109438761) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_ask_every_time (2636885901417245388) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_always_allowed (6006569348772247645) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (5870733328332108204) -->
-    <skip />
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"اسکرین آٹومیشن"</string>
+    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"اس ایپ کو دیگر ایپس کو مکمل طور پر خودکار کرنے کی اجازت دیں"</string>
+    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"یہ ایپ آپ کی ایپس کو کنٹرول کر سکے گی۔ اسکرین آٹومیشن جاری ہونے کے دوران کنٹرول کی جانے والی ایپس کو استعمال نہیں کیا جا سکتا، لیکن آپ اسے کسی بھی وقت روک سکتے ہیں۔"</string>
+    <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"ہر بار پوچھیں"</string>
+    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"ہمیشہ اجازت یافتہ"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"اجازت نہ دیں"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"پوری اسکرین کی اطلاعات"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"اس ایپ سے پوری اسکرین کی اطلاعات کی اجازت دیں"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"اس ایپ کو وہ اطلاعات دکھانے کی اجازت دیں جو آلے کے مقفل ہونے پر پوری اسکرین پر ظاہر ہوتی ہیں۔ ایپس ان کا استعمال الارمز، اِن کمنگ کالز یا دیگر فوری اطلاعات کو نمایاں کرنے کے لیے کر سکتی ہیں۔"</string>
@@ -4930,9 +4917,11 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"پیچھے کی حساسیت"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"اشاروں والی نیویگیشن"</string>
     <string name="gesture_settings_button_description" msgid="7916105652019436751">"اشاروں والی نیویگیشن کی ترتیبات"</string>
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"اشاروں والی نیویگیشن کی ترتیبات کھولیں"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"ایک ڈیمو آزمائیں"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"بٹن والی نیویگیشن"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"بٹن نیویگیشن کی ترتیبات"</string>
+    <string name="button_navigation_settings_extra_button_hint" msgid="6471481336598365780">"بٹن والی نیویگیشن کی ترتیبات کھولیں"</string>
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"بٹن کی ترتیب"</string>
     <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"بٹن کی ترتیب، بٹنز منتقل کرنا، بائیں ہاتھ کی وضع، دائیں ہاتھ کی وضع"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"پیچھے"</string>
@@ -6010,6 +5999,8 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"‫<xliff:g id="DEVICE_NAME">%1$s</xliff:g>۔ آلہ کی تفصیل کنفیگر کریں۔"</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"پیرنٹل کنٹرولز"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"ڈیجیٹل بنیادی اصول اور اسکرین کے وقت کی حدود"</string>
+    <string name="supervision_intro_title" msgid="2686370837216266390">"‏اس آلے کیلئے پیرنٹل کنٹرولز کا PIN تخلیق کریں"</string>
+    <string name="supervision_intro_description" msgid="101353421249918460">"‏اس آلے پر پیرنٹل کنٹرولز کی ترتیبات اور ایپس کا نظم کرنے کیلئے، آپ اس PIN کا استعمال کریں گے۔\n\nآپ Android کی ترتیبات اور پیرنٹل کنٹرولز سے PIN میں ترمیم یا اسے حذف کر سکتے ہیں۔"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"‏‫PIN سیٹ اپ کریں"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"‏پیرنٹل کنٹرولز PIN سیٹ اپ کریں"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"‏نگرانی، پیرنٹل کنٹرولز، والدین، نگرانی PIN، PIN"</string>
@@ -6017,12 +6008,12 @@
     <string name="supervision_manage_pin_preference_title" msgid="4699676657525668391">"‏پیرنٹل کنٹرولز PIN کا نظم کریں"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"‏پیرنٹل کنٹرولز PIN"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"‏والد/والدہ کا PIN، پیرنٹل کنٹرولز PIN"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"بازیابی ای میل شامل کریں"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"بازیابی ای میل کی توثیق کریں"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="1949336705488617143">"بازیابی کی معلومات شامل کریں"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="7278612024999247649">"بازیابی کی معلومات کی توثیق کریں"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"‏‫PIN تبدیل کریں"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"‏‫PIN بھول گئے"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"‏‫PIN بھول گئے؟"</string>
-    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"بازیابی ای میل اپ ڈیٹ کریں"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="8096029750575323477">"بازیابی معلومات اپ ڈیٹ کریں"</string>
     <string name="supervision_recovery_email_added" msgid="4327869201011721812">"بازیابی ای میل پتہ شامل ہو گیا"</string>
     <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"بازیابی ای میل پتے کی توثیق ہو گئی"</string>
     <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"بازیابی ای میل پتہ اپ ڈیٹ ہو گیا"</string>
@@ -6034,12 +6025,15 @@
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"بازیابی کی معلومات شامل کریں"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"‏اپنا PIN بھول جانے پر، اسے ری سیٹ کرنے کیلئے آپ اپنے اکاؤنٹ کا استعمال کر سکتے ہیں"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"‏‫PIN حذف کریں"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"بازیابی ای میل شامل کریں"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"اپنے ای میل کی توثیق کریں"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"بازیابی کی معلومات شامل کریں"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"بازیابی کی معلومات کی توثیق کریں"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"‏‫App اسٹور کے فلٹرز"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"ایپس کو ان کے مواد کی پختگی کے لحاظ سے فلٹر کریں"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"‏ہر ایپ مختلف اقسام کے مواد کو بلاک کر سکتی ہے۔ وہ App اسٹورز جو فہرست میں شامل نہیں ہیں ان کا نظم الگ سے کیا جانا چاہیے۔"</string>
-    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"ویب سائٹ کے مواد کے فلٹرز"</string>
+    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
+    <skip />
+    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ویب مواد فلٹرز"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"ویب سائٹ کے فلٹرز، سائٹس بلاک کریں، براؤزر فلٹرز، فُحش سائٹس بلاک کریں، سائٹس کو فلٹر کریں، تلاش کے نتائج کو بلاک کریں، فُحش تلاش کے نتائج کو فلٹر کریں، مواد کی پابندیاں"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"اس فون پر کچھ ایپس اور براؤزرز پر فُحش مواد کو فلٹر کرنے میں مدد کریں۔ فُحش مواد اب بھی دیگر ایپس، آلات یا براؤزرز پر دکھائی دے سکتا ہے۔"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"ویب سائٹس"</string>
@@ -6058,7 +6052,13 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"‏‫PIN کو حذف نہیں کیا جا سکتا"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"‏‫PIN کو حذف نہیں کیا جا سکتا"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"‏‫PIN کو حذف کرنے کی کوشش کرتے وقت ایک خرابی پیش آ گئی۔"</string>
+    <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"اس صارف کیلئے کنٹرولز کو آف کریں"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"‏‫PIN حذف کریں اور کنٹرولز کو آف کریں؟"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"‏آپ کے پیرنٹل کنٹرولز PIN کو حذف کر دیا جائے گا۔ آپ کے سیٹ اپ کردہ کسی بھی کنٹرول کو آف کر دیا جائے گا۔"</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"حذف کریں اور آف کریں"</string>
+    <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"‏‫PIN حذف کریں اور کنٹرولز کو آف کریں"</string>
+    <string name="supervision_delete_button_label" msgid="8096648247610708181">"حذف کریں"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"‏مندرجہ ذیل آپ کے پیرنٹل کنٹرولز PIN کا استعمال کر رہے ہیں:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"‫<xliff:g id="FEATURE">%1$s</xliff:g> اینیمیشن"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"کنٹرولز کو آن نہیں کیا جا سکتا"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"کنٹرولز کا استعمال نہیں کیا جا سکتا"</string>
@@ -6120,4 +6120,7 @@
     <string name="satellite_tile_subtitle_on" msgid="5612034043378102400">"آن ہے"</string>
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"دستیاب ہے"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"دستیاب نہیں ہے"</string>
+    <string name="satellite_connectivity_title" msgid="5919956632912518626">"سیٹلائٹ کنیکٹوٹی"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"‏جب آپ کے پاس موبائل یا Wi-Fi نیٹ ورک نہ ہو تب بھی منسلک رہیں"</string>
+    <string name="satellite_landing_page_label" msgid="534906205317274253">"سیٹلائٹ لینڈنگ صفحہ"</string>
 </resources>
