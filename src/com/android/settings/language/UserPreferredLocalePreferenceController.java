@@ -28,6 +28,16 @@ import android.os.LocaleList;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.core.BasePreferenceController;
@@ -41,16 +51,6 @@ import com.android.settingslib.widget.OrderMenuPreference;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.DefaultLifecycleObserver;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 public class UserPreferredLocalePreferenceController extends BasePreferenceController implements
         LifecycleObserver, DefaultLifecycleObserver {
@@ -148,6 +148,9 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
                 } else if (i == (listSize - 1)) {
                     menuId = R.menu.preferred_locale_menu_top;
                 }
+                pref.setMenuButtonContentDescription(
+                        mContext.getString(R.string.action_label_menu_option,
+                                localeInfo.getFullNameNative()));
                 pref.setMenuResId(menuId);
                 pref.setMenuItemClickListener((item, preference) -> {
                     int menuItemId = item.getItemId();

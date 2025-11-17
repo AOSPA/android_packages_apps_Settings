@@ -25,6 +25,8 @@ import android.widget.EditText;
 import com.android.settings.Utils;
 import com.android.settingslib.CustomEditTextPreferenceCompat;
 
+import java.text.NumberFormat;
+
 /**
  * Base class for Autofill integer properties that are backed by
  * {@link android.provider.Settings.Global}.
@@ -38,13 +40,13 @@ abstract class AbstractGlobalSettingsPreference extends CustomEditTextPreference
 
     private final AutofillDeveloperSettingsObserver mObserver;
 
-    protected AbstractGlobalSettingsPreference(Context context, AttributeSet attrs,
-            String key, int defaultValue) {
+    protected AbstractGlobalSettingsPreference(Context context, AttributeSet attrs, String key,
+            int defaultValue) {
         super(context, attrs);
 
         mKey = key;
         mDefaultValue = defaultValue;
-        mObserver = new AutofillDeveloperSettingsObserver(context, () -> updateSummary());
+        mObserver = new AutofillDeveloperSettingsObserver(context, this::updateSummary);
     }
 
     @Override
@@ -62,16 +64,12 @@ abstract class AbstractGlobalSettingsPreference extends CustomEditTextPreference
         super.onDetached();
     }
 
-    private String getCurrentValue() {
-        final int value = Settings.Global.getInt(getContext().getContentResolver(),
-                mKey, mDefaultValue);
-
-        return Integer.toString(value);
+    private int getCurrentValue() {
+        return Settings.Global.getInt(getContext().getContentResolver(), mKey, mDefaultValue);
     }
 
     private void updateSummary() {
-        setSummary(getCurrentValue());
-
+        setSummary(NumberFormat.getInstance().format(getCurrentValue()));
     }
 
     @Override
@@ -81,7 +79,7 @@ abstract class AbstractGlobalSettingsPreference extends CustomEditTextPreference
         EditText editText = view.findViewById(android.R.id.edit);
         if (editText != null) {
             editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-            editText.setText(getCurrentValue());
+            editText.setText(Integer.toString(getCurrentValue()));
             Utils.setEditTextCursorPosition(editText);
         }
     }
@@ -94,8 +92,9 @@ abstract class AbstractGlobalSettingsPreference extends CustomEditTextPreference
             try {
                 newValue = Integer.parseInt(stringValue);
             } catch (Exception e) {
-                Log.e(TAG, "Error converting '" + stringValue + "' to integer. Using "
-                        + mDefaultValue + " instead");
+                Log.e(TAG,
+                        "Error converting '" + stringValue + "' to integer. Using " + mDefaultValue
+                                + " instead");
             }
             Settings.Global.putInt(getContext().getContentResolver(), mKey, newValue);
         }

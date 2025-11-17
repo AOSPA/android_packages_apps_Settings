@@ -47,6 +47,7 @@ import android.view.animation.Interpolator;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.insets.ProtectionLayout;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
@@ -171,6 +172,17 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             };
             View view = inflater.inflate(layoutId, container, false);
             mGlifLayout = view.findViewById(R.id.setup_wizard_layout);
+
+            // TODO(b/440023111):This can be removed once SetupDesignLib and SettingsLib have
+            //  integrated the solution.
+            if (Flags.removeProtectionLayout()
+                    && ThemeHelper.shouldApplyGlifExpressiveStyle(getContext())) {
+                final ProtectionLayout protect = mGlifLayout.findViewById(
+                        com.google.android.setupdesign.R.id.sud_layout_protection);
+                if (protect != null) {
+                    protect.setProtections(Collections.emptyList());
+                }
+            }
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             if (Flags.msdlFeedback() && mLockPatternView != null) {
                 mLockPatternView.setExternalHapticsPlayer(mExternalHapticsPlayer);

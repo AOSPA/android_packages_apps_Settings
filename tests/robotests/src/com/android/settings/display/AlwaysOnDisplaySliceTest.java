@@ -29,7 +29,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.display.AmbientDisplayConfiguration;
 import android.net.Uri;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.slice.Slice;
@@ -39,7 +38,6 @@ import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
 import com.android.settings.slices.CustomSliceRegistry;
-import com.android.systemui.shared.Flags;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -56,9 +54,6 @@ public class AlwaysOnDisplaySliceTest {
 
     private Context mContext;
     private AlwaysOnDisplaySlice mSlice;
-
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private AmbientDisplayConfiguration mConfig;
@@ -91,22 +86,7 @@ public class AlwaysOnDisplaySliceTest {
     }
 
     @Test
-    public void getSlice_alwaysOnSupported_showTitleSubtitle_flagOff() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_AMBIENT_AOD);
-        when(mConfig.alwaysOnAvailableForUser(anyInt())).thenReturn(true);
-
-        final Slice slice = mSlice.getSlice();
-        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
-
-        assertThat(metadata.getTitle()).isEqualTo(
-                mContext.getString(R.string.doze_always_on_title));
-        assertThat(metadata.getSubtitle()).isEqualTo(
-                mContext.getString(R.string.doze_always_on_summary));
-    }
-
-    @Test
     public void getSlice_alwaysOnSupported_showTitleSubtitle() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_AMBIENT_AOD);
         when(mConfig.alwaysOnAvailableForUser(anyInt())).thenReturn(true);
 
         final Slice slice = mSlice.getSlice();

@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"การตั้งค่าเครื่องช่วยฟัง"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"ทางลัด ความเข้ากันได้กับเครื่องช่วยฟัง"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"ค่าที่กำหนดล่วงหน้า"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"ค่าที่กำหนดล่วงหน้าสำหรับด้านซ้าย"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"ค่าที่กำหนดล่วงหน้าสำหรับด้านขวา"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"ซ้าย: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> ขวา: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"ไม่มีค่าที่กำหนดล่วงหน้าที่นักโสตสัมผัสวิทยาตั้งโปรแกรมไว้"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"ไม่สามารถอัปเดตค่าที่กำหนดล่วงหน้า"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"เสียงแวดล้อม"</string>
@@ -251,6 +248,8 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"ย้ายลง"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"นำออก"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"ย้ายไปด้านบนสุด"</string>
+    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"ค่ากำหนดตามพื้นที่"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"ตั้งค่ากำหนดหน่วยและตัวเลข"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"บอกให้แอปทราบค่ากำหนดตามพื้นที่เพื่อให้แอปปรับเปลี่ยนประสบการณ์การใช้งานให้เหมาะกับคุณ"</string>
@@ -1526,7 +1525,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"เวลาที่แสดง"</string>
     <string name="doze_title" msgid="1523090408230862316">"ปลุกหน้าจอสำหรับการแจ้งเตือน"</string>
     <string name="doze_summary" msgid="8252867381522942804">"ขณะที่หน้าจอมืดอยู่ ฟีเจอร์นี้จะเปิดขึ้นเมื่อมีการแจ้งเตือนเข้ามาใหม่"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"แสดงเวลาและข้อมูลเสมอ"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"จอแสดงผลเปิดตลอดเวลา"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"การใช้งานแบตเตอรี่เพิ่มขึ้น"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"แสดงวอลเปเปอร์หน้าจอล็อกเมื่อหน้าจอปิดอยู่"</string>
@@ -1690,10 +1688,8 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"การตั้งค่าส่วนกลาง"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"โหมดฮับ"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"วิดเจ็ตในหน้าจอล็อก"</string>
-    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
-    <skip />
-    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
-    <skip />
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"หากต้องการเข้าถึงวิดเจ็ตโปรด ให้ปัดไปทางซ้ายจากหน้าจอล็อก \n\nเมื่อเปิดแอปโดยใช้วิดเจ็ต คุณจะต้องยืนยันตัวตนของคุณ นอกจากนี้ โปรดทราบว่าผู้อื่นจะดูวิดเจ็ตเหล่านี้ได้"</string>
+    <string name="settings_beta_tag" msgid="8646243453760353582">"เบต้า"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"เวลาที่ต้องการให้แสดงโดยอัตโนมัติ"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"ไม่เลย"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"ขณะชาร์จ"</string>
@@ -3398,10 +3394,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"เปิดใช้งานระบบใบรับรอง CA หรือไม่"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"ปิดใช้งานระบบใบรับรอง CA หรือไม่"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"นำใบรับรอง CA ของผู้ใช้ออกถาวรหรือไม่"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"ใบรับรอง CA <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>, ยุบอยู่, แตะสองครั้งเพื่อขยาย"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"ใบรับรอง CA <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>, ขยายอยู่, แตะสองครั้งเพื่อยุบ"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"ใช้อยู่โดย"</string>
     <string name="credential_contains" msgid="3146519680449595771">"รายการนี้ประกอบด้วย"</string>
     <string name="one_userkey" msgid="6363426728683951234">"คีย์ผู้ใช้ 1 รายการ"</string>
@@ -3441,8 +3435,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"ลบ <xliff:g id="USER_NAME">%1$s</xliff:g> จากอุปกรณ์นี้"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"การตั้งค่าหน้าจอล็อก"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"เพิ่มผู้ใช้จากหน้าจอล็อก"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"เพิ่มผู้ใช้จากหน้าจอลงชื่อเข้าใช้"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"เปลี่ยนเป็นผู้ใช้ที่ดูแลระบบเมื่อวางบนแท่นชาร์จ"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"ลบตัวคุณเองไหม"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"ลบผู้ใช้รายนี้ใช่ไหม"</string>
@@ -5949,7 +5942,10 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"ลบ PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"เพิ่มอีเมลสำหรับการกู้คืน"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"ยืนยันอีเมล"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"ตัวกรอง App Store"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"ตัวกรองเนื้อหาเว็บไซต์"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"ตัวกรองเว็บไซต์ ปิดกั้นไซต์ ตัวกรองเบราว์เซอร์ ปิดกั้นเว็บไซต์ที่อาจไม่เหมาะสม กรองเว็บไซต์ ปิดกั้นผลการค้นหา กรองผลการค้นหาที่อาจไม่เหมาะสม การจำกัดเนื้อหา"</string>
@@ -5988,16 +5984,13 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"การควบคุมความเป็นส่วนตัว"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"สิทธิ์ การควบคุม"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"การปลดล็อกอุปกรณ์"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"ล็อกหน้าจอ"</string>
     <string name="location_settings" msgid="6833222354060094170">"การเข้าถึงตำแหน่ง"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"ดูแอปและบริการที่มีสิทธิ์เข้าถึงตำแหน่ง"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"การตรวจสอบตัวตนทำงานร่วมกับแอปอื่นๆ อีก"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"การตรวจสอบตัวตนจะป้องกันการเข้าถึงแอปของคุณโดยไม่พึงประสงค์ ตอนนี้พร้อมใช้งานกับทุกแอปที่ใช้การปลดล็อกด้วยลายนิ้วมือหรือใบหน้า"</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"ดูรายละเอียด"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"ตรวจสอบการตั้งค่าไม่ได้"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"ยังไม่มีข้อมูล"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

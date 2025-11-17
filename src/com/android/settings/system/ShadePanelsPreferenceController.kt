@@ -31,10 +31,8 @@ import kotlin.math.min
  * The preference controller for the Settings page controlling Notifications & Quick Settings
  * panels, allowing the user to switch between "Dual Shade" and "Single Shade".
  */
-class ShadePanelsPreferenceController(
-    context: Context,
-    key: String
-) : BasePreferenceController(context, key) {
+class ShadePanelsPreferenceController(context: Context, key: String) :
+    BasePreferenceController(context, key) {
 
     override fun getAvailabilityStatus(): Int = getDualShadeAvailability(mContext)
 
@@ -66,16 +64,12 @@ class ShadePanelsPreferenceController(
 
         /** Persist the preference value to secure settings. */
         fun ContentResolver.setDualShadeEnabled(enable: Boolean): Boolean {
-            return Settings.Secure.putInt(
-                this,
-                Settings.Secure.DUAL_SHADE,
-                if (enable) ON else OFF
-            )
+            return Settings.Secure.putInt(this, Settings.Secure.DUAL_SHADE, if (enable) ON else OFF)
         }
 
         /** Whether the Dual Shade feature is available on this device. */
         @JvmStatic
-        fun isDualShadeAvailable(context: Context) : Boolean {
+        fun isDualShadeAvailable(context: Context): Boolean {
             return getDualShadeAvailability(context) == AVAILABLE
         }
 
@@ -99,18 +93,13 @@ class ShadePanelsPreferenceController(
          *
          * This function queries all logical displays reported by the [DisplayManager].
          *
-         * @return `true` if at least one display meets the condition, `false` otherwise.
-         * Returns `false` if [DisplayManager] cannot be accessed or no displays are found.
+         * @return `true` if at least one display meets the condition, `false` otherwise. Returns
+         *   `false` if [DisplayManager] cannot be accessed or no displays are found.
          */
         internal fun hasAnyDisplayWithSmallestWidthLessThan(
             context: Context,
-            thresholdDp: Int
+            thresholdDp: Int,
         ): Boolean {
-            // Minor optimization that captures the vast majority of cases.
-            if (context.resources.configuration.smallestScreenWidthDp < MIN_LARGE_SCREEN_WIDTH_DP) {
-                Log.d(TAG, "The current display has smallestScreenWidthDp under the threshold")
-                return true
-            }
 
             val displayManager =
                 context.getSystemService(Context.DISPLAY_SERVICE) as? DisplayManager
@@ -124,7 +113,10 @@ class ShadePanelsPreferenceController(
             // Iterate through all currently available logical displays, including built-in screens
             // (like inner/outer on foldables) and connected external displays (HDMI, wireless
             // display etc.)
-            for (display in displayManager.displays) {
+            for (display in
+                displayManager.getDisplays(
+                    DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED
+                )) {
                 val id = display.displayId
                 try {
                     display.getRealMetrics(displayMetrics)
@@ -135,16 +127,15 @@ class ShadePanelsPreferenceController(
                         continue
                     }
 
-                    val smallestWidthDp = with (displayMetrics) {
-                        min(widthPixels, heightPixels) / density
-                    }
+                    val smallestWidthDp =
+                        with(displayMetrics) { min(widthPixels, heightPixels) / density }
 
                     Log.d(
                         TAG,
                         "Display $id: (${displayMetrics.widthPixels}px, " +
                             "${displayMetrics.heightPixels}px), " +
                             "Density: $density, " +
-                            "Smallest: ${"%.1f".format(smallestWidthDp)}dp"
+                            "Smallest: ${"%.1f".format(smallestWidthDp)}dp",
                     )
 
                     if (smallestWidthDp < thresholdDp) {

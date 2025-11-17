@@ -18,7 +18,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/measurement_system_preferences_title"
-    android:key="regional_preference_measurement_system">
+    android:key="regional_preference_measurement_system"
+    settings:keywords="@string/keywords_measurement_system_page">
 
   <com.android.settingslib.widget.TopIntroPreference
       android:key="measurement_system_intro"

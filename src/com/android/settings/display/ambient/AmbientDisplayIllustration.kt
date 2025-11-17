@@ -25,7 +25,6 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.IllustrationPreference
-import com.android.systemui.shared.Flags.ambientAod
 
 class AmbientDisplayIllustration(context: Context) : PreferenceMetadata, PreferenceBinding {
 
@@ -70,6 +69,6 @@ class AmbientDisplayIllustration(context: Context) : PreferenceMetadata, Prefere
         const val KEY = "ambient_display_illustration"
 
         private val Context.isAmbientWallpaperOptionsAvailable: Boolean
-            get() = ambientAod() && resources.getBoolean(config_dozeSupportsAodWallpaper)
+            get() = resources.getBoolean(config_dozeSupportsAodWallpaper)
     }
 }

@@ -204,6 +204,9 @@
     <!-- List of packages that should be allowlisted for slice uri access for debugging purpose. Do not translate -->
     <string-array name="slice_allowlist_package_names_for_dev" translatable="false"/>
 
+    <!-- Whether to hide the skip buttons on lskf screens during SetupWizard -->
+    <bool name="config_hide_skip_security_options_in_suw">false</bool>
+
     <!-- Whether to support click input for the pattern component -->
     <bool name="config_enable_pattern_input_click_support">false</bool>
 

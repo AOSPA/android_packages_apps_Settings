@@ -272,7 +272,7 @@ public class UserSettingsTest {
                 com.android.settings.R.bool.config_offer_restricted_profiles, true);
         when(mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_ADD_USER, mContext.getUser()))
                 .thenReturn(false);
-        when(mUserManager.isUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED))
+        when(mUserManager.isUserTypeSupported(UserManager.USER_TYPE_FULL_RESTRICTED))
                 .thenReturn(true);
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);

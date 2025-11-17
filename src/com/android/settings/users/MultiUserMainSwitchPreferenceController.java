@@ -70,10 +70,12 @@ public class MultiUserMainSwitchPreferenceController extends TogglePreferenceCon
 
     @Override
     public int getAvailabilityStatus() {
-        if (!mUserCaps.mIsGuest) {
-            return AVAILABLE;
-        } else {
+        if (mUserCaps.mIsGuest) {
             return DISABLED_FOR_USER;
+        } else if (!mUserCaps.mUserSwitchingUiEnabled) {
+            return DISABLED_FOR_USER;
+        } else {
+            return AVAILABLE;
         }
     }
 

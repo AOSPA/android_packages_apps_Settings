@@ -105,6 +105,9 @@ public class BubblePreference extends Preference implements RadioGroup.OnChecked
             summary.setVisibility(View.GONE);
         }
         holder.itemView.setClickable(false);
+        RadioGroup bubblesRadioGroup = (RadioGroup) holder.findViewById(R.id.radio_group);
+        // Set the listener as null so that no changes are called while the views are set up.
+        bubblesRadioGroup.setOnCheckedChangeListener(null);
 
         RadioButton bubbleAllButton = (RadioButton) holder.findViewById(R.id.bubble_all);
         bubbleAllButton.setChecked(mSelectedPreference == BUBBLE_PREFERENCE_ALL);
@@ -123,8 +126,8 @@ public class BubblePreference extends Preference implements RadioGroup.OnChecked
         bubbleNoneButton.setTag(BUBBLE_PREFERENCE_NONE);
         bubbleNoneButton.setVisibility(disabledByAdmin ? View.GONE : View.VISIBLE);
 
-        RadioGroup bublesRadioGroup = (RadioGroup) holder.findViewById(R.id.radio_group);
-        bublesRadioGroup.setOnCheckedChangeListener(this);
+        // The views are set up so now set the listener
+        bubblesRadioGroup.setOnCheckedChangeListener(this);
     }
 
     @Override

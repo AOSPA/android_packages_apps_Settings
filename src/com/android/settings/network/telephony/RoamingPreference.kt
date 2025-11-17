@@ -18,6 +18,7 @@ package com.android.settings.network.telephony
 
 import android.Manifest
 import android.content.Context
+import android.os.UserManager
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
@@ -26,6 +27,7 @@ import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceChangeListener
 import androidx.preference.SwitchPreferenceCompat
 import com.android.settings.R
+import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.datastore.Permissions
@@ -51,6 +53,7 @@ class RoamingPreference(
     PreferenceBindingPlaceholder,
     PreferenceLifecycleProvider,
     PreferenceAvailabilityProvider,
+    PreferenceRestrictionMixin,
     OnPreferenceChangeListener {
 
     private lateinit var fragmentManager: FragmentManager
@@ -60,6 +63,8 @@ class RoamingPreference(
     override val title: Int = R.string.roaming
 
     override val summary: Int = R.string.roaming_enable
+
+    override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)
@@ -87,6 +92,9 @@ class RoamingPreference(
             Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.READ_BASIC_PHONE_STATE,
         )
+
+    override val restrictionKeys
+        get() = arrayOf(UserManager.DISALLOW_DATA_ROAMING)
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW

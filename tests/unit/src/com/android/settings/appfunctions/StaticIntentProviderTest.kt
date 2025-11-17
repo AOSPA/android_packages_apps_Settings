@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.appfunctions.providers
+package com.android.settings.appfunctions.executors
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.appfunctions.DeviceStateAppFunctionType.GET_STORAGE

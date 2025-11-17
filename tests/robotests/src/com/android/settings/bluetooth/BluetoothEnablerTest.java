@@ -15,6 +15,8 @@
  */
 package com.android.settings.bluetooth;
 
+import static android.app.admin.DpcAuthority.DPC_AUTHORITY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -26,6 +28,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.EnforcingAdmin;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -34,6 +37,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.AndroidRuntimeException;
 import android.view.View;
 
@@ -47,6 +53,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -61,14 +68,21 @@ import org.robolectric.shadow.api.Shadow;
 @Config(shadows = ShadowBluetoothAdapter.class)
 public class BluetoothEnablerTest {
 
+    @Rule
+    public SetFlagsRule  mSetFlagsRule = new SetFlagsRule();
+
     private static EnforcedAdmin sFakeEnforcedAdmin;
+    private static EnforcingAdmin sFakeEnforcingAdmin;
     private PreferenceViewHolder mHolder;
     private RestrictedSwitchPreference mRestrictedSwitchPreference;
 
     @BeforeClass
     public static void beforeClass() {
+        final ComponentName testComponentName = new ComponentName("test.package", "test.Class");
         sFakeEnforcedAdmin = new EnforcedAdmin(new ComponentName("test.package", "test.Class"),
                 UserHandle.of(10));
+        sFakeEnforcingAdmin = new EnforcingAdmin(testComponentName.getPackageName(), DPC_AUTHORITY,
+                UserHandle.of(UserHandle.myUserId()), testComponentName);
     }
 
     @Mock
@@ -133,6 +147,7 @@ public class BluetoothEnablerTest {
         verify(mCallback).onSwitchToggled(false);
     }
 
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     @Test
     public void maybeEnforceRestrictions_noRestrictions() {
         // GIVEN there are no restrictions set...
@@ -149,6 +164,25 @@ public class BluetoothEnablerTest {
         verify(mSwitchController, never()).setChecked(anyBoolean());
     }
 
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @Test
+    public void maybeEnforceRestrictions_noRestrictions_withEnforcingAdmin() {
+        // GIVEN there are no restrictions set...
+        when(mRestrictionUtils.checkIfUserRestrictionEnforced(any(Context.class),
+                any(String.class)))
+                .thenReturn(null);
+
+        // WHEN the maybeEnforceRestrictions is called...
+        // THEN false is returned to indicate there was no restriction to enforce
+        assertThat(mBluetoothEnabler.maybeEnforceRestrictions()).isFalse();
+
+        // THEN a null EnforcingAdmin is set.
+        verify(mSwitchController).setDisabledByAdmin((EnforcingAdmin) null);
+        // THEN the state of the switch isn't changed.
+        verify(mSwitchController, never()).setChecked(anyBoolean());
+    }
+
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     @Test
     public void maybeEnforceRestrictions_disallowBluetoothRestrictionSet() {
         // GIVEN Bluetooth has been disallowed...
@@ -168,6 +202,28 @@ public class BluetoothEnablerTest {
         verify(mSwitchController).setChecked(false);
     }
 
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @Test
+    public void maybeEnforceRestrictions_disallowBluetoothRestrictionSet_withEnforcingAdmin() {
+        // GIVEN Bluetooth has been disallowed...
+        when(mRestrictionUtils.checkIfUserRestrictionEnforced(
+                mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(sFakeEnforcingAdmin);
+        when(mRestrictionUtils.checkIfUserRestrictionEnforced(
+                mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH)).thenReturn(null);
+
+        // WHEN the maybeEnforceRestrictions is called...
+        // THEN true is returned to indicate there was a restriction to enforce.
+        assertThat(mBluetoothEnabler.maybeEnforceRestrictions()).isTrue();
+
+        // THEN the expected EnforcingAdmin is set.
+        verify(mSwitchController).setDisabledByAdmin(sFakeEnforcingAdmin);
+        verify(mSwitchController).setRestriction(UserManager.DISALLOW_BLUETOOTH);
+
+        // THEN the switch is unchecked.
+        verify(mSwitchController).setChecked(false);
+    }
+
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     @Test
     public void maybeEnforceRestrictions_disallowConfigBluetoothRestrictionSet() {
         // GIVEN configuring Bluetooth has been disallowed...
@@ -187,12 +243,48 @@ public class BluetoothEnablerTest {
         verify(mSwitchController).setChecked(false);
     }
 
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @Test
+    public void maybeEnforceRestrictions_disallowConfigBluetoothRestriction_withEnforcingAdmin() {
+        // GIVEN configuring Bluetooth has been disallowed...
+        when(mRestrictionUtils.checkIfUserRestrictionEnforced(
+                mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(null);
+        when(mRestrictionUtils.checkIfUserRestrictionEnforced(
+                mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH)).thenReturn(sFakeEnforcingAdmin);
+
+        // WHEN the maybeEnforceRestrictions is called...
+        // THEN true is returned to indicate there was a restriction to enforce.
+        assertThat(mBluetoothEnabler.maybeEnforceRestrictions()).isTrue();
+
+        // THEN the expected EnforcingAdmin is set.
+        verify(mSwitchController).setDisabledByAdmin(sFakeEnforcingAdmin);
+        verify(mSwitchController).setRestriction(UserManager.DISALLOW_CONFIG_BLUETOOTH);
+
+        // THEN the switch is unchecked.
+        verify(mSwitchController).setChecked(false);
+    }
+
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     @Test
     public void maybeEnforceRestrictions_disallowBluetoothNotOverriden() {
         // GIVEN Bluetooth has been disallowed...
         when(mRestrictionUtils.checkIfRestrictionEnforced(
                 mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(sFakeEnforcedAdmin);
         when(mRestrictionUtils.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH)).thenReturn(null);
+
+        mBluetoothEnabler.resume(mContext);
+
+        verify(mSwitchController, never()).setEnabled(true);
+    }
+
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @Test
+    public void maybeEnforceRestrictions_disallowBluetoothNotOverriden_withEnforcingAdmin() {
+        // GIVEN Bluetooth has been disallowed...
+        when(mRestrictionUtils.checkIfUserRestrictionEnforced(
+                mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(sFakeEnforcingAdmin);
+        when(mRestrictionUtils.checkIfUserRestrictionEnforced(
                 mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH)).thenReturn(null);
 
         mBluetoothEnabler.resume(mContext);

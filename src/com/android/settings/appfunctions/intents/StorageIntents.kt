@@ -17,8 +17,8 @@ package com.android.settings.appfunctions.intents
 
 import android.os.storage.StorageManager
 import com.android.settings.appfunctions.DeviceStateAppFunctionType.GET_STORAGE
-import com.android.settings.appfunctions.providers.StaticIntent
-import com.android.settings.appfunctions.providers.StaticIntents
+import com.android.settings.appfunctions.executors.StaticIntent
+import com.android.settings.appfunctions.executors.StaticIntents
 
 fun getStorageIntents() =
     StaticIntents(

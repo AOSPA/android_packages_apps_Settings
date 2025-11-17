@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Поставки за слушни апарати"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Кратенка, компатибилност со слушни помагала"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Зададена вредност"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Зададена вредност лево"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Зададена вредност десно"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Лево: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Десно: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Нема зададени вредности што ги програмирал вашиот аудиолог"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Не можеше да се ажурира зададената вредност"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Опкружување"</string>
@@ -251,6 +248,8 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Премести надолу"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Отстрани"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Премести најгоре"</string>
+    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Регионални поставки"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Одредете поставки за мерни единици и броеви"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Дозволете им на апликациите да пристапуваат до вашите регионални поставки за да ви овозможат персонализирано доживување."</string>
@@ -1526,7 +1525,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Кога да се прикажува"</string>
     <string name="doze_title" msgid="1523090408230862316">"Будење екран за известувања"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Кога екранот е темен, се вклучува за нови известувања"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"Секогаш прикажувај време и информации"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"Секогаш вклучен екран"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Зголемено користење на батеријата"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Прикажувај го тапетот на заклучен екран кога екранот е исклучен"</string>
@@ -1690,10 +1688,8 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"Заеднички поставки"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Режим Hub"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Виџети на заклучен екран"</string>
-    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
-    <skip />
-    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
-    <skip />
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"За да пристапите до омилените виџети, повлечете налево од заклучениот екран. \n\nКога ќе отворите апликација со помош на виџет, ќе треба да потврдите дека сте вие. Имајте предвид и дека секој може да ги прегледува виџетите."</string>
+    <string name="settings_beta_tag" msgid="8646243453760353582">"Бета"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Кога да се прикаже автоматски"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Никогаш"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Додека се полни"</string>
@@ -2631,7 +2627,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Користи „Инверзија на боите“"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Кратенка за „Инверзија на боите“"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Инверзијата на боите ги затемнува светлите екрани. Исто така, таа ги осветлува темните екрани."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Имајте предвид&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Боите ќе се променат во аудиовизуелните содржини и во сликите&lt;/li&gt; &lt;li&gt; „Инверзија на боите“ функционира во сите апликации&lt;/li&gt; &lt;li&gt; За да се прикаже темна заднина, може да користите „Темна тема“ наместо „Инверзија на боите“&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Имајте предвид&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; боите ќе се променат во аудиовизуелните содржини и сликите&lt;/li&gt; &lt;li&gt; инверзијата на боите функционира во сите апликации&lt;/li&gt; &lt;li&gt; за да се прикаже темна заднина, наместо тоа, може да ја користите „Темната тема“&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"внесете поставки"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Автоматско кликнување (време на задржување)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"За автоматско кликнување (време на задржување)"</string>
@@ -3398,10 +3394,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Овозможи го системскиот CA сертификат?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Оневозможи го системскиот CA сертификат?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Трајно отстрани го корисничкиот CA сертификат?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA-сертификати, собрано, допрете двапати за да се прошири"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA-сертификати, проширено, допрете двапати за да се собере"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Се користи од"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Записов содржи"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 клуч на корисник"</string>
@@ -3441,8 +3435,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Избриши го <xliff:g id="USER_NAME">%1$s</xliff:g> од тука"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Поставки на екранот за заклучување"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Дозволи додавање корисници од заклучен екран"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Додајте корисници од екранот за најавување"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Префрли се на администраторски корисник кога уредот е приклучен на док"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Избриши се себеси?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Да се избрише корисникот?"</string>
@@ -4792,7 +4785,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Привремено оневозможено поради „Штедачот на батерија“"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Исклучи го „Штедачот на батерија“"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Привремено вклучена поради Штедачот на батерија"</string>
-    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Испробајте ја темната тема"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Испробајте „Темна тема“"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Батеријата трае подолго"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Програмерски плочки за брзи поставки"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Оневозможи истекување на авторизацијата за ADB"</string>
@@ -5949,7 +5942,10 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Избришете го PIN-кодот"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Додајте е-пошта за враќање"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Потврдете ја е-поштата"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Филтри за продавница за апликации"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Филтри за содржини на веб-сајтови"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Филтри на веб-сајтови, блокирање сајтови, филтри на прелистувачи, блокирање експлицитни сајтови, филтрирање сајтови, блокирање резултати од пребарување, филтрирање експлицитни резултати од пребарување, ограничувања за содржини"</string>
@@ -5988,16 +5984,13 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"Контроли за приватност"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Дозволи, контроли"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Отклучување на уредот"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"Заклучување екран"</string>
     <string name="location_settings" msgid="6833222354060094170">"Пристап до локацијата"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Погледнете ги апликациите и услугите што имаат пристап до локацијата"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"„Проверка на идентитетот“ функционира со повеќе апликации"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"„Проверка на идентитетот“ спречува несакан пристап до вашите апликации. Отсега достапна со која било апликација што користи „Отклучување со отпечаток“ или „Отклучување со лик“."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Прикажи ги деталите"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Не можеше да се проверат поставките"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Сѐ уште нема податоци"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

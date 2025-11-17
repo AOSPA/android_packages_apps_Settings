@@ -74,8 +74,8 @@ class WifiDppUtilsTest {
     }
 
     @Test
-    fun showLockScreen_notKeyguardSecure_runRunnable() {
-        mockKeyguardManager.stub { on { isKeyguardSecure } doReturn false }
+    fun showLockScreen_notDeviceSecure_runRunnable() {
+        mockKeyguardManager.stub { on { isDeviceSecure } doReturn false }
 
         WifiDppUtils.showLockScreen(context, runnable)
 
@@ -83,8 +83,8 @@ class WifiDppUtilsTest {
     }
 
     @Test
-    fun showLockScreen_isKeyguardSecure_doNotRunRunnable() {
-        mockKeyguardManager.stub { on { isKeyguardSecure } doReturn true }
+    fun showLockScreen_isDeviceSecure_doNotRunRunnable() {
+        mockKeyguardManager.stub { on { isDeviceSecure } doReturn true }
 
         try {
             WifiDppUtils.showLockScreen(context, runnable)
@@ -95,7 +95,7 @@ class WifiDppUtilsTest {
 
     @Test
     fun showLockScreenForWifiSharing_deviceUnlockedRecently_runRunnable() {
-        mockKeyguardManager.stub { on { isKeyguardSecure } doReturn true }
+        mockKeyguardManager.stub { on { isDeviceSecure } doReturn true }
         whenever(Cipher.getInstance(WifiDppUtils.AES_CBC_PKCS7_PADDING)).thenReturn(cipher)
 
         WifiDppUtils.showLockScreenForWifiSharing(context, runnable)
@@ -105,7 +105,7 @@ class WifiDppUtilsTest {
 
     @Test
     fun showLockScreenForWifiSharing_deviceNotUnlockedRecently_doNotRunRunnable() {
-        mockKeyguardManager.stub { on { isKeyguardSecure } doReturn true }
+        mockKeyguardManager.stub { on { isDeviceSecure } doReturn true }
         whenever(Cipher.getInstance(WifiDppUtils.AES_CBC_PKCS7_PADDING)).thenReturn(cipher)
         doThrow(InvalidKeyException()).whenever(cipher).init(anyInt(), any<Key>())
 

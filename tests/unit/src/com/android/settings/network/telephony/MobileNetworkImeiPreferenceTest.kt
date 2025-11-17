@@ -21,6 +21,7 @@ import android.os.UserManager
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -61,7 +62,7 @@ class MobileNetworkImeiPreferenceTest {
             on { getImei(1) } doReturn IMEI_2
             on { createForSubscriptionId(anyInt()) } doReturn mockTelephonyManagerForSubId
         }
-        preference = MobileNetworkImeiPreference(context, 0)
+        preference = MobileNetworkImeiPreference(context, 0, imeiList)
     }
 
     @Test
@@ -73,7 +74,7 @@ class MobileNetworkImeiPreferenceTest {
     fun isAvailable_isNotAdminUser_returnFalse() {
         mockUserManager.stub { on { isAdminUser } doReturn false }
 
-        preference = MobileNetworkImeiPreference(context, 0)
+        preference = MobileNetworkImeiPreference(context, 0, imeiList)
 
         assertThat(preference.isAvailable(context)).isFalse()
     }
@@ -85,7 +86,7 @@ class MobileNetworkImeiPreferenceTest {
             on { isDeviceVoiceCapable } doReturn false
         }
 
-        preference = MobileNetworkImeiPreference(context, 0)
+        preference = MobileNetworkImeiPreference(context, 0, imeiList)
 
         assertThat(preference.isAvailable(context)).isFalse()
     }
@@ -99,13 +100,34 @@ class MobileNetworkImeiPreferenceTest {
     fun getSummary_index1_returnImei2() {
         mockTelephonyManagerForSubId.stub { on { imei } doReturn IMEI_2 }
 
-        preference = MobileNetworkImeiPreference(context, 1)
+        preference = MobileNetworkImeiPreference(context, 1, imeiList)
 
         assertThat(preference.getSummary(context)).isEqualTo(IMEI_2)
+    }
+
+    @Test
+    fun getTitle_index0_returnImei1() {
+        preference = MobileNetworkImeiPreference(context, 0, imeiList)
+
+        assertThat(preference.getTitle(context))
+            .isEqualTo(context.getString(R.string.imei_multi_sim, IMEI_INDEXING_1))
+    }
+
+    @Test
+    fun getTitle_index1_returnImei2() {
+        mockTelephonyManagerForSubId.stub { on { imei } doReturn IMEI_2 }
+
+        preference = MobileNetworkImeiPreference(context, 1, imeiList)
+
+        assertThat(preference.getTitle(context))
+            .isEqualTo(context.getString(R.string.imei_multi_sim, IMEI_INDEXING_2))
     }
 
     companion object {
         const val IMEI_1 = "111111111111115"
         const val IMEI_2 = "222222222222225"
+        const val IMEI_INDEXING_1 = 1
+        const val IMEI_INDEXING_2 = 2
+        val imeiList = listOf(IMEI_1, IMEI_2)
     }
 }

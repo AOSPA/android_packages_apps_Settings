@@ -21,6 +21,7 @@ import android.app.admin.PasswordMetrics;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.UserInfo;
+import android.os.SystemClock;
 import android.os.UserHandle;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +53,7 @@ public class ShadowLockPatternUtils {
     private static Map<Integer, Boolean> sUserToBiometricAllowedMap = new HashMap<>();
     private static Map<Integer, Boolean> sUserToLockPatternEnabledMap = new HashMap<>();
     private static Map<Integer, Integer> sKeyguardStoredPasswordQualityMap = new HashMap<>();
+    private static Map<Integer, Duration> sUserToLockoutEndTimeMap = new HashMap<>();
 
     private static boolean sIsUserOwnsFrpCredential;
 
@@ -68,6 +71,7 @@ public class ShadowLockPatternUtils {
         sDeviceEncryptionEnabled = false;
         sIsUserOwnsFrpCredential = false;
         sKeyguardStoredPasswordQualityMap.clear();
+        sUserToLockoutEndTimeMap.clear();
     }
 
     @Implementation
@@ -243,5 +247,38 @@ public class ShadowLockPatternUtils {
 
     public static void setKeyguardStoredPasswordQuality(int quality) {
         sKeyguardStoredPasswordQualityMap.put(UserHandle.myUserId(), quality);
+    }
+
+    /**
+     * Sets the lockout end time for a given user. Stored as a {@link Duration} representing the
+     * time since boot.
+     *
+     * @return the millis since boot of the lockout end time.
+     */
+    @Implementation
+    public long setLockoutAttemptDeadline(int userId, int deadline) {
+        long lockoutEndTimeMs = SystemClock.elapsedRealtime() + (long) deadline;
+        sUserToLockoutEndTimeMap.put(userId, Duration.ofMillis(lockoutEndTimeMs));
+        return lockoutEndTimeMs;
+    }
+
+    /**
+     * Gets the lockout end time for a given user.
+     *
+     * @return the millis since boot of the lockout end time.
+     */
+    @Implementation
+    public long getLockoutAttemptDeadline(int userId) {
+        return getLockoutEndTime(userId).toMillis();
+    }
+
+    /**
+     * Gets the lockout end time for a given user.
+     *
+     * @return the time since boot of the lockout end time.
+     */
+    @Implementation
+    public Duration getLockoutEndTime(int userId) {
+        return sUserToLockoutEndTimeMap.getOrDefault(userId, Duration.ZERO);
     }
 }

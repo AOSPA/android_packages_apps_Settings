@@ -84,6 +84,7 @@ import android.widget.TextView.OnEditorActionListener;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.view.insets.ProtectionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -98,6 +99,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.notification.RedactionInterstitial;
 import com.android.settings.widget.ImeAwareTextInputEditText;
 import com.android.settingslib.utils.StringUtil;
@@ -553,6 +555,15 @@ public class ChooseLockPassword extends SettingsActivity {
 
             mLayout = (GlifLayout) view;
 
+            // TODO(b/440023111):This can be removed once SetupDesignLib and SettingsLib have
+            //  integrated the solution.
+            if (Flags.removeProtectionLayout() && mIsExpressiveStyle) {
+                final ProtectionLayout protect = mLayout.findViewById(
+                        com.google.android.setupdesign.R.id.sud_layout_protection);
+                if (protect != null) {
+                    protect.setProtections(Collections.emptyList());
+                }
+            }
             // Make the password container consume the optical insets so the edit text is aligned
             // with the sides of the parent visually.
             ViewGroup container = view.findViewById(R.id.password_container);

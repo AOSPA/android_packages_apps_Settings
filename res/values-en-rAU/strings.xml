@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Hearing device settings"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Shortcut, hearing aid compatibility"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Preset"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Left preset"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Right preset"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Left: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Right: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"There are no presets programmed by your audiologist"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Couldn\'t update preset"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Surroundings"</string>
@@ -251,6 +248,8 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Move down"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Remove"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Move to top"</string>
+    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regional preferences"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Set units and number preferences"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Let apps know your regional preferences so that they can personalise your experience."</string>
@@ -866,22 +865,22 @@
 </xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won’t be able to use your face or fingerprint for authentication in apps."</string>
     <string name="unlock_disable_frp_warning_content_authbound_keys" msgid="6397327696248819663">"Your screen lock will be removed.<xliff:g id="EMPTY_LINE_0">
 
-</xliff:g>Pay contactless won\'t be available.<xliff:g id="EMPTY_LINE_1">
+</xliff:g>Contactless payments won\'t be available.<xliff:g id="EMPTY_LINE_1">
 
 </xliff:g>Wallet, payment and other apps that require authentication may not work properly."</string>
     <string name="unlock_disable_frp_warning_content_fingerprint_authbound_keys" msgid="7158076544627335461">"Your screen lock and Fingerprint Unlock will be removed.<xliff:g id="EMPTY_LINE_0">
 
-</xliff:g>Pay contactless won\'t be available.<xliff:g id="EMPTY_LINE_1">
+</xliff:g>Contactless payments won\'t be available.<xliff:g id="EMPTY_LINE_1">
 
 </xliff:g>Wallet, payment and other apps that require authentication may not work properly."</string>
     <string name="unlock_disable_frp_warning_content_face_authbound_keys" msgid="8120786951217029818">"Your screen lock and Face Unlock will be removed.<xliff:g id="EMPTY_LINE_0">
 
-</xliff:g>Pay contactless won\'t be available.<xliff:g id="EMPTY_LINE_1">
+</xliff:g>Contactless payments won\'t be available.<xliff:g id="EMPTY_LINE_1">
 
 </xliff:g>Wallet, payment and other apps that require authentication may not work properly."</string>
     <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"Your screen lock and Face and Fingerprint Unlock will be removed.<xliff:g id="EMPTY_LINE_0">
 
-</xliff:g>Pay contactless won\'t be available.<xliff:g id="EMPTY_LINE_1">
+</xliff:g>Contactless payments won\'t be available.<xliff:g id="EMPTY_LINE_1">
 
 </xliff:g>Wallet, payment and other apps that require authentication may not work properly."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Delete"</string>
@@ -1526,7 +1525,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"When to show"</string>
     <string name="doze_title" msgid="1523090408230862316">"Wake screen for notifications"</string>
     <string name="doze_summary" msgid="8252867381522942804">"When screen is dark, it turns on for new notifications"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"Always show time and info"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"Always-on display"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Increased battery usage"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Show lock screen wallpaper when screen is off"</string>
@@ -1690,10 +1688,8 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"Communal settings"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub Mode"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgets on lock screen"</string>
-    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
-    <skip />
-    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
-    <skip />
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"To access your favourite widgets, swipe left from your lock screen. \n\nWhen you open an app using a widget, you\'ll need to verify that it\'s you. Also bear in mind that anyone can view them."</string>
+    <string name="settings_beta_tag" msgid="8646243453760353582">"Beta"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"When to automatically show"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Never"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"While charging"</string>
@@ -2631,7 +2627,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Use colour inversion"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Colour inversion shortcut"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Colour inversion turns light screens dark. It also turns dark screens light."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Keep in mind&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Colours will change in media and images&lt;/li&gt; &lt;li&gt; Colour inversion works on all apps&lt;/li&gt; &lt;li&gt; To display a dark background, Dark theme can be used instead&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Bear in mind&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Colours will change in media and images&lt;/li&gt; &lt;li&gt; Colour inversion works on all apps&lt;/li&gt; &lt;li&gt; To display a dark background, Dark theme can be used instead&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"enter settings"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Autoclick (dwell timing)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"About auto-click (dwell timing)"</string>
@@ -3398,10 +3394,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Enable the system CA certificate?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Disable the system CA certificate?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Permanently remove the user CA certificate?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA certificates, collapsed, double-tap to expand"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA certificates, expanded, double-tap to collapse"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Being used by"</string>
     <string name="credential_contains" msgid="3146519680449595771">"This entry contains"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 user key"</string>
@@ -3441,8 +3435,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Delete <xliff:g id="USER_NAME">%1$s</xliff:g> from this device"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Lock screen settings"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Add users from lock screen"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Add users from the sign-in screen"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Switch to admin user when docked"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Delete yourself?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Delete this user?"</string>
@@ -5949,7 +5942,10 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Delete PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Add recovery email"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verify your email"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"App store filters"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Website content filters"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Website filters, Block sites, Browser filters, Block explicit sites, Filter sites, Block search results, Filter explicit search results, content restrictions"</string>
@@ -5988,16 +5984,13 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"Privacy controls"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Permissions, controls"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Device unlock"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"Screen lock"</string>
     <string name="location_settings" msgid="6833222354060094170">"Location access"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"See apps and services that have access to location"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Identity Check works with more apps"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Identity Check prevents unwanted access to your apps. Now available with any app that uses Fingerprint or Face Unlock."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"View details"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Couldn\'t check settings"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"No info yet"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

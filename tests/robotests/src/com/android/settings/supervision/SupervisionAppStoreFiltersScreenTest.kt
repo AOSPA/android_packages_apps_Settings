@@ -15,18 +15,40 @@
  */
 package com.android.settings.supervision
 
+import android.app.supervision.flags.Flags
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.Uri
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
+import android.provider.Settings.Global
+import android.text.Spanned
+import android.text.style.ClickableSpan
+import android.view.View
+import android.widget.TextView
+import androidx.preference.PreferenceGroupAdapter
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import com.android.settings.R
 import com.android.settingslib.metadata.getPreferenceTitle
+import com.android.settingslib.preference.launchFragmentScenario
+import com.android.settingslib.widget.FooterPreference
+import com.android.settingslib.widget.TopIntroPreference
 import com.google.common.truth.Truth.assertThat
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionAppStoreFiltersScreenTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val supervisionAppStoreFiltersScreen = SupervisionAppStoreFiltersScreen()
+
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
     @Test
     fun key() {
@@ -38,5 +60,73 @@ class SupervisionAppStoreFiltersScreenTest {
     fun getTitle() {
         assertThat(supervisionAppStoreFiltersScreen.getPreferenceTitle(context))
             .isEqualTo("App store filters")
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_APP_STORE_FILTERS_SCREEN)
+    fun flagEnabled() {
+        assertThat(supervisionAppStoreFiltersScreen.isFlagEnabled(context)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_APP_STORE_FILTERS_SCREEN)
+    fun topIntroExists() {
+        supervisionAppStoreFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val topIntroPreference =
+                fragment.findPreference<TopIntroPreference>(
+                    SupervisionAppStoreFiltersTopIntroPreference.KEY
+                )
+            assertThat(topIntroPreference).isNotNull()
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_APP_STORE_FILTERS_SCREEN)
+    fun footerPreference() {
+        supervisionAppStoreFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val footerPreference: FooterPreference =
+                fragment.findPreference(SupervisionAppStoreFiltersFooterPreference.KEY)!!
+
+            assertThat(footerPreference).isNotNull()
+            val context = footerPreference.context
+            val learnMoreLink =
+                context.getString(R.string.supervision_app_store_filters_learn_more_link)
+
+            // setup for HelpUtils.getHelpIntent
+            Global.putInt(context.contentResolver, Global.DEVICE_PROVISIONED, 1)
+            shadowOf(context.packageManager).apply {
+                val componentName = ComponentName(context, "browser")
+                val intentFilter =
+                    IntentFilter(Intent.ACTION_VIEW).apply {
+                        addCategory(Intent.CATEGORY_DEFAULT)
+                        addDataScheme(Uri.parse(learnMoreLink).scheme)
+                    }
+                addActivityIfNotPresent(componentName)
+                addIntentFilterForActivity(componentName, intentFilter)
+            }
+
+            // ensure the footer preference is visible
+            val recyclerView = fragment.listView
+            val adapter = recyclerView.adapter as PreferenceGroupAdapter
+            val position = adapter.getPreferenceAdapterPosition(footerPreference)
+            recyclerView.scrollToPosition(position)
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+            val viewHolder = recyclerView.findViewHolderForAdapterPosition(position)!!
+            val learnMoreView =
+                viewHolder.itemView.findViewById<TextView>(
+                    com.android.settingslib.widget.preference.footer.R.id.settingslib_learn_more
+                )
+            assertThat(learnMoreView.visibility).isEqualTo(View.VISIBLE)
+
+            val text = learnMoreView.text
+            (text as Spanned).getSpans(0, text.length, ClickableSpan::class.java).apply {
+                assertThat(this).hasLength(1)
+                get(0).onClick(learnMoreView)
+            }
+
+            val intent = shadowOf(fragment.activity).nextStartedActivity
+            assertThat(intent.dataString).isEqualTo(learnMoreLink)
+            assertThat(intent.action).isEqualTo(Intent.ACTION_VIEW)
+        }
     }
 }

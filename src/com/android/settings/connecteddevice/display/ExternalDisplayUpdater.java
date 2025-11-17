@@ -18,6 +18,9 @@ package com.android.settings.connecteddevice.display;
 
 import static com.android.settings.flags.Flags.showTabbedConnectedDisplaySetting;
 
+import android.app.admin.DevicePolicyIdentifiers;
+import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
@@ -79,7 +82,11 @@ public class ExternalDisplayUpdater {
         mPreference.setSummary(getSummary());
         mPreference.setIcon(getDrawable(context));
         mPreference.setKey(PREF_KEY);
-        mPreference.setDisabledByAdmin(checkIfUsbDataSignalingIsDisabled(context));
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            mPreference.setDisabledByAdmin(getEnforcingAdminForUsbDataSignaling(context));
+        } else {
+            mPreference.setDisabledByAdmin(checkIfUsbDataSignalingIsDisabled(context));
+        }
         mPreference.setOnPreferenceClickListener((Preference p) -> {
             mMetricsFeatureProvider.logClickedPreference(p, mMetricsCategory);
             if (showTabbedConnectedDisplaySetting()) {
@@ -126,6 +133,17 @@ public class ExternalDisplayUpdater {
 
     @VisibleForTesting
     @Nullable
+    protected EnforcingAdmin getEnforcingAdminForUsbDataSignaling(Context context) {
+        DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
+        if (dpm == null) {
+            return null;
+        }
+        return dpm.getEnforcingAdminsForPolicy(DevicePolicyIdentifiers.USB_DATA_SIGNALING_POLICY,
+                UserHandle.myUserId()).getMostImportantEnforcingAdmin();
+    }
+
+    @VisibleForTesting
+    @Nullable
     protected Drawable getDrawable(Context context) {
         return context.getDrawable(R.drawable.ic_external_display_32dp);
     }
@@ -144,6 +162,11 @@ public class ExternalDisplayUpdater {
                 DisplayDevice::isConnectedDisplay).toList();
         for (var display : allDisplays) {
             if (display.isEnabled() == DisplayIsEnabled.YES) {
+                if (mInjector.getFlags().displayTopologyPaneInDisplayList()) {
+                    // In the new DisplayTopology settings, "External display" preference should
+                    // be displayed without a summary as there's no longer "on" / "off" toggle
+                    return "";
+                }
                 return context.getString(R.string.external_display_on);
             }
         }

@@ -50,7 +50,10 @@ open class SupervisionAppStoreFiltersScreen : PreferenceScreenMixin {
     override fun hasCompleteHierarchy() = true
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) { +SupervisionAppStoreFiltersTopIntroPreference() }
+        preferenceHierarchy(context) {
+            +SupervisionAppStoreFiltersTopIntroPreference()
+            +SupervisionAppStoreFiltersFooterPreference()
+        }
 
     companion object {
         const val KEY = "supervision_app_store_filters"

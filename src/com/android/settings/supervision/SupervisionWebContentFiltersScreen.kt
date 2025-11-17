@@ -96,7 +96,9 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
     override fun onCreate(context: PreferenceLifecycleContext) {
         if (isContainer(context)) {
             supervisionClient = getSupervisionClient(context)
-            addSupportedApps(context)
+            if (!Flags.enableSupervisionSettingsUiUpdates()) {
+                addSupportedApps(context)
+            }
         }
     }
 
@@ -118,6 +120,9 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
                 {
                     val dataStore = SupervisionSafeSitesDataStore(context)
                     +SupervisionSafeSitesSwitchPreference(dataStore)
+                    if (Flags.enableSupervisionSettingsUiUpdates()) {
+                        +SupervisionWebContentFiltersBrowserSupportedAppsScreen.KEY
+                    }
                 }
             +NonIndexablePreferenceCategory(
                 SEARCH_FILTERS_GROUP,
@@ -126,6 +131,9 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
                 {
                     val dataStore = SupervisionSafeSearchDataStore(context)
                     +SupervisionSafeSearchSwitchPreference(dataStore)
+                    if (Flags.enableSupervisionSettingsUiUpdates()) {
+                        +SupervisionWebContentFiltersSearchSupportedAppsScreen.KEY
+                    }
                 }
             +SupervisionWebContentFiltersFooterPreference()
         }

@@ -19,7 +19,6 @@ package com.android.settings.accessibility.screenmagnification.ui
 import android.content.Context
 import android.provider.Settings
 import com.android.internal.accessibility.util.AccessibilityUtils
-import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.MagnificationCapabilities
@@ -82,8 +81,7 @@ class MagnifyKeyboardSwitchPreference :
     }
 
     override fun isAvailable(context: Context): Boolean {
-        return Flags.enableMagnificationMagnifyNavBarAndIme() &&
-            context.isWindowMagnificationSupported()
+        return context.isWindowMagnificationSupported()
     }
 
     override fun isEnabled(context: Context): Boolean {

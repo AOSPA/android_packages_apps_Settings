@@ -55,3 +55,13 @@ flag {
   }
 }
 
+flag {
+  name: "remove_protection_layout"
+  namespace: "biometrics_integration"
+  description: "This flag controls whether remove protection layout in biometrics settings"
+  bug: "440023111"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}
+

@@ -25,7 +25,6 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.AdjustNumeri
 import com.google.android.appfunctions.schema.common.v1.devicestate.OffsetNumericDeviceStateItemByValueParams
 import com.google.android.appfunctions.schema.common.v1.devicestate.SetDeviceStateItemParams
 import com.google.android.appfunctions.schema.common.v1.devicestate.SetDeviceStateItemResponse
-import com.google.android.appfunctions.schema.common.v1.devicestate.ToggleDeviceStateItemParams
 
 /**
  * Attempts to set the device state according to the provided params if it's the appropriate setter
@@ -65,8 +64,6 @@ abstract class DeviceStateSetter {
                     context,
                     params.getAdjustNumericDeviceStateItemByPercentageParams(),
                 )
-            DeviceStateAppFunctionType.TOGGLE_DEVICE_STATE ->
-                toggleDeviceStateItemParams(context, params.getToggleDeviceStateItemParams())
             else -> {
                 Log.i(TAG, "Unrecognised appFunctionType: $appFunctionType")
                 return null
@@ -99,12 +96,6 @@ abstract class DeviceStateSetter {
     abstract fun adjustNumericDeviceStateByPercentage(
         context: Context,
         params: AdjustNumericDeviceStateItemByPercentageParams,
-    ): SetDeviceStateItemResponse?
-
-    /** Changes the value of a toggle to the opposite of the current value. e.g. Toggling wifi. */
-    abstract fun toggleDeviceStateItemParams(
-        context: Context,
-        params: ToggleDeviceStateItemParams,
     ): SetDeviceStateItemResponse?
 
     companion object {

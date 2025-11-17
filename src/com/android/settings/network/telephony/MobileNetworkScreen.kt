@@ -29,6 +29,7 @@ import com.android.settings.Settings.MobileNetworkActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.datausage.BillingCycleScreen
 import com.android.settings.datausage.DataUsageListScreen
+import com.android.settings.deviceinfo.imei.getImeiList
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.apn.ApnSettings
@@ -96,7 +97,8 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
                     +MobileNetworkPhoneNumberPreference(data)
                     +RoamingPreference(context, subId) order +90
                     +EnabledNetworkModePreference(data)
-                    +MobileNetworkImeiPreference(context, subId)
+                    val imeiList = context.getImeiList
+                    +MobileNetworkImeiPreference(context, subId, imeiList)
                     +(DataUsageListScreen.KEY args arguments)
                     +(BillingCycleScreen.KEY args arguments) order 115
                     +UntitledPreferenceCategoryMetadata("apn_and_protection_container") += {

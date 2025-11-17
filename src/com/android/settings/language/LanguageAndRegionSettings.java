@@ -267,7 +267,8 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
         mUserPreferredLocalePreferenceController.updatePreferences();
     }
 
-    private void showConfirmDialogByType(Integer type) {
+    @VisibleForTesting
+    void showConfirmDialogByType(Integer type) {
         if (isAdded()) {
             Log.d(TAG, "getDialogType, type = " + type);
             LocaleDialogFragment localeDialogFragment = LocaleDialogFragment.newInstance();

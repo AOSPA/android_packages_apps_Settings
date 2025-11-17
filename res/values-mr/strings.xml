@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"श्रवणयंत्राची सेटिंग्ज"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"शॉर्टकट, श्रवणयंत्राची कंपॅटिबिलिटी"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"प्रीसेट"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"डावा प्रीसेट"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"उजवा प्रीसेट"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"डावा: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> उजवा: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"तुमच्या ऑडिओलॉजिस्टने प्रोग्राम केलेले प्रीसेट नाहीत"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"प्रीसेट अपडेट करता आले नाही"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"जवळपासचे"</string>
@@ -251,6 +248,8 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"खाली हलवा"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"काढून टाका"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"सर्वात वरती हलवा"</string>
+    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"प्रादेशिक प्राधान्ये"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"युनिट आणि नंबर प्राधान्ये सेट करा"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"अ‍ॅप्सना तुमची प्रादेशिक प्राधान्ये सांगा ज्यामुळे ते तुमचा अनुभव पर्सनलाइझ करतील."</string>
@@ -1526,7 +1525,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"कधी दाखवायचे"</string>
     <string name="doze_title" msgid="1523090408230862316">"नोटिफिकेशनसाठी स्क्रीन सुरू करा"</string>
     <string name="doze_summary" msgid="8252867381522942804">"स्क्रीन बंद असताना, नवीन नोटिफिकेशन आल्यास सुरू होते"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"वेळ आणि माहिती कायम दाखवा"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"नेहमी सुरू असलेला डिस्प्ले"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"वाढलेला बॅटरी वापर"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"स्क्रीन बंद असते, तेव्हा लॉक स्‍क्रीन वॉलपेपर दाखवा"</string>
@@ -1690,10 +1688,8 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"सामुदायिक सेटिंग्ज"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"हब मोड"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"लॉक स्क्रीनवरील विजेट"</string>
-    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
-    <skip />
-    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
-    <skip />
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"तुमची आवडती विजेट अ‍ॅक्सेस करण्यासाठी, तुमच्या लॉक स्‍क्रीन वरून डावीकडे स्वाइप करा. \n\nतुम्ही विजेट वापरून अ‍ॅप उघडता, तेव्हा तुम्हाला हे तुम्हीच असल्याची पडताळणी करावी लागेल. तसेच, लक्षात ठेवा, कोणीही ती पाहू शकते."</string>
+    <string name="settings_beta_tag" msgid="8646243453760353582">"बीटा"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"आपोआप कधी दाखवायचे"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"कधीही नाही"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"चार्ज करताना"</string>
@@ -3439,8 +3435,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"या डिव्हाइसवरुन <xliff:g id="USER_NAME">%1$s</xliff:g> हटवा"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"लॉक स्क्रीन सेटिंग्ज"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"लॉक स्‍क्रीनवरून वापरकर्ते जोडा"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"साइन-इन स्क्रीनवरून वापरकर्ते जोडा"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"डॉक केले असेल तेव्हा ॲडमिन वापरकर्त्यावर स्विच करा"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"आपल्या स्वत:ला हटवायचे?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"हा वापरकर्ता हटवायचा का?"</string>
@@ -5947,7 +5942,10 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"पिन हटवा"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"रिकव्हरी ईमेल जोडा"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"तुमच्या ईमेलची पडताळणी करा"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"अ‍ॅप स्टोअर फिल्टर"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"वेबसाइट आशय फिल्टर"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"वेबसाइट फिल्टर, साइट ब्लॉक करणे, ब्राउझर फिल्टर, भडक साइट ब्लॉक करणे, साइट फिल्टर करणे, शोध परिणाम ब्लॉक करणे, भडक शोध परिणाम फिल्टर करणे, आशयासंबंधी निर्बंध"</string>
@@ -5986,7 +5984,6 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"गोपनीयता नियंत्रणे"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"परवानग्या, नियंत्रणे"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"डिव्हाइस अनलॉक करणे"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"स्क्रीन लॉक"</string>
     <string name="location_settings" msgid="6833222354060094170">"स्थान अ‍ॅक्सेस"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"स्थानाचा अ‍ॅक्सेस असलेली अ‍ॅप्स आणि सेवा पहा"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"ओळख तपासणी आणखी अ‍ॅप्ससह काम करते"</string>

@@ -129,7 +129,7 @@ public class UserCapabilitiesTest {
     @Test
     @Ignore
     public void restrictedProfile_enabled() {
-        mUserManager.setUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED, true);
+        mUserManager.setUserTypeSupported(UserManager.USER_TYPE_FULL_RESTRICTED, true);
         mDpm.setDeviceOwner(null);
         SettingsShadowResources.overrideResource(R.bool.config_offer_restricted_profiles, true);
         final UserCapabilities userCapabilities = UserCapabilities.create(mContext);
@@ -138,7 +138,7 @@ public class UserCapabilitiesTest {
 
     @Test
     public void restrictedProfile_configNotSet() {
-        mUserManager.setUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED, true);
+        mUserManager.setUserTypeSupported(UserManager.USER_TYPE_FULL_RESTRICTED, true);
         mDpm.setDeviceOwner(null);
         SettingsShadowResources.overrideResource(R.bool.config_offer_restricted_profiles, false);
         final UserCapabilities userCapabilities = UserCapabilities.create(mContext);
@@ -147,7 +147,7 @@ public class UserCapabilitiesTest {
 
     @Test
     public void restrictedProfile_deviceIsManaged() {
-        mUserManager.setUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED, true);
+        mUserManager.setUserTypeSupported(UserManager.USER_TYPE_FULL_RESTRICTED, true);
         mDpm.setDeviceOwner(new ComponentName("test", "test"));
         SettingsShadowResources.overrideResource(R.bool.config_offer_restricted_profiles, true);
         final UserCapabilities userCapabilities = UserCapabilities.create(mContext);
@@ -156,7 +156,7 @@ public class UserCapabilitiesTest {
 
     @Test
     public void restrictedProfile_typeNotEnabled() {
-        mUserManager.setUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED, false);
+        mUserManager.setUserTypeSupported(UserManager.USER_TYPE_FULL_RESTRICTED, false);
         mDpm.setDeviceOwner(null);
         SettingsShadowResources.overrideResource(R.bool.config_offer_restricted_profiles, true);
         final UserCapabilities userCapabilities = UserCapabilities.create(mContext);
@@ -171,7 +171,7 @@ public class UserCapabilitiesTest {
                 com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen, true);
         mUserManager.setIsAdminUser(true);
         mUserManager.setSupportsMultipleUsers(true);
-        mUserManager.setUserTypeEnabled(UserManager.USER_TYPE_FULL_GUEST, true);
+        mUserManager.setUserTypeSupported(UserManager.USER_TYPE_FULL_GUEST, true);
         UserCapabilities userCapabilities = UserCapabilities.create(mContext);
         assertThat(userCapabilities.mCanAddGuest).isFalse();
     }

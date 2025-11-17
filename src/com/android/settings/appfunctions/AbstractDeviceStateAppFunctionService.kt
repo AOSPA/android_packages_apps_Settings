@@ -31,12 +31,13 @@ import com.android.extensions.appfunctions.AppFunctionException.ERROR_FUNCTION_N
 import com.android.extensions.appfunctions.AppFunctionService
 import com.android.extensions.appfunctions.ExecuteAppFunctionRequest
 import com.android.extensions.appfunctions.ExecuteAppFunctionResponse
-import com.android.settings.appfunctions.providers.AndroidApiStateProviderExecutor
-import com.android.settings.appfunctions.providers.AndroidApiStateSetterExecutor
-import com.android.settings.appfunctions.providers.CatalystStateMetadataProviderExecutor
-import com.android.settings.appfunctions.providers.CatalystStateProviderExecutor
-import com.android.settings.appfunctions.providers.CatalystStateSetterExecutor
-import com.android.settings.appfunctions.providers.DeviceStateExecutor
+import com.android.settings.appfunctions.executors.AndroidApiStateMetadataProviderExecutor
+import com.android.settings.appfunctions.executors.AndroidApiStateProviderExecutor
+import com.android.settings.appfunctions.executors.AndroidApiStateSetterExecutor
+import com.android.settings.appfunctions.executors.CatalystStateMetadataProviderExecutor
+import com.android.settings.appfunctions.executors.CatalystStateProviderExecutor
+import com.android.settings.appfunctions.executors.CatalystStateSetterExecutor
+import com.android.settings.appfunctions.executors.DeviceStateExecutor
 import com.android.settings.utils.getLocale
 import java.util.Locale
 import kotlinx.coroutines.runBlocking
@@ -72,7 +73,8 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                 getSettingsCatalystConfig(),
                 applicationContext,
                 englishContext,
-            )
+            ),
+            AndroidApiStateMetadataProviderExecutor(applicationContext),
         )
     }
     val deviceStateMetadataProviderAggregator by lazy {
@@ -99,7 +101,6 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
             DeviceStateAppFunctionType.ADJUST_DEVICE_STATE_BY_PERCENTAGE to
                 deviceStateSetterAggregator,
             DeviceStateAppFunctionType.OFFSET_DEVICE_STATE_BY_VALUE to deviceStateSetterAggregator,
-            DeviceStateAppFunctionType.TOGGLE_DEVICE_STATE to deviceStateSetterAggregator,
         )
     }
 

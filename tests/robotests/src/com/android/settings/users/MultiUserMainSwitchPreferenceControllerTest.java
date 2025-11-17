@@ -39,6 +39,7 @@ import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.SettingsMainSwitchPreference;
@@ -57,7 +58,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class, ShadowDevicePolicyManager.class})
+@Config(shadows = {
+        ShadowUserManager.class,
+        ShadowDevicePolicyManager.class,
+        SettingsShadowResources.class,
+})
 public class MultiUserMainSwitchPreferenceControllerTest {
 
     @Rule
@@ -85,6 +90,7 @@ public class MultiUserMainSwitchPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowUserManager.reset();
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -222,6 +228,20 @@ public class MultiUserMainSwitchPreferenceControllerTest {
                 new MultiUserMainSwitchPreferenceController(mContext, KEY_USER_SWITCH_TOGGLE);
 
         assertEquals(AVAILABLE,
+                multiUserMainSwitchPreferenceController.getAvailabilityStatus());
+    }
+
+    @Test
+    public void changeUserSwitcherDisabled_shouldBeHidden() {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.bool.config_allowChangeUserSwitcherEnabled, false);
+        mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_USER_SWITCH, false);
+
+        MultiUserMainSwitchPreferenceController multiUserMainSwitchPreferenceController =
+                new MultiUserMainSwitchPreferenceController(mContext, KEY_USER_SWITCH_TOGGLE);
+
+        assertEquals(DISABLED_FOR_USER,
                 multiUserMainSwitchPreferenceController.getAvailabilityStatus());
     }
 }

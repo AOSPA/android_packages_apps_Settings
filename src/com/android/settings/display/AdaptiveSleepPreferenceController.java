@@ -23,6 +23,7 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 import static com.android.settings.display.UtilsKt.isAdaptiveSleepSupported;
 
 import android.Manifest;
+import android.app.admin.EnforcingAdmin;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -83,11 +84,21 @@ public class AdaptiveSleepPreferenceController {
      */
     public void updatePreference() {
         initializePreference();
-        final EnforcedAdmin enforcedAdmin = mRestrictionUtils.checkIfRestrictionEnforced(mContext,
-                UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT);
-        if (enforcedAdmin != null) {
-            mPreference.setDisabledByAdmin(enforcedAdmin);
+        boolean isDisabledByAdmin;
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            final EnforcingAdmin admin = mRestrictionUtils.checkIfUserRestrictionEnforced(mContext,
+                    UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT);
+            isDisabledByAdmin = admin != null;
+            mPreference.setDisabledByAdmin(admin);
         } else {
+            final EnforcedAdmin enforcedAdmin = mRestrictionUtils.checkIfRestrictionEnforced(
+                    mContext, UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT);
+            isDisabledByAdmin = enforcedAdmin != null;
+            if (isDisabledByAdmin) {
+                mPreference.setDisabledByAdmin(enforcedAdmin);
+            }
+        }
+        if (!isDisabledByAdmin) {
             mPreference.setChecked(isChecked());
             mPreference.setEnabled(hasSufficientPermission(mPackageManager) && !isCameraLocked()
                     && !isPowerSaveMode());

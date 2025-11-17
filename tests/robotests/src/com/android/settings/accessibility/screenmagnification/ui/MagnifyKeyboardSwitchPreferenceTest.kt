@@ -17,7 +17,6 @@
 package com.android.settings.accessibility.screenmagnification.ui
 
 import android.content.Context
-import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
@@ -135,23 +134,6 @@ class MagnifyKeyboardSwitchPreferenceTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MAGNIFY_NAV_BAR_AND_IME)
-    fun isAvailable_featureFlagDisabled_windowMagnificationSupported_disabled() {
-        setWindowMagnificationSupported(context, true)
-
-        assertThat(preference.isAvailable(context)).isFalse()
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MAGNIFY_NAV_BAR_AND_IME)
-    fun isAvailable_featureFlagDisabled_windowMagnificationNotSupported_disabled() {
-        setWindowMagnificationSupported(context, false)
-
-        assertThat(preference.isAvailable(context)).isFalse()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MAGNIFY_NAV_BAR_AND_IME)
     fun isAvailable_featureFlagEnabled_windowMagnificationSupported_enabled() {
         setWindowMagnificationSupported(context, true)
 
@@ -159,7 +141,6 @@ class MagnifyKeyboardSwitchPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MAGNIFY_NAV_BAR_AND_IME)
     fun isAvailable_featureFlagEnabled_windowMagnificationNotSupported_disabled() {
         setWindowMagnificationSupported(context, false)
 

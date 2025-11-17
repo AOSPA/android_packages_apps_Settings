@@ -18,17 +18,52 @@ package com.android.settings.safetycenter.ui
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import com.android.settings.R
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
+import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
+import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFactory
 import com.android.settings.search.BaseSearchIndexProvider
+import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.widget.IllustrationPreference
 
 /** Fragment for displaying device unlock subpage within the Safety Center in Settings. */
 @SearchIndexable
 class DeviceUnlockSubPageFragment : DashboardFragment() {
 
+    private val viewModel: LiveSafetyCenterViewModel by viewModels {
+        LiveSafetyCenterViewModelFactory(requireActivity().application)
+    }
+
     override fun getPreferenceScreenResId(): Int {
-        return com.android.settings.R.xml.safety_center_device_unlock_subpage
+        return R.xml.safety_center_device_unlock_subpage
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupIllustration()
+        setupSafetySourcePreferenceControllers(viewLifecycleOwner)
+    }
+
+    private fun setupIllustration() {
+        val illustrationPreference: IllustrationPreference =
+            findPreference(DEVICE_UNLOCK_ILLUSTRATION_KEY)!!
+        illustrationPreference.imageDrawable =
+            context?.getDrawable(R.drawable.illustration_expressive_android_lock_screen_sources)
+    }
+
+    private fun setupSafetySourcePreferenceControllers(owner: LifecycleOwner) {
+        val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
+        for (controller in allControllers) {
+            if (controller is SafetySourcePreferenceController) {
+                controller.setViewModelAndLifecycle(viewModel, owner)
+            }
+        }
     }
 
     override fun getLogTag(): String {
@@ -40,15 +75,13 @@ class DeviceUnlockSubPageFragment : DashboardFragment() {
     }
 
     companion object {
-        private const val TAG = "DeviceUnlockSubpageFragment"
+        private const val TAG = "DeviceUnlockSubPageFrag"
+        private const val DEVICE_UNLOCK_ILLUSTRATION_KEY = "device_unlock_illustration"
 
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =
-            object :
-                BaseSearchIndexProvider(
-                    com.android.settings.R.xml.safety_center_device_unlock_subpage
-                ) {
-                override fun isPageSearchEnabled(context: Context): Boolean {
+            object : BaseSearchIndexProvider(R.xml.safety_center_device_unlock_subpage) {
+                override fun isPageSearchEnabled(context: Context?): Boolean {
                     return Flags.enableSafetyCenterNewUi()
                 }
             }
