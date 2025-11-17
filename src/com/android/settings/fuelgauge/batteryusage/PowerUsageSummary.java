@@ -39,7 +39,6 @@ import com.android.settings.Utils;
 import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatteryHeaderTextPreferenceController;
 import com.android.settings.fuelgauge.BatteryInfo;
-import com.android.settings.fuelgauge.BatteryInfoLoader;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
@@ -80,29 +79,6 @@ public class PowerUsageSummary extends PowerUsageBase
                 @Override
                 public void onChange(boolean selfChange, Uri uri) {
                     restartBatteryInfoLoader();
-                }
-            };
-
-    @VisibleForTesting
-    LoaderManager.LoaderCallbacks<BatteryInfo> mBatteryInfoLoaderCallbacks =
-            new LoaderManager.LoaderCallbacks<BatteryInfo>() {
-
-                @Override
-                public Loader<BatteryInfo> onCreateLoader(int i, Bundle bundle) {
-                    return new BatteryInfoLoader(getContext());
-                }
-
-                @Override
-                public void onLoadFinished(Loader<BatteryInfo> loader, BatteryInfo batteryInfo) {
-                    mBatteryHeaderTextPreferenceController.updateHeaderPreference(batteryInfo);
-                    mBatteryHeaderTextPreferenceController.updateHeaderByBatteryTips(
-                            mBatteryTipPreferenceController.getCurrentBatteryTip(), batteryInfo);
-                    mBatteryInfo = batteryInfo;
-                }
-
-                @Override
-                public void onLoaderReset(Loader<BatteryInfo> loader) {
-                    // do nothing
                 }
             };
 
@@ -244,7 +220,15 @@ public class PowerUsageSummary extends PowerUsageBase
         if (!mIsBatteryPresent) {
             return;
         }
-        restartLoader(LoaderIndex.BATTERY_INFO_LOADER, Bundle.EMPTY, mBatteryInfoLoaderCallbacks);
+        BatteryInfo.getBatteryInfo(
+                getContext(),
+                info -> {
+                    mBatteryHeaderTextPreferenceController.updateHeaderPreference(info);
+                    mBatteryHeaderTextPreferenceController.updateHeaderByBatteryTips(
+                            mBatteryTipPreferenceController.getCurrentBatteryTip(), info);
+                    mBatteryInfo = info;
+                },
+                true);
     }
 
     @VisibleForTesting
