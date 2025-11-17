@@ -306,7 +306,7 @@
     <string name="okay" msgid="4827099303045669054">"OK"</string>
     <string name="forget" msgid="3754013654135912783">"Esquecer"</string>
     <string name="save" msgid="3125033126936493822">"Guardar"</string>
-    <string name="done" msgid="7497982645646431310">"Concluído"</string>
+    <string name="done" msgid="7497982645646431310">"Concluir"</string>
     <string name="apply" msgid="7834684883190163536">"Aplicar"</string>
     <string name="share" msgid="8502235338607613795">"Partilhar"</string>
     <string name="add" msgid="8335206931421683426">"Adicionar"</string>
@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Usa o fuso horário <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"O horário <xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> começa a <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Usa o fuso horário <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Sem mudança da hora."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Mudança da hora"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Hora padrão"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Selecionar por região"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Selec. por diferença para GMT"</string>
@@ -1056,7 +1054,7 @@
     <string name="wifi_display_status_not_available" msgid="8463750208946968594">"Indisponível"</string>
     <string name="wifi_display_options_title" msgid="7584326966240865043">"Opções de visualização sem fios"</string>
     <string name="wifi_display_options_forget" msgid="3140558691112356024">"Esquecer"</string>
-    <string name="wifi_display_options_done" msgid="7608851767701954020">"Concluído"</string>
+    <string name="wifi_display_options_done" msgid="7608851767701954020">"Concluir"</string>
     <string name="wifi_display_options_name" msgid="8181334945680312228">"Nome"</string>
     <string name="wifi_band_24ghz" msgid="7322286660245127384">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="7995204987245404797">"5 GHz"</string>
@@ -2366,7 +2364,7 @@
     <string name="pointer_scale_keywords" msgid="8939432511048322072">"escala, tamanho, escala do ponteiro, tamanho do ponteiro, ponteiro do rato grande, grande, visível"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Controlador de Jogos"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redirecionar vibração"</string>
-    <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Enviar a vibração para o controlador do jogo, quando ligado."</string>
+    <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Enviar vibração para o comando de jogos, quando ligado"</string>
     <string name="keyboard_layout_dialog_title" msgid="8770130364048089954">"Escolher esquema de teclado"</string>
     <string name="keyboard_layout_dialog_setup_button" msgid="6546245862744626706">"Configurar os esquemas de teclado"</string>
     <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"Para alternar, prima Ctrl-Bar. esp."</string>
@@ -4975,7 +4973,7 @@
     <string name="account_sync_summary_all_on" msgid="2953682111836599841">"Sincronização ativada para todos os itens"</string>
     <string name="account_sync_summary_all_off" msgid="6378301874540507884">"Sincronização desativada para todos os itens"</string>
     <string name="enterprise_privacy_settings" msgid="786350385374794180">"Informações do dispositivo gerido"</string>
-    <string name="enterprise_privacy_settings_summary_generic" msgid="5471858290610344646">"Alterações e definições geridas pela sua entidade"</string>
+    <string name="enterprise_privacy_settings_summary_generic" msgid="5471858290610344646">"Alterações e definições geridas pela sua organização"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="1315413275836515937">"Alterações e definições geridas pela <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>"</string>
     <string name="enterprise_privacy_header" msgid="4626225398848641603">"Para fornecer acesso aos seus dados de trabalho, a sua entidade pode alterar definições e instalar software no seu dispositivo.\n\nPara obter mais detalhes, contacte o gestor da sua entidade."</string>
     <string name="enterprise_privacy_exposure_category" msgid="2507761423540037308">"Tipos de informação que a sua entidade pode ver"</string>
@@ -6120,4 +6118,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Conetividade por satélite"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Mantenha-se em contacto quando não tiver uma rede móvel ou Wi-Fi"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Página de destino do satélite"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

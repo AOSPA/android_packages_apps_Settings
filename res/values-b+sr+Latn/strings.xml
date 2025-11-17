@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Koristi se <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> počinje <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>"</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Koristi <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nema letnjeg računanja vremena."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Letnje računanje vremena"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standardno vreme"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Izaberite prema regionu"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Izbor prema odstupanju od GMT-a"</string>
@@ -2673,7 +2671,7 @@
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Automatski klik (vreme zadržavanja)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Saznajte više o automatskom kliku (vreme zadržavanja)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Možete da podesite da povezani miš automatski klikne kada kursor prestane da se kreće neko vreme"</string>
-    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Automatski klik može da bude koristan ako vamje teško da klikćete mišem"</string>
+    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Automatski klik može da bude koristan ako vam je teško da klikćete mišem"</string>
     <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Automatski klik je isključen"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Kratko"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0,2 sekunde"</string>
@@ -6027,10 +6025,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verifikujte podatke za vraćanje pristupa nalogu"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filteri prodavnice aplikacija"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtrirajte aplikacije na osnovu ocene zrelosti njihovog sadržaja"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Svaka prodavnica ocenjuje sadržaj na različit način. Ocena aplikacije može da se razlikuje u različitim prodavnicama."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtrirajte aplikacije prema ocenama sadržaja"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filteri veb-sadržaja"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"filteri veb-sajtova, blokiranje sajtova, filteri pregledača, blokiranje eksplicitnih sajtova, filtriranje sajtova, blokiranje rezultata pretrage, filtriranje eksplicitnih rezultata pretrage, ograničenja sadržaja"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Pomaže u filtriranju eksplicitnog sadržaja u nekim aplikacijama i pregledačima na ovom telefonu. Eksplicitan sadržaj i dalje može da se prikazuje u drugim aplikacijama i pregledačima, kao i na drugim uređajima."</string>
@@ -6121,4 +6117,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Satelitska veza"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Ostanite povezani kada nemate pristup mobilnoj ni WiFi mreži"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Odredišna stranica za satelit"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>
