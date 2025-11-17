@@ -114,6 +114,9 @@ const val KEY_NOTIFICATION_VOLUME = "notification_volume"
 /** Contract key for the "Alarm volume" setting. */
 const val KEY_ALARM_VOLUME = "alarm_volume"
 
+/** Contract key for the "Assistant volume" setting. */
+const val KEY_ASSISTANT_VOLUME = "assistant_volume"
+
 /**
  * Contract key for the "Dial pad tones" setting, identical to
  * [android.provider.Settings.System.DTMF_TONE_WHEN_DIALING].

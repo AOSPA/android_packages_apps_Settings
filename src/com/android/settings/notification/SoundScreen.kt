@@ -78,6 +78,7 @@ open class SoundScreen : PreferenceScreenMixin, PreferenceIconProvider {
                     +SeparateRingVolumePreference(audioHelper) order -155
                     +NotificationVolumePreference(audioHelper) order -150
                     +AlarmVolumePreference(audioHelper) order -140
+                    +AssistantVolumePreference(audioHelper) order -130
                 }
             +PreferenceCategory(
                 key = AUDIO_CATEGORY,
