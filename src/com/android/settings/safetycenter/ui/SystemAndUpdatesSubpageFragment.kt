@@ -24,6 +24,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import com.android.settings.R
+import com.android.settings.core.SubSettingLauncher
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
@@ -42,9 +43,31 @@ class SystemAndUpdatesSubpageFragment : DashboardFragment() {
     private val viewModel: LiveSafetyCenterViewModel by viewModels {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
     }
+    private var safetySourceIds: List<String> = emptyList()
 
     override fun getPreferenceScreenResId(): Int {
         return R.xml.safety_center_system_and_updates_subpage
+    }
+
+    override fun onCreate(icicle: Bundle?) {
+        super.onCreate(icicle)
+
+        safetySourceIds =
+            SafetyCenterSubpageRegistry.getAllSafetySourceIds(
+                requireContext(),
+                SafetyCenterSubpageRegistry.SYSTEM_AND_UPDATES_SUBPAGE_KEY,
+            )
+        val entries =
+            viewModel
+                .getCurrentSafetyCenterDataAsUiData()
+                .getDynamicEntriesForSources(safetySourceIds)
+        if (entries.isEmpty()) {
+            Log.d(TAG, "Redirecting from an empty subpage to Safety Center home")
+            SubSettingLauncher(requireContext())
+                .setDestination(SafetyCenterFragment::class.java.getName())
+                .setSourceMetricsCategory(METRICS_CATEGORY_UNKNOWN)
+                .launch()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,11 +102,6 @@ class SystemAndUpdatesSubpageFragment : DashboardFragment() {
 
             val illustrationPreference: IllustrationPreference =
                 findPreference(SYSTEM_AND_UPDATES_ILLUSTRATION_KEY)!!
-            val safetySourceIds =
-                SafetyCenterSubpageRegistry.getAllSafetySourceIds(
-                    requireContext(),
-                    SafetyCenterSubpageRegistry.SYSTEM_AND_UPDATES_SUBPAGE_KEY,
-                )
             setSubpageSafetySourcesAndIllustration(safetySourceIds, illustrationPreference)
         }
     }

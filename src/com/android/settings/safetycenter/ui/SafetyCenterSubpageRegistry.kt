@@ -29,7 +29,9 @@ import org.xmlpull.v1.XmlPullParser
  *
  * This object serves as the central point for:
  * - Defining preference key constants for all subpages.
- * - Mapping preference keys to their [SubpageConfig] (XML, title, summary, issue-only sources).
+ * - Mapping preference keys to [SubpageConfig] (XML, title, summary, issue-only sources, subpage
+ *   fragment).
+ * - Mapping external subpage IDs to preference keys.
  * - Parsing subpage XMLs to extract configurations from [SafetySourcePreference] tags.
  * - Providing utility functions to retrieve lists of source IDs related to a subpage.
  */
@@ -64,12 +66,14 @@ object SafetyCenterSubpageRegistry {
                     R.xml.safety_center_app_security_subpage,
                     R.string.app_security_subpage_title,
                     R.string.safety_center_app_security_summary,
+                    AppSecuritySubpageFragment::class.qualifiedName!!,
                 ),
             DEVICE_UNLOCK_SUBPAGE_KEY to
                 SubpageConfig(
                     R.xml.safety_center_device_unlock_subpage,
                     R.string.device_unlock_subpage_title,
                     R.string.safety_center_device_unlock_summary,
+                    DeviceUnlockSubpageFragment::class.qualifiedName!!,
                     listOf("AndroidIdentityCheck"),
                 ),
             ACCOUNT_SECURITY_SUBPAGE_KEY to
@@ -77,30 +81,35 @@ object SafetyCenterSubpageRegistry {
                     R.xml.safety_center_account_security_subpage,
                     R.string.account_security_subpage_title,
                     R.string.safety_center_account_security_summary,
+                    AccountSecuritySubpageFragment::class.qualifiedName!!,
                 ),
             DEVICE_FINDERS_SUBPAGE_KEY to
                 SubpageConfig(
                     R.xml.safety_center_device_finders_subpage,
                     R.string.device_finders_subpage_title,
                     R.string.safety_center_device_finders_summary,
+                    DeviceFindersSubpageFragment::class.qualifiedName!!,
                 ),
             SYSTEM_AND_UPDATES_SUBPAGE_KEY to
                 SubpageConfig(
                     R.xml.safety_center_system_and_updates_subpage,
                     R.string.system_and_updates_subpage_title,
                     R.string.safety_center_system_and_updates_summary,
+                    SystemAndUpdatesSubpageFragment::class.qualifiedName!!,
                 ),
             CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY to
                 SubpageConfig(
                     R.xml.safety_center_cellular_network_security_subpage,
                     R.string.cellular_network_security_subpage_title,
                     R.string.safety_center_cellular_network_security_summary,
+                    CellularNetworkSecuritySubpageFragment::class.qualifiedName!!,
                 ),
             PRIVACY_CONTROLS_SUBPAGE_KEY to
                 SubpageConfig(
                     R.xml.safety_center_privacy_controls_settings,
                     R.string.privacy_sources_title,
                     R.string.privacy_sources_summary,
+                    PrivacyControlsFragment::class.qualifiedName!!,
                     listOf(
                         "AndroidAccessibility",
                         "AndroidNotificationListener",
@@ -110,6 +119,28 @@ object SafetyCenterSubpageRegistry {
                     ),
                 ),
         )
+
+    fun getSubpageFragmentClassNameFor(context: Context, subpageId: String): String? {
+        val subpageIdToPreferenceKey =
+            mapOf(
+                context.getString(R.string.config_safety_center_app_security_subpage_id) to
+                    APP_SECURITY_SUBPAGE_KEY,
+                context.getString(R.string.config_safety_center_accounts_subpage_id) to
+                    ACCOUNT_SECURITY_SUBPAGE_KEY,
+                context.getString(R.string.config_safety_center_device_finders_subpage_id) to
+                    DEVICE_FINDERS_SUBPAGE_KEY,
+                context.getString(R.string.config_safety_center_updates_subpage_id) to
+                    SYSTEM_AND_UPDATES_SUBPAGE_KEY,
+                context.getString(R.string.config_safety_center_lock_screen_subpage_id) to
+                    DEVICE_UNLOCK_SUBPAGE_KEY,
+                context.getString(R.string.config_safety_center_network_security_subpage_id) to
+                    CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY,
+                context.getString(R.string.config_safety_center_privacy_controls_subpage_id) to
+                    PRIVACY_CONTROLS_SUBPAGE_KEY,
+            )
+
+        return subpageConfigs[subpageIdToPreferenceKey[subpageId]]?.subpageFragmentClassName
+    }
 
     /**
      * Gets the XML resource ID for a given [preferenceKey].
@@ -286,5 +317,6 @@ data class SubpageConfig(
     @XmlRes val xmlResId: Int,
     @StringRes val titleResId: Int,
     @StringRes val defaultSummaryResId: Int,
+    val subpageFragmentClassName: String,
     val issueOnlySources: List<String> = emptyList(),
 )
