@@ -51,20 +51,15 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
     private var preference: Preference? = null
     var relatedSafetySources: List<String> = emptyList()
     var relatedIssueOnlySafetySources: List<String> = emptyList()
-    private var viewModel: LiveSafetyCenterViewModel? = null
+    var viewModel: LiveSafetyCenterViewModel? = null
     @StringRes var defaultSummaryResId: Int? = null
 
-    /**
-     * Sets the ViewModel instance for this controller and registers the observer to update the
-     * preference state when data changes.
-     *
-     * @param viewModel The LiveSafetyCenterViewModel instance.
-     * @param owner The LifecycleOwner to scope the observation.
-     */
-    fun setViewModelAndLifecycle(viewModel: LiveSafetyCenterViewModel, owner: LifecycleOwner) {
-        this.viewModel = viewModel
-
-        viewModel.safetyCenterUiLiveData.observe(owner) { data ->
+    override fun onViewCreated(owner: LifecycleOwner) {
+        if (viewModel == null) {
+            Log.w(TAG, "[$preferenceKey] ViewModel not set, cannot observe LiveData")
+            return
+        }
+        viewModel!!.safetyCenterUiLiveData.observe(owner) { data ->
             if (data == null) {
                 Log.d(TAG, "[$preferenceKey] LiveData received null")
                 return@observe
@@ -89,7 +84,15 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)
-        preference?.let { setVisibility(it, false) }
+        relatedSafetySources =
+            SafetyCenterSubpageRegistry.getXmlSafetySourceIds(mContext, preferenceKey)
+        relatedIssueOnlySafetySources =
+            SafetyCenterSubpageRegistry.getIssueOnlySafetySourceIds(preferenceKey)
+        defaultSummaryResId = SafetyCenterSubpageRegistry.getDefaultSummaryResId(preferenceKey)
+        val model = viewModel
+        if (preference != null && model != null) {
+            updatePreferenceUi(preference!!, model.getCurrentSafetyCenterDataAsUiData())
+        }
     }
 
     override fun updateState(preference: Preference?) {
