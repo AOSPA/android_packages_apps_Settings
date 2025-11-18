@@ -490,9 +490,11 @@ public class BluetoothPairingDialogTest {
         ConstraintLayout positiveContainer =
                 frag.getmDialog().findViewById(R.id.positive_button_container);
         ProgressBar progressBar = frag.getmDialog().findViewById(R.id.positive_button_progress_bar);
+        TextView pairingText = frag.getmDialog().findViewById(R.id.positive_button_pairing_text);
 
         assertThat(positiveContainer.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(progressBar.getVisibility()).isEqualTo(View.GONE);
+        assertThat(pairingText.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
@@ -505,9 +507,11 @@ public class BluetoothPairingDialogTest {
         ConstraintLayout positiveContainer =
                 frag.getmDialog().findViewById(R.id.positive_button_container);
         ProgressBar progressBar = frag.getmDialog().findViewById(R.id.positive_button_progress_bar);
+        TextView pairingText = frag.getmDialog().findViewById(R.id.positive_button_pairing_text);
         positiveContainer.callOnClick();
 
         assertThat(progressBar.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(pairingText.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test
