@@ -21,6 +21,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
+import com.android.settings.SettingsLaunchpadActivity
+import com.android.settings.SettingsLaunchpadActivity.Companion.EXTRA_SCREEN_ARGS
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
 import com.android.settingslib.metadata.ValidatedKeyParameters
 
@@ -68,6 +70,34 @@ fun makeLaunchIntent(
     keyParameters: ValidatedKeyParameters,
     key: String?,
 ) = createIntent(context, activityClass).apply { highlightPreference(keyParameters, key) }
+
+fun makeLaunchpadIntent(context: Context, screenKey: String, key: String?) =
+    Intent(context, SettingsLaunchpadActivity::class.java).apply {
+        action = "com.android.settings.action.LAUNCH_SETTINGS_PAGES"
+        putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, screenKey)
+        highlightPreference(key)
+    }
+
+fun makeLaunchpadIntent(
+    context: Context,
+    screenKey: String,
+    keyParameters: ValidatedKeyParameters,
+    key: String?,
+) =
+    Intent(context, SettingsLaunchpadActivity::class.java).apply {
+        action = "com.android.settings.action.LAUNCH_SETTINGS_PAGES"
+        putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, screenKey)
+        putExtra(EXTRA_SCREEN_ARGS, keyParameters.toBundle())
+        highlightPreference(key)
+    }
+
+fun makeLaunchpadIntent(context: Context, screenKey: String, arguments: Bundle, key: String?) =
+    Intent(context, SettingsLaunchpadActivity::class.java).apply {
+        action = "com.android.settings.action.LAUNCH_SETTINGS_PAGES"
+        putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, screenKey)
+        putExtra(EXTRA_SCREEN_ARGS, arguments)
+        highlightPreference(key)
+    }
 
 private fun createIntent(context: Context, activityClass: Class<out Activity>) =
     Intent(context, activityClass).apply {
