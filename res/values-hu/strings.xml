@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"A következőt használja: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"A(z) <xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> kezdete: <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"A következőt használja: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nyári időszámítás nélkül."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Nyári időszámítás"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Hivatalos idő"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Kiválasztás régió szerint"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"GMT-eltolódás kiválasztása"</string>
@@ -4601,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Engedélyezi ennek az alkalmazásnak az eszközön és a csatlakoztatott tárolóköteteken található összes fájl olvasását, módosítását és törlését. Ha engedélyezve van, az alkalmazás anélkül férhet hozzá a fájlokhoz, hogy Önt külön tájékoztatná róla."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Minden fájlhoz hozzáférhet"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Képernyőautomatizálás"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Engedélyezheti ennek az alkalmazásnak, hogy teljes mértékben automatizáljon más appokat"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Ez az alkalmazás vezérelni tudja majd az appjait. A vezérelt alkalmazások nem használhatók a képernyőautomatizálás során, de bármikor leállíthatja a képernyőautmatizálást."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Mindig kérdezzen rá"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Mindig engedélyezve"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Tiltás"</string>
@@ -6026,10 +6028,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Helyreállítási adatok ellenőrzése"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Alkalmazásbolti szűrők"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Alkalmazások szűrése a tartalmuk életkor-besorolási szintje alapján"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Minden áruház másképp értékeli a tartalmakat. Egy adott alkalmazás értékelése eltérő lehet a különböző áruházakban."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Alkalmazások szűrése tartalombesorolás szerint"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Webes tartalomszűrők"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Webhelyszűrők, Webhelyek letiltása, Böngészőszűrők, Szókimondó webhelyek letiltása, Webhelyek szűrése, Keresési találatok letiltása, Szókimondó keresési találatok szűrése, tartalmi korlátozások"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Segít kiszűrni a felnőtteknek szóló tartalmakat bizonyos alkalmazásokban és böngészőkben ezen a telefonon. Más alkalmazásokban, eszközökön vagy böngészőkben a felnőtteknek szóló tartalmak továbbra is megjelenhetnek."</string>

@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"使用<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>。<xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g>將從 <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>開始。"</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"使用<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>。沒有日光節約時間。"</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"日光節約時間"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"標準時間"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"依區域選取"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"依 GMT 時差選取"</string>
@@ -4601,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"授權給這個應用程式，允許讀取、修改及刪除這部裝置或任何已連結儲存空間的所有檔案。應用程式獲得授權後，可能會在你不知情的情況下存取檔案。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以存取所有檔案"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"螢幕自動化"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"允許這個應用程式對其他應用程式執行完全自動化作業"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"這個應用程式將能控制你的其他應用程式。螢幕自動化作業期間，你無法使用受控應用程式，但隨時可以停止自動化作業。"</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"每次都詢問"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"一律允許"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"不允許"</string>
@@ -6026,10 +6028,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"驗證備援資訊"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"應用程式商店篩選條件"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"根據內容級別篩選應用程式"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"各商店的內容分級標準不同，因此應用程式在不同商店的內容分級可能有差異。"</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"依內容分級篩選應用程式"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"網路內容篩選器"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"網站篩選器, 封鎖網站, 瀏覽器篩選器, 封鎖露骨內容網站, 篩選網站, 封鎖搜尋結果, 篩選露骨搜尋結果, 內容限制"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"在這支手機上，協助篩除部分應用程式和瀏覽器中的露骨內容。其他應用程式、裝置或瀏覽器仍可能顯示這類內容。"</string>

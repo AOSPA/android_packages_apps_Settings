@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Utilitza <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> a partir del dia <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Utilitza <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. No té horari d\'estiu."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Horari d\'estiu"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Hora estàndard"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Selecciona per regió"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Selecciona per diferència amb GMT"</string>
@@ -3084,11 +3082,11 @@
     <string name="battery_app_usage_since_last_full_charge_to" msgid="4339201995118102114">"Ús de les aplicacions des de la darrera càrrega completa fins a <xliff:g id="SLOT_TIMESTAMP">%s</xliff:g>"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="951460680288855780">"Total: menys d\'un minut"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="267133882897827276">"En segon pla: menys d\'un minut"</string>
-    <string name="battery_usage_screen_time_less_than_one_minute" msgid="578511021578427369">"Temps de connexió: menys d\'un minut"</string>
+    <string name="battery_usage_screen_time_less_than_one_minute" msgid="578511021578427369">"Temps de pantalla: menys d\'un minut"</string>
     <string name="power_usage_time_less_than_one_minute" msgid="1599706998204418081">"Menys d\'un minut"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"En segon pla: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_time" msgid="3973865893520804115">"Temps de connexió: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_screen_time" msgid="3973865893520804115">"Temps de pantalla: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Les dades d\'ús de la bateria estaran disponibles d\'aquí a unes quantes hores un cop s\'hagi carregat del tot"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"ara"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>-<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
@@ -3103,8 +3101,8 @@
     <string name="battery_level_percentage" msgid="1433178290838842146">"Percentatge del nivell de bateria de <xliff:g id="START_PERCENTAGE">%1$s</xliff:g> a <xliff:g id="END_PERCENTAGE">%2$s</xliff:g>"</string>
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Ús de la bateria des de la darrera càrrega completa"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Ús de la bateria: <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Temps de connexió des de la darrera càrrega completa"</string>
-    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Temps de connexió: <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Temps de pantalla des de la darrera càrrega completa"</string>
+    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Temps de pantalla: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Mostra per aplicacions"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Mostra per sistemes"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
@@ -4495,7 +4493,7 @@
     <string name="apps_storage" msgid="643866814746927111">"Emmagatzematge d\'aplicacions"</string>
     <string name="usage_access" msgid="640680494210288246">"Dades d\'ús de l\'aplicació"</string>
     <string name="permit_usage_access" msgid="1590518257313260262">"Permet l\'accés a les dades d\'ús de l\'app"</string>
-    <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Temps de connexió"</string>
+    <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Temps de pantalla"</string>
     <string name="usage_access_description" msgid="2593955296993609047">"Les dades d\'ús de l\'aplicació permeten que una aplicació pugui fer un seguiment de les altres aplicacions que utilitzes i la freqüència amb què ho fas, així com del teu operador i de la configuració d\'idioma, entre d\'altres."</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"Memòria"</string>
     <string name="always_running" msgid="9012705720688200252">"Sempre en execució (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -4603,8 +4601,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permet que aquesta aplicació llegeixi, modifiqui i suprimeixi tots els fitxers d\'aquest dispositiu o de qualsevol volum d\'emmagatzematge connectat. L\'aplicació podrà accedir als fitxers sense el teu coneixement explícit."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pot accedir a tots els fitxers"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatització de la pantalla"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Permet que aquesta aplicació automatitzi completament altres aplicacions"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Aquesta aplicació podrà controlar les teves aplicacions. Les aplicacions que es controlen no es poden utilitzar mentre l\'automatització de la pantalla està en curs, però sempre pots aturar-la."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Pregunta sempre"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Permet sempre"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"No permetis"</string>
@@ -5997,7 +5999,7 @@
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Mantén premut el botó d\'inici o l\'ansa de navegació per cercar utilitzant el contingut de la pantalla."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Configura els detalls del dispositiu."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Controls parentals"</string>
-    <string name="supervision_settings_summary" msgid="6304257872307136073">"Regles digitals bàsiques i límits de temps de connexió"</string>
+    <string name="supervision_settings_summary" msgid="6304257872307136073">"Regles digitals bàsiques i límits de temps de pantalla"</string>
     <string name="supervision_intro_title" msgid="2686370837216266390">"Crea un PIN per als controls parentals en aquest dispositiu"</string>
     <string name="supervision_intro_description" msgid="101353421249918460">"Utilitzaràs aquest PIN per gestionar la configuració i les aplicacions dels controls parentals en aquest dispositiu.\n\nPots editar o suprimir el PIN des de Configuració d\'Android &gt; Controls parentals."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Configura un PIN"</string>
@@ -6028,10 +6030,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verifica la informació de recuperació"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtres de la botiga d\'aplicacions"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtra les aplicacions segons la maduresa del seu contingut"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Cada botiga classifica el contingut de manera diferent. La classificació d\'una aplicació pot variar segons la botiga."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtra les aplicacions segons les classificacions del contingut"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtres de contingut web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtres de llocs web, bloqueig de llocs web, filtres del navegador, bloqueig de llocs web explícits, filtració de llocs web, bloqueig de resultats de cerca, filtració de resultats de cerca explícits, restriccions de contingut"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Ajuda a filtrar el contingut explícit en algunes aplicacions i navegadors d\'aquest telèfon. És possible que el contingut explícit continuï mostrant-se en altres aplicacions, dispositius o navegadors."</string>
