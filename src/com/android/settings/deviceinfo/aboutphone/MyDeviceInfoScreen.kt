@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.deviceinfo.aboutphone
 
 import android.app.settings.SettingsEnums
@@ -32,6 +38,7 @@ import com.android.settings.deviceinfo.imei.ImeiPreference
 import com.android.settings.deviceinfo.imei.getImeiList
 import com.android.settings.deviceinfo.simstatus.SimEidPreference
 import com.android.settings.flags.Flags
+import com.android.settings.network.telephony.TelephonyUtils
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.wifi.utils.activeModemCount
 import com.android.settingslib.metadata.PreferenceCategory
@@ -96,10 +103,10 @@ open class MyDeviceInfoScreen :
                     addAsync(coroutineScope, Dispatchers.Default) {
                         +SimEidPreference(context) order 31
                     }
-                    val activeModemCount = context.activeModemCount
+                    var slotCount = TelephonyUtils.getSlotsCount(context)
                     val imeiList = context.getImeiList
-                    for (i in 0 until activeModemCount) {
-                        +ImeiPreference(context, i, activeModemCount, imeiList) order (i + 33)
+                    for (i in 0 until slotCount) {
+                        +ImeiPreference(context, i, slotCount, imeiList) order (i + 33)
                     }
                     +FirmwareVersionScreen.KEY order 42
                 }
