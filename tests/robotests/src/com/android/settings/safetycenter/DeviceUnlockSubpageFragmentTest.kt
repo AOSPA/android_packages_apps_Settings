@@ -870,6 +870,24 @@ class DeviceUnlockSubpageFragmentTest {
         }
     }
 
+    @Test
+    fun onCreate_withEntries_doesNotRedirect() {
+        val entry =
+            createEntry(
+                id = "lockScreenEntry",
+                title = "Screen Lock",
+                userHandle = USER_PERSONAL,
+                sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
+                summary = "set screen lock",
+            )
+
+        runTest(createScData(listOf(entry))) { fragment ->
+            val nextIntent = shadowOf(fragment.requireActivity()).nextStartedActivity
+
+            assertThat(nextIntent).isNull()
+        }
+    }
+
     companion object {
         private const val DEVICE_UNLOCK_ILLUSTRATION_KEY = "device_unlock_illustration"
         private const val DEVICE_UNLOCK_ISSUES_KEY = "device_unlock_issues_banner_group"
