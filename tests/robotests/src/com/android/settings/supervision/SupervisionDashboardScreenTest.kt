@@ -379,7 +379,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onCreate_supervisionSettingsUiUpdatesEnabled_nonEmptySupervisionAppsList_supervisionAppsGroupVisible() {
+    fun onResume_supervisionSettingsUiUpdatesEnabled_nonEmptySupervisionAppsList_supervisionAppsGroupVisible() {
         val testPackageName = "com.android.settings.test"
         val testLabel = "testLabel"
         val testActivity = "com.android.settings.test.TestActivity"
@@ -412,20 +412,19 @@ class SupervisionDashboardScreenTest {
             } doReturn supervisionAppsGroup
         }
 
-        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onResume(mockLifeCycleContext)
 
         assertThat(supervisionAppsGroup.isVisible).isTrue()
         assertThat(supervisionAppsGroup.preferenceCount).isEqualTo(1)
         val preference = supervisionAppsGroup.getPreference(0)
-        assertThat(preference.intent?.action)
-            .isEqualTo(Settings.MANAGE_SUPERVISION_APP_SETTINGS)
+        assertThat(preference.intent?.action).isEqualTo(Settings.MANAGE_SUPERVISION_APP_SETTINGS)
         assertThat(preference.widgetLayoutResource)
             .isEqualTo(R.layout.preference_external_action_icon)
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onCreate_supervisionSettingsUiUpdatesDisabled_emptySupervisionAppsList_supervisionAppsGroupIsNotVisible() {
+    fun onResume_supervisionSettingsUiUpdatesDisabled_emptySupervisionAppsList_supervisionAppsGroupIsNotVisible() {
         mockRoleManager.stub { on { getRoleHolders(any()) } doReturn emptyList() }
         val supervisionAppsGroup = PreferenceCategory(context, null)
         mockLifeCycleContext.stub {
@@ -436,7 +435,7 @@ class SupervisionDashboardScreenTest {
             } doReturn supervisionAppsGroup
         }
 
-        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onResume(mockLifeCycleContext)
 
         assertThat(supervisionAppsGroup.isVisible).isFalse()
         assertThat(supervisionAppsGroup.preferenceCount).isEqualTo(0)
@@ -444,8 +443,8 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onCreate_supervisionSettingsUiUpdatesDisabled_doNotAttemptToLoadSupervisionAppsList() {
-        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+    fun onResume_supervisionSettingsUiUpdatesDisabled_doNotAttemptToLoadSupervisionAppsList() {
+        preferenceScreenCreator.onResume(mockLifeCycleContext)
 
         verify(mockLifeCycleContext, never())
             .findPreference<PreferenceGroup>(

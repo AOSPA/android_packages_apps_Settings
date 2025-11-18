@@ -80,29 +80,31 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
             this.lifeCycleContext = context
             supervisionManager = context.getSystemService(SupervisionManager::class.java)
             supervisionManager?.registerSupervisionListener(supervisionListener)
-            if (Flags.enableSupervisionSettingsUiUpdates()) {
-                var supervisionAppCount = 0
-                val supervisionAppsGroup =
-                    context.findPreference<PreferenceGroup>(ACTIVE_SUPERVISION_APPS_GROUP)?.apply {
-                        for (supervisionApp in context.supervisionRoleHolders) {
-                            try {
-                                addPreference(
-                                    createSupervisionAppPreference(context, supervisionApp)
-                                )
-                                // Increment the count on successfully adding the preference
-                                supervisionAppCount++
-                            } catch (e: Exception) {
-                                Log.e(
-                                    SupervisionLog.TAG,
-                                    "Error displaying supervision app preference for: $supervisionApp",
-                                    e,
-                                )
-                            }
+        }
+    }
+
+    override fun onResume(context: PreferenceLifecycleContext) {
+        if (Flags.enableSupervisionSettingsUiUpdates()) {
+            var supervisionAppCount = 0
+            val supervisionAppsGroup =
+                context.findPreference<PreferenceGroup>(ACTIVE_SUPERVISION_APPS_GROUP)?.apply {
+                    removeAll()
+                    for (supervisionApp in context.supervisionRoleHolders) {
+                        try {
+                            addPreference(createSupervisionAppPreference(context, supervisionApp))
+                            // Increment the count on successfully adding the preference
+                            supervisionAppCount++
+                        } catch (e: Exception) {
+                            Log.e(
+                                SupervisionLog.TAG,
+                                "Error displaying supervision app preference for: $supervisionApp",
+                                e,
+                            )
                         }
                     }
-                // Set the visibility of the entire group based on whether any apps were found.
-                supervisionAppsGroup?.isVisible = supervisionAppCount > 0
-            }
+                }
+            // Set the visibility of the entire group based on whether any apps were found.
+            supervisionAppsGroup?.isVisible = supervisionAppCount > 0
         }
     }
 
