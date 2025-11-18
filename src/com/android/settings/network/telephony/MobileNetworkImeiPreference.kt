@@ -14,19 +14,29 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.telephony.TelephonyManager
+import android.text.TextUtils
 import android.telephony.SubscriptionManager
 import android.telephony.SubscriptionManager.INVALID_SIM_SLOT_INDEX
 import android.util.Log
+import android.util.Pair
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.deviceinfo.imei.ImeiInfoDialogFragment
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
+import com.android.settings.network.telephony.TelephonyUtils
 import com.android.settings.wifi.utils.isAdminUser
 import com.android.settings.wifi.utils.telephonyManager
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -36,6 +46,8 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.preference.PreferenceBinding
+
+import com.qti.extphone.QtiImeiInfo
 
 // LINT.IfChange
 @SuppressLint("MissingPermission")
@@ -55,12 +67,20 @@ class MobileNetworkImeiPreference(
         context.isAdminUser == true &&
             (Utils.isMobileDataCapable(context) || Utils.isVoiceCapable(context)) &&
             (Flags.isDualSimOnboardingEnabled() && SubscriptionManager.isValidSubscriptionId(subId))
-    private var imei: String? = if (isAvailable) context.telephonyManager(subId)?.imei else ""
+    private var imei: String? = if (isAvailable) context.getImei() else ""
     private var indexing: Int = imeiList.indexOf(imei)
     private val formattedTitle: String = getFormattedTitle()
 
     override val key: String
         get() = KEY
+
+    private val Context.isMinHalVersion2_1: Boolean
+        private get() {
+            val radioVersion: Pair<Int, Int> = telephonyManager?.getHalVersion(
+                    TelephonyManager.HAL_SERVICE_MODEM)?: Pair(0, 0)
+            val halVersion = makeRadioVersion(radioVersion.first, radioVersion.second)
+            return halVersion > makeRadioVersion(2, 0)
+        }
 
     override fun getSummary(context: Context): CharSequence? = imei
 
@@ -108,6 +128,38 @@ class MobileNetworkImeiPreference(
             Log.e(TAG, "getSlotIndex(), simSlotIndex=INVALID_SIM_SLOT_INDEX")
             INVALID_SIM_SLOT_INDEX
         }
+    }
+
+    private fun Context.getImei(): String {
+        val slot = getSlotIndex()
+        var imei = String()
+        var qtiImeiInfo: Array<QtiImeiInfo?>? = null
+        try {
+            if (isMinHalVersion2_1 && !TelephonyUtils.isDsdsToSsConfigValid(this)) {
+                imei = telephonyManager?.getImei(slot) ?: String()
+            } else {
+                qtiImeiInfo = TelephonyUtils.getImeiInfo()
+                if (qtiImeiInfo != null) {
+                    for (i in qtiImeiInfo.indices) {
+                        if (qtiImeiInfo[i] != null && qtiImeiInfo[i]!!.getSlotId() == slot) {
+                            imei = qtiImeiInfo[i]!!.getImei()
+                            break
+                        }
+                    }
+                }
+                if (TextUtils.isEmpty(imei)) {
+                    imei = telephonyManager?.getImei(slot) ?: String()
+                }
+            }
+        } catch (exception: Exception) {
+            Log.e(TAG, "Imei not available. " + exception)
+        }
+        return imei
+    }
+
+    private fun makeRadioVersion(major: Int, minor: Int): Int {
+        if (major < 0 || minor < 0) return 0
+        return major * 100 + minor
     }
 
     companion object {
