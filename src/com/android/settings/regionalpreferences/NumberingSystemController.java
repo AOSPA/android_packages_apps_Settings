@@ -28,6 +28,7 @@ import java.util.Locale;
 import java.util.Set;
 
 /** A controller for the entry of Numbering System's page */
+@Deprecated
 public class NumberingSystemController extends BasePreferenceController {
     private static final String TAG = NumberingSystemController.class.getSimpleName();
 
