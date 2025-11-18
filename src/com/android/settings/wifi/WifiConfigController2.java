@@ -362,9 +362,11 @@ public class WifiConfigController2 implements TextWatcher,
             mView.findViewById(R.id.edit_wifi_network_configuration_fields)
                     .setVisibility(mIsMultiUser ? View.VISIBLE : View.GONE);
 
-            boolean sharedDefault =
+            boolean sharedDefault = WifiUtils.isGuestUser(mContext)
+                    ? false : WifiUtils.isAtLoginScreen(mContext) ? true :
                     mContext.getResources().getBoolean(R.bool.config_share_network_by_default);
-            boolean editConfigDefault =
+            boolean editConfigDefault = WifiUtils.isGuestUser(mContext)
+                    ? false : WifiUtils.isAtLoginScreen(mContext) ? true :
                     mContext.getResources()
                         .getBoolean(R.bool.config_allow_edit_network_configuration_by_default);
 
