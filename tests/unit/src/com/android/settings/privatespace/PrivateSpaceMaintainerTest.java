@@ -165,8 +165,6 @@ public class PrivateSpaceMaintainerTest {
      */
     @Test
     public void createPrivateSpace_psDoesNotExist_setsDefaultPsSensitiveNotificationsValue() {
-        mSetFlagsRule.enableFlags(
-                android.multiuser.Flags.FLAG_ENABLE_PS_SENSITIVE_NOTIFICATIONS_TOGGLE);
         assumeTrue(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
