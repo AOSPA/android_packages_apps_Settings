@@ -49,8 +49,15 @@ open class WifiControlAppListScreen : SpecialAccessAppListScreen() {
     override val appDetailScreenKey: String
         get() = WifiControlAppDetailScreen.KEY
 
+    @Deprecated(
+        message =
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use appDetailKeyParameters instead."
+    )
     override fun appDetailParameters(context: Context, hierarchyType: Boolean) =
         WifiControlAppDetailScreen.parameters(context, hierarchyType)
+
+    override fun appDetailKeyParameters(context: Context, hierarchyType: Boolean) =
+        WifiControlAppDetailScreen.keyParameters(context, hierarchyType)
 
     companion object {
         const val KEY = "special_access_wifi_control_app_list"

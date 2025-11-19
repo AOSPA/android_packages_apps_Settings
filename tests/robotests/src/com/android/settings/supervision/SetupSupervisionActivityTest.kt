@@ -33,7 +33,6 @@ import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
-import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
@@ -320,7 +319,7 @@ class SetupSupervisionActivityTest {
         Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
     )
     fun onSetLockResult_startsRecoveryActivity() {
-        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(true)
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(false)
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
         ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
@@ -415,7 +414,7 @@ class SetupSupervisionActivityTest {
         Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
     )
     fun canLaunchPinRecovery_onPinRecoveryResult_finishesOk() {
-        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(true)
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(false)
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
@@ -455,7 +454,7 @@ class SetupSupervisionActivityTest {
         Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
     )
     fun canNotLaunchPinRecovery_finishesWithoutStartingPinRecovery() {
-        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(false)
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(true)
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
@@ -529,7 +528,6 @@ class SetupSupervisionActivityTest {
             }
         }
     }
-
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)

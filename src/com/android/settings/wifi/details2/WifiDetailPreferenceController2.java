@@ -862,11 +862,19 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     /**
-     * Returns true if the current user owns the network or if there is only a single user
-     * on the device.
+     * Returns true if the current user can modify the network or if there is
+     * only a single user on the device.
      */
     public boolean canModifyNetwork() {
         return WifiUtils.isNetworkEditable(mWifiEntry, mContext);
+    }
+
+    /**
+     * Returns true if the current user can modify the share settings for a
+     * network.
+     */
+    public boolean canModifyShareSettings() {
+        return WifiUtils.isSharedFieldEditable(mWifiEntry, mContext);
     }
 
     /**

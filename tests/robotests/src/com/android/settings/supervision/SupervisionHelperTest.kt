@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.app.KeyguardManager
 import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
 import android.app.supervision.ISupervisionManager
@@ -67,8 +68,9 @@ class SupervisionHelperTest {
     private val mockUserManager = mock<UserManager>()
     private val mockResources = mock<Resources>()
     private val mockISupervisionManager = mock<ISupervisionManager>()
+    private val mockKeyguardManager = mock<KeyguardManager>()
 
-    private val context = contextOf(mockRoleManager)
+    private val context = contextOf(roleManager = mockRoleManager)
     private lateinit var packageManager: PackageManager
     private lateinit var shadowPackageManager: ShadowPackageManager
 
@@ -113,7 +115,7 @@ class SupervisionHelperTest {
 
     @Test
     fun systemSupervisionPackageName_roleManagerUnavailable_returnsNull() {
-        val context = contextOf(/* roleManager= */ null)
+        val context = contextOf(roleManager = null)
 
         assertThat(context.systemSupervisionPackageName).isNull()
     }
@@ -133,7 +135,7 @@ class SupervisionHelperTest {
 
     @Test
     fun supervisionRoleHolders_roleManagerUnavailable_returnsEmptyList() {
-        val context = contextOf(/* roleManager= */ null)
+        val context = contextOf(roleManager = null)
 
         assertThat(context.supervisionRoleHolders).isEmpty()
     }
@@ -492,6 +494,108 @@ class SupervisionHelperTest {
         assertThat(context.canLaunchPinRecovery()).isFalse()
     }
 
+    @Test
+    fun supervisingUserHandle_hasSupervisingUser_returnsUserHandle() {
+        // A supervising user exists in the user list.
+        mockUserManager.stub { on { getUsers() } doReturn listOf(MAIN_USER, SUPERVISING_PROFILE) }
+
+        // Verify the UserManager extension function returns the correct handle.
+        assertThat(mockUserManager.supervisingUserHandle())
+                .isEqualTo(SUPERVISING_PROFILE.userHandle)
+        // Verify the Context extension function also returns the correct handle.
+        assertThat(context.supervisingUserHandle()).isEqualTo(SUPERVISING_PROFILE.userHandle)
+    }
+
+    @Test
+    fun supervisingUserHandle_noSupervisingUser_returnsNull() {
+        // No supervising user exists in the user list.
+        mockUserManager.stub { on { getUsers() } doReturn listOf(MAIN_USER, SECONDARY_USER) }
+
+        // Verify both extension functions return null.
+        assertThat(mockUserManager.supervisingUserHandle()).isNull()
+        assertThat(context.supervisingUserHandle()).isNull()
+    }
+
+    @Test
+    fun supervisingUserHandle_noUsers_returnsNull() {
+        // The user list is empty.
+        mockUserManager.stub { on { getUsers() } doReturn emptyList() }
+
+        // Verify both extension functions return null.
+        assertThat(mockUserManager.supervisingUserHandle()).isNull()
+        assertThat(context.supervisingUserHandle()).isNull()
+    }
+
+    @Test
+    fun supervisingUserHandle_nullUserManager_returnsNull() {
+        // The UserManager instance itself is null.
+        val userManager: UserManager? = null
+        assertThat(userManager.supervisingUserHandle()).isNull()
+    }
+
+    @Test
+    fun isSupervisingCredentialSet_noSupervisingUser_returnsFalse() {
+        // No supervising user exists.
+        mockUserManager.stub { on { getUsers() } doReturn listOf(MAIN_USER, SECONDARY_USER) }
+
+        // The function should return false.
+        assertThat(context.isSupervisingCredentialSet()).isFalse()
+    }
+
+    @Test
+    fun isSupervisingCredentialSet_keyguardManagerNotAvailable_returnsFalse() {
+        // Create a context where KeyguardManager is not available.
+        val contextWithNoKeyguardManager =
+            contextOf(roleManager = mockRoleManager, keyguardManager = null)
+        // A supervising user exists.
+        mockUserManager.stub { on { getUsers() } doReturn listOf(SUPERVISING_PROFILE) }
+
+        // The function should return false because the service is unavailable.
+        assertThat(contextWithNoKeyguardManager.isSupervisingCredentialSet()).isFalse()
+    }
+
+    @Test
+    fun isSupervisingCredentialSet_credentialNotSet_returnsFalse() {
+        // A supervising user exists.
+        mockUserManager.stub { on { getUsers() } doReturn listOf(SUPERVISING_PROFILE) }
+        // The device is not secure for that user.
+        whenever(mockKeyguardManager.isDeviceSecure(SUPERVISING_USER_ID)).thenReturn(false)
+
+        // The function should return false.
+        assertThat(context.isSupervisingCredentialSet()).isFalse()
+    }
+
+    @Test
+    fun isSupervisingCredentialSet_credentialSet_returnsTrue() {
+        // A supervising user exists.
+        mockUserManager.stub { on { getUsers() } doReturn listOf(SUPERVISING_PROFILE) }
+        // The device is secure for that user.
+        whenever(mockKeyguardManager.isDeviceSecure(SUPERVISING_USER_ID)).thenReturn(true)
+
+        // The function should return true.
+        assertThat(context.isSupervisingCredentialSet()).isTrue()
+    }
+
+    @Test
+    fun isSupervisingCredentialSet_withUserHandleArgument_usesArgument() {
+        // The device is secure for the supervising user.
+        whenever(mockKeyguardManager.isDeviceSecure(SUPERVISING_USER_ID)).thenReturn(true)
+
+        // Call the function with the supervising user handle directly.
+        assertThat(context.isSupervisingCredentialSet(SUPERVISING_PROFILE.userHandle)).isTrue()
+        // Verify that the provided handle was used and we didn't try to look it up again.
+        verify(mockUserManager, never()).getUsers()
+    }
+
+    @Test
+    fun isSupervisingCredentialSet_withNullUserHandleArgument_returnsFalse() {
+        // Call the function with a null user handle.
+        assertThat(context.isSupervisingCredentialSet(null)).isFalse()
+        // Verify no interactions with KeyguardManager or UserManager occurred.
+        verify(mockKeyguardManager, never()).isDeviceSecure(any())
+        verify(mockUserManager, never()).getUsers()
+    }
+
     private fun setUpMessengerServiceComponent(packageName: String, disabled: Boolean) {
         val serviceComponentName = ComponentName(packageName, "FakeSupervisionMessengerService")
         val intentFilter =
@@ -517,13 +621,17 @@ class SupervisionHelperTest {
         shadowPackageManager.addIntentFilterForActivity(installComponentName, intentFilter)
     }
 
-    private fun contextOf(roleManager: RoleManager?): Context =
+    private fun contextOf(
+        roleManager: RoleManager?,
+        keyguardManager: KeyguardManager? = mockKeyguardManager
+    ): Context =
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
             override fun getSystemService(name: String): Any? =
                 when (name) {
                     ROLE_SERVICE -> roleManager
                     SUPERVISION_SERVICE -> mockSupervisionManager
                     USER_SERVICE -> mockUserManager
+                    KEYGUARD_SERVICE -> keyguardManager
                     else -> super.getSystemService(name)
                 }
 

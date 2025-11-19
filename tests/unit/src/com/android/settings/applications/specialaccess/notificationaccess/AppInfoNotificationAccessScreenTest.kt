@@ -20,50 +20,80 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.applications.specialaccess.notificationaccess.AppInfoNotificationAccessScreen.Companion.KEY_APP_PACKAGE_NAME
+import com.android.settings.applications.specialaccess.notificationaccess.AppInfoNotificationAccessScreen.Companion.KEY_SERVICE_NAME
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class AppInfoNotificationAccessScreenTest {
-    private val packageManager: PackageManager = mock()
-    private val context: Context = mock { on { packageManager } doReturn packageManager }
+    private val mockPackageManager: PackageManager = mock()
+    private lateinit var context: Context
+
+    @Before
+    fun setUp() {
+        context =
+            spy(ApplicationProvider.getApplicationContext<Context>()) {
+                on { packageManager } doReturn mockPackageManager
+            }
+    }
 
     @Test
     fun isAvailable_whenAppInfoIsNull_returnsFalse() {
-        packageManager.stub {
+        // Arrange: Configure the mock to throw an exception for the given package name.
+        mockPackageManager.stub {
             on { getApplicationInfo("app.not.found", 0) } doThrow
                 PackageManager.NameNotFoundException()
         }
-        val screen =
-            AppInfoNotificationAccessScreen(
-                context,
-                Bundle().apply {
-                    putString("app", "app.not.found")
-                    putString("serviceName", "service")
-                },
-            )
 
+        // Act: Create the screen, which will fail to find the app info.
+        val screen = createScreen(packageName = "app.not.found")
+
+        // Assert: isAvailable should be false.
         assertThat(screen.isAvailable(context)).isFalse()
     }
 
     @Test
     fun isAvailable_whenAppInfoIsNotNull_returnsTrue() {
-        packageManager.stub { on { getApplicationInfo("app.found", 0) } doReturn ApplicationInfo() }
-        val screen =
+        // Arrange: Configure the mock to return a valid ApplicationInfo object.
+        mockPackageManager.stub {
+            on { getApplicationInfo("app.found", 0) } doReturn ApplicationInfo()
+        }
+
+        // Act: Create the screen AFTER the mock has been configured.
+        val screen = createScreen(packageName = "app.found")
+
+        // Assert: isAvailable should be true.
+        assertThat(screen.isAvailable(context)).isTrue()
+    }
+
+    private fun createScreen(packageName: String): AppInfoNotificationAccessScreen {
+        return if (CatalystFlags.catalystUseKeyParameters()) {
+            AppInfoNotificationAccessScreen(
+                context,
+                AppInfoNotificationAccessScreen.parametersSchema.prepare(
+                    KEY_APP_PACKAGE_NAME to packageName,
+                    KEY_SERVICE_NAME to "service",
+                ),
+            )
+        } else {
             AppInfoNotificationAccessScreen(
                 context,
                 Bundle().apply {
-                    putString("app", "app.found")
+                    putString("app", packageName)
                     putString("serviceName", "service")
                 },
             )
-
-        assertThat(screen.isAvailable(context)).isTrue()
+        }
     }
 }

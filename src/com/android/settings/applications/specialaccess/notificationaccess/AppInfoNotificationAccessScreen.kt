@@ -34,9 +34,13 @@ import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.notification.NotificationBackend
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.KeyParametersSchema
+import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -48,23 +52,48 @@ import com.android.settingslib.widget.MainSwitchPreferenceBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 /** "Apps" -> "Special app access" -> "Notification read, reply & control" -> {app name} */
 @ProvidePreferenceScreen(AppInfoNotificationAccessScreen.KEY, parameterized = true)
-open class AppInfoNotificationAccessScreen(context: Context, override val arguments: Bundle) :
+open class AppInfoNotificationAccessScreen
+private constructor(
+    val context: Context,
+    @Deprecated(
+        "This property will be removed once the catalyst framework stops passing the arguments as a bundle. Use the keyParameters instead."
+    )
+    final override val arguments: Bundle?,
+    final override val keyParameters: KeyParameters?,
+) :
     PreferenceScreenMixin,
     PreferenceSummaryProvider,
     PreferenceTitleProvider,
     PreferenceAvailabilityProvider {
 
-    private val packageName = arguments.getString("app")!!
-
-    private val serviceName = arguments.getString("serviceName")!!
+    private val packageName: String =
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            keyParameters!!.getRequired(KEY_APP_PACKAGE_NAME)
+        } else {
+            arguments!!.getString(KEY_APP_PACKAGE_NAME)!!
+        }
+    private val serviceName: String =
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            keyParameters!!.getRequired(KEY_SERVICE_NAME)
+        } else {
+            arguments!!.getString(KEY_SERVICE_NAME)!!
+        }
 
     private val appInfo = context.getApplicationInfo(packageName)
 
     private val storage: KeyValueStore =
         NotificationAccessStorage(context, packageName, serviceName)
+
+    @Deprecated(
+        "This constructor will be removed once the catalyst framework stops passing the arguments as a bundle. Use the other constructor instead."
+    )
+    constructor(context: Context, args: Bundle) : this(context, args, null)
+
+    constructor(context: Context, keyParameters: KeyParameters) : this(context, null, keyParameters)
 
     override val key: String
         get() = KEY
@@ -116,19 +145,39 @@ open class AppInfoNotificationAccessScreen(context: Context, override val argume
             +NotificationAccessSilentPreference(storage)
         }
 
-    companion object {
+    companion object : ParameterizedPreferenceScreenArgumentsFactory {
         const val KEY = "device_state_app_info_notification_access"
 
         const val KEY_EXTRA_PACKAGE_NAME = "package_name"
+        const val KEY_APP_PACKAGE_NAME = "app"
+        const val KEY_SERVICE_NAME = "serviceName"
 
+        @JvmStatic
+        override val parametersSchema = KeyParametersSchema {
+            parameter(KEY_APP_PACKAGE_NAME, "The package name of the app", required = true)
+            parameter(KEY_SERVICE_NAME, "The name of the service", required = true)
+        }
+
+        @JvmStatic
+        override fun keyParameters(context: Context): Flow<KeyParameters> {
+            // TODO (b/457649430): when the catalyst framework stops passing the arguments as a
+            // bundle: replace the parameters(context) call to the actual implementation,
+            // or make this function the primary implementation and the legacy parameters() should
+            // call this one.
+            return parameters(context).map { bundle -> parametersSchema.prepare(bundle) }
+        }
+
+        @Deprecated(
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use keyParameters instead."
+        )
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
             val services = AppsNotificationAccessScreen.loadNotificationListenerServices(context)
             for (service in services) {
                 emit(
                     Bundle(1).apply {
-                        putString("app", service.packageName)
-                        putString("serviceName", service.name)
+                        putString(KEY_APP_PACKAGE_NAME, service.packageName)
+                        putString(KEY_SERVICE_NAME, service.name)
                     }
                 )
             }

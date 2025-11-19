@@ -186,7 +186,8 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
                 errorHandler("No supervising user exists, cannot verify credentials.")
                 return
             }
-        } else if (isSupervisingCredentialSet) {
+        }
+        if (isSupervisingCredentialSet) {
             mSupervisingUser = supervisingUser!!
             val intentFilter = IntentFilter().apply { addAction(Intent.ACTION_USER_STOPPED) }
             registerReceiver(userStateChangeReceiver, intentFilter, RECEIVER_NOT_EXPORTED)

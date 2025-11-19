@@ -35,4 +35,10 @@ class PrivacyControlsPreferenceController(context: Context, preferenceKey: Strin
         // not present, because it contains a lot of other preferences.
         preference.isVisible = true
     }
+
+    override fun updateNonIndexableKeys(keys: MutableList<String>) {
+        // Privacy controls subpage shouldn't be hidden from search as the subpage preference is
+        // always visible
+        return
+    }
 }

@@ -49,8 +49,15 @@ open class AlarmsAndRemindersAppListScreen : SpecialAccessAppListScreen() {
     override val appDetailScreenKey: String
         get() = AlarmsAndRemindersAppDetailScreen.KEY
 
+    @Deprecated(
+        message =
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use appDetailKeyParameters instead."
+    )
     override fun appDetailParameters(context: Context, hierarchyType: Boolean) =
         AlarmsAndRemindersAppDetailScreen.parameters(context, hierarchyType)
+
+    override fun appDetailKeyParameters(context: Context, hierarchyType: Boolean) =
+        AlarmsAndRemindersAppDetailScreen.keyParameters(context, hierarchyType)
 
     companion object {
         const val KEY = "special_access_alarms_and_reminders_app_list"
