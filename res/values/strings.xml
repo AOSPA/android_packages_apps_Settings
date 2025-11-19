@@ -2261,6 +2261,12 @@
     <string name="external_display_use_title">Use external display</string>
     <!-- External Display resolution settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="external_display_resolution_settings_title">Display resolution</string>
+    <!-- External Display resolution and refresh rate settings. The title of the screen. -->
+    <string name="external_display_resolution_refresh_rate_settings_title">Resolution and refresh rate</string>
+    <!-- External Display refresh rate options section. -->
+    <string name="external_display_refresh_rate_title">Refresh rate</string>
+    <!-- External Display resolution options section. -->
+    <string name="external_display_resolution_title">Resolution</string>
     <!-- External Display Connection Preference. The preferred method of connection for an external display. [CHAR LIMIT=40] -->
     <string name="external_display_connection_preference">Default connection behavior</string>
     <!-- External Display settings. Always start in desktop mode when display is connected. -->
@@ -3245,6 +3251,10 @@
     <string name="screen_resolution_footer">Max resolution uses more of your battery. Switching your resolution may cause some apps to restart.</string>
     <!-- Screen resolution a11y message announced to replace 'x' in entry e.g. 600 by 800 [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_delimiter_a11y"><xliff:g id="width">%1$s</xliff:g> by <xliff:g id="height">%2$s</xliff:g></string>
+    <!-- Screen refresh rate option displayed text [CHAR LIMIT=NONE] -->
+    <string name="screen_refresh_rate_displayed_text"><xliff:g id="refresh_rate">%1$s</xliff:g> Hz</string>
+    <!-- Screen refresh rate option a11y text -->
+    <string name="screen_refresh_rate_a11y"><xliff:g id="refresh_rate">%1$s</xliff:g> Hertz</string>
     <!-- Display settings screen, Color mode settings title [CHAR LIMIT=30] -->
     <string name="color_mode_title">Colors</string>
     <!-- Display settings screen, Color mode option for "natural(sRGB) color"  [CHAR LIMIT=45] -->
