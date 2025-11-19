@@ -42,6 +42,7 @@ import com.android.settings.R
 import com.android.settings.supervision.SupervisionMainSwitchPreference.Companion.REQUEST_CODE_CONFIRM_SUPERVISION_CREDENTIALS
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
 import com.android.settingslib.ipc.MessengerService
 import com.android.settingslib.ipc.MessengerServiceRule
 import com.android.settingslib.ipc.PermissionChecker

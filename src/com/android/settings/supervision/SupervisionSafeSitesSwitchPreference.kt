@@ -30,6 +30,8 @@ import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
+import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersBrowserSupportedAppsScreen
+import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersSupportedAppsEntryPointPreference
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
