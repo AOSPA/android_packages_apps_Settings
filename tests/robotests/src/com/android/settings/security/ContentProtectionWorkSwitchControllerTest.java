@@ -16,8 +16,6 @@
 
 package com.android.settings.security;
 
-import static android.view.contentprotection.flags.Flags.FLAG_MANAGE_DEVICE_POLICY_ENABLED;
-
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
@@ -57,8 +55,6 @@ public class ContentProtectionWorkSwitchControllerTest {
 
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-
     private final Context mContext = ApplicationProvider.getApplicationContext();
 
     @Mock private PreferenceScreen mMockPreferenceScreen;
@@ -80,18 +76,7 @@ public class ContentProtectionWorkSwitchControllerTest {
     }
 
     @Test
-    public void constructor_flagDisabled_doesNotFetchData() {
-        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
-        mController = new TestContentProtectionWorkSwitchController();
-
-        assertThat(mController.mCounterGetManagedProfile).isEqualTo(0);
-        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(0);
-        assertThat(mController.mCounterGetContentProtectionPolicy).isEqualTo(0);
-    }
-
-    @Test
-    public void constructor_flagEnabled_fetchesManagedProfile() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void constructor_fetchesManagedProfile() {
         mController = new TestContentProtectionWorkSwitchController();
 
         assertThat(mController.mCounterGetManagedProfile).isEqualTo(1);
@@ -100,8 +85,7 @@ public class ContentProtectionWorkSwitchControllerTest {
     }
 
     @Test
-    public void constructor_flagEnabled_withManagedProfile_fetchesPolicy() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void constructor_withManagedProfile_fetchesPolicy() {
         mManagedProfileUserHandle = TEST_USER_HANDLE;
         mController = new TestContentProtectionWorkSwitchController();
 
@@ -111,27 +95,7 @@ public class ContentProtectionWorkSwitchControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_flagDisabled_managedProfile_available() {
-        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
-        mManagedProfileUserHandle = TEST_USER_HANDLE;
-        mController = new TestContentProtectionWorkSwitchController();
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void getAvailabilityStatus_flagDisabled_noManagedProfile_unavailable() {
-        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
-        mController = new TestContentProtectionWorkSwitchController();
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void getAvailabilityStatus_flagEnabled_managedProfile_policyDisabled_available() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void getAvailabilityStatus_managedProfile_policyDisabled_available() {
         mManagedProfileUserHandle = TEST_USER_HANDLE;
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
         mController = new TestContentProtectionWorkSwitchController();
@@ -141,8 +105,7 @@ public class ContentProtectionWorkSwitchControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_flagEnabled_managedProfile_policyEnabled_available() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void getAvailabilityStatus_managedProfile_policyEnabled_available() {
         mManagedProfileUserHandle = TEST_USER_HANDLE;
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_ENABLED;
         mController = new TestContentProtectionWorkSwitchController();
@@ -152,8 +115,7 @@ public class ContentProtectionWorkSwitchControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_flagEnabled_managedProfile_policyNotControlled_unavailable() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void getAvailabilityStatus_managedProfile_policyNotControlled_unavailable() {
         mManagedProfileUserHandle = TEST_USER_HANDLE;
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY;
         mController = new TestContentProtectionWorkSwitchController();
@@ -163,8 +125,7 @@ public class ContentProtectionWorkSwitchControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_flagEnabled_noManagedProfile_unavailable() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void getAvailabilityStatus_noManagedProfile_unavailable() {
         mController = new TestContentProtectionWorkSwitchController();
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
@@ -172,16 +133,7 @@ public class ContentProtectionWorkSwitchControllerTest {
     }
 
     @Test
-    public void isChecked_flagDisabled_false() {
-        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
-        mController = new TestContentProtectionWorkSwitchController();
-
-        assertThat(mController.isChecked()).isFalse();
-    }
-
-    @Test
-    public void isChecked_flagEnabled_policyEnabled_true() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void isChecked_policyEnabled_true() {
         mManagedProfileUserHandle = TEST_USER_HANDLE;
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_ENABLED;
         mController = new TestContentProtectionWorkSwitchController();
@@ -190,8 +142,7 @@ public class ContentProtectionWorkSwitchControllerTest {
     }
 
     @Test
-    public void isChecked_flagEnabled_policyDisabled_false() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void isChecked_policyDisabled_false() {
         mManagedProfileUserHandle = TEST_USER_HANDLE;
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
         mController = new TestContentProtectionWorkSwitchController();
@@ -200,8 +151,7 @@ public class ContentProtectionWorkSwitchControllerTest {
     }
 
     @Test
-    public void isChecked_flagEnabled_policyNotControlled_false() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void isChecked_policyNotControlled_false() {
         mManagedProfileUserHandle = TEST_USER_HANDLE;
         mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY;
         mController = new TestContentProtectionWorkSwitchController();
@@ -216,35 +166,7 @@ public class ContentProtectionWorkSwitchControllerTest {
     }
 
     @Test
-    public void displayPreference_flagDisabled_managedProfile_disabledByAdmin() {
-        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
-        mManagedProfileUserHandle = TEST_USER_HANDLE;
-        mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
-        setupForDisplayPreference();
-
-        mController.displayPreference(mMockPreferenceScreen);
-
-        verify(mMockSwitchPreference).setDisabledByAdmin(mEnforcedAdmin);
-        assertThat(mController.mCounterGetManagedProfile).isEqualTo(3);
-        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
-    }
-
-    @Test
-    public void displayPreference_flagDisabled_noManagedProfile_notDisabledByAdmin() {
-        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
-        setupForDisplayPreference();
-
-        mController.displayPreference(mMockPreferenceScreen);
-
-        verify(mMockSwitchPreference, never()).setDisabledByAdmin(
-                (RestrictedLockUtils.EnforcedAdmin) any());
-        assertThat(mController.mCounterGetManagedProfile).isEqualTo(3);
-        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(0);
-    }
-
-    @Test
-    public void displayPreference_flagEnabled_managedProfile_disabledByAdmin() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void displayPreference_managedProfile_disabledByAdmin() {
         mManagedProfileUserHandle = TEST_USER_HANDLE;
         mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
         setupForDisplayPreference();
@@ -257,8 +179,7 @@ public class ContentProtectionWorkSwitchControllerTest {
     }
 
     @Test
-    public void displayPreference_flagEnabled_noManagedProfile_notDisabledByAdmin() {
-        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+    public void displayPreference_noManagedProfile_notDisabledByAdmin() {
         setupForDisplayPreference();
 
         mController.displayPreference(mMockPreferenceScreen);

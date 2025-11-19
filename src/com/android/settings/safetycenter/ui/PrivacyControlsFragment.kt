@@ -31,6 +31,7 @@ import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFacto
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.search.SearchIndexableRaw
 
 /**
  * Fragment that displays various privacy controls. This fragment is a sub-page of the main Safety
@@ -71,20 +72,19 @@ class PrivacyControlsFragment : DashboardFragment() {
     }
 
     private fun setupSafetyIssuesPreferenceController(owner: LifecycleOwner) {
-        Log.d(TAG, "Setting up the safety issues preference controller")
-        safetyIssuesPreferenceController?.setViewModelAndLifecycle(viewModel, owner)
-        safetyIssuesPreferenceController?.setFragmentManager(childFragmentManager)
-        safetyIssuesPreferenceController?.setActivityTaskId(requireActivity().taskId)
+        Log.d(TAG, "Setting Up the safety issues preference controller")
+        safetyIssuesPreferenceController?.apply {
+            setViewModelAndLifecycle(viewModel, owner)
+            this.fragmentManager = childFragmentManager
+            this.activityTaskId = requireActivity().taskId
 
-        val safetySourceIds =
-            SafetyCenterSubpageRegistry.getAllSafetySourceIds(
-                requireContext(),
-                SafetyCenterSubpageRegistry.SubpageKey.PRIVACY_CONTROLS,
-            )
-        safetyIssuesPreferenceController?.setSubpageSafetySourcesAndIllustration(
-            safetySourceIds,
-            illustrationPref = null,
-        )
+            val safetySourceIds =
+                SafetyCenterSubpageRegistry.getAllSafetySourceIds(
+                    requireContext(),
+                    SafetyCenterSubpageRegistry.PRIVACY_CONTROLS_SUBPAGE_KEY,
+                )
+            setSubpageSafetySourcesAndIllustration(safetySourceIds, illustrationPref = null)
+        }
     }
 
     override fun getLogTag(): String = TAG
@@ -104,6 +104,20 @@ class PrivacyControlsFragment : DashboardFragment() {
             object : BaseSearchIndexProvider(R.xml.safety_center_privacy_controls_settings) {
                 public override fun isPageSearchEnabled(context: Context): Boolean {
                     return Flags.enableSafetyCenterNewUi()
+                }
+
+                override fun getDynamicRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableRaw> {
+                    val rawData = super.getDynamicRawDataToIndex(context, enabled).toMutableList()
+                    rawData.addAll(
+                        SafetyCenterSearchIndexUtils.getDynamicRawDataForIndexingSubpage(
+                            context,
+                            SafetyCenterSubpageRegistry.PRIVACY_CONTROLS_SUBPAGE_KEY,
+                        )
+                    )
+                    return rawData
                 }
             }
     }

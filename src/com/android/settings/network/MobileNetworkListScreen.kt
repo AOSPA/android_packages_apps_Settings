@@ -40,6 +40,7 @@ import com.android.settings.spa.network.startAddSimFlow
 import com.android.settings.spa.network.startSatelliteWarningDialogFlow
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.RestrictedPreference
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -181,8 +182,14 @@ open class MobileNetworkListScreen(context: Context) :
             +MobileDataPreference()
             addAsync(coroutineScope, Dispatchers.Default) {
                 if (Flags.deeplinkNetworkAndInternet25q4()) {
-                    MobileNetworkScreen.parameters(context).collect {
-                        +(MobileNetworkScreen.KEY args it)
+                    if (CatalystFlags.catalystUseKeyParameters()) {
+                        MobileNetworkScreen.keyParameters(context).collect {
+                            +(MobileNetworkScreen.KEY withParameters it)
+                        }
+                    } else {
+                        MobileNetworkScreen.parameters(context).collect {
+                            +(MobileNetworkScreen.KEY args it)
+                        }
                     }
                 }
             }

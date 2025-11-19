@@ -24,6 +24,7 @@ import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterEntry
 import android.safetycenter.SafetyCenterEntryOrGroup
 import android.safetycenter.SafetyCenterIssue
+import android.safetycenter.SafetyCenterManager
 import android.safetycenter.SafetyCenterStatus
 import androidx.test.core.app.ApplicationProvider
 
@@ -141,5 +142,17 @@ object SafetyCenterTestUtils {
         activeIssues.forEach { builder.addIssue(it) }
         dismissedIssues.forEach { builder.addDismissedIssue(it) }
         return builder.build()
+    }
+
+    fun createFocusedIntent(
+        sourceIssueId: String,
+        sourceId: String,
+        userHandle: UserHandle = USER_PERSONAL,
+    ): Intent {
+        return Intent(Intent.ACTION_SAFETY_CENTER).apply {
+            putExtra(SafetyCenterManager.EXTRA_SAFETY_SOURCE_ISSUE_ID, sourceIssueId)
+            putExtra(SafetyCenterManager.EXTRA_SAFETY_SOURCE_ID, sourceId)
+            putExtra(SafetyCenterManager.EXTRA_SAFETY_SOURCE_USER_HANDLE, userHandle)
+        }
     }
 }

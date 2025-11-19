@@ -85,6 +85,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.utils.SubIdBundleUtils;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.metadata.KeyParameters;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.search.SearchIndexable;
@@ -103,6 +104,7 @@ import kotlin.Unit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -861,11 +863,24 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         return MobileNetworkScreen.KEY;
     }
 
+    @Deprecated(since = "This method will be removed once the catalyst framework stops passing the"
+            + " arguments as a bundle. Use getPreferenceScreenBindingKeyParameters instead.")
     @Override
     public @Nullable Bundle getPreferenceScreenBindingArgs(@NonNull Context context) {
         final Bundle bundle = new Bundle();
         SubIdBundleUtils.putSubId(bundle, Settings.EXTRA_SUB_ID, getSubId());
         return bundle;
+    }
+
+    @Override
+    @Nullable
+    public KeyParameters getPreferenceScreenBindingKeyParameters(@NonNull Context context) {
+        return MobileNetworkScreen.Companion.getParametersSchema().prepare(
+            Map.of(
+                Settings.EXTRA_SUB_ID,
+                String.valueOf(getSubId())
+            )
+        );
     }
 
     @VisibleForTesting
