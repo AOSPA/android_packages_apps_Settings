@@ -87,7 +87,7 @@ public class HearingAidCompatibilityPreferenceController extends TogglePreferenc
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        if (isChecked && shouldShowDisclaimer()) {
+        if (mFragmentManager != null && isChecked && shouldShowDisclaimer()) {
             HacDisclaimerDialog.newInstance().show(mFragmentManager, TAG);
         }
         FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().changed(
