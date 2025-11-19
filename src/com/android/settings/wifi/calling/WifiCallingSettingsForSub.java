@@ -27,12 +27,12 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
-import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsManager;
 import android.telephony.ims.ImsMmTelManager;
+import android.telephony.satellite.SatelliteManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -116,6 +116,7 @@ public class WifiCallingSettingsForSub extends DashboardFragment
 
     private class PhoneTelephonyCallback extends TelephonyCallback implements
             TelephonyCallback.CallStateListener {
+
         /*
          * Enable/disable controls when in/out of a call and depending on
          * TTY mode and TTY support over VoLTE.
@@ -249,6 +250,11 @@ public class WifiCallingSettingsForSub extends DashboardFragment
             mTelephonyManager = getContext().getSystemService(TelephonyManager.class);
         }
         return mTelephonyManager.createForSubscriptionId(subId);
+    }
+
+    @VisibleForTesting
+    SatelliteManager getSatelliteManager() {
+        return getContext().getSystemService(SatelliteManager.class);
     }
 
     @VisibleForTesting
@@ -717,13 +723,19 @@ public class WifiCallingSettingsForSub extends DashboardFragment
      * {@code false} otherwise.
      */
     private boolean overrideWfcRoamingModeWhileUsingNtn() {
-        TelephonyManager tm = getTelephonyManagerForSub(mSubId);
-        ServiceState serviceState = tm.getServiceState();
-        if (serviceState == null) {
+        SatelliteManager satelliteManager = getSatelliteManager();
+        if (satelliteManager == null) {
             return false;
         }
 
-        if (!serviceState.isUsingNonTerrestrialNetwork()) {
+        boolean isInCarrierRoamingNtnMode = false;
+        try {
+            isInCarrierRoamingNtnMode = satelliteManager.isInCarrierRoamingNtnMode(mSubId);
+        } catch (IllegalStateException ex) {
+            Log.e(TAG, "overrideWfcRoamingModeWhileUsingNtn: ex=" + ex);
+        }
+
+        if (!isInCarrierRoamingNtnMode) {
             return false;
         }
 
