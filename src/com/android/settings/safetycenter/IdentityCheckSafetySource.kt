@@ -28,6 +28,7 @@ import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemProperties
+import android.os.UserManager
 import android.provider.Settings
 import android.proximity.IProximityResultCallback
 import android.proximity.ProximityResultCode
@@ -97,6 +98,7 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                 context,
                 safetyEvent,
                 context.getSystemService(BiometricManager::class.java),
+                context.getSystemService(UserManager::class.java),
             )
         }
 
@@ -105,10 +107,15 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
             context: Context,
             safetyEvent: SafetyEvent,
             biometricManager: BiometricManager?,
+            userManager: UserManager?,
             isTablet: Boolean = isTablet(),
             isLowRamDevice: Boolean = isLowRam(context),
+            userId: Int = context.userId,
         ) {
             if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
+                return
+            }
+            if (userManager?.isProfile(userId) == true) {
                 return
             }
             if (isTablet) {
