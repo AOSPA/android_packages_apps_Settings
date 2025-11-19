@@ -39,6 +39,7 @@ import com.android.settings.accessibility.TextReadingPreferenceFragment
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.core.instrumentation.SettingsStatsLog
+import com.android.settings.flags.Flags
 import java.util.Locale
 
 /**
@@ -80,8 +81,13 @@ open class SelectedDisplayPreferenceFragment(
             Bundle().apply {
                 putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, displayId)
             }
+        val isRefreshRatePrefEnabled = Flags.enableResolutionRefreshRateSetting()
         SubSettingLauncher(requireContext())
-            .setDestination(ResolutionPreferenceFragment::class.java.name)
+            .setDestination(
+                if (isRefreshRatePrefEnabled)
+                    ResolutionRefreshRatePreferenceFragment::class.java.name
+                else ResolutionPreferenceFragment::class.java.name
+            )
             .setArguments(args)
             .setSourceMetricsCategory(metricsCategory)
             .launch()
