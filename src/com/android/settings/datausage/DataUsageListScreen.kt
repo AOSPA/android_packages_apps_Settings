@@ -35,6 +35,9 @@ import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.telephony.subscriptionManager
 import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -42,15 +45,34 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 // LINT.IfChange
 /** Preference screen for Network & Internet -> SIMs -> [SIM] -> App data usage. */
 @ProvidePreferenceScreen(DataUsageListScreen.KEY, parameterized = true)
-open class DataUsageListScreen(override val arguments: Bundle) :
-    PreferenceScreenMixin, PreferenceSummaryProvider {
+open class DataUsageListScreen
+private constructor(
+    @Deprecated(
+        "This property will be removed once the catalyst framework stops passing the arguments as a bundle. Use the keyParameters instead."
+    )
+    final override val arguments: Bundle?,
+    final override val keyParameters: KeyParameters?,
+) : PreferenceScreenMixin, PreferenceSummaryProvider {
 
-    private val subId =
-        arguments.getSubId(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+    private val subId: Int =
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            keyParameters!![Settings.EXTRA_SUB_ID]?.toInt()
+                ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
+        } else {
+            arguments!!.getSubId(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+        }
+
+    @Deprecated(
+        "This constructor will be removed once the catalyst framework stops passing the arguments as a bundle. Use the other constructor instead."
+    )
+    constructor(args: Bundle) : this(args, null)
+
+    constructor(keyParameters: KeyParameters) : this(null, keyParameters)
 
     override val key: String
         get() = KEY
@@ -77,7 +99,21 @@ open class DataUsageListScreen(override val arguments: Bundle) :
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
         val intent =
-            makeLaunchIntent(context, MobileDataUsageListActivity::class.java, metadata?.key)
+            if (CatalystFlags.catalystUseKeyParameters()) {
+                makeLaunchIntent(
+                    context,
+                    MobileDataUsageListActivity::class.java,
+                    keyParameters!!,
+                    metadata?.key,
+                )
+            } else {
+                makeLaunchIntent(
+                    context,
+                    MobileDataUsageListActivity::class.java,
+                    arguments!!,
+                    metadata?.key,
+                )
+            }
         intent.putExtra(Settings.EXTRA_SUB_ID, subId)
         return intent
     }
@@ -90,9 +126,23 @@ open class DataUsageListScreen(override val arguments: Bundle) :
 
     override fun getSummary(context: Context) = getDataUsageInfo(context, subId).summary
 
-    companion object {
+    companion object : ParameterizedPreferenceScreenArgumentsFactory {
         const val KEY = "data_usage_summary"
 
+        @JvmStatic override val parametersSchema = MobileNetworkScreen.parametersSchema
+
+        @JvmStatic
+        override fun keyParameters(context: Context): Flow<KeyParameters> {
+            // TODO (b/457649430): when the catalyst framework stops passing the arguments as a
+            // bundle: replace the parameters(context) call to the actual implementation,
+            // or make this function the primary implementation and the legacy parameters() should
+            // call this one.
+            return parameters(context).map { bundle -> parametersSchema.prepare(bundle) }
+        }
+
+        @Deprecated(
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use keyParameters instead."
+        )
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> {
             return MobileNetworkScreen.parameters(context)

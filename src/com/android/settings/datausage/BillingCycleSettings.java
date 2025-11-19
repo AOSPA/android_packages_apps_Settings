@@ -51,8 +51,10 @@ import com.android.settings.datausage.lib.DataUsageFormatter;
 import com.android.settings.datausage.lib.NetworkTemplates;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.utils.SubIdBundleUtils;
 import com.android.settings.widget.EnhancedSettingsSpinnerAdapter;
 import com.android.settingslib.NetworkPolicyEditor;
+import com.android.settingslib.metadata.KeyParameters;
 import com.android.settingslib.net.DataUsageController;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -274,17 +276,43 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
         }
         if (getIntent().hasExtra(Settings.EXTRA_SUB_ID)) return getIntent();
 
-        final Bundle args = getPreferenceScreenBindingArgs(requireContext());
-        if (args == null) {
+        Integer subId = getSubIdFromBindingArgs();
+        if (subId == null) {
             Log.e(TAG, "getLocalIntent: has no PreferenceScreenBindingArgs data");
             return null;
         }
-        final int subId =
-                args.getInt(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+
         Log.d(TAG, "getLocalIntent: subId is " + subId);
         final Intent localIntent = (Intent) getIntent().clone();
         localIntent.putExtra(Settings.EXTRA_SUB_ID, subId);
         return localIntent;
+    }
+
+    private @Nullable Integer getSubIdFromBindingArgs() {
+        if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters()) {
+            final KeyParameters parameters =
+                    getPreferenceScreenBindingKeyParameters(requireContext());
+            if (parameters == null) {
+                return null;
+            }
+
+            try {
+                return Integer.parseInt(parameters.get(Settings.EXTRA_SUB_ID));
+            } catch (NumberFormatException e) {
+                return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+            }
+        } else {
+            final Bundle args = getPreferenceScreenBindingArgs(requireContext());
+            if (args == null) {
+                return null;
+            }
+
+            return SubIdBundleUtils.getSubId(
+                    args,
+                    Settings.EXTRA_SUB_ID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID
+            );
+        }
     }
 
     /**
