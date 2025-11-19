@@ -26,6 +26,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 /** Provides entries of each regional preferences */
+@Deprecated
 @SearchIndexable
 public class RegionalPreferencesEntriesFragment extends DashboardFragment {
     private static final String TAG = RegionalPreferencesEntriesFragment.class.getSimpleName();
