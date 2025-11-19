@@ -800,8 +800,8 @@ public final class DataProcessor {
                     // If there is an existing start time that is further back than the max usage
                     // duration, then close the previous usage period and start a new one.
                     // Otherwise, simply ignore this start event.
-                    if (isStartTimeEarlierThanQueryBufferDuration(
-                            pendingUsagePeriod.getStartTime(), eventTime)) {
+                    if (isLastActiveTimeEarlierThanQueryBufferDuration(
+                            pendingUsagePeriod, eventTime)) {
                         pendingUsagePeriod.setEndTime(
                                 getEndTimeForIncompleteUsagePeriod(pendingUsagePeriod, eventTime));
                         validateAndAddToPeriodList(
@@ -813,13 +813,15 @@ public final class DataProcessor {
                     // If there was no start time, then start a new period.
                     pendingUsagePeriod.setStartTime(eventTime);
                 }
+                // Always update last active time for period with only start time.
+                pendingUsagePeriod.setLastActiveTimeMs(eventTime);
             } else if (event.getType() == AppUsageEventType.ACTIVITY_STOPPED) {
                 // If there is an existing start time longer than the max query buffer duration,
                 // close the previous usage period by adding a default end time to match the
                 // start event. Treat current end event as an unmatched event.
                 if (pendingUsagePeriod.hasStartTime()
-                        && isStartTimeEarlierThanQueryBufferDuration(
-                                pendingUsagePeriod.getStartTime(), eventTime)) {
+                        && isLastActiveTimeEarlierThanQueryBufferDuration(
+                                pendingUsagePeriod, eventTime)) {
                     pendingUsagePeriod.setEndTime(
                             getEndTimeForIncompleteUsagePeriod(pendingUsagePeriod, eventTime));
                     validateAndAddToPeriodList(
@@ -1087,22 +1089,25 @@ public final class DataProcessor {
         packageNameMap.get(packageName).addAll(usagePeriodList);
     }
 
-    private static boolean isStartTimeEarlierThanQueryBufferDuration(
-            final long startTime, final long eventTime) {
-        return startTime + DatabaseUtils.USAGE_QUERY_BUFFER_HOURS < eventTime;
+    private static boolean isLastActiveTimeEarlierThanQueryBufferDuration(
+            final AppUsagePeriodOrBuilder appUsagePeriod, final long eventTime) {
+        final long lastActiveTimeMs = appUsagePeriod.hasLastActiveTimeMs()
+                ? appUsagePeriod.getLastActiveTimeMs() : appUsagePeriod.getStartTime();
+        return lastActiveTimeMs + DatabaseUtils.USAGE_QUERY_BUFFER_HOURS < eventTime;
     }
 
-    /** Returns the start time that gives {@code usagePeriod} the default usage duration. */
+    /** Returns the start time that gives {@code appUsagePeriod} the default usage duration. */
     private static long getStartTimeForIncompleteUsagePeriod(
-            final AppUsagePeriodOrBuilder usagePeriod) {
-        return usagePeriod.getEndTime() - DEFAULT_USAGE_DURATION_FOR_INCOMPLETE_INTERVAL;
+            final AppUsagePeriodOrBuilder appUsagePeriod) {
+        return appUsagePeriod.getEndTime() - DEFAULT_USAGE_DURATION_FOR_INCOMPLETE_INTERVAL;
     }
 
     /** Returns the end time that gives {@code usagePeriod} the default usage duration. */
     private static long getEndTimeForIncompleteUsagePeriod(
-            final AppUsagePeriodOrBuilder usagePeriod, final long eventTime) {
+            final AppUsagePeriodOrBuilder appUsagePeriod, final long eventTime) {
         return Math.min(
-                usagePeriod.getStartTime() + DEFAULT_USAGE_DURATION_FOR_INCOMPLETE_INTERVAL,
+                appUsagePeriod.getLastActiveTimeMs()
+                        + DEFAULT_USAGE_DURATION_FOR_INCOMPLETE_INTERVAL,
                 eventTime);
     }
 

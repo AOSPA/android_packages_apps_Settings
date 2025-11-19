@@ -398,6 +398,85 @@ public final class DataProcessorTest {
     }
 
     @Test
+    public void generateAppUsagePeriodMap_withLongUsagePeriod_returnExpectedResult() {
+        final long startTime = Duration.ofHours(2).toMillis();
+        final long midTime = Duration.ofHours(4).toMillis();
+        final long endTime = Duration.ofHours(6).toMillis();
+        final String packageName = "com.android.settings";
+        DataProcessor.sDebug = true;
+        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
+                List.of(
+                        new BatteryLevelData.PeriodBatteryLevelData(
+                                /* batteryLevelMap= */ Map.of(
+                                startTime, 100, midTime, 100, endTime, 100),
+                                /* timestamps= */ List.of(startTime, midTime, endTime),
+                                /* isStartTimestamp= */ false)
+                );
+        List<AppUsageEvent> eventList;
+        Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> result;
+        List<AppUsagePeriod> periods;
+
+        // Case 1: A long usage period from 2:00 to 6:00, with active resume events during period.
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        startTime + 10L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        midTime + 5L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        endTime,
+                        AppUsageEventType.ACTIVITY_STOPPED)
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        // Trim usage period by time range from 2:00 to 4:00
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(1);
+        assertAppUsagePeriod(periods.get(0), startTime + 10L, midTime);
+        // Trim usage period by time range from 4:00 to 6:00
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */1)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(1);
+        assertAppUsagePeriod(periods.get(0), midTime, endTime);
+
+        // Case 2: A long usage period from 2:00 to 6:00, without resume events inside period.
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        startTime + 10L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        endTime,
+                        AppUsageEventType.ACTIVITY_STOPPED)
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        // Split into 2 periods with incompleted duration time.
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(1);
+        assertAppUsagePeriod(periods.get(0),
+                startTime + 10L, startTime + DURATION_FOR_UNMATCHED_EVENT + 10L);
+        // Trim usage period by time range from 4:00 to 6:00
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */1)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(1);
+        assertAppUsagePeriod(periods.get(0), endTime - DURATION_FOR_UNMATCHED_EVENT, endTime);
+    }
+
+    @Test
     public void generateAppUsagePeriodMap_withDupResumeEvents_returnExpectedResult() {
         final long startTime = Duration.ofHours(4).toMillis();
         final long endTime = Duration.ofHours(6).toMillis();
@@ -411,12 +490,14 @@ public final class DataProcessorTest {
                                 /* timestamps= */ List.of(startTime, endTime),
                                 /* isStartTimestamp= */ false)
                 );
+        List<AppUsageEvent> eventList;
         Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> result;
+        List<AppUsagePeriod> periods;
 
         // Time gap between 2 Resumed events within query buffer.
-        final List<AppUsageEvent> eventList1 = new ArrayList<>();
+        eventList = new ArrayList<>();
         appendAppUsageEventList(
-                eventList1,
+                eventList,
                 /* userId= */ 1,
                 /* instanceId= */ 2,
                 packageName,
@@ -430,32 +511,58 @@ public final class DataProcessorTest {
         );
 
         result = DataProcessor.generateAppUsagePeriodMap(
-                mContext, hourlyBatteryLevelsPerDay, eventList1, new ArrayList<>());
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
 
-        List<AppUsagePeriod> periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
                 .get(/* UserId= */ 1L).get(packageName);
         assertThat(periods).hasSize(1);
-        // Ignore the later start event.
+        // A UsagePeriod from first resume to the stop.
         assertAppUsagePeriod(periods.get(0), startTime + 1L, endTime);
 
-        // Time gap between 2 Resumed events exceeds the query buffer.
-        final List<AppUsageEvent> eventList2 = new ArrayList<>();
+        // Time gap between several Resumed events within query buffer and without STOP event.
+        eventList = new ArrayList<>();
         appendAppUsageEventList(
-                eventList2,
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        startTime + 10L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        startTime + 20L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        startTime + 30L,
+                        AppUsageEventType.ACTIVITY_RESUMED)
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(1);
+        // Close the period from start to the last active resume event.
+        assertAppUsagePeriod(periods.get(0),
+                startTime + 10L, startTime + 30L + DURATION_FOR_UNMATCHED_EVENT);
+
+        // Time gap between 2 Resumed events exceeds the query buffer.
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
                 /* userId= */ 1,
                 /* instanceId= */ 2,
                 packageName,
                 Map.of(
                         startTime + 1L,
                         AppUsageEventType.ACTIVITY_RESUMED,
-                        startTime + queryBuffer + 1L,
-                        AppUsageEventType.ACTIVITY_RESUMED,
                         startTime + queryBuffer + 2L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        startTime + queryBuffer + 3L,
                         AppUsageEventType.ACTIVITY_STOPPED)
         );
 
         result = DataProcessor.generateAppUsagePeriodMap(
-                mContext, hourlyBatteryLevelsPerDay, eventList2, new ArrayList<>());
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
 
         periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
                 .get(/* UserId= */ 1L).get(packageName);
@@ -463,6 +570,32 @@ public final class DataProcessorTest {
         // Split into 2 events but the later one out-of-slot-range.
         assertAppUsagePeriod(periods.get(0), startTime + 1L,
                 startTime + 1L + DURATION_FOR_UNMATCHED_EVENT);
+
+        // Time gap between several Resumed events exceeds the query buffer.
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        startTime + 10L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        startTime + 20L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        startTime + queryBuffer + 30L,
+                        AppUsageEventType.ACTIVITY_RESUMED)
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(1);
+        // Close the usage period from start to the last active resume event.
+        assertAppUsagePeriod(periods.get(0), startTime + 10L,
+                startTime + DURATION_FOR_UNMATCHED_EVENT + 20L);
     }
 
     @Test
@@ -510,7 +643,6 @@ public final class DataProcessorTest {
     public void generateAppUsagePeriodMap_withScreenOffEvents_returnExpectedResult() {
         final long startTime = Duration.ofHours(4).toMillis();
         final long endTime = Duration.ofHours(6).toMillis();
-        final long queryBuffer = DatabaseUtils.USAGE_QUERY_BUFFER_HOURS;
         final String packageName = "com.android.settings";
         DataProcessor.sDebug = true;
         final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
@@ -542,7 +674,7 @@ public final class DataProcessorTest {
         );
 
         result = DataProcessor.generateAppUsagePeriodMap(
-                        mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
 
         periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
                 .get(/* UserId= */ 1L).get(packageName);
@@ -573,6 +705,32 @@ public final class DataProcessorTest {
                 .get(/* UserId= */ 1L).get(packageName);
         assertThat(periods).hasSize(1);
         assertAppUsagePeriod(periods.get(0), endTime - 30L, endTime - 20L);
+
+        // Screen off event after 2 duplicate start events
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        endTime - DURATION_FOR_UNMATCHED_EVENT - 30L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        endTime - DURATION_FOR_UNMATCHED_EVENT - 20L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        endTime - 10L,
+                        AppUsageEventType.SCREEN_NON_INTERACTIVE
+                )
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(1);
+        assertAppUsagePeriod(periods.get(0),
+                endTime - DURATION_FOR_UNMATCHED_EVENT - 30L, endTime - 20L);
     }
 
     @Test
