@@ -16,6 +16,7 @@
 package com.android.settings.security;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.UserHandle;
@@ -46,6 +47,7 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
     @Nullable private SettingsMainSwitchPreference mSwitchBar;
 
     @Nullable private RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
+    @Nullable private EnforcingAdmin mEnforcingAdmin;
 
     @NonNull private final ContentResolver mContentResolver;
 
@@ -56,7 +58,13 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
         super(context, preferenceKey);
         mContentResolver = context.getContentResolver();
 
-        mEnforcedAdmin = getEnforcedAdmin();
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorV2()) {
+            mEnforcingAdmin = ContentProtectionPreferenceUtils.getContentProtectionEnforcingAdmin(
+                    mContext, getManagedProfile());
+        } else {
+            mEnforcedAdmin = getEnforcedAdmin();
+        }
+
         mContentProtectionPolicy = getContentProtectionPolicy(getManagedProfile());
     }
 
@@ -67,7 +75,12 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
 
     @Override
     public boolean isChecked() {
-        if (mEnforcedAdmin != null) {
+        final boolean hasAdmin =
+                android.app.admin.flags.Flags.policyTransparencyRefactorV2()
+                        ? mEnforcingAdmin != null
+                        : mEnforcedAdmin != null;
+
+        if (hasAdmin) {
             if (mContentProtectionPolicy == DevicePolicyManager.CONTENT_PROTECTION_DISABLED) {
                 return false;
             }
@@ -80,7 +93,11 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        if (mEnforcedAdmin != null
+        final boolean hasAdmin =
+                    android.app.admin.flags.Flags.policyTransparencyRefactorV2()
+                            ? mEnforcingAdmin != null
+                            : mEnforcedAdmin != null;
+        if (hasAdmin
                 && mContentProtectionPolicy
                         != DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY) {
             return false;
@@ -106,12 +123,22 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        if (mSwitchBar != null
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorV2()) {
+            if (mSwitchBar != null
+                && mEnforcingAdmin != null
+                && mContentProtectionPolicy
+                        != DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY) {
+                mSwitchBar.setDisabledByAdmin(mEnforcingAdmin);
+                return;
+            }
+        } else {
+            if (mSwitchBar != null
                 && mEnforcedAdmin != null
                 && mContentProtectionPolicy
                         != DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY) {
-            mSwitchBar.setDisabledByAdmin(mEnforcedAdmin);
-            return;
+                mSwitchBar.setDisabledByAdmin(mEnforcedAdmin);
+                return;
+            }
         }
 
         UserManager userManager = mContext.getSystemService(UserManager.class);

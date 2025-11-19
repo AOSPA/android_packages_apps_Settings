@@ -16,6 +16,8 @@
 
 package com.android.settings.security;
 
+import static android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_V2;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
@@ -26,7 +28,12 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.PolicyEnforcementInfo;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.UnknownAuthority;
+import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -47,11 +54,18 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
+
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowDevicePolicyManager.class})
 public class ContentProtectionWorkSwitchControllerTest {
 
     private static final UserHandle TEST_USER_HANDLE = UserHandle.of(10);
+
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
@@ -64,6 +78,13 @@ public class ContentProtectionWorkSwitchControllerTest {
     @Nullable private UserHandle mManagedProfileUserHandle;
 
     @Nullable private RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
+    @Nullable private EnforcingAdmin mEnforcingAdmin = new EnforcingAdmin(
+                    "test.pkg",
+                    UnknownAuthority.UNKNOWN_AUTHORITY,
+                    UserHandle.of(UserHandle.myUserId()),
+                    new ComponentName("", ""));
+
+    private ShadowDevicePolicyManager mShadowDevicePolicyManager;
 
     @DevicePolicyManager.ContentProtectionPolicy
     private int mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
@@ -72,6 +93,7 @@ public class ContentProtectionWorkSwitchControllerTest {
 
     @Before
     public void setUp() {
+        mShadowDevicePolicyManager = ShadowDevicePolicyManager.getShadow();
         mController = new TestContentProtectionWorkSwitchController();
     }
 
@@ -166,7 +188,8 @@ public class ContentProtectionWorkSwitchControllerTest {
     }
 
     @Test
-    public void displayPreference_managedProfile_disabledByAdmin() {
+    public void displayPreference_managedProfile_disabledByEnforcedAdmin() {
+        mSetFlagsRule.disableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_V2);
         mManagedProfileUserHandle = TEST_USER_HANDLE;
         mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
         setupForDisplayPreference();
@@ -179,7 +202,19 @@ public class ContentProtectionWorkSwitchControllerTest {
     }
 
     @Test
-    public void displayPreference_noManagedProfile_notDisabledByAdmin() {
+    public void displayPreference_managedProfile_disabledByEnforcingAdmin() {
+        mSetFlagsRule.enableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_V2);
+        mManagedProfileUserHandle = TEST_USER_HANDLE;
+        setupForDisplayPreferenceWithEnforcingAdmin(true);
+
+        mController.displayPreference(mMockPreferenceScreen);
+
+        verify(mMockSwitchPreference).setDisabledByAdmin(mEnforcingAdmin);
+    }
+
+    @Test
+    public void displayPreference_noManagedProfile_notDisabledByEnforcedAdmin() {
+        mSetFlagsRule.disableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_V2);
         setupForDisplayPreference();
 
         mController.displayPreference(mMockPreferenceScreen);
@@ -190,10 +225,36 @@ public class ContentProtectionWorkSwitchControllerTest {
         assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(0);
     }
 
+    @Test
+    public void displayPreference_noManagedProfile_notDisabledByEnforcingAdmin() {
+        mSetFlagsRule.enableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_V2);
+        setupForDisplayPreferenceWithEnforcingAdmin(false);
+
+        mController.displayPreference(mMockPreferenceScreen);
+
+        verify(mMockSwitchPreference, never()).setDisabledByAdmin(
+                any(EnforcingAdmin.class));
+    }
+
     private void setupForDisplayPreference() {
         when(mMockPreferenceScreen.findPreference(any())).thenReturn(mMockSwitchPreference);
         when(mMockSwitchPreference.getKey()).thenReturn(mController.getPreferenceKey());
         mController = new TestContentProtectionWorkSwitchController();
+    }
+
+    private void setUpEnforcingAdmin() {
+        mShadowDevicePolicyManager.setPolicyEnforcementInfoForPolicy(
+                DevicePolicyIdentifiers.CONTENT_PROTECTION_POLICY,
+                new PolicyEnforcementInfo(List.of(mEnforcingAdmin)));
+        mController = new TestContentProtectionWorkSwitchController();
+    }
+
+    private void setupForDisplayPreferenceWithEnforcingAdmin(boolean isSetUpByEnforcingAdmin) {
+        when(mMockPreferenceScreen.findPreference(any())).thenReturn(mMockSwitchPreference);
+        when(mMockSwitchPreference.getKey()).thenReturn(mController.getPreferenceKey());
+        if (isSetUpByEnforcingAdmin) {
+            setUpEnforcingAdmin();
+        }
     }
 
     private class TestContentProtectionWorkSwitchController

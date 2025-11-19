@@ -19,11 +19,16 @@ import static android.view.contentprotection.flags.Flags.manageDevicePolicyEnabl
 
 import static com.android.internal.R.string.config_defaultContentProtectionService;
 
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
+import android.app.admin.DevicePolicyIdentifiers;
+
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
+import android.util.Log;
 import android.os.UserManager;
 import android.provider.DeviceConfig;
 import android.view.contentcapture.ContentCaptureManager;
@@ -32,6 +37,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.Utils;
+import com.android.internal.util.Preconditions;
 
 /** Util class for content protection preference. */
 public class ContentProtectionPreferenceUtils {
@@ -88,6 +94,21 @@ public class ContentProtectionPreferenceUtils {
         }
         Context policyContext = createContentProtectionPolicyContext(context, managedProfile);
         return getContentProtectionPolicyWithGivenContext(policyContext);
+    }
+
+    @Nullable
+    public static EnforcingAdmin getContentProtectionEnforcingAdmin(
+            @NonNull Context context, @Nullable UserHandle managedProfile) {
+        DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
+        Preconditions.checkState(dpm != null, "DevicePolicyManager is not available.");
+        int userId = managedProfile != null ? managedProfile.myUserId() : UserHandle.myUserId();
+        PolicyEnforcementInfo policyEnforcementInfo =
+            dpm.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.CONTENT_PROTECTION_POLICY,
+                userId);
+
+        EnforcingAdmin admin = policyEnforcementInfo.getMostImportantEnforcingAdmin();
+        return admin;
     }
 
     @NonNull
