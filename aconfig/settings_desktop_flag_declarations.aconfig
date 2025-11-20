@@ -45,3 +45,10 @@ flag {
     description: "Controls whether to show the 'add users from the sign-in screen' toggle in Settings."
     bug: "391862614"
 }
+
+flag {
+   name: "show_top_level_device_category"
+   namespace: "desktop_settings"
+   description: "Controls whether to show the new Device top-level category and re-groups related settings under it on Desktop devices"
+   bug: "452710958"
+}
