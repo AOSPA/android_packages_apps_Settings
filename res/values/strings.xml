@@ -793,12 +793,12 @@
     <string name="zone_info_offset_and_name"><xliff:g id="time_type" example="Pacific Time">%2$s</xliff:g> (<xliff:g id="offset" example="GMT-08:00">%1$s</xliff:g>)</string>
     <!-- Label describing a time zone and a follow-up sentence [CHAR LIMIT=NONE] -->
     <string name="zone_info_footer_first_sentence">Uses <xliff:g id="offset_and_name" example="Pacific Time (GMT-08:00)">%1$s</xliff:g>. <xliff:g id="second_sentence" example="Pacific Daylight Time starts on Mar 11 2018.">%2$s</xliff:g></string>
-    <!-- Label describing the upcoming daylight savings time change [CHAR LIMIT=NONE] -->
+    <!-- Label describing the upcoming daylight saving time change [CHAR LIMIT=NONE] -->
     <string name="zone_info_footer_second_sentence"><xliff:g id="dst_time_type" example="Pacific Daylight Time">%1$s</xliff:g> starts on <xliff:g id="transition_date" example="Mar 11 2018">%2$s</xliff:g>.</string>
     <!-- Label describing a time zone without DST [CHAR LIMIT=NONE] -->
-    <string name="zone_info_footer_no_dst">Uses <xliff:g id="offset_and_name" example="GMT-08:00 Pacific Time">%1$s</xliff:g>. No daylight savings time.</string>
-    <!-- Describes the time type "daylight savings time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
-    <string name="zone_time_type_dst">Daylight savings time</string>
+    <string name="zone_info_footer_no_dst">Uses <xliff:g id="offset_and_name" example="GMT-08:00 Pacific Time">%1$s</xliff:g>. No daylight saving time.</string>
+    <!-- Describes the time type "daylight saving time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
+    <string name="zone_time_type_dst">Daylight saving time</string>
     <!-- Describes the time type "standard time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
     <string name="zone_time_type_standard">Standard time</string>
     <!-- The menu item to switch to selecting a time zone by region (default) [CHAR LIMIT=30] -->
@@ -15209,9 +15209,11 @@
     <!-- Top intro for app store filters [CHAR LIMIT=NONE] -->
     <string name="supervision_app_store_filters_top_intro">Filter apps based on the maturity of their content</string>
     <!-- Title for app store filters footer [CHAR LIMIT=NONE] -->
-    <string name="supervision_app_store_filters_footer_content">Each app may block different types of content. App stores not listed must be managed separately. </string>
+    <string name="supervision_app_store_filters_footer_content">Each store rates content differently. An app\u2019s rating may vary across stores.</string>
     <!-- Learn more link for app store filters footer. [CHAR LIMIT=NONE]-->
     <string name="supervision_app_store_filters_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_app_store_filters</string>
+    <!--Summary for app store filters [CHAR LIMIT=NONE] -->
+    <string name="supervision_app_store_filters_summary">Filter apps by content ratings</string>
     <!-- Title for web content filters entry [CHAR LIMIT=60] [BACKUP_MESSAGE_ID=2412562442507104921] -->
     <string name="supervision_web_content_filters_title">Web content filters</string>
     <!-- Search keywords for web content filters entry [CHAR LIMIT=NONE] -->
@@ -15425,4 +15427,20 @@
     <string name="satellite_connectivity_topintro">Stay connected when you don\'t have a mobile or Wi-Fi network</string>
     <!-- Label for the satellite landing page activity. [CHAR LIMIT=NONE] -->
     <string name="satellite_landing_page_label">Satellite Landing Page</string>
+    <!-- Title for a button to try a demo of satellite connectivity. [CHAR LIMIT=NONE] -->
+    <string name="try_a_demo">Try a demo</string>
+    <!-- Subitle for the try a demo button. [CHAR LIMIT=NONE] -->
+    <string name="see_how_it_works">See how it works</string>
+    <!-- Footer text for the satellite landing page, explaining how it works for LTE devices. [CHAR LIMIT=NONE] -->
+    <string name="landing_page_footer_text_lte">When you don\'t have a mobile or Wi-Fi network, your phone will automatically connect to a satellite. For the best connection, keep a clear view of the sky. Your phone will reconnect to a mobile network when available. Calling over satellite isn\'t available. Emergency calls may still connect.</string>
+    <!-- Footer text for the satellite landing page, explaining how it works for phones that have to be manually pointed at a satellite that stays in one place in the sky using a UI that guides them to do so. [CHAR LIMIT=NONE] -->
+    <string name="landing_page_footer_text_nbiot">For the best connection, keep a clear view of the sky. Your phone will reconnect to a mobile network when available. Calling over satellite isn\'t available. Emergency calls may still connect.</string>
+    <!-- Text for a link to more information about satellite connectivity. [CHAR LIMIT=NONE] -->
+    <string name="satellite_more_info_text"><u>More about satellite connectivity</u></string>
+    <!-- Content description for the forward arrow on the try a demo button. [CHAR LIMIT=NONE] -->
+    <string name="forward_arrow_content_desc">Open satellite SOS demo</string>
+    <!-- Title for the satellite apps preference category. [CHAR LIMIT=NONE] [SCREENSHOT=screen/4uVGfjXnxQQmMby] -->
+    <string name="satellite_apps_title">Satellite apps</string>
+    <!-- Name for the Emergency SOS app in the satellite landing page. [CHAR LIMIT=NONE] -->
+    <string name="satellite_emergency_sos">Emergency SOS</string>
 </resources>

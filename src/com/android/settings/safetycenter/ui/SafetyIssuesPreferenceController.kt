@@ -48,8 +48,9 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
     private var bannerGroup: BannerMessagePreferenceGroup? = null
     private var bannerGroupManager: SafetyIssuesBannerGroupManager? = null
     private var viewModel: LiveSafetyCenterViewModel? = null
-    private var fragmentManager: FragmentManager? = null
-    private var activityTaskId: Int? = null
+    var focusedIssueKey: FocusedIssueKey? = null
+    var fragmentManager: FragmentManager? = null
+    var activityTaskId: Int? = null
 
     // Configuration for subpage behavior
     private var relatedSafetySources: List<String> = emptyList()
@@ -75,25 +76,6 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
             Log.d(TAG, "[$preferenceKey] safetyCenterUiLiveData observer notified")
             bannerGroup?.let { group -> updatePreferenceUi(group, data) }
         }
-    }
-
-    /**
-     * Sets the [FragmentManager] to be used for showing DialogFragments. This should typically be
-     * the childFragmentManager of the hosting fragment.
-     *
-     * @param fragmentManager The FragmentManager instance.
-     */
-    fun setFragmentManager(fragmentManager: FragmentManager) {
-        this.fragmentManager = fragmentManager
-    }
-
-    /**
-     * Sets the task ID of the hosting Activity.
-     *
-     * @param taskId The task ID of the hosting Activity.
-     */
-    fun setActivityTaskId(taskId: Int) {
-        this.activityTaskId = taskId
     }
 
     /**
@@ -207,6 +189,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
             newActiveIssues = activeIssues,
             newDismissedIssues = emptyList(),
             resolvedIssues = data.resolvedIssues,
+            focusedIssueKey = focusedIssueKey,
         )
         bannerGroup.isVisible = !activeIssues.isEmpty()
     }
@@ -230,6 +213,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
             newActiveIssues = activeIssues,
             newDismissedIssues = dismissedIssues,
             resolvedIssues = data.resolvedIssues,
+            focusedIssueKey = focusedIssueKey,
         )
 
         illustrationPreference?.isVisible = activeIssues.isEmpty()

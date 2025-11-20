@@ -16,7 +16,9 @@
 
 package com.android.settings.security;
 
+import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
@@ -81,6 +83,32 @@ public class ScreenLockPreferenceDetailsUtils {
                 .getSystemService(Context.DEVICE_POLICY_SERVICE);
         return admin != null && dpm.getPasswordQuality(admin.component, userId)
                 == DevicePolicyManager.PASSWORD_QUALITY_MANAGED;
+    }
+
+    /**
+     * Returns the enforcing admin if the admin has set it to
+     * {@link DevicePolicyManager.PASSWORD_QUALITY_MANAGED} which would make user unable to
+     * change the password. Otherwise, returns null. Note that this method doesn't check for
+     * other password quality levels and only checks for
+     * {@link DevicePolicyManager.PASSWORD_QUALITY_MANAGED} which is the strictest password
+     * quality level. This method includes the admin policies that applied on the parent profile
+     * from managed profile when unified profile challenge is enabled.
+     */
+    @Nullable
+    public EnforcingAdmin getPasswordQualityManagedEnforcingAdmin(int userId) {
+        final DevicePolicyManager dpm = mContext.getSystemService(DevicePolicyManager.class);
+        if (dpm == null) {
+            return null;
+        }
+        // Check with component set to null to check for password quality set by all admins on
+        // that user.
+        if (dpm.getPasswordQuality(/* component= */ null, userId)
+                != DevicePolicyManager.PASSWORD_QUALITY_MANAGED) {
+            return null;
+        }
+        return dpm.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.PASSWORD_QUALITY_POLICY,
+                userId).getMostImportantEnforcingAdmin();
     }
 
     /**

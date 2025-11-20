@@ -32,6 +32,7 @@ import com.android.settings.accessibility.DisplaySizeData;
 import com.android.settings.core.instrumentation.SettingsStatsLog;
 import com.android.settingslib.display.DisplayDensityUtils;
 import com.android.settingslib.widget.SliderPreference;
+import com.android.wm.shell.shared.desktopmode.DesktopState;
 
 import com.google.android.material.slider.Slider;
 
@@ -75,8 +76,12 @@ public class ExternalDisplaySizePreference extends SliderPreference {
     }
 
     private void setStateForPreferenceInternal() {
+        DesktopState desktopState = DesktopState.getInstance(mContext);
         var displaySizeData = new DisplaySizeData(mContext,
-                new DisplayDensityUtils(mContext, (info) -> info.displayId == mDisplayId));
+                new DisplayDensityUtils(mContext,
+                        /* targetDisplayPredicate= */ (info) -> info.displayId == mDisplayId,
+                        /* isLargeScreenPredicate= */ (info) ->
+                        desktopState.isDesktopModeSupportedOnDisplay(info.displayId)));
         setMax(displaySizeData.getValues().size() - 1);
         setSliderIncrement(1);
         setMin(0);

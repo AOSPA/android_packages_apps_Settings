@@ -199,7 +199,12 @@ public class UtilsTest {
         when(cachedDevice2.getGroupId()).thenReturn(1);
         when(cachedDevice3.getGroupId()).thenReturn(2);
         when(cachedDevice1.getProfiles())
-                .thenReturn(ImmutableList.of(mA2dpProfile, mHeadsetProfile, mLeAudioProfile));
+                .thenReturn(
+                        ImmutableList.of(
+                                mA2dpProfile,
+                                mHeadsetProfile,
+                                mHearingAidProfile,
+                                mLeAudioProfile));
         when(cachedDevice2.getProfiles()).thenReturn(ImmutableList.of(mLeAudioProfile));
         when(cachedDevice3.getProfiles())
                 .thenReturn(ImmutableList.of(mA2dpProfile, mHeadsetProfile, mLeAudioProfile));
@@ -254,6 +259,45 @@ public class UtilsTest {
     }
 
     @Test
+    public void enableLeAudioProfile_hasHearingAidProfile_disableHearingAidProfile() {
+        CachedBluetoothDevice cachedDevice1 = mock(CachedBluetoothDevice.class);
+        BluetoothDevice device1 = mock(BluetoothDevice.class);
+        when(cachedDevice1.getDevice()).thenReturn(device1);
+        when(cachedDevice1.getGroupId()).thenReturn(BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
+        when(cachedDevice1.getProfiles())
+                .thenReturn(
+                        ImmutableList.of(
+                                mA2dpProfile,
+                                mHeadsetProfile,
+                                mHearingAidProfile,
+                                mLeAudioProfile));
+
+        Utils.setLeAudioEnabled(mLocalBtManager, cachedDevice1, true);
+
+        verify(mLeAudioProfile).setEnabled(device1, true);
+        verify(mHearingAidProfile).setEnabled(device1, false);
+    }
+
+    @Test
+    public void enableLeAudioProfile_noHearingAidProfile_notDisableHearingAidProfile() {
+        CachedBluetoothDevice cachedDevice1 = mock(CachedBluetoothDevice.class);
+        BluetoothDevice device1 = mock(BluetoothDevice.class);
+        when(cachedDevice1.getDevice()).thenReturn(device1);
+        when(cachedDevice1.getGroupId()).thenReturn(BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
+        when(cachedDevice1.getProfiles())
+                .thenReturn(
+                        ImmutableList.of(
+                                mA2dpProfile,
+                                mHeadsetProfile,
+                                mLeAudioProfile));
+
+        Utils.setLeAudioEnabled(mLocalBtManager, cachedDevice1, true);
+
+        verify(mLeAudioProfile).setEnabled(device1, true);
+        verify(mHearingAidProfile, never()).setEnabled(device1, false);
+    }
+
+    @Test
     public void disableLeAudioProfile_multipleDeviceInGroup() {
         CachedBluetoothDevice cachedDevice1 = mock(CachedBluetoothDevice.class);
         CachedBluetoothDevice cachedDevice2 = mock(CachedBluetoothDevice.class);
@@ -271,7 +315,12 @@ public class UtilsTest {
         when(cachedDevice2.getGroupId()).thenReturn(1);
         when(cachedDevice3.getGroupId()).thenReturn(2);
         when(cachedDevice1.getProfiles())
-                .thenReturn(ImmutableList.of(mA2dpProfile, mHeadsetProfile, mLeAudioProfile));
+                .thenReturn(
+                        ImmutableList.of(
+                                mA2dpProfile,
+                                mHeadsetProfile,
+                                mHearingAidProfile,
+                                mLeAudioProfile));
         when(cachedDevice2.getProfiles()).thenReturn(ImmutableList.of(mLeAudioProfile));
         when(cachedDevice3.getProfiles())
                 .thenReturn(ImmutableList.of(mA2dpProfile, mHeadsetProfile, mLeAudioProfile));
@@ -323,5 +372,44 @@ public class UtilsTest {
         verify(mLeAudioProfile).setEnabled(device1, false);
         verify(mA2dpProfile).setEnabled(device1, true);
         verify(mHeadsetProfile).setEnabled(device1, true);
+    }
+
+    @Test
+    public void disableLeAudioProfile_hasHearingAidProfile_enableHearingAidProfile() {
+        CachedBluetoothDevice cachedDevice1 = mock(CachedBluetoothDevice.class);
+        BluetoothDevice device1 = mock(BluetoothDevice.class);
+        when(cachedDevice1.getDevice()).thenReturn(device1);
+        when(cachedDevice1.getGroupId()).thenReturn(BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
+        when(cachedDevice1.getProfiles())
+                .thenReturn(
+                        ImmutableList.of(
+                                mA2dpProfile,
+                                mHeadsetProfile,
+                                mHearingAidProfile,
+                                mLeAudioProfile));
+
+        Utils.setLeAudioEnabled(mLocalBtManager, cachedDevice1, false);
+
+        verify(mLeAudioProfile).setEnabled(device1, false);
+        verify(mHearingAidProfile).setEnabled(device1, true);
+    }
+
+    @Test
+    public void disableLeAudioProfile_noHearingAidProfile_notEnableHearingAidProfile() {
+        CachedBluetoothDevice cachedDevice1 = mock(CachedBluetoothDevice.class);
+        BluetoothDevice device1 = mock(BluetoothDevice.class);
+        when(cachedDevice1.getDevice()).thenReturn(device1);
+        when(cachedDevice1.getGroupId()).thenReturn(BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
+        when(cachedDevice1.getProfiles())
+                .thenReturn(
+                        ImmutableList.of(
+                                mA2dpProfile,
+                                mHeadsetProfile,
+                                mLeAudioProfile));
+
+        Utils.setLeAudioEnabled(mLocalBtManager, cachedDevice1, false);
+
+        verify(mLeAudioProfile).setEnabled(device1, false);
+        verify(mHearingAidProfile, never()).setEnabled(device1, true);
     }
 }

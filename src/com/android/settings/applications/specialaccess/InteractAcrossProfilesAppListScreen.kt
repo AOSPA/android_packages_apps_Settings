@@ -24,9 +24,11 @@ import android.os.Bundle
 import android.os.UserManager
 import android.provider.Settings.ACTION_MANAGE_CROSS_PROFILE_ACCESS
 import com.android.settings.R
+import com.android.settings.applications.specialaccess.InteractAcrossProfilesAppDetailScreen.Companion.KEY_APP_PACKAGE_NAME
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -69,8 +71,17 @@ open class InteractAcrossProfilesAppListScreen : PreferenceScreenMixin {
                     crossProfileApps,
                 )
                 .forEach { app_user ->
-                    val arguments = Bundle(1).apply { putString("app", app_user.first.packageName) }
-                    +(InteractAcrossProfilesAppDetailScreen.KEY args arguments)
+                    if (CatalystFlags.catalystUseKeyParameters()) {
+                        val parameters =
+                            InteractAcrossProfilesAppDetailScreen.parametersSchema.prepare(
+                                KEY_APP_PACKAGE_NAME to app_user.first.packageName
+                            )
+                        +(InteractAcrossProfilesAppDetailScreen.KEY withParameters parameters)
+                    } else {
+                        val arguments =
+                            Bundle(1).apply { putString("app", app_user.first.packageName) }
+                        +(InteractAcrossProfilesAppDetailScreen.KEY args arguments)
+                    }
                 }
         }
 

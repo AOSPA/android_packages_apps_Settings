@@ -295,17 +295,22 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     private void detectAnomaly() {
-        mExecutor.execute(
-                () -> {
-                    final PowerUsageFeatureProvider powerUsageFeatureProvider =
-                            FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
-                    final PowerAnomalyEventList anomalyEventList =
-                            powerUsageFeatureProvider.detectPowerAnomaly(
-                                    getContext(),
-                                    /* displayDrain= */ 0,
-                                    DetectRequestSourceType.TYPE_USAGE_UI);
-                    mHandler.post(() -> onAnomalyDetected(anomalyEventList));
-                });
+        try {
+            mExecutor.execute(this::detectAnomalyInner);
+        } catch (Exception e) {
+            Log.e(TAG, "detectAnomaly failed: ", e);
+        }
+    }
+
+    private void detectAnomalyInner() {
+        final PowerUsageFeatureProvider powerUsageFeatureProvider =
+                FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
+        final PowerAnomalyEventList anomalyEventList =
+                powerUsageFeatureProvider.detectPowerAnomaly(
+                        getContext(),
+                        /* displayDrain= */ 0,
+                        DetectRequestSourceType.TYPE_USAGE_UI);
+        mHandler.post(() -> onAnomalyDetected(anomalyEventList));
     }
 
     private void onAnomalyDetected(PowerAnomalyEventList anomalyEventList) {

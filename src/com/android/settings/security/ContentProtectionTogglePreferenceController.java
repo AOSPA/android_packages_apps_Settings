@@ -15,8 +15,6 @@
  */
 package com.android.settings.security;
 
-import static android.view.contentprotection.flags.Flags.manageDevicePolicyEnabled;
-
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -58,10 +56,8 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
         super(context, preferenceKey);
         mContentResolver = context.getContentResolver();
 
-        if (manageDevicePolicyEnabled()) {
-            mEnforcedAdmin = getEnforcedAdmin();
-            mContentProtectionPolicy = getContentProtectionPolicy(getManagedProfile());
-        }
+        mEnforcedAdmin = getEnforcedAdmin();
+        mContentProtectionPolicy = getContentProtectionPolicy(getManagedProfile());
     }
 
     @Override
@@ -72,11 +68,6 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
     @Override
     public boolean isChecked() {
         if (mEnforcedAdmin != null) {
-            if (!manageDevicePolicyEnabled()) {
-                // If fully managed device, it should always unchecked
-                return false;
-            }
-
             if (mContentProtectionPolicy == DevicePolicyManager.CONTENT_PROTECTION_DISABLED) {
                 return false;
             }
@@ -89,12 +80,10 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        if (manageDevicePolicyEnabled()) {
-            if (mEnforcedAdmin != null
-                    && mContentProtectionPolicy
-                            != DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY) {
-                return false;
-            }
+        if (mEnforcedAdmin != null
+                && mContentProtectionPolicy
+                        != DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY) {
+            return false;
         }
         Settings.Global.putInt(
                 mContentResolver, KEY_CONTENT_PROTECTION_PREFERENCE, isChecked ? 1 : -1);
@@ -117,11 +106,6 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        if (!manageDevicePolicyEnabled()) {
-            // Assign the value to mEnforcedAdmin since it's needed in isChecked()
-            mEnforcedAdmin = getEnforcedAdmin();
-            mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
-        }
         if (mSwitchBar != null
                 && mEnforcedAdmin != null
                 && mContentProtectionPolicy

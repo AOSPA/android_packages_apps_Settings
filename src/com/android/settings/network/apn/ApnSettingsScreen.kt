@@ -36,6 +36,10 @@ import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.utils.putSubId
 import com.android.settingslib.RestrictedPreference
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.KeyParametersSchema
+import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -48,12 +52,32 @@ import kotlinx.coroutines.flow.map
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ApnSettingsScreen.KEY, parameterized = true)
-open class ApnSettingsScreen(override val arguments: Bundle) :
+open class ApnSettingsScreen
+private constructor(
+    @Deprecated(
+        "This property will be removed once the catalyst framework stops passing the arguments as a bundle. Use the keyParameters instead."
+    )
+    final override val arguments: Bundle?,
+    final override val keyParameters: KeyParameters?,
+) :
     PreferenceScreenMixin,
     PreferenceRestrictionMixin,
     PreferenceAvailabilityProvider,
     PreferenceBinding {
-    private val subId = arguments.getSubId(ApnSettings.SUB_ID, INVALID_SUBSCRIPTION_ID)
+
+    private val subId: Int =
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            keyParameters!![ApnSettings.SUB_ID]?.toInt() ?: INVALID_SUBSCRIPTION_ID
+        } else {
+            arguments!!.getSubId(ApnSettings.SUB_ID, INVALID_SUBSCRIPTION_ID)
+        }
+
+    @Deprecated(
+        "This constructor will be removed once the catalyst framework stops passing the arguments as a bundle. Use the other constructor instead."
+    )
+    constructor(args: Bundle) : this(args, null)
+
+    constructor(keyParameters: KeyParameters) : this(null, keyParameters)
 
     override val key: String
         get() = KEY
@@ -91,7 +115,21 @@ open class ApnSettingsScreen(override val arguments: Bundle) :
     override fun createWidget(context: Context) = RestrictedPreference(context)
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        makeLaunchIntent(context, ApnSettingsActivity::class.java, arguments, metadata?.bindingKey)
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            makeLaunchIntent(
+                context,
+                ApnSettingsActivity::class.java,
+                keyParameters!!,
+                metadata?.bindingKey,
+            )
+        } else {
+            makeLaunchIntent(
+                context,
+                ApnSettingsActivity::class.java,
+                arguments!!,
+                metadata?.bindingKey,
+            )
+        }
 
     override fun isAvailable(context: Context): Boolean {
         val carrierConfig: PersistableBundle? =
@@ -109,9 +147,26 @@ open class ApnSettingsScreen(override val arguments: Bundle) :
         return !hideCarrierNetwork && isGsmApn
     }
 
-    companion object {
+    companion object : ParameterizedPreferenceScreenArgumentsFactory {
         const val KEY = "telephony_apn_key"
 
+        @JvmStatic
+        override val parametersSchema = KeyParametersSchema {
+            parameter(ApnSettings.SUB_ID, "The subscription ID")
+        }
+
+        @JvmStatic
+        override fun keyParameters(context: Context): Flow<KeyParameters> {
+            // TODO (b/457649430): when the catalyst framework stops passing the arguments as a
+            // bundle: replace the parameters(context) call to the actual implementation,
+            // or make this function the primary implementation and the legacy parameters() should
+            // call this one.
+            return parameters(context).map { bundle -> parametersSchema.prepare(bundle) }
+        }
+
+        @Deprecated(
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use keyParameters instead."
+        )
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> {
             fun Int.toArguments() = Bundle(1).also { it.putSubId(ApnSettings.SUB_ID, this) }

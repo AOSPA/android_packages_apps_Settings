@@ -18,6 +18,7 @@ package com.android.settings.safetycenter
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Intent
 import android.permission.flags.Flags
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
@@ -28,6 +29,7 @@ import android.safetycenter.SafetyCenterIssue
 import android.safetycenter.SafetyCenterManager
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.preference.Preference
+import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -41,10 +43,13 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.Settings
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_ACTION
 import com.android.settings.safetycenter.SafetyCenterTestUtils.USER_PERSONAL
+import com.android.settings.safetycenter.SafetyCenterTestUtils.USER_WORK_PROFILE
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createEntry
+import com.android.settings.safetycenter.SafetyCenterTestUtils.createFocusedIntent
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssue
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssueAction
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createScData
@@ -95,6 +100,24 @@ class SafetyCenterFragmentTest {
         scenario.close()
     }
 
+    private fun runTestWithIntent(
+        intent: Intent,
+        data: SafetyCenterData,
+        testBlock: (SafetyCenterFragment) -> Unit,
+    ) {
+        shadowSafetyCenterManager.setSafetyCenterData(data)
+        ActivityScenario.launch<Settings.SafetyCenterActivity>(intent).use { scenario ->
+            scenario.onActivity { activity ->
+                ShadowLooper.idleMainLooper()
+
+                val fragment = activity.supportFragmentManager.findFragmentById(R.id.main_content)
+                assertThat(fragment).isNotNull()
+                assertThat(fragment).isInstanceOf(SafetyCenterFragment::class.java)
+                testBlock(fragment as SafetyCenterFragment)
+            }
+        }
+    }
+
     private fun assertIconResource(preference: Preference?, expectedResId: Int) {
         assertThat(preference?.icon).isNotNull()
         val shadowDrawable: ShadowDrawable = Shadow.extract(preference?.icon)
@@ -103,6 +126,10 @@ class SafetyCenterFragmentTest {
 
     private fun expectedDefaultDeviceUnlockSummary(): String {
         return mApplication.getString(DEFAULT_DEVICE_UNLOCK_SUMMARY_RES)
+    }
+
+    private fun expectedDefaultNetworkSecuritySummary(): String {
+        return mApplication.getString(DEFAULT_NETWORK_SECURITY_SUMMARY_RES)
     }
 
     private fun expectedDefaultPrivacyControlsSummary(): String {
@@ -161,16 +188,59 @@ class SafetyCenterFragmentTest {
 
     @Test
     @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
-    fun deviceUnlockPref_withOkEntryAndNoIssues_usesDefaultSummaryAndInfoIcon() {
-        val entry =
+    fun deviceUnlockPref_withOkEntriesAndNoIssues_usesSourceListSummaryAndInfoIcon() {
+        val entry1 =
             createEntry(
-                id = "TestEntry",
-                title = "Entry with Severity Level OK",
+                id = "TestEntry1",
+                title = "Entry1",
                 sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
                 severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
             )
+        val entry2 =
+            createEntry(
+                id = "TestEntry2",
+                title = "Entry2",
+                sourceId = ANDROID_FACE_UNLOCK_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+            )
+        val entry3 =
+            createEntry(
+                id = "TestEntry3",
+                title = "Entry3",
+                sourceId = ANDROID_FACE_UNLOCK_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+                userHandle = USER_WORK_PROFILE,
+            )
 
-        runTest(createScData(entries = listOf(entry))) { fragment ->
+        runTest(createScData(entries = listOf(entry1, entry2, entry3))) { fragment ->
+            val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.summary.toString()).isEqualTo("Entry1, Entry2")
+            assertIconResource(preference, R.drawable.ic_safety_info)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun deviceUnlockPref_withOkWorkEntriesAndNoIssues_usesSourceListSummaryAndInfoIcon() {
+        val entry1 =
+            createEntry(
+                id = "TestEntry1",
+                title = "Entry1",
+                sourceId = ANDROID_FINGERPRINT_UNLOCK_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+                userHandle = USER_WORK_PROFILE,
+            )
+        val entry2 =
+            createEntry(
+                id = "TestEntry2",
+                title = "Entry2",
+                sourceId = ANDROID_FACE_UNLOCK_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+                userHandle = USER_WORK_PROFILE,
+            )
+
+        runTest(createScData(entries = listOf(entry1, entry2))) { fragment ->
             val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
             assertThat(preference?.isVisible).isTrue()
             assertThat(preference?.summary.toString())
@@ -249,11 +319,11 @@ class SafetyCenterFragmentTest {
 
     @Test
     @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
-    fun deviceUnlockPref_withUnspecifiedEntryAndNoIconType_usesDefaultSummaryAndEmptyIcon() {
+    fun deviceUnlockPref_withUnspecifiedEntryAndNoIconType_usesSourceListSummaryAndEmptyIcon() {
         val entry =
             createEntry(
                 id = "TestEntry",
-                title = "Entry with Severity Level Unspecified",
+                title = "Entry",
                 sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
                 severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNSPECIFIED,
                 iconType = SafetyCenterEntry.SEVERITY_UNSPECIFIED_ICON_TYPE_NO_ICON,
@@ -262,8 +332,7 @@ class SafetyCenterFragmentTest {
         runTest(createScData(entries = listOf(entry))) { fragment ->
             val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
             assertThat(preference?.isVisible).isTrue()
-            assertThat(preference?.summary.toString())
-                .isEqualTo(expectedDefaultDeviceUnlockSummary())
+            assertThat(preference?.summary.toString()).isEqualTo("Entry")
             assertIconResource(preference, R.drawable.ic_safety_empty)
         }
     }
@@ -285,7 +354,7 @@ class SafetyCenterFragmentTest {
             assertThat(preference?.isVisible).isTrue()
             assertThat(preference?.summary.toString())
                 .isEqualTo(mApplication.getString(R.string.safety_center_refresh_error))
-            assertThat(preference?.icon).isNull()
+            assertIconResource(preference, R.drawable.ic_safety_null_state)
         }
     }
 
@@ -613,6 +682,317 @@ class SafetyCenterFragmentTest {
         }
     }
 
+    @Test
+    fun focusedIssue_noActionIntent_noReordering() {
+        val issue1 =
+            createIssue(
+                id = "issue1",
+                title = "Issue 1",
+                sourceIds = setOf("any"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        val issue2 =
+            createIssue(
+                id = "issue2",
+                title = "Issue 2",
+                sourceIds = setOf("any"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION,
+            )
+        val intent = Intent("android.intent.action.MAIN")
+        intent.setClass(mApplication, Settings.SafetyCenterActivity::class.java)
+
+        runTestWithIntent(intent, createScData(activeIssues = listOf(issue1, issue2))) { fragment ->
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.visiblePreferencesWhenCollapsedCount).isEqualTo(1)
+            assertThat(bannerGroup?.getPreference(0)?.key).isEqualTo("active_${issue1.id}")
+            assertThat(bannerGroup?.getPreference(1)?.key).isEqualTo("active_${issue2.id}")
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue1.id}")?.isVisible)
+                .isTrue()
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue2.id}")?.isVisible)
+                .isFalse()
+        }
+    }
+
+    @Test
+    fun focusedIssue_missingExtras_noReordering() {
+        val issue1 =
+            createIssue(
+                id = "issue1",
+                title = "Issue 1",
+                sourceIds = setOf("any"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        val issue2 =
+            createIssue(
+                id = "issue2",
+                title = "Issue 2",
+                sourceIds = setOf("any"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION,
+            )
+        val intent =
+            Intent(Intent.ACTION_SAFETY_CENTER).apply {
+                putExtra(SafetyCenterManager.EXTRA_SAFETY_SOURCE_ID, "any")
+            }
+
+        runTestWithIntent(intent, createScData(activeIssues = listOf(issue1, issue2))) { fragment ->
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.visiblePreferencesWhenCollapsedCount).isEqualTo(1)
+            assertThat(bannerGroup?.getPreference(0)?.key).isEqualTo("active_${issue1.id}")
+            assertThat(bannerGroup?.getPreference(1)?.key).isEqualTo("active_${issue2.id}")
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue1.id}")?.isVisible)
+                .isTrue()
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue2.id}")?.isVisible)
+                .isFalse()
+        }
+    }
+
+    @Test
+    fun focusedIssue_issueNotFound_noReordering() {
+        val issue1 =
+            createIssue(
+                id = "issue1",
+                title = "Issue 1",
+                sourceIds = setOf("any"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        val issue2 =
+            createIssue(
+                id = "issue2",
+                title = "Issue 2",
+                sourceIds = setOf("any"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION,
+            )
+        val intent = createFocusedIntent(sourceIssueId = "nonExistentIssue", sourceId = "any")
+
+        runTestWithIntent(intent, createScData(activeIssues = listOf(issue1, issue2))) { fragment ->
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.visiblePreferencesWhenCollapsedCount).isEqualTo(1)
+            assertThat(bannerGroup?.getPreference(0)?.key).isEqualTo("active_${issue1.id}")
+            assertThat(bannerGroup?.getPreference(1)?.key).isEqualTo("active_${issue2.id}")
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue1.id}")?.isVisible)
+                .isTrue()
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue2.id}")?.isVisible)
+                .isFalse()
+        }
+    }
+
+    @Test
+    fun focusedIssue_existsAndIsHighestSeverity_isFirstAndOneVisible() {
+        val issue1 =
+            createIssue(
+                id = "focusedIssueId",
+                title = "Focused Issue",
+                safetySourceIssueId = "focusedSourceIssueId",
+                sourceIds = setOf("testSource"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        val issue2 =
+            createIssue(
+                id = "issue2",
+                title = "Other Issue",
+                sourceIds = setOf("any"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION,
+            )
+        val intent =
+            createFocusedIntent(sourceIssueId = "focusedSourceIssueId", sourceId = "testSource")
+
+        runTestWithIntent(intent, createScData(activeIssues = listOf(issue1, issue2))) { fragment ->
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.visiblePreferencesWhenCollapsedCount).isEqualTo(1)
+            assertThat(bannerGroup?.getPreference(0)?.key).isEqualTo("active_${issue1.id}")
+            assertThat(bannerGroup?.getPreference(1)?.key).isEqualTo("active_${issue2.id}")
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue1.id}")?.isVisible)
+                .isTrue()
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue2.id}")?.isVisible)
+                .isFalse()
+        }
+    }
+
+    @Test
+    fun focusedIssue_existsNotHighestSeverity_isSecondAndTwoVisible() {
+        val issue1 =
+            createIssue(
+                id = "issue1",
+                title = "Critical Issue",
+                sourceIds = setOf("any"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        val issue2 =
+            createIssue(
+                id = "focusedIssue",
+                title = "Focused Issue",
+                safetySourceIssueId = "focusedSourceIssueId",
+                sourceIds = setOf("testSource"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION,
+            )
+        val issue3 =
+            createIssue(
+                id = "issue3",
+                title = "OK Issue",
+                sourceIds = setOf("any"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK,
+            )
+        val intent =
+            createFocusedIntent(sourceIssueId = "focusedSourceIssueId", sourceId = "testSource")
+
+        runTestWithIntent(intent, createScData(activeIssues = listOf(issue1, issue2, issue3))) {
+            fragment ->
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.visiblePreferencesWhenCollapsedCount).isEqualTo(2)
+            assertThat(bannerGroup?.getPreference(0)?.key).isEqualTo("active_${issue1.id}")
+            assertThat(bannerGroup?.getPreference(1)?.key).isEqualTo("active_${issue2.id}")
+            assertThat(bannerGroup?.getPreference(2)?.key).isEqualTo("active_${issue3.id}")
+            // First two are visible when collapsed
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue1.id}")?.isVisible)
+                .isTrue()
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue2.id}")?.isVisible)
+                .isTrue()
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue3.id}")?.isVisible)
+                .isFalse()
+        }
+    }
+
+    @Test
+    fun focusedIssue_onlyIssue_isFirstAndOneVisible() {
+        val issue1 =
+            createIssue(
+                id = "focusedIssue",
+                title = "Focused Issue",
+                safetySourceIssueId = "focusedSourceIssueId",
+                sourceIds = setOf("testSource"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION,
+            )
+        val intent =
+            createFocusedIntent(sourceIssueId = "focusedSourceIssueId", sourceId = "testSource")
+
+        runTestWithIntent(intent, createScData(activeIssues = listOf(issue1))) { fragment ->
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.visiblePreferencesWhenCollapsedCount).isEqualTo(1)
+            assertThat(bannerGroup?.preferenceCount).isEqualTo(1)
+            assertThat(bannerGroup?.getPreference(0)?.key).isEqualTo("active_${issue1.id}")
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue1.id}")?.isVisible)
+                .isTrue()
+        }
+    }
+
+    @Test
+    fun focusedIssue_withSameHighestSeverity_reordersFocusedToFirst() {
+        val issue1 =
+            createIssue(
+                id = "issue1",
+                title = "Critical Issue 1",
+                safetySourceIssueId = "critical1",
+                sourceIds = setOf("sourceA"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        val issue2 =
+            createIssue(
+                id = "issue2",
+                title = "Critical Issue 2 (Focused)",
+                safetySourceIssueId = "critical2",
+                sourceIds = setOf("sourceB"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        val intent = createFocusedIntent(sourceIssueId = "critical2", sourceId = "sourceB")
+
+        runTestWithIntent(intent, createScData(activeIssues = listOf(issue1, issue2))) { fragment ->
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.visiblePreferencesWhenCollapsedCount).isEqualTo(1)
+            // issue2 should be moved to the top
+            assertThat(bannerGroup?.getPreference(0)?.key).isEqualTo("active_${issue2.id}")
+            assertThat(bannerGroup?.getPreference(1)?.key).isEqualTo("active_${issue1.id}")
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue2.id}")?.isVisible)
+                .isTrue()
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue1.id}")?.isVisible)
+                .isFalse()
+        }
+    }
+
+    @Test
+    fun focusedIssue_whenDiffersByUserHandle_focusesMatchingUser() {
+        val issueId = "sharedIssueId"
+        val sourceId = "sharedSourceId"
+        val issue1 =
+            createIssue(
+                id = "issuePersonal",
+                title = "Issue Personal",
+                safetySourceIssueId = issueId,
+                sourceIds = setOf(sourceId),
+                userHandle = USER_PERSONAL,
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        val issue2 =
+            createIssue(
+                id = "issueWork",
+                title = "Issue Work",
+                safetySourceIssueId = issueId,
+                sourceIds = setOf(sourceId),
+                userHandle = USER_WORK_PROFILE,
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        val intent =
+            createFocusedIntent(
+                sourceIssueId = issueId,
+                sourceId = sourceId,
+                userHandle = USER_WORK_PROFILE,
+            )
+
+        runTestWithIntent(intent, createScData(activeIssues = listOf(issue1, issue2))) { fragment ->
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.visiblePreferencesWhenCollapsedCount).isEqualTo(1)
+            // issue2 (Work) should be focused and on top
+            assertThat(bannerGroup?.getPreference(0)?.key).isEqualTo("active_${issue2.id}")
+            assertThat(bannerGroup?.getPreference(1)?.key).isEqualTo("active_${issue1.id}")
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue2.id}")?.isVisible)
+                .isTrue()
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue1.id}")?.isVisible)
+                .isFalse()
+        }
+    }
+
+    @Test
+    fun focusedIssue_whenDiffersBySourceId_focusesMatchingSourceId() {
+        val sourceIssueId = "sharedSourceIssueId"
+        val issue1 =
+            createIssue(
+                id = "issueSourceA",
+                title = "Issue Source A",
+                safetySourceIssueId = sourceIssueId,
+                sourceIds = setOf("sourceA"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        val issue2 =
+            createIssue(
+                id = "issueSourceB",
+                title = "Issue Source B",
+                safetySourceIssueId = sourceIssueId,
+                sourceIds = setOf("sourceB"),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        val intent = createFocusedIntent(sourceIssueId = sourceIssueId, sourceId = "sourceB")
+
+        runTestWithIntent(intent, createScData(activeIssues = listOf(issue1, issue2))) { fragment ->
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.visiblePreferencesWhenCollapsedCount).isEqualTo(1)
+            // issue2 (Source B) should be focused and on top
+            assertThat(bannerGroup?.getPreference(0)?.key).isEqualTo("active_${issue2.id}")
+            assertThat(bannerGroup?.getPreference(1)?.key).isEqualTo("active_${issue1.id}")
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue2.id}")?.isVisible)
+                .isTrue()
+            assertThat(bannerGroup?.findPreference<Preference>("active_${issue1.id}")?.isVisible)
+                .isFalse()
+        }
+    }
+
     // Tests for safety source directly displayed on the main page
 
     @Test
@@ -643,16 +1023,57 @@ class SafetyCenterFragmentTest {
         }
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun networkSecurityPref_withOkEntriesAndNoIssues_usesDefaultSummaryAndInfoIcon() {
+        val entry1 =
+            createEntry(
+                id = "TestEntry1",
+                title = "Entry1",
+                sourceId = ANDROID_NETWORK_SECURITY_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+            )
+        val entry2 =
+            createEntry(
+                id = "TestEntry2",
+                title = "Entry2",
+                sourceId = ANDROID_NETWORK_SECURITY_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+            )
+        val entry3 =
+            createEntry(
+                id = "TestEntry3",
+                title = "Entry3",
+                sourceId = ANDROID_NETWORK_SECURITY_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+                userHandle = USER_WORK_PROFILE,
+            )
+
+        runTest(createScData(entries = listOf(entry1, entry2, entry3))) { fragment ->
+            val preference = fragment.findPreference<Preference>(NETWORK_SECURITY_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.summary.toString())
+                .isEqualTo(expectedDefaultNetworkSecuritySummary())
+            assertIconResource(preference, R.drawable.ic_safety_info)
+        }
+    }
+
     companion object {
         private const val DEVICE_UNLOCK_KEY = "device_unlock_subpage"
+        private const val NETWORK_SECURITY_KEY = "cellular_network_security_subpage"
         private const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
         private const val ANDROID_LOCK_SCREEN_SOURCE_ID = "AndroidLockScreen"
+        private const val ANDROID_FACE_UNLOCK_SOURCE_ID = "AndroidFaceUnlock"
+        private const val ANDROID_FINGERPRINT_UNLOCK_SOURCE_ID = "AndroidFingerprintUnlock"
+        private const val ANDROID_NETWORK_SECURITY_SOURCE_ID = "AndroidCellularNetworkSecurity"
         private const val ANDROID_HEALTH_CONNECT_SOURCE_ID = "AndroidHealthConnect"
         private const val ANDROID_WORK_POLICY_INFO_SOURCE_ID = "AndroidWorkPolicyInfo"
         private const val ANDROID_A11Y_SOURCES_ID = "AndroidAccessibility"
         private const val SAFETY_ISSUES_BANNER_KEY = "issues_banner_group"
         private const val ANDROID_WORK_POLICY_INFO_PREFERENCE_KEY = "work_policy_info"
         private val DEFAULT_DEVICE_UNLOCK_SUMMARY_RES = R.string.safety_center_device_unlock_summary
+        private val DEFAULT_NETWORK_SECURITY_SUMMARY_RES =
+            R.string.safety_center_cellular_network_security_summary
         private val DEFAULT_PRIVACY_CONTROLS_SUMMARY_RES = R.string.privacy_sources_summary
     }
 }
