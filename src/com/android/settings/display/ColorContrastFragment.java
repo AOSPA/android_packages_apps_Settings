@@ -17,17 +17,66 @@
 package com.android.settings.display;
 
 import android.app.settings.SettingsEnums;
+import android.os.Bundle;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 /** Accessibility settings for color contrast. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ColorContrastFragment extends DashboardFragment {
 
     private static final String TAG = "ColorContrastFragment";
+    private static final String KEY_APP_BAR_COLLAPSED = "app_bar_collapsed";
+
+    private AppBarLayout mAppBarLayout;
+    private boolean mAppBarCollapsed;
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mAppBarLayout = getActivity().findViewById(R.id.app_bar);
+        if (savedInstanceState != null && savedInstanceState.getBoolean(KEY_APP_BAR_COLLAPSED)) {
+            if (mAppBarLayout != null) {
+                mAppBarLayout.setExpanded(false, /* animate= */ false);
+                mAppBarCollapsed = true;
+            }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAppBarLayout != null) {
+            mAppBarLayout.addOnOffsetChangedListener(this::onOffsetChanged);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mAppBarLayout != null) {
+            mAppBarLayout.removeOnOffsetChangedListener(this::onOffsetChanged);
+        }
+    }
+
+    private void onOffsetChanged(AppBarLayout appBar, int verticalOffset) {
+        mAppBarCollapsed = Math.abs(verticalOffset) >= appBar.getTotalScrollRange();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_APP_BAR_COLLAPSED, mAppBarCollapsed);
+    }
 
     @Override
     protected int getPreferenceScreenResId() {
