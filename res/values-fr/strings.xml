@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Fuseau horaire : <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> : à partir du <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Fuseau horaire : <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Aucune heure d\'été."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Heure d\'été"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Heure standard"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Sélectionner par zone géo."</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Sélectionner par décalage GMT"</string>
@@ -4601,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Autoriser cette appli à lire, modifier et supprimer tous les fichiers sur cet appareil ou sur n\'importe quel volume de stockage connecté. Si cette option est activée, l\'appli pourra accéder à des fichiers à votre insu."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Peut peut accéder à tous les fichiers"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatisation de l\'écran"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Autoriser cette appli à automatiser complètement d\'autres applis"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Cette appli pourra contrôler vos applis. Les applis contrôlées ne peuvent pas être utilisées pendant l\'automatisation de l\'écran, mais vous pouvez toujours l\'arrêter."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Toujours demander"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Toujours autorisée"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Ne pas autoriser"</string>
@@ -6026,7 +6028,7 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Valider les infos de récupération"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtres de magasin d\'applications"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtrer les applis en fonction de la classification d\'âge de leur contenu"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Chaque plate-forme de téléchargement d\'applis évalue le contenu différemment. La note d\'une appli peut varier selon les plates-formes de téléchargement d\'applis."</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Chaque magasin d\'applications évalue le contenu différemment. La note d\'une appli peut varier selon les magasins d\'applications."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtrer les applis par classification du contenu"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtres de contenu Web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtres de sites Web, bloquer les sites, filtres de navigateur, bloquer les sites au contenu explicite, filtrer les sites, bloquer les résultats de recherche, filtrer les résultats de recherche au contenu explicite, restrictions de contenu"</string>
