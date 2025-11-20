@@ -121,7 +121,7 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
                     R.string.doze_always_on_summary_without_wallpaper
                 }
             } else {
-                R.string.doze_always_on_summary
+                R.string.doze_always_on_summary_short
             }
         )
 
