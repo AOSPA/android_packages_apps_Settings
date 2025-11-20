@@ -18,6 +18,8 @@ package com.android.settings.notification.zen;
 
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
@@ -25,6 +27,8 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
@@ -105,6 +109,7 @@ public class ZenAccessSettings extends EmptyTextSettings implements
         final ArrayList<ApplicationInfo> apps = new ArrayList<>();
         final Set<String> requesting =
                 ZenAccessController.getPackagesRequestingNotificationPolicyAccess();
+        requesting.addAll(mNoMan.getEnabledZenPackages());
         if (!requesting.isEmpty()) {
             final List<ApplicationInfo> installed = mPkgMan.getInstalledApplications(0);
             if (installed != null) {
