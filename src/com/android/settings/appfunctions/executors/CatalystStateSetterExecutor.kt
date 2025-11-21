@@ -17,18 +17,27 @@
 package com.android.settings.appfunctions.executors
 
 import android.app.appsearch.GenericDocument
+import android.os.OutcomeReceiver
+import android.service.settings.preferences.SetValueRequest
+import android.service.settings.preferences.SetValueResult
+import android.service.settings.preferences.SettingsPreferenceValue
 import android.util.Log
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateSetterExecutorResult
 import com.android.settings.appfunctions.GenericDeviceStateItemSetterParams
+import com.android.settings.appfunctions.SettingsPreferenceServiceClientManager
 import com.google.android.appfunctions.schema.common.v1.devicestate.SetDeviceStateItemResponse
+import kotlin.coroutines.resume
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.asExecutor
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 
 /**
  * A [DeviceStateExecutor] that sets device state for Settings that are exposed using Catalyst
  * framework. Configured in [CatalystStateProviderConfig].
  */
 class CatalystStateSetterExecutor() : DeviceStateExecutor {
-
     /**
      * Asynchronously executes the device state set request.
      *
@@ -40,25 +49,22 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
     override suspend fun execute(
         appFunctionType: DeviceStateAppFunctionType,
         params: GenericDocument?,
-    ): DeviceStateSetterExecutorResult {
-        try {
-            if (params == null) {
-                throw IllegalArgumentException("Provided params are null.")
+    ): DeviceStateSetterExecutorResult =
+        withContext(Dispatchers.IO) {
+            try {
+                if (params == null) {
+                    throw IllegalArgumentException("Provided params are null.")
+                }
+                val result = executeSetDeviceStateRequest(appFunctionType, params)
+
+                DeviceStateSetterExecutorResult(result = result)
+            } catch (e: Exception) {
+                Log.e(TAG, "error executing $appFunctionType", e)
+                DeviceStateSetterExecutorResult(result = null)
             }
-            var result = executeSetDeviceStateRequest(appFunctionType, params)
-
-            // TODO: replace with actual result
-            var dummyResult =
-                SetDeviceStateItemResponse(isSuccessful = true, currentValue = "dummyValue")
-            return result?.let { DeviceStateSetterExecutorResult(result = it) }
-                ?: DeviceStateSetterExecutorResult(result = dummyResult)
-        } catch (e: Exception) {
-            Log.e(TAG, "error executing $appFunctionType", e)
-            return DeviceStateSetterExecutorResult(result = null)
         }
-    }
 
-    private fun executeSetDeviceStateRequest(
+    private suspend fun executeSetDeviceStateRequest(
         appFunctionType: DeviceStateAppFunctionType,
         params: GenericDocument,
     ): SetDeviceStateItemResponse? {
@@ -72,19 +78,103 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
                 adjustNumericDeviceStateByPercentage(parsedParams)
             else -> {
                 Log.i(TAG, "Unrecognised appFunctionType: $appFunctionType")
-                return null
+                null
             }
         }
     }
 
-    private fun setDeviceState(
+    private suspend fun setDeviceState(
         genericParams: GenericDeviceStateItemSetterParams
-    ): SetDeviceStateItemResponse? {
-        val params = genericParams.getSetDeviceStateItemParams()
-        // TODO: call into appropriate setter APIs
+    ): SetDeviceStateItemResponse {
+        val client = SettingsPreferenceServiceClientManager.client
+        if (client == null) {
+            Log.e(TAG, "SettingsPreferenceServiceClient is not available.")
+            return SetDeviceStateItemResponse(
+                isSuccessful = false,
+                currentValue = "",
+                failureReason = "Service client not available",
+            )
+        }
 
-        return null
+        val params = genericParams.getSetDeviceStateItemParams()
+        val settingsPreferenceValue =
+            toSettingsPreferenceValue(params.value)
+                ?: return SetDeviceStateItemResponse(
+                    isSuccessful = false,
+                    currentValue = "",
+                    failureReason = "Unsupported value type",
+                )
+
+        val fullKey = params.key
+        val keyParts = fullKey.split("/", limit = 2)
+        val screenKey = keyParts.getOrNull(0)
+        val key = keyParts.getOrElse(1) { fullKey }
+
+        if (screenKey == null) {
+            Log.e(TAG, "Unsupported key: ${params.key}")
+            return SetDeviceStateItemResponse(
+                isSuccessful = false,
+                currentValue = "",
+                failureReason = "Unsupported key value",
+            )
+        }
+        val request =
+            SetValueRequest.Builder(
+                    screenKey,
+                    key,
+                    settingsPreferenceValue, // mPreferenceValue
+                )
+                .build()
+
+        return suspendCancellableCoroutine { continuation ->
+            client.setPreferenceValue(
+                request,
+                Dispatchers.Default.asExecutor(),
+                object : OutcomeReceiver<SetValueResult, Exception> {
+                    override fun onResult(result: SetValueResult) {
+                        continuation.resume(
+                            SetDeviceStateItemResponse(
+                                isSuccessful = result.resultCode == SetValueResult.RESULT_OK,
+                                // TODO(b/461469319): Set the current value
+                                currentValue = "",
+                            )
+                        )
+                    }
+
+                    override fun onError(error: Exception) {
+                        Log.e(TAG, "Error setting preference value", error)
+                        continuation.resume(
+                            // TODO(461469319): set the failure reason and the current value
+                            SetDeviceStateItemResponse(
+                                isSuccessful = false,
+                                currentValue = "",
+                                failureReason = "Error: ${error.message}",
+                            )
+                        )
+                    }
+                },
+            )
+        }
     }
+
+    private fun toSettingsPreferenceValue(value: String): SettingsPreferenceValue? =
+        when {
+            value.equals("true", ignoreCase = true) || value.equals("false", ignoreCase = true) -> {
+
+                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_BOOLEAN)
+                    .setBooleanValue(value.toBoolean())
+                    .build()
+            }
+            value.toIntOrNull() != null -> {
+                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_INT)
+                    .setIntValue(value.toInt())
+                    .build()
+            }
+            else -> {
+                Log.e(TAG, "Unsupported value type: $value")
+                null
+            } // Unsupported type
+        }
 
     private fun offsetNumericDeviceStateByValue(
         genericParams: GenericDeviceStateItemSetterParams

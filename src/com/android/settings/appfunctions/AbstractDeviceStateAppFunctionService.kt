@@ -106,6 +106,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
 
     override fun onCreate() {
         super.onCreate()
+        SettingsPreferenceServiceClientManager.initialize(applicationContext)
         englishContext = createEnglishContext()
     }
 
