@@ -63,7 +63,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.utils.SubIdBundleUtils;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.metadata.KeyParameters;
+import com.android.settingslib.metadata.ValidatedKeyParameters;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.search.SearchIndexable;
@@ -584,7 +584,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     @Override
     @Nullable
-    public KeyParameters getPreferenceScreenBindingKeyParameters(@NonNull Context context) {
+    public ValidatedKeyParameters getPreferenceScreenBindingKeyParameters(
+            @NonNull Context context
+    ) {
         return MobileNetworkScreen.Companion.getParametersSchema().prepare(
             Map.of(
                 Settings.EXTRA_SUB_ID,

@@ -23,7 +23,7 @@ import com.android.settings.applications.AppListScreen
 import com.android.settings.applications.CatalystAppListFragment
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
 import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
-import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,7 +44,7 @@ abstract class SpecialAccessAppListScreen : AppListScreen() {
     abstract fun appDetailKeyParameters(
         context: Context,
         hierarchyType: Boolean,
-    ): Flow<KeyParameters>
+    ): Flow<ValidatedKeyParameters>
 
     override fun fragmentClass(): Class<out Fragment>? = CatalystAppListFragment::class.java
 

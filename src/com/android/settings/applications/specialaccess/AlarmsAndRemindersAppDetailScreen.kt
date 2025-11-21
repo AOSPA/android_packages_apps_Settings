@@ -36,10 +36,10 @@ import com.android.settings.flags.Flags
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.R
 import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
-import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.spaprivileged.model.app.userHandle
 
 /**
@@ -56,7 +56,10 @@ open class AlarmsAndRemindersAppDetailScreen : SpecialAccessAppDetailScreen {
     )
     constructor(context: Context, arguments: Bundle) : super(context, arguments)
 
-    constructor(context: Context, keyArguments: KeyParameters) : super(context, keyArguments)
+    constructor(
+        context: Context,
+        keyArguments: ValidatedKeyParameters,
+    ) : super(context, keyArguments)
 
     override val key
         get() = KEY
