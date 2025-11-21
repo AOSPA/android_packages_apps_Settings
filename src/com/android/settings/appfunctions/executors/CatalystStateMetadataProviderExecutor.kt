@@ -133,7 +133,7 @@ class CatalystStateMetadataProviderExecutor(
             deviceStateItemMetadataList.add(
                 DeviceStateItemMetadata(
                     // TODO: Expose parameterization
-                    key = metadataProto.key,
+                    key = "${screenMetaData.key}/${metadataProto.key}",
                     purpose = metadataProto.key,
                     name =
                         LocalizedString(
@@ -183,11 +183,11 @@ class CatalystStateMetadataProviderExecutor(
                 PreferenceValueDescriptorProto.TypeCase.LONG_TYPE -> "LONG"
                 PreferenceValueDescriptorProto.TypeCase.RANGE_VALUE -> {
                     val range = rangeValue
-                    val stepString = if (range.hasStep() && range.step != 0) ", step=${range.step}" else ""
+                    val stepString =
+                        if (range.hasStep() && range.step != 0) ", step=${range.step}" else ""
                     "INTEGER(min=${range.min}, max=${range.max}$stepString)"
                 }
                 else -> ""
             }
-
     }
 }
