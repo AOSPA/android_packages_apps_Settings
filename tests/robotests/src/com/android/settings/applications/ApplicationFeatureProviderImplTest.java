@@ -47,7 +47,6 @@ import android.telecom.TelecomManager;
 import com.android.settings.flags.Flags;
 import com.android.settings.testutils.ApplicationTestUtils;
 import com.android.settings.webview.WebViewUpdateServiceWrapper;
-import com.android.settingslib.testutils.shadow.ShadowDefaultDialerManager;
 import com.android.settingslib.testutils.shadow.ShadowSmsApplication;
 
 import org.junit.Before;
@@ -302,19 +301,20 @@ public final class ApplicationFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
+    @Config(shadows = {ShadowSmsApplication.class})
     public void getKeepEnabledPackages_shouldContainDefaultPhoneAndSmsAndLocationHistory() {
         final String testDialer = "com.android.test.defaultdialer";
         final String testSms = "com.android.test.defaultsms";
         final String testLocationHistory = "com.android.test.location.history";
 
         ShadowSmsApplication.setDefaultSmsApplication(new ComponentName(testSms, "receiver"));
-        ShadowDefaultDialerManager.setDefaultDialerApplication(testDialer);
+        when(mTelecomManager.getDefaultDialerPackage()).thenReturn(testDialer);
 
         // Spy the real context to mock LocationManager.
         Context spyContext = spy(RuntimeEnvironment.application);
         when(mLocationManager.getExtraLocationControllerPackage()).thenReturn(testLocationHistory);
         when(spyContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
+        when(spyContext.getSystemService(TelecomManager.class)).thenReturn(mTelecomManager);
 
         ReflectionHelpers.setField(mProvider, "mContext", spyContext);
 
@@ -326,7 +326,7 @@ public final class ApplicationFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
+    @Config(shadows = {ShadowSmsApplication.class})
     public void getKeepEnabledPackages_hasEuiccComponent_shouldContainEuiccPackage() {
         final String testDialer = "com.android.test.defaultdialer";
         final String testSms = "com.android.test.defaultsms";
@@ -334,7 +334,7 @@ public final class ApplicationFeatureProviderImplTest {
         final String testEuicc = "com.android.test.euicc";
 
         ShadowSmsApplication.setDefaultSmsApplication(new ComponentName(testSms, "receiver"));
-        ShadowDefaultDialerManager.setDefaultDialerApplication(testDialer);
+        when(mTelecomManager.getDefaultDialerPackage()).thenReturn(testDialer);
         final ComponentInfo componentInfo = new ComponentInfo();
         componentInfo.packageName = testEuicc;
 
@@ -346,6 +346,7 @@ public final class ApplicationFeatureProviderImplTest {
         Context spyContext = spy(RuntimeEnvironment.application);
         when(mLocationManager.getExtraLocationControllerPackage()).thenReturn(testLocationHistory);
         when(spyContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
+        when(spyContext.getSystemService(TelecomManager.class)).thenReturn(mTelecomManager);
 
         ReflectionHelpers.setField(mProvider, "mContext", spyContext);
 
@@ -355,19 +356,20 @@ public final class ApplicationFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
+    @Config(shadows = {ShadowSmsApplication.class})
     public void getKeepEnabledPackages_shouldContainSettingsIntelligence() {
         final String testDialer = "com.android.test.defaultdialer";
         final String testSms = "com.android.test.defaultsms";
         final String testLocationHistory = "com.android.test.location.history";
 
         ShadowSmsApplication.setDefaultSmsApplication(new ComponentName(testSms, "receiver"));
-        ShadowDefaultDialerManager.setDefaultDialerApplication(testDialer);
+        when(mTelecomManager.getDefaultDialerPackage()).thenReturn(testDialer);
 
         // Spy the real context to mock LocationManager.
         Context spyContext = spy(RuntimeEnvironment.application);
         when(mLocationManager.getExtraLocationControllerPackage()).thenReturn(testLocationHistory);
         when(spyContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
+        when(spyContext.getSystemService(TelecomManager.class)).thenReturn(mTelecomManager);
 
         ReflectionHelpers.setField(mProvider, "mContext", spyContext);
 
@@ -386,19 +388,20 @@ public final class ApplicationFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
+    @Config(shadows = {ShadowSmsApplication.class})
     public void getKeepEnabledPackages_shouldContainPackageInstaller() {
         final String testDialer = "com.android.test.defaultdialer";
         final String testSms = "com.android.test.defaultsms";
         final String testLocationHistory = "com.android.test.location.history";
 
         ShadowSmsApplication.setDefaultSmsApplication(new ComponentName(testSms, "receiver"));
-        ShadowDefaultDialerManager.setDefaultDialerApplication(testDialer);
+        when(mTelecomManager.getDefaultDialerPackage()).thenReturn(testDialer);
 
         // Spy the real context to mock LocationManager.
         Context spyContext = spy(RuntimeEnvironment.application);
         when(mLocationManager.getExtraLocationControllerPackage()).thenReturn(testLocationHistory);
         when(spyContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
+        when(spyContext.getSystemService(TelecomManager.class)).thenReturn(mTelecomManager);
 
         ReflectionHelpers.setField(mProvider, "mContext", spyContext);
 
@@ -419,7 +422,7 @@ public final class ApplicationFeatureProviderImplTest {
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_KEEP_SYSTEM_DIALER_ENABLED)
-    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
+    @Config(shadows = {ShadowSmsApplication.class})
     public void getKeepEnabledPackages_shouldContainSystemDialer() {
         final String testSystemDialer = "com.android.test.systemdialer";
 
@@ -432,7 +435,7 @@ public final class ApplicationFeatureProviderImplTest {
 
     @Test
     @RequiresFlagsDisabled(Flags.FLAG_KEEP_SYSTEM_DIALER_ENABLED)
-    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
+    @Config(shadows = {ShadowSmsApplication.class})
     public void getKeepEnabledPackages_shouldNotContainSystemDialerWhenFlagIsDisabled() {
         final String testSystemDialer = "com.android.test.systemdialer";
 
