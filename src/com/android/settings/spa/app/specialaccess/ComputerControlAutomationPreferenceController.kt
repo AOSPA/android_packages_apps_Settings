@@ -18,7 +18,6 @@ package com.android.settings.spa.app.specialaccess
 
 import android.content.Context
 import androidx.preference.Preference
-import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
@@ -47,9 +46,6 @@ class ComputerControlAutomationPreferenceController(context: Context, key: Strin
         }
     }
 
-    override fun displayPreference(screen: PreferenceScreen?) {
-        super.displayPreference(screen)
-        val preference = screen?.findPreference<Preference>(mPreferenceKey)
-        preference?.summary = mContext.getString(R.string.computer_control_automation_page_summary)
-    }
+    override fun getSummary() =
+        mContext.getString(R.string.computer_control_automation_page_summary)
 }
