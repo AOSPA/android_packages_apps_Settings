@@ -21,19 +21,27 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.os.UserManager;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.security.advancedprotection.AdvancedProtectionManager;
 
-import androidx.preference.Preference;
+import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.connectivity.Flags;
 import com.android.wifitrackerlib.WifiEntry;
@@ -56,7 +64,13 @@ public class WifiAutoConnectPreferenceController2Test {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
+    private static final int USER_ID_CURRENT = 1;
+    private static final int USER_ID_OTHER = 11;
+
     private WifiAutoConnectPreferenceController2 mController;
+
+    private Context mContext;
+
     @Mock
     private UserManager mUserManager;
     @Mock
@@ -65,19 +79,36 @@ public class WifiAutoConnectPreferenceController2Test {
     private WifiConfiguration mWifiConfiguration;
     @Mock
     private PreferenceScreen mScreen;
-    @Mock
-    private Preference mPreference;
 
-    private Context mContext;
+    @Mock
+    private SwitchPreferenceCompat mPreference;
+
+    @Mock
+    private AdvancedProtectionManager mAdvancedProtectionManager;
+    @Mock
+    private Fragment mFragment;
+    @Mock
+    private WifiAutoConnectPreferenceController2.PreferenceRefreshCallback mCallback;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
 
-        mController = new WifiAutoConnectPreferenceController2(mContext);
+        when(mContext.getUserId()).thenReturn(USER_ID_CURRENT);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mContext.getSystemService(AdvancedProtectionManager.class))
+                .thenReturn(mAdvancedProtectionManager);
+
+        WifiAutoConnectPreferenceController2 realController =
+                new WifiAutoConnectPreferenceController2(mContext);
+
+        mController = spy(realController);
+
         mController.setWifiEntry(mWifiEntry);
+        mController.setWifiConfig(mWifiConfiguration);
+        mController.setParentFragment(mFragment);
+        mController.setRefreshCallback(mCallback);
     }
 
     @Test
@@ -132,7 +163,8 @@ public class WifiAutoConnectPreferenceController2Test {
     public void displayPreference_NetworkOwned() {
         when(mUserManager.getUserCount()).thenReturn(3);
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mWifiConfiguration);
-        mWifiConfiguration.creatorUid = 1;
+        // The creator matches the current user
+        mWifiConfiguration.creatorUid = USER_ID_CURRENT;
 
         mController.updateState(mPreference);
 
@@ -144,7 +176,8 @@ public class WifiAutoConnectPreferenceController2Test {
     public void displayPreference_NetworkNotOwned() {
         when(mUserManager.getUserCount()).thenReturn(3);
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mWifiConfiguration);
-        mWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        // The creator is different from the current user
+        mWifiConfiguration.creatorUid = USER_ID_OTHER;
 
         mController.updateState(mPreference);
 
@@ -156,10 +189,59 @@ public class WifiAutoConnectPreferenceController2Test {
     public void displayPreference_NetworkNotOwned_SingleUser() {
         when(mUserManager.getUserCount()).thenReturn(1);
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mWifiConfiguration);
-        mWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        // The creator is different, but there is only 1 user on device
+        mWifiConfiguration.creatorUid = USER_ID_OTHER;
 
         mController.updateState(mPreference);
 
         verify(mPreference).setEnabled(true);
+    }
+
+    @Test
+    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN)
+    public void onPreferenceClick_aapmActiveInsecureNetwork_showsDialogAndDoesNotToggle() {
+        when(mAdvancedProtectionManager.isAdvancedProtectionEnabled()).thenReturn(true);
+        when(mWifiConfiguration.isAutoJoinInAdvancedProtectionModeEnabled()).thenReturn(false);
+        when(mWifiEntry.isAutoJoinEnabled()).thenReturn(false);
+
+        doReturn(new Intent("mock.action"))
+                .when(mController).getAapmSupportIntent();
+
+        boolean handled = mController.onPreferenceClick(mPreference);
+
+        assertThat(handled).isTrue();
+        verify(mFragment).startActivityForResult(any(Intent.class),
+                eq(WifiAutoConnectPreferenceController2.REQUEST_CODE_AUTOCONNECT_OVERRIDE));
+
+        verify(mWifiEntry, never()).setAutoJoinEnabled(true);
+    }
+
+    @Test
+    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN)
+    public void handleDialogResult_resultCanceled_remainsOff() {
+        mController.handleDialogResult(
+                WifiAutoConnectPreferenceController2.REQUEST_CODE_AUTOCONNECT_OVERRIDE,
+                Activity.RESULT_CANCELED);
+
+        verify(mWifiConfiguration, never()).setAutoJoinInAdvancedProtectionModeEnabled(true);
+        verify(mWifiEntry, never()).setAutoJoinEnabled(true);
+    }
+
+    @Test
+    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN)
+    public void handleDialogResult_resultOk_turnsOnAndSavesOverride() {
+        when(mAdvancedProtectionManager.isAdvancedProtectionEnabled()).thenReturn(true);
+        when(mWifiConfiguration.isAutoJoinInAdvancedProtectionModeEnabled()).thenReturn(false);
+        mController.updateState(mPreference);
+
+        mController.handleDialogResult(
+                WifiAutoConnectPreferenceController2.REQUEST_CODE_AUTOCONNECT_OVERRIDE,
+                Activity.RESULT_OK);
+
+        verify(mWifiConfiguration).setAutoJoinInAdvancedProtectionModeEnabled(true);
+
+        verify(mWifiEntry).setAutoJoinEnabled(true);
+
+        verify(mCallback).onPreferenceStateChange(mPreference);
     }
 }
