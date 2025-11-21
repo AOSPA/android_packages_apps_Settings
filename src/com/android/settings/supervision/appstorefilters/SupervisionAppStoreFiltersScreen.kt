@@ -28,9 +28,11 @@ import androidx.preference.PreferenceGroup
 import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.supervision.SupervisionLog.TAG
@@ -54,6 +56,12 @@ open class SupervisionAppStoreFiltersScreen :
 
     override val title: Int
         get() = R.string.supervision_app_store_filters_title
+
+    override val indexable: Boolean
+        get() = true
+
+    override val keywords: Int
+        get() = R.string.supervision_app_store_filters_keywords
 
     override val summary: Int
         get() = R.string.supervision_app_store_filters_summary
@@ -138,6 +146,9 @@ open class SupervisionAppStoreFiltersScreen :
             +UntitledPreferenceCategoryMetadata(SUPERVISION_APP_STORE_FILTERS_GROUP) order 0
             +SupervisionAppStoreFiltersFooterPreference() order 100
         }
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, SupervisionAppStoreFiltersActivity::class.java, metadata?.key)
 
     companion object {
         const val KEY = "supervision_app_store_filters"
