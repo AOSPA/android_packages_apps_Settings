@@ -36,6 +36,10 @@ open class AdaptiveConnectivityScreen : PreferenceScreenMixin {
     override val key
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.adaptive_connectivity_purpose
+
     override val title
         get() = R.string.adaptive_connectivity_title
 

@@ -49,6 +49,9 @@ open class SupervisionAppStoreFiltersScreen :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.supervision_app_store_filters_purpose
+
     override val title: Int
         get() = R.string.supervision_app_store_filters_title
 

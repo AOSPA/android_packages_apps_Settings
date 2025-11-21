@@ -38,6 +38,10 @@ open class AppDashboardScreen : PreferenceScreenMixin, PreferenceIconProvider {
     override val key
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.top_level_apps_purpose
+
     override val title
         get() = R.string.apps_dashboard_title
 

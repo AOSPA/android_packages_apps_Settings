@@ -92,6 +92,10 @@ open class TextReadingScreen : BaseTextReadingScreen() {
 
     override val key: String = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.text_reading_options_purpose
+
     override val indexable
         get() = true
 
@@ -118,6 +122,10 @@ open class TextReadingScreenOnAccessibility : BaseTextReadingScreen() {
 
     override val key: String = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.text_reading_options_in_a11y_purpose
+
     override val icon: Int
         get() = R.drawable.ic_adaptive_font_download
 
@@ -136,6 +144,10 @@ open class TextReadingScreenInSuw : BaseTextReadingScreen() {
         get() = R.string.menu_key_accessibility
 
     override val key: String = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.text_reading_options_in_suw_purpose
 
     override val icon: Int
         get() = R.drawable.ic_adaptive_font_download
@@ -158,6 +170,10 @@ open class TextReadingScreenInAnythingElse : BaseTextReadingScreen() {
         get() = EntryPoint.SUW_ANYTHING_ELSE
 
     override val key: String = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.text_reading_options_in_anything_else_purpose
 
     override val icon: Int
         get() = R.drawable.ic_font_download
@@ -182,6 +198,10 @@ open class TextReadingScreenFromNotification : BaseTextReadingScreen() {
         get() = EntryPoint.HIGH_CONTRAST_TEXT_NOTIFICATION
 
     override val key: String = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.text_reading_options_in_outline_text_notification_purpose
 
     companion object {
         const val KEY = "text_reading_options_in_outline_text_notification"

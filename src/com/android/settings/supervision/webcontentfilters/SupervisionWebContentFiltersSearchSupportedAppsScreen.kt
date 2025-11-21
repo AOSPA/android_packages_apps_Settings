@@ -41,6 +41,9 @@ open class SupervisionWebContentFiltersSearchSupportedAppsScreen :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.supervision_web_content_filters_search_supported_apps_purpose
+
     override val settingsKey: String
         get() = SEARCH_CONTENT_FILTERS_ENABLED
 

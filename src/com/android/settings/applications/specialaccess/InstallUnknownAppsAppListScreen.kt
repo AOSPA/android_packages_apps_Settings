@@ -34,6 +34,10 @@ open class InstallUnknownAppsAppListScreen : SpecialAccessAppListScreen() {
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.special_access_install_unknown_apps_app_list_purpose
+
     override val title: Int
         get() = com.android.settingslib.R.string.install_other_apps
 

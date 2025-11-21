@@ -80,6 +80,9 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.supervision_web_content_filters_purpose
+
     override val title: Int
         get() = R.string.supervision_web_content_filters_title
 
