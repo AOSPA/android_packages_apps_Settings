@@ -14,21 +14,32 @@
  * limitations under the License.
  */
 
-package com.android.settings.utils
+package com.android.settings.testutils.shadow
 
 import android.content.Context
-import com.android.settings.R
-import com.android.settings.flags.Flags
+import com.android.settings.utils.DesktopSettingsUtils
+import org.robolectric.annotation.Implementation
+import org.robolectric.annotation.Implements
+import org.robolectric.annotation.Resetter
 
-class DesktopSettingsUtils {
+@Implements(DesktopSettingsUtils.Companion::class)
+class ShadowDesktopSettingsUtils {
     companion object {
-        /**
-         * Returns true if the top-level device category should be shown.
-         */
+        private var sShouldShow: Boolean? = null
+
         @JvmStatic
-        fun shouldShowTopLevelDeviceCategory(context: Context): Boolean {
-            return Flags.showTopLevelDeviceCategory() &&
-                context.resources.getBoolean(R.bool.config_show_top_level_device_category)
+        fun setShouldShow(shouldShow: Boolean) {
+            sShouldShow = shouldShow
         }
+    }
+
+    @Implementation
+    fun shouldShowTopLevelDeviceCategory(context: Context): Boolean {
+        return sShouldShow ?: true
+    }
+
+    @Resetter
+    fun reset() {
+        sShouldShow = null
     }
 }
