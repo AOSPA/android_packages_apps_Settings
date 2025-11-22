@@ -44,6 +44,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.password.ChooseLockGeneric
+import com.android.settings.password.ChooseLockPassword
 import com.android.settings.supervision.ConfirmSupervisionCredentialsActivity.Companion.EXTRA_FORCE_CONFIRMATION
 import com.android.settings.testutils.MetricsRule
 import com.google.common.truth.Truth.assertThat
@@ -894,6 +895,38 @@ class SupervisionPinRecoveryActivityTest {
                     .action(activity, SettingsEnums.ACTION_SUPERVISION_PIN_RESET_SUCCEED, false)
                 assertEquals(testActivityResult, shadowActivity.resultCode)
                 assertThat(activity.isFinishing).isTrue()
+            }
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onVerification_recoveryAction_successfulResult_setsSupervisionResetExtra() {
+        mockSupervisionManager.stub {
+            on { getSupervisionRecoveryInfo() } doReturn EXPECTED_SUPERVISION_RECOVERY_INFO
+            on { isSupervisionEnabled } doReturn true
+        }
+
+        val intent =
+            Intent(context, SupervisionPinRecoveryActivity::class.java).apply {
+                action = SupervisionPinRecoveryActivity.ACTION_RECOVERY
+            }
+
+        ActivityScenario.launch<SupervisionPinRecoveryActivity>(intent).use { scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                val verificationIntent = shadowActivity.nextStartedActivity
+
+                shadowActivity.receiveResult(verificationIntent, Activity.RESULT_OK, null)
+                val setPinIntent = shadowActivity.nextStartedActivity
+
+                assertThat(
+                        setPinIntent.getBooleanExtra(
+                            ChooseLockPassword.EXTRA_KEY_FOR_SUPERVISION_RESET,
+                            false,
+                        )
+                    )
+                    .isTrue()
             }
         }
     }
