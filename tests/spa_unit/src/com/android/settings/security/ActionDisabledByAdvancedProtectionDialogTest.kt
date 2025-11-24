@@ -24,20 +24,14 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.Bundle
-import android.platform.test.annotations.RequiresFlagsEnabled
-import android.platform.test.flag.junit.CheckFlagsRule
-import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.security.Flags
-import android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN
 import android.security.advancedprotection.AdvancedProtectionManager
 import android.security.advancedprotection.AdvancedProtectionManager.FEATURE_ID_DISALLOW_CELLULAR_2G
 import android.security.advancedprotection.AdvancedProtectionManager.SUPPORT_DIALOG_TYPE_BLOCKED_INTERACTION
 import android.security.advancedprotection.AdvancedProtectionManager.SUPPORT_DIALOG_TYPE_DISABLED_SETTING
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.createEmptyComposeRule
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performScrollTo
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ActivityScenario.launch
 import androidx.test.core.app.ApplicationProvider
@@ -46,8 +40,7 @@ import com.android.settings.R
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
-import org.junit.Assume.assumeTrue
-import org.junit.Before
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -60,127 +53,83 @@ import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-@RequiresFlagsEnabled(Flags.FLAG_AAPM_API, FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN)
 @RunWith(AndroidJUnit4::class)
 class ActionDisabledByAdvancedProtectionDialogTest {
-    @get:Rule val composeTestRule = createEmptyComposeRule()
-
-    @get:Rule val checkFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
+    @get:Rule
+    val composeTestRule = createAndroidComposeRule<ActionDisabledByAdvancedProtectionDialog>()
 
     private val mockPackageManager = mock<PackageManager>()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 
-    private lateinit var wifiAutojoinIntent: Intent
-
-    @Before
-    fun setUp() {
-        val hasGmsFeature =
-            try {
-                // Check for a known GMS-dependent package
-                context.packageManager.getPackageInfo("com.google.android.gms", 0)
-                true
-            } catch (e: PackageManager.NameNotFoundException) {
-                false
-            }
-
-        if (!hasGmsFeature) {
-            // Skip the test gracefully if the dependency is missing
-            assumeTrue(
-                "Skipping test on AOSP build (GMS/Advanced Protection dependencies missing)",
-                false,
-            )
-        }
-
-        wifiAutojoinIntent =
-            AdvancedProtectionManager.createSupportIntent(
-                AdvancedProtectionManager.FEATURE_ID_DISALLOW_INSECURE_WIFI_AUTOJOIN,
-                SUPPORT_DIALOG_TYPE_DISABLED_SETTING,
-            )
-    }
-
     @Test
     fun blockedInteractionDialog_showsCorrectTitleAndMessage() {
-        val intent =
-            AdvancedProtectionManager.createSupportIntent(
-                FEATURE_ID_DISALLOW_CELLULAR_2G,
-                SUPPORT_DIALOG_TYPE_BLOCKED_INTERACTION,
-            )
+        val intent = AdvancedProtectionManager.createSupportIntent(
+            FEATURE_ID_DISALLOW_CELLULAR_2G,
+            SUPPORT_DIALOG_TYPE_BLOCKED_INTERACTION
+        )
 
         launchDialogActivity(intent) {
             composeTestRule
                 .onNodeWithText(context.getString(R.string.disabled_by_advanced_protection_title))
                 .assertIsDisplayed()
             composeTestRule
-                .onNodeWithText(
-                    context.getString(R.string.disabled_by_advanced_protection_action_message)
-                )
+                .onNodeWithText(context.getString(
+                    R.string.disabled_by_advanced_protection_action_message))
                 .assertIsDisplayed()
         }
     }
 
     @Test
     fun disabled2gSettingDialog_showsCorrectTitleAndMessage() {
-        val intent =
-            AdvancedProtectionManager.createSupportIntent(
-                FEATURE_ID_DISALLOW_CELLULAR_2G,
-                SUPPORT_DIALOG_TYPE_DISABLED_SETTING,
-            )
+        val intent = AdvancedProtectionManager.createSupportIntent(
+            FEATURE_ID_DISALLOW_CELLULAR_2G,
+            SUPPORT_DIALOG_TYPE_DISABLED_SETTING
+        )
 
         launchDialogActivity(intent) {
             composeTestRule
                 .onNodeWithText(context.getString(R.string.disabled_by_advanced_protection_title))
                 .assertIsDisplayed()
             composeTestRule
-                .onNodeWithText(
-                    context.getString(
-                        R.string.disabled_by_advanced_protection_setting_is_on_message
-                    )
-                )
+                .onNodeWithText(context.getString(
+                    R.string.disabled_by_advanced_protection_setting_is_on_message))
                 .assertIsDisplayed()
         }
     }
 
     @Test
     fun disabledMteSettingDialog_showsCorrectTitleAndMessage() {
-        val intent =
-            AdvancedProtectionManager.createSupportIntent(
-                AdvancedProtectionManager.FEATURE_ID_ENABLE_MTE,
-                SUPPORT_DIALOG_TYPE_DISABLED_SETTING,
-            )
+        val intent = AdvancedProtectionManager.createSupportIntent(
+            AdvancedProtectionManager.FEATURE_ID_ENABLE_MTE,
+            SUPPORT_DIALOG_TYPE_DISABLED_SETTING
+        )
 
         launchDialogActivity(intent) {
             composeTestRule
                 .onNodeWithText(context.getString(R.string.disabled_by_advanced_protection_title))
                 .assertIsDisplayed()
             composeTestRule
-                .onNodeWithText(
-                    context.getString(
-                        R.string.disabled_by_advanced_protection_setting_is_on_message
-                    )
-                )
+                .onNodeWithText(context.getString(
+                    R.string.disabled_by_advanced_protection_setting_is_on_message))
                 .assertIsDisplayed()
         }
     }
 
     @Test
     fun disabledInstallUnknownSourcesSettingDialog_showsCorrectTitleAndMessage() {
-        val intent =
-            AdvancedProtectionManager.createSupportIntent(
-                AdvancedProtectionManager.FEATURE_ID_DISALLOW_INSTALL_UNKNOWN_SOURCES,
-                SUPPORT_DIALOG_TYPE_DISABLED_SETTING,
-            )
+        val intent = AdvancedProtectionManager.createSupportIntent(
+            AdvancedProtectionManager.FEATURE_ID_DISALLOW_INSTALL_UNKNOWN_SOURCES,
+            SUPPORT_DIALOG_TYPE_DISABLED_SETTING
+        )
 
         launchDialogActivity(intent) {
             composeTestRule
                 .onNodeWithText(context.getString(R.string.disabled_by_advanced_protection_title))
                 .assertIsDisplayed()
             composeTestRule
-                .onNodeWithText(
-                    context.getString(
-                        R.string.disabled_by_advanced_protection_setting_is_off_message
-                    )
-                )
+                .onNodeWithText(context.getString(
+                    R.string.disabled_by_advanced_protection_setting_is_off_message))
                 .assertIsDisplayed()
         }
     }
@@ -215,10 +164,11 @@ class ActionDisabledByAdvancedProtectionDialogTest {
         launchDialogActivity(defaultIntent) { scenario ->
             scenario.onActivity { activity ->
                 val spyActivity = spyOnActivityHelpIntentUri(activity, helpIntentUri)
-                val resolveInfoToReturn =
-                    ResolveInfo().apply {
-                        activityInfo = ActivityInfo().apply { packageName = HELP_INTENT_PKG_NAME }
+                val resolveInfoToReturn = ResolveInfo().apply {
+                    activityInfo = ActivityInfo().apply {
+                        packageName = HELP_INTENT_PKG_NAME
                     }
+                }
                 mockResolveActivity(spyActivity, resolveInfoToReturn)
 
                 // 1. Check the button is returned.
@@ -226,9 +176,8 @@ class ActionDisabledByAdvancedProtectionDialogTest {
                 assertNotNull(button)
 
                 // 2. Check the button has correct text.
-                assertEquals(
-                    context.getString(R.string.disabled_by_advanced_protection_help_button_title),
-                    button!!.text,
+                assertEquals(context.getString(
+                    R.string.disabled_by_advanced_protection_help_button_title), button!!.text
                 )
 
                 // 3. Check the button's onClick launches the help activity and finishes the dialog.
@@ -239,157 +188,15 @@ class ActionDisabledByAdvancedProtectionDialogTest {
                 val launchedIntent = intentCaptor.value
                 assertEquals(HELP_INTENT_ACTION, launchedIntent.action)
                 assertEquals(HELP_INTENT_PKG_NAME, launchedIntent.`package`)
-            }
-        }
-    }
 
-    @Test
-    fun insecureWifiAutoJoinDialog_withLearnMoreHyperlink_showsCorrectStrings() {
-        launchDialogActivity(wifiAutojoinIntent) { scenario ->
-            scenario.onActivity { activity ->
-                val spyActivity = spyOnActivityHelpIntentUri(activity, helpIntentUri)
-
-                val resolveInfoToReturn =
-                    ResolveInfo().apply {
-                        activityInfo = ActivityInfo().apply { packageName = HELP_INTENT_PKG_NAME }
-                    }
-                mockResolveActivity(spyActivity, resolveInfoToReturn)
-            }
-
-            composeTestRule
-                .onNodeWithText(context.getString(R.string.wifi_autojoin_disabled_title))
-                .assertIsDisplayed()
-
-            composeTestRule
-                .onNodeWithText(
-                    context.getString(R.string.wifi_autojoin_disabled_body),
-                    substring = true,
-                )
-                .assertIsDisplayed()
-
-            composeTestRule
-                .onNodeWithText(context.getString(R.string.learn_more), substring = true)
-                .performScrollTo()
-                .assertIsDisplayed()
-
-            composeTestRule
-                .onNodeWithText(context.getString(R.string.wifi_autojoin_disabled_positive_button))
-                .assertIsDisplayed()
-
-            composeTestRule
-                .onNodeWithText(context.getString(R.string.wifi_autojoin_disabled_negative_button))
-                .assertIsDisplayed()
-        }
-    }
-
-    @Test
-    fun insecureWifiAutoJoinDialog_withoutLearnMoreHyperlink_showsCorrectStrings() {
-        launchDialogActivity(wifiAutojoinIntent) { scenario ->
-            scenario.onActivity { activity ->
-                spyOnActivityHelpIntentUri(activity, /* uriToReturn */ null)
-            }
-
-            composeTestRule
-                .onNodeWithText(context.getString(R.string.wifi_autojoin_disabled_title))
-                .assertIsDisplayed()
-            composeTestRule
-                .onNodeWithText(
-                    context.getString(R.string.wifi_autojoin_disabled_body),
-                    substring = true,
-                )
-                .assertIsDisplayed()
-            composeTestRule
-                .onNodeWithText(context.getString(R.string.wifi_autojoin_disabled_positive_button))
-                .assertIsDisplayed()
-            composeTestRule
-                .onNodeWithText(context.getString(R.string.wifi_autojoin_disabled_negative_button))
-                .assertIsDisplayed()
-
-            composeTestRule
-                .onNodeWithText(context.getString(R.string.learn_more))
-                .assertDoesNotExist()
-        }
-    }
-
-    @Test
-    fun insecureWifiAutoJoinDialog_clickTurnOnAnyway_returnsResultOk() {
-        val intent =
-            wifiAutojoinIntent.setComponent(
-                ComponentName(context, ActionDisabledByAdvancedProtectionDialog::class.java)
-            )
-        val scenario =
-            ActivityScenario.launchActivityForResult<ActionDisabledByAdvancedProtectionDialog>(
-                intent
-            )
-
-        composeTestRule
-            .onNodeWithText(context.getString(R.string.wifi_autojoin_disabled_negative_button))
-            .performClick()
-
-        val result = scenario.result
-        assertEquals(Activity.RESULT_OK, result.resultCode)
-
-        scenario.close()
-    }
-
-    @Test
-    fun insecureWifiAutoJoinDialog_clickBack_returnsResultCanceled() {
-        val intent =
-            wifiAutojoinIntent.setComponent(
-                ComponentName(context, ActionDisabledByAdvancedProtectionDialog::class.java)
-            )
-        val scenario =
-            ActivityScenario.launchActivityForResult<ActionDisabledByAdvancedProtectionDialog>(
-                intent
-            )
-
-        composeTestRule
-            .onNodeWithText(context.getString(R.string.wifi_autojoin_disabled_positive_button))
-            .performClick()
-
-        val result = scenario.result
-        assertEquals(Activity.RESULT_CANCELED, result.resultCode)
-
-        scenario.close()
-    }
-
-    @Test
-    fun insecureWifiAutoJoinDialog_clickLearnMoreHyperlink_launchesHelpIntent() {
-        launchDialogActivity(wifiAutojoinIntent) { scenario ->
-            scenario.onActivity { activity ->
-                val spyActivity = spy(activity)
-                val spyResources = spy(spyActivity.resources)
-                doReturn(spyResources).whenever(spyActivity).resources
-                doReturn(helpIntentUri).whenever(spyResources).getString(helpUriResourceId)
-
-                doReturn(mockPackageManager).whenever(spyActivity).packageManager
-                val resolveInfoToReturn =
-                    ResolveInfo().apply {
-                        activityInfo = ActivityInfo().apply { packageName = HELP_INTENT_PKG_NAME }
-                    }
-                doReturn(resolveInfoToReturn)
-                    .whenever(mockPackageManager)
-                    .resolveActivity(any(), anyInt())
-
-                val supportButton = spyActivity.getSupportButtonIfExists()
-                assertNotNull(supportButton)
-
-                val onClickAction = supportButton!!.onClick
-                onClickAction()
-
-                val intentCaptor = ArgumentCaptor.forClass(Intent::class.java)
-                verify(spyActivity).startActivity(intentCaptor.capture())
-                val launchedIntent = intentCaptor.value
-
-                assertEquals(HELP_INTENT_ACTION, launchedIntent.action)
-                assertEquals(HELP_INTENT_PKG_NAME, launchedIntent.`package`)
+                assertTrue(spyActivity.isFinishing)
             }
         }
     }
 
     private fun spyOnActivityHelpIntentUri(
         activity: ActionDisabledByAdvancedProtectionDialog,
-        uriToReturn: String?,
+        uriToReturn: String?
     ): ActionDisabledByAdvancedProtectionDialog {
         val spyActivity = spy(activity)
         val spyResources = spy(spyActivity.resources)
@@ -400,7 +207,7 @@ class ActionDisabledByAdvancedProtectionDialogTest {
 
     private fun mockResolveActivity(
         spyActivity: ActionDisabledByAdvancedProtectionDialog,
-        resolveInfoToReturn: ResolveInfo?,
+        resolveInfoToReturn: ResolveInfo?
     ) {
         doReturn(mockPackageManager).whenever(spyActivity).packageManager
         doReturn(resolveInfoToReturn).whenever(mockPackageManager).resolveActivity(any(), anyInt())
@@ -408,10 +215,13 @@ class ActionDisabledByAdvancedProtectionDialogTest {
 
     private fun launchDialogActivity(
         intent: Intent,
-        onScenario: (ActivityScenario<ActionDisabledByAdvancedProtectionDialog>) -> Unit,
+        onScenario: (ActivityScenario<ActionDisabledByAdvancedProtectionDialog>) -> Unit
     ) {
         intent.setComponent(
-            ComponentName(context, ActionDisabledByAdvancedProtectionDialog::class.java)
+            ComponentName(
+                context,
+                ActionDisabledByAdvancedProtectionDialog::class.java
+            )
         )
         launch<ActionDisabledByAdvancedProtectionDialog>(intent).use(onScenario)
     }
@@ -424,12 +234,10 @@ class ActionDisabledByAdvancedProtectionDialogTest {
     }
 
     private companion object {
-        val defaultIntent =
-            AdvancedProtectionManager.createSupportIntent(
-                FEATURE_ID_DISALLOW_CELLULAR_2G,
-                SUPPORT_DIALOG_TYPE_BLOCKED_INTERACTION,
-            )
-
+        val defaultIntent = AdvancedProtectionManager.createSupportIntent(
+            FEATURE_ID_DISALLOW_CELLULAR_2G,
+            SUPPORT_DIALOG_TYPE_BLOCKED_INTERACTION
+        )
         const val HELP_INTENT_PKG_NAME = "com.android.settings.tests.spa_unit"
         const val HELP_INTENT_ACTION = "$HELP_INTENT_PKG_NAME.HELP_ACTION"
         val helpIntent = Intent(HELP_INTENT_ACTION).setPackage(HELP_INTENT_PKG_NAME)
