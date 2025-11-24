@@ -1012,6 +1012,9 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Premikanje miške med zasloni"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Uporabi zunanji zaslon"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Ločljivost zaslona"</string>
+    <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"Ločljivost in hitrost osveževanja"</string>
+    <string name="external_display_refresh_rate_title" msgid="6326813722241312213">"Hitrost osveževanja"</string>
+    <string name="external_display_resolution_title" msgid="124681567143280861">"Ločljivost"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"Privzeto delovanje povezave"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Uporabi kot ločen zaslon"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Zrcaljenje vgrajenega zaslona"</string>
@@ -1411,6 +1414,8 @@
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Najvišja ločljivost"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Za najvišjo ločljivost se porablja več energije baterije. Ob spremembi ločljivosti se bodo morda nekatere aplikacije znova zagnale."</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> krat <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
+    <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
+    <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Herz"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Barve"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naravne"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Poudarjene"</string>
@@ -1545,7 +1550,8 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"Poveča porabo baterije"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Prikaz zaslonskega ozadja zaklenjenega zaslona, ko je zaslon izklopljen"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"Skrivanje zaslonskega ozadja zaklenjenega zaslona, ko je zaslon izklopljen"</string>
-    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"Stalno vklopljen zaslon prikazuje uro, datum in drugo, ko je zaslon izklopljen"</string>
+    <string name="doze_always_on_summary_long" msgid="7956866501728946221">"Prikazuje uro, datum in drugo, ko je zaslon izklopljen"</string>
+    <string name="doze_always_on_summary_short" msgid="3301903540897812365">"Prikaz ure, datuma in drugega"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Možnosti zaslonskega ozadja"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Prikaz zaslonskega ozadja zaklenjenega zaslona"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Zaslonsko ozadje zaklenjenega zaslona je vidno s stalno vklopljenim zaslonom"</string>
@@ -2206,6 +2212,8 @@
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"Hitrost"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Zmanjšanje"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Povečanje"</string>
+    <string name="mouse_keys_seek_bar_start_label" msgid="902491192774832751">"Počasneje"</string>
+    <string name="mouse_keys_seek_bar_end_label" msgid="3225448426565556589">"Hitreje"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Obratno pomikanje"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Uporabi primarne tipke"</string>
     <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"Upravljajte tipkovnico s črkami in številkami namesto številske tipkovnice."</string>
@@ -4599,14 +4607,17 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Tej aplikaciji dovolite, da bere, spreminja in briše vse datoteke v tej napravi ali drugih povezanih nosilcih za shranjevanje. Če daste to dovoljenje, bo aplikacija morda dostopala do datotek brez vaše vednosti."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Lahko dostopa do vseh datotek"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Avtomatizacija zaslona"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Vedno vprašaj"</string>
-    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Vedno dovoljeno"</string>
+    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Ne dovoli"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Celozaslonska obvestila"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Dovoli celozaslonska obvestila te aplikacije"</string>
@@ -4674,6 +4685,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Zaradi vaše varnosti dodatna zaščita zahteva, da ta nastavitev ostane izklopljena."</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Zaradi vaše varnosti dodatna zaščita preprečuje to dejanje"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Nastavitve"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Izklopi"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Vklopi"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Prikaz"</string>
@@ -6029,6 +6048,8 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Dodajanje podatkov za obnovitev"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Preverjanje podatkov za obnovitev"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtri trgovine z aplikacijami"</string>
+    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
+    <skip />
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtriranje aplikacij glede na starostno primernost njihove vsebine"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Vsaka trgovina vsebino ocenjuje drugače. Kategorija vsebine aplikacije se lahko razlikuje med trgovinami."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtriranje aplikacij po kategorijah vsebine"</string>
@@ -6122,20 +6143,12 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Povezljivost s sateliti"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Ostanite povezani, ko nimate povezave z mobilnim omrežjem ali omrežjem Wi-Fi"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Ciljna stran za satelitsko povezavo"</string>
-    <!-- no translation found for try_a_demo (5053671464025495505) -->
-    <skip />
-    <!-- no translation found for see_how_it_works (6358887025296144792) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
-    <skip />
-    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
-    <skip />
-    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
-    <skip />
-    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
-    <skip />
-    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
-    <skip />
+    <string name="try_a_demo" msgid="5053671464025495505">"Preizkusite predstavitev"</string>
+    <string name="see_how_it_works" msgid="6358887025296144792">"Prikaz delovanja"</string>
+    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"Ko mobilno omrežje in omrežje Wi-Fi nista na voljo, se telefon samodejno poveže s satelitom. Za najboljšo povezavo zagotovite neoviran pogled v nebo. Telefon se bo znova povezal z mobilnim omrežjem, ko bo to na voljo. Klicanje prek satelita ni na voljo. Klici v sili bodo morda kljub temu vzpostavljeni."</string>
+    <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"Za najboljšo povezavo zagotovite neoviran pogled v nebo. Telefon se bo znova povezal z mobilnim omrežjem, ko bo to na voljo. Klicanje prek satelita ni na voljo. Klici v sili bodo morda kljub temu vzpostavljeni."</string>
+    <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Več o povezljivosti s sateliti"</u></string>
+    <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Odpri predstavitev funkcije SOS prek satelita"</string>
+    <string name="satellite_apps_title" msgid="3693252720266491323">"Satelitske aplikacije"</string>
+    <string name="satellite_emergency_sos" msgid="5598135807261930736">"Klic v sili"</string>
 </resources>

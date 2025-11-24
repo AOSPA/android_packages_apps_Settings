@@ -1012,6 +1012,12 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"เลื่อนเมาส์ระหว่างจอแสดงผล"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"ใช้จอแสดงผลภายนอก"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ความละเอียดของจอแสดงผล"</string>
+    <!-- no translation found for external_display_resolution_refresh_rate_settings_title (4331709890849304277) -->
+    <skip />
+    <!-- no translation found for external_display_refresh_rate_title (6326813722241312213) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_title (124681567143280861) -->
+    <skip />
     <string name="external_display_connection_preference" msgid="3337612335495542718">"ลักษณะการทำงานของการเชื่อมต่อเริ่มต้น"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"ใช้เป็นจอแสดงผลแยกต่างหาก"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"มิเรอร์จอแสดงผลในตัว"</string>
@@ -1411,6 +1417,10 @@
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"ความละเอียดสูงสุด"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"ความละเอียดสูงสุดจะใช้แบตเตอรี่มากขึ้น การเปลี่ยนความละเอียดอาจทำให้บางแอปรีสตาร์ท"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> โดย <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
+    <!-- no translation found for screen_refresh_rate_displayed_text (8610804817257940684) -->
+    <skip />
+    <!-- no translation found for screen_refresh_rate_a11y (2423288931036941435) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"สี"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ธรรมชาติ"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"บูสต์"</string>
@@ -1545,7 +1555,10 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"การใช้งานแบตเตอรี่เพิ่มขึ้น"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"แสดงวอลเปเปอร์หน้าจอล็อกเมื่อหน้าจอปิดอยู่"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"ซ่อนวอลเปเปอร์หน้าจอล็อกเมื่อหน้าจอปิดอยู่"</string>
-    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"จอแสดงผลจะเปิดตลอดเวลาเพื่อแสดงเวลา วันที่ และอื่นๆ เมื่อหน้าจอปิดอยู่"</string>
+    <!-- no translation found for doze_always_on_summary_long (7956866501728946221) -->
+    <skip />
+    <!-- no translation found for doze_always_on_summary_short (3301903540897812365) -->
+    <skip />
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"ตัวเลือกวอลเปเปอร์"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"แสดงวอลเปเปอร์หน้าจอล็อก"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"วอลเปเปอร์หน้าจอล็อกจะแสดงเมื่อใช้จ⁠อแ⁠ส⁠ด⁠งผ⁠ลเ⁠ปิ⁠ดต⁠ล⁠อ⁠ดเ⁠ว⁠ล⁠า"</string>
@@ -2206,6 +2219,10 @@
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"ความเร็ว"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"ลด"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"เพิ่ม"</string>
+    <!-- no translation found for mouse_keys_seek_bar_start_label (902491192774832751) -->
+    <skip />
+    <!-- no translation found for mouse_keys_seek_bar_end_label (3225448426565556589) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"การเลื่อนย้อนกลับ"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"ใช้แป้นหลัก"</string>
     <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"ควบคุมแป้นพิมพ์ด้วยตัวอักษรและตัวเลขแทนการใช้ปุ่มกดตัวเลข"</string>
@@ -4599,14 +4616,17 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"อนุญาตให้แอปนี้อ่าน แก้ไข และลบไฟล์ทั้งหมดในอุปกรณ์นี้หรือวอลุ่มของพื้นที่เก็บข้อมูลใดๆ ที่เชื่อมต่อ หากได้รับอนุญาต ​แอปอาจเข้าถึงไฟล์ได้โดยที่คุณไม่ทราบอย่างชัดแจ้ง"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"เข้าถึงไฟล์ทั้งหมดได้"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"การทำงานอัตโนมัติของหน้าจอ"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"ถามทุกครั้ง"</string>
-    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"อนุญาตเสมอ"</string>
+    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"ไม่อนุญาต"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"การแจ้งเตือนแบบเต็มหน้าจอ"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"อนุญาตให้แอปนี้แสดงการแจ้งเตือนแบบเต็มหน้าจอ"</string>
@@ -4674,6 +4694,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"การปกป้องขั้นสูงกำหนดให้ปิดการตั้งค่านี้ไว้เพื่อความปลอดภัย"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"การปกป้องขั้นสูงป้องกันการดำเนินการนี้เพื่อความปลอดภัย"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"การตั้งค่า"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"ปิด"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"เปิด"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"แสดง"</string>
@@ -6027,6 +6055,8 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"เพิ่มข้อมูลการกู้คืน"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"ยืนยันข้อมูลการกู้คืน"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"ตัวกรอง App Store"</string>
+    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
+    <skip />
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"กรองแอปตามระดับความเหมาะสมของเนื้อหา"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Store แต่ละแห่งจัดประเภทเนื้อหาแตกต่างกัน การจัดประเภทของแอปจึงอาจแตกต่างกันไปในแต่ละ Store"</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"กรองแอปตามการจัดประเภทเนื้อหา"</string>
@@ -6050,8 +6080,8 @@
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"ลบ PIN ไม่ได้"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"เกิดข้อผิดพลาดขณะพยายามลบ PIN"</string>
     <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"ปิดการควบคุมสำหรับผู้ใช้รายนี้"</string>
-    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"ลบ PIN และปิดการควบคุมหรือไม่"</string>
-    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"ระบบจะลบ PIN การควบคุมโดยผู้ปกครองอย่างถาวร ระบบจะปิดการควบคุมที่คุณตั้งค่าไว้"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"ลบ PIN และปิดการควบคุมไหม"</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"ระบบจะลบ PIN การควบคุมโดยผู้ปกครอง ระบบจะปิดการควบคุมที่คุณตั้งค่าไว้"</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"ลบและปิด"</string>
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"ลบ PIN และปิดการควบคุม"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"ลบ"</string>
@@ -6120,20 +6150,12 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"การเชื่อมต่อผ่านดาวเทียม"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"เชื่อมต่ออยู่เสมอเมื่อไม่มีเครือข่ายมือถือหรือ Wi-Fi"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"หน้า Landing Page ของดาวเทียม"</string>
-    <!-- no translation found for try_a_demo (5053671464025495505) -->
-    <skip />
-    <!-- no translation found for see_how_it_works (6358887025296144792) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
-    <skip />
-    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
-    <skip />
-    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
-    <skip />
-    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
-    <skip />
-    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
-    <skip />
+    <string name="try_a_demo" msgid="5053671464025495505">"ลองใช้เดโม"</string>
+    <string name="see_how_it_works" msgid="6358887025296144792">"ดูวิธีการทำงาน"</string>
+    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"เมื่อไม่มีเครือข่ายมือถือหรือ Wi-Fi โทรศัพท์จะเชื่อมต่อกับดาวเทียมโดยอัตโนมัติ โปรดอยู่ในพื้นที่ที่มองเห็นท้องฟ้าได้อย่างชัดเจนเพื่อรับการเชื่อมต่อที่ดีที่สุด โดยโทรศัพท์จะเชื่อมต่อกับเครือข่ายมือถืออีกครั้งเมื่อมีให้ใช้งาน การโทรผ่านดาวเทียมไม่พร้อมใช้งาน การโทรฉุกเฉินอาจยังเชื่อมต่ออยู่"</string>
+    <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"โปรดอยู่ในพื้นที่ที่มองเห็นท้องฟ้าได้อย่างชัดเจนเพื่อรับการเชื่อมต่อที่ดีที่สุด โดยโทรศัพท์จะเชื่อมต่อกับเครือข่ายมือถืออีกครั้งเมื่อมีให้ใช้งาน การโทรผ่านดาวเทียมไม่พร้อมใช้งาน การโทรฉุกเฉินอาจยังเชื่อมต่ออยู่"</string>
+    <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"ข้อมูลเพิ่มเติมเกี่ยวกับการเชื่อมต่อผ่านดาวเทียม"</u></string>
+    <string name="forward_arrow_content_desc" msgid="5027233524587883868">"เปิดเดโมของ SOS ดาวเทียม"</string>
+    <string name="satellite_apps_title" msgid="3693252720266491323">"แอปที่ใช้เครือข่ายดาวเทียม"</string>
+    <string name="satellite_emergency_sos" msgid="5598135807261930736">"SOS ฉุกเฉิน"</string>
 </resources>
