@@ -54,6 +54,10 @@ open class DisplayOverOtherAppsAppDetailScreen : SpecialAccessAppDetailScreen {
     override val key
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description: Int
+    override val purpose
+        get() = R.string.special_access_draw_overlay_app_detail_purpose
+
     override val bindingKey
         get() = "$KEY-$packageName"
 

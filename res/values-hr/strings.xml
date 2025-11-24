@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Upotrebljava <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> počinje <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>"</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Upotrebljava <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nema ljetnog računanja vremena."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Ljetno računanje vremena"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standardno računanje vremena"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Odaberite po regiji"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Odabir u odnosu na GMT"</string>
@@ -4601,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Dopustite toj aplikaciji čitanje, izmjenu i brisanje svih datoteka na ovom uređaju ili drugim povezanim uređajima za pohranu. Ako date to dopuštenje, aplikacija može pristupati datotekama bez vašeg znanja."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Može pristupiti svim datotekama"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatizacija zaslona"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Dopusti ovoj aplikaciji da potpuno automatizira druge aplikacije"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Ova će aplikacija moći upravljati vašim aplikacijama. Aplikacije kojima se upravlja ne mogu se upotrebljavati dok je automatizacija zaslona u tijeku, ali je uvijek možete zaustaviti."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Pitaj svaki put"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Uvijek dopušteno"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Nemoj dopustiti"</string>
@@ -6027,10 +6029,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Potvrda podataka za oporavak"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtri trgovine aplikacija"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtrirajte aplikacije na temelju prikladnosti njihovog sadržaja za određeni uzrast"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Svaka trgovina ocjenjuje prikladnost sadržaja na drugačiji način. Ocjena prikladnosti sadržaja aplikacije može se razlikovati u različitim trgovinama."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtrirajte aplikacije prema ocjenama prikladnosti sadržaja"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtri web-sadržaja"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"filtri web-lokacija, blokiranje web-lokacija, filtri preglednika, blokiranje eksplicitnih web-lokacija, filtriranje web-lokacija, blokiranje rezultata pretraživanja, filtriranje eksplicitnih rezultata pretraživanja, ograničenja sadržaja"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Omogućite filtriranje eksplicitnog sadržaja u nekim aplikacijama i preglednicima na ovom telefonu. Eksplicitan sadržaj i dalje se može prikazivati u drugim aplikacijama, na drugim uređajima ili u drugim preglednicima."</string>
@@ -6121,4 +6121,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Satelitska povezivost"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Ostanite povezani kad nemate mobilnu ili Wi-Fi mrežu"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Odredišna stranica za satelit"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

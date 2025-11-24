@@ -33,6 +33,7 @@ import com.android.settings.R
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.accessibility.extensions.getFeatureName
+import com.android.settings.accessibility.extensions.toParameterString
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment
 import com.android.settings.accessibility.shortcuts.ui.EditShortcutsScreen.Companion.FEATURE_SHORTCUT_TITLE_MAP
 import com.android.settings.testutils.AccessibilityTestUtils
@@ -66,8 +67,20 @@ class EditShortcutsScreenTest : SettingsCatalystTestCase() {
             )
         }
 
+    // TODO(b/440383851): understand whether we should provide parameters to any caller and
+    // retrieve the shortcutTargets from keyParameters
+    private val keyParameters =
+        EditShortcutsScreen.parametersSchema.prepare(
+            EditShortcutsPreferenceFragment.ARG_KEY_SHORTCUT_TARGETS to
+                "[${COLOR_INVERSION_COMPONENT_NAME.flattenToString()}]"
+        )
+
     override val preferenceScreenCreator: EditShortcutsScreen by lazy {
-        EditShortcutsScreen(appContext, arguments)
+        if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters()) {
+            EditShortcutsScreen(keyParameters)
+        } else {
+            EditShortcutsScreen(arguments)
+        }
     }
 
     @After
@@ -168,12 +181,23 @@ class EditShortcutsScreenTest : SettingsCatalystTestCase() {
     }
 
     private fun createScreen(targets: Array<String>): EditShortcutsScreen {
-        return EditShortcutsScreen(
-            appContext,
-            Bundle().apply {
-                putStringArray(EditShortcutsPreferenceFragment.ARG_KEY_SHORTCUT_TARGETS, targets)
-            },
-        )
+        return if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters()) {
+            EditShortcutsScreen(
+                EditShortcutsScreen.parametersSchema.prepare(
+                    EditShortcutsPreferenceFragment.ARG_KEY_SHORTCUT_TARGETS to
+                        targets.toParameterString()
+                )
+            )
+        } else {
+            EditShortcutsScreen(
+                Bundle().apply {
+                    putStringArray(
+                        EditShortcutsPreferenceFragment.ARG_KEY_SHORTCUT_TARGETS,
+                        targets,
+                    )
+                }
+            )
+        }
     }
 
     private fun createA11yServiceInfo(): AccessibilityServiceInfo {

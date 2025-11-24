@@ -58,6 +58,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -1363,7 +1365,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         // If it's an unsaved secure WifiEntry, it will callback
         // ConnectCallback#onConnectResult with ConnectCallback#CONNECT_STATUS_FAILURE_NO_CONFIG
         WifiEntryConnectCallback callback =
-                new WifiEntryConnectCallback(wifiEntry, editIfNoConfig, fullScreenEdit);
+                new WifiEntryConnectCallback(wifiEntry, editIfNoConfig, fullScreenEdit, this);
 
         if (Flags.androidVWifiApi() && wifiEntry.getSecurityTypes()
                 .contains(WifiEntry.SECURITY_WEP)) {
@@ -1450,23 +1452,27 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         final WifiEntry mConnectWifiEntry;
         final boolean mEditIfNoConfig;
         final boolean mFullScreenEdit;
+        final MutableLiveData<Integer> mConnectStatus = new MutableLiveData<>();
 
         WifiEntryConnectCallback(WifiEntry connectWifiEntry, boolean editIfNoConfig,
-                boolean fullScreenEdit) {
+                boolean fullScreenEdit, LifecycleOwner lifecycleOwner) {
             mConnectWifiEntry = connectWifiEntry;
             mEditIfNoConfig = editIfNoConfig;
             mFullScreenEdit = fullScreenEdit;
+            mConnectStatus.observe(lifecycleOwner, this::handleConnectResult);
         }
 
         @Override
         public void onConnectResult(@ConnectStatus int status) {
-            if (isFinishingOrDestroyed()) {
-                return;
-            }
+            Log.i(TAG, "onConnectResult(), ConnectStatus:" + status);
+            mConnectStatus.postValue(status);
+        }
 
+        private void handleConnectResult(@ConnectStatus int status) {
             if (status == ConnectCallback.CONNECT_STATUS_SUCCESS) {
                 mClickedConnect = true;
             } else if (status == ConnectCallback.CONNECT_STATUS_FAILURE_NO_CONFIG) {
+                Log.w(TAG, "No config for Wi-Fi connect!");
                 if (mEditIfNoConfig) {
                     // Edit an unsaved secure Wi-Fi network.
                     if (mFullScreenEdit) {

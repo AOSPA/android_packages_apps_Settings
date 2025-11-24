@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> का इस्तेमाल करता है. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g>, <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> को शुरू होगा."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> का इस्तेमाल किया जाता है. डेलाइट सेविंग टाइम लागू नहीं है."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"डेलाइट सेविंग टाइम"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"मानक समय"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"क्षेत्र के हिसाब से चुनें"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"जीएमटी ऑफ़सेट के हिसाब से चुनें"</string>
@@ -2636,12 +2634,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"सभी ऐप्लिकेशन पर लागू की गई गहरे रंग वाली थीम"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"इससे ऐसे ज़्यादातर ऐप पर गहरे रंग वाली थीम अपने-आप लागू हो जाती है जिन पर यह थीम काम नहीं करती. इससे ऐप ऐक्सेस करना और उनका कॉन्टेंट पढ़ना आसान हो सकता है, लेकिन मुमकिन है कि कुछ ऐप का कॉन्टेंट सही से न दिखे."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"फ़ोर्स इनवर्ट, रंग बदलने की सुविधा, कंट्रास्ट"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"सभी ऐप्लिकेशन पर लागू की गई गहरे रंग वाली थीम"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"सभी ऐप्लिकेशन पर लागू की गई गहरे रंग वाली थीम की सेटिंग"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"सभी ऐप्लिकेशन पर लागू की गई गहरे रंग वाली थीम की सेटिंग खोलें"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ऐनिमेशन हटाएं"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"स्क्रीन पर ऐनिमेशन नहीं चलेंगे"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"टेक्स्ट कर्सर के ब्लिंक करने की सुविधा"</string>
@@ -4604,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"इस ऐप्लिकेशन को अनुमति दें कि इस डिवाइस और इससे जुड़े स्टोरेज में मौजूद सभी फ़ाइलों को पढ़ सके, उनमें बदलाव कर सके, और उन्हें मिटा सके. अनुमति दिए जाने पर, यह ऐप्लिकेशन आपको सूचना दिए बिना उन फ़ाइलों को ऐक्सेस कर सकता है."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"सभी फ़ाइलें ऐक्सेस कर सकते हैं"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"स्क्रीन ऑटोमेशन"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"अन्य ऐप्लिकेशन को पूरी तरह से ऑटोमेट करने के लिए इस ऐप्लिकेशन को अनुमति दें"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"यह ऐप्लिकेशन, आपके अन्य ऐप्लिकेशन को कंट्रोल कर सकेगा. स्क्रीन ऑटोमेशन के दौरान, कंट्रोल किए जा रहे ऐप्लिकेशन का इस्तेमाल नहीं किया जा सकता. हालांकि, इसे किसी भी समय रोका जा सकता है."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"हर बार पूछें"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"हमेशा इस्तेमाल करने की अनुमति है"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"अनुमति न दें"</string>
@@ -6029,10 +6028,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"पिन वापस पाने के लिए जोड़ी गई जानकारी की पुष्टि करें"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"ऐप स्टोर के फ़िल्टर"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"ऐप्लिकेशन को उनके कॉन्टेंट के मैच्योरिटी लेवल के हिसाब से फ़िल्टर करें"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"हर स्टोर, कॉन्टेंट को अलग-अलग तरीके से रेट करता है. किसी ऐप्लिकेशन की रेटिंग, सभी स्टोर पर अलग-अलग हो सकती है."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"कॉन्टेंट रेटिंग के हिसाब से ऐप्लिकेशन फ़िल्टर करें"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"वेब कॉन्टेंट के लिए फ़िल्टर"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"वेबसाइट फ़िल्टर, साइटें ब्लॉक करना, ब्राउज़र फ़िल्टर, अश्लील साइटें ब्लॉक करना, साइटें फ़िल्टर करना, खोज के नतीजे ब्लॉक करना, अश्लील कॉन्टेंट वाले खोज नतीजे फ़िल्टर करना, कॉन्टेंट से जुड़ी पाबंदियां"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"इस फ़ोन पर कुछ ऐप्लिकेशन और ब्राउज़र के लिए अश्लील कॉन्टेंट को फ़िल्टर करें. हालांकि, अन्य ऐप्लिकेशन, डिवाइसों या ब्राउज़र में अश्लील कॉन्टेंट फिर भी दिख सकता है."</string>
@@ -6123,4 +6120,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"सैटलाइट कनेक्टिविटी"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"मोबाइल या वाई-फ़ाई नेटवर्क न होने पर भी इंटरनेट से कनेक्ट रहें"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"सैटलाइट लैंडिंग पेज"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

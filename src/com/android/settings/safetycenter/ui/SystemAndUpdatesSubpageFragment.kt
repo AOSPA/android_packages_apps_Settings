@@ -16,14 +16,14 @@
 
 package com.android.settings.safetycenter.ui
 
+import android.annotation.SuppressLint
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import com.android.settings.R
+import com.android.settings.core.SubSettingLauncher
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
@@ -32,70 +32,90 @@ import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
 import com.android.settingslib.search.SearchIndexableRaw
-import com.android.settingslib.widget.IllustrationPreference
 
 /** Fragment for displaying System and Updates subpage within the Safety Center in Settings. */
+// Suppressing MissingPermission lint: The Settings app holds the MANAGE_SAFETY_CENTER permission,
+// which is required by the SafetyCenterManager APIs used by the ViewModel.
+@SuppressLint("MissingPermission")
 @SearchIndexable
 class SystemAndUpdatesSubpageFragment : DashboardFragment() {
 
-    private var safetyIssuesPreferenceController: SafetyIssuesPreferenceController? = null
     private val viewModel: LiveSafetyCenterViewModel by viewModels {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
     }
+    private var safetySourceIds: List<String> = emptyList()
 
     override fun getPreferenceScreenResId(): Int {
         return R.xml.safety_center_system_and_updates_subpage
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupIllustration()
-        setupSafetyIssuesPreferenceController(viewLifecycleOwner)
-        setupSafetySourcePreferenceControllers(viewLifecycleOwner)
-    }
+    override fun onCreate(icicle: Bundle?) {
+        super.onCreate(icicle)
 
-    override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> {
-        val controllers = mutableListOf<AbstractPreferenceController>()
-        safetyIssuesPreferenceController =
-            SafetyIssuesPreferenceController(context, SYSTEM_AND_UPDATES_ISSUES_KEY)
-        controllers.add(safetyIssuesPreferenceController!!)
-        return controllers
-    }
-
-    private fun setupIllustration() {
-        Log.d(TAG, "Setting Up the illustration")
-        val illustrationPreference: IllustrationPreference =
-            findPreference(SYSTEM_AND_UPDATES_ILLUSTRATION_KEY)!!
-        illustrationPreference.imageDrawable =
-            context?.getDrawable(R.drawable.safety_center_system_and_updates_subpage_illustration)
-    }
-
-    private fun setupSafetyIssuesPreferenceController(owner: LifecycleOwner) {
-        Log.d(TAG, "Setting Up the safety issues preference controller")
-        safetyIssuesPreferenceController?.apply {
-            setViewModelAndLifecycle(viewModel, owner)
-            this.fragmentManager = childFragmentManager
-            this.activityTaskId = requireActivity().taskId
-
-            val illustrationPreference: IllustrationPreference =
-                findPreference(SYSTEM_AND_UPDATES_ILLUSTRATION_KEY)!!
-            val safetySourceIds =
-                SafetyCenterSubpageRegistry.getAllSafetySourceIds(
-                    requireContext(),
-                    SafetyCenterSubpageRegistry.SYSTEM_AND_UPDATES_SUBPAGE_KEY,
-                )
-            setSubpageSafetySourcesAndIllustration(safetySourceIds, illustrationPreference)
+        val entries =
+            viewModel
+                .getCurrentSafetyCenterDataAsUiData()
+                .getDynamicEntriesForSources(safetySourceIds)
+        if (entries.isEmpty()) {
+            Log.d(TAG, "Redirecting from an empty subpage to Safety Center home")
+            SubSettingLauncher(requireContext())
+                .setDestination(SafetyCenterFragment::class.java.getName())
+                .setSourceMetricsCategory(METRICS_CATEGORY_UNKNOWN)
+                .launch()
         }
     }
 
-    private fun setupSafetySourcePreferenceControllers(owner: LifecycleOwner) {
-        Log.d(TAG, "Setting Up the safety source preference controllers")
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
         val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
         for (controller in allControllers) {
-            if (controller is SafetySourcePreferenceController) {
-                controller.setViewModelAndLifecycle(viewModel, owner)
-                controller.setActivityTaskId(requireActivity().taskId)
+            when (controller) {
+                is SafetyIssuesPreferenceController ->
+                    setupSafetyIssuesPreferenceController(controller)
+                is SafetySourcePreferenceController ->
+                    setupSafetySourcePreferenceController(controller)
             }
+        }
+    }
+
+    override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> =
+        listOf(SafetyIssuesPreferenceController(context, SYSTEM_AND_UPDATES_ISSUES_KEY))
+
+    private fun setupSafetyIssuesPreferenceController(
+        safetyIssuesPreferenceController: SafetyIssuesPreferenceController
+    ) {
+        Log.d(TAG, "Setting Up the safety issues preference controller")
+        safetySourceIds =
+            SafetyCenterSubpageRegistry.getAllSafetySourceIds(
+                requireContext(),
+                SafetyCenterSubpageRegistry.SYSTEM_AND_UPDATES_SUBPAGE_KEY,
+            )
+        safetyIssuesPreferenceController.apply {
+            viewModel = this@SystemAndUpdatesSubpageFragment.viewModel
+            fragmentManager = childFragmentManager
+            activityTaskId = requireActivity().taskId
+            isSubpage = true
+            relatedSafetySources = safetySourceIds
+            illustrationPreferenceKey =
+                SafetyCenterSubpageRegistry.getIllustrationPrefKey(
+                    SafetyCenterSubpageRegistry.SYSTEM_AND_UPDATES_SUBPAGE_KEY
+                )
+            illustrationResId =
+                SafetyCenterSubpageRegistry.getIllustrationResId(
+                    SafetyCenterSubpageRegistry.SYSTEM_AND_UPDATES_SUBPAGE_KEY
+                )
+        }
+    }
+
+    private fun setupSafetySourcePreferenceController(
+        safetySourcePreferenceController: SafetySourcePreferenceController
+    ) {
+        val preferenceKey = safetySourcePreferenceController.preferenceKey
+        Log.d(TAG, "Setting up the safety source preference controller for [$preferenceKey]")
+        safetySourcePreferenceController.apply {
+            viewModel = this@SystemAndUpdatesSubpageFragment.viewModel
+            activityTaskId = requireActivity().taskId
         }
     }
 
@@ -109,7 +129,6 @@ class SystemAndUpdatesSubpageFragment : DashboardFragment() {
 
     companion object {
         private const val TAG = "SystemUpdatesSubpage"
-        private const val SYSTEM_AND_UPDATES_ILLUSTRATION_KEY = "system_and_updates_illustration"
         private const val SYSTEM_AND_UPDATES_ISSUES_KEY = "system_and_updates_issues_banner_group"
 
         @JvmField

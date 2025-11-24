@@ -24,6 +24,7 @@ import static android.service.notification.ZenModeConfig.MANUAL_RULE_ID;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.safetycenter.SafetyCenterManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
@@ -60,6 +61,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.safetycenter.SafetyCenterUtils;
 import com.android.settings.safetycenter.ui.PrivacyControlsFragment;
+import com.android.settings.safetycenter.ui.SafetyCenterSubpageRegistry;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen;
 import com.android.settings.system.ResetDashboardFragment;
@@ -700,7 +702,23 @@ public class Settings extends SettingsActivity {
         @Override
         protected void onCreate(Bundle savedState) {
             super.onCreate(savedState);
+            handleIntent();
+        }
+
+        @Override
+        protected void onNewIntent(Intent intent) {
+            super.onNewIntent(intent);
+            setIntent(intent);
+            handleIntent();
+        }
+
+        private void handleIntent() {
+            if (getIntent() == null) {
+                return;
+            }
+
             handlePrivacyControlsRedirection();
+            handleSubpageRedirection();
         }
 
         private void handlePrivacyControlsRedirection() {
@@ -713,6 +731,32 @@ public class Settings extends SettingsActivity {
                         .launch();
             }
         }
+
+        private void handleSubpageRedirection() {
+            String intentAction = getIntent().getAction();
+            if (!Objects.equals(intentAction, Intent.ACTION_SAFETY_CENTER)) {
+                return;
+            }
+
+            String subpageId =
+                    getIntent().getStringExtra(SafetyCenterManager.EXTRA_SAFETY_SOURCES_GROUP_ID);
+            if (subpageId == null) {
+                return;
+            }
+
+            String fragmentClassName =
+                    SafetyCenterSubpageRegistry.INSTANCE.getSubpageFragmentClassNameFor(
+                            this, subpageId);
+            if (fragmentClassName == null) {
+                return;
+            }
+
+            Log.d(TAG, "Redirecting to a subpage based on EXTRA_SAFETY_SOURCES_GROUP_ID");
+            new SubSettingLauncher(this)
+                    .setDestination(fragmentClassName)
+                    .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                    .launch();
+        }
     }
 
     /** Activity for Network & Internet -> Airplane Mode. */
@@ -720,7 +764,9 @@ public class Settings extends SettingsActivity {
         public AirplaneModeSettingsActivity() {
             super(AirplaneModeSettingsScreen.KEY);
         }
+
         private static final String TAG = "AirplaneModeSettingsActivity";
+
         @Override
         protected void onCreate(Bundle savedState) {
             super.onCreate(savedState);

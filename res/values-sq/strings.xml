@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Përdor <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> fillon më <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Përdor: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nuk ka orë verore."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Ora verore"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Ora standarde"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Zgjidh sipas rajonit"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Zgjidh sipas kompensimit (GMT)"</string>
@@ -2636,12 +2634,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Tema e errët e zgjeruar"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Zbaton automatikisht temën e errët në shumë apl. ku nuk mbështetet. Kjo mund të përmirësojë qasshmërinë e lexueshmërinë, por mund të dëmtojë paraqitjen e disa apl."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"detyro anasjelljen, anasjellja e ngjyrës, kontrasti"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema e errët e zgjeruar"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Cilësimet e temës së errët të zgjeruar"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Hap cilësimet e temës së errët të zgjeruar"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Hiq animacionet"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Redukto lëvizjen në ekran"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Pulsimi i kursorit të tekstit"</string>
@@ -4604,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Lejo që ky aplikacion të lexojë, modifikojë dhe fshijë të gjithë skedarët në këtë pajisje ose në çdo volum hapësire ruajtjeje të lidhur. Nëse lejohet, aplikacioni mund të ketë qasje te skedarët pa dijeninë tënde të qartë."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Mund të ketë qasje te të gjithë skedarët"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatizimi i ekranit"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Lejo që ky aplikacion të automatizojë plotësisht aplikacionet e tjera"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Ky aplikacion do të mund të kontrollojë aplikacionet e tua. Aplikacionet që kontrollohen nuk mund të përdoren ndërkohë që automatizimi i ekranit është në vazhdim, por mund ta ndalosh gjithmonë."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Pyet çdo herë"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Lejohet gjithmonë"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Mos lejo"</string>
@@ -6029,10 +6028,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verifiko informacionet e rikuperimit"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtrat e dyqanit të aplikacioneve"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtro aplikacionet në bazë të nivelit të moshës së lejuar të përmbajtjeve të tyre"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Çdo dyqan i vlerëson ndryshe përmbajtjet. Vlerësimi i një aplikacioni mund të ndryshojë në dyqane të ndryshme."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtro aplikacionet sipas vlerësimeve të përmbajtjeve"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtrat e përmbajtjeve të uebit"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtrat e uebsajteve, blloko sajtet, filtrat e shfletuesit, blloko sajtet e papërshtatshme, filtro sajtet, blloko rezultatet e kërkimit, filtro rezultatet e papërshtatshme të kërkimit, kufizimet e përmbajtjes"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Ndihmo në filtrimin e përmbajtjeve të papërshtatshme në disa aplikacione dhe shfletues në këtë telefon. Përmbajtjet e papërshtatshme mund të shfaqen përsëri në aplikacione, pajisje ose shfletues të tjerë."</string>
@@ -6123,4 +6120,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Lidhja satelitore"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Qëndro i lidhur kur nuk ke një rrjet celular ose Wi-Fi"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Faqja e destinacionit e satelitit"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

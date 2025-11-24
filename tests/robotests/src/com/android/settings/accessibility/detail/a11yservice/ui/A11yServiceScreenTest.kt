@@ -32,6 +32,7 @@ import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment
+import com.android.settings.accessibility.extensions.putComponentName
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.testutils.AccessibilityTestUtils
 import com.android.settings.testutils.FakeFeatureFactory
@@ -59,18 +60,20 @@ class A11yServiceScreenTest : SettingsCatalystTestCase() {
 
     private val arguments =
         Bundle().apply {
-            if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
-                putString(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                    A11Y_SERVICE_COMPONENT.flattenToString(),
-                )
-            } else {
-                putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_SERVICE_COMPONENT)
-            }
+            putComponentName(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_SERVICE_COMPONENT)
         }
 
+    private val keyParameters =
+        A11yServiceScreen.parametersSchema.prepare(
+            AccessibilitySettings.EXTRA_COMPONENT_NAME to A11Y_SERVICE_COMPONENT.flattenToString()
+        )
+
     override val preferenceScreenCreator: A11yServiceScreen by lazy {
-        A11yServiceScreen(appContext, arguments)
+        if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters()) {
+            A11yServiceScreen(appContext, keyParameters)
+        } else {
+            A11yServiceScreen(appContext, arguments)
+        }
     }
     private val a11yManager: ShadowAccessibilityManager =
         Shadow.extract(appContext.getSystemService(AccessibilityManager::class.java))
@@ -150,7 +153,11 @@ class A11yServiceScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    fun parameters_hasTwoA11yServices_returnTwoItems() {
+    @DisableFlags(
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
+        com.android.settingslib.catalyst.flags.Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+    )
+    fun parameters_hasTwoA11yServices_returnTwoItems_bundleArguments() {
         AccessibilityRepositoryProvider.resetInstanceForTesting()
         runTest {
             val serviceInfo1 = createA11yServiceInfo(serviceComponent = A11Y_SERVICE_COMPONENT)
@@ -166,6 +173,33 @@ class A11yServiceScreenTest : SettingsCatalystTestCase() {
                         )
                         ?.flattenToString()
                 )
+            }
+            assertThat(collectedItems).hasSize(2)
+            assertThat(collectedItems)
+                .containsExactlyElementsIn(
+                    listOf(
+                        A11Y_SERVICE_COMPONENT.flattenToString(),
+                        A11Y_SERVICE_COMPONENT2.flattenToString(),
+                    )
+                )
+        }
+    }
+
+    @Test
+    @EnableFlags(
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
+        com.android.settingslib.catalyst.flags.Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+    )
+    fun parameters_hasTwoA11yServices_returnTwoItems() {
+        AccessibilityRepositoryProvider.resetInstanceForTesting()
+        runTest {
+            val serviceInfo1 = createA11yServiceInfo(serviceComponent = A11Y_SERVICE_COMPONENT)
+            val serviceInfo2 = createA11yServiceInfo(serviceComponent = A11Y_SERVICE_COMPONENT2)
+
+            a11yManager.setInstalledAccessibilityServiceList(listOf(serviceInfo1, serviceInfo2))
+            val collectedItems = mutableListOf<String?>()
+            A11yServiceScreen.keyParameters(appContext).collect {
+                collectedItems.add(it[AccessibilitySettings.EXTRA_COMPONENT_NAME])
             }
             assertThat(collectedItems).hasSize(2)
             assertThat(collectedItems)

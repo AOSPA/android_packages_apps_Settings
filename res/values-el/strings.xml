@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Χρησιμοποιεί <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> ξεκινά στις <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Χρησιμοποιεί τη ζώνη ώρας <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Δεν υπάρχει θερινή ώρα."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Θερινή ώρα"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Χειμερινή ώρα"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Επιλογή κατά περιοχή"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Επιλογή κατά μετατόπιση GMT"</string>
@@ -2636,12 +2634,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Αναπτυγμένο Σκούρο θέμα"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Εφαρμόζει αυτόματα το σκούρο θέμα στις περισσότερες εφαρμογές που δεν το υποστηρίζουν. Μπορεί να βελτιωθεί η προσβασιμότητα και η αναγνωσιμότητα, αλλά ορισμένες εφαρμογές ενδέχεται να εμφανίζονται λανθασμένα."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"αναγκαστική αντιστροφή, αντιστροφή χρωμάτων, αντίθεση"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Αναπτυγμένο Σκούρο θέμα"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Ρυθμίσεις Αναπτυγμένου Σκούρου θέματος"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Άνοιγμα ρυθμίσεων Αναπτυγμένου Σκούρου θέματος"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Κατάργηση κινούμενων εικόνων"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Περιορίστε την κίνηση στην οθόνη"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Αναβόσβημα δείκτη κειμένου"</string>
@@ -4604,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Να επιτρέπεται σε αυτή την εφαρμογή η ανάγνωση, η τροποποίηση και η διαγραφή όλων των αρχείων σε αυτή τη συσκευή και σε κάθε συνδεδεμένη μονάδα αποθήκευσης. Εάν εκχωρηθούν σχετικά δικαιώματα, η εφαρμογή μπορεί να έχει πρόσβαση σε αρχεία χωρίς να έχετε ενημερωθεί ρητά."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Με πρόσβαση σε όλα τα αρχεία"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Αυτοματισμός οθόνης"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Να επιτρέπεται σε αυτή την εφαρμογή να αυτοματοποιεί πλήρως άλλες εφαρμογές"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Αυτή η εφαρμογή θα μπορεί να ελέγχει τις εφαρμογές σας. Δεν θα μπορείτε να χρησιμοποιήσετε τις εφαρμογές που ελέγχονται όσο βρίσκεται σε εξέλιξη ο αυτοματισμός οθόνης, αλλά μπορείτε να τον διακόψετε ανά πάσα στιγμή."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Ερώτηση κάθε φορά"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Να επιτρέπεται πάντα"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Να μην επιτρέπεται"</string>
@@ -6029,10 +6028,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Επαλήθευση πληροφοριών ανάκτησης"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Φίλτρα App Store"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Φιλτράρισμα εφαρμογών με βάση το επίπεδο καταλληλότητας του περιεχομένου τους"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Κάθε κατάστημα αξιολογεί το περιεχόμενο διαφορετικά. Η αξιολόγηση μιας εφαρμογής μπορεί να διαφέρει μεταξύ των καταστημάτων."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Φιλτράρισμα εφαρμογών με βάση τις κατατάξεις περιεχομένου"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Φίλτρα περιεχομένου ιστού"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Φίλτρα ιστοτόπου, Αποκλεισμός ιστοτόπων, Φίλτρα προγράμματος περιήγησης, Αποκλεισμός ιστοτόπων με άσεμνο περιεχόμενο, Φιλτράρισμα ιστοτόπων, Αποκλεισμός αποτελεσμάτων αναζήτησης, Φιλτράρισμα αποτελεσμάτων αναζήτησης με άσεμνο περιεχόμενο, περιορισμοί περιεχομένου"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Συμβάλετε στο φιλτράρισμα άσεμνου περιεχομένου σε ορισμένες εφαρμογές και προγράμματα περιήγησης σε αυτό το τηλέφωνο. Το άσεμνο περιεχόμενο ενδέχεται να εξακολουθεί να εμφανίζεται σε άλλες εφαρμογές, συσκευές ή προγράμματα περιήγησης."</string>
@@ -6123,4 +6120,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Δορυφορική συνδεσιμότητα"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Παραμείνετε συνδεδεμένοι όταν δεν έχετε δίκτυο κινητής τηλεφωνίας ή Wi-Fi"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Σελίδα προορισμού δορυφορικής συνδεσιμότητας"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

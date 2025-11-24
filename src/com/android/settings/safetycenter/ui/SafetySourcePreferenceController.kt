@@ -42,22 +42,18 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
     BasePreferenceController(context, preferenceKey) {
 
     private var preference: SafetySourcePreference? = null
-    private var viewModel: LiveSafetyCenterViewModel? = null
-    private var activityTaskId: Int? = null
+    var viewModel: LiveSafetyCenterViewModel? = null
+    var activityTaskId: Int? = null
     private lateinit var safetySourceId: String
     private var profileType: SafetySourcePreference.Profile =
         SafetySourcePreference.Profile.PERSONAL
 
-    /**
-     * Sets the ViewModel instance for this controller and registers an observer to update the
-     * preference state when [SafetyCenterUiData] changes.
-     *
-     * @param viewModel The [LiveSafetyCenterViewModel] instance.
-     * @param owner The [LifecycleOwner] to scope the observation.
-     */
-    fun setViewModelAndLifecycle(viewModel: LiveSafetyCenterViewModel, owner: LifecycleOwner) {
-        this.viewModel = viewModel
-        viewModel.safetyCenterUiLiveData.observe(owner) { data ->
+    override fun onViewCreated(owner: LifecycleOwner) {
+        if (viewModel == null) {
+            Log.w(TAG, "[$preferenceKey] ViewModel not set, cannot observe LiveData")
+            return
+        }
+        viewModel!!.safetyCenterUiLiveData.observe(owner) { data ->
             if (data == null) {
                 Log.d(TAG, "[$preferenceKey] LiveData received null")
                 return@observe
@@ -65,15 +61,6 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
             Log.d(TAG, "[$preferenceKey] safetyCenterUiLiveData observer notified")
             preference?.let { updatePreferenceUi(it, data) }
         }
-    }
-
-    /**
-     * Sets the task ID of the hosting Activity.
-     *
-     * @param taskId The task ID of the hosting Activity.
-     */
-    fun setActivityTaskId(taskId: Int) {
-        this.activityTaskId = taskId
     }
 
     override fun getAvailabilityStatus(): Int {
@@ -86,7 +73,13 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
         preference?.let {
             safetySourceId = requireNotNull(it.safetySource)
             profileType = it.profile
-            it.isVisible = false
+            val model = viewModel
+            if (model != null) {
+                updatePreferenceUi(
+                    preference as SafetySourcePreference,
+                    model.getCurrentSafetyCenterDataAsUiData(),
+                )
+            }
         }
     }
 

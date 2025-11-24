@@ -35,14 +35,20 @@ import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferen
 import com.android.settings.accessibility.detail.a11yservice.data.UseServiceDataStore
 import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceFooterPreference.Companion.FOOTER_KEY
 import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceFooterPreference.Companion.HTML_FOOTER_KEY
+import com.android.settings.accessibility.extensions.getComponentName
 import com.android.settings.accessibility.extensions.getFeatureName
+import com.android.settings.accessibility.extensions.putComponentName
 import com.android.settings.accessibility.shared.ui.LaunchAppInfoPreference
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.RestrictedPreference
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.KeyParametersSchema
+import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -58,27 +64,38 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 @ProvidePreferenceScreen(A11yServiceScreen.KEY, parameterized = true)
-open class A11yServiceScreen(context: Context, override val arguments: Bundle) :
+open class A11yServiceScreen
+private constructor(
+    val context: Context,
+    @Deprecated(
+        "This property will be removed once the catalyst framework stops passing the arguments as a bundle. Use the keyParameters instead."
+    )
+    final override val arguments: Bundle?,
+    final override val keyParameters: KeyParameters?,
+) :
     PreferenceScreenMixin,
     PreferenceSummaryProvider,
     PreferenceTitleProvider,
     PreferenceBinding,
     PreferenceLifecycleProvider {
 
+    @Deprecated(
+        "This constructor will be removed once the catalyst framework stops passing the arguments as a bundle. Use the other constructor instead."
+    )
+    constructor(context: Context, args: Bundle) : this(context, args, null)
+
+    constructor(context: Context, keyParameters: KeyParameters) : this(context, null, keyParameters)
+
     private val featureComponentName: ComponentName by lazy {
-        if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
+        if (CatalystFlags.catalystUseKeyParameters()) {
             val componentNameString =
-                requireNotNull(arguments.getString(AccessibilitySettings.EXTRA_COMPONENT_NAME))
+                requireNotNull(keyParameters!![AccessibilitySettings.EXTRA_COMPONENT_NAME])
             requireNotNull(ComponentName.unflattenFromString(componentNameString))
         } else {
-            requireNotNull(
-                arguments.getParcelable(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                    ComponentName::class.java,
-                )
-            )
+            requireNotNull(arguments!!.getComponentName(AccessibilitySettings.EXTRA_COMPONENT_NAME))
         }
     }
 
@@ -96,6 +113,10 @@ open class A11yServiceScreen(context: Context, override val arguments: Bundle) :
 
     override val key: String
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.a11y_service_detail_screen_purpose
 
     override val highlightMenuKey: Int
         get() = R.string.menu_key_accessibility
@@ -201,14 +222,40 @@ open class A11yServiceScreen(context: Context, override val arguments: Bundle) :
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent {
         return Intent(Settings.ACTION_ACCESSIBILITY_DETAILS_SETTINGS).apply {
-            highlightPreference(arguments, metadata?.key)
             putExtra(Intent.EXTRA_COMPONENT_NAME, featureComponentName.flattenToString())
+
+            if (CatalystFlags.catalystUseKeyParameters()) {
+                highlightPreference(keyParameters!!, metadata?.bindingKey)
+            } else {
+                highlightPreference(arguments!!, metadata?.bindingKey)
+            }
         }
     }
 
-    companion object {
+    companion object : ParameterizedPreferenceScreenArgumentsFactory {
         const val KEY = "a11y_service_detail_screen"
 
+        @JvmStatic
+        override val parametersSchema = KeyParametersSchema {
+            parameter(
+                AccessibilitySettings.EXTRA_COMPONENT_NAME,
+                "The flattened string representation of the ComponentName of the AccessibilityService that implements an accessibility feature",
+                required = true,
+            )
+        }
+
+        @JvmStatic
+        override fun keyParameters(context: Context): Flow<KeyParameters> {
+            // TODO (b/457649430): when the catalyst framework stops passing the arguments as a
+            // bundle: replace the parameters(context) call to the actual implementation,
+            // or make this function the primary implementation and the legacy parameters() should
+            // call this one.
+            return parameters(context).map { bundle -> parametersSchema.prepare(bundle) }
+        }
+
+        @Deprecated(
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use keyParameters instead."
+        )
         @OptIn(ExperimentalCoroutinesApi::class)
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> {
@@ -220,17 +267,10 @@ open class A11yServiceScreen(context: Context, override val arguments: Bundle) :
                     .forEach { a11yServiceInfo ->
                         emit(
                             Bundle(1).apply {
-                                if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
-                                    putString(
-                                        AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                                        a11yServiceInfo.componentName.flattenToString(),
-                                    )
-                                } else {
-                                    putParcelable(
-                                        AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                                        a11yServiceInfo.componentName,
-                                    )
-                                }
+                                putComponentName(
+                                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
+                                    a11yServiceInfo.componentName,
+                                )
                             }
                         )
                     }

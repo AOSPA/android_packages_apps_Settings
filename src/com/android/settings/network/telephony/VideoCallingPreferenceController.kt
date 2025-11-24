@@ -67,11 +67,13 @@ constructor(
     }
 
     // Availability is controlled in onViewCreated() and VideoCallingSearchItem.
-    override fun getAvailabilityStatus() = if (isVisible) AVAILABLE else CONDITIONALLY_UNAVAILABLE
+    override fun getAvailabilityStatus() = AVAILABLE
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)
+        preference?.isVisible = isVisible
+        callingPreferenceCategoryController?.updateChildVisible(preferenceKey, isVisible)
         Log.d(
             TAG,
             "displayPreference: isVisible: $isVisible, videoCallEditable: $videoCallEditable",
@@ -114,7 +116,10 @@ constructor(
     override fun getSliceHighlightMenuRes() = NO_RES
 
     override fun setChecked(isChecked: Boolean): Boolean {
+        Log.d(TAG, "[$subId] To set VT status $isChecked")
+
         if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            Log.w(TAG, "[$subId] no subId")
             return false
         }
         val imsMmTelManager = ImsManager(mContext).getImsMmTelManager(subId)

@@ -23,10 +23,12 @@ import android.permission.flags.Flags
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import android.provider.Settings
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterEntry
 import android.safetycenter.SafetyCenterIssue
 import android.safetycenter.SafetyCenterManager
+import android.safetycenter.SafetyCenterStatus
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.preference.Preference
 import androidx.test.core.app.ActivityScenario
@@ -35,15 +37,20 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.action.ViewActions.swipeUp
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.isEnabled
+import androidx.test.espresso.matcher.ViewMatchers.isNotEnabled
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.Settings
+import com.android.settings.Settings.EXTRA_SHOW_FRAGMENT
+import com.android.settings.Settings.SafetyCenterActivity
+import com.android.settings.SubSettings
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_ACTION
 import com.android.settings.safetycenter.SafetyCenterTestUtils.USER_PERSONAL
@@ -53,10 +60,14 @@ import com.android.settings.safetycenter.SafetyCenterTestUtils.createFocusedInte
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssue
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssueAction
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createScData
+import com.android.settings.safetycenter.ui.PrivacyControlsFragment
 import com.android.settings.safetycenter.ui.SafetyCenterFragment
+import com.android.settings.safetycenter.ui.SafetyCenterSubpageRegistry
 import com.android.settingslib.safetycenter.SafetySourcePreference
 import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.BannerMessagePreferenceGroup
+import com.android.settingslib.widget.StatusBannerPreference
+import com.android.settingslib.widget.StatusBannerPreference.BannerStatus
 import com.android.settingslib.widget.preference.banner.R as BannerR
 import com.android.settingslib.widget.preference.button.R as ButtonR
 import com.android.settingslib.widget.preference.statusbanner.R as StatusBannerR
@@ -94,6 +105,9 @@ class SafetyCenterFragmentTest {
         val scenario =
             launchFragmentInContainer<SafetyCenterFragment>(themeResId = R.style.Theme_SubSettings)
         scenario.onFragment { fragment ->
+            // TODO: b/460466023 - remove when fixed (now it serves to initiate live data values)
+            shadowSafetyCenterManager.setSafetyCenterData(data)
+
             ShadowLooper.idleMainLooper()
             testBlock(fragment)
         }
@@ -106,7 +120,7 @@ class SafetyCenterFragmentTest {
         testBlock: (SafetyCenterFragment) -> Unit,
     ) {
         shadowSafetyCenterManager.setSafetyCenterData(data)
-        ActivityScenario.launch<Settings.SafetyCenterActivity>(intent).use { scenario ->
+        ActivityScenario.launch<SafetyCenterActivity>(intent).use { scenario ->
             scenario.onActivity { activity ->
                 ShadowLooper.idleMainLooper()
 
@@ -699,7 +713,7 @@ class SafetyCenterFragmentTest {
                 severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION,
             )
         val intent = Intent("android.intent.action.MAIN")
-        intent.setClass(mApplication, Settings.SafetyCenterActivity::class.java)
+        intent.setClass(mApplication, SafetyCenterActivity::class.java)
 
         runTestWithIntent(intent, createScData(activeIssues = listOf(issue1, issue2))) { fragment ->
             val bannerGroup =
@@ -1025,6 +1039,185 @@ class SafetyCenterFragmentTest {
 
     @Test
     @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun statusBanner_whenSeverityOk_showsOkStateAndRescanButton() {
+        val status =
+            SafetyCenterStatus.Builder("Title OK", "Summary OK")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK)
+                .build()
+
+        runTest(createScData(status = status)) { fragment ->
+            val preference = fragment.findPreference<StatusBannerPreference>(STATUS_BANNER_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.title.toString()).isEqualTo("Title OK")
+            assertThat(preference?.summary.toString()).isEqualTo("Summary OK")
+            assertThat(preference?.iconLevel).isEqualTo(BannerStatus.LOW)
+
+            onView(withText(R.string.safety_center_rescan_button)).check(matches(isDisplayed()))
+            onView(withText(R.string.safety_center_rescan_button)).check(matches(isEnabled()))
+        }
+    }
+
+    @Test
+    fun statusBanner_whenSeverityOkAndRefreshing_showsOkStateAndDisabledButton() {
+        val status =
+            SafetyCenterStatus.Builder("Title", "Summary Refreshing")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK)
+                .setRefreshStatus(SafetyCenterStatus.REFRESH_STATUS_FULL_RESCAN_IN_PROGRESS)
+                .build()
+
+        runTest(createScData(status = status)) { fragment ->
+            val preference = fragment.findPreference<StatusBannerPreference>(STATUS_BANNER_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.title.toString()).isEqualTo("Title")
+            assertThat(preference?.summary.toString()).isEqualTo("Summary Refreshing")
+            assertThat(preference?.iconLevel).isEqualTo(BannerStatus.LOW)
+
+            onView(withText(R.string.safety_center_rescan_button)).check(matches(isDisplayed()))
+            onView(withText(R.string.safety_center_rescan_button)).check(matches(isNotEnabled()))
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun statusBanner_whenSeverityUnknown_showsOkStateAndRescanButton() {
+        val status =
+            SafetyCenterStatus.Builder("Title OK", "Summary OK")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_UNKNOWN)
+                .build()
+
+        runTest(createScData(status = status)) { fragment ->
+            val preference = fragment.findPreference<StatusBannerPreference>(STATUS_BANNER_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.title.toString()).isEqualTo("Title OK")
+            assertThat(preference?.summary.toString()).isEqualTo("Summary OK")
+            assertThat(preference?.iconLevel).isEqualTo(BannerStatus.LOW)
+
+            onView(withText(R.string.safety_center_rescan_button)).check(matches(isDisplayed()))
+            onView(withText(R.string.safety_center_rescan_button)).check(matches(isEnabled()))
+        }
+    }
+
+    @Test
+    fun statusBanner_whenSeverityUnknownAndRefreshing_showsOkStateAndDisabledButton() {
+        val status =
+            SafetyCenterStatus.Builder("Title", "Summary Refreshing")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_UNKNOWN)
+                .setRefreshStatus(SafetyCenterStatus.REFRESH_STATUS_FULL_RESCAN_IN_PROGRESS)
+                .build()
+
+        runTest(createScData(status = status)) { fragment ->
+            val preference = fragment.findPreference<StatusBannerPreference>(STATUS_BANNER_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.title.toString()).isEqualTo("Title")
+            assertThat(preference?.summary.toString()).isEqualTo("Summary Refreshing")
+            assertThat(preference?.iconLevel).isEqualTo(BannerStatus.LOW)
+
+            onView(withText(R.string.safety_center_rescan_button)).check(matches(isDisplayed()))
+            onView(withText(R.string.safety_center_rescan_button)).check(matches(isNotEnabled()))
+        }
+    }
+
+    @Test
+    fun statusBanner_whenSeverityRecommendation_showsRecommendationStateAndNoButton() {
+        val status =
+            SafetyCenterStatus.Builder("Title Rec", "Summary Rec")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_RECOMMENDATION)
+                .build()
+
+        runTest(createScData(status = status)) { fragment ->
+            val preference = fragment.findPreference<StatusBannerPreference>(STATUS_BANNER_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.title.toString()).isEqualTo("Title Rec")
+            assertThat(preference?.summary.toString()).isEqualTo("Summary Rec")
+            assertThat(preference?.iconLevel).isEqualTo(BannerStatus.MEDIUM)
+
+            onView(withText(R.string.safety_center_rescan_button)).check(doesNotExist())
+        }
+    }
+
+    @Test
+    fun statusBanner_whenSeverityRecommendationAndRefreshing_showsRecommendationStateAndNoButton() {
+        val status =
+            SafetyCenterStatus.Builder("Title", "Summary Refreshing")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_RECOMMENDATION)
+                .setRefreshStatus(SafetyCenterStatus.REFRESH_STATUS_DATA_FETCH_IN_PROGRESS)
+                .build()
+
+        runTest(createScData(status = status)) { fragment ->
+            val preference = fragment.findPreference<StatusBannerPreference>(STATUS_BANNER_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.title.toString()).isEqualTo("Title")
+            assertThat(preference?.summary.toString()).isEqualTo("Summary Refreshing")
+            assertThat(preference?.iconLevel).isEqualTo(BannerStatus.MEDIUM)
+
+            onView(withText(R.string.safety_center_rescan_button)).check(doesNotExist())
+        }
+    }
+
+    @Test
+    fun statusBanner_whenSeverityCriticalWarning_showsCriticalStateAndNoButton() {
+        val status =
+            SafetyCenterStatus.Builder("Title Warn", "Summary Warn")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING)
+                .build()
+
+        runTest(createScData(status = status)) { fragment ->
+            val preference = fragment.findPreference<StatusBannerPreference>(STATUS_BANNER_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.title.toString()).isEqualTo("Title Warn")
+            assertThat(preference?.summary.toString()).isEqualTo("Summary Warn")
+            assertThat(preference?.iconLevel).isEqualTo(BannerStatus.HIGH)
+
+            onView(withText(R.string.safety_center_rescan_button)).check(doesNotExist())
+        }
+    }
+
+    @Test
+    fun statusBanner_whenSeverityCriticalWarningAndRefreshing_showsCriticalStateAndNoButton() {
+        val status =
+            SafetyCenterStatus.Builder("Title", "Summary Refreshing")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING)
+                .setRefreshStatus(SafetyCenterStatus.REFRESH_STATUS_FULL_RESCAN_IN_PROGRESS)
+                .build()
+
+        runTest(createScData(status = status)) { fragment ->
+            val preference = fragment.findPreference<StatusBannerPreference>(STATUS_BANNER_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.title.toString()).isEqualTo("Title")
+            assertThat(preference?.summary.toString()).isEqualTo("Summary Refreshing")
+            assertThat(preference?.iconLevel).isEqualTo(BannerStatus.HIGH)
+
+            onView(withText(R.string.safety_center_rescan_button)).check(doesNotExist())
+        }
+    }
+
+    @Test
+    fun statusBanner_clickRescanButton_disablesButton() {
+        val initialStatus =
+            SafetyCenterStatus.Builder("Title OK", "Summary OK")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK)
+                .build()
+
+        runTest(createScData(status = initialStatus)) { _ ->
+            onView(withText(R.string.safety_center_rescan_button)).perform(click())
+            ShadowLooper.idleMainLooper()
+
+            onView(withText(R.string.safety_center_rescan_button)).check(matches(isDisplayed()))
+            onView(withText(R.string.safety_center_rescan_button)).check(matches(isNotEnabled()))
+
+            val refreshingStatus =
+                SafetyCenterStatus.Builder("Title", "Summary Refreshing")
+                    .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK)
+                    .setRefreshStatus(SafetyCenterStatus.REFRESH_STATUS_FULL_RESCAN_IN_PROGRESS)
+                    .build()
+            shadowSafetyCenterManager.setSafetyCenterData(createScData(status = refreshingStatus))
+            ShadowLooper.idleMainLooper()
+
+            onView(withText(R.string.safety_center_rescan_button)).check(matches(isDisplayed()))
+            onView(withText(R.string.safety_center_rescan_button)).check(matches(isNotEnabled()))
+        }
+    }
+
     fun networkSecurityPref_withOkEntriesAndNoIssues_usesDefaultSummaryAndInfoIcon() {
         val entry1 =
             createEntry(
@@ -1058,9 +1251,69 @@ class SafetyCenterFragmentTest {
         }
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun launchWithSafetyCenterAction_withGroupId_startsSubSettingsWithFragment() {
+        shadowSafetyCenterManager.setSafetyCenterData(EMPTY_SC_DATA)
+        val testGroupId =
+            mApplication.getString(R.string.config_safety_center_lock_screen_subpage_id)
+        val startIntent =
+            Intent(Intent.ACTION_SAFETY_CENTER).apply {
+                putExtra(SafetyCenterManager.EXTRA_SAFETY_SOURCES_GROUP_ID, testGroupId)
+                setClass(
+                    ApplicationProvider.getApplicationContext(),
+                    SafetyCenterActivity::class.java,
+                )
+            }
+
+        ActivityScenario.launch<SafetyCenterActivity>(startIntent).use { scenario ->
+            scenario.onActivity { activity ->
+                val nextIntent = shadowOf(activity).nextStartedActivity
+
+                assertThat(nextIntent).isNotNull()
+                assertThat(nextIntent.component?.className).isEqualTo(SubSettings::class.java.name)
+                val extras = nextIntent.extras
+                assertThat(extras).isNotNull()
+                val expectedFragmentClass =
+                    SafetyCenterSubpageRegistry.getSubpageFragmentClassNameFor(
+                        activity,
+                        testGroupId,
+                    )
+                assertThat(extras?.getString(EXTRA_SHOW_FRAGMENT)).isEqualTo(expectedFragmentClass)
+            }
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun launchWithPrivacyControlsAction_startsSubSettingsWithFragment() {
+        shadowSafetyCenterManager.setSafetyCenterData(EMPTY_SC_DATA)
+        val startIntent =
+            Intent(Settings.ACTION_PRIVACY_CONTROLS).apply {
+                setClass(
+                    ApplicationProvider.getApplicationContext(),
+                    SafetyCenterActivity::class.java,
+                )
+            }
+
+        ActivityScenario.launch<SafetyCenterActivity>(startIntent).use { scenario ->
+            scenario.onActivity { activity ->
+                val nextIntent = shadowOf(activity).nextStartedActivity
+
+                assertThat(nextIntent).isNotNull()
+                assertThat(nextIntent.component?.className).isEqualTo(SubSettings::class.java.name)
+                val extras = nextIntent.extras
+                assertThat(extras).isNotNull()
+                assertThat(extras?.getString(EXTRA_SHOW_FRAGMENT))
+                    .isEqualTo(PrivacyControlsFragment::class.qualifiedName)
+            }
+        }
+    }
+
     companion object {
         private const val DEVICE_UNLOCK_KEY = "device_unlock_subpage"
         private const val NETWORK_SECURITY_KEY = "cellular_network_security_subpage"
+        private const val STATUS_BANNER_KEY = "safety_center_status_banner"
         private const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
         private const val ANDROID_LOCK_SCREEN_SOURCE_ID = "AndroidLockScreen"
         private const val ANDROID_FACE_UNLOCK_SOURCE_ID = "AndroidFaceUnlock"

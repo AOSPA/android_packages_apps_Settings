@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Usa <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> empieza el <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Utiliza <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. No hay horario de verano."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Horario de verano"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Hora estándar"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Seleccionar por región"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Seleccionar por compensación de GMT"</string>
@@ -364,7 +362,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"Ubicación"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usar ubicación"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Desactivada"</string>
-    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activada / # app tiene acceso a la ubicación}other{Activada / # apps tienen acceso a la ubicación}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activada / # aplicación tiene acceso a la ubicación}other{Activada / # aplicaciones tienen acceso a la ubicación}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Cargando…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Las apps que tengan permiso para detectar dispositivos cercanos podrán determinar la posición relativa de los dispositivos conectados."</string>
     <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Las apps y los servicios no pueden acceder a la ubicación. Aun así, la ubicación de tu dispositivo puede enviarse a los servicios de emergencias si te pones en contacto con un número de emergencia."</string>
@@ -380,7 +378,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Estado de seguridad"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Bloqueo de pantalla, Encontrar mi dispositivo, seguridad de aplicaciones"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Seguridad y privacidad"</string>
-    <string name="safety_center_summary" msgid="3554867379951053869">"Seguridad de apps, bloqueo del dispositivo, permisos"</string>
+    <string name="safety_center_summary" msgid="3554867379951053869">"Seguridad de aplicaciones, bloqueo del dispositivo, permisos"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Cara añadida"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Hay que configurarlo"</string>
     <string name="security_settings_face_preference_summary_none_new" msgid="1963253146734002815">"Añadir cara"</string>
@@ -1847,7 +1845,7 @@
     <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Ubicación del espacio privado"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Permisos de ubicación de aplicaciones"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"La ubicación está desactivada"</string>
-    <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# de {total} apps tiene acceso a la ubicación}other{# de {total} apps tienen acceso a la ubicación}}"</string>
+    <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# de {total} aplicaciones tiene acceso a la ubicación}other{# de {total} aplicaciones tiene acceso a la ubicación}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Accesos recientes"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Ver todo"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Ver detalles"</string>
@@ -2636,12 +2634,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Tema oscuro ampliado"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Aplica automáticamente el tema oscuro a muchas aplicaciones que no lo usan. Esto mejora la accesibilidad y la legibilidad, pero puede hacer que algunas aplicaciones no se vean bien."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"forzar inversión, inversión de colores, contraste"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema oscuro ampliado"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Ajustes del tema oscuro ampliado"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Abrir ajustes del tema oscuro ampliado"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Quitar animaciones"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduce el movimiento de la pantalla"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Parpadeo del cursor de texto"</string>
@@ -4604,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permite que esta aplicación lea, modifique y elimine todos los archivos de este dispositivo o de cualquier volumen de almacenamiento conectado. Si le das permiso, podrá acceder a archivos sin avisarte expresamente."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Puede acceder a todos los archivos"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatización de pantalla"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Permitir que esta aplicación automatice completamente otras aplicaciones"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Esta aplicación podrá controlar tus aplicaciones. Las aplicaciones controladas no se pueden usar mientras la automatización de la pantalla está en curso, pero siempre puedes detenerla."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Preguntar siempre"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Permitir siempre"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"No permitir"</string>
@@ -6029,10 +6028,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verificar información de recuperación"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtros de tiendas de apps"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Excluir apps según la clasificación por edad de su contenido"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Cada tienda clasifica el contenido de forma diferente. La valoración de una aplicación puede variar de una tienda a otra."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtrar aplicaciones por clasificación del contenido"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtros de contenido web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"exclusión de sitios web, bloquear sitios, filtros del navegador, bloquear sitios con contenido explícito, excluir sitios, bloquear resultados de búsqueda, excluir resultados de búsqueda con contenido explícito, restricciones de contenido"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Ayuda a excluir el contenido explícito en algunas apps y navegadores de este teléfono. Puede seguir apareciendo contenido explícito en otras apps, dispositivos o navegadores."</string>
@@ -6123,4 +6120,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Conectividad por satélite"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Sigue con conexión incluso sin red móvil o Wi-Fi"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Página de destino de satélite"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

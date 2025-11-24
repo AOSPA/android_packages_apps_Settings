@@ -56,6 +56,10 @@ open class ExtraDimScreen(context: Context) :
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.reduce_bright_colors_preference_purpose
+
     override val indexable
         get() = true
 

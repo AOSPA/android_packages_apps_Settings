@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Používa <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> sa začína <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Používa čas <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Letný čas sa nepoužíva."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Letný čas"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Štandardný čas"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Vybrať podľa oblasti"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Vybrať podľa posunu od GMT"</string>
@@ -1600,7 +1598,7 @@
     <string name="build_number" msgid="9009733242117579826">"Číslo zostavy"</string>
     <string name="module_version" msgid="1787518340082046658">"Aktualizácia systému Google Play"</string>
     <string name="battery_info" msgid="7873528123969546728">"Informácie o batérii"</string>
-    <string name="device_info_not_available" msgid="4804474466616712326">"Nie je k dispozícii"</string>
+    <string name="device_info_not_available" msgid="4804474466616712326">"Nie je k dispozícii"</string>
     <string name="storage_settings" msgid="7472188817781592677">"Ukladací priestor"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Ukladací priestor a vyrovnávacia pamäť"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Nastavenia úložiska"</string>
@@ -1991,7 +1989,7 @@
     <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Vypnúť animácie pri zadávaní kódu PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Zobrazovať vzor profilu"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrovať pri klepnutí"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Zamykať vypínačom"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Zamykať okamžite vypínačom"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Ak odomknutie nie je udržiavané funkciou <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Nastaviť bezpečnostný vzor"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Zmena bezpečnostného vzoru"</string>
@@ -4601,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Povoľte tejto aplikácii čítať, upravovať a odstraňovať všetky súbory v tomto zariadení alebo akýchkoľvek pripojených úložiskách. Po udelení tohto povolenia bude môcť aplikácia používať súbory bez vášho vedomia."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Má prístup k všetkým súborom"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatizácia obrazovky"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Povoľte tejto aplikácii v plnej miere automatizovať iné aplikácie"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Táto aplikácia bude môcť ovládať vaše iné aplikácie. Ovládané aplikácie sa nebudú dať používať počas prebiehajúcej automatizácie obrazovky, ale kedykoľvek to budete môcť zastaviť."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Vždy sa opýtať"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Vždy povolená"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Nepovoliť"</string>
@@ -6028,10 +6030,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Overenie údajov na obnovenie"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtre obchodu s aplikáciami"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtrujte aplikácie podľa toho, pre akú vekovú skupinu je ich obsah určený"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Každý obchod hodnotí obsah inak. Hodnotenie aplikácie sa môže v rôznych obchodoch líšiť."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtrovanie aplikácií podľa hodnotení obsahu"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtre webového obsahu"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtre webov, blokovať weby, filtre prehliadača, blokovať explicitné weby, filtrovať weby, blokovať výsledky vyhľadávania, filtrovať explicitné výsledky vyhľadávania, obmedzenia obsahu"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Môžete filtrovať explicitný obsah v niektorých aplikáciách a prehliadačoch v tomto telefóne. Explicitný obsah sa môže naďalej zobrazovať v iných aplikáciách, zariadeniach alebo prehliadačoch."</string>
@@ -6122,4 +6122,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Pripojenie cez satelit"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Zostaňte v spojení, keď nemáte k dispozícii mobilnú sieť ani Wi‑Fi"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Vstupná stránka pripojenia cez satelit"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

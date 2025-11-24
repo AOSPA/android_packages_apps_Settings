@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> ഉപയോഗിക്കുന്നു. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="TRANSITION_DATE">%2$s</xliff:g>-ന് <xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> ആരംഭിക്കുന്നു."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> ഉപയോഗിക്കുന്നു. പകൽ സമയം ലാഭിക്കൽ ഇല്ല."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"പകൽ സമയം ലാഭിക്കൽ"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"സ്‌റ്റാന്‍ഡേര്‍ഡ് സമയം"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"പ്രദേശ പ്രകാരം തിരഞ്ഞെടുക്കുക"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"GMTഓഫ്സെറ്റിലൂടെ തിരഞ്ഞെടുക്കൂ"</string>
@@ -4601,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"ഈ ഉപകരണത്തിലെയോ ഇതുമായി ബന്ധിപ്പിച്ചിട്ടുള്ള ഏതെങ്കിലും സ്‌റ്റോറേജുകളിലെയോ എല്ലാ ഫയലുകളും വായിക്കാനും പരിഷ്ക്കരിക്കാനും ഇല്ലാതാക്കാനും ഈ ആപ്പിനെ അനുവദിക്കുക. അനുമതി നൽകിയിട്ടുണ്ടെങ്കിൽ, നിങ്ങളുടെ അറിവില്ലാതെ തന്നെ ആപ്പ് ഫയലുകൾ ആക്സസ് ചെയ്തേക്കാം."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"എല്ലാ ഫയലുകളും ആക്സസ് ചെയ്യാനാവും"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"സ്ക്രീൻ ഓട്ടോമേഷൻ"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"മറ്റ് ആപ്പുകൾ പൂർണ്ണമായും ഓട്ടോമേറ്റ് ചെയ്യാൻ ഈ ആപ്പിനെ അനുവദിക്കുക"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"ഈ ആപ്പിന് നിങ്ങളുടെ ആപ്പുകൾ നിയന്ത്രിക്കാനാകും. സ്ക്രീൻ ഓട്ടോമേഷൻ നടന്നുകൊണ്ടിരിക്കുമ്പോൾ നിയന്ത്രിക്കുന്ന ആപ്പുകൾ ഉപയോഗിക്കാനാകില്ല, എന്നാൽ നിങ്ങൾക്ക് എപ്പോൾ വേണമെങ്കിലും അത് നിർത്താം."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"എല്ലായ്‌പ്പോഴും ചോദിക്കുക"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"എപ്പോഴും അനുവദനീയം"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"അനുവദിക്കരുത്"</string>
@@ -6026,10 +6028,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"വീണ്ടെടുക്കുന്നതിനുള്ള വിവരങ്ങൾ പരിശോധിച്ചുറപ്പിക്കുക"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"ആപ്പ് സ്‌റ്റോർ ഫിൽട്ടറുകൾ"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"ആപ്പുകളിലെ ഉള്ളടക്കത്തിന്റെ റേറ്റിംഗിന്റെ അടിസ്ഥാനത്തിൽ അവ ഫിൽട്ടർ ചെയ്യുക"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"ഓരോ സ്റ്റോറും ഉള്ളടക്കം വ്യത്യസ്തമായി റേറ്റ് ചെയ്യുന്നു. ആപ്പിന്റെ റേറ്റിംഗ്, സ്റ്റോറുകളിൽ ഉടനീളം വ്യത്യാസപ്പെടാം."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"ഉള്ളടക്ക റേറ്റിംഗുകൾ അനുസരിച്ച് ആപ്പുകൾ ഫിൽട്ടർ ചെയ്യുക"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"വെബ് ഉള്ളടക്ക ഫിൽട്ടറുകൾ"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"വെബ്സൈറ്റ് ഫിൽട്ടറുകൾ, സൈറ്റുകൾ ബ്ലോക്ക് ചെയ്യൽ, ബ്രൗസർ ഫിൽട്ടറുകൾ, പ്രായപൂർത്തിയായവർക്കുള്ള സെെറ്റുകൾ ബ്ലോക്ക് ചെയ്യൽ, സൈറ്റുകൾ ഫിൽട്ടർ ചെയ്യൽ, തിരയൽ ഫിൽട്ടറുകൾ ബ്ലോക്ക് ചെയ്യൽ, പ്രായപൂർത്തിയായവർക്കുള്ള തിരയൽ ഫലങ്ങൾ ഫിൽട്ടർ ചെയ്യൽ, ഉള്ളടക്ക നിയന്ത്രണങ്ങൾ"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"ഈ ഫോണിലെ ചില ആപ്പുകളിലും ബ്രൗസറുകളിലും പ്രായപൂർത്തിയായവർക്കുള്ള ഉള്ളടക്കം ഫിൽട്ടർ ചെയ്യാൻ സഹായിക്കുക. മറ്റ് ആപ്പുകളിലും ഉപകരണങ്ങളിലും ബ്രൗസറുകളിലും പ്രായപൂർത്തിയായവർക്കുള്ള ഉള്ളടക്കം തുടർന്നും കാണിച്ചേക്കാം."</string>
@@ -6120,4 +6120,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"സാറ്റലൈറ്റ് കണക്റ്റിവിറ്റി"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"മൊബൈൽ നെറ്റ്‌വർക്കോ വൈഫൈ നെറ്റ്‌വർക്കോ ഇല്ലാത്തപ്പോൾ കണക്റ്റ് ചെയ്ത നിലയിൽ തുടരൂ"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"സാറ്റലൈറ്റ് ലാൻഡിംഗ് പേജ്"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

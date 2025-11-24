@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"נעשה שימוש ב-<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> מתחיל בתאריך <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"אזור זמן: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. ללא שעון קיץ."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"שעון קיץ"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"שעון רגיל"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"בחירה לפי אזור"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"‏בחירה לפי ההפרש משעון גריניץ\' (GMT)"</string>
@@ -2525,7 +2523,7 @@
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"הגדלה בעזרת קיצור דרך ולחיצה שלוש פעמים"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"מידע על <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="2059907327364152763">"גודל התצוגה והטקסט"</string>
-    <string name="accessibility_text_reading_options_subtext" msgid="3480489973093251705">"גודל הגופן, גודל התצוגה, טקסט מודגש, טקסט בקווי מתאר"</string>
+    <string name="accessibility_text_reading_options_subtext" msgid="3480489973093251705">"גודל הגופן, גודל התצוגה, טקסט מודגש, טקסט עם קווי מתאר"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"שינוי התצוגה של הטקסט"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"נושא: עיצובים של כדור פורח"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"מאת: יובל"</string>
@@ -2636,12 +2634,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"עיצוב כהה מורחב"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"הפעלה אוטומטית של העיצוב הכהה ברוב האפליקציות שלא תומכות בו. הפעולה הזו יכולה לשפר את הנגישות ואת הקריאות, אבל היא עלולה גם לגרום לבעיות בתצוגה באפליקציות מסוימות."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"אילוץ היפוך, היפוך צבעים, ניגודיות"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"הגדרות מורחבות של העיצוב הכהה"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"הגדרות מורחבות של העיצוב הכהה"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"פתיחת ההגדרות המורחבות של העיצוב הכהה"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"הסרת אנימציות"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"יהיו פחות תנועות במסך"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"הבהוב של סמן הטקסט"</string>
@@ -2701,9 +2696,9 @@
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"קטן במיוחד"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"התעלמות מתנועות קטנות של הסמן"</string>
     <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"שימוש בקליק שמאלי כפעולת ברירת המחדל"</string>
-    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"כשמשתמשים בפעולה אחרת, הקליק האוטומטי חוזר אוטומטית להיות קליק שמאלי."</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"כשמשתמשים בפעולה אחרת, הקליק האוטומטי חוזר להיות קליק שמאלי"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"התכונה \"קליק אוטומטי\" פועלת טוב יותר עם ניווט ב-3 כפתורים"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"כדי לחזור לדף הקודם, לעבור למסך הבית ולעבור בין אפליקציות כשמשתמשים בקליק אוטומטי, צריך להשתמש בניווט ב-3 כפתורים במקום בניווט באמצעות תנועות"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"כדי לחזור לדף הקודם, לעבור למסך הבית ולעבור בין אפליקציות בקלות בעזרת הקליק האוטומטי, אפשר להשתמש בניווט ב-3 כפתורים במקום בניווט באמצעות תנועות"</string>
     <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"המשך הניווט באמצעות תנועות"</string>
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"הגדרות ניווט"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"רטט ומשוב פיזי"</string>
@@ -4604,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"לאפליקציה הזו תהיה הרשאה לקרוא, לשנות ולמחוק את כל הקבצים במכשיר הזה או בכל אחסון שמחובר אליו. אם ההרשאה ניתנת, האפליקציה תורשה לגשת לקבצים מבלי ליידע אותך במפורש."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"יכולת גישה לכל הקבצים"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"אוטומציה של המסך"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"האפליקציה יכולה לבצע אוטומציה מלאה באפליקציות אחרות"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"האפליקציה הזו תוכל לשלוט באפליקציות שלך. אי אפשר להשתמש באפליקציות נשלטות כשהאוטומציה של המסך מתבצעת, אבל אפשר להפסיק את האפליקציה הזו בכל שלב."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"אני רוצה לבחור בכל פעם"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"מותר תמיד"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"אין אישור"</string>
@@ -5120,7 +5119,7 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"‏מעקב תמידי אחרי כל מערכי הלוויינים והתדרים של GNSS, במקום הפעלת המקלט לסירוגין"</string>
     <string name="input_method_category" msgid="2252659253631639005">"שיטת קלט"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"כתיבה ידנית בסטיילוס"</string>
-    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"‏כשההגדרה מופעלת, שיטת הקלט הנוכחית מקבלת MotionEvent מהסטיילוס כשהמיקוד הוא על עורך."</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"‏כשההגדרה מופעלת, שיטת הקלט הנוכחית מקבלת MotionEvent מהסטיילוס כשהמיקוד הוא על עריכה."</string>
     <string name="device_theme" msgid="5027604586494772471">"עיצוב המכשיר"</string>
     <string name="default_theme" msgid="4815428567082263639">"ברירת מחדל"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"שם הרשת"</string>
@@ -5737,7 +5736,7 @@
     <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"הצגת הכפתור \"ממשק השליטה במכשירים\" בשומר המסך"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"הגדרות נוספות"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"בחירת שומר מסך"</string>
-    <string name="dream_setup_description" msgid="7508547154038580296">"אפשר לבחור מה יוצג במסך כשהטאבלט בעגינה. יכול להיות שהמכשיר ינצל יותר אנרגיה בזמן השימוש בשומר מסך."</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"אפשר לבחור מה יוצג במסך כשהטאבלט בעגינה. כששומר המסך מופעל, המכשיר עלול לצרוך יותר חשמל."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"התאמה אישית"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"התאמה אישית של <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"צריך להפעיל מחדש כדי להפעיל את התמיכה בשינוי הגודל והמיקום של החלונות."</string>
@@ -6030,10 +6029,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"אימות פרטי השחזור"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"מסננים של חנות האפליקציות"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"סינון אפליקציות לפי סיווג התוכן"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"כל חנות מסווגת את התוכן בצורה שונה. סיווג האפליקציה עשוי להיות שונה בין החנויות."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"סינון אפליקציות לפי סיווגי תוכן"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"מסנני תוכן מהאינטרנט"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"מסנני אתרים, חסימת אתרים, מסנני דפדפן, חסימת אתרים בוטים, סינון אתרים, חסימת תוצאות חיפוש, סינון תוצאות חיפוש בוטות, הגבלות תוכן"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"סינון תוכן בוטה בחלק מהאפליקציות והדפדפנים בטלפון הזה. תוכן בוטה עדיין יכול להופיע באפליקציות, במכשירים או בדפדפנים אחרים."</string>
@@ -6124,4 +6121,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"קישוריות ללוויין"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"‏חיבור רציף בלי רשת סלולרית או Wi-Fi"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"דף הנחיתה לתקשורת לוויינית"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

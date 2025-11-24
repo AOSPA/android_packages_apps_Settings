@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Usa <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"O <xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> começa em <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Usa o fuso horário <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> Sem horário de verão."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Horário de verão"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Horário padrão"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Selecionar por região"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Selecionar por fuso GMT"</string>
@@ -2524,7 +2522,7 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Ampliar com atalho"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Ampliar com atalho e toque triplo"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_text_reading_options_title" msgid="2059907327364152763">"Tamanho de exibição e texto"</string>
+    <string name="accessibility_text_reading_options_title" msgid="2059907327364152763">"Tamanho da tela e configurações de texto"</string>
     <string name="accessibility_text_reading_options_subtext" msgid="3480489973093251705">"Tamanho da fonte, tamanho de exibição, negrito, contorno do texto"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Mudar a exibição do texto"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Assunto: Balões de ar quente"</string>
@@ -2636,12 +2634,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Tema escuro ampliado"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Aplica automaticamente o tema escuro à maioria dos apps que não têm essa opção. Isso pode melhorar a acessibilidade e a legibilidade, mas talvez alguns apps sejam mostrados incorretamente."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"forçar inversão, inversão de cores, contraste"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema escuro ampliado"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Configurações do tema escuro ampliado"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Abrir configurações do tema escuro ampliado"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remover animações"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduza o movimento na tela"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Cursor de texto piscando"</string>
@@ -2674,7 +2669,7 @@
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"acessar as configurações"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Clique automático (tempo de permanência)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Sobre o clique automático (tempo de permanência)"</string>
-    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Saiba mais sobre o clique automático (tempo de permanência)."</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Saiba mais sobre o clique automático (tempo de permanência)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"É possível configurar um mouse para clicar automaticamente quando o cursor parar de se mover por um determinado período."</string>
     <string name="accessibility_autoclick_description" msgid="6695732131412361101">"O clique automático pode ser útil em caso de dificuldade para clicar com o mouse."</string>
     <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Clique automático desativado"</string>
@@ -4604,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permita que o app leia, modifique e exclua todos os arquivos deste dispositivo ou de qualquer volume de armazenamento conectado. Se a permissão for concedida, o app poderá acessar arquivos sem nenhum aviso."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pode acessar todos os arquivos"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automação de tela"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Permitir que o app automatize totalmente outros apps"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Esse app poderá controlar seus apps. Os aplicativos controlados não podem ser usados enquanto a automação de tela está em andamento, mas você pode interrompê-la a qualquer momento."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Perguntar sempre"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Sempre permitido"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Não permitir"</string>
@@ -6029,10 +6028,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verifique as informações de recuperação"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtros da app store"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtrar apps com base na classificação etária do conteúdo"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Cada loja categoriza o conteúdo de maneira diferente. A classificação de um app pode variar."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtrar apps por classificação do conteúdo"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtros de conteúdo da Web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtros de sites, Bloquear sites, Filtros do navegador, Bloquear sites explícitos, Filtrar sites, Bloquear resultados de pesquisa, Filtrar resultados de pesquisa com linguagem explícita, restrições de conteúdo"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Filtra conteúdo explícito em alguns apps e navegadores neste smartphone. O conteúdo explícito ainda pode aparecer em outros apps, dispositivos ou navegadores."</string>
@@ -6123,4 +6120,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Conectividade via satélite"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Mantenha a conexão quando não tiver uma rede móvel ou Wi-Fi"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Página de destino do satélite"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

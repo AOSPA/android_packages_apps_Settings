@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> ব্যৱহাৰ কৰে। <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>ত আৰম্ভ হয়।"</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> ব্যৱহাৰ কৰে। কোনো ডে’লাইট ছেভিং টাইম নাই।"</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"ডে’লাইট ছেভিং টাইম"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"মান সময়"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"অঞ্চল অনুসৰি বাছনি কৰক"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"GMT অফছেট অনুসৰি বাছনি কৰক"</string>
@@ -2636,12 +2634,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"বিস্তাৰ কৰা গাঢ় ৰঙৰ থীম"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"এয়া সমৰ্থন নকৰা বেছিভাগ এপত স্বয়ংক্ৰিয়ভাৱে গাঢ় ৰঙৰ থীম প্ৰয়োগ কৰে। এইটোৱে সাধ্য সুবিধা আৰু পঠনযোগ্যতা উন্নত কৰিব পাৰে, কিন্তু ইয়াৰ ফলত কিছুমান এপ্‌ ভুলকৈ প্ৰদৰ্শিত হ’ব পাৰে।"</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"জোৰ কৰি ওলোটা কৰা, ৰং বিপৰীতকৰণ, কনট্ৰাষ্ট"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"বিস্তাৰ কৰা গাঢ় ৰঙৰ থীম"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"বিস্তাৰ কৰা গাঢ় ৰঙৰ থীমৰ ছেটিং"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"বিস্তাৰিত গাঢ় ৰঙৰ থীমৰ ছেটিং খোলক"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"এনিমেশ্বন আঁতৰাওক"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"স্ক্ৰীনখনত গতিবিধি হ্ৰাস কৰক"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"পাঠ কাৰ্ছৰৰ ব্লিংক কৰা"</string>
@@ -4604,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"এই এপ্‌টোক এই ডিভাইচটোত অথবা অন্য যিকোনো সংযুক্ত ষ্ট’ৰেজৰ ভলিউমসমূহত আটাইবোৰ ফাইল পঢ়িবলৈ, সংশোধন কৰিবলৈ আৰু মচিবলৈ অনুমতি দিয়ক। যদি অনুমতি দিয়ে, আপোনাৰ নিশ্চিত জ্ঞানৰ অবিহনে এপে ফাইলবোৰ এক্সেছ কৰিব পাৰে।"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"আটাইবোৰ ফাইল এক্সেছ কৰিব পাৰে"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"স্ক্ৰীনৰ স্বয়ংক্ৰিয়কৰণ"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"এই এপ্‌টোক অন্য এপ্‌সমূহ সম্পূৰ্ণৰূপে স্বয়ংক্ৰিয় কৰিবলৈ অনুমতি দিয়ক"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"এই এপ্‌টোৱে আপোনাৰ এপ্‌সমূহ নিয়ন্ত্ৰণ কৰিব পাৰিব। স্ক্ৰীনৰ স্বয়ংক্ৰিয়কৰণ চলি থকাৰ সময়ত নিয়ন্ত্ৰণ কৰি থকা এপ্‌সমূহ ব্যৱহাৰ কৰিব নোৱাৰি, কিন্তু আপুনি যিকোনো সময়তে সেইটো বন্ধ কৰিব পাৰে।"</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"প্ৰতিবাৰতে সোধক"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"সদায় অনুমতি দিয়া হৈছে"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"অনুমতি নিদিব"</string>
@@ -6029,10 +6028,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"পুনৰুদ্ধাৰৰ তথ্য সত্যাপন কৰক"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"এপ্‌ ষ্ট’ৰৰ ফিল্টাৰ"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"সমলৰ পৰিপক্কতাৰ ওপৰত ভিত্তি কৰি এপ্‌সমূহ ফিল্টাৰ কৰক"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"প্ৰতিটো ষ্ট’ৰে সমলক ভিন্ন ধৰণে মূল্যায়ন কৰে। এটা এপৰ মূল্যাংকন ষ্ট’ৰ অনুসৰি ভিন্ন হ’ব পাৰে।"</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"সমলৰ মূল্যাংকন অনুসৰি এপ্‌সমূহ ফিল্টাৰ কৰক"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ৱেব সমলৰ ফিল্টাৰ"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"ৱেবছাইটৰ ফিল্টাৰ, ছাইট অৱৰোধ কৰক, ব্ৰাউজাৰৰ ফিল্টাৰ, অশ্লীল ছাইট অৱৰোধ কৰক, ছাইট ফিল্টাৰ কৰক, সন্ধানৰ ফলাফল অৱৰোধ কৰক, অশ্লীল সন্ধানৰ ফলাফল ফিল্টাৰ কৰক, সমলৰ সীমাবদ্ধতা"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"এই ফ’নটোৰ কিছুমান এপ্‌ আৰু ব্ৰাউজাৰত যৌনগন্ধী সমল ফিল্টাৰ কৰাত সহায় কৰক। অন্য এপ্‌, ডিভাইচ বা ব্ৰাউজাৰত তথাপি যৌনগন্ধী সমল দেখুৱাব পাৰে।"</string>
@@ -6123,4 +6120,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"উপগ্ৰহৰ সংযোগ"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"আপোনাৰ ওচৰত কোনো ম’বাইল বা ৱাই-ফাই নেটৱৰ্ক নাথাকিলেও সংযুক্ত হৈ থাকক"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"উপগ্ৰহৰ লেণ্ডিং পে’জ"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

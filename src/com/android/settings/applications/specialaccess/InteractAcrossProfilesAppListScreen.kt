@@ -40,6 +40,10 @@ open class InteractAcrossProfilesAppListScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.special_access_interact_across_profiles_app_list_purpose
+
     override val title: Int
         get() = R.string.interact_across_profiles_title
 

@@ -23,7 +23,6 @@ import android.text.format.DateFormat
 import android.util.Log
 import androidx.preference.Preference
 import com.android.settings.R
-import com.android.settings.flags.Flags
 import com.android.settings.utils.getLocale
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -75,12 +74,8 @@ class MainlineModuleVersionPreference :
 
     override fun intent(context: Context): Intent? {
         val packageManager = context.packageManager
-        val intentPackage =
-            if (Flags.mainlineModuleExplicitIntent()) {
-                context.getString(R.string.config_mainline_module_update_package)
-            } else {
-                null
-            }
+        val intentPackage = context.getString(R.string.config_mainline_module_update_package)
+
         fun String.resolveIntent() =
             Intent(this).let {
                 if (intentPackage != null) it.setPackage(intentPackage)

@@ -21,7 +21,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.android.settings.flags.Flags
 import kotlinx.coroutines.DelicateCoroutinesApi
 
 /** Receiver to enable/disable LE Audio profile. */
@@ -29,9 +28,6 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 class LeAudioProfileEnablementRequestReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        if (!Flags.enableChangeLeProfileBroadcastReceiver()) {
-            return
-        }
         val action: String = intent.action ?: return
         if (action != ACTION) {
             return

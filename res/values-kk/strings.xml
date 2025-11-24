@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Қазіргі уақыт белдеуі: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="TRANSITION_DATE">%2$s</xliff:g> күні <xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> белдеуіне ауысады."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> пайдаланады. Жазғы уақыт жоқ."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Жазғы уақыт"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Қысқы уақыт"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Аймақ бойынша таңдау"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"GMT айырмашылығымен таңдау"</string>
@@ -2636,12 +2634,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Кеңейтілген қараңғы режим"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Қараңғы режимді қолдамайтын көптеген қолданбаға оны автоматты түрде орнатады. Пайдалануға және оқуға ыңғайлы болғанымен, кейбір қолданбалар дұрыс көрсетілмеуі мүмкін."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"мәжбүрлі инверсия, түс инверсиясы, контраст"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Жайылған қараңғы режим"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Жайылған қараңғы режим параметрлері"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Жайылған қараңғы режим параметрлерін ашу"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Анимацияны өшіру"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Экрандағы қозғалысты азайту"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Мәтін курсорының жыпылықтауы"</string>
@@ -4604,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Қолданбаға осы құрылғыдағы немесе жалғанған сыртқы жад құрылғыларындағы барлық файлды оқуға, өзгертуге немесе жоюға рұқсат береді. Егер осы рұқсат берілсе, қолданба файлдарды сіздің келісіміңізсіз пайдалана алады."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Барлық файлды пайдалана алатын қолданбалар"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Экранды автоматтандыру"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Бұл қолданбаға басқа қолданбаларды толық автоматтандыруға рұқсат беру"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Бұл қолданба қолданбаларыңызды басқара алады. Экранды автоматтандыру процесі жүріп жатқанда, басқарылатын қолданбаларды пайдалану мүмкін емес, бірақ оны кез келген уақытта тоқтатуға болады."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Әрдайым сұрау"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Әрқашан рұқсат етілген"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Рұқсат етпеу"</string>
@@ -5736,7 +5735,7 @@
     <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"Скринсейверден үй басқару түймесін көрсету"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Қосымша параметрлер"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Скринсейвер таңдаңыз"</string>
-    <string name="dream_setup_description" msgid="7508547154038580296">"Планшет қондыру станциясына қойылған кезде, экраныңызда ненің көрсетілетінін таңдаңыз. Скринсейвер пайдаланылған кезде құрылғы көбірек қуат тұтынуы мүмкін."</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"Планшет қондыру станциясына қойылған кезде, экраныңызда ненің көрсетілетінін таңдаңыз. Скринсейвер пайдаланылғанда, құрылғы көбірек қуат тұтынуы мүмкін."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Реттеу"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> скринсейверін бейімдеу"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Еркін пішінді терезелер мүмкіндігін қосу үшін құрылғыны өшіріп қосу қажет."</string>
@@ -6029,10 +6028,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Қалпына келтіруге қажет ақпаратты растау"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Қолданбалар дүкенінің сүзгілері"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Қолданбаларға контентке арналған жас шектеуі бойынша сүзгі қолданыңыз."</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Әр дүкен жас шектеуін әртүрлі белгілейді. Қолданбаның жас шектеуі дүкендерде әртүрлі болуы мүмкін."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Қолданбаларды жас шектеулері бойынша іріктеу"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Веб-контент сүзгілері"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Веб-сайт сүзгілері, сайттарды блоктау, браузер сүзгілері, цензурасыз сайттарды блоктау, сайттарды іріктеу, іздеу нәтижелерін блоктау, цензурасыз іздеу нәтижелерін іріктеу, контент шектеулері"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Осы телефондағы кейбір қолданбалар мен браузерлердегі цензурасыз контентті жасыруға көмектеседі. Бірақ мұндай контент басқа қолданбаларда, құрылғыларда немесе браузерлерде көрсетілуі мүмкін."</string>
@@ -6123,4 +6120,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Жерсерікке қосылу мүмкіндігі"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Мобильдік немесе Wi-Fi желісі болмаған кезде де байланыста болыңыз"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Жерсеріктің мақсатты беті"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

@@ -22,6 +22,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.OutcomeReceiver
+import android.provider.DeviceConfig
 import android.telephony.CarrierConfigManager
 import android.telephony.TelephonyManager
 import android.telephony.satellite.SatelliteManager
@@ -68,13 +69,22 @@ open class SatelliteTileStateReceiver(
      * checking for NTN support and enabling or disabling the [SatelliteTileService] accordingly.
      */
     override fun onReceive(context: Context, intent: Intent) {
-        val action = intent.action
-        if (
-            action != Intent.ACTION_BOOT_COMPLETED &&
-                action != TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED &&
-                action != CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED
-        ) {
+        if (!context.packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_SATELLITE)) {
             return
+        }
+
+        if (!isSatelliteTileFeatureEnabled()) {
+            return
+        }
+
+        val action = intent.action
+        when (intent.action) {
+            Intent.ACTION_BOOT_COMPLETED,
+            TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED,
+            CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED -> {
+                // Legitimate actions, continue processing.
+            }
+            else -> return // Exit for any other actions.
         }
 
         val isFlagEnabled = Flags.enableSatelliteTile()
@@ -147,23 +157,47 @@ open class SatelliteTileStateReceiver(
         return isNbIotBasedNtnSupportedFlow(context)
     }
 
+    /**
+     * Returns `true` if the satellite tile feature is enabled, and `false` otherwise.
+     *
+     * This checks device config flag `enable_satellite_tile_feature` and is used to control the
+     * feature on a per-device basis. Check `telephony.gcl` for the flag definition.
+     */
+    private fun isSatelliteTileFeatureEnabled(): Boolean {
+        return DeviceConfig.getBoolean(
+            DeviceConfig.NAMESPACE_TELEPHONY,
+            ENABLE_SATELLITE_TILE_FEATURE_CONFIG_KEY,
+            /* defaultValue= */ false,
+        )
+    }
+
     companion object {
+        private const val ENABLE_SATELLITE_TILE_FEATURE_CONFIG_KEY = "enable_satellite_tile_feature"
+
         /**
          * Update the tile service state. This enables or disables the service, making the tile
          * appear or disappear.
          */
         fun updateTileServiceEnabledState(context: Context, isAnyNtnSupported: Boolean) {
+            val componentName = ComponentName(context, SatelliteTileService::class.java)
+            val packageManager = context.packageManager
             val newState =
                 if (isAnyNtnSupported) {
                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                 } else {
                     PackageManager.COMPONENT_ENABLED_STATE_DISABLED
                 }
-            Log.i(TAG, "SatelliteTileService enabled state: $isAnyNtnSupported")
+
+            if (packageManager.getComponentEnabledSetting(componentName) == newState) {
+                Log.d(TAG, "Not updating SatelliteTileService state, already $newState")
+                return
+            }
+
+            Log.i(TAG, "Setting SatelliteTileService enabled state to: $isAnyNtnSupported")
 
             // This enables or disables the service, making the tile appear or disappear.
-            context.packageManager.setComponentEnabledSetting(
-                ComponentName(context, SatelliteTileService::class.java),
+            packageManager.setComponentEnabledSetting(
+                componentName,
                 newState,
                 PackageManager.DONT_KILL_APP,
             )
@@ -198,36 +232,31 @@ internal object SatelliteSupportedStateChangeHandler {
 
             // Use application context to avoid leaking the receiver context
             val appContext = context.applicationContext
-            if (
-                !appContext.packageManager.hasSystemFeature(
-                    PackageManager.FEATURE_TELEPHONY_SATELLITE
-                )
-            ) {
-                Log.i(TAG, "Device does not support satellite telephony. Skipping registration.")
-                return
-            }
-
             val satelliteManager = appContext.getSystemService(SatelliteManager::class.java)
             if (satelliteManager == null) {
                 Log.e(TAG, "SatelliteManager is not available for registration.")
                 return
             }
 
-            satelliteManager.registerForSupportedStateChanged(dispatcher.asExecutor()) {
-                isNbIotBasedNtnSupported ->
-                Log.i(
-                    TAG,
-                    "onSatelliteSupportedStateChanged: isSupported=$isNbIotBasedNtnSupported",
-                )
-                val isLteBasedNtnSupported =
-                    SatelliteUtils.isLteBasedNtnSupportedByDevice(appContext)
-                SatelliteTileStateReceiver.updateTileServiceEnabledState(
-                    appContext,
-                    isLteBasedNtnSupported || isNbIotBasedNtnSupported,
-                )
+            try {
+                satelliteManager.registerForSupportedStateChanged(dispatcher.asExecutor()) {
+                    isNbIotBasedNtnSupported ->
+                    Log.i(
+                        TAG,
+                        "onSatelliteSupportedStateChanged: isSupported=$isNbIotBasedNtnSupported",
+                    )
+                    val isLteBasedNtnSupported =
+                        SatelliteUtils.isLteBasedNtnSupportedByDevice(appContext)
+                    SatelliteTileStateReceiver.updateTileServiceEnabledState(
+                        appContext,
+                        isLteBasedNtnSupported || isNbIotBasedNtnSupported,
+                    )
+                }
+                isRegistered = true
+                Log.i(TAG, "Successfully registered for satellite state changes.")
+            } catch (e: IllegalStateException) {
+                Log.e(TAG, "Failed to register for satellite state changes", e)
             }
-            isRegistered = true
-            Log.i(TAG, "Successfully registered for satellite state changes.")
         }
     }
 }

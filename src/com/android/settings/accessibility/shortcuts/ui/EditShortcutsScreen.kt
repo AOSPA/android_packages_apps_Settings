@@ -32,10 +32,15 @@ import com.android.internal.accessibility.AccessibilityShortcutController.REDUCE
 import com.android.settings.R
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.PreferredShortcuts
+import com.android.settings.accessibility.extensions.toParameterStringArray
 import com.android.settings.accessibility.shared.utils.getA11yActivityFeatureName
 import com.android.settings.accessibility.shared.utils.getA11yServiceFeatureName
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.KeyParametersSchema
+import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -45,18 +50,42 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.map
 
 // TODO(b/440383851): Figure out if this screen can be merged with
 // [AccessibilityShortcutPreference] and its subclasses.
 // If we do, make sure we don't accidentally allow outsider to change individual shortcuts.
 @ProvidePreferenceScreen(EditShortcutsScreen.KEY, parameterized = true)
-open class EditShortcutsScreen(context: Context, override val arguments: Bundle) :
-    PreferenceScreenMixin, PreferenceLifecycleProvider {
+open class EditShortcutsScreen
+private constructor(
+    @Deprecated(
+        "This property will be removed once the catalyst framework stops passing the arguments as a bundle. Use the keyParameters instead."
+    )
+    final override val arguments: Bundle?,
+    final override val keyParameters: KeyParameters?,
+) : PreferenceScreenMixin, PreferenceLifecycleProvider {
 
     private val shortcutTargets: Set<String> by lazy {
-        arguments.getStringArray(EditShortcutsPreferenceFragment.ARG_KEY_SHORTCUT_TARGETS)?.toSet()
-            ?: emptySet()
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            // TODO(b/440383851): understand whether we should provide parameters to any caller and
+            // retrieve the shortcutTargets from keyParameters
+            keyParameters
+                ?.get(EditShortcutsPreferenceFragment.ARG_KEY_SHORTCUT_TARGETS)
+                ?.toParameterStringArray()
+                ?.toSet() ?: emptySet()
+        } else {
+            arguments
+                ?.getStringArray(EditShortcutsPreferenceFragment.ARG_KEY_SHORTCUT_TARGETS)
+                ?.toSet() ?: emptySet()
+        }
     }
+
+    @Deprecated(
+        "This constructor will be removed once the catalyst framework stops passing the arguments as a bundle. Use the other constructor instead."
+    )
+    constructor(args: Bundle) : this(args, null)
+
+    constructor(keyParameters: KeyParameters) : this(null, keyParameters)
 
     override fun getScreenTitle(context: Context): CharSequence? {
         if (shortcutTargets.size == 1) {
@@ -142,9 +171,36 @@ open class EditShortcutsScreen(context: Context, override val arguments: Bundle)
     override val key: String
         get() = KEY
 
-    companion object {
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.edit_shortcuts_screen_purpose
+
+    companion object : ParameterizedPreferenceScreenArgumentsFactory {
         const val KEY = "edit_shortcuts_screen"
 
+        @JvmStatic
+        // TODO(b/440383851): understand whether we should provide parameters to any caller and
+        // update the parameters schema
+        override val parametersSchema = KeyParametersSchema {
+            parameter(
+                EditShortcutsPreferenceFragment.ARG_KEY_SHORTCUT_TARGETS,
+                "A string array of targets",
+                required = true,
+            )
+        }
+
+        @JvmStatic
+        override fun keyParameters(context: Context): Flow<KeyParameters> {
+            // TODO (b/457649430): when the catalyst framework stops passing the arguments as a
+            // bundle: replace the parameters(context) call to the actual implementation,
+            // or make this function the primary implementation and the legacy parameters() should
+            // call this one.
+            return parameters(context).map { bundle -> parametersSchema.prepare(bundle) }
+        }
+
+        @Deprecated(
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use keyParameters instead."
+        )
         @OptIn(ExperimentalCoroutinesApi::class)
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> {

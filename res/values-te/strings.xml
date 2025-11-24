@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>‌ను ఉపయోగిస్తుంది. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>‌న ప్రారంభమవుతుంది."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>‌ను ఉపయోగిస్తుంది. డేలైట్ ఆదా సమయం లేదు."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"డేలైట్ ఆదా సమయం"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"స్టాండర్డ్ సమయం"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"ప్రాంతం ద్వారా ఎంచుకోండి"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"GMT ఆఫ్‌సెట్ ద్వారా ఎంచుకోండి"</string>
@@ -2636,12 +2634,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"డార్క్ థీమ్ విస్తరించబడింది"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"డార్క్ థీమ్‌ను సపోర్ట్ చేయని చాలా యాప్‌లకు ఆటోమేటిక్‌గా వర్తింపజేస్తుంది. ఇది యాక్సెసిబిలిటీని, రీడబిలిటీని మెరుగుపరుస్తుంది, కానీ కొన్ని యాప్‌లు తప్పుగా డిస్‌ప్లే అవ్వడానికి కారణం కావచ్చు."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"ఫోర్స్ ఇన్వర్ట్, కలర్ మార్పిడి, కాంట్రాస్ట్"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"విస్తరించబడిన డార్క్ థీమ్"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"విస్తరించిన డార్క్ థీమ్ సెట్టింగ్‌లు"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"విస్తరించిన డార్క్ థీమ్ సెట్టింగ్‌లను తెరవండి"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"యానిమేషన్‌లను తీసివేయండి"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"స్క్రీన్ మీద కదలికను తగ్గించండి"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"టెక్స్ట్ కర్సర్ బ్లింకింగ్"</string>
@@ -4604,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"ఈ డివైజ్‌లో, లేదా కనెక్ట్ చేయబడిన ఏవైనా స్టోరేజ్ వాల్యూమ్‌ల్లో, అన్ని ఫైళ్లను రీడ్ చేయడానికి, మార్చడానికి, తొలగించడానికి ఈ యాప్‌నకు అనుమతిని ఇవ్వండి. అటువంటి అనుమతిని మీరు మంజూరు చేస్తే, మీకు ప్రత్యేకంగా తెలియపరచకుండానే మీ ఫైళ్లను ఈ యాప్ యాక్సెస్ చేయవచ్చు."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"అన్ని ఫైళ్లను యాక్సెస్ చేయగలవు"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"స్క్రీన్ ఆటోమేషన్"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"ఇతర యాప్‌లను పూర్తిగా ఆటోమేట్ చేయడానికి ఈ యాప్‌నకు అనుమతినివ్వండి"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"ఈ యాప్ మీ ఇతర యాప్‌లను కంట్రోల్ చేయగలదు. స్క్రీన్ ఆటోమేషన్ జరుగుతున్నప్పుడు కంట్రోల్ చేయబడుతున్న యాప్‌లను ఉపయోగించడం సాధ్యం కాదు, కానీ మీరు ఎప్పుడైనా దాన్ని ఆపివేయవచ్చు."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"ప్రతిసారి అడగాలి"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"ఎల్లవేళలా అనుమతించబడుతుంది"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"అనుమతించవద్దు"</string>
@@ -6029,10 +6028,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"రికవరీ సమాచారాన్ని వెరిఫై చేయండి"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"యాప్ స్టోర్ ఫిల్టర్‌లు"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"యాప్‌లను వాటి కంటెంట్‌కు సంబంధించి మెచ్యూరిటీ ఆధారంగా ఫిల్టర్ చేయండి"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"ప్రతి స్టోర్ కంటెంట్‌ను వేర్వేరుగా రేట్ చేస్తుంది. స్టోర్‌లను బట్టి యాప్ రేటింగ్ మారవచ్చు."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"కంటెంట్ రేటింగ్‌ల ఆధారంగా యాప్‌లను ఫిల్టర్ చేయండి"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"వెబ్ కంటెంట్ ఫిల్టర్‌లు"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"వెబ్‌సైట్ ఫిల్టర్‌లు, సైట్‌లను బ్లాక్ చేయండి, బ్రౌజర్ ఫిల్టర్‌లు, అందరికీ తగని సైట్‌లను బ్లాక్ చేయండి, సైట్‌లను ఫిల్టర్ చేయండి, సెర్చ్ ఫలితాలను బ్లాక్ చేయండి, అందరికీ తగని సెర్చ్ ఫలితాలను ఫిల్టర్ చేయండి, కంటెంట్ పరిమితులు"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"ఈ ఫోన్‌లోని కొన్ని యాప్‌లు, బ్రౌజర్‌లలో అందరికీ తగని కంటెంట్‌ను ఫిల్టర్ చేయడంలో సహాయం చేయండి. ఇతర యాప్‌లు, డివైజ్‌లు లేదా బ్రౌజర్‌లలో అందరికీ తగని కంటెంట్ ఇప్పటికీ కనిపించవచ్చు."</string>
@@ -6123,4 +6120,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"శాటిలైట్ కనెక్టివిటీ"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"మీకు మొబైల్ లేదా Wi-Fi నెట్‌వర్క్ లేనప్పుడు కనెక్ట్ అయి ఉండండి"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"శాటిలైట్ ల్యాండింగ్ పేజీ"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

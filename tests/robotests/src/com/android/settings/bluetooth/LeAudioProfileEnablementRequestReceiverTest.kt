@@ -20,11 +20,9 @@ import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
-import com.android.settings.flags.Flags
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager
@@ -80,7 +78,6 @@ class LeAudioProfileEnablementRequestReceiverTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_CHANGE_LE_PROFILE_BROADCAST_RECEIVER)
     fun testEnableLeAudio() =
         testScope.runTest {
             whenever(localBtManager.cachedDeviceManager.findDevice(device)).thenReturn(cachedDevice)
@@ -98,7 +95,6 @@ class LeAudioProfileEnablementRequestReceiverTest {
         }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_CHANGE_LE_PROFILE_BROADCAST_RECEIVER)
     fun testDisableLeAudio() =
         testScope.runTest {
             whenever(localBtManager.cachedDeviceManager.findDevice(device)).thenReturn(cachedDevice)

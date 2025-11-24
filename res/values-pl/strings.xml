@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Używana strefa czasowa: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> zaczyna się <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Używana strefa czasowa: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nie ma czasu letniego."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Czas letni"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Czas standardowy"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Wybierz według regionu"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Wybierz wg przesunięcia GMT"</string>
@@ -2636,12 +2634,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Rozszerzony ciemny motyw"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Automatycznie stosuje ciemny motyw w większości aplikacji, które go nie obsługują, by poprawić dostępność i czytelność. Niektóre mogą się wyświetlać nieprawidłowo."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"wymuś odwrócenie, odwrócenie kolorów, kontrast"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Rozszerzony ciemny motyw"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Ustawienia rozszerzonego ciemnego motywu"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Otwórz ustawienia rozszerzonego ciemnego motywu"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Usuwaj animacje"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Ogranicz ruch na ekranie"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Miganie kursora tekstowego"</string>
@@ -4604,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Zezwól tej aplikacji na odczytywanie, modyfikowanie i usuwanie plików na tym urządzeniu oraz wszelkich połączonych woluminach pamięci. Aplikacje z tymi uprawnieniami mogą korzystać z dostępu do plików bez konieczności wyraźnego informowania Cię o tym."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Ma dostęp do wszystkich plików"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatyzacja ekranu"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Zezwalaj tej aplikacji na pełną automatyzację innych aplikacji"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Ta aplikacja będzie mogła sterować innymi aplikacjami. Podczas automatyzacji ekranu nie można korzystać z aplikacji, które są sterowane, ale możesz w każdej chwili zatrzymać ten proces."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Zawsze pytaj"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Zawsze zezwalaj"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Nie zezwalaj"</string>
@@ -6031,10 +6030,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Zweryfikuj informacje pomocnicze"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtry sklepu z aplikacjami"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtruj aplikacje według klasyfikacji wiekowej ich treści"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Każdy sklep ocenia treści inaczej. Ocena aplikacji może się różnić w zależności od sklepu."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtruj aplikacje według ocen treści"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtry treści z internetu"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtry witryn, blokowanie witryn, filtry przeglądarki, blokowanie witryn dla pełnoletnich, filtrowanie witryn, blokowanie wyników wyszukiwania, filtrowanie wyników wyszukiwania dla pełnoletnich, ograniczenia treści"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Pomagaj odfiltrowywać treści dla dorosłych w niektórych aplikacjach i przeglądarkach na tym telefonie. Treści te mogą nadal pojawiać się w innych aplikacjach i przeglądarkach oraz na innych urządzeniach."</string>
@@ -6125,4 +6122,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Łączność satelitarna"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Pozostawaj w kontakcie nawet wtedy, gdy nie masz połączenia z siecią komórkową lub Wi-Fi"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Strona docelowa łączności satelitarnej"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

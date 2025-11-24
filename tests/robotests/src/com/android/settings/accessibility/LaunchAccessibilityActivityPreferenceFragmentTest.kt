@@ -201,6 +201,17 @@ class LaunchAccessibilityActivityPreferenceFragmentTest :
         assertThat(fragment!!.metricsCategory).isEqualTo(SettingsEnums.ACCESSIBILITY_SERVICE)
     }
 
+    @Test
+    fun getPreferenceScreenBindingKeyParameters_returnsTheCorrectParametersForCreatingA11yActivityScreen() {
+        launchFragment()
+        val parameters = fragment!!.getPreferenceScreenBindingKeyParameters(context)
+
+        // Assert: The correct parameters were returned
+        assertThat(parameters).isNotNull()
+        assertThat(parameters!![AccessibilitySettings.EXTRA_COMPONENT_NAME])
+            .isEqualTo(PLACEHOLDER_A11Y_ACTIVITY.flattenToString())
+    }
+
     private fun launchFragment(a11yShortcutInfo: AccessibilityShortcutInfo) {
         a11yManager.setInstalledAccessibilityShortcutListAsUser(listOf(a11yShortcutInfo))
         val bundle = Bundle()

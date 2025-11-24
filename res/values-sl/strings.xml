@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Uporablja <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> se začne dne <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Uporablja <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Brez preklapljanja med zimskim in poletnim časom."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Poletni čas"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standardni čas"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Izberi po regiji"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Izbira po zamiku glede na GMT"</string>
@@ -4601,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Tej aplikaciji dovolite, da bere, spreminja in briše vse datoteke v tej napravi ali drugih povezanih nosilcih za shranjevanje. Če daste to dovoljenje, bo aplikacija morda dostopala do datotek brez vaše vednosti."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Lahko dostopa do vseh datotek"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Avtomatizacija zaslona"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Dovoli tej aplikaciji, da v celoti avtomatizira druge aplikacije"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"Ta aplikacija bo lahko upravljala vaše aplikacije. Aplikacij, ki so upravljane, ni mogoče uporabljati, medtem ko poteka avtomatizacija zaslona, vendar lahko avtomatizacijo kadar koli ustavite."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Vedno vprašaj"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Vedno dovoljeno"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Ne dovoli"</string>
@@ -5438,8 +5440,8 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Levo"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Desno"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Škatlica"</string>
-    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Levo: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Desno: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Leva: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Desna: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Škatlica: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Baterija, levo: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Baterija, desno: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
@@ -6028,10 +6030,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Preverjanje podatkov za obnovitev"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtri trgovine z aplikacijami"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtriranje aplikacij glede na starostno primernost njihove vsebine"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Vsaka trgovina vsebino ocenjuje drugače. Kategorija vsebine aplikacije se lahko razlikuje med trgovinami."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtriranje aplikacij po kategorijah vsebine"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtri spletne vsebine"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"filtri spletnih mest, blokiranje spletnih mest, filtri v brskalniku, blokiranje eksplicitnih spletnih mest, filtriranje spletnih mest, blokiranje rezultatov iskanja, filtriranje eksplicitnih rezultatov iskanja, omejitve vsebine"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Pomagajo filtrirati eksplicitno vsebino v nekaterih aplikacijah in brskalnikih v tem telefonu. Eksplicitna vsebina bo morda še vedno prikazana v drugih aplikacijah, napravah ali brskalnikih."</string>
@@ -6053,7 +6053,7 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Pri poskusu brisanja kode PIN je prišlo do napake."</string>
     <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"Izklopi starševski nadzor za tega uporabnika"</string>
     <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"Želite izbrisati kodo PIN in izklopiti starševski nadzor?"</string>
-    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"Koda PIN za starševski nadzor bo izbrisana. Vsi nadzori, ki ste jih nastavili, bodo izklopljeni."</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"Koda PIN za starševski nadzor bo izbrisana. Vsi kontrolniki, ki ste jih nastavili, bodo izklopljeni."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Izbriši in izklopi"</string>
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Izbriši kodo PIN in izklopi starševski nadzor"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Izbriši"</string>
@@ -6122,4 +6122,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Povezljivost s sateliti"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Ostanite povezani, ko nimate povezave z mobilnim omrežjem ali omrežjem Wi-Fi"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Ciljna stran za satelitsko povezavo"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

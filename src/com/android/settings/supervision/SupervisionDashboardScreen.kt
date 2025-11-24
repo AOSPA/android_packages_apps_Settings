@@ -27,7 +27,9 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceGroup
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.supervision.appstorefilters.SupervisionAppStoreFiltersScreen
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -80,29 +82,31 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
             this.lifeCycleContext = context
             supervisionManager = context.getSystemService(SupervisionManager::class.java)
             supervisionManager?.registerSupervisionListener(supervisionListener)
-            if (Flags.enableSupervisionSettingsUiUpdates()) {
-                var supervisionAppCount = 0
-                val supervisionAppsGroup =
-                    context.findPreference<PreferenceGroup>(ACTIVE_SUPERVISION_APPS_GROUP)?.apply {
-                        for (supervisionApp in context.supervisionRoleHolders) {
-                            try {
-                                addPreference(
-                                    createSupervisionAppPreference(context, supervisionApp)
-                                )
-                                // Increment the count on successfully adding the preference
-                                supervisionAppCount++
-                            } catch (e: Exception) {
-                                Log.e(
-                                    SupervisionLog.TAG,
-                                    "Error displaying supervision app preference for: $supervisionApp",
-                                    e,
-                                )
-                            }
+        }
+    }
+
+    override fun onResume(context: PreferenceLifecycleContext) {
+        if (Flags.enableSupervisionSettingsUiUpdates()) {
+            var supervisionAppCount = 0
+            val supervisionAppsGroup =
+                context.findPreference<PreferenceGroup>(ACTIVE_SUPERVISION_APPS_GROUP)?.apply {
+                    removeAll()
+                    for (supervisionApp in context.supervisionRoleHolders) {
+                        try {
+                            addPreference(createSupervisionAppPreference(context, supervisionApp))
+                            // Increment the count on successfully adding the preference
+                            supervisionAppCount++
+                        } catch (e: Exception) {
+                            Log.e(
+                                SupervisionLog.TAG,
+                                "Error displaying supervision app preference for: $supervisionApp",
+                                e,
+                            )
                         }
                     }
-                // Set the visibility of the entire group based on whether any apps were found.
-                supervisionAppsGroup?.isVisible = supervisionAppCount > 0
-            }
+                }
+            // Set the visibility of the entire group based on whether any apps were found.
+            supervisionAppsGroup?.isVisible = supervisionAppCount > 0
         }
     }
 
@@ -110,6 +114,10 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
 
     override val key: String
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.top_level_supervision_purpose
 
     override val title: Int
         get() = R.string.supervision_settings_title

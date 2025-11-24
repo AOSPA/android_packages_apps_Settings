@@ -241,6 +241,9 @@ open class TabbedDisplayPreferenceFragment(
 
         activity.setToolbarItems(toolbarItems)
         activity.setFloatingToolbarVisibility(true)
+        toolbarIdxToDisplayIdMapping.inverse().get(selectedDisplayId)?.let { toolbarPosition ->
+            activity.setToolbarSelectedItem(toolbarPosition)
+        }
         activity.setOnItemSelectedListener(
             object : ScrollableToolbarItemLayout.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -255,9 +258,6 @@ open class TabbedDisplayPreferenceFragment(
                 }
             }
         )
-        toolbarIdxToDisplayIdMapping.inverse().get(selectedDisplayId)?.let { toolbarPosition ->
-            activity.setToolbarSelectedItem(toolbarPosition)
-        }
     }
 
     /**

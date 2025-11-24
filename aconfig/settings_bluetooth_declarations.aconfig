@@ -58,16 +58,6 @@ flag {
 }
 
 flag {
-  name: "enable_change_le_profile_broadcast_receiver"
-  namespace: "cross_device_experiences"
-  description: "Enable broadcast receiver to enable/disable LE audio profile"
-  bug: "381353150"
-  metadata {
-      purpose: PURPOSE_BUGFIX
-  }
-}
-
-flag {
   name: "enable_expressive_bluetooth_battery_header"
   namespace: "cross_device_experiences"
   description: "Enable expressive bluetooth battery header."

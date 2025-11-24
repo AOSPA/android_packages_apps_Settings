@@ -25,6 +25,7 @@ import android.os.PersistableBundle
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import android.provider.DeviceConfig
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
@@ -35,6 +36,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -54,6 +56,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowDeviceConfig
 import org.robolectric.shadows.ShadowSatelliteManager
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -67,10 +70,15 @@ class SatelliteTileStateReceiverTest {
     @Mock private lateinit var subInfo: SubscriptionInfo
 
     private lateinit var context: Context
+    private var componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
     private lateinit var receiver: SatelliteTileStateReceiver
     private lateinit var shadowSatelliteManager: ShadowSatelliteManager
     private val testDispatcher = StandardTestDispatcher()
     private val SUB_ID = 1
+
+    companion object {
+        private const val ENABLE_SATELLITE_TILE_FEATURE_CONFIG_KEY = "enable_satellite_tile_feature"
+    }
 
     @Before
     fun setUp() {
@@ -86,10 +94,27 @@ class SatelliteTileStateReceiverTest {
         shadowOf(subscriptionManager).setActiveSubscriptionInfoList(listOf(subInfo))
         receiver = spy(SatelliteTileStateReceiver(testDispatcher))
         `when`(receiver.goAsync()).thenReturn(pendingResult)
+        DeviceConfig.setProperty(
+            DeviceConfig.NAMESPACE_TELEPHONY,
+            ENABLE_SATELLITE_TILE_FEATURE_CONFIG_KEY,
+            "true",
+            /* makeDefault= */ false,
+        )
 
         // Reset the singleton state of SatelliteSupportedStateChangeHandler to ensure test
         // isolation
         SatelliteSupportedStateChangeHandler.reset()
+
+        componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
+        `when`(packageManager.getComponentEnabledSetting(any())).thenAnswer { componentEnabledState }
+        `when`(packageManager.setComponentEnabledSetting(any(), anyInt(), anyInt())).then {
+            componentEnabledState = it.getArgument(1)
+        }
+    }
+
+    @After
+    fun tearDown() {
+        ShadowDeviceConfig.reset()
     }
 
     @Test
@@ -99,6 +124,22 @@ class SatelliteTileStateReceiverTest {
 
         verify(packageManager, never()).setComponentEnabledSetting(any(), anyInt(), anyInt())
         verify(pendingResult, never()).finish()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
+    fun onReceive_deviceDisabled_doesNothing() = runTest {
+        DeviceConfig.setProperty(
+            DeviceConfig.NAMESPACE_TELEPHONY,
+            ENABLE_SATELLITE_TILE_FEATURE_CONFIG_KEY,
+            "false",
+            /* makeDefault= */ false,
+        )
+
+        sendBootCompletedBroadcast()
+
+        verify(receiver, never()).goAsync()
+        verify(packageManager, never()).setComponentEnabledSetting(any(), anyInt(), anyInt())
     }
 
     @Test
@@ -144,21 +185,43 @@ class SatelliteTileStateReceiverTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_bootCompleted_noSatelliteFeature_doesNotRegisterCallback() =
+    fun onReceive_bootCompleted_isNbIotBasedNtnRequestFailed_disablesTile() =
         runTest(testDispatcher) {
-            `when`(packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_SATELLITE))
-                .thenReturn(false)
+            setLteNtnSupported(false)
+            val exception =
+                SatelliteManager.SatelliteException(
+                    SatelliteManager.SATELLITE_RESULT_REQUEST_FAILED
+                )
+            shadowSatelliteManager.setIsSupportedResponse(false, exception)
 
             sendBootCompletedBroadcast()
             advanceUntilIdle()
 
-            // Verify that the callback was not registered by triggering it and checking that
-            // the tile state does not change.
-            clearInvocations(packageManager)
-            shadowSatelliteManager.triggerOnSupportedStateChanged(true)
-            advanceUntilIdle()
-            verify(packageManager, never()).setComponentEnabledSetting(any(), anyInt(), anyInt())
+            verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
+            verify(pendingResult).finish()
         }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
+    fun onReceive_noSatelliteFeature_doesNothing() = runTest {
+        `when`(packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_SATELLITE))
+            .thenReturn(false)
+
+        sendBootCompletedBroadcast()
+
+        verify(receiver, never()).goAsync()
+        verify(packageManager, never()).setComponentEnabledSetting(any(), anyInt(), anyInt())
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
+    fun onReceive_unknownAction_doesNothing() = runTest {
+        val intent = Intent("com.android.settings.UNKNOWN_ACTION")
+        receiver.onReceive(context, intent)
+
+        verify(receiver, never()).goAsync()
+        verify(packageManager, never()).setComponentEnabledSetting(any(), anyInt(), anyInt())
+    }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
@@ -296,6 +359,39 @@ class SatelliteTileStateReceiverTest {
 
             verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
         }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
+    fun onSupportedStateChanged_lteNtnSupported_tileStateUnchanged() =
+        runTest(testDispatcher) {
+            setLteNtnSupported(true)
+            sendBootCompletedBroadcast()
+            advanceUntilIdle()
+
+            // Verify that the tile is initially enabled
+            verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
+            clearInvocations(packageManager)
+
+            // Simulate the NB-IoT state changing to not supported
+            shadowSatelliteManager.triggerOnSupportedStateChanged(false)
+            advanceUntilIdle()
+
+            // The tile should remain enabled because LTE NTN is supported
+            verify(packageManager, never()).setComponentEnabledSetting(any(), anyInt(), anyInt())
+        }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
+    fun registerForSupportedStateChanged_throwsException_doesNotCrash() {
+        val mockSatelliteManager = mock(SatelliteManager::class.java)
+        `when`(context.getSystemService(SatelliteManager::class.java))
+            .thenReturn(mockSatelliteManager)
+        `when`(mockSatelliteManager.registerForSupportedStateChanged(any(), any()))
+            .thenThrow(IllegalStateException("Registration failed"))
+
+        // This should not crash
+        SatelliteSupportedStateChangeHandler.register(context, testDispatcher)
+    }
 
     private fun sendBootCompletedBroadcast() {
         val intent = Intent(Intent.ACTION_BOOT_COMPLETED)

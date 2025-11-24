@@ -116,7 +116,8 @@ class WifiSharedPreferenceController(
     private fun getMatchingWifiEntry(shared: Boolean): WifiEntry? {
         val wifiPickerTracker = wifiPickerTrackerHelper.getWifiPickerTracker()
         val matchingWifiEntry: WifiEntry? =
-            wifiPickerTracker.wifiEntries
+            (wifiPickerTracker.wifiEntries +
+                    listOfNotNull(wifiPickerTracker.getConnectedWifiEntry()))
                 .stream()
                 .filter { entry: WifiEntry -> TextUtils.equals(wifiEntry.ssid, entry.ssid) }
                 .filter { entry: WifiEntry -> entry.getWifiConfiguration()?.shared == shared }

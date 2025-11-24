@@ -36,11 +36,13 @@ import android.os.PersistableBundle
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
+import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.overlay.FeatureFactory
 import com.android.settings.password.ChooseLockGeneric
 import com.android.settings.supervision.ConfirmSupervisionCredentialsActivity.Companion.EXTRA_FORCE_CONFIRMATION
 import com.android.settings.testutils.MetricsRule
@@ -53,10 +55,12 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argThat
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.verifyNoInteractions
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
@@ -371,6 +375,197 @@ class SupervisionPinRecoveryActivityTest {
         }
     }
 
+    // TODO: b/460563813 - Merge these test cases with the existing ones that cover the same flows
+    // when cleaning up the flag
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_METRICS)
+    fun onVerification_setupAction_successfulResult_logsSuccessMetric() {
+        val expectedMetric = SettingsEnums.ACTION_SUPERVISION_ADD_RECOVERY_ON_SETUP_SUCCESS
+        val intent =
+            Intent(context, SupervisionPinRecoveryActivity::class.java).apply {
+                action = SupervisionPinRecoveryActivity.ACTION_SETUP
+            }
+        val resultIntent =
+            Intent().apply {
+                putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, EXPECTED_SUPERVISION_RECOVERY_INFO)
+            }
+
+        ActivityScenario.launch<SupervisionPinRecoveryActivity>(intent).use { scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                val testActivityResult = Activity.RESULT_OK
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivity,
+                    testActivityResult,
+                    resultIntent,
+                )
+
+                verify(FeatureFactory.featureFactory.metricsFeatureProvider)
+                    .action(eq(activity), eq(expectedMetric), eq(true))
+            }
+        }
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_METRICS)
+    fun onVerification_setupAction_noMetricsLogWhenFlagDisabled() {
+        val expectedMetric = SettingsEnums.ACTION_SUPERVISION_ADD_RECOVERY_ON_SETUP_SUCCESS
+        val intent =
+            Intent(context, SupervisionPinRecoveryActivity::class.java).apply {
+                action = SupervisionPinRecoveryActivity.ACTION_SETUP
+            }
+        val resultIntent =
+            Intent().apply {
+                putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, EXPECTED_SUPERVISION_RECOVERY_INFO)
+            }
+
+        ActivityScenario.launch<SupervisionPinRecoveryActivity>(intent).use { scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivity,
+                    Activity.RESULT_OK,
+                    resultIntent,
+                )
+
+                verify(metricsRule.metricsFeatureProvider, never())
+                    .action(any(), eq(expectedMetric), eq(false))
+            }
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_METRICS)
+    fun onVerification_setupVerifiedAction_successfulResult_logsPostSetupAddMetric() {
+        val expectedMetric = SettingsEnums.ACTION_SUPERVISION_ADD_RECOVERY_POST_SETUP_SUCCESS
+        val intent =
+            Intent(context, SupervisionPinRecoveryActivity::class.java).apply {
+                action = SupervisionPinRecoveryActivity.ACTION_SETUP_VERIFIED
+            }
+        val resultIntent =
+            Intent().apply {
+                putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, EXPECTED_SUPERVISION_RECOVERY_INFO)
+            }
+
+        ActivityScenario.launch<SupervisionPinRecoveryActivity>(intent).use { scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivity,
+                    Activity.RESULT_OK,
+                    null,
+                )
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivity,
+                    Activity.RESULT_OK,
+                    resultIntent,
+                )
+
+                verify(FeatureFactory.featureFactory.metricsFeatureProvider)
+                    .action(eq(activity), eq(expectedMetric), eq(true))
+            }
+        }
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_METRICS)
+    fun onVerification_setupVerifiedAction_noMetricsLogWhenFlagDisabled() {
+        val expectedMetric = SettingsEnums.ACTION_SUPERVISION_ADD_RECOVERY_POST_SETUP_SUCCESS
+        val intent =
+            Intent(context, SupervisionPinRecoveryActivity::class.java).apply {
+                action = SupervisionPinRecoveryActivity.ACTION_SETUP_VERIFIED
+            }
+        val resultIntent =
+            Intent().apply {
+                putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, EXPECTED_SUPERVISION_RECOVERY_INFO)
+            }
+
+        ActivityScenario.launch<SupervisionPinRecoveryActivity>(intent).use { scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivity,
+                    Activity.RESULT_OK,
+                    null,
+                )
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivity,
+                    Activity.RESULT_OK,
+                    resultIntent,
+                )
+
+                verify(metricsRule.metricsFeatureProvider, never())
+                    .action(any(), eq(expectedMetric), eq(false))
+            }
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_METRICS)
+    fun onVerification_postSetupVerifyAction_successfulResult_logsVerifyMetric() {
+        val expectedMetric = SettingsEnums.ACTION_SUPERVISION_VERIFY_RECOVERY_SUCCESS
+        val intent =
+            Intent(context, SupervisionPinRecoveryActivity::class.java).apply {
+                action = SupervisionPinRecoveryActivity.ACTION_POST_SETUP_VERIFY
+            }
+        val resultIntent =
+            Intent().apply {
+                putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, EXPECTED_SUPERVISION_RECOVERY_INFO)
+            }
+
+        ActivityScenario.launch<SupervisionPinRecoveryActivity>(intent).use { scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivity,
+                    Activity.RESULT_OK,
+                    null,
+                )
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivity,
+                    Activity.RESULT_OK,
+                    resultIntent,
+                )
+
+                verify(FeatureFactory.featureFactory.metricsFeatureProvider)
+                    .action(eq(activity), eq(expectedMetric), eq(true))
+            }
+        }
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_METRICS)
+    fun onVerification_postSetupVerifyAction_noMetricsLogWhenFlagDisabled() {
+        val expectedMetric = SettingsEnums.ACTION_SUPERVISION_VERIFY_RECOVERY_SUCCESS
+        val intent =
+            Intent(context, SupervisionPinRecoveryActivity::class.java).apply {
+                action = SupervisionPinRecoveryActivity.ACTION_POST_SETUP_VERIFY
+            }
+        val resultIntent =
+            Intent().apply {
+                putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, EXPECTED_SUPERVISION_RECOVERY_INFO)
+            }
+
+        ActivityScenario.launch<SupervisionPinRecoveryActivity>(intent).use { scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivity,
+                    Activity.RESULT_OK,
+                    null,
+                )
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivity,
+                    Activity.RESULT_OK,
+                    resultIntent,
+                )
+
+                verify(metricsRule.metricsFeatureProvider, never())
+                    .action(any(), eq(expectedMetric), eq(false))
+            }
+        }
+    }
+
     @Test
     fun onVerification_setupVerifiedAction_successfulResult_setsRecoveryInfoAndFinishes() {
         // Test scenario where the PIN recovery verification for SETUP_VERIFIED action completes
@@ -507,6 +702,8 @@ class SupervisionPinRecoveryActivityTest {
 
                 // Verifies that supervisionRecoveryInfo is set correctly.
                 verifySupervisionRecoveryInfo(EXPECTED_SUPERVISION_RECOVERY_INFO)
+
+                verifyNoInteractions(FeatureFactory.featureFactory.metricsFeatureProvider)
 
                 assertEquals(testActivityResult, shadowActivity.resultCode)
                 assertThat(activity.isFinishing).isTrue()

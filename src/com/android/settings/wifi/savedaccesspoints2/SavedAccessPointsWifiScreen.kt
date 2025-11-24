@@ -52,6 +52,10 @@ open class SavedAccessPointsWifiScreen :
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.saved_networks_purpose
+
     override val title: Int
         get() = R.string.wifi_saved_access_points_label
 

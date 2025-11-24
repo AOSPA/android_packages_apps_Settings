@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"使用<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>。<xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g>將從 <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>開始。"</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"使用<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>。沒有日光節約時間。"</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"日光節約時間"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"標準時間"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"依區域選取"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"依 GMT 時差選取"</string>
@@ -364,7 +362,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"位置"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"使用位置資訊"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"關閉"</string>
-    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{已開啟/# 個應用程式可存取位置資訊}other{已開啟/# 個應用程式可存取位置資訊}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{已開啟/ # 個應用程式可存取位置資訊}other{已開啟/ # 個應用程式可存取位置資訊}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"載入中…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"如果應用程式具有鄰近裝置權限，就能判斷連結裝置的相對位置。"</string>
     <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"應用程式和服務的位置存取權已關閉。你撥打緊急電話號碼時，裝置位置資訊仍可能會傳送給緊急應變人員。"</string>
@@ -2636,12 +2634,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"擴展深色主題"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"自動在大多數不支援的應用程式中套用深色主題，提升瀏覽和使用體驗。不過，部分應用程式可能無法正常顯示。"</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"強制反轉, 色彩反轉, 對比"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"擴展深色主題"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"擴展深色主題設定"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"開啟擴展深色主題設定"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"移除動畫"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"減少畫面上的動態效果"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"文字游標閃爍"</string>
@@ -4604,8 +4599,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"授權給這個應用程式，允許讀取、修改及刪除這部裝置或任何已連結儲存空間的所有檔案。應用程式獲得授權後，可能會在你不知情的情況下存取檔案。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以存取所有檔案"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"螢幕自動化"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"允許這個應用程式對其他應用程式執行完全自動化作業"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"這個應用程式將能控制你的其他應用程式。螢幕自動化作業期間，你無法使用受控應用程式，但隨時可以停止自動化作業。"</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"每次都詢問"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"一律允許"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"不允許"</string>
@@ -6029,10 +6028,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"驗證備援資訊"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"應用程式商店篩選條件"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"根據內容級別篩選應用程式"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"各商店的內容分級標準不同，因此應用程式在不同商店的內容分級可能有差異。"</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"依內容分級篩選應用程式"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"網路內容篩選器"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"網站篩選器, 封鎖網站, 瀏覽器篩選器, 封鎖露骨內容網站, 篩選網站, 封鎖搜尋結果, 篩選露骨搜尋結果, 內容限制"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"在這支手機上，協助篩除部分應用程式和瀏覽器中的露骨內容。其他應用程式、裝置或瀏覽器仍可能顯示這類內容。"</string>
@@ -6123,4 +6120,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"衛星連線"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"沒有 Wi-Fi 或行動網路時，也能保持連線"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"衛星到達網頁"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>
