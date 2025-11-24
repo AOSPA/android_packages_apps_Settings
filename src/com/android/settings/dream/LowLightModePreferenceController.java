@@ -17,7 +17,6 @@
 package com.android.settings.dream;
 
 import static android.provider.Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_LOW_LIGHT_CLOCK_DREAM;
-import static android.provider.Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_SCREEN_OFF;
 import static android.os.Flags.lowLightDreamBehavior;
 
 import android.annotation.StringRes;
@@ -101,8 +100,6 @@ public class LowLightModePreferenceController extends TogglePreferenceController
     @StringRes
     static int getSummaryResId(DreamBackend backend) {
         switch (backend.getLowLightDisplayBehavior()) {
-            case LOW_LIGHT_DISPLAY_BEHAVIOR_SCREEN_OFF:
-                return R.string.low_light_display_behavior_screen_off_full_summary;
             case LOW_LIGHT_DISPLAY_BEHAVIOR_LOW_LIGHT_CLOCK_DREAM:
             default:
                 return R.string.low_light_display_behavior_low_light_clock_dream_full_summary;
