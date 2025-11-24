@@ -94,6 +94,9 @@ class SupervisionPinRecoveryPreference :
                 )
                 .show()
         }
+        if (Flags.enableSupervisionSettingsUiUpdates()) {
+            lifeCycleContext.notifyPreferenceChange(KEY)
+        }
     }
 
     override fun onPreferenceClick(preference: Preference): Boolean {
