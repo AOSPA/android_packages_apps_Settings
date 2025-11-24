@@ -53,7 +53,7 @@ import com.android.settings.network.telephony.SubscriptionRepository;
 import com.android.settings.spa.SpaActivity;
 import com.android.settings.utils.SubIdBundleUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-import com.android.settingslib.metadata.KeyParameters;
+import com.android.settingslib.metadata.ValidatedKeyParameters;
 
 import kotlin.Unit;
 
@@ -214,7 +214,7 @@ public class ApnSettings extends RestrictedDashboardFragment
 
     private int getSubIdFromBindingArgs() {
         if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters()) {
-            final KeyParameters parameters =
+            final ValidatedKeyParameters parameters =
                     getPreferenceScreenBindingKeyParameters(requireContext());
             if (parameters == null) {
                 return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
