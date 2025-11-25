@@ -14,21 +14,23 @@
  * limitations under the License.
  */
 
-package com.android.settings.utils
+package com.android.settings.device
 
 import android.content.Context
-import com.android.settings.R
-import com.android.settings.flags.Flags
+import com.android.settings.core.BasePreferenceController
+import com.android.settings.utils.DesktopSettingsUtils
 
-class DesktopSettingsUtils {
-    companion object {
-        /**
-         * Returns true if the top-level device category should be shown.
-         */
-        @JvmStatic
-        fun shouldShowTopLevelDeviceCategory(context: Context): Boolean {
-            return Flags.showTopLevelDeviceCategory() &&
-                context.resources.getBoolean(R.bool.config_show_top_level_device_category)
+/**
+ * A [BasePreferenceController] for the top-level "Device" category.
+ */
+class TopLevelDevicePreferenceController(context: Context, preferenceKey: String) :
+    BasePreferenceController(context, preferenceKey) {
+
+    override fun getAvailabilityStatus(): Int {
+        return if (DesktopSettingsUtils.shouldShowTopLevelDeviceCategory(mContext)) {
+            AVAILABLE
+        } else {
+            UNSUPPORTED_ON_DEVICE
         }
     }
 }
