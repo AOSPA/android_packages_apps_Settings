@@ -92,12 +92,15 @@ class KeyboardShortcutPreference(context: Context, targets: Set<String>) :
         val voiceAccessTargetName = ShortcutUtils.getVoiceAccessTargetName(context)
         val targetsContainsScreenReader =
             targetsContainsScreenReader(ShortcutUtils.getScreenReaderTargetName(context))
+        val selectToSpeakTargetName = ShortcutUtils.getSelectToSpeakTargetName(context)
 
-        // Keyboard shortcut is only currently available for Magnification, Voice Access, and
-        // TalkBack.
+        // Keyboard shortcut is only currently available for Magnification, Voice Access, TalkBack,
+        // and Select to Speak.
         return targets.contains(MAGNIFICATION_CONTROLLER_NAME) ||
             targets.contains(voiceAccessTargetName) ||
-            targetsContainsScreenReader
+            targetsContainsScreenReader ||
+            (com.android.hardware.input.Flags.enableSelectToSpeakKeyGestures() &&
+                targets.contains(selectToSpeakTargetName))
     }
 
     override fun onCreate(context: PreferenceLifecycleContext) {
