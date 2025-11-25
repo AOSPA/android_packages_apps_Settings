@@ -35,6 +35,9 @@ import android.hardware.usb.UsbPortStatus;
 import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.os.SystemProperties;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.PreferenceScreen;
 
@@ -51,6 +54,7 @@ import com.android.settingslib.fuelgauge.BatteryUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -69,6 +73,8 @@ public class BatteryHeaderTextPreferenceControllerTest {
     private static final int BATTERY_LEVEL = 60;
     private static final String TIME_LEFT = "2h30min";
     private static final String BATTERY_STATUS = "Charging";
+
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock private PreferenceScreen mPreferenceScreen;
     @Mock private BatteryInfo mBatteryInfo;
@@ -388,6 +394,45 @@ public class BatteryHeaderTextPreferenceControllerTest {
         verify(mBatteryHeaderTextPreference).setText(expected);
     }
 
+    @Test
+    @EnableFlags(android.os.Flags.FLAG_BATTERY_CHARGING_INFO_API)
+    public void updateBatteryStatus_flagOnForceFullCharge_showsForceChargeLabel() {
+        when(mFactory.batterySettingsFeatureProvider.isForceFullCharge(mContext)).thenReturn(true);
+        final String expectedLabel = "Force full charge";
+        when(mFactory.batterySettingsFeatureProvider.getForceFullChargeLabel(mContext))
+                .thenReturn(expectedLabel);
+
+        mController.updateBatteryStatus(/* label= */ null, mBatteryInfo);
+
+        verify(mBatteryHeaderTextPreference).setText(expectedLabel);
+    }
+
+    @Test
+    @DisableFlags(android.os.Flags.FLAG_BATTERY_CHARGING_INFO_API)
+    public void updateBatteryStatus_flagOffForceFullCharge_notShowsForceChargeLabel() {
+        when(mFactory.batterySettingsFeatureProvider.isForceFullCharge(mContext)).thenReturn(true);
+        final String expectedLabel = "Force full charge";
+        when(mFactory.batterySettingsFeatureProvider.getForceFullChargeLabel(mContext))
+                .thenReturn(expectedLabel);
+
+        mController.updateBatteryStatus(/* label= */ null, mBatteryInfo);
+
+        verify(mBatteryHeaderTextPreference, never()).setText(expectedLabel);
+    }
+
+    @Test
+    @EnableFlags(android.os.Flags.FLAG_BATTERY_CHARGING_INFO_API)
+    public void updateBatteryStatus_flagOnForceFullChargeNullLabel_showsNormalLabel() {
+        mBatteryInfo.remainingLabel = "remaining label";
+        when(mFactory.batterySettingsFeatureProvider.isForceFullCharge(mContext)).thenReturn(true);
+        when(mFactory.batterySettingsFeatureProvider.getForceFullChargeLabel(mContext))
+                .thenReturn(null);
+
+        mController.updateBatteryStatus(/* label= */ null, mBatteryInfo);
+
+        verify(mBatteryHeaderTextPreference).setText(mBatteryInfo.remainingLabel);
+    }
+
     private BatteryInfo arrangeUpdateBatteryStatusTestWithRemainingLabel(
             String remainingLabel,
             String statusLabel,
@@ -467,6 +512,45 @@ public class BatteryHeaderTextPreferenceControllerTest {
                 .setText(
                         mContext.getString(
                                 com.android.settingslib.R.string.battery_info_status_not_charging));
+    }
+
+    @Test
+    @EnableFlags(android.os.Flags.FLAG_BATTERY_CHARGING_INFO_API)
+    public void updateHeaderPreference_flagOnForceFullCharge_showsForceChargeLabel() {
+        when(mFactory.batterySettingsFeatureProvider.isForceFullCharge(mContext)).thenReturn(true);
+        final String expectedLabel = "Force full charge";
+        when(mFactory.batterySettingsFeatureProvider.getForceFullChargeLabel(mContext))
+                .thenReturn(expectedLabel);
+
+        mController.updateHeaderPreference(mBatteryInfo);
+
+        verify(mBatteryHeaderTextPreference).setText(expectedLabel);
+    }
+
+    @Test
+    @DisableFlags(android.os.Flags.FLAG_BATTERY_CHARGING_INFO_API)
+    public void updateHeaderPreference_flagOffForceFullCharge_notShowsForceChargeLabel() {
+        when(mFactory.batterySettingsFeatureProvider.isForceFullCharge(mContext)).thenReturn(true);
+        final String expectedLabel = "Force full charge";
+        when(mFactory.batterySettingsFeatureProvider.getForceFullChargeLabel(mContext))
+                .thenReturn(expectedLabel);
+
+        mController.updateHeaderPreference(mBatteryInfo);
+
+        verify(mBatteryHeaderTextPreference, never()).setText(expectedLabel);
+    }
+
+    @Test
+    @EnableFlags(android.os.Flags.FLAG_BATTERY_CHARGING_INFO_API)
+    public void updateHeaderPreference_flagOnForceFullChargeNullLabel_showsNormalLabel() {
+        when(mFactory.batterySettingsFeatureProvider.isForceFullCharge(mContext)).thenReturn(true);
+        when(mFactory.batterySettingsFeatureProvider.getForceFullChargeLabel(mContext))
+                .thenReturn(null);
+        mBatteryInfo.remainingLabel = "remaining label";
+
+        mController.updateHeaderPreference(mBatteryInfo);
+
+        verify(mBatteryHeaderTextPreference).setText(mBatteryInfo.remainingLabel);
     }
 
     @Test
