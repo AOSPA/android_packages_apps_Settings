@@ -104,6 +104,7 @@ public class WifiHotspotRepository {
     @VisibleForTesting
     Boolean mIsConfigShowSpeed;
     private Boolean mIsSpeedFeatureAvailable;
+    private Boolean mEnhancedOpenOweOnly;
 
     @VisibleForTesting
     SoftApCallback mSoftApCallback = new SoftApCallback();
@@ -286,8 +287,10 @@ public class WifiHotspotRepository {
                log("Setting band to 2GHz for Enhanced open");
                configBuilder.setBand(BAND_2GHZ);
            } else if (config.getBand() == BAND_2GHZ || config.getBand() == BAND_2GHZ_5GHZ) {
-               log("OWE to OWE_TRANSITION for 2.4 or 5 GHz");
-               securityType = SECURITY_TYPE_WPA3_OWE_TRANSITION;
+               if (!isEnhancedOpenOweOnlyEnabled()) {
+                   log("OWE to OWE_TRANSITION for 2.4 or 5 GHz");
+                   securityType = SECURITY_TYPE_WPA3_OWE_TRANSITION;
+               }
            }
         }
         configBuilder.setPassphrase(passphrase, securityType);
@@ -439,7 +442,11 @@ public class WifiHotspotRepository {
             if ((passphrase.length() >= 8) && (config.getBand() & BAND_6GHZ) != 0) {
                 if (config.getSecurityType() == SECURITY_TYPE_WPA3_OWE &&
                     speedType != SPEED_2GHZ_5GHZ) {
-                    configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE_TRANSITION);
+                    if (!isEnhancedOpenOweOnlyEnabled()) {
+                        configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE_TRANSITION);
+                    } else {
+                        configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE);
+                    }
                 } else {
                     configBuilder.setPassphrase(
                             generatePassword(config), SECURITY_TYPE_WPA3_SAE_TRANSITION);
@@ -545,6 +552,17 @@ public class WifiHotspotRepository {
         if (m6gAvailable != null) {
             m6gAvailable.setValue(is6gAvailable());
         }
+    }
+
+    /**
+     * Return whether Enhanced Open with OWE only enabled or not.
+     */
+    public boolean isEnhancedOpenOweOnlyEnabled() {
+        if (mEnhancedOpenOweOnly == null) {
+            mEnhancedOpenOweOnly = mAppContext.getResources()
+                    .getBoolean(R.bool.config_vendor_wifi_tethering_use_owe_only);
+        }
+        return mEnhancedOpenOweOnly;
     }
 
     /**
