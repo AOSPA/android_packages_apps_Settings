@@ -902,7 +902,7 @@
     <string name="lock_last_pin_attempt_before_wipe_device" msgid="2815681042623708775">"‏اگر آپ نے اگلی کوشش میں غلط PIN درج کیا، تو اس آلے کا ڈیٹا حذف کر دیا جائے گا"</string>
     <string name="lock_last_password_attempt_before_wipe_device" msgid="985126164175708507">"اگر آپ نے اگلی کوشش میں غلط پاس ورڈ درج کیا، تو اس آلے کا ڈیٹا حذف کر دیا جائے گا"</string>
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="8283944727199433440">"اگر آپ نے اگلی کوشش میں غلط پیٹرن درج کیا، تو اس صارف کو حذف کر دیا جائے گا"</string>
-    <string name="lock_last_pin_attempt_before_wipe_user" msgid="972834567684477451">"‏اگر آپ نے اگلی کوشش میں غلط PIN درج کیا، تو اس صارف کو حذف کر دیا جائے گا"</string>
+    <string name="lock_last_pin_attempt_before_wipe_user" msgid="972834567684477451">"‏اگر آپ نے اگلی کوشش میں غلط PIN درج کیا ہے تو اس صارف کو حذف کر دیا جائے گا"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="3797239847079686727">"اگر آپ نے اگلی کوشش میں غلط پاس ورڈ درج کیا، تو اس صارف کو حذف کر دیا جائے گا"</string>
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"اگر آپ نے اگلی کوشش میں غلط پیٹرن درج کیا تو آپ کا دفتری پروفائل اور اس کا ڈیٹا حذف کر دیا جائے گا"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"‏اگر آپ نے اگلی کوشش میں غلط PIN درج کیا تو آپ کا دفتری پروفائل اور اس کا ڈیٹا حذف کر دیا جائے گا"</string>
@@ -3227,7 +3227,7 @@
     <string name="credentials_not_erased" msgid="3611058412683184031">"اسناد کا اسٹوریج صاف نہیں کیا جا سکا۔"</string>
     <string name="usage_access_title" msgid="8784394396356369568">"ایپ کے استعمال کے ڈیٹا تک رسائی والی ایپس"</string>
     <string name="ca_certificate" msgid="3076484307693855611">"‏CA سرٹیفکیٹ"</string>
-    <string name="user_certificate" msgid="6897024598058566466">"‏VPN اور ایپ صارف کا سرٹیفکیٹ"</string>
+    <string name="user_certificate" msgid="6897024598058566466">"‏‫VPN اور ایپ صارف کا سرٹیفکیٹ"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"‏Wi-Fi کا سرٹیفکیٹ"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"آپ کا ڈیٹا نجی نہیں رہے گا"</string>
     <string name="ca_certificate_warning_description" msgid="8409850109551028774">"‏CA سرٹیفکیٹس کو مرموزکاری کے لیے ویب سائٹس، ایپس اور VPNs کے ذریعے استعمال کیا جاتا ہے۔ صرف ان تنظیموں سے CA سرٹیفکیٹس انسٹال کریں جن پر آپ کو اعتماد ہے۔ \n\nاگر آپ CA سرٹیفکیٹ انسٹال کرتے ہیں تو سرٹیفکیٹ کا مالک آپ کی ملاحظہ کردہ ویب سائٹس یا آپ کی استعمال کردہ ایپس سے پاس ورڈز یا کریڈٹ کارڈ کی تفصیلات جیسے آپ کے ڈیٹا تک رسائی حاصل کر سکتا ہے - اگرچہ آپ کا ڈیٹا مرموز کردہ ہو۔"</string>
@@ -3666,6 +3666,10 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"‏بلوٹوتھ، Android Auto، ڈرائیونگ موڈ"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"‏بلوٹوتھ، Android Auto، ‏NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"‏بلوٹوتھ، Android Auto"</string>
+    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
+    <skip />
+    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"‏دستیاب نہیں ہے کیونکہ NFC آف ہے"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"استعمال کرنے کے لیے، پہلے کوئی ادائیگی ایپ انسٹال کریں"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"حالیہ ایپس، ڈیفالٹ ایپس"</string>
@@ -4694,14 +4698,6 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"آپ کی سیکیورٹی کے لیے، اعلی تحفظ کے لیے اس ترتیب کو بند رکھنے کی ضرورت ہے"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"آپ کی سکیورٹی کے لیے، اعلی تحفظ اس ایکشن کو روک دیتا ہے"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"ترتیبات"</string>
-    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
-    <skip />
-    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
-    <skip />
-    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
-    <skip />
-    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
-    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"آف کریں"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"آن کریں"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"دکھائیں"</string>
