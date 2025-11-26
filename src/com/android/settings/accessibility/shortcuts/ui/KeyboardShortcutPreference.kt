@@ -1,0 +1,137 @@
+/*
+ * Copyright (C) 2025 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.accessibility.shortcuts.ui
+
+import android.content.ComponentName
+import android.content.Context
+import android.provider.Settings
+import androidx.preference.Preference
+import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
+import com.android.internal.accessibility.util.ShortcutUtils
+import com.android.server.accessibility.Flags
+import com.android.settings.R
+import com.android.settings.accessibility.shared.utils.getAccessibilityFeatureName
+import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
+import com.android.settingslib.datastore.HandlerExecutor
+import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
+import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.PreferenceSummaryProvider
+
+class KeyboardShortcutPreference(context: Context, targets: Set<String>) :
+    ShortcutOptionPreference(context, UserShortcutType.KEY_GESTURE, targets),
+    PreferenceSummaryProvider,
+    PreferenceAvailabilityProvider,
+    PreferenceLifecycleProvider {
+    override val key: String
+        get() = KEY
+
+    override val title: Int
+        get() = R.string.accessibility_shortcut_edit_dialog_title_keyboard
+
+    private var observer: KeyedObserver<String>? = null
+
+    override fun getSummary(context: Context): CharSequence? {
+        if (targets.size > 1) {
+            return null
+        }
+
+        val targetName = targets.single()
+
+        val shortcutKeyCode: String? = ShortcutUtils.getKeyCodeLabelFromTarget(context, targetName)
+        val shortcutFeatureName: CharSequence? = getAccessibilityFeatureName(context, targetName)
+
+        val meta: String? = context.getString(R.string.modifier_keys_meta)
+        val alt: String? = context.getString(R.string.modifier_keys_alt)
+
+        return context.getString(
+            R.string.accessibility_shortcut_edit_dialog_summary_keyboard,
+            meta,
+            alt,
+            shortcutKeyCode,
+            shortcutFeatureName,
+        )
+    }
+
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
+
+        // TODO(b/453743837): Get vector image for keyboard shortcut.
+        // if (preference is ShortcutOptionWidget) {
+        //     preference.setIntroImageResId(R.drawable.accessibility_shortcut_type_keyboard)
+        // }
+    }
+
+    override fun isAvailable(context: Context): Boolean {
+        if (
+            !Flags.enableKeyGestureShortcutSettings() ||
+                targets.size > 1 ||
+                !InputPeripheralsSettingsUtils.isHardKeyboard()
+        ) {
+            return false
+        }
+
+        val voiceAccessTargetName = ShortcutUtils.getVoiceAccessTargetName(context)
+        val targetsContainsScreenReader =
+            targetsContainsScreenReader(ShortcutUtils.getScreenReaderTargetName(context))
+
+        // Keyboard shortcut is only currently available for Magnification, Voice Access, and
+        // TalkBack.
+        return targets.contains(MAGNIFICATION_CONTROLLER_NAME) ||
+            targets.contains(voiceAccessTargetName) ||
+            targetsContainsScreenReader
+    }
+
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        super.onCreate(context)
+        observer =
+            KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(key) }
+                .also {
+                    SettingsSecureStore.get(context)
+                        .addObserver(
+                            key = KEYBOARD_SHORTCUT_SETTING,
+                            observer = it,
+                            executor = HandlerExecutor.main,
+                        )
+                }
+    }
+
+    override fun onDestroy(context: PreferenceLifecycleContext) {
+        super.onDestroy(context)
+        observer?.let {
+            SettingsSecureStore.get(context).removeObserver(KEYBOARD_SHORTCUT_SETTING, it)
+        }
+    }
+
+    private fun targetsContainsScreenReader(screenReaderTargetName: String): Boolean {
+        val screenReaderComponentName = ComponentName.unflattenFromString(screenReaderTargetName)
+
+        return targets.contains(screenReaderTargetName) ||
+            (screenReaderComponentName != null &&
+                targets.contains(screenReaderComponentName.flattenToString()))
+    }
+
+    companion object {
+        private const val KEY = "shortcut_keyboard_pref"
+        private const val KEYBOARD_SHORTCUT_SETTING =
+            Settings.Secure.ACCESSIBILITY_KEY_GESTURE_TARGETS
+    }
+}
