@@ -17,30 +17,31 @@
 package com.android.settings.spa.app.appinfo
 
 import android.app.admin.DevicePolicyManager
+import android.app.admin.EnforcingAdmin
+import android.app.admin.PolicyEnforcementInfo
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.UserHandle
-import android.os.UserManager
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.util.trace
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settingslib.spa.testutils.delay
 import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
-import com.android.settingslib.spaprivileged.model.app.userId
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
@@ -103,6 +104,12 @@ class AppForceStopButtonTest {
         mockPackageManager.stub {
             on { isPackageStateProtected(PACKAGE_NAME, UserHandle.getUserId(UID)) } doReturn false
         }
+        mockDevicePolicyManager.stub {
+            on { getEnforcingAdminsForPolicy(any(), anyInt()) } doReturn PolicyEnforcementInfo(
+                emptyList<EnforcingAdmin>()
+            )
+        }
+
 
         val admin = appForceStopButton.getAdminRestriction(createApp())
 
