@@ -21,11 +21,15 @@ import android.app.role.RoleManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
+import android.content.Intent
+import android.content.pm.ActivityInfo
+import android.content.pm.ResolveInfo
 import android.content.pm.UserInfo
-import android.os.Build
+import android.os.Looper
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
 import android.provider.Settings.Secure.USER_SETUP_COMPLETE
 import android.provider.Settings.Secure.putInt
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -40,8 +44,8 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
-import org.mockito.kotlin.verifyNoInteractions
 import org.mockito.kotlin.whenever
 import org.robolectric.Robolectric
 import org.robolectric.Shadows.shadowOf
@@ -54,6 +58,7 @@ import org.robolectric.shadows.ShadowDialog
 
 @Config(shadows = [SettingsShadowResources::class])
 @RunWith(AndroidJUnit4::class)
+@EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
 class EnableSupervisionActivityTest {
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockRoleManager = mock<RoleManager>()
@@ -76,12 +81,27 @@ class EnableSupervisionActivityTest {
 
         shadowActivity = shadowOf(mActivity)
         shadowActivity.setCallingPackage(callingPackage)
+        val shadowPackageManager = shadowOf(mActivity.packageManager)
+        val resolveInfo =
+            ResolveInfo().apply {
+                activityInfo =
+                    ActivityInfo().apply {
+                        packageName = callingPackage
+                        name = "TestActivity"
+                    }
+            }
+        shadowPackageManager.addResolveInfoForIntent(
+            Intent(SupervisionManager.ACTION_CONFIRM_SUPERVISION_APPROVAL),
+            resolveInfo,
+        )
+
         Shadow.extract<ShadowContextImpl>(mActivity.baseContext).apply {
             setSystemService(Context.DEVICE_POLICY_SERVICE, mockDevicePolicyManager)
             setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
             setSystemService(Context.ROLE_SERVICE, mockRoleManager)
             setSystemService(Context.USER_SERVICE, mockUserManager)
         }
+        whenever(mockSupervisionManager.hasSupervisionCredentials()).thenReturn(true)
     }
 
     @After
@@ -116,7 +136,7 @@ class EnableSupervisionActivityTest {
         verify(mockRoleManager)
             .addRoleHolderAsUser(any(), any(), any(), any(), any(), captor.capture())
         captor.firstValue.accept(false)
-        verifyNoInteractions(mockSupervisionManager)
+        verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
 
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
         assertThat(mActivity.isFinishing).isTrue()
@@ -171,7 +191,6 @@ class EnableSupervisionActivityTest {
         }
 
     @Test
-    @Config(sdk = [Build.VERSION_CODES.BAKLAVA])
     @DisableFlags(Flags.FLAG_ENABLE_CONFIRMATION_DIALOG_BYPASS)
     fun onCreate_SystemSupervisionHolderAndNotProfileOwnerAndUserSetupCompletedBypassFlagDisabled_CannotSkipUserConfirmation() =
         runBlocking {
@@ -179,6 +198,13 @@ class EnableSupervisionActivityTest {
             whenever(mockRoleManager.getRoleHolders(any())).thenReturn(listOf(callingPackage))
             whenever(mockDevicePolicyManager.isProfileOwnerApp(any())).thenReturn(false)
             putInt(mActivity.contentResolver, USER_SETUP_COMPLETE, 1)
+            val resourceId =
+                mActivity.resources.getIdentifier(
+                    "config_allowedSupervisionRolePackages",
+                    "string",
+                    "android",
+                )
+            SettingsShadowResources.overrideResource(resourceId, "some.other.package")
 
             mActivityController.setup()
 
@@ -222,6 +248,44 @@ class EnableSupervisionActivityTest {
         mActivityController.setup()
 
         assertThat(mActivity.isAllowedPackage(callingPackage)).isFalse()
+    }
+
+    @Test
+    fun onCreate_noCredentials_noRoleApprovalMethods_startsSetupSupervisionActivity() {
+        confirmSupervisionApproval(hasSupervisionCredentials = false)
+    }
+
+    @Test
+    fun onCreate_hasCredentials_noRoleApprovalMethods_doesNotStartSetupSupervisionActivity() {
+        confirmSupervisionApproval(hasSupervisionCredentials = true)
+    }
+
+    private fun confirmSupervisionApproval(hasSupervisionCredentials: Boolean) {
+        val intent = Intent(SupervisionManager.ACTION_CONFIRM_SUPERVISION_APPROVAL)
+        val shadowPackageManager = shadowOf(mActivity.packageManager)
+        val originalResolveInfo = mActivity.packageManager.resolveActivity(intent, 0)
+
+        try {
+            shadowPackageManager.removeResolveInfosForIntent(intent, callingPackage)
+
+            whenever(mockSupervisionManager.hasSupervisionCredentials())
+                .thenReturn(hasSupervisionCredentials)
+            whenever(mockUserManager.users).thenReturn(listOf(SUPERVISING_USER_INFO))
+
+            mActivityController.setup()
+
+            if (hasSupervisionCredentials) {
+                shadowOf(Looper.getMainLooper()).runToEndOfTasks()
+                assertThat(shadowActivity.nextStartedActivity).isNull()
+            } else {
+                val startedIntent = shadowActivity.nextStartedActivity
+                assertThat(startedIntent.component!!.className)
+                    .isEqualTo(SetupSupervisionActivity::class.java.name)
+            }
+        } finally {
+            // Restore state for other tests
+            shadowPackageManager.addResolveInfoForIntent(intent, originalResolveInfo)
+        }
     }
 
     // TODO: b/393418334 - Add show dialog tests when full versions are supported and
