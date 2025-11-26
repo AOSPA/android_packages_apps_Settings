@@ -49,11 +49,11 @@ class WifiCallingScreenTest : SettingsCatalystTestCase() {
 
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun subId_whenFlagIsFalse_andSubIdIsString_fallsBackToDefault() {
+    fun subId_whenFlagIsFalse_andSubIdIsString_getsTheSubIdFromString() {
         val bundle = Bundle().apply { putString(EXTRA_SUB_ID, testSubId.toString()) }
         val screen = createScreen(bundle)
 
-        assertThat(screen.isAvailable(appContext)).isFalse()
+        assertThat(screen.isAvailable(appContext)).isTrue()
     }
 
     @Test
@@ -67,11 +67,11 @@ class WifiCallingScreenTest : SettingsCatalystTestCase() {
 
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun subId_whenFlagIsTrue_andSubIdIsInt_fallsBackToDefault() {
+    fun subId_whenFlagIsTrue_andSubIdIsInt_getsTheSubIdFromInt() {
         val bundle = Bundle().apply { putInt(EXTRA_SUB_ID, testSubId) }
         val screen = createScreen(bundle)
 
-        assertThat(screen.isAvailable(appContext)).isFalse()
+        assertThat(screen.isAvailable(appContext)).isTrue()
     }
 
     @Test

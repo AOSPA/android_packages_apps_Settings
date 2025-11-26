@@ -150,11 +150,11 @@ class ApnSettingsScreenTest : SettingsCatalystTestCase() {
 
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun subId_flagTrue_subIdIsInt_returnsDefault() {
+    fun subId_flagTrue_subIdIsInt_returnsTheSubId() {
         val args = Bundle().apply { putInt(ApnSettings.SUB_ID, subId) }
         val screen = createScreen(args)
 
-        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+        assertThat(screen.getSubId()).isEqualTo(subId)
     }
 
     @Test
@@ -177,11 +177,11 @@ class ApnSettingsScreenTest : SettingsCatalystTestCase() {
 
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun subId_flagFalse_subIdIsString_returnsDefault() {
+    fun subId_flagFalse_subIdIsString_returnsTheSubId() {
         val args = Bundle().apply { putString(ApnSettings.SUB_ID, subId.toString()) }
         val screen = createScreen(args)
 
-        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+        assertThat(screen.getSubId()).isEqualTo(subId)
     }
 
     private fun ApnSettingsScreen.getSubId(): Int {
