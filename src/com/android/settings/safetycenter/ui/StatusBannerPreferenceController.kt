@@ -59,7 +59,6 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
     }
 
     private fun updateUi(statusUiData: StatusUiData?) {
-
         val status = statusUiData ?: return
         val pref = preference ?: return
 
@@ -121,7 +120,10 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
     }
 
     private fun StatusBannerPreference.updateBannerButton(status: StatusUiData) {
-        if (status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK) {
+        if (
+            status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK ||
+                status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_UNKNOWN
+        ) {
             setButtonText(R.string.safety_center_rescan_button)
             setButtonOnClickListener {
                 if (triggerRescan()) {
