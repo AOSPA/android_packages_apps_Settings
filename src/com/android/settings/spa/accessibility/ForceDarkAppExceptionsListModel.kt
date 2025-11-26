@@ -60,6 +60,7 @@ object ForceDarkAppExceptionsPageProvider : SettingsPageProvider {
                     )
                 }
             },
+            noMoreOptions = true,
         )
     }
 }
