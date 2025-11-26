@@ -52,8 +52,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.android.settings.R
 import com.android.settings.supervision.ConfirmSupervisionCredentialsActivity
 import com.android.settings.supervision.SupervisionDashboardActivity
-import com.android.settings.supervision.SupervisionSafeSearchSwitchPreference
-import com.android.settings.supervision.SupervisionSafeSitesSwitchPreference
 import com.android.settings.supervision.TestSupervisionMessengerService
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settingslib.ipc.MessengerServiceClient

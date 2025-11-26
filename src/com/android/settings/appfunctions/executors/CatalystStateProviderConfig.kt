@@ -111,7 +111,7 @@ import com.android.settings.spa.app.catalyst.AppInfoScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
 import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
 import com.android.settings.supervision.SupervisionDashboardScreen
-import com.android.settings.supervision.SupervisionPinManagementScreen
+import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
 import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
 import com.android.settings.system.ResetDashboardScreen
 import com.android.settings.system.SystemDashboardScreen

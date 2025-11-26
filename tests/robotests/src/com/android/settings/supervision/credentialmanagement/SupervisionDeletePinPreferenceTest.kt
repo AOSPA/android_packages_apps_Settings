@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.credentialmanagement
 
 import android.app.Activity
 import android.app.role.RoleManager
@@ -49,8 +49,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.supervision.SupervisionHelper.KEY_RECOVERY_BANNER_DISMISSED
-import com.android.settings.supervision.SupervisionHelper.SHARED_PREFS_NAME
+import com.android.settings.supervision.ConfirmSupervisionCredentialsActivity
+import com.android.settings.supervision.shared.SupervisionHelper.KEY_RECOVERY_BANNER_DISMISSED
+import com.android.settings.supervision.shared.SupervisionHelper.SHARED_PREFS_NAME
 import com.android.settings.testutils.MetricsRule
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
 import com.android.settingslib.metadata.PreferenceLifecycleContext

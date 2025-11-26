@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.credentialmanagement
 
 import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ADD_RECOVERY
@@ -31,7 +31,8 @@ import androidx.annotation.DrawableRes
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
-import com.android.settings.supervision.SupervisionUpdateRecoveryEmailPreference.Companion.asMaskedEmail
+import com.android.settings.supervision.credentialmanagement.SupervisionUpdateRecoveryEmailPreference.Companion.asMaskedEmail
+import com.android.settings.supervision.shared.shouldDisplayPinRecoveryReminders
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext

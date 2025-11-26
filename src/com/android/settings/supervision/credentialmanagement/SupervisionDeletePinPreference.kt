@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.credentialmanagement
 
 import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_DELETE_PIN
@@ -35,6 +35,7 @@ import android.text.Html
 import android.text.Spanned
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.VisibleForTesting
@@ -44,8 +45,12 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.spa.network.getActivity
-import com.android.settings.supervision.SupervisionHelper.KEY_RECOVERY_BANNER_DISMISSED
-import com.android.settings.supervision.SupervisionHelper.SHARED_PREFS_NAME
+import com.android.settings.supervision.ConfirmSupervisionCredentialsActivity
+import com.android.settings.supervision.shared.SupervisionHelper.KEY_RECOVERY_BANNER_DISMISSED
+import com.android.settings.supervision.shared.SupervisionHelper.SHARED_PREFS_NAME
+import com.android.settings.supervision.shared.areAnyUsersExceptCurrentSupervised
+import com.android.settings.supervision.shared.deleteSupervisionData
+import com.android.settings.supervision.shared.supervisionRoleHolders
 import com.android.settingslib.HelpUtils
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -372,8 +377,7 @@ class SupervisionDeletePinPreference() :
      * <p> Called when delete pin dialog confirmation button is clicked.
      */
     fun navigateToDashboard(lifecycleContext: PreferenceLifecycleContext) {
-        val activity =
-            (lifeCycleContext.baseContext.getActivity() as? androidx.activity.ComponentActivity)
+        val activity = (lifeCycleContext.baseContext.getActivity() as? ComponentActivity)
         activity?.onBackPressedDispatcher?.onBackPressed()
     }
 

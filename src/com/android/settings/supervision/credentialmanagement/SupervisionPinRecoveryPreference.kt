@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.credentialmanagement
 
 import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_FORGOT_PIN
@@ -30,6 +30,8 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.spa.network.getActivity
+import com.android.settings.supervision.shared.canLaunchPinRecovery
+import com.android.settings.supervision.shared.isSupervisingCredentialSet
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
