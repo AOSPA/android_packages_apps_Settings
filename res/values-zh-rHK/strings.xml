@@ -1012,12 +1012,9 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"在不同顯示屏間移動滑鼠"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"使用外部顯示屏"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"顯示屏解像度"</string>
-    <!-- no translation found for external_display_resolution_refresh_rate_settings_title (4331709890849304277) -->
-    <skip />
-    <!-- no translation found for external_display_refresh_rate_title (6326813722241312213) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_title (124681567143280861) -->
-    <skip />
+    <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"解像度和更新率"</string>
+    <string name="external_display_refresh_rate_title" msgid="6326813722241312213">"更新率"</string>
+    <string name="external_display_resolution_title" msgid="124681567143280861">"解像度"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"預設連線行為"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"用作獨立顯示屏"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"鏡像內置顯示屏"</string>
@@ -1417,10 +1414,8 @@
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"最高解像度"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"設定至最高解像度時，耗電量會較高。切換解像度後，部分應用程式可能會重新啟動。"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> 乘 <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
-    <!-- no translation found for screen_refresh_rate_displayed_text (8610804817257940684) -->
-    <skip />
-    <!-- no translation found for screen_refresh_rate_a11y (2423288931036941435) -->
-    <skip />
+    <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
+    <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> 赫茲"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"顏色"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"自然"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"強化"</string>
@@ -1555,10 +1550,8 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"此功能會增加耗電量"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"螢幕關閉時顯示上鎖畫面桌布"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"螢幕關閉時隱藏上鎖畫面桌布"</string>
-    <!-- no translation found for doze_always_on_summary_long (7956866501728946221) -->
-    <skip />
-    <!-- no translation found for doze_always_on_summary_short (3301903540897812365) -->
-    <skip />
+    <string name="doze_always_on_summary_long" msgid="7956866501728946221">"在螢幕關閉時顯示時間、日期和其他資料"</string>
+    <string name="doze_always_on_summary_short" msgid="3301903540897812365">"顯示時間、日期和其他資料"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"桌布選項"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"顯示上鎖畫面桌布"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"螢幕長亮模式會顯示上鎖畫面桌布"</string>
@@ -2219,10 +2212,8 @@
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"速度"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"調低"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"調高"</string>
-    <!-- no translation found for mouse_keys_seek_bar_start_label (902491192774832751) -->
-    <skip />
-    <!-- no translation found for mouse_keys_seek_bar_end_label (3225448426565556589) -->
-    <skip />
+    <string name="mouse_keys_seek_bar_start_label" msgid="902491192774832751">"較慢"</string>
+    <string name="mouse_keys_seek_bar_end_label" msgid="3225448426565556589">"較快"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"反向捲動"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"使用主鍵"</string>
     <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"使用字母和數字而非數字鍵盤控制鍵盤"</string>
@@ -3666,6 +3657,10 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"藍牙、Android Auto、駕駛模式"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"藍牙、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"藍牙、Android Auto"</string>
+    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
+    <skip />
+    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"由於 NFC 已關閉，因此無法使用"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"如要使用，請先安裝付款應用程式"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使用的應用程式、預設應用程式"</string>
@@ -4694,14 +4689,6 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"為安全起見，「進階保護功能」要求保持關閉此設定"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"為安全起見，「進階保護功能」禁止此操作"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"設定"</string>
-    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
-    <skip />
-    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
-    <skip />
-    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
-    <skip />
-    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
-    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"關閉"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"開啟"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"顯示"</string>

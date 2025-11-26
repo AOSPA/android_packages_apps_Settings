@@ -1012,12 +1012,9 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Mueve el ratón entre pantallas"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Usar pantalla externa"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolución de pantalla"</string>
-    <!-- no translation found for external_display_resolution_refresh_rate_settings_title (4331709890849304277) -->
-    <skip />
-    <!-- no translation found for external_display_refresh_rate_title (6326813722241312213) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_title (124681567143280861) -->
-    <skip />
+    <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"Resolución y frecuencia de actualización"</string>
+    <string name="external_display_refresh_rate_title" msgid="6326813722241312213">"Frecuencia de actualización"</string>
+    <string name="external_display_resolution_title" msgid="124681567143280861">"Resolución"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"Comportamiento de conexión por defecto"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Usar como pantalla independiente"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Proyectar pantalla integrada"</string>
@@ -1417,10 +1414,8 @@
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Resolución máxima"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"La resolución máxima consume más batería. Cambiar la resolución puede provocar que algunas apps se reinicien."</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> por <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
-    <!-- no translation found for screen_refresh_rate_displayed_text (8610804817257940684) -->
-    <skip />
-    <!-- no translation found for screen_refresh_rate_a11y (2423288931036941435) -->
-    <skip />
+    <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
+    <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> hercios"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Colores"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturales"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Mejorados"</string>
@@ -1555,10 +1550,8 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"Aumenta el uso de la batería"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Mostrar el fondo de la pantalla de bloqueo cuando la pantalla esté apagada"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"Ocultar el fondo de pantalla de la pantalla de bloqueo cuando la pantalla esté apagada"</string>
-    <!-- no translation found for doze_always_on_summary_long (7956866501728946221) -->
-    <skip />
-    <!-- no translation found for doze_always_on_summary_short (3301903540897812365) -->
-    <skip />
+    <string name="doze_always_on_summary_long" msgid="7956866501728946221">"Muestra la hora, la fecha y más información cuando la pantalla está apagada"</string>
+    <string name="doze_always_on_summary_short" msgid="3301903540897812365">"Mostrar la hora, la fecha y más información"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Opciones de fondo de pantalla"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Mostrar fondo de pantalla de la pantalla de bloqueo"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"El fondo de la pantalla de bloqueo se muestra con la pantalla siempre activa"</string>
@@ -1962,7 +1955,7 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verificar patrón"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verificar PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verificar contraseña"</string>
-    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Verifica que eres tú"</string>
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Demuestra que eres tú"</string>
     <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Para transferir las cuentas de Google, los ajustes y más, introduce el patrón de tu otro dispositivo. Tu patrón estará cifrado."</string>
     <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Para transferir las cuentas de Google, los ajustes y más, introduce el PIN de tu otro dispositivo. Tu PIN estará cifrado."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Para transferir las cuentas de Google, los ajustes y más, introduce la contraseña de tu otro dispositivo. Tu contraseña estará cifrada."</string>
@@ -2219,10 +2212,8 @@
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"Velocidad"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Bajar"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Subir"</string>
-    <!-- no translation found for mouse_keys_seek_bar_start_label (902491192774832751) -->
-    <skip />
-    <!-- no translation found for mouse_keys_seek_bar_end_label (3225448426565556589) -->
-    <skip />
+    <string name="mouse_keys_seek_bar_start_label" msgid="902491192774832751">"Más lenta"</string>
+    <string name="mouse_keys_seek_bar_end_label" msgid="3225448426565556589">"Más rápida"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Desplazamiento invertido"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Usar teclas principales"</string>
     <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"Controla el teclado con letras y números en lugar de con el teclado numérico"</string>
@@ -3666,6 +3657,10 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, modo de conducción"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
+    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
+    <skip />
+    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"No está disponible porque el NFC está desactivado"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar esta opción, primero tienes que instalar una aplicación de pagos"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Aplicaciones recientes y aplicaciones predeterminadas"</string>
@@ -4694,14 +4689,6 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Por tu seguridad, Protección Avanzada requiere que este ajuste permanezca desactivado"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Por tu seguridad, Protección Avanzada impide esta acción"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Ajustes"</string>
-    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
-    <skip />
-    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
-    <skip />
-    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
-    <skip />
-    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
-    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Desactivar"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Activar"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Mostrar"</string>

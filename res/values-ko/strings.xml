@@ -1012,12 +1012,9 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"디스플레이 간에 마우스 이동"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"외부 디스플레이 사용"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"디스플레이 해상도"</string>
-    <!-- no translation found for external_display_resolution_refresh_rate_settings_title (4331709890849304277) -->
-    <skip />
-    <!-- no translation found for external_display_refresh_rate_title (6326813722241312213) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_title (124681567143280861) -->
-    <skip />
+    <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"해상도 및 화면 재생 빈도"</string>
+    <string name="external_display_refresh_rate_title" msgid="6326813722241312213">"화면 재생 빈도"</string>
+    <string name="external_display_resolution_title" msgid="124681567143280861">"해상도"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"기본 연결 동작"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"별도 디스플레이로 사용"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"내장 디스플레이 미러링"</string>
@@ -1417,10 +1414,8 @@
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"최대 해상도"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"최대 해상도 사용 시 배터리 사용량이 증가합니다. 해상도를 전환하면 일부 앱이 다시 시작될 수 있습니다."</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g>x<xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
-    <!-- no translation found for screen_refresh_rate_displayed_text (8610804817257940684) -->
-    <skip />
-    <!-- no translation found for screen_refresh_rate_a11y (2423288931036941435) -->
-    <skip />
+    <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g>Hz"</string>
+    <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g>헤르츠"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"색상"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"자연스럽게"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"생생하게"</string>
@@ -1555,10 +1550,8 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"배터리 사용량이 증가함"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"화면이 꺼져 있을 때 잠금 화면 배경화면 표시"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"화면이 꺼져 있을 때 잠금 화면 배경화면 숨기기"</string>
-    <!-- no translation found for doze_always_on_summary_long (7956866501728946221) -->
-    <skip />
-    <!-- no translation found for doze_always_on_summary_short (3301903540897812365) -->
-    <skip />
+    <string name="doze_always_on_summary_long" msgid="7956866501728946221">"화면이 꺼져 있을 때 시간, 날짜 등을 표시합니다."</string>
+    <string name="doze_always_on_summary_short" msgid="3301903540897812365">"시간, 날짜 등 표시"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"배경화면 옵션"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"잠금 화면 배경화면 표시"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"화면 항상 켜기를 사용하면 잠금 화면 배경화면을 볼 수 있습니다."</string>
@@ -2219,10 +2212,8 @@
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"속도"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"줄이기"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"늘리기"</string>
-    <!-- no translation found for mouse_keys_seek_bar_start_label (902491192774832751) -->
-    <skip />
-    <!-- no translation found for mouse_keys_seek_bar_end_label (3225448426565556589) -->
-    <skip />
+    <string name="mouse_keys_seek_bar_start_label" msgid="902491192774832751">"더 느리게"</string>
+    <string name="mouse_keys_seek_bar_end_label" msgid="3225448426565556589">"더 빠르게"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"역방향 스크롤"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"기본 키 사용"</string>
     <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"숫자 키패드 대신 문자와 숫자로 키보드를 제어합니다."</string>
@@ -3666,6 +3657,10 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"블루투스, Android Auto, 운전 모드"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"블루투스, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"블루투스, Android Auto"</string>
+    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
+    <skip />
+    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC가 꺼져 있어 사용할 수 없음"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"사용하려면 먼저 결제 앱을 설치하세요."</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"최근 앱, 기본 앱"</string>
@@ -4694,14 +4689,6 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"보안을 위해 고급 보호를 사용하려면 이 설정을 계속 사용 중지해야 합니다."</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"보안을 위해 고급 보호 기능이 이 작업을 차단합니다"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"설정"</string>
-    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
-    <skip />
-    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
-    <skip />
-    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
-    <skip />
-    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
-    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"사용 중지"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"사용 설정"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"표시"</string>
