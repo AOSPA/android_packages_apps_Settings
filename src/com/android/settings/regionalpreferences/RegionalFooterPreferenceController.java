@@ -31,6 +31,7 @@ import com.android.settingslib.widget.FooterPreference;
 /**
  * Preference controller for regional preference footer.
  */
+@Deprecated
 public class RegionalFooterPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "RegionalFooterPreferenceController";

@@ -18,6 +18,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,7 +38,7 @@ class AppInfoScreenTest {
             on { getApplicationInfo("app.not.found", 0) } doThrow
                 PackageManager.NameNotFoundException()
         }
-        val screen = AppInfoScreen(context, Bundle().apply { putString("pkg", "app.not.found") })
+        val screen = createScreen(context, Bundle().apply { putString("pkg", "app.not.found") })
 
         assertThat(screen.isAvailable(context)).isFalse()
     }
@@ -45,8 +46,16 @@ class AppInfoScreenTest {
     @Test
     fun isAvailable_whenAppInfoIsNotNull_returnsTrue() {
         packageManager.stub { on { getApplicationInfo("app.found", 0) } doReturn ApplicationInfo() }
-        val screen = AppInfoScreen(context, Bundle().apply { putString("pkg", "app.found") })
+        val screen = createScreen(context, Bundle().apply { putString("pkg", "app.found") })
 
         assertThat(screen.isAvailable(context)).isTrue()
+    }
+
+    private fun createScreen(context: Context, args: Bundle): AppInfoScreen {
+        return if (CatalystFlags.catalystUseKeyParameters()) {
+            AppInfoScreen(context, AppInfoScreen.parametersSchema.prepare(args))
+        } else {
+            AppInfoScreen(context, args)
+        }
     }
 }

@@ -1568,6 +1568,9 @@ public class FingerprintSettings extends SubSettings {
         private void setupFingerprintRecognition(
                 @NonNull FingerprintPreference fpref, Fingerprint fp) {
             final View view = fpref.getView();
+            if (view == null) {
+                return;
+            }
             final AccessibilityManager a11y =
                     view.getContext().getSystemService(AccessibilityManager.class);
             if (a11y == null || !a11y.isTouchExplorationEnabled()) return;
@@ -2160,6 +2163,11 @@ public class FingerprintSettings extends SubSettings {
                 mHighlightAnimator.cancel();
                 mHighlightAnimator = null;
             }
+
+            if (mView == null) {
+                return;
+            }
+
             clearDescription();
             mView.removeCallbacks(mClearHighlightRunnable);
             final int backgroundRes = getBackgroundRes(false /* isHighlighted */);

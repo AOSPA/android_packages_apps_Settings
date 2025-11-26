@@ -18,11 +18,8 @@ package com.android.settings.safetycenter.ui
 
 import android.app.settings.SettingsEnums
 import android.content.Context
-import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import com.android.settings.R
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
@@ -42,56 +39,60 @@ class PrivacyControlsFragment : DashboardFragment() {
 
     private val TAG = "PrivacyControlsFragment"
 
-    private var safetyIssuesPreferenceController: SafetyIssuesPreferenceController? = null
     private val viewModel: LiveSafetyCenterViewModel by viewModels {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupSafetyIssuesPreferenceController(viewLifecycleOwner)
-        setupSafetySourcePreferenceControllers(viewLifecycleOwner)
+    override fun getPreferenceScreenResId(): Int {
+        return R.xml.safety_center_privacy_controls_settings
     }
 
-    override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> {
-        val controllers = mutableListOf<AbstractPreferenceController>()
-        safetyIssuesPreferenceController =
-            SafetyIssuesPreferenceController(context, PRIVACY_CONTROLS_ISSUES_KEY)
-        controllers.add(safetyIssuesPreferenceController!!)
-        return controllers
-    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
-    private fun setupSafetySourcePreferenceControllers(owner: LifecycleOwner) {
         val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
         for (controller in allControllers) {
-            if (controller is SafetySourcePreferenceController) {
-                controller.setViewModelAndLifecycle(viewModel, owner)
-                controller.setActivityTaskId(requireActivity().taskId)
+            when (controller) {
+                is SafetyIssuesPreferenceController ->
+                    setupSafetyIssuesPreferenceController(controller)
+                is SafetySourcePreferenceController ->
+                    setupSafetySourcePreferenceController(controller)
             }
         }
     }
 
-    private fun setupSafetyIssuesPreferenceController(owner: LifecycleOwner) {
-        Log.d(TAG, "Setting Up the safety issues preference controller")
-        safetyIssuesPreferenceController?.apply {
-            setViewModelAndLifecycle(viewModel, owner)
-            this.fragmentManager = childFragmentManager
-            this.activityTaskId = requireActivity().taskId
+    override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> =
+        listOf(SafetyIssuesPreferenceController(context, PRIVACY_CONTROLS_ISSUES_KEY))
 
-            val safetySourceIds =
+    private fun setupSafetyIssuesPreferenceController(
+        safetyIssuesPreferenceController: SafetyIssuesPreferenceController
+    ) {
+        Log.d(TAG, "Setting Up the safety issues preference controller")
+        safetyIssuesPreferenceController.apply {
+            viewModel = this@PrivacyControlsFragment.viewModel
+            fragmentManager = childFragmentManager
+            activityTaskId = requireActivity().taskId
+            isSubpage = true
+            relatedSafetySources =
                 SafetyCenterSubpageRegistry.getAllSafetySourceIds(
                     requireContext(),
                     SafetyCenterSubpageRegistry.PRIVACY_CONTROLS_SUBPAGE_KEY,
                 )
-            setSubpageSafetySourcesAndIllustration(safetySourceIds, illustrationPref = null)
+        }
+    }
+
+    private fun setupSafetySourcePreferenceController(
+        safetySourcePreferenceController: SafetySourcePreferenceController
+    ) {
+        val preferenceKey = safetySourcePreferenceController.preferenceKey
+        Log.d(TAG, "Setting up the safety source preference controller for [$preferenceKey]")
+        safetySourcePreferenceController.apply {
+            viewModel = this@PrivacyControlsFragment.viewModel
+            activityTaskId = requireActivity().taskId
         }
     }
 
     override fun getLogTag(): String = TAG
-
-    override fun getPreferenceScreenResId(): Int {
-        return R.xml.safety_center_privacy_controls_settings
-    }
 
     override fun getMetricsCategory(): Int = SettingsEnums.SAFETY_CENTER
 

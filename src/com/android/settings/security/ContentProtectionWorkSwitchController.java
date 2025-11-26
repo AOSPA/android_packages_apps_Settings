@@ -76,7 +76,11 @@ public class ContentProtectionWorkSwitchController extends TogglePreferenceContr
 
         if (mManagedProfile != null) {
             RestrictedSwitchPreference switchPreference = screen.findPreference(getPreferenceKey());
-            if (switchPreference != null) {
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorV2()) {
+                switchPreference.setDisabledByAdmin(
+                        ContentProtectionPreferenceUtils.getContentProtectionEnforcingAdmin(
+                                mContext, mManagedProfile));
+            } else {
                 switchPreference.setDisabledByAdmin(getEnforcedAdmin(mManagedProfile));
             }
         }

@@ -193,9 +193,15 @@ constructor(
         val currentState = _uiState.value ?: return
         // Pre-select the highest refresh rate for the selected resolution
         val newPendingMode =
-            allowedModes.values
-                .filter { it.hasSameResolutionAs(item) }
-                .maxByOrNull { it.refreshRate }
+            if (currentState.currentActiveMode.hasSameResolutionAs(item)) {
+                // If same resolution is selected, choose the currently applied refresh rate instead
+                // of selecting the highest one
+                currentState.currentActiveMode
+            } else {
+                allowedModes.values
+                    .filter { it.hasSameResolutionAs(item) }
+                    .maxByOrNull { it.refreshRate }
+            }
         // Selected mode must be coming from allowedModes, and should exist here
         if (newPendingMode == null) {
             logWarn("No supported mode found for resolution item: $item")
@@ -265,11 +271,18 @@ constructor(
         }
     }
 
-    private fun buildRefreshRateItems(resolutionSelectedMode: Mode) =
-        allowedModes.values
-            .filter { it.hasSameResolutionAs(resolutionSelectedMode) }
-            .sortedByDescending { it.refreshRate }
-            .map { it.toRefreshRateItem() }
+    private fun buildRefreshRateItems(resolutionSelectedMode: Mode): List<RefreshRateItem> {
+        return if (isRefreshRateSyncEnabled) {
+            listOf(
+                RefreshRateItem(resolutionSelectedMode.modeId, resolutionSelectedMode.refreshRate)
+            )
+        } else {
+            allowedModes.values
+                .filter { it.hasSameResolutionAs(resolutionSelectedMode) }
+                .sortedByDescending { it.refreshRate }
+                .map { it.toRefreshRateItem() }
+        }
+    }
 
     private fun updateState(updateAction: (UiState) -> UiState) {
         val currentState = _uiState.value ?: return

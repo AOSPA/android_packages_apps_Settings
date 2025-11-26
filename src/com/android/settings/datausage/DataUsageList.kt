@@ -39,6 +39,7 @@ import com.android.settings.datausage.lib.BillingCycleRepository
 import com.android.settings.datausage.lib.NetworkUsageData
 import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settings.utils.getSubId
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.widget.LayoutPreference
@@ -170,12 +171,7 @@ open class DataUsageList : DashboardFragment() {
                 )
             val localIntent: Intent = intent.clone() as Intent
             if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                subId =
-                    getPreferenceScreenBindingArgs(requireContext())
-                        ?.getSubId(
-                            Settings.EXTRA_SUB_ID,
-                            SubscriptionManager.INVALID_SUBSCRIPTION_ID,
-                        ) ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                subId = getSubIdFromBindingArgs()
 
                 Log.d(
                     TAG,
@@ -194,6 +190,19 @@ open class DataUsageList : DashboardFragment() {
                 )
                     ?: DataUsageUtils.getMobileNetworkTemplateFromSubId(context, localIntent)
                         .getOrNull()
+        }
+    }
+
+    private fun getSubIdFromBindingArgs(): Int {
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            val parameters = getPreferenceScreenBindingKeyParameters(requireContext())
+
+            return parameters?.get(Settings.EXTRA_SUB_ID)?.toIntOrNull()
+                ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
+        } else {
+            return getPreferenceScreenBindingArgs(requireContext())
+                ?.getSubId(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+                ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
         }
     }
 

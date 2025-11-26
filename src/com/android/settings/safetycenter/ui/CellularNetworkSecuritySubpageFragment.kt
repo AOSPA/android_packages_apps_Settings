@@ -21,9 +21,7 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import com.android.settings.R
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.dashboard.DashboardFragment
@@ -34,7 +32,6 @@ import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
 import com.android.settingslib.search.SearchIndexableRaw
-import com.android.settingslib.widget.IllustrationPreference
 
 /**
  * Fragment for displaying Cellular Network Security subpage within the Safety Center in Settings.
@@ -45,7 +42,6 @@ import com.android.settingslib.widget.IllustrationPreference
 @SearchIndexable
 class CellularNetworkSecuritySubpageFragment : DashboardFragment() {
 
-    private var safetyIssuesPreferenceController: SafetyIssuesPreferenceController? = null
     private val viewModel: LiveSafetyCenterViewModel by viewModels {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
     }
@@ -58,11 +54,6 @@ class CellularNetworkSecuritySubpageFragment : DashboardFragment() {
     override fun onCreate(icicle: Bundle?) {
         super.onCreate(icicle)
 
-        safetySourceIds =
-            SafetyCenterSubpageRegistry.getAllSafetySourceIds(
-                requireContext(),
-                SafetyCenterSubpageRegistry.CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY,
-            )
         val entries =
             viewModel
                 .getCurrentSafetyCenterDataAsUiData()
@@ -76,52 +67,57 @@ class CellularNetworkSecuritySubpageFragment : DashboardFragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupIllustration()
-        setupSafetyIssuesPreferenceController(viewLifecycleOwner)
-        setupSafetySourcePreferenceControllers(viewLifecycleOwner)
-    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
-    override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> {
-        val controllers = mutableListOf<AbstractPreferenceController>()
-        safetyIssuesPreferenceController =
-            SafetyIssuesPreferenceController(context, CELLULAR_NETWORK_SECURITY_ISSUES_KEY)
-        controllers.add(safetyIssuesPreferenceController!!)
-        return controllers
-    }
-
-    private fun setupIllustration() {
-        Log.d(TAG, "Setting Up the illustration")
-        val illustrationPreference: IllustrationPreference =
-            findPreference(CELLULAR_NETWORK_SECURITY_ILLUSTRATION_KEY)!!
-        illustrationPreference.imageDrawable =
-            context?.getDrawable(
-                R.drawable.safety_center_cellular_network_security_subpage_illustration
-            )
-    }
-
-    private fun setupSafetyIssuesPreferenceController(owner: LifecycleOwner) {
-        Log.d(TAG, "Setting Up the safety issues preference controller")
-        safetyIssuesPreferenceController?.apply {
-            setViewModelAndLifecycle(viewModel, owner)
-            this.fragmentManager = childFragmentManager
-            this.activityTaskId = requireActivity().taskId
-
-            val illustrationPreference: IllustrationPreference =
-                findPreference(CELLULAR_NETWORK_SECURITY_ILLUSTRATION_KEY)!!
-            setSubpageSafetySourcesAndIllustration(safetySourceIds, illustrationPreference)
+        val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
+        for (controller in allControllers) {
+            when (controller) {
+                is SafetyIssuesPreferenceController ->
+                    setupSafetyIssuesPreferenceController(controller)
+                is SafetySourcePreferenceController ->
+                    setupSafetySourcePreferenceController(controller)
+            }
         }
     }
 
-    private fun setupSafetySourcePreferenceControllers(owner: LifecycleOwner) {
-        Log.d(TAG, "Setting Up the safety source preference controllers")
-        val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
-        for (controller in allControllers) {
-            if (controller is SafetySourcePreferenceController) {
-                controller.setViewModelAndLifecycle(viewModel, owner)
-                controller.setActivityTaskId(requireActivity().taskId)
-            }
+    override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> =
+        listOf(SafetyIssuesPreferenceController(context, CELLULAR_NETWORK_SECURITY_ISSUES_KEY))
+
+    private fun setupSafetyIssuesPreferenceController(
+        safetyIssuesPreferenceController: SafetyIssuesPreferenceController
+    ) {
+        Log.d(TAG, "Setting Up the safety issues preference controller")
+        safetySourceIds =
+            SafetyCenterSubpageRegistry.getAllSafetySourceIds(
+                requireContext(),
+                SafetyCenterSubpageRegistry.CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY,
+            )
+        safetyIssuesPreferenceController.apply {
+            viewModel = this@CellularNetworkSecuritySubpageFragment.viewModel
+            fragmentManager = childFragmentManager
+            activityTaskId = requireActivity().taskId
+            isSubpage = true
+            relatedSafetySources = safetySourceIds
+            illustrationPreferenceKey =
+                SafetyCenterSubpageRegistry.getIllustrationPrefKey(
+                    SafetyCenterSubpageRegistry.CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY
+                )
+            illustrationResId =
+                SafetyCenterSubpageRegistry.getIllustrationResId(
+                    SafetyCenterSubpageRegistry.CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY
+                )
+        }
+    }
+
+    private fun setupSafetySourcePreferenceController(
+        safetySourcePreferenceController: SafetySourcePreferenceController
+    ) {
+        val preferenceKey = safetySourcePreferenceController.preferenceKey
+        Log.d(TAG, "Setting up the safety source preference controller for [$preferenceKey]")
+        safetySourcePreferenceController.apply {
+            viewModel = this@CellularNetworkSecuritySubpageFragment.viewModel
+            activityTaskId = requireActivity().taskId
         }
     }
 
@@ -135,8 +131,6 @@ class CellularNetworkSecuritySubpageFragment : DashboardFragment() {
 
     companion object {
         private const val TAG = "NetworkSecuritySubpage"
-        private const val CELLULAR_NETWORK_SECURITY_ILLUSTRATION_KEY =
-            "cellular_network_security_illustration"
         private const val CELLULAR_NETWORK_SECURITY_ISSUES_KEY =
             "cellular_network_security_issues_banner_group"
 

@@ -42,6 +42,7 @@ import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceControll
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
+import com.android.settingslib.metadata.KeyParameters
 
 /** Fragment that shows the detail screen of an AccessibilityService */
 open class A11yServicePreferenceFragment : DashboardFragment() {
@@ -174,22 +175,13 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
     }
 
     private fun getFeatureComponentName(): ComponentName {
-        val arguments = getFragmentArguments()
-
-        return if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
-            requireNotNull(
-                arguments.getString(AccessibilitySettings.EXTRA_COMPONENT_NAME)?.let {
-                    ComponentName.unflattenFromString(it)
-                }
-            )
-        } else {
-            requireNotNull(
-                arguments.getParcelable(
+        return requireNotNull(
+            getFragmentArguments()
+                .getParcelable(
                     AccessibilitySettings.EXTRA_COMPONENT_NAME,
                     ComponentName::class.java,
                 )
-            )
-        }
+        )
     }
 
     override fun getPreferenceScreenResId(): Int {
@@ -234,6 +226,9 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
         return A11yServiceScreen.KEY
     }
 
+    @Deprecated(
+        "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use getPreferenceScreenBindingKeyParameters instead."
+    )
     override fun getPreferenceScreenBindingArgs(context: Context): Bundle? {
         return if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
             // TODO: b/447555338 - Replace this Bundle with KeyParameters.
@@ -246,6 +241,13 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
         } else {
             getFragmentArguments()
         }
+    }
+
+    override fun getPreferenceScreenBindingKeyParameters(context: Context): KeyParameters? {
+        return A11yServiceScreen.parametersSchema.prepare(
+            AccessibilitySettings.EXTRA_COMPONENT_NAME to
+                getFeatureComponentName().flattenToString()
+        )
     }
 
     /**
