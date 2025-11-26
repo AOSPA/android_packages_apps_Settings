@@ -6201,6 +6201,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:name="Settings$SafetyCenterActivity"
             android:exported="true"
             android:label="@string/safety_center_title"
+            android:launchMode="singleTask"
             android:featureFlag="com.android.settings.flags.enable_safety_center_new_ui">
             <intent-filter android:priority="20">
                 <action android:name="android.intent.action.SAFETY_CENTER"/>

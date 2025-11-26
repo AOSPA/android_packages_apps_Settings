@@ -16,6 +16,7 @@
 
 package com.android.settings.safetycenter.ui
 
+import android.annotation.SuppressLint
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Bundle
@@ -24,6 +25,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import com.android.settings.R
+import com.android.settings.core.SubSettingLauncher
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
@@ -35,6 +37,9 @@ import com.android.settingslib.search.SearchIndexableRaw
 import com.android.settingslib.widget.IllustrationPreference
 
 /** Fragment for displaying Account Security subpage within the Safety Center in Settings. */
+// Suppressing MissingPermission lint: The Settings app holds the MANAGE_SAFETY_CENTER permission,
+// which is required by the SafetyCenterManager APIs used by the ViewModel.
+@SuppressLint("MissingPermission")
 @SearchIndexable
 class AccountSecuritySubpageFragment : DashboardFragment() {
 
@@ -42,9 +47,31 @@ class AccountSecuritySubpageFragment : DashboardFragment() {
     private val viewModel: LiveSafetyCenterViewModel by viewModels {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
     }
+    private var safetySourceIds: List<String> = emptyList()
 
     override fun getPreferenceScreenResId(): Int {
         return R.xml.safety_center_account_security_subpage
+    }
+
+    override fun onCreate(icicle: Bundle?) {
+        super.onCreate(icicle)
+
+        safetySourceIds =
+            SafetyCenterSubpageRegistry.getAllSafetySourceIds(
+                requireContext(),
+                SafetyCenterSubpageRegistry.ACCOUNT_SECURITY_SUBPAGE_KEY,
+            )
+        val entries =
+            viewModel
+                .getCurrentSafetyCenterDataAsUiData()
+                .getDynamicEntriesForSources(safetySourceIds)
+        if (entries.isEmpty()) {
+            Log.d(TAG, "Redirecting from an empty subpage to Safety Center home")
+            SubSettingLauncher(requireContext())
+                .setDestination(SafetyCenterFragment::class.java.getName())
+                .setSourceMetricsCategory(METRICS_CATEGORY_UNKNOWN)
+                .launch()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,11 +106,6 @@ class AccountSecuritySubpageFragment : DashboardFragment() {
 
             val illustrationPreference: IllustrationPreference =
                 findPreference(ACCOUNT_SECURITY_ILLUSTRATION_KEY)!!
-            val safetySourceIds =
-                SafetyCenterSubpageRegistry.getAllSafetySourceIds(
-                    requireContext(),
-                    SafetyCenterSubpageRegistry.ACCOUNT_SECURITY_SUBPAGE_KEY,
-                )
             setSubpageSafetySourcesAndIllustration(safetySourceIds, illustrationPreference)
         }
     }
