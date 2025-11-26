@@ -101,6 +101,16 @@ class SupervisionSetUpPinPreferenceTest {
     }
 
     @Test
+    fun dependencies_returnsCorrectKey() {
+        // Verifies that the preference depends on the PIN management screen.
+        val dependencies = supervisionSetUpPinPreference.dependencies(context)
+
+        // Assert that the correct dependency key is returned.
+        assertThat(dependencies).hasLength(1)
+        assertThat(dependencies[0]).isEqualTo(SupervisionPinManagementScreen.KEY)
+    }
+
+    @Test
     fun onPreferenceClick_launchesCorrectIntent() {
         ActivityScenario.launch(EmptyFragmentActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
