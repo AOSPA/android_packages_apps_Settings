@@ -164,7 +164,7 @@ public class SimSelectNotificationTest {
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.checkPermission(any(), any()))
                 .thenReturn(PackageManager.PERMISSION_GRANTED);
-        when(mUserManager.isMainUser()).thenReturn(true);
+        when(mUserManager.isAdminUser()).thenReturn(true);
         when(mContext.getSharedPreferences(
                 SubscriptionActionDialogActivity.SIM_ACTION_DIALOG_PREFS, MODE_PRIVATE))
                 .thenReturn(mSharedPreferences);
@@ -253,8 +253,8 @@ public class SimSelectNotificationTest {
     }
 
     @Test
-    public void onReceiveEnableMms_userIdIsNotMain_notificationShouldNotSend() {
-        when(mUserManager.isMainUser()).thenReturn(false);
+    public void onReceiveEnableMms_userIdIsNotAdmin_notificationShouldNotSend() {
+        when(mUserManager.isAdminUser()).thenReturn(false);
         Intent intent = new Intent(Settings.ACTION_ENABLE_MMS_DATA_REQUEST);
         intent.putExtra(EXTRA_SUB_ID, mSubId);
         intent.putExtra(EXTRA_ENABLE_MMS_DATA_REQUEST_REASON,
@@ -266,7 +266,7 @@ public class SimSelectNotificationTest {
     }
 
     @Test
-    public void onReceivePrimarySubListChange_userIdIsMain_shouldScheduleJob() {
+    public void onReceivePrimarySubListChange_userIdIsAdmin_shouldScheduleJob() {
         Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
         intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
                 EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA);
@@ -277,8 +277,8 @@ public class SimSelectNotificationTest {
     }
 
     @Test
-    public void onReceivePrimarySubListChange_userIdIsNotMain_notificationShouldNotSend() {
-        when(mUserManager.isMainUser()).thenReturn(false);
+    public void onReceivePrimarySubListChange_userIdIsNotAdmin_notificationShouldNotSend() {
+        when(mUserManager.isAdminUser()).thenReturn(false);
         Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
         intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
                 EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA);
