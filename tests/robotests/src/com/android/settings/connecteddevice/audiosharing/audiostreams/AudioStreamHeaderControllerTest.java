@@ -259,7 +259,6 @@ public class AudioStreamHeaderControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_AUDIO_STREAM_MEDIA_SERVICE_BY_RECEIVE_STATE)
     public void testCallback_onReceiveStateChanged_updateButton() {
         when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
                 .thenReturn(Map.of(BROADCAST_ID, STREAMING));
