@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.accessibility
+package com.android.settings.accessibility.systemcontrols.ui
 
 import android.app.settings.SettingsEnums
 import android.content.Context
@@ -32,7 +32,7 @@ open class SystemControlsScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.system_controls_preference_screen_purpose
 
@@ -68,4 +68,4 @@ open class SystemControlsScreen : PreferenceScreenMixin {
         const val KEY = "system_controls_preference_screen"
     }
 }
-// LINT.ThenChange(SystemControlsFragment.java, SystemControlsPreferenceController.kt)
+// LINT.ThenChange(SystemControlsFragment.java, ../../SystemControlsPreferenceController.kt)

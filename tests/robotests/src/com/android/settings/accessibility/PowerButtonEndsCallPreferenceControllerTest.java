@@ -164,4 +164,4 @@ public class PowerButtonEndsCallPreferenceControllerTest {
                 .isEqualTo(Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF);
     }
 }
-// LINT.ThenChange(PowerButtonEndsCallPreferenceTest.kt)
+// LINT.ThenChange(systemcontrols/ui/PowerButtonEndsCallPreferenceTest.kt)
