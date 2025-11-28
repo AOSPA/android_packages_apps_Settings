@@ -273,8 +273,10 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         val resolutionPref = category.findPreference<Preference>(PrefInfo.DISPLAY_RESOLUTION.key)!!
         resolutionPref.onPreferenceClickListener!!.onPreferenceClick(resolutionPref)
 
+        val formattedResolution = "${display.mode?.physicalWidth} x ${display.mode?.physicalHeight}"
+        val formattedRefreshRate = "%.2f".format(display.mode?.refreshRate)
         assertThat(resolutionPref.summary.toString())
-            .isEqualTo("${display.mode?.physicalWidth} x ${display.mode?.physicalHeight}")
+            .isEqualTo(("$formattedResolution ($formattedRefreshRate Hz)"))
         assertThat(fragment.writtenMetricsPreference).isEqualTo(resolutionPref)
         assertThat(fragment.resolutionSelectorLaunchDisplayId).isEqualTo(EXTERNAL_DISPLAY_ID)
     }
