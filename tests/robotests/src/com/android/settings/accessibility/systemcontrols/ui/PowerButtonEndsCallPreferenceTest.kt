@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.accessibility
+package com.android.settings.accessibility.systemcontrols.ui
 
 import android.content.Context
 import android.content.ContextWrapper
@@ -126,4 +126,4 @@ class PowerButtonEndsCallPreferenceTest {
                 },
             )
 }
-// LINT.ThenChange(PowerButtonEndsCallPreferenceControllerTest.java)
+// LINT.ThenChange(../../PowerButtonEndsCallPreferenceControllerTest.java)

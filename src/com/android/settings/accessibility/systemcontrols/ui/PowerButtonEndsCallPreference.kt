@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.accessibility
+package com.android.settings.accessibility.systemcontrols.ui
 
 import android.app.settings.SettingsEnums.ACTION_POWER_BUTTON_ENDS_CALL
 import android.content.Context
@@ -21,6 +21,7 @@ import android.view.KeyCharacterMap
 import android.view.KeyEvent
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.accessibility.systemcontrols.data.PowerButtonEndsCallDataStore
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
@@ -60,4 +61,4 @@ class PowerButtonEndsCallPreference :
             get() = PowerButtonEndsCallDataStore(this)
     }
 }
-// LINT.ThenChange(PowerButtonEndsCallPreferenceController.java)
+// LINT.ThenChange(../../PowerButtonEndsCallPreferenceController.java)

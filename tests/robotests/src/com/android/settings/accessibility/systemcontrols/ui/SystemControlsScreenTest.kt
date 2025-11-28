@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.accessibility
+package com.android.settings.accessibility.systemcontrols.ui
 
 import com.android.settings.R
 import com.android.settings.flags.Flags
@@ -52,4 +52,4 @@ class SystemControlsScreenTest : SettingsCatalystTestCase() {
         private const val SUPPORT_ONE_HANDED_MODE = "ro.support_one_handed_mode"
     }
 }
-// LINT.ThenChange(SystemControlsFragmentTest.java, SystemControlsPreferenceControllerTest.kt)
+// LINT.ThenChange(SystemControlsFragmentTest.java, ../../SystemControlsPreferenceControllerTest.kt)
