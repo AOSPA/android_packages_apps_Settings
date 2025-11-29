@@ -420,8 +420,12 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             key = intent != null ? intent.getStringExtra(EXTRA_FRAGMENT_ARG_KEY) : null;
         }
         key = PreferenceSearchIndexablesProvider.Companion.getHighlightKey(key);
-        mAdapter = new HighlightablePreferenceGroupAdapter(preferenceScreen, key,
-                mPreferenceHighlighted);
+        mAdapter = new HighlightablePreferenceGroupAdapter(
+                preferenceScreen,
+                key,
+                mPreferenceHighlighted,
+                getFooterDataMap()
+        );
         return mAdapter;
     }
 

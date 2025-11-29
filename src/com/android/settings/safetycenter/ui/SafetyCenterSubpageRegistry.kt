@@ -18,6 +18,7 @@ package com.android.settings.safetycenter.ui
 
 import android.content.Context
 import android.util.Log
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.annotation.XmlRes
 import com.android.settings.R
@@ -29,7 +30,9 @@ import org.xmlpull.v1.XmlPullParser
  *
  * This object serves as the central point for:
  * - Defining preference key constants for all subpages.
- * - Mapping preference keys to their [SubpageConfig] (XML, title, summary, issue-only sources).
+ * - Mapping preference keys to [SubpageConfig] (XML, title, summary, issue-only sources, subpage
+ *   fragment).
+ * - Mapping external subpage IDs to preference keys.
  * - Parsing subpage XMLs to extract configurations from [SafetySourcePreference] tags.
  * - Providing utility functions to retrieve lists of source IDs related to a subpage.
  */
@@ -53,6 +56,15 @@ object SafetyCenterSubpageRegistry {
     const val CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY = "cellular_network_security_subpage"
     const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
 
+    // Illustration Preference Keys
+    private const val APP_SECURITY_ILLUSTRATION_KEY = "app_security_illustration"
+    private const val DEVICE_UNLOCK_ILLUSTRATION_KEY = "device_unlock_illustration"
+    private const val ACCOUNT_SECURITY_ILLUSTRATION_KEY = "account_security_illustration"
+    private const val DEVICE_FINDERS_ILLUSTRATION_KEY = "device_finders_illustration"
+    private const val SYSTEM_AND_UPDATES_ILLUSTRATION_KEY = "system_and_updates_illustration"
+    private const val CELLULAR_NETWORK_SECURITY_ILLUSTRATION_KEY =
+        "cellular_network_security_illustration"
+
     /**
      * Configuration map for each subpage, keyed by the preference key string. Provides the XML
      * resource, title resource, default summary resource, and any issue-only sources.
@@ -61,55 +73,103 @@ object SafetyCenterSubpageRegistry {
         mapOf(
             APP_SECURITY_SUBPAGE_KEY to
                 SubpageConfig(
-                    R.xml.safety_center_app_security_subpage,
-                    R.string.app_security_subpage_title,
-                    R.string.safety_center_app_security_summary,
+                    xmlResId = R.xml.safety_center_app_security_subpage,
+                    titleResId = R.string.app_security_subpage_title,
+                    defaultSummaryResId = R.string.safety_center_app_security_summary,
+                    subpageFragmentClassName = AppSecuritySubpageFragment::class.qualifiedName!!,
+                    illustrationPrefKey = APP_SECURITY_ILLUSTRATION_KEY,
+                    illustrationResId = R.drawable.safety_center_app_security_subpage_illustration,
                 ),
             DEVICE_UNLOCK_SUBPAGE_KEY to
                 SubpageConfig(
-                    R.xml.safety_center_device_unlock_subpage,
-                    R.string.device_unlock_subpage_title,
-                    R.string.safety_center_device_unlock_summary,
-                    listOf("AndroidIdentityCheck"),
+                    xmlResId = R.xml.safety_center_device_unlock_subpage,
+                    titleResId = R.string.device_unlock_subpage_title,
+                    defaultSummaryResId = R.string.safety_center_device_unlock_summary,
+                    subpageFragmentClassName = DeviceUnlockSubpageFragment::class.qualifiedName!!,
+                    issueOnlySources = listOf("AndroidIdentityCheck"),
+                    illustrationPrefKey = DEVICE_UNLOCK_ILLUSTRATION_KEY,
+                    illustrationResId = R.drawable.safety_center_device_unlock_subpage_illustration,
                 ),
             ACCOUNT_SECURITY_SUBPAGE_KEY to
                 SubpageConfig(
-                    R.xml.safety_center_account_security_subpage,
-                    R.string.account_security_subpage_title,
-                    R.string.safety_center_account_security_summary,
+                    xmlResId = R.xml.safety_center_account_security_subpage,
+                    titleResId = R.string.account_security_subpage_title,
+                    defaultSummaryResId = R.string.safety_center_account_security_summary,
+                    subpageFragmentClassName =
+                        AccountSecuritySubpageFragment::class.qualifiedName!!,
+                    illustrationPrefKey = ACCOUNT_SECURITY_ILLUSTRATION_KEY,
+                    illustrationResId =
+                        R.drawable.safety_center_account_security_subpage_illustration,
                 ),
             DEVICE_FINDERS_SUBPAGE_KEY to
                 SubpageConfig(
-                    R.xml.safety_center_device_finders_subpage,
-                    R.string.device_finders_subpage_title,
-                    R.string.safety_center_device_finders_summary,
+                    xmlResId = R.xml.safety_center_device_finders_subpage,
+                    titleResId = R.string.device_finders_subpage_title,
+                    defaultSummaryResId = R.string.safety_center_device_finders_summary,
+                    subpageFragmentClassName = DeviceFindersSubpageFragment::class.qualifiedName!!,
+                    illustrationPrefKey = DEVICE_FINDERS_ILLUSTRATION_KEY,
+                    illustrationResId = R.drawable.safety_center_device_finders_subpage_illustration,
                 ),
             SYSTEM_AND_UPDATES_SUBPAGE_KEY to
                 SubpageConfig(
-                    R.xml.safety_center_system_and_updates_subpage,
-                    R.string.system_and_updates_subpage_title,
-                    R.string.safety_center_system_and_updates_summary,
+                    xmlResId = R.xml.safety_center_system_and_updates_subpage,
+                    titleResId = R.string.system_and_updates_subpage_title,
+                    defaultSummaryResId = R.string.safety_center_system_and_updates_summary,
+                    subpageFragmentClassName =
+                        SystemAndUpdatesSubpageFragment::class.qualifiedName!!,
+                    illustrationPrefKey = SYSTEM_AND_UPDATES_ILLUSTRATION_KEY,
+                    illustrationResId =
+                        R.drawable.safety_center_system_and_updates_subpage_illustration,
                 ),
             CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY to
                 SubpageConfig(
-                    R.xml.safety_center_cellular_network_security_subpage,
-                    R.string.cellular_network_security_subpage_title,
-                    R.string.safety_center_cellular_network_security_summary,
+                    xmlResId = R.xml.safety_center_cellular_network_security_subpage,
+                    titleResId = R.string.cellular_network_security_subpage_title,
+                    defaultSummaryResId = R.string.safety_center_cellular_network_security_summary,
+                    subpageFragmentClassName =
+                        CellularNetworkSecuritySubpageFragment::class.qualifiedName!!,
+                    illustrationPrefKey = CELLULAR_NETWORK_SECURITY_ILLUSTRATION_KEY,
+                    illustrationResId =
+                        R.drawable.safety_center_cellular_network_security_subpage_illustration,
                 ),
             PRIVACY_CONTROLS_SUBPAGE_KEY to
                 SubpageConfig(
-                    R.xml.safety_center_privacy_controls_settings,
-                    R.string.privacy_sources_title,
-                    R.string.privacy_sources_summary,
-                    listOf(
-                        "AndroidAccessibility",
-                        "AndroidNotificationListener",
-                        "AndroidBackgroundLocation",
-                        "AndroidPermissionAutoRevoke",
-                        "AndroidCertificateTransparency",
-                    ),
+                    xmlResId = R.xml.safety_center_privacy_controls_settings,
+                    titleResId = R.string.privacy_sources_title,
+                    defaultSummaryResId = R.string.privacy_sources_summary,
+                    subpageFragmentClassName = PrivacyControlsFragment::class.qualifiedName!!,
+                    issueOnlySources =
+                        listOf(
+                            "AndroidAccessibility",
+                            "AndroidNotificationListener",
+                            "AndroidBackgroundLocation",
+                            "AndroidPermissionAutoRevoke",
+                            "AndroidCertificateTransparency",
+                        ),
                 ),
         )
+
+    fun getSubpageFragmentClassNameFor(context: Context, subpageId: String): String? {
+        val subpageIdToPreferenceKey =
+            mapOf(
+                context.getString(R.string.config_safety_center_app_security_subpage_id) to
+                    APP_SECURITY_SUBPAGE_KEY,
+                context.getString(R.string.config_safety_center_accounts_subpage_id) to
+                    ACCOUNT_SECURITY_SUBPAGE_KEY,
+                context.getString(R.string.config_safety_center_device_finders_subpage_id) to
+                    DEVICE_FINDERS_SUBPAGE_KEY,
+                context.getString(R.string.config_safety_center_updates_subpage_id) to
+                    SYSTEM_AND_UPDATES_SUBPAGE_KEY,
+                context.getString(R.string.config_safety_center_lock_screen_subpage_id) to
+                    DEVICE_UNLOCK_SUBPAGE_KEY,
+                context.getString(R.string.config_safety_center_network_security_subpage_id) to
+                    CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY,
+                context.getString(R.string.config_safety_center_privacy_controls_subpage_id) to
+                    PRIVACY_CONTROLS_SUBPAGE_KEY,
+            )
+
+        return subpageConfigs[subpageIdToPreferenceKey[subpageId]]?.subpageFragmentClassName
+    }
 
     /**
      * Gets the XML resource ID for a given [preferenceKey].
@@ -137,6 +197,25 @@ object SafetyCenterSubpageRegistry {
     @StringRes
     fun getDefaultSummaryResId(preferenceKey: String): Int? =
         subpageConfigs[preferenceKey]?.defaultSummaryResId
+
+    /**
+     * Gets the illustration preference key for a given [preferenceKey].
+     *
+     * @param preferenceKey The string key for the subpage.
+     * @return The illustration preference key, or null if not found.
+     */
+    fun getIllustrationPrefKey(preferenceKey: String): String? =
+        subpageConfigs[preferenceKey]?.illustrationPrefKey
+
+    /**
+     * Gets the illustration drawable resource ID for a given [preferenceKey].
+     *
+     * @param preferenceKey The string key for the subpage.
+     * @return The illustration drawable resource ID, or null if not found.
+     */
+    @DrawableRes
+    fun getIllustrationResId(preferenceKey: String): Int? =
+        subpageConfigs[preferenceKey]?.illustrationResId
 
     /**
      * Retrieves the list of safety source IDs that only provide issues for the given
@@ -279,12 +358,18 @@ data class SafetySourcePrefConfig(
  * @property xmlResId The resource ID of the XML layout for this subpage.
  * @property titleResId The string resource ID for the title of this subpage.
  * @property defaultSummaryResId The string resource ID for the default summary of this subpage.
+ * @property subpageFragmentClassName The class name of the fragment that implements this subpage.
  * @property issueOnlySources A list of safety source IDs that only contribute issues to this
  *   subpage.
+ * @property illustrationPrefKey The preference key for the illustration on this subpage.
+ * @property illustrationResId The drawable resource ID for the illustration on this subpage.
  */
 data class SubpageConfig(
     @XmlRes val xmlResId: Int,
     @StringRes val titleResId: Int,
     @StringRes val defaultSummaryResId: Int,
+    val subpageFragmentClassName: String,
     val issueOnlySources: List<String> = emptyList(),
+    val illustrationPrefKey: String? = null,
+    @DrawableRes val illustrationResId: Int? = null,
 )

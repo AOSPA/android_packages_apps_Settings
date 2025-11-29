@@ -19,6 +19,8 @@ package com.android.settings.wifi.repository;
 import static android.net.TetheringManager.TETHERING_WIFI;
 import static android.net.TetheringManager.TETHER_ERROR_SERVICE_UNAVAIL;
 import static android.net.wifi.SoftApConfiguration.BAND_2GHZ;
+import static android.net.wifi.SoftApConfiguration.BAND_5GHZ;
+import static android.net.wifi.SoftApConfiguration.BAND_6GHZ;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
@@ -35,6 +37,7 @@ import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_6GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_5GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_6GHZ;
+import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_UNKNOWN;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -490,6 +493,57 @@ public class WifiHotspotRepositoryTest {
         mRepository.updateSpeedType();
 
         verify(mSpeedType).setValue(SPEED_2GHZ_6GHZ);
+    }
+
+    @Test
+    public void updateSpeedType_only5gChannel_get5gSpeedType() {
+        mRepository.mIsDualBand = false;
+        SoftApConfiguration config = new SoftApConfiguration.Builder()
+                .setBand(BAND_5GHZ).build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
+
+        mRepository.updateSpeedType();
+
+        verify(mSpeedType).setValue(SPEED_5GHZ);
+    }
+
+    @Test
+    public void updateSpeedType_only5gChannelAndDualBand_get2g5gSpeedType() {
+        mRepository.mIsDualBand = true;
+        SoftApConfiguration config = new SoftApConfiguration.Builder()
+                .setBand(BAND_5GHZ).build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
+
+        mRepository.updateSpeedType();
+
+        // When dual band is supported, a 5GHz-only config is upgraded to 2.4+5GHz.
+        verify(mSpeedType).setValue(SPEED_2GHZ_5GHZ);
+    }
+
+    @Test
+    public void updateSpeedType_only5gChannelBut5gUnavailable_getUnknownSpeedType() {
+        mRepository.mBand5g.hasChannels = false;
+        SoftApConfiguration config = new SoftApConfiguration.Builder()
+                .setBand(BAND_5GHZ).build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
+
+        mRepository.updateSpeedType();
+
+        // With only 5GHz specified and 5GHz unavailable, there are no other bands to fall back to.
+        verify(mSpeedType).setValue(SPEED_UNKNOWN);
+    }
+
+    @Test
+    public void updateSpeedType_only6gChannelBut6gUnavailable_getUnknownSpeedType() {
+        mRepository.mBand6g.hasChannels = false;
+        SoftApConfiguration config = new SoftApConfiguration.Builder()
+                .setBand(BAND_6GHZ).build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
+
+        mRepository.updateSpeedType();
+
+        // With only 6GHz specified and 6GHz unavailable, there are no other bands to fall back to.
+        verify(mSpeedType).setValue(SPEED_UNKNOWN);
     }
 
     @Test

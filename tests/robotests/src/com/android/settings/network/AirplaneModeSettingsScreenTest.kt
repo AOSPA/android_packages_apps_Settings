@@ -43,6 +43,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.TestScope
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -66,6 +67,16 @@ class AirplaneModeSettingsScreenTest {
             on { requirePreference<Preference>(AirplaneModeSettingsScreen.KEY) } doReturn
                 mock<Preference>()
         }
+    private val mockCompanionDeviceManager =
+        mock<CompanionDeviceManager> {
+            on { getLocalMetadata(UserHandle.USER_ALL) } doReturn PersistableBundle()
+        }
+
+    @Before
+    fun setUp() {
+        Shadow.extract<ShadowContextImpl>(context.baseContext)
+            .setSystemService(COMPANION_DEVICE_SERVICE, mockCompanionDeviceManager)
+    }
 
     @Test
     fun key() {
@@ -256,27 +267,23 @@ class AirplaneModeSettingsScreenTest {
     }
 
     private fun addWatchAssociation() {
-        val mockCompanionDeviceManager =
-            mock<CompanionDeviceManager> {
-                on { allAssociations } doReturn
-                    listOf(
-                        AssociationInfo.Builder(1, UserHandle.myUserId(), context.packageName)
-                            .setDeviceProfile(AssociationRequest.DEVICE_PROFILE_WATCH)
-                            .setDisplayName("Smart Watch")
-                            .setMetadata(
-                                PersistableBundle().apply {
-                                    putPersistableBundle(
-                                        FEATURE_CROSS_DEVICE_SYNC,
-                                        PersistableBundle().apply {
-                                            putBoolean(APM_SYNC_SUPPORTED, true)
-                                        },
-                                    )
-                                }
-                            )
-                            .build()
-                    )
+        val metadata =
+            PersistableBundle().apply {
+                putPersistableBundle(
+                    FEATURE_CROSS_DEVICE_SYNC,
+                    PersistableBundle().apply { putBoolean(APM_SYNC_SUPPORTED, true) },
+                )
             }
-        Shadow.extract<ShadowContextImpl>(context.baseContext)
-            .setSystemService(COMPANION_DEVICE_SERVICE, mockCompanionDeviceManager)
+        mockCompanionDeviceManager.stub {
+            on { allAssociations } doReturn
+                listOf(
+                    AssociationInfo.Builder(1, UserHandle.myUserId(), context.packageName)
+                        .setDeviceProfile(AssociationRequest.DEVICE_PROFILE_WATCH)
+                        .setDisplayName("Smart Watch")
+                        .setMetadata(metadata)
+                        .build()
+                )
+            on { getLocalMetadata(UserHandle.USER_ALL) } doReturn metadata
+        }
     }
 }

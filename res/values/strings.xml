@@ -2276,6 +2276,12 @@
     <string name="external_display_use_title">Use external display</string>
     <!-- External Display resolution settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="external_display_resolution_settings_title">Display resolution</string>
+    <!-- External Display resolution and refresh rate settings. The title of the screen. -->
+    <string name="external_display_resolution_refresh_rate_settings_title">Resolution and refresh rate</string>
+    <!-- External Display refresh rate options section. -->
+    <string name="external_display_refresh_rate_title">Refresh rate</string>
+    <!-- External Display resolution options section. -->
+    <string name="external_display_resolution_title">Resolution</string>
     <!-- External Display Connection Preference. The preferred method of connection for an external display. [CHAR LIMIT=40] -->
     <string name="external_display_connection_preference">Default connection behavior</string>
     <!-- External Display settings. Always start in desktop mode when display is connected. -->
@@ -3306,6 +3312,10 @@
     <string name="screen_resolution_footer">Max resolution uses more of your battery. Switching your resolution may cause some apps to restart.</string>
     <!-- Screen resolution a11y message announced to replace 'x' in entry e.g. 600 by 800 [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_delimiter_a11y"><xliff:g id="width">%1$s</xliff:g> by <xliff:g id="height">%2$s</xliff:g></string>
+    <!-- Screen refresh rate option displayed text [CHAR LIMIT=NONE] -->
+    <string name="screen_refresh_rate_displayed_text"><xliff:g id="refresh_rate">%1$s</xliff:g> Hz</string>
+    <!-- Screen refresh rate option a11y text -->
+    <string name="screen_refresh_rate_a11y"><xliff:g id="refresh_rate">%1$s</xliff:g> Hertz</string>
     <!-- Display settings screen, Color mode settings title [CHAR LIMIT=30] -->
     <string name="color_mode_title">Colors</string>
     <!-- Display settings screen, Color mode option for "natural(sRGB) color"  [CHAR LIMIT=45] -->
@@ -5199,6 +5209,10 @@
     <string name="mouse_keys_seek_bar_decrease_button_description">Decrease</string>
     <!-- Description for the button that increases the seekbar in mouse keys settings page. [CHAR_LIMIT=NONE] -->
     <string name="mouse_keys_seek_bar_increase_button_description">Increase</string>
+    <!-- Start label for the seekbar in mouse keys settings page. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_keys_seek_bar_start_label">Slower</string>
+    <!-- End label for the seekbar in mouse keys settings page. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_keys_seek_bar_end_label">Faster</string>
     <!-- Title for the 'Mouse reverse scrolling' preference switch, which reverses the direction of mouse scroll wheels so that moving the wheel up scrolls the content down. [CHAR LIMIT=60] -->
     <string name="mouse_reverse_vertical_scrolling">Reverse scrolling</string>
     <!-- Title for a toggle switch for 'Use primary keys' under mouse key main page, an accessibility setting that allows the user to use primary keyboard keys to control the cursor instead of using numpad keys. [CHAR LIMIT=35] -->
@@ -11419,17 +11433,19 @@
     <!-- Label for showing apps that can manage external storage[CHAR LIMIT=45] -->
     <string name="filter_manage_external_storage">Can access all files</string>
 
-    <!-- Computer control automation settings title [CHAR LIMIT=40] [SCREENSHOT=screen/3gqAyPwhuTgdoh5] -->
+    <!-- Computer control automation settings title [CHAR LIMIT=40] [SCREENSHOT=screen/7GzP2k3PhF8UTVQ] -->
     <string name="computer_control_automation_page_title">Screen automation</string>
-    <!-- Label for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/3gqAyPwhuTgdoh5] -->
-    <string name="computer_control_automation_switch_title">Allow this app to fully automate other apps</string>
-    <!-- Description for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/3gqAyPwhuTgdoh5] -->
-    <string name="computer_control_automation_footer_description">This app will able control your apps. Apps being controlled can\u2019t be used while screen automation is ongoing, but you can always stop it.</string>
-    <!-- Preference summary text for an app when computer control access must be confirmed every time. [CHAR LIMIT=45] [SCREENSHOT=screen/4HoRqQaeUTunirH] -->
+    <!-- Sub heading for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
+    <string name="computer_control_automation_sub_heading">To complete tasks for you, this app will be able to control and get info from other apps, and see your on-screen content</string>
+    <!-- Footer summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
+    <string name="computer_control_automation_footer_summary">You can\u2019t use apps while they\u2019re automated, but you can stop automation any time to use them again</string>
+    <!-- Summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/55Y5GXxjQJNFvRT] -->
+    <string name="computer_control_automation_page_summary">Allow apps to complete tasks for you</string>
+    <!-- Preference summary text for an app when computer control access must be confirmed every time. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
     <string name="computer_control_automation_ask_every_time">Ask every time</string>
-    <!-- Preference summary text for an app when computer control access is always allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/4HoRqQaeUTunirH] -->
+    <!-- Preference summary text for an app when computer control access is always allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF -->
     <string name="computer_control_automation_always_allowed">Always allowed</string>
-    <!-- Preference summary text for an app when computer control access is not allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/4HoRqQaeUTunirH] -->
+    <!-- Preference summary text for an app when computer control access is not allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
     <string name="computer_control_automation_dont_allow">Don\u2019t allow</string>
 
     <!-- Manage full screen intent permission title [CHAR LIMIT=40] -->

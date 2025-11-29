@@ -18,6 +18,7 @@ package com.android.settings.datausage
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -28,8 +29,12 @@ import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.KeyParametersSchema
+import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -42,10 +47,19 @@ import com.android.settingslib.utils.applications.PackageObservable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 /** Preference screen for Apps -> Individual App Info -> Mobile data usage. */
 @ProvidePreferenceScreen(DataUsageAppDetailScreen.KEY, parameterized = true)
-open class DataUsageAppDetailScreen(context: Context, override val arguments: Bundle) :
+open class DataUsageAppDetailScreen
+private constructor(
+    val context: Context,
+    @Deprecated(
+        "This property will be removed once the catalyst framework stops passing the arguments as a bundle. Use the keyParameters instead."
+    )
+    final override val arguments: Bundle?,
+    final override val keyParameters: KeyParameters?,
+) :
     PreferenceScreenMixin,
     PreferenceTitleProvider,
     PreferenceLifecycleProvider,
@@ -53,9 +67,21 @@ open class DataUsageAppDetailScreen(context: Context, override val arguments: Bu
 
     private lateinit var keyedObserver: KeyedObserver<String>
 
-    private val packageName = arguments.getString(KEY_APP_PACKAGE_NAME)!!
+    private val packageName: String =
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            keyParameters!!.getRequired(KEY_APP_PACKAGE_NAME)
+        } else {
+            arguments!!.getString(KEY_APP_PACKAGE_NAME)!!
+        }
 
     private var appInfo = context.getApplicationInfo(packageName)
+
+    @Deprecated(
+        "This constructor will be removed once the catalyst framework stops passing the arguments as a bundle. Use the other constructor instead."
+    )
+    constructor(context: Context, args: Bundle) : this(context, args, null)
+
+    constructor(context: Context, keyParameters: KeyParameters) : this(context, null, keyParameters)
 
     override val key: String
         get() = KEY
@@ -85,9 +111,27 @@ open class DataUsageAppDetailScreen(context: Context, override val arguments: Bu
 
     override fun fragmentClass(): Class<out Fragment>? = AppDataUsage::class.java
 
-    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        makeLaunchIntent(context, AppDataUsageActivity::class.java, arguments, metadata?.bindingKey)
-            .apply { data = "package:$packageName".toUri() }
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent {
+        val intent =
+            if (CatalystFlags.catalystUseKeyParameters()) {
+                makeLaunchIntent(
+                    context,
+                    AppDataUsageActivity::class.java,
+                    keyParameters!!,
+                    metadata?.bindingKey,
+                )
+            } else {
+                makeLaunchIntent(
+                    context,
+                    AppDataUsageActivity::class.java,
+                    arguments!!,
+                    metadata?.bindingKey,
+                )
+            }
+        intent.apply { data = "package:$packageName".toUri() }
+
+        return intent
+    }
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {}
@@ -112,10 +156,27 @@ open class DataUsageAppDetailScreen(context: Context, override val arguments: Bu
         }
     }
 
-    companion object {
+    companion object : ParameterizedPreferenceScreenArgumentsFactory {
         const val KEY = "app_data_usage_screen"
         const val KEY_APP_PACKAGE_NAME = "app"
 
+        @JvmStatic
+        override val parametersSchema = KeyParametersSchema {
+            parameter(KEY_APP_PACKAGE_NAME, "The package name of the app", required = true)
+        }
+
+        @JvmStatic
+        override fun keyParameters(context: Context): Flow<KeyParameters> {
+            // TODO (b/457649430): when the catalyst framework stops passing the arguments as a
+            // bundle: replace the parameters(context) call to the actual implementation,
+            // or make this function the primary implementation and the legacy parameters() should
+            // call this one.
+            return parameters(context).map { bundle -> parametersSchema.prepare(bundle) }
+        }
+
+        @Deprecated(
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use keyParameters instead."
+        )
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
             val repo = AppListRepositoryImpl(context)

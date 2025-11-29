@@ -3032,8 +3032,17 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         </activity>
 
         <activity
-            android:name=".supervision.SupervisionWebContentFiltersActivity"
+            android:name=".supervision.webcontentfilters.SupervisionWebContentFiltersActivity"
             android:label="@string/supervision_web_content_filters_title"
+            android:exported="true">
+            <meta-data
+                android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_supervision" />
+        </activity>
+
+        <activity
+            android:name=".supervision.appstorefilters.SupervisionAppStoreFiltersActivity"
+            android:label="@string/supervision_app_store_filters_title"
             android:exported="true">
             <meta-data
                 android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
@@ -6201,6 +6210,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:name="Settings$SafetyCenterActivity"
             android:exported="true"
             android:label="@string/safety_center_title"
+            android:launchMode="singleTask"
             android:featureFlag="com.android.settings.flags.enable_safety_center_new_ui">
             <intent-filter android:priority="20">
                 <action android:name="android.intent.action.SAFETY_CENTER"/>

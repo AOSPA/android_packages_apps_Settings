@@ -544,6 +544,25 @@ class A11yServicePreferenceFragmentTest :
         assertThat(fragment!!.metricsCategory).isEqualTo(SettingsEnums.ACCESSIBILITY_SERVICE)
     }
 
+    @Test
+    fun getPreferenceScreenBindingKeyParameters_returnsTheCorrectParametersForCreatingA11yServiceScreen() {
+        // Arrange: Set this service as the default accessibility service in resources.
+        val a11yServiceInfo = createA11yServiceInfo()
+        SettingsShadowResources.overrideResource(
+            com.android.internal.R.string.config_defaultAccessibilityService,
+            a11yServiceInfo.componentName.flattenToString(),
+        )
+
+        // Act: Launch the fragment.
+        launchFragment(a11yServiceInfo)
+        val parameters = fragment!!.getPreferenceScreenBindingKeyParameters(context)
+
+        // Assert: The correct parameters were returned
+        assertThat(parameters).isNotNull()
+        assertThat(parameters!![AccessibilitySettings.EXTRA_COMPONENT_NAME])
+            .isEqualTo(a11yServiceInfo.componentName.flattenToString())
+    }
+
     private fun assertPrefExistsButInvisible(prefKey: String) {
         val preference: Preference? = fragment!!.findPreference(prefKey)
         assertThat(preference).isNotNull()

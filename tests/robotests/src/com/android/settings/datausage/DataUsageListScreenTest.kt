@@ -25,6 +25,7 @@ import com.android.settings.Settings
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settings.utils.putSubId
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -35,9 +36,7 @@ class DataUsageListScreenTest : SettingsCatalystTestCase() {
     @get:Rule val platformFlags = SetFlagsRule()
 
     override val preferenceScreenCreator =
-        DataUsageListScreen(
-            Bundle(1).also { it.putSubId(android.provider.Settings.EXTRA_SUB_ID, 1) }
-        )
+        createScreen(Bundle(1).also { it.putSubId(android.provider.Settings.EXTRA_SUB_ID, 1) })
 
     override val flagName: String
         get() = Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4
@@ -52,7 +51,7 @@ class DataUsageListScreenTest : SettingsCatalystTestCase() {
             Bundle().apply {
                 putString(android.provider.Settings.EXTRA_SUB_ID, testSubId.toString())
             }
-        val screen = DataUsageListScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(testSubId)
     }
@@ -61,7 +60,7 @@ class DataUsageListScreenTest : SettingsCatalystTestCase() {
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_invalidString_returnsDefault() {
         val args = Bundle().apply { putString(android.provider.Settings.EXTRA_SUB_ID, "invalid") }
-        val screen = DataUsageListScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(invalidSubId)
     }
@@ -70,7 +69,7 @@ class DataUsageListScreenTest : SettingsCatalystTestCase() {
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_missingKey_returnsDefault() {
         val args = Bundle()
-        val screen = DataUsageListScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(invalidSubId)
     }
@@ -79,7 +78,7 @@ class DataUsageListScreenTest : SettingsCatalystTestCase() {
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_subIdIsInt_returnsDefault() {
         val args = Bundle().apply { putInt(android.provider.Settings.EXTRA_SUB_ID, testSubId) }
-        val screen = DataUsageListScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(invalidSubId)
     }
@@ -88,7 +87,7 @@ class DataUsageListScreenTest : SettingsCatalystTestCase() {
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagFalse_validInt_parsedCorrectly() {
         val args = Bundle().apply { putInt(android.provider.Settings.EXTRA_SUB_ID, testSubId) }
-        val screen = DataUsageListScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(testSubId)
     }
@@ -100,7 +99,7 @@ class DataUsageListScreenTest : SettingsCatalystTestCase() {
             Bundle().apply {
                 putString(android.provider.Settings.EXTRA_SUB_ID, testSubId.toString())
             }
-        val screen = DataUsageListScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(invalidSubId)
     }
@@ -109,7 +108,7 @@ class DataUsageListScreenTest : SettingsCatalystTestCase() {
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagFalse_missingKey_returnsDefault() {
         val args = Bundle()
-        val screen = DataUsageListScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(invalidSubId)
     }
@@ -122,6 +121,14 @@ class DataUsageListScreenTest : SettingsCatalystTestCase() {
         assertThat(intent?.component?.className)
             .isEqualTo(Settings.MobileDataUsageListActivity::class.java.name)
         assertThat(intent?.extras?.getInt(android.provider.Settings.EXTRA_SUB_ID)).isEqualTo(1)
+    }
+
+    private fun createScreen(args: Bundle): DataUsageListScreen {
+        return if (CatalystFlags.catalystUseKeyParameters()) {
+            DataUsageListScreen(DataUsageListScreen.parametersSchema.prepare(args))
+        } else {
+            DataUsageListScreen(args)
+        }
     }
 
     private fun DataUsageListScreen.getSubId(): Int {

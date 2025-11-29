@@ -69,6 +69,7 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.common.collect.ImmutableList;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -83,6 +84,7 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 import org.robolectric.shadows.ShadowInputMethodManager;
 import org.robolectric.shadows.ShadowSubscriptionManager;
 
@@ -174,6 +176,11 @@ public class WifiConfigController2Test {
         ipSettingsSpinner.setSelection(DHCP);
         mShadowSubscriptionManager = shadowOf(mContext.getSystemService(SubscriptionManager.class));
         when(mEapMethodSimSpinner.getSelectedItemPosition()).thenReturn(WIFI_EAP_METHOD_SIM);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowWifiUtils.reset();
     }
 
     private void createController(
@@ -929,20 +936,25 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    public void loginScreenMode() {
+    public void checkDefaultSharedEditable_loginScreenMode() {
         ShadowWifiUtils.setIsAtLoginScreen(true);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
         shadowOf(Looper.getMainLooper()).idle();
 
-        assertThat(mView.findViewById(R.id.shared_network_login_screen_warning).getVisibility())
-                .isEqualTo(View.VISIBLE);
-        assertThat(mView.findViewById(R.id.sharing_toggle_fields).getVisibility())
-                .isEqualTo(View.GONE);
-        assertThat(mView.findViewById(R.id.edit_wifi_network_configuration_fields).getVisibility())
-                .isEqualTo(View.GONE);
-
         WifiConfiguration wifiConfiguration = mController.getConfig();
         assertThat(wifiConfiguration.shared).isTrue();
+        assertThat(wifiConfiguration.isAllowedToUpdateByOtherUsers()).isTrue();
+    }
+
+    @Test
+    public void checkDefaultPrivate_guestMode() {
+        ShadowWifiUtils.setIsGuestUser(true);
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+        assertThat(wifiConfiguration.shared).isFalse();
+        assertThat(wifiConfiguration.isAllowedToUpdateByOtherUsers()).isFalse();
     }
 
     @Test
@@ -1407,6 +1419,13 @@ public class WifiConfigController2Test {
 
         public static void setIsGuestUser(boolean isGuestUser) {
             sIsGuestUser = isGuestUser;
+        }
+
+        /** Resetter method to reset values between tests */
+        @Resetter
+        public static void reset() {
+            sIsGuestUser = false;
+            sIsAtLoginScreen = false;
         }
     }
 }

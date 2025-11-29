@@ -210,6 +210,7 @@ public class MouseKeysMainPageFragment extends DashboardFragment
     private void configureImagesPreference() {
         final RecyclerView recyclerView = mMouseKeyImagesPreference.findViewById(
                 R.id.mouse_keys_image_recycler_list);
+        recyclerView.setFocusable(false);
         boolean isPortrait = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_PORTRAIT;
         boolean isTwoPaneState = ActivityEmbeddingUtils.isAlreadyEmbedded(this.getActivity());
@@ -222,6 +223,7 @@ public class MouseKeysMainPageFragment extends DashboardFragment
             recyclerView.setPadding(0, 0, 0, 0);
             final RecyclerView numKeyboardRecyclerView = mMouseKeyImagesPreference
                     .findViewById(R.id.mouse_keys_numpad_image_recycler_list);
+            numKeyboardRecyclerView.setFocusable(false);
             numKeyboardRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), column));
             numKeyboardRecyclerView.setAdapter(
                     new MouseKeysNumKeyboardImageListAdapter(getActivity(), mCurrentInputDevice));

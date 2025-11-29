@@ -129,10 +129,11 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
     protected void onPassKeyOrPinDialogAcceptButtonClicked(View view) {
         CircularProgressIndicator progressBar =
                 view.findViewById(R.id.positive_button_progress_bar);
-        TextView positiveText = view.findViewById(R.id.positive_button_text);
         progressBar.setVisibility(View.VISIBLE);
-        positiveText
-                .setText(R.string.bluetooth_pairing_passkey_dialog_pairing_positive_button_text);
+        TextView positiveText = view.findViewById(R.id.positive_button_text);
+        positiveText.setVisibility(View.GONE);
+        TextView positivePairingText = view.findViewById(R.id.positive_button_pairing_text);
+        positivePairingText.setVisibility(View.VISIBLE);
 
         // Tell the controller the dialog has been created.
         mPairingController.notifyDialogDisplayed();

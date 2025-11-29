@@ -757,8 +757,8 @@ public final class DataProcessor {
                             firstEvent.getPackageName(),
                             firstEvent.getTaskRootPackageName());
 
-            // Appends the device events to per-instance app events list, then sorts the usageEvents
-            // in ascending order, with handling reverse order events case.
+            // Append the device events to the per-instance app events list, then sort the
+            // usageEvents in ascending order, handling reverse order event cases.
             combineDeviceEventsToCurrentUsageEvent(usageEvents, deviceEvents);
 
             // A package might have multiple instances. Computes the usage period per instance id
@@ -1002,16 +1002,16 @@ public final class DataProcessor {
         return batteryUsageStats;
     }
 
-    private static void combineDeviceEventsToCurrentUsageEvent(
+    @VisibleForTesting
+    static void combineDeviceEventsToCurrentUsageEvent(
             final List<AppUsageEvent> usageEvents,
             final List<AppUsageEvent> deviceEvents) {
         usageEvents.addAll(deviceEvents);
         Collections.sort(usageEvents, APP_USAGE_EVENT_TIMESTAMP_COMPARATOR);
 
-        // For the top activity with screen-off events, the UsageStatsManager usually record
-        // screen-off device event first, then record the stop events for activities.
-        // We swap the adjacent screen-off and stop events if they happened in a short duration
-        // to prepare for the usage period calculation.
+        // For the top activity with screen-off events, the UsageStatsManager usually records the
+        // screen-off device event first, then records the stop events for activities.
+        // We swap the adjacent screen-off and stop events if they happen within a short duration
         for (int i = 0; i < usageEvents.size() - 1; i++) {
             AppUsageEvent firstEvent = usageEvents.get(i);
             AppUsageEvent secondEvent = usageEvents.get(i + 1);

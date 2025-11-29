@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.webcontentfilters
 
 import android.app.Activity
 import android.app.Application
@@ -50,6 +50,11 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.android.settings.R
+import com.android.settings.supervision.ConfirmSupervisionCredentialsActivity
+import com.android.settings.supervision.SupervisionDashboardActivity
+import com.android.settings.supervision.SupervisionSafeSearchSwitchPreference
+import com.android.settings.supervision.SupervisionSafeSitesSwitchPreference
+import com.android.settings.supervision.TestSupervisionMessengerService
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settingslib.ipc.MessengerServiceClient
 import com.android.settingslib.ipc.MessengerServiceRule
@@ -178,7 +183,7 @@ class SupervisionWebContentFiltersScreenTest {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val browserSwitchPreference =
                 fragment.findPreference<SwitchPreferenceCompat>(
-                    SupervisionSafeSitesSwitchPreference.KEY
+                    SupervisionSafeSitesSwitchPreference.Companion.KEY
                 )!!
 
             assertThat(browserSwitchPreference.isChecked).isFalse()
@@ -204,7 +209,7 @@ class SupervisionWebContentFiltersScreenTest {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val browserSwitchPreference =
                 fragment.findPreference<SwitchPreferenceCompat>(
-                    SupervisionSafeSitesSwitchPreference.KEY
+                    SupervisionSafeSitesSwitchPreference.Companion.KEY
                 )!!
 
             assertThat(browserSwitchPreference.isChecked).isFalse()
@@ -230,7 +235,7 @@ class SupervisionWebContentFiltersScreenTest {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val searchSwitchWidget =
                 fragment.findPreference<SwitchPreferenceCompat>(
-                    SupervisionSafeSearchSwitchPreference.KEY
+                    SupervisionSafeSearchSwitchPreference.Companion.KEY
                 )!!
 
             assertThat(searchSwitchWidget.isChecked).isFalse()
@@ -256,7 +261,7 @@ class SupervisionWebContentFiltersScreenTest {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val searchSwitchWidget =
                 fragment.findPreference<SwitchPreferenceCompat>(
-                    SupervisionSafeSearchSwitchPreference.KEY
+                    SupervisionSafeSearchSwitchPreference.Companion.KEY
                 )!!
 
             assertThat(searchSwitchWidget.isChecked).isFalse()
@@ -289,7 +294,7 @@ class SupervisionWebContentFiltersScreenTest {
                 )
             InstrumentationRegistry.getInstrumentation().waitForIdleSync()
             val safeSitesSwitch: SwitchPreferenceCompat =
-                fragment.findPreference(SupervisionSafeSitesSwitchPreference.KEY)!!
+                fragment.findPreference(SupervisionSafeSitesSwitchPreference.Companion.KEY)!!
 
             assertThat(safeSitesSwitch.summaryOn).isEqualTo(summaryString)
             assertThat(safeSitesSwitch.summaryOff).isEqualTo(summaryString)
@@ -385,7 +390,7 @@ class SupervisionWebContentFiltersScreenTest {
 
             val switchWidget =
                 fragment.findPreference<SwitchPreferenceCompat>(
-                    SupervisionSafeSitesSwitchPreference.KEY
+                    SupervisionSafeSitesSwitchPreference.Companion.KEY
                 )!!
 
             switchWidget.performClick()

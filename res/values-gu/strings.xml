@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>નો ઉપયોગ કરે છે. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="TRANSITION_DATE">%2$s</xliff:g>ના રોજથી <xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> શરૂ થાય છે."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>નો ઉપયોગ કરે છે. કોઈ ડેલાઇટ સેવિંગ ટાઇમ નથી."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"ડેલાઇટ સેવિંગ ટાઇમ"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"સ્ટૅન્ડર્ડ સમય"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"પ્રદેશ પ્રમાણે પસંદ કરો"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"GMT ઑફસેટ મુજબ પસંદ કરો"</string>
@@ -2623,7 +2621,7 @@
     <string name="accessibility_notification_high_contrast_text_body_message" msgid="6846453833480117658">"ઉચ્ચ કૉન્ટ્રાસ્ટવાળી ટેક્સ્ટનું સ્થાન આઉટલાઇન ટેક્સ્ટ દ્વારા લેવામાં આવ્યું. તમે તેને <xliff:g id="SETTINGS">%1$s</xliff:g>માં ચાલુ કરી શકો છો."</string>
     <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"<xliff:g id="SETTINGS">%1$s</xliff:g> પર જાઓ"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"ટેક્સ્ટ માટે આઉટલાઇન ઉમેરો"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"કોન્ટ્રાસ્ટ વધારવા માટે ટેક્સ્ટની આસપાસ કાળું અથવા સફેદ બૅકગ્રાઉન્ડ ઉમેરો"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"કૉન્ટ્રાસ્ટ વધારવા માટે ટેક્સ્ટની આસપાસ કાળું અથવા સફેદ બૅકગ્રાઉન્ડ ઉમેરો"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"સ્ક્રીન મોટી કરવાનું ઑટોમૅટિક અપડેટ કરો"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"ઍપ્લિકેશન સંક્રમણો પર સ્ક્રીન વિસ્તૃતીકરણને અપડેટ કરો"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"પાવર બટન કૉલને સમાપ્ત કરે છે"</string>
@@ -2636,12 +2634,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"મોટી કરેલી ડાર્ક થીમ"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"આ સુવિધા, ડાર્ક થીમને સપોર્ટ ન કરતી મોટાભાગની ઍપ પર ઑટોમૅટિક રીતે ડાર્ક થીમ લાગુ કરે છે. આ સુવિધા, ઍક્સેસિબિલિટી અને વાંચનક્ષમતાને બહેતર બનાવે છે, પરંતુ તેને કારણે કેટલીક ઍપ અયોગ્ય રીતે ડિસ્પ્લે થઈ શકે છે."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"ઉલટાવવાની ફરજ પાડો, વિપરીત રંગમાં બદલવું, કૉન્ટ્રાસ્ટ"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"મોટી કરેલી ડાર્ક થીમ"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"ડાર્ક થીમના મોટા કરેલા સેટિંગ"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"ડાર્ક થીમના મોટા કરેલા સેટિંગ ખોલો"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ઍનિમેશન કાઢી નાખો"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"સ્ક્રીન પર હિલચાલ ઘટાડો"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"ટેક્સ્ટ કર્સર બ્લિંક થવું"</string>
@@ -6032,10 +6027,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"રિકવરીની માહિતી ચકાસો"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"ઍપ સ્ટોરના ફિલ્ટર"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"વયસ્ક લોકો માટેના કન્ટેન્ટના રેટિંગના આધારે ઍપને ફિલ્ટર કરો"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"દરેક સ્ટોર કન્ટેન્ટને અલગ રીતે રેટિંગ આપે છે. ઍપનું રેટિંગ સ્ટોર પ્રમાણે અલગ હોઈ શકે છે."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"કન્ટેન્ટના રેટિંગ મુજબ ઍપ ફિલ્ટર કરે છે"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"વેબ કન્ટેન્ટના ફિલ્ટર"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"વેબસાઇટના ફિલ્ટર, સાઇટ બ્લૉક કરો, બ્રાઉઝરના ફિલ્ટર, અયોગ્ય સાઇટ બ્લૉક કરો, સાઇટને ફિલ્ટર કરો, શોધ પરિણામો બ્લૉક કરો, અયોગ્ય શોધ પરિણામો ફિલ્ટર કરો, કન્ટેન્ટ પ્રતિબંધો"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"આ ફોનમાં અમુક ઍપ અને બ્રાઉઝર પર અયોગ્ય કન્ટેન્ટ ફિલ્ટર કરવામાં મદદ કરો. અન્ય ઍપ, ડિવાઇસ અથવા બ્રાઉઝર પર અયોગ્ય કન્ટેન્ટ હજી પણ દેખાઈ શકે છે."</string>
@@ -6126,4 +6119,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"સૅટલાઇટની કનેક્ટિવિટી"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"જ્યારે તમારી પાસે મોબાઇલ કે વાઇ-ફાઇ નેટવર્ક ન હોય, ત્યારે કનેક્ટેડ રહો"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"સૅટલાઇટ લૅન્ડિંગ પેજ"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

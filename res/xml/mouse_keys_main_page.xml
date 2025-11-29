@@ -42,6 +42,8 @@
         settings:iconEndContentDescription="@string/mouse_keys_acceleration_fast_icon_desc"
         settings:iconStart="@drawable/ic_remove_24dp"
         settings:iconStartContentDescription="@string/mouse_keys_acceleration_slow_icon_desc"
+        settings:textStart="@string/mouse_keys_seek_bar_start_label"
+        settings:textEnd="@string/mouse_keys_seek_bar_end_label"
         settings:controller="com.android.settings.inputmethod.MouseKeysAccelerationController"/>
 
     <com.android.settingslib.widget.SliderPreference
@@ -54,6 +56,8 @@
         settings:iconEndContentDescription="@string/mouse_keys_seek_bar_increase_button_description"
         settings:iconStart="@drawable/ic_remove_24dp"
         settings:iconStartContentDescription="@string/mouse_keys_seek_bar_decrease_button_description"
+        settings:textStart="@string/mouse_keys_seek_bar_start_label"
+        settings:textEnd="@string/mouse_keys_seek_bar_end_label"
         settings:controller="com.android.settings.inputmethod.MouseKeysMaxSpeedController"/>
 
     <SwitchPreferenceCompat
