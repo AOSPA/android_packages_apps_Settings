@@ -2622,8 +2622,8 @@
     <string name="accessibility_notification_high_contrast_text_title" msgid="2297915407152953323">"텍스트 대비 개선"</string>
     <string name="accessibility_notification_high_contrast_text_body_message" msgid="6846453833480117658">"고대비 텍스트 기능이 윤곽선 있는 텍스트 기능으로 대체되었습니다. <xliff:g id="SETTINGS">%1$s</xliff:g>에서 이 기능을 사용 설정할 수 있습니다."</string>
     <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"<xliff:g id="SETTINGS">%1$s</xliff:g> 앱으로 이동"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"윤곽선 있는 텍스트"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"텍스트 주변에 검은색 또는 흰색 배경을 추가하여 대비를 높이세요."</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"윤곽선 텍스트"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"텍스트 주변에 검은색 또는 흰색 배경을 추가하여 대비 높이기"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"화면 확대 자동 업데이트"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"앱 전환 시 화면 확대 업데이트"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"전원 버튼으로 통화 종료"</string>
@@ -2636,12 +2636,9 @@
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"확장형 어두운 테마"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"어두운 테마를 지원하지 않는 대부분의 앱에 어두운 테마를 자동으로 적용합니다. 이렇게 하면 접근성과 가독성이 개선될 수 있지만 일부 앱이 잘못 표시될 수 있습니다."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"강제 반전, 색상 반전, 대비"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_title (6670371265342260529) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_content_description (4279819951044961382) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_gear_hint (5416622231409406588) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"확장형 어두운 테마"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"확장형 어두운 테마 설정"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"확장형 어두운 테마 설정 열기"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"애니메이션 삭제"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"화면상의 움직임 줄이기"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"텍스트 커서 깜박임"</string>
@@ -2703,7 +2700,7 @@
     <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"왼쪽 클릭을 기본 작업으로 사용"</string>
     <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"다른 작업을 사용하면 자동 클릭이 자동으로 왼쪽 클릭으로 돌아갑니다."</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"자동 클릭은 3버튼 탐색에서 더 잘 작동합니다"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"자동 클릭을 사용할 때 쉽게 뒤로 돌아가거나 홈으로 이동하거나 앱을 전환하려면 동작 탐색 대신 3버튼 탐색을 사용하세요."</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"자동 클릭을 사용하여 더 손쉽게 뒤로 돌아가거나 홈으로 이동하거나 앱을 전환하려면 동작 탐색 대신 3버튼 탐색을 사용하세요."</string>
     <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"동작 탐색 유지"</string>
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"탐색 설정"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"진동 및 햅틱"</string>
@@ -2806,7 +2803,7 @@
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"작동하지 않습니다. 자세히 알아보려면 탭하세요."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"이 서비스가 제대로 작동하지 않습니다."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"접근성 바로가기"</string>
-    <string name="accessibility_shortcuts_settings_subtext" msgid="3870836550836457943">"접근성 버튼, 볼륨 키 단축키"</string>
+    <string name="accessibility_shortcuts_settings_subtext" msgid="3870836550836457943">"접근성 버튼, 볼륨 키 바로가기"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"빠른 설정에 표시"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"적녹색약, 녹색약"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"적녹색약, 적색약"</string>
@@ -5115,7 +5112,7 @@
     <string name="debug_autofill_category" msgid="5998163555428196185">"자동 완성"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"로깅 수준"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"세션당 최대 요청 수"</string>
-    <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"표시할 데이터세트 최대 개수"</string>
+    <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"표시할 데이터 세트 최대 개수"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"기본값으로 초기화"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"개발자 옵션 자동완성 기능이 초기화되었습니다."</string>
     <string name="location_category" msgid="3496759112306219062">"위치"</string>
@@ -5123,7 +5120,7 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"듀티 사이클 없이 모든 GNSS 배열 및 빈도를 추적"</string>
     <string name="input_method_category" msgid="2252659253631639005">"입력 방법"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"스타일러스 필기 입력"</string>
-    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"사용 설정하면 편집기에 초점이 맞춰진 경우 현재 입력 방법이 스타일러스의 MotionEvent를 수신합니다."</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"사용 설정 시 편집기에 초점이 맞춰진 경우 현재 입력 방법이 스타일러스의 MotionEvent 수신"</string>
     <string name="device_theme" msgid="5027604586494772471">"기기 테마"</string>
     <string name="default_theme" msgid="4815428567082263639">"기본값"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"네트워크 이름"</string>
@@ -6032,10 +6029,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"복구 정보 확인"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"앱 스토어 필터"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"콘텐츠 수위를 기준으로 앱 필터링"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"스토어마다 콘텐츠를 다르게 평가합니다. 앱의 등급은 스토어마다 다를 수 있습니다"</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"콘텐츠 등급별로 앱 필터링"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"웹 콘텐츠 필터"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"웹사이트 필터, 사이트 차단, 브라우저 필터, 선정적인 사이트 차단, 사이트 필터링, 검색 결과 차단, 선정적인 검색 결과 필터링, 콘텐츠 제한"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"이 휴대전화의 일부 앱과 브라우저에서 선정적인 콘텐츠를 필터링하는 데 도움이 됩니다. 다른 앱, 기기 또는 브라우저에는 선정적인 콘텐츠가 계속 표시될 수 있습니다."</string>
@@ -6126,4 +6121,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"위성 연결"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"모바일 또는 Wi-Fi 네트워크를 이용할 수 없는 경우에도 연결 상태 유지"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"위성 방문 페이지"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

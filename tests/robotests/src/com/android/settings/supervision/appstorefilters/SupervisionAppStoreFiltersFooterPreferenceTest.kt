@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.appstorefilters
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
@@ -22,12 +22,13 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class SupervisionWebContentFiltersTopIntroPreferenceTest {
-    private val topIntroPreference = SupervisionWebContentFiltersTopIntroPreference()
+class SupervisionAppStoreFiltersFooterPreferenceTest {
+
+    private val footerPreference = SupervisionAppStoreFiltersFooterPreference()
 
     @Test
     fun getTitle() {
-        assertThat(topIntroPreference.title)
-            .isEqualTo(R.string.supervision_web_content_filters_top_intro)
+        assertThat(footerPreference.title)
+            .isEqualTo(R.string.supervision_app_store_filters_footer_content)
     }
 }

@@ -27,6 +27,7 @@ import com.android.settings.core.BasePreferenceController;
 import java.util.Locale;
 
 /** A controller for the entry of First Day of Week's page */
+@Deprecated
 public class FirstDayOfWeekController extends BasePreferenceController {
     private static final String TAG = FirstDayOfWeekController.class.getSimpleName();
 

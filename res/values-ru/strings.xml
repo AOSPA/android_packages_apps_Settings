@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Часовой пояс: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> с <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>"</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Используется часовой пояс <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Без перехода на летнее время."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Летнее время"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Стандартное время"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Регион"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Выбрать по разнице с GMT"</string>
@@ -364,7 +362,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"Геолокация"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Включить геолокацию"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Откл."</string>
-    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Включено. Доступ к данным о местоположении есть у # приложения.}one{Включено. Доступ к данным о местоположении есть у # приложения.}few{Включено. Доступ к данным о местоположении есть у # приложений.}many{Включено. Доступ к данным о местоположении есть у # приложений.}other{Включено. Доступ к данным о местоположении есть у # приложения.}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Включено/Доступ к данным о местоположении есть у # приложения}one{Включено/Доступ к данным о местоположении есть у # приложения}few{Включено/Доступ к данным о местоположении есть у # приложений}many{Включено/Доступ к данным о местоположении есть у # приложений}other{Включено/Доступ к данным о местоположении есть у # приложения}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Загрузка…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Приложения, у которых есть разрешение \"Устройства поблизости\", могут определять относительное местоположение подключенных устройств."</string>
     <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Доступ к информации о местоположении отключен для приложений и сервисов. Однако если вы свяжетесь с экстренной службой, геоданные вашего устройства могут быть переданы спасателям."</string>
@@ -380,7 +378,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Статус защиты"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Блокировка экрана, сервис \"Найти устройство\", безопасность приложений"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Защита и кон­фи­ден­циаль­ность"</string>
-    <string name="safety_center_summary" msgid="3554867379951053869">"Безопасность приложений, блокировка устройства и разрешения"</string>
+    <string name="safety_center_summary" msgid="3554867379951053869">"Безопасность приложений, разрешения и блокировка устройства"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Модель лица добавлена"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Требуется настройка"</string>
     <string name="security_settings_face_preference_summary_none_new" msgid="1963253146734002815">"Добавить модель лица"</string>
@@ -2698,7 +2696,7 @@
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Очень маленькая"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Не реагировать на незначительные движения указателя"</string>
     <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"Использовать нажатие левой кнопки мыши как действие по умолчанию"</string>
-    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"Когда вы выполните другое действие, автоматическое нажатие сразу изменится на нажатие левой кнопки мыши"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"Оно будет восстанавливаться после любых других действий"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Автонажатие работает лучше, когда включена навигация с помощью трех кнопок"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Чтобы вернуться на главный экран и переключаться между приложениями с помощью автонажатия, используйте навигацию с помощью трех кнопок вместо навигации с помощью жестов."</string>
     <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Оставить навигацию с помощью жестов"</string>
@@ -3107,7 +3105,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Системные сервисы"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"менее <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Поскольку на заводе устройство проверяют перед поставкой, в информации о нем может быть указано, что оно уже использовалось до настройки, а количество циклов зарядки может быть больше нуля. Это нормально."</string>
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Перед поставкой устройство проходит проверку качества, поэтому может показаться, что оно использовалось до настройки, а количество циклов зарядки может быть больше нуля. Это нормально."</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика процессов"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Статистика запущенных процессов"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Использование памяти"</string>
@@ -5120,7 +5118,7 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Отслеживать все группировки и частоты GNSS без рабочего цикла"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Способ ввода"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"Рукописный ввод стилусом"</string>
-    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Если функция включена и вы перешли к текстовому редактору, для текущего способа ввода можно использовать стилус"</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Если эта функция включена и фокус находится на редакторе, текущий метод ввода получает от стилуса события MotionEvent"</string>
     <string name="device_theme" msgid="5027604586494772471">"Тема устройства"</string>
     <string name="default_theme" msgid="4815428567082263639">"По умолчанию"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Название сети"</string>
@@ -6000,7 +5998,7 @@
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Чтобы запустить поиск по экрану, нажмите и удерживайте кнопку главного экрана или полосу навигации"</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Настройка сведений об устройстве."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Родительский контроль"</string>
-    <string name="supervision_settings_summary" msgid="6304257872307136073">"Основные правила использования устройств и ограничение экранного времени"</string>
+    <string name="supervision_settings_summary" msgid="6304257872307136073">"Основные правила и ограничение экранного времени"</string>
     <string name="supervision_intro_title" msgid="2686370837216266390">"Создайте PIN-код для родительского контроля на этом устройстве"</string>
     <string name="supervision_intro_description" msgid="101353421249918460">"Этот PIN-код потребуется для управления приложениями и настройками родительского контроля на этом устройстве.\n\nВы можете изменить или удалить PIN-код в разделе \"Родительский контроль\" настроек Android."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Задать PIN-код"</string>
@@ -6031,10 +6029,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Подтвердить данные для восстановления доступа"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Фильтры магазина приложений"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Фильтруйте приложения по возрастному ограничению для контента."</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Рейтинг приложения может различаться в зависимости от магазина"</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Фильтруйте приложения по возрастным ограничениям."</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Фильтры веб-контента"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Фильтры сайтов, заблокировать сайты, фильтры браузера, заблокировать сайты для взрослых, отфильтровать сайты, заблокировать результаты поиска, отфильтровать результаты поиска для взрослых, ограничения на контент"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Помогите отфильтровывать контент для взрослых в некоторых приложениях и браузерах на этом телефоне. Возможно, такие материалы будут по-прежнему показываться в других приложениях, браузерах и на других устройствах."</string>
@@ -6125,4 +6121,20 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Спутниковая связь"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Оставайтесь на связи, даже если нет доступа к мобильной сети или Wi-Fi."</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Целевая страница спутниковой связи"</string>
+    <!-- no translation found for try_a_demo (5053671464025495505) -->
+    <skip />
+    <!-- no translation found for see_how_it_works (6358887025296144792) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
+    <skip />
+    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
+    <skip />
+    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
+    <skip />
+    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
+    <skip />
+    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
+    <skip />
+    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
+    <skip />
 </resources>

@@ -83,7 +83,7 @@ private fun Context.getEnableMessage(timeout: Int, name: CharSequence?): String 
         else -> getString(R.string.bluetooth_ask_enablement, name)
     }
 
-    timeout == BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER -> when (name) {
+    timeout == 0 -> when (name) {
         null -> getString(R.string.bluetooth_ask_enablement_and_lasting_discovery_no_name)
         else -> getString(R.string.bluetooth_ask_enablement_and_lasting_discovery, name)
     }

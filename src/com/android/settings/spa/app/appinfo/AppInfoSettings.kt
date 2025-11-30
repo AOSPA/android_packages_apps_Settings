@@ -162,6 +162,9 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         }
 
         Category(title = stringResource(R.string.advanced_apps)) {
+            if (android.companion.virtualdevice.flags.Flags.computerControlAccess()) {
+                ComputerControlAutomationAppListProvider.InfoPageEntryItem(app)
+            }
             UserAspectRatioAppPreference(app)
             DisplayOverOtherAppsAppListProvider.InfoPageEntryItem(app)
             ModifySystemSettingsAppListProvider.InfoPageEntryItem(app)
@@ -170,9 +173,6 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             InteractAcrossProfilesDetailsPreference(app)
             AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
             WriteSystemPreferencesAppListProvider.InfoPageEntryItem(app)
-            if (android.companion.virtualdevice.flags.Flags.computerControlAccess()) {
-                ComputerControlAutomationAppListProvider.InfoPageEntryItem(app)
-            }
             Enable16KbAppCompatPreference(app, packageInfoPresenter)
             UsageDataAppListProvider.InfoPageEntryItem(app)
         }

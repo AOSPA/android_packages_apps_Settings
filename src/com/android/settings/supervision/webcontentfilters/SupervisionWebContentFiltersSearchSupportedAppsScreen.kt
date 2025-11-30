@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.webcontentfilters
 
 import android.app.settings.SettingsEnums
 import android.content.Context

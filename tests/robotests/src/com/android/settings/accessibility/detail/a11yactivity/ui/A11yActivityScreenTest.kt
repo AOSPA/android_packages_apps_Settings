@@ -33,6 +33,7 @@ import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.LaunchAccessibilityActivityPreferenceFragment
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
+import com.android.settings.accessibility.extensions.putComponentName
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.SettingsStoreRule
@@ -60,18 +61,20 @@ class A11yActivityScreenTest : SettingsCatalystTestCase() {
 
     private val arguments =
         Bundle().apply {
-            if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
-                putString(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                    A11Y_ACTIVITY_COMPONENT.flattenToString(),
-                )
-            } else {
-                putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_ACTIVITY_COMPONENT)
-            }
+            putComponentName(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_ACTIVITY_COMPONENT)
         }
 
+    private val keyParameters =
+        A11yActivityScreen.parametersSchema.prepare(
+            AccessibilitySettings.EXTRA_COMPONENT_NAME to A11Y_ACTIVITY_COMPONENT.flattenToString()
+        )
+
     override val preferenceScreenCreator: A11yActivityScreen by lazy {
-        A11yActivityScreen(appContext, arguments)
+        if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters()) {
+            A11yActivityScreen(appContext, keyParameters)
+        } else {
+            A11yActivityScreen(appContext, arguments)
+        }
     }
     private val a11yManager: ShadowAccessibilityManager =
         Shadow.extract(appContext.getSystemService(AccessibilityManager::class.java))
@@ -163,8 +166,11 @@ class A11yActivityScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    @DisableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun parameters_hasTwoA11yActivities_returnTwoItems() = runTest {
+    @DisableFlags(
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
+        com.android.settingslib.catalyst.flags.Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+    )
+    fun parameters_hasTwoA11yActivities_returnTwoItems_bundleArguments() = runTest {
         AccessibilityRepositoryProvider.resetInstanceForTesting()
         val shortcutInfo1 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT)
         val shortcutInfo2 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT2)
@@ -192,10 +198,43 @@ class A11yActivityScreenTest : SettingsCatalystTestCase() {
             )
     }
 
+    @Test
+    @EnableFlags(
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
+        com.android.settingslib.catalyst.flags.Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+    )
+    fun parameters_hasTwoA11yActivities_returnTwoItems_keyParameters() = runTest {
+        AccessibilityRepositoryProvider.resetInstanceForTesting()
+        val shortcutInfo1 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT)
+        val shortcutInfo2 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT2)
+
+        a11yManager.setInstalledAccessibilityShortcutListAsUser(
+            listOf(shortcutInfo1, shortcutInfo2)
+        )
+        val collectedItems = mutableListOf<String?>()
+        A11yActivityScreen.keyParameters(appContext).collect {
+            collectedItems.add(it[AccessibilitySettings.EXTRA_COMPONENT_NAME])
+        }
+        assertThat(collectedItems).hasSize(2)
+        assertThat(collectedItems)
+            .containsExactlyElementsIn(
+                listOf(
+                    A11Y_ACTIVITY_COMPONENT.flattenToString(),
+                    A11Y_ACTIVITY_COMPONENT2.flattenToString(),
+                )
+            )
+    }
+
     override fun launchFragmentScenario(
         fragmentClass: Class<PreferenceFragmentCompat>
     ): FragmentScenario<PreferenceFragmentCompat> {
-        val scenario = FragmentScenario.launch(fragmentClass, arguments)
+        val scenario =
+            FragmentScenario.launch(
+                fragmentClass,
+                if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters())
+                    keyParameters.toBundle()
+                else arguments,
+            )
         scenario.onFragment { fragment ->
             // Pre catalyst, we didn't set up the preference screen's title.
             // Hence, we had to add the title to preference screen directly in order to test the

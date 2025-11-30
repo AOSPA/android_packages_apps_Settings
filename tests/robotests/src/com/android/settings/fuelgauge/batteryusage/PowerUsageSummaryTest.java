@@ -66,6 +66,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
@@ -87,7 +89,6 @@ public class PowerUsageSummaryTest {
     @Mock private FragmentActivity mActivity;
     @Mock private LoaderManager mLoaderManager;
     @Mock private Loader<BatteryTip> mBatteryTipLoader;
-    @Mock private Loader<BatteryInfo> mBatteryInfoLoader;
     @Mock private ContentResolver mContentResolver;
     @Mock private BatteryBroadcastReceiver mBatteryBroadcastReceiver;
     @Mock private VisibilityLoggerMixin mVisibilityLoggerMixin;
@@ -154,10 +155,12 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
+    @Config(shadows = ShadowBatteryInfo.class)
     public void restartBatteryTipLoader() {
         doReturn(mBatteryTipLoader)
                 .when(mLoaderManager)
                 .getLoader(PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER);
+        ShadowBatteryInfo.resetBatteryInfoInvoked();
         doReturn(false).when(mBatteryTipLoader).isReset();
 
         mFragment.restartBatteryTipLoader();
@@ -165,6 +168,7 @@ public class PowerUsageSummaryTest {
         verify(mLoaderManager)
                 .restartLoader(
                         eq(PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER), eq(Bundle.EMPTY), any());
+        assertThat(ShadowBatteryInfo.isInvokeGetBatteryInfo()).isFalse();
     }
 
     @Test
@@ -273,77 +277,36 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
+    @Config(shadows = ShadowBatteryInfo.class)
     public void restartBatteryInfoLoader_contextNull_doNothing() {
+        ShadowBatteryInfo.resetBatteryInfoInvoked();
         when(mFragment.getContext()).thenReturn(null);
 
         mFragment.restartBatteryInfoLoader();
 
-        verify(mLoaderManager, never())
-                .restartLoader(
-                        PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER,
-                        Bundle.EMPTY,
-                        mFragment.mBatteryInfoLoaderCallbacks);
+        assertThat(ShadowBatteryInfo.isInvokeGetBatteryInfo()).isFalse();
     }
 
     @Test
+    @Config(shadows = ShadowBatteryInfo.class)
     public void restartBatteryInfoLoader_batteryIsNotPresent_doNothing() {
+        ShadowBatteryInfo.resetBatteryInfoInvoked();
         mFragment.setIsBatteryPresent(false);
 
         mFragment.restartBatteryInfoLoader();
 
-        verify(mLoaderManager, never())
-                .restartLoader(
-                        PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER,
-                        Bundle.EMPTY,
-                        mFragment.mBatteryInfoLoaderCallbacks);
+        assertThat(ShadowBatteryInfo.isInvokeGetBatteryInfo()).isFalse();
     }
 
     @Test
+    @Config(shadows = ShadowBatteryInfo.class)
     public void restartBatteryInfoLoader() {
-        doReturn(mBatteryInfoLoader)
-                .when(mLoaderManager)
-                .getLoader(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER);
+        ShadowBatteryInfo.resetBatteryInfoInvoked();
         doReturn(false).when(mBatteryTipLoader).isReset();
 
         mFragment.restartBatteryInfoLoader();
 
-        verify(mLoaderManager)
-                .restartLoader(
-                        eq(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER),
-                        eq(Bundle.EMPTY),
-                        any());
-    }
-
-    @Test
-    public void restartBatteryInfoLoader_nullLoader_initLoader() {
-        doReturn(null)
-                .when(mLoaderManager)
-                .getLoader(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER);
-
-        mFragment.restartBatteryInfoLoader();
-
-        verify(mLoaderManager)
-                .initLoader(
-                        eq(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER),
-                        eq(Bundle.EMPTY),
-                        any());
-    }
-
-    @Test
-    public void restartBatteryInfoLoader_loaderReset_initLoader() {
-        mFragment.setIsBatteryPresent(true);
-        doReturn(mBatteryInfoLoader)
-                .when(mLoaderManager)
-                .getLoader(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER);
-        doReturn(true).when(mBatteryInfoLoader).isReset();
-
-        mFragment.restartBatteryInfoLoader();
-
-        verify(mLoaderManager)
-                .initLoader(
-                        eq(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER),
-                        eq(Bundle.EMPTY),
-                        any());
+        assertThat(ShadowBatteryInfo.isInvokeGetBatteryInfo()).isTrue();
     }
 
     private static class TestFragment extends PowerUsageSummary {
@@ -373,6 +336,30 @@ public class PowerUsageSummaryTest {
         @Override
         protected LoaderManager getLoaderManagerForCurrentFragment() {
             return mLoaderManager;
+        }
+    }
+
+    @Implements(BatteryInfo.class)
+    public static class ShadowBatteryInfo {
+        private static boolean sInvokeGetBatteryInfo = false;
+
+        /** Shadow implementation of getBatteryInfo */
+        @Implementation
+        public static void getBatteryInfo(
+                final Context context, final BatteryInfo.Callback callback, boolean shortString) {
+            setInvokeGetBatteryInfo(true);
+        }
+
+        static boolean isInvokeGetBatteryInfo() {
+            return sInvokeGetBatteryInfo;
+        }
+
+        static void resetBatteryInfoInvoked() {
+            sInvokeGetBatteryInfo = false;
+        }
+
+        static void setInvokeGetBatteryInfo(boolean invokeGetBatteryInfo) {
+            sInvokeGetBatteryInfo = invokeGetBatteryInfo;
         }
     }
 }

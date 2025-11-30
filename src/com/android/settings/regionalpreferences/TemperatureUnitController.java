@@ -27,6 +27,7 @@ import com.android.settings.core.BasePreferenceController;
 import java.util.Locale;
 
 /** A controller for the entry of Temperature units' page */
+@Deprecated
 public class TemperatureUnitController extends BasePreferenceController {
     private static final String TAG = TemperatureUnitController.class.getSimpleName();
     public TemperatureUnitController(Context context, String preferenceKey) {

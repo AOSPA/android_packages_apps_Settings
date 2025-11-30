@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.webcontentfilters
 
 import android.app.supervision.flags.Flags
 import android.content.Context
@@ -23,6 +23,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceGroup
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.supervision.SupervisionSupportedAppPreference
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.supervision.ipc.SupportedApp
 import com.android.settingslib.datastore.SettingsSecureStore

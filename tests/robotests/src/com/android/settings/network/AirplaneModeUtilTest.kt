@@ -39,6 +39,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.robolectric.Shadows.shadowOf
@@ -53,8 +54,15 @@ class AirplaneModeUtilTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     private val associationsList = mutableListOf<AssociationInfo>()
+    private var selfSupportsApmSync = true
     private val mockCompanionDeviceManager =
-        mock<CompanionDeviceManager> { on { allAssociations } doReturn associationsList }
+        mock<CompanionDeviceManager> {
+            on { allAssociations } doReturn associationsList
+            on { getLocalMetadata(UserHandle.USER_ALL) } doAnswer
+                {
+                    getMetadata(selfSupportsApmSync)
+                }
+        }
     private val context = ApplicationProvider.getApplicationContext<Application>().baseContext
     private val shadowPackageManager = shadowOf(context.packageManager)
 
@@ -129,6 +137,15 @@ class AirplaneModeUtilTest {
 
     @Test
     @EnableFlags(FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES, FLAG_ENABLE_DATA_SYNC)
+    fun hasPairedWatchForAirplaneModeSync_selfDoesNotSupportApmSync_returnsFalse() {
+        addAssociation(DEVICE_PROFILE_WATCH)
+        selfSupportsApmSync = false
+
+        assertThat(context.hasPairedWatchForAirplaneModeSync()).isFalse()
+    }
+
+    @Test
+    @EnableFlags(FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES, FLAG_ENABLE_DATA_SYNC)
     fun hasPairedWatchForAirplaneModeSync_hasMultipleWatchAssociations_oneApmSyncSupported_returnsTrue() {
         addAssociation(DEVICE_PROFILE_WATCH, apmSyncSupported = false)
         addAssociation(DEVICE_PROFILE_WATCH, apmSyncSupported = true)
@@ -159,17 +176,16 @@ class AirplaneModeUtilTest {
             AssociationInfo.Builder(1, UserHandle.myUserId(), "packageName")
                 .setDeviceProfile(deviceProfile)
                 .setDisplayName("Smart Device")
-                .setMetadata(
-                    PersistableBundle().apply {
-                        putPersistableBundle(
-                            FEATURE_CROSS_DEVICE_SYNC,
-                            PersistableBundle().apply {
-                                putBoolean(APM_SYNC_SUPPORTED, apmSyncSupported)
-                            },
-                        )
-                    }
-                )
+                .setMetadata(getMetadata(apmSyncSupported))
                 .build()
         )
     }
+
+    private fun getMetadata(apmSyncSupported: Boolean) =
+        PersistableBundle().apply {
+            putPersistableBundle(
+                FEATURE_CROSS_DEVICE_SYNC,
+                PersistableBundle().apply { putBoolean(APM_SYNC_SUPPORTED, apmSyncSupported) },
+            )
+        }
 }

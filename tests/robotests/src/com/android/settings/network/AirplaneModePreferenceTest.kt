@@ -62,6 +62,7 @@ import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.robolectric.Shadows.shadowOf
@@ -81,6 +82,10 @@ class AirplaneModePreferenceTest {
     private val airplaneModePreference = AirplaneModePreference()
     private val airplaneModeDataStore = AirplaneModePreference.createDataStore(context)
     private val packageManager = shadowOf(context.packageManager)
+    private val companionDeviceManager =
+        mock<CompanionDeviceManager> {
+            on { getLocalMetadata(UserHandle.USER_ALL) } doReturn PersistableBundle()
+        }
 
     @Before
     fun setUp() {
@@ -88,6 +93,8 @@ class AirplaneModePreferenceTest {
         SettingsShadowResources.overrideResource(R.bool.config_show_toggle_airplane, true)
         packageManager.setSystemFeature(FEATURE_LEANBACK, false)
         SatelliteRepository.setIsSessionStartedForTesting(false)
+        Shadow.extract<ShadowContextImpl>(context.baseContext)
+            .setSystemService(COMPANION_DEVICE_SERVICE, companionDeviceManager)
     }
 
     @Test
@@ -325,28 +332,24 @@ class AirplaneModePreferenceTest {
     }
 
     private fun addWatchAssociation() {
-        val mockCompanionDeviceManager =
-            mock<CompanionDeviceManager> {
-                on { allAssociations } doReturn
-                    listOf(
-                        AssociationInfo.Builder(1, UserHandle.myUserId(), context.packageName)
-                            .setDeviceProfile(AssociationRequest.DEVICE_PROFILE_WATCH)
-                            .setDisplayName("Smart Watch")
-                            .setMetadata(
-                                PersistableBundle().apply {
-                                    putPersistableBundle(
-                                        FEATURE_CROSS_DEVICE_SYNC,
-                                        PersistableBundle().apply {
-                                            putBoolean(APM_SYNC_SUPPORTED, true)
-                                        },
-                                    )
-                                }
-                            )
-                            .build()
-                    )
+        val metadata =
+            PersistableBundle().apply {
+                putPersistableBundle(
+                    FEATURE_CROSS_DEVICE_SYNC,
+                    PersistableBundle().apply { putBoolean(APM_SYNC_SUPPORTED, true) },
+                )
             }
-        Shadow.extract<ShadowContextImpl>(context.baseContext)
-            .setSystemService(COMPANION_DEVICE_SERVICE, mockCompanionDeviceManager)
+        companionDeviceManager.stub {
+            on { allAssociations } doReturn
+                listOf(
+                    AssociationInfo.Builder(1, UserHandle.myUserId(), context.packageName)
+                        .setDeviceProfile(AssociationRequest.DEVICE_PROFILE_WATCH)
+                        .setDisplayName("Smart Watch")
+                        .setMetadata(metadata)
+                        .build()
+                )
+            on { getLocalMetadata(UserHandle.USER_ALL) } doReturn metadata
+        }
     }
 
     private fun getSwitchPreference(): SwitchPreferenceCompat =

@@ -282,8 +282,8 @@ class ConfirmSupervisionCredentialsActivityTest {
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
     }
 
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onCreate_noSupervisingCredential_flagDisabled_startSetupActivity() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
@@ -310,8 +310,8 @@ class ConfirmSupervisionCredentialsActivityTest {
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
     }
 
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onCreate_noSupervisingCredential_noApprovalMethods_startsSetup() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
@@ -328,7 +328,8 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    fun onCreate_noSupervisingCredential_oneApprovalMethod_launchesMethodDirectly() {
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_noSupervisingCredential_oneApprovalMethod_launchesMethodAndHandlesResult() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
@@ -350,10 +351,48 @@ class ConfirmSupervisionCredentialsActivityTest {
         assertThat(nextActivity.action)
             .isEqualTo(SupervisionManager.ACTION_CONFIRM_SUPERVISION_APPROVAL)
         assertThat(nextActivity.component?.className).isEqualTo("ApprovalActivity")
+
+        shadowActivity.receiveResult(nextActivity, Activity.RESULT_OK, null)
+
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
+        assertThat(SupervisionAuthController.getInstance(context).isSessionActive(mActivity.taskId))
+            .isTrue()
     }
 
     @Test
-    fun onCreate_noSupervisingCredential_multipleApprovalMethods_showsChooser() {
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_noSupervisingCredential_oneApprovalMethod_handlingFailureResult() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+        val resolveInfo =
+            ResolveInfo().apply {
+                activityInfo =
+                    ActivityInfo().apply {
+                        packageName = "com.example.approval"
+                        name = "ApprovalActivity"
+                    }
+            }
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(listOf(resolveInfo))
+
+        mActivityController.setup()
+
+        val nextActivity = shadowActivity.nextStartedActivity
+        assertThat(nextActivity).isNotNull()
+
+        shadowActivity.receiveResult(nextActivity, Activity.RESULT_CANCELED, null)
+
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
+        assertThat(SupervisionAuthController.getInstance(context).isSessionActive(mActivity.taskId))
+            .isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_noSupervisingCredential_multipleApprovalMethods_showsChooserAndHandlesResult() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
@@ -387,10 +426,75 @@ class ConfirmSupervisionCredentialsActivityTest {
         val dialog = mActivity.supportFragmentManager.findFragmentByTag("ApprovalMethodChooser")
         assertThat(dialog).isInstanceOf(ApprovalMethodChooserDialogFragment::class.java)
         assertThat(dialog?.isAdded).isTrue()
+
+        val resultBundle =
+            Bundle().apply {
+                putInt(
+                    ApprovalMethodChooserDialogFragment.BUNDLE_KEY_RESULT_CODE,
+                    Activity.RESULT_OK,
+                )
+            }
+        mActivity.supportFragmentManager.setFragmentResult(
+            ApprovalMethodChooserDialogFragment.REQUEST_KEY_APPROVAL_RESULT,
+            resultBundle,
+        )
+
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
+        assertThat(SupervisionAuthController.getInstance(context).isSessionActive(mActivity.taskId))
+            .isTrue()
     }
 
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_noSupervisingCredential_multipleApprovalMethods_handlingFailureResult() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+        val applicationInfo = ApplicationInfo().apply { packageName = "com.example.approval" }
+        val resolveInfo1 =
+            ResolveInfo().apply {
+                activityInfo =
+                    ActivityInfo().apply {
+                        packageName = "com.example.approval"
+                        name = "ApprovalActivity1"
+                        this.applicationInfo = applicationInfo
+                    }
+            }
+        val resolveInfo2 =
+            ResolveInfo().apply {
+                activityInfo =
+                    ActivityInfo().apply {
+                        packageName = "com.example.approval"
+                        name = "ApprovalActivity2"
+                        this.applicationInfo = applicationInfo
+                    }
+            }
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(listOf(resolveInfo1, resolveInfo2))
+
+        mActivityController.setup()
+
+        val resultBundle =
+            Bundle().apply {
+                putInt(
+                    ApprovalMethodChooserDialogFragment.BUNDLE_KEY_RESULT_CODE,
+                    Activity.RESULT_CANCELED,
+                )
+            }
+        mActivity.supportFragmentManager.setFragmentResult(
+            ApprovalMethodChooserDialogFragment.REQUEST_KEY_APPROVAL_RESULT,
+            resultBundle,
+        )
+
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
+        assertThat(SupervisionAuthController.getInstance(context).isSessionActive(mActivity.taskId))
+            .isFalse()
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onCreate_onStartSetupActivity_onDestroy_notStopProfile() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }

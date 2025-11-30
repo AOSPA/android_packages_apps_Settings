@@ -32,7 +32,6 @@ import com.android.wifitrackerlib.WifiEntry
 import com.android.wifitrackerlib.WifiPickerTracker
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -46,7 +45,6 @@ import org.mockito.kotlin.whenever
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
-import org.robolectric.shadows.ShadowDialog
 import org.robolectric.shadows.ShadowLooper
 
 @RunWith(AndroidJUnit4::class)
@@ -93,7 +91,7 @@ class WifiSharedPreferenceControllerTest {
             on { getWifiPickerTracker() } doReturn mockWifiPickerTracker
         }
         whenever(mockWifiPickerTracker.wifiEntries).thenReturn(listOf(mockWifiEntry))
-        ShadowDialog.reset()
+        ShadowAlertDialogCompat.reset()
 
         controller.setChecked(true)
 
@@ -114,12 +112,27 @@ class WifiSharedPreferenceControllerTest {
     }
 
     @Test
+    fun setChecked_conflictingConnectedEntry_showsAlertDialog() {
+        mockWifiPickerTrackerHelper.stub {
+            on { getWifiPickerTracker() } doReturn mockWifiPickerTracker
+        }
+        whenever(mockWifiPickerTracker.wifiEntries).thenReturn(listOf())
+        whenever(mockWifiPickerTracker.getConnectedWifiEntry()).thenReturn(mockWifiEntry)
+        ShadowAlertDialogCompat.reset()
+
+        controller.setChecked(true)
+
+        val dialog = ShadowAlertDialogCompat.getLatestAlertDialog()
+        assertThat(dialog).isNotNull()
+    }
+
+    @Test
     fun setChecked_conflictingEntry_showsAlertDialog_clickNegativeButton() {
         mockWifiPickerTrackerHelper.stub {
             on { getWifiPickerTracker() } doReturn mockWifiPickerTracker
         }
         whenever(mockWifiPickerTracker.wifiEntries).thenReturn(listOf(mockWifiEntry))
-        ShadowDialog.reset()
+        ShadowAlertDialogCompat.reset()
 
         controller.setChecked(true)
 
@@ -131,14 +144,13 @@ class WifiSharedPreferenceControllerTest {
         assertThat(dialog?.isShowing()).isFalse()
     }
 
-    @Ignore("b/424068182")
     @Test
     fun setChecked_noConflict_doesNotShowAlertDialog() {
         mockWifiPickerTrackerHelper.stub {
             on { getWifiPickerTracker() } doReturn mockWifiPickerTracker
         }
         whenever(mockWifiPickerTracker.wifiEntries).thenReturn(listOf())
-        ShadowDialog.reset()
+        ShadowAlertDialogCompat.reset()
 
         controller.setChecked(true)
 

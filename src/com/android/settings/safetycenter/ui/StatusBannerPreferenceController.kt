@@ -37,29 +37,41 @@ import com.android.settingslib.widget.StatusBannerPreference
  * This class observes data from the [LiveSafetyCenterViewModel] and updates the UI of the banner to
  * reflect the current security state, including dynamic changes like a scanning animation.
  */
+// Suppressing MissingPermission lint: The Settings app holds the MANAGE_SAFETY_CENTER permission,
+// which is required by the SafetyCenterManager APIs used by the ViewModel.
+@SuppressLint("MissingPermission")
 class StatusBannerPreferenceController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
 
     private var preference: StatusBannerPreference? = null
-    private var viewModel: LiveSafetyCenterViewModel? = null
+    var viewModel: LiveSafetyCenterViewModel? = null
 
-    fun setViewModelAndLifecycle(viewModel: LiveSafetyCenterViewModel, owner: LifecycleOwner) {
-        this.viewModel = viewModel
-        this.viewModel?.statusUiLiveData?.observe(owner) { statusUiData -> updateUi(statusUiData) }
+    override fun onViewCreated(owner: LifecycleOwner) {
+        if (viewModel == null) {
+            Log.w(TAG, "[$preferenceKey] ViewModel not set, cannot observe LiveData")
+            return
+        }
+        viewModel!!.statusUiLiveData.observe(owner) { statusUiData -> updateUi(statusUiData) }
     }
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)
+        val model = viewModel
+        if (model != null) {
+            updateUi(StatusUiData(model.getCurrentSafetyCenterDataAsUiData()))
+        }
     }
 
     override fun updateState(preference: Preference) {
         super.updateState(preference)
-        updateUi(viewModel?.statusUiLiveData?.value)
+        val model = viewModel
+        if (model != null) {
+            updateUi(StatusUiData(model.getCurrentSafetyCenterDataAsUiData()))
+        }
     }
 
     private fun updateUi(statusUiData: StatusUiData?) {
-
         val status = statusUiData ?: return
         val pref = preference ?: return
 
@@ -121,7 +133,10 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
     }
 
     private fun StatusBannerPreference.updateBannerButton(status: StatusUiData) {
-        if (status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK) {
+        if (
+            status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK ||
+                status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_UNKNOWN
+        ) {
             setButtonText(R.string.safety_center_rescan_button)
             setButtonOnClickListener {
                 if (triggerRescan()) {
@@ -137,8 +152,6 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
 
     private fun triggerRescan(): Boolean {
         if (viewModel?.statusUiLiveData?.value?.isRefreshInProgress == false) {
-            @SuppressLint("MissingPermission")
-            // LiveSafetyCenterViewModel.rescan() in Settings app (has MANAGE_SAFETY_CENTER)
             (viewModel?.rescan())
             return true
         }

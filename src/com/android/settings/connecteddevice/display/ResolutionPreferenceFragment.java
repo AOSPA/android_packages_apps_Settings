@@ -292,7 +292,6 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
             @NonNull DisplayDevice display) {
         Mode curMode = display.getMode();
         var currentResolution = modeToPrefKey(curMode);
-        var rotatedResolution = rotatedModeToPrefKey(curMode);
         var skippedModes = new ArrayList<Mode>();
         var isAnyOfModesSelected = false;
         for (var mode : modes) {
@@ -304,8 +303,7 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
                 skippedModes.add(mode);
                 continue;
             }
-            var isCurrentMode =
-                    currentResolution.equals(modeStr) || rotatedResolution.equals(modeStr);
+            var isCurrentMode = currentResolution.equals(modeStr);
             if (!isCurrentMode && !isAllowedMode(mode)) {
                 continue;
             }
@@ -523,13 +521,6 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
             return "";
         }
         return toPrefKey(m.getPhysicalWidth(), m.getPhysicalHeight());
-    }
-
-    private String rotatedModeToPrefKey(@Nullable Mode m) {
-        if (m == null) {
-            return "";
-        }
-        return toPrefKey(m.getPhysicalHeight(), m.getPhysicalWidth());
     }
 
     private String toPrefKey(int w, int h) {

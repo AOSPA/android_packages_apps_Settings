@@ -203,6 +203,139 @@ public final class DataProcessorTest {
     }
 
     @Test
+    public void combineDeviceEventsToCurrentUsageEvent_returnExpectedResult() {
+        List<AppUsageEvent> usageEvents;
+        List<AppUsageEvent> deviceEvents;
+        final long screenOffTime = 60L;
+        final String packageName = "com.android.settings";
+        deviceEvents = new ArrayList<>();
+        appendAppUsageEventList(
+                deviceEvents,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(screenOffTime, AppUsageEventType.SCREEN_NON_INTERACTIVE)
+        );
+
+        // Case1: App and Device events occurs in the same timestamp.
+        usageEvents = new ArrayList<>();
+        appendAppUsageEventList(
+                usageEvents,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(screenOffTime, AppUsageEventType.ACTIVITY_STOPPED)
+        );
+
+        DataProcessor.combineDeviceEventsToCurrentUsageEvent(usageEvents, deviceEvents);
+
+        // STOP event first for the same timestamp.
+        assertThat(usageEvents).hasSize(2);
+        assertAppUsageEvent(usageEvents.get(0),
+                AppUsageEventType.ACTIVITY_STOPPED, screenOffTime);
+        assertAppUsageEvent(usageEvents.get(1),
+                AppUsageEventType.SCREEN_NON_INTERACTIVE, screenOffTime);
+
+        // Case2: Screen-off events happens before several stop events.
+        usageEvents = new ArrayList<>();
+        appendAppUsageEventList(
+                usageEvents,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        screenOffTime + 1L, AppUsageEventType.ACTIVITY_STOPPED,
+                        screenOffTime + 10L, AppUsageEventType.ACTIVITY_STOPPED,
+                        screenOffTime + 20L, AppUsageEventType.ACTIVITY_STOPPED,
+                        screenOffTime + DataProcessor.MAX_REVERSE_ORDER_DURATION + 1L,
+                        AppUsageEventType.ACTIVITY_STOPPED
+                )
+        );
+
+        DataProcessor.combineDeviceEventsToCurrentUsageEvent(usageEvents, deviceEvents);
+
+        // Swap will stop for the first STOP events exceeds the reverse range.
+        assertThat(usageEvents).hasSize(5);
+        assertAppUsageEvent(usageEvents.get(0),
+                AppUsageEventType.ACTIVITY_STOPPED, screenOffTime + 1L);
+        assertAppUsageEvent(usageEvents.get(1),
+                AppUsageEventType.ACTIVITY_STOPPED, screenOffTime + 10L);
+        assertAppUsageEvent(usageEvents.get(2),
+                AppUsageEventType.ACTIVITY_STOPPED, screenOffTime + 20L);
+        assertAppUsageEvent(usageEvents.get(3),
+                AppUsageEventType.SCREEN_NON_INTERACTIVE, screenOffTime);
+
+        // Case3: Different App events happens quickly after Screen-off event.
+        usageEvents = new ArrayList<>();
+        appendAppUsageEventList(
+                usageEvents,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        screenOffTime + 1L, AppUsageEventType.ACTIVITY_STOPPED,
+                        screenOffTime + 10L, AppUsageEventType.ACTIVITY_STOPPED,
+                        screenOffTime + 15L, AppUsageEventType.ACTIVITY_RESUMED,
+                        screenOffTime + 20L, AppUsageEventType.ACTIVITY_STOPPED,
+                        screenOffTime + DataProcessor.MAX_REVERSE_ORDER_DURATION + 1L,
+                        AppUsageEventType.ACTIVITY_STOPPED
+                )
+        );
+
+        DataProcessor.combineDeviceEventsToCurrentUsageEvent(usageEvents, deviceEvents);
+
+        // Swap will stop for the first Non-STOP events.
+        assertThat(usageEvents).hasSize(6);
+        assertAppUsageEvent(usageEvents.get(0),
+                AppUsageEventType.ACTIVITY_STOPPED, screenOffTime + 1L);
+        assertAppUsageEvent(usageEvents.get(1),
+                AppUsageEventType.ACTIVITY_STOPPED, screenOffTime + 10L);
+        assertAppUsageEvent(usageEvents.get(2),
+                AppUsageEventType.SCREEN_NON_INTERACTIVE, screenOffTime);
+
+        // Case4: Several swap happens in one combination.
+        usageEvents = new ArrayList<>();
+        appendAppUsageEventList(
+                usageEvents,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        110L, AppUsageEventType.ACTIVITY_STOPPED,
+                        210L, AppUsageEventType.ACTIVITY_STOPPED,
+                        310L, AppUsageEventType.ACTIVITY_STOPPED
+                )
+        );
+        deviceEvents = new ArrayList<>();
+        appendAppUsageEventList(
+                deviceEvents,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(100L, AppUsageEventType.SCREEN_NON_INTERACTIVE,
+                        200L, AppUsageEventType.DEVICE_SHUTDOWN,
+                        300L, AppUsageEventType.SCREEN_NON_INTERACTIVE)
+        );
+
+        DataProcessor.combineDeviceEventsToCurrentUsageEvent(usageEvents, deviceEvents);
+
+        assertThat(usageEvents).hasSize(6);
+        assertAppUsageEvent(usageEvents.get(0),
+                AppUsageEventType.ACTIVITY_STOPPED, 110L);
+        assertAppUsageEvent(usageEvents.get(1),
+                AppUsageEventType.SCREEN_NON_INTERACTIVE, 100L);
+        // Shutdown events will not invoke the swap.
+        assertAppUsageEvent(usageEvents.get(2),
+                AppUsageEventType.DEVICE_SHUTDOWN, 200);
+        assertAppUsageEvent(usageEvents.get(3),
+                AppUsageEventType.ACTIVITY_STOPPED, 210L);
+        assertAppUsageEvent(usageEvents.get(4),
+                AppUsageEventType.ACTIVITY_STOPPED, 310L);
+        assertAppUsageEvent(usageEvents.get(5),
+                AppUsageEventType.SCREEN_NON_INTERACTIVE, 300L);
+    }
+
+    @Test
     public void generateAppUsagePeriodMap_withOutOfRangeUsageEvents_returnExpectedResult() {
         final long startTime = Duration.ofHours(4).toMillis();
         final long endTime = Duration.ofHours(6).toMillis();
@@ -387,9 +520,9 @@ public final class DataProcessorTest {
                                 /* timestamps= */ List.of(startTime, endTime),
                                 /* isStartTimestamp= */ false)
                 );
-        List<AppUsageEvent> eventList = null;
-        Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> result = null;
-        List<AppUsagePeriod> periods = null;
+        List<AppUsageEvent> eventList;
+        Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> result;
+        List<AppUsagePeriod> periods;
 
         // Screen off event after the usage period
         eventList = new ArrayList<>();
@@ -455,9 +588,9 @@ public final class DataProcessorTest {
                                 /* timestamps= */ List.of(startTime, endTime),
                                 /* isStartTimestamp= */ false)
                 );
-        List<AppUsageEvent> eventList = null;
-        Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> result = null;
-        List<AppUsagePeriod> periods = null;
+        List<AppUsageEvent> eventList;
+        Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> result;
+        List<AppUsagePeriod> periods;
 
         // Stop event is soon after the screen-off event.
         eventList = new ArrayList<>();
@@ -525,9 +658,9 @@ public final class DataProcessorTest {
                                 /* timestamps= */ List.of(startTime, endTime),
                                 /* isStartTimestamp= */ false)
                 );
-        List<AppUsageEvent> eventList = null;
-        Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> result = null;
-        List<AppUsagePeriod> periods = null;
+        List<AppUsageEvent> eventList;
+        Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> result;
+        List<AppUsagePeriod> periods;
 
         // Single start event
         eventList = new ArrayList<>();

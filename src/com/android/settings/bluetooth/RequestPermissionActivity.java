@@ -68,7 +68,8 @@ public class RequestPermissionActivity extends Activity implements
 
     private BluetoothAdapter mBluetoothAdapter;
 
-    private int mTimeout = BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT;
+    private static final int DEFAULT_DISCOVERABLE_TIMEOUT = 120;
+    private int mTimeout = DEFAULT_DISCOVERABLE_TIMEOUT;
 
     private int mRequest;
 
@@ -195,7 +196,7 @@ public class RequestPermissionActivity extends Activity implements
         } else {
             // Ask the user whether to turn on discovery mode or not
             // For lasting discoverable mode there is a different message
-            if (mTimeout == BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER) {
+            if (mTimeout == 0) {
                 CharSequence message = mAppLabel != null
                         ? getString(R.string.bluetooth_ask_lasting_discovery, mAppLabel)
                         : getString(R.string.bluetooth_ask_lasting_discovery_no_name);
@@ -309,12 +310,12 @@ public class RequestPermissionActivity extends Activity implements
         } else if (intent.getAction().equals(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE)) {
             mRequest = REQUEST_ENABLE_DISCOVERABLE;
             mTimeout = intent.getIntExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,
-                    BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT);
+                    DEFAULT_DISCOVERABLE_TIMEOUT);
 
             Log.d(TAG, "Setting Bluetooth Discoverable Timeout = " + mTimeout);
 
             if (mTimeout < 1 || mTimeout > MAX_DISCOVERABLE_TIMEOUT) {
-                mTimeout = BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT;
+                mTimeout = DEFAULT_DISCOVERABLE_TIMEOUT;
             }
         } else {
             Log.e(TAG, "Error: this activity may be started only with intent "

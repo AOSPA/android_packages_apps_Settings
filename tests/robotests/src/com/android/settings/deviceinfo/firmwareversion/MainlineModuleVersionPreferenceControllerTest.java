@@ -32,9 +32,6 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.preference.Preference;
 
@@ -52,9 +49,6 @@ import org.robolectric.RuntimeEnvironment;
 public class MainlineModuleVersionPreferenceControllerTest {
 
     private static final String MODULE_PACKAGE = "com.android.vending";
-
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Mock
     private PackageManager mPackageManager;
@@ -136,7 +130,6 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(mPreference.isSelectable()).isTrue();
     }
 
-    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_MAINLINE_MODULE_EXPLICIT_INTENT)
     @Test
     public void updateState_canHandleIntent_setIntentToPreference() throws Exception {
         setupModulePackage("test version 123");
@@ -151,7 +144,6 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(mPreference.getIntent()).isEqualTo(MODULE_UPDATE_INTENT);
     }
 
-    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_MAINLINE_MODULE_EXPLICIT_INTENT)
     @Test
     public void updateState_canHandleIntent_preferenceShouldBeSelectable() throws Exception {
         setupModulePackage("test version 123");
@@ -166,7 +158,6 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(mPreference.isSelectable()).isTrue();
     }
 
-    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_MAINLINE_MODULE_EXPLICIT_INTENT)
     @Test
     public void updateState_cannotHandleIntent_setNullToPreference() throws Exception {
         setupModulePackage("test version 123");

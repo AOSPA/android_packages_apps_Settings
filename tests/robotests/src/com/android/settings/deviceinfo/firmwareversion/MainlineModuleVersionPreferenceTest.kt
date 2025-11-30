@@ -22,15 +22,11 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.content.res.Resources
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreference.Companion.MODULE_UPDATE_ACTION
 import com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreference.Companion.MODULE_UPDATE_ACTION_V2
-import com.android.settings.flags.Flags
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -48,8 +44,6 @@ import org.robolectric.RobolectricTestRunner
 // LINT.IfChange
 @RunWith(RobolectricTestRunner::class)
 class MainlineModuleVersionPreferenceTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
-
     private lateinit var mockPackageManager: PackageManager
     private lateinit var mockResources: Resources
 
@@ -111,17 +105,9 @@ class MainlineModuleVersionPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MAINLINE_MODULE_EXPLICIT_INTENT)
-    fun intentV2_preferenceShouldBeSelectable() {
+    fun intent_preferenceShouldBeSelectable_v2() {
         intent_preferenceShouldBeSelectable(MODULE_UPDATE_ACTION_V2, MODULE_PACKAGE)
     }
-
-    @Test
-    @DisableFlags(Flags.FLAG_MAINLINE_MODULE_EXPLICIT_INTENT)
-    fun intent_preferenceShouldBeSelectable() {
-        intent_preferenceShouldBeSelectable(MODULE_UPDATE_ACTION, null)
-    }
-
     private fun intent_preferenceShouldBeSelectable(action: String, intentPackage: String?) {
         createMocks("test.provider", "test version 123") {
             on { resolveActivity(any(), anyInt()) } doAnswer
