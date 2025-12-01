@@ -27,6 +27,7 @@ import static org.mockito.Mockito.when;
 import android.app.Flags;
 import android.app.INotificationManager;
 import android.content.Context;
+import android.platform.test.annotations.DisableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import org.junit.Before;
@@ -67,12 +68,14 @@ public class SummarizationManageAppsPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_NM_SUMMARIZATION_ALL)
     public void isAvailable_flagEnabledNasDoesNotSupport_shouldReturnFalse() throws Exception {
         when(mInm.getUnsupportedAdjustmentTypes()).thenReturn(List.of(KEY_SUMMARIZATION));
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_NM_SUMMARIZATION_ALL)
     public void isAvailable_flagDisabledNasSupports_shouldReturnFalse() {
         mSetFlagsRule.disableFlags(Flags.FLAG_NM_SUMMARIZATION);
         mSetFlagsRule.disableFlags(Flags.FLAG_NM_SUMMARIZATION_UI);

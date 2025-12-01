@@ -81,6 +81,7 @@ public class SummarizationPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_NM_SUMMARIZATION_ALL)
     public void isAvailable_flagDisabledNasSupports_shouldReturnFalse() {
         mSetFlagsRule.disableFlags(Flags.FLAG_NM_SUMMARIZATION);
         mSetFlagsRule.disableFlags(Flags.FLAG_NM_SUMMARIZATION_UI);
