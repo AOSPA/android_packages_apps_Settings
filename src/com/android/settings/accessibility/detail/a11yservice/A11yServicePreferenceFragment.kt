@@ -42,7 +42,7 @@ import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceControll
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
-import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.ValidatedKeyParameters
 
 /** Fragment that shows the detail screen of an AccessibilityService */
 open class A11yServicePreferenceFragment : DashboardFragment() {
@@ -243,7 +243,9 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
         }
     }
 
-    override fun getPreferenceScreenBindingKeyParameters(context: Context): KeyParameters? {
+    override fun getPreferenceScreenBindingKeyParameters(
+        context: Context
+    ): ValidatedKeyParameters? {
         return A11yServiceScreen.parametersSchema.prepare(
             AccessibilitySettings.EXTRA_COMPONENT_NAME to
                 getFeatureComponentName().flattenToString()

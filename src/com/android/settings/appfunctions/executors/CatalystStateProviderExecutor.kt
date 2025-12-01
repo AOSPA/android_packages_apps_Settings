@@ -147,7 +147,7 @@ class CatalystStateProviderExecutor(
                     DeviceStateItem(
                         // Binding key is either equal to the key or contains the package name or
                         // other item specific id necessary to distinguish the items.
-                        key = metadata.bindingKey,
+                        key = "${screenMetaData.key}/${metadata.bindingKey}",
                         purpose = metadata.key,
                         name =
                             LocalizedString(

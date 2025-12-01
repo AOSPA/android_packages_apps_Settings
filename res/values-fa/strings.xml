@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"از <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> استفاده می‌کند. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> در <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> شروع می‌شود."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"از <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> استفاده می‌کند. ساعت تابستانی ندارد."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"ساعت تابستانی"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"زمان استاندارد"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"انتخاب براساس منطقه"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"‏انتخاب براساس اختلاف با GMT"</string>
@@ -4607,8 +4605,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"به این برنامه اجازه می‌دهد همه فایل‌های موجود در این دستگاه یا فضاهای ذخیره‌سازی متصل‌شده به آن را بخواند، تغییر دهد، و حذف کند. اگر این مجوز به برنامه داده شود، ممکن است بدون اطلاع صریح شما به فایل‌ها دسترسی یابد."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"می‌توانند به همه فایل‌ها دسترسی داشته باشند"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"خودکارسازی صفحه"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"اجازه دادن به این برنامه برای خودکارسازی کامل برنامه‌های دیگر"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"این برنامه می‌تواند برنامه‌هایتان را کنترل کند. وقتی خودکارسازی صفحه درحال انجام است نمی‌توان از برنامه‌های تحت کنترل استفاده کرد، اما همیشه می‌توانید آن را متوقف کنید."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"هربار پرسیده شود"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"همیشه مجاز"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"اجازه ندادن"</string>
@@ -6032,10 +6034,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"درستی‌سنجی کردن اطلاعات بازیابی"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"فیلترهای فروشگاه برنامه‌ها"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"برنامه‌ها را براساس رده سنی محتوایشان فیلتر می‌کند"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"هر فروشگاه محتوا را به‌صورت متفاوتی رده‌بندی می‌کند. رده‌بندی یک برنامه ممکن است در فروشگاه‌های مختلف متفاوت باشد."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"فیلتر کردن برنامه‌ها براساس رده‌بندی محتوا"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"فیلترهای محتوای وب"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"فیلترهای وب‌سایت، مسدود کردن سایت‌ها، فیلترهای مرورگر، مسدود کردن سایت‌های صریح، فیلتر کردن سایت‌ها، مسدود کردن نتایج جستجو، فیلتر کردن نتایج جستجوی صریح، محدودیت‌های محتوا"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"به فیلتر کردن محتوای صریح در برخی‌از برنامه‌ها و مرورگرهای این تلفن کمک می‌کند. ممکن است محتوای صریح همچنان در سایر برنامه‌ها، دستگاه‌ها، یا مرورگرها نمایش داده شود."</string>

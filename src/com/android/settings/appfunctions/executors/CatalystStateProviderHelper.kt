@@ -17,15 +17,16 @@
 package com.android.settings.appfunctions.executors
 
 import android.content.Context
+import android.os.Bundle
 import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateItemConfig
 import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceHierarchyNode
-import com.android.settingslib.metadata.PreferenceScreenCoordinate
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.ValidatedKeyParameters
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.toList
 
@@ -64,7 +65,9 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
                 PreferenceScreenRegistry.getKeyParameters(context, screenKey).toList().map {
                     getPreferenceHierarchy(
                         context,
-                        PreferenceScreenCoordinate(screenKey, it),
+                        screenKey,
+                        args = null,
+                        keyParameters = it,
                         settingConfigMap,
                     )
                 }
@@ -72,7 +75,9 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
                 PreferenceScreenRegistry.getParameters(context, screenKey).toList().map {
                     getPreferenceHierarchy(
                         context,
-                        PreferenceScreenCoordinate(screenKey, it),
+                        screenKey,
+                        args = it,
+                        keyParameters = null,
                         settingConfigMap,
                     )
                 }
@@ -81,7 +86,9 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
             listOf(
                 getPreferenceHierarchy(
                     context,
-                    PreferenceScreenCoordinate(screenKey),
+                    screenKey,
+                    args = null,
+                    keyParameters = null,
                     settingConfigMap,
                 )
             )
@@ -92,10 +99,18 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
 
 private suspend fun CoroutineScope.getPreferenceHierarchy(
     context: Context,
-    coordinate: PreferenceScreenCoordinate,
+    screenKey: String,
+    args: Bundle?,
+    keyParameters: ValidatedKeyParameters?,
     settingConfigMap: Map<String, DeviceStateItemConfig>,
 ): Pair<PreferenceScreenMetadata, List<PreferenceHierarchyNode>>? {
-    val screenMetaData = PreferenceScreenRegistry.create(context, coordinate) ?: return null
+    val screenMetaData =
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            PreferenceScreenRegistry.createWithKeyParameters(context, screenKey, keyParameters)
+        } else {
+            PreferenceScreenRegistry.create(context, screenKey, args)
+        } ?: return null
+
     if (screenMetaData is PreferenceAvailabilityProvider && !screenMetaData.isAvailable(context)) {
         return null
     }

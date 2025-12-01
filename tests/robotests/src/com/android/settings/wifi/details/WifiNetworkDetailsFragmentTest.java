@@ -142,6 +142,7 @@ public class WifiNetworkDetailsFragmentTest {
         doReturn(mHotspotConnectionCategory).when(mScreen)
                 .findPreference(KEY_HOTSPOT_CONNECTION_CATEGORY);
         mFragment.mNetworkDetailsTracker = mNetworkDetailsTracker;
+        mFragment.mWifiDetailPreferenceController2 = mWifiDetailPreferenceController2;
 
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mWifiFeatureProvider = mFeatureFactory.mWifiFeatureProvider;
@@ -236,8 +237,6 @@ public class WifiNetworkDetailsFragmentTest {
 
     @Test
     public void onHotspotNetworkChanged_dataNull_hotspotSetVisibleFalse() {
-        mFragment.mWifiDetailPreferenceController2 = mWifiDetailPreferenceController2;
-
         mFragment.onHotspotNetworkChanged(null);
 
         verify(mHotspotDeviceCategory).setVisible(false);
@@ -247,8 +246,6 @@ public class WifiNetworkDetailsFragmentTest {
 
     @Test
     public void onHotspotNetworkChanged_dataNotNull_hotspotSetVisibleTrue() {
-        mFragment.mWifiDetailPreferenceController2 = mWifiDetailPreferenceController2;
-
         mFragment.onHotspotNetworkChanged(mHotspotNetworkData);
 
         verify(mHotspotDeviceCategory).setVisible(true);

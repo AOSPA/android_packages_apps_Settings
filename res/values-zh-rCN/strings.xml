@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"使用<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>。<xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g>开始于 <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>。"</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"使用<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>。没有夏令时。"</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"夏令时"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"标准时间"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"按区域选择"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"按 GMT 时差选择"</string>
@@ -4606,8 +4604,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"允许此应用读取、修改和删除此设备或任何已连接的存储设备上的所有文件。如果您授予该权限，应用无需明确通知您即可访问文件。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以访问所有文件"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"屏幕自动化"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"允许此应用完全自动控制其他应用"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"此应用将能够控制您的应用。在屏幕自动化操作进行期间，无法使用受控应用，但您可以随时停止该操作。"</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"每次都询问"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"始终允许"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"不允许"</string>
@@ -6048,7 +6050,7 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"验证辅助联系信息"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"应用商店过滤条件"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"根据应用内容的分级过滤应用"</string>
-    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"每个商店对内容的分级方式各不相同。应用在不同商店中的分级可能会有所不同。"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"不同应用商店对内容的分级标准各不相同。同一应用在不同商店的分级可能存在差异。"</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"按内容分级过滤应用"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Web 内容过滤器"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"网站过滤器, 屏蔽网站, 浏览器过滤器, 屏蔽含露骨内容的网站, 过滤网站, 屏蔽搜索结果, 过滤含露骨内容的搜索结果, 内容限制, Website filters, Block sites, Browser filters, Block explicit sites, Filter sites, Block search results, Filter explicit search results, content restrictions"</string>

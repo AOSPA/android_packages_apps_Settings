@@ -74,7 +74,7 @@ import com.android.settings.accessibility.shortcuts.ui.EditShortcutsScreen;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.metadata.KeyParameters;
+import com.android.settingslib.metadata.ValidatedKeyParameters;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -555,7 +555,9 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
 
     @Nullable
     @Override
-    public KeyParameters getPreferenceScreenBindingKeyParameters(@NotNull Context context) {
+    public ValidatedKeyParameters getPreferenceScreenBindingKeyParameters(
+            @NotNull Context context
+    ) {
         // TODO(b/440383851): understand whether we should provide parameters to any caller and
         // put the shortcutTargets to keyParameters
         Bundle args = getArguments();

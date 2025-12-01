@@ -36,10 +36,10 @@ import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
-import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.ValidatedKeyParameters
 
 @ProvidePreferenceScreen(DisplayOverOtherAppsAppDetailScreen.KEY, parameterized = true)
 open class DisplayOverOtherAppsAppDetailScreen : SpecialAccessAppDetailScreen {
@@ -49,10 +49,17 @@ open class DisplayOverOtherAppsAppDetailScreen : SpecialAccessAppDetailScreen {
     )
     constructor(context: Context, arguments: Bundle) : super(context, arguments)
 
-    constructor(context: Context, keyArguments: KeyParameters) : super(context, keyArguments)
+    constructor(
+        context: Context,
+        keyArguments: ValidatedKeyParameters,
+    ) : super(context, keyArguments)
 
     override val key
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description: Int
+    override val purpose
+        get() = R.string.special_access_draw_overlay_app_detail_purpose
 
     override val bindingKey
         get() = "$KEY-$packageName"

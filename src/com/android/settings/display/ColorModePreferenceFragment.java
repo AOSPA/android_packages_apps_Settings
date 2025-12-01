@@ -163,9 +163,13 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
         final ArrayList<Integer> tmpviewPagerList = getViewPagerResource();
         mViewPager = preview.findViewById(R.id.viewpager);
 
+        boolean isRtl = getContext().getResources().getConfiguration().getLayoutDirection()
+                == View.LAYOUT_DIRECTION_RTL;
+
         mViewPagerImages = new View[3];
         for (int idx = 0; idx < tmpviewPagerList.size(); idx++) {
-            mViewPagerImages[idx] =
+            int index = isRtl ? tmpviewPagerList.size() - idx - 1 : idx;
+            mViewPagerImages[index] =
                     getLayoutInflater().inflate(tmpviewPagerList.get(idx), null /* root */);
         }
 
@@ -210,11 +214,14 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
                     new ViewGroup.MarginLayoutParams(DOT_INDICATOR_SIZE, DOT_INDICATOR_SIZE);
             lp.setMargins(DOT_INDICATOR_LEFT_PADDING, 0, DOT_INDICATOR_RIGHT_PADDING, 0);
             imageView.setLayoutParams(lp);
-            mDotIndicators[i] = imageView;
-
-            viewGroup.addView(mDotIndicators[i]);
+            int dotIndex = isRtl ? mPageList.size() - 1 - i : i;
+            mDotIndicators[dotIndex] = imageView;
+            viewGroup.addView(imageView);
         }
 
+        if (isRtl) {
+            mViewPager.setCurrentItem(mPageList.size() - 1, true);
+        }
         updateIndicator(mViewPager.getCurrentItem());
     }
 
@@ -338,12 +345,13 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
                 } else {
                     mViewPagerImages[position].setContentDescription(
                             getContext().getString(R.string.colors_viewpager_content_description));
-                    updateIndicator(position);
                 }
             }
 
             @Override
-            public void onPageSelected(int position) {}
+            public void onPageSelected(int position) {
+                updateIndicator(position);
+            }
 
             @Override
             public void onPageScrollStateChanged(int state) {}

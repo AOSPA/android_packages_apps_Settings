@@ -3614,7 +3614,9 @@
     <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the always-on ambient display feature with wallpaper not visible on AOD. -->
     <string name="doze_always_on_summary_without_wallpaper">Hide lock screen wallpaper when screen is off</string>
     <!-- [CHAR LIMIT=NONE] Display settings screen, always-on display, long description-->
-    <string name="doze_always_on_summary_long">Always-on display shows the time, date, and more when the screen is off</string>
+    <string name="doze_always_on_summary_long">Shows the time, date, and more when the screen is off</string>
+    <!-- [CHAR LIMIT=NONE] Display settings screen, always-on display, short description-->
+    <string name="doze_always_on_summary_short">Show time, date, and more</string>
     <!-- [CHAR LIMIT=50] Title for a group of settings related to the wallpaper on always-on display-->
     <string name="doze_always_on_wallpaper_options">Wallpaper options</string>
     <!-- [CHAR LIMIT=50] Title for always-on display that will enable the wallpaper to be visible-->
@@ -11436,15 +11438,16 @@
     <!-- Computer control automation settings title [CHAR LIMIT=40] [SCREENSHOT=screen/7GzP2k3PhF8UTVQ] -->
     <string name="computer_control_automation_page_title">Screen automation</string>
     <!-- Sub heading for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
-    <string name="computer_control_automation_sub_heading">To complete tasks for you, this app will be able to control and get info from other apps, and see your on-screen content</string>
+    <string name="computer_control_automation_sub_heading">This app will be able to see and interact with other apps\' screen content to help you complete tasks, even when the apps are in the background</string>
     <!-- Footer summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
-    <string name="computer_control_automation_footer_summary">You can\u2019t use apps while they\u2019re automated, but you can stop automation any time to use them again</string>
+    <string name="computer_control_automation_footer_summary">If you don\'t allow screen automation, <xliff:g  example="Example App">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g example="Example App">%1$s</xliff:g> in other ways</string>
     <!-- Summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/55Y5GXxjQJNFvRT] -->
-    <string name="computer_control_automation_page_summary">Allow apps to complete tasks for you</string>
+    <string name="computer_control_automation_page_summary">Allow apps to help you complete tasks by interacting with other apps\' screen content</string>
+    <string name="computer_control_automation_app_page_summary">Allow this app to help you complete tasks by interacting with other apps\' screen content</string>
     <!-- Preference summary text for an app when computer control access must be confirmed every time. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
     <string name="computer_control_automation_ask_every_time">Ask every time</string>
     <!-- Preference summary text for an app when computer control access is always allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF -->
-    <string name="computer_control_automation_always_allowed">Always allowed</string>
+    <string name="computer_control_automation_always_allowed">Always allow</string>
     <!-- Preference summary text for an app when computer control access is not allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
     <string name="computer_control_automation_dont_allow">Don\u2019t allow</string>
 
@@ -15219,6 +15222,8 @@
     <string name="supervision_verify_pin_recovery_title">Verify recovery info</string>
     <!-- Title for app store filters entry [CHAR LIMIT=60] -->
     <string name="supervision_app_store_filters_title">App store filters</string>
+    <!-- Search keywords for app store filters entry [CHAR LIMIT=NONE] -->
+    <string name="supervision_app_store_filters_keywords">App filters, Mature app filters, Mature filters, Explicit apps, Block apps, Block explicit apps, Block mature apps</string>
     <!-- Top intro for app store filters [CHAR LIMIT=NONE] -->
     <string name="supervision_app_store_filters_top_intro">Filter apps based on the maturity of their content</string>
     <!-- Title for app store filters footer [CHAR LIMIT=NONE] -->

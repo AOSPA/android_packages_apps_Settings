@@ -22,7 +22,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
-import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.ValidatedKeyParameters
 
 /**
  * Returns the [Intent] to start given settings activity and highlight a specific preference.
@@ -65,7 +65,7 @@ fun makeLaunchIntent(
 fun makeLaunchIntent(
     context: Context,
     activityClass: Class<out Activity>,
-    keyParameters: KeyParameters,
+    keyParameters: ValidatedKeyParameters,
     key: String?,
 ) = createIntent(context, activityClass).apply { highlightPreference(keyParameters, key) }
 
@@ -97,7 +97,7 @@ fun Intent.highlightPreference(arguments: Bundle, key: String?) {
  * @param keyParameters arguments of the parameterized screen
  * @param key preference to highlight
  */
-fun Intent.highlightPreference(keyParameters: KeyParameters, key: String?) {
+fun Intent.highlightPreference(keyParameters: ValidatedKeyParameters, key: String?) {
     putExtra(EXTRA_BINDING_SCREEN_ARGS, keyParameters.toBundle())
     if (key != null) putExtra(EXTRA_FRAGMENT_ARG_KEY, key)
 }

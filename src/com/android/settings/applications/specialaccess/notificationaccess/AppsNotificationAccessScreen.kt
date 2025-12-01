@@ -49,6 +49,10 @@ open class AppsNotificationAccessScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.notification_access_purpose
+
     override val title: Int
         get() = R.string.manage_notification_access_title
 

@@ -52,6 +52,10 @@ open class DataSaverScreen(context: Context) :
     override val key
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.restrict_background_parent_entry_purpose
+
     override val title
         get() = R.string.data_saver_title
 

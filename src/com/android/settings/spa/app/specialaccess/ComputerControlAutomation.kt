@@ -61,7 +61,6 @@ import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.Radio2
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
-import com.android.settingslib.spa.widget.ui.AnnotatedText
 import com.android.settingslib.spa.widget.ui.Category
 import com.android.settingslib.spa.widget.ui.Footer
 import com.android.settingslib.spaprivileged.framework.common.appOpsManager
@@ -270,7 +269,13 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
                 )
             }
             packageInfo.applicationInfo?.let { Content(it, model) }
-            Footer { AnnotatedText(model.footerResId) }
+            Footer {
+                Text(
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodyMedium,
+                    text = stringResource(model.footerResId, title),
+                )
+            }
         }
     }
 
@@ -314,7 +319,7 @@ class ComputerControlAutomationAppListModel : AppListModel<ComputerControlAppRec
     val askTitleResId = R.string.computer_control_automation_ask_every_time
     val deniedTitleResId = R.string.computer_control_automation_dont_allow
     val pageTitleResId = R.string.computer_control_automation_page_title
-    val pageSummaryResId = R.string.computer_control_automation_page_summary
+    val pageSummaryResId = R.string.computer_control_automation_app_page_summary
     val subHeadingResId = R.string.computer_control_automation_sub_heading
     val footerResId = R.string.computer_control_automation_footer_summary
     val appOps =

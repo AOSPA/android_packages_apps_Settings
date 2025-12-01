@@ -41,6 +41,9 @@ open class SupervisionWebContentFiltersBrowserSupportedAppsScreen :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.supervision_web_content_filters_browser_supported_apps_purpose
+
     override val settingsKey: String
         get() = BROWSER_CONTENT_FILTERS_ENABLED
 

@@ -39,7 +39,7 @@ import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityScr
 import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.metadata.KeyParameters;
+import com.android.settingslib.metadata.ValidatedKeyParameters;
 
 import java.util.Map;
 import java.util.Objects;
@@ -155,7 +155,9 @@ public class LaunchAccessibilityActivityPreferenceFragment extends DashboardFrag
 
     @Nullable
     @Override
-    public KeyParameters getPreferenceScreenBindingKeyParameters(@NonNull Context context) {
+    public ValidatedKeyParameters getPreferenceScreenBindingKeyParameters(
+            @NonNull Context context
+    ) {
         return A11yActivityScreen.Companion.getParametersSchema().prepare(
                 Map.of(
                     AccessibilitySettings.EXTRA_COMPONENT_NAME,

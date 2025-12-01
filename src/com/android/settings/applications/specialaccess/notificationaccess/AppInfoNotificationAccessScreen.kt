@@ -38,7 +38,6 @@ import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.metadata.BooleanValuePreference
-import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -46,6 +45,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.SwitchPreferenceBinding
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
@@ -63,7 +63,7 @@ private constructor(
         "This property will be removed once the catalyst framework stops passing the arguments as a bundle. Use the keyParameters instead."
     )
     final override val arguments: Bundle?,
-    final override val keyParameters: KeyParameters?,
+    final override val keyParameters: ValidatedKeyParameters?,
 ) :
     PreferenceScreenMixin,
     PreferenceSummaryProvider,
@@ -93,10 +93,18 @@ private constructor(
     )
     constructor(context: Context, args: Bundle) : this(context, args, null)
 
-    constructor(context: Context, keyParameters: KeyParameters) : this(context, null, keyParameters)
+    constructor(
+        context: Context,
+        keyParameters: ValidatedKeyParameters,
+    ) : this(context, null, keyParameters)
 
     override val key: String
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.device_state_app_info_notification_access_purpose
+
 
     override val screenTitle: Int
         get() = R.string.manage_notification_access_title
@@ -159,7 +167,7 @@ private constructor(
         }
 
         @JvmStatic
-        override fun keyParameters(context: Context): Flow<KeyParameters> {
+        override fun keyParameters(context: Context): Flow<ValidatedKeyParameters> {
             // TODO (b/457649430): when the catalyst framework stops passing the arguments as a
             // bundle: replace the parameters(context) call to the actual implementation,
             // or make this function the primary implementation and the legacy parameters() should
