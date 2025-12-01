@@ -54,7 +54,6 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingtoolbar.FloatingToolbarLayout;
 import com.google.android.material.resources.TextAppearanceConfig;
 import com.google.android.setupcompat.util.WizardManagerHelper;
-import com.google.android.setupdesign.transition.TransitionHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.List;
@@ -70,7 +69,6 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
 
     protected static final boolean DEBUG_TIMING = false;
     private static final String TAG = "SettingsBaseActivity";
-    private static final int DEFAULT_REQUEST = -1;
 
     private static final int EXPRESSIVE_LAYOUT_ID =
             com.android.settingslib.collapsingtoolbar.R.layout.settingslib_expressive_collapsing_toolbar_base_layout;
@@ -84,9 +82,8 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     protected CategoryMixin mCategoryMixin;
     protected CollapsingToolbarLayout mCollapsingToolbarLayout;
     protected AppBarLayout mAppBarLayout;
-    private Toolbar mToolbar;
 
-    private CollapsingToolbarDelegate mToolbardelegate;
+    private CollapsingToolbarDelegate mToolbarDelegate;
 
     @Override
     public CategoryMixin getCategoryMixin() {
@@ -97,9 +94,6 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (isAnySetupWizard) {
-            TransitionHelper.applyForwardTransition(this);
-            TransitionHelper.applyBackwardTransition(this);
-
             // Apply SetupWizard light theme during setup flow. This is for SubSettings pages.
             if (this instanceof SubSettings) {
                 // setTheme needs to be called before inflating any views (e.g. before calling
@@ -179,13 +173,6 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         if (DEBUG_TIMING) {
             Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
         }
-    }
-
-    @Override
-    public void setActionBar(@androidx.annotation.Nullable Toolbar toolbar) {
-        super.setActionBar(toolbar);
-
-        mToolbar = toolbar;
     }
 
     @Override
@@ -311,9 +298,9 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
 
     /**
      * This internal ActionBar will be appeared automatically when the
-     * Utils.setupEdgeToEdge is invoked.
+     * {@link Utils#setupEdgeToEdge} is invoked.
      *
-     * @see Utils.setupEdgeToEdge
+     * @see Utils#setupEdgeToEdge
      */
     private void hideInternalActionBar() {
         final View actionBarContainer =
@@ -434,10 +421,10 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     }
 
     private CollapsingToolbarDelegate getToolbarDelegate() {
-        if (mToolbardelegate == null) {
-            mToolbardelegate = new CollapsingToolbarDelegate(new EmptyDelegateCallback(), true);
+        if (mToolbarDelegate == null) {
+            mToolbarDelegate = new CollapsingToolbarDelegate(new EmptyDelegateCallback(), true);
         }
-        return mToolbardelegate;
+        return mToolbarDelegate;
     }
 
     @Override
