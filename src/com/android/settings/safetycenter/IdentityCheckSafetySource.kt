@@ -266,6 +266,13 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
             return "tablet" in SystemProperties.get("ro.build.characteristics", "").split(',')
         }
 
+        private fun isIdentityCheckToggleEnabled(context: Context): Boolean =
+            Settings.Secure.getInt(
+                context.contentResolver,
+                Settings.Secure.MANDATORY_BIOMETRICS,
+                0,
+            ) == 1
+
         private fun getIfIdentityCheckPromoNotificationHasBeenClicked(
             context: Context,
             isWatch: Boolean,
@@ -352,7 +359,7 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                 !getIfIdentityCheckPromoNotificationHasBeenClicked(
                     context,
                     issueCardDetails.intentAction == ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS,
-                )
+                ) && isIdentityCheckToggleEnabled(context)
             ) {
                 issue
                     .setCustomNotification(notification)
