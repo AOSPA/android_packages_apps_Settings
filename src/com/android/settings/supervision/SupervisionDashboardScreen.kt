@@ -15,13 +15,18 @@
  */
 package com.android.settings.supervision
 
+import android.app.role.OnRoleHoldersChangedListener
+import android.app.role.RoleManager
+import android.app.role.RoleManager.ROLE_SUPERVISION
 import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
+import android.os.UserHandle
 import android.provider.Settings
 import android.util.Log
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceGroup
@@ -51,10 +56,14 @@ import kotlinx.coroutines.CoroutineScope
  * 3. Entry point to supervision PIN management settings page.
  */
 @ProvidePreferenceScreen(SupervisionDashboardScreen.KEY)
-open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecycleProvider {
+open class SupervisionDashboardScreen :
+    PreferenceScreenMixin, PreferenceLifecycleProvider, OnRoleHoldersChangedListener {
     private var supervisionClient: SupervisionMessengerClient? = null
     private var supervisionManager: SupervisionManager? = null
     private var lifeCycleContext: PreferenceLifecycleContext? = null
+
+    private lateinit var roleManager: RoleManager
+    private var isSupervisionAppListBuilt: Boolean = false
 
     private val supervisionListener =
         object : SupervisionManager.SupervisionListener() {
@@ -77,10 +86,21 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
             }
         }
 
+    override fun onRoleHoldersChanged(@NonNull roleName: String, @NonNull user: UserHandle) {
+        if (roleName == ROLE_SUPERVISION) {
+            lifeCycleContext?.let { context ->
+                // Force a rebuild and reset the flag so onResume doesn't rebuild it again
+                // if the change happened while on a different screen.
+                updateSupervisionAppPreferences(context)
+            }
+        }
+    }
+
     override fun onCreate(context: PreferenceLifecycleContext) {
         if (isContainer(context)) {
             this.lifeCycleContext = context
             supervisionManager = context.getSystemService(SupervisionManager::class.java)
+            roleManager = context.getSystemService(RoleManager::class.java)!!
             if (!Flags.enableSupervisionSettingsUiUpdates()) {
                 supervisionManager?.registerSupervisionListener(supervisionListener)
             }
@@ -88,36 +108,25 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
     }
 
     override fun onResume(context: PreferenceLifecycleContext) {
-        if (Flags.enableSupervisionSettingsUiUpdates()) {
-            if (isContainer(context)) {
-                supervisionManager?.registerSupervisionListener(supervisionListener)
+        if (Flags.enableSupervisionSettingsUiUpdates() && isContainer(context)) {
+            supervisionManager?.registerSupervisionListener(supervisionListener)
+            roleManager.addOnRoleHoldersChangedListenerAsUser(
+                context.mainExecutor,
+                this,
+                UserHandle.ALL,
+            )
+            // Build the supervision app list for the first time
+            if (!isSupervisionAppListBuilt) {
+                updateSupervisionAppPreferences(context)
             }
-            var supervisionAppCount = 0
-            val supervisionAppsGroup =
-                context.findPreference<PreferenceGroup>(ACTIVE_SUPERVISION_APPS_GROUP)?.apply {
-                    removeAll()
-                    for (supervisionApp in context.supervisionRoleHolders) {
-                        try {
-                            addPreference(createSupervisionAppPreference(context, supervisionApp))
-                            // Increment the count on successfully adding the preference
-                            supervisionAppCount++
-                        } catch (e: Exception) {
-                            Log.e(
-                                SupervisionLog.TAG,
-                                "Error displaying supervision app preference for: $supervisionApp",
-                                e,
-                            )
-                        }
-                    }
-                }
-            // Set the visibility of the entire group based on whether any apps were found.
-            supervisionAppsGroup?.isVisible = supervisionAppCount > 0
         }
     }
 
     override fun onPause(context: PreferenceLifecycleContext) {
         if (Flags.enableSupervisionSettingsUiUpdates() && isContainer(context)) {
             supervisionManager?.unregisterSupervisionListener(supervisionListener)
+            roleManager.removeOnRoleHoldersChangedListenerAsUser(this, UserHandle.ALL)
+            this.isSupervisionAppListBuilt = false
         }
     }
 
@@ -175,29 +184,34 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                     R.string.supervision_features_group_1_purpose,
                     R.string.device_supervision_features_title,
                 ) order -100
-                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2,
-                R.string.supervision_dynamic_group_2) order 10 += {
-                    +SupervisionAppStoreFiltersScreen.KEY order -100
-                    +SupervisionWebContentFiltersScreen.KEY order -50
-                }
+                +UntitledPreferenceCategoryMetadata(
+                    SUPERVISION_DYNAMIC_GROUP_2,
+                    R.string.supervision_dynamic_group_2,
+                ) order 10 +=
+                    {
+                        +SupervisionAppStoreFiltersScreen.KEY order -100
+                        +SupervisionWebContentFiltersScreen.KEY order -50
+                    }
             } else {
                 +SupervisionMainSwitchPreference(context, supervisionClient) order -200
                 +UntitledPreferenceCategoryMetadata(
                     key = SUPERVISION_DYNAMIC_GROUP_1,
                     purpose = R.string.supervision_features_group_1_purpose,
-                ) order -100 += {
-                    +SupervisionWebContentFiltersScreen.KEY order 100
-                }
+                ) order -100 +=
+                    {
+                        +SupervisionWebContentFiltersScreen.KEY order 100
+                    }
             }
             +UntitledPreferenceCategoryMetadata(
                 key = "pin_management_group",
                 purpose = R.string.pin_management_group_purpose,
-            ) order 100 += {
-                if (Flags.enableSupervisionSettingsUiUpdates()) {
-                    +SupervisionSetUpPinPreference() order 5
+            ) order 100 +=
+                {
+                    if (Flags.enableSupervisionSettingsUiUpdates()) {
+                        +SupervisionSetUpPinPreference() order 5
+                    }
+                    +SupervisionPinManagementScreen.KEY order 10
                 }
-                +SupervisionPinManagementScreen.KEY order 10
-            }
             if (Flags.enableSupervisionSettingsUiUpdates()) {
                 +NonIndexablePreferenceCategory(
                     ACTIVE_SUPERVISION_APPS_GROUP,
@@ -217,10 +231,11 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                 +UntitledPreferenceCategoryMetadata(
                     key = "footer_group",
                     purpose = R.string.footer_group_purpose,
-                ) order 300 += {
-                    +SupervisionPromoFooterPreference(supervisionClient) order 30
-                    +SupervisionAocFooterPreference(supervisionClient) order 40
-                }
+                ) order 300 +=
+                    {
+                        +SupervisionPromoFooterPreference(supervisionClient) order 30
+                        +SupervisionAocFooterPreference(supervisionClient) order 40
+                    }
             }
         }
 
@@ -229,6 +244,30 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
 
     private fun getSupervisionClient(context: Context) =
         supervisionClient ?: SupervisionMessengerClient(context).also { supervisionClient = it }
+
+    private fun updateSupervisionAppPreferences(context: PreferenceLifecycleContext) {
+        var supervisionAppCount = 0
+        val supervisionAppsGroup =
+            context.findPreference<PreferenceGroup>(ACTIVE_SUPERVISION_APPS_GROUP)?.apply {
+                removeAll()
+                for (supervisionApp in context.supervisionRoleHolders) {
+                    try {
+                        addPreference(createSupervisionAppPreference(context, supervisionApp))
+                        // Increment the count on successfully adding the preference
+                        supervisionAppCount++
+                    } catch (e: Exception) {
+                        Log.e(
+                            SupervisionLog.TAG,
+                            "Error displaying supervision app preference for: $supervisionApp",
+                            e,
+                        )
+                    }
+                }
+            }
+        // Set the visibility of the entire group based on whether any apps were found.
+        supervisionAppsGroup?.isVisible = supervisionAppCount > 0
+        isSupervisionAppListBuilt = true
+    }
 
     /** Creates a Preference item for a specific supervision app package. */
     private fun createSupervisionAppPreference(context: Context, packageName: String): Preference {
