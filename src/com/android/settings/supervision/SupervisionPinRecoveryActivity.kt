@@ -67,7 +67,8 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
             ACTION_RECOVERY -> startVerification()
             ACTION_UPDATE -> startConfirmPin()
             ACTION_POST_SETUP_VERIFY -> startConfirmPin()
-            else -> setResultCanceledFinish("PIN recovery result unknown actionType: $actionType")
+            else ->
+                setResultCanceledAndFinish("PIN recovery result unknown actionType: $actionType")
         }
     }
 
@@ -80,7 +81,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
         if (setupIntent != null) {
             verificationLauncher.launch(setupIntent)
         } else {
-            setResultCanceledFinish("No activity found for SETUP PIN recovery.")
+            setResultCanceledAndFinish("No activity found for SETUP PIN recovery.")
         }
     }
 
@@ -93,7 +94,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
         if (confirmPinIntent != null) {
             confirmPinLauncher.launch(confirmPinIntent)
         } else {
-            setResultCanceledFinish("No activity found for confirm PIN.")
+            setResultCanceledAndFinish("No activity found for confirm PIN.")
         }
     }
 
@@ -126,7 +127,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
 
             when (approvalMethods.size) {
                 0 -> {
-                    setResultCanceledFinish("No supervision recovery methods available.")
+                    setResultCanceledAndFinish("No supervision recovery methods available.")
                 }
                 1 -> {
                     // If there's only one supervision authentication method, go directly to that
@@ -161,7 +162,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                     verificationLauncher.launch(this)
                 }
             } else {
-                setResultCanceledFinish("No supervision recovery methods available.")
+                setResultCanceledAndFinish("No supervision recovery methods available.")
             }
         }
     }
@@ -202,7 +203,9 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                     if (setIntent != null) {
                         verificationLauncher.launch(setIntent)
                     } else {
-                        setResultCanceledFinish("No activity found for SET_VERIFIED PIN recovery.")
+                        setResultCanceledAndFinish(
+                            "No activity found for SET_VERIFIED PIN recovery."
+                        )
                     }
                 }
                 ACTION_UPDATE -> {
@@ -214,7 +217,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                     if (updatePinIntent != null) {
                         verificationLauncher.launch(updatePinIntent)
                     } else {
-                        setResultCanceledFinish("No activity found for UPDATE PIN recovery.")
+                        setResultCanceledAndFinish("No activity found for UPDATE PIN recovery.")
                     }
                 }
                 ACTION_POST_SETUP_VERIFY -> {
@@ -231,22 +234,22 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                             verificationLauncher.launch(postSetupVerifyIntent)
                         }
                     } else {
-                        setResultCanceledFinish(
+                        setResultCanceledAndFinish(
                             "No activity found for post setup PIN recovery verify."
                         )
                     }
                 }
                 else ->
-                    setResultCanceledFinish("Unknown action after PIN confirmation: $nextAction")
+                    setResultCanceledAndFinish("Unknown action after PIN confirmation: $nextAction")
             }
         } else {
-            setResultCanceledFinish("PIN confirmation failed with result: $resultCode")
+            setResultCanceledAndFinish("PIN confirmation failed with result: $resultCode")
         }
     }
 
     private fun onVerification(resultCode: Int, data: Intent?) {
         if (intent.action == null) {
-            setResultCanceledFinish("Null action received in onVerification.")
+            setResultCanceledAndFinish("Null action received in onVerification.")
             return
         }
 
@@ -254,7 +257,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
 
         if (resultCode != RESULT_OK) {
             logRecoveryResult(action, success = false)
-            setResultCanceledFinish(
+            setResultCanceledAndFinish(
                 "Verification process failed with result: $resultCode, action: $action"
             )
             return
@@ -270,7 +273,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
             }
 
         if (actionNeedsData && data == null) {
-            setResultCanceledFinish("Cannot save recovery info, no result data. Action: $action")
+            setResultCanceledAndFinish("Cannot save recovery info, no result data. Action: $action")
             return
         }
 
@@ -289,7 +292,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                     )
 
                 if (recoveryInfo == null) {
-                    setResultCanceledFinish(
+                    setResultCanceledAndFinish(
                         "Cannot save recovery info, no valid recovery info from result. Action: $action"
                     )
                     return
@@ -301,7 +304,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                 setResultOkAndFinish()
             }
             else -> {
-                setResultCanceledFinish("Unknown action after successful verification: $action")
+                setResultCanceledAndFinish("Unknown action after successful verification: $action")
             }
         }
     }
@@ -313,7 +316,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
             setResultOkAndFinish()
         } else {
             logRecoveryResult(intent.action, success = false)
-            setResultCanceledFinish("Setting new PIN failed with result cancelled.")
+            setResultCanceledAndFinish("Setting new PIN failed with result cancelled.")
         }
     }
 
@@ -323,7 +326,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
     )
     private fun startResetPinActivity() {
         if (!resetSupervisionUser()) {
-            setResultCanceledFinish("Failed to reset supervision user.")
+            setResultCanceledAndFinish("Failed to reset supervision user.")
             logRecoveryResult(ACTION_RECOVERY, success = false)
             return
         }
@@ -339,7 +342,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
     }
 
     /** Helper method to handle errors consistently. */
-    private fun setResultCanceledFinish(errorMessage: String) {
+    private fun setResultCanceledAndFinish(errorMessage: String) {
         Log.e(SupervisionLog.TAG, errorMessage)
         setResult(RESULT_CANCELED)
         finish()

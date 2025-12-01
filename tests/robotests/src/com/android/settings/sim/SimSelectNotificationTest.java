@@ -54,6 +54,7 @@ import static org.mockito.Mockito.when;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.job.JobScheduler;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -108,6 +109,8 @@ public class SimSelectNotificationTest {
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
+    private JobScheduler mJobScheduler;
+    @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
     private SubscriptionManager mSubscriptionManager;
@@ -148,6 +151,8 @@ public class SimSelectNotificationTest {
                 .thenReturn(mNotificationManager);
         when(mContext.getSystemService(NotificationManager.class))
                 .thenReturn(mNotificationManager);
+        when(mContext.getSystemService(JobScheduler.class))
+                .thenReturn(mJobScheduler);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE))
                 .thenReturn(mTelephonyManager);
         when(mContext.getSystemService(UserManager.class))
@@ -159,7 +164,7 @@ public class SimSelectNotificationTest {
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.checkPermission(any(), any()))
                 .thenReturn(PackageManager.PERMISSION_GRANTED);
-        when(mUserManager.isMainUser()).thenReturn(true);
+        when(mUserManager.isAdminUser()).thenReturn(true);
         when(mContext.getSharedPreferences(
                 SubscriptionActionDialogActivity.SIM_ACTION_DIALOG_PREFS, MODE_PRIVATE))
                 .thenReturn(mSharedPreferences);
@@ -248,15 +253,38 @@ public class SimSelectNotificationTest {
     }
 
     @Test
-    public void onReceivePrimarySubListChange_userIdIsNotMain_notificationShouldNotSend() {
-        when(mUserManager.isMainUser()).thenReturn(false);
+    public void onReceiveEnableMms_userIdIsNotAdmin_notificationShouldNotSend() {
+        when(mUserManager.isAdminUser()).thenReturn(false);
+        Intent intent = new Intent(Settings.ACTION_ENABLE_MMS_DATA_REQUEST);
+        intent.putExtra(EXTRA_SUB_ID, mSubId);
+        intent.putExtra(EXTRA_ENABLE_MMS_DATA_REQUEST_REASON,
+                ENABLE_MMS_DATA_REQUEST_REASON_OUTGOING_MMS);
+
+        mSimSelectNotification.onReceive(mContext, intent);
+
+        verify(mNotificationManager, never()).createNotificationChannel(any());
+    }
+
+    @Test
+    public void onReceivePrimarySubListChange_userIdIsAdmin_shouldScheduleJob() {
         Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
         intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
                 EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA);
 
-        // If MMS data is already enabled, there's no need to trigger the notification.
         mSimSelectNotification.onReceive(mContext, intent);
-        verify(mNotificationManager, never()).createNotificationChannel(any());
+
+        verify(mJobScheduler).schedule(any());
+    }
+
+    @Test
+    public void onReceivePrimarySubListChange_userIdIsNotAdmin_notificationShouldNotSend() {
+        when(mUserManager.isAdminUser()).thenReturn(false);
+        Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
+        intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
+                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA);
+
+        mSimSelectNotification.onReceive(mContext, intent);
+        verify(mJobScheduler, never()).schedule(any());
     }
 
     @Test

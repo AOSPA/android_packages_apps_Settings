@@ -21,12 +21,11 @@ import android.os.Bundle
 import com.android.settings.flags.Flags
 
 /**
- * Retrieves an integer value from a [Bundle] by a given [key], gracefully handling cases where the
- * underlying value is stored as either a `String` or an `Int`.
+ * Retrieves a subscription ID from a [Bundle] by a given [key].
  *
- * This function is useful for migrations where a feature flag controls the data type of a
- * parameter. It checks the `Flags.catalystUseStringBundle()` flag to determine whether to retrieve
- * the value as a `String` and convert it to an `Int`, or to retrieve it directly as an `Int`.
+ * This function first attempts to retrieve the value as `String` and if the `String` value is not
+ * found, then attempts to retrieve the value as 'Int'. This dual approach provides compatibility
+ * for cases where the subscription ID might be stored in either format.
  *
  * @param key The key to look up in the Bundle.
  * @param defaultValue The value to return if the key is not found or if the `String` value cannot
@@ -35,11 +34,7 @@ import com.android.settings.flags.Flags
  *   parsing error occurs.
  */
 fun Bundle.getSubId(key: String, defaultValue: Int): Int {
-    return if (Flags.catalystUseStringBundle()) {
-        getString(key)?.toIntOrNull() ?: defaultValue
-    } else {
-        getInt(key, defaultValue)
-    }
+    return getString(key)?.let { it.toIntOrNull() ?: defaultValue } ?: getInt(key, defaultValue)
 }
 
 /**

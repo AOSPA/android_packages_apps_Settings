@@ -55,7 +55,16 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
                 if (params == null) {
                     throw IllegalArgumentException("Provided params are null.")
                 }
-                val result = executeSetDeviceStateRequest(appFunctionType, params)
+                val result =
+                    when (appFunctionType) {
+                        DeviceStateAppFunctionType.SET_DEVICE_STATE ->
+                            executeSetDeviceStateRequest(appFunctionType, params)
+                        else ->
+                            SetDeviceStateItemResponse(
+                                isSuccessful = false,
+                                currentValue = "Not implemented",
+                            )
+                    }
 
                 DeviceStateSetterExecutorResult(result = result)
             } catch (e: Exception) {

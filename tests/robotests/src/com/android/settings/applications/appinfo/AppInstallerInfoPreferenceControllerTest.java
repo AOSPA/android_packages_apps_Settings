@@ -18,10 +18,10 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -53,6 +53,9 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class AppInstallerInfoPreferenceControllerTest {
 
+    private static final String APK_PACKAGE_NAME = "Package1";
+    private static final String APEX_PACKAGE_NAME = "Package2";
+
     @Mock
     private PackageManager mPackageManager;
     @Mock
@@ -77,8 +80,10 @@ public class AppInstallerInfoPreferenceControllerTest {
         when(mInstallSourceInfo.getInstallingPackageName()).thenReturn(installerPackage);
         when(mPackageManager.getApplicationInfo(eq(installerPackage), anyInt()))
                 .thenReturn(mAppInfo);
+        mockModulePackage(APK_PACKAGE_NAME, false /* isApex */);
+        mockModulePackage(APEX_PACKAGE_NAME, true /* isApex */);
         mController = new AppInstallerInfoPreferenceController(mContext, "test_key");
-        mController.setPackageName("Package1");
+        mController.setPackageName(APK_PACKAGE_NAME);
         mController.setParentFragment(mFragment);
     }
 
@@ -91,12 +96,10 @@ public class AppInstallerInfoPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_hasAppLabel_shouldReturnAvailable()
             throws PackageManager.NameNotFoundException {
-        final String packageName = "Package1";
         when(mAppInfo.loadLabel(mPackageManager)).thenReturn("Label1");
         mController = new AppInstallerInfoPreferenceController(mContext, "test_key");
-        mController.setPackageName(packageName);
+        mController.setPackageName(APK_PACKAGE_NAME);
         mController.setParentFragment(mFragment);
-        mockModulePackage(packageName, false /* isApex */);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
@@ -145,10 +148,8 @@ public class AppInstallerInfoPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_apexPackage_shouldReturnDisabled()
             throws PackageManager.NameNotFoundException {
-        final String packageName = "Package";
         when(mAppInfo.loadLabel(mPackageManager)).thenReturn("Label");
-        mController.setPackageName(packageName);
-        mockModulePackage(packageName, true /* isApex */);
+        mController.setPackageName(APEX_PACKAGE_NAME);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.DISABLED_FOR_USER);
@@ -160,13 +161,14 @@ public class AppInstallerInfoPreferenceControllerTest {
         final ApplicationInfo applicationInfo = new ApplicationInfo();
         applicationInfo.sourceDir = "apex";
         packageInfo.applicationInfo = applicationInfo;
+        packageInfo.isApex = isApex;
 
+        when(mPackageManager.getPackageInfo(eq(packageName), anyInt() /* flags */)).thenReturn(
+                packageInfo);
         if (isApex) {
             when(mPackageManager.getModuleInfo(packageName, 0 /* flags */)).thenReturn(
                     new ModuleInfo());
         } else {
-            when(mPackageManager.getPackageInfo(packageName, 0 /* flags */)).thenReturn(
-                    packageInfo);
             when(mPackageManager.getModuleInfo(packageName, 0 /* flags */)).thenThrow(
                     new PackageManager.NameNotFoundException());
         }

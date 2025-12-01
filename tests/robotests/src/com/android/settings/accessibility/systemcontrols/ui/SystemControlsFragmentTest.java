@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility;
+package com.android.settings.accessibility.systemcontrols.ui;
 
 import static com.google.common.truth.Truth.assertThat;
 

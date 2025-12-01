@@ -101,4 +101,15 @@ public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatur
             long currentTimeMs) {
         return null;
     }
+
+    @Override
+    public boolean isForceFullCharge(@NonNull Context context) {
+        return false;
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getForceFullChargeLabel(@NonNull Context context) {
+        return null;
+    }
 }

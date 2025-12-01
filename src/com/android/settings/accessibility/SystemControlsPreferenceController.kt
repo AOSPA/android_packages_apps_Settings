@@ -41,4 +41,4 @@ class SystemControlsPreferenceController(context: Context, prefKey: String) :
         }
     }
 }
-// LINT.ThenChange(SystemControlsScreen.kt)
+// LINT.ThenChange(systemcontrols/ui/SystemControlsScreen.kt)

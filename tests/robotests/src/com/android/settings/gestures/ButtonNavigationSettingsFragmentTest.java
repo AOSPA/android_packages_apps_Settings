@@ -66,7 +66,7 @@ public class ButtonNavigationSettingsFragmentTest {
             com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH})
     public void searchIndexer_getResources_isNull() {
         assertThat(ButtonNavigationSettingsFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getXmlResourcesToIndex(mContext, true)).isNotNull();
+                .getXmlResourcesToIndex(mContext, true)).isNull();
     }
 
     @Test

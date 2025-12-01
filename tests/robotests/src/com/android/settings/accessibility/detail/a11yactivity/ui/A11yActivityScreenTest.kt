@@ -296,16 +296,15 @@ class A11yActivityScreenTest : SettingsCatalystTestCase() {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun featureComponentName_flagTrue_wrongType_throwsException() {
+    fun featureComponentName_flagTrue_canRetrieveTheComponentNameFromParcelable() {
         val args =
             Bundle().apply {
                 putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_ACTIVITY_COMPONENT)
             }
 
-        assertThrows(IllegalArgumentException::class.java) {
-            val screen = A11yActivityScreen(appContext, args)
-            screen.getFeatureComponentName()
-        }
+        val screen = A11yActivityScreen(appContext, args)
+
+        assertThat(screen.getFeatureComponentName()).isEqualTo(A11Y_ACTIVITY_COMPONENT)
     }
 
     @Test
@@ -333,7 +332,7 @@ class A11yActivityScreenTest : SettingsCatalystTestCase() {
 
     @Test
     @DisableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun featureComponentName_flagFalse_wrongType_throwsException() {
+    fun featureComponentName_flagFalse_canRetrieveTheComponentNameFromString() {
         val args =
             Bundle().apply {
                 putString(
@@ -342,10 +341,9 @@ class A11yActivityScreenTest : SettingsCatalystTestCase() {
                 )
             }
 
-        assertThrows(IllegalArgumentException::class.java) {
-            val screen = A11yActivityScreen(appContext, args)
-            screen.getFeatureComponentName()
-        }
+        val screen = A11yActivityScreen(appContext, args)
+
+        assertThat(screen.getFeatureComponentName()).isEqualTo(A11Y_ACTIVITY_COMPONENT)
     }
 
     @Test

@@ -1012,6 +1012,9 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"अपने माउस को अलग-अलग डिसप्ले पर ले जाएं"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"बाहरी डिसप्ले का इस्तेमाल करें"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"डिसप्ले का रिज़ॉल्यूशन"</string>
+    <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"रिज़ॉल्यूशन और रीफ़्रेश रेट"</string>
+    <string name="external_display_refresh_rate_title" msgid="6326813722241312213">"रीफ़्रेश रेट"</string>
+    <string name="external_display_resolution_title" msgid="124681567143280861">"रिज़ॉल्यूशन"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"कनेक्ट करने का डिफ़ॉल्ट तरीका"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"किसी अन्य डिसप्ले के तौर पर इस्तेमाल करें"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"पहले से मौजूद डिसप्ले को मिरर मोड में दिखाएं"</string>
@@ -1411,6 +1414,8 @@
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"फ़ुल रिज़ॉल्यूशन"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"फ़ुल रिज़ॉल्यूशन में ज़्यादा बैटरी खर्च होती है. रिज़ॉल्यूशन बदलने पर, कुछ ऐप्लिकेशन रीस्टार्ट हो सकते हैं."</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="HEIGHT">%2$s</xliff:g> और <xliff:g id="WIDTH">%1$s</xliff:g>"</string>
+    <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> हर्ट्ज़"</string>
+    <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> हर्ट्ज़"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"रंग"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"बिना किसी बदलाव के"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"बूस्ट किया गया"</string>
@@ -1545,7 +1550,8 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"बैटरी खर्च बढ़ाता है"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"स्क्रीन बंद होने पर लॉक स्क्रीन वॉलपेपर दिखता है"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"स्क्रीन के बंद होने पर, लॉक स्क्रीन वॉलपेपर छिपाएं"</string>
-    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"हमेशा चालू रहने वाले डिसप्ले की सुविधा, स्क्रीन बंद होने पर समय, तारीख वगैरह जैसी जानकारी दिखाती है"</string>
+    <string name="doze_always_on_summary_long" msgid="7956866501728946221">"इस सुविधा से, स्क्रीन बंद होने पर समय, तारीख वगैरह जैसी जानकारी दिखती है"</string>
+    <string name="doze_always_on_summary_short" msgid="3301903540897812365">"समय, तारीख वगैरह दिखाएं"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"वॉलपेपर के विकल्प"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"लॉक स्क्रीन वॉलपेपर दिखाएं"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"हमेशा चालू रहने वाले डिसप्ले की सुविधा में, आपका लॉक स्क्रीन वॉलपेपर दिखता है"</string>
@@ -2206,6 +2212,8 @@
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"स्पीड"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"घटाएं"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"बढ़ाएं"</string>
+    <string name="mouse_keys_seek_bar_start_label" msgid="902491192774832751">"धीमा"</string>
+    <string name="mouse_keys_seek_bar_end_label" msgid="3225448426565556589">"तेज़"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"रिवर्स स्क्रोलिंग"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"प्राइमरी बटन इस्तेमाल करें"</string>
     <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"कीबोर्ड को न्यूमेरिक कीपैड के बजाय, अक्षरों और अंकों की मदद से कंट्रोल करें"</string>
@@ -3423,7 +3431,7 @@
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"वीपीएन कनेक्शन ज़रूरी है?"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"यह वीपीएन सुरक्षित नहीं है. IKEv2 वीपीएन पर अपडेट करें"</string>
     <string name="vpn_start_unsupported" msgid="7139925503292269904">"इस्तेमाल न किए जा सकने वाले वीपीएन को चालू नहीं किया जा सका."</string>
-    <string name="vpn_lockdown_summary" msgid="4700625960550559029">"वह VPN प्रोफ़ाइल चुनें जिससे हमेशा कनेक्ट रहना है. नेटवर्क ट्रैफ़िक की अनुमति केवल इस VPN से कनेक्ट रहने पर ही दी जाएगी."</string>
+    <string name="vpn_lockdown_summary" msgid="4700625960550559029">"वह VPN प्रोफ़ाइल चुनें जिससे हमेशा कनेक्ट रहना है. नेटवर्क ट्रैफ़िक की अनुमति सिर्फ़ इस VPN से कनेक्ट रहने पर ही दी जाएगी."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"कोई नहीं"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"हमेशा-चालू VPN के लिए, सर्वर और DNS दोनों के लिए आईपी पता होना ज़रूरी है."</string>
     <string name="vpn_no_network" msgid="7187593680049843763">"कोई नेटवर्क कनेक्शन नहीं है. कृपया बाद में फिर से प्रयास करें."</string>
@@ -3649,6 +3657,10 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"ब्लूटूथ, Android Auto, ड्राइविंग मोड"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"ब्लूटूथ, Android Auto, एनएफ़सी"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"ब्लूटूथ, Android Auto"</string>
+    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
+    <skip />
+    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"एनएफ़सी बंद होने की वजह से यह सुविधा उपलब्ध नहीं है"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"इसका इस्तेमाल करने के लिए, कोई पेमेंट ऐप्लिकेशन इंस्टॉल करें"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"हाल ही के ऐप्लिकेशन, डिफ़ॉल्ट ऐप्लिकेशन"</string>
@@ -4599,14 +4611,17 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"इस ऐप्लिकेशन को अनुमति दें कि इस डिवाइस और इससे जुड़े स्टोरेज में मौजूद सभी फ़ाइलों को पढ़ सके, उनमें बदलाव कर सके, और उन्हें मिटा सके. अनुमति दिए जाने पर, यह ऐप्लिकेशन आपको सूचना दिए बिना उन फ़ाइलों को ऐक्सेस कर सकता है."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"सभी फ़ाइलें ऐक्सेस कर सकते हैं"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"स्क्रीन ऑटोमेशन"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"हर बार पूछें"</string>
-    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"हमेशा इस्तेमाल करने की अनुमति है"</string>
+    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"अनुमति न दें"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"पूरी स्क्रीन पर सूचनाएं दिखाने की अनुमति"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"इस ऐप्लिकेशन को पूरी स्क्रीन पर सूचनाएं दिखाने की अनुमति दें"</string>
@@ -6027,6 +6042,8 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"पिन वापस पाने के लिए जानकारी जोड़ें"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"पिन वापस पाने के लिए जोड़ी गई जानकारी की पुष्टि करें"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"ऐप स्टोर के फ़िल्टर"</string>
+    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
+    <skip />
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"ऐप्लिकेशन को उनके कॉन्टेंट के मैच्योरिटी लेवल के हिसाब से फ़िल्टर करें"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"हर स्टोर, कॉन्टेंट को अलग-अलग तरीके से रेट करता है. किसी ऐप्लिकेशन की रेटिंग, सभी स्टोर पर अलग-अलग हो सकती है."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"कॉन्टेंट रेटिंग के हिसाब से ऐप्लिकेशन फ़िल्टर करें"</string>
@@ -6120,20 +6137,12 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"सैटलाइट कनेक्टिविटी"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"मोबाइल या वाई-फ़ाई नेटवर्क न होने पर भी इंटरनेट से कनेक्ट रहें"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"सैटलाइट लैंडिंग पेज"</string>
-    <!-- no translation found for try_a_demo (5053671464025495505) -->
-    <skip />
-    <!-- no translation found for see_how_it_works (6358887025296144792) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
-    <skip />
-    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
-    <skip />
-    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
-    <skip />
-    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
-    <skip />
-    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
-    <skip />
+    <string name="try_a_demo" msgid="5053671464025495505">"डेमो देखें"</string>
+    <string name="see_how_it_works" msgid="6358887025296144792">"देखें कि यह सुविधा कैसे काम करती है"</string>
+    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"मोबाइल या वाई-फ़ाई नेटवर्क न होने पर आपका फ़ोन, सैटलाइट से अपने-आप कनेक्ट हो जाएगा. अच्छे कनेक्शन के लिए, यह ज़रूरी है कि आप किसी खुली जगह में हों और आसमान साफ़ हो. मोबाइल नेटवर्क के उपलब्ध होने पर आपका फ़ोन फिर से कनेक्ट हो जाएगा. सैटलाइट के ज़रिए कॉल करने की सुविधा उपलब्ध नहीं है. हालांकि, ऐसा हो सकता है कि आपातकालीन कॉल किए जा सकें."</string>
+    <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"अच्छे कनेक्शन के लिए, यह ज़रूरी है कि आप किसी खुली जगह में हों और आसमान साफ़ हो. मोबाइल नेटवर्क के उपलब्ध होने पर आपका फ़ोन फिर से कनेक्ट हो जाएगा. सैटलाइट के ज़रिए कॉल करने की सुविधा उपलब्ध नहीं है. हालांकि, ऐसा हो सकता है कि आपातकालीन कॉल किए जा सकें."</string>
+    <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"सैटलाइट कनेक्टिविटी के बारे में ज़्यादा जानें"</u></string>
+    <string name="forward_arrow_content_desc" msgid="5027233524587883868">"सैटलाइट एसओएस का डेमो देखें"</string>
+    <string name="satellite_apps_title" msgid="3693252720266491323">"सैटलाइट ऐप्लिकेशन"</string>
+    <string name="satellite_emergency_sos" msgid="5598135807261930736">"इमरजेंसी एसओएस"</string>
 </resources>

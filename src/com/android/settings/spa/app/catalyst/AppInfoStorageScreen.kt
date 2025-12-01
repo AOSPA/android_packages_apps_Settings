@@ -35,7 +35,6 @@ import com.android.settings.spa.app.storage.StorageType
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.applications.StorageStatsSource
 import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
-import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -43,6 +42,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.android.settingslib.spaprivileged.model.app.AppStorageRepository
@@ -60,7 +60,7 @@ private constructor(
         "This property will be removed once the catalyst framework stops passing the arguments as a bundle. Use the keyParameters instead."
     )
     final override val arguments: Bundle?,
-    final override val keyParameters: KeyParameters?,
+    final override val keyParameters: ValidatedKeyParameters?,
 ) :
     PreferenceScreenMixin,
     PreferenceSummaryProvider,
@@ -87,7 +87,10 @@ private constructor(
     )
     constructor(context: Context, args: Bundle) : this(context, args, null)
 
-    constructor(context: Context, keyParameters: KeyParameters) : this(context, null, keyParameters)
+    constructor(
+        context: Context,
+        keyParameters: ValidatedKeyParameters,
+    ) : this(context, null, keyParameters)
 
     override val key: String
         get() = KEY
@@ -164,7 +167,7 @@ private constructor(
         }
 
         @JvmStatic
-        override fun keyParameters(context: Context): Flow<KeyParameters> {
+        override fun keyParameters(context: Context): Flow<ValidatedKeyParameters> {
             // TODO (b/457649430): when the catalyst framework stops passing the arguments as a
             //  bundle: replace the parameters(context) call to the actual implementation,
             // or make this function the primary implementation and the legacy parameters() should

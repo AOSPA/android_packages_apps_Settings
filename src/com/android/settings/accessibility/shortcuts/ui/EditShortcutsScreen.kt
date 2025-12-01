@@ -38,13 +38,13 @@ import com.android.settings.accessibility.shared.utils.getA11yServiceFeatureName
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
-import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -62,7 +62,7 @@ private constructor(
         "This property will be removed once the catalyst framework stops passing the arguments as a bundle. Use the keyParameters instead."
     )
     final override val arguments: Bundle?,
-    final override val keyParameters: KeyParameters?,
+    final override val keyParameters: ValidatedKeyParameters?,
 ) : PreferenceScreenMixin, PreferenceLifecycleProvider {
 
     private val shortcutTargets: Set<String> by lazy {
@@ -85,7 +85,7 @@ private constructor(
     )
     constructor(args: Bundle) : this(args, null)
 
-    constructor(keyParameters: KeyParameters) : this(null, keyParameters)
+    constructor(keyParameters: ValidatedKeyParameters) : this(null, keyParameters)
 
     override fun getScreenTitle(context: Context): CharSequence? {
         if (shortcutTargets.size == 1) {
@@ -145,7 +145,9 @@ private constructor(
             if (shortcutTargets.isEmpty()) return@preferenceHierarchy
             val advancedPreference = AdvancedPreference(shortcutTargets)
 
+            // LINT.IfChange(shortcut_type_ui_order)
             +IntroPreference(shortcutTargets)
+            +KeyboardShortcutPreference(context, shortcutTargets)
             +QuickSettingsShortcutPreference(context, shortcutTargets)
             +FloatingButtonShortcutPreference(context, shortcutTargets)
             +GestureShortcutPreference(context, shortcutTargets)
@@ -158,6 +160,7 @@ private constructor(
                 shortcutTargets,
                 expandableStateProvider = { advancedPreference.expandableState },
             )
+            // LINT.ThenChange(/src/com/android/settings/accessibility/AccessibilityUtil.java:shortcut_type_ui_order)
         }
 
     override fun getMetricsCategory(): Int {
@@ -171,7 +174,7 @@ private constructor(
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.edit_shortcuts_screen_purpose
 
@@ -190,7 +193,7 @@ private constructor(
         }
 
         @JvmStatic
-        override fun keyParameters(context: Context): Flow<KeyParameters> {
+        override fun keyParameters(context: Context): Flow<ValidatedKeyParameters> {
             // TODO (b/457649430): when the catalyst framework stops passing the arguments as a
             // bundle: replace the parameters(context) call to the actual implementation,
             // or make this function the primary implementation and the legacy parameters() should

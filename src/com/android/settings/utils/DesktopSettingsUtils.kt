@@ -20,14 +20,15 @@ import android.content.Context
 import com.android.settings.R
 import com.android.settings.flags.Flags
 
-object DesktopSettingsUtils {
-
-    /**
-     * Returns true if the top-level device category should be shown.
-     */
-    @JvmStatic
-    fun shouldShowTopLevelDeviceCategory(context: Context): Boolean {
-        return Flags.showTopLevelDeviceCategory() &&
+class DesktopSettingsUtils {
+    companion object {
+        /**
+         * Returns true if the top-level device category should be shown.
+         */
+        @JvmStatic
+        fun shouldShowTopLevelDeviceCategory(context: Context): Boolean {
+            return Flags.showTopLevelDeviceCategory() &&
                 context.resources.getBoolean(R.bool.config_show_top_level_device_category)
+        }
     }
 }

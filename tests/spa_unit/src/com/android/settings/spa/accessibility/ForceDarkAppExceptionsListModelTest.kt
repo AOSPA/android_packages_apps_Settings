@@ -15,11 +15,13 @@
  */
 package com.android.settings.spa.accessibility
 
+import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.google.common.truth.Truth.assertThat
@@ -41,15 +43,16 @@ class ForceDarkAppExceptionsListModelTest {
 
     @Mock lateinit var repository: ForceDarkAppExceptionsRepository
     private lateinit var listModel: ForceDarkAppExceptionsListModel
+    private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Before
     fun setup() {
-        listModel = ForceDarkAppExceptionsListModel(repository)
+        listModel = ForceDarkAppExceptionsListModel(context, repository)
     }
 
     @Test
     fun transform() = runTest {
-        whenever(repository.isException(APP)).thenReturn(true)
+        whenever(repository.isAppForceDarkAlwaysDisable(APP)).thenReturn(true)
         val recordListFlow =
             listModel.transform(userIdFlow = flowOf(USER_ID), appListFlow = flowOf(listOf(APP)))
 
@@ -61,10 +64,10 @@ class ForceDarkAppExceptionsListModelTest {
 
     @Test
     fun appIsException_isChecked() {
-        whenever(repository.isException(APP)).thenReturn(true)
+        whenever(repository.isAppForceDarkAlwaysDisable(APP)).thenReturn(true)
 
         composeTestRule.setContent {
-            with(ForceDarkAppExceptionsListModel(repository)) {
+            with(ForceDarkAppExceptionsListModel(context, repository)) {
                 AppListItemModel(
                         record =
                             ForceDarkAppExceptionRecord(
@@ -83,10 +86,10 @@ class ForceDarkAppExceptionsListModelTest {
 
     @Test
     fun appIsNotException_isNotChecked() {
-        whenever(repository.isException(APP)).thenReturn(false)
+        whenever(repository.isAppForceDarkAlwaysDisable(APP)).thenReturn(false)
 
         composeTestRule.setContent {
-            with(ForceDarkAppExceptionsListModel(repository)) {
+            with(ForceDarkAppExceptionsListModel(context, repository)) {
                 AppListItemModel(
                         record =
                             ForceDarkAppExceptionRecord(

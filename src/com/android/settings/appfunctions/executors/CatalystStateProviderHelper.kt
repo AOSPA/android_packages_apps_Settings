@@ -22,11 +22,11 @@ import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateItemConfig
 import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
-import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.ValidatedKeyParameters
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.toList
 
@@ -47,6 +47,7 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
     context: Context,
     appFunctionType: DeviceStateAppFunctionType? = null,
     screenKey: String,
+    removeDuplicates: Boolean = false,
 ): Map<PreferenceScreenMetadata, List<PreferenceHierarchyNode>> {
     val settingConfigMap = config.deviceStateItems.associateBy { it.settingKey }
     val perScreenConfigMap = config.screenConfigs.associateBy { it.screenKey }
@@ -62,24 +63,52 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
     val hierarchies =
         if (PreferenceScreenRegistry.isParameterized(context, screenKey)) {
             if (CatalystFlags.catalystUseKeyParameters()) {
-                PreferenceScreenRegistry.getKeyParameters(context, screenKey).toList().map {
-                    getPreferenceHierarchy(
-                        context,
-                        screenKey,
-                        args = null,
-                        keyParameters = it,
-                        settingConfigMap,
+                if (removeDuplicates) {
+                    listOf(
+                        getPreferenceHierarchy(
+                            context,
+                            screenKey,
+                            args = null,
+                            keyParameters =
+                                PreferenceScreenRegistry.getKeyParameters(context, screenKey)
+                                    .toList()[0],
+                            settingConfigMap,
+                        )
                     )
+                } else {
+                    PreferenceScreenRegistry.getKeyParameters(context, screenKey).toList().map {
+                        getPreferenceHierarchy(
+                            context,
+                            screenKey,
+                            args = null,
+                            keyParameters = it,
+                            settingConfigMap,
+                        )
+                    }
                 }
             } else {
-                PreferenceScreenRegistry.getParameters(context, screenKey).toList().map {
-                    getPreferenceHierarchy(
-                        context,
-                        screenKey,
-                        args = it,
-                        keyParameters = null,
-                        settingConfigMap,
+                if (removeDuplicates) {
+                    listOf(
+                        getPreferenceHierarchy(
+                            context,
+                            screenKey,
+                            args =
+                                PreferenceScreenRegistry.getParameters(context, screenKey)
+                                    .toList()[0],
+                            keyParameters = null,
+                            settingConfigMap,
+                        )
                     )
+                } else {
+                    PreferenceScreenRegistry.getParameters(context, screenKey).toList().map {
+                        getPreferenceHierarchy(
+                            context,
+                            screenKey,
+                            args = it,
+                            keyParameters = null,
+                            settingConfigMap,
+                        )
+                    }
                 }
             }
         } else {
@@ -101,7 +130,7 @@ private suspend fun CoroutineScope.getPreferenceHierarchy(
     context: Context,
     screenKey: String,
     args: Bundle?,
-    keyParameters: KeyParameters?,
+    keyParameters: ValidatedKeyParameters?,
     settingConfigMap: Map<String, DeviceStateItemConfig>,
 ): Pair<PreferenceScreenMetadata, List<PreferenceHierarchyNode>>? {
     val screenMetaData =

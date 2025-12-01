@@ -36,13 +36,14 @@ import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ToggleShortcutPreferenceController
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceScreen
+import com.android.settings.accessibility.extensions.getComponentName
 import com.android.settings.accessibility.extensions.getFeatureName
 import com.android.settings.accessibility.extensions.isServiceEnabled
 import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceController
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
-import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.ValidatedKeyParameters
 
 /** Fragment that shows the detail screen of an AccessibilityService */
 open class A11yServicePreferenceFragment : DashboardFragment() {
@@ -176,11 +177,7 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
 
     private fun getFeatureComponentName(): ComponentName {
         return requireNotNull(
-            getFragmentArguments()
-                .getParcelable(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                    ComponentName::class.java,
-                )
+            getFragmentArguments().getComponentName(AccessibilitySettings.EXTRA_COMPONENT_NAME)
         )
     }
 
@@ -231,7 +228,6 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
     )
     override fun getPreferenceScreenBindingArgs(context: Context): Bundle? {
         return if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
-            // TODO: b/447555338 - Replace this Bundle with KeyParameters.
             Bundle(1).apply {
                 putString(
                     AccessibilitySettings.EXTRA_COMPONENT_NAME,
@@ -243,7 +239,9 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
         }
     }
 
-    override fun getPreferenceScreenBindingKeyParameters(context: Context): KeyParameters? {
+    override fun getPreferenceScreenBindingKeyParameters(
+        context: Context
+    ): ValidatedKeyParameters? {
         return A11yServiceScreen.parametersSchema.prepare(
             AccessibilitySettings.EXTRA_COMPONENT_NAME to
                 getFeatureComponentName().flattenToString()

@@ -23,7 +23,6 @@ import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
@@ -37,7 +36,6 @@ import android.os.SimpleClock;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.security.Flags;
 import android.telephony.SignalStrength;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -92,8 +90,7 @@ import java.util.List;
  * in order to properly render this page.
  */
 public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment implements
-        WifiDialog2.WifiDialog2Listener,
-        WifiAutoConnectPreferenceController2.PreferenceRefreshCallback {
+        WifiDialog2.WifiDialog2Listener {
 
     private static final String TAG = "WifiNetworkDetailsFrg";
 
@@ -265,24 +262,6 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
     }
 
     @Override
-    public void onPreferenceStateChange(Preference preference) {
-        refreshPreferences();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (Flags.aapmFeatureDisableInsecureWifiAutojoin()) {
-            WifiAutoConnectPreferenceController2 controller =
-                    use(WifiAutoConnectPreferenceController2.class);
-            if (controller != null) {
-                controller.handleDialogResult(requestCode, resultCode);
-            }
-        }
-    }
-
-    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mControllers = new ArrayList<>();
         final ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
@@ -312,11 +291,6 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
         final WifiAutoConnectPreferenceController2 wifiAutoConnectPreferenceController2 =
                 new WifiAutoConnectPreferenceController2(context);
         wifiAutoConnectPreferenceController2.setWifiEntry(wifiEntry);
-        wifiAutoConnectPreferenceController2.setWifiConfig(wifiEntry.getWifiConfiguration());
-        if (Flags.aapmFeatureDisableInsecureWifiAutojoin()) {
-            wifiAutoConnectPreferenceController2.setRefreshCallback(this);
-            wifiAutoConnectPreferenceController2.setParentFragment(this);
-        }
         mControllers.add(wifiAutoConnectPreferenceController2);
 
         mWifiPickerTrackerHelper =

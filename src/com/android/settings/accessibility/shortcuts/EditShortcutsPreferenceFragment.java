@@ -21,6 +21,7 @@ import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
 import static android.provider.Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED;
 import static android.provider.Settings.Secure.ACCESSIBILITY_GESTURE_TARGETS;
+import static android.provider.Settings.Secure.ACCESSIBILITY_KEY_GESTURE_TARGETS;
 import static android.provider.Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED;
 import static android.provider.Settings.Secure.ACCESSIBILITY_QS_TARGETS;
 import static android.provider.Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
@@ -74,7 +75,7 @@ import com.android.settings.accessibility.shortcuts.ui.EditShortcutsScreen;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.metadata.KeyParameters;
+import com.android.settingslib.metadata.ValidatedKeyParameters;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -101,6 +102,8 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
     static final String SAVED_STATE_IS_EXPANDED = "isExpanded";
     private ContentObserver mSettingsObserver;
 
+    private static final Uri KEY_GESTURE_SHORTCUT_SETTING =
+            Settings.Secure.getUriFor(ACCESSIBILITY_KEY_GESTURE_TARGETS);
     private static final Uri VOLUME_KEYS_SHORTCUT_SETTING =
             Settings.Secure.getUriFor(ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
     private static final Uri BUTTON_SHORTCUT_MODE_SETTING =
@@ -126,6 +129,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
             TRIPLE_TAP_SHORTCUT_SETTING,
             TWO_FINGERS_DOUBLE_TAP_SHORTCUT_SETTING,
             QUICK_SETTINGS_SHORTCUT_SETTING,
+            KEY_GESTURE_SHORTCUT_SETTING,
     };
 
     private Set<String> mShortcutTargets;
@@ -555,7 +559,9 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
 
     @Nullable
     @Override
-    public KeyParameters getPreferenceScreenBindingKeyParameters(@NotNull Context context) {
+    public ValidatedKeyParameters getPreferenceScreenBindingKeyParameters(
+            @NotNull Context context
+    ) {
         // TODO(b/440383851): understand whether we should provide parameters to any caller and
         // put the shortcutTargets to keyParameters
         Bundle args = getArguments();
