@@ -1588,7 +1588,7 @@
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"اسمح لجهازك بالتبديل تلقائيًا إلى استخدام \"<xliff:g id="BACKUP_CARRIER">%1$s</xliff:g>\" لبيانات الجوّال عند توفّرها بشكل أفضل."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"قد تكون المكالمات والرسائل وحركة بيانات الشبكة مرئية لمؤسستك."</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"‏رمز \"رقم التعريف الشخصي\" لبطاقة SIM غير صحيح، ويلزمك الاتصال الآن بمشغّل شبكة الجوّال لإلغاء قفل الجهاز."</string>
-    <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{‏رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك محاولة واحدة يجب بعدها الاتصال بمشغّل شبكة الجوّال لفتح قفل الجهاز.}zero{‏رمز رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك # محاولة.}two{‏رمز رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك محاولتان.}few{‏رمز رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك # محاولات.}many{‏رمز رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك # محاولة.}other{‏رمز رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك # محاولة.}}"</string>
+    <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{‏رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك محاولة واحدة يجب بعدها الاتصال بمشغّل شبكة الجوّال لفتح قفل الجهاز.}zero{‏رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك # محاولة.}two{‏رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك محاولتان.}few{‏رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك # محاولات.}many{‏رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك # محاولة.}other{‏رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك # محاولة.}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"‏رمز \"رقم التعريف الشخصي\" لبطاقة SIM غير صحيح، ويتبقى لديك محاولة واحدة يجب بعدها الاتصال بمشغّل شبكة الجوّال لإلغاء قفل الجهاز."</string>
     <string name="pin_failed" msgid="3726505565797352255">"‏تعذّر إتمام عملية \"رقم التعريف الشخصي\" لبطاقة SIM!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"تحديثات النظام"</string>
@@ -2333,6 +2333,8 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"التطبيقات المستخدَمة مؤخرًا"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"الإشعارات"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"الإعدادات السريعة"</string>
+    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"يُرجى اختيار اختصار  <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"الزاوية السفلية اليمنى"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"الزاوية السفلية اليسرى"</string>
@@ -2600,6 +2602,12 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"‏انقر سريعًا على الشاشة %1$d مرّات. قد يؤدي ذلك إلى إبطاء جهازك."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"النقر مرّتين باستخدام إصبعين"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"النقر ثلاث مرّات"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_keyboard (6563958384189884131) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_keyboard (8755352177645189254) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_keyboard_keyword (7354208869208311654) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"خيارات متقدمة"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"تم ضبط زر \"سهولة الاستخدام\" لخدمة <xliff:g id="SERVICE">%1$s</xliff:g>. لاستخدام التكبير، المس زر \"سهولة الاستخدام\" مع الاستمرار ثم اختَر التكبير."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"تم ضبط إيماءة تمكين الوصول على <xliff:g id="SERVICE">%1$s</xliff:g>. للتكبير، مرّر سريعًا من أسفل الشاشة إلى أعلاها باستخدام إصبعين مع تثبيتهما. ثم اختَر التكبير."</string>
@@ -3426,7 +3434,7 @@
     <string name="vpn_always_on_summary" msgid="2171252372476858166">"‏متابعة الاتصال بشبكة VPN في جميع الأوقات"</string>
     <string name="vpn_always_on_summary_not_supported" msgid="9084872130449368437">"عدم التوافق مع هذا التطبيق"</string>
     <string name="vpn_always_on_summary_active" msgid="175877594406330387">"التشغيل دائمًا"</string>
-    <string name="vpn_insecure_summary" msgid="4450920215186742859">"هذا التطبيق غير آمن."</string>
+    <string name="vpn_insecure_summary" msgid="4450920215186742859">"هذا التطبيق غير آمن"</string>
     <string name="vpn_require_connection" msgid="1027347404470060998">"‏حظر أي اتصالات بدون شبكة VPN"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"‏أيتطلب الأمر اتصالاً عبر شبكة VPN؟"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"‏هذا التطبيق غير آمن. يُرجى التحديث إلى شبكة VPN باستخدام بروتوكول IKEv2."</string>
@@ -3930,6 +3938,10 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"التطبيقات"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"المنبهات ومصادر الإزعاج الأخرى"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"مدة الإعدادات السريعة"</string>
+    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
+    <skip />
+    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
+    <skip />
     <string name="sound_work_settings" msgid="752627453846309092">"أصوات ملف العمل"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"استخدام أصوات الملف الشخصي"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"استخدام الأصوات نفسها التي يستخدمها ملفك الشخصي"</string>
@@ -4611,18 +4623,13 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"يسمح هذا الإعداد لهذا التطبيق بقراءة كل الملفات وتعديلها وحذفها من هذا الجهاز أو أي وحدات تخزين متصلة. في حال تفعيله، يمكن أن يصل التطبيق إلى الملفات بدون إعلامك بذلك."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"يمكن الوصول إلى كل الملفات"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"التشغيل الآلي للشاشة"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"سيتمكّن هذا التطبيق من الاطّلاع على محتوى شاشة التطبيقات الأخرى والتفاعل معه لمساعدتك في إكمال المهام، حتى عند عمل التطبيقات في الخلفية"</string>
+    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"في حال عدم السماح بالتشغيل الآلي للشاشة، قد يظل بإمكان \"<xliff:g id="ID_1">%1$s</xliff:g>\" التفاعل مع التطبيقات المرتبطة بـ \"<xliff:g id="ID_2">%1$s</xliff:g>\" بطرق أخرى"</string>
+    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"السماح للتطبيقات بمساعدتك في إكمال المهام من خلال التفاعل مع محتوى شاشة التطبيقات الأخرى"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"السؤال في كل مرّة"</string>
-    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
+    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"السماح دومًا"</string>
+    <!-- no translation found for computer_control_automation_dont_allow (6562575180350018944) -->
     <skip />
-    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"عدم السماح"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"عرض الإشعارات بملء الشاشة"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"السماح بعرض الإشعارات ملء الشاشة من هذا التطبيق"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"يتم السماح لهذا التطبيق بعرض إشعارات بملء الشاشة عندما يكون الجهاز مُقفَلاً. قد تستخدم التطبيقات هذا الإذن لإبراز المنبّهات أو المكالمات الواردة أو غيرها من الإشعارات العاجلة."</string>
@@ -4900,6 +4907,16 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"قلب الكاميرا لالتقاط سيلفي"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"وضع التنقّل"</string>
+    <!-- no translation found for update_device_category_title (6588608879793647296) -->
+    <skip />
+    <!-- no translation found for interaction_category_title (5712424978503035872) -->
+    <skip />
+    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
+    <skip />
+    <!-- no translation found for system_management_category_title (5405726452116686478) -->
+    <skip />
+    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
+    <skip />
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"التنقل باستخدام زرّين"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"للتبديل بين التطبيقات، مرّر سريعًا للأعلى على زر \"الشاشة الرئيسية\". للاطّلاع على كل التطبيقات، مرّر سريعًا للأعلى مرة أخرى. للرجوع، انقر على زر الرجوع."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"الإشعارات و\"الإعدادات السريعة\""</string>
@@ -6046,8 +6063,7 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"إضافة معلومات استرداد الحساب"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"تأكيد معلومات استرداد الحساب"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"فلاتر متجر التطبيقات"</string>
-    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
-    <skip />
+    <string name="supervision_app_store_filters_keywords" msgid="8281936888718160336">"فلاتر التطبيقات، فلاتر التطبيقات المخصّصة للبالغين، فلاتر المحتوى المخصّص للبالغين، التطبيقات التي تتضمّن محتوًى فاضحًا، حظر التطبيقات، حظر التطبيقات التي تتضمّن محتوًى فاضحًا، حظر التطبيقات المخصّصة للبالغين"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"فلترة التطبيقات استنادًا إلى مدى ملاءمة محتواها"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"قد يختلف تقييم التطبيق من متجر إلى آخر، حسب النهج الذي يتبعه كل متجر."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"فلترة التطبيقات حسب تقييمات المحتوى"</string>
