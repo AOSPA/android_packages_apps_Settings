@@ -22,12 +22,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.OutcomeReceiver
-import android.provider.DeviceConfig
 import android.telephony.CarrierConfigManager
 import android.telephony.TelephonyManager
 import android.telephony.satellite.SatelliteManager
 import android.util.Log
 import com.android.internal.annotations.VisibleForTesting
+import com.android.settings.R
 import com.android.settings.flags.Flags
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -69,11 +69,7 @@ open class SatelliteTileStateReceiver(
      * checking for NTN support and enabling or disabling the [SatelliteTileService] accordingly.
      */
     override fun onReceive(context: Context, intent: Intent) {
-        if (!context.packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_SATELLITE)) {
-            return
-        }
-
-        if (!isSatelliteTileFeatureEnabled()) {
+        if (!isSatelliteTileFeatureEnabled(context)) {
             return
         }
 
@@ -83,14 +79,9 @@ open class SatelliteTileStateReceiver(
             TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED,
             CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED -> {
                 // Legitimate actions, continue processing.
+                Log.d(TAG, "onReceive: $action")
             }
             else -> return // Exit for any other actions.
-        }
-
-        val isFlagEnabled = Flags.enableSatelliteTile()
-        Log.i(TAG, "onReceive: $action, enableSatelliteTileFlag: $isFlagEnabled")
-        if (!isFlagEnabled) {
-            return
         }
 
         val pendingResult = goAsync()
@@ -157,22 +148,42 @@ open class SatelliteTileStateReceiver(
         return isNbIotBasedNtnSupportedFlow(context)
     }
 
-    /**
-     * Returns `true` if the satellite tile feature is enabled, and `false` otherwise.
-     *
-     * This checks device config flag `enable_satellite_tile_feature` and is used to control the
-     * feature on a per-device basis. Check `telephony.gcl` for the flag definition.
-     */
-    private fun isSatelliteTileFeatureEnabled(): Boolean {
-        return DeviceConfig.getBoolean(
-            DeviceConfig.NAMESPACE_TELEPHONY,
-            ENABLE_SATELLITE_TILE_FEATURE_CONFIG_KEY,
-            /* defaultValue= */ false,
-        )
-    }
-
     companion object {
-        private const val ENABLE_SATELLITE_TILE_FEATURE_CONFIG_KEY = "enable_satellite_tile_feature"
+        /**
+         * Verifies that the satellite tile feature is enabled for the device.
+         *
+         * This function checks for the following conditions in order:
+         * 1. The master aconfig flag `FLAG_ENABLE_SATELLITE_TILE` is enabled.
+         * 2. The device supports satellite telephony via `FEATURE_TELEPHONY_SATELLITE`.
+         * 3. The feature is enabled by the OEM via `config_show_satellite_tile`.
+         *
+         * @param context The application context.
+         * @return `true` if all conditions are met, `false` otherwise.
+         */
+        fun isSatelliteTileFeatureEnabled(context: Context): Boolean {
+            // Master aconfig flag check for the entire feature
+            if (!Flags.enableSatelliteTile()) {
+                Log.d(TAG, "enable_satellite_tile aconfig flag is false.")
+                return false
+            }
+
+            // Hardware/Software Capability Check for NTN
+            if (
+                !context.packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_SATELLITE)
+            ) {
+                Log.d(TAG, "FEATURE_TELEPHONY_SATELLITE not supported.")
+                return false
+            }
+
+            // OEM opt-in for the feature
+            if (!context.resources.getBoolean(R.bool.config_show_satellite_tile)) {
+                Log.d(TAG, "config_show_satellite_tile is false, feature disabled.")
+                return false
+            }
+
+            Log.d(TAG, "Satellite tile feature enabled for this device.")
+            return true
+        }
 
         /**
          * Update the tile service state. This enables or disables the service, making the tile

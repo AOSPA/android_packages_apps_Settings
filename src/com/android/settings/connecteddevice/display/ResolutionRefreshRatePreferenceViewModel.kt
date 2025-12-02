@@ -18,6 +18,8 @@ package com.android.settings.connecteddevice.display
 
 import android.app.Application
 import android.graphics.Point
+import android.os.Build
+import android.os.SystemProperties
 import android.util.Log
 import android.view.Display.Mode
 import androidx.lifecycle.AndroidViewModel
@@ -149,7 +151,7 @@ constructor(
         }
 
         // If mode filtering is defined, only modes in the whitelist are allowed.
-        if (allowedResolutions.isNotEmpty()) {
+        if (!skipExternalDisplayResolutionFiltering() && allowedResolutions.isNotEmpty()) {
             // If this is an anisotropic mode, check if its base mode is supported.
             val modeToCheck =
                 if ((mode.flags and Mode.FLAG_ANISOTROPY_CORRECTION) != 0) {
@@ -302,6 +304,11 @@ constructor(
 
     companion object {
 
+        @JvmStatic
+        fun skipExternalDisplayResolutionFiltering() =
+            (Build.IS_USERDEBUG || Build.IS_ENG) &&
+                SystemProperties.getBoolean(PROP_SKIP_EXTERNAL_DISPLAY_RESOLUTION_FILTERING, false)
+
         private fun Mode.toResolutionItem(): ResolutionItem =
             ResolutionItem(this.physicalWidth, this.physicalHeight)
 
@@ -321,6 +328,8 @@ constructor(
 
         private const val TAG = "ResRefreshRatePref"
         private const val DEFAULT_LOW_REFRESH_RATE = 60
+        private const val PROP_SKIP_EXTERNAL_DISPLAY_RESOLUTION_FILTERING =
+            "persist.sys.display.skip_resolution_filtering.external"
         const val TOP_MODE_RES_MAX_COUNT = 3
     }
 }

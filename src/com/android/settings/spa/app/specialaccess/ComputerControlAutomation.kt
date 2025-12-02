@@ -138,7 +138,7 @@ object ComputerControlAutomationAppListProvider : SettingsPageProvider {
             object : PreferenceModel {
                 override val title = stringResource(model.pageTitleResId)
                 override val summary: () -> CharSequence
-                    get() = { context.resources.getString(model.pageSummaryResId) }
+                    get() = { model.getSummary(context, ComputerControlAppRecord(app)) }
 
                 override val onClick = navigator(app)
             }
@@ -319,7 +319,6 @@ class ComputerControlAutomationAppListModel : AppListModel<ComputerControlAppRec
     val askTitleResId = R.string.computer_control_automation_ask_every_time
     val deniedTitleResId = R.string.computer_control_automation_dont_allow
     val pageTitleResId = R.string.computer_control_automation_page_title
-    val pageSummaryResId = R.string.computer_control_automation_app_page_summary
     val subHeadingResId = R.string.computer_control_automation_sub_heading
     val footerResId = R.string.computer_control_automation_footer_summary
     val appOps =

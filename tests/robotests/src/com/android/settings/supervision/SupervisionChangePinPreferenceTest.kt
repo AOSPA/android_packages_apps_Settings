@@ -128,6 +128,21 @@ class SupervisionChangePinPreferenceTest {
     }
 
     @Test
+    fun onPreferenceClick_whenSupervisingUserExistsButCredentialNotSet_returnsFalse() {
+        val widget: Preference = preference.createAndBindWidget(context)
+
+        mockLifeCycleContext.stub {
+            on { findPreference<Preference>(SupervisionChangePinPreference.KEY) } doReturn widget
+        }
+
+        whenever(mockUserManager.users).thenReturn(listOf(SUPERVISING_USER_INFO))
+        whenever(mockKeyguardManager.isDeviceSecure(SUPERVISING_USER_ID)).thenReturn(false)
+        val result = preference.onPreferenceClick(widget)
+        assertThat(result).isFalse()
+        verify(mockChangePinLauncher, never()).launch(any())
+    }
+
+    @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
     fun onChangePinComplete_showsCorrectToastString() {
         val expectedToastMessage = context.getString(R.string.supervision_pin_changed)

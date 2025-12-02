@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.accessibility
+package com.android.settings.accessibility.systemcontrols.data
 
 import android.content.Context
 import android.provider.Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP
@@ -71,7 +71,7 @@ class PowerButtonEndsCallDataStoreTest {
     }
 
     @Test
-    fun setValue_true_shouldStoreHanup() {
+    fun setValue_true_shouldStoreHangup() {
         dataStore.setValue(PowerButtonEndsCallDataStore.KEY, Boolean::class.javaObjectType, true)
 
         assertThat(settingsStore.getInt(PowerButtonEndsCallDataStore.KEY))

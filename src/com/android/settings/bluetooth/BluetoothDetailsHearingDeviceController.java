@@ -113,10 +113,8 @@ public class BluetoothDetailsHearingDeviceController extends BluetoothDetailsCon
             mControllers.add(new BluetoothDetailsHearingAidsPresetsController(mContext, mFragment,
                     mManager, mCachedDevice, mLifecycle));
         }
-        if (com.android.settingslib.flags.Flags.hearingDevicesAmbientVolumeControl()) {
-            mControllers.add(new BluetoothDetailsAmbientVolumePreferenceController(mContext,
-                    mManager, mFragment, mCachedDevice, mLifecycle));
-        }
+        mControllers.add(new BluetoothDetailsAmbientVolumePreferenceController(mContext,
+                mManager, mFragment, mCachedDevice, mLifecycle));
         if (com.android.settingslib.flags.Flags.hearingDevicesInputRoutingControl()) {
             mControllers.add(
                     new BluetoothDetailsHearingDeviceInputRoutingController(mContext, mFragment,

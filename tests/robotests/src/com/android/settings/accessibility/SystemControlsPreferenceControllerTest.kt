@@ -63,4 +63,4 @@ class SystemControlsPreferenceControllerTest {
         private const val SUPPORT_ONE_HANDED_MODE: String = "ro.support_one_handed_mode"
     }
 }
-// LINT.ThenChange(SystemControlsScreenTest.kt)
+// LINT.ThenChange(systemcontrols/ui/SystemControlsScreenTest.kt)

@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.View.OVER_SCROLL_NEVER;
+
 import static com.android.settings.accessibility.ItemInfoArrayAdapter.ItemInfo;
 
 import android.app.Dialog;
@@ -162,6 +164,10 @@ public class AccessibilityDialogUtils {
         list.setId(android.R.id.list);
         list.setDivider(/* divider= */ null);
         list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        // Accessibility scroll actions in ListView could trigger an immediate bounce-back effect
+        // upon reaching the scroll limit if an overscroll UI was present, due to attempting to
+        // scroll past the available range.
+        list.setOverScrollMode(OVER_SCROLL_NEVER);
         final ListAdapter adapter = new ItemInfoArrayAdapter<>(context, itemInfoList);
         list.setAdapter(adapter);
         list.setOnItemClickListener(itemListener);

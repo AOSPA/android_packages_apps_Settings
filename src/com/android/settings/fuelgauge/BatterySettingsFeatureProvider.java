@@ -29,13 +29,13 @@ import java.util.List;
 /** Feature provider for battery settings usage. */
 public interface BatterySettingsFeatureProvider {
 
-    /** Returns true if manufacture date should be shown */
+    /** Returns {@code true} if manufacture date should be shown */
     boolean isManufactureDateAvailable(Context context, long manufactureDateMs);
 
-    /** Returns true if first use date should be shown */
+    /** Returns {@code true} if first use date should be shown */
     boolean isFirstUseDateAvailable(Context context, long firstUseDateMs);
 
-    /** Check whether the battery information page is enabled in the About phone page */
+    /** Checks whether the battery information page is enabled in the About phone page */
     boolean isBatteryInfoEnabled(Context context);
 
     /** A way to add more battery tip detectors. */
@@ -45,24 +45,24 @@ public interface BatterySettingsFeatureProvider {
             BatteryInfo batteryInfo,
             BatteryTipPolicy batteryTipPolicy);
 
-    /** Return a label for the bottom summary during wireless charging. */
+    /** Returns a label for the bottom summary during wireless charging. */
     @Nullable
     CharSequence getWirelessChargingLabel(@NonNull Context context, @NonNull BatteryInfo info);
 
-    /** Return a content description for the bottom summary during wireless charging. */
+    /** Returns a content description for the bottom summary during wireless charging. */
     @Nullable
     CharSequence getWirelessChargingContentDescription(
             @NonNull Context context, @NonNull BatteryInfo info);
 
-    /** Return a charging remaining time label for wireless charging. */
+    /** Returns a charging remaining time label for wireless charging. */
     @Nullable
     CharSequence getWirelessChargingRemainingLabel(
             @NonNull Context context, long remainingTimeMs, long currentTimeMs);
 
-    /** Return true if it's in the charging optimization mode. */
+    /** Returns {@code true} if it's in the charging optimization mode. */
     boolean isChargingOptimizationMode(@NonNull Context context, boolean isLongLife);
 
-    /** Return a charging remaining time label for charging optimization mode. */
+    /** Returns a charging remaining time label for charging optimization mode. */
     @Nullable
     CharSequence getChargingOptimizationRemainingLabel(
             @NonNull Context context,
@@ -71,7 +71,7 @@ public interface BatterySettingsFeatureProvider {
             long chargeRemainingTimeMs,
             long currentTimeMs);
 
-    /** Return a charge label for charging optimization mode. */
+    /** Returns a charge label for charging optimization mode. */
     @Nullable
     CharSequence getChargingOptimizationChargeLabel(
             @NonNull Context context,
@@ -79,4 +79,14 @@ public interface BatterySettingsFeatureProvider {
             String batteryPercentageString,
             long chargeRemainingTimeMs,
             long currentTimeMs);
+
+    /**
+     * Returns {@code true} if the device is currently forcing a full charge, ignoring any
+     * optimization or limits that might usually stop charging before 100%.
+     */
+    boolean isForceFullCharge(@NonNull Context context);
+
+    /** Returns a label for forcing a full charge. */
+    @Nullable
+    CharSequence getForceFullChargeLabel(@NonNull Context context);
 }

@@ -18,10 +18,14 @@ package com.android.settings.connecteddevice.display
 
 import android.content.Context
 import android.hardware.display.DisplayManager
+import android.view.Display.DEFAULT_DISPLAY
 import androidx.core.content.getSystemService
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.wm.shell.shared.desktopmode.FakeDesktopState
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -45,13 +49,19 @@ class ConnectedDisplayInjectorTest {
     @Spy private val context: Context = ApplicationProvider.getApplicationContext()
     @Mock private lateinit var mockDisplayManager: DisplayManager
 
+    private lateinit var fakeDesktopState: FakeDesktopState
+
     private lateinit var injector: ConnectedDisplayInjector
 
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
 
-        injector = ConnectedDisplayInjector(context)
+        fakeDesktopState = FakeDesktopState()
+        injector =
+            object : ConnectedDisplayInjector(context) {
+                override val desktopState = fakeDesktopState
+            }
         doReturn(mockDisplayManager).whenever(context).getSystemService(DisplayManager::class.java)
     }
 
@@ -107,5 +117,39 @@ class ConnectedDisplayInjectorTest {
 
         verify(mockDisplayManager, never())
             .setExternalDisplayConnectionPreference(uniqueId, newPreference)
+    }
+
+    @Test
+    fun isProjectedModeEnabled_canEnterDesktopModeAndNotSupportedOnDefaultDisplay_returnsTrue() {
+        fakeDesktopState.canEnterDesktopMode = true
+        fakeDesktopState.overrideDesktopModeSupportPerDisplay[DEFAULT_DISPLAY] = false
+
+        assertTrue(injector.isProjectedModeEnabled())
+    }
+
+    @Test
+    fun isProjectedModeEnabled_canEnterDesktopModeAndSupportedOnDefaultDisplay_returnsFalse() {
+        fakeDesktopState.canEnterDesktopMode = true
+        fakeDesktopState.overrideDesktopModeSupportPerDisplay[DEFAULT_DISPLAY] = true
+
+        assertFalse(injector.isProjectedModeEnabled())
+    }
+
+    @Test
+    fun isProjectedModeEnabled_cannotEnterDesktopMode_returnsFalse() {
+        fakeDesktopState.canEnterDesktopMode = false
+
+        assertFalse(injector.isProjectedModeEnabled())
+    }
+
+    @Test
+    fun isProjectedModeEnabled_desktopStateIsNull_returnsFalse() {
+        val injectorWithNullDesktopState =
+            object : ConnectedDisplayInjector(context) {
+                override val desktopState: FakeDesktopState?
+                    get() = null
+            }
+
+        assertFalse(injectorWithNullDesktopState.isProjectedModeEnabled())
     }
 }

@@ -25,6 +25,7 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.GESTURE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.KEY_GESTURE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
@@ -52,7 +53,9 @@ import androidx.annotation.StringRes;
 
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.accessibility.util.ShortcutUtils;
+import com.android.server.accessibility.Flags;
 import com.android.settings.R;
+import com.android.settings.inputmethod.InputPeripheralsSettingsUtils;
 import com.android.settings.utils.LocaleUtils;
 
 import java.lang.annotation.Retention;
@@ -67,6 +70,7 @@ public final class AccessibilityUtil {
 
     // LINT.IfChange(shortcut_type_ui_order)
     static final int[] SHORTCUTS_ORDER_IN_UI = {
+            KEY_GESTURE,
             QUICK_SETTINGS,
             SOFTWARE, // FAB displays before gesture. Navbar displays without gesture.
             GESTURE,
@@ -74,7 +78,7 @@ public final class AccessibilityUtil {
             TWOFINGER_DOUBLETAP,
             TRIPLETAP
     };
-    // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
+    // LINT.ThenChange(/src/com/android/settings/accessibility/shortcuts/ui/EditShortcutsScreen.kt:shortcut_type_ui_order)
 
     private AccessibilityUtil(){}
 
@@ -216,6 +220,9 @@ public final class AccessibilityUtil {
         }
         int shortcutTypes = UserShortcutType.DEFAULT;
         for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
+            if (shortcutType == KEY_GESTURE && !Flags.enableKeyGestureShortcutSettings()) {
+                continue;
+            }
             if (ShortcutUtils.isShortcutContained(
                     context, shortcutType, componentNameString)) {
                 shortcutTypes |= shortcutType;
@@ -292,6 +299,16 @@ public final class AccessibilityUtil {
             if (!com.android.server.accessibility.Flags
                     .enableMagnificationMultipleFingerMultipleTapGesture()
                     && (shortcutType & TWOFINGER_DOUBLETAP) == TWOFINGER_DOUBLETAP) {
+                continue;
+            }
+
+            // Only show keyboard shortcut in summary if a keyboard is attached.
+            if (com.android.server.accessibility.Flags.enableKeyGestureShortcutSettings()
+                    && shortcutType == KEY_GESTURE
+                    && (shortcutTypes & shortcutType) == shortcutType
+                    && InputPeripheralsSettingsUtils.isHardKeyboard()) {
+                list.add(context.getText(
+                        R.string.accessibility_shortcut_keyboard_keyword));
                 continue;
             }
 

@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.os.BatteryManager;
+import android.os.Flags;
 import android.os.PowerManager;
 import android.util.Log;
 
@@ -84,6 +85,14 @@ public class BatteryHeaderTextPreferenceController extends BasePreferenceControl
                         .isExtraDefend()) {
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_charging_on_hold);
+        }
+        if (Flags.batteryChargingInfoApi()
+                && mBatterySettingsFeatureProvider.isForceFullCharge(mContext)) {
+            final CharSequence forceFullChargeLabel =
+                    mBatterySettingsFeatureProvider.getForceFullChargeLabel(mContext);
+            if (forceFullChargeLabel != null) {
+                return forceFullChargeLabel;
+            }
         }
         if (info.remainingLabel != null
                 && mBatterySettingsFeatureProvider.isChargingOptimizationMode(

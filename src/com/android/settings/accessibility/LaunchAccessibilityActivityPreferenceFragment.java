@@ -36,6 +36,7 @@ import com.android.settings.accessibility.detail.a11yactivity.SettingsPreference
 import com.android.settings.accessibility.detail.a11yactivity.ShortcutPreferenceController;
 import com.android.settings.accessibility.detail.a11yactivity.TopIntroPreferenceController;
 import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityScreen;
+import com.android.settings.accessibility.extensions.ComponentNameBundleUtils;
 import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -169,8 +170,12 @@ public class LaunchAccessibilityActivityPreferenceFragment extends DashboardFrag
     @NonNull
     private ComponentName getFeatureComponentName() {
         Bundle arguments = getFragmentArguments();
-        return arguments.getParcelable(
-                AccessibilitySettings.EXTRA_COMPONENT_NAME, ComponentName.class);
+        return Objects.requireNonNull(
+                ComponentNameBundleUtils.getComponentName(
+                        arguments,
+                        AccessibilitySettings.EXTRA_COMPONENT_NAME
+                )
+        );
     }
 
     /**

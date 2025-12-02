@@ -92,7 +92,7 @@ open class TextReadingScreen : BaseTextReadingScreen() {
 
     override val key: String = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.text_reading_options_purpose
 
@@ -122,12 +122,14 @@ open class TextReadingScreenOnAccessibility : BaseTextReadingScreen() {
 
     override val key: String = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.text_reading_options_in_a11y_purpose
 
     override val icon: Int
         get() = R.drawable.ic_adaptive_font_download
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? = null
 
     companion object {
         const val KEY = "text_reading_options_in_a11y"
@@ -145,7 +147,7 @@ open class TextReadingScreenInSuw : BaseTextReadingScreen() {
 
     override val key: String = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.text_reading_options_in_suw_purpose
 
@@ -171,7 +173,7 @@ open class TextReadingScreenInAnythingElse : BaseTextReadingScreen() {
 
     override val key: String = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.text_reading_options_in_anything_else_purpose
 
@@ -199,7 +201,7 @@ open class TextReadingScreenFromNotification : BaseTextReadingScreen() {
 
     override val key: String = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.text_reading_options_in_outline_text_notification_purpose
 

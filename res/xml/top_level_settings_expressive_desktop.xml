@@ -36,7 +36,11 @@
             android:summary="@string/summary_placeholder"
             settings:highlightableMenuKey="@string/menu_key_network"
             settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController"/>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
+    <com.android.settingslib.widget.UntitledPreferenceCategory
+        android:order="-125"
+        android:key="top_level_device_category">
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"
             android:icon="@drawable/ic_homepage_connected_device"
@@ -46,6 +50,16 @@
             android:summary="@string/connected_devices_dashboard_default_summary"
             settings:highlightableMenuKey="@string/menu_key_connected_devices"
             settings:controller="com.android.settings.connecteddevice.TopLevelConnectedDevicesPreferenceController"/>
+
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.android.settings.device.DeviceDashboardFragment"
+            android:icon="@drawable/ic_homepage_device"
+            android:key="top_level_device_desktop"
+            android:order="-5"
+            android:title="@string/device_dashboard_title"
+            android:summary="@string/device_dashboard_summary"
+            settings:highlightableMenuKey="@string/menu_key_device"
+            settings:controller="com.android.settings.device.TopLevelDevicePreferenceController"/>
     </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <com.android.settingslib.widget.UntitledPreferenceCategory

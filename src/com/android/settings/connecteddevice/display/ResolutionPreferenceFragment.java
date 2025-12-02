@@ -358,7 +358,8 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         }
 
         // If mode filtering is enabled.
-        if (!mExternDisplayResolutionShown.isEmpty()) {
+        if (!ResolutionRefreshRatePreferenceViewModel.skipExternalDisplayResolutionFiltering()
+                && !mExternDisplayResolutionShown.isEmpty()) {
             Mode m;
             // If this is an anisotropic mode, check the base mode is supported.
             if ((mode.getFlags() & Mode.FLAG_ANISOTROPY_CORRECTION) != 0) {

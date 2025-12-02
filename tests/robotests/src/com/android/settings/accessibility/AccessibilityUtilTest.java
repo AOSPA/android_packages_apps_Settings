@@ -26,24 +26,34 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.icu.text.CaseMap;
 import android.os.Build;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
+import com.android.server.accessibility.Flags;
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowInputDevice;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.Locale;
 
+@Config(shadows = ShadowInputDevice.class)
 @RunWith(RobolectricTestRunner.class)
 public final class AccessibilityUtilTest {
+    @Rule
+    public SetFlagsRule setFlagsRule = new SetFlagsRule();
     private static final String SECURE_TEST_KEY = "secure_test_key";
     private static final String MOCK_PACKAGE_NAME = "com.mock.example";
     private static final String MOCK_CLASS_NAME = MOCK_PACKAGE_NAME + ".mock_a11y_service";
@@ -106,12 +116,37 @@ public final class AccessibilityUtilTest {
         assertThat(result.isEmpty()).isEqualTo(true);
     }
 
+    @DisableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
     @Test
-    public void getShortcutSummaryList_keyGestureShortcut_shouldReturnEmptyString() {
+    public void getShortcutSummaryList_keyGestureShortcut_flagDisabled_shouldReturnEmptyString() {
+        setHardwareKeyboard(true);
+        final CharSequence result = AccessibilityUtil.getShortcutSummaryList(mContext,
+                UserShortcutType.KEY_GESTURE);
+        assertThat(result.isEmpty()).isEqualTo(true);
+    }
+
+    @EnableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    public void getShortcutSummaryList_keyGestureShortcut_noKeyboard_shouldReturnEmptyString() {
+        setHardwareKeyboard(false);
+        final CharSequence result = AccessibilityUtil.getShortcutSummaryList(mContext,
+                UserShortcutType.KEY_GESTURE);
+        assertThat(result.isEmpty()).isEqualTo(true);
+    }
+
+    @EnableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    public void getShortcutSummaryList_keyGestureShortcut_hasKeyboard_shouldReturnNonEmptyString() {
+        setHardwareKeyboard(true);
         final CharSequence result = AccessibilityUtil.getShortcutSummaryList(mContext,
                 UserShortcutType.KEY_GESTURE);
 
-        assertThat(result.isEmpty()).isEqualTo(true);
+        assertThat(result.isEmpty()).isEqualTo(false);
+        final CharSequence summary = CaseMap.toTitle().wholeString().noLowercase().apply(
+                Locale.getDefault(),
+                /* iter= */ null,
+                mContext.getText(R.string.accessibility_shortcut_keyboard_keyword));
+        assertThat(result.toString()).isEqualTo(summary.toString());
     }
 
     @Test
@@ -187,5 +222,14 @@ public final class AccessibilityUtilTest {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 settingsKey,
                 enabled ? AccessibilityUtil.State.ON : AccessibilityUtil.State.OFF);
+    }
+
+    private void setHardwareKeyboard(boolean hasConnectedKeyboard) {
+        if (hasConnectedKeyboard) {
+            var device = ShadowInputDevice.makeFullKeyboardInputDevicebyId(/* id= */ 1);
+            ShadowInputDevice.addDevice(device.getId(), device);
+        } else {
+            ShadowInputDevice.reset();
+        }
     }
 }
