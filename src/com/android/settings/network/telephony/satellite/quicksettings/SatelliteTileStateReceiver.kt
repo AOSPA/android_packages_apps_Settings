@@ -179,17 +179,25 @@ open class SatelliteTileStateReceiver(
          * appear or disappear.
          */
         fun updateTileServiceEnabledState(context: Context, isAnyNtnSupported: Boolean) {
+            val componentName = ComponentName(context, SatelliteTileService::class.java)
+            val packageManager = context.packageManager
             val newState =
                 if (isAnyNtnSupported) {
                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                 } else {
                     PackageManager.COMPONENT_ENABLED_STATE_DISABLED
                 }
-            Log.i(TAG, "SatelliteTileService enabled state: $isAnyNtnSupported")
+
+            if (packageManager.getComponentEnabledSetting(componentName) == newState) {
+                Log.d(TAG, "Not updating SatelliteTileService state, already $newState")
+                return
+            }
+
+            Log.i(TAG, "Setting SatelliteTileService enabled state to: $isAnyNtnSupported")
 
             // This enables or disables the service, making the tile appear or disappear.
-            context.packageManager.setComponentEnabledSetting(
-                ComponentName(context, SatelliteTileService::class.java),
+            packageManager.setComponentEnabledSetting(
+                componentName,
                 newState,
                 PackageManager.DONT_KILL_APP,
             )
@@ -230,21 +238,25 @@ internal object SatelliteSupportedStateChangeHandler {
                 return
             }
 
-            satelliteManager.registerForSupportedStateChanged(dispatcher.asExecutor()) {
-                isNbIotBasedNtnSupported ->
-                Log.i(
-                    TAG,
-                    "onSatelliteSupportedStateChanged: isSupported=$isNbIotBasedNtnSupported",
-                )
-                val isLteBasedNtnSupported =
-                    SatelliteUtils.isLteBasedNtnSupportedByDevice(appContext)
-                SatelliteTileStateReceiver.updateTileServiceEnabledState(
-                    appContext,
-                    isLteBasedNtnSupported || isNbIotBasedNtnSupported,
-                )
+            try {
+                satelliteManager.registerForSupportedStateChanged(dispatcher.asExecutor()) {
+                    isNbIotBasedNtnSupported ->
+                    Log.i(
+                        TAG,
+                        "onSatelliteSupportedStateChanged: isSupported=$isNbIotBasedNtnSupported",
+                    )
+                    val isLteBasedNtnSupported =
+                        SatelliteUtils.isLteBasedNtnSupportedByDevice(appContext)
+                    SatelliteTileStateReceiver.updateTileServiceEnabledState(
+                        appContext,
+                        isLteBasedNtnSupported || isNbIotBasedNtnSupported,
+                    )
+                }
+                isRegistered = true
+                Log.i(TAG, "Successfully registered for satellite state changes.")
+            } catch (e: IllegalStateException) {
+                Log.e(TAG, "Failed to register for satellite state changes", e)
             }
-            isRegistered = true
-            Log.i(TAG, "Successfully registered for satellite state changes.")
         }
     }
 }

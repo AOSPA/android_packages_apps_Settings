@@ -72,6 +72,17 @@ class SupervisionAppStoreFiltersScreenTest {
     }
 
     @Test
+    fun getKeywords() {
+        assertThat(supervisionAppStoreFiltersScreen.keywords)
+            .isEqualTo(R.string.supervision_app_store_filters_keywords)
+    }
+
+    @Test
+    fun isIndexable() {
+        assertThat(supervisionAppStoreFiltersScreen.indexable).isTrue()
+    }
+
+    @Test
     fun getSummary() {
         assertThat(supervisionAppStoreFiltersScreen.getPreferenceSummary(context))
             .isEqualTo("Filter apps by content ratings")

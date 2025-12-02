@@ -43,10 +43,9 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.CarrierConfigManager;
-import android.telephony.NetworkRegistrationInfo;
-import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsMmTelManager;
+import android.telephony.satellite.SatelliteManager;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -109,6 +108,8 @@ public class WifiCallingSettingsForSubTest {
     private ImsMmTelManager mImsMmTelManager;
     @Mock
     private TelephonyManager mTelephonyManager;
+    @Mock
+    private SatelliteManager mSatelliteManager;
     @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock
@@ -253,14 +254,8 @@ public class WifiCallingSettingsForSubTest {
         mBundle.putBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL, true);
         mBundle.putBoolean(
                 CarrierConfigManager.KEY_OVERRIDE_WFC_ROAMING_MODE_WHILE_USING_NTN_BOOL, true);
-
         // Phone connected to non-terrestrial network
-        NetworkRegistrationInfo nri = new NetworkRegistrationInfo.Builder()
-                .setIsNonTerrestrialNetwork(true)
-                .build();
-        ServiceState ss = new ServiceState();
-        ss.addNetworkRegistrationInfo(nri);
-        doReturn(ss).when(mTelephonyManager).getServiceState();
+        doReturn(true).when(mSatelliteManager).isInCarrierRoamingNtnMode(anyInt());
 
         // Call onResume to update the WFC roaming preference.
         mFragment.onResume();
@@ -421,6 +416,11 @@ public class WifiCallingSettingsForSubTest {
         @Override
         TelephonyManager getTelephonyManagerForSub(int subId) {
             return mTelephonyManager;
+        }
+
+        @Override
+        SatelliteManager getSatelliteManager() {
+            return mSatelliteManager;
         }
 
         @Override

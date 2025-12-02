@@ -42,6 +42,9 @@ open class AppStorageAppListScreen : PreferenceScreenMixin, PreferenceHierarchyG
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.device_state_apps_storage_purpose
+
     override val title: Int
         get() = StorageType.Apps.titleResource
 

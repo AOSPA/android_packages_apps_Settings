@@ -19,6 +19,7 @@ package com.android.settings.safetycenter
 import android.content.Context
 import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.Flags
+import android.os.UserManager
 import android.platform.test.annotations.RequiresFlagsDisabled
 import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.CheckFlagsRule
@@ -61,6 +62,7 @@ class IdentityCheckSafetySourceTest {
 
     @Mock lateinit var safetyCenterManagerWrapper: SafetyCenterManagerWrapper
     @Mock lateinit var biometricManager: BiometricManager
+    @Mock lateinit var userManager: UserManager
 
     private val applicationContext: Context = ApplicationProvider.getApplicationContext()
     private val refreshSafetyEvent =
@@ -79,6 +81,7 @@ class IdentityCheckSafetySourceTest {
         identityCheckSafetySource = IdentityCheckSafetySource()
         whenever(biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG))
             .thenReturn(BiometricManager.BIOMETRIC_SUCCESS)
+        whenever(userManager.isProfile(applicationContext.userId)).thenReturn(false)
     }
 
     @After
@@ -97,6 +100,28 @@ class IdentityCheckSafetySourceTest {
             applicationContext,
             refreshSafetyEvent,
             biometricManager,
+            userManager,
+        )
+
+        verify(safetyCenterManagerWrapper, never()).setSafetySourceData(any(), any(), any(), any())
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
+    fun refreshSafetySources_whenUserIsProfile_doesNotSetData() {
+        val profileUserId = 10
+
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+        whenever(userManager.isProfile(profileUserId)).thenReturn(true)
+
+        setIdentityCheckPromoCardShown(false)
+
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+            userManager,
+            userId = profileUserId,
         )
 
         verify(safetyCenterManagerWrapper, never()).setSafetySourceData(any(), any(), any(), any())
@@ -114,6 +139,7 @@ class IdentityCheckSafetySourceTest {
             applicationContext,
             refreshSafetyEvent,
             biometricManager,
+            userManager,
         )
 
         verify(safetyCenterManagerWrapper)
@@ -136,6 +162,7 @@ class IdentityCheckSafetySourceTest {
             applicationContext,
             refreshSafetyEvent,
             biometricManager,
+            userManager,
         )
 
         verify(safetyCenterManagerWrapper)
@@ -159,6 +186,7 @@ class IdentityCheckSafetySourceTest {
             applicationContext,
             refreshSafetyEvent,
             biometricManager,
+            userManager,
         )
 
         verify(safetyCenterManagerWrapper)
@@ -180,6 +208,7 @@ class IdentityCheckSafetySourceTest {
             applicationContext,
             refreshSafetyEvent,
             biometricManager,
+            userManager,
             isTablet = true,
         )
 
@@ -202,6 +231,7 @@ class IdentityCheckSafetySourceTest {
             applicationContext,
             refreshSafetyEvent,
             biometricManager,
+            userManager,
             isLowRamDevice = true,
         )
 
@@ -226,6 +256,7 @@ class IdentityCheckSafetySourceTest {
             applicationContext,
             refreshSafetyEvent,
             biometricManager,
+            userManager,
         )
 
         verify(safetyCenterManagerWrapper)
@@ -250,6 +281,7 @@ class IdentityCheckSafetySourceTest {
             applicationContext,
             refreshSafetyEvent,
             biometricManager,
+            userManager,
         )
 
         verify(safetyCenterManagerWrapper)
@@ -281,6 +313,7 @@ class IdentityCheckSafetySourceTest {
             applicationContext,
             refreshSafetyEvent,
             biometricManager,
+            userManager,
         )
 
         verify(safetyCenterManagerWrapper)
@@ -321,6 +354,7 @@ class IdentityCheckSafetySourceTest {
             applicationContext,
             refreshSafetyEvent,
             biometricManager,
+            userManager,
         )
 
         verify(safetyCenterManagerWrapper)
@@ -353,6 +387,7 @@ class IdentityCheckSafetySourceTest {
             applicationContext,
             refreshSafetyEvent,
             biometricManager,
+            userManager,
         )
 
         verify(safetyCenterManagerWrapper)
@@ -383,6 +418,7 @@ class IdentityCheckSafetySourceTest {
             applicationContext,
             refreshSafetyEvent,
             biometricManager,
+            userManager,
         )
 
         verify(safetyCenterManagerWrapper)
@@ -423,6 +459,7 @@ class IdentityCheckSafetySourceTest {
             applicationContext,
             refreshSafetyEvent,
             biometricManager,
+            userManager,
         )
 
         verify(safetyCenterManagerWrapper)

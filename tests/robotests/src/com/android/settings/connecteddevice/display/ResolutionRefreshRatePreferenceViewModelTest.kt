@@ -74,7 +74,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
 
         assertThat(state.currentActiveMode).isEqualTo(mode)
         assertThat(state.pendingMode).isEqualTo(mode)
-        assertThat(state.confirmationDialogEvent).isNull()
+        assertThat(viewModel.confirmationDialogEvent.value).isNull()
 
         assertThat(state.topResolutionItems)
             .containsExactly(
@@ -186,11 +186,11 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         val currentActiveMode = uiState.currentActiveMode
 
         viewModel.onApplyClicked()
-        val updatedStated = viewModel.uiState.value!!
 
-        assertThat(updatedStated.confirmationDialogEvent).isNotNull()
-        assertThat(updatedStated.confirmationDialogEvent?.newMode).isEqualTo(pendingMode)
-        assertThat(updatedStated.confirmationDialogEvent?.existingMode).isEqualTo(currentActiveMode)
+        val confirmationDialogEvent = viewModel.confirmationDialogEvent.value
+        assertThat(confirmationDialogEvent).isNotNull()
+        assertThat(confirmationDialogEvent!!.newMode).isEqualTo(pendingMode)
+        assertThat(confirmationDialogEvent.existingMode).isEqualTo(currentActiveMode)
         verify(mMockedInjector).setUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID, pendingMode, false)
     }
 
@@ -210,7 +210,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         // The pending mode should be synced to the new original mode
         assertThat(updatedState.pendingMode).isEqualTo(pendingMode)
         // The dialog event should be cleared
-        assertThat(updatedState.confirmationDialogEvent).isNull()
+        assertThat(viewModel.confirmationDialogEvent.value).isNull()
         verify(mMockedInjector).setUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID, pendingMode, true)
     }
 
@@ -230,7 +230,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         // The pending mode should be reverted back to the original mode
         assertThat(updatedState.pendingMode).isEqualTo(currentActiveMode)
         // The dialog event should be cleared
-        assertThat(updatedState.confirmationDialogEvent).isNull()
+        assertThat(viewModel.confirmationDialogEvent.value).isNull()
         verify(mMockedInjector).resetUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID)
     }
 }

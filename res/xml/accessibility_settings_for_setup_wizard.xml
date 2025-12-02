@@ -46,6 +46,15 @@
         settings:controller="com.android.settings.display.AutoBrightnessPreferenceControllerForSetupWizard"/>
 
     <Preference
+        android:fragment="com.android.settings.accessibility.ToggleColorInversionPreferenceFragmentForSetupWizard"
+        android:key="accessibility_display_inversion_enabled"
+        android:icon="@drawable/ic_color_inversion"
+        android:title="@string/accessibility_display_inversion_preference_title"
+        android:summary="@string/accessibility_display_inversion_preference_intro_text"
+        android:persistent="false"
+        settings:controller="com.android.settings.accessibility.ColorInversionVisionFragmentForSuwController"/>
+
+    <Preference
         android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragmentForSetupWizard"
         android:key="screen_magnification_preference"
         android:icon="@drawable/ic_accessibility_magnification"

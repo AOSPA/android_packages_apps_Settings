@@ -343,10 +343,8 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Uses <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> starts on <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <!-- no translation found for zone_info_footer_no_dst (4328558145064330111) -->
-    <skip />
-    <!-- no translation found for zone_time_type_dst (5959023322756665929) -->
-    <skip />
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"Uses <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. No daylight saving time."</string>
+    <string name="zone_time_type_dst" msgid="5959023322756665929">"Daylight saving time"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standard time"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Select by region"</string>
     <string name="zone_menu_by_offset" msgid="543648951618438204">"Select by GMT offset"</string>
@@ -4604,8 +4602,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Allow this app to read, modify and delete all files on this device or any connected storage volumes. If granted, the app may access files without your explicit knowledge."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Can access all files"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Screen automation"</string>
-    <string name="computer_control_automation_switch_title" msgid="8090259186522366153">"Allow this app to fully automate other apps"</string>
-    <string name="computer_control_automation_footer_description" msgid="7038289408109438761">"This app will be able to control your apps. Apps being controlled can\'t be used while screen automation is ongoing, but you can always stop it."</string>
+    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Ask every time"</string>
     <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Always allowed"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Don\'t allow"</string>
@@ -6029,10 +6031,8 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verify recovery info"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"App store filters"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filter apps based on the maturity of their content"</string>
-    <!-- no translation found for supervision_app_store_filters_footer_content (8782299039136703625) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_summary (7953506045105313815) -->
-    <skip />
+    <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Each store rates content differently. An app\'s rating may vary across stores."</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filter apps by content ratings"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Web content filters"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Website filters, Block sites, Browser filters, Block explicit sites, Filter sites, Block search results, Filter explicit search results, content restrictions"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Help filter explicit content on some apps and browsers on this phone. Explicit content may still show on other apps, devices or browsers."</string>

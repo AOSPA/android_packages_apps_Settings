@@ -54,7 +54,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.utils.SubIdBundleUtils;
 import com.android.settings.widget.EnhancedSettingsSpinnerAdapter;
 import com.android.settingslib.NetworkPolicyEditor;
-import com.android.settingslib.metadata.KeyParameters;
+import com.android.settingslib.metadata.ValidatedKeyParameters;
 import com.android.settingslib.net.DataUsageController;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -290,7 +290,7 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
 
     private @Nullable Integer getSubIdFromBindingArgs() {
         if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters()) {
-            final KeyParameters parameters =
+            final ValidatedKeyParameters parameters =
                     getPreferenceScreenBindingKeyParameters(requireContext());
             if (parameters == null) {
                 return null;

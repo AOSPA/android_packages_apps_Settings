@@ -42,7 +42,6 @@ constructor(
         val moreResolutionItems: List<ResolutionItem> = emptyList(),
         val refreshRateItems: List<RefreshRateItem> = emptyList(),
         val areMoreOptionsExpanded: Boolean = false,
-        val confirmationDialogEvent: ConfirmationDialogEvent? = null,
     )
 
     data class ResolutionItem(val physicalWidth: Int, val physicalHeight: Int)
@@ -61,6 +60,8 @@ constructor(
 
     private val _uiState = MutableLiveData<UiState?>(null)
     val uiState: LiveData<UiState?> = _uiState
+    private val _confirmationDialogEvent = MutableLiveData<ConfirmationDialogEvent?>(null)
+    val confirmationDialogEvent: LiveData<ConfirmationDialogEvent?> = _confirmationDialogEvent
 
     private val displayListener =
         object : ExternalDisplaySettingsConfiguration.DisplayListener() {
@@ -121,7 +122,6 @@ constructor(
                 moreResolutionItems = moreItems,
                 refreshRateItems = buildRefreshRateItems(currentActiveMode),
                 areMoreOptionsExpanded = shouldExpand,
-                confirmationDialogEvent = _uiState.value?.confirmationDialogEvent,
             )
     }
 
@@ -241,12 +241,8 @@ constructor(
         val currentPendingMode = currentState.pendingMode
         val currentActiveMode = currentState.currentActiveMode
 
-        updateState {
-            it.copy(
-                confirmationDialogEvent =
-                    ConfirmationDialogEvent(currentPendingMode, currentActiveMode)
-            )
-        }
+        _confirmationDialogEvent.value =
+            ConfirmationDialogEvent(currentPendingMode, currentActiveMode)
         logInfo("Try applying mode: $currentPendingMode")
         injector.setUserPreferredDisplayMode(displayId, currentPendingMode, storeMode = false)
     }
@@ -258,17 +254,14 @@ constructor(
         if (confirmed) {
             logInfo("Mode change confirmed: $pendingMode")
             injector.setUserPreferredDisplayMode(displayId, pendingMode, storeMode = true)
-            updateState {
-                it.copy(currentActiveMode = it.pendingMode, confirmationDialogEvent = null)
-            }
+            updateState { it.copy(currentActiveMode = it.pendingMode) }
             logResolutionChange(pendingMode)
         } else {
             logInfo("Mode change rejected, reverting to: $currentActiveMode")
             injector.resetUserPreferredDisplayMode(displayId)
-            updateState {
-                it.copy(pendingMode = it.currentActiveMode, confirmationDialogEvent = null)
-            }
+            updateState { it.copy(pendingMode = it.currentActiveMode) }
         }
+        _confirmationDialogEvent.value = null
     }
 
     private fun buildRefreshRateItems(resolutionSelectedMode: Mode): List<RefreshRateItem> {

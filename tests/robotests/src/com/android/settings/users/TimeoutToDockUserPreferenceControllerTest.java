@@ -47,7 +47,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowSecureSettings.class, ShadowUserHandle.class})
+@Config(shadows = {ShadowUserHandle.class})
 public class TimeoutToDockUserPreferenceControllerTest {
     private Context mContext;
     private Resources mResources;
@@ -165,5 +165,13 @@ public class TimeoutToDockUserPreferenceControllerTest {
                 mValues[1], UserHandle.myUserId());
 
         assertThat(mController.getSummary().toString()).isEqualTo(mEntries[1]);
+    }
+
+    @Test
+    public void getSummary_setToFiveMinutes() {
+        Settings.Secure.putStringForUser(mContext.getContentResolver(), TIMEOUT_TO_DOCK_USER,
+                mValues[2], UserHandle.myUserId());
+
+        assertThat(mController.getSummary().toString()).isEqualTo(mEntries[2]);
     }
 }
