@@ -59,7 +59,6 @@ public class KeyboardRepeatKeysDelayPreferenceController extends SliderPreferenc
 
     @Override
     public int getAvailabilityStatus() {
-        return InputSettings.isRepeatKeysFeatureFlagEnabled()
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return AVAILABLE;
     }
 }

@@ -16,17 +16,11 @@
 
 package com.android.settings.inputmethod;
 
-import static com.android.input.flags.Flags.FLAG_KEYBOARD_REPEAT_KEYS;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.hardware.input.InputSettings;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
-
-import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -51,20 +45,6 @@ public class KeyboardRepeatKeysDelayPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mRepeatKeysDelayPreferenceController = new KeyboardRepeatKeysDelayPreferenceController(
                 mContext, "repeat_keys_delay_preference");
-    }
-
-    @Test
-    @EnableFlags(FLAG_KEYBOARD_REPEAT_KEYS)
-    public void getAvailabilityStatus_flagIsEnabled_isAvailable() {
-        assertThat(mRepeatKeysDelayPreferenceController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
-    @DisableFlags(FLAG_KEYBOARD_REPEAT_KEYS)
-    public void getAvailabilityStatus_flagIsDisabled_notSupport() {
-        assertThat(mRepeatKeysDelayPreferenceController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
