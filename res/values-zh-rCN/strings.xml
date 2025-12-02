@@ -1012,6 +1012,9 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"在显示屏之间移动鼠标指针"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"使用外接显示器"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"显示分辨率"</string>
+    <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"分辨率和刷新率"</string>
+    <string name="external_display_refresh_rate_title" msgid="6326813722241312213">"刷新率"</string>
+    <string name="external_display_resolution_title" msgid="124681567143280861">"分辨率"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"默认连接行为"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"用作单独的显示器"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"镜像内置显示器"</string>
@@ -1411,6 +1414,8 @@
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"最大分辨率"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"最大分辨率会增加耗电量。切换分辨率可能会导致一些应用重启。"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
+    <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
+    <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> 赫兹"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"颜色"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"自然色"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"增强色"</string>
@@ -1545,7 +1550,8 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"启用后会增加耗电量"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"屏幕关闭时显示锁屏壁纸"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"屏幕关闭时隐藏锁屏壁纸"</string>
-    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"屏幕常亮功能可在屏幕关闭时显示时间、日期等信息"</string>
+    <string name="doze_always_on_summary_long" msgid="7956866501728946221">"在屏幕处于关闭状态时显示时间、日期等信息"</string>
+    <string name="doze_always_on_summary_short" msgid="3301903540897812365">"显示时间、日期等信息"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"壁纸选项"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"显示锁屏壁纸"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"使用“屏幕常亮”功能时，显示锁屏壁纸"</string>
@@ -2206,6 +2212,8 @@
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"最高速"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"减少"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"增加"</string>
+    <string name="mouse_keys_seek_bar_start_label" msgid="902491192774832751">"较慢"</string>
+    <string name="mouse_keys_seek_bar_end_label" msgid="3225448426565556589">"较快"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"反向滚动"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"使用主要按键"</string>
     <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"使用字母键和数字键来控制键盘，而不是使用数字键盘"</string>
@@ -3651,6 +3659,10 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"蓝牙、Android Auto、驾车模式"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"蓝牙、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"蓝牙、Android Auto"</string>
+    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
+    <skip />
+    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"无法使用，因为 NFC 已关闭"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"先安装付款应用，然后才能使用感应式付款功能"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使用的应用、默认应用"</string>
@@ -4604,14 +4616,17 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"允许此应用读取、修改和删除此设备或任何已连接的存储设备上的所有文件。如果您授予该权限，应用无需明确通知您即可访问文件。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以访问所有文件"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"屏幕自动化"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"每次都询问"</string>
-    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"始终允许"</string>
+    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"不允许"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"全屏通知"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"允许此应用显示全屏通知"</string>
@@ -6049,6 +6064,8 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"添加辅助联系信息"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"验证辅助联系信息"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"应用商店过滤条件"</string>
+    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
+    <skip />
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"根据应用内容的分级过滤应用"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"不同应用商店对内容的分级标准各不相同。同一应用在不同商店的分级可能存在差异。"</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"按内容分级过滤应用"</string>
@@ -6142,20 +6159,12 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"卫星连接"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"在没有移动网络或 WLAN 网络时保持连接"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"卫星着陆页"</string>
-    <!-- no translation found for try_a_demo (5053671464025495505) -->
-    <skip />
-    <!-- no translation found for see_how_it_works (6358887025296144792) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
-    <skip />
-    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
-    <skip />
-    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
-    <skip />
-    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
-    <skip />
-    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
-    <skip />
+    <string name="try_a_demo" msgid="5053671464025495505">"开始演示"</string>
+    <string name="see_how_it_works" msgid="6358887025296144792">"了解运作方式"</string>
+    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"没有移动网络或 Wi-Fi 网络时，手机会自动连接到卫星。为获得最佳连接质量，请确保您身在能清楚看到天空的场所。当有可用的移动网络时，手机会重新连接到移动网络。无法进行卫星通话。紧急呼叫或许仍可接通。"</string>
+    <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"为获得最佳连接质量，请确保您身在能清楚看到天空的场所。当有可用的移动网络时，手机会重新连接到移动网络。无法进行卫星通话。紧急呼叫或许仍可接通。"</string>
+    <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"详细了解卫星连接"</u></string>
+    <string name="forward_arrow_content_desc" msgid="5027233524587883868">"打开卫星紧急呼救演示"</string>
+    <string name="satellite_apps_title" msgid="3693252720266491323">"卫星应用"</string>
+    <string name="satellite_emergency_sos" msgid="5598135807261930736">"紧急求救"</string>
 </resources>

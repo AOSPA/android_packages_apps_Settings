@@ -21,16 +21,17 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.os.PersistableBundle
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
-import android.provider.DeviceConfig
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.telephony.satellite.SatelliteManager
+import com.android.settings.R
 import com.android.settings.flags.Flags
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -68,6 +69,7 @@ class SatelliteTileStateReceiverTest {
     @Mock private lateinit var packageManager: PackageManager
     @Mock private lateinit var pendingResult: BroadcastReceiver.PendingResult
     @Mock private lateinit var subInfo: SubscriptionInfo
+    @Mock private lateinit var resources: Resources
 
     private lateinit var context: Context
     private var componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
@@ -76,10 +78,6 @@ class SatelliteTileStateReceiverTest {
     private val testDispatcher = StandardTestDispatcher()
     private val SUB_ID = 1
 
-    companion object {
-        private const val ENABLE_SATELLITE_TILE_FEATURE_CONFIG_KEY = "enable_satellite_tile_feature"
-    }
-
     @Before
     fun setUp() {
         context = spy(RuntimeEnvironment.getApplication())
@@ -87,6 +85,8 @@ class SatelliteTileStateReceiverTest {
         `when`(context.packageManager).thenReturn(packageManager)
         `when`(packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_SATELLITE))
             .thenReturn(true)
+        `when`(context.resources).thenReturn(resources)
+        `when`(resources.getBoolean(R.bool.config_show_satellite_tile)).thenReturn(true)
         shadowSatelliteManager =
             Shadow.extract(context.getSystemService(SatelliteManager::class.java))
         `when`(subInfo.subscriptionId).thenReturn(SUB_ID)
@@ -94,19 +94,15 @@ class SatelliteTileStateReceiverTest {
         shadowOf(subscriptionManager).setActiveSubscriptionInfoList(listOf(subInfo))
         receiver = spy(SatelliteTileStateReceiver(testDispatcher))
         `when`(receiver.goAsync()).thenReturn(pendingResult)
-        DeviceConfig.setProperty(
-            DeviceConfig.NAMESPACE_TELEPHONY,
-            ENABLE_SATELLITE_TILE_FEATURE_CONFIG_KEY,
-            "true",
-            /* makeDefault= */ false,
-        )
 
         // Reset the singleton state of SatelliteSupportedStateChangeHandler to ensure test
         // isolation
         SatelliteSupportedStateChangeHandler.reset()
 
         componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
-        `when`(packageManager.getComponentEnabledSetting(any())).thenAnswer { componentEnabledState }
+        `when`(packageManager.getComponentEnabledSetting(any())).thenAnswer {
+            componentEnabledState
+        }
         `when`(packageManager.setComponentEnabledSetting(any(), anyInt(), anyInt())).then {
             componentEnabledState = it.getArgument(1)
         }
@@ -128,13 +124,8 @@ class SatelliteTileStateReceiverTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_deviceDisabled_doesNothing() = runTest {
-        DeviceConfig.setProperty(
-            DeviceConfig.NAMESPACE_TELEPHONY,
-            ENABLE_SATELLITE_TILE_FEATURE_CONFIG_KEY,
-            "false",
-            /* makeDefault= */ false,
-        )
+    fun onReceive_configIsFalse_doesNothing() = runTest {
+        `when`(resources.getBoolean(R.bool.config_show_satellite_tile)).thenReturn(false)
 
         sendBootCompletedBroadcast()
 

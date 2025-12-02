@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.accessibility
+package com.android.settings.accessibility.systemcontrols.data
 
 import android.content.Context
 import android.provider.Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR
@@ -25,7 +25,10 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsSecureStore
 
-/** Data store for [PowerButtonEndsCallPreference] */
+/**
+ * Data store for
+ * [com.android.settings.accessibility.systemcontrols.ui.PowerButtonEndsCallPreference]
+ */
 class PowerButtonEndsCallDataStore(private val context: Context) : KeyValueStoreDelegate {
     override val keyValueStoreDelegate: KeyValueStore
         get() =

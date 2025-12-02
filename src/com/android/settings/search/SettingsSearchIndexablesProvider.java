@@ -422,6 +422,9 @@ public class SettingsSearchIndexablesProvider extends PreferenceSearchIndexables
                 raw.summaryOn = TextUtils.isEmpty(summary) ? null : summary.toString();
                 raw.summaryOff = raw.summaryOn;
                 raw.className = CATEGORY_KEY_TO_PARENT_MAP.get(tile.getCategory());
+                final String[] keywordsArray = tile.getKeywords(context);
+                raw.keywords = keywordsArray != null && keywordsArray.length > 0
+                        ? String.join(",", keywordsArray) : "";
                 rawList.add(raw);
             }
         }

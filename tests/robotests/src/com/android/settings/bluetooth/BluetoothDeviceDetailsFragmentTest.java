@@ -98,8 +98,6 @@ public class BluetoothDeviceDetailsFragmentTest {
 
     @Before
     public void setUp() {
-        mSetFlagsRule.disableFlags(
-                com.android.settingslib.flags.Flags.FLAG_HEARING_DEVICES_AMBIENT_VOLUME_CONTROL);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalManager;
         doReturn(new int[] {TEST_DEVICE_ID}).when(mInputManager).getInputDeviceIds();
         doReturn(TEST_ADDRESS).when(mInputManager).getInputDeviceBluetoothAddress(TEST_DEVICE_ID);

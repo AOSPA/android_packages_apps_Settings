@@ -62,7 +62,7 @@
             android:enabled="false"
             settings:controller="com.android.settings.network.telephony.SmsDefaultSubscriptionController"/>
 
-        <Preference
+        <com.android.settings.supervision.NonClickablePreference
             android:key="mobile_network_spn"
             android:order="40"
             android:title="@string/mobile_network_spn_title"

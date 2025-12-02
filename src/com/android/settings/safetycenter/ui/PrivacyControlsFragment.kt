@@ -16,17 +16,10 @@
 
 package com.android.settings.safetycenter.ui
 
-import android.app.settings.SettingsEnums
 import android.content.Context
-import android.util.Log
-import androidx.fragment.app.viewModels
 import com.android.settings.R
-import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
-import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
-import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFactory
 import com.android.settings.search.BaseSearchIndexProvider
-import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
 import com.android.settingslib.search.SearchIndexableRaw
 
@@ -35,70 +28,22 @@ import com.android.settingslib.search.SearchIndexableRaw
  * Center UI. It hosts preferences for privacy hosts preferences for privacy-related settings`
  */
 @SearchIndexable
-class PrivacyControlsFragment : DashboardFragment() {
+class PrivacyControlsFragment : SafetyCenterSubpageFragment() {
 
-    private val TAG = "PrivacyControlsFragment"
+    override val subpageKey = SafetyCenterSubpageRegistry.PRIVACY_CONTROLS_SUBPAGE_KEY
 
-    private val viewModel: LiveSafetyCenterViewModel by viewModels {
-        LiveSafetyCenterViewModelFactory(requireActivity().application)
+    override fun getLogTag(): String {
+        return TAG
     }
 
-    override fun getPreferenceScreenResId(): Int {
-        return R.xml.safety_center_privacy_controls_settings
+    override fun redirectIfEmpty() {
+        // Privacy controls subpage shouldn't be hidden even if safety source preferences in it are
+        // not present, because it contains a lot of other preferences.
+        return
     }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
-        for (controller in allControllers) {
-            when (controller) {
-                is SafetyIssuesPreferenceController ->
-                    setupSafetyIssuesPreferenceController(controller)
-                is SafetySourcePreferenceController ->
-                    setupSafetySourcePreferenceController(controller)
-            }
-        }
-    }
-
-    override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> =
-        listOf(SafetyIssuesPreferenceController(context, PRIVACY_CONTROLS_ISSUES_KEY))
-
-    private fun setupSafetyIssuesPreferenceController(
-        safetyIssuesPreferenceController: SafetyIssuesPreferenceController
-    ) {
-        Log.d(TAG, "Setting Up the safety issues preference controller")
-        safetyIssuesPreferenceController.apply {
-            viewModel = this@PrivacyControlsFragment.viewModel
-            fragmentManager = childFragmentManager
-            activityTaskId = requireActivity().taskId
-            isSubpage = true
-            relatedSafetySources =
-                SafetyCenterSubpageRegistry.getAllSafetySourceIds(
-                    requireContext(),
-                    SafetyCenterSubpageRegistry.PRIVACY_CONTROLS_SUBPAGE_KEY,
-                )
-        }
-    }
-
-    private fun setupSafetySourcePreferenceController(
-        safetySourcePreferenceController: SafetySourcePreferenceController
-    ) {
-        val preferenceKey = safetySourcePreferenceController.preferenceKey
-        Log.d(TAG, "Setting up the safety source preference controller for [$preferenceKey]")
-        safetySourcePreferenceController.apply {
-            viewModel = this@PrivacyControlsFragment.viewModel
-            activityTaskId = requireActivity().taskId
-        }
-    }
-
-    override fun getLogTag(): String = TAG
-
-    override fun getMetricsCategory(): Int = SettingsEnums.SAFETY_CENTER
 
     companion object {
-
-        private const val PRIVACY_CONTROLS_ISSUES_KEY = "privacy_controls_issues_banner_group"
+        private const val TAG = "PrivacyControlsFragment"
 
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER =

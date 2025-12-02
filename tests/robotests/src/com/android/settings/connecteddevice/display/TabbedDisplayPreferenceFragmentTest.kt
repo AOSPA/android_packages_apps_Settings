@@ -167,7 +167,22 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         viewModel.updateSelectedDisplay(secondDisplayId)
 
         assertThat(topologyView.selectedDisplay).isEqualTo(secondDisplayId)
+        // Verify the toolbar is updated with the correct selected item.
         verify(settingsActivity).setToolbarSelectedItem(/* position= */ 1)
+        // Verify a listener is re-attached to handle user interaction on the toolbar.
+        verify(settingsActivity).setOnItemSelectedListener(any())
+    }
+
+    @Test
+    fun onStateUpdate_withInvalidSelectedId_doesNotSetToolbarItem() {
+        val invalidDisplayId = 999
+
+        viewModel.updateSelectedDisplay(invalidDisplayId)
+
+        // The topology view is still updated with the invalid ID.
+        assertThat(topologyView.selectedDisplay).isEqualTo(invalidDisplayId)
+        // Verify that setToolbarSelectedItem is not called, as the ID is not in the map.
+        verify(settingsActivity, never()).setToolbarSelectedItem(any())
     }
 
     @Test

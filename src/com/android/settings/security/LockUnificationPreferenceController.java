@@ -22,7 +22,11 @@ import static com.android.settings.security.SecuritySettings.UNIFY_LOCK_CONFIRM_
 import static com.android.settings.security.SecuritySettings.UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
+import android.annotation.Nullable;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -151,10 +155,19 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
                     mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileUserId);
             mUnifyProfile.setChecked(!separate);
             if (separate) {
-                mUnifyProfile.setDisabledByAdmin(RestrictedLockUtilsInternal
-                        .checkIfRestrictionEnforced(mContext, UserManager.DISALLOW_UNIFIED_PASSWORD,
-                                mProfileUserId));
+                setAdminRestriction();
             }
+        }
+    }
+
+    private void setAdminRestriction() {
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            mUnifyProfile.checkRestrictionAndSetDisabled(
+                UserManager.DISALLOW_UNIFIED_PASSWORD, mProfileUserId);
+        } else {
+            mUnifyProfile.setDisabledByAdmin(
+                    RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                            mContext, UserManager.DISALLOW_UNIFIED_PASSWORD, mProfileUserId));
         }
     }
 

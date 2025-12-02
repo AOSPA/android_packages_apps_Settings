@@ -5463,6 +5463,8 @@
     <string name="action_corner_action_notifications">Notifications</string>
     <!-- Text for 'Quick settings' action radio button. [CHAR LIMIT=60] -->
     <string name="action_corner_action_quick_settings">Quick settings</string>
+    <!-- Text for 'Note' action radio button. [CHAR LIMIT=60] -->
+    <string name="action_corner_action_note_title">Note</string>
     <!-- Title text for action selection dialog. [CHAR LIMIT=NONE] -->
     <string name="action_corner_action_dialog_title">Choose a shortcut for the <xliff:g id="corner">%1$s</xliff:g></string>
     <!-- Text for 'Bottom-left corner'. [CHAR LIMIT=60] -->
@@ -6137,6 +6139,12 @@
     <string name="accessibility_shortcut_two_finger_double_tap_keyword">%1$d-finger double tap</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_triple_tap_keyword">triple tap</string>
+    <!-- Title for keyboard shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_title_keyboard">Keyboard shortcut</string>
+    <!-- Summary for keyboard shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_keyboard">Press <xliff:g name="meta_key" example="Action">%1$s</xliff:g> + <xliff:g name="secondary_key" example="Alt">%2$s</xliff:g> + <xliff:g name="key_code" example="M">%3$s</xliff:g> to use <xliff:g name="feature" example="Magnification">%4$s</xliff:g></string>
+    <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_keyboard_keyword">keyboard shortcut</string>
     <!-- Title for the accessibility edit shortcut dialog to save the preference when user clicks it. [CHAR LIMIT=20] -->
     <string name="accessibility_shortcut_edit_dialog_title_advance">Advanced</string>
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
@@ -8806,6 +8814,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary">Bluetooth, Android Auto, NFC</string>
     <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode">Bluetooth, Android Auto</string>
+
+    <!-- Title for setting tile leading to Device settings [CHAR LIMIT=40]-->
+    <string name="device_dashboard_title">Device</string>
+    <!-- Summary for Device settings, explaining it contains Keyboard, Touchpad, Display, and Sound setting [CHAR LIMIT=NONE]-->
+    <string name="device_dashboard_summary">Keyboard, Touchpad, Display, Sound</string>
+
     <!-- Summary for Tap & pay settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary">Unavailable because NFC is off</string>
     <!-- Summary for Tap & pay settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
@@ -9482,6 +9496,11 @@
     <!-- Do not disturb settings, main screen, field, duration setting where user can specify how
     long dnd will last when toggling dnd on from qs) [CHAR LIMIT=100] -->
     <string name="zen_category_duration">Duration for Quick Settings</string>
+
+    <!-- Do not disturb: Title for the do not disturb sync toggle. When turned on, Do not disturb mode will be synced with other devices. [CHAR LIMIT=80] -->
+    <string name="dnd_sync_title">Do not disturb sync</string>
+    <!-- Do not disturb: Description for the do not disturb sync toggle. [CHAR LIMIT=120] -->
+    <string name="dnd_sync_description">Sync Do not disturb settings to connected devices</string>
 
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>
@@ -11443,13 +11462,12 @@
     <string name="computer_control_automation_footer_summary">If you don\'t allow screen automation, <xliff:g  example="Example App">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g example="Example App">%1$s</xliff:g> in other ways</string>
     <!-- Summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/55Y5GXxjQJNFvRT] -->
     <string name="computer_control_automation_page_summary">Allow apps to help you complete tasks by interacting with other apps\' screen content</string>
-    <string name="computer_control_automation_app_page_summary">Allow this app to help you complete tasks by interacting with other apps\' screen content</string>
     <!-- Preference summary text for an app when computer control access must be confirmed every time. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
     <string name="computer_control_automation_ask_every_time">Ask every time</string>
     <!-- Preference summary text for an app when computer control access is always allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF -->
     <string name="computer_control_automation_always_allowed">Always allow</string>
     <!-- Preference summary text for an app when computer control access is not allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
-    <string name="computer_control_automation_dont_allow">Don\u2019t allow</string>
+    <string name="computer_control_automation_dont_allow">Don\'t allow</string>
 
     <!-- Manage full screen intent permission title [CHAR LIMIT=40] -->
     <string name="full_screen_intent_title">Full-screen notifications</string>
@@ -12215,6 +12233,21 @@
 
     <!-- Title text for system navigation [CHAR LIMIT=60] -->
     <string name="system_navigation_title">Navigation mode</string>
+
+    <!-- Title text for update device category in system navigation [CHAR LIMIT=60] -->
+    <string name="update_device_category_title">Update device</string>
+
+    <!-- Title text for interaction category in system navigation [CHAR LIMIT=60] -->
+    <string name="interaction_category_title">Interaction</string>
+
+    <!-- Title text for automation & intelligence category in system navigation [CHAR LIMIT=60] -->
+    <string name="automation_intelligence_category_title">Automation &amp; Intelligence</string>
+
+    <!-- Title text for system management category in system navigation [CHAR LIMIT=60] -->
+    <string name="system_management_category_title">System management</string>
+
+    <!-- Title text for manage data category in system navigation [CHAR LIMIT=60] -->
+    <string name="manage_data_category_title">Manage data</string>
 
     <!-- Title text for swipe up to switch apps [CHAR LIMIT=60] -->
     <string name="swipe_up_to_switch_apps_title">2-button navigation</string>

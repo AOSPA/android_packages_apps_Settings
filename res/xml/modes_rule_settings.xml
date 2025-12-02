@@ -90,5 +90,11 @@
                 android:key="mode_manual_duration"
                 android:title="@string/zen_category_duration"
                 android:icon="@drawable/ic_zen_mode_category_duration" />
+
+        <SwitchPreferenceCompat
+            android:key="mode_sync"
+            android:title="@string/dnd_sync_title"
+            android:summary="@string/dnd_sync_description"
+            android:icon="@drawable/ic_sync" />
     </PreferenceCategory>
 </PreferenceScreen>
