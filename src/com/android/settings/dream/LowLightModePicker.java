@@ -39,8 +39,7 @@ import java.util.Set;
 public class LowLightModePicker extends RadioButtonPickerFragment
         implements Preference.OnPreferenceChangeListener  {
     static final String LOW_LIGHT_DISPLAY_BEHAVIOR_NONE = "low_light_display_behavior_none";
-    static final String LOW_LIGHT_DISPLAY_BEHAVIOR_SCREEN_OFF =
-            "low_light_display_behavior_screen_off";
+
     static final String LOW_LIGHT_DISPLAY_BEHAVIOR_LOW_LIGHT_CLOCK_DREAM =
             "low_light_display_behavior_low_light_clock_dream";
     static final String LOW_LIGHT_DISPLAY_BEHAVIOR_NO_DREAM = "low_light_display_behavior_no_dream";
@@ -53,8 +52,6 @@ public class LowLightModePicker extends RadioButtonPickerFragment
     @Settings.Secure.LowLightDisplayBehavior
     static int getSettingFromPrefKey(String key) {
         switch (key) {
-            case LOW_LIGHT_DISPLAY_BEHAVIOR_SCREEN_OFF:
-                return Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_SCREEN_OFF;
             case LOW_LIGHT_DISPLAY_BEHAVIOR_LOW_LIGHT_CLOCK_DREAM:
                 return Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_LOW_LIGHT_CLOCK_DREAM;
             case LOW_LIGHT_DISPLAY_BEHAVIOR_NO_DREAM:
@@ -67,8 +64,6 @@ public class LowLightModePicker extends RadioButtonPickerFragment
 
     static String getKeyFromSetting(@Settings.Secure.LowLightDisplayBehavior int setting) {
         switch (setting) {
-            case Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_SCREEN_OFF:
-                return LOW_LIGHT_DISPLAY_BEHAVIOR_SCREEN_OFF;
             case Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_LOW_LIGHT_CLOCK_DREAM:
                 return LOW_LIGHT_DISPLAY_BEHAVIOR_LOW_LIGHT_CLOCK_DREAM;
             case Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_NO_DREAM:
