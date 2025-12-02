@@ -71,7 +71,8 @@ class MobileNetworkMainSwitchPreference(
     override val disableWidgetOnCheckedChanged: Boolean
         get() = false
 
-    override fun isAvailable(context: Context): Boolean = true
+    // TODO: (b/462299877) temporarily rollback to controller base
+    override fun isAvailable(context: Context): Boolean = false
 
     override fun tags(context: Context) = arrayOf(KEY_MOBILE_DATA)
 
@@ -89,7 +90,7 @@ class MobileNetworkMainSwitchPreference(
     override fun onStart(context: PreferenceLifecycleContext) {
         super.onStart(context)
         context.lifecycleScope.launch(Dispatchers.Default) {
-            subscriptionActivationRepository.isActivationChangeableFlow().collect { it ->
+            subscriptionActivationRepository.isActivationChangeableFlow().collect {
                 isActivationChangeable.value = it
                 context.notifyPreferenceChange(KEY)
             }
@@ -124,7 +125,6 @@ class MobileNetworkMainSwitchPreference(
         override fun contains(key: String) = key == KEY
 
         override fun <T : Any> getValue(key: String, valueType: Class<T>): T {
-
             return runBlocking { subscriptionRepository.isSubscriptionEnabledFlow(subId).first() }
                 as T
         }
