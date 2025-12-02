@@ -165,13 +165,13 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         if (result is Allowed) {
             return
         } else if (result is EnterpriseRestriction) {
-            throw EnterpriseRestrictionException(context.getString(result.reason))
+            throw EnterpriseRestrictionException(result.getReason(context))
         } else if (result is HardwareUnsupported) {
-            throw HardwareUnsupportedException(context.getString(result.reason))
+            throw HardwareUnsupportedException(result.getReason(context))
         } else if (result is InvalidPreference) {
-            throw InvalidPreferenceException(context.getString(result.reason))
+            throw InvalidPreferenceException(result.getReason(context))
         } else if (result is MissingPermission) {
-            throw MissingPermissionException(context.getString(result.reason))
+            throw MissingPermissionException(result.getReason(context))
         }
         throw FailedPreconditionException()
     }
