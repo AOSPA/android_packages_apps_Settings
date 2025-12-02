@@ -411,8 +411,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 Log.d(LOG_TAG, "intent is null, can not get subId " + mSubId + " from intent.");
             }
         } else {
-            mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
-                    MobileNetworkUtils.getSearchableSubscriptionId(context));
+            mSubId = SubIdBundleUtils.getSubId(
+                    getArguments(),
+                    Settings.EXTRA_SUB_ID,
+                    MobileNetworkUtils.getSearchableSubscriptionId(context)
+            );
             Log.d(LOG_TAG, "display subId from getArguments(): " + mSubId);
         }
         Log.i(LOG_TAG, "display subId: " + mSubId);
@@ -913,8 +916,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                         + " from intent.");
             }
         } else {
-            retSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
-                    MobileNetworkUtils.getSearchableSubscriptionId(getContext()));
+            retSubId = SubIdBundleUtils.getSubId(
+                    getArguments(),
+                    Settings.EXTRA_SUB_ID,
+                    MobileNetworkUtils.getSearchableSubscriptionId(getContext())
+            );
         }
         if (retSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.d(LOG_TAG, "getSubId: Invalid subId, get the default subscription to show.");

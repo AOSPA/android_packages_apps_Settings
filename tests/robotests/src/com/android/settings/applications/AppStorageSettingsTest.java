@@ -19,6 +19,7 @@ package com.android.settings.applications;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
@@ -157,13 +158,14 @@ public class AppStorageSettingsTest {
         final ApplicationInfo applicationInfo = new ApplicationInfo();
         applicationInfo.sourceDir = "apex";
         packageInfo.applicationInfo = applicationInfo;
+        packageInfo.isApex = isApex;
 
+        when(mPackageManager.getPackageInfo(eq(packageName), anyInt() /* flags */)).thenReturn(
+                packageInfo);
         if (isApex) {
             when(mPackageManager.getModuleInfo(packageName, 0 /* flags */)).thenReturn(
                     new ModuleInfo());
         } else {
-            when(mPackageManager.getPackageInfo(packageName, 0 /* flags */)).thenReturn(
-                    packageInfo);
             when(mPackageManager.getModuleInfo(packageName, 0 /* flags */)).thenThrow(
                     new PackageManager.NameNotFoundException());
         }

@@ -53,6 +53,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
 import com.android.settings.flags.FakeFeatureFlagsImpl;
+import com.android.wm.shell.shared.desktopmode.FakeDesktopState;
 
 import org.junit.Before;
 import org.mockito.Mock;
@@ -84,6 +85,7 @@ public class ExternalDisplayTestBase {
     ActivityTaskManager mActivityTaskManager;
     @Mock
     DevicePolicyManager mDevicePolicyManager;
+    FakeDesktopState mFakeDesktopState = new FakeDesktopState();
 
     /**
      * Setup.
@@ -103,6 +105,7 @@ public class ExternalDisplayTestBase {
         updateDisplaysAndTopology(List.of(createExternalDisplay(DisplayIsEnabled.YES),
                 createOverlayDisplay(DisplayIsEnabled.YES)));
         doReturn(mInjectedFlags).when(mMockedInjector).getFlags();
+        doReturn(mFakeDesktopState).when(mMockedInjector).getDesktopState();
         mHandler = new TestHandler(mContext.getMainThreadHandler());
         doReturn(mHandler).when(mMockedInjector).getHandler();
         doReturn("").when(mMockedInjector).getSystemProperty(

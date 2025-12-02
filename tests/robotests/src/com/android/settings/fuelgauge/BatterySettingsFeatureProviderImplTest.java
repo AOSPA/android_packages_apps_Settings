@@ -46,17 +46,17 @@ public class BatterySettingsFeatureProviderImplTest {
     }
 
     @Test
-    public void isManufactureDateAvailable_returnFalse() {
+    public void isManufactureDateAvailable_default_returnFalse() {
         assertThat(mImpl.isManufactureDateAvailable(mContext, 1000L)).isFalse();
     }
 
     @Test
-    public void isFirstUseDateAvailable_returnFalse() {
+    public void isFirstUseDateAvailable_default_returnFalse() {
         assertThat(mImpl.isFirstUseDateAvailable(mContext, 1000L)).isFalse();
     }
 
     @Test
-    public void isBatteryInfoEnabled_returnFalse() {
+    public void isBatteryInfoEnabled_default_returnFalse() {
         assertThat(mImpl.isBatteryInfoEnabled(mContext)).isFalse();
     }
 
@@ -72,18 +72,18 @@ public class BatterySettingsFeatureProviderImplTest {
     }
 
     @Test
-    public void getWirelessChargingLabel_returnNull() {
+    public void getWirelessChargingLabel_default_returnNull() {
         assertThat(mImpl.getWirelessChargingLabel(mContext, new BatteryInfo())).isNull();
     }
 
     @Test
-    public void getWirelessChargingContentDescription_returnNull() {
+    public void getWirelessChargingContentDescription_default_returnNull() {
         assertThat(mImpl.getWirelessChargingContentDescription(mContext, new BatteryInfo()))
                 .isNull();
     }
 
     @Test
-    public void getWirelessChargingRemainingLabel_returnNull() {
+    public void getWirelessChargingRemainingLabel_default_returnNull() {
         assertThat(mImpl.getWirelessChargingRemainingLabel(mContext, 1000L, 1000L)).isNull();
     }
 
@@ -104,5 +104,15 @@ public class BatterySettingsFeatureProviderImplTest {
     public void getChargingOptimizationChargeLabel_default_returnNull() {
         assertThat(mImpl.getChargingOptimizationChargeLabel(mContext, 70, "70%", 1000L, 1000L))
                 .isNull();
+    }
+
+    @Test
+    public void isForceFullCharge_default_returnFalse() {
+        assertThat(mImpl.isForceFullCharge(mContext)).isFalse();
+    }
+
+    @Test
+    public void getForceFullChargeLabel_default_returnNull() {
+        assertThat(mImpl.getForceFullChargeLabel(mContext)).isNull();
     }
 }

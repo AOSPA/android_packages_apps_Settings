@@ -1012,6 +1012,9 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Move your mouse between displays"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Use external display"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Display resolution"</string>
+    <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"Resolution and refresh rate"</string>
+    <string name="external_display_refresh_rate_title" msgid="6326813722241312213">"Refresh rate"</string>
+    <string name="external_display_resolution_title" msgid="124681567143280861">"Resolution"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"Default connection behavior"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Use as separate display"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Mirror built-in display"</string>
@@ -1411,6 +1414,8 @@
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Max resolution"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Max resolution uses more of your battery. Switching your resolution may cause some apps to restart."</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> by <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
+    <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
+    <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hertz"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Colors"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natural"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Boosted"</string>
@@ -1545,7 +1550,8 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"Increased battery usage"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Show lock screen wallpaper when screen is off"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"Hide lock screen wallpaper when screen is off"</string>
-    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"Always-on display shows the time, date, and more when the screen is off"</string>
+    <string name="doze_always_on_summary_long" msgid="7956866501728946221">"Shows the time, date, and more when the screen is off"</string>
+    <string name="doze_always_on_summary_short" msgid="3301903540897812365">"Show time, date, and more"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Wallpaper options"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Show lock screen wallpaper"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Lock screen wallpaper is visible with always-on display"</string>
@@ -2206,6 +2212,8 @@
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"Speed"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Decrease"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Increase"</string>
+    <string name="mouse_keys_seek_bar_start_label" msgid="902491192774832751">"Slower"</string>
+    <string name="mouse_keys_seek_bar_end_label" msgid="3225448426565556589">"Faster"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Reverse scrolling"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Use primary keys"</string>
     <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"Control the keyboard with letters and numbers instead of the numeric keypad"</string>
@@ -3649,6 +3657,10 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, driving mode"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
+    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
+    <skip />
+    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Unavailable because NFC is off"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"To use, first install a payment app"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Recent apps, default apps"</string>
@@ -4602,14 +4614,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Allow this app to read, modify and delete all files on this device or any connected storage volumes. If granted, app may access files without your explicit knowledge."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Can access all files"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Screen automation"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"This app will be able to see and interact with other apps\' screen content to help you complete tasks, even when the apps are in the background"</string>
+    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"If you don\'t allow screen automation, <xliff:g id="ID_1">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g id="ID_2">%1$s</xliff:g> in other ways"</string>
+    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Allow apps to help you complete tasks by interacting with other apps\' screen content"</string>
+    <string name="computer_control_automation_app_page_summary" msgid="9014447574247981720">"Allow this app to help you complete tasks by interacting with other apps\' screen content"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Ask every time"</string>
-    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"Always allowed"</string>
+    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Always allow"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Don’t allow"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Full-screen notifications"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Allow full-screen notifications from this app"</string>
@@ -6030,6 +6040,7 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Add recovery info"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verify recovery info"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"App store filters"</string>
+    <string name="supervision_app_store_filters_keywords" msgid="8281936888718160336">"App filters, Mature app filters, Mature filters, Explicit apps, Block apps, Block explicit apps, Block mature apps"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filter apps based on the maturity of their content"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Each store rates content differently. An app’s rating may vary across stores."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filter apps by content ratings"</string>

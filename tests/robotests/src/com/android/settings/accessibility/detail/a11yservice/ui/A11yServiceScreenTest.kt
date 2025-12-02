@@ -279,14 +279,14 @@ class A11yServiceScreenTest : SettingsCatalystTestCase() {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun featureComponentName_flagTrue_wrongType_throwsException() {
+    fun featureComponentName_flagTrue_canRetrieveTheComponentNameFromParcelable() {
         val args =
             Bundle().apply {
                 putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_SERVICE_COMPONENT)
             }
         val screen = A11yServiceScreen(appContext, args)
 
-        assertThrows(IllegalArgumentException::class.java) { screen.bindingKey }
+        assertThat(screen.bindingKey).isEqualTo(A11Y_SERVICE_COMPONENT.flattenToString())
     }
 
     @Test
@@ -311,7 +311,7 @@ class A11yServiceScreenTest : SettingsCatalystTestCase() {
 
     @Test
     @DisableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun featureComponentName_flagFalse_wrongType_throwsException() {
+    fun featureComponentName_flagFalse_canRetrieveTheComponentNameFromString() {
         val args =
             Bundle().apply {
                 putString(
@@ -321,7 +321,7 @@ class A11yServiceScreenTest : SettingsCatalystTestCase() {
             }
         val screen = A11yServiceScreen(appContext, args)
 
-        assertThrows(IllegalArgumentException::class.java) { screen.bindingKey }
+        assertThat(screen.bindingKey).isEqualTo(A11Y_SERVICE_COMPONENT.flattenToString())
     }
 
     @Test

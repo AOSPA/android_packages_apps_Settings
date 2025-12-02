@@ -17,7 +17,9 @@
 package com.android.settings.accessibility
 
 import android.content.Context
+import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import android.view.View
 import android.view.accessibility.AccessibilityManager
@@ -61,6 +63,7 @@ private const val PREFERENCE_TITLE = "prefTitle"
 /** Tests for [ToggleShortcutPreferenceController] */
 @RunWith(RobolectricTestRunner::class)
 class ToggleShortcutPreferenceControllerTest {
+    @get:Rule val setFlagsRule: SetFlagsRule = SetFlagsRule()
     @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
     private lateinit var shortcutPreference: ShortcutPreference
     private lateinit var controller: ToggleShortcutPreferenceController
@@ -182,9 +185,10 @@ class ToggleShortcutPreferenceControllerTest {
             .isEqualTo(context.getText(R.string.accessibility_shortcut_state_off))
     }
 
+    @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
     @EnableFlags(Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
     @Test
-    fun displayPreferenceAndUpdateState_keyGestureShortcut_updateCheckStateAndSummary() {
+    fun displayPreferenceAndUpdateState_keyGestureShortcut_doNotUpdateCheckStateAndSummary() {
         a11yManager.enableShortcutsForTargets(
             /* enable= */ true,
             KEY_GESTURE,
@@ -199,6 +203,25 @@ class ToggleShortcutPreferenceControllerTest {
         assertThat(shortcutPreference.isChecked).isFalse()
         assertThat(shortcutPreference.summary)
             .isEqualTo(context.getText(R.string.accessibility_shortcut_state_off))
+    }
+
+    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    fun displayPreferenceAndUpdateState_keyGestureShortcut_updateCheckStateAndSummary() {
+        a11yManager.enableShortcutsForTargets(
+            /* enable= */ true,
+            KEY_GESTURE,
+            setOf(testComponentString),
+            context.userId,
+        )
+
+        fragmentScenario.moveToState(CREATED)
+        controller.displayPreference(shortcutPreference.preferenceManager.preferenceScreen)
+        controller.updateState(shortcutPreference)
+
+        assertThat(shortcutPreference.isChecked).isTrue()
+        assertThat(shortcutPreference.summary)
+            .isEqualTo(AccessibilityUtil.getShortcutSummaryList(context, KEY_GESTURE))
     }
 
     @Test

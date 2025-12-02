@@ -137,7 +137,9 @@ open class SelectedDisplayPreferenceFragment(
         preferenceScreen.addPreference(selectedDisplayPreference)
 
         // Built-in display preferences
-        prefComponents.add(PrefComponent(mirroringPreference(), PrefInfo.DISPLAY_MIRRORING))
+        if (viewModel.injector.desktopState?.canEnterDesktopMode == true) {
+            prefComponents.add(PrefComponent(mirroringPreference(), PrefInfo.DISPLAY_MIRRORING))
+        }
         prefComponents.add(
             PrefComponent(
                 includeDefaultDisplayInTopologyPreference(),

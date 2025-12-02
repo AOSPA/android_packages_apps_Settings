@@ -22,25 +22,19 @@ import android.os.Bundle
 import com.android.settings.flags.Flags
 
 /**
- * Retrieves a [ComponentName] from a [Bundle] by a given [key]. The method of retrieval depends on
- * the `Flags.catalystUseStringBundle()` flag. If the flag is enabled, it attempts to retrieve a
- * flattened `String` and unflatten it. Otherwise, it retrieves the value as a `Parcelable`.
+ * Retrieves a [ComponentName] from a [Bundle] by a given [key].
  *
- * This function is useful for migrations where a feature flag controls the data type of a
- * parameter. It checks the `Flags.catalystUseStringBundle()` flag to determine whether to retrieve
- * the value as a `String` (and unflatten it) or to retrieve it directly as a `Parcelable`.
+ * This function first attempts to retrieve the value as a flattened `String` and if a `String`
+ * value is not found, then attempts to retrieve the value as a `Parcelable`. This dual approach
+ * provides compatibility for cases where the [ComponentName] might be stored in either format.
  *
  * @param key The key to look up in the Bundle.
- * @return The [ComponentName] associated with the key, or `null` if the key is not found or the
- *   flattened string is malformed.
+ * @return The [ComponentName] associated with the key, or `null` if the key is not found, the
+ *   flattened string is malformed, or the value is not a valid ComponentName parcelable.
  */
 fun Bundle.getComponentName(key: String): ComponentName? {
-    return if (Flags.catalystUseStringBundle()) {
-        val componentNameString = getString(key) ?: return null
-        ComponentName.unflattenFromString(componentNameString)
-    } else {
-        getParcelable(key, ComponentName::class.java)
-    }
+    return getString(key)?.let { ComponentName.unflattenFromString(it) }
+        ?: getParcelable(key, ComponentName::class.java)
 }
 
 /**

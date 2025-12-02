@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility;
+package com.android.settings.accessibility.systemcontrols.ui;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;

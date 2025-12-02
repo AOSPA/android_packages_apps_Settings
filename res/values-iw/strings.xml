@@ -1012,6 +1012,9 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"הזזת העכבר בין מסכים"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"שימוש במסך החיצוני"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"רזולוציית המסך"</string>
+    <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"רזולוציה וקצב רענון"</string>
+    <string name="external_display_refresh_rate_title" msgid="6326813722241312213">"קצב רענון"</string>
+    <string name="external_display_resolution_title" msgid="124681567143280861">"רזולוציה"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"התנהגות ברירת המחדל של החיבור"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"שימוש כמסך נפרד"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"שיקוף המסך המובנה"</string>
@@ -1411,6 +1414,8 @@
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"רזולוציה מקסימלית"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"כשמשתמשים ברזולוציה מקסימלית, צריכת הסוללה גבוהה יותר. אם משנים את הרזולוציה, יכול להיות שחלק מהאפליקציות יופעלו מחדש."</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"‫<xliff:g id="WIDTH">%1$s</xliff:g> על <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
+    <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"‫<xliff:g id="REFRESH_RATE">%1$s</xliff:g> הרץ"</string>
+    <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"‫<xliff:g id="REFRESH_RATE">%1$s</xliff:g> הרץ"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"צבעים"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"גוון טבעי"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"גוון מוגבר"</string>
@@ -1545,7 +1550,8 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"צריכת סוללה גבוהה יותר"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"הצגת הטפט של מסך הנעילה כשהמסך כבוי"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"הסתרת הטפט של מסך הנעילה כשהמסך כבוי"</string>
-    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"‏כשהמכשיר במצב AOD, מוצגים השעה, התאריך ופרטים נוספים כשהמסך נעול"</string>
+    <string name="doze_always_on_summary_long" msgid="7956866501728946221">"הצגת השעה, התאריך ופרטים נוספים כשהמסך כבוי"</string>
+    <string name="doze_always_on_summary_short" msgid="3301903540897812365">"הצגת השעה, התאריך ופרטים נוספים"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"אפשרויות הטפט"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"הצגת הטפט של מסך הנעילה"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"‏הטפט של מסך הנעילה מופעל בתצוגה התמידית (AOD)"</string>
@@ -2206,6 +2212,8 @@
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"מהירות"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"הפחתה"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"הגברה"</string>
+    <string name="mouse_keys_seek_bar_start_label" msgid="902491192774832751">"לאט יותר"</string>
+    <string name="mouse_keys_seek_bar_end_label" msgid="3225448426565556589">"מהר יותר"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"גלילה הפוכה"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"שימוש במקשים הראשיים"</string>
     <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"שליטה במקלדת עם אותיות ומספרים במקום לוח המקשים המספרי"</string>
@@ -3649,6 +3657,10 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"‏Bluetooth, ‏Android Auto, מצב נהיגה"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"‏Bluetooth, ‏Android Auto, ‏NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"‏Bluetooth, ‏Android Auto"</string>
+    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
+    <skip />
+    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"‏לא זמין כי NFC כבוי"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"כדי להשתמש, יש להתקין תחילה אפליקציה לתשלום"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"אפליקציות אחרונות, אפליקציות ברירת מחדל"</string>
@@ -4602,14 +4614,17 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"לאפליקציה הזו תהיה הרשאה לקרוא, לשנות ולמחוק את כל הקבצים במכשיר הזה או בכל אחסון שמחובר אליו. אם ההרשאה ניתנת, האפליקציה תורשה לגשת לקבצים מבלי ליידע אותך במפורש."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"יכולת גישה לכל הקבצים"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"אוטומציה של המסך"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"אני רוצה לבחור בכל פעם"</string>
-    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"מותר תמיד"</string>
+    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"אין אישור"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"התראות במסך מלא"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"מתן הרשאה להצגת התראות במסך מלא מהאפליקציה הזו"</string>
@@ -6031,6 +6046,8 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"הוספת פרטי השחזור"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"אימות פרטי השחזור"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"מסננים של חנות האפליקציות"</string>
+    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
+    <skip />
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"סינון אפליקציות לפי סיווג התוכן"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"כל חנות מסווגת את התוכן בצורה שונה. סיווג האפליקציה עשוי להיות שונה בין החנויות."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"סינון אפליקציות לפי סיווגי תוכן"</string>
@@ -6124,20 +6141,12 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"קישוריות ללוויין"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"‏חיבור רציף בלי רשת סלולרית או Wi-Fi"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"דף הנחיתה לתקשורת לוויינית"</string>
-    <!-- no translation found for try_a_demo (5053671464025495505) -->
-    <skip />
-    <!-- no translation found for see_how_it_works (6358887025296144792) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
-    <skip />
-    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
-    <skip />
-    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
-    <skip />
-    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
-    <skip />
-    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
-    <skip />
+    <string name="try_a_demo" msgid="5053671464025495505">"צפייה בהדגמה"</string>
+    <string name="see_how_it_works" msgid="6358887025296144792">"איך זה עובד"</string>
+    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"‏כשאין לך חיבור לרשת סלולרית או ל-Wi-Fi, הטלפון יתחבר ללוויין אוטומטית. כדי שהחיבור יהיה טוב יותר, צריך להיות בחוץ, מתחת לכיפת השמיים. הטלפון יתחבר מחדש לרשת סלולרית כשהיא תהיה זמינה. אי אפשר להתקשר באמצעות לוויין. יכול להיות ששיחות חירום יפעלו."</string>
+    <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"כדי שהחיבור יהיה טוב יותר, צריך להיות בחוץ, מתחת לכיפת השמיים. הטלפון יתחבר מחדש לרשת סלולרית כשהיא תהיה זמינה. אי אפשר להתקשר באמצעות לוויין. יכול להיות ששיחות חירום יפעלו."</string>
+    <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"מידע נוסף על קישוריות לוויינית"</u></string>
+    <string name="forward_arrow_content_desc" msgid="5027233524587883868">"פתיחת ההדגמה של התקשורת הלוויינית למצב חירום"</string>
+    <string name="satellite_apps_title" msgid="3693252720266491323">"אפליקציות לוויין"</string>
+    <string name="satellite_emergency_sos" msgid="5598135807261930736">"מצב חירום"</string>
 </resources>

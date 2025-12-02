@@ -1012,6 +1012,9 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"ನಿಮ್ಮ ಮೌಸ್ ಅನ್ನು ಡಿಸ್‌ಪ್ಲೇಗಳ ನಡುವೆ ಸರಿಸಿ"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"ಬಾಹ್ಯ ಡಿಸ್‌ಪ್ಲೇ ಬಳಸಿ"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ಡಿಸ್‌ಪ್ಲೇ ರೆಸಲ್ಯೂಷನ್"</string>
+    <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"ರೆಸಲ್ಯೂಷನ್‌‌ ಮತ್ತು ರಿಫ್ರೆಶ್ ರೇಟ್"</string>
+    <string name="external_display_refresh_rate_title" msgid="6326813722241312213">"ರಿಫ್ರೆಶ್ ರೇಟ್"</string>
+    <string name="external_display_resolution_title" msgid="124681567143280861">"ರೆಸಲ್ಯೂಷನ್"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"ಡೀಫಾಲ್ಟ್ ಕನೆಕ್ಷನ್‍ನ ವರ್ತನೆ"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"ಪ್ರತ್ಯೇಕ ಡಿಸ್‌ಪ್ಲೇ ಆಗಿ ಬಳಸಿ"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"ಮಿರರ್ ಬಿಲ್ಟ್-ಇನ್ ಡಿಸ್‌ಪ್ಲೇ"</string>
@@ -1411,6 +1414,8 @@
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"ಗರಿಷ್ಠ ರೆಸಲ್ಯೂಶನ್"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"ಗರಿಷ್ಠ ರೆಸಲ್ಯೂಶನ್ ನಿಮ್ಮ ಬ್ಯಾಟರಿಯನ್ನು ಹೆಚ್ಚು ಬಳಸುತ್ತದೆ. ನಿಮ್ಮ ರೆಸಲ್ಯೂಶನ್ ಅನ್ನು ಬದಲಿಸುವುದರಿಂದ ಕೆಲವು ಆ್ಯಪ್‌ಗಳು ಮರುಪ್ರಾರಂಭವಾಗಬಹುದು."</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="HEIGHT">%2$s</xliff:g> ಅವರಿಂದ <xliff:g id="WIDTH">%1$s</xliff:g>"</string>
+    <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
+    <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> ಹರ್ಟ್ಸ್"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"ಬಣ್ಣಗಳು"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ಸ್ವಾಭಾವಿಕ"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"ಬೂಸ್ಟ್ ಮಾಡಿರುವುದು"</string>
@@ -1545,7 +1550,8 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"ಅಧಿಕ ಬ್ಯಾಟರಿ ಬಳಕೆ"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"ಸ್ಕ್ರೀನ್ ಆಫ್ ಆಗಿರುವಾಗ ಲಾಕ್ ಸ್ಕ್ರೀನ್ ವಾಲ್‌ಪೇಪರ್ ಅನ್ನು ತೋರಿಸಿ"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"ಸ್ಕ್ರೀನ್ ಆಫ್ ಆಗಿರುವಾಗ ಲಾಕ್ ಸ್ಕ್ರೀನ್ ವಾಲ್‌ಪೇಪರ್ ಅನ್ನು ಮರೆಮಾಡಿ"</string>
-    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"ಸ್ಕ್ರೀನ್ ಆಫ್ ಆಗಿರುವಾಗ ಯಾವಾಗಲೂ ಡಿಸ್‌ಪ್ಲೇ ಆನ್‌ ಆಗಿರಲಿ, ದಿನಾಂಕ ಮತ್ತು ಹೆಚ್ಚಿನದನ್ನು ತೋರಿಸುತ್ತದೆ"</string>
+    <string name="doze_always_on_summary_long" msgid="7956866501728946221">"ಸ್ಕ್ರೀನ್ ಆಫ್ ಆಗಿರುವಾಗ ಸಮಯ, ದಿನಾಂಕ ಮತ್ತು ಹೆಚ್ಚಿನದನ್ನು ತೋರಿಸುತ್ತದೆ"</string>
+    <string name="doze_always_on_summary_short" msgid="3301903540897812365">"ಸಮಯ, ದಿನಾಂಕ ಮತ್ತು ಇತ್ಯಾದಿಗಳನ್ನು ತೋರಿಸಿ"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"ವಾಲ್‌ಪೇಪರ್ ಆಯ್ಕೆಗಳು"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"ಲಾಕ್ ಸ್ಕ್ರೀನ್ ವಾಲ್‌ಪೇಪರ್ ಅನ್ನು ತೋರಿಸಿ"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"ಲಾಕ್ ಸ್ಕ್ರೀನ್ ವಾಲ್‌ಪೇಪರ್ ಯಾವಾಗಲೂ ಡಿಸ್‌ಪ್ಲೇ ಆನ್‌ ಆಗಿರಲಿ ಎಂಬ ಫೀಚರ್ ಮೂಲಕ ಗೋಚರಿಸುತ್ತದೆ"</string>
@@ -2206,6 +2212,8 @@
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"ವೇಗ"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"ಕಡಿಮೆ ಮಾಡಿ"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"ಹೆಚ್ಚಿಸಿ"</string>
+    <string name="mouse_keys_seek_bar_start_label" msgid="902491192774832751">"ಇನ್ನಷ್ಟು ನಿಧಾನ"</string>
+    <string name="mouse_keys_seek_bar_end_label" msgid="3225448426565556589">"ಇನ್ನಷ್ಟು ವೇಗ"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"ರಿವರ್ಸ್ ಸ್ಕ್ರಾಲಿಂಗ್"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"ಪ್ರಾಥಮಿಕ ಕೀಗಳನ್ನು ಬಳಸಿ"</string>
     <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"ಸಂಖ್ಯಾ ಕೀಪ್ಯಾಡ್ ಬದಲಿಗೆ ಅಕ್ಷರಗಳು ಮತ್ತು ಸಂಖ್ಯೆಗಳೊಂದಿಗೆ ಕೀಬೋರ್ಡ್ ಅನ್ನು ನಿಯಂತ್ರಿಸಿ"</string>
@@ -3649,6 +3657,10 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"ಬ್ಲೂಟೂತ್, Android Auto, ಡ್ರೈವಿಂಗ್ ಮೋಡ್"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"ಬ್ಲೂಟೂತ್, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"ಬ್ಲೂಟೂತ್, Android Auto"</string>
+    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
+    <skip />
+    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC ಆಫ್ ಆಗಿರುವ ಕಾರಣ ಲಭ್ಯವಿಲ್ಲ"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ಬಳಸಲು, ಮೊದಲು ಪಾವತಿ ಆ್ಯಪ್‌ ಅನ್ನು ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"ಇತ್ತೀಚಿನ ಆ್ಯಪ್‌ಗಳು, ಡೀಫಾಲ್ಟ್ ಆ್ಯಪ್‌ಗಳು"</string>
@@ -4602,14 +4614,17 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"ಈ ಸಾಧನ ಅಥವಾ ಕನೆಕ್ಟ್ ಮಾಡಿದ ಶೇಖರಣಾ ವಾಲ್ಯೂಮ್‌ಗಳಲ್ಲಿ ಎಲ್ಲಾ ಫೈಲ್‌ಗಳನ್ನು ಓದಲು, ಮಾರ್ಪಡಿಸಲು ಮತ್ತು ಅಳಿಸಲು ಈ ಆ್ಯಪ್‌ಗೆ ಅನುಮತಿಸಿ. ಅನುಮತಿಸಿದರೆ, ಬಳಕೆದಾರರ ಪೂರ್ವಾನುಮತಿ ಇಲ್ಲದೆ ಆ್ಯಪ್‌ಗಳು ಫೈಲ್‌ಗಳನ್ನು ಪ್ರವೇಶಿಸಬಹುದು."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"ಎಲ್ಲಾ ಫೈಲ್‌ಗಳನ್ನು ಪ್ರವೇಶಿಸಬಹುದು"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"ಸ್ಕ್ರೀನ್ ಆಟೋಮೇಷನ್"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"ಪ್ರತಿ ಬಾರಿ ಕೇಳಿ"</string>
-    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"ಯಾವಾಗಲೂ ಅನುಮತಿಸಲಾಗಿದೆ"</string>
+    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"ಅನುಮತಿಸಬೇಡಿ"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"ಫುಲ್ ಸ್ಕ್ರೀನ್ ನೋಟಿಫಿಕೇಶನ್‌ಗಳು"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ಈ ಆ್ಯಪ್‌ನಿಂದ ಫುಲ್-ಸ್ಕ್ರೀನ್ ನೋಟಿಫಿಕೇಶನ್‌ಗಳನ್ನು ಅನುಮತಿಸಿ"</string>
@@ -6030,6 +6045,8 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"ರಿಕವರಿ ಮಾಹಿತಿಯನ್ನು ಸೇರಿಸಿ"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"ರಿಕವರಿ ಮಾಹಿತಿಯನ್ನು ದೃಢೀಕರಿಸಿ"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"ಆ್ಯಪ್ ಸ್ಟೋರ್ ಫಿಲ್ಟರ್‌ಗಳು"</string>
+    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
+    <skip />
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"ಆ್ಯಪ್‌ಗಳನ್ನು ಅವುಗಳ ಕಂಟೆಂಟ್‌ನ ಪ್ರಬುದ್ಧತೆಯ ಆಧಾರದ ಮೇಲೆ ಫಿಲ್ಟರ್ ಮಾಡಿ"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"ಪ್ರತಿ ಸ್ಟೋರ್ ಕಂಟೆಂಟ್ ಅನ್ನು ವಿಭಿನ್ನವಾಗಿ ರೇಟ್ ಮಾಡುತ್ತದೆ. ಆ್ಯಪ್‌ನ ರೇಟಿಂಗ್ ಸ್ಟೋರ್‌ಗಳಾದ್ಯಂತ ಬದಲಾಗಬಹುದು."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"ಕಂಟೆಂಟ್ ರೇಟಿಂಗ್‌ಗಳ ಪ್ರಕಾರ ಆ್ಯಪ್‌ಗಳನ್ನು ಫಿಲ್ಟರ್ ಮಾಡಿ"</string>
@@ -6123,20 +6140,12 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"ಸ್ಯಾಟಲೈಟ್ ಕನೆಕ್ಟಿವಿಟಿ"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"ನೀವು ಮೊಬೈಲ್ ಅಥವಾ ವೈ-ಫೈ ನೆಟ್‌ವರ್ಕ್ ಹೊಂದಿಲ್ಲದಿದ್ದಾಗಲೂ ಕನೆಕ್ಟ್ ಆಗಿರಿ"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"ಸ್ಯಾಟಲೈಟ್ ಲ್ಯಾಂಡಿಂಗ್ ಪುಟ"</string>
-    <!-- no translation found for try_a_demo (5053671464025495505) -->
-    <skip />
-    <!-- no translation found for see_how_it_works (6358887025296144792) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
-    <skip />
-    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
-    <skip />
-    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
-    <skip />
-    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
-    <skip />
-    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
-    <skip />
+    <string name="try_a_demo" msgid="5053671464025495505">"ಡೆಮೋ ಪ್ರಯತ್ನಿಸಿ ನೋಡಿ"</string>
+    <string name="see_how_it_works" msgid="6358887025296144792">"ಇದು ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ ಎಂಬುದನ್ನು ನೋಡಿ"</string>
+    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"ನೀವು ಮೊಬೈಲ್ ಅಥವಾ ವೈ-ಫೈ ನೆಟ್‌ವರ್ಕ್ ಹೊಂದಿಲ್ಲದಿದ್ದಾಗ, ನಿಮ್ಮ ಫೋನ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಸ್ಯಾಟಲೈಟ್‌ಗೆ ಕನೆಕ್ಟ್ ಆಗುತ್ತದೆ. ಉತ್ತಮ ಕನೆಕ್ಷನ್‌ಗಾಗಿ, ಆಕಾಶ ಸ್ಪಷ್ಟವಾಗಿ ಕಾಣುವ ಹಾಗೆ ಇರಿಸಿ. ಲಭ್ಯವಿರುವಾಗ ನಿಮ್ಮ ಫೋನ್ ಮೊಬೈಲ್ ನೆಟ್‌ವರ್ಕ್‌ಗೆ ಪುನಃ ಕನೆಕ್ಟ್ ಆಗುತ್ತದೆ. ಸ್ಯಾಟಲೈಟ್ ಮೂಲಕ ಕರೆ ಮಾಡುವ ಸೌಲಭ್ಯ ಲಭ್ಯವಿಲ್ಲ. ತುರ್ತು ಕರೆಗಳು ಈಗಲೂ ಕನೆಕ್ಟ್ ಆಗಬಹುದು."</string>
+    <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"ಉತ್ತಮ ಕನೆಕ್ಷನ್‌ಗಾಗಿ, ಆಕಾಶ ಸ್ಪಷ್ಟವಾಗಿ ಕಾಣುವ ಹಾಗೆ ಇರಿಸಿ. ಲಭ್ಯವಿರುವಾಗ ನಿಮ್ಮ ಫೋನ್ ಮೊಬೈಲ್ ನೆಟ್‌ವರ್ಕ್‌ಗೆ ಪುನಃ ಕನೆಕ್ಟ್ ಆಗುತ್ತದೆ. ಸ್ಯಾಟಲೈಟ್ ಮೂಲಕ ಕರೆ ಮಾಡುವ ಸೌಲಭ್ಯ ಲಭ್ಯವಿಲ್ಲ. ತುರ್ತು ಕರೆಗಳು ಈಗಲೂ ಕನೆಕ್ಟ್ ಆಗಬಹುದು."</string>
+    <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"ಸ್ಯಾಟಲೈಟ್ ಕನೆಕ್ಟಿವಿಟಿ ಕುರಿತು ಇನ್ನಷ್ಟು"</u></string>
+    <string name="forward_arrow_content_desc" msgid="5027233524587883868">"ಸ್ಯಾಟಲೈಟ್ SOS ಡೆಮೋ ತೆರೆಯಿರಿ"</string>
+    <string name="satellite_apps_title" msgid="3693252720266491323">"ಸ್ಯಾಟಲೈಟ್ ಆ್ಯಪ್‌ಗಳು"</string>
+    <string name="satellite_emergency_sos" msgid="5598135807261930736">"ತುರ್ತು SOS"</string>
 </resources>

@@ -23,6 +23,7 @@ import androidx.preference.PreferenceManager
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.network.ims.VolteQueryImsState
 import com.android.settings.network.ims.VtQueryImsState
 import com.google.common.truth.Truth.assertThat
@@ -36,6 +37,7 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class VideoCallingPreferenceControllerTest {
@@ -48,6 +50,7 @@ class VideoCallingPreferenceControllerTest {
 
     private val mockCallStateRepository = mock<CallStateRepository> {}
     private val mockVideoCallingRepository = mock<VideoCallingRepository> {}
+    private val mockCallingPreferenceCategoryController = mock<CallingPreferenceCategoryController>()
 
     private var controller =
         spy(
@@ -67,7 +70,7 @@ class VideoCallingPreferenceControllerTest {
 
     @Before
     fun setUp() {
-        controller.init(SUB_ID, CallingPreferenceCategoryController(context, "calling_category"))
+        controller.init(SUB_ID, mockCallingPreferenceCategoryController)
         preferenceScreen.addPreference(preference)
         controller.displayPreference(preferenceScreen)
     }
@@ -75,6 +78,7 @@ class VideoCallingPreferenceControllerTest {
     @Test
     fun displayPreference_uiInitState_isHidden() {
         assertThat(preference.isVisible).isFalse()
+        verify(mockCallingPreferenceCategoryController).updateChildVisible(TEST_KEY, false)
     }
 
     @Test
@@ -105,6 +109,7 @@ class VideoCallingPreferenceControllerTest {
         delay(100)
 
         assertThat(preference.isVisible).isTrue()
+        verify(mockCallingPreferenceCategoryController).updateChildVisible(TEST_KEY, true)
     }
 
     @Test
@@ -180,6 +185,24 @@ class VideoCallingPreferenceControllerTest {
         controller.updateState(preference)
 
         assertThat(preference.isEnabled).isFalse()
+    }
+
+    @Test
+    fun getAvailabilityStatus_returnsAvailable() {
+        assertThat(controller.availabilityStatus).isEqualTo(AVAILABLE)
+    }
+
+    @Test
+    fun setChecked_withInvalidSubId_returnsFalse() {
+        val newController = VideoCallingPreferenceController(
+            context,
+            TEST_KEY,
+            mockCallStateRepository,
+            mockVideoCallingRepository
+        )
+        newController.init(-1, mockCallingPreferenceCategoryController)
+
+        assertThat(newController.setChecked(true)).isFalse()
     }
 
     @Test

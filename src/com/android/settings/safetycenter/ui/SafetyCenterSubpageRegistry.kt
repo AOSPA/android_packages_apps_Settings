@@ -65,6 +65,16 @@ object SafetyCenterSubpageRegistry {
     private const val CELLULAR_NETWORK_SECURITY_ILLUSTRATION_KEY =
         "cellular_network_security_illustration"
 
+    // Issues Banner Group Preference Keys
+    private const val APP_SECURITY_ISSUES_KEY = "app_security_issues_banner_group"
+    private const val DEVICE_UNLOCK_ISSUES_KEY = "device_unlock_issues_banner_group"
+    private const val ACCOUNT_SECURITY_ISSUES_KEY = "account_security_issues_banner_group"
+    private const val DEVICE_FINDERS_ISSUES_KEY = "device_finders_issues_banner_group"
+    private const val SYSTEM_AND_UPDATES_ISSUES_KEY = "system_and_updates_issues_banner_group"
+    private const val CELLULAR_NETWORK_SECURITY_ISSUES_KEY =
+        "cellular_network_security_issues_banner_group"
+    private const val PRIVACY_CONTROLS_ISSUES_KEY = "privacy_controls_issues_banner_group"
+
     /**
      * Configuration map for each subpage, keyed by the preference key string. Provides the XML
      * resource, title resource, default summary resource, and any issue-only sources.
@@ -79,6 +89,7 @@ object SafetyCenterSubpageRegistry {
                     subpageFragmentClassName = AppSecuritySubpageFragment::class.qualifiedName!!,
                     illustrationPrefKey = APP_SECURITY_ILLUSTRATION_KEY,
                     illustrationResId = R.drawable.safety_center_app_security_subpage_illustration,
+                    issuesBannerGroupPrefKey = APP_SECURITY_ISSUES_KEY,
                 ),
             DEVICE_UNLOCK_SUBPAGE_KEY to
                 SubpageConfig(
@@ -89,6 +100,7 @@ object SafetyCenterSubpageRegistry {
                     issueOnlySources = listOf("AndroidIdentityCheck"),
                     illustrationPrefKey = DEVICE_UNLOCK_ILLUSTRATION_KEY,
                     illustrationResId = R.drawable.safety_center_device_unlock_subpage_illustration,
+                    issuesBannerGroupPrefKey = DEVICE_UNLOCK_ISSUES_KEY,
                 ),
             ACCOUNT_SECURITY_SUBPAGE_KEY to
                 SubpageConfig(
@@ -100,6 +112,7 @@ object SafetyCenterSubpageRegistry {
                     illustrationPrefKey = ACCOUNT_SECURITY_ILLUSTRATION_KEY,
                     illustrationResId =
                         R.drawable.safety_center_account_security_subpage_illustration,
+                    issuesBannerGroupPrefKey = ACCOUNT_SECURITY_ISSUES_KEY,
                 ),
             DEVICE_FINDERS_SUBPAGE_KEY to
                 SubpageConfig(
@@ -108,7 +121,9 @@ object SafetyCenterSubpageRegistry {
                     defaultSummaryResId = R.string.safety_center_device_finders_summary,
                     subpageFragmentClassName = DeviceFindersSubpageFragment::class.qualifiedName!!,
                     illustrationPrefKey = DEVICE_FINDERS_ILLUSTRATION_KEY,
-                    illustrationResId = R.drawable.safety_center_device_finders_subpage_illustration,
+                    illustrationResId =
+                        R.drawable.safety_center_device_finders_subpage_illustration,
+                    issuesBannerGroupPrefKey = DEVICE_FINDERS_ISSUES_KEY,
                 ),
             SYSTEM_AND_UPDATES_SUBPAGE_KEY to
                 SubpageConfig(
@@ -120,6 +135,7 @@ object SafetyCenterSubpageRegistry {
                     illustrationPrefKey = SYSTEM_AND_UPDATES_ILLUSTRATION_KEY,
                     illustrationResId =
                         R.drawable.safety_center_system_and_updates_subpage_illustration,
+                    issuesBannerGroupPrefKey = SYSTEM_AND_UPDATES_ISSUES_KEY,
                 ),
             CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY to
                 SubpageConfig(
@@ -131,6 +147,7 @@ object SafetyCenterSubpageRegistry {
                     illustrationPrefKey = CELLULAR_NETWORK_SECURITY_ILLUSTRATION_KEY,
                     illustrationResId =
                         R.drawable.safety_center_cellular_network_security_subpage_illustration,
+                    issuesBannerGroupPrefKey = CELLULAR_NETWORK_SECURITY_ISSUES_KEY,
                 ),
             PRIVACY_CONTROLS_SUBPAGE_KEY to
                 SubpageConfig(
@@ -146,6 +163,7 @@ object SafetyCenterSubpageRegistry {
                             "AndroidPermissionAutoRevoke",
                             "AndroidCertificateTransparency",
                         ),
+                    issuesBannerGroupPrefKey = PRIVACY_CONTROLS_ISSUES_KEY,
                 ),
         )
 
@@ -216,6 +234,15 @@ object SafetyCenterSubpageRegistry {
     @DrawableRes
     fun getIllustrationResId(preferenceKey: String): Int? =
         subpageConfigs[preferenceKey]?.illustrationResId
+
+    /**
+     * Gets the issues banner group preference key for a given [preferenceKey].
+     *
+     * @param preferenceKey The string key for the subpage.
+     * @return The issues banner group preference key, or null if not found.
+     */
+    fun getIssuesBannerGroupPrefKey(preferenceKey: String): String? =
+        subpageConfigs[preferenceKey]?.issuesBannerGroupPrefKey
 
     /**
      * Retrieves the list of safety source IDs that only provide issues for the given
@@ -363,6 +390,8 @@ data class SafetySourcePrefConfig(
  *   subpage.
  * @property illustrationPrefKey The preference key for the illustration on this subpage.
  * @property illustrationResId The drawable resource ID for the illustration on this subpage.
+ * @property issuesBannerGroupPrefKey The preference key for the issues banner group on this
+ *   subpage.
  */
 data class SubpageConfig(
     @XmlRes val xmlResId: Int,
@@ -372,4 +401,5 @@ data class SubpageConfig(
     val issueOnlySources: List<String> = emptyList(),
     val illustrationPrefKey: String? = null,
     @DrawableRes val illustrationResId: Int? = null,
+    val issuesBannerGroupPrefKey: String,
 )

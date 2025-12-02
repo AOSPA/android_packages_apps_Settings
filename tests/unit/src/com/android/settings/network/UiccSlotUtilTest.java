@@ -690,13 +690,35 @@ public class UiccSlotUtilTest {
 
     private SubscriptionInfo createSubscriptionInfo(int subId, int logicalSlotIndex, int portIndex,
             boolean isEmbedded, int cardId) {
-        return new SubscriptionInfo(
-                subId, "",
-                logicalSlotIndex, "", "", 0, 0, "", 0, null, "", "", "",
-                isEmbedded /* isEmbedded */,
-                null, "",
-                cardId,
-                false, null, false, 0, 0, 0, null, null, true, portIndex);
+        return new SubscriptionInfo.Builder()
+                .setId(subId)
+                .setIccId("")
+                .setSimSlotIndex(logicalSlotIndex)
+                .setDisplayName("")
+                .setCarrierName("")
+                .setDisplayNameSource(0)
+                .setIconTint(0)
+                .setNumber("")
+                .setDataRoaming(0)
+                .setIcon(null)
+                .setMcc("")
+                .setMnc("")
+                .setCountryIso("")
+                .setEmbedded(isEmbedded)
+                .setNativeAccessRules(null)
+                .setCardString("")
+                .setCardId(cardId)
+                .setOpportunistic(false)
+                .setGroupUuid(null)
+                .setGroupDisabled(false)
+                .setCarrierId(0)
+                .setProfileClass(0)
+                .setType(0)
+                .setGroupOwner(null)
+                .setCarrierConfigAccessRules(null)
+                .setUiccApplicationsEnabled(true)
+                .setPortIndex(portIndex)
+                .build();
     }
 
     private UiccCardInfo createUiccCardInfo(boolean isEuicc, int cardId, int physicalSlotIndex,

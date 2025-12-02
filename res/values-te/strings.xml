@@ -1012,6 +1012,9 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"మీ మౌస్‌ను ఒక డిస్‌ప్లే నుండి ఇంకో డిస్‌ప్లేకు షిఫ్ట్ చేయండి"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"ఎక్స్‌టర్నల్ డిస్‌ప్లేను ఉపయోగించండి"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"డిస్‌ప్లే రిజల్యూషన్"</string>
+    <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"రిజల్యూషన్ &amp; రిఫ్రెష్ రేటు"</string>
+    <string name="external_display_refresh_rate_title" msgid="6326813722241312213">"రిఫ్రెష్ రేటు"</string>
+    <string name="external_display_resolution_title" msgid="124681567143280861">"రిజల్యూషన్"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"ఆటోమేటిక్‌ కనెక్షన్ సెట్టింగ్ తీరు"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"ప్రత్యేక డిస్‌ప్లేగా ఉపయోగించండి"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"మిర్రర్ బిల్ట్-ఇన్ డిస్‌ప్లే"</string>
@@ -1411,6 +1414,8 @@
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"పూర్తి రిజల్యూషన్"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"పూర్తి రిజల్యూషన్, మీ బ్యాటరీని ఎక్కువగా వినియోగిస్తుంది. పూర్తి రిజల్యూషన్‌కు మారడం వల్ల కొన్ని యాప్‌లు రీస్టార్ట్ అయ్యే అవకాశం ఉంది."</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="HEIGHT">%2$s</xliff:g> అందించిన <xliff:g id="WIDTH">%1$s</xliff:g>"</string>
+    <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
+    <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> హెర్ట్‌జ్"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"కలర్స్‌"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"సహజం"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"మెరుగుపరిచినవి"</string>
@@ -1545,7 +1550,8 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"బ్యాటరీ వినియోగం పెరుగుతుంది"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"స్క్రీన్ ఆఫ్‌లో ఉన్నప్పుడు లాక్ స్క్రీన్ వాల్‌పేపర్‌ను చూపించండి"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"స్క్రీన్ ఆఫ్‌లో ఉన్నప్పుడు లాక్ స్క్రీన్ వాల్‌పేపర్‌ను దాచండి"</string>
-    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"స్క్రీన్ ఆఫ్‌లో ఉన్నప్పుడు ఎల్లప్పుడూ ఆన్‌లో ఉండే డిస్‌ప్లే సమయం, తేదీ, అలాగే మరిన్నింటిని చూపుతుంది"</string>
+    <string name="doze_always_on_summary_long" msgid="7956866501728946221">"స్క్రీన్ ఆఫ్‌లో ఉన్నప్పుడు సమయం, తేదీ, ఇంకా మరిన్నింటిని చూపుతుంది"</string>
+    <string name="doze_always_on_summary_short" msgid="3301903540897812365">"సమయం, తేదీ, ఇంకా మరిన్నింటిని చూడండి"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"వాల్‌పేపర్ ఆప్షన్‌లు"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"లాక్ స్క్రీన్ వాల్‌పేపర్‌ను చూపించండి"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"లాక్ స్క్రీన్ వాల్‌పేపర్ ఎల్లప్పుడూ ఆన్‌లో ఉండే డిస్‌ప్లేతో కనిపిస్తుంది"</string>
@@ -2206,6 +2212,8 @@
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"వేగం"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"తగ్గించండి"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"పెంచండి"</string>
+    <string name="mouse_keys_seek_bar_start_label" msgid="902491192774832751">"మరింత నెమ్మదిగా"</string>
+    <string name="mouse_keys_seek_bar_end_label" msgid="3225448426565556589">"మరింత వేగంగా"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"రివర్స్ స్క్రోలింగ్"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"ప్రధానమైన కీలను ఉపయోగించండి"</string>
     <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"న్యూమరిక్ కీప్యాడ్‌కు బదులుగా అక్షరాలు, అలాగే నంబర్‌లతో కీబోర్డ్‌ను కంట్రోల్ చేయండి"</string>
@@ -3649,6 +3657,10 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"బ్లూటూత్, Android Auto, డ్రైవింగ్ మోడ్"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"బ్లూటూత్, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"బ్లూటూత్, Android Auto"</string>
+    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
+    <skip />
+    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC ఆఫ్‌లో ఉన్నందున అందుబాటులో లేదు"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ఉపయోగించాలంటే, ముందు ఒక పేమెంట్ యాప్‌ను ఇన్‌స్టాల్ చేయండి"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"ఇటీవలి యాప్‌లు, ఆటోమేటిక్ యాప్‌లు"</string>
@@ -4602,14 +4614,17 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"ఈ డివైజ్‌లో, లేదా కనెక్ట్ చేయబడిన ఏవైనా స్టోరేజ్ వాల్యూమ్‌ల్లో, అన్ని ఫైళ్లను రీడ్ చేయడానికి, మార్చడానికి, తొలగించడానికి ఈ యాప్‌నకు అనుమతిని ఇవ్వండి. అటువంటి అనుమతిని మీరు మంజూరు చేస్తే, మీకు ప్రత్యేకంగా తెలియపరచకుండానే మీ ఫైళ్లను ఈ యాప్ యాక్సెస్ చేయవచ్చు."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"అన్ని ఫైళ్లను యాక్సెస్ చేయగలవు"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"స్క్రీన్ ఆటోమేషన్"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"ప్రతిసారి అడగాలి"</string>
-    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"ఎల్లవేళలా అనుమతించబడుతుంది"</string>
+    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"అనుమతించవద్దు"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"ఫుల్ స్క్రీన్ నోటిఫికేషన్‌లు"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ఈ యాప్ నుండి ఫుల్ స్క్రీన్ నోటిఫికేషన్‌లను అనుమతించండి"</string>
@@ -6030,6 +6045,8 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"రికవరీ సమాచారాన్ని జోడించండి"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"రికవరీ సమాచారాన్ని వెరిఫై చేయండి"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"యాప్ స్టోర్ ఫిల్టర్‌లు"</string>
+    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
+    <skip />
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"యాప్‌లను వాటి కంటెంట్‌కు సంబంధించి మెచ్యూరిటీ ఆధారంగా ఫిల్టర్ చేయండి"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"ప్రతి స్టోర్ కంటెంట్‌ను వేర్వేరుగా రేట్ చేస్తుంది. స్టోర్‌లను బట్టి యాప్ రేటింగ్ మారవచ్చు."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"కంటెంట్ రేటింగ్‌ల ఆధారంగా యాప్‌లను ఫిల్టర్ చేయండి"</string>
@@ -6054,11 +6071,11 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"PINను తొలగించడానికి ట్రై చేస్తున్నప్పుడు ఎర్రర్ ఏర్పడింది."</string>
     <string name="supervision_turn_off_controls_button_label" msgid="3167081374549512327">"ఈ యూజర్ కోసం కంట్రోల్స్‌ను ఆఫ్ చేయండి"</string>
     <string name="supervision_delete_pin_turn_off_controls_confirm_header" msgid="3406690808634716382">"PINను తొలగించి, కంట్రోల్స్‌ను ఆఫ్ చేయాలా?"</string>
-    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"మీ తల్లిదండ్రుల కంట్రోల్స్ PIN తొలగించబడుతుంది. మీరు సెటప్ చేసిన ఏవైనా కంట్రోల్స్ ఆఫ్ అవుతాయి."</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message" msgid="6469268717329098248">"మీ తల్లిదండ్రుల కంట్రోల్స్ PIN తొలగించబడుతుంది. మీరు ఏవైనా కంట్రోల్స్‌ను సెట్ చేసి ఉంటే, అవి ఆఫ్ అవుతాయి."</string>
     <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"తొలగించి, ఆఫ్ చేయండి"</string>
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"PINను తొలగించి, కంట్రోల్స్‌ను ఆఫ్ చేయండి"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"తొలగించండి"</string>
-    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"మీ తల్లిదండ్రుల కంట్రోల్స్ PINను వీటి ద్వారా ఉపయోగిస్తున్నారు:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"మీ తల్లిదండ్రుల కంట్రోల్స్ PINను వీరు ఉపయోగిస్తున్నారు:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> యానిమేషన్"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"కంట్రోల్స్‌ను ఆన్ చేయడం సాధ్యం కాలేదు"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"కంట్రోల్స్‌ను ఉపయోగించడం సాధ్యపడదు"</string>
@@ -6123,20 +6140,12 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"శాటిలైట్ కనెక్టివిటీ"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"మీకు మొబైల్ లేదా Wi-Fi నెట్‌వర్క్ లేనప్పుడు కనెక్ట్ అయి ఉండండి"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"శాటిలైట్ ల్యాండింగ్ పేజీ"</string>
-    <!-- no translation found for try_a_demo (5053671464025495505) -->
-    <skip />
-    <!-- no translation found for see_how_it_works (6358887025296144792) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
-    <skip />
-    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
-    <skip />
-    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
-    <skip />
-    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
-    <skip />
-    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
-    <skip />
+    <string name="try_a_demo" msgid="5053671464025495505">"డెమోను ట్రై చేయండి"</string>
+    <string name="see_how_it_works" msgid="6358887025296144792">"ఇది ఎలా పని చేస్తుందో చూడండి"</string>
+    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"మీకు మొబైల్ లేదా Wi-Fi నెట్‌వర్క్ లేనప్పుడు, మీ ఫోన్ ఆటోమేటిక్‌గా శాటిలైట్‌కు కనెక్ట్ అవుతుంది. ఉత్తమ కనెక్షన్ కోసం, దయచేసి ఆకాశం స్పష్టంగా కనిపించే ప్రాంతంలో ఉంచండి. అందుబాటులో ఉన్నప్పుడు మీ ఫోన్ మొబైల్ నెట్‌వర్క్‌కు మళ్లీ కనెక్ట్ అవుతుంది. శాటిలైట్ ద్వారా కాల్ చేయడం అందుబాటులో లేదు. అయినప్పటికీ ఎమర్జెన్సీ కాల్స్ కనెక్ట్ అయ్యే అవకాశం ఉంది."</string>
+    <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"ఉత్తమ కనెక్షన్ కోసం, దయచేసి ఆకాశం స్పష్టంగా కనిపించే ప్రాంతంలో ఉంచండి. అందుబాటులో ఉన్నప్పుడు మీ ఫోన్ మొబైల్ నెట్‌వర్క్‌కు మళ్లీ కనెక్ట్ అవుతుంది. శాటిలైట్ ద్వారా కాల్ చేయడం అందుబాటులో లేదు. అయినప్పటికీ ఎమర్జెన్సీ కాల్స్ కనెక్ట్ అయ్యే అవకాశం ఉంది."</string>
+    <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"శాటిలైట్ కనెక్టివిటీ గురించి మరిన్ని వివరాలు"</u></string>
+    <string name="forward_arrow_content_desc" msgid="5027233524587883868">"ఎమర్జెన్సీ శాటిలైట్ సహాయం డెమోను తెరవండి"</string>
+    <string name="satellite_apps_title" msgid="3693252720266491323">"శాటిలైట్ యాప్‌లు"</string>
+    <string name="satellite_emergency_sos" msgid="5598135807261930736">"ఎమర్జెన్సీ సహాయం"</string>
 </resources>

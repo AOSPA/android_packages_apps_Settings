@@ -91,7 +91,7 @@ class FollowKeyboardPreferenceControllerTest {
 
     @Test
     fun isChecked_default_returnFalse() {
-         assertThat(controller.isChecked).isFalse()
+        assertThat(controller.isChecked).isFalse()
     }
 
     @Test
@@ -161,8 +161,8 @@ class FollowKeyboardPreferenceControllerTest {
         }
     }
 
-    private fun setHardwareKeyboard(hasConnectedMouse: Boolean) {
-        if (hasConnectedMouse) {
+    private fun setHardwareKeyboard(hasConnectedKeyboard: Boolean) {
+        if (hasConnectedKeyboard) {
             val device = ShadowInputDevice.makeFullKeyboardInputDevicebyId(/* id= */ 1)
             ShadowInputDevice.addDevice(device.id, device)
         } else {

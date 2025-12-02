@@ -95,7 +95,7 @@
     <string name="bluetooth_ambient_volume_control_description" msgid="8652460879432504546">"پیرامون"</string>
     <string name="bluetooth_ambient_volume_control_left_description" msgid="7907887057591335693">"پیرامون چپ"</string>
     <string name="bluetooth_ambient_volume_control_right_description" msgid="7651747671161021283">"پیرامون راست"</string>
-    <string name="bluetooth_ambient_volume_mute" msgid="2700088105160838096">"بی‌صدا کردن پیرامون"</string>
+    <string name="bluetooth_ambient_volume_mute" msgid="2700088105160838096">"صامت کردن پیرامون"</string>
     <string name="bluetooth_ambient_volume_unmute" msgid="8055038818824925188">"صدادار کردن پیرامون"</string>
     <string name="bluetooth_ambient_volume_error" msgid="259328969488233714">"پیرامون به‌روز نشد"</string>
     <string name="bluetooth_hearing_device_input_routing_title" msgid="4250163440326783748">"میکروفون پیش‌فرض برای تماس‌ها"</string>
@@ -1012,6 +1012,9 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"می‌توانید موشواره را بین نمایشگرها جابه‌جا کنید"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"استفاده از نمایشگر خارجی"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"وضوح صفحه‌نمایش"</string>
+    <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"نرخ بازآوری و وضوح"</string>
+    <string name="external_display_refresh_rate_title" msgid="6326813722241312213">"نرخ بازآوری"</string>
+    <string name="external_display_resolution_title" msgid="124681567143280861">"وضوح"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"رفتار پیش‌فرض اتصال"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"استفاده به‌عنوان نمایشگر مستقل"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"قرینه‌سازی نمایشگر داخلی"</string>
@@ -1411,6 +1414,8 @@
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"وضوح بیشینه"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"«وضوح بیشینه» از شارژ باتری بیشتری استفاده می‌کند. تغییر دادن وضوح ممکن است باعث شود برخی‌از برنامه‌ها بازراه‌اندازی شوند."</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"‫<xliff:g id="WIDTH">%1$s</xliff:g> در <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
+    <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"‫<xliff:g id="REFRESH_RATE">%1$s</xliff:g> هرتز"</string>
+    <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"‫<xliff:g id="REFRESH_RATE">%1$s</xliff:g> هرتز"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"رنگ‌"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"طبیعی"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"تقویت‌شده"</string>
@@ -1545,7 +1550,8 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"مصرف باتری بالا"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"نمایش کاغذدیواری صفحه قفل وقتی صفحه‌نمایش خاموش است"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"پنهان کردن کاغذدیواری صفحه قفل وقتی صفحه‌نمایش خاموش است"</string>
-    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"ساعت، تاریخ، و اطلاعات دیگر هنگام خاموش بودن صفحه‌نمایش در «نمایشگر همیشه روشن» نشان داده می‌شود"</string>
+    <string name="doze_always_on_summary_long" msgid="7956866501728946221">"ساعت، تاریخ، و اطلاعات دیگر را هنگام خاموش بودن صفحه‌نمایش نشان می‌دهد"</string>
+    <string name="doze_always_on_summary_short" msgid="3301903540897812365">"نمایش دادن زمان، تاریخ، و اطلاعات دیگر"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"گزینه‌های کاغذدیواری"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"نمایش کاغذدیواری صفحه قفل"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"کاغذدیواری صفحه قفل در «نمایشگر همیشه روشن» نمایان است"</string>
@@ -2206,6 +2212,8 @@
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"سرعت"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"کاهش دادن"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"افزایش دادن"</string>
+    <string name="mouse_keys_seek_bar_start_label" msgid="902491192774832751">"آهسته‌تر"</string>
+    <string name="mouse_keys_seek_bar_end_label" msgid="3225448426565556589">"سریع‌تر"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"پیمایش معکوس"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"استفاده از کلیدهای اصلی"</string>
     <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"به‌جای صفحه‌کلید عددی، از حروف و اعداد برای کنترل صفحه‌کلید استفاده می‌شود"</string>
@@ -2634,7 +2642,7 @@
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"زمینه تیره استاندارد"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"زمینه تیره را برای دستگاه و برنامه‌هایی که از زمینه تیره پشتیبانی می‌کنند، روشن می‌کند"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"ازهم بازکردن"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"ازهم بازکردن زمینه تیره"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"زمینه تیره گسترش‌یافته"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"به‌صورت خودکار زمینه تیره را روی اکثر برنامه‌هایی که از آن پشتیبانی نمی‌کنند، اعمال می‌کند. این امر می‌تواند دسترس‌پذیری و خوانایی را بهبود بخشد، اما ممکن است باعث شود برخی‌از برنامه‌ها به‌صورت نادرست نمایش داده شوند."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"معکوس اجباری، وارونگی رنگ، کنتراست"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"زمینه تیره گسترش‌یافته"</string>
@@ -3188,7 +3196,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"اعلان‌های شبکه"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"وقتی دستگاهتان به شبکه رمزگذاری‌نشده متصل شود، یا وقتی شبکه‌ای شناسه یکتای دستگاه یا سیم‌کارتتان را ضبط کند، اعلان دریافت می‌کنید"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"نسل شبکه"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"«محافظت دربرابر شبکه نسل دوم» از اتصال به شبکه‌های نسل دوم که امنیت کمتری دارند جلوگیری می‌کند. این ویژگی ممکن است اتصال‌پذیری را در برخی مکان‌ها محدود کند. شبکه نسل دوم همیشه برای تماس‌های اضطراری مجاز است، اما اگر از فراگردی بین‌المللی استفاده می‌کنید، ممکن است تماس‌ها وصل نشود."</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"«محافظت دربرابر شبکه نسل دوم» از اتصال به شبکه‌های نسل دوم که امنیت کمتری دارند جلوگیری می‌کند. این ویژگی ممکن است اتصال‌پذیری را در برخی جا‌ها محدود کند. شبکه نسل دوم همیشه برای تماس‌های اضطراری مجاز است، اما اگر از فراگردی بین‌المللی استفاده می‌کنید، ممکن است تماس‌ها وصل نشود."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"محافظت دربرابر شبکه نسل دوم"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"رمزگذاری"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"شبکه‌های تولیدشده"</string>
@@ -3652,6 +3660,10 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"‏بلوتوث، Android Auto، حالت رانندگی"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"‏بلوتوث، Android Auto،‏ NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"‏بلوتوث، Android Auto"</string>
+    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
+    <skip />
+    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"‏غیرقابل‌دسترسی چون NFC خاموش است"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"برای استفاده، ابتدا یک برنامه پرداخت نصب کنید"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"برنامه‌های اخیر، برنامه‌ها پیش‌فرض"</string>
@@ -3702,7 +3714,7 @@
     <string name="keywords_network_reset" msgid="4075670452112218042">"بازنشانی، بازیابی، کارخانه"</string>
     <string name="keywords_factory_data_reset" msgid="4979623326958976773">"محو کردن داده، حذف کردن، بازیابی، پاک کردن، برداشتن، بازنشانی کارخانه‌ای"</string>
     <string name="keywords_printing" msgid="3528250034669909466">"چاپگر"</string>
-    <string name="keywords_sounds" msgid="187191900698371911">"بیپ بلندگو، بلندگو، میزان صدا، صامت کردن، بی‌صدا کردن، صدا، موسیقی، لمسی، لرزان‌گر، لرزیدن"</string>
+    <string name="keywords_sounds" msgid="187191900698371911">"بیپ بلندگو، بلندگو، میزان صدا، صامت کردن، صامت کردن، صدا، موسیقی، لمسی، لرزان‌گر، لرزیدن"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"مزاحم نشوید، قطع، وقفه، توقف"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"‏اطراف، مکان، سابقه، گزارش، GPS"</string>
@@ -3903,7 +3915,7 @@
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"محدودیت‌های سفارشی"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"وقتی صفحه‌نمایش روشن است"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"وقتی صفحه‌نمایش خاموش است"</string>
-    <string name="zen_mode_block_effect_sound" msgid="7929909410442858327">"صدا و لرزش بی‌صدا شود"</string>
+    <string name="zen_mode_block_effect_sound" msgid="7929909410442858327">"صدا و لرزش صامت شود"</string>
     <string name="zen_mode_block_effect_intent" msgid="7621578645742903531">"صفحه روشن نشود"</string>
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"چراغ چشمک نزند"</string>
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"اعلان‌های بازشو در صفحه نشان داده نشود"</string>
@@ -4605,14 +4617,17 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"به این برنامه اجازه می‌دهد همه فایل‌های موجود در این دستگاه یا فضاهای ذخیره‌سازی متصل‌شده به آن را بخواند، تغییر دهد، و حذف کند. اگر این مجوز به برنامه داده شود، ممکن است بدون اطلاع صریح شما به فایل‌ها دسترسی یابد."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"می‌توانند به همه فایل‌ها دسترسی داشته باشند"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"خودکارسازی صفحه"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1324320758155177) -->
+    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (8970726414925813606) -->
+    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary (8840738219957049411) -->
+    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"هربار پرسیده شود"</string>
-    <string name="computer_control_automation_always_allowed" msgid="6006569348772247645">"همیشه مجاز"</string>
+    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"اجازه ندادن"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"اعلان‌های تمام‌صفحه"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"مجاز کردن اعلان‌های تمام‌صفحه از این برنامه"</string>
@@ -5191,9 +5206,9 @@
     <string name="gesture_prevent_ringing_title" msgid="5978577898997523581">"هم‌زمان دکمه روشن/خاموش و افزایش صدا را فشار دهید"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="4529077822282099235">"میان‌بر برای جلوگیری از زنگ زدن"</string>
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"لرزش"</string>
-    <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"بی‌صدا"</string>
+    <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"صامت"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"لرزش"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"بی‌صدا کردن"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"صامت کردن"</string>
     <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"برای فعال کردن، ابتدا «فشار دادن و نگه داشتن دکمه روشن / خاموش» را به «منو روشن/ خاموش» تغییر دهید."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"جزئیات شبکه"</string>
     <string name="devices_title" msgid="649715719278562515">"دستگاه‌ها"</string>
@@ -5692,7 +5707,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"شماره تلفن وارد نشده است."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"تأیید"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"محافظت دربرابر شبکه نسل دوم"</string>
-    <string name="enable_2g_summary" msgid="6194875539424151678">"از اتصال به شبکه‌های نسل دوم که امنیت کمتری دارند جلوگیری می‌کند. این ویژگی ممکن است اتصال‌پذیری را در برخی مکان‌ها محدود کند. شبکه نسل دوم همیشه برای تماس‌های اضطراری مجاز است، اما اگر از فراگردی بین‌المللی استفاده می‌کنید، ممکن است تماس‌ها وصل نشود."</string>
+    <string name="enable_2g_summary" msgid="6194875539424151678">"از اتصال به شبکه‌های نسل دوم که امنیت کمتری دارند جلوگیری می‌کند. این ویژگی ممکن است اتصال‌پذیری را در برخی جا‌ها محدود کند. شبکه نسل دوم همیشه برای تماس‌های اضطراری مجاز است، اما اگر از فراگردی بین‌المللی استفاده می‌کنید، ممکن است تماس‌ها وصل نشود."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"‏<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> برای دردسترس بودن به 2G نیاز دارد"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"فقط شبکه‌های رمزگذاری‌شده مجاز باشد"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"این کار ایمن‌تر است اما ممکن است اتصال شبکه تلفن همراه شما را در برخی مکان‌ها محدود کند. تماس اضطراری همیشه مجاز است."</string>
@@ -6033,6 +6048,8 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"افزودن اطلاعات بازیابی"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"درستی‌سنجی کردن اطلاعات بازیابی"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"فیلترهای فروشگاه برنامه‌ها"</string>
+    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
+    <skip />
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"برنامه‌ها را براساس رده سنی محتوایشان فیلتر می‌کند"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"هر فروشگاه محتوا را به‌صورت متفاوتی رده‌بندی می‌کند. رده‌بندی یک برنامه ممکن است در فروشگاه‌های مختلف متفاوت باشد."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"فیلتر کردن برنامه‌ها براساس رده‌بندی محتوا"</string>
@@ -6126,20 +6143,12 @@
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"اتصال‌پذیری ماهواره"</string>
     <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"‏وقتی‌که شبکه تلفن همراه یا Wi-Fi ندارید، متصل بمانید"</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"صفحه مقصد ماهواره"</string>
-    <!-- no translation found for try_a_demo (5053671464025495505) -->
-    <skip />
-    <!-- no translation found for see_how_it_works (6358887025296144792) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_lte (6768795590418158370) -->
-    <skip />
-    <!-- no translation found for landing_page_footer_text_nbiot (8646871907270616646) -->
-    <skip />
-    <!-- no translation found for satellite_more_info_text (6053516592568119780) -->
-    <skip />
-    <!-- no translation found for forward_arrow_content_desc (5027233524587883868) -->
-    <skip />
-    <!-- no translation found for satellite_apps_title (3693252720266491323) -->
-    <skip />
-    <!-- no translation found for satellite_emergency_sos (5598135807261930736) -->
-    <skip />
+    <string name="try_a_demo" msgid="5053671464025495505">"امتحان کردن نسخه نمایشی"</string>
+    <string name="see_how_it_works" msgid="6358887025296144792">"سازوکار عمل را ببینید"</string>
+    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"‏وقتی‌که شبکه Wi-Fi یا شبکه تلفن همراه ندارید، تلفنتان به‌طور خودکار به ماهواره متصل می‌شود. برای داشتن بهترین اتصال، در فضای باز با نمایی واضح از آسمان بمانید. هروقت شبکه تلفن همراه دردسترس قرار بگیرد، تلفن دوباره به آن متصل خواهد شد. تماس ازطریق ماهواره دردسترس نیست. ممکن است تماس‌های اضطراری همچنان متصل شوند."</string>
+    <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"برای داشتن بهترین اتصال، در فضای باز با نمایی واضح از آسمان بمانید. هروقت شبکه تلفن همراه دردسترس قرار بگیرد، تلفن دوباره به آن متصل خواهد شد. تماس ازطریق ماهواره دردسترس نیست. ممکن است تماس‌های اضطراری همچنان متصل شوند."</string>
+    <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"اطلاعات بیشتر درباره اتصال‌پذیری ماهواره‌ای"</u></string>
+    <string name="forward_arrow_content_desc" msgid="5027233524587883868">"باز کردن نسخه نمایشی «درخواست کمک ماهواره‌ای»"</string>
+    <string name="satellite_apps_title" msgid="3693252720266491323">"برنامه‌های ماهواره‌ای"</string>
+    <string name="satellite_emergency_sos" msgid="5598135807261930736">"درخواست کمک اضطراری"</string>
 </resources>

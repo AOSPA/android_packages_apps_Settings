@@ -15,17 +15,53 @@
  */
 package com.android.settings.spa.accessibility
 
+import android.app.UiModeManager
+import android.content.Context
 import android.content.pm.ApplicationInfo
 
-class ForceDarkAppExceptionsRepository() {
+class ForceDarkAppExceptionsRepository(private val context: Context) {
 
-    fun isException(app: ApplicationInfo): Boolean {
-        // TODO(b/448469020): Read if the app is an exception
-        return false
+    private val forceInvertAlwaysDisableSet = HashSet<String>()
+
+    init {
+        readForceInvertAlwaysDisableApps()
     }
 
-    fun setIsException(app: ApplicationInfo, exception: Boolean): Boolean {
-        // TODO(b/448469020): set exception for the app package
-        return true
+    fun isAppForceDarkAlwaysDisable(app: ApplicationInfo): Boolean {
+        return forceInvertAlwaysDisableSet.contains(app.packageName)
+    }
+
+    fun setIsAppForceDarkAlwaysDisable(app: ApplicationInfo, isException: Boolean): Boolean {
+        val result =
+            if (isException) forceInvertAlwaysDisableSet.add(app.packageName)
+            else forceInvertAlwaysDisableSet.remove(app.packageName)
+
+        if (result) {
+            val newState =
+                if (isException) UiModeManager.FORCE_INVERT_PACKAGE_ALWAYS_DISABLE
+                else UiModeManager.FORCE_INVERT_PACKAGE_ALLOWED
+            updatePackageForceInvertOverrideStateToSettings(app.packageName, newState)
+        }
+
+        return result
+    }
+
+    private fun readForceInvertAlwaysDisableApps() {
+        forceInvertAlwaysDisableSet.clear()
+
+        val uiModeManager: UiModeManager = context.getSystemService(UiModeManager::class.java)
+        val exceptionListValue = uiModeManager.getAllForceInvertAlwaysDisableApps()
+
+        if (exceptionListValue != null && exceptionListValue.isNotEmpty()) {
+            forceInvertAlwaysDisableSet.addAll(exceptionListValue)
+        }
+    }
+
+    private fun updatePackageForceInvertOverrideStateToSettings(
+        packageName: String,
+        newState: Int,
+    ) {
+        val uiModeManager: UiModeManager = context.getSystemService(UiModeManager::class.java)
+        uiModeManager.setForceInvertOverrideStateForApp(packageName, newState)
     }
 }

@@ -19,7 +19,6 @@ package com.android.settings.appfunctions.executors
 import android.app.appsearch.GenericDocument
 import android.content.Context
 import android.content.Intent
-import android.os.BaseBundle
 import android.os.Binder
 import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
@@ -30,6 +29,7 @@ import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.toProto
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.getPreferenceScreenTitle
@@ -95,19 +95,31 @@ class CatalystStateMetadataProviderExecutor(
     private suspend fun CoroutineScope.buildPerScreenDeviceStatesMetadata(
         screenKey: String
     ): List<PerScreenMetadata> {
+        val isParameterized = PreferenceScreenRegistry.isParameterized(context, screenKey)
         val hierarchy =
-            getEnabledPreferencesHierarchy(config, context, appFunctionType = null, screenKey)
+            getEnabledPreferencesHierarchy(
+                config,
+                context,
+                appFunctionType = null,
+                screenKey,
+                removeDuplicates = isParameterized,
+            )
 
         return hierarchy.map { entry ->
             val screenMetaData = entry.key
             val preferencesHierarchy = entry.value
-            buildPerScreenDeviceStatesMetadata(screenMetaData, preferencesHierarchy)
+            buildPerScreenDeviceStatesMetadata(
+                screenMetaData,
+                preferencesHierarchy,
+                isParameterized,
+            )
         }
     }
 
     private suspend fun CoroutineScope.buildPerScreenDeviceStatesMetadata(
         screenMetaData: PreferenceScreenMetadata,
         preferencesHierarchy: List<PreferenceHierarchyNode>,
+        isParameterized: Boolean,
     ): PerScreenMetadata {
         val deviceStateItemMetadataList = mutableListOf<DeviceStateItemMetadata>()
         preferencesHierarchy.forEach {
@@ -150,23 +162,17 @@ class CatalystStateMetadataProviderExecutor(
         }
 
         val launchingIntent = screenMetaData.getLaunchIntent(context, null)
-
-        // This is hack because in general parameters are not human readable. We remove known
-        // internal keys then just dump the rest in the description.
-        val basicDescription = screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: ""
-        val arguments = screenMetaData.arguments?.clone() as? BaseBundle
-        arguments?.remove("source")
-        val descriptionSuffix =
-            if (arguments == null) {
-                ""
-            } else {
-                ". " + arguments.keySet().joinToString(", ") { "$it=${arguments.get(it)}" }
-            }
-        val description = basicDescription + descriptionSuffix
         return PerScreenMetadata(
-            description = description,
+            // This is a hack to remove the title from parametrised screens as it may contain
+            // some text referring to that specific parameter which could confuse the agent.
+            description =
+                if (isParameterized) ""
+                else screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
             deviceStateItemsMetadata = deviceStateItemMetadataList,
             intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
+            // This is a temporary hack to indicate to the agent that the screen is itemized, it
+            // should eventually state the type of itemization (e.g. package, sim, etc)
+            itemizationType = if (isParameterized) "ITEMIZED SCREEN" else null,
         )
     }
 
