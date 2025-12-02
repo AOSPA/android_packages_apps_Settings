@@ -2333,6 +2333,8 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Apps recentes"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notificações"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Configurações Rápidas"</string>
+    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Escolha um atalho para o <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"canto inferior esquerdo"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"canto inferior direito"</string>
@@ -2600,6 +2602,9 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Toque rapidamente na tela %1$d vezes. Isso pode deixar o dispositivo mais lento."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Tocar duas vezes com %1$d dedos na tela"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"toque triplo"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Atalho do teclado"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Pressione <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> para usar <xliff:g id="ID_4">%4$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_keyboard_keyword" msgid="7354208869208311654">"atalho do teclado"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avançado"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"O botão Acessibilidade está definido para <xliff:g id="SERVICE">%1$s</xliff:g>. Para usar a ampliação, toque nesse botão, mantenha-o pressionado e selecione a ampliação."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"O gesto de acessibilidade está definido para <xliff:g id="SERVICE">%1$s</xliff:g>. Para usar a ampliação, deslize de baixo para cima com dois dedos e mantenha a tela pressionada. Em seguida, selecione \"Ampliação\"."</string>
@@ -3657,10 +3662,8 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, modo carro"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
-    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
-    <skip />
-    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
-    <skip />
+    <string name="device_dashboard_title" msgid="1176311605407079643">"Dispositivo"</string>
+    <string name="device_dashboard_summary" msgid="657619609434549473">"Teclado, touchpad, tela, som"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Indisponível porque a NFC está desativada"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar, instale um app de pagamento"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Apps recentes, apps padrão"</string>
@@ -3930,6 +3933,10 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmes e outras interrupções"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Duração das configurações rápidas"</string>
+    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
+    <skip />
+    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
+    <skip />
     <string name="sound_work_settings" msgid="752627453846309092">"Sons do perfil de trabalho"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Usar sons do perfil pessoal"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Use os mesmos sons que o perfil pessoal"</string>
@@ -4611,18 +4618,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permita que o app leia, modifique e exclua todos os arquivos deste dispositivo ou de qualquer volume de armazenamento conectado. Se a permissão for concedida, o app poderá acessar arquivos sem nenhum aviso."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pode acessar todos os arquivos"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automação de tela"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Este app poderá acessar e interagir com o conteúdo da tela de outros apps para ajudar você a concluir tarefas, mesmo quando os apps estiverem em segundo plano"</string>
+    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Se você não permitir a automação de tela, o <xliff:g id="ID_1">%1$s</xliff:g> ainda poderá interagir com apps conectados ao <xliff:g id="ID_2">%1$s</xliff:g> de outras maneiras"</string>
+    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Permitir que apps ajudem você a concluir tarefas interagindo com o conteúdo da tela de outros apps"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Perguntar sempre"</string>
-    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
-    <skip />
-    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Não permitir"</string>
+    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Sempre permitir"</string>
+    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Não permitir"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificações em tela cheia"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permitir que esse app mostre notificações em tela cheia"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permita que o app mostre notificações que ocupam a tela inteira quando o dispositivo estiver bloqueado. Os apps poderão usar essa permissão para destacar alarmes, ligações recebidas ou outras notificações urgentes."</string>
@@ -4650,7 +4651,7 @@
     <string name="external_source_switch_title" msgid="101571983954849473">"Permitir desta fonte"</string>
     <string name="camera_gesture_title" msgid="5559439253128696180">"Girar duas vezes para abrir a câmera"</string>
     <string name="camera_gesture_desc" msgid="7557645057320805328">"Abrir o app Câmera girando o pulso duas vezes"</string>
-    <string name="screen_zoom_title" msgid="6928045302654960559">"Tamanho da exibição"</string>
+    <string name="screen_zoom_title" msgid="6928045302654960559">"Tamanho de exibição"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Deixe tudo maior ou menor"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"densidade de exibição, zoom da tela, escala, dimensionamento"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Visualização"</string>
@@ -4900,6 +4901,16 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Virar câmera para tirar selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Modo de navegação"</string>
+    <!-- no translation found for update_device_category_title (6588608879793647296) -->
+    <skip />
+    <!-- no translation found for interaction_category_title (5712424978503035872) -->
+    <skip />
+    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
+    <skip />
+    <!-- no translation found for system_management_category_title (5405726452116686478) -->
+    <skip />
+    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
+    <skip />
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navegação com dois botões"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Para mudar de app, deslize o botão home para cima. Para acessar todos os apps, deslize para cima novamente. Para retornar, toque no botão \"Voltar\"."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"Notificações e Configurações Rápidas"</string>
@@ -6042,8 +6053,7 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Adicione informações de recuperação"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verifique as informações de recuperação"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtros da app store"</string>
-    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
-    <skip />
+    <string name="supervision_app_store_filters_keywords" msgid="8281936888718160336">"Filtros de apps, Filtros de apps para maiores de idade, Filtros para adultos, Apps com linguagem explícita, Bloquear apps, Bloquear apps com linguagem explícita, Bloquear apps para maiores de idade"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtrar apps com base na classificação etária do conteúdo"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Cada loja categoriza o conteúdo de maneira diferente. A classificação de um app pode variar."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtrar apps por classificação do conteúdo"</string>
@@ -6135,12 +6145,12 @@
     <string name="satellite_tile_subtitle_available" msgid="3218752171363246978">"Disponível"</string>
     <string name="satellite_tile_subtitle_not_available" msgid="422078851110512104">"Indisponível"</string>
     <string name="satellite_connectivity_title" msgid="5919956632912518626">"Conectividade via satélite"</string>
-    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Mantenha a conexão quando não tiver uma rede móvel ou Wi-Fi"</string>
+    <string name="satellite_connectivity_topintro" msgid="8310270194233472980">"Não perca a conexão mesmo sem rede móvel ou Wi-Fi."</string>
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Página de destino do satélite"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"Veja uma demonstração"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"Saiba como funciona"</string>
     <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"Quando você não tiver uma rede móvel ou Wi-Fi, o celular vai se conectar automaticamente a um satélite. Para conseguir a melhor conexão, vá até um local com céu aberto. O celular vai se reconectar a uma rede móvel quando disponível. Ligação via satélite indisponível. Talvez chamadas de emergência ainda possam ser feitas."</string>
-    <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"Para conseguir a melhor conexão, vá até um local com céu aberto. O celular vai se reconectar a uma rede móvel quando disponível. Ligação via satélite indisponível. Talvez chamadas de emergência ainda possam ser feitas."</string>
+    <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"Para garantir a melhor conexão possível, procure um lugar a céu aberto. O celular vai se reconectar à rede móvel assim que houver sinal. Não é possível fazer ligações por satélite, mas as de emergência ainda podem funcionar."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Mais informações sobre a conectividade via satélite"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Abrir a demonstração do SOS via Satélite"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Apps que usam satélites"</string>

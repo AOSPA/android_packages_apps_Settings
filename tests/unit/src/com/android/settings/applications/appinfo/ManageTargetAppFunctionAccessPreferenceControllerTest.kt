@@ -22,9 +22,9 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.UserManager
 import android.permission.flags.Flags
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
+import android.platform.test.annotations.RequiresFlagsDisabled
+import android.platform.test.annotations.RequiresFlagsEnabled
+import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -55,7 +55,7 @@ import org.mockito.quality.Strictness
 
 @RunWith(AndroidJUnit4::class)
 class ManageTargetAppFunctionAccessPreferenceControllerTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
+    @get:Rule val checkFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
     @Mock private lateinit var appFunctionManagerWrapper: AppFunctionManagerWrapper
     @Mock private lateinit var packageManager: PackageManager
@@ -94,7 +94,7 @@ class ManageTargetAppFunctionAccessPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsDisabled(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
     fun whenAppFunctionsDisabled_thenPreferenceUnavailable() = runTest {
         controller!!.updateAvailability(appFunctionManagerWrapper)
 
@@ -102,7 +102,10 @@ class ManageTargetAppFunctionAccessPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsEnabled(
+        Flags.FLAG_APP_FUNCTION_ACCESS_API_ENABLED,
+        Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED,
+    )
     fun whenAppFunctionsEnabled_isInvalidTarget_thenPreferenceUnavailable() = runTest {
         appFunctionManagerWrapper.stub {
             onBlocking { isValidTarget(PACKAGE_NAME) }.doReturn(false)
@@ -114,7 +117,7 @@ class ManageTargetAppFunctionAccessPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsEnabled(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
     fun whenAppFunctionsEnabled_isProfile_thenPreferenceUnavailable() = runTest {
         doReturn(true).whenever(userManager).isProfile
 
@@ -124,7 +127,10 @@ class ManageTargetAppFunctionAccessPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsEnabled(
+        Flags.FLAG_APP_FUNCTION_ACCESS_API_ENABLED,
+        Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED,
+    )
     fun whenAppFunctionsEnabled_andSupportedFormFactor_thenPreferenceAvailable() = runTest {
         controller!!.updateAvailability(appFunctionManagerWrapper)
 
@@ -132,7 +138,10 @@ class ManageTargetAppFunctionAccessPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsEnabled(
+        Flags.FLAG_APP_FUNCTION_ACCESS_API_ENABLED,
+        Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED,
+    )
     fun whenAppFunctionsEnabled_andUnsupportedFormFactor_thenPreferenceUnavailable() = runTest {
         for (formFactor in unsupportedFormFactors) {
             doReturn(true)
@@ -146,7 +155,10 @@ class ManageTargetAppFunctionAccessPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsEnabled(
+        Flags.FLAG_APP_FUNCTION_ACCESS_API_ENABLED,
+        Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED,
+    )
     fun handlePreferenceTreeClick() = runTest {
         controller!!.updateAvailability(appFunctionManagerWrapper)
 

@@ -2333,6 +2333,8 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Aplicacions recents"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notificacions"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Configuració ràpida"</string>
+    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Tria una drecera per a l’<xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"extrem inferior esquerre"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"extrem inferior dret"</string>
@@ -2496,7 +2498,7 @@
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Segueix l\'escriptura"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"La lupa segueix el text a mesura que escrius"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"Segueix el focus del teclat"</string>
-    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"La lupa segueix l\'element on s\'ha posat el focus mentre navegues amb el teclat"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"La lupa segueix l\'element enfocat mentre navegues amb el teclat"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Amplia el teclat"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Amplia el zoom al teclat per veure els emojis i les lletres en utilitzar l\'ampliació de pantalla completa"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"No disponible si només s\'amplia part de la pantalla"</string>
@@ -2600,6 +2602,12 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Toca ràpidament la pantalla %1$d vegades. Aquesta acció pot alentir el dispositiu."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Fes doble toc amb %1$d dits"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"fer triple toc"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_keyboard (6563958384189884131) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_keyboard (8755352177645189254) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_keyboard_keyword (7354208869208311654) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Configuració avançada"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"El botó d\'accessibilitat està configurat per a <xliff:g id="SERVICE">%1$s</xliff:g>. Per utilitzar la funció d\'ampliació, toca i mantén premut el botó d\'accessibilitat i, a continuació, selecciona l\'ampliació."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"El gest d\'accessibilitat està definit per a la funció <xliff:g id="SERVICE">%1$s</xliff:g>. Per utilitzar l\'ampliació, fes lliscar els dos dits cap amunt des de la part inferior de la pantalla i mantén premut. A continuació, selecciona l\'amplificació."</string>
@@ -3932,6 +3940,10 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Aplicacions"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmes i altres interrupcions"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Durada per a la configuració ràpida"</string>
+    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
+    <skip />
+    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
+    <skip />
     <string name="sound_work_settings" msgid="752627453846309092">"Sons del perfil de treball"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Utilitza els sons del perfil personal"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Utilitza els mateixos sons que el teu perfil personal"</string>
@@ -4616,18 +4628,13 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permet que aquesta aplicació llegeixi, modifiqui i suprimeixi tots els fitxers d\'aquest dispositiu o de qualsevol volum d\'emmagatzematge connectat. L\'aplicació podrà accedir als fitxers sense el teu coneixement explícit."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pot accedir a tots els fitxers"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatització de la pantalla"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Aquesta aplicació podrà veure el contingut de la pantalla d\'altres aplicacions i interaccionar-hi per ajudar-te a completar tasques, fins i tot quan les aplicacions estiguin en segon pla"</string>
+    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Si no permets l\'automatització de la pantalla, és possible que <xliff:g id="ID_1">%1$s</xliff:g> pugui continuar interaccionant amb les aplicacions que estan connectades a <xliff:g id="ID_2">%1$s</xliff:g> d\'altres maneres"</string>
+    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Permet que les aplicacions t\'ajudin a completar tasques interaccionant amb el contingut de la pantalla d\'altres aplicacions"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Pregunta sempre"</string>
-    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
+    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Permet sempre"</string>
+    <!-- no translation found for computer_control_automation_dont_allow (6562575180350018944) -->
     <skip />
-    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"No permetis"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificacions de pantalla completa"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permet les notificacions de pantalla completa d\'aquesta aplicació"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permet que aquesta aplicació mostri notificacions que ocupen tota la pantalla quan el dispositiu està bloquejat. Les aplicacions poden utilitzar aquesta opció per destacar alarmes, trucades entrants o altres notificacions urgents."</string>
@@ -4905,6 +4912,16 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Gira la càmera per fer una selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Mode de navegació"</string>
+    <!-- no translation found for update_device_category_title (6588608879793647296) -->
+    <skip />
+    <!-- no translation found for interaction_category_title (5712424978503035872) -->
+    <skip />
+    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
+    <skip />
+    <!-- no translation found for system_management_category_title (5405726452116686478) -->
+    <skip />
+    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
+    <skip />
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navegació amb 2 botons"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Per canviar d\'aplicació, fes lliscar cap amunt el botó d\'inici. Per veure totes les aplicacions, torna a lliscar cap amunt. Per tornar enrere, toca el botó Enrere."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"Notificacions i configuració ràpida"</string>
@@ -6047,8 +6064,7 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Afegeix la informació de recuperació"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Verifica la informació de recuperació"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtres de la botiga d\'aplicacions"</string>
-    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
-    <skip />
+    <string name="supervision_app_store_filters_keywords" msgid="8281936888718160336">"Filtres d\'aplicacions, filtres d\'aplicacions per a adults, filtres per a adults, aplicacions explícites, bloquejar aplicacions, bloquejar aplicacions explícites, bloquejar aplicacions per a adults"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtra les aplicacions segons la maduresa del seu contingut"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Cada botiga classifica el contingut de manera diferent. La classificació d\'una aplicació pot variar segons la botiga."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtra les aplicacions segons les classificacions del contingut"</string>

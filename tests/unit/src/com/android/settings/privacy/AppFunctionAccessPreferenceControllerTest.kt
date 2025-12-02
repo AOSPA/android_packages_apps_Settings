@@ -19,9 +19,9 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.UserManager
 import android.permission.flags.Flags
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
+import android.platform.test.annotations.RequiresFlagsDisabled
+import android.platform.test.annotations.RequiresFlagsEnabled
+import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.core.BasePreferenceController
@@ -42,7 +42,7 @@ import org.mockito.quality.Strictness
 
 @RunWith(AndroidJUnit4::class)
 class AppFunctionAccessPreferenceControllerTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
+    @get:Rule val checkFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
     @Mock lateinit var packageManager: PackageManager
     @Mock lateinit var userManager: UserManager
@@ -75,14 +75,17 @@ class AppFunctionAccessPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsDisabled(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
     fun whenAppFunctionsDisabled_thenPreferenceUnavailable() {
         Truth.assertThat(controller!!.availabilityStatus)
             .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE)
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsEnabled(
+        Flags.FLAG_APP_FUNCTION_ACCESS_API_ENABLED,
+        Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED,
+    )
     fun whenAppFunctionsEnabled_isProfile_thenPreferenceUnavailable() {
         Mockito.doReturn(true).`when`(userManager).isProfile
         Truth.assertThat(controller!!.availabilityStatus)
@@ -90,14 +93,20 @@ class AppFunctionAccessPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsEnabled(
+        Flags.FLAG_APP_FUNCTION_ACCESS_API_ENABLED,
+        Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED,
+    )
     fun whenAppFunctionsEnabled_andSupportedFormFactor_thenPreferenceAvailable() {
         Truth.assertThat(controller!!.availabilityStatus)
             .isEqualTo(BasePreferenceController.AVAILABLE)
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsEnabled(
+        Flags.FLAG_APP_FUNCTION_ACCESS_API_ENABLED,
+        Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED,
+    )
     fun whenAppFunctionsEnabled_andUnsupportedFormFactor_thenPreferenceUnavailable() {
         for (formFactor in unsupportedFormFactors) {
             Mockito.doReturn(true)

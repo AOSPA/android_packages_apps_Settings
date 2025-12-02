@@ -1415,7 +1415,7 @@
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Za najvišjo ločljivost se porablja več energije baterije. Ob spremembi ločljivosti se bodo morda nekatere aplikacije znova zagnale."</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> krat <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
-    <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Herz"</string>
+    <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Barve"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naravne"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Poudarjene"</string>
@@ -2333,6 +2333,8 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Nedavne aplikacije"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Obvestila"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Hitre nastavitve"</string>
+    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Izberite bližnjico za <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"spodnji levi kot"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"spodnji desni kot"</string>
@@ -2600,6 +2602,12 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"%1$d-krat se hitro dotaknite zaslona. To bo morda upočasnilo delovanje naprave."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Dvakratni dotik z %1$d prstoma"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"trikratni dotik"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_keyboard (6563958384189884131) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_keyboard (8755352177645189254) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_keyboard_keyword (7354208869208311654) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Dodatno"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Gumb »Dostopnost« je nastavljen na <xliff:g id="SERVICE">%1$s</xliff:g>. Če želite uporabiti povečavo, se dotaknite gumba »Dostopnost« in ga pridržite, nato pa izberite povečavo."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Poteza za dostopnost je nastavljena na <xliff:g id="SERVICE">%1$s</xliff:g>. Če želite uporabiti povečavo, z dvema prstoma povlecite z dna zaslona navzgor in pridržite. Nato izberite povečavo."</string>
@@ -3930,6 +3938,10 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Aplikacije"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmi in druge motnje"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Trajanje pri uporabi hitrih nastavitev"</string>
+    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
+    <skip />
+    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
+    <skip />
     <string name="sound_work_settings" msgid="752627453846309092">"Zvoki v delovnem profilu"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Uporabi zvoke iz osebnega profila"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Uporabite iste zvoke kot v osebnem profilu."</string>
@@ -4614,18 +4626,13 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Tej aplikaciji dovolite, da bere, spreminja in briše vse datoteke v tej napravi ali drugih povezanih nosilcih za shranjevanje. Če daste to dovoljenje, bo aplikacija morda dostopala do datotek brez vaše vednosti."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Lahko dostopa do vseh datotek"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Avtomatizacija zaslona"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Ta aplikacija si bo lahko ogledala vsebino zaslona drugih aplikacij in komunicirala z njo, da vam bo pomagala dokončati opravila, tudi ko so aplikacije v ozadju"</string>
+    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Če ne dovolite avtomatizacije zaslona, bo <xliff:g id="ID_1">%1$s</xliff:g> morda še vedno lahko komuniciral z aplikacijami, ki so povezane s storitvijo <xliff:g id="ID_2">%1$s</xliff:g>, na druge načine"</string>
+    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Aplikacijam dovolite, da vam pomagajo dokončati opravila z interakcijo z vsebino na zaslonu drugih aplikacij"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Vedno vprašaj"</string>
-    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
+    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Vedno dovoli"</string>
+    <!-- no translation found for computer_control_automation_dont_allow (6562575180350018944) -->
     <skip />
-    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Ne dovoli"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Celozaslonska obvestila"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Dovoli celozaslonska obvestila te aplikacije"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Dovolite, da ta aplikacija prikazuje obvestila, ki zavzamejo celoten zaslon, ko je naprava zaklenjena. Aplikacije lahko z njimi izpostavijo alarme, dohodne klice ali druga nujna obvestila."</string>
@@ -4903,6 +4910,16 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Zasuk fotoaparata za selfije"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Način krmarjenja"</string>
+    <!-- no translation found for update_device_category_title (6588608879793647296) -->
+    <skip />
+    <!-- no translation found for interaction_category_title (5712424978503035872) -->
+    <skip />
+    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
+    <skip />
+    <!-- no translation found for system_management_category_title (5405726452116686478) -->
+    <skip />
+    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
+    <skip />
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Krmarjenje z dvema gumboma"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Za preklop med aplikacijami povlecite navzgor po gumbu za začetni zaslon. Za ogled vseh aplikacij znova povlecite navzgor. Za vrnitev se dotaknite gumba za nazaj."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"Obvestila in hitre nastavitve"</string>
@@ -6047,8 +6064,7 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Dodajanje podatkov za obnovitev"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Preverjanje podatkov za obnovitev"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtri trgovine z aplikacijami"</string>
-    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
-    <skip />
+    <string name="supervision_app_store_filters_keywords" msgid="8281936888718160336">"Filtri aplikacij, filtri aplikacij za odrasle, filtri za odrasle, eksplicitne aplikacije, blokiranje aplikacij, blokiranje eksplicitnih aplikacij, blokiranje aplikacij za odrasle"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtriranje aplikacij glede na starostno primernost njihove vsebine"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Vsaka trgovina vsebino ocenjuje drugače. Kategorija vsebine aplikacije se lahko razlikuje med trgovinami."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtriranje aplikacij po kategorijah vsebine"</string>

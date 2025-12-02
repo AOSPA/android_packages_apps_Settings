@@ -44,12 +44,16 @@ class KeyboardShortcutPreferenceTest {
     @Before
     fun setUp() {
         SettingsShadowResources.overrideResource(
-            com.android.internal.R.string.config_defaultVoiceAccessService,
-            "voice_access",
-        )
-        SettingsShadowResources.overrideResource(
             com.android.internal.R.string.config_defaultAccessibilityService,
             "talkback",
+        )
+        SettingsShadowResources.overrideResource(
+            com.android.internal.R.string.config_defaultSelectToSpeakService,
+            "select_to_speak",
+        )
+        SettingsShadowResources.overrideResource(
+            com.android.internal.R.string.config_defaultVoiceAccessService,
+            "voice_access",
         )
         setHardwareKeyboard(true)
         preference =
@@ -131,17 +135,29 @@ class KeyboardShortcutPreferenceTest {
 
     @Test
     @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
-    fun isAvailable_whenTargetIsVoiceAccess_returnsTrue() {
+    fun isAvailable_whenTargetIsScreenReader_returnsTrue() {
+        preference = KeyboardShortcutPreference(context = appContext, targets = setOf("talkback"))
+
+        assertThat(preference.isAvailable(appContext)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(
+        com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS,
+        com.android.hardware.input.Flags.FLAG_ENABLE_SELECT_TO_SPEAK_KEY_GESTURES,
+    )
+    fun isAvailable_whenTargetIsSelectToSpeak_returnsTrue() {
         preference =
-            KeyboardShortcutPreference(context = appContext, targets = setOf("voice_access"))
+            KeyboardShortcutPreference(context = appContext, targets = setOf("select_to_speak"))
 
         assertThat(preference.isAvailable(appContext)).isTrue()
     }
 
     @Test
     @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
-    fun isAvailable_whenTargetIsScreenReader_returnsTrue() {
-        preference = KeyboardShortcutPreference(context = appContext, targets = setOf("talkback"))
+    fun isAvailable_whenTargetIsVoiceAccess_returnsTrue() {
+        preference =
+            KeyboardShortcutPreference(context = appContext, targets = setOf("voice_access"))
 
         assertThat(preference.isAvailable(appContext)).isTrue()
     }
