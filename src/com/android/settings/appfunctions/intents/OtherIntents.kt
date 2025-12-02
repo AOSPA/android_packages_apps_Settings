@@ -35,11 +35,6 @@ fun getOtherIntents() =
                     "intent:#Intent;component=com.android.settings/.wallpaper.StyleSuggestionActivity;end",
             ),
             StaticIntent(
-                description = "Backup: Settings to configure the backup options for the device.",
-                intentUri =
-                    "intent:#Intent;action=com.android.settings.BACKUP_SETTINGS;package=com.android.settings;end",
-            ),
-            StaticIntent(
                 description =
                     "Send feedback about this device: Intent to generate a report that you can share with the device manufacturer.",
                 intentUri = "intent:#Intent;action=android.intent.action.BUG_REPORT;end",
