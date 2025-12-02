@@ -19,9 +19,11 @@ package com.android.settings.accessibility.shared.ui
 import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
+import android.hardware.input.InputManager
 import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentManager
 import androidx.preference.Preference
+import com.android.internal.accessibility.common.ShortcutConstants
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityShortcutsTutorial
 import com.android.settings.accessibility.AccessibilityUtil
@@ -69,6 +71,8 @@ open class AccessibilityShortcutPreference(
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider {
 
+    private lateinit var lifecycleContext: PreferenceLifecycleContext
+
     protected open val dataStore: AccessibilityShortcutDataStore by lazy {
         AccessibilityShortcutDataStore(context, componentName)
     }
@@ -105,8 +109,32 @@ open class AccessibilityShortcutPreference(
             else -> ReadWritePermit.ALLOW
         }
 
+    private val inputDeviceListener by lazy {
+        object : InputManager.InputDeviceListener {
+            override fun onInputDeviceAdded(deviceId: Int) {
+                if (::lifecycleContext.isInitialized) {
+                    lifecycleContext.notifyPreferenceChange(key)
+                }
+            }
+
+            override fun onInputDeviceRemoved(deviceId: Int) {
+                if (::lifecycleContext.isInitialized) {
+                    lifecycleContext.notifyPreferenceChange(key)
+                }
+            }
+
+            override fun onInputDeviceChanged(deviceId: Int) {
+                // No-op
+            }
+        }
+    }
+
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)
+        lifecycleContext = context
+        context
+            .getSystemService(InputManager::class.java)
+            ?.registerInputDeviceListener(inputDeviceListener, null)
         val shortcutPreference = context.requirePreference<ShortcutPreference>(key)
         shortcutPreference.setOnClickCallback(
             object : ShortcutPreference.OnClickCallback {
@@ -122,6 +150,13 @@ open class AccessibilityShortcutPreference(
                 }
             }
         )
+    }
+
+    override fun onDestroy(context: PreferenceLifecycleContext) {
+        super.onDestroy(context)
+        context
+            .getSystemService(InputManager::class.java)
+            ?.unregisterInputDeviceListener(inputDeviceListener)
     }
 
     protected open fun onSettingsClicked(
@@ -167,6 +202,18 @@ open class AccessibilityShortcutPreference(
         shortcutTypes: Int,
         isInSetupWizard: Boolean,
     ) {
+        // There is no tutorial for the key gesture shortcut, so do not try to show the
+        // shortcuts tutorial for the key gesture.
+        val supportedShortcutTypes =
+            AccessibilityUtil.removeTypeFromShortcutTypes(
+                shortcutTypes,
+                ShortcutConstants.UserShortcutType.KEY_GESTURE,
+            )
+
+        if (supportedShortcutTypes == ShortcutConstants.UserShortcutType.DEFAULT) {
+            return
+        }
+
         val featureLabel: CharSequence =
             when {
                 title != 0 -> context.getText(title)
@@ -176,7 +223,7 @@ open class AccessibilityShortcutPreference(
 
         AccessibilityShortcutsTutorial.DialogFragment.showDialog(
             fragmentManager,
-            shortcutTypes,
+            supportedShortcutTypes,
             featureLabel,
             isInSetupWizard,
         )
