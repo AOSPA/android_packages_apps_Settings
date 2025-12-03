@@ -103,6 +103,9 @@ private class LocationAccessAppPreference(
     override val key: String
         get() = "recent_app_location_access_$index"
 
+    override val purpose: Int
+        get() = R.string.recent_app_location_access_purpose
+
     override fun getTitle(context: Context): CharSequence? = access.label
 
     override fun getSummary(context: Context): CharSequence? = StringUtil.formatRelativeTime(

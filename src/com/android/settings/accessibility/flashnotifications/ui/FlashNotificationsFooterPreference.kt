@@ -27,6 +27,9 @@ class FlashNotificationsFooterPreference : FooterPreferenceMetadata, FooterPrefe
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.flash_notifications_footer_purpose
+
     override val title: Int
         get() = R.string.flash_notifications_note
 

@@ -27,7 +27,11 @@ import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 
 class ColorCorrectionMainSwitchPreference(context: Context) :
-    SwitchPreference(key = KEY, title = R.string.accessibility_daltonizer_primary_switch_title),
+    SwitchPreference(
+        key = KEY,
+        purpose = R.string.accessibility_display_daltonizer_enabled_purpose,
+        title = R.string.accessibility_daltonizer_primary_switch_title
+    ),
     MainSwitchPreferenceBinding {
 
     private val storage by lazy {

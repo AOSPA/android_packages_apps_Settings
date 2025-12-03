@@ -235,13 +235,15 @@ open class HearingDevicesScreen(context: Context) :
 
     class HearingDeviceOptionsPreferenceCategory(
         key: String = "hearing_options_category",
+        purpose: Int = R.string.hearing_options_category_purpose,
         title: Int = R.string.accessibility_screen_option,
-    ) : PreferenceCategory(key, title)
+    ) : PreferenceCategory(key,purpose, title)
 
     class HearingDeviceShortcutPreference(context: Context, metricsCategory: Int) :
         AccessibilityShortcutPreference(
             context = context,
             key = "hearing_aids_shortcut_preference",
+            purpose = R.string.hearing_aids_shortcut_preference_purpose,
             title = R.string.accessibility_hearing_device_shortcut_title,
             componentName = ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME,
             featureName = R.string.accessibility_hearingaid_title,

@@ -70,19 +70,19 @@ open class DisplayScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +Category("category_brightness", R.string.category_name_brightness) order -200 += {
+            +Category("category_brightness", R.string.category_brightness_purpose, R.string.category_name_brightness) order -200 += {
                 +BrightnessLevelPreference()
                 if (Flags.catalystScreenBrightnessMode()) +AutoBrightnessScreen.KEY
             }
-            +Category("category_lock_display", R.string.category_name_lock_display) order -190 += {
+            +Category("category_lock_display", R.string.category_lock_display_purpose, R.string.category_name_lock_display) order -190 += {
                 if (Flags.catalystLockscreenFromDisplaySettings()) +LockScreenPreferenceScreen.KEY
                 +AmbientDisplayAlwaysOnPreferenceScreen.KEY
             }
-            +Category("category_key_appearance", R.string.category_name_appearance) order -180 += {
+            +Category("category_key_appearance", R.string.category_key_appearance_purpose, R.string.category_name_appearance) order -180 += {
                 if (AccessibilityFlags.catalystDarkUiMode()) +DarkModeScreen.KEY
                 if (Flags.catalystTextReadingScreen()) +TextReadingScreen.KEY
             }
-            +Category("category_other", R.string.category_name_display_controls) order -150 += {
+            +Category("category_other", R.string.category_other_purpose, R.string.category_name_display_controls) order -150 += {
                 +PeakRefreshRateSwitchPreference()
                 if (Flags.catalystScreensaver()) +ScreensaverScreen.KEY
             }

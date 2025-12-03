@@ -32,7 +32,12 @@ import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
 class BatteryPercentageSwitchPreference :
-    SwitchPreference(KEY, R.string.battery_percentage, R.string.battery_percentage_description),
+    SwitchPreference(
+        KEY,
+        purpose = R.string.status_bar_show_battery_percent_purpose,
+        R.string.battery_percentage,
+        R.string.battery_percentage_description
+    ),
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider {
 

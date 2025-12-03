@@ -324,4 +324,7 @@ private class FooterPreference(override val title: Int) :
 
     override val key: String
         get() = "footer"
+
+    override val purpose: Int
+        get() = R.string.footer_purpose
 }

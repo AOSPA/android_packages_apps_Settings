@@ -26,6 +26,9 @@ class IntroPreference : PreferenceMetadata, PreferenceBinding {
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.daltonizer_preference_top_intro_purpose
+
     override val title: Int
         get() = R.string.accessibility_daltonizer_about_intro_text
 

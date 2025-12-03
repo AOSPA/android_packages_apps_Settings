@@ -124,11 +124,11 @@ class MagnificationScreenTest : SettingsCatalystTestCase() {
     @Test
     fun getLaunchIntent_metadata_correctActivityWithExtraKey() {
         val underTest =
-            preferenceScreenCreator.getLaunchIntent(context, TestMetadata("preference_key"))!!
+            preferenceScreenCreator.getLaunchIntent(context, TestMetadata("preference_key", 0))!!
 
         assertThat(underTest.hasExtra(EXTRA_FRAGMENT_ARG_KEY)).isTrue()
         assertThat(underTest.getStringExtra(EXTRA_FRAGMENT_ARG_KEY)).isEqualTo("preference_key")
     }
 }
 
-private data class TestMetadata(override val key: String) : PreferenceMetadata
+private data class TestMetadata(override val key: String, override val purpose: Int) : PreferenceMetadata

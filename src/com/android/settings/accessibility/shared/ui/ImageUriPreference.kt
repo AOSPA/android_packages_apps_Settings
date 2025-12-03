@@ -27,6 +27,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.utils.ThreadUtils
 import com.android.settingslib.widget.IllustrationPreference
+import com.android.settings.R
 
 /**
  * PreferenceMetadata for showing image uri illustration with the [IllustrationPreference] widget.
@@ -37,6 +38,9 @@ abstract class ImageUriPreference :
     PreferenceMetadata, PreferenceBinding, PreferenceAvailabilityProvider {
     override val key: String
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.a11y_activity_detail_screen_animated_image_purpose
 
     override val indexable
         get() = false

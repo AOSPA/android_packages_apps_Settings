@@ -39,6 +39,7 @@ import com.android.settingslib.preference.SwitchPreferenceBinding
 class HearingAidCompatibilitySwitchPreference(private val context: Context) :
     SwitchPreference(
         KEY,
+        purpose = R.string.hearing_aid_purpose,
         R.string.accessibility_hac_mode_title,
         R.string.accessibility_hac_mode_summary,
     ),

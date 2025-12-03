@@ -66,6 +66,9 @@ class FullScreenModeSelectorPreference(store: MagnificationModeStorage) :
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.full_screen_mode_preference_purpose
+
     override val title
         get() = R.string.accessibility_magnification_mode_dialog_option_full_screen
 
@@ -83,6 +86,9 @@ class WindowModeSelectorPreference(store: MagnificationModeStorage) :
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.window_mode_preference_purpose
+
     override val title
         get() = R.string.accessibility_magnification_mode_dialog_option_window
 
@@ -99,6 +105,9 @@ class AllModeSelectorPreference(store: MagnificationModeStorage) :
     MagnificationModeSelectorPreference(store) {
     override val key
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.all_mode_preference_purpose
 
     override val title
         get() = R.string.accessibility_magnification_mode_dialog_option_switch

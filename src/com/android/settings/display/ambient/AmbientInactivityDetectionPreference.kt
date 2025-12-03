@@ -25,9 +25,10 @@ import com.android.settingslib.metadata.SwitchPreference
 
 class AmbientInactivityDetectionPreference(context: Context) :
     SwitchPreference(
-        KEY,
-        R.string.doze_always_on_inactivity_detection_title,
-        R.string.doze_always_on_inactivity_detection_summary,
+        key = KEY,
+        purpose = R.string.doze_always_on_inactivity_detection_purpose,
+        title = R.string.doze_always_on_inactivity_detection_title,
+        summary = R.string.doze_always_on_inactivity_detection_summary,
     ) {
 
     private val dozeAlwaysOnDataStore = AmbientDisplayStorage(context)

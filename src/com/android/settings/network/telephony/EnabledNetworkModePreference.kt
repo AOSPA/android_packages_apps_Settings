@@ -77,6 +77,9 @@ class EnabledNetworkModePreference(
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.enabled_networks_key_purpose
+
     override val title: Int
         get() = R.string.preferred_network_mode_title
 

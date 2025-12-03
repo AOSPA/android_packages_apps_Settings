@@ -38,6 +38,7 @@ import com.android.settingslib.metadata.SwitchPreference
 class WifiScorerTogglePreference() :
     SwitchPreference(
         KEY,
+        R.string.adaptive_connectivity_wifi_enabled_purpose,
         R.string.adaptive_connectivity_wifi_switch_title,
         R.string.adaptive_connectivity_wifi_switch_summary,
     ),
@@ -48,6 +49,9 @@ class WifiScorerTogglePreference() :
 
     override val key: String
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.adaptive_connectivity_wifi_enabled_purpose
 
     override fun tags(context: Context) = arrayOf(KEY_ADAPTIVE_WIFI_SCORER)
 

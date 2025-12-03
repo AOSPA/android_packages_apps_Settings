@@ -205,6 +205,9 @@ class NotificationAccessApprovalPreference(private val storage: KeyValueStore) :
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.device_state_notification_access_approval_preference_purpose
+
     override val title
         get() = R.string.notification_access_detail_switch
 
@@ -226,6 +229,9 @@ class NotificationAccessOngoingPreference(private val storage: KeyValueStore) :
 
     override val key
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.device_state_notification_access_ongoing_preference_purpose
 
     override val title
         get() = R.string.notif_type_ongoing
@@ -249,6 +255,9 @@ class NotificationAccessConversationsPreference(private val storage: KeyValueSto
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.device_state_notification_access_conversations_preference_purpose
+
     override val title
         get() = R.string.notif_type_conversation
 
@@ -271,6 +280,9 @@ class NotificationAccessAlertingPreference(private val storage: KeyValueStore) :
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.device_state_notification_access_alerting_preference_purpose
+
     override val title
         get() = R.string.notif_type_alerting
 
@@ -292,6 +304,9 @@ class NotificationAccessSilentPreference(private val storage: KeyValueStore) :
 
     override val key
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.device_state_notification_access_silent_preference_purpose
 
     override val title
         get() = R.string.notif_type_silent

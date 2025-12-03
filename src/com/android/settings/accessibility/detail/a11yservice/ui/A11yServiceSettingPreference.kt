@@ -31,6 +31,9 @@ class A11yServiceSettingPreference(private val serviceInfo: AccessibilityService
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.accessibility_service_settings_purpose
+
     override val title: Int
         get() = R.string.accessibility_menu_item_settings
 

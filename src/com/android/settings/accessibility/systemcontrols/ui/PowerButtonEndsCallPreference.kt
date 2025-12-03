@@ -34,6 +34,7 @@ import com.android.settingslib.metadata.SwitchPreference
 class PowerButtonEndsCallPreference :
     SwitchPreference(
         PowerButtonEndsCallDataStore.KEY,
+        R.string.incall_power_button_behavior_purpose,
         R.string.accessibility_power_button_ends_call_prerefence_title,
     ),
     PreferenceActionMetricsProvider,

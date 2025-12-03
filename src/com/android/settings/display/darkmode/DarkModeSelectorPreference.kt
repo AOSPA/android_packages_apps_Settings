@@ -79,6 +79,9 @@ class StandardDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.standard_dark_theme_purpose
+
     override val title
         get() = R.string.accessibility_standard_dark_theme_title
 
@@ -99,6 +102,9 @@ class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
 
     override val key
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.expanded_dark_theme_purpose
 
     override val title
         get() = R.string.accessibility_expanded_dark_theme_title

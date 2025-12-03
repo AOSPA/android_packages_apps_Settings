@@ -197,6 +197,9 @@ private class AppSizePreference(
     override val key: String
         get() = "app_size"
 
+    override val purpose: Int
+        get() = R.string.app_size_purpose
+
     override val title: Int
         get() = R.string.application_size_label
 
@@ -210,6 +213,9 @@ private class AppUserDataSizePreference(
 
     override val key: String
         get() = "data_size"
+
+    override val purpose: Int
+        get() = R.string.data_size_purpose
 
     override val title: Int
         get() = R.string.data_size_label
@@ -226,6 +232,9 @@ private class AppCacheSizePreference(
     override val key: String
         get() = "cache_size"
 
+    override val purpose: Int
+        get() = R.string.cache_size_purpose
+
     override val title: Int
         get() = R.string.cache_size_label
 
@@ -240,6 +249,9 @@ private class AppTotalSizePreference(
 
     override val key: String
         get() = "total_size"
+
+    override val purpose: Int
+        get() = R.string.total_size_purpose
 
     override val title: Int
         get() = R.string.total_size_label

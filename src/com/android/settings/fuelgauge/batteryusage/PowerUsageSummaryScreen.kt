@@ -77,11 +77,17 @@ open class PowerUsageSummaryScreen :
         preferenceHierarchy(context) {
             +BatteryHeaderPreference()
             if (Flags.deeplinkBattery25q4()) {
-                +UntitledPreferenceCategoryMetadata("power_usage_summary_category") += {
+                +UntitledPreferenceCategoryMetadata(
+                    key = "power_usage_summary_category",
+                    purpose = R.string.power_usage_summary_category_purpose,
+                ) += {
                     +PowerUsageAdvancedScreen.KEY
                 }
             }
-            +UntitledPreferenceCategoryMetadata("percentage_category") += {
+            +UntitledPreferenceCategoryMetadata(
+                key = "percentage_category",
+                purpose = R.string.percentage_category_purpose,
+            ) += {
                 +BatteryPercentageSwitchPreference()
             }
         }

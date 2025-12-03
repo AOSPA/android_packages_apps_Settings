@@ -71,6 +71,9 @@ class SupervisionDeletePinPreference() :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.supervision_delete_pin_purpose
+
     override fun getTitle(context: Context): CharSequence {
         if (!Flags.enableSupervisionSettingsUiUpdates()) {
             return context.getString(R.string.supervision_delete_pin_preference_title)

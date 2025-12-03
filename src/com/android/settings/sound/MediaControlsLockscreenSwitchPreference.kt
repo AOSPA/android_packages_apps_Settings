@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.SwitchPreference
 class MediaControlsLockscreenSwitchPreference :
     SwitchPreference(
         KEY,
+        R.string.media_controls_lock_screen_purpose,
         R.string.media_controls_lockscreen_title,
         R.string.media_controls_lockscreen_description,
     ),

@@ -29,7 +29,11 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
 class AirplaneModeSyncPreference :
-    SwitchPreference(KEY, R.string.sync_across_devices_title), PreferenceActionMetricsProvider {
+    SwitchPreference(
+        KEY,
+        R.string.airplane_mode_sync_purpose,
+        R.string.sync_across_devices_title,
+    ), PreferenceActionMetricsProvider {
 
     override val icon: Int
         @DrawableRes get() = R.drawable.ic_sync

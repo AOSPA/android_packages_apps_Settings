@@ -58,7 +58,7 @@ class RampingRingerVibrationSwitchPreferenceTest {
                 }
         }
 
-    private val preference = RampingRingerVibrationSwitchPreference(context, TEST_KEY, RING_KEY)
+    private val preference = RampingRingerVibrationSwitchPreference(context, TEST_KEY, TEST_PURPOSE, RING_KEY)
 
     @Before
     fun setUp() {
@@ -71,6 +71,7 @@ class RampingRingerVibrationSwitchPreferenceTest {
             RampingRingerVibrationSwitchPreference(
                 context,
                 key = TEST_KEY,
+                purpose = TEST_PURPOSE,
                 ringPreferenceKey = RING_KEY,
                 deviceConfig =
                     object : TelephonyConfigProvider {
@@ -89,6 +90,7 @@ class RampingRingerVibrationSwitchPreferenceTest {
             RampingRingerVibrationSwitchPreference(
                 context,
                 key = TEST_KEY,
+                purpose = TEST_PURPOSE,
                 ringPreferenceKey = RING_KEY,
                 deviceConfig =
                     object : TelephonyConfigProvider {
@@ -107,6 +109,7 @@ class RampingRingerVibrationSwitchPreferenceTest {
             RampingRingerVibrationSwitchPreference(
                 context,
                 key = TEST_KEY,
+                purpose = TEST_PURPOSE,
                 ringPreferenceKey = RING_KEY,
                 deviceConfig =
                     object : TelephonyConfigProvider {
@@ -320,6 +323,7 @@ class RampingRingerVibrationSwitchPreferenceTest {
 
     companion object {
         private const val TEST_KEY = "some_key"
+        private const val TEST_PURPOSE = 0
         private const val RING_KEY = "ring_key"
     }
 }

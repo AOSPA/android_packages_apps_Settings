@@ -63,6 +63,9 @@ class MobileNetworkImeiPreference(
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.network_mode_imei_info_purpose
+
     override fun getSummary(context: Context): CharSequence? =
         imei?.let { PhoneNumberUtil.expandByTts(it) }
 

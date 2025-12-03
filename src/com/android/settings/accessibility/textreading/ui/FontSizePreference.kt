@@ -100,6 +100,9 @@ internal class FontSizePreference(context: Context, @EntryPoint private val entr
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.font_size_purpose
+
     override val title: Int
         get() = R.string.title_font_size
 

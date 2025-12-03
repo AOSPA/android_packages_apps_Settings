@@ -37,6 +37,9 @@ class DoubleTapPowerMainSwitchPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.double_tap_power_button_gesture_enabled_purpose
+
     override val title: Int
         get() = R.string.double_tap_power_enabled
 

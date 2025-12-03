@@ -127,7 +127,7 @@ private constructor(
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +PreferenceCategory("advanced_app_info", R.string.advanced_apps) += {
+            +PreferenceCategory("advanced_app_info",R.string.advanced_app_info_purpose, R.string.advanced_apps) += {
                 var newKeyParameters: ValidatedKeyParameters? = null
                 if (CatalystFlags.catalystUseKeyParameters()) {
                     newKeyParameters =

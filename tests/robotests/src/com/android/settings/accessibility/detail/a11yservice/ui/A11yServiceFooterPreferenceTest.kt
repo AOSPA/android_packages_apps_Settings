@@ -65,6 +65,7 @@ class A11yServiceFooterPreferenceTest {
         val footerPreferenceMetadata =
             A11yServiceFooterPreference(
                 key = HTML_FOOTER_KEY,
+                purpose = R.string.a11y_service_detail_screen_html_footer_info_purpose,
                 serviceInfo = a11yServiceInfo,
                 loadHtmlFooter = true,
             )
@@ -104,6 +105,7 @@ class A11yServiceFooterPreferenceTest {
         val footerPreferenceMetadata =
             A11yServiceFooterPreference(
                 key = FOOTER_KEY,
+                purpose = R.string.a11y_service_detail_screen_footer_info_purpose,
                 serviceInfo = a11yServiceInfo,
                 loadHtmlFooter = false,
             )
@@ -126,6 +128,7 @@ class A11yServiceFooterPreferenceTest {
         val footerPreferenceMetadata =
             A11yServiceFooterPreference(
                 key = FOOTER_KEY,
+                purpose = R.string.a11y_service_detail_screen_footer_info_purpose,
                 serviceInfo = a11yServiceInfo,
                 loadHtmlFooter = false,
             )

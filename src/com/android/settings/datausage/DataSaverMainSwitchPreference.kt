@@ -36,6 +36,9 @@ class DataSaverMainSwitchPreference :
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.use_data_saver_purpose
+
     override val title
         get() = R.string.data_saver_switch_title
 
