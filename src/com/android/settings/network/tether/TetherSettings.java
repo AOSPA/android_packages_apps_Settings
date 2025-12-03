@@ -159,7 +159,9 @@ public class TetherSettings extends RestrictedDashboardFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setIfOnlyAvailableForAdmins(true);
+        if (!com.android.settings.connectivity.Flags.wifiMultiuser()) {
+            setIfOnlyAvailableForAdmins(true);
+        }
         if (isUiRestricted()) {
             return;
         }
