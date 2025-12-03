@@ -50,6 +50,7 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
@@ -269,6 +270,33 @@ class SupervisionPinRecoveryPreferenceTest {
     fun onRecoveryFlowComplete_flowCanceled_noToast() {
         preference.onRecoveryFlowComplete(ActivityResult(Activity.RESULT_CANCELED, null))
         assertThat(ShadowToast.getTextOfLatestToast()).isNull()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onRecoveryFlowComplete_uiUpdatesFlagEnabled_notifiesPreferenceChange() {
+        // This test verifies that when the UI updates flag is enabled, a preference change
+        // notification is sent after the recovery flow completes.
+
+        // Trigger the completion callback.
+        preference.onRecoveryFlowComplete(ActivityResult(Activity.RESULT_OK, null))
+
+        // Verify that notifyPreferenceChange is called with the correct key.
+        verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionPinRecoveryPreference.KEY)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onRecoveryFlowComplete_uiUpdatesFlagDisabled_doesNotNotifyPreferenceChange() {
+        // This test verifies that when the UI updates flag is disabled, no preference change
+        // notification is sent after the recovery flow completes.
+
+        // Trigger the completion callback.
+        preference.onRecoveryFlowComplete(ActivityResult(Activity.RESULT_OK, null))
+
+        // Verify that notifyPreferenceChange is never called.
+        verify(mockLifeCycleContext, never())
+            .notifyPreferenceChange(SupervisionPinRecoveryPreference.KEY)
     }
 
     private fun setCanLaunchPinRecovery(canLaunch: Boolean) {
