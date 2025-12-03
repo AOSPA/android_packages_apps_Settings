@@ -20,6 +20,12 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/device_dashboard_title">
 
-    <!-- Add preferences for the device dashboard here -->
-
+    <!-- TODO: b/448125141 - Add new icons for display. -->
+    <Preference
+        android:fragment="com.android.settings.DisplaySettings"
+        android:icon="@drawable/ic_settings_display_filled"
+        android:key="device_dashboard_display"
+        android:title="@string/display_settings"
+        android:summary="@string/display_dashboard_summary"
+        settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
 </PreferenceScreen>
