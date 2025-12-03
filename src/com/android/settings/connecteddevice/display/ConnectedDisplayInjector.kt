@@ -44,7 +44,6 @@ import android.view.View
 import android.view.ViewManager
 import android.view.WindowManager
 import android.view.WindowManagerGlobal
-import androidx.annotation.OpenForTesting
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY
 import com.android.settings.flags.FeatureFlagsImpl
 import com.android.wm.shell.shared.desktopmode.DesktopState
@@ -79,15 +78,13 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         context?.getSystemService(DisplayManager::class.java)
     }
 
-    @get:OpenForTesting
-    open val desktopState: DesktopState? by lazy { context?.let { DesktopState.getInstance(it) } }
+    val desktopState: DesktopState? by lazy { context?.let { DesktopState.getInstance(it) } }
 
     /** The window manager instance, or null if it cannot be retrieved. */
     val windowManager: IWindowManager? by lazy { WindowManagerGlobal.getWindowManagerService() }
 
     open fun isProjectedModeEnabled(): Boolean =
-        desktopState?.canEnterDesktopMode == true &&
-            desktopState?.isDesktopModeSupportedOnDisplay(DEFAULT_DISPLAY) != true
+        desktopState?.isDesktopModeSupportedOnDisplay(DEFAULT_DISPLAY) != true
 
     /**
      * Reveals the wallpaper on the given display using a View with FLAG_SHOW_WALLPAPER flag set in

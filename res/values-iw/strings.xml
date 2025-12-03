@@ -2333,6 +2333,8 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"האפליקציות האחרונות"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"התראות"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"הגדרות מהירות"</string>
+    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"בחירת קיצור דרך בשביל <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"הפינה השמאלית התחתונה"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"הפינה הימנית התחתונה"</string>
@@ -2600,6 +2602,9 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"‏לחיצה מהירה %1$d פעמים על המסך. זה עלול להאט את פעולת המכשיר."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"‏לחיצה כפולה עם %1$d אצבעות"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"לחיצה מהירה 3 פעמים"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"מקשי קיצור"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"כדי להשתמש ב<xliff:g id="ID_4">%4$s</xliff:g>, צריך ללחוץ על <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_keyboard_keyword" msgid="7354208869208311654">"מקשי קיצור"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"מתקדם"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"הכפתור \'נגישות\' מוגדר לשירות <xliff:g id="SERVICE">%1$s</xliff:g>. כדי להשתמש בהגדלה, יש ללחוץ לחיצה ארוכה על כפתור הנגישות ולאחר מכן לבחור בהגדלה."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"תנועת הנגישות מוגדרת לשירות <xliff:g id="SERVICE">%1$s</xliff:g>. כדי להשתמש בהגדלה, יש להחליק מעלה מהחלק התחתון של המסך באמצעות שתי אצבעות ולהחזיק. לאחר מכן יש לבחור באפשרות \'הגדלה\'."</string>
@@ -3657,10 +3662,8 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"‏Bluetooth, ‏Android Auto, מצב נהיגה"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"‏Bluetooth, ‏Android Auto, ‏NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"‏Bluetooth, ‏Android Auto"</string>
-    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
-    <skip />
-    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
-    <skip />
+    <string name="device_dashboard_title" msgid="1176311605407079643">"מכשיר"</string>
+    <string name="device_dashboard_summary" msgid="657619609434549473">"מקלדת, לוח מגע, מסך, צליל"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"‏לא זמין כי NFC כבוי"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"כדי להשתמש, יש להתקין תחילה אפליקציה לתשלום"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"אפליקציות אחרונות, אפליקציות ברירת מחדל"</string>
@@ -3930,6 +3933,10 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"אפליקציות"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"שעונים מעוררים והפרעות אחרות"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"כמה זמן פועלות ההגדרות המהירות"</string>
+    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
+    <skip />
+    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
+    <skip />
     <string name="sound_work_settings" msgid="752627453846309092">"צלילי פרופיל עבודה"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"שימוש בצלילי הפרופיל האישי"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"אותם צלילים כמו בפרופיל האישי"</string>
@@ -4266,7 +4273,7 @@
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"שיחות"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"שיחות שיכולות להפריע"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"המכשיר צריך להיות במצב \"צלצול\" כדי כדי שבטוח יישמע צליל כשייכנסו שיחות מורשות"</string>
-    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"במצב \'<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\' שיחות נכנסות ייחסמו. ניתן לשנות את ההגדרות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
+    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"במצב \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" שיחות נכנסות ייחסמו. ניתן לשנות את ההגדרות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"אנשי קשר שסומנו בכוכב"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{אין}=1{{contact_1}}=2{{contact_1} וגם {contact_2}}=3{{contact_1}, {contact_2} וגם {contact_3}}one{{contact_1}, {contact_2} ו-# אנשים נוספים}other{{contact_1}, {contact_2} ו-# אנשים נוספים}}"</string>
     <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(ללא שם)"</string>
@@ -4614,18 +4621,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"לאפליקציה הזו תהיה הרשאה לקרוא, לשנות ולמחוק את כל הקבצים במכשיר הזה או בכל אחסון שמחובר אליו. אם ההרשאה ניתנת, האפליקציה תורשה לגשת לקבצים מבלי ליידע אותך במפורש."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"יכולת גישה לכל הקבצים"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"אוטומציה של המסך"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"האפליקציה הזו תוכל לראות את תוכן המסך של אפליקציות אחרות ולבצע איתו אינטראקציה כדי לעזור לך במשימות, גם כשהאפליקציות פועלות ברקע"</string>
+    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"אם האוטומציה של המסך לא תאושר, יכול להיות שעדיין תהיה ל-<xliff:g id="ID_1">%1$s</xliff:g> אפשרות לקיים אינטראקציה עם אפליקציות שמחוברות אל <xliff:g id="ID_2">%1$s</xliff:g> בדרכים אחרות"</string>
+    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"מתן הרשאה לאפליקציות לעזור במשימות על ידי אינטראקציה עם תוכן המסך של אפליקציות אחרות"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"אני רוצה לבחור בכל פעם"</string>
-    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
-    <skip />
-    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"אין אישור"</string>
+    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"אישור לתמיד"</string>
+    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"אין אישור"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"התראות במסך מלא"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"מתן הרשאה להצגת התראות במסך מלא מהאפליקציה הזו"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"מתן הרשאה לאפליקציה הזו להציג התראות במסך מלא כשהמכשיר נעול. אפליקציות יכולות להשתמש בהרשאה הזו כדי להציג התראות, שיחות נכנסות או הודעות דחופות אחרות."</string>
@@ -4903,6 +4904,16 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"סיבוב לסלפי במצלמה"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"מעבר בין מסכים"</string>
+    <!-- no translation found for update_device_category_title (6588608879793647296) -->
+    <skip />
+    <!-- no translation found for interaction_category_title (5712424978503035872) -->
+    <skip />
+    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
+    <skip />
+    <!-- no translation found for system_management_category_title (5405726452116686478) -->
+    <skip />
+    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
+    <skip />
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"ניווט באמצעות 2 כפתורים"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"כדי לעבור בין אפליקציות יש להחליק מעלה על הכפתור הראשי. כדי להציג את כל האפליקציות, יש להחליק מעלה שוב. כדי לחזור למסך הקודם, יש ללחוץ על הכפתור \'הקודם\'."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"התראות והגדרות מהירות"</string>
@@ -6046,8 +6057,7 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"הוספת פרטי השחזור"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"אימות פרטי השחזור"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"מסננים של חנות האפליקציות"</string>
-    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
-    <skip />
+    <string name="supervision_app_store_filters_keywords" msgid="8281936888718160336">"מסנני אפליקציות, מסנני אפליקציות למבוגרים בלבד, מסננים למבוגרים בלבד, אפליקציות בוטות, חסימת אפליקציות, חסימת אפליקציות בוטות, חסימת אפליקציות למבוגרים בלבד"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"סינון אפליקציות לפי סיווג התוכן"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"כל חנות מסווגת את התוכן בצורה שונה. סיווג האפליקציה עשוי להיות שונה בין החנויות."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"סינון אפליקציות לפי סיווגי תוכן"</string>

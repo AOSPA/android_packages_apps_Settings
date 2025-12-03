@@ -2333,6 +2333,8 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Apps recentes"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notificações"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Definições rápidas"</string>
+    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Escolha um atalho para o <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"canto inferior esquerdo"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"canto inferior direito"</string>
@@ -2600,6 +2602,9 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Toque rapidamente no ecrã %1$d vezes. Esta ação pode tornar o dispositivo mais lento."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Tocar duas vezes com %1$d dedos"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"tocar três vezes"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Atalho de teclado"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Prima <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> para usar <xliff:g id="ID_4">%4$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_keyboard_keyword" msgid="7354208869208311654">"atalho de teclado"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avançadas"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"O botão de acessibilidade está definido para o serviço <xliff:g id="SERVICE">%1$s</xliff:g>. Para utilizar a ampliação, toque sem soltar neste botão e, em seguida, selecione a ampliação."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"O gesto de acessibilidade está definido para o serviço <xliff:g id="SERVICE">%1$s</xliff:g>. Para utilizar a ampliação, deslize rapidamente com dois dedos para cima sem soltar a partir da parte inferior do ecrã. Em seguida, selecione a ampliação."</string>
@@ -3657,10 +3662,8 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, modo de condução"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
-    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
-    <skip />
-    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
-    <skip />
+    <string name="device_dashboard_title" msgid="1176311605407079643">"Dispositivo"</string>
+    <string name="device_dashboard_summary" msgid="657619609434549473">"Teclado, touchpad, ecrã, som"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Não disponível com o NFC desativado"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar, instale primeiro uma app de pagamento"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Apps recentes, apps predefinidas"</string>
@@ -3930,6 +3933,10 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmes e outras interrupções"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Duração das Definições rápidas"</string>
+    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
+    <skip />
+    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
+    <skip />
     <string name="sound_work_settings" msgid="752627453846309092">"Sons do perfil de trabalho"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Usar sons do perfil pessoal"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Use os mesmos sons que o seu perfil pessoal"</string>
@@ -4614,18 +4621,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permita que esta app leia, modifique e elimine todos os ficheiros neste dispositivo ou em qualquer volume de armazenamento ligado. Se a autorização for concedida, a app poderá aceder aos ficheiros sem o seu conhecimento explícito."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pode aceder a todos os ficheiros"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatização do ecrã"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_app_page_summary (9014447574247981720) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Esta app vai poder ver e interagir com o conteúdo do ecrã de outras apps para ajudar a concluir tarefas, mesmo quando as apps estão em segundo plano"</string>
+    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Se não permitir a automatização do ecrã, a app <xliff:g id="ID_1">%1$s</xliff:g> ainda pode interagir com as apps associadas à app <xliff:g id="ID_2">%1$s</xliff:g> de outras formas"</string>
+    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Permita que as apps ajudem a concluir tarefas interagindo com o conteúdo do ecrã de outras apps"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Perguntar sempre"</string>
-    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
-    <skip />
-    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Não permitir"</string>
+    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Permitir sempre"</string>
+    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Não permitir"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificações em ecrã inteiro"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permitir notificações desta app em ecrã inteiro"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permita que esta app mostre notificações que ocupam o ecrã inteiro quando o dispositivo está bloqueado. As apps podem usá-las para destacar alarmes, chamadas recebidas ou outras notificações urgentes."</string>
@@ -4903,6 +4904,16 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Inverter a câmara para tirar uma selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Modo de navegação"</string>
+    <!-- no translation found for update_device_category_title (6588608879793647296) -->
+    <skip />
+    <!-- no translation found for interaction_category_title (5712424978503035872) -->
+    <skip />
+    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
+    <skip />
+    <!-- no translation found for system_management_category_title (5405726452116686478) -->
+    <skip />
+    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
+    <skip />
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navegação com 2 botões"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Para mudar de app, deslize rapidamente para cima no botão do ecrã principal. Para ver todas as apps, volte a deslizar rapidamente para cima. Para retroceder, toque no botão Anterior."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"Notificações e Definições rápidas"</string>
@@ -6045,8 +6056,7 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"Adicione informações de recuperação"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Valide as informações de recuperação"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtros da loja de apps"</string>
-    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
-    <skip />
+    <string name="supervision_app_store_filters_keywords" msgid="8281936888718160336">"Filtros de apps, filtros de apps para adultos, filtros para adultos, apps explícitas, bloquear apps, bloquear apps explícitas, bloquear apps para adultos"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtre apps com base na maturidade do respetivo conteúdo"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Cada loja classifica o conteúdo de forma diferente. A classificação de uma app pode variar consoante a loja."</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtre apps por classificações de conteúdo"</string>
