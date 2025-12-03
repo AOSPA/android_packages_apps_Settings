@@ -15,6 +15,8 @@
  */
 package com.android.settings.location;
 
+import static android.app.admin.DpcAuthority.DPC_AUTHORITY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -27,6 +29,8 @@ import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyResourcesManager;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.UserInfo;
@@ -61,6 +65,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -135,18 +140,12 @@ public class LocationInjectedServicesPreferenceControllerTest {
         ShadowUserManager.getShadow().addProfile(new UserInfo(UserHandle.myUserId(), "", 0));
         ShadowUserManager.getShadow().addProfile(new UserInfo(fakeWorkProfileId, "",
                 UserInfo.FLAG_MANAGED_PROFILE | UserInfo.FLAG_PROFILE));
-
-        // Mock RestrictedLockUtils.checkIfRestrictionEnforced and let it return non-null.
-        final List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
-        enforcingUsers.add(new UserManager.EnforcingUser(fakeWorkProfileId,
-                UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
-        final ComponentName componentName = new ComponentName("test", "test");
-        // Ensure that RestrictedLockUtils.checkIfRestrictionEnforced doesn't return null.
-        ShadowUserManager.getShadow().setUserRestrictionSources(
-                UserManager.DISALLOW_SHARE_LOCATION,
-                UserHandle.of(fakeWorkProfileId),
-                enforcingUsers);
-        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(componentName);
+        // Mock the admin restriction on the preference.
+        ComponentName componentName = new ComponentName("test", "test");
+        EnforcingAdmin enforcingAdmin = new EnforcingAdmin("test", DPC_AUTHORITY,
+                UserHandle.of(UserHandle.myUserId()), componentName);
+        when(mDevicePolicyManager.getEnforcingAdminsForPolicy(any(), anyInt())).thenReturn(
+                new PolicyEnforcementInfo(List.of(enforcingAdmin)));
 
         mController.displayPreference(mScreen);
 
@@ -166,14 +165,9 @@ public class LocationInjectedServicesPreferenceControllerTest {
         ShadowUserManager.getShadow().addProfile(new UserInfo(UserHandle.myUserId(), "", 0));
         ShadowUserManager.getShadow().addProfile(new UserInfo(fakeWorkProfileId, "",
                 UserInfo.FLAG_MANAGED_PROFILE | UserInfo.FLAG_PROFILE));
-
-        // Mock RestrictedLockUtils.checkIfRestrictionEnforced and let it return null.
-        // Empty enforcing users.
-        final List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
-        ShadowUserManager.getShadow().setUserRestrictionSources(
-                UserManager.DISALLOW_SHARE_LOCATION,
-                UserHandle.of(fakeWorkProfileId),
-                enforcingUsers);
+        // Mock restricted preference and make it return empty admins.
+        when(mDevicePolicyManager.getEnforcingAdminsForPolicy(any(), anyInt())).thenReturn(
+                new PolicyEnforcementInfo(Collections.emptyList()));
 
         mController.displayPreference(mScreen);
 
@@ -192,18 +186,12 @@ public class LocationInjectedServicesPreferenceControllerTest {
         ShadowUserManager.getShadow().addProfile(new UserInfo(UserHandle.myUserId(), "", 0));
         ShadowUserManager.getShadow().setPrivateProfile(fakePrivateProfileId, "private", 0);
         ShadowUserManager.getShadow().addUserProfile(UserHandle.of(fakePrivateProfileId));
-
-        // Mock RestrictedLockUtils.checkIfRestrictionEnforced and let it return non-null.
-        final List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
-        enforcingUsers.add(new UserManager.EnforcingUser(fakePrivateProfileId,
-                UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
-        final ComponentName componentName = new ComponentName("test", "test");
-        // Ensure that RestrictedLockUtils.checkIfRestrictionEnforced doesn't return null.
-        ShadowUserManager.getShadow().setUserRestrictionSources(
-                UserManager.DISALLOW_SHARE_LOCATION,
-                UserHandle.of(fakePrivateProfileId),
-                enforcingUsers);
-        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(componentName);
+        // Mock the admin restriction on the preference.
+        ComponentName componentName = new ComponentName("test", "test");
+        EnforcingAdmin enforcingAdmin = new EnforcingAdmin("test", DPC_AUTHORITY,
+                UserHandle.of(UserHandle.myUserId()), componentName);
+        when(mDevicePolicyManager.getEnforcingAdminsForPolicy(any(), anyInt())).thenReturn(
+                new PolicyEnforcementInfo(List.of(enforcingAdmin)));
 
         mController.displayPreference(mScreen);
 
@@ -223,14 +211,9 @@ public class LocationInjectedServicesPreferenceControllerTest {
         ShadowUserManager.getShadow().addProfile(new UserInfo(UserHandle.myUserId(), "", 0));
         ShadowUserManager.getShadow().setPrivateProfile(fakePrivateProfileId, "private", 0);
         ShadowUserManager.getShadow().addUserProfile(UserHandle.of(fakePrivateProfileId));
-
-        // Mock RestrictedLockUtils.checkIfRestrictionEnforced and let it return null.
-        // Empty enforcing users.
-        final List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
-        ShadowUserManager.getShadow().setUserRestrictionSources(
-                UserManager.DISALLOW_SHARE_LOCATION,
-                UserHandle.of(fakePrivateProfileId),
-                enforcingUsers);
+        // Mock restricted preference and make it return empty admins.
+        when(mDevicePolicyManager.getEnforcingAdminsForPolicy(any(), anyInt())).thenReturn(
+                new PolicyEnforcementInfo(Collections.emptyList()));
 
         mController.displayPreference(mScreen);
 
@@ -250,6 +233,12 @@ public class LocationInjectedServicesPreferenceControllerTest {
 
     @Test
     public void withUserRestriction_shouldDisableLocationAccuracy() {
+        // Mock the admin restriction on the preference.
+        ComponentName componentName = new ComponentName("test", "test");
+        EnforcingAdmin enforcingAdmin = new EnforcingAdmin("test", DPC_AUTHORITY,
+                UserHandle.of(UserHandle.myUserId()), componentName);
+        when(mDevicePolicyManager.getEnforcingAdminsForPolicy(any(), anyInt())).thenReturn(
+                new PolicyEnforcementInfo(List.of(enforcingAdmin)));
         final List<Preference> preferences = new ArrayList<>();
         final RestrictedAppPreference pref = new RestrictedAppPreference(mContext,
                 UserManager.DISALLOW_CONFIG_LOCATION);
@@ -260,19 +249,6 @@ public class LocationInjectedServicesPreferenceControllerTest {
         doReturn(map).when(mSettingsInjector)
                 .getInjectedSettings(any(Context.class), any(ArraySet.class));
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(new int[]{UserHandle.myUserId()});
-
-        final int userId = UserHandle.myUserId();
-        List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
-        enforcingUsers.add(new UserManager.EnforcingUser(userId,
-                UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
-        ComponentName componentName = new ComponentName("test", "test");
-        // Ensure that RestrictedLockUtils.checkIfRestrictionEnforced doesn't return null.
-        ShadowUserManager.getShadow().setUserRestrictionSources(
-                UserManager.DISALLOW_CONFIG_LOCATION,
-                UserHandle.of(userId),
-                enforcingUsers);
-        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(componentName);
-        when(mDevicePolicyResourcesManager.getString(any(), any())).thenReturn(any());
 
         mController.displayPreference(mScreen);
 
