@@ -23,6 +23,7 @@ import android.telephony.euicc.EuiccManager
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.deviceinfo.PhoneNumberUtil
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -58,7 +59,8 @@ class SimEidPreference(private val context: Context) :
 
     override fun getTitle(context: Context): CharSequence? = eidMetadata.getTitle(context)
 
-    override fun getSummary(context: Context): CharSequence? = eidMetadata?.eid
+    override fun getSummary(context: Context): CharSequence? =
+        eidMetadata?.let { PhoneNumberUtil.expandByTts(it.eid) }
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
