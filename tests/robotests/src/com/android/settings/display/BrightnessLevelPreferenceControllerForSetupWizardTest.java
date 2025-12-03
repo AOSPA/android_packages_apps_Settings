@@ -16,20 +16,25 @@
 
 package com.android.settings.display;
 
+import static android.app.admin.DpcAuthority.DPC_AUTHORITY;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
-
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
+import android.content.ComponentName;
 import android.content.Context;
+import android.os.UserHandle;
+import android.os.UserManager;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
@@ -38,12 +43,20 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Tests for {@link BrightnessLevelPreferenceControllerForSetupWizard}.
  */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowDevicePolicyManager.class})
 public class BrightnessLevelPreferenceControllerForSetupWizardTest {
+    private static final EnforcingAdmin ENFORCING_ADMIN = new EnforcingAdmin("test", DPC_AUTHORITY,
+            UserHandle.CURRENT, new ComponentName("test", "test.class"));
+
     private Context mContext;
     private BrightnessLevelPreferenceControllerForSetupWizard mController;
 
@@ -85,17 +98,29 @@ public class BrightnessLevelPreferenceControllerForSetupWizardTest {
     }
 
     private RestrictedPreference displayPreference(boolean restricted) {
+        setConfigBrightnessPolicyEnforcementInfo(restricted);
         final PreferenceManager manager = new PreferenceManager(mContext);
         final PreferenceScreen screen = manager.createPreferenceScreen(mContext);
         final RestrictedPreference preference = new RestrictedPreference(mContext);
+        // Normally user restriction is set on the preference XML attribute {@link R
+        // .styleable#RestrictedPreference_userRestriction}. For test environment, we set it
+        // explicitly here.
+        preference.getRestrictedPreferenceHelper().setUserRestriction(
+                UserManager.DISALLOW_CONFIG_BRIGHTNESS);
         preference.setKey(mController.getPreferenceKey());
-        preference.setDisabledByAdmin(restricted
-                ? mock(RestrictedLockUtils.EnforcedAdmin.class)
-                : null);
-        assertThat(preference.isDisabledByAdmin()).isEqualTo(restricted);
         screen.addPreference(preference);
 
         mController.displayPreference(screen);
+        assertThat(preference.isDisabledByAdmin()).isEqualTo(restricted);
         return preference;
+    }
+
+
+    private void setConfigBrightnessPolicyEnforcementInfo(boolean restricted) {
+        PolicyEnforcementInfo policyEnforcementInfo = restricted ? new PolicyEnforcementInfo(
+                List.of(ENFORCING_ADMIN)) : new PolicyEnforcementInfo(
+                Collections.emptyList());
+        ShadowDevicePolicyManager.getShadow().setPolicyEnforcementInfoForUserRestriction(
+                UserManager.DISALLOW_CONFIG_BRIGHTNESS, policyEnforcementInfo);
     }
 }
