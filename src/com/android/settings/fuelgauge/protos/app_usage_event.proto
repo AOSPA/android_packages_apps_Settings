@@ -10,6 +10,7 @@ enum AppUsageEventType {
   ACTIVITY_STOPPED = 2;
   DEVICE_SHUTDOWN = 3;
   SCREEN_NON_INTERACTIVE = 4;
+  ACTIVITY_ON_TOP = 5;
 }
 
 message AppUsageEvent {

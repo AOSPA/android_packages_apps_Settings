@@ -16,11 +16,14 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import static android.app.ActivityManager.PROCESS_STATE_TOP;
+
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.getEffectivePackageName;
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.isSystemConsumer;
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.isUidConsumer;
 import static com.android.settingslib.fuelgauge.BatteryStatus.BATTERY_LEVEL_UNKNOWN;
 
+import android.app.ActivityManager;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageEvents.Event;
@@ -370,6 +373,15 @@ public final class DataProcessor {
                 String.format(
                         "Read %d relevant events (%d total) from UsageStatsManager for all users",
                         numEventsFetched, numAllEventsFetched));
+
+        final List<AppUsageEvent> appOnScreenEvents = getCurrentAppOnTopEvents(context);
+        Log.d(
+                TAG,
+                String.format(
+                        "Read %d current on top events from ActivityManager running app processes",
+                        appOnScreenEvents.size()));
+
+        appUsageEventList.addAll(appOnScreenEvents);
         return appUsageEventList;
     }
 
@@ -718,6 +730,7 @@ public final class DataProcessor {
         // Attributes the list of AppUsagePeriod into device events and instance events for further
         // use.
         final List<AppUsageEvent> deviceEvents = new ArrayList<>();
+        final ArrayMap<Long, List<AppUsageEvent>> appOnTopEventsByUid = new ArrayMap<>();
         final ArrayMap<Integer, List<AppUsageEvent>> usageEventsByInstanceId = new ArrayMap<>();
         for (final AppUsageEvent event : appUsageEvents) {
             final AppUsageEventType eventType = event.getType();
@@ -732,6 +745,12 @@ public final class DataProcessor {
                     || eventType == AppUsageEventType.SCREEN_NON_INTERACTIVE) {
                 // Track device-wide events in their own list as they affect any app.
                 deviceEvents.add(event);
+            } else if (eventType == AppUsageEventType.ACTIVITY_ON_TOP) {
+                final long uid = event.getUid();
+                if (appOnTopEventsByUid.get(uid) == null) {
+                    appOnTopEventsByUid.put(uid, new ArrayList<>());
+                }
+                appOnTopEventsByUid.get(uid).add(event);
             }
         }
         if (usageEventsByInstanceId.isEmpty()) {
@@ -750,6 +769,7 @@ public final class DataProcessor {
             // The same instance must have same userId and packageName.
             final AppUsageEvent firstEvent = usageEvents.get(0);
             final long eventUserId = firstEvent.getUserId();
+            final long uid = firstEvent.getUid();
             final String packageName =
                     getEffectivePackageName(
                             context,
@@ -759,7 +779,8 @@ public final class DataProcessor {
 
             // Append the device events to the per-instance app events list, then sort the
             // usageEvents in ascending order, handling reverse order event cases.
-            combineDeviceEventsToCurrentUsageEvent(usageEvents, deviceEvents);
+            combineDeviceEventsToCurrentUsageEvent(usageEvents, deviceEvents,
+                    appOnTopEventsByUid.get(uid));
 
             // A package might have multiple instances. Computes the usage period per instance id
             // and then merges them into the same user-package map.
@@ -795,7 +816,8 @@ public final class DataProcessor {
         for (final AppUsageEvent event : usageEvents) {
             final long eventTime = event.getTimestamp();
 
-            if (event.getType() == AppUsageEventType.ACTIVITY_RESUMED) {
+            if (event.getType() == AppUsageEventType.ACTIVITY_RESUMED
+                    || event.getType() == AppUsageEventType.ACTIVITY_ON_TOP) {
                 if (pendingUsagePeriod.hasStartTime()) {
                     // If there is an existing start time that is further back than the max usage
                     // duration, then close the previous usage period and start a new one.
@@ -1007,8 +1029,12 @@ public final class DataProcessor {
     @VisibleForTesting
     static void combineDeviceEventsToCurrentUsageEvent(
             final List<AppUsageEvent> usageEvents,
-            final List<AppUsageEvent> deviceEvents) {
+            final List<AppUsageEvent> deviceEvents,
+            @Nullable final List<AppUsageEvent> appOnTopEvents) {
         usageEvents.addAll(deviceEvents);
+        if (appOnTopEvents != null) {
+            usageEvents.addAll(appOnTopEvents);
+        }
         Collections.sort(usageEvents, APP_USAGE_EVENT_TIMESTAMP_COMPARATOR);
 
         // For the top activity with screen-off events, the UsageStatsManager usually records the
@@ -1050,6 +1076,31 @@ public final class DataProcessor {
             }
         }
         return resultList;
+    }
+
+    private static List<AppUsageEvent> getCurrentAppOnTopEvents(final Context context) {
+        final long startTime = System.currentTimeMillis();
+        final long currentTimeMs = getCurrentTimeMillis();
+        final ActivityManager activityManager = context.getSystemService(ActivityManager.class);
+        final List<ActivityManager.RunningAppProcessInfo> runningAppProcesses =
+                activityManager.getRunningAppProcesses();
+        if (runningAppProcesses == null || runningAppProcesses.isEmpty()) {
+            return  new ArrayList<>();
+        }
+        final List<AppUsageEvent> appOnScreenEvents = new ArrayList<>(runningAppProcesses.size());
+        for (ActivityManager.RunningAppProcessInfo appProcessInfo : runningAppProcesses) {
+            if (appProcessInfo.processState == PROCESS_STATE_TOP) {
+                final int uid = appProcessInfo.uid;
+                appOnScreenEvents.add(AppUsageEvent.newBuilder()
+                        .setTimestamp(currentTimeMs)
+                        .setUid(uid)
+                        .setType(AppUsageEventType.ACTIVITY_ON_TOP)
+                        .setUserId(UserHandle.getUserId(uid)).build());
+            }
+        }
+        Log.d(TAG, String.format("getCurrentAppOnTopEvents() from ActivityManager in %d/ms",
+                System.currentTimeMillis() - startTime));
+        return appOnScreenEvents;
     }
 
     private static void validateAndAddToPeriodList(

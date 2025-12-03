@@ -206,9 +206,11 @@ public final class DataProcessorTest {
     public void combineDeviceEventsToCurrentUsageEvent_returnExpectedResult() {
         List<AppUsageEvent> usageEvents;
         List<AppUsageEvent> deviceEvents;
+        List<AppUsageEvent> appOnTopEvents;
         final long screenOffTime = 60L;
         final String packageName = "com.android.settings";
         deviceEvents = new ArrayList<>();
+        appOnTopEvents = null;
         appendAppUsageEventList(
                 deviceEvents,
                 /* userId= */ 1,
@@ -227,7 +229,8 @@ public final class DataProcessorTest {
                 Map.of(screenOffTime, AppUsageEventType.ACTIVITY_STOPPED)
         );
 
-        DataProcessor.combineDeviceEventsToCurrentUsageEvent(usageEvents, deviceEvents);
+        DataProcessor.combineDeviceEventsToCurrentUsageEvent(
+                usageEvents, deviceEvents, appOnTopEvents);
 
         // STOP event first for the same timestamp.
         assertThat(usageEvents).hasSize(2);
@@ -252,7 +255,8 @@ public final class DataProcessorTest {
                 )
         );
 
-        DataProcessor.combineDeviceEventsToCurrentUsageEvent(usageEvents, deviceEvents);
+        DataProcessor.combineDeviceEventsToCurrentUsageEvent(
+                usageEvents, deviceEvents, appOnTopEvents);
 
         // Swap will stop for the first STOP events exceeds the reverse range.
         assertThat(usageEvents).hasSize(5);
@@ -282,7 +286,8 @@ public final class DataProcessorTest {
                 )
         );
 
-        DataProcessor.combineDeviceEventsToCurrentUsageEvent(usageEvents, deviceEvents);
+        DataProcessor.combineDeviceEventsToCurrentUsageEvent(
+                usageEvents, deviceEvents, appOnTopEvents);
 
         // Swap will stop for the first Non-STOP events.
         assertThat(usageEvents).hasSize(6);
@@ -317,7 +322,8 @@ public final class DataProcessorTest {
                         300L, AppUsageEventType.SCREEN_NON_INTERACTIVE)
         );
 
-        DataProcessor.combineDeviceEventsToCurrentUsageEvent(usageEvents, deviceEvents);
+        DataProcessor.combineDeviceEventsToCurrentUsageEvent(
+                usageEvents, deviceEvents, appOnTopEvents);
 
         assertThat(usageEvents).hasSize(6);
         assertAppUsageEvent(usageEvents.get(0),
@@ -333,6 +339,23 @@ public final class DataProcessorTest {
                 AppUsageEventType.ACTIVITY_STOPPED, 310L);
         assertAppUsageEvent(usageEvents.get(5),
                 AppUsageEventType.SCREEN_NON_INTERACTIVE, 300L);
+
+        // Case5: merge the on top event
+        appOnTopEvents = new ArrayList<>();
+        appendAppUsageEventList(
+                appOnTopEvents,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(400L, AppUsageEventType.ACTIVITY_ON_TOP)
+        );
+
+        DataProcessor.combineDeviceEventsToCurrentUsageEvent(
+                usageEvents, new ArrayList<>(), appOnTopEvents);
+
+        assertThat(usageEvents).hasSize(7);
+        assertAppUsageEvent(usageEvents.get(6),
+                AppUsageEventType.ACTIVITY_ON_TOP, 400L);
     }
 
     @Test
@@ -474,6 +497,115 @@ public final class DataProcessorTest {
                 .get(/* UserId= */ 1L).get(packageName);
         assertThat(periods).hasSize(1);
         assertAppUsagePeriod(periods.get(0), endTime - DURATION_FOR_UNMATCHED_EVENT, endTime);
+    }
+
+    @Test
+    public void generateAppUsagePeriodMap_withAppOnTopEvents_returnExpectedResult() {
+        final long startTime = Duration.ofHours(4).toMillis();
+        final long endTime = Duration.ofHours(6).toMillis();
+        final long queryBuffer = DatabaseUtils.USAGE_QUERY_BUFFER_HOURS;
+        final String packageName = "com.android.settings";
+        DataProcessor.sDebug = true;
+        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
+                List.of(
+                        new BatteryLevelData.PeriodBatteryLevelData(
+                                /* batteryLevelMap= */ Map.of(startTime, 100, endTime, 100),
+                                /* timestamps= */ List.of(startTime, endTime),
+                                /* isStartTimestamp= */ false)
+                );
+        List<AppUsageEvent> eventList;
+        Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> result;
+        List<AppUsagePeriod> periods;
+
+        // Case1: App still on top while calculate the usagePeriod.
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        startTime + 1L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        startTime + 2L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        endTime + 10L,
+                        AppUsageEventType.ACTIVITY_ON_TOP)
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(1);
+        // A UsagePeriod from first resume to the app on top event then trim to slot range.
+        assertAppUsagePeriod(periods.get(0), startTime + 1L, endTime);
+
+        // Case2: App on top but the period start earlier than query buffer.
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(
+                        endTime - queryBuffer - 2L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        endTime - 1L,
+                        AppUsageEventType.ACTIVITY_ON_TOP)
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(1);
+        // Split into 2 periods and the earlier one out of range.
+        assertAppUsagePeriod(periods.get(0), endTime - 1L, endTime);
+
+        // Case3: Single app on top event.
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(endTime - DURATION_FOR_UNMATCHED_EVENT,
+                        AppUsageEventType.ACTIVITY_ON_TOP)
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        // On top events must combine with instance events.
+        assertThat(result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)).isNull();
+
+        // Case4: On top event after a period.
+        eventList = new ArrayList<>();
+        appendAppUsageEventList(
+                eventList,
+                /* userId= */ 1,
+                /* instanceId= */ 2,
+                packageName,
+                Map.of(startTime + 10L,
+                        AppUsageEventType.ACTIVITY_RESUMED,
+                        startTime + 20L,
+                        AppUsageEventType.ACTIVITY_STOPPED,
+                        endTime - DURATION_FOR_UNMATCHED_EVENT,
+                        AppUsageEventType.ACTIVITY_ON_TOP)
+        );
+
+        result = DataProcessor.generateAppUsagePeriodMap(
+                mContext, hourlyBatteryLevelsPerDay, eventList, new ArrayList<>());
+
+        periods = result.get(/* dailyIndex= */0).get(/* hourlyIndex= */0)
+                .get(/* UserId= */ 1L).get(packageName);
+        assertThat(periods).hasSize(2);
+        // Generated 2 periods, the eariler one out
+        assertAppUsagePeriod(periods.get(0), startTime + 10L, startTime + 20L);
+        assertAppUsagePeriod(periods.get(1), endTime - DURATION_FOR_UNMATCHED_EVENT, endTime);
     }
 
     @Test
@@ -3181,13 +3313,16 @@ public final class DataProcessorTest {
             final long userId,
             final int instanceId,
             final String packageName) {
-        return AppUsageEvent.newBuilder()
-                .setType(type)
+        final AppUsageEvent.Builder builder = AppUsageEvent.newBuilder();
+        builder.setType(type)
                 .setTimestamp(timestamp)
                 .setUserId(userId)
-                .setPackageName(packageName)
-                .setInstanceId(instanceId)
-                .build();
+                .setPackageName(packageName);
+        if (type == AppUsageEventType.ACTIVITY_RESUMED
+                || type == AppUsageEventType.ACTIVITY_STOPPED) {
+            builder.setInstanceId(instanceId);
+        }
+        return builder.build();
     }
 
     private AppUsagePeriod buildAppUsagePeriod(final long start, final long end) {
