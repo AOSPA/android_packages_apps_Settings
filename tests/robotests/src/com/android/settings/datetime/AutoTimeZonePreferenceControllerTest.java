@@ -283,6 +283,8 @@ public class AutoTimeZonePreferenceControllerTest {
                                 : Capabilities.CAPABILITY_NOT_SUPPORTED)
                 .setSetManualTimeZoneCapability(Capabilities.CAPABILITY_POSSESSED)
                 .setConfigureNotificationsEnabledCapability(Capabilities.CAPABILITY_POSSESSED)
+                .setConfigureTimeZoneOffsetChangeNotificationsEnabledCapability(
+                        Capabilities.CAPABILITY_POSSESSED)
                 .build();
         TimeZoneConfiguration config = new TimeZoneConfiguration.Builder()
                 .setAutoDetectionEnabled(autoEnabled)
