@@ -17,12 +17,14 @@
 package com.android.settings.device
 
 import android.app.settings.SettingsEnums
+import androidx.preference.Preference
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows
 import org.robolectric.shadows.androidx.fragment.FragmentController
 
 @RunWith(RobolectricTestRunner::class)
@@ -51,5 +53,17 @@ class DeviceDashboardFragmentTest {
     @Test
     fun getMetricsCategory_shouldReturnCorrectEnum() {
         assertThat(fragment.getMetricsCategory()).isEqualTo(SettingsEnums.SETTINGS_DEVICE_CATEGORY)
+    }
+
+    @Test
+    fun displayPreference_shouldBeConfiguredCorrectly() {
+        val displayPreference = fragment.findPreference<Preference>("device_dashboard_display")
+        assertThat(displayPreference).isNotNull()
+        assertThat(displayPreference?.fragment).isEqualTo("com.android.settings.DisplaySettings")
+        assertThat(displayPreference?.title).isEqualTo(fragment.context?.getString(R.string.display_settings))
+        assertThat(displayPreference?.summary).isEqualTo(fragment.context?.getString(R.string.display_dashboard_summary))
+        val icon = displayPreference?.icon
+        assertThat(Shadows.shadowOf(icon).createdFromResId)
+            .isEqualTo(R.drawable.ic_settings_display_filled)
     }
 }
