@@ -66,4 +66,15 @@ class DeviceDashboardFragmentTest {
         assertThat(Shadows.shadowOf(icon).createdFromResId)
             .isEqualTo(R.drawable.ic_settings_display_filled)
     }
+
+    @Test
+    fun soundPreference_shouldBeConfiguredCorrectly() {
+        val soundPreference = fragment.findPreference<Preference>("device_dashboard_sound")
+        assertThat(soundPreference).isNotNull()
+        assertThat(soundPreference?.fragment).isEqualTo("com.android.settings.notification.SoundSettings")
+        assertThat(soundPreference?.title).isEqualTo(fragment.context?.getString(R.string.sound_settings))
+        assertThat(soundPreference?.summary).isEqualTo(fragment.context?.getString(R.string.sound_dashboard_summary))
+        val icon = soundPreference?.icon
+        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_volume_up_filled)
+    }
 }

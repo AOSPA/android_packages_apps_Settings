@@ -83,15 +83,6 @@
             android:summary="@string/notification_dashboard_summary"
             settings:highlightableMenuKey="@string/menu_key_notifications"/>
 
-        <com.android.settings.widget.HomepagePreference
-            android:fragment="com.android.settings.notification.SoundSettings"
-            android:icon="@drawable/ic_homepage_sound"
-            android:key="top_level_sound"
-            android:order="-40"
-            android:title="@string/sound_settings"
-            android:summary="@string/sound_dashboard_summary"
-            settings:highlightableMenuKey="@string/menu_key_sound" />
-
         <com.android.settings.widget.RestrictedHomepagePreference
             android:fragment="com.android.settings.notification.modes.ZenModesListFragment"
             android:icon="@drawable/ic_homepage_modes"
