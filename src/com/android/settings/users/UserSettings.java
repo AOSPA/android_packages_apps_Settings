@@ -1314,10 +1314,10 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         List<UserInfo> users;
-        // Only users that can be switched to should show up here.
+        // Only human users that can be UI-switched to should show up here.
         // e.g. Managed profiles appear under Accounts Settings instead
         users = mUserManager.getAliveUsers().stream()
-                .filter(UserInfo::supportsSwitchToByUser)
+                .filter(UserInfo::isUiSwitchableHumanUser)
                 .collect(Collectors.toList());
 
         final ArrayList<Integer> missingIcons = new ArrayList<>();
