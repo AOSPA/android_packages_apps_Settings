@@ -19,18 +19,21 @@ package com.android.settings.accessibility;
 import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+import static com.android.settings.testutils.AccessibilityTestUtils.launchFragmentInSetupWizardFlow;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,18 +44,23 @@ import androidx.preference.TwoStatePreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.colorinversion.ui.FooterPreference;
+import com.android.settings.testutils.PreferenceExtKt;
 import com.android.settings.testutils.SettingsStoreRule;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowLooper;
 
 import java.util.List;
 
 /** Tests for {@link ToggleColorInversionPreferenceFragment} */
+@Config(shadows = SettingsShadowResources.class)
 @RunWith(RobolectricTestRunner.class)
 public class ToggleColorInversionPreferenceFragmentTest extends
         BaseShortcutInteractionsTestCases<ToggleColorInversionPreferenceFragment> {
@@ -149,6 +157,39 @@ public class ToggleColorInversionPreferenceFragmentTest extends
         assertThat(mFragment.getHelpResource()).isEqualTo(R.string.help_url_color_inversion);
     }
 
+    @Test
+    public void launchFragment_helpUrlResolvable_learnMoreTextIsVisible() {
+        setupHelpUri(/* isResolvable= */ true);
+
+        ToggleColorInversionPreferenceFragment fragment = launchFragment();
+
+        assertThat(isLearnMoreTextVisible(fragment)).isTrue();
+    }
+
+    @Test
+    public void launchFragment_helpUrlNotResolvable_learnMoreTextIsNotVisible() {
+        setupHelpUri(/* isResolvable= */ false);
+
+        ToggleColorInversionPreferenceFragment fragment = launchFragment();
+
+        assertThat(isLearnMoreTextVisible(fragment)).isFalse();
+    }
+
+    @Test
+    public void launchFragmentInSetupWizard_helpUrlResolvable_learnMoreTextIsNotVisible() {
+        setupHelpUri(/* isResolvable= */ true);
+
+        try (FragmentScenario<ToggleColorInversionPreferenceFragment> fragScenario =
+                     launchFragmentInSetupWizardFlow(
+                ToggleColorInversionPreferenceFragment.class, null)) {
+            fragScenario.moveToState(Lifecycle.State.RESUMED)
+                    .onFragment(frag -> mFragment = frag);
+            assertThat(mFragment).isNotNull();
+
+            assertThat(isLearnMoreTextVisible(mFragment)).isFalse();
+        }
+    }
+
     @RequiresFlagsDisabled({
             Flags.FLAG_CATALYST_COLOR_INVERSION,
             com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH
@@ -223,5 +264,30 @@ public class ToggleColorInversionPreferenceFragmentTest extends
                 (FragmentFactory) null).moveToState(Lifecycle.State.RESUMED);
         mFragScenario.onFragment(frag -> mFragment = frag);
         return mFragment;
+    }
+
+    private boolean isLearnMoreTextVisible(ToggleColorInversionPreferenceFragment fragment) {
+        AccessibilityFooterPreference footerPreference =
+                fragment.findPreference(FooterPreference.KEY);
+        View view = PreferenceExtKt.inflateViewHolder(footerPreference).findViewById(
+                com.android.settingslib.widget.preference.footer.R.id.settingslib_learn_more);
+
+        return view.getVisibility() == View.VISIBLE;
+    }
+
+    private void setupHelpUri(boolean isResolvable) {
+        // If the device is not provisioned, the HelperUtils#getHelpIntent would return null
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEVICE_PROVISIONED,
+                1);
+        if (isResolvable) {
+            // Use the Uri that is resolvable by the Settings app to reduce extra test setup
+            SettingsShadowResources.overrideResource(
+                    R.string.help_url_color_inversion,
+                    (new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)).toUri(
+                            Intent.URI_INTENT_SCHEME)
+            );
+        } else {
+            SettingsShadowResources.overrideResource(R.string.help_url_color_inversion, "");
+        }
     }
 }
