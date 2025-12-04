@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"নিচে নামান"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"সরান"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"উপরের দিকে সরান"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> উপরে তুলুন"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> নিচে নামান"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> সরান"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> উপরের দিকে সরান"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"সিস্টেমের ভাষার তালিকা এডিট করুন, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"দেশ, অঞ্চল"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"আবহাওয়া, সেন্টিগ্রেড, ডিগ্রি, তাপমাত্রা, সেলসিয়াস, ফারেনহাইট"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"মেট্রিক, ইম্পেরিয়াল, তাপমাত্রা, উচ্চতা, ওজন, দূরত্ব, সেলসিয়াস, ফারেনহাইট, পাউন্ড, কিলোগ্রাম, কেজি, মাইল, কিলোমিটার, ইঞ্চি, সেন্টিমিটার, মিটার, ইউনিট"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"সংখ্যা, একাধিক সংখ্যা, নম্বর, একাধিক নম্বর, নম্বরিং সিস্টেম"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"রবিবার, সোমবার, মঙ্গলবার, বুধবার, বৃহস্পতিবার, শুক্রবার, শনিবার, প্রথম দিন"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"আঞ্চলিক অভিরুচি"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"ইউনিট ও নম্বর সংক্রান্ত পছন্দ সেট করুন"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"অ্যাপকে আপনার আঞ্চলিক অভিরুচি সম্পর্কে জানতে দিন, যাতে সেগুলি আপনার অভিজ্ঞতা পছন্দমতো করে তুলতে পারে।"</string>
@@ -304,8 +312,12 @@
     <string name="apply" msgid="7834684883190163536">"প্রয়োগ করুন"</string>
     <string name="share" msgid="8502235338607613795">"শেয়ার করুন"</string>
     <string name="add" msgid="8335206931421683426">"যোগ করুন"</string>
+    <!-- no translation found for verify (6452664472920137535) -->
+    <skip />
     <string name="remove" msgid="1028414219245072102">"সরিয়ে দিন"</string>
     <string name="process" msgid="2614220641928709668">"প্রসেস করুন"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"সেটিংস"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"সেটিংস"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"সেটিংস শর্টকাট"</string>
@@ -1189,7 +1201,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"এই নেটওয়ার্কে কোনও ডিভাইস যোগ করার জন্য QR কোড ব্যবহার করুন"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR কোড ফর্ম্যাট ভুল"</string>
     <string name="retry" msgid="7542103800274026915">"আবার করুন"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"অন্য ডিভাইস ব্যবহারকারীদের সাথে শেয়ার করুন"</string>
     <string name="shared_message" msgid="2104244057926025072">"শেয়ার করা হয়েছে"</string>
     <string name="private_message" msgid="5897966950396765392">"ব্যক্তিগত"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"কনফার্ম করুন"</string>
@@ -1533,6 +1544,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"ওয়ালপেপারের বিকল্প"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"লক স্ক্রিন ওয়ালপেপার দেখুন"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"\'ডিসপ্লে সবসময় চালু\' ফিচারের মাধ্যমে লক স্ক্রিন ওয়ালপেপার দেখা যায়"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"অ্যাক্টিভ না থাকলে ডিসপ্লে বন্ধ করুন"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"কোনও ব্যবহারকারী অ্যাক্টিভিটি করছেন না বলে শনাক্ত করা হলে, বিদ্যুৎ সাশ্রয় করতে, ডিসপ্লে বন্ধ হয়ে যায়"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"বোল্ড টেক্সট"</string>
     <string name="title_font_size" msgid="570613010306330622">"ফন্ট সাইজ"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"টেক্সট আরও বড় বা ছোট করুন"</string>
@@ -3469,6 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"এই ব্যবহারকারীর জন্য আপনি অ্যাডমিনের বিশেষ সুবিধা তুলে নিলে, আপনি বা অন্য অ্যাডমিন পরে তাকে তা ফিরিয়ে দিতে পারবেন।"</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"আপনি অ্যাডমিনের বিশেষ সুবিধা সরানোর বিষয়ে নিশ্চিত?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"আপনি এগিয়ে গেলে, শুধুমাত্র অন্যান্য অ্যাডমিন আপনাকে অ্যাডমিনের বিশেষ সুবিধা দিতে পারবেন।"</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"ব্যবহারকারীকে মোছা যাচ্ছে না"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"আপনি এই ডিভাইসের একমাত্র অ্যাডমিন, তাই আপনার ব্যবহারকারীর প্রোফাইল মুছে যাবে না। নিজের ব্যবহারকারীর প্রোফাইল মুছে দিতে চাইলে, অন্য কোনও ব্যবহারকারীকে অ্যাডমিন করতে পারবেন অথবা সিস্টেম &gt; রিসেট করার বিকল্প &gt; সব ডেটা মুছুন (ফ্যাক্টরি রিসেট) বিকল্পে গিয়ে ডিভাইস থেকে সব ডেটা মুছে দিতে পারবেন।"</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"অ্যাডমিনের বিশেষ সুবিধা সরানো যাচ্ছে না"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"এই ডিভাইসে আপনিই একমাত্র অ্যাডমিন ব্যবহারকারী। আপনি আর অ্যাডমিন হতে না চাইলে, প্রথমে অন্য কোনও ব্যবহারকারীকে অ্যাডমিন করতে হবে।"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"জরুরি তথ্য"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>-এর তথ্য ও পরিচিতি"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> খুলুন"</string>
@@ -4084,7 +4101,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"বিজ্ঞপ্তি অর্গানাইজার"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"কম অগ্রাধিকারযুক্ত বিজ্ঞপ্তি বান্ডেল এবং সাইলেন্ট করুন"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"বিজ্ঞপ্তি অর্গানাইজারের জন্য অ্যাপ ম্যানেজ করুন"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"বান্ডেল সবসময় বড় করুন"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"বান্ডেল সম্প্রসারণ"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"অটোমেটিক"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"সবসময় বড় করুন"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"কখনই বড় করবেন না"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"অফিস প্রোফাইল অ্যাপে প্রয়োগ করুন"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"ভিআর(VR) সহায়তাকারী পরিষেবা"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"VR সহায়তাকারী পরিষেবা হিসেবে চলার জন্য কোনও অ্যাপ ইনস্টল করা নেই৷"</string>
@@ -5267,6 +5287,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"আপনার ফোনে যেসব অ্যাপ চলবে"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"কোনও সিম কার্ড যোগ করা যাচ্ছে না"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"কোনও সিম কার্ড যোগ করার আগে স্যাটেলাইট কানেকশন বন্ধ করুন"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"ব্লুটুথের মাধ্যমে কানেক্ট করা থাকলে, বিমান মোড কাজ করে এমন সব ডিভাইস জুড়ে সিঙ্ক করা হবে যেমন ফোন ও স্মার্ট ওয়াচ"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"অ্যাক্সেস পয়েন্টের নাম"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>-এ কনেক্ট থাকলে উপলভ্য থাকে না"</string>
@@ -5373,9 +5394,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"বাঁদিক: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"ডানদিক: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"কেস: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"বাঁদিক, ব্যাটারি: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"ডানদিক, ব্যাটারি: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"কেস, ব্যাটারি: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"ব্যাটারিতে আর চার্জ আছে: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"ডানদিকের ব্যাটারি: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"ব্যাটারি, কেস: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"ব্যাটারি: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ব্যাটারি"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"সেটিংস প্যানেল"</string>
@@ -5939,14 +5960,26 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"পিন মনে নেই"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"পিন ভুলে গেছেন?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"অ্যাকাউন্ট ফিরিয়ে আনার ইমেল আপডেট করুন"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"অ্যাকাউন্ট ফিরিয়ে আনার ইমেল যোগ করা হয়েছে"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"অ্যাকাউন্ট ফিরিয়ে আনার ইমেল যাচাই করা হয়েছে"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"অ্যাকাউন্ট ফিরিয়ে আনার ইমেল আপডেট করা হয়েছে"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"পিন আপডেট করা হয়েছে"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"পিন পরিবর্তন করা হয়েছে"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"পিন মোছা হয়েছে"</string>
+    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
+    <skip />
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"পিন মুছুন"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"অ্যাকাউন্ট ফিরিয়ে আনার ইমেল যোগ করুন"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"আপনার ইমেল আইডি যাচাই করুন"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"অ্যাপ স্টোর ফিল্টার"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"অ্যাপগুলিকে, সেগুলির কন্টেন্টের ম্যাচুরিটির ভিত্তিতে ফিল্টার করুন"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"প্রতিটি অ্যাপ বিভিন্ন ধরনের কন্টেন্ট ব্লক করতে পারে। তালিকাভুক্ত নয় এমন অ্যাপ স্টোর আলাদাভাবে ম্যানেজ করতে হবে।"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"ওয়েবসাইট কন্টেন্ট ফিল্টার"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"ওয়েবসাইট ফিল্টার, সাইট ব্লক করুন, ব্রাউজার ফিল্টার, অনুপযুক্ত সাইট ব্লক করুন, সাইট ফিল্টার করুন, সার্চ ফলাফল ব্লক করুন, অনুপযুক্ত সার্চ ফলাফল ফিল্টার করুন, কন্টেন্ট সংক্রান্ত বিধিনিষেধ"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"এই ফোনের কিছু অ্যাপ এবং ব্রাউজারে অনুপযুক্ত কন্টেন্ট ফিল্টার করতে সাহায্য করে। অনুপযুক্ত কন্টেন্ট এখনও অন্যান্য অ্যাপ, ডিভাইস বা ব্রাউজারে দেখা যেতে পারে।"</string>
@@ -5999,4 +6032,18 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"পেয়ার করা হচ্ছে"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> কানেক্ট করা হয়েছে"</string>
+    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
+    <skip />
 </resources>

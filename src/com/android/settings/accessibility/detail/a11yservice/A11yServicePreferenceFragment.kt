@@ -32,7 +32,6 @@ import androidx.annotation.VisibleForTesting
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.AccessibilityStatsLogUtils
-import com.android.settings.accessibility.BaseSupportFragment
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ToggleShortcutPreferenceController
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
@@ -40,11 +39,12 @@ import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceScree
 import com.android.settings.accessibility.extensions.getFeatureName
 import com.android.settings.accessibility.extensions.isServiceEnabled
 import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceController
+import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
 
 /** Fragment that shows the detail screen of an AccessibilityService */
-open class A11yServicePreferenceFragment : BaseSupportFragment() {
+open class A11yServicePreferenceFragment : DashboardFragment() {
     private val tag = A11yServicePreferenceFragment::class.simpleName
     private var disabledStateLogged = false
     private var startTimeMillisForLogging = 0L
@@ -174,13 +174,22 @@ open class A11yServicePreferenceFragment : BaseSupportFragment() {
     }
 
     private fun getFeatureComponentName(): ComponentName {
-        return requireNotNull(
-            getFragmentArguments()
-                .getParcelable(
+        val arguments = getFragmentArguments()
+
+        return if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
+            requireNotNull(
+                arguments.getString(AccessibilitySettings.EXTRA_COMPONENT_NAME)?.let {
+                    ComponentName.unflattenFromString(it)
+                }
+            )
+        } else {
+            requireNotNull(
+                arguments.getParcelable(
                     AccessibilitySettings.EXTRA_COMPONENT_NAME,
                     ComponentName::class.java,
                 )
-        )
+            )
+        }
     }
 
     override fun getPreferenceScreenResId(): Int {
@@ -226,7 +235,17 @@ open class A11yServicePreferenceFragment : BaseSupportFragment() {
     }
 
     override fun getPreferenceScreenBindingArgs(context: Context): Bundle? {
-        return getFragmentArguments()
+        return if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
+            // TODO: b/447555338 - Replace this Bundle with KeyParameters.
+            Bundle(1).apply {
+                putString(
+                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
+                    getFeatureComponentName().flattenToString(),
+                )
+            }
+        } else {
+            getFragmentArguments()
+        }
     }
 
     /**

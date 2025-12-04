@@ -208,7 +208,7 @@
     <bool name="config_hide_skip_security_options_in_suw">false</bool>
 
     <!-- Whether to support click input for the pattern component -->
-    <bool name="config_enable_pattern_input_click_support">false</bool>
+    <bool name="config_enable_pattern_input_click_support">true</bool>
 
     <!-- Whether to use a UI variant that minimizes the number of UI elements on screen. This is
          typically used when there is not enough space to display everything, because pattern view
@@ -755,9 +755,7 @@
     <!-- Whether to show the "glanceable hub" settings on mobile. -->
     <bool name="config_show_glanceable_hub_toggle_setting_mobile">false</bool>
 
-    <!-- Whether to show a "restrict to wireless charging" settings option in screensaver and hub
-         mode settings (false by default). -->
-    <bool name="config_show_restrict_to_wireless_charging">false</bool>
+
 
     <!-- The extra value for battery tip -->
     <integer name="config_battery_extra_tip_value">12</integer>
@@ -959,4 +957,9 @@
 
     <!-- Comma separated list of Safety Center safety source IDs to show in the same task as Safety Center -->
     <string name="config_same_task_safety_source_ids" translatable="false">AdvancedProtection,AndroidAccessibility,AndroidAppFunctionAccess,AndroidBackgroundLocation,AndroidBiometrics,AndroidFaceUnlock,AndroidFingerprintUnlock,AndroidHealthConnect,AndroidLockScreen,AndroidPrivateSpace,AndroidNotificationListener,AndroidPermissionAutoRevoke,AndroidPrivacyAppDataSharingUpdates,AndroidWearUnlock,AndroidWorkPolicyInfo</string>
+
+    <!-- Resolutions shown on external display (for native resolutions only). There must be an even
+         number of values, each pair being width x height. If empty, all resolutions are supported. -->
+    <integer-array name="config_resolutionsShownOnExternalDisplay" translatable="false"/>
+
 </resources>

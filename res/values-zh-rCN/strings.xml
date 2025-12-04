@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"下移"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"移除"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"移至顶部"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"上移<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"下移<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"移除<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"将<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>移至顶部"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"修改系统语言列表，<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"国家/地区, 地区, country, territory"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"天气, 摄氏温度, 度, 温度, 摄氏度, 华氏度, weather, centigrade, degrees, temp, celsius, fahrenheit"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"公制, 英制, 温度, 高度, 重量, 距离, 摄氏度, 华氏度, 磅, 千克, kg, 英里, 公里, 英寸, 厘米, 米, 单位, metric, imperial, temperature, height, weight, distance, celsius, fahrenheit, pounds, kilograms, kg, mile, kilometer, inches, centimeters, meters, unit"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"数字, 数位, 数, 数目, 编号系统, digit, digits, number, numbers, numbering system"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"星期日, 星期一, 星期二, 星期三, 星期四, 星期五, 星期六, 第一天, sunday, monday, tuesday, wednesday, thursday, friday, saturday, first day"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"地区偏好设置"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"设置单位和数字偏好设置"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"将您的地区偏好设置告知应用，使应用能够为您提供个性化体验。"</string>
@@ -304,8 +312,11 @@
     <string name="apply" msgid="7834684883190163536">"应用"</string>
     <string name="share" msgid="8502235338607613795">"分享"</string>
     <string name="add" msgid="8335206931421683426">"添加"</string>
+    <string name="verify" msgid="6452664472920137535">"验证"</string>
     <string name="remove" msgid="1028414219245072102">"移除"</string>
     <string name="process" msgid="2614220641928709668">"处理"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"设置"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"设置"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"设置快捷方式"</string>
@@ -989,7 +1000,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"可连接的蓝牙音频设备的数量上限"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"选择已连接蓝牙音频设备的数量上限"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC 详细供应商调试日志"</string>
-    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"在 bug 报告中纳入更多的设备专属供应商日志，其中可能包含私密信息。"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"在错误报告中纳入更多的设备专属供应商日志，其中可能包含私密信息。"</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"未经过滤的 NFC NCI 日志"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"捕获 NFC 详情数据包，其中可能包含私密信息。"</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"要重启设备吗？"</string>
@@ -1189,7 +1200,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"使用二维码将设备添加到此网络"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"二维码的格式无效"</string>
     <string name="retry" msgid="7542103800274026915">"重试"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"与其他设备用户共享"</string>
     <string name="shared_message" msgid="2104244057926025072">"共享"</string>
     <string name="private_message" msgid="5897966950396765392">"私有"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"确认"</string>
@@ -1533,6 +1543,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"壁纸选项"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"显示锁屏壁纸"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"使用“屏幕常亮”功能时，显示锁屏壁纸"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"无活动时关闭显示屏"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"在未检测到用户活动时关闭显示屏以节省电量"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"粗体文字"</string>
     <string name="title_font_size" msgid="570613010306330622">"字体大小"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"放大或缩小文字"</string>
@@ -3469,6 +3481,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"如果您移除该用户的管理员权限，您或其他管理员之后可以重新授予该权限。"</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"确定要移除自己的管理员权限吗？"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"如果您继续操作，只有其他管理员才能授予您管理员权限。"</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"无法删除用户"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"您是此设备上的唯一管理员，因此无法删除您的用户个人资料。如果您想删除自己的用户个人资料，可以前往“系统”&gt;“重置选项”&gt;“清除所有数据（恢复出厂设置）”，将其他用户设为管理员或清除设备中的所有数据。"</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"无法撤销管理员权限"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"您是此设备上的唯一管理员用户。如果您不想再担任管理员，需要先将其他用户设为管理员。"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"急救信息"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>的相关信息和联系人信息"</string>
     <string name="open_app_button" msgid="5025229765547191710">"打开“<xliff:g id="APP_NAME">%1$s</xliff:g>”"</string>
@@ -4087,7 +4103,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"通知整理工具"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"对优先级较低的通知进行整合并静音"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"管理用于整理通知的应用"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"始终展开通知分组"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"展开分组"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"自动"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"始终展开"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"永不展开"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"应用于工作资料应用"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服务"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"没有任何已安装的应用请求以 VR 助手服务的形式运行。"</string>
@@ -5286,6 +5305,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"您的手机上支持的应用"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"无法添加 SIM 卡"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"请先断开卫星信号连接，然后再添加 SIM 卡"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"通过蓝牙连接后，飞行模式会在手机和手表等受支持的设备之间同步"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"接入点名称"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"连接到<xliff:g id="CARRIER">%1$s</xliff:g>时无法使用"</string>
@@ -5392,9 +5412,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"左侧：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"右侧：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"充电盒：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"左侧，电池电量：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"右侧，电池电量：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"保护壳，电池电量：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"左侧电量：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"右侧电量：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"充电盒电量：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"电池电量：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"电池"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"设置面板"</string>
@@ -5484,8 +5504,8 @@
     <string name="stop_app_dlg_text" msgid="4373849065005318901">"应用将被停止应用页面大小兼容设置。"</string>
     <string name="error_pending_updates" msgid="7196832772265874760">"内核更新失败。检查并安装所有待安装的更新。"</string>
     <string name="error_ota_failed" msgid="4762376085470989653">"内核更新失败。应用 OTA 时出错了。"</string>
-    <string name="bug_report_handler_title" msgid="713439959113250125">"Bug 报告处理程序"</string>
-    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"确定要使用哪款应用来处理设备上的 Bug 报告快捷方式。"</string>
+    <string name="bug_report_handler_title" msgid="713439959113250125">"错误报告处理程序"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"确定要使用哪款应用来处理设备上的错误报告快捷方式。"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"个人"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"工作"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"系统默认"</string>
@@ -5959,14 +5979,22 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"忘记了 PIN 码"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"忘记了 PIN 码？"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"更新辅助邮箱"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"已添加辅助邮箱"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"已验证辅助邮箱"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"已更新辅助邮箱"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"已更新 PIN 码"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"已更改 PIN 码"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"已删除 PIN 码"</string>
+    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"验证辅助联系信息"</string>
+    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"您的辅助账号尚未经过验证。如需验证，您需要输入账号密码。"</string>
+    <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"添加辅助联系信息"</string>
+    <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"如果您忘记了 PIN 码，可以使用账号重置 PIN 码"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"删除 PIN 码"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"添加辅助邮箱"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"验证您的邮箱"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"应用商店过滤条件"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"根据应用内容的分级过滤应用"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"每个应用可能会屏蔽不同类型的内容。未列出的应用商店必须单独管理。"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"网站内容过滤器"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"网站过滤器, 屏蔽网站, 浏览器过滤器, 屏蔽含露骨内容的网站, 过滤网站, 屏蔽搜索结果, 过滤含露骨内容的搜索结果, 内容限制, Website filters, Block sites, Browser filters, Block explicit sites, Filter sites, Block search results, Filter explicit search results, content restrictions"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"帮助滤除此手机上某些应用和浏览器中的露骨内容。其他应用、设备或浏览器中仍可能会显示此类内容。"</string>
@@ -6019,4 +6047,17 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"正在配对"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"已连接“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”"</string>
+    <string name="safety_center_rescan_button" msgid="1290673104206018701">"扫描设备"</string>
 </resources>

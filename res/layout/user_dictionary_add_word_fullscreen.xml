@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
             android:text="@string/user_dict_settings_add_word_option_name"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/materialColorOnSurface" />
 
         <EditText
             android:id="@+id/user_dictionary_add_word_text"
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
             android:text="@string/user_dict_settings_add_shortcut_option_name"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/materialColorOnSurface" />
 
         <EditText
             android:id="@+id/user_dictionary_add_shortcut"

@@ -16,12 +16,9 @@
 
 package com.android.settings.applications.specialaccess.pictureinpicture;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 
 import android.app.settings.SettingsEnums;
-import android.content.pm.ActivityInfo;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -46,31 +43,6 @@ public class PictureInPictureDetailsTest {
     }
 
     @Test
-    public void testIgnoredApp() {
-        for (String ignoredPackage : PictureInPictureSettings.IGNORE_PACKAGE_LIST) {
-            assertThat(checkPackageHasPictureInPictureActivities(ignoredPackage, true))
-                            .isFalse();
-        }
-    }
-
-    @Test
-    public void testNonPippableApp() {
-        assertThat(checkPackageHasPictureInPictureActivities("com.android.fakepackage")).isFalse();
-        assertThat(checkPackageHasPictureInPictureActivities("com.android.fakepackage",
-                false, false, false)).isFalse();
-    }
-
-    @Test
-    public void testPippableApp() {
-        assertThat(checkPackageHasPictureInPictureActivities("com.android.fakepackage",
-                true)).isTrue();
-        assertThat(checkPackageHasPictureInPictureActivities("com.android.fakepackage",
-                false, true)).isTrue();
-        assertThat(checkPackageHasPictureInPictureActivities("com.android.fakepackage",
-                true, false)).isTrue();
-    }
-
-    @Test
     public void logSpecialPermissionChange() {
         mFragment.logSpecialPermissionChange(true, "app");
         verify(mFeatureFactory.metricsFeatureProvider).action(
@@ -87,32 +59,5 @@ public class PictureInPictureDetailsTest {
                 mFragment.getMetricsCategory(),
                 "app",
                 0);
-    }
-
-    private boolean checkPackageHasPictureInPictureActivities(String packageName,
-            boolean... resizeableActivityState) {
-        ActivityInfo[] activities = null;
-        if (resizeableActivityState.length > 0) {
-            activities = new ActivityInfo[resizeableActivityState.length];
-            for (int i = 0; i < activities.length; i++) {
-                activities[i] = new MockActivityInfo(resizeableActivityState[i]);
-            }
-        }
-        return PictureInPictureSettings.checkPackageHasPictureInPictureActivities(packageName,
-                activities);
-    }
-
-    private class MockActivityInfo extends ActivityInfo {
-
-        private boolean mSupportsPictureInPicture;
-
-        private MockActivityInfo(boolean supportsPictureInPicture) {
-            mSupportsPictureInPicture = supportsPictureInPicture;
-        }
-
-        @Override
-        public boolean supportsPictureInPicture() {
-            return mSupportsPictureInPicture;
-        }
     }
 }

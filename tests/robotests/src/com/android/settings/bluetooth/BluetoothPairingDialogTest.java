@@ -27,21 +27,31 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.Intent;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -50,10 +60,14 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
+import org.robolectric.shadows.ShadowToast;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialogCompat.class)
 public class BluetoothPairingDialogTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String FILLER = "text that goes in a view";
     private static final String FAKE_DEVICE_NAME = "Fake Bluetooth Device";
@@ -464,6 +478,88 @@ public class BluetoothPairingDialogTest {
         // verify message is what we expect it to be and is visible
         TextView message = frag.getmDialog().findViewById(R.id.pairing_group_message);
         assertThat(message.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ADD_PROGRESS_BAR_TO_THE_POSITIVE_BUTTON_IN_PASSKEY_OR_PING_DIALOG)
+    public void displayPasskeyDialog_enableAddProgressFlag_showsPositiveContainer() {
+        when(controller.getDialogType())
+                .thenReturn(BluetoothPairingController.DISPLAY_PASSKEY_DIALOG);
+
+        BluetoothPairingDialogFragment frag = makeFragment();
+        ConstraintLayout positiveContainer =
+                frag.getmDialog().findViewById(R.id.positive_button_container);
+        ProgressBar progressBar = frag.getmDialog().findViewById(R.id.positive_button_progress_bar);
+
+        assertThat(positiveContainer.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(progressBar.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ADD_PROGRESS_BAR_TO_THE_POSITIVE_BUTTON_IN_PASSKEY_OR_PING_DIALOG)
+    public void displayPasskeyDialog_enableAddProgressFlagClickPositiveButton_showsProgressbar() {
+        when(controller.getDialogType())
+                .thenReturn(BluetoothPairingController.DISPLAY_PASSKEY_DIALOG);
+
+        BluetoothPairingDialogFragment frag = makeFragment();
+        ConstraintLayout positiveContainer =
+                frag.getmDialog().findViewById(R.id.positive_button_container);
+        ProgressBar progressBar = frag.getmDialog().findViewById(R.id.positive_button_progress_bar);
+        positiveContainer.callOnClick();
+
+        assertThat(progressBar.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ADD_PROGRESS_BAR_TO_THE_POSITIVE_BUTTON_IN_PASSKEY_OR_PING_DIALOG)
+    public void displayPasskeyDialog_doNotEnableAddProgressFlag_doesNotshowPositiveContainer() {
+        when(controller.getDialogType())
+                .thenReturn(BluetoothPairingController.DISPLAY_PASSKEY_DIALOG);
+
+        BluetoothPairingDialogFragment frag = makeFragment();
+
+        ConstraintLayout positiveContainer
+                = frag.getmDialog().findViewById(R.id.positive_button_container);
+        assertThat(positiveContainer.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ADD_PROGRESS_BAR_TO_THE_POSITIVE_BUTTON_IN_PASSKEY_OR_PING_DIALOG)
+    public void onReceive_bondedWithPinPairDeviceWithoutFlag_doesNotShowToast() {
+        Intent intent = new Intent();
+        intent.setAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
+        intent.putExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.BOND_BONDED);
+        when(controller.getDialogType())
+                .thenReturn(BluetoothPairingController.DISPLAY_PASSKEY_DIALOG);
+        BluetoothPairingDialog dialog = new BluetoothPairingDialog();
+        dialog.setPairingController(controller);
+
+        dialog.getBroadcastReceiver()
+                .onReceive(ApplicationProvider.getApplicationContext(), intent);
+
+        assertThat(ShadowToast.shownToastCount()).isEqualTo(0);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ADD_PROGRESS_BAR_TO_THE_POSITIVE_BUTTON_IN_PASSKEY_OR_PING_DIALOG)
+    public void onReceive_bondedWithPinPairDeviceWithFlag_showsToast() {
+        Context context = ApplicationProvider.getApplicationContext();
+        String deviceName = "A device";
+        Intent intent = new Intent();
+        intent.setAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
+        intent.putExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.BOND_BONDED);
+        when(controller.getDialogType())
+                .thenReturn(BluetoothPairingController.DISPLAY_PASSKEY_DIALOG);
+        when(controller.getDeviceName())
+                .thenReturn(deviceName);
+        BluetoothPairingDialog dialog = new BluetoothPairingDialog();
+        dialog.setPairingController(controller);
+
+        dialog.getBroadcastReceiver().onReceive(context, intent);
+
+        assertThat(ShadowToast.shownToastCount()).isEqualTo(1);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                context.getString(R.string.bluetooth_pairing_pin_success_message, deviceName));
     }
 
     // Runs a test simulating the user entry dialog type in a situation like device rotation, where

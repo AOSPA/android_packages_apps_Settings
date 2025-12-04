@@ -16,7 +16,6 @@
 
 package com.android.settings.notification;
 
-import android.app.Flags;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -71,11 +70,7 @@ public class SummarizationCombinedPreferenceController extends BasePreferenceCon
     @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        if ((Flags.nmSummarization() || Flags.nmSummarizationUi())
-                && mBackend.isNotificationSummarizationSupported()) {
-            return AVAILABLE;
-        }
-        return CONDITIONALLY_UNAVAILABLE;
+        return mBackend.showSummarizationSettings() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

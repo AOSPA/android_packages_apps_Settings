@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Премести надолу"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Отстрани"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Премести најгоре"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"Премести го <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> погоре"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"Премести го <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> подолу"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"Отстрани го <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"Премести го <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> најгоре"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"Изменете го списокот со системски јазици, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"земја, територија"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"време, целзиусови, степени, температура, целзиусови, фаренхајтови"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"метрички, империјални, температура, висина, тежина, растојание, целзиусови, фаренхајтови, lbs, килограми, kg, милја, километар, инчи, сантиметри, метри, единица"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"цифра, цифри, број, броеви, систем за нумерирање"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"недела, понеделник, вторник, среда, четврток, петок, сабота, прв ден"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Регионални поставки"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Одредете поставки за мерни единици и броеви"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Дозволете им на апликациите да пристапуваат до вашите регионални поставки за да ви овозможат персонализирано доживување."</string>
@@ -304,8 +312,11 @@
     <string name="apply" msgid="7834684883190163536">"Примени"</string>
     <string name="share" msgid="8502235338607613795">"Сподели"</string>
     <string name="add" msgid="8335206931421683426">"Додајте"</string>
+    <string name="verify" msgid="6452664472920137535">"Потврди"</string>
     <string name="remove" msgid="1028414219245072102">"Отстрани"</string>
     <string name="process" msgid="2614220641928709668">"Обработи"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"Поставки"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Поставки"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Кратенка за поставки"</string>
@@ -1189,7 +1200,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Користете QR-код за да додадете уред на мрежава"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-кодот не е во важечки формат"</string>
     <string name="retry" msgid="7542103800274026915">"Обиди се повторно"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"Сподели со други корисници на уредот"</string>
     <string name="shared_message" msgid="2104244057926025072">"споделено"</string>
     <string name="private_message" msgid="5897966950396765392">"приватно"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Потврди"</string>
@@ -1232,7 +1242,7 @@
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Не успеа да се поврзе со мрежата"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Мрежата не е во опсег"</string>
     <string name="wifi_forget" msgid="3485573280364015620">"Заборави"</string>
-    <string name="wifi_modify" msgid="5127926476383659412">"Измени"</string>
+    <string name="wifi_modify" msgid="5127926476383659412">"Изменете"</string>
     <string name="wifi_save" msgid="2312643132472226807">"Зачувај"</string>
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Не успеа да се зачува мрежата"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Откажи"</string>
@@ -1533,6 +1543,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Опции за тапети"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Прикажувај тапет на заклучен екран"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Тапетот на заклучен екран е видлив со „Секогаш вклучен екран“"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Исклучување на екранот при неактивност"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Го исклучува екранот кога не е откриена никаква активност на корисникот за да заштеди енергија"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Текст во болд"</string>
     <string name="title_font_size" msgid="570613010306330622">"Големина на фонтот"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Намалете го или зголемете го текстот"</string>
@@ -1959,7 +1971,7 @@
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Нацртајте ја шемата повторно за потврда"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Вашата нова шема за отклучување"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"Потврдете"</string>
-    <string name="lockpattern_restart_button_text" msgid="255339375151895998">"Измени"</string>
+    <string name="lockpattern_restart_button_text" msgid="255339375151895998">"Изменете"</string>
     <string name="lockpattern_retry_button_text" msgid="4229668933251849760">"Избриши"</string>
     <string name="lockpattern_continue_button_text" msgid="5253269556259503537">"Продолжи"</string>
     <string name="lockpattern_settings_title" msgid="9223165804553269083">"Шема за отклучување"</string>
@@ -2351,7 +2363,7 @@
     <string name="user_dict_settings_add_word_hint" msgid="4560494723256242785">"Напишете збор"</string>
     <string name="user_dict_settings_add_shortcut_hint" msgid="6209624157217434640">"Изборна кратенка"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="316493656442362284">"Измени збор"</string>
-    <string name="user_dict_settings_context_menu_edit_title" msgid="4909198741914531509">"Измени"</string>
+    <string name="user_dict_settings_context_menu_edit_title" msgid="4909198741914531509">"Изменете"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="651550824433043545">"Избриши"</string>
     <string name="user_dict_settings_empty_text" msgid="86562873609647919">"Немате зборови во корисничкиот речник. За да додадете збор, допрете го копчето Додај (+)."</string>
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"За сите јазици"</string>
@@ -3469,6 +3481,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Ако му ги отстраните администраторските привилегии на корисников, вие или друг администратор може да му ги вратите подоцна."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Дали сигурно сакате да ги отстраните вашите администраторски привилегии?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Само другите администратори ќе може да ви доделат администраторски привилегии ако продолжите."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Не може да се избрише корисникот"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Вие сте единствениот администратор на уредов, па вашиот кориснички профил не може да се избрише. Ако сакате да го избришете корисничкиот профил, може да назначите друг администратор или да ги избришете сите податоци од уредот во „Систем &gt; Опции за ресетирање &gt; Избриши ги сите податоци (ресетирај на фабрички поставки)“."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Не може да се отстранат администраторските привилегии"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Вие сте единствениот администраторски корисник на уредов. Ако веќе не сакате да бидете администратор, прво треба да назначите друг администратор."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Податоци за итни случаи"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Податоци и контакти за <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Отвори <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3810,7 +3826,7 @@
     <string name="zen_mode_menu_rename_mode" msgid="4681802125016390837">"Преименувај"</string>
     <string name="zen_mode_menu_delete_mode" msgid="5380084696402157428">"Избриши"</string>
     <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"Да се избрише режимот „<xliff:g id="MODE">%1$s</xliff:g>“?"</string>
-    <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Измени"</string>
+    <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Изменете"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Распореди"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Распоред"</string>
     <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Кога да се вклучува автоматски"</string>
@@ -3914,7 +3930,7 @@
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Билтени, препорачани аудиовизуелни содржини и друго"</string>
     <string name="notification_bundle_no_apps_desc" msgid="6357770877341582580">"Сите апликации во моментов користат организатор за известувања"</string>
     <string name="notification_ai_features_title" msgid="2241618579100257538">"Управувајте со AI"</string>
-    <string name="notification_summarization_title" msgid="1516039882005781529">"Резимеа за известувања"</string>
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Резимеа на известувањата"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Добивајте кратки резимеа на подолги пораки"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Користи резимеа за известувања"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Резимирајте долги пораки и групни разговори за да добивате брзи резимеа.\n\nРезимеата користат AI на вашиот уред, што понекогаш може да прави грешки. Вашите пораки никогаш не се испраќаат до Google."</string>
@@ -3922,7 +3938,7 @@
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Управувајте со апликациите"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Управувајте со апликациите за резимеа на известувањата"</string>
     <string name="notification_excluded_apps" msgid="317898848790046528">"Не опфаќај ги овие апликации"</string>
-    <string name="notification_app_level_summarize_title" msgid="488390574186154905">"Резимеа на известувања"</string>
+    <string name="notification_app_level_summarize_title" msgid="488390574186154905">"Резимеа на известувањата"</string>
     <string name="notification_app_level_summarize_subtext" msgid="2064371198044287108">"Добивајте кратки резимеа на подолги пораки"</string>
     <string name="notification_summarization_no_apps_desc" msgid="6058658379217986963">"Сите засегнати апликации во моментов користат организатор за известувања"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Известувања во живо"</string>
@@ -4084,7 +4100,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Организатор за известувања"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Групирајте ги и исклучете им го звукот на известувањата со понизок приоритет"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Управувајте со апликации за „Организатор за известувања“"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Секогаш проширувај ги пакетите"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Проширување на пакетите"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Автоматски"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Секогаш проширувај"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Никогаш не проширувај"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Примени на апликациите во работниот профил"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Помошни услуги за VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ниедна инсталирана апликација не побара извршување како помошна услуга за VR."</string>
@@ -5267,6 +5286,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Поддржани апликации на телефонот"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Не може да се додаде SIM-картичка"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Прекинете ја сателитската врска пред да додадете SIM-картичка"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Кога е поврзано преку Bluetooth, „Авионски режим“ ќе се синхронизира на поддржаните уреди како телефонот и часовникот"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Имиња на пристапни точки"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Недостапно кога сте поврзани на <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5373,9 +5393,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Лево: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Десно: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Куќиште: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Лево, батерија: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Десно, батерија: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Куќиште, батерија: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Батерија, лево: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Батерија, десно: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Батерија, куќиште: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Батерија: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Батерија"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Табла за поставки"</string>
@@ -5939,14 +5959,22 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Го заборавив PIN-кодот"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Го заборавивте PIN-кодот?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Ажурирајте ја е-поштата за враќање"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Додадена е е-пошта за враќање"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Е-поштата за враќање е потврдена"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Е-поштата за враќање е ажурирана"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN-кодот е ажуриран"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN-кодот е променет"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN-кодот е избришан"</string>
+    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"Потврдете ги податоците за враќање"</string>
+    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"Вашата сметка за враќање не е потврдена. За да ја потврдите, ќе треба да ја внесете лозинката за сметката."</string>
+    <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Додајте податоци за враќање"</string>
+    <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Ако го заборавите PIN-кодот, може да ја користите сметката за да го ресетирате"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Избришете го PIN-кодот"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Додајте е-пошта за враќање"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Потврдете ја е-поштата"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Филтри за продавница за апликации"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Филтрирајте ги апликациите според категоризацијата на содржините"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Секоја апликација може да блокира различни видови содржини. Со продавниците за апликации што не се наведени мора да се управува одделно."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Филтри за содржини на веб-сајтови"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Филтри на веб-сајтови, блокирање сајтови, филтри на прелистувачи, блокирање експлицитни сајтови, филтрирање сајтови, блокирање резултати од пребарување, филтрирање експлицитни резултати од пребарување, ограничувања за содржини"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Помогнете да се филтрираат експлицитни содржини на некои апликации и прелистувачи на телефонов. Експлицитните содржини сѐ уште може да се прикажуваат на други апликации, уреди или прелистувачи."</string>
@@ -5999,4 +6027,17 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Се спарува"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Поврзано: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="safety_center_rescan_button" msgid="1290673104206018701">"Скенирај го уредот"</string>
 </resources>

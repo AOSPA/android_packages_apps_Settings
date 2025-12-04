@@ -115,4 +115,4 @@ class MobileNetworkImeiPreference(
         const val KEY = "network_mode_imei_info"
     }
 }
-// LINT.ThenChange(MobileNetworkImeiPreferenceController.java)
+// LINT.ThenChange(MobileNetworkImeiPreferenceController.kt)

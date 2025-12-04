@@ -17,11 +17,11 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.UserManager
 import android.provider.Settings
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
+import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
@@ -44,7 +44,7 @@ class MobileNetworkSettingsSearchIndexTest {
 
     private val mockUserManager = mock<UserManager> { on { isAdminUser } doReturn true }
 
-    private val mockPackageManager = mock<PackageManager>()
+    private val mockTelephonyManager = mock<TelephonyManager>()
 
     private val mockSubscriptionManager =
         mock<SubscriptionManager> {
@@ -56,7 +56,8 @@ class MobileNetworkSettingsSearchIndexTest {
             on { getSystemService(UserManager::class.java) } doReturn mockUserManager
             on { getSystemService(SubscriptionManager::class.java) } doReturn
                 mockSubscriptionManager
-            on { packageManager } doReturn mockPackageManager
+            on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
+            on { getSystemService(Context.TELEPHONY_SERVICE) } doReturn mockTelephonyManager
         }
 
     private val resources =
@@ -71,7 +72,8 @@ class MobileNetworkSettingsSearchIndexTest {
                     } else {
                         null
                     }
-            })
+            }
+        )
     }
 
     @Before
@@ -80,8 +82,9 @@ class MobileNetworkSettingsSearchIndexTest {
 
         // By default, searchable
         mockUserManager.stub { on { isAdminUser } doReturn true }
-        mockPackageManager.stub {
-            on { hasSystemFeature(PackageManager.FEATURE_TELEPHONY) } doReturn true
+        mockTelephonyManager.stub {
+            on { isDataCapable } doReturn true
+            on { isDeviceVoiceCapable } doReturn true
         }
     }
 
@@ -103,9 +106,28 @@ class MobileNetworkSettingsSearchIndexTest {
     }
 
     @Test
+    fun isMobileNetworkSettingsSearchable_dataOnly_returnTrue() {
+        mockTelephonyManager.stub { on { isDeviceVoiceCapable } doReturn false }
+
+        val isSearchable = isMobileNetworkSettingsSearchable(context)
+
+        assertThat(isSearchable).isTrue()
+    }
+
+    @Test
+    fun isMobileNetworkSettingsSearchable_voiceOnly_returnTrue() {
+        mockTelephonyManager.stub { on { isDataCapable } doReturn false }
+
+        val isSearchable = isMobileNetworkSettingsSearchable(context)
+
+        assertThat(isSearchable).isTrue()
+    }
+
+    @Test
     fun isMobileNetworkSettingsSearchable_noTelephony_returnFalse() {
-        mockPackageManager.stub {
-            on { hasSystemFeature(PackageManager.FEATURE_TELEPHONY) } doReturn false
+        mockTelephonyManager.stub {
+            on { isDataCapable } doReturn false
+            on { isDeviceVoiceCapable } doReturn false
         }
 
         val isSearchable = isMobileNetworkSettingsSearchable(context)
@@ -130,8 +152,11 @@ class MobileNetworkSettingsSearchIndexTest {
                             .setPreferenceKey(KEY)
                             .putArguments(
                                 Settings.EXTRA_SUB_ID,
-                                BundleValue.newBuilder().setIntValue(SUB_ID_1).build()))
-                    .build())
+                                BundleValue.newBuilder().setIntValue(SUB_ID_1).build(),
+                            )
+                    )
+                    .build()
+            )
         assertThat(item.pageTitle).isEqualTo("SIMs > $SUB_DISPLAY_NAME_1")
         assertThat(item.itemTitle).isEqualTo(TITLE)
     }

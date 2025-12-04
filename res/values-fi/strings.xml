@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Siirrä alas"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Poista"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Siirrä ylös"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"Siirrä <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> ylös"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"Siirrä <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> alas"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"Poista <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"Siirrä <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> ylös"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"Muokkaa kieliä, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"maa, alue"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"sää, celsiusaste, asteet, lämpötila, celsius, fahrenheit"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"metrijärjestelmä, brittiläinen järjestelmä, lämpötila, pituus, paino, etäisyys, celsius, fahrenheit, paunat, kilogrammat, kg, maili, kilometri, tuumat, senttimetrit, metrit, yksikkö"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"numero, numerot, numerointijärjestelmä"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"sunnuntai, maanantai, tiistai, keskiviikko, torstai, perjantai, lauantai, ensimmäinen päivä"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Alueelliset valinnat"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Valitse yksikkö- ja numeroasetukset"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Ilmoita alueellisista valinnoista sovelluksille, jotta ne voivat personoida kokemuksesi."</string>
@@ -304,8 +312,12 @@
     <string name="apply" msgid="7834684883190163536">"Hae"</string>
     <string name="share" msgid="8502235338607613795">"Jaa"</string>
     <string name="add" msgid="8335206931421683426">"Lisää"</string>
+    <!-- no translation found for verify (6452664472920137535) -->
+    <skip />
     <string name="remove" msgid="1028414219245072102">"Poista"</string>
     <string name="process" msgid="2614220641928709668">"Käsittele"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"Asetukset"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Asetukset"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Asetukset-pikakuvake"</string>
@@ -1189,7 +1201,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Lisää laite tähän verkkoon QR-koodin avulla"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-koodin muoto ei kelpaa"</string>
     <string name="retry" msgid="7542103800274026915">"Yritä uudelleen"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"Jaa muiden laitteen käyttäjien kanssa"</string>
     <string name="shared_message" msgid="2104244057926025072">"jaettu"</string>
     <string name="private_message" msgid="5897966950396765392">"yksityinen"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Vahvista"</string>
@@ -1533,6 +1544,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Taustakuva-asetukset"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Näytä lukitusnäytön taustakuva"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Lukitusnäytön taustakuva näkyy aina päällä olevalla näytöllä"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Laita näyttö pois päältä, kun se ei ole käytössä"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Sammuttaa näytön, kun käyttäjän toimintaa ei havaita, jotta virtaa säästyy"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Lihavoi teksti"</string>
     <string name="title_font_size" msgid="570613010306330622">"Fontin koko"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Suurenna tai pienennä tekstiä"</string>
@@ -3469,6 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Jos poistat käyttäjän järjestelmänvalvojan oikeudet, sinä tai toinen järjestelmänvalvoja voi antaa oikeudet takaisin myöhemmin."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Poistetaanko järjestelmänvalvojan oikeudet?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Vain muut järjestelmänvalvojat voivat myöntää sinulle järjestelmänvalvojan oikeudet, jos jatkat."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Käyttäjää ei voi poistaa"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Olet ainoa järjestelmänvalvoja tällä laitteella, joten käyttäjäprofiiliasi ei voi poistaa. Jos haluat poistaa käyttäjäprofiilisi, voit tehdä toisesta käyttäjästä järjestelmänvalvojan tai poistaa kaiken datan laitteelta valitsemalla Järjestelmä &gt; Palautusvalinnat &gt; Poista data (tehdasasetusten palautus)."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Järjestelmänvalvojan oikeuksia ei voi poistaa"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Olet tämän laitteen ainoa järjestelmänvalvoja. Jos et enää halua olla järjestelmänvalvoja, sinun on ensin tehtävä toisesta käyttäjästä järjestelmänvalvoja."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Vaaratiedot"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Käyttäjän <xliff:g id="USER_NAME">%1$s</xliff:g> tiedot ja yhteystiedot"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Avaa <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4084,7 +4101,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Ilmoitusten järjestäjä"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Niputa ja hiljennä vähemmän tärkeät ilmoitukset"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Hallinnoi ilmoitusten järjestäjän sovelluksia"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Laajenna paketit aina"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Paketin laajennus"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automaattinen"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Laajenna aina"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Älä koskaan laajenna"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Käytä työprofiilin sovelluksissa"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-avustinpalvelut"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Asennettuja sovelluksia ei ole pyydetty toimimaan VR-avustinpalveluina."</string>
@@ -4828,8 +4848,8 @@
     <string name="shade_panels_category" msgid="3262351355390846546">"Paneelit"</string>
     <string name="shade_panels_separate_title" msgid="7839124123668116363">"Erilliset"</string>
     <string name="shade_panels_separate_summary" msgid="4879360492042964895">"Avaa pika-asetukset pyyhkäisemällä alas oikeasta yläkulmasta. Avaa ilmoitukset pyyhkäisemällä alas vasemmasta yläkulmasta"</string>
-    <string name="shade_panels_combined_title" msgid="2812149031368941984">"Yhdistetty (klassinen)"</string>
-    <string name="shade_panels_combined_summary" msgid="5884627562590432068">"Pyyhkäise alas näytön yläreunasta, niin näet ilmoitukset ja pika-asetukset sisältävän klassisen paneelin."</string>
+    <string name="shade_panels_combined_title" msgid="2812149031368941984">"Yhdistetyt (klassinen)"</string>
+    <string name="shade_panels_combined_summary" msgid="5884627562590432068">"Pyyhkäise alas näytön yläreunasta, niin näet ilmoitukset ja pika-asetukset sisältävän klassisen paneelin"</string>
     <string name="shade_panels_foldables_footer_message" msgid="3974376428811063936">"Yhdistetty (klassinen) näkymä on rajoitettu taitettavan laitteen ulkonäytölle"</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Turvallisuus ja hätätilanteet"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Hätäpuhelut, terveystiedot, hälytykset"</string>
@@ -5267,6 +5287,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Tuetut sovellukset puhelimella"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM-korttia ei voi lisätä"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Katkaise satelliittiyhteys ennen SIM-kortin lisäämistä"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Kun Bluetooth-yhteys on muodostettu, lentokonetila synkronoidaan tuetuille laitteille, kuten puhelimelle ja kellolle"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Tukiasemien nimet"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Ei käytettävissä <xliff:g id="CARRIER">%1$s</xliff:g> ‑käytön aikana"</string>
@@ -5373,9 +5394,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Vasen: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Oikea: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Kotelo: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Vasen, akku: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Oikea, akku: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Kotelo, akku: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Akku, vasen: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Akku, oikea: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Akku, kotelo: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Akku: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Akku"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Asetuspaneeli"</string>
@@ -5939,14 +5960,26 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN-koodi unohtunut"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Unohtuiko PIN-koodi?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Päivitä varasähköposti"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Varasähköposti lisätty"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Varasähköposti vahvistettu"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Varasähköposti päivitetty"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN-koodi päivitetty"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN-koodi vaihdettu"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN-koodi poistettu"</string>
+    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
+    <skip />
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Poista PIN-koodi"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Varasähköpostin lisääminen"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Sähköpostiosoitteen vahvistaminen"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Sovelluskauppasuodattimet"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Suodata sovelluksia niiden sisällön kohderyhmän mukaan"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Kukin sovellus voi estää erityyppistä sisältöä. Muita sovelluskauppoja on ylläpidettävä erikseen."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Verkkosivuston sisältösuodattimet"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Verkkosivustojen suodattimet, Sivustojen estäminen, Selaimen suodattimet, Avoimen seksuaalisen sisällön sivustojen estäminen, Sivustojen suodattaminen, Hakutulosten estäminen, Avoimen seksuaalisen sisällön hakutulosten suodattaminen, Sisältörajoitukset"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Auttaa suodattamaan vain aikuisille tarkoitettua sisältöä joissakin sovelluksissa ja selaimissa tällä puhelimella. Vain aikuisille tarkoitettu sisältö voi silti näkyä muissa sovelluksissa, laitteissa tai selaimissa."</string>
@@ -5999,4 +6032,18 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Muodostetaan paria"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> yhdistetty"</string>
+    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
+    <skip />
 </resources>

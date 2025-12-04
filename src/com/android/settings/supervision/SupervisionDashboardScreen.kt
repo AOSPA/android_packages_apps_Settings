@@ -62,6 +62,9 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                 lifeCycleContext?.notifyPreferenceChange(KEY)
                 lifeCycleContext?.notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
                 lifeCycleContext?.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+                if (Flags.enableSupervisionSettingsUiUpdates()) {
+                    lifeCycleContext?.notifyPreferenceChange(SupervisionSetUpPinPreference.KEY)
+                }
             }
         }
 
@@ -114,12 +117,21 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             val supervisionClient = getSupervisionClient(context)
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                +SupervisionRecoveryBannerPreference() order -250
+            }
             +SupervisionMainSwitchPreference(context, supervisionClient) order -200
             +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
                 +SupervisionAppStoreFiltersScreen.KEY order 50
                 +SupervisionWebContentFiltersScreen.KEY order 100
             }
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2) order 0
+            }
             +UntitledPreferenceCategoryMetadata("pin_management_group") order 100 += {
+                if (Flags.enableSupervisionSettingsUiUpdates()) {
+                    +SupervisionSetUpPinPreference() order 5
+                }
                 +SupervisionPinManagementScreen.KEY order 10
             }
             +UntitledPreferenceCategoryMetadata("footer_group") order 300 += {
@@ -137,5 +149,6 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
     companion object {
         const val KEY = "top_level_supervision"
         internal const val SUPERVISION_DYNAMIC_GROUP_1 = "supervision_features_group_1"
+        internal const val SUPERVISION_DYNAMIC_GROUP_2 = "supervision_features_group_2"
     }
 }

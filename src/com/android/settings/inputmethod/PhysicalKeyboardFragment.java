@@ -28,10 +28,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings.Secure;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodManager;
 
@@ -54,7 +52,6 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -72,7 +69,6 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
     private static final String ACCESSIBILITY_MOUSE_KEYS = "accessibility_mouse_keys";
     private static final String ACCESSIBILITY_PHYSICAL_KEYBOARD_A11Y = "physical_keyboard_a11y";
     private static final String KEYBOARD_SHORTCUTS_HELPER = "keyboard_shortcuts_helper";
-    private static final String MODIFIER_KEYS_SETTINGS = "modifier_keys_settings";
     private static final String EXTRA_AUTO_SELECTION = "auto_selection";
     public static final String EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier";
     private static final String TAG = "KeyboardAndTouchA11yFragment";
@@ -156,11 +152,6 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
         mSupportsFirmwareUpdate = mFeatureProvider.supportsFirmwareUpdate();
         if (mSupportsFirmwareUpdate) {
             mFeatureProvider.registerKeyboardInformationCategory(getPreferenceScreen());
-        }
-        boolean isModifierKeySettingsEnabled = FeatureFlagUtils
-                .isEnabled(getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_MODIFIER_KEY);
-        if (!isModifierKeySettingsEnabled) {
-            mKeyboardAssistanceCategory.removePreference(findPreference(MODIFIER_KEYS_SETTINGS));
         }
         mKeyboardA11yCategory.removePreference(mAccessibilityBounceKeys);
         mKeyboardA11yCategory.removePreference(mAccessibilitySlowKeys);
@@ -453,7 +444,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
         }
         for (int deviceId : InputDevice.getDeviceIds()) {
             final InputDevice device = InputDevice.getDevice(deviceId);
-            if (device == null || device.isVirtual() || !device.isFullKeyboard()) {
+            if (device == null || !device.isPhysicalDevice() || !device.isFullKeyboard()) {
                 continue;
             }
             keyboards.add(new HardKeyboardDeviceInfo(
@@ -525,15 +516,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.physical_keyboard_settings;
-                    return Arrays.asList(sir);
-                }
-
+            new BaseSearchIndexProvider(R.xml.physical_keyboard_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return !getHardKeyboards(context).isEmpty();

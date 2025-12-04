@@ -45,6 +45,12 @@ abstract class SafetyCenterViewModel(protected val app: Application) : AndroidVi
     /** Triggers a request to refresh all safety sources. */
     abstract fun rescan()
 
+    /** Signals configuration change destruction to the ViewModel. */
+    abstract fun changingConfigurations()
+
+    /** Triggering data refresh when Safety Center page opens. */
+    abstract fun pageOpen()
+
     /** Clears the current error state. */
     abstract fun clearError()
 
@@ -54,4 +60,17 @@ abstract class SafetyCenterViewModel(protected val app: Application) : AndroidVi
      * @param issue The issue to be dismissed by the framework.
      */
     abstract fun dismissIssue(issue: SafetyCenterIssue)
+
+    /**
+     * Executes the given [action] to address the [issue].
+     *
+     * @param issue The issue the action belongs to.
+     * @param action The action to execute.
+     * @param launchTaskId The task ID to launch the action in.
+     */
+    abstract fun executeIssueAction(
+        issue: SafetyCenterIssue,
+        action: SafetyCenterIssue.Action,
+        launchTaskId: Int,
+    )
 }

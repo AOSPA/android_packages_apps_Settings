@@ -75,6 +75,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private @UserManager.UserSwitchabilityResult int mSwitchabilityStatus =
             UserManager.SWITCHABILITY_STATUS_OK;
     private final Map<Integer, Integer> mSameProfileGroupIds = Maps.newHashMap();
+    private final Map<Integer, Integer> mUserRemovabilityMap = new HashMap<>();
 
     public void addProfile(UserInfo userInfo) {
         mUserProfileInfos.add(userInfo);
@@ -412,5 +413,21 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     protected List<UserHandle> getUserProfiles() {
         return ImmutableList.copyOf(mUserProfiles.keySet());
+    }
+
+    /**
+     * Returns whether the specified user is removable.
+     */
+    @Implementation
+    protected @UserManager.RemoveResult int getUserRemovability(@UserIdInt int userId) {
+        return mUserRemovabilityMap.getOrDefault(userId, UserManager.REMOVE_RESULT_REMOVED);
+    }
+
+    /**
+     * Sets the remove result for the specified user.
+     */
+    public void setUserRemovability(
+            @UserIdInt int userId, @UserManager.RemoveResult int removeResult) {
+        mUserRemovabilityMap.put(userId, removeResult);
     }
 }

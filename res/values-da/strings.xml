@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Flyt ned"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Fjern"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Flyt til toppen"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"Ryk <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> op"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"Ryk <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> ned"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"Fjern <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"Flyt <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> til toppen"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"Rediger liste over systemsprog, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"land, territorium"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"vejr, celsiusgrad, grader, temperatur, celsius, fahrenheit"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"metrisk, britisk standard, temperatur, højde, vægt, afstand, celsius, fahrenheit, pund, kilogram, kg, mile, kilometer, tommer, centimeter, meter, enhed"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"ciffer, cifre, tallet, tal, nummereringssystem"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"søndag, mandag, tirsdag, onsdag, torsdag, fredag, lørdag, første dag"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionsindstillinger"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Angiv præferencer for måleenheder og numre"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Giv apps besked om dine regionsindstillinger, så de kan foretage personlig tilpasning af din brugeroplevelse."</string>
@@ -304,8 +312,12 @@
     <string name="apply" msgid="7834684883190163536">"Anvend"</string>
     <string name="share" msgid="8502235338607613795">"Del"</string>
     <string name="add" msgid="8335206931421683426">"Tilføj"</string>
+    <!-- no translation found for verify (6452664472920137535) -->
+    <skip />
     <string name="remove" msgid="1028414219245072102">"Fjern"</string>
     <string name="process" msgid="2614220641928709668">"Udfør behandling"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"Indstillinger"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Indstillinger"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Genvej til Indstillinger"</string>
@@ -1189,7 +1201,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Brug en QR-kode til at føje en enhed til dette netværk"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-koden har ikke et gyldigt format"</string>
     <string name="retry" msgid="7542103800274026915">"Prøv igen"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"Del med andre enhedsbrugere"</string>
     <string name="shared_message" msgid="2104244057926025072">"delt"</string>
     <string name="private_message" msgid="5897966950396765392">"privat"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Bekræft"</string>
@@ -1533,6 +1544,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Valgmuligheder for baggrund"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Vis låseskærmens baggrund"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Låseskærmens baggrund er synlig med altid aktiv skærm"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Sluk skærmen ved inaktivitet"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Slukker skærmen, når der ikke registreres brugeraktivitet, for at spare på strømmen"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Fed tekst"</string>
     <string name="title_font_size" msgid="570613010306330622">"Skriftstørrelse"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Gør tekst større eller mindre"</string>
@@ -3469,6 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Hvis du fjerner administratorrettigheder for denne bruger, kan du eller en anden administrator tildele dem igen senere."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Er du sikker på, at du vil fjerne dine egne administratorrettigheder?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Det er kun andre administratorer, der kan give dig administratorrettigheder, hvis du fortsætter."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Brugeren kan ikke slettes"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Du er den eneste administrator på denne enhed, så din brugerprofil kan ikke slettes. Hvis du vil slette din brugerprofil, kan du gøre en anden bruger til administrator eller rydde alle data fra enheden ved at gå til System &gt; Nulstil valg &gt; Ryd alle data (gendan fabriksindstillinger)."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Administratorrettighederne kan ikke fjernes"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Du er den eneste administrator på denne enhed. Hvis du ikke længere vil være administrator, skal du først gøre en anden bruger til administrator."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Nødoplysninger"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Oplysninger og kontakter for <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Åbn <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4084,7 +4101,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Notifikations­organisering"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Gruppér og ignorer notifikationer med lavere prioritet"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Administrer apps til notifikationsorganisering"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Udvid altid pakker"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Udvid pakker"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automatisk"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Udvid altid"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Udvid aldrig"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Anvend på apps på arbejdsprofilen"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-hjælpetjenester"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ingen installerede apps har anmodet om at blive kørt som VR-hjælpetjenester."</string>
@@ -5267,6 +5287,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Understøttede apps på din telefon"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM kan ikke tilføjes"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Afbryd satellitforbindelsen, før du tilføjer et SIM"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Når der er forbindelse via Bluetooth, synkroniseres flytilstand mellem de understøttede enheder, f.eks. telefonen og uret"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Adgangspunkter"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Utilgængelig ved forbindelse til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5373,9 +5394,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Venstre: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Højre: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Etui: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Venstre, batteriniveau: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Højre, batteriniveau: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Etui, batteriniveau: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Batteri, venstre: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Batteri, højre: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Batteri, etui: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Batteriniveau: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batteri"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Indstillingspanel"</string>
@@ -5939,14 +5960,26 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Har du glemt pinkoden?"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Har du glemt pinkoden?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Opdater mailadresse til gendannelse"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"En mailadresse til gendannelse er tilføjet"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Mailadressen til gendannelse er bekræftet"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Mailadressen til gendannelse er opdateret"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"Pinkoden er opdateret"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"Pinkoden er ændret"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"Pinkoden er slettet"</string>
+    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
+    <skip />
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Slet pinkode"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Tilføj mailadresse til gendannelse"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verificer din mailadresse"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtre i appbutik"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtrér apps baseret på indholdets aldersgrænse"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Hver app kan blokere forskellige typer indhold. Appbutikker, der ikke er angivet, skal administreres separat."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Indholdsfiltre for websites"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Websitefiltre, blokere websites, browserfiltre, blokere eksplicitte websites, filtrere websites, blokere søgeresultater, filtrere eksplicitte søgeresultater, indholdsbegrænsninger"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Hjælper med at bortfiltrere eksplicit indhold i nogle apps og browsere på denne telefon. Eksplicit indhold kan stadig vises i andre apps, på andre enheder eller i andre browsere."</string>
@@ -5999,4 +6032,18 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Parrer"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> er forbundet"</string>
+    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
+    <skip />
 </resources>

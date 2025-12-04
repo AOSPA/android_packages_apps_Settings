@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Move down"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Remove"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Move to top"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"Move <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> up"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"Move <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> down"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"Remove <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"Move <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> to top"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"Edit system language list, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"country, territory"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"weather, centigrade, degrees, temp, celsius, fahrenheit"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"metric, imperial, temperature, height, weight, distance, celsius, fahrenheit, pounds, kilograms, kg, mile, kilometre, inches, centimetres, metres, unit"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"digit, digits, number, numbers, numbering system"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"sunday, monday, tuesday, wednesday, thursday, friday, saturday, first day"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regional preferences"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Set units and number preferences"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Let apps know your regional preferences so that they can personalise your experience."</string>
@@ -304,8 +312,12 @@
     <string name="apply" msgid="7834684883190163536">"Apply"</string>
     <string name="share" msgid="8502235338607613795">"Share"</string>
     <string name="add" msgid="8335206931421683426">"Add"</string>
+    <!-- no translation found for verify (6452664472920137535) -->
+    <skip />
     <string name="remove" msgid="1028414219245072102">"Remove"</string>
     <string name="process" msgid="2614220641928709668">"Process"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"Settings"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Settings"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Settings shortcut"</string>
@@ -1189,7 +1201,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Use a QR code to add a device to this network"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR code isn\'t a valid format"</string>
     <string name="retry" msgid="7542103800274026915">"Retry"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"Share with other device users"</string>
     <string name="shared_message" msgid="2104244057926025072">"shared"</string>
     <string name="private_message" msgid="5897966950396765392">"private"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Confirm"</string>
@@ -1533,6 +1544,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Wallpaper options"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Show lock screen wallpaper"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Lock screen wallpaper is visible with always-on display"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Turn off display on inactivity"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Powers down the display when no user activity is detected to save power"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Bold text"</string>
     <string name="title_font_size" msgid="570613010306330622">"Font size"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Make text bigger or smaller"</string>
@@ -3469,6 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"If you remove admin privileges for this user, you or another admin can give them back later."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Are you sure you want to remove your own admin privileges?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Only other admins will be able to grant you admin privileges if you proceed."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Can\'t delete user"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"You are the only admin on this device so your user profile can\'t be deleted. If you want to delete your user profile, you can make another user an admin or erase all data from the device by going to System &gt; Reset options &gt; Erase all data (factory reset)."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Can\'t remove admin privileges"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"You are the only admin user on this device. If you no longer want to be an admin, you need to make another user an admin first."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Emergency information"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Info and contacts for <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Open <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4084,7 +4101,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Notification organiser"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Bundle and silence lower priority notifications"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Manage apps for notification organiser"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Always expand bundles"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Bundle expansion"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automatic"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Always expand"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Never expand"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Apply to work profile apps"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR helper services"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"No installed apps have requested to be run as VR helper services."</string>
@@ -5267,6 +5287,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Supported apps on your phone"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Can\'t add a SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"End the satellite connection before you add a SIM"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"When connected by Bluetooth, aeroplane mode will sync across the supported devices such as phone and watch"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Access point names"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Unavailable when connected to <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5373,9 +5394,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Left: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Right: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Case: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Left, battery: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Right, battery: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Case, battery: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Battery, left: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Battery, right: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Battery, case: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Battery: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Battery"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Settings Panel"</string>
@@ -5939,14 +5960,26 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Forgot PIN"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Forgotten PIN?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Update recovery email"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Recovery email added"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Recovery email verified"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Recovery email updated"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN updated"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN changed"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN deleted"</string>
+    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
+    <skip />
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Delete PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Add recovery email"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verify your email"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"App store filters"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filter apps based on the maturity of their content"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Each app may block different types of content. App stores not listed must be managed separately."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Website content filters"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Website filters, Block sites, Browser filters, Block explicit sites, Filter sites, Block search results, Filter explicit search results, content restrictions"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Help filter explicit content on some apps and browsers on this phone. Explicit content may still show on other apps, devices or browsers."</string>
@@ -5999,4 +6032,18 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Pairing"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> connected"</string>
+    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
+    <skip />
 </resources>

@@ -28,12 +28,13 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.extradim.ui.ExtraDimScreen;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 /** Settings for reducing brightness. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class ToggleReduceBrightColorsPreferenceFragment extends BaseSupportFragment {
+public class ToggleReduceBrightColorsPreferenceFragment extends DashboardFragment {
     private static final String TAG = "ToggleReduceBrightColorsPreferenceFragment";
 
     @Override

@@ -35,7 +35,7 @@
             android:layout_marginTop="16dp"
             android:textSize="20sp"
             android:gravity="center_horizontal"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
         />
 
@@ -47,7 +47,7 @@
             android:layout_marginTop="8dp"
             android:textSize="16sp"
             android:gravity="center"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="@color/materialColorOnSurfaceVariant"
         />
 
         <RadioGroup
@@ -109,14 +109,14 @@
                     <TextView
                         android:id="@+id/input_setting_keys_value_custom_title"
                         android:text="@string/input_setting_keys_custom_title"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/materialColorOnSurface"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"/>
                     <TextView
                         android:id="@+id/input_setting_keys_value_custom_value"
                         android:text="@string/input_setting_keys_custom_value"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/materialColorOnSurface"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"

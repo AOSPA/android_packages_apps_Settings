@@ -21,8 +21,11 @@ import android.graphics.PointF
 import android.os.Handler
 import android.util.Size
 import android.view.SurfaceControl
+import android.view.SurfaceView
+import android.view.View
 import android.widget.FrameLayout
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -97,7 +100,15 @@ class DisplayBlockTest {
     fun normalUpdateFlow() {
         val wallpaper = SurfaceControl.Builder().setName("wallpaper").build()
         injector.wallpapers[DISPLAY_ID] = wallpaper
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(10f, 10f),
+            PointF(20f, 20f),
+            0.5f,
+            DISPLAY_SIZE,
+            ArrowMovement.immovable(),
+        )
         injector.testHandler.flush()
 
         block.updateSurfaceView()
@@ -115,12 +126,28 @@ class DisplayBlockTest {
         val wallpaperB = SurfaceControl.Builder().setName("wallpaperB").build()
         injector.wallpapers[DISPLAY_ID] = wallpaperA
 
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.25f, DISPLAY_SIZE)
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(10f, 10f),
+            PointF(20f, 20f),
+            0.25f,
+            DISPLAY_SIZE,
+            ArrowMovement.immovable(),
+        )
 
         // Should not have fetched wallpaper info yet. Replace wallpaper setting with wallpaperB.
         assertThat(injector.wallpapers.put(DISPLAY_ID, wallpaperB)).isEqualTo(wallpaperA)
 
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(30f, 30f), 0.4f, DISPLAY_SIZE)
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(10f, 10f),
+            PointF(30f, 30f),
+            0.4f,
+            DISPLAY_SIZE,
+            ArrowMovement.immovable(),
+        )
         injector.testHandler.flush()
 
         // Should not have fetched wallpaper or display info yet.
@@ -143,8 +170,15 @@ class DisplayBlockTest {
         val wallpaperB = SurfaceControl.Builder().setName("wallpaperB").build()
 
         injector.wallpapers[DISPLAY_ID] = wallpaperA
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
-        injector.testHandler.flush()
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(0.0f, 0.0f),
+            PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
+            0.5f,
+            DISPLAY_SIZE,
+            ArrowMovement.immovable(),
+        )
         block.updateSurfaceView()
         injector.testHandler.flush()
 
@@ -157,7 +191,16 @@ class DisplayBlockTest {
 
         // Same size and scale as before, but a new wallpaper and different position in parent view.
         injector.wallpapers[DISPLAY_ID] = wallpaperB
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(60f, 10f), PointF(70f, 20f), 0.5f, DISPLAY_SIZE)
+        val moveOffsetPx = 10f
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(moveOffsetPx, moveOffsetPx),
+            PointF(moveOffsetPx + BLOCK_WIDTH, moveOffsetPx + BLOCK_HEIGHT),
+            0.5f,
+            DISPLAY_SIZE,
+            ArrowMovement.immovable(),
+        )
         injector.testHandler.flush()
         verify(mockTransaction).reparent(eq(wallpaperB), any())
         verify(mockTransaction).setScale(eq(wallpaperB), eq(0.5f), eq(0.5f))
@@ -169,7 +212,15 @@ class DisplayBlockTest {
 
         // Repeat the pattern, but with a new scale and reverting back to wallpaperA.
         injector.wallpapers.put(DISPLAY_ID, wallpaperA)
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(60f, 30f), PointF(70f, 40f), 0.2f, DISPLAY_SIZE)
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(0.0f, 0.0f),
+            PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
+            0.2f,
+            DISPLAY_SIZE,
+            ArrowMovement.immovable(),
+        )
         injector.testHandler.flush()
 
         verify(mockTransaction).reparent(eq(wallpaperA), any())
@@ -180,7 +231,15 @@ class DisplayBlockTest {
 
     @Test
     fun retryIfWallpaperNotReady() {
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(10f, 10f),
+            PointF(20f, 20f),
+            0.5f,
+            DISPLAY_SIZE,
+            ArrowMovement.immovable(),
+        )
         injector.testHandler.flush()
         block.updateSurfaceView()
         injector.testHandler.flush()
@@ -208,16 +267,17 @@ class DisplayBlockTest {
             DISPLAY_ID,
             DISPLAY_ID,
             PointF(0f, 0f),
-            PointF(0f, 0f),
+            PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             surfaceScale,
             DISPLAY_SIZE,
+            ArrowMovement.immovable(),
         )
 
         block.updateSurfaceView()
         injector.testHandler.flush()
 
-        val wallpaperViewWidth = block.wallpaperView.width.toFloat()
-        val wallpaperViewHeight = block.wallpaperView.height.toFloat()
+        val wallpaperViewWidth = block.wallpaperView().width.toFloat()
+        val wallpaperViewHeight = block.wallpaperView().height.toFloat()
         val scaledSurfaceWidth = DISPLAY_SIZE.width * surfaceScale
         val scaledSurfaceHeight = DISPLAY_SIZE.height * surfaceScale
         val expectedPosX = (wallpaperViewWidth - scaledSurfaceWidth) / 2f
@@ -235,9 +295,10 @@ class DisplayBlockTest {
             DISPLAY_ID,
             DISPLAY_ID,
             PointF(0f, 0f),
-            PointF(0f, 0f),
+            PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             surfaceScale,
             DISPLAY_SIZE,
+            ArrowMovement.immovable(),
         )
 
         block.updateSurfaceView()
@@ -255,9 +316,10 @@ class DisplayBlockTest {
             DISPLAY_ID,
             MIRRORED_DISPLAY_ID,
             PointF(0f, 0f),
-            PointF(0f, 0f),
+            PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             0.5f,
             DISPLAY_SIZE,
+            ArrowMovement.immovable(),
         )
 
         block.updateSurfaceView()
@@ -274,9 +336,10 @@ class DisplayBlockTest {
             DISPLAY_ID,
             MIRRORED_DISPLAY_ID,
             PointF(0f, 0f),
-            PointF(0f, 0f),
+            PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             0.5f,
             DISPLAY_SIZE,
+            ArrowMovement.immovable(),
         )
 
         block.updateSurfaceView()
@@ -285,7 +348,7 @@ class DisplayBlockTest {
         val surfaceCaptor = ArgumentCaptor.forClass(SurfaceControl::class.java)
         // Verify both the wallpaper and backgroundSurface is reparented
         verify(mockTransaction, times(2))
-            .reparent(surfaceCaptor.capture(), eq(block.wallpaperView.surfaceControl))
+            .reparent(surfaceCaptor.capture(), eq(block.wallpaperView().surfaceControl))
         val backgroundSurface = surfaceCaptor.allValues.get(1)
 
         verify(mockTransaction).setAlpha(eq(backgroundSurface), eq(0.5f))
@@ -294,16 +357,32 @@ class DisplayBlockTest {
         verify(mockTransaction).setLayer(eq(wallpaper), eq(1))
     }
 
+    @Test
+    fun init_addsArrowButtons_notVisible() {
+        assertThat(block.arrowButtons.keys)
+            .containsExactly(Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT)
+
+        for (arrowButtonView in block.arrowButtons.values) {
+            assertThat(arrowButtonView.parent).isEqualTo(block)
+            assertThat(arrowButtonView.visibility).isEqualTo(View.GONE)
+        }
+    }
+
     private fun applyRequestedSize() {
         block.right = block.left + block.layoutParams.width
         block.bottom = block.top + block.layoutParams.height
     }
 
     private companion object {
+
+        private fun DisplayBlock.wallpaperView(): SurfaceView {
+            return findViewById<SurfaceView>(R.id.display_block_wallpaper)
+        }
+
         private const val DISPLAY_ID = 123
         private const val MIRRORED_DISPLAY_ID = 456
         private val DISPLAY_SIZE = Size(1280, 720)
-        private const val BLOCK_WIDTH = 200
-        private const val BLOCK_HEIGHT = 300
+        private const val BLOCK_WIDTH = 200f
+        private const val BLOCK_HEIGHT = 300f
     }
 }

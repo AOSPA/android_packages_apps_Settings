@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"下に移動"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"削除"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"一番上に移動"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> を上に移動"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> を下に移動"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> を削除"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> を一番上に移動"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"システム言語一覧の編集（<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>）"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"国, 地域"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"天気, 百分度, 度, 気温, 摂氏, 華氏"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"メートル法, ヤードポンド法, 温度, 身長, 体重, 距離, 摂氏, 華氏, ポンド, キログラム, kg, マイル, キロメートル, インチ, センチメートル, メートル, 単位"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"数字, 数値, 番号, ナンバー, 番号体系"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"日曜日, 月曜日, 火曜日, 水曜日, 木曜日, 金曜日, 土曜日, 最初の曜日"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"地域別の設定"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"使用する単位と数字を指定します"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"地域別の設定を行えば、アプリが機能をパーソナライズします。"</string>
@@ -304,8 +312,10 @@
     <string name="apply" msgid="7834684883190163536">"適用"</string>
     <string name="share" msgid="8502235338607613795">"共有"</string>
     <string name="add" msgid="8335206931421683426">"追加"</string>
+    <string name="verify" msgid="6452664472920137535">"確認"</string>
     <string name="remove" msgid="1028414219245072102">"削除"</string>
     <string name="process" msgid="2614220641928709668">"プロセス"</string>
+    <string name="dismiss" msgid="7878176050401175851">"閉じる"</string>
     <string name="settings_label" msgid="943294133671632976">"設定"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"設定"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"設定のショートカット"</string>
@@ -1189,7 +1199,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"QR コードを使用して、このネットワークにデバイスを追加します"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR コードの形式が無効です"</string>
     <string name="retry" msgid="7542103800274026915">"再試行"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"他のデバイスユーザーと共有する"</string>
     <string name="shared_message" msgid="2104244057926025072">"共有"</string>
     <string name="private_message" msgid="5897966950396765392">"非公開"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"確認"</string>
@@ -1533,6 +1542,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"壁紙のオプション"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"ロック画面の壁紙の表示"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"常に表示状態のディスプレイにロック画面の壁紙が表示されます"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"操作がないときにディスプレイを OFF にする"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"ユーザーのアクティビティが検出されないときに、ディスプレイを OFF にして電力を節約します"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"テキストを太字にする"</string>
     <string name="title_font_size" msgid="570613010306330622">"フォントサイズ"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"文字のサイズを変更します"</string>
@@ -3469,6 +3480,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"このユーザーの管理者権限を削除しても、あなたや他の管理者が後で管理者権限を再設定できます。"</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"ご自身の管理者権限を削除してもよろしいですか？"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"続行すると、管理者権限を付与できるのは他の管理者のみになります。"</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"ユーザーを削除できません"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"このデバイスの管理者はあなただけなので、ユーザー プロフィールを削除することはできません。ユーザー プロフィールを削除する場合は、別のユーザーを管理者に指定するか、[システム] &gt; [リセット オプション] &gt; [すべてのデータを消去（初期設定にリセット）] に移動してデバイスからすべてのデータを消去してください。"</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"管理者権限を削除できません"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"このデバイスの管理者ユーザーはあなただけです。管理者をやめる場合は、まず別のユーザーを管理者に指定してください。"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"緊急時情報"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>の情報と連絡先"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g>を開く"</string>
@@ -4084,7 +4099,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"通知オーガナイザー"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"優先度の低い通知をまとめてミュートします"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"通知オーガナイザーの対象アプリを管理する"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"バンドルを常に開く"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"バンドルの展開"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"自動"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"常に開く"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"開かない"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"仕事用プロファイルのアプリに適用する"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR ヘルパー サービス"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"VR ヘルパー サービスとしての実行権限をリクエストしたインストール済みアプリはありません。"</string>
@@ -5267,6 +5285,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"スマートフォンでサポートされているアプリ"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM を追加できません"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM を追加する前に衛星通信を終了してください"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"スマートウォッチやスマートフォンなどの対応デバイスが Bluetooth で接続されていれば、デバイス間で機内モードが同期されます"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"アクセス ポイント名"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> への接続時は利用できません"</string>
@@ -5373,9 +5392,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"左: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"右: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"ケース: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"バッテリー残量 - 左: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"バッテリー残量 - 右:<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"バッテリー残量 - ケース: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"バッテリー残量（左）: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"バッテリー残量（右）: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"バッテリー残量（ケース）: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"バッテリー残量: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"バッテリー"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"設定パネル"</string>
@@ -5939,14 +5958,22 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN を忘れた場合"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"PIN をお忘れの場合"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"再設定用のメールアドレスを更新する"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"再設定用のメールアドレスが追加されました"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"再設定用のメールアドレスを確認しました"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"再設定用のメールアドレスを更新しました"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN を更新しました"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN を変更しました"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN を削除しました"</string>
+    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"再設定用の情報を確認してください"</string>
+    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"再設定用のアカウントが確認されていません。確認するには、アカウントのパスワードを入力する必要があります。"</string>
+    <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"再設定用の情報を追加してください"</string>
+    <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"PIN を忘れた場合は、アカウントを使って再設定できます"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN を削除する"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"再設定用のメールアドレスの追加"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"メールアドレスの確認"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"アプリストアのフィルタ"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"コンテンツの対象ユーザー（成熟度）に基づいてアプリをフィルタします"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"アプリごとに異なる種類のコンテンツをブロックしている可能性があります。記載されていないアプリストアは個別に管理する必要があります。"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"ウェブサイトのコンテンツ フィルタ"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"ウェブサイト フィルタ, サイトのブロック, ブラウザ フィルタ, 露骨な表現を含むサイトのブロック, サイトのフィルタ, 検索結果のブロック, 露骨な表現を含む検索結果のフィルタ, コンテンツの制限"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"このスマートフォンの一部のアプリとブラウザで露骨な表現を含むコンテンツが除外されやすくなります。他のアプリ、デバイス、ブラウザでは、露骨な表現を含むコンテンツが引き続き表示される場合があります。"</string>
@@ -5999,4 +6026,12 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"アラートを開く"</string>
+    <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"アラートを閉じる"</string>
+    <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"削除したアラート"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"このアラートを削除しますか？"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"セキュリティとプライバシーの設定を適宜確認し、保護を強化しましょう"</string>
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"ペア設定"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> を接続しました"</string>
+    <string name="safety_center_rescan_button" msgid="1290673104206018701">"デバイスをスキャン"</string>
 </resources>

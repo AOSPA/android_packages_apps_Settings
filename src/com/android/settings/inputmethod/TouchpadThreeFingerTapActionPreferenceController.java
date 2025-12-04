@@ -17,7 +17,6 @@
 package com.android.settings.inputmethod;
 
 import static com.android.settings.flags.Flags.threeFingerTapAppLaunch;
-import static com.android.settings.flags.Flags.touchpadSettingsDesignUpdate;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.SHARED_PREF_NAME;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.TARGET_ACTION_URI;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.TRIGGER;
@@ -146,7 +145,7 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
                         v -> appSelectionLauncher(/* isRadioClicked= */ false).launch());
             }
             mPreference.setOnClickListener(this);
-            if (touchpadSettingsDesignUpdate() && mPreferenceKey.equals(ASSISTANT_KEY)) {
+            if (mPreferenceKey.equals(ASSISTANT_KEY)) {
                 mPreference.setTitle(getDefaultAssistantTitle(mContext, mPackageManager));
             }
         }

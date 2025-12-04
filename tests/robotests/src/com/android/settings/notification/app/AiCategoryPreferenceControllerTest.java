@@ -101,6 +101,7 @@ public class AiCategoryPreferenceControllerTest {
 
         when(mBackend.hasSentValidMsg(anyString(), anyInt())).thenReturn(true);
         when(mBackend.getAllowedAssistantAdjustments()).thenReturn(List.of(KEY_SUMMARIZATION));
+        when(mBackend.showSummarizationSettings()).thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
 
         when(mBackend.getAllowedAssistantAdjustments()).thenReturn(

@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Mover hacia abajo"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Quitar"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Mover al principio"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"Mover <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> hacia arriba"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"Mover <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> hacia abajo"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"Eliminar <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"Mover <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> al principio"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"Editar lista de idiomas del sistema, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"país, territorio"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"tiempo, centígrados, grados, temperatura, celsius, fahrenheit"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"métrico, imperial, temperatura, altura, peso, distancia, celsius, fahrenheit, libras, kilogramos, kg, milla, kilómetro, pulgadas, centímetros, metros, unidad"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"dígito, dígitos, número, números, sistema de numeración"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"domingo, lunes, martes, miércoles, jueves, viernes, sábado, primer día"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferencias regionales"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Define preferencias de unidades y números"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permite que las apps sepan tus preferencias regionales para que puedan personalizar tu experiencia."</string>
@@ -304,8 +312,12 @@
     <string name="apply" msgid="7834684883190163536">"Aplicar"</string>
     <string name="share" msgid="8502235338607613795">"Compartir"</string>
     <string name="add" msgid="8335206931421683426">"Añadir"</string>
+    <!-- no translation found for verify (6452664472920137535) -->
+    <skip />
     <string name="remove" msgid="1028414219245072102">"Quitar"</string>
     <string name="process" msgid="2614220641928709668">"Procesar"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"Ajustes"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Ajustes"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Acceso a Ajustes"</string>
@@ -1189,7 +1201,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Usa un código QR para añadir un dispositivo a esta red"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"El formato del código QR no es válido"</string>
     <string name="retry" msgid="7542103800274026915">"Reintentar"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"Compartir con otros usuarios del dispositivo"</string>
     <string name="shared_message" msgid="2104244057926025072">"compartida"</string>
     <string name="private_message" msgid="5897966950396765392">"privada"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Confirmar"</string>
@@ -1533,6 +1544,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Opciones de fondo de pantalla"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Mostrar fondo de pantalla de la pantalla de bloqueo"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"El fondo de la pantalla de bloqueo se muestra con la pantalla siempre activa"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Apagar pantalla por inactividad"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Apaga la pantalla cuando no se detecta actividad del usuario para ahorrar energía"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Texto en negrita"</string>
     <string name="title_font_size" msgid="570613010306330622">"Tamaño de fuente"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Amplía o reduce el texto"</string>
@@ -2112,7 +2125,7 @@
     <string name="running_processes_header_title" msgid="558961782589967366">"Memoria del dispositivo"</string>
     <string name="running_processes_header_footer" msgid="2726092156680487584">"RAM usada por las aplicaciones"</string>
     <string name="running_processes_header_system_prefix" msgid="8819527769608555124">"Sistema"</string>
-    <string name="running_processes_header_apps_prefix" msgid="4151874328324238133">"Apps"</string>
+    <string name="running_processes_header_apps_prefix" msgid="4151874328324238133">"Aplicaciones"</string>
     <string name="running_processes_header_free_prefix" msgid="4271100378295864738">"Libre"</string>
     <string name="running_processes_header_used_prefix" msgid="5205762402234243007">"Usada"</string>
     <string name="running_processes_header_cached_prefix" msgid="839132595831993521">"En caché"</string>
@@ -3469,6 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Si le quitas los privilegios de administrador a este usuario, tanto tú como otro administrador puede devolvérselos más tarde."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"¿Seguro que quieres quitarte los privilegios de administrador?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Si continúas, solo otros administradores podrán concederte privilegios de administrador."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"No se puede eliminar el usuario"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Eres el único administrador de este dispositivo, por lo que tu perfil de usuario no se puede eliminar. Si quieres eliminarlo, puedes asignar el rol de administrador a otro usuario o borrar todos los datos del dispositivo yendo a Sistema &gt; Opciones de restablecimiento &gt; Volver al estado de fábrica (borrar todo)."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"No se pueden quitar los privilegios de administrador"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Eres el único usuario administrador de este dispositivo. Si ya no quieres ser administrador, primero debes asignar ese rol a otro usuario."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Información de emergencia"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Información y contactos de <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Abrir <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3864,7 +3881,7 @@
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 hora}other{# horas}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 minuto}other{# minutos}}"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Personas"</string>
-    <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
+    <string name="zen_category_apps" msgid="1167374545618451925">"Aplicaciones"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmas y otras interrupciones"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Duración en los ajustes rápidos"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Sonidos del perfil de trabajo"</string>
@@ -4066,7 +4083,7 @@
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"Notificaciones que nunca hacen que el dispositivo suene o vibre"</string>
     <string name="notification_listener_allowed" msgid="5536962633536318551">"Permitido"</string>
     <string name="notification_listener_not_allowed" msgid="3352962779597846538">"No permitido"</string>
-    <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Ver todas las apps"</string>
+    <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Ver todas las aplicaciones"</string>
     <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"Cambia los ajustes de cada aplicación que envía notificaciones"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Aplicaciones que se muestran en el dispositivo"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Esta aplicación no admite la configuración avanzada"</string>
@@ -4084,7 +4101,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Organizador de notificaciones"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Agrupa y silencia las notificaciones de menor prioridad"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Gestionar apps para el organizador de notificaciones"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Desplegar siempre las agrupaciones"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Ampliación del paquete"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automático"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Ampliar siempre"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"No ampliar nunca"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Aplicar a las apps del perfil de trabajo"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicios de ayuda de RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ninguna aplicación instalada ha solicitado ejecutarse como servicio de ayuda de RV."</string>
@@ -4239,7 +4259,7 @@
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"De próximos eventos de calendario"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"eventos"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"Eventos"</string>
-    <string name="zen_mode_apps_title" msgid="1691010857014041183">"Apps"</string>
+    <string name="zen_mode_apps_title" msgid="1691010857014041183">"Aplicaciones"</string>
     <string name="zen_mode_apps_category" msgid="4082380323683889391">"Apps que pueden interrumpirte"</string>
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Apps seleccionadas"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Ninguna"</string>
@@ -4258,7 +4278,7 @@
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Algunas notificaciones"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Las personas seleccionadas podrán ponerse en contacto contigo, incluso si no permites que las aplicaciones puedan interrumpirte"</string>
     <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Ninguna aplicación puede interrumpirte}=1{{app_1} puede interrumpirte}=2{{app_1} y {app_2} pueden interrumpirte}=3{{app_1}, {app_2} y {app_3} pueden interrumpirte}other{{app_1}, {app_2} y # más pueden interrumpirte}}"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Apps"</string>
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Aplicaciones"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notificaciones que pueden interrumpirte"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Permitir todas las notificaciones"</string>
     <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Nada puede interrumpirte}=1{{sound_category_1} puede interrumpirte}=2{Te pueden interrumpir {sound_category_1} y {sound_category_2}}=3{Te pueden interrumpir {sound_category_1}, {sound_category_2} y {sound_category_3}}other{Te pueden interrumpir {sound_category_1}, {sound_category_2} y # más}}"</string>
@@ -4990,7 +5010,7 @@
     <string name="storage_audio" msgid="5994664984472140386">"Audio"</string>
     <string name="storage_documents" msgid="7873134307844320096">"Documentos"</string>
     <string name="storage_other" msgid="7922190148479988838">"Otros"</string>
-    <string name="storage_apps" msgid="3564291603258795216">"Apps"</string>
+    <string name="storage_apps" msgid="3564291603258795216">"Aplicaciones"</string>
     <string name="storage_system" msgid="8472410119822911844">"Sistema"</string>
     <string name="storage_os_name" msgid="4637680493234672410">"Android <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="storage_temporary_files" msgid="8254109904032452219">"Archivos temporales del sistema"</string>
@@ -5269,6 +5289,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Apps compatibles en tu teléfono"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"No se puede añadir una SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Finaliza la conexión por satélite antes de añadir una SIM"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Cuando estén conectados por Bluetooth, el modo Avión se sincronizará en los dispositivos compatibles, como el teléfono y el reloj"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nombres de puntos de acceso"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"No está disponible cuando se está conectado a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5375,9 +5396,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Izquierdo: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Derecho: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Funda: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Izquierdo, batería: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Derecho, batería: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Funda, batería: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Batería, izquierdo: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Batería, derecho: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Batería, funda: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Batería: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batería"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panel de ajustes"</string>
@@ -5574,7 +5595,7 @@
     <string name="not_allowed_by_ent" msgid="1958611623122304411">"No permitido por tu organización"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"No disponible porque el modo Descanso está activado"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Borrado de la importancia de las notificaciones completado."</string>
-    <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>
+    <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplicaciones"</string>
     <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Un dispositivo quiere acceder a tus mensajes. Toca para consultar información detallada."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"¿Permitir acceso a los mensajes?"</string>
     <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Un dispositivo Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, quiere acceder a tus mensajes.\n\nEs la primera vez que te conectas a <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
@@ -5604,7 +5625,7 @@
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"Usar NFC"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Usar Brillo adaptativo"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Usar Llamada por Wi-Fi"</string>
-    <string name="default_see_all_apps_title" msgid="7481113230662612178">"Ver todas las apps"</string>
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"Ver todas las aplicaciones"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Desvío inteligente"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Desvío inteligente habilitado"</string>
     <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"Desvío inteligente inhabilitado"</string>
@@ -5941,14 +5962,26 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"He olvidado el PIN"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"¿Has olvidado tu PIN?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Actualizar correo de recuperación"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Correo de recuperación añadido"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Correo de recuperación verificado"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Correo de recuperación actualizado"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN actualizado"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN cambiado"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN eliminado"</string>
+    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
+    <skip />
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Eliminar PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Añadir correo de recuperación"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verificar tu correo"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtros de tiendas de apps"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Excluir apps según la clasificación por edad de su contenido"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Cada app puede bloquear diferentes tipos de contenido. Las tiendas de apps que no aparecen en la lista deben gestionarse de forma independiente."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtros de contenido de sitios"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"exclusión de sitios web, bloquear sitios, filtros del navegador, bloquear sitios con contenido explícito, excluir sitios, bloquear resultados de búsqueda, excluir resultados de búsqueda con contenido explícito, restricciones de contenido"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Ayuda a excluir el contenido explícito en algunas apps y navegadores de este teléfono. Puede seguir apareciendo contenido explícito en otras apps, dispositivos o navegadores."</string>
@@ -6001,4 +6034,18 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Emparejamiento"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> conectado"</string>
+    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
+    <skip />
 </resources>

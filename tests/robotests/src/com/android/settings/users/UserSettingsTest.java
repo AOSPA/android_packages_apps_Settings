@@ -125,7 +125,6 @@ import java.util.List;
 public class UserSettingsTest {
 
     private static final String KEY_USER_GUEST = "user_guest";
-    private static final String KEY_ALLOW_MULTIPLE_USERS = "allow_multiple_users";
     private static final String KEY_USER_SETTINGS_SCREEN = "user_settings_screen";
     private static final String KEY_ADD_USER = "user_add";
     private static final int ACTIVE_USER_ID = 1;
@@ -250,7 +249,7 @@ public class UserSettingsTest {
 
     @Test
     public void testGetRawDataToIndex_returnAllIndexablePreferences() {
-        String[] expectedKeys = {KEY_ALLOW_MULTIPLE_USERS, KEY_USER_SETTINGS_SCREEN, KEY_ADD_USER};
+        String[] expectedKeys = {KEY_USER_SETTINGS_SCREEN, KEY_ADD_USER};
         List<String> keysResultList = new ArrayList<>();
         ShadowUserManager.getShadow().setSupportsMultipleUsers(true);
         givenUsers(getAdminUser(true));

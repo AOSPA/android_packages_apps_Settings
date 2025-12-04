@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Perkelti žemyn"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Pašalinti"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Perkelti į viršų"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"Perkelti <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> aukštyn"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"Perkelti <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> žemyn"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"Pašalinti <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"Perkelti <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> į viršų"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"Redaguoti sistemos kalbų sąrašą, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"šalis, teritorija"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"orai, Celsijaus skalė, laipsniai, temperatūra, Celsijus, Farenheitas"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"metrinė, imperinė, temperatūra, ūgis, svoris, atstumas, Celsijaus, Farenheito, svarai, kilogramai, kg, mylia, kilometras, coliai, centimetrai, metrai, matavimo vienetas"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"skaitmuo, skaitmenys, skaičius, skaičiai, numeravimo sistema"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"sekmadienis, pirmadienis, antradienis, trečiadienis, ketvirtadienis, penktadienis, šeštadienis, pirma diena"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Tinkamumo nustatymai pagal regioną"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Nustatyti vienetus ir numerių nuostatas"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Leiskite programoms žinoti jūsų tinkamumo nustatymus pagal regioną, kad galėtų suasmeninti funkcijas."</string>
@@ -304,8 +312,10 @@
     <string name="apply" msgid="7834684883190163536">"Taikyti"</string>
     <string name="share" msgid="8502235338607613795">"Bendrinti"</string>
     <string name="add" msgid="8335206931421683426">"Pridėti"</string>
+    <string name="verify" msgid="6452664472920137535">"Patvirtinti"</string>
     <string name="remove" msgid="1028414219245072102">"Pašalinti"</string>
     <string name="process" msgid="2614220641928709668">"Apdoroti"</string>
+    <string name="dismiss" msgid="7878176050401175851">"Uždaryti"</string>
     <string name="settings_label" msgid="943294133671632976">"Nustatymai"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Nustatymai"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Spartusis nustatymų klavišas"</string>
@@ -1189,7 +1199,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Naudokite QR kodą, kad galėtumėte pridėti įrenginį prie šio tinklo"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR kodas netinkamo formato"</string>
     <string name="retry" msgid="7542103800274026915">"Bandyti dar kartą"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"Bendrinti su kitais įrenginio naudotojais"</string>
     <string name="shared_message" msgid="2104244057926025072">"bendrinama"</string>
     <string name="private_message" msgid="5897966950396765392">"privatu"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Patvirtinti"</string>
@@ -1533,6 +1542,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Ekrano fono parinktys"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Rodyti užrakinimo ekrano foną"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Užrakinimo ekrano fonas matomas naudojant visada veikiantį ekraną"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Ekrano išjungimas, kai neaktyvu"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Išjungiamas ekranas, kai neaptinkama naudotojo veikla, siekiant taupyti energiją"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Pusjuodis tekstas"</string>
     <string name="title_font_size" msgid="570613010306330622">"Šrifto dydis"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Teksto padidinimas arba sumažinimas"</string>
@@ -3469,6 +3480,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Jei pašalinsite šio naudotojo administratoriaus privilegijas, jūs ar kitas administratorius galės jas vėl suteikti vėliau."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Ar tikrai norite pašalinti savo administratoriaus privilegijas?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Jei tęsite, tik kiti administratoriai galės suteikti jums administratoriaus privilegijas."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Nepavyko ištrinti naudotojo"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Esate vienintelis administratorius šiame įrenginyje, todėl naudotojo profilio ištrinti negalima. Jei norite ištrinti naudotojo profilį, galite paskirti kitą naudotoją administratoriumi arba ištrinti visus įrenginio duomenis apsilankę skiltyje „Sistema“ &gt; „Nust. parinkt. iš naujo“ &gt; „Ištrinti visus duomenis (atkurti gamyklinius nustatymus)“."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Nepavyko pašalinti administratoriaus privilegijų"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Esate vienintelis naudotojas administratorius šiame įrenginyje. Jei nebenorite būti administratorius, pirmiausia turite paskirti administratoriumi kitą naudotoją."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Kritinės padėties informacija"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> informacija ir kontaktai"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Atidaryti „<xliff:g id="APP_NAME">%1$s</xliff:g>“"</string>
@@ -4084,7 +4099,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Pranešimų tvarkyklė"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Sugrupuokite ir nutildykite žemesnio prioriteto pranešimus"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Pranešimų tvarkyklės programų tvarkymas"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Visada išskleisti rinkinius"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Rinkinio išskleidimas"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automatinis"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Visada išskleisti"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Niekada neišskleisti"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Taikyti darbo profilio programoms"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Pagalbinės virtualiosios realybės paslaugos"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nėra įdiegtų programų, kurios pateikė užklausą būti vykdomos kaip pagalbinės virtualiosios realybės paslaugos."</string>
@@ -5267,6 +5285,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Telefone palaikomos programos"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Nepavyko pridėti SIM kortelės"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Prieš pridėdami SIM kortelę, nutraukite palydovinį ryšį"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Susiejus „Bluetooth“ ryšiu, lėktuvo režimas bus sinchronizuojamas palaikomuose įrenginiuose, pvz., telefone ir laikrodyje"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Prieigos taškų pavadinimai"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"Prieigos taško pavadinimas"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nepasiekiama, kai prisijungta prie „<xliff:g id="CARRIER">%1$s</xliff:g>“"</string>
@@ -5373,9 +5392,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Kairė: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Dešinė: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Dėklas: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Akumuliatoriaus lygis (kairė): <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Akumuliatoriaus lygis (dešinė): <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Dėklas, akumuliatoriaus lygis: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Kairiojo kaušelio akumuliatoriaus energija: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Dešiniojo kaušelio akumuliatoriaus energija: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Dėklo akumuliatoriaus energija: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Akumuliatorius: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Akumuliatorius"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Nustatymų skydelis"</string>
@@ -5941,14 +5960,22 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Pamiršau PIN kodą"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Pamiršote PIN kodą?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Atnaujinti atkūrimo el. pašto adresą"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Atkūrimo el. pašto adresas pridėtas"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Atkūrimo el. pašto adresas patvirtintas"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Atkūrimo el. pašto adresas atnaujintas"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN kodas atnaujintas"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN kodas pakeistas"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN kodas ištrintas"</string>
+    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"Patvirtinti atkūrimo informaciją"</string>
+    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"Atkūrimo paskyra nepatvirtinta. Norėdami patvirtinti turėsite įvesti paskyros slaptažodį."</string>
+    <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Pridėti atkūrimo informaciją"</string>
+    <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Jei pamiršite PIN kodą, naudodami paskyrą galėsite jį nustatyti iš naujo"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Ištrinti PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Atkūrimo el. pašto adreso pridėjimas"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"El. pašto adreso patvirtinimas"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Programų parduotuvės filtrai"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtruokite programas pagal jų turinio brandą"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Kiekviena programa gali blokuoti skirtingų tipų turinį. Nepateiktos programų parduotuvės turi būti tvarkomos atskirai."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Svetainės turinio filtrai"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Svetainių filtrai, blokuojamos svetainės, naršyklės filtrai, blokuoti nepadoraus turinio svetaines, filtruoti svetaines, blokuoti paieškos rezultatus, filtruoti nepadoraus turinio paieškos rezultatus, turinio apribojimai"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Padėkite filtruoti nepadorų turinį kai kuriose programose ir naršyklėse šiame telefone. Nepadorus turinys vis tiek gali būti rodomas kitose programose, įrenginiuose ar naršyklėse."</string>
@@ -6001,4 +6028,12 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Daugiau įspėjimų"</string>
+    <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Mažiau įspėjimų"</string>
+    <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Uždaryti įspėjimai"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Uždaryti šį įspėjimą?"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Peržiūrėkite saugos bei privatumo nustatymus bet kuriuo metu ir pasirūpinkite geresne apsauga"</string>
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Susiejama"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Prijungta: „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
+    <string name="safety_center_rescan_button" msgid="1290673104206018701">"Nuskaityti įrenginį"</string>
 </resources>

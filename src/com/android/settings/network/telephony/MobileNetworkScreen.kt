@@ -35,7 +35,9 @@ import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.apn.ApnSettings
 import com.android.settings.network.apn.ApnSettingsScreen
 import com.android.settings.restriction.PreferenceRestrictionMixin
+import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settings.utils.putSubId
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -59,7 +61,7 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
     PreferenceRestrictionMixin {
 
     private val subId =
-        arguments.getInt(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+        arguments.getSubId(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
 
     override val key: String
         get() = KEY
@@ -95,14 +97,13 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
                     +MobileNetworkDataUsagePreference(context, coroutineScope, subId)
                     +MobileNetworkSpnPreference(context, subId)
                     +MobileNetworkPhoneNumberPreference(data)
-                    +RoamingPreference(context, subId) order +90
                     +EnabledNetworkModePreference(data)
                     val imeiList = context.getImeiList
                     +MobileNetworkImeiPreference(context, subId, imeiList)
                     +(DataUsageListScreen.KEY args arguments)
                     +(BillingCycleScreen.KEY args arguments) order 115
                     +UntitledPreferenceCategoryMetadata("apn_and_protection_container") += {
-                        val bundle = Bundle(1).also { it.putInt(ApnSettings.SUB_ID, subId) }
+                        val bundle = Bundle(1).also { it.putSubId(ApnSettings.SUB_ID, subId) }
                         +(ApnSettingsScreen.KEY args bundle)
                     }
                 }
@@ -141,7 +142,7 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
 
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> {
-            fun Int.toArguments() = Bundle(1).also { it.putInt(Settings.EXTRA_SUB_ID, this) }
+            fun Int.toArguments() = Bundle(1).also { it.putSubId(Settings.EXTRA_SUB_ID, this) }
             return SubscriptionUtil.getSelectableSubscriptionInfoList(context).asFlow().map {
                 it.subscriptionId.toArguments()
             }

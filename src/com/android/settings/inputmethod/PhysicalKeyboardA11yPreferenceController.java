@@ -38,7 +38,7 @@ public class PhysicalKeyboardA11yPreferenceController extends BasePreferenceCont
     private static boolean isAnyHardKeyboardsExist() {
         for (int deviceId : InputDevice.getDeviceIds()) {
             final InputDevice device = InputDevice.getDevice(deviceId);
-            if (device != null && !device.isVirtual() && device.isFullKeyboard()) {
+            if (device != null && device.isPhysicalDevice() && device.isFullKeyboard()) {
                 return true;
             }
         }

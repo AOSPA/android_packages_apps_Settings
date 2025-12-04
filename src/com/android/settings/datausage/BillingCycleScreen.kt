@@ -29,6 +29,7 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.telephony.subscriptionManager
+import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -49,7 +50,7 @@ open class BillingCycleScreen(override val arguments: Bundle) :
     PreferenceBindingPlaceholder {
 
     private val subId =
-        arguments.getInt(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+        arguments.getSubId(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
 
     override val key: String
         get() = KEY

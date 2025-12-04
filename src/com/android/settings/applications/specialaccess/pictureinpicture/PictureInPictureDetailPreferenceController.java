@@ -47,7 +47,7 @@ public class PictureInPictureDetailPreferenceController extends AppInfoPreferenc
                 PackageManager.FEATURE_PICTURE_IN_PICTURE)) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        return hasPictureInPictureActivites() ? AVAILABLE : DISABLED_FOR_USER;
+        return hasPictureInPictureActivities() ? AVAILABLE : DISABLED_FOR_USER;
     }
 
     @Override
@@ -61,22 +61,22 @@ public class PictureInPictureDetailPreferenceController extends AppInfoPreferenc
     }
 
     @VisibleForTesting
-    boolean hasPictureInPictureActivites() {
-        // Get the package info with the activities
-        PackageInfo packageInfoWithActivities = null;
+    boolean hasPictureInPictureActivities() {
+        // Get the package info with the activities and permissions
+        PackageInfo packageInfo = null;
         try {
-            packageInfoWithActivities = mPackageManager.getPackageInfoAsUser(mPackageName,
-                    PackageManager.GET_ACTIVITIES, UserHandle.myUserId());
+            packageInfo = mPackageManager.getPackageInfoAsUser(mPackageName,
+                    PackageManager.GET_ACTIVITIES | PackageManager.GET_PERMISSIONS,
+                    UserHandle.myUserId());
         } catch (Exception e) {
             // Catch Exception to avoid DeadObjectException thrown with binder transaction
             // failures, since the explicit request of DeadObjectException has compiler errors.
             Log.e(TAG, "Exception while retrieving the package info of " + mPackageName, e);
         }
 
-        return packageInfoWithActivities != null
-                && PictureInPictureSettings.checkPackageHasPictureInPictureActivities(
-                packageInfoWithActivities.packageName,
-                packageInfoWithActivities.activities);
+        return packageInfo != null
+                && PictureInPictureSettings.checkPackageSupportsPictureInPicture(
+                packageInfo.packageName, packageInfo.activities, packageInfo.requestedPermissions);
     }
 
     @VisibleForTesting

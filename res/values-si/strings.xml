@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"පහළට ගෙන යන්න"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"ඉවත් කරන්න"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"ඉහළට ගෙන යන්න"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> ඉහළට ගෙන යන්න"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> පහළට ගෙන යන්න"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> ඉවත් කරන්න"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> ඉහළට ගෙන යන්න"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"පද්ධති භාෂා ලැයිස්තුව සංස්කරණය කරන්න, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"රට, දේශ භූමිය"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"කාලගුණය, සෙන්ටිග්‍රේඩ්, අංශක, උෂ්ණත්වය, සෙල්සියස්, ෆැරන්හයිට්"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"මාත්‍රික, ඉම්පීරියල්, උෂ්ණත්වය, උස, බර, දුර, සෙල්සියස්, ෆැරන්හයිට්, රාත්තල්, කිලෝග්‍රෑම්, kg, සැතපුම්, කිලෝමීටර, අඟල්, සෙන්ටිමීටර, මීටර, ඒකකය"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"ඉලක්කම්, ඉලක්කම්, අංකය, සංඛ්‍යා, අංකකරණ පද්ධතිය"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"ඉරිදා, සඳුදා, අඟහරුවාදා, බදාදා, බ්‍රහස්පතින්දා, සිකුරාදා, සෙනසුරාදා, පළමු දිනය"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"කලාපීය මනාප"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"ඒකක සහ අංක මනාප සකසන්න"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"යෙදුම්වලට ඔබේ අත්දැකීම පෞද්ගලීකරණය කළ හැකි පරිදි ඒවාට ඔබේ කලාපීය මනාපයන් දැන ගැනීමට සලස්වන්න."</string>
@@ -304,8 +312,11 @@
     <string name="apply" msgid="7834684883190163536">"යොදන්න"</string>
     <string name="share" msgid="8502235338607613795">"බෙදා ගන්න"</string>
     <string name="add" msgid="8335206931421683426">"එක් කරන්න"</string>
+    <string name="verify" msgid="6452664472920137535">"සත්‍යාපනය කරන්න"</string>
     <string name="remove" msgid="1028414219245072102">"ඉවත් කරන්න"</string>
     <string name="process" msgid="2614220641928709668">"ක්‍රියාවලිය"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"සැකසීම්"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"සැකසීම්"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"සැකසීම කෙටිමඟ"</string>
@@ -1189,7 +1200,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"මෙම ජාලයට උපාංගයක් එක් කිරීමට QR කේතයක් භාවිතා කරන්න"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR කේතය වලංගු ආකෘතියක් නොවේ"</string>
     <string name="retry" msgid="7542103800274026915">"යළි උත්සාහ කරන්න"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"අනෙකුත් උපාංග පරිශීලකයන් සමග බෙදා ගන්න"</string>
     <string name="shared_message" msgid="2104244057926025072">"බෙදා ගත්"</string>
     <string name="private_message" msgid="5897966950396765392">"පෞද්ගලික"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"තහවුරු කරන්න"</string>
@@ -1533,6 +1543,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"වෝල්පේපර විකල්ප"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"අගුළු තිර වෝල්පේපරය පෙන්වන්න"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"අගුළු තිර වෝල්පේපරය සැම විට ක්‍රියාත්මක සංදර්ශකය සමග දෘශ්‍යමාන වේ"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"අක්‍රියතාවය මත සංදර්ශකය ක්‍රියාවිරහිත කරන්න"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"බලය ඉතිරි කර ගැනීම සඳහා පරිශීලක ක්‍රියාකාරකමක් අනාවරණය නොවූ විට සංදර්ශකය ක්‍රියා විරහිත කරයි"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"තදකුරු පෙළ"</string>
     <string name="title_font_size" msgid="570613010306330622">"අකුරු ප්‍රමාණය"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"පෙළ වඩා විශාල හෝ වඩා කුඩා කරන්න"</string>
@@ -3469,6 +3481,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"ඔබ මෙම පරිශීලකයා සඳහා පරිපාලක වරප්‍රසාද ඉවත් කරන්නේ නම්, ඔබට හෝ වෙනත් පරිපාලකයෙකුට ඒවා පසුව ආපසු ලබා දිය හැක."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"ඔබට ඔබේම පරිපාලක වරප්‍රසාද ඉවත් කිරීමට අවශ්‍ය බව ඔබට විශ්වාස ද?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"ඔබ ඉදිරියට ගියහොත්, අනෙකුත් පරිපාලකයින්ට පමණක් ඔබට පරිපාලක වරප්‍රසාද ලබා දිය හැක."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"පරිශීලකයා මැකිය නොහැක"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"මෙම උපාංගයේ එකම පරිපාලකයා ඔබ වන බැවින් ඔබේ පරිශීලක පැතිකඩ මැකිය නොහැක. ඔබට ඔබේ පරිශීලක පැතිකඩ මකා දැමීමට අවශ්‍ය නම්, ඔබට වෙනත් පරිශීලකයෙකු පරිපාලකයෙකු කිරීමට හෝ පද්ධතිය &gt; නැවත සැකසීමේ විකල්ප &gt; සියලු දත්ත මකන්න (කර්මාන්තශාලා යළි සැකසීම) වෙත යාමෙන් උපාංගයෙන් සියලු දත්ත මකා දැමිය හැක."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"පරිපාලක වරප්‍රසාද ඉවත් කළ නොහැක"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"මෙම උපාංගයේ සිටින එකම පරිපාලක පරිශීලකයා ඔබයි. ඔබට තවදුරටත් පරිපාලකයෙකු වීමට අවශ්‍ය නැති නම්, ඔබ පළමුව වෙනත් පරිශීලකයෙකු පරිපාලකයෙකු කළ යුතුය."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"හදිසි අවස්ථා තොරතුරු"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> සඳහා තොරතුරු සහ සම්බන්ධතා"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> විවෘත කරන්න"</string>
@@ -4084,7 +4100,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"දැනුම්දීම් සංවිධායකයා"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"අඩු ප්‍රමුඛතා දැනුම්දීම් පොදි කර නිහඬ කරන්න"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"ඔබේ දැනුම්දීම් කිසි විටෙකත් Google වෙත යවනු නොලැබේ"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"සැම විට ම පොදි පුළුල් කරන්න"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"බණ්ඩල් ප්‍රසාරණය"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"ස්වයංක්‍රීය"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"සැමවිටම පුළුල් කරන්න"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"කිසිදා පුළුල් නොකරන්න"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"කාර්යාල පැතිකඩ යෙදුම්වලට යොදන්න"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR උදවුකරු සේවා"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ස්ථාපිත යෙදුම් කිසිවක් VR උදවුකරු සේවා ලෙස ධාවනය කිරීමට ඉල්ලා නැත."</string>
@@ -5267,6 +5286,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"ඔබේ දුරකථනයෙහි සහාය දක්වන යෙදුම්"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM එකක් එක් කළ නොහැක"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM එකක් එක් කිරීමට පෙර චන්ද්‍රිකා සම්බන්ධතාවය නිමා කරන්න"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"බ්ලූටූත් මඟින් සම්බන්ධ කළ විට, දුරකථනය සහ ඔරලෝසුව වැනි සහය දක්වන උපාංග හරහා අහස්යානා ප්‍රකාරය සමමුහුර්ත වනු ඇත"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ප්‍රවේශ ලක්ෂ්‍ය නම්"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> වෙත සම්බන්ධ වූ විට නොමැත"</string>
@@ -5373,9 +5393,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"වම: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"දකුණ: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"පෙට්ටිය: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"වම, බැටරිය: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"දකුණ, බැටරිය: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"පෙට්ටිය, බැටරිය: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"බැටරිය, වම: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"බැටරිය, දකුණ: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"බැටරි, පෙට්ටිය: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"බැටරිය: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"බැටරිය"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"සැකසීම් පුවරුව"</string>
@@ -5939,14 +5959,22 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN අමතක විණි"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"PIN අමතක වුණා ද?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"ප්‍රතිසාධන ඉ-තැපෑල යාවත්කාලීන කරන්න"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"ප්‍රතිසාධන ඉ-තැපෑල එක් කෙරිණි"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"ප්‍රතිසාධන ඉ-තැපෑල සත්‍යාපනය කරන ලදි"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"ප්‍රතිසාධන ඉ-තැපෑල යාවත්කාලීනයි"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN යාවත්කාලීන කරන ලදි"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN වෙනස් කෙරිණි"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN එක මැකුවා"</string>
+    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"ප්‍රතිසාධන තොරතුරු තහවුරු කරන්න"</string>
+    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"ඔබේ ප්‍රතිසාධන ගිණුම සත්‍යාපනය කර නොමැත. සත්‍යාපනය කිරීමට, ඔබ ගිණුමේ මුරපදය ඇතුළත් කිරීමට අවශ්‍ය වනු ඇත."</string>
+    <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"ප්‍රතිසාධන තතු එක් කරන්න"</string>
+    <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"ඔබට ඔබේ PIN අංකය අමතක වුවහොත්, එය නැවත සැකසීමට ඔබට ඔබේ ගිණුම භාවිත කළ හැක"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN එක මකන්න"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"ප්‍රතිසාධන ඉ-තැපෑල එක් කරන්න"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"ඔබේ ඉ-තැපෑල සත්‍යාපනය කරන්න"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"App store පෙරහන්"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"යෙදුම් ඒවායේ අන්තර්ගතයේ පරිණතභාවය මත පදනම්ව පෙරහන් කරන්න"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"එක් එක් යෙදුම විවිධ ආකාරයේ අන්තර්ගත අවහිර කළ හැකිය. ලැයිස්තුගත කර නොමැති App Store වෙන වෙනම කළමනාකරණය කළ යුතුය."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"වෙබ් අඩවි අන්තර්ගත පෙරහන්"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"වෙබ් අඩවි පෙරහන්, අඩවි අවහිර කරන්න, බ්‍රව්සර් පෙරහන්, අසභ්‍ය අඩවි අවහිර කරන්න, අඩවි පෙරහන් කරන්න, සෙවුම් ප්‍රතිඵල අවහිර කරන්න, අසභ්‍ය සෙවුම් ප්‍රතිඵල පෙරහන් කරන්න, අන්තර්ගත සීමා කිරීම්"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"මෙම දුරකථනයේ සමහර යෙදුම් සහ බ්‍රව්සර්වල අසභ්‍ය අන්තර්ගතය පෙරහන් කිරීමට උදවු කරන්න. වෙනත් යෙදුම්, උපාංග හෝ බ්‍රව්සර්වල තවමත් අසභ්‍ය අන්තර්ගතයන් පෙන්විය හැක."</string>
@@ -5999,4 +6027,17 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"යුගලනය වේ"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> සම්බන්ධිතයි"</string>
+    <string name="safety_center_rescan_button" msgid="1290673104206018701">"උපාංගය ස්කෑන් කරන්න"</string>
 </resources>

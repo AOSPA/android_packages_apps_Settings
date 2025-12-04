@@ -48,6 +48,7 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
     private var preference: SafetySourcePreference? = null
     private val userManager: UserManager = mContext.getSystemService(UserManager::class.java)!!
     private var viewModel: LiveSafetyCenterViewModel? = null
+    private var activityTaskId: Int? = null
     private lateinit var safetySourceId: String
     private var profileType: SafetySourcePreference.Profile =
         SafetySourcePreference.Profile.PERSONAL
@@ -63,11 +64,21 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
         this.viewModel = viewModel
         viewModel.safetyCenterUiLiveData.observe(owner) { data ->
             if (data == null) {
-                Log.d(TAG, "SafetyCenterUiData LiveData received null for $preferenceKey")
+                Log.d(TAG, "[$preferenceKey] LiveData received null")
                 return@observe
             }
+            Log.d(TAG, "[$preferenceKey] safetyCenterUiLiveData observer notified")
             preference?.let { updatePreferenceUi(it, data) }
         }
+    }
+
+    /**
+     * Sets the task ID of the hosting Activity.
+     *
+     * @param taskId The task ID of the hosting Activity.
+     */
+    fun setActivityTaskId(taskId: Int) {
+        this.activityTaskId = taskId
     }
 
     override fun getAvailabilityStatus(): Int {
@@ -84,41 +95,51 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
         }
     }
 
+    override fun updateState(preference: Preference?) {
+        super.updateState(preference)
+        val model = viewModel
+        if (preference != null && model != null) {
+            updatePreferenceUi(
+                preference as SafetySourcePreference,
+                model.getCurrentSafetyCenterDataAsUiData(),
+            )
+        }
+    }
+
     /** Updates the preference's UI elements based on the provided [SafetyCenterUiData]. */
     private fun updatePreferenceUi(preference: SafetySourcePreference, data: SafetyCenterUiData) {
-        Log.d(TAG, "updatePreferenceUi with data for $preferenceKey")
-
         val targetUserHandle = getUserHandleForProfile(profileType)
         if (targetUserHandle == null) {
-            Log.w(
-                TAG,
-                "No target UserHandle found for profile type $profileType for key $preferenceKey",
-            )
+            Log.w(TAG, "[$preferenceKey] No target UserHandle found for profile type $profileType")
             preference.isVisible = false
             return
         }
 
-        val entry = data.getEntry(targetUserHandle.identifier, safetySourceId!!)
+        val entry = data.getEntry(targetUserHandle.identifier, safetySourceId)
         if (entry == null) {
             Log.d(
                 TAG,
-                "No entry found for $safetySourceId and user ${targetUserHandle.identifier} for key $preferenceKey",
+                "[$preferenceKey] No entry found for $safetySourceId and user ${targetUserHandle.identifier}",
             )
             preference.isVisible = false
             return
         }
 
+        Log.d(
+            TAG,
+            "[$preferenceKey] Updating UI for entry with safetySourceId $safetySourceId and user ${targetUserHandle.identifier}",
+        )
         preference.title = entry.title
         preference.summary = entry.summary
         preference.isVisible = true
-    }
-
-    override fun updateState(preference: Preference) {
-        super.updateState(preference)
-        viewModel?.let { vm ->
-            val currentData = vm.getCurrentSafetyCenterDataAsUiData()
-            updatePreferenceUi(preference as SafetySourcePreference, currentData)
-        } ?: Log.w(TAG, "ViewModel not set in updateState for $preferenceKey, skipping UI update")
+        preference.setOnPreferenceClickListener {
+            PendingIntentSender.sendIntent(
+                mContext,
+                entry.pendingIntent,
+                safetySourceId,
+                activityTaskId,
+            )
+        }
     }
 
     /**
@@ -147,7 +168,7 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
     ): Boolean {
         val userInfo = userManager.getUserInfo(userHandle.identifier)
         if (userInfo == null) {
-            Log.e(TAG, "Failed to get UserInfo for user $userHandle")
+            Log.e(TAG, "[$preferenceKey] Failed to get UserInfo for user $userHandle")
             return false
         }
 

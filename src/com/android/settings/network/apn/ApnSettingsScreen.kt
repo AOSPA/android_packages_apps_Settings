@@ -32,7 +32,9 @@ import com.android.settings.network.CarrierConfigCache
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settings.restriction.PreferenceRestrictionMixin
+import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settings.utils.putSubId
 import com.android.settingslib.RestrictedPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -51,7 +53,7 @@ open class ApnSettingsScreen(override val arguments: Bundle) :
     PreferenceRestrictionMixin,
     PreferenceAvailabilityProvider,
     PreferenceBinding {
-    private val subId = arguments.getInt(ApnSettings.SUB_ID, INVALID_SUBSCRIPTION_ID)
+    private val subId = arguments.getSubId(ApnSettings.SUB_ID, INVALID_SUBSCRIPTION_ID)
 
     override val key: String
         get() = KEY
@@ -112,7 +114,7 @@ open class ApnSettingsScreen(override val arguments: Bundle) :
 
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> {
-            fun Int.toArguments() = Bundle(1).also { it.putInt(ApnSettings.SUB_ID, this) }
+            fun Int.toArguments() = Bundle(1).also { it.putSubId(ApnSettings.SUB_ID, this) }
             return SubscriptionUtil.getSelectableSubscriptionInfoList(context).asFlow().map {
                 it.subscriptionId.toArguments()
             }

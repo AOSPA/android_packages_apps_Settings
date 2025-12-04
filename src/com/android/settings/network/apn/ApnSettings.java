@@ -66,6 +66,7 @@ import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.network.telephony.SubscriptionRepository;
 import com.android.settings.spa.SpaActivity;
+import com.android.settings.utils.SubIdBundleUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settings.Utils;
 
@@ -76,6 +77,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 
 /** Handle each different apn setting. */
 // LINT.IfChange
@@ -289,7 +291,12 @@ public class ApnSettings extends RestrictedDashboardFragment
         if (args == null) {
             return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         }
-        return args.getInt(SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+
+        return SubIdBundleUtils.getSubId(
+                args,
+                SUB_ID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID
+        );
     }
 
     private void fillList() {

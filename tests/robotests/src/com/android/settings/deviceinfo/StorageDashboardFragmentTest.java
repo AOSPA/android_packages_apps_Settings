@@ -18,7 +18,9 @@ package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -27,33 +29,48 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.os.storage.StorageManager;
 import android.provider.SearchIndexableResource;
 import android.util.SparseArray;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class StorageDashboardFragmentTest {
-
+    private static final String FREE_UP_SPACE_KEY = "free_up_space";
+    @Mock
+    private PackageManager mMockPackageManager;
+    private Context mContext;
     private StorageDashboardFragment mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFragment = new StorageDashboardFragment();
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getPackageManager()).thenReturn(mMockPackageManager);
     }
 
     @Test
@@ -159,5 +176,43 @@ public class StorageDashboardFragmentTest {
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
+    }
+
+    @Test
+    public void searchIndexProvider_manageStorageIntentHandled_FreeUpSpaceIsSearchable() {
+        setupIntentHandling(true);
+
+        BaseSearchIndexProvider indexProvider = StorageDashboardFragment.SEARCH_INDEX_DATA_PROVIDER;
+        List<String> nonIndexableKeys = indexProvider.getNonIndexableKeys(mContext);
+
+        assertThat(nonIndexableKeys).doesNotContain(FREE_UP_SPACE_KEY);
+    }
+
+    @Test
+    public void searchIndexProvider_manageStorageIntentNotHandled_FreeUpIsNotSearchable() {
+        setupIntentHandling(false);
+
+        BaseSearchIndexProvider indexProvider = StorageDashboardFragment.SEARCH_INDEX_DATA_PROVIDER;
+        List<String> nonIndexableKeys = indexProvider.getNonIndexableKeys(mContext);
+
+        assertThat(nonIndexableKeys).contains(FREE_UP_SPACE_KEY);
+    }
+
+    private void setupIntentHandling(boolean canHandle) {
+        List<ResolveInfo> resolveInfoList = new ArrayList<>();
+        if (canHandle) {
+            resolveInfoList.add(new ResolveInfo()); // Simulate an activity can handle the intent
+        }
+
+        when(mMockPackageManager.queryIntentActivitiesAsUser(
+                any(Intent.class),
+                eq(PackageManager.MATCH_DEFAULT_ONLY), anyInt()))
+                .thenAnswer(invocation -> {
+                    Intent intent = invocation.getArgument(0);
+                    if (StorageManager.ACTION_MANAGE_STORAGE.equals(intent.getAction())) {
+                        return resolveInfoList;
+                    }
+                    return Collections.emptyList();
+                });
     }
 }

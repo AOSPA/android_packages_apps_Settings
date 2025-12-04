@@ -26,7 +26,6 @@ import static com.android.settings.Utils.createAccessibleSequence;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE;
-import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isExternalDisplaySettingsPageEnabled;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -37,6 +36,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.admin.EnforcingAdmin;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.icu.text.NumberFormat;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -72,6 +72,7 @@ import com.android.settingslib.widget.MainSwitchPreference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * The Settings screen for External Displays configuration and connection management.
@@ -200,6 +201,9 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     private ActivityTaskManager mActivityTaskManager;
     private DevicePolicyManager mDpm;
 
+    private final NumberFormat mNumberFormatter =
+            NumberFormat.getNumberInstance(Locale.getDefault());
+
     public ExternalDisplayPreferenceFragment() {
         mInjector = new ConnectedDisplayInjector(/* context= */ null);
     }
@@ -226,6 +230,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         }
         mActivityTaskManager = requireContext().getSystemService(ActivityTaskManager.class);
         mDpm = requireContext().getSystemService(DevicePolicyManager.class);
+        mNumberFormatter.setGroupingUsed(false);
         addPreferencesFromResource(EXTERNAL_DISPLAY_SETTINGS_RESOURCE);
     }
 
@@ -539,7 +544,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (isUseDisplaySettingEnabled()) {
             addUseDisplayPreferenceForDisplay(refresh, display, position);
         }
-        final var displayRotation = getDisplayRotation(display.getId());
+        final var displayRotation = display.getRotation();
         if (includeV1Helpers && display.isEnabled() == DisplayIsEnabled.YES) {
             addIllustrationImage(refresh, displayRotation);
         }
@@ -687,8 +692,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             logger.log(SettingsStatsLog.EXTERNAL_DISPLAY_SETTINGS_CHANGED__SETTING__ROTATION);
             return true;
         });
-        pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES
-                && mInjector.getFlags().rotationConnectedDisplaySetting());
+        pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES);
     }
 
     private void addConnectionPreference(PrefRefresh refresh, DisplayDevice display, int position) {
@@ -751,9 +755,11 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         var pref = reuseResolutionPreference(refresh, position);
         int width = mode.getPhysicalWidth();
         int height = mode.getPhysicalHeight();
+        String formattedWidth = mNumberFormatter.format(width);
+        String formattedHeight = mNumberFormatter.format(height);
         pref.setSummary(
                 createAccessibleSequence(
-                        width + " x " + height,
+                        formattedWidth + " x " + formattedHeight,
                         getResources()
                                 .getString(
                                         R.string.screen_resolution_delimiter_a11y, width, height)));
@@ -775,13 +781,6 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                     return true;
                 });
         pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES);
-    }
-
-    private int getDisplayRotation(int displayId) {
-        if (mInjector == null) {
-            return 0;
-        }
-        return Math.min(3, Math.max(0, mInjector.getDisplayUserRotation(displayId)));
     }
 
     @VisibleForTesting
@@ -877,9 +876,6 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 public @NonNull List<SearchIndexableRaw> getRawDataToIndex(@NonNull Context context,
                         boolean enabled) {
                     List<SearchIndexableRaw> rawData = new ArrayList<>();
-                    if (!isExternalDisplaySettingsPageEnabled(new FeatureFlagsImpl())) {
-                        return rawData;
-                    }
                     SearchIndexableRaw indexInfo = new SearchIndexableRaw(context);
                     indexInfo.key = "external_display_screen_title";
                     indexInfo.title = context.getString(EXTERNAL_DISPLAY_TITLE_RESOURCE);

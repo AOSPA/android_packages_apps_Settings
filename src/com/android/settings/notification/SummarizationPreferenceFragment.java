@@ -18,6 +18,8 @@ package com.android.settings.notification;
 
 import static android.service.notification.Adjustment.KEY_SUMMARIZATION;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+
 import android.app.Activity;
 import android.app.Application;
 import android.app.Flags;
@@ -91,8 +93,7 @@ public class SummarizationPreferenceFragment extends DashboardFragment {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     NotificationBackend backend = new NotificationBackend();
-                    return (Flags.nmSummarization() || Flags.nmSummarizationUi())
-                            && backend.isNotificationSummarizationSupported();
+                    return backend.showSummarizationSettings();
                 }
             };
 }

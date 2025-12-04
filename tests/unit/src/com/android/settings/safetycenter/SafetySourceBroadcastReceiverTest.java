@@ -23,6 +23,7 @@ import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_DEVICE_REBOOTED
 import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_REFRESH_REQUESTED;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.util.concurrent.MoreExecutors.directExecutor;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
@@ -35,13 +36,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.platform.test.flag.junit.FlagsParameterization;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.safetycenter.SafetyEvent;
 
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.flags.Flags;
 import com.android.settings.privatespace.PrivateSpaceSafetySource;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -54,9 +56,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import platform.test.runner.parameterized.ParameterizedAndroidJunit4;
+import platform.test.runner.parameterized.Parameters;
+
 import java.util.List;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(ParameterizedAndroidJunit4.class)
 public class SafetySourceBroadcastReceiverTest {
 
     private static final String REFRESH_BROADCAST_ID = "REFRESH_BROADCAST_ID";
@@ -71,6 +76,18 @@ public class SafetySourceBroadcastReceiverTest {
     @Mock private LockPatternUtils mLockPatternUtils;
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
+    private SafetySourceBroadcastReceiver mSafetySourceBroadcastReceiver;
+
+    @Parameters(name = "{0}")
+    public static List<FlagsParameterization> getParams() {
+        return FlagsParameterization.allCombinationsOf(
+                Flags.FLAG_MOVE_SAFETY_SOURCE_REFRESH_TO_BACKGROUND);
+    }
+
+    public SafetySourceBroadcastReceiverTest(FlagsParameterization flags) {
+        mSetFlagsRule.setFlagsParameterization(flags);
+    }
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -79,6 +96,8 @@ public class SafetySourceBroadcastReceiverTest {
         when(featureFactory.securityFeatureProvider.getLockPatternUtils(mApplicationContext))
                 .thenReturn(mLockPatternUtils);
         SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
+        mSafetySourceBroadcastReceiver = new SafetySourceBroadcastReceiver();
+        mSafetySourceBroadcastReceiver.setTestExecutor(directExecutor());
     }
 
     @After
@@ -97,7 +116,7 @@ public class SafetySourceBroadcastReceiverTest {
                                 new String[] {LockScreenSafetySource.SAFETY_SOURCE_ID})
                         .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
 
         verify(mSafetyCenterManagerWrapper, never())
                 .setSafetySourceData(any(), any(), any(), any());
@@ -113,7 +132,7 @@ public class SafetySourceBroadcastReceiverTest {
                                 new String[] {LockScreenSafetySource.SAFETY_SOURCE_ID})
                         .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
 
         verify(mSafetyCenterManagerWrapper, never())
                 .setSafetySourceData(any(), any(), any(), any());
@@ -127,7 +146,7 @@ public class SafetySourceBroadcastReceiverTest {
                         .setAction(ACTION_REFRESH_SAFETY_SOURCES)
                         .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
 
         verify(mSafetyCenterManagerWrapper, never())
                 .setSafetySourceData(any(), any(), any(), any());
@@ -142,7 +161,7 @@ public class SafetySourceBroadcastReceiverTest {
                         .putExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS, new String[] {})
                         .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
 
         verify(mSafetyCenterManagerWrapper, never())
                 .setSafetySourceData(any(), any(), any(), any());
@@ -158,7 +177,7 @@ public class SafetySourceBroadcastReceiverTest {
                                 EXTRA_REFRESH_SAFETY_SOURCE_IDS,
                                 new String[] {LockScreenSafetySource.SAFETY_SOURCE_ID});
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
 
         verify(mSafetyCenterManagerWrapper, never())
                 .setSafetySourceData(any(), any(), any(), any());
@@ -175,7 +194,7 @@ public class SafetySourceBroadcastReceiverTest {
                                 new String[] {LockScreenSafetySource.SAFETY_SOURCE_ID})
                         .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
         ArgumentCaptor<SafetyEvent> captor = ArgumentCaptor.forClass(SafetyEvent.class);
         verify(mSafetyCenterManagerWrapper, times(1))
                 .setSafetySourceData(any(), any(), any(), captor.capture());
@@ -198,7 +217,7 @@ public class SafetySourceBroadcastReceiverTest {
                                 new String[] {LockScreenSafetySource.SAFETY_SOURCE_ID})
                         .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mSafetyCenterManagerWrapper, times(1))
                 .setSafetySourceData(any(), captor.capture(), any(), any());
@@ -217,7 +236,7 @@ public class SafetySourceBroadcastReceiverTest {
                                 new String[] {BiometricsSafetySource.SAFETY_SOURCE_ID})
                         .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mSafetyCenterManagerWrapper, times(1))
                 .setSafetySourceData(any(), captor.capture(), any(), any());
@@ -236,7 +255,7 @@ public class SafetySourceBroadcastReceiverTest {
                                 new String[] {FaceSafetySource.SAFETY_SOURCE_ID})
                         .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mSafetyCenterManagerWrapper, times(1))
                 .setSafetySourceData(any(), captor.capture(), any(), any());
@@ -255,7 +274,7 @@ public class SafetySourceBroadcastReceiverTest {
                                 new String[] {WearSafetySource.SAFETY_SOURCE_ID})
                         .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mSafetyCenterManagerWrapper, times(1))
                 .setSafetySourceData(any(), captor.capture(), any(), any());
@@ -274,7 +293,7 @@ public class SafetySourceBroadcastReceiverTest {
                                 new String[] {FingerprintSafetySource.SAFETY_SOURCE_ID})
                         .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mSafetyCenterManagerWrapper, times(1))
                 .setSafetySourceData(any(), captor.capture(), any(), any());
@@ -297,7 +316,7 @@ public class SafetySourceBroadcastReceiverTest {
                                 new String[] {PrivateSpaceSafetySource.SAFETY_SOURCE_ID})
                         .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mSafetyCenterManagerWrapper, times(1))
                 .setSafetySourceData(any(), captor.capture(), any(), any());
@@ -310,7 +329,7 @@ public class SafetySourceBroadcastReceiverTest {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent = new Intent().setAction(Intent.ACTION_BOOT_COMPLETED);
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
         ArgumentCaptor<SafetyEvent> captor = ArgumentCaptor.forClass(SafetyEvent.class);
         verify(mSafetyCenterManagerWrapper, atLeastOnce())
                 .setSafetySourceData(any(), any(), any(), captor.capture());
@@ -324,7 +343,7 @@ public class SafetySourceBroadcastReceiverTest {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent = new Intent().setAction(Intent.ACTION_BOOT_COMPLETED);
 
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        mSafetySourceBroadcastReceiver.onReceive(mApplicationContext, intent);
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mSafetyCenterManagerWrapper, times(7))
                 .setSafetySourceData(any(), captor.capture(), any(), any());

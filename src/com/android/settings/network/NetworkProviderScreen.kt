@@ -74,7 +74,7 @@ open class NetworkProviderScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +PreferenceCategory("wifi_category", R.string.wifi_settings) += {
-                +WifiSwitchPreference()
+                +WifiSwitchPreference(coroutineScope)
             }
             +UntitledPreferenceCategoryMetadata("wifi_ext_category") += {
                 if (Flags.deeplinkNetworkAndInternet25q4()) +SavedAccessPointsWifiScreen.KEY

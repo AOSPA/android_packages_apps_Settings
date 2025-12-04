@@ -56,6 +56,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.InputMode;
 import com.android.internal.widget.LockscreenCredential;
+import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.Utils;
@@ -156,7 +157,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             if (sIsPatternInputClickSupportedForTesting != null) {
                 return sIsPatternInputClickSupportedForTesting;
             }
-            return Flags.enablePatternInputClickSupport()
+            return Flags.patternInputClickSupport()
                     && getResources().getBoolean(R.bool.config_enable_pattern_input_click_support);
         }
 
@@ -706,7 +707,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             final int localEffectiveUserId = mEffectiveUserId;
             final int localUserId = mUserId;
             final LockPatternChecker.OnVerifyCallback onVerifyCallback =
-                    (response, timeoutMs) -> {
+                    response -> {
+                        final int timeoutMs = response.getTimeout();
                         mPendingLockCheck = null;
                         final boolean matched = response.isMatched();
                         if (matched && mReturnCredentials) {
@@ -746,7 +748,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     localEffectiveUserId,
                     new LockPatternChecker.OnCheckCallback() {
                         @Override
-                        public void onChecked(boolean matched, int timeoutMs) {
+                        public void onChecked(VerifyCredentialResponse response) {
+                            final boolean matched = response.isMatched();
+                            final int timeoutMs = response.getTimeout();
                             mPendingLockCheck = null;
                             if (matched && isInternalActivity() && mReturnCredentials) {
                                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,

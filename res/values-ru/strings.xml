@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Переместить вниз"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Удалить"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Переместить в начало"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"Переместить <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> вверх"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"Переместить <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> вниз"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"Удалить <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"Переместить <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> в начало"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"Изменить системные языки, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"страна, регион"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"погода, стоградусная шкала, градусы, температура, по Цельсию, по Фаренгейту"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"метрическая система измерений, британская система измерений, температура, рост, вес, расстояние, по Цельсию, по Фаренгейту, фунты, килограммы, кг, мили, километры, дюймы, сантиметры, метры, единица измерения"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"цифра, цифры, число, числа, система нумерации"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"воскресенье, понедельник, вторник, среда, четверг, пятница, суббота, первый день"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Региональные настройки"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Укажите предпочтительные единицы измерения и форматы отображения чисел"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Приложения используют эти параметры для персонализации."</string>
@@ -304,8 +312,12 @@
     <string name="apply" msgid="7834684883190163536">"Применить"</string>
     <string name="share" msgid="8502235338607613795">"Поделиться"</string>
     <string name="add" msgid="8335206931421683426">"Добавить"</string>
+    <!-- no translation found for verify (6452664472920137535) -->
+    <skip />
     <string name="remove" msgid="1028414219245072102">"Отозвать"</string>
     <string name="process" msgid="2614220641928709668">"Обработать"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"Настройки"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Настройки"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Ярлык настроек"</string>
@@ -1189,7 +1201,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Подключить устройство к этой сети по QR-коду"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Недопустимый формат QR-кода"</string>
     <string name="retry" msgid="7542103800274026915">"Повторить попытку"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"Поделиться с другими пользователями устройства"</string>
     <string name="shared_message" msgid="2104244057926025072">"общедоступная"</string>
     <string name="private_message" msgid="5897966950396765392">"частная"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Подтвердить"</string>
@@ -1533,6 +1544,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Параметры обоев"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Показывать обои заблокированного экрана"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Когда включена информация на заблокированном экране, видны обои заблокированного экрана"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Отключать экран при бездействии"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Для экономии энергии экран будет отключаться, если устройство не обнаружит действия пользователя"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Полужирный шрифт"</string>
     <string name="title_font_size" msgid="570613010306330622">"Размер шрифта"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Изменение размера шрифта"</string>
@@ -3041,7 +3054,7 @@
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Фоновый режим: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Активный режим: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Сведения о расходе заряда батареи будут доступны через несколько часов после полной зарядки."</string>
-    <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"Cейчас"</string>
+    <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"сейчас"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g>, <xliff:g id="HOUR">%2$s</xliff:g>"</string>
@@ -3469,6 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Если вы лишите этого пользователя прав администратора, вы или другой администратор сможете их вернуть позже."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Вы отказываетесь от прав администратора?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Если вы продолжите, права администратора вам смогут предоставить только другие администраторы."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Не удалось удалить пользователя"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Вы единственный администратор на этом устройстве, поэтому ваш профиль нельзя удалить. Чтобы сделать это, назначьте другого пользователя администратором или удалите все данные с устройства, выбрав \"Система &gt; Сброс настроек &gt; Удалить все данные (сброс настроек)\"."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Не удалось отозвать права администратора"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Вы единственный администратор на этом устройстве. Если вы больше не хотите им быть, сначала назначьте администратором другого пользователя."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Данные для экстренных случаев"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>: информация и контакты"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Открыть приложение \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
@@ -4084,7 +4101,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Менеджер уведомлений"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Группируйте уведомления с низким приоритетом и отключайте их звук"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Управление приложениями, для которых настроен менеджер уведомлений"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Всегда разворачивать группу уведомлений"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Разворачивание наборов"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Автоматически"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Всегда разворачивать"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Не разворачивать"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Применить для приложений в рабочем профиле"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Вспомогательные VR-сервисы"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Установленные приложения не запрашивали доступ для работы в качестве вспомогательного VR-сервиса."</string>
@@ -5267,6 +5287,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Совместимые приложения на устройстве"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Не удалось добавить SIM-карту"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Прежде чем добавить SIM-карту, отключите спутниковую связь."</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Когда поддерживаемые устройства, например телефон и часы, подключены по Bluetooth, режим полета на них синхронизируется."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Точки доступа"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"точка доступа"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Недоступны при подключении к <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5373,9 +5394,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Левый: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Правый: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Чехол: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Заряд левого устройства: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Заряд правого устройства: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Заряд чехла: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Заряд левого устройства: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Заряд правого устройства: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Заряд чехла: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Заряд: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Батарея"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Панель настроек"</string>
@@ -5941,14 +5962,26 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Забыли PIN-код?"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Забыли PIN-код?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Обновить резервный адрес электронной почты"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Резервный адрес электронной почты добавлен."</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Резервный адрес электронной почты подтвержден."</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Резервный адрес электронной почты обновлен."</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN-код обновлен."</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN-код изменен."</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN-код удален."</string>
+    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
+    <skip />
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Удалить PIN-код"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Добавить резервный адрес электронной почты"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Подтвердить адрес электронной почты"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Фильтры магазина приложений"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Фильтруйте приложения по возрастному ограничению для контента."</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"В зависимости от приложения могут блокироваться разные типы контента. Магазины приложений, не указанные в списке, нужно настраивать отдельно."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Фильтры для контента сайтов"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Фильтры сайтов, заблокировать сайты, фильтры браузера, заблокировать сайты для взрослых, отфильтровать сайты, заблокировать результаты поиска, отфильтровать результаты поиска для взрослых, ограничения на контент"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Помогите отфильтровывать контент для взрослых в некоторых приложениях и браузерах на этом телефоне. Возможно, такие материалы будут по-прежнему показываться в других приложениях, браузерах и на других устройствах."</string>
@@ -6001,4 +6034,18 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Подключение"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" подключено"</string>
+    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
+    <skip />
 </resources>

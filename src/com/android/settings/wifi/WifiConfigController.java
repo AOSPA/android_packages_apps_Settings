@@ -204,7 +204,6 @@ public class WifiConfigController implements TextWatcher,
     private TextView mProxyPortView;
     private TextView mProxyExclusionListView;
     private TextView mProxyPacView;
-    private CheckBox mSharedCheckBox;
 
     private IpAssignment mIpAssignment = IpAssignment.UNASSIGNED;
     private ProxySettings mProxySettings = ProxySettings.UNASSIGNED;
@@ -305,7 +304,6 @@ public class WifiConfigController implements TextWatcher,
         mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
         mProxySettingsSpinner.setAdapter(getSpinnerAdapter(R.array.wifi_proxy_settings));
         mProxySettingsSpinner.setOnItemSelectedListener(this);
-        mSharedCheckBox = (CheckBox) mView.findViewById(R.id.shared);
         mMeteredSettingsSpinner = mView.findViewById(R.id.metered_settings);
         mMeteredSettingsSpinner.setAdapter(getSpinnerAdapter(R.array.wifi_metered_entries));
         mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
@@ -366,7 +364,6 @@ public class WifiConfigController implements TextWatcher,
                     mIpSettingsSpinner.setSelection(DHCP);
                 }
 
-                mSharedCheckBox.setEnabled(config.shared);
                 if (!config.shared) {
                     showAdvancedFields = true;
                 }
@@ -471,7 +468,6 @@ public class WifiConfigController implements TextWatcher,
 
             mSsidScanButton.setVisibility(View.GONE);
         }
-        mSharedCheckBox.setVisibility(View.GONE);
 
         mConfigUi.setCancelButton(res.getString(R.string.wifi_cancel));
         if (mConfigUi.getSubmitButton() != null) {
@@ -602,8 +598,6 @@ public class WifiConfigController implements TextWatcher,
             config.networkId = mAccessPoint.getConfig().networkId;
             config.hiddenSSID = mAccessPoint.getConfig().hiddenSSID;
         }
-
-        config.shared = mSharedCheckBox.isChecked();
 
         switch (mAccessPointSecurity) {
             case AccessPoint.SECURITY_NONE:

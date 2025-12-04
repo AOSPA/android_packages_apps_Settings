@@ -66,7 +66,7 @@
                     android:layout_marginBottom="8dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="?android:attr/textColorPrimary"
+                    android:textColor="@color/materialColorOnSurface"
                     android:textSize="24sp"
                     android:fontFamily="@*android:string/config_headlineFontFamilyMedium"/>
 
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:textColor="@color/materialColorOnSurfaceVariant"
                     android:textSize="14sp"
                     android:fontFamily="@*android:string/config_headlineFontFamilyMedium" />
             </LinearLayout>
@@ -89,7 +89,7 @@
             android:layout_marginTop="@dimen/settings_panel_title_margin"
             android:layout_marginBottom="@dimen/settings_panel_title_margin_bottom"
             android:gravity="center"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:textSize="24sp"
             android:fontFamily="@*android:string/config_headlineFontFamilyMedium"/>
 

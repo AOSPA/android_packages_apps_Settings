@@ -23,6 +23,7 @@ import android.os.Bundle
 import android.os.Trace
 import android.util.Log
 import android.util.Size
+import android.view.Gravity
 import android.view.SurfaceControl
 import android.view.SurfaceHolder
 import android.view.SurfaceView
@@ -31,6 +32,9 @@ import android.view.ViewOutlineProvider
 import android.view.accessibility.AccessibilityNodeInfo
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction
 import android.widget.FrameLayout
+import android.widget.ImageButton
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
 import com.android.settingslib.utils.ThreadUtils
@@ -44,6 +48,11 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     @VisibleForTesting
     internal val cornerRadiusPx =
         context.resources.getDimensionPixelSize(R.dimen.display_block_corner_radius)
+    @VisibleForTesting
+    internal val arrowSizePx =
+        context.resources.getDimensionPixelSize(R.dimen.display_block_arrow_size)
+    private val arrowTappableAreaSizePx =
+        context.resources.getDimensionPixelSize(R.dimen.display_block_arrow_tappable_area_size)
 
     // Id of the logical display this DisplayBlock represents
     var logicalDisplayId: Int = -1
@@ -88,15 +97,15 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
             override fun surfaceDestroyed(h: SurfaceHolder) {}
         }
 
-    val wallpaperView = SurfaceView(context)
+    private val wallpaperView = SurfaceView(context).apply { id = R.id.display_block_wallpaper }
     private val backgroundView =
         View(context).apply {
+            id = R.id.display_block_background
             background = context.getDrawable(R.drawable.display_block_background)
         }
-
-    @VisibleForTesting
-    val selectionMarkerView =
+    private val selectionMarkerView =
         View(context).apply {
+            id = R.id.display_block_selection_marker
             background = context.getDrawable(R.drawable.display_block_selection_marker_background)
         }
 
@@ -105,13 +114,15 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
      * highlight border.
      */
     var positionInPane: PointF
-        get() = PointF(x + highlightPx, y + highlightPx)
+        get() = PointF(x + highlightPx + arrowSizePx, y + highlightPx + arrowSizePx)
         set(value: PointF) {
-            x = value.x - highlightPx
-            y = value.y - highlightPx
+            x = value.x - highlightPx - arrowSizePx
+            y = value.y - highlightPx - arrowSizePx
         }
 
     var onA11yMoveListener: ((direction: Direction) -> Unit)? = null
+    @VisibleForTesting internal val arrowButtons: Map<Direction, View>
+    private var arrowMovement: ArrowMovement = ArrowMovement.immovable()
 
     init {
         isScrollContainer = false
@@ -128,7 +139,18 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         addView(backgroundView)
         addView(selectionMarkerView)
 
+        arrowButtons =
+            ARROW_BUTTONS.mapValues { (direction, properties) ->
+                createArrowButtons(properties).also { arrowButtonView -> addView(arrowButtonView) }
+            }
+
         wallpaperView.holder.addCallback(holderCallback)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        setTouchListener(null)
+        onA11yMoveListener = null
     }
 
     @VisibleForTesting
@@ -241,6 +263,23 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         z = if (value) 2f else 1f
     }
 
+    fun setArrowVisible(visible: Boolean) {
+        arrowButtons.forEach { (direction, buttonView) ->
+            val isMovable = arrowMovement.directionMapping[direction] ?: false
+            buttonView.visibility = if (isMovable && visible) VISIBLE else GONE
+        }
+    }
+
+    // DisplayBlock bounds are bigger than the actual display wallpaper (+ padding) area. Sets
+    // touch listener to specific view
+    fun setTouchListener(listener: OnTouchListener?) {
+        if (listener == null) {
+            backgroundView.setOnTouchListener(null)
+        } else {
+            backgroundView.setOnTouchListener { v, e -> listener.onTouch(v, e) }
+        }
+    }
+
     /**
      * Sets position and size of the block given coordinates in pane space.
      *
@@ -262,6 +301,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         bottomRight: PointF,
         surfaceScale: Float,
         surfaceSize: Size,
+        arrowMovement: ArrowMovement,
     ) {
         wallpaperSurface?.let { oldSurfaces.add(it) }
         letterboxBackgroundSurface?.let { oldSurfaces.add(it) }
@@ -274,6 +314,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         this.displayIdToShowWallpaper = displayIdToShowWallpaper
         this.surfaceScale = surfaceScale
         this.surfaceSize = surfaceSize
+        this.arrowMovement = arrowMovement
 
         val displayDevice = injector.getDisplay(logicalDisplayId)
         contentDescription =
@@ -281,12 +322,40 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
                 R.string.external_display_topology_display_block_content_description,
                 displayDevice?.name ?: "Display $logicalDisplayId",
             )
+        setupLayoutBounds(
+            Size((bottomRight.x - topLeft.x).toInt(), (bottomRight.y - topLeft.y).toInt())
+        )
+    }
 
-        val newWidth = (bottomRight.x - topLeft.x).toInt()
-        val newHeight = (bottomRight.y - topLeft.y).toInt()
-
-        val paddedWidth = newWidth + 2 * highlightPx
-        val paddedHeight = newHeight + 2 * highlightPx
+    /**
+     * DisplayBlock is rendered with multiple View stacked on top of each other. Each View serves a
+     * purpose, there are 4 layers:
+     * 1. Wallpaper: The actual display wallpaper rendered on a SurfaceView
+     * 2. Background: Applies padding overlay on top of the surface to create an appearance of block
+     *    being distanced from one another
+     * 3. Highlight: Border around the wallpaper highlighting selected display
+     * 4. DisplayBlock parent container: The container for the block itself, this is set to be
+     *    larger than the actual visible area to accommodate for A11y arrow buttons sticking out
+     *    from wallpaper (+ highlight).
+     * <pre>
+     * ......................  <-- DisplayBlock outermost boundary (.)
+     *            ^         .  <-- A11y arrow buttons (<^>v)
+     * .  ########|#######  .  <-- Highlight, `selectionMarkerView` (#)
+     * .  #/------|-----\#  .  <-- Padding, `backgroundView` (-)
+     * .  #|-WWWWWWWWWW-|#  .
+     * .  #|-WWWWWWWWWW-|#  .  <-- Wallpaper / Surface, `wallpaperView` (W)
+     * . <===WWWWWWWWWW===> .
+     * .  #|-WWWWWWWWWW-|#  .
+     * .  #|-WWWWWWWWWW-|#  .
+     * .  #\------|-----/#  .
+     * .  ########|#######  .
+     * .          v          .
+     * ......................
+     * </pre>
+     */
+    private fun setupLayoutBounds(bounds: Size) {
+        val paddedWidth = bounds.width + 2 * highlightPx + 2 * arrowSizePx
+        val paddedHeight = bounds.height + 2 * highlightPx + 2 * arrowSizePx
 
         if (width == paddedWidth && height == paddedHeight) {
             // Will not receive a surfaceChanged callback, so in case the wallpaper is different,
@@ -304,15 +373,29 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         // The highlight is the outermost border. The highlight is shown outside of the parent
         // FrameLayout so that it consumes the padding between the blocks.
         wallpaperView.layoutParams.let {
-            it.width = newWidth
-            it.height = newHeight
+            it.width = bounds.width
+            it.height = bounds.height
             if (it is MarginLayoutParams) {
-                it.leftMargin = highlightPx
-                it.topMargin = highlightPx
-                it.bottomMargin = highlightPx
-                it.topMargin = highlightPx
+                val marginToParentBounds = highlightPx + arrowSizePx
+                it.setMargins(
+                    marginToParentBounds,
+                    marginToParentBounds,
+                    marginToParentBounds,
+                    marginToParentBounds,
+                )
             }
             wallpaperView.layoutParams = it
+        }
+        // Padding is already applied in xml layout
+        (backgroundView.layoutParams as MarginLayoutParams).let {
+            it.width = bounds.width + 2 * highlightPx
+            it.height = bounds.height + 2 * highlightPx
+            it.setMargins(arrowSizePx, arrowSizePx, arrowSizePx, arrowSizePx)
+        }
+        (selectionMarkerView.layoutParams as MarginLayoutParams).let {
+            it.width = bounds.width + 2 * highlightPx
+            it.height = bounds.height + 2 * highlightPx
+            it.setMargins(arrowSizePx, arrowSizePx, arrowSizePx, arrowSizePx)
         }
 
         wallpaperView.outlineProvider =
@@ -323,9 +406,36 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
             }
         wallpaperView.clipToOutline = true
 
-        // The other two child views are MATCH_PARENT by default so will resize to fill up the
-        // FrameLayout.
+        requestLayout()
     }
+
+    private fun createArrowButtons(props: ArrowButtonProperties) =
+        FrameLayout(context).apply {
+            layoutParams =
+                LayoutParams(arrowTappableAreaSizePx, arrowTappableAreaSizePx, props.gravity)
+                    .apply {
+                        when (props.direction) {
+                            Direction.UP -> topMargin = props.verticalOffset
+                            Direction.DOWN -> bottomMargin = props.verticalOffset
+                            Direction.LEFT -> leftMargin = props.horizontalOffset
+                            Direction.RIGHT -> rightMargin = props.horizontalOffset
+                        }
+                    }
+            addView(
+                ImageButton(context).apply {
+                    setImageResource(props.drawableRes)
+                    background = context.getDrawable(R.drawable.display_block_arrow_background)
+                    importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_NO
+                    isFocusable = false
+                    setClickable(false)
+                },
+                LayoutParams(arrowSizePx, arrowSizePx, Gravity.CENTER),
+            )
+            contentDescription = context.getString(props.contentDescriptionRes)
+            isFocusable = true
+            setOnClickListener { _ -> onA11yMoveListener?.invoke(props.direction) }
+            visibility = GONE
+        }
 
     override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {
         super.onInitializeAccessibilityNodeInfo(info)
@@ -387,6 +497,47 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     }
 
     private companion object {
+        private data class ArrowButtonProperties(
+            @param:DrawableRes val drawableRes: Int,
+            @param:StringRes val contentDescriptionRes: Int,
+            val direction: Direction,
+            val gravity: Int,
+            val horizontalOffset: Int = 0,
+            val verticalOffset: Int = 0,
+        )
+
+        private val ARROW_BUTTONS =
+            mutableMapOf<Direction, ArrowButtonProperties>(
+                Direction.UP to
+                    ArrowButtonProperties(
+                        R.drawable.display_block_arrow_up,
+                        R.string.external_display_topology_a11y_action_move_up,
+                        Direction.UP,
+                        Gravity.TOP or Gravity.CENTER_HORIZONTAL,
+                    ),
+                Direction.DOWN to
+                    ArrowButtonProperties(
+                        R.drawable.display_block_arrow_down,
+                        R.string.external_display_topology_a11y_action_move_down,
+                        Direction.DOWN,
+                        Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL,
+                    ),
+                Direction.LEFT to
+                    ArrowButtonProperties(
+                        R.drawable.display_block_arrow_left,
+                        R.string.external_display_topology_a11y_action_move_left,
+                        Direction.LEFT,
+                        Gravity.START or Gravity.CENTER_VERTICAL,
+                    ),
+                Direction.RIGHT to
+                    ArrowButtonProperties(
+                        R.drawable.display_block_arrow_right,
+                        R.string.external_display_topology_a11y_action_move_right,
+                        Direction.RIGHT,
+                        Gravity.END or Gravity.CENTER_VERTICAL,
+                    ),
+            )
+
         private val REFETCH_WALLPAPER_DELAY = 500.milliseconds
         private const val TAG = "DisplayBlock"
     }

@@ -76,7 +76,7 @@ public class BluetoothDetailsDataSyncControllerTest extends BluetoothDetailsCont
         mController = new BluetoothDetailsDataSyncController(mContext, mFragment,
                 mCachedDevice, mLifecycle);
         mController.mAssociationId = ASSOCIATION_ID;
-        mController.mPreferenceCategory = mPreferenceCategory;
+        mController.mPreferenceContainer = mPreferenceCategory;
 
         mPermSyncPreference = mController.createPermSyncPreference(mContext);
         when(mPreferenceCategory.findPreference(KEY_PERM_SYNC)).thenReturn(mPermSyncPreference);

@@ -42,6 +42,7 @@ open class DisplayDevice(
     val supportedModes: List<Mode>,
     val isEnabled: DisplayIsEnabled,
     val isConnectedDisplay: Boolean,
+    val rotation: Int,
 )
 
 /** Extends [DisplayDevice] with additional information */
@@ -55,7 +56,17 @@ class DisplayDeviceAdditionalInfo(
     supportedModes: List<Mode>,
     isEnabled: DisplayIsEnabled,
     isConnectedDisplay: Boolean,
+    rotation: Int,
     // Additional properties
-    val rotation: Int,
     val connectionPreference: Int,
-) : DisplayDevice(id, uniqueId, name, mode, supportedModes, isEnabled, isConnectedDisplay)
+) :
+    DisplayDevice(
+        id,
+        uniqueId,
+        name,
+        mode,
+        supportedModes,
+        isEnabled,
+        isConnectedDisplay,
+        rotation,
+    )

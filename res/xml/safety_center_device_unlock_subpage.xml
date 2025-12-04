@@ -21,6 +21,9 @@
         android:key="device_unlock_illustration"
         android:selectable="false" />
 
+    <com.android.settingslib.widget.BannerMessagePreferenceGroup
+        android:key="device_unlock_issues_banner_group" />
+
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_lock_screen"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
@@ -40,12 +43,6 @@
         settings:profile="work_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
-        android:key="android_fingerprint_unlock_private"
-        settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
-        settings:safetySource="AndroidFingerprintUnlock"
-        settings:profile="private_profile" />
-
-    <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_face_unlock_personal"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:safetySource="AndroidFaceUnlock"
@@ -58,12 +55,6 @@
         settings:profile="work_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
-        android:key="android_face_unlock_private"
-        settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
-        settings:safetySource="AndroidFaceUnlock"
-        settings:profile="private_profile" />
-
-    <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_wear_unlock_personal"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:safetySource="AndroidWearUnlock"
@@ -74,10 +65,4 @@
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:safetySource="AndroidWearUnlock"
         settings:profile="work_profile" />
-
-    <com.android.settingslib.safetycenter.SafetySourcePreference
-        android:key="android_wear_unlock_private"
-        settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
-        settings:safetySource="AndroidWearUnlock"
-        settings:profile="private_profile" />
 </PreferenceScreen>

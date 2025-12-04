@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Nach unten verschieben"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Entfernen"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"An den Anfang verschieben"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> nach oben verschieben"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> nach unten verschieben"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> entfernen"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> an den Anfang verschieben"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"Systemsprachen-Liste bearbeiten, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"Land, Gebiet"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"Wetter, Grad, Temperatur, Celsius, Fahrenheit"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"Metrisch, angloamerikanisch, Temperatur, Größe, Gewicht, Distanz, Celsius, Fahrenheit, Pfund, Kilogramm, kg, Meile, Kilometer, Zoll, Zentimeter, Meter, Einheit"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"Ziffer, Ziffern, Zahl, Zahlen, Nummer, Nummern, Zahlensystem"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"Sonntag, Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, erster Tag"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionale Einstellungen"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Einstellungen für Einheiten und Zahlen festlegen"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Wenn du Apps deine regionalen Einstellungen mitteilst, können ihre Dienste für dich personalisiert werden."</string>
@@ -304,8 +312,12 @@
     <string name="apply" msgid="7834684883190163536">"Anwenden"</string>
     <string name="share" msgid="8502235338607613795">"Teilen"</string>
     <string name="add" msgid="8335206931421683426">"Hinzufügen"</string>
+    <!-- no translation found for verify (6452664472920137535) -->
+    <skip />
     <string name="remove" msgid="1028414219245072102">"Entfernen"</string>
     <string name="process" msgid="2614220641928709668">"Prozess"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"Einstellungen"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Einstellungen"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Einstellungsverknüpfung"</string>
@@ -1189,7 +1201,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"QR-Code verwenden, um diesem Netzwerk ein Gerät hinzuzufügen"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-Code ist kein gültiges Format"</string>
     <string name="retry" msgid="7542103800274026915">"Noch mal versuchen"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"Für andere Gerätenutzer freigeben"</string>
     <string name="shared_message" msgid="2104244057926025072">"freigegebenen"</string>
     <string name="private_message" msgid="5897966950396765392">"privaten"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Bestätigen"</string>
@@ -1533,6 +1544,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Hintergrundoptionen"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Sperrbildschirmhintergrund anzeigen"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Sperrbildschirmhintergrund sichtbar, wenn die Funktion „Always-on-Display“ verwendet wird"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Display bei Inaktivität ausschalten"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Schaltet das Display aus, wenn keine Nutzeraktivität erkannt wird, um Strom zu sparen"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Fettschrift"</string>
     <string name="title_font_size" msgid="570613010306330622">"Schriftgröße"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Text vergrößern oder verkleinern"</string>
@@ -1779,7 +1792,7 @@
     <string name="tether_settings_title_wifi" msgid="4327056146425282159">"Mobiler Hotspot"</string>
     <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Bluetooth-Tethering"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Tethering"</string>
-    <string name="tether_settings_title_all" msgid="6807525590937697228">"Hotspot und Tethering"</string>
+    <string name="tether_settings_title_all" msgid="6807525590937697228">"Hotspot &amp; Tethering"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Hotspot aktiviert, Tethering"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Hotspot aktiviert"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"Tethering"</string>
@@ -3469,6 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Wenn du die Administrator­berechtigungen für diesen Nutzer entfernst, können sie von dir oder einem anderen Administrator später wiederhergestellt werden."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Möchtest du deine eigenen Administratorberechtigungen wirklich entfernen?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Wenn du fortfährst, können dir nur andere Administratoren Administratorberechtigungen gewähren."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Nutzer kann nicht gelöscht werden"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Du bist der einzige Administrator auf diesem Gerät. Daher kann dein Nutzerprofil nicht gelöscht werden. Wenn du dein Nutzerprofil löschen möchtest, kannst du einen anderen Nutzer zum Administrator machen oder alle Daten vom Gerät löschen. Dazu gehst du zu „System“ &gt; „Optionen zum Zurücksetzen“ &gt; „Alle Daten löschen (auf Werkseinstellungen zurücksetzen)“."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Administratorberechtigungen können nicht entfernt werden"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Du bist der einzige Administrator auf diesem Gerät. Wenn du kein Administrator mehr sein möchtest, musst du zuerst einen anderen Nutzer zum Administrator machen."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Notfallinformationen"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informationen und Kontaktdaten für <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"„<xliff:g id="APP_NAME">%1$s</xliff:g>“ öffnen"</string>
@@ -3519,7 +3536,7 @@
     <string name="amber_alerts_title" msgid="5238275758191804575">"AMBER Alerts"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"Bulletins über Kindesentführungen erhalten"</string>
     <string name="repeat_title" msgid="8676570486899483606">"Wiederholen"</string>
-    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Notfall­benachrichtigungen an Mobilgeräte"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Warnmeldungen an Mobilgeräte"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Netzbetreiber"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Zugangspunkte (APNs)"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3768,7 +3785,7 @@
     <string name="live_caption_on_summary" msgid="8921561021882989495">"Ein / Untertitel für Anrufe, Videos und andere Medien anzeigen"</string>
     <string name="live_caption_off_summary" msgid="6761535729357010911">"Aus / Untertitel für Anrufe, Videos und andere Medien anzeigen"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Kabelgebundene Kopfhörer"</string>
-    <string name="spatial_audio_text" msgid="8201387855375146000">"Kompatible Medien mit vollerem Klang hören"</string>
+    <string name="spatial_audio_text" msgid="8201387855375146000">"Audio von kompatiblen Medien mit vollerem Klang hören"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Aus"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"An / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"An / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> und <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
@@ -4084,7 +4101,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Benachrichtigungs­organisator"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Benachrichtigungen mit niedriger Priorität bündeln und stummschalten"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Apps für den Benachrichtigungsorganisator verwalten"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Bundles immer erweitern"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Set-Maximierung"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automatisch"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Immer maximieren"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Nie maximieren"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Auf Apps im Arbeitsprofil anwenden"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-Hilfsdienste"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Keine installierte App hat die Ausführung als VR-Hilfsdienst angefordert."</string>
@@ -5267,6 +5287,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Unterstützte Apps auf deinem Smartphone"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM kann nicht hinzugefügt werden"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Beende die Satellitenverbindung, bevor du eine SIM hinzufügst"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Wenn unterstützte Geräte wie Smartphones und Smartwatches per Bluetooth verbunden sind, wird der Flugmodus auf diesen Geräten synchronisiert"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Zugangspunkte (APNs)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Bei Verbindung mit <xliff:g id="CARRIER">%1$s</xliff:g> nicht verfügbar"</string>
@@ -5373,9 +5394,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Links: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Rechts: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Case: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Akku links: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Akku rechts: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Akkustand des Case: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Akkustand links: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Akkustand rechts: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Akkustand des Lade-Case: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Akku: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Akku"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Einstellungen"</string>
@@ -5674,9 +5695,9 @@
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Jetzt neu starten"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Später neu starten"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Spatial Audio"</string>
-    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Kompatible Medien mit vollerem Klang hören"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Audio von kompatiblen Medien mit vollerem Klang hören"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Erfassung von Kopfbewegungen"</string>
-    <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Änderungen am Ton, während du deinen Kopf bewegst, damit er natürlicher klingt"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Durch Kopfbewegungen den Klang von Audiodateien ändern, damit er natürlicher wirkt"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Berechtigungen von Smartphone synchronisieren"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Gib deiner Smartwatch die gleiche App-Berechtigung, die du auch deinem Smartphone gegeben hast"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Audiogerätetyp"</string>
@@ -5939,14 +5960,26 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN vergessen"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"PIN vergessen?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"E‑Mail-Adresse zur Kontowiederherstellung aktualisieren"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"E‑Mail-Adresse zur Kontowiederherstellung hinzugefügt"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"E‑Mail-Adresse zur Kontowiederherstellung bestätigt"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"E‑Mail-Adresse zur Kontowiederherstellung aktualisiert"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN aktualisiert"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN geändert"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN gelöscht"</string>
+    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
+    <skip />
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN löschen"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"E‑Mail-Adresse zur Kontowiederherstellung hinzufügen"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"E‑Mail-Adresse bestätigen"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filter für App-Shop"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Apps nach der Altersfreigabe ihrer Inhalte filtern"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Jede App kann unterschiedliche Arten von Inhalten blockieren. App-Shops, die nicht aufgeführt sind, müssen separat verwaltet werden."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filter für Websiteinhalte"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Websitefilter, Websites blockieren, Browserfilter, Anstößige Websites blockieren, Websites filtern, Suchergebnisse blockieren, Anstößige Suchergebnisse filtern, Inhaltsbeschränkungen"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Helfen dabei, anstößige Inhalte in einigen Apps und Browsern auf diesem Smartphone herauszufiltern. In anderen Apps, auf anderen Geräten oder in anderen Browsern werden möglicherweise weiterhin anstößige Inhalte angezeigt."</string>
@@ -5999,4 +6032,18 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Wird gekoppelt"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verbunden"</string>
+    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
+    <skip />
 </resources>

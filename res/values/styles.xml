@@ -112,7 +112,7 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@style/TextAppearance.SettingsLib.BodySmall.Emphasized</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <style name="wifi_item_warning">
@@ -126,7 +126,7 @@
     <style name="wifi_item_content">
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Subhead</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
     </style>
 
@@ -147,7 +147,7 @@
         <item name="android:layout_marginStart">4dip</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Medium</item>
-        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
+        <item name="android:textColorHint">@color/materialColorOnSurfaceVariant</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
         <item name="android:maxLength">500</item>
     </style>
@@ -171,13 +171,13 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body1</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <style name="ethernet_item_content">
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Subhead</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
     </style>
 
@@ -198,7 +198,7 @@
         <item name="android:layout_marginStart">4dip</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Medium</item>
-        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
+        <item name="android:textColorHint">@color/materialColorOnSurfaceVariant</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
         <item name="android:maxLength">500</item>
     </style>
@@ -222,7 +222,7 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <style name="adb_wireless_item_content">
@@ -230,7 +230,7 @@
         <item name="android:textSize">24sp</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
     </style>
 
     <style name="adb_wireless_item_progress_text">
@@ -238,7 +238,7 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
     </style>
 
     <style name="adb_wireless_section">
@@ -268,7 +268,7 @@
         <item name="android:singleLine">true</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
-        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
+        <item name="android:textColorHint">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <style name="vpn_spinner" parent="@style/Dialog.Spinner">
@@ -302,7 +302,7 @@
     <style name="TextAppearance.PasswordEntry" parent="android:TextAppearance.DeviceDefault">
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:textSize">24sp</item>
     </style>
 
@@ -323,7 +323,7 @@
     </style>
 
     <style name="TextAppearance.SuggestionSummary" parent="TextAppearance.Small">
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <style name="TextAppearance.ErrorText"
@@ -334,14 +334,14 @@
     <style name="TextAppearance.RemoveDialogContent"
            parent="@android:style/TextAppearance.DeviceDefault">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
     </style>
 
     <style name="TextAppearance.SearchBar">
         <item name="android:layout_gravity">center</item>
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
         <item name="android:textSize">@dimen/search_bar_text_size</item>
-        <item name="android:textColor">@androidprv:color/materialColorOnSurfaceVariant</item>
+        <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
         <item name="android:singleLine">true</item>
     </style>
 
@@ -353,7 +353,7 @@
 
     <style name="TextAppearance.ConditionCardSummary"
            parent="@*android:style/TextAppearance.DeviceDefault.Body1">
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <style name="TextAppearance.ZenOnboardingButton">
@@ -422,14 +422,14 @@
     <style name="BiometricEnrollIntroTitle">
         <item name="android:paddingVertical">24dp</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:textSize">20sp</item>
     </style>
 
     <style name="BiometricEnrollIntroMessage">
         <item name="android:lineSpacingMultiplier">1.2</item>
         <item name="android:paddingBottom">16dp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:textSize">16sp</item>
     </style>
 
@@ -495,9 +495,9 @@
 
     <style name="LockPatternStyle">
         <item name="*android:regularColor">?android:attr/colorAccent</item>
-        <item name="*android:successColor">?android:attr/textColorPrimary</item>
+        <item name="*android:successColor">@color/materialColorOnSurface</item>
         <item name="*android:errorColor">?android:attr/colorError</item>
-        <item name="*android:dotColor">?android:attr/textColorSecondary</item>
+        <item name="*android:dotColor">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <style name="LockPatternStyleExpressive">
@@ -536,7 +536,7 @@
         <item name="android:singleLine">true</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
-        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
+        <item name="android:textColorHint">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <style name="WorkChallengeEmergencyButtonStyle">
@@ -554,14 +554,14 @@
         <item name="android:textAlignment">viewStart</item>
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <style name="device_info_dialog_value">
         <item name="android:textAlignment">viewStart</item>
         <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:paddingBottom">24dp</item>
         <item name="android:textIsSelectable">true</item>
     </style>
@@ -570,14 +570,14 @@
         <item name="android:textAlignment">center</item>
         <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
     </style>
 
     <style name="ContextualCardStyle">
         <item name="android:layout_marginBottom">@dimen/contextual_card_vertical_margin</item>
         <item name="android:layout_marginStart">@dimen/contextual_card_side_margin</item>
         <item name="android:layout_marginEnd">@dimen/contextual_card_side_margin</item>
-        <item name="cardBackgroundColor">@androidprv:color/materialColorSurfaceContainer</item>
+        <item name="cardBackgroundColor">@color/materialColorSurfaceContainer</item>
         <item name="cardCornerRadius">@dimen/contextual_card_corner_radius</item>
         <item name="cardElevation">0dp</item>
         <item name="rippleColor">?android:attr/colorControlHighlight</item>
@@ -746,7 +746,7 @@
     </style>
 
     <style name="TextAppearance.NotificationImportanceButton.Unselected" parent="TextAppearance.NotificationImportanceButton">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
     </style>
 
     <style name="AccessibilityDialog">
@@ -783,7 +783,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
     </style>
 
@@ -794,7 +794,7 @@
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:layout_marginBottom">32dp</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
     </style>
 
     <style name="AccessibilityDialogPermissionTitle"
@@ -802,7 +802,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
     </style>
 
@@ -811,7 +811,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <style name="AccessibilityDialogButtonBarSpace">
@@ -876,7 +876,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:fontFamily">google-sans-medium</item>
         <item name="android:paddingTop">36dp</item>
         <item name="android:paddingBottom">16dp</item>
@@ -887,7 +887,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">36dp</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:gravity">start</item>
     </style>
@@ -903,7 +903,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:gravity">start</item>
     </style>
@@ -912,7 +912,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:gravity">start</item>
     </style>
@@ -972,13 +972,13 @@
     <style name="RequestManageCredentialsTitle">
         <item name="android:layout_marginTop">24dp</item>
         <item name="android:textSize">36sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
     </style>
 
     <style name="RequestManageCredentialsDescription">
         <item name="android:layout_marginTop">24dp</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:alpha">0.7</item>
     </style>
 
@@ -994,13 +994,13 @@
 
     <style name="AppAuthenticationPolicyText">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
     </style>
 
     <style name="AppAuthenticationPolicyNumberOfUrisText">
         <item name="android:layout_marginTop">4dp</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
         <item name="android:alpha">0.7</item>
     </style>
 
@@ -1013,7 +1013,7 @@
     <style name="AppUriAuthenticationPolicyText">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <style name="TextAppearance.AdminDialogTitle"
@@ -1024,14 +1024,14 @@
 
     <style name="TextAppearance.AdminDialogMessage"
            parent="@*android:style/TextAppearance.DeviceDefault">
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <style name="TextAppearance.SimConfirmDialogList" parent="@style/TextAppearance.DialogMessage"/>
 
     <style name="TextAppearance.SimConfirmDialogList.Summary">
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <style name="SimConfirmDialog.OutlineButton" parent="@android:style/Widget.Material.Button">
@@ -1041,7 +1041,7 @@
         <item name="android:textSize">14sp</item>
         <item name="android:lineHeight">20sp</item>
         <item name="android:fontFamily">@*android:string/config_bodyFontFamilyMedium</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:background">@drawable/sim_confirm_dialog_btn_outline</item>
     </style>
 
@@ -1059,7 +1059,7 @@
 
     <style name="BroadcastActionButton" parent="@android:style/Widget.Material.Button">
         <item name="android:background">@drawable/broadcast_button_outline</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineHeight">20sp</item>
         <item name="android:fontFamily">@*android:string/config_bodyFontFamilyMedium</item>
@@ -1071,7 +1071,7 @@
     <style name="QrCodeScanner">
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:textDirection">locale</item>
     </style>
 
@@ -1113,12 +1113,12 @@
     </style>
 
     <style name="ScreenLockPasswordHintTextFontStyle">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:fontFamily">google-sans-text</item>
     </style>
 
     <style name="PrivateSpaceSetupTextFontStyle" parent="@android:style/TextAppearance.DeviceDefault">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:fontFamily">google-sans-text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

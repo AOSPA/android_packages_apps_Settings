@@ -25,6 +25,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -33,7 +34,7 @@ import com.android.settingslib.search.SearchIndexable;
  * feature.
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class ToggleAutoclickPreferenceFragment extends BaseSupportFragment {
+public class ToggleAutoclickPreferenceFragment extends DashboardFragment {
 
     private static final String TAG = "AutoclickPrefFragment";
 

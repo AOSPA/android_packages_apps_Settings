@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"खाली हलवा"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"काढून टाका"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"सर्वात वरती हलवा"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> वर हलवा"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> खाली हलवा"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> काढून टाका"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> सर्वात वरती हलवा"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"सिस्टीमची भाषा सूची संपादित करा, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"देश, प्रदेश"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"हवामान, सेंटीग्रेड, अंश, तापमान, सेल्सियस, फॅरेनहाइट"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"मेट्रिक, इंपिरियल, तापमान, उंची, वजन, अंतर, सेल्सियस, फॅरेनहाइट, पाउंड, किलोग्रॅम, किग्रॅ, मैल, किलोमीटर, इंच, सेंटीमीटर, मीटर, युनिट"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"अंक, अंक, नंबर, नंबर, क्रमांकन प्रणाली"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"रविवार, सोमवार, बुधवार, गुरूवार, शुक्रवार, शनिवार, पहिला दिवस"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"प्रादेशिक प्राधान्ये"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"युनिट आणि नंबर प्राधान्ये सेट करा"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"अ‍ॅप्सना तुमची प्रादेशिक प्राधान्ये सांगा ज्यामुळे ते तुमचा अनुभव पर्सनलाइझ करतील."</string>
@@ -304,8 +312,12 @@
     <string name="apply" msgid="7834684883190163536">"लागू करा"</string>
     <string name="share" msgid="8502235338607613795">"शेअर करा"</string>
     <string name="add" msgid="8335206931421683426">"जोडा"</string>
+    <!-- no translation found for verify (6452664472920137535) -->
+    <skip />
     <string name="remove" msgid="1028414219245072102">"काढून टाका"</string>
     <string name="process" msgid="2614220641928709668">"प्रक्रिया"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"सेटिंग्ज"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"सेटिंग्ज"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"सेटिंग्ज शॉर्टकट"</string>
@@ -1189,7 +1201,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"डिव्हाइस या नेटवर्कशी जोडण्यासाठी QR कोड वापरा"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR कोडचा फॉरमॅट चुकीचा आहे"</string>
     <string name="retry" msgid="7542103800274026915">"पुन्हा प्रयत्न करा"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"इतर डिव्हाइस वापरकर्त्यांसह शेअर करा"</string>
     <string name="shared_message" msgid="2104244057926025072">"शेअर केले"</string>
     <string name="private_message" msgid="5897966950396765392">"खाजगी"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"कन्फर्म करा"</string>
@@ -1533,6 +1544,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"वॉलपेपरशी संबंधित पर्याय"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"लॉक स्‍क्रीन वॉलपेपर दाखवा"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"नेहमी सुरू असलेला डिस्प्ले यासह लॉक स्‍क्रीन वॉलपेपर दृश्यमान आहे"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"डिव्हाइस इनॅक्टिव्ह असल्यावर डिस्प्ले बंद करा"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"पॉवर वाचवण्यासाठी जेव्हा वापरकर्ता अ‍ॅक्टिव्हिटी डिटेक्ट होत नाही तेव्हा डिस्प्लेची पॉवर बंद करते"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"ठळक मजकूर"</string>
     <string name="title_font_size" msgid="570613010306330622">"फॉंटचा आकार"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"मजकूर आणखी मोठा किंवा लहान करा"</string>
@@ -3469,6 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"तुम्ही या वापरकर्त्यासाठी ॲडमिनचे विशेषाधिकार काढून टाकल्यास, तुम्ही किंवा दुसरा ॲडमिन त्यांना नंतर परत ते देऊ शकता."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"तुम्हाला नक्की तुमचे स्वतःचे ॲडमिनचे विशेषाधिकार काढून टाकायचे आहेत का?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"तुम्ही पुढे सुरू ठेवल्यास, फक्त इतर ॲडमिन तुम्हाला ॲडमिनचे विशेषाधिकार देऊ शकतील."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"वापरकर्ता हटवू शकत नाही"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"या डिव्हाइसवर तुम्ही एकमेव ॲडमिन आहात त्यामुळे तुमचे वापरकर्ता प्रोफाइल हटवले जाऊ शकत नाही. तुम्हाला तुमचे वापरकर्ता प्रोफाइल हटवायचे असल्यास, तुम्ही सिस्टीम &gt; रीसेट करण्याचे पर्याय &gt; सर्व डेटा मिटवा (फॅक्टरी रीसेट करा) वर जाऊन दुसऱ्या वापरकर्त्याला ॲडमिन बनवू शकता किंवा डिव्हाइसमधून सर्व डेटा मिटवू शकता."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"ॲडमिनचे विशेषाधिकार काढून टाकता येणार नाहीत"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"या डिव्हाइसवर तुम्ही एकमेव ॲडमिन वापरकर्ता आहात. तुम्हाला आता ॲडमिन राहायचे नसल्यास तुम्हाला आधी दुसऱ्या वापरकर्त्याला ॲडमिन बनवावे लागेल."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"आणीबाणी माहिती"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> साठी माहिती आणि संपर्क"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> उघडा"</string>
@@ -4084,7 +4101,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"नोटिफिकेशन ऑर्गनायझर"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"कमी प्राधान्य असलेली नोटिफिकेशन बंडल करा आणि सायलंट करा"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"नोटिफिकेशन ऑर्गनायझरसाठी अ‍ॅप्स व्यवस्थापित करा"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"नेहमी बंडलचा विस्तार करा"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"बंडलचा विस्तार"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"ऑटोमॅटिक"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"नेहमी विस्तार करा"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"कधीही विस्तार करू नका"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"कार्य प्रोफाइलच्या अ‍ॅप्सना लागू करा"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR मदतनीस सेवा"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"कोणत्याही इंस्टॉल केलेल्या अ‍ॅप्सनी VR मदतनीस सेवा म्हणून चालवण्यासाठी विनंती केली नाही."</string>
@@ -5267,6 +5287,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"तुमच्या फोनवर सपोर्ट असलेल्या अ‍ॅप्स"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"सिम जोडता आले नाही"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"सिम जोडण्यापूर्वी सॅटेलाइट कनेक्शन बंद करा"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"ब्लूटूथ वापरून कनेक्ट केल्यावर, फोन आणि वॉच यांसारख्या सपोर्ट असलेल्या सर्व डिव्हाइसवर विमान मोड सिंक होईल"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"अ‍ॅक्सेस पॉइंट"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>शी कनेक्ट केले असल्यास उपलब्ध नाही"</string>
@@ -5373,9 +5394,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"डावे: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"उजवे: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"केस: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"डावे, बॅटरी: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"उजवे, बॅटरी: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"केस, बॅटरी: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"बॅटरी, शिल्लक आहे: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"बॅटरी, उजवी: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"बॅटरी, केस: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"बॅटरी: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"बॅटरी"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"सेटिंग्ज पॅनल"</string>
@@ -5939,14 +5960,26 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"पिन विसरलात"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"पिन विसरला आहात का?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"रिकव्हरी ईमेल अपडेट करा"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"रिकव्हरी ईमेल जोडला"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"रिकव्हरी ईमेलची पडताळणी केली"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"रिकव्हरी ईमेल अपडेट केला"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"पिन अपडेट केला"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"पिन बदलला"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"पिन हटवला"</string>
+    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
+    <skip />
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"पिन हटवा"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"रिकव्हरी ईमेल जोडा"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"तुमच्या ईमेलची पडताळणी करा"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"अ‍ॅप स्टोअर फिल्टर"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"ॲप्सना त्यांच्या आशयाच्या प्रौढता पातळीनुसार फिल्टर करा"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"प्रत्येक ॲप विविध प्रकारचा आशय ब्लॉक करू शकते. सूचीबद्ध नसलेली ॲप स्टोअर स्वतंत्रपणे व्यवस्थापित करणे आवश्यक आहे."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"वेबसाइट आशय फिल्टर"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"वेबसाइट फिल्टर, साइट ब्लॉक करणे, ब्राउझर फिल्टर, भडक साइट ब्लॉक करणे, साइट फिल्टर करणे, शोध परिणाम ब्लॉक करणे, भडक शोध परिणाम फिल्टर करणे, आशयासंबंधी निर्बंध"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"या फोनवरील काही ॲप्स आणि ब्राउझर यांवरील भडक आशय फिल्टर करण्यास मदत करा. तरीही, इतर अ‍ॅप्स, डिव्हाइस किंवा ब्राउझर यांवर भडक आशय दिसू शकतो."</string>
@@ -5999,4 +6032,18 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"पेअर करत आहे"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> कनेक्‍ट केले"</string>
+    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
+    <skip />
 </resources>

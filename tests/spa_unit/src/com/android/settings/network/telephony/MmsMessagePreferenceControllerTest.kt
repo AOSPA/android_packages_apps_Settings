@@ -237,6 +237,19 @@ class MmsMessagePreferenceControllerTest {
     }
 
     @Test
+    fun searchIsAvailable_noMessagingCapability_isFalse() {
+        // Arrange: Set up the condition where the device is not SMS capable.
+        mockTelephonyManager.stub { on { isDeviceSmsCapable() } doReturn false }
+        val mmsMessageSearchItem = MmsMessageSearchItem(context)
+
+        // Act: Call the method under test.
+        val isAvailable = mmsMessageSearchItem.isAvailable(SUB_2_ID)
+
+        // Assert: The result should be false because the availability status is UNSUPPORTED_ON_DEVICE.
+        assertThat(isAvailable).isFalse()
+    }
+
+    @Test
     fun searchIsAvailable_notDefaultDataAndDataOnAndAutoDataSwitchOn_unavailable() {
         mockTelephonyManager1.stub { on { isDataEnabled } doReturn true }
         mockTelephonyManager2.stub {
@@ -273,6 +286,7 @@ class MmsMessagePreferenceControllerTest {
         defaultDataSubId = SUB_2_ID
         mockTelephonyManager2.stub {
             on { isDataEnabled } doReturn false
+            on { isApnMetered(ApnSetting.TYPE_MMS) } doReturn true
             on {
                 isMobileDataPolicyEnabled(TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH)
             } doReturn true
@@ -282,11 +296,11 @@ class MmsMessagePreferenceControllerTest {
             key = CarrierConfigManager.KEY_MMS_MMS_ENABLED_BOOL,
             value = false,
         )
-        controller.init(SUB_2_ID)
+        val mmsMessageSearchItem = MmsMessageSearchItem(context) { defaultDataSubId }
 
-        val availabilityStatus = controller.getAvailabilityStatus()
+        val isAvailable = mmsMessageSearchItem.isAvailable(SUB_2_ID)
 
-        assertThat(availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
+        assertThat(isAvailable).isFalse()
     }
 
     @Test

@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"ქვემოთ გადატანა"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"ამოშლა"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"ზემოთ ატანა"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"ზემოთ გადატანა: <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"ქვემოთ გადატანა: <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"ამოშლა: <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"დასაწყისში გადატანა: <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"სისტემური ენების სიის რედაქტირება, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"ქვეყანა, ტერიტორია"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"ამინდი, ცელსიუსი, გრადუსი, ტემპერატურა, ცელსიუსი, ფარენჰაიტი"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"მეტრიკა, იმპერიული, ტემპერატურა, სიმაღლე, წონა, მანძილი, ცელსიუსი, ფარენჰაიტი, ფუნტი, კილოგრამი, კგ, მილი, კილომეტრი, დუიმი, სანტიმეტრი, მეტრი, ერთეული"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"ციფრი, ციფრები, რიცხვი, რიცხვები, ნუმერაციის სისტემა"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"კვირა, ორშაბათი, სამშაბათი, ოთხშაბათი, ხუთშაბათი, პარასკევი, შაბათი, პირველი დღე"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"რეგიონული პარამეტრები"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"რაოდენობის და საზომი ერთეულების პარამეტრების დაყენება"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"აცნობეთ აპებს თქვენი რეგიონული პარამეტრების შესახებ, რათა მათ თქვენი გამოცდილების პერსონალიზება შეძლოს."</string>
@@ -304,8 +312,10 @@
     <string name="apply" msgid="7834684883190163536">"მისადაგება"</string>
     <string name="share" msgid="8502235338607613795">"გაზიარება"</string>
     <string name="add" msgid="8335206931421683426">"დამატება"</string>
+    <string name="verify" msgid="6452664472920137535">"დადასტურება"</string>
     <string name="remove" msgid="1028414219245072102">"წაშლა"</string>
     <string name="process" msgid="2614220641928709668">"დამუშავება"</string>
+    <string name="dismiss" msgid="7878176050401175851">"დახურვა"</string>
     <string name="settings_label" msgid="943294133671632976">"პარამეტრები"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"პარამეტრები"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"პარამეტრების მალსახმობი"</string>
@@ -1189,7 +1199,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ამ ქსელზე მოწყობილობის დასამატებლად გამოიყენეთ QR კოდი"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR კოდის ფორმატი არასწორია"</string>
     <string name="retry" msgid="7542103800274026915">"ხელახლა ცდა"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"მოწყობილობის სხვა მომხმარებლებთან გაზიარება"</string>
     <string name="shared_message" msgid="2104244057926025072">"გაზიარებული"</string>
     <string name="private_message" msgid="5897966950396765392">"პირადი"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"დადასტურება"</string>
@@ -1533,6 +1542,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"ფონის ვარიანტები"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"ჩაკეტილი ეკრანის ფონის ჩვენება"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"ჩაკეტილი ეკრანის ფონი ხილულია ყოველთვის ჩართული ეკრანით"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"ეკრანის გამორთვა უმოქმედობისას"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"ენერგიის დასაზოგად გამორთავს ეკრანს, როდესაც არ ფიქსირდება მომხმარებლის აქტივობა"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"მუქი ტექსტი"</string>
     <string name="title_font_size" msgid="570613010306330622">"შრიფტის ზომა"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"ტექსტის გადიდება ან დაპატარავება"</string>
@@ -3469,6 +3480,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"თუ ამ მომხმარებელს ადმინისტრატორის პრივილეგიებს ჩამოართმევთ, თქვენ ან სხვა ადმინისტრატორი მოგვიანებით ისევ შეძლებთ მათ აღდგენას."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"ნამდვილად გსურთ თქვენი ადმინის პრივილეგიების გაუქმება?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"მხოლოდ სხვა ადმინისტრატორებს შეეძლებათ თქვენთვის ადმინის პრივილეგიების მინიჭება, თუ გააგრძელებთ."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"მომხმარებელის წაშლა ვერ მოხერხდა"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"თქვენ ამ მოწყობილობაზე ერთადერთი ადმინისტრატორი ხართ, ამიტომ თქვენი მომხმარებლის პროფილის წაშლა შეუძლებელია. თუ გსურთ თქვენი მომხმარებლის პროფილის წაშლა, შეგიძლიათ სხვა მომხმარებელი ადმინისტრატორად დანიშნოთ ან ყველა მონაცემი ამოშალოთ ამ მოწყობილობიდან შემდეგზე გადასვლით: სისტემა &gt; ვარიანტების გადაყენება &gt; ყველა მონაცემის ამოშლა (ქარხნული პარამეტრების დაბრუნება)."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"ადმინის პრივილეგიების ამოშლა ვერ მოხერხდა"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"თქვენ ამ მოწყობილობაზე ერთადერთი ადმინისტრატორი მომხმარებელი ხართ. თუ აღარ გსურთ, იყოთ ადმინისტრატორი, ჯერ სხვა მომხმარებელი უნდა გახადოთ ადმინისტრატორი."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"საგანგებო ინფორმაცია"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"ინფორმაცია და კონტაქტები (<xliff:g id="USER_NAME">%1$s</xliff:g>)"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g>-ის გახსნა"</string>
@@ -4084,7 +4099,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"შეტყობინების ორგანიზატორი"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"დაჯგუფებისა და დადუმების დაბალი პრიორიტეტის შეტყობინებები"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"აპების მართვა შეტყობინების ორგანიზატორისთვის"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"ყოველთვის გააფართოვეთ ნაკრებები"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"ნაკრების გაფართოება"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"ავტომატური"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"ყოველთვის გაფართოება"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"არასდროს გაფართოება"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"სამსახურის პროფილის აპებზე გავრცელება"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"ვირტ. რეალობის დამხმარე სერვისები"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ვირტუალური რეალობის დამხმარე სერვისად გაშვება არცერთ დაინსტალირებულ აპს არ მოუთხოვია."</string>
@@ -5267,6 +5285,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"მხარდაჭერილი აპები თქვენს ტელეფონზე"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM-ის დამატება ვერ ხერხდება"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"დაასრულეთ სატელიტური კავშირი, სანამ დაამატებთ SIM-ს"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Bluetooth-თან დაკავშირებისას მოხდება თვითმფრინავის რეჟიმის სინქრონიზაცია მხარდაჭერის მოწყობილობებთან, როგორიცაა ტელეფონი და საათი"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"წვდომის წერტილების სახელები"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"მიუწვდომელია, როცა დაკავშირებულია <xliff:g id="CARRIER">%1$s</xliff:g>-თან"</string>
@@ -5373,9 +5392,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"მარცხენა: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"მარჯვენა: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"სათავსო: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"მარცხენა, ბატარეა: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"მარჯვენა, ბატარეა: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"სათავსო, ბატარეა: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"ბატარეა, მარცხენა: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"ბატარეა, მარჯვენა: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"ბატარეა, სათავსო: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"ბატარეა: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ბატარეა"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"პარამეტრების პანელი"</string>
@@ -5939,14 +5958,22 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN-კოდი დამავიწყდა"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"დაგავიწყდათ PIN-კოდი?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"აღდგენის ელფოსტის განახლება"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"აღდგენის ელფოსტა დამატებულია"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"აღდგენის ელფოსტა დადასტურდა"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"აღდგენის ელფოსტა განახლდა"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN-კოდი განახლებულია"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN-კოდი შეიცვალა"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN-კოდი წაშლილია"</string>
+    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"აღდგენის ინფორმაციის დადასტურება"</string>
+    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"თქვენი აღდგენის ანგარიში არ არის დადასტურებული. დასადასტურებლად უნდა შეიყვანოთ ანგარიშის პაროლი."</string>
+    <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"აღდგენის ინფორმაციის დამატება"</string>
+    <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"თუ დაგავიწყდათ თქვენი PIN-კოდი, შეგიძლიათ გამოიყენოთ თქვენი ანგარიში მის გადასაყენებლად"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN-კოდის წაშლა"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"აღდგენის ელფოსტის დამატება"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"დაადასტურეთ თქვენი ელფოსტა"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"აპების მაღაზიის ფილტრები"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"აპების გაფილტვრა მათი კონტენტის ასაკობრივი რეიტინგის მიხედვით"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"ყოველ აპს შეუძლია სხვადასხვა ტიპის კონტენტის დაბლოკვა. აპების მაღაზიები, რომლებიც არაა მითითებული ჩამონათვალში, საჭიროებს ცალკე მართვას."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"ვებსაიტის კონტენტის ფილტრები"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"ვებსაიტის ფილტრები, დაბლოკილი საიტები, ბრაუზერის ფილტრები, დაბლოკილი უხამსი საიტები, გაფილტრული საიტები, დაბლოკილი ძიების შედეგები, ფილტრის უხამსი ძიების შედეგები, კონტენტის შეზღუდვები"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"გაფილტრეთ უცენზურო კონტენტი ამ ტელეფონის ზოგიერთ აპსა და ბრაუზერში. უცენზურო კონტენტი, შესაძლოა, მაინც გამოჩნდეს სხვა აპებში, მოწყობილობებში ან ბრაუზერებში."</string>
@@ -5999,4 +6026,12 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"მეტი გაფრთხილება"</string>
+    <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"ნაკლები გაფრთხილება"</string>
+    <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"დახურული გაფრთხილებები"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"გსურთ გაფრთხილების დახურვა?"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"მიმოიხილეთ თქვენი უსაფრთხოების და კონფიდენციალურობის პარამეტრები ნებისმიერ დროს დამატებითი დაცვის დასამატებლად"</string>
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"მიმდინარეობს დაწყვილება"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"დაკავშირებულია <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="safety_center_rescan_button" msgid="1290673104206018701">"მოწყობილობის სკანირება"</string>
 </resources>

@@ -21,13 +21,16 @@ import android.Manifest.permission.WRITE_SYSTEM_PREFERENCES
 import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
+import androidx.core.net.toUri
 import com.android.settings.R
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
 import com.android.settings.applications.getPackageInfoWithPermissions
 import com.android.settings.applications.isPermissionGranted
 import com.android.settings.applications.isPermissionRequested
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 
 @ProvidePreferenceScreen(WriteSystemPreferencesAppDetailScreen.KEY, parameterized = true)
@@ -61,6 +64,11 @@ open class WriteSystemPreferencesAppDetailScreen(context: Context, arguments: Bu
             writeSystemPreferencesFilter(context, packageInfo?.applicationInfo)
 
     override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        Intent("android.settings.action.WRITE_SYSTEM_PREFERENCES").apply {
+            data = "package:$packageName".toUri()
+        }
 
     companion object {
         const val KEY = "special_access_write_system_preferences_app_detail"

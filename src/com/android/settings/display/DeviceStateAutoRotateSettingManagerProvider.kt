@@ -23,16 +23,13 @@ import android.os.Looper
 import com.android.internal.annotations.VisibleForTesting
 import com.android.settingslib.devicestate.AndroidSecureSettings
 import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManager
-import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManagerProvider.createInstance
+import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManagerImpl
 import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingUtils.isDeviceStateRotationLockEnabled
 import com.android.settingslib.devicestate.PostureDeviceStateConverter
 import com.android.settingslib.utils.ThreadUtils
 import java.util.Optional
 
-/**
- * Provides appropriate instance of [DeviceStateAutoRotateSettingManager], based on the value of
- * [Flags.FLAG_ENABLE_DEVICE_STATE_AUTO_ROTATE_SETTING_REFACTOR].
- */
+/** Provides appropriate instance of [DeviceStateAutoRotateSettingManager]. */
 object DeviceStateAutoRotateSettingManagerProvider {
     /**
      * Will be:
@@ -43,10 +40,9 @@ object DeviceStateAutoRotateSettingManagerProvider {
     private var singletonSettingManager: Optional<DeviceStateAutoRotateSettingManager>? = null
 
     /**
-     * Provides a singleton instance of [DeviceStateAutoRotateSettingManager], based on the value
-     * of[Flags.FLAG_ENABLE_DEVICE_STATE_AUTO_ROTATE_SETTING_REFACTOR]. It is supposed to be used by
-     * apps that don't support dagger to provide and manager instance. Returns null if the current
-     * device is not supported by the manager.
+     * Provides a singleton instance of [DeviceStateAutoRotateSettingManager]. It is supposed to be
+     * used by apps that don't support dagger to provide a manager instance. Returns null if the
+     * current device is not supported by the manager.
      */
     @JvmStatic
     fun getSingletonInstance(context: Context): DeviceStateAutoRotateSettingManager? {
@@ -64,7 +60,7 @@ object DeviceStateAutoRotateSettingManagerProvider {
         }
 
         return Optional.of(
-            createInstance(
+            DeviceStateAutoRotateSettingManagerImpl(
                 context,
                 ThreadUtils.getBackgroundExecutor(),
                 AndroidSecureSettings(context.contentResolver),

@@ -22,6 +22,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Telephony
 import android.telephony.CarrierConfigManager
+import android.telephony.data.ApnSetting
 import android.util.Log
 import com.android.settings.R
 import com.android.settings.network.apn.ApnTypes.getPreSelectedApnType
@@ -176,7 +177,7 @@ fun validateApnData(apnData: ApnData, context: Context): String? {
         apnData.name.isEmpty() -> context.resources.getString(R.string.error_name_empty)
         apnData.apn.isEmpty() -> context.resources.getString(R.string.error_apn_empty)
         apnData.apnType.isEmpty() -> context.resources.getString(R.string.error_apn_type_empty)
-        else -> validateMMSC(true, apnData.mmsc, context) ?: isItemExist(apnData, context)
+        else -> validateMMSC(true, apnData.mmsc, context, apnData) ?: isItemExist(apnData, context)
     }
     return errorMsg?.also { Log.d(TAG, "APN data not valid, reason: $it") }
 }
@@ -265,8 +266,16 @@ fun deleteApn(uri: Uri, context: Context) {
     contentResolver.delete(uri, null, null)
 }
 
-fun validateMMSC(validEnabled: Boolean, mmsc: String, context: Context): String? {
-    return if (validEnabled && mmsc != "" && !mmsc.matches(Regex("^https?:\\/\\/.+")))
+fun validateMMSC(validEnabled: Boolean, mmsc: String, context: Context, apnData: ApnData): String? {
+    val apnTypes = ApnTypes.splitToList(apnData.apnType)
+    var isMmsApnTypeSelected: Boolean =
+            ApnSetting.TYPE_ALL_STRING in apnTypes || ApnSetting.TYPE_MMS_STRING in apnTypes
+    Log.d(TAG, "validateMMSC: isMmsApnTypeSelected = $isMmsApnTypeSelected")
+    if (!isMmsApnTypeSelected) {
+        Log.d(TAG, "validateMMSC : mms apn not selected")
+        return null
+    }
+    return if (validEnabled && (mmsc == "" || !mmsc.matches(Regex("^https?:\\/\\/.+"))))
         context.resources.getString(R.string.error_mmsc_valid)
     else null
 }

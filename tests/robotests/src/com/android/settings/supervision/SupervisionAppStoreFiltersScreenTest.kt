@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.app.settings.SettingsEnums
 import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
@@ -28,6 +29,7 @@ import android.text.Spanned
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
+import androidx.preference.PreferenceGroup
 import androidx.preference.PreferenceGroupAdapter
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -63,6 +65,12 @@ class SupervisionAppStoreFiltersScreenTest {
     }
 
     @Test
+    fun getMetricsCategory() {
+        assertThat(supervisionAppStoreFiltersScreen.getMetricsCategory())
+            .isEqualTo(SettingsEnums.SUPERVISION_APP_STORE_FILTERS)
+    }
+
+    @Test
     @EnableFlags(Flags.FLAG_ENABLE_APP_STORE_FILTERS_SCREEN)
     fun flagEnabled() {
         assertThat(supervisionAppStoreFiltersScreen.isFlagEnabled(context)).isTrue()
@@ -81,6 +89,17 @@ class SupervisionAppStoreFiltersScreenTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_APP_STORE_FILTERS_SCREEN)
+    fun preferenceGroupExists() {
+        supervisionAppStoreFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val preferenceGroup =
+                fragment.findPreference<PreferenceGroup>(
+                    SupervisionAppStoreFiltersScreen.SUPERVISION_APP_STORE_FILTERS_GROUP
+                )
+            assertThat(preferenceGroup).isNotNull()
+        }
+    }
+
     @EnableFlags(Flags.FLAG_ENABLE_APP_STORE_FILTERS_SCREEN)
     fun footerPreference() {
         supervisionAppStoreFiltersScreen.launchFragmentScenario().onFragment { fragment ->

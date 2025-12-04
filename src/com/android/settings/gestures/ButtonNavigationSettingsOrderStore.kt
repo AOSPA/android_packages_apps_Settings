@@ -69,6 +69,7 @@ class ButtonNavigationSettingsOrderStore(val context: Context) :
 
     companion object {
         const val KEY = NAVIGATIONBAR_KEY_ORDER
+
         val readPermissions: Permissions = SettingsSecureStore.getReadPermissions()
         val writePermissions: Permissions = SettingsSecureStore.getWritePermissions()
     }

@@ -70,7 +70,7 @@ public class PictureInPictureDetailPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_noPictureInPictureActivities_shouldReturnDisabled() {
-        doReturn(false).when(mController).hasPictureInPictureActivites();
+        doReturn(false).when(mController).hasPictureInPictureActivities();
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
@@ -78,7 +78,7 @@ public class PictureInPictureDetailPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_hasPictureInPictureActivities_shouldReturnAvailable() {
-        doReturn(true).when(mController).hasPictureInPictureActivites();
+        doReturn(true).when(mController).hasPictureInPictureActivities();
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);

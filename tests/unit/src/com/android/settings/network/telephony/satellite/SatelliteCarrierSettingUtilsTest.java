@@ -19,15 +19,21 @@ package com.android.settings.network.telephony.satellite;
 import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ALL;
 import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED;
 
+import static com.android.settings.network.telephony.satellite.SatelliteCarrierSettingUtils.SATELLITE_REGION_TAG_ID;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.os.Looper;
+import android.platform.test.annotations.EnableFlags;
+import android.telephony.satellite.SatelliteAccessConfiguration;
 import android.telephony.satellite.SatelliteManager;
 
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.internal.telephony.flags.Flags;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -37,6 +43,7 @@ import org.mockito.junit.MockitoRule;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class SatelliteCarrierSettingUtilsTest {
@@ -121,5 +128,65 @@ public class SatelliteCarrierSettingUtilsTest {
                 TEST_SUB_ID);
 
         assertThat(result).isEqualTo(SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_SUPPORT_CARRIER_IDS_IN_GEOFENCE)
+    public void isSatelliteRegionSupportedForSpecificCarrier_hasSpecificId_returnTrue() {
+        SatelliteAccessConfiguration config = new SatelliteAccessConfiguration(null,
+                Collections.emptyList(), List.of(1839));
+
+        boolean result =
+                SatelliteCarrierSettingUtils.isSatelliteRegionSupportedForSpecificCarrier(
+                        config,
+                        1839
+                );
+
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_SUPPORT_CARRIER_IDS_IN_GEOFENCE)
+    public void isSatelliteRegionSupportedForSpecificCarrier_noSpecificId_returnFalse() {
+        SatelliteAccessConfiguration config = new SatelliteAccessConfiguration(null,
+                Collections.emptyList(), List.of(1839));
+
+        boolean result =
+                SatelliteCarrierSettingUtils.isSatelliteRegionSupportedForSpecificCarrier(
+                        config,
+                        1234
+                );
+
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_SUPPORT_CARRIER_IDS_IN_GEOFENCE)
+    public void isSatelliteRegionSupportedForSpecificCarrier_onlyTagId_returnTrue() {
+        SatelliteAccessConfiguration config = new SatelliteAccessConfiguration(null,
+                List.of(SATELLITE_REGION_TAG_ID), Collections.emptyList());
+
+        boolean result =
+                SatelliteCarrierSettingUtils.isSatelliteRegionSupportedForSpecificCarrier(
+                        config,
+                        1234
+                );
+
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_SUPPORT_CARRIER_IDS_IN_GEOFENCE)
+    public void isSatelliteRegionSupportedForSpecificCarrier_noBothIds_returnFalse() {
+        SatelliteAccessConfiguration config = new SatelliteAccessConfiguration(null,
+                Collections.emptyList(), Collections.emptyList());
+
+        boolean result =
+                SatelliteCarrierSettingUtils.isSatelliteRegionSupportedForSpecificCarrier(
+                        config,
+                        1234
+                );
+
+        assertThat(result).isFalse();
     }
 }

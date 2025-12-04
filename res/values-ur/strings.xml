@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"نیچے منتقل کریں"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"ہٹائیں"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"سب سے اوپر منتقل کریں"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"‫<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> کو اوپر منتقل کریں"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"‫<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> کو نیچے منتقل کریں"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"‫<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> ہٹائیں"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"‫<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> کو سب سے اوپر منتقل کریں"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"سسٹم کی زبان کی فہرست میں ترمیم کریں، <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"ملک، علاقہ"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"موسم، سینٹی گریڈ، ڈگریز، درجہ حرارت، سیلسیس، فارن ہائیٹ"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"میٹرک، امپیریل، درجہ حرارت، اونچائی، وزن، فاصلہ، سیلسیس، فارن ہائیٹ، پاؤنڈز، کلوگرامز، کلوگرام، میل، کلومیٹر، انچز، سینٹی میٹرز، میٹرز، یونٹ"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"ہندسہ، ہندسے، نمبر، نمبرز، نمبرنگ سسٹم"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"اتوار، پیر، منگل، بدھ، جمعرات، جمعہ، ہفتہ، پہلا دن"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"علاقائی ترجیحات"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"یونٹس اور نمبر کی ترجیحات سیٹ کریں"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"ایپس کو اپنی علاقائی ترجیحات کو جاننے کی اجازت دیں تاکہ وہ آپ کے تجربے کو ذاتی نوعیت کا بنا سکیں۔"</string>
@@ -304,8 +312,11 @@
     <string name="apply" msgid="7834684883190163536">"لاگو کریں"</string>
     <string name="share" msgid="8502235338607613795">"اشتراک کریں"</string>
     <string name="add" msgid="8335206931421683426">"شامل کریں"</string>
+    <!-- no translation found for verify (6452664472920137535) -->
+    <skip />
     <string name="remove" msgid="1028414219245072102">"ہٹائیں"</string>
     <string name="process" msgid="2614220641928709668">"کارروائی کریں"</string>
+    <string name="dismiss" msgid="7878176050401175851">"برخاست کریں"</string>
     <string name="settings_label" msgid="943294133671632976">"ترتیبات"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"ترتیبات"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"ترتیبات کا شارٹ کٹ"</string>
@@ -1189,7 +1200,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"‏اس نیٹ ورک میں کوئی آلہ شامل کرنے کے لیے QR کوڈ استعمال کریں"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"‏QR کوڈ درست فارمیٹ نہیں ہے"</string>
     <string name="retry" msgid="7542103800274026915">"پھر کوشش کریں"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"دوسرے آلہ صارفین کے ساتھ اشتراک کریں"</string>
     <string name="shared_message" msgid="2104244057926025072">"اشتراک کردہ"</string>
     <string name="private_message" msgid="5897966950396765392">"نجی"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"تصدیق کریں"</string>
@@ -1533,6 +1543,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"وال پیپر کے اختیارات"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"مقفل اسکرین وال پیپر دکھائیں"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"مقفل اسکرین وال پیپر ہمیشہ آن ڈسپلے خصوصیت کے ساتھ مرئی ہے"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"غیر سرگرمی پر ڈسپلے کو آف کریں"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"پاور کی بچت کرنے کیلئے، صارف کی کسی سرگرمی کا پتا نہ چلنے پر ڈسپلے کی پاور کو کم کرتی ہے"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"بولڈ ٹیکسٹ"</string>
     <string name="title_font_size" msgid="570613010306330622">"فونٹ سائز"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"ٹیکسٹ کو بڑا یا چھوٹا بنائیں"</string>
@@ -3469,6 +3481,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"اگر آپ اس صارف کے لیے منتظم کی مراعات کو ہٹاتے ہیں تو آپ یا دیگر منتظم انہیں بعد میں واپس دے سکتے ہیں۔"</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"کیا آپ واقعی اپنے منتظم کی مراعات کو ہٹانا چاہتے ہیں؟"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"اگر آپ آگے بڑھتے ہیں تو صرف دوسرے منتظمین ہی آپ کو منتظم کی مراعات دے سکیں گے۔"</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"صارف کو حذف نہیں کیا جا سکتا"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"‏آپ اس آلے کے واحد منتظم ہیں لہذا آپ کی صارف کی پروفائل کو حذف نہیں کیا جا سکتا۔ اگر آپ اپنی صارف کی پروفائل کو حذف کرنا چاہتے ہیں تو آپ کسی دوسرے صارف کو منتظم بنا سکتے ہیں یا سسٹم &gt; ری سیٹ کے اختیارات &gt; تمام ڈیٹا کو مٹائیں (فیکٹری ری سیٹ کریں) پر جا کر آلے سے تمام ڈیٹا کو حذف کر سکتے ہیں۔"</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"منتظم کی مراعات ہٹائی نہیں جا سکتی ہیں"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"آپ اس آلے کے واحد منتظم صارف ہیں۔ اگر آپ مزید منتظم نہیں رہنا چاہتے تو آپ کو پہلے کسی اور صارف کو منتظم بنانا ہوگا۔"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"ایمرجنسی معلومات"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> کے متعلق معلومات اور رابطے"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> کھولیں"</string>
@@ -4084,7 +4100,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"نوٹیفیکیشن آرگنائزر"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"کم ترجیحی اطلاعات کو بنڈل کریں اور خاموش کریں"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"نوٹیفکیشن آرگنائزر کے لیے ایپس کا نظم کریں"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"ہمیشہ بنڈلز کو پھیلائیں"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"بنڈل میں توسیع"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"خودکار"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"ہمیشہ پھیلائیں"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"کبھی توسیع نہ کریں"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"دفتری پروفائل ایپس پر لاگو کریں"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"‏VR مددگار سروسز"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"‏کسی انسٹال کردہ ایپ نے VR مددگار سروسز کے طور پر چلائے جانے کی درخواست نہیں کی ہے۔"</string>
@@ -5267,6 +5286,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"آپ کے فون پر تعاون یافتہ ایپس"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"‏کوئی SIM شامل نہیں کر سکتے"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"‏‫SIM شامل کرنے سے پہلے سیٹلائٹ کنکشن ختم کر دیں"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"بلوٹوتھ کے ذریعے منسلک ہونے پر، ہوائی جہاز وضع تعاون یافتہ آلات جیسے کہ فون اور گھڑی میں مطابقت پذیر ہو جائے گی۔"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"رسائی کی جگہ کے نام"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> سے منسلک ہونے پر دستیاب نہیں ہے"</string>
@@ -5373,9 +5393,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"بائیں: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"دائیں: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"کیس: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"بائيں، بیٹری: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"دائيں، بیٹری: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"کیس، بیٹری: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"بیٹری، باقی: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"بیٹری، دائیں: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"بیٹری، کیس: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"بیٹری: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"بیٹری"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"ترتیبات پینل"</string>
@@ -5939,14 +5959,26 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"‏‫PIN بھول گئے"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"‏‫PIN بھول گئے؟"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"بازیابی ای میل اپ ڈیٹ کریں"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"بازیابی ای میل پتہ شامل ہو گیا"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"بازیابی ای میل پتے کی توثیق ہو گئی"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"بازیابی ای میل پتہ اپ ڈیٹ ہو گیا"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"‏‫PIN اپ ڈیٹ ہو گیا"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"‏‫PIN تبدیل ہو گیا"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"‏‫PIN حذف ہو گیا"</string>
+    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
+    <skip />
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"‏‫PIN حذف کریں"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"بازیابی ای میل شامل کریں"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"اپنے ای میل کی توثیق کریں"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"‏‫App اسٹور کے فلٹرز"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"ایپس کو ان کے مواد کی پختگی کے لحاظ سے فلٹر کریں"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"‏ہر ایپ مختلف اقسام کے مواد کو بلاک کر سکتی ہے۔ وہ App اسٹورز جو فہرست میں شامل نہیں ہیں ان کا نظم الگ سے کیا جانا چاہیے۔"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"ویب سائٹ کے مواد کے فلٹرز"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"ویب سائٹ کے فلٹرز، سائٹس بلاک کریں، براؤزر فلٹرز، فُحش سائٹس بلاک کریں، سائٹس کو فلٹر کریں، تلاش کے نتائج کو بلاک کریں، فُحش تلاش کے نتائج کو فلٹر کریں، مواد کی پابندیاں"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"اس فون پر کچھ ایپس اور براؤزرز پر فُحش مواد کو فلٹر کرنے میں مدد کریں۔ فُحش مواد اب بھی دیگر ایپس، آلات یا براؤزرز پر دکھائی دے سکتا ہے۔"</string>
@@ -5999,4 +6031,13 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"مزید الرٹس"</string>
+    <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"کم الرٹس"</string>
+    <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"برخاست کردہ الرٹس"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"اس الرٹ کو برخاست کریں؟"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"مزید تحفظ شامل کرنے کے لیے کسی بھی وقت اپنی سیکیورٹی اور رازداری کی ترتیبات کا جائزہ لیں"</string>
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"جوڑا بنانا"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> منسلک ہے"</string>
+    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
+    <skip />
 </resources>

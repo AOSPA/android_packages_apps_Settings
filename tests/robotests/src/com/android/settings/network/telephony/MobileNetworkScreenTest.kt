@@ -17,22 +17,32 @@
 package com.android.settings.network.telephony
 
 import android.os.Bundle
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
+import android.telephony.SubscriptionManager
 import com.android.settings.Settings.MobileNetworkActivity
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.android.settings.utils.putSubId
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.google.common.truth.Truth.assertThat
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.robolectric.util.ReflectionHelpers
 
 class MobileNetworkScreenTest : SettingsCatalystTestCase() {
+
+    @get:Rule val platformFlags = SetFlagsRule()
     private val subId = 123
+    private val invalidSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
 
     override val preferenceScreenCreator =
-        MobileNetworkScreen(Bundle().apply { putInt(Settings.EXTRA_SUB_ID, subId) })
+        MobileNetworkScreen(Bundle().apply { putSubId(Settings.EXTRA_SUB_ID, subId) })
 
     override val flagName: String
         get() = Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4
@@ -58,6 +68,66 @@ class MobileNetworkScreenTest : SettingsCatalystTestCase() {
         assertThat(intent.getIntExtra(Settings.EXTRA_SUB_ID, -1)).isEqualTo(subId)
         assertThat(intent.hasExtra(EXTRA_FRAGMENT_ARG_KEY)).isTrue()
         assertThat(intent.getStringExtra(EXTRA_FRAGMENT_ARG_KEY)).isEqualTo(prefKey)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagTrue_validString_parsedCorrectly() {
+        val args = Bundle().apply { putString(Settings.EXTRA_SUB_ID, subId.toString()) }
+        val screen = MobileNetworkScreen(args)
+        assertThat(screen.getSubId()).isEqualTo(subId)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagTrue_invalidString_returnsDefault() {
+        val args = Bundle().apply { putString(Settings.EXTRA_SUB_ID, "invalid") }
+        val screen = MobileNetworkScreen(args)
+        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagTrue_missingKey_returnsDefault() {
+        val args = Bundle()
+        val screen = MobileNetworkScreen(args)
+        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagTrue_subIdIsInt_returnsDefault() {
+        val args = Bundle().apply { putInt(Settings.EXTRA_SUB_ID, subId) }
+        val screen = MobileNetworkScreen(args)
+        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagFalse_validInt_parsedCorrectly() {
+        val args = Bundle().apply { putInt(Settings.EXTRA_SUB_ID, subId) }
+        val screen = MobileNetworkScreen(args)
+        assertThat(screen.getSubId()).isEqualTo(subId)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagFalse_missingKey_returnsDefault() {
+        val args = Bundle()
+        val screen = MobileNetworkScreen(args)
+        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagFalse_subIdIsString_returnsDefault() {
+        val args = Bundle().apply { putString(Settings.EXTRA_SUB_ID, subId.toString()) }
+        val screen = MobileNetworkScreen(args)
+        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+    }
+
+    private fun MobileNetworkScreen.getSubId(): Int {
+        return ReflectionHelpers.getField(this, "subId")
     }
 
     // TODO(b/419310279): Migration test fails when instantiating a BillingCycleRepository due to a

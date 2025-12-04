@@ -88,8 +88,6 @@ public class SmartAutoRotateControllerTest {
         doReturn(PACKAGE_NAME).when(mPackageManager).getRotationResolverPackageName();
         doReturn(PackageManager.PERMISSION_GRANTED).when(mPackageManager).checkPermission(
                 Manifest.permission.CAMERA, PACKAGE_NAME);
-        // Necessary for the DeviceStateRotationLockSettingsManager setup
-        doReturn(context).when(context).getApplicationContext();
         doReturn(mDeviceStateManager).when(context).getSystemService(DeviceStateManager.class);
         setDeviceStateRotationLockEnabled(/* enable= */ false, mResources, mDeviceStateManager);
         mController = Mockito.spy(new SmartAutoRotateController(

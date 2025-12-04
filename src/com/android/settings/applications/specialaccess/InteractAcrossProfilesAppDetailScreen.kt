@@ -19,13 +19,13 @@ package com.android.settings.applications.specialaccess
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ApplicationInfo
 import android.content.pm.CrossProfileApps
 import android.os.Bundle
 import android.os.UserManager
 import android.provider.Settings.ACTION_MANAGE_CROSS_PROFILE_ACCESS
 import androidx.core.net.toUri
 import com.android.settings.R
+import com.android.settings.applications.getApplicationInfo
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetails
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
@@ -35,6 +35,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -47,14 +48,16 @@ import kotlinx.coroutines.flow.flow
 
 @ProvidePreferenceScreen(InteractAcrossProfilesAppDetailScreen.KEY, parameterized = true)
 open class InteractAcrossProfilesAppDetailScreen(context: Context, override val arguments: Bundle) :
-    PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceTitleProvider {
+    PreferenceScreenMixin,
+    PreferenceSummaryProvider,
+    PreferenceTitleProvider,
+    PreferenceAvailabilityProvider {
 
     private val packageName = arguments.getString("app")!!
 
-    private val appInfo = context.packageManager.getApplicationInfo(packageName, 0)
+    private val appInfo = context.getApplicationInfo(packageName)
 
-    private val storage: KeyValueStore =
-        InteractAcrossProfilesStorage(context, appInfo, packageName)
+    private val storage: KeyValueStore = InteractAcrossProfilesStorage(context, packageName)
 
     override val key: String
         get() = KEY
@@ -70,8 +73,8 @@ open class InteractAcrossProfilesAppDetailScreen(context: Context, override val 
     override fun tags(context: Context) =
         arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
 
-    override fun getTitle(context: Context): CharSequence =
-        appInfo.loadLabel(context.packageManager)
+    override fun getTitle(context: Context): CharSequence? =
+        appInfo?.loadLabel(context.packageManager)
 
     override fun getSummary(context: Context): CharSequence =
         context.getString(
@@ -83,11 +86,13 @@ open class InteractAcrossProfilesAppDetailScreen(context: Context, override val 
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         Intent(ACTION_MANAGE_CROSS_PROFILE_ACCESS).apply {
-            data = "package:${appInfo.packageName}".toUri()
+            data = "package:$packageName".toUri()
             // Only one switch so no need to highlight it with [IntentUtils.highlightPreference].
         }
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
+
+    override fun isAvailable(context: Context) = appInfo != null
 
     override fun extras(context: Context): Bundle? =
         Bundle(1).apply { putString(KEY_EXTRA_PACKAGE_NAME, arguments.getString("app")) }
@@ -138,7 +143,6 @@ private class InteractAcrossProfilesMainSwitch(private val storage: KeyValueStor
 
 private class InteractAcrossProfilesStorage(
     private val context: Context,
-    private val appInfo: ApplicationInfo,
     private val packageName: String,
 ) : NoOpKeyedObservable<String>(), KeyValueStore {
 

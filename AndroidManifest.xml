@@ -398,6 +398,22 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 android:value="true" />
         </activity>
 
+        <activity
+            android:name=".Settings$AirplaneModeSettingsActivity"
+            android:label="@string/airplane_mode"
+            android:exported="true"
+            android:featureFlag="com.android.server.connectivity.sync_airplane_mode_with_watches"
+            android:icon="@drawable/ic_airplanemode_active">
+            <!-- TODO: Check large screen device and fix Intent filters accordingly. -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_network"/>
+        </activity>
+
         <activity android:name="AirplaneModeVoiceActivity"
                 android:label="@string/wireless_networks_settings_title"
                 android:theme="@*android:style/Theme.DeviceDefault.Light.Voice"
@@ -2636,7 +2652,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:name="Settings$AppUsageAccessSettingsActivity"
             android:exported="true"
             android:label="@string/usage_access_title">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.USAGE_ACCESS_SETTINGS"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <data android:scheme="package"/>
@@ -4851,6 +4867,33 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 android:value="@string/menu_key_apps"/>
         </activity-alias>
 
+        <activity-alias android:name="WriteSystemPreferencesAppListIntent"
+            android:exported="true"
+            android:targetActivity=".spa.SpaBridgeActivity">
+            <intent-filter>
+                <action android:name="android.settings.action.WRITE_SYSTEM_PREFERENCES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                android:value="TogglePermissionAppList/WriteSystemPreferences"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
+        <activity-alias android:name="WriteSystemPreferencesAppDetailIntent"
+            android:exported="true"
+            android:targetActivity=".spa.SpaAppBridgeActivity">
+            <intent-filter>
+                <action android:name="android.settings.action.WRITE_SYSTEM_PREFERENCES" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                android:value="TogglePermissionAppInfoPage/WriteSystemPreferences"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
         <activity
             android:name="Settings$AlarmsAndRemindersActivity"
             android:exported="true"
@@ -4931,6 +4974,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                   android:taskAffinity="com.android.settings.appops"
                   android:excludeFromRecents="true"
                   android:exported="true"
+                  android:permission="android.permission.MANAGE_ENHANCED_CONFIRMATION_STATES"
                   android:launchMode="singleTop">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.SHOW_RESTRICTED_SETTING_DIALOG" />
@@ -6119,7 +6163,34 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                    android:value="com.android.settings.safetycenter.ui.SafetyCenterFragment" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                    android:value="true" />
+            <intent-filter android:priority="200">
+                <action android:name="android.settings.PRIVACY_CONTROLS"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+
+        <receiver
+            android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteTileStateReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteTileService"
+            android:enabled="false"
+            android:icon="@drawable/ic_satellite_tile"
+            android:label="@string/satellite_tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data android:name="android.service.quicksettings.TILE_CATEGORY"
+                android:value="android.service.quicksettings.CATEGORY_CONNECTIVITY" />
+        </service>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
 

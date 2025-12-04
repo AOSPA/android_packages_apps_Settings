@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.specialaccess.pictureinpicture;
 
+import static android.Manifest.permission.USE_PINNED_WINDOWING_LAYER;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -39,10 +41,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class PictureInPictureSettingsTest {
@@ -76,7 +78,7 @@ public class PictureInPictureSettingsTest {
         profileUserInfo.id = PROFILE_USER_ID;
 
         when(mUserManager.getProfiles(PRIMARY_USER_ID))
-            .thenReturn(ImmutableList.of(primaryUserInfo, profileUserInfo));
+                .thenReturn(ImmutableList.of(primaryUserInfo, profileUserInfo));
     }
 
     @Test
@@ -94,6 +96,27 @@ public class PictureInPictureSettingsTest {
         List<Pair<ApplicationInfo, Integer>> apps = mFragment.collectPipApps(PRIMARY_USER_ID);
         assertThat(containsPackages(apps, primaryP1, profileP2)).isTrue();
         assertThat(containsPackages(apps, primaryP2, profileP1)).isFalse();
+    }
+
+    @Test
+    public void testCollectAppsWithPinnedLayerSupport() {
+        PackageInfo primaryP1 = createPackage("Calculator", /* pip */ true, /* pinned */ true);
+        PackageInfo primaryP2 = createPackage("Clock", false, true);
+        PackageInfo primaryP3 = createPackage("VideoPlayer", false, false);
+        PackageInfo profileP1 = createPackage("Calculator", false, true);
+        PackageInfo profileP2 = createPackage("Clock", true, true);
+        PackageInfo profileP3 = createPackage("VideoPlayer", false, false);
+
+        mPrimaryUserPackages.add(primaryP1);
+        mPrimaryUserPackages.add(primaryP2);
+        mPrimaryUserPackages.add(primaryP3);
+        mProfileUserPackages.add(profileP1);
+        mProfileUserPackages.add(profileP2);
+        mProfileUserPackages.add(profileP3);
+
+        List<Pair<ApplicationInfo, Integer>> apps = mFragment.collectPipApps(PRIMARY_USER_ID);
+        assertThat(containsPackages(apps, primaryP1, primaryP2, profileP1, profileP2)).isTrue();
+        assertThat(containsPackages(apps, primaryP3, profileP3)).isFalse();
     }
 
     @Test
@@ -115,6 +138,42 @@ public class PictureInPictureSettingsTest {
         List<Pair<ApplicationInfo, Integer>> apps = mFragment.collectPipApps(PRIMARY_USER_ID);
         apps.sort(new PictureInPictureSettings.AppComparator(null));
         assertThat(isOrdered(apps, primaryP1, profileP1, primaryP2, profileP2, primaryP3)).isTrue();
+    }
+
+
+    @Test
+    public void checkPackageSupportsPictureInPicture_forIgnoredApps_isFalse() {
+        for (String ignoredPackage : PictureInPictureSettings.IGNORE_PACKAGE_LIST) {
+            ActivityInfo[] packageActivities = createActivityInfos(true);
+            String[] permissions = {USE_PINNED_WINDOWING_LAYER};
+
+            assertThat(PictureInPictureSettings.checkPackageSupportsPictureInPicture(
+                    ignoredPackage, packageActivities, permissions)).isFalse();
+        }
+    }
+
+    @Test
+    public void checkPackageSupportsPictureInPicture_forNonPiPApps_isFalse() {
+        assertThat(PictureInPictureSettings.checkPackageSupportsPictureInPicture(
+                "com.android.fakepackage", createActivityInfos(), null)).isFalse();
+        assertThat(PictureInPictureSettings.checkPackageSupportsPictureInPicture(
+                "com.android.fakepackage", createActivityInfos(false, false), null)).isFalse();
+    }
+
+    @Test
+    public void checkPackageSupportsPictureInPicture_forAppsWithPipActivity_isTrue() {
+        assertThat(PictureInPictureSettings.checkPackageSupportsPictureInPicture(
+                "com.android.fakepackage", createActivityInfos(true), null)).isTrue();
+        assertThat(PictureInPictureSettings.checkPackageSupportsPictureInPicture(
+                "com.android.fakepackage", createActivityInfos(false, true), null)).isTrue();
+    }
+
+    @Test
+    public void checkPackageSupportsPictureInPicture_forAppsWithPinnedWindowingLayer_isTrue() {
+        String[] permissions = {USE_PINNED_WINDOWING_LAYER};
+
+        assertThat(PictureInPictureSettings.checkPackageSupportsPictureInPicture(
+                "com.android.fakepackage", createActivityInfos(false), permissions)).isTrue();
     }
 
     private boolean containsPackages(List<Pair<ApplicationInfo, Integer>> apps,
@@ -148,15 +207,49 @@ public class PictureInPictureSettingsTest {
     }
 
     private PackageInfo createPackage(String appTitle, boolean supportsPip) {
+        return createPackage(appTitle, supportsPip, false);
+    }
+
+    private PackageInfo createPackage(String appTitle, boolean supportsPip,
+            boolean usesPinnedWindowingLayerPermission) {
         PackageInfo pi = new PackageInfo();
         ActivityInfo ai = new ActivityInfo();
         if (supportsPip) {
             ai.flags |= ActivityInfo.FLAG_SUPPORTS_PICTURE_IN_PICTURE;
+        }
+        if (usesPinnedWindowingLayerPermission) {
+            pi.requestedPermissions =
+                    new String[]{android.Manifest.permission.USE_PINNED_WINDOWING_LAYER};
         }
         pi.activities = new ActivityInfo[1];
         pi.activities[0] = ai;
         pi.applicationInfo = new ApplicationInfo();
         pi.applicationInfo.name = appTitle;
         return pi;
+    }
+
+    private ActivityInfo[] createActivityInfos(boolean... supportsPiP) {
+        ActivityInfo[] activities = null;
+        if (supportsPiP.length > 0) {
+            activities = new ActivityInfo[supportsPiP.length];
+            for (int i = 0; i < activities.length; i++) {
+                activities[i] = new MockActivityInfo(supportsPiP[i]);
+            }
+        }
+        return activities;
+    }
+
+    private class MockActivityInfo extends ActivityInfo {
+
+        private final boolean mSupportsPictureInPicture;
+
+        private MockActivityInfo(boolean supportsPictureInPicture) {
+            mSupportsPictureInPicture = supportsPictureInPicture;
+        }
+
+        @Override
+        public boolean supportsPictureInPicture() {
+            return mSupportsPictureInPicture;
+        }
     }
 }

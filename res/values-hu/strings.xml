@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Mozgatás lefelé"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Eltávolítás"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Áthelyezés a fal tetejére"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"A(z) <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> nyelv mozgatása felfelé"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"A(z) <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> nyelv mozgatása lefelé"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"A(z) <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> nyelv eltávolítása"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"A(z) <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> nyelv mozgatása fentre"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"Rendszernyelvlista szerkesztése, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"ország, terület"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"időjárás, celsius-fok, fok, hőmérséklet, celsius, fahrenheit"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"metrikus, angolszász, hőmérséklet, magasság, súly, távolság, celsius, fahrenheit, font, kilogramm, kg, mérföld, kilométer, hüvelyk, centiméter, méter, egység"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"számjegy, számjegyek, szám, számok, számozási rendszer"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"vasárnap, hétfő, kedd, szerda, csütörtök, péntek, szombat, első nap"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionális preferenciák"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Mértékegységekkel és számokkal kapcsolatos preferenciák beállítása"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Tudassa az alkalmazásokkal a regionális preferenciáit, hogy személyre szabhassák a felhasználói élményt."</string>
@@ -304,8 +312,12 @@
     <string name="apply" msgid="7834684883190163536">"Alkalmaz"</string>
     <string name="share" msgid="8502235338607613795">"Megosztás"</string>
     <string name="add" msgid="8335206931421683426">"Hozzáadás"</string>
+    <!-- no translation found for verify (6452664472920137535) -->
+    <skip />
     <string name="remove" msgid="1028414219245072102">"Eltávolítás"</string>
     <string name="process" msgid="2614220641928709668">"Folyamat"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"Beállítások"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Beállítások"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Beállítások parancsikon"</string>
@@ -1189,7 +1201,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Használjon QR-kódot, ha új eszközt szeretne hozzáadni a hálózathoz"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"A QR-kód nem érvényes formátum"</string>
     <string name="retry" msgid="7542103800274026915">"Újra"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"Megosztás az eszköz más felhasználóival"</string>
     <string name="shared_message" msgid="2104244057926025072">"megosztott"</string>
     <string name="private_message" msgid="5897966950396765392">"privát"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Megerősítés"</string>
@@ -1533,6 +1544,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Háttérkép-beállítások"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"A lezárási képernyő háttérképének megjelenítése"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"A lezárási képernyő háttérképe látható mindig bekapcsolt kijelző esetén."</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Kijelző kikapcsolása inaktivitás esetén"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Az energiamegtakarítás érdekében kikapcsolja a kijelzőt, ha nem észlel felhasználói tevékenységet"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Félkövér szöveg"</string>
     <string name="title_font_size" msgid="570613010306330622">"Betűméret"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Szöveg nagyítása vagy kicsinyítése"</string>
@@ -3295,7 +3308,7 @@
     <string name="data_usage_tab_3g" msgid="6111070409752123049">"2G-3G"</string>
     <string name="data_usage_list_mobile" msgid="3738130489722964291">"Mobil"</string>
     <string name="data_usage_list_none" msgid="2091924522549134855">"Nincs"</string>
-    <string name="data_usage_enable_mobile" msgid="1996943748103310201">"Mobiladatok"</string>
+    <string name="data_usage_enable_mobile" msgid="1996943748103310201">"Mobiladat"</string>
     <string name="data_usage_enable_3g" msgid="2818189799905446932">"2G-3G adatforgalom"</string>
     <string name="data_usage_enable_4g" msgid="1526584080251993023">"4G adatforgalom"</string>
     <string name="data_roaming_enable_mobile" msgid="5745287603577995977">"Roaming"</string>
@@ -3469,6 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Ha visszavonja a felhasználó adminisztrátori jogosultságait, később újra megadhatja neki Ön vagy egy másik adminisztrátor."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Eltávolítja a saját adminisztrátori jogosultságait?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Ha folytatja, csak más adminisztrátorok adhatnak Önnek adminisztrátori jogosultságokat."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Nem lehet törölni a felhasználót"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Ön az egyetlen adminisztrátor ezen az eszközön, ezért a felhasználói profilja nem törölhető. Ha törölni szeretné felhasználói profilját, megteheti, hogy egy másik felhasználót adminisztrátorrá tesz, vagy törli az összes adatot az eszközről a Rendszer &gt; Beállítások visszaállítása &gt; Összes adat törlése (gyári beállítások visszaállítása) menüpontban."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Az adminisztrátori jogosultságok nem távolíthatók el"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Ön az egyetlen adminisztrátor felhasználó ezen az eszközön. Ha már nem szeretne adminisztrátor lenni, először adminisztrátori jogosultságot kell adnia egy másik felhasználónak."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Segélyhívási információk"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Adatok és névjegyek: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> megnyitása"</string>
@@ -4084,7 +4101,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Értesítésszervező"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Az alacsonyabb prioritású értesítések összevonása és némítása"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Az értesítésszervező alkalmazásainak kezelése"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Mindig legyenek kibontva a csomagok"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Csomag kibontása"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automatikus"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Mindig kibontva"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Soha ne legyen kibontva"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Alkalmazás a munkaprofil alkalmazásaira"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Virtuálisvalóság-segédszolgáltatás"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Egy telepített alkalmazás sem kérte, hogy virtuálisvalóság-segédszolgáltatásként legyen futtatva."</string>
@@ -5267,6 +5287,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Támogatott alkalmazások a telefonon"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Nem lehet hozzáadni SIM-et"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM hozzáadása előtt szakítsa meg a műholdas kapcsolatot"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Aktív Bluetooth-kapcsolat esetén a Repülős üzemmód szinkronizálódik a támogatott eszközökön (pl. telefonon és órán)."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Hozzáférési pontok nevei"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nem hozzáférhető, amikor a következőhöz csatlakozik: <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5373,9 +5394,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Bal oldali: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Jobb oldali: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Tok: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Akkumulátor töltöttségi szintje: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> (bal)"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Akkumulátor töltöttségi szintje: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> (jobb)"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Tok akkumulátorszintje: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Akkumulátor töltöttségi szintje (bal): <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Akkumulátor töltöttségi szintje (jobb): <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Akkumulátor töltöttségi szintje (tok): <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Akkumulátor: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Akkumulátor"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Beállítások panel"</string>
@@ -5939,14 +5960,26 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Elfelejtett PIN-kód"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Elfelejtette a PIN-kódot?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Biztonsági e-mail-cím frissítése"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Biztonsági e-mail-cím hozzáadva"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Biztonsági e-mail-cím igazolva"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"A biztonsági e-mail-cím frissült"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN-kód frissítve"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"A PIN-kód megváltozott"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN-kód törölve"</string>
+    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
+    <skip />
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN-kód törlése"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Biztonsági e-mail-cím hozzáadása"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Igazolja e-mail-címét"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Alkalmazásbolti szűrők"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Alkalmazások szűrése a tartalmuk életkor-besorolási szintje alapján"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Az egyes alkalmazások különböző típusú tartalmakat blokkolhatnak. A nem felsorolt alkalmazásboltokat külön kell kezelni."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Webhelytartalom-szűrők"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Webhelyszűrők, Webhelyek letiltása, Böngészőszűrők, Szókimondó webhelyek letiltása, Webhelyek szűrése, Keresési találatok letiltása, Szókimondó keresési találatok szűrése, tartalmi korlátozások"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Segít kiszűrni a felnőtteknek szóló tartalmakat bizonyos alkalmazásokban és böngészőkben ezen a telefonon. Más alkalmazásokban, eszközökön vagy böngészőkben a felnőtteknek szóló tartalmak továbbra is megjelenhetnek."</string>
@@ -5999,4 +6032,18 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Párosítás"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> csatlakoztatva"</string>
+    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
+    <skip />
 </resources>

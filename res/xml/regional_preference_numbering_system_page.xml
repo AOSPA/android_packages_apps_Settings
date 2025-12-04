@@ -15,4 +15,7 @@
 -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="regional_preference_numbering_system"/>
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/numbers_preferences_title"
+    android:key="regional_preference_numbering_system"
+    settings:keywords="@string/keywords_numbering_system_page"/>

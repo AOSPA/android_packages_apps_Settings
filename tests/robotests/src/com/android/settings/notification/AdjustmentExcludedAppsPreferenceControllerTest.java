@@ -92,13 +92,13 @@ public class AdjustmentExcludedAppsPreferenceControllerTest {
     @Test
     public void testIsAvailable() {
         when(mBackend.isNotificationBundlingSupported()).thenReturn(true);
-        when(mBackend.isNotificationSummarizationSupported()).thenReturn(true);
+        when(mBackend.showSummarizationSettings()).thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_flagEnabledNasDoesNotSupport_shouldReturnFalse() throws Exception {
-        when(mInm.getUnsupportedAdjustmentTypes()).thenReturn(List.of(KEY_SUMMARIZATION));
+        when(mBackend.showSummarizationSettings()).thenReturn(false);
         assertThat(mController.isAvailable()).isFalse();
     }
 

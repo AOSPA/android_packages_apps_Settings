@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Eraman behera"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Kendu"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Eraman goraino"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"Eraman <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> gora"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"Eraman <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> behera"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"Kendu <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"Eraman <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> goraino"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"Editatu sistemaren hizkuntza-zerrenda, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"herrialdea, lurraldea"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"eguraldia, zentigradua, graduak, tenperatura, celsius, fahrenheit"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"metrikoa, inperiala, tenperatura, altuera, pisua, distantzia, celsius, fahrenheit, librak, kilogramoak, kg, milia, kilometroa, hazbeteak, zentimetroak, metroak, unitatea"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"digitua, digituak, zenbakia, zenbakiak, zenbaki-sistema"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"igandea, astelehena, asteartea, asteazkena, osteguna, ostirala, larunbata, lehen eguna"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Lurraldeko hobespenak"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Ezarri unitate- eta zenbaki-hobespenak"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Eman lurraldeko hobespenen berri aplikazioei zerbitzuak pertsonaliza ditzaten."</string>
@@ -304,8 +312,11 @@
     <string name="apply" msgid="7834684883190163536">"Aplikatu"</string>
     <string name="share" msgid="8502235338607613795">"Partekatu"</string>
     <string name="add" msgid="8335206931421683426">"Gehitu"</string>
+    <string name="verify" msgid="6452664472920137535">"Egiaztatu"</string>
     <string name="remove" msgid="1028414219245072102">"Kendu"</string>
     <string name="process" msgid="2614220641928709668">"Prozesatu"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"Ezarpenak"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Ezarpenak"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Ezarpenen lasterbidea"</string>
@@ -1189,7 +1200,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Erabili QR kode bat sare honetan gailu bat gehitzeko"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR kodearen formatua ez da baliozkoa"</string>
     <string name="retry" msgid="7542103800274026915">"Saiatu berriro"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"Partekatu gailuaren gainerako erabiltzaileekin"</string>
     <string name="shared_message" msgid="2104244057926025072">"partekatuta"</string>
     <string name="private_message" msgid="5897966950396765392">"pribatua"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Berretsi"</string>
@@ -1533,6 +1543,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Horma-paperaren aukerak"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Erakutsi pantaila blokeatuaren horma-papera"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Pantaila blokeatuaren horma-papera ikusgai dago pantaila etengabe piztuta mantentzeko eginbidearekin"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Itzali pantaila jarduerarik ez badago"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Pantaila itzaltzen du erabiltzailearen jarduerarik hautematen ez bada, energia aurrezteko"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Testu lodia"</string>
     <string name="title_font_size" msgid="570613010306330622">"Letra-tamaina"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Handitu edo txikitu testua"</string>
@@ -3469,6 +3481,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Erabiltzaile honi administratzaile-baimenak kendu arren, berriro eman ahal izango dizkiozue bai zuk, bai beste administratzaile batek."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Ziur zeure administratzaile-baimenak kendu nahi dituzula?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Aurrera eginez gero, beste administratzaileek soilik eman ahalko dizkizute administratzaile-baimenak."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Ezin da ezabatu erabiltzailea"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Gailu honen administratzaile bakarra zara; beraz, ezin da ezabatu zure erabiltzaile-profila. Erabiltzaile-profila ezabatu nahi baduzu, beste erabiltzaile bati administratzaile funtzioa eslei diezaiokezu, edo gailu datu guztiak ezabatu. Horretarako, joan Sistema &gt; Berrezartzeko aukerak &gt; Ezabatu datu guztiak (berrezarri jatorrizkoak) atalera."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Ezin dira kendu administratzaile-baimenak"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Gailu honetan administratzailea den erabiltzaile bakarra zara. Administratzaile izateari utzi nahi badiozu, beste erabiltzaile bati esleitu behar diozu funtzio hori lehenbizi."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Larrialdietarako informazioa"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Datuak eta kontaktuak (<xliff:g id="USER_NAME">%1$s</xliff:g>)"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Ireki <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4084,7 +4100,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Jakinarazpenen antolatzailea"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Multzokatu lehentasun txikiagoko jakinarazpenak eta desaktibatu haien audioa"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Kudeatu jakinarazpenen antolatzailearekin erabiltzeko aplikazioak"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Zabaldu multzoak beti"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Multzoak zabaltzea"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automatikoa"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Zabaldu beti"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Ez zabaldu inoiz"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Aplikatu laneko profileko aplikazioetan"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"EBko laguntza-zerbitzuak"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ez dago EBko laguntza-zerbitzu gisa abiaraztea eskatu duen aplikaziorik instalatuta."</string>
@@ -4547,7 +4566,7 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Pantaila osoko jakinarazpenak"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Eman pantaila osoko jakinarazpenak erakusteko baimena aplikazioari"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Eman gailua blokeatuta dagoenean pantaila osoa hartzen duten jakinarazpenak erakusteko baimena aplikazioari. Alarmen, sarrerako deien edo bestelako premiazko jakinarazpenen berri emateko erabil dezakete aplikazioek."</string>
-    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Sistemaren hobespenak idatzi"</string>
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Idatzi sistemaren hobespenak"</string>
     <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Eman zure izenean sistemaren hobespenak aldatzeko baimena aplikazio honi"</string>
     <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"Baimen honekin, aplikazio batek sistemaren hobespen nagusiak alda ditzake."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Multimedia-edukia kudeatzeko aplikazioak"</string>
@@ -5267,6 +5286,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Telefonoko aplikazio bateragarriak"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Ezin da gehitu SIMa"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Amaitu satelite bidezko konexioa SIM bat gehitu aurretik"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Bluetooth bidez konektatuta zaudenean, hegaldi modua gailu bateragarrien artean sinkronizatuko da, hala nola erlojuaren eta telefonoaren artean"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Sarbide-puntuen izenak"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APNa"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Ez dago erabilgarri <xliff:g id="CARRIER">%1$s</xliff:g> operadorera konektatuta egoteagatik"</string>
@@ -5373,9 +5393,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Ezkerrekoa: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Eskuinekoa: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Kutxa: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Ezkerrekoaren bateria: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Eskuinekoaren bateria: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Kutxaren bateria: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Bateria, ezkerrekoa: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Bateria, eskuinekoa: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Bateria, zorroa: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Bateria: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Bateria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Ezarpenen panela"</string>
@@ -5939,14 +5959,22 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Ahaztu egin zait PINa"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"PINa ahaztu zaizu?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Eguneratu kontua berreskuratzeko helbide elektronikoa"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Gehitu da kontua berreskuratzeko helbide elektronikoa"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Egiaztatu da kontua berreskuratzeko helbide elektronikoa"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Eguneratu da kontua berreskuratzeko helbide elektronikoa"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"Eguneratu da PINa"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"Aldatu da PINa"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"Ezabatu da PINa"</string>
+    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"Egiaztatu kontua berreskuratzeko informazioa"</string>
+    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"Ez da egiaztatu berreskuratzeko kontua. Egiaztatzeko, kontuko pasahitza idatzi beharko duzu."</string>
+    <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Gehitu kontua berreskuratzeko informazioa"</string>
+    <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"PINa ahazten baduzu, zure kontua erabil dezakezu hura berrezartzeko"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Ezabatu PINa"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Gehitu kontua berreskuratzeko helbide elektronikoa"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Egiaztatu helbide elektronikoa"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Aplikazio-dendako iragazkiak"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Iragazi aplikazioak haien edukiaren heldutasun-mailaren arabera"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Baliteke aplikazio bakoitzak eduki mota ezberdinak blokeatzea. Zerrendan ez dauden aplikazio-dendak bereizita kudeatu behar dira."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Webguneen eduki-iragazkiak"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Webguneen iragazkiak, webguneak blokeatzea, arakatzaileen iragazkiak, webgune esplizituak blokeatzea, webguneak iragaztea, bilaketa-emaitzak blokeatzea, bilaketa-emaitza esplizituak iragaztea, edukiaren murriztapenak"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Telefono honetako zenbait aplikazio eta arakatzailetan eduki esplizitua iragazten laguntzen dute. Baliteke eduki esplizitua beste aplikazio, gailu edo arakatzaile batzuetan agertzea."</string>
@@ -5999,4 +6027,17 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Parekatzen"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Konektatu da <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="safety_center_rescan_button" msgid="1290673104206018701">"Aztertu gailua"</string>
 </resources>

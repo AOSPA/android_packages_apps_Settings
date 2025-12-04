@@ -88,7 +88,7 @@ public class UserPreference extends RestrictedPreference {
 
     @Override
     protected int getSecondTargetResId() {
-        return R.layout.preference_widget_edit;
+        return R.layout.preference_widget_user_edit;
     }
 
     @Override

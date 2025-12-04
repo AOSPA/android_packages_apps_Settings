@@ -29,6 +29,9 @@ class AmbientDisplayMainSwitchPreference : BooleanValuePreference, MainSwitchPre
     override val title
         get() = R.string.doze_always_on_title2
 
+    override val indexable
+        get() = false
+
     override fun storage(context: Context): KeyValueStore = AmbientDisplayStorage(context)
 
     companion object {

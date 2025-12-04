@@ -16,7 +16,6 @@
 package com.android.settings.supervision
 
 import android.Manifest
-import android.app.Activity.RESULT_CANCELED
 import android.app.admin.DevicePolicyManager
 import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
@@ -28,13 +27,11 @@ import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresPermission
 import androidx.fragment.app.FragmentActivity
 import com.android.internal.widget.LockPatternUtils
-import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.password.ChooseLockGeneric
 import com.android.settingslib.supervision.SupervisionIntentProvider

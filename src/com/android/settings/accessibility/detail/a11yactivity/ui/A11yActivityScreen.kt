@@ -57,12 +57,18 @@ open class A11yActivityScreen(context: Context, override val arguments: Bundle) 
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceTitleProvider, PreferenceBinding {
     private val packageManager = context.packageManager
     private val featureComponentName: ComponentName =
-        requireNotNull(
-            arguments.getParcelable(
-                AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                ComponentName::class.java,
+        if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
+            val componentNameString =
+                requireNotNull(arguments.getString(AccessibilitySettings.EXTRA_COMPONENT_NAME))
+            requireNotNull(ComponentName.unflattenFromString(componentNameString))
+        } else {
+            requireNotNull(
+                arguments.getParcelable(
+                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
+                    ComponentName::class.java,
+                )
             )
-        )
+        }
     private val accessibilityShortcutInfo =
         AccessibilityRepositoryProvider.get(context)
             .getAccessibilityShortcutInfo(featureComponentName)
@@ -155,7 +161,6 @@ open class A11yActivityScreen(context: Context, override val arguments: Bundle) 
         @OptIn(ExperimentalCoroutinesApi::class)
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> {
-
             return flow {
                 AccessibilityRepositoryProvider.get(context)
                     .accessibilityShortcutInfos
@@ -163,10 +168,17 @@ open class A11yActivityScreen(context: Context, override val arguments: Bundle) 
                     .forEach { a11yShortcutInfo ->
                         emit(
                             Bundle(1).apply {
-                                putParcelable(
-                                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                                    a11yShortcutInfo.componentName,
-                                )
+                                if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
+                                    putString(
+                                        AccessibilitySettings.EXTRA_COMPONENT_NAME,
+                                        a11yShortcutInfo.componentName.flattenToString(),
+                                    )
+                                } else {
+                                    putParcelable(
+                                        AccessibilitySettings.EXTRA_COMPONENT_NAME,
+                                        a11yShortcutInfo.componentName,
+                                    )
+                                }
                             }
                         )
                     }

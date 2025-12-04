@@ -237,6 +237,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
                 listOf(mode),
                 DisplayIsEnabled.YES,
                 /* isConnectedDisplay= */ false,
+                /* rotation= */ 0,
             )
         )
         updateDisplaysAndTopology(updatedEnabledDisplays)
@@ -265,6 +266,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
                 listOf(mode),
                 DisplayIsEnabled.NO,
                 /* isConnectedDisplay= */ true,
+                /* rotation= */ 0,
             )
         )
         updateDisplaysAndTopology(updatedEnabledDisplays)

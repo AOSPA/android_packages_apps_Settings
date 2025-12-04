@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Flytta nedåt"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Ta bort"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Flytta högst upp"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"Flytta <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> uppåt"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"Flytta <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> nedåt"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"Ta bort <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"Flytta <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> högst upp"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"Ändra systemspråkslistan, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"land, territorium"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"väder, grader celsius, grader, temperatur, celsius, fahrenheit"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"metrisk, brittisk, temperatur, längd, vikt, sträcka, celsius, fahrenheit, pund, kilogram, kg, mile, kilometer, tum, centimeter, meter, enhet"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"siffra, siffror, tal, talsystem"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"söndag, måndag, tisdag, onsdag, torsdag, fredag, lördag, första dagen"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionsinställningar"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Anger inställningar för enheter och siffror"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Ge appar åtkomst till dina regionsinställningar så att din upplevelse kan anpassas."</string>
@@ -304,8 +312,11 @@
     <string name="apply" msgid="7834684883190163536">"Tillämpa"</string>
     <string name="share" msgid="8502235338607613795">"Dela"</string>
     <string name="add" msgid="8335206931421683426">"Lägg till"</string>
+    <string name="verify" msgid="6452664472920137535">"Verifiera"</string>
     <string name="remove" msgid="1028414219245072102">"Ta bort"</string>
     <string name="process" msgid="2614220641928709668">"Behandla"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"Inställningar"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Inställningar"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Genväg för inställningar"</string>
@@ -1189,7 +1200,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Lägg till en enhet på nätverket med hjälp av en QR-kod"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-kodens format är ogiltigt"</string>
     <string name="retry" msgid="7542103800274026915">"Försök igen"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"Dela med andra som använder enheten"</string>
     <string name="shared_message" msgid="2104244057926025072">"delat"</string>
     <string name="private_message" msgid="5897966950396765392">"privat"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Bekräfta"</string>
@@ -1533,6 +1543,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Bakgrundsalternativ"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Visa bakgrunden på låsskärmen"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Bakgrunden på låsskärmen visas med Alltid aktiv skärm"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Stäng av skärmen vid inaktivitet"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Stänger av skärmen när ingen användaraktivitet upptäcks för att spara ström"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Fetstil"</string>
     <string name="title_font_size" msgid="570613010306330622">"Teckenstorlek"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Gör text större eller mindre"</string>
@@ -3469,6 +3481,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Om du tar bort administratörsbehörigheter för den här användaren kan du eller en annan administratör bevilja dem igen senare."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Ta bort dina egna administratörsbehörigheter?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Om du fortsätter kan endast andra administratörer ge dig administratörsbehörighet."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Det går inte att radera användaren"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Du är den enda administratören på den här enheten, så din användarprofil kan inte raderas. Om du vill radera din användarprofil kan du göra en annan användare till administratör eller radera all data från enheten genom att gå till System &gt; Återställningsalternativ &gt; Radera all data (återställ standardinställningarna)."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Kan inte ta bort administratörsbehörigheter"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Du är den enda administratörsanvändaren på den här enheten. Om du inte längre vill vara administratör måste du först göra en annan användare till administratör."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Nödinformation"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Information och kontakter för <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Öppna <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4084,7 +4100,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Organisera aviseringar"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Gruppera och stäng av ljudet för aviseringar med lägre prioritet"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Hantera appar för Organisera aviseringar"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Utöka alltid paket"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Paketutökning"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automatiskt"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Utöka alltid"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Utöka aldrig"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Tillämpa på jobbprofilappar"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Hjälptjänster för VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Inga installerade appar har begärt att få köras som hjälptjänster för VR."</string>
@@ -4827,7 +4846,7 @@
     <string name="keywords_shade_panels" msgid="6181844937287087945">"skugga, paneler, aviseringar, snabbinställningar, separat, kombinerad, dubbel, enkel"</string>
     <string name="shade_panels_category" msgid="3262351355390846546">"Paneler"</string>
     <string name="shade_panels_separate_title" msgid="7839124123668116363">"Separat"</string>
-    <string name="shade_panels_separate_summary" msgid="4879360492042964895">"Svep från det övre högra hörnet för att öppna snabbinställningar. Svep från övre vänstra hörnet för att öppna aviseringar."</string>
+    <string name="shade_panels_separate_summary" msgid="4879360492042964895">"Svep nedåt från det övre högra hörnet för att öppna snabbinställningar. Svep nedåt från övre vänstra hörnet för att öppna aviseringar."</string>
     <string name="shade_panels_combined_title" msgid="2812149031368941984">"Kombinerad (klassisk)"</string>
     <string name="shade_panels_combined_summary" msgid="5884627562590432068">"Svep nedåt från skärmens överkant för att öppna den klassiska panelen som kombinerar aviseringar och snabbinställningar."</string>
     <string name="shade_panels_foldables_footer_message" msgid="3974376428811063936">"Kombinerad (klassisk) vy är begränsad till den yttre skärmen på den vikbara enheten"</string>
@@ -5267,6 +5286,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Appar som stöds på telefonen"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Det går inte att lägga till ett SIM-kort"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Avsluta satellitanslutningen innan du lägger till ett SIM-kort"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"När de är anslutna till varandra via Bluetooth synkroniseras flygplansläget mellan de enheter som stöds, till exempel telefonen och klockan"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Namn på åtkomstpunkter"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Inte tillgänglig vid anslutning till <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5373,9 +5393,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Vänster: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Höger: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Fodral: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Vänster, batteri: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Höger, batteri: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Fodral, batteri: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Batteri, vänster: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Batteri, höger: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Batteri, fodral: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Batteri: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batteri"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panelen Inställningar"</string>
@@ -5939,14 +5959,22 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Glömt pinkoden"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Har du glömt pinkoden?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Uppdatera återställningsadressen"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"En återställningsadress har lagts till"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Återställningsadressen har verifierats"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Återställningsadressen har uppdaterats"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"Pinkoden har uppdaterats"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"Pinkoden har ändrats"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"Pinkoden har raderats"</string>
+    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"Verifiera återställningsuppgifter"</string>
+    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"Ditt återställningskonto har inte verifierats. Du måste ange kontolösenordet för att verifiera."</string>
+    <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Lägg till återställningsuppgifter"</string>
+    <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Om du glömmer pinkoden kan du återställa den med ditt konto"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Radera pinkod"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Lägg till en återställningsadress"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verifiera din e-postadress"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Appbutiksfilter"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtrera appar utifrån innehållets åldersgräns"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Varje app kan blockera olika typer av innehåll. Appbutiker som inte finns med i listan måste hanteras separat."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filter för webbplatsinnehåll"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Webbplatsfilter, blockera webbplatser, webbläsarfilter, blockera explicita webbplatser, filtrera webbplatser, blockera sökresultat, filtrera explicita sökresultat, innehållsbegränsningar"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Hjälp till att filtrera bort explicit innehåll i vissa appar och webbläsare på den här telefonen. Explicit innehåll kan fortfarande visas i andra appar, enheter eller webbläsare."</string>
@@ -5999,4 +6027,17 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Parkoppling"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> har anslutits"</string>
+    <string name="safety_center_rescan_button" msgid="1290673104206018701">"Skanna enhet"</string>
 </resources>

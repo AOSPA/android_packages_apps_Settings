@@ -17,6 +17,7 @@
 package com.android.settings.appfunctions
 
 import android.content.Context
+import com.android.server.connectivity.Flags as ConnectivityFlags
 import com.android.settings.accessibility.AccessibilityScreen
 import com.android.settings.accessibility.ColorAndMotionScreen
 import com.android.settings.accessibility.VibrationIntensityScreen
@@ -90,6 +91,7 @@ import com.android.settings.location.LocationScreen
 import com.android.settings.location.LocationServicesScreen
 import com.android.settings.location.RecentLocationAccessScreen
 import com.android.settings.network.AdaptiveConnectivityScreen
+import com.android.settings.network.AirplaneModeSettingsScreen
 import com.android.settings.network.MobileNetworkListScreen
 import com.android.settings.network.NetworkDashboardScreen
 import com.android.settings.network.NetworkProviderScreen
@@ -225,6 +227,11 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(
+            enabled = ConnectivityFlags.syncAirplaneModeWithWatches(),
+            screenKey = AirplaneModeSettingsScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
+        ),
+        PerScreenCatalystConfig(
             enabled = true,
             screenKey = PowerUsageSummaryScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
@@ -282,7 +289,11 @@ private fun getCatalystScreenConfigs() =
             additionalDescription =
                 ". Always-on-display settings indicates whether the lock screen, including the time, is visible when the phone is off.",
         ),
-        PerScreenCatalystConfig(enabled = true, screenKey = DataUsageAppDetailScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = DataUsageAppDetailScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = InstallUnknownAppsAppListScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ManageWriteSettingsAppListScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorModeScreen.KEY),
@@ -571,21 +582,6 @@ private fun getDeviceStateItemList() =
             enabled = true,
             settingKey = "use_data_saver",
             settingScreenKey = DataSaverScreen.KEY,
-        ),
-        DeviceStateItemConfig(
-            enabled = true,
-            settingKey = "mobile_network_list",
-            settingScreenKey = NetworkDashboardScreen.KEY,
-        ),
-        DeviceStateItemConfig(
-            enabled = true,
-            settingKey = "airplane_mode_on",
-            settingScreenKey = NetworkDashboardScreen.KEY,
-        ),
-        DeviceStateItemConfig(
-            enabled = true,
-            settingKey = "restrict_background_parent_entry",
-            settingScreenKey = NetworkDashboardScreen.KEY,
         ),
         DeviceStateItemConfig(
             enabled = true,

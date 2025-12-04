@@ -15,6 +15,8 @@
  */
 package com.android.settings;
 
+import static android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS;
+import static android.provider.Settings.ACTION_PRIVACY_CONTROLS;
 import static android.provider.Settings.ACTION_PRIVACY_SETTINGS;
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 import static android.service.notification.ZenModeConfig.MANUAL_RULE_ID;
@@ -42,6 +44,7 @@ import com.android.settings.applications.specialaccess.SpecialAccessSettings;
 import com.android.settings.applications.specialaccess.SpecialAccessSettingsScreen;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.communal.CommunalPreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.BillingCycleScreen;
 import com.android.settings.datausage.BillingCycleSettings;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen;
@@ -53,18 +56,24 @@ import com.android.settings.emergency.EmergencyDashboardScreen;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.network.AdaptiveConnectivityScreen;
 import com.android.settings.network.AdaptiveConnectivitySettings;
+import com.android.settings.network.AirplaneModeSettingsScreen;
+import com.android.settings.network.AirplaneModeUtilKt;
 import com.android.settings.network.MobileNetworkIntentConverter;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.safetycenter.SafetyCenterUtils;
+import com.android.settings.safetycenter.ui.PrivacyControlsFragment;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen;
 import com.android.settings.system.ResetDashboardFragment;
 import com.android.settings.system.ResetDashboardScreen;
 import com.android.settings.system.ShadePanelsPreferenceController;
 import com.android.settings.wifi.WifiUtils;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import com.google.android.setupdesign.util.ThemeHelper;
+
+import java.util.Objects;
 
 /**
  * Top-level Settings activity
@@ -176,8 +185,10 @@ public class Settings extends SettingsActivity {
     /** Activity for the notifications and quick settings panels settings. */
     public static class ShadeSettingsActivity extends SettingsActivity {
         @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
+        public void onResume() {
+            super.onResume();
+            // Re-check availability, because a configuration change (e.g. switching screens)
+            // could've changed it.
             if (!ShadePanelsPreferenceController.isDualShadeAvailable(this)) {
                 finish();
             }
@@ -288,7 +299,7 @@ public class Settings extends SettingsActivity {
     }
     /** Activity for the Advanced security settings. */
     public static class SecurityAdvancedSettings extends SettingsActivity {
-        private static final String TAG = "SecurityAdvancedActivity";
+        private static final String TAG = "SecurityAdvancedSettings";
         @Override
         protected void onCreate(Bundle savedState) {
             super.onCreate(savedState);
@@ -505,7 +516,7 @@ public class Settings extends SettingsActivity {
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeletionHelperActivity extends SettingsActivity { /* empty */ }
 
-    /** Actviity to manage apps with {@link android.Manifest.permission#SCHEDULE_EXACT_ALARM} */
+    /** Activity to manage apps with {@link android.Manifest.permission#SCHEDULE_EXACT_ALARM} */
     public static class AlarmsAndRemindersActivity extends SettingsActivity {/* empty */ }
     /** App specific version of {@link AlarmsAndRemindersActivity} */
     public static class AlarmsAndRemindersAppActivity extends SettingsActivity {/* empty */ }
@@ -610,7 +621,7 @@ public class Settings extends SettingsActivity {
         }
     }
 
-    /** Actviity to manage apps with {@link android.Manifest.permission#RUN_USER_INITIATED_JOBS} */
+    /** Activity to manage apps with {@link android.Manifest.permission#RUN_USER_INITIATED_JOBS} */
     public static class LongBackgroundTasksActivity extends SettingsActivity { /* empty */ }
     /** App specific version of {@link LongBackgroundTasksActivity} */
     public static class LongBackgroundTasksAppActivity extends SettingsActivity { /* empty */ }
@@ -621,7 +632,28 @@ public class Settings extends SettingsActivity {
     public static class BugReportHandlerPickerActivity extends SettingsActivity { /* empty */ }
 
     // Top level categories for new IA
-    public static class NetworkDashboardActivity extends SettingsActivity {}
+    public static class NetworkDashboardActivity extends SettingsActivity {
+        private static final String TAG = "NetworkDashboardActivity";
+        @Override
+        protected void onCreate(Bundle savedState) {
+            super.onCreate(savedState);
+            if (isFinishing()) {
+                // Don't trampoline if already exiting this activity.
+                return;
+            }
+
+            if (TextUtils.equals(ACTION_AIRPLANE_MODE_SETTINGS, getIntent().getAction())
+                    && AirplaneModeUtilKt.isAirplaneModeEligible(this)
+                    && AirplaneModeUtilKt.hasPairedWatchForAirplaneModeSync(this)) {
+                try {
+                    startActivity(new Intent(this, AirplaneModeSettingsActivity.class));
+                    finish();
+                } catch (ActivityNotFoundException e) {
+                    Log.e(TAG, "Unable to open Airplane Settings", e);
+                }
+            }
+        }
+    }
     public static class ConnectedDeviceDashboardActivity extends SettingsActivity {}
     public static class PowerUsageSummaryActivity extends SettingsActivity { /* empty */ }
     public static class PowerUsageAdvancedActivity extends SettingsActivity { /* empty */ }
@@ -699,5 +731,53 @@ public class Settings extends SettingsActivity {
             super(ColorModeScreen.KEY, ColorModePreferenceFragment.class);
         }
     }
-    public static class SafetyCenterActivity extends SettingsActivity { }
+
+    public static class SafetyCenterActivity extends SettingsActivity {
+
+        private static final String TAG = "SafetyCenterActivity";
+
+        @Override
+        protected void onCreate(Bundle savedState) {
+            super.onCreate(savedState);
+            handlePrivacyControlsRedirection();
+        }
+
+        private void handlePrivacyControlsRedirection() {
+            String intentAction = getIntent().getAction();
+            if (Objects.equals(intentAction, ACTION_PRIVACY_CONTROLS)) {
+                Log.d(TAG, "Redirecting to Privacy controls subpage");
+                new SubSettingLauncher(this)
+                        .setDestination(PrivacyControlsFragment.class.getName())
+                        .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                        .launch();
+            }
+        }
+    }
+
+    /** Activity for Network & Internet -> Airplane Mode. */
+    public static class AirplaneModeSettingsActivity extends CatalystSettingsActivity {
+        public AirplaneModeSettingsActivity() {
+            super(AirplaneModeSettingsScreen.KEY);
+        }
+        private static final String TAG = "AirplaneModeSettingsActivity";
+        @Override
+        protected void onCreate(Bundle savedState) {
+            super.onCreate(savedState);
+            if (isFinishing()) {
+                // Don't trampoline if already exiting this activity.
+                return;
+            }
+
+            // If there is no paired watch, open the Network settings instead where there is a
+            // toggle for Airplane mode.
+            if (!AirplaneModeUtilKt.hasPairedWatchForAirplaneModeSync(this)) {
+                try {
+                    startActivity(new Intent(this, NetworkDashboardActivity.class));
+                    finish();
+                } catch (ActivityNotFoundException e) {
+                    Log.e(TAG, "Unable to open Airplane Settings", e);
+                }
+            }
+        }
+    }
 }

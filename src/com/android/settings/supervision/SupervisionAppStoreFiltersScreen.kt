@@ -21,17 +21,20 @@ import android.content.Context
 import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
 
 class SupervisionAppStoreFiltersActivity :
     CatalystSettingsActivity(SupervisionAppStoreFiltersScreen.KEY)
 
 @ProvidePreferenceScreen(SupervisionAppStoreFiltersScreen.KEY)
-open class SupervisionAppStoreFiltersScreen : PreferenceScreenMixin {
+open class SupervisionAppStoreFiltersScreen :
+    PreferenceScreenMixin, PreferenceAvailabilityProvider {
 
-    override fun isFlagEnabled(context: Context) = Flags.enableAppStoreFiltersScreen()
+    override fun isAvailable(context: Context) = Flags.enableAppStoreFiltersScreen()
 
     override val key: String
         get() = KEY
@@ -51,11 +54,14 @@ open class SupervisionAppStoreFiltersScreen : PreferenceScreenMixin {
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +SupervisionAppStoreFiltersTopIntroPreference()
-            +SupervisionAppStoreFiltersFooterPreference()
+            +SupervisionAppStoreFiltersTopIntroPreference() order -100
+            +UntitledPreferenceCategoryMetadata(SUPERVISION_APP_STORE_FILTERS_GROUP) order 0 += {}
+            +SupervisionAppStoreFiltersFooterPreference() order 100
         }
 
     companion object {
         const val KEY = "supervision_app_store_filters"
+        internal const val SUPERVISION_APP_STORE_FILTERS_GROUP =
+            "supervision_app_store_filters_group"
     }
 }

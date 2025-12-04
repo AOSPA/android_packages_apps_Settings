@@ -25,7 +25,8 @@
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="widgets_on_lockscreen_illustration"
-        settings:controller="com.android.settings.communal.WidgetsIllustrationPreferenceController"/>
+        settings:lottie_rawRes="@raw/lottie_lockscreen_widgets_illustration"
+        settings:dynamicColor="true"/>
 
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="widgets_on_lockscreen_main_switch"

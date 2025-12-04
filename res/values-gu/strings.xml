@@ -248,8 +248,16 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"નીચે ખસેડો"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"કાઢી નાખો"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"સૌથી ઉપર ખસેડો"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>ને ઉપર ખસેડો"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> નીચે ખસેડો"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> કાઢી નાખો"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>ને સૌથી ઉપર ખસેડો"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"સિસ્ટમની ભાષાની સૂચિમાં ફેરફાર કરો, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="keywords_region_page" msgid="7148673842253297212">"દેશ, પ્રદેશ"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"હવામાન, સેન્ટીગ્રેડ, ડિગ્રી, તાપમાન, સેલ્સિયસ, ફૅરન્હાઇટ"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"મેટ્રિક, ઇમ્પીરિયલ, તાપમાન, ઊંચાઈ, વજન, અંતર, સેલ્સિયસ, ફૅરન્હાઇટ, પાઉન્ડ, કિલોગ્રામ, કિલો, માઇલ, કિલોમીટર, ઇંચ, સેન્ટિમીટર, મીટર, એકમ"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"અંક, અંકો, નંબર, નંબર, નંબરિંગ સિસ્ટમ"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"રવિવાર, સોમવાર, મંગળવાર, બુધવાર, ગુરુવાર, શુક્રવાર, શનિવાર, પહેલો દિવસ"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"પ્રાદેશિક પસંદગીઓ"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"એકમો અને સંખ્યાની પસંદગીઓ સેટ કરો"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"તમારા અનુભવને મનગમતો બનાવી શકે તે માટે ઍપને તમારી પ્રાદેશિક પસંદગીઓ જણાવો."</string>
@@ -304,8 +312,11 @@
     <string name="apply" msgid="7834684883190163536">"લાગુ કરો"</string>
     <string name="share" msgid="8502235338607613795">"શેર કરો"</string>
     <string name="add" msgid="8335206931421683426">"ઉમેરો"</string>
+    <string name="verify" msgid="6452664472920137535">"ચકાસો"</string>
     <string name="remove" msgid="1028414219245072102">"કાઢી નાખો"</string>
     <string name="process" msgid="2614220641928709668">"પ્રક્રિયા"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"સેટિંગ"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"સેટિંગ"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"સેટિંગ શૉર્ટકટ"</string>
@@ -1189,7 +1200,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"આ નેટવર્ક પર ડિવાઇસ ઉમેરવા માટે QR કોડનો ઉપયોગ કરો"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR કોડનું માન્ય ફોર્મેટ નથી"</string>
     <string name="retry" msgid="7542103800274026915">"ફરી પ્રયાસ કરો"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"અન્ય ઉપકરણ વપરાશકર્તાઓ સાથે શેર કરો"</string>
     <string name="shared_message" msgid="2104244057926025072">"શેર કરેલું"</string>
     <string name="private_message" msgid="5897966950396765392">"ખાનગી"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"કન્ફર્મ કરો"</string>
@@ -1533,6 +1543,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"વૉલપેપરના વિકલ્પો"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"લૉક સ્ક્રીનનું વૉલપેપર બતાવો"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"ડિસ્પ્લે હંમેશાં-ચાલુ સાથે લૉક સ્ક્રીનનું વૉલપેપર જોઈ શકાય છે"</string>
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"નિષ્ક્રિય હોય ત્યારે ડિસ્પ્લે બંધ કરો"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"જ્યારે કોઈ વપરાશકર્તાની ઍક્ટિવિટીની ભાળ મળી ન હોય, ત્યારે પાવર બચાવવા માટે ડિસ્પ્લેનો પાવર બંધ કરે છે"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"બોલ્ડ ટેક્સ્ટ"</string>
     <string name="title_font_size" msgid="570613010306330622">"ફૉન્ટનું કદ"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"ટેક્સ્ટને મોટી અથવા નાની કરો"</string>
@@ -2410,7 +2422,7 @@
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"સ્ક્રીનને વધુ ઘેરી બનાવો"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"ક્રિયાપ્રતિક્રિયાના નિયંત્રણો"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"સમયના નિયંત્રણો"</string>
-    <string name="accessibility_tap_assistance_subtext" msgid="1805279944665087799">"વિલંબ બટનને ટચ કરીને થોડીવાર દબાવી રાખો, પગલું લેવામાં લાગતો સમય"</string>
+    <string name="accessibility_tap_assistance_subtext" msgid="1805279944665087799">"બટનને ટચ કરીને થોડીવાર દબાવી રાખવા માટેનો વિલંબ, પગલું લેવામાં લાગતો સમય"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"સિસ્ટમના નિયંત્રણો"</string>
     <string name="accessibility_system_controls_subtext" msgid="2722046038429586174">"નૅવિગેશન મોડ, એક-હાથે વાપરો મોડ, સ્ક્રીન રોટેશન"</string>
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"નૅવિગેશન મોડ, સ્ક્રીન રોટેશન"</string>
@@ -2627,7 +2639,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"વિપરીત રંગમાં બદલવાનો ઉપયોગ કરો"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"વિપરીત રંગમાં બદલવાનો શૉર્ટકટ"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"વિપરીત રંગમાં બદલવાની સુવિધાથી લાઇટ સ્ક્રીન ઘેરી બની જાય છે. તે ઘેરી સ્ક્રીનને લાઇટ પણ બનાવે છે."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;ધ્યાનમાં રાખો&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; મીડિયા અને છબીઓમાં રંગ બદલાશે&lt;/li&gt; &lt;li&gt; વિપરીત રંગમાં બદલવાની સુવિધા બધી ઍપ પર કામ કરે છે&lt;/li&gt; &lt;li&gt; ડાર્ક બૅકગ્રાઉન્ડ બતાવવા માટે તેના બદલે ડાર્ક થીમનો ઉપયોગ કરી શકાય છે&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;ધ્યાનમાં રાખો&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; મીડિયા અને છબીઓમાં રંગ બદલાશે&lt;/li&gt; &lt;li&gt; વિપરીત રંગમાં બદલવાની સુવિધા બધી ઍપ પર કામ કરે છે&lt;/li&gt; &lt;li&gt; ડાર્ક બૅકગ્રાઉન્ડ બૅકગ્રાઉન્ડ ડિસ્પ્લે કરવા માટે તેના બદલે ડાર્ક થીમનો ઉપયોગ કરી શકાય છે&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"સેટિંગ દાખલ કરો"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"ઑટોક્લિક (કર્સર અટક્યાનો સમયગાળો)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"ઑટોક્લિક (જોવાયાનો સમયગાળો) વિશે"</string>
@@ -2665,7 +2677,7 @@
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"નૅવિગેશન સેટિંગ"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"વાઇબ્રેશન અને હેપ્ટિક"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"વિવિધ પ્રકારના વપરાશ માટે વાઇબ્રેશનની તીવ્રતા નિયંત્રિત કરો"</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"ચાલુ / કૉલ, નોટિફિકેશન અને અલાર્મ માટે વાઇબ્રેશન લેવલ નિયંત્રિત કરો"</string>
+    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"ચાલુ છે / કૉલ, નોટિફિકેશન અને અલાર્મ માટે વાઇબ્રેશન લેવલ નિયંત્રિત કરો"</string>
     <string name="accessibility_vibration_settings_state_off" msgid="113565506991847845">"બંધ / કૉલ, નોટિફિકેશન અને અલાર્મ માટે વાઇબ્રેશન લેવલ નિયંત્રિત કરો"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"ડિવાઇસ સાઇલન્ટ મોડ પર સેટ કરેલું હોવાથી સેટિંગ બંધ કરવામાં આવ્યું છે"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"કૉલ"</string>
@@ -3469,6 +3481,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"જો તમે આ વપરાશકર્તાના ઍડમિનના અધિકારોને કાઢી નાખશો, તો તમે અથવા બીજા ઍડમિન પછી તેમને તે પાછા આપી શકે છે."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"શું તમે ખરેખર તમારા પોતાના ઍડમિનના અધિકારો કાઢી નાખવા માગો છો?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"જો તમે આગળ વધશો, તો ફક્ત અન્ય ઍડમિન તમને ઍડમિનના અધિકારો આપી શકશે."</string>
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"વપરાશકર્તા ડિલીટ કરી શકાતા નથી"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"આ ડિવાઇસ પર તમે એકમાત્ર ઍડમિન છો, તેથી તમારી વપરાશકર્તા પ્રોફાઇલ ડિલીટ કરી શકાતી નથી. જો તમે તમારી વપરાશકર્તા પ્રોફાઇલ ડિલીટ કરવા માગતા હો, તો તમે સિસ્ટમ &gt; રીસેટ કરવાના વિકલ્પો &gt; બધો ડેટા કાઢી નાખો (ફેક્ટરી રીસેટ) પર જઈને કોઈ બીજા વપરાશકર્તાને ઍડમિન બનાવી શકો છો અથવા ડિવાઇસમાંથી બધો ડેટા કાઢી નાખી શકો છો."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"ઍડમિનના અધિકારો કાઢી નાખી શકાતા નથી"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"આ ડિવાઇસ પર તમે એકમાત્ર ઍડમિન વપરાશકર્તા છો. જો તમે હવે ઍડમિન તરીકે રહેવા માગતા ન હો, તો તમારે પહેલાં કોઈ બીજા વપરાશકર્તાને ઍડમિન બનાવવા જરૂરી છે."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"ઇમર્જન્સીની માહિતી"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> માટે માહિતી અને સંપર્કો"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> ખોલો"</string>
@@ -3766,7 +3782,7 @@
     <string name="live_caption_title" msgid="8617086825712756983">"લાઇવ કૅપ્શન"</string>
     <string name="live_caption_summary" msgid="7290150167089515457">"કૉલ, વીડિયો અને અન્ય મીડિયા માટે કૅપ્શન મેળવો"</string>
     <string name="live_caption_on_summary" msgid="8921561021882989495">"ચાલુ / કૉલ, વીડિયો અને અન્ય મીડિયા માટે કૅપ્શન મેળવો"</string>
-    <string name="live_caption_off_summary" msgid="6761535729357010911">"બંધ / કૉલ, વીડિયો અને અન્ય મીડિયા માટે કૅપ્શન મેળવો"</string>
+    <string name="live_caption_off_summary" msgid="6761535729357010911">"બંધ છે / કૉલ, વીડિયો અને અન્ય મીડિયા માટે કૅપ્શન મેળવો"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"વાયર્ડ હૅડફોન"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"સુસંગત મીડિયાનો ઑડિયો વધુ ઇમર્સિવ બને છે"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"બંધ"</string>
@@ -4084,7 +4100,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"નોટિફિકેશન ઑર્ગેનાઇઝર"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"ઓછી પ્રાધાન્યતા ધરાવતા નોટિફિકેશનને બંડલ કરો અને સાઇલન્ટ કરો"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"નોટિફિકેશન ઑર્ગેનાઇઝર માટે ઍપ મેનેજ કરો"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"બંડલને હંમેશાં મોટું કરો"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"બંડલ મોટું કરવું"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"ઑટોમૅટિક"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"હંમેશાં મોટું કરો"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"ક્યારેય મોટું કરશો નહીં"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"ઑફિસની પ્રોફાઇલ ઍપ પર લાગુ કરો"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR સહાયક સેવાઓ"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"કોઇ ઇન્સ્ટૉલ કરેલી ઍપએ VR સહાયક સેવાઓ તરીકે શરૂ કરવાની વિનંતી કરી નથી."</string>
@@ -5267,6 +5286,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"તમારા ફોનમાં સપોર્ટ કરતી ઍપ"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"સિમ કાર્ડ ઉમેરી શકાતું નથી"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"તમે સિમ કાર્ડ ઉમેરતાં પહેલાં સૅટલાઇટ કનેક્શન સમાપ્ત કરો"</string>
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"બ્લૂટૂથ સાથે કનેક્ટ કરેલું હોય ત્યારે એરપ્લેન મોડ ફોન અને વૉચ જેવા સપોર્ટેડ ડિવાઇસ પર સિંક થશે"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ઍક્સેસ પૉઇન્ટના નામ"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"જ્યારે <xliff:g id="CARRIER">%1$s</xliff:g> સાથે કનેક્ટ થયેલ હોય, ત્યારે ઉપલબ્ધ નથી"</string>
@@ -5373,9 +5393,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"ડાબું: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"જમણું: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"કેસ: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"ડાબે, બૅટરી: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"જમણે, બૅટરી: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"કેસ, બૅટરી: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"બૅટરી, ડાબી બાજુ: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"બૅટરી, જમણી બાજુ: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"બૅટરી, કેસ: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"બૅટરી: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"બૅટરી"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"સેટિંગ પૅનલ"</string>
@@ -5723,7 +5743,7 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"ફિંગરપ્રિન્ટ સેન્સર"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ફ્લૅશ નોટિફિકેશન"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ફ્લૅશ નોટિફિકેશન વિશે"</string>
-    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"બંધ / નોટિફિકેશન અને અલાર્મ માટે, કૅમેરા અથવા સ્ક્રીન ફ્લૅશ વડે અલર્ટ મેળવો"</string>
+    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"બંધ છે / નોટિફિકેશન અને અલાર્મ માટે, કૅમેરા અથવા સ્ક્રીન ફ્લૅશ વડે અલર્ટ મેળવો"</string>
     <string name="flash_notifications_summary_on" msgid="7750683903778104666">"ચાલુ / નોટિફિકેશન અને અલાર્મ માટે, કૅમેરા અથવા સ્ક્રીન ફ્લૅશ વડે અલર્ટ મેળવો"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"જ્યારે તમને નોટિફિકેશન મળે કે અલાર્મ વાગે, ત્યારે કૅમેરાની લાઇટ કે સ્ક્રીન ફ્લૅશ કરો"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"જ્યારે તમને નોટિફિકેશન મળે કે અલાર્મ વાગે, ત્યારે સ્ક્રીન ફ્લૅશ કરો"</string>
@@ -5762,7 +5782,7 @@
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"લાઇટ સ્ક્રીનને ઘેરી અને ઘેરી સ્ક્રીનને લાઇટ કરે છે"</string>
     <string name="magnification_feature_summary" msgid="4403387702011660253">"કન્ટેન્ટને તમારી સ્ક્રીન પર વધુ મોટું કરવા માટે મોટું કરો"</string>
     <string name="autoclick_disabled" msgid="3213396804955002120">"બંધ"</string>
-    <string name="show_captions_disabled" msgid="924366862253349790">"બંધ / કૅપ્શનનું કદ અને શૈલી કસ્ટમાઇઝ કરો"</string>
+    <string name="show_captions_disabled" msgid="924366862253349790">"બંધ છે / કૅપ્શનનું કદ અને શૈલી કસ્ટમાઇઝ કરો"</string>
     <string name="show_captions_enabled" msgid="3495595825041704052">"ચાલુ / કૅપ્શનનું કદ અને શૈલી કસ્ટમાઇઝ કરો"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"બંધ"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"ચાલુ"</string>
@@ -5939,14 +5959,22 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"પિન ભૂલી ગયા"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"શું પિન ભૂલી ગયા છો?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"રિકવરી ઇમેઇલ ઍડ્રેસ અપડેટ કરો"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"રિકવરી ઇમેઇલ ઍડ્રેસ ઉમેર્યું"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"રિકવરી ઇમેઇલ ઍડ્રેસની ચકાસણી કરવામાં આવી"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"રિકવરી ઇમેઇલ ઍડ્રેસ અપડેટ કર્યું"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"પિન અપડેટ કર્યો"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN બદલાવ્યો"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"પિન ડિલીટ કર્યો"</string>
+    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"રિકવરીની માહિતી ચકાસો"</string>
+    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"તમારું રિકવરી એકાઉન્ટ ચકાસવામાં આવ્યું નથી. ચકાસવા માટે, તમારે એકાઉન્ટનો પાસવર્ડ દાખલ કરવો જરૂરી રહેશે."</string>
+    <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"રિકવરીની માહિતી ઉમેરો"</string>
+    <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"જો તમે તમારો PIN ભૂલી જાઓ, તો તમે તેને રીસેટ કરવા માટે તમારા એકાઉન્ટનો ઉપયોગ કરી શકો છો"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"પિન ડિલીટ કરો"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"રિકવરી ઇમેઇલ ઍડ્રેસ ઉમેરો"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"તમારા ઇમેઇલ ઍડ્રેસની ચકાસણી કરો"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"ઍપ સ્ટોરના ફિલ્ટર"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"વયસ્ક લોકો માટેના કન્ટેન્ટના રેટિંગના આધારે ઍપને ફિલ્ટર કરો"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"દરેક ઍપ જુદાં જુદાં પ્રકારોનું કન્ટેન્ટ બ્લૉક કરી શકે છે. સૂચિમાં ન હોય તેવા ઍપ સ્ટોરને અલગથી મેનેજ કરવા જરૂરી છે."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"વેબસાઇટ પરના કન્ટેન્ટના ફિલ્ટર"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"વેબસાઇટના ફિલ્ટર, સાઇટ બ્લૉક કરો, બ્રાઉઝરના ફિલ્ટર, અયોગ્ય સાઇટ બ્લૉક કરો, સાઇટને ફિલ્ટર કરો, શોધ પરિણામો બ્લૉક કરો, અયોગ્ય શોધ પરિણામો ફિલ્ટર કરો, કન્ટેન્ટ પ્રતિબંધો"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"આ ફોનમાં અમુક ઍપ અને બ્રાઉઝર પર અયોગ્ય કન્ટેન્ટ ફિલ્ટર કરવામાં મદદ કરો. અન્ય ઍપ, ડિવાઇસ અથવા બ્રાઉઝર પર અયોગ્ય કન્ટેન્ટ હજી પણ દેખાઈ શકે છે."</string>
@@ -5999,4 +6027,17 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"જોડાણ બનાવવું"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> કનેક્ટ થયું"</string>
+    <string name="safety_center_rescan_button" msgid="1290673104206018701">"ડિવાઇસ સ્કૅન કરો"</string>
 </resources>
