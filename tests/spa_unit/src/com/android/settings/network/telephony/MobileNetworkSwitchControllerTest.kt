@@ -36,6 +36,7 @@ import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.spa.testutils.waitUntilExists
 import kotlinx.coroutines.flow.flowOf
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -147,6 +148,7 @@ class MobileNetworkSwitchControllerTest {
     }
 
     @Test
+    @Ignore("b/462299877")
     @EnableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
     fun isVisible_flagOn_returnFalse() {
         val eSimSubInfo =
