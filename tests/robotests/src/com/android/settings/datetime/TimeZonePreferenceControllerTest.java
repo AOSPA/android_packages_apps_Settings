@@ -123,6 +123,7 @@ public class TimeZonePreferenceControllerTest {
                 .setAutoDetectionEnabled(!suggestManualAllowed)
                 .setGeoDetectionEnabled(false)
                 .setNotificationsEnabled(true)
+                .setTimeZoneOffsetChangeNotificationsEnabled(true)
                 .build();
         return new TimeZoneCapabilitiesAndConfig(status, capabilities, config);
     }
