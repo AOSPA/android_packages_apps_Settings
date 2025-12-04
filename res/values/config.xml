@@ -993,4 +993,9 @@
 
     <!-- Whether to show the satellite tile in quick settings. This is false by default and can be overridden by OEMs. -->
     <bool name="config_show_satellite_tile">false</bool>
+
+    <!-- Whether to hide the pattern lock screen option from Settings and Setup Wizard.
+         This will prevent users from setting a new pattern lock, but does not affect
+         existing pattern locks. -->
+    <bool name="config_hide_pattern_security_option">false</bool>
 </resources>
