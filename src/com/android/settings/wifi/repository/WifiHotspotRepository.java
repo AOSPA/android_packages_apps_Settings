@@ -34,6 +34,7 @@ import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiAvailableChannel;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiScanner;
+import android.net.wifi.WifiSsid;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseIntArray;
@@ -99,6 +100,7 @@ public class WifiHotspotRepository {
     @VisibleForTesting
     Boolean mIsConfigShowSpeed;
     private Boolean mIsSpeedFeatureAvailable;
+    private Boolean mIsWpa3TransitionAllowedFor2g6gDbs;
 
     @VisibleForTesting
     SoftApCallback mSoftApCallback = new SoftApCallback();
@@ -394,13 +396,20 @@ public class WifiHotspotRepository {
 
         if (newSpeedHas6g && config.getSecurityType() != SECURITY_TYPE_WPA3_SAE) {
             // If we're moving to 6Ghz, set the security type to WPA3-SAE since 6GHz requires it.
-            log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE)");
-            configBuilder.setPassphrase(generatePassword(config), SECURITY_TYPE_WPA3_SAE);
+            String password = generatePassword(config);
+            if (speedType == SPEED_2GHZ_6GHZ && isWpa3TransitionAllowedFor2g6gDbs()) {
+                log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE_TRANSITION)");
+                configBuilder.setPassphrase(password, SECURITY_TYPE_WPA3_SAE_TRANSITION);
+            } else {
+                log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE)");
+                configBuilder.setPassphrase(password, SECURITY_TYPE_WPA3_SAE);
+            }
         } else if (has6Ghz(config) && !newSpeedHas6g) {
             // If we're moving away from 6Ghz, reset the security type back to WPA2/WPA3 transition
             // for maximum compatibility.
             String passphrase = generatePassword(config);
-            if ((passphrase.length() >= 8) && (config.getBand() & BAND_6GHZ) != 0) {
+            if (passphrase.length() >= 8) {
+                log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE_TRANSITION)");
                 configBuilder.setPassphrase(passphrase, SECURITY_TYPE_WPA3_SAE_TRANSITION);
             }
         }
@@ -486,6 +495,22 @@ public class WifiHotspotRepository {
             isChannelAvailable(mBand6g);
         }
         return mBand6g.isAvailable();
+    }
+
+    /**
+     * Returns whether WPA3-SAE Transition is allowed for 2 and 6 GHz DBS. If so, the HAL will
+     * use WPA3-SAE for the 6 GHz instance.
+     */
+    public boolean isWpa3TransitionAllowedFor2g6gDbs() {
+        if (mIsWpa3TransitionAllowedFor2g6gDbs == null) {
+            SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
+            configBuilder.setWifiSsid(WifiSsid.fromBytes("Test SSID".getBytes()));
+            configBuilder.setBands(new int[]{BAND_2GHZ, BAND_6GHZ});
+            configBuilder.setPassphrase("Test passphrase", SECURITY_TYPE_WPA3_SAE_TRANSITION);
+            mIsWpa3TransitionAllowedFor2g6gDbs =
+                    mWifiManager.validateSoftApConfiguration(configBuilder.build());
+        }
+        return mIsWpa3TransitionAllowedFor2g6gDbs;
     }
 
     /**
