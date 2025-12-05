@@ -252,7 +252,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
         }
 
-        use(MobileNetworkSwitchController.class).init(mSubId);
+        if (!isCatalystEnabled() || !Flags.deeplinkNetworkAndInternet25q4()) {
+            use(MobileNetworkSwitchController.class).init(mSubId);
+        }
         use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
         if (!isCatalystEnabled() || !Flags.deeplinkNetworkAndInternet25q4()) {
             use(BillingCyclePreferenceController.class).init(mSubId);
