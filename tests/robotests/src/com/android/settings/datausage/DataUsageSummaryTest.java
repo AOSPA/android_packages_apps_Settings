@@ -75,7 +75,9 @@ public class DataUsageSummaryTest {
     @Before
     public void setUp() {
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
-        doReturn(false).when(mUserManager).isGuestUser();
+        doReturn(true).when(mUserManager).isAdminUser();
+        doReturn(false).when(mUserManager).hasUserRestriction(
+                UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
 
         ShadowUserManager.getShadow().setIsAdminUser(true);
 

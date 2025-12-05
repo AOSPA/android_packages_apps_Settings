@@ -46,6 +46,7 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.PersistableBundle;
+import android.os.UserManager;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
@@ -99,6 +100,8 @@ public class MobileNetworkUtilsTest {
     private ConnectivityManager mConnectivityManager;
     @Mock
     private TelecomManager mTelecomManager;
+    @Mock
+    private UserManager mUserManager;
 
     private Context mContext;
     private PersistableBundle mCarrierConfig;
@@ -119,6 +122,7 @@ public class MobileNetworkUtilsTest {
         when(mTelephonyManager.createForSubscriptionId(SUB_ID_1)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID_2)).thenReturn(mTelephonyManager2);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
 
         CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
         mCarrierConfig = new PersistableBundle();
@@ -147,6 +151,31 @@ public class MobileNetworkUtilsTest {
         when(mTelecomManager.getSimCallManagerForSubscription(SUB_ID_1))
                 .thenReturn(mPhoneAccountHandle);
         mMockQueryWfcState = new MockWfcQueryImsState(mContext, SUB_ID_1);
+    }
+
+    @Test
+    public void isMobileNetworkUserRestricted_notAdmin_true() {
+        when(mUserManager.isAdminUser()).thenReturn(false);
+
+        assertThat(MobileNetworkUtils.isMobileNetworkUserRestricted(mContext)).isTrue();
+    }
+
+    @Test
+    public void isMobileNetworkUserRestricted_isAdmin_false() {
+        when(mUserManager.isAdminUser()).thenReturn(true);
+        when(mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS))
+                .thenReturn(false);
+
+        assertThat(MobileNetworkUtils.isMobileNetworkUserRestricted(mContext)).isFalse();
+    }
+
+    @Test
+    public void isMobileNetworkUserRestricted_isAdminAndRestricted_true() {
+        when(mUserManager.isAdminUser()).thenReturn(true);
+        when(mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS))
+                .thenReturn(true);
+
+        assertThat(MobileNetworkUtils.isMobileNetworkUserRestricted(mContext)).isTrue();
     }
 
     @Test
