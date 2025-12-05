@@ -20,6 +20,7 @@ import android.content.pm.PackageManager.MATCH_UNINSTALLED_PACKAGES
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settings.R
+import com.android.settings.widget.NonClickablePreference
 
 class SupervisionSupportedAppPreference(
     private val titleString: CharSequence?,

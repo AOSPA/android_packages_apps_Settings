@@ -69,16 +69,16 @@
 
     <!-- General Details Preferences -->
     <PreferenceCategory>
-        <com.android.settings.supervision.NonClickablePreference
+        <com.android.settings.widget.NonClickablePreference
             android:key="signal_strength"
             android:title="@string/wifi_signal" />
 
-        <com.android.settings.supervision.NonClickablePreference
+        <com.android.settings.widget.NonClickablePreference
             android:key="frequency"
             android:icon="@drawable/ic_frequency_antenna"
             android:title="@string/wifi_frequency" />
 
-        <com.android.settings.supervision.NonClickablePreference
+        <com.android.settings.widget.NonClickablePreference
             android:key="security"
             android:icon="@drawable/ic_security_lock_24dp"
             android:title="@string/wifi_security" />
