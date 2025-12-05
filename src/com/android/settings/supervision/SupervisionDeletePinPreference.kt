@@ -79,15 +79,7 @@ class SupervisionDeletePinPreference() :
             return context.getString(R.string.supervision_delete_pin_preference_title)
         }
 
-        val internalSupervisionManager =
-            ISupervisionManager.Stub.asInterface(
-                ServiceManager.getService(Context.SUPERVISION_SERVICE)
-            )
-        val otherUsersRequirePin =
-            internalSupervisionManager.getUsersThatRequirePlatformCredential().any {
-                it.id != context.user.identifier
-            }
-        if (context.supervisionRoleHolders.isEmpty() && !otherUsersRequirePin) {
+        if (context.supervisionRoleHolders.isEmpty()) {
             return context.getString(R.string.supervision_delete_pin_turn_off_controls_button_label)
         }
 
@@ -172,16 +164,25 @@ class SupervisionDeletePinPreference() :
                 .setMessage(getCantDeletePinMultipleProviderMessage(roleHolders, context))
                 .setPositiveButton(R.string.okay, null)
         } else if (otherUsersRequirePin) {
-            // At least one other user requires the platform credential, so we can't delete
-            // but we can turn off supervision for the user
-            builder
-                .setTitle(R.string.supervision_delete_pin_supervision_enabled_header)
-                .setMessage(R.string.supervision_cant_delete_pin_multi_user_switch_message)
-                .setPositiveButton(
-                    R.string.supervision_turn_off_controls_button_label,
-                    { _, _ -> onConfirmDeleteClick() },
-                )
-                .setNegativeButton(R.string.cancel, null)
+            if (currentUserRequiresPin) {
+                // At least one other user requires the platform credential, so we can't delete
+                // but we can turn off supervision for the user
+                builder
+                    .setTitle(R.string.supervision_delete_pin_supervision_enabled_header)
+                    .setMessage(R.string.supervision_cant_delete_pin_multi_user_switch_message)
+                    .setPositiveButton(
+                        R.string.supervision_turn_off_controls_button_label,
+                        { _, _ -> onConfirmDeleteClick() },
+                    )
+                    .setNegativeButton(R.string.cancel, null)
+            } else {
+                // Current user does not require the platform credential, but at least one other
+                // user does. User should not be able to delete the pin.
+                builder
+                    .setTitle(R.string.supervision_delete_pin_supervision_enabled_header)
+                    .setMessage(R.string.supervision_cant_delete_pin_in_use_message)
+                    .setPositiveButton(R.string.okay, null)
+            }
         } else if (roleHolders.isEmpty()) {
             // Platform supervision only. Can delete the pin and disable supervision for this
             // user
