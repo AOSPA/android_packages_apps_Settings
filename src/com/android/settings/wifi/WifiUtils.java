@@ -355,6 +355,12 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
         return userManager != null && userManager.isGuestUser();
     }
 
+    /** @return  true if the current user is an Admin user. */
+    private static boolean isAdminUser(@NonNull Context context) {
+        UserManager userManager = context.getSystemService(UserManager.class);
+        return userManager != null && userManager.isAdminUser();
+    }
+
     /** @return  true if the current user is at the login screen. */
     public static boolean isAtLoginScreen(@NonNull Context context) {
         UserManager userManager = context.getSystemService(UserManager.class);
@@ -372,7 +378,7 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
      * @return true if the network is owned by the current user or if the device
      *         contains single user.
      */
-    private static boolean isCurrentUserNetworkOwner(
+    public static boolean isCurrentUserNetworkOwner(
             @NonNull WifiEntry wifiEntry, @NonNull Context context) {
         if (!com.android.settings.connectivity.Flags.wifiMultiuser()
                 || wifiEntry.getWifiConfiguration() == null) {
@@ -430,5 +436,37 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
         return !isGuestUser(context)
                 && (wifiEntry == null
                 || isCurrentUserNetworkOwner(wifiEntry, context));
+    }
+
+    /**
+     * Checks if the current user can share the network QR code/password.
+     *
+     * @param wifiEntry the network entry for which the ownership check will be
+     *      made.
+     * @param context Context of caller
+     * @return true if the share QR code/password button should be visible to
+     *      the current user.
+     */
+    public static boolean isNetworkShareable(
+            @NonNull WifiEntry wifiEntry, @NonNull Context context) {
+        return wifiEntry.canShare()
+                && (isCurrentUserNetworkOwner(wifiEntry, context)
+                && !isGuestUser(context));
+    }
+
+    /**
+     * Checks if the current user can forget the network.
+     *
+     * @param wifiEntry the network entry for which the ownership check will be
+     *      made.
+     * @param context Context of caller
+     * @return true if the forget button should be visible to the current user.
+     */
+    public static boolean isNetworkForgettable(
+            @NonNull WifiEntry wifiEntry, @NonNull Context context) {
+        return wifiEntry.canForget()
+                && !isNetworkLockedDown(context, wifiEntry.getWifiConfiguration())
+                && (isCurrentUserNetworkOwner(wifiEntry, context)
+                || isAdminUser(context));
     }
 }

@@ -30,6 +30,7 @@ import android.util.Pair;
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.deviceinfo.PhoneNumberUtil
 import com.android.settings.network.telephony.TelephonyUtils
 import com.android.settings.wifi.utils.activeModemCount
 import com.android.settings.wifi.utils.isAdminUser
@@ -99,11 +100,11 @@ class ImeiPreference(
         return getString(R.string.imei_multi_sim, index + 1)
     }
 
-    private fun getFormattedSummary(): String {
+    private fun getFormattedSummary(): CharSequence {
         return when {
             imeiList.isEmpty() || index >= imeiList.size -> String()
             else -> {
-                imeiList[index]
+                PhoneNumberUtil.expandByTts(imeiList[index])
             }
         }
     }

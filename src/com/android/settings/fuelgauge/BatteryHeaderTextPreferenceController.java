@@ -86,7 +86,7 @@ public class BatteryHeaderTextPreferenceController extends BasePreferenceControl
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_charging_on_hold);
         }
-        if (Flags.batteryChargingInfoApi()
+        if (Flags.batteryChargingInfoApi() && info.pluggedStatus != 0
                 && mBatterySettingsFeatureProvider.isForceFullCharge(mContext)) {
             final CharSequence forceFullChargeLabel =
                     mBatterySettingsFeatureProvider.getForceFullChargeLabel(mContext);

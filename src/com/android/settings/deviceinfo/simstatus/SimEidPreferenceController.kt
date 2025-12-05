@@ -91,7 +91,7 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
             val title = withContext(Dispatchers.Default) { getTitle() }
             preference.title = title
             preference.dialogTitle = title
-            preference.summary = eid
+            preference.summary = PhoneNumberUtil.expandByTts(eid)
             updateDialog()
         }
     }

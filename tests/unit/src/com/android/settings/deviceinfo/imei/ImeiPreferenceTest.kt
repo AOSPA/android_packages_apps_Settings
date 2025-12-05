@@ -120,35 +120,35 @@ class ImeiPreferenceTest {
 
     @Test
     fun getSummary_oneImei_index0_returnImei1() {
-        assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
+        assertThat(preference.getSummary(context).toString()).isEqualTo(IMEI_1)
     }
 
     @Test
     fun getSummary_twoImei_index0_returnImei1() {
         preference = ImeiPreference(context, 0, 2, imeiList)
 
-        assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
+        assertThat(preference.getSummary(context).toString()).isEqualTo(IMEI_1)
     }
 
     @Test
     fun getSummary_twoImei_index1_returnImei2() {
         preference = ImeiPreference(context, 1, 2, imeiList)
 
-        assertThat(preference.getSummary(context)).isEqualTo(IMEI_2)
+        assertThat(preference.getSummary(context).toString()).isEqualTo(IMEI_2)
     }
 
     @Test
     fun getSummary_index0_bothSlotsAreSameImei_returnImei1() {
         preference = ImeiPreference(context, 0, 2, imeiList_sameImei)
 
-        assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
+        assertThat(preference.getSummary(context).toString()).isEqualTo(IMEI_1)
     }
 
     @Test
     fun getSummary_index1_bothSlotsAreSameImei_returnImei1() {
         preference = ImeiPreference(context, 1, 2, imeiList_sameImei)
 
-        assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
+        assertThat(preference.getSummary(context).toString()).isEqualTo(IMEI_1)
     }
 
     @Test
