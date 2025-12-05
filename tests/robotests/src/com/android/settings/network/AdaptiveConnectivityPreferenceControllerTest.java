@@ -27,10 +27,11 @@ import android.content.res.Resources;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
-
 import com.android.settings.flags.Flags;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,6 +47,7 @@ public class AdaptiveConnectivityPreferenceControllerTest {
 
     private Context mContext;
     @Mock private Resources mResources;
+    @Mock private TelephonyManager mTelephonyManager;
     private AdaptiveConnectivityPreferenceController mController;
 
     @Before
@@ -53,6 +55,10 @@ public class AdaptiveConnectivityPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mResources).when(mContext).getResources();
+        doReturn(mTelephonyManager).when(mContext).getSystemService(TelephonyManager.class);
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
+        when(mTelephonyManager.isDataCapable()).thenReturn(true);
+
         mController = new AdaptiveConnectivityPreferenceController(mContext, PREF_KEY);
         // Clear settings before each test
         Settings.Secure.putString(mContext.getContentResolver(),
@@ -75,6 +81,15 @@ public class AdaptiveConnectivityPreferenceControllerTest {
     public void isAvailable_notSupportAdaptiveConnectivity_shouldReturnFalse() {
         when(mResources.getBoolean(R.bool.config_show_adaptive_connectivity))
                 .thenReturn(false);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_mobileDataNotCapable_shouldReturnFalse() {
+        when(mResources.getBoolean(R.bool.config_show_adaptive_connectivity))
+                .thenReturn(true);
+        when(mTelephonyManager.isDataCapable()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
