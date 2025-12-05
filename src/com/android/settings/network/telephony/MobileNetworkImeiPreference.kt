@@ -33,6 +33,7 @@ import android.util.Pair
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.deviceinfo.PhoneNumberUtil
 import com.android.settings.deviceinfo.imei.ImeiInfoDialogFragment
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
@@ -82,7 +83,8 @@ class MobileNetworkImeiPreference(
             return halVersion > makeRadioVersion(2, 0)
         }
 
-    override fun getSummary(context: Context): CharSequence? = imei
+    override fun getSummary(context: Context): CharSequence? =
+        imei?.let { PhoneNumberUtil.expandByTts(it) }
 
     override fun isAvailable(context: Context) = isAvailable
 

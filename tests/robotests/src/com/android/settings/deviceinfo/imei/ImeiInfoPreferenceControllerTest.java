@@ -234,8 +234,8 @@ public class ImeiInfoPreferenceControllerTest {
     public void displayPreference_multiSimGsm_differentImei_shouldSetMultiSimGsmTitleAndImei() {
         setupPhoneCount(2, PHONE_TYPE_GSM, PHONE_TYPE_GSM);
 
-        final String imei = "01234";
-        final String imei2 = "01235";
+        final String imei = "IMEI";
+        final String imei2 = "IMEI2";
         when(mTelephonyManager.getImei(0)).thenReturn(imei);
         when(mTelephonyManager.getImei(1)).thenReturn(imei2);
         when(mTelephonyManager.getPrimaryImei()).thenReturn(imei);

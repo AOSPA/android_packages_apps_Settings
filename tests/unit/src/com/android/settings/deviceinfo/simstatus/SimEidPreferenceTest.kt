@@ -103,7 +103,7 @@ class SimEidPreferenceTest {
 
     @Test
     fun getSummary_returnEid() {
-        assertThat(preference.getSummary(context)).isEqualTo(EID)
+        assertThat(preference.getSummary(context).toString()).isEqualTo(EID)
     }
 
     @Test

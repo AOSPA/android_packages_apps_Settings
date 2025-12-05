@@ -39,6 +39,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.deviceinfo.PhoneNumberUtil
 import com.android.settings.deviceinfo.imei.ImeiInfoDialogFragment
 import com.android.settings.deviceinfo.imei.getImeiList
 import com.android.settings.flags.Flags
@@ -140,7 +141,7 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
 
     private fun refreshUi() {
         preference.title = title
-        preference.summary = imei
+        preference.summary = PhoneNumberUtil.expandByTts(imei)
     }
 
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
