@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
+import com.android.settings.flags.Flags
 import com.android.settings.spa.preference.ComposePreferenceController
 import com.android.settingslib.spa.widget.preference.MainSwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
@@ -76,6 +77,8 @@ constructor(
     }
 
     private fun Context.isVisible(): Boolean {
+        if (Flags.deeplinkNetworkAndInternet25q4()) return false
+
         val subInfo =
             subscriptionRepository.getSelectableSubscriptionInfoList().firstOrNull {
                 it.subscriptionId == subId

@@ -28,14 +28,12 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.mockito.Mockito.spy
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 
-@Ignore("b/462299877")
 class MobileNetworkMainSwitchPreferenceTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
 
@@ -57,6 +55,7 @@ class MobileNetworkMainSwitchPreferenceTest {
                 MobileNetworkMainSwitchPreference(
                     context,
                     TEST_SUB_ID,
+                    testScope,
                     mockSubscriptionActivationRepository,
                     mockSubscriptionRepository,
                 )
