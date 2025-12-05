@@ -200,14 +200,11 @@ public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
     private void authenticatePrivateSpaceEntry() {
         Intent credentialIntent = mPrivateSpaceMaintainer.getPrivateProfileLockCredentialIntent();
         if (credentialIntent != null) {
-            if (android.multiuser.Flags.usePrivateSpaceIconInBiometricPrompt()) {
-                credentialIntent.putExtra(CUSTOM_BIOMETRIC_PROMPT_LOGO_RES_ID_KEY,
-                        com.android.internal.R.drawable.stat_sys_private_profile_status);
-                credentialIntent.putExtra(CUSTOM_BIOMETRIC_PROMPT_LOGO_DESCRIPTION_KEY,
-                        getApplicationContext().getString(
-                                com.android.internal.R.string.private_space_biometric_prompt_title
-                        ));
-            }
+            credentialIntent.putExtra(CUSTOM_BIOMETRIC_PROMPT_LOGO_RES_ID_KEY,
+                    com.android.internal.R.drawable.stat_sys_private_profile_status);
+            credentialIntent.putExtra(CUSTOM_BIOMETRIC_PROMPT_LOGO_DESCRIPTION_KEY,
+                    getApplicationContext().getString(
+                            com.android.internal.R.string.private_space_biometric_prompt_title));
             mVerifyDeviceLock.launch(credentialIntent);
         } else {
             Log.e(TAG, "verifyCredentialIntent is null even though device lock is set");
