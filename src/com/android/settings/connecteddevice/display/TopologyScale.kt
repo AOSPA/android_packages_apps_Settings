@@ -18,14 +18,13 @@ package com.android.settings.connecteddevice.display
 
 import android.graphics.PointF
 import android.graphics.RectF
-
 import java.util.Locale
-
 import kotlin.math.max
 import kotlin.math.min
 
 // These extension methods make calls to min and max chainable.
 fun Float.atMost(n: Number): Float = min(this, n.toFloat())
+
 fun Float.atLeast(n: Number): Float = max(this, n.toFloat())
 
 /**
@@ -36,22 +35,23 @@ fun Float.atLeast(n: Number): Float = max(this, n.toFloat())
  * direction, to display coordinates, is necessary for resolve a drag position to display space.
  *
  * The topology pane coordinates are physical pixels and represent the relative position from the
- * upper-left corner of the pane. It uses a scale optimized for showing all displays with minimal
- * or no scrolling. The display coordinates are floating point and the origin can be in any
- * position. In practice the origin will be the upper-left coordinate of the primary display.
+ * upper-left corner of the pane. It uses a scale optimized for showing all displays with minimal or
+ * no scrolling. The display coordinates are floating point and the origin can be in any position.
+ * In practice the origin will be the upper-left coordinate of the primary display.
  *
  * @param paneWidth width of the pane in view coordinates
  * @param minEdgeLength the smallest length permitted of a display block. This should be set based
- *                      on accessibility requirements, but also accounting for padding that appears
- *                      around each button.
+ *   on accessibility requirements, but also accounting for padding that appears around each button.
  * @param maxEdgeLength the longest width or height permitted of a display block. This will limit
- *                      the amount of dragging and scrolling the user will need to do to set the
- *                      arrangement.
+ *   the amount of dragging and scrolling the user will need to do to set the arrangement.
  * @param displaysPos the absolute topology coordinates for each display in the topology.
  */
 class TopologyScale(
-        paneWidth: Int, minEdgeLength: Float, maxEdgeLength: Float,
-        displaysPos: Collection<RectF>) {
+    paneWidth: Int,
+    minEdgeLength: Float,
+    maxEdgeLength: Float,
+    displaysPos: Collection<RectF>,
+) {
     /** Scale of block sizes to real-world display sizes. Should be less than 1. */
     val blockRatio: Float
 
@@ -65,8 +65,8 @@ class TopologyScale(
     val originPaneY: Float
 
     init {
-        val displayBounds = RectF(
-                Float.MAX_VALUE, Float.MAX_VALUE, Float.MIN_VALUE, Float.MIN_VALUE)
+        val displayBounds =
+            RectF(Float.MAX_VALUE, Float.MAX_VALUE, Float.MIN_VALUE, Float.MIN_VALUE)
         var smallestDisplayDim = Float.MAX_VALUE
         var biggestDisplayDim = Float.MIN_VALUE
 
@@ -80,7 +80,9 @@ class TopologyScale(
 
         // Initialize blockRatio such that there is 20% padding on left and right sides of the
         // display bounds.
-        blockRatio = (paneWidth * 0.6 / displayBounds.width()).toFloat()
+        blockRatio =
+            (paneWidth * 0.6 / displayBounds.width())
+                .toFloat()
                 // If the `ratio` is set too high because one of the displays will have an edge
                 // greater than maxEdgeLength(px) long, decrease it such that the largest edge is
                 // that long.
@@ -91,9 +93,9 @@ class TopologyScale(
 
         // A tall pane is likely to result in more scrolling. So we
         // prevent the height from growing too large here, by limiting vertical padding to
-        // 1.5x of the minEdgeLength on each side. This keeps a comfortable amount of
+        // 1.75x of the minEdgeLength on each side. This keeps a comfortable amount of
         // padding without it resulting in too much deadspace.
-        paneHeight = blockRatio * displayBounds.height() + minEdgeLength * 3f
+        paneHeight = blockRatio * displayBounds.height() + minEdgeLength * 3.5f
 
         // Set originPaneXY (the location of 0,0 in display space in the pane's coordinate system)
         // such that the display bounds rect is centered in the pane.
@@ -119,10 +121,14 @@ class TopologyScale(
         return PointF(displayX * blockRatio + originPaneX, displayY * blockRatio + originPaneY)
     }
 
-    override fun toString() : String {
+    override fun toString(): String {
         return String.format(
-                Locale.ROOT,
-                "{TopologyScale blockRatio=%f originPaneXY=%.1f,%.1f paneHeight=%.1f}",
-                blockRatio, originPaneX, originPaneY, paneHeight)
+            Locale.ROOT,
+            "{TopologyScale blockRatio=%f originPaneXY=%.1f,%.1f paneHeight=%.1f}",
+            blockRatio,
+            originPaneX,
+            originPaneY,
+            paneHeight,
+        )
     }
 }
