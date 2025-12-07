@@ -61,6 +61,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.safetycenter.SafetyCenterUtils;
 import com.android.settings.safetycenter.ui.PrivacyControlsFragment;
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils;
 import com.android.settings.safetycenter.ui.SafetyCenterSubpageRegistry;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen;
@@ -697,6 +698,7 @@ public class Settings extends SettingsActivity {
     public static class SafetyCenterActivity extends SettingsActivity {
 
         private static final String TAG = "SafetyCenterActivity";
+        long mSessionId = SafetyCenterSessionUtils.INSTANCE.generateValidSessionId();
 
         @Override
         protected void onCreate(Bundle savedState) {
@@ -709,6 +711,16 @@ public class Settings extends SettingsActivity {
             super.onNewIntent(intent);
             setIntent(intent);
             handleIntent();
+        }
+
+        @Override
+        public Intent getIntent() {
+            Intent intent = super.getIntent();
+            if (intent != null && !intent.hasExtra(SafetyCenterSessionUtils.EXTRA_SESSION_ID)) {
+                intent.putExtra(SafetyCenterSessionUtils.EXTRA_SESSION_ID, mSessionId);
+                Log.d(TAG, "Added sessionId to Activity's Intent: " + mSessionId);
+            }
+            return intent;
         }
 
         private void handleIntent() {
@@ -726,6 +738,8 @@ public class Settings extends SettingsActivity {
                 Log.d(TAG, "Redirecting to Privacy controls subpage");
                 new SubSettingLauncher(this)
                         .setDestination(PrivacyControlsFragment.class.getName())
+                        .setArguments(SafetyCenterSessionUtils.INSTANCE
+                                .createSessionArgs(mSessionId))
                         .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                         .launch();
             }
@@ -753,6 +767,7 @@ public class Settings extends SettingsActivity {
             Log.d(TAG, "Redirecting to a subpage based on EXTRA_SAFETY_SOURCES_GROUP_ID");
             new SubSettingLauncher(this)
                     .setDestination(fragmentClassName)
+                    .setArguments(SafetyCenterSessionUtils.INSTANCE.createSessionArgs(mSessionId))
                     .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                     .launch();
         }
