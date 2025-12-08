@@ -17,14 +17,20 @@
 package com.android.settings.testutils.shadow;
 
 import static org.robolectric.util.ReflectionHelpers.ClassParameter.from;
+import static org.robolectric.util.reflector.Reflector.reflector;
 
 import android.hardware.input.IInputManager;
 import android.hardware.input.InputManager;
+import android.hardware.input.InputManagerGlobal;
 import android.os.Handler;
+import android.util.SparseArray;
+import android.view.InputDevice;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
+import org.robolectric.util.reflector.Accessor;
+import org.robolectric.util.reflector.ForType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +42,7 @@ import java.util.List;
 @Implements(value = InputManager.class, callThroughByDefault = false)
 public class ShadowInputManager extends org.robolectric.shadows.ShadowInputManager {
 
-    private List<InputManager.InputDeviceListener> mInputDeviceListeners;
-
-    @Implementation
-    protected void __constructor__(IInputManager service) {
-        mInputDeviceListeners = new ArrayList<>();
-    }
+    private final List<InputManager.InputDeviceListener> mInputDeviceListeners = new ArrayList<>();
 
     @Implementation
     protected static InputManager getInstance() {
@@ -62,5 +63,44 @@ public class ShadowInputManager extends org.robolectric.shadows.ShadowInputManag
     @Implementation
     protected void unregisterInputDeviceListener(InputManager.InputDeviceListener listener) {
         mInputDeviceListeners.remove(listener);
+    }
+
+    @Implementation
+    public int[] getInputDeviceIds() {
+        return reflector(InputManagerGlobalReflector.class, InputManagerGlobal.getInstance())
+                .getInputDeviceIds();
+    }
+
+    /**
+     * @see InputManager#getInputDevice(int)
+     */
+    @Implementation
+    public InputDevice getInputDevice(int id) {
+        return reflector(InputManagerGlobalReflector.class, InputManagerGlobal.getInstance())
+                .getInputDevice(id);
+    }
+
+    @Override
+    public void addInputDevice(InputDevice device) {
+        super.addInputDevice(device);
+        mInputDeviceListeners.forEach(listener -> listener.onInputDeviceAdded(device.getId()));
+    }
+
+    /** Remove the input device with given id triggering the listeners. */
+    public void removeInputDevice(int deviceId) {
+        reflector(InputManagerGlobalReflector.class, InputManagerGlobal.getInstance())
+                .getInputDevices()
+                .delete(deviceId);
+        mInputDeviceListeners.forEach(listener -> listener.onInputDeviceRemoved(deviceId));
+    }
+
+    @ForType(InputManagerGlobal.class)
+    interface InputManagerGlobalReflector {
+        int[] getInputDeviceIds();
+
+        InputDevice getInputDevice(int id);
+
+        @Accessor("mInputDevices")
+        SparseArray<InputDevice> getInputDevices();
     }
 }
