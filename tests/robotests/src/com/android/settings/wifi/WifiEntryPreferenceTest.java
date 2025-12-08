@@ -40,7 +40,7 @@ import android.widget.LinearLayout;
 
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.settings.connectivity.Flags;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.R;
 import com.android.settingslib.wifi.WifiUtils;
 import com.android.wifitrackerlib.HotspotNetworkEntry;
@@ -317,7 +317,7 @@ public class WifiEntryPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void sharedNetwork_shouldSetSharedIcon() {
         mMockWifiConfig.shared = true;
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mMockWifiConfig);
@@ -336,7 +336,7 @@ public class WifiEntryPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void sharedPskNetwork_shouldSetSharedIconAndLockIcon() {
         mMockWifiConfig.shared = true;
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mMockWifiConfig);
@@ -360,7 +360,7 @@ public class WifiEntryPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void sharedNetwork_singleUser_shouldNotSetSharedIcon() {
         mMockWifiConfig.shared = true;
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mMockWifiConfig);
@@ -374,7 +374,7 @@ public class WifiEntryPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void sharedNetwork_notShared_shouldNotSetSharedIcon() {
         mMockWifiConfig.shared = false;
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mMockWifiConfig);

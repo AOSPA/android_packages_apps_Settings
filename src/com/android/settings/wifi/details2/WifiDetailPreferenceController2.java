@@ -909,7 +909,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                     mContext.getString(
                         R.string.forget_passpoint_dialog_message));
             return;
-        } else if (com.android.settings.connectivity.Flags.wifiMultiuser()
+        } else if (WifiUtils.isWifiMultiuserEnabled()
                         && mWifiEntry.isSharedWithOtherUsers()
                         && mUserManager.getUserCount() > 1) {
             showConfirmForgetDialog(

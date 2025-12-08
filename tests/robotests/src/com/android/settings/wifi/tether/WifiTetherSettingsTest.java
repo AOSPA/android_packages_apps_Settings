@@ -63,7 +63,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.connectivity.Flags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
@@ -213,7 +212,8 @@ public class WifiTetherSettingsTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     @Config(shadows = ShadowRestrictedDashboardFragment.class)
     public void onCreate_isNotMultiUser_setIfOnlyAvailableForAdmins() {
         when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(false);
