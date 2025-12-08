@@ -24,6 +24,7 @@ import android.util.Log
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.deviceinfo.PhoneNumberUtil
 import com.android.settings.deviceinfo.imei.ImeiInfoDialogFragment
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
@@ -62,7 +63,11 @@ class MobileNetworkImeiPreference(
     override val key: String
         get() = KEY
 
-    override fun getSummary(context: Context): CharSequence? = imei
+    override val purpose: Int
+        get() = R.string.network_mode_imei_info_purpose
+
+    override fun getSummary(context: Context): CharSequence? =
+        imei?.let { PhoneNumberUtil.expandByTts(it) }
 
     override fun isAvailable(context: Context) = isAvailable
 

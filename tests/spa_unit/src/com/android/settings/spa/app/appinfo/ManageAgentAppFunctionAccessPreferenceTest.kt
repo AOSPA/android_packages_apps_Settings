@@ -22,9 +22,9 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.UserManager
 import android.permission.flags.Flags
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
+import android.platform.test.annotations.RequiresFlagsDisabled
+import android.platform.test.annotations.RequiresFlagsEnabled
+import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
@@ -58,7 +58,7 @@ import org.mockito.quality.Strictness
 @RunWith(AndroidJUnit4::class)
 class ManageAgentAppFunctionAccessPreferenceTest {
     @get:Rule val composeTestRule = createComposeRule()
-    @get:Rule val setFlagsRule = SetFlagsRule()
+    @get:Rule val checkFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
     @Mock private lateinit var appFunctionManager: AppFunctionManager
     @Mock private lateinit var packageManager: PackageManager
@@ -93,7 +93,7 @@ class ManageAgentAppFunctionAccessPreferenceTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsDisabled(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
     fun content_display_flagDisabled() {
         setContent()
 
@@ -110,7 +110,10 @@ class ManageAgentAppFunctionAccessPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsEnabled(
+        Flags.FLAG_APP_FUNCTION_ACCESS_API_ENABLED,
+        Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED,
+    )
     fun content_display_flagEnabled() {
         setContent()
 
@@ -127,7 +130,10 @@ class ManageAgentAppFunctionAccessPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsEnabled(
+        Flags.FLAG_APP_FUNCTION_ACCESS_API_ENABLED,
+        Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED,
+    )
     fun content_display_invalidAgent_flagEnabled() {
         doReturn(emptyList<String>()).whenever(appFunctionManager).validAgents
 
@@ -146,7 +152,10 @@ class ManageAgentAppFunctionAccessPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsEnabled(
+        Flags.FLAG_APP_FUNCTION_ACCESS_API_ENABLED,
+        Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED,
+    )
     fun content_display_isProfile_flagEnabled() {
         doReturn(true).whenever(userManager).isProfile
 
@@ -165,7 +174,10 @@ class ManageAgentAppFunctionAccessPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsEnabled(
+        Flags.FLAG_APP_FUNCTION_ACCESS_API_ENABLED,
+        Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED,
+    )
     fun content_display_invalidFormFactor_flagEnabled() {
         for (formFactor in unsupportedFormFactors) {
             doReturn(true)
@@ -188,7 +200,10 @@ class ManageAgentAppFunctionAccessPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED)
+    @RequiresFlagsEnabled(
+        Flags.FLAG_APP_FUNCTION_ACCESS_API_ENABLED,
+        Flags.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED,
+    )
     fun whenClick_startActivity() {
         setContent()
         composeTestRule.onRoot().performClick()

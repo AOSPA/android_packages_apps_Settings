@@ -161,6 +161,7 @@ private constructor(
                 +LaunchA11yActivityPreference(shortcutInfo)
                 +PreferenceCategory(
                     key = "general_categories",
+                    purpose = R.string.general_categories_purpose,
                     title = R.string.accessibility_screen_option,
                 ) +=
                     {
@@ -168,11 +169,12 @@ private constructor(
                         +A11yActivitySettingPreference(shortcutInfo)
                         +LaunchAppInfoPreference(
                             key = "accessibility_activity_app_info",
+                            purpose = R.string.accessibility_activity_app_info_purpose,
                             packageName = shortcutInfo.componentName.packageName,
                         )
                     }
-                +A11yActivityFooterPreference(HTML_FOOTER_KEY, shortcutInfo, loadHtmlFooter = true)
-                +A11yActivityFooterPreference(FOOTER_KEY, shortcutInfo, loadHtmlFooter = false)
+                +A11yActivityFooterPreference(HTML_FOOTER_KEY, purpose = R.string.a11y_activity_detail_screen_html_footer_info_purpose, shortcutInfo, loadHtmlFooter = true)
+                +A11yActivityFooterPreference(FOOTER_KEY, purpose = R.string.a11y_activity_detail_screen_footer_info_purpose, shortcutInfo, loadHtmlFooter = false, )
             }
         }
 

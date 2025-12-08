@@ -34,6 +34,9 @@ class SimpleBuildNumberPreference :
     override val key: String
         get() = "os_build_number"
 
+    override val purpose: Int
+        get() = R.string.os_build_number_purpose
+
     override val title: Int
         get() = R.string.build_number
 

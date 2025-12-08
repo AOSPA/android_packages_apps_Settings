@@ -66,6 +66,8 @@ class ShortcutOptionPreferenceTest {
                 ) {
                 override val key: String
                     get() = "test_shortcut_option_pref"
+                override val purpose: Int
+                    get() = 0
             }
     }
 

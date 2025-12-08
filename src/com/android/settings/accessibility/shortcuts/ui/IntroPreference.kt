@@ -31,6 +31,9 @@ class IntroPreference(private val targets: Set<String>) :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.shortcut_description_purpose
+
     override val indexable = false
 
     override fun createWidget(context: Context) = TopIntroPreference(context)

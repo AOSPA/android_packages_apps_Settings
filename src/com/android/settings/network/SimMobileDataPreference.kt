@@ -38,6 +38,9 @@ class SimMobileDataPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.sim_mobile_datas_preference_key_purpose
+
     override val title: Int
         get() = R.string.mobile_data_settings_title
 

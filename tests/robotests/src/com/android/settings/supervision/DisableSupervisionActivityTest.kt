@@ -205,7 +205,7 @@ class DisableSupervisionActivityTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onCreate_multipleSupervisedUsers_disablesSupervisionAndDeletesData() {
+    fun onCreate_enableSupervisionSettingsUiUpdates_multipleSupervisedUsers_disablesSupervisionAndKeepsData() {
         mockRoleManager.stub {
             on { getRoleHolders(RoleManager.ROLE_SUPERVISION) } doReturn listOf(CALLING_PACKAGE)
         }
@@ -218,8 +218,8 @@ class DisableSupervisionActivityTest {
         mActivityController.create()
 
         verify(mockSupervisionManager).setSupervisionEnabled(false)
-        verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
-        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
+        verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
+        verify(mockUserManager, never()).removeUserEvenWhenDisallowed(any<Int>())
         verifyRemoveSupervisionRole(/* times= */ 1).firstValue.accept(true) // Role removal succeeds
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
         assertThat(mActivity.isFinishing).isTrue()

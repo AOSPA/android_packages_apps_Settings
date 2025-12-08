@@ -27,6 +27,7 @@ class MediaVibrationIntensitySliderPreference(context: Context) :
     VibrationIntensitySliderPreference(
         context = context,
         key = KEY,
+        purpose = R.string.media_vibration_intensity_purpose,
         vibrationUsage = VibrationAttributes.USAGE_MEDIA,
         title = R.string.accessibility_media_vibration_title,
     ),

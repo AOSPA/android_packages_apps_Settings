@@ -233,10 +233,11 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         final boolean isDeepLinkStartedFromSearch = getIntent().getBooleanExtra(
                 EXTRA_IS_DEEPLINK_HOME_STARTED_FROM_SEARCH, false /* defaultValue */);
         if (!isTaskRoot && !isDeepLinkStartedFromSearch) {
-            if (!isEmbeddedDeepLink) {
+            if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK) != 0
+                    && !isEmbeddedDeepLink) {
                 Log.i(TAG, "Activity has been started, finishing");
             } else {
-                Log.i(TAG, "Embedded deep link is not started as the task root, restarting");
+                Log.i(TAG, "Homepage is not started as the task root, restarting");
                 Intent intent = new Intent(getIntent())
                         .setPackage(getPackageName())
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK

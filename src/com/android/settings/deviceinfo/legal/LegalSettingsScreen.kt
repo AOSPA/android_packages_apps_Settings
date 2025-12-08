@@ -49,12 +49,28 @@ open class LegalSettingsScreen : PreferenceScreenMixin {
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +LegalPreference("copyright", R.string.copyright_title, "android.settings.COPYRIGHT")
-            +LegalPreference("license", R.string.license_title, "android.settings.LICENSE")
-            +LegalPreference("terms", R.string.terms_title, "android.settings.TERMS")
+            +LegalPreference(
+                "copyright",
+                R.string.copyright_purpose,
+                R.string.copyright_title,
+                "android.settings.COPYRIGHT",
+            )
+            +LegalPreference(
+                "license",
+                R.string.license_purpose,
+                R.string.license_title,
+                "android.settings.LICENSE",
+            )
+            +LegalPreference(
+                "terms",
+                R.string.terms_purpose,
+                R.string.terms_title,
+                "android.settings.TERMS",
+            )
             +ModuleLicensesScreen.KEY // Use screen key in case it is overlaid.
             +LegalPreference(
                 "webview_license",
+                R.string.webview_license_purpose,
                 R.string.webview_license_title,
                 "android.settings.WEBVIEW_LICENSE",
             )

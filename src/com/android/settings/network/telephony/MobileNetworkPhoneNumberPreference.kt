@@ -42,6 +42,9 @@ class MobileNetworkPhoneNumberPreference(private val data: MobileNetworkData) :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.mobile_network_phone_number_purpose
+
     override val title: Int
         get() = R.string.status_number
 

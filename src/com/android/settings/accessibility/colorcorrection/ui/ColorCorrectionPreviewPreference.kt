@@ -20,10 +20,14 @@ import android.content.Context
 import com.android.settings.accessibility.PaletteListPreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
+import com.android.settings.R
 
 class ColorCorrectionPreviewPreference : PreferenceMetadata, PreferenceBinding {
     override val key: String
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.daltonizer_preview_purpose
 
     override val indexable
         get() = false

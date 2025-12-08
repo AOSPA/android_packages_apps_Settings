@@ -51,6 +51,9 @@ abstract class BaseSurveyButtonPreference(val metricsCategory: Int = METRICS_CAT
     override val key: String
         get() = PREFERENCE_KEY
 
+    override val purpose: Int
+        get() = R.string.dark_ui_mode_survey_purpose
+
     override val title: Int
         get() = R.string.accessibility_send_survey_title
 

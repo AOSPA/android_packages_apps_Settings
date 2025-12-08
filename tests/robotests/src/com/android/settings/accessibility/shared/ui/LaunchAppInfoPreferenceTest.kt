@@ -47,7 +47,7 @@ class LaunchAppInfoPreferenceTest {
     private val shadowPackageManager = shadowOf(context.packageManager)
     private var activityScenario: ActivityScenario<FragmentActivity>? = null
     private val launchAppInfoPreference =
-        LaunchAppInfoPreference(key = "appInfo", packageName = PACKAGE)
+        LaunchAppInfoPreference(key = "appInfo", purpose = 0, packageName = PACKAGE)
 
     @After
     fun cleanUp() {

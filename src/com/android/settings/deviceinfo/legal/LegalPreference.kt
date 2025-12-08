@@ -27,6 +27,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 // LINT.IfChange
 class LegalPreference(
     override val key: String,
+    @StringRes override val purpose: Int,
     @StringRes val defaultTitle: Int = 0,
     val intentAction: String,
 ) : PreferenceMetadata, PreferenceTitleProvider, PreferenceAvailabilityProvider {

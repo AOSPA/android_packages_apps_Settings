@@ -46,6 +46,9 @@ class DarkModePendingLocationFooterPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.dark_theme_connection_footer_purpose
+
     override val icon: Int
         get() = R.drawable.ic_settings_location_filled
 

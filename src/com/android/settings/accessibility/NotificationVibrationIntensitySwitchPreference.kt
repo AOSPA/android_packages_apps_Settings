@@ -25,11 +25,13 @@ import com.android.settings.R
 class NotificationVibrationIntensitySwitchPreference(
     context: Context,
     key: String,
+    purpose: Int,
     mainSwitchPreferenceKey: String,
 ) :
     VibrationIntensitySwitchPreference(
         context = context,
         key = key,
+        purpose = purpose,
         settingsProviderKey = NOTIFICATION_VIBRATION_INTENSITY,
         mainSwitchPreferenceKey = mainSwitchPreferenceKey,
         vibrationUsage = VibrationAttributes.USAGE_NOTIFICATION,

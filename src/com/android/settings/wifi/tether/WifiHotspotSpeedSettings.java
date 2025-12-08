@@ -18,6 +18,7 @@ package com.android.settings.wifi.tether;
 
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_5GHZ;
+import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_6GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_5GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_6GHZ;
 
@@ -28,6 +29,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
@@ -46,6 +48,7 @@ public class WifiHotspotSpeedSettings extends DashboardFragment implements
     protected static final String KEY_SPEED_5GHZ = "wifi_hotspot_speed_5g";
     protected static final String KEY_SPEED_2GHZ_5GHZ = "wifi_hotspot_speed_2g_5g";
     protected static final String KEY_SPEED_6GHZ = "wifi_hotspot_speed_6g";
+    protected static final String KEY_SPEED_2GHZ_6GHZ = "wifi_hotspot_speed_2g_6g";
     protected static Map<String, Integer> sSpeedKeyMap = new HashMap<>();
 
     static {
@@ -53,6 +56,9 @@ public class WifiHotspotSpeedSettings extends DashboardFragment implements
         sSpeedKeyMap.put(KEY_SPEED_5GHZ, SPEED_5GHZ);
         sSpeedKeyMap.put(KEY_SPEED_2GHZ_5GHZ, SPEED_2GHZ_5GHZ);
         sSpeedKeyMap.put(KEY_SPEED_6GHZ, SPEED_6GHZ);
+        if (Flags.enable2And6GhzHotspotSpeed()) {
+            sSpeedKeyMap.put(KEY_SPEED_2GHZ_6GHZ, SPEED_2GHZ_6GHZ);
+        }
     }
 
     protected WifiHotspotSpeedViewModel mWifiHotspotSpeedViewModel;

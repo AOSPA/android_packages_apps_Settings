@@ -29,7 +29,11 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SwitchPreference
 
 class BlurSwitchPreference :
-    SwitchPreference(key = KEY, title = R.string.blur_switch),
+    SwitchPreference(
+        key = KEY,
+        purpose = R.string.disable_window_blurs_purpose,
+        title = R.string.blur_switch,
+    ),
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider {
 

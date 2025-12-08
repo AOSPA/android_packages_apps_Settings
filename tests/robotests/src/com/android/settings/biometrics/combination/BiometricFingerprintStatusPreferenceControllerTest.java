@@ -35,6 +35,7 @@ import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
@@ -131,6 +132,7 @@ public class BiometricFingerprintStatusPreferenceControllerTest {
 
 
     @Test
+    @DisableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
     public void fingerprintDisabled_whenAdminAndNoFingerprintsEnrolled() {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);

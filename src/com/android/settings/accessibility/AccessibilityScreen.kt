@@ -76,7 +76,7 @@ open class AccessibilityScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +PreferenceCategory("display_category", R.string.display_category_title) += {
+            +PreferenceCategory("display_category", purpose = R.string.display_category_purpose, R.string.display_category_title) += {
                 if (Flags.catalystTextReadingScreen()) +TextReadingScreenOnAccessibility.KEY
             }
         }

@@ -35,6 +35,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.deviceinfo.PhoneNumberUtil;
 import com.android.settings.deviceinfo.simstatus.SlotSimStatus;
 import com.android.settings.flags.Flags;
 
@@ -136,7 +137,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         } else {
             imei = imeiList.get(simSlot);
         }
-        return imei;
+        return PhoneNumberUtil.expandByTts(imei);
     }
 
     private String getImeiBySlot(int simSlot) {

@@ -79,6 +79,7 @@ class IdentityCheckSafetySourceTest {
     fun setUp() {
         SafetyCenterManagerWrapper.sInstance = safetyCenterManagerWrapper
         identityCheckSafetySource = IdentityCheckSafetySource()
+        setIdentityCheckToggleStatus(true)
         whenever(biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG))
             .thenReturn(BiometricManager.BIOMETRIC_SUCCESS)
         whenever(userManager.isProfile(applicationContext.userId)).thenReturn(false)
@@ -302,6 +303,39 @@ class IdentityCheckSafetySourceTest {
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
+    fun refreshSafetySources_identityCheckNotEnabled_setsSafetySourceDataWithoutNotification() {
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+
+        setIdentityCheckNotificationBeenClicked(false)
+        setIdentityCheckPromoCardShown(false)
+        setWatchRangingSupportedValue(false)
+        setIdentityCheckToggleStatus(false)
+
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+            userManager,
+        )
+
+        verify(safetyCenterManagerWrapper)
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                safetySourceDataArgumentCaptor.capture(),
+                eq(refreshSafetyEvent),
+            )
+
+        val safetySourceIssue: SafetySourceIssue =
+            safetySourceDataArgumentCaptor.firstValue.issues[0]!!
+        val actionPendingIntent = safetySourceIssue.actions[0].pendingIntent
+
+        assertThat(safetySourceIssue.customNotification).isNull()
+        assertThat(actionPendingIntent.intent.action).isEqualTo(ACTION_ISSUE_CARD_SHOW_DETAILS)
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
     fun refreshSafetySources_notificationClicked_setsSafetySourceDataWithoutNotification() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
@@ -449,6 +483,14 @@ class IdentityCheckSafetySourceTest {
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
     fun refreshSafetySources_watchAvailable_notificationClicked_setsDataWithoutNotification() {
+        assume()
+            .that(
+                applicationContext.resources.getBoolean(
+                    R.bool.config_show_identity_check_watch_promo
+                )
+            )
+            .isTrue()
+
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
         setWatchRangingSupportedValue(true)
@@ -475,12 +517,8 @@ class IdentityCheckSafetySourceTest {
         val actionPendingIntent = safetySourceIssue.actions[0].pendingIntent
 
         assertThat(safetySourceIssue.customNotification).isNull()
-        val showWatchPromo =
-            applicationContext.resources.getBoolean(R.bool.config_show_identity_check_watch_promo)
-        val expectedAction =
-            if (showWatchPromo) ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS
-            else ACTION_ISSUE_CARD_SHOW_DETAILS
-        assertThat(actionPendingIntent.intent.action).isEqualTo(expectedAction)
+        assertThat(actionPendingIntent.intent.action)
+            .isEqualTo(ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS)
     }
 
     @Test
@@ -553,4 +591,11 @@ class IdentityCheckSafetySourceTest {
             null,
         )
     }
+
+    private fun setIdentityCheckToggleStatus(enabled: Boolean) =
+        Settings.Secure.putInt(
+            applicationContext.contentResolver,
+            Settings.Secure.MANDATORY_BIOMETRICS,
+            if (enabled) 1 else 0,
+        )
 }

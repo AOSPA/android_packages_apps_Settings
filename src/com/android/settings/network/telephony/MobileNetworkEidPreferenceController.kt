@@ -39,7 +39,6 @@ import com.android.settings.Utils
 import com.android.settings.deviceinfo.PhoneNumberUtil
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionInfoListViewModel
-import com.android.settings.network.SubscriptionUtil
 import com.android.settingslib.CustomDialogPreferenceCompat
 import com.android.settingslib.qrcode.QrCodeGenerator
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
@@ -50,9 +49,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/**
- * Preference controller for "EID"
- */
+/** Preference controller for "EID" */
 open class MobileNetworkEidPreferenceController(context: Context, key: String) :
     TelephonyBasePreferenceController(context, key) {
 
@@ -69,16 +66,17 @@ open class MobileNetworkEidPreferenceController(context: Context, key: String) :
         mSubId = subId
     }
 
-    override fun getAvailabilityStatus(subId: Int): Int = when {
-        !Utils.isMobileDataCapable(mContext)
-                && !Utils.isVoiceCapable(mContext) -> UNSUPPORTED_ON_DEVICE
-        !mContext.userManager.isAdminUser -> DISABLED_FOR_USER
-        !Flags.isDualSimOnboardingEnabled()
-                || !SubscriptionManager.isValidSubscriptionId(subId)
-                || eid.isEmpty() -> CONDITIONALLY_UNAVAILABLE
+    override fun getAvailabilityStatus(subId: Int): Int =
+        when {
+            !Utils.isMobileDataCapable(mContext) && !Utils.isVoiceCapable(mContext) ->
+                UNSUPPORTED_ON_DEVICE
+            !mContext.userManager.isAdminUser -> DISABLED_FOR_USER
+            !Flags.isDualSimOnboardingEnabled() ||
+                !SubscriptionManager.isValidSubscriptionId(subId) ||
+                eid.isEmpty() -> CONDITIONALLY_UNAVAILABLE
 
-        else -> AVAILABLE
-    }
+            else -> AVAILABLE
+        }
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
@@ -89,7 +87,7 @@ open class MobileNetworkEidPreferenceController(context: Context, key: String) :
         if (!this::lazyViewModel.isInitialized) {
             Log.e(
                 this.javaClass.simpleName,
-                "lateinit property lazyViewModel has not been initialized"
+                "lateinit property lazyViewModel has not been initialized",
             )
             return
         }
@@ -98,17 +96,12 @@ open class MobileNetworkEidPreferenceController(context: Context, key: String) :
         coroutineScope = viewLifecycleOwner.lifecycleScope
         viewModel.subscriptionInfoListFlow
             .map { subscriptionInfoList ->
-                subscriptionInfoList
-                    .firstOrNull { subInfo ->
-                        subInfo.subscriptionId == mSubId && subInfo.isEmbedded
-                    }
+                subscriptionInfoList.firstOrNull { subInfo ->
+                    subInfo.subscriptionId == mSubId && subInfo.isEmbedded
+                }
             }
             .collectLatestWithLifecycle(viewLifecycleOwner) { subscriptionInfo ->
-                subscriptionInfo?.let {
-                    coroutineScope?.launch {
-                        refreshData(it)
-                    }
-                }
+                subscriptionInfo?.let { coroutineScope?.launch { refreshData(it) } }
             }
     }
 
@@ -127,14 +120,12 @@ open class MobileNetworkEidPreferenceController(context: Context, key: String) :
     fun refreshUi() {
         preference.title = title
         preference.dialogTitle = title
-        preference.summary = eid
+        preference.summary = PhoneNumberUtil.expandByTts(eid)
     }
 
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
         if (preference.key != preferenceKey) return false
-        this.preference.setOnShowListener {
-            coroutineScope?.launch { updateDialog() }
-        }
+        this.preference.setOnShowListener { coroutineScope?.launch { updateDialog() } }
         return true
     }
 
@@ -146,7 +137,7 @@ open class MobileNetworkEidPreferenceController(context: Context, key: String) :
         val dialog = preference.dialog ?: return
         dialog.window?.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
-            WindowManager.LayoutParams.FLAG_SECURE
+            WindowManager.LayoutParams.FLAG_SECURE,
         )
         dialog.setCanceledOnTouchOutside(false)
         val textView = dialog.requireViewById<TextView>(R.id.esim_id_value)
@@ -169,27 +160,26 @@ open class MobileNetworkEidPreferenceController(context: Context, key: String) :
     fun getEid(subscriptionInfo: SubscriptionInfo): String {
         val euiccMgr = getEuiccManager(mContext)
         val telMgr = getTelephonyManager(mContext)
-        if(euiccMgr==null || telMgr==null) return String()
+        if (euiccMgr == null || telMgr == null) return String()
 
         var eid = getEidPerSlot(telMgr, euiccMgr, subscriptionInfo)
-        return eid.ifEmpty {
-            getDefaultEid(euiccMgr)
-        }
+        return eid.ifEmpty { getDefaultEid(euiccMgr) }
     }
 
     private fun getEidPerSlot(
         telMgr: TelephonyManager,
         euiccMgr: EuiccManager,
-        subscriptionInfo: SubscriptionInfo
+        subscriptionInfo: SubscriptionInfo,
     ): String {
         val uiccCardInfoList = telMgr.uiccCardsInfo
         val cardId = subscriptionInfo.cardId
 
         /**
-         * Find EID from first slot which contains an eSIM and with card ID within
-         * the eSIM card ID provided by SubscriptionManager.
+         * Find EID from first slot which contains an eSIM and with card ID within the eSIM card ID
+         * provided by SubscriptionManager.
          */
-        return uiccCardInfoList.firstOrNull { cardInfo -> cardInfo.isEuicc && cardInfo.cardId == cardId }
+        return uiccCardInfoList
+            .firstOrNull { cardInfo -> cardInfo.isEuicc && cardInfo.cardId == cardId }
             ?.let { cardInfo ->
                 var eid = cardInfo.getEid()
                 if (TextUtils.isEmpty(eid)) {
@@ -211,17 +201,19 @@ open class MobileNetworkEidPreferenceController(context: Context, key: String) :
 
         /**
          * Gets the QR code for EID
+         *
          * @param eid is the EID string
          * @return a Bitmap of QR code
          */
-        private suspend fun getEidQrCode(eid: String): Bitmap? = withContext(Dispatchers.Default) {
-            try {
-                Log.d(TAG, "updateDialog. getEidQrCode $eid")
-                QrCodeGenerator.encodeQrCode(contents = eid, size = QR_CODE_SIZE)
-            } catch (exception: Exception) {
-                Log.w(TAG, "Error when creating QR code width $QR_CODE_SIZE", exception)
-                null
+        private suspend fun getEidQrCode(eid: String): Bitmap? =
+            withContext(Dispatchers.Default) {
+                try {
+                    Log.d(TAG, "updateDialog. getEidQrCode $eid")
+                    QrCodeGenerator.encodeQrCode(contents = eid, size = QR_CODE_SIZE)
+                } catch (exception: Exception) {
+                    Log.w(TAG, "Error when creating QR code width $QR_CODE_SIZE", exception)
+                    null
+                }
             }
-        }
     }
 }

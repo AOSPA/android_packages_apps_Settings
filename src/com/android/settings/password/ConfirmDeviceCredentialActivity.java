@@ -259,9 +259,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             promptInfo.setRealCallerForConfirmDeviceCredentialActivity(getCallingActivity());
         }
 
-        if (android.multiuser.Flags.usePrivateSpaceIconInBiometricPrompt()
-                && hasSetBiometricDialogAdvanced(mContext, getLaunchedFromUid())
-        ) {
+        if (hasSetBiometricDialogAdvanced(mContext, getLaunchedFromUid())) {
             final int iconResId = intent.getIntExtra(CUSTOM_BIOMETRIC_PROMPT_LOGO_RES_ID_KEY, 0);
             if (iconResId != 0) {
                 final Bitmap iconBitmap = toBitmap(mContext.getDrawable(iconResId));

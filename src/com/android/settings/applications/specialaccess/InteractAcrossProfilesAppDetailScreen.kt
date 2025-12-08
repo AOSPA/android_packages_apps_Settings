@@ -191,6 +191,9 @@ private class InteractAcrossProfilesMainSwitch(private val storage: KeyValueStor
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.device_state_interact_across_profiles_settings_switch_purpose
+
     override val title
         get() = R.string.interact_across_profiles_title
 

@@ -51,6 +51,7 @@ import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.widget.TextView;
 
@@ -62,6 +63,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.connectivity.Flags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
@@ -208,6 +210,17 @@ public class WifiTetherSettingsTest {
         mSettings.onCreate(null);
 
         assertThat(mSettings.mWifiTetherViewModel).isNull();
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @Config(shadows = ShadowRestrictedDashboardFragment.class)
+    public void onCreate_isNotMultiUser_setIfOnlyAvailableForAdmins() {
+        when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(false);
+
+        mSettings.onCreate(null);
+
+        verify(mSettings).setIfOnlyAvailableForAdmins(true);
     }
 
     @Test

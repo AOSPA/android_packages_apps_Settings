@@ -26,6 +26,7 @@ import com.android.internal.accessibility.util.ShortcutUtils
 import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.accessibility.shared.utils.getAccessibilityFeatureName
+import com.android.settings.accessibility.shortcuts.ShortcutOptionPreference as ShortcutOptionWidget
 import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
@@ -43,6 +44,9 @@ class KeyboardShortcutPreference(context: Context, targets: Set<String>) :
     PreferenceLifecycleProvider {
     override val key: String
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.shortcut_keyboard_pref_purpose
 
     override val title: Int
         get() = R.string.accessibility_shortcut_edit_dialog_title_keyboard
@@ -74,10 +78,27 @@ class KeyboardShortcutPreference(context: Context, targets: Set<String>) :
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
 
-        // TODO(b/453743837): Get vector image for keyboard shortcut.
-        // if (preference is ShortcutOptionWidget) {
-        //     preference.setIntroImageResId(R.drawable.accessibility_shortcut_type_keyboard)
-        // }
+        if (targets.size > 1 || preference !is ShortcutOptionWidget) {
+            return
+        }
+
+        val imageResId =
+            when {
+                targetsContainsMagnification() ->
+                    R.drawable.accessibility_shortcut_type_keyboard_magnification
+                targetsContainsScreenReader(context) ->
+                    R.drawable.accessibility_shortcut_type_keyboard_screenreader
+                com.android.hardware.input.Flags.enableSelectToSpeakKeyGestures() &&
+                    targetsContainsSelectToSpeak(context) ->
+                    R.drawable.accessibility_shortcut_type_keyboard_selecttospeak
+                targetsContainsVoiceAccess(context) ->
+                    R.drawable.accessibility_shortcut_type_keyboard_voiceaccess
+                else -> 0
+            }
+
+        if (imageResId != 0) {
+            preference.setIntroImageResId(imageResId)
+        }
     }
 
     override fun isAvailable(context: Context): Boolean {
@@ -89,15 +110,13 @@ class KeyboardShortcutPreference(context: Context, targets: Set<String>) :
             return false
         }
 
-        val voiceAccessTargetName = ShortcutUtils.getVoiceAccessTargetName(context)
-        val targetsContainsScreenReader =
-            targetsContainsScreenReader(ShortcutUtils.getScreenReaderTargetName(context))
-
-        // Keyboard shortcut is only currently available for Magnification, Voice Access, and
-        // TalkBack.
-        return targets.contains(MAGNIFICATION_CONTROLLER_NAME) ||
-            targets.contains(voiceAccessTargetName) ||
-            targetsContainsScreenReader
+        // Keyboard shortcut is only currently available for Magnification, Voice Access, TalkBack,
+        // and Select to Speak.
+        return targetsContainsMagnification() ||
+            targetsContainsVoiceAccess(context) ||
+            targetsContainsScreenReader(context) ||
+            (com.android.hardware.input.Flags.enableSelectToSpeakKeyGestures() &&
+                targetsContainsSelectToSpeak(context))
     }
 
     override fun onCreate(context: PreferenceLifecycleContext) {
@@ -121,12 +140,27 @@ class KeyboardShortcutPreference(context: Context, targets: Set<String>) :
         }
     }
 
-    private fun targetsContainsScreenReader(screenReaderTargetName: String): Boolean {
+    private fun targetsContainsMagnification(): Boolean {
+        return targets.contains(MAGNIFICATION_CONTROLLER_NAME)
+    }
+
+    private fun targetsContainsScreenReader(context: Context): Boolean {
+        val screenReaderTargetName = ShortcutUtils.getScreenReaderTargetName(context)
         val screenReaderComponentName = ComponentName.unflattenFromString(screenReaderTargetName)
 
         return targets.contains(screenReaderTargetName) ||
             (screenReaderComponentName != null &&
                 targets.contains(screenReaderComponentName.flattenToString()))
+    }
+
+    private fun targetsContainsSelectToSpeak(context: Context): Boolean {
+        val selectToSpeakTargetName = ShortcutUtils.getSelectToSpeakTargetName(context)
+        return targets.contains(selectToSpeakTargetName)
+    }
+
+    private fun targetsContainsVoiceAccess(context: Context): Boolean {
+        val voiceAccessTargetName = ShortcutUtils.getVoiceAccessTargetName(context)
+        return targets.contains(voiceAccessTargetName)
     }
 
     companion object {

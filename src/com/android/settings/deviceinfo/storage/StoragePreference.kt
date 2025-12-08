@@ -24,6 +24,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 
 class StoragePreference(
     override val key: String,
+    override val purpose: Int,
     override val title: Int,
     val provideIntent: (Context) -> Intent?,
     val provideSummary: (Context) -> CharSequence?,
