@@ -3532,6 +3532,44 @@
     <string name="sim_enter_ok">OK</string>
     <!-- SIM card lock settings screen, SIM PIN dialog button labels: [CHAR LIMIT=40] -->
     <string name="sim_enter_cancel">Cancel</string>
+
+    <!-- More security and Privacy, SIM protection setting option name  [CHAR LIMIT=40] -->
+    <string name="automatic_sim_lock_settings_title">Protect SIM card</string>
+    <!-- More security and Privacy, SIM protection setting screen title  [CHAR LIMIT=40] -->
+    <string name="automatic_sim_lock_protection">Automatic SIM lock protection</string>
+    <!-- SIM protection settings screen, primary setting for turning on automatic PIN management. [CHAR LIMIT=40] -->
+    <string name="sim_auto_pin_management_toggle">Automatic PIN management</string>
+    <!-- SIM protection settings screen, primary setting, description for automatic PIN management on [CHAR LIMIT=NONE] -->
+    <string name="sim_pin_auto_management_on">Managed by Android</string>
+    <!-- SIM protection settings screen, primary setting, description for auto PIN management off [CHAR LIMIT=NONE] -->
+    <string name="sim_pin_auto_management_off">Not managed by Android</string>
+    <!-- Enrollment into the automatic SIM card PIN management feature succeeded. [CHAR LIMIT=NONE] -->
+    <string name="sim_enrollment_succeeded">Enrollment succeeded</string>
+    <!-- Enrollment into the automatic SIM card PIN management feature failed. [CHAR LIMIT=NONE] -->
+    <string name="sim_enrollment_failed">Enrollment failed</string>
+    <!-- Automatic SIM lock protection screen, preference to show the platform-managed PIN. [CHAR LIMIT=NONE] -->
+    <string name="sim_display_platform_managed_pin_title">Show Android-managed PIN</string>
+    <!-- Dialog for showing the platform-managed PIN, title. [CHAR LIMIT=40] -->
+    <string name="sim_display_platform_managed_pin">Android-managed PIN</string>
+    <!-- Dialog for showing the platform-managed PIN, text. [CHAR LIMIT=NONE] -->
+    <string name="sim_platform_managed_pin_value">Value of the Android-managed PIN: </string>
+    <!-- Dialog for showing the platform-managed PIN, text when there's a failure. [CHAR LIMIT=NONE] -->
+    <string name="sim_platform_managed_pin_failure">Failed getting PIN</string>
+    <!-- Automatic SIM card lock protection screen, preference summary when nothing is set. [CHAR LIMIT=NONE] -->
+    <string name="sim_choose_protection_mode_title">Protect SIM card from theft</string>
+    <!-- Automatic SIM card lock protection screen, preference summary when the SIM PIN is platform-managed. [CHAR LIMIT=NONE] -->
+    <string name="sim_protection_mode_protected_by_platform">SIM PIN managed by Android</string>
+    <!-- Automatic SIM card lock protection screen, preference summary when the SIM PIN is manually managed. [CHAR LIMIT=NONE] -->
+    <string name="sim_protection_mode_manually_managed">SIM PIN manually managed</string>
+    <!-- Automatic SIM card lock protection screen, preference summary when there is no lockscreen so the feature cannot be turned on. [CHAR LIMIT=NONE] -->
+    <string name="sim_protection_mode_lskf_required">Lockscreen must be set up to turn on SIM protection</string>
+    <!-- Enrollment into automatic SIM PIN management dialog, title. [CHAR LIMIT=40] -->
+    <string name="provide_current_sim_pin_title">Enter current SIM PIN</string>
+    <!-- Enrollment into automatic SIM PIN management dialog, text. [CHAR LIMIT=NONE] -->
+    <string name="provide_current_sim_pin">Enter the SIM card current PIN</string>
+    <!-- Enrollment into automatic SIM PIN management dialog, button for using carrier default PIN. [CHAR LIMIT=25] -->
+    <string name="use_carrier_default_pin">Use carrier default</string>
+
     <!-- Title asking user if they wish to change the default sim for cellular data.  [CHAR LIMIT=40] -->
     <string name="sim_change_data_title">
         Use <xliff:g id="carrier" example="Verizon">%1$s</xliff:g> for mobile data?
