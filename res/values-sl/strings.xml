@@ -1215,7 +1215,7 @@
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"Deljenje omrežja"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Drugi uporabniki v tej napravi lahko dostopajo do tega omrežja"</string>
     <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"Želite preklopiti na <xliff:g id="SHARED">%1$s</xliff:g> omrežje?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"<xliff:g id="SHARED_0">%1$s</xliff:g> omrežje z imenom »<xliff:g id="NETWORK_NAME">%2$s</xliff:g>« že obstaja. Če preklopite na <xliff:g id="SHARED_1">%1$s</xliff:g> omrežje, boste zapustili <xliff:g id="PRIVATE">%3$s</xliff:g> omrežje in morda začasno ne boste imeli dostopa do interneta."</string>
+    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"Izbrano <xliff:g id="SHARED_0">%1$s</xliff:g> omrežje z imenom »<xliff:g id="NETWORK_NAME">%2$s</xliff:g>« že obstaja. Če preklopite na <xliff:g id="SHARED_1">%1$s</xliff:g> omrežje, boste zapustili <xliff:g id="PRIVATE">%3$s</xliff:g> omrežje in morda začasno ne boste imeli dostopa do interneta."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(nespremenjeno)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Uporabnikom dovoli urejanje omrežja"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Drugi uporabniki lahko spreminjajo to omrežje"</string>
@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Začasno onemogočeno zaradi varčevanja z energijo baterije"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Uporabi način šibke svetlobe"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Izberite, kaj naj bo prikazano v načinu šibke svetlobe"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Izklop zaslona"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Ura s šibko svetlobo"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"Vklopljeno/<xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"Izklopljeno"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"Zaslon se bo izklopil v temnejšem okolju"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"Ura s šibko svetlobo bo prikazana v temnejšem okolju"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Prikaz na podlagi okolja"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Kdaj naj se prikaže"</string>
@@ -1885,6 +1883,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Sprememba časovnega pasu"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Prejmite obvestilo ob samodejni posodobitvi časovnega pasu"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"obvestilo, ura, čas, pas, časovni pas"</string>
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Načrtovana sprememba ure"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Prejmite obvestilo, ko ura izvede načrtovano spremembo, na primer premik na poletni čas"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"dst, poletni čas, premik ure, prestavitev ure, načrtovana prestavitev ure"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Naslednja sprememba"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Ni načrtovanih sprememb"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Ogled pravnih informacij, stanja, različice programske opreme"</string>
     <string name="legal_information" msgid="7509900979811934843">"Pravne informacije"</string>
     <string name="manual" msgid="3651593989906084868">"Ročno"</string>
@@ -2333,8 +2336,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Nedavne aplikacije"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Obvestila"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Hitre nastavitve"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"Opomba"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Izberite bližnjico za <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"spodnji levi kot"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"spodnji desni kot"</string>
@@ -2602,12 +2604,9 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"%1$d-krat se hitro dotaknite zaslona. To bo morda upočasnilo delovanje naprave."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Dvakratni dotik z %1$d prstoma"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"trikratni dotik"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_keyboard (6563958384189884131) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_keyboard (8755352177645189254) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_keyboard_keyword (7354208869208311654) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Bližnjične tipke"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Pritisnite <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> za uporabo »<xliff:g id="ID_4">%4$s</xliff:g>«"</string>
+    <string name="accessibility_shortcut_keyboard_keyword" msgid="7354208869208311654">"bližnjične tipke"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Dodatno"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Gumb »Dostopnost« je nastavljen na <xliff:g id="SERVICE">%1$s</xliff:g>. Če želite uporabiti povečavo, se dotaknite gumba »Dostopnost« in ga pridržite, nato pa izberite povečavo."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Poteza za dostopnost je nastavljena na <xliff:g id="SERVICE">%1$s</xliff:g>. Če želite uporabiti povečavo, z dvema prstoma povlecite z dna zaslona navzgor in pridržite. Nato izberite povečavo."</string>
@@ -2977,6 +2976,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Poraba energije baterije za aplikacijo"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Podrobnosti uporabe"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Prilagodi porabo energije"</string>
@@ -3665,10 +3665,8 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, način vožnje"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
-    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
-    <skip />
-    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
-    <skip />
+    <string name="device_dashboard_title" msgid="1176311605407079643">"Naprava"</string>
+    <string name="device_dashboard_summary" msgid="657619609434549473">"Tipkovnica, sledilna ploščica, zaslon, zvok"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Ni na voljo, ker je vmesnik NFC izklopljen."</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Za uporabo najprej namestite aplikacijo za plačevanje."</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Nedavne aplikacije, privzete aplikacije"</string>
@@ -3686,7 +3684,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Klonirano"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Ustvarjanje klona aplikacije <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Ustvarjen klon aplikacije <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"Jeziki, poteze, ura, varnostno kopiranje"</string>
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Jeziki, poteze, ura"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Sistemski jeziki, jeziki aplikacij, regijske nastavitve, govor"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, omrežna povezava, internet, brezžično, podatki, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Obvestilo za Wi‑Fi, obvestilo za wifi"</string>
@@ -3938,10 +3936,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Aplikacije"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmi in druge motnje"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Trajanje pri uporabi hitrih nastavitev"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"Sinhroniziranje načina Ne moti"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"Sinhroniziranje nastavitev načina Ne moti s povezanimi napravami"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Zvoki v delovnem profilu"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Uporabi zvoke iz osebnega profila"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Uporabite iste zvoke kot v osebnem profilu."</string>
@@ -4628,8 +4624,7 @@
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Aplikacijam dovolite, da vam pomagajo dokončati opravila z interakcijo z vsebino na zaslonu drugih aplikacij"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Vedno vprašaj"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Vedno dovoli"</string>
-    <!-- no translation found for computer_control_automation_dont_allow (6562575180350018944) -->
-    <skip />
+    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Ne dovoli"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Celozaslonska obvestila"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Dovoli celozaslonska obvestila te aplikacije"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Dovolite, da ta aplikacija prikazuje obvestila, ki zavzamejo celoten zaslon, ko je naprava zaklenjena. Aplikacije lahko z njimi izpostavijo alarme, dohodne klice ali druga nujna obvestila."</string>
@@ -4907,16 +4902,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Zasuk fotoaparata za selfije"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Način krmarjenja"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"Posodobitev naprave"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"Interakcija"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"Avtomatizacija in inteligenca"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"Upravljanje sistema"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"Upravljanje podatkov"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Krmarjenje z dvema gumboma"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Za preklop med aplikacijami povlecite navzgor po gumbu za začetni zaslon. Za ogled vseh aplikacij znova povlecite navzgor. Za vrnitev se dotaknite gumba za nazaj."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"Obvestila in hitre nastavitve"</string>
@@ -5184,8 +5174,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Preizkusno: Omogoči gonilnik ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Opozorilo: Omogoči gonilnik ANGLE kot privzeti gonilnik OpenGL ES. Ta funkcija je preizkusna in morda ni združljiva z nekaterimi aplikacijami za fotoaparat in videoposnetke."</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Če želite spremeniti sistemski gonilnik OpenGL ES, morate znova zagnati napravo."</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Opozorilo: Omogoči gonilnik ANGLE kot privzeti gonilnik OpenGL ES. Ta funkcija je preizkusna in morda ni združljiva z nekaterimi aplikacijami za fotoaparat in videoposnetke. Pred vklopom stikala varnostno kopirajte podatke v napravi."</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"Če želite spremeniti sistemski gonilnik OpenGL ES, morate znova zagnati napravo. Pred vnovičnim zagonom varnostno kopirajte podatke v napravi. Če vnovični zagon ne uspe, boste za obnovitev naprave morali izvesti ponastavitev na tovarniške nastavitve."</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Spremembe združljivosti aplikacij"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Vklop/izklop sprememb združljivosti aplikacij"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Privzeto omogočene spremembe"</string>
@@ -6074,6 +6064,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtriranje eksplicitnih rezultatov iskanja"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{V # aplikaciji}one{V # aplikaciji}two{V # aplikacijah}few{V # aplikacijah}other{V # aplikacijah}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Ko so te nastavitve izklopljene, so druge nastavitve računa morda še vedno v uporabi."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Vnesite kodo PIN za starševski nadzor"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Nastavitev kode PIN za starševski nadzor"</string>
@@ -6091,6 +6083,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Izbriši kodo PIN in izklopi starševski nadzor"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Izbriši"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Kodo PIN za starševski nadzor uporabljajo:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animacija funkcije <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Starševskega nadzora ni mogoče vklopiti"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Kontrolnikov ni mogoče uporabljati"</string>

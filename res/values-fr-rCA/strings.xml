@@ -326,7 +326,7 @@
     <string name="date_time_auto" msgid="1759599045100040686">"Date et heure automatiques"</string>
     <string name="date_time_auto_summary" msgid="8294938565417729698">"Configurez automatiquement ce paramètre à l\'aide de votre réseau et de vos signaux sans fil"</string>
     <string name="zone_auto_title" msgid="3520584257065861479">"Fuseau horaire automatique"</string>
-    <string name="zone_auto_title_summary" msgid="6540356783943375071">"Configurez ce paramètre automatiquement en fonction des réseaux cellulaires à proximité"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"Le fuseau horaire est configuré automatiquement en fonction des réseaux cellulaires à proximité"</string>
     <string name="auto_zone_requires_location_summary" msgid="2366567167956530124">"Configurez automatiquement ce paramètre si la localisation de l\'appareil est disponible"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Utiliser les paramètres régionaux par défaut"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Utiliser le format 24 h"</string>
@@ -699,7 +699,7 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Verrouiller automatiquement l\'espace privé"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Vous pouvez verrouiller automatiquement votre espace privé si vous n\'avez pas utilisé votre appareil pendant un certain temps"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Chaque fois que l\'appareil se verrouille"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 min après la mise veille de l\'écran"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 min après la mise en veille de l\'écran"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Seulement après le redémarrage de l\'appareil"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Masquer l\'espace privé"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Masquer l\'espace privé lorsqu\'il est verrouillé"</string>
@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Temporairement désactivé par l\'Économiseur de pile"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Utiliser le mode Luminosité faible"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Choisir ce que vous voulez afficher en mode Luminosité faible"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Écran éteint"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Horloge à faible luminosité"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"Activé/<xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"Désactivé"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"L\'écran s\'éteindra quand votre environnement sera sombre"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"L\'horloge à faible luminosité s\'affichera lorsque votre environnement est sombre"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Affichage en mode Veille"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Activation du mode Veille"</string>
@@ -1885,6 +1883,16 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Changement de fuseau horaire"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Recevez une notification lorsque votre fuseau horaire est automatiquement mis à jour"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notification, heure, fuseau, fuseau horaire"</string>
+    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
+    <skip />
+    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
+    <skip />
+    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
+    <skip />
     <string name="about_settings_summary" msgid="4831942939227432513">"Informations légales, état et version du logiciel"</string>
     <string name="legal_information" msgid="7509900979811934843">"Renseignements juridiques"</string>
     <string name="manual" msgid="3651593989906084868">"Manuel"</string>
@@ -2333,8 +2341,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Applis récentes"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notifications"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Paramètres rapides"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"Remarque"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Choisir un raccourci pour le <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"coin inférieur gauche"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"coin inférieur droit"</string>
@@ -2602,12 +2609,9 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Touchez rapidement l\'écran %1$d fois. Cela pourrait ralentir votre appareil."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"toucher deux fois avec %1$d doigts"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"toucher trois fois"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_keyboard (6563958384189884131) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_keyboard (8755352177645189254) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_keyboard_keyword (7354208869208311654) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Raccourci-clavier"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Appuyez sur <xliff:g id="ID_1">%1$s</xliff:g>+<xliff:g id="ID_2">%2$s</xliff:g>+<xliff:g id="ID_3">%3$s</xliff:g> pour utiliser <xliff:g id="ID_4">%4$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_keyboard_keyword" msgid="7354208869208311654">"raccourci-clavier"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Paramètres avancés"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Le bouton d\'accessibilité est défini à <xliff:g id="SERVICE">%1$s</xliff:g>. Pour utiliser cette fonction, maintenez enfoncé le bouton d\'accessibilité, puis sélectionnez l\'agrandissement."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Le geste d\'accessibilité est défini pour <xliff:g id="SERVICE">%1$s</xliff:g>. Pour utiliser le zoom, balayez l\'écran de bas en haut deux avec doigts, puis maintenez-les-y. Sélectionnez ensuite Zoom."</string>
@@ -2977,6 +2981,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Utilisation de la pile par les applis"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Détails d\'utilisation"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajuster la consommation"</string>
@@ -3665,10 +3670,8 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, mode Voiture"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, CCP"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
-    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
-    <skip />
-    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
-    <skip />
+    <string name="device_dashboard_title" msgid="1176311605407079643">"Appareil"</string>
+    <string name="device_dashboard_summary" msgid="657619609434549473">"Clavier, pavé tactile, écran, son"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Non accessible parce que la technologie CCP est désactivée"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Pour utiliser la fonctionnalité, installez d\'abord une appli de paiement"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Applis récentes, applis par défaut"</string>
@@ -3686,7 +3689,8 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Clonée"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Création d\'un clone de <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> en cours…"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Clone de <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> créé"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"Langues, gestes, heure, sauvegarde"</string>
+    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
+    <skip />
     <string name="languages_setting_summary" msgid="2650807397396180351">"Langues du système, langues des applis, préférences régionales, voix"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, connexion réseau, internet, sans fil, données, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"notification Wi‑Fi, notification wifi"</string>
@@ -3938,10 +3942,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Applis"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmes et autres interruptions"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Durée des paramètres rapides"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"Synchronisation des paramètres Ne pas déranger"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"Synchronisez les paramètres Ne pas déranger avec les appareils connectés"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Sons du profil professionnel"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Utiliser les sons du profil personnel"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Utiliser les mêmes sons que votre profil personnel"</string>
@@ -4628,8 +4630,7 @@
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Autoriser les applis à vous aider à effectuer des tâches en interagissant avec le contenu de l\'écran d\'autres applis"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Toujours demander"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Toujours autoriser"</string>
-    <!-- no translation found for computer_control_automation_dont_allow (6562575180350018944) -->
-    <skip />
+    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Ne pas autoriser"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notifications en plein écran"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Autoriser les notifications en plein écran de cette appli"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Autoriser cette appli à afficher des notifications en plein écran lorsque l\'appareil est verrouillé. Les applis peuvent s\'en servir pour mettre en évidence des alarmes, des appels entrants ou d\'autres notifications urgentes."</string>
@@ -4907,16 +4908,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Changer d\'appareil photo pour prendre un égoportrait"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Mode de navigation"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"Mettre à jour l\'appareil"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"Interaction"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"Automatisation et intelligence"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"Gestion de systèmes"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"Gérer les données"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navigation à deux boutons"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Pour changer d\'appli, balayez un doigt vers le haut sur la touche d\'accueil. Pour voir toutes les applis, balayez vers le haut de nouveau. Pour revenir, touchez le bouton Précédent."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"Notifications et Paramètres rapides"</string>
@@ -5184,8 +5180,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Expérimental : Activer ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Avertissement : Activer ANGLE en tant que pilote OpenGL ES par défaut. Cette fonctionnalité est en cours de test et peut ne pas être compatible avec certaines applis vidéo et d\'appareils photo."</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Un redémarrage est nécessaire pour modifier le pilote OpenGL ES du système"</string>
+    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Changements dans la compatibilité des applis"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Activez/Désactivez les changements de compatibilité des applis"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Changements activés par défaut"</string>
@@ -6072,6 +6070,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtrer les résultats de recherche explicites"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Activé pour # appli}one{Activé pour # appli}other{Activé pour # applis}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Lorsque ces paramètres sont désactivés, d\'autres paramètres de compte peuvent toujours s\'appliquer."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Entrer le NIP des contrôles parentaux"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Définir un NIP des contrôles parentaux"</string>
@@ -6089,6 +6089,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Supprimer le NIP et désactiver les contrôles"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Supprimer"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Votre NIP des contrôles parentaux est utilisé par :\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animation <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Impossible d\'activer les contrôles"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Impossible d\'utiliser les commandes"</string>
