@@ -28,7 +28,7 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class FooterPreferenceTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
-    private val preference: FooterPreference = FooterPreference()
+    private val preference: FooterPreference = FooterPreference(R.string.help_url_color_inversion)
 
     @Test
     fun getTitle_returnsCorrectTitleText() {

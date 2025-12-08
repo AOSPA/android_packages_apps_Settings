@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.SwitchPreference
 class MediaControlsSwitchPreference(private val mediaControlsStore: KeyValueStore) :
     SwitchPreference(
         KEY,
+        purpose = R.string.qs_media_resumption_purpose,
         R.string.media_controls_resume_title,
         R.string.media_controls_resume_description,
     ),

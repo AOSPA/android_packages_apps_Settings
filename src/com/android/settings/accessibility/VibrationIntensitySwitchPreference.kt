@@ -42,13 +42,14 @@ import com.android.settingslib.preference.SwitchPreferenceBinding
 open class VibrationIntensitySwitchPreference(
     context: Context,
     key: String,
+    @StringRes purpose: Int,
     val settingsProviderKey: String,
     private val mainSwitchPreferenceKey: String,
     @Usage val vibrationUsage: Int,
     @StringRes title: Int = 0,
     @StringRes summary: Int = 0,
 ) :
-    SwitchPreference(key, title, summary),
+    SwitchPreference(key, purpose, title, summary),
     SwitchPreferenceBinding,
     PreferenceSummaryProvider,
     Preference.OnPreferenceChangeListener {

@@ -35,6 +35,9 @@ class AmbientDisplayIllustration(context: Context) : PreferenceMetadata, Prefere
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.ambient_display_illustration_purpose
+
     override val indexable
         get() = false
 

@@ -55,6 +55,9 @@ class IntensityPreference(context: Context) :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.accessibility_display_daltonizer_saturation_level_purpose
+
     override val title: Int
         get() = R.string.daltonizer_saturation_title
 

@@ -75,6 +75,9 @@ class MobileNetworkImeiPreference(
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.network_mode_imei_info_purpose
+
     private val Context.isMinHalVersion2_1: Boolean
         private get() {
             val radioVersion: Pair<Int, Int> = telephonyManager?.getHalVersion(

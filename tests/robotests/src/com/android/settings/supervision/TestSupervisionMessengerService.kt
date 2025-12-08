@@ -74,21 +74,25 @@ class TestSupportedAppsApiImpl :
                         title = "Supported app",
                         summary = "App summary",
                         packageName = "com.android.chrome",
+                        learnMoreLink = "www.learn.more.link",
                     ),
                     SupportedApp(
                         title = "Supported app 2",
                         summary = "App summary 2",
                         packageName = "com.android.chrome",
+                        learnMoreLink = "www.learn.more.link",
                     ),
                     SupportedApp(
                         title = "Supported app 3",
                         summary = "App summary 3",
                         packageName = "com.android.chrome",
+                        learnMoreLink = "www.learn.more.link",
                     ),
                     SupportedApp(
                         title = "Supported app 4",
                         summary = "App summary 4",
                         packageName = "com.android.chrome",
+                        learnMoreLink = "www.learn.more.link",
                     ),
                 )
         )

@@ -45,7 +45,7 @@ class LegalPreferenceTest {
         }
 
     private val copyrightPreference =
-        LegalPreference("copyright", R.string.copyright_title, "android.settings.COPYRIGHT")
+        LegalPreference("copyright", 0, R.string.copyright_title, "android.settings.COPYRIGHT")
 
     @Test
     fun isAvailable_systemApp_shouldReturnTrue() {

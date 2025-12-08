@@ -33,7 +33,11 @@ class PersistentAfterRestartsPreference(
     context: Context,
     private val extraDimStorage: ExtraDimDataStore = ExtraDimDataStore(context),
 ) :
-    SwitchPreference(key = KEY, title = R.string.reduce_bright_colors_persist_preference_title),
+    SwitchPreference(
+        key = KEY,
+        purpose = R.string.reduce_bright_colors_persist_across_reboots_purpose,
+        title = R.string.reduce_bright_colors_persist_preference_title
+    ),
     PreferenceLifecycleProvider {
 
     private var settingsKeyedObserver: KeyedObserver<String?>? = null

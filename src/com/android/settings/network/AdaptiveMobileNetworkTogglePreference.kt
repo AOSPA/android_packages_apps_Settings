@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.SwitchPreference
 class AdaptiveMobileNetworkTogglePreference() :
     SwitchPreference(
         KEY,
+        R.string.adaptive_connectivity_mobile_network_enabled_purpose,
         R.string.adaptive_connectivity_mobile_network_switch_title,
         R.string.adaptive_connectivity_mobile_network_switch_summary,
     ),
@@ -43,6 +44,9 @@ class AdaptiveMobileNetworkTogglePreference() :
 
     override val key: String
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.adaptive_connectivity_mobile_network_enabled_purpose
 
     override fun tags(context: Context) = arrayOf(KEY_ADAPTIVE_MOBILE_NETWORK)
 

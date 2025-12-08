@@ -27,6 +27,9 @@ class FlashNotificationsIllustrationPreference : PreferenceMetadata, PreferenceB
     override val key: String
         get() = "flash_notifications_illustration"
 
+    override val purpose: Int
+        get() = R.string.flash_notifications_illustration_purpose
+
     override val indexable
         get() = false
 

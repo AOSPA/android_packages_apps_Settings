@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.SwitchPreference
 class JoystickSwitchPreference :
     SwitchPreference(
         KEY,
+        R.string.accessibility_magnification_joystick_enabled_purpose,
         R.string.accessibility_screen_magnification_joystick_title,
         R.string.accessibility_screen_magnification_joystick_summary,
     ),

@@ -27,7 +27,11 @@ import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 
 class ColorInversionMainSwitchPreference(context: Context) :
-    SwitchPreference(key = KEY, title = R.string.accessibility_display_inversion_switch_title),
+    SwitchPreference(
+        key = KEY,
+        purpose = R.string.accessibility_display_inversion_enabled_purpose,
+        title = R.string.accessibility_display_inversion_switch_title
+    ),
     MainSwitchPreferenceBinding {
 
     private val storage by lazy {

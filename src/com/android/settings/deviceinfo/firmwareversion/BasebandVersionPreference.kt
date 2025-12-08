@@ -36,6 +36,9 @@ class BasebandVersionPreference :
     override val key: String
         get() = "base_band"
 
+    override val purpose: Int
+        get() = R.string.base_band_purpose
+
     override val title: Int
         get() = R.string.baseband_version
 

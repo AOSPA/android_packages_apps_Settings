@@ -49,6 +49,7 @@ import com.android.settingslib.ipc.MessengerServiceClient
 import com.android.settingslib.ipc.MessengerServiceRule
 import com.android.settingslib.preference.launchFragmentScenario
 import com.android.settingslib.widget.FooterPreference
+import com.android.settingslib.widget.theme.flags.Flags as LibFlags
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
@@ -134,7 +135,10 @@ class SupervisionWebContentFiltersBrowserSupportedAppsScreenTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+        LibFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED,
+    )
     fun supportedAppsPreferences() {
         browserSupportedAppsScreen.launchFragmentScenario().onFragment { fragment ->
             InstrumentationRegistry.getInstrumentation().waitForIdleSync()
@@ -144,6 +148,23 @@ class SupervisionWebContentFiltersBrowserSupportedAppsScreenTest {
             assertThat(preference?.title).isEqualTo("Supported app")
             assertThat(preference?.summary).isEqualTo("App summary")
             assertThat(preference?.icon).isEqualTo(iconDrawable)
+
+            val recyclerView = fragment.listView
+            val adapter = recyclerView.adapter as PreferenceGroupAdapter
+            val position = adapter.getPreferenceAdapterPosition(preference!!)
+            val viewHolder = recyclerView.findViewHolderForAdapterPosition(position)!!
+            val footerLinkView =
+                viewHolder.itemView.findViewById<TextView>(
+                    com.android.settingslib.widget.theme.R.id.settingslib_expressive_link_footer
+                )
+            // TODO: b/465520347 - Remove the null check once a solution is found.
+            if (footerLinkView != null) {
+                assertThat(footerLinkView.visibility).isEqualTo(View.VISIBLE)
+                assertThat(footerLinkView.text)
+                    .isEqualTo(
+                        context.getString(R.string.supervision_web_content_filters_learn_more_title)
+                    )
+            }
         }
     }
 

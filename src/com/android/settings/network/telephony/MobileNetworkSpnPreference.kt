@@ -43,6 +43,9 @@ class MobileNetworkSpnPreference(private val context: Context, private val subId
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.mobile_network_spn_purpose
+
     override val title: Int
         get() = R.string.mobile_network_spn_title
 

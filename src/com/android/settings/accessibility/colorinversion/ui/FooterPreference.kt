@@ -23,12 +23,15 @@ import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenc
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 
-class FooterPreference :
+class FooterPreference(override val helpResource: Int) :
     AccessibilityFooterPreferenceMetadata,
     AccessibilityFooterPreferenceBinding,
     PreferenceTitleProvider {
     override val key: String
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.toggle_inversion_preference_html_description_purpose
 
     override fun getTitle(context: Context): CharSequence? {
         return Html.fromHtml(
@@ -41,9 +44,6 @@ class FooterPreference :
 
     override val introductionTitle: Int
         get() = R.string.accessibility_color_inversion_about_title
-
-    override val helpResource: Int
-        get() = R.string.help_url_color_inversion
 
     override val learnMoreText: Int
         get() = R.string.accessibility_color_inversion_footer_learn_more_content_description

@@ -26,6 +26,7 @@ class NotificationVibrationIntensitySliderPreference(context: Context) :
     VibrationIntensitySliderPreference(
         context = context,
         key = KEY,
+        purpose = R.string.notification_vibration_intensity_purpose,
         vibrationUsage = VibrationAttributes.USAGE_NOTIFICATION,
         title = R.string.accessibility_notification_vibration_title,
     ) {

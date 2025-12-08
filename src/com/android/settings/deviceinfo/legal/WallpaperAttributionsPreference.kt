@@ -28,6 +28,9 @@ class WallpaperAttributionsPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.wallpaper_attributions_purpose
+
     override val title: Int
         get() = R.string.wallpaper_attributions
 

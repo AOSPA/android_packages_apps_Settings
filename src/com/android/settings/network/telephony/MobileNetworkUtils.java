@@ -109,17 +109,14 @@ public class MobileNetworkUtils {
     private static final String SHARED_PREFERENCE_NAME ="selected_plmn_name";
 
     /**
-     * Return true if current user limited by UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS.
-     *
-     * Note: Guest user should have this restriction through
-     *       GuestTelephonyPreferenceController.java.
-     *       However, it's not help with those devices upgraded their software.
+     * Return true if current user is not ADMIN or is restricted
+     * by UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS.
      */
     public static boolean isMobileNetworkUserRestricted(Context context) {
         UserManager um = context.getSystemService(UserManager.class);
         boolean disallow = false;
         if (um != null) {
-            disallow = um.isGuestUser() || um.hasUserRestriction(
+            disallow = !um.isAdminUser() || um.hasUserRestriction(
                     UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
         }
         return disallow;

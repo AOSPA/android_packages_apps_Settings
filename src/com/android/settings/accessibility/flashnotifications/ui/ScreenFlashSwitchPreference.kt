@@ -38,7 +38,12 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
-class ScreenFlashSwitchPreference : SwitchPreference(KEY, R.string.screen_flash_notification_title),
+class ScreenFlashSwitchPreference :
+    SwitchPreference(
+        KEY,
+        R.string.screen_flash_notification_purpose,
+        R.string.screen_flash_notification_title,
+    ),
     PreferenceSummaryProvider, PrimarySwitchPreferenceBinding, PreferenceLifecycleProvider,
     OnPreferenceClickListener, KeyedObserver<String?> {
 

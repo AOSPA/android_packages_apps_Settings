@@ -39,6 +39,9 @@ class DarkModeCustomModesFooterPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.dark_theme_custom_bedtime_footer_purpose
+
     override fun getTitle(context: Context): CharSequence? {
         val modesUsingDarkTheme = AutoDarkTheme.getModesThatChangeDarkTheme(context)
         val titleFormat =

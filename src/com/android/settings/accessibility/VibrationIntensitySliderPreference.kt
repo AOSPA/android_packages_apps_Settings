@@ -47,6 +47,7 @@ import kotlin.math.min
 open class VibrationIntensitySliderPreference(
     context: Context,
     override val key: String,
+    @StringRes override val purpose: Int,
     @Usage val vibrationUsage: Int,
     @StringRes override val title: Int = 0,
     @StringRes override val summary: Int = 0,

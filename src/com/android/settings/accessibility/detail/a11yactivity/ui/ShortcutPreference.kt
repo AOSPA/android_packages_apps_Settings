@@ -31,6 +31,7 @@ class ShortcutPreference(
     AccessibilityShortcutPreference(
         context = context,
         key = KEY,
+        purpose = R.string.shortcut_preference_key_purpose,
         componentName = shortcutInfo.componentName,
         metricsCategory = metricCategory,
     ),

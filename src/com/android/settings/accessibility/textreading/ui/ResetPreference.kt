@@ -39,6 +39,9 @@ internal class ResetPreference(@EntryPoint private val entryPoint: Int) :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.reset_purpose
+
     override val title: Int
         get() = R.string.accessibility_text_reading_reset_button_title
 

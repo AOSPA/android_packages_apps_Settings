@@ -50,6 +50,9 @@ class BluetoothDeviceRenamePreference(private val bluetoothDataStore: BluetoothD
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.bluetooth_screen_bt_pair_rename_devices_purpose
+
     override val title: Int
         get() = R.string.bluetooth_device_name
 

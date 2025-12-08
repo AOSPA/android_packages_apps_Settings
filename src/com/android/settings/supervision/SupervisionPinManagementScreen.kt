@@ -135,12 +135,18 @@ class SupervisionPinManagementScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +SupervisionSetupRecoveryPreference()
-            +UntitledPreferenceCategoryMetadata(GROUP_KEY) += {
+            +UntitledPreferenceCategoryMetadata(
+                key = GROUP_KEY,
+                purpose = R.string.pin_management_group_purpose,
+            ) += {
                 +SupervisionPinRecoveryPreference()
                 +SupervisionChangePinPreference()
                 +SupervisionUpdateRecoveryEmailPreference()
             }
-            +UntitledPreferenceCategoryMetadata("delete_pin_group") += {
+            +UntitledPreferenceCategoryMetadata(
+                key = "delete_pin_group",
+                purpose = R.string.delete_pin_group_purpose,
+            ) += {
                 +SupervisionDeletePinPreference()
             }
             +SupervisionPinManagementFooterPreference()

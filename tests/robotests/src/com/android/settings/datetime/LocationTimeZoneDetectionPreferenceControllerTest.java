@@ -237,6 +237,8 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
                 .setConfigureGeoDetectionEnabledCapability(configureGeoDetectionEnabledCapability)
                 .setSetManualTimeZoneCapability(CAPABILITY_NOT_APPLICABLE)
                 .setConfigureNotificationsEnabledCapability(CAPABILITY_POSSESSED)
+                .setConfigureTimeZoneOffsetChangeNotificationsEnabledCapability(
+                    CAPABILITY_POSSESSED)
                 .build();
 
         TimeZoneConfiguration configuration = new TimeZoneConfiguration.Builder()

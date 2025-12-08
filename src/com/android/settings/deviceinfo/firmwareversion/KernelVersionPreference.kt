@@ -30,6 +30,9 @@ class KernelVersionPreference : PreferenceMetadata, PreferenceSummaryProvider, P
     override val key: String
         get() = "kernel_version"
 
+    override val purpose: Int
+        get() = R.string.kernel_version_purpose
+
     override val title: Int
         get() = R.string.kernel_version
 

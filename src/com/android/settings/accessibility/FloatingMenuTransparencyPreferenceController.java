@@ -33,6 +33,9 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.widget.SliderPreference;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /** Preference controller that controls the transparency slider in accessibility button page. */
 public class FloatingMenuTransparencyPreferenceController extends SliderPreferenceController
         implements LifecycleObserver, OnResume, OnPause {
@@ -49,6 +52,8 @@ public class FloatingMenuTransparencyPreferenceController extends SliderPreferen
     static final float PRECISION = 100f;
 
     private final ContentResolver mContentResolver;
+    private Locale mCachedLocale;
+    private NumberFormat mPercentFormat;
     @VisibleForTesting
     final ContentObserver mContentObserver;
     private SliderPreference mPreference;
@@ -80,9 +85,10 @@ public class FloatingMenuTransparencyPreferenceController extends SliderPreferen
         mPreference.setMax(getMax());
         mPreference.setMin(getMin());
         mPreference.setHapticFeedbackMode(SliderPreference.HAPTIC_FEEDBACK_MODE_ON_ENDS);
-
         updateAvailabilityStatus();
         updateState(mPreference);
+        mPreference.setSliderStateDescription(
+                formatStateDescription(convertTransparencyIntToFloat(mPreference.getValue())));
     }
 
     @Override
@@ -109,7 +115,11 @@ public class FloatingMenuTransparencyPreferenceController extends SliderPreferen
 
     @Override
     public boolean setSliderPosition(int position) {
-        final float opacityValue = MAXIMUM_TRANSPARENCY - convertTransparencyIntToFloat(position);
+        final float transparencyValue = convertTransparencyIntToFloat(position);
+        final float opacityValue = MAXIMUM_TRANSPARENCY - transparencyValue;
+        if (mPreference != null) {
+            mPreference.setSliderStateDescription(formatStateDescription(transparencyValue));
+        }
         return Settings.Secure.putFloat(mContentResolver,
                 Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, opacityValue);
     }
@@ -148,5 +158,17 @@ public class FloatingMenuTransparencyPreferenceController extends SliderPreferen
 
         return (transparencyValue < minValue || transparencyValue > maxValue)
                 ? DEFAULT_TRANSPARENCY : transparencyValue;
+    }
+
+    private CharSequence formatStateDescription(float percentage) {
+        // Cache the locale-appropriate NumberFormat.  Configuration locale is guaranteed
+        // non-null, so the first time this is called we will always get the appropriate
+        // NumberFormat, then never regenerate it unless the locale changes on the fly.
+        final Locale curLocale = mContext.getResources().getConfiguration().getLocales().get(0);
+        if (!curLocale.equals(mCachedLocale)) {
+            mCachedLocale = curLocale;
+            mPercentFormat = NumberFormat.getPercentInstance(curLocale);
+        }
+        return mPercentFormat.format(percentage);
     }
 }

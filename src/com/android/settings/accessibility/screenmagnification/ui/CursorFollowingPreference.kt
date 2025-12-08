@@ -55,6 +55,9 @@ class CursorFollowingPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.accessibility_magnification_cursor_following_mode_purpose
+
     override val title: Int
         get() = R.string.accessibility_magnification_cursor_following_title
 

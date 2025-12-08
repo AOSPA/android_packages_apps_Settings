@@ -34,7 +34,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -195,6 +197,20 @@ public class AppLocalePickerFragment extends DashboardFragment implements
             } else {
                 mSearchView.setQuery(null, false /* submit */);
             }
+
+            // Set zero margin and padding to align with the text horizontally in the preference
+            final TextView searchViewTextView = (TextView) mSearchView.findViewById(
+                    com.android.internal.R.id.search_src_text);
+            searchViewTextView.setPadding(0, searchViewTextView.getPaddingTop(), 0,
+                    searchViewTextView.getPaddingBottom());
+            searchViewTextView.setTextAppearance(R.style.TextAppearance_SearchBar);
+            final View editFrame = mSearchView.findViewById(
+                    com.android.internal.R.id.search_edit_frame);
+            final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) editFrame
+                    .getLayoutParams();
+            params.setMarginStart(0);
+            params.setMarginEnd(0);
+            editFrame.setLayoutParams(params);
         }
     }
 

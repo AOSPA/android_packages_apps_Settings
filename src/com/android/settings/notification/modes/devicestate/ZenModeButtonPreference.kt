@@ -41,6 +41,9 @@ class ZenModeButtonPreference(val zenMode: ZenMode) :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.device_state_activate_purpose
+
     override val summary: Int
         get() =
             if (zenMode.isActive) R.string.zen_mode_action_deactivate

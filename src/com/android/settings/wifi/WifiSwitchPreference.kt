@@ -58,7 +58,11 @@ import kotlinx.coroutines.launch
 
 // LINT.IfChange
 class WifiSwitchPreference(private val scope: CoroutineScope) :
-    SwitchPreference(KEY, R.string.wifi_settings_primary_switch_title),
+    SwitchPreference(
+        KEY,
+        purpose = R.string.main_toggle_wifi_purpose,
+        R.string.wifi_settings_primary_switch_title
+    ),
     SwitchPreferenceBinding,
     PreferenceActionMetricsProvider,
     OnPreferenceChangeListener,

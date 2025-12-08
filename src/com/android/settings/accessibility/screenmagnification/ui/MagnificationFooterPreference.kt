@@ -34,7 +34,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 
 // LINT.IfChange
-class MagnificationFooterPreference :
+class MagnificationFooterPreference(override val helpResource: Int) :
     AccessibilityFooterPreferenceMetadata,
     AccessibilityFooterPreferenceBinding,
     PreferenceTitleProvider,
@@ -44,14 +44,14 @@ class MagnificationFooterPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.magnification_preference_screen_html_description_purpose
+
     override val indexable
         get() = false
 
     override val introductionTitle: Int
         get() = R.string.accessibility_screen_magnification_about_title
-
-    override val helpResource: Int
-        get() = R.string.help_url_magnification
 
     override val learnMoreText: Int
         get() = R.string.accessibility_screen_magnification_footer_learn_more_content_description

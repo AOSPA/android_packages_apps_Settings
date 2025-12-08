@@ -120,6 +120,9 @@ internal class NightDisplayTopIntroPreference :
     override val key: String
         get() = "night_display_top_intro"
 
+    override val purpose: Int
+        get() = R.string.night_display_top_intro_purpose
+
     override val title: Int
         get() = R.string.night_display_text
 

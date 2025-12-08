@@ -54,6 +54,9 @@ class AdvancedPreference(private val targets: Set<String>) :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.advanced_shortcuts_collapsed_purpose
+
     override val icon: Int
         get() = R.drawable.ic_keyboard_arrow_down
 

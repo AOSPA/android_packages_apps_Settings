@@ -18,6 +18,7 @@ package com.android.settings.supervision
 import android.text.Html
 import android.view.View
 import androidx.preference.Preference
+import com.android.settings.R
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settings.widget.FooterPreferenceBinding
 import com.android.settings.widget.FooterPreferenceMetadata
@@ -37,6 +38,9 @@ class SupervisionAocFooterPreference(
 ) : FooterPreferenceMetadata, FooterPreferenceBinding, PreferenceLifecycleProvider {
     override val key: String
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.aoc_footer_purpose
 
     private var preferenceData: PreferenceData? = null
 

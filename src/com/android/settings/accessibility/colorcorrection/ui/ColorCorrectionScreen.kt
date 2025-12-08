@@ -125,12 +125,14 @@ class ColorCorrectionScreen :
             +GrayscaleModePreference(modeStorage)
             +PreferenceCategory(
                 key = "general_categories",
+                purpose = R.string.general_categories_purpose,
                 title = R.string.accessibility_screen_option,
             ) +=
                 {
                     +AccessibilityShortcutPreference(
                         context = context,
                         key = "daltonizer_shortcut_key",
+                        purpose = R.string.daltonizer_shortcut_key_purpose,
                         title = R.string.accessibility_daltonizer_shortcut_title,
                         componentName = DALTONIZER_COMPONENT_NAME,
                         featureName =

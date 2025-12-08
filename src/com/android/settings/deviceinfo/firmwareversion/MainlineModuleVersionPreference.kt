@@ -45,6 +45,9 @@ class MainlineModuleVersionPreference :
     override val key: String
         get() = "module_version"
 
+    override val purpose: Int
+        get() = R.string.module_version_purpose
+
     override val title: Int
         get() = R.string.module_version
 

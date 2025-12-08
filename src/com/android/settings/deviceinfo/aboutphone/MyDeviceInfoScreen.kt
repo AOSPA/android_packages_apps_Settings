@@ -91,16 +91,18 @@ open class MyDeviceInfoScreen :
         preferenceHierarchy(context) {
             if (Flags.catalystAboutPhoneDeviceName()) {
                 +PreferenceCategory(
-                    BASIC_INFO_CATEGORY,
-                    R.string.my_device_info_basic_info_category_title,
+                    key = BASIC_INFO_CATEGORY,
+                    purpose = R.string.basic_info_category_purpose,
+                    title = R.string.my_device_info_basic_info_category_title,
                 ) +=
                     {
                         +DeviceNamePreference(context) order 1
                     }
             }
             +PreferenceCategory(
-                DEVICE_DETAIL_CATEGORY,
-                R.string.my_device_info_device_details_category_title,
+                key = DEVICE_DETAIL_CATEGORY,
+                purpose = R.string.device_detail_category_purpose,
+                title = R.string.my_device_info_device_details_category_title,
             ) +=
                 {
                     if (Flags.catalystDeviceModel()) +HardwareInfoScreen.KEY order 30

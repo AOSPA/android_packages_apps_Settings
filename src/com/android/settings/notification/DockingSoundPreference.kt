@@ -30,7 +30,11 @@ import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
 class DockingSoundPreference :
-    SwitchPreference(KEY, R.string.docking_sounds_title),
+    SwitchPreference(
+        key = KEY,
+        purpose = R.string.dock_sounds_enabled_purpose,
+        title = R.string.docking_sounds_title
+    ),
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider {
     override val preferenceActionMetrics: Int

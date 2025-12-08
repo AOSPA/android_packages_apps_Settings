@@ -39,6 +39,9 @@ class HearingDevicesFooterPreference(
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.hearing_device_footer_purpose
+
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
 

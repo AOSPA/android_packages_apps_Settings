@@ -122,6 +122,22 @@ public class ChooseLockGenericControllerTest {
     }
 
     @Test
+    public void isScreenLockVisible_hidePatternConfigDisabled_shouldReturnTrue() {
+        SettingsShadowResources.overrideResource(R.bool.config_hide_pattern_security_option, false);
+        final ChooseLockGenericController controller = createBuilder().build();
+
+        assertThat(controller.isScreenLockVisible(ScreenLockType.PATTERN)).isTrue();
+    }
+
+    @Test
+    public void isScreenLockVisible_hidePatternConfigEnabled_shouldReturnFalse() {
+        SettingsShadowResources.overrideResource(R.bool.config_hide_pattern_security_option, true);
+        final ChooseLockGenericController controller = createBuilder().build();
+
+        assertThat(controller.isScreenLockVisible(ScreenLockType.PATTERN)).isFalse();
+    }
+
+    @Test
     public void isScreenLockEnabled_Default() {
         assertThat(mController.isScreenLockEnabled(ScreenLockType.NONE)).isTrue();
         assertThat(mController.isScreenLockEnabled(ScreenLockType.SWIPE)).isTrue();

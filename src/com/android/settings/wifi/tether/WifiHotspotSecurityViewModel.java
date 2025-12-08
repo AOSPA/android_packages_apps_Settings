@@ -23,9 +23,11 @@ import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION;
 
+import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_6GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_6GHZ;
 
 import android.app.Application;
+import android.util.ArraySet;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -40,6 +42,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Wi-Fi Hotspot Security View Model for {@link WifiHotspotSecuritySettings}
@@ -105,18 +108,29 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
 
     protected void onSpeedTypeChanged(Integer speedType) {
         log("onSpeedTypeChanged(), speedType:" + speedType);
-        for (Map.Entry<Integer, ViewItem> entry : mViewItemMap.entrySet()) {
-            if (speedType == SPEED_6GHZ) {
-                if (entry.getKey() == SECURITY_TYPE_WPA3_SAE ||
-                    entry.getKey() == SECURITY_TYPE_WPA3_OWE) {
-                    entry.getValue().mIsEnabled = true;
-                } else {
-                    entry.getValue().mIsEnabled = false;
-                }
-             } else {
-                entry.getValue().mIsEnabled = true;
-             }
+
+        // Certain speed types require specific security types. Specify an allowlist if the speed
+        // type requires it.
+        Set<Integer> allowedSecurityTypes = new ArraySet<>();
+        if (speedType == SPEED_6GHZ) {
+            allowedSecurityTypes.add(SECURITY_TYPE_WPA3_SAE);
+            allowedSecurityTypes.add(SECURITY_TYPE_WPA3_OWE);
+        } else if (speedType == SPEED_2GHZ_6GHZ) {
+            allowedSecurityTypes.add(SECURITY_TYPE_WPA3_SAE);
+            if (mWifiHotspotRepository.isWpa3TransitionAllowedFor2g6gDbs()) {
+                allowedSecurityTypes.add(SECURITY_TYPE_WPA3_SAE_TRANSITION);
+            }
         }
+
+        // Mask out any security type that isn't supported by the current speed type.
+        for (Map.Entry<Integer, ViewItem> entry : mViewItemMap.entrySet()) {
+            Integer securityType = entry.getKey();
+            ViewItem viewItem = entry.getValue();
+
+            viewItem.mIsEnabled = allowedSecurityTypes.isEmpty()
+                    || allowedSecurityTypes.contains(securityType);
+        }
+
         updateViewItemListData();
     }
 

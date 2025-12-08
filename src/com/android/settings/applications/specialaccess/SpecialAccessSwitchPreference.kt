@@ -18,6 +18,7 @@ package com.android.settings.applications.specialaccess
 
 import android.content.Context
 import androidx.preference.Preference
+import com.android.settings.R
 import com.android.settings.widget.FilterTouchesSwitchPreference
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
@@ -31,6 +32,9 @@ internal class SpecialAccessSwitchPreference(
 
     override val key
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.access_switch_purpose
 
     override fun storage(context: Context) = dataStore
 

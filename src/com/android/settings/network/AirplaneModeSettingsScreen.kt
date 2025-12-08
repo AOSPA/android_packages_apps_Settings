@@ -120,6 +120,9 @@ class AirplaneModeSettingsFooter : FooterPreferenceMetadata, FooterPreferenceBin
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        @StringRes get() = R.string.airplane_mode_footer_purpose
+
     override val title: Int
         @StringRes get() = R.string.airplane_mode_sync_description
 

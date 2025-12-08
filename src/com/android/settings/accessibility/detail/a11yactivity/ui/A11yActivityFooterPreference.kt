@@ -29,6 +29,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 /** Footer metadata for [AccessibilityShortcutInfo]'s description. */
 class A11yActivityFooterPreference(
     override val key: String,
+    override val purpose: Int,
     private val shortcutInfo: AccessibilityShortcutInfo,
     private val loadHtmlFooter: Boolean,
 ) :

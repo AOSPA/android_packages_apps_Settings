@@ -60,6 +60,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -93,7 +94,8 @@ import java.util.List;
         ShadowUtils.class,
         ShadowDevicePolicyManager.class,
         ShadowUserManager.class,
-        ShadowApplicationPackageManager.class
+        ShadowApplicationPackageManager.class,
+        SettingsShadowResources.class
 })
 public class ConfirmLockPatternTest {
 
@@ -374,6 +376,33 @@ public class ConfirmLockPatternTest {
         lockPatternView.setPattern(LockPatternView.DisplayMode.Correct, pattern);
         clearButton.performClick();
         assertThat(lockPatternView.isEmpty()).isTrue();
+    }
+
+    @Test
+    public void checkboxVisibility_hidePatternDisabled_checkboxIsVisible() throws Exception {
+        SettingsShadowResources.overrideResource(R.bool.config_hide_pattern_security_option, false);
+        ConfirmDeviceCredentialBaseActivity activity =
+                buildConfirmDeviceCredentialBaseActivity(
+                        ConfirmLockPattern.class,
+                        createRemoteLockscreenValidationIntent(
+                                KeyguardManager.PATTERN, VALID_REMAINING_ATTEMPTS));
+        ConfirmLockPatternFragment fragment =
+                (ConfirmLockPatternFragment) getConfirmDeviceCredentialBaseFragment(activity);
+        assertThat(fragment.mCheckBox.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void checkboxVisibility_hidePatternEnabled_checkboxIsGone() throws Exception {
+        SettingsShadowResources.overrideResource(R.bool.config_hide_pattern_security_option, true);
+        ConfirmDeviceCredentialBaseActivity activity =
+                buildConfirmDeviceCredentialBaseActivity(
+                        ConfirmLockPattern.class,
+                        createRemoteLockscreenValidationIntent(
+                                KeyguardManager.PATTERN, VALID_REMAINING_ATTEMPTS));
+        ConfirmLockPatternFragment fragment =
+                (ConfirmLockPatternFragment) getConfirmDeviceCredentialBaseFragment(activity);
+        assertThat(fragment.mCheckBox.getVisibility()).isEqualTo(View.GONE);
+        assertThat(fragment.mCheckBox.isChecked()).isFalse();
     }
 
     private void triggerOnPatternDetected(LockPatternView lockPatternView) {

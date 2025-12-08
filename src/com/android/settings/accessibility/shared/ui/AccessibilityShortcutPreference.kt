@@ -59,6 +59,7 @@ interface ShortcutFeatureNameProvider {
 open class AccessibilityShortcutPreference(
     context: Context,
     override val key: String,
+    @StringRes override val purpose: Int,
     @StringRes override val title: Int = 0,
     val componentName: ComponentName,
     @StringRes val featureName: Int = 0,

@@ -30,6 +30,9 @@ class FlashNotificationsTopIntroPreference :
     override val key: String
         get() = "flash_notifications_intro"
 
+    override val purpose: Int
+        get() = R.string.flash_notifications_intro_purpose
+
     override val indexable
         get() = false
 

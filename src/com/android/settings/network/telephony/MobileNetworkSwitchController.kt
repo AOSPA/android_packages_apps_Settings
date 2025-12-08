@@ -78,9 +78,8 @@ constructor(
     }
 
     private fun Context.isVisible(): Boolean {
-        if (Flags.deeplinkNetworkAndInternet25q4()) {
-            return false
-        }
+        if (Flags.deeplinkNetworkAndInternet25q4()) return false
+
         val subInfo =
             subscriptionRepository.getSelectableSubscriptionInfoList().firstOrNull {
                 it.subscriptionId == subId

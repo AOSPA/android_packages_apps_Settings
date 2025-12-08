@@ -30,6 +30,9 @@ class AudioRoutingPreference : PreferenceMetadata, PreferenceAvailabilityProvide
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.audio_routing_purpose
+
     override val title: Int
         get() = R.string.bluetooth_audio_routing_title
 

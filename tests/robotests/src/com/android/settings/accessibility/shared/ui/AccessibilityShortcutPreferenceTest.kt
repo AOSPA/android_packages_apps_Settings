@@ -55,6 +55,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.shadow.api.Shadow
 
 const val TEST_KEY = "testKey"
+const val TEST_PURPOSE = 0
 const val TEST_TITLE_RES = 0
 const val TEST_FEATURE_NAME_RES = 0
 
@@ -192,6 +193,7 @@ class AccessibilityShortcutPreferenceTest {
         AccessibilityShortcutPreference(
             context,
             TEST_KEY,
+            TEST_PURPOSE,
             TEST_TITLE_RES,
             testComponentName,
             TEST_FEATURE_NAME_RES,

@@ -45,6 +45,9 @@ class SupervisionRecoveryBannerPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.supervision_pin_recovery_banner_purpose
+
     override val indexable: Boolean
         get() = false
 

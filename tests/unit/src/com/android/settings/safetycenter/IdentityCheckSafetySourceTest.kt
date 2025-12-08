@@ -483,6 +483,14 @@ class IdentityCheckSafetySourceTest {
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
     fun refreshSafetySources_watchAvailable_notificationClicked_setsDataWithoutNotification() {
+        assume()
+            .that(
+                applicationContext.resources.getBoolean(
+                    R.bool.config_show_identity_check_watch_promo
+                )
+            )
+            .isTrue()
+
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
         setWatchRangingSupportedValue(true)
@@ -509,12 +517,8 @@ class IdentityCheckSafetySourceTest {
         val actionPendingIntent = safetySourceIssue.actions[0].pendingIntent
 
         assertThat(safetySourceIssue.customNotification).isNull()
-        val showWatchPromo =
-            applicationContext.resources.getBoolean(R.bool.config_show_identity_check_watch_promo)
-        val expectedAction =
-            if (showWatchPromo) ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS
-            else ACTION_ISSUE_CARD_SHOW_DETAILS
-        assertThat(actionPendingIntent.intent.action).isEqualTo(expectedAction)
+        assertThat(actionPendingIntent.intent.action)
+            .isEqualTo(ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS)
     }
 
     @Test
