@@ -724,7 +724,7 @@ class DisplayTopologyPreferenceController(
     }
 
     private companion object {
-        private const val MIN_EDGE_LENGTH_DP = 60f
+        private const val MIN_EDGE_LENGTH_DP = 48f
         private const val MAX_EDGE_LENGTH_DP = 256f
         private const val MIRRORING_DIAGONAL_STACK_OFFSET_DP = 120f
         private const val TAG = "DisplayTopologyPreferenceController"

@@ -26,6 +26,7 @@ class AlarmVibrationIntensitySliderPreference(context: Context) :
     VibrationIntensitySliderPreference(
         context = context,
         key = KEY,
+        purpose = R.string.alarm_vibration_intensity_purpose,
         vibrationUsage = VibrationAttributes.USAGE_ALARM,
         title = R.string.accessibility_alarm_vibration_title,
     ) {

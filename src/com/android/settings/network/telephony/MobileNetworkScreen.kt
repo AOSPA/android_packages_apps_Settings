@@ -89,7 +89,7 @@ private constructor(
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.mobile_network_pref_screen_purpose
 
@@ -118,7 +118,7 @@ private constructor(
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             if (Flags.deeplinkNetworkAndInternet25q4()) {
-                +MobileNetworkMainSwitchPreference(context, subId) order +0
+                +MobileNetworkMainSwitchPreference(context, subId, coroutineScope) order +0
                 val data = MobileNetworkData(context, coroutineScope, subId)
                 +EnabledStateUntitledCategory(subId) += {
                     +MobileNetworkDataUsagePreference(context, coroutineScope, subId)
@@ -137,18 +137,23 @@ private constructor(
                     } else {
                         +(BillingCycleScreen.KEY args arguments!!) order 115
                     }
-                    +UntitledPreferenceCategoryMetadata("apn_and_protection_container") += {
-                        if (CatalystFlags.catalystUseKeyParameters()) {
-                            val newParameters =
-                                ApnSettingsScreen.parametersSchema.prepare(
-                                    ApnSettings.SUB_ID to subId.toString()
-                                )
-                            +(ApnSettingsScreen.KEY withParameters newParameters)
-                        } else {
-                            val bundle = Bundle(1).also { it.putSubId(ApnSettings.SUB_ID, subId) }
-                            +(ApnSettingsScreen.KEY args bundle)
+                    +UntitledPreferenceCategoryMetadata(
+                        "apn_and_protection_container",
+                        R.string.mobile_network_apn_and_protection_purpose,
+                    ) +=
+                        {
+                            if (CatalystFlags.catalystUseKeyParameters()) {
+                                val newParameters =
+                                    ApnSettingsScreen.parametersSchema.prepare(
+                                        ApnSettings.SUB_ID to subId.toString()
+                                    )
+                                +(ApnSettingsScreen.KEY withParameters newParameters)
+                            } else {
+                                val bundle =
+                                    Bundle(1).also { it.putSubId(ApnSettings.SUB_ID, subId) }
+                                +(ApnSettingsScreen.KEY args bundle)
+                            }
                         }
-                    }
                 }
             }
         }

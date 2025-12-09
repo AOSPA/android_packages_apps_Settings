@@ -185,6 +185,9 @@ private open class AccessibilityFooterPreferenceMetadataImpl :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = 0
+
     companion object {
         const val KEY = "prefKey"
     }

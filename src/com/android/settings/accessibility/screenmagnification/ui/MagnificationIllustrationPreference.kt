@@ -31,6 +31,9 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.magnification_preference_screen_animated_image_purpose
+
     override val indexable
         get() = false
 

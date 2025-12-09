@@ -229,7 +229,7 @@ public class CreateShortcutPreferenceControllerTest {
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
-        when(mUserManager.isGuestUser()).thenReturn(false);
+        when(mUserManager.isAdminUser()).thenReturn(true);
         when(mUserManager.hasUserRestriction(
                 UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)).thenReturn(false);
 
@@ -241,7 +241,7 @@ public class CreateShortcutPreferenceControllerTest {
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(false);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
-        when(mUserManager.isGuestUser()).thenReturn(false);
+        when(mUserManager.isAdminUser()).thenReturn(true);
         when(mUserManager.hasUserRestriction(
                 UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)).thenReturn(false);
 
@@ -249,11 +249,11 @@ public class CreateShortcutPreferenceControllerTest {
     }
 
     @Test
-    public void canShowDataUsage_isGuestUser_returnFalse() {
+    public void canShowDataUsage_isNotAdminUser_returnFalse() {
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
-        when(mUserManager.isGuestUser()).thenReturn(true);
+        when(mUserManager.isAdminUser()).thenReturn(false);
         when(mUserManager.hasUserRestriction(
                 UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)).thenReturn(false);
 
@@ -265,7 +265,7 @@ public class CreateShortcutPreferenceControllerTest {
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
-        when(mUserManager.isGuestUser()).thenReturn(false);
+        when(mUserManager.isAdminUser()).thenReturn(true);
         when(mUserManager.hasUserRestriction(
                 UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)).thenReturn(true);
 

@@ -254,9 +254,10 @@ public class SettingsHomepageActivityTest {
     }
 
     @Test
-    public void onCreate_notTaskRoot_notEmbeddedDeepLink_shouldOnlyFinish() {
+    public void onCreate_notTaskRoot_flagNewTaskAndNotEmbeddedDeepLink_shouldFinish() {
         SettingsHomepageActivity activity =
-                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class,
+                        new Intent().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)).get());
         doReturn(false).when(activity).isTaskRoot();
         doReturn(false).when(activity).shouldLaunchDeepLinkIntentToRight();
 

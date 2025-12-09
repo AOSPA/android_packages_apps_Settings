@@ -31,6 +31,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 /** Footer metadata for [AccessibilityServiceInfo]'s description. */
 class A11yServiceFooterPreference(
     override val key: String,
+    override val purpose: Int,
     private val serviceInfo: AccessibilityServiceInfo,
     private val loadHtmlFooter: Boolean,
 ) :

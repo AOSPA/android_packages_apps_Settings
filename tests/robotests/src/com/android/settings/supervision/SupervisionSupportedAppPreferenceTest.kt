@@ -15,17 +15,21 @@
  */
 package com.android.settings.supervision
 
+import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.MATCH_UNINSTALLED_PACKAGES
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
@@ -34,6 +38,7 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
@@ -42,9 +47,13 @@ class SupervisionSupportedAppPreferenceTest {
     private val title = "title"
     private val summary = "summary"
     private val appPackageName = "packageName"
+    private val preferenceKey = "preferenceKey"
     private val appIcon = ColorDrawable(Color.RED)
     private val mockPackageManager = mock(PackageManager::class.java)
     private lateinit var preference: Preference
+    private lateinit var preferenceWithDefaultKey: Preference
+
+    @get:Rule(order = 0) val setFlagsRule = SetFlagsRule()
 
     @Before
     fun setUp() {
@@ -57,6 +66,10 @@ class SupervisionSupportedAppPreferenceTest {
         }
 
         preference =
+            SupervisionSupportedAppPreference(title, summary, appPackageName, preferenceKey)
+                .createWidget(spyContext)
+
+        preferenceWithDefaultKey =
             SupervisionSupportedAppPreference(title, summary, appPackageName)
                 .createWidget(spyContext)
     }
@@ -77,8 +90,21 @@ class SupervisionSupportedAppPreferenceTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun getKey() {
+        assertThat(preference.key).isEqualTo(preferenceKey)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun getDefaultKey() {
+        assertThat(preferenceWithDefaultKey.key).isEqualTo(SupervisionSupportedAppPreference.KEY)
+    }
+
+    @Test
     fun createWidget_callsGetApplicationInfoWithCorrectFlags() {
         val expectedFlags = MATCH_UNINSTALLED_PACKAGES
-        verify(mockPackageManager).getApplicationInfo(eq(appPackageName), eq(expectedFlags))
+        verify(mockPackageManager, times(2))
+            .getApplicationInfo(eq(appPackageName), eq(expectedFlags))
     }
 }

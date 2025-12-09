@@ -53,6 +53,9 @@ class UseServicePreference(
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.use_service_purpose
+
     private val dataStore by lazy { UseServiceDataStore(context, serviceInfo) }
 
     override fun storage(context: Context): KeyValueStore {

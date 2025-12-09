@@ -40,7 +40,11 @@ import kotlin.math.roundToInt
 
 // LINT.IfChange
 class PeakRefreshRateSwitchPreference :
-    SwitchPreference(KEY, R.string.peak_refresh_rate_title),
+    SwitchPreference(
+        key = KEY,
+        purpose = R.string.peak_refresh_rate_purpose,
+        title = R.string.peak_refresh_rate_title,
+    ),
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,

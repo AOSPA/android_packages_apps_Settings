@@ -37,6 +37,9 @@ class LaunchA11yActivityPreference(private val shortcutInfo: AccessibilityShortc
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.launch_preference_purpose
+
     override val indexable
         get() = false
 

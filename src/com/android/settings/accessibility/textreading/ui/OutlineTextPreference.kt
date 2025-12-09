@@ -32,6 +32,7 @@ import com.android.settingslib.preference.SwitchPreferenceBinding
 class OutlineTextPreference(context: Context, @EntryPoint private val entryPoint: Int) :
     SwitchPreference(
         key = KEY,
+        purpose = R.string.high_text_contrast_enabled_purpose,
         title = R.string.accessibility_toggle_maximize_text_contrast_preference_title,
         summary = R.string.accessibility_toggle_maximize_text_contrast_preference_summary,
     ),

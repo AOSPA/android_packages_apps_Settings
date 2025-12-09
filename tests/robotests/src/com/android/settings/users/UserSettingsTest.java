@@ -847,6 +847,7 @@ public class UserSettingsTest {
     @Test
     public void updateUserList_existingGuest_shouldAddGuestUserPreference() {
         givenUsers(getAdminUser(true), getGuest(false));
+        mUserCapabilities.mUserSwitchingUiEnabled = true;
 
         mFragment.updateUserList();
 
@@ -866,6 +867,7 @@ public class UserSettingsTest {
     @Test
     public void updateUserList_existingSecondaryUser_shouldAddSecondaryUserPreference() {
         givenUsers(getAdminUser(true), getSecondaryUser(false));
+        mUserCapabilities.mIsAdmin = true;
 
         mFragment.updateUserList();
 
@@ -901,6 +903,7 @@ public class UserSettingsTest {
     @Test
     public void updateUserList_existingSecondaryUser_shouldAddSecondaryUser_MultiUserIsEnabled() {
         givenUsers(getAdminUser(true), getSecondaryUser(false));
+        mUserCapabilities.mIsAdmin = true;
 
         mFragment.updateUserList();
 

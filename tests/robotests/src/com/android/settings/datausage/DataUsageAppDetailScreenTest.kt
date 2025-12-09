@@ -153,4 +153,5 @@ class DataUsageAppDetailScreenTest : SettingsCatalystTestCase() {
 private data class TestMetadata(
     override val bindingKey: String,
     override val key: String = "testKey",
+    override val purpose: Int = 0
 ) : PreferenceMetadata

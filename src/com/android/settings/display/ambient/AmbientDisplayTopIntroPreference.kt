@@ -26,6 +26,9 @@ class AmbientDisplayTopIntroPreference : PreferenceMetadata, PreferenceBinding {
     override val key: String
         get() = "ambient_display_always_on_intro"
 
+    override val purpose: Int
+        get() = R.string.ambient_display_always_on_intro_purpose
+
     override val title: Int
         get() = R.string.doze_always_on_summary_long
 

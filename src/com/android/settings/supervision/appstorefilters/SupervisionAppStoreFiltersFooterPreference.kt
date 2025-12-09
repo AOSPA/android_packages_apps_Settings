@@ -32,6 +32,9 @@ class SupervisionAppStoreFiltersFooterPreference :
     override val title: Int
         get() = R.string.supervision_app_store_filters_footer_content
 
+    override val purpose: Int
+        get() = R.string.app_store_filters_footer_purpose
+
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         val footerPreference = preference as FooterPreference

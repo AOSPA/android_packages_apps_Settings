@@ -25,6 +25,9 @@ class SupervisionWebContentFiltersTopIntroPreference : PreferenceMetadata, Prefe
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.supervision_web_content_filters_intro_purpose
+
     override val title: Int
         get() = R.string.supervision_web_content_filters_top_intro
 

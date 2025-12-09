@@ -31,6 +31,9 @@ class A11yActivitySettingPreference(private val shortcutInfo: AccessibilityShort
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.accessibility_activity_settings_purpose
+
     override val title: Int
         get() = R.string.accessibility_menu_item_settings
 

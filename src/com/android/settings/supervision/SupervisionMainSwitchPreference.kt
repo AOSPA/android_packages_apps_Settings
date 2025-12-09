@@ -70,6 +70,9 @@ class SupervisionMainSwitchPreference(
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.device_supervision_switch_purpose
+
     override val title
         get() = R.string.device_supervision_features_title
 

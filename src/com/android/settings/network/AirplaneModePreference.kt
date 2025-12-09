@@ -47,7 +47,11 @@ import com.qti.extphone.ExtTelephonyManager
 
 // LINT.IfChange
 open class AirplaneModePreference :
-    SwitchPreference(KEY, R.string.airplane_mode),
+    SwitchPreference(
+        KEY,
+        R.string.airplane_mode_settings_airplane_mode_on_purpose,
+        R.string.airplane_mode,
+    ),
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
     PreferenceLifecycleProvider,

@@ -50,7 +50,7 @@ class MagnificationFooterPreferenceTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
-    private val preference = MagnificationFooterPreference()
+    private val preference = MagnificationFooterPreference(R.string.help_url_magnification)
     private val oneFingerPanningOnDefaultSummary =
         Html.fromHtml(
                 MessageFormat.format(

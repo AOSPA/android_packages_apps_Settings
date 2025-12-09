@@ -60,6 +60,9 @@ class AdaptiveSleepPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.adaptive_sleep_purpose
+
     override val title: Int
         get() = R.string.adaptive_sleep_title
 

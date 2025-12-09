@@ -21,11 +21,13 @@ import android.content.pm.PackageManager
 import android.util.Log
 import androidx.preference.Preference
 import androidx.preference.PreferenceGroup
+import com.android.settings.CatalystFragment
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.SupervisionSupportedAppPreference
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.supervision.ipc.SupportedApp
+import com.android.settingslib.HelpUtils
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -135,20 +137,48 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +UntitledPreferenceCategoryMetadata(SUPPORTED_APPS_GROUP)
+            +UntitledPreferenceCategoryMetadata(SUPPORTED_APPS_GROUP, R.string.supported_apps_group_purpose)
             +SupervisionWebContentFiltersFooterPreference()
         }
 
     private fun addSupportedAppsPreferences(context: PreferenceLifecycleContext) {
+        val fragmentInstance = context.lifecycleOwner
         context.findPreference<PreferenceGroup>(SUPPORTED_APPS_GROUP)?.apply {
-            for (supportedApp in supportedApps) {
+            for ((index, supportedApp) in supportedApps.withIndex()) {
                 SupervisionSupportedAppPreference(
                         supportedApp.title,
                         supportedApp.summary,
                         supportedApp.packageName!!,
+                        SupervisionSupportedAppPreference.KEY + index.toString(),
                     )
                     .createWidget(context)
-                    .let { addPreference(it) }
+                    .let {
+                        addPreference(it)
+                        if (
+                            Flags.enableSupervisionSettingsUiUpdates() &&
+                                (supportedApp.learnMoreLink != null) &&
+                                fragmentInstance is CatalystFragment
+                        ) {
+                            fragmentInstance.attachFooter(
+                                it.key,
+                                context.getString(
+                                    R.string.supervision_web_content_filters_learn_more_title
+                                ),
+                            ) {
+                                val intent =
+                                    HelpUtils.getHelpIntent(
+                                        context,
+                                        supportedApp.learnMoreLink,
+                                        context::class.java.name,
+                                    )
+                                if (intent != null) {
+                                    context.startActivity(intent)
+                                } else {
+                                    Log.w(TAG, "HelpIntent is null")
+                                }
+                            }
+                        }
+                    }
             }
         }
     }

@@ -122,6 +122,7 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
             +SupervisionWebContentFiltersTopIntroPreference()
             +NonIndexablePreferenceCategory(
                 BROWSER_FILTERS_GROUP,
+                R.string.browser_filters_group_purpose,
                 R.string.supervision_web_content_filters_browser_title,
             ) +=
                 {
@@ -133,6 +134,7 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
                 }
             +NonIndexablePreferenceCategory(
                 SEARCH_FILTERS_GROUP,
+                R.string.search_filters_group_purpose,
                 R.string.supervision_web_content_filters_search_title,
             ) +=
                 {

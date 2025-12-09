@@ -114,6 +114,12 @@
             android:fragment="com.android.settings.gestures.GestureSettings"
             settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController"/>
 
+        <SwitchPreferenceCompat
+            android:key="search_gesture_press_hold"
+            android:title="@string/search_gesture_feature_title"
+            android:summary="@string/search_gesture_feature_summary"
+            android:icon="@drawable/ic_gesture_24px"
+            settings:controller="com.android.settings.gestures.NavigationSettingsContextualSearchController" />
     </PreferenceCategory>
 
     <PreferenceCategory

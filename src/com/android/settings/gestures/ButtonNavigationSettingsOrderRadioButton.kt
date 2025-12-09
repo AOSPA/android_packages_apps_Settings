@@ -18,7 +18,6 @@ package com.android.settings.gestures
 
 import android.content.Context
 import android.icu.text.CaseMap
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.preference.CheckBoxPreference
@@ -47,15 +46,8 @@ class ButtonNavigationSettingsOrderRadioButton(
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
 
-        val actualIconIds =
-            if (context.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
-                iconIds.reversed()
-            } else {
-                iconIds
-            }
-
         for (i in 0..2) {
-            bindIcon(holder, actualIconIds[i], icons[i], labels[i])
+            bindIcon(holder, iconIds[i], icons[i], labels[i])
         }
 
         (holder.findViewById(R.id.order_label) as? TextView)?.text =

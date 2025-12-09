@@ -26,6 +26,9 @@ class ColorInversionIllustrationPreference : PreferenceMetadata, PreferenceBindi
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.animated_image_purpose
+
     override val indexable
         get() = false
 

@@ -36,6 +36,9 @@ class SupervisionSetUpPinPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.supervision_set_up_pin_purpose
+
     override val title: Int
         get() = R.string.supervision_set_up_pin_preference_title
 

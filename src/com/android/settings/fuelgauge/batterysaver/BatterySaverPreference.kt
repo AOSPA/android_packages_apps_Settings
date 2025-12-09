@@ -49,6 +49,9 @@ class BatterySaverPreference :
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.battery_saver_purpose
+
     override val title
         get() = R.string.battery_saver_master_switch_title
 

@@ -162,7 +162,11 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
                 +AmbientInactivityDetectionPreference(context)
             }
             if (context.isAmbientWallpaperOptionsAvailable) {
-                +Category("ambient_wallpaperGroup", R.string.doze_always_on_wallpaper_options) += {
+                +Category(
+                    "ambient_wallpaperGroup",
+                    R.string.ambient_wallpaper_group_purpose,
+                    R.string.doze_always_on_wallpaper_options
+                ) += {
                     +ambientWallpaperPreference
                 }
             }

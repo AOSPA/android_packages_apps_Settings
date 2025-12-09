@@ -116,6 +116,9 @@ class MobileNetworkDataUsagePreference(
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.status_header_purpose
+
     override fun isAvailable(context: Context) = subInfo != null
 
     override fun getSummary(context: Context) = dataUsageDataFlow.value.summary

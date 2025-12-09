@@ -18,7 +18,7 @@ package com.android.settings.supervision
 import com.android.settingslib.metadata.PreferenceCategory
 
 /** A [PreferenceCategory] that is not search indexable, even though it has a non-empty title. */
-class NonIndexablePreferenceCategory(key: String, title: Int) : PreferenceCategory(key, title) {
+class NonIndexablePreferenceCategory(key: String, purpose: Int, title: Int) : PreferenceCategory(key, purpose, title) {
     override val indexable
         get() = false
 }

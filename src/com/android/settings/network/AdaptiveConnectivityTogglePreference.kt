@@ -38,6 +38,9 @@ class AdaptiveConnectivityTogglePreference :
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.adaptive_connectivity_enabled_purpose
+
     override val title
         get() = R.string.adaptive_connectivity_main_switch_title
 

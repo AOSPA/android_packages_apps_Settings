@@ -79,7 +79,11 @@ class ButtonNavigationSettingsScreen : PreferenceScreenMixin {
     }
 
     class OrderPreferenceCategory :
-        PreferenceCategory("button_order_group", R.string.button_navigation_settings_order_title) {
+        PreferenceCategory(
+            key = "button_order_group",
+            purpose = R.string.button_order_group_purpose,
+            title = R.string.button_navigation_settings_order_title,
+        ) {
         override val keywords: Int
             get() =
                 if (com.android.settings.flags.Flags.catalystSettingsSearch())

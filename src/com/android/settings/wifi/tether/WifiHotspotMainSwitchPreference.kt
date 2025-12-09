@@ -32,6 +32,9 @@ class WifiHotspotMainSwitchPreference(private val wifiHotspotStore: KeyValueStor
     override val key
         get() = KEY
 
+    override val purpose
+        get() = R.string.use_wifi_hotspot_purpose
+
     override val title
         get() = R.string.use_wifi_hotsopt_main_switch_title
 

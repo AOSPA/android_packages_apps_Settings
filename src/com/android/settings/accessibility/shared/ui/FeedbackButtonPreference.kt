@@ -38,6 +38,9 @@ open class FeedbackButtonPreference(feedbackManagerProvider: () -> FeedbackManag
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.accessibility_color_and_motion_feedback_purpose
+
     override val title: Int
         get() = R.string.accessibility_send_feedback_title
 

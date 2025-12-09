@@ -29,7 +29,11 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.preference.SwitchPreferenceBinding
 
-class CameraFlashSwitchPreference : SwitchPreference(KEY, R.string.camera_flash_notification_title),
+class CameraFlashSwitchPreference : SwitchPreference(
+    KEY,
+    R.string.camera_flash_notification_purpose,
+    R.string.camera_flash_notification_title,
+),
     SwitchPreferenceBinding, PreferenceAvailabilityProvider {
 
     override fun storage(context: Context): KeyValueStore = SettingsSystemStore.get(context)

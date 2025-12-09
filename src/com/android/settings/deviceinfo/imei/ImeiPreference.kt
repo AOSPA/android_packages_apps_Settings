@@ -66,11 +66,13 @@ class ImeiPreference(
     override val key: String
         get() = KEY_PREFIX + "${index + 1}"
 
+    override val purpose: Int
+        get() = R.string.imei_info_purpose
+
     init {
         Log.d(TAG, "init index = " + index)
         TelephonyUtils.connectExtTelephonyService(context)
     }
-
     override fun isAvailable(context: Context): Boolean =
         context.isAdminUser == true &&
             (Utils.isMobileDataCapable(context) || Utils.isVoiceCapable(context))

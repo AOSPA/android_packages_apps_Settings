@@ -32,6 +32,9 @@ class HearingDevicesTopIntroPreference(
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.hearing_device_intro_purpose
+
     override val indexable
         get() = false
 

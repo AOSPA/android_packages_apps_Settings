@@ -496,6 +496,47 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
+    @EnableFlags(FLAG_ENABLE_2_AND_6_GHZ_HOTSPOT_SPEED)
+    public void setSpeedType_2g6g_wpa3TransitionAllowed_setsTransitionSecurity() {
+        // isWpa3TransitionAllowedFor2g6gDbs is set by the result of validateSoftApConfiguration
+        when(mWifiManager.validateSoftApConfiguration(any())).thenReturn(true);
+        mockConfig(SECURITY_TYPE_WPA2_PSK, SPEED_2GHZ_5GHZ, WIFI_PASSWORD);
+
+        mRepository.setSpeedType(SPEED_2GHZ_6GHZ);
+
+        verify(mWifiManager).setSoftApConfiguration(mSoftApConfigCaptor.capture());
+        assertThat(mSoftApConfigCaptor.getValue().getSecurityType())
+                .isEqualTo(SECURITY_TYPE_WPA3_SAE_TRANSITION);
+    }
+
+    @Test
+    @EnableFlags(FLAG_ENABLE_2_AND_6_GHZ_HOTSPOT_SPEED)
+    public void setSpeedType_2g6g_wpa3TransitionNotAllowed_setsSaeSecurity() {
+        // isWpa3TransitionAllowedFor2g6gDbs is set by the result of validateSoftApConfiguration
+        when(mWifiManager.validateSoftApConfiguration(any())).thenReturn(false);
+        mockConfig(SECURITY_TYPE_WPA2_PSK, SPEED_2GHZ_5GHZ, WIFI_PASSWORD);
+
+        mRepository.setSpeedType(SPEED_2GHZ_6GHZ);
+
+        verify(mWifiManager).setSoftApConfiguration(mSoftApConfigCaptor.capture());
+        assertThat(mSoftApConfigCaptor.getValue().getSecurityType())
+                .isEqualTo(SECURITY_TYPE_WPA3_SAE);
+    }
+
+    @Test
+    @EnableFlags(FLAG_ENABLE_2_AND_6_GHZ_HOTSPOT_SPEED)
+    public void setSpeedType_from2g6gTo2g5g_setsTransitionSecurity() {
+        mockConfigSpeedType(SPEED_2GHZ_6GHZ);
+        mRepository.mIsDualBand = true;
+
+        mRepository.setSpeedType(SPEED_2GHZ_5GHZ);
+
+        verify(mWifiManager).setSoftApConfiguration(mSoftApConfigCaptor.capture());
+        assertThat(mSoftApConfigCaptor.getValue().getSecurityType())
+                .isEqualTo(SECURITY_TYPE_WPA3_SAE_TRANSITION);
+    }
+
+    @Test
     public void updateSpeedType_only5gChannel_get5gSpeedType() {
         mRepository.mIsDualBand = false;
         SoftApConfiguration config = new SoftApConfiguration.Builder()
@@ -935,6 +976,9 @@ public class WifiHotspotRepositoryTest {
             configBuilder.setBands(bands);
         } else if (speedType == SPEED_6GHZ) {
             configBuilder.setBand(BAND_2GHZ_5GHZ_6GHZ);
+        } else if (speedType == SPEED_2GHZ_6GHZ) {
+            int[] bands = {BAND_2GHZ, BAND_2GHZ_5GHZ_6GHZ};
+            configBuilder.setBands(bands);
         }
         when(mWifiManager.getSoftApConfiguration()).thenReturn(configBuilder.build());
     }

@@ -31,6 +31,7 @@ import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -62,7 +63,6 @@ open class DoubleTapPowerScreen(context: Context) :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.gesture_double_tap_power_input_summary_purpose
 
@@ -149,6 +149,16 @@ open class DoubleTapPowerScreen(context: Context) :
             if (Flags.catalystMigration26q2()) {
                 if (!context.isNonLaunchWalletOrNonMultiTargetDoubleTap()) {
                     +DoubleTapPowerMainSwitchPreference()
+                    +PreferenceCategory(
+                        "gesture_double_tap_power_actions",
+                        R.string.gesture_double_tap_power_actions_purpose,
+                        R.string.double_tap_power_target_action_category,
+                    ) +=
+                        {
+                            val storage = DoubleTapPowerStorage(context)
+                            +DoubleTapPowerForCameraPreference(storage)
+                            +DoubleTapPowerForWalletPreference(storage)
+                        }
                 }
             }
         }

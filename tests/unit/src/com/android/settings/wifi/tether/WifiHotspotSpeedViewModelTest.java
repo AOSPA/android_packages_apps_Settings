@@ -42,6 +42,7 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.wifi.repository.WifiHotspotRepository;
 
@@ -103,22 +104,6 @@ public class WifiHotspotSpeedViewModelTest {
         verify(m5gAvailable).observeForever(mViewModel.m5gAvailableObserver);
         verify(m6gAvailable).observeForever(mViewModel.m6gAvailableObserver);
         verify(mWifiHotspotRepository).setAutoRefresh(true);
-    }
-
-    @Test
-    @UiThreadTest
-    public void constructor_supported6GHzBand_set6gVisible() {
-        assertThat(mViewModel.mSpeedInfo6g.mIsVisible).isTrue();
-    }
-
-    @Test
-    @UiThreadTest
-    public void constructor_notSupported6GHzBand_set6gVisible() {
-        when(mWifiHotspotRepository.is6GHzBandSupported()).thenReturn(false);
-
-        WifiHotspotSpeedViewModel viewModel = new WifiHotspotSpeedViewModel((Application) mContext);
-
-        assertThat(viewModel.mSpeedInfo6g.mIsVisible).isFalse();
     }
 
     @Test
@@ -207,7 +192,7 @@ public class WifiHotspotSpeedViewModelTest {
         mViewModel.on6gAvailableChanged(true);
 
         verify(mSpeedInfoMapData).setValue(mViewModel.mSpeedInfoMap);
-        assertThat(mViewModel.mSpeedInfoMap.get(SPEED_2GHZ_6GHZ).mIsVisible).isFalse();
+        assertThat(mViewModel.mSpeedInfoMap.containsKey(SPEED_2GHZ_6GHZ)).isFalse();
         assertThat(mViewModel.mSpeedInfoMap.get(SPEED_6GHZ).mIsVisible).isTrue();
     }
 
@@ -288,7 +273,9 @@ public class WifiHotspotSpeedViewModelTest {
         assertThat(mViewModel.mSpeedInfoMap.get(SPEED_5GHZ).mIsChecked).isFalse();
         assertThat(mViewModel.mSpeedInfoMap.get(SPEED_2GHZ_5GHZ).mIsChecked).isFalse();
         assertThat(mViewModel.mSpeedInfoMap.get(SPEED_6GHZ).mIsChecked).isFalse();
-        assertThat(mViewModel.mSpeedInfoMap.get(SPEED_2GHZ_6GHZ).mIsChecked).isFalse();
+        if (Flags.enable2And6GhzHotspotSpeed()) {
+            assertThat(mViewModel.mSpeedInfoMap.get(SPEED_2GHZ_6GHZ).mIsChecked).isFalse();
+        }
     }
 
     @Test
@@ -303,7 +290,9 @@ public class WifiHotspotSpeedViewModelTest {
         assertThat(mViewModel.mSpeedInfoMap.get(SPEED_5GHZ).mIsChecked).isTrue();
         assertThat(mViewModel.mSpeedInfoMap.get(SPEED_2GHZ_5GHZ).mIsChecked).isFalse();
         assertThat(mViewModel.mSpeedInfoMap.get(SPEED_6GHZ).mIsChecked).isFalse();
-        assertThat(mViewModel.mSpeedInfoMap.get(SPEED_2GHZ_6GHZ).mIsChecked).isFalse();
+        if (Flags.enable2And6GhzHotspotSpeed()) {
+            assertThat(mViewModel.mSpeedInfoMap.get(SPEED_2GHZ_6GHZ).mIsChecked).isFalse();
+        }
     }
 
     @Test
@@ -318,7 +307,9 @@ public class WifiHotspotSpeedViewModelTest {
         assertThat(mViewModel.mSpeedInfoMap.get(SPEED_5GHZ).mIsChecked).isFalse();
         assertThat(mViewModel.mSpeedInfoMap.get(SPEED_2GHZ_5GHZ).mIsChecked).isTrue();
         assertThat(mViewModel.mSpeedInfoMap.get(SPEED_6GHZ).mIsChecked).isFalse();
-        assertThat(mViewModel.mSpeedInfoMap.get(SPEED_2GHZ_6GHZ).mIsChecked).isFalse();
+        if (Flags.enable2And6GhzHotspotSpeed()) {
+            assertThat(mViewModel.mSpeedInfoMap.get(SPEED_2GHZ_6GHZ).mIsChecked).isFalse();
+        }
     }
 
     @Test
@@ -333,11 +324,14 @@ public class WifiHotspotSpeedViewModelTest {
         assertThat(mViewModel.mSpeedInfoMap.get(SPEED_5GHZ).mIsChecked).isFalse();
         assertThat(mViewModel.mSpeedInfoMap.get(SPEED_2GHZ_5GHZ).mIsChecked).isFalse();
         assertThat(mViewModel.mSpeedInfoMap.get(SPEED_6GHZ).mIsChecked).isTrue();
-        assertThat(mViewModel.mSpeedInfoMap.get(SPEED_2GHZ_6GHZ).mIsChecked).isFalse();
+        if (Flags.enable2And6GhzHotspotSpeed()) {
+            assertThat(mViewModel.mSpeedInfoMap.get(SPEED_2GHZ_6GHZ).mIsChecked).isFalse();
+        }
     }
 
     @Test
     @UiThreadTest
+    @EnableFlags(FLAG_ENABLE_2_AND_6_GHZ_HOTSPOT_SPEED)
     public void onSpeedTypeChanged_toSpeed2g6g_setLiveData2g6gChecked() {
         mViewModel.mSpeedInfo2g6g.mIsChecked = false;
 
@@ -370,9 +364,11 @@ public class WifiHotspotSpeedViewModelTest {
 
         verify(mWifiHotspotRepository).setSpeedType(SPEED_6GHZ);
 
-        mViewModel.setSpeedType(SPEED_2GHZ_6GHZ);
+        if (Flags.enable2And6GhzHotspotSpeed()) {
+            mViewModel.setSpeedType(SPEED_2GHZ_6GHZ);
 
-        verify(mWifiHotspotRepository).setSpeedType(SPEED_2GHZ_6GHZ);
+            verify(mWifiHotspotRepository).setSpeedType(SPEED_2GHZ_6GHZ);
+        }
     }
 
     @Test

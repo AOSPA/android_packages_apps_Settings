@@ -25,9 +25,10 @@ import com.android.settingslib.metadata.SwitchPreference
 
 class AmbientWallpaperPreference(context: Context) :
     SwitchPreference(
-        KEY,
-        R.string.doze_always_on_wallpaper_title,
-        R.string.doze_always_on_wallpaper_description,
+        key = KEY,
+        purpose = R.string.doze_always_on_wallpaper_enabled_purpose,
+        title = R.string.doze_always_on_wallpaper_title,
+        summary = R.string.doze_always_on_wallpaper_description,
     ) {
 
     private val dataStore = context.dataStore
