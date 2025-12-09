@@ -302,12 +302,14 @@ class SupervisionDashboardScreenTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onCreate_registersListener() {
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
         verify(mockSupervisionManager).registerSupervisionListener(any())
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onDestroy_unregistersListener() {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
@@ -315,6 +317,27 @@ class SupervisionDashboardScreenTest {
         verify(mockSupervisionManager).registerSupervisionListener(listenerCaptor.capture())
 
         preferenceScreenCreator.onDestroy(mockLifeCycleContext)
+        verify(mockSupervisionManager).unregisterSupervisionListener(listenerCaptor.firstValue)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onResume_registersListener() {
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onResume(mockLifeCycleContext)
+        verify(mockSupervisionManager).registerSupervisionListener(any())
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onPause_unregistersListener() {
+        val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
+
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onResume(mockLifeCycleContext)
+        verify(mockSupervisionManager).registerSupervisionListener(listenerCaptor.capture())
+
+        preferenceScreenCreator.onPause(mockLifeCycleContext)
         verify(mockSupervisionManager).unregisterSupervisionListener(listenerCaptor.firstValue)
     }
 
@@ -354,6 +377,7 @@ class SupervisionDashboardScreenTest {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onResume(mockLifeCycleContext)
         verify(mockSupervisionManager).registerSupervisionListener(listenerCaptor.capture())
 
         listenerCaptor.firstValue.onSupervisionDisabled(0 /* userId */)
@@ -369,6 +393,7 @@ class SupervisionDashboardScreenTest {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onResume(mockLifeCycleContext)
         verify(mockSupervisionManager).registerSupervisionListener(listenerCaptor.capture())
 
         listenerCaptor.firstValue.onSupervisionEnabled(0 /* userId */)
