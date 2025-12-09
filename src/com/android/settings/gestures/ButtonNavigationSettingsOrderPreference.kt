@@ -84,6 +84,9 @@ class DefaultButtonNavigationSettingsOrderPreference(store: ButtonNavigationSett
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.navbar_order_preference_default_purpose
+
     override val icons
         get() =
             listOf(
@@ -109,6 +112,9 @@ class ReverseButtonNavigationSettingsOrderPreference(store: ButtonNavigationSett
     ButtonNavigationSettingsOrderPreference(store) {
     override val key
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.navbar_order_preference_reverse_purpose
 
     override val icons
         get() =

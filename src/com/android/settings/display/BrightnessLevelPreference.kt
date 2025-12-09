@@ -66,6 +66,9 @@ class BrightnessLevelPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.brightness_purpose
+
     override val title: Int
         get() = R.string.brightness
 

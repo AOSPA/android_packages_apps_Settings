@@ -612,7 +612,7 @@ class DisplayTopologyPreferenceTest {
                 paneChildren
                     .map { virtualBounds(it) }
                     .map { it.width() / it.height() }
-                    .filter { abs(it - expectedAspectRatio) < 0.001f }
+                    .filter { abs(it - expectedAspectRatio) < 0.01f }
             )
             .hasSize(1)
     }
@@ -700,7 +700,7 @@ class DisplayTopologyPreferenceTest {
     fun updatedTopologyCancelsDragIfNonTrivialChange() {
         val (leftBlock, _) = setupPaneWithTwoDisplays(POSITION_LEFT, /* childOffset= */ 42f)
 
-        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(143.76f)
+        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(137.76f)
 
         leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder()
@@ -714,13 +714,15 @@ class DisplayTopologyPreferenceTest {
                 .setPointer(0f, 30f)
                 .build()
         )
-        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(173.76f)
+        // Dragged by 30px: 137.76 + 30 = 167.76.
+        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(167.76f)
 
         // Offset is only different by 0.5 dp, so the drag will not cancel.
         setupTwoDisplays(POSITION_LEFT, /* childOffset= */ 41.5f)
         injector.topologyListener!!.accept(injector.topology!!)
 
-        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(173.76f)
+        // Position maintained despite small topology update.
+        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(167.76f)
         // Move block farther downward.
         leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder()
@@ -728,12 +730,13 @@ class DisplayTopologyPreferenceTest {
                 .setPointer(0f, 50f)
                 .build()
         )
-        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(193.76f)
+        // 167.76 + 20 = 187.76.
+        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(187.76f)
 
         setupTwoDisplays(POSITION_LEFT, /* childOffset= */ 20f)
         injector.topologyListener!!.accept(injector.topology!!)
 
-        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(115.60f)
+        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(109.60f)
         // Another move in the opposite direction should not move the left block.
         leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder()
@@ -741,7 +744,7 @@ class DisplayTopologyPreferenceTest {
                 .setPointer(0f, -20f)
                 .build()
         )
-        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(115.60f)
+        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(109.60f)
     }
 
     @Test

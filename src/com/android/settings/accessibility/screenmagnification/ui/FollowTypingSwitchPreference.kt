@@ -31,6 +31,7 @@ import com.android.settingslib.metadata.SwitchPreference
 class FollowTypingSwitchPreference :
     SwitchPreference(
         KEY,
+        R.string.accessibility_magnification_follow_typing_enabled_purpose,
         R.string.accessibility_screen_magnification_follow_typing_title,
         R.string.accessibility_screen_magnification_follow_typing_summary,
     ),

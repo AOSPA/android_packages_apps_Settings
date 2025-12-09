@@ -49,7 +49,7 @@ import org.robolectric.annotation.Config
 abstract class VibrationIntensitySliderPreferenceTestCase {
     protected abstract val hasRingerModeDependency: Boolean
     protected abstract val preference: VibrationIntensitySliderPreference
-    protected val mainSwitchPreference = VibrationMainSwitchPreference("some_key")
+    protected val mainSwitchPreference = VibrationMainSwitchPreference("some_key", 0)
 
     protected val resourcesSpy: Resources =
         spy(ApplicationProvider.getApplicationContext<Context>().resources)

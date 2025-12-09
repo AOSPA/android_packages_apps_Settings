@@ -46,6 +46,9 @@ class DarkModeSchedulePreference(
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.dark_ui_auto_mode_purpose
+
     override val keywords: Int
         get() = R.string.keywords_dark_ui_mode
 

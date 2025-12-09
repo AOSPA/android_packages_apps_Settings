@@ -310,6 +310,11 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         @Override
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+            if (mCheckBox != null && getResources().getBoolean(
+                    R.bool.config_hide_pattern_security_option)) {
+                mCheckBox.setVisibility(View.GONE);
+                mCheckBox.setChecked(false);
+            }
             if (mRemoteValidation) {
                 if (mCheckBox != null) {
                     mCheckBox.setText(TextUtils.isEmpty(mCheckBoxLabel)

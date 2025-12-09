@@ -56,6 +56,9 @@ class SupervisionUpdateRecoveryEmailPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.supervision_update_recovery_email_purpose
+
     override val preferenceActionMetrics: Int
         get() = ACTION_SUPERVISION_UPDATE_RECOVERY
 

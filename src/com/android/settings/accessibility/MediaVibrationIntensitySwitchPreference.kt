@@ -26,11 +26,13 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 class MediaVibrationIntensitySwitchPreference(
     context: Context,
     key: String,
+    purpose: Int,
     mainSwitchPreferenceKey: String,
 ) :
     VibrationIntensitySwitchPreference(
         context = context,
         key = key,
+        purpose = purpose,
         settingsProviderKey = MEDIA_VIBRATION_INTENSITY,
         mainSwitchPreferenceKey = mainSwitchPreferenceKey,
         vibrationUsage = VibrationAttributes.USAGE_MEDIA,

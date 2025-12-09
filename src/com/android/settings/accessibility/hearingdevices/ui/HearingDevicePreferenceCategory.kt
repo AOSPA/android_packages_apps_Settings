@@ -28,8 +28,8 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceCategoryBinding
 
-abstract class HearingDevicePreferenceCategory(key: String, title: Int) :
-    PreferenceCategory(key, title),
+abstract class HearingDevicePreferenceCategory(key: String, purpose: Int, title: Int) :
+    PreferenceCategory(key, purpose, title),
     PreferenceCategoryBinding,
     PreferenceAvailabilityProvider,
     PreferenceLifecycleProvider,

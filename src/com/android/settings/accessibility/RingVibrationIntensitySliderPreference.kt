@@ -26,6 +26,7 @@ class RingVibrationIntensitySliderPreference(context: Context) :
     VibrationIntensitySliderPreference(
         context = context,
         key = KEY,
+        purpose = R.string.ring_vibration_intensity_purpose,
         vibrationUsage = VibrationAttributes.USAGE_RINGTONE,
         title = R.string.accessibility_ring_vibration_title,
     ) {

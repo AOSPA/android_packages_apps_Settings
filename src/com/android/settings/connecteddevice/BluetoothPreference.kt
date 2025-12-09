@@ -64,6 +64,9 @@ class BluetoothPreference(private val bluetoothDataStore: BluetoothDataStore) :
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.use_bluetooth_purpose
+
     override val title
         get() = R.string.bluetooth_main_switch_title
 

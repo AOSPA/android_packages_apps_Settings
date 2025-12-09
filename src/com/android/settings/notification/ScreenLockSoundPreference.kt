@@ -30,7 +30,11 @@ import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
 class ScreenLockSoundPreference :
-    SwitchPreference(KEY, R.string.screen_locking_sounds_title),
+    SwitchPreference(
+        key = KEY,
+        purpose = R.string.lockscreen_sounds_enabled_purpose,
+        title = R.string.screen_locking_sounds_title
+    ),
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider {
     override val preferenceActionMetrics: Int

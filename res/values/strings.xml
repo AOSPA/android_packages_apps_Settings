@@ -4451,6 +4451,17 @@
     <!-- Search keywords for the time zone notification category / section in Date & Time settings. [CHAR_LIMIT=NONE] -->
     <string name="keywords_time_notification_category">notification, time, zone, timezone</string>
 
+    <!-- Date&Time settings screen, title of the time zone offset change notification toggle. [CHAR LIMIT=50] -->
+    <string name="time_zone_offset_change_notification_toggle_title">Scheduled clock change</string>
+    <!-- Date&Time settings screen, summary of the time zone offset change notification toggle [CHAR_LIMIT=NONE] -->
+    <string name="time_zone_offset_change_notification_toggle_summary">Receive a notification when your clock performs a scheduled change, for example for daylight saving time</string>
+    <!-- Keywords for the time zone offset change notification toggle. [CHAR_LIMIT=NONE] -->
+    <string name="keywords_time_zone_offset_change_notification_category">dst, daylight saving time, daylight savings, clock change, scheduled clock change</string>
+    <!-- Footer for time zone offset change. [CHAR LIMIT=NONE] -->
+    <string name="footer_time_zone_offset_change_next_change">Next change</string>
+    <!-- Footer for time zone offset change when there is no scheduled change. [CHAR LIMIT=NONE] -->
+    <string name="footer_time_zone_offset_change_no_next_change">No scheduled changes</string>
+
     <!-- Main settings screen, setting summary for the user to go into the About phone screen-->
     <string name="about_settings_summary">View legal info, status, software version</string>
     <!-- About phone settings screen, setting option name to go to dialog that shows legal info -->
@@ -6987,6 +6998,8 @@
     <string name="battery_advance_info_profile_result_2"></string>
     <string name="battery_advance_info_profile_result_3"></string>
     <string name="battery_advance_info_profile_result_4"></string>
+    <!-- Text for battery advance info learn more link [CHAR LIMIT=NONE] -->
+    <string name="battery_advance_info_learn_more"></string>
 
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="battery_details_title">App battery usage</string>
@@ -15284,6 +15297,8 @@
         }</string>
     <!-- Floating text for supported apps entry point icon, which displays the number of remaining supported apps. [CHAR LIMIT=10] -->
     <string name="supervision_remaining_supported_apps_count">+<xliff:g id="count" example="2">%d</xliff:g></string>
+    <!-- Title for learn more link button. [CHAR LIMIT=NONE]-->
+    <string name="supervision_web_content_filters_learn_more_title">Learn more</string>
     <!-- Title for web content filters footer. [CHAR LIMIT=NONE]-->
     <string name="supervision_web_content_filters_footer_title">When these settings are off, other account settings may still apply.</string>
     <!-- Learn more link for web content filters footer. [CHAR LIMIT=NONE]-->
@@ -15322,6 +15337,8 @@
     <string name="supervision_delete_button_label">Delete</string>
     <!-- Message on the can't delete pin dialog that shows the role holders requiring the PIN [CHAR_LIMIT=NONE] -->
     <string name="supervision_cant_delete_pin_multiple_role_holders_message">Your parental controls PIN is being used by:\n\n<xliff:g id="role_holder_bullet_list">%1$s</xliff:g></string>
+    <!-- Message on the can't delete pin dialog that says that the PIN is being used by another user on the device [CHAR_LIMIT=NONE] -->
+    <string name="supervision_cant_delete_pin_in_use_message">Your parental controls PIN is active for another user</string>
     <!-- Learn more link for device supervision PIN. [CHAR LIMIT=NONE]-->
     <string name="supervision_pin_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_pin</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>

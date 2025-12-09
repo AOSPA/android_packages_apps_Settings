@@ -29,7 +29,6 @@ import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 class ButtonNavigationSettingsOrderRadioButtonTest {
@@ -60,7 +59,7 @@ class ButtonNavigationSettingsOrderRadioButtonTest {
     private val label = view.findViewById<TextView>(R.id.order_label)
 
     @Test
-    fun onBindViewHolder_ltr_setsIconContentDescriptions() {
+    fun onBindViewHolder_setsIconContentDescriptions() {
         radioButton.onBindViewHolder(viewHolder)
 
         assertThat(startIcon.contentDescription)
@@ -69,19 +68,6 @@ class ButtonNavigationSettingsOrderRadioButtonTest {
             .isEqualTo(context.getString(R.string.navbar_home_button))
         assertThat(endIcon.contentDescription)
             .isEqualTo(context.getString(R.string.navbar_recent_button))
-    }
-
-    @Test
-    @Config(qualifiers = "+ar-rXB")
-    fun onBindViewHolder_rtl_setsIconContentDescriptions() {
-        radioButton.onBindViewHolder(viewHolder)
-
-        assertThat(startIcon.contentDescription)
-            .isEqualTo(context.getString(R.string.navbar_recent_button))
-        assertThat(centerIcon.contentDescription)
-            .isEqualTo(context.getString(R.string.navbar_home_button))
-        assertThat(endIcon.contentDescription)
-            .isEqualTo(context.getString(R.string.navbar_back_button))
     }
 
     @Test

@@ -262,6 +262,8 @@ public class LocationProviderStatusPreferenceControllerTest {
                 .setConfigureGeoDetectionEnabledCapability(configureGeoDetectionEnabledCapability)
                 .setSetManualTimeZoneCapability(Capabilities.CAPABILITY_POSSESSED)
                 .setConfigureNotificationsEnabledCapability(Capabilities.CAPABILITY_POSSESSED)
+                .setConfigureTimeZoneOffsetChangeNotificationsEnabledCapability(
+                        Capabilities.CAPABILITY_POSSESSED)
                 .build();
 
         return new TimeZoneCapabilitiesAndConfig(status, capabilities,

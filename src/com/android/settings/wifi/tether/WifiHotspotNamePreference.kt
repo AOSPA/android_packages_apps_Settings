@@ -71,6 +71,9 @@ class WifiHotspotNamePreference(
     override val key
         get() = KEY
 
+    override val purpose
+        get() = R.string.wifi_tether_network_name_purpose
+
     override val title: Int
         get() = R.string.wifi_hotspot_name_title
 

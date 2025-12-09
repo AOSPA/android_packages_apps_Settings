@@ -72,6 +72,9 @@ class WifiDataUsagePreference(context: Context):
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.non_carrier_data_usage_purpose
+
     override val title
         get() = R.string.non_carrier_data_usage
 

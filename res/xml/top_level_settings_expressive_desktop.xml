@@ -83,15 +83,6 @@
             android:summary="@string/notification_dashboard_summary"
             settings:highlightableMenuKey="@string/menu_key_notifications"/>
 
-        <com.android.settings.widget.HomepagePreference
-            android:fragment="com.android.settings.notification.SoundSettings"
-            android:icon="@drawable/ic_homepage_sound"
-            android:key="top_level_sound"
-            android:order="-40"
-            android:title="@string/sound_settings"
-            android:summary="@string/sound_dashboard_summary"
-            settings:highlightableMenuKey="@string/menu_key_sound" />
-
         <com.android.settings.widget.RestrictedHomepagePreference
             android:fragment="com.android.settings.notification.modes.ZenModesListFragment"
             android:icon="@drawable/ic_homepage_modes"
@@ -112,15 +103,6 @@
             settings:highlightableMenuKey="@string/menu_key_communal"
             settings:controller="com.android.settings.communal.CommunalPreferenceController"/>
 
-        <com.android.settings.widget.HomepagePreference
-            android:fragment="com.android.settings.DisplaySettings"
-            android:icon="@drawable/ic_homepage_display"
-            android:key="top_level_display"
-            android:order="-20"
-            android:title="@string/display_settings"
-            android:summary="@string/display_dashboard_summary"
-            settings:highlightableMenuKey="@string/menu_key_display"
-            settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
 
         <com.android.settings.widget.RestrictedHomepagePreference
             android:icon="@drawable/ic_homepage_wallpaper"

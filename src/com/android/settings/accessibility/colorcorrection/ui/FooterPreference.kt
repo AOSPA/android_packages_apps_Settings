@@ -31,6 +31,9 @@ class FooterPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.daltonizer_preference_html_description_purpose
+
     override fun getTitle(context: Context): CharSequence? =
         Html.fromHtml(
             context.getString(

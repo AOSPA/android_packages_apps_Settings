@@ -76,8 +76,9 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
                 +DarkModeScreenOnAccessibility.KEY
                 +BlurSwitchPreference()
                 +PreferenceCategory(
-                    "experimental_category",
-                    R.string.experimental_category_title,
+                    key = "experimental_category",
+                    purpose = R.string.experimental_category_purpose,
+                    title = R.string.experimental_category_title,
                 ) +=
                     {
                         +ColorCorrectionScreen.KEY

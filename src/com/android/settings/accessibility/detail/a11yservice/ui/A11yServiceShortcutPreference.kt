@@ -53,6 +53,7 @@ class A11yServiceShortcutPreference(
     AccessibilityShortcutPreference(
         context = context,
         key = KEY,
+        purpose = R.string.service_shortcut_purpose,
         componentName = serviceInfo.componentName,
         metricsCategory = metricCategory,
     ),

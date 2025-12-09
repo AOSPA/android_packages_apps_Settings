@@ -159,19 +159,27 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                 +SupervisionRecoveryBannerPreference() order -250
                 +NonIndexablePreferenceCategory(
                     SUPERVISION_DYNAMIC_GROUP_1,
+                    R.string.supervision_features_group_1_purpose,
                     R.string.device_supervision_features_title,
                 ) order -100
-                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2) order 10 += {
+                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2,
+                R.string.supervision_dynamic_group_2) order 10 += {
                     +SupervisionAppStoreFiltersScreen.KEY order -100
                     +SupervisionWebContentFiltersScreen.KEY order -50
                 }
             } else {
                 +SupervisionMainSwitchPreference(context, supervisionClient) order -200
-                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
+                +UntitledPreferenceCategoryMetadata(
+                    key = SUPERVISION_DYNAMIC_GROUP_1,
+                    purpose = R.string.supervision_features_group_1_purpose,
+                ) order -100 += {
                     +SupervisionWebContentFiltersScreen.KEY order 100
                 }
             }
-            +UntitledPreferenceCategoryMetadata("pin_management_group") order 100 += {
+            +UntitledPreferenceCategoryMetadata(
+                key = "pin_management_group",
+                purpose = R.string.pin_management_group_purpose,
+            ) order 100 += {
                 if (Flags.enableSupervisionSettingsUiUpdates()) {
                     +SupervisionSetUpPinPreference() order 5
                 }
@@ -180,10 +188,12 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
             if (Flags.enableSupervisionSettingsUiUpdates()) {
                 +NonIndexablePreferenceCategory(
                     ACTIVE_SUPERVISION_APPS_GROUP,
+                    R.string.active_supervision_apps_group_purpose,
                     R.string.supervision_apps_managing_this_device_title,
                 ) order 200
                 +AutoHidingPreferenceCategory(
                     AVAILABLE_SUPERVISION_APPS_GROUP,
+                    R.string.available_supervision_apps_group_purpose,
                     R.string.supervision_available_apps_title,
                 ) order 300 +=
                     {
@@ -191,7 +201,10 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                     }
                 +SupervisionAocFooterPreference(supervisionClient) order 400
             } else {
-                +UntitledPreferenceCategoryMetadata("footer_group") order 300 += {
+                +UntitledPreferenceCategoryMetadata(
+                    key = "footer_group",
+                    purpose = R.string.footer_group_purpose,
+                ) order 300 += {
                     +SupervisionPromoFooterPreference(supervisionClient) order 30
                     +SupervisionAocFooterPreference(supervisionClient) order 40
                 }

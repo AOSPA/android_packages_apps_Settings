@@ -69,13 +69,14 @@ abstract class BaseTextReadingScreen : PreferenceScreenMixin {
 
             +PreferenceCategory(
                 key = "display_text_size",
+                purpose = R.string.display_text_size_purpose,
                 title = R.string.category_title_display_text_size,
             ) +=
                 {
                     +fontSizePreference
                     +displaySizePreference
                 }
-            +PreferenceCategory(key = "text_style", title = R.string.category_title_text_style) += {
+            +PreferenceCategory(key = "text_style", purpose = R.string.text_style_purpose, title = R.string.category_title_text_style) += {
                 +BoldTextPreference(context, entryPoint)
                 +OutlineTextPreference(context, entryPoint)
             }

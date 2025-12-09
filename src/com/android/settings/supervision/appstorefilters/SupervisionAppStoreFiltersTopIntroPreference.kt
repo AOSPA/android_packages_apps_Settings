@@ -25,6 +25,9 @@ class SupervisionAppStoreFiltersTopIntroPreference : PreferenceMetadata, Prefere
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.supervision_app_store_filters_intro_purpose
+
     override val title: Int
         get() = R.string.supervision_app_store_filters_top_intro
 

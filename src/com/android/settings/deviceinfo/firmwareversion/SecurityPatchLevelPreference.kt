@@ -40,6 +40,9 @@ class SecurityPatchLevelPreference :
     override val key: String
         get() = "security_key"
 
+    override val purpose: Int
+        get() = R.string.security_key_purpose
+
     override val title: Int
         get() = R.string.security_patch
 

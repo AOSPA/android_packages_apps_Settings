@@ -25,11 +25,13 @@ import com.android.settings.R
 class TouchVibrationIntensitySwitchPreference(
     context: Context,
     key: String,
+    purpose: Int,
     mainSwitchPreferenceKey: String,
 ) :
     VibrationIntensitySwitchPreference(
         context = context,
         key = key,
+        purpose = purpose,
         settingsProviderKey = HAPTIC_FEEDBACK_INTENSITY,
         mainSwitchPreferenceKey = mainSwitchPreferenceKey,
         vibrationUsage = VibrationAttributes.USAGE_TOUCH,

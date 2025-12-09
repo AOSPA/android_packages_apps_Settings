@@ -76,6 +76,9 @@ class SeparateRingVolumePreference(private val audioHelper: AudioHelper) :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.separate_ring_volume_purpose
+
     override val title: Int
         get() = R.string.separate_ring_volume_option_title
 

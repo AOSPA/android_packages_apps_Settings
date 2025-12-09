@@ -20,6 +20,6 @@ class NotificationVibrationIntensitySwitchPreferenceTest :
     VibrationIntensitySwitchPreferenceTestCase() {
     override val hasRingerModeDependency = true
     override val preference =
-        NotificationVibrationIntensitySwitchPreference(context, "key", "main_key")
+        NotificationVibrationIntensitySwitchPreference(context, "key", 0, "main_key")
 }
 // LINT.ThenChange(NotificationVibrationTogglePreferenceControllerTest.java)

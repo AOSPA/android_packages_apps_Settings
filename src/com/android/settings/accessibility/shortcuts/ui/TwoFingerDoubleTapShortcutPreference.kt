@@ -36,6 +36,9 @@ class TwoFingerDoubleTapShortcutPreference(context: Context, targets: Set<String
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.shortcut_two_finger_double_tap_pref_purpose
+
     override fun getTitle(context: Context): CharSequence? {
         return context.getString(
             R.string.accessibility_shortcut_edit_screen_title_two_finger_double_tap,

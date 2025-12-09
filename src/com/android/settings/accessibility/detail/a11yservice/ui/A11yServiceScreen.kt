@@ -209,6 +209,7 @@ private constructor(
             +UseServicePreference(context, serviceInfo, metricsCategory)
             +PreferenceCategory(
                 key = "general_categories",
+                purpose = R.string.general_categories_purpose,
                 title = R.string.accessibility_screen_option,
             ) +=
                 {
@@ -216,11 +217,12 @@ private constructor(
                     +A11yServiceSettingPreference(serviceInfo)
                     +LaunchAppInfoPreference(
                         key = "accessibility_service_app_info",
+                        purpose = R.string.accessibility_service_app_info_purpose,
                         packageName = serviceInfo.componentName.packageName,
                     )
                 }
-            +A11yServiceFooterPreference(HTML_FOOTER_KEY, serviceInfo, loadHtmlFooter = true)
-            +A11yServiceFooterPreference(FOOTER_KEY, serviceInfo, loadHtmlFooter = false)
+            +A11yServiceFooterPreference(HTML_FOOTER_KEY, purpose = R.string.a11y_service_detail_screen_html_footer_info_purpose, serviceInfo, loadHtmlFooter = true)
+            +A11yServiceFooterPreference(FOOTER_KEY, purpose = R.string.a11y_service_detail_screen_footer_info_purpose, serviceInfo, loadHtmlFooter = false)
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent {

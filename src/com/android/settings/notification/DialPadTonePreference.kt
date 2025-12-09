@@ -30,7 +30,11 @@ import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
 class DialPadTonePreference :
-    SwitchPreference(DTMF_TONE_WHEN_DIALING, R.string.dial_pad_tones_title),
+    SwitchPreference(
+        key = DTMF_TONE_WHEN_DIALING,
+        purpose = R.string.dtmf_tone_purpose,
+        title = R.string.dial_pad_tones_title
+    ),
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider {
     override val preferenceActionMetrics: Int

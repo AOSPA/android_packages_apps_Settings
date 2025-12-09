@@ -26,6 +26,9 @@ class AmbientDisplayMainSwitchPreference : BooleanValuePreference, MainSwitchPre
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.ambient_display_always_on_key_purpose
+
     override val title
         get() = R.string.doze_always_on_title2
 

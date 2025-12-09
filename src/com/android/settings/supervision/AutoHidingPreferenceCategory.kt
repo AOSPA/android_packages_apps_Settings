@@ -22,8 +22,8 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
 
 /** A [PreferenceCategory] that is visible only if at least one of its children is visible. */
-class AutoHidingPreferenceCategory(key: String, title: Int) :
-    com.android.settingslib.metadata.PreferenceCategory(key, title), PreferenceBinding {
+class AutoHidingPreferenceCategory(key: String, purpose: Int, title: Int) :
+    com.android.settingslib.metadata.PreferenceCategory(key, purpose, title), PreferenceBinding {
 
     override fun createWidget(context: Context) = PreferenceCategory(context)
 

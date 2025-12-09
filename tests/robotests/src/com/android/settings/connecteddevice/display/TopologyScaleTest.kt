@@ -16,7 +16,6 @@
 
 package com.android.settings.connecteddevice.display
 
-import android.graphics.Point
 import android.graphics.PointF
 import android.graphics.RectF
 import kotlin.math.abs
@@ -29,7 +28,7 @@ import org.robolectric.RobolectricTestRunner
 // in a small way and we don't want to re-compile and re-test for *every* individual float.
 fun assertPointF(comparisons: List<Pair<PointF, PointF>>, delta: Float) {
     val errors = StringBuilder()
-    comparisons.forEachIndexed {i, (a, b) ->
+    comparisons.forEachIndexed { i, (a, b) ->
         if (abs(b.x - a.x) > delta) {
             errors.append("x value at index $i - ${a.x} != ${b.x}\n")
         }
@@ -44,119 +43,181 @@ fun assertPointF(comparisons: List<Pair<PointF, PointF>>, delta: Float) {
 class TopologyScaleTest {
     @Test
     fun oneDisplay4to3Aspect() {
-        val scale = TopologyScale(
-                paneWidth = 640, minEdgeLength = 48f, maxEdgeLength = 64f,
-                listOf(RectF(0f, 0f, 640f, 480f)))
+        val scale =
+            TopologyScale(
+                paneWidth = 640,
+                minEdgeLength = 48f,
+                maxEdgeLength = 64f,
+                listOf(RectF(0f, 0f, 640f, 480f)),
+            )
 
-        // blockRatio is is set in order to make the smallest display edge (480 dp) 48dp
-        // in the pane.
+        // blockRatio is is set in order to make the smallest display edge (480 dp) 48dp in the pane
+        // Ratio=0.1 (minEdge/minDim=48/480). Height=Ratio*480 + 3.5*48 = 48+168 = 216.
         assertEquals(
-                "{TopologyScale blockRatio=0.100000 originPaneXY=288.0,72.0 paneHeight=192.0}",
-                "" + scale)
+            "{TopologyScale blockRatio=0.100000 originPaneXY=288.0,84.0 paneHeight=216.0}",
+            "" + scale,
+        )
 
         assertPointF(
             listOf(
-                PointF(352f, 120f) to scale.displayToPaneCoor(640f, 480f),
-                PointF(320f, 96f) to scale.displayToPaneCoor(320f, 240f),
-                PointF(640f, 240f) to scale.paneToDisplayCoor(352f, 96f),
+                // x: 640*0.1 + 288 = 352. y: 480*0.1 + 84 = 132.
+                PointF(352f, 132f) to scale.displayToPaneCoor(640f, 480f),
+                // x: 320*0.1 + 288 = 320. y: 240*0.1 + 84 = 108.
+                PointF(320f, 108f) to scale.displayToPaneCoor(320f, 240f),
+                // x: (352-288)/0.1 = 640. y: (96-84)/0.1 = 120.
+                PointF(640f, 120f) to scale.paneToDisplayCoor(352f, 96f),
             ),
-            0.001f)
+            0.001f,
+        )
     }
 
     @Test
     fun twoUnalignedDisplays() {
-        val scale = TopologyScale(
-                paneWidth = 300, minEdgeLength = 48f, maxEdgeLength = 96f,
-                listOf(RectF(0f, 0f, 1920f, 1200f), RectF(1920f, -300f, 3840f, 900f)))
+        val scale =
+            TopologyScale(
+                paneWidth = 300,
+                minEdgeLength = 48f,
+                maxEdgeLength = 96f,
+                listOf(RectF(0f, 0f, 1920f, 1200f), RectF(1920f, -300f, 3840f, 900f)),
+            )
 
+        // Ratio=(300 * 0.6) / 3840 = 0.046875. Height=0.046875*1500 + 3.5*48 = 70.3125 + 168 =
+        // 238.3125.
         assertEquals(
-                "{TopologyScale blockRatio=0.046875 originPaneXY=60.0,86.1 paneHeight=214.3}",
-                "" + scale)
+            "{TopologyScale blockRatio=0.046875 originPaneXY=60.0,98.1 paneHeight=238.3}",
+            "" + scale,
+        )
 
         assertPointF(
             listOf(
-                PointF(78.75f, 104.8125f) to scale.displayToPaneCoor(400f, 400f),
-                PointF(41.25f, 86.0625f) to scale.displayToPaneCoor(-400f, 0f),
-                PointF(-384f, -940f) to scale.paneToDisplayCoor(42f, 42f),
-            ), 0.001f)
+                // x: 400 * 0.046875 + 60 = 18.75 + 60 = 78.75
+                // y: 400 * 0.046875 + 98.0625 = 18.75 + 98.0625 = 116.8125
+                PointF(78.75f, 116.8125f) to scale.displayToPaneCoor(400f, 400f),
+                // x: -400 * 0.046875 + 60 = -18.75 + 60 = 41.25
+                // y: 0 * 0.046875 + 98.0625 = 98.0625
+                PointF(41.25f, 98.0625f) to scale.displayToPaneCoor(-400f, 0f),
+                // x: (42 - 60) / 0.046875 = -18 / 0.046875 = -384
+                // y: (42 - 98.0625) / 0.046875 = -56.0625 / 0.046875 = -1196
+                PointF(-384f, -1196f) to scale.paneToDisplayCoor(42f, 42f),
+            ),
+            0.001f,
+        )
     }
 
     @Test
     fun twoDisplaysBlockRatioBumpedForGarSizeMinimumHorizontal() {
-        val scale = TopologyScale(
-                paneWidth = 192, minEdgeLength = 48f, maxEdgeLength = 64f,
-                listOf(RectF(0f, 0f, 240f, 320f), RectF(-240f, -320f, 0f, 0f)))
+        val scale =
+            TopologyScale(
+                paneWidth = 192,
+                minEdgeLength = 48f,
+                maxEdgeLength = 64f,
+                listOf(RectF(0f, 0f, 240f, 320f), RectF(-240f, -320f, 0f, 0f)),
+            )
 
         // blockRatio is higher than 0.05 in order to make the smallest display edge (240 dp) 48dp
         // in the pane.
+        // Ratio=0.2 (minEdge/minDim=48/240). Height=0.2*640 + 3.5*48 = 128+168 = 296.
         assertEquals(
-                "{TopologyScale blockRatio=0.200000 originPaneXY=96.0,136.0 paneHeight=272.0}",
-                "" + scale)
+            "{TopologyScale blockRatio=0.200000 originPaneXY=96.0,148.0 paneHeight=296.0}",
+            "" + scale,
+        )
 
         assertPointF(
             listOf(
-                PointF(192f, 264f) to scale.displayToPaneCoor(480f, 640f),
-                PointF(96f, 72f) to scale.displayToPaneCoor(0f, -320f),
-                PointF(220f, -470f) to scale.paneToDisplayCoor(140f, 42f),
-            ), 0.001f)
+                // x: 480*0.2 + 96 = 192. y: 640*0.2 + 148 = 276.
+                PointF(192f, 276f) to scale.displayToPaneCoor(480f, 640f),
+                // x: 0*0.2 + 96 = 96. y: -320*0.2 + 148 = 84.
+                PointF(96f, 84f) to scale.displayToPaneCoor(0f, -320f),
+                // x: (140-96)/0.2 = 220. y: (42-148)/0.2 = -530.
+                PointF(220f, -530f) to scale.paneToDisplayCoor(140f, 42f),
+            ),
+            0.001f,
+        )
     }
 
     @Test
     fun paneVerticalPaddingSetByMinEdgeLength() {
-        val scale = TopologyScale(
-                paneWidth = 300, minEdgeLength = 48f, maxEdgeLength = 80f,
+        val scale =
+            TopologyScale(
+                paneWidth = 300,
+                minEdgeLength = 48f,
+                maxEdgeLength = 80f,
                 listOf(
-                        RectF(0f, 0f, 640f, 480f),
-                        RectF(0f, 480f, 640f, 960f),
-                        RectF(0f, 960f, 640f, 1440f),
-                        RectF(0f, 1440f, 640f, 1920f),
-                        RectF(0f, 1920f, 640f, 2400f),
-                        RectF(0f, 2400f, 640f, 2880f)))
+                    RectF(0f, 0f, 640f, 480f),
+                    RectF(0f, 480f, 640f, 960f),
+                    RectF(0f, 960f, 640f, 1440f),
+                    RectF(0f, 1440f, 640f, 1920f),
+                    RectF(0f, 1920f, 640f, 2400f),
+                    RectF(0f, 2400f, 640f, 2880f),
+                ),
+            )
 
+        // Ratio=0.125 (maxEdge/maxDim=80/640). Height=0.125*2880 + 3.5*48 = 360+168 = 528.
         assertEquals(
-                "{TopologyScale blockRatio=0.125000 originPaneXY=110.0,72.0 paneHeight=504.0}",
-                "" + scale)
+            "{TopologyScale blockRatio=0.125000 originPaneXY=110.0,84.0 paneHeight=528.0}",
+            "" + scale,
+        )
         assertPointF(
             listOf(
-                PointF(150f, 72f) to scale.displayToPaneCoor(320f, 0f),
-                PointF(-80f, 2112f) to scale.paneToDisplayCoor(100f, 336f),
-            ), 0.001f)
+                // x: 320*0.125 + 110 = 150. y: 0*0.125 + 84 = 84.
+                PointF(150f, 84f) to scale.displayToPaneCoor(320f, 0f),
+                // x: (100-110)/0.125 = -80. y: (336-84)/0.125 = 2016.
+                PointF(-80f, 2016f) to scale.paneToDisplayCoor(100f, 336f),
+            ),
+            0.001f,
+        )
     }
 
     @Test
     fun limitedByCustomMaxBlockRatio() {
-        val scale = TopologyScale(
-                paneWidth = 300, minEdgeLength = 24f, maxEdgeLength = 77f,
-                listOf(
-                        RectF(0f, 0f, 640f, 480f),
-                        RectF(0f, 480f, 640f, 960f)))
+        val scale =
+            TopologyScale(
+                paneWidth = 300,
+                minEdgeLength = 24f,
+                maxEdgeLength = 77f,
+                listOf(RectF(0f, 0f, 640f, 480f), RectF(0f, 480f, 640f, 960f)),
+            )
 
+        // Ratio=0.1203125 (77/640). Height=Ratio*960 + 3.5*24 = 115.5+84 = 199.5.
         assertEquals(
-                "{TopologyScale blockRatio=0.120312 originPaneXY=111.5,36.0 paneHeight=187.5}",
-                "" + scale)
+            "{TopologyScale blockRatio=0.120312 originPaneXY=111.5,42.0 paneHeight=199.5}",
+            "" + scale,
+        )
         assertPointF(
             listOf(
-                PointF(150f, 36.0f) to scale.displayToPaneCoor(320f, 0f),
-                PointF(-95.58442f, 2493.5066f) to scale.paneToDisplayCoor(100f, 336f),
-            ), 0.001f)
+                // x: 320*Ratio + 111.5 = 150. y: 0 + 42 = 42.
+                PointF(150f, 42.0f) to scale.displayToPaneCoor(320f, 0f),
+                // x: (100-111.5)/Ratio = -95.58... y: (336-42)/Ratio = 2443.636...
+                PointF(-95.58442f, 2443.6364f) to scale.paneToDisplayCoor(100f, 336f),
+            ),
+            0.001f,
+        )
     }
 
     @Test
     fun largeCustomMinEdgeLength() {
         // minBlockEdgeLength/minDisplayEdgeLength = 80/480 = 1/6, so the block ratio will be 1/6
-        val scale = TopologyScale(
-                paneWidth = 300, minEdgeLength = 80f, maxEdgeLength = 100f,
-                listOf(
-                        RectF(0f, 0f, 640f, 480f),
-                        RectF(0f, 480f, 640f, 960f)))
+        val scale =
+            TopologyScale(
+                paneWidth = 300,
+                minEdgeLength = 80f,
+                maxEdgeLength = 100f,
+                listOf(RectF(0f, 0f, 640f, 480f), RectF(0f, 480f, 640f, 960f)),
+            )
 
+        // Ratio=1/6. Height=(1/6)*960 + 3.5*80 = 160 + 280 = 440.
         assertEquals(
-                "{TopologyScale blockRatio=0.166667 originPaneXY=96.7,120.0 paneHeight=400.0}",
-                "" + scale)
+            "{TopologyScale blockRatio=0.166667 originPaneXY=96.7,140.0 paneHeight=440.0}",
+            "" + scale,
+        )
         assertPointF(
             listOf(
-                PointF(150f, 120f) to scale.displayToPaneCoor(320f, 0f),
-                PointF(20f, 1296f) to scale.paneToDisplayCoor(100f, 336f),
-            ), 0.001f)
+                // x: 320*(1/6) + 96.666 = 150. y: 0 + 140 = 140.
+                PointF(150f, 140f) to scale.displayToPaneCoor(320f, 0f),
+                // x: (100-96.666)*6 = 20. y: (336-140)*6 = 1176.
+                PointF(20f, 1176f) to scale.paneToDisplayCoor(100f, 336f),
+            ),
+            0.001f,
+        )
     }
 }

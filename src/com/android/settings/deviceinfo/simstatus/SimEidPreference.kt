@@ -52,6 +52,9 @@ class SimEidPreference(private val context: Context) :
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.eid_info_purpose
+
     override fun isAvailable(context: Context): Boolean =
         context.applicationContext.getSystemService(UserManager::class.java)?.isAdminUser == true &&
             (Utils.isMobileDataCapable(context) || Utils.isVoiceCapable(context)) &&

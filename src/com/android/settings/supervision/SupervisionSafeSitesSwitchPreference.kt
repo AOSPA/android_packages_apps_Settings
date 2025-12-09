@@ -44,7 +44,10 @@ import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /** Web content filters browser filter preference. */
 class SupervisionSafeSitesSwitchPreference(protected val dataStore: SupervisionSafeSitesDataStore) :
-    SwitchPreference(KEY),
+    SwitchPreference(
+        key = KEY,
+        purpose = R.string.web_content_filters_browser_filter_purpose,
+    ),
     SwitchPreferenceBinding,
     Preference.OnPreferenceChangeListener,
     PreferenceLifecycleProvider {

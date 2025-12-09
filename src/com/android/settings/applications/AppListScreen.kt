@@ -55,6 +55,9 @@ abstract class AppListScreen :
         override val key
             get() = "no_app"
 
+        override val purpose: Int
+            get() = R.string.no_app_purpose
+
         override val title
             get() = R.string.no_applications
 

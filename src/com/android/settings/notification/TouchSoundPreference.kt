@@ -38,7 +38,11 @@ import kotlinx.coroutines.launch
 
 // LINT.IfChange
 class TouchSoundPreference(context: Context) :
-    SwitchPreference(KEY, R.string.touch_sounds_title),
+    SwitchPreference(
+        KEY,
+        purpose = R.string.sound_effects_enabled_purpose,
+        R.string.touch_sounds_title
+    ),
     SwitchPreferenceBinding,
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider {

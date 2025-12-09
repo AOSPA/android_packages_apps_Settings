@@ -92,6 +92,9 @@ public class DateTimeSettings extends DashboardFragment implements
         use(TimeZoneNotificationsPreferenceController.class)
                 .registerIn(
                         notificationsPreferenceCategoryController);
+        use(TimeZoneOffsetChangeNotificationsPreferenceController.class)
+                .registerIn(
+                        notificationsPreferenceCategoryController);
     }
 
     @Override
