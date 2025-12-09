@@ -28,7 +28,13 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import android.provider.SearchIndexableResource;
+
+import com.android.settings.utils.DesktopSettingsUtils;
 import com.android.settingslib.search.SearchIndexable;
+
+import java.util.Arrays;
+import java.util.List;
 
 // LINT.IfChange
 @SearchIndexable
@@ -59,7 +65,7 @@ public class SystemDashboardFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.system_dashboard_fragment;
+        return getResId(getContext());
     }
 
     @Override
@@ -85,10 +91,26 @@ public class SystemDashboardFragment extends DashboardFragment {
         return SystemDashboardScreen.KEY;
     }
 
+    private static int getResId(Context context) {
+        if (DesktopSettingsUtils.shouldShowTopLevelDeviceCategory(context)) {
+            return R.xml.system_dashboard_fragment_desktop;
+        }
+
+        return R.xml.system_dashboard_fragment;
+    }
+
     /**
      * For Search.
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.system_dashboard_fragment);
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = getResId(context);
+                    return Arrays.asList(sir);
+                }
+            };
 }
 // LINT.ThenChange(SystemDashboardScreen.kt)

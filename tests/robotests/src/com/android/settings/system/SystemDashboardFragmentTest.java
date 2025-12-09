@@ -24,7 +24,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowDesktopSettingsUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.After;
@@ -38,7 +40,11 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {SettingsShadowResources.class, ShadowUserManager.class})
+@Config(shadows = {
+        SettingsShadowResources.class,
+        ShadowUserManager.class,
+        ShadowDesktopSettingsUtils.class
+})
 public class SystemDashboardFragmentTest {
 
     private Context mContext;
@@ -63,10 +69,25 @@ public class SystemDashboardFragmentTest {
     public void testNonIndexableKeys_existInXmlLayout() {
         final List<String> niks = SystemDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext);
-        final int xmlId = (new SystemDashboardFragment()).getPreferenceScreenResId();
+        final int xmlId = mFragment.getPreferenceScreenResId();
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
 
         assertThat(keys).containsAtLeastElementsIn(niks);
+    }
+
+    @Test
+    public void getPreferenceScreenResId_shouldShowDeviceCategoryFalse_returnsFragmentXml() {
+        ShadowDesktopSettingsUtils.setShouldShow(false);
+
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.system_dashboard_fragment);
+    }
+
+    @Test
+    public void getPreferenceScreenResId_shouldShowDeviceCategoryTrue_returnsDesktopXml() {
+        ShadowDesktopSettingsUtils.setShouldShow(true);
+
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
+                R.xml.system_dashboard_fragment_desktop);
     }
 }
