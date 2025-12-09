@@ -248,13 +248,14 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     /** Update the resolution image according display mode. */
     private void updateIllustrationImage(IllustrationPreference preference) {
         String key = getDefaultKey();
-
         if (TextUtils.equals(
                 mScreenResolutionOptions[ScreenResolutionController.HIGHRESOLUTION_IDX], key)) {
-            preference.setLottieAnimationResId(R.drawable.screen_resolution_high);
+            preference.setLottieAnimationResId(R.raw.lottie_screen_resolution_high);
+            preference.applyDynamicColor();
         } else if (TextUtils.equals(
                 mScreenResolutionOptions[ScreenResolutionController.FULLRESOLUTION_IDX], key)) {
-            preference.setLottieAnimationResId(R.drawable.screen_resolution_full);
+            preference.setLottieAnimationResId(R.raw.lottie_screen_resolution_full);
+            preference.applyDynamicColor();
         }
     }
 
