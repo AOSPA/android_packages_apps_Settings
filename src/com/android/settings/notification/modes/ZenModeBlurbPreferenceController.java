@@ -24,6 +24,7 @@ import static android.app.AutomaticZenRule.TYPE_SCHEDULE_CALENDAR;
 import static android.app.AutomaticZenRule.TYPE_SCHEDULE_TIME;
 import static android.app.AutomaticZenRule.TYPE_THEATER;
 import static android.app.AutomaticZenRule.TYPE_TRANSIT;
+import static android.app.Flags.modesUiTransit;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -67,7 +68,8 @@ class ZenModeBlurbPreferenceController extends AbstractZenModePreferenceControll
                 case TYPE_IMMERSIVE -> R.string.zen_mode_blurb_immersive;
                 case TYPE_THEATER -> R.string.zen_mode_blurb_theater;
                 case TYPE_MANAGED -> R.string.zen_mode_blurb_managed;
-                case TYPE_TRANSIT -> R.string.zen_mode_blurb_transit;
+                case TYPE_TRANSIT -> modesUiTransit() ? R.string.zen_mode_blurb_transit :
+                        R.string.zen_mode_blurb_generic;
                 default -> R.string.zen_mode_blurb_generic; // Including OTHER, UNKNOWN.
             };
         }
