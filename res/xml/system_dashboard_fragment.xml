@@ -97,14 +97,21 @@
             android:summary="@string/mouse_settings_summary"
             android:icon="@drawable/ic_settings_mouse"
             android:fragment="com.android.settings.inputmethod.MouseSettingFragment"
-            settings:controller="com.android.settings.inputmethod.MouseSettingsController"/>
+            settings:controller="com.android.settings.inputmethod.MouseSettingsController" />
+
+        <Preference
+            android:key="game_controller_settings"
+            android:title="@string/game_controller_settings_title"
+            android:icon="@drawable/ic_default_controller"
+            android:fragment="com.android.settings.input.gamecontroller.GameControllerListFragment"
+            settings:controller="com.android.settings.input.gamecontroller.GameControllerSettingsController" />
 
         <Preference
             android:key="gesture_settings"
             android:title="@string/gesture_preference_title"
             android:icon="@drawable/ic_settings_gestures"
             android:fragment="com.android.settings.gestures.GestureSettings"
-            settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController"/>
+            settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController" />
 
         <SwitchPreferenceCompat
             android:key="search_gesture_press_hold"
