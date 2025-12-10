@@ -17,7 +17,6 @@
 package com.android.settings.notification.modes;
 
 import android.app.Application;
-import android.app.Flags;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -168,17 +167,16 @@ public class ZenModeAddBypassingAppsPreferenceController extends AbstractPrefere
 
         Map<Integer, Set<String>> packagesByUser = new HashMap<>();
         Map<Integer, Map<String, Boolean>> packagesBypassingDndByUser = new HashMap<>();
-        if (Flags.nmBinderPerfGetAppsWithChannels()) {
-            if (mHelperBackend == null || mUserManager == null) {
-                return;
-            }
-            for (UserHandle userHandle : mUserManager.getUserProfiles()) {
-                int userId = userHandle.getIdentifier();
-                packagesByUser.put(userId, mNotificationBackend.getPackagesWithAnyChannels(userId));
-                packagesBypassingDndByUser.put(userId,
-                        mHelperBackend.getPackagesBypassingDnd(userId));
-            }
+        if (mHelperBackend == null || mUserManager == null) {
+            return;
         }
+        for (UserHandle userHandle : mUserManager.getUserProfiles()) {
+            int userId = userHandle.getIdentifier();
+            packagesByUser.put(userId, mNotificationBackend.getPackagesWithAnyChannels(userId));
+            packagesBypassingDndByUser.put(userId,
+                    mHelperBackend.getPackagesBypassingDnd(userId));
+        }
+
         boolean doAnyAppsPassCriteria = false;
         for (ApplicationsState.AppEntry app : apps) {
             String pkg = app.info.packageName;
@@ -186,20 +184,12 @@ public class ZenModeAddBypassingAppsPreferenceController extends AbstractPrefere
             int userId = UserHandle.getUserId(app.info.uid);
 
             boolean doesAppBypassDnd, doesAppHaveAnyChannels;
-            if (Flags.nmBinderPerfGetAppsWithChannels()) {
-                Set<String> packagesWithChannels = packagesByUser.getOrDefault(userId,
-                        Collections.EMPTY_SET);
-                Map<String, Boolean> packagesBypassingDnd =
-                        packagesBypassingDndByUser.getOrDefault(userId, new HashMap<>());
-                doesAppBypassDnd = packagesBypassingDnd.containsKey(pkg);
-                doesAppHaveAnyChannels = packagesWithChannels.contains(pkg);
-            } else {
-                final int appChannels = mNotificationBackend.getChannelCount(pkg, app.info.uid);
-                final int appChannelsBypassingDnd = mNotificationBackend
-                        .getNotificationChannelsBypassingDnd(pkg, app.info.uid).getList().size();
-                doesAppBypassDnd = (appChannelsBypassingDnd != 0);
-                doesAppHaveAnyChannels = (appChannels > 0);
-            }
+            Set<String> packagesWithChannels = packagesByUser.getOrDefault(userId,
+                    Collections.EMPTY_SET);
+            Map<String, Boolean> packagesBypassingDnd =
+                    packagesBypassingDndByUser.getOrDefault(userId, new HashMap<>());
+            doesAppBypassDnd = packagesBypassingDnd.containsKey(pkg);
+            doesAppHaveAnyChannels = packagesWithChannels.contains(pkg);
 
             if (!doesAppBypassDnd && doesAppHaveAnyChannels) {
                 doAnyAppsPassCriteria = true;
