@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Privremeno je onemogućeno zbog uštede baterije"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Koristi režim slabog osvetljenja"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Odaberite šta će se prikazivati u režimu slabog osvetljenja"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Ekran je isključen"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Slabo osvetljen sat"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"Uključeno / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"Isključeno"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"Ekran će se isključiti kada je okruženje tamno"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"Slabo osvetljen sat će se prikazivati kada je okruženje tamno"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Ambijentalni ekran"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Kada da se prikazuje"</string>
@@ -1885,6 +1883,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Promena vremenske zone"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Dobijte obaveštenje kada se vremenska zona automatski ažurira"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"obaveštenje, vreme, zona, vremenska zona"</string>
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Zakazana promena sata"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Dobijte obaveštenje kada sat obavi zakazanu promenu, na primer, na letnje računanje vremena"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"letnje računanje vremena, letnje vreme, promena sata, zakazana promena sata"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Sledeća promena"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Nema zakazanih promena"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Pregled pravnih informacija, statusa, verzije softvera"</string>
     <string name="legal_information" msgid="7509900979811934843">"Pravne informacije"</string>
     <string name="manual" msgid="3651593989906084868">"Uputstvo"</string>
@@ -2333,8 +2336,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Nedavne aplikacije"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Obaveštenja"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Brza podešavanja"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"Napomena"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Odaberite prečicu za <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"donji levi ugao"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"donji desni ugao"</string>
@@ -2974,6 +2976,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Potrošnja baterije za aplikacije"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Korišćenje detalja"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Prilagođavanje korišćenja napajanja"</string>
@@ -3681,7 +3684,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Klonirano je"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Pravi se klon paketa <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Napravljen je klon paketa <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"Jezici, pokreti, vreme, rezervne kopije"</string>
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Jezici, pokreti, vreme"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Jezici sistema, jezici aplikacija, regionalna podešavanja, govor"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, veza sa mrežom, internet, bežično, podaci, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi obaveštenje, wifi obaveštenje"</string>
@@ -3933,10 +3936,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Aplikacije"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmi i drugi prekidi"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Trajanje za Brza podešavanja"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"Sinhronizacija režima Ne uznemiravaj"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"Sinhronizujte podešavanja režima Ne uznemiravaj sa povezanim uređajima"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Zvukovi za poslovni profil"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Koristi zvukove ličnog profila"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Koristi iste zvukove kao lični profil"</string>
@@ -4901,16 +4902,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Obrnite kameru da biste snimili selfi"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Režim navigacije"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"Ažurirajte uređaj"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"Interakcija"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"Automatizacija i inteligencija"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"Upravljajte sistemom"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"Upravljajte podacima"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navigacija pomoću 2 dugmeta"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Da biste prešli sa jedne aplikacije na drugu, prevucite nagore na dugmetu Početak. Da biste videli sve aplikacije, ponovo prevucite nagore. Da biste se vratili, dodirnite dugme Nazad."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"Obaveštenja i Brza podešavanja"</string>
@@ -5178,8 +5174,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Eksperimentalno: Omogući ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Upozorenje: Omogućava ANGLE kao podrazumevani OpenGL ES upravljački program. Ova funkcija je u eksperimentalnoj fazi i možda nije kompatibilna sa nekim aplikacijama za kameru i video snimke."</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Morate da restartujete da biste promenili OpenGL ES upravljački program sistema"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Upozorenje: Omogućava ANGLE kao podrazumevani OpenGL ES upravljački program. Ova funkcija je u eksperimentalnoj fazi i možda nije kompatibilna sa nekim aplikacijama za kameru i video snimke. Napravite rezervnu kopiju podataka sa uređaja pre nego što uključite prekidač"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"Morate da restartujete da biste promenili OpenGL ES upravljački program sistema. Napravite rezervnu kopiju podataka sa uređaja pre restartovanja. Ako restartovanje nije uspelo, treba da resetujete uređaj na fabrička podešavanja da biste ga vratili u prethodno stanje"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Promene kompatibilnosti aplikacije"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Uključite/isključite promene kompatibilnosti aplikacije"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Podrazumevane omogućene promene"</string>
@@ -6067,6 +6063,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtriraj eksplicitne rezultate pretrage"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{# aplikacija}one{# aplikacija}few{# aplikacije}other{# aplikacija}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Kada su ova podešavanja isključena, i dalje mogu da važe druga podešavanja naloga."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Unesite PIN za roditeljski nadzor"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Podesite PIN za roditeljski nadzor"</string>
@@ -6084,6 +6082,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Izbriši PIN i isključi kontrole"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Izbriši"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"PIN za roditeljski nadzor koristi:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animacija za: <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Uključivanje kontrola nije uspelo"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Ne možete da koristite kontrole"</string>

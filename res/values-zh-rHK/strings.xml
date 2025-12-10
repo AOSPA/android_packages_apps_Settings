@@ -343,7 +343,7 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"使用<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>。<xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g>將從 <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>開始。"</string>
-    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"使用 <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>。沒有日光節約時間。"</string>
+    <string name="zone_info_footer_no_dst" msgid="4328558145064330111">"使用<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>。沒有日光節約時間。"</string>
     <string name="zone_time_type_dst" msgid="5959023322756665929">"日光節約時間"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"標準時間"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"按地區選取"</string>
@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"因「省電模式」而暫時停用"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"使用「弱光模式」"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"選擇在「弱光模式」下顯示的內容"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"關閉螢幕"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"弱光時鐘"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"開啟/<xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"關閉"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"螢幕會在環境昏暗時關閉"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"系統會在環境昏暗時顯示「弱光時鐘」"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"微光螢幕"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"何時顯示"</string>
@@ -1885,6 +1883,16 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"變更時區"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"在時區自動更新時接收通知"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"通知, 時間, 時區"</string>
+    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
+    <skip />
+    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
+    <skip />
+    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
+    <skip />
     <string name="about_settings_summary" msgid="4831942939227432513">"查看法律資訊、狀態、軟件版本"</string>
     <string name="legal_information" msgid="7509900979811934843">"法律資訊"</string>
     <string name="manual" msgid="3651593989906084868">"手動"</string>
@@ -2333,8 +2341,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"最近使用的應用程式"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"通知"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"快速設定"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"附註"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"選擇<xliff:g id="CORNER">%1$s</xliff:g>的捷徑"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"左下角"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"右下角"</string>
@@ -2974,6 +2981,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"應用程式電池用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"詳細使用狀況"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"調整電力使用"</string>
@@ -3681,7 +3689,8 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"已複製"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"正在複製「<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>」"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"已複製「<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>」"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"語言、手勢、時間、備份"</string>
+    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
+    <skip />
     <string name="languages_setting_summary" msgid="2650807397396180351">"系統語言、應用程式語言、地區偏好設定、語音"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"Wifi, Wi-Fi, 網絡連線, 互聯網, 無線, 數據, Wifi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi 通知, wifi 通知"</string>
@@ -3933,10 +3942,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"應用程式"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"鬧鐘和其他干擾"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"「快速設定」持續時間"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"請勿騷擾同步"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"將請勿騷擾設定同步至已連接裝置"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"工作設定檔音效"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"使用個人設定檔音效"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"使用與個人設定檔相同的音效"</string>
@@ -4470,7 +4477,7 @@
     <string name="permissions_usage_summary" msgid="6784310472062516454">"顯示最近曾使用權限的應用程式"</string>
     <string name="unused_apps" msgid="4566272194756830656">"不使用的應用程式"</string>
     <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{# 個未使用的應用程式}other{# 個未使用的應用程式}}"</string>
-    <string name="unused_apps_category" msgid="8954930958175500851">"不使用的應用程式設定"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"未使用的應用程式設定"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"暫停未使用應用程式的活動"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"移除權限、刪除暫存檔案和停止通知"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"管理不使用的應用程式"</string>
@@ -4901,16 +4908,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"反轉相機自拍"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"導覽模式"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"更新裝置"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"互動"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"自動化操作和智能"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"系統管理"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"管理資料"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"雙按鈕導覽"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"如要切換應用程式，請從主按鈕向上滑動。如要查看所有應用程式，請再次向上滑動。如要返回，請輕按 [返回] 按鈕。"</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"通知和「快速設定」"</string>
@@ -5178,8 +5180,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"實驗功能：啟用 ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"警告：啟用 ANGLE 作為預設 OpenGL ES 驅動程式。此功能目前處於實驗階段，可能與部分相機和影片應用程式不兼容。"</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"你需要重新開機，才能變更 OpenGL ES 驅動程式"</string>
+    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"應用程式兼容性變更"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"切換應用程式兼容性變更"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"預設為啟用的變更"</string>
@@ -6066,6 +6070,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"過濾露骨色情的搜尋結果"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{已在 # 個應用程式開啟}other{已在 # 個應用程式開啟}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"關閉這些設定後，其他帳戶設定可能仍然有效。"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"輸入家長監控設定 PIN"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"設定家長監控設定 PIN"</string>
@@ -6083,6 +6089,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"刪除 PIN 並關閉監控設定"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"刪除"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"以下使用者正在使用你的家長監控 PIN：\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>動畫"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"無法開啟控制項"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"無法使用控制項"</string>

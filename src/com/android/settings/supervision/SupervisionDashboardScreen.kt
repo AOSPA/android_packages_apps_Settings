@@ -81,12 +81,17 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
         if (isContainer(context)) {
             this.lifeCycleContext = context
             supervisionManager = context.getSystemService(SupervisionManager::class.java)
-            supervisionManager?.registerSupervisionListener(supervisionListener)
+            if (!Flags.enableSupervisionSettingsUiUpdates()) {
+                supervisionManager?.registerSupervisionListener(supervisionListener)
+            }
         }
     }
 
     override fun onResume(context: PreferenceLifecycleContext) {
         if (Flags.enableSupervisionSettingsUiUpdates()) {
+            if (isContainer(context)) {
+                supervisionManager?.registerSupervisionListener(supervisionListener)
+            }
             var supervisionAppCount = 0
             val supervisionAppsGroup =
                 context.findPreference<PreferenceGroup>(ACTIVE_SUPERVISION_APPS_GROUP)?.apply {
@@ -110,12 +115,18 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
         }
     }
 
+    override fun onPause(context: PreferenceLifecycleContext) {
+        if (Flags.enableSupervisionSettingsUiUpdates() && isContainer(context)) {
+            supervisionManager?.unregisterSupervisionListener(supervisionListener)
+        }
+    }
+
     override fun isFlagEnabled(context: Context) = Flags.enableSupervisionSettingsScreen()
 
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.top_level_supervision_purpose
 
@@ -144,7 +155,9 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
     override fun onDestroy(context: PreferenceLifecycleContext) {
         if (isContainer(context)) {
             supervisionClient?.close()
-            supervisionManager?.unregisterSupervisionListener(supervisionListener)
+            if (!Flags.enableSupervisionSettingsUiUpdates()) {
+                supervisionManager?.unregisterSupervisionListener(supervisionListener)
+            }
             this.lifeCycleContext = null
             this.supervisionManager = null
         }

@@ -1253,7 +1253,7 @@
     <string name="wifi_save" msgid="2312643132472226807">"സംരക്ഷിക്കുക"</string>
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"നെറ്റ്‌വർക്ക് സംരക്ഷിക്കുന്നതിൽ പരാജയപ്പെട്ടു"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"റദ്ദാക്കുക"</string>
-    <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"നെറ്റ്‌വർക്ക് മറന്നോ?"</string>
+    <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"നെറ്റ്‌വർക്ക് മറക്കണോ?"</string>
     <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"ഈ ഉപകരണത്തിലെ എല്ലാ ഉപയോക്താക്കൾക്കും <xliff:g id="NETWORK_NAME">%1$s</xliff:g> നീക്കം ചെയ്യും"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{ഒരു നെറ്റ്‌വർക്ക്}other{# നെറ്റ്‌വർക്കുകൾ}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{ഒരു സബ്‌സ്‌ക്രിപ്‌ഷൻ}other{# സബ്‌സ്‌ക്രിപ്ഷനുകൾ}}"</string>
@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"ബാറ്ററി സേവർ കാരണം തൽക്കാലം പ്രവർത്തനരഹിതമാണ്"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"ലോ ലൈറ്റ് മോഡ് ഉപയോഗിക്കുക"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"ലോ ലൈറ്റ് മോഡിൽ കാണിക്കേണ്ടത് എന്താണെന്ന് തിരഞ്ഞെടുക്കുക"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"സ്‌ക്രീൻ ഓഫാണ്"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"ലോ ലൈറ്റ് ക്ലോക്ക്"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"ഓണാണ് / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"ഓഫാണ്"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"ചുറ്റുപാടും ഇരുട്ടാകുമ്പോൾ സ്ക്രീൻ ഓഫാകും"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"ചുറ്റുപാടും ഇരുട്ടാകുമ്പോൾ ക്ലോക്ക്, ലോ ലൈറ്റ് മോഡിലാകും"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"പാതിമയക്ക ഡിസ്‌പ്ലേ"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"കാണിക്കേണ്ട സമയം"</string>
@@ -1885,6 +1883,16 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"സമയമേഖലയിലെ മാറ്റം"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"നിങ്ങളുടെ സമയമേഖല സ്വയമേവ അപ്‌ഡേറ്റ് ചെയ്യുമ്പോൾ അറിയിപ്പ് നേടുക"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"അറിയിപ്പ്, സമയം, മേഖല, സമയമേഖല"</string>
+    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
+    <skip />
+    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
+    <skip />
+    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
+    <skip />
     <string name="about_settings_summary" msgid="4831942939227432513">"നിയമ വിവരം, നില, സോഫ്‌റ്റ്‌വെയർ പതിപ്പ് എന്നിവ കാണുക"</string>
     <string name="legal_information" msgid="7509900979811934843">"നിയമപരമായ വിവരങ്ങൾ"</string>
     <string name="manual" msgid="3651593989906084868">"മാനുവൽ"</string>
@@ -2333,8 +2341,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"അടുത്തിടെ ഉപയോഗിച്ച ആപ്പുകൾ"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"അറിയിപ്പുകൾ"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"ദ്രുത ക്രമീകരണം"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"കുറിപ്പ്"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g> എന്നതിനുള്ള കുറുക്കുവഴി തിരഞ്ഞെടുക്കുക"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"താഴെ ഇടത് മൂല"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"താഴെ വലത് മൂല"</string>
@@ -2974,6 +2981,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"ആപ്പിന്റെ ബാറ്ററി ഉപയോഗം"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"വിശദാംശം ഉപയോഗിക്കൂ"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"പവർ ഉപയോഗം ക്രമീകരിക്കുക"</string>
@@ -3681,7 +3689,8 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"ക്ലോൺ ചെയ്തു"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> ക്ലോൺ സൃഷ്‌ടിക്കുന്നു"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> ക്ലോൺ സൃഷ്‌ടിച്ചു"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"ഭാഷകൾ, ജെസ്ച്ചറുകൾ, സമയം, ബാക്കപ്പ്"</string>
+    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
+    <skip />
     <string name="languages_setting_summary" msgid="2650807397396180351">"സിസ്റ്റം ഭാഷകൾ, ആപ്പ് ഭാഷകൾ, പ്രാദേശിക മുൻഗണനകൾ, സംഭാഷണം"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"വൈഫൈ, വൈ-ഫൈ, നെറ്റ്‌വർക്ക് കണക്ഷൻ, ഇന്റർനെറ്റ്, വയർലെസ്സ്, ഡാറ്റ, വൈ ഫൈ"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"വൈഫൈ അറിയിപ്പ്, വൈഫൈ അറിയിപ്പ്"</string>
@@ -3933,10 +3942,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"ആപ്പുകൾ"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"അലാറങ്ങളും മറ്റ് തടസ്സങ്ങളും"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"ദ്രുത ക്രമീകരണത്തിന്റെ സമയ ദൈർഘ്യം"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"\'ശല്യപ്പെടുത്തരുത്\' സമന്വയിപ്പിക്കൽ"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"കണക്റ്റ് ചെയ്ത ഉപകരണങ്ങളിലേക്ക് \'ശല്യപ്പെടുത്തരുത്\' ക്രമീകരണം സമന്വയിപ്പിക്കുക"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"ഔദ്യോഗിക പ്രൊഫൈൽ ശബ്ദങ്ങൾ"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"വ്യക്തിപര പ്രൊഫൈൽ ശബ്ദങ്ങൾ ഉപയോഗിക്കുക"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"നിങ്ങളുടെ വ്യക്തിപര പ്രൊഫൈൽ ഉപയോഗിക്കുന്ന അതേ ശബ്‌ദങ്ങൾ ഉപയോഗിക്കുക"</string>
@@ -4901,16 +4908,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"സെൽഫിക്ക് ക്യാമറ ഫ്ലിപ്പ് ചെയ്യുക"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"നാവിഗേഷൻ മോഡ്"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"ഉപകരണം അപ്‌ഡേറ്റ് ചെയ്യുക"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"ഇടപഴകൽ"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"ഓട്ടോമേഷനും ഇന്റലിജൻസും"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"സിസ്‌റ്റം മാനേജ്മെന്റ്"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"ഡാറ്റ മാനേജ് ചെയ്യുക"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"2-ബട്ടൺ നാവിഗേഷൻ"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"ആപ്പുകൾ മാറാൻ ഹോം ബട്ടണിൽ മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക. എല്ലാ ആപ്പുകളും കാണാൻ മുകളിലേക്ക് വീണ്ടും സ്വൈപ്പ് ചെയ്യുക. തിരികെ പോകാൻ \'മടങ്ങുക\' ബട്ടൺ ടാപ്പ് ചെയ്യുക."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"അറിയിപ്പുകളും ദ്രുത ക്രമീകരണവും"</string>
@@ -5178,8 +5180,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"പരീക്ഷണാത്മകം: ആംഗിൾ പ്രവർത്തനക്ഷമമാക്കുക"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"മുന്നറിയിപ്പ്: ഡിഫോൾട്ട് OpenGL ES ഡ്രൈവറായി ആംഗിൾ പ്രവർത്തനക്ഷമമാക്കുക. ഈ ഫീച്ചർ പരീക്ഷണത്തിലാണ്, ചില ക്യാമറ, വീഡിയോ ആപ്പുകളുമായി ഇത് അനുയോജ്യമല്ലായിരിക്കാം."</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"സിസ്റ്റം OpenGL ES ഡ്രൈവർ മാറ്റാൻ റീബൂട്ട് ചെയ്യേണ്ടതുണ്ട്"</string>
+    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"ആപ്പ് അനുയോജ്യതാ മാറ്റങ്ങൾ"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"ആപ്പ് അനുയോജ്യതാ മാറ്റങ്ങൾ ടോഗിൾ ചെയ്യുക"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"ഡിഫോൾട്ട് ആയ, പ്രവർത്തനക്ഷമമാക്കിയ മാറ്റങ്ങൾ"</string>
@@ -6066,6 +6070,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"പ്രായപൂർത്തിയായവർക്കുള്ള തിരയൽ ഫലങ്ങൾ ഫിൽട്ടർ ചെയ്യുക"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{# ആപ്പിൽ}other{# ആപ്പുകളിൽ}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"ഈ ക്രമീകരണം ഓഫായിരിക്കുമ്പോഴും, മറ്റ് അക്കൗണ്ട് ക്രമീകരണം തുടർന്നും ബാധകമായേക്കാം."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"രക്ഷാകർതൃ നിയന്ത്രണങ്ങളുടെ പിൻ നൽകുക"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"ഒരു രക്ഷാകർതൃ നിയന്ത്രണ പിൻ സജ്ജീകരിക്കുക"</string>
@@ -6083,6 +6089,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"പിൻ ഇല്ലാതാക്കി നിയന്ത്രണങ്ങൾ ഓഫാക്കുക"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"ഇല്ലാതാക്കുക"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"നിങ്ങളുടെ രക്ഷാകർതൃ നിയന്ത്രണങ്ങളുടെ പിൻ ഇനിപ്പറയുന്നവർ ഉപയോഗിക്കുന്നു:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> ആനിമേഷൻ"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"നിയന്ത്രണങ്ങൾ ഓണാക്കാനാകില്ല"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"നിയന്ത്രണങ്ങൾ ഉപയോഗിക്കാനാകില്ല"</string>
