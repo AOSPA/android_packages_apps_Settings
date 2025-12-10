@@ -26,7 +26,6 @@ import androidx.preference.PreferenceScreen
 import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.internal.accessibility.common.ShortcutConstants
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
-import com.android.server.accessibility.Flags.enableLowVisionHats
 import com.android.settings.accessibility.AccessibilitySettingsContentObserver.ContentObserverCallback
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.core.BasePreferenceController
@@ -54,11 +53,9 @@ class MagnificationSurveyButtonPreferenceController(context: Context, prefKey: S
      */
     fun initialize(surveyManager: SurveyManager) {
         this.surveyManager = surveyManager
-        if (enableLowVisionHats()) {
-            surveyManager.checkSurveyAvailable { available ->
-                isSurveyButtonVisible = available
-                updateSurveyButtonVisibility()
-            }
+        surveyManager.checkSurveyAvailable { available ->
+            isSurveyButtonVisible = available
+            updateSurveyButtonVisibility()
         }
     }
 
@@ -78,8 +75,7 @@ class MagnificationSurveyButtonPreferenceController(context: Context, prefKey: S
 
     override fun getAvailabilityStatus(): Int {
         val available =
-            enableLowVisionHats() &&
-                !mContext.isInSetupWizard() &&
+            !mContext.isInSetupWizard() &&
                 isSurveyButtonVisible &&
                 AccessibilityUtil.getUserShortcutTypesFromSettings(mContext, componentName) !=
                     UserShortcutType.DEFAULT

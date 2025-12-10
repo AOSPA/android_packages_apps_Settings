@@ -21,9 +21,6 @@ import android.app.settings.SettingsEnums
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
 import androidx.core.util.Consumer
 import androidx.fragment.app.testing.EmptyFragmentActivity
 import androidx.lifecycle.testing.TestLifecycleOwner
@@ -35,7 +32,6 @@ import com.android.internal.accessibility.common.NotificationConstants.ACTION_CA
 import com.android.internal.accessibility.common.NotificationConstants.EXTRA_PAGE_ID
 import com.android.internal.accessibility.common.NotificationConstants.EXTRA_SOURCE
 import com.android.internal.accessibility.common.NotificationConstants.SOURCE_START_SURVEY
-import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.Utils.SETTINGS_PACKAGE_NAME
 import com.android.settings.accessibility.screenmagnification.ui.MagnificationPreferenceFragment.Companion.MAGNIFICATION_SURVEY_KEY
@@ -68,7 +64,6 @@ import org.robolectric.shadows.ShadowPackageManager
 
 @RunWith(RobolectricTestParameterInjector::class)
 class MagnificationSurveyButtonPreferenceTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
     @get:Rule val settingStoreRule = SettingsStoreRule()
     private lateinit var context: Context
     private lateinit var shadowPackageManager: ShadowPackageManager
@@ -125,7 +120,6 @@ class MagnificationSurveyButtonPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     @TestParameters(
         value =
             [
@@ -151,7 +145,7 @@ class MagnificationSurveyButtonPreferenceTest {
                     "}",
             ]
     )
-    fun isAvailable_flagOn_returnExpectedValue(
+    fun isAvailable_returnExpectedValue(
         hasShortcuts: Boolean,
         surveyAvailability: Boolean,
         inSetupWizard: Boolean,
@@ -166,18 +160,6 @@ class MagnificationSurveyButtonPreferenceTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    fun isAvailable_flagOff_returnFalse() {
-        val newContext = createContext(inSetupWizard = false)
-        setupSurveyAvailability(available = true)
-
-        val preference = createPreference(newContext, hasShortcuts = true)
-
-        assertThat(preference.isAvailable(newContext)).isFalse()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     fun buttonClick_callsSurveyMethodsAndHidesButton() {
         val newContext = createContext(inSetupWizard = false)
         setupSurveyAvailability(available = true)
@@ -198,7 +180,6 @@ class MagnificationSurveyButtonPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     fun onCreate_surveyIntentPresent_startsSurvey() {
         val newContext = createContext(isStartSurveyIntent = true)
 
@@ -208,7 +189,6 @@ class MagnificationSurveyButtonPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     fun onCreate_noSurveyIntentPresent_checksSurveyAvailability() {
         val newContext = createContext(isStartSurveyIntent = false)
 

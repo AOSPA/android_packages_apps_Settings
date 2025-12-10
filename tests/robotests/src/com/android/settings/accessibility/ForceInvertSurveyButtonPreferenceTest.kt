@@ -22,9 +22,6 @@ import android.app.settings.SettingsEnums
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
 import androidx.core.content.getSystemService
 import androidx.core.util.Consumer
 import androidx.fragment.app.testing.EmptyFragmentActivity
@@ -37,7 +34,6 @@ import com.android.internal.accessibility.common.NotificationConstants.ACTION_CA
 import com.android.internal.accessibility.common.NotificationConstants.EXTRA_PAGE_ID
 import com.android.internal.accessibility.common.NotificationConstants.EXTRA_SOURCE
 import com.android.internal.accessibility.common.NotificationConstants.SOURCE_START_SURVEY
-import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.Utils.SETTINGS_PACKAGE_NAME
 import com.android.settings.accessibility.shared.ui.BaseSurveyButtonPreference.Companion.PREFERENCE_KEY
@@ -52,7 +48,6 @@ import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
@@ -69,7 +64,6 @@ import org.robolectric.shadows.ShadowPackageManager
 
 @RunWith(RobolectricTestParameterInjector::class)
 class ForceInvertSurveyButtonPreferenceTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
     private lateinit var context: Context
     private lateinit var shadowPackageManager: ShadowPackageManager
     private lateinit var surveyFeatureProvider: SurveyFeatureProvider
@@ -127,7 +121,6 @@ class ForceInvertSurveyButtonPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     @TestParameters(
         value =
             [
@@ -163,7 +156,7 @@ class ForceInvertSurveyButtonPreferenceTest {
                     "}",
             ]
     )
-    fun isAvailable_flagOn_returnExpectedValue(
+    fun isAvailable_returnExpectedValue(
         forceInvertState: Int,
         surveyAvailability: Boolean,
         inSetupWizard: Boolean,
@@ -179,19 +172,6 @@ class ForceInvertSurveyButtonPreferenceTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    fun isAvailable_flagOff_returnFalse() {
-        val newContext = createContext(inSetupWizard = false)
-        setupForceInvertState(UiModeManager.FORCE_INVERT_TYPE_DARK)
-        setupSurveyAvailability(available = true)
-
-        val preference = createPreference(newContext)
-
-        assertThat(preference.isAvailable(newContext)).isFalse()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     fun buttonClick_callsSurveyMethodsAndHidesButton() {
         val newContext = createContext(inSetupWizard = false)
         setupForceInvertState(UiModeManager.FORCE_INVERT_TYPE_DARK)
@@ -214,7 +194,6 @@ class ForceInvertSurveyButtonPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     fun onCreate_surveyIntentPresent_startsSurvey() {
         val newContext = createContext(isStartSurveyIntent = true)
 
@@ -225,7 +204,6 @@ class ForceInvertSurveyButtonPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     fun onCreate_noSurveyIntentPresent_checksSurveyAvailability() {
         val newContext = createContext(isStartSurveyIntent = false)
 
