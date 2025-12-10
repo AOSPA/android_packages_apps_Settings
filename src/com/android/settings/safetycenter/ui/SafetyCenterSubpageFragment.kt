@@ -24,7 +24,6 @@ import android.util.Log
 import androidx.fragment.app.viewModels
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.dashboard.DashboardFragment
-import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.INVALID_SESSION_ID
 import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.getOrGenerateSessionId
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFactory
@@ -44,8 +43,6 @@ abstract class SafetyCenterSubpageFragment : DashboardFragment() {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
     }
     private var safetySourceIds: List<String> = emptyList()
-
-    private var sessionId = INVALID_SESSION_ID
 
     /** The unique preference key for the subpage, used to look up configuration. */
     abstract val subpageKey: String
@@ -76,7 +73,7 @@ abstract class SafetyCenterSubpageFragment : DashboardFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        sessionId = getOrGenerateSessionId(requireArguments())
+        configureInteractionLogger()
 
         val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
         for (controller in allControllers) {
@@ -96,6 +93,24 @@ abstract class SafetyCenterSubpageFragment : DashboardFragment() {
                 SafetyCenterSubpageRegistry.getIssuesBannerGroupPrefKey(subpageKey)!!,
             )
         )
+
+    override fun onResume() {
+        super.onResume()
+        logSafetyCenterViewedEvent()
+    }
+
+    private fun configureInteractionLogger() {
+        viewModel.interactionLogger.apply {
+            sessionId = getOrGenerateSessionId(requireArguments())
+            viewType = ViewType.SUBPAGE
+            navigationSource = NavigationSource.fromIntent(requireActivity().intent)
+            subpageId = this@SafetyCenterSubpageFragment.subpageKey
+        }
+    }
+
+    private fun logSafetyCenterViewedEvent() {
+        viewModel.interactionLogger.record(Action.SAFETY_CENTER_VIEWED)
+    }
 
     private fun setupSafetyIssuesPreferenceController(
         safetyIssuesPreferenceController: SafetyIssuesPreferenceController

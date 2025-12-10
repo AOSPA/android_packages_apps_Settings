@@ -41,7 +41,14 @@ class ConfirmDismissalDialogFragment : DialogFragment() {
         return AlertDialog.Builder(requireContext())
             .setTitle(R.string.safety_center_issue_card_dismiss_confirmation_title)
             .setMessage(R.string.safety_center_issue_card_dismiss_confirmation_message)
-            .setPositiveButton(R.string.dismiss) { _, _ -> viewModel.dismissIssue(issue) }
+            .setPositiveButton(R.string.dismiss) { _, _ ->
+                viewModel.dismissIssue(issue)
+                viewModel.interactionLogger.recordForIssue(
+                    Action.ISSUE_DISMISS_CLICKED,
+                    issue,
+                    isDismissed = false,
+                )
+            }
             .setNegativeButton(R.string.cancel, /* listener= */ null)
             .create()
     }

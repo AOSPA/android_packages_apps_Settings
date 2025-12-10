@@ -52,6 +52,7 @@ import com.android.settings.R
 import com.android.settings.Settings.EXTRA_SHOW_FRAGMENT
 import com.android.settings.Settings.SafetyCenterActivity
 import com.android.settings.SubSettings
+import com.android.settings.core.instrumentation.SettingsStatsLog
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_ACTION
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_SESSION_ID
@@ -62,10 +63,16 @@ import com.android.settings.safetycenter.SafetyCenterTestUtils.createFocusedInte
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssue
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssueAction
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createScData
+import com.android.settings.safetycenter.ui.Action
+import com.android.settings.safetycenter.ui.InteractionLogger
+import com.android.settings.safetycenter.ui.LogSeverityLevel
+import com.android.settings.safetycenter.ui.NavigationSource
 import com.android.settings.safetycenter.ui.PrivacyControlsFragment
 import com.android.settings.safetycenter.ui.SafetyCenterFragment
 import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.EXTRA_SESSION_ID
 import com.android.settings.safetycenter.ui.SafetyCenterSubpageRegistry
+import com.android.settings.safetycenter.ui.SafetySourceProfileType
+import com.android.settings.safetycenter.ui.ViewType
 import com.android.settingslib.safetycenter.SafetySourcePreference
 import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.BannerMessagePreferenceGroup
@@ -81,6 +88,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowDrawable
 import org.robolectric.shadows.ShadowLooper
@@ -90,6 +98,7 @@ import org.robolectric.shadows.ShadowSafetyCenterManager
 // which is required by the SafetyCenterManager APIs.
 @SuppressLint("MissingPermission")
 @RunWith(AndroidJUnit4::class)
+@Config(shadows = [SafetyCenterTestUtils.ShadowSettingsStatsLog::class])
 class SafetyCenterFragmentTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
     private lateinit var mApplication: Application
@@ -101,6 +110,7 @@ class SafetyCenterFragmentTest {
         val safetyCenterManager = mApplication.getSystemService(SafetyCenterManager::class.java)!!
         shadowSafetyCenterManager = Shadow.extract(safetyCenterManager)
         shadowSafetyCenterManager.setSafetyCenterEnabled(true)
+        SafetyCenterTestUtils.ShadowSettingsStatsLog.reset()
     }
 
     private fun runTest(data: SafetyCenterData, testBlock: (SafetyCenterFragment) -> Unit) {
@@ -1314,6 +1324,169 @@ class SafetyCenterFragmentTest {
                 assertThat(extras?.getString(EXTRA_SHOW_FRAGMENT))
                     .isEqualTo(PrivacyControlsFragment::class.qualifiedName)
             }
+        }
+    }
+
+    // --- Tests for InteractionLogger ---
+
+    @Test
+    fun interactionLogger_onPageCreation_logsSafetyCenterViewed() {
+        runTest(EMPTY_SC_DATA) {
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            assertThat(events).hasSize(1)
+            val event = events[0]
+
+            assertThat(event.atomId).isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(event.action).isEqualTo(Action.SAFETY_CENTER_VIEWED.statsLogValue)
+            assertThat(event.viewType).isEqualTo(ViewType.FULL.statsLogValue)
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(event.severityLevel).isEqualTo(LogSeverityLevel.UNKNOWN.statsLogValue)
+            assertThat(event.sourceId).isEqualTo(0)
+            assertThat(event.sourceProfileType)
+                .isEqualTo(SafetySourceProfileType.UNKNOWN.statsLogValue)
+            assertThat(event.issueTypeId).isEqualTo(0)
+            assertThat(event.subpageId).isEqualTo(0)
+            assertThat(event.issueState)
+                .isEqualTo(
+                    SettingsStatsLog
+                        .SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ISSUE_STATE_UNKNOWN
+                )
+        }
+    }
+
+    @Test
+    fun interactionLogger_onLaunchWithIntent_usesSessionIdFromIntent() {
+        val intent =
+            Intent(mApplication, SafetyCenterActivity::class.java).apply {
+                putExtra(EXTRA_SESSION_ID, TEST_SESSION_ID)
+            }
+
+        runTestWithIntent(intent, EMPTY_SC_DATA) {
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            assertThat(events).hasSize(1)
+            val event = events[0]
+
+            assertThat(event.atomId).isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(event.action).isEqualTo(Action.SAFETY_CENTER_VIEWED.statsLogValue)
+            assertThat(event.viewType).isEqualTo(ViewType.FULL.statsLogValue)
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(event.severityLevel).isEqualTo(LogSeverityLevel.UNKNOWN.statsLogValue)
+            assertThat(event.sourceId).isEqualTo(0)
+            assertThat(event.sourceProfileType)
+                .isEqualTo(SafetySourceProfileType.UNKNOWN.statsLogValue)
+            assertThat(event.issueTypeId).isEqualTo(0)
+            assertThat(event.subpageId).isEqualTo(0)
+            assertThat(event.issueState)
+                .isEqualTo(
+                    SettingsStatsLog
+                        .SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ISSUE_STATE_UNKNOWN
+                )
+        }
+    }
+
+    @Test
+    fun sessionId_onConfigurationChange_isPreserved() {
+        val intent =
+            Intent(mApplication, SafetyCenterActivity::class.java).apply {
+                putExtra(EXTRA_SESSION_ID, TEST_SESSION_ID)
+            }
+        shadowSafetyCenterManager.setSafetyCenterData(EMPTY_SC_DATA)
+
+        ActivityScenario.launch<SafetyCenterActivity>(intent).use { scenario ->
+            // Initial launch
+            scenario.onActivity {
+                val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+                assertThat(events).hasSize(1)
+                assertThat(events[0].atomId)
+                    .isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+                assertThat(events[0].sessionId).isEqualTo(TEST_SESSION_ID)
+                assertThat(events[0].action).isEqualTo(Action.SAFETY_CENTER_VIEWED.statsLogValue)
+            }
+
+            // Trigger configuration change (e.g., rotation)
+            scenario.recreate()
+            ShadowLooper.idleMainLooper()
+
+            // After recreation
+            scenario.onActivity {
+                val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+                // Should have a new view event, but session ID should be the same
+                assertThat(events).hasSize(2)
+                assertThat(events[0].sessionId).isEqualTo(TEST_SESSION_ID)
+                assertThat(events[1].sessionId).isEqualTo(TEST_SESSION_ID)
+                assertThat(events[1].action).isEqualTo(Action.SAFETY_CENTER_VIEWED.statsLogValue)
+            }
+        }
+    }
+
+    @Test
+    fun interactionLogger_onIssueViewed_logsIssueViewed() {
+        val activeIssue = createIssue(id = "activeIssue", sourceIds = setOf("any"))
+        runTest(createScData(activeIssues = listOf(activeIssue))) {
+            ShadowLooper.idleMainLooper()
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            assertThat(events).hasSize(2)
+            val issueViewedEvent =
+                events.find { it.action == Action.SAFETY_ISSUE_VIEWED.statsLogValue }!!
+
+            assertThat(issueViewedEvent.atomId)
+                .isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(issueViewedEvent.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(issueViewedEvent.action).isEqualTo(Action.SAFETY_ISSUE_VIEWED.statsLogValue)
+            assertThat(issueViewedEvent.viewType).isEqualTo(ViewType.FULL.statsLogValue)
+            assertThat(issueViewedEvent.navigationSource)
+                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(issueViewedEvent.sourceId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.safetySourceIds.first()))
+            assertThat(issueViewedEvent.issueTypeId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.issueTypeId))
+            assertThat(issueViewedEvent.severityLevel)
+                .isEqualTo(LogSeverityLevel.RECOMMENDATION.statsLogValue)
+            assertThat(issueViewedEvent.sourceProfileType)
+                .isEqualTo(SafetySourceProfileType.PERSONAL.statsLogValue)
+            assertThat(issueViewedEvent.subpageId).isEqualTo(0)
+            assertThat(issueViewedEvent.issueState)
+                .isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ACTIVE)
+        }
+    }
+
+    @Test
+    fun interactionLogger_onRescanClick_logsScanInitiated() {
+        val status =
+            SafetyCenterStatus.Builder("Title OK", "Summary OK")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK)
+                .build()
+
+        runTest(createScData(status = status)) {
+            onView(withText(R.string.safety_center_rescan_button)).perform(click())
+            ShadowLooper.idleMainLooper()
+
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            // Events: SAFETY_CENTER_VIEWED, SCAN_INITIATED
+            assertThat(events).hasSize(2)
+            val event = events[1]
+
+            assertThat(event.atomId).isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(event.action).isEqualTo(Action.SCAN_INITIATED.statsLogValue)
+            assertThat(event.viewType).isEqualTo(ViewType.FULL.statsLogValue)
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(event.severityLevel).isEqualTo(LogSeverityLevel.UNKNOWN.statsLogValue)
+            assertThat(event.sourceId).isEqualTo(0)
+            assertThat(event.sourceProfileType)
+                .isEqualTo(SafetySourceProfileType.UNKNOWN.statsLogValue)
+            assertThat(event.issueTypeId).isEqualTo(0)
+            assertThat(event.subpageId).isEqualTo(0)
+            assertThat(event.issueState)
+                .isEqualTo(
+                    SettingsStatsLog
+                        .SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ISSUE_STATE_UNKNOWN
+                )
         }
     }
 
