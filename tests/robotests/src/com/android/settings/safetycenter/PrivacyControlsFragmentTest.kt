@@ -112,6 +112,7 @@ class PrivacyControlsFragmentTest {
             onView(withText(mApplication.getString(R.string.mic_toggle_title)))
                 .check(matches(isDisplayed()))
 
+            onView(isRoot()).perform(swipeUp())
             onView(withText(mApplication.getString(R.string.show_clip_access_notification)))
                 .check(matches(isDisplayed()))
 
