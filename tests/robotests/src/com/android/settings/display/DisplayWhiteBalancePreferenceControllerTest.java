@@ -4,9 +4,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
@@ -80,14 +78,6 @@ public class DisplayWhiteBalancePreferenceControllerTest {
   }
 
   @Test
-  public void isAvailable_configuredUnavailable() {
-    SettingsShadowResources.overrideResource(
-        com.android.internal.R.bool.config_displayWhiteBalanceAvailable, false);
-
-    assertThat(mController.isAvailable()).isFalse();
-  }
-
-  @Test
   public void setChecked_true_setSuccessfully() {
     when(mColorDisplayManager.setDisplayWhiteBalanceEnabled(true)).thenReturn(true);
     assertThat(mController.setChecked(true)).isTrue();
@@ -112,90 +102,77 @@ public class DisplayWhiteBalancePreferenceControllerTest {
   }
 
   @Test
-  public void onStart_configuredUnavailable() {
+  public void isNotAvailable_disabledForUser() {
     SettingsShadowResources.overrideResource(
-        com.android.internal.R.bool.config_displayWhiteBalanceAvailable, false);
-    mController.displayPreference(mScreen);
-    mController.onStart();
-    assertThat(mController.mContentObserver).isNull();
+            com.android.internal.R.bool.config_displayWhiteBalanceAvailable, false);
+
+    assertThat(mController.isAvailable()).isFalse();
+    assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(DisplayWhiteBalancePreferenceController.DISABLED_FOR_USER);
   }
 
   @Test
-  public void onStart_configuredAvailable() {
-    SettingsShadowResources.overrideResource(
-        com.android.internal.R.bool.config_displayWhiteBalanceAvailable, true);
-    when(mColorDisplayManager.getColorMode())
-        .thenReturn(ColorDisplayManager.COLOR_MODE_NATURAL);
-    toggleAccessibilityInversion(false);
-    toggleAccessibilityDaltonizer(false);
-
-    mController.displayPreference(mScreen);
-    mController.onStart();
-    assertThat(mController.mContentObserver).isNotNull();
-  }
-
-  @Test
-  public void visibility_configuredAvailableAccessibilityToggled() {
-    SettingsShadowResources.overrideResource(
-        com.android.internal.R.bool.config_displayWhiteBalanceAvailable, true);
-    mController.displayPreference(mScreen);
-
-    // Accessibility features disabled
-    toggleAccessibilityInversion(false);
-    reset(mPreference);
-    mController.updateVisibility();
-    verify(mPreference).setVisible(true);
-
-    toggleAccessibilityDaltonizer(false);
-    reset(mPreference);
-    mController.updateVisibility();
-    verify(mPreference).setVisible(true);
-
-    // Accessibility features enabled one by one
-    toggleAccessibilityInversion(true);
-    mController.updateVisibility();
-    verify(mPreference).setVisible(false);
-
-    toggleAccessibilityDaltonizer(true);
-    reset(mPreference);
-    mController.updateVisibility();
-    verify(mPreference).setVisible(false);
-
-    // Accessibility features disabled one by one
-    toggleAccessibilityInversion(false);
-    reset(mPreference);
-    mController.updateVisibility();
-    // Daltonizer is still enabled, so we expect the preference to still be invisible
-    verify(mPreference).setVisible(false);
-
-    // Now both a11y features are disabled, so we expect the preference to become visible
-    toggleAccessibilityDaltonizer(false);
-    mController.updateVisibility();
-    verify(mPreference).setVisible(true);
-  }
-
-  @Test
-  public void visibility_configuredAvailableColorModeChanged() {
+  public void isAvailable_colorModeSaturated() {
     SettingsShadowResources.overrideResource(
             com.android.internal.R.bool.config_displayWhiteBalanceAvailable, true);
-    mController.displayPreference(mScreen);
+    when(mColorDisplayManager.getColorMode())
+            .thenReturn(ColorDisplayManager.COLOR_MODE_SATURATED);
 
-    // Non-Saturated color mode selected
-    when(mColorDisplayManager.getColorMode()).thenReturn(ColorDisplayManager.COLOR_MODE_NATURAL);
-    reset(mPreference);
-    mController.updateVisibility();
-    verify(mPreference).setVisible(true);
+    assertThat(mController.isAvailable()).isFalse();
+    assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(DisplayWhiteBalancePreferenceController.CONDITIONALLY_UNAVAILABLE);
+  }
 
-    // Saturated color mode selected
-    when(mColorDisplayManager.getColorMode()).thenReturn(ColorDisplayManager.COLOR_MODE_SATURATED);
-    mController.updateVisibility();
-    verify(mPreference).setVisible(false);
+  @Test
+  public void isAvailable_accessibilityInversionEnabled() {
+    SettingsShadowResources.overrideResource(
+            com.android.internal.R.bool.config_displayWhiteBalanceAvailable, true);
+    when(mColorDisplayManager.getColorMode())
+            .thenReturn(ColorDisplayManager.COLOR_MODE_NATURAL);
+    toggleAccessibilityInversion(true);
 
-    // Switch back to non-Saturated color mode
-    when(mColorDisplayManager.getColorMode()).thenReturn(ColorDisplayManager.COLOR_MODE_NATURAL);
-    reset(mPreference);
-    mController.updateVisibility();
-    verify(mPreference).setVisible(true);
+    assertThat(mController.isAvailable()).isFalse();
+    assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(DisplayWhiteBalancePreferenceController.CONDITIONALLY_UNAVAILABLE);
+  }
+
+  @Test
+  public void isAvailable_accessibilityInversionDisabled() {
+    SettingsShadowResources.overrideResource(
+            com.android.internal.R.bool.config_displayWhiteBalanceAvailable, true);
+    when(mColorDisplayManager.getColorMode())
+            .thenReturn(ColorDisplayManager.COLOR_MODE_NATURAL);
+    toggleAccessibilityInversion(false);
+
+    assertThat(mController.isAvailable()).isTrue();
+    assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(DisplayWhiteBalancePreferenceController.AVAILABLE);
+  }
+
+  @Test
+  public void isAvailable_accessibilityDaltonizerEnabled() {
+    SettingsShadowResources.overrideResource(
+            com.android.internal.R.bool.config_displayWhiteBalanceAvailable, true);
+    when(mColorDisplayManager.getColorMode())
+            .thenReturn(ColorDisplayManager.COLOR_MODE_NATURAL);
+    toggleAccessibilityDaltonizer(true);
+
+    assertThat(mController.isAvailable()).isFalse();
+    assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(DisplayWhiteBalancePreferenceController.CONDITIONALLY_UNAVAILABLE);
+  }
+
+  @Test
+  public void isAvailable_accessibilityDaltonizerDisabled() {
+    SettingsShadowResources.overrideResource(
+            com.android.internal.R.bool.config_displayWhiteBalanceAvailable, true);
+    when(mColorDisplayManager.getColorMode())
+            .thenReturn(ColorDisplayManager.COLOR_MODE_NATURAL);
+    toggleAccessibilityDaltonizer(false);
+
+    assertThat(mController.isAvailable()).isTrue();
+    assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(DisplayWhiteBalancePreferenceController.AVAILABLE);
   }
 
   private void toggleAccessibilityInversion(boolean enable) {
@@ -205,6 +182,6 @@ public class DisplayWhiteBalancePreferenceControllerTest {
 
   private void toggleAccessibilityDaltonizer(boolean enable) {
     Settings.Secure.putInt(mContentResolver,
-        Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, enable ? 1 : 0);
+            Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, enable ? 1 : 0);
   }
 }
