@@ -52,14 +52,6 @@
         android:order="-390">
 
         <Preference
-            android:key="language_settings"
-            android:title="@string/languages_settings"
-            android:summary="@string/languages_setting_summary"
-            android:icon="@drawable/ic_settings_languages"
-            android:fragment="com.android.settings.language.LanguageSettings"
-            settings:controller="com.android.settings.language.LanguagePreferenceController"/>
-
-        <Preference
             android:key="language_and_region_settings"
             android:title="@string/language_and_region_settings"
             android:summary="@string/languages_setting_summary"

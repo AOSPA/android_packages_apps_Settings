@@ -142,7 +142,6 @@ import com.android.settings.inputmethod.TouchpadAndMouseSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.language.LanguageAndRegionSettings;
-import com.android.settings.language.LanguageSettings;
 import com.android.settings.localepicker.AppLocalePickerFragment;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.localepicker.SystemLocalePickerFragment;
@@ -251,7 +250,6 @@ public class SettingsGateway {
             LocaleListEditor.class.getName(),
             LanguageAndRegionSettings.class.getName(),
             AvailableVirtualKeyboardFragment.class.getName(),
-            LanguageSettings.class.getName(),
             KeyboardSettings.class.getName(),
             GameControllerFragment.class.getName(),
             GameControllerListFragment.class.getName(),
@@ -475,7 +473,6 @@ public class SettingsGateway {
             Settings.AdaptiveBrightnessActivity.class.getName(),
             // Home page > Security & screen lock
             Settings.LocationSettingsActivity.class.getName(),
-            Settings.LanguageSettingsActivity.class.getName(),
             Settings.LanguageAndRegionSettingsActivity.class.getName(),
             Settings.KeyboardSettingsActivity.class.getName(),
             Settings.DateTimeSettingsActivity.class.getName(),
