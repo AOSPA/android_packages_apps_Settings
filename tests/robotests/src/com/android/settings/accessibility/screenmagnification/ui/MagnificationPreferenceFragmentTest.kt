@@ -19,7 +19,6 @@ package com.android.settings.accessibility.screenmagnification.ui
 import android.app.settings.SettingsEnums
 import android.content.ComponentName
 import android.content.Intent
-import android.platform.test.annotations.EnableFlags
 import android.platform.test.annotations.RequiresFlagsDisabled
 import android.platform.test.flag.junit.CheckFlagsRule
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
@@ -83,7 +82,6 @@ class MagnificationPreferenceFragmentTest :
         assertDialogShown(fragment, MagnificationModeChooser::class.java)
     }
 
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG)
     @Test
     fun clickCursorFollowingModePreference_showDedicatedDialog() {
         // Setup cursor following mode enabled

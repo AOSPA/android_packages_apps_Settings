@@ -29,7 +29,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
-import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.MagnificationCapabilities
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.screenmagnification.dialogs.CursorFollowingModeChooser
@@ -133,8 +132,7 @@ class CursorFollowingModePreferenceController(context: Context, prefKey: String)
     }
 
     private fun isMagnificationCursorFollowingModeDialogSupported(): Boolean {
-        return Flags.enableMagnificationCursorFollowingDialog() &&
-            InputPeripheralsSettingsUtils.isMouse()
+        return InputPeripheralsSettingsUtils.isMouse()
     }
 
     override fun handlePreferenceTreeClick(preference: Preference?): Boolean {
