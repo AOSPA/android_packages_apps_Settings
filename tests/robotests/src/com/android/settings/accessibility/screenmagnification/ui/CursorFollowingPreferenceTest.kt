@@ -18,8 +18,6 @@ package com.android.settings.accessibility.screenmagnification.ui
 
 import android.content.Context
 import android.content.Intent
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import android.provider.Settings.Secure.AccessibilityMagnificationCursorFollowingMode
@@ -31,7 +29,6 @@ import androidx.lifecycle.Lifecycle.State.INITIALIZED
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
-import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.MagnificationCapabilities
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode
 import com.android.settings.accessibility.screenmagnification.dialogs.CursorFollowingModeChooser
@@ -183,7 +180,6 @@ class CursorFollowingPreferenceTest {
         assertThat(preference.isEnabled(context)).isEqualTo(expectedEnabled)
     }
 
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG)
     @Test
     @TestParameters(
         "{inSetupWizard: false, hasConnectedMouse: false, expectedAvailable: false}",
@@ -191,23 +187,7 @@ class CursorFollowingPreferenceTest {
         "{inSetupWizard: true, hasConnectedMouse: false, expectedAvailable: false}",
         "{inSetupWizard: true, hasConnectedMouse: true, expectedAvailable: false}",
     )
-    fun isAvailable_flagOn(
-        inSetupWizard: Boolean,
-        hasConnectedMouse: Boolean,
-        expectedAvailable: Boolean,
-    ) {
-        assertIsAvailable(inSetupWizard, hasConnectedMouse, expectedAvailable)
-    }
-
-    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG)
-    @Test
-    @TestParameters(
-        "{inSetupWizard: false, hasConnectedMouse: false, expectedAvailable: false}",
-        "{inSetupWizard: false, hasConnectedMouse: true, expectedAvailable: false}",
-        "{inSetupWizard: true, hasConnectedMouse: false, expectedAvailable: false}",
-        "{inSetupWizard: true, hasConnectedMouse: true, expectedAvailable: false}",
-    )
-    fun isAvailable_flagOff(
+    fun isAvailable(
         inSetupWizard: Boolean,
         hasConnectedMouse: Boolean,
         expectedAvailable: Boolean,
