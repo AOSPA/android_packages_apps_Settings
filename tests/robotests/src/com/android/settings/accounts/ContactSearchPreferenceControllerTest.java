@@ -17,6 +17,8 @@ package com.android.settings.accounts;
 
 import static android.provider.Settings.Secure.MANAGED_PROFILE_CONTACT_REMOTE_SEARCH;
 
+import static com.android.settings.testutils.DevicePolicyUtils.DPC_ADMIN;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -25,28 +27,42 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyIdentifiers;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.Collections;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowDevicePolicyManager.class})
 public class ContactSearchPreferenceControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String PREF_KEY = "contacts_search";
     private static final int MANAGED_USER_ID = 10;
@@ -108,8 +124,21 @@ public class ContactSearchPreferenceControllerTest {
         assertThat(mPreference.isChecked()).isTrue();
     }
 
+    @EnableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
     @Test
     public void updateState_preferenceShouldBeDisabled() {
+        ShadowDevicePolicyManager.getShadow().setPolicyEnforcementInfoForPolicy(
+                DevicePolicyIdentifiers.MANAGED_PROFILE_CONTACTS_ACCESS_POLICY,
+                new PolicyEnforcementInfo(List.of(DPC_ADMIN)));
+
+        mController.updateState(mPreference);
+
+        verify(mPreference).setDisabledByAdmin((EnforcingAdmin) any());
+    }
+
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @Test
+    public void updateState_preferenceShouldBeDisabled_refactorDisabled() {
         mController.updateState(mPreference);
 
         verify(mPreference).setDisabledByAdmin((RestrictedLockUtils.EnforcedAdmin) any());
