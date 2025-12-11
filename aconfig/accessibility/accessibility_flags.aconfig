@@ -132,6 +132,13 @@ flag {
 }
 
 flag {
+    name: "enable_setuplib_in_a11y_setup_page"
+    namespace: "accessibility"
+    description: "Decides whether to use new accessibility setup page uses the SetupLib implementation."
+    bug: "407080818"
+}
+
+flag {
   name: "never_restrict_accessibility_activity"
   namespace: "accessibility"
   description: "Stops possibly restricting AccessibilityActivityPreferences"
