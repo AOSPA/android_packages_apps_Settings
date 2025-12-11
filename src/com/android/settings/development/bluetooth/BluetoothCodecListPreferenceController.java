@@ -86,24 +86,26 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
         final BluetoothA2dp bluetoothA2dp = mBluetoothA2dp;
         if (bluetoothA2dp == null) {
             Log.e(TAG, "onPreferenceChange: bluetoothA2dp is null");
-            setListPreferenceEnabled(false);
+            setupDefaultListPreference();
             return false;
         }
 
         if (!writeConfigurationValues((String) newValue)) {
             Log.e(TAG, "onPreferenceChange: Configuration failed");
+            setupDefaultListPreference();
             return false;
         }
 
         if (mBluetoothA2dpConfigStore == null) {
             Log.e(TAG, "onPreferenceChange: Bluetooth A2dp Config Store is null");
+            setupDefaultListPreference();
             return false;
         }
 
         final BluetoothDevice activeDevice = getA2dpActiveDevice();
         if (activeDevice == null) {
             Log.e(TAG, "onPreferenceChange: active device is null");
-            setListPreferenceEnabled(false);
+            setupDefaultListPreference();
             return false;
         }
 
@@ -122,21 +124,17 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
     public void updateState(@Nullable Preference preference) {
         super.updateState(preference);
 
-        if (!isHDAudioEnabled()) {
-            Log.d(TAG, "updateState: HD Audio is disabled");
-            setListPreferenceEnabled(false);
-            return;
-        }
-
         final BluetoothCodecStatus codecStatus = getBluetoothCodecStatus();
         if (codecStatus == null) {
             Log.e(TAG, "updateState: Bluetooth Codec Status is null");
+            setupDefaultListPreference();
             return;
         }
 
         final BluetoothCodecConfig currentCodecConfig = codecStatus.getCodecConfig();
         if (currentCodecConfig == null) {
             Log.e(TAG, "updateState: currentCodecConfig is null");
+            setupDefaultListPreference();
             return;
         }
 
@@ -150,6 +148,9 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
             BluetoothCodecType codecType = config.getExtendedCodecType();
             if (codecType == null) {
                 Log.e(TAG, "codec type for config:" + config + " is null");
+                continue;
+            }
+            if (!isHDAudioEnabled() && codecType.getCodecId() != BluetoothCodecType.CODEC_ID_SBC) {
                 continue;
             }
             labels.add(codecType.getCodecName());
@@ -181,11 +182,7 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
             Log.e(TAG, "onHDAudioEnabled: List preference is null");
             return;
         }
-        setListPreferenceEnabled(enabled);
-        if (!enabled) {
-            mListPreference.setValue(null);
-            mListPreference.setSummary(null);
-        }
+        updateState(mListPreference);
     }
 
     @VisibleForTesting
