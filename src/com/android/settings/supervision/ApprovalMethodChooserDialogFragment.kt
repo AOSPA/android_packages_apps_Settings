@@ -130,7 +130,7 @@ class ApprovalMethodChooserDialogFragment : BottomSheetDialogFragment() {
 
         fun newInstance(
             authMethods: List<ResolveInfo>,
-            extras: Bundle,
+            extras: Bundle? = null,
         ): ApprovalMethodChooserDialogFragment {
             val fragment = ApprovalMethodChooserDialogFragment()
             val args = Bundle()
