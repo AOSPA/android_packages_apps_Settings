@@ -138,7 +138,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             Log.d(TAG, "mBluetoothA2dpReceiver.onReceive intent=" + intent);
             String action = intent.getAction();
 
-            if (BluetoothA2dp.ACTION_CODEC_CONFIG_CHANGED.equals(action)) {
+            if (BluetoothA2dp.ACTION_CODEC_CONFIG_CHANGED.equals(action)
+                    || BluetoothA2dp.ACTION_ACTIVE_DEVICE_CHANGED.equals(action)) {
                 BluetoothCodecStatus codecStatus = intent.getParcelableExtra(
                         BluetoothCodecStatus.EXTRA_CODEC_STATUS);
                 Log.d(TAG, "Received BluetoothCodecStatus=" + codecStatus);
@@ -628,6 +629,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                         AdbPreferenceController.ACTION_ENABLE_ADB_STATE_CHANGED));
 
         final IntentFilter filter = new IntentFilter();
+        filter.addAction(BluetoothA2dp.ACTION_ACTIVE_DEVICE_CHANGED);
         filter.addAction(BluetoothA2dp.ACTION_CODEC_CONFIG_CHANGED);
         getActivity().registerReceiver(mBluetoothA2dpReceiver, filter);
     }
