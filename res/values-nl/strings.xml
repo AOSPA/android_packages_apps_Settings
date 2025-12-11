@@ -1007,7 +1007,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"Aan"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Uit"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Externe beeldschermen"</string>
-    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Ingebouwd scherm"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"In­ge­bouwd scherm"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Universele cursor"</string>
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Je muis tussen schermen bewegen"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Extern scherm gebruiken"</string>
@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Certificaat vereist."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Om de locatieprecisie te verbeteren en voor andere doeleinden, wil <xliff:g id="APP_NAME">%1$s</xliff:g> de netwerkscan aanzetten, zelfs als wifi uitstaat.\n\nDit toestaan voor alle apps die willen scannen?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Ter verbetering van locatienauwkeurigheid en voor andere doeleinden wil een onbekende app de netwerkscan aanzetten, zelfs als wifi uitstaat.\n\nDit toestaan voor alle apps die willen scannen?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Toestaan"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Weigeren"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*verplicht"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Dit is een gedeeld netwerk. Je moet inloggen om wijzigingen aan te brengen."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Neem contact op met de netwerkeigenaar of apparaatbeheerder om wijzigingen aan te brengen."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Alle gebruikers op dit apparaat hebben toegang tot dit netwerk."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Dit netwerk heeft geen internettoegang. Verbonden blijven?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Sommige apps en services werken mogelijk niet vanwege de beperkte connectiviteit. Toch gebruiken?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Niet meer vragen voor dit netwerk"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Opslaan van netwerk is mislukt"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Annuleren"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Netwerk vergeten?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> wordt op dit apparaat verwijderd voor alle gebruikers"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 netwerk}other{# netwerken}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 abonnement}other{# abonnementen}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 netwerk en abonnement}other{# netwerken en abonnementen}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Hoge resolutie"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Maximale resolutie"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"De maximale resolutie gebruikt meer batterijlading. Als je de resolutie wijzigt, worden sommige apps misschien opnieuw gestart."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> bij <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hertz"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Wijziging van tijdzone"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Krijg een melding als je tijdzone automatisch wordt geüpdatet"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"melding, tijd, zone, tijdzone"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Geplande klokwijziging"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Krijg een melding als je klok een geplande wijziging uitvoert, bijvoorbeeld voor zomertijd"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"zomertijd, klokwijziging, geplande klokwijziging"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Volgende wijziging"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Geen geplande wijzigingen"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Juridische info, status, softwareversie bekijken"</string>
     <string name="legal_information" msgid="7509900979811934843">"Juridische informatie"</string>
     <string name="manual" msgid="3651593989906084868">"Handleiding"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Gekloond"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Kloon van <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> wordt gemaakt"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Kloon van <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> is gemaakt"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Talen, gebaren, tijd"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Systeemtalen, app-talen, regionale voorkeuren, spraak"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wifi-netwerk, netwerkverbinding, internet, draadloos, gegevens, wifi-verbinding"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wifimelding, wifi-melding"</string>
@@ -4697,6 +4692,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Uit veiligheidsoverwegingen vereist Geavanceerde beveiliging dat deze instelling blijft uitstaan"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Uit veiligheidsoverwegingen voorkomt Geavanceerde beveiliging deze actie"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Instellingen"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Uitzetten"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Aanzetten"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Tonen"</string>
@@ -5180,10 +5183,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Experimenteel: ANGLE aanzetten"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Waarschuwing: Zet ANGLE aan als standaard OpenGL ES-stuurprogramma. Deze functie is in een experimentele fase en werkt misschien niet met bepaalde camera- en video-apps. Maak een back-up van je apparaatgegevens voordat je de schakelaar aanzet."</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"Je moet opnieuw opstarten om het OpenGL ES-stuurprogramma van het systeem te wijzigen. Maak een back-up van je apparaatgegevens voordat je opnieuw opstart. Als het opnieuw opstarten is mislukt, moet je de fabrieksinstellingen terugzetten om het apparaat te herstellen."</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"App-compatibiliteitswijzigingen"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Zet app-compatibiliteitswijzigingen aan of uit"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Standaard aangezette wijzigingen"</string>
@@ -6070,8 +6071,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Expliciete zoekresultaten filteren"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Op # app}other{Op # apps}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"Meer informatie"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Als deze instellingen uitstaan, kunnen er nog steeds andere accountinstellingen van toepassing zijn."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Pincode voor ouderlijk toezicht invoeren"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Een pincode voor ouderlijk toezicht instellen"</string>
@@ -6089,8 +6089,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Pincode verwijderen en opties uitzetten"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Verwijderen"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Je pincode voor ouderlijk toezicht wordt gebruikt door:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"Je pincode voor ouderlijk toezicht is actief voor een andere gebruiker"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animatie voor <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Kan bedieningselementen niet aanzetten"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Kan bedieningselementen niet gebruiken"</string>

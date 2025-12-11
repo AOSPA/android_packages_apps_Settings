@@ -1208,8 +1208,8 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Use um código QR para adicionar um dispositivo a esta rede"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"O código QR não é um formato válido."</string>
     <string name="retry" msgid="7542103800274026915">"Repetir"</string>
-    <string name="shared_message" msgid="2104244057926025072">"partilhado"</string>
-    <string name="private_message" msgid="5897966950396765392">"privado"</string>
+    <string name="shared_message" msgid="2104244057926025072">"partilhada"</string>
+    <string name="private_message" msgid="5897966950396765392">"privada"</string>
     <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"Mudar"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Cancelar"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"Partilhar rede"</string>
@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Certificado obrigatório."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Para melhorar a precisão da localização e para outros fins, <xliff:g id="APP_NAME">%1$s</xliff:g> quer ativar a verificação de redes, mesmo quando o Wi-Fi está desativado.\n\nPermitir esta opção para todas as aplicações que querrem verificar?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Para melhorar a precisão da localização e outros fins, uma app desconhecida quer ativar a procura de redes, mesmo quando o Wi-Fi está desativado.\n\nPermitir para todas as apps que querrem procurar?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Permitir"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Recusar"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* obrigatório"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Esta é uma rede partilhada. Tem de iniciar sessão para fazer alterações."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Contacte o proprietário da rede ou o administrador do dispositivo para fazer alterações."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Outros utilizadores neste dispositivo podem aceder a esta rede."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Esta rede não tem acesso à Internet. Quer manter a ligação?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Algumas aplicações e serviços podem não funcionar devido a conetividade limitada. Usar mesmo assim?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Não perguntar novamente para esta rede"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Não foi possível guardar a rede"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Cancelar"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Esquecer rede?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"A rede <xliff:g id="NETWORK_NAME">%1$s</xliff:g> vai ser removida para todos os utilizadores neste dispositivo"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 rede}other{# redes}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 subscrição}other{# subscrições}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 rede e subscrição}other{# redes e subscrições}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolução"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Resolução máxima"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"A resolução máxima consome mais bateria. Se mudar a resolução, algumas apps podem ser reiniciadas."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> por <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hertz"</string>
@@ -4667,7 +4668,7 @@
     <string name="users_summary" msgid="8473589474976307510">"Sessão iniciada como <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Atualizado para o Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"Atualização disponível."</string>
-    <string name="disabled_by_policy_title" msgid="6852347040813204503">"Bloqueada por polít. trabalho"</string>
+    <string name="disabled_by_policy_title" msgid="6852347040813204503">"Bloqueada por Polít. Trabalho"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"Impossível alterar o volume"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"Não é possível fazer chamadas"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"Não é possível enviar mensagens SMS"</string>
@@ -4691,6 +4692,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Para sua segurança, a Proteção avançada requer que esta definição permaneça desativada"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Para sua segurança, a Proteção avançada impede esta ação"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Definições"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Desativar"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Ativar"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Mostrar"</string>
@@ -6062,8 +6071,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtrar resultados da pesquisa explícitos"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Em # app}other{Em # apps}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"Mais <xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"Saber mais"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Quando estas definições estão desativadas, podem continuar a aplicar-se outras definições da conta."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Introduza o PIN dos controlos parentais"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Defina um PIN de controlos parentais"</string>
@@ -6081,8 +6089,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Eliminar PIN e desativar controlos"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Eliminar"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"O PIN dos controlos parentais está a ser usado por:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"O PIN dos controlos parentais está ativo para outro utilizador"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animação de <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Não é possível ativar os controlos"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Não é possível usar os controlos"</string>

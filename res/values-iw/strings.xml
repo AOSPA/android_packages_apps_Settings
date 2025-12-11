@@ -1031,9 +1031,9 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"כדי להתחיל, צריך לחבר מסך חיצוני או להשתמש בכבל אחר"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"אפשרויות נוספות"</string>
     <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"השהיה של אנימציית המעבר בין הוראות"</string>
-    <string name="external_display_topology_hint" msgid="885396727047321347">"כדי לשנות את סדר התצוגות, לוחצים לחיצה ארוכה על תצוגה וגוררים אותה"</string>
+    <string name="external_display_topology_hint" msgid="885396727047321347">"כדי לשנות את סדר המסכים, לוחצים לחיצה ארוכה על מסך וגוררים אותו"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"צריך ללחוץ כדי לראות את חיצי הניווט"</string>
-    <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"כדי לשנות את סדר התצוגות צריך ללחוץ על החיצים"</string>
+    <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"כדי לשנות את סדר המסכים צריך ללחוץ על החיצים"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"שיקוף המסך המובנה"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"להמשיך עם ההגדרות החדשות?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"אם תצוגת המסך לא פועלת כמו שציפית, אפשר לחזור להגדרות הקודמות"</string>
@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"נדרש אישור."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"‏לשיפור דיוק המיקום ולמטרות אחרות, <xliff:g id="APP_NAME">%1$s</xliff:g> מבקשת להפעיל את חיפוש הרשתות, גם כאשר ה-Wi-Fi כבוי.\n\nהאם לאפשר זאת עבור כל האפליקציות?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"‏לשיפור של דיוק המיקום ולמטרות אחרות, אפליקציה לא ידועה רוצה להפעיל את סריקת הרשתות, גם כאשר ה-Wi-Fi כבוי.\n\nהאם להתיר זאת עבור כל האפליקציות שרוצות לסרוק?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"כן, זה בסדר"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"דחייה"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*חובה"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"הרשת הזו משותפת. כדי לבצע שינויים, צריך להיכנס לחשבון."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"כדי לבצע שינויים, צריך לפנות לבעלים של הרשת או לאדמין של המכשיר."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"כל המשתמשים במכשיר הזה יכולים לגשת לרשת הזו."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"אין לרשת הזו חיבור לאינטרנט. האם להישאר מחובר?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"ייתכן שחלק מהאפליקציות והשירותים לא יפעלו עקב קישוריות מוגבלת. להשתמש בכל זאת?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"אל תשאל שוב בשביל הרשת הזו"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"נכשל הניסיון לשמור את הרשת"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"ביטול"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"למחוק את הרשת?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"אף אחד מהמשתמשים במכשיר הזה לא יוכל להתחבר לרשת <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{רשת אחת}one{# רשתות}two{# רשתות}other{# רשתות}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{מינוי אחד}one{# מינויים}two{# מינויים}other{# מינויים}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{רשת ומינוי}one{# רשתות ומינויים}two{# רשתות ומינויים}other{# רשתות ומינויים}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"רזולוציה גבוהה"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"רזולוציה מקסימלית"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"כשמשתמשים ברזולוציה מקסימלית, צריכת הסוללה גבוהה יותר. אם משנים את הרזולוציה, יכול להיות שחלק מהאפליקציות יופעלו מחדש."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"‫<xliff:g id="WIDTH">%1$s</xliff:g> על <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"‫<xliff:g id="REFRESH_RATE">%1$s</xliff:g> הרץ"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"‫<xliff:g id="REFRESH_RATE">%1$s</xliff:g> הרץ"</string>
@@ -1883,8 +1884,8 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"שינוי אזור הזמן"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"קבלת התראה כשאזור הזמן מתעדכן אוטומטית"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"התראה, זמן, אזור, אזור זמן"</string>
-    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"שינוי מתוזמן בשעון"</string>
-    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"קבלת התראה על שינוי מתוזמן של השעון, למשל במעבר לשעון קיץ"</string>
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"הזזה מתוזמנת של השעון"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"קבלת התראה על הזזה מתוזמנת של השעון, למשל במעבר לשעון קיץ"</string>
     <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"שעון קיץ, מעבר לשעון קיץ, מעבר לשעון חורף, הזזת השעון, הזזה מתוזמנת של השעון"</string>
     <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"השינוי הבא"</string>
     <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"אין שינויים מתוזמנים"</string>
@@ -3173,7 +3174,7 @@
     <string name="tts_sliders_title" msgid="6901146958648426181">"קצב הדיבור וגובה הקול"</string>
     <string name="tts_engine_section_title" msgid="5115035218089228451">"מנוע"</string>
     <string name="tts_install_voice_title" msgid="5133545696447933812">"קולות"</string>
-    <string name="tts_spoken_language" msgid="4652894245474520872">"שפת הדיבור"</string>
+    <string name="tts_spoken_language" msgid="4652894245474520872">"שפת ההקראה"</string>
     <string name="tts_install_voices_title" msgid="6505257816336165782">"התקנת צלילים"</string>
     <string name="tts_install_voices_text" msgid="902408506519246362">"המשך אל האפליקציה <xliff:g id="TTS_APP_NAME">%s</xliff:g> כדי להתקין צלילים"</string>
     <string name="tts_install_voices_open" msgid="919034855418197668">"פתיחת האפליקציה"</string>
@@ -4406,7 +4407,7 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"הצמדת אפליקציה"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"התכונה \"הצמדת אפליקציה\" מאפשרת לקבע את האפליקציה הנוכחית בתצוגה עד לביטול ההצמדה. אפשר להשתמש בתכונה, למשל, כשנותנים לחבר שסומכים עליו לשחק במשחק מסוים."</string>
     <string name="screen_pinning_description" msgid="5822120806426139396">"‏לאחר הצמדת אפליקציה כלשהי, יכול להיות שייפתחו אפליקציות אחרות מאותה אפליקציה ושתתאפשר גישה למידע האישי. \n\nכדי להשתמש בהצמדת אפליקציה: 	\n{0,number,integer}. מפעילים את התכונה \'הצמדת האפליקציה\' 	\n{1,number,integer}. פותחים את הסקירה הכללית 	\n{2,number,integer}. לוחצים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז לוחצים על \'הצמדה\'"</string>
-    <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"‏לאחר הצמדת אפליקציה כלשהי, יכול להיות שייפתחו אפליקציות אחרות מאותה אפליקציה ושתתאפשר גישה למידע האישי. \n\nכדי לשתף את המכשיר באופן מאובטח עם אדם אחר, כדאי להשתמש במשתמש אורח במקום זאת. \n\nכדי להשתמש בהצמדת אפליקציה: 	\n{0,number,integer}. מפעילים את התכונה \'הצמדת האפליקציה\' 	\n{1,number,integer}. פותחים את הסקירה הכללית 	\n{2,number,integer}. לוחצים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז לוחצים על \'הצמדה\'"</string>
+    <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"‏לאחר הצמדת אפליקציה כלשהי, יכול להיות שייפתחו אפליקציות אחרות מאותה אפליקציה ושתתאפשר גישה למידע האישי. \n\nכדי לשתף את המכשיר באופן מאובטח עם אדם אחר, כדאי להשתמש במשתמש אורח במקום זאת. \n\nכדי להשתמש בהצמדת אפליקציה: 	\n{0,number,integer}. מפעילים את התכונה \'הצמדת האפליקציה\' 	\n{1,number,integer}. פותחים את הסקירה הכללית 	\n{2,number,integer}. לוחצים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז לוחצים על \'הצמדה‘"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"אחרי הצמדת אפליקציה: \n\n•	 יכול להיות שתתאפשר גישה למידע אישי \n		(כמו אנשי קשר ותוכן מהאימייל) \n•	 האפליקציה שהוצמדה עשויה לפתוח אפליקציות אחרות \n\nצריך להשתמש בהצמדת אפליקציה רק עם אנשים מהימנים."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"בקשת קו ביטול נעילה לפני ביטול הצמדה"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"בקשת קוד גישה לפני ביטול הצמדה"</string>
@@ -4421,7 +4422,7 @@
     <string name="memtag_off" msgid="4835589640091709019">"מושבתת"</string>
     <string name="memtag_on_pending" msgid="1592053425431532361">"ההגנה תופעל כשמפעילים את המכשיר מחדש"</string>
     <string name="memtag_off_pending" msgid="1543177181383593726">"ההגנה תושבת כשמפעילים את המכשיר מחדש"</string>
-    <string name="memtag_force_off" msgid="1143468955988138470">"ההגנה לא זמינה כרגע עבור המכשיר שלך"</string>
+    <string name="memtag_force_off" msgid="1143468955988138470">"ההגנה לא זמינה כרגע במכשיר שלך"</string>
     <string name="memtag_force_on" msgid="3254349938627883664">"פועלת כל הזמן עבור המכשיר שלך"</string>
     <string name="memtag_footer" msgid="8480784485124271376">"צריך להפעיל מחדש את המכשיר כדי להפעיל את הגנת הזיכרון המתקדמת או להשבית אותה. כשהיא מופעלת, ביצועי המכשיר עשויים להיות איטיים יותר."</string>
     <string name="memtag_reboot_title" msgid="1413471876903578769">"להפעיל את המכשיר מחדש?"</string>
@@ -4691,6 +4692,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"מטעמי אבטחה, כשההגנה המתקדמת פועלת, ההגדרה הזו צריכה להיות מושבתת"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"מטעמי אבטחה, ההגנה המתקדמת חוסמת את הפעולה הזו"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"הגדרות"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"כיבוי"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"הפעלה"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"הצגה"</string>
@@ -5174,8 +5183,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"‏ניסיוני: הפעלת ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"‏אזהרה: להפעיל את ANGLE כברירת מחדל של הדרייבר OpenGL ES? התכונה הזו ניסיונית ויכול להיות שלא תתאים לחלק מאפליקציות המצלמה והסרטונים. לפני שמפעילים את המתג, צריך לגבות את הנתונים במכשיר"</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"‏כדי לשנות את דרייבר OpenGL ES של המערכת, צריך להפעיל את המכשיר מחדש. לפני ההפעלה מחדש, צריך לגבות את הנתונים במכשיר. אם ההפעלה מחדש נכשלה, צריך לאפס את המכשיר להגדרות המקוריות כדי לשחזר אותו"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"‏אזהרה: להפעיל את ANGLE כברירת מחדל של הדרייבר OpenGL ES? התכונה הזו ניסיונית ויכול להיות שלא תתאים לחלק מאפליקציות המצלמה והסרטונים. לפני שמפעילים את המתג, צריך לגבות את הנתונים במכשיר."</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"‏כדי לשנות את דרייבר OpenGL ES של המערכת, צריך להפעיל את המכשיר מחדש. לפני ההפעלה מחדש, צריך לגבות את הנתונים במכשיר. אם ההפעלה מחדש נכשלה, צריך לאפס את המכשיר להגדרות המקוריות כדי לשחזר אותו."</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"שינויים בתאימות האפליקציה"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"החלפת המצב של שינויים בתאימות של אפליקציות"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"השינויים מופעלים כברירת מחדל"</string>
@@ -5865,7 +5874,7 @@
     <string name="grammatical_gender_title" msgid="8584242850477270828">"לשון הפנייה"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"בחירת לשון הפנייה"</string>
     <string name="content_protection_preference_title" msgid="5069260032659193074">"סריקה לאיתור אפליקציות מטעות"</string>
-    <string name="content_protection_preference_summary" msgid="2252393849408445391">"בדיקת הפעילות באפליקציה לאיתור פישינג"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"בדיקת הפעילות באפליקציות לאיתור פישינג"</string>
     <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"שימוש בסריקה לגילוי אפליקציות שיש בהן ניסיונות הונאה"</string>
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"שימוש בסריקה לגילוי אפליקציות לצורכי עבודה שיש בהן ניסיונות הונאה"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>

@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Vyžaduje sa certifikát."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Aplikácia <xliff:g id="APP_NAME">%1$s</xliff:g> chce zapnúť vyhľadávanie sietí (z dôvodu dosiahnutia vyššej presnosti určovania polohy aj z iných dôvodov) a hľadať siete aj v prípade, že je vypnutý modul Wi‑Fi.\n\nChcete túto možnosť povoliť všetkým aplikáciám, ktoré chcú vyhľadávať siete?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Neznáma aplikácia chce na zlepšenie presnosti určovania polohy a ďalšie účely zapnúť vyhľadávanie sietí, aj keď je vypnutá funkcia Wi‑Fi.\n\nChcete to povoliť všetkým aplikáciám, ktoré chcú vyhľadávať siete?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Povoliť"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Zamietnuť"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* Povinné."</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Toto je zdieľaná sieť. Ak ju chcete meniť, musíte sa prihlásiť."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Ak chcete vykonať zmeny, kontaktujte vlastníka siete alebo správcu zariadenia."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Túto sieť môžu využívať všetci používatelia tohto zariadenia."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Táto sieť nemá prístup k internetu. Zachovať pripojenie?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Niektoré aplikácie a služby nemusia fungovať z dôvodu obmedzeného pripojenia. Chcete sieť napriek tomu použiť?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Nabudúce sa na túto sieť nepýtať"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Nepodarilo sa uložiť sieť"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Zrušiť"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Zabudnúť sieť?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"Sieť <xliff:g id="NETWORK_NAME">%1$s</xliff:g> bude odstránená pre všetkých používateľov tohto zariadenia"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 sieť}few{# siete}many{# networks}other{# sietí}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 odber}few{# odbery}many{# subscriptions}other{# odberov}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 sieť a odber}few{# siete a odbery}many{# networks &amp; subscriptions}other{# sietí a odberov}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Vysoké rozlíšenie"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Maximálne rozlíšenie"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Maximálne rozlíšenie viac spotrebúva batériu. Ak rozlíšenie prepnete, niektoré aplikácie sa môžu reštartovať."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> – <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Zmena časového pásma"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Dostávať upozornenia, keď sa časové pásmo automaticky aktualizuje"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"upozornenie, čas, pásmo, časové pásmo"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Naplánovaná zmena hodín"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Dostávajte upozornenia, keď hodiny vykonajú naplánovanú zmenu, napríklad pri prechode na letný čas"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"lč, letný čas, zmena času, plánovaná zmena času"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Ďalšia zmena"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Žiadne naplánované zmeny"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Zobrazuje právne informácie, stav a verziu softvéru"</string>
     <string name="legal_information" msgid="7509900979811934843">"Právne informácie"</string>
     <string name="manual" msgid="3651593989906084868">"Príručka"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Klon"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Klon <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> sa vytvára"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Klon <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> bol vytvorený"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Jazyky, gestá, čas"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Jazyky systému, jazyky aplikácií, regionálne nastavenia, reč"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, sieťové pripojenie, internet, bezdrôtové, dáta, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Upozornenie Wi‑Fi, upozornenie wifi"</string>
@@ -4697,6 +4692,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Rozšírená ochrana z bezpečnostných dôvodov vyžaduje, aby zostalo toto nastavenie vypnuté"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Rozšírená ochrana zabráni z bezpečnostných dôvodov tejto akcii"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Nastavenia"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Vypnúť"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Zapnúť"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Zobraziť"</string>
@@ -5180,10 +5183,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Experimentálne: povoliť ANGLE"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Upozornenie: Povoľte ANGLE ako predvolený ovládač OpenGL ES. Táto funkcia je experimentálna a nemusí byť kompatibilná s niektorými aplikáciami na ovládanie kamery a tvorbu videa. Pred zapnutím prepínača zálohujte dáta zo zariadenia."</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"Zmena systémového ovládača OpenGL ES vyžaduje reštart. Pred reštartom zálohujte dáta zo zariadenia. Ak sa reštart nepodaril, musíte obnoviť výrobné nastavenia zariadenia."</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Zmeny v kompatibilite aplikácie"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Prepínať zmeny kompatibility aplikácie"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Predvolené aktivované zmeny"</string>
@@ -6072,8 +6073,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtrovať explicitné výsledky vyhľadávania"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Zapnutá je # aplikácia}few{Zapnuté sú # aplikácie}many{On # apps}other{Zapnutých je # aplikácií}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"Ďalšie informácie"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Keď sú tieto nastavenia vypnuté, môžu ďalej platiť iné nastavenia účtu."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Zadajte PIN rodičovskej kontroly"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Nastavte PIN rodičovskej kontroly"</string>
@@ -6091,8 +6091,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Odstrániť PIN a vypnúť ovládanie"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Odstrániť"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Váš kód PIN rodičovskej kontroly používa:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"Váš kód PIN rodičovskej kontroly je aktívny pre iného používateľa"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animácia <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Ovládanie sa nedá zapnúť"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Ovládanie sa nedá použiť"</string>
