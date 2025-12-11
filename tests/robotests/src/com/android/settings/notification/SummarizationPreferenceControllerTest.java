@@ -56,7 +56,6 @@ public class SummarizationPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mSetFlagsRule.enableFlags(Flags.FLAG_NM_SUMMARIZATION, Flags.FLAG_NM_SUMMARIZATION_UI);
         mController = new SummarizationPreferenceController(mContext, PREFERENCE_KEY);
         mController.mBackend.setNm(mInm);
     }
@@ -78,13 +77,5 @@ public class SummarizationPreferenceControllerTest {
     public void isAvailable_NasDoesNotSupport_butAppsDo() throws Exception {
         when(mInm.getUnsupportedAdjustmentTypes()).thenReturn(List.of(KEY_SUMMARIZATION));
         assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_NM_SUMMARIZATION_ALL)
-    public void isAvailable_flagDisabledNasSupports_shouldReturnFalse() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_NM_SUMMARIZATION);
-        mSetFlagsRule.disableFlags(Flags.FLAG_NM_SUMMARIZATION_UI);
-        assertThat(mController.isAvailable()).isFalse();
     }
 }
