@@ -1,0 +1,109 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <target android:name="_R_G_L_1_G_D_0_P_0">
+        <aapt:attr name="android:animation">
+            <set android:ordering="together">
+                <objectAnimator
+                    android:duration="583"
+                    android:propertyName="fillAlpha"
+                    android:startOffset="0"
+                    android:valueFrom="1"
+                    android:valueTo="1"
+                    android:valueType="floatType">
+                    <aapt:attr name="android:interpolator">
+                        <pathInterpolator android:pathData="M 0.0,0.0 c0.167,0 0.667,1 1.0,1.0" />
+                    </aapt:attr>
+                </objectAnimator>
+                <objectAnimator
+                    android:duration="417"
+                    android:propertyName="fillAlpha"
+                    android:startOffset="583"
+                    android:valueFrom="1"
+                    android:valueTo="0"
+                    android:valueType="floatType">
+                    <aapt:attr name="android:interpolator">
+                        <pathInterpolator android:pathData="M 0.0,0.0 c0.167,0 0.667,1 1.0,1.0" />
+                    </aapt:attr>
+                </objectAnimator>
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="_R_G_L_1_G">
+        <aapt:attr name="android:animation">
+            <set android:ordering="together">
+                <objectAnimator
+                    android:duration="1000"
+                    android:propertyName="scaleX"
+                    android:startOffset="0"
+                    android:valueFrom="0.1"
+                    android:valueTo="1"
+                    android:valueType="floatType">
+                    <aapt:attr name="android:interpolator">
+                        <pathInterpolator android:pathData="M 0.0,0.0 c0.167,0.167 0,1 1.0,1.0" />
+                    </aapt:attr>
+                </objectAnimator>
+                <objectAnimator
+                    android:duration="1000"
+                    android:propertyName="scaleY"
+                    android:startOffset="0"
+                    android:valueFrom="0.1"
+                    android:valueTo="1"
+                    android:valueType="floatType">
+                    <aapt:attr name="android:interpolator">
+                        <pathInterpolator android:pathData="M 0.0,0.0 c0.167,0.167 0,1 1.0,1.0" />
+                    </aapt:attr>
+                </objectAnimator>
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="time_group">
+        <aapt:attr name="android:animation">
+            <set android:ordering="together">
+                <objectAnimator
+                    android:duration="1000"
+                    android:propertyName="translateX"
+                    android:startOffset="0"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="72dp"
+            android:height="72dp"
+            android:viewportHeight="72"
+            android:viewportWidth="72">
+            <group android:name="_R_G">
+                <group
+                    android:name="_R_G_L_1_G"
+                    android:pivotX="36"
+                    android:pivotY="36"
+                    android:scaleX="0.1"
+                    android:scaleY="0.1">
+                    <path
+                        android:name="_R_G_L_1_G_D_0_P_0"
+                        android:fillAlpha="1"
+                        android:fillColor="?attr/colorScStatusIconBackgroundRecommend"
+                        android:fillType="nonZero"
+                        android:pathData="M36,0C55.88,0,72,16.12,72,36S55.88,72,36,72,0,55.88,0,36,16.12,0,36,0Z" />
+                </group>
+                <group
+                    android:name="_R_G_L_0_G"
+                    android:pivotX="36"
+                    android:pivotY="36"
+                    android:translateX="19"
+                    android:translateY="15">
+                    <path
+                        android:name="_R_G_L_0_G_D_0_P_0"
+                        android:fillAlpha="1"
+                        android:fillColor="?attr/colorScIconRecommend"
+                        android:fillType="nonZero"
+                        android:pathData="M0.856,17.569C0.887,19.083 1.004,20.593 1.206,22.094C2.166,28.584 5.804,35.937 15.774,41.089C16.171,41.293 16.61,41.4 17.056,41.4C17.503,41.4 17.942,41.293 18.339,41.089C28.309,35.936 31.947,28.583 32.907,22.093C33.109,20.593 33.226,19.083 33.256,17.569V8.605C33.257,7.919 33.046,7.25 32.652,6.688C32.259,6.127 31.703,5.7 31.059,5.467L18.191,0.8C17.458,0.534 16.655,0.534 15.922,0.8L3.054,5.467C2.41,5.7 1.854,6.127 1.461,6.688C1.067,7.25 0.856,7.919 0.856,8.605V17.569Z" />
+                </group>
+            </group>
+            <group android:name="time_group" />
+        </vector>
+    </aapt:attr>
+</animated-vector>
