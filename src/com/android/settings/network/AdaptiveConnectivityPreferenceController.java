@@ -16,13 +16,14 @@
 
 package com.android.settings.network;
 
-import android.content.Context;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.flags.Flags;
 
@@ -42,8 +43,11 @@ public class AdaptiveConnectivityPreferenceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(R.bool.config_show_adaptive_connectivity)
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        if (!Utils.isMobileDataCapable(mContext)
+                || !mContext.getResources().getBoolean(R.bool.config_show_adaptive_connectivity)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        return AVAILABLE;
     }
 
     @Override
