@@ -368,7 +368,12 @@ open class SelectedDisplayPreferenceFragment(
         val height = displayMode.physicalHeight
         val formattedWidth = numberFormatter.format(width)
         val formattedHeight = numberFormatter.format(height)
-        val resolutionDisplayText = "$formattedWidth x $formattedHeight"
+        val resolutionDisplayText =
+            resources.getString(
+                R.string.screen_resolution_displayed_text,
+                formattedWidth,
+                formattedHeight,
+            )
         val resolutionA11yText =
             resources.getString(R.string.screen_resolution_delimiter_a11y, width, height)
         ExternalDisplaySettingsLoggerStore.getLogger(display.id).updateResolution(width, height)

@@ -193,11 +193,21 @@ class ResolutionRefreshRatePreferenceFragment(
                 SelectorWithWidgetPreference(prefContext).apply {
                     val width = item.physicalWidth
                     val height = item.physicalHeight
+                    val formattedWidth = resolutionFormatter.format(width)
+                    val formattedHeight = resolutionFormatter.format(height)
                     key = "${width}x$height"
                     title =
                         Utils.createAccessibleSequence(
-                            item.toReadableString(),
-                            getString(R.string.screen_resolution_delimiter_a11y, width, height),
+                            getString(
+                                R.string.screen_resolution_displayed_text,
+                                formattedWidth,
+                                formattedHeight,
+                            ),
+                            getString(
+                                R.string.screen_resolution_delimiter_a11y,
+                                formattedWidth,
+                                formattedHeight,
+                            ),
                         )
                     isSingleLineTitle = true
                     isChecked =
@@ -294,12 +304,6 @@ class ResolutionRefreshRatePreferenceFragment(
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean = false
-
-    private fun ResolutionItem.toReadableString(): String {
-        val formattedWidth = resolutionFormatter.format(this.physicalWidth)
-        val formattedHeight = resolutionFormatter.format(this.physicalHeight)
-        return "$formattedWidth x $formattedHeight"
-    }
 
     private fun RefreshRateItem.toReadableString(): String {
         return refreshRateFormatter.format(this.refreshRate)
