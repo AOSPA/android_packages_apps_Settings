@@ -1205,7 +1205,7 @@
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Ligação automática"</string>
     <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Permita a ligação a esta rede quando estiver ao alcance"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Adicionar dispositivo"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Utilize um código QR para adicionar um dispositivo a esta rede"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Use um código QR para adicionar um dispositivo a esta rede"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"O código QR não é um formato válido."</string>
     <string name="retry" msgid="7542103800274026915">"Repetir"</string>
     <string name="shared_message" msgid="2104244057926025072">"partilhado"</string>
@@ -1253,7 +1253,7 @@
     <string name="wifi_save" msgid="2312643132472226807">"Guardar"</string>
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Não foi possível guardar a rede"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Cancelar"</string>
-    <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Esqueceu-se da rede?"</string>
+    <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Esquecer rede?"</string>
     <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"A rede <xliff:g id="NETWORK_NAME">%1$s</xliff:g> vai ser removida para todos os utilizadores neste dispositivo"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 rede}other{# redes}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 subscrição}other{# subscrições}}"</string>
@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Temporariamente desativado devido à Poupança de bateria"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Usar modo de baixa luminosidade"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Escolha o que quer mostrar no modo de baixa luminosidade"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Desligar ecrã"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Relógio para pouca luz"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"Ativado/<xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"Desativado"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"O ecrã vai desligar-se quando o ambiente estiver escuro"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"O relógio para pouca luz é apresentado quando o ambiente está escuro"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Visualização ambiente"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Quando apresentar"</string>
@@ -1885,6 +1883,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Alteração do fuso horário"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Receba uma notificação quando o seu fuso horário for atualizado automaticamente"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notificação, hora, zona, fuso horário"</string>
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Mudança da hora agendada"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Receba uma notificação quando o relógio fizer uma mudança agendada, por exemplo, para a hora de verão"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"mudança da hora, mudança de hora, mudança de hora agendada"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Próxima mudança"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Sem mudanças agendadas"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Ver informações jurídicas, estado, versão de software"</string>
     <string name="legal_information" msgid="7509900979811934843">"Informações legais"</string>
     <string name="manual" msgid="3651593989906084868">"Manual"</string>
@@ -2333,8 +2336,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Apps recentes"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notificações"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Definições rápidas"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"Nota"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Escolha um atalho para o <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"canto inferior esquerdo"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"canto inferior direito"</string>
@@ -2974,6 +2976,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Utilização da bateria pelas apps"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Usar detalhes"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajustar utilização de energia"</string>
@@ -3681,7 +3684,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Clonada"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"A criar um clone de <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Clone de <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> criado"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"Idiomas, gestos, hora, cópia de segurança"</string>
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Idiomas, gestos e hora"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Idiomas do sistema, idiomas de apps, preferências regionais, voz"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wi-Fi, ligação de rede, Internet, sem fios, dados, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notificação Wi‑Fi, notificação wifi"</string>
@@ -3933,10 +3936,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmes e outras interrupções"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Duração das Definições rápidas"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"Sincronização do modo Não incomodar"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"Sincronize as definições do modo Não incomodar com os dispositivos ligados"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Sons do perfil de trabalho"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Usar sons do perfil pessoal"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Use os mesmos sons que o seu perfil pessoal"</string>
@@ -3991,7 +3992,7 @@
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"As notificações destas apps não vão ser resumidas"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Gerir apps"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Faça a gestão de apps para resumos de notificações"</string>
-    <string name="notification_excluded_apps" msgid="317898848790046528">"Não inclua estas apps"</string>
+    <string name="notification_excluded_apps" msgid="317898848790046528">"Não incluir estas apps"</string>
     <string name="notification_app_level_summarize_title" msgid="488390574186154905">"Resumos de notificações"</string>
     <string name="notification_app_level_summarize_subtext" msgid="2064371198044287108">"Receba resumos rápidos de mensagens mais longas"</string>
     <string name="notification_summarization_no_apps_desc" msgid="6058658379217986963">"Todas as apps aplicáveis estão a usar os resumos de notificações"</string>
@@ -4164,7 +4165,7 @@
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Permitir que o serviço de RV tenha acesso a <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"Será possível executar o <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> quando estiver a usar aplicações no modo de realidade virtual."</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"Com o dispositivo no modo RV"</string>
-    <string name="display_vr_pref_low_persistence" msgid="7039841277157739871">"Reduzir a desfocagem (recomendado)"</string>
+    <string name="display_vr_pref_low_persistence" msgid="7039841277157739871">"Reduzir desfocagem (recomendado)"</string>
     <string name="display_vr_pref_off" msgid="4008841566387432721">"Reduzir a cintilação"</string>
     <string name="picture_in_picture_title" msgid="9001594281840542493">"Ecrã no ecrã"</string>
     <string name="picture_in_picture_empty_text" msgid="9123600661268731579">"Nenhuma app instalada é compatível com Imagem na imagem"</string>
@@ -4904,16 +4905,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Inverter a câmara para tirar uma selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Modo de navegação"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"Atualize o dispositivo"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"Interação"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"Automatização e inteligência"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"Gestão de sistemas"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"Faça a gestão dos dados"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navegação com 2 botões"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Para mudar de app, deslize rapidamente para cima no botão do ecrã principal. Para ver todas as apps, volte a deslizar rapidamente para cima. Para retroceder, toque no botão Anterior."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"Notificações e Definições rápidas"</string>
@@ -5181,8 +5177,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Experimental: ativar ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Aviso: ative o ANGLE como controlador predefinido do OpenGL ES. Esta funcionalidade é uma experiência e pode não ser compatível com algumas apps de câmara e vídeo."</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"É necessário reiniciar para alterar o controlador do OpenGL ES do sistema"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Aviso: ative o ANGLE como controlador predefinido do OpenGL ES. Esta funcionalidade é uma experiência e pode não ser compatível com algumas apps de câmara e vídeo. Faça uma cópia de segurança dos dados do dispositivo antes de ativar o switch"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"É necessário reiniciar para alterar o controlador do OpenGL ES do sistema. Faça uma cópia de segurança dos dados do dispositivo antes de o reiniciar. Caso o reinício tenha falhado, precisa de uma reposição de fábrica para restaurar o dispositivo"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Alterações de compatibilidade da aplicação"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Ativar/desativar alterações de compatibilidade das apps"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Alterações ativadas predefinidas"</string>
@@ -6069,6 +6065,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtrar resultados da pesquisa explícitos"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Em # app}other{Em # apps}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"Mais <xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Quando estas definições estão desativadas, podem continuar a aplicar-se outras definições da conta."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Introduza o PIN dos controlos parentais"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Defina um PIN de controlos parentais"</string>
@@ -6086,6 +6084,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Eliminar PIN e desativar controlos"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Eliminar"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"O PIN dos controlos parentais está a ser usado por:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animação de <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Não é possível ativar os controlos"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Não é possível usar os controlos"</string>

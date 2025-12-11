@@ -333,7 +333,7 @@
     <string name="date_time_set_time_title" msgid="2870083415922991906">"시간"</string>
     <string name="time_format_category_title" msgid="7108616745509689991">"시간 형식"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"시간대"</string>
-    <string name="date_time_set_timezone" msgid="2915125337941495746">"표준시간대 선택"</string>
+    <string name="date_time_set_timezone" msgid="2915125337941495746">"시간대 선택"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"시간대 검색"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"날짜"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"지역 검색"</string>
@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"절전 모드로 인해 일시적으로 사용 중지되었습니다."</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"저조도 모드 사용"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"저조도 모드에서 표시할 항목 선택"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"화면 꺼짐"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"저조도 시계"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"켬/<xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"끔"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"주변이 어두우면 화면이 꺼집니다."</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"저조도 시계는 주변 환경이 어두울 때 표시됩니다."</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"절전 모드 자동 해제"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"표시 시점"</string>
@@ -1885,6 +1883,16 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"시간대 변경"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"시간대가 자동으로 업데이트되면 알림을 받습니다."</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"알림, 시간, 시간대"</string>
+    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
+    <skip />
+    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
+    <skip />
+    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
+    <skip />
     <string name="about_settings_summary" msgid="4831942939227432513">"법률 정보, 상태, 소프트웨어 버전 보기"</string>
     <string name="legal_information" msgid="7509900979811934843">"법률 정보"</string>
     <string name="manual" msgid="3651593989906084868">"수동"</string>
@@ -2333,8 +2341,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"최근 앱"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"알림"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"빠른 설정"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"메모"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g>의 바로가기를 선택하세요"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"왼쪽 하단"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"오른쪽 하단"</string>
@@ -2602,12 +2609,9 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"화면을 빠르게 %1$d번 탭합니다. 이렇게 하면 기기가 느려질 수 있습니다."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"손가락 %1$d개를 사용하여 두 번 탭"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"세 번 탭"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_keyboard (6563958384189884131) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_keyboard (8755352177645189254) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_keyboard_keyword (7354208869208311654) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"단축키"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"<xliff:g id="ID_4">%4$s</xliff:g> 기능을 사용하려면 <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> 키를 누르세요."</string>
+    <string name="accessibility_shortcut_keyboard_keyword" msgid="7354208869208311654">"단축키"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"고급"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"접근성 버튼이 <xliff:g id="SERVICE">%1$s</xliff:g>(으)로 설정되어 있습니다. 확대를 사용하려면 접근성 버튼을 길게 터치한 다음 확대를 선택하세요."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"접근성 동작이 <xliff:g id="SERVICE">%1$s</xliff:g>(으)로 설정되어 있습니다. 확대 기능을 사용하려면 두 손가락을 사용하여 화면 하단에서 위로 스와이프한 다음 잠시 기다리세요. 그런 다음 확대를 선택합니다."</string>
@@ -2977,6 +2981,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"앱 배터리 사용량"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"사용 세부정보"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"전원 사용 조절"</string>
@@ -3665,10 +3670,8 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"블루투스, Android Auto, 운전 모드"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"블루투스, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"블루투스, Android Auto"</string>
-    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
-    <skip />
-    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
-    <skip />
+    <string name="device_dashboard_title" msgid="1176311605407079643">"기기"</string>
+    <string name="device_dashboard_summary" msgid="657619609434549473">"키보드, 터치패드, 디스플레이, 사운드"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC가 꺼져 있어 사용할 수 없음"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"사용하려면 먼저 결제 앱을 설치하세요."</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"최근 앱, 기본 앱"</string>
@@ -3686,7 +3689,8 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"복제됨"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> 복제 만드는 중"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> 복제 생성됨"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"언어, 동작, 시간, 백업"</string>
+    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
+    <skip />
     <string name="languages_setting_summary" msgid="2650807397396180351">"시스템 언어, 앱 언어, 지역 설정, 음성"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wi-Fi, 네트워크 연결, 인터넷, 무선, 데이터, WiFi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi 알림, Wi‑Fi 알림"</string>
@@ -3938,10 +3942,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"앱"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"알람 및 기타 방해 요소"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"빠른 설정 지속 시간"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"방해 금지 모드 동기화"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"연결된 기기에 방해 금지 모드 설정을 동기화합니다."</string>
     <string name="sound_work_settings" msgid="752627453846309092">"직장 프로필 소리"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"개인 프로필 소리 사용"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"개인 프로필과 동일한 소리 사용"</string>
@@ -4631,8 +4633,7 @@
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"앱이 다른 앱의 화면 콘텐츠와 상호작용하여 작업을 완료할 수 있도록 허용합니다."</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"항상 확인"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"항상 허용"</string>
-    <!-- no translation found for computer_control_automation_dont_allow (6562575180350018944) -->
-    <skip />
+    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"허용 안함"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"전체 화면 알림"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"이 앱에 전체 화면 알림 허용"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"기기가 잠겨 있을 때 앱에서 알림을 전체 화면에 표시할 수 있도록 허용합니다. 앱에서는 이러한 방식으로 알람, 수신 전화 또는 기타 긴급 알림을 강조 표시할 수 있습니다."</string>
@@ -4910,16 +4911,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"뒤집어서 셀피용 카메라로 전환"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"탐색 모드"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"기기 업데이트"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"상호작용"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"자동화 및 인텔리전스"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"시스템 관리"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"데이터 관리"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"2버튼 탐색"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"앱을 전환하려면 홈 버튼에서 위로 스와이프합니다. 모든 앱을 보려면 다시 위로 스와이프합니다. 뒤로 돌아가려면 뒤로 버튼을 탭합니다."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"알림 및 빠른 설정"</string>
@@ -5187,8 +5183,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"실험 기능: ANGLE 사용 설정"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"경고: ANGLE을 기본 OpenGL ES 드라이버로 사용 설정합니다. 이 기능은 실험적인 기능이며, 일부 카메라 및 동영상 앱과 호환되지 않을 수도 있습니다."</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"시스템 OpenGL ES 드라이버를 변경하려면 재부팅해야 합니다."</string>
+    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"앱 호환성 변경사항"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"앱 호환성 변경사항 전환"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"기본적으로 사용 설정된 앱의 변경사항"</string>
@@ -6075,6 +6073,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"선정적인 검색 결과 필터링"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{지원되는 앱 #개}other{지원되는 앱 #개}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"이러한 설정을 사용 중지해도 다른 계정 설정이 적용될 수도 있습니다."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"자녀 보호 기능 PIN 입력"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"자녀 보호 기능 PIN 설정"</string>
@@ -6092,6 +6092,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"PIN 삭제 및 자녀 보호 기능 사용 중지"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"삭제"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"자녀 보호 기능 PIN을 이용 중인 사용자:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> 애니메이션"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"컨트롤을 사용 설정할 수 없음"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"설정을 사용할 수 없음"</string>

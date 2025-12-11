@@ -1212,10 +1212,10 @@
     <string name="private_message" msgid="5897966950396765392">"非公開"</string>
     <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"切り替える"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"キャンセル"</string>
-    <string name="wifi_share_preference_title" msgid="2000847347515149059">"ネットワークの共有"</string>
+    <string name="wifi_share_preference_title" msgid="2000847347515149059">"ネットワークを共有"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"このデバイスの他のユーザーもこのネットワークにアクセスできます"</string>
     <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"<xliff:g id="SHARED">%1$s</xliff:g>ネットワークに切り替えますか？"</string>
-    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"「<xliff:g id="NETWORK_NAME">%2$s</xliff:g>」という名前の<xliff:g id="SHARED_0">%1$s</xliff:g>ネットワークはすでに存在します。<xliff:g id="SHARED_1">%1$s</xliff:g>ネットワークに切り替えると、<xliff:g id="PRIVATE">%3$s</xliff:g> ネットワークから切断され、一時的にインターネットに接続できなくなる可能性があります。"</string>
+    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"「<xliff:g id="NETWORK_NAME">%2$s</xliff:g>」という名前の<xliff:g id="SHARED_0">%1$s</xliff:g>ネットワークはすでに存在します。<xliff:g id="SHARED_1">%1$s</xliff:g>ネットワークに切り替えると、<xliff:g id="PRIVATE">%3$s</xliff:g>ネットワークから切断され、一時的にインターネットに接続できなくなる可能性があります。"</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"（変更なし）"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"ネットワークの編集を許可する"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"他のユーザーがこのネットワークに変更を加えることができます"</string>
@@ -1254,7 +1254,7 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"ネットワークを保存できませんでした"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"キャンセル"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"ネットワークを削除"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"このデバイスですべてのユーザーに対し <xliff:g id="NETWORK_NAME">%1$s</xliff:g> が削除されます"</string>
+    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"このデバイスのすべてのユーザーで <xliff:g id="NETWORK_NAME">%1$s</xliff:g> が削除されます"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 件のネットワーク}other{# 件のネットワーク}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 件の登録}other{# 件の登録}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 件のネットワークと登録}other{# 件のネットワークと登録}}"</string>
@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"バッテリー セーバーにより一時的に無効になりました"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"ローライト モードを使用する"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"ローライト モードで表示する項目を選択する"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"画面 OFF"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"ローライト クロック"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"ON / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"OFF"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"周囲が暗くなると画面が OFF になります"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"周囲が暗くなるとローライト クロックを表示します"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"アンビエント表示"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"表示するタイミング"</string>
@@ -1885,6 +1883,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"タイムゾーンの変更"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"タイムゾーンが自動的に更新されたときに通知を受け取る"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"通知, 時間, ゾーン, タイムゾーン"</string>
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"予定されている時計の変更"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"予定されている時計の変更（夏時間など）が行われると通知が届きます"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"dst, 夏時間, サマータイム, 時計の変更, 予定されている時計の変更"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"次の変更"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"予定されている変更はありません"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"規約、ステータス、ソフトウェアバージョン"</string>
     <string name="legal_information" msgid="7509900979811934843">"法的情報"</string>
     <string name="manual" msgid="3651593989906084868">"マニュアル"</string>
@@ -2333,8 +2336,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"最近使ったアプリ"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"通知"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"クイック設定"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"注"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g>のショートカットを選択してください"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"左下の角"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"右下の角"</string>
@@ -2974,6 +2976,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"アプリのバッテリー使用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"使用状況の詳細"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"消費電力の調整"</string>
@@ -3681,7 +3684,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"クローン作成済み"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> のクローンを作成しています"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> のクローンを作成しました"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"言語、ジェスチャー、時間、バックアップ"</string>
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"言語、ジェスチャー、時間"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"システムの言語、アプリの言語、地域別の設定、音声認識"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, ネットワーク接続, インターネット, ワイヤレス, データ, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi 通知, wifi 通知"</string>
@@ -3933,10 +3936,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"アプリ"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"アラームとその他の割り込み"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"クイック設定の持続時間"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"サイレント モードの同期"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"サイレント モードの設定を接続済みデバイスと同期する"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"仕事用プロファイルの音"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"個人用プロファイルの音を使用"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"個人用プロファイルと同じ音を使用する"</string>
@@ -4621,7 +4622,7 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"このアプリに対して、デバイス内または接続されているストレージ ボリューム内のファイルすべての参照、変更、削除を許可します。許可されている場合、アプリがユーザーの事前の承認なしにファイルにアクセスすることもあります。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"すべてのファイルにアクセス可能"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"画面の自動操作"</string>
-    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"このアプリで、他のアプリの画面のコンテンツを表示して操作し、タスクを完了できるようになります（アプリがバックグラウンドで動作している場合でも同様です）"</string>
+    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"このアプリで、他のアプリの画面のコンテンツを参照して操作し、タスクを完了できるようになります（アプリがバックグラウンドで動作している場合でも同様です）"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"画面の自動操作を許可しない場合でも、<xliff:g id="ID_1">%1$s</xliff:g> は <xliff:g id="ID_2">%1$s</xliff:g> に接続されているアプリと他の方法でやり取りできる可能性があります"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"他のアプリの画面のコンテンツを操作してタスクを完了することをアプリに許可します"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"毎回確認"</string>
@@ -4904,16 +4905,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"フリップしてカメラを切り替え"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"ナビゲーション モード"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"デバイスの更新"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"操作"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"自動化とインテリジェンス"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"システム管理"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"データの管理"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"2 ボタン ナビゲーション"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"アプリを切り替えるには、ホームボタンを上にスワイプします。すべてのアプリを表示するには、もう一度上にスワイプします。戻るには、[戻る] ボタンをタップします。"</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"通知とクイック設定"</string>
@@ -5181,8 +5177,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"試験運用機能: ANGLE の有効化"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"警告: デフォルトの OpenGL ES ドライバとして ANGLE を有効にします。これは試験運用機能であり、一部のカメラアプリと動画アプリには対応していない可能性があります。"</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"システムの OpenGL ES ドライバを変更するには再起動が必要です"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"警告: デフォルトの OpenGL ES ドライバとして ANGLE を有効にします。これは試験運用機能であり、一部のカメラアプリと動画アプリには対応していない可能性があります。スイッチを ON にする前に、デバイスのデータをバックアップしてください"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"システムの OpenGL ES ドライバを変更するには再起動が必要です。再起動する前に、デバイスのデータをバックアップしてください。再起動に失敗した場合は、デバイスを復元するために出荷時の設定にリセットする必要があります"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"アプリの互換性の変更"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"「アプリの互換性の変更」を切り替えます"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"デフォルトで有効な変更"</string>
@@ -6069,6 +6065,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"露骨な表現を含む検索結果を除外する"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{# 個のアプリで利用可能}other{# 個のアプリで利用可能}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"これらの設定を OFF にしても、他のアカウント設定が適用される場合があります。"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"保護者による使用制限の PIN を入力"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"保護者による使用制限の PIN を設定する"</string>
@@ -6086,6 +6084,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"PIN を削除して使用制限を OFF にする"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"削除"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"保護者による使用制限の PIN は次のユーザーによって使用されています。\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> のアニメーション"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"コントロールを有効にできません"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"コントロールを使用できません"</string>

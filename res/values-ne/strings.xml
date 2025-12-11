@@ -1210,7 +1210,7 @@
     <string name="retry" msgid="7542103800274026915">"पुनः प्रयास गर्नु…"</string>
     <string name="shared_message" msgid="2104244057926025072">"साझा"</string>
     <string name="private_message" msgid="5897966950396765392">"निजी"</string>
-    <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"बदल्नुहोस्"</string>
+    <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"प्रयोग गर्नुहोस्"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"रद्द गर्नुहोस्"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"नेटवर्क सेयर गर्नुहोस्"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"यो डिभाइसका अन्य प्रयोगकर्ताहरू यो नेटवर्क एक्सेस गर्न सक्छन्"</string>
@@ -1253,7 +1253,7 @@
     <string name="wifi_save" msgid="2312643132472226807">"सेभ गर्नुहोस्"</string>
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"सञ्जाल बचत गर्न विफल"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"रद्द गर्नुहोस्"</string>
-    <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"नेटवर्क बिर्सने हो?"</string>
+    <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"नेटवर्क हटाउने हो?"</string>
     <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> यो डिभाइसका सबै प्रयोगकर्ताहरूका लागि हटाइने छ"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{१ नेटवर्क}other{# वटा नेटवर्क}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{१ सदस्यता}other{# वटा सदस्यता}}"</string>
@@ -1355,11 +1355,11 @@
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> सक्रिय छ"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"यो नेटवर्क सुरक्षित गर्ने हो?"</string>
-    <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"सुरक्षित गर्दै…"</string>
+    <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"सेभ गरिँदै छ…."</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"सेभ गरियो"</string>
     <string name="wifi_add_app_network_save_failed_summary" msgid="7223817782309294652">"सुरक्षित गर्न सकिएन। फेरि प्रयास गर्नुहोस्।"</string>
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"नेटवर्क सेभ गर्नुहोस्?"</string>
-    <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"<xliff:g id="NUMBER">%d</xliff:g> नेटवर्कहरू सुरक्षित गर्दै…"</string>
+    <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"<xliff:g id="NUMBER">%d</xliff:g> नेटवर्कहरू सेभ गरिँदै छ…"</string>
     <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"नेटवर्कहरू सेभ गरियो"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Wi-Fi कलिङ"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"Wi‑Fi मार्फत कल गर्ने सेवाको क्षेत्र विस्तार गर्नुहोस्"</string>
@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"ब्याट्री सेभर अन भएकाले केही समयका लागि अफ गरिएको छ"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"कम उज्यालो मोड प्रयोग गर्नुहोस्"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"कम उज्यालो मोडमा देखाइनु पर्ने कुराहरू छनौट गर्नुहोस्"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"स्क्रिन अफ छ"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"कम उज्यालो घडी"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"अन छ / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"अफ छ"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"वरपर अँध्यारो भएका बेला स्क्रिन अफ हुन्छ"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"वरपर अँध्यारो भएका बेला कम उज्यालो घडी देखिन्छ"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"एम्बियन्ट प्रदर्शन"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"देखाउनु पर्ने समय"</string>
@@ -1885,6 +1883,16 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"प्रामाणिक समयमा भएको परिवर्तन"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"तपाईंको प्रामाणिक समय स्वतः अपडेट हुँदा नोटिफिकेसन प्राप्त गर्नुहोस्"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"नोटिफिकेसन, समय, क्षेत्र, प्रामाणिक समय"</string>
+    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
+    <skip />
+    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
+    <skip />
+    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
+    <skip />
     <string name="about_settings_summary" msgid="4831942939227432513">"कानुनी जानकारी, वस्तुस्थिति, सफ्ट्वेयर संस्करण हेर्नुहोस्"</string>
     <string name="legal_information" msgid="7509900979811934843">"कानुनी जानकारी"</string>
     <string name="manual" msgid="3651593989906084868">"म्यानुअल"</string>
@@ -2333,8 +2341,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"हालसालै चलाइएका एपहरू"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"नोटिफिकेसनहरू"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"द्रुत सेटिङ"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"नोट"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g>को सर्टकर्ट छनौट गर्नुहोस्"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"पुछारको बायाँ कुना"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"पुछारको दायाँ कुना"</string>
@@ -2602,12 +2609,9 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"स्क्रिनमा %1$d पटक छिटो छिटो ट्याप गर्नुहोस्। तपाईंले यसो गर्नुभयो भने तपाईंको डिभाइस ढिलो चल्न सक्छ।"</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"%1$d-औँलाले डबल ट्याप"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"ट्रिपल ट्याप"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_keyboard (6563958384189884131) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_keyboard (8755352177645189254) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_keyboard_keyword (7354208869208311654) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"किबोर्डको सर्टकट"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"<xliff:g id="ID_4">%4$s</xliff:g> प्रयोग गर्न <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> थिच्नुहोस्"</string>
+    <string name="accessibility_shortcut_keyboard_keyword" msgid="7354208869208311654">"किबोर्डको सर्टकट"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"उन्नत"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"पहुँच बटनलाई <xliff:g id="SERVICE">%1$s</xliff:g> मा सेट गरिएको छ। म्याग्निफिकेसन प्रयोग गर्नाका लागि पहुँच बटनलाई केहीबेर छोइरहनुहोस् र त्यसपछि म्याग्निफिकेसन चयन गर्नुहोस्।"</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"पहुँचको इसारा सेट गरी <xliff:g id="SERVICE">%1$s</xliff:g> बनाइयो। म्याग्निफिकेसन प्रयोग गर्न दुई वटा औँलाले स्क्रिनको फेदबाट माथितिर स्वाइप गरी थिचिराख्नुहोस्। त्यसपछि म्याग्निफिकेसन चयन गर्नुहोस्।"</string>
@@ -2977,6 +2981,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"एपका हकमा तोकिएको ब्याट्रीको खपत"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"विवरणहरू प्रयोग गर्नुहोस्"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"उर्जा प्रयोग मिलाउनुहोस्"</string>
@@ -3665,10 +3670,8 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"ब्लुटुथ, Android Auto, ड्राइभिङ मोड"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"ब्लुटुथ, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"ब्लुटुथ, Android Auto"</string>
-    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
-    <skip />
-    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
-    <skip />
+    <string name="device_dashboard_title" msgid="1176311605407079643">"डिभाइस"</string>
+    <string name="device_dashboard_summary" msgid="657619609434549473">"किबोर्ड, टचप्याड, डिस्प्ले, साउन्ड"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC अफ भएकाले उपलब्ध नभएको"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"यो सुवधा प्रयोग गर्न सर्वप्रथम भुक्तानी एप इन्स्टल गर्नुहोस्"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"हालैका एपहरू, डिफल्ट एपहरू"</string>
@@ -3686,7 +3689,8 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"क्लोन गरिएको छ"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> को क्लोन बनाइँदै छ"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> को क्लोन बनाइएको छ"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"भाषाहरू, जेस्चरहरू, समय, ब्याकअप"</string>
+    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
+    <skip />
     <string name="languages_setting_summary" msgid="2650807397396180351">"सिस्टमका भाषा, एपका भाषा, क्षेत्रीय प्राथमिकताहरू, बोली"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, नेटवर्क जडान, इन्टरनेट, वायरलेस, डेटा, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi सूचना, wifi सूचना"</string>
@@ -3938,10 +3942,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"एपहरू"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"अलार्म र अन्य अवरोधहरू"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"द्रुत सेटिङहरूको अवधि"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"Do Not Disturb सिंक गर्ने सुविधा"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"कनेक्ट गरिएका डिभाइसहरूमा Do Not Disturb सम्बन्धी सेटिङ सिंक गर्नुहोस्"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"वर्क प्रोफाइलको साउन्ड"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"व्यक्तिगत प्रोफाइलका साउन्डहरूको प्रयोग गर्नुहोस्"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"तपाईंको व्यक्तिगत प्रोफाइलमा सेट गरिएको साउन्ड प्रयोग गरिन्छ"</string>
@@ -4626,17 +4628,12 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"यो एपलाई यो डिभाइस वा जोडिएको कुनै भण्डारणमा रहेका सबै फाइलहरू पढ्ने, परिमार्जन गर्ने तथा मेट्ने अनुमति दिनुहोस्। अनुमति दिइएका खण्डमा यो एपले तपाईंको स्पष्ट अनुमतिविनै फाइलहरू एक्सेस गर्नसक्छ।"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"सबै फाइलहरूमाथि पहुँच राख्न सक्छ।"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"स्क्रिन अटोमेसन"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (1416146361612039463) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (7244915433372453577) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (5061942204074823130) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"यो एपले तपाईंलाई कार्यहरू पूरा गर्न मद्दत गर्ने प्रयोजनका लागि अन्य एपहरू ब्याकग्राउन्डमा चलिरहेका बेला पनि ती एपको स्क्रिनमा भएका सामग्री हेर्न र ती सामग्रीसँग अन्तर्क्रिया गर्न सक्ने छ"</string>
+    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"तपाईंले स्क्रिन अटोमेसन प्रयोग गर्ने अनुमति दिनुभएन भने <xliff:g id="ID_1">%1$s</xliff:g> ले अझै पनि <xliff:g id="ID_2">%1$s</xliff:g> सँग अन्य तरिकाले कनेक्ट गरिएका एपहरूसँग अन्तर्क्रिया गर्न सक्ने छ"</string>
+    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"एपहरूलाई अन्य एपको स्क्रिनमा भएको सामग्रीसँग अन्तर्क्रिया गरेर तपाईंलाई कार्यहरू पूरा गर्न मद्दत गर्ने अनुमति दिनुहोस्"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"प्रत्येक पटक सोध्नुहोस्"</string>
-    <!-- no translation found for computer_control_automation_always_allowed (2509025480867646050) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_dont_allow (6562575180350018944) -->
-    <skip />
+    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"सधैँ अनुमति दिनुहोस्"</string>
+    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"अनुमति नदिनुहोस्"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"फुल स्क्रिनमा नोटिफिकेसनहरू देखाउने अनुमति"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"यो एपलाई नोटिफिकेसनहरू फुल स्क्रिनमा देखाउने अनुमति दिनुहोस्"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"यो एपलाई डिभाइस लक भएका बेला फुल स्क्रिन ढाक्ने खालका सूचनाहरू देखाउने अनुमति दिनुहोस्। एपहरूले अलार्म, आगमन कल वा अन्य महत्त्वपूर्ण सूचनाहरू हाइलाइट गर्ने प्रयोजनका लागि फुल स्क्रिनमा सूचनाहरू देखाउन सक्छन्।"</string>
@@ -4914,16 +4911,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"सेल्फी खिच्न क्यामेरा फ्लिप गर्ने"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"नेभिगेसन मोड"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"डिभाइस अपडेट गर्नुहोस्"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"अन्तर्क्रिया"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"अटोमेसन तथा इन्टेलिजेन्स"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"सिस्टम व्यवस्थापन"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"डेटा व्यवस्थापन गर्नुहोस्"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"२ बटन नेभिगेसन"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"एपहरू बदल्न गृह बटनमा माथितिर स्वाइप गर्नुहोस्। सबै एपहरू हेर्न फेरि माथितिर स्वाइप गर्नुहोस्। पछाडि जान पछाडि नामक बटनमा ट्याप गर्नुहोस्।"</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"नोटिफिकेसन र द्रुत सेटिङहरू"</string>
@@ -5191,8 +5183,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"परीक्षणका क्रममा रहेको: ANGLE अन गर्नुहोस्"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"चेतावनी: ANGLE लाई डिफल्ट OpenGL ES ड्राइभर बनाउनुहोस्। यो सुविधा परीक्षणको क्रममा छ र यसले क्यामेरा तथा भिडियोसम्बन्धी केही एपहरूमा काम नगर्न सक्छ।"</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"सिस्टम OpenGL ES ड्राइभर बदल्न रिबुट गर्नु पर्ने हुन्छ"</string>
+    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"एपको कम्प्याटिबिलिटीमा भएका परिवर्तनहरू"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"एपको कम्प्याटिबिलिटीमा गरिएको परिवर्तन टगल गर्नुहोस्"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"डिफल्ट रूपमा सक्षम पारिएका परिवर्तनहरू"</string>
@@ -6066,8 +6060,7 @@
     <string name="supervision_add_pin_recovery_title" msgid="3188513465822725563">"रिकभर गर्ने विकल्पसम्बन्धी जानकारी हाल्नुहोस्"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"रिकभर गर्ने विकल्पसम्बन्धी जानकारी पुष्टि गर्नुहोस्"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"एप स्टोरका फिल्टरहरू"</string>
-    <!-- no translation found for supervision_app_store_filters_keywords (8281936888718160336) -->
-    <skip />
+    <string name="supervision_app_store_filters_keywords" msgid="8281936888718160336">"एपसम्बन्धी फिल्टर, वयस्क लक्षित एपसम्बन्धी फिल्टर, वयस्क लक्षित फिल्टर, अश्लील एपहरू, एपहरू ब्लक गर्नुहोस्, अश्लील एपहरू ब्लक गर्नुहोस्, वयस्क लक्षित एपहरू ब्लक गर्नुहोस्"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"एपमा समावेश गरिएका सामग्री उमेर सुहाउँदो छन् कि छैनन् भन्ने कुराको मूल्याङ्कनका आधारमा एपहरू फिल्टर गर्नुहोस्"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"हरेक स्टोरले कन्टेन्टको रेटिङ फरक तरिकाले गर्छ। विभिन्न स्टोरहरूले कुनै एपको रेटिङ फरक तरिकाले गर्न सक्छन्।"</string>
     <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"कन्टेन्टका रेटिङअनुसार एपहरू फिल्टर गर्नुहोस्"</string>
@@ -6080,6 +6073,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"अश्लील खोज परिणामहरू फिल्टर गर्नुहोस्"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{# एपमा}other{# वटा एपमा}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"यी सेटिङ अफ हुँदा पनि खाताका अन्य सेटिङ लागू हुन सक्छन्।"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"अभिभावकीय नियन्त्रणहरूको PIN हाल्नुहोस्"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"अभिभावकीय नियन्त्रणहरूको PIN सेट गर्नुहोस्"</string>
@@ -6097,6 +6092,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"PIN मेटाउनुहोस् र अभिभावकीय नियन्त्रणहरू अफ गर्नुहोस्"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"मेटाउनुहोस्"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"निम्न प्रयोगकर्ताहरू तपाईंका अभिभावकीय नियन्त्रणहरूको PIN प्रयोग गरिरहेका छन्:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> को एनिमेसन"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"कन्ट्रोलहरू अन गर्न सकिएनन्"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"कन्ट्रोलहरू प्रयोग गर्न मिल्दैन"</string>

@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"ব্যাটারি সেভারের কারণে সাময়িকভাবে বন্ধ করা আছে"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"কম আলোর মোড ব্যবহার করুন"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"কম আলোর মোডে কী দেখানো হবে তা বেছে নিন"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"স্ক্রিন বন্ধ করা আছে"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"কম আলোর ঘড়ি"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"চালু / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"বন্ধ"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"আশেপাশে অন্ধকার হয়ে গেলে স্ক্রিন বন্ধ করা হবে"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"কম আলোর ঘড়ি তখন দেখা যাবে যখন আশেপাশে অন্ধকার হবে"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"অ্যাম্বিয়েন্ট ডিসপ্লে"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"কখন দেখানো হবে"</string>
@@ -1885,6 +1883,16 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"টাইম জোন পরিবর্তন করুন"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"আপনার টাইম জোন অটোমেটিক আপডেট হলে বিজ্ঞপ্তি পান"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"বিজ্ঞপ্তি, সময়, অঞ্চল, টাইম জোন"</string>
+    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
+    <skip />
+    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
+    <skip />
+    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
+    <skip />
     <string name="about_settings_summary" msgid="4831942939227432513">"আইনি তথ্য, স্থিতি, সফ্টওয়্যার ভার্সন দেখুন"</string>
     <string name="legal_information" msgid="7509900979811934843">"আইনি তথ্য"</string>
     <string name="manual" msgid="3651593989906084868">"ম্যানুয়াল"</string>
@@ -2333,8 +2341,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"সম্প্রতি ব্যবহৃত অ্যাপ"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"বিজ্ঞপ্তি"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"দ্রুত সেটিংস"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"মনে রাখবেন"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g>-এর জন্য শর্টকাট বেছে নিন"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"একদম নিচে বাঁদিকের কোণে"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"একদম নিচে ডানদিকের কোণে"</string>
@@ -2602,12 +2609,9 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"স্ক্রিনে দ্রুত %1$d বার ট্যাপ করুন। এটি আপনার ডিভাইসের স্পিড কমিয়ে দিতে পারে।"</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"%1$d-টি আঙুল দিয়ে ডবল ট্যাপ"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"ট্রিপল ট্যাপ"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_keyboard (6563958384189884131) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_keyboard (8755352177645189254) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_keyboard_keyword (7354208869208311654) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"কীবোর্ড শর্টকাট"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"<xliff:g id="ID_4">%4$s</xliff:g> ব্যবহার করতে <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> প্রেস করুন"</string>
+    <string name="accessibility_shortcut_keyboard_keyword" msgid="7354208869208311654">"কীবোর্ড শর্টকাট"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"উন্নত"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"অ্যাক্সেসযোগ্যতা বোতামটি <xliff:g id="SERVICE">%1$s</xliff:g> এর সাথে সেট করা আছে। ম্যাগনিফিকেশন ব্যবহার করার জন্য অ্যাক্সেসযোগ্যতা বোতামটি স্পর্শ করে টিপে ধরুন, তারপর ম্যাগনিফিকেশন বেছে নিন।"</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"অ্যাক্সেসিবিলিটি জেসচার <xliff:g id="SERVICE">%1$s</xliff:g>-এ সেট করা আছে। ম্যাগনিফিকেশন ব্যবহার করার জন্য, স্ক্রিনের নিচ থেকে দুটি আঙুল দিয়ে উপরের দিকে সোয়াইপ করুন এবং ধরে থাকুন। তার পরে ম্যাগনিফিকেশন বেছে নিন।"</string>
@@ -2977,6 +2981,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"অ্যাপের জন্য ব্যাটারির ব্যবহার"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"বিবরণ ব্যবহার করুন"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"বিদ্যুতের ব্যবহার সামঞ্জস্য করুন"</string>
@@ -3665,10 +3670,8 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"ব্লুটুথ, Android Auto, ড্রাইভিং মোড"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"ব্লুটুথ, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"ব্লুটুথ, Android Auto"</string>
-    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
-    <skip />
-    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
-    <skip />
+    <string name="device_dashboard_title" msgid="1176311605407079643">"ডিভাইস"</string>
+    <string name="device_dashboard_summary" msgid="657619609434549473">"কীবোর্ড, টাচপ্যাড, ডিসপ্লে, সাউন্ড"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC বন্ধ থাকার জন্য উপলভ্য নেই"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ব্যবহার করার জন্য প্রথমে কোনও পেমেন্ট অ্যাপ ইনস্টল করতে হবে"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"সাম্প্রতিক অ্যাপ, ডিফল্ট অ্যাপ"</string>
@@ -3686,7 +3689,8 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"ক্লোন করা হয়েছে"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> ক্লোন তৈরি করা হচ্ছে"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> ক্লোন তৈরি করা হয়েছে"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"ভাষা, জেসচার, সময়, ব্যাক-আপ"</string>
+    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
+    <skip />
     <string name="languages_setting_summary" msgid="2650807397396180351">"সিস্টেম ভাষা, অ্যাপ ভাষা, আঞ্চলিক পছন্দ, স্পিচ"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"ওয়াই-ফাই, ওয়াই-ফাই, নেটওয়ার্ক কানেকশন, ইন্টারনেট, ওয়্যারলেস, ডেটা, ওয়াই-ফাই"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"ওয়াই-ফাই বিজ্ঞপ্তি, ওয়াই-ফাই বিজ্ঞপ্তি"</string>
@@ -3938,10 +3942,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"অ্যাপ"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"অ্যালার্ম ও বিভিন্ন বাধা"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"দ্রুত সেটিংসের জন্য সময়সীমা"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"বিরক্ত করবে না সেটিংস সিঙ্ক করে"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"কানেক্ট করা ডিভাইসে বিরক্ত করবে না সেটিংস সিঙ্ক করুন"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"অফিস প্রোফাইলের সাউন্ড"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"ব্যক্তিগত প্রোফাইলের সাউন্ড ব্যবহার করুন"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"ব্যক্তিগত প্রোফাইলের সাউন্ডই ব্যবহার করুন"</string>
@@ -4631,8 +4633,7 @@
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"অন্যান্য অ্যাপের স্ক্রিন কন্টেন্টের সাথে ইন্টার‍্যাক্ট করার মাধ্যমে টাস্ক সম্পূর্ণ করতে সাহায্য করার জন্য অ্যাপকে অনুমতি দিন"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"প্রত্যেকবার জিজ্ঞাসা করো"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"সবসময় অনুমতি দিন"</string>
-    <!-- no translation found for computer_control_automation_dont_allow (6562575180350018944) -->
-    <skip />
+    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"অনুমতি দেবেন না"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"ফুল-স্ক্রিন বিজ্ঞপ্তি"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"এই অ্যাপকে ফুল-স্ক্রিনে বিজ্ঞপ্তি দেখানোর অনুমতি দিন"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"ডিভাইস লক থাকার সময় এই অ্যাপকে ফুল স্ক্রিন জুড়ে বিজ্ঞপ্তি দেখানোর অনুমতি দিন। অ্যালার্ম, ইনকামিং কল অথবা অন্যান্য জরুরি বিজ্ঞপ্তি হাইলাইট করতে, অ্যাপ এগুলি ব্যবহার করতে পারে।"</string>
@@ -4910,16 +4911,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"সেল্ফির জন্য ক্যামেরা ঘোরান"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"নেভিগেশন মোড"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"ডিভাইস আপডেট করুন"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"ইন্টার‌্যাকশন"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"অটোমেশন ও ইন্টেলিজেন্স"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"সিস্টেম ম্যানেজমেন্ট"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"ডেটা ম্যানেজ করুন"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"২টি বোতাম দিয়ে করা নেভিগেশন"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"একটি অ্যাপ থেকে অন্য অ্যাপে যেতে, হোম বোতামে উপরের দিকে সোয়াইপ করুন। সবকটি অ্যাপ দেখতে আবার উপরের দিকে সোয়াইপ করুন। ফিরে যেতে, \'ফিরুন\' বোতামে ট্যাপ করুন।"</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"বিজ্ঞপ্তি ও দ্রুত সেটিংস"</string>
@@ -5187,8 +5183,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"এক্সপেরিমেন্ট হিসেবে উপলভ্য: ANGLE চালু করুন"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"সতর্কতা: ডিফল্ট OpenGL ES ড্রাইভার হিসেবে ANGLE চালু করুন। এই ফিচার এক্সপেরিমেন্ট হিসেবে উপলভ্য। এটি কিছু ক্যামেরা ও ভিডিও অ্যাপে ব্যবহার নাও করা যেতে পারে।"</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"সিস্টেম OpenGL ES ড্রাইভার পরিবর্তন করার জন্য, রিবুট করতে হবে"</string>
+    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"ডিভাইসে অ্যাপ মানানসই করা সম্পর্কিত পরিবর্তন"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"অ্যাপ মানানসই করা সম্পর্কিত পরিবর্তন টগল করুন"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"ডিফল্ট হিসেবে চালু করা পরিবর্তন"</string>
@@ -6075,6 +6073,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"অনুপযুক্ত সার্চ ফলাফল ফিল্টার করুন"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{#টি অ্যাপে}one{#টি অ্যাপে}other{#টি অ্যাপে}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"এই সেটিংস বন্ধ করা থাকলেও, অন্যান্য অ্যাকাউন্ট সেটিংস এরপরেও প্রযোজ্য হতে পারে।"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"অভিভাবকীয় নিয়ন্ত্রণ ফিচারের পিন লিখুন"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"একটি অভিভাবকীয় নিয়ন্ত্রণ পিন সেট করুন"</string>
@@ -6092,6 +6092,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"পিন মুছে দিন ও কন্ট্রোলের সুবিধা বন্ধ করুন"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"মুছে দিন"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"আপনার অভিভাবকীয় নিয়ন্ত্রণের পিন এর মাধ্যমে ব্যবহার করা হচ্ছে:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> অ্যানিমেশন"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"কন্ট্রোল চালু করা যাচ্ছে না"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"কন্ট্রোল ব্যবহার করা যাচ্ছে না"</string>

@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Slökkt tímabundið vegna rafhlöðusparnaðar"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Nota stillingu fyrir litla birtu"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Veldu hvað á að sýna í stillingu fyrir litla birtu"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Slökkt á skjá"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Klukka með lítilli birtu"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"Kveikt/<xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"Slökkt"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"Það slokknar á skjánum þegar það er dimmt"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"Klukka með lítilli birtu sést þegar það er dimmt"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Umhverfisskjár"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Sýnt hvenær"</string>
@@ -1885,6 +1883,16 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Breyting á tímabelti"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Fáðu tilkynningu þegar tímabeltið þitt uppfærist sjálfkrafa"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"tilkynning, tími, belti, tímabelti"</string>
+    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
+    <skip />
+    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
+    <skip />
+    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
+    <skip />
     <string name="about_settings_summary" msgid="4831942939227432513">"Skoða lagalegar upplýsingar, stöðu, útgáfu hugbúnaðar"</string>
     <string name="legal_information" msgid="7509900979811934843">"Lagalegar upplýsingar"</string>
     <string name="manual" msgid="3651593989906084868">"Handbók"</string>
@@ -2333,8 +2341,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Nýleg forrit"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Tilkynningar"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Flýtistillingar"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"Glósa"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Veldu flýtileið til að setja í <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"hornið neðst til vinstri"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"hornið neðst til hægri"</string>
@@ -2602,12 +2609,9 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Ýttu hratt á skjáinn %1$d sinnum. Þetta kann að hægja á tækinu þínu."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Ýtt tvisvar með %1$d-fingrum"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"ýttu þrisvar"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_keyboard (6563958384189884131) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_keyboard (8755352177645189254) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_keyboard_keyword (7354208869208311654) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Flýtilykill"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Ýttu á <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> til að nota <xliff:g id="ID_4">%4$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_keyboard_keyword" msgid="7354208869208311654">"flýtilykill"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Ítarlegt"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Aðgengishnappurinn er stilltur á <xliff:g id="SERVICE">%1$s</xliff:g>. Til að nota stækkun skaltu halda aðgengishnappnum inni og velja stækkun."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Aðgengisbending er stillt á <xliff:g id="SERVICE">%1$s</xliff:g>. Til að nota stækkun skaltu strjúka upp með tveimur fingrum frá neðri hluta skjásins og halda inni. Síðan skaltu velja stækkun."</string>
@@ -2977,6 +2981,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Rafhlöðunotkun forrits"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Notkunarupplýsingar"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Stilla orkunotkun"</string>
@@ -3665,10 +3670,8 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, akstursstilling"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
-    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
-    <skip />
-    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
-    <skip />
+    <string name="device_dashboard_title" msgid="1176311605407079643">"Tæki"</string>
+    <string name="device_dashboard_summary" msgid="657619609434549473">"Lyklaborð, snertiflötur, skjár, hljóð"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Ekki í boði vegna þess að slökkt er á NFC"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Settu upp greiðsluforrit til að byrja"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Nýleg forrit, sjálfgefin forrit"</string>
@@ -3686,7 +3689,8 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Klónað"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Býr til afrit af <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Afrit af <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> búið til"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"Tungumál, bendingar, tími, öryggisafrit"</string>
+    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
+    <skip />
     <string name="languages_setting_summary" msgid="2650807397396180351">"Tungumál kerfis, tungumál forrita, kjörstillingar svæðis, tal"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wi-Fi, nettenging, internet, þráðlaust, gögn, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi tilkynning, wifi tilkynning"</string>
@@ -3938,10 +3942,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Forrit"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Vekjarar &amp; aðrar truflanir"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Tímalengd flýtistillinga"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"Samstilla „Ónáðið ekki“"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"Samstilla stillingar „Ónáðið ekki“ við tengd tæki"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Hljóð vinnusniðs"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Nota hljóð úr einkasniði"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Nota sömu hljóð og eigið snið þitt"</string>
@@ -4631,8 +4633,7 @@
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Leyfðu forritum að hjálpa þér að ljúka verkefnum með því að nota efni úr öðrum forritum"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Spyrja í hvert skipti"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Alltaf leyfa"</string>
-    <!-- no translation found for computer_control_automation_dont_allow (6562575180350018944) -->
-    <skip />
+    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Ekki leyfa"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Tilkynningar á öllum skjánum"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Leyfa tilkynningar frá þessu forriti á öllum skjánum"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Leyfa forritinu að birta tilkynningar á öllum skjánum þegar tækið er læst. Forrit kunna að nota þennan eiginleika til að leggja áherslu á vekjara, móttekin símtöl og aðrar áríðandi tilkynningar."</string>
@@ -4910,16 +4911,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Snúa myndavél til að taka sjálfsmynd"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Yfirlitsstilling"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"Uppfæra tæki"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"Gagnvirkni"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"Sjálfvirkni og gervigreind"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"Kerfisstjórnun"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"Stjórna gögnum"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Tveggja hnappa stjórnun"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Til að skipta um forrit skaltu strjúka upp á heimahnappinum. Strjúktu aftur upp til að sjá öll forrit. Ýttu á bakkhnappinn til að fara til baka."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"Tilkynningar og flýtistillingar"</string>
@@ -5187,8 +5183,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Tilraun: Kveikja á ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Viðvörun: Virkja ANGLE sem sjálfgefinn OpenGL ES-rekil. Þessi eiginleiki er á tilraunastigi og er hugsanlega ekki samhæfur sumum myndavélar- og vídeóforritum."</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Endurræsingar er krafist til að skipta um OpenGL ES-rekil kerfis"</string>
+    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Breytingar á samhæfi forrits"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Víxla samhæfisbreytingum forrits"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Sjálfgefnar virkar breytingar"</string>
@@ -6075,6 +6073,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Sía burt leitarniðurstöður sem innihalda gróft efni"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Í # forriti}one{Í # forriti}other{Í # forritum}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Aðrar reikningsstillingar kunna að gilda þrátt fyrir að slökkt sé á þessum stillingum."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Sláðu inn PIN-númer barnalæsingar"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Veldu PIN-númer fyrir barnalæsingu"</string>
@@ -6092,6 +6092,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Eyða PIN-númeri og slökkva á stýringum"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Eyða"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"PIN-númer barnalæsingar er í notkun hjá:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> hreyfimynd"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Ekki er hægt að kveikja á stýringum"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Ekki er hægt að nota stýringar"</string>

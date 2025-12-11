@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Dilumpuhkan sementara disebabkan oleh Penjimat Bateri"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Gunakan mod Cahaya Malap"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Pilih perkara yang mahu dipaparkan dalam mod Cahaya Malap"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Skrin dimatikan"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Jam cahaya malap"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"Hidup / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"Mati"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"Skrin akan dimatikan apabila persekitaran anda gelap"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"Jam Cahaya Malap akan dipaparkan apabila persekitaran anda gelap"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Paparan ambien"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Waktu untuk tunjukkan"</string>
@@ -1885,6 +1883,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Perubahan zon waktu"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Terima pemberitahuan apabila zon waktu anda dikemaskinikan secara automatik"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"pemberitahuan, masa, zon, zon waktu"</string>
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Perubahan jam yang dijadualkan"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Terima pemberitahuan apabila jam anda melakukan perubahan yang dijadualkan, contohnya untuk waktu jimat siang"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"dst, waktu jimat siang, perubahan jam, perubahan jam dijadualkan"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Perubahan seterusnya"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Tiada perubahan yang dijadualkan"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Lihat maklumat undang-undang, status, versi perisian"</string>
     <string name="legal_information" msgid="7509900979811934843">"Maklumat undang-undang"</string>
     <string name="manual" msgid="3651593989906084868">"Manual"</string>
@@ -2333,8 +2336,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Apl terbaharu"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Pemberitahuan"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Tetapan pantas"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"Nota"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Buat pintasan untuk <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"penjuru bawah sebelah kiri"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"penjuru bawah sebelah kanan"</string>
@@ -2974,6 +2976,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Penggunaan bateri oleh apl"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Butiran penggunaan"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Laraskan penggunaan kuasa"</string>
@@ -3681,7 +3684,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Diklon"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Membuat klon <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Klon <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> dibuat"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"Bahasa, gerak isyarat, masa, sandaran"</string>
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Bahasa, gerak isyarat, masa"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Bahasa sistem, bahasa apl, tetapan wilayah, pertuturan"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, sambungan rangkaian, Internet, wayarles, data, wi-fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Pemberitahuan Wi‑Fi, pemberitahuan wifi"</string>
@@ -3933,10 +3936,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Apl"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Penggera &amp; gangguan lain"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Tempoh bagi Tetapan Pantas"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"Penyegerakan jangan ganggu"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"Segerakkan tetapan Jangan ganggu kepada peranti tersambung"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Bunyi profil kerja"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Gunakan bunyi profil peribadi"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Gunakan bunyi yang sama seperti profil peribadi"</string>
@@ -4904,16 +4905,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Balikkan kamera untuk mengambil swafoto"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Mod navigasi"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"Kemas kinikan peranti"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"Interaksi"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"Automasi &amp; Kecerdasan"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"Pengurusan sistem"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"Urus data"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navigasi 2 butang"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Untuk menukar apl, leret ke atas pada butang Skrin Utama. Untuk melihat semua apl, leret ke atas sekali lagi. Untuk kembali, ketik butang kembali."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"Pemberitahuan &amp; Tetapan Pantas"</string>
@@ -5181,8 +5177,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Percubaan: Dayakan ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Amaran: Dayakan ANGLE sebagai pemacu OpenGL ES lalai. Ciri ini dalam peringkat percubaan dan mungkin tidak serasi dengan sesetengah apl kamera dan video."</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"But semula diperlukan untuk menukar pemacu OpenGL ES sistem"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Amaran: Dayakan ANGLE sebagai pemacu OpenGL ES lalai. Ciri ini sedang dalam percubaan dan mungkin tidak serasi dengan sesetengah apl kamera dan video. Sila sandarkan data peranti anda sebelum menghidupkan suis"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"But semula diperlukan untuk menukar pemacu OpenGL ES sistem. Sila sandarkan data peranti anda sebelum melakukan but semula. Sekiranya but semula gagal, anda perlu melakukan tetapan semula kilang untuk memulihkan peranti"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Perubahan Keserasian Apl"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Togol perubahan keserasian apl"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Perubahan didayakan tetapan lalai"</string>
@@ -6069,6 +6065,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Tapis keluar hasil carian eksplisit"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Pada # apl}other{Pada # apl}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Apabila tetapan ini dimatikan, tetapan akaun lain mungkin masih digunakan."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Masukkan PIN kawalan ibu bapa"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Tetapkan PIN kawalan ibu bapa"</string>
@@ -6086,6 +6084,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Padamkan PIN &amp; matikan kawalan"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Padam"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"PIN kawalan ibu bapa anda sedang digunakan oleh:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animasi <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Tidak dapat menghidupkan kawalan"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Tidak dapat menggunakan kawalan"</string>
