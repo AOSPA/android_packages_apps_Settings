@@ -67,7 +67,18 @@ public final class PreferredShortcuts {
 
         final String str = info.stream().findFirst().get();
         final PreferredShortcut shortcut = PreferredShortcut.fromString(str);
-        return shortcut.getType();
+        int type = shortcut.getType();
+        if ((type & UserShortcutType.KEY_GESTURE) == UserShortcutType.KEY_GESTURE
+                && !AccessibilityUtil.isKeyboardShortcutSettingAvailable()) {
+            type = AccessibilityUtil.removeTypeFromShortcutTypes(type,
+                    UserShortcutType.KEY_GESTURE);
+        }
+
+        if (type == DEFAULT) {
+            return defaultTypes;
+        }
+
+        return type;
     }
 
     /**

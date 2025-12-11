@@ -22,6 +22,7 @@ import android.view.accessibility.AccessibilityManager
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.internal.accessibility.common.ShortcutConstants
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
 import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.PreferredShortcut
 import com.android.settings.accessibility.PreferredShortcuts
@@ -65,10 +66,27 @@ open class AccessibilityShortcutDataStore(
     override fun contains(key: String): Boolean = true
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : Any> getValue(key: String, valueType: Class<T>): T? =
-        ((AccessibilityUtil.getUserShortcutTypesFromSettings(context, componentName) !=
-            ShortcutConstants.UserShortcutType.DEFAULT)
-            as? T?)
+    override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
+        val userShortcutTypes =
+            AccessibilityUtil.getUserShortcutTypesFromSettings(context, componentName)
+
+        // The feature is disabled if no shortcuts are currently active.
+        if (userShortcutTypes == UserShortcutType.DEFAULT) {
+            return (false as? T?)
+        }
+
+        // The feature is also considered disabled if the *only* active shortcut is the
+        // keyboard gesture, but no physical keyboard is attached.
+        if (
+            userShortcutTypes == UserShortcutType.KEY_GESTURE &&
+                !AccessibilityUtil.isKeyboardShortcutSettingAvailable()
+        ) {
+            return (false as? T?)
+        }
+
+        // In all other cases, the feature is enabled.
+        return (true as? T?)
+    }
 
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
         if (valueType == Boolean::class.javaObjectType) {
@@ -106,11 +124,10 @@ open class AccessibilityShortcutDataStore(
         debounceUpdateData.invoke()
     }
 
-    @ShortcutConstants.UserShortcutType
-    protected open fun getDefaultShortcutTypes(): Int = ShortcutConstants.UserShortcutType.SOFTWARE
+    @UserShortcutType protected open fun getDefaultShortcutTypes(): Int = UserShortcutType.SOFTWARE
 
     /** Returns the user preferred shortcut types or the default shortcut types if not set */
-    @ShortcutConstants.UserShortcutType
+    @UserShortcutType
     fun getUserShortcutTypes(): Int {
         // We must use PreferredShortcuts.retrieveUserShortcutType() here instead of reading from
         // Settings data by AccessibilityUtil.getUserShortcutTypesFromSettings()
@@ -137,7 +154,7 @@ open class AccessibilityShortcutDataStore(
     private fun updatePreferredShortcuts() {
         val shortcutTypes =
             AccessibilityUtil.getUserShortcutTypesFromSettings(context, componentName)
-        if (shortcutTypes != ShortcutConstants.UserShortcutType.DEFAULT) {
+        if (shortcutTypes != UserShortcutType.DEFAULT) {
             val shortcut = PreferredShortcut(getComponentNameAsString(), shortcutTypes)
             PreferredShortcuts.saveUserShortcutType(context, shortcut)
         }
