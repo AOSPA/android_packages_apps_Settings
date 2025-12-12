@@ -34,6 +34,7 @@ object SafetyCenterTestUtils {
     val USER_PERSONAL: UserHandle = UserHandle.of(0)
     val USER_WORK_PROFILE: UserHandle = UserHandle.of(10)
     const val TEST_ACTION = "TEST_ACTION"
+    const val TEST_SESSION_ID: Long = 12345L
     val testIntent = Intent("TEST_ACTION")
     val TEST_PENDING_INTENT: PendingIntent =
         PendingIntent.getActivity(

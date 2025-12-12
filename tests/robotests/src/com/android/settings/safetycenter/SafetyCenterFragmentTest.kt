@@ -19,6 +19,7 @@ package com.android.settings.safetycenter
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Intent
+import android.os.Bundle
 import android.permission.flags.Flags
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
@@ -53,6 +54,7 @@ import com.android.settings.Settings.SafetyCenterActivity
 import com.android.settings.SubSettings
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_ACTION
+import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_SESSION_ID
 import com.android.settings.safetycenter.SafetyCenterTestUtils.USER_PERSONAL
 import com.android.settings.safetycenter.SafetyCenterTestUtils.USER_WORK_PROFILE
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createEntry
@@ -62,6 +64,7 @@ import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssueAction
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createScData
 import com.android.settings.safetycenter.ui.PrivacyControlsFragment
 import com.android.settings.safetycenter.ui.SafetyCenterFragment
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.EXTRA_SESSION_ID
 import com.android.settings.safetycenter.ui.SafetyCenterSubpageRegistry
 import com.android.settingslib.safetycenter.SafetySourcePreference
 import com.android.settingslib.widget.BannerMessagePreference
@@ -102,8 +105,12 @@ class SafetyCenterFragmentTest {
 
     private fun runTest(data: SafetyCenterData, testBlock: (SafetyCenterFragment) -> Unit) {
         shadowSafetyCenterManager.setSafetyCenterData(data)
+        val fragmentArgs = Bundle().apply { putLong(EXTRA_SESSION_ID, TEST_SESSION_ID) }
         val scenario =
-            launchFragmentInContainer<SafetyCenterFragment>(themeResId = R.style.Theme_SubSettings)
+            launchFragmentInContainer<SafetyCenterFragment>(
+                fragmentArgs = fragmentArgs,
+                themeResId = R.style.Theme_SubSettings,
+            )
         scenario.onFragment { fragment ->
             // TODO: b/460466023 - remove when fixed (now it serves to initiate live data values)
             shadowSafetyCenterManager.setSafetyCenterData(data)
