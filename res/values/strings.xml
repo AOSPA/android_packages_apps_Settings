@@ -2748,8 +2748,6 @@
     <string name="wifi_shared_network_login_screen_warning">This is a shared network. You need to sign in to make changes.</string>
     <!-- Message to inform user, the network can only be configured by device admin or network owner. Will be used as both a tooltip and footer description. [CHAR LIMIT=NONE] [SCREENSHOT=screen/6MYkFQCPvtEAtHz] -->
     <string name="edit_wifi_network_non_owner_message">Contact the network owner or device admin to make changes.</string>
-    <!-- Message displayed when a user hovers over the shared network icon. [CHAR LIMIT=NONE] [SCREENSHOT=screen/87w2B9komPHTVSK]-->
-    <string name="wifi_shared_network_icon_message">All users on this device can access this network.</string>
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no internet access. Stay connected?</string>
@@ -2788,7 +2786,7 @@
     <!-- Dialog title for forget confirmation dialog -->
     <string name="wifi_forget_dialog_title">Forget network?</string>
     <!-- Dialog summary for forget confirmation dialog on shared wifi network [CHAR LIMIT=NONE] [SCREENSHOT=screen/8VTjf4rnDw8CZKw] -->
-    <string name="shared_wifi_forget_dialog_message"><xliff:g id="network_name">%1$s</xliff:g> will be removed for all users on this device</string>
+    <string name="shared_wifi_forget_dialog_message">\"<xliff:g id="network_name">%1$s</xliff:g>\" will be removed for all users on this device</string>
 
     <!-- Wi-Fi Advanced Settings -->
     <skip />
@@ -3248,6 +3246,8 @@
     <string name="screen_resolution_option_full">Max resolution</string>
     <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_footer">Max resolution uses more of your battery. Switching your resolution may cause some apps to restart.</string>
+    <!-- Screen resolution displayed text [CHAR LIMIT=NONE] -->
+    <string name="screen_resolution_displayed_text"><xliff:g id="width">%1$s</xliff:g> x <xliff:g id="height">%2$s</xliff:g></string>
     <!-- Screen resolution a11y message announced to replace 'x' in entry e.g. 600 by 800 [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_delimiter_a11y"><xliff:g id="width">%1$s</xliff:g> by <xliff:g id="height">%2$s</xliff:g></string>
     <!-- Screen refresh rate option displayed text [CHAR LIMIT=NONE] -->
@@ -11533,6 +11533,15 @@
     <string name="disabled_by_advanced_protection_action_message">For your security, Advanced Protection prevents this action</string>
     <!-- Title for a button that will resolve to a help URL explaining what Advanced Protection is. [CHAR LIMIT=50] -->
     <string name="disabled_by_advanced_protection_help_button_title">Settings</string>
+
+    <!-- Title for dialog when Wi-Fi auto-connect is blocked by Advanced Protection. [CHAR LIMIT=50] -->
+    <string name="wifi_autojoin_disabled_title">Auto-connect isn\'t recommended</string>
+    <!-- Body text for dialog explaining why Wi-Fi auto-connect is disabled by Advanced Protection. [CHAR LIMIT=NONE] -->
+    <string name="wifi_autojoin_disabled_body">To keep your device secure, Advanced Protection recommends not to auto-connect to such unsecured networks.</string>
+    <!-- Positive (dismiss) button text for the Wi-Fi auto-connect disabled dialog. [CHAR LIMIT=25] -->
+    <string name="wifi_autojoin_disabled_positive_button">Back</string>
+    <!-- Negative (acknowledgment) button text for the Wi-Fi auto-connect disabled dialog. [CHAR LIMIT=25] -->
+    <string name="wifi_autojoin_disabled_negative_button">Turn on anyway</string>
 
     <!-- Turn off a conditional state of the device (e.g. airplane mode, or hotspot) [CHAR LIMIT=30] -->
     <string name="condition_turn_off">Turn off</string>

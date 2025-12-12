@@ -34,11 +34,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.PersistableBundle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 
-import com.android.server.accessibility.Flags;
 import com.android.settings.accessibility.notification.NotificationHelper;
 
 import org.junit.Before;
@@ -58,8 +54,6 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilitySurveyNotificationJobServiceTest {
 
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Rule
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
 
@@ -87,7 +81,6 @@ public class AccessibilitySurveyNotificationJobServiceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void scheduleJob_whenJobAlreadyPending_notSchedule() {
         int jobId = mJobService.getJobId(TEST_PAGE_ID);
         when(mMockJobScheduler.getPendingJob(jobId)).thenReturn(mock(JobInfo.class));
@@ -98,7 +91,6 @@ public class AccessibilitySurveyNotificationJobServiceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void scheduleJob_whenNewJob_scheduleSuccessfullyWithCorrectParameters() {
         int expectedJobId = mJobService.getJobId(TEST_PAGE_ID);
         when(mMockJobScheduler.getPendingJob(expectedJobId)).thenReturn(null);
@@ -124,15 +116,6 @@ public class AccessibilitySurveyNotificationJobServiceTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    public void scheduleJob_disableHaTS_notSchedule() {
-        mJobService.scheduleJob(mContext, TEST_PAGE_ID, TEST_DELAY_MILLIS);
-
-        verify(mMockJobScheduler, never()).schedule(any(JobInfo.class));
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void onStartJob_withValidPageId_showSurveyNotification() {
         PersistableBundle extras = new PersistableBundle();
         extras.putInt(EXTRA_PAGE_ID, TEST_PAGE_ID);
@@ -145,7 +128,6 @@ public class AccessibilitySurveyNotificationJobServiceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void onStartJob_withUnknownPageId_notShowSurveyNotification() {
         int unknownPageId = SettingsEnums.PAGE_UNKNOWN;
         PersistableBundle extras = new PersistableBundle();
@@ -159,7 +141,6 @@ public class AccessibilitySurveyNotificationJobServiceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void onStartJob_withMissingPageIdInExtras_notShowSurveyNotification() {
         PersistableBundle extras = new PersistableBundle();
         JobParameters mockParams = getTestJobParameters(TEST_PAGE_ID, extras);
@@ -172,7 +153,6 @@ public class AccessibilitySurveyNotificationJobServiceTest {
 
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void onStartJob_withNullExtras_notShowSurveyNotification() {
         JobParameters mockParams = getTestJobParameters(TEST_PAGE_ID, null);
 
@@ -184,7 +164,6 @@ public class AccessibilitySurveyNotificationJobServiceTest {
 
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void onStopJob_returnTrue() {
         int stopReason = JobParameters.STOP_REASON_TIMEOUT;
         JobParameters mockParams = getTestJobParametersForStop(TEST_PAGE_ID, stopReason);

@@ -24,7 +24,6 @@ import androidx.core.content.getSystemService
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.PreferenceScreen
-import com.android.server.accessibility.Flags.enableLowVisionHats
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.core.BasePreferenceController
 import com.android.settingslib.widget.ButtonPreference
@@ -57,11 +56,9 @@ class ForceInvertSurveyButtonPreferenceController(context: Context, prefKey: Str
     ) {
         this.surveyManager = surveyManager
         this.uiModeManager = uiModeManager
-        if (enableLowVisionHats()) {
-            surveyManager.checkSurveyAvailable { available ->
-                isSurveyButtonVisible = available
-                updateSurveyButtonVisibility()
-            }
+        surveyManager.checkSurveyAvailable { available ->
+            isSurveyButtonVisible = available
+            updateSurveyButtonVisibility()
         }
     }
 
@@ -81,8 +78,7 @@ class ForceInvertSurveyButtonPreferenceController(context: Context, prefKey: Str
 
     override fun getAvailabilityStatus(): Int {
         val available =
-            enableLowVisionHats() &&
-                !mContext.isInSetupWizard() &&
+            !mContext.isInSetupWizard() &&
                 isSurveyButtonVisible &&
                 currentForceInvertState == UiModeManager.FORCE_INVERT_TYPE_DARK
         return if (available) AVAILABLE else CONDITIONALLY_UNAVAILABLE

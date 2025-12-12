@@ -17,6 +17,7 @@ package com.android.settings.supervision
 
 import android.app.Activity
 import android.app.Application
+import android.app.role.OnRoleHoldersChangedListener
 import android.app.role.RoleManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
@@ -28,6 +29,7 @@ import android.content.pm.ResolveInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Process
+import android.os.UserHandle
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -50,6 +52,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.preference.launchFragmentScenario
 import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
+import java.util.concurrent.Executor
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -326,19 +329,36 @@ class SupervisionDashboardScreenTest {
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
         preferenceScreenCreator.onResume(mockLifeCycleContext)
         verify(mockSupervisionManager).registerSupervisionListener(any())
+        verify(mockRoleManager)
+            .addOnRoleHoldersChangedListenerAsUser(
+                any<Executor>(),
+                any<OnRoleHoldersChangedListener>(),
+                any<UserHandle>(),
+            )
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onPause_unregistersListener() {
-        val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
+        val supervisionListenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
+        val roleListenerCaptor = argumentCaptor<OnRoleHoldersChangedListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
         preferenceScreenCreator.onResume(mockLifeCycleContext)
-        verify(mockSupervisionManager).registerSupervisionListener(listenerCaptor.capture())
+        verify(mockSupervisionManager)
+            .registerSupervisionListener(supervisionListenerCaptor.capture())
+        verify(mockRoleManager)
+            .addOnRoleHoldersChangedListenerAsUser(
+                any<Executor>(),
+                roleListenerCaptor.capture(),
+                any<UserHandle>(),
+            )
 
         preferenceScreenCreator.onPause(mockLifeCycleContext)
-        verify(mockSupervisionManager).unregisterSupervisionListener(listenerCaptor.firstValue)
+        verify(mockSupervisionManager)
+            .unregisterSupervisionListener(supervisionListenerCaptor.firstValue)
+        verify(mockRoleManager)
+            .removeOnRoleHoldersChangedListenerAsUser(roleListenerCaptor.firstValue, UserHandle.ALL)
     }
 
     @Test
@@ -438,6 +458,7 @@ class SupervisionDashboardScreenTest {
             } doReturn supervisionAppsGroup
         }
 
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
         preferenceScreenCreator.onResume(mockLifeCycleContext)
 
         assertThat(supervisionAppsGroup.isVisible).isTrue()
@@ -461,6 +482,7 @@ class SupervisionDashboardScreenTest {
             } doReturn supervisionAppsGroup
         }
 
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
         preferenceScreenCreator.onResume(mockLifeCycleContext)
 
         assertThat(supervisionAppsGroup.isVisible).isFalse()

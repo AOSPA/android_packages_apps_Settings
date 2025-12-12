@@ -298,6 +298,14 @@
     <color name="sc_shield_accent_dark">@color/gm_grey_900</color>
     <color name="sc_shield_accent_fixed_variant">@color/sc_shield_accent_dark</color>
 
+    <color name="sc_status_icon_background_info_light">@color/m3_ref_palette_green95</color>
+    <color name="sc_status_icon_background_recommend_light">@color/m3_ref_palette_yellow95</color>
+    <color name="sc_status_icon_background_warn_light">@color/m3_ref_palette_red95</color>
+
+    <color name="sc_status_icon_background_info_dark">@color/m3_ref_palette_green20</color>
+    <color name="sc_status_icon_background_recommend_dark">@color/m3_ref_palette_yellow20</color>
+    <color name="sc_status_icon_background_warn_dark">@color/m3_ref_palette_red20</color>
+
     <color name="gm_grey_900">#202124</color>
 
     <!-- Safety Center Illustration Colors -->
@@ -310,10 +318,4 @@
     <color name="sc_materialColorSurfaceContainer">@android:color/system_surface_container_light</color>
     <color name="sc_materialColorOutline">@android:color/system_outline_light</color>
     <color name="sc_materialColorOutlineVariant">@android:color/system_outline_variant_light</color>
-
-    <!-- Safety Center Shield Fill Colors -->
-    <color name="safety_center_shield_low">@color/m3_ref_palette_green60</color>
-    <color name="safety_center_shield_medium">@color/m3_ref_palette_yellow80</color>
-    <color name="safety_center_shield_high">@color/m3_ref_palette_red50</color>
-    <color name="safety_center_shield_glyph_color">@color/settingslib_materialColorSurfaceContainerLowest</color>
 </resources>

@@ -20,7 +20,6 @@ import android.content.Context
 import android.provider.Settings
 import androidx.preference.Preference
 import com.android.settings.R
-import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.MagnificationCapabilities
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode.ALL
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode.FULLSCREEN
@@ -130,8 +129,7 @@ class CursorFollowingPreference :
     }
 
     private fun isMagnificationCursorFollowingModeDialogSupported(): Boolean {
-        return Flags.enableMagnificationCursorFollowingDialog() &&
-            InputPeripheralsSettingsUtils.isMouse()
+        return InputPeripheralsSettingsUtils.isMouse()
     }
 
     companion object {

@@ -22,13 +22,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 
-import com.android.server.accessibility.Flags;
-
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -37,16 +31,12 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class FeedbackManagerTest {
 
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-
     private static final String PACKAGE_NAME = "test.feedback.package";
     private static final String DEFAULT_CATEGORY = "default category";
     private static final String DEFAULT_TRIGGER_ID = "default triggerId";
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
-    public void isAvailable_enableLowVisionGenericFeedbackWithValidParams_returnsTrue() {
+    public void isAvailable_withValidParams_returnsTrue() {
         FeedbackManager feedbackManager =
                 new FeedbackManager(PACKAGE_NAME, DEFAULT_CATEGORY, DEFAULT_TRIGGER_ID);
 
@@ -54,16 +44,6 @@ public class FeedbackManagerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
-    public void isAvailable_disableLowVisionGenericFeedback_returnsFalse() {
-        FeedbackManager feedbackManager =
-                new FeedbackManager(PACKAGE_NAME, DEFAULT_CATEGORY, DEFAULT_TRIGGER_ID);
-
-        assertThat(feedbackManager.isAvailable()).isFalse();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void isAvailable_withNullCategory_returnsFalse() {
         FeedbackManager feedbackManager =
                 new FeedbackManager(PACKAGE_NAME, /* category= */ null,
@@ -73,7 +53,6 @@ public class FeedbackManagerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void isAvailable_withNullReporterPackage_returnsFalse() {
         FeedbackManager feedbackManager =
                 new FeedbackManager(/* reporterPackage= */ null, DEFAULT_CATEGORY,
