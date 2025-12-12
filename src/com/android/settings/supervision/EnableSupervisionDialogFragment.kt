@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.app.Dialog
+import android.app.supervision.flags.Flags
 import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.TextView
@@ -52,9 +53,30 @@ class EnableSupervisionDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
 
+        val supervisionAppName =
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                try {
+                    val packageManager = requireContext().packageManager
+                    val appInfo =
+                        packageManager.getApplicationInfo(requireActivity().callingPackage ?: "", 0)
+                    packageManager.getApplicationLabel(appInfo)
+                } catch (e: android.content.pm.PackageManager.NameNotFoundException) {
+                    null
+                }
+            } else {
+                arguments?.getString(ARG_SUPERVISION_APP_NAME)
+            }
+
+        val title =
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                getString(R.string.supervision_confirmation_title, supervisionAppName)
+            } else {
+                getString(R.string.profile_owner_add_title_simplified)
+            }
+
         val builder = AlertDialog.Builder(requireContext())
         builder
-            .setTitle(R.string.profile_owner_add_title_simplified)
+            .setTitle(title)
             .setPositiveButton(R.string.allow) { _, _ ->
                 setFragmentResult(DIALOG_POSITIVE_BUTTON_CLICKED, Bundle())
             }
@@ -66,11 +88,18 @@ class EnableSupervisionDialogFragment : DialogFragment() {
         val dialog = builder.create()
 
         dialog.setOnShowListener { _ ->
-            val message = arguments?.getString(ARG_MESSAGE)
-            dialog.findViewById<TextView>(R.id.supervision_activation_message)?.setText(message)
+            if (!Flags.enableSupervisionSettingsUiUpdates()) {
+                val message = arguments?.getString(ARG_MESSAGE)
+                dialog.findViewById<TextView>(R.id.supervision_activation_message)?.setText(message)
+            }
 
-            val supervisionAppName = arguments?.getString(ARG_SUPERVISION_APP_NAME)
-            val warning = getString(R.string.device_admin_warning_simplified, supervisionAppName)
+            val warningResId =
+                if (Flags.enableSupervisionSettingsUiUpdates()) {
+                    R.string.supervision_role_holder_warning
+                } else {
+                    R.string.device_admin_warning_simplified
+                }
+            val warning = getString(warningResId, supervisionAppName)
             dialog.findViewById<TextView>(R.id.supervision_activation_warning)?.setText(warning)
 
             val positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE)
