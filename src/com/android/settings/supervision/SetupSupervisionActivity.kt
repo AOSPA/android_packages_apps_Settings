@@ -36,6 +36,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresPermission
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
@@ -209,7 +210,7 @@ class SetupSupervisionActivity : FragmentActivity() {
     @RequiresPermission(anyOf = [CREATE_USERS, MANAGE_USERS])
     private fun enableSupervision() {
         // Create user profile in the background to avoid blocking the loading indicator UI
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(ioDispatcher) {
             val supervisingUser: UserHandle? = setupSupervisingUser()
 
             // Update UI on the main thread
@@ -381,5 +382,9 @@ class SetupSupervisionActivity : FragmentActivity() {
         } else {
             Log.w(SupervisionLog.TAG, "HelpIntent is null")
         }
+    }
+
+    companion object {
+        @VisibleForTesting var ioDispatcher = Dispatchers.IO
     }
 }
