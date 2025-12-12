@@ -446,6 +446,18 @@ public class UtilsTest {
     }
 
     @Test
+    @EnableFlags(FLAG_HIDE_DREAM_SETTING_IN_DEMO_MODE)
+    public void shouldHideDreamsInDemoMode_unExpectedException_returnFalse() {
+        Resources mockResources = mock(Resources.class);
+        when(mContext.getResources()).thenReturn(mockResources);
+        when(mockResources.getBoolean(R.bool.config_hide_dream_setting_in_demo_mode))
+                .thenReturn(true);
+        when(mContext.getContentResolver()).thenThrow(
+            new NullPointerException("Test: null pointer"));
+        assertThat(Utils.shouldHideDreamsInDemoMode(mContext)).isFalse();
+    }
+
+    @Test
     public void checkUserOwnsFrpCredential_userOwnsFrpCredential_returnUserId() {
         ShadowLockPatternUtils.setUserOwnsFrpCredential(true);
 
