@@ -29,6 +29,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
+import com.android.settings.spa.network.getActivity
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -98,6 +99,16 @@ class SupervisionPinRecoveryPreference :
                 .show()
         }
         if (Flags.enableSupervisionSettingsUiUpdates()) {
+            if (
+                result.resultCode == Activity.RESULT_CANCELED &&
+                    !lifeCycleContext.isSupervisingCredentialSet()
+            ) {
+                // Navigate back to the dashboard.
+                val activity =
+                    (lifeCycleContext.baseContext.getActivity()
+                        as? androidx.activity.ComponentActivity)
+                activity?.onBackPressedDispatcher?.onBackPressed()
+            }
             lifeCycleContext.notifyPreferenceChange(KEY)
         }
     }

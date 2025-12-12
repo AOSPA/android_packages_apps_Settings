@@ -241,12 +241,14 @@
         android:id="@+id/ic_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="-8dp"
+        android:padding="8dp"
         android:background="@drawable/color_contrast_preview_icon_edit_background"
         android:contentDescription="@null"
-        android:padding="27dp"
         android:src="@drawable/ic_edit_24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/email_background"
+        app:layout_constraintBottom_toBottomOf="@+id/attachment_background"
         app:layout_constraintEnd_toEndOf="@+id/email_background" />
 
     <View
