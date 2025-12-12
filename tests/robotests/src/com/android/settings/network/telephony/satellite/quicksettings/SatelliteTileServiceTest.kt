@@ -49,7 +49,7 @@ class SatelliteTileServiceTest {
     @get:Rule val mocks = MockitoJUnit.rule()
 
     @Mock private lateinit var telephonyManager: TelephonyManager
-
+    @Mock private lateinit var satelliteTilePromptUtils: SatelliteTilePromptUtils
     @Captor private lateinit var telephonyCallbackCaptor: ArgumentCaptor<TelephonyCallback>
     @Captor private lateinit var pendingIntentCaptor: ArgumentCaptor<PendingIntent>
 
@@ -60,6 +60,7 @@ class SatelliteTileServiceTest {
     fun setUp() {
         context = RuntimeEnvironment.getApplication()
         service = spy(Robolectric.setupService(SatelliteTileService::class.java))
+        service.satelliteTilePromptUtils = satelliteTilePromptUtils
 
         doReturn(telephonyManager).`when`(service).getSystemService(TelephonyManager::class.java)
 
@@ -172,6 +173,18 @@ class SatelliteTileServiceTest {
         assertThat(capturedIntent).isNotNull()
         assertThat(capturedIntent.component?.className)
             .isEqualTo(SatelliteLandingPageActivity::class.java.name)
+    }
+
+    @Test
+    fun onTileAdded_setsPromptShown() {
+        service.onTileAdded()
+        verify(satelliteTilePromptUtils).setAddTilePromptShown(service, true)
+    }
+
+    @Test
+    fun onTileRemoved_setsPromptShown() {
+        service.onTileRemoved()
+        verify(satelliteTilePromptUtils).setAddTilePromptShown(service, false)
     }
 
     private fun getTelephonyCallback(): TelephonyCallback {
