@@ -331,7 +331,7 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"לפי ברירת המחדל באזור"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"פורמט 24 שעות"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"שעה"</string>
-    <string name="time_format_category_title" msgid="7108616745509689991">"פורמט זמן"</string>
+    <string name="time_format_category_title" msgid="7108616745509689991">"פורמט השעה"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"אזור זמן"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"אזור זמן"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"חיפוש אזור זמן"</string>
@@ -350,7 +350,7 @@
     <string name="zone_menu_by_offset" msgid="543648951618438204">"‏בחירה לפי ההפרש משעון גריניץ\' (GMT)"</string>
     <string name="time_feedback_category_title" msgid="5942621686512255208">"משוב"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"משוב, באג, זמן, אזור, אזור זמן"</string>
-    <string name="time_feedback_title" msgid="7720948068042783614">"שליחת משוב לגבי הזמן"</string>
+    <string name="time_feedback_title" msgid="7720948068042783614">"שליחת משוב לגבי השעה"</string>
     <string name="keywords_time_feedback" msgid="929965356597294030">"משוב, באג, זמן, אזור, אזור זמן"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"נעילה בתום הזמן הקצוב לכיבוי המסך"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> לאחר תום הזמן הקצוב לתפוגה"</string>
@@ -1203,9 +1203,9 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏סיסמת ה-Wi‑Fi היא: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"סיסמה של נקודה לשיתוף אינטרנט: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"חיבור אוטומטי"</string>
-    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"להתחבר לרשת הזו כשנמצאים בטווח שלה?"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"המכשיר יתחבר לרשת הזו כשהוא ייכנס לטווח שלה"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"הוספת מכשיר"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"‏אפשר להשתמש בקוד QR כדי להוסיף מכשיר לרשת הזו"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"‏כדי להוסיף מכשיר לרשת, אפשר לסרוק קוד QR"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"‏קוד QR אינו בפורמט חוקי"</string>
     <string name="retry" msgid="7542103800274026915">"ניסיון נוסף"</string>
     <string name="shared_message" msgid="2104244057926025072">"משותפת"</string>
@@ -1213,11 +1213,11 @@
     <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"מעבר"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"ביטול"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"שיתוף הרשת"</string>
-    <string name="wifi_share_preference_summary" msgid="3642772041628058748">"משתמשים אחרים במכשיר הזה יכולים לגשת לרשת הזו"</string>
+    <string name="wifi_share_preference_summary" msgid="3642772041628058748">"משתמשים אחרים במכשיר הזה יכולים להתחבר לרשת הזו"</string>
     <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"לעבור לרשת <xliff:g id="SHARED">%1$s</xliff:g>?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"כבר קיימת רשת <xliff:g id="SHARED_0">%1$s</xliff:g> בשם \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\". אם בוחרים לעבור לרשת <xliff:g id="SHARED_1">%1$s</xliff:g>, עוזבים את רשת <xliff:g id="PRIVATE">%3$s</xliff:g> והחיבור לאינטרנט יכול להתנתק באופן זמני."</string>
+    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"כבר קיימת רשת <xliff:g id="SHARED_0">%1$s</xliff:g> בשם \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\". אם בוחרים לעבור לרשת <xliff:g id="SHARED_1">%1$s</xliff:g>, עוזבים את הרשת ה<xliff:g id="PRIVATE">%3$s</xliff:g> והחיבור לאינטרנט יכול להתנתק באופן זמני."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(ללא שינוי)"</string>
-    <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"המשתמשים יכולים לערוך את הרשת"</string>
+    <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"מתן הרשאת עריכה לרשת"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"משתמשים אחרים יכולים לבצע שינויים ברשת הזו"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"צריך לבחור"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(נוספו מספר אישורים)"</string>
@@ -1254,7 +1254,7 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"נכשל הניסיון לשמור את הרשת"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"ביטול"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"למחוק את הרשת?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"הרשת <xliff:g id="NETWORK_NAME">%1$s</xliff:g> תוסר בשביל כל המשתמשים במכשיר הזה"</string>
+    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"אף אחד מהמשתמשים במכשיר הזה לא יוכל להתחבר לרשת <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{רשת אחת}one{# רשתות}two{# רשתות}other{# רשתות}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{מינוי אחד}one{# מינויים}two{# מינויים}other{# מינויים}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{רשת ומינוי}one{# רשתות ומינויים}two{# רשתות ומינויים}other{# רשתות ומינויים}}"</string>
@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"מושבת זמנית כי הופעל מצב \"חיסכון בסוללה\""</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"שימוש במצב תאורה חלשה"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"מה להציג במצב תאורה חלשה?"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"כיבוי המסך"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"שעון בתאורה חלשה"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"פועל / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"מושבת"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"המסך יכבה כשהסביבה חשוכה"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"כשהסביבה חשוכה, יוצג שעון בתאורה חלשה"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"תצוגת אווירה דינמית"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"מתי להציג"</string>
@@ -1885,6 +1883,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"שינוי אזור הזמן"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"קבלת התראה כשאזור הזמן מתעדכן אוטומטית"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"התראה, זמן, אזור, אזור זמן"</string>
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"שינוי מתוזמן בשעון"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"קבלת התראה על שינוי מתוזמן של השעון, למשל במעבר לשעון קיץ"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"שעון קיץ, מעבר לשעון קיץ, מעבר לשעון חורף, הזזת השעון, הזזה מתוזמנת של השעון"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"השינוי הבא"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"אין שינויים מתוזמנים"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"הצגת מידע משפטי, סטטוס, גרסת תוכנה"</string>
     <string name="legal_information" msgid="7509900979811934843">"מידע משפטי"</string>
     <string name="manual" msgid="3651593989906084868">"ידני"</string>
@@ -2333,8 +2336,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"האפליקציות האחרונות"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"התראות"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"הגדרות מהירות"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"הערה"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"בחירת קיצור דרך בשביל <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"הפינה השמאלית התחתונה"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"הפינה הימנית התחתונה"</string>
@@ -2602,9 +2604,9 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"‏לחיצה מהירה %1$d פעמים על המסך. זה עלול להאט את פעולת המכשיר."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"‏לחיצה כפולה עם %1$d אצבעות"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"לחיצה מהירה 3 פעמים"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"מקשי קיצור"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"מקש קיצור"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"כדי להשתמש ב<xliff:g id="ID_4">%4$s</xliff:g>, צריך ללחוץ על <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_keyboard_keyword" msgid="7354208869208311654">"מקשי קיצור"</string>
+    <string name="accessibility_shortcut_keyboard_keyword" msgid="7354208869208311654">"מקש קיצור"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"מתקדם"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"הכפתור \'נגישות\' מוגדר לשירות <xliff:g id="SERVICE">%1$s</xliff:g>. כדי להשתמש בהגדלה, יש ללחוץ לחיצה ארוכה על כפתור הנגישות ולאחר מכן לבחור בהגדלה."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"תנועת הנגישות מוגדרת לשירות <xliff:g id="SERVICE">%1$s</xliff:g>. כדי להשתמש בהגדלה, יש להחליק מעלה מהחלק התחתון של המסך באמצעות שתי אצבעות ולהחזיק. לאחר מכן יש לבחור באפשרות \'הגדלה\'."</string>
@@ -2974,6 +2976,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"שימוש בסוללה לאפליקציה"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"פרטי שימוש"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"התאמת צריכת סוללה"</string>
@@ -3681,7 +3684,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"משוכפלת"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"יצירת השכפול של <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> מתבצעת"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"נוצר שכפול של <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"שפות, תנועות, שעה, גיבוי"</string>
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"שפות, תנועות, שעה"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"שפות מערכת, שפות של אפליקציות, העדפות פורמט ומידות, דיבור"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"‏wifi, Wi-Fi, חיבור רשת, אינטרנט, אלחוטי, נתונים, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"‏התראת Wi‑Fi, התראת wifi"</string>
@@ -3933,10 +3936,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"אפליקציות"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"שעונים מעוררים והפרעות אחרות"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"כמה זמן פועלות ההגדרות המהירות"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"סנכרון של מצב \"נא לא להפריע\""</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"סנכרון ההגדרות של מצב \"נא לא להפריע\" עם מכשירים מחוברים"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"צלילי פרופיל עבודה"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"שימוש בצלילי הפרופיל האישי"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"אותם צלילים כמו בפרופיל האישי"</string>
@@ -4621,9 +4622,9 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"לאפליקציה הזו תהיה הרשאה לקרוא, לשנות ולמחוק את כל הקבצים במכשיר הזה או בכל אחסון שמחובר אליו. אם ההרשאה ניתנת, האפליקציה תורשה לגשת לקבצים מבלי ליידע אותך במפורש."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"יכולת גישה לכל הקבצים"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"אוטומציה של המסך"</string>
-    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"האפליקציה הזו תוכל לראות את תוכן המסך של אפליקציות אחרות ולבצע איתו אינטראקציה כדי לעזור לך במשימות, גם כשהאפליקציות פועלות ברקע"</string>
+    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"האפליקציה הזו תוכל לראות את תוכן המסך של אפליקציות אחרות ולקיים איתו אינטראקציה כדי לעזור לך במשימות, גם כשהאפליקציות פועלות ברקע"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"אם האוטומציה של המסך לא תאושר, יכול להיות שעדיין תהיה ל-<xliff:g id="ID_1">%1$s</xliff:g> אפשרות לקיים אינטראקציה עם אפליקציות שמחוברות אל <xliff:g id="ID_2">%1$s</xliff:g> בדרכים אחרות"</string>
-    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"מתן הרשאה לאפליקציות לעזור במשימות על ידי אינטראקציה עם תוכן המסך של אפליקציות אחרות"</string>
+    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"אם תינתן הרשאה, האפליקציות יוכלו לעזור במשימות על ידי אינטראקציה עם תוכן המסך של אפליקציות אחרות"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"אני רוצה לבחור בכל פעם"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"אישור לתמיד"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"אין אישור"</string>
@@ -4904,16 +4905,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"סיבוב לסלפי במצלמה"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"מעבר בין מסכים"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"עדכון המכשיר"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"אינטראקציה"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"אוטומציה ובינה"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"ניהול המערכת"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"ניהול הנתונים"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"ניווט באמצעות 2 כפתורים"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"כדי לעבור בין אפליקציות יש להחליק מעלה על הכפתור הראשי. כדי להציג את כל האפליקציות, יש להחליק מעלה שוב. כדי לחזור למסך הקודם, יש ללחוץ על הכפתור \'הקודם\'."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"התראות והגדרות מהירות"</string>
@@ -5181,8 +5177,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"‏ניסיוני: הפעלת ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"‏אזהרה: הפעלה של ANGLE כברירת מחדל של הדרייבר OpenGL ES. התכונה הזו ניסיונית ויכול להיות שלא תתאים לחלק מאפליקציות המצלמה והסרטונים."</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"‏צריך להפעיל מחדש כדי לשנות את מערכת OpenGL ES לנהג"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"‏אזהרה: להפעיל את ANGLE כברירת מחדל של הדרייבר OpenGL ES? התכונה הזו ניסיונית ויכול להיות שלא תתאים לחלק מאפליקציות המצלמה והסרטונים. לפני שמפעילים את המתג, צריך לגבות את הנתונים במכשיר"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"‏כדי לשנות את דרייבר OpenGL ES של המערכת, צריך להפעיל את המכשיר מחדש. לפני ההפעלה מחדש, צריך לגבות את הנתונים במכשיר. אם ההפעלה מחדש נכשלה, צריך לאפס את המכשיר להגדרות המקוריות כדי לשחזר אותו"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"שינויים בתאימות האפליקציה"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"החלפת המצב של שינויים בתאימות של אפליקציות"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"השינויים מופעלים כברירת מחדל"</string>
@@ -6070,6 +6066,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"סינון תוצאות חיפוש בוטות"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{באפליקציה אחת}one{ב-# אפליקציות}two{ב-# אפליקציות}other{ב-# אפליקציות}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"גם אם ההגדרות האלה מושבות, יכול להיות שהגדרות אחרות בחשבון עדיין בתוקף."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"הזנת קוד אימות לאמצעי בקרת ההורים"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"הגדרת קוד אימות לאמצעי בקרת ההורים"</string>
@@ -6087,6 +6085,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"מחיקת קוד האימות והשבתת אמצעי הבקרה"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"מחיקה"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"קוד האימות של אמצעי בקרת ההורים נמצא בשימוש של:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"אנימציה של <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"לא ניתן להפעיל את אמצעי הבקרה"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"אי אפשר להשתמש באמצעי הבקרה"</string>

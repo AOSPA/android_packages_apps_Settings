@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Temporarily disabled due to Battery Saver"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Use Low Light mode"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Choose what to show in Low Light mode"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Screen off"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Low light clock"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"On / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"Off"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"Screen will turn off when your environment is dark"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"Low Light Clock will show when your environment is dark"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Ambient display"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"When to show"</string>
@@ -1885,6 +1883,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Time zone change"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Receive a notification when your time zone is automatically updated"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notification, time, zone, timezone"</string>
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Scheduled clock change"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Receive a notification when your clock performs a scheduled change, for example for daylight saving time"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"dst, daylight saving time, daylight savings, clock change, scheduled clock change"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Next change"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"No scheduled changes"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"View legal info, status, software version"</string>
     <string name="legal_information" msgid="7509900979811934843">"Legal information"</string>
     <string name="manual" msgid="3651593989906084868">"Manual"</string>
@@ -2333,8 +2336,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Recent apps"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notifications"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Quick settings"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"Note"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Choose a shortcut for the <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"bottom-left corner"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"bottom-right corner"</string>
@@ -2974,6 +2976,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"App battery usage"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Use details"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Adjust power use"</string>
@@ -3681,7 +3684,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Cloned"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Creating <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> clone"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Created <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> clone"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"Languages, gestures, time, backup"</string>
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Languages, gestures, time"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"System languages, app languages, regional preferences, speech"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, network connection, internet, wireless, data, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi notification, wifi notification"</string>
@@ -3933,10 +3936,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarms &amp; other interruptions"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Duration for Quick Settings"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"Do not disturb sync"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"Sync Do not disturb settings to connected devices"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Work profile sounds"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Use personal profile sounds"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Use the same sounds as your personal profile"</string>
@@ -4904,16 +4905,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Flip camera for selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigation mode"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"Update device"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"Interaction"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"Automation &amp; Intelligence"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"System management"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"Manage data"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Two-button navigation"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"To switch apps, swipe up on the Home button. To see all apps, swipe up again. To go back, tap the back button."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"Notifications &amp; Quick Settings"</string>
@@ -5181,8 +5177,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Experimental: Enable ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Warning: Enable ANGLE as default OpenGL ES driver. This feature is in experiment and may not be compatible with some camera and video apps."</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"A reboot is required to change the system OpenGL ES driver"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Warning: Enable ANGLE as default OpenGL ES driver. This feature is in experiment and may not be compatible with some camera and video apps. Please backup your device data before turning on the switch"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"A reboot is required to change the system OpenGL ES driver. Please back up your device data before rebooting. In case the reboot failed, you need a factory reset to restore the device"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"App Compatibility Changes"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Toggle app compatibility changes"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Default enabled changes"</string>
@@ -6069,6 +6065,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filter out explicit search results"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{On # app}other{On # apps}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"When these settings are off, other account settings may still apply."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Enter parental controls PIN"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Set a parental controls PIN"</string>
@@ -6086,6 +6084,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Delete PIN &amp; turn off controls"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Delete"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Your parental controls PIN is being used by:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animation"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Can’t turn on controls"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Can’t use controls"</string>

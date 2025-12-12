@@ -26,6 +26,7 @@ import static android.app.AutomaticZenRule.TYPE_SCHEDULE_TIME;
 import static android.app.AutomaticZenRule.TYPE_THEATER;
 import static android.app.AutomaticZenRule.TYPE_TRANSIT;
 import static android.app.AutomaticZenRule.TYPE_UNKNOWN;
+import static android.app.Flags.modesUiTransit;
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import android.annotation.SuppressLint;
@@ -170,7 +171,8 @@ public class SetupInterstitialActivity extends FragmentActivity {
                 case TYPE_IMMERSIVE -> R.string.zen_mode_inspiration_immersive;
                 case TYPE_THEATER -> R.string.zen_mode_inspiration_theater;
                 case TYPE_MANAGED -> R.string.zen_mode_inspiration_managed;
-                case TYPE_TRANSIT -> R.string.zen_mode_inspiration_transit;
+                case TYPE_TRANSIT -> modesUiTransit() ? R.string.zen_mode_inspiration_transit :
+                        R.string.zen_mode_inspiration_generic;
                 default -> R.string.zen_mode_inspiration_generic; // Including OTHER, UNKNOWN.
             };
         }
@@ -197,7 +199,9 @@ public class SetupInterstitialActivity extends FragmentActivity {
             case TYPE_BEDTIME -> R.drawable.modes_interstitial_bedtime_expressive;
             case TYPE_DRIVING -> R.drawable.modes_interstitial_driving_expressive;
             case TYPE_THEATER -> R.drawable.modes_interstitial_theater_expressive;
-            case TYPE_TRANSIT -> R.drawable.modes_interstitial_transit_expressive;
+            case TYPE_TRANSIT -> modesUiTransit()
+                    ? R.drawable.modes_interstitial_transit_expressive
+                    : R.drawable.modes_interstitial_unknown_expressive;
             // Immersive and Managed should have specific images, but they aren't (yet?) available.
             case TYPE_OTHER, TYPE_SCHEDULE_CALENDAR, TYPE_SCHEDULE_TIME,
                  TYPE_IMMERSIVE, TYPE_MANAGED -> R.drawable.modes_interstitial_other_expressive;

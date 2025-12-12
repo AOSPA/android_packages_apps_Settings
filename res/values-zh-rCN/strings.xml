@@ -1536,11 +1536,9 @@
     <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"因省电模式已开启，该功能被暂时停用了"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"启用弱光模式"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"选择在弱光模式下显示的内容"</string>
-    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"关闭屏幕"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"弱光时钟"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"已开启 / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"已关闭"</string>
-    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"在环境昏暗时将会关闭屏幕"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"环境昏暗时会显示弱光时钟"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"氛围屏保"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"何时显示"</string>
@@ -1885,6 +1883,16 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"时区更改"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"在时区自动更新时接收通知"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"通知, 时间, 区, 时区, notification, time, zone, timezone"</string>
+    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
+    <skip />
+    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
+    <skip />
+    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
+    <skip />
+    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
+    <skip />
     <string name="about_settings_summary" msgid="4831942939227432513">"查看法律信息、状态和软件版本"</string>
     <string name="legal_information" msgid="7509900979811934843">"法律信息"</string>
     <string name="manual" msgid="3651593989906084868">"手册"</string>
@@ -2333,8 +2341,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"最近用过的应用"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"通知"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"快捷设置"</string>
-    <!-- no translation found for action_corner_action_note_title (676681755341991937) -->
-    <skip />
+    <string name="action_corner_action_note_title" msgid="676681755341991937">"笔记"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"选择<xliff:g id="CORNER">%1$s</xliff:g>的快捷方式"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"左下角"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"右下角"</string>
@@ -2602,12 +2609,9 @@
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"快速点按屏幕 %1$d 次。此操作可能会减慢设备的运行速度。"</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"%1$d 指点按两次"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"点按三次"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_keyboard (6563958384189884131) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_keyboard (8755352177645189254) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_keyboard_keyword (7354208869208311654) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"键盘快捷键"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"按 <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> 即可使用<xliff:g id="ID_4">%4$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_keyboard_keyword" msgid="7354208869208311654">"键盘快捷键"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"高级"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"“无障碍”按钮已设为“<xliff:g id="SERVICE">%1$s</xliff:g>”。要使用放大功能，请触摸并按住“无障碍”按钮，然后选择“放大功能”。"</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"无障碍手势已设为<xliff:g id="SERVICE">%1$s</xliff:g>。要使用放大功能，请用两指从屏幕底部向上滑动并按住，然后选择放大功能。"</string>
@@ -2977,6 +2981,7 @@
     <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
     <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
     <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"应用的电池使用情况"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"详细使用情况"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"省电提示"</string>
@@ -3667,10 +3672,8 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"蓝牙、Android Auto、驾车模式"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"蓝牙、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"蓝牙、Android Auto"</string>
-    <!-- no translation found for device_dashboard_title (1176311605407079643) -->
-    <skip />
-    <!-- no translation found for device_dashboard_summary (657619609434549473) -->
-    <skip />
+    <string name="device_dashboard_title" msgid="1176311605407079643">"设备"</string>
+    <string name="device_dashboard_summary" msgid="657619609434549473">"键盘、触控板、显示屏、声音"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"无法使用，因为 NFC 已关闭"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"先安装付款应用，然后才能使用感应式付款功能"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使用的应用、默认应用"</string>
@@ -3688,7 +3691,8 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"已克隆"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"正在创建 <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> 克隆"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"已创建 <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> 克隆"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"语言、手势、时间、备份"</string>
+    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
+    <skip />
     <string name="languages_setting_summary" msgid="2650807397396180351">"系统语言、应用语言、地区偏好设置、语音"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, WLAN, 网络连接, 互联网, 无线, 数据, WLAN 网络"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"WLAN 通知, wlan 通知"</string>
@@ -3940,10 +3944,8 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"应用"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"闹钟和其他例外项"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"勿扰模式经由快捷设置开启后持续的时长"</string>
-    <!-- no translation found for dnd_sync_title (2422077702431248079) -->
-    <skip />
-    <!-- no translation found for dnd_sync_description (2625638932336262656) -->
-    <skip />
+    <string name="dnd_sync_title" msgid="2422077702431248079">"同步勿扰设置"</string>
+    <string name="dnd_sync_description" msgid="2625638932336262656">"将勿扰设置同步到关联的设备"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"工作资料提示音"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"使用个人资料提示音"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"使用与个人资料相同的提示音"</string>
@@ -4633,8 +4635,7 @@
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"允许应用通过与其他应用的界面内容互动来帮助您完成任务"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"每次都询问"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"始终允许"</string>
-    <!-- no translation found for computer_control_automation_dont_allow (6562575180350018944) -->
-    <skip />
+    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"不允许"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"全屏通知"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"允许此应用显示全屏通知"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"允许此应用在设备锁定时全屏显示通知。应用可利用全屏通知突出显示闹钟、来电或其他紧急通知。"</string>
@@ -4912,16 +4913,11 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"翻转相机切换自拍模式"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"导航模式"</string>
-    <!-- no translation found for update_device_category_title (6588608879793647296) -->
-    <skip />
-    <!-- no translation found for interaction_category_title (5712424978503035872) -->
-    <skip />
-    <!-- no translation found for automation_intelligence_category_title (1154006517484412196) -->
-    <skip />
-    <!-- no translation found for system_management_category_title (5405726452116686478) -->
-    <skip />
-    <!-- no translation found for manage_data_category_title (1663320047422544008) -->
-    <skip />
+    <string name="update_device_category_title" msgid="6588608879793647296">"更新设备"</string>
+    <string name="interaction_category_title" msgid="5712424978503035872">"互动"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"自动化与智能"</string>
+    <string name="system_management_category_title" msgid="5405726452116686478">"系统管理"</string>
+    <string name="manage_data_category_title" msgid="1663320047422544008">"管理数据"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"“双按钮”导航"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"在主屏幕按钮上向上滑动，可切换应用；再次向上滑动，可查看所有应用；点按返回按钮，可返回上一个屏幕。"</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"通知和快捷设置"</string>
@@ -5189,8 +5185,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"实验功能：启用 ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"警告：您可以启用 ANGLE 作为默认 OpenGL ES 驱动程序，但此功能目前处于实验阶段，可能与某些相机和视频应用不兼容。"</string>
-    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"必须重新启动，才能更改系统 OpenGL ES 驱动程序"</string>
+    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"应用兼容性变更"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"在不同的应用兼容性设置之间切换"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"默认启用的应用兼容性变更"</string>
@@ -6094,6 +6092,8 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"滤除含露骨内容的搜索结果"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{针对 # 款应用}other{针对 # 款应用}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
+    <skip />
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"关闭这些设置后，其他账号设置可能仍起作用。"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"输入家长控制 PIN 码"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"设置家长控制 PIN 码"</string>
@@ -6111,6 +6111,8 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"删除 PIN 码并关闭控制功能"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"删除"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"以下各项正在使用您的家长控制 PIN 码：\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
+    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"“<xliff:g id="FEATURE">%1$s</xliff:g>”动画"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"无法开启控制功能"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"无法使用控件"</string>

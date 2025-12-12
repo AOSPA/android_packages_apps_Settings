@@ -168,7 +168,7 @@ public class WifiScanModeActivity extends FragmentActivity {
                                     ? getString(R.string.wifi_scan_always_turn_on_message_unknown)
                                     : getString(R.string.wifi_scan_always_turnon_message, mApp))
                     .setPositiveButton(
-                            R.string.wifi_scan_always_confirm_allow,
+                            R.string.allow,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     ((WifiScanModeActivity) getActivity()).doPositiveClick();
