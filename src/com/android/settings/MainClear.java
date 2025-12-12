@@ -41,7 +41,6 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.hardware.biometrics.Flags;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemProperties;
@@ -197,19 +196,9 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                     Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
                             false /* biometricsAuthenticationRequested */,
                             userId);
-            if (Flags.bpFallbackOptions()) {
-                if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                    Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRICS_REQUEST,
-                            userId, false /* hideBackground */);
-                    return;
-                }
-            } else if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+            if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
                 Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRICS_REQUEST,
                         userId, false /* hideBackground */);
-                return;
-            } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
-                        biometricAuthStatus, true /* twoFactorAuthentication */);
                 return;
             }
         }
