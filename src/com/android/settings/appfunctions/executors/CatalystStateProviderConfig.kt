@@ -200,7 +200,7 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = LanguageAndRegionScreen.KEY),
-        PerScreenCatalystConfig(enabled = false, screenKey = ModuleLicensesScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ModuleLicensesScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LegalSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationServicesScreen.KEY),
         PerScreenCatalystConfig(
