@@ -7626,6 +7626,11 @@
     <string name="device_admin_warning">Activating this admin app will allow
         the app <xliff:g id="app_name">%1$s</xliff:g> to perform the
         following operations:</string>
+    <!-- Warning message about policies a SUPERVISION role holder can use -->
+    <string name="supervision_role_holder_warning">This device will be managed and monitored by
+        <xliff:g id="app_name" example="Example Supervisor">%1$s</xliff:g>.
+        \n\n<xliff:g id="app_name" example="Example Supervisor">%1$s</xliff:g> will be able to
+        manage parental controls settings, such as app blocking and content restrictions.</string>
     <!-- Simplified device admin warning message [CHAR LIMIT=NONE]-->
     <string name="device_admin_warning_simplified">This device will be managed and monitored by
         <xliff:g id="app_name" example="Example Supervisor">%1$s</xliff:g>.</string>
@@ -7636,6 +7641,8 @@
 
     <!-- Title for screen to set a profile owner [CHAR LIMIT=40] -->
     <string name="profile_owner_add_title">Activate Profile Manager?</string>
+    <!-- Title for a dialog to confirm granting an app the SUPERVISION role [CHAR LIMIT=NONE] -->
+    <string name="supervision_confirmation_title">Allow <xliff:g id="app_name" example="Example Supervisor">%1$s</xliff:g> to supervise this device?</string>
     <!-- Simplified title for dialog to set a profile owner [CHAR LIMIT=40] -->
     <string name="profile_owner_add_title_simplified">Allow supervision?</string>
     <!-- Warning when trying to add a profile owner admin after setup has completed. [CHAR LIMIT=none] -->
