@@ -37,6 +37,8 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /** List preference controller to set the Bluetooth A2DP codec */
 public class BluetoothCodecListPreferenceController extends AbstractBluetoothPreferenceController
@@ -138,10 +140,7 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
             return;
         }
 
-        final List<String> codecIds = new ArrayList<>();
-        final List<String> labels = new ArrayList<>();
-        String selectedCodecId = null;
-        String selectedLabel = null;
+        final Map<Long, String> codecMap = new TreeMap<>();
         final List<BluetoothCodecConfig> codecConfigs =
                 codecStatus.getCodecsSelectableCapabilities();
         for (BluetoothCodecConfig config : codecConfigs) {
@@ -153,12 +152,22 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
             if (!isHDAudioEnabled() && codecType.getCodecId() != BluetoothCodecType.CODEC_ID_SBC) {
                 continue;
             }
-            labels.add(codecType.getCodecName());
-            codecIds.add(String.valueOf(codecType.getCodecId()));
-            if (currentCodecConfig != null
-                    && currentCodecConfig.getExtendedCodecType().equals(codecType)) {
-                selectedCodecId = codecIds.get(codecIds.size() - 1);
-                selectedLabel = labels.get(labels.size() - 1);
+            codecMap.put(codecType.getCodecId(), codecType.getCodecName());
+        }
+
+        final List<String> labels = new ArrayList<>(codecMap.values());
+        final List<String> codecIds = new ArrayList<>();
+        for (Long codecId : codecMap.keySet()) {
+            codecIds.add(String.valueOf(codecId));
+        }
+
+        String selectedCodecId = null;
+        String selectedLabel = null;
+        if (currentCodecConfig != null) {
+            BluetoothCodecType currentCodecType = currentCodecConfig.getExtendedCodecType();
+            if (codecMap.containsKey(currentCodecType.getCodecId())) {
+                selectedCodecId = String.valueOf(currentCodecType.getCodecId());
+                selectedLabel = currentCodecType.getCodecName();
                 Log.d(
                         TAG,
                         "updateState: Selecting codec: "
