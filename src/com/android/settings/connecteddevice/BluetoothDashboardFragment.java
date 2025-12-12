@@ -20,10 +20,16 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import android.os.SystemProperties;
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
+// QTI_BEGIN: 2022-10-07: Bluetooth: Use property API to identify broadcast support
 import android.sysprop.BluetoothProperties;
+// QTI_END: 2022-10-07: Bluetooth: Use property API to identify broadcast support
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import android.util.Log;
 import android.view.View;
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -34,8 +40,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -49,13 +57,17 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.MainSwitchBarController;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import com.android.settingslib.core.AbstractPreferenceController;
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 
 /**
  * Dedicated screen for allowing the user to toggle bluetooth which displays relevant information to
@@ -67,14 +79,18 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     private static final String TAG = "BluetoothDashboardFrag";
     private static final String SLICE_ACTION = "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
     private static final String BLUETOOTH_ADV_AUDIO_MASK_PROP
                                                   = "persist.vendor.service.bt.adv_audio_mask";
     private static final String BLUETOOTH_BROADCAST_UI_PROP = "persist.bluetooth.broadcast_ui";
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
     private static final String BLUETOOTH_BROADCAST_PTS_PROP
                                                   = "persist.vendor.service.bt.broadcast_pts";
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
     private static final int BROADCAST_MASK = 0x04;
     private static boolean mBroadcastEnabled = false;
     private static boolean mBroadcastPropertyChecked = false;
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 
     private FooterPreference mFooterPreference;
     private SettingsMainSwitchBar mSwitchBar;
@@ -132,6 +148,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
         use(BluetoothDeviceRenamePreferenceController.class).setFragment(this);
     }
 
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
     @Override
     protected void displayResourceTilesToScreen(PreferenceScreen screen) {
         if (mBroadcastEnabled == false) {
@@ -148,7 +165,11 @@ public class BluetoothDashboardFragment extends DashboardFragment {
         if (mBroadcastPropertyChecked == false) {
             int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
             mBroadcastEnabled = (((advAudioMask & BROADCAST_MASK) == BROADCAST_MASK) &&
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
+// QTI_BEGIN: 2021-04-30: WConnect/BTHOST: BLE Broadcast UI: Enable UI prop by default
                 SystemProperties.getBoolean(BLUETOOTH_BROADCAST_UI_PROP, true));
+// QTI_END: 2021-04-30: WConnect/BTHOST: BLE Broadcast UI: Enable UI prop by default
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
             mBroadcastPropertyChecked = true;
         }
 
@@ -165,12 +186,24 @@ public class BluetoothDashboardFragment extends DashboardFragment {
                 Class.forName("com.android.settings.bluetooth.BluetoothBroadcastEnableController");
             Constructor ctorPin, ctorEnable;
             ctorPin = classBroadcastPinController
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
+// QTI_BEGIN: 2022-04-20: Bluetooth: BLE Broadcast UI: Fix lifecycle event callbacks
                           .getDeclaredConstructor(new Class[] {Context.class, Lifecycle.class});
+// QTI_END: 2022-04-20: Bluetooth: BLE Broadcast UI: Fix lifecycle event callbacks
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
             ctorEnable = classBroadcastEnableController
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
+// QTI_BEGIN: 2022-04-20: Bluetooth: BLE Broadcast UI: Fix lifecycle event callbacks
                 .getDeclaredConstructor(new Class[] {Context.class, String.class, Lifecycle.class});
             Object objBroadcastPinController = ctorPin.newInstance(context, getSettingsLifecycle());
+// QTI_END: 2022-04-20: Bluetooth: BLE Broadcast UI: Fix lifecycle event callbacks
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
             Object objBroadcastEnableController = ctorEnable
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
+// QTI_BEGIN: 2022-04-20: Bluetooth: BLE Broadcast UI: Fix lifecycle event callbacks
                 .newInstance(context, new String("bluetooth_screen_broadcast_enable"), getSettingsLifecycle());
+// QTI_END: 2022-04-20: Bluetooth: BLE Broadcast UI: Fix lifecycle event callbacks
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
             objBroadcastPinController.getClass().getMethod("setFragment", Fragment.class)
                 .invoke(objBroadcastPinController, (Fragment) this);
             controllers.add((AbstractPreferenceController) objBroadcastPinController);
@@ -185,6 +218,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
         }
     }
 
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

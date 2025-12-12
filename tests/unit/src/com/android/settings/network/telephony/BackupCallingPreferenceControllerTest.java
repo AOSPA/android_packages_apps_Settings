@@ -1,3 +1,4 @@
+// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
 /*
  * Copyright (C) 2020 The Android Open Source Project
  *
@@ -13,7 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
+// QTI_BEGIN: 2024-01-29: Telephony: Fix copyright marking
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+// QTI_END: 2024-01-29: Telephony: Fix copyright marking
+// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
  * Copyright (c) 2022, 2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
@@ -89,3 +94,4 @@ public class BackupCallingPreferenceControllerTest {
         verify(mFragmentManager).beginTransaction();
     }
 }
+// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI

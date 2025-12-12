@@ -18,7 +18,9 @@ package com.android.settings.network.telephony
 
 import android.content.Context
 import android.content.Intent
+// QTI_BEGIN: 2025-03-27: Telephony: Prevent disabling and enabling SIM in SCBM
 import android.sysprop.TelephonyProperties
+// QTI_END: 2025-03-27: Telephony: Prevent disabling and enabling SIM in SCBM
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS
 import android.util.Log
@@ -26,7 +28,9 @@ import com.android.settings.Utils
 import com.android.settings.flags.Flags
 import com.android.settings.network.SatelliteRepository
 import com.android.settings.network.SimOnboardingActivity.Companion.startSimOnboardingActivity
+// QTI_BEGIN: 2025-03-27: Telephony: Prevent disabling and enabling SIM in SCBM
 import com.qti.extphone.ExtTelephonyManager.ACTION_SHOW_NOTICE_SCM_BLOCK_OTHERS
+// QTI_END: 2025-03-27: Telephony: Prevent disabling and enabling SIM in SCBM
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -67,6 +71,7 @@ class SubscriptionActivationRepository(
             context.startActivity(intent)
             return
         }
+// QTI_BEGIN: 2025-03-27: Telephony: Prevent disabling and enabling SIM in SCBM
         if (isInScbm()) {
             val intent = Intent(ACTION_SHOW_NOTICE_SCM_BLOCK_OTHERS).apply {
                 setPackage(Utils.PHONE_PACKAGE_NAME)
@@ -74,6 +79,7 @@ class SubscriptionActivationRepository(
             context.startActivity(intent)
             return
         }
+// QTI_END: 2025-03-27: Telephony: Prevent disabling and enabling SIM in SCBM
         if (active && Flags.isDualSimOnboardingEnabled()) {
             startSimOnboardingActivity(context, subId)
             return
@@ -81,10 +87,12 @@ class SubscriptionActivationRepository(
         context.startActivity(ToggleSubscriptionDialogActivity.getIntent(context, subId, active))
     }
 
+// QTI_BEGIN: 2025-03-27: Telephony: Prevent disabling and enabling SIM in SCBM
     private suspend fun isInScbm(): Boolean {
         return TelephonyProperties.in_scbm().orElse(false)
     }
 
+// QTI_END: 2025-03-27: Telephony: Prevent disabling and enabling SIM in SCBM
     private suspend fun isEmergencyCallbackMode(subId: Int) =
         withContext(Dispatchers.Default) { context.telephonyManager(subId).emergencyCallbackMode }
 

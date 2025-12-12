@@ -15,43 +15,69 @@
  */
 
 /*
+// QTI_BEGIN: 2024-01-29: Telephony: Fix copyright marking
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+// QTI_END: 2024-01-29: Telephony: Fix copyright marking
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
  * Copyright (c) 2022-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
 package com.android.settings.network.telephony;
 
+// QTI_BEGIN: 2023-04-03: Telephony: Use the new API to check if the device is roaming
 import static android.telephony.AccessNetworkConstants.TRANSPORT_TYPE_WWAN;
+// QTI_END: 2023-04-03: Telephony: Use the new API to check if the device is roaming
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 import static android.telephony.ims.feature.ImsFeature.FEATURE_MMTEL;
 import static android.telephony.ims.stub.ImsRegistrationImplBase.REGISTRATION_TECH_CROSS_SIM;
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-04-03: Telephony: Use the new API to check if the device is roaming
 import static android.telephony.NetworkRegistrationInfo.DOMAIN_PS;
 
+// QTI_END: 2023-04-03: Telephony: Use the new API to check if the device is roaming
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 import static com.qti.extphone.ExtPhoneCallbackListener.EVENT_ON_CIWLAN_CONFIG_CHANGE;
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+// QTI_BEGIN: 2024-06-07: Telephony: Fix mobile network setting preferences display issue
 import android.content.BroadcastReceiver;
+// QTI_END: 2024-06-07: Telephony: Fix mobile network setting preferences display issue
 import android.content.Context;
 import android.content.Intent;
+// QTI_BEGIN: 2024-06-07: Telephony: Fix mobile network setting preferences display issue
 import android.content.IntentFilter;
+// QTI_END: 2024-06-07: Telephony: Fix mobile network setting preferences display issue
 import android.os.Bundle;
+// QTI_BEGIN: 2020-06-10: Telephony: Update SIM options according to SIM status
 import android.os.RemoteException;
+// QTI_END: 2020-06-10: Telephony: Update SIM options according to SIM status
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+// QTI_BEGIN: 2024-06-07: Telephony: Fix mobile network setting preferences display issue
 import android.telephony.CarrierConfigManager;
+// QTI_END: 2024-06-07: Telephony: Fix mobile network setting preferences display issue
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 import android.telephony.ims.aidl.IImsRegistration;
 import android.telephony.ims.ImsException;
 import android.telephony.ims.ImsManager;
 import android.telephony.ims.ImsMmTelManager;
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-04-03: Telephony: Use the new API to check if the device is roaming
 import android.telephony.NetworkRegistrationInfo;
 import android.telephony.ServiceState;
+// QTI_END: 2023-04-03: Telephony: Use the new API to check if the device is roaming
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 import android.util.SparseArray;
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -91,13 +117,21 @@ import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
 
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 import com.qti.extphone.CiwlanConfig;
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 import com.qti.extphone.Client;
 import com.qti.extphone.ExtPhoneCallbackListener;
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 import com.qti.extphone.ExtTelephonyManager;
 import com.qti.extphone.ServiceCallback;
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 import java.lang.Runnable;
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 
 import kotlin.Unit;
 
@@ -119,26 +153,36 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @VisibleForTesting
     static final String KEY_CLICKED_PREF = "key_clicked_pref";
 
+// QTI_BEGIN: 2023-01-30: Telephony: Fix for "Data preference" issue
     private static final String KEY_DATA_PREF = "data_preference";
+// QTI_END: 2023-01-30: Telephony: Fix for "Data preference" issue
+// QTI_BEGIN: 2024-09-19: Telephony: Use java implementations for Roaming preference
     private static final String KEY_ROAMING_PREF = "button_roaming_key";
+// QTI_END: 2024-09-19: Telephony: Use java implementations for Roaming preference
     private static final String KEY_CALLS_PREF = "calls_preference";
     private static final String KEY_SMS_PREF = "sms_preference";
     private static final String KEY_MOBILE_DATA_PREF = "mobile_data_enable";
     private static final String KEY_CONVERT_TO_ESIM_PREF = "convert_to_esim";
     private static final String KEY_EID_KEY = "network_mode_eid_info";
 
+// QTI_BEGIN: 2020-06-10: Telephony: Update SIM options according to SIM status
     // UICC provisioning status
     public static final int CARD_NOT_PROVISIONED = 0;
     public static final int CARD_PROVISIONED = 1;
 
+// QTI_END: 2020-06-10: Telephony: Update SIM options according to SIM status
     //String keys for preference lookup
     private static final String BUTTON_CDMA_SYSTEM_SELECT_KEY = "cdma_system_select_key";
     private static final String BUTTON_CDMA_SUBSCRIPTION_KEY = "cdma_subscription_key";
 
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     private static final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
     private static TelephonyManager mTelephonyManager;
     private static int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 
     private CdmaSystemSelectPreferenceController mCdmaSystemSelectPreferenceController;
     private CdmaSubscriptionPreferenceController mCdmaSubscriptionPreferenceController;
@@ -152,6 +196,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     private SubscriptionInfoEntity mSubscriptionInfoEntity;
     private MobileNetworkInfoEntity mMobileNetworkInfoEntity;
 
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     private static ImsManager sImsMgr;
     private static String sPackageName;
     private static SparseArray<CiwlanConfig> sCiwlanConfig = new SparseArray();
@@ -159,31 +204,55 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     private static Client sClient;
     private static ExtTelephonyManager sExtTelephonyManager;
     private static SubscriptionManager sSubscriptionManager;
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2024-02-29: Telephony: Fix for Settings app crash when toggle Mobile Data
     private static boolean sIsMsimCiwlanSupported = false;
     private static int sInstanceCounter = 0;
+// QTI_END: 2024-02-29: Telephony: Fix for Settings app crash when toggle Mobile Data
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     private static final ServiceCallback mExtTelServiceCallback = new ServiceCallback() {
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         @Override
         public void onConnected() {
             Log.d(LOG_TAG, "ExtTelephony service connected");
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
             sExtTelServiceConnected = true;
             int[] events = new int[] {EVENT_ON_CIWLAN_CONFIG_CHANGE};
             sClient = sExtTelephonyManager.registerCallbackWithEvents(sPackageName,
                     mExtPhoneCallbackListener, events);
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2024-02-29: Telephony: Fix for Settings app crash when toggle Mobile Data
             sIsMsimCiwlanSupported = sExtTelephonyManager.isFeatureSupported(
                     ExtTelephonyManager.FEATURE_CIWLAN_MODE_PREFERENCE);
+// QTI_END: 2024-02-29: Telephony: Fix for Settings app crash when toggle Mobile Data
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
             Log.d(LOG_TAG, "Client = " + sClient);
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
             getCiwlanConfig();
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         }
 
         @Override
         public void onDisconnected() {
             Log.d(LOG_TAG, "ExtTelephony service disconnected");
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2024-07-22: Telephony: Unregister to ExtPhoneCallback
             sExtTelephonyManager.unregisterCallback(mExtPhoneCallbackListener);
+// QTI_END: 2024-07-22: Telephony: Unregister to ExtPhoneCallback
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
             sExtTelServiceConnected = false;
             sClient = null;
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         }
     };
 
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     private static ExtPhoneCallbackListener mExtPhoneCallbackListener =
             new ExtPhoneCallbackListener() {
         @Override
@@ -192,9 +261,15 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                    ciwlanConfig);
            int subId = SubscriptionManager.getSubscriptionId(slotId);
            sCiwlanConfig.put(subId, ciwlanConfig);
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
         }
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     };
 
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2024-06-07: Telephony: Fix mobile network setting preferences display issue
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -207,6 +282,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         }
     };
 
+// QTI_END: 2024-06-07: Telephony: Fix mobile network setting preferences display issue
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     private static CiwlanConfig getCiwlanConfig(int... subscriptionId) {
         // If subscriptionId is passed in, return the config belonging to that subId. Otherwise,
         // query the config for all active subscriptions.
@@ -214,9 +291,15 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             return sCiwlanConfig.get(subscriptionId[0]);
         }
 
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
         mExecutor.execute(new Runnable() {
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
             @Override
             public void run() {
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
                 // Query the C_IWLAN config of all active subscriptions
                 int[] activeSubIdList = sSubscriptionManager.getActiveSubscriptionIdList();
                 for (int i = 0; i < activeSubIdList.length; i++) {
@@ -227,42 +310,76 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                     } catch (RemoteException ex) {
                         Log.e(LOG_TAG, "getCiwlanConfig exception", ex);
                     }
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
                 }
             }
         });
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
         return null;
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
     }
 
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     static boolean isCiwlanEnabled(int subId) {
         ImsMmTelManager imsMmTelMgr = getImsMmTelManager(subId);
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         if (imsMmTelMgr == null) {
             return false;
         }
         try {
             return imsMmTelMgr.isCrossSimCallingEnabled();
         } catch (ImsException exception) {
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
             Log.e(LOG_TAG, "Failed to get C_IWLAN toggle status", exception);
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         }
         return false;
     }
 
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     private static ImsMmTelManager getImsMmTelManager(int subId) {
         if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
             Log.d(LOG_TAG, "getImsMmTelManager: subId unusable");
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
             return null;
         }
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         if (sImsMgr == null) {
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
             Log.d(LOG_TAG, "getImsMmTelManager: ImsManager null");
             return null;
         }
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         return sImsMgr.getImsMmTelManager(subId);
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
     }
 
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     static boolean isInCiwlanOnlyMode(int subId) {
         if (sCiwlanConfig == null) {
             Log.d(LOG_TAG, "isInCiwlanOnlyMode: C_IWLAN config map null");
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
             return false;
         }
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         CiwlanConfig config = sCiwlanConfig.get(subId);
         if (config != null) {
             if (isRoaming(subId)) {
@@ -272,9 +389,13 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         } else {
             Log.d(LOG_TAG, "isInCiwlanOnlyMode: C_IWLAN config null for subId " + subId);
             return false;
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         }
     }
 
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     static boolean isCiwlanModeSupported(int subId) {
         if (sCiwlanConfig == null) {
             Log.d(LOG_TAG, "isCiwlanModeSupported: C_IWLAN config map null");
@@ -285,10 +406,14 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             return config.isCiwlanModeSupported();
         } else {
             Log.d(LOG_TAG, "isCiwlanModeSupported: C_IWLAN config null for subId " + subId);
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
             return false;
         }
     }
 
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     static boolean isImsRegisteredOnCiwlan(int subId) {
         if (mTelephonyManager == null) {
             Log.d(LOG_TAG, "isImsRegisteredOnCiwlan: TelephonyManager null");
@@ -309,18 +434,32 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     }
 
     static boolean isMsimCiwlanSupported() {
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2024-02-29: Telephony: Fix for Settings app crash when toggle Mobile Data
         Log.i(LOG_TAG, "isMsimCiwlanSupported = " + sIsMsimCiwlanSupported);
         return sIsMsimCiwlanSupported;
+// QTI_END: 2024-02-29: Telephony: Fix for Settings app crash when toggle Mobile Data
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     }
 
     static boolean isRoaming(int subId) {
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-04-03: Telephony: Use the new API to check if the device is roaming
         if (mTelephonyManager == null) {
             Log.d(LOG_TAG, "isRoaming: TelephonyManager null");
             return false;
         }
+// QTI_END: 2023-04-03: Telephony: Use the new API to check if the device is roaming
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         TelephonyManager tm = mTelephonyManager.createForSubscriptionId(subId);
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-04-03: Telephony: Use the new API to check if the device is roaming
         boolean nriRoaming = false;
+// QTI_END: 2023-04-03: Telephony: Use the new API to check if the device is roaming
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         ServiceState serviceState = tm.getServiceState();
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-04-03: Telephony: Use the new API to check if the device is roaming
         if (serviceState != null) {
             NetworkRegistrationInfo nri =
                     serviceState.getNetworkRegistrationInfo(DOMAIN_PS, TRANSPORT_TYPE_WWAN);
@@ -335,6 +474,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         return nriRoaming;
     }
 
+// QTI_END: 2023-04-03: Telephony: Use the new API to check if the device is roaming
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     static int getNonDefaultDataSub() {
         final int DDS = SubscriptionManager.getDefaultDataSubscriptionId();
         int nDDS = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
@@ -347,6 +488,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         return nDDS;
     }
 
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     private BroadcastReceiver mBrocastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -377,9 +519,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         }
         final String key = preference.getKey();
 
+// QTI_BEGIN: 2024-05-05: Telephony: Add null checks to avoid NPE
         if (mTelephonyManager == null) {
             return false;
         }
+// QTI_END: 2024-05-05: Telephony: Add null checks to avoid NPE
         if (TextUtils.equals(key, BUTTON_CDMA_SYSTEM_SELECT_KEY)
                 || TextUtils.equals(key, BUTTON_CDMA_SUBSCRIPTION_KEY)) {
             if (mTelephonyManager.getEmergencyCallbackMode()) {
@@ -418,7 +562,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             );
             Log.d(LOG_TAG, "display subId from getArguments(): " + mSubId);
         }
+// QTI_BEGIN: 2022-04-13: Telephony: Remove setScreenState Method.
         Log.i(LOG_TAG, "display subId: " + mSubId);
+// QTI_END: 2022-04-13: Telephony: Remove setScreenState Method.
 
         mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mExecutor.execute(() -> {
@@ -435,8 +581,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
         return Arrays.asList(
                 new DataUsageSummaryPreferenceController(context, mSubId),
+// QTI_BEGIN: 2023-01-30: Telephony: Fix for "Data preference" issue
                 new DataDefaultSubscriptionController(context, KEY_DATA_PREF,
                         getSettingsLifecycle(), this),
+// QTI_END: 2023-01-30: Telephony: Fix for "Data preference" issue
                 new CallsDefaultSubscriptionController(context, KEY_CALLS_PREF,
                         getSettingsLifecycle(), this),
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
@@ -461,10 +609,14 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             Log.d(LOG_TAG, "Show NetworkSettings fragment for subId" + mSubId);
         }
 
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         sImsMgr = context.getSystemService(ImsManager.class);
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
 
         // Connect TelephonyUtils to ExtTelephonyService
         TelephonyUtils.connectExtTelephonyService(context);
+// QTI_END: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -503,7 +655,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             use(BillingCyclePreferenceController.class).init(mSubId);
         }
         use(MmsMessagePreferenceController.class).init(mSubId);
+// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
         use(DataDuringCallsPreferenceController.class).init(mSubId);
+// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
         // CrossSimCallingViewModel is responsible for maintaining the correct cross sim calling
         // settings (backup calling).
         new ViewModelProvider(this).get(CrossSimCallingViewModel.class);
@@ -532,10 +686,14 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                             null /* WifiPickerTrackerCallback */));
         }
 
+// QTI_BEGIN: 2024-09-19: Telephony: Use java implementations for Roaming preference
         final RoamingPreferenceController roamingPreferenceController =
                 use(RoamingPreferenceController.class);
+// QTI_END: 2024-09-19: Telephony: Use java implementations for Roaming preference
         if (roamingPreferenceController != null) {
+// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
             roamingPreferenceController.init(getFragmentManager(), mSubId);
+// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
         }
 
         final SatelliteSettingPreferenceController satelliteSettingPreferenceController = use(
@@ -545,14 +703,18 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         }
 
         use(ApnPreferenceController.class).init(mSubId);
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
         use(UserPLMNPreferenceController.class).init(mSubId);
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
         use(CarrierPreferenceController.class).init(mSubId);
         if (!isCatalystEnabled() || !Flags.deeplinkNetworkAndInternet25q4()) {
             use(DataUsagePreferenceController.class).init(mSubId);
             use(EnabledNetworkModePreferenceController.class)
                     .init(mSubId, getParentFragmentManager());
         }
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
         use(PreferredNetworkModePreferenceController.class).init(getLifecycle(), mSubId);
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
         use(DataServiceSetupPreferenceController.class).init(mSubId);
         use(Enable2gPreferenceController.class).init(mSubId);
         use(CarrierWifiTogglePreferenceController.class).init(getLifecycle(), mSubId);
@@ -569,10 +731,12 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                         .init(mSubId)
                         .addListener(openNetworkSelectPagePreferenceController);
 
+// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
         final SelectNetworkPreferenceController selectNetworkPreferenceController =
                 use(SelectNetworkPreferenceController.class)
                         .init(mSubId)
                         .addListener(autoSelectPreferenceController);
+// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 
         use(NetworkPreferenceCategoryController.class).init(mSubId)
                 .setChildren(Arrays.asList(autoSelectPreferenceController));
@@ -584,10 +748,12 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         final VideoCallingPreferenceController videoCallingPreferenceController =
                 use(VideoCallingPreferenceController.class)
                         .init(mSubId, callingPreferenceCategoryController);
+// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
         final BackupCallingPreferenceController crossSimCallingPreferenceController =
                 use(BackupCallingPreferenceController.class)
                         .init(getFragmentManager(), mSubId, callingPreferenceCategoryController);
         use(Enabled5GPreferenceController.class).init(mSubId);
+// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
         use(Enhanced4gLtePreferenceController.class).init(mSubId)
                 .addListener(videoCallingPreferenceController);
         use(Enhanced4gCallingPreferenceController.class).init(mSubId)
@@ -622,21 +788,27 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             finish();
             return;
         }
+// QTI_BEGIN: 2024-05-10: Telephony: IMS: Fix NPE during SIM removal re-insert.
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.i(LOG_TAG, "onCreate: invalid subId. finish");
             session.close();
             finish();
             return;
         }
+// QTI_END: 2024-05-10: Telephony: IMS: Fix NPE during SIM removal re-insert.
         final Context context = getContext();
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         sPackageName = this.getClass().getPackage().toString();
         sSubscriptionManager = context.getSystemService(SubscriptionManager.class);
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
+// QTI_BEGIN: 2024-03-25: Android_UI: Change ext telephony service connection location.
         sExtTelephonyManager = ExtTelephonyManager.getInstance(context);
         sExtTelephonyManager.connectService(mExtTelServiceCallback);
         sInstanceCounter++;
+// QTI_END: 2024-03-25: Android_UI: Change ext telephony service connection location.
 
         session.close();
 
@@ -663,22 +835,28 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 });
     }
 
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
     @Override
     public void onResume() {
         Log.i(LOG_TAG, "onResume:+");
         super.onResume();
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
         mMobileNetworkRepository.addRegister(this, this, mSubId);
         mMobileNetworkRepository.updateEntity();
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
+// QTI_BEGIN: 2024-06-07: Telephony: Fix mobile network setting preferences display issue
         getActivity().registerReceiver(mBroadcastReceiver,
                 new IntentFilter(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED));
+// QTI_END: 2024-06-07: Telephony: Fix mobile network setting preferences display issue
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
         getContext().registerReceiver(mBrocastReceiver, intentFilter, Context.RECEIVER_EXPORTED);
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
     }
 
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
     private void onSubscriptionDetailChanged() {
         final SubscriptionInfoEntity subscriptionInfoEntity = mSubscriptionInfoEntity;
         if (subscriptionInfoEntity == null) {
@@ -698,11 +876,16 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         mMobileNetworkRepository.removeRegister(this);
         getContext().unregisterReceiver(mBrocastReceiver);
         super.onPause();
+// QTI_BEGIN: 2024-06-07: Telephony: Fix mobile network setting preferences display issue
         getActivity().unregisterReceiver(mBroadcastReceiver);
+// QTI_END: 2024-06-07: Telephony: Fix mobile network setting preferences display issue
     }
 
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     @Override
     public void onDestroy() {
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2024-02-29: Telephony: Fix for Settings app crash when toggle Mobile Data
         Log.i(LOG_TAG, "onDestroy: sExtTelServiceConnected = " + sExtTelServiceConnected
                 + " , sInstanceCounter = " + sInstanceCounter);
         if (sInstanceCounter > 0) {
@@ -710,12 +893,15 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         }
         if ((sInstanceCounter == 0) && (sExtTelephonyManager != null) && sExtTelServiceConnected) {
             Log.i(LOG_TAG, "onDestroy");
+// QTI_END: 2024-02-29: Telephony: Fix for Settings app crash when toggle Mobile Data
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
             sExtTelephonyManager.disconnectService(mExtTelServiceCallback);
             sExtTelephonyManager = null;
         }
         super.onDestroy();
     }
 
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     @VisibleForTesting
     void onRestoreInstance(Bundle icicle) {
         if (icicle != null) {
