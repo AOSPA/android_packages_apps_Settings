@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yservice.ui
+package com.android.settings.accessibility.a11yservice.ui
 
 import android.content.ComponentName
 import android.content.Context
@@ -29,11 +29,11 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.accessibility.AccessibilitySettings
+import com.android.settings.accessibility.a11yservice.A11yServicePreferenceFragment
+import com.android.settings.accessibility.a11yservice.data.UseServiceDataStore
+import com.android.settings.accessibility.a11yservice.ui.A11yServiceFooterPreference.Companion.FOOTER_KEY
+import com.android.settings.accessibility.a11yservice.ui.A11yServiceFooterPreference.Companion.HTML_FOOTER_KEY
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
-import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment
-import com.android.settings.accessibility.detail.a11yservice.data.UseServiceDataStore
-import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceFooterPreference.Companion.FOOTER_KEY
-import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceFooterPreference.Companion.HTML_FOOTER_KEY
 import com.android.settings.accessibility.extensions.getComponentName
 import com.android.settings.accessibility.extensions.getFeatureName
 import com.android.settings.accessibility.extensions.putComponentName

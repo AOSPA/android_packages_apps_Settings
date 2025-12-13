@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yservice.ui
+package com.android.settings.accessibility.a11yservice.ui
 
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ComponentName
@@ -24,8 +24,8 @@ import android.text.Html
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityFooterPreference
-import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceFooterPreference.Companion.FOOTER_KEY
-import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceFooterPreference.Companion.HTML_FOOTER_KEY
+import com.android.settings.accessibility.a11yservice.ui.A11yServiceFooterPreference.Companion.FOOTER_KEY
+import com.android.settings.accessibility.a11yservice.ui.A11yServiceFooterPreference.Companion.HTML_FOOTER_KEY
 import com.android.settings.testutils.AccessibilityTestUtils
 import com.android.settingslib.accessibility.AccessibilityUtils
 import com.android.settingslib.preference.createAndBindWidget

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yservice.data
+package com.android.settings.accessibility.a11yservice.data
 
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context

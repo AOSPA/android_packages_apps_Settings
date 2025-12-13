@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yservice.ui
+package com.android.settings.accessibility.a11yservice.ui
 
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ComponentName
@@ -33,7 +33,6 @@ import com.android.settings.R
 import com.android.settings.SettingsActivity
 import com.android.settings.accessibility.ShortcutPreference
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
-import com.android.settings.accessibility.detail.a11yservice.ui.FakePreferenceScreen.Companion.KEY
 import com.android.settings.accessibility.shared.dialogs.AccessibilityServiceWarningDialogFragment
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment
 import com.android.settings.core.PreferenceScreenMixin
@@ -301,7 +300,9 @@ class A11yServiceShortcutPreferenceTest {
 
     private fun setupTestData(serviceInfo: AccessibilityServiceInfo) {
         PreferenceScreenRegistry.preferenceScreenMetadataFactories =
-            FixedArrayMap(1) { it.put(KEY) { FakePreferenceScreen(serviceInfo) } }
+            FixedArrayMap(1) {
+                it.put(FakePreferenceScreen.Companion.KEY) { FakePreferenceScreen(serviceInfo) }
+            }
     }
 
     private fun assertServiceWarningDialogShown(): AccessibilityServiceWarningDialogFragment {
@@ -333,7 +334,7 @@ class A11yServiceShortcutPreferenceTest {
 
 class TestA11yServiceShortcutFragment : PreferenceFragment() {
     override fun getPreferenceScreenBindingKey(context: Context): String? {
-        return KEY
+        return FakePreferenceScreen.Companion.KEY
     }
 }
 
@@ -349,7 +350,7 @@ private class FakePreferenceScreen(private val serviceInfo: AccessibilityService
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = 0
 
