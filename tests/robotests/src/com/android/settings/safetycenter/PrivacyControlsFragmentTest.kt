@@ -19,13 +19,14 @@ package com.android.settings.safetycenter
 import android.app.Application
 import android.content.Context
 import android.hardware.SensorPrivacyManager
+import android.os.Bundle
 import android.os.UserManager
 import android.permission.flags.Flags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterManager
-import androidx.fragment.app.testing.FragmentScenario
+import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.swipeUp
@@ -37,10 +38,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_ACTION
+import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_SESSION_ID
 import com.android.settings.safetycenter.SafetyCenterTestUtils.USER_PERSONAL
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createEntry
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createScData
 import com.android.settings.safetycenter.ui.PrivacyControlsFragment
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.EXTRA_SESSION_ID
 import com.android.settingslib.safetycenter.SafetySourcePreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -86,7 +89,9 @@ class PrivacyControlsFragmentTest {
 
     private fun runTest(data: SafetyCenterData, testBlock: (PrivacyControlsFragment) -> Unit) {
         shadowSafetyCenterManager.setSafetyCenterData(data)
-        val scenario = FragmentScenario.launchInContainer(PrivacyControlsFragment::class.java)
+        val fragmentArgs = Bundle().apply { putLong(EXTRA_SESSION_ID, TEST_SESSION_ID) }
+        val scenario =
+            launchFragmentInContainer<PrivacyControlsFragment>(fragmentArgs = fragmentArgs)
         scenario.onFragment { fragment ->
             ShadowLooper.idleMainLooper()
             testBlock(fragment)

@@ -289,10 +289,7 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     private fun showApprovalMethodChooser() {
         registerApprovalMethodChooserResultListener()
         val chooserFragment =
-            ApprovalMethodChooserDialogFragment.newInstance(
-                mApprovalMethods,
-                intent.extras ?: Bundle(),
-            )
+            ApprovalMethodChooserDialogFragment.newInstance(mApprovalMethods, intent.extras)
         chooserFragment.show(supportFragmentManager, "ApprovalMethodChooser")
     }
 

@@ -45,7 +45,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.ComponentInfoInternal;
-import android.hardware.biometrics.Flags;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintEnrollOptions;
@@ -55,7 +54,6 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.os.UserManager;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -417,7 +415,6 @@ public class FingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @RequiresFlagsEnabled({Flags.FLAG_BP_FALLBACK_OPTIONS})
     public void onActivityResult_identityCheckActiveAndHardwareError_checkCredentialActivity() {
         mBiometricManager.setAuthenticatorType(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
 
@@ -435,7 +432,6 @@ public class FingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @RequiresFlagsEnabled({Flags.FLAG_BP_FALLBACK_OPTIONS})
     public void onActivityResult_identityCheckActiveNotActive_noActivityStarted() {
         mBiometricManager.setAuthenticatorType(BIOMETRIC_ERROR_IDENTITY_CHECK_NOT_ACTIVE);
 
