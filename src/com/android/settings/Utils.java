@@ -54,7 +54,9 @@ import android.content.pm.UserProperties;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
 import android.content.res.Resources.NotFoundException;
+// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -87,7 +89,9 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
+// QTI_BEGIN: 2020-04-20: Telephony: FR61513: Hide SIM cards option
 import android.os.SystemProperties;
+// QTI_END: 2020-04-20: Telephony: FR61513: Hide SIM cards option
 import android.os.storage.VolumeInfo;
 import android.preference.PreferenceFrameLayout;
 import android.provider.ContactsContract.CommonDataKinds;
@@ -95,8 +99,10 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
+// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
 import android.provider.Telephony;
 import android.service.persistentdata.PersistentDataBlockManager;
+// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
@@ -148,8 +154,10 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
+// QTI_BEGIN: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
 import org.codeaurora.internal.IExtTelephony;
 
+// QTI_END: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
 public final class Utils extends com.android.settingslib.Utils {
 
     private static final String TAG = "Settings";
@@ -169,6 +177,7 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static final String OS_PKG = "os";
 
+// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
     public static final String KEY_SOFTWARE_VERSION = "ext_meta_software_version";
     public static final String KEY_MODEL = "ext_model_name_from_meta";
     public static final String KEY_HARDWARE_VERSION = "ext_hardware_version";
@@ -177,6 +186,7 @@ public final class Utils extends com.android.settingslib.Utils {
     public static final String KEY_ROM_TOTAL_SIZE = "ext_rom_total_size";
     public static final String KEY_RAM_TOTAL_SIZE = "ext_ram_total_size";
 
+// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
     /**
      * Whether to disable the new device identifier access restrictions.
      */
@@ -1299,6 +1309,7 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static String getLocalizedName(Context context, String resName) {
         if(context == null){
+// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
            return null;
         }
         // If can find a localized name, replace the APN name with it
@@ -1321,7 +1332,11 @@ public final class Utils extends com.android.settingslib.Utils {
     public static boolean carrierTableFieldValidate(String field){
         if(field == null)
             return false;
+// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
+// QTI_BEGIN: 2019-01-01: Android_UI: Settings: remove two extended APN attributes
         if(Telephony.Carriers.AUTH_TYPE.equalsIgnoreCase(field)
+// QTI_END: 2019-01-01: Android_UI: Settings: remove two extended APN attributes
+// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
                 || Telephony.Carriers.SUBSCRIPTION_ID.equalsIgnoreCase(field))
             return true;
         field = field.toUpperCase();
@@ -1333,17 +1348,24 @@ public final class Utils extends com.android.settingslib.Utils {
             return false;
         }
         return true;
+// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
     }
 
+// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
     public static boolean isSupportCTPA(Context context) {
         Context appContext = context.getApplicationContext();
         return appContext.getResources().getBoolean(R.bool.config_support_CT_PA);
     }
 
     public static String getString(Context context, String key) {
+// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
+// QTI_BEGIN: 2024-12-26: Android_UI: Fix force close when disabling component in work profile
         return android.provider.Settings.Global.getString(context.getContentResolver(), key);
+// QTI_END: 2024-12-26: Android_UI: Fix force close when disabling component in work profile
+// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
     }
 
+// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
     /** Get {@link Resources} by subscription id if subscription id is valid. */
     public static Resources getResourcesForSubId(Context context, int subId) {
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
@@ -1620,6 +1642,7 @@ public final class Utils extends com.android.settingslib.Utils {
                 });
     }
 
+// QTI_BEGIN: 2024-06-03: Android_UI: Settings: Adapt edge-to-edge enforcement
     public static void setupEdgeToEdge(@NonNull Activity activity) {
         ViewCompat.setOnApplyWindowInsetsListener(activity.findViewById(android.R.id.content),
                 (v, windowInsets) -> {
@@ -1636,6 +1659,7 @@ public final class Utils extends com.android.settingslib.Utils {
                 });
     }
 
+// QTI_END: 2024-06-03: Android_UI: Settings: Adapt edge-to-edge enforcement
     private static FaceManager.RemovalCallback faceManagerRemovalCallback(int userId) {
         return new FaceManager.RemovalCallback() {
             @Override
@@ -1679,7 +1703,9 @@ public final class Utils extends com.android.settingslib.Utils {
         disableComponent(pm, new ComponentName(context, Settings.class));
 
         //Disable Shortcut picker
+// QTI_BEGIN: 2024-12-26: Android_UI: Fix force close when disabling component in work profile
         disableComponent(pm, new ComponentName(context, Settings.CreateShortcutActivity.class));
+// QTI_END: 2024-12-26: Android_UI: Fix force close when disabling component in work profile
     }
 
     /**

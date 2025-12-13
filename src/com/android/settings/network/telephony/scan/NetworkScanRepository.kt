@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// QTI_BEGIN: 2024-06-26: Telephony: Display NR network scan results
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
  *
@@ -21,12 +22,17 @@
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_END: 2024-06-26: Telephony: Display NR network scan results
 package com.android.settings.network.telephony.scan
 
 import android.content.Context
+// QTI_BEGIN: 2024-04-15: Telephony: Remove hardcoded max_search_time value.
 import android.content.res.Resources
+// QTI_END: 2024-04-15: Telephony: Remove hardcoded max_search_time value.
 import android.telephony.AccessNetworkConstants.AccessNetworkType
+// QTI_BEGIN: 2024-06-26: Telephony: Display NR network scan results
 import android.telephony.CellIdentity;
+// QTI_END: 2024-06-26: Telephony: Display NR network scan results
 import android.telephony.CellInfo
 import android.telephony.NetworkScanRequest
 import android.telephony.PhoneCapability
@@ -37,7 +43,9 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import com.android.settings.R
 import com.android.settings.network.telephony.CellInfoUtil.getNetworkTitle
+// QTI_BEGIN: 2024-05-08: Telephony: CAG and SNPN feature
 import com.android.settings.network.telephony.MobileNetworkUtils
+// QTI_END: 2024-05-08: Telephony: CAG and SNPN feature
 import com.android.settings.network.telephony.telephonyManager
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import java.util.concurrent.Executors
@@ -61,6 +69,7 @@ class NetworkScanRepository(private val context: Context, subId: Int) {
 
     private val telephonyManager = context.telephonyManager(subId)
 
+// QTI_BEGIN: 2024-04-15: Telephony: Remove hardcoded max_search_time value.
     private var maxSearchTimeSec = MAX_SEARCH_TIME_SEC
 
     init {
@@ -72,6 +81,7 @@ class NetworkScanRepository(private val context: Context, subId: Int) {
         }
     }
 
+// QTI_END: 2024-04-15: Telephony: Remove hardcoded max_search_time value.
     /** TODO: Move this to UI layer, when UI layer migrated to Kotlin. */
     fun launchNetworkScan(lifecycleOwner: LifecycleOwner, onResult: (NetworkScanResult) -> Unit) =
         networkScanFlow().collectLatestWithLifecycle(lifecycleOwner, action = onResult)
@@ -80,13 +90,17 @@ class NetworkScanRepository(private val context: Context, subId: Int) {
         val title: String?,
         val className: String,
         val isRegistered: Boolean,
+// QTI_BEGIN: 2024-06-26: Telephony: Display NR network scan results
         val cellIdentity: CellIdentity,
+// QTI_END: 2024-06-26: Telephony: Display NR network scan results
     ) {
         constructor(cellInfo: CellInfo) : this(
             title = cellInfo.cellIdentity.getNetworkTitle(),
             className = cellInfo.javaClass.name,
             isRegistered = cellInfo.isRegistered,
+// QTI_BEGIN: 2024-06-26: Telephony: Display NR network scan results
             cellIdentity = cellInfo.cellIdentity,
+// QTI_END: 2024-06-26: Telephony: Display NR network scan results
         )
     }
 
@@ -139,12 +153,14 @@ class NetworkScanRepository(private val context: Context, subId: Int) {
         val radioAccessSpecifiers = allowedNetworkTypes
             .map { RadioAccessSpecifier(it, null, null) }
             .toTypedArray()
+// QTI_BEGIN: 2024-05-08: Telephony: CAG and SNPN feature
         var accessMode: Int = NetworkScanRequest.ACCESS_MODE_PLMN
         var searchType: Int = NetworkScanRequest.SEARCH_TYPE_PLMN_ONLY
         if (MobileNetworkUtils.isCagSnpnEnabled(context)) {
             accessMode = MobileNetworkUtils.getAccessMode(context, telephonyManager.getSlotIndex())
             searchType = NetworkScanRequest.SEARCH_TYPE_PLMN_AND_CAG
         }
+// QTI_END: 2024-05-08: Telephony: CAG and SNPN feature
         return NetworkScanRequest(
             NetworkScanRequest.SCAN_TYPE_ONE_SHOT,
             radioAccessSpecifiers,
@@ -153,8 +169,10 @@ class NetworkScanRepository(private val context: Context, subId: Int) {
             true,
             INCREMENTAL_RESULTS_PERIODICITY_SEC,
             null,
+// QTI_BEGIN: 2024-05-08: Telephony: CAG and SNPN feature
             accessMode,
             searchType,
+// QTI_END: 2024-05-08: Telephony: CAG and SNPN feature
         )
     }
 

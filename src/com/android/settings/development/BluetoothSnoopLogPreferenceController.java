@@ -45,9 +45,13 @@ public class BluetoothSnoopLogPreferenceController extends DeveloperOptionsPrefe
     @VisibleForTesting static final int BTSNOOP_LOG_MODE_FULL_INDEX = 2;
 
     @VisibleForTesting
+// QTI_BEGIN: 2019-10-18: Bluetooth: Change order of BT snoop dev UI options[1/2]
     static final int BTSNOOP_LOG_MODE_SNOOPHEADERSFILTERED_INDEX = 3;
+// QTI_END: 2019-10-18: Bluetooth: Change order of BT snoop dev UI options[1/2]
     @VisibleForTesting
+// QTI_BEGIN: 2019-10-18: Bluetooth: Change order of BT snoop dev UI options[1/2]
     static final int BTSNOOP_LOG_MODE_MEDIAPKTSFILTERED_INDEX = 4;
+// QTI_END: 2019-10-18: Bluetooth: Change order of BT snoop dev UI options[1/2]
     @VisibleForTesting
 
     static final String BLUETOOTH_BTSNOOP_LOG_MODE_PROPERTY = "persist.bluetooth.btsnooplogmode";
@@ -128,6 +132,7 @@ public class BluetoothSnoopLogPreferenceController extends DeveloperOptionsPrefe
                 break;
             }
         }
+// QTI_BEGIN: 2019-05-08: Bluetooth: BT : Handle array index properly.
         if( index < mListValues.length && index < mListEntries.length ) {
             listPreference.setValue(mListValues[index]);
             listPreference.setSummary(mListEntries[index]);
@@ -135,6 +140,7 @@ public class BluetoothSnoopLogPreferenceController extends DeveloperOptionsPrefe
             Log.e(TAG, "missing some entries in xml file"
              + "\t some options in developer options will not be shown until added in xml file");
         }
+// QTI_END: 2019-05-08: Bluetooth: BT : Handle array index properly.
     }
 
     @Override

@@ -1,3 +1,4 @@
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
 /**
  * Copyright (c) 2020, The Linux Foundation. All rights reserved.
  *
@@ -28,65 +29,123 @@
  *
  */
 
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 /*
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
  * Changes from Qualcomm Technologies, Inc. are provided under the following license:
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
 package com.android.settings.network.telephony;
 
 import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
+// QTI_BEGIN: 2021-03-10: Telephony: Add dual 5g option support
 import android.telephony.TelephonyManager;
+// QTI_END: 2021-03-10: Telephony: Add dual 5g option support
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 import android.telephony.UiccSlotInfo;
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
+// QTI_BEGIN: 2021-03-10: Telephony: Add dual 5g option support
 import android.text.TextUtils;
+// QTI_END: 2021-03-10: Telephony: Add dual 5g option support
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
 import android.util.Log;
 
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
 import com.qti.extphone.ExtTelephonyManager;
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
+// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
 import com.qti.extphone.QtiImeiInfo;
+// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
 import com.qti.extphone.ServiceCallback;
 
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
 import org.codeaurora.internal.IExtTelephony;
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
+// QTI_BEGIN: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
 import java.util.Optional;
+// QTI_END: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
 
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
 /**
  * Add static utility functions to get information about Primary Card and Subsidy Lock features.
  */
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
 public final class TelephonyUtils {
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
 
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
     private static final String TAG = "TelephonyUtils";
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
 
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
     private static int sDsdsToSsConfigStatus = -1;
     private static UiccSlotInfo[] sSlotsInfo;
 
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
     // Flag to control debug logging for primary card and subsidy lock features
     public static boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
 
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
     private static final String PROPERTY_ADVANCED_SCAN  = "persist.vendor.radio.enableadvancedscan";
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
     private static final String PROPERTY_DSDS_TO_SS = "persist.vendor.radio.dsds_to_ss";
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
+// QTI_BEGIN: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
     private static final String PROPERTY_SUBSIDY_DEVICE  = "persist.vendor.radio.subsidydevice";
     private static final String ALLOW_USER_SELECT_DDS = "allow_user_select_dds";
 
+// QTI_END: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
+// QTI_BEGIN: 2021-03-10: Telephony: Add dual 5g option support
     // Modem version prefix tag
     private static final String MODEM_VERSION_PREFIX_HI_TAG = "MPSS.HI."; // Himalaya
     private static final String MODEM_VERSION_PREFIX_DE_TAG = "MPSS.DE."; // Denali
 
+// QTI_END: 2021-03-10: Telephony: Add dual 5g option support
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
     // UICC provisioning status
     public static final int CARD_NOT_PROVISIONED = 0;
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
+// QTI_BEGIN: 2020-03-22: Telephony: FR61513: Add support to enable sim on/off feature
     public static final int CARD_PROVISIONED = 1;
     public static final int CARD_INVALID_STATE = -1;
+// QTI_END: 2020-03-22: Telephony: FR61513: Add support to enable sim on/off feature
 
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
     private static ExtTelephonyManager mExtTelephonyManager;
     private static boolean mIsServiceBound;
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
+// QTI_BEGIN: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
     private static boolean mIsSmartDdsSwitchFeatureAvailable = true; // default to true
+// QTI_END: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
+// QTI_BEGIN: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
     private static Optional<Boolean> mIsSubsidyFeatureEnabled = Optional.empty();
+// QTI_END: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
 
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
     private TelephonyUtils() {
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
     }
 
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
     private static UiccSlotInfo[] getUiccSlotsInfo(Context context) {
         UiccSlotInfo[] slotsInfo = null;
         TelephonyManager telephonyManager =
@@ -102,9 +161,14 @@ public final class TelephonyUtils {
         if (sSlotsInfo == null) {
             sSlotsInfo = getUiccSlotsInfo(context);
         }
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
+// QTI_BEGIN: 2025-05-25: Telephony: Add null check for UiccSlotsInfo
         return sSlotsInfo == null ? 0 : sSlotsInfo.length;
+// QTI_END: 2025-05-25: Telephony: Add null check for UiccSlotsInfo
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
     }
 
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
     /**
      * Gets the number of available slots.
      *
@@ -133,11 +197,16 @@ public final class TelephonyUtils {
      * @return {@code true} if the DSDS-to-SS configuration is valid, {@code false} otherwise.
      */
     public static boolean isDsdsToSsConfigValid(Context context){
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
         if (sSlotsInfo == null) {
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
             sSlotsInfo = getUiccSlotsInfo(context);
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
         }
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
         return sDsdsToSsConfigStatus == 1 && sSlotsInfo != null
                 && sSlotsInfo.length > 1 && sSlotsInfo[1] != null;
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
     }
 
     /**
@@ -154,8 +223,14 @@ public final class TelephonyUtils {
         Log.d(TAG, "queryDsdsToSsConfig value = " + sDsdsToSsConfigStatus);
     }
 
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
     public static boolean isAdvancedPlmnScanSupported(Context context) {
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
         boolean propVal = false;
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
         if (mIsServiceBound) {
             try {
                 propVal = mExtTelephonyManager.getPropertyValueBool(PROPERTY_ADVANCED_SCAN, false);
@@ -164,27 +239,43 @@ public final class TelephonyUtils {
             }
         } else {
             Log.e(TAG, "isAdvancedPlmnScanSupported: ExtTelephony Service not connected!");
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
         }
         return propVal;
     }
 
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
     public static boolean performIncrementalScan(Context context, int slotId) {
         boolean success = false;
         if (mIsServiceBound) {
             success = mExtTelephonyManager.performIncrementalScan(slotId);
         } else {
             Log.e(TAG, "performIncrementalScan: ExtTelephony Service not connected!");
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
         }
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
         return success;
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
     }
 
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
     public static void abortIncrementalScan(Context context, int slotId) {
         if (mIsServiceBound) {
             mExtTelephonyManager.abortIncrementalScan(slotId);
         } else {
             Log.e(TAG, "abortIncrementalScan: ExtTelephony Service not connected!");
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
         }
     }
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
+// QTI_BEGIN: 2021-03-10: Telephony: Add dual 5g option support
 
     /*
      * As many products come from different modem version, it is hard to maintain one
@@ -229,7 +320,9 @@ public final class TelephonyUtils {
         }
         return false;
     }
+// QTI_END: 2021-03-10: Telephony: Add dual 5g option support
 
+// QTI_BEGIN: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
     public static boolean isSubsidyFeatureEnabled(Context context) {
         if (!mIsSubsidyFeatureEnabled.isPresent()) {
             if (!mIsServiceBound) {
@@ -267,6 +360,8 @@ public final class TelephonyUtils {
         return isSubsidySim;
     }
 
+// QTI_END: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
+// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
     public static QtiImeiInfo[] getImeiInfo() {
         QtiImeiInfo[] qtiImeiInfo = null;
         if (isServiceConnected()) {
@@ -277,12 +372,20 @@ public final class TelephonyUtils {
         return qtiImeiInfo;
     }
 
+// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
+// QTI_BEGIN: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
     public static boolean isSmartDdsSwitchFeatureAvailable() {
         return mIsSmartDdsSwitchFeatureAvailable;
     }
 
+// QTI_END: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
     public static void connectExtTelephonyService(Context context) {
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
         sSlotsInfo = getUiccSlotsInfo(context);
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
         if (!mIsServiceBound) {
             Log.d(TAG, "Connect to ExtTelephonyService...");
             mExtTelephonyManager = ExtTelephonyManager.getInstance(context);
@@ -299,8 +402,14 @@ public final class TelephonyUtils {
         public void onConnected() {
             Log.d(TAG, "ExtTelephony Service connected");
             mIsServiceBound = true;
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
+// QTI_BEGIN: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
             try {
+// QTI_END: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
                 queryDsdsToSsConfig();
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
+// QTI_BEGIN: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
                 mIsSmartDdsSwitchFeatureAvailable =
                         mExtTelephonyManager.isSmartDdsSwitchFeatureAvailable();
                 Log.d(TAG, "isSmartDdsSwitchFeatureAvailable: " +
@@ -308,6 +417,8 @@ public final class TelephonyUtils {
             } catch (RemoteException ex) {
                 Log.e(TAG, "isSmartDdsSwitchFeatureAvailable exception " + ex);
             }
+// QTI_END: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
+// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
         }
 
         @Override
@@ -316,4 +427,7 @@ public final class TelephonyUtils {
             mIsServiceBound = false;
         }
     };
+// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
+// QTI_BEGIN: 2020-01-26: Telephony: Add support for primary card and subsidy lock
 }
+// QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock

@@ -78,7 +78,9 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     @Override
     public void updateDisplay() {
         final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
+// QTI_BEGIN: 2021-07-13: WLAN: Softap: Add support for OWE Security for Softap Configuration.
         if (!isNoPasswordSecurityrType(config.getSecurityType())
+// QTI_END: 2021-07-13: WLAN: Softap: Add support for OWE Security for Softap Configuration.
                 && TextUtils.isEmpty(config.getPassphrase())) {
             mPassword = mWifiHotspotRepository.generatePassword();
         } else {
@@ -114,7 +116,9 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
      */
     public String getPasswordValidated(int securityType) {
         // don't actually overwrite unless we get a new config in case it was accidentally toggled.
+// QTI_BEGIN: 2021-07-13: WLAN: Softap: Add support for OWE Security for Softap Configuration.
         if (isNoPasswordSecurityrType(securityType)) {
+// QTI_END: 2021-07-13: WLAN: Softap: Add support for OWE Security for Softap Configuration.
             return "";
         } else if (!WifiUtils.isHotspotPasswordValid(mPassword, securityType)) {
             mPassword = mWifiHotspotRepository.generatePassword();
@@ -131,7 +135,9 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
      */
     public void setSecurityType(int securityType) {
         mSecurityType = securityType;
+// QTI_BEGIN: 2021-07-13: WLAN: Softap: Add support for OWE Security for Softap Configuration.
         mPreference.setVisible(!isNoPasswordSecurityrType(securityType));
+// QTI_END: 2021-07-13: WLAN: Softap: Add support for OWE Security for Softap Configuration.
     }
 
     @Override
@@ -152,12 +158,18 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
             pref.setVisible(false);
         }
     }
+// QTI_BEGIN: 2021-07-13: WLAN: Softap: Add support for OWE Security for Softap Configuration.
 
     private boolean isNoPasswordSecurityrType(int securityType) {
         return (securityType == SoftApConfiguration.SECURITY_TYPE_OPEN
+// QTI_END: 2021-07-13: WLAN: Softap: Add support for OWE Security for Softap Configuration.
+// QTI_BEGIN: 2022-10-06: WLAN: HotSpot: Use updated SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
                 || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
                 || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE);
+// QTI_END: 2022-10-06: WLAN: HotSpot: Use updated SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
+// QTI_BEGIN: 2021-07-13: WLAN: Softap: Add support for OWE Security for Softap Configuration.
     }
+// QTI_END: 2021-07-13: WLAN: Softap: Add support for OWE Security for Softap Configuration.
 
     @Override
     public void onBindEditText(@NonNull EditText editText) {

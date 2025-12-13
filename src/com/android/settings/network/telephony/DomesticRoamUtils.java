@@ -1,3 +1,4 @@
+// QTI_BEGIN: 2022-08-30: Android_UI: Settings: support CU operator ID display in domestic roaming status
 /*
  * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
@@ -61,12 +62,15 @@ public class DomesticRoamUtils {
             Log.d(TAG, "getMPLMNOperatorName: context = " + context
                     + " subId = " + subId + " idMPLMN = " + idMPLMN);
         }
+// QTI_END: 2022-08-30: Android_UI: Settings: support CU operator ID display in domestic roaming status
 
         if (TextUtils.isEmpty(idMPLMN)) {
             return EMPTY_OPERATOR_NAME;
         }
 
+// QTI_BEGIN: 2022-08-30: Android_UI: Settings: support CU operator ID display in domestic roaming status
         Context appContext = context.getApplicationContext();
+// QTI_END: 2022-08-30: Android_UI: Settings: support CU operator ID display in domestic roaming status
 
         // use the static mapping to generate the operator name for MPLMN select UI
         OPERATOR_TYPE homeOperator = OPERATOR_TYPE.OTHERS;
@@ -108,6 +112,7 @@ public class DomesticRoamUtils {
                 break;
         }
 
+// QTI_BEGIN: 2022-08-30: Android_UI: Settings: support CU operator ID display in domestic roaming status
         Log.d(TAG, "getMPLMNOperatorName: homeOperator = " + homeOperator
                 + " mplmnOperator = " + mplmnOperator);
         if (homeOperator == OPERATOR_TYPE.OTHERS
@@ -297,3 +302,4 @@ public class DomesticRoamUtils {
         return outputBuilder.toString();
     }
 }
+// QTI_END: 2022-08-30: Android_UI: Settings: support CU operator ID display in domestic roaming status

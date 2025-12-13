@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// QTI_BEGIN: 2024-03-17: Telephony: UI requirement in CU domestic roaming
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
  *
@@ -21,6 +22,7 @@
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_END: 2024-03-17: Telephony: UI requirement in CU domestic roaming
 package com.android.settings.datausage
 
 import android.content.Context
@@ -37,7 +39,9 @@ import com.android.settings.datausage.lib.INetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
 import com.android.settings.network.ProxySubscriptionManager
 import com.android.settings.network.policy.NetworkPolicyRepository
+// QTI_BEGIN: 2024-03-17: Telephony: UI requirement in CU domestic roaming
 import com.android.settings.network.telephony.DomesticRoamUtils
+// QTI_END: 2024-03-17: Telephony: UI requirement in CU domestic roaming
 import com.android.settings.network.telephony.TelephonyBasePreferenceController
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlin.math.max
@@ -131,6 +135,7 @@ constructor(
             preference.setChartEnabled(false)
         }
 
+// QTI_BEGIN: 2024-03-17: Telephony: UI requirement in CU domestic roaming
         var carrierName = subInfo?.carrierName
         if (DomesticRoamUtils.isFeatureEnabled(mContext)) {
             val operatorName : String = DomesticRoamUtils
@@ -141,10 +146,13 @@ constructor(
             }
         }
 
+// QTI_END: 2024-03-17: Telephony: UI requirement in CU domestic roaming
         preference.setUsageInfo(
             dataPlanInfo.cycleEnd,
             dataPlanInfo.snapshotTime,
+// QTI_BEGIN: 2024-03-17: Telephony: UI requirement in CU domestic roaming
             carrierName,
+// QTI_END: 2024-03-17: Telephony: UI requirement in CU domestic roaming
             dataPlanInfo.dataPlanCount,
         )
     }

@@ -14,25 +14,31 @@
  * limitations under the License.
  */
 
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
  * Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 package com.android.settings;
 
 import android.app.Application;
+// QTI_BEGIN: 2023-02-22: Android_UI: Settings: Exit process when multi-sim configuration changes
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.content.Intent;
+// QTI_END: 2023-02-22: Android_UI: Settings: Exit process when multi-sim configuration changes
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.Uri;
 import android.provider.Settings;
+// QTI_BEGIN: 2023-02-22: Android_UI: Settings: Exit process when multi-sim configuration changes
 import android.telephony.TelephonyManager;
+// QTI_END: 2023-02-22: Android_UI: Settings: Exit process when multi-sim configuration changes
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
@@ -50,7 +56,9 @@ import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.localepicker.LocaleNotificationDataManager;
 import com.android.settings.metrics.SettingsMetricsLogger;
 import com.android.settings.msds.MSDLPlayerWrapper;
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 import com.android.settings.network.telephony.TelephonyUtils;
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.FeatureFactoryImpl;
 import com.android.settings.spa.SettingsSpaEnvironment;
@@ -77,6 +85,7 @@ public class SettingsApplication extends Application {
     private WeakReference<SettingsHomepageActivity> mHomeActivity = new WeakReference<>(null);
     @Nullable volatile private BiometricsEnvironment mBiometricsEnvironment;
 
+// QTI_BEGIN: 2023-02-22: Android_UI: Settings: Exit process when multi-sim configuration changes
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -86,6 +95,7 @@ public class SettingsApplication extends Application {
         }
     };
 
+// QTI_END: 2023-02-22: Android_UI: Settings: Exit process when multi-sim configuration changes
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -114,8 +124,10 @@ public class SettingsApplication extends Application {
             ElapsedTimeUtils.assignSuwFinishedTimeStamp(getApplicationContext());
         }
 
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
         TelephonyUtils.connectExtTelephonyService(getApplicationContext());
 
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
         // Set Spa environment.
         setSpaEnvironment();
 
@@ -128,9 +140,11 @@ public class SettingsApplication extends Application {
                 new DeviceProvisionedObserver().registerContentObserver();
             }
         }
+// QTI_BEGIN: 2023-02-22: Android_UI: Settings: Exit process when multi-sim configuration changes
 
         registerReceiver(mBroadcastReceiver,
                 new IntentFilter(TelephonyManager.ACTION_MULTI_SIM_CONFIG_CHANGED));
+// QTI_END: 2023-02-22: Android_UI: Settings: Exit process when multi-sim configuration changes
 
         registerActivityLifecycleCallbacks(new DeveloperOptionsActivityLifecycle());
 
