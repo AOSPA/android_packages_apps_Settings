@@ -29,17 +29,12 @@ import android.os.Looper
 import android.os.SystemClock
 import android.provider.Settings
 import androidx.annotation.VisibleForTesting
-import com.android.settings.R
 import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.AccessibilityStatsLogUtils
-import com.android.settings.accessibility.Flags
-import com.android.settings.accessibility.ToggleShortcutPreferenceController
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceScreen
 import com.android.settings.accessibility.extensions.getComponentName
-import com.android.settings.accessibility.extensions.getFeatureName
 import com.android.settings.accessibility.extensions.isServiceEnabled
-import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceController
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
@@ -87,25 +82,7 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
 
         serviceInfo?.let {
             writeConfigDefaultAccessibilityServiceShortcutTargetIfNeeded(it.componentName)
-            if (!Flags.catalystA11yServiceDetail()) {
-                initializePreferenceControllers(it)
-            }
         }
-    }
-
-    private fun initializePreferenceControllers(a11yServiceInfo: AccessibilityServiceInfo) {
-        use(TopIntroPreferenceController::class.java).initialize(a11yServiceInfo)
-        use(AccessibilityServiceIllustrationPreferenceController::class.java)
-            .initialize(a11yServiceInfo)
-        use(UseServiceTogglePreferenceController::class.java)
-            .initialize(a11yServiceInfo, childFragmentManager, metricsCategory)
-        use(ShortcutPreferenceController::class.java)
-            .initialize(a11yServiceInfo, childFragmentManager, getFeatureName(), metricsCategory)
-        use(SettingsPreferenceController::class.java).initialize(a11yServiceInfo)
-        use(LaunchAppInfoPreferenceController::class.java).initialize(a11yServiceInfo.componentName)
-        use(AccessibilityServiceHtmlFooterPreferenceController::class.java)
-            .initialize(a11yServiceInfo)
-        use(AccessibilityServiceFooterPreferenceController::class.java).initialize(a11yServiceInfo)
     }
 
     private fun writeConfigDefaultAccessibilityServiceShortcutTargetIfNeeded(name: ComponentName) {
@@ -144,9 +121,6 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
             disabledStateLogged = savedInstanceState.getBoolean(KEY_HAS_LOGGED)
         }
 
-        if (!Flags.catalystA11yServiceDetail()) {
-            requireActivity().setTitle(getFeatureName())
-        }
         registerPackageRemoveReceiver()
 
         requireContext()
@@ -171,10 +145,6 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
         }
     }
 
-    private fun getFeatureName(): CharSequence {
-        return serviceInfo?.getFeatureName(requireContext()) ?: ""
-    }
-
     private fun getFeatureComponentName(): ComponentName {
         return requireNotNull(
             getFragmentArguments().getComponentName(AccessibilitySettings.EXTRA_COMPONENT_NAME)
@@ -182,7 +152,7 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
     }
 
     override fun getPreferenceScreenResId(): Int {
-        return R.xml.accessibility_service_detail_screen
+        return 0
     }
 
     override fun getLogTag(): String? {
@@ -193,10 +163,6 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
         return featureFactory.accessibilityPageIdFeatureProvider.getCategory(
             getFeatureComponentName()
         )
-    }
-
-    protected fun getShortcutPreferenceController(): ToggleShortcutPreferenceController? {
-        return use(ShortcutPreferenceController::class.java)
     }
 
     private fun registerPackageRemoveReceiver() {

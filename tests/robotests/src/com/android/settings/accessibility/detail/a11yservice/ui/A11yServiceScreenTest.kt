@@ -18,6 +18,7 @@ package com.android.settings.accessibility.detail.a11yservice.ui
 
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.platform.test.annotations.DisableFlags
@@ -25,8 +26,8 @@ import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import android.view.accessibility.AccessibilityManager
-import androidx.fragment.app.testing.FragmentScenario
-import androidx.preference.PreferenceFragmentCompat
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.Flags
@@ -38,7 +39,6 @@ import com.android.settings.testutils.AccessibilityTestUtils
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.RestrictedPreference
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
@@ -48,13 +48,16 @@ import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.kotlin.whenever
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowPackageManager
 
 /** Tests for [A11yServiceScreen]. */
-class A11yServiceScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class A11yServiceScreenTest {
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
     @get:Rule val settingStoreRule = SettingsStoreRule()
     @get:Rule val platformFlags = SetFlagsRule()
 
@@ -68,7 +71,7 @@ class A11yServiceScreenTest : SettingsCatalystTestCase() {
             AccessibilitySettings.EXTRA_COMPONENT_NAME to A11Y_SERVICE_COMPONENT.flattenToString()
         )
 
-    override val preferenceScreenCreator: A11yServiceScreen by lazy {
+    private val preferenceScreenCreator: A11yServiceScreen by lazy {
         if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters()) {
             A11yServiceScreen(appContext, keyParameters)
         } else {
@@ -212,21 +215,6 @@ class A11yServiceScreenTest : SettingsCatalystTestCase() {
         }
     }
 
-    override fun launchFragmentScenario(
-        fragmentClass: Class<PreferenceFragmentCompat>
-    ): FragmentScenario<PreferenceFragmentCompat> {
-        val scenario = FragmentScenario.launch(fragmentClass, arguments)
-        scenario.onFragment { fragment ->
-            // Pre catalyst, we didn't set up the preference screen's title.
-            // Hence, we had to add the title to preference screen directly in order to test the
-            // migration test case.
-            // We also have a separate test case to test the title in post-catalyst scenario
-            fragment.preferenceScreen.title = "FakeA11yService"
-        }
-
-        return scenario
-    }
-
     private fun createA11yServiceInfo(
         isAlwaysOnService: Boolean = false,
         serviceComponent: ComponentName = A11Y_SERVICE_COMPONENT,
@@ -238,9 +226,6 @@ class A11yServiceScreenTest : SettingsCatalystTestCase() {
             )
             .apply { isAccessibilityTool = true }
     }
-
-    override val flagName: String
-        get() = Flags.FLAG_CATALYST_A11Y_SERVICE_DETAIL
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)

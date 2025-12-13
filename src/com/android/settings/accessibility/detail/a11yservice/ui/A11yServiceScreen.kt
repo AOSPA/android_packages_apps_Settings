@@ -29,7 +29,6 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.accessibility.AccessibilitySettings
-import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment
 import com.android.settings.accessibility.detail.a11yservice.data.UseServiceDataStore
@@ -110,14 +109,10 @@ private constructor(
     private var serviceEnablementStorage: UseServiceDataStore? = null
     private var serviceEnablementObserver: KeyedObserver<String>? = null
 
-    override fun isFlagEnabled(context: Context): Boolean {
-        return Flags.catalystA11yServiceDetail()
-    }
-
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.a11y_service_detail_screen_purpose
 
@@ -221,8 +216,18 @@ private constructor(
                         packageName = serviceInfo.componentName.packageName,
                     )
                 }
-            +A11yServiceFooterPreference(HTML_FOOTER_KEY, purpose = R.string.a11y_service_detail_screen_html_footer_info_purpose, serviceInfo, loadHtmlFooter = true)
-            +A11yServiceFooterPreference(FOOTER_KEY, purpose = R.string.a11y_service_detail_screen_footer_info_purpose, serviceInfo, loadHtmlFooter = false)
+            +A11yServiceFooterPreference(
+                HTML_FOOTER_KEY,
+                purpose = R.string.a11y_service_detail_screen_html_footer_info_purpose,
+                serviceInfo,
+                loadHtmlFooter = true,
+            )
+            +A11yServiceFooterPreference(
+                FOOTER_KEY,
+                purpose = R.string.a11y_service_detail_screen_footer_info_purpose,
+                serviceInfo,
+                loadHtmlFooter = false,
+            )
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent {
