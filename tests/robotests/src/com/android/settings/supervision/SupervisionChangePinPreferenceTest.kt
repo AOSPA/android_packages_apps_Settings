@@ -37,6 +37,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.internal.widget.LockPatternUtils
 import com.android.settings.R
 import com.android.settings.password.ChooseLockGeneric
+import com.android.settings.password.ChooseLockPassword
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
@@ -140,6 +141,27 @@ class SupervisionChangePinPreferenceTest {
         val result = preference.onPreferenceClick(widget)
         assertThat(result).isFalse()
         verify(mockChangePinLauncher, never()).launch(any())
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onPreferenceClick_setsSupervisionResetExtra() {
+        val widget: Preference = preference.createAndBindWidget(context)
+        mockLifeCycleContext.stub {
+            on { findPreference<Preference>(SupervisionChangePinPreference.KEY) } doReturn widget
+        }
+        whenever(mockUserManager.users).thenReturn(listOf(SUPERVISING_USER_INFO))
+        whenever(mockKeyguardManager.isDeviceSecure(SUPERVISING_USER_ID)).thenReturn(true)
+
+        preference.onPreferenceClick(widget)
+        val intentCaptor = argumentCaptor<Intent>()
+        verify(mockChangePinLauncher).launch(intentCaptor.capture())
+
+        val intent = intentCaptor.firstValue
+        assertThat(
+                intent.getBooleanExtra(ChooseLockPassword.EXTRA_KEY_FOR_SUPERVISION_RESET, false)
+            )
+            .isTrue()
     }
 
     @Test

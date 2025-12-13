@@ -190,6 +190,19 @@ public class ChooseLockPasswordTest {
     }
 
     @Test
+    @EnableFlags(android.app.supervision.flags.Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    public void intentBuilder_setForSupervisionReset_shouldAddExtra() {
+        Intent intent = new IntentBuilder(application)
+                .setForSupervisionReset(true)
+                .build();
+
+        assertWithMessage("EXTRA_KEY_FOR_SUPERVISION_RESET").that(
+                        intent.getBooleanExtra(
+                                ChooseLockPassword.EXTRA_KEY_FOR_SUPERVISION_RESET, false))
+                .isTrue();
+    }
+
+    @Test
     public void activity_shouldHaveSecureFlag() {
         PasswordPolicy policy = new PasswordPolicy();
         policy.quality = PASSWORD_QUALITY_ALPHABETIC;
