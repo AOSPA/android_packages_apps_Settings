@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yactivity.ui
+package com.android.settings.accessibility.a11yactivity.ui
 
 import android.accessibilityservice.AccessibilityShortcutInfo
 import android.content.ComponentName
@@ -38,6 +38,7 @@ import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
+import com.android.settingslib.catalyst.flags.Flags
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.TwoTargetPreference
 import com.google.common.truth.Truth.assertThat
@@ -72,7 +73,7 @@ class A11yActivityScreenTest {
         )
 
     private val preferenceScreenCreator: A11yActivityScreen by lazy {
-        if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters()) {
+        if (Flags.catalystUseKeyParameters()) {
             A11yActivityScreen(appContext, keyParameters)
         } else {
             A11yActivityScreen(appContext, arguments)
@@ -170,7 +171,7 @@ class A11yActivityScreenTest {
     @Test
     @DisableFlags(
         com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        com.android.settingslib.catalyst.flags.Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
     )
     fun parameters_hasTwoA11yActivities_returnTwoItems_bundleArguments() = runTest {
         AccessibilityRepositoryProvider.resetInstanceForTesting()
@@ -203,7 +204,7 @@ class A11yActivityScreenTest {
     @Test
     @EnableFlags(
         com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        com.android.settingslib.catalyst.flags.Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
     )
     fun parameters_hasTwoA11yActivities_returnTwoItems_keyParameters() = runTest {
         AccessibilityRepositoryProvider.resetInstanceForTesting()

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yactivity.ui
+package com.android.settings.accessibility.a11yactivity.ui
 
 import android.content.ComponentName
 import android.content.Context
@@ -31,9 +31,9 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.LaunchAccessibilityActivityPreferenceFragment
+import com.android.settings.accessibility.a11yactivity.ui.A11yActivityFooterPreference.Companion.FOOTER_KEY
+import com.android.settings.accessibility.a11yactivity.ui.A11yActivityFooterPreference.Companion.HTML_FOOTER_KEY
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
-import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityFooterPreference.Companion.FOOTER_KEY
-import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityFooterPreference.Companion.HTML_FOOTER_KEY
 import com.android.settings.accessibility.extensions.getComponentName
 import com.android.settings.accessibility.extensions.putComponentName
 import com.android.settings.accessibility.shared.ui.LaunchAppInfoPreference

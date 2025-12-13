@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yactivity.ui
+package com.android.settings.accessibility.a11yactivity.ui
 
 import android.accessibilityservice.AccessibilityShortcutInfo
 import android.app.ActivityOptions
