@@ -30,7 +30,6 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.accessibility.AccessibilitySettings
-import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.LaunchAccessibilityActivityPreferenceFragment
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityFooterPreference.Companion.FOOTER_KEY
@@ -96,17 +95,13 @@ private constructor(
         AccessibilityRepositoryProvider.get(context)
             .getAccessibilityShortcutInfo(featureComponentName)
 
-    override fun isFlagEnabled(context: Context): Boolean {
-        return Flags.catalystA11yActivityDetail()
-    }
-
     override val highlightMenuKey: Int
         get() = R.string.menu_key_accessibility
 
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.a11y_activity_detail_screen_purpose
 
@@ -173,8 +168,18 @@ private constructor(
                             packageName = shortcutInfo.componentName.packageName,
                         )
                     }
-                +A11yActivityFooterPreference(HTML_FOOTER_KEY, purpose = R.string.a11y_activity_detail_screen_html_footer_info_purpose, shortcutInfo, loadHtmlFooter = true)
-                +A11yActivityFooterPreference(FOOTER_KEY, purpose = R.string.a11y_activity_detail_screen_footer_info_purpose, shortcutInfo, loadHtmlFooter = false, )
+                +A11yActivityFooterPreference(
+                    HTML_FOOTER_KEY,
+                    purpose = R.string.a11y_activity_detail_screen_html_footer_info_purpose,
+                    shortcutInfo,
+                    loadHtmlFooter = true,
+                )
+                +A11yActivityFooterPreference(
+                    FOOTER_KEY,
+                    purpose = R.string.a11y_activity_detail_screen_footer_info_purpose,
+                    shortcutInfo,
+                    loadHtmlFooter = false,
+                )
             }
         }
 
