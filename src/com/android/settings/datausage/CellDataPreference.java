@@ -36,8 +36,10 @@ import com.android.settings.R;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionUtil;
+// QTI_BEGIN: 2024-04-25: Telephony: Fix for Dds data option keeps enabled during nDds data voice call
 import com.android.settings.network.telephony.DdsDataOptionStateTuner;
 import com.android.settings.network.telephony.TelephonyUtils;
+// QTI_END: 2024-04-25: Telephony: Fix for Dds data option keeps enabled during nDds data voice call
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.CustomDialogPreferenceCompat;
 
@@ -53,14 +55,18 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     public boolean mChecked;
     public boolean mMultiSimDialog;
     private final MobileDataEnabledListener mDataStateListener;
+// QTI_BEGIN: 2024-04-25: Telephony: Fix for Dds data option keeps enabled during nDds data voice call
     private final DdsDataOptionStateTuner mDdsDataOptionStateTuner;
+// QTI_END: 2024-04-25: Telephony: Fix for Dds data option keeps enabled during nDds data voice call
 
     public CellDataPreference(Context context, AttributeSet attrs) {
         super(context, attrs, androidx.preference.R.attr.switchPreferenceCompatStyle);
         mDataStateListener = new MobileDataEnabledListener(context, this);
+// QTI_BEGIN: 2024-04-25: Telephony: Fix for Dds data option keeps enabled during nDds data voice call
         mDdsDataOptionStateTuner = new DdsDataOptionStateTuner(
                 context.getSystemService(TelephonyManager.class),
                 getProxySubscriptionManager().get(), () -> updateEnabled());
+// QTI_END: 2024-04-25: Telephony: Fix for Dds data option keeps enabled during nDds data voice call
     }
 
     @Override
@@ -89,9 +95,11 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
         mDataStateListener.start(mSubId);
         getProxySubscriptionManager()
                 .addActiveSubscriptionsListener(mOnSubscriptionsChangeListener);
+// QTI_BEGIN: 2024-04-25: Telephony: Fix for Dds data option keeps enabled during nDds data voice call
         if (SubscriptionManager.isUsableSubscriptionId(mSubId)) {
             mDdsDataOptionStateTuner.register(getContext(), mSubId);
         }
+// QTI_END: 2024-04-25: Telephony: Fix for Dds data option keeps enabled during nDds data voice call
     }
 
     @Override
@@ -99,9 +107,11 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
         mDataStateListener.stop();
         getProxySubscriptionManager()
                 .removeActiveSubscriptionsListener(mOnSubscriptionsChangeListener);
+// QTI_BEGIN: 2024-04-25: Telephony: Fix for Dds data option keeps enabled during nDds data voice call
         if (SubscriptionManager.isUsableSubscriptionId(mSubId)) {
             mDdsDataOptionStateTuner.unregister(getContext());
         }
+// QTI_END: 2024-04-25: Telephony: Fix for Dds data option keeps enabled during nDds data voice call
         super.onDetached();
     }
 
@@ -140,6 +150,7 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
         // If this subscription is not active, for example, SIM card is taken out, we disable
         // the button.
         setEnabled(getActiveSubscriptionInfo(mSubId) != null);
+// QTI_BEGIN: 2024-04-25: Telephony: Fix for Dds data option keeps enabled during nDds data voice call
 
         // When nDds voice call is ongoing, disallow to turn off Dds mobile data, but enablement
         // should be allowed.
@@ -154,6 +165,7 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
                 setEnabled(false);
             }
         }
+// QTI_END: 2024-04-25: Telephony: Fix for Dds data option keeps enabled during nDds data voice call
     }
 
     @Override

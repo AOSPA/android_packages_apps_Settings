@@ -620,9 +620,6 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     }
 
     private void setUserPreferenceForPackage(boolean enabled, String crossProfilePackage) {
-        if (!Flags.backupConnectedAppsSettings()) {
-            return;
-        }
         String allowedPackagesString = Settings.Global.getString(getContentResolver(),
                 CONNECTED_APPS_ALLOWED_PACKAGES);
         String disallowedPackagesString = Settings.Global.getString(getContentResolver(),

@@ -20,16 +20,24 @@ import static com.android.settings.network.AirplaneModeUtilKt.isAirplaneModeElig
 import static com.android.settings.network.SatelliteWarningDialogActivity.EXTRA_TYPE_OF_SATELLITE_WARNING_DIALOG;
 import static com.android.settings.network.SatelliteWarningDialogActivity.TYPE_IS_AIRPLANE_MODE;
 
+// QTI_BEGIN: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
 import android.app.Activity;
+// QTI_END: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+// QTI_BEGIN: 2021-09-08: Android_UI: Settings: Fix airplane mode slice no update in internet panel
 import android.database.ContentObserver;
+// QTI_END: 2021-09-08: Android_UI: Settings: Fix airplane mode slice no update in internet panel
 import android.net.Uri;
+// QTI_BEGIN: 2021-09-08: Android_UI: Settings: Fix airplane mode slice no update in internet panel
 import android.os.Handler;
 import android.os.Looper;
+// QTI_END: 2021-09-08: Android_UI: Settings: Fix airplane mode slice no update in internet panel
 import android.provider.SettingsSlicesContract;
+// QTI_BEGIN: 2021-09-08: Android_UI: Settings: Fix airplane mode slice no update in internet panel
 import android.provider.Settings;
+// QTI_END: 2021-09-08: Android_UI: Settings: Fix airplane mode slice no update in internet panel
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -44,16 +52,22 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.contract.SettingsContractKt;
 import com.android.settings.core.TogglePreferenceController;
+// QTI_BEGIN: 2021-09-08: Android_UI: Settings: Fix airplane mode slice no update in internet panel
 import com.android.settings.slices.SliceBackgroundWorker;
+// QTI_END: 2021-09-08: Android_UI: Settings: Fix airplane mode slice no update in internet panel
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
+// QTI_BEGIN: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
 import com.qti.extphone.ExtTelephonyManager;
 
+// QTI_END: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
+// QTI_BEGIN: 2021-09-08: Android_UI: Settings: Fix airplane mode slice no update in internet panel
 import java.io.IOException;
+// QTI_END: 2021-09-08: Android_UI: Settings: Fix airplane mode slice no update in internet panel
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -66,7 +80,9 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         AirplaneModeEnabler.OnAirplaneModeChangedListener {
     private static final String TAG = AirplaneModePreferenceController.class.getSimpleName();
     public static final int REQUEST_CODE_EXIT_ECM = 1;
+// QTI_BEGIN: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
     public static final int REQUEST_CODE_EXIT_SCBM = 2;
+// QTI_END: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
 
     /**
      * Uri for Airplane mode Slice.
@@ -107,10 +123,13 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         if (AirplaneModePreference.KEY.equals(preference.getKey()) && isAvailable()) {
             // In ECM mode launch ECM app dialog
             if (mAirplaneModeEnabler.isInEcmMode()) {
+// QTI_BEGIN: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
                 if (mFragment != null) {
                     mFragment.startActivityForResult(
+// QTI_END: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
                             new Intent(TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null)
                                 .setPackage(Utils.PHONE_PACKAGE_NAME),
+// QTI_BEGIN: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
                             REQUEST_CODE_EXIT_ECM);
                 }
                 return true;
@@ -118,11 +137,14 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
                 // In SCBM mode launch SCBM app dialog
                 if (mFragment != null) {
                     mFragment.startActivityForResult(
+// QTI_END: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
                             new Intent(ExtTelephonyManager.ACTION_SHOW_NOTICE_SCM_BLOCK_OTHERS, null)
                                 .setPackage(Utils.PHONE_PACKAGE_NAME),
                             REQUEST_CODE_EXIT_SCBM);
+// QTI_BEGIN: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
                 }
                 return true;
+// QTI_END: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
             }
             if (mIsSatelliteOn.get()) {
                 mContext.startActivity(
@@ -207,12 +229,14 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         if (requestCode == REQUEST_CODE_EXIT_ECM && isAvailable()) {
             final boolean isChoiceYes = (resultCode == Activity.RESULT_OK);
             // Set Airplane mode based on the return value and checkbox state
+// QTI_BEGIN: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
             mAirplaneModeEnabler.setAirplaneModeInEmergencyMode(isChoiceYes,
                     mAirplaneModePreference.isChecked());
         } else if (requestCode == REQUEST_CODE_EXIT_SCBM) {
             final boolean isChoiceYes = resultCode == Activity.RESULT_OK;
             // Set Airplane mode based on the return value and checkbox state
             mAirplaneModeEnabler.setAirplaneModeInEmergencyMode(isChoiceYes,
+// QTI_END: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
                     mAirplaneModePreference.isChecked());
         }
     }
@@ -239,6 +263,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
             mAirplaneModePreference.setChecked(isAirplaneModeOn);
         }
     }
+// QTI_BEGIN: 2021-09-08: Android_UI: Settings: Fix airplane mode slice no update in internet panel
 
     /**
      * According to slice framework, need override this function and provide background
@@ -307,5 +332,6 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
             }
         }
     }
+// QTI_END: 2021-09-08: Android_UI: Settings: Fix airplane mode slice no update in internet panel
 }
 // LINT.ThenChange(AirplaneModePreference.kt)

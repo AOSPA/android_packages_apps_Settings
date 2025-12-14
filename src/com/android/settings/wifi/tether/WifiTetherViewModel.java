@@ -17,8 +17,10 @@
 package com.android.settings.wifi.tether;
 
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_OWE;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION;
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION;
@@ -67,10 +69,12 @@ public class WifiTetherViewModel extends AndroidViewModel {
                 com.android.settingslib.R.string.wifi_security_psk_sae);
         sSecuritySummaryResMap.put(
                 SECURITY_TYPE_WPA2_PSK, com.android.settingslib.R.string.wifi_security_wpa2);
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
         sSecuritySummaryResMap.put(
                 SECURITY_TYPE_WPA3_OWE, com.android.settingslib.R.string.wifi_security_owe);
        sSecuritySummaryResMap.put(SECURITY_TYPE_WPA3_OWE_TRANSITION,
                 com.android.settingslib.R.string.wifi_security_owe);
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
         sSecuritySummaryResMap.put(
                 SECURITY_TYPE_OPEN, com.android.settingslib.R.string.wifi_security_none);
     }

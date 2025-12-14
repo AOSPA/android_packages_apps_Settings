@@ -17,6 +17,7 @@
 package com.android.settings.development;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -229,7 +230,7 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
 
     @Override
     public int getMetricsCategory() {
-        return 0;
+        return SettingsEnums.ADB_WIRELESS_DEVICE_QR_PAIRING_DIALOG;
     }
 
     @Override

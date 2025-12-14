@@ -35,7 +35,9 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+// QTI_BEGIN: 2021-05-26: Telephony: Strip null objects from the array
 import java.util.Arrays;
+// QTI_END: 2021-05-26: Telephony: Strip null objects from the array
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;

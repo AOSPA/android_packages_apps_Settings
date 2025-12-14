@@ -40,7 +40,7 @@ public class AdbQrCodeActivity extends WifiDppBaseActivity {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_ADB_WIRELESS;
+        return SettingsEnums.ADB_WIRELESS_DEVICE_QR_PAIRING_DIALOG;
     }
 
     @Override

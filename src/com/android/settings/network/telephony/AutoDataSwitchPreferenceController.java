@@ -102,10 +102,12 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
             mMobileDataContentObserver.setOnMobileDataChangedListener(() -> refreshPreference());
         }
         mMobileDataContentObserver.register(mContext, mSubId);
+// QTI_BEGIN: 2021-09-21: Telephony: Fix the data of nDDS sub can't be tore down
         final int defaultDataSub = SubscriptionManager.getDefaultDataSubscriptionId();
         if (defaultDataSub != mSubId) {
             mMobileDataContentObserver.register(mContext, defaultDataSub);
         }
+// QTI_END: 2021-09-21: Telephony: Fix the data of nDDS sub can't be tore down
         mContext.registerReceiver(mDefaultDataChangedReceiver,
                 new IntentFilter(TelephonyIntents.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED));
     }
@@ -153,7 +155,9 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
 
     @Override
     public int getAvailabilityStatus(int subId) {
+// QTI_BEGIN: 2024-06-25: Telephony: Fix for Auto data switch UI option
         if (!SubscriptionManager.isValidSubscriptionId(subId)
+// QTI_END: 2024-06-25: Telephony: Fix for Auto data switch UI option
                 || SubscriptionManager.getDefaultDataSubscriptionId() == subId
                 || (!hasMobileData())) {
             return CONDITIONALLY_UNAVAILABLE;
@@ -161,27 +165,39 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
         if (mManager == null) {
             return CONDITIONALLY_UNAVAILABLE;
         }
+// QTI_BEGIN: 2021-09-21: Telephony: Fix the data of nDDS sub can't be tore down
         boolean isDefDataEnabled = mManager.createForSubscriptionId(
                 SubscriptionManager.getDefaultDataSubscriptionId())
                 .isDataEnabled();
+// QTI_END: 2021-09-21: Telephony: Fix the data of nDDS sub can't be tore down
+// QTI_BEGIN: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
         // Do not show auto data switch preference when mobile data switch
+// QTI_END: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
+// QTI_BEGIN: 2021-09-21: Telephony: Fix the data of nDDS sub can't be tore down
         // for the DDS sub is turned off.
         if (!isDefDataEnabled) {
             return CONDITIONALLY_UNAVAILABLE;
         }
+// QTI_END: 2021-09-21: Telephony: Fix the data of nDDS sub can't be tore down
+// QTI_BEGIN: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
 
         if (TelephonyUtils.isSubsidyFeatureEnabled(mContext) &&
                 !TelephonyUtils.isSubsidySimCard(mContext,
                 SubscriptionManager.getSlotIndex(mSubId))) {
             return CONDITIONALLY_UNAVAILABLE;
         }
+// QTI_END: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
         // Auto data switch preference has been moved to NetworkCellularGroupProvider
         // as per dual sim onboarding ui enhancements
         if (Flags.isDualSimOnboardingEnabled()) {
             Log.d(LOG_TAG, "Dual sim onboarding config is enabled");
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
+// QTI_BEGIN: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
             return CONDITIONALLY_UNAVAILABLE;
         }
 
+// QTI_END: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
         return AVAILABLE;
     }
 

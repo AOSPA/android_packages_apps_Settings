@@ -14,12 +14,18 @@
  * limitations under the License.
  */
 
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
+// QTI_BEGIN: 2025-01-16: Telephony: Fix mobile data greyed out issue
  * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+// QTI_END: 2025-01-16: Telephony: Fix mobile data greyed out issue
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 package com.android.settings.spa.network
 
 import android.app.settings.SettingsEnums
@@ -55,11 +61,15 @@ import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionInfoListViewModel
 import com.android.settings.network.telephony.DataSubscriptionRepository
+// QTI_BEGIN: 2025-01-16: Telephony: Fix mobile data greyed out issue
 import com.android.settings.network.telephony.DdsPreferenceRepository
+// QTI_END: 2025-01-16: Telephony: Fix mobile data greyed out issue
 import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settings.network.telephony.SimRepository
 import com.android.settings.network.telephony.SubscriptionRepository
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 import com.android.settings.network.telephony.TelephonyUtils
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 import com.android.settings.network.telephony.requireSubscriptionManager
 import com.android.settings.spa.network.PrimarySimRepository.PrimarySimInfo
 import com.android.settings.wifi.WifiPickerTrackerHelper
@@ -147,8 +157,10 @@ open class NetworkCellularGroupProvider : SettingsPageProvider, SearchablePage {
             if (mobileDataSelectedIdValue != null) {
                 val showMobileDataSection =
                     selectableSubscriptionInfoList.any { subInfo -> subInfo.simSlotIndex > -1 }
+// QTI_BEGIN: 2025-01-23: Telephony: Fix for incorrect conflict resolution issue
                 if (showMobileDataSection
                         && (!TelephonyUtils.isSmartDdsSwitchFeatureAvailable())) {
+// QTI_END: 2025-01-23: Telephony: Fix for incorrect conflict resolution issue
                     MobileDataSectionImpl(mobileDataSelectedIdValue, nonDdsRemember.intValue)
                 }
 
@@ -267,27 +279,37 @@ fun PrimarySimImpl(
         primarySimInfo.callsList,
         callsSelectedId,
         ImageVector.vectorResource(R.drawable.ic_phone),
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
         actionSetCalls,
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
     )
     CreatePrimarySimListPreference(
         stringResource(id = R.string.primary_sim_texts_title),
         primarySimInfo.smsList,
         textsSelectedId,
         Icons.AutoMirrored.Outlined.Message,
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
         actionSetTexts,
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
     )
+// QTI_BEGIN: 2025-01-16: Telephony: Fix mobile data greyed out issue
 
     val ddsPreferenceRepository = rememberContext(::DdsPreferenceRepository)
     val isDdsSelectable by remember {
         ddsPreferenceRepository.isDdsPreferenceSelectableFlow()
     }.collectAsStateWithLifecycle(initialValue = true)
+// QTI_END: 2025-01-16: Telephony: Fix mobile data greyed out issue
     CreatePrimarySimListPreference(
         stringResource(id = R.string.mobile_data_settings_title),
         primarySimInfo.dataList,
         mobileDataSelectedId,
         Icons.Outlined.DataUsage,
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
         actionSetMobileData,
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
+// QTI_BEGIN: 2025-01-16: Telephony: Fix mobile data greyed out issue
         isDdsSelectable,
+// QTI_END: 2025-01-16: Telephony: Fix mobile data greyed out issue
     )
 }
 
@@ -364,12 +386,16 @@ suspend fun setDefaultData(
     subscriptionManager: SubscriptionManager?,
     wifiPickerTrackerHelper: WifiPickerTrackerHelper?,
     subId: Int,
+// QTI_BEGIN: 2025-03-18: Telephony: Update DDS user preference properly
 ): Unit {
     // Save user preferred subscription to settings database
     val SETTING_USER_PREF_DATA_SUB: String = "user_preferred_data_sub"
     Settings.Global.putInt(context.getContentResolver(), SETTING_USER_PREF_DATA_SUB, subId)
+// QTI_END: 2025-03-18: Telephony: Update DDS user preference properly
     setMobileData(context, subscriptionManager, wifiPickerTrackerHelper, subId, true)
+// QTI_BEGIN: 2025-03-18: Telephony: Update DDS user preference properly
 }
+// QTI_END: 2025-03-18: Telephony: Update DDS user preference properly
 
 suspend fun setMobileData(
     context: Context,

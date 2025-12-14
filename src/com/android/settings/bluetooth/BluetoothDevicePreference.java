@@ -21,7 +21,9 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+// QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support
 import android.bluetooth.BluetoothAdapter;
+// QTI_END: 2021-01-15: Bluetooth: Add BC support
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -148,8 +150,10 @@ public final class BluetoothDevicePreference extends GearPreference {
         }
     }
 
+// QTI_BEGIN: 2021-01-04: Bluetooth: Group: Add below Group Changes
     private final boolean mHideSummary;
 
+// QTI_END: 2021-01-04: Bluetooth: Group: Add below Group Changes
     public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice,
             boolean showDeviceWithoutNames, @SortType int type) {
         super(context, null);
@@ -176,6 +180,7 @@ public final class BluetoothDevicePreference extends GearPreference {
         onPreferenceAttributesChanged();
         mHideSummary = false;
         setVisible(false);
+// QTI_BEGIN: 2021-01-04: Bluetooth: Group: Add below Group Changes
     }
 
     public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice,
@@ -183,20 +188,27 @@ public final class BluetoothDevicePreference extends GearPreference {
         super(context, null);
         mResources = getContext().getResources();
         mUserManager = context.getSystemService(UserManager.class);
+// QTI_END: 2021-01-04: Bluetooth: Group: Add below Group Changes
         mLocalBtManager = Utils.getLocalBluetoothManager(context);
+// QTI_BEGIN: 2021-01-04: Bluetooth: Group: Add below Group Changes
         mShowDevicesWithoutNames = showDeviceWithoutNames;
         if (sDimAlpha == Integer.MIN_VALUE) {
             TypedValue outValue = new TypedValue();
             context.getTheme().resolveAttribute(android.R.attr.disabledAlpha, outValue, true);
             sDimAlpha = (int) (outValue.getFloat() * 255);
         }
+// QTI_END: 2021-01-04: Bluetooth: Group: Add below Group Changes
 
+// QTI_BEGIN: 2021-01-04: Bluetooth: Group: Add below Group Changes
         mCachedDevice = cachedDevice;
         mCallback = new BluetoothDevicePreferenceCallback();
         mCachedDevice.registerCallback(mCallback);
+// QTI_END: 2021-01-04: Bluetooth: Group: Add below Group Changes
         mId = sNextId.getAndIncrement();
+// QTI_BEGIN: 2021-01-04: Bluetooth: Group: Add below Group Changes
         mType = type;
         mHideSummary = hideSummary;
+// QTI_END: 2021-01-04: Bluetooth: Group: Add below Group Changes
         onPreferenceAttributesChanged();
     }
 

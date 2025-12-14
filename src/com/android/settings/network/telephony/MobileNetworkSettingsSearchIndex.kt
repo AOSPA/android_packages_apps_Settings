@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
+// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
 /*
 * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
 * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
 * SPDX-License-Identifier: BSD-3-Clause-Clear
 */
 
+// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
 package com.android.settings.network.telephony
 
 import android.content.Context
@@ -31,7 +33,9 @@ import com.android.settings.network.telephony.CarrierSettingsVersionPreferenceCo
 import com.android.settings.network.telephony.DataUsagePreferenceController.Companion.DataUsageSearchItem
 import com.android.settings.network.telephony.MmsMessagePreferenceController.Companion.MmsMessageSearchItem
 import com.android.settings.network.telephony.NrAdvancedCallingPreferenceController.Companion.NrAdvancedCallingSearchItem
+// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
 import com.android.settings.network.telephony.RoamingPreferenceController.Companion.RoamingSearchItem
+// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
 import com.android.settings.network.telephony.VideoCallingPreferenceController.Companion.VideoCallingSearchItem
 import com.android.settings.network.telephony.WifiCallingPreferenceController.Companion.WifiCallingSearchItem
 import com.android.settings.network.telephony.satellite.SatelliteSettingPreferenceController.Companion.SatelliteConnectivitySearchItem

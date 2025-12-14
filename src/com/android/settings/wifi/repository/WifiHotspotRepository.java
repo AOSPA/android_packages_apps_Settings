@@ -22,8 +22,10 @@ import static android.net.wifi.SoftApConfiguration.BAND_5GHZ;
 import static android.net.wifi.SoftApConfiguration.BAND_6GHZ;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_OWE;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION;
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION;
 import static android.net.wifi.WifiAvailableChannel.OP_MODE_SAP;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_DISABLED;
@@ -147,9 +149,13 @@ public class WifiHotspotRepository {
      */
     public void queryLastPasswordIfNeeded() {
         SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
+// QTI_BEGIN: 2025-04-03: WLAN: Settings: Fix security type checks in queryLastPasswordIfNeeded API
         if (config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_OPEN &&
             config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_WPA3_OWE &&
+// QTI_END: 2025-04-03: WLAN: Settings: Fix security type checks in queryLastPasswordIfNeeded API
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
             config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION) {
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
             return;
         }
         mWifiManager.queryLastConfiguredTetheredApPassphraseSinceBoot(mAppContext.getMainExecutor(),
@@ -277,6 +283,7 @@ public class WifiHotspotRepository {
             return;
         }
         SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder(config);
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
         String passphrase;
         if (securityType == SECURITY_TYPE_OPEN || securityType == SECURITY_TYPE_WPA3_OWE ||
             securityType == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
@@ -285,16 +292,25 @@ public class WifiHotspotRepository {
             passphrase = generatePassword(config);
         }
         if (securityType == SECURITY_TYPE_WPA3_OWE) {
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
+// QTI_BEGIN: 2024-05-22: WLAN: wifi: remove dependency on "framework-wifi-vendor-hide-access-defaults"
            if (config.getChannels().size() > 1) {
+// QTI_END: 2024-05-22: WLAN: wifi: remove dependency on "framework-wifi-vendor-hide-access-defaults"
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
                log("Setting band to 2GHz for Enhanced open");
                configBuilder.setBand(BAND_2GHZ);
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
+// QTI_BEGIN: 2024-06-06: WLAN: Settings: updating band comparision for setSecurityType in WifiHotspotRepository
            } else if (config.getBand() == BAND_2GHZ || config.getBand() == BAND_2GHZ_5GHZ) {
+// QTI_END: 2024-06-06: WLAN: Settings: updating band comparision for setSecurityType in WifiHotspotRepository
                if (!isEnhancedOpenOweOnlyEnabled()) {
                    log("OWE to OWE_TRANSITION for 2.4 or 5 GHz");
                    securityType = SECURITY_TYPE_WPA3_OWE_TRANSITION;
                }
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
            }
         }
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
         configBuilder.setPassphrase(passphrase, securityType);
         setSoftApConfiguration(configBuilder.build());
 
@@ -448,18 +464,24 @@ public class WifiHotspotRepository {
             // for maximum compatibility.
             String passphrase = generatePassword(config);
             if (passphrase.length() >= 8) {
+// QTI_BEGIN: 2024-07-01: WLAN: Settings: switch securityType to OWE_TRANSITION when moving to other band from 6GHz.
                 if (config.getSecurityType() == SECURITY_TYPE_WPA3_OWE &&
                     speedType != SPEED_2GHZ_5GHZ) {
+// QTI_END: 2024-07-01: WLAN: Settings: switch securityType to OWE_TRANSITION when moving to other band from 6GHz.
                     if (!isEnhancedOpenOweOnlyEnabled()) {
                         configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE_TRANSITION);
                     } else {
                         configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE);
                     }
+// QTI_BEGIN: 2024-07-01: WLAN: Settings: switch securityType to OWE_TRANSITION when moving to other band from 6GHz.
                 } else {
+// QTI_END: 2024-07-01: WLAN: Settings: switch securityType to OWE_TRANSITION when moving to other band from 6GHz.
                     log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE_TRANSITION)");
+// QTI_BEGIN: 2024-07-01: WLAN: Settings: switch securityType to OWE_TRANSITION when moving to other band from 6GHz.
                     configBuilder.setPassphrase(
                             generatePassword(config), SECURITY_TYPE_WPA3_SAE_TRANSITION);
                 }
+// QTI_END: 2024-07-01: WLAN: Settings: switch securityType to OWE_TRANSITION when moving to other band from 6GHz.
 
             }
         }
