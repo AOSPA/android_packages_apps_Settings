@@ -16,13 +16,11 @@
 
 package com.android.settings.accessibility
 
-import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.view.ViewGroup
 import androidx.preference.PreferenceScreen
 import com.airbnb.lottie.LottieAnimationView
-import com.android.settings.R
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.core.BasePreferenceController
 import com.android.settingslib.utils.ThreadUtils
@@ -91,21 +89,3 @@ open class IllustrationPreferenceController(context: Context, prefKey: String) :
 }
 
 // LINT.ThenChange(shared/ui/ImageUriPreference.kt)
-
-class ColorInversionIllustrationPreferenceController(context: Context, prefKey: String) :
-    IllustrationPreferenceController(context, prefKey) {
-    init {
-        val imageUri =
-            Uri.Builder()
-                .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
-                .authority(context.packageName)
-                .appendPath(java.lang.String.valueOf(R.raw.accessibility_color_inversion_banner))
-                .build()
-        val contentDescription =
-            context.getString(
-                R.string.accessibility_illustration_content_description,
-                context.getText(R.string.accessibility_display_inversion_preference_title),
-            )
-        initialize(imageUri, contentDescription)
-    }
-}
