@@ -22,6 +22,7 @@ import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.fragment.app.FragmentManager
+import androidx.preference.PreferenceViewHolder
 import com.android.settings.R
 import com.android.settings.safetycenter.SafetyCenterSeverityConverter
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
@@ -46,15 +47,24 @@ class SafetyIssueBannerPreference(
     private val activityTaskId: Int,
 ) : BannerMessagePreference(context) {
 
+    lateinit var issue: SafetyCenterIssue
+    var isDismissed: Boolean = false
+
     init {
         key = bannerKey
         setButtonOrientation(LinearLayout.VERTICAL)
     }
 
+    override fun onBindViewHolder(holder: PreferenceViewHolder) {
+        super.onBindViewHolder(holder)
+
+        viewModel.interactionLogger.recordIssueViewed(issue!!, isDismissed!!)
+    }
+
     /**
      * Updates the content and button states of the banner.
      *
-     * @param issue The latest [SafetyCenterIssue] data.
+     * @param issue The [SafetyCenterIssue] to display.
      * @param isDismissed Whether the issue is currently in the dismissed state.
      * @param resolvedIssues A map of issue IDs to action IDs for resolved actions.
      */
@@ -63,13 +73,16 @@ class SafetyIssueBannerPreference(
         isDismissed: Boolean,
         resolvedIssues: Map<String, String>,
     ) {
+        this.issue = issue
+        this.isDismissed = isDismissed
+
         title = issue.title
         summary = issue.summary
         setHeader(issue.attributionTitle)
         setSubtitle(issue.subtitle)
         setAttentionLevel(SafetyCenterSeverityConverter.toBannerAttentionLevel(issue.severityLevel))
 
-        configureActionButtons(issue, resolvedIssues)
+        configureActionButtons(issue, isDismissed, resolvedIssues)
         configureDismissButton(issue, isDismissed)
         maybeStartResolution(issue, resolvedIssues)
     }
@@ -82,6 +95,7 @@ class SafetyIssueBannerPreference(
      */
     private fun configureActionButtons(
         issue: SafetyCenterIssue,
+        isDismissed: Boolean,
         resolvedIssues: Map<String, String>,
     ) {
         val resolvedActionId = resolvedIssues[issue.id]
@@ -92,7 +106,13 @@ class SafetyIssueBannerPreference(
             setPositiveButtonEnabled(primaryAction.id != resolvedActionId)
             setPositiveButtonVisible(true)
             setPositiveButtonOnClickListener(
-                ActionButtonOnClickListener(issue, primaryAction, this)
+                ActionButtonOnClickListener(
+                    issue,
+                    isDismissed,
+                    isPrimaryButton = true,
+                    primaryAction,
+                    this,
+                )
             )
         } else {
             setPositiveButtonVisible(false)
@@ -105,7 +125,13 @@ class SafetyIssueBannerPreference(
             setNegativeButtonEnabled(secondaryAction.id != resolvedActionId)
             setNegativeButtonVisible(true)
             setNegativeButtonOnClickListener(
-                ActionButtonOnClickListener(issue, secondaryAction, this)
+                ActionButtonOnClickListener(
+                    issue,
+                    isDismissed,
+                    isPrimaryButton = false,
+                    secondaryAction,
+                    this,
+                )
             )
         } else {
             setNegativeButtonVisible(false)
@@ -130,6 +156,11 @@ class SafetyIssueBannerPreference(
                         .showNow(fragmentManager, /* tag= */ null)
                 } else {
                     viewModel.dismissIssue(issue)
+                    viewModel.interactionLogger.recordForIssue(
+                        Action.ISSUE_DISMISS_CLICKED,
+                        issue,
+                        isDismissed = false,
+                    )
                 }
             }
         } else {
@@ -181,6 +212,8 @@ class SafetyIssueBannerPreference(
      */
     private inner class ActionButtonOnClickListener(
         private val issue: SafetyCenterIssue,
+        private val isDismissed: Boolean,
+        private val isPrimaryButton: Boolean,
         private val action: SafetyCenterIssue.Action,
         private val banner: BannerMessagePreference,
     ) : View.OnClickListener {
@@ -188,7 +221,13 @@ class SafetyIssueBannerPreference(
             Log.d(TAG, "Action '${action.id}' clicked for issue '${issue.id}'")
             if (action.confirmationDialogDetails != null) {
                 Log.d(TAG, "Showing confirmation dialog for action '${action.id}'")
-                ConfirmActionDialogFragment.newInstance(issue, action, activityTaskId)
+                ConfirmActionDialogFragment.newInstance(
+                        issue,
+                        isDismissed,
+                        isPrimaryButton,
+                        action,
+                        activityTaskId,
+                    )
                     .showNow(fragmentManager, /* tag= */ null)
             } else {
                 if (action.willResolve()) {
@@ -196,6 +235,15 @@ class SafetyIssueBannerPreference(
                     banner.setNegativeButtonEnabled(false)
                 }
                 viewModel.executeIssueAction(issue, action, activityTaskId)
+                viewModel.interactionLogger.recordForIssue(
+                    if (isPrimaryButton) {
+                        Action.ISSUE_PRIMARY_ACTION_CLICKED
+                    } else {
+                        Action.ISSUE_SECONDARY_ACTION_CLICKED
+                    },
+                    issue,
+                    isDismissed,
+                )
             }
         }
     }

@@ -34,6 +34,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.map
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.android.settings.safetycenter.ui.InteractionLogger
 import com.android.settingslib.safetycenter.SafetyCenterDataTransformer
 import com.android.settingslib.safetycenter.SafetyCenterUiData
 import kotlin.reflect.KClass
@@ -56,6 +57,12 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
         get() = safetyCenterUiLiveData.map { StatusUiData(it) }
 
     override val errorLiveData: LiveData<SafetyCenterErrorDetails> by this::_errorLiveData
+
+    override val interactionLogger: InteractionLogger by lazy {
+        // Fetching the config to build this set of source IDs requires IPC, so we do this
+        // initialization lazily.
+        InteractionLogger(app, safetyCenterManager.safetyCenterConfig)
+    }
 
     private val safetyCenterManager = app.getSystemService(SafetyCenterManager::class.java)!!
 
