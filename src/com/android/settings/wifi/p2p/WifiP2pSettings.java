@@ -63,6 +63,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 /*
  * Displays Wi-fi p2p settings UI
  */
@@ -681,3 +682,4 @@ public class WifiP2pSettings extends DashboardFragment
         return true;
     }
 }
+// LINT.ThenChange(WifiDirectApiScreen.kt)
