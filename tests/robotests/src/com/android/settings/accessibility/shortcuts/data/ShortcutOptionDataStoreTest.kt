@@ -193,10 +193,6 @@ class ShortcutOptionDataStoreTest {
         value = ["{shortcutType: ${UserShortcutType.TRIPLETAP} }"],
     )
     @TestParameters(
-        customName = "TwofingerDoubleTapType",
-        value = ["{shortcutType: ${UserShortcutType.TWOFINGER_DOUBLETAP} }"],
-    )
-    @TestParameters(
         customName = "QuickSettingsType",
         value = ["{shortcutType: ${UserShortcutType.QUICK_SETTINGS} }"],
     )

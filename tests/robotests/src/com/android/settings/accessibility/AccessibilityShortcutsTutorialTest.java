@@ -21,7 +21,6 @@ import static com.android.internal.accessibility.common.ShortcutConstants.UserSh
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -33,7 +32,6 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.text.SpannableStringBuilder;
 import android.util.ArrayMap;
@@ -52,7 +50,6 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
-import com.android.server.accessibility.Flags;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
@@ -110,15 +107,6 @@ public final class AccessibilityShortcutsTutorialTest {
     @Test
     public void createTutorialPages_turnOnTripleTapShortcut_hasOnePage() {
         showShortcutsTutorialDialog(TRIPLETAP, FAKE_FEATURE_NAME, /* isInSetupWizard= */ false);
-
-        assertTutorialPageSize(1);
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
-    public void createTutorialPages_turnOnTwoFingerTripleTapShortcut_hasOnePage() {
-        showShortcutsTutorialDialog(TWOFINGER_DOUBLETAP, FAKE_FEATURE_NAME, /* isInSetupWizard= */
-                false);
 
         assertTutorialPageSize(1);
     }
@@ -322,25 +310,6 @@ public final class AccessibilityShortcutsTutorialTest {
                 alertDialog,
                 expectedTitle,
                 expectedInstruction.toString());
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
-    public void createAccessibilityTutorialDialog_twoFingerDoubleTapShortcut_verifyText() {
-        final int numFingers = 2;
-        final String expectedTitle = mContext.getString(
-                R.string.accessibility_tutorial_dialog_title_two_finger_double, numFingers);
-        final String expectedInstruction = mContext.getString(
-                R.string.accessibility_tutorial_dialog_twofinger_doubletap_instruction, numFingers);
-
-        showShortcutsTutorialDialog(TWOFINGER_DOUBLETAP, FAKE_FEATURE_NAME, /* isInSetupWizard= */
-                false);
-
-        AlertDialog alertDialog = assertDialogShown();
-        verifyTutorialTitleAndInstruction(
-                alertDialog,
-                expectedTitle,
-                expectedInstruction);
     }
 
     @Test
