@@ -533,7 +533,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     @Override
     public void setTransform(Matrix transform) {
-        mTextureView.setTransform(transform);
+        getActivity().runOnUiThread(() -> mTextureView.setTransform(transform));
     }
 
     @Override
