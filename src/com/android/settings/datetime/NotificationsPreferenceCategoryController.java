@@ -49,12 +49,7 @@ public class NotificationsPreferenceCategoryController extends BasePreferenceCon
 
     @Override
     public int getAvailabilityStatus() {
-        // Firstly, hide the category if it is not enabled by flags.
-        if (!Flags.datetimeNotifications()) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
-
-        // Secondly, only show the category if there's one or more controllers available within it.
+        // Only show the category if there's one or more controllers available within it.
         for (AbstractPreferenceController childController : mChildControllers) {
             if (childController.isAvailable()) {
                 return AVAILABLE;
