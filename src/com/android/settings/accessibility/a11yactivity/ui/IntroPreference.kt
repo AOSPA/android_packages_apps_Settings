@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yactivity.ui
+package com.android.settings.accessibility.a11yactivity.ui
 
 import android.accessibilityservice.AccessibilityShortcutInfo
 import android.content.Context
 import android.text.TextUtils
+import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TopIntroPreference
-import com.android.settings.R
 
 /** Handles fetching and display the introduction text of an [AccessibilityShortcutInfo]. */
 class IntroPreference(private val shortcutInfo: AccessibilityShortcutInfo) :

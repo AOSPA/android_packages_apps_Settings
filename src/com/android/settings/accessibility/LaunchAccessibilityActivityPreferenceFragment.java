@@ -25,7 +25,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityScreen;
+import com.android.settings.accessibility.a11yactivity.ui.A11yActivityScreen;
 import com.android.settings.accessibility.extensions.ComponentNameBundleUtils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
