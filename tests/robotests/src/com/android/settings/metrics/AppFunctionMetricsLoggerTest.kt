@@ -92,6 +92,50 @@ class AppFunctionMetricsLoggerTest {
         assertThat(event.errorCode).isEqualTo(0)
     }
 
+    @Test
+    fun logAppFunctionError_withFunctionType_logsCorrectly() {
+        // Given
+        val functionType = DeviceStateAppFunctionType.GET_STORAGE
+        val callingPackage = "com.android.settings.test"
+        val errorCode = 1
+
+        // When
+        appFunctionMetricsLogger.logAppFunctionError(
+            callingPackage,
+            errorCode,
+            context,
+            functionType,
+        )
+
+        // Then
+        val writtenEvents = ShadowSettingsStatsLog.getWrittenEvents()
+        assertThat(writtenEvents).hasSize(1)
+        val event = writtenEvents[0]
+        assertThat(event.atomId).isEqualTo(SettingsStatsLog.SETTINGS_APP_FUNCTION_EVENT)
+        assertThat(event.functionId).isEqualTo(SettingsEnums.APP_FUNCTION_GET_STORAGE)
+        assertThat(event.latencyMillis).isEqualTo(0)
+        assertThat(event.errorCode).isEqualTo(errorCode)
+    }
+
+    @Test
+    fun logAppFunctionError_withoutFunctionType_logsUnknown() {
+        // Given
+        val callingPackage = "com.android.settings.test"
+        val errorCode = 1
+
+        // When
+        appFunctionMetricsLogger.logAppFunctionError(callingPackage, errorCode, context)
+
+        // Then
+        val writtenEvents = ShadowSettingsStatsLog.getWrittenEvents()
+        assertThat(writtenEvents).hasSize(1)
+        val event = writtenEvents[0]
+        assertThat(event.atomId).isEqualTo(SettingsStatsLog.SETTINGS_APP_FUNCTION_EVENT)
+        assertThat(event.functionId).isEqualTo(SettingsEnums.UNKNOWN_APP_FUNCTION)
+        assertThat(event.latencyMillis).isEqualTo(0)
+        assertThat(event.errorCode).isEqualTo(errorCode)
+    }
+
     @org.robolectric.annotation.Implements(SettingsStatsLog::class)
     class ShadowSettingsStatsLog {
 
