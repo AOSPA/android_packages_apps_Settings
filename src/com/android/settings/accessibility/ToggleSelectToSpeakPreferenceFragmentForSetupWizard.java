@@ -31,8 +31,8 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment;
-import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceShortcutPreference;
+import com.android.settings.accessibility.a11yservice.A11yServicePreferenceFragment;
+import com.android.settings.accessibility.a11yservice.ui.A11yServiceShortcutPreference;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;

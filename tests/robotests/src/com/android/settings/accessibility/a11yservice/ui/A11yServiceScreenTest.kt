@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yservice.ui
+package com.android.settings.accessibility.a11yservice.ui
 
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ComponentName
@@ -30,9 +30,8 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilitySettings
-import com.android.settings.accessibility.Flags
+import com.android.settings.accessibility.a11yservice.A11yServicePreferenceFragment
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
-import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment
 import com.android.settings.accessibility.extensions.putComponentName
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.testutils.AccessibilityTestUtils
@@ -40,6 +39,7 @@ import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
 import com.android.settingslib.RestrictedPreference
+import com.android.settingslib.catalyst.flags.Flags
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
@@ -72,7 +72,7 @@ class A11yServiceScreenTest {
         )
 
     private val preferenceScreenCreator: A11yServiceScreen by lazy {
-        if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters()) {
+        if (Flags.catalystUseKeyParameters()) {
             A11yServiceScreen(appContext, keyParameters)
         } else {
             A11yServiceScreen(appContext, arguments)
@@ -158,7 +158,7 @@ class A11yServiceScreenTest {
     @Test
     @DisableFlags(
         com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        com.android.settingslib.catalyst.flags.Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
     )
     fun parameters_hasTwoA11yServices_returnTwoItems_bundleArguments() {
         AccessibilityRepositoryProvider.resetInstanceForTesting()
@@ -191,7 +191,7 @@ class A11yServiceScreenTest {
     @Test
     @EnableFlags(
         com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        com.android.settingslib.catalyst.flags.Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
     )
     fun parameters_hasTwoA11yServices_returnTwoItems() {
         AccessibilityRepositoryProvider.resetInstanceForTesting()

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yservice.data
+package com.android.settings.accessibility.a11yservice.data
 
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
@@ -29,8 +29,8 @@ import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 
 /**
- * DataStore for [com.android.settings.accessibility.detail.a11yservice.ui.UseServicePreference] to
- * turn on/off the accessibility service.
+ * DataStore for [com.android.settings.accessibility.a11yservice.ui.UseServicePreference] to turn
+ * on/off the accessibility service.
  */
 class UseServiceDataStore(
     private val context: Context,

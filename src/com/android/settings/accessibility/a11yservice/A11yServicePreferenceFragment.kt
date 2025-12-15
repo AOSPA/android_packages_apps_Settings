@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yservice
+package com.android.settings.accessibility.a11yservice
 
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.BroadcastReceiver
@@ -29,13 +29,15 @@ import android.os.Looper
 import android.os.SystemClock
 import android.provider.Settings
 import androidx.annotation.VisibleForTesting
+import com.android.internal.R
 import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.AccessibilityStatsLogUtils
+import com.android.settings.accessibility.a11yservice.ui.A11yServiceScreen
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
-import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceScreen
 import com.android.settings.accessibility.extensions.getComponentName
 import com.android.settings.accessibility.extensions.isServiceEnabled
 import com.android.settings.dashboard.DashboardFragment
+import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
 import com.android.settingslib.metadata.ValidatedKeyParameters
@@ -91,7 +93,7 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
         // `ACCESSIBILITY_SHORTCUT_TARGET_SERVICE`.
         val defaultService =
             ComponentName.unflattenFromString(
-                getString(com.android.internal.R.string.config_defaultAccessibilityService)
+                getString(R.string.config_defaultAccessibilityService)
             )
 
         if (defaultService == null || name != defaultService) {
@@ -186,14 +188,14 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
     }
 
     override fun getPreferenceScreenBindingKey(context: Context): String? {
-        return A11yServiceScreen.KEY
+        return A11yServiceScreen.Companion.KEY
     }
 
     @Deprecated(
         "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use getPreferenceScreenBindingKeyParameters instead."
     )
     override fun getPreferenceScreenBindingArgs(context: Context): Bundle? {
-        return if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
+        return if (Flags.catalystUseStringBundle()) {
             Bundle(1).apply {
                 putString(
                     AccessibilitySettings.EXTRA_COMPONENT_NAME,
@@ -208,7 +210,7 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
     override fun getPreferenceScreenBindingKeyParameters(
         context: Context
     ): ValidatedKeyParameters? {
-        return A11yServiceScreen.parametersSchema.prepare(
+        return A11yServiceScreen.Companion.parametersSchema.prepare(
             AccessibilitySettings.EXTRA_COMPONENT_NAME to
                 getFeatureComponentName().flattenToString()
         )

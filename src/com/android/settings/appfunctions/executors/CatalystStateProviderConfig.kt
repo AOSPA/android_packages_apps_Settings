@@ -23,9 +23,9 @@ import com.android.settings.accessibility.ColorAndMotionScreen
 import com.android.settings.accessibility.VibrationIntensityScreen
 import com.android.settings.accessibility.VibrationScreen
 import com.android.settings.accessibility.a11yactivity.ui.A11yActivityScreen
+import com.android.settings.accessibility.a11yservice.ui.A11yServiceScreen
 import com.android.settings.accessibility.colorcorrection.ui.ColorCorrectionScreen
 import com.android.settings.accessibility.colorinversion.ui.ColorInversionScreen
-import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceScreen
 import com.android.settings.accessibility.extradim.ui.ExtraDimScreen
 import com.android.settings.accessibility.flashnotifications.ui.FlashNotificationsScreen
 import com.android.settings.accessibility.textreading.ui.TextReadingScreen

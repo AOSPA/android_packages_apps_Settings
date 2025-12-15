@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yservice.ui
+package com.android.settings.accessibility.a11yservice.ui
 
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
@@ -24,7 +24,7 @@ import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.ENABLE_WARNING_FROM_SHORTCUT
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE
 import com.android.settings.accessibility.ShortcutPreference
-import com.android.settings.accessibility.detail.a11yservice.data.ShortcutDataStore
+import com.android.settings.accessibility.a11yservice.data.ShortcutDataStore
 import com.android.settings.accessibility.extensions.getFeatureName
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.extensions.isServiceWarningRequired

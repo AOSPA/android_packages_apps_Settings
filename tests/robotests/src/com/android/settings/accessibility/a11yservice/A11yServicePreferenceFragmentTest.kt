@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yservice
+package com.android.settings.accessibility.a11yservice
 
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.app.settings.SettingsEnums

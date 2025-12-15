@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.detail.a11yservice.ui
+package com.android.settings.accessibility.a11yservice.ui
 
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
@@ -22,7 +22,7 @@ import android.os.Build
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.ENABLE_WARNING_FROM_TOGGLE
-import com.android.settings.accessibility.detail.a11yservice.data.UseServiceDataStore
+import com.android.settings.accessibility.a11yservice.data.UseServiceDataStore
 import com.android.settings.accessibility.extensions.getFeatureName
 import com.android.settings.accessibility.extensions.isServiceWarningRequired
 import com.android.settings.accessibility.extensions.targetSdkIsAtLeast
