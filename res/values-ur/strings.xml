@@ -1017,7 +1017,7 @@
     <string name="external_display_resolution_title" msgid="124681567143280861">"ریزولیوشن"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"کنکشن کا ڈیفالٹ برتاؤ"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"علیحدہ ڈسپلے کے بطور استعمال کریں"</string>
-    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"پہلے سے شامل ڈسپلے کو دو طرفہ مطابقت پذیر بنائیں"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"پہلے سے شامل ڈسپلے کو مرر کریں"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"کنکشن کا ڈائیلاگ دکھائیں"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"بیرونی ڈسپلے غیر منسلک ہے"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"گھمانا"</string>
@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"سرٹیفکیٹ درکار ہے۔"</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"‏مقام کی قطعیت کو بہتر بنانے اور دوسرے مقاصد کیلئے، <xliff:g id="APP_NAME">%1$s</xliff:g> Wi-Fi بند ہونے پر بھی نیٹ ورک اسکیننگ آن کرنا چاہتی ہے۔\n\nاسکین کرنے کی خواہاں سبھی ایپس کیلئے اس کی اجازت دیں؟"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"‏مقام کی درستگی کو بہتر بنانے اور دیگر مقاصد کے لیے، ایک نامعلوم ایپ Wi-Fi بند ہونے پر بھی نیٹ ورک اسکیننگ کو آن کرنا چاہتی ہے۔\n\nاسکین کرنے کی خواہاں سبھی ایپس کے لیے اس کی اجازت دیں؟"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"اجازت دیں"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"مسترد کریں"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"‫*درکار ہے"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"یہ ایک مشترکہ نیٹ ورک ہے۔ تبدیلیاں کرنے کے لیے آپ کو سائن ان کرنا ہوگا۔"</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"تبدیلیاں کرنے کے لیے نیٹ ورک کے مالک یا آلہ کے منتظم سے رابطہ کریں۔"</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"اس آلے پر موجود تمام صارفین اس نیٹ ورک تک رسائی حاصل کر سکتے ہیں۔"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"اس نیٹ ورک کو انٹرنیٹ تک رسائی نہیں ہے۔ منسلک رہیں؟"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"ہو سکتا ہے محدود کنیکٹوٹی کی وجہ سے کچھ ایپس اور سروسز کام نہ کریں۔ بہر حال استعمال کریں؟"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"اس نیٹ ورک کیلئے دوبارہ نہ پوچھیں"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"نیٹ ورک محفوظ کرنے میں ناکام ہوگیا"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"منسوخ کریں"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"نیٹ ورک بھول جائیں؟"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"‫<xliff:g id="NETWORK_NAME">%1$s</xliff:g> کو اس آلہ پر موجود تمام صارفین کے لیے ہٹا دیا جائے گا"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 نیٹ ورک}other{# نیٹ ورکس}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 سبسکرپشن}other{# سبسکرپشنز}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 نیٹ ورک اور سبسکرپشن}other{# نیٹ ورکس اور سبسکرپشنز}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"اعلی ریزولیوشن"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"زیادہ سے زیادہ ریزولیوشن"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"زیادہ سے زیادہ ریزولیوشن آپ کی زیادہ بیٹری کا استعمال کرتا ہے۔ آپ کی ریزولیوشن پر سوئچ کرنے سے کچھ ایپس ری سٹارٹ ہو سکتی ہیں۔"</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="HEIGHT">%2$s</xliff:g> x <xliff:g id="WIDTH">%1$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"‎<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"‫<xliff:g id="REFRESH_RATE">%1$s</xliff:g> ہرٹز"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"ٹائم زون میں تبدیلی کی اطلاع"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"جب آپ کا ٹائم زون خودکار طور پر اپ ڈیٹ ہوجائے تو اطلاع موصول کریں"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"اطلاع، وقت، زون، ٹائم زون"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"شیڈول کردہ گھڑی کی تبدیلی"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"آپ کی گھڑی کے شیڈول کردہ تبدیلی کرنے پر ایک اطلاع موصول کریں، مثال کے طور پر ڈے لائٹ سیونگ ٹائم کے لیے"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"‏‫DST، ڈے لائٹ سیونگ ٹائم، ڈے لائٹ سیونگز، گھڑی کی تبدیلی، شیڈول کردہ گھڑی کی تبدیلی"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"اگلی تبدیلی"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"کوئی شیڈول تبدیلی نہیں"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"قانونی معلومات، اسٹیٹس، سافٹ ویئر ورژن دیکھیں"</string>
     <string name="legal_information" msgid="7509900979811934843">"قانونی معلومات"</string>
     <string name="manual" msgid="3651593989906084868">"مینوئل"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"کلون کردہ"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> کلون تخلیق کیا جا رہا ہے"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> کولن تخلیق کیا گیا"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"زبانیں، اشارے، وقت"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"سسٹم کی زبانیں، ایپ کی زبانیں، علاقائی ترجیحات، اسپیچ"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"‏wifi، wi-fi، نیٹ ورک کنکشن، انٹرنیٹ، وائر لیس، ڈیٹا، wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"‏Wi‑Fi کی اطلاع، wifi کی اطلاع"</string>
@@ -4697,6 +4692,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"آپ کی سیکیورٹی کے لیے، اعلی تحفظ کے لیے اس ترتیب کو بند رکھنے کی ضرورت ہے"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"آپ کی سکیورٹی کے لیے، اعلی تحفظ اس ایکشن کو روک دیتا ہے"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"ترتیبات"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"آف کریں"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"آن کریں"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"دکھائیں"</string>
@@ -5180,10 +5183,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"‏تجرباتی: ANGLE کو فعال کریں"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"‏وارننگ: ANGLE کو ڈیفالٹ OpenGL ES ڈرائیور کے طور پر فعال کریں۔ یہ خصوصیت تجربہ میں ہے اور ہو سکتا ہے کہ کیمرا اور ویڈیو کی کچھ ایپس کے ساتھ موافق نہ ہو۔ سوئچ آن کرنے سے پہلے براہ کرم اپنے آلہ پر موجود ڈیٹا کا بیک اپ لیں"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"‏سسٹم OpenGL ES ڈرائیور تبدیل کرنے کے لیے ریبوٹ کی ضرورت ہے۔ براہ کرم ریبوٹ کرنے سے پہلے اپنے آلہ پر موجود ڈیٹا کا بیک اپ لیں۔ اگر ریبوٹ ناکام ہو جاتا ہے تو آپ کو آلہ کو بحال کرنے کے لیے فیکٹری ری سیٹ کی ضرورت ہے"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"ایپ کی موافقت میں تبدیلیاں"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"ایپ کی موافقت کی تبدیلیاں ٹوگل کریں"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"فعال کردہ ڈیفالٹ تبدیلیاں"</string>
@@ -6070,8 +6071,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"فُحش تلاش کے نتائج کو فلٹر کریں"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{‫# ایپ پر}other{‫# ایپس پر}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"<xliff:g id="COUNT">%d</xliff:g>+"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"مزید جانیں"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"ان ترتیبات کے آف ہونے پر، اکاؤنٹ کی دیگر ترتیبات اب بھی لاگو ہو سکتی ہیں۔"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"‏پیرنٹل کنٹرولز PIN درج کریں"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"‏پیرنٹل کنٹرولز PIN سیٹ کریں"</string>
@@ -6089,8 +6089,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"‏‫PIN حذف کریں اور کنٹرولز کو آف کریں"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"حذف کریں"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"‏مندرجہ ذیل آپ کے پیرنٹل کنٹرولز PIN کا استعمال کر رہے ہیں:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"‏آپ کے پیرنٹل کنٹرولز کا PIN کسی دوسرے صارف کے لیے فعال ہے"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"‫<xliff:g id="FEATURE">%1$s</xliff:g> اینیمیشن"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"کنٹرولز کو آن نہیں کیا جا سکتا"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"کنٹرولز کا استعمال نہیں کیا جا سکتا"</string>

@@ -210,7 +210,7 @@
     <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"Totes les regions"</string>
     <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"Tots els sistemes de numeració"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma del sistema"</string>
-    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Valor predeterminat del sistema"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Predeterminat del sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selecció d\'idioma per a aquesta aplicació no està disponible des de Configuració."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"És possible que l\'idioma no coincideixi amb els que hi ha disponibles a l\'aplicació. Algunes aplicacions no admeten aquesta opció de configuració."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Tria l\'idioma per a cada aplicació."</string>
@@ -702,7 +702,7 @@
     <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 min després del temps d\'espera de la pantalla"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Només després de reiniciar el dispositiu"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Amaga l\'espai privat"</string>
-    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Amaga l\'espai privat quan està bloquejat"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Amaga l\'espai privat quan es bloquegi."</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Per evitar que altres persones sàpiguen que tens un espai privat al dispositiu, pots amagar-lo de la llista d\'aplicacions"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Accedeix a l\'espai privat quan està amagat"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"A la barra de cerca, escriu \"espai privat\""</string>
@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Es necessita un certificat."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Per millorar la precisió de la ubicació i per a altres finalitats, <xliff:g id="APP_NAME">%1$s</xliff:g> vol activar la cerca de xarxes tot i que la connexió Wi-Fi estigui desactivada.\n\nVols permetre-ho per a totes les aplicacions que vulguin cercar xarxes?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Per millorar la precisió de la ubicació i per a altres finalitats, una aplicació desconeguda vol activar la cerca de xarxes tot i que la Wi‑Fi està desactivada.\n\nVols permetre-ho per a totes les aplicacions?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Permet"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Denega"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* obligatori"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Aquesta és una xarxa compartida. Has d\'iniciar la sessió per fer canvis."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Contacta amb el propietari de la xarxa o amb l\'administrador del dispositiu per fer canvis."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Els altres usuaris d\'aquest dispositiu poden accedir a aquesta xarxa."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Aquesta xarxa no té accés a Internet. Vols mantenir-hi la connexió?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Alguns serveis i aplicacions poden no funcionar amb una connectivitat limitada. Utilitzar igualment?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"No ho tornis a preguntar en aquesta xarxa"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"No s\'ha pogut desar la xarxa"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Cancel·la"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Vols que s\'oblidi la xarxa?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> se suprimirà per a tots els usuaris d\'aquest dispositiu"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 xarxa}other{# xarxes}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 subscripció}other{# subscripcions}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 xarxa i subscripció}other{# xarxes i subscripcions}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolució"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Resolució màxima"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"La resolució màxima consumeix més bateria. Si canvies la resolució, és possible que algunes aplicacions es reiniciïn."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> per <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> hertz"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Canvi de zona horària"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Rep una notificació quan la teva zona horària s\'actualitzi automàticament"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notificació, hora, zona, zona horària"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Canvi d\'hora programat"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Rep una notificació quan el rellotge faci un canvi programat, per exemple, per l\'horari d\'estiu"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"dst, horari d\'estiu, canvi d\'hora, canvi d\'hora programat"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Canvi següent"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"No hi ha cap canvi programat"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Mostra informació legal, estat, versió de programari"</string>
     <string name="legal_information" msgid="7509900979811934843">"Informació legal"</string>
     <string name="manual" msgid="3651593989906084868">"Manual"</string>
@@ -3691,8 +3687,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"S\'ha clonat"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"S\'està clonant <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"S\'ha clonat <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Idiomes, gestos, hora"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Idiomes del sistema, idiomes de les aplicacions, preferències regionals, parla"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wi-fi, Wi-Fi, connexió de xarxa, Internet, sense fil, dades, wifi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"notificació Wi‑Fi, notificació wifi"</string>
@@ -4699,6 +4694,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Per a la teva seguretat, la Protecció avançada requereix que aquesta opció de configuració es mantingui desactivada"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Per a la teva seguretat, la Protecció avançada impedeix aquesta acció"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Configuració"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Desactiva"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Activa"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Mostra"</string>
@@ -5182,10 +5185,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Experimental: activa ANGLE"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Advertiment: activa ANGLE com a controlador OpenGL ES predeterminat. Aquesta funció està en fase d\'experimentació i és possible que no sigui compatible amb algunes aplicacions de càmera i vídeo. Crea una còpia de seguretat de les dades del dispositiu abans d\'activar l\'interruptor."</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"Cal reiniciar per canviar el controlador OpenGL ES del sistema. Crea una còpia de seguretat de les dades del dispositiu abans de reiniciar-lo. Si el reinici ha fallat, has de restablir les dades de fàbrica per restaurar el dispositiu."</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Canvis en la compatibilitat de les aplicacions"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Commuta els canvis en la compatibilitat de les aplicacions"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Canvis activats de manera predeterminada"</string>
@@ -5571,7 +5572,7 @@
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina quina aplicació gestiona la drecera de l\'informe d\'errors al dispositiu."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Treball"</string>
-    <string name="system_default_app_subtext" msgid="5212055189703164839">"Opció predeterminada del sistema"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"Predeterminat del sistema"</string>
     <string name="default_app_none" msgid="5420632042222036264">"Cap"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Aquesta opció ja no és vàlida. Torna-ho a provar."</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"Mantén premut el botó d\'engegada"</string>
@@ -6072,8 +6073,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtra els resultats de cerca explícits"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{En # aplicació}other{En # aplicacions}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"Més informació"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Quan aquestes opcions de configuració estan desactivades, és possible que s\'apliquin altres opcions de configuració del compte."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Introdueix el PIN dels controls parentals"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Defineix un PIN per als controls parentals"</string>
@@ -6091,8 +6091,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Suprimeix el PIN i desactiva els controls"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Suprimeix"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"El teu PIN dels controls parentals l\'utilitzen:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"El PIN dels controls parentals està actiu per a un altre usuari"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animació de <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"No es poden activar els controls"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"No es poden utilitzar els controls"</string>
