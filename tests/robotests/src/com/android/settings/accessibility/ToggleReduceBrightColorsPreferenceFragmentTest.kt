@@ -18,9 +18,6 @@ package com.android.settings.accessibility
 import android.app.settings.SettingsEnums
 import android.content.ComponentName
 import android.hardware.display.ColorDisplayManager
-import android.platform.test.annotations.RequiresFlagsDisabled
-import android.platform.test.annotations.RequiresFlagsEnabled
-import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.provider.Settings
 import android.text.Html
 import android.widget.TextView
@@ -33,7 +30,6 @@ import androidx.preference.TwoStatePreference
 import com.android.internal.accessibility.AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_COMPONENT_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.extradim.ui.ExtraDimScreen
-import com.android.settings.testutils.XmlTestUtils
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.datastore.SettingsSecureStore
@@ -43,7 +39,6 @@ import com.android.settingslib.widget.SliderPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -56,8 +51,6 @@ import org.robolectric.shadows.ShadowLooper
 @RunWith(RobolectricTestRunner::class)
 class ToggleReduceBrightColorsPreferenceFragmentTest :
     BaseShortcutInteractionsTestCases<ToggleReduceBrightColorsPreferenceFragment>() {
-
-    @get:Rule val checkFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
     private val shadowColorDisplayManager: ShadowColorDisplayManager =
         Shadow.extract(context.getSystemService(ColorDisplayManager::class.java))
     private var fragScenario: FragmentScenario<ToggleReduceBrightColorsPreferenceFragment>? = null
@@ -86,7 +79,6 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
             .isEqualTo(context.getString(R.string.reduce_bright_colors_preference_intro_text))
     }
 
-    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_EXTRA_DIM)
     @Test
     fun onResume_verifyIllustration() {
         launchFragment()
@@ -97,19 +89,6 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
 
         assertThat(illustrationPref!!.isVisible).isTrue()
         assertThat(illustrationPref.lottieAnimationResId).isEqualTo(R.raw.extra_dim_banner)
-    }
-
-    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_EXTRA_DIM)
-    @Test
-    fun onResume_flagOff_verifyIllustration() {
-        launchFragment()
-
-        val illustrationPref: IllustrationPreference? =
-            fragment!!.findPreference(ILLUSTRATION_PREF_KEY)
-        assertThat(illustrationPref).isNotNull()
-
-        assertThat(illustrationPref!!.isVisible).isTrue()
-        assertThat(illustrationPref.imageUri).isEqualTo(IMAGE_URI)
     }
 
     @Test
@@ -325,15 +304,6 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
     }
 
     @Test
-    fun getFeatureName() {
-        launchFragment()
-
-        val featureName = fragment!!.getFeatureName().toString()
-        assertThat(featureName)
-            .isEqualTo(context.getString(R.string.reduce_bright_colors_preference_title).toString())
-    }
-
-    @Test
     fun getMetricsCategory() {
         val category = ToggleReduceBrightColorsPreferenceFragment().getMetricsCategory()
         assertThat(category).isEqualTo(SettingsEnums.REDUCE_BRIGHT_COLORS_SETTINGS)
@@ -342,61 +312,7 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
     @Test
     fun getPreferenceScreenResId() {
         assertThat(ToggleReduceBrightColorsPreferenceFragment().getPreferenceScreenResId())
-            .isEqualTo(R.xml.accessibility_extra_dim_settings)
-    }
-
-    @RequiresFlagsDisabled(
-        Flags.FLAG_CATALYST_EXTRA_DIM,
-        com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH,
-    )
-    @Test
-    fun getNonIndexableKeys_reduceBrightColorUnavailable_allElementsInXmlIsNonSearchable() {
-        setReduceBrightColorsAvailable(false)
-        val expectedKeys =
-            XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.accessibility_extra_dim_settings)
-
-        val actualKeys =
-            ToggleReduceBrightColorsPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context)
-                .filterNotNull()
-
-        assertThat(actualKeys).containsExactlyElementsIn(expectedKeys)
-    }
-
-    @RequiresFlagsDisabled(
-        Flags.FLAG_CATALYST_EXTRA_DIM,
-        com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH,
-    )
-    @Test
-    fun getNonIndexableKey_reduceBrightColorAvailable_containsOnlyNonSearchablePrefKeys() {
-        shadowColorDisplayManager.setReduceBrightColorsActivated(true)
-        val expectedKeys =
-            listOf(
-                TOP_INTRO_PREF_KEY,
-                ILLUSTRATION_PREF_KEY,
-                PERSISTS_AFTER_RESTORE_PERF_KEY,
-                FOOTER_PREF,
-            )
-
-        val actualKeys =
-            ToggleReduceBrightColorsPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context)
-                .filterNotNull()
-
-        assertThat(actualKeys).containsExactlyElementsIn(expectedKeys)
-    }
-
-    @RequiresFlagsEnabled(
-        Flags.FLAG_CATALYST_EXTRA_DIM,
-        com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH,
-    )
-    @Test
-    fun getXmlResourceToIndex_catalystSearch() {
-        val indexableResources =
-            ToggleReduceBrightColorsPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getXmlResourcesToIndex(context, true)
-
-        assertThat(indexableResources).isNull()
+            .isEqualTo(0)
     }
 
     @Test
