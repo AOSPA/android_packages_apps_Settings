@@ -112,11 +112,3 @@ class ColorInversionMainSwitchPreferenceController(context: Context, prefKey: St
     override fun getComponentName(): ComponentName =
         AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME
 }
-
-class DaltonizerMainSwitchPreferenceController(context: Context, prefKey: String) :
-    SimpleSettingSwitchPreferenceController(context, prefKey) {
-    override fun getSettingKey(): String = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED
-
-    override fun getComponentName(): ComponentName =
-        AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME
-}
