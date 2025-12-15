@@ -35,6 +35,7 @@ import com.android.settings.R
 open class SatelliteTileService : TileService() {
 
     private lateinit var telephonyManager: TelephonyManager
+    @VisibleForTesting internal var satelliteTilePromptUtils = SatelliteTilePromptUtils()
 
     @VisibleForTesting internal var isCarrierRoamingNtnEligible = false
     @VisibleForTesting internal var isCarrierRoamingNtnModeActive = false
@@ -77,6 +78,17 @@ open class SatelliteTileService : TileService() {
     override fun onStartListening() {
         super.onStartListening()
         updateTile()
+    }
+
+    override fun onTileAdded() {
+        super.onTileAdded()
+        // Mark as shown so we don't prompt user to add the tile.
+        satelliteTilePromptUtils.setAddTilePromptShown(this, true)
+    }
+
+    override fun onTileRemoved() {
+        super.onTileRemoved()
+        satelliteTilePromptUtils.setAddTilePromptShown(this, false)
     }
 
     override fun onClick() {
