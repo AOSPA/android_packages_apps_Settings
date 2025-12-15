@@ -18,6 +18,7 @@ package com.android.settings.input.gamecontroller
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.hardware.input.InputDeviceIdentifier
 import android.hardware.input.InputManager
 import android.os.Bundle
 import android.platform.test.annotations.EnableFlags
@@ -25,97 +26,54 @@ import android.platform.test.flag.junit.SetFlagsRule
 import android.view.InputDevice
 import android.view.KeyEvent
 import android.view.MotionEvent
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentFactory
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.CreationExtras
+import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.testutils.InstantTaskExecutorRule
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
+import com.android.settings.testutils.shadow.ShadowInputManager
+import com.android.settingslib.widget.ButtonPreference
 import com.google.common.truth.Truth.assertThat
-import kotlin.reflect.KClass
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
-import org.mockito.kotlin.any
-import org.mockito.kotlin.eq
-import org.mockito.kotlin.spy
-import org.mockito.kotlin.verify
-import org.mockito.kotlin.whenever
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowLooper
 
 /** Tests for [GameControllerFragment]. */
 @RunWith(AndroidJUnit4::class)
 @EnableFlags(com.android.hardware.input.Flags.FLAG_CONTROLLER_REMAPPING)
 @SuppressLint("MissingPermission")
+@Config(shadows = [ShadowInputManager::class, ShadowAlertDialogCompat::class])
 class GameControllerFragmentTest {
-
-    @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Mock private lateinit var inputManager: InputManager
+    private val context: Application = ApplicationProvider.getApplicationContext()
+    private val inputManager: InputManager = context.getSystemService(InputManager::class.java)
+    private val shadowInputManager: ShadowInputManager =
+        shadowOf(inputManager) as ShadowInputManager
 
-    private lateinit var application: Application
-
-    @Before
-    fun setUp() {
-        application = spy(ApplicationProvider.getApplicationContext<Application>())
-        whenever(application.getSystemService(InputManager::class.java)).thenReturn(inputManager)
-        whenever(inputManager.getControllerButtonRemappings(any())).thenReturn(mapOf())
-        whenever(inputManager.getControllerAxisRemappings(any())).thenReturn(mapOf())
-    }
-
-    private fun launchFragment(viewModel: GameControllerViewModel) =
+    private fun launchFragment(identifier: InputDeviceIdentifier) =
         launchFragmentInContainer<GameControllerFragment>(
             fragmentArgs =
                 Bundle().apply {
-                    putParcelable(
-                        GameControllerUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
-                        viewModel.controllerDevice.inputDeviceIdentifier,
-                    )
+                    putParcelable(GameControllerUtils.EXTRA_INPUT_DEVICE_IDENTIFIER, identifier)
                 },
             themeResId = R.style.Theme_Settings,
-            factory =
-                object : FragmentFactory() {
-                    override fun instantiate(
-                        classLoader: ClassLoader,
-                        className: String,
-                    ): Fragment {
-                        if (className == GameControllerFragment::class.java.name) {
-                            val testViewModelFactory =
-                                object : ViewModelProvider.Factory {
-                                    @Suppress("UNCHECKED_CAST")
-                                    override fun <T : ViewModel> create(
-                                        modelClass: KClass<T>,
-                                        extras: CreationExtras,
-                                    ): T {
-                                        return viewModel as T
-                                    }
-                                }
-                            // Use the test-only constructor to inject the factory
-                            return GameControllerFragment(testViewModelFactory)
-                        }
-                        return super.instantiate(classLoader, className)
-                    }
-                },
         )
 
     @Test
     fun onLaunch_titleIsSet() {
         val device = createFakeController(1, "Test Controller")
-        whenever(inputManager.getInputDevice(1)).thenReturn(device)
-        whenever(inputManager.getInputDeviceByDescriptor(device.descriptor)).thenReturn(device)
-        val scenario = launchFragment(GameControllerViewModel(application, device.identifier))
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
 
         scenario.onFragment { fragment ->
             assertThat(fragment.requireActivity().title).isEqualTo("Test Controller")
@@ -125,17 +83,12 @@ class GameControllerFragmentTest {
     @Test
     fun onDeviceDisconnected_activityFinishes() {
         val device = createFakeController(1, "Test Controller")
-        whenever(inputManager.getInputDevice(1)).thenReturn(device)
-        whenever(inputManager.getInputDeviceByDescriptor(device.descriptor)).thenReturn(device)
-        val viewModel = GameControllerViewModel(application, device.identifier)
-        val scenario = launchFragment(viewModel)
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
 
         scenario.onFragment { fragment ->
             assertThat(fragment.requireActivity().isFinishing).isFalse()
-            viewModel.onInputDeviceRemoved(device.id)
-        }
-
-        scenario.onFragment { fragment ->
+            shadowInputManager.removeInputDevice(device.id)
             assertThat(fragment.requireActivity().isFinishing).isTrue()
         }
     }
@@ -143,10 +96,8 @@ class GameControllerFragmentTest {
     @Test
     fun onFragmentResult_applyRemappingIsCalledForButton() {
         val device = createFakeController(1, "Remapping Controller")
-        whenever(inputManager.getInputDevice(1)).thenReturn(device)
-        whenever(inputManager.getInputDeviceByDescriptor(device.descriptor)).thenReturn(device)
-        val viewModel = GameControllerViewModel(application, device.identifier)
-        val scenario = launchFragment(viewModel)
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
 
         scenario.onFragment { fragment ->
             val result =
@@ -166,22 +117,16 @@ class GameControllerFragmentTest {
             )
         }
 
-        // Verify that the remapping was applied via the InputManager mock
-        verify(inputManager)
-            .remapControllerButton(
-                eq(device.identifier),
-                eq(KeyEvent.KEYCODE_BUTTON_A),
-                eq(KeyEvent.KEYCODE_BUTTON_B),
-            )
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_A, KeyEvent.KEYCODE_BUTTON_B)
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier)).isEmpty()
     }
 
     @Test
     fun onFragmentResult_applyRemappingIsCalledForAxis() {
         val device = createFakeController(1, "Axis Remapping Controller")
-        whenever(inputManager.getInputDevice(1)).thenReturn(device)
-        whenever(inputManager.getInputDeviceByDescriptor(device.descriptor)).thenReturn(device)
-        val viewModel = GameControllerViewModel(application, device.identifier)
-        val scenario = launchFragment(viewModel)
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
         scenario.onFragment { fragment ->
             val result =
                 Bundle().apply {
@@ -200,32 +145,24 @@ class GameControllerFragmentTest {
             )
         }
 
-        verify(inputManager)
-            .remapControllerAxis(
-                eq(device.identifier),
-                eq(MotionEvent.AXIS_X),
-                eq(MotionEvent.AXIS_Z),
-            )
-        verify(inputManager)
-            .remapControllerAxis(
-                eq(device.identifier),
-                eq(MotionEvent.AXIS_Y),
-                eq(MotionEvent.AXIS_RZ),
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier)).isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier))
+            .containsExactly(
+                MotionEvent.AXIS_X,
+                MotionEvent.AXIS_Z,
+                MotionEvent.AXIS_Y,
+                MotionEvent.AXIS_RZ,
             )
     }
 
     @Test
     fun onRequestRemappingDialog_showsRemappingDialogFragment() {
         val device = createFakeController(1, "Test Controller")
-        whenever(inputManager.getInputDevice(1)).thenReturn(device)
-        whenever(inputManager.getInputDeviceByDescriptor(device.descriptor)).thenReturn(device)
-
-        val viewModel = GameControllerViewModel(application, device.identifier)
-        val scenario = launchFragment(viewModel)
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
 
         scenario.onFragment { fragment ->
-            viewModel.requestRemappingDialog("controller_button_a", "controller_button_b")
-
+            fragment.findPreference<Preference>("controller_button_a")!!.performClick()
             ShadowLooper.idleMainLooper()
 
             val dialogFragment =
@@ -235,6 +172,120 @@ class GameControllerFragmentTest {
             assertThat(dialogFragment).isNotNull()
             assertThat(dialogFragment)
                 .isInstanceOf(GameControllerRemappingDialogFragment::class.java)
+        }
+    }
+
+    @Test
+    fun resetToDefault_showsDialog_positiveButton_clearsMappings() {
+        val device = createFakeController(1, "Test Controller")
+        shadowInputManager.addInputDevice(device)
+        inputManager.remapControllerButton(
+            device.identifier,
+            KeyEvent.KEYCODE_BUTTON_B,
+            KeyEvent.KEYCODE_BUTTON_X,
+        )
+        inputManager.remapControllerButton(
+            device.identifier,
+            KeyEvent.KEYCODE_BUTTON_L1,
+            KeyEvent.KEYCODE_BUTTON_R2,
+        )
+        inputManager.remapControllerAxis(device.identifier, MotionEvent.AXIS_Y, MotionEvent.AXIS_RZ)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            fragment
+                .findPreference<ButtonPreference>(
+                    GameControllerFragment.RESET_BUTTON_PREFERENCE_KEY
+                )!!
+                .performClick()
+
+            ShadowLooper.idleMainLooper()
+            val dialog = ShadowAlertDialogCompat.getLatestAlertDialog()
+            assertThat(dialog).isNotNull()
+            val shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog)
+            assertThat(shadowDialog.title)
+                .isEqualTo(context.getString(R.string.game_controller_remapping_reset_dialog_title))
+            assertThat(shadowDialog.message)
+                .isEqualTo(
+                    context.getString(R.string.game_controller_remapping_reset_dialog_message)
+                )
+
+            dialog!!.getButton(AlertDialog.BUTTON_POSITIVE).performClick()
+
+            ShadowLooper.idleMainLooper()
+            assertThat(inputManager.getControllerButtonRemappings(device.identifier)).isEmpty()
+            assertThat(inputManager.getControllerAxisRemappings(device.identifier)).isEmpty()
+            // Check that the mappings have been reset in the UI: the button (title) and the
+            // corresponding action (summary) is the same for each preference.
+            for ((key, nameResId) in GameControllerUtils.preferenceKeyToNameMap) {
+                val preference = fragment.findPreference<Preference>(key)!!
+                assertThat(preference.title).isEqualTo(context.getString(nameResId))
+                assertThat(preference.summary).isEqualTo(context.getString(nameResId))
+            }
+        }
+    }
+
+    @Test
+    fun resetToDefault_showsDialog_negativeButton_doesNotClearMappings() {
+        val device = createFakeController(1, "Test Controller")
+        shadowInputManager.addInputDevice(device)
+        inputManager.remapControllerButton(
+            device.identifier,
+            KeyEvent.KEYCODE_BUTTON_B,
+            KeyEvent.KEYCODE_BUTTON_X,
+        )
+        inputManager.remapControllerButton(
+            device.identifier,
+            KeyEvent.KEYCODE_BUTTON_L1,
+            KeyEvent.KEYCODE_BUTTON_R2,
+        )
+        inputManager.remapControllerAxis(device.identifier, MotionEvent.AXIS_Y, MotionEvent.AXIS_RZ)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            fragment
+                .findPreference<ButtonPreference>(
+                    GameControllerFragment.RESET_BUTTON_PREFERENCE_KEY
+                )!!
+                .performClick()
+
+            ShadowLooper.idleMainLooper()
+            val dialog = ShadowAlertDialogCompat.getLatestAlertDialog()
+            assertThat(dialog).isNotNull()
+            val shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog)
+            assertThat(shadowDialog.title)
+                .isEqualTo(context.getString(R.string.game_controller_remapping_reset_dialog_title))
+            assertThat(shadowDialog.message)
+                .isEqualTo(
+                    context.getString(R.string.game_controller_remapping_reset_dialog_message)
+                )
+
+            dialog!!.getButton(AlertDialog.BUTTON_NEGATIVE).performClick()
+
+            ShadowLooper.idleMainLooper()
+            assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+                .containsExactly(
+                    KeyEvent.KEYCODE_BUTTON_B,
+                    KeyEvent.KEYCODE_BUTTON_X,
+                    KeyEvent.KEYCODE_BUTTON_L1,
+                    KeyEvent.KEYCODE_BUTTON_R2,
+                )
+            assertThat(inputManager.getControllerAxisRemappings(device.identifier))
+                .containsExactly(MotionEvent.AXIS_Y, MotionEvent.AXIS_RZ)
+            for ((key, nameResId) in GameControllerUtils.preferenceKeyToNameMap) {
+                val preference = fragment.findPreference<Preference>(key)!!
+                assertThat(preference.title).isEqualTo(context.getString(nameResId))
+            }
+            // Check that the mappings in the UI remained unchanged.
+            val buttonBPreference = fragment.findPreference<Preference>("controller_button_b")!!
+            assertThat(buttonBPreference.summary)
+                .isEqualTo(context.getString(R.string.game_controller_button_x))
+            val buttonL1Preference = fragment.findPreference<Preference>("controller_button_l1")!!
+            assertThat(buttonL1Preference.summary)
+                .isEqualTo(context.getString(R.string.game_controller_button_r2))
+            val axisYPreference = fragment.findPreference<Preference>("controller_stick_right")!!
+            assertThat(axisYPreference.summary)
+                .isEqualTo(context.getString(R.string.game_controller_stick_right))
         }
     }
 
