@@ -887,6 +887,12 @@ public class ChooseLockGeneric extends SettingsActivity {
                             .setForBiometrics(mForBiometrics)
                             .setUserId(mUserId)
                             .setRequestGatekeeperPasswordHandle(mRequestGatekeeperPasswordHandle);
+            if (android.app.supervision.flags.Flags.enableSupervisionSettingsUiUpdates()) {
+                builder.setForSupervisionReset(
+                        getIntent().getBooleanExtra(
+                                ChooseLockPassword.EXTRA_KEY_FOR_SUPERVISION_RESET,
+                                false));
+            }
             if (mUserPassword != null) {
                 builder.setPassword(mUserPassword);
             }
