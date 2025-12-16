@@ -17,11 +17,13 @@
 package com.android.settings.safetycenter.ui
 
 import android.annotation.SuppressLint
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.permission.flags.Flags
 import android.safetycenter.SafetyCenterEntry
 import android.safetycenter.SafetyCenterIssue
+import android.text.TextUtils
 import android.util.Log
 import android.view.ContextThemeWrapper
 import androidx.annotation.StringRes
@@ -31,7 +33,10 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
+import com.android.settings.core.SubSettingLauncher
 import com.android.settings.safetycenter.SafetyCenterSeverityConverter.toEntrySeverityLevel
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.INVALID_SESSION_ID
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.createSessionArgs
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
 import com.android.settingslib.safetycenter.SafetyCenterUiData
 import kotlin.math.max
@@ -49,6 +54,7 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
     BasePreferenceController(context, preferenceKey) {
 
     private var preference: Preference? = null
+    var sessionId = INVALID_SESSION_ID
     var relatedSafetySources: List<String> = emptyList()
     var relatedIssueOnlySafetySources: List<String> = emptyList()
     var viewModel: LiveSafetyCenterViewModel? = null
@@ -79,6 +85,20 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
 
     override fun getAvailabilityStatus(): Int {
         return AVAILABLE
+    }
+
+    override fun handlePreferenceTreeClick(preference: Preference): Boolean {
+        if (!TextUtils.equals(preference.key, preferenceKey)) {
+            return super.handlePreferenceTreeClick(preference)
+        }
+
+        SubSettingLauncher(mContext)
+            .setDestination(preference.fragment)
+            .setArguments(createSessionArgs(sessionId))
+            .setSourceMetricsCategory(SettingsEnums.SAFETY_CENTER)
+            .launch()
+
+        return true
     }
 
     override fun displayPreference(screen: PreferenceScreen) {

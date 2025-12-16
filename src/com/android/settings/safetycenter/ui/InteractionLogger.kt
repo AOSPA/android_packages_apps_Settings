@@ -47,7 +47,7 @@ import java.security.MessageDigest
  */
 class InteractionLogger
 private constructor(private val context: Context, private val noLogSourceIds: Set<String?>) {
-    var sessionId: Long = INVALID_SESSION_ID
+    var sessionId: Long = SafetyCenterSessionUtils.INVALID_SESSION_ID
         set(value) {
             if (field != value) {
                 field = value
@@ -146,7 +146,6 @@ private constructor(private val context: Context, private val noLogSourceIds: Se
     }
 
     private companion object {
-        const val INVALID_SESSION_ID = 0L
         const val SENSOR_UNKNOWN = 0
 
         /**

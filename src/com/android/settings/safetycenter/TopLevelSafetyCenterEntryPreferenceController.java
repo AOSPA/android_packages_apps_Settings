@@ -27,9 +27,9 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.safetycenter.SafetyCenterUtils;
-import com.android.settings.safetycenter.ui.SafetyCenterFragment;
 import com.android.settings.flags.Flags;
+import com.android.settings.safetycenter.ui.SafetyCenterFragment;
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils;
 
 
 /** Controller for the SafetyCenter entry in top level Settings. */
@@ -57,8 +57,10 @@ public class TopLevelSafetyCenterEntryPreferenceController extends BasePreferenc
         try {
             if (Flags.enableSafetyCenterNewUi()) {
                 Log.d(TAG, "Launching SafetyCenter in Settings");
+                long sessionId = SafetyCenterSessionUtils.INSTANCE.generateValidSessionId();
                 new SubSettingLauncher(mContext)
                     .setDestination(SafetyCenterFragment.class.getName())
+                    .setArguments(SafetyCenterSessionUtils.INSTANCE.createSessionArgs(sessionId))
                     .setSourceMetricsCategory(SettingsEnums.SETTINGS_HOMEPAGE)
                     .launch();
             } else {

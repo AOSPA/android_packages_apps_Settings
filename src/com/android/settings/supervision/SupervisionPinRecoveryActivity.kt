@@ -169,8 +169,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
 
     private fun showApprovalMethodChooser(approvalMethods: List<ResolveInfo>) {
         registerApprovalMethodChooserResultListener()
-        val chooserFragment =
-            ApprovalMethodChooserDialogFragment.newInstance(approvalMethods, Bundle())
+        val chooserFragment = ApprovalMethodChooserDialogFragment.newInstance(approvalMethods)
         chooserFragment.show(supportFragmentManager, "ApprovalMethodChooser")
     }
 

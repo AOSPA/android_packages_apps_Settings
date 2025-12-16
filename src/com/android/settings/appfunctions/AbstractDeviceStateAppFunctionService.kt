@@ -23,6 +23,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.CancellationSignal
 import android.os.OutcomeReceiver
+import android.os.SystemClock
 import android.os.Trace
 import android.util.Log
 import androidx.annotation.Keep
@@ -38,6 +39,7 @@ import com.android.settings.appfunctions.executors.CatalystStateMetadataProvider
 import com.android.settings.appfunctions.executors.CatalystStateProviderExecutor
 import com.android.settings.appfunctions.executors.CatalystStateSetterExecutor
 import com.android.settings.appfunctions.executors.DeviceStateExecutor
+import com.android.settings.metrics.AppFunctionMetricsLogger
 import com.android.settings.utils.getLocale
 import java.util.Locale
 import kotlinx.coroutines.runBlocking
@@ -50,6 +52,8 @@ import kotlinx.coroutines.runBlocking
  */
 @Keep
 abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
+    open val metricsLogger = AppFunctionMetricsLogger()
+
     protected lateinit var englishContext: Context
         private set
 
@@ -151,6 +155,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                     )
                 )
             }
+            val startMs = SystemClock.elapsedRealtime()
             val responseData =
                 aggregators[appFunctionType]!!.aggregate(
                     appFunctionType,
@@ -159,8 +164,17 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                 )
             val response = buildResponse(responseData)
             callback.onResult(response)
+
+            val executeDurationMs = SystemClock.elapsedRealtime() - startMs
             Log.d(TAG, "app function ${request.functionIdentifier} fulfilled.")
             Trace.endSection()
+
+            metricsLogger.logAppFunction(
+                appFunctionType,
+                callingPackage,
+                executeDurationMs,
+                applicationContext,
+            )
         }
     }
 

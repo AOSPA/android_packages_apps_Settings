@@ -22,6 +22,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 import static com.android.settings.network.MobileIconGroupExtKt.getSummaryForSub;
 import static com.android.settings.network.MobileIconGroupExtKt.maybeToHtml;
 import static com.android.settings.network.telephony.MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
+import static com.android.settingslib.flags.Flags.newStatusBarIcons;
 import static com.android.settingslib.mobile.MobileMappings.getIconKey;
 import static com.android.settingslib.mobile.MobileMappings.mapIconSets;
 
@@ -277,7 +278,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mUpdateListener.onChildrenUpdated();
     }
 
-    /**@return {@code true} if subId is the default data sub. **/
+    /** @return {@code true} if subId is the default data sub. **/
     private boolean isDds(int subId) {
         SubscriptionInfo info = mSubscriptionManager.getDefaultDataSubscriptionInfo();
         return info != null && info.getSubscriptionId() == subId;
@@ -338,8 +339,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             numLevels += 1;
         }
 
-        Drawable icon = mContext.getDrawable(R.drawable.ic_signal_strength_zero_bar_no_internet);
-
         final ServiceState serviceState = tmForSubId.getServiceState();
         final NetworkRegistrationInfo regInfo = (serviceState == null)
                 ? null
@@ -356,10 +355,13 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         final boolean isDataEnabled = tmForSubId.isDataEnabled()
                 // non-Dds but auto data switch feature is enabled
                 || (!isDds(subId) && tmForSubId.isMobileDataPolicyEnabled(
-                        TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH));
+                TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH));
+        Drawable icon;
         if (isDataInService || isVoiceInService || isCarrierNetworkActive) {
             icon = mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels, !isDataEnabled,
                     mCarrierNetworkChangeMode);
+        } else {
+            icon = mSubsPrefCtrlInjector.getNoInternetIcon(mContext, numLevels);
         }
 
         final boolean isActiveCellularNetwork =
@@ -612,6 +614,17 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 boolean carrierNetworkChanged) {
             return MobileNetworkUtils.getSignalStrengthIcon(context, level, numLevels,
                     NO_CELL_DATA_TYPE_ICON, cutOut, carrierNetworkChanged);
+        }
+
+        /**
+         * Gets signal icon with different signal level.
+         */
+        public Drawable getNoInternetIcon(Context context, int numLevels) {
+            if (newStatusBarIcons()) {
+                return getIcon(context, 0 /* level */, numLevels, true /* cutOut */,
+                        false /* carrierNetworkChanged */);
+            }
+            return context.getDrawable(R.drawable.ic_signal_strength_zero_bar_no_internet);
         }
     }
 }

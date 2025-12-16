@@ -30,10 +30,8 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.biometrics.BiometricManager;
-import android.hardware.biometrics.Flags;
 import android.os.Looper;
 import android.os.UserManager;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
@@ -230,7 +228,6 @@ public class BuildNumberPreferenceControllerTest {
 
     @Test
     @UiThreadTest
-    @RequiresFlagsEnabled(Flags.FLAG_BP_FALLBACK_OPTIONS)
     public void onActivityResult_confirmPasswordRequestCompleted_biometricHardwareError() {
         when(mUserManager.isAdminUser()).thenReturn(true);
         when(mBiometricManager.canAuthenticate(mContext.getUserId(),

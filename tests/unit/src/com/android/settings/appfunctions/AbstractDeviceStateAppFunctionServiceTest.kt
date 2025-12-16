@@ -25,6 +25,7 @@ import com.android.extensions.appfunctions.AppFunctionException
 import com.android.extensions.appfunctions.ExecuteAppFunctionRequest
 import com.android.extensions.appfunctions.ExecuteAppFunctionResponse
 import com.android.settings.appfunctions.executors.DeviceStateExecutor
+import com.android.settings.metrics.AppFunctionMetricsLogger
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 import com.google.common.truth.Truth.assertThat
 import java.util.Locale
@@ -51,13 +52,19 @@ class AbstractDeviceStateAppFunctionServiceTest {
         OutcomeReceiver<ExecuteAppFunctionResponse, AppFunctionException>
     @Captor private lateinit var responseCaptor: ArgumentCaptor<ExecuteAppFunctionResponse>
     @Captor private lateinit var exceptionCaptor: ArgumentCaptor<AppFunctionException>
+    @Captor private lateinit var latencyCaptor: ArgumentCaptor<Long>
 
     private lateinit var service: TestDeviceStateAppFunctionService
+    private lateinit var metricsLogger: AppFunctionMetricsLogger
 
     // Test implementation of the abstract class that allows injecting mocks
     private class TestDeviceStateAppFunctionService(
-        override val deviceStateProviderExecutors: List<DeviceStateExecutor>
+        override val deviceStateProviderExecutors: List<DeviceStateExecutor>,
+        private val logger: AppFunctionMetricsLogger,
     ) : AbstractDeviceStateAppFunctionService() {
+        override val metricsLogger: AppFunctionMetricsLogger
+            get() = logger
+
         init {
             // Attach a base context to allow applicationContext to be used
             attachBaseContext(ApplicationProvider.getApplicationContext<Context>())
@@ -69,7 +76,8 @@ class AbstractDeviceStateAppFunctionServiceTest {
 
     @Before
     fun setUp() {
-        service = TestDeviceStateAppFunctionService(listOf(mockProvider))
+        metricsLogger = AppFunctionMetricsLogger()
+        service = TestDeviceStateAppFunctionService(listOf(mockProvider), metricsLogger)
         service.onCreate()
     }
 

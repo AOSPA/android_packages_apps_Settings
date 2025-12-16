@@ -19,6 +19,7 @@ package com.android.settings.safetycenter
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.pm.UserInfo
+import android.os.Bundle
 import android.os.UserManager
 import android.permission.flags.Flags
 import android.platform.test.annotations.EnableFlags
@@ -44,6 +45,7 @@ import com.android.settings.Settings
 import com.android.settings.SubSettings
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_ACTION
+import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_SESSION_ID
 import com.android.settings.safetycenter.SafetyCenterTestUtils.USER_PERSONAL
 import com.android.settings.safetycenter.SafetyCenterTestUtils.USER_WORK_PROFILE
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createEntry
@@ -52,6 +54,7 @@ import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssueAction
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createScData
 import com.android.settings.safetycenter.ui.DeviceUnlockSubpageFragment
 import com.android.settings.safetycenter.ui.SafetyCenterFragment
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.EXTRA_SESSION_ID
 import com.android.settingslib.safetycenter.SafetySourcePreference
 import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.BannerMessagePreferenceGroup
@@ -99,9 +102,11 @@ class DeviceUnlockSubpageFragmentTest {
 
     private fun runTest(data: SafetyCenterData, testBlock: (DeviceUnlockSubpageFragment) -> Unit) {
         shadowSafetyCenterManager.setSafetyCenterData(data)
+        val fragmentArgs = Bundle().apply { putLong(EXTRA_SESSION_ID, TEST_SESSION_ID) }
         val scenario =
             launchFragmentInContainer<DeviceUnlockSubpageFragment>(
-                themeResId = R.style.Theme_SubSettings
+                fragmentArgs = fragmentArgs,
+                themeResId = R.style.Theme_SubSettings,
             )
         scenario.onFragment { fragment ->
             ShadowLooper.idleMainLooper()
