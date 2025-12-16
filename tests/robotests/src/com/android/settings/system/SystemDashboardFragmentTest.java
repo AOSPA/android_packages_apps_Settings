@@ -80,15 +80,18 @@ public class SystemDashboardFragmentTest {
     public void getPreferenceScreenResId_shouldShowDeviceCategoryFalse_returnsFragmentXml() {
         ShadowDesktopSettingsUtils.setShouldShow(false);
 
-        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.system_dashboard_fragment);
+        final int xmlId = mFragment.getPreferenceScreenResId();
+
+        assertThat(xmlId).isEqualTo(R.xml.system_dashboard_fragment);
     }
 
     @Test
     public void getPreferenceScreenResId_shouldShowDeviceCategoryTrue_returnsDesktopXml() {
         ShadowDesktopSettingsUtils.setShouldShow(true);
 
-        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
-                R.xml.system_dashboard_fragment_desktop);
+        final int xmlId = mFragment.getPreferenceScreenResId();
+
+        assertThat(xmlId).isEqualTo(R.xml.system_dashboard_fragment_desktop);
     }
 
     @Test
@@ -109,5 +112,25 @@ public class SystemDashboardFragmentTest {
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
 
         assertThat(keys).doesNotContain("Keyboard_settings");
+    }
+
+    @Test
+    public void getPreferenceScreenResId_shouldShowDeviceCategoryFalse_includesMouseSettings() {
+        ShadowDesktopSettingsUtils.setShouldShow(false);
+
+        final int xmlId = mFragment.getPreferenceScreenResId();
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
+
+        assertThat(keys).contains("mouse_settings");
+    }
+
+    @Test
+    public void getPreferenceScreenResId_shouldShowDeviceCategoryTrue_excludesMouseSettings() {
+        ShadowDesktopSettingsUtils.setShouldShow(true);
+
+        final int xmlId = mFragment.getPreferenceScreenResId();
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
+
+        assertThat(keys).doesNotContain("mouse_settings");
     }
 }

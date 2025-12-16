@@ -21,6 +21,14 @@
     android:title="@string/device_dashboard_title">
 
     <Preference
+        android:key="mouse_settings"
+        android:title="@string/mouse_settings"
+        android:summary="@string/mouse_settings_summary"
+        android:icon="@drawable/ic_settings_mouse"
+        android:fragment="com.android.settings.inputmethod.MouseSettingFragment"
+        settings:controller="com.android.settings.inputmethod.MouseSettingsController"/>
+
+    <Preference
         android:key="keyboard_settings"
         android:title="@string/keyboard_settings"
         android:icon="@drawable/ic_settings_keyboards"

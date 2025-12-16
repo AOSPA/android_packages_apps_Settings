@@ -85,14 +85,6 @@
             settings:controller="com.android.settings.inputmethod.TouchpadSettingsController"/>
 
         <Preference
-            android:key="mouse_settings"
-            android:title="@string/mouse_settings"
-            android:summary="@string/mouse_settings_summary"
-            android:icon="@drawable/ic_settings_mouse"
-            android:fragment="com.android.settings.inputmethod.MouseSettingFragment"
-            settings:controller="com.android.settings.inputmethod.MouseSettingsController" />
-
-        <Preference
             android:key="game_controller_settings"
             android:title="@string/game_controller_settings_title"
             android:icon="@drawable/ic_default_controller"
