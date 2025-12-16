@@ -129,10 +129,12 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
             return
         }
 
+        val issueIdToHeaderResIdMap = viewModel!!.getIssueIdToHeaderResIdMap(data)
+
         if (isSubpage) {
-            updateIssuesInSubpage(group, data, bannerGroupManager)
+            updateIssuesInSubpage(group, data, bannerGroupManager, issueIdToHeaderResIdMap)
         } else {
-            updateIssuesInMainPage(group, data, bannerGroupManager)
+            updateIssuesInMainPage(group, data, bannerGroupManager, issueIdToHeaderResIdMap)
         }
     }
 
@@ -172,6 +174,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
         bannerGroup: BannerMessagePreferenceGroup,
         data: SafetyCenterUiData,
         bannerGroupManager: SafetyIssuesBannerGroupManager,
+        issueIdToHeaderResIdMap: Map<String, Int>,
     ) {
         val activeIssues = data.getActiveIssues()
         Log.d(TAG, "[$preferenceKey] Updating main page with ${activeIssues.size} active issues")
@@ -180,6 +183,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
             newDismissedIssues = emptyList(),
             resolvedIssues = data.resolvedIssues,
             focusedIssueKey = focusedIssueKey,
+            issueIdToHeaderResIdMap = issueIdToHeaderResIdMap,
         )
         bannerGroup.isVisible = !activeIssues.isEmpty()
     }
@@ -192,6 +196,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
         bannerGroup: BannerMessagePreferenceGroup,
         data: SafetyCenterUiData,
         bannerGroupManager: SafetyIssuesBannerGroupManager,
+        issueIdToHeaderResIdMap: Map<String, Int>,
     ) {
         val activeIssues = data.getActiveIssuesForSources(relatedSafetySources)
         val dismissedIssues = data.getDismissedIssuesForSources(relatedSafetySources)
@@ -204,6 +209,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
             newDismissedIssues = dismissedIssues,
             resolvedIssues = data.resolvedIssues,
             focusedIssueKey = focusedIssueKey,
+            issueIdToHeaderResIdMap = issueIdToHeaderResIdMap,
         )
 
         illustrationPreference?.isVisible = activeIssues.isEmpty()
