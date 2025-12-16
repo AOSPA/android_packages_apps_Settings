@@ -33,7 +33,7 @@ import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.PreferenceScreenCoordinate
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
-import com.android.settingslib.metadata.apifirst.ApiFirstPreferenceScreen
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.toMap
 
 /**
@@ -146,7 +146,7 @@ class SettingsLaunchpadActivity : Activity() {
 
     private fun resolveMenuKey(metadata: PreferenceScreenMetadata): String? =
         when (metadata) {
-            is ApiFirstPreferenceScreen -> metadata.topLevelSettingsCategory.value
+            is PreferencesApiScreen -> metadata.topLevelSettingsCategory.value
             is PreferenceScreenMixin ->
                 metadata.highlightMenuKey.takeIf { it != 0 }?.let { getString(it) }
             else -> null
