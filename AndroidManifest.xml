@@ -1375,7 +1375,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity
             android:name="Settings$ManageAssistActivity"
             android:exported="true"
-            android:label="@string/assist_and_voice_input_title">
+            android:label="@string/assist_and_voice_input_title"
+            android:featureFlag="!android.permission.flags.assist_settings_privacy_improvements_enabled">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VOICE_INPUT_SETTINGS" />
                 <category android:name="android.intent.category.BROWSABLE" />

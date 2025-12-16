@@ -23,7 +23,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
-import com.android.server.accessibility.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.DeviceInfoUtils;
 
@@ -76,10 +75,6 @@ public class FeedbackManager {
      * @return {@code true} if feedback is available, {@code false} otherwise.
      */
     public boolean isAvailable() {
-        if (!Flags.enableLowVisionGenericFeedback()) {
-            return false;
-        }
-
         return !TextUtils.isEmpty(mReporterPackage)
                 && !TextUtils.isEmpty(mCategoryTag);
     }
