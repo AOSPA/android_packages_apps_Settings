@@ -23,7 +23,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.NightDisplaySettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.KeyValueStore
@@ -62,7 +61,7 @@ open class NightDisplayScreen(val context: Context) :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.night_display_purpose
 
@@ -74,8 +73,6 @@ open class NightDisplayScreen(val context: Context) :
 
     override val keywords: Int
         get() = R.string.keywords_display_night_display
-
-    override fun isFlagEnabled(context: Context) = Flags.catalystNightDisplay()
 
     override fun hasCompleteHierarchy() = false
 
@@ -101,8 +98,7 @@ open class NightDisplayScreen(val context: Context) :
         coroutineScope: CoroutineScope,
     ): PreferenceHierarchy = preferenceHierarchy(context) { +NightDisplayTopIntroPreference() }
 
-    override fun isAvailable(context: Context): Boolean =
-        context.isNightDisplaySettingsAvailable
+    override fun isAvailable(context: Context): Boolean = context.isNightDisplaySettingsAvailable
 
     override fun getMetricsCategory(): Int = SettingsEnums.NIGHT_DISPLAY_SETTINGS
 
@@ -131,7 +127,6 @@ internal class NightDisplayTopIntroPreference :
 
     override fun createWidget(context: Context) = TopIntroPreference(context)
 
-    override fun isAvailable(context: Context): Boolean =
-        context.isNightDisplaySettingsAvailable
+    override fun isAvailable(context: Context): Boolean = context.isNightDisplaySettingsAvailable
 }
 // LINT.ThenChange(NightDisplaySettings.java)
