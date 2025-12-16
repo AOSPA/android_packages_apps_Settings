@@ -67,13 +67,6 @@
         android:order="-380">
 
         <Preference
-            android:key="Keyboard_settings"
-            android:title="@string/keyboard_settings"
-            android:icon="@drawable/ic_settings_keyboards"
-            android:fragment="com.android.settings.inputmethod.KeyboardSettings"
-            settings:controller="com.android.settings.inputmethod.KeyboardPreferenceController"/>
-
-        <Preference
             android:key="trackpad_settings"
             android:title="@string/trackpad_mouse_settings"
             android:summary="@string/trackpad_settings_summary"

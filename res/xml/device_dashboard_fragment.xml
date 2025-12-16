@@ -20,6 +20,13 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/device_dashboard_title">
 
+    <Preference
+        android:key="keyboard_settings"
+        android:title="@string/keyboard_settings"
+        android:icon="@drawable/ic_settings_keyboards"
+        android:fragment="com.android.settings.inputmethod.KeyboardSettings"
+        settings:controller="com.android.settings.inputmethod.KeyboardPreferenceController"/>
+
     <!-- TODO: b/448125141 - Add new icons for display and sound. -->
     <Preference
         android:fragment="com.android.settings.DisplaySettings"
