@@ -33,7 +33,6 @@ import static com.android.settings.connecteddevice.display.ExternalDisplayPrefer
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_SIZE_SUMMARY_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_TITLE_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY_SUMMARY_RESOURCE;
-import static com.android.settings.flags.Flags.FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
 import static com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING;
 
@@ -300,8 +299,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
     @Test
     @UiThreadTest
     @EnableFlags({FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT})
-    public void testShowEnabledDisplay_OnlyOneDisplayAvailable_displaySizeDisabled() {
-        mFlags.setFlag(FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING, false);
+    public void testShowEnabledDisplay_OnlyOneDisplayAvailable() {
         // Only one display available
         doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getDisplays();
         // Init
@@ -318,7 +316,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         var footerPref = category.findPreference(PrefBasics.FOOTER.key);
         assertThat(footerPref).isNotNull();
         var sizePref = category.findPreference(PrefBasics.EXTERNAL_DISPLAY_SIZE.keyForNth(0));
-        assertThat(sizePref).isNull();
+        assertThat(sizePref).isNotNull();
         assertThat("" + footerPref.getTitle())
                 .isEqualTo(getText(EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE));
     }
@@ -345,25 +343,6 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         assertThat(footerPref).isNotNull();
         var sizePref = category.findPreference(PrefBasics.EXTERNAL_DISPLAY_SIZE.keyForNth(0));
         assertThat(sizePref).isNull();
-        assertThat("" + footerPref.getTitle())
-                .isEqualTo(getText(EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE));
-    }
-
-    @Test
-    @UiThreadTest
-    public void testShowEnabledDisplay_OnlyOneDisplayAvailable() {
-        // Only one display available
-        doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getDisplays();
-        // Init
-        initFragment();
-        mHandler.flush();
-        assertDisplayListCount(1);
-        var category = getExternalDisplayCategory(0);
-        assertThat("" + category.getTitle()).isEqualTo("HDMI");
-        var footerPref = category.findPreference(PrefBasics.FOOTER.key);
-        assertThat(footerPref).isNotNull();
-        var sizePref = category.findPreference(PrefBasics.EXTERNAL_DISPLAY_SIZE.keyForNth(0));
-        assertThat(sizePref).isNotNull();
         assertThat("" + footerPref.getTitle())
                 .isEqualTo(getText(EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE));
     }
