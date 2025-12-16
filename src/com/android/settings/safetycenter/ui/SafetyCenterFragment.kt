@@ -18,6 +18,7 @@ package com.android.settings.safetycenter.ui
 import android.annotation.SuppressLint
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.viewModels
 import com.android.settings.R
@@ -78,7 +79,7 @@ class SafetyCenterFragment : DashboardFragment() {
             sessionId = intentSessionId
             Log.d(TAG, "Session ID retrieved from Intent: $sessionId")
         } else {
-            sessionId = getOrGenerateSessionId(requireArguments())
+            sessionId = getOrGenerateSessionId(arguments ?: Bundle())
             Log.d(TAG, "Session ID not found in Intent, fallback to fragment arguments: $sessionId")
         }
     }
