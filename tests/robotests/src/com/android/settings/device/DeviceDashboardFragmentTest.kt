@@ -98,4 +98,26 @@ class DeviceDashboardFragmentTest {
         val icon = mousePreference?.icon
         assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_mouse)
     }
+
+    @Test
+    fun trackpadPreference_shouldBeConfiguredCorrectly() {
+        val trackpadPreference = fragment.findPreference<Preference>("trackpad_settings")
+        assertThat(trackpadPreference).isNotNull()
+        assertThat(trackpadPreference?.fragment).isEqualTo("com.android.settings.inputmethod.TouchpadAndMouseSettings")
+        assertThat(trackpadPreference?.title).isEqualTo(fragment.context?.getString(R.string.trackpad_settings))
+        assertThat(trackpadPreference?.summary).isEqualTo(fragment.context?.getString(R.string.trackpad_settings_summary))
+        val icon = trackpadPreference?.icon
+        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_touchpad)
+    }
+
+    @Test
+    fun touchpadPreference_shouldBeConfiguredCorrectly() {
+        val touchpadPreference = fragment.findPreference<Preference>("touchpad_settings")
+        assertThat(touchpadPreference).isNotNull()
+        assertThat(touchpadPreference?.fragment).isEqualTo("com.android.settings.inputmethod.TouchpadSettingFragment")
+        assertThat(touchpadPreference?.title).isEqualTo(fragment.context?.getString(R.string.trackpad_settings))
+        assertThat(touchpadPreference?.summary).isEqualTo(fragment.context?.getString(R.string.trackpad_settings_summary))
+        val icon = touchpadPreference?.icon
+        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_touchpad)
+    }
 }

@@ -133,4 +133,44 @@ public class SystemDashboardFragmentTest {
 
         assertThat(keys).doesNotContain("mouse_settings");
     }
+
+    @Test
+    public void getPreferenceScreenResId_shouldShowDeviceCategoryFalse_includesTrackpadSettings() {
+        ShadowDesktopSettingsUtils.setShouldShow(false);
+
+        final int xmlId = mFragment.getPreferenceScreenResId();
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
+
+        assertThat(keys).contains("trackpad_settings");
+    }
+
+    @Test
+    public void getPreferenceScreenResId_shouldShowDeviceCategoryTrue_excludesTrackpadSettings() {
+        ShadowDesktopSettingsUtils.setShouldShow(true);
+
+        final int xmlId = mFragment.getPreferenceScreenResId();
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
+
+        assertThat(keys).doesNotContain("trackpad_settings");
+    }
+
+    @Test
+    public void getPreferenceScreenResId_shouldShowDeviceCategoryFalse_includesTouchpadSettings() {
+        ShadowDesktopSettingsUtils.setShouldShow(false);
+
+        final int xmlId = mFragment.getPreferenceScreenResId();
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
+
+        assertThat(keys).contains("touchpad_settings");
+    }
+
+    @Test
+    public void getPreferenceScreenResId_shouldShowDeviceCategoryTrue_excludesTouchpadSettings() {
+        ShadowDesktopSettingsUtils.setShouldShow(true);
+
+        final int xmlId = mFragment.getPreferenceScreenResId();
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
+
+        assertThat(keys).doesNotContain("touchpad_settings");
+    }
 }
