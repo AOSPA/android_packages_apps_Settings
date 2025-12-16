@@ -101,7 +101,7 @@ abstract class SafetyCenterSubpageFragment : DashboardFragment() {
 
     private fun configureInteractionLogger() {
         viewModel.interactionLogger.apply {
-            sessionId = getOrGenerateSessionId(requireArguments())
+            sessionId = getOrGenerateSessionId(arguments ?: Bundle())
             viewType = ViewType.SUBPAGE
             navigationSource = NavigationSource.fromIntent(requireActivity().intent)
             subpageId = this@SafetyCenterSubpageFragment.subpageKey

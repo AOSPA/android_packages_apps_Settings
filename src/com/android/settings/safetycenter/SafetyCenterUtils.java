@@ -43,6 +43,7 @@ import com.android.settings.flags.Flags;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.safetycenter.ui.SafetyCenterFragment;
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils;
 import com.android.settings.security.ChangeProfileScreenLockPreferenceController;
 import com.android.settings.security.LockUnificationPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
@@ -172,6 +173,8 @@ public final class SafetyCenterUtils {
                 Log.d(TAG, "Launching SafetyCenter in Settings");
                 new SubSettingLauncher(context)
                     .setDestination(SafetyCenterFragment.class.getName())
+                    .setArguments(SafetyCenterSessionUtils.INSTANCE.createSessionArgs(
+                            SafetyCenterSessionUtils.INSTANCE.generateValidSessionId()))
                     .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                     .launch();
             } else {
