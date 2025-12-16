@@ -1018,7 +1018,7 @@
     <string name="external_display_connection_preference" msgid="3337612335495542718">"Comportement de connexion par défaut"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Utiliser comme écran séparé"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Dupliquer l\'écran intégré"</string>
-    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Afficher la boîte de dialogue de connexion"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Faites afficher la boîte de dialogue de connexion"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"L\'écran externe est déconnecté"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Rotation"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Standard"</string>
@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Certificat obligatoire."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Pour améliorer la précision de la position et à d\'autres fins, <xliff:g id="APP_NAME">%1$s</xliff:g> souhaite activer la recherche de réseaux, même lorsque le Wi-Fi est désactivé.\n\nDonner cette autorisation à toutes les applis souhaitant activer la recherche de réseaux?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Pour améliorer la précision de la position, une appli inconnue souhaite activer la recherche de réseaux, même lorsque le Wi-Fi est désactivé.\n\nAutoriser toutes les applis qui le demandent?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Autoriser"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Refuser"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* obligatoire"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Il s\'agit d\'un réseau partagé. Vous devez vous connecter pour apporter des modifications."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Communiquez avec le propriétaire du réseau ou l\'administrateur de l\'appareil pour apporter des modifications."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Tous les utilisateurs de cet appareil peuvent accéder à ce réseau."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Ce réseau ne dispose d\'aucun accès Internet. Voulez-vous quand même l\'utiliser?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Connectivité limitée : certains services et applis pourraient ne pas fonctionner. Utiliser quand même?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Ne plus me demander pour ce réseau"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Échec de l\'enregistrement du réseau."</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Annuler"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Oublier le réseau?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> sera retiré pour tous les utilisateurs de cet appareil"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 réseau}one{# réseau}other{# réseaux}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 abonnement}one{# abonnement}other{# abonnements}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 réseau et abonnement}one{# réseau et abonnement}other{# réseaux et abonnements}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Haute résolution"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Résolution maximale"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"La résolution maximale sollicite davantage votre pile. Le changement de résolution peut entraîner le redémarrage de certaines applis."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> par <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hertz"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Changement de fuseau horaire"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Recevez une notification lorsque votre fuseau horaire est automatiquement mis à jour"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notification, heure, fuseau, fuseau horaire"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Changement d\'heure programmé"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Recevez une notification en cas de changement d\'heure programmé, par exemple lors du passage à l\'heure avancée"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"ha, heure avancée, changement d\'heure, changement d\'heure programmé"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Changement suivant"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Aucun changement programmé"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Informations légales, état et version du logiciel"</string>
     <string name="legal_information" msgid="7509900979811934843">"Renseignements juridiques"</string>
     <string name="manual" msgid="3651593989906084868">"Manuel"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Clonée"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Création d\'un clone de <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> en cours…"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Clone de <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> créé"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Langues, gestes, heure"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Langues du système, langues des applis, préférences régionales, voix"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, connexion réseau, internet, sans fil, données, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"notification Wi‑Fi, notification wifi"</string>
@@ -4697,6 +4692,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Pour votre sécurité, la protection avancée exige que ce paramètre reste désactivé"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Pour votre sécurité, la protection avancée empêche cette action"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Paramètres"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Désactiver"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Activer"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Afficher"</string>
@@ -5180,10 +5183,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Expérimental : Activer ANGLE"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Avertissement : Activer ANGLE en tant que pilote OpenGL ES par défaut. Cette fonctionnalité est en cours de test et peut ne pas être compatible avec certaines applis vidéo et d\'appareils photo. Veuillez sauvegarder les données de votre appareil avant d\'activer le commutateur."</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"Un redémarrage est nécessaire pour modifier le pilote OpenGL ES du système. Veuillez sauvegarder les données de votre appareil avant de procéder au redémarrage. En cas d\'échec du redémarrage, il vous faudra rétablir les paramètres par défaut pour restaurer l\'appareil."</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Changements dans la compatibilité des applis"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Activez/Désactivez les changements de compatibilité des applis"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Changements activés par défaut"</string>

@@ -151,28 +151,12 @@ class SafetyIssuesBannerGroupManager(
         issues: MutableList<SafetyCenterIssue>,
         focusedIssueKey: FocusedIssueKey,
     ): SafetyCenterIssue? {
-        val index = issues.indexOfFirst { matchesFocusedIssue(it, focusedIssueKey) }
+        val index = issues.indexOfFirst { focusedIssueKey.matchesSafetyCenterIssue(it) }
         return if (index != -1) {
             issues.removeAt(index)
         } else {
             null
         }
-    }
-
-    /**
-     * Checks if the given [SafetyCenterIssue] matches the provided [FocusedIssueKey].
-     *
-     * @param issue The [SafetyCenterIssue] to check.
-     * @param focusedIssueKey The [FocusedIssueKey] to match against.
-     * @return True if the issue matches the key, false otherwise.
-     */
-    private fun matchesFocusedIssue(
-        issue: SafetyCenterIssue,
-        focusedIssueKey: FocusedIssueKey,
-    ): Boolean {
-        return issue.safetySourceIssueId == focusedIssueKey.sourceIssueId &&
-            issue.safetySourceIds.contains(focusedIssueKey.sourceId) &&
-            issue.user == focusedIssueKey.userHandle
     }
 
     /**

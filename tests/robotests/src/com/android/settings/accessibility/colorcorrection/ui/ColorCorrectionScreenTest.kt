@@ -17,13 +17,14 @@
 package com.android.settings.accessibility.colorcorrection.ui
 
 import android.app.settings.SettingsEnums
+import android.content.Context
 import android.provider.Settings.ACTION_COLOR_CORRECTION_SETTINGS
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
-import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment
 import com.android.settings.testutils.SettingsStoreRule
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.R as SettingsLibR
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -32,6 +33,7 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
@@ -40,21 +42,15 @@ import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.robolectric.shadows.ShadowLooper
 
-class ColorCorrectionScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class ColorCorrectionScreenTest {
     @get:Rule val settingsStoreRule = SettingsStoreRule()
-
-    override val flagName = Flags.FLAG_CATALYST_DALTONIZER
-    override val preferenceScreenCreator = ColorCorrectionScreen()
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
+    private val preferenceScreenCreator = ColorCorrectionScreen()
 
     @Before
     fun setUp() {
         SettingsSecureStore.get(appContext).setBoolean(ColorCorrectionScreen.SETTING_KEY, false)
-    }
-
-    @Test
-    override fun migration() {
-        SettingsSecureStore.get(appContext).setBoolean(ColorCorrectionScreen.SETTING_KEY, true)
-        super.migration()
     }
 
     @Test

@@ -16,6 +16,8 @@
 
 package com.android.settings.network.telephony.satellite.quicksettings
 
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
 import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
@@ -33,6 +35,7 @@ import android.telephony.TelephonyManager
 import android.telephony.satellite.SatelliteManager
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -42,6 +45,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentCaptor
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
@@ -59,6 +63,7 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowDeviceConfig
 import org.robolectric.shadows.ShadowSatelliteManager
+import org.robolectric.shadows.ShadowSubscriptionManager
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(RobolectricTestRunner::class)
@@ -70,6 +75,8 @@ class SatelliteTileStateReceiverTest {
     @Mock private lateinit var pendingResult: BroadcastReceiver.PendingResult
     @Mock private lateinit var subInfo: SubscriptionInfo
     @Mock private lateinit var resources: Resources
+    @Mock private lateinit var mockTelephonyManager: TelephonyManager
+    @Mock private lateinit var mockJobScheduler: JobScheduler
 
     private lateinit var context: Context
     private var componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
@@ -77,21 +84,28 @@ class SatelliteTileStateReceiverTest {
     private lateinit var shadowSatelliteManager: ShadowSatelliteManager
     private val testDispatcher = StandardTestDispatcher()
     private val SUB_ID = 1
+    private var jobId = 0
 
     @Before
     fun setUp() {
         context = spy(RuntimeEnvironment.getApplication())
+        jobId = context.resources.getInteger(R.integer.satellite_eligibility_job)
         `when`(context.applicationContext).thenReturn(context)
         `when`(context.packageManager).thenReturn(packageManager)
         `when`(packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_SATELLITE))
             .thenReturn(true)
         `when`(context.resources).thenReturn(resources)
+        `when`(resources.getInteger(R.integer.satellite_eligibility_job)).thenReturn(jobId)
         `when`(resources.getBoolean(R.bool.config_show_satellite_tile)).thenReturn(true)
+        `when`(context.getSystemService(TelephonyManager::class.java))
+            .thenReturn(mockTelephonyManager)
+        `when`(context.getSystemService(JobScheduler::class.java)).thenReturn(mockJobScheduler)
         shadowSatelliteManager =
             Shadow.extract(context.getSystemService(SatelliteManager::class.java))
         `when`(subInfo.subscriptionId).thenReturn(SUB_ID)
         val subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
         shadowOf(subscriptionManager).setActiveSubscriptionInfoList(listOf(subInfo))
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID)
         receiver = spy(SatelliteTileStateReceiver(testDispatcher))
         `when`(receiver.goAsync()).thenReturn(pendingResult)
 
@@ -135,7 +149,7 @@ class SatelliteTileStateReceiverTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_bootCompleted_isLteBasedNtnSupported_enablesTile() =
+    fun onReceive_bootCompleted_isLteBasedNtnSupported_enablesTileAndSchedulesJob() =
         runTest(testDispatcher) {
             setLteNtnSupported(true)
 
@@ -143,12 +157,13 @@ class SatelliteTileStateReceiverTest {
             advanceUntilIdle()
 
             verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
+            verifyJobScheduled()
             verify(pendingResult).finish()
         }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_bootCompleted_isNbIotBasedNtnSupported_enablesTile() =
+    fun onReceive_bootCompleted_isNbIotBasedNtnSupported_enablesTileAndSchedulesJob() =
         runTest(testDispatcher) {
             setLteNtnSupported(false)
             shadowSatelliteManager.setIsSupportedResponse(true, null)
@@ -157,12 +172,13 @@ class SatelliteTileStateReceiverTest {
             advanceUntilIdle()
 
             verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
+            verifyJobScheduled()
             verify(pendingResult).finish()
         }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_bootCompleted_noNtnSupport_disablesTile() =
+    fun onReceive_bootCompleted_noNtnSupport_disablesTileAndSchedulesJob() =
         runTest(testDispatcher) {
             setLteNtnSupported(false)
             shadowSatelliteManager.setIsSupportedResponse(false, null)
@@ -171,24 +187,7 @@ class SatelliteTileStateReceiverTest {
             advanceUntilIdle()
 
             verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
-            verify(pendingResult).finish()
-        }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_bootCompleted_isNbIotBasedNtnRequestFailed_disablesTile() =
-        runTest(testDispatcher) {
-            setLteNtnSupported(false)
-            val exception =
-                SatelliteManager.SatelliteException(
-                    SatelliteManager.SATELLITE_RESULT_REQUEST_FAILED
-                )
-            shadowSatelliteManager.setIsSupportedResponse(false, exception)
-
-            sendBootCompletedBroadcast()
-            advanceUntilIdle()
-
-            verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
+            verifyJobScheduled()
             verify(pendingResult).finish()
         }
 
@@ -216,39 +215,7 @@ class SatelliteTileStateReceiverTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_bootCompleted_registersCallbackOnlyOnce() =
-        runTest(testDispatcher) {
-            // Arrange: initial state is unsupported
-            shadowSatelliteManager.setIsSupportedResponse(false, null)
-
-            // Act 1: Send first broadcast, which should register the callback.
-            sendBootCompletedBroadcast()
-            advanceUntilIdle()
-
-            // Act 2: Send second broadcast. This should not register the callback again.
-            val anotherPendingResult = mock(BroadcastReceiver.PendingResult::class.java)
-            `when`(receiver.goAsync()).thenReturn(anotherPendingResult)
-            sendBootCompletedBroadcast()
-            advanceUntilIdle()
-
-            // Assert: Trigger the callback. If it was registered only once, the tile state
-            // should be updated only once.
-            clearInvocations(packageManager)
-            shadowSatelliteManager.triggerOnSupportedStateChanged(true)
-            advanceUntilIdle()
-            // Verify that the tile was enabled exactly once, confirming the callback was not
-            // registered multiple times.
-            verify(packageManager)
-                .setComponentEnabledSetting(
-                    any(),
-                    eq(PackageManager.COMPONENT_ENABLED_STATE_ENABLED),
-                    anyInt(),
-                )
-        }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_simCardStateChanged_isLteBasedNtnSupported_enablesTile() =
+    fun onReceive_simCardStateChanged_isLteBasedNtnSupported_enablesTileAndSchedulesJob() =
         runTest(testDispatcher) {
             setLteNtnSupported(true)
 
@@ -256,12 +223,13 @@ class SatelliteTileStateReceiverTest {
             advanceUntilIdle()
 
             verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
+            verifyJobScheduled()
             verify(pendingResult).finish()
         }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_simCardStateChanged_noNtnSupport_disablesTile() =
+    fun onReceive_simCardStateChanged_noNtnSupport_disablesTileAndSchedulesJob() =
         runTest(testDispatcher) {
             setLteNtnSupported(false)
             shadowSatelliteManager.setIsSupportedResponse(false, null)
@@ -270,12 +238,13 @@ class SatelliteTileStateReceiverTest {
             advanceUntilIdle()
 
             verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
+            verifyJobScheduled()
             verify(pendingResult).finish()
         }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_carrierConfigChanged_isLteBasedNtnSupported_enablesTile() =
+    fun onReceive_carrierConfigChanged_isLteBasedNtnSupported_enablesTileAndSchedulesJob() =
         runTest(testDispatcher) {
             setLteNtnSupported(true)
 
@@ -283,12 +252,13 @@ class SatelliteTileStateReceiverTest {
             advanceUntilIdle()
 
             verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
+            verifyJobScheduled()
             verify(pendingResult).finish()
         }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_carrierConfigChanged_noNtnSupport_disablesTile() =
+    fun onReceive_carrierConfigChanged_noNtnSupport_disablesTileAndSchedulesJob() =
         runTest(testDispatcher) {
             setLteNtnSupported(false)
             shadowSatelliteManager.setIsSupportedResponse(false, null)
@@ -297,24 +267,40 @@ class SatelliteTileStateReceiverTest {
             advanceUntilIdle()
 
             verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
+            verifyJobScheduled()
             verify(pendingResult).finish()
         }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_carrierConfigChanged_noNtnSupport_callbackNotRegistered() =
+    fun onReceive_defaultDataSubscriptionChanged_isLteBasedNtnSupported_enablesTileAndSchedulesJob() =
         runTest(testDispatcher) {
-            setLteNtnSupported(false)
-            shadowSatelliteManager.setIsSupportedResponse(false, null)
+            setLteNtnSupported(true)
 
-            sendCarrierConfigChangedBroadcast()
+            val intent = Intent(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED)
+            receiver.onReceive(context, intent)
             advanceUntilIdle()
 
-            // Verify that the callback was not registered
-            clearInvocations(packageManager)
-            shadowSatelliteManager.triggerOnSupportedStateChanged(true)
+            verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
+            verifyJobScheduled()
+            verify(pendingResult).finish()
+        }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
+    fun onReceive_defaultDataSubscriptionChanged_invalidSubId_cancelsJob() =
+        runTest(testDispatcher) {
+            ShadowSubscriptionManager.setDefaultDataSubscriptionId(
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID
+            )
+
+            val intent = Intent(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED)
+            receiver.onReceive(context, intent)
             advanceUntilIdle()
-            verify(packageManager, never()).setComponentEnabledSetting(any(), anyInt(), anyInt())
+
+            verify(mockJobScheduler).cancel(jobId)
+            verify(mockJobScheduler, never()).schedule(any())
+            verify(pendingResult).finish()
         }
 
     @Test
@@ -384,6 +370,15 @@ class SatelliteTileStateReceiverTest {
         SatelliteSupportedStateChangeHandler.register(context, testDispatcher)
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
+    fun registerForSupportedStateChanged_satelliteManagerNull_doesNothing() {
+        `when`(context.getSystemService(SatelliteManager::class.java)).thenReturn(null)
+
+        // This should not crash
+        SatelliteSupportedStateChangeHandler.register(context, testDispatcher)
+    }
+
     private fun sendBootCompletedBroadcast() {
         val intent = Intent(Intent.ACTION_BOOT_COMPLETED)
         receiver.onReceive(context, intent)
@@ -429,5 +424,17 @@ class SatelliteTileStateReceiverTest {
             }
         val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
         shadowOf(carrierConfigManager).setConfigForSubId(SUB_ID, config)
+    }
+
+    private fun verifyJobScheduled() {
+        val jobInfoCaptor = ArgumentCaptor.forClass(JobInfo::class.java)
+        verify(mockJobScheduler).schedule(jobInfoCaptor.capture())
+
+        val jobInfo = jobInfoCaptor.value
+        assertThat(jobInfo.id).isEqualTo(jobId)
+        assertThat(jobInfo.service.className)
+            .isEqualTo(SatelliteEligibilityJobService::class.java.name)
+        assertThat(jobInfo.isPersisted).isFalse()
+        assertThat(jobInfo.triggerContentUris).isNotEmpty()
     }
 }

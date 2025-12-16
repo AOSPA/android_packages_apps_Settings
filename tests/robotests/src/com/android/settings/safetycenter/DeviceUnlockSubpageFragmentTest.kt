@@ -25,6 +25,7 @@ import android.permission.flags.Flags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.safetycenter.SafetyCenterData
+import android.safetycenter.SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_RECOMMENDATION
 import android.safetycenter.SafetyCenterIssue
 import android.safetycenter.SafetyCenterManager
 import androidx.fragment.app.testing.launchFragmentInContainer
@@ -43,6 +44,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.SubSettings
+import com.android.settings.core.instrumentation.SettingsStatsLog
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_ACTION
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_SESSION_ID
@@ -52,9 +54,16 @@ import com.android.settings.safetycenter.SafetyCenterTestUtils.createEntry
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssue
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssueAction
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createScData
+import com.android.settings.safetycenter.ui.Action
 import com.android.settings.safetycenter.ui.DeviceUnlockSubpageFragment
+import com.android.settings.safetycenter.ui.InteractionLogger
+import com.android.settings.safetycenter.ui.LogSeverityLevel
+import com.android.settings.safetycenter.ui.NavigationSource
 import com.android.settings.safetycenter.ui.SafetyCenterFragment
 import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.EXTRA_SESSION_ID
+import com.android.settings.safetycenter.ui.SafetyCenterSubpageRegistry.DEVICE_UNLOCK_SUBPAGE_KEY
+import com.android.settings.safetycenter.ui.SafetySourceProfileType
+import com.android.settings.safetycenter.ui.ViewType
 import com.android.settingslib.safetycenter.SafetySourcePreference
 import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.BannerMessagePreferenceGroup
@@ -66,6 +75,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowDialog
 import org.robolectric.shadows.ShadowLooper
@@ -77,6 +87,7 @@ import org.robolectric.shadows.ShadowUserManager
 @SuppressLint("MissingPermission")
 @RunWith(AndroidJUnit4::class)
 @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+@Config(shadows = [SafetyCenterTestUtils.ShadowSettingsStatsLog::class])
 class DeviceUnlockSubpageFragmentTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
     private lateinit var application: Application
@@ -89,6 +100,7 @@ class DeviceUnlockSubpageFragmentTest {
         val shadowUserManager = Shadow.extract(userManager) as ShadowUserManager
         val safetyCenterManager = application.getSystemService(SafetyCenterManager::class.java)!!
         shadowSafetyCenterManager = Shadow.extract(safetyCenterManager)
+        SafetyCenterTestUtils.ShadowSettingsStatsLog.reset()
 
         shadowUserManager.addUser(USER_PERSONAL.identifier, "Personal", 0)
         shadowUserManager.addProfile(
@@ -890,6 +902,393 @@ class DeviceUnlockSubpageFragmentTest {
             val nextIntent = shadowOf(fragment.requireActivity()).nextStartedActivity
 
             assertThat(nextIntent).isNull()
+        }
+    }
+
+    // --- Tests for InteractionLogger ---
+
+    @Test
+    fun interactionLogger_onPageCreation_logsSafetyCenterViewed() {
+        val entry =
+            createEntry(
+                id = "lockScreenEntry",
+                title = "Screen Lock",
+                sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
+            )
+        runTest(createScData(listOf(entry))) {
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            assertThat(events).hasSize(1)
+            val event = events[0]
+
+            assertThat(event.atomId).isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(event.action).isEqualTo(Action.SAFETY_CENTER_VIEWED.statsLogValue)
+            assertThat(event.viewType).isEqualTo(ViewType.SUBPAGE.statsLogValue)
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(event.severityLevel).isEqualTo(LogSeverityLevel.UNKNOWN.statsLogValue)
+            assertThat(event.sourceId).isEqualTo(0)
+            assertThat(event.sourceProfileType)
+                .isEqualTo(SafetySourceProfileType.UNKNOWN.statsLogValue)
+            assertThat(event.issueTypeId).isEqualTo(0)
+            assertThat(event.subpageId)
+                .isEqualTo(InteractionLogger.encodeStringId(DEVICE_UNLOCK_SUBPAGE_KEY))
+            assertThat(event.issueState)
+                .isEqualTo(
+                    SettingsStatsLog
+                        .SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ISSUE_STATE_UNKNOWN
+                )
+        }
+    }
+
+    @Test
+    fun interactionLogger_onEntryClick_logsEntryClicked() {
+        val entry =
+            createEntry(
+                id = "lockScreenEntry",
+                title = "Screen Lock",
+                sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
+                severity = ENTRY_SEVERITY_LEVEL_RECOMMENDATION,
+            )
+        runTest(createScData(listOf(entry))) { fragment ->
+            val preference =
+                fragment.findPreference<SafetySourcePreference>(ANDROID_LOCK_SCREEN_PREFERENCE_KEY)
+
+            preference?.performClick()
+            ShadowLooper.idleMainLooper()
+
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            // The first event is SAFETY_CENTER_VIEWED
+            assertThat(events).hasSize(2)
+            val event = events[1]
+
+            assertThat(event.atomId).isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(event.action).isEqualTo(Action.ENTRY_CLICKED.statsLogValue)
+            assertThat(event.viewType).isEqualTo(ViewType.SUBPAGE.statsLogValue)
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(event.sourceId)
+                .isEqualTo(InteractionLogger.encodeStringId(entry.safetySourceId))
+            assertThat(event.severityLevel).isEqualTo(LogSeverityLevel.RECOMMENDATION.statsLogValue)
+            assertThat(event.sourceProfileType)
+                .isEqualTo(SafetySourceProfileType.PERSONAL.statsLogValue)
+            assertThat(event.issueTypeId).isEqualTo(0)
+            assertThat(event.subpageId)
+                .isEqualTo(InteractionLogger.encodeStringId(DEVICE_UNLOCK_SUBPAGE_KEY))
+            assertThat(event.issueState)
+                .isEqualTo(
+                    SettingsStatsLog
+                        .SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ISSUE_STATE_UNKNOWN
+                )
+        }
+    }
+
+    @Test
+    fun interactionLogger_onIssueViewed_logsIssueViewed() {
+        val activeIssue =
+            createIssue(
+                id = "activeIssue",
+                sourceIds = setOf(ANDROID_LOCK_SCREEN_SOURCE_ID),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        runTest(createScData(activeIssues = listOf(activeIssue))) {
+            ShadowLooper.idleMainLooper()
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            // One for the page view, one for the visible issue.
+            assertThat(events).hasSize(2)
+            val issueViewedEvent =
+                events.find { it.action == Action.SAFETY_ISSUE_VIEWED.statsLogValue }!!
+
+            assertThat(issueViewedEvent.atomId)
+                .isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(issueViewedEvent.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(issueViewedEvent.action).isEqualTo(Action.SAFETY_ISSUE_VIEWED.statsLogValue)
+            assertThat(issueViewedEvent.viewType).isEqualTo(ViewType.SUBPAGE.statsLogValue)
+            assertThat(issueViewedEvent.navigationSource)
+                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(issueViewedEvent.sourceId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.safetySourceIds.first()))
+            assertThat(issueViewedEvent.issueTypeId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.issueTypeId))
+            assertThat(issueViewedEvent.severityLevel)
+                .isEqualTo(LogSeverityLevel.CRITICAL_WARNING.statsLogValue)
+            assertThat(issueViewedEvent.sourceProfileType)
+                .isEqualTo(SafetySourceProfileType.PERSONAL.statsLogValue)
+            assertThat(issueViewedEvent.subpageId)
+                .isEqualTo(InteractionLogger.encodeStringId(DEVICE_UNLOCK_SUBPAGE_KEY))
+            assertThat(issueViewedEvent.issueState)
+                .isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ACTIVE)
+        }
+    }
+
+    @Test
+    fun interactionLogger_onMultipleIssues_onlyLogsVisibleIssueViewed() {
+        val activeIssue1 =
+            createIssue(
+                id = "activeIssue1",
+                sourceIds = setOf(ANDROID_LOCK_SCREEN_SOURCE_ID),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        val activeIssue2 =
+            createIssue(
+                id = "activeIssue2",
+                sourceIds = setOf(ANDROID_LOCK_SCREEN_SOURCE_ID),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION,
+            )
+        runTest(createScData(activeIssues = listOf(activeIssue1, activeIssue2))) {
+            ShadowLooper.idleMainLooper()
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            // One for the page view, one for the visible issue. The second issue is collapsed.
+            assertThat(events).hasSize(2)
+
+            val issueViewedEvent =
+                events.find { it.action == Action.SAFETY_ISSUE_VIEWED.statsLogValue }!!
+            assertThat(issueViewedEvent.atomId)
+                .isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(issueViewedEvent.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(issueViewedEvent.action).isEqualTo(Action.SAFETY_ISSUE_VIEWED.statsLogValue)
+            assertThat(issueViewedEvent.viewType).isEqualTo(ViewType.SUBPAGE.statsLogValue)
+            assertThat(issueViewedEvent.navigationSource)
+                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(issueViewedEvent.sourceId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue1.safetySourceIds.first()))
+            assertThat(issueViewedEvent.issueTypeId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue1.issueTypeId))
+            assertThat(issueViewedEvent.severityLevel)
+                .isEqualTo(LogSeverityLevel.CRITICAL_WARNING.statsLogValue)
+            assertThat(issueViewedEvent.sourceProfileType)
+                .isEqualTo(SafetySourceProfileType.PERSONAL.statsLogValue)
+            assertThat(issueViewedEvent.subpageId)
+                .isEqualTo(InteractionLogger.encodeStringId(DEVICE_UNLOCK_SUBPAGE_KEY))
+            assertThat(issueViewedEvent.issueState)
+                .isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ACTIVE)
+
+            val pageViewedEvent =
+                events.find { it.action == Action.SAFETY_CENTER_VIEWED.statsLogValue }!!
+            assertThat(pageViewedEvent.action).isEqualTo(Action.SAFETY_CENTER_VIEWED.statsLogValue)
+        }
+    }
+
+    @Test
+    fun interactionLogger_onlyOneDismissedIssue_doesNotLogIssueViewed() {
+        val dismissedIssue =
+            createIssue(
+                id = "dismissedIssue",
+                sourceIds = setOf(ANDROID_LOCK_SCREEN_SOURCE_ID),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+        runTest(createScData(dismissedIssues = listOf(dismissedIssue))) {
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            // Only the page view is logged. The dismissed issue is collapsed and not yet viewed.
+            assertThat(events).hasSize(1)
+            assertThat(events[0].action).isEqualTo(Action.SAFETY_CENTER_VIEWED.statsLogValue)
+        }
+    }
+
+    @Test
+    fun interactionLogger_onIssuePrimaryActionClick_logsPrimaryActionClicked() {
+        val action =
+            createIssueAction(id = "primaryAction", label = "Primary Action", willResolve = true)
+        val activeIssue =
+            createIssue(
+                id = "primaryActionIssue",
+                actions = listOf(action),
+                sourceIds = setOf(ANDROID_LOCK_SCREEN_SOURCE_ID),
+            )
+
+        runTest(createScData(activeIssues = listOf(activeIssue))) {
+            onView(withId(R.id.banner_positive_btn)).perform(click())
+            ShadowLooper.idleMainLooper()
+
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            // Events: SAFETY_ISSUE_VIEWED, SAFETY_CENTER_VIEWED, ISSUE_PRIMARY_ACTION_CLICKED
+            assertThat(events).hasSize(3)
+            val event = events[2]
+
+            assertThat(event.atomId).isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(event.action).isEqualTo(Action.ISSUE_PRIMARY_ACTION_CLICKED.statsLogValue)
+            assertThat(event.viewType).isEqualTo(ViewType.SUBPAGE.statsLogValue)
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(event.sourceId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.safetySourceIds.first()))
+            assertThat(event.issueTypeId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.issueTypeId))
+            assertThat(event.severityLevel).isEqualTo(LogSeverityLevel.RECOMMENDATION.statsLogValue)
+            assertThat(event.sourceProfileType)
+                .isEqualTo(SafetySourceProfileType.PERSONAL.statsLogValue)
+            assertThat(event.subpageId)
+                .isEqualTo(InteractionLogger.encodeStringId(DEVICE_UNLOCK_SUBPAGE_KEY))
+            assertThat(event.issueState)
+                .isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ACTIVE)
+        }
+    }
+
+    @Test
+    fun interactionLogger_onIssuePrimaryActionClickWithConfirmation_logsPrimaryActionClicked() {
+        val action =
+            createIssueAction(
+                id = "primaryAction",
+                label = "Primary Action",
+                willResolve = true,
+                hasConfirmation = true,
+            )
+        val activeIssue =
+            createIssue(
+                id = "primaryActionIssue",
+                actions = listOf(action),
+                sourceIds = setOf(ANDROID_LOCK_SCREEN_SOURCE_ID),
+            )
+
+        runTest(createScData(activeIssues = listOf(activeIssue))) {
+            onView(withId(R.id.banner_positive_btn)).perform(click())
+            ShadowLooper.idleMainLooper()
+            onView(withText("Accept")).inRoot(isDialog()).perform(click())
+            ShadowLooper.idleMainLooper()
+
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            // Events: SAFETY_ISSUE_VIEWED, SAFETY_CENTER_VIEWED, ISSUE_PRIMARY_ACTION_CLICKED
+            assertThat(events).hasSize(3)
+            val event = events[2]
+
+            assertThat(event.atomId).isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(event.action).isEqualTo(Action.ISSUE_PRIMARY_ACTION_CLICKED.statsLogValue)
+            assertThat(event.viewType).isEqualTo(ViewType.SUBPAGE.statsLogValue)
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(event.sourceId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.safetySourceIds.first()))
+            assertThat(event.issueTypeId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.issueTypeId))
+            assertThat(event.severityLevel).isEqualTo(LogSeverityLevel.RECOMMENDATION.statsLogValue)
+            assertThat(event.sourceProfileType)
+                .isEqualTo(SafetySourceProfileType.PERSONAL.statsLogValue)
+            assertThat(event.subpageId)
+                .isEqualTo(InteractionLogger.encodeStringId(DEVICE_UNLOCK_SUBPAGE_KEY))
+            assertThat(event.issueState)
+                .isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ACTIVE)
+        }
+    }
+
+    @Test
+    fun interactionLogger_onIssueSecondaryActionClick_logsSecondaryActionClicked() {
+        val action1 =
+            createIssueAction(id = "primaryAction", label = "Primary Action", willResolve = true)
+        val action2 = createIssueAction(id = "secondaryAction", label = "Secondary Action")
+        val activeIssue =
+            createIssue(
+                id = "secondaryActionIssue",
+                actions = listOf(action1, action2),
+                sourceIds = setOf(ANDROID_LOCK_SCREEN_SOURCE_ID),
+            )
+
+        runTest(createScData(activeIssues = listOf(activeIssue))) {
+            onView(withId(R.id.banner_negative_btn)).perform(click())
+            ShadowLooper.idleMainLooper()
+
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            // Events: SAFETY_ISSUE_VIEWED, SAFETY_CENTER_VIEWED, ISSUE_SECONDARY_ACTION_CLICKED
+            assertThat(events).hasSize(3)
+            val event = events[2]
+
+            assertThat(event.atomId).isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(event.action).isEqualTo(Action.ISSUE_SECONDARY_ACTION_CLICKED.statsLogValue)
+            assertThat(event.viewType).isEqualTo(ViewType.SUBPAGE.statsLogValue)
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(event.sourceId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.safetySourceIds.first()))
+            assertThat(event.issueTypeId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.issueTypeId))
+            assertThat(event.severityLevel).isEqualTo(LogSeverityLevel.RECOMMENDATION.statsLogValue)
+            assertThat(event.sourceProfileType)
+                .isEqualTo(SafetySourceProfileType.PERSONAL.statsLogValue)
+            assertThat(event.subpageId)
+                .isEqualTo(InteractionLogger.encodeStringId(DEVICE_UNLOCK_SUBPAGE_KEY))
+            assertThat(event.issueState)
+                .isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ACTIVE)
+        }
+    }
+
+    @Test
+    fun interactionLogger_onIssueDismissClick_logsDismissClicked() {
+        val activeIssue =
+            createIssue(
+                id = "dismissIssue",
+                sourceIds = setOf(ANDROID_LOCK_SCREEN_SOURCE_ID),
+                isDismissible = true,
+                shouldConfirmDismissal = false,
+            )
+        runTest(createScData(activeIssues = listOf(activeIssue))) {
+            onView(withId(R.id.banner_dismiss_btn)).perform(click())
+            ShadowLooper.idleMainLooper()
+
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            // Events: SAFETY_ISSUE_VIEWED, SAFETY_CENTER_VIEWED, ISSUE_DISMISS_CLICKED
+            assertThat(events).hasSize(3)
+            val event = events[2]
+
+            assertThat(event.atomId).isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(event.action).isEqualTo(Action.ISSUE_DISMISS_CLICKED.statsLogValue)
+            assertThat(event.viewType).isEqualTo(ViewType.SUBPAGE.statsLogValue)
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(event.sourceId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.safetySourceIds.first()))
+            assertThat(event.issueTypeId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.issueTypeId))
+            assertThat(event.severityLevel).isEqualTo(LogSeverityLevel.RECOMMENDATION.statsLogValue)
+            assertThat(event.sourceProfileType)
+                .isEqualTo(SafetySourceProfileType.PERSONAL.statsLogValue)
+            assertThat(event.subpageId)
+                .isEqualTo(InteractionLogger.encodeStringId(DEVICE_UNLOCK_SUBPAGE_KEY))
+            assertThat(event.issueState)
+                .isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ACTIVE)
+        }
+    }
+
+    @Test
+    fun interactionLogger_onIssueDismissClickWithConfirmation_logsDismissClicked() {
+        val activeIssue =
+            createIssue(
+                id = "dismissIssue",
+                sourceIds = setOf(ANDROID_LOCK_SCREEN_SOURCE_ID),
+                isDismissible = true,
+                shouldConfirmDismissal = true,
+            )
+        runTest(createScData(activeIssues = listOf(activeIssue))) {
+            onView(withId(R.id.banner_dismiss_btn)).perform(click())
+            ShadowLooper.idleMainLooper()
+            onView(withText("Dismiss")).inRoot(isDialog()).perform(click())
+            ShadowLooper.idleMainLooper()
+
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            // Events: SAFETY_ISSUE_VIEWED, SAFETY_CENTER_VIEWED, ISSUE_DISMISS_CLICKED
+            assertThat(events).hasSize(3)
+            val event = events[2]
+
+            assertThat(event.atomId).isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(event.action).isEqualTo(Action.ISSUE_DISMISS_CLICKED.statsLogValue)
+            assertThat(event.viewType).isEqualTo(ViewType.SUBPAGE.statsLogValue)
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(event.sourceId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.safetySourceIds.first()))
+            assertThat(event.issueTypeId)
+                .isEqualTo(InteractionLogger.encodeStringId(activeIssue.issueTypeId))
+            assertThat(event.severityLevel).isEqualTo(LogSeverityLevel.RECOMMENDATION.statsLogValue)
+            assertThat(event.sourceProfileType)
+                .isEqualTo(SafetySourceProfileType.PERSONAL.statsLogValue)
+            assertThat(event.subpageId)
+                .isEqualTo(InteractionLogger.encodeStringId(DEVICE_UNLOCK_SUBPAGE_KEY))
+            assertThat(event.issueState)
+                .isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ACTIVE)
         }
     }
 

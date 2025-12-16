@@ -18,6 +18,7 @@ package com.android.settings.safetycenter.ui
 
 import android.content.Intent
 import android.os.UserHandle
+import android.safetycenter.SafetyCenterIssue
 import android.safetycenter.SafetyCenterManager.EXTRA_SAFETY_SOURCE_ID
 import android.safetycenter.SafetyCenterManager.EXTRA_SAFETY_SOURCE_ISSUE_ID
 import android.safetycenter.SafetyCenterManager.EXTRA_SAFETY_SOURCE_USER_HANDLE
@@ -72,4 +73,18 @@ data class FocusedIssueKey(
     val sourceIssueId: String,
     val sourceId: String,
     val userHandle: UserHandle,
-)
+) {
+    /**
+     * Checks if this [FocusedIssueKey] matches the given [SafetyCenterIssue].
+     *
+     * A match is determined by comparing the `sourceIssueId`, `sourceId`, and `userHandle`.
+     *
+     * @param issue The [SafetyCenterIssue] to compare against this key.
+     * @return `true` if the issue's properties match this key, `false` otherwise.
+     */
+    fun matchesSafetyCenterIssue(issue: SafetyCenterIssue): Boolean {
+        return issue.safetySourceIssueId == this.sourceIssueId &&
+            issue.safetySourceIds.contains(this.sourceId) &&
+            issue.user == this.userHandle
+    }
+}

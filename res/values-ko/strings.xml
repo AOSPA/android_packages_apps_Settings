@@ -1031,7 +1031,7 @@
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"시작하려면 외부 디스플레이를 연결하거나 다른 케이블을 사용해 보세요."</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"옵션 더보기"</string>
     <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"힌트 텍스트 반복 애니메이션 일시중지"</string>
-    <string name="external_display_topology_hint" msgid="885396727047321347">"길게 터치한 후 드래그하여 디스플레이를 재정렬하세요."</string>
+    <string name="external_display_topology_hint" msgid="885396727047321347">"길게 터치한 후 드래그하여 디스플레이 재정렬"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"탭하여 탐색 화살표 표시"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"화살표를 탭하여 디스플레이 재정렬"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"내장 디스플레이 미러링"</string>
@@ -1208,7 +1208,7 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"QR 코드를 사용하여 이 네트워크에 기기를 추가합니다."</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR 코드가 유효한 형식이 아닙니다."</string>
     <string name="retry" msgid="7542103800274026915">"재시도"</string>
-    <string name="shared_message" msgid="2104244057926025072">"공유됨"</string>
+    <string name="shared_message" msgid="2104244057926025072">"공유"</string>
     <string name="private_message" msgid="5897966950396765392">"비공개"</string>
     <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"전환"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"취소"</string>
@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"인증서가 필요합니다."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"위치 정확성 개선 등의 목적으로 <xliff:g id="APP_NAME">%1$s</xliff:g>에서 Wi-Fi가 꺼져 있을 때에도 네트워크 검색을 사용하도록 설정하려 합니다.\n\n검색하려는 모든 앱에 대해 이를 허용하시겠습니까?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"알 수 없는 앱에서 위치 정확성 개선 등의 목적으로 Wi-Fi가 꺼져 있을 때도 네트워크 검색 기능을 사용 설정하려 합니다.\n\n기능을 요청하는 모든 앱에 네트워크 검색을 허용하시겠습니까?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"허용"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"거부"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*필수 입력란"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"공유 네트워크입니다. 변경하려면 로그인해야 합니다."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"변경하려면 네트워크 소유자 또는 기기 관리자에게 문의하세요."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"이 기기의 모든 사용자가 이 네트워크에 액세스할 수 있습니다."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"이 네트워크에는 인터넷이 연결되어 있지 않습니다. 연결 상태를 유지하시겠습니까?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"제한된 연결로 인해 일부 앱과 서비스가 작동하지 않을 수 있습니다. 계속 사용하시겠습니까?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"이 네트워크를 다시 요청하지 마세요."</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"네트워크 저장 실패"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"취소"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"네트워크를 삭제하시겠습니까?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"이 기기의 모든 사용자에게서 <xliff:g id="NETWORK_NAME">%1$s</xliff:g> 네트워크가 삭제됩니다."</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{네트워크 1개}other{네트워크 #개}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{구독 1개}other{구독 #개}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{네트워크 및 구독 1개}other{네트워크 및 구독 #개}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"고해상도"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"최대 해상도"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"최대 해상도 사용 시 배터리 사용량이 증가합니다. 해상도를 전환하면 일부 앱이 다시 시작될 수 있습니다."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g>x<xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g>Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g>헤르츠"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"시간대 변경"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"시간대가 자동으로 업데이트되면 알림을 받습니다."</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"알림, 시간, 시간대"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"예약된 시계 변경"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"시계에 예약된 변경이 적용되면(예: 일광 절약 시간이 적용될 때) 알림을 받습니다."</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"DST, 일광 절약 시간, 일광 절약, 시계 변경, 예약된 시계 변경"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"다음 변경"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"예약된 변경 없음"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"법률 정보, 상태, 소프트웨어 버전 보기"</string>
     <string name="legal_information" msgid="7509900979811934843">"법률 정보"</string>
     <string name="manual" msgid="3651593989906084868">"수동"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"복제됨"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> 복제 만드는 중"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> 복제 생성됨"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"언어, 동작, 시간"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"시스템 언어, 앱 언어, 지역 설정, 음성"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wi-Fi, 네트워크 연결, 인터넷, 무선, 데이터, WiFi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi 알림, Wi‑Fi 알림"</string>
@@ -4697,6 +4692,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"보안을 위해 고급 보호를 사용하려면 이 설정을 계속 사용 중지해야 합니다."</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"보안을 위해 고급 보호 기능이 이 작업을 차단합니다"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"설정"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"사용 중지"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"사용 설정"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"표시"</string>
@@ -5180,10 +5183,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"실험 기능: ANGLE 사용 설정"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"경고: ANGLE을 기본 OpenGL ES 드라이버로 사용 설정합니다. 이 기능은 실험적인 기능이며, 일부 카메라 및 동영상 앱과 호환되지 않을 수도 있습니다. 스위치를 켜기 전에 기기 데이터를 백업하세요."</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"시스템 OpenGL ES 드라이버를 변경하려면 재부팅해야 합니다. 재부팅하기 전에 기기 데이터를 백업하세요. 재부팅에 실패할 경우 기기를 복원하려면 초기화해야 합니다."</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"앱 호환성 변경사항"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"앱 호환성 변경사항 전환"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"기본적으로 사용 설정된 앱의 변경사항"</string>
@@ -6070,8 +6071,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"선정적인 검색 결과 필터링"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{지원되는 앱 #개}other{지원되는 앱 #개}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"자세히 알아보기"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"이러한 설정을 사용 중지해도 다른 계정 설정이 적용될 수도 있습니다."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"자녀 보호 기능 PIN 입력"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"자녀 보호 기능 PIN 설정"</string>
@@ -6089,8 +6089,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"PIN 삭제 및 자녀 보호 기능 사용 중지"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"삭제"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"자녀 보호 기능 PIN을 이용 중인 사용자:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"다른 사용자에 대해 자녀 보호 기능 PIN이 활성화되어 있습니다."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> 애니메이션"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"컨트롤을 사용 설정할 수 없음"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"설정을 사용할 수 없음"</string>

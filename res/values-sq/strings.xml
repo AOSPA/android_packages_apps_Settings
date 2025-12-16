@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Kërkohet certifikimi."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Për të përmirësuar saktësinë e vendndodhjes dhe për qëllime të tjera, <xliff:g id="APP_NAME">%1$s</xliff:g> dëshiron të aktivizojë skanimin e rrjetit, edhe kur Wi-Fi është joaktiv.\n\nTë lejohet kjo për të gjitha aplikacionet që dëshirojnë të skanojnë?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Për të përmirësuar saktësinë e vendndodhjes dhe për qëllime të tjera, një aplikacion i panjohur dëshiron të aktivizojë skanimin e rrjetit, edhe kur Wi-Fi është joaktiv.\n\nTë lejohet kjo për të gjitha aplikacionet që dëshirojnë të skanojnë?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Lejo"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Refuzo"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*e detyrueshme"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Ky është një rrjet i ndarë. Duhet të identifikohesh për të bërë ndryshime."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Kontakto me zotëruesin e rrjetit ose administratorin e pajisjes për të bërë ndryshime."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Të gjithë përdoruesit në këtë pajisje mund të qasen në këtë rrjet"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Ky rrjet nuk ka qasje në internet. Dëshiron të qëndrosh i lidhur?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Disa aplikacione dhe shërbime mund të mos funksionojnë për shkak të lidhshmërisë së kufizuar. Do ta përdorësh gjithsesi?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Mos pyet përsëri për këtë rrjet"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Dështoi në ruajtjen e rrjetit"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Anulo"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Të harrohet rrjeti?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> do të hiqet për të gjithë përdoruesit në këtë pajisje"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 rrjet}other{# rrjete}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 abonim}other{# abonime}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 rrjet dhe abonim}other{# rrjete dhe abonime}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Rezolucioni i lartë"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Rezolucioni maksimal"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Rezolucioni maksimal përdor më shumë bateri. Ndryshimi i rezolucionit mund të shkaktojë rinisjen e disa aplikacioneve."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> me <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> herc"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Ndryshim i brezit orar"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Merr një njoftim kur brezi yt orar përditësohet automatikisht"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"njoftim, ora, zona, brezi orar"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Ndryshimi i planifikuar i orës"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Merr një njoftim kur ora jote kryen një ndryshim të planifikuar, p.sh. për orën verore"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"dst, ora verore, ndërrimi i orës, ndryshimi i orës, ndryshimi i planifikuar i orës"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Ndryshimi tjetër"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Nuk ka ndryshime të planifikuara"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Shiko informacionin ligjor, statusin dhe versionin e softuerit"</string>
     <string name="legal_information" msgid="7509900979811934843">"Informacioni ligjor"</string>
     <string name="manual" msgid="3651593989906084868">"Manuale"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"U klonua"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Kloni i <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> po krijohet"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Kloni i <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> u krijua"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Gjuhët, gjestet, ora"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Gjuhët e sistemit, gjuhët e aplikacionit, preferencat rajonale, ligjërimi"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, lidhja e rrjetit, internet, wireless, të dhëna, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Njoftimi i Wi‑Fi, njoftimi i wifi"</string>
@@ -4697,6 +4692,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Për sigurinë tënde, \"Mbrojtja e përparuar\" kërkon që ky cilësim të qëndrojë joaktiv"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Për sigurinë tënde, \"Mbrojtja e përparuar\" e parandalon këtë veprim"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Cilësimet"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Çaktivizo"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Aktivizo"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Shfaq"</string>
@@ -5180,10 +5183,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Eksperimentale: Aktivizo ANGLE"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Paralajmërim: Aktivizo ANGLE si drejtues të parazgjedhur OpenGL ES. Kjo veçori është në eksperiment dhe mund të mos jetë e përputhshme me disa aplikacione të kamerave dhe videove. Rezervo të dhënat e pajisjes para se të aktivizosh ndryshimin"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"Kërkohet rindezja për të ndryshuar drejtuesin e OpenGL ES për sistemin. Rezervo të dhënat e pajisjes para se ta rindezësh. Në rast se rindezja dështon, të duhet një rivendosje në gjendje fabrike për të restauruar pajisjen"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Ndryshimet e pajtueshmërisë së aplikacionit"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Aktivizo ose çaktivizo ndryshimet e përputhshmërisë së aplikacionit"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Ndryshimet të aktivizuara si parazgjedhje"</string>

@@ -6104,13 +6104,22 @@
         <receiver
             android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteTileStateReceiver"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false"
+            android:featureFlag="com.android.settings.flags.enable_satellite_tile">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.telephony.action.DEFAULT_DATA_SUBSCRIPTION_CHANGED"/>
                 <action android:name="android.telephony.action.CARRIER_CONFIG_CHANGED"/>
                 <action android:name="android.telephony.action.SIM_CARD_STATE_CHANGED"/>
             </intent-filter>
         </receiver>
+
+        <service
+            android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteEligibilityJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false"
+            android:featureFlag="com.android.settings.flags.enable_satellite_tile" />
 
         <service
             android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteTileService"
@@ -6118,7 +6127,8 @@
             android:icon="@drawable/ic_satellite_tile"
             android:label="@string/satellite_tile_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:exported="true"
+            android:featureFlag="com.android.settings.flags.enable_satellite_tile">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -6131,8 +6141,19 @@
             android:label="@string/satellite_landing_page_label"
             android:exported="false"
             android:theme="@style/SatelliteLandingPageTheme"
-            android:taskAffinity=".network.telephony.satellite.quicksettings.SatelliteLandingPageActivity">
+            android:taskAffinity=".network.telephony.satellite.quicksettings.SatelliteLandingPageActivity"
+            android:featureFlag="com.android.settings.flags.enable_satellite_tile">
         </activity>
+
+
+
+        <activity
+            android:name=".network.telephony.satellite.quicksettings.AddSatelliteTileActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:taskAffinity="com.android.settings.satellite.addtile"
+            android:excludeFromRecents="true"
+            android:featureFlag="com.android.settings.flags.enable_satellite_tile" />
 
         <!-- This is the longest AndroidManifest.xml ever. -->
 
