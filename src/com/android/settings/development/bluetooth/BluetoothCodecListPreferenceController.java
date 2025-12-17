@@ -37,6 +37,8 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /** List preference controller to set the Bluetooth A2DP codec */
 public class BluetoothCodecListPreferenceController extends AbstractBluetoothPreferenceController
@@ -86,24 +88,26 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
         final BluetoothA2dp bluetoothA2dp = mBluetoothA2dp;
         if (bluetoothA2dp == null) {
             Log.e(TAG, "onPreferenceChange: bluetoothA2dp is null");
-            setListPreferenceEnabled(false);
+            setupDefaultListPreference();
             return false;
         }
 
         if (!writeConfigurationValues((String) newValue)) {
             Log.e(TAG, "onPreferenceChange: Configuration failed");
+            setupDefaultListPreference();
             return false;
         }
 
         if (mBluetoothA2dpConfigStore == null) {
             Log.e(TAG, "onPreferenceChange: Bluetooth A2dp Config Store is null");
+            setupDefaultListPreference();
             return false;
         }
 
         final BluetoothDevice activeDevice = getA2dpActiveDevice();
         if (activeDevice == null) {
             Log.e(TAG, "onPreferenceChange: active device is null");
-            setListPreferenceEnabled(false);
+            setupDefaultListPreference();
             return false;
         }
 
@@ -122,28 +126,21 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
     public void updateState(@Nullable Preference preference) {
         super.updateState(preference);
 
-        if (!isHDAudioEnabled()) {
-            Log.d(TAG, "updateState: HD Audio is disabled");
-            setListPreferenceEnabled(false);
-            return;
-        }
-
         final BluetoothCodecStatus codecStatus = getBluetoothCodecStatus();
         if (codecStatus == null) {
             Log.e(TAG, "updateState: Bluetooth Codec Status is null");
+            setupDefaultListPreference();
             return;
         }
 
         final BluetoothCodecConfig currentCodecConfig = codecStatus.getCodecConfig();
         if (currentCodecConfig == null) {
             Log.e(TAG, "updateState: currentCodecConfig is null");
+            setupDefaultListPreference();
             return;
         }
 
-        final List<String> codecIds = new ArrayList<>();
-        final List<String> labels = new ArrayList<>();
-        String selectedCodecId = null;
-        String selectedLabel = null;
+        final Map<Long, String> codecMap = new TreeMap<>();
         final List<BluetoothCodecConfig> codecConfigs =
                 codecStatus.getCodecsSelectableCapabilities();
         for (BluetoothCodecConfig config : codecConfigs) {
@@ -152,12 +149,25 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
                 Log.e(TAG, "codec type for config:" + config + " is null");
                 continue;
             }
-            labels.add(codecType.getCodecName());
-            codecIds.add(String.valueOf(codecType.getCodecId()));
-            if (currentCodecConfig != null
-                    && currentCodecConfig.getExtendedCodecType().equals(codecType)) {
-                selectedCodecId = codecIds.get(codecIds.size() - 1);
-                selectedLabel = labels.get(labels.size() - 1);
+            if (!isHDAudioEnabled() && codecType.getCodecId() != BluetoothCodecType.CODEC_ID_SBC) {
+                continue;
+            }
+            codecMap.put(codecType.getCodecId(), codecType.getCodecName());
+        }
+
+        final List<String> labels = new ArrayList<>(codecMap.values());
+        final List<String> codecIds = new ArrayList<>();
+        for (Long codecId : codecMap.keySet()) {
+            codecIds.add(String.valueOf(codecId));
+        }
+
+        String selectedCodecId = null;
+        String selectedLabel = null;
+        if (currentCodecConfig != null) {
+            BluetoothCodecType currentCodecType = currentCodecConfig.getExtendedCodecType();
+            if (codecMap.containsKey(currentCodecType.getCodecId())) {
+                selectedCodecId = String.valueOf(currentCodecType.getCodecId());
+                selectedLabel = currentCodecType.getCodecName();
                 Log.d(
                         TAG,
                         "updateState: Selecting codec: "
@@ -181,11 +191,7 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
             Log.e(TAG, "onHDAudioEnabled: List preference is null");
             return;
         }
-        setListPreferenceEnabled(enabled);
-        if (!enabled) {
-            mListPreference.setValue(null);
-            mListPreference.setSummary(null);
-        }
+        updateState(mListPreference);
     }
 
     @VisibleForTesting
