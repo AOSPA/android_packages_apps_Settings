@@ -23,6 +23,8 @@ import android.app.Application
 import android.app.TaskStackListener
 import android.content.Context
 import android.hardware.display.DisplayManager
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import android.view.Display.DEFAULT_DISPLAY
 import androidx.lifecycle.Lifecycle
@@ -36,6 +38,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.RestrictedListPreference
 import com.android.settings.connecteddevice.display.SelectedDisplayPreferenceFragment.PrefInfo
+import com.android.settings.flags.Flags.FLAG_ENABLE_RESOLUTION_REFRESH_RATE_SETTING
 import com.android.settings.testutils.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
 import kotlin.test.assertNull
@@ -56,6 +59,7 @@ import org.mockito.kotlin.doReturn
 class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     // Rule to execute LiveData operations synchronously
     @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
+    @get:Rule val setFlagsRule: SetFlagsRule = SetFlagsRule()
 
     private lateinit var application: Application
     private lateinit var viewModel: DisplayPreferenceViewModel
@@ -265,6 +269,7 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     }
 
     @Test
+    @EnableFlags(FLAG_ENABLE_RESOLUTION_REFRESH_RATE_SETTING)
     fun testExternalDisplaySelected_launchingResolutionSelector() {
         fragment = initFragment()
         val display = mDisplays.first { it.id == EXTERNAL_DISPLAY_ID }
