@@ -50,7 +50,7 @@ open class MyDeviceInfoScreen :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.my_device_info_pref_screen_purpose
 
@@ -98,7 +98,7 @@ open class MyDeviceInfoScreen :
                 title = R.string.my_device_info_device_details_category_title,
             ) +=
                 {
-                    if (Flags.catalystDeviceModel()) +HardwareInfoScreen.KEY order 30
+                    +HardwareInfoScreen.KEY order 30
                     addAsync(coroutineScope, Dispatchers.Default) {
                         +SimEidPreference(context) order 31
                     }

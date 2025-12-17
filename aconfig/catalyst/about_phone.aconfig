@@ -1,14 +1,6 @@
 package: "com.android.settings.flags"
 container: "system_ext"
 
-
-flag {
-  name: "catalyst_device_model"
-  namespace: "android_settings"
-  description: "Flag for Model"
-  bug: "405344827"
-}
-
 flag {
   name: "catalyst_my_device_info_pref_screen"
   namespace: "android_settings"
