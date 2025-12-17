@@ -90,4 +90,24 @@ public class SystemDashboardFragmentTest {
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
                 R.xml.system_dashboard_fragment_desktop);
     }
+
+    @Test
+    public void getPreferenceScreenResId_shouldShowDeviceCategoryFalse_includesKeyboardSettings() {
+        ShadowDesktopSettingsUtils.setShouldShow(false);
+
+        final int xmlId = mFragment.getPreferenceScreenResId();
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
+
+        assertThat(keys).contains("Keyboard_settings");
+    }
+
+    @Test
+    public void getPreferenceScreenResId_shouldShowDeviceCategoryTrue_excludesKeyboardSettings() {
+        ShadowDesktopSettingsUtils.setShouldShow(true);
+
+        final int xmlId = mFragment.getPreferenceScreenResId();
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
+
+        assertThat(keys).doesNotContain("Keyboard_settings");
+    }
 }

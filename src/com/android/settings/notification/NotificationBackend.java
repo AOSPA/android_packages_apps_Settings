@@ -822,8 +822,7 @@ public class NotificationBackend {
     }
 
     public boolean showSummarizationSettings() {
-        boolean nasSupported = (Flags.nmSummarization() || Flags.nmSummarizationUi())
-                && isNotificationSummarizationSupported();
+        boolean nasSupported = isNotificationSummarizationSupported();
         return nasSupported || Flags.nmSummarizationAll();
     }
 
