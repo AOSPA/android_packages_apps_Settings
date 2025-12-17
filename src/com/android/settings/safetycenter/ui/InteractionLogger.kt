@@ -209,6 +209,7 @@ enum class ViewType(val statsLogValue: Int) {
     UNKNOWN(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__VIEW_TYPE__VIEW_TYPE_UNKNOWN),
     FULL(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__VIEW_TYPE__FULL),
     SUBPAGE(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__VIEW_TYPE__SUBPAGE),
+    QUICK_SETTINGS(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__VIEW_TYPE__QUICK_SETTINGS),
 }
 
 /** Represents the source from which the user navigated to the current screen. */

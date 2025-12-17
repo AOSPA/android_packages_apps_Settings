@@ -6132,6 +6132,19 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.android.settings.safetycenter.ui.SafetyCenterQsActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:exported="true"
+            android:theme="@style/Theme.Settings.NoActionBar"
+            android:featureFlag="com.android.settings.flags.enable_safety_center_quick_settings">
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.VIEW_SAFETY_CENTER_QS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <receiver
             android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteTileStateReceiver"
             android:enabled="true"
