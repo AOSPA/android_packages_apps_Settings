@@ -22,6 +22,7 @@ import android.service.settings.preferences.SettingsPreferenceServiceClient
 import android.util.Log
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlinx.coroutines.CompletableDeferred
 
 /**
  * Manages the connection to the [SettingsPreferenceServiceClient]. The client is created
@@ -34,6 +35,8 @@ object SettingsPreferenceServiceClientManager {
     @Volatile
     var client: SettingsPreferenceServiceClient? = null
         private set
+
+    private val initializationComplete = CompletableDeferred<Unit>()
 
     private val backgroundExecutor: ExecutorService = Executors.newSingleThreadExecutor()
 
@@ -48,13 +51,19 @@ object SettingsPreferenceServiceClientManager {
                     override fun onResult(result: SettingsPreferenceServiceClient) {
                         Log.d(TAG, "Successfully connected to SettingsPreferenceServiceClient")
                         this@SettingsPreferenceServiceClientManager.client = result
+                        initializationComplete.complete(Unit)
                     }
 
                     override fun onError(error: Exception) {
                         Log.e(TAG, "Error connecting to SettingsPreferenceServiceClient: $error")
+                        initializationComplete.completeExceptionally(error)
                     }
                 },
             )
         }
+    }
+
+    suspend fun awaitInitialized() {
+        initializationComplete.await()
     }
 }
