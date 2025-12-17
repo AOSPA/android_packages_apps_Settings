@@ -2264,7 +2264,6 @@
                        android:value="com.android.settings.notification.BundlePreferenceFragment" />
         </activity>
 
-
         <activity
             android:name="Settings$NotificationSummarizationActivity"
             android:exported="true">
@@ -2678,10 +2677,22 @@
                        android:value="@string/menu_key_accessibility"/>
         </activity>
 
+        <activity android:name=".accessibility.setupwizard.AccessibilitySetupWizardActivity"
+            android:icon="@drawable/ic_accessibility_suggestion"
+            android:label="@string/vision_settings_title"
+            android:theme="@style/SudThemeGlif.DayNight"
+            android:exported="true"
+            android:enabled="false">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ACCESSIBILITY_SETTINGS_FOR_SUW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".accessibility.AccessibilitySettingsForSetupWizardActivity"
-                android:icon="@drawable/ic_accessibility_suggestion"
-                android:label="@string/vision_settings_title"
-                android:exported="true">
+            android:icon="@drawable/ic_accessibility_suggestion"
+            android:label="@string/vision_settings_title"
+            android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS_FOR_SUW" />
                 <category android:name="android.intent.category.DEFAULT" />
