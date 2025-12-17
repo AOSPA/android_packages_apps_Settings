@@ -18,13 +18,18 @@ package com.android.settings.spa.accessibility
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.rememberContext
+import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.framework.util.mapItem
 import com.android.settingslib.spa.lifecycle.collectAsCallbackWithLifecycle
+import com.android.settingslib.spa.widget.ui.SettingsIntro
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
@@ -40,6 +45,15 @@ object ForceDarkAppExceptionsPageProvider : SettingsPageProvider {
         AppListPage(
             title = stringResource(R.string.accessibility_expanded_dark_theme_exceptions_title),
             listModel = rememberContext(::ForceDarkAppExceptionsListModel),
+            header = {
+                Box(Modifier.padding(SettingsDimension.itemPadding)) {
+                    SettingsIntro(
+                        stringResource(
+                            R.string.accessibility_expanded_dark_theme_exceptions_header_description
+                        )
+                    )
+                }
+            },
         )
     }
 }
@@ -66,13 +80,14 @@ class ForceDarkAppExceptionsListModel(
     @Composable
     override fun AppListItemModel<ForceDarkAppExceptionRecord>.AppItem() {
         AppListSwitchItem(
-            checked = record.controller.isException.collectAsCallbackWithLifecycle(),
+            checked = record.controller.isForceDarkAllowed.collectAsCallbackWithLifecycle(),
             changeable = {
                 // TODO(b/448469020): If the app exists in our blocklist, the switch item for the
                 // app should not be changeable.
                 true
             },
-            onCheckedChange = record.controller::setException,
+            // When the switch is on, enable EDT for the app, otherwise, exclude the app from EDT.
+            onCheckedChange = record.controller::setIsForceDarkAllowed,
         )
     }
 }

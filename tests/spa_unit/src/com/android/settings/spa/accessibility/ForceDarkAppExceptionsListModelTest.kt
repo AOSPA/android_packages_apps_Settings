@@ -63,7 +63,7 @@ class ForceDarkAppExceptionsListModelTest {
     }
 
     @Test
-    fun appIsException_isChecked() {
+    fun appIsException_isNotChecked() {
         whenever(repository.isAppForceDarkAlwaysDisable(APP)).thenReturn(true)
 
         composeTestRule.setContent {
@@ -81,11 +81,11 @@ class ForceDarkAppExceptionsListModelTest {
             }
         }
 
-        composeTestRule.onNodeWithText(LABEL).assertIsOn()
+        composeTestRule.onNodeWithText(LABEL).assertIsOff()
     }
 
     @Test
-    fun appIsNotException_isNotChecked() {
+    fun appIsNotException_isChecked() {
         whenever(repository.isAppForceDarkAlwaysDisable(APP)).thenReturn(false)
 
         composeTestRule.setContent {
@@ -103,7 +103,7 @@ class ForceDarkAppExceptionsListModelTest {
             }
         }
 
-        composeTestRule.onNodeWithText(LABEL).assertIsOff()
+        composeTestRule.onNodeWithText(LABEL).assertIsOn()
     }
 
     private companion object {
