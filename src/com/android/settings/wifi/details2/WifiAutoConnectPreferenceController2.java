@@ -104,7 +104,7 @@ public class WifiAutoConnectPreferenceController2 extends TogglePreferenceContro
                 boolean enabled = true;
                 if (com.android.settings.connectivity.Flags.wifiMultiuser()
                         && config != null) {
-                    if (config.creatorUid != mContext.getUserId()) {
+                    if (config.getCreatorUserId() != mContext.getUserId()) {
                         if (mUserManager != null && mUserManager.getUserCount() > 1) {
                             enabled = false;
                         }
