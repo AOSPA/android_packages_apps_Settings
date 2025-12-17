@@ -15,6 +15,8 @@
  */
 package com.android.settings.spa.accessibility
 
+import android.app.usage.UsageStats
+import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
@@ -30,11 +32,13 @@ import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.framework.util.mapItem
 import com.android.settingslib.spa.lifecycle.collectAsCallbackWithLifecycle
 import com.android.settingslib.spa.widget.ui.SettingsIntro
+import com.android.settingslib.spaprivileged.model.app.AppEntry
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.android.settingslib.spaprivileged.template.app.AppListPage
 import com.android.settingslib.spaprivileged.template.app.AppListSwitchItem
+import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.flow.Flow
 
 object ForceDarkAppExceptionsPageProvider : SettingsPageProvider {
@@ -69,6 +73,16 @@ class ForceDarkAppExceptionsListModel(
         ForceDarkAppExceptionsRepository(context = context),
 ) : AppListModel<ForceDarkAppExceptionRecord> {
 
+    private val usageStatsManager =
+        context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+    private val now = System.currentTimeMillis()
+    private val usageStatsMap: Map<String, UsageStats>
+
+    init {
+        val startTime = now - TimeUnit.DAYS.toMillis(5)
+        usageStatsMap = usageStatsManager.queryAndAggregateUsageStats(startTime, now)
+    }
+
     override fun transform(userIdFlow: Flow<Int>, appListFlow: Flow<List<ApplicationInfo>>) =
         appListFlow.mapItem { app ->
             ForceDarkAppExceptionRecord(
@@ -76,6 +90,14 @@ class ForceDarkAppExceptionsListModel(
                 controller = ForceDarkAppExceptionsController(app, repository),
             )
         }
+
+    override fun getComparator(option: Int): Comparator<AppEntry<ForceDarkAppExceptionRecord>> =
+        compareByDescending<AppEntry<ForceDarkAppExceptionRecord>> {
+                // Ordering by the Force dark override status
+                !it.record.controller.isForceDarkAllowed.value
+            }
+            .thenByDescending { usageStatsMap[it.record.app.packageName]?.lastTimeUsed ?: 0L }
+            .then(super.getComparator(option))
 
     @Composable
     override fun AppListItemModel<ForceDarkAppExceptionRecord>.AppItem() {
