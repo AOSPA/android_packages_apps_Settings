@@ -17,14 +17,22 @@
 package com.android.settings.catalyst
 
 import android.Manifest
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.fragment.app.Fragment
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R;
-import com.android.settings.testutils.catalyst.ApiTester
-import com.android.settings.testutils.catalyst.CannotSetException
-import com.android.settings.testutils.catalyst.FailedPreconditionException
-import com.android.settings.testutils.catalyst.HardwareUnsupportedException
-import com.android.settings.testutils.catalyst.MissingPermissionException
+import com.android.settings.SettingsApplication
+import com.android.settings.flags.Flags
+import com.android.settings.flags.Flags.FLAG_CATALYST_MIGRATION_26Q2
+import com.android.settings.testutils2.ApiTester
+import com.android.settings.testutils2.CannotSetException
+import com.android.settings.testutils2.FailedPreconditionException
+import com.android.settings.testutils2.HardwareUnsupportedException
+import com.android.settings.testutils2.MissingPermissionException
+import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.ProvidePreferenceScreenOptions
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -33,8 +41,10 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUns
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.google.common.truth.Truth
 import kotlin.test.assertFailsWith
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 class ApiTesterTest {
@@ -45,6 +55,9 @@ class ApiTesterTest {
         purpose = 0
     ) {
         init {
+            flag {
+                Flags.catalystMigration26q2()
+            }
             preference(
                 key = "preference_which_has_value_hello_and_no_setter",
                 purpose = 0,
@@ -144,6 +157,20 @@ class ApiTesterTest {
         }
     }
     val tester = ApiTester(TestScreen())
+    @get:Rule val setFlagsRule = SetFlagsRule()
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getScreen_flagEnabled_isNotNull() {
+        Truth.assertThat(tester.getScreen()).isNotNull()
+    }
+
+    @Test
+    @DisableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getScreen_flagDisabled_isNull() {
+        Truth.assertThat(tester.getScreen()).isNull()
+    }
+
     @Test
     fun get_returnsCorrectValue() {
         Truth.assertThat(tester.get<String>("preference_which_has_value_hello_and_no_setter")).isEqualTo("Hello")
