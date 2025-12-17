@@ -40,6 +40,7 @@ import androidx.fragment.app.FragmentActivity
 import com.android.internal.widget.LockPatternUtils
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.password.ChooseLockGeneric
+import com.android.settings.password.ChooseLockPassword
 import com.android.settingslib.supervision.SupervisionIntentProvider
 import com.android.settingslib.supervision.SupervisionLog
 
@@ -169,8 +170,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
 
     private fun showApprovalMethodChooser(approvalMethods: List<ResolveInfo>) {
         registerApprovalMethodChooserResultListener()
-        val chooserFragment =
-            ApprovalMethodChooserDialogFragment.newInstance(approvalMethods, Bundle())
+        val chooserFragment = ApprovalMethodChooserDialogFragment.newInstance(approvalMethods)
         chooserFragment.show(supportFragmentManager, "ApprovalMethodChooser")
     }
 
@@ -214,6 +214,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                             this,
                             SupervisionIntentProvider.PinRecoveryAction.UPDATE,
                         )
+
                     if (updatePinIntent != null) {
                         verificationLauncher.launch(updatePinIntent)
                     } else {
@@ -337,6 +338,9 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                     DevicePolicyManager.PASSWORD_QUALITY_NUMERIC,
                 )
                 putExtra(Intent.EXTRA_USER_ID, supervisingUserHandle()?.identifier)
+                if (Flags.enableSupervisionSettingsUiUpdates()) {
+                    putExtra(ChooseLockPassword.EXTRA_KEY_FOR_SUPERVISION_RESET, true)
+                }
             }
         setPinLauncher.launch(intent)
     }

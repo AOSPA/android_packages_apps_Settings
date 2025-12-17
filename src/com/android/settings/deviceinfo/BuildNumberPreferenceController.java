@@ -22,7 +22,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import android.hardware.biometrics.Flags;
 import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -229,23 +228,12 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
                     Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
                             false /* biometricsAuthenticationRequested */,
                             userId);
-            if (Flags.bpFallbackOptions()) {
-                if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                    Utils.launchBiometricPromptForMandatoryBiometrics(mFragment,
-                            REQUEST_IDENTITY_CHECK_FOR_DEV_PREF,
-                            userId, false /* hideBackground */);
-                } else {
-                    enableDevelopmentSettings();
-                }
-            } else if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+            if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
                 Utils.launchBiometricPromptForMandatoryBiometrics(mFragment,
                         REQUEST_IDENTITY_CHECK_FOR_DEV_PREF,
                         userId, false /* hideBackground */);
-            } else if (biometricAuthStatus == Utils.BiometricStatus.NOT_ACTIVE) {
-                enableDevelopmentSettings();
             } else {
-                IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(mFragment.getActivity(),
-                        biometricAuthStatus, true /* twoFactorAuthentication */);
+                enableDevelopmentSettings();
             }
         } else if (requestCode == REQUEST_IDENTITY_CHECK_FOR_DEV_PREF) {
             if (resultCode == Activity.RESULT_OK) {

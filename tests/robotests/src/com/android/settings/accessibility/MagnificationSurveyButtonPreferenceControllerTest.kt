@@ -21,9 +21,6 @@ import android.app.settings.SettingsEnums
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
 import android.view.accessibility.AccessibilityManager
 import androidx.core.util.Consumer
 import androidx.fragment.app.testing.EmptyFragmentActivity
@@ -36,7 +33,6 @@ import com.android.internal.accessibility.common.NotificationConstants.ACTION_CA
 import com.android.internal.accessibility.common.NotificationConstants.EXTRA_PAGE_ID
 import com.android.internal.accessibility.common.ShortcutConstants
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE
-import com.android.server.accessibility.Flags
 import com.android.settings.Utils.SETTINGS_PACKAGE_NAME
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE
@@ -50,7 +46,6 @@ import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
@@ -64,7 +59,6 @@ import org.robolectric.shadow.api.Shadow
 
 @RunWith(RobolectricTestParameterInjector::class)
 class MagnificationSurveyButtonPreferenceControllerTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val shadowPackageManager = shadowOf(context.packageManager)
     private var activityScenario: ActivityScenario<EmptyFragmentActivity>? = null
@@ -91,7 +85,6 @@ class MagnificationSurveyButtonPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     @TestParameters(
         value =
             [
@@ -121,7 +114,7 @@ class MagnificationSurveyButtonPreferenceControllerTest {
                     "}",
             ]
     )
-    fun getAvailabilityStatus_flagOn_returnExpectedAvailabilityStatus(
+    fun getAvailabilityStatus_returnExpectedAvailabilityStatus(
         hasShortcuts: Boolean,
         surveyAvailability: Boolean,
         inSetupWizard: Boolean,
@@ -136,18 +129,6 @@ class MagnificationSurveyButtonPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    fun getAvailabilityStatus_flagOff_returnUnavailable() {
-        setHasAnyMagnificationShortcut(true)
-        setupSurveyAvailability(available = true)
-
-        createController(inSetupWizard = false)
-
-        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     fun performClick_shouldStartActivityAndHideButtonAndSendCancelBroadcast() {
         setHasAnyMagnificationShortcut(true)
         setupSurveyAvailability(available = true)

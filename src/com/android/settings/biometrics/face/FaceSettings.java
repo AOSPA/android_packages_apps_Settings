@@ -395,22 +395,10 @@ public class FaceSettings extends DashboardFragment {
                         Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
                                 mBiometricsAuthenticationRequested,
                                 mUserId);
-                if (android.hardware.biometrics.Flags.bpFallbackOptions()) {
-                    if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                        Utils.launchBiometricPromptForMandatoryBiometrics(this,
-                                BIOMETRIC_AUTH_REQUEST,
-                                mUserId, true /* hideBackground */);
-                    } else {
-                        enrollFaceIfNeeded(data);
-                    }
-                } else if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
                     Utils.launchBiometricPromptForMandatoryBiometrics(this,
                             BIOMETRIC_AUTH_REQUEST,
                             mUserId, true /* hideBackground */);
-                } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                    IdentityCheckBiometricErrorDialog
-                            .showBiometricErrorDialogAndFinishActivityOnDismiss(getActivity(),
-                                    biometricAuthStatus);
                 } else {
                     enrollFaceIfNeeded(data);
                 }

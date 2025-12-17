@@ -34,7 +34,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
-import android.hardware.biometrics.Flags;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -383,26 +382,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                                 getContext(),
                                 mIsBiometricsAuthenticated,
                                 userId);
-                if (Flags.bpFallbackOptions()) {
-                    if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                        mSwitchBar.setChecked(false);
-                        Utils.launchBiometricPromptForMandatoryBiometrics(this,
-                                REQUEST_BIOMETRIC_PROMPT, userId, false /* hideBackground */);
-                        return;
-                    } else {
-                        //Reset biometrics once enable dialog is shown
-                        mIsBiometricsAuthenticated = false;
-                        EnableDevelopmentSettingWarningDialog.show(this /* host */);
-                    }
-                } else if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
                     mSwitchBar.setChecked(false);
                     Utils.launchBiometricPromptForMandatoryBiometrics(this,
-                            REQUEST_BIOMETRIC_PROMPT,
-                            userId, false /* hideBackground */);
-                } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                    mSwitchBar.setChecked(false);
-                    IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
-                            biometricAuthStatus, false /* twoFactorAuthentication */);
+                            REQUEST_BIOMETRIC_PROMPT, userId, false /* hideBackground */);
+                    return;
                 } else {
                     //Reset biometrics once enable dialog is shown
                     mIsBiometricsAuthenticated = false;

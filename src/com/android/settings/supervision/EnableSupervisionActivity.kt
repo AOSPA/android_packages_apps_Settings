@@ -232,8 +232,17 @@ class EnableSupervisionActivity : FragmentActivity() {
         if (savedInstanceState == null) {
             setFragmentResultListeners()
 
-            val message = getIntent().getCharSequenceExtra(EXTRA_SUPERVISION_DIALOG_EXPLANATION)
-            val appName = getIntent().getCharSequenceExtra(EXTRA_SUPERVISION_APP_NAME)
+            val message = if (Flags.enableSupervisionSettingsUiUpdates()) {
+                null
+            } else {
+                getIntent().getCharSequenceExtra(EXTRA_SUPERVISION_DIALOG_EXPLANATION)
+            }
+            val appName =
+                if (Flags.enableSupervisionSettingsUiUpdates()) {
+                    null
+                } else {
+                    getIntent().getCharSequenceExtra(EXTRA_SUPERVISION_APP_NAME)
+                }
 
             val dialog = EnableSupervisionDialogFragment.newInstance(message, appName)
             dialog.show(supportFragmentManager, "enable_supervision_dialog")

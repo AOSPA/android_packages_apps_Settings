@@ -31,6 +31,7 @@ import com.android.internal.widget.LockPatternUtils
 import com.android.settings.R
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.password.ChooseLockGeneric
+import com.android.settings.password.ChooseLockPassword
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -109,6 +110,9 @@ class SupervisionChangePinPreference :
                     DevicePolicyManager.PASSWORD_QUALITY_NUMERIC,
                 )
                 putExtra(Intent.EXTRA_USER_ID, supervisingUserHandle?.identifier)
+                if (Flags.enableSupervisionSettingsUiUpdates()) {
+                    putExtra(ChooseLockPassword.EXTRA_KEY_FOR_SUPERVISION_RESET, true)
+                }
             }
         changePinLauncher.launch(intent)
         return true

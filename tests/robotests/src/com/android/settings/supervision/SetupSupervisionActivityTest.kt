@@ -45,6 +45,12 @@ import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupdesign.GlifLayout
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -77,11 +83,15 @@ class SetupSupervisionActivityTest {
     private lateinit var shadowKeyguardManager: ShadowKeyguardManager
     private val mockISupervisionManager = mock<ISupervisionManager>()
 
+    private val testDispatcher = UnconfinedTestDispatcher()
+
     @get:Rule val metricsRule = MetricsRule()
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     @Before
     fun setUp() {
+        Dispatchers.setMain(testDispatcher)
+        SetupSupervisionActivity.ioDispatcher = testDispatcher
         shadowKeyguardManager = shadowOf(context.getSystemService(KeyguardManager::class.java))
         Shadow.extract<ShadowContextImpl>((context as Application).baseContext).apply {
             setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
@@ -95,6 +105,12 @@ class SetupSupervisionActivityTest {
             ISupervisionManager::class.java,
             mockISupervisionManager,
         )
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
+        SetupSupervisionActivity.ioDispatcher = Dispatchers.IO
     }
 
     @Test
@@ -113,7 +129,7 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
-    fun onCreate_noSupervisingUser_createProfile_startSetPinActivity() {
+    fun onCreate_noSupervisingUser_createProfile_startSetPinActivity() = runTest {
         mockUserManager.stub {
             on { users } doReturn emptyList()
             on {
@@ -144,7 +160,7 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
-    fun onCreate_existingSupervisingUser_startSetPinActivity() {
+    fun onCreate_existingSupervisingUser_startSetPinActivity() = runTest {
         ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
                 clickNextOnIntroductionScreen(activity)
@@ -158,22 +174,6 @@ class SetupSupervisionActivityTest {
 
         verify(mockUserManager, never())
             .createProfileForUserEvenWhenDisallowed(any(), any(), any(), any(), any())
-    }
-
-    @Test
-    fun onCreate_createUserFails_canceled() {
-        mockUserManager.stub {
-            on { users } doReturn emptyList()
-            on {
-                createProfileForUserEvenWhenDisallowed(any(), any(), any(), any(), any())
-            } doReturn null
-        }
-
-        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
-            scenario ->
-            scenario.onActivity { activity -> clickNextOnIntroductionScreen(activity) }
-            assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
-        }
     }
 
     @Test
@@ -318,7 +318,7 @@ class SetupSupervisionActivityTest {
         Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
         Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
     )
-    fun onSetLockResult_startsRecoveryActivity() {
+    fun onSetLockResult_startsRecoveryActivity() = runTest {
         whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(false)
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
@@ -346,7 +346,7 @@ class SetupSupervisionActivityTest {
         Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
         Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
     )
-    fun onSetLockResult_logsMetrics() {
+    fun onSetLockResult_logsMetrics() = runTest {
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
         ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
@@ -367,7 +367,7 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
-    fun onSetLockResult_supervisingUserNull_canceled() {
+    fun onSetLockResult_supervisingUserNull_canceled() = runTest {
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
             scenario ->
             scenario.onActivity { activity ->
@@ -389,7 +389,7 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
-    fun onSetLockResult_supervisingUserNotSecure_canceled() {
+    fun onSetLockResult_supervisingUserNotSecure_canceled() = runTest {
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
             scenario ->
             scenario.onActivity { activity ->
@@ -413,7 +413,7 @@ class SetupSupervisionActivityTest {
         Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
         Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
     )
-    fun canLaunchPinRecovery_onPinRecoveryResult_finishesOk() {
+    fun canLaunchPinRecovery_onPinRecoveryResult_finishesOk() = runTest {
         whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(false)
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
@@ -453,7 +453,7 @@ class SetupSupervisionActivityTest {
         Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
         Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
     )
-    fun canNotLaunchPinRecovery_finishesWithoutStartingPinRecovery() {
+    fun canNotLaunchPinRecovery_finishesWithoutStartingPinRecovery() = runTest {
         whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(true)
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
@@ -477,7 +477,7 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
-    fun onCreate_createUserFails_showsErrorScreen() {
+    fun onCreate_createUserFails_showsErrorScreen() = runTest {
         mockUserManager.stub {
             on { users } doReturn emptyList()
             on {
@@ -485,7 +485,8 @@ class SetupSupervisionActivityTest {
             } doReturn null
         }
 
-        ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
             scenario.onActivity { activity ->
                 clickNextOnIntroductionScreen(activity)
                 val nextStartedActivity = shadowOf(activity).nextStartedActivity
@@ -494,6 +495,7 @@ class SetupSupervisionActivityTest {
 
                 assertThat(activity.isFinishing).isTrue()
             }
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
         }
     }
 
@@ -531,7 +533,7 @@ class SetupSupervisionActivityTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onIntroductionScreen_nextButton_enablesSupervision() {
+    fun onIntroductionScreen_nextButton_enablesSupervision() = runTest {
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
         mockUserManager.stub {
             on { users } doReturn emptyList()

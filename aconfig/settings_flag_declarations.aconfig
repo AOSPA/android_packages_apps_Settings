@@ -73,3 +73,10 @@ flag {
   description: "Enables alert indicator on homepage tiles"
   bug: "403326850"
 }
+
+flag {
+  name: "dont_show_other_users_apps_to_admin"
+  namespace: "android_settings"
+  description: "Disables showing other user apps to admin"
+  bug: "424786870"
+}

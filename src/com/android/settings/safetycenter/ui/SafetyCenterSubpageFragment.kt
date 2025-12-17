@@ -24,6 +24,8 @@ import android.util.Log
 import androidx.fragment.app.viewModels
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.dashboard.DashboardFragment
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.INVALID_SESSION_ID
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.getOrGenerateSessionId
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFactory
 import com.android.settingslib.core.AbstractPreferenceController
@@ -42,6 +44,8 @@ abstract class SafetyCenterSubpageFragment : DashboardFragment() {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
     }
     private var safetySourceIds: List<String> = emptyList()
+
+    private var sessionId = INVALID_SESSION_ID
 
     /** The unique preference key for the subpage, used to look up configuration. */
     abstract val subpageKey: String
@@ -72,6 +76,7 @@ abstract class SafetyCenterSubpageFragment : DashboardFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        sessionId = getOrGenerateSessionId(requireArguments())
 
         val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
         for (controller in allControllers) {

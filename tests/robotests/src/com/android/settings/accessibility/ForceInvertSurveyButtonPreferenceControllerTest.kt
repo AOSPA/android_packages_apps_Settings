@@ -22,9 +22,6 @@ import android.app.settings.SettingsEnums
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
 import androidx.core.content.getSystemService
 import androidx.core.util.Consumer
 import androidx.fragment.app.testing.EmptyFragmentActivity
@@ -34,7 +31,6 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.common.NotificationConstants.ACTION_CANCEL_SURVEY_NOTIFICATION
 import com.android.internal.accessibility.common.NotificationConstants.EXTRA_PAGE_ID
-import com.android.server.accessibility.Flags
 import com.android.settings.Utils.SETTINGS_PACKAGE_NAME
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE
@@ -47,7 +43,6 @@ import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
@@ -61,7 +56,6 @@ import org.robolectric.Shadows.shadowOf
 
 @RunWith(RobolectricTestParameterInjector::class)
 class ForceInvertSurveyButtonPreferenceControllerTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val shadowPackageManager = shadowOf(context.packageManager)
     private var activityScenario: ActivityScenario<EmptyFragmentActivity>? = null
@@ -87,7 +81,6 @@ class ForceInvertSurveyButtonPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     @TestParameters(
         value =
             [
@@ -128,7 +121,7 @@ class ForceInvertSurveyButtonPreferenceControllerTest {
                     "}",
             ]
     )
-    fun getAvailabilityStatus_flagOn_returnExpectedAvailabilityStatus(
+    fun getAvailabilityStatus_returnExpectedAvailabilityStatus(
         forceInvertState: Int,
         surveyAvailability: Boolean,
         inSetupWizard: Boolean,
@@ -144,19 +137,6 @@ class ForceInvertSurveyButtonPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    fun getAvailabilityStatus_flagOff_returnUnavailable() {
-        val newContext = createContext(inSetupWizard = false)
-        setupForceInvertState(UiModeManager.FORCE_INVERT_TYPE_DARK)
-        setupSurveyAvailability(available = true)
-
-        createController(newContext)
-
-        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     fun performClick_shouldStartActivityAndHideButtonAndSendCancelBroadcast() {
         val newContext = createContext(inSetupWizard = false)
         setupForceInvertState(UiModeManager.FORCE_INVERT_TYPE_DARK)

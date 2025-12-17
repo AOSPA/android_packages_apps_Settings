@@ -23,6 +23,9 @@ import androidx.fragment.app.viewModels
 import com.android.settings.R
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.EXTRA_SESSION_ID
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.INVALID_SESSION_ID
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.getOrGenerateSessionId
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFactory
 import com.android.settings.search.BaseSearchIndexProvider
@@ -45,8 +48,11 @@ class SafetyCenterFragment : DashboardFragment() {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
     }
 
+    private var sessionId = INVALID_SESSION_ID
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        retrieveSessionId()
 
         val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
         for (controller in allControllers) {
@@ -59,6 +65,18 @@ class SafetyCenterFragment : DashboardFragment() {
                 is SafetySourcePreferenceController ->
                     setupSafetySourcePreferenceController(controller)
             }
+        }
+    }
+
+    private fun retrieveSessionId() {
+        val intentSessionId =
+            requireActivity().intent?.getLongExtra(EXTRA_SESSION_ID, INVALID_SESSION_ID)
+        if (intentSessionId != null && intentSessionId != INVALID_SESSION_ID) {
+            sessionId = intentSessionId
+            Log.d(TAG, "Session ID retrieved from Intent: $sessionId")
+        } else {
+            sessionId = getOrGenerateSessionId(requireArguments())
+            Log.d(TAG, "Session ID not found in Intent, fallback to fragment arguments: $sessionId")
         }
     }
 
@@ -104,6 +122,7 @@ class SafetyCenterFragment : DashboardFragment() {
         val preferenceKey = subpagePreferenceController.preferenceKey
         Log.d(TAG, "Setting Up the sub-page preference controller for [$preferenceKey]")
         subpagePreferenceController.viewModel = viewModel
+        subpagePreferenceController.sessionId = sessionId
     }
 
     private fun setupSafetySourcePreferenceController(

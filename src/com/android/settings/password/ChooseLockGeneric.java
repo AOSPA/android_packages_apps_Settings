@@ -532,20 +532,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                         Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
                                 false /* biometricsAuthenticationRequested */,
                                 mUserId);
-                if (android.hardware.biometrics.Flags.bpFallbackOptions()) {
-                    if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                        Utils.launchBiometricPromptForMandatoryBiometrics(this,
-                                BIOMETRIC_AUTH_REQUEST,
-                                mUserId, true /* hideBackground */);
-                    }
-                } else if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
                     Utils.launchBiometricPromptForMandatoryBiometrics(this,
                             BIOMETRIC_AUTH_REQUEST,
                             mUserId, true /* hideBackground */);
-                } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                    IdentityCheckBiometricErrorDialog
-                            .showBiometricErrorDialogAndFinishActivityOnDismiss(getActivity(),
-                                    biometricAuthStatus);
                 }
             } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
                 if (resultCode == Activity.RESULT_OK) {
@@ -897,6 +887,12 @@ public class ChooseLockGeneric extends SettingsActivity {
                             .setForBiometrics(mForBiometrics)
                             .setUserId(mUserId)
                             .setRequestGatekeeperPasswordHandle(mRequestGatekeeperPasswordHandle);
+            if (android.app.supervision.flags.Flags.enableSupervisionSettingsUiUpdates()) {
+                builder.setForSupervisionReset(
+                        getIntent().getBooleanExtra(
+                                ChooseLockPassword.EXTRA_KEY_FOR_SUPERVISION_RESET,
+                                false));
+            }
             if (mUserPassword != null) {
                 builder.setPassword(mUserPassword);
             }

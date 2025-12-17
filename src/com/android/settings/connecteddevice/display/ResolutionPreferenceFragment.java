@@ -313,14 +313,20 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
             pref.setKey(modeStr);
             int width = mode.getPhysicalWidth();
             int height = mode.getPhysicalHeight();
+            String formattedWidth = mNumberFormatter.format(width);
+            String formattedHeight = mNumberFormatter.format(height);
             pref.setTitle(
                     createAccessibleSequence(
-                            modeToReadableString(mode),
+                            getResources()
+                                    .getString(
+                                            R.string.screen_resolution_displayed_text,
+                                            formattedWidth,
+                                            formattedHeight),
                             getResources()
                                     .getString(
                                             R.string.screen_resolution_delimiter_a11y,
-                                            width,
-                                            height)));
+                                            formattedWidth,
+                                            formattedHeight)));
             pref.setSingleLineTitle(true);
             pref.setOnClickListener(preference -> onDisplayModeClicked(preference, display));
             pref.setChecked(isCurrentMode);

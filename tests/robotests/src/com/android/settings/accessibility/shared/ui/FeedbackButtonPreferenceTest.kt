@@ -20,9 +20,6 @@ import android.app.Application
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
 import androidx.activity.ComponentActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.testing.EmptyFragmentActivity
@@ -30,7 +27,6 @@ import androidx.fragment.app.testing.launchFragment
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
-import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.accessibility.FeedbackManager
 import com.android.settings.testutils.inflateViewHolder
@@ -40,7 +36,6 @@ import com.android.settingslib.widget.ButtonPreference
 import com.google.android.setupcompat.util.WizardManagerHelper
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
@@ -51,7 +46,6 @@ import org.robolectric.android.controller.ActivityController
 
 @RunWith(RobolectricTestRunner::class)
 class FeedbackButtonPreferenceTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
     private val context = ApplicationProvider.getApplicationContext<Context>()
     private val shadowPackageManager = shadowOf(context.packageManager)
     private var activityScenario: ActivityScenario<EmptyFragmentActivity>? = null
@@ -88,7 +82,6 @@ class FeedbackButtonPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     fun isAvailable_whenInSetupWizard_returnFalse() {
         var activityController: ActivityController<ComponentActivity>? = null
         try {
@@ -105,19 +98,11 @@ class FeedbackButtonPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     fun isAvailable_whenNotInSetupWizard_returnTrue() {
         assertThat(preference.isAvailable(context)).isTrue()
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
-    fun isAvailable_disableLowVisionGeneric_returnFalse() {
-        assertThat(preference.isAvailable(context)).isFalse()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     fun performClick_shouldStartBugReportIntent() {
         val fragmentScenario =
             launchFragment<Fragment>(themeResId = androidx.appcompat.R.style.Theme_AppCompat)

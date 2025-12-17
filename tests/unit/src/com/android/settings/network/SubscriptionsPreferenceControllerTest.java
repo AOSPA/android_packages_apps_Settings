@@ -37,6 +37,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
@@ -45,6 +46,9 @@ import android.net.wifi.WifiManager;
 import android.os.Looper;
 import android.os.PersistableBundle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.telephony.AccessNetworkConstants;
 import android.telephony.CarrierConfigManager;
@@ -66,6 +70,7 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.internal.hidden_from_bootclasspath.com.android.settingslib.flags.Flags;
 import com.android.settings.Utils;
 import com.android.settings.network.SubscriptionsPreferenceController.SubsPrefCtrlInjector;
 import com.android.settings.testutils.ResourcesUtils;
@@ -75,10 +80,12 @@ import com.android.settingslib.mobile.MobileMappings;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +95,10 @@ public class SubscriptionsPreferenceControllerTest {
     private static final String KEY = "preference_group";
     private static final int SUB_ID = 1;
 
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Mock
     private UserManager mUserManager;
     @Mock
@@ -129,7 +140,6 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
         if (Looper.myLooper() == null) {
             Looper.prepare();
@@ -173,7 +183,7 @@ public class SubscriptionsPreferenceControllerTest {
         mUpdateListener = () -> mOnChildUpdatedCount++;
 
         sInjector = spy(new SubsPrefCtrlInjector());
-        mController =  new FakeSubscriptionsPreferenceController(mContext, mLifecycle,
+        mController = new FakeSubscriptionsPreferenceController(mContext, mLifecycle,
                 mUpdateListener, KEY, 5);
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
         mWifiPickerTrackerHelper.mWifiState = mock(MutableLiveData.class);
@@ -553,6 +563,18 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Test
     @UiThreadTest
+    public void getIcon_noInternet_getNoInternetIcon() {
+        final List<SubscriptionInfo> subs = setupMockSubscriptions(1);
+        final int subId = subs.get(0).getSubscriptionId();
+        setupGetIconConditions(subId, false, false, false, ServiceState.STATE_OUT_OF_SERVICE);
+
+        mController.getIcon(subId);
+
+        verify(sInjector).getNoInternetIcon(any(), anyInt());
+    }
+
+    @Test
+    @UiThreadTest
     public void getIcon_carrierNetworkIsNotActive_useMobileDataLevel() {
         // Fake mobile data active and level is SIGNAL_STRENGTH_GOOD(3)
         mNetworkRegistrationInfo = createNetworkRegistrationInfo(true /* dateState */);
@@ -625,6 +647,26 @@ public class SubscriptionsPreferenceControllerTest {
         verify(mWifiPickerTrackerHelper, never()).connectCarrierNetwork(any());
     }
 
+    @Test
+    @UiThreadTest
+    @EnableFlags(Flags.FLAG_NEW_STATUS_BAR_ICONS)
+    public void getNoInternetIcon_newStatusBarIconsEnabled_getIconFromUtils() {
+        sInjector.getNoInternetIcon(mContext, SignalStrength.NUM_SIGNAL_STRENGTH_BINS);
+
+        verify(sInjector).getIcon(any(), anyInt(), anyInt(), anyBoolean(), anyBoolean());
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_NEW_STATUS_BAR_ICONS)
+    public void getNoInternetIcon_newStatusBarIconsDisable_getIconFromRes() {
+        final Resources spyResources = spy(mContext.getResources());
+        doReturn(spyResources).when(mContext).getResources();
+
+        sInjector.getNoInternetIcon(mContext, SignalStrength.NUM_SIGNAL_STRENGTH_BINS);
+
+        verify(spyResources).getDrawable(anyInt(), any());
+    }
+
     private void setupGetIconConditions(int subId, boolean isActiveCellularNetwork,
             boolean isDataEnable, boolean dataState, int servicestate) {
         doReturn(mTelephonyManagerForSub).when(mTelephonyManager).createForSubscriptionId(subId);
@@ -653,12 +695,13 @@ public class SubscriptionsPreferenceControllerTest {
         return setupMockSubscriptions(count, 0, true);
     }
 
-    /** Helper method to setup several mock active subscriptions. The generated subscription id's
+    /**
+     * Helper method to setup several mock active subscriptions. The generated subscription id's
      * start at 1.
      *
-     * @param count How many subscriptions to create
-     * @param defaultDataSubId The subscription id of the default data subscription - pass
-     *                         INVALID_SUBSCRIPTION_ID if there should not be one
+     * @param count             How many subscriptions to create
+     * @param defaultDataSubId  The subscription id of the default data subscription - pass
+     *                          INVALID_SUBSCRIPTION_ID if there should not be one
      * @param mobileDataEnabled Whether mobile data should be considered enabled for the default
      *                          data subscription
      */
@@ -701,7 +744,7 @@ public class SubscriptionsPreferenceControllerTest {
          *                           in the
          *                           PreferenceGroup has changed
          * @param preferenceGroupKey the key used to lookup the PreferenceGroup where Preferences
-         *                          will
+         *                           will
          *                           be placed
          * @param startOrder         the order that should be given to the first Preference
          *                           placed into

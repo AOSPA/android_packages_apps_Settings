@@ -275,6 +275,7 @@ constructor(
             allowedModes.values
                 .filter { it.hasSameResolutionAs(resolutionSelectedMode) }
                 .sortedByDescending { it.refreshRate }
+                .distinctBy { it.refreshRate }
                 .map { it.toRefreshRateItem() }
         }
     }

@@ -158,11 +158,8 @@ public class WifiEntryPreference extends RestrictedPreference implements
         endIcons.removeAllViews();
         // The shared icon should precede the lock icon to match the mocks.
         if (displaySharedIcon()) {
-            ImageView sharedIcon =
-                    addIcon(endIcons,
-                            com.android.settings.R.drawable.ic_group_24dp);
-            sharedIcon.setTooltipText(getContext().getString(
-                    com.android.settings.R.string.wifi_shared_network_icon_message));
+            addIcon(endIcons,
+                    com.android.settings.R.drawable.ic_group_24dp);
         }
         if ((mWifiEntry.getSecurity() != WifiEntry.SECURITY_NONE)
                 && (mWifiEntry.getSecurity() != WifiEntry.SECURITY_OWE)) {
@@ -171,7 +168,7 @@ public class WifiEntryPreference extends RestrictedPreference implements
         }
     }
 
-    private ImageView addIcon(LinearLayout endIcons, @DrawableRes int drawableId) {
+    private void addIcon(LinearLayout endIcons, @DrawableRes int drawableId) {
         ImageView icon = new ImageView(getContext());
         icon.setImageDrawable(getDrawable(drawableId));
         icon.setImageTintList(Utils.getColorAttr(getContext(),
@@ -186,7 +183,6 @@ public class WifiEntryPreference extends RestrictedPreference implements
                 LinearLayout.LayoutParams.WRAP_CONTENT);
 
         endIcons.addView(icon, layoutParams);
-        return icon;
     }
 
     private boolean displaySharedIcon() {

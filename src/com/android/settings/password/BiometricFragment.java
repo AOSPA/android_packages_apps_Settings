@@ -16,10 +16,7 @@
 
 package com.android.settings.password;
 
-import static android.hardware.biometrics.BiometricConstants.BIOMETRIC_ERROR_USER_CANCELED;
-
 import android.app.settings.SettingsEnums;
-import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationResult;
@@ -167,15 +164,6 @@ public class BiometricFragment extends InstrumentedFragment {
             promptBuilder.setUseDefaultSubtitle();
         }
 
-        if (!android.hardware.biometrics.Flags.bpFallbackOptions()
-                && (promptInfo.getAuthenticators()
-                & BiometricManager.Authenticators.DEVICE_CREDENTIAL) == 0) {
-            promptBuilder.setNegativeButton(promptInfo.getNegativeButtonText(),
-                    getContext().getMainExecutor(),
-                    (dialog, which) -> mAuthenticationCallback.onAuthenticationError(
-                            BIOMETRIC_ERROR_USER_CANCELED,
-                            null /* errString */));
-        }
         mBiometricPrompt = promptBuilder.build();
     }
 

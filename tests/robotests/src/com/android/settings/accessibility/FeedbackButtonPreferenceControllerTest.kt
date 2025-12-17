@@ -20,14 +20,10 @@ import android.app.Application
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
 import androidx.fragment.app.testing.EmptyFragmentActivity
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
-import com.android.server.accessibility.Flags
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE
 import com.android.settings.testutils.inflateViewHolder
@@ -35,7 +31,6 @@ import com.android.settingslib.widget.ButtonPreference
 import com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -44,7 +39,6 @@ import org.robolectric.Shadows.shadowOf
 
 @RunWith(RobolectricTestRunner::class)
 class FeedbackButtonPreferenceControllerTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val shadowPackageManager = shadowOf(context.packageManager)
     private var activityScenario: ActivityScenario<EmptyFragmentActivity>? = null
@@ -59,7 +53,6 @@ class FeedbackButtonPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     fun getAvailabilityStatus_whenInSetupWizard_returnUnavailable() {
         setUp(/* inSetupWizard= */ true, PACKAGE_NAME)
 
@@ -67,7 +60,6 @@ class FeedbackButtonPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     fun getAvailabilityStatus_whenNotInSetupWizardAndNoValidProvider_returnUnavailable() {
         setUp(/* inSetupWizard= */ false)
 
@@ -75,7 +67,6 @@ class FeedbackButtonPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     fun getAvailabilityStatus_whenNotInSetupWizardAndHasValidProvider_returnAvailable() {
         setUp(/* inSetupWizard= */ false, PACKAGE_NAME)
 
@@ -83,15 +74,6 @@ class FeedbackButtonPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
-    fun getAvailabilityStatus_disableLowVisionGeneric_returnUnavailable() {
-        setUp(/* inSetupWizard= */ false, PACKAGE_NAME)
-
-        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     fun performClick_shouldStartBugReportIntent() {
         setUp(/* inSetupWizard= */ false, PACKAGE_NAME)
 

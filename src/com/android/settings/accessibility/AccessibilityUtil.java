@@ -220,7 +220,7 @@ public final class AccessibilityUtil {
         }
         int shortcutTypes = UserShortcutType.DEFAULT;
         for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
-            if (shortcutType == KEY_GESTURE && !Flags.enableKeyGestureShortcutSettings()) {
+            if (shortcutType == KEY_GESTURE && !isKeyboardShortcutSettingAvailable()) {
                 continue;
             }
             if (ShortcutUtils.isShortcutContained(
@@ -297,19 +297,12 @@ public final class AccessibilityUtil {
 
         for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
             if (!com.android.server.accessibility.Flags
-                    .enableMagnificationMultipleFingerMultipleTapGesture()
-                    && (shortcutType & TWOFINGER_DOUBLETAP) == TWOFINGER_DOUBLETAP) {
-                continue;
+                    .enableMagnificationMultipleFingerMultipleTapGesture()) {
+                shortcutTypes = removeTypeFromShortcutTypes(shortcutTypes, TWOFINGER_DOUBLETAP);
             }
 
-            // Only show keyboard shortcut in summary if a keyboard is attached.
-            if (com.android.server.accessibility.Flags.enableKeyGestureShortcutSettings()
-                    && shortcutType == KEY_GESTURE
-                    && (shortcutTypes & shortcutType) == shortcutType
-                    && InputPeripheralsSettingsUtils.isHardKeyboard()) {
-                list.add(context.getText(
-                        R.string.accessibility_shortcut_keyboard_keyword));
-                continue;
+            if (!isKeyboardShortcutSettingAvailable()) {
+                shortcutTypes = removeTypeFromShortcutTypes(shortcutTypes, KEY_GESTURE);
             }
 
             if ((shortcutTypes & shortcutType) == shortcutType) {
@@ -326,6 +319,8 @@ public final class AccessibilityUtil {
                             R.string.accessibility_shortcut_two_finger_double_tap_keyword, 2);
                     case TRIPLETAP -> context.getText(
                             R.string.accessibility_shortcut_triple_tap_keyword);
+                    case KEY_GESTURE -> context.getText(
+                            R.string.accessibility_shortcut_keyboard_keyword);
                     default -> "";
                 });
             }
@@ -340,5 +335,23 @@ public final class AccessibilityUtil {
         list.sort(CharSequence::compare);
         return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
                 null, LocaleUtils.getConcatenatedString(list));
+    }
+
+    /**
+     * @return true if the keyboard shortcut setting is available for use, false otherwise.
+     */
+    public static boolean isKeyboardShortcutSettingAvailable() {
+        return Flags.enableKeyGestureShortcutSettings()
+                && InputPeripheralsSettingsUtils.isHardKeyboard();
+    }
+
+    /**
+     * Removes a specific shortcut type from a bitmask of shortcut types.
+     * @param shortcutTypes int containing bitmask of shortcut types.
+     * @param typeToRemove int shortcut type to remove.
+     * @return updated bitmask of shortcutTypes without the typeToRemove shortcut type.
+     */
+    public static int removeTypeFromShortcutTypes(int shortcutTypes, int typeToRemove) {
+        return shortcutTypes & ~typeToRemove;
     }
 }

@@ -916,7 +916,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                     R.string.wifi_forget_dialog_title,
                     mContext.getString(
                         R.string.shared_wifi_forget_dialog_message,
-                        mWifiEntry.getTitle()));
+                        BidiFormatter.getInstance().unicodeWrap(mWifiEntry.getTitle())));
             return;
         } else {
             mWifiEntry.forget(this);

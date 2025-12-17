@@ -26,9 +26,12 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.testutils.shadow.ShadowActivityEmbeddingUtils
 import com.android.settingslib.metadata.FixedArrayMap
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.PreferenceScreenMetadataFactory
 import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFactory
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.ValidatedKeyParameters
+import com.android.settingslib.metadata.apifirst.ApiFirstPreferenceScreen
+import com.android.settingslib.metadata.apifirst.category.Category
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.Flow
 import org.junit.Before
@@ -46,13 +49,24 @@ class SettingsLaunchpadActivityTest {
 
     companion object {
         const val TEST_SCREEN_KEY = "test_screen_key"
+        const val API_FIRST_SCREEN_KEY = "api_first_screen_key"
     }
 
     private lateinit var context: Context
     private lateinit var fakeFactory: FakeParameterizedFactory
+    private lateinit var fakeApiFirstFactory: PreferenceScreenMetadataFactory
 
     // Dummy class for testing fragment launching
     class TestFragment : Fragment()
+
+    /** A fake [ApiFirstPreferenceScreen] for testing the category mapping logic. */
+    class FakeApiFirstPreferenceScreen :
+        ApiFirstPreferenceScreen(
+            key = API_FIRST_SCREEN_KEY,
+            topLevelSettingsCategory = Category.APPS,
+            fragment = TestFragment::class,
+            purpose = 0,
+        )
 
     @Before
     fun setUp() {
@@ -60,8 +74,13 @@ class SettingsLaunchpadActivityTest {
         context = ApplicationProvider.getApplicationContext()
 
         fakeFactory = FakeParameterizedFactory()
+        fakeApiFirstFactory = PreferenceScreenMetadataFactory { FakeApiFirstPreferenceScreen() }
+
         PreferenceScreenRegistry.preferenceScreenMetadataFactories =
-            FixedArrayMap(1) { it.put(TEST_SCREEN_KEY, fakeFactory) }
+            FixedArrayMap(2) {
+                it.put(API_FIRST_SCREEN_KEY, fakeApiFirstFactory)
+                it.put(TEST_SCREEN_KEY, fakeFactory)
+            }
     }
 
     @Test
@@ -216,6 +235,69 @@ class SettingsLaunchpadActivityTest {
         // Assert
         assertThat(activity.isFinishing).isTrue()
         assertThat(shadowOf(activity).nextStartedActivity).isNull()
+    }
+
+    @Test
+    fun launch_twoPane_withPreferenceScreenMixin_usesHighlightMenuKey() {
+        // Arrange: Device is in two-pane mode
+        ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true)
+        ShadowActivityEmbeddingUtils.setIsAlreadyEmbedded(false)
+
+        val intent =
+            Intent(context, SettingsLaunchpadActivity::class.java).apply {
+                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+            }
+
+        // Act
+        val activity =
+            Robolectric.buildActivity(SettingsLaunchpadActivity::class.java, intent).create().get()
+
+        // Assert
+        val nextActivity = shadowOf(activity).nextStartedActivity
+        assertThat(nextActivity).isNotNull()
+        assertThat(nextActivity.action).isEqualTo(Settings.ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)
+
+        val expectedMenuKey = context.getString(R.string.menu_key_display)
+        assertThat(
+                nextActivity.getStringExtra(
+                    Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY
+                )
+            )
+            .isEqualTo(expectedMenuKey)
+
+        assertThat(activity.isFinishing).isTrue()
+    }
+
+    @Test
+    fun launch_twoPane_withApiFirstScreen_usesCategoryMap() {
+        // Arrange: Device is in two-pane mode
+        ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true)
+        ShadowActivityEmbeddingUtils.setIsAlreadyEmbedded(false)
+
+        val intent =
+            Intent(context, SettingsLaunchpadActivity::class.java).apply {
+                // Use the key for our new ApiFirstPreferenceScreen fake
+                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, API_FIRST_SCREEN_KEY)
+            }
+
+        // Act
+        val activity =
+            Robolectric.buildActivity(SettingsLaunchpadActivity::class.java, intent).create().get()
+
+        // Assert
+        val nextActivity = shadowOf(activity).nextStartedActivity
+        assertThat(nextActivity).isNotNull()
+        assertThat(nextActivity.action).isEqualTo(Settings.ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)
+
+        val expectedMenuKey = context.getString(R.string.menu_key_apps)
+        assertThat(
+                nextActivity.getStringExtra(
+                    Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY
+                )
+            )
+            .isEqualTo(expectedMenuKey)
+
+        assertThat(activity.isFinishing).isTrue()
     }
 
     class FakeParameterizedFactory :
