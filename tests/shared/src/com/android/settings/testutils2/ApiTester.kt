@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.testutils.catalyst
+package com.android.settings.testutils2
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -67,6 +67,11 @@ class InvalidPreferenceException() : FailedPreconditionException()
  * with no setter.
  */
 class CannotSetException : Exception()
+
+/**
+ * This class contains information regarding a screen, retrieved from the underlying infrastructure.
+ */
+class ScreenInfo
 
 /**
  * Helper class for testing an api screen, including potential preferences it includes.
@@ -153,6 +158,13 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         }
         throw FailedPreconditionException()
     }
+
+
+    /**
+     * Helper method that returns the screen information extracted from the underlying
+     * infrastructure.
+     */
+    fun getScreen() : ScreenInfo? = if (instance.isFlagEnabled(context)) ScreenInfo() else null
 
     /**
      * Helper method that executes a get operation over a specific api preference inside the current
