@@ -92,7 +92,7 @@ public class NumberingSystemLocaleListFragment extends DashboardFragment {
 
     private static Bundle getExtraData() {
         Bundle extra = new Bundle();
-        extra.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
+        extra.putString(NumberingSystemItemController.ARG_KEY_REGIONAL_PREFERENCE,
                 NumberingSystemItemController.ARG_VALUE_LANGUAGE_SELECT);
         return extra;
     }
