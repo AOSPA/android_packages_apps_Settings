@@ -219,6 +219,9 @@ enum class NavigationSource(val statsLogValue: Int) {
         SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__NAVIGATION_SOURCE__NOTIFICATION
     ),
     SETTINGS(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__NAVIGATION_SOURCE__SETTINGS),
+    QUICK_SETTINGS_TILE(
+        SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__NAVIGATION_SOURCE__QUICK_SETTINGS_TILE
+    ),
     SAFETY_CENTER(
         SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__NAVIGATION_SOURCE__SAFETY_CENTER
     );
@@ -228,6 +231,10 @@ enum class NavigationSource(val statsLogValue: Int) {
         val args = Bundle()
         args.putInt(EXTRA_NAVIGATION_SOURCE, this.statsLogValue)
         return args
+    }
+
+    fun addToIntent(intent: Intent) {
+        intent.putExtra(EXTRA_NAVIGATION_SOURCE, this.statsLogValue)
     }
 
     companion object {
@@ -251,14 +258,24 @@ enum class NavigationSource(val statsLogValue: Int) {
             if (intent == null) {
                 return UNKNOWN
             }
+
+            return when (intent.action) {
+                Intent.ACTION_VIEW_SAFETY_CENTER_QS -> QUICK_SETTINGS_TILE
+                else -> fromHomepageIntent(intent)
+            }
+        }
+
+        private fun fromHomepageIntent(intent: Intent): NavigationSource {
             val sourceIssueId = intent.getStringExtra(EXTRA_SAFETY_SOURCE_ISSUE_ID)
             val searchKey = intent.getStringExtra(EXTRA_SETTINGS_FRAGMENT_ARGS_KEY)
+            val intentNavigationSourceValue =
+                intent.getIntExtra(EXTRA_NAVIGATION_SOURCE, UNKNOWN.statsLogValue)
             return if (sourceIssueId != null) {
                 NOTIFICATION
             } else if (searchKey != null) {
                 SETTINGS
             } else {
-                UNKNOWN
+                fromStatsLogValue(intentNavigationSourceValue)
             }
         }
 

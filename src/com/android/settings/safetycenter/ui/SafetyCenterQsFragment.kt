@@ -148,7 +148,11 @@ class SafetyCenterQsFragment : Fragment() {
         val securitySettings = addToggle(SETTINGS_TOGGLE_TAG, parent)
         val context = requireContext()
         return securitySettings.apply {
-            setOnClickListener { context.startActivity(Intent(Intent.ACTION_SAFETY_CENTER)) }
+            setOnClickListener {
+                val intent = Intent(Intent.ACTION_SAFETY_CENTER)
+                NavigationSource.QUICK_SETTINGS_TILE.addToIntent(intent)
+                context.startActivity(intent)
+            }
 
             findViewById<TextView>(R.id.toggle_sensor_name).apply {
                 text = getString(R.string.settings_label)
