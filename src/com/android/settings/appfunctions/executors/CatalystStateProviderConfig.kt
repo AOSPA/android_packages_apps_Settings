@@ -118,6 +118,7 @@ import com.android.settings.wfd.WifiDisplayScreen
 import com.android.settings.wifi.ConfigureWifiScreen
 import com.android.settings.wifi.WifiDataUsagePreference
 import com.android.settings.wifi.calling.WifiCallingScreen
+import com.android.settings.wifi.p2p.WifiDirectApiScreen
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiScreen
 import com.android.settings.wifi.tether.WifiHotspotScreen
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -431,6 +432,7 @@ private fun getCatalystScreenConfigs() =
             screenKey = BillingCycleScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
+        PerScreenCatalystConfig(enabled = true, screenKey = WifiDirectApiScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =
