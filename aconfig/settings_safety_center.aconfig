@@ -14,3 +14,10 @@ flag {
   description: "Moves the Safety Center source refresh to the background"
   bug: "420734103"
 }
+
+flag {
+  name: "enable_binary_transparency_in_safety_center"
+  namespace: "hardware_backed_security"
+  description: "Enables the binary transparency option in Safety Center"
+  bug: "458810078"
+}
