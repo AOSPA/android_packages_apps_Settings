@@ -27,18 +27,21 @@
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="app_security_personal"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_app_security_search_terms"
         settings:safetySource="@string/config_safety_center_app_security_source_id"
         settings:profile="personal_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="app_security_work"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_app_security_search_terms"
         settings:safetySource="@string/config_safety_center_app_security_source_id"
         settings:profile="work_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="app_security_private"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_app_security_search_terms"
         settings:safetySource="@string/config_safety_center_app_security_source_id"
         settings:profile="private_profile" />
 
