@@ -25,6 +25,7 @@
 <string name="launch_preference_purpose" translatable="false">launch_preference</string>
 <string name="shortcut_preference_key_purpose" translatable="false">shortcut_preference_key</string>
 <string name="a11y_activity_detail_screen_top_intro_purpose" translatable="false">top_intro</string>
+<string name="a11y_button_shortcut_setting_screen_purpose" translatable="false">screen to configure a11y button shortcut appearance</string>
 <string name="a11y_service_detail_screen_purpose" translatable="false">a11y_service_detail_screen</string>
 <string name="accessibility_service_app_info_purpose" translatable="false">accessibility_service_app_info</string>
 <string name="accessibility_service_settings_purpose" translatable="false">accessibility_service_settings</string>
@@ -150,12 +151,16 @@
 <string name="flash_notifications_preview_purpose" translatable="false">flash_notifications_preview</string>
 <string name="screen_flash_notification_purpose" translatable="false">screen_flash_notification</string>
 <!-- Double press power button screen begin -->
-<string name="gesture_double_tap_power_input_summary_purpose" translatable="false">This screen allows the user to open an application when they quickly press the power button twice. The available options are Camera or Wallet</string>
-<string name="gesture_double_tap_power_actions_purpose" translatable="false">Allows users to configure the action performed when the power button is double-tapped, such as launching the camera or opening the wallet</string>
-<string name="double_tap_power_button_gesture_enabled_purpose" translatable="false">This setting allows the user to enable double-pressing the power button to quickly open an application</string>
-<string name="gesture_double_power_tap_camera_purpose" translatable="false">This setting allows the user to open the Camera application by double-pressing the power button</string>
-<string name="gesture_double_power_tap_wallet_purpose" translatable="false">This setting allows the user to open the Wallet application by double-pressing the power button.</string>
+<string name="gesture_double_tap_power_input_summary_purpose" translatable="false">Allows the user to open an application when they quickly press the power button twice. The available options are Camera or Wallet</string>
+<string name="gesture_double_tap_power_actions_purpose" translatable="false">Allows the user to configure the action performed when the power button is double-tapped, such as launching the camera or opening the wallet</string>
+<string name="double_tap_power_button_gesture_enabled_purpose" translatable="false">Allows the user to enable double-pressing the power button to quickly open an application</string>
+<string name="gesture_double_power_tap_camera_purpose" translatable="false">Allows the user to open the Camera application by double-pressing the power button</string>
+<string name="gesture_double_power_tap_wallet_purpose" translatable="false">Allows the user to open the Wallet application by double-pressing the power button</string>
 <!-- Double press power button screen end -->
+<!-- Flip camera for selfie screen begin -->
+<string name="double_twist_gesture_screen_purpose" translatable="false">Allows the user to toggle the feature that enables switching between the front and rear cameras by twisting the device twice</string>
+<string name="gesture_double_twist_purpose" translatable="false">Enables the gesture to switch cameras by twisting the device</string>
+<!-- Flip camera for selfie screen end -->
 <string name="gesture_system_navigation_input_summary_purpose" translatable="false">gesture_system_navigation_input_summary</string>
 <string name="audio_routing_purpose" translatable="false">audio_routing</string>
 <string name="available_hearing_devices_purpose" translatable="false">available_hearing_devices</string>
@@ -404,10 +409,10 @@
 <string name="wifi_calling_purpose" translatable="false">wifi_calling</string>
 <string name="wifi_network_details_purpose" translatable="false">wifi_network_details</string>
 <string name="legal_information_purpose" translatable="false">legal_information</string>
-<string name="display_settings_screen_purpose">display_settings_screen</string>
-<string name="screen_timeout_purpose">screen_timeout</string>
-<string name="battery_saver_screen_purpose">battery_saver_screen</string>
-<string name="lockscreen_from_display_settings_purpose">lockscreen_from_display_settings</string>
+<string name="display_settings_screen_purpose" translatable="false">display_settings_screen</string>
+<string name="screen_timeout_purpose" translatable="false">screen_timeout</string>
+<string name="battery_saver_screen_purpose" translatable="false">battery_saver_screen</string>
+<string name="lockscreen_from_display_settings_purpose" translatable="false">lockscreen_from_display_settings</string>
 <string name="use_wifi_hotspot_purpose" translatable="false">use_wifi_hotspot</string>
 <string name="wifi_tether_auto_turn_off_purpose" translatable="false">wifi_tether_auto_turn_off</string>
 <string name="wifi_tether_network_name_purpose" translatable="false">wifi_tether_network_name</string>
@@ -449,4 +454,5 @@
 <string name="window_mode_preference_purpose" translatable="false">window_mode_preference</string>
 <string name="all_mode_preference_purpose" translatable="false">all_mode_preference</string>
 <string name="shortcut_keyboard_pref_purpose" translatable="false">shortcut_keyboard_pref</string>
+<string name="wifi_direct_screen_purpose" translatable="false">Allows users to manage peer-to-peer Wi-Fi connections and view the device name for Wi-Fi Direct.</string>
 </resources>

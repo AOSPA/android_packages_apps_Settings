@@ -191,7 +191,6 @@ import com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment;
 import com.android.settings.regionalpreferences.MeasurementSystemItemFragment;
 import com.android.settings.regionalpreferences.NumberingSystemLocaleListFragment;
 import com.android.settings.regionalpreferences.RegionPickerFragment;
-import com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment;
 import com.android.settings.regionalpreferences.TemperatureUnitFragment;
 import com.android.settings.safetycenter.MoreSecurityPrivacyFragment;
 import com.android.settings.safetycenter.ui.SafetyCenterFragment;
@@ -406,7 +405,6 @@ public class SettingsGateway {
             ColorContrastFragment.class.getName(),
             LongBackgroundTasksDetails.class.getName(),
             RegionPickerFragment.class.getName(),
-            RegionalPreferencesEntriesFragment.class.getName(),
             TemperatureUnitFragment.class.getName(),
             FirstDayOfWeekItemFragment.class.getName(),
             MeasurementSystemItemFragment.class.getName(),

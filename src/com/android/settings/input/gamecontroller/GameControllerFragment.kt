@@ -32,6 +32,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.dashboard.DashboardFragment
+import com.android.settingslib.widget.ButtonPreference
 import kotlinx.coroutines.launch
 
 /** Fragment that manages device specific game controller settings. */
@@ -70,6 +71,13 @@ internal constructor(private var viewModelFactory: ViewModelProvider.Factory? = 
         // Observe the remapping state to automatically refresh the screen
         viewModel.buttonRemapping.observe(viewLifecycleOwner) { newMap -> updatePreferenceStates() }
         viewModel.axisRemapping.observe(viewLifecycleOwner) { newMap -> updatePreferenceStates() }
+
+        findPreference<ButtonPreference>(RESET_BUTTON_PREFERENCE_KEY)
+            ?.setOnPreferenceClickListener {
+                val dialog = GameControllerResetDialogFragment(viewModel)
+                dialog.show(parentFragmentManager, RESET_DIALOG_TAG)
+                true
+            }
 
         // Observe requests to show the remapping dialog
         viewLifecycleOwner.lifecycleScope.launch {
@@ -115,5 +123,10 @@ internal constructor(private var viewModelFactory: ViewModelProvider.Factory? = 
 
     companion object {
         private val TAG = GameControllerFragment::class.java.simpleName
+
+        @VisibleForTesting val RESET_BUTTON_PREFERENCE_KEY = "reset_to_default"
+
+        @VisibleForTesting
+        val RESET_DIALOG_TAG = GameControllerResetDialogFragment::class.java.simpleName
     }
 }

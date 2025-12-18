@@ -50,7 +50,7 @@ import java.util.Locale;
 public class NumberingSystemItemControllerTest {
     private Context mApplicationContext;
     private NumberingSystemItemController mController;
-    private NumberingPreferencesFragment mFragment;
+    private NumberingSystemLocaleListFragment mFragment;
     private PreferenceScreen mPreferenceScreen;
     private LocaleList mCacheLocale;
     private FakeFeatureFactory mFeatureFactory;
@@ -63,7 +63,7 @@ public class NumberingSystemItemControllerTest {
         }
         mApplicationContext = ApplicationProvider.getApplicationContext();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mFragment = spy(new NumberingPreferencesFragment());
+        mFragment = spy(new NumberingSystemLocaleListFragment());
         PreferenceManager preferenceManager = new PreferenceManager(mApplicationContext);
         mPreferenceScreen = preferenceManager.createPreferenceScreen(mApplicationContext);
         mCacheLocale = LocaleList.getDefault();
@@ -79,7 +79,7 @@ public class NumberingSystemItemControllerTest {
     @UiThreadTest
     public void handlePreferenceTreeClick_languageSelect_launchFragment() {
         Bundle bundle = new Bundle();
-        bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
+        bundle.putString(NumberingSystemItemController.ARG_KEY_REGIONAL_PREFERENCE,
                 NumberingSystemItemController.ARG_VALUE_LANGUAGE_SELECT);
         bundle.putString(
                 NumberingSystemItemController.KEY_SELECTED_LANGUAGE, Locale.US.toLanguageTag());
@@ -109,7 +109,7 @@ public class NumberingSystemItemControllerTest {
     @Ignore("b/377633438")
     public void handlePreferenceTreeClick_numbersSelect_preferenceHasTick() {
         Bundle bundle = new Bundle();
-        bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
+        bundle.putString(NumberingSystemItemController.ARG_KEY_REGIONAL_PREFERENCE,
                 NumberingSystemItemController.ARG_VALUE_NUMBERING_SYSTEM_SELECT);
         bundle.putString(
                 NumberingSystemItemController.KEY_SELECTED_LANGUAGE, Locale.US.toLanguageTag());
@@ -133,7 +133,7 @@ public class NumberingSystemItemControllerTest {
     public void handlePreferenceTreeClick_numbersSelect_numberingSystemIsUpdated() {
         LocalePicker.updateLocales(LocaleList.forLanguageTags("en-US,zh-TW,ar-BH"));
         Bundle bundle = new Bundle();
-        bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
+        bundle.putString(NumberingSystemItemController.ARG_KEY_REGIONAL_PREFERENCE,
                 NumberingSystemItemController.ARG_VALUE_NUMBERING_SYSTEM_SELECT);
         bundle.putString(
                 NumberingSystemItemController.KEY_SELECTED_LANGUAGE, "ar-BH");
@@ -160,7 +160,7 @@ public class NumberingSystemItemControllerTest {
     public void displayPreference_languageOptAndHas2LocaleWithSingleNu_showNothing() {
         LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-TW"));
         Bundle bundle = new Bundle();
-        bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
+        bundle.putString(NumberingSystemItemController.ARG_KEY_REGIONAL_PREFERENCE,
                 NumberingSystemItemController.ARG_VALUE_LANGUAGE_SELECT);
         bundle.putString(
                 NumberingSystemItemController.KEY_SELECTED_LANGUAGE, Locale.US.toLanguageTag());
@@ -178,7 +178,7 @@ public class NumberingSystemItemControllerTest {
         // ar-JO and dz-BT have multiple numbering systems.
         LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-TW,ar-JO,dz-BT"));
         Bundle bundle = new Bundle();
-        bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
+        bundle.putString(NumberingSystemItemController.ARG_KEY_REGIONAL_PREFERENCE,
                 NumberingSystemItemController.ARG_VALUE_LANGUAGE_SELECT);
         bundle.putString(
                 NumberingSystemItemController.KEY_SELECTED_LANGUAGE, Locale.US.toLanguageTag());
@@ -195,7 +195,7 @@ public class NumberingSystemItemControllerTest {
     public void displayPreference_enUsNumbersOpt_show1Option() {
         LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-TW"));
         Bundle bundle = new Bundle();
-        bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
+        bundle.putString(NumberingSystemItemController.ARG_KEY_REGIONAL_PREFERENCE,
                 NumberingSystemItemController.ARG_VALUE_NUMBERING_SYSTEM_SELECT);
         bundle.putString(
                 NumberingSystemItemController.KEY_SELECTED_LANGUAGE, Locale.US.toLanguageTag());

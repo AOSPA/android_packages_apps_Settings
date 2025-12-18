@@ -85,6 +85,7 @@ import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvancedScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummaryScreen
 import com.android.settings.gestures.ButtonNavigationSettingsScreen
 import com.android.settings.gestures.DoubleTapPowerScreen
+import com.android.settings.gestures.DoubleTwistGestureApiFirstScreen
 import com.android.settings.gestures.SystemNavigationGestureScreen
 import com.android.settings.language.LanguageAndRegionScreen
 import com.android.settings.location.LocationScreen
@@ -118,6 +119,7 @@ import com.android.settings.wfd.WifiDisplayScreen
 import com.android.settings.wifi.ConfigureWifiScreen
 import com.android.settings.wifi.WifiDataUsagePreference
 import com.android.settings.wifi.calling.WifiCallingScreen
+import com.android.settings.wifi.p2p.WifiDirectApiScreen
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiScreen
 import com.android.settings.wifi.tether.WifiHotspotScreen
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -200,7 +202,7 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = LanguageAndRegionScreen.KEY),
-        PerScreenCatalystConfig(enabled = false, screenKey = ModuleLicensesScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ModuleLicensesScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LegalSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationServicesScreen.KEY),
         PerScreenCatalystConfig(
@@ -431,6 +433,8 @@ private fun getCatalystScreenConfigs() =
             screenKey = BillingCycleScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
+        PerScreenCatalystConfig(enabled = true, screenKey = DoubleTwistGestureApiFirstScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = WifiDirectApiScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =

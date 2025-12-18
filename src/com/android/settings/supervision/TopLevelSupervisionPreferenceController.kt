@@ -22,6 +22,7 @@ import android.content.Intent
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.SettingsActivity.EXTRA_IS_SECOND_LAYER_PAGE
+import com.android.settings.Utils
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController
 import com.android.settings.core.BasePreferenceController
 
@@ -57,7 +58,8 @@ class TopLevelSupervisionPreferenceController(context: Context, key: String) :
         if (
             !Flags.enableSupervisionSettingsScreen() ||
                 (!hasNecessarySupervisionComponent &&
-                    mContext.getSupervisionAppInstallActivityInfo() == null)
+                    mContext.getSupervisionAppInstallActivityInfo() == null) ||
+                Utils.shouldHideSupervisionInDemoMode(mContext)
         ) {
             return UNSUPPORTED_ON_DEVICE
         }

@@ -23,8 +23,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
+import com.android.settings.accessibility.buttonshortcutsetting.ui.ButtonShortcutSettingScreen;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
@@ -56,8 +60,15 @@ public class AccessibilityButtonFragment extends DashboardFragment {
         return SettingsEnums.ACCESSIBILITY_BUTTON_SETTINGS;
     }
 
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return ButtonShortcutSettingScreen.KEY;
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_button_settings) {
+            new BaseSearchIndexProvider(
+                    Flags.catalystA11yButtonShortcutSetting() ? 0
+                            : R.xml.accessibility_button_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     // Page should be unsearchable if there are no active button targets
