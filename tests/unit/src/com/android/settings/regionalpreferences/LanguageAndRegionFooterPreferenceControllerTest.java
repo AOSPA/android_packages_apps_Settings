@@ -34,11 +34,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
-public class RegionalFooterPreferenceControllerTest {
+public class LanguageAndRegionFooterPreferenceControllerTest {
 
-    private static String KEY_FOOTER_PREFERENCE = "regional_pref_footer";
+    private static String KEY_FOOTER_PREFERENCE = "language_and_region_footer_preference";
     private Context mContext;
-    private RegionalFooterPreferenceController mRegionalFooterPreferenceController;
+    private LanguageAndRegionFooterPreferenceController mFooterPreferenceController;
 
     @Mock
     private FooterPreference mMockFooterPreference;
@@ -50,13 +50,13 @@ public class RegionalFooterPreferenceControllerTest {
             Looper.prepare();
         }
         mContext = ApplicationProvider.getApplicationContext();
-        mRegionalFooterPreferenceController = new RegionalFooterPreferenceController(mContext,
-                KEY_FOOTER_PREFERENCE);
+        mFooterPreferenceController =
+                new LanguageAndRegionFooterPreferenceController(mContext, KEY_FOOTER_PREFERENCE);
     }
 
     @Test
     public void setupFooterPreference_shouldSetAsTextInLearnMore() {
-        mRegionalFooterPreferenceController.setupFooterPreference(mMockFooterPreference);
+        mFooterPreferenceController.setupFooterPreference(mMockFooterPreference);
         verify(mMockFooterPreference).setLearnMoreText(anyString());
     }
 }

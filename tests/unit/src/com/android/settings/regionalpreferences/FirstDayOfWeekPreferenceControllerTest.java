@@ -19,34 +19,28 @@ package com.android.settings.regionalpreferences;
 import static org.junit.Assert.assertEquals;
 
 import android.content.Context;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.flags.Flags;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.Locale;
 
-public class TemperatureUnitControllerTest {
+public class FirstDayOfWeekPreferenceControllerTest {
     private Context mApplicationContext;
-    private TemperatureUnitController mController;
+    private FirstDayOfWeekPreferenceController mController;
     private String mCacheProviderContent = "";
     private Locale mCacheLocale;
-
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() throws Exception {
         mApplicationContext = ApplicationProvider.getApplicationContext();
-        mController = new TemperatureUnitController(mApplicationContext, "key");
+        mController = new FirstDayOfWeekPreferenceController(mApplicationContext, "key");
         mCacheProviderContent = Settings.System.getString(
                 mApplicationContext.getContentResolver(), Settings.System.LOCALE_PREFERENCES);
         mCacheLocale = Locale.getDefault(Locale.Category.FORMAT);
@@ -60,44 +54,38 @@ public class TemperatureUnitControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
-    public void getSummary_hasProviderValue_resultIsCelsius() {
-        RegionalPreferenceTestUtils.setSettingsProviderContent(
-                mApplicationContext, "und-u-mu-celsius");
+    public void getSummary_hasProviderValue_resultIsWed() {
+        RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "und-u-fw-wed");
 
         String summary = mController.getSummary().toString();
 
         assertEquals(ResourcesUtils.getResourcesString(
-                mApplicationContext, "celsius_temperature_unit"), summary);
+                mApplicationContext, "wednesday_first_day_of_week"), summary);
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
-    public void getSummary_hasProviderValue_resultIsFahrenheit() {
-        RegionalPreferenceTestUtils.setSettingsProviderContent(
-                mApplicationContext, "und-u-mu-fahrenhe");
+    public void getSummary_hasProviderValue_resultIsSat() {
+        RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "und-u-fw-sat");
 
         String summary = mController.getSummary().toString();
 
         assertEquals(ResourcesUtils.getResourcesString(
-                mApplicationContext, "fahrenheit_temperature_unit"), summary);
+                mApplicationContext, "saturday_first_day_of_week"), summary);
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
-    public void getSummary_noProviderValueButHasDefaultLocaleWithSubtag_resultIsFahrenheit() {
+    public void getSummary_noProviderValueButHasDefaultLocaleWithSubtag_resultIsSat() {
         RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "");
-        Locale.setDefault(Locale.forLanguageTag("en-US-u-mu-fahrenhe"));
+        Locale.setDefault(Locale.forLanguageTag("en-US-u-fw-sat"));
 
         String summary = mController.getSummary().toString();
 
         assertEquals(ResourcesUtils.getResourcesString(
-                mApplicationContext, "fahrenheit_temperature_unit"), summary);
+                mApplicationContext, "saturday_first_day_of_week"), summary);
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
-    public void getSummary_noProviderValueAndDefaultLocaleWithoutSubtag_resultIsDefault() {
+    public void getSummary_noProviderValueAndDefaultLocaleWithoutSubtag_resultIsdefault() {
         RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "");
         Locale.setDefault(Locale.forLanguageTag("en-US"));
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.android.settings.regionalpreferences;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
 import androidx.core.text.util.LocalePreferences;
 
 import com.android.settings.R;
@@ -26,12 +27,11 @@ import com.android.settings.core.BasePreferenceController;
 
 import java.util.Locale;
 
-/** A controller for the entry of First Day of Week's page */
-@Deprecated
-public class FirstDayOfWeekController extends BasePreferenceController {
-    private static final String TAG = FirstDayOfWeekController.class.getSimpleName();
-
-    public FirstDayOfWeekController(Context context, String preferenceKey) {
+/** A controller for the entry of Temperature units' page */
+public class TemperatureUnitPreferenceController extends BasePreferenceController {
+    private static final String TAG = TemperatureUnitPreferenceController.class.getSimpleName();
+    public TemperatureUnitPreferenceController(
+            @NonNull Context context, @NonNull String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -52,19 +52,21 @@ public class FirstDayOfWeekController extends BasePreferenceController {
     }
 
     @Override
+    @NonNull
     public CharSequence getSummary() {
         String record = Settings.System.getString(
                 mContext.getContentResolver(), Settings.System.LOCALE_PREFERENCES);
         String result = "";
         if (record != null) {
-            result = LocalePreferences.getFirstDayOfWeek(Locale.forLanguageTag(record), false);
+            result = LocalePreferences.getTemperatureUnit(Locale.forLanguageTag(record), false);
         }
 
         if (result.isEmpty()) {
-            result = LocalePreferences.getFirstDayOfWeek(false);
+            result = LocalePreferences.getTemperatureUnit(false);
         }
+
         return result.isEmpty()
-                ? mContext.getString(R.string.default_string_of_regional_preference)
-                : RegionalPreferencesDataUtils.dayConverter(mContext, result);
+            ? mContext.getString(R.string.default_string_of_regional_preference)
+            : RegionalPreferencesDataUtils.temperatureUnitsConverter(mContext, result);
     }
 }

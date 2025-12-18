@@ -24,14 +24,14 @@ import androidx.core.text.util.LocalePreferences;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.flags.Flags;
 
 import java.util.Locale;
 
-/** A controller for the entry of Temperature units' page */
-public class NewTemperatureUnitController extends BasePreferenceController {
-    private static final String TAG = NewTemperatureUnitController.class.getSimpleName();
-    public NewTemperatureUnitController(@NonNull Context context, @NonNull String preferenceKey) {
+/** A controller for the entry of First Day of Week's page */
+public class FirstDayOfWeekPreferenceController extends BasePreferenceController {
+
+    public FirstDayOfWeekPreferenceController(
+            @NonNull Context context, @NonNull String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -48,10 +48,7 @@ public class NewTemperatureUnitController extends BasePreferenceController {
      */
     @Override
     public int getAvailabilityStatus() {
-        if (Flags.regionalPreferencesApiEnabled()) {
-            return AVAILABLE;
-        }
-        return CONDITIONALLY_UNAVAILABLE;
+        return AVAILABLE;
     }
 
     @Override
@@ -61,15 +58,14 @@ public class NewTemperatureUnitController extends BasePreferenceController {
                 mContext.getContentResolver(), Settings.System.LOCALE_PREFERENCES);
         String result = "";
         if (record != null) {
-            result = LocalePreferences.getTemperatureUnit(Locale.forLanguageTag(record), false);
+            result = LocalePreferences.getFirstDayOfWeek(Locale.forLanguageTag(record), false);
         }
 
         if (result.isEmpty()) {
-            result = LocalePreferences.getTemperatureUnit(false);
+            result = LocalePreferences.getFirstDayOfWeek(false);
         }
-
         return result.isEmpty()
             ? mContext.getString(R.string.default_string_of_regional_preference)
-            : RegionalPreferencesDataUtils.temperatureUnitsConverter(mContext, result);
+            : RegionalPreferencesDataUtils.dayConverter(mContext, result);
     }
 }
