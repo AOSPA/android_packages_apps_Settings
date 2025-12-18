@@ -21,6 +21,7 @@ import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.accounts.ManageAccountsScreen
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceCategory
@@ -74,7 +75,7 @@ open class AccountsAndBackupScreen : PreferenceScreenMixin, PreferenceIconProvid
                 title = R.string.account_settings,
             ) +=
                 {
-                    // TODO(b/462460140): Add the new "Manage accounts" screen when it's ready.
+                    +ManageAccountsScreen.KEY
                 }
             +PreferenceCategory(
                 key = KEY_BACKUP,
