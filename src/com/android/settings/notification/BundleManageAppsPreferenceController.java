@@ -46,7 +46,7 @@ public class BundleManageAppsPreferenceController extends
 
     @Override
     public int getAvailabilityStatus() {
-        if (Flags.notificationClassificationUi() && mBackend.isNotificationBundlingSupported()) {
+        if (mBackend.isNotificationBundlingSupported()) {
             return AVAILABLE;
         }
         return CONDITIONALLY_UNAVAILABLE;

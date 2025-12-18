@@ -91,8 +91,7 @@ public class BundlePreferenceFragment extends DashboardFragment {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     NotificationBackend backend = new NotificationBackend();
-                    return Flags.notificationClassificationUi()
-                            && backend.isNotificationBundlingSupported();
+                    return backend.isNotificationBundlingSupported();
                 }
             };
 }
