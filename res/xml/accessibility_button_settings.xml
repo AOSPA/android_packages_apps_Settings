@@ -31,8 +31,8 @@
     <ListPreference
         android:entries="@array/accessibility_button_location_selector_titles"
         android:entryValues="@array/accessibility_button_location_selector_values"
-        android:key="accessibility_button_location"
-        android:persistent="false"
+        android:key="accessibility_button_mode"
+        android:persistent="true"
         android:summary="%s"
         android:title="@string/accessibility_button_location_title"
         settings:controller="com.android.settings.accessibility.AccessibilityButtonLocationPreferenceController" />
@@ -40,8 +40,8 @@
     <ListPreference
         android:entries="@array/accessibility_button_size_selector_titles"
         android:entryValues="@array/accessibility_button_size_selector_values"
-        android:key="accessibility_button_size"
-        android:persistent="false"
+        android:key="accessibility_floating_menu_size"
+        android:persistent="true"
         android:summary="%s"
         android:title="@string/accessibility_button_size_title"
         settings:controller="com.android.settings.accessibility.FloatingMenuSizePreferenceController" />

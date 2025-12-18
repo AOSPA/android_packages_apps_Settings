@@ -47,6 +47,8 @@ open class ButtonShortcutSettingScreen : PreferenceScreenMixin, PreferenceSummar
         preferenceHierarchy(context) {
             +ButtonShortcutTopIntroPreference()
             +ButtonShortcutIllustrationPreference()
+            +ButtonLocationPreference(context)
+            +ButtonSizePreference(context)
         }
 
     override val key: String
