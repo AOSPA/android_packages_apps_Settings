@@ -29,6 +29,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
+/** Provides the preference screen for the Accessibility Button shortcut settings. */
 @ProvidePreferenceScreen(ButtonShortcutSettingScreen.KEY)
 open class ButtonShortcutSettingScreen : PreferenceScreenMixin, PreferenceSummaryProvider {
     override val title: Int
@@ -43,7 +44,10 @@ open class ButtonShortcutSettingScreen : PreferenceScreenMixin, PreferenceSummar
     override fun fragmentClass() = AccessibilityButtonFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) {
+            +ButtonShortcutTopIntroPreference()
+            +ButtonShortcutIllustrationPreference()
+        }
 
     override val key: String
         get() = KEY
