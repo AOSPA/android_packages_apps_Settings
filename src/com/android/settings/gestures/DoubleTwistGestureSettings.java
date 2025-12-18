@@ -31,6 +31,7 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.Arrays;
 import java.util.List;
 
+// LINT.IfChange
 @SearchIndexable
 public class DoubleTwistGestureSettings extends DashboardFragment {
 
@@ -75,3 +76,4 @@ public class DoubleTwistGestureSettings extends DashboardFragment {
             };
 
 }
+// LINT.ThenChange(DoubleTwistGestureApiFirstScreen.kt)
