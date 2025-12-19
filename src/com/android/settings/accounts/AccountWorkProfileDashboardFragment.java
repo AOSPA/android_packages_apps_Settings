@@ -19,6 +19,7 @@ package com.android.settings.accounts;
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
 import static com.android.settings.accounts.AccountDashboardFragment.buildAutofillPreferenceControllers;
+import static com.android.settings.accounts.TopLevelAccountEntryPreferenceController.maybeAddTopLevelAccountEntryPreferenceController;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -88,6 +89,7 @@ public class AccountWorkProfileDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        maybeAddTopLevelAccountEntryPreferenceController(context, controllers);
         buildAutofillPreferenceControllers(
                 context, controllers, /*isWorkProfile=*/ true, /*isPrivateSpace=*/ false);
         final String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
