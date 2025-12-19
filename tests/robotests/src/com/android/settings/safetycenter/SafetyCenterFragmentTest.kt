@@ -115,7 +115,11 @@ class SafetyCenterFragmentTest {
 
     private fun runTest(data: SafetyCenterData, testBlock: (SafetyCenterFragment) -> Unit) {
         shadowSafetyCenterManager.setSafetyCenterData(data)
-        val fragmentArgs = Bundle().apply { putLong(EXTRA_SESSION_ID, TEST_SESSION_ID) }
+        val fragmentArgs =
+            Bundle().apply {
+                putLong(EXTRA_SESSION_ID, TEST_SESSION_ID)
+                putAll(NavigationSource.SETTINGS.createArgs())
+            }
         val scenario =
             launchFragmentInContainer<SafetyCenterFragment>(
                 fragmentArgs = fragmentArgs,
@@ -1340,8 +1344,7 @@ class SafetyCenterFragmentTest {
             assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
             assertThat(event.action).isEqualTo(Action.SAFETY_CENTER_VIEWED.statsLogValue)
             assertThat(event.viewType).isEqualTo(ViewType.FULL.statsLogValue)
-            assertThat(event.navigationSource)
-                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(event.navigationSource).isEqualTo(NavigationSource.SETTINGS.statsLogValue)
             assertThat(event.severityLevel).isEqualTo(LogSeverityLevel.UNKNOWN.statsLogValue)
             assertThat(event.sourceId).isEqualTo(0)
             assertThat(event.sourceProfileType)
@@ -1372,8 +1375,7 @@ class SafetyCenterFragmentTest {
             assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
             assertThat(event.action).isEqualTo(Action.SAFETY_CENTER_VIEWED.statsLogValue)
             assertThat(event.viewType).isEqualTo(ViewType.FULL.statsLogValue)
-            assertThat(event.navigationSource)
-                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(event.navigationSource).isEqualTo(NavigationSource.UNKNOWN.statsLogValue)
             assertThat(event.severityLevel).isEqualTo(LogSeverityLevel.UNKNOWN.statsLogValue)
             assertThat(event.sourceId).isEqualTo(0)
             assertThat(event.sourceProfileType)
@@ -1385,6 +1387,49 @@ class SafetyCenterFragmentTest {
                     SettingsStatsLog
                         .SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ISSUE_STATE_UNKNOWN
                 )
+        }
+    }
+
+    @Test
+    fun interactionLogger_onLaunchWithNotificationIntent_logsNavigationSourceNotification() {
+        val intent =
+            createFocusedIntent(sourceIssueId = "issueId", sourceId = "sourceId").apply {
+                putExtra(EXTRA_SESSION_ID, TEST_SESSION_ID)
+            }
+        val issue =
+            createIssue(
+                id = "issue1",
+                safetySourceIssueId = "issueId",
+                sourceIds = setOf("sourceId"),
+            )
+
+        runTestWithIntent(intent, createScData(activeIssues = listOf(issue))) {
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            assertThat(events).hasSize(2) // SAFETY_CENTER_VIEWED and SAFETY_ISSUE_VIEWED
+            val event = events.find { it.action == Action.SAFETY_CENTER_VIEWED.statsLogValue }!!
+
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.NOTIFICATION.statsLogValue)
+        }
+    }
+
+    @Test
+    fun interactionLogger_onLaunchWithSearchIntent_logsNavigationSourceSettings() {
+        val intent =
+            Intent(mApplication, SafetyCenterActivity::class.java).apply {
+                putExtra(EXTRA_SESSION_ID, TEST_SESSION_ID)
+                putExtra(
+                    NavigationSource.EXTRA_SETTINGS_FRAGMENT_ARGS_KEY,
+                    "some_search_result_key",
+                )
+            }
+
+        runTestWithIntent(intent, EMPTY_SC_DATA) {
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            assertThat(events).hasSize(1)
+            val event = events[0]
+
+            assertThat(event.navigationSource).isEqualTo(NavigationSource.SETTINGS.statsLogValue)
         }
     }
 
@@ -1439,7 +1484,7 @@ class SafetyCenterFragmentTest {
             assertThat(issueViewedEvent.action).isEqualTo(Action.SAFETY_ISSUE_VIEWED.statsLogValue)
             assertThat(issueViewedEvent.viewType).isEqualTo(ViewType.FULL.statsLogValue)
             assertThat(issueViewedEvent.navigationSource)
-                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+                .isEqualTo(NavigationSource.SETTINGS.statsLogValue)
             assertThat(issueViewedEvent.sourceId)
                 .isEqualTo(InteractionLogger.encodeStringId(activeIssue.safetySourceIds.first()))
             assertThat(issueViewedEvent.issueTypeId)
@@ -1474,8 +1519,7 @@ class SafetyCenterFragmentTest {
             assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
             assertThat(event.action).isEqualTo(Action.SCAN_INITIATED.statsLogValue)
             assertThat(event.viewType).isEqualTo(ViewType.FULL.statsLogValue)
-            assertThat(event.navigationSource)
-                .isEqualTo(NavigationSource.SAFETY_CENTER.statsLogValue)
+            assertThat(event.navigationSource).isEqualTo(NavigationSource.SETTINGS.statsLogValue)
             assertThat(event.severityLevel).isEqualTo(LogSeverityLevel.UNKNOWN.statsLogValue)
             assertThat(event.sourceId).isEqualTo(0)
             assertThat(event.sourceProfileType)

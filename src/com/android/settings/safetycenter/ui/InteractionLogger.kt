@@ -18,6 +18,7 @@ package com.android.settings.safetycenter.ui
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.os.UserHandle
 import android.safetycenter.SafetyCenterEntry
 import android.safetycenter.SafetyCenterIssue
@@ -221,13 +222,34 @@ enum class NavigationSource(val statsLogValue: Int) {
         SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__NAVIGATION_SOURCE__SAFETY_CENTER
     );
 
+    /** Creates a Bundle with the navigation source. */
+    fun createArgs(): Bundle {
+        val args = Bundle()
+        args.putInt(EXTRA_NAVIGATION_SOURCE, this.statsLogValue)
+        return args
+    }
+
     companion object {
 
         /** Intent extra representing the preference key of a search result */
         const val EXTRA_SETTINGS_FRAGMENT_ARGS_KEY: String = ":settings:fragment_args_key"
+        /** Intent/Argument extra representing the navigation source. */
+        const val EXTRA_NAVIGATION_SOURCE: String = "navigation_source"
+
+        /**
+         * Determines the navigation source by first checking the intent, then falling back to the
+         * arguments bundle.
+         */
+        fun fromIntentOrArguments(intent: Intent?, args: Bundle?): NavigationSource {
+            val source = fromIntent(intent)
+            return if (source == UNKNOWN) fromArguments(args) else source
+        }
 
         /** Determines the navigation source from the provided [Intent]. */
-        fun fromIntent(intent: Intent): NavigationSource {
+        private fun fromIntent(intent: Intent?): NavigationSource {
+            if (intent == null) {
+                return UNKNOWN
+            }
             val sourceIssueId = intent.getStringExtra(EXTRA_SAFETY_SOURCE_ISSUE_ID)
             val searchKey = intent.getStringExtra(EXTRA_SETTINGS_FRAGMENT_ARGS_KEY)
             return if (sourceIssueId != null) {
@@ -235,8 +257,21 @@ enum class NavigationSource(val statsLogValue: Int) {
             } else if (searchKey != null) {
                 SETTINGS
             } else {
-                SAFETY_CENTER
+                UNKNOWN
             }
+        }
+
+        /** Gets the navigation source from a Bundle. */
+        private fun fromArguments(args: Bundle?): NavigationSource {
+            if (args == null) {
+                return UNKNOWN
+            }
+            val sourceValue = args.getInt(EXTRA_NAVIGATION_SOURCE, UNKNOWN.statsLogValue)
+            return fromStatsLogValue(sourceValue)
+        }
+
+        private fun fromStatsLogValue(sourceValue: Int): NavigationSource {
+            return entries.find { it.statsLogValue == sourceValue } ?: UNKNOWN
         }
     }
 }
