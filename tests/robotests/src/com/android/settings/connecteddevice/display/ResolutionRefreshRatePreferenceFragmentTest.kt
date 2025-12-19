@@ -104,6 +104,10 @@ class ResolutionRefreshRatePreferenceFragmentTest : ExternalDisplayTestBase() {
             val initialResPref = topCategory.getPreference(1) as SelectorWithWidgetPreference
             assertThat(initialResPref.key).isEqualTo("1920x1080")
             assertThat(initialResPref.isChecked).isTrue()
+            // Verify resolution preference title is correctly formatted
+            val expectedTitle =
+                fragment.getString(R.string.screen_resolution_displayed_text, "1920", "1080")
+            assertThat(initialResPref.title.toString()).isEqualTo(expectedTitle)
 
             assertThat(refreshRateCategory.preferenceCount).isEqualTo(1)
             val initialRefreshPref =
