@@ -3157,6 +3157,10 @@
     <string name="screen_resolution_option_full">Max resolution</string>
     <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_footer">Max resolution uses more of your battery. Switching your resolution may cause some apps to restart.</string>
+    <!-- Screen resolution and refresh rate displayed text [CHAR LIMIT=NONE] -->
+    <string name="screen_resolution_refresh_rate_combined_displayed_text"><xliff:g id="width">%1$s</xliff:g> x <xliff:g id="height">%2$s</xliff:g> (<xliff:g id="refresh_rate">%3$s</xliff:g> Hz)</string>
+    <!-- Screen resolution and refresh rate a11y text. Replaces 600x800 -> 600 by 800, and 'Hz' notation to 'Hertz' [CHAR LIMIT=NONE] -->
+    <string name="screen_resolution_refresh_rate_combined_a11y"><xliff:g id="width">%1$s</xliff:g> by <xliff:g id="height">%2$s</xliff:g> <xliff:g id="refresh_rate">%3$s</xliff:g> Hertz</string>
     <!-- Screen resolution displayed text [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_displayed_text"><xliff:g id="width">%1$s</xliff:g> x <xliff:g id="height">%2$s</xliff:g></string>
     <!-- Screen resolution a11y message announced to replace 'x' in entry e.g. 600 by 800 [CHAR LIMIT=NONE] -->
