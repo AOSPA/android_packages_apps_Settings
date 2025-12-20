@@ -17,6 +17,7 @@
 package com.android.settings.testutils2
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settingslib.metadata.ValidatedKeyParameters
@@ -60,7 +61,7 @@ class HardwareUnsupportedException(val reason: String): FailedPreconditionExcept
  * This exception is thrown if the preconditions for a get/set operation made through the ApiTester
  * failed due to an invalid state of another preference.
  */
-class InvalidPreferenceException() : FailedPreconditionException()
+class InvalidPreferenceException(val reason: String) : FailedPreconditionException()
 
 /**
  * This exception is thrown if there is a set operation about to be performed on a preference
@@ -97,9 +98,9 @@ class ApiTester(private val instance: PreferencesApiScreen) {
     }
 
     private fun checkSetPermissions(preference: ApiPreference<*>) {
-        val prefPermissions = preference.permissions?.permissions ?: listOf()
-        val prefSetPermissions = preference.get.permissions?.permissions ?: listOf()
         val screenPermissions = instance.screenPermissions?.permissions ?: listOf()
+        val prefPermissions = preference.permissions?.permissions ?: listOf()
+        val prefSetPermissions = preference.set?.permissions?.permissions ?: listOf()
 
         val allPermissions = prefPermissions + prefSetPermissions + screenPermissions
 
@@ -112,7 +113,7 @@ class ApiTester(private val instance: PreferencesApiScreen) {
 
     private fun checkGetPreconditions(preference: ApiPreference<*>, operationContext: ApiOperationContext) {
         val screenPrecondition = runBlocking {
-            preference.preconditions?.check(operationContext) ?: Allowed
+            preference.screenPreconditions?.check(operationContext) ?: Allowed
         }
         dealWithPreconditionResult(screenPrecondition)
         val commonPrecondition = runBlocking {
@@ -152,7 +153,7 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         } else if (result is HardwareUnsupported) {
             throw HardwareUnsupportedException(context.getString(result.reason))
         } else if (result is InvalidPreference) {
-            throw InvalidPreferenceException()
+            throw InvalidPreferenceException(context.getString(result.reason))
         } else if (result is MissingPermission) {
             throw MissingPermissionException(context.getString(result.reason))
         }
@@ -172,7 +173,7 @@ class ApiTester(private val instance: PreferencesApiScreen) {
      *
      * @param key The key of the preference the tester is executing the get operation on.
      */
-    fun <V> get(key: String): V {
+    fun <V : Any> get(key: String): V {
         val preference = getPreference<V>(key)
         val keyParameters = preference.screenParameters ?: ValidatedKeyParameters.EMPTY
         val operationContext = ApiOperationContext(context, keyParameters)
@@ -204,5 +205,30 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         runBlocking {
             setConfig.execute.invoke(operationContext, value)
         }
+    }
+
+    /**
+     * Helper method that returns the launch intent if the screen permissions and preconditions
+     * pass.
+     */
+    fun getLaunchIntent() : Intent {
+        val operationContext = ApiOperationContext(
+            context,
+            instance.keyParameters ?: ValidatedKeyParameters.EMPTY
+        )
+        val screenPermissions = runBlocking {
+            instance.screenPermissions?.permissions?: listOf()
+        }
+        for (permission in screenPermissions) {
+            if (context.checkSelfPermission(permission) == PackageManager.PERMISSION_DENIED) {
+                throw MissingPermissionException(permission)
+            }
+        }
+        val screenPrecondition = runBlocking {
+            instance.screenPreconditions?.check(operationContext) ?: Allowed
+        }
+        dealWithPreconditionResult(screenPrecondition)
+        return instance.getLaunchIntent(context, null)
+            ?: throw Exception("Intent should not be null.")
     }
 }

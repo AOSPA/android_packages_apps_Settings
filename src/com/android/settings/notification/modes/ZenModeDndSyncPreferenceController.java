@@ -42,7 +42,8 @@ public class ZenModeDndSyncPreferenceController extends AbstractZenModePreferenc
 
     @Override
     public boolean isAvailable(@NonNull ZenMode zenMode) {
-        return zenMode.isManualDnd()
+        return android.service.notification.Flags.enableDndSync()
+                && zenMode.isManualDnd()
                 && zenMode.isEnabled()
                 && requireNonNull(mBackend).isModeSyncSupported();
     }

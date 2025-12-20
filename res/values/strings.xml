@@ -6058,7 +6058,7 @@
     <!-- Title in the search result for expanded dark theme mode. [BACKUP_MESSAGE_ID: 7467343853315678576] -->
     <string name="accessibility_expanded_dark_theme_title_in_search">Expanded dark theme</string>
     <!-- Summary for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_expanded_dark_theme_summary">Automatically applies dark theme to most apps that don\'t support it. This can improve accessibility and readability, but may cause some apps to display incorrectly.</string>
+    <string name="accessibility_expanded_dark_theme_summary">Automatically applies dark theme to most apps that don\'t support it, helping to improve accessibility.</string>
     <!-- Search keywords for the Expanded dark theme settings. [CHAR_LIMIT=NONE] -->
     <string name="keywords_expanded_dark_theme">force invert, color inversion, contrast</string>
     <!-- Title for the Expanded dark theme per-app settings page. [CHAR LIMIT=35] -->
@@ -6067,6 +6067,8 @@
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description">Expanded dark theme settings</string>
     <!-- Hint for the Expanded dark theme per-app settings gear icon. [CHAR LIMIT=NONE] -->
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint">Open expanded dark theme settings</string>
+    <!-- header description for the Expanded dark theme per-app settings. [CHAR LIMIT=NONE] [DO NOT TRANSLATE] -->
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description">Expanded dark theme can improve readability, but may cause some apps to display incorrectly. Apps with this setting off will use the standard dark theme option.</string>
     <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
@@ -15221,4 +15223,12 @@
     <string name="add_tile_action">Add tile</string>
     <!-- Title for the satellite tile prompt notification channel. [CHAR LIMIT=NONE] -->
     <string name="satellite_tile_prompt_channel_title">Satellite Tile Prompts</string>
+
+    <string name="long_press_power_assistant_sensitivity_ms_description" translatable="false">A length of time in ms.</string>
+    <string name="long_press_power_category_precondition" translatable="false">Requires that long pressing the power button can be configured for Assistant</string>
+    <string name="long_press_power_category_unavailable" translatable="false">This device does not support setting the power button to open assistant on long press</string>
+    <string name="long_press_power_sensitivity_precondition" translatable="false">Requires that the device is currently set to launch the Assistant on long press of the power button, and that there are multiple durations available for the long press.</string>
+    <string name="long_press_power_sensitivity_precondition_set_for_power_button" translatable="false">The device is currently set to launch the Power Menu on long press of the power button</string>
+    <string name="long_press_power_sensitivity_no_options" translatable="false">The device does not support setting alternative sensitivities for long pressing power button for Assistant</string>
+    <string name="long_press_power_sensitivity_value_description" translatable="false"><xliff:g id="duration_in_millis" example="100">%d</xliff:g>ms</string>
 </resources>
