@@ -51,7 +51,7 @@ class DoubleTwistGestureApiFirstScreen :
         }
 
         preference(
-            key = "gesture_double_twist",
+            key = MAIN_SWITCH_KEY,
             purpose = R.string.gesture_double_twist_purpose,
             type = AnyBoolean,
         ) {
@@ -91,6 +91,7 @@ class DoubleTwistGestureApiFirstScreen :
 
     companion object {
         const val KEY = "double_twist_gesture_screen"
+        const val MAIN_SWITCH_KEY = "gesture_double_twist"
         const val ON = 1
         const val OFF = 0
     }
