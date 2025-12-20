@@ -15223,4 +15223,12 @@
     <string name="add_tile_action">Add tile</string>
     <!-- Title for the satellite tile prompt notification channel. [CHAR LIMIT=NONE] -->
     <string name="satellite_tile_prompt_channel_title">Satellite Tile Prompts</string>
+
+    <string name="long_press_power_assistant_sensitivity_ms_description" translatable="false">A length of time in ms.</string>
+    <string name="long_press_power_category_precondition" translatable="false">Requires that long pressing the power button can be configured for Assistant</string>
+    <string name="long_press_power_category_unavailable" translatable="false">This device does not support setting the power button to open assistant on long press</string>
+    <string name="long_press_power_sensitivity_precondition" translatable="false">Requires that the device is currently set to launch the Assistant on long press of the power button, and that there are multiple durations available for the long press.</string>
+    <string name="long_press_power_sensitivity_precondition_set_for_power_button" translatable="false">The device is currently set to launch the Power Menu on long press of the power button</string>
+    <string name="long_press_power_sensitivity_no_options" translatable="false">The device does not support setting alternative sensitivities for long pressing power button for Assistant</string>
+    <string name="long_press_power_sensitivity_value_description" translatable="false"><xliff:g id="duration_in_millis" example="100">%d</xliff:g>ms</string>
 </resources>

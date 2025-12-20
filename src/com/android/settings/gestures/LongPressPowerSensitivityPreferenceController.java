@@ -139,7 +139,7 @@ public class LongPressPowerSensitivityPreferenceController extends SliderPrefere
                         com.android.internal.R.integer.config_longPressOnPowerDurationMs));
     }
 
-    private static int closestValueIndex(int[] values, int needle) {
+    static int closestValueIndex(int[] values, int needle) {
         int minDistance = Integer.MAX_VALUE;
         int valueIndex = 0;
         for (int i = 0; i < values.length; i++) {
