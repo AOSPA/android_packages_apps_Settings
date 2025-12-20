@@ -32,7 +32,6 @@ import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutT
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP
-import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP
 import com.android.server.accessibility.Flags
 import com.android.settings.accessibility.PreferredShortcut
 import com.android.settings.accessibility.PreferredShortcuts
@@ -109,11 +108,7 @@ class AccessibilityShortcutDataStoreTest {
         assertThat(a11yManager.getAccessibilityShortcutTargets(SOFTWARE)).isEmpty()
         assertThat(a11yManager.getAccessibilityShortcutTargets(HARDWARE)).isEmpty()
         assertThat(a11yManager.getAccessibilityShortcutTargets(TRIPLETAP)).isEmpty()
-        assertThat(a11yManager.getAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP)).isEmpty()
-        setPreferredShortcuts(
-            SOFTWARE or HARDWARE or TRIPLETAP or TWOFINGER_DOUBLETAP,
-            MAGNIFICATION_CONTROLLER_NAME,
-        )
+        setPreferredShortcuts(SOFTWARE or HARDWARE or TRIPLETAP, MAGNIFICATION_CONTROLLER_NAME)
         val dataStore = createDataStoreFromTestScope(this, MAGNIFICATION_COMPONENT_NAME)
 
         dataStore.setBoolean(TEST_KEY, true)
@@ -124,24 +119,16 @@ class AccessibilityShortcutDataStoreTest {
             .contains(MAGNIFICATION_CONTROLLER_NAME)
         assertThat(a11yManager.getAccessibilityShortcutTargets(TRIPLETAP))
             .contains(MAGNIFICATION_CONTROLLER_NAME)
-        assertThat(a11yManager.getAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP))
-            .contains(MAGNIFICATION_CONTROLLER_NAME)
     }
 
     @Test
     fun setValue_false_magnificationPreferredShortcutDisabled() = runTest {
-        enableShortcuts(
-            true,
-            SOFTWARE or HARDWARE or TRIPLETAP or TWOFINGER_DOUBLETAP,
-            MAGNIFICATION_CONTROLLER_NAME,
-        )
+        enableShortcuts(true, SOFTWARE or HARDWARE or TRIPLETAP, MAGNIFICATION_CONTROLLER_NAME)
         assertThat(a11yManager.getAccessibilityShortcutTargets(SOFTWARE))
             .contains(MAGNIFICATION_CONTROLLER_NAME)
         assertThat(a11yManager.getAccessibilityShortcutTargets(HARDWARE))
             .contains(MAGNIFICATION_CONTROLLER_NAME)
         assertThat(a11yManager.getAccessibilityShortcutTargets(TRIPLETAP))
-            .contains(MAGNIFICATION_CONTROLLER_NAME)
-        assertThat(a11yManager.getAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP))
             .contains(MAGNIFICATION_CONTROLLER_NAME)
         val dataStore = createDataStoreFromTestScope(this, MAGNIFICATION_COMPONENT_NAME)
 
@@ -150,7 +137,6 @@ class AccessibilityShortcutDataStoreTest {
         assertThat(a11yManager.getAccessibilityShortcutTargets(SOFTWARE)).isEmpty()
         assertThat(a11yManager.getAccessibilityShortcutTargets(HARDWARE)).isEmpty()
         assertThat(a11yManager.getAccessibilityShortcutTargets(TRIPLETAP)).isEmpty()
-        assertThat(a11yManager.getAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP)).isEmpty()
     }
 
     @DisableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)

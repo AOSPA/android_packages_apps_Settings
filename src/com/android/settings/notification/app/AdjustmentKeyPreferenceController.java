@@ -58,9 +58,6 @@ public class AdjustmentKeyPreferenceController extends
     static boolean isAvailable(String key, NotificationBackend backend, String pkg, int uid) {
         boolean isBundlePref = Adjustment.KEY_TYPE.equals(key);
         boolean isSummarizePref = Adjustment.KEY_SUMMARIZATION.equals(key);
-        if (!Flags.notificationClassificationUi() && isBundlePref) {
-            return false;
-        }
         if (!isSummarizePref && !isBundlePref) {
             return false;
         }

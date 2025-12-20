@@ -46,6 +46,7 @@ object SafetyCenterSubpageRegistry {
     private const val ATTR_KEY = "key"
     private const val ATTR_SAFETY_SOURCE = "safetySource"
     private const val ATTR_PROFILE = "profile"
+    private const val ATTR_KEYWORDS = "keywords"
 
     // Subpage Preference Keys
     const val APP_SECURITY_SUBPAGE_KEY = "app_security_subpage"
@@ -336,6 +337,7 @@ object SafetyCenterSubpageRegistry {
                         val keyAttr = parser.getAttributeValue(NS_ANDROID, ATTR_KEY)
                         val sourceIdAttr = parser.getAttributeValue(NS_SETTINGS, ATTR_SAFETY_SOURCE)
                         val profileAttr = parser.getAttributeValue(NS_SETTINGS, ATTR_PROFILE)
+                        val keywordsAttr = parser.getAttributeValue(NS_SETTINGS, ATTR_KEYWORDS)
 
                         val key = resolveStringAttribute(context, keyAttr)
                         val sourceId = resolveStringAttribute(context, sourceIdAttr)
@@ -343,10 +345,11 @@ object SafetyCenterSubpageRegistry {
                             SafetySourcePreference.Profile.fromIntValue(
                                 resolveProfileAttribute(profileAttr)
                             )
+                        val keywords = resolveStringAttribute(context, keywordsAttr)
 
                         if (key != null && sourceId != null) {
                             safetySourcePrefConfigs.add(
-                                SafetySourcePrefConfig(key, sourceId, profile)
+                                SafetySourcePrefConfig(key, sourceId, profile, keywords)
                             )
                         } else {
                             Log.w(
@@ -372,11 +375,13 @@ object SafetyCenterSubpageRegistry {
  * @property sourceId The Safety Center source ID (from `settings:safetySource`).
  * @property profile The user profile type associated with this preference (from
  *   `settings:profile`).
+ * @property keywords The search keywords for the preference (from `settings:keywords`).
  */
 data class SafetySourcePrefConfig(
     val key: String,
     val sourceId: String,
     val profile: SafetySourcePreference.Profile,
+    val keywords: String? = null,
 )
 
 /**

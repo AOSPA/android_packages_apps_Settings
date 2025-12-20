@@ -26,7 +26,6 @@ import static com.android.internal.accessibility.common.ShortcutConstants.UserSh
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -290,8 +289,6 @@ public final class AccessibilityShortcutsTutorial {
             case SOFTWARE -> getSoftwareTitle(context, buttonMode);
             case GESTURE -> context.getText(R.string.accessibility_tutorial_dialog_title_gesture);
             case TRIPLETAP -> context.getText(R.string.accessibility_tutorial_dialog_title_triple);
-            case TWOFINGER_DOUBLETAP -> context.getString(
-                    R.string.accessibility_tutorial_dialog_title_two_finger_double, 2);
             case QUICK_SETTINGS -> context.getText(
                     R.string.accessibility_tutorial_dialog_title_quick_setting);
             default -> "";
@@ -311,8 +308,6 @@ public final class AccessibilityShortcutsTutorial {
                             : R.drawable.accessibility_shortcut_type_gesture);
             case TRIPLETAP -> createIllustrationViewWithImageRawResource(context,
                     R.raw.accessibility_shortcut_type_tripletap);
-            case TWOFINGER_DOUBLETAP -> createIllustrationViewWithImageRawResource(context,
-                    R.raw.accessibility_shortcut_type_2finger_doubletap);
             case QUICK_SETTINGS -> {
                 View v = createIllustrationView(context,
                         R.drawable.accessibility_shortcut_type_quick_settings);
@@ -338,8 +333,6 @@ public final class AccessibilityShortcutsTutorial {
                     R.string.accessibility_tutorial_dialog_gesture_shortcut_instruction);
             case TRIPLETAP -> context.getString(
                     R.string.accessibility_tutorial_dialog_tripletap_instruction, 3);
-            case TWOFINGER_DOUBLETAP -> context.getString(
-                    R.string.accessibility_tutorial_dialog_twofinger_doubletap_instruction, 2);
             case QUICK_SETTINGS -> getQuickSettingsInstruction(context, featureName, inSetupWizard);
             default -> "";
         };

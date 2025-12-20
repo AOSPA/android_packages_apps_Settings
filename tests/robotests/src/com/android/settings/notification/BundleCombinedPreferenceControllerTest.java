@@ -132,7 +132,6 @@ public class BundleCombinedPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void isAvailable_flagEnabledNasSupports_shouldReturnTrue() throws RemoteException {
         when(mNotificationManager.getAllowedAssistantAdjustmentsForUser(anyInt()))
                 .thenReturn(List.of(KEY_TYPE));
@@ -141,7 +140,6 @@ public class BundleCombinedPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void isAvailable_flagEnabledNasDoesNotSupport_shouldReturnFalse()
             throws RemoteException {
         when(mNotificationManager.getAllowedAssistantAdjustmentsForUser(anyInt()))
@@ -151,16 +149,6 @@ public class BundleCombinedPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
-    public void isAvailable_flagDisabledNasSupports_shouldReturnFalse() throws RemoteException {
-        when(mNotificationManager.getAllowedAssistantAdjustmentsForUser(anyInt()))
-                .thenReturn(List.of(KEY_TYPE));
-        when(mNotificationManager.getUnsupportedAdjustmentTypes()).thenReturn(new ArrayList<>());
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void updatePrefValues_reflectsSettings() throws RemoteException {
         // bundling is enabled globally
         when(mNotificationManager.getAllowedAssistantAdjustmentsForUser(anyInt()))
@@ -179,7 +167,6 @@ public class BundleCombinedPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void updateState_noManagedProfile_workSwitchNotVisible() throws RemoteException {
         // bundling is enabled globally with non-zero types
         when(mNotificationManager.getAllowedAssistantAdjustmentsForUser(anyInt()))
@@ -193,7 +180,6 @@ public class BundleCombinedPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void updateState_hasManagedProfile_reflectsSettings() throws RemoteException {
         // bundling is enabled globally with non-zero types
         when(mNotificationManager.getAllowedAssistantAdjustmentsForUser(anyInt()))
@@ -219,7 +205,6 @@ public class BundleCombinedPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void updatePrefValues_otherPrefsGoneWhenGlobalOff() throws RemoteException {
         when(mNotificationManager.getAllowedAssistantAdjustmentsForUser(anyInt()))
                 .thenReturn(List.of(KEY_SENSITIVE_CONTENT));
@@ -236,7 +221,6 @@ public class BundleCombinedPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void turnOffGlobalSwitch_updatesBackendAndOtherSwitches() throws RemoteException {
         // Initial state: global allowed + some types set. Work profile exists
         mController.setManagedProfile(new UserHandle(12345));
@@ -264,7 +248,6 @@ public class BundleCombinedPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void turnOnGlobalSwitch_updatesBackendAndTypeSwitches() throws RemoteException {
         mController.setManagedProfile(new UserHandle(12345));
         when(mNotificationManager.getAllowedAssistantAdjustmentsForUser(anyInt()))
@@ -296,7 +279,6 @@ public class BundleCombinedPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void toggleWorkSwitch_updatesBackend() throws RemoteException {
         // default setting: bundling is enabled, with some type enabled as well
         when(mNotificationManager.getAllowedAssistantAdjustmentsForUser(anyInt()))
@@ -318,7 +300,6 @@ public class BundleCombinedPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void turnOnTypeBundle_updatesBackend_doesNotChangeGlobalSwitch() throws RemoteException {
         when(mNotificationManager.getAllowedAssistantAdjustmentsForUser(anyInt()))
                 .thenReturn(List.of(KEY_TYPE));
@@ -338,7 +319,6 @@ public class BundleCombinedPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void turnOffTypeBundle_lastOneChangesGlobalSwitch() throws RemoteException {
         when(mNotificationManager.getAllowedAssistantAdjustmentsForUser(anyInt()))
                 .thenReturn(List.of(KEY_TYPE));
@@ -365,7 +345,6 @@ public class BundleCombinedPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void expansionSettings_reflectsSettings() throws RemoteException {
         when(mNotificationManager.getAllowedAssistantAdjustmentsForUser(anyInt()))
                 .thenReturn(List.of(KEY_TYPE));
@@ -405,7 +384,6 @@ public class BundleCombinedPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void toggleExpansionSettings_updatesSetting() throws RemoteException {
         Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUNDLES_ALWAYS_EXPAND,
                 AUTO_EXPAND_VALUE);
