@@ -662,7 +662,7 @@ class ConfirmSupervisionCredentialsActivityTest {
                     mActivity.getString(R.string.supervision_auth_prompt_forgot_pin_button_label)
             }
         assertThat(forgotPinOption).isNotNull()
-        assertThat(forgotPinOption!!.getIconType()).isEqualTo(BiometricManager.ICON_TYPE_ACCOUNT)
+        assertThat(forgotPinOption!!.getIconType()).isEqualTo(BiometricManager.ICON_TYPE_RESET)
 
         mActivity.onForgotPinFallbackClicked()
         verify(metricsRule.metricsFeatureProvider)
@@ -706,6 +706,7 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun getBiometricPrompt_withApprovalMethods_showsFallbackOptions() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
@@ -744,6 +745,8 @@ class ConfirmSupervisionCredentialsActivityTest {
         val fallbackOptions = biometricPrompt.getFallbackOptions()
         assertThat(fallbackOptions).isNotNull()
         assertThat(fallbackOptions).hasSize(2)
+        assertThat(fallbackOptions[0].getIconType())
+            .isEqualTo(BiometricManager.ICON_TYPE_SUPERVISED)
         assertThat(fallbackOptions.map { it.getText().toString() })
             .containsExactly("Method 1", "Method 2")
 

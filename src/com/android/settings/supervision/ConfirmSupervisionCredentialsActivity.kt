@@ -329,7 +329,7 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
                 // supported.
                 builder.addFallbackOption(
                     label.toString(),
-                    BiometricManager.ICON_TYPE_ACCOUNT,
+                    BiometricManager.ICON_TYPE_SUPERVISED,
                     ContextCompat.getMainExecutor(this),
                     listener,
                 )
@@ -350,11 +350,10 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
                     onForgotPinFallbackClicked()
                 }
 
-            // TODO(b/454404010): Use forgot PIN icon once the arbitrary icon is
-            // supported.
             builder.addFallbackOption(
                 getString(R.string.supervision_auth_prompt_forgot_pin_button_label),
-                BiometricManager.ICON_TYPE_ACCOUNT,
+                if (Flags.enableSupervisionSettingsUiUpdates()) BiometricManager.ICON_TYPE_RESET
+                else BiometricManager.ICON_TYPE_ACCOUNT,
                 ContextCompat.getMainExecutor(this),
                 listener,
             )
