@@ -57,7 +57,11 @@ open class ActionTimeoutSettingsScreen : PreferenceScreenMixin, PreferenceSummar
         get() = true
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) {
+            +ActionTimeoutIntroPreference()
+            +ActionTimeoutIllustrationPreference()
+            +ActionTimeoutFooterPreference()
+        }
 
     override fun getMetricsCategory(): Int = SettingsEnums.ACCESSIBILITY_TIMEOUT
 
