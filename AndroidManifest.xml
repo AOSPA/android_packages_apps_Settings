@@ -5173,6 +5173,22 @@
                        android:value="true" />
         </activity>
 
+        <activity
+            android:name=".Settings$AccountsAndBackupDashboardActivity"
+            android:label="@string/accounts_and_backup_title"
+            android:exported="true"
+            android:featureFlag="com.android.settings.flags.enable_accounts_and_backup_screen"
+            android:icon="@drawable/ic_homepage_accounts_and_backup">
+
+            <intent-filter>
+                <action android:name="com.android.settings.action.ACCOUNTS_AND_BACKUP_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accounts_and_backup"/>
+        </activity>
+
         <!-- Access to the Credential Manager list. -->
         <activity android:name=".applications.credentials.CredentialsPickerActivity"
                 android:excludeFromRecents="true"
