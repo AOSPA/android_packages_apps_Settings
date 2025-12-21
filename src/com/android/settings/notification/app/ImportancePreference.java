@@ -77,10 +77,7 @@ public class ImportancePreference extends Preference {
                 R.drawable.notification_importance_button_background_selected);
         unselectedBackground = context.getDrawable(
                 R.drawable.notification_importance_button_background_unselected);
-        int layoutId = android.app.Flags.notificationsRedesignTemplates()
-                ? R.layout.notification_2025_importance_preference
-                : R.layout.notif_importance_preference;
-        setLayoutResource(layoutId);
+        setLayoutResource(R.layout.notification_2025_importance_preference);
     }
 
     public void setImportance(int importance) {
