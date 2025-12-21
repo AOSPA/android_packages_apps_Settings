@@ -58,9 +58,7 @@ public class ImportancePreferenceTest {
     @Test
     public void createNewPreference_shouldSetLayout() {
         final ImportancePreference preference = new ImportancePreference(mContext);
-        int layoutId = android.app.Flags.notificationsRedesignTemplates()
-                ? R.layout.notification_2025_importance_preference
-                : R.layout.notif_importance_preference;
+        int layoutId = R.layout.notification_2025_importance_preference;
         assertThat(preference.getLayoutResource()).isEqualTo(layoutId);
     }
 
