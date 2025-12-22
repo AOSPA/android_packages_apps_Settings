@@ -1,0 +1,20 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto">
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="top_intro"
+        android:title="@string/vpn_app_exclusion_description"/>
+
+    <com.android.settingslib.widget.IntroPreference
+        android:key="vpn_app"/>
+
+    <PreferenceCategory
+        android:key="selected_apps"
+        android:title="@string/vpn_app_exclusion_selected_category_title" />
+
+    <PreferenceCategory
+        android:key="candidate_apps"
+        android:title="@string/filter_apps_all" />
+
+</PreferenceScreen>
