@@ -44,3 +44,13 @@ flag {
       purpose: PURPOSE_BUGFIX
   }
 }
+
+flag {
+  name: "enable_face_enroll_education_dynamic_colors"
+  namespace: "biometrics_integration"
+  description: "This flag controls whether Swatchie dynamic colors should be applied to Face Enroll education animation"
+  bug: "462073623"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}
