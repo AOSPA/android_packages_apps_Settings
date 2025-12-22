@@ -122,11 +122,16 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
         preference.isVisible = true
         preference.setOnPreferenceClickListener {
             PendingIntentSender.sendIntent(
-                mContext,
-                entry.pendingIntent,
-                safetySourceId,
-                activityTaskId,
-            )
+                    mContext,
+                    entry.pendingIntent,
+                    safetySourceId,
+                    activityTaskId,
+                )
+                .also { wasIntentSent ->
+                    if (wasIntentSent) {
+                        viewModel?.interactionLogger?.recordForEntry(Action.ENTRY_CLICKED, entry)
+                    }
+                }
         }
     }
 

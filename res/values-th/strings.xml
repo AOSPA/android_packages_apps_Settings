@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"ต้องมีใบรับรอง"</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"เพื่อปรับปรุงความแม่นยำของตำแหน่ง และเพื่อวัตถุประสงค์อื่น ๆ <xliff:g id="APP_NAME">%1$s</xliff:g> ต้องการเปิดการสแกนเครือข่าย แม้ในขณะที่ไม่มี WiFi \n \n อนุญาตให้ดำเนินการนี้สำหรับแอปทั้งหมดที่ต้องการสแกนหรือไม่"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"แอปที่ไม่รู้จักต้องการเปิดการสแกนเครือข่ายแม้ Wi‑Fi จะปิดอยู่เพื่อปรับปรุงความแม่นยำของตำแหน่งและวัตถุประสงค์อื่นๆ\n\nอนุญาตการดำเนินการนี้สำหรับทุกแอปที่ต้องการสแกนไหม"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"อนุญาต"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"ปฏิเสธ"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*ต้องระบุ"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"เครือข่ายนี้คือเครือข่ายที่ใช้ร่วมกัน คุณต้องลงชื่อเข้าใช้เพื่อทำการเปลี่ยนแปลง"</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"โปรดติดต่อเจ้าของเครือข่ายหรือผู้ดูแลระบบอุปกรณ์เพื่อทำการเปลี่ยนแปลง"</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"ผู้ใช้ทุกรายในอุปกรณ์นี้จะเข้าถึงเครือข่ายนี้ได้"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"เครือข่ายนี้ไม่มีการเข้าถึงอินเทอร์เน็ต ยังต้องการเชื่อมต่ออยู่ไหม"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"แอปและบริการบางรายการอาจไม่ทำงานเนื่องจากมีการเชื่อมต่อจำกัด ใช้ต่อไปไหม"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"ไม่ต้องถามอีกสำหรับเครือข่ายนี้"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"ไม่สามารถบันทึกเครือข่าย"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"ยกเลิก"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"ไม่จำเครือข่ายใช่ไหม"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"ระบบจะนำ <xliff:g id="NETWORK_NAME">%1$s</xliff:g> ออกสำหรับผู้ใช้ทุกคนในอุปกรณ์นี้"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 เครือข่าย}other{# เครือข่าย}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{การสมัครใช้บริการ 1 รายการ}other{การสมัครใช้บริการ # รายการ}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{เครือข่ายและการสมัครใช้บริการ 1 รายการ}other{เครือข่ายและการสมัครใช้บริการ # รายการ}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"ความละเอียดสูง"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"ความละเอียดสูงสุด"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"ความละเอียดสูงสุดจะใช้แบตเตอรี่มากขึ้น การเปลี่ยนความละเอียดอาจทำให้บางแอปรีสตาร์ท"</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> โดย <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> เฮิรตซ์"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"เปลี่ยนเขตเวลา"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"รับการแจ้งเตือนเมื่อมีการอัปเดตเขตเวลาโดยอัตโนมัติ"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"การแจ้งเตือน, เวลา, เขต, เขตเวลา"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"การเปลี่ยนแปลงนาฬิกาตามกำหนดเวลา"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"รับการแจ้งเตือนเมื่อนาฬิกาเปลี่ยนแปลงตามกำหนดเวลา เช่น เวลาออมแสง"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"dst, เวลาออมแสง, การเปลี่ยนเวลา, การเปลี่ยนเวลาตามกำหนด"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"การเปลี่ยนแปลงครั้งถัดไป"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"ไม่มีการเปลี่ยนแปลงที่กำหนดเวลาไว้"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"ดูข้อมูลกฎหมาย สถานะ รุ่นซอฟต์แวร์"</string>
     <string name="legal_information" msgid="7509900979811934843">"ข้อมูลทางกฎหมาย"</string>
     <string name="manual" msgid="3651593989906084868">"คู่มือ"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"โคลนแล้ว"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"กำลังสร้างโคลนของ <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"สร้างโคลนของ <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> แล้ว"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"ภาษา ท่าทางสัมผัส เวลา"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"ภาษาของระบบ ภาษาของแอป ค่ากำหนดตามพื้นที่ เสียงพูด"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, การเชื่อมต่อเครือข่าย, อินเทอร์เน็ต, ไร้สาย, ข้อมูล, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"การแจ้งเตือน Wi‑Fi การแจ้งเตือน wifi"</string>
@@ -4700,6 +4695,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"การปกป้องขั้นสูงกำหนดให้ปิดการตั้งค่านี้ไว้เพื่อความปลอดภัย"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"การปกป้องขั้นสูงป้องกันการดำเนินการนี้เพื่อความปลอดภัย"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"การตั้งค่า"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"ปิด"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"เปิด"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"แสดง"</string>
@@ -5183,10 +5186,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"ทดลอง: เปิดใช้ ANGLE"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"คำเตือน: เปิดใช้ ANGLE เป็นไดรเวอร์ OpenGL ES เริ่มต้น ฟีเจอร์นี้อยู่ระหว่างการทดสอบและอาจใช้งานกับแอปกล้องและแอปวิดีโอบางแอปไม่ได้ โปรดสำรองข้อมูลอุปกรณ์ก่อนเปิดสวิตช์"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"ต้องรีบูตเพื่อเปลี่ยนไดรเวอร์ OpenGL ES ของระบบ โปรดสำรองข้อมูลอุปกรณ์ก่อนรีบูต หากรีบูตไม่สำเร็จ คุณจะต้องรีเซ็ตเป็นค่าเริ่มต้นเพื่อกู้คืนอุปกรณ์"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"การเปลี่ยนแปลงความเข้ากันได้ของแอป"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"สลับการเปลี่ยนแปลงความเข้ากันได้ของแอป"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"การเปลี่ยนแปลงที่เปิดใช้โดยค่าเริ่มต้น"</string>
@@ -6073,8 +6074,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"กรองผลการค้นหาที่อาจไม่เหมาะสมออก"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{เปิดอยู่ # แอป}other{เปิดอยู่ # แอป}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"ดูข้อมูลเพิ่มเติม"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"เมื่อปิดการตั้งค่าเหล่านี้ การตั้งค่าบัญชีอื่นๆ อาจยังคงมีผล"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"ป้อน PIN การควบคุมโดยผู้ปกครอง"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"ตั้งค่า PIN การควบคุมโดยผู้ปกครอง"</string>
@@ -6092,8 +6092,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"ลบ PIN และปิดการควบคุม"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"ลบ"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"PIN การควบคุมโดยผู้ปกครองของคุณกำลังใช้งานโดย\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"PIN การควบคุมโดยผู้ปกครองของคุณเปิดใช้งานสำหรับผู้ใช้รายอื่น"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"ภาพเคลื่อนไหวสำหรับฟีเจอร์<xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"เปิดการควบคุมไม่ได้"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"ใช้การควบคุมไม่ได้"</string>

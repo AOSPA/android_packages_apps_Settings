@@ -1009,7 +1009,7 @@
     <string name="external_display_settings_title" msgid="3865786552022665355">"Layar eksternal"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Layar bawaan"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Kursor universal"</string>
-    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Memindahkan kursor mouse antar-layar"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Gerakkan kursor mouse antar-layar"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Gunakan layar eksternal"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolusi layar"</string>
     <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"Resolusi dan kecepatan refresh"</string>
@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Informasi sertifikat wajib diisi."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Untuk meningkatkan ketepatan lokasi dan untuk tujuan lainnya, <xliff:g id="APP_NAME">%1$s</xliff:g> ingin mengaktifkan pemindaian jaringan, bahkan saat Wi-Fi sedang tidak aktif.\n\nIzinkan ini untuk semua aplikasi yang ingin memindai?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Untuk meningkatkan akurasi lokasi dan untuk tujuan-tujuan lainnya, sebuah aplikasi yang tidak dikenal ingin mengaktifkan pemindaian jaringan, bahkan saat Wi‑Fi nonaktif.\n\nIzinkan ini untuk semua aplikasi yang ingin memindai?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Izinkan"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Tolak"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*wajib diisi"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Jaringan ini adalah jaringan bersama. Anda harus login untuk melakukan perubahan."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Hubungi pemilik jaringan atau admin perangkat untuk membuat perubahan."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Semua pengguna di perangkat ini dapat mengakses jaringan ini."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Jaringan ini tidak memiliki akses internet. Tetap hubungkan?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Beberapa aplikasi dan layanan mungkin tidak berfungsi karena konektivitas terbatas. Tetap gunakan?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Jangan tanya lagi untuk jaringan ini"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Gagal menyimpan jaringan"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Batal"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Lupakan jaringan?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> akan dihapus untuk semua pengguna di perangkat ini"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 jaringan}other{# jaringan}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 langganan}other{# langganan}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 jaringan &amp; langganan}other{# jaringan &amp; langganan}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Resolusi tinggi"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Resolusi maksimum"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Resolusi maksimum menggunakan lebih banyak daya baterai. Mengganti resolusi mungkin menyebabkan beberapa aplikasi dimulai ulang."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hertz"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Perubahan zona waktu"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Terima notifikasi saat zona waktu Anda diperbarui secara otomatis"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notifikasi, waktu, zona, zona waktu"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Perubahan jam terjadwal"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Terima notifikasi saat jam melakukan perubahan terjadwal, misalnya untuk waktu musim panas"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"dst, waktu musim panas, waktu musim panas, perubahan jam, perubahan jam terjadwal"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Perubahan berikutnya"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Tidak ada perubahan terjadwal"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Lihat info legal, status, versi software"</string>
     <string name="legal_information" msgid="7509900979811934843">"Informasi hukum"</string>
     <string name="manual" msgid="3651593989906084868">"Manual"</string>
@@ -2641,7 +2637,7 @@
     <string name="accessibility_notification_high_contrast_text_body_message" msgid="6846453833480117658">"Teks bergaris tepi telah menggantikan teks kontras tinggi. Anda dapat mengaktifkannya di <xliff:g id="SETTINGS">%1$s</xliff:g>."</string>
     <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"Buka <xliff:g id="SETTINGS">%1$s</xliff:g>"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"Teks bergaris tepi"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Tambahkan latar belakang hitam atau putih di sekeliling teks untuk menaikkan kontras"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Tambahkan latar belakang hitam atau putih di sekeliling teks untuk meningkatkan kontras"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Perbarui otomatis pembesaran layar"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Perbarui pembesaran layar di transisi aplikasi"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Tombol daya untuk tutup telepon"</string>
@@ -2716,7 +2712,7 @@
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Ekstra kecil"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Abaikan gerakan kursor kecil"</string>
     <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"Gunakan klik kiri sebagai tindakan default"</string>
-    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"Saat Anda menggunakan tindakan lain, klik otomatis akan otomatis kembali menjadi klik kiri"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"Setelah Anda menggunakan tindakan lain, klik otomatis akan otomatis kembali menjadi klik kiri"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Klik otomatis berfungsi optimal dengan navigasi 3 tombol"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Untuk kembali, membuka Layar utama, dan beralih aplikasi dengan mudah saat menggunakan klik otomatis, gunakan navigasi 3 tombol, bukan navigasi gestur"</string>
     <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Pertahankan navigasi gestur"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Di-clone"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Membuat clone <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Clone <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> telah dibuat"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Bahasa, gestur, waktu"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Bahasa sistem, bahasa aplikasi, preferensi regional, ucapan"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, koneksi jaringan, internet, nirkabel, data, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notifikasi Wi‑Fi, notifikasi wi‑fi"</string>
@@ -4700,6 +4695,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Demi keamanan Anda, Perlindungan Lanjutan mengharuskan setelan ini tetap dinonaktifkan"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Demi keamanan Anda, Perlindungan Lanjutan mencegah tindakan ini"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Setelan"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Nonaktifkan"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Aktifkan"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Lihat"</string>
@@ -5183,10 +5186,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Eksperimental: Aktifkan ANGLE"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Peringatan: Aktifkan ANGLE sebagai driver OpenGL ES default. Fitur ini dalam tahap eksperimen dan mungkin tidak kompatibel dengan beberapa aplikasi kamera dan video. Cadangkan data perangkat Anda sebelum mengaktifkan peralihan"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"Perlu memulai ulang untuk mengubah driver OpenGL ES sistem. Cadangkan data perangkat Anda sebelum memulai ulang. Jika mulai ulang gagal, Anda perlu melakukan reset ke setelan pabrik untuk memulihkan perangkat"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Perubahan Kompatibilitas Aplikasi"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Ubah setelan kompatibilitas aplikasi"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Perubahan aktif default"</string>
@@ -6073,8 +6074,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Memfilter hasil penelusuran yang bersifat vulgar"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Di # aplikasi}other{Di # aplikasi}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"Pelajari lebih lanjut"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Jika setelan ini dinonaktifkan, setelan di akun lainnya mungkin masih berlaku."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Masukkan PIN kontrol orang tua"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Setel PIN kontrol orang tua"</string>
@@ -6092,8 +6092,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Hapus PIN &amp; nonaktifkan kontrol"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Hapus"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"PIN kontrol orang tua Anda sedang digunakan oleh:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"PIN kontrol orang tua Anda aktif untuk pengguna lain"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animasi <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Tidak dapat mengaktifkan kontrol"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Tidak dapat menggunakan kontrol"</string>

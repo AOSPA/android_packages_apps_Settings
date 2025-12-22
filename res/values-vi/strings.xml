@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Cần có chứng chỉ."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Để nâng cao độ chính xác vị trí và phục vụ các mục đích khác, <xliff:g id="APP_NAME">%1$s</xliff:g> muốn bật tính năng quét mạng ngay cả khi Wi-Fi đang tắt.\n\nCho phép cài đặt này đối với tất cả ứng dụng muốn quét?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Để nâng cao độ chính xác vị trí và phục vụ các mục đích khác, một ứng dụng không xác định muốn bật tính năng quét tìm mạng ngay cả khi Wi-Fi tắt.\n\nBạn có muốn cho phép tất cả các ứng dụng có thể quét tìm mạng không?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Cho phép"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Từ chối"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*bắt buộc"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Đây là mạng dùng chung. Bạn cần đăng nhập để thực hiện thay đổi."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Hãy liên hệ với chủ sở hữu mạng hoặc quản trị viên thiết bị để thực hiện thay đổi."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Tất cả người dùng trên thiết bị này có thể truy cập vào mạng này."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Mạng này không có quyền truy cập Internet. Giữ kết nối?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Một số ứng dụng và dịch vụ có thể không hoạt động do khả năng kết nối giới hạn. Vẫn sử dụng?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Không hỏi lại cho mạng này"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Không thể lưu mạng"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Hủy"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Xóa mạng?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"Mạng <xliff:g id="NETWORK_NAME">%1$s</xliff:g> sẽ bị xoá cho tất cả người dùng trên thiết bị này"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 mạng}other{# mạng}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 gói thuê bao}other{# gói thuê bao}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 mạng và gói thuê bao}other{# mạng và gói thuê bao}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Độ phân giải cao"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Độ phân giải tối đa"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Độ phân giải tối đa sẽ làm tiêu tốn nhiều pin hơn. Việc điều chỉnh độ phân giải có thể khiến một số ứng dụng khởi động lại."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Héc"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Thay đổi múi giờ"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Nhận thông báo khi múi giờ của bạn được tự động cập nhật"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"thông báo, thời gian, khu vực, múi giờ"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Thay đổi đồng hồ theo lịch"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Nhận thông báo khi đồng hồ của bạn thực hiện một thay đổi theo lịch, chẳng hạn như giờ mùa hè"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"gmh, giờ mùa hè, giờ hè, thay đổi đồng hồ, thay đổi đồng hồ theo lịch"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Thay đổi tiếp theo"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Không có thay đổi nào theo lịch"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Xem thông tin pháp lý, trạng thái, phiên bản phần mềm"</string>
     <string name="legal_information" msgid="7509900979811934843">"Thông tin pháp lý"</string>
     <string name="manual" msgid="3651593989906084868">"Hướng dẫn sử dụng"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Đã nhân bản"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Đang tạo bản sao của <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Đã tạo bản sao của <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Ngôn ngữ, cử chỉ, thời gian"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Ngôn ngữ hệ thống, ngôn ngữ ứng dụng, lựa chọn ưu tiên theo khu vực, giọng nói"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, kết nối mạng, internet, không dây, dữ liệu, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"thông báo về Wi‑Fi, thông báo wifi"</string>
@@ -4700,6 +4695,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Để đảm bảo tính bảo mật, bạn phải luôn tắt chế độ cài đặt này khi dùng tính năng Bảo vệ nâng cao"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Để đảm bảo tính bảo mật, tính năng Bảo vệ nâng cao sẽ chặn thao tác này"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Cài đặt"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Tắt"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Bật"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Hiển thị"</string>
@@ -5183,10 +5186,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Thử nghiệm: Bật ANGLE"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Cảnh báo: Hãy bật ANGLE làm trình điều khiển OpenGL ES mặc định. Tính năng này đang được thử nghiệm và có thể không tương thích với một số ứng dụng camera cũng như ứng dụng video. Vui lòng sao lưu dữ liệu trên thiết bị của bạn trước khi bật nút chuyển"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"Cần phải khởi động lại để thay đổi trình điều khiển OpenGL ES của hệ thống. Vui lòng sao lưu dữ liệu trên thiết bị của bạn trước khi khởi động lại. Trong trường hợp không khởi động lại được, bạn cần đặt lại thiết bị về trạng thái ban đầu để khôi phục thiết bị"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Các thay đổi về khả năng tương thích của ứng dụng"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Bật/tắt các thay đổi về khả năng tương thích của ứng dụng"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Các thay đổi được bật theo mặc định"</string>
@@ -6073,8 +6074,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Lọc ra kết quả tìm kiếm có nội dung phản cảm"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Đang bật # ứng dụng}other{Đang bật # ứng dụng}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"Tìm hiểu thêm"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Khi bạn tắt những chế độ cài đặt này, các chế độ cài đặt khác của tài khoản có thể vẫn được áp dụng."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Nhập mã PIN cho chế độ kiểm soát của cha mẹ"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Đặt mã PIN cho chế độ kiểm soát của cha mẹ"</string>
@@ -6092,8 +6092,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Xoá mã PIN và tắt chế độ kiểm soát"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Xoá"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Mã PIN cho chế độ kiểm soát của cha mẹ đang được dùng bởi:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"Một người dùng khác đang sử dụng mã PIN cho chế độ kiểm soát của cha mẹ"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Ảnh động <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Không bật được chế độ kiểm soát"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Không dùng được các chế độ kiểm soát"</string>

@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"საჭიროა სერტიფიკატი."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"მდებარეობის ზუსტი განსაზღვრის და სხვა ფუნქციების გასაუმჯობესებლად <xliff:g id="APP_NAME">%1$s</xliff:g>-ს სურს, გააქტიურდეს ქსელების მოძიება, მაშინაც კი, როცა გამორთულია Wi-Fi.\n\nმიეცეს ამის უფლება ყველა აპს?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"მდებარეობის ზუსტი განსაზღვრის გასაუმჯობესებლად და სხვა მიზნებისთვის, უცნობ აპს სურს, ჩართოს ქსელის სკანირება, თუნდაც Wi-Fi გამორთული იყოს.\n\nდაუშვებთ ამას ყველა აპისთვის, რომელსაც სკანირება სურს?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"ნებართვა"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"უარყოფა"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*სავალდებულო"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"ეს გაზიარებული ქსელია. ცვლილებების შესატანად საჭიროა შესვლა."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"ცვლილებების შესატანად დაუკავშირდით ქსელის მფლობელს ან მოწყობილობის ადმინისტრატორს."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"ამ მოწყობილობაზე ყველა მომხმარებელს შეუძლია ამ ქსელზე წვდომა."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"ამ ქსელს არ აქვს ინტერნეტზე წვდომა. შენარჩუნდეს კავშირი?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"ზოგიერთმა აპმა და სერვისმა შეიძლება არ იმუშაოს შეზღუდული კავშირის გამო. მაინც გამოიყენებთ?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"აღარ მოითხოვოთ ეს ქსელი კიდევ ერთხელ."</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"ქსელის შენახვა ვერ მოხერხდა"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"გაუქმება"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"გსურთ ქსელის დავიწყება?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> ამოიშლება ამ მოწყობილობის ყველა მომხმარებლისთვის"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 ქსელი}other{# ქსელი}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 გამოწერა}other{# გამოწერა}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 ქსელი და გამოწერა}other{# ქსელი და გამოწერა}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"მაღალი გარჩევადობა"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"მაქსიმალური გარჩევადობა"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"მაქსიმალური გარჩევადობა მეტად მოიხმარს ბატარეას. გარჩევადობის გადართვამ შეიძლება გამოიწვიოს ზოგიერთი აპის გადატვირთვა."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> (<xliff:g id="HEIGHT">%2$s</xliff:g>)"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> ჰც"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> ჰერცი"</string>
@@ -4694,6 +4695,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"თქვენივე უსაფრთხოებისთვის, დამატებითი დაცვა მოითხოვს, რომ ეს პარამეტრი დარჩეს გამორთული"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"თქვენივე უსაფრთხოებისთვის, დამატებითი დაცვა არ უშვებს ამ მოქმედებას"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"პარამეტრები"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"გამორთვა"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"ჩართვა"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"ჩვენება"</string>
@@ -6065,8 +6074,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"სექსუალური ხასიათის ძიების შედეგების გაფილტვრა"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{ჩართულია # აპი}other{ჩართულია # აპი}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"შეიტყვეთ მეტი"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"როდესაც ეს პარამეტრები გამორთულია, სხვა ანგარიშის პარამეტრები, შესაძლოა, კვლავ მოქმედებდეს."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"შეიყვანეთ მშობელთა კონტროლის PIN-კოდი"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"მშობელთა კონტროლის PIN-კოდის დაყენება"</string>
@@ -6084,8 +6092,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"PIN-კოდის წაშლა და მართვის საშუალებების გამორთვა"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"წაშლა"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"მშობელთა კონტროლის თქვენს PIN-კოდს იყენებს:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"მშობელთა კონტროლის თქვენი PIN-კოდი აქტიურია სხვა მომხმარებლისთვის"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> ანიმაცია"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"მართვის საშუალებების ჩართვა ვერ ხერხდება"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"მართვის საშუალებების გამოყენება ვერ ხერხდება"</string>

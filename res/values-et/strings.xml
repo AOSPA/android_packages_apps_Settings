@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Sertifikaat on nõutav."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Täpsema asukoha ja muude toimingute jaoks tahab rakendus <xliff:g id="APP_NAME">%1$s</xliff:g> võrkude skannimise sisse lülitada, isegi kui WiFi on välja lülitatud.\n\nKas lubada see kõigi rakenduste jaoks, mis skannida tahavad?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Täpsema asukoha ja muude toimingute jaoks tahab tundmatu rakendus võrkude skannimise sisse lülitada, isegi kui WiFi on välja lülitatud.\n\nKas lubada see kõigi rakenduste jaoks, mis skannida tahavad?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Luba"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Keela"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* kohustuslik"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"See on jagatud võrk. Muudatuste tegemiseks peate sisse logima."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Muudatuste tegemiseks pöörduge võrgu omaniku või seadme administraatori poole."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Teised selle seadme kasutajad pääsevad sellele võrgule juurde."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Sellel võrgul puudub juurdepääs Internetile. Kas soovite ühenduse säilitada?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Mõned rakendused ja teenused ei pruugi piiratud ühenduse tõttu töötada. Kas soovite siiski kasutada?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Ära selle võrgu puhul uuesti küsi"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Võrgu säilitamine ebaõnnestus"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Tühista"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Kas unustada võrk?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> eemaldatakse selle seadme kõigi kasutajate jaoks."</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 võrk}other{# võrku}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 tellimus}other{# tellimust}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 võrk ja tellimus}other{# võrku ja tellimust}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Kõrge eraldusvõime"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Maksimaalne eraldusvõime"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Maksimaalne eraldusvõime tarbib rohkem akut. Eraldusvõime muutmine võib mõne rakenduse taaskäivitada."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> korda <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> hertsi"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Ajavööndi muutus"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Saate ajavööndi automaatse värskendamise korral märguande"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"märguanne, aeg, vöönd, ajavöönd"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Ajastatud kellakeeramine"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Saate märguande, kui kell teeb ajastatud muudatuse, näiteks suveajale ülemineku korral"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"talveaeg, suveaeg, kellakeeramine, ajastatud kellakeeramine"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Järgmine muudatus"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Ajastatud muudatusi pole"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Vaadake juriidilist teavet, olekut, tarkvara versiooni"</string>
     <string name="legal_information" msgid="7509900979811934843">"Juriidiline teave"</string>
     <string name="manual" msgid="3651593989906084868">"Käsitsi"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Kloonitud"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Luuakse rakenduse <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> kloon"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Loodi rakenduse <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> kloon"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Keeled, liigutused, kellaaeg"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Süsteemi keeled, rakenduste keeled, piirkondlikud eelistused, kõne"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, võrguühendus, internet, juhtmeta, andmed, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"WiFi märguanne, wifi märguanne"</string>
@@ -4483,7 +4478,7 @@
     <string name="unused_apps_category" msgid="8954930958175500851">"Kasutamata rakenduse seaded"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Kasutamata rakenduse tegevuste peatamine"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Eemaldatakse load, kustutatakse ajutised failid ja peatatakse märguanded"</string>
-    <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Kasutamata rakenduste haldamine"</string>
+    <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Kasutamata rakenduse haldamine"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Eemalda load, kustuta ajutised failid, peata märguanded ja arhiivi rakendus"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Kõik rakendused"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Installitud rakendused"</string>
@@ -4700,6 +4695,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Teie turvalisuse huvides nõuab täiustatud kaitse, et see seade oleks välja lülitatud."</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Teie turvalisuse huvides takistab täiustatud kaitse seda toimingut."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Seaded"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Lülita välja"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Lülita sisse"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Kuva"</string>
@@ -5183,10 +5186,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Katseline: luba ANGLE"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Hoiatus: selle seadega lubate ANGLE-i OpenGL ES-i vaikedraiverina. See funktsioon on katseline ning ei pruugi mõne kaamera- ja videorakendusega ühilduda. Enne sisselülitamist varundage oma seadme andmed."</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"Süsteemi OpenGL ES-i draiveri muutmiseks on vajalik taaskäivitamine. Enne taaskäivitamist varundage oma seadme andmed. Kui taaskäivitamine ebaõnnestub, peate seadme taastamiseks selle tehaseseadetele lähtestama."</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Rakenduste ühilduvuse muudatused"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Rakenduse ühilduvuse muudatuste lüliti"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Vaikimisi lubatud rakenduste muudatused"</string>
@@ -6073,8 +6074,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Vulgaarsete otsingutulemuste filtreerimine"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{# rakenduses}other{# rakenduses}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"Lisateave"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Kui need seaded on välja lülitatud, võivad muud konto seaded siiski kehtida."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Sisestage vanemliku järelevalve PIN-kood"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Vanemliku järelevalve PIN-koodi seadistamine"</string>
@@ -6092,8 +6092,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Kustuta PIN-kood ja lülita järelevalve välja"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Kustuta"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Teie vanemliku järelevalve PIN-koodi kasutavad:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"Teie vanemliku järelevalve PIN-kood on aktiivne teise kasutaja jaoks."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animatsioon"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Vanemlikku järelevalvet ei saa sisse lülitada."</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Juhtelemente ei saa kasutada"</string>
