@@ -40,8 +40,8 @@ open class FailedPreconditionException : Exception()
 
 /**
  * This exception is thrown if the preconditions for a get/set operation made through the ApiTester
- * failed due to a missing permission restriction, or if the context the ApiTester instance
- * is running in lacks the required permissions to execute the get/set operation.
+ * failed due to a missing permission restriction, or if the context the ApiTester instance is
+ * running in lacks the required permissions to execute the get/set operation.
  */
 class MissingPermissionException(val reason: String) : FailedPreconditionException()
 
@@ -49,13 +49,13 @@ class MissingPermissionException(val reason: String) : FailedPreconditionExcepti
  * This exception is thrown if the preconditions for a get/set operation made through the ApiTester
  * failed due to an enterprise restriction.
  */
-class EnterpriseRestrictionException(val reason: String): FailedPreconditionException()
+class EnterpriseRestrictionException(val reason: String) : FailedPreconditionException()
 
 /**
  * This exception is thrown if the preconditions for a get/set operation made through the ApiTester
  * failed due to a hardware unsupported restriction.
  */
-class HardwareUnsupportedException(val reason: String): FailedPreconditionException()
+class HardwareUnsupportedException(val reason: String) : FailedPreconditionException()
 
 /**
  * This exception is thrown if the preconditions for a get/set operation made through the ApiTester
@@ -64,8 +64,8 @@ class HardwareUnsupportedException(val reason: String): FailedPreconditionExcept
 class InvalidPreferenceException(val reason: String) : FailedPreconditionException()
 
 /**
- * This exception is thrown if there is a set operation about to be performed on a preference
- * with no setter.
+ * This exception is thrown if there is a set operation about to be performed on a preference with
+ * no setter.
  */
 class CannotSetException : Exception()
 
@@ -81,7 +81,9 @@ class ScreenInfo
  */
 class ApiTester(private val instance: PreferencesApiScreen) {
     private val context: Context = ApplicationProvider.getApplicationContext()
-    private fun <V> getPreference(key: String) = instance.preferences.first { it.key == key } as ApiPreference<V>
+
+    private fun <V> getPreference(key: String) =
+        instance.preferences.first { it.key == key } as ApiPreference<V>
 
     private fun checkGetPermissions(preference: ApiPreference<*>) {
         val prefPermissions = preference.permissions?.permissions ?: listOf()
@@ -111,7 +113,10 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         }
     }
 
-    private fun checkGetPreconditions(preference: ApiPreference<*>, operationContext: ApiOperationContext) {
+    private fun checkGetPreconditions(
+        preference: ApiPreference<*>,
+        operationContext: ApiOperationContext,
+    ) {
         val screenPrecondition = runBlocking {
             preference.screenPreconditions?.check(operationContext) ?: Allowed
         }
@@ -126,7 +131,11 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         dealWithPreconditionResult(prefPrecondition)
     }
 
-    private fun <V: Any> checkSetPreconditions(preference: ApiPreference<V>, value: V, operationContext: ApiOperationContext) {
+    private fun <V : Any> checkSetPreconditions(
+        preference: ApiPreference<V>,
+        value: V,
+        operationContext: ApiOperationContext,
+    ) {
         val screenPrecondition = runBlocking {
             preference.screenPreconditions?.check(operationContext) ?: Allowed
         }
@@ -160,12 +169,11 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         throw FailedPreconditionException()
     }
 
-
     /**
      * Helper method that returns the screen information extracted from the underlying
      * infrastructure.
      */
-    fun getScreen() : ScreenInfo? = if (instance.isFlagEnabled(context)) ScreenInfo() else null
+    fun getScreen(): ScreenInfo? = if (instance.isFlagEnabled(context)) ScreenInfo() else null
 
     /**
      * Helper method that executes a get operation over a specific api preference inside the current
@@ -175,15 +183,13 @@ class ApiTester(private val instance: PreferencesApiScreen) {
      */
     fun <V : Any> get(key: String): V {
         val preference = getPreference<V>(key)
-        val keyParameters = preference.screenParameters ?: ValidatedKeyParameters.EMPTY
+        val keyParameters = preference.getScreenParameters.invoke() ?: ValidatedKeyParameters.EMPTY
         val operationContext = ApiOperationContext(context, keyParameters)
 
         checkGetPermissions(preference)
         checkGetPreconditions(preference, operationContext)
 
-        return runBlocking {
-            preference.get.execute(operationContext)
-        }
+        return runBlocking { preference.get.execute(operationContext) }
     }
 
     /**
@@ -196,29 +202,23 @@ class ApiTester(private val instance: PreferencesApiScreen) {
     fun <V : Any> set(key: String, value: V) {
         val preference = getPreference<V>(key)
         val setConfig = preference.set ?: throw CannotSetException()
-        val keyParameters = preference.screenParameters ?: ValidatedKeyParameters.EMPTY
+        val keyParameters = preference.getScreenParameters.invoke() ?: ValidatedKeyParameters.EMPTY
         val operationContext = ApiOperationContext(context, keyParameters)
 
         checkSetPermissions(preference)
         checkSetPreconditions(preference, value, operationContext)
 
-        runBlocking {
-            setConfig.execute.invoke(operationContext, value)
-        }
+        runBlocking { setConfig.execute.invoke(operationContext, value) }
     }
 
     /**
      * Helper method that returns the launch intent if the screen permissions and preconditions
      * pass.
      */
-    fun getLaunchIntent() : Intent {
-        val operationContext = ApiOperationContext(
-            context,
-            instance.keyParameters ?: ValidatedKeyParameters.EMPTY
-        )
-        val screenPermissions = runBlocking {
-            instance.screenPermissions?.permissions?: listOf()
-        }
+    fun getLaunchIntent(): Intent {
+        val operationContext =
+            ApiOperationContext(context, instance.keyParameters ?: ValidatedKeyParameters.EMPTY)
+        val screenPermissions = runBlocking { instance.screenPermissions?.permissions ?: listOf() }
         for (permission in screenPermissions) {
             if (context.checkSelfPermission(permission) == PackageManager.PERMISSION_DENIED) {
                 throw MissingPermissionException(permission)

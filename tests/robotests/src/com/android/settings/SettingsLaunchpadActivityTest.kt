@@ -26,6 +26,7 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.testutils.shadow.ShadowActivityEmbeddingUtils
 import com.android.settingslib.metadata.FixedArrayMap
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
 import com.android.settingslib.metadata.PreferenceScreenMetadataFactory
 import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFactory
 import com.android.settingslib.metadata.PreferenceScreenRegistry
@@ -297,6 +298,41 @@ class SettingsLaunchpadActivityTest {
             )
             .isEqualTo(expectedMenuKey)
 
+        assertThat(activity.isFinishing).isTrue()
+    }
+
+    @Test
+    fun launch_withLaunchScreenExtra_shouldPassExtrasToFragment() {
+        // Arrange: Use one-pane mode for direct verification of SubSettings launch
+        ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(false)
+        val extraKey1 = "package"
+        val extraValue1 = "com.google.android.gm"
+        val extraKey2 = "id"
+        val extraValue2 = 2737
+        val launchScreenExtra =
+            Bundle(2).apply {
+                putString(extraKey1, extraValue1)
+                putInt(extraKey2, extraValue2)
+            }
+
+        val intent =
+            Intent(context, SettingsLaunchpadActivity::class.java).apply {
+                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+                putExtra(EXTRA_LAUNCH_SCREEN, launchScreenExtra)
+            }
+
+        // Act: Create the activity
+        val activity =
+            Robolectric.buildActivity(SettingsLaunchpadActivity::class.java, intent).create().get()
+
+        // Assert: Verify that the next activity receives the extras in its fragment arguments
+        val nextActivity = shadowOf(activity).nextStartedActivity
+        assertThat(nextActivity).isNotNull()
+        val fragmentArgs =
+            nextActivity.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+        assertThat(fragmentArgs).isNotNull()
+        assertThat(fragmentArgs!!.getString(extraKey1)).isEqualTo(extraValue1)
+        assertThat(fragmentArgs.getInt(extraKey2)).isEqualTo(extraValue2)
         assertThat(activity.isFinishing).isTrue()
     }
 
