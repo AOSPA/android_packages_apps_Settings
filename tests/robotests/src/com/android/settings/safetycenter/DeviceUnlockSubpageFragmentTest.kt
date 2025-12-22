@@ -114,7 +114,11 @@ class DeviceUnlockSubpageFragmentTest {
 
     private fun runTest(data: SafetyCenterData, testBlock: (DeviceUnlockSubpageFragment) -> Unit) {
         shadowSafetyCenterManager.setSafetyCenterData(data)
-        val fragmentArgs = Bundle().apply { putLong(EXTRA_SESSION_ID, TEST_SESSION_ID) }
+        val fragmentArgs =
+            Bundle().apply {
+                putLong(EXTRA_SESSION_ID, TEST_SESSION_ID)
+                putAll(NavigationSource.SAFETY_CENTER.createArgs())
+            }
         val scenario =
             launchFragmentInContainer<DeviceUnlockSubpageFragment>(
                 fragmentArgs = fragmentArgs,
