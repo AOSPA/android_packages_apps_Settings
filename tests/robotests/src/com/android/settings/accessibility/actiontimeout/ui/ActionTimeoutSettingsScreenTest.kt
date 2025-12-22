@@ -19,19 +19,23 @@ package com.android.settings.accessibility.actiontimeout.ui
 import android.app.settings.SettingsEnums
 import com.android.settings.R
 import com.android.settings.accessibility.Flags
+import com.android.settings.accessibility.actiontimeout.data.ActionTimeoutOptionDataStore
+import com.android.settings.accessibility.actiontimeout.data.ActionTimeoutOptionDataStore.Companion.DISCRETE_TIMEOUT_OPTIONS
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.android.settingslib.datastore.SettingsSecureStore
 import com.google.common.truth.Truth.assertThat
+import com.google.testing.junit.testparameterinjector.TestParameters
+import com.google.testing.junit.testparameterinjector.TestParametersValuesProvider
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestParameterInjector
 
+@RunWith(RobolectricTestParameterInjector::class)
 class ActionTimeoutSettingsScreenTest : SettingsCatalystTestCase() {
 
-    override val preferenceScreenCreator = ActionTimeoutSettingsScreen()
+    override val preferenceScreenCreator = ActionTimeoutSettingsScreen(appContext)
 
     override val flagName = Flags.FLAG_CATALYST_TIME_TO_TAKE_ACTION_SCREEN
-
-    override fun migration() {
-        // Temporarily skip the #migration test. Will enable it once the entire screen is migrated
-    }
 
     @Test
     fun getMetricsCategory_returnsCorrectValue() {
@@ -77,5 +81,38 @@ class ActionTimeoutSettingsScreenTest : SettingsCatalystTestCase() {
     @Test
     fun indexable_returnsTrue() {
         assertThat(preferenceScreenCreator.indexable).isTrue()
+    }
+
+    @TestParameters(valuesProvider = TimeoutOptionsProvider::class)
+    @Test
+    fun getSummary_returnsCorrespondingSummaryForSelectedTimeoutValue(
+        timeoutValue: Int,
+        expectedStringRes: Int,
+    ) {
+        SettingsSecureStore.get(appContext)
+            .setInt(ActionTimeoutOptionDataStore.INTERACTIVE_UI_TIMEOUT_SETTING_KEY, timeoutValue)
+        val expectedSummary = appContext.getString(expectedStringRes)
+
+        assertThat(preferenceScreenCreator.getSummary(appContext)).isEqualTo(expectedSummary)
+    }
+
+    @Test
+    fun getSummary_unknownValue_returnsNull() {
+        SettingsSecureStore.get(appContext)
+            .setInt(ActionTimeoutOptionDataStore.INTERACTIVE_UI_TIMEOUT_SETTING_KEY, -100)
+
+        assertThat(preferenceScreenCreator.getSummary(appContext)).isNull()
+    }
+
+    private object TimeoutOptionsProvider : TestParametersValuesProvider() {
+        override fun provideValues(context: Context): List<TestParameters.TestParametersValues> {
+            return DISCRETE_TIMEOUT_OPTIONS.map { entry ->
+                TestParameters.TestParametersValues.builder()
+                    .name("Accessibility Timeout: ${entry.key}")
+                    .addParameter("timeoutValue", entry.key)
+                    .addParameter("expectedStringRes", entry.value.optionDescriptionRes)
+                    .build()
+            }
+        }
     }
 }
