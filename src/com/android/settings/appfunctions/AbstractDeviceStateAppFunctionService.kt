@@ -40,7 +40,9 @@ import com.android.settings.appfunctions.executors.CatalystStateProviderExecutor
 import com.android.settings.appfunctions.executors.CatalystStateSetterExecutor
 import com.android.settings.appfunctions.executors.DeviceStateExecutor
 import com.android.settings.metrics.AppFunctionMetricsLogger
+import com.android.settings.metrics.toMetricsId
 import com.android.settings.utils.getLocale
+import com.android.settingslib.metadata.AppFunctionMetricsLoggerInterface
 import java.util.Locale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -54,7 +56,7 @@ import kotlinx.coroutines.withContext
  */
 @Keep
 abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
-    open val metricsLogger = AppFunctionMetricsLogger()
+    open val metricsLogger: AppFunctionMetricsLoggerInterface = AppFunctionMetricsLogger()
 
     protected lateinit var englishContext: Context
         private set
@@ -128,6 +130,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                 callingPackage,
                 ERROR_FUNCTION_NOT_FOUND,
                 applicationContext,
+                null,
             )
             callback.onError(
                 AppFunctionException(
@@ -146,7 +149,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                 callingPackage,
                 ERROR_DENIED,
                 applicationContext,
-                appFunctionType,
+                appFunctionType.toMetricsId(),
             )
             callback.onError(
                 AppFunctionException(
@@ -169,7 +172,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                     callingPackage,
                     ERROR_FUNCTION_NOT_FOUND,
                     applicationContext,
-                    appFunctionType,
+                    appFunctionType.toMetricsId(),
                 )
                 callback.onError(
                     AppFunctionException(
@@ -193,7 +196,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
             Trace.endSection()
 
             metricsLogger.logAppFunction(
-                appFunctionType,
+                appFunctionType.toMetricsId(),
                 callingPackage,
                 executeDurationMs,
                 applicationContext,
