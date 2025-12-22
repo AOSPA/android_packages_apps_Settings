@@ -2682,7 +2682,7 @@
             android:label="@string/vision_settings_title"
             android:theme="@style/SudThemeGlif.DayNight"
             android:exported="true"
-            android:enabled="false">
+            android:featureFlag="com.android.settings.accessibility.enable_setuplib_in_a11y_setup_page">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS_FOR_SUW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2692,7 +2692,8 @@
         <activity android:name=".accessibility.AccessibilitySettingsForSetupWizardActivity"
             android:icon="@drawable/ic_accessibility_suggestion"
             android:label="@string/vision_settings_title"
-            android:exported="true">
+            android:exported="true"
+            android:featureFlag="!com.android.settings.accessibility.enable_setuplib_in_a11y_setup_page">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS_FOR_SUW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2706,7 +2707,8 @@
         <activity-alias
             android:name=".FontSizeSettingsForSetupWizardActivity"
             android:exported="true"
-            android:targetActivity=".accessibility.AccessibilitySettingsForSetupWizardActivity">
+            android:targetActivity=".accessibility.AccessibilitySettingsForSetupWizardActivity"
+            android:featureFlag="!com.android.settings.accessibility.enable_setuplib_in_a11y_setup_page">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -2722,7 +2724,8 @@
             android:name=".TextReadingForSetupWizardActivity"
             android:exported="true"
             android:icon="@drawable/ic_font_download"
-            android:targetActivity=".accessibility.AccessibilitySettingsForSetupWizardActivity">
+            android:targetActivity=".accessibility.AccessibilitySettingsForSetupWizardActivity"
+            android:featureFlag="!com.android.settings.accessibility.enable_setuplib_in_a11y_setup_page">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!-- TODO(b/1352717): Consider replacing it with another category, temporarily
