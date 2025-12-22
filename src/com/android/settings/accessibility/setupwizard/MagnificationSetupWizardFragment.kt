@@ -23,7 +23,12 @@ import com.google.android.setupdesign.items.RecyclerItemAdapter
 class MagnificationSetupWizardFragment : BaseSetupWizardFragment() {
 
     override fun createControllers(adapter: RecyclerItemAdapter): Map<Int, BaseItemController> =
-        emptyMap()
+        buildMap {
+            val context = requireContext()
+            findItem(adapter, R.id.magnify_keyboard_in_suw)?.let {
+                put(R.id.magnify_keyboard_in_suw, MagnifyKeyboardSwitchItemController(context, it))
+            }
+        }
 
     override val fragmentLayoutResId: Int = R.layout.magnification_suw_screen
 
