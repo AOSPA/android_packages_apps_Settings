@@ -65,6 +65,7 @@ import com.android.settings.datausage.DataUsageAppDetailScreen
 import com.android.settings.datausage.DataUsageListScreen
 import com.android.settings.datetime.DateTimeSettingsScreen
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoScreen
+import com.android.settings.deviceinfo.batteryinfo.BatteryInfoApiScreen
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen
 import com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreference
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoScreen
@@ -224,6 +225,11 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = MyDeviceInfoScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = BatteryInfoApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = DataSaverScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
