@@ -41,6 +41,9 @@ class AccessibilitySetupWizardFragment() : BaseSetupWizardFragment() {
                     AccessibilityServiceItemController(context, it, selectToSpeakComponent),
                 )
             }
+            findItem(adapter, R.id.screen_magnification_in_suw)?.let {
+                put(R.id.screen_magnification_in_suw, MagnificationItemController(it))
+            }
         }
 
     override val fragmentLayoutResId: Int = R.layout.accessibility_suw_screen

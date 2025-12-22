@@ -27,15 +27,13 @@ import com.android.settings.testutils.AccessibilityTestUtils
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
 import com.google.android.setupdesign.items.Item
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
-import org.mockito.Mock
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.spy
 import org.mockito.Mockito.verify
-import org.mockito.junit.MockitoJUnit
+import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
@@ -45,8 +43,7 @@ import org.robolectric.shadow.api.Shadow
 @RunWith(RobolectricTestRunner::class)
 class AccessibilityServiceItemControllerTest {
 
-    @get:Rule val mocks = MockitoJUnit.rule()
-    @Mock private lateinit var mockItem: Item
+    private val mockItem = mock<Item>()
 
     private val appContext: Context = ApplicationProvider.getApplicationContext()
     private val a11yManager: ShadowAccessibilityManager =
