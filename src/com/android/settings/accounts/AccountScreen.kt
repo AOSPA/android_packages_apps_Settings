@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.AccountDashboardActivity
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -48,11 +49,7 @@ open class AccountScreen : PreferenceScreenMixin, PreferenceTitleProvider, Prefe
         get() = R.string.keywords_accounts
 
     override fun getTitle(context: Context): CharSequence =
-        context.getText(
-            if (CredentialManager.isServiceEnabled(context)) {
-                R.string.account_dashboard_title_with_passkeys
-            } else R.string.account_dashboard_title
-        )
+        context.getText(context.getAccountScreenTitle())
 
     override fun getIcon(context: Context) =
         when {
@@ -77,6 +74,14 @@ open class AccountScreen : PreferenceScreenMixin, PreferenceTitleProvider, Prefe
 
     companion object {
         const val KEY = "top_level_accounts"
+
+        @JvmStatic
+        fun Context.getAccountScreenTitle(): Int =
+            when {
+                !CredentialManager.isServiceEnabled(this) -> R.string.account_dashboard_title
+                Flags.enableAccountsAndBackupScreen() -> R.string.dashboard_title_passwords_passkeys
+                else -> R.string.account_dashboard_title_with_passkeys
+            }
     }
 }
 // LINT.ThenChange(AccountDashboardFragment.java)
