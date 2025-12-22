@@ -112,9 +112,14 @@ open class SupervisionDashboardScreen :
         }
     }
 
-    override fun onResume(context: PreferenceLifecycleContext) {
+    override fun onStart(context: PreferenceLifecycleContext) {
         if (Flags.enableSupervisionSettingsUiUpdates() && isContainer(context)) {
             supervisionManager?.registerSupervisionListener(supervisionListener)
+        }
+    }
+
+    override fun onResume(context: PreferenceLifecycleContext) {
+        if (Flags.enableSupervisionSettingsUiUpdates() && isContainer(context)) {
             roleManager.addOnRoleHoldersChangedListenerAsUser(
                 context.mainExecutor,
                 this,
@@ -127,9 +132,14 @@ open class SupervisionDashboardScreen :
         }
     }
 
-    override fun onPause(context: PreferenceLifecycleContext) {
+    override fun onStop(context: PreferenceLifecycleContext) {
         if (Flags.enableSupervisionSettingsUiUpdates() && isContainer(context)) {
             supervisionManager?.unregisterSupervisionListener(supervisionListener)
+        }
+    }
+
+    override fun onPause(context: PreferenceLifecycleContext) {
+        if (Flags.enableSupervisionSettingsUiUpdates() && isContainer(context)) {
             roleManager.removeOnRoleHoldersChangedListenerAsUser(this, UserHandle.ALL)
             this.isSupervisionAppListBuilt = false
         }
