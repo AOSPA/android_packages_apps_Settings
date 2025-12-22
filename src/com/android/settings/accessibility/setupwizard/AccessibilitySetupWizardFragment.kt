@@ -44,6 +44,9 @@ class AccessibilitySetupWizardFragment() : BaseSetupWizardFragment() {
             findItem(adapter, R.id.screen_magnification_in_suw)?.let {
                 put(R.id.screen_magnification_in_suw, MagnificationItemController(it))
             }
+            findItem(adapter, R.id.auto_brightness_in_suw)?.let {
+                put(R.id.auto_brightness_in_suw, AutoBrightnessSwitchItemController(context, it))
+            }
         }
 
     override val fragmentLayoutResId: Int = R.layout.accessibility_suw_screen
