@@ -211,7 +211,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Sjálfgildi kerfis"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Ekki er hægt að velja tungumál fyrir þetta forrit í stillingum."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Tungumál kann að vera frábrugðið tiltækum tungumálum í forritinu. Tiltekin forrit styðja hugsanlega ekki þessa stillingu."</string>
-    <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Veldu tungumál hvers forrits"</string>
+    <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Veldu tungumál hvers forrits."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Veldu tungumál hvers forrits. Tungumál kunna að vera mismunandi eftir því hvaða tungumál eru í boði í forriti. Sum forrit styðja hugsanlega ekki þessa stillingu."</string>
     <string name="desc_introduction_of_language_picker" msgid="2164004945569753730">"Tækið, forrit og vefsvæði nota fyrsta studda tungumálið af lista kjörtungumála."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Til að velja tungumál fyrir hvert forrit skaltu fara í tungumálastillingar forrita."</string>
@@ -1349,6 +1349,10 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Há upplausn"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Hámarksupplausn"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Hámarksupplausn gengur meira á rafhlöðuna. Hugsanlega munu einhver forrit endurræsast ef upplausn er breytt."</string>
+    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
+    <skip />
+    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
+    <skip />
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> með <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2508,7 +2512,6 @@
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Flýtileið fyrir aðgengishnapp"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Flýtileið fyrir hljóðstyrkstakka"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Flýtileið fyrir Ýtt þrisvar"</string>
-    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Flýtileið fyrir Ýtt tvisvar með %1$d-fingrum"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Flýtileið fyrir Flýtistillingar"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Flýtileið fyrir aðgengisbendingu"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Til að nota þennan eiginleika skaltu ýta á aðgengishnappinn <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> neðst á skjánum.\n\nTil að skipta á milli eiginleika skaltu halda aðgengishnappinum inni."</string>
@@ -2544,11 +2547,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Hljóðstyrkstakkar"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"hljóðstyrkstakkar"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Haltu báðum hljóðstyrkstökkunum inni"</string>
-    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Ýtt tvisvar með %1$d-fingrum"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Ýttu hratt á skjáinn tvisvar með %1$d fingrum."</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Ýttu þrisvar"</string>
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Ýttu hratt á skjáinn %1$d sinnum. Þetta kann að hægja á tækinu þínu."</string>
-    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Ýtt tvisvar með %1$d-fingrum"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"ýttu þrisvar"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Flýtilykill"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Ýttu á <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> til að nota <xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -2593,7 +2593,8 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Kveikir á dökku þema í tækinu þínu og forritum sem styðja það"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Framlengt"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Framlengt dökkt þema"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Kveikir sjálfkrafa á dökku þema í flestum forritum sem styðja það ekki. Þetta getur aukið aðgengi og læsileika en gæti valdið því að forrit birtist ekki með réttum hætti."</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
+    <skip />
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"þvinga umsnúning, umsnúningur lita, birtuskil"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Framlengt dökkt þema"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Stillingar fyrir framlengt dökkt þema"</string>
@@ -5071,6 +5072,16 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Viltu slökkva á %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Viltu slökkva á þessari þjónustu?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Vistaðar upplýsingar á borð við aðgangsorð, aðgangslykla, greiðslumáta og aðrar upplýsingar verða ekki fylltar út þegar þú skráir þig inn. Veldu aðgangsorð, aðgangslykil eða gagnaþjónustu til að nota vistuðu upplýsingarnar."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Aðgangsorð, aðgangslyklar og reikningar"</string>
+    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_title (2841026269835953207) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_summary (4126659439608747174) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_manage_accounts_title (1034959782380418930) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_backup_category_title (807568201052547222) -->
+    <skip />
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Slökkva á öllum þjónustum?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Aðgangsorð, aðgangslyklar og aðrar vistaðar upplýsingar verða ekki tiltækar fyrir sjálfvirka útfyllingu þegar þú skráir þig inn"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Breyta valinni þjónustu í &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Ný aðgangsorð, aðgangslyklar og aðrar upplýsingar verða vistaðar héðan í frá. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kann að nota það sem er á skjánum hjá þér til að greina hvað er hægt að fylla sjálfkrafa út"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Nota %1$s?"</string>
@@ -6072,16 +6083,42 @@
     <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
-    <string name="safety_center_device_finders_search_terms" msgid="2703625009760905100"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"Uppfærslur"</string>
+    <!-- no translation found for safety_center_security_update_search_terms (545517841376162382) -->
+    <skip />
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"Tegund netkerfis, dulkóðun, tilkynningastýringar"</string>
+    <!-- no translation found for safety_center_android_lock_screen_search_terms (4741569259158180141) -->
+    <skip />
+    <!-- no translation found for safety_center_fingerprint_unlock_search_terms (954519907845160433) -->
+    <skip />
+    <!-- no translation found for safety_center_face_unlock_search_terms (2994457346086700870) -->
+    <skip />
+    <!-- no translation found for safety_center_wear_unlock_search_terms (6289459571308806285) -->
+    <skip />
+    <!-- no translation found for safety_center_backup_search_terms (5652327131910333830) -->
+    <skip />
+    <!-- no translation found for safety_center_permission_manager_search_terms (1303866079616216426) -->
+    <skip />
+    <!-- no translation found for safety_center_health_connect_search_terms (1323524144779175830) -->
+    <skip />
+    <!-- no translation found for safety_center_app_data_sharing_updates_search_terms (2041373488015575634) -->
+    <skip />
+    <!-- no translation found for safety_center_permission_usage_search_terms (3015527940068111714) -->
+    <skip />
+    <!-- no translation found for safety_center_private_space_search_terms (6748750858253093118) -->
+    <skip />
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Fleiri viðvaranir"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Færri viðvaranir"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Hunsaðar viðvaranir"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Hunsa þessa viðvörun?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Þú getur farið yfir öryggis- og aðgengisstillingarnar þínar og aukið varnir þínar hvenær sem er"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Aðgerð lokið"</string>
+    <!-- no translation found for safety_center_qs_page_landing (1024103851758565938) -->
+    <skip />
+    <!-- no translation found for privacy_controls_qs (1774718598801606190) -->
+    <skip />
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Parar"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> tengt"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Skanna tæki"</string>
