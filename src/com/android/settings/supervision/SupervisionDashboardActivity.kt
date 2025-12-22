@@ -20,6 +20,12 @@ import android.app.supervision.flags.Flags
 import android.content.Intent
 import android.util.Log
 import com.android.settings.CatalystSettingsActivity
+import com.android.settings.supervision.shared.SupervisionHelper
+import com.android.settings.supervision.shared.getSupervisionAppInstallActivityInfo
+import com.android.settings.supervision.shared.hasNecessarySupervisionComponent
+import com.android.settings.supervision.shared.isSupervisionPackageProfileOwner
+import com.android.settings.supervision.shared.readDefaultSupervisionPackageNameFromResources
+import com.android.settings.supervision.shared.supervisionRoleHolders
 import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /**

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.credentialmanagement
 
 import android.app.settings.SettingsEnums
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_MANAGE_PIN
@@ -25,6 +25,8 @@ import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.metrics.PreferenceActionMetricsProvider
+import com.android.settings.supervision.shared.isSupervisingCredentialSet
+import com.android.settings.supervision.shared.shouldDisplayPinRecoveryReminders
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
@@ -50,7 +52,7 @@ class SupervisionPinManagementScreen :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.supervision_pin_management_purpose
 
@@ -138,17 +140,19 @@ class SupervisionPinManagementScreen :
             +UntitledPreferenceCategoryMetadata(
                 key = GROUP_KEY,
                 purpose = R.string.pin_management_group_purpose,
-            ) += {
-                +SupervisionPinRecoveryPreference()
-                +SupervisionChangePinPreference()
-                +SupervisionUpdateRecoveryEmailPreference()
-            }
+            ) +=
+                {
+                    +SupervisionPinRecoveryPreference()
+                    +SupervisionChangePinPreference()
+                    +SupervisionUpdateRecoveryEmailPreference()
+                }
             +UntitledPreferenceCategoryMetadata(
                 key = "delete_pin_group",
                 purpose = R.string.delete_pin_group_purpose,
-            ) += {
-                +SupervisionDeletePinPreference()
-            }
+            ) +=
+                {
+                    +SupervisionDeletePinPreference()
+                }
             +SupervisionPinManagementFooterPreference()
         }
 

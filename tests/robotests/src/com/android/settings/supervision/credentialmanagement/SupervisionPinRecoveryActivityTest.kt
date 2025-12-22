@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.credentialmanagement
 
 import android.app.Activity
 import android.app.Application
@@ -45,6 +45,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.password.ChooseLockGeneric
 import com.android.settings.password.ChooseLockPassword
+import com.android.settings.supervision.ConfirmSupervisionCredentialsActivity
 import com.android.settings.supervision.ConfirmSupervisionCredentialsActivity.Companion.EXTRA_FORCE_CONFIRMATION
 import com.android.settings.testutils.MetricsRule
 import com.google.common.truth.Truth.assertThat

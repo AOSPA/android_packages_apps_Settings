@@ -44,6 +44,10 @@ import com.android.internal.widget.LockPatternUtils
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.password.ChooseLockGeneric
+import com.android.settings.supervision.credentialmanagement.SupervisionPinRecoveryActivity
+import com.android.settings.supervision.shared.canLaunchPinRecovery
+import com.android.settings.supervision.shared.isSupervisingCredentialSet
+import com.android.settings.supervision.shared.supervisingUserHandle
 import com.android.settingslib.HelpUtils
 import com.android.settingslib.collapsingtoolbar.R.drawable.settingslib_expressive_icon_back as EXPRESSIVE_BACK_ICON
 import com.android.settingslib.supervision.SupervisionLog

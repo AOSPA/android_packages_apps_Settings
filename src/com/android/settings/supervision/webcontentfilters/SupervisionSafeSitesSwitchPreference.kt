@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.webcontentfilters
 
 import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ALLOW_ALL_SITES
@@ -30,8 +30,6 @@ import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
-import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersBrowserSupportedAppsScreen
-import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersSupportedAppsEntryPointPreference
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -44,10 +42,7 @@ import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /** Web content filters browser filter preference. */
 class SupervisionSafeSitesSwitchPreference(protected val dataStore: SupervisionSafeSitesDataStore) :
-    SwitchPreference(
-        key = KEY,
-        purpose = R.string.web_content_filters_browser_filter_purpose,
-    ),
+    SwitchPreference(key = KEY, purpose = R.string.web_content_filters_browser_filter_purpose),
     SwitchPreferenceBinding,
     Preference.OnPreferenceChangeListener,
     PreferenceLifecycleProvider {

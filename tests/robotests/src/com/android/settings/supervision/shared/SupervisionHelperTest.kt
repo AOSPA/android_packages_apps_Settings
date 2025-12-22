@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.shared
 
 import android.app.KeyguardManager
 import android.app.admin.DevicePolicyManager
@@ -501,7 +501,7 @@ class SupervisionHelperTest {
 
         // Verify the UserManager extension function returns the correct handle.
         assertThat(mockUserManager.supervisingUserHandle())
-                .isEqualTo(SUPERVISING_PROFILE.userHandle)
+            .isEqualTo(SUPERVISING_PROFILE.userHandle)
         // Verify the Context extension function also returns the correct handle.
         assertThat(context.supervisingUserHandle()).isEqualTo(SUPERVISING_PROFILE.userHandle)
     }
@@ -623,7 +623,7 @@ class SupervisionHelperTest {
 
     private fun contextOf(
         roleManager: RoleManager?,
-        keyguardManager: KeyguardManager? = mockKeyguardManager
+        keyguardManager: KeyguardManager? = mockKeyguardManager,
     ): Context =
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
             override fun getSystemService(name: String): Any? =

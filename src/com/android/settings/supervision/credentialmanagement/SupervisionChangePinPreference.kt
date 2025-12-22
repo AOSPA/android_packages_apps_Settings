@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.credentialmanagement
 
 import android.app.Activity
 import android.app.admin.DevicePolicyManager
@@ -32,6 +32,8 @@ import com.android.settings.R
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.password.ChooseLockGeneric
 import com.android.settings.password.ChooseLockPassword
+import com.android.settings.supervision.shared.isSupervisingCredentialSet
+import com.android.settings.supervision.shared.supervisingUserHandle
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata

@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.supervision
+package com.android.settings.supervision.shared.widget
 
 import com.android.settingslib.metadata.PreferenceCategory
 
 /** A [PreferenceCategory] that is not search indexable, even though it has a non-empty title. */
-class NonIndexablePreferenceCategory(key: String, purpose: Int, title: Int) : PreferenceCategory(key, purpose, title) {
+class NonIndexablePreferenceCategory(key: String, purpose: Int, title: Int) :
+    PreferenceCategory(key, purpose, title) {
     override val indexable
         get() = false
 }

@@ -30,6 +30,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
 import com.android.settings.testutils.MetricsRule
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
