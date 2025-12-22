@@ -21,6 +21,7 @@ import android.safetycenter.SafetyCenterIssue
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentManager
 import androidx.preference.PreferenceViewHolder
 import com.android.settings.R
@@ -67,18 +68,20 @@ class SafetyIssueBannerPreference(
      * @param issue The [SafetyCenterIssue] to display.
      * @param isDismissed Whether the issue is currently in the dismissed state.
      * @param resolvedIssues A map of issue IDs to action IDs for resolved actions.
+     * @param headerResId The String Resource ID for the banner header.
      */
     fun updateBanner(
         issue: SafetyCenterIssue,
         isDismissed: Boolean,
         resolvedIssues: Map<String, String>,
+        @StringRes headerResId: Int,
     ) {
         this.issue = issue
         this.isDismissed = isDismissed
 
         title = issue.title
         summary = issue.summary
-        setHeader(issue.attributionTitle)
+        setHeader(context.getString(headerResId))
         setSubtitle(issue.subtitle)
         setAttentionLevel(SafetyCenterSeverityConverter.toBannerAttentionLevel(issue.severityLevel))
 

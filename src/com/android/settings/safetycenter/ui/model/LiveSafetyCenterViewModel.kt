@@ -34,7 +34,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.map
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.android.settings.R
 import com.android.settings.safetycenter.ui.InteractionLogger
+import com.android.settings.safetycenter.ui.SafetyCenterSubpageRegistry
 import com.android.settingslib.safetycenter.SafetyCenterDataTransformer
 import com.android.settingslib.safetycenter.SafetyCenterUiData
 import kotlin.reflect.KClass
@@ -65,6 +67,27 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
     }
 
     private val safetyCenterManager = app.getSystemService(SafetyCenterManager::class.java)!!
+
+    private val sourceIdToSubpageTitleResIdMap: Map<String, Int> by lazy {
+        SafetyCenterSubpageRegistry.subpageConfigs.entries
+            .flatMap { (subpageKey, config) ->
+                val sourceIds =
+                    SafetyCenterSubpageRegistry.getAllSafetySourceIds(getApplication(), subpageKey)
+                sourceIds.map { sourceId -> sourceId to config.titleResId }
+            }
+            .toMap()
+    }
+
+    /** Creates a map of Issue ID to the String Resource ID for the header title. */
+    fun getIssueIdToHeaderResIdMap(data: SafetyCenterUiData): Map<String, Int> {
+        val allIssues = (data.getActiveIssues() + data.getDismissedIssues()).distinctBy { it.id }
+
+        return allIssues.associate { issue ->
+            val subpageTitleResId =
+                issue.safetySourceIds.firstNotNullOfOrNull { sourceIdToSubpageTitleResIdMap[it] }
+            issue.id to (subpageTitleResId ?: R.string.safety_center_title)
+        }
+    }
 
     /**
      * A [MutableLiveData] that listens for changes from the [SafetyCenterManager].

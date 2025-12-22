@@ -19,10 +19,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
+    <FrameLayout
+        android:id="@+id/viewpager_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/color_mode_preview_height"/>
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:clipChildren="true">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/color_mode_preview_height"
+            android:background="?android:attr/colorBackground" />
+    </FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
