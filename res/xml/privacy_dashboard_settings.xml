@@ -92,6 +92,20 @@
         android:summary="@string/show_password_summary"
         settings:controller="com.android.settings.security.ShowPasswordPreferenceController"/>
 
+    <!-- Show secrets (touch) -->
+    <SwitchPreferenceCompat
+        android:key="show_secrets_touch"
+        android:title="@string/show_secrets_touch_title"
+        android:summary="@string/show_secrets_touch_summary"
+        settings:controller="com.android.settings.security.ShowSecretsTouchPreferenceController"/>
+
+    <!-- Show secrets (physical) -->
+    <SwitchPreferenceCompat
+        android:key="show_secrets_physical"
+        android:title="@string/show_secrets_physical_title"
+        android:summary="@string/show_secrets_physical_summary"
+        settings:controller="com.android.settings.security.ShowSecretsPhysicalPreferenceController"/>
+
     <!-- On lock screen notifications -->
     <com.android.settings.RestrictedListPreference
         android:key="privacy_lock_screen_notifications"
