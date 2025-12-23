@@ -30,6 +30,7 @@ import com.android.settings.applications.autofill.PasswordsPreferenceController;
 import com.android.settings.applications.credentials.CredentialManagerPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.users.AutoSyncDataPreferenceController;
 import com.android.settings.users.AutoSyncPrivateDataPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -100,13 +101,15 @@ public class AccountPrivateDashboardFragment extends DashboardFragment {
             Context context,
             String[] authorities,
             List<AbstractPreferenceController> controllers) {
-        final AccountPreferenceController accountPrefController =
-                new AccountPreferenceController(
-                        context,
-                        this,
-                        authorities,
-                        ProfileSelectFragment.ProfileType.PRIVATE);
-        controllers.add(accountPrefController);
+        if (!Flags.enableAccountsAndBackupScreen()) {
+            final AccountPreferenceController accountPrefController =
+                    new AccountPreferenceController(
+                            context,
+                            this,
+                            authorities,
+                            ProfileSelectFragment.ProfileType.PRIVATE);
+            controllers.add(accountPrefController);
+        }
         controllers.add(new AutoSyncDataPreferenceController(context, this));
         controllers.add(new AutoSyncPrivateDataPreferenceController(context, this));
     }

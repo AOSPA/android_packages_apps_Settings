@@ -36,6 +36,7 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 public class AutoSyncDataPreferenceController extends AbstractPreferenceController
@@ -84,6 +85,9 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
 
     @Override
     public boolean isAvailable() {
+        if (Flags.enableAccountsAndBackupScreen()) {
+            return false;
+        }
         return !mUserManager.isManagedProfile()
                 && (mUserManager.isRestrictedProfile()
                 || mUserManager.getProfiles(UserHandle.myUserId()).size() == 1);

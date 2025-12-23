@@ -21,6 +21,7 @@ import android.os.UserHandle;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.settings.Utils;
+import com.android.settings.flags.Flags;
 
 /** An account sync data preference controller for work */
 public class AutoSyncWorkDataPreferenceController extends AutoSyncDataPreferenceController {
@@ -39,6 +40,9 @@ public class AutoSyncWorkDataPreferenceController extends AutoSyncDataPreference
 
     @Override
     public boolean isAvailable() {
+        if (Flags.enableAccountsAndBackupScreen()) {
+            return false;
+        }
         mUserHandle = Utils.getManagedProfileWithDisabled(mUserManager);
         return mUserHandle != null && !mUserManager.isManagedProfile() && !mUserManager.isLinkedUser()
                 && mUserManager.getProfiles(UserHandle.myUserId()).size() > 1;
