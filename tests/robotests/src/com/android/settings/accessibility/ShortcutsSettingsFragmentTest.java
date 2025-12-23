@@ -20,6 +20,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.provider.SearchIndexableResource;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -27,6 +32,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -36,6 +42,8 @@ import java.util.List;
 /** Tests for {@link ShortcutsSettingsFragment}. */
 @RunWith(RobolectricTestRunner.class)
 public class ShortcutsSettingsFragmentTest {
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private ShortcutsSettingsFragment mFragment;
@@ -62,6 +70,7 @@ public class ShortcutsSettingsFragmentTest {
         assertThat(mFragment.getLogTag()).isEqualTo("ShortcutsSettingsFragment");
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_A11Y_SHORTCUTS_SETTINGS)
     @Test
     public void getNonIndexableKeys_existInXmlLayout() {
         final List<String> niks = ShortcutsSettingsFragment.SEARCH_INDEX_DATA_PROVIDER
@@ -71,5 +80,25 @@ public class ShortcutsSettingsFragmentTest {
                         R.xml.accessibility_shortcuts_settings);
 
         assertThat(keys).containsAtLeastElementsIn(niks);
+    }
+
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_A11Y_SHORTCUTS_SETTINGS)
+    @Test
+    public void getSearchIndexDataProvider_verifyXmlResourcesToIndex() {
+        List<SearchIndexableResource> searchIndexableResource =
+                ShortcutsSettingsFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                        mContext, /* enabled= */ true);
+        assertThat(searchIndexableResource.getFirst().xmlResId)
+                .isEqualTo(R.xml.accessibility_shortcuts_settings);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_A11Y_SHORTCUTS_SETTINGS)
+    @Test
+    public void getSearchIndexDataProvider_returnsNull() {
+        List<SearchIndexableResource> searchIndexableResource =
+                ShortcutsSettingsFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                        mContext, /* enabled= */ true);
+
+        assertThat(searchIndexableResource).isNull();
     }
 }
