@@ -267,61 +267,15 @@ public class AudioStreamMediaService extends Service {
             stopSelf();
             return START_NOT_STICKY;
         }
-        // TODO(b/398700619): Remove hasExtra check when feasible.
-        if (Flags.audioStreamMediaServiceByReceiveState() && intent.hasExtra(
-                EXTRA_PRIVATE_BROADCAST_RECEIVE_DATA)) {
-            PrivateBroadcastReceiveData data = intent.getParcelableExtra(
-                    EXTRA_PRIVATE_BROADCAST_RECEIVE_DATA, PrivateBroadcastReceiveData.class);
-            if (data == null || !PrivateBroadcastReceiveData.Companion.isValid(data)) {
-                Log.w(TAG, "Data is null or invalid. Service will not start.");
-                stopSelf();
-                return START_NOT_STICKY;
-            }
-            getHandler().post(() -> handleIntentData(data));
+        PrivateBroadcastReceiveData data =
+                intent.getParcelableExtra(
+                        EXTRA_PRIVATE_BROADCAST_RECEIVE_DATA, PrivateBroadcastReceiveData.class);
+        if (data == null || !PrivateBroadcastReceiveData.Companion.isValid(data)) {
+            Log.w(TAG, "Data is null or invalid. Service will not start.");
+            stopSelf();
             return START_NOT_STICKY;
         }
-        getHandler().post(() -> {
-            mBroadcastId = intent.getIntExtra(BROADCAST_ID, -1);
-            if (mBroadcastId == -1) {
-                Log.w(TAG, "Invalid broadcast ID. Service will not start.");
-                stopSelf();
-                return;
-            }
-            var devices = intent.getParcelableArrayListExtra(DEVICES, BluetoothDevice.class);
-            if (devices == null || devices.isEmpty()) {
-                Log.w(TAG, "No device. Service will not start.");
-                stopSelf();
-            } else {
-                mStateByDevice = new HashMap<>();
-                devices.forEach(d -> {
-                    if (mStateByDevice == null) {
-                        return;
-                    }
-                    mStateByDevice.put(d, STREAMING);
-                    if (mLocalBtManager != null && mLeBroadcastAssistant != null) {
-                        mLeBroadcastAssistant.getAllSources(d).stream().filter(
-                                state -> state.getBroadcastId()
-                                        == mBroadcastId).findFirst().ifPresent(state -> {
-                                    if (mLocalBtManager == null) {
-                                        return;
-                                    }
-                                    var profileManager = mLocalBtManager.getProfileManager();
-                                    if (profileManager == null) {
-                                        return;
-                                    }
-                                    mSourceId = state.getSourceId();
-                                    var selectedChannel = getLocalSourceStateWithSelectedChannel(
-                                            profileManager, d, mSourceId, state).second;
-                                    cacheSelectedChannelIndex(selectedChannel, d);
-                                }
-                        );
-                    }
-                });
-                MediaSession.Token token =
-                        getOrCreateLocalMediaSession(intent.getStringExtra(BROADCAST_TITLE));
-                startForeground(NOTIFICATION_ID, buildNotification(token));
-            }
-        });
+        getHandler().post(() -> handleIntentData(data));
         return START_NOT_STICKY;
     }
 
@@ -557,11 +511,8 @@ public class AudioStreamMediaService extends Service {
             Log.w(TAG, "getDeviceInValidState() : mStateByDevice is null or empty!");
             return emptyList();
         }
-        if (Flags.audioStreamMediaServiceByReceiveState()) {
-            return mStateByDevice.entrySet().stream().filter(
-                    entry -> entry.getValue() != DECRYPTION_FAILED).map(Map.Entry::getKey).toList();
-        }
-        return mStateByDevice.keySet().stream().toList();
+        return mStateByDevice.entrySet().stream().filter(
+                entry -> entry.getValue() != DECRYPTION_FAILED).map(Map.Entry::getKey).toList();
     }
 
     @Nullable
@@ -586,37 +537,7 @@ public class AudioStreamMediaService extends Service {
         @Override
         public void onReceiveStateChanged(
                 BluetoothDevice sink, int sourceId, BluetoothLeBroadcastReceiveState state) {
-            if (Flags.audioStreamMediaServiceByReceiveState()) {
-                return;
-            }
-            super.onReceiveStateChanged(sink, sourceId, state);
-            if (!mHysteresisModeFixAvailable || mStateByDevice == null
-                    || !mStateByDevice.containsKey(sink) || mLocalBtManager == null) {
-                return;
-            }
-            var stateWithSelectedChannel = getLocalSourceStateWithSelectedChannel(
-                    mLocalBtManager.getProfileManager(), sink, sourceId, state);
-            var sourceState = stateWithSelectedChannel.first;
-            cacheSelectedChannelIndex(stateWithSelectedChannel.second, sink);
-            // Exit early if the state is neither streaming nor paused
-            if (sourceState != STREAMING && sourceState != PAUSED
-                    && sourceState != PAUSED_BY_RECEIVER) {
-                return;
-            }
-            boolean shouldUpdate = mStateByDevice.get(sink) != sourceState;
-            if (shouldUpdate) {
-                mStateByDevice.put(sink, sourceState);
-                if (mLocalSession != null) {
-                    mLocalSession.setPlaybackState(getPlaybackState());
-                    if (mNotificationManager != null) {
-                        mNotificationManager.notify(
-                                NOTIFICATION_ID,
-                                buildNotification(mLocalSession.getSessionToken())
-                        );
-                    }
-                    Log.d(TAG, "updating source state to : " + sourceState);
-                }
-            }
+            return;
         }
 
         private void handleRemoveSource() {
