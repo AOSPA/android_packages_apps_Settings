@@ -17,13 +17,14 @@
 package com.android.settings.accessibility.colorinversion.ui
 
 import android.app.settings.SettingsEnums
+import android.content.Context
 import android.provider.Settings.ACTION_COLOR_INVERSION_SETTINGS
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
-import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment
 import com.android.settings.testutils.SettingsStoreRule
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -31,6 +32,7 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
@@ -40,11 +42,11 @@ import org.mockito.kotlin.verify
 import org.robolectric.shadows.ShadowLooper
 
 /** Tests for [ColorInversionScreen]. */
-class ColorInversionScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class ColorInversionScreenTest {
     @get:Rule val settingsStoreRule = SettingsStoreRule()
-
-    override val flagName = Flags.FLAG_CATALYST_COLOR_INVERSION
-    override val preferenceScreenCreator = ColorInversionScreen()
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
+    private val preferenceScreenCreator = ColorInversionScreen()
 
     @Before
     fun setUp() {
@@ -54,7 +56,7 @@ class ColorInversionScreenTest : SettingsCatalystTestCase() {
     @Test
     fun getLaunchIntent_returnColorInversionScreenIntent() {
         val prefKey = "fakePrefKey"
-        val mockPrefMetadata = mock<PreferenceMetadata>() { on { key } doReturn prefKey }
+        val mockPrefMetadata = mock<PreferenceMetadata> { on { key } doReturn prefKey }
         val launchIntent = preferenceScreenCreator.getLaunchIntent(appContext, mockPrefMetadata)
 
         assertThat(launchIntent).isNotNull()

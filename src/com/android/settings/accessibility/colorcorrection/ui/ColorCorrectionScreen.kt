@@ -26,7 +26,6 @@ import com.android.internal.accessibility.AccessibilityShortcutController.DALTON
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.FeedbackManager
-import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment
 import com.android.settings.accessibility.colorcorrection.data.ColorCorrectionModeDataStore
 import com.android.settings.accessibility.shared.ui.AccessibilityShortcutPreference
@@ -53,7 +52,7 @@ class ColorCorrectionScreen :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.daltonizer_preference_purpose
 
@@ -76,8 +75,6 @@ class ColorCorrectionScreen :
 
     override fun fragmentClass(): Class<out Fragment>? =
         ToggleDaltonizerPreferenceFragment::class.java
-
-    override fun isFlagEnabled(context: Context) = Flags.catalystDaltonizer()
 
     override fun getMetricsCategory() = SettingsEnums.ACCESSIBILITY_TOGGLE_DALTONIZER
 

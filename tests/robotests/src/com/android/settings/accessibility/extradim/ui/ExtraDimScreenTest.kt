@@ -17,31 +17,34 @@
 package com.android.settings.accessibility.extradim.ui
 
 import android.app.settings.SettingsEnums
+import android.content.Context
 import android.provider.Settings.ACTION_REDUCE_BRIGHT_COLORS_SETTINGS
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.internal.R as AndroidInternalR
 import com.android.settings.R
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
-import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment
 import com.android.settings.accessibility.extradim.data.ExtraDimDataStore
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.SettingsShadowResources
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.robolectric.annotation.Config
 
 @Config(shadows = [SettingsShadowResources::class])
-class ExtraDimScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class ExtraDimScreenTest {
     @get:Rule val settingsStoreRule = SettingsStoreRule()
-    override val flagName = Flags.FLAG_CATALYST_EXTRA_DIM
-    override val preferenceScreenCreator by lazy { ExtraDimScreen(appContext) }
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
+    private val preferenceScreenCreator by lazy { ExtraDimScreen(appContext) }
 
     @Before
     fun setUp() {

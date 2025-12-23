@@ -13,34 +13,18 @@
  */
 package com.android.settings.display;
 
-import android.app.ActivityManager;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.database.ContentObserver;
 import android.hardware.display.ColorDisplayManager;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Looper;
-import android.provider.Settings.Secure;
-import android.provider.Settings.System;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
 
-public class DisplayWhiteBalancePreferenceController extends TogglePreferenceController
-    implements LifecycleObserver, OnStart, OnStop {
+public class DisplayWhiteBalancePreferenceController extends TogglePreferenceController {
 
     private ColorDisplayManager mColorDisplayManager;
-    @VisibleForTesting
-    ContentObserver mContentObserver;
-    private Preference mPreference;
 
     public DisplayWhiteBalancePreferenceController(Context context, String key) {
         super(context, key);
@@ -48,8 +32,20 @@ public class DisplayWhiteBalancePreferenceController extends TogglePreferenceCon
 
     @Override
     public int getAvailabilityStatus() {
-        return getColorDisplayManager().isDisplayWhiteBalanceAvailable(mContext) ?
-            AVAILABLE : DISABLED_FOR_USER;
+        ColorDisplayManager cdm = getColorDisplayManager();
+        // Display white balance is only valid in linear light space. COLOR_MODE_SATURATED
+        // implies unmanaged color mode, and hence unknown color processing conditions.
+        // We also disallow display white balance when color accessibility features are enabled.
+        if (cdm.isDisplayWhiteBalanceAvailable(mContext)) {
+            if (cdm.getColorMode() != ColorDisplayManager.COLOR_MODE_SATURATED
+                    && !cdm.areAccessibilityTransformsEnabled(mContext)) {
+                return AVAILABLE;
+            } else {
+                return CONDITIONALLY_UNAVAILABLE;
+            }
+        } else {
+            return DISABLED_FOR_USER;
+        }
     }
 
     @Override
@@ -68,47 +64,8 @@ public class DisplayWhiteBalancePreferenceController extends TogglePreferenceCon
     }
 
     @Override
-    public void onStart() {
-        if (!isAvailable()) {
-            return;
-        }
-
-        final ContentResolver cr = mContext.getContentResolver();
-        mContentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                super.onChange(selfChange, uri);
-                updateVisibility();
-            }
-        };
-        cr.registerContentObserver(
-                Secure.getUriFor(Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED),
-                false /* notifyForDescendants */, mContentObserver,
-                ActivityManager.getCurrentUser());
-        cr.registerContentObserver(
-                Secure.getUriFor(Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED),
-                false /* notifyForDescendants */, mContentObserver,
-                ActivityManager.getCurrentUser());
-        cr.registerContentObserver(
-                System.getUriFor(System.DISPLAY_COLOR_MODE),
-                false /* notifyForDescendants */, mContentObserver,
-                ActivityManager.getCurrentUser());
-
-        updateVisibility();
-    }
-
-    @Override
-    public void onStop() {
-        if (mContentObserver != null) {
-            mContext.getContentResolver().unregisterContentObserver(mContentObserver);
-            mContentObserver = null;
-        }
-    }
-
-    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @VisibleForTesting
@@ -117,18 +74,5 @@ public class DisplayWhiteBalancePreferenceController extends TogglePreferenceCon
             mColorDisplayManager = mContext.getSystemService(ColorDisplayManager.class);
         }
         return mColorDisplayManager;
-    }
-
-    @VisibleForTesting
-    void updateVisibility() {
-        if (mPreference != null) {
-            ColorDisplayManager cdm = getColorDisplayManager();
-
-            // Display white balance is only valid in linear light space. COLOR_MODE_SATURATED
-            // implies unmanaged color mode, and hence unknown color processing conditions.
-            // We also disallow display white balance when color accessibility features are enabled.
-            mPreference.setVisible(cdm.getColorMode() != ColorDisplayManager.COLOR_MODE_SATURATED &&
-                    !cdm.areAccessibilityTransformsEnabled(mContext));
-        }
     }
 }

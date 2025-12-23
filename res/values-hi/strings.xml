@@ -179,7 +179,7 @@
     <string name="proxy_error_invalid_exclusion_list" msgid="6096353559936226599">"अलग किये गए डोमेन (वो डोमेन जिन्हें सर्च में शामिल नहीं किया जाएगा) की जो सूची आपने टाइप की है वो सही फ़ॉर्मेट में नहीं है. डोमेन की बीच में कॉमा लगाकर बनाई गई सूची टाइप करें।"</string>
     <string name="proxy_error_empty_port" msgid="4250295137005082992">"आपको पोर्ट फ़ील्‍ड पूरा करना होगा."</string>
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"अगर होस्‍ट फ़ील्‍ड खाली है तो पोर्ट फ़ील्‍ड को खाली होना ही चाहिए."</string>
-    <string name="proxy_error_invalid_port" msgid="2830054691770209166">"  लिखा गया पोर्ट मान्‍य नहीं है."</string>
+    <string name="proxy_error_invalid_port" msgid="2830054691770209166">"लिखा गया पोर्ट मान्‍य नहीं है."</string>
     <string name="proxy_warning_limited_support" msgid="3277104160797351942">"एचटीटीपी प्रॉक्सी का इस्तेमाल ब्राउज़र करता है, लेकिन हो सकता है कि अन्य ऐप्लिकेशन इसका इस्तेमाल न करे."</string>
     <string name="proxy_url_title" msgid="3502625766036404073">"पीएसी यूआरएल: "</string>
     <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"होस्‍टनाम(www.google.com) IPv4 पिंग करें:"</string>
@@ -1034,7 +1034,7 @@
     <string name="external_display_topology_hint" msgid="885396727047321347">"डिसप्ले का क्रम बदलने के लिए, उन्हें दबाकर रखें और खींचकर छोड़ें"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"नेविगेशन ऐरो दिखाने के लिए टैप करें"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"अलग-अलग डिसप्ले को फिर से क्रम से लगाने के लिए, ऐरो पर टैप करें"</string>
-    <string name="external_display_mirroring_title" msgid="2688288527687724603">"पहले से मौजूद डिसप्ले की स्क्रीन शेयर करें"</string>
+    <string name="external_display_mirroring_title" msgid="2688288527687724603">"पहले से मौजूद डिसप्ले को मिरर मोड में दिखाएं"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"क्या आपको नई सेटिंग इस्तेमाल करनी हैं?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"अगर डिसप्ले सही तरीके से काम नहीं कर रहा है, तो पिछली सेटिंग पर वापस जाएं"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"सेटिंग का इस्तेमाल करें"</string>
@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"सर्टिफ़िकेट ज़रूरी है."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"जगह की जानकारी को सटीक बनाने और दूसरे कामों के लिए, वाई-फ़ाई बंद होने पर भी <xliff:g id="APP_NAME">%1$s</xliff:g> नेटवर्क को स्कैन करना चालू करना चाहता है.\n\nउन सभी ऐप्लिकेशन को इसकी अनुमति दें जो स्कैन करना चाहते हैं?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"जगह की जानकारी सटीक बनाने और दूसरे कामों के लिए, एक अज्ञात ऐप्लिकेशन वाई-फ़ाई बंद होने पर भी  नेटवर्क स्कैन करने की सुविधा चालू करना चाहता है.\n\nस्कैन की अनुमति मांगने वाले सभी ऐप्लिकेशन को ऐसा करने दें."</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"अनुमति दें"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"अस्वीकार करें"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*ज़रूरी है"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"यह शेयर किया गया नेटवर्क है. बदलाव करने के लिए, आपको साइन इन करना होगा."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"बदलाव करने के लिए, नेटवर्क की सुविधा देने वाली कंपनी या डिवाइस के एडमिन से संपर्क करें."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"इस डिवाइस का इस्तेमाल करने वाले सभी लोग, इस नेटवर्क को ऐक्सेस कर सकते हैं."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"इस नेटवर्क में कोई इंटरनेट ऐक्सेस नहीं है. जुड़े रहें?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"सीमित कनेक्टिविटी की वजह से हो सकता है कुछ ऐप्लिकेशन और सेवाएं न काम करें. फिर भी इस्तेमाल करें?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"इस नेटवर्क के लिए फिर से ना पूछें"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"नेटवर्क सहेजने में विफल रहा"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"रद्द करें"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"नेटवर्क हटाना है?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> को इस डिवाइस से सभी उपयोगकर्ताओं के लिए हटा दिया जाएगा"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 नेटवर्क}one{# नेटवर्क}other{# नेटवर्क}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 सदस्यता}one{# सदस्यता}other{# सदस्यताएं}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 नेटवर्क और सदस्यता}one{# नेटवर्क और सदस्यता}other{# नेटवर्क और सदस्यताएं}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"हाई रिज़ॉल्यूशन"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"फ़ुल रिज़ॉल्यूशन"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"फ़ुल रिज़ॉल्यूशन में ज़्यादा बैटरी खर्च होती है. रिज़ॉल्यूशन बदलने पर, कुछ ऐप्लिकेशन रीस्टार्ट हो सकते हैं."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="HEIGHT">%2$s</xliff:g> और <xliff:g id="WIDTH">%1$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> हर्ट्ज़"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> हर्ट्ज़"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"टाइम ज़ोन बदले जाने की सूचना"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"टाइम ज़ोन अपने-आप अपडेट होने पर सूचना मिलती है"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"सूचना, समय, ज़ोन, टाइमज़ोन"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"घड़ी का समय बदलने के लिए शेड्यूल किया गया बदलाव"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"शेड्यूल के हिसाब से घड़ी के समय में बदलाव होने पर सूचना पाएं. जैसे, डेलाइट सेविंग टाइम की वजह से हुआ बदलाव"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"डीएसटी, डेलाइट सेविंग टाइम, डेलाइट सेविंग, घड़ी के समय में बदलाव, घड़ी का समय बदलने के लिए शेड्यूल किया गया बदलाव"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"अगला बदलाव"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"कोई भी बदलाव शेड्यूल नहीं किया गया है"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"क़ानूनी जानकारी, स्‍थिति, सॉफ़्टवेयर वर्शन देखें"</string>
     <string name="legal_information" msgid="7509900979811934843">"कानूनी जानकारी"</string>
     <string name="manual" msgid="3651593989906084868">"मैन्युअल"</string>
@@ -2539,7 +2535,7 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"शॉर्टकट की मदद से बड़ा करके देखें"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"तीन बार टैप और शॉर्टकट की मदद से बड़ा करके देखें"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g> के बारे में जानकारी"</string>
-    <string name="accessibility_text_reading_options_title" msgid="2059907327364152763">"डिसप्ले साइज़ और टेक्स्ट साइज़"</string>
+    <string name="accessibility_text_reading_options_title" msgid="2059907327364152763">"डिसप्ले का साइज़ और टेक्स्ट"</string>
     <string name="accessibility_text_reading_options_subtext" msgid="3480489973093251705">"फ़ॉन्ट साइज़, डिसप्ले साइज़, टेक्स्ट को बोल्ड करने की सुविधा, आउटलाइन टेक्स्ट"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"डिवाइस पर टेक्स्ट दिखने का तरीका बदलें"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"विषय: गर्म हवा के गुब्बारे के डिज़ाइन"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"ऐप्लिकेशन क्लोन किया गया"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> का क्लोन बनाया जा रहा है"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> का क्लोन बनाया गया"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"भाषाएं, हाथ के जेस्चर, समय"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"सिस्टम की भाषाएं, ऐप्लिकेशन की भाषाएं, जगह के हिसाब से प्राथमिकताएं, और बोली"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"वाईफ़ाई, वाई-फ़ाई, नेटवर्क कनेक्शन, इंटरनेट, वायरलेस, डेटा, वाई फ़ाई"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"वाई-फ़ाई सूचना, वाई-फ़ाई नोटिफ़िकेशन"</string>
@@ -4700,6 +4695,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"ऐडवांस सुरक्षा के लिए इस सेटिंग को बंद रखना ज़रूरी है, ताकि आपका डेटा सुरक्षित रहे"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"ऐडवांस सुरक्षा की सेटिंग इस कार्रवाई को रोक देती है, ताकि आपका डेटा सुरक्षित रहे"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"सेटिंग"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"बंद करें"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"चालू करें"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"दिखाएं"</string>
@@ -5183,10 +5186,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"एक्सपेरिमेंट के तौर पर उपलब्ध: ANGLE चालू करें"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"चेतावनी: ANGLE को OpenGL ES के डिफ़ॉल्ट ड्राइवर के तौर पर चालू करें. यह सुविधा एक्सपेरिमेंट के तौर पर उपलब्ध है. इसलिए, ऐसा हो सकता है कि यह कुछ कैमरा और वीडियो ऐप्लिकेशन के साथ काम न करे. चालू करने से पहले, कृपया अपने डिवाइस के डेटा का बैकअप लें"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"सिस्टम के OpenGL ES ड्राइवर को बदलने के लिए, आपको डिवाइस को फिर से चालू करना होगा. डिवाइस को फिर से चालू करने से पहले, कृपया अपने डिवाइस के डेटा का बैक अप लें. अगर आपका डिवाइस फिर चालू नहीं हो पाता है, तो डिवाइस को पहले जैसा करने के लिए आपको उसे फ़ैक्ट्री रीसेट करना होगा"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"साथ काम करने के लिए ऐप्लिकेशन में किए गए बदलाव"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"साथ काम करने के लिए ऐप्लिकेशन में किए गए बदलावों को लागू करने के लिए, टॉगल करें"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"डिफ़ॉल्ट रूप से चालू किए गए बदलाव"</string>
@@ -6073,8 +6074,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"अश्लील कॉन्टेंट वाले खोज नतीजों को फ़िल्टर करें"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{# ऐप्लिकेशन पर काम करता है}one{# ऐप्लिकेशन पर काम करता है}other{# ऐप्लिकेशन पर काम करता है}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"ज़्यादा जानें"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"ये सेटिंग बंद होने के बावजूद, खाते की अन्य सेटिंग लागू हो सकती हैं."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"\'माता-पिता के कंट्रोल\' सुविधा के लिए सेट किया गया पिन डालें"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"माता-पिता के कंट्रोल का पिन सेट करें"</string>
@@ -6092,8 +6092,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"पिन मिटाएं और कंट्रोल बंद करें"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"मिटाएं"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"ये माता-पिता के कंट्रोल की सुविधा के लिए सेट किए गए पिन का इस्तेमाल कर रहे हैं:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"माता-पिता के कंट्रोल की सुविधा के लिए सेट किया गया पिन, किसी अन्य उपयोगकर्ता के लिए इस्तेमाल किया जा रहा है"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> ऐनिमेशन"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"कंट्रोल चालू नहीं किए जा सकते"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"कंट्रोल का इस्तेमाल नहीं किया जा सकता"</string>

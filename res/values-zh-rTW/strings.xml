@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"需要憑證。"</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"<xliff:g id="APP_NAME">%1$s</xliff:g> 要求開啟網路掃描功能 (即使 Wi-Fi 已關閉)，藉此提升定位精確度及用於其他用途。\n\n你要對所有需要執行掃描的應用程式允許這項要求嗎？"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"某個不明應用程式要求開啟網路掃描功能 (即使 Wi-Fi 已關閉)，藉此提升定位精確度及用於其他用途。\n\n你要對所有需要執行掃描的應用程式允許這項要求嗎？"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"允許"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"拒絕"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*必填"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"這是共用網路，必須登入才能變更。"</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"如要變更，請與網路擁有者或裝置管理員聯絡。"</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"這部裝置的所有使用者都能存取這個網路。"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"這個網路沒有網際網路連線。要繼續保持連線嗎？"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"連線能力受限，因此部分應用程式和服務可能無法運作，仍要使用嗎？"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"不要再詢問我是否使用這個網路"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"無法儲存網路"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"取消"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"要清除網路嗎？"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"系統將為這部裝置的所有使用者移除「<xliff:g id="NETWORK_NAME">%1$s</xliff:g>」"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 個網路}other{# 個網路}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 個訂閱項目}other{# 個訂閱項目}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 個網路和訂閱項目}other{# 個網路和訂閱項目}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"高解析度"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"最大解析度"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"使用最大解析度會比較耗電。如果切換解析度，部分應用程式可能會重新啟動。"</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> 乘 <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> 赫茲"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"時區變更"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"時區自動更新時收到通知"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"通知, 時間, 區域, 時區"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"排定的時鐘變更"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"在時鐘執行排定的變更 (例如日光節約時間) 時收到通知"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"dst, 日光節約時間, 日光節約, 時鐘變更, 排定的時鐘變更"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"下一項變更"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"沒有排定的變更"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"查看法律資訊、狀態、軟體版本"</string>
     <string name="legal_information" msgid="7509900979811934843">"法律資訊"</string>
     <string name="manual" msgid="3651593989906084868">"說明書"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"已複製"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"正在複製「<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>」"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"已複製「<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>」"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"語言、手勢、時間"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"系統語言、應用程式語言、地區偏好設定、語音"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, 網路連線, 網際網路, 無線, 數據, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi 通知, wifi 通知"</string>
@@ -4700,6 +4695,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"為了安全起見，進階保護功能要求這項設定保持關閉"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"為了安全起見，進階保護功能禁止這項操作"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"設定"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"關閉"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"開啟"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"顯示"</string>
@@ -5183,10 +5186,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"實驗功能：啟用 ANGLE"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"警告：啟用 ANGLE 做為預設 OpenGL ES 驅動程式時，請特別注意。這項功能目前處於實驗階段，可能與某些相機和影片應用程式不相容。請先備份裝置資料，再開啟切換鈕"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"必須重新啟動，才能變更系統 OpenGL ES 驅動程式。請先備份裝置資料，再重新啟動。如果無法重新啟動，請將裝置恢復原廠設定"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"應用程式相容性變更"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"切換應用程式相容性變更"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"預設啟用的應用程式有相容性異動"</string>
@@ -6073,8 +6074,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"篩除涉及露骨內容的搜尋結果"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{已在 # 個應用程式上開啟}other{已在 # 個應用程式上開啟}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"瞭解詳情"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"即使關閉這些設定，仍可能會套用其他帳戶設定。"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"輸入家長監護 PIN 碼"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"設定家長監護 PIN 碼"</string>
@@ -6092,8 +6092,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"刪除 PIN 碼並關閉監護功能"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"刪除"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"目前的家長監護 PIN 碼使用者：\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"裝置的其他共用者正在使用家長監護 PIN 碼"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>動畫"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"無法開啟監護功能"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"無法使用控制選項"</string>

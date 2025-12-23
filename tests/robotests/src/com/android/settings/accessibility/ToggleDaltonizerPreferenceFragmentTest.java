@@ -25,11 +25,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
@@ -55,14 +50,10 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestParameterInjector;
 import org.robolectric.shadows.ShadowLooper;
 
-import java.util.List;
-
 /** Tests for {@link ToggleDaltonizerPreferenceFragment} */
 @RunWith(RobolectricTestParameterInjector.class)
 public class ToggleDaltonizerPreferenceFragmentTest extends
         BaseShortcutInteractionsTestCases<ToggleDaltonizerPreferenceFragment> {
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
     @Rule
     public final SettingsStoreRule mSettingsStoreRule = new SettingsStoreRule();
     private static final String MAIN_SWITCH_PREF_KEY = "accessibility_display_daltonizer_enabled";
@@ -130,39 +121,6 @@ public class ToggleDaltonizerPreferenceFragmentTest extends
         assertThat(getMainSwitch().isChecked()).isTrue();
     }
 
-    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_DALTONIZER)
-    @Test
-    @TestParameters(
-            customName = "deuteranomaly",
-            value = "{modePrefKey: \"daltonizer_mode_deuteranomaly\", expectedValue: 12}")
-    @TestParameters(
-            customName = "protanomaly",
-            value = "{modePrefKey: \"daltonizer_mode_protanomaly\", expectedValue: 11}")
-    @TestParameters(
-            customName = "tritanomaly",
-            value = "{modePrefKey: \"daltonizer_mode_tritanomaly\", expectedValue: 13}")
-    @TestParameters(
-            customName = "grayscale",
-            value = "{modePrefKey: \"daltonizer_mode_grayscale\", expectedValue: 0}")
-    public void setDaltonizerMode_flagOff_updateSettingData(String modePrefKey, int expectedValue) {
-        launchFragment();
-        CheckBoxPreference modePref = mFragment.findPreference(modePrefKey);
-        assertThat(modePref).isNotNull();
-
-        modePref.performClick();
-        ShadowLooper.idleMainLooper();
-
-        assertThat(modePref.isChecked()).isTrue();
-        // Robolectric's ShadowSettings has different implementation detail than
-        // SettingsProvider's Settings.
-        // SettingsProvider always stores everything as String, whereas Robolectric's
-        // ShadowSettings store the data with the same type as when it's stored.
-        assertThat(Settings.Secure.getString(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER)).isEqualTo(
-                Integer.toString(expectedValue));
-    }
-
-    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_DALTONIZER)
     @Test
     @TestParameters(
             customName = "deuteranomaly",
@@ -208,8 +166,7 @@ public class ToggleDaltonizerPreferenceFragmentTest extends
     public void getPreferenceScreenResId_returnsCorrectXml() {
         launchFragment();
 
-        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
-                R.xml.accessibility_daltonizer_settings);
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(0);
     }
 
     @Test
@@ -217,54 +174,6 @@ public class ToggleDaltonizerPreferenceFragmentTest extends
         launchFragment();
 
         assertThat(mFragment.getHelpResource()).isEqualTo(R.string.help_url_color_correction);
-    }
-
-    @RequiresFlagsDisabled({
-            Flags.FLAG_CATALYST_DALTONIZER,
-            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH
-    })
-    @Test
-    public void getNonIndexableKeys_containsNonIndexableItems() {
-        final List<String> niks = ToggleDaltonizerPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
-        final List<String> keys = List.of(
-                "top_intro",
-                "daltonizer_preview",
-                "general_categories",
-                "html_description",
-                "feedback"
-        );
-
-        assertThat(niks).containsExactlyElementsIn(keys);
-    }
-
-    @RequiresFlagsDisabled({
-            Flags.FLAG_CATALYST_DALTONIZER,
-            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH
-    })
-    @Test
-    public void getXmlResourceToIndex() {
-        final List<SearchIndexableResource> indexableResources =
-                ToggleDaltonizerPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
-                        .getXmlResourcesToIndex(mContext, true);
-
-        assertThat(indexableResources).isNotNull();
-        assertThat(indexableResources.size()).isEqualTo(1);
-        assertThat(indexableResources.getFirst().xmlResId).isEqualTo(
-                R.xml.accessibility_daltonizer_settings);
-    }
-
-    @RequiresFlagsEnabled({
-            Flags.FLAG_CATALYST_DALTONIZER,
-            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH
-    })
-    @Test
-    public void getXmlResourceToIndex_catalystSearch() {
-        final List<SearchIndexableResource> indexableResources =
-                ToggleDaltonizerPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
-                        .getXmlResourcesToIndex(mContext, true);
-
-        assertThat(indexableResources).isNull();
     }
 
     @Test

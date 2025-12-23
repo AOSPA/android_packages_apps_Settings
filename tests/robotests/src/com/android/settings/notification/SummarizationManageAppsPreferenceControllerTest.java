@@ -16,12 +16,10 @@
 
 package com.android.settings.notification;
 
-import static android.service.notification.Adjustment.KEY_IMPORTANCE;
 import static android.service.notification.Adjustment.KEY_SUMMARIZATION;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import android.app.Flags;
@@ -57,7 +55,6 @@ public class SummarizationManageAppsPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mSetFlagsRule.enableFlags(Flags.FLAG_NM_SUMMARIZATION, Flags.FLAG_NM_SUMMARIZATION_UI);
         mController = new SummarizationManageAppsPreferenceController(mContext, PREFERENCE_KEY);
         mController.mBackend.setNm(mInm);
     }
@@ -71,14 +68,6 @@ public class SummarizationManageAppsPreferenceControllerTest {
     @DisableFlags(Flags.FLAG_NM_SUMMARIZATION_ALL)
     public void isAvailable_flagEnabledNasDoesNotSupport_shouldReturnFalse() throws Exception {
         when(mInm.getUnsupportedAdjustmentTypes()).thenReturn(List.of(KEY_SUMMARIZATION));
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_NM_SUMMARIZATION_ALL)
-    public void isAvailable_flagDisabledNasSupports_shouldReturnFalse() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_NM_SUMMARIZATION);
-        mSetFlagsRule.disableFlags(Flags.FLAG_NM_SUMMARIZATION_UI);
         assertThat(mController.isAvailable()).isFalse();
     }
 }

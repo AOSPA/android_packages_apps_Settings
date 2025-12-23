@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Inahitaji cheti."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Ili kuboresha usahihi wa mahali na kwa madhumuni mengine, <xliff:g id="APP_NAME">%1$s</xliff:g> inataka kuwasha ukaguaji mitandao, hata wakati Wi-Fi imezimwa.\n\nJe, ungependa kuruhusu programu zote ambazo zingependa kukagua ziweza kufanya hivyo?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Ili kuboresha usahihi wa mahali na kwa madhumuni mengine, programu isiyojulikana inataka kuwasha utafutaji wa mtandao, hata wakati Wi-Fi imezimwa.\n\nUtatoa ruhusa kwa programu zinazotaka kutafuta?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Ruhusu"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Kataa"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*lazima ijazwe"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Huu ni mtandao unaotumiwa pamoja. Unahitaji kuingia katika akaunti ili ufanye mabadiliko."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Wasiliana na mmiliki wa mtandao au msimamizi wa kifaa ili ufanye mabadiliko."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Watumiaji wote kwenye kifaa hiki wanaweza kufikia mtandao huu."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Mtandao huu hauna intaneti. Utaendelea kuutumia?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Huenda baadhi ya programu na huduma zisifanye kazi kwa sababu ya muunganisho hafifu. Tumia tu?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Usiulizie mtandao huu tena"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Imeshindwa kuhifadhi mtandao"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Ghairi"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Ungependa kusahau mtandao?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> itaondolewa kwa watumiaji wote kwenye kifaa hiki"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{Mtandao 1}other{Mitandao #}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{Aina 1 ya usajili}other{Aina # za usajili}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{Aina 1 ya mtandao na usajili}other{Aina # za mitandao na usajili}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Ubora wa juu"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Ubora wa juu zaidi"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Ubora wa juu zaidi wa skrini hutumia betri zaidi. Ukibadilisha ubora wa skrini yako, huenda baadhi ya programu zikazimwa kisha kuwashwa."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> kwa <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"Hz <xliff:g id="REFRESH_RATE">%1$s</xliff:g>"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"Hezi <xliff:g id="REFRESH_RATE">%1$s</xliff:g>"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Mabadiliko ya saa za eneo"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Pokea arifa saa za eneo lako zinaposasishwa kiotomatiki"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"arifa, saa, eneo, saa za eneo"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Mabadiliko yaliyoratibiwa ya saa"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Pokea arifa wakati saa yako inafanya mabadiliko yaliyoratibiwa, kwa mfano kuongeza saa za mchana"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"dst, kuongeza saa za mchana, kuongeza saa za mchana, kubadilisha saa, mabadiliko yaliyoratibiwa ya saa"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Mabadiliko yanayofuata"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Hakuna mabadiliko yaliyoratibiwa"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Angalia maelezo ya kisheria, hadhi, toleo la programu"</string>
     <string name="legal_information" msgid="7509900979811934843">"Maelezo ya kisheria"</string>
     <string name="manual" msgid="3651593989906084868">"Mwongozo"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Imenakiliwa"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Inaunda nakala ya <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Imeunda nakala ya <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Lugha, miguso, saa"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Lugha za mfumo, lugha za programu, mapendeleo ya kimaeneo, matamshi"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, mtandao, muunganisho wa mtandao, intaneti, pasiwaya, data,"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Arifa ya Wi-Fi, arifa ya wifi"</string>
@@ -4700,6 +4695,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Kwa usalama wako, Ulinzi wa Hali ya Juu unahitaji mipangilio hii iendelee kuzimwa"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Kwa usalama wako, mipangilio ya Ulinzi wa Hali ya Juu huzuia kitendo hiki"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Mipangilio"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Zima"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Washa"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Onyesha"</string>
@@ -5183,10 +5186,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Kipengele cha jaribio: Washa ANGLE"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Onyo: Washa ANGLE kama kiendeshaji chaguomsingi cha OpenGL ES. Kipengele hiki ni cha jaribio na huenda kisioane na baadhi ya programu za kamera na video. Tafadhali hifadhi nakala ya data ya kifaa chako kabla ya kuwasha swichi"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"Unahitaji kuwasha tena ili kubadilisha kiendeshaji cha mfumo cha OpenGL ES. Tafadhali hifadhi nakala ya data iliyo kwenye kifaa chako kabla ya kuzima kisha uwashe. Ikiwa imeshindwa kuzima kisha kuwaka, unahitaji kurejesha mipangilio ambayo kifaa chako kilitoka nayo kiwandani ili kurejesha data ya kifaa"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Mabadiliko ya Uoanifu wa Programu"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Geuza mabadiliko ya uoanifu wa programu"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Mabadiliko chaguomsingi yaliyowashwa"</string>
@@ -6073,8 +6074,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Chuja matokeo ya utafutaji yenye lugha chafu"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Kwenye programu #}other{Kwenye programu #}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"Pata maelezo zaidi"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Mipangilio hii ikiwa imezimwa, mipangilio mingine ya akaunti bado inaweza kutumika."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Weka PIN ya vidhibiti vya wazazi"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Weka PIN ya vidhibiti vya wazazi"</string>
@@ -6092,8 +6092,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Futa PIN na uzime vidhibiti"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Futa"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"PIN yako ya vidhibiti vya wazazi inatumiwa na:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"PIN yako ya vidhibiti vya wazazi inatumika kwa mtumiaji mwingine"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Uhuishaji wa <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Huwezi kuwasha vidhibiti"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Huwezi kutumia vidhibiti"</string>

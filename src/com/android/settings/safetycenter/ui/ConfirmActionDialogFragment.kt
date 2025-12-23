@@ -36,6 +36,8 @@ class ConfirmActionDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val issue = requireArguments().getParcelable(ISSUE_KEY, SafetyCenterIssue::class.java)!!
+        val isDismissed = requireArguments().getBoolean(IS_DISMISSED_KEY)
+        val isPrimaryButton = requireArguments().getBoolean(IS_PRIMARY_BUTTON_KEY)
         val action =
             requireArguments().getParcelable(ACTION_KEY, SafetyCenterIssue.Action::class.java)!!
         val launchTaskId = requireArguments().getInt(LAUNCH_TASK_ID_KEY)
@@ -46,6 +48,15 @@ class ConfirmActionDialogFragment : DialogFragment() {
             .setMessage(confirmationDialogDetails.text)
             .setPositiveButton(confirmationDialogDetails.acceptButtonText) { _, _ ->
                 viewModel.executeIssueAction(issue, action, launchTaskId)
+                viewModel.interactionLogger.recordForIssue(
+                    if (isPrimaryButton) {
+                        Action.ISSUE_PRIMARY_ACTION_CLICKED
+                    } else {
+                        Action.ISSUE_SECONDARY_ACTION_CLICKED
+                    },
+                    issue,
+                    isDismissed,
+                )
             }
             .setNegativeButton(confirmationDialogDetails.denyButtonText, /* listener= */ null)
             .create()
@@ -53,6 +64,8 @@ class ConfirmActionDialogFragment : DialogFragment() {
 
     companion object {
         private const val ISSUE_KEY = "issue"
+        private const val IS_DISMISSED_KEY = "isDismissed"
+        private const val IS_PRIMARY_BUTTON_KEY = "isPrimaryButton"
         private const val ACTION_KEY = "action"
         private const val LAUNCH_TASK_ID_KEY = "launchTaskId"
 
@@ -60,17 +73,23 @@ class ConfirmActionDialogFragment : DialogFragment() {
          * Creates a new instance of the dialog.
          *
          * @param issue The SafetyCenterIssue the action belongs to.
+         * @param isDismissed Whether the issue is currently in the dismissed state.
+         * @param isPrimaryButton Whether the action being confirmed is the primary action.
          * @param action The SafetyCenterIssue.Action to be confirmed.
          * @param launchTaskId The task ID to launch the action in.
          */
         fun newInstance(
             issue: SafetyCenterIssue,
+            isDismissed: Boolean,
+            isPrimaryButton: Boolean,
             action: SafetyCenterIssue.Action,
             launchTaskId: Int,
         ): ConfirmActionDialogFragment {
             val fragment = ConfirmActionDialogFragment()
             val args = Bundle()
             args.putParcelable(ISSUE_KEY, issue)
+            args.putBoolean(IS_DISMISSED_KEY, isDismissed)
+            args.putBoolean(IS_PRIMARY_BUTTON_KEY, isPrimaryButton)
             args.putParcelable(ACTION_KEY, action)
             args.putInt(LAUNCH_TASK_ID_KEY, launchTaskId)
             fragment.arguments = args

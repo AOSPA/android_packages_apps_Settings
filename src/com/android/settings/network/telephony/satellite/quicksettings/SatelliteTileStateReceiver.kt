@@ -23,6 +23,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.OutcomeReceiver
 import android.telephony.CarrierConfigManager
+import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.telephony.satellite.SatelliteManager
 import android.util.Log
@@ -43,62 +44,107 @@ import kotlinx.coroutines.launch
 private const val TAG = "SatelliteTileStateReceiver"
 
 /**
- * A [BroadcastReceiver] that listens for boot completed events and subscription changes to update
- * the [SatelliteTileService] enabled state.
+ * A [BroadcastReceiver] that listens for system events to manage the Satellite QS Tile state and
+ * prompt notifications.
  *
- * This receiver is responsible for monitoring the boot completion event. It then checks the current
- * satellite supported state and updates the [SatelliteTileService] enabled state accordingly.
+ * This receiver handles:
+ * 1. **Boot/Update**: Initializing listeners and updating the tile's enabled state based on NTN
+ *    (Non-Terrestrial Network) support.
+ * 2. **SIM/Config Changes**: Re-evaluating the tile's visibility when carrier config or SIM state
+ *    changes.
+ * 3. **Satellite Eligibility Job**: Schedules a [JobService] to monitor satellite eligibility when
+ *    cellular data is lost.
  *
  * The enabled state of the service is updated based on the following logic:
  * 1. If the device supports any NTN, the service is enabled.
  * 2. If NTN is not supported, the service is disabled.
  *
- * Even if the current carrier or geo location doesn't support satellite connectivity, the tile
- * service will still be enabled if the device supports NTN. The Landing Page will be responsible
- * for educating the user on why certain NTN features are not available. We will only prompt the
- * user to add the satellite tile to quick settings when eligible for NTN.
+ * This class is `open` to allow for spying in unit tests.
  */
 open class SatelliteTileStateReceiver(
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
 ) : BroadcastReceiver() {
 
-    /**
-     * Handles incoming broadcasts to update the satellite tile's enabled state.
-     *
-     * This method responds to boot completion, SIM state changes, and carrier config changes by
-     * checking for NTN support and enabling or disabling the [SatelliteTileService] accordingly.
-     */
     override fun onReceive(context: Context, intent: Intent) {
         if (!isSatelliteTileFeatureEnabled(context)) {
             return
         }
 
         val action = intent.action
-        when (intent.action) {
-            Intent.ACTION_BOOT_COMPLETED,
-            TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED,
-            CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED -> {
-                // Legitimate actions, continue processing.
-                Log.d(TAG, "onReceive: $action")
-            }
-            else -> return // Exit for any other actions.
-        }
+        Log.d(TAG, "onReceive: $action")
 
-        val pendingResult = goAsync()
-        CoroutineScope(defaultDispatcher).launch {
-            try {
-                val isAnyNtnSupported = isAnyNtnSupportedFlow(context).first()
-                updateTileServiceEnabledState(context, isAnyNtnSupported)
-            } finally {
-                pendingResult.finish()
+        val handler: (suspend () -> Unit)? =
+            when (action) {
+                Intent.ACTION_BOOT_COMPLETED,
+                Intent.ACTION_MY_PACKAGE_REPLACED -> { -> handleBootOrAppUpdate(context) }
+                TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED,
+                TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED,
+                CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED -> { ->
+                        handleSubscriptionOrConfigChanged(context)
+                    }
+                else -> null
             }
-        }
 
-        // To combat false negatives for [SatelliteManager.requestIsSupported] on boot, we need to
-        // register for satellite supported state changes.
-        if (action == Intent.ACTION_BOOT_COMPLETED) {
-            SatelliteSupportedStateChangeHandler.register(context, defaultDispatcher)
+        if (handler != null) {
+            val pendingResult = goAsync()
+            CoroutineScope(defaultDispatcher).launch {
+                try {
+                    handler()
+                } finally {
+                    pendingResult.finish()
+                }
+            }
+        } else {
+            Log.d(TAG, "onReceive: unsupported action: $action")
         }
+    }
+
+    /**
+     * Handles boot completion (`ACTION_BOOT_COMPLETED`) and app update
+     * (`ACTION_MY_PACKAGE_REPLACED`) events.
+     *
+     * This is the initialization phase where we:
+     * 1. Register a [SatelliteManager] callback via [SatelliteSupportedStateChangeHandler] to keep
+     *    tile visibility updated.
+     * 2. Perform an immediate check to update the tile state.
+     * 3. Schedule the Satellite Eligibility Job to monitor data loss events.
+     */
+    private suspend fun handleBootOrAppUpdate(context: Context) {
+        SatelliteSupportedStateChangeHandler.register(context, defaultDispatcher)
+        updateTileServiceEnabledState(context, isAnyNtnSupported(context))
+        scheduleEligibilityJob(context)
+    }
+
+    /**
+     * Handles default data subscription, SIM state, or Carrier Config changes.
+     *
+     * These events indicate that the device's capabilities or carrier support might have changed,
+     * so we refresh the tile's enabled state.
+     */
+    private suspend fun handleSubscriptionOrConfigChanged(context: Context) {
+        updateTileServiceEnabledState(context, isAnyNtnSupported(context))
+        scheduleEligibilityJob(context)
+    }
+
+    /**
+     * Schedules a JobService to monitor the data registration state.
+     *
+     * The job will be triggered when the data registration state changes (e.g., losing service).
+     */
+    private fun scheduleEligibilityJob(context: Context) {
+        val subId = SubscriptionManager.getDefaultDataSubscriptionId()
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            val jobScheduler = context.getSystemService(android.app.job.JobScheduler::class.java)
+            val jobId = context.resources.getInteger(R.integer.satellite_eligibility_job)
+            jobScheduler?.cancel(jobId)
+            Log.d(TAG, "Default data subscription is invalid, cancelled job.")
+        } else {
+            SatelliteEligibilityJobService.schedule(context)
+        }
+    }
+
+    private suspend fun isAnyNtnSupported(context: Context): Boolean {
+        return isAnyNtnSupportedFlow(context).first()
     }
 
     /**
@@ -114,12 +160,12 @@ open class SatelliteTileStateReceiver(
             Log.w(TAG, "SatelliteManager is null, returning false")
             return flowOf(false)
         }
-        Log.i(TAG, "isNbIotBasedNtnSupportedFlow started")
+        Log.d(TAG, "isNbIotBasedNtnSupportedFlow started")
         return callbackFlow {
             val callback =
                 object : OutcomeReceiver<Boolean, SatelliteManager.SatelliteException> {
                     override fun onResult(isSupported: Boolean) {
-                        Log.i(TAG, "isNbIotBasedNtnSupportedFlow onResult: $isSupported")
+                        Log.d(TAG, "isNbIotBasedNtnSupportedFlow onResult: $isSupported")
                         trySend(isSupported)
                         close()
                     }
@@ -199,19 +245,16 @@ open class SatelliteTileStateReceiver(
                     PackageManager.COMPONENT_ENABLED_STATE_DISABLED
                 }
 
-            if (packageManager.getComponentEnabledSetting(componentName) == newState) {
-                Log.d(TAG, "Not updating SatelliteTileService state, already $newState")
-                return
+            if (packageManager.getComponentEnabledSetting(componentName) != newState) {
+                Log.i(TAG, "Setting SatelliteTileService enabled state to: $isAnyNtnSupported")
+
+                // This enables or disables the service, making the tile appear or disappear.
+                packageManager.setComponentEnabledSetting(
+                    componentName,
+                    newState,
+                    PackageManager.DONT_KILL_APP,
+                )
             }
-
-            Log.i(TAG, "Setting SatelliteTileService enabled state to: $isAnyNtnSupported")
-
-            // This enables or disables the service, making the tile appear or disappear.
-            packageManager.setComponentEnabledSetting(
-                componentName,
-                newState,
-                PackageManager.DONT_KILL_APP,
-            )
         }
     }
 }
@@ -226,17 +269,23 @@ open class SatelliteTileStateReceiver(
  */
 @VisibleForTesting
 internal object SatelliteSupportedStateChangeHandler {
-    private var isRegistered = false
+    private var isSatelliteSupportedRegistered = false
     private val lock = Any()
 
     @VisibleForTesting
     internal fun reset() {
-        synchronized(lock) { isRegistered = false }
+        synchronized(lock) { isSatelliteSupportedRegistered = false }
     }
 
+    /**
+     * Registers for [SatelliteManager] supported state changes.
+     *
+     * This is typically called on boot to ensure the [SatelliteTileService] enabled state tracks
+     * the modem's satellite capabilities dynamically.
+     */
     fun register(context: Context, dispatcher: CoroutineDispatcher) {
         synchronized(lock) {
-            if (isRegistered) {
+            if (isSatelliteSupportedRegistered) {
                 Log.d(TAG, "Already registered for satellite state changes.")
                 return
             }
@@ -252,7 +301,7 @@ internal object SatelliteSupportedStateChangeHandler {
             try {
                 satelliteManager.registerForSupportedStateChanged(dispatcher.asExecutor()) {
                     isNbIotBasedNtnSupported ->
-                    Log.i(
+                    Log.d(
                         TAG,
                         "onSatelliteSupportedStateChanged: isSupported=$isNbIotBasedNtnSupported",
                     )
@@ -263,11 +312,13 @@ internal object SatelliteSupportedStateChangeHandler {
                         isLteBasedNtnSupported || isNbIotBasedNtnSupported,
                     )
                 }
-                isRegistered = true
-                Log.i(TAG, "Successfully registered for satellite state changes.")
             } catch (e: IllegalStateException) {
-                Log.e(TAG, "Failed to register for satellite state changes", e)
+                Log.e(TAG, "Failed to register for satellite supported state changes", e)
+                return
             }
+
+            isSatelliteSupportedRegistered = true
+            Log.d(TAG, "Successfully registered callbacks for satellite state changes.")
         }
     }
 }

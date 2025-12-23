@@ -421,6 +421,11 @@ public class NetworkSelectSettings extends DashboardFragment implements
 // QTI_END: 2020-04-27: Telephony: Add sanity check for slotIndex during scan abort
             switch (msg.what) {
                 case EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE:
+                    Context context = getContext();
+                    if (context == null || isFinishingOrDestroyed()) {
+                        Log.d(TAG, "Activity finished or context null, skipping UI update");
+                        return;
+                    }
                     final boolean isSucceed = (boolean) msg.obj;
 // QTI_BEGIN: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
                     setProgressBarVisible(false);
@@ -435,7 +440,7 @@ public class NetworkSelectSettings extends DashboardFragment implements
 
                         if (isSucceed && mSubscriptionManager.isActiveSubscriptionId(mSubId)) {
                             final OperatorInfo operator = mSelectedPreference.getOperatorInfo();
-                            MobileNetworkUtils.setCarrierName(getContext(),
+                            MobileNetworkUtils.setCarrierName(context,
                                     operator.getOperatorAlphaLong(), mSubId);
                         }
 // QTI_END: 2025-06-23: Telephony: Use selected plmn name as summary of choose network am: 0f4a28c31f am: 0f4a28c31f
