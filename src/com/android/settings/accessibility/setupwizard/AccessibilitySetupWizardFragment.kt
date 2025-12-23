@@ -20,7 +20,7 @@ import com.android.settings.R
 import com.google.android.setupdesign.items.RecyclerItemAdapter
 
 /** Accessibility Vision Settings for Setup Wizard. */
-class AccessibilitySetupWizardFragment() : BaseSetupWizardFragment() {
+class AccessibilitySetupWizardFragment : BaseSetupWizardFragment() {
 
     override fun createControllers(adapter: RecyclerItemAdapter): Map<Int, BaseItemController> =
         buildMap {
@@ -49,6 +49,9 @@ class AccessibilitySetupWizardFragment() : BaseSetupWizardFragment() {
             }
             findItem(adapter, R.id.auto_brightness_in_suw)?.let {
                 put(R.id.auto_brightness_in_suw, AutoBrightnessSwitchItemController(context, it))
+            }
+            findItem(adapter, R.id.brightness_level_in_suw)?.let {
+                put(R.id.brightness_level_in_suw, BrightnessLevelItemController(context, it))
             }
         }
 
