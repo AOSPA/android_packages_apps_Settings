@@ -25,6 +25,7 @@ import android.text.TextUtils;
 
 import com.android.settings.Utils;
 
+// LINT.IfChange
 public class SwipeToNotificationPreferenceController extends GesturePreferenceController {
 
     private static final int ON = 1;
@@ -94,3 +95,4 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
         return isGestureAvailable(context);
     }
 }
+// LINT.ThenChange(SwipeToNotificationApiScreen.kt)
