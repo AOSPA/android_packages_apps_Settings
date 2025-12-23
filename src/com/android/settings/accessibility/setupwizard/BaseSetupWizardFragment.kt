@@ -56,7 +56,7 @@ abstract class BaseSetupWizardFragment : Fragment(), RecyclerItemAdapter.OnItemS
 
     override fun onItemSelected(item: IItem) {
         val itemId = (item as? Item)?.id ?: return
-        controllers[itemId]?.onItemSelected()
+        controllers[itemId]?.onItemSelected(activity!!)
     }
 
     override fun onStart() {

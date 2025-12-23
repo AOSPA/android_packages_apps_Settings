@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility.setupwizard
 
+import androidx.fragment.app.FragmentActivity
 import com.google.android.setupdesign.items.Item
 
 /**
@@ -62,6 +63,10 @@ abstract class BaseItemController(val targetItem: Item) {
      */
     open fun onStop() {}
 
-    /** Action to perform when the managed item is selected or clicked. */
-    abstract fun onItemSelected()
+    /**
+     * Action to perform when the managed item is selected or clicked.
+     *
+     * @param activity The activity currently handling the selection callback.
+     */
+    abstract fun onItemSelected(activity: FragmentActivity)
 }
