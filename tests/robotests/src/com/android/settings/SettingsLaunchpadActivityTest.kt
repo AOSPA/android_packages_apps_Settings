@@ -30,8 +30,8 @@ import com.android.settingslib.metadata.PreferenceScreenMetadataFactory
 import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFactory
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.ValidatedKeyParameters
-import com.android.settingslib.metadata.apifirst.ApiFirstPreferenceScreen
-import com.android.settingslib.metadata.apifirst.category.Category
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
+import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.Flow
 import org.junit.Before
@@ -49,20 +49,20 @@ class SettingsLaunchpadActivityTest {
 
     companion object {
         const val TEST_SCREEN_KEY = "test_screen_key"
-        const val API_FIRST_SCREEN_KEY = "api_first_screen_key"
+        const val API_SCREEN_KEY = "api_screen_key"
     }
 
     private lateinit var context: Context
     private lateinit var fakeFactory: FakeParameterizedFactory
-    private lateinit var fakeApiFirstFactory: PreferenceScreenMetadataFactory
+    private lateinit var fakeApiFactory: PreferenceScreenMetadataFactory
 
     // Dummy class for testing fragment launching
     class TestFragment : Fragment()
 
-    /** A fake [ApiFirstPreferenceScreen] for testing the category mapping logic. */
-    class FakeApiFirstPreferenceScreen :
-        ApiFirstPreferenceScreen(
-            key = API_FIRST_SCREEN_KEY,
+    /** A fake [PreferencesApiScreen] for testing the category mapping logic. */
+    class FakePreferencesApiScreen :
+        PreferencesApiScreen(
+            key = API_SCREEN_KEY,
             topLevelSettingsCategory = Category.APPS,
             fragment = TestFragment::class,
             purpose = 0,
@@ -74,11 +74,11 @@ class SettingsLaunchpadActivityTest {
         context = ApplicationProvider.getApplicationContext()
 
         fakeFactory = FakeParameterizedFactory()
-        fakeApiFirstFactory = PreferenceScreenMetadataFactory { FakeApiFirstPreferenceScreen() }
+        fakeApiFactory = PreferenceScreenMetadataFactory { FakePreferencesApiScreen() }
 
         PreferenceScreenRegistry.preferenceScreenMetadataFactories =
             FixedArrayMap(2) {
-                it.put(API_FIRST_SCREEN_KEY, fakeApiFirstFactory)
+                it.put(API_SCREEN_KEY, fakeApiFactory)
                 it.put(TEST_SCREEN_KEY, fakeFactory)
             }
     }
@@ -269,15 +269,15 @@ class SettingsLaunchpadActivityTest {
     }
 
     @Test
-    fun launch_twoPane_withApiFirstScreen_usesCategoryMap() {
+    fun launch_twoPane_withApiScreen_usesCategoryMap() {
         // Arrange: Device is in two-pane mode
         ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true)
         ShadowActivityEmbeddingUtils.setIsAlreadyEmbedded(false)
 
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                // Use the key for our new ApiFirstPreferenceScreen fake
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, API_FIRST_SCREEN_KEY)
+                // Use the key for our new PreferencesApiScreen fake
+                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, API_SCREEN_KEY)
             }
 
         // Act

@@ -1009,7 +1009,7 @@
     <string name="external_display_settings_title" msgid="3865786552022665355">"Надворешни екрани"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Вграден екран"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Универзален курсор"</string>
-    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Преместувајте го глувчето од еден на друг екран"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Движете го глувчето од еден на друг екран"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Користи надворешен екран"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Резолуција на екранот"</string>
     <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"Стапка на освежување и резолуција"</string>
@@ -1034,7 +1034,7 @@
     <string name="external_display_topology_hint" msgid="885396727047321347">"Задржете и повлечете за преуредување на екраните"</string>
     <string name="external_display_tap_to_show_arrows" msgid="5173026632711056564">"Допрете за да се прикажат стрелките за навигација"</string>
     <string name="external_display_tap_arrows_to_rearrange" msgid="8603187508788001297">"Допрете ги стрелките за да ги прераспоредите екраните"</string>
-    <string name="external_display_mirroring_title" msgid="2688288527687724603">"Екран со вградено отсликување"</string>
+    <string name="external_display_mirroring_title" msgid="2688288527687724603">"Отсликај го вградениот екран"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Да се користат новите поставки?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Ако вашиот екран не работи како што сакате, може да го вратите на претходните поставки"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Користи ги поставките"</string>
@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Сертификатот е задолжителен."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"За да се подобри точноста на локација и за други цели, <xliff:g id="APP_NAME">%1$s</xliff:g> сака да се вклучи скенирање за мрежи  дури и кога Wi-Fi е исклучена.\n\nДозволи го ова за сите апликации кои сакаат да се скенира?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"За да се подобри точноста на локација и за други цели, непозната апликација сака да вклучи скенирање мрежи, дури и кога Wi-Fi е исклучена.\n\nДа се дозволи ова за сите апликации што сакаат да скенираат?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Дозволи"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Одбиј"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*задолжително"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Ова е споделена мрежа. Треба да се најавите за да вршите промени."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Контактирајте со сопственикот на мрежата или администраторот на уредот за да извршите промени."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Сите корисници на уредов може да пристапуваат до мрежава."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Мрежава нема пристап на интернет. Сакате да останете поврзани?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Некои апликации и услуги можеби нема да работат поради ограничена поврзливост. Сепак да се користи?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Не прашувај повторно во оваа мрежа"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Не успеа да се зачува мрежата"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Откажи"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Дали да се заборави мрежата?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> ќе се отстрани за сите корисници на уредов"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 мрежа}one{# мрежа}other{# мрежи}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 претплата}one{# претплата}other{# претплати}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 мрежа и претплата}one{# мрежа и претплата}other{# мрежи и претплати}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока резолуција"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Максимална резолуција"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Максималната резолуција повеќе ја троши батеријата. Ако ја смените резолуцијата, некои од апликациите може да се рестартираат."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> од <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> херца"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Промена на временската зона"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Добијте известување кога вашата временска зона ќе се промени автоматски"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"известување, време, зона, временска зона"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Закажана промена на часовникот"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Добијте известување кога часовникот ќе изврши закажана промена, како за летно сметање на времето"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"лсв, летно сметање на времето, летно сметање, промена на часовникот, закажана промена на часовникот"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Следна промена"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Нема закажани промени"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Прикажи правни информации, статус, верзија на софтвер"</string>
     <string name="legal_information" msgid="7509900979811934843">"Правни информации"</string>
     <string name="manual" msgid="3651593989906084868">"Упатство"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Клонирана"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Се создава клон на <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Клонот на <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> е создаден"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Јазици, движења, време"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Системски јазици, јазици на апликации, регионални поставки, говор"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"WiFi, Wi-Fi, мрежна врска, интернет, безжичен, податоци, Wi Fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Известување за Wi‑Fi, Wi‑Fi известување"</string>
@@ -4700,6 +4695,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"За ваша безбедност, „Напредна заштита“ бара поставкава да остане исклучена"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"За ваша безбедност, „Напредна заштита“ го спречува дејствово"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Поставки"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Исклучи"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Вклучи"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Прикажи"</string>
@@ -5183,10 +5186,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Експериментално: овозможете ANGLE"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Предупредување: Ќе се овозможи ANGLE како стандарден драјвер за OpenGL ES. Функцијава е експериментална, па може да не биде компатибилна со некои апликации за камера и видео. Направете бекап на податоците на уредот пред да го вклучите прекинувачот"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"Потребно е рестартирање за да се промени драјверот за системот OpenGL ES. Направете бекап на податоците на уредот пред да рестартирате. Ако не успее рестартирањето, ќе треба да ресетирате на фабрички поставки за да го вратите уредот"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Промени за компатибилност на апликациите"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Вклучување/исклучување на промените за компатибилност на апликациите"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Стандардно овозможени промени"</string>
@@ -6073,8 +6074,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Филтрирај експлицитни резултати од пребарување"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{Во # апликација}one{Во # апликација}other{Во # апликации}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"и уште <xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"Дознајте повеќе"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Кога се исклучени поставкиве, сѐ уште може да важат другите поставки за сметката."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Внесете го PIN-кодот за родителските контроли"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Поставете PIN-код за родителски контроли"</string>
@@ -6092,8 +6092,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"Избриши го PIN-кодот и исклучи ги контролите"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Избриши"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Вашиот PIN за родителски контроли го користат:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"Вашиот PIN-код за родителските контроли е активен за друг корисник"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Анимација на <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Не може да се вклучат контролите"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Не може да се користат контролите"</string>

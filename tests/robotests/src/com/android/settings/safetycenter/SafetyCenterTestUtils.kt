@@ -27,6 +27,7 @@ import android.safetycenter.SafetyCenterIssue
 import android.safetycenter.SafetyCenterManager
 import android.safetycenter.SafetyCenterStatus
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.core.instrumentation.SettingsStatsLog
 
 /** Common utilities and constants for Safety Center tests. */
 object SafetyCenterTestUtils {
@@ -156,4 +157,69 @@ object SafetyCenterTestUtils {
             putExtra(SafetyCenterManager.EXTRA_SAFETY_SOURCE_USER_HANDLE, userHandle)
         }
     }
+
+    @org.robolectric.annotation.Implements(SettingsStatsLog::class)
+    class ShadowSettingsStatsLog {
+
+        companion object {
+            private val writtenEvents: MutableList<LoggedEvent> = ArrayList()
+
+            @JvmStatic
+            @org.robolectric.annotation.Implementation
+            fun write(
+                atomId: Int,
+                sessionId: Long,
+                action: Int,
+                viewType: Int,
+                navigationSource: Int,
+                severityLevel: Int,
+                sourceId: Long,
+                sourceProfileType: Int,
+                issueTypeId: Long,
+                sensor: Int,
+                subpageId: Long,
+                issueState: Int,
+            ) {
+                writtenEvents.add(
+                    LoggedEvent(
+                        atomId,
+                        sessionId,
+                        action,
+                        viewType,
+                        navigationSource,
+                        severityLevel,
+                        sourceId,
+                        sourceProfileType,
+                        issueTypeId,
+                        sensor,
+                        subpageId,
+                        issueState,
+                    )
+                )
+            }
+
+            fun getWrittenEvents(): List<LoggedEvent> {
+                return writtenEvents
+            }
+
+            fun reset() {
+                writtenEvents.clear()
+            }
+        }
+    }
+
+    data class LoggedEvent(
+        val atomId: Int,
+        val sessionId: Long,
+        val action: Int,
+        val viewType: Int,
+        val navigationSource: Int,
+        val severityLevel: Int,
+        val sourceId: Long,
+        val sourceProfileType: Int,
+        val issueTypeId: Long,
+        val sensor: Int,
+        val subpageId: Long,
+        val issueState: Int,
+    )
 }

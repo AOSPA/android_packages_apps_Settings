@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"به گواهینامه نیاز است."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"‏برای بهبود دقت موقعیت مکانی و مقاصد دیگر، <xliff:g id="APP_NAME">%1$s</xliff:g> می‌خواهد اسکن کردن شبکه را فعال کند، حتی هنگامی که Wi-Fi خاموش است.\n\nاین مورد را برای همه برنامه‌هایی که می‌خواهند اسکن کنند مجاز می‌کنید؟"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"‏برای بهبود دقت موقعیت مکانی و مقاصد دیگر، برنامه‌ای ناشناس می‌خواهد اسکن کردن شبکه را فعال کند، حتی هنگامی‌که Wi-Fi خاموش است.\n\nاین مورد برای همه برنامه‌هایی که می‌خواهند اسکن کنند مجاز شود؟"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"اجازه دادن"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"مجاز نبودن"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*ضروری"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"این یک شبکه هم‌رسانی‌شده است. برای ایجاد تغییر، باید به سیستم وارد شوید."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"برای ایجاد تغییرات، با مالک شبکه یا سرپرست دستگاه تماس بگیرید."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"همه کاربران این دستگاه می‌توانند به این شبکه دسترسی داشته باشند."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"این شبکه به اینترنت دسترسی ندارد. به شبکه متصل بماند؟"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"به‌دلیلی اتصال محدود، ممکن است برخی برنامه‌ها و سرویس‌ها کار نکند. درهرصورت استفاده شود؟"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"دیگر درباره این شبکه سؤال نشود"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"شبکه ذخیره نشد"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"لغو"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"شبکه فراموش شود؟"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"‫<xliff:g id="NETWORK_NAME">%1$s</xliff:g> برای همه کاربران این دستگاه برداشته خواهد شد"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{یک شبکه}one{# شبکه}other{# شبکه}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{یک اشتراک}one{# اشتراک}other{# اشتراک}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{یک شبکه و اشتراک}one{# شبکه و اشتراک}other{# شبکه و اشتراک}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"وضوح بالا"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"وضوح بیشینه"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"«وضوح بیشینه» از شارژ باتری بیشتری استفاده می‌کند. تغییر دادن وضوح ممکن است باعث شود برخی‌از برنامه‌ها بازراه‌اندازی شوند."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"‫<xliff:g id="WIDTH">%1$s</xliff:g> در <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"‫<xliff:g id="REFRESH_RATE">%1$s</xliff:g> هرتز"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"‫<xliff:g id="REFRESH_RATE">%1$s</xliff:g> هرتز"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"تغییر منطقه زمانی"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"هرگاه منطقه زمانی‌تان به‌طور خودکار به‌روز شود، اعلان دریافت کنید"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"اعلان، زمان، منطقه، منطقه زمانی"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"تغییر زمان‌بندی‌شده ساعت"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"زمانی‌که ساعتتان تغییر زمان‌بندی‌شده‌ای، مانند تغییر ساعت تابستانی، را اجرا می‌کند اعلان دریافت می‌کنید"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"‏‫dst، ساعت تابستانی، وقت تابستانی، تغییر ساعت، تغییر زمان‌بندی‌شده ساعت"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"تغییر بعدی"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"تغییر زمان‌بندی‌شده‌ای وجود ندارد"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"مشاهدهٔ اطلاعات حقوقی، وضعیت، نسخه نرم‌افزار"</string>
     <string name="legal_information" msgid="7509900979811934843">"اطلاعات حقوقی"</string>
     <string name="manual" msgid="3651593989906084868">"دفترچه راهنما"</string>
@@ -2644,7 +2640,7 @@
     <string name="accessibility_notification_high_contrast_text_body_message" msgid="6846453833480117658">"نوشتار حاشیه‌دار جایگزین نوشتار با کنتراست بالا شده است. می‌توانید آن را در <xliff:g id="SETTINGS">%1$s</xliff:g> روشن کنید."</string>
     <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"رفتن به <xliff:g id="SETTINGS">%1$s</xliff:g>"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"افزودن نوشتار حاشیه‌دار"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"برای افزایش کنتراست، پس‌زمینه‌ای سیاه یا سفید در اطراف نوشتار اضافه کنید"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"برای افزایش تضاد، پس‌زمینه‌ای سیاه یا سفید در اطراف نوشتار اضافه می‌کند"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"به‌روزرسانی خودکار درشت‌‌نمایی صفحه"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"به‌روزرسانی درشت‌‌نمایی صفحه در انتقال‌های برنامه"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"قطع تماس با دکمه روشن/خاموش"</string>
@@ -3692,8 +3688,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"همسانه‌سازی شد"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"درحال ایجاد همسانه <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"همسانه <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> ایجاد شد"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"زبان‌ها، اشاره‌ها، زمان"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"زبان‌های سیستم، زبان‌های برنامه، اولویت‌های منطقه‌ای، گفتار"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"‏wifi، ‏Wi-Fi، اتصال شبکه، اینترنت، بی‌سیم، داده، wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"‏اعلان Wi-Fi، اعلان wifi"</string>
@@ -4703,6 +4698,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"برای امنیت شما، «محافظت پیشرفته» لازم می‌داند این تنظیم خاموش بماند"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"برای امنیت شما، «محافظت پیشرفته» مانع از انجام این کنش می‌شود"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"تنظیمات"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"خاموش کردن"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"روشن کردن"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"نمایش"</string>
@@ -5186,10 +5189,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"‏آزمایشی: فعال کردن ANGLE"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"‏هشدار: فعال کردن ANGLE به‌عنوان درایور پیش‌فرض OpenGL ES. این ویژگی در مرحله آزمایش است و ممکن است با برخی‌از برنامه‌های ویدیو و دوربین سازگار نباشد. لطفاً قبل‌از روشن کردن کلید، از داده‌های دستگاهتان پشتیبان‌گیری کنید"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"‏برای تغییر درایور OpenGL ES در سیستم، به بازراه‌اندازی نیاز است. لطفاً قبل‌از بازراه‌اندازی کردن، از داده‌های دستگاهتان پشتیبان‌گیری کنید. اگر بازراه‌اندازی انجام نشد، برای بازگرداندن دستگاه باید آن را بازنشانی کارخانه‌ای کنید"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"تغییرات در سازگاری برنامه"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"روشن/خاموش کردن تغییرات سازگاری برنامه"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"تغییرات فعال پیش‌فرض"</string>
@@ -6076,8 +6077,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"فیلتر کردن نتایج جستجوی صریح"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{در # برنامه}one{در # برنامه}other{در # برنامه}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"‪+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"بیشتر بدانید"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"حتی با خاموش بودن این تنظیمات، ممکن است سایر تنظیمات حساب همچنان اعمال شود."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"پین کنترل‌های والدین را وارد کنید"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"پین کنترل‌های والدین تنظیم کنید"</string>
@@ -6095,8 +6095,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"حذف پین و خاموش کردن کنترل‌ها"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"حذف"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"این افراد از پین کنترل‌های والدین شما استفاده می‌کنند:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"پین کنترل‌های والدین شما برای کاربر دیگری فعال است"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"پویانمایی <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"کنترل‌ها روشن نمی‌شود"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"نمی‌توان از کنترل‌ها استفاده کرد"</string>
@@ -6115,7 +6114,7 @@
     <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"با یک ساعت متصل، احراز هویت روش‌های بیشتری برای درستی‌سنجی هویت شما اضافه می‌کند تا از دسترسی غیرمجاز به برنامه‌ها جلوگیری شود."</string>
     <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"احراز هویت و مراقبت"</string>
     <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"به‌روزرسانی‌ها:\n"<ul><li>" با اتصال یک ساعت، می‌توانید از زیست‌سنجشی یا پین خود برای دسترسی به برنامه‌ها زمانی که در جای مطمئن نیستید استفاده کنید. "</li>\n<li>" با گذر زمان، احراز هویت ممکن است روش‌های بیشتری برای درستی‌سنجی‌ هویت شما و ایمن نگه داشتن برنامه‌ها روی دستگاه اضافه کند. "<a href="https://support.google.com/android?p=identity_check">"درباره زمان و مکانی که محافظت می‌شوید بیشتر بدانید "</a></li></ul></string>
-    <string name="more_security_privacy_category_title" msgid="6107292123094705732">"تنظیمات دیگر"</string>
+    <string name="more_security_privacy_category_title" msgid="6107292123094705732">"سایر تنظیمات"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"تکمیل خودکار، اعلان‌ها، و موارد دیگر"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"کنترل‌های حریم خصوصی"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"اجازه‌ها، کنترل‌ها"</string>

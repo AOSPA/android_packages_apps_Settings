@@ -392,7 +392,7 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Баталгаажуулахын тулд царайгаа ашиглах"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Эхлэх"</string>
-    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Хандалтын Царайгаар түгжээ тайлах унтарсан тохиолдолд тохируулгын зарим алхам TalkBack-тай хэвийн ажиллахгүй байж болзошгүй."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Хүртээмжтэй Царайгаар түгжээ тайлах унтарсан тохиолдолд тохируулгын зарим алхам TalkBack-тай хэвийн ажиллахгүй байж болзошгүй."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Буцах"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Тохируулгыг үргэлжлүүлэх"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Хүртээмжийн тохируулгыг ашиглах"</string>
@@ -1229,12 +1229,10 @@
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Сертификат шаардлагатай."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Байршлын нарийвчлалыг сайжруулах болон бусад зорилгоор <xliff:g id="APP_NAME">%1$s</xliff:g> нь Wi-Fi хаалттай байгаа хэдий ч сүлжээний сканийг идэвхжүүлэхийг хүсч байна.\n\nҮүнийг скан хийхийг хүсч байгаа бүх апп-д зөвшөөрөх үү?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Үл мэдэгдэх апп байршлын нарийвчлалыг сайжруулах болон бусад зорилгоор сүлжээний сканыг Wi-Fi-г унтраалттай байсан ч идэвхжүүлэх хүсэлтэй байна.\n\nҮүнийг скан хийхийг хүсэж буй бүх аппад зөвшөөрөх үү?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Зөвшөөрөх"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Татгалзах"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*шаардлагатай"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Энэ нь дундын сүлжээ юм. Та өөрчлөлт хийхийн тулд нэвтрэх шаардлагатай."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Өөрчлөлт хийхийн тулд сүлжээний өмчлөгч, төхөөрөмжийн админтай холбогдоно уу."</string>
-    <string name="wifi_shared_network_icon_message" msgid="8937015463026388043">"Энэ төхөөрөмж дээрх бүх хэрэглэгч энэ сүлжээнд хандах боломжтой."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Энэ сүлжээ нь интернетэд холбогдоогүй байна. Цааш үргэлжлүүлэн ашиглах уу?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Зарим апп болон үйлчилгээ хязгаарлагдмал холболтын улмаас ажиллахгүй байж болзошгүй. Үүнийг ямар ч үед ашиглах уу?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Энэ сүлжээнд дахин бүү асуу"</string>
@@ -1254,7 +1252,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Сүлжээг хадгалж чадсангүй"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Цуцлах"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Сүлжээг мартах уу?"</string>
-    <string name="shared_wifi_forget_dialog_message" msgid="8239531688427507193">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>-г энэ төхөөрөмж дээрх бүх хэрэглэгчийн хувьд хасна"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_message (6432459016048228814) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 сүлжээ}other{# сүлжээ}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 захиалга}other{# захиалга}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 сүлжээ, захиалга}other{# сүлжээ, захиалга}}"</string>
@@ -1413,6 +1412,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Өндөр нягтрал"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Дээд нягтрал"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Дээд нягтрал нь таны батарейн цэнэгийг илүү их ашигладаг. Нягтралаа сэлгэх нь зарим аппыг дахин эхлүүлэхэд хүргэж магадгүй."</string>
+    <!-- no translation found for screen_resolution_displayed_text (5162121376105888005) -->
+    <skip />
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="HEIGHT">%2$s</xliff:g>-г харьцах нь <xliff:g id="WIDTH">%1$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Гц"</string>
     <string name="screen_refresh_rate_a11y" msgid="2423288931036941435">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Герц"</string>
@@ -1883,16 +1884,11 @@
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Цагийн бүсийг өөрчлөх"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Таны цагийн бүс автоматаар шинэчлэгдэхэд мэдэгдэл хүлээн авах"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"мэдэгдэл, цаг, бүс, цагийн бүс"</string>
-    <!-- no translation found for time_zone_offset_change_notification_toggle_title (1193662496430013157) -->
-    <skip />
-    <!-- no translation found for time_zone_offset_change_notification_toggle_summary (5968024653460815774) -->
-    <skip />
-    <!-- no translation found for keywords_time_zone_offset_change_notification_category (8387079903065649221) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_next_change (8084602449443278109) -->
-    <skip />
-    <!-- no translation found for footer_time_zone_offset_change_no_next_change (3377219282350130919) -->
-    <skip />
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Цагийн хуваарьт өөрчлөлт"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Таны цаг хуваарьт өөрчлөлт хийхэд мэдэгдэл хүлээн авна. Жишээлбэл: зуны цагийн хуваарь"</string>
+    <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"зцх, зуны цагийн хуваарь, зуны цагийн хэмнэлт, цагийн өөрчлөлт, цагийн хуваарьт өөрчлөлт"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Дараагийн өөрчлөлт"</string>
+    <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Хуваарьт өөрчлөлт байхгүй"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Хууль эрх зүйн мэдээлэл, статус, программын хувилбарыг харах"</string>
     <string name="legal_information" msgid="7509900979811934843">"Хууль эрх зүйн мэдээлэл"</string>
     <string name="manual" msgid="3651593989906084868">"Гар ажиллагаатай"</string>
@@ -2194,7 +2190,7 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Боломжтой дэлгэц дээрх гар"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Дэлгэц дээрх гарыг удирдах"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Сонголт"</string>
-    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Хандалт"</string>
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Хүртээмж"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Биет гар"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Биет гарын бүдүүвч сонгогч"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Ойх товч"</string>
@@ -2357,7 +2353,7 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Шинэчлэх"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Тохируулагч товч сонгох"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>-н шинэ товч сонгоно уу:"</string>
-    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Биет гарын хандалт"</string>
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Биет гарын хүртээмж"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Бэхэлсэн товч, ойх товч, хулганын товч"</string>
     <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Товчийг давтах"</string>
     <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Давтахаас өмнөх саатал"</string>
@@ -2426,11 +2422,11 @@
     <string name="last_time_used_never" msgid="2936073559267990034">"хэзээ ч үгүй"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Ашиглалтын цаг"</string>
     <string name="phone_information_v2_title" msgid="3373745314543222111">"Phone Information V2"</string>
-    <string name="accessibility_settings" msgid="4713215774904704682">"Хандалт"</string>
-    <string name="accessibility_settings_title" msgid="6739115703615065716">"Хандалтын тохиргоо"</string>
+    <string name="accessibility_settings" msgid="4713215774904704682">"Хүртээмж"</string>
+    <string name="accessibility_settings_title" msgid="6739115703615065716">"Хүртээмжтэй тохиргоо"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Дэлгэц, харилцан үйлдэл, аудио"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"Харааны тохиргоо"</string>
-    <string name="vision_settings_description" msgid="7614894785054441991">"Та энэ төхөөрөмжийг өөрийн хэрэгцээнд нийцүүлэн тохируулах боломжтой. Эдгээр хандалтын онцлогийг дараа нь Тохиргоонд өөрчлөх боломжтой."</string>
+    <string name="vision_settings_description" msgid="7614894785054441991">"Та энэ төхөөрөмжийг өөрийн хэрэгцээнд нийцүүлэн тохируулах боломжтой. Эдгээр хүртээмжтэй онцлогийг дараа нь Тохиргоонд өөрчлөх боломжтой."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Фонтын хэмжээг өөрчлөх"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Дэлгэц уншигч"</string>
     <string name="keyboard_category_title" msgid="6841712758039893220">"Биет гарын сонголтууд"</string>
@@ -2440,7 +2436,7 @@
     <string name="display_category_title" msgid="6638191682294461408">"Дэлгэц"</string>
     <string name="accessibility_color_and_motion_title" msgid="1085072332445818494">"Өнгө, хөдөлгөөн"</string>
     <string name="accessibility_color_and_motion_subtext" msgid="1150281881647191503">"Бараан загвар, өнгө засах, хөдөлгөөнт зургийг хасах"</string>
-    <string name="accessibility_pointer_and_touchpad_title" msgid="5703454643194245909">"Курсор, мэдрэгч самбарын хандалт"</string>
+    <string name="accessibility_pointer_and_touchpad_title" msgid="5703454643194245909">"Курсор, мэдрэгч самбарын хүртээмж"</string>
     <string name="accessibility_pointer_and_touchpad_summary" msgid="8588221231953604340">"Хэмжээ, өнгө, төрөл"</string>
     <string name="accessibility_pointer_color_customization_title" msgid="2841888132681075999">"Курсорын өнгө"</string>
     <string name="accessibility_pointer_title" msgid="7427650233669997010">"Курсор"</string>
@@ -2564,14 +2560,14 @@
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Томруулахын тулд:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Томруулж эхлэхийн тулд товчлол ашиглана уу&lt;br/&gt; {1,number,integer}. Дэлгэц дээр товшино уу&lt;br/&gt; {2,number,integer}. Дэлгэцийн эргэн тойронд шилжихийн тулд 1 эсвэл 2 хуруугаараа чирнэ үү&lt;br/&gt; {3,number,integer}. Томруулах хэмжээг тохируулахын тулд 2 хуруугаараа чимхэнэ үү&lt;br/&gt; {4,number,integer}. Томруулахыг зогсоохын тулд товчлолыг ашиглана уу&lt;br/&gt;&lt;br/&gt; Та мөн түр зуур томруулах болон бусад зүйлийг хийх боломжтой."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Томруулах сонголт асаалттай үед та дэлгэцээ томруулж болно.\n\n"<b>"Томруулахын тулд "</b>" томруулах сонголтыг эхлүүлж, дэлгэцийн аль нэг хэсгийг товшино уу.\n"<ul><li>"Гүйлгэхийн тулд 2 эсвэл түүнээс дээш хуруугаараа чирнэ үү"</li>\n<li>"Томруулах хэмжээг тохируулахын тулд 2 эсвэл түүнээс дээш хуруугаараа чимхэнэ үү"</li></ul>\n\n<b>"Түр хугацаанд томруулахын тулд "</b>" томруулах сонголтыг эхлүүлээд, дэлгэцийн аль нэг хэсэг дээр удаан дарна уу.\n"<ul><li>"Дэлгэцийн эргэн тойронд очихын тулд чирнэ үү"</li>\n<li>"Жижигрүүлэхийн тулд хуруугаа авна уу"</li></ul>\n\n"Та гар эсвэл навигацын самбарт томруулах боломжгүй."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g>-н <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>-р хуудас"</string>
-    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Хандалтын товчны товчлол"</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Хүртээмжтэй товчны товчлол"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Дууны түвшний товчнуудын товчлол"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Гурав товших товчлол"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"%1$d хуруугаар хоёр товших товчлол"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Шуурхай тохиргооны товчлол"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Хандалтын зангааны товчлол"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Энэ онцлогийг ашиглахын тулд дэлгэцийнхээ доод талд байх хандалтын товчлуур <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> дээр товшино уу.\n\nОнцлогуудын хооронд сэлгэхийн тулд хандалтын товчлуурыг удаан дарна уу."</string>
-    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Энэ онцлогийг ашиглахын тулд дэлгэцийнхээ хандалтын товчийг товшино уу"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Хүртээмжтэй зангааны товчлол"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Энэ онцлогийг ашиглахын тулд дэлгэцийнхээ доод талд байх хүртээмжтэй товч <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> дээр товшино уу.\n\nОнцлогуудын хооронд сэлгэхийн тулд хүртээмжтэй товчийг удаан дарна уу."</string>
+    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Энэ онцлогийг ашиглахын тулд дэлгэц дээрх хүртээмжтэй товчийг товшино уу"</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Энэ онцлогийг ашиглахын тулд дууны түвшний хоёр товчийг зэрэг удаан дарна уу"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Томруулахыг эхлүүлэх болон зогсоохын тулд дэлгэцийнхээ аль нэг хэсэгт гурав товшино уу."</string>
     <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"Томруулахыг эхлүүлэх болон зогсоохын тулд дэлгэц дээр %1$d удаа хурдан товшино уу"</string>
@@ -2585,14 +2581,14 @@
     <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"Өөрчлөх товч"</string>
     <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"Бусад сонголт"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> товчлол"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"хандалтын товчлуур"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"хандалтын зангаа"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"хүртээмжтэй товч"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"хүртээмжтэй зангаа"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"2 хуруугаараа дээш шударна уу"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"3 хуруугаараа дээш шударна уу"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"Хандалтын товч"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"Хүртээмжтэй товч"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Хөвөгч товчийг товшино уу"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Хандалтын зангаа"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Дэлгэцийнхээ доод талд байх <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> хандалтын товчлуурыг товшино уу. Онцлогуудын хооронд сэлгэхийн тулд хандалтын товчлуурыг удаан дарна уу."</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Хүртээмжтэй зангаа"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Дэлгэцийнхээ доод талд байх <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> хүртээмжтэй товчийг товшино уу. Онцлогуудын хооронд сэлгэхийн тулд хүртээмжтэй товчийг удаан дарна уу."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Дэлгэцийнхээ доод талаас дээш шударна уу. Онцлогуудын хооронд сэлгэхийн тулд дээш шудраад, удаан дарна уу.}other{Дэлгэцийнхээ доод талаас # хуруугаараа дээш шударна уу. Онцлогуудын хооронд сэлгэхийн тулд # хуруугаараа дээш шудраад, удаан дарна уу.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Бусад сонголт"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"<xliff:g id="SERVICE">%1$s</xliff:g>-н талаар нэмэлт мэдээлэл авах"</string>
@@ -2614,19 +2610,19 @@
     <string name="accessibility_shortcut_keyboard_keyword" msgid="7354208869208311654">"товчлуурын шууд холбоос"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Дэлгэрэнгүй"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Хүртээмжийн товчлуурыг <xliff:g id="SERVICE">%1$s</xliff:g> болгож тохируулсан. Томруулахын тулд Хүртээмжийн товчлуурыг удаан дараад, томруулахыг сонгоно уу."</string>
-    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Хандалтын зангааг <xliff:g id="SERVICE">%1$s</xliff:g>-д тохирууллаа. Томруулахыг ашиглахын тулд хоёр хуруугаараа дэлгэцийн доороос дээш шудраад удаан дарна уу. Дараа нь томруулахыг сонгоно уу."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Хүртээмжтэй зангааг <xliff:g id="SERVICE">%1$s</xliff:g>-д тохирууллаа. Томруулахыг ашиглахын тулд хоёр хуруугаараа дэлгэцийн доороос дээш шудраад удаан дарна уу. Дараа нь томруулахыг сонгоно уу."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Дууны түвшний товчийн товчлол"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Товчлолын тохиргоо"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Түгжээтэй дэлгэцийн дууны түвшний товчийн товчлол"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Онцлогийн товчлолд түгжээтэй дэлгэцээс асахыг зөвшөөрнө үү. Дууны түвшний хоёр товчийг хэдэн секундийн турш дарна уу."</string>
-    <string name="accessibility_button_title" msgid="5251235485581552614">"Хандалтын товч"</string>
-    <string name="accessibility_button_intro_text" msgid="80993874471745687">"Дурын дэлгэцээс хандалтын онцлогуудад шуурхай хандана уу"</string>
-    <string name="accessibility_button_about_title" msgid="3581116105084067926">"Хандалтын товчлуурын тухай"</string>
-    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Хандалтын товчлуур болон зангааны тухай"</string>
-    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Хандалтын товчлуур болон зангааны тухай нэмэлт мэдээлэл авах"</string>
-    <string name="accessibility_button_intro" msgid="2601976470525277903">"Хандалтын товчлуурыг ашиглаж байна. 3 товчлуурт навигацаар зангаа боломжгүй байна."</string>
-    <string name="accessibility_button_summary" msgid="8510939012631455831">"Хандалтын онцлогуудад шуурхай хандана уу"</string>
-    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Эхлүүлэхийн тулд&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Хандалтын тохиргоо руу очно уу&lt;br/&gt; {1,number,integer}. Онцлогийг сонгож, товчлол дээр товшино уу&lt;br/&gt; {2,number,integer}. Онцлогт хандах товчийг сонгоно уу&lt;br/&gt;"</string>
+    <string name="accessibility_button_title" msgid="5251235485581552614">"Хүртээмжтэй товч"</string>
+    <string name="accessibility_button_intro_text" msgid="80993874471745687">"Дурын дэлгэцээс хүртээмжтэй онцлогуудад шуурхай хандана уу"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"Хүртээмжтэй товчны тухай"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Хүртээмжтэй товч болон зангааны тухай"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Хүртээмжтэй товч болон зангааны тухай нэмэлт мэдээлэл авах"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Хүртээмжтэй товчийг ашиглаж байна. 3 товчлуурт навигацаар зангаа боломжгүй байна."</string>
+    <string name="accessibility_button_summary" msgid="8510939012631455831">"Хүртээмжтэй онцлогуудад шуурхай хандана уу"</string>
+    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Эхлүүлэхийн тулд&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Хүртээмжтэй тохиргоо руу очно уу&lt;br/&gt; {1,number,integer}. Онцлогийг сонгож, товчлол дээр товшино уу&lt;br/&gt; {2,number,integer}. Онцлогт хандах товчийг сонгоно уу&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Байршил"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Хэмжээ"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Ашиглаагүй үед бүдгэрнэ"</string>
@@ -2675,8 +2671,8 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 минут"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 минут"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Үйлдэл хийх хугацаа (Хандалтын хугацаа)"</string>
-    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Үйлдэл хийх хугацааны тухай (Хандалтын хугацаа)"</string>
-    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Үйлдэл хийх хугацааны тухай нэмэлт мэдээлэл авах (Хандалтын хугацаа)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Үйлдэл хийх хугацааны тухай (Хүртээмжийн хугацаа)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Үйлдэл хийх хугацааны тухай нэмэлт мэдээлэл авах (Хүртээмжийн хугацаа)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Үйлдэл хийх хугацаа"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Энэ цагны тохиргоог бүх апп дэмждэггүй"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Танаас үйлдэл хийхийг хүсдэг түр зуурын мессежийг хэр удаан харуулахыг сонгоно уу"</string>
@@ -2765,14 +2761,14 @@
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Бусад сонголт"</string>
     <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Тайлбарыг уншихад хялбар болгохын тулд түүний хэмжээ болон загварыг өөрчилнө үү"</string>
     <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Эдгээр тайлбарын тохиргоог бүх медиа апп дэмждэггүй"</string>
-    <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Хандалтын товчлуур"</string>
+    <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Хүртээмжтэй товч"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Доод талаас нь 2 хуруугаар дээш шувтрах"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Дууны түвшний товчийг удаан дарах"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Дэлгэцийг гурав товших"</string>
-    <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Хандалтын товчлолуудыг засах"</string>
+    <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Хүртээмжтэй товчлолуудыг засах"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"%1$s-н товчлолоо сонгоно уу"</string>
-    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary" msgid="8268632664568192689">"Үүнийг ашиглахын тулд хандалтын онцлогийн хуудсан дээр хандалтын товчны товчлолыг асаана уу"</string>
-    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary" msgid="2232737783140069174">"Үүнийг ашиглахын тулд хандалтын онцлогийн хуудсан дээр дууны түвшний товчнуудын товчлолыг асаана уу"</string>
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary" msgid="8268632664568192689">"Үүнийг ашиглахын тулд хандалтын онцлогийн хуудсан дээр хүртээмжтэй товчны товчлолыг асаана уу"</string>
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary" msgid="2232737783140069174">"Үүнийг ашиглахын тулд хүртээмжтэй онцлогийн хуудсан дээр дууны түвшний товчнуудын товчлолыг асаана уу"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Үргэлжлүүлэх"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Сонсголын төхөөрөмжүүд"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA, LE Аудионы сонсголын төхөөрөмж, дунгийн суулгац болон бусад өсгөх төхөөрөмжийг тохируулж, удирдана уу"</string>
@@ -2820,8 +2816,8 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Унтраалттай"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Ажиллахгүй байна. Мэдээлэл авахын тулд товшино уу."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Энэ үйлчилгээ буруу ажиллаж байна."</string>
-    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Хандалтын товчлол"</string>
-    <string name="accessibility_shortcuts_settings_subtext" msgid="3870836550836457943">"Хандалтын товч, дууны түвшний товчны товчлол"</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Хүртээмжтэй товчлол"</string>
+    <string name="accessibility_shortcuts_settings_subtext" msgid="3870836550836457943">"Хүртээмжтэй товч, дууны түвшний товчны товчлол"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Шуурхай Тохиргоонд харуулах"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Улаан-ногоон, ногоон нь сул"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Улаан-ногоон, улаан нь сул"</string>
@@ -3689,8 +3685,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Хувилсан"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> клон үүсгэж байна"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> клон үүсгэсэн"</string>
-    <!-- no translation found for system_dashboard_summary (1189068922734915013) -->
-    <skip />
+    <string name="system_dashboard_summary" msgid="1189068922734915013">"Хэл, зангаа, хугацаа"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Системийн хэл, аппын хэл, бүс нутгийн тохиргоо, яриа"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, сүлжээний холболт, интернэт, утасгүй сүлжээ, дата, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi-н мэдэгдэл, wifi-н мэдэгдэл"</string>
@@ -4700,6 +4695,14 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Таныг аюулгүй байлгах үүднээс Дэвшилтэт хамгаалалт энэ тохиргоог унтраалттай байхыг шаарддаг"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Таныг аюулгүй байлгах үүднээс Дэвшилтэт хамгаалалт энэ үйлдлээс сэргийлсэн"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Тохиргоо"</string>
+    <!-- no translation found for wifi_autojoin_disabled_title (2367026291219253993) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_body (4209632501961503789) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_positive_button (1526169946424203242) -->
+    <skip />
+    <!-- no translation found for wifi_autojoin_disabled_negative_button (1413901361810590236) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Унтраах"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Асаах"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Харуулах"</string>
@@ -5183,10 +5186,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Туршилтын: ANGLE-г идэвхжүүлэх"</string>
-    <!-- no translation found for enable_angle_as_system_driver_summary (1552818142467085308) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (14147627096976157) -->
-    <skip />
+    <string name="enable_angle_as_system_driver_summary" msgid="1552818142467085308">"Сануулга: ANGLE-г өгөгдмөл OpenGL ES драйвер байдлаар идэвхжүүлнэ үү. Энэ онцлогийг туршиж байгаа бөгөөд зарим камер, видео апптай тохиромжгүй байж болзошгүй. Сэлгүүрийг асаахаасаа өмнө төхөөрөмжийн өгөгдлөө нөөцөлнө үү"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="14147627096976157">"Системийн OpenGL ES драйверыг өөрчлөхийн тулд дахин асаах шаардлагатай. Дахин асаахаасаа өмнө төхөөрөмжийн өгөгдлөө хуулбарлана уу. Дахин асааж чадаагүй тохиолдолд та төхөөрөмжийг сэргээхийн тулд үйлдвэрийн тохиргоонд шинэчлэх шаардлагатай"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Аппын тохирох байдлын өөрчлөлт"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Аппын тохирох байдлын өөрчлөлтийг идэвхгүй болгох/идэвхжүүлэх"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Өгөгдмөл тохиргоогоор идэвхжүүлсэн өөрчлөлт"</string>
@@ -6073,8 +6074,7 @@
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Насанд хүрэгчдийн хайлтын илэрцийг шүүх"</string>
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{# апп дээр}other{# апп дээр}}"</string>
     <string name="supervision_remaining_supported_apps_count" msgid="579669653237937862">"+<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for supervision_web_content_filters_learn_more_title (1221723141263328405) -->
-    <skip />
+    <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"Нэмэлт мэдээлэл авах"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Эдгээр тохиргоог унтраалттай үед бүртгэлийн бусад тохиргоо хэрэгжсээр байж магадгүй."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Эцэг эхийн хяналтын ПИН оруулна уу"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Эцэг эхийн хяналтын ПИН тохируулах"</string>
@@ -6092,8 +6092,7 @@
     <string name="supervision_delete_pin_turn_off_controls_button_label" msgid="1069413044624006425">"ПИН-г устгаж, хяналтыг унтраах"</string>
     <string name="supervision_delete_button_label" msgid="8096648247610708181">"Устгах"</string>
     <string name="supervision_cant_delete_pin_multiple_role_holders_message" msgid="926001793311679905">"Таны эцэг эхийн хяналтын ПИН-г дараах ашиглаж байна:\n\n<xliff:g id="ROLE_HOLDER_BULLET_LIST">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_cant_delete_pin_in_use_message (97623511627171557) -->
-    <skip />
+    <string name="supervision_cant_delete_pin_in_use_message" msgid="97623511627171557">"Таны эцэг эхийн хяналтын ПИН өөр хэрэглэгчийн хувьд идэвхтэй байна"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>-н хөдөлгөөнт зураг"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Тохиргоог асаах боломжгүй"</string>
     <string name="supervision_setup_multi_profile_error_title" msgid="7538001161488140882">"Тохиргоог ашиглах боломжгүй"</string>

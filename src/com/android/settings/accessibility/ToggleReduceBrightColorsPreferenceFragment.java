@@ -16,53 +16,18 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.internal.accessibility.AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_COMPONENT_NAME;
-
 import android.app.settings.SettingsEnums;
-import android.content.ComponentName;
 import android.content.Context;
-import android.hardware.display.ColorDisplayManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.android.settings.R;
 import com.android.settings.accessibility.extradim.ui.ExtraDimScreen;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.SearchIndexable;
 
 /** Settings for reducing brightness. */
-@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ToggleReduceBrightColorsPreferenceFragment extends DashboardFragment {
     private static final String TAG = "ToggleReduceBrightColorsPreferenceFragment";
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (!Flags.catalystExtraDim()) {
-            ToggleShortcutPreferenceController shortcutPreferenceController =
-                    use(ToggleShortcutPreferenceController.class);
-            if (shortcutPreferenceController != null) {
-                shortcutPreferenceController.initialize(
-                        getFeatureComponentName(),
-                        getChildFragmentManager(),
-                        getFeatureName(),
-                        getMetricsCategory()
-                );
-            }
-        }
-    }
-
-    @NonNull
-    public CharSequence getFeatureName() {
-        return getString(R.string.reduce_bright_colors_preference_title);
-    }
-
-    @NonNull
-    private ComponentName getFeatureComponentName() {
-        return REDUCE_BRIGHT_COLORS_COMPONENT_NAME;
-    }
 
     @Override
     public int getMetricsCategory() {
@@ -77,7 +42,7 @@ public class ToggleReduceBrightColorsPreferenceFragment extends DashboardFragmen
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.accessibility_extra_dim_settings;
+        return 0;
     }
 
     @Override
@@ -89,16 +54,4 @@ public class ToggleReduceBrightColorsPreferenceFragment extends DashboardFragmen
     public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
         return ExtraDimScreen.KEY;
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(
-                    Flags.catalystExtraDim()
-                            && com.android.settings.flags.Flags.catalystSettingsSearch()
-                            ? 0 : R.xml.accessibility_extra_dim_settings) {
-
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    return ColorDisplayManager.isReduceBrightColorsAvailable(context);
-                }
-            };
 }

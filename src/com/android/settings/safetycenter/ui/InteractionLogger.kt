@@ -85,7 +85,7 @@ private constructor(private val context: Context, private val noLogSourceIds: Se
     }
 
     /** Clears the set of viewed issue IDs, allowing them to be logged again. */
-    fun clearViewedIssues() {
+    private fun clearViewedIssues() {
         viewedIssueIds.clear()
     }
 
@@ -145,14 +145,14 @@ private constructor(private val context: Context, private val noLogSourceIds: Se
         )
     }
 
-    private companion object {
+    companion object {
         const val SENSOR_UNKNOWN = 0
 
         /**
          * Encodes a string into an long ID. The ID is a MD5 hash of the string, truncated to 64
          * bits.
          */
-        private fun encodeStringId(id: String?): Long {
+        fun encodeStringId(id: String?): Long {
             if (id == null) return 0
             val digest = MessageDigest.getInstance("MD5")
             digest.update(id.toByteArray())

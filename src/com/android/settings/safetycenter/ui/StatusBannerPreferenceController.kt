@@ -150,6 +150,7 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
             setButtonOnClickListener {
                 if (triggerRescan()) {
                     isButtonEnabled = false
+                    viewModel?.interactionLogger?.record(Action.SCAN_INITIATED)
                 }
             }
             buttonLevel = StatusBannerPreference.BannerStatus.LOW

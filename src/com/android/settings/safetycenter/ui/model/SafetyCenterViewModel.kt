@@ -21,6 +21,7 @@ import android.safetycenter.SafetyCenterErrorDetails
 import android.safetycenter.SafetyCenterIssue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.android.settings.safetycenter.ui.InteractionLogger
 import com.android.settingslib.safetycenter.SafetyCenterUiData
 
 /**
@@ -38,6 +39,9 @@ abstract class SafetyCenterViewModel(protected val app: Application) : AndroidVi
 
     /** Exposes any errors reported by the Safety Center framework. */
     abstract val errorLiveData: LiveData<SafetyCenterErrorDetails>
+
+    /** Exposes an [InteractionLogger] to record user interactions for metrics. */
+    abstract val interactionLogger: InteractionLogger
 
     /** Returns the [SafetyCenterUiData] currently stored by the Safety Center service. */
     abstract fun getCurrentSafetyCenterDataAsUiData(): SafetyCenterUiData
