@@ -359,14 +359,16 @@ public final class BluetoothDevicePreference extends GearPreference {
             // Run this on main thread in order to make sure the dialog only appear once
             if (BluetoothUtils.isBluetoothDiagnosisAvailable(getContext())) {
                 if (mCachedDevice.getBondFailureTimeMillis() != mLastBondingFailureTimeMillis
-                        && BluetoothUtils.showPairingFailure(mCachedDevice)) {
-                    ThreadUtils.postOnBackgroundThread(() -> {
-                        mBluetoothFeatureProvider.buildBluetoothDiagnosisAlertDialog(
+                        && BluetoothUtils.showPairingFailure(mCachedDevice)
+                        && mItemView != null
+                        && mItemView.isShown()) {
+                    ThreadUtils.postOnBackgroundThread(
+                            () -> mBluetoothFeatureProvider.buildBluetoothDiagnosisAlertDialog(
                                 getContext(),
                                 BluetoothDiagnosisEntryPoint.ENTRY_POINT_CAN_NOT_PAIR,
                                 mCachedDevice,
                                 result -> {
-                                    if (result != null && mItemView.isShown()) {
+                                    if (result != null) {
                                         Log.d(
                                                 TAG,
                                                 "Showing bonding failure alert dialog for "
@@ -375,18 +377,19 @@ public final class BluetoothDevicePreference extends GearPreference {
                                                         + mCachedDevice.getBondFailureTimeMillis());
                                         getContext().getMainExecutor().execute(result::show);
                                     }
-                                });
-                    });
+                                }));
                 } else if (mCachedDevice.getConnectionFailureTimeMillis()
                             > mLastConnectionFailureTimeMillis + ALERT_DIALOG_BLOCKING_TIME_MILLS
-                        && BluetoothUtils.showConnectionFailure(mCachedDevice)) {
-                    ThreadUtils.postOnBackgroundThread(() -> {
-                        mBluetoothFeatureProvider.buildBluetoothDiagnosisAlertDialog(
+                        && BluetoothUtils.showConnectionFailure(mCachedDevice)
+                        && mItemView != null
+                        && mItemView.isShown()) {
+                    ThreadUtils.postOnBackgroundThread(
+                            () -> mBluetoothFeatureProvider.buildBluetoothDiagnosisAlertDialog(
                                 getContext(),
                                 BluetoothDiagnosisEntryPoint.ENTRY_POINT_CAN_NOT_CONNECT,
                                 mCachedDevice,
                                 result -> {
-                                    if (result != null && mItemView.isShown()) {
+                                    if (result != null) {
                                         Log.d(
                                                 TAG,
                                                 "Showing connection failure alert dialog for "
@@ -396,9 +399,8 @@ public final class BluetoothDevicePreference extends GearPreference {
                                                                 .getConnectionFailureTimeMillis()
                                         );
                                         getContext().getMainExecutor().execute(result::show);
-                                }
-                            });
-                    });
+                                    }
+                                }));
                 }
                 mLastBondingFailureTimeMillis = mCachedDevice.getBondFailureTimeMillis();
                 mLastConnectionFailureTimeMillis =
