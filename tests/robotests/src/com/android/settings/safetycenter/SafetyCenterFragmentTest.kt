@@ -1509,6 +1509,23 @@ class SafetyCenterFragmentTest {
     }
 
     @Test
+    fun interactionLogger_onLaunchWithQuickSettingsIntent_logsNavigationSourceQuickSettingsTile() {
+        val intent =
+            Intent(mApplication, SafetyCenterActivity::class.java)
+                .setAction(Intent.ACTION_SAFETY_CENTER)
+        NavigationSource.QUICK_SETTINGS_TILE.addToIntent(intent)
+
+        runTestWithIntent(intent, EMPTY_SC_DATA) {
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            assertThat(events).hasSize(1)
+            val event = events[0]
+
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.QUICK_SETTINGS_TILE.statsLogValue)
+        }
+    }
+
+    @Test
     fun sessionId_onConfigurationChange_isPreserved() {
         val intent =
             Intent(mApplication, SafetyCenterActivity::class.java).apply {
