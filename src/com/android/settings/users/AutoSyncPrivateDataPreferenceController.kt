@@ -19,13 +19,15 @@ import android.content.Context
 import androidx.preference.PreferenceFragmentCompat
 import com.android.settings.Utils
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment
+import com.android.settings.flags.Flags
 
 class AutoSyncPrivateDataPreferenceController(
-        context: Context?, parent: PreferenceFragmentCompat?)
-    : AutoSyncDataPreferenceController(context, parent) {
+    context: Context?,
+    parent: PreferenceFragmentCompat?,
+) : AutoSyncDataPreferenceController(context, parent) {
     init {
-        mUserHandle = Utils
-                .getProfileOfType(mUserManager, ProfileSelectFragment.ProfileType.PRIVATE)
+        mUserHandle =
+            Utils.getProfileOfType(mUserManager, ProfileSelectFragment.ProfileType.PRIVATE)
     }
 
     override fun getPreferenceKey(): String {
@@ -33,8 +35,11 @@ class AutoSyncPrivateDataPreferenceController(
     }
 
     override fun isAvailable(): Boolean {
-        return (mUserHandle != null
-                && mUserManager.getUserInfo(mUserHandle.identifier).isPrivateProfile)
+        if (Flags.enableAccountsAndBackupScreen()) {
+            return false
+        }
+        return (mUserHandle != null &&
+            mUserManager.getUserInfo(mUserHandle.identifier).isPrivateProfile)
     }
 
     companion object {
