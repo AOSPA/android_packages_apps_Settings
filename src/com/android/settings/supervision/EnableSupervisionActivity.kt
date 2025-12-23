@@ -38,6 +38,7 @@ import androidx.lifecycle.lifecycleScope
 import com.android.settings.supervision.EnableSupervisionDialogFragment.Companion.DIALOG_DISMISSED
 import com.android.settings.supervision.EnableSupervisionDialogFragment.Companion.DIALOG_NEGATIVE_BUTTON_CLICKED
 import com.android.settings.supervision.EnableSupervisionDialogFragment.Companion.DIALOG_POSITIVE_BUTTON_CLICKED
+import com.android.settings.supervision.shared.systemSupervisionPackageName
 import com.android.settingslib.supervision.SupervisionLog.TAG
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.launch
@@ -232,11 +233,12 @@ class EnableSupervisionActivity : FragmentActivity() {
         if (savedInstanceState == null) {
             setFragmentResultListeners()
 
-            val message = if (Flags.enableSupervisionSettingsUiUpdates()) {
-                null
-            } else {
-                getIntent().getCharSequenceExtra(EXTRA_SUPERVISION_DIALOG_EXPLANATION)
-            }
+            val message =
+                if (Flags.enableSupervisionSettingsUiUpdates()) {
+                    null
+                } else {
+                    getIntent().getCharSequenceExtra(EXTRA_SUPERVISION_DIALOG_EXPLANATION)
+                }
             val appName =
                 if (Flags.enableSupervisionSettingsUiUpdates()) {
                     null

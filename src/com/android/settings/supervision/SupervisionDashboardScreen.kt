@@ -34,7 +34,11 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.appstorefilters.SupervisionAppStoreFiltersScreen
+import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settings.supervision.shared.supervisionRoleHolders
+import com.android.settings.supervision.shared.widget.AutoHidingPreferenceCategory
+import com.android.settings.supervision.shared.widget.NonIndexablePreferenceCategory
 import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceLifecycleContext

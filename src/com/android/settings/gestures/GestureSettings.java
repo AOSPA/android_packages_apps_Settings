@@ -27,6 +27,7 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.List;
 
+// LINT.IfChange
 @SearchIndexable
 public class GestureSettings extends DashboardFragment {
 
@@ -75,3 +76,4 @@ public class GestureSettings extends DashboardFragment {
                 }
             };
 }
+// LINT.ThenChange(GestureSettingsApiScreen.kt)

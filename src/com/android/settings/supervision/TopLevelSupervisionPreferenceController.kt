@@ -25,6 +25,8 @@ import com.android.settings.SettingsActivity.EXTRA_IS_SECOND_LAYER_PAGE
 import com.android.settings.Utils
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController
 import com.android.settings.core.BasePreferenceController
+import com.android.settings.supervision.shared.getSupervisionAppInstallActivityInfo
+import com.android.settings.supervision.shared.hasNecessarySupervisionComponent
 
 /** Controller for the top level Supervision settings Preference item. */
 class TopLevelSupervisionPreferenceController(context: Context, key: String) :

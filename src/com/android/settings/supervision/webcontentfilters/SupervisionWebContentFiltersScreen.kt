@@ -28,15 +28,11 @@ import androidx.preference.SwitchPreferenceCompat
 import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.supervision.NonIndexablePreferenceCategory
 import com.android.settings.supervision.SupervisionDashboardActivity
-import com.android.settings.supervision.SupervisionSafeSearchDataStore
-import com.android.settings.supervision.SupervisionSafeSearchSwitchPreference
-import com.android.settings.supervision.SupervisionSafeSitesDataStore
-import com.android.settings.supervision.SupervisionSafeSitesSwitchPreference
 import com.android.settings.supervision.SupervisionSupportedAppPreference
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.supervision.ipc.SupportedApp
+import com.android.settings.supervision.shared.widget.NonIndexablePreferenceCategory
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider

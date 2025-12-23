@@ -40,6 +40,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.password.ChooseLockGeneric
+import com.android.settings.supervision.credentialmanagement.SupervisionPinRecoveryActivity
 import com.android.settings.testutils.MetricsRule
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
 import com.google.android.setupcompat.template.FooterBarMixin

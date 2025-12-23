@@ -29,19 +29,29 @@ class AppFunctionMetricsLogger {
         latencyMs: Long,
         context: Context,
     ) {
-        val uid =
-            try {
-                context.packageManager.getPackageUid(callingPackageName, 0)
-            } catch (e: PackageManager.NameNotFoundException) {
-                PACKAGE_ID_UNKNOWN
-            }
-
+        val uid = callingPackageName.toUid(context)
         SettingsStatsLog.write(
             SettingsStatsLog.SETTINGS_APP_FUNCTION_EVENT,
             functionType.toMetricsId(),
             uid,
             latencyMs,
             0,
+        )
+    }
+
+    fun logAppFunctionError(
+        callingPackageName: String,
+        errorCode: Int,
+        context: Context,
+        functionType: DeviceStateAppFunctionType? = null,
+    ) {
+        val uid = callingPackageName.toUid(context)
+        SettingsStatsLog.write(
+            SettingsStatsLog.SETTINGS_APP_FUNCTION_EVENT,
+            functionType?.toMetricsId() ?: SettingsEnums.UNKNOWN_APP_FUNCTION,
+            uid,
+            0,
+            errorCode,
         )
     }
 
@@ -62,6 +72,13 @@ class AppFunctionMetricsLogger {
                 SettingsEnums.APP_FUNCTION_ADJUST_DEVICE_STATE_BY_PERCENTAGE
             DeviceStateAppFunctionType.OFFSET_DEVICE_STATE_BY_VALUE ->
                 SettingsEnums.APP_FUNCTION_OFFSET_DEVICE_STATE_BY_VALUE
+        }
+
+    private fun String.toUid(context: Context) =
+        try {
+            context.packageManager.getPackageUid(this, 0)
+        } catch (e: PackageManager.NameNotFoundException) {
+            PACKAGE_ID_UNKNOWN
         }
 
     private companion object {

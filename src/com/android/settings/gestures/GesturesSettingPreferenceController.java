@@ -27,6 +27,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 public class GesturesSettingPreferenceController extends BasePreferenceController {
     private List<AbstractPreferenceController> mGestureControllers;
 
@@ -41,11 +42,27 @@ public class GesturesSettingPreferenceController extends BasePreferenceControlle
         if (mGestureControllers == null) {
             mGestureControllers = buildAllPreferenceControllers(mContext);
         }
+        return isSpecificControllersAvailable(mContext, mGestureControllers) ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
+    }
+
+    /**
+     * Checks if at least one of the provided gesture controllers is available.
+     *
+     * @param gestureControllers the list of gesture controllers to check
+     * @return {@code true} if at least one controller in the list is available,
+     *         {@code false} otherwise
+     */
+    public static boolean isSpecificControllersAvailable(Context context,
+            List<AbstractPreferenceController> gestureControllers) {
+        List<AbstractPreferenceController> localGestureControllers =
+                gestureControllers != null ? gestureControllers : buildAllPreferenceControllers(
+                        context);
         boolean isAvailable = false;
-        for (AbstractPreferenceController controller : mGestureControllers) {
+        for (AbstractPreferenceController controller : localGestureControllers) {
             isAvailable = isAvailable || controller.isAvailable();
         }
-        return isAvailable ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return isAvailable;
     }
 
     /**
@@ -71,3 +88,4 @@ public class GesturesSettingPreferenceController extends BasePreferenceControlle
         return controllers;
     }
 }
+// LINT.ThenChange(GestureSettingsApiScreen.kt)
