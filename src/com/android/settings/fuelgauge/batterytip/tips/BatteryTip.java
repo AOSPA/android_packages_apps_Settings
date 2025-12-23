@@ -63,7 +63,8 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         TipType.BATTERY_DEFENDER,
         TipType.DOCK_DEFENDER,
         TipType.INCOMPATIBLE_CHARGER,
-        TipType.BATTERY_WARNING
+        TipType.BATTERY_WARNING,
+        TipType.BATTERY_HEALTH
     })
     public @interface TipType {
         int SMART_BATTERY_MANAGER = 0;
@@ -78,24 +79,26 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         int DOCK_DEFENDER = 9;
         int INCOMPATIBLE_CHARGER = 10;
         int BATTERY_WARNING = 11;
+        int BATTERY_HEALTH = 12;
     }
 
     @VisibleForTesting static final SparseIntArray TIP_ORDER;
 
     static {
         TIP_ORDER = new SparseIntArray();
-        TIP_ORDER.append(TipType.BATTERY_SAVER, 0);
-        TIP_ORDER.append(TipType.LOW_BATTERY, 1);
-        TIP_ORDER.append(TipType.BATTERY_DEFENDER, 2);
-        TIP_ORDER.append(TipType.DOCK_DEFENDER, 3);
-        TIP_ORDER.append(TipType.INCOMPATIBLE_CHARGER, 4);
-        TIP_ORDER.append(TipType.APP_RESTRICTION, 5);
-        TIP_ORDER.append(TipType.HIGH_DEVICE_USAGE, 6);
-        TIP_ORDER.append(TipType.SUMMARY, 7);
-        TIP_ORDER.append(TipType.SMART_BATTERY_MANAGER, 8);
-        TIP_ORDER.append(TipType.REDUCED_BATTERY, 9);
-        TIP_ORDER.append(TipType.REMOVE_APP_RESTRICTION, 10);
-        TIP_ORDER.append(TipType.BATTERY_WARNING, 11);
+        TIP_ORDER.append(TipType.BATTERY_HEALTH, 0);
+        TIP_ORDER.append(TipType.BATTERY_SAVER, 1);
+        TIP_ORDER.append(TipType.LOW_BATTERY, 2);
+        TIP_ORDER.append(TipType.BATTERY_DEFENDER, 3);
+        TIP_ORDER.append(TipType.DOCK_DEFENDER, 4);
+        TIP_ORDER.append(TipType.INCOMPATIBLE_CHARGER, 5);
+        TIP_ORDER.append(TipType.APP_RESTRICTION, 6);
+        TIP_ORDER.append(TipType.HIGH_DEVICE_USAGE, 7);
+        TIP_ORDER.append(TipType.SUMMARY, 8);
+        TIP_ORDER.append(TipType.SMART_BATTERY_MANAGER, 9);
+        TIP_ORDER.append(TipType.REDUCED_BATTERY, 10);
+        TIP_ORDER.append(TipType.REMOVE_APP_RESTRICTION, 11);
+        TIP_ORDER.append(TipType.BATTERY_WARNING, 12);
     }
 
     private static final String KEY_PREFIX = "key_battery_tip";
