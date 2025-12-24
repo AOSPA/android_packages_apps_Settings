@@ -30,6 +30,7 @@ import com.android.settingslib.widget.FooterPreference;
 /**
  * Spatial audio settings located in the sound menu
  */
+// LINT.IfChange
 @SearchIndexable
 public class SpatialAudioSettings extends DashboardFragment {
 
@@ -68,3 +69,4 @@ public class SpatialAudioSettings extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.spatial_audio_settings);
 }
+// LINT.ThenChange(SpatialAudioApiScreen.kt)
