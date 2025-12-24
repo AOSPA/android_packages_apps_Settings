@@ -23,6 +23,7 @@ import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 
 /** Controller to enter battery information page. */
+// LINT.IfChange
 public class BatteryInfoPreferenceController extends BasePreferenceController {
 
     private final BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
@@ -39,3 +40,4 @@ public class BatteryInfoPreferenceController extends BasePreferenceController {
                 : UNSUPPORTED_ON_DEVICE;
     }
 }
+// LINT.ThenChange(BatteryInfoApiScreen.kt)

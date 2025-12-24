@@ -21,7 +21,6 @@ import android.content.Intent
 import android.content.res.Resources
 import android.media.AudioManager
 import android.os.Vibrator
-import android.platform.test.annotations.EnableFlags
 import android.provider.Settings.System.APPLY_RAMPING_RINGER
 import android.provider.Settings.System.KEYBOARD_VIBRATION_ENABLED
 import android.provider.Settings.System.NOTIFICATION_VIBRATION_INTENSITY
@@ -105,7 +104,6 @@ class VibrationScreenTest : SettingsCatalystTestCase() {
         assertThat(preferenceScreenCreator.isAvailable(context)).isTrue()
     }
 
-    @EnableFlags(Flags.FLAG_CATALYST_VIBRATION_INTENSITY_SCREEN_25Q4)
     @Test
     fun mainSwitchClick_withIntensitiesSet_disablesAndUnchecksAllIntensitiesAndPreservesStorage() {
         val intensityKeys = findVibrationIntensitySwitchPreferences()
@@ -163,7 +161,6 @@ class VibrationScreenTest : SettingsCatalystTestCase() {
         }
     }
 
-    @EnableFlags(Flags.FLAG_CATALYST_VIBRATION_INTENSITY_SCREEN_25Q4)
     @Test
     fun ringerModeChange_disablesOnlyRingAndNotificationOnSilentMode() {
         setRingerMode(AudioManager.RINGER_MODE_NORMAL)
@@ -226,7 +223,6 @@ class VibrationScreenTest : SettingsCatalystTestCase() {
         }
     }
 
-    @EnableFlags(Flags.FLAG_CATALYST_VIBRATION_INTENSITY_SCREEN_25Q4)
     @Test
     fun ringVibrationChange_disablesRampingRingerAndPreservesStorage() {
         // Setup initial ring vibration and ramping ringer.

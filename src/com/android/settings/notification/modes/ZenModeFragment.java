@@ -93,8 +93,6 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         prefControllers.add(
                 new ManualDurationPreferenceController(
                         context, "mode_manual_duration", this, mBackend));
-        prefControllers.add(
-                new ZenModeDndSyncPreferenceController(context, "mode_sync", mBackend));
         return prefControllers;
     }
 

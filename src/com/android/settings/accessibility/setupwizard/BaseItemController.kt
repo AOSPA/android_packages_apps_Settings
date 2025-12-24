@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility.setupwizard
 
+import androidx.fragment.app.FragmentActivity
 import com.google.android.setupdesign.items.Item
 
 /**
@@ -26,7 +27,7 @@ import com.google.android.setupdesign.items.Item
  * and the [Item] UI component. It ensures that data binding and interaction logic for a single list
  * entry are encapsulated.
  */
-abstract class BaseItemController(private val targetItem: Item) {
+abstract class BaseItemController(val targetItem: Item) {
 
     /**
      * Initializes the controller by locating the target [Item].
@@ -47,6 +48,25 @@ abstract class BaseItemController(private val targetItem: Item) {
      */
     protected abstract fun bindData(item: Item)
 
-    /** Action to perform when the managed item is selected or clicked. */
-    abstract fun onItemSelected()
+    /**
+     * Called when the controller becomes active or visible to the user.
+     *
+     * Use this to register listeners, start observers, or refresh data that may have changed while
+     * the controller was stopped.
+     */
+    open fun onStart() {}
+
+    /**
+     * Called when the controller is no longer active or visible.
+     *
+     * Use this to unregister listeners or perform cleanup to prevent memory leaks.
+     */
+    open fun onStop() {}
+
+    /**
+     * Action to perform when the managed item is selected or clicked.
+     *
+     * @param activity The activity currently handling the selection callback.
+     */
+    abstract fun onItemSelected(activity: FragmentActivity)
 }

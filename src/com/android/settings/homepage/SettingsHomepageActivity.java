@@ -720,14 +720,12 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     private void initHomepageContainer() {
-        if (Flags.extendedScreenshotsExcludeNestedScrollables()) {
-            // Force scroll capture to select the NestedScrollView, instead of the non-scrollable
-            // RecyclerView which is contained inside it with no height constraint.
-            final View scrollableContainer = findViewById(R.id.main_content_scrollable_container);
-            if (scrollableContainer != null) {
-                scrollableContainer.setScrollCaptureHint(
-                        View.SCROLL_CAPTURE_HINT_EXCLUDE_DESCENDANTS);
-            }
+        // Force scroll capture to select the NestedScrollView, instead of the non-scrollable
+        // RecyclerView which is contained inside it with no height constraint.
+        final View scrollableContainer = findViewById(R.id.main_content_scrollable_container);
+        if (scrollableContainer != null) {
+            scrollableContainer.setScrollCaptureHint(
+                    View.SCROLL_CAPTURE_HINT_EXCLUDE_DESCENDANTS);
         }
     }
 

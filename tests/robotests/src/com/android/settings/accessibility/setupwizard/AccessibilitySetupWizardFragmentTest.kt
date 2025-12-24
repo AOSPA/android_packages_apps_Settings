@@ -21,7 +21,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.drawable.ColorDrawable
-import android.os.Looper
 import android.view.accessibility.AccessibilityManager
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
@@ -42,7 +41,6 @@ import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.spy
 import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
 
@@ -70,19 +68,20 @@ class AccessibilitySetupWizardFragmentTest {
 
     @Test
     fun onViewCreated_hasCorrectTitleAndDescription() {
-        val scenario = launchFragment()
+        launchFragment().use { scenario ->
+            scenario.onFragment { fragment ->
+                val layout =
+                    fragment
+                        .requireView()
+                        .findViewById<GlifRecyclerLayout>(R.id.accessibility_suw_screen_layout)
 
-        scenario.onFragment { fragment ->
-            val layout =
-                fragment
-                    .requireView()
-                    .findViewById<GlifRecyclerLayout>(R.id.accessibility_suw_screen_layout)
-
-            val headerText = layout.headerTextView.text
-            assertThat(headerText).isEqualTo(appContext.getString(R.string.vision_settings_title))
-            val descriptionText = layout.descriptionTextView.text
-            assertThat(descriptionText)
-                .isEqualTo(appContext.getString(R.string.vision_settings_description))
+                val headerText = layout.headerTextView.text
+                assertThat(headerText)
+                    .isEqualTo(appContext.getString(R.string.vision_settings_title))
+                val descriptionText = layout.descriptionTextView.text
+                assertThat(descriptionText)
+                    .isEqualTo(appContext.getString(R.string.vision_settings_description))
+            }
         }
     }
 
@@ -100,31 +99,29 @@ class AccessibilitySetupWizardFragmentTest {
             )
         a11yManager.setInstalledAccessibilityServiceList(listOf(talkBackInfo, selectToSpeakInfo))
 
-        val scenario = launchFragment()
-        shadowOf(Looper.getMainLooper()).idle()
+        launchFragment().use { scenario ->
+            scenario.onFragment { fragment ->
+                val screenReaderItem = findItem(fragment, R.id.screen_reader_in_suw)
+                assertThat(screenReaderItem?.isVisible).isTrue()
+                assertThat(screenReaderItem?.title).isEqualTo(TEST_SCREEN_READER_LABEL)
 
-        scenario.onFragment { fragment ->
-            val screenReaderItem = findItem(fragment, R.id.screen_reader_in_suw)
-            assertThat(screenReaderItem?.isVisible).isTrue()
-            assertThat(screenReaderItem?.title).isEqualTo(TEST_SCREEN_READER_LABEL)
-
-            val selectToSpeakItem = findItem(fragment, R.id.select_to_speak_in_suw)
-            assertThat(selectToSpeakItem?.isVisible).isTrue()
-            assertThat(selectToSpeakItem?.title).isEqualTo(TEST_SELECT_TO_SPEAK_LABEL)
+                val selectToSpeakItem = findItem(fragment, R.id.select_to_speak_in_suw)
+                assertThat(selectToSpeakItem?.isVisible).isTrue()
+                assertThat(selectToSpeakItem?.title).isEqualTo(TEST_SELECT_TO_SPEAK_LABEL)
+            }
         }
     }
 
     @Test
     fun onViewCreated_noServicesInstalled_hidesItems() {
-        val scenario = launchFragment()
-        shadowOf(Looper.getMainLooper()).idle()
+        launchFragment().use { scenario ->
+            scenario.onFragment { fragment ->
+                val screenReaderItem = findItem(fragment, R.id.screen_reader_in_suw)
+                assertThat(screenReaderItem?.isVisible).isFalse()
 
-        scenario.onFragment { fragment ->
-            val screenReaderItem = findItem(fragment, R.id.screen_reader_in_suw)
-            assertThat(screenReaderItem?.isVisible).isFalse()
-
-            val selectToSpeakItem = findItem(fragment, R.id.select_to_speak_in_suw)
-            assertThat(selectToSpeakItem?.isVisible).isFalse()
+                val selectToSpeakItem = findItem(fragment, R.id.select_to_speak_in_suw)
+                assertThat(selectToSpeakItem?.isVisible).isFalse()
+            }
         }
     }
 

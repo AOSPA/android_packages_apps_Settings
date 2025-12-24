@@ -25,6 +25,7 @@ import android.graphics.drawable.Drawable
 import android.view.accessibility.AccessibilityManager
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.toDrawable
+import androidx.fragment.app.FragmentActivity
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settingslib.utils.ThreadUtils
@@ -62,7 +63,7 @@ class AccessibilityServiceItemController(
         }
     }
 
-    override fun onItemSelected() {
+    override fun onItemSelected(activity: FragmentActivity) {
         // TODO (b/467926454): Navigate to a new screen or toggle the feature state
     }
 
