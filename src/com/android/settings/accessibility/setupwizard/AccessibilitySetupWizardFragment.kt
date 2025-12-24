@@ -41,6 +41,9 @@ class AccessibilitySetupWizardFragment() : BaseSetupWizardFragment() {
                     AccessibilityServiceItemController(context, it, selectToSpeakComponent),
                 )
             }
+            findItem(adapter, R.id.text_reading_options_in_suw)?.let {
+                put(R.id.text_reading_options_in_suw, TextReadingItemController(it))
+            }
             findItem(adapter, R.id.screen_magnification_in_suw)?.let {
                 put(R.id.screen_magnification_in_suw, MagnificationItemController(it))
             }
