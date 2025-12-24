@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// LINT.IfChange
 /**
  * Wi-Fi Hotspot Security Settings
  */
@@ -118,3 +119,4 @@ public class WifiHotspotSecuritySettings extends DashboardFragment implements
         FeatureFactory.getFeatureFactory().getWifiFeatureProvider().verboseLog(TAG, msg);
     }
 }
+// LINT.ThenChange(WifiHotspotSecurityApiScreen.kt)
