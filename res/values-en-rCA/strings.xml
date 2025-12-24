@@ -1349,6 +1349,10 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"High resolution"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Max resolution"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Max resolution uses more of your battery. Switching your resolution may cause some apps to restart."</string>
+    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
+    <skip />
+    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
+    <skip />
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> by <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2500,7 +2504,6 @@
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Accessibility button shortcut"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Volume keys shortcut"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Triple tap shortcut"</string>
-    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"%1$d-finger double tap shortcut"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Quick Settings shortcut"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Accessibility gesture shortcut"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"To use this feature, tap the accessibility button <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> at the bottom of your screen.\n\nTo switch between features, touch &amp; hold the accessibility button."</string>
@@ -2536,11 +2539,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Volume keys"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"volume keys"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Press and hold both volume keys"</string>
-    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"%1$d-finger double tap"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Quickly tap the screen twice with %1$d fingers"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Triple tap"</string>
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Quickly tap the screen %1$d times. This may slow down your device."</string>
-    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"%1$d-finger double tap"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"triple tap"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Keyboard shortcut"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Press <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> to use <xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -2585,7 +2585,8 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Turns on dark theme for your device and apps that support dark theme"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Expanded"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Expanded dark theme"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Automatically applies dark theme to most apps that don\'t support it. This can improve accessibility and readability, but may cause some apps to display incorrectly."</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
+    <skip />
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"force invert, colour inversion, contrast"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Expanded dark theme"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Expanded dark theme settings"</string>
@@ -5058,6 +5059,12 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Turn off %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Turn off this service?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Saved info like passwords, passkeys, payment methods, and other info won\'t be filled in when you sign in. To use your saved info, choose a password, passkey, or data service."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Passwords, passkeys &amp; accounts"</string>
+    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
+    <skip />
+    <string name="accounts_and_backup_title" msgid="2841026269835953207">"Accounts and backup"</string>
+    <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Back up data, copy data from another device"</string>
+    <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Manage accounts"</string>
+    <string name="accounts_and_backup_backup_category_title" msgid="807568201052547222">"Back up or copy data"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Turn off all services?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Passwords, passkeys, and other saved info won\'t be available for autofill when you sign in"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Change your preferred service to &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; New passwords, passkeys, and other info will be saved here from now on. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; may use what\'s on your screen to determine what can be autofilled"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Use %1$s?"</string>
@@ -6058,16 +6065,29 @@
     <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
-    <string name="safety_center_device_finders_search_terms" msgid="2703625009760905100"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"Updates"</string>
+    <string name="safety_center_security_update_search_terms" msgid="545517841376162382">"Updates, Update, Security update, Security updates"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"Network type, encryption, notification controls"</string>
+    <string name="safety_center_android_lock_screen_search_terms" msgid="4741569259158180141">"Device lock, Screen lock, Lock screen, Lockscreen, Password, Pin, Pattern, Lock, Unlock"</string>
+    <string name="safety_center_fingerprint_unlock_search_terms" msgid="954519907845160433">"Fingerprint, Finger, Add fingerprint"</string>
+    <string name="safety_center_face_unlock_search_terms" msgid="2994457346086700870">"Face unlock, Face"</string>
+    <string name="safety_center_wear_unlock_search_terms" msgid="6289459571308806285">"Watch, Watch unlock"</string>
+    <string name="safety_center_backup_search_terms" msgid="5652327131910333830">"Backup"</string>
+    <string name="safety_center_permission_manager_search_terms" msgid="1303866079616216426">"Permissions, Permissions manager"</string>
+    <string name="safety_center_health_connect_search_terms" msgid="1323524144779175830">"Health, Health Connect"</string>
+    <string name="safety_center_app_data_sharing_updates_search_terms" msgid="2041373488015575634">"Data, Data sharing, Data sharing updates, Data sharing updates for location, sharing"</string>
+    <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"Privacy, Privacy dashboard"</string>
+    <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"Private Space"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"More alerts"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Less alerts"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Dismissed alerts"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Dismiss this alert?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Review your security and privacy settings any time to add more protection"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Action complete"</string>
+    <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Security and privacy quick settings"</string>
+    <string name="privacy_controls_qs" msgid="1774718598801606190">"Your privacy controls"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Pairing"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> connected"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Scan Device"</string>
