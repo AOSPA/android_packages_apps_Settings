@@ -1349,6 +1349,10 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolução"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Resolução máxima"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"A resolução máxima consome mais bateria. A troca de resolução pode fazer com que alguns apps sejam reiniciados."</string>
+    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
+    <skip />
+    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
+    <skip />
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> por <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2371,7 +2375,7 @@
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Configurações de acessibilidade"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Exibição, interação, áudio"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"Configurações visuais"</string>
-    <string name="vision_settings_description" msgid="7614894785054441991">"Você pode personalizar este dispositivo do jeito que quiser. Esses recursos de acessibilidade podem ser alterados depois nas Configurações."</string>
+    <string name="vision_settings_description" msgid="7614894785054441991">"Você pode personalizar este dispositivo do jeito que quiser. Estes recursos de acessibilidade podem ser alterados depois nas Configurações."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Mudar o tamanho da fonte"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Leitor de tela"</string>
     <string name="keyboard_category_title" msgid="6841712758039893220">"Opções de teclado físico"</string>
@@ -2485,9 +2489,9 @@
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Mudar a exibição do texto"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Assunto: Balões de ar quente"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"De: Bruno"</string>
-    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Bom dia.\n\nEu só queria saber como a criação dos designs está indo. Eles vão estar prontos antes de começarmos a criar os novos balões?"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Bom dia!\n\nSó queria saber como a criação dos designs está indo. Eles vão estar prontos antes de começarmos a montagem dos novos balões?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Redefinir configurações"</string>
-    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"As configurações de fonte e o tamanho da exibição foram redefinidos"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Os tamanhos de texto e de exibição foram redefinidos"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Redefinir texto e tamanho de exibição?"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Redefinir"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Algum plano para o fim de semana?"</string>
@@ -2508,7 +2512,6 @@
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Atalho para o botão de acessibilidade"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Atalho para teclas de volume"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Atalho para tocar três vezes"</string>
-    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Atalho para tocar duas vezes com %1$d dedos"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Atalho para Configurações Rápidas"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Atalho para o gesto de acessibilidade"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Para usar esse recurso, toque no botão de acessibilidade <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na parte de baixo da tela.\n\nPara mudar de recurso, toque no botão de acessibilidade e mantenha-o pressionado."</string>
@@ -2544,11 +2547,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Teclas de volume"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"teclas de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Toque e mantenha as duas teclas de volume pressionadas."</string>
-    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Toque duplo com %1$d dedos"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Toque rapidamente na tela 2 vezes com %1$d dedos"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Toque triplo"</string>
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Toque rapidamente na tela %1$d vezes. Isso pode deixar o dispositivo mais lento."</string>
-    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Tocar duas vezes com %1$d dedos na tela"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"toque triplo"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Atalho do teclado"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Pressione <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> para usar <xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -2593,7 +2593,8 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Ativa o tema escuro no dispositivo e nos apps compatíveis com essa opção"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Expandido"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Tema escuro ampliado"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Aplica automaticamente o tema escuro à maioria dos apps que não têm essa opção. Isso pode melhorar a acessibilidade e a legibilidade, mas talvez alguns apps sejam mostrados incorretamente."</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
+    <skip />
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"forçar inversão, inversão de cores, contraste"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema escuro ampliado"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Configurações do tema escuro ampliado"</string>
@@ -4606,7 +4607,7 @@
     <string name="camera_gesture_title" msgid="5559439253128696180">"Girar duas vezes para abrir a câmera"</string>
     <string name="camera_gesture_desc" msgid="7557645057320805328">"Abrir o app Câmera girando o pulso duas vezes"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"Tamanho de exibição"</string>
-    <string name="screen_zoom_short_summary" msgid="756254364808639194">"Deixe tudo maior ou menor"</string>
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"Aumente ou diminua tudo"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"densidade de exibição, zoom da tela, escala, dimensionamento"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Visualização"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="6268455784510593120">"Diminuir o tamanho de exibição"</string>
@@ -5071,6 +5072,16 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Desativar %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Desativar este serviço?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Senhas, chaves de acesso, formas de pagamento e outras informações salvas não serão preenchidas quando você fizer login. Para usar suas informações salvas, escolha uma senha, uma chave de acesso ou um serviço de dados."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Senhas, chaves de acesso e contas"</string>
+    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_title (2841026269835953207) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_summary (4126659439608747174) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_manage_accounts_title (1034959782380418930) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_backup_category_title (807568201052547222) -->
+    <skip />
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Desativar todos os serviços?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Senhas, chaves de acesso e outras informações salvas não estarão disponíveis para preenchimento automático quando você fizer login."</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Mudar seu serviço favorito para o &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Novas senhas, chaves de acesso e outras informações serão salvas aqui a partir de agora. O &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; pode usar o que aparece na tela para determinar o que pode ser preenchido automaticamente"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Usar %1$s?"</string>
@@ -6072,16 +6083,42 @@
     <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
-    <string name="safety_center_device_finders_search_terms" msgid="2703625009760905100"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"Atualizações"</string>
+    <!-- no translation found for safety_center_security_update_search_terms (545517841376162382) -->
+    <skip />
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"Tipo de rede, criptografia, controles de notificação"</string>
+    <!-- no translation found for safety_center_android_lock_screen_search_terms (4741569259158180141) -->
+    <skip />
+    <!-- no translation found for safety_center_fingerprint_unlock_search_terms (954519907845160433) -->
+    <skip />
+    <!-- no translation found for safety_center_face_unlock_search_terms (2994457346086700870) -->
+    <skip />
+    <!-- no translation found for safety_center_wear_unlock_search_terms (6289459571308806285) -->
+    <skip />
+    <!-- no translation found for safety_center_backup_search_terms (5652327131910333830) -->
+    <skip />
+    <!-- no translation found for safety_center_permission_manager_search_terms (1303866079616216426) -->
+    <skip />
+    <!-- no translation found for safety_center_health_connect_search_terms (1323524144779175830) -->
+    <skip />
+    <!-- no translation found for safety_center_app_data_sharing_updates_search_terms (2041373488015575634) -->
+    <skip />
+    <!-- no translation found for safety_center_permission_usage_search_terms (3015527940068111714) -->
+    <skip />
+    <!-- no translation found for safety_center_private_space_search_terms (6748750858253093118) -->
+    <skip />
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Mais alertas"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Menos alertas"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Alertas dispensados"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Dispensar esse alerta?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Revise suas configurações de segurança e privacidade a qualquer momento para aumentar a proteção"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Ação concluída"</string>
+    <!-- no translation found for safety_center_qs_page_landing (1024103851758565938) -->
+    <skip />
+    <!-- no translation found for privacy_controls_qs (1774718598801606190) -->
+    <skip />
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Pareando"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Dispositivo conectado: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Verificar dispositivo"</string>

@@ -124,6 +124,11 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
     ) {
         val appFunctionType = DeviceStateAppFunctionType.fromId(request.functionIdentifier)
         if (appFunctionType == null) {
+            metricsLogger.logAppFunctionError(
+                callingPackage,
+                ERROR_FUNCTION_NOT_FOUND,
+                applicationContext,
+            )
             callback.onError(
                 AppFunctionException(
                     ERROR_FUNCTION_NOT_FOUND,
@@ -137,6 +142,12 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
             shouldCheckForDeviceLock(request.parameters, appFunctionType) &&
                 applicationContext.getSystemService(KeyguardManager::class.java).isDeviceLocked
         ) {
+            metricsLogger.logAppFunctionError(
+                callingPackage,
+                ERROR_DENIED,
+                applicationContext,
+                appFunctionType,
+            )
             callback.onError(
                 AppFunctionException(
                     ERROR_DENIED,
@@ -154,6 +165,12 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
             Trace.beginSection("DeviceStateAppFunction ${request.functionIdentifier}")
             Log.d(TAG, "device state app function ${request.functionIdentifier} called.")
             if (!aggregators.containsKey(appFunctionType)) {
+                metricsLogger.logAppFunctionError(
+                    callingPackage,
+                    ERROR_FUNCTION_NOT_FOUND,
+                    applicationContext,
+                    appFunctionType,
+                )
                 callback.onError(
                     AppFunctionException(
                         ERROR_FUNCTION_NOT_FOUND,
