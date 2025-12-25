@@ -36,6 +36,7 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference;
 import java.util.HashMap;
 import java.util.Map;
 
+// LINT.IfChange
 /**
  * Wi-Fi Hotspot Speed & compatibility Settings
  */
@@ -147,3 +148,4 @@ public class WifiHotspotSpeedSettings extends DashboardFragment implements
         FeatureFactory.getFeatureFactory().getWifiFeatureProvider().verboseLog(TAG, msg);
     }
 }
+// LINT.ThenChange(WifiHotspotSpeedApiScreen.kt)
