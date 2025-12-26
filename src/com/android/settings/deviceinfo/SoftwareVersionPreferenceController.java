@@ -1,4 +1,3 @@
-// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 /*
 Copyright (c) 2019, The Linux Foundation. All rights reserved.
 
@@ -71,5 +70,4 @@ public class SoftwareVersionPreferenceController extends BasePreferenceControlle
     public String getPreferenceKey() {
         return PREF_KEY;
     }
-// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 }
