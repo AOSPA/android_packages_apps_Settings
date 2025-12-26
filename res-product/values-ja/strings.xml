@@ -49,6 +49,10 @@
     <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="505214056751470551">"アプリが Bluetooth を ON にして他のデバイスにこのタブレットを表示しようとしています。これは後から Bluetooth の設定で変更できます。"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="6187216564831513193">"アプリが Bluetooth を ON にして他のデバイスにこのスマートフォンを表示しようとしています。これは後から Bluetooth の設定で変更できます。"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="desktop" msgid="1296067140931944135">"アプリが Bluetooth を ON にして他のデバイスにこのデバイスを表示しようとしています。これは後から Bluetooth の設定で変更できます。"</string>
+    <string name="bluetooth_hearing_device_input_routing_builtin_option" product="default" msgid="604940407490893699">"このスマートフォンのマイク"</string>
+    <string name="bluetooth_hearing_device_input_routing_builtin_option" product="desktop" msgid="899174913125357494">"このデバイスのマイク"</string>
+    <string name="bluetooth_audio_routing_summary" product="default" msgid="7087659154407454242">"補聴器またはスマートフォンのスピーカーに音を転送します"</string>
+    <string name="bluetooth_audio_routing_summary" product="desktop" msgid="4537882886747949240">"補聴器またはデバイスのスピーカーに音を転送します"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="3741475436042800617">"スマートフォンの暗号化"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="2220021007677215054">"デバイスの暗号化"</string>
     <string name="encryption_and_credential_settings_summary" product="desktop" msgid="2220021007677215054">"デバイスの暗号化"</string>
@@ -123,6 +127,26 @@
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="6983939010814873996"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="6983939010814873996"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="desktop" msgid="6983939010814873996"></string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" product="default" msgid="8906620058505772369">"顔認証を使用して、スマートフォンのロック解除や購入の承認を行うことができます。\n\n注: このデバイスのロック解除に顔認証を使用することはできません。詳しくは、組織の管理者にお問い合わせください。"</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" product="desktop" msgid="8527453843561896568">"顔認証を使用して、デバイスのロック解除や購入の承認を行うことができます。\n\n注: このデバイスのロック解除に顔認証を使用することはできません。詳しくは、組織の管理者にお問い合わせください。"</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" product="default" msgid="5667326364825190475">"顔認証を使用して、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます"</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" product="desktop" msgid="8153291564425666563">"顔認証を使用して、デバイスのロック解除、購入の承認、アプリへのログインを行うことができます"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" product="default" msgid="827881183869443564">"現在の顔モデルを削除して顔認証をもう一度設定してください。\n\n顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロック解除やアプリでの認証を行うには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" product="desktop" msgid="5610667230794771663">"現在の顔モデルを削除して顔認証をもう一度設定してください。\n\n顔モデルは安全かつ完全に削除されます。\n\n削除後に、デバイスのロック解除やアプリでの認証を行うには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" product="default" msgid="657898108282284896">"現在の顔モデルを削除して顔認証をもう一度設定してください。\n\n顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロック解除やアプリでの認証を行うには、指紋、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" product="desktop" msgid="6944214629283384636">"現在の顔モデルを削除して顔認証をもう一度設定してください。\n\n顔モデルは安全かつ完全に削除されます。\n\n削除後に、デバイスのロック解除やアプリでの認証を行うには、指紋、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_settings_require_attention_details" product="default" msgid="9055569538299306139">"スマートフォンのロックを解除する際に、目を開いていることを確認します"</string>
+    <string name="security_settings_face_settings_require_attention_details" product="desktop" msgid="6708465338217767003">"デバイスのロックを解除する際に、目を開いていることを確認します"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" product="default" msgid="631912351020557148">"顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロック解除やアプリでの認証を行うには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" product="desktop" msgid="6371830907687898599">"顔モデルは安全かつ完全に削除されます。\n\n削除後に、デバイスのロック解除やアプリでの認証を行うには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" product="default" msgid="4067458308624865583">"顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロックを解除するには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" product="desktop" msgid="8773532142993444478">"顔モデルは安全かつ完全に削除されます。\n\n削除後に、デバイスのロックを解除するには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint" product="default" msgid="3697170798827306695">"顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロック解除やアプリでの認証を行うには、指紋、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint" product="desktop" msgid="540277269419613514">"顔モデルは安全かつ完全に削除されます。\n\n削除後に、デバイスのロック解除やアプリでの認証を行うには、指紋、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint_conv" product="default" msgid="7229672458856399521">"顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロックを解除するには、指紋、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint_conv" product="desktop" msgid="2106529501669220799">"顔モデルは安全かつ完全に削除されます。\n\n削除後に、デバイスのロックを解除するには、指紋、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_settings_context_subtitle" product="default" msgid="1322898999413079369">"顔認証を使用してスマートフォンのロックを解除できます"</string>
+    <string name="security_settings_face_settings_context_subtitle" product="desktop" msgid="8193725713604149575">"顔認証を使用してデバイスのロックを解除できます"</string>
     <string name="security_settings_face_settings_footer" product="default" msgid="3036403896485044957">"顔を使って、スマートフォンのロック解除やアプリでの認証（ログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\nスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもスマートフォンのロックが解除されることがあります。"</string>
     <string name="security_settings_face_settings_footer" product="tablet" msgid="3467711032275909082">"顔を使って、タブレットのロック解除やアプリでの認証（ログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nタブレットに無意識に顔を向けても、ロックが解除されることがあります。\n\nタブレットを顔に近づけられた場合、他のユーザーによってタブレットのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもタブレットのロックが解除されることがあります。"</string>
     <string name="security_settings_face_settings_footer" product="device" msgid="6237815625247917310">"顔を使って、デバイスのロック解除やアプリでの認証（ログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nデバイスに無意識に顔を向けても、ロックが解除されることがあります。\n\nデバイスを顔に近づけられた場合、他のユーザーによってデバイスのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもデバイスのロックが解除されることがあります。"</string>
@@ -176,10 +200,96 @@
     <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="7398339851724524558">"指紋を使ってデバイストのロック解除や本人確認（アプリへのログインなど）を行えるようにします。"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="5376408603508393038">"指紋を使ってスマートフォンのロック解除や本人確認（アプリへのログインなど）を行えるようにします。"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="desktop" msgid="7398339851724524558">"指紋を使ってデバイストのロック解除や本人確認（アプリへのログインなど）を行えるようにします。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" product="default" msgid="8536395298073746085">"指紋認証を使用して、スマートフォンのロック解除や購入の承認を行うことができます。\n\n注: このデバイスのロック解除に指紋認証を使用することはできません。詳しくは、組織の管理者にお問い合わせください。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" product="desktop" msgid="1449873608291132102">"指紋認証を使用して、デバイスのロック解除や購入の承認を行うことができます。\n\n注: このデバイスのロック解除に指紋認証を使用することはできません。詳しくは、組織の管理者にお問い合わせください。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_message" product="default" msgid="548895260855476885">"ウォッチ認証を使用すると、指が濡れているときや顔が認識されないときなどでも、このスマートフォンをロック解除できます。\n\nスマートウォッチからこのスマートフォンをロック解除する手順は次のとおりです。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_message" product="desktop" msgid="6975912914017982596">"ウォッチ認証を使用すると、指が濡れているときや顔が認識されないときなどでも、このデバイスをロック解除できます。\n\nスマートウォッチからこのデバイスをロック解除する手順は次のとおりです。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_lock_open" product="default" msgid="5036235531555790028">"スマートウォッチをロック解除し、手首に着けて、このスマートフォンに近づける必要があります。すでに着けている場合は、スマートウォッチを再びロック解除する必要はありません。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_lock_open" product="desktop" msgid="4379534816294081846">"スマートウォッチをロック解除し、手首に着けて、このデバイスに近づける必要があります。すでに着けている場合は、スマートウォッチを再びロック解除する必要はありません。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" product="default" msgid="8236871030056883849">"このスマートフォンがロック解除されると、スマートウォッチに通知が届きます。意図せずロック解除された場合は、通知をタップしてスマートフォンをもう一度ロックしてください。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" product="desktop" msgid="1186235463250896267">"このデバイスがロック解除されると、スマートウォッチに通知が届きます。意図せずロック解除された場合は、通知をタップしてデバイスをもう一度ロックしてください。"</string>
+    <string name="security_settings_remoteauth_enroll_finish_description" product="default" msgid="553477510982159386">"ロック画面で上にスワイプするか通知をタップして、スマートウォッチからスマートフォンをロック解除できるようになりました"</string>
+    <string name="security_settings_remoteauth_enroll_finish_description" product="desktop" msgid="7745250450395684994">"ロック画面で上にスワイプするか通知をタップして、スマートウォッチからデバイスをロック解除できるようになりました"</string>
+    <string name="security_settings_remoteauth_settings_description" product="default" msgid="507676718189793752">"ロック画面で上にスワイプするか通知をタップして、スマートウォッチからスマートフォンをロック解除できます"</string>
+    <string name="security_settings_remoteauth_settings_description" product="desktop" msgid="4266751960630500666">"ロック画面で上にスワイプするか通知をタップして、スマートウォッチからデバイスをロック解除できます"</string>
+    <string name="security_settings_remoteauth_settings_info_footer" product="default" msgid="7176165099467997157">"ウォッチ認証を使用するには、スマートウォッチがロック解除されていること、手首に装着されていること、このスマートフォンの近くにあること、このスマートフォンと接続済みであることが必要です。接続が中断された場合、ウォッチ認証を使用するにはスマートフォンをロック解除する必要があります。\n\n注意事項:\n一度にセットアップできるスマートウォッチは 1 つだけです。他のスマートウォッチを追加するには、セットアップ済みのスマートウォッチを削除してください。"</string>
+    <string name="security_settings_remoteauth_settings_info_footer" product="desktop" msgid="4888346924492807836">"ウォッチ認証を使用するには、スマートウォッチがロック解除されていること、手首に装着されていること、このデバイスの近くにあること、このデバイスと接続済みであることが必要です。接続が中断された場合、ウォッチ認証を使用するにはデバイスをロック解除する必要があります。\n\n注意事項:\n一度にセットアップできるスマートウォッチは 1 つだけです。他のスマートウォッチを追加するには、セットアップ済みのスマートウォッチを削除してください。"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="9034560319613439593">"タブレットを保護者に渡してください"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="2149647165743006307">"デバイスを保護者に渡してください"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="2060265104488529949">"スマートフォンを保護者に渡してください"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="desktop" msgid="2149647165743006307">"デバイスを保護者に渡してください"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="8858463763101227881">"顔認証と指紋認証を設定した場合、マスク着用時や暗い場所にいるときは指紋認証が求められます。\n\nウォッチ認証を使用すると、指が濡れているときや顔が認識されないときなどでも、スマートフォンをロック解除できます。"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="desktop" msgid="5820941581053148013">"顔認証と指紋認証を設定した場合、マスク着用時や暗い場所にいるときは指紋認証が求められます。\n\nウォッチ認証を使用すると、指が濡れているときや顔が認識されないときなどでも、デバイスをロック解除できます。"</string>
+    <string name="biometric_settings_intro_with_fingerprint" product="default" msgid="7057949977059277103">"ウォッチ認証を使用すると、指紋が認識されないときなどでも、スマートフォンをロック解除できます。"</string>
+    <string name="biometric_settings_intro_with_fingerprint" product="desktop" msgid="3405074735777726953">"ウォッチ認証を使用すると、指紋が認識されないときなどでも、デバイスをロック解除できます。"</string>
+    <string name="biometric_settings_intro_with_face" product="default" msgid="2726655588847229283">"ウォッチ認証を使用すると、顔が認識されないときなどでも、スマートフォンをロック解除できます。"</string>
+    <string name="biometric_settings_intro_with_face" product="desktop" msgid="1265319569297304712">"ウォッチ認証を使用すると、顔が認識されないときなどでも、デバイスをロック解除できます。"</string>
+    <string name="biometric_settings_intro" product="default" msgid="1110080686857635531">"顔認証と指紋認証を設定した場合、マスク着用時や暗い場所にいるときは指紋認証が求められます"</string>
+    <string name="biometric_settings_intro" product="desktop" msgid="8796499771937952128">"顔認証と指紋認証を設定した場合、マスク着用時や暗い場所にいるときは指紋認証が求められます"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" product="default" msgid="3409316849691305012">"スマートフォンのロックを解除する"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" product="desktop" msgid="6393832544950099600">"デバイスのロックを解除する"</string>
+    <string name="setup_fingerprint_enroll_enrolling_skip_message" product="default" msgid="4979485905634049022">"スマートフォンのロック解除方法として指紋認証を選択しています。スキップした場合は、後でセットアップする必要があります。セットアップの所要時間は 1 分程度です。"</string>
+    <string name="setup_fingerprint_enroll_enrolling_skip_message" product="desktop" msgid="2601670958752026992">"デバイスのロック解除方法として指紋認証を選択しています。スキップした場合は、後でセットアップする必要があります。セットアップの所要時間は 1 分程度です。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" product="default" msgid="5070116742207378028">"パターンは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" product="desktop" msgid="3828076488822985960">"パターンは、紛失したり盗難に遭ったりした場合にデバイスを保護するものです"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" product="default" msgid="7919767908076245408">"パターンは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、デバイスに保存されている指紋モデルも削除されます。アプリで指紋認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" product="desktop" msgid="9116397340044675886">"パターンは、紛失したり盗難に遭ったりした場合にデバイスを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、デバイスに保存されている指紋モデルも削除されます。アプリで指紋認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face" product="default" msgid="37951657146319620">"パターンは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、顔モデルも安全かつ完全に削除されます。アプリで顔認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face" product="desktop" msgid="5949258661260705528">"パターンは、紛失したり盗難に遭ったりした場合にデバイスを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、顔モデルも安全かつ完全に削除されます。アプリで顔認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" product="default" msgid="2099587344025095004">"パターンは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、デバイスに保存されている指紋モデルが削除され、顔モデルも安全かつ完全に削除されます。アプリで顔認証や指紋認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" product="desktop" msgid="1894841959198314076">"パターンは、紛失したり盗難に遭ったりした場合にデバイスを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、デバイスに保存されている指紋モデルが削除され、顔モデルも安全かつ完全に削除されます。アプリで顔認証や指紋認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_pin" product="default" msgid="4884453290870316484">"PIN は、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです"</string>
+    <string name="unlock_disable_frp_warning_content_pin" product="desktop" msgid="2069572855122085869">"PIN は、紛失したり盗難に遭ったりした場合にデバイスを保護するものです"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" product="default" msgid="2874913409506418991">"PIN は、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、デバイスに保存されている指紋モデルも削除されます。アプリで指紋認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" product="desktop" msgid="6361691886708081331">"PIN は、紛失したり盗難に遭ったりした場合にデバイスを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、デバイスに保存されている指紋モデルも削除されます。アプリで指紋認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_pin_face" product="default" msgid="263465132877970450">"PIN は、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、顔モデルも安全かつ完全に削除されます。アプリで顔認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_pin_face" product="desktop" msgid="1495988088469298632">"PIN は、紛失したり盗難に遭ったりした場合にデバイスを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、顔モデルも安全かつ完全に削除されます。アプリで顔認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" product="default" msgid="476636556062520667">"PIN は、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、デバイスに保存されている指紋モデルが削除され、顔モデルも安全かつ完全に削除されます。アプリで顔認証や指紋認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" product="desktop" msgid="6813575631983953707">"PIN は、紛失したり盗難に遭ったりした場合にデバイスを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、デバイスに保存されている指紋モデルが削除され、顔モデルも安全かつ完全に削除されます。アプリで顔認証や指紋認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_password" product="default" msgid="1127164258200398958">"パスワードは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです"</string>
+    <string name="unlock_disable_frp_warning_content_password" product="desktop" msgid="8367036366524786060">"パスワードは、紛失したり盗難に遭ったりした場合にデバイスを保護するものです"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" product="default" msgid="4593407083619543775">"パスワードは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、デバイスに保存されている指紋モデルも削除されます。アプリで指紋認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" product="desktop" msgid="1659299201470069003">"パスワードは、紛失したり盗難に遭ったりした場合にデバイスを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、デバイスに保存されている指紋モデルも削除されます。アプリで指紋認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_password_face" product="default" msgid="2765003117110694527">"パスワードは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、顔モデルも安全かつ完全に削除されます。アプリで顔認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_password_face" product="desktop" msgid="912428236263888131">"パスワードは、紛失したり盗難に遭ったりした場合にデバイスを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、顔モデルも安全かつ完全に削除されます。アプリで顔認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint" product="default" msgid="5660327560346083891">"パスワードは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、デバイスに保存されている指紋モデルが削除され、顔モデルも安全かつ完全に削除されます。アプリで顔認証や指紋認証を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint" product="desktop" msgid="5615430301170627057">"パスワードは、紛失したり盗難に遭ったりした場合にデバイスを保護するものです。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報を削除すると、デバイスに保存されている指紋モデルが削除され、顔モデルも安全かつ完全に削除されます。アプリで顔認証や指紋認証を使用できなくなります。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7526137517192538870">"デバイス保護機能は ON になりません。このタブレットの紛失、盗難、リセット時に、他人に使用されるのを阻止することはできません。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="1350434793163709209">"デバイス保護機能は ON になりません。このデバイスの紛失、盗難、リセット時に、他人に使用されるのを阻止することはできません。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="8367731653387033354">"デバイス保護機能は ON になりません。このスマートフォンの紛失、盗難、リセット時に、他人に使用されるのを阻止することはできません。"</string>
@@ -271,6 +381,8 @@
     <string name="encrypt_title" product="tablet" msgid="8915795247786124547">"タブレットの暗号化"</string>
     <string name="encrypt_title" product="default" msgid="511146128799853404">"スマートフォンの暗号化"</string>
     <string name="encrypt_title" product="desktop" msgid="7536236095337188236">"デバイスを暗号化"</string>
+    <string name="suggested_lock_settings_title" product="default" msgid="2717909185701554381">"スマートフォンの保護"</string>
+    <string name="suggested_lock_settings_title" product="desktop" msgid="2170600598362998798">"デバイスの保護"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="8821254377043173267">"画面ロックを設定するとタブレットを保護できます"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="4863929838844014122">"画面ロックを設定するとデバイスを保護できます"</string>
     <string name="suggested_lock_settings_summary" product="default" msgid="8050809409337082738">"画面ロックを設定するとスマートフォンを保護できます"</string>
@@ -310,6 +422,8 @@
     <string name="wifi_add_app_networks_summary" product="default" msgid="7014504084783236696">"<xliff:g id="APPNAME">%1$s</xliff:g> がスマートフォンにこれらのネットワークを保存しようとしています"</string>
     <string name="wifi_add_app_networks_summary" product="tablet" msgid="6433255556506891439">"<xliff:g id="APPNAME">%1$s</xliff:g> がタブレットにこれらのネットワークを保存しようとしています"</string>
     <string name="wifi_add_app_networks_summary" product="desktop" msgid="4238956725252527159">"<xliff:g id="APPNAME">%1$s</xliff:g> がデバイスにこれらのネットワークを保存しようとしています"</string>
+    <string name="wifi_hidden_network_warning" product="default" msgid="5069866459200615493">"ネットワーク ID がルーター側からブロードキャストされていないネットワークに接続する場合は、非公開ネットワークとして設定できます。\n\n非公開ネットワークに設定すると、スマートフォンが定期的に信号をブロードキャストしてネットワークを探すため、セキュリティ上のリスクを伴います。\n\nここでネットワークを非公開に設定しても、ルーターの設定は変わりません。"</string>
+    <string name="wifi_hidden_network_warning" product="desktop" msgid="1145969827779463554">"ネットワーク ID がルーター側からブロードキャストされていないネットワークに接続する場合は、非公開ネットワークとして設定できます。\n\n非公開ネットワークに設定すると、デバイスが定期的に信号をブロードキャストしてネットワークを探すため、セキュリティ上のリスクを伴います。\n\nここでネットワークを非公開に設定しても、ルーターの設定は変わりません。"</string>
     <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"スマートフォンの縦横の向きに合わせて、画面の向きを自動的に調整します"</string>
     <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"タブレットの縦横の向きに合わせて、画面の向きを自動的に調整します"</string>
     <string name="auto_rotate_screen_summary" product="desktop" msgid="3805199344834364732">"デバイスを縦向きや横向きに動かすと、画面の向きが自動的に調整されます"</string>
@@ -547,4 +661,52 @@
     <string name="audio_sharing_confirm_dialog_content_with_link" product="desktop" msgid="668964968208427465">"音声の共有を開始するには、まず LE Audio 対応のヘッドフォンをデバイスに接続してください。"<annotation id="link">"対応デバイスについての詳細"</annotation></string>
     <string name="network_dashboard_summary_mobile" product="default" msgid="1856501121269595911">"モバイル、Wi-Fi、アクセス ポイント"</string>
     <string name="network_dashboard_summary_mobile" product="desktop" msgid="8770767156162473221">"Wi-Fi、モバイル、アクセス ポイント"</string>
+    <string name="top_intro_region_title" product="default" msgid="915184646302419632">"選択した地域によって、スマートフォン上での時刻、日付、温度などの表示形式が決まります"</string>
+    <string name="top_intro_region_title" product="desktop" msgid="4176286015398594299">"選択した地域によって、デバイス上での時刻、日付、温度などの表示形式が決まります"</string>
+    <string name="private_space_fingerprint_enroll_introduction_footer_message" product="default" msgid="5424764618312876122">"あなたの指にスマートフォンを近づけられた場合など、意図せずプライベート スペースのロックが解除されることがあります。"</string>
+    <string name="private_space_fingerprint_enroll_introduction_footer_message" product="desktop" msgid="1777628194784795967">"あなたの指にデバイスを近づけられた場合など、意図せずプライベート スペースのロックが解除されることがあります。"</string>
+    <string name="private_space_face_enroll_introduction_info_looking" product="default" msgid="305936839337361784">"スマートフォンに無意識に顔を向けても、プライベート スペースのロックが解除されることがあります。双子など、あなたによく似た人であったり、あなたの顔にデバイスを近づけられたりした場合も、ロックが解除されることがあります。"</string>
+    <string name="private_space_face_enroll_introduction_info_looking" product="desktop" msgid="7384750093083248112">"デバイスに無意識に顔を向けても、プライベート スペースのロックが解除されることがあります。双子など、あなたによく似た人であったり、あなたの顔にデバイスを近づけられたりした場合も、ロックが解除されることがあります。"</string>
+    <string name="private_space_face_settings_footer" product="default" msgid="212607111539219116">"顔認証を使用して、プライベート スペースのロックを解除できます。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\nお持ちのデバイスが自分以外の人によって顔の前に掲げられたりしても、プライベート スペースのロックが解除されることがあります。\n\n双子など、あなたによく似た人であれば、プライベート スペースのロックを解除できる可能性があります。"</string>
+    <string name="private_space_face_settings_footer" product="desktop" msgid="5379113827824389147">"顔認証を使用して、プライベート スペースのロックを解除できます。\n\n注意事項:\n 一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nデバイスを見る動作を行うと、意図していなくてもロックが解除されることがあります。\nお持ちのデバイスが自分以外の人によって顔の前に掲げられたりしても、プライベート スペースのロックが解除されることがあります。\n\n\n双子など、あなたによく似た人であれば、プライベート スペースのロックを解除できる可能性があります。"</string>
+    <string name="private_space_delete_summary" product="default" msgid="6731333342020734606">"デバイスからプライベート スペースが完全に削除されます。\n\nスペースに含まれるすべてのアプリとそのデータも、スマートフォンの"<b>"内部ストレージ"</b>"から完全に削除されます。"</string>
+    <string name="private_space_delete_summary" product="desktop" msgid="2654261524341800235">"デバイスからプライベート スペースが完全に削除されます。\n\nスペースに含まれるすべてのアプリとそのデータも、デバイスの"<b>"内部ストレージ"</b>"から完全に削除されます。"</string>
+    <string name="reset_private_space_delete_dialog" product="default" msgid="8929854517683078216">"デバイスにプライベート スペースがある場合は完全に削除され、スペースに追加されていた Google アカウントはスペースから削除されます。\n\nスペースに含まれるすべてのアプリとそのデータも、スマートフォンの"<b>"内部ストレージ"</b>"から完全に削除されます。"</string>
+    <string name="reset_private_space_delete_dialog" product="desktop" msgid="212701183647817405">"デバイスにプライベート スペースがある場合は完全に削除され、スペースに追加されていた Google アカウントはスペースから削除されます。\n\nスペースに含まれるすべてのアプリとそのデータも、デバイスの"<b>"内部ストレージ"</b>"から完全に削除されます。"</string>
+    <string name="style_suggestion_title" product="default" msgid="5542169058581069091">"スマートフォンのカスタマイズ"</string>
+    <string name="style_suggestion_title" product="desktop" msgid="6633259602241390541">"デバイスのカスタマイズ"</string>
+    <string name="storage_os_detail_dialog_system" product="default" msgid="900519793933569665">"オペレーティング システムのほか、スマートフォンを常にスムーズに動作させるために必要なファイルも含まれます。完全性を保護するため、これらのファイルにはアクセスできません。"</string>
+    <string name="storage_os_detail_dialog_system" product="desktop" msgid="6775876458851128896">"オペレーティング システムのほか、デバイスを常にスムーズに動作させるために必要なファイルも含まれます。完全性を保護するため、これらのファイルにはアクセスできません。"</string>
+    <string name="activity_not_found" product="default" msgid="6925342827420626978">"アプリがスマートフォンにインストールされていません。"</string>
+    <string name="activity_not_found" product="desktop" msgid="2440711947892938614">"アプリがデバイスにインストールされていません。"</string>
+    <string name="notification_listener_security_warning_summary" product="default" msgid="6430760593378501603">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> アプリはすべての通知を読み取ることができます。通知には、連絡先名、写真などの個人情報や受信したメッセージの本文も含まれます。また、通知をスヌーズ、非表示にしたり、電話に出るなどの通知内のボタン操作を実行したりすることもできます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
+    <string name="notification_listener_security_warning_summary" product="desktop" msgid="4220921495800674165">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> アプリはすべての通知を読み取ることができます。通知には、連絡先名、写真などの個人情報や受信したメッセージの本文も含まれます。また、通知をスヌーズしたり、閉じたり、通知内のボタン操作を実行したりすることもできるようになります。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
+    <string name="notif_type_ongoing_summary" product="default" msgid="4609736750050399900">"使用中のアプリ、ナビ、着信などからの継続的な通知"</string>
+    <string name="notif_type_ongoing_summary" product="desktop" msgid="2095885335561216334">"使用中のアプリ、ナビなどからの継続的な通知"</string>
+    <string name="usb_default_info" product="default" msgid="3102841746337088387">"別のデバイスが接続されてスマートフォンのロックが解除されると、この設定が適用されます。信頼できるデバイスにのみ接続してください。"</string>
+    <string name="usb_default_info" product="desktop" msgid="4425262755067415698">"別のデバイスが接続されてデバイスのロックが解除されると、この設定が適用されます。信頼できるデバイスにのみ接続してください。"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" product="default" msgid="1632474961586870159">"スマートフォンを保護者の方に渡し、設定してもらってください"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" product="desktop" msgid="7693039404410022862">"デバイスを保護者の方に渡し、設定してもらってください"</string>
+    <string name="disabled_by_policy_parental_consent" product="default" msgid="3228137840263314415">"スマートフォンを保護者の方に渡し、この設定を変更してもらってください。"</string>
+    <string name="disabled_by_policy_parental_consent" product="desktop" msgid="1779899136601893549">"デバイスを保護者の方に渡し、この設定を変更してもらってください。"</string>
+    <string name="condition_zen_summary_phone_muted" product="default" msgid="1107174080067940534">"スマートフォンはミュートされています"</string>
+    <string name="condition_zen_summary_phone_muted" product="desktop" msgid="3749597102905584774">"デバイスはミュートされています"</string>
+    <string name="disabled_feature_reason_slow_down_phone" product="default" msgid="8659735491296581891">"この機能はスマートフォンのパフォーマンスを低下させるため OFF になっています"</string>
+    <string name="disabled_feature_reason_slow_down_phone" product="desktop" msgid="7800573784344580283">"この機能はデバイスのパフォーマンスを低下させるため OFF になっています"</string>
+    <string name="mobile_data_settings_summary_auto_switch" product="default" msgid="3598846878817104930">"スマートフォンは圏内に入るとこの携帯通信会社に自動的に切り替わります"</string>
+    <string name="mobile_data_settings_summary_auto_switch" product="desktop" msgid="524891657197879512">"デバイスは圏内に入るとこの携帯通信会社に自動的に切り替わります"</string>
+    <string name="thread_network_settings_footer_title" product="default" msgid="1317201778097436182">"Thread を使用すると、スマートホーム デバイスを接続して、効率とパフォーマンスを高めることができます。\n\nこの設定を有効にすると、Thread ネットワークに接続して、このスマートフォンから Matter 対応デバイスを管理できるようになります。"</string>
+    <string name="thread_network_settings_footer_title" product="desktop" msgid="2799861559795140920">"Thread を使用すると、スマートホーム デバイスを接続して、効率とパフォーマンスを高めることができます。\n\nこの設定を有効にすると、Thread ネットワークに接続して、このデバイスから Matter 対応デバイスを管理できるようになります。"</string>
+    <string name="bluetooth_connect_access_dialog_content" product="default" msgid="4057807008863531756">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> がこのスマートフォンに接続しようとしています。\n\nこれまでに <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> に接続したことはありません。"</string>
+    <string name="bluetooth_connect_access_dialog_content" product="desktop" msgid="6980101860822297332">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> がこのデバイスに接続しようとしています。\n\nこれまでに <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> に接続したことはありません。"</string>
+    <string name="bluetooth_details_permissions_sync_title" product="default" msgid="8409065081160402814">"スマートフォンの権限と同期する"</string>
+    <string name="bluetooth_details_permissions_sync_title" product="desktop" msgid="2734017312695525620">"デバイスの権限と同期する"</string>
+    <string name="bluetooth_details_permissions_sync_summary" product="default" msgid="8315177725634711706">"このスマートフォンで許可したものと同じアプリの権限をスマートウォッチに付与してください"</string>
+    <string name="bluetooth_details_permissions_sync_summary" product="desktop" msgid="6376301353616747859">"このデバイスで許可したものと同じアプリの権限をスマートウォッチに付与してください"</string>
+    <string name="audio_sharing_comfirm_dialog_content" product="default" msgid="5014698176442588172">"音声の共有を開始するには、まず LE Audio 対応のヘッドフォンをスマートフォンに接続します"</string>
+    <string name="audio_sharing_comfirm_dialog_content" product="desktop" msgid="162861653770613243">"音声の共有を開始するには、まず LE Audio 対応のヘッドフォンをデバイスに接続します"</string>
+    <string name="supervision_web_content_filters_top_intro" product="default" msgid="4953123663358923689">"このスマートフォンの一部のアプリとブラウザで露骨な表現を含むコンテンツが除外されやすくなります。他のアプリ、デバイス、ブラウザでは、露骨な表現を含むコンテンツが引き続き表示される場合があります。"</string>
+    <string name="supervision_web_content_filters_top_intro" product="desktop" msgid="9032662719049305184">"このデバイスの一部のアプリとブラウザで露骨な表現を含むコンテンツが除外されやすくなります。他のアプリ、デバイス、ブラウザでは、露骨な表現を含むコンテンツが引き続き表示される場合があります。"</string>
+    <string name="dream_setup_description" product="default" msgid="8438386366154615008">"タブレットが装着されているときに画面に表示するものを選択してください。スクリーン セーバーを使用すると、デバイスの電力使用量が増えることがあります。"</string>
+    <string name="dream_setup_description" product="desktop" msgid="5397812906934631491">"デバイスが装着されているときに画面に表示するものを選択してください。スクリーン セーバーを使用すると、デバイスの電力使用量が増えることがあります。"</string>
 </resources>

@@ -49,6 +49,10 @@
     <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="505214056751470551">"‏אפליקציה מסוימת רוצה להפעיל את ה-Bluetooth ולהפוך את הטאבלט שלך לגלוי בפני מכשירים אחרים. ניתן לשנות זאת מאוחר יותר בהגדרות ה-Bluetooth."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="6187216564831513193">"‏אפליקציה מסוימת רוצה להפעיל את ה-Bluetooth ולהפוך את הטלפון שלך לגלוי בפני מכשירים אחרים. ניתן לשנות זאת מאוחר יותר בהגדרות ה-Bluetooth."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="desktop" msgid="1296067140931944135">"‏אפליקציה מסוימת מבקשת להפעיל את Bluetooth ושהמכשיר הזה יהיה גלוי למכשירים אחרים. אפשר לשנות את הבחירה הזו אחר כך בהגדרות ה-Bluetooth."</string>
+    <string name="bluetooth_hearing_device_input_routing_builtin_option" product="default" msgid="604940407490893699">"המיקרופון של הטלפון הזה"</string>
+    <string name="bluetooth_hearing_device_input_routing_builtin_option" product="desktop" msgid="899174913125357494">"המיקרופון של המכשיר הזה"</string>
+    <string name="bluetooth_audio_routing_summary" product="default" msgid="7087659154407454242">"ניתוב הצלילים למכשיר השמיעה או לרמקול של הטלפון"</string>
+    <string name="bluetooth_audio_routing_summary" product="desktop" msgid="4537882886747949240">"ניתוב הצלילים למכשיר השמיעה או לרמקול של המכשיר"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="3741475436042800617">"טלפון מוצפן"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="2220021007677215054">"המכשיר מוצפן"</string>
     <string name="encryption_and_credential_settings_summary" product="desktop" msgid="2220021007677215054">"המכשיר מוצפן"</string>
@@ -123,6 +127,26 @@
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="6983939010814873996"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="6983939010814873996"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="desktop" msgid="6983939010814873996"></string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" product="default" msgid="8906620058505772369">"אפשר להשתמש בזיהוי פנים כדי לפתוח את הטלפון או לאשר רכישות.\n\nהערה: אין לך אפשרות לפתוח את המכשיר הזה באמצעות הפנים שלך. למידע נוסף, יש לפנות לאדמין של הארגון."</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" product="desktop" msgid="8527453843561896568">"אפשר להשתמש בזיהוי פנים כדי לפתוח את המכשיר או לאשר רכישות.\n\nהערה: אין לך אפשרות לפתוח את המכשיר הזה באמצעות הפנים שלך. למידע נוסף, יש לפנות לאדמין של הארגון."</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" product="default" msgid="5667326364825190475">"אפשר להשתמש בזיהוי פנים כדי לפתוח את נעילת הטלפון, לאשר רכישות או להיכנס לחשבון באפליקציות"</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" product="desktop" msgid="8153291564425666563">"אפשר להשתמש בזיהוי פנים כדי לפתוח את נעילת המכשיר, לאשר רכישות או להיכנס לחשבון באפליקציות"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" product="default" msgid="827881183869443564">"כדי להגדיר שוב פתיחה בזיהוי פנים, צריך למחוק את התבנית הנוכחית לזיהוי הפנים.\n\nהתבנית תימחק באופן סופי ומאובטח.\n\nאחרי המחיקה יהיה צורך להשתמש בקוד האימות, בקו פתיחת הנעילה או בסיסמה כדי לפתוח את הטלפון או כדי לבצע אימות באפליקציות."</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" product="desktop" msgid="5610667230794771663">"כדי להגדיר שוב פתיחה בזיהוי פנים, צריך למחוק את התבנית הנוכחית לזיהוי הפנים.\n\nהתבנית תימחק באופן סופי ומאובטח.\n\nאחרי המחיקה יהיה צורך להשתמש בקוד האימות, בקו פתיחת הנעילה או בסיסמה כדי לפתוח את המכשיר או כדי לבצע אימות באפליקציות."</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" product="default" msgid="657898108282284896">"כדי להגדיר שוב פתיחה בזיהוי פנים, צריך למחוק את התבנית הנוכחית לזיהוי הפנים.\n\nהתבנית תימחק באופן סופי ומאובטח.\n\nאחרי המחיקה יהיה צורך להשתמש בטביעת האצבע, בקוד האימות, בקו פתיחת הנעילה או בסיסמה כדי לפתוח את הטלפון או כדי לבצע אימות באפליקציות."</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" product="desktop" msgid="6944214629283384636">"כדי להגדיר שוב פתיחה בזיהוי פנים, צריך למחוק את התבנית הנוכחית לזיהוי הפנים.\n\nהתבנית תימחק באופן סופי ומאובטח.\n\nאחרי המחיקה יהיה צורך להשתמש בטביעת האצבע, בקוד האימות, בקו פתיחת הנעילה או בסיסמה כדי לפתוח את המכשיר או כדי לבצע אימות באפליקציות."</string>
+    <string name="security_settings_face_settings_require_attention_details" product="default" msgid="9055569538299306139">"כדי לפתוח את הנעילה של הטלפון, העיניים שלך חייבות להיות פקוחות"</string>
+    <string name="security_settings_face_settings_require_attention_details" product="desktop" msgid="6708465338217767003">"כדי לפתוח את הנעילה של המכשיר, העיניים שלך חייבות להיות פקוחות"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" product="default" msgid="631912351020557148">"התבנית לזיהוי הפנים שלך תימחק באופן סופי ומאובטח.\n\nאחרי המחיקה יהיה צורך להשתמש בקוד האימות, בקו פתיחת הנעילה או בסיסמה כדי לפתוח את הטלפון או כדי לבצע אימות באפליקציות."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" product="desktop" msgid="6371830907687898599">"התבנית לזיהוי הפנים שלך תימחק באופן סופי ומאובטח.\n\nאחרי המחיקה יהיה צורך להשתמש בקוד האימות, בקו פתיחת הנעילה או בסיסמה כדי לפתוח את המכשיר או כדי לבצע אימות באפליקציות."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" product="default" msgid="4067458308624865583">"התבנית לזיהוי הפנים שלך תימחק באופן סופי ומאובטח.\n\nלאחר המחיקה, יהיה צורך בקוד האימות, בקו ביטול הנעילה או בסיסמה שלך כדי לבטל את נעילת הטלפון."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" product="desktop" msgid="8773532142993444478">"התבנית לזיהוי הפנים שלך תימחק באופן סופי ומאובטח.\n\nאחרי המחיקה יהיה צורך להשתמש בקוד האימות, בקו פתיחת הנעילה או בסיסמה כדי לפתוח את המכשיר."</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint" product="default" msgid="3697170798827306695">"התבנית לזיהוי הפנים שלך תימחק באופן סופי ומאובטח.\n\nאחרי המחיקה יהיה צורך להשתמש בטביעת האצבע, בקוד האימות, בקו פתיחת הנעילה או בסיסמה כדי לפתוח את הטלפון או כדי לבצע אימות באפליקציות."</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint" product="desktop" msgid="540277269419613514">"התבנית לזיהוי הפנים שלך תימחק באופן סופי ומאובטח.\n\nאחרי המחיקה יהיה צורך להשתמש בטביעת האצבע, בקוד האימות, בקו פתיחת הנעילה או בסיסמה כדי לפתוח את המכשיר או כדי לבצע אימות באפליקציות."</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint_conv" product="default" msgid="7229672458856399521">"התבנית לזיהוי הפנים שלך תימחק באופן סופי ומאובטח.\n\nאחרי המחיקה יהיה צורך להשתמש בטביעת האצבע, בקוד האימות, בקו פתיחת הנעילה או בסיסמה כדי לפתוח את הטלפון."</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint_conv" product="desktop" msgid="2106529501669220799">"התבנית לזיהוי הפנים שלך תימחק באופן סופי ומאובטח.\n\nאחרי המחיקה יהיה צורך להשתמש בטביעת האצבע, בקוד האימות, בקו פתיחת הנעילה או בסיסמה כדי לפתוח את המכשיר."</string>
+    <string name="security_settings_face_settings_context_subtitle" product="default" msgid="1322898999413079369">"שימוש בפתיחה בזיהוי פנים כדי לפתוח את הנעילה של הטלפון"</string>
+    <string name="security_settings_face_settings_context_subtitle" product="desktop" msgid="8193725713604149575">"שימוש בפתיחה בזיהוי פנים כדי לפתוח את הנעילה של המכשיר"</string>
     <string name="security_settings_face_settings_footer" product="default" msgid="3036403896485044957">"אפשר להשתמש בזיהוי הפנים כדי לבטל את הנעילה של הטלפון או לבצע אימות באפליקציות, למשל בשביל להיכנס לחשבון או כדי לאשר רכישה.\n\nחשוב לזכור:\nניתן להגדיר פנים של אדם אחד בלבד בכל פעם. כדי להוסיף פנים אחרות, יש למחוק את הפנים הנוכחיות.\n\nמבט לטלפון עשוי לבטל נעילה בלי כוונה.\n\nנעילת הטלפון עשויה להתבטל על ידי מישהו אחר, אם הטלפון מוחזק אל מול הפנים שלך.\n\nנעילת הטלפון עשויה להתבטל על ידי מישהו שדומה לך מאוד, כמו אח או אחות תאומים."</string>
     <string name="security_settings_face_settings_footer" product="tablet" msgid="3467711032275909082">"אפשר להשתמש בזיהוי הפנים כדי לבטל את הנעילה של הטאבלט או לבצע אימות באפליקציות, למשל בשביל להיכנס לחשבון או כדי לאשר רכישה.\n\nחשוב לזכור:\nניתן להגדיר פנים של אדם אחד בלבד בכל פעם. כדי להוסיף פנים אחרות, יש למחוק את הפנים הנוכחיות.\n\nמבט לטאבלט עשוי לבטל נעילה בלי כוונה.\n\nנעילת הטאבלט עשויה להתבטל על ידי מישהו אחר, אם הטאבלט מוחזק אל מול הפנים שלך.\n\nנעילת הטאבלט עשויה להתבטל על ידי מישהו שדומה לך מאוד, כמו אח או אחות תאומים."</string>
     <string name="security_settings_face_settings_footer" product="device" msgid="6237815625247917310">"אפשר להשתמש בזיהוי הפנים כדי לבטל את הנעילה של המכשיר או לבצע אימות באפליקציות, למשל בשביל להיכנס לחשבון או לאשר רכישה.\n\nחשוב לזכור:\nניתן להגדיר פנים של אדם אחד בלבד בכל פעם. כדי להוסיף פנים אחרות, יש למחוק את הפנים הנוכחיות.\n\nמבט למכשיר עשוי לבטל נעילה בלי כוונה.\n\nנעילת המכשיר עשויה להתבטל על ידי מישהו אחר, אם המכשיר מוחזק מול הפנים שלך.\n\nנעילת המכשיר עשויה להתבטל על ידי מישהו שדומה לך מאוד, כמו אח או אחות תאומים."</string>
@@ -176,10 +200,96 @@
     <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="7398339851724524558">"אפשר להשתמש בטביעת האצבע כדי לבטל את נעילת המכשיר או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="5376408603508393038">"אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="desktop" msgid="7398339851724524558">"אפשר להשתמש בטביעת האצבע כדי לבטל את נעילת המכשיר או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" product="default" msgid="8536395298073746085">"אפשר להשתמש בטביעת אצבע כדי לבטל את הנעילה של הטלפון או לאשר רכישות.\n\nהערה: לא ניתן להשתמש בטביעת אצבע כדי לבטל את הנעילה של המכשיר הזה. לקבלת מידע נוסף, אפשר לפנות למנהל המערכת של הארגון."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" product="desktop" msgid="1449873608291132102">"אפשר להשתמש בטביעת אצבע כדי לבטל את הנעילה של המכשיר או לאשר רכישות.\n\nהערה: לא ניתן להשתמש בטביעת אצבע כדי לבטל את הנעילה של המכשיר הזה. לקבלת מידע נוסף, אפשר לפנות למנהל המערכת של הארגון."</string>
+    <string name="security_settings_remoteauth_enroll_introduction_message" product="default" msgid="548895260855476885">"התכונה \"פתיחת נעילה עם השעון\" היא עוד דרך נוחה לפתוח את הנעילה של המכשיר, למשל, אם האצבעות שלך רטובות או שהפנים שלך לא מזוהות.\n\nאפשר להשתמש בשעון כדי לפתוח את נעילת הטלפון כאשר:"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_message" product="desktop" msgid="6975912914017982596">"התכונה \"פתיחת נעילה עם השעון\" היא עוד דרך נוחה לפתוח את הנעילה של המכשיר, למשל, אם האצבעות שלך רטובות או שהפנים שלך לא מזוהות.\n\nאפשר להשתמש בשעון כדי לפתוח את נעילת הטלפון כאשר:"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_lock_open" product="default" msgid="5036235531555790028">"השעון צריך להיות פתוח, על פרק כף היד שלך וקרוב לטלפון. כשהשעון על פרק כף היד, לא צריך לבטל את הנעילה שלו שוב."</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_lock_open" product="desktop" msgid="4379534816294081846">"השעון צריך להיות פתוח, על פרק כף היד שלך וקרוב למכשיר. כשהשעון על פרק כף היד, לא צריך לבטל את הנעילה שלו שוב."</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" product="default" msgid="8236871030056883849">"כשמבטלים את הנעילה של הטלפון מקבלים התראה בשעון. אם הטלפון נפתח כשלא התכוונת, אפשר ללחוץ על ההתראה כדי לנעול אותו שוב."</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" product="desktop" msgid="1186235463250896267">"כשהנעילה של המכשיר הזה נפתחת, מקבלים התראה בשעון. אם המכשיר נפתח כשלא התכוונת, אפשר ללחוץ על ההתראה כדי לנעול אותו שוב."</string>
+    <string name="security_settings_remoteauth_enroll_finish_description" product="default" msgid="553477510982159386">"עכשיו אפשר להשתמש בשעון כדי לפתוח את הנעילה של הטלפון הזה כשמחליקים למעלה במסך הנעילה או לוחצים על התראה"</string>
+    <string name="security_settings_remoteauth_enroll_finish_description" product="desktop" msgid="7745250450395684994">"עכשיו אפשר להשתמש בשעון כדי לפתוח את הנעילה של המכשיר הזה כשמחליקים למעלה במסך הנעילה או לוחצים על התראה"</string>
+    <string name="security_settings_remoteauth_settings_description" product="default" msgid="507676718189793752">"אפשר להשתמש בשעון כדי לפתוח את הנעילה של הטלפון הזה כשמחליקים למעלה במסך הנעילה או כשלוחצים על התראה"</string>
+    <string name="security_settings_remoteauth_settings_description" product="desktop" msgid="4266751960630500666">"אפשר להשתמש בשעון כדי לפתוח את הנעילה של המכשיר הזה כשמחליקים למעלה במסך הנעילה או כשלוחצים על התראה"</string>
+    <string name="security_settings_remoteauth_settings_info_footer" product="default" msgid="7176165099467997157">"כדי להשתמש בתכונה \"פתיחת נעילה עם השעון\", השעון צריך להיות פתוח, על פרק כף היד שלך, בהישג יד ומחובר למכשיר הזה. אם החיבור נקטע, צריך לפתוח את נעילת הטלפון כדי להשתמש בתכונה \"פתיחת נעילה עם השעון\".\n\nחשוב לזכור:\nאפשר להגדיר רק שעון אחד בכל פעם. כדי להוסיף עוד שעון, קודם צריך להסיר את השעון הנוכחי."</string>
+    <string name="security_settings_remoteauth_settings_info_footer" product="desktop" msgid="4888346924492807836">"כדי להשתמש בתכונה \"פתיחת נעילה עם השעון\", השעון צריך להיות פתוח, על פרק כף היד שלך, בהישג יד ומחובר למכשיר הזה. אם החיבור נקטע, צריך לפתוח את נעילת המכשיר כדי להשתמש בתכונה \"פתיחת נעילה עם השעון\".\n\nחשוב לזכור:\nאפשר להגדיר רק שעון אחד בכל פעם. כדי להוסיף עוד שעון, קודם צריך להסיר את השעון הנוכחי."</string>
     <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="9034560319613439593">"צריך להחזיר את הטאבלט לאחד ההורים"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="2149647165743006307">"צריך להחזיר את המכשיר לאחד ההורים"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="2060265104488529949">"צריך להחזיר את הטלפון לאחד ההורים"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="desktop" msgid="2149647165743006307">"צריך להחזיר את המכשיר לאחד ההורים"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="8858463763101227881">"אחרי שמגדירים פתיחה בזיהוי פנים ופתיחה בטביעת אצבע, תופיע בטלפון בקשה לפתוח את המסך בטביעת אצבע אם עוטים מסכה או נמצאים במקום חשוך.\n\nהתכונה \"פתיחת נעילה עם השעון\" היא עוד דרך נוחה לפתוח את הטלפון, למשל כשהאצבעות שלך רטובות או כשהפנים לא מזוהות."</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="desktop" msgid="5820941581053148013">"אחרי שמגדירים פתיחה בזיהוי פנים ופתיחה בטביעת אצבע, תופיע במכשיר בקשה לפתוח את המסך בטביעת אצבע אם עוטים מסכה או נמצאים במקום חשוך.\n\nהתכונה \"פתיחת נעילה עם השעון\" היא עוד דרך נוחה לפתוח את המכשיר, למשל כשהאצבעות שלך רטובות או כשהפנים לא מזוהות."</string>
+    <string name="biometric_settings_intro_with_fingerprint" product="default" msgid="7057949977059277103">"התכונה \"פתיחת נעילה עם השעון\" היא עוד דרך נוחה לפתוח את הטלפון, למשל כשטביעת האצבע שלך לא מזוהה."</string>
+    <string name="biometric_settings_intro_with_fingerprint" product="desktop" msgid="3405074735777726953">"התכונה \"פתיחת נעילה עם השעון\" היא עוד דרך נוחה לפתוח את המכשיר, למשל כשטביעת האצבע שלך לא מזוהה."</string>
+    <string name="biometric_settings_intro_with_face" product="default" msgid="2726655588847229283">"התכונה \"פתיחת נעילה עם השעון\" היא עוד דרך נוחה לפתוח את הטלפון, למשל כשהפנים שלך לא מזוהות."</string>
+    <string name="biometric_settings_intro_with_face" product="desktop" msgid="1265319569297304712">"התכונה \"פתיחת נעילה עם השעון\" היא עוד דרך נוחה לפתוח את המכשיר, למשל כשהפנים שלך לא מזוהות."</string>
+    <string name="biometric_settings_intro" product="default" msgid="1110080686857635531">"אחרי שמגדירים פתיחה בזיהוי פנים ופתיחה בטביעת אצבע, תופיע בטלפון בקשה לפתוח את המסך בטביעת אצבע אם עוטים מסכה או נמצאים במקום חשוך"</string>
+    <string name="biometric_settings_intro" product="desktop" msgid="8796499771937952128">"אחרי שמגדירים פתיחה בזיהוי פנים ופתיחה בטביעת אצבע, תופיע במכשיר בקשה לפתוח את המסך בטביעת אצבע אם עוטים מסכה או נמצאים במקום חשוך"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" product="default" msgid="3409316849691305012">"פתיחה של נעילת הטלפון"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" product="desktop" msgid="6393832544950099600">"פתיחה של נעילת המכשיר"</string>
+    <string name="setup_fingerprint_enroll_enrolling_skip_message" product="default" msgid="4979485905634049022">"בחרת להשתמש בטביעת האצבע שלך כאחת הדרכים לבטל את הנעילה בטלפון. אם החלטת לדלג עכשיו, יהיה עליך להגדיר את זה בהמשך. ההגדרה לוקחת רק דקה או שתיים."</string>
+    <string name="setup_fingerprint_enroll_enrolling_skip_message" product="desktop" msgid="2601670958752026992">"בחרת להשתמש בטביעת האצבע שלך כאחת הדרכים לבטל את הנעילה במכשיר. אם החלטת לדלג עכשיו, יהיה עליך להגדיר את זה בהמשך. ההגדרה לוקחת רק דקה או שתיים."</string>
+    <string name="unlock_disable_frp_warning_content_pattern" product="default" msgid="5070116742207378028">"קו ביטול הנעילה מגן על הטלפון במקרה של אובדן או גניבה"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" product="desktop" msgid="3828076488822985960">"קו ביטול הנעילה מגן על המכשיר במקרה של אובדן או גניבה"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" product="default" msgid="7919767908076245408">"קו ביטול הנעילה מגן על הטלפון במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>הפעולה הזו גם מוחקת את תבנית טביעת האצבע ששמורה במכשיר. לא תהיה לך אפשרות לבצע אימות באמצעות טביעת אצבע באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" product="desktop" msgid="9116397340044675886">"קו ביטול הנעילה מגן על המכשיר במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>הפעולה הזו גם מוחקת את תבנית טביעת האצבע ששמורה במכשיר. לא תהיה לך אפשרות לבצע אימות באמצעות טביעת אצבע באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face" product="default" msgid="37951657146319620">"קו ביטול הנעילה מגן על הטלפון במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>גם התבנית לזיהוי הפנים תימחק באופן סופי ומאובטח. לא תהיה לך אפשרות לבצע אימות באמצעות הפנים באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face" product="desktop" msgid="5949258661260705528">"קו ביטול הנעילה מגן על המכשיר במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>גם התבנית לזיהוי הפנים תימחק באופן סופי ומאובטח. לא תהיה לך אפשרות לבצע אימות באמצעות הפנים באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" product="default" msgid="2099587344025095004">"קו ביטול הנעילה מגן על הטלפון במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>הפעולה הזו מוחקת את תבנית טביעת האצבע ששמורה במכשיר. גם התבנית לזיהוי הפנים תימחק באופן סופי ומאובטח. לא תהיה לך אפשרות לבצע אימות באמצעות הפנים או טביעת אצבע באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" product="desktop" msgid="1894841959198314076">"קו ביטול הנעילה מגן על המכשיר במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>הפעולה הזו מוחקת את תבנית טביעת האצבע ששמורה במכשיר. גם התבנית לזיהוי הפנים תימחק באופן סופי ומאובטח. לא תהיה לך אפשרות לבצע אימות באמצעות הפנים או טביעת אצבע באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_pin" product="default" msgid="4884453290870316484">"קוד האימות מגן על הטלפון במקרה של אובדן או גניבה"</string>
+    <string name="unlock_disable_frp_warning_content_pin" product="desktop" msgid="2069572855122085869">"קוד האימות מגן על המכשיר במקרה של אובדן או גניבה"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" product="default" msgid="2874913409506418991">"קוד האימות מגן על הטלפון במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>הפעולה הזו גם מוחקת את תבנית טביעת האצבע ששמורה במכשיר. לא תהיה לך אפשרות לבצע אימות באמצעות טביעת אצבע באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" product="desktop" msgid="6361691886708081331">"קוד האימות מגן על המכשיר במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>הפעולה הזו גם מוחקת את תבנית טביעת האצבע ששמורה במכשיר. לא תהיה לך אפשרות לבצע אימות באמצעות טביעת אצבע באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face" product="default" msgid="263465132877970450">"קוד האימות מגן על הטלפון במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>גם התבנית לזיהוי פנים תימחק באופן סופי ומאובטח. לא תהיה לך אפשרות לבצע אימות באמצעות הפנים באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face" product="desktop" msgid="1495988088469298632">"קוד האימות מגן על המכשיר במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>גם התבנית לזיהוי פנים תימחק באופן סופי ומאובטח. לא תהיה לך אפשרות לבצע אימות באמצעות הפנים באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" product="default" msgid="476636556062520667">"קוד האימות מגן על הטלפון במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>הפעולה הזו מוחקת את תבנית טביעת האצבע ששמורה במכשיר. גם התבנית לזיהוי הפנים תימחק באופן סופי ומאובטח. לא תהיה לך אפשרות לבצע אימות באמצעות הפנים או טביעת אצבע באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" product="desktop" msgid="6813575631983953707">"קוד האימות מגן על המכשיר במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>הפעולה הזו מוחקת את תבנית טביעת האצבע ששמורה במכשיר. גם התבנית לזיהוי הפנים תימחק באופן סופי ומאובטח. לא תהיה לך אפשרות לבצע אימות באמצעות הפנים או טביעת אצבע באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_password" product="default" msgid="1127164258200398958">"הסיסמה מגינה על הטלפון במקרה של אובדן או גניבה"</string>
+    <string name="unlock_disable_frp_warning_content_password" product="desktop" msgid="8367036366524786060">"הסיסמה מגינה על המכשיר במקרה של אובדן או גניבה"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" product="default" msgid="4593407083619543775">"הסיסמה מגינה על הטלפון במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>הפעולה הזו גם מוחקת את תבנית טביעת האצבע ששמורה במכשיר. לא תהיה לך אפשרות לבצע אימות באמצעות טביעת אצבע באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" product="desktop" msgid="1659299201470069003">"הסיסמה מגינה על המכשיר במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>הפעולה הזו גם מוחקת את תבנית טביעת האצבע ששמורה במכשיר. לא תהיה לך אפשרות לבצע אימות באמצעות טביעת אצבע באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_password_face" product="default" msgid="2765003117110694527">"הסיסמה מגינה על המכשיר במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>גם התבנית לזיהוי הפנים תימחק באופן סופי ומאובטח. לא תהיה לך אפשרות לבצע אימות באמצעות הפנים באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_password_face" product="desktop" msgid="912428236263888131">"הסיסמה מגינה על המכשיר במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>גם התבנית לזיהוי הפנים תימחק באופן סופי ומאובטח. לא תהיה לך אפשרות לבצע אימות באמצעות הפנים באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint" product="default" msgid="5660327560346083891">"הסיסמה מגינה על הטלפון במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>הפעולה הזו מוחקת את תבנית טביעת האצבע ששמורה במכשיר. גם התבנית לזיהוי הפנים תימחק באופן סופי ומאובטח. לא תהיה לך אפשרות לבצע אימות באמצעות הפנים או טביעת אצבע באפליקציות."</string>
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint" product="desktop" msgid="5615430301170627057">"הסיסמה מגינה על המכשיר במקרה של אובדן או גניבה.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>הפעולה הזו מוחקת את תבנית טביעת האצבע ששמורה במכשיר. גם התבנית לזיהוי הפנים תימחק באופן סופי ומאובטח. לא תהיה לך אפשרות לבצע אימות באמצעות הפנים או טביעת אצבע באפליקציות."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7526137517192538870">"תכונות ההגנה על המכשיר לא יופעלו. לא תהיה לך אפשרות למנוע מאנשים אחרים להשתמש בטאבלט אם הוא יאבד, ייגנב או יאופס."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="1350434793163709209">"תכונות ההגנה על המכשיר לא יופעלו. לא תהיה לך אפשרות למנוע מאנשים אחרים להשתמש במכשיר אם הוא יאבד, ייגנב או יאופס."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="8367731653387033354">"תכונות ההגנה על המכשיר לא יופעלו. לא תהיה לך אפשרות למנוע מאנשים אחרים להשתמש בטלפון אם הוא יאבד, ייגנב או יאופס."</string>
@@ -271,6 +381,8 @@
     <string name="encrypt_title" product="tablet" msgid="8915795247786124547">"הצפנת הטאבלט"</string>
     <string name="encrypt_title" product="default" msgid="511146128799853404">"הצפנת הטלפון"</string>
     <string name="encrypt_title" product="desktop" msgid="7536236095337188236">"הצפנת המכשיר"</string>
+    <string name="suggested_lock_settings_title" product="default" msgid="2717909185701554381">"אבטחת הטלפון"</string>
+    <string name="suggested_lock_settings_title" product="desktop" msgid="2170600598362998798">"אבטחת המכשיר"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="8821254377043173267">"הגדרה של נעילת מסך לצורך הגנה על הטאבלט"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="4863929838844014122">"הגדרה של נעילת מסך לצורך הגנה על המכשיר"</string>
     <string name="suggested_lock_settings_summary" product="default" msgid="8050809409337082738">"הגדרה של נעילת מסך לצורך הגנה על הטלפון"</string>
@@ -310,6 +422,8 @@
     <string name="wifi_add_app_networks_summary" product="default" msgid="7014504084783236696">"התקבלה בקשה מהאפליקציה <xliff:g id="APPNAME">%1$s</xliff:g> לשמור את הרשתות האלה בטלפון"</string>
     <string name="wifi_add_app_networks_summary" product="tablet" msgid="6433255556506891439">"התקבלה בקשה מהאפליקציה <xliff:g id="APPNAME">%1$s</xliff:g> לשמור את הרשתות האלה בטאבלט"</string>
     <string name="wifi_add_app_networks_summary" product="desktop" msgid="4238956725252527159">"האפליקציה <xliff:g id="APPNAME">%1$s</xliff:g> מבקשת לשמור את הרשתות האלה במכשיר"</string>
+    <string name="wifi_hidden_network_warning" product="default" msgid="5069866459200615493">"אם יש רשת שהנתב שלך לא משדר את המזהה שלה וברצונך להתחבר אליה בעתיד באופן אוטומטי, אפשר להגדיר את הרשת הזאת כ\"מוסתרת\".\n\nהפעולה הזו עשויה לסכן את האבטחה כי הטלפון ישדר אות באופן קבוע כדי למצוא את הרשת.\n\nהגדרת הרשת כ\"מוסתרת\" לא תשנה את הגדרות הנתב."</string>
+    <string name="wifi_hidden_network_warning" product="desktop" msgid="1145969827779463554">"אם יש רשת שהנתב שלך לא משדר את המזהה שלה וברצונך להתחבר אליה בעתיד באופן אוטומטי, אפשר להגדיר את הרשת הזאת כ\"מוסתרת\".\n\nהפעולה הזו עשויה לסכן את האבטחה כי המכשיר ישדר אות באופן קבוע כדי למצוא את הרשת.\n\nהגדרת הרשת כ\"מוסתרת\" לא תשנה את הגדרות הנתב."</string>
     <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"סיבוב של המכשיר מתצוגה לאורך לתצוגה לרוחב משנה את כיוון המסך אוטומטית"</string>
     <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"כשהופכים את המכשיר מתצוגה לאורך לתצוגה לרוחב, כיוון המסך משתנה אוטומטית"</string>
     <string name="auto_rotate_screen_summary" product="desktop" msgid="3805199344834364732">"כשהופכים את המכשיר מתצוגה לאורך לתצוגה לרוחב, כיוון המסך משתנה אוטומטית"</string>
@@ -547,4 +661,52 @@
     <string name="audio_sharing_confirm_dialog_content_with_link" product="desktop" msgid="668964968208427465">"‏כדי להתחיל לשתף אודיו, צריך לחבר את אוזניות LE Audio למכשיר. "<annotation id="link">"מידע נוסף על מכשירים תואמים"</annotation></string>
     <string name="network_dashboard_summary_mobile" product="default" msgid="1856501121269595911">"‏אינטרנט סלולרי, Wi‑Fi, נקודת אינטרנט (Hotspot)"</string>
     <string name="network_dashboard_summary_mobile" product="desktop" msgid="8770767156162473221">"‏‫Wi‑Fi, נייד, נקודה לשיתוף אינטרנט (Hotspot)"</string>
+    <string name="top_intro_region_title" product="default" msgid="915184646302419632">"הטלפון יציג את השעה, התאריכים, הטמפרטורה ופרטים נוספים לפי האזור שייבחר."</string>
+    <string name="top_intro_region_title" product="desktop" msgid="4176286015398594299">"הטלפון יציג את השעה, התאריכים, הטמפרטורה ופרטים נוספים לפי האזור שייבחר."</string>
+    <string name="private_space_fingerprint_enroll_introduction_footer_message" product="default" msgid="5424764618312876122">"נעילת המרחב הפרטי יכולה להיפתח גם אם לא התכוונת לעשות את זה, למשל כשמישהו מצמיד את הטלפון לאצבע שלך."</string>
+    <string name="private_space_fingerprint_enroll_introduction_footer_message" product="desktop" msgid="1777628194784795967">"נעילת המרחב הפרטי יכולה להיפתח גם אם לא התכוונת לעשות את זה, למשל כשמישהו מצמיד את המכשיר לאצבע שלך."</string>
+    <string name="private_space_face_enroll_introduction_info_looking" product="default" msgid="305936839337361784">"מבט לטלפון עשוי לפתוח את הנעילה של המרחב הפרטי בלי כוונה. הנעילה יכולה להיפתח גם אם מישהו שמאוד דומה לך (למשל אח או אחות תאומים) יסתכל במכשיר, או אם מישהו יחזיק את המכשיר מול הפנים שלך."</string>
+    <string name="private_space_face_enroll_introduction_info_looking" product="desktop" msgid="7384750093083248112">"מבט למכשיר עשוי לפתוח את הנעילה של המרחב הפרטי בלי כוונה. הנעילה יכולה להיפתח גם אם מישהו שמאוד דומה לך (למשל אח או אחות תאומים) יסתכל במכשיר, או אם מישהו יחזיק את המכשיר מול הפנים שלך."</string>
+    <string name="private_space_face_settings_footer" product="default" msgid="212607111539219116">"אפשר להשתמש בזיהוי הפנים כדי לפתוח את הנעילה של המרחב הפרטי.\n\nחשוב לזכור:\nניתן להגדיר פנים של אדם אחד בלבד בכל פעם. כדי להוסיף פנים אחרות, צריך למחוק את הפנים הנוכחיות.\n\nמבט לטלפון עשוי לפתוח את הנעילה של המרחב הפרטי בלי כוונה.\n\nמישהו אחר יכול לפתוח את הנעילה של המרחב הפרטי אם הוא יחזיק את המכשיר מול הפנים שלך.\n\nהנעילה יכולה להיפתח גם אם מישהו שמאוד דומה לך (למשל אח או אחות תאומים) יסתכל במכשיר."</string>
+    <string name="private_space_face_settings_footer" product="desktop" msgid="5379113827824389147">"אפשר להשתמש בזיהוי הפנים כדי לפתוח את הנעילה של המרחב הפרטי.\n\nחשוב לזכור:\nניתן להגדיר פנים של אדם אחד בלבד בכל פעם. כדי להוסיף פנים אחרות, צריך למחוק את הפנים הנוכחיות.\n\nמבט למכשיר עשוי לפתוח את הנעילה של המרחב הפרטי בלי כוונה.\n\nמישהו אחר יכול לפתוח את הנעילה של המרחב הפרטי אם הוא יחזיק את המכשיר מול הפנים שלך.\n\nהנעילה יכולה להיפתח גם אם מישהו שמאוד דומה לך (למשל אח או אחות תאומים) יסתכל במכשיר."</string>
+    <string name="private_space_delete_summary" product="default" msgid="6731333342020734606">"המרחב הפרטי שלך יימחק לתמיד מהמכשיר. \n\nכל האפליקציות במרחב הפרטי והנתונים שלהן יימחקו לתמיד מ"<b>"האחסון הפנימי"</b>" של הטלפון."</string>
+    <string name="private_space_delete_summary" product="desktop" msgid="2654261524341800235">"המרחב הפרטי שלך יימחק לתמיד מהמכשיר. \n\nכל האפליקציות במרחב הפרטי והנתונים שלהן יימחקו לתמיד מ"<b>"האחסון הפנימי"</b>" של המכשיר."</string>
+    <string name="reset_private_space_delete_dialog" product="default" msgid="8929854517683078216">"‏אם יש לך מרחב פרטי במכשיר, הוא יימחק לתמיד וחשבון Google שנוסף למרחב הפרטי שלך יוסר. \n\nכל האפליקציות במרחב הפרטי והנתונים שלהן יימחקו לתמיד מ"<b>"האחסון הפנימי"</b>" של הטלפון."</string>
+    <string name="reset_private_space_delete_dialog" product="desktop" msgid="212701183647817405">"‏אם יש לך מרחב פרטי במכשיר, הוא יימחק לתמיד וחשבון Google שנוסף למרחב הפרטי שלך יוסר. \n\nכל האפליקציות במרחב הפרטי והנתונים שלהן יימחקו לתמיד מ"<b>"האחסון הפנימי"</b>" של המכשיר."</string>
+    <string name="style_suggestion_title" product="default" msgid="5542169058581069091">"התאמה אישית של הטלפון"</string>
+    <string name="style_suggestion_title" product="desktop" msgid="6633259602241390541">"התאמה אישית של המכשיר"</string>
+    <string name="storage_os_detail_dialog_system" product="default" msgid="900519793933569665">"האחסון כולל את מערכת ההפעלה והקבצים שדרושים כדי שהטלפון שלך יפעל בצורה חלקה. כדי להגן על התקינות של הקבצים האלה, הגישה אליהם חסומה."</string>
+    <string name="storage_os_detail_dialog_system" product="desktop" msgid="6775876458851128896">"האחסון כולל את מערכת ההפעלה והקבצים שדרושים כדי שהטלפון שלך יפעל בצורה חלקה. כדי להגן על התקינות של הקבצים האלה, הגישה אליהם חסומה."</string>
+    <string name="activity_not_found" product="default" msgid="6925342827420626978">"האפליקציה לא מותקנת בטלפון שלך."</string>
+    <string name="activity_not_found" product="desktop" msgid="2440711947892938614">"האפליקציה לא מותקנת במכשיר שלך."</string>
+    <string name="notification_listener_security_warning_summary" product="default" msgid="6430760593378501603">"האפליקציה <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> תוכל לקרוא את כל ההתראות, כולל מידע אישי כמו שמות של אנשי קשר, תמונות והודעות טקסט שקיבלת. האפליקציה תוכל גם לסגור התראות, להעביר אותן למצב נודניק או להפעיל כפתורי פעולה שהן כוללות, וגם לענות לשיחות טלפון. \n\nבנוסף, האפליקציה תוכל להפעיל או לכבות את התכונה \"נא לא להפריע\" ולשנות הגדרות שקשורות אליה."</string>
+    <string name="notification_listener_security_warning_summary" product="desktop" msgid="4220921495800674165">"האפליקציה <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> תוכל לקרוא את כל ההתראות, כולל מידע אישי כמו שמות של אנשי קשר, תמונות והודעות טקסט שקיבלת. האפליקציה תוכל גם לסגור התראות, להעביר אותן למצב נודניק או להפעיל כפתורי פעולה שהן כוללות. \n\nבנוסף, האפליקציה תוכל להפעיל או לכבות את התכונה \"נא לא להפריע\" ולשנות הגדרות שקשורות אליה."</string>
+    <string name="notif_type_ongoing_summary" product="default" msgid="4609736750050399900">"תקשורת רציפה מאפליקציות שנמצאות בשימוש, מתוכנות ניווט, משיחות טלפון ועוד"</string>
+    <string name="notif_type_ongoing_summary" product="desktop" msgid="2095885335561216334">"תקשורת רציפה מאפליקציות שנמצאות בשימוש, מתוכנות ניווט ועוד"</string>
+    <string name="usb_default_info" product="default" msgid="3102841746337088387">"כשמכשיר אחר מחובר והטלפון שלך פתוח, ההגדרות האלה תקפות. יש לחבר רק למכשירים מהימנים."</string>
+    <string name="usb_default_info" product="desktop" msgid="4425262755067415698">"כשמכשיר אחר מחובר והמכשיר הזה פתוח, ההגדרות האלה תקפות. יש לחבר רק למכשירים מהימנים."</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" product="default" msgid="1632474961586870159">"צריך לתת את הטלפון להורה כדי להתחיל בתהליך ההגדרה"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" product="desktop" msgid="7693039404410022862">"צריך לתת את המכשיר להורה כדי להתחיל בתהליך ההגדרה"</string>
+    <string name="disabled_by_policy_parental_consent" product="default" msgid="3228137840263314415">"צריך לתת את הטלפון להורה כדי לאשר את שינוי ההגדרה הזו."</string>
+    <string name="disabled_by_policy_parental_consent" product="desktop" msgid="1779899136601893549">"צריך לתת את המכשיר להורה כדי לאשר את שינוי ההגדרה הזו."</string>
+    <string name="condition_zen_summary_phone_muted" product="default" msgid="1107174080067940534">"הטלפון מושתק"</string>
+    <string name="condition_zen_summary_phone_muted" product="desktop" msgid="3749597102905584774">"המכשיר מושתק"</string>
+    <string name="disabled_feature_reason_slow_down_phone" product="default" msgid="8659735491296581891">"התכונה הזו הושבתה כי היא מאיטה את הטלפון שלך"</string>
+    <string name="disabled_feature_reason_slow_down_phone" product="desktop" msgid="7800573784344580283">"התכונה הזו הושבתה כי היא מאיטה את המכשיר שלך"</string>
+    <string name="mobile_data_settings_summary_auto_switch" product="default" msgid="3598846878817104930">"הטלפון יעבור באופן אוטומטי לספק הזה כשיהיה בטווח הכיסוי"</string>
+    <string name="mobile_data_settings_summary_auto_switch" product="desktop" msgid="524891657197879512">"המכשיר יעבור באופן אוטומטי לספק הזה כשיהיה בטווח הכיסוי"</string>
+    <string name="thread_network_settings_footer_title" product="default" msgid="1317201778097436182">"‏פרוטוקול Thread עוזר למכשירים לבית החכם להתחבר ומשפר את היעילות והביצועים.\n\nכשהפרוטוקול מופעל, המכשיר הזה יכול להצטרף לרשת Thread. כך אפשר לשלוט מהטלפון במכשירים שתומכים בתקן Matter."</string>
+    <string name="thread_network_settings_footer_title" product="desktop" msgid="2799861559795140920">"‏פרוטוקול Thread עוזר למכשירים לבית החכם להתחבר ומשפר את היעילות והביצועים.\n\nכשהפרוטוקול מופעל, המכשיר הזה יכול להצטרף לרשת Thread. כך אפשר לשלוט מהמכשיר במכשירים שתומכים בתקן Matter."</string>
+    <string name="bluetooth_connect_access_dialog_content" product="default" msgid="4057807008863531756">"המכשיר <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> מבקש להתחבר לטלפון הזה.\n\nלא התחברת אל <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> בעבר."</string>
+    <string name="bluetooth_connect_access_dialog_content" product="desktop" msgid="6980101860822297332">"המכשיר <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> מבקש להתחבר למכשיר הזה.\n\nלא התחברת אל <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> בעבר."</string>
+    <string name="bluetooth_details_permissions_sync_title" product="default" msgid="8409065081160402814">"סנכרון ההרשאות מהטלפון"</string>
+    <string name="bluetooth_details_permissions_sync_title" product="desktop" msgid="2734017312695525620">"סנכרון ההרשאות מהמכשיר"</string>
+    <string name="bluetooth_details_permissions_sync_summary" product="default" msgid="8315177725634711706">"עליך לתת לשעון את אותן הרשאות לאפליקציות שנתת לטלפון הזה"</string>
+    <string name="bluetooth_details_permissions_sync_summary" product="desktop" msgid="6376301353616747859">"עליך לתת לשעון את אותן הרשאות לאפליקציות שנתת למכשיר הזה"</string>
+    <string name="audio_sharing_comfirm_dialog_content" product="default" msgid="5014698176442588172">"‏כדי להתחיל לשתף אודיו, צריך לחבר אוזניות LE Audio לטלפון"</string>
+    <string name="audio_sharing_comfirm_dialog_content" product="desktop" msgid="162861653770613243">"‏כדי להתחיל לשתף אודיו, צריך לחבר אוזניות LE Audio למכשיר"</string>
+    <string name="supervision_web_content_filters_top_intro" product="default" msgid="4953123663358923689">"סינון תוכן בוטה בחלק מהאפליקציות והדפדפנים בטלפון הזה. תוכן בוטה עדיין יכול להופיע באפליקציות, במכשירים או בדפדפנים אחרים."</string>
+    <string name="supervision_web_content_filters_top_intro" product="desktop" msgid="9032662719049305184">"סינון תוכן בוטה בחלק מהאפליקציות והדפדפנים במכשיר הזה. תוכן בוטה עדיין יכול להופיע באפליקציות, במכשירים או בדפדפנים אחרים."</string>
+    <string name="dream_setup_description" product="default" msgid="8438386366154615008">"אפשר לבחור מה יוצג במסך כשהטאבלט בעגינה. כששומר המסך מופעל, המכשיר מנצל יותר אנרגיה."</string>
+    <string name="dream_setup_description" product="desktop" msgid="5397812906934631491">"אפשר לבחור מה יוצג במסך כשהמכשיר בעגינה. כששומר המסך מופעל, המכשיר מנצל יותר אנרגיה."</string>
 </resources>
