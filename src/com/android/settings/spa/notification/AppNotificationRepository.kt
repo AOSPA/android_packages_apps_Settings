@@ -33,7 +33,6 @@ import android.os.RemoteException
 import android.os.ServiceManager
 import android.util.Log
 
-import com.android.settings.flags.Flags
 import com.android.settings.R
 import com.android.settingslib.RestrictedLockUtils
 import com.android.settingslib.spa.framework.util.formatString
@@ -112,15 +111,13 @@ class AppNotificationRepository(
             return false
         }
 
-        if (Flags.notificationUseDpcPolicy()) {
-            val admin: RestrictedLockUtils.EnforcedAdmin? =
-                RestrictedLockUtils.getProfileOrDeviceOwner(context, context.getUser())
-            val devicePolicyEnforced: Boolean = admin?.let {
-                dpm.getPermissionPolicy(it.component) != DevicePolicyManager.PERMISSION_POLICY_PROMPT
-            } ?: false
-            if (devicePolicyEnforced) {
-                return false
-            }
+        val admin: RestrictedLockUtils.EnforcedAdmin? =
+            RestrictedLockUtils.getProfileOrDeviceOwner(context, context.getUser())
+        val devicePolicyEnforced: Boolean = admin?.let {
+            dpm.getPermissionPolicy(it.component) != DevicePolicyManager.PERMISSION_POLICY_PROMPT
+        } ?: false
+        if (devicePolicyEnforced) {
+            return false
         }
 
         // If the app targets T but has not requested the permission, we cannot change the

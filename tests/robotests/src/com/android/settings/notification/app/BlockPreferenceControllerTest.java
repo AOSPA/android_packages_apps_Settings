@@ -48,7 +48,6 @@ import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,12 +56,10 @@ import android.widget.LinearLayout;
 import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.flags.Flags;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -431,7 +428,6 @@ public class BlockPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_USE_DPC_POLICY)
     public void testDPCPolicyPrompt_switchIsNotDisabledByAdmin() {
         when(mDpm.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_ADMIN_COMPONENT);
         when(mDpm.getPermissionPolicy(any())).thenReturn(
@@ -445,7 +441,6 @@ public class BlockPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_USE_DPC_POLICY)
     public void testDPCPolicyAutoGrant_switchIsDisabledByAdmin() {
         when(mDpm.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_ADMIN_COMPONENT);
         when(mDpm.getPermissionPolicy(any())).thenReturn(
@@ -459,7 +454,6 @@ public class BlockPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_USE_DPC_POLICY)
     public void testDPCPolicyAutoDeny_switchIsDisabledByAdmin() {
         when(mDpm.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_ADMIN_COMPONENT);
         when(mDpm.getPermissionPolicy(any())).thenReturn(

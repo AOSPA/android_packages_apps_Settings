@@ -31,6 +31,8 @@ import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.SpaAppBridgeActivity.Companion.getDestinationForApp
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
+import com.android.settings.spa.app.specialaccess.ComputerControlAppInfoPageProvider
+import com.android.settings.spa.app.specialaccess.ComputerControlAutomationAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
@@ -38,34 +40,43 @@ import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListPro
 import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
+import com.android.settings.spa.app.specialaccess.runIfComputerControlEnabled
 import com.android.settings.wifi.ChangeWifiStateDetails
 
 object SettingsActivityUtil {
-    private val FRAGMENT_TO_SPA_DESTINATION_MAP = mapOf(
-        PictureInPictureSettings::class.qualifiedName to
-            PictureInPictureListProvider.getAppListRoute(),
-    )
+    private val FRAGMENT_TO_SPA_DESTINATION_MAP =
+        mapOf(
+            PictureInPictureSettings::class.qualifiedName to
+                PictureInPictureListProvider.getAppListRoute()
+        )
 
-    private val FRAGMENT_TO_SPA_APP_DESTINATION_PREFIX_MAP = mapOf(
-        PictureInPictureDetails::class.qualifiedName to
-            PictureInPictureListProvider.getAppInfoRoutePrefix(),
-        DrawOverlayDetails::class.qualifiedName to
-            DisplayOverOtherAppsAppListProvider.getAppInfoRoutePrefix(),
-        WriteSettingsDetails::class.qualifiedName to
-            ModifySystemSettingsAppListProvider.getAppInfoRoutePrefix(),
-        AlarmsAndRemindersDetails::class.qualifiedName to
-            AlarmsAndRemindersAppListProvider.getAppInfoRoutePrefix(),
-        ExternalSourcesDetails::class.qualifiedName to
-            InstallUnknownAppsListProvider.getAppInfoRoutePrefix(),
-        ManageExternalStorageDetails::class.qualifiedName to
-            AllFilesAccessAppListProvider.getAppInfoRoutePrefix(),
-        MediaManagementAppsDetails::class.qualifiedName to
-            MediaManagementAppsAppListProvider.getAppInfoRoutePrefix(),
-        ChangeWifiStateDetails::class.qualifiedName to
-            WifiControlAppListProvider.getAppInfoRoutePrefix(),
-        NfcTagAppsSettingsProvider::class.qualifiedName to
-            NfcTagAppsSettingsProvider.getAppInfoRoutePrefix(),
-    )
+    private val FRAGMENT_TO_SPA_APP_DESTINATION_PREFIX_MAP =
+        mapOf(
+                PictureInPictureDetails::class.qualifiedName to
+                    PictureInPictureListProvider.getAppInfoRoutePrefix(),
+                DrawOverlayDetails::class.qualifiedName to
+                    DisplayOverOtherAppsAppListProvider.getAppInfoRoutePrefix(),
+                WriteSettingsDetails::class.qualifiedName to
+                    ModifySystemSettingsAppListProvider.getAppInfoRoutePrefix(),
+                AlarmsAndRemindersDetails::class.qualifiedName to
+                    AlarmsAndRemindersAppListProvider.getAppInfoRoutePrefix(),
+                ExternalSourcesDetails::class.qualifiedName to
+                    InstallUnknownAppsListProvider.getAppInfoRoutePrefix(),
+                ManageExternalStorageDetails::class.qualifiedName to
+                    AllFilesAccessAppListProvider.getAppInfoRoutePrefix(),
+                MediaManagementAppsDetails::class.qualifiedName to
+                    MediaManagementAppsAppListProvider.getAppInfoRoutePrefix(),
+                ChangeWifiStateDetails::class.qualifiedName to
+                    WifiControlAppListProvider.getAppInfoRoutePrefix(),
+                NfcTagAppsSettingsProvider::class.qualifiedName to
+                    NfcTagAppsSettingsProvider.getAppInfoRoutePrefix(),
+            )
+            .runIfComputerControlEnabled {
+                plus(
+                    ComputerControlAppInfoPageProvider::class.qualifiedName to
+                        ComputerControlAutomationAppListProvider.getAppInfoRoutePrefix()
+                )
+            }
 
     @JvmStatic
     fun Context.launchSpaActivity(fragmentName: String, intent: Intent): Boolean {

@@ -49,11 +49,17 @@
         android:layout_width="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:paddingTop="16dp">
-        <TextView
+        <com.android.settings.connecteddevice.display.TopologyHintTextView
             android:id="@+id/topology_hint"
             android:background="@drawable/display_topology_background"
             android:paddingHorizontal="5dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:minHeight="48dp"
             android:textColor="@color/materialColorOnPrimaryContainer"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:lineSpacingExtra="1sp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
     </FrameLayout>

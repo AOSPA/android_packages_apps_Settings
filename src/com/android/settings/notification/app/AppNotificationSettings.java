@@ -16,7 +16,6 @@
 
 package com.android.settings.notification.app;
 
-import android.app.Flags;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
@@ -48,21 +47,19 @@ public class AppNotificationSettings extends NotificationSettings {
 
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
-        if (Flags.uiRichOngoing()) {
-            // If we got here via APP_NOTIFICATION_PROMOTION_SETTINGS intent, add the relevant
-            // preference key to navigate to & highlight. This argument is passed into
-            // HighlightablePreferenceGroupAdapter in the SettingsPreferenceFragment onCreateAdapter
-            // call.
-            if (mIntent != null && TextUtils.equals(mIntent.getAction(),
-                    Settings.ACTION_APP_NOTIFICATION_PROMOTION_SETTINGS)) {
-                Bundle args = getArguments();
-                if (args == null) {
-                    args = new Bundle();
-                }
-                args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
-                        PromotedNotificationsPreferenceController.KEY_PROMOTED_SWITCH);
-                setArguments(args);
+        // If we got here via APP_NOTIFICATION_PROMOTION_SETTINGS intent, add the relevant
+        // preference key to navigate to & highlight. This argument is passed into
+        // HighlightablePreferenceGroupAdapter in the SettingsPreferenceFragment onCreateAdapter
+        // call.
+        if (mIntent != null && TextUtils.equals(mIntent.getAction(),
+                Settings.ACTION_APP_NOTIFICATION_PROMOTION_SETTINGS)) {
+            Bundle args = getArguments();
+            if (args == null) {
+                args = new Bundle();
             }
+            args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
+                    PromotedNotificationsPreferenceController.KEY_PROMOTED_SWITCH);
+            setArguments(args);
         }
         return super.onCreateAdapter(preferenceScreen);
     }

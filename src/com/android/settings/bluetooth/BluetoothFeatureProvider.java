@@ -34,6 +34,7 @@ import kotlinx.coroutines.CoroutineScope;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 /** Provider for bluetooth related features. */
 public interface BluetoothFeatureProvider {
@@ -86,13 +87,12 @@ public interface BluetoothFeatureProvider {
             @NonNull Context context,
             @NonNull CoroutineScope scope);
 
-    /** Gets the alert dialogs for Bluetooth Diagnosis. */
-    @Nullable
-    AlertDialog getBluetoothDiagnosisAlertDialog(
+    /** Builds the alert dialogs for Bluetooth Diagnosis. */
+    void buildBluetoothDiagnosisAlertDialog(
             @NonNull Context context,
             @BluetoothDiagnosisEntryPoint int entryPoint,
             @Nullable CachedBluetoothDevice device,
-            int metricsCategory);
+            @NonNull Consumer<AlertDialog> onDialogBuilt);
 
     /** Send broadcast when connection failure happens. */
     void notifyConnectionFailureTimeChange(

@@ -26,6 +26,7 @@ import com.android.settings.gestures.OneHandedSettingsUtils
  *
  * This controller manages the display and summary text for the "System Controls" preference.
  */
+// LINT.IfChange
 class SystemControlsPreferenceController(context: Context, prefKey: String) :
     BasePreferenceController(context, prefKey) {
     override fun getAvailabilityStatus(): Int = AVAILABLE
@@ -40,3 +41,4 @@ class SystemControlsPreferenceController(context: Context, prefKey: String) :
         }
     }
 }
+// LINT.ThenChange(SystemControlsScreen.kt)

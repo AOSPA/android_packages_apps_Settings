@@ -15,20 +15,47 @@
  */
 package com.android.settings.supervision
 
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_SET_UP_PIN_ENTRY
 import android.content.Context
+import android.content.Intent
+import androidx.preference.Preference
+import androidx.preference.Preference.OnPreferenceClickListener
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.preference.PreferenceBinding
 
 /** Preference on the Supervision dashboard the invokes the flow to create a device PIN. */
-class SupervisionSetUpPinPreference : PreferenceMetadata, PreferenceAvailabilityProvider {
+class SupervisionSetUpPinPreference :
+    PreferenceMetadata,
+    PreferenceAvailabilityProvider,
+    PreferenceBinding,
+    OnPreferenceClickListener {
+
     override val key: String
         get() = KEY
 
     override val title: Int
         get() = R.string.supervision_set_up_pin_preference_title
 
-    override fun isAvailable(context: Context) = !context.isSupervisingCredentialSet
+    override fun isAvailable(context: Context) = !context.isSupervisingCredentialSet()
+
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
+        preference.onPreferenceClickListener = this
+    }
+
+    override fun onPreferenceClick(preference: Preference): Boolean {
+        FeatureFactory.featureFactory.metricsFeatureProvider.action(
+            preference.context,
+            ACTION_SUPERVISION_SET_UP_PIN_ENTRY,
+        )
+
+        val intent = Intent(preference.context, SetupSupervisionActivity::class.java)
+        preference.context.startActivity(intent)
+        return true
+    }
 
     companion object {
         const val KEY = "supervision_set_up_pin"

@@ -160,12 +160,17 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         }
         setActionBar(toolbar);
 
+        getToolbarDelegate().initToolbarButtonsContainer(findViewById(
+                com.android.settingslib.collapsingtoolbar.R.id.toolbar_buttons_container));
         getToolbarDelegate().initToolbarPrimaryButton(
                 findViewById(com.android.settingslib.collapsingtoolbar.R.id.primary_button));
         getToolbarDelegate().initToolbarSecondaryButton(
                 findViewById(com.android.settingslib.collapsingtoolbar.R.id.secondary_button));
         getToolbarDelegate().initToolbarActionButton(
                 findViewById(com.android.settingslib.collapsingtoolbar.R.id.action_button));
+        getToolbarDelegate().initToolbarActionIconOnlyButton(
+                findViewById(
+                        com.android.settingslib.collapsingtoolbar.R.id.action_icon_only_button));
 
         FloatingToolbarLayout toolbarLayout = findViewById(
                 com.android.settingslib.collapsingtoolbar.R.id.floating_toolbar);

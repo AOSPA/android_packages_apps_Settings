@@ -20,6 +20,7 @@ import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_CONF
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_NOT_AVAILABLE_LOCALE_WITH_CANCEL;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_REMOVE_AND_CHANGE_SYSTEM_LOCALE;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_REMOVE_LOCALE;
+import static com.android.settings.localepicker.LocaleUtils.getFirstTranslatedLocalePosition;
 import static com.android.settings.localepicker.LocaleUtils.getUserLocaleList;
 
 import android.app.settings.SettingsEnums;
@@ -176,17 +177,19 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
                         mSelectedLocaleInfo = saved;
                         int position = localeInfoList.indexOf(localeInfo);
                         localeInfoList.remove(position);
+                        int actionId = SettingsEnums.ACTION_MOVE_LANGUAGE_TOP;
                         int toPosition = 0; // menuItemId is R.id.move_top
                         if (menuItemId == R.id.move_up) {
                             toPosition = position - 1;
+                            actionId = SettingsEnums.ACTION_MOVE_LANGUAGE_UP;
                         } else if (menuItemId == R.id.move_down) {
                             toPosition = position + 1;
+                            actionId = SettingsEnums.ACTION_MOVE_LANGUAGE_DOWN;
                         }
                         localeInfoList.add(toPosition, saved);
                         mUpdatedLocaleInfoList = localeInfoList;
                         showConfirmDialog(localeInfoList);
-                        mMetricsFeatureProvider.action(mContext,
-                                SettingsEnums.ACTION_REORDER_LANGUAGE);
+                        mMetricsFeatureProvider.action(mContext, actionId);
                     } else {
                         NotificationController controller = NotificationController.getInstance(
                                 mContext);
@@ -306,6 +309,11 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
         LocaleList localeList = new LocaleList(mUpdatedLocaleInfoList.stream()
                 .map(LocaleStore.LocaleInfo::getLocale)
                 .toArray(Locale[]::new));
+        mMetricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_GET_SYSTEM_LANGUAGE_POSITION,
+                getFirstTranslatedLocalePosition(mUpdatedLocaleInfoList));
+        mMetricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_GET_LANGUAGE_LIST_SIZE, mUpdatedLocaleInfoList.size());
         // Update the Settings application to make things feel more responsive.
         LocaleList.setDefault(localeList);
         // Update the system.

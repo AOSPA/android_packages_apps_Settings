@@ -15,12 +15,15 @@
  */
 package com.android.settings.supervision
 
+import android.Manifest
 import android.app.settings.SettingsEnums
 import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
 import android.net.Uri
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -29,6 +32,7 @@ import android.text.Spanned
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
+import androidx.preference.Preference
 import androidx.preference.PreferenceGroup
 import androidx.preference.PreferenceGroupAdapter
 import androidx.test.core.app.ApplicationProvider
@@ -44,11 +48,13 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.ShadowPackageManager
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionAppStoreFiltersScreenTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val supervisionAppStoreFiltersScreen = SupervisionAppStoreFiltersScreen()
+    private val shadowPackageManager: ShadowPackageManager = shadowOf(context.packageManager)
 
     @get:Rule val setFlagsRule = SetFlagsRule()
 
@@ -100,6 +106,7 @@ class SupervisionAppStoreFiltersScreenTest {
         }
     }
 
+    @Test
     @EnableFlags(Flags.FLAG_ENABLE_APP_STORE_FILTERS_SCREEN)
     fun footerPreference() {
         supervisionAppStoreFiltersScreen.launchFragmentScenario().onFragment { fragment ->
@@ -147,5 +154,142 @@ class SupervisionAppStoreFiltersScreenTest {
             assertThat(intent.dataString).isEqualTo(learnMoreLink)
             assertThat(intent.action).isEqualTo(Intent.ACTION_VIEW)
         }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_APP_STORE_FILTERS_SCREEN)
+    fun getAppStoreFiltersEntries_findsAppsWithPermission() {
+        val appWithPermissionPackage = "com.example.goodapp"
+        val appWithPermissionLabel = "Good App Store"
+        val appWithPermissionClass = "com.example.goodapp.AppFilterSettingsActivity"
+        val appWithPermissionIconId = R.drawable.ic_apps_library
+
+        val appWithoutPermissionPackage = "com.example.badapp"
+        val appWithoutPermissionLabel = "Bad App Store"
+        val appWithoutPermissionClass = "com.example.badapp.AppFilterSettingsActivity"
+        val appWithoutPermissionIconId = R.drawable.ic_apps
+
+        val anotherAppWithPermissionPackage = "com.example.anothergoodapp"
+        val anotherAppWithPermissionLabel = "Another Good App Store"
+        val anotherAppWithPermissionClass = "com.example.anothergoodapp.AppFilterSettingsActivity"
+        val anotherAppWithPermissionIconId = R.drawable.ic_apps_alt
+
+        addAppStoreActivity(
+            componentName = ComponentName(appWithPermissionPackage, appWithPermissionClass),
+            label = appWithPermissionLabel,
+            hasInstallPackagesPermission = true,
+            iconId = appWithPermissionIconId,
+        )
+        addAppStoreActivity(
+            componentName = ComponentName(appWithoutPermissionPackage, appWithoutPermissionClass),
+            label = appWithoutPermissionLabel,
+            hasInstallPackagesPermission = false,
+            iconId = appWithoutPermissionIconId,
+        )
+        addAppStoreActivity(
+            componentName =
+                ComponentName(anotherAppWithPermissionPackage, anotherAppWithPermissionClass),
+            label = anotherAppWithPermissionLabel,
+            hasInstallPackagesPermission = true,
+            iconId = anotherAppWithPermissionIconId,
+        )
+
+        // check to see that correct app stores are added to the UI
+        supervisionAppStoreFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            // Assert: Check the contents of the PreferenceGroup
+            val preferenceGroup =
+                fragment.findPreference<PreferenceGroup>(
+                    SupervisionAppStoreFiltersScreen.SUPERVISION_APP_STORE_FILTERS_GROUP
+                )
+            assertThat(preferenceGroup).isNotNull()
+
+            assertThat(preferenceGroup!!.preferenceCount).isEqualTo(2)
+
+            val pref1 = preferenceGroup.findPreference<Preference>(appWithPermissionPackage)
+            assertThat(pref1).isNotNull()
+            assertThat(pref1!!.title.toString()).isEqualTo(appWithPermissionLabel)
+            assertThat(pref1.key.toString()).isEqualTo(appWithPermissionPackage)
+            assertThat(pref1.icon).isNotNull()
+
+            val pref2 = preferenceGroup.findPreference<Preference>(anotherAppWithPermissionPackage)
+            assertThat(pref2).isNotNull()
+            assertThat(pref2!!.title.toString()).isEqualTo(anotherAppWithPermissionLabel)
+            assertThat(pref2.key.toString()).isEqualTo(anotherAppWithPermissionPackage)
+            assertThat(pref2.icon).isNotNull()
+
+            val badPref = preferenceGroup.findPreference<Preference>(appWithoutPermissionPackage)
+            assertThat(badPref).isNull()
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_APP_STORE_FILTERS_SCREEN)
+    fun onAppStorePreferenceClick_launchesIntent() {
+        val appPackage = "com.example.appstore"
+        val appClass = "com.example.appstore.SettingsActivity"
+        val appLabel = "My App Store"
+
+        addAppStoreActivity(
+            componentName = ComponentName(appPackage, appClass),
+            label = appLabel,
+            hasInstallPackagesPermission = true,
+            iconId = R.drawable.ic_apps_library,
+        )
+
+        supervisionAppStoreFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val preferenceGroup =
+                fragment.findPreference<PreferenceGroup>(
+                    SupervisionAppStoreFiltersScreen.SUPERVISION_APP_STORE_FILTERS_GROUP
+                )
+            assertThat(preferenceGroup).isNotNull()
+
+            val pref = preferenceGroup!!.findPreference<Preference>(appPackage)
+            assertThat(pref).isNotNull()
+
+            pref!!.performClick()
+
+            val shadowActivity = shadowOf(fragment.requireActivity())
+            val nextIntentResult = shadowActivity.nextStartedActivityForResult
+
+            assertThat(nextIntentResult).isNotNull()
+            val startedIntent = nextIntentResult.intent
+            assertThat(startedIntent).isNotNull()
+
+            assertThat(startedIntent.component?.packageName).isEqualTo(appPackage)
+            assertThat(startedIntent.component?.className).isEqualTo(appClass)
+        }
+    }
+
+    private fun addAppStoreActivity(
+        componentName: ComponentName,
+        label: String,
+        hasInstallPackagesPermission: Boolean,
+        iconId: Int,
+    ) {
+        val packageName = componentName.packageName
+        val packageInfo =
+            PackageInfo().apply {
+                this.packageName = packageName
+                applicationInfo =
+                    ApplicationInfo().apply {
+                        this.packageName = packageName
+                        name = label
+                        icon = iconId
+                    }
+                if (hasInstallPackagesPermission) {
+                    requestedPermissions = arrayOf(Manifest.permission.INSTALL_PACKAGES)
+                } else {
+                    requestedPermissions = emptyArray()
+                }
+            }
+
+        shadowPackageManager.installPackage(packageInfo)
+
+        shadowPackageManager.addActivityIfNotPresent(componentName)
+        val intentFilter =
+            IntentFilter(SupervisionAppStoreFiltersScreen.ACTION_VIEW_APP_FILTER_SETTINGS).apply {
+                addCategory(Intent.CATEGORY_DEFAULT)
+            }
+        shadowPackageManager.addIntentFilterForActivity(componentName, intentFilter)
     }
 }

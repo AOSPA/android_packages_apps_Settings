@@ -36,7 +36,10 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.BooleanValuePreferenceBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 /** A catalyst main switch preference for switching SIM on/off. */
@@ -46,13 +49,14 @@ class MobileNetworkMainSwitchPreference(
     private val subId: Int,
     private val subscriptionActivationRepository: SubscriptionActivationRepository =
         SubscriptionActivationRepository(context),
-    private val subscriptionRepository: SubscriptionRepository =
-        SubscriptionRepository(context),
+    private val subscriptionRepository: SubscriptionRepository = SubscriptionRepository(context),
 ) :
     MainSwitchBarMetadata,
     BooleanValuePreferenceBinding,
     PreferenceLifecycleProvider,
     PreferenceAvailabilityProvider {
+
+    val isActivationChangeable = MutableStateFlow(false)
 
     override val key: String
         get() = KEY
@@ -61,7 +65,7 @@ class MobileNetworkMainSwitchPreference(
         get() = R.string.mobile_network_use_sim_on
 
     override fun isEnabled(context: Context): Boolean {
-        return runBlocking { subscriptionActivationRepository.isActivationChangeableFlow().first() }
+        return isActivationChangeable.value
     }
 
     override val disableWidgetOnCheckedChanged: Boolean
@@ -81,6 +85,16 @@ class MobileNetworkMainSwitchPreference(
 
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
+
+    override fun onStart(context: PreferenceLifecycleContext) {
+        super.onStart(context)
+        context.lifecycleScope.launch(Dispatchers.Default) {
+            subscriptionActivationRepository.isActivationChangeableFlow().collect { it ->
+                isActivationChangeable.value = it
+                context.notifyPreferenceChange(KEY)
+            }
+        }
+    }
 
     override fun onResume(context: PreferenceLifecycleContext) {
         super.onResume(context)

@@ -144,6 +144,8 @@
     <string name="bluetooth_disconnect_title">Disconnect device?</string>
     <!-- Title for bluetooth pairing item [CHAR LIMIT=60] -->
     <string name="bluetooth_pairing_pref_title">Pair new device</string>
+    <!-- Message on the button when can't find the device [CHAR LIMIT=60] -->
+    <string name="bluetooth_pairing_no_device_button_message">Can\'t find your device?</string>
     <!-- Keywords for bluetooth pairing item [CHAR LIMIT=30] -->
     <string name="keywords_add_bt_device">bluetooth</string>
     <!-- Title for bluetooth auto on toggle [CHAR LIMIT=60] -->
@@ -301,9 +303,6 @@
     <!-- Footer description for discoverable mode in bluetooth off state [CHAR LIMIT=none] -->
     <string name="bluetooth_off_footer">Turn on Bluetooth to connect to other devices.</string>
 
-    <!-- Footer description for shared network [CHAR LIMIT=none] -->
-    <string name="shared_network_footer">Contact the network owner or a device admin to make changes to this network.</string>
-
     <!-- Title for paired device group [CHAR LIMIT=none] -->
     <string name="bluetooth_paired_device_title">Your devices</string>
     <!-- Title for pairing bluetooth device page [CHAR LIMIT=none] -->
@@ -322,10 +321,6 @@
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_hw_offload_dialog_cancel">Cancel</string>
 
-    <!-- Setting toggle title for disabling Bluetooth LE Audio feature. [CHAR LIMIT=40] -->
-    <string name="bluetooth_disable_leaudio">Disable Bluetooth LE audio</string>
-    <!-- Summary of toggle for disabling Bluetooth LE audio [CHAR LIMIT=none]-->
-    <string name="bluetooth_disable_leaudio_summary">Disables Bluetooth LE audio feature if the device supports LE audio hardware capabilities.</string>
     <!-- Setting toggle title for switch Bluetooth LE Audio mode. [CHAR LIMIT=40] -->
     <string name="bluetooth_leaudio_mode">Bluetooth LE Audio mode</string>
     <!-- Setting toggle title for enabling Bluetooth LE Audio toggle in Device Details. [CHAR LIMIT=40] -->
@@ -2203,6 +2198,8 @@
     <string name="device_details_title">Device details</string>
     <!-- Title for keyboard settings preferences. [CHAR LIMIT=50] -->
     <string name="bluetooth_device_keyboard_settings_preference_title">Keyboard settings</string>
+    <!-- Title for game controller settings preferences. [CHAR LIMIT=50] -->
+    <string name="bluetooth_device_game_controller_settings_preference_title">Game Controller settings</string>
     <!-- Title for more settings preferences. [CHAR LIMIT=50] -->
     <string name="bluetooth_device_more_settings_preference_title">More settings</string>
     <!-- Title for more settings summary. [CHAR LIMIT=50] -->
@@ -2309,8 +2306,14 @@
     <string name="external_display_no_display_connected_screen_summary">Connect an external display to get started, or try using a different cable</string>
     <!-- External Display settings. More resolution options -->
     <string name="external_display_more_options_title">More options</string>
-    <!-- External Display settings. -->
+    <!-- External Display settings. Topology rearrangement hint (hold and drag / tap to show arrows) will be alternatively shown / 5s. Tapping on the text itself will pause the hint cycling animation -->
+    <string name="external_display_pause_topology_hint">Pause hint text cycling animation</string>
+    <!-- External Display settings. Default topology hint. -->
     <string name="external_display_topology_hint">Hold and drag to rearrange displays</string>
+    <!-- External Display settings. DisplayTopology panel hint to indicate that display blocks can be tapped again to show arrows (that can be used to move and rearrange displays) -->
+    <string name="external_display_tap_to_show_arrows">Tap to show navigation arrows</string>
+    <!-- External Display settings. DisplayTopology panel hint to indicate that arrows can be tapped to move display block in the desired direction -->
+    <string name="external_display_tap_arrows_to_rearrange">Tap arrows to rearrange displays</string>
     <!-- External Display settings. -->
     <string name="external_display_mirroring_title">Mirror built-in display</string>
     <!-- External Display settings. Dialog title to confirm if resolution change wants to be applied (change was first temporarily applied while showing dialog). -->
@@ -2329,6 +2332,14 @@
     <string name="external_display_topology_a11y_action_move_left">Move left</string>
     <!-- External Display settings. Display topology a11y -->
     <string name="external_display_topology_a11y_action_move_right">Move right</string>
+    <!-- External Display settings. Display topology a11y -->
+    <string name="external_display_topology_a11y_display_moved_up">Display: %1$s moved up</string>
+    <!-- External Display settings. Display topology a11y -->
+    <string name="external_display_topology_a11y_display_moved_down">Display: %1$s moved down</string>
+    <!-- External Display settings. Display topology a11y -->
+    <string name="external_display_topology_a11y_display_moved_left">Display: %1$s moved left</string>
+    <!-- External Display settings. Display topology a11y -->
+    <string name="external_display_topology_a11y_display_moved_right">Display: %1$s moved right</string>
 
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Google Cast</string>
@@ -2707,22 +2718,24 @@
     <string name="shared_message">shared</string>
     <!-- Label for the private wifi message -->
     <string name="private_message">private</string>
-    <!-- Label for the conflict wifi dialog confirm button -->
-    <string name="wifi_conflict_dialog_confirm">Confirm</string>
-    <!-- Label for the conflict wifi dialog cancel button -->
+    <!-- Label for the conflict wifi dialog switch button [CHAR LIMIT=12] [SCREENSHOT=screen/WDcGQEccdjdc5es] -->
+    <string name="wifi_conflict_dialog_switch">Switch</string>
+    <!-- Label for the conflict wifi dialog cancel button [CHAR LIMIT=12] [SCREENSHOT=screen/WDcGQEccdjdc5es] -->
     <string name="wifi_conflict_dialog_cancel">Cancel</string>
-    <!-- Title for the preference to share a network with other users on the same device -->
-    <string name="wifi_share_preference_title">This is a shared network</string>
-    <!-- Summary for the preference to share a network with other users on the same device -->
-    <string name="wifi_share_preference_summary">All users with the exception of guest users, will be able to view, edit and delete this network</string>
-    <!-- Alert dialog title, informing the user to switch to the conflicting network.  [CHAR LIMIT=250] -->
-    <string name="wifi_conflict_dialog_title">Switch to <xliff:g id="shared">%1$s</xliff:g> \"<xliff:g id="network_name">%2$s</xliff:g>\" network?</string>
-    <!-- Alert dialog summary, informing the user to switch to the conflicting network.  [CHAR LIMIT=250] -->
-    <string name="wifi_conflict_dialog_message">You\'re currently connected to a <xliff:g id="shared">%1$s</xliff:g> network with the same name. When you switch, you\'ll disconnect from the <xliff:g id="shared">%2$s</xliff:g> network and then reconnect to the <xliff:g id="private">%3$s</xliff:g> network. You may temporarily have no internet.</string>
+    <!-- Title for the preference to share a network with other users on the same device [CHAR LIMIT=30] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
+    <string name="wifi_share_preference_title">Share network</string>
+    <!-- Summary for the preference to share a network with other users on the same device [CHAR LIMIT=NONE] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
+    <string name="wifi_share_preference_summary">Other users on this device can access this network</string>
+    <!-- Alert dialog title, informing the user to switch to the conflicting network which already has the desired share toggle value. [CHAR LIMIT=30] [SCREENSHOT=screen/WDcGQEccdjdc5es] -->
+    <string name="wifi_conflict_dialog_title">Switch to <xliff:g id="shared">%1$s</xliff:g> network?</string>
+    <!-- Alert dialog summary, informing the user to switch to the conflicting network which already has the desired share toggle value. [CHAR LIMIT=NONE] [SCREENSHOT=screen/WDcGQEccdjdc5es]-->
+    <string name="wifi_conflict_dialog_message">A <xliff:g id="shared">%1$s</xliff:g> network with the name \"<xliff:g id="network_name">%2$s</xliff:g>\" already exists. If you switch to the <xliff:g id="shared">%1$s</xliff:g> network, you will leave your <xliff:g id="private">%3$s</xliff:g> network and you may temporarily have no internet.</string>
     <!-- Hint for unchanged fields -->
     <string name="wifi_unchanged">(unchanged)</string>
-    <!-- Label for the check box to allow other device users to edit network details -->
-    <string name="wifi_allow_edit_configuration_title">Allow other users to edit network configuration</string>
+    <!-- Label for the check box to allow other device users to edit network details [CHAR LIMIT=30] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
+    <string name="wifi_allow_edit_configuration_title">Allow users to edit network</string>
+    <!-- Label for the check box to allow other device users to edit network details [CHAR LIMIT=NONE] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
+    <string name="wifi_allow_edit_configuration_summary">Other users can make changes to this network</string>
     <!-- Hint for unspecified fields -->
     <string name="wifi_unspecified">Please select</string>
     <!-- Hint for multiple certificates being added to the configuration -->
@@ -2750,14 +2763,12 @@
     <string name="wifi_scan_always_confirm_deny">Deny</string>
     <!-- Error message displayed below the Wi-Fi EditText when the filed is required. [CHAR LIMIT=NONE] -->
     <string name="wifi_field_required">*required</string>
-    <!-- Message to inform user, the network can only be configured at a shared network.  [CHAR LIMIT=250] -->
-    <string name="wifi_shared_network_login_screen_warning">This is a shared network. You can change this setting once logged in.</string>
-    <!-- Label for the share wifi network toggle. [CHAR LIMIT=250] -->
-    <string name="share_wifi_network">Share this network with other device users</string>
-    <!-- Label for the share wifi network summary. [CHAR LIMIT=NONE] -->
-    <string name="share_wifi_network_summary">All users on this device can view and connect to a shared network. Administrators can delete a shared network. Learn more</string>
-    <string name="edit_wifi_network_configuration">Allow other users to edit network configuration</string>
-    <string name="edit_wifi_network_non_owner_message">Contact the admin of this device to make changes to this network.</string>
+    <!-- Message to inform headless system user, the network can only be configured after they log in. [CHAR LIMIT=NONE] [SCREENSHOT=screen/35ZTCRoD2K22W2P] -->
+    <string name="wifi_shared_network_login_screen_warning">This is a shared network. You need to sign in to make changes.</string>
+    <!-- Message to inform user, the network can only be configured by device admin or network owner. Will be used as both a tooltip and footer description. [CHAR LIMIT=NONE] [SCREENSHOT=screen/6MYkFQCPvtEAtHz] -->
+    <string name="edit_wifi_network_non_owner_message">Contact the network owner or device admin to make changes.</string>
+    <!-- Message displayed when a user hovers over the shared network icon. [CHAR LIMIT=NONE] [SCREENSHOT=screen/87w2B9komPHTVSK]-->
+    <string name="wifi_shared_network_icon_message">All users on this device can access this network.</string>
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no internet access. Stay connected?</string>
@@ -2795,10 +2806,8 @@
     <string name="wifi_cancel">Cancel</string>
     <!-- Dialog title for forget confirmation dialog -->
     <string name="wifi_forget_dialog_title">Forget network?</string>
-    <!-- Dialog title for forget confirmation dialog on shared wifi network -->
-    <string name="shared_wifi_forget_dialog_title">Forget all device users?</string>
-    <!-- Dialog summary for forget confirmation dialog on shared wifi network -->
-    <string name="shared_wifi_forget_dialog_message"><xliff:g id="network_name">%1$s</xliff:g> is used by other users on this device, and all users of this network will need to set it up again. Still want to forget?</string>
+    <!-- Dialog summary for forget confirmation dialog on shared wifi network [CHAR LIMIT=NONE] [SCREENSHOT=screen/8VTjf4rnDw8CZKw] -->
+    <string name="shared_wifi_forget_dialog_message"><xliff:g id="network_name">%1$s</xliff:g> will be removed for all users on this device</string>
 
     <!-- Wi-Fi Advanced Settings -->
     <skip />
@@ -2982,6 +2991,7 @@
     <string name="wifi_hotspot_speed_summary_6g">6 GHz / Compatible with few devices</string>
     <!-- Summary for Wifi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_summary_2g_and_5g">2.4 and 5 GHz / Compatible with most devices</string>
+    <string name="wifi_hotspot_speed_summary_2g_and_6g">2.4 and 6 GHz / Compatible with most devices</string>
     <!-- Top introduction on the Wi-Fi hotspot speed settings, summarizes options available for Wi-Fi hotspot bands. [CHAR LIMIT=NONE] -->
     <string name="wifi_hotspot_speed_intro">Choose a frequency for your hotspot. The frequency affects the connection speed and what types of devices can find your hotspot.</string>
     <!-- Category title on the radio button of the Wi-Fi hotspot speed. [CHAR LIMIT=NONE] -->
@@ -3002,6 +3012,10 @@
     <string name="wifi_hotspot_speed_6g">6 GHz</string>
     <!-- Summary for radio button of the Wi-Fi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_6g_summary">Fastest speeds. Compatible with few devices.</string>
+    <!-- Title for radio button of the Wi-Fi hotspot speed to 2.4 GHz and 6 GHz bands [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_2g_6g">2.4 and 6 GHz</string>
+    <!-- Summary for radio button of the Wi-Fi hotspot speed to 2.4 GHz and 6 GHz bands [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_2g_6g_summary">Fastest speeds. This dual-band hotspot is compatible with most devices.</string>
     <!-- Summary for the Wi-Fi hotspot speed unavailable [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_summary_unavailable">Not available in your country or region</string>
     <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
@@ -4093,6 +4107,8 @@
     <string name="error_mnc_not23">MNC field must be 2 or 3 digits.</string>
     <!-- APN error dialog messages: -->
     <string name="error_adding_apn_type">Carrier does not allow adding APNs of type %s.</string>
+    <!-- APN error dialog messages: -->
+    <string name="error_disallow_adding_apn">Carrier doesn\'t allow adding this APN.</string>
     <!-- APN error messages: -->
     <string name="error_mmsc_valid">MMSC field must be valid.</string>
     <!-- The message of dialog indicated restoring default APN settings in progress -->
@@ -5252,6 +5268,39 @@
     <!-- Summary text for none selected keyboard default layout -->
     <string name="keyboard_default_layout">Default</string>
 
+    <!-- Title for the button to trigger the 'Game Controller settings' page if only connected with a game controller. [CHAR LIMIT=35] -->
+    <string name="game_controller_settings_title">Game Controllers</string>
+    <!-- Title for the preference category for key remapping for game controllers. [CHAR LIMIT=35] -->
+    <string name="game_controller_key_remapping">Keys</string>
+    <!-- Title for the preference category for stick remapping for game controllers. [CHAR LIMIT=35] -->
+    <string name="game_controller_stick_remapping">Axes</string>
+    <!-- Title for the preference category for button A remapping. Button A is typical game controller button with "A" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_a">A Button</string>
+    <!-- Title for the preference category for button B remapping. Button B is typical game controller button with "B" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_b">B Button</string>
+    <!-- Title for the preference category for button X remapping. Button X is typical game controller button with "X" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_x">X Button</string>
+    <!-- Title for the preference category for button Y remapping. Button Y is typical game controller button with "Y" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_y">Y Button</string>
+    <!-- Title for the preference category for button L1 remapping. Button L1 is typical game controller trigger with "L1" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_l1">L1 Button</string>
+    <!-- Title for the preference category for button R1 remapping. Button R1 is typical game controller trigger with "R1" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_r1">R1 Button</string>
+    <!-- Title for the preference category for button L2 remapping. Button L2 is typical game controller trigger with "L2" printed on it.[CHAR LIMIT=35] -->
+    <string name="game_controller_button_l2">L2 Button</string>
+    <!-- Title for the preference category for button R2 remapping. Button R2 is typical game controller trigger with "R2" printed on it. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_r2">R2 Button</string>
+    <!-- Title for the preference category for button thumbl remapping. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_thumbl">Left Stick Click</string>
+    <!-- Title for the preference category for button thumbr remapping. [CHAR LIMIT=35] -->
+    <string name="game_controller_button_thumbr">Right Stick Click</string>
+    <!-- Title for the preference category for dpad remapping. [CHAR LIMIT=35] -->
+    <string name="game_controller_dpad">D-pad</string>
+    <!-- Title for the preference category for left stick remapping. [CHAR LIMIT=35] -->
+    <string name="game_controller_stick_left">Left Stick</string>
+    <!-- Title for the preference category for right stick remapping. [CHAR LIMIT=35] -->
+    <string name="game_controller_stick_right">Right Stick</string>
+
     <!-- Title for the button to trigger the 'trackpad settings' page if only connect with a touchpad. [CHAR LIMIT=35] -->
     <string name="trackpad_settings">Touchpad</string>
     <!-- Title for the button to trigger the 'trackpad settings' page if connect with a touchpad and a mouse. [CHAR LIMIT=35] -->
@@ -6165,6 +6214,12 @@
     <string name="accessibility_expanded_dark_theme_summary">Automatically applies dark theme to most apps that don\'t support it. This can improve accessibility and readability, but may cause some apps to display incorrectly.</string>
     <!-- Search keywords for the Expanded dark theme settings. [CHAR_LIMIT=NONE] -->
     <string name="keywords_expanded_dark_theme">force invert, color inversion, contrast</string>
+    <!-- Title for the Expanded dark theme per-app settings page. [CHAR LIMIT=35] -->
+    <string name="accessibility_expanded_dark_theme_exceptions_title">Expanded dark theme</string>
+    <!-- Description for the Expanded dark theme per-app settings gear icon. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description">Expanded dark theme settings</string>
+    <!-- Hint for the Expanded dark theme per-app settings gear icon. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_expanded_dark_theme_exceptions_gear_hint">Open expanded dark theme settings</string>
     <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
@@ -6403,9 +6458,10 @@
     <string name="accessibility_shortcut_edit_screen_title">Edit accessibility shortcuts</string>
     <!-- Prompt for editing the shortcuts of multiple accessibility features. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_screen_prompt">Choose your shortcut for %1$s</string>
-    <!-- Summary to display when a shortcut setting is disabled, due to the shortcut being unassigned -->
-    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary">To use this, turn on the %1$s shortcut on an accessibility feature\'s page</string>
-
+    <!-- Summary to display when a shortcut setting is disabled, due to the "accessibility button" shortcut being unassigned. The "accessibility button" is the same as @string/accessibility_shortcut_edit_summary_software -->
+    <string name="a11y_button_shortcut_unassigned_setting_unavailable_summary">To use this, turn on the accessibility button shortcut on an accessibility feature\'s page</string>
+    <!-- Summary to display when a shortcut setting is disabled, due to the "volume keys" shortcut being unassigned. The "volume keys" is the same as @string/accessibility_shortcut_hardware_keyword -->
+    <string name="a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary">To use this, turn on the volume keys shortcut on an accessibility feature\'s page</string>
     <!-- Button text for the accessibility dialog continue to the next screen for hearing aid. [CHAR LIMIT=32] -->
     <string name="accessibility_hearingaid_instruction_continue_button">Continue</string>
     <!-- Title for the accessibility preference for hearing devices. [CHAR LIMIT=35] -->
@@ -6900,6 +6956,16 @@
     <!-- Preference summary for advanced battery usage, since last full charge [CHAR LIMIT=40] -->
     <string name="advanced_battery_preference_summary">View usage since last full charge</string>
 
+    <!-- Title for the battery advance info tip [CHAR LIMIT=NONE] -->
+    <string name="battery_advance_info"></string>
+    <!-- Preference summary for advanced battery loading usage [CHAR LIMIT=NONE] -->
+    <string name="battery_advance_preference_loading_summary"></string>
+    <!-- Description of battery advance info profile results [CHAR LIMIT=NONE] -->
+    <string name="battery_advance_info_profile_result_1"></string>
+    <string name="battery_advance_info_profile_result_2"></string>
+    <string name="battery_advance_info_profile_result_3"></string>
+    <string name="battery_advance_info_profile_result_4"></string>
+
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="battery_details_title">App battery usage</string>
     <!-- Subtitle for application/subsystem details -->
@@ -7247,7 +7313,7 @@
     <!-- Process Stats strings -->
     <skip />
     <!-- Description of battery information footer text. [CHAR LIMIT=NONE] -->
-    <string name="battery_cycle_count_footer">Due to quality inspections before shipping, the cycle count may not be zero on first use</string>
+    <string name="battery_cycle_count_footer">Due to factory inspections before shipping, it may show that your device was used before you set it up and the cycle count may not be zero, which is normal</string>
 
     <!-- [CHAR LIMIT=NONE] Activity title for Process Stats summary -->
     <string name="process_stats_summary_title">Process Stats</string>
@@ -7434,7 +7500,7 @@
     <string name="cellular_security_summary">Network type, encryption, notification controls</string>
 
     <!-- Summary of Cellular network security settings page in Network & Internet. [CHAR LIMIT=NONE]-->
-    <string name="cellular_security_top_intro">These settings help protect your calls, messages, and data from outdated or unencrypted networks that could expose you to data theft or surveillance</string>
+    <string name="cellular_security_top_intro">These settings help protect your calls, messages, and data from outdated or unencrypted networks that could expose you to data theft or surveillance.</string>
 
     <!-- Title of cellular security settings page [CHAR LIMIT=60]-->
     <string name="cellular_security_settings_title">Mobile network security</string>
@@ -8223,6 +8289,9 @@
     <string name="user_revoke_last_admin_title">Can’t remove admin privileges</string>
     <!-- Message for the warning dialog when the user tries to revoke the admin status from the last admin user [CHAR LIMIT=none] -->
     <string name="user_revoke_last_admin_message">You are the only admin user on this device. If you no longer want to be an admin, you need to make another user an admin first. </string>
+    <!-- User settings summary for a restricted profile [CHAR LIMIT=50] -->
+    <string name="add_user_summary_action_restricted">Blocked by work policy</string>
+
     <!-- Title for the emergency info preference [CHAR LIMIT=40] -->
     <string name="emergency_info_title">Emergency information</string>
     <!-- Summary for the emergency info preference [CHAR LIMIT=40] -->
@@ -10627,6 +10696,8 @@
     <string name="zen_mode_trigger_title_bedtime">Bedtime routine</string>
     <!-- Modes: Trigger title for modes of type DRIVING. [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_driving">While driving</string>
+    <!-- Modes: Trigger title for modes of type TRANSIT. [CHAR LIMIT=30] -->
+    <string name="zen_mode_trigger_title_transit">While transiting</string>
     <!-- Modes: Generic trigger title for modes of other types [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_generic">App settings</string>
     <!-- Modes: Generic trigger summary for modes where the owner app did not provide a triggerDescription but did provide a configurationActivity to call [CHAR LIMIT=60] -->
@@ -10661,6 +10732,8 @@
     <string name="zen_mode_blurb_theater">Eliminate all distractions for a quiet environment</string>
     <!-- Modes: Blurb for a mode of type MANAGED. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_managed">Personalize device experiences and settings for different users</string>
+    <!-- Modes: Blurb for a mode of type TRANSIT. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_blurb_transit">Enjoy a better transit ride with automatic settings adjustments</string>
     <!-- Modes: Blurb for modes that are not of a specific type (OTHER, UNKNOWN). [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_generic">Minimize interruptions by only allowing important people and apps to reach you</string>
 
@@ -10678,6 +10751,8 @@
     <string name="zen_mode_inspiration_theater">For moments when courtesy counts</string>
     <!-- Modes: Inspirational text for a mode of type MANAGED. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_inspiration_managed">Guided usage to help you stay in good hands</string>
+    <!-- Modes: Inspirational text for a mode of type TRANSIT. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_inspiration_transit">Optimize your device for a smoother public transit experience</string>
     <!-- Modes: Inspirational text for modes that are not of a specific type (OTHER, UNKNOWN). [CHAR LIMIT=NONE] -->
     <string name="zen_mode_inspiration_generic">Take control of your attention</string>
 
@@ -11346,6 +11421,19 @@
     <string name="allow_manage_external_storage_description">Allow this app to read, modify and delete all files on this device or any connected storage volumes. If granted, app may access files without your explicit knowledge.</string>
     <!-- Label for showing apps that can manage external storage[CHAR LIMIT=45] -->
     <string name="filter_manage_external_storage">Can access all files</string>
+
+    <!-- Computer control automation settings title [CHAR LIMIT=40] [SCREENSHOT=screen/3gqAyPwhuTgdoh5] -->
+    <string name="computer_control_automation_page_title">Screen automation</string>
+    <!-- Label for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/3gqAyPwhuTgdoh5] -->
+    <string name="computer_control_automation_switch_title">Allow this app to fully automate other apps</string>
+    <!-- Description for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/3gqAyPwhuTgdoh5] -->
+    <string name="computer_control_automation_footer_description">This app will able control your apps. Apps being controlled can\u2019t be used while screen automation is ongoing, but you can always stop it.</string>
+    <!-- Preference summary text for an app when computer control access must be confirmed every time. [CHAR LIMIT=45] [SCREENSHOT=screen/4HoRqQaeUTunirH] -->
+    <string name="computer_control_automation_ask_every_time">Ask every time</string>
+    <!-- Preference summary text for an app when computer control access is always allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/4HoRqQaeUTunirH] -->
+    <string name="computer_control_automation_always_allowed">Always allowed</string>
+    <!-- Preference summary text for an app when computer control access is not allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/4HoRqQaeUTunirH] -->
+    <string name="computer_control_automation_dont_allow">Don\u2019t allow</string>
 
     <!-- Manage full screen intent permission title [CHAR LIMIT=40] -->
     <string name="full_screen_intent_title">Full-screen notifications</string>
@@ -12197,6 +12285,9 @@
     <!-- Content description for button that brings the user to the Gesture Navigation settings page.-->
     <string name="gesture_settings_button_description">Gesture navigation settings</string>
 
+    <!-- Hint text for clicking a button that opens the Gesture Navigation settings page.-->
+    <string name="gesture_settings_extra_button_hint">open gesture navigation settings</string>
+
     <!-- Title for the screen to show the gesture navigation tutorial [CHAR LIMIT=80] -->
     <string name="gesture_navigation_tutorial_title">Try a demo</string>
 
@@ -12205,6 +12296,9 @@
 
     <!-- Content description for button that brings the user to the Button Navigation settings page.-->
     <string name="button_navigation_settings_button_description">Button navigation settings</string>
+
+    <!-- Hint text for clicking a button that opens the Button Navigation settings page.-->
+    <string name="button_navigation_settings_extra_button_hint">open button navigation settings</string>
 
     <!-- Title text for changing the order of the navbar buttons -->
     <string name="button_navigation_settings_order_title">Button order</string>
@@ -15054,6 +15148,10 @@
     <string name="supervision_settings_title">Parental controls</string>
     <!-- Description for Supervision settings menu entry [CHAR LIMIT=NONE] -->
     <string name="supervision_settings_summary">Digital ground rules &amp; screen time limits</string>
+    <!-- Title for the introduction screen of the parental controls PIN setup flow. [CHAR LIMIT=NONE] -->
+    <string name="supervision_intro_title">Create a parental controls PIN for this device</string>
+    <!-- Description for the introduction screen of the parental controls PIN setup flow. [CHAR LIMIT=NONE] -->
+    <string name="supervision_intro_description">You\u2019ll use this PIN to manage parental controls settings and apps on this device.\n\nYou can edit or delete the PIN from Android Settings &gt; Parental Controls.</string>
     <!-- Description of device supervision toggle when PIN has never been set up [CHAR LIMIT=NONE] -->
     <string name="device_supervision_switch_no_pin_summary">Set up PIN</string>
     <!-- Title for supervision set up PIN entry [CHAR LIMIT=60] -->
@@ -15062,22 +15160,24 @@
     <string name="keywords_supervision_settings">supervision, parental controls, parents, supervision pin, pin</string>
     <!-- Title for supervision PIN management settings entry [CHAR LIMIT=60] -->
     <string name="supervision_pin_management_preference_title">Manage your PIN</string>
+    <!-- Title for supervision PIN management settings entry [CHAR LIMIT=60] -->
+    <string name="supervision_manage_pin_preference_title">Manage parental controls PIN</string>
     <!-- Title for supervision PIN management settings screen [CHAR LIMIT=60] -->
     <string name="supervision_pin_management_screen_title">Parental controls PIN</string>
     <!-- Search keywords for supervision PIN management settings entry [CHAR LIMIT=NONE] -->
     <string name="supervision_pin_management_preference_keywords">Parent PIN, Parental controls PIN</string>
-    <!-- Description for supervision PIN management settings entry, in the case of adding a PIN recovery method[CHAR LIMIT=NONE] -->
-    <string name="supervision_pin_management_preference_summary_add">Add recovery email</string>
-    <!-- Description for supervision PIN management settings entry, in the case of verifying the PIN recovery method[CHAR LIMIT=NONE] -->
-    <string name="supervision_pin_management_preference_summary_verify_recovery">Verify recovery email</string>
+    <!-- Description for supervision PIN management settings entry, in the case of adding a PIN recovery method[CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=2247921267270577374] -->
+    <string name="supervision_pin_management_preference_summary_add">Add recovery info</string>
+    <!-- Description for supervision PIN management settings entry, in the case of verifying the PIN recovery method[CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=5072554239108915119] -->
+    <string name="supervision_pin_management_preference_summary_verify_recovery">Verify recovery info</string>
     <!-- Title for supervision change PIN setting entry [CHAR LIMIT=60] -->
     <string name="supervision_change_pin_preference_title">Change PIN</string>
     <!-- Title for supervision forgot PIN setting entry [CHAR LIMIT=60] -->
     <string name="supervision_add_forgot_pin_preference_title">Forgot PIN</string>
     <!-- Label for the fallback option button "Forgot PIN?" on the authentication prompt [CHAR LIMIT=60] -->
     <string name="supervision_auth_prompt_forgot_pin_button_label">Forgot PIN?</string>
-    <!-- Title for supervision update PIN recovery email setting entry [CHAR LIMIT=60] -->
-    <string name="supervision_update_recovery_email_preference_title">Update recovery email</string>
+    <!-- Title for supervision update PIN recovery email setting entry [CHAR LIMIT=60] [BACKUP_MESSAGE_ID=2057393838251915087] -->
+    <string name="supervision_update_recovery_email_preference_title">Update recovery info</string>
     <!-- Toast message for supervision recovery email added [CHAR LIMIT=NONE] -->
     <string name="supervision_recovery_email_added">Recovery email added</string>
     <!-- Toast message for supervision recovery email verified [CHAR LIMIT=NONE] -->
@@ -15100,10 +15200,10 @@
     <string name="supervision_recovery_banner_summary_add">If you forget your PIN, you can use your account to reset it</string>
     <!-- Title for supervision delete pin setting entry [CHAR LIMIT=60] -->
     <string name="supervision_delete_pin_preference_title">Delete PIN</string>
-    <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
-    <string name="supervision_add_pin_recovery_title">Add recovery email</string>
-    <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
-    <string name="supervision_verify_pin_recovery_title">Verify your email</string>
+    <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=3487098027604685794] -->
+    <string name="supervision_add_pin_recovery_title">Add recovery info</string>
+    <!-- Title for verifying supervision PIN recovery setting entry [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=3166602415814821497] -->
+    <string name="supervision_verify_pin_recovery_title">Verify recovery info</string>
     <!-- Title for app store filters entry [CHAR LIMIT=60] -->
     <string name="supervision_app_store_filters_title">App store filters</string>
     <!-- Top intro for app store filters [CHAR LIMIT=NONE] -->
@@ -15112,8 +15212,8 @@
     <string name="supervision_app_store_filters_footer_content">Each app may block different types of content. App stores not listed must be managed separately. </string>
     <!-- Learn more link for app store filters footer. [CHAR LIMIT=NONE]-->
     <string name="supervision_app_store_filters_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_app_store_filters</string>
-    <!-- Title for web content filters entry [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_title">Website content filters</string>
+    <!-- Title for web content filters entry [CHAR LIMIT=60] [BACKUP_MESSAGE_ID=2412562442507104921] -->
+    <string name="supervision_web_content_filters_title">Web content filters</string>
     <!-- Search keywords for web content filters entry [CHAR LIMIT=NONE] -->
     <string name="supervision_web_content_filters_keywords">Website filters, Block sites, Browser filters, Block explicit sites, Filter sites, Block search results, Filter explicit search results, content restrictions</string>
     <!-- Top intro for web content filters [CHAR LIMIT=NONE] -->
@@ -15131,6 +15231,8 @@
         =1      {On # app}
         other   {On # apps}
         }</string>
+    <!-- Floating text for supported apps entry point icon, which displays the number of remaining supported apps. [CHAR LIMIT=10] -->
+    <string name="supervision_remaining_supported_apps_count">+<xliff:g id="count" example="2">%d</xliff:g></string>
     <!-- Title for web content filters footer. [CHAR LIMIT=NONE]-->
     <string name="supervision_web_content_filters_footer_title">When these settings are off, other account settings may still apply.</string>
     <!-- Learn more link for web content filters footer. [CHAR LIMIT=NONE]-->
@@ -15155,24 +15257,27 @@
     <string name="supervision_delete_pin_error_header">PIN can not be deleted</string>
     <!-- Message in dialog that informs the user that an error occurred while trying to delete the PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_error_message">An error occurred while trying to delete the PIN.</string>
-    <!-- TODO(b/450908334): Set strings as translatable once copy is finalized. -->
-    <!-- Title on a dialog that informs the user that they cannot delete the PIN because multiple users are supervised [CHAR_LIMIT=NONE]-->
-    <string name="supervision_cant_delete_pin_multi_user_switch_message" product="default" translatable="false">To delete your parental controls PIN, you must turn off controls for all users on this phone.\nYou may turn off controls for the current user, but the PIN can\u2019t be deleted until you also go to other users and turn off controls.</string>
-    <string name="supervision_cant_delete_pin_multi_user_switch_message" product="desktop" translatable="false">To delete your parental controls PIN, you must turn off controls for all users on this device.\nYou may turn off controls for the current user, but the PIN can\u2019t be deleted until you also go to other users and turn off controls.</string>
-    <string name="supervision_cant_delete_pin_multi_user_switch_message" product="tablet" translatable="false">To delete your parental controls PIN, you must turn off controls for all users on this tablet.\nYou may turn off controls for the current user, but the PIN can\u2019t be deleted until you also go to other users and turn off controls.</string>
     <!-- Button label on a dialog to turn off controls for the current user [CHAR LIMIT=NONE] -->
-    <string name="supervision_turn_off_controls_button_label" translatable="false">Turn off controls for this user</string>
+    <string name="supervision_turn_off_controls_button_label">Turn off controls for this user</string>
     <!-- Title on a dialog that confirms whether the user wants to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_turn_off_controls_confirm_header" translatable="false">Delete PIN &amp; turn off controls?</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_header">Delete PIN &amp; turn off controls?</string>
     <!-- Message on a dialog that confirms whether the user wants to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_turn_off_controls_confirm_message" translatable="false">Your parental controls PIN will be deleted. Any controls you set up will be turned off.</string>
+    <string name="supervision_delete_pin_turn_off_controls_confirm_message">Your parental controls PIN will be deleted. Any controls you set up will be turned off.</string>
     <!-- Button label on a dialog to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_and_turn_off_button_label">Delete and turn off</string>
+    <!-- Button label on manage PIN screen to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_turn_off_controls_button_label">Delete PIN &amp; turn off controls</string>
+    <!-- Button label on a dialog to delete the PIN [CHAR_LIMIT=NONE] -->
+    <string name="supervision_delete_button_label">Delete</string>
+    <!-- Message on the can't delete pin dialog that shows the role holders requiring the PIN [CHAR_LIMIT=NONE] -->
+    <string name="supervision_cant_delete_pin_multiple_role_holders_message">Your parental controls PIN is being used by:\n\n<xliff:g id="role_holder_bullet_list">%1$s</xliff:g></string>
     <!-- Learn more link for device supervision PIN. [CHAR LIMIT=NONE]-->
     <string name="supervision_pin_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_pin</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
     <!-- Title on dialog that informs the user that controls cannot be enabled due to a multi-profile conflict. [CHAR LIMIT=NONE] -->
     <string name="supervision_multi_profile_error_title">Can\u2019t turn on controls</string>
+    <!-- Title on dialog that informs the user that controls cannot be used due to a multi-profile conflict. [CHAR LIMIT=NONE] -->
+    <string name="supervision_setup_multi_profile_error_title">Can\u2019t use controls</string>
     <!-- Learn more link for when device supervision is unavailable. [CHAR LIMIT=NONE]-->
     <string name="supervision_unavailable_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_unavailable</string>
     <!-- Title on generic error screen that informs the user that controls cannot be enabled. [CHAR LIMIT=NONE] -->
@@ -15181,6 +15286,13 @@
     <string name="supervision_generic_error_page_message">Try again later</string>
     <!-- Button label on generic error screen bottom that the user can click to retry to enable controls. [CHAR LIMIT=NONE] -->
     <string name="supervision_generic_error_page_button_label">Go back</string>
+    <!-- Title displayed on supervision dashboard to show available apps and services to manage the device. [CHAR LIMIT=NONE] -->
+    <string name="supervision_available_apps_title">Available apps &amp; services</string>
+
+    <!-- Auth method chooser dialog title text. [CHAR LIMIT=80] -->
+    <string name="supervision_approval_method_chooser_title">Choose a verification method</string>
+    <!-- Auth method chooser dialog description text. [CHAR LIMIT=NONE] -->
+    <string name="supervision_approval_method_chooser_description">You must verify you\u2019re a parent</string>
 
     <!-- Light theme customization for Face Education lottie illustration. Not translatable. -->
     <string-array name="face_education_illustration" translatable="false">
@@ -15242,6 +15354,10 @@
     <string name="identity_check_notification_title">Identity Check works with more apps</string>
     <!-- Summary for promo notification for Identity Check -->
     <string name="identity_check_notification_summary">Identity Check prevents unwanted access to your apps. Now available with any app that uses Fingerprint or Face Unlock.</string>
+    <!-- Title for promo notification for Identity Check integration with watch ranging -->
+    <string name="identity_check_watch_notification_title">Identity Check and your watch</string>
+    <!-- Summary for promo notification for Identity Check integration with watch ranging -->
+    <string name="identity_check_watch_notification_summary">With a connected watch, Identity Check adds more ways to verify it’s you to prevent unwanted access to apps</string>
     <!-- Identity Check promo notification button text -->
     <string name="identity_check_view_details">View details</string>
 
@@ -15283,6 +15399,9 @@
     <string name="safety_center_issue_card_dismiss_confirmation_title">Dismiss this alert?</string>
     <!-- Message for a dialog confirming if a user wants to dismiss a safety center issue [CHAR LIMIT=NONE] -->
     <string name="safety_center_issue_card_dismiss_confirmation_message">Review your security and privacy settings any time to add more protection</string>
+    <!-- Issue resolution confirmation text [CHAR LIMIT=NONE]-->
+    <string name="safety_center_resolved_issue_fallback">Action complete</string>
+
 
     <!-- Positive button text for the passkey dialog to show the state when accept pairing [CHAR LIMIT=30] -->
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text">Pairing</string>
@@ -15294,4 +15413,16 @@
 
     <!-- Label for the satellite tile [CHAR LIMIT=40] [SCREENSHOT=screen/36JFTB2VAFC4hrJ] -->
     <string name="satellite_tile_label">Satellite</string>
+    <!-- Subtitle for the satellite tile when NTN mode is active on the device. [CHAR LIMIT=40] -->
+    <string name="satellite_tile_subtitle_on">On</string>
+    <!-- Subtitle for the satellite tile when the device is eligible for NTN. [CHAR LIMIT=40] -->
+    <string name="satellite_tile_subtitle_available">Available</string>
+    <!-- Subtitle for the satellite tile when the device is not eligible for NTN. [CHAR LIMIT=40] -->
+    <string name="satellite_tile_subtitle_not_available">Not available</string>
+    <!-- Title for the satellite landing page. [CHAR LIMIT=40] -->
+    <string name="satellite_connectivity_title">Satellite connectivity</string>
+    <!-- Top intro for the satellite landing page. [CHAR LIMIT=NONE] -->
+    <string name="satellite_connectivity_topintro">Stay connected when you don\'t have a mobile or Wi-Fi network</string>
+    <!-- Label for the satellite landing page activity. [CHAR LIMIT=NONE] -->
+    <string name="satellite_landing_page_label">Satellite Landing Page</string>
 </resources>

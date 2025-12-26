@@ -105,30 +105,42 @@ class ResolutionChangeDialogFragmentTest {
     }
 
     @Test
-    fun onStop_dismissesDialogAndSendsCancelledResult() {
+    fun onStop_dismissesDialogAndKeepAtNoAction() {
+        // This is the case when fragment gets re-drawn due to resolution update happens on the same
+        // display where the dialog is drawn at
         dialogFragment.onStop()
         shadowOf(Looper.getMainLooper()).idle()
 
         assertThat(dialog.isShowing).isFalse()
-        assertModeNotChanged()
+        assertNoAction()
     }
 
     private fun assertModeChanged() {
         assertThat(receivedBundle).isNotNull()
         val bundle = receivedBundle!!
-        assertThat(getIsConfirmed(bundle)).isTrue()
+        assertThat(getConfirmationState(bundle)).isEqualTo(ResolutionChangeConfirmationState.ACCEPT)
         assertThat(getNewMode(bundle)).isEqualTo(newMode)
     }
 
     private fun assertModeNotChanged() {
         assertThat(receivedBundle).isNotNull()
         val bundle = receivedBundle!!
-        assertThat(getIsConfirmed(bundle)).isFalse()
+        assertThat(getConfirmationState(bundle)).isEqualTo(ResolutionChangeConfirmationState.REVERT)
         assertThat(getExistingMode(bundle)).isEqualTo(existingMode)
     }
 
-    private fun getIsConfirmed(bundle: Bundle): Boolean {
-        return bundle.getBoolean(ResolutionChangeDialogFragment.KEY_CONFIRMED)
+    private fun assertNoAction() {
+        assertThat(receivedBundle).isNotNull()
+        val bundle = receivedBundle!!
+        assertThat(getConfirmationState(bundle))
+            .isEqualTo(ResolutionChangeConfirmationState.NO_ACTION)
+    }
+
+    private fun getConfirmationState(bundle: Bundle): ResolutionChangeConfirmationState {
+        return bundle.getParcelable(
+            ResolutionChangeDialogFragment.KEY_CONFIRMED,
+            ResolutionChangeConfirmationState::class.java,
+        )!!
     }
 
     private fun getNewMode(bundle: Bundle): Mode {

@@ -19,15 +19,29 @@ import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.flags.Flags
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.BannerMessagePreference
 
 class SupervisionRecoveryBannerPreference :
-    PreferenceMetadata, PreferenceBinding, PreferenceAvailabilityProvider {
+    PreferenceMetadata,
+    PreferenceBinding,
+    PreferenceAvailabilityProvider,
+    PreferenceLifecycleProvider {
+
+    private lateinit var lifeCycleContext: PreferenceLifecycleContext
+    private lateinit var setUpRecoveryLauncher: ActivityResultLauncher<Intent>
+    private lateinit var prefs: SharedPreferences
+
     override val key: String
         get() = KEY
 
@@ -38,8 +52,26 @@ class SupervisionRecoveryBannerPreference :
         if (!Flags.enableSupervisionSettingsUiUpdates()) {
             return false
         }
-        val missingRecovery = context.isMissingRecoveryMethod()
+        ensurePrefsInitialized(context)
+        if (!context.isSupervisingCredentialSet()) {
+            return false
+        }
+        val missingRecovery = context.shouldDisplayPinRecoveryReminders()
         return missingRecovery && !isDismissed()
+    }
+
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        lifeCycleContext = context
+        ensurePrefsInitialized(context)
+        setUpRecoveryLauncher =
+            context.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                lifeCycleContext.notifyPreferenceChange(KEY)
+                lifeCycleContext.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+            }
+    }
+
+    override fun onResume(context: PreferenceLifecycleContext) {
+        lifeCycleContext?.notifyPreferenceChange(KEY)
     }
 
     // This method sets up the preference instance and its basic structure.
@@ -49,11 +81,6 @@ class SupervisionRecoveryBannerPreference :
 
             // Add the dismiss 'X' button
             setDismissButtonVisible(true)
-            setDismissButtonOnClickListener {
-                // TODO(b/446025922): Implement logic to store in shared prefs after user dismissed
-                // it).
-                isVisible = false
-            }
             setPositiveButtonVisible(true)
         }
     }
@@ -63,11 +90,7 @@ class SupervisionRecoveryBannerPreference :
         val banner = preference as BannerMessagePreference
         val context = banner.context
 
-        val supervisionManager = context.getSystemService(SupervisionManager::class.java)
-        val recoveryInfo = supervisionManager?.getSupervisionRecoveryInfo()
-        val hasAccount = hasAccountNameSet(recoveryInfo)
-        val state = recoveryInfo?.state
-        val showVerifyFlow = hasAccount && state == SupervisionRecoveryInfo.STATE_PENDING
+        val showVerifyFlow = shouldShowVerifyFlow(context)
         val titleRes =
             if (showVerifyFlow) R.string.supervision_recovery_banner_title_verify
             else R.string.supervision_recovery_banner_title_add
@@ -79,8 +102,12 @@ class SupervisionRecoveryBannerPreference :
         banner.setTitle(titleRes)
         banner.setSummary(summaryRes)
         banner.setPositiveButtonText(buttonTextRes)
-        banner.setPositiveButtonOnClickListener {
-            // TODO(b/446025922): Implement action to launch Add/Verify flow.
+        banner.setPositiveButtonOnClickListener { onPositiveButtonClick(banner, showVerifyFlow) }
+
+        banner.setDismissButtonOnClickListener {
+            persistDismissalState(true)
+            banner.isVisible = false
+            lifeCycleContext.notifyPreferenceChange(KEY)
         }
     }
 
@@ -89,11 +116,45 @@ class SupervisionRecoveryBannerPreference :
     }
 
     private fun isDismissed(): Boolean {
-        // TODO(b/446025922): Implement real dismiss logic
-        return false
+        return prefs.getBoolean(KEY_BANNER_DISMISSED, false)
+    }
+
+    private fun persistDismissalState(dismissed: Boolean) {
+        prefs.edit().putBoolean(KEY_BANNER_DISMISSED, dismissed).commit()
+    }
+
+    private fun onPositiveButtonClick(preference: Preference, isVerificationFlow: Boolean) {
+        val context = preference.context
+        val intent = Intent(context, SupervisionPinRecoveryActivity::class.java)
+
+        if (isVerificationFlow) {
+            // It's a "verify" flow
+            intent.action = SupervisionPinRecoveryActivity.ACTION_POST_SETUP_VERIFY
+        } else {
+            // It's an "add" flow
+            intent.action = SupervisionPinRecoveryActivity.ACTION_SETUP_VERIFIED
+        }
+        setUpRecoveryLauncher.launch(intent)
+    }
+
+    // Checks the SupervisionManager state to determine if the Verify flow should be shown.
+    private fun shouldShowVerifyFlow(context: Context): Boolean {
+        val supervisionManager = context.getSystemService(SupervisionManager::class.java)
+        val recoveryInfo = supervisionManager?.getSupervisionRecoveryInfo()
+        val hasAccount = hasAccountNameSet(recoveryInfo)
+        val state = recoveryInfo?.state
+        return hasAccount && state == SupervisionRecoveryInfo.STATE_PENDING
+    }
+
+    private fun ensurePrefsInitialized(context: Context) {
+        if (!::prefs.isInitialized) {
+            prefs = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+        }
     }
 
     companion object {
         const val KEY = "supervision_pin_recovery_banner"
+        private const val SHARED_PREFS_NAME = "supervision_settings_prefs"
+        private const val KEY_BANNER_DISMISSED = "supervision_recovery_banner_dismissed"
     }
 }

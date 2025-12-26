@@ -33,6 +33,17 @@ class IdentityCheckNotificationPromoCardActivity : Activity() {
             Settings.Secure.IDENTITY_CHECK_NOTIFICATION_VIEW_DETAILS_CLICKED,
             1,
         )
+
+        if (
+            intent.action.equals(IdentityCheckSafetySource.ACTION_WATCH_ISSUE_NOTIFICATION_CLICKED)
+        ) {
+            Settings.Secure.putInt(
+                contentResolver,
+                Settings.Secure.IDENTITY_CHECK_WATCH_NOTIFICATION_VIEW_DETAILS_CLICKED,
+                1,
+            )
+        }
+
         IdentityCheckSafetySource.setSafetySourceData(
             this,
             SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build(),

@@ -101,10 +101,24 @@ flag {
 }
 
 flag {
+  name: "enable_color_inversion_in_suw"
+  namespace: "accessibility"
+  description: "Allows users to control color inversion in the SetupWizard Vision settings page."
+  bug: "453531997"
+}
+
+flag {
     name: "enable_disability_support"
     namespace: "accessibility"
     description: "Use disability support for accessibility"
     bug: "419387108"
+}
+
+flag {
+    name: "enable_edt_app_exceptions"
+    namespace: "accessibility"
+    description: "Allow users to opt-out selected apps from Expanded Dark Theme."
+    bug: "448469020"
 }
 
 flag {
@@ -122,6 +136,16 @@ flag {
 }
 
 flag {
+  name: "enable_magnification_mode_chooser_fragment"
+  namespace: "accessibility"
+  description: "Enables the magnification mode chooser fragment instead of the legacy dialog UI."
+  bug: "456047460"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
+}
+
+flag {
   name: "never_restrict_accessibility_activity"
   namespace: "accessibility"
   description: "Stops possibly restricting AccessibilityActivityPreferences"
@@ -129,4 +153,11 @@ flag {
   metadata {
     purpose: PURPOSE_BUGFIX
   }
+}
+
+flag {
+  name: "voice_access_locale_notifications"
+  namespace: "accessibility"
+  description: "Provides notification to users when the chosen locale doesn't have an associated model."
+  bug: "453531997"
 }

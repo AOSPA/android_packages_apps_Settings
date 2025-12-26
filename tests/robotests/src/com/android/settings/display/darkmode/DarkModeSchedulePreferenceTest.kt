@@ -28,7 +28,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.testutils.BedtimeSettingsUtils
 import com.android.settings.testutils.shadow.SettingsShadowResources
-import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
@@ -38,6 +38,7 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyBoolean
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
@@ -60,7 +61,7 @@ class DarkModeSchedulePreferenceTest {
     private val bedtimeActivityInfo = ActivityInfo()
     private val bedtimeSettingsUtils: BedtimeSettingsUtils = BedtimeSettingsUtils(context)
     private val shadowPowerManager = shadowOf(context.getSystemService(PowerManager::class.java))
-    private val preference = DarkModeSchedulePreference(mockUiModeManager, BedtimeSettings(context))
+    private val preference = DarkModeSchedulePreference(context)
 
     @Before
     fun setUp() {
@@ -78,7 +79,6 @@ class DarkModeSchedulePreferenceTest {
             "wellbeing",
         )
         context.resources.configuration.updateFrom(configNightNo)
-        preference.onCreate(mock<PreferenceLifecycleContext>())
     }
 
     @Test
@@ -94,6 +94,11 @@ class DarkModeSchedulePreferenceTest {
     @Test
     fun getTitle() {
         assertThat(preference.title).isEqualTo(R.string.dark_ui_auto_mode_title)
+    }
+
+    @Test
+    fun sensitivityLevel_isNoSensitivity() {
+        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.NO_SENSITIVITY)
     }
 
     @Test
@@ -149,8 +154,6 @@ class DarkModeSchedulePreferenceTest {
             "wellbeing", /* wellbeingPackage */
             false, /* enabled */
         )
-        val preference = DarkModeSchedulePreference(mockUiModeManager, BedtimeSettings(context))
-        preference.onCreate(mock<PreferenceLifecycleContext>())
         mockUiModeManager.stub {
             on { nightMode } doReturn UiModeManager.MODE_NIGHT_CUSTOM
             on { nightModeCustomType } doReturn UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME
@@ -221,7 +224,7 @@ class DarkModeSchedulePreferenceTest {
     }
 
     @Test
-    fun onPreferenceChange_dropDownValueIsAuto_nightModeChangeToAuto() {
+    fun onPreferenceChange_dropDownValueIsAuto_isLocationEnabled_nightModeChangeToAuto() {
         mockUiModeManager.stub { on { nightMode } doReturn UiModeManager.MODE_NIGHT_CUSTOM }
 
         preference.onPreferenceChange(
@@ -230,6 +233,22 @@ class DarkModeSchedulePreferenceTest {
         )
 
         verify(mockUiModeManager).nightMode = UiModeManager.MODE_NIGHT_AUTO
+    }
+
+    @Test
+    fun onPreferenceChange_dropDownValueIsAuto_isLocationDisabled_nightModeNonChangeToAuto() {
+        mockUiModeManager.stub { on { nightMode } doReturn UiModeManager.MODE_NIGHT_CUSTOM }
+        mockLocationManager.stub {
+            on { isLocationEnabled } doReturn false
+            on { lastLocation } doReturn Location("mock")
+        }
+
+        preference.onPreferenceChange(
+            preference.createAndBindWidget<DropDownPreference>(context),
+            context.getString(R.string.dark_ui_auto_mode_auto),
+        )
+
+        verify(mockUiModeManager, never()).nightMode = UiModeManager.MODE_NIGHT_AUTO
     }
 
     @Test

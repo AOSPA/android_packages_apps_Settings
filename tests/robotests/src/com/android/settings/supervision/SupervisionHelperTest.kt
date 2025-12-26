@@ -17,7 +17,9 @@ package com.android.settings.supervision
 
 import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
+import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
 import android.content.ContextWrapper
@@ -31,12 +33,16 @@ import android.os.UserManager
 import android.os.UserManager.USER_TYPE_FULL_SECONDARY
 import android.os.UserManager.USER_TYPE_FULL_SYSTEM
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.google.common.truth.Truth.assertThat
 import kotlin.collections.listOf
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -46,19 +52,23 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadows.ShadowDevicePolicyManager
 import org.robolectric.shadows.ShadowPackageManager
+import org.robolectric.shadows.ShadowServiceManager
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionHelperTest {
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
     private val mockRoleManager = mock<RoleManager>()
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockUserManager = mock<UserManager>()
     private val mockResources = mock<Resources>()
-    private val context = contextOf(mockRoleManager)
+    private val mockISupervisionManager = mock<ISupervisionManager>()
 
+    private val context = contextOf(mockRoleManager)
     private lateinit var packageManager: PackageManager
     private lateinit var shadowPackageManager: ShadowPackageManager
 
@@ -72,6 +82,11 @@ class SupervisionHelperTest {
         shadowPackageManager = shadowOf(packageManager)
         dpm = applicationContext.getSystemService(DevicePolicyManager::class.java)
         shadowDpm = shadowOf(dpm) as ShadowDevicePolicyManager
+        ShadowServiceManager.addBinderService(
+            Context.SUPERVISION_SERVICE,
+            ISupervisionManager::class.java,
+            mockISupervisionManager,
+        )
     }
 
     @Test
@@ -173,7 +188,7 @@ class SupervisionHelperTest {
             on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
         }
 
-        val result = context.deleteSupervisionData()
+        val result = context.deleteSupervisionData(disableSupervision = true)
 
         assertThat(result).isTrue()
         verify(mockSupervisionManager).setSupervisionEnabled(false)
@@ -182,6 +197,7 @@ class SupervisionHelperTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun deleteSupervisionData_secondaryUserSupervised_keepsSupervisionData() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
@@ -192,12 +208,54 @@ class SupervisionHelperTest {
             on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
         }
 
-        val result = context.deleteSupervisionData()
+        val result = context.deleteSupervisionData(disableSupervision = true)
 
         assertThat(result).isFalse()
         verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
         verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
         verify(mockUserManager, never()).removeUserEvenWhenDisallowed(any<Int>())
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun deleteSupervisionData_secondaryUserSupervised_deletesSupervisionData() {
+        mockUserManager.stub {
+            on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
+            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn true
+        }
+        mockSupervisionManager.stub {
+            on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
+            on { isSupervisionEnabledForUser(SECONDARY_USER_ID) } doReturn true
+            on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
+        }
+
+        val result = context.deleteSupervisionData(disableSupervision = true)
+
+        assertThat(result).isTrue()
+        verify(mockSupervisionManager).setSupervisionEnabled(false)
+        verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
+        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun deleteSupervisionData_doNotDisableSupervision() {
+        mockUserManager.stub {
+            on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
+            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn true
+        }
+        mockSupervisionManager.stub {
+            on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
+            on { isSupervisionEnabledForUser(SECONDARY_USER_ID) } doReturn false
+            on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
+        }
+
+        val result = context.deleteSupervisionData(disableSupervision = false)
+
+        assertThat(result).isTrue()
+        verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
+        verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
+        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
     }
 
     @Test
@@ -404,6 +462,34 @@ class SupervisionHelperTest {
         shadowDpm.setProfileOwner(null)
 
         assertThat(context.isSupervisionPackageProfileOwner()).isFalse()
+    }
+
+    @Test
+    fun shouldDisplayPinRecoveryReminders_hasValidRecoveryMethod_returnsFalse() {
+        whenever(mockISupervisionManager.hasValidRecoveryMethod(any())).thenReturn(true)
+
+        assertThat(context.shouldDisplayPinRecoveryReminders()).isFalse()
+    }
+
+    @Test
+    fun shouldDisplayPinRecoveryReminders_noValidRecoveryMethod_returnsTrue() {
+        whenever(mockISupervisionManager.hasValidRecoveryMethod(any())).thenReturn(false)
+
+        assertThat(context.shouldDisplayPinRecoveryReminders()).isTrue()
+    }
+
+    @Test
+    fun canLaunchPinRecovery_whenRecoveryFlowIsLaunchable_returnsTrue() {
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(true)
+
+        assertThat(context.canLaunchPinRecovery()).isTrue()
+    }
+
+    @Test
+    fun canLaunchPinRecovery_whenRecoveryFlowIsNotConfigured_returnsFalse() {
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(false)
+
+        assertThat(context.canLaunchPinRecovery()).isFalse()
     }
 
     private fun setUpMessengerServiceComponent(packageName: String, disabled: Boolean) {

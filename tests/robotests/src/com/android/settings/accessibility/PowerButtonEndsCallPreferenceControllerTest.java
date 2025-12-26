@@ -43,6 +43,7 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowKeyCharacterMap.class})
 public class PowerButtonEndsCallPreferenceControllerTest {
@@ -163,3 +164,4 @@ public class PowerButtonEndsCallPreferenceControllerTest {
                 .isEqualTo(Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF);
     }
 }
+// LINT.ThenChange(PowerButtonEndsCallPreferenceTest.kt)

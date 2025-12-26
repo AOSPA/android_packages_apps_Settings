@@ -79,6 +79,7 @@ import com.android.settingslib.animation.DisappearAnimationUtils;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.setupdesign.util.ThemeHelper;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -482,7 +483,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         @Override
         public void onResume() {
             super.onResume();
-            long deadline = mLockPatternUtils.getLockoutAttemptDeadline(mEffectiveUserId);
+            long deadline = mLockPatternUtils.getLockoutEndTime(mEffectiveUserId).toMillis();
             if (deadline != 0) {
                 mCredentialCheckResultTracker.clearResult();
                 handleAttemptLockout(deadline);
@@ -504,12 +505,13 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
         @Override
         protected void authenticationSucceeded() {
-            mCredentialCheckResultTracker.setResult(true, new Intent(), 0, mEffectiveUserId);
+            mCredentialCheckResultTracker.setResult(true, new Intent(), Duration.ZERO,
+                    mEffectiveUserId);
         }
 
         private void updatePasswordEntry() {
             final boolean isLockedOut =
-                    mLockPatternUtils.getLockoutAttemptDeadline(mEffectiveUserId) != 0;
+                    !mLockPatternUtils.getLockoutEndTime(mEffectiveUserId).isZero();
             final boolean isRemoteLockscreenValidationInProgress =
                     mRemoteLockscreenValidationFragment != null
                     && mRemoteLockscreenValidationFragment.isRemoteValidationInProgress();
@@ -583,7 +585,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 return;
             }
 
-            mCredentialCheckResultTracker.setResult(false, intent, 0, mEffectiveUserId);
+            mCredentialCheckResultTracker.setResult(false, intent, Duration.ZERO,
+                    mEffectiveUserId);
         }
 
         private boolean isInternalActivity() {
@@ -595,7 +598,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             final int localEffectiveUserId = mEffectiveUserId;
             final int localUserId = mUserId;
             final LockPatternChecker.OnVerifyCallback onVerifyCallback = response -> {
-                final int timeoutMs = response.getTimeout();
+                final Duration timeout = response.getTimeout();
                 mPendingLockCheck = null;
                 final boolean matched = response.isMatched();
                 if (matched && mReturnCredentials) {
@@ -608,7 +611,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                                 response.getGatekeeperHAT());
                     }
                 }
-                mCredentialCheckResultTracker.setResult(matched, intent, timeoutMs,
+                mCredentialCheckResultTracker.setResult(matched, intent, timeout,
                         localEffectiveUserId);
             };
             mPendingLockCheck = (localEffectiveUserId == localUserId)
@@ -629,13 +632,13 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         @Override
                         public void onChecked(VerifyCredentialResponse response) {
                             final boolean matched = response.isMatched();
-                            final int timeoutMs = response.getTimeout();
+                            final Duration timeout = response.getTimeout();
                             mPendingLockCheck = null;
                             if (matched && isInternalActivity() && mReturnCredentials) {
                                 intent.putExtra(
                                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, credential);
                             }
-                            mCredentialCheckResultTracker.setResult(matched, intent, timeoutMs,
+                            mCredentialCheckResultTracker.setResult(matched, intent, timeout,
                                     localEffectiveUserId);
                         }
                     });
@@ -669,7 +672,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             }
         }
 
-        private void onPasswordChecked(boolean matched, Intent intent, int timeoutMs,
+        private void onPasswordChecked(boolean matched, Intent intent, Duration timeout,
                 int effectiveUserId, boolean newResult) {
             mPasswordEntryInputDisabler.setInputEnabled(true);
             if (matched) {
@@ -681,10 +684,10 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 startDisappearAnimation(intent);
                 ConfirmDeviceCredentialUtils.checkForPendingIntent(getActivity());
             } else {
-                if (timeoutMs > 0) {
+                if (timeout.isPositive()) {
                     refreshLockScreen();
                     long deadline = mLockPatternUtils.setLockoutAttemptDeadline(
-                            effectiveUserId, timeoutMs);
+                            effectiveUserId, timeout).toMillis();
                     handleAttemptLockout(deadline);
                 } else {
                     showError(getErrorMessage(), CLEAR_WRONG_ATTEMPT_TIMEOUT_MS);
@@ -720,16 +723,16 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                                 mEffectiveUserId);
                     } else {
                         mCredentialCheckResultTracker.setResult(/* matched= */ true, new Intent(),
-                                /* timeoutMs= */ 0, mEffectiveUserId);
+                                /* timeout= */ Duration.ZERO, mEffectiveUserId);
                     }
                     return;
                 case RemoteLockscreenValidationResult.RESULT_GUESS_INVALID:
                     mCredentialCheckResultTracker.setResult(/* matched= */ false, new Intent(),
-                            /* timeoutMs= */ 0, mEffectiveUserId);
+                            /* timeout= */ Duration.ZERO, mEffectiveUserId);
                     break;
                 case RemoteLockscreenValidationResult.RESULT_LOCKOUT:
                     mCredentialCheckResultTracker.setResult(/* matched= */ false, new Intent(),
-                            (int) result.getTimeoutMillis(), mEffectiveUserId);
+                            Duration.ofMillis(result.getTimeoutMillis()), mEffectiveUserId);
                     break;
                 case RemoteLockscreenValidationResult.RESULT_NO_REMAINING_ATTEMPTS:
                 case RemoteLockscreenValidationResult.RESULT_SESSION_EXPIRED:
@@ -744,9 +747,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         @Override
-        public void onCredentialChecked(boolean matched, Intent intent, int timeoutMs,
+        public void onCredentialChecked(boolean matched, Intent intent, Duration timeout,
                 int effectiveUserId, boolean newResult) {
-            onPasswordChecked(matched, intent, timeoutMs, effectiveUserId, newResult);
+            onPasswordChecked(matched, intent, timeout, effectiveUserId, newResult);
         }
 
         @Override
@@ -815,7 +818,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 SetupRedactionInterstitial.setEnabled(getContext(), true);
             }
             mCredentialCheckResultTracker.setResult(/* matched= */ true, result,
-                    /* timeoutMs= */ 0, mEffectiveUserId);
+                    /* timeout= */ Duration.ZERO, mEffectiveUserId);
         }
     }
 }

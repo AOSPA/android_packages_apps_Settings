@@ -34,8 +34,22 @@ import androidx.annotation.Nullable;
 
 import com.android.settingslib.utils.ThreadUtils;
 
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 /** Listens to updates from the content provider and fetches the latest value. */
 public class ActiveUnlockContentListener {
+
+    private static ExecutorService sExecutorService = Executors.newCachedThreadPool();
+    private static int sTimeoutInSeconds = 5;
 
     /** Callback interface for updates to values from the ContentProvider. */
     public interface OnContentChangedListener {
@@ -139,6 +153,36 @@ public class ActiveUnlockContentListener {
         }
     }
 
+    /** Get the content from Uri with Timeout. */
+    public static @Nullable String getContentFromUriWithTimeout(
+            @NonNull Context context,
+            @NonNull Uri uri,
+            @NonNull String logTag,
+            @NonNull String methodName,
+            @NonNull String contentKey) {
+        return getStringWithTimeout(
+            logTag,
+            new GetContentFromUriCallable(context, uri, logTag, methodName, contentKey),
+            sTimeoutInSeconds);
+    }
+
+
+    static @Nullable String getStringWithTimeout(
+            String logTag, Callable<String> callable, int timeoutInSeconds) {
+        ListeningExecutorService executor = MoreExecutors.listeningDecorator(sExecutorService);
+        ListenableFuture<String> future = executor.submit(callable);
+        String retVal = null;
+        try {
+            retVal = future.get(timeoutInSeconds, TimeUnit.SECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            Log.w(logTag, "Failed to getContentFromUri , likely timeout. Skipping", e);
+        } finally {
+            future.cancel(/*mayInterruptIfRunning=*/ true);
+        }
+
+        return retVal;
+    }
+
     /** Get the content from Uri. */
     public static @Nullable String getContentFromUri(
             @NonNull Context context,
@@ -175,6 +219,33 @@ public class ActiveUnlockContentListener {
         } catch (Exception e) {
             Log.e(logTag, "Error close content provider client.");
             return null;
+        }
+    }
+
+    /** Returns String by calling getContentFromUri. */
+    private static class GetContentFromUriCallable implements Callable<String> {
+        private final Context mContext;
+        private final Uri mUri;
+        private final String mLogTag;
+        private final String mMethodName;
+        private final String mContentKey;
+
+        private GetContentFromUriCallable(
+                @NonNull Context context,
+                @NonNull Uri uri,
+                @NonNull String logTag,
+                @NonNull String methodName,
+                @NonNull String contentKey) {
+            mContext = context;
+            mUri = uri;
+            mLogTag = logTag;
+            mMethodName = methodName;
+            mContentKey = contentKey;
+        }
+
+        @Override
+        public @Nullable String call() throws Exception {
+            return getContentFromUri(mContext, mUri, mLogTag, mMethodName, mContentKey);
         }
     }
 }

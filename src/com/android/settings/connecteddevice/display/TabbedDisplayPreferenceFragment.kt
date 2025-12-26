@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.display
 
+import android.content.Context
 import android.os.Bundle
 import android.view.InputDevice
 import android.view.LayoutInflater
@@ -27,7 +28,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.internal.annotations.VisibleForTesting
 import com.android.settings.R
 import com.android.settings.core.SettingsBaseActivity
+import com.android.settings.flags.Flags
+import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.collapsingtoolbar.widget.ScrollableToolbarItemLayout
+import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.search.SearchIndexableRaw
 import com.google.android.material.appbar.AppBarLayout
 import com.google.common.collect.HashBiMap
 import kotlin.math.min
@@ -36,6 +41,7 @@ import kotlin.math.min
  * The main fragment that holds both the DisplayTopologyPreferenceView and the
  * SelectedDisplayPreferenceFragment, isolating them from each other to prevent redraw issues.
  */
+@SearchIndexable
 open class TabbedDisplayPreferenceFragment(
     private val testViewModel: DisplayPreferenceViewModel? = null
 ) : Fragment() {
@@ -292,5 +298,31 @@ open class TabbedDisplayPreferenceFragment(
                 }
             }
         )
+    }
+
+    companion object {
+
+        @JvmField
+        val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =
+            object : BaseSearchIndexProvider() {
+                override fun getRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): MutableList<SearchIndexableRaw?> {
+                    val rawData: MutableList<SearchIndexableRaw?> = mutableListOf()
+                    if (!Flags.showTabbedConnectedDisplaySetting()) {
+                        return rawData
+                    }
+                    val indexInfo = SearchIndexableRaw(context)
+                    indexInfo.key = "external_display_screen_title"
+                    indexInfo.title = context.getString(R.string.external_display_settings_title)
+                    indexInfo.keywords =
+                        context.getString(R.string.keywords_external_display_settings)
+                    indexInfo.screenTitle =
+                        context.getString(R.string.connected_devices_dashboard_title)
+                    rawData.add(indexInfo)
+                    return rawData
+                }
+            }
     }
 }

@@ -30,13 +30,11 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Build
 import android.os.UserHandle
-import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 
-import com.android.settings.flags.Flags
 import com.android.settings.R
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.android.settingslib.spaprivileged.model.app.userId
@@ -237,7 +235,6 @@ class AppNotificationRepositoryTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_USE_DPC_POLICY)
     fun isChangeable_devicePolicyPrompt() {
         whenever(notificationManager.isImportanceLocked(APP.packageName, APP.uid)).thenReturn(false)
         whenever(devicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(testAdminComponent)
@@ -249,7 +246,6 @@ class AppNotificationRepositoryTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_USE_DPC_POLICY)
     fun isChangeable_devicePolicyAutoGrant() {
         whenever(notificationManager.isImportanceLocked(APP.packageName, APP.uid)).thenReturn(false)
         whenever(devicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(testAdminComponent)
@@ -261,7 +257,6 @@ class AppNotificationRepositoryTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_USE_DPC_POLICY)
     fun isChangeable_devicePolicyAutoDeny() {
         whenever(notificationManager.isImportanceLocked(APP.packageName, APP.uid)).thenReturn(false)
         whenever(devicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(testAdminComponent)

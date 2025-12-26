@@ -30,12 +30,16 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.network.SatelliteRepository;
 import com.android.settings.network.SatelliteWarningDialogActivity;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.search.Indexable;
+import com.android.settingslib.widget.ButtonPreference;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.concurrent.ExecutionException;
@@ -50,15 +54,22 @@ public class BluetoothPairingDetail extends BluetoothDevicePairingDetailBase imp
         Indexable {
     private static final String TAG = "BluetoothPairingDetail";
 
+    private static final long SHOW_NO_DEVICE_BUTTON_TIMEOUT_MILLS = 5000;
     @VisibleForTesting
     static final String KEY_AVAIL_DEVICES = "available_devices";
+    @VisibleForTesting
+    static final String KEY_NO_DEVICE_BUTTON = "no_device_button";
     @VisibleForTesting
     static final String KEY_FOOTER_PREF = "footer_preference";
 
     @VisibleForTesting
     FooterPreference mFooterPreference;
     @VisibleForTesting
+    ButtonPreference mButtonPreference;
+    @VisibleForTesting
     AlwaysDiscoverable mAlwaysDiscoverable;
+
+    private AlertDialog mCanNotFindDeviceDialog;
 
     public BluetoothPairingDetail() {
         super();
@@ -120,6 +131,34 @@ public class BluetoothPairingDetail extends BluetoothDevicePairingDetailBase imp
         super.initPreferencesFromPreferenceScreen();
         mFooterPreference = findPreference(KEY_FOOTER_PREF);
         mFooterPreference.setSelectable(false);
+        mButtonPreference = findPreference(KEY_NO_DEVICE_BUTTON);
+        mButtonPreference.setVisible(false);
+        mButtonPreference.setOnClickListener(
+                v -> {
+                    if (mCanNotFindDeviceDialog != null) {
+                        mCanNotFindDeviceDialog.show();
+                    }
+                });
+        if (BluetoothUtils.isBluetoothDiagnosisAvailable(getContext())) {
+            FeatureFactory.getFeatureFactory()
+                    .getBluetoothFeatureProvider()
+                    .buildBluetoothDiagnosisAlertDialog(
+                            getContext(),
+                            BluetoothDiagnosisEntryPoint.ENTRY_POINT_CAN_NOT_FIND,
+                            null,
+                            result -> {
+                                if (result != null) {
+                                    mCanNotFindDeviceDialog = result;
+                                    Executors.newSingleThreadScheduledExecutor()
+                                            .schedule(
+                                                    () -> {
+                                                        mButtonPreference.setVisible(true);
+                                                    },
+                                                    SHOW_NO_DEVICE_BUTTON_TIMEOUT_MILLS,
+                                                    TimeUnit.MILLISECONDS);
+                                }
+                            });
+        }
     }
 
     @Override

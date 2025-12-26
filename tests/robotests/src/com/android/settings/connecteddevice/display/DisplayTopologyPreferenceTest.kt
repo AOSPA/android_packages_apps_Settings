@@ -63,6 +63,7 @@ class DisplayTopologyPreferenceTest {
 
     init {
         preference.onBindViewHolder(holder)
+        preference.controller.topologyHint.disableAnimation()
 
         featureFlags.setFlag(FLAG_SHOW_STACKED_MIRRORING_DISPLAY_CONNECTED_DISPLAY_SETTING, true)
         featureFlags.setFlag(FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING, false)

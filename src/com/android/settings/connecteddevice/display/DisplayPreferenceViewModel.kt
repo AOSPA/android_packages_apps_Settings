@@ -232,9 +232,7 @@ constructor(
         ) != 0
 
     private fun shouldShowIncludeDefaultDisplayInTopologyPref(isMirroring: Boolean) =
-        !isMirroring &&
-            injector.isDefaultDisplayInTopologyFlagEnabled() &&
-            injector.isProjectedModeEnabled()
+        !isMirroring && injector.isProjectedModeEnabled()
 
     /**
      * This is different from the actual [Settings.Secure.MIRROR_BUILT_IN_DISPLAY] value

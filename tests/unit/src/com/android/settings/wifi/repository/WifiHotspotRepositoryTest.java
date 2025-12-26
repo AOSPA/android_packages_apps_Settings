@@ -17,6 +17,7 @@
 package com.android.settings.wifi.repository;
 
 import static android.net.TetheringManager.TETHERING_WIFI;
+import static android.net.TetheringManager.TETHER_ERROR_SERVICE_UNAVAIL;
 import static android.net.wifi.SoftApConfiguration.BAND_2GHZ;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
@@ -26,10 +27,12 @@ import static android.net.wifi.WifiAvailableChannel.OP_MODE_SAP;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_DISABLED;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_ENABLED;
 
+import static com.android.settings.flags.Flags.FLAG_ENABLE_2_AND_6_GHZ_HOTSPOT_SPEED;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.BAND_2GHZ_5GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.BAND_2GHZ_5GHZ_6GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_5GHZ;
+import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_6GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_5GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_6GHZ;
 
@@ -54,6 +57,8 @@ import android.net.wifi.WifiScanner;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.SparseIntArray;
 
 import androidx.annotation.NonNull;
@@ -76,6 +81,9 @@ import java.util.Arrays;
 
 @RunWith(AndroidJUnit4.class)
 public class WifiHotspotRepositoryTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     static final String WIFI_SSID = "wifi_ssid";
     static final String WIFI_PASSWORD = "wifi_password";
     static final String WIFI_PASSWORD_SHORT = "wifi";
@@ -458,6 +466,33 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
+    @EnableFlags(FLAG_ENABLE_2_AND_6_GHZ_HOTSPOT_SPEED)
+    public void updateSpeedType_single6gConfig_upgradedTo2g6gDbsWhenFlagEnabled() {
+        mRepository.mIsDualBand = true;
+        SoftApConfiguration config = new SoftApConfiguration.Builder()
+                .setBand(WIFI_6GHZ_BAND_PREFERRED).build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
+
+        mRepository.updateSpeedType();
+
+        verify(mSpeedType).setValue(SPEED_2GHZ_6GHZ);
+    }
+
+    @Test
+    @EnableFlags(FLAG_ENABLE_2_AND_6_GHZ_HOTSPOT_SPEED)
+    public void updateSpeedType_2g6gDbsConfig_gets2g6gSpeedTypeWhenFlagEnabled() {
+        mRepository.mIsDualBand = true;
+        int[] bands = {BAND_2GHZ, BAND_2GHZ_5GHZ_6GHZ};
+        SoftApConfiguration config = new SoftApConfiguration.Builder()
+                .setBands(bands).build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
+
+        mRepository.updateSpeedType();
+
+        verify(mSpeedType).setValue(SPEED_2GHZ_6GHZ);
+    }
+
+    @Test
     public void setSpeedType_sameValue_doNotSetConfig() {
         doReturn(SPEED_6GHZ).when(mSpeedType).getValue();
 
@@ -763,6 +798,17 @@ public class WifiHotspotRepositoryTest {
 
         mRepository.mSoftApCallback.onStateChanged(WIFI_AP_STATE_ENABLED, 0);
 
+        assertThat(mRepository.mIsRestarting).isFalse();
+    }
+
+    @Test
+    public void onTetheringFailed_isRestarting_stopTetheringAndSetRestartingFalse() {
+        mRepository.mIsRestarting = true;
+        mRepository.startTethering();
+
+        mRepository.mStartTetheringCallback.onTetheringFailed(TETHER_ERROR_SERVICE_UNAVAIL);
+
+        verify(mTetheringManager).stopTethering(TETHERING_WIFI);
         assertThat(mRepository.mIsRestarting).isFalse();
     }
 

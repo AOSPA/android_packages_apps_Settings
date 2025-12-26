@@ -133,6 +133,7 @@ android_library {
         "SettingsLibMetadata-processor",
         "androidx.room_room-compiler-plugin",
     ],
+    kotlin_plugins: ["kotlin-parcelize-compiler-plugin"],
 
     errorprone: {
         extra_check_modules: ["//external/nullaway:nullaway_plugin"],
@@ -160,6 +161,9 @@ android_library {
         "device_policy_aconfig_flags",
         "keyboard_flags",
     ],
+    lint: {
+        baseline_filename: "lint-baseline.xml",
+    },
 }
 
 platform_compat_config {

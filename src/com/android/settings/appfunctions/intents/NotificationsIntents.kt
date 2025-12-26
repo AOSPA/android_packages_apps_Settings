@@ -34,23 +34,5 @@ fun getNotificationsIntents() =
                 intentUri =
                     "intent:#Intent;action=android.settings.NOTIFICATION_HISTORY;package=com.android.settings;end",
             ),
-            StaticIntent(
-                description =
-                    "Conversations: Settings to manage and customize how conversations are displayed in notifications.",
-                intentUri =
-                    "intent:#Intent;action=android.settings.CONVERSATION_SETTINGS;package=com.android.settings;end",
-            ),
-            StaticIntent(
-                description =
-                    "Bubbles: Settings to manage and customize how bubbles are displayed for notifications.",
-                intentUri =
-                    "intent:#Intent;action=android.settings.NOTIFICATION_BUBBLE_SETTINGS;package=com.android.settings;end",
-            ),
-            StaticIntent(
-                description =
-                    "Notification read, reply & control: Settings to manage apps that can read, reply and control notifications.",
-                intentUri =
-                    "intent:#Intent;action=android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS;package=com.android.settings;end",
-            ),
         ),
     )

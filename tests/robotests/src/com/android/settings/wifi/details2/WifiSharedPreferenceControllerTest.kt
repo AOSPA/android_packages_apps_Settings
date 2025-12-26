@@ -18,7 +18,6 @@ package com.android.settings.wifi.details2
 
 import android.content.Context
 import android.net.wifi.WifiConfiguration
-import android.net.wifi.WifiManager
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -38,7 +37,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
-import org.mockito.Mockito.any
 import org.mockito.Mockito.verify
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
@@ -103,14 +101,14 @@ class WifiSharedPreferenceControllerTest {
         val shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog)
         assertThat(shadowDialog).isNotNull()
         assertThat(shadowDialog.getTitle().toString())
-            .isEqualTo(context.getString(R.string.wifi_conflict_dialog_title, "shared", "testSSID"))
+            .isEqualTo(context.getString(R.string.wifi_conflict_dialog_title, "shared"))
         assertThat(shadowDialog.getMessage().toString())
             .isEqualTo(
                 context.getString(
                     R.string.wifi_conflict_dialog_message,
-                    "private",
-                    "private",
                     "shared",
+                    "testSSID",
+                    "private",
                 )
             )
     }

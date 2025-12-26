@@ -16,28 +16,124 @@
 
 package com.android.settings.network.telephony.satellite.quicksettings
 
+import android.app.PendingIntent
+import android.content.Intent
+import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
+import android.telephony.TelephonyCallback
+import android.telephony.TelephonyManager
 import android.util.Log
+import androidx.annotation.VisibleForTesting
+import com.android.settings.R
 
-class SatelliteTileService : TileService() {
+/**
+ * A [TileService] that provides a quick settings tile for satellite connectivity.
+ *
+ * This service is responsible for monitoring the satellite connectivity status and updating the
+ * tile's appearance and behavior accordingly.
+ */
+open class SatelliteTileService : TileService() {
+
+    private lateinit var telephonyManager: TelephonyManager
+
+    @VisibleForTesting internal var isCarrierRoamingNtnEligible = false
+    @VisibleForTesting internal var isCarrierRoamingNtnModeActive = false
+
+    private val satelliteTelephonyCallback = SatelliteTelephonyCallback()
+
+    private inner class SatelliteTelephonyCallback :
+        TelephonyCallback(), TelephonyCallback.CarrierRoamingNtnListener {
+
+        /**
+         * Called when the device becomes eligible for carrier roaming NTN.
+         *
+         * Triggered only for NB-IoT NTN. Updates tile to "Available" state.
+         */
+        override fun onCarrierRoamingNtnEligibleStateChanged(eligible: Boolean) {
+            Log.d(TAG, "onCarrierRoamingNtnEligibleStateChanged: $eligible")
+            isCarrierRoamingNtnEligible = eligible
+            updateTile()
+        }
+
+        /**
+         * Called when the carrier roaming NTN mode is active, not necessarily when connected to
+         * satellite.
+         *
+         * Triggered when either LTE or NB-IoT NTN becomes active. Updates tile to "On" state.
+         */
+        override fun onCarrierRoamingNtnModeChanged(active: Boolean) {
+            Log.d(TAG, "onCarrierRoamingNtnModeChanged: $active")
+            isCarrierRoamingNtnModeActive = active
+            updateTile()
+        }
+    }
 
     override fun onCreate() {
         super.onCreate()
+        telephonyManager = getSystemService(TelephonyManager::class.java)
+        telephonyManager.registerTelephonyCallback(mainExecutor, satelliteTelephonyCallback)
     }
 
     override fun onStartListening() {
         super.onStartListening()
-    }
-
-    override fun onStopListening() {
-        super.onStopListening()
+        updateTile()
     }
 
     override fun onClick() {
         super.onClick()
+        unlockAndRun {
+            // Create PendingIntent to launch SatelliteLandingPageActivity.
+            val intent = Intent(this, SatelliteLandingPageActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val pendingIntent =
+                PendingIntent.getActivity(
+                    this,
+                    REQUEST_CODE_SATELLITE_LANDING_PAGE,
+                    intent,
+                    PendingIntent.FLAG_IMMUTABLE,
+                )
+            startActivityAndCollapse(pendingIntent)
+        }
+    }
+
+    override fun onDestroy() {
+        cleanup()
+        super.onDestroy()
+    }
+
+    @VisibleForTesting
+    internal fun cleanup() {
+        telephonyManager.unregisterTelephonyCallback(satelliteTelephonyCallback)
+    }
+
+    @VisibleForTesting
+    fun updateTile() {
+        val qsTile = qsTile ?: return
+
+        when {
+            isCarrierRoamingNtnModeActive -> {
+                qsTile.state = Tile.STATE_ACTIVE
+                qsTile.subtitle = getString(R.string.satellite_tile_subtitle_on)
+            }
+            isCarrierRoamingNtnEligible -> {
+                qsTile.state = Tile.STATE_INACTIVE
+                qsTile.subtitle = getString(R.string.satellite_tile_subtitle_available)
+            }
+            else -> {
+                qsTile.state = Tile.STATE_INACTIVE
+                qsTile.subtitle = getString(R.string.satellite_tile_subtitle_not_available)
+            }
+        }
+        qsTile.updateTile()
+
+        Log.i(
+            TAG,
+            "updateTile: New State: ${qsTile.subtitle}, isCarrierRoamingNtnModeActive: $isCarrierRoamingNtnModeActive, isCarrierRoamingNtnEligible: $isCarrierRoamingNtnEligible",
+        )
     }
 
     companion object {
         private const val TAG = "SatelliteTileService"
+        private const val REQUEST_CODE_SATELLITE_LANDING_PAGE = 1987
     }
 }

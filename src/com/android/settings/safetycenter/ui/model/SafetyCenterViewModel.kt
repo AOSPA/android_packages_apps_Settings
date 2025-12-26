@@ -73,4 +73,16 @@ abstract class SafetyCenterViewModel(protected val app: Application) : AndroidVi
         action: SafetyCenterIssue.Action,
         launchTaskId: Int,
     )
+
+    /**
+     * Marks a resolved [SafetyCenterIssue] as fully complete, meaning the resolution success
+     * message has been shown.
+     *
+     * @param issueId Resolved issue that has completed its UI update and view can be removed.
+     */
+    abstract fun markIssueResolvedUiCompleted(issueId: IssueId)
 }
+
+typealias IssueId = String
+
+typealias ActionId = String

@@ -31,8 +31,6 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
-import java.util.Locale;
-
 /**
  * Setting to allow the hardware shortcut to turn on from the lock screen
  */
@@ -48,10 +46,12 @@ public class HardwareShortcutFromLockscreenPreferenceController
         final ContentResolver cr = mContext.getContentResolver();
         // The shortcut is enabled by default on the lock screen as long as the user has
         // enabled the shortcut with the warning dialog
-        final int dialogShown = Settings.Secure.getInt(
-                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_DIALOG_SHOWN, OFF);
-        final boolean enabledFromLockScreen = Settings.Secure.getInt(
-                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, dialogShown) == ON;
+        final int dialogShown = Settings.Secure.getIntForUser(
+                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_DIALOG_SHOWN, OFF,
+                mContext.getUserId());
+        final boolean enabledFromLockScreen = Settings.Secure.getIntForUser(
+                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, dialogShown,
+                mContext.getUserId()) == ON;
         return enabledFromLockScreen;
     }
 
@@ -84,9 +84,7 @@ public class HardwareShortcutFromLockscreenPreferenceController
             return mContext.getString(R.string.accessibility_shortcut_description);
         } else {
             return mContext.getString(
-                    R.string.accessibility_shortcut_unassigned_setting_unavailable_summary,
-                    AccessibilityUtil.getShortcutSummaryList(mContext, HARDWARE)
-                            .toString().toLowerCase(Locale.getDefault()));
+                    R.string.a11y_volume_keys_shortcut_unassigned_setting_unavailable_summary);
         }
     }
 

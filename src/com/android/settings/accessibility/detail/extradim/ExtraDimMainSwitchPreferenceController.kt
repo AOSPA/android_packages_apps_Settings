@@ -21,6 +21,7 @@ import android.database.ContentObserver
 import android.hardware.display.ColorDisplayManager
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import androidx.preference.TwoStatePreference
@@ -67,7 +68,12 @@ class ExtraDimMainSwitchPreferenceController(override val context: Context, pref
     }
 
     private fun isChecked(): Boolean {
-        return colorDisplayManager?.isReduceBrightColorsActivated == true
+        return Settings.Secure.getIntForUser(
+            context.contentResolver,
+            Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED,
+            /* def= */ 0,
+            context.userId,
+        ) == 1
     }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {

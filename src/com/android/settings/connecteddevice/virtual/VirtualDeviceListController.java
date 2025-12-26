@@ -85,7 +85,7 @@ public class VirtualDeviceListController extends BasePreferenceController
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreferenceGroup = screen.findPreference(getPreferenceKey());
-        if (isAvailable()) {
+        if (getAvailabilityStatus() != UNSUPPORTED_ON_DEVICE) {
             mVirtualDeviceUpdater.loadDevices();
         }
     }
@@ -174,6 +174,6 @@ public class VirtualDeviceListController extends BasePreferenceController
                 com.android.internal.R.bool.config_enableVirtualDeviceManager)) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        return AVAILABLE;
+        return (mVirtualDeviceUpdater.mDevices.size() > 0) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 }

@@ -16,7 +16,7 @@
 
 package com.android.settings.users;
 
-import static com.android.settings.flags.Flags.hideUserListForNonAdmins;
+import static com.android.settings.flags.Flags.showAddUsersFromSigninToggle;
 import static com.android.settings.flags.Flags.showUserDetailsSettingsForSelf;
 import static com.android.settingslib.Utils.getColorAttrDefaultColor;
 
@@ -30,6 +30,7 @@ import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.EnforcingAdmin;
 import android.app.admin.PolicyEnforcementInfo;
+import android.app.admin.SystemAuthority;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -708,7 +709,16 @@ public class UserSettings extends SettingsPreferenceFragment
     private void onUserCreated(UserInfo userInfo, Context context) {
         hideUserCreatingDialog();
         mAddingUser = false;
-        openUserDetails(userInfo, true, context);
+        if (showAddUsersFromSigninToggle()
+                && getPrefContext()
+                        .getResources()
+                        .getBoolean(
+                                com.android.internal.R.bool
+                                        .config_userSwitchingMustGoThroughLoginScreen)) {
+            switchToUserId(userInfo.id);
+        } else {
+            openUserDetails(userInfo, true, context);
+        }
     }
 
     private void hideUserCreatingDialog() {
@@ -1000,6 +1010,7 @@ public class UserSettings extends SettingsPreferenceFragment
                     getActivity(),
                     this::startActivityForResult,
                     canCreateAdminUser(),
+                    canEditUserInfo(),
                     (userName, userIcon, iconPath, isAdmin) -> {
                         mPendingUserIcon = userIcon;
                         mPendingUserName = userName;
@@ -1029,6 +1040,13 @@ public class UserSettings extends SettingsPreferenceFragment
         } else {
             return UserManager.isMultipleAdminEnabled();
         }
+    }
+
+    private boolean canEditUserInfo() {
+        return !showAddUsersFromSigninToggle()
+                || !getPrefContext()
+                        .getResources()
+                        .getBoolean(com.android.internal.R.bool.config_enableUserInfoSetupInSuw);
     }
 
     @Override
@@ -1314,22 +1332,15 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         boolean canOpenUserDetails =
-                isCurrentUserAdmin() || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
-        boolean shouldShowOnlySelf =
-                hideUserListForNonAdmins()
-                        && !isCurrentUserAdmin()
-                        && getPrefContext()
-                                .getResources()
-                                .getBoolean(
-                                        com.android.internal.R.bool
-                                                .config_userSwitchingMustGoThroughLoginScreen);
+                isCurrentUserAdmin()
+                        || (canSwitchUserNow()
+                                && !mUserCaps.mDisallowSwitchUser
+                                && mUserCaps.mUserSwitchingUiEnabled);
+
         for (UserInfo user : users) {
             if (user.isGuest()) {
                 // Guest user is added to guest category via updateGuestCategory
                 // and not to user list so skip guest here
-                continue;
-            }
-            if (shouldShowOnlySelf && user.id != UserHandle.myUserId()) {
                 continue;
             }
             UserPreference pref;
@@ -1502,7 +1513,10 @@ public class UserSettings extends SettingsPreferenceFragment
         UserPreference pref = null;
         boolean isGuestAlreadyCreated = false;
         boolean canOpenUserDetails =
-                isCurrentUserAdmin() || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
+                isCurrentUserAdmin()
+                        || (canSwitchUserNow()
+                                && !mUserCaps.mDisallowSwitchUser
+                                && mUserCaps.mUserSwitchingUiEnabled);
 
         mGuestUserCategory.removeAll();
         mGuestUserCategory.setVisible(false);
@@ -1584,7 +1598,15 @@ public class UserSettings extends SettingsPreferenceFragment
             }
             // A restriction can be enforced by the system or an admin.
             if (mUserCaps.mDisallowAddUserRestrictionEnforcementInfo.isOnlyEnforcedBySystem()) {
-                mAddGuest.setEnabled(false);
+                if (Flags.showPolicyTransparencyForSystemRestrictions()) {
+                    mAddGuest.setDisabledByAdmin(
+                            mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
+                                    .getMostImportantEnforcingAdmin());
+                    mAddGuest.setSummary(getPrefContext().getString(
+                            R.string.add_user_summary_action_restricted));
+                } else {
+                    mAddGuest.setEnabled(false);
+                }
             } else {
                 mAddGuest.setDisabledByAdmin(
                         mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
@@ -1601,7 +1623,14 @@ public class UserSettings extends SettingsPreferenceFragment
                     final UserManager.EnforcingUser enforcingUser = enforcingUsers.get(0);
                     final int restrictionSource = enforcingUser.getUserRestrictionSource();
                     if (restrictionSource == UserManager.RESTRICTION_SOURCE_SYSTEM) {
-                        mAddGuest.setEnabled(false);
+                        if (Flags.showPolicyTransparencyForSystemRestrictions()) {
+                            mAddGuest.setDisabledByAdmin(new EnforcingAdmin("android",
+                                    new SystemAuthority("system"), UserHandle.CURRENT));
+                            mAddGuest.setSummary(getPrefContext().getString(
+                                    R.string.add_user_summary_action_restricted));
+                        } else {
+                            mAddGuest.setEnabled(false);
+                        }
                     } else {
                         mAddGuest.setVisible(false);
                     }
@@ -1654,7 +1683,15 @@ public class UserSettings extends SettingsPreferenceFragment
                             mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
                                     .getMostImportantEnforcingAdmin());
                 } else {
-                    addUser.setEnabled(false);
+                    if (Flags.showPolicyTransparencyForSystemRestrictions()) {
+                        addUser.setDisabledByAdmin(
+                                mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
+                                        .getMostImportantEnforcingAdmin());
+                        addUser.setSummary(context.getString(
+                                R.string.add_user_summary_action_restricted));
+                    } else {
+                        addUser.setEnabled(false);
+                    }
                 }
             } else {
                 addUser.setVisible(false);
@@ -1691,7 +1728,15 @@ public class UserSettings extends SettingsPreferenceFragment
                     final int restrictionSource = enforcingUser.getUserRestrictionSource();
                     if (restrictionSource == UserManager.RESTRICTION_SOURCE_SYSTEM) {
                         addUser.setVisible(true);
-                        addUser.setEnabled(false);
+                        if (Flags.showPolicyTransparencyForSystemRestrictions()) {
+                            addUser.setDisabledByAdmin(
+                                    new EnforcingAdmin("android", new SystemAuthority("system"),
+                                            UserHandle.CURRENT));
+                            addUser.setSummary(context.getString(
+                                    R.string.add_user_summary_action_restricted));
+                        } else {
+                            addUser.setEnabled(false);
+                        }
                     } else {
                         addUser.setVisible(false);
                     }
@@ -1809,8 +1854,12 @@ public class UserSettings extends SettingsPreferenceFragment
             if (mUserCaps.mCanAddRestrictedProfile) {
                 showDialog(DIALOG_CHOOSE_USER_TYPE);
             } else {
-                startActivityForResult(CreateUserActivity.createIntentForStart(getActivity(),
-                                canCreateAdminUser(), Utils.FILE_PROVIDER_AUTHORITY),
+                startActivityForResult(
+                        CreateUserActivity.createIntentForStart(
+                                getActivity(),
+                                canCreateAdminUser(),
+                                canEditUserInfo(),
+                                Utils.FILE_PROVIDER_AUTHORITY),
                         REQUEST_ADD_USER);
             }
             return true;

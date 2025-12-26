@@ -128,13 +128,16 @@ public class ProxySubscriptionManager implements LifecycleObserver {
     @Keep
     @VisibleForTesting
     protected void notifySubscriptionInfoMightChanged() {
+        List<OnActiveSubscriptionChangedListener> listeners = new ArrayList<>();
         // create a merged list for processing all listeners
-        List<OnActiveSubscriptionChangedListener> listeners =
-                new ArrayList<OnActiveSubscriptionChangedListener>(mPendingNotifyListeners);
-        listeners.addAll(mActiveSubscriptionsListeners);
-
-        mActiveSubscriptionsListeners.clear();
-        mPendingNotifyListeners.clear();
+        if (mPendingNotifyListeners != null) {
+            listeners.addAll(mPendingNotifyListeners);
+            mPendingNotifyListeners.clear();
+        }
+        if (mActiveSubscriptionsListeners != null) {
+            listeners.addAll(mActiveSubscriptionsListeners);
+            mActiveSubscriptionsListeners.clear();
+        }
         processStatusChangeOnListeners(listeners);
     }
 

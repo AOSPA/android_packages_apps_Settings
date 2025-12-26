@@ -37,6 +37,7 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /** The controller to handle double tap power button main switch enable or disable state. */
+// LINT.IfChange
 public class DoubleTapPowerMainSwitchPreferenceController
         extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
@@ -101,3 +102,4 @@ public class DoubleTapPowerMainSwitchPreferenceController
         return R.string.menu_key_system;
     }
 }
+// LINT.ThenChange(DoubleTapPowerMainSwitchPreference.kt)

@@ -71,6 +71,7 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.util.ThemeHelper;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -185,7 +186,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 }
             }
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
-            if (Flags.msdlFeedback() && mLockPatternView != null) {
+            if (mLockPatternView != null && mExternalHapticsPlayer != null) {
                 mLockPatternView.setExternalHapticsPlayer(mExternalHapticsPlayer);
             }
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
@@ -376,7 +377,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             super.onResume();
 
             // if the user is currently locked out, enforce it.
-            long deadline = mLockPatternUtils.getLockoutAttemptDeadline(mEffectiveUserId);
+            long deadline = mLockPatternUtils.getLockoutEndTime(mEffectiveUserId).toMillis();
             if (deadline != 0) {
                 mCredentialCheckResultTracker.clearResult();
                 handleAttemptLockout(deadline);
@@ -396,7 +397,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             if (mSaveAndFinishWorker != null) {
                 mSaveAndFinishWorker.setListener(this);
             }
-            if (mLockPatternView != null && Flags.msdlFeedback()) {
+            if (mLockPatternView != null && mExternalHapticsPlayer != null) {
                 mLockPatternView.setExternalHapticsPlayer(mExternalHapticsPlayer);
             }
         }
@@ -577,7 +578,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         @Override
         protected void authenticationSucceeded() {
-            mCredentialCheckResultTracker.setResult(true, new Intent(), 0, mEffectiveUserId);
+            mCredentialCheckResultTracker.setResult(true, new Intent(),
+                    Duration.ZERO, mEffectiveUserId);
         }
 
         private void startDisappearAnimation(final Intent intent) {
@@ -695,7 +697,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 return;
             }
 
-            mCredentialCheckResultTracker.setResult(false, intent, 0, mEffectiveUserId);
+            mCredentialCheckResultTracker.setResult(false, intent, Duration.ZERO,
+                    mEffectiveUserId);
         }
 
         private boolean isInternalActivity() {
@@ -708,7 +711,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             final int localUserId = mUserId;
             final LockPatternChecker.OnVerifyCallback onVerifyCallback =
                     response -> {
-                        final int timeoutMs = response.getTimeout();
+                        final Duration timeout = response.getTimeout();
                         mPendingLockCheck = null;
                         final boolean matched = response.isMatched();
                         if (matched && mReturnCredentials) {
@@ -721,7 +724,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                                         response.getGatekeeperHAT());
                             }
                         }
-                        mCredentialCheckResultTracker.setResult(matched, intent, timeoutMs,
+                        mCredentialCheckResultTracker.setResult(matched, intent, timeout,
                                 localEffectiveUserId);
                 };
             mPendingLockCheck = (localEffectiveUserId == localUserId)
@@ -737,7 +740,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 final Intent intent) {
             if (pattern.size() < LockPatternUtils.MIN_PATTERN_REGISTER_FAIL) {
                 // Pattern size is less than the minimum, do not count it as an fail attempt.
-                onPatternChecked(false, intent, 0, mEffectiveUserId, false /* newResult */);
+                onPatternChecked(false, intent, Duration.ZERO, mEffectiveUserId,
+                        false /* newResult */);
                 return;
             }
 
@@ -750,19 +754,19 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                         @Override
                         public void onChecked(VerifyCredentialResponse response) {
                             final boolean matched = response.isMatched();
-                            final int timeoutMs = response.getTimeout();
+                            final Duration timeout = response.getTimeout();
                             mPendingLockCheck = null;
                             if (matched && isInternalActivity() && mReturnCredentials) {
                                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
                                         pattern);
                             }
-                            mCredentialCheckResultTracker.setResult(matched, intent, timeoutMs,
+                            mCredentialCheckResultTracker.setResult(matched, intent, timeout,
                                     localEffectiveUserId);
                         }
                     });
         }
 
-        private void onPatternChecked(boolean matched, Intent intent, int timeoutMs,
+        private void onPatternChecked(boolean matched, Intent intent, Duration timeout,
                 int effectiveUserId, boolean newResult) {
             mLockPatternView.setEnabled(true);
             if (matched) {
@@ -774,10 +778,10 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 startDisappearAnimation(intent);
                 ConfirmDeviceCredentialUtils.checkForPendingIntent(getActivity());
             } else {
-                if (timeoutMs > 0) {
+                if (timeout.isPositive()) {
                     refreshLockScreen();
                     long deadline = mLockPatternUtils.setLockoutAttemptDeadline(
-                            effectiveUserId, timeoutMs);
+                            effectiveUserId, timeout).toMillis();
                     handleAttemptLockout(deadline);
                 } else {
                     updateStage(Stage.NeedToUnlockWrong);
@@ -814,16 +818,16 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                                 mEffectiveUserId);
                     } else {
                         mCredentialCheckResultTracker.setResult(/* matched= */ true, new Intent(),
-                                /* timeoutMs= */ 0, mEffectiveUserId);
+                                /* timeout= */ Duration.ZERO, mEffectiveUserId);
                     }
                     return;
                 case RemoteLockscreenValidationResult.RESULT_GUESS_INVALID:
                     mCredentialCheckResultTracker.setResult(/* matched= */ false, new Intent(),
-                            /* timeoutMs= */ 0, mEffectiveUserId);
+                            /* timeout= */ Duration.ZERO, mEffectiveUserId);
                     break;
                 case RemoteLockscreenValidationResult.RESULT_LOCKOUT:
                     mCredentialCheckResultTracker.setResult(/* matched= */ false, new Intent(),
-                            (int) result.getTimeoutMillis(), mEffectiveUserId);
+                            Duration.ofMillis(result.getTimeoutMillis()), mEffectiveUserId);
                     break;
                 case RemoteLockscreenValidationResult.RESULT_NO_REMAINING_ATTEMPTS:
                 case RemoteLockscreenValidationResult.RESULT_SESSION_EXPIRED:
@@ -837,9 +841,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         @Override
-        public void onCredentialChecked(boolean matched, Intent intent, int timeoutMs,
+        public void onCredentialChecked(boolean matched, Intent intent, Duration timeout,
                 int effectiveUserId, boolean newResult) {
-            onPatternChecked(matched, intent, timeoutMs, effectiveUserId, newResult);
+            onPatternChecked(matched, intent, timeout, effectiveUserId, newResult);
         }
 
         @Override
@@ -922,7 +926,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 SetupRedactionInterstitial.setEnabled(getContext(), true);
             }
             mCredentialCheckResultTracker.setResult(/* matched= */ true, result,
-                    /* timeoutMs= */ 0, mEffectiveUserId);
+                    /* timeout= */ Duration.ZERO, mEffectiveUserId);
         }
     }
 }

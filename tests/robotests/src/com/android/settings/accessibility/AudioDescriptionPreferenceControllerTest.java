@@ -70,7 +70,8 @@ public class AudioDescriptionPreferenceControllerTest {
 
     @Test
     public void isChecked_disableAudioDescription_onResumeShouldReturnFalse() {
-        Settings.Secure.putInt(mContext.getContentResolver(), KEY_AUDIO_DESCRIPTION, OFF);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(), KEY_AUDIO_DESCRIPTION, OFF,
+                mContext.getUserId());
 
         mController.updateState(mSwitchPreference);
 
@@ -80,7 +81,8 @@ public class AudioDescriptionPreferenceControllerTest {
 
     @Test
     public void isChecked_enableAudioDescription_onResumeShouldReturnTrue() {
-        Settings.Secure.putInt(mContext.getContentResolver(), KEY_AUDIO_DESCRIPTION, ON);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(), KEY_AUDIO_DESCRIPTION, ON,
+                mContext.getUserId());
 
         mController.updateState(mSwitchPreference);
 
@@ -90,7 +92,8 @@ public class AudioDescriptionPreferenceControllerTest {
 
     @Test
     public void performClick_enableAudioDescription_shouldReturnTrue() {
-        Settings.Secure.putInt(mContext.getContentResolver(), KEY_AUDIO_DESCRIPTION, OFF);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(), KEY_AUDIO_DESCRIPTION, OFF,
+                mContext.getUserId());
 
         mController.updateState(mSwitchPreference);
 
@@ -103,7 +106,8 @@ public class AudioDescriptionPreferenceControllerTest {
 
     @Test
     public void performClick_disableAudioDescription_shouldReturnFalse() {
-        Settings.Secure.putInt(mContext.getContentResolver(), KEY_AUDIO_DESCRIPTION, ON);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(), KEY_AUDIO_DESCRIPTION, ON,
+                mContext.getUserId());
 
         mController.updateState(mSwitchPreference);
 
@@ -118,15 +122,17 @@ public class AudioDescriptionPreferenceControllerTest {
     public void setChecked_setFalse_shouldDisableAudioDescription() {
         mController.setChecked(false);
 
-        assertThat(Settings.Secure.getInt(
-            mContext.getContentResolver(), KEY_AUDIO_DESCRIPTION, UNKNOWN)).isEqualTo(OFF);
+        assertThat(Settings.Secure.getIntForUser(
+            mContext.getContentResolver(), KEY_AUDIO_DESCRIPTION, UNKNOWN, mContext.getUserId()))
+                .isEqualTo(OFF);
     }
 
     @Test
     public void setChecked_setTrue_shouldEnableAudioDescription() {
         mController.setChecked(true);
 
-        assertThat(Settings.Secure.getInt(
-            mContext.getContentResolver(), KEY_AUDIO_DESCRIPTION, UNKNOWN)).isEqualTo(ON);
+        assertThat(Settings.Secure.getIntForUser(
+            mContext.getContentResolver(), KEY_AUDIO_DESCRIPTION, UNKNOWN, mContext.getUserId()))
+                .isEqualTo(ON);
     }
 }

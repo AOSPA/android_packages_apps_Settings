@@ -37,6 +37,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.widget.ButtonPreference;
 import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.Before;
@@ -78,6 +79,7 @@ public class BluetoothPairingDetailTest {
     private CachedBluetoothDeviceManager mDeviceManager;
     private BluetoothPairingDetail mFragment;
     private BluetoothProgressCategory mAvailableDevicesCategory;
+    private ButtonPreference mButtonPreference;
     private FooterPreference mFooterPreference;
     private BluetoothAdapter mBluetoothAdapter;
 
@@ -86,6 +88,7 @@ public class BluetoothPairingDetailTest {
         mFragment = spy(new BluetoothPairingDetail());
         doReturn(mContext).when(mFragment).getContext();
         mAvailableDevicesCategory = spy(new BluetoothProgressCategory(mContext));
+        mButtonPreference = new ButtonPreference(mContext);
         mFooterPreference = new FooterPreference(mContext);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -93,6 +96,8 @@ public class BluetoothPairingDetailTest {
                 .findPreference(BluetoothPairingDetail.KEY_AVAIL_DEVICES);
         doReturn(mFooterPreference).when(mFragment)
                 .findPreference(BluetoothPairingDetail.KEY_FOOTER_PREF);
+        doReturn(mButtonPreference).when(mFragment)
+                .findPreference(BluetoothPairingDetail.KEY_NO_DEVICE_BUTTON);
         doReturn(new View(mContext)).when(mFragment).getView();
         doReturn((LifecycleOwner) () -> mFakeLifecycle).when(mFragment).getViewLifecycleOwner();
         doReturn(Collections.emptyList()).when(mDeviceManager).getCachedDevicesCopy();
@@ -109,6 +114,7 @@ public class BluetoothPairingDetailTest {
         mFragment.initPreferencesFromPreferenceScreen();
 
         assertThat(mFragment.mAvailableDevicesCategory).isEqualTo(mAvailableDevicesCategory);
+        assertThat(mFragment.mButtonPreference).isEqualTo(mButtonPreference);
         assertThat(mFragment.mFooterPreference).isEqualTo(mFooterPreference);
     }
 

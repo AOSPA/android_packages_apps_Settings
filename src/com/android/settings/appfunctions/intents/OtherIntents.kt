@@ -30,18 +30,6 @@ fun getOtherIntents() =
             ),
             StaticIntent(
                 description =
-                    "Saved devices: Settings to show the list of previously connected Bluetooth devices.",
-                intentUri =
-                    "intent:#Intent;action=com.android.settings.PREVIOUSLY_CONNECTED_DEVICE;package=com.android.settings;end",
-            ),
-            StaticIntent(
-                description =
-                    "Cast: Settings to configure Cast options to send screen or media to other devices.",
-                intentUri =
-                    "intent:#Intent;action=android.settings.CAST_SETTINGS;package=com.android.settings;end",
-            ),
-            StaticIntent(
-                description =
                     "Wallpaper & Style: Settings to change the wallpaper and style of the device.",
                 intentUri =
                     "intent:#Intent;component=com.android.settings/.wallpaper.StyleSuggestionActivity;end",
@@ -55,6 +43,10 @@ fun getOtherIntents() =
                 description =
                     "Send feedback about this device: Intent to generate a report that you can share with the device manufacturer.",
                 intentUri = "intent:#Intent;action=android.intent.action.BUG_REPORT;end",
+            ),
+            StaticIntent(
+                description = "Factory reset: Settings to erase all data from the device.",
+                intentUri = "intent:#Intent;action=com.android.settings.action.FACTORY_RESET;end",
             ),
         ),
     )

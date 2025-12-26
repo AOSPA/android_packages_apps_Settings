@@ -18,8 +18,8 @@ package com.android.settings.users;
 
 import static android.os.UserManager.SWITCHABILITY_STATUS_OK;
 import static android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED;
+import static android.multiuser.Flags.FLAG_SHOW_POLICY_TRANSPARENCY_FOR_SYSTEM_RESTRICTIONS;
 
-import static com.android.settings.flags.Flags.FLAG_HIDE_USER_LIST_FOR_NON_ADMINS;
 import static com.android.settings.flags.Flags.FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF;
 import static com.android.settings.testutils.DevicePolicyUtils.DPC_ADMIN;
 import static com.android.settings.testutils.DevicePolicyUtils.SYSTEM_ADMIN;
@@ -45,7 +45,9 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
 import android.app.admin.PolicyEnforcementInfo;
+import android.app.admin.SystemAuthority;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
@@ -640,7 +642,9 @@ public class UserSettingsTest {
         verify(mAddUserPreference).setEnabled(true);
     }
 
-    @DisableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @DisableFlags({
+            FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED,
+            FLAG_SHOW_POLICY_TRANSPARENCY_FOR_SYSTEM_RESTRICTIONS})
     @Test
     public void updateUserList_disallowAddUser_refactoringDisabled_shouldShowButDisableAddActions() {
         givenUsers(getAdminUser(true));
@@ -668,6 +672,7 @@ public class UserSettingsTest {
     }
 
     @EnableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @DisableFlags(FLAG_SHOW_POLICY_TRANSPARENCY_FOR_SYSTEM_RESTRICTIONS)
     @Test
     public void updateUserList_disallowAddUser_refactoringEnabled_shouldShowButDisableAddActions() {
         givenUsers(getAdminUser(true));
@@ -688,6 +693,36 @@ public class UserSettingsTest {
         verify(mAddGuestPreference).setEnabled(false);
         verify(mAddUserPreference).setVisible(true);
         verify(mAddUserPreference).setEnabled(false);
+    }
+
+    @EnableFlags({
+            FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED,
+            FLAG_SHOW_POLICY_TRANSPARENCY_FOR_SYSTEM_RESTRICTIONS})
+    @Test
+    public void updateUserList_disallowAddUser_refactoringEnabled_shouldShowActionsDisabledByAdmin() {
+        givenUsers(getAdminUser(true));
+        mUserCapabilities.mCanAddGuest = true;
+        mUserCapabilities.mCanAddUser = false;
+        mUserCapabilities.mDisallowAddUser = true;
+        mUserCapabilities.mDisallowAddUserSetByAdmin = false;
+        mUserCapabilities.mDisallowAddUserRestrictionEnforcementInfo =
+                new PolicyEnforcementInfo(List.of(SYSTEM_ADMIN));
+        doReturn(true)
+                .when(mUserManager).canAddMoreUsers(eq(UserManager.USER_TYPE_FULL_GUEST));
+        doReturn(true)
+                .when(mUserManager).canAddMoreUsers(eq(UserManager.USER_TYPE_FULL_SECONDARY));
+
+        mFragment.updateUserList();
+        ArgumentCaptor<EnforcingAdmin> enforcingAdminCaptor = ArgumentCaptor.forClass(
+                EnforcingAdmin.class);
+        verify(mAddGuestPreference).setVisible(true);
+        verify(mAddGuestPreference).setDisabledByAdmin(enforcingAdminCaptor.capture());
+        EnforcingAdmin guestEnforcingAdminValue = enforcingAdminCaptor.getValue();
+        assertThat(guestEnforcingAdminValue.getAuthority()).isInstanceOf(SystemAuthority.class);
+        verify(mAddUserPreference).setVisible(true);
+        verify(mAddUserPreference).setDisabledByAdmin(enforcingAdminCaptor.capture());
+        EnforcingAdmin userEnforcingAdminValue = enforcingAdminCaptor.getValue();
+        assertThat(userEnforcingAdminValue.getAuthority()).isInstanceOf(SystemAuthority.class);
     }
 
     @EnableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
@@ -1038,82 +1073,6 @@ public class UserSettingsTest {
         assertThat(adminPref).isSameInstanceAs(mMePreference);
         assertThat(adminPref.shouldHideSecondTarget()).isFalse();
         assertThat(secondaryPref.shouldHideSecondTarget()).isTrue();
-    }
-
-    @Test
-    @EnableFlags(FLAG_HIDE_USER_LIST_FOR_NON_ADMINS)
-    public void
-            updateUserList_nonAdminUsersWithSwitchingDisabledAndFeatureEnabled_userListIsHidden() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen,
-                true);
-        mUserCapabilities.mIsAdmin = false;
-        givenUsers(getAdminUser(false), getSecondaryUser(true));
-
-        mFragment.updateUserList();
-
-        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
-        verify(mFragment.mUserListCategory, times(1)).addPreference(captor.capture());
-
-        UserPreference secondaryPref = captor.getAllValues().get(0);
-        assertThat(secondaryPref).isSameInstanceAs(mMePreference);
-    }
-
-    @Test
-    @EnableFlags(FLAG_HIDE_USER_LIST_FOR_NON_ADMINS)
-    public void updateUserList_adminUsersWithSwitchingDisabledAndFeatureEnabled_userListIsShown() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen,
-                true);
-        mUserCapabilities.mIsAdmin = true;
-        givenUsers(getAdminUser(true), getSecondaryUser(false));
-
-        mFragment.updateUserList();
-
-        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
-        verify(mFragment.mUserListCategory, times(2)).addPreference(captor.capture());
-
-        List<UserPreference> userPrefs = captor.getAllValues();
-        UserPreference adminPref = userPrefs.get(0);
-        UserPreference secondaryPref = userPrefs.get(1);
-
-        assertThat(userPrefs.size()).isEqualTo(2);
-        assertThat(adminPref).isSameInstanceAs(mMePreference);
-        assertThat(secondaryPref.getUserId()).isEqualTo(INACTIVE_SECONDARY_USER_ID);
-        assertThat(secondaryPref.getTitle()).isEqualTo(SECONDARY_USER_NAME);
-        assertThat(secondaryPref.getIcon()).isNotNull();
-        assertThat(secondaryPref.getKey()).isEqualTo("id=" + INACTIVE_SECONDARY_USER_ID);
-        assertThat(secondaryPref.isEnabled()).isEqualTo(true);
-        assertThat(secondaryPref.isSelectable()).isEqualTo(true);
-        assertThat(secondaryPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
-    }
-
-    @Test
-    @DisableFlags(FLAG_HIDE_USER_LIST_FOR_NON_ADMINS)
-    public void
-            updateUserList_nonAdminUsersWithSwitchingDisabledAndFeatureDisabled_userListIsShown() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen, true);
-        mUserCapabilities.mIsAdmin = false;
-        givenUsers(getAdminUser(false), getSecondaryUser(true));
-
-        mFragment.updateUserList();
-
-        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
-        verify(mFragment.mUserListCategory, times(2)).addPreference(captor.capture());
-
-        List<UserPreference> userPrefs = captor.getAllValues();
-        UserPreference secondaryPref = userPrefs.get(0);
-        UserPreference adminPref = userPrefs.get(1);
-
-        assertThat(secondaryPref).isSameInstanceAs(mMePreference);
-        assertThat(adminPref.getUserId()).isEqualTo(INACTIVE_ADMIN_USER_ID);
-        assertThat(adminPref.getTitle()).isEqualTo(ADMIN_USER_NAME);
-        assertThat(adminPref.getIcon()).isNotNull();
-        assertThat(adminPref.getKey()).isEqualTo("id=" + INACTIVE_ADMIN_USER_ID);
-        assertThat(adminPref.isEnabled()).isEqualTo(true);
-        assertThat(adminPref.isSelectable()).isEqualTo(true);
-        assertThat(adminPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
     @Test

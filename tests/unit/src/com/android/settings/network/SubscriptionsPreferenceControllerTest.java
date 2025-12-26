@@ -58,6 +58,7 @@ import android.telephony.TelephonyManager;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
+import androidx.lifecycle.MutableLiveData;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -74,7 +75,6 @@ import com.android.settingslib.mobile.MobileMappings;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -176,7 +176,9 @@ public class SubscriptionsPreferenceControllerTest {
         mController =  new FakeSubscriptionsPreferenceController(mContext, mLifecycle,
                 mUpdateListener, KEY, 5);
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
-        mController.mWifiPickerTrackerHelper = mWifiPickerTrackerHelper;
+        mWifiPickerTrackerHelper.mWifiState = mock(MutableLiveData.class);
+        mWifiPickerTrackerHelper.mWifiEntriesChangedReason = mock(MutableLiveData.class);
+        mController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
     }
 
     @After

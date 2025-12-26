@@ -54,8 +54,6 @@ import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -139,9 +137,6 @@ public class FingerprintSettings extends SubSettings {
 
     private static final int RESULT_FINISHED = BiometricEnrollBase.RESULT_FINISHED;
     private static final int RESULT_TIMEOUT = BiometricEnrollBase.RESULT_TIMEOUT;
-    @VisibleForTesting
-    static final VibrationEffect SUCCESS_VIBRATION_EFFECT =
-            VibrationEffect.get(VibrationEffect.EFFECT_CLICK);
 
     @Override
     public Intent getIntent() {
@@ -359,7 +354,6 @@ public class FingerprintSettings extends SubSettings {
         private FingerprintAuthenticateSidecar mAuthenticateSidecar;
         private FingerprintRemoveSidecar mRemovalSidecar;
         private HashMap<Integer, String> mFingerprintsRenaming;
-        private Vibrator mVibrator;
 
         @Nullable
         private UdfpsEnrollCalibrator mCalibrator;
@@ -656,7 +650,6 @@ public class FingerprintSettings extends SubSettings {
                     addFirstFingerprint(null);
                 }
             }
-            mVibrator = getContext().getSystemService(Vibrator.class);
             final PreferenceScreen root = getPreferenceScreen();
             root.removeAll();
             addPreferencesFromResource(getPreferenceScreenResId());
@@ -1557,11 +1550,7 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private void highlightFingerprintItem(int fpId) {
-            if (Flags.msdlFeedback()) {
-                MSDLPlayerWrapper.INSTANCE.playToken(MSDLToken.UNLOCK);
-            } else {
-                mVibrator.vibrate(SUCCESS_VIBRATION_EFFECT);
-            }
+            MSDLPlayerWrapper.INSTANCE.playToken(MSDLToken.UNLOCK);
             String prefName = genKey(fpId);
             FingerprintPreference fpref = (FingerprintPreference) findPreference(prefName);
             if (fpref == null) {
@@ -1855,7 +1844,6 @@ public class FingerprintSettings extends SubSettings {
 
                 final TextView message =
                         dialog.findViewById(R.id.udfps_fingerprint_sensor_message);
-                final Vibrator vibrator = getContext().getSystemService(Vibrator.class);
                 final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(getContext());
                 mCancellationSignal = new CancellationSignal();
                 fpm.authenticate(
@@ -1888,12 +1876,7 @@ public class FingerprintSettings extends SubSettings {
 
                             @Override
                             public void onAuthenticationFailed() {
-                                if (Flags.msdlFeedback()) {
-                                    MSDLPlayerWrapper.INSTANCE.playToken(MSDLToken.FAILURE);
-                                } else {
-                                    vibrator.vibrate(
-                                        VibrationEffect.get(VibrationEffect.EFFECT_DOUBLE_CLICK));
-                                }
+                                MSDLPlayerWrapper.INSTANCE.playToken(MSDLToken.FAILURE);
                                 message.setText(R.string.fingerprint_check_enroll_not_recognized);
                                 message.postDelayed(() -> {
                                     message.setText(R.string.fingerprint_check_enroll_touch_sensor);

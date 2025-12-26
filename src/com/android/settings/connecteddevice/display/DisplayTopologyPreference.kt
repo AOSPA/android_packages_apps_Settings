@@ -17,7 +17,6 @@
 package com.android.settings.connecteddevice.display
 
 import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
@@ -49,7 +48,7 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector) :
 
         val paneHolder = holder.itemView as FrameLayout
         val paneContent = holder.findViewById(R.id.display_topology_pane_content) as FrameLayout
-        val topologyHint = holder.findViewById(R.id.topology_hint) as TextView
+        val topologyHint = holder.findViewById(R.id.topology_hint) as TopologyHintTextView
         controller.bindViews(paneHolder, paneContent, topologyHint)
     }
 

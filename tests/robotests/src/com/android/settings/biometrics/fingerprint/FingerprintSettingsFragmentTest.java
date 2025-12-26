@@ -62,7 +62,6 @@ import android.os.CancellationSignal;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.os.Vibrator;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -79,6 +78,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.biometrics.fingerprint.feature.FingerprintExtPreferencesProvider;
 import com.android.settings.biometrics.fingerprint.feature.PrimarySwitchIntentPreference;
+import com.android.settings.msds.MSDLPlayerWrapper;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -90,6 +90,9 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
+
+import com.google.android.msdl.data.model.MSDLToken;
+import com.google.android.msdl.domain.MSDLPlayer;
 
 import org.junit.After;
 import org.junit.Before;
@@ -151,7 +154,7 @@ public class FingerprintSettingsFragmentTest {
             FingerprintManager.AuthenticationCallback.class);
 
     @Mock
-    private Vibrator mVibrator;
+    private MSDLPlayer mMSDLPlayer;
 
     private FingerprintSettingsFeatureProvider mFingerprintSettingsFeatureProvider;
 
@@ -170,7 +173,6 @@ public class FingerprintSettingsFragmentTest {
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mBiometricManager).when(mContext).getSystemService(BiometricManager.class);
         doReturn(true).when(mFingerprintManager).isHardwareDetected();
-        doReturn(mVibrator).when(mContext).getSystemService(Vibrator.class);
         doReturn(true).when(mUserManager).isProfile(GUEST_USER_ID);
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         when(mBiometricManager.canAuthenticate(PRIMARY_USER_ID,
@@ -184,6 +186,7 @@ public class FingerprintSettingsFragmentTest {
                 .getExtPreferenceProvider(mContext))
                 .thenReturn(mExtPreferencesProvider);
         when(mExtPreferencesProvider.getSize()).thenReturn(0);
+        MSDLPlayerWrapper.INSTANCE.createPlayer(mContext, mMSDLPlayer);
     }
 
     @After
@@ -348,7 +351,7 @@ public class FingerprintSettingsFragmentTest {
                         new Fingerprint("finger 1", 1, 1), 0 /* userId */, false));
 
         shadowOf(Looper.getMainLooper()).idle();
-        verify(mVibrator).vibrate(FingerprintSettings.SUCCESS_VIBRATION_EFFECT);
+        verify(mMSDLPlayer).playToken(MSDLToken.UNLOCK, null);
     }
 
     @Test

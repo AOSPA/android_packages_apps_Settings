@@ -232,4 +232,13 @@ public class WifiUtilsTest {
 
         assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isTrue();
     }
+
+    @Test
+    public void isNetworkEditable_nullWifiConfiguration_returnsTrue() {
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(false);
+        when(wifiEntry.getWifiConfiguration()).thenReturn(null);
+
+        assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isTrue();
+    }
 }

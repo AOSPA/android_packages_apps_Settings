@@ -59,7 +59,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -83,6 +82,8 @@ import com.android.settingslib.utils.ThreadUtils;
 import com.android.wifi.flags.Flags;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectedInfo;
+
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -205,8 +206,8 @@ public class WifiConfigController2 implements TextWatcher,
     private TextView mDns2View;
 
     private LinearLayout mSharedNetworkLoginScreenWarning;
-    private Switch mSharedSwitch;
-    private Switch mEditConfigurationSwitch;
+    private MaterialSwitch mSharedSwitch;
+    private MaterialSwitch mEditConfigurationSwitch;
     private Spinner mProxySettingsSpinner;
     @Nullable
     private Spinner mMeteredSettingsSpinner;
@@ -349,9 +350,9 @@ public class WifiConfigController2 implements TextWatcher,
                         ? View.GONE
                         : View.VISIBLE);
         mSecurityInPosition = new Integer[WifiEntry.NUM_SECURITY_TYPES];
-        mSharedSwitch = (Switch) mView.findViewById(R.id.share_wifi_network);
+        mSharedSwitch = (MaterialSwitch) mView.findViewById(R.id.share_wifi_network);
         mEditConfigurationSwitch =
-            (Switch) mView.findViewById(R.id.edit_wifi_network_configuration);
+            (MaterialSwitch) mView.findViewById(R.id.edit_wifi_network_configuration);
         mSharedNetworkLoginScreenWarning =
             (LinearLayout) mView.findViewById(R.id.shared_network_login_screen_warning);
 
@@ -369,10 +370,13 @@ public class WifiConfigController2 implements TextWatcher,
 
             mSharedSwitch.setChecked(sharedDefault);
             mSharedSwitch.setEnabled(mIsNetworkEditable);
-            mEditConfigurationSwitch.setEnabled(sharedDefault && mIsNetworkEditable);
             mEditConfigurationSwitch.setChecked(editConfigDefault);
+            mEditConfigurationSwitch.setEnabled(sharedDefault && mIsNetworkEditable);
 
             mSharedSwitch.setOnCheckedChangeListener(this);
+            if (mMode == WifiConfigUiBase2.MODE_LOGIN_SCREEN) {
+                setSharedNetworkFieldsInvisible();
+            }
         }
 
         if (mWifiEntry == null) { // new network
@@ -451,14 +455,9 @@ public class WifiConfigController2 implements TextWatcher,
 
             if (mMode == WifiConfigUiBase2.MODE_MODIFY) {
                 mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
-            } else if (mMode == WifiConfigUiBase2.MODE_CONNECT) {
+            } else if (mMode == WifiConfigUiBase2.MODE_CONNECT
+                    || mMode == WifiConfigUiBase2.MODE_LOGIN_SCREEN) {
                 mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
-            } else if (mMode == WifiConfigUiBase2.MODE_LOGIN_SCREEN) {
-                mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
-                mSharedNetworkLoginScreenWarning.setVisibility(View.VISIBLE);
-                mView.findViewById(R.id.sharing_toggle_fields).setVisibility(View.GONE);
-                mView.findViewById(R.id.edit_wifi_network_configuration_fields)
-                        .setVisibility(View.GONE);
             } else {
                 final String signalLevel = getSignalString();
 
@@ -643,7 +642,11 @@ public class WifiConfigController2 implements TextWatcher,
 
         if (com.android.settings.connectivity.Flags.wifiMultiuser()) {
             config.shared = mSharedSwitch.isChecked();
-            // TODO: set allowEditConfig once the API is ready.
+            if (!config.shared) {
+                config.setAllowedToUpdateByOtherUsers(false);
+            } else {
+                config.setAllowedToUpdateByOtherUsers(mEditConfigurationSwitch.isChecked());
+            }
         }
 
         switch (mWifiEntrySecurity) {
@@ -1436,6 +1439,13 @@ public class WifiConfigController2 implements TextWatcher,
 
     private void setEapMethodInvisible() {
         mView.findViewById(R.id.eap).setVisibility(View.GONE);
+    }
+
+    private void setSharedNetworkFieldsInvisible() {
+        mSharedNetworkLoginScreenWarning.setVisibility(View.VISIBLE);
+        mView.findViewById(R.id.sharing_toggle_fields).setVisibility(View.GONE);
+        mView.findViewById(R.id.edit_wifi_network_configuration_fields)
+                .setVisibility(View.GONE);
     }
 
     private void showIpConfigFields() {

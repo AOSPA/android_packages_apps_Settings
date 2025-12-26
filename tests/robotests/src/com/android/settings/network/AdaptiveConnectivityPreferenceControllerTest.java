@@ -24,10 +24,13 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.provider.Settings;
 
 import com.android.settings.R;
 
+import com.android.settings.flags.Flags;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,6 +54,13 @@ public class AdaptiveConnectivityPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mResources).when(mContext).getResources();
         mController = new AdaptiveConnectivityPreferenceController(mContext, PREF_KEY);
+        // Clear settings before each test
+        Settings.Secure.putString(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, null);
+        Settings.Secure.putString(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, null);
+        Settings.Secure.putString(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED, null);
     }
 
     @Test
@@ -70,6 +80,7 @@ public class AdaptiveConnectivityPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
     public void getSummary_adaptiveConnectivityEnabled_shouldShowOn() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 1);
@@ -78,11 +89,126 @@ public class AdaptiveConnectivityPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
     public void getSummary_adaptiveConnectivityEnabled_shouldShowOff() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 0);
 
         assertThat(mController.getSummary())
                 .isEqualTo(mContext.getString(R.string.switch_off_text));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void getSummary_wifiOn_mobileOff_shouldShowOn() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, 1);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED, 0);
+
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.adaptive_connectivity_switch_on));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void getSummary_wifiOff_mobileOn_shouldShowOn() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, 0);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED, 1);
+
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.adaptive_connectivity_switch_on));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void getSummary_wifiOn_mobileOn_shouldShowOn() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, 1);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED, 1);
+
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.adaptive_connectivity_switch_on));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void getSummary_wifiOff_mobileOff_shouldShowOff() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, 0);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED, 0);
+
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.adaptive_connectivity_switch_off));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void getSummary_wifiOn_mobileNotSet_shouldShowOn() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, 1);
+
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.adaptive_connectivity_switch_on));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void getSummary_wifiNotSet_mobileOn_shouldShowOn() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED, 1);
+
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.adaptive_connectivity_switch_on));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void getSummary_wifiOff_mobileNotSet_shouldShowOff() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, 0);
+
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.adaptive_connectivity_switch_off));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void getSummary_wifiNotSet_mobileOff_shouldShowOff() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED, 0);
+
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.adaptive_connectivity_switch_off));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void getSummary_newSettingsNotSet_fallbackToEnabled_shouldShowOn() {
+        // When the new settings are not set, the controller should fall back to the old global
+        // setting. Set the old setting to ON.
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 1);
+
+        // Verify the summary shows "On".
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.adaptive_connectivity_switch_on));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void getSummary_newSettingsNotSet_fallbackToDisabled_shouldShowOff() {
+        // When the new settings are not set, the controller should fall back to the old global
+        // setting. Set the old setting to OFF.
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 0);
+
+        // Verify the summary shows "Off".
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.adaptive_connectivity_switch_off));
     }
 }

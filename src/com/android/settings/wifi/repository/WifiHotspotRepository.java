@@ -40,6 +40,7 @@ import android.net.wifi.WifiManager.WifiStateChangedListener;
 import android.net.wifi.WifiScanner;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.SparseIntArray;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -47,11 +48,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
 
@@ -63,8 +63,6 @@ public class WifiHotspotRepository {
 
     private static final int RESTART_INTERVAL_MS = 100;
 
-    /** Wi-Fi hotspot band unknown. */
-    public static final int BAND_UNKNOWN = 0;
     /** Wi-Fi hotspot band 2.4GHz and 5GHz. */
     public static final int BAND_2GHZ_5GHZ = BAND_2GHZ | BAND_5GHZ;
     /** Wi-Fi hotspot band 2.4GHz and 5GHz and 6GHz. */
@@ -80,16 +78,8 @@ public class WifiHotspotRepository {
     public static final int SPEED_2GHZ_5GHZ = 3;
     /** Wi-Fi hotspot speed 6GHz. */
     public static final int SPEED_6GHZ = 4;
-
-    protected static Map<Integer, Integer> sSpeedMap = new HashMap<>();
-
-    static {
-        sSpeedMap.put(BAND_UNKNOWN, SPEED_UNKNOWN);
-        sSpeedMap.put(BAND_2GHZ, SPEED_2GHZ);
-        sSpeedMap.put(BAND_5GHZ, SPEED_5GHZ);
-        sSpeedMap.put(BAND_6GHZ, SPEED_6GHZ);
-        sSpeedMap.put(BAND_2GHZ_5GHZ, SPEED_2GHZ_5GHZ);
-    }
+    /** Wi-Fi hotspot speed 2.4GHz and 6GHz. */
+    public static final int SPEED_2GHZ_6GHZ = 5;
 
     private final Context mAppContext;
     private final WifiManager mWifiManager;
@@ -320,6 +310,50 @@ public class WifiHotspotRepository {
         return mSpeedType;
     }
 
+    /**
+     * Get the intended speed type of a SoftApConfiguration, taking into account the currently
+     * available channels and dual band capabilities.
+     *
+     * Single-band configurations may be upgraded to DBS by the framework if available.
+     * (see config_wifiSoftapUpgradeTetheredTo2g5gBridgedIfBandsAreSubset).
+     */
+    private int getSpeedTypeOfConfiguration(@NonNull SoftApConfiguration config) {
+        boolean specifies2ghz = false;
+        boolean specifies5ghz = false;
+        boolean specifies6ghz = false;
+        SparseIntArray configuredChannels = config.getChannels();
+        for (int i = 0; i < configuredChannels.size(); i++) {
+            int band = configuredChannels.keyAt(i);
+            if ((band & BAND_2GHZ) != 0) specifies2ghz = true;
+            if ((band & BAND_5GHZ) != 0) specifies5ghz = true;
+            if ((band & BAND_6GHZ) != 0) specifies6ghz = true;
+        }
+        log("getSpeedTypeOfConfiguration(): channels=" + configuredChannels
+                + ", specifies2ghz=" + specifies2ghz
+                + ", specifies5ghz=" + specifies5ghz
+                + ", specifies6ghz=" + specifies6ghz
+        );
+
+        // Check configured bands in order of compatibility.
+        if (specifies6ghz && is6gAvailable()) {
+            if (isDualBand() && Flags.enable2And6GhzHotspotSpeed()) return SPEED_2GHZ_6GHZ;
+            return SPEED_6GHZ;
+        }
+
+        if (specifies5ghz && is5gAvailable()) {
+            if (isDualBand() && (configuredChannels.size() > 1)) return SPEED_2GHZ_5GHZ;
+            return SPEED_5GHZ;
+        }
+
+        if (specifies2ghz) { // Assume 2 GHz is always available
+            // Upgrade to 2 + 5 GHz if available
+            if (isDualBand() && is5gAvailable()) return SPEED_2GHZ_5GHZ;
+            return SPEED_2GHZ;
+        }
+
+        return SPEED_UNKNOWN;
+    }
+
     protected void updateSpeedType() {
         if (mSpeedType == null) {
             return;
@@ -329,30 +363,20 @@ public class WifiHotspotRepository {
             mSpeedType.setValue(SPEED_UNKNOWN);
             return;
         }
-        int keyBand = 0;
-        for (int i = 0; i < config.getChannels().size(); i++) {
-            keyBand |= config.getChannels().keyAt(i);
+
+        int speedType = getSpeedTypeOfConfiguration(config);
+        log("updateSpeedType():" + speedType);
+        mSpeedType.setValue(speedType);
+    }
+
+    private boolean has6Ghz(@NonNull SoftApConfiguration config) {
+        SparseIntArray channels = config.getChannels();
+        for (int i = 0; i < channels.size(); i++) {
+            if ((channels.keyAt(i) & BAND_6GHZ) != 0) {
+                return true;
+            }
         }
-        log("updateSpeedType(), getBand():" + keyBand);
-        if (!is5gAvailable()) {
-            keyBand &= ~BAND_5GHZ;
-        }
-        if (!is6gAvailable()) {
-            keyBand &= ~BAND_6GHZ;
-        }
-        if ((keyBand & BAND_6GHZ) != 0) {
-            keyBand = BAND_6GHZ;
-        } else if (isDualBand() && is5gAvailable() && (config.getChannels().size() > 1)) {
-            keyBand = BAND_2GHZ_5GHZ;
-        } else if ((keyBand & BAND_5GHZ) != 0) {
-            keyBand = BAND_5GHZ;
-        } else if ((keyBand & BAND_2GHZ) != 0) {
-            keyBand = BAND_2GHZ;
-        } else {
-            keyBand = 0;
-        }
-        log("updateSpeedType(), keyBand:" + keyBand);
-        mSpeedType.setValue(sSpeedMap.get(keyBand));
+        return false;
     }
 
     /**
@@ -369,6 +393,7 @@ public class WifiHotspotRepository {
             Log.w(TAG, "setSpeedType() is no changed! mSpeedType:" + mSpeedType.getValue());
             return;
         }
+
         SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
         if (config == null) {
             mSpeedType.setValue(SPEED_UNKNOWN);
@@ -376,32 +401,40 @@ public class WifiHotspotRepository {
             return;
         }
         SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder(config);
-        if (speedType == SPEED_6GHZ) {
-            log("setSpeedType(), setBand(BAND_2GHZ_5GHZ_6GHZ)");
-            configBuilder.setBand(BAND_2GHZ_5GHZ_6GHZ);
-            if (config.getSecurityType() == SECURITY_TYPE_WPA3_OWE ||
-                config.getSecurityType() == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
-                log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_OWE)");
-                configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE);
-            } else if (config.getSecurityType() != SECURITY_TYPE_WPA3_SAE) {
-                log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE)");
-                configBuilder.setPassphrase(generatePassword(config), SECURITY_TYPE_WPA3_SAE);
-            }
-        } else {
-            if (speedType == SPEED_5GHZ) {
-                log("setSpeedType(), setBand(BAND_2GHZ_5GHZ)");
-                configBuilder.setBand(BAND_2GHZ_5GHZ);
-            } else if (isDualBand() && speedType == SPEED_2GHZ_5GHZ) {
-                log("setSpeedType(), setBands(BAND_2GHZ + BAND_2GHZ_5GHZ)");
-                int[] bands = {BAND_2GHZ, BAND_2GHZ_5GHZ};
-                configBuilder.setBands(bands);
-            } else {
+
+        boolean newSpeedHas6g = false;
+        switch (speedType) {
+            case SPEED_2GHZ:
                 log("setSpeedType(), setBand(BAND_2GHZ)");
                 configBuilder.setBand(BAND_2GHZ);
-            }
-            // Set the security type back to WPA2/WPA3 if the password is at least 8 characters and
-            // we're moving from 6GHz to something else.
-            // except for Enhanced open case, moving to OWE transition from OWE
+                break;
+            case SPEED_5GHZ:
+                log("setSpeedType(), setBand(BAND_2GHZ_5GHZ)");
+                configBuilder.setBand(BAND_2GHZ_5GHZ);
+                break;
+            case SPEED_6GHZ:
+                log("setSpeedType(), setBand(BAND_2GHZ_5GHZ_6GHZ)");
+                configBuilder.setBand(BAND_2GHZ_5GHZ_6GHZ);
+                newSpeedHas6g = true;
+                break;
+            case SPEED_2GHZ_5GHZ:
+                log("setSpeedType(), setBands({BAND_2GHZ, BAND_2GHZ_5GHZ})");
+                configBuilder.setBands(new int[]{BAND_2GHZ, BAND_2GHZ_5GHZ});
+                break;
+            case SPEED_2GHZ_6GHZ:
+                log("setSpeedType(), setBands({BAND_2GHZ, BAND_2GHZ_5GHZ_6GHZ})");
+                configBuilder.setBands(new int[]{BAND_2GHZ, BAND_2GHZ_5GHZ_6GHZ});
+                newSpeedHas6g = true;
+                break;
+        }
+
+        if (newSpeedHas6g && config.getSecurityType() != SECURITY_TYPE_WPA3_SAE) {
+            // If we're moving to 6Ghz, set the security type to WPA3-SAE since 6GHz requires it.
+            log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE)");
+            configBuilder.setPassphrase(generatePassword(config), SECURITY_TYPE_WPA3_SAE);
+        } else if (has6Ghz(config) && !newSpeedHas6g) {
+            // If we're moving away from 6Ghz, reset the security type back to WPA2/WPA3 transition
+            // for maximum compatibility.
             String passphrase = generatePassword(config);
             if ((passphrase.length() >= 8) && (config.getBand() & BAND_6GHZ) != 0) {
                 if (config.getSecurityType() == SECURITY_TYPE_WPA3_OWE &&
@@ -413,6 +446,7 @@ public class WifiHotspotRepository {
                 }
             }
         }
+
         setSoftApConfiguration(configBuilder.build());
     }
 
@@ -660,7 +694,8 @@ public class WifiHotspotRepository {
         }, RESTART_INTERVAL_MS);
     }
 
-    private void startTethering() {
+    @VisibleForTesting
+    void startTethering() {
         if (mStartTetheringCallback == null) {
             mStartTetheringCallback = new StartTetheringCallback();
         }
@@ -719,7 +754,8 @@ public class WifiHotspotRepository {
         }
     }
 
-    private class StartTetheringCallback implements TetheringManager.StartTetheringCallback {
+    @VisibleForTesting
+    class StartTetheringCallback implements TetheringManager.StartTetheringCallback {
         @Override
         public void onTetheringStarted() {
             log("onTetheringStarted()");
@@ -727,7 +763,13 @@ public class WifiHotspotRepository {
 
         @Override
         public void onTetheringFailed(int error) {
-            log("onTetheringFailed(), error:" + error);
+            Log.e(TAG, "onTetheringFailed(), error:" + error);
+            if (isRestarting()) {
+                Log.w(TAG, "Stop tethering due to restart failure!");
+                stopTethering();
+                refresh();
+                setRestarting(false);
+            }
         }
     }
 

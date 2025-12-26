@@ -22,7 +22,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
+import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -68,6 +71,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
 
     private static final String TAG = "AppInfoBase";
 
+    protected EnforcingAdmin mAppsControlEnforcingAdmin;
     protected EnforcedAdmin mAppsControlDisallowedAdmin;
     protected boolean mAppsControlDisallowedBySystem;
 
@@ -112,11 +116,20 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-                getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
-        mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
-                getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
-
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            PolicyEnforcementInfo appsControlEnforcementInfo = getActivity().getSystemService(
+                    DevicePolicyManager.class).getEnforcingAdminsForPolicy(
+                    DevicePolicyIdentifiers.getIdentifierForUserRestriction(
+                            UserManager.DISALLOW_APPS_CONTROL), mUserId);
+            mAppsControlEnforcingAdmin =
+                    appsControlEnforcementInfo.getMostImportantEnforcingAdmin();
+            mAppsControlDisallowedBySystem = appsControlEnforcementInfo.isEnforcedBySystem();
+        } else {
+            mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
+                    getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
+            mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                    getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
+        }
         if (!refreshUi()) {
             setIntentAndFinish(true /* appChanged */);
         }

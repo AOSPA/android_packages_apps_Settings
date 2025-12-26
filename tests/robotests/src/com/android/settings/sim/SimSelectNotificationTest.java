@@ -16,6 +16,7 @@
 package com.android.settings.sim;
 
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
+import static android.content.Context.MODE_PRIVATE;
 import static android.provider.Settings.ENABLE_MMS_DATA_REQUEST_REASON_INCOMING_MMS;
 import static android.provider.Settings.ENABLE_MMS_DATA_REQUEST_REASON_OUTGOING_MMS;
 import static android.provider.Settings.EXTRA_ENABLE_MMS_DATA_REQUEST_REASON;
@@ -55,10 +56,15 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -68,11 +74,14 @@ import android.util.DisplayMetrics;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.SatelliteRepository;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.SubscriptionActionDialogActivity;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -90,6 +99,10 @@ import java.util.concurrent.Executor;
 public class SimSelectNotificationTest {
     @Spy
     private Context mContext = ApplicationProvider.getApplicationContext();
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
     @Mock
     private Executor mExecutor;
     @Mock
@@ -110,6 +123,8 @@ public class SimSelectNotificationTest {
     private SimDialogActivity mActivity;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private SharedPreferences mSharedPreferences;
 
     private final String mFakeDisplayName = "fake_display_name";
     private final CharSequence mFakeNotificationChannelTitle = "fake_notification_channel_title";
@@ -145,6 +160,9 @@ public class SimSelectNotificationTest {
         when(mPackageManager.checkPermission(any(), any()))
                 .thenReturn(PackageManager.PERMISSION_GRANTED);
         when(mUserManager.isMainUser()).thenReturn(true);
+        when(mContext.getSharedPreferences(
+                SubscriptionActionDialogActivity.SIM_ACTION_DIALOG_PREFS, MODE_PRIVATE))
+                .thenReturn(mSharedPreferences);
 
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         when(mTelephonyManager.isDataEnabledForApn(TYPE_MMS)).thenReturn(false);
@@ -264,6 +282,7 @@ public class SimSelectNotificationTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
     public void onReceivePrimarySubListChange_WithDataPickExtra_shouldStartActivity() {
         Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
         intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
@@ -279,13 +298,29 @@ public class SimSelectNotificationTest {
                 SimDialogActivity.class.getName());
         // Verify that the intent has the correct flags.
         assertThat(capturedIntent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK).isNotEqualTo(0);
-        assertThat(capturedIntent.getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TASK).isNotEqualTo(0);
+        // Verify FLAG_ACTIVITY_CLEAR_TASK is not set.
+        assertThat(capturedIntent.getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TASK).isEqualTo(0);
         assertThat(capturedIntent.getIntExtra(SimDialogActivity.DIALOG_TYPE_KEY, INVALID_PICK))
                 .isEqualTo(DATA_PICK);
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
+    public void onReceivePrimarySubListChange_dataPickWithOnboardingFlag_shouldNotStartActivity() {
+        Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
+        intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
+                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA);
+
+        SimSelectNotification.onPrimarySubscriptionListChanged(mContext, intent);
+
+        verify(mContext, never()).startActivity(any());
+    }
+
+    @Test
     public void onReceivePrimarySubListChange_WithAllPickExtra_shouldStartActivity() {
+        when(mSharedPreferences.getInt(
+                eq(SubscriptionActionDialogActivity.KEY_PROGRESS_STATE), anyInt()))
+                .thenReturn(SubscriptionActionDialogActivity.PROGRESS_IS_NOT_SHOWING);
         final int subId = 123;
         Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
         intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
@@ -306,6 +341,24 @@ public class SimSelectNotificationTest {
         assertThat(capturedIntent.getIntExtra(SimDialogActivity.DIALOG_TYPE_KEY, INVALID_PICK))
                 .isEqualTo(PREFERRED_PICK);
         assertThat(capturedIntent.hasExtra(PREFERRED_SIM)).isTrue();
+    }
+
+    @Test
+    public void
+          onReceivePrimarySubListChange_WithAllPickExtraProgressShowing_shouldNotStartActivity() {
+        when(mSharedPreferences.getInt(
+                eq(SubscriptionActionDialogActivity.KEY_PROGRESS_STATE), anyInt()))
+                .thenReturn(SubscriptionActionDialogActivity.PROGRESS_IS_SHOWING);
+
+        final int subId = 123;
+        Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
+        intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
+                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_ALL);
+        intent.putExtra(EXTRA_SUBSCRIPTION_ID, subId);
+
+        SimSelectNotification.onPrimarySubscriptionListChanged(mContext, intent);
+
+        verify(mContext, never()).startActivity(any());
     }
 
     @Test

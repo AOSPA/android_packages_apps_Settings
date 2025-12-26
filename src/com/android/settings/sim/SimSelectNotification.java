@@ -16,6 +16,7 @@
 
 package com.android.settings.sim;
 
+import static android.content.Context.MODE_PRIVATE;
 import static android.provider.Settings.ENABLE_MMS_DATA_REQUEST_REASON_INCOMING_MMS;
 import static android.provider.Settings.ENABLE_MMS_DATA_REQUEST_REASON_OUTGOING_MMS;
 import static android.provider.Settings.EXTRA_ENABLE_MMS_DATA_REQUEST_REASON;
@@ -41,6 +42,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -56,8 +58,10 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.HelpTrampoline;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.SatelliteRepository;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.SubscriptionActionDialogActivity;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -225,7 +229,9 @@ public class SimSelectNotification extends BroadcastReceiver {
         // Create a notification to tell the user that some defaults are missing
         createSimSelectNotification(context);
 
-        if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_ALL) {
+        if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_ALL
+                && getProgressState(context)
+                != SubscriptionActionDialogActivity.PROGRESS_IS_SHOWING) {
             int subId = intent.getIntExtra(EXTRA_SUBSCRIPTION_ID,
                     SubscriptionManager.DEFAULT_SUBSCRIPTION_ID);
             int slotIndex = SubscriptionManager.getSlotIndex(subId);
@@ -236,13 +242,24 @@ public class SimSelectNotification extends BroadcastReceiver {
                     SimDialogActivity.PREFERRED_PICK);
             newIntent.putExtra(SimDialogActivity.PREFERRED_SIM, slotIndex);
             context.startActivity(newIntent);
-        } else if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA) {
+        } else if (!Flags.isDualSimOnboardingEnabled()
+                && dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA) {
+            // If Flags.isDualSimOnboardingEnabled() is true, then it replaces SimDialogActivity
+            // with sim onboarding dialog
+
             // If there are multiple, ensure they pick default data
             Intent newIntent = new Intent(context, SimDialogActivity.class);
-            newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             newIntent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, SimDialogActivity.DATA_PICK);
             context.startActivity(newIntent);
         }
+    }
+
+    private static int getProgressState(Context context) {
+        final SharedPreferences prefs = context.getSharedPreferences(
+                SubscriptionActionDialogActivity.SIM_ACTION_DIALOG_PREFS, MODE_PRIVATE);
+        return prefs.getInt(SubscriptionActionDialogActivity.KEY_PROGRESS_STATE,
+                SubscriptionActionDialogActivity.PROGRESS_IS_NOT_SHOWING);
     }
 
     private static void sendSimCombinationWarningIfNeeded(Context context, Intent intent) {

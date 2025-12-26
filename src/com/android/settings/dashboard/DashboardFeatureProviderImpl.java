@@ -555,18 +555,19 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     private Drawable getExpressiveHomepageIcon(Tile tile, Drawable iconDrawable,
             @Nullable String iconPackage) {
+        // Normalize icon size
+        LayerDrawable drawable = new LayerDrawable(new Drawable[] {iconDrawable});
+        int size = mContext.getResources().getDimensionPixelSize(R.dimen.dashboard_tile_image_size);
+        drawable.setLayerSize(0, size, size);
+
+        // Account-type raw image
         if (TextUtils.equals(tile.getGroupKey(), TOP_LEVEL_ACCOUNT_CATEGORY)
                 && iconPackage == null) {
-            // Normalize size for homepage account type raw image
-            LayerDrawable drawable = new LayerDrawable(new Drawable[] {iconDrawable});
-            int size = mContext.getResources().getDimensionPixelSize(
-                    R.dimen.dashboard_tile_image_size);
-            drawable.setLayerSize(0, size, size);
             return drawable;
         }
 
         ColorScheme scheme = getColorScheme(tile);
-        return getRoundedIcon(iconDrawable, scheme.foregroundColor, scheme.backgroundColor);
+        return getRoundedIcon(drawable, scheme.foregroundColor, scheme.backgroundColor);
     }
 
     private Drawable getRoundedIcon(Drawable iconDrawable, int fgColorId, int bgColorId) {

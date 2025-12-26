@@ -18,8 +18,9 @@ package com.android.settings.supervision
 import android.app.KeyguardManager
 import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
+import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
-import android.app.supervision.SupervisionRecoveryInfo.STATE_VERIFIED
+import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -27,6 +28,7 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager.MATCH_ALL
 import android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS
 import android.content.res.Resources
+import android.os.ServiceManager
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
@@ -37,20 +39,22 @@ import com.android.settingslib.supervision.SupervisionLog.TAG
 object SupervisionHelper {
     const val INSTALL_SUPERVISION_APP_ACTION =
         "android.app.supervision.action.INSTALL_SUPERVISION_APP"
+    const val SHARED_PREFS_NAME = "supervision_settings_prefs"
+    const val KEY_RECOVERY_BANNER_DISMISSED = "supervision_recovery_banner_dismissed"
 }
 
-val Context.isSupervisingCredentialSet: Boolean
-    get() {
-        val supervisingUserId = supervisingUserHandle?.identifier ?: return false
-        return getSystemService(KeyguardManager::class.java)?.isDeviceSecure(supervisingUserId) ==
-            true
-    }
+fun Context.isSupervisingCredentialSet(
+    supervisingUserHandle: UserHandle? = supervisingUserHandle()
+): Boolean {
+    val supervisingUserId = supervisingUserHandle?.identifier ?: return false
+    return getSystemService(KeyguardManager::class.java)?.isDeviceSecure(supervisingUserId) == true
+}
 
-val Context.supervisingUserHandle: UserHandle?
-    get() = getSystemService(UserManager::class.java).supervisingUserHandle
+fun Context.supervisingUserHandle(): UserHandle? =
+    getSystemService(UserManager::class.java).supervisingUserHandle()
 
-val UserManager?.supervisingUserHandle: UserHandle?
-    get() = this?.users?.firstOrNull { it.userType == USER_TYPE_PROFILE_SUPERVISING }?.userHandle
+fun UserManager?.supervisingUserHandle(): UserHandle? =
+    this?.getUsers()?.firstOrNull { it.userType == USER_TYPE_PROFILE_SUPERVISING }?.userHandle
 
 /** Returns the package name of the system supervision app, or null if not found. */
 val Context.systemSupervisionPackageName: String?
@@ -124,7 +128,7 @@ fun Context.areAnyUsersExceptCurrentSupervised(
  * Disables supervision, deletes the supervising profile and recovery info. Returns whether all
  * supervision data was deleted.
  */
-fun Context.deleteSupervisionData(): Boolean {
+fun Context.deleteSupervisionData(disableSupervision: Boolean): Boolean {
     val userManager = getSystemService(UserManager::class.java)
     val supervisionManager = getSystemService(SupervisionManager::class.java)
     if (userManager == null || supervisionManager == null) {
@@ -132,18 +136,24 @@ fun Context.deleteSupervisionData(): Boolean {
         return false
     }
 
-    if (areAnyUsersExceptCurrentSupervised(supervisionManager, userManager)) {
+    if (
+        !Flags.enableSupervisionSettingsUiUpdates() &&
+            areAnyUsersExceptCurrentSupervised(supervisionManager, userManager)
+    ) {
         Log.e(TAG, "Can't delete supervision data; one or more users on the device are supervised.")
         return false
     }
 
-    val supervisingUser = supervisingUserHandle?.identifier
+    val supervisingUser = userManager.supervisingUserHandle()?.identifier
     if (supervisingUser == null) {
         Log.e(TAG, "Can't delete supervision data; supervising user does not exist.")
         return false
     }
 
-    supervisionManager.setSupervisionEnabled(false)
+    if (disableSupervision) {
+        supervisionManager.setSupervisionEnabled(false)
+    }
+
     supervisionManager.setSupervisionRecoveryInfo(null)
     return userManager.removeUserEvenWhenDisallowed(supervisingUser)
 }
@@ -197,17 +207,31 @@ fun Context.readSystemSupervisionPackageNameFromResources(): String? {
 }
 
 /** Checks if there's valid recovery method */
-fun Context.isMissingRecoveryMethod(): Boolean {
-    return !hasAlternativeCredentialConfirmationMethod() && !isPinRecoveryEmailVerified()
-}
-
-/** Checks for alternative authentication methods */
-private fun Context.hasAlternativeCredentialConfirmationMethod(): Boolean {
-    // TODO(b/446025922): add real implementation
+fun Context.shouldDisplayPinRecoveryReminders(): Boolean {
+    val supervisionManager =
+        ISupervisionManager.Stub.asInterface(ServiceManager.getService(Context.SUPERVISION_SERVICE))
+    if (supervisionManager != null) {
+        return try {
+            !supervisionManager.hasValidRecoveryMethod(userId)
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to check if the user has verified recovery method.", e)
+            false
+        }
+    }
     return false
 }
 
-private fun Context.isPinRecoveryEmailVerified(): Boolean {
-    return getSystemService(SupervisionManager::class.java)?.getSupervisionRecoveryInfo()?.state ==
-        STATE_VERIFIED
+/** Checks if the PIN recovery flow can be launched */
+fun Context.canLaunchPinRecovery(): Boolean {
+    val supervisionManager =
+        ISupervisionManager.Stub.asInterface(ServiceManager.getService(Context.SUPERVISION_SERVICE))
+    if (supervisionManager != null) {
+        return try {
+            supervisionManager.canLaunchPinRecovery(userId)
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to check if recovery configuration is available for launch.", e)
+            false
+        }
+    }
+    return false
 }

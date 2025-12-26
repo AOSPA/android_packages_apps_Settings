@@ -37,17 +37,13 @@ import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.hardware.display.DisplayManager;
-import android.os.Handler;
 import android.os.RemoteException;
-import android.os.UserHandle;
 import android.util.Slog;
 import android.view.Display;
 import android.view.DisplayInfo;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
-import com.android.window.flags.Flags;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -55,7 +51,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.charset.StandardCharsets;
-import java.time.InstantSource;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -78,8 +73,6 @@ class UserAspectRatioBackupManager {
     @BackupRestoreEventLogger.BackupRestoreError
     private static final String ERROR_TYPE_CAST_FAILED = "type_cast_failed";
     @BackupRestoreEventLogger.BackupRestoreError
-    private static final String ERROR_QUERY_PACKAGE_FAILED = "query_package_failed";
-    @BackupRestoreEventLogger.BackupRestoreError
     private static final String ERROR_ASPECT_RATIO_FAILED = "aspect_ratio_failed";
 
     @NonNull
@@ -91,8 +84,6 @@ class UserAspectRatioBackupManager {
     @VisibleForTesting
     @NonNull
     private Set<Integer> mAvailableUserMinAspectRatioSet;
-    @NonNull
-    private final UserAspectRatioRestoreStorage mStorage;
 
     @UserIdInt
     private final int mUserId;
@@ -101,44 +92,14 @@ class UserAspectRatioBackupManager {
 
     private final Map<Integer, Float> mUserAspectRatiosPerSettingMap = new HashMap<>();
 
-    /**
-     * Helper to monitor package states for the purpose of restoring user aspect ratios.
-     *
-     * <p>This package monitor also keeps the backed-up and restored data up-to-date when a package
-     * is removed.
-     */
-    @VisibleForTesting
-    final PackageMonitor mPackageMonitor = new PackageMonitor() {
-        @Override
-        public void onPackageAdded(String packageName, int uid) {
-            final int aspectRatio = mStorage.getAndRemoveUserAspectRatioForPackage(packageName);
-            if (aspectRatio != USER_MIN_ASPECT_RATIO_UNSET) {
-                checkExistingAspectRatioAndApplyRestore(packageName, aspectRatio);
-            }
-        }
-
-        @Override
-        public void onPackageRemoved(@NonNull String packageName, int uid) {
-            // Just in case, but the user aspect ratio should be restored and removed as soon as an
-            // app is installed. Therefore there should not be anything to clean up here.
-            mStorage.getAndRemoveUserAspectRatioForPackage(packageName);
-        }
-    };
-
     public UserAspectRatioBackupManager(@NonNull Context context,
             @NonNull IPackageManager iPackageManager, @NonNull PackageManager packageManager,
-            @NonNull BackupRestoreEventLogger logger, @NonNull Handler handler,
-            @NonNull InstantSource instantSource) {
+            @NonNull BackupRestoreEventLogger logger) {
         mContext = context;
         mIPackageManager = iPackageManager;
         mPackageManager = packageManager;
         mUserId = mPackageManager.getUserId();
-        mStorage = new UserAspectRatioRestoreStorage(context, mUserId, instantSource);
         mLogger = logger;
-
-        if (!Flags.restoreUserAspectRatioSettingsUsingService()) {
-            mPackageMonitor.register(context, UserHandle.of(UserHandle.USER_ALL), handler);
-        }
 
         populateAvailableUserAspectRatioSettingOptions(mContext.getResources().getIntArray(
                 R.array.config_userAspectRatioOverrideValues));
@@ -295,36 +256,11 @@ class UserAspectRatioBackupManager {
                         + pkgName);
                 continue;
             }
-            // If restoring via service is enabled, try to set the user aspect ratio even if the
-            // package is not installed - this would be restored later by a system service.
-            if (isPackageInstalled(pkgName) || Flags.restoreUserAspectRatioSettingsUsingService()) {
-                Slog.d(TAG, "StageAndApplyRestoredPayload Found package: " + pkgName);
-                checkExistingAspectRatioAndApplyRestore(pkgName, aspectRatio);
-            } else {
-                Slog.d(TAG, "StageAndApplyRestoredPayload package not installed: " + pkgName);
-                mStorage.storePackageAndUserAspectRatio(pkgName, aspectRatio);
-            }
-        }
-        mStorage.restoreCompleted();
-    }
-
-    private boolean isPackageInstalled(@NonNull String packageName) {
-        try {
-            return mPackageManager.getPackageInfo(packageName, /* flags= */ 0) != null;
-        } catch (PackageManager.NameNotFoundException e) {
-            // It is common that the package is not installed during setup. Restore will be retried
-            // when the package is installed.
-            if (DEBUG) {
-                Slog.d(TAG, "Could not get package info for " + packageName);
-            }
-            return false;
-        } catch (Exception e) {
-            mLogger.logItemsRestoreFailed(KEY_USER_ASPECT_RATIO, /* count= */ 1,
-                    ERROR_QUERY_PACKAGE_FAILED);
-            if (DEBUG) {
-                Slog.e(TAG, "Could not get package info for " + packageName, e);
-            }
-            return false;
+            // Try to set the user aspect ratio even if the package is not installed - this would be
+            // restored later by a system service.
+            Slog.d(TAG, "StageAndApplyRestoredPayload trying to set aspect ratio for package: "
+                    + pkgName);
+            checkExistingAspectRatioAndApplyRestore(pkgName, aspectRatio);
         }
     }
 

@@ -31,7 +31,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Preference controller for accessibility button preference.
@@ -63,9 +62,7 @@ public class AccessibilityButtonPreferenceController extends BasePreferenceContr
             return "";
         } else {
             return mContext.getString(
-                    R.string.accessibility_shortcut_unassigned_setting_unavailable_summary,
-                    AccessibilityUtil.getShortcutSummaryList(mContext, SOFTWARE)
-                            .toString().toLowerCase(Locale.getDefault()));
+                    R.string.a11y_button_shortcut_unassigned_setting_unavailable_summary);
         }
     }
 

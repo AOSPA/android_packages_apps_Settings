@@ -15,8 +15,22 @@
  */
 package com.android.settings.supervision
 
+import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
 import android.content.Context
+import android.content.Intent
+import androidx.annotation.VisibleForTesting
+import androidx.lifecycle.lifecycleScope
+import androidx.preference.Preference
+import androidx.preference.Preference.OnPreferenceClickListener
+import androidx.preference.PreferenceGroup
 import com.android.settings.CatalystFragment
+import com.android.settings.supervision.ipc.PreferenceData
+import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settingslib.preference.forEachRecursively
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Fragment to display the Supervision settings landing page (Settings > Supervision).
@@ -24,6 +38,96 @@ import com.android.settings.CatalystFragment
  * See [SupervisionDashboardScreen] for details on the page contents.
  */
 class SupervisionDashboardFragment : CatalystFragment() {
+    private var supervisionClient: SupervisionMessengerClient? = null
+    private var supervisionManager: SupervisionManager? = null
+    private var preferenceDataMap: Map<String, PreferenceData>? = null
+    private var originalClickListenerMap = mutableMapOf<String, OnPreferenceClickListener?>()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        supervisionClient = getSupervisionClient(context)
+        supervisionManager = context.getSystemService(SupervisionManager::class.java)
+    }
+
+    public override fun onResume() {
+        super.onResume()
+
+        if (!Flags.enableSupervisionSettingsUiUpdates()) {
+            return
+        }
+
+        // Fetch fresh preference data.
+        val supervisionClient = getSupervisionClient(requireContext())
+        lifecycleScope.launch {
+            val preferences = featurePreferences()
+            val preferenceKeys = preferences.map { it.key }
+            preferenceDataMap =
+                withContext(Dispatchers.IO) { supervisionClient.getPreferenceData(preferenceKeys) }
+            preferences.forEach { preference ->
+                val newSummary = preferenceDataMap?.get(preference.key)?.summary
+                if (newSummary != null) {
+                    preference.setSummary(newSummary)
+                }
+            }
+        }
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    public override fun refreshDashboardTiles(tag: String) {
+        super.refreshDashboardTiles(tag)
+
+        if (!Flags.enableSupervisionSettingsUiUpdates()) {
+            return
+        }
+
+        // Refresh dynamic preference overrides.
+        // Doing this here ensures that the values do not get overridden if there is
+        // another tile refresh (e.g. when navigating back from SetupSupervisionActivity).
+        val supervisionClient = getSupervisionClient(requireContext())
+        val preferences = featurePreferences()
+        val preferenceKeys = preferences.map { it.key }
+        val cachedData = supervisionClient.getCachedPreferenceData(preferenceKeys)
+        if (cachedData.isNotEmpty()) {
+            preferenceDataMap = cachedData
+        }
+        val shouldRedirectToSetupSupervision = supervisionManager?.isSupervisionEnabled == false
+
+        preferences.forEach { preference ->
+            val newSummary = preferenceDataMap?.get(preference.key)?.summary
+            if (newSummary != null) {
+                preference.setSummary(newSummary)
+            }
+
+            if (!originalClickListenerMap.containsKey(preference.key)) {
+                // Store the original click listener, only if we haven't already done so.
+                originalClickListenerMap.put(preference.key, preference.onPreferenceClickListener)
+            }
+
+            // If supervision is not enabled, clicks on feature tiles should redirect to
+            // SetupSupervisionActivity. Once supervision is enabled, restore the
+            // original click listener.
+            if (shouldRedirectToSetupSupervision) {
+                preference.setOnPreferenceClickListener {
+                    startActivity(Intent(context, SetupSupervisionActivity::class.java))
+                    true
+                }
+            } else {
+                preference.onPreferenceClickListener = originalClickListenerMap?.get(preference.key)
+            }
+        }
+    }
 
     override fun getPreferenceScreenBindingKey(context: Context) = SupervisionDashboardScreen.KEY
+
+    private fun getSupervisionClient(context: Context) =
+        supervisionClient ?: SupervisionMessengerClient(context).also { supervisionClient = it }
+
+    private fun featurePreferences() =
+        buildList<Preference> {
+            SupervisionDashboardScreen.FEATURE_GROUP_KEYS.forEach { key ->
+                findPreference<PreferenceGroup>(key)?.let { group ->
+                    group.forEachRecursively { add(it) }
+                }
+            }
+        }
 }

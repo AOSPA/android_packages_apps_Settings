@@ -46,6 +46,11 @@ import java.util.List;
 public class CellularSecurityPreferenceController extends BasePreferenceController {
 
     private static final String LOG_TAG = "CellularSecurityPreferenceController";
+    private static final long BITMASK_2G = TelephonyManager.NETWORK_TYPE_BITMASK_GSM
+            | TelephonyManager.NETWORK_TYPE_BITMASK_GPRS
+            | TelephonyManager.NETWORK_TYPE_BITMASK_EDGE
+            | TelephonyManager.NETWORK_TYPE_BITMASK_CDMA
+            | TelephonyManager.NETWORK_TYPE_BITMASK_1xRTT;
 
     private @Nullable TelephonyManager mTelephonyManager;
 
@@ -116,7 +121,15 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
                             + e.getMessage());
         }
 
+        // If allowed network modes APIs are not available, or 2G is unsupported by this
+        // modem, the 2G network protection is not shown.
+        boolean is2gSupported = false;
         boolean isRadioCapabilitySupported = false;
+
+        if ((mTelephonyManager.getSupportedRadioAccessFamily() & BITMASK_2G) != 0) {
+            is2gSupported = true;
+        }
+
         try {
             isRadioCapabilitySupported = mTelephonyManager.isRadioInterfaceCapabilitySupported(
                     mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
@@ -125,7 +138,7 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
         }
 
         if (isNullCipherDisablementAvailable || areCellSecNotificationsAvailable
-                || isRadioCapabilitySupported) {
+                || (isRadioCapabilitySupported && is2gSupported)) {
             return AVAILABLE;
         } else {
             return UNSUPPORTED_ON_DEVICE;

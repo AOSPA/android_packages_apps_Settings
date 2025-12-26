@@ -23,6 +23,7 @@ import static android.content.Intent.EXTRA_USER;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
+import android.app.admin.EnforcingAdmin;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -168,15 +169,30 @@ public class ChooseAccountPreferenceController extends BasePreferenceController 
         if (mProviderList.size() == 1) {
             // There's only one provider that matches. If it is disabled by admin show the
             // support dialog otherwise run it.
-            final RestrictedLockUtils.EnforcedAdmin admin =
-                    RestrictedLockUtilsInternal.checkIfAccountManagementDisabled(
-                            context, mProviderList.get(0).getType(), mUserHandle.getIdentifier());
-            if (admin != null) {
-                mActivity.setResult(RESULT_CANCELED,
-                        RestrictedLockUtils.getShowAdminSupportDetailsIntent(
-                                context, admin));
-                mActivity.finish();
+            boolean isDisabledByAdmin;
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                final EnforcingAdmin admin =
+                        RestrictedLockUtilsInternal.checkIfAccountManagementDisabledByAdmin(context,
+                                mProviderList.getFirst().getType(), mUserHandle.getIdentifier());
+                if (admin != null) {
+                    mActivity.setResult(RESULT_CANCELED,
+                            RestrictedLockUtils.getShowAdminSupportDetailsIntent(admin));
+                    mActivity.finish();
+                }
+                isDisabledByAdmin = admin != null;
             } else {
+                final RestrictedLockUtils.EnforcedAdmin admin =
+                        RestrictedLockUtilsInternal.checkIfAccountManagementDisabled(context,
+                                mProviderList.get(0).getType(), mUserHandle.getIdentifier());
+                if (admin != null) {
+                    mActivity.setResult(RESULT_CANCELED,
+                            RestrictedLockUtils.getShowAdminSupportDetailsIntent(context, admin));
+                    mActivity.finish();
+                }
+                isDisabledByAdmin = admin != null;
+            }
+
+            if (!isDisabledByAdmin) {
                 finishWithAccountType(mProviderList.get(0).getType());
             }
         } else if (mProviderList.size() > 0) {
