@@ -220,9 +220,9 @@ class DisplayTopologyPreferenceController(
      * 4. Ensure wallpapers are revealed
      */
     private fun applyTopology(topology: DisplayTopology) {
-        // If stacked mirroring display is turned on, updates will come from DisplayListener since
-        // there's no more topology update when display is added / removed
-        if (!this::paneContent.isInitialized || showStackedMirroringDisplay()) {
+        // If mirroring display is turned on, updates will come from DisplayListener since there's
+        // no more topology update when display is added / removed
+        if (!this::paneContent.isInitialized || isDisplayInMirroringMode(context)) {
             return
         }
         val topologyBounds = topology.absoluteBounds
@@ -277,8 +277,8 @@ class DisplayTopologyPreferenceController(
      * 4. Ensure wallpapers are revealed for mirrored display and removed for other displays
      */
     private fun applyDisplayUpdateInMirroringMode() {
-        // If stacked mirroring display is turned off, update will be handled by topology update
-        if (!this::paneContent.isInitialized || !showStackedMirroringDisplay()) {
+        // If mirroring display is turned off, update will be handled by topology update
+        if (!this::paneContent.isInitialized || !isDisplayInMirroringMode(context)) {
             return
         }
         // Step 1
@@ -648,10 +648,6 @@ class DisplayTopologyPreferenceController(
 
         return true
     }
-
-    private fun showStackedMirroringDisplay() =
-        isDisplayInMirroringMode(context) &&
-            injector.flags.showStackedMirroringDisplayConnectedDisplaySetting()
 
     private fun displayBlocks(): ArrayDeque<DisplayBlock> {
         val blocks = ArrayDeque<DisplayBlock>()
