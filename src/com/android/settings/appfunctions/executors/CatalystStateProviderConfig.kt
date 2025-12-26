@@ -51,6 +51,7 @@ import com.android.settings.applications.specialaccess.WifiControlAppDetailScree
 import com.android.settings.applications.specialaccess.WifiControlAppListScreen
 import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppDetailScreen
 import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppListScreen
+import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminApiScreen
 import com.android.settings.applications.specialaccess.notificationaccess.AppsNotificationAccessScreen
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppListScreen
@@ -330,6 +331,7 @@ private fun getCatalystScreenConfigs() =
                 ": Settings to manage and customize how conversations are displayed in notifications.",
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = DateTimeSettingsScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = DeviceAdminApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
