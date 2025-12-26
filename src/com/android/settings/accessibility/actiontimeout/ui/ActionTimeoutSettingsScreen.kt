@@ -22,14 +22,18 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityControlTimeoutPreferenceFragment
 import com.android.settings.accessibility.Flags
+import com.android.settings.accessibility.actiontimeout.data.ActionTimeoutOptionDataStore
+import com.android.settings.accessibility.actiontimeout.data.ActionTimeoutOptionDataStore.Companion.DISCRETE_TIMEOUT_OPTIONS
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
+/** Preference screen for "Time to take action (Accessibility timeout)" settings. */
 @ProvidePreferenceScreen(ActionTimeoutSettingsScreen.KEY)
-open class ActionTimeoutSettingsScreen : PreferenceScreenMixin, PreferenceSummaryProvider {
+open class ActionTimeoutSettingsScreen(context: Context) :
+    PreferenceScreenMixin, PreferenceSummaryProvider {
     override val highlightMenuKey: Int
         get() = R.string.menu_key_accessibility
 
@@ -48,6 +52,8 @@ open class ActionTimeoutSettingsScreen : PreferenceScreenMixin, PreferenceSummar
     override val purpose: Int
         get() = R.string.a11y_action_timeout_setting_screen_purpose
 
+    private val timeoutOptionDataStore by lazy { ActionTimeoutOptionDataStore(context) }
+
     override fun fragmentClass(): Class<out Fragment> =
         AccessibilityControlTimeoutPreferenceFragment::class.java
 
@@ -60,15 +66,27 @@ open class ActionTimeoutSettingsScreen : PreferenceScreenMixin, PreferenceSummar
         preferenceHierarchy(context) {
             +ActionTimeoutIntroPreference()
             +ActionTimeoutIllustrationPreference()
+            DISCRETE_TIMEOUT_OPTIONS.keys.sorted().forEach { timeoutOption ->
+                val actionTimeoutOption = DISCRETE_TIMEOUT_OPTIONS[timeoutOption]!!
+                +ActionTimeoutOptionPreference(
+                    key = actionTimeoutOption.preferenceKey,
+                    title = actionTimeoutOption.optionDescriptionRes,
+                    dataStoreProvider = { timeoutOptionDataStore },
+                )
+            }
             +ActionTimeoutFooterPreference()
         }
 
     override fun getMetricsCategory(): Int = SettingsEnums.ACCESSIBILITY_TIMEOUT
 
     override fun getSummary(context: Context): CharSequence? {
-        // TODO: update the summary as follow up when we implements the content PreferenceMetadata
-        // and its KeyValueStore on the screen.
-        return ""
+        val timeoutValue = timeoutOptionDataStore.getInt(bindingKey)
+        val stringResId = DISCRETE_TIMEOUT_OPTIONS[timeoutValue]?.optionDescriptionRes ?: 0
+        return if (stringResId != 0) {
+            context.getString(stringResId)
+        } else {
+            null
+        }
     }
 
     companion object {
