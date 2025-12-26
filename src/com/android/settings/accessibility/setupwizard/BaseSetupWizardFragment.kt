@@ -21,6 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.google.android.setupdesign.GlifRecyclerLayout
 import com.google.android.setupdesign.items.IItem
@@ -29,7 +30,7 @@ import com.google.android.setupdesign.items.RecyclerItemAdapter
 
 /** Base fragment for Accessibility Setup Wizard screens that utilize a [GlifRecyclerLayout]. */
 abstract class BaseSetupWizardFragment : Fragment(), RecyclerItemAdapter.OnItemSelectedListener {
-    @get:IdRes abstract val fragmentLayoutResId: Int
+    @get:LayoutRes abstract val fragmentLayoutResId: Int
 
     @get:IdRes abstract val glifLayoutId: Int
 
@@ -56,7 +57,7 @@ abstract class BaseSetupWizardFragment : Fragment(), RecyclerItemAdapter.OnItemS
 
     override fun onItemSelected(item: IItem) {
         val itemId = (item as? Item)?.id ?: return
-        controllers[itemId]?.onItemSelected(activity!!)
+        controllers[itemId]?.onItemSelected(requireActivity())
     }
 
     override fun onStart() {
