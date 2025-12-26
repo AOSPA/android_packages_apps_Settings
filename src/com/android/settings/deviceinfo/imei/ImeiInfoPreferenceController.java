@@ -14,35 +14,25 @@
  * limitations under the License.
  */
 
-// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 /*
-// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
  * Changes from Qualcomm Technologies, Inc. are provided under the following license:
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
-// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 package com.android.settings.deviceinfo.imei;
 
 import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
-// QTI_BEGIN: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
 import static android.telephony.TelephonyManager.PHONE_TYPE_GSM;
-// QTI_END: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
 
 import android.content.Context;
 import android.os.UserManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
 import android.text.TextUtils;
 import android.util.Log;
-// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
-// QTI_BEGIN: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
 import android.util.Pair;
-// QTI_END: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -56,17 +46,11 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deviceinfo.PhoneNumberUtil;
 import com.android.settings.deviceinfo.simstatus.SlotSimStatus;
 import com.android.settings.flags.Flags;
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
 import com.android.settings.network.telephony.MobileNetworkUtils;
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
-// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
 import com.android.settings.network.telephony.TelephonyUtils;
-// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
 
-// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
 import com.qti.extphone.QtiImeiInfo;
 
-// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -80,29 +64,19 @@ import java.util.List;
 @Deprecated(forRemoval = true)
 public class ImeiInfoPreferenceController extends BasePreferenceController {
 
-// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
     private static final String TAG = "ImeiInfoPreferenceController";
-// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
 
     private static final String KEY_PREFERENCE_CATEGORY = "device_detail_category";
     public static final String DEFAULT_KEY = "imei_info";
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
     private static final String DEFAULT_MEID_KEY = "meid_info";
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
 
     private TelephonyManager mTelephonyManager;
     private Fragment mFragment;
     private SlotSimStatus mSlotSimStatus;
-// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
     private QtiImeiInfo mQtiImeiInfo[];
-// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
-// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
     private boolean mIsDsdsToSsConfigValid;
     private int mSlotCount = -1;
-// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
     private boolean mIsCdmaSupported = true;
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
 
     public ImeiInfoPreferenceController(Context context, String key) {
         super(context, key);
@@ -111,33 +85,25 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     public void init(Fragment fragment, SlotSimStatus slotSimStatus) {
         mFragment = fragment;
         mSlotSimStatus = slotSimStatus;
-// QTI_BEGIN: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
         TelephonyUtils.connectExtTelephonyService(mContext);
-// QTI_END: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
         mIsDsdsToSsConfigValid = TelephonyUtils.isDsdsToSsConfigValid(mContext);
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
         mSlotCount = TelephonyUtils.getUiccSlotsCount(mContext);
         mIsCdmaSupported = MobileNetworkUtils.isCdmaSupported(mContext);
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
     }
 
     private boolean isMultiSim() {
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
         return (mSlotSimStatus != null) && (mSlotSimStatus.size() > 1)
                 || (mIsDsdsToSsConfigValid && mSlotCount > 1);
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
     }
 
     private int keyToSlotIndex(String key) {
         int simSlot = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
         try {
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
             if (key.startsWith(DEFAULT_MEID_KEY)) {
                 simSlot = Integer.valueOf(key.replace(DEFAULT_MEID_KEY, "")) - 1;
             } else {
                 simSlot = Integer.valueOf(key.replace(DEFAULT_KEY, "")) - 1;
             }
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
         } catch (Exception exception) {
             Log.i(TAG, "Invalid key : " + key);
         }
@@ -154,43 +120,29 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         if (!isAvailable() || (mSlotSimStatus == null)) {
             return;
         }
-// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
         mSlotCount = TelephonyUtils.getUiccSlotsCount(mContext);
-// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
-// QTI_BEGIN: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
         PreferenceCategory category = screen.findPreference(KEY_PREFERENCE_CATEGORY);
-// QTI_END: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
         Preference preference = screen.findPreference(DEFAULT_KEY);
         if (preference == null || !preference.isVisible()) {
             return;
         }
 
         int imeiPreferenceOrder = preference.getOrder();
-// QTI_BEGIN: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
         category.removePreference(preference);
-// QTI_END: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
         final int slotCount = mIsDsdsToSsConfigValid? mSlotCount : mSlotSimStatus.size();
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
 
         if (Flags.catalystMyDeviceInfoPrefScreen()) {
             return;
         }
 
         // Add additional preferences for each imei slot in the device
-// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
         // Loop through all active SIMs or all slots if mIsDsdsToSsConfigValid is enabled
-// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
         for (int simSlotNumber = 0; simSlotNumber < slotCount; simSlotNumber++) {
             if (simSlotNumber == 0 && isCdmaPreferenceRequired()) {
                 addPreferenceForCdma(screen, category, simSlotNumber, imeiPreferenceOrder);
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
-// QTI_BEGIN: 2025-03-23: Android_UI: Remove MEID in about phone for CT
             }
 
-// QTI_END: 2025-03-23: Android_UI: Remove MEID in about phone for CT
             Preference multiImeiPreference = createNewPreference(screen.getContext());
             multiImeiPreference.setOrder(imeiPreferenceOrder + 1 + simSlotNumber);
             multiImeiPreference.setKey(DEFAULT_KEY + (1 + simSlotNumber));
@@ -198,39 +150,25 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             multiImeiPreference.setCopyingEnabled(true);
 
             category.addPreference(multiImeiPreference);
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
             multiImeiPreference.setTitle(getTitle(simSlotNumber));
             multiImeiPreference.setSummary(getSummary(simSlotNumber));
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
         }
     }
 
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
     private void addPreferenceForCdma(PreferenceScreen screen, PreferenceCategory category,
             int slotId, int order) {
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
-// QTI_BEGIN: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
         Preference multiSimPreference = createNewPreference(screen.getContext());
-// QTI_END: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
         multiSimPreference.setOrder(order + slotId);
         multiSimPreference.setKey(DEFAULT_MEID_KEY + (1 + slotId));
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
-// QTI_BEGIN: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
         multiSimPreference.setEnabled(true);
         multiSimPreference.setCopyingEnabled(true);
-// QTI_END: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
-// QTI_BEGIN: 2021-09-23: Android_UI: Settings: Insert new IMEI/MEID preference into device detail category
         category.addPreference(multiSimPreference);
-// QTI_END: 2021-09-23: Android_UI: Settings: Insert new IMEI/MEID preference into device detail category
         multiSimPreference.setTitle(getTitleForCdmaPhone(slotId));
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
         multiSimPreference.setSummary(getMeid(slotId));
     }
 
     private boolean isCdmaPreferenceRequired() {
         return mIsCdmaSupported && Utils.isSupportCTPA(mContext);
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
     }
 
     @Override
@@ -255,17 +193,13 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     private String getImeiBySlot(int simSlot) {
         final int phoneType = getPhoneType(simSlot);
         return phoneType == PHONE_TYPE_CDMA ? mTelephonyManager.getMeid(simSlot)
-// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
                 : getImei(simSlot);
-// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
     }
 
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
     private String getMeid(int simSlot) {
         return mTelephonyManager.getMeid(simSlot);
     }
 
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
     private List<String> getImeiListBySlot() {
         List<String> imeiListBySlot = new ArrayList<>();
 
@@ -315,19 +249,13 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         if (simSlot < 0) {
             return false;
         }
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
         if (preference.getKey().startsWith(DEFAULT_MEID_KEY)) {
             preference.setSummary(getMeid(simSlot));
         } else {
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
-// QTI_BEGIN: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
             ImeiInfoDialogFragment.show(mFragment, simSlot, preference.getTitle().toString());
-// QTI_END: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
 
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
             preference.setSummary(getSummary(simSlot));
         }
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
         return true;
     }
 
@@ -353,30 +281,19 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             preference.setVisible(false);
             return;
         }
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
         if (preference.getKey().startsWith(DEFAULT_MEID_KEY)) {
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
             preference.setTitle(getTitleForCdmaPhone(simSlot));
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
             preference.setSummary(getMeid(simSlot));
             return;
         }
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
         preference.setTitle(getTitle(simSlot));
         preference.setSummary(getSummary(simSlot));
     }
 
-// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
     private String getImei(int slot) {
         String imei = null;
-// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
-// QTI_BEGIN: 2023-10-11: Telephony: Avoid IllegalStateException in Settings app
         try {
-// QTI_END: 2023-10-11: Telephony: Avoid IllegalStateException in Settings app
-// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
             if (isMinHalVersion2_1() && !mIsDsdsToSsConfigValid) {
-// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
-// QTI_BEGIN: 2023-10-11: Telephony: Avoid IllegalStateException in Settings app
                 imei = mTelephonyManager.getImei(slot);
             } else {
                 if (mQtiImeiInfo == null) {
@@ -388,31 +305,18 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
                             imei = mQtiImeiInfo[i].getImei();
                             break;
                         }
-// QTI_END: 2023-10-11: Telephony: Avoid IllegalStateException in Settings app
-// QTI_BEGIN: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
                     }
-// QTI_END: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
-// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
                 }
-// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
-// QTI_BEGIN: 2023-10-11: Telephony: Avoid IllegalStateException in Settings app
                 if (TextUtils.isEmpty(imei)) {
                     imei = mTelephonyManager.getImei(slot);
                 }
-// QTI_END: 2023-10-11: Telephony: Avoid IllegalStateException in Settings app
-// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
             }
-// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
-// QTI_BEGIN: 2023-10-11: Telephony: Avoid IllegalStateException in Settings app
         } catch (Exception exception) {
             Log.i(TAG, "Imei not available. " + exception);
-// QTI_END: 2023-10-11: Telephony: Avoid IllegalStateException in Settings app
-// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
         }
         return imei;
     }
 
-// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
     private CharSequence getTitleForGsmPhone(int simSlot) {
         // using simSlot as index
         return isMultiSim() ? mContext.getString(R.string.imei_multi_sim, simSlot + 1)
@@ -432,14 +336,12 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     }
 
     public int getPhoneType(int slotIndex) {
-// QTI_BEGIN: 2025-06-10: Telephony: Refactor MEID display function for About phone
         if (!mIsCdmaSupported || Utils.isSupportCTPA(mContext)) {
             return PHONE_TYPE_GSM;
         }
         if (mIsDsdsToSsConfigValid && slotIndex < mSlotCount
                 && slotIndex == mTelephonyManager.getPhoneCount()) {
             return PHONE_TYPE_GSM;
-// QTI_END: 2025-06-10: Telephony: Refactor MEID display function for About phone
         }
         SubscriptionInfo subInfo = getSubscriptionInfo(slotIndex);
         return mTelephonyManager.getCurrentPhoneType(subInfo != null ? subInfo.getSubscriptionId()
@@ -450,7 +352,6 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     Preference createNewPreference(Context context) {
         return new Preference(context);
     }
-// QTI_BEGIN: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
 
     private int makeRadioVersion(int major, int minor) {
         if (major < 0 || minor < 0) return 0;
@@ -458,15 +359,10 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     }
 
     private boolean isMinHalVersion2_1() {
-// QTI_END: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
-// QTI_BEGIN: 2023-03-27: Telephony: Use correct API to get HAL Version
         Pair<Integer, Integer> radioVersion = mTelephonyManager.getHalVersion(
                 TelephonyManager.HAL_SERVICE_MODEM);
-// QTI_END: 2023-03-27: Telephony: Use correct API to get HAL Version
-// QTI_BEGIN: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
         int halVersion = makeRadioVersion(radioVersion.first, radioVersion.second);
         return (halVersion > makeRadioVersion(2, 0)) ? true:false;
     }
-// QTI_END: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
 }
 

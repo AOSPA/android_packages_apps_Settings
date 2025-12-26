@@ -61,9 +61,7 @@ import com.android.settings.wifi.tether.WifiTetherSecurityPreferenceController;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
-// QTI_BEGIN: 2024-01-22: Android_UI: Avoid accessing AP Band preference controller when Wi-Fi Hotspot Speed Feature is enabled
 import com.android.settings.overlay.FeatureFactory;
-// QTI_END: 2024-01-22: Android_UI: Avoid accessing AP Band preference controller when Wi-Fi Hotspot Speed Feature is enabled
 
 import java.util.ArrayList;
 import java.util.List;
@@ -383,12 +381,10 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
                     mPasswordPreferenceController.getPasswordValidated(securityType),
                     SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
         }
-// QTI_BEGIN: 2024-01-22: Android_UI: Avoid accessing AP Band preference controller when Wi-Fi Hotspot Speed Feature is enabled
         if (!FeatureFactory.getFeatureFactory()
                 .getWifiFeatureProvider().getWifiHotspotRepository().isSpeedFeatureAvailable()) {
             configBuilder.setBand(mApBandPreferenceController.getBandIndex());
         }
-// QTI_END: 2024-01-22: Android_UI: Avoid accessing AP Band preference controller when Wi-Fi Hotspot Speed Feature is enabled
         return configBuilder.build();
     }
 

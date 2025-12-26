@@ -17,9 +17,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
-// QTI_BEGIN: 2021-03-10: Telephony: Add dual 5g option support
 import androidx.preference.PreferenceScreen;
-// QTI_END: 2021-03-10: Telephony: Add dual 5g option support
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.onboarding.OnboardingFeatureProvider;
@@ -117,6 +115,4 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
 
     @Override
     public abstract int getSliceHighlightMenuRes();
-// QTI_BEGIN: 2021-03-10: Telephony: Add dual 5g option support
 }
-// QTI_END: 2021-03-10: Telephony: Add dual 5g option support

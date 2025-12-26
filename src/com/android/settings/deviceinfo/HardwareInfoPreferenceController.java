@@ -22,9 +22,7 @@ import android.util.Log;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 import com.android.settings.Utils;
-// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.DeviceInfoUtils;
 
@@ -52,18 +50,14 @@ public class HardwareInfoPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
         if (Utils.isSupportCTPA(mContext)) {
             String modelName = Utils.getString(mContext, Utils.KEY_MODEL);
             if (null == modelName || modelName.isEmpty()) {
                 modelName = getDeviceModel();
             }
-// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
             return modelName;
-// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
         }
 
-// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
         return getDeviceModel();
     }
 

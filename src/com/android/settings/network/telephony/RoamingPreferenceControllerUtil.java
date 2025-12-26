@@ -1,10 +1,5 @@
-// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
 /*
-// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
-// QTI_BEGIN: 2025-02-12: Telephony: Fix for updating roaming data option greyed out state
 * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
-// QTI_END: 2025-02-12: Telephony: Fix for updating roaming data option greyed out state
-// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
 * SPDX-License-Identifier: BSD-3-Clause-Clear
 */
 
@@ -117,4 +112,3 @@ public class RoamingPreferenceControllerUtil {
         return subToCheck;
     }
 }
-// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference

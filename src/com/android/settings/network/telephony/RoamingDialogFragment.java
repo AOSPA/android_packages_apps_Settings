@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
 
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
@@ -21,7 +20,6 @@
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
-// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
 package com.android.settings.network.telephony;
 
 import android.app.AlertDialog;
@@ -44,50 +42,28 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
  */
 public class RoamingDialogFragment extends InstrumentedDialogFragment implements OnClickListener {
 
-// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
     private static final String PREF_TITLE = "pref_title";
-// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
-// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
     private static final String SUB_ID_KEY = "sub_id_key";
     private static final String DIALOG_TYPE = "dialog_type";
-// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
-// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
     private static final String ARG_CIWLAN_MODE_SUPPORTED = "ciwlan_mode_supported";
-// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
-// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
 
     public static final int TYPE_ENABLE_DIALOG = 0;
     public static final int TYPE_DISABLE_CIWLAN_DIALOG = 1;
-// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
 
     private CarrierConfigManager mCarrierConfigManager;
-// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
     private String mPrefTitle;
-// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
-// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
     private int mType;
-// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
     private int mSubId;
-// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
     private boolean mCiwlanModeSupported;
-// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
 
-// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
     public static RoamingDialogFragment newInstance(String prefTitle, int type, int subId,
             boolean ciwlanModeSupported) {
-// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
         final RoamingDialogFragment dialogFragment = new RoamingDialogFragment();
         final Bundle args = new Bundle();
-// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         args.putString(PREF_TITLE, prefTitle);
-// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
-// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
         args.putInt(DIALOG_TYPE, type);
-// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
         args.putInt(SUB_ID_KEY, subId);
-// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
         args.putBoolean(ARG_CIWLAN_MODE_SUPPORTED, ciwlanModeSupported);
-// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
         dialogFragment.setArguments(args);
 
         return dialogFragment;
@@ -103,19 +79,14 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         final Bundle bundle = getArguments();
         final Context context = getContext();
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         mPrefTitle = bundle.getString(PREF_TITLE).toLowerCase();
         mType = bundle.getInt(DIALOG_TYPE);
-// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
-// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
         mCiwlanModeSupported = bundle.getBoolean(ARG_CIWLAN_MODE_SUPPORTED);
-// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
 
-// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
         switch (mType) {
             case TYPE_ENABLE_DIALOG:
                 int message = R.string.roaming_warning;
@@ -130,8 +101,6 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
                        .setTitle(getResources().getString(R.string.roaming_alert_title));
                 break;
             case TYPE_DISABLE_CIWLAN_DIALOG:
-// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
-// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
                 String msg = mCiwlanModeSupported ?
                         context.getString(
                                 R.string.toggle_disable_ciwlan_call_will_drop_dialog_body,
@@ -139,26 +108,15 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
                         context.getString(
                                 R.string.toggle_disable_ciwlan_call_might_drop_dialog_body,
                                 mPrefTitle);
-// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
-// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
                 builder.setTitle(context.getString(
-// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
-// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
                                 R.string.toggle_disable_ciwlan_call_dialog_title, mPrefTitle))
                        .setMessage(msg);
-// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
-// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
                 break;
-// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
         }
-// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
         builder.setIconAttribute(android.R.attr.alertDialogIcon)
-// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
                .setPositiveButton(android.R.string.ok, this)
                .setNegativeButton(android.R.string.cancel, this);
-// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
         return builder.create();
-// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
     }
 
     @Override
@@ -168,7 +126,6 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
         final TelephonyManager telephonyManager =
                 getContext().getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
@@ -187,7 +144,6 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
                     telephonyManager.setDataRoamingEnabled(false);
                 }
                 break;
-// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
         }
     }
 }

@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
  * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
-// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 package com.android.settings.network.telephony
 
 import android.content.Context
@@ -117,14 +115,10 @@ class MobileDataRepository(
         if (!SubscriptionManager.isValidSubscriptionId(subId)) return
 
         Log.d(TAG, "setMobileDataEnabled: $enabled")
-// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
         // Return disableOtherSubscriptions as false to support value add
         // feature where 'Mobile Data' needs to be enabled on both subscriptions
-// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
         MobileNetworkUtils.setMobileDataEnabled(
-// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
             context, subId, enabled, /* disableOtherSubscriptions= */ false)
-// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 
         if (wifiPickerTrackerHelper != null &&
             !wifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(subId)) {

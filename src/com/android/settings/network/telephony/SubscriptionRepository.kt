@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-// QTI_BEGIN: 2025-06-25: Telephony: Sort user selected SUB info list am: 234f567418 am: 234f567418
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
  * Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
-// QTI_END: 2025-06-25: Telephony: Sort user selected SUB info list am: 234f567418 am: 234f567418
 package com.android.settings.network.telephony
 
 import android.content.Context
@@ -253,9 +251,7 @@ fun Context.subscriptionsChangedFlow(): Flow<Unit> =
     SubscriptionRepository(this).subscriptionsChangedFlow()
 
 /** Subscription with invalid sim slot index has lowest sort order. */
-// QTI_BEGIN: 2025-06-25: Telephony: Sort user selected SUB info list am: 234f567418 am: 234f567418
 val SubscriptionInfo.sortableSimSlotIndex: Int
-// QTI_END: 2025-06-25: Telephony: Sort user selected SUB info list am: 234f567418 am: 234f567418
     get() = if (simSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
         simSlotIndex
     } else {

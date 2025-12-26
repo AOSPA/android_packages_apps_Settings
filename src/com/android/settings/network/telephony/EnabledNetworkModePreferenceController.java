@@ -14,35 +14,25 @@
  * limitations under the License.
  */
 
-// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
 /*
-// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
-// QTI_BEGIN: 2025-11-21: Telephony: Re-add TelephonyManager API exception handling
  * Changes from Qualcomm Technologies, Inc. are provided under the following license:
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-// QTI_END: 2025-11-21: Telephony: Re-add TelephonyManager API exception handling
-// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
-// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
 package com.android.settings.network.telephony;
 
 import static com.android.settings.network.telephony.EnabledNetworkModePreferenceControllerHelperKt.getNetworkModePreferenceType;
 import static com.android.settings.network.telephony.EnabledNetworkModePreferenceControllerHelperKt.setAllowedNetworkTypes;
-// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.LTE;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.NR;
 
 import android.app.AlertDialog;
-// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 import static com.android.settings.network.telephony.mode.NetworkModes.addNrToLteNetworkMode;
 import static com.android.settings.network.telephony.mode.NetworkModes.reduceNrToLteNetworkMode;
 
 import android.content.Context;
-// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 import android.content.DialogInterface;
-// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 import android.os.Looper;
 import android.content.res.Resources;
 import android.os.PersistableBundle;
@@ -50,9 +40,7 @@ import android.provider.Settings;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.telephony.CarrierConfigManager;
-// QTI_BEGIN: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
 import android.telephony.PhoneStateListener;
-// QTI_END: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
 import android.telephony.RadioAccessFamily;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -64,9 +52,7 @@ import android.telephony.satellite.SelectedNbIotSatelliteSubscriptionCallback;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-// QTI_BEGIN: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
 import androidx.annotation.VisibleForTesting;
-// QTI_END: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.DefaultLifecycleObserver;
@@ -134,9 +120,7 @@ public class EnabledNetworkModePreferenceController extends
     private PhoneCallStateTelephonyCallback mTelephonyCallback;
     private FragmentManager mFragmentManager;
     private LifecycleOwner mViewLifecycleOwner;
-// QTI_BEGIN: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
     private PhoneCallStateListener mPhoneStateListener;
-// QTI_END: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
     private SatelliteManager mSatelliteManager;
     private boolean mIsSatelliteSessionStarted = false;
     private boolean mIsCurrentSubscriptionForSatellite = false;
@@ -214,12 +198,10 @@ public class EnabledNetworkModePreferenceController extends
         if (mAllowedNetworkTypesListener == null || mTelephonyCallback == null) {
             return;
         }
-// QTI_BEGIN: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
         if (mPhoneStateListener != null) {
             mPhoneStateListener.register(mContext, mSubId);
         }
 
-// QTI_END: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
         mAllowedNetworkTypesListener.register(mContext, mSubId);
         mTelephonyCallback.register(mTelephonyManager, mSubId);
     }
@@ -240,11 +222,9 @@ public class EnabledNetworkModePreferenceController extends
         if (mAllowedNetworkTypesListener == null || mTelephonyCallback == null) {
             return;
         }
-// QTI_BEGIN: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
         if (mPhoneStateListener != null) {
             mPhoneStateListener.unregister();
         }
-// QTI_END: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
         mAllowedNetworkTypesListener.unregister(mContext, mSubId);
         mTelephonyCallback.unregister();
     }
@@ -290,18 +270,13 @@ public class EnabledNetworkModePreferenceController extends
         mBuilder.setPreferenceValueAndSummary(newPreferredNetworkMode);
         listPreference.setValue(Integer.toString(mBuilder.getSelectedEntryValue()));
         listPreference.setSummary(mBuilder.getSummary());
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         final int DDS = SubscriptionManager.getDefaultDataSubscriptionId();
         final int nDDS = MobileNetworkSettings.getNonDefaultDataSub();
         final boolean isDDS = mSubId == DDS;
         // Check UE's C_IWLAN configuration and user's current network mode selection. If C_IWLAN is
         // enabled, and the selection does not contain LTE or NR, show a dialog to disable C_IWLAN.
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         boolean isCiwlanIncompatibleNetworkSelected = isCiwlanIncompatibleNetworkSelected(
                 newPreferredNetworkMode);
-// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         boolean isMsimCiwlanSupported = MobileNetworkSettings.isMsimCiwlanSupported();
         boolean currentSubCiwlanEnabled = MobileNetworkSettings.isCiwlanEnabled(mSubId);
         boolean otherSubCiwlanEnabled = isDDS ? MobileNetworkSettings.isCiwlanEnabled(nDDS) :
@@ -309,15 +284,9 @@ public class EnabledNetworkModePreferenceController extends
         Log.d(LOG_TAG, "isDDS = " + isDDS +
                 ", currentSubCiwlanEnabled = " + currentSubCiwlanEnabled +
                 ", otherSubCiwlanEnabled = " + otherSubCiwlanEnabled +
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
                 ", isCiwlanIncompatibleNetworkSelected = " + isCiwlanIncompatibleNetworkSelected);
-// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         if (isMsimCiwlanSupported) {
             if (isCiwlanIncompatibleNetworkSelected) {
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-03-29: Telephony: Modify C_IWLAN warning behavior to be non-blocking
                 if (isDDS) {
                     if (otherSubCiwlanEnabled && currentSubCiwlanEnabled) {
                         showCiwlanWarningDialog(
@@ -334,11 +303,7 @@ public class EnabledNetworkModePreferenceController extends
                     } else {
                         // No warning
                     }
-// QTI_END: 2024-03-29: Telephony: Modify C_IWLAN warning behavior to be non-blocking
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
                 } else {
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-03-29: Telephony: Modify C_IWLAN warning behavior to be non-blocking
                     if (otherSubCiwlanEnabled && currentSubCiwlanEnabled) {
                         showCiwlanWarningDialog(
                                 R.string.incompatible_pref_nw_for_ndds_with_ciwlan_ui_on_both);
@@ -351,57 +316,29 @@ public class EnabledNetworkModePreferenceController extends
                     } else {
                         // No warning
                     }
-// QTI_END: 2024-03-29: Telephony: Modify C_IWLAN warning behavior to be non-blocking
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
                 }
             }
         } else {
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-04-18: Telephony: Fix C_IWLAN warning dialog showing for nDDS
             if (isDDS && currentSubCiwlanEnabled && isCiwlanIncompatibleNetworkSelected) {
-// QTI_END: 2024-04-18: Telephony: Fix C_IWLAN warning dialog showing for nDDS
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
                 showCiwlanWarningDialog(
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-03-29: Telephony: Modify C_IWLAN warning behavior to be non-blocking
                         R.string.incompatible_pref_nw_for_dds_with_ciwlan_ui_on_dds);
-// QTI_END: 2024-03-29: Telephony: Modify C_IWLAN warning behavior to be non-blocking
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
                 return false;
             }
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         }
-// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 
         setAllowedNetworkTypes(mTelephonyManager, mViewLifecycleOwner, newPreferredNetworkMode);
         return true;
     }
 
-// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
     private boolean isCiwlanIncompatibleNetworkSelected(int networkMode) {
-// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         long raf = RadioAccessFamily.getRafFromNetworkType(networkMode);
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         return (LTE & raf) == 0 && (NR & raf) == 0;
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
     }
 
-// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     private void showCiwlanWarningDialog(int dialogBodyTextId) {
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
-// QTI_BEGIN: 2024-03-29: Telephony: Modify C_IWLAN warning behavior to be non-blocking
         builder.setTitle(R.string.incompatible_pref_nw_ciwlan_dialog_title)
-// QTI_END: 2024-03-29: Telephony: Modify C_IWLAN warning behavior to be non-blocking
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
                .setMessage(dialogBodyTextId)
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
                .setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                    }
@@ -409,7 +346,6 @@ public class EnabledNetworkModePreferenceController extends
         builder.show();
     }
 
-// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
     @Override
     public void notifyAirplaneModeChanged(boolean isAirplaneModeOn) {
         this.mIsAirplaneModeOn = isAirplaneModeOn;
@@ -421,11 +357,9 @@ public class EnabledNetworkModePreferenceController extends
                 .createForSubscriptionId(mSubId);
         mBuilder = new PreferenceEntriesBuilder(mContext, mSubId);
 
-// QTI_BEGIN: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
         if (mPhoneStateListener == null) {
             mPhoneStateListener = new PhoneCallStateListener();
         }
-// QTI_END: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
         if (mAllowedNetworkTypesListener == null) {
             mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
                     mContext.getMainExecutor());
@@ -501,14 +435,10 @@ public class EnabledNetworkModePreferenceController extends
             // mIsGlobalCdma, which eventually needs to be removed as 3GPP2 is deprecated.
             mIsGlobalCdma = false;
             if (carrierConfig != null) {
-// QTI_BEGIN: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
                 mIsGlobalCdma = MobileNetworkUtils.isCdmaSupported(mContext)
                         && mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled()
-// QTI_END: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
                         && carrierConfig.getBoolean(
-// QTI_BEGIN: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
                                 CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
-// QTI_END: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
             }
             Log.d(LOG_TAG, "PreferenceEntriesBuilder: subId" + mSubId
                     + " , mIsGlobalCdma: " + mIsGlobalCdma);
@@ -519,7 +449,6 @@ public class EnabledNetworkModePreferenceController extends
                 configKeyPrefer2g = carrierConfig.getBoolean(
                         CarrierConfigManager.KEY_PREFER_2G_BOOL);
             }
-// QTI_BEGIN: 2025-11-21: Telephony: Re-add TelephonyManager API exception handling
             long allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
             try {
                 allowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
@@ -529,7 +458,6 @@ public class EnabledNetworkModePreferenceController extends
             }
             final boolean allowed2gNetworkType = checkSupportedRadioBitmask(
                     allowedNetworkTypes, BITMASK_2G);
-// QTI_END: 2025-11-21: Telephony: Re-add TelephonyManager API exception handling
             final boolean enabledByAdmin2g = !is2gDisabledByAdmin();
             mDisplay2gOptions =
                 supported2g
@@ -587,7 +515,6 @@ public class EnabledNetworkModePreferenceController extends
                     + ", allowed4gNetworkType: " + allowed4gNetworkType);
 
             // 5G option display
-// QTI_BEGIN: 2025-11-21: Telephony: Re-add TelephonyManager API exception handling
             allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
             try {
                 allowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
@@ -595,11 +522,8 @@ public class EnabledNetworkModePreferenceController extends
             } catch (Exception ex) {
                 Log.e(LOG_TAG, "getAllowedNetworkTypesForReason exception", ex);
             }
-// QTI_END: 2025-11-21: Telephony: Re-add TelephonyManager API exception handling
             final boolean allowed5gNetworkType = checkSupportedRadioBitmask(
-// QTI_BEGIN: 2025-11-21: Telephony: Re-add TelephonyManager API exception handling
                     allowedNetworkTypes, TelephonyManager.NETWORK_TYPE_BITMASK_NR);
-// QTI_END: 2025-11-21: Telephony: Re-add TelephonyManager API exception handling
             mDisplay5gOptions = supported5g && allowed5gNetworkType;
             Log.d(LOG_TAG, "mDisplay5gOptions: " + mDisplay5gOptions
                     + ", supported5g: " + supported5g
@@ -716,9 +640,7 @@ public class EnabledNetworkModePreferenceController extends
             IntStream.range(0, formatList.size()).forEach(entryIndex -> {
                 switch (formatList.get(entryIndex)) {
                     case add1xEntry:
-// QTI_BEGIN: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
                         if (MobileNetworkUtils.isCdmaSupported(mContext) && mDisplay2gOptions) {
-// QTI_END: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
                             add1xEntry(entryValuesInt[entryIndex]);
                         }
                         break;
@@ -736,14 +658,12 @@ public class EnabledNetworkModePreferenceController extends
                         addGlobalEntry(entryValuesInt[entryIndex]);
                         break;
                     case addWorldModeCdmaEntry:
-// QTI_BEGIN: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
                         if (MobileNetworkUtils.isCdmaSupported(mContext)) {
                             addCustomEntry(
                                     getResourcesForSubId().getString(
                                             R.string.network_world_mode_cdma_lte),
                                     entryValuesInt[entryIndex]);
                         }
-// QTI_END: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
                         break;
                     case addWorldModeGsmEntry:
                         addCustomEntry(
@@ -776,14 +696,12 @@ public class EnabledNetworkModePreferenceController extends
 
         private int getPreferredNetworkMode() {
             long allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
-// QTI_BEGIN: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
             try {
                 allowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
                         TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
             } catch (Exception ex) {
                 Log.e(LOG_TAG, "getAllowedNetworkTypesForReason exception", ex);
             }
-// QTI_END: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
             int networkMode = RadioAccessFamily.getNetworkTypeFromRaf((int) allowedNetworkTypes);
             if (!mDisplay5gOptions) {
                 Log.d(LOG_TAG, "Network mode :" + networkMode + " reduce NR");
@@ -1043,27 +961,21 @@ public class EnabledNetworkModePreferenceController extends
             }
         }
 
-// QTI_BEGIN: 2020-09-25: Linux/Telephony: Add resource network_5G_lte support
         // This entry is used to support for 5G/LTE display in resource overlay
         private void add5gLteEntry(int value) {
-// QTI_END: 2020-09-25: Linux/Telephony: Add resource network_5G_lte support
             boolean isNRValue = value >= TelephonyManager.NETWORK_MODE_NR_ONLY;
             if (mDisplay5gOptions && isNRValue) {
                 mEntries.add(mContext.getString(R.string.network_5G_recommended));
-// QTI_BEGIN: 2020-09-25: Linux/Telephony: Add resource network_5G_lte support
                 mEntriesValue.add(value);
                 mIs5gEntryDisplayed = true;
             } else {
                 mIs5gEntryDisplayed = false;
                 Log.d(LOG_TAG, "Hide 5G option. "
-// QTI_END: 2020-09-25: Linux/Telephony: Add resource network_5G_lte support
                         + " mDisplay5gOptions: " + mDisplay5gOptions
-// QTI_BEGIN: 2020-09-25: Linux/Telephony: Add resource network_5G_lte support
                         + " isNRValue: " + isNRValue);
             }
         }
 
-// QTI_END: 2020-09-25: Linux/Telephony: Add resource network_5G_lte support
         private void addGlobalEntry(int value) {
             Log.d(LOG_TAG, "addGlobalEntry. display5gOptions: " + mDisplay5gOptions);
             mEntries.add(getResourcesForSubId().getString(R.string.network_global));
@@ -1244,7 +1156,6 @@ public class EnabledNetworkModePreferenceController extends
         }
     }
 
-// QTI_BEGIN: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
     private class PhoneCallStateListener extends PhoneStateListener {
 
         PhoneCallStateListener() {
@@ -1269,12 +1180,9 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         public void unregister() {
-// QTI_END: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
             mCallState = TelephonyManager.CALL_STATE_IDLE;
-// QTI_BEGIN: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
         }
     }
-// QTI_END: 2020-07-31: Telephony: Set some preferences to disabled when device is in call.
 }
 // LINT.ThenChange(EnabledNetworkModePreference.kt)

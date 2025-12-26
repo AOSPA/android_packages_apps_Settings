@@ -38,9 +38,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-// QTI_BEGIN: 2021-01-04: Bluetooth: Group: Add below Group Changes
 import java.util.UUID;
-// QTI_END: 2021-01-04: Bluetooth: Group: Add below Group Changes
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -67,9 +65,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
 
 
     @VisibleForTesting
-// QTI_BEGIN: 2021-01-04: Bluetooth: Group: Add below Group Changes
     public final GearPreference.OnGearClickListener mDeviceProfilesListener = pref -> {
-// QTI_END: 2021-01-04: Bluetooth: Group: Add below Group Changes
         launchDeviceDetails(pref);
     };
 
@@ -195,7 +191,6 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         update(cachedDevice);
     }
 
-// QTI_BEGIN: 2021-01-04: Bluetooth: Group: Add below Group Changes
     @Override
     public void onNewGroupFound(CachedBluetoothDevice cachedDevice, int groupId,
             UUID setPrimaryServiceUuid) {
@@ -206,7 +201,6 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         update(cachedDevice);
     }
 
-// QTI_END: 2021-01-04: Bluetooth: Group: Add below Group Changes
     @Override
     public void onServiceConnected() {
         // When bluetooth service connected update the UI

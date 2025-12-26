@@ -119,7 +119,6 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             // If current audio profile is a2dp, show the bluetooth device that have a2dp profile.
             // If current audio profile is headset,
             // show the bluetooth device that have headset profile.
-// QTI_BEGIN: 2022-10-07: Bluetooth: Group: Fix showing duplicate devices
             if (!isFilterMatched) {
                 switch (currentAudioProfile) {
                     case BluetoothProfile.A2DP:
@@ -129,7 +128,6 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
                         isFilterMatched = cachedDevice.isConnectedHfpDevice();
                         break;
                 }
-// QTI_END: 2022-10-07: Bluetooth: Group: Fix showing duplicate devices
             }
             Log.d(
                     TAG,

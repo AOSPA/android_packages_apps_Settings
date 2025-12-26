@@ -555,10 +555,8 @@ public class WifiDppUtils {
                 || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION
                 || securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
                 || securityType == SoftApConfiguration.SECURITY_TYPE_OPEN
-// QTI_BEGIN: 2022-10-06: WLAN: HotSpot: Use updated SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
                 || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
                 || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE;
-// QTI_END: 2022-10-06: WLAN: HotSpot: Use updated SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
     }
 
     private static boolean isSupportWifiDpp(Context context, int wifiEntrySecurity) {

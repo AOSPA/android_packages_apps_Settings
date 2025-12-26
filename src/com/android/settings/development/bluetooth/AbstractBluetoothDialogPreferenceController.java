@@ -161,17 +161,11 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
             Log.d(TAG, "Unable to get current codec config. Codec status is null");
             return null;
         }
-// QTI_BEGIN: 2021-03-08: Bluetooth: Fix for Developer options app closing unexpectedly if
         if (codecStatus.getCodecConfig().getCodecType() >=
-// QTI_END: 2021-03-08: Bluetooth: Fix for Developer options app closing unexpectedly if
-// QTI_BEGIN: 2021-04-01: Bluetooth: A2dpSrc: Align legacy codec enumeration with AOSP(5/7)
             BluetoothCodecConfig.SOURCE_QVA_CODEC_TYPE_MAX) {
-// QTI_END: 2021-04-01: Bluetooth: A2dpSrc: Align legacy codec enumeration with AOSP(5/7)
-// QTI_BEGIN: 2021-03-08: Bluetooth: Fix for Developer options app closing unexpectedly if
             Log.d(TAG,"Invalid codec type");
             return null;
         }
-// QTI_END: 2021-03-08: Bluetooth: Fix for Developer options app closing unexpectedly if
         return codecStatus.getCodecConfig();
     }
 

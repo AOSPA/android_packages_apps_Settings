@@ -26,9 +26,7 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-// QTI_BEGIN: 2020-09-18: Telephony: Fix disabled sub showing as Active in Settings > Mobile network
 import android.telephony.TelephonyManager;
-// QTI_END: 2020-09-18: Telephony: Fix disabled sub showing as Active in Settings > Mobile network
 import android.util.ArrayMap;
 
 import androidx.lifecycle.Lifecycle;
@@ -126,14 +124,10 @@ public class MobileNetworkListController extends AbstractPreferenceController im
                     pref.setSummary(R.string.mobile_network_inactive_esim);
                 }
             } else {
-// QTI_BEGIN: 2020-09-18: Telephony: Fix disabled sub showing as Active in Settings > Mobile network
                 int slotId = mSubscriptionManager.getPhoneId(subId);
                 if (mSubscriptionManager.isActiveSubscriptionId(subId) &&
-// QTI_END: 2020-09-18: Telephony: Fix disabled sub showing as Active in Settings > Mobile network
                         TelephonyManager.getSimStateForSlotIndex(slotId) !=
-// QTI_BEGIN: 2020-09-18: Telephony: Fix disabled sub showing as Active in Settings > Mobile network
                                 TelephonyManager.SIM_STATE_NOT_READY) {
-// QTI_END: 2020-09-18: Telephony: Fix disabled sub showing as Active in Settings > Mobile network
                     pref.setSummary(R.string.mobile_network_active_sim);
                 } else if (SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
                     pref.setSummary(mContext.getString(R.string.mobile_network_inactive_sim));
@@ -147,18 +141,12 @@ public class MobileNetworkListController extends AbstractPreferenceController im
                 if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)
                         && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
                     SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId, true, false);
-// QTI_BEGIN: 2019-05-28: Telephony: NetworkSettings: Launch vendor activity for new entries
                 } else {
-// QTI_END: 2019-05-28: Telephony: NetworkSettings: Launch vendor activity for new entries
                     final Intent intent = new Intent(Settings.ACTION_NETWORK_OPERATOR_SETTINGS);
                     intent.setPackage(SETTINGS_PACKAGE_NAME);
-// QTI_BEGIN: 2019-12-30: Telephony: Remove hooks that lauched vendor network settings
                     intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
-// QTI_END: 2019-12-30: Telephony: Remove hooks that lauched vendor network settings
                     mContext.startActivity(intent);
-// QTI_BEGIN: 2019-05-28: Telephony: NetworkSettings: Launch vendor activity for new entries
                 }
-// QTI_END: 2019-05-28: Telephony: NetworkSettings: Launch vendor activity for new entries
                 return true;
             });
             mPreferences.put(subId, pref);

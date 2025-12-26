@@ -24,12 +24,10 @@
 package com.android.settings.network.telephony;
 
 import android.annotation.IntDef;
-// QTI_BEGIN: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
 import android.content.Context;
 import android.content.IntentFilter;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-// QTI_END: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
 import android.provider.Settings;
 import android.telephony.AccessNetworkConstants.AccessNetworkType;
 import android.telephony.CellInfo;
@@ -99,7 +97,6 @@ public class NetworkScanHelper {
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS, NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS_LEGACY})
     public @interface NetworkQueryType {}
-// QTI_BEGIN: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
 
     /**
      * Performs the network scan using {@link TelephonyManager#requestNetworkScan(
@@ -125,7 +122,6 @@ public class NetworkScanHelper {
      */
     public static final int NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS_LEGACY = 2;
 
-// QTI_END: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
     /** The constants below are used in the async network scan. */
     @VisibleForTesting
     static final boolean INCREMENTAL_RESULTS = true;
@@ -143,17 +139,11 @@ public class NetworkScanHelper {
     private final Executor mExecutor;
     private int mMaxSearchTimeSec = MAX_SEARCH_TIME_SEC;
 
-// QTI_BEGIN: 2022-11-03: Telephony: Fix NULL pointer exception
     private LegacyIncrementalScanBroadcastReceiver mLegacyIncrScanReceiver;
-// QTI_END: 2022-11-03: Telephony: Fix NULL pointer exception
-// QTI_BEGIN: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
     private Context mContext;
-// QTI_END: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
     private NetworkScan mNetworkScanRequester;
-// QTI_BEGIN: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
     private IntentFilter filter =
             new IntentFilter("qualcomm.intent.action.ACTION_INCREMENTAL_NW_SCAN_IND");
-// QTI_END: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
 
     public NetworkScanHelper(TelephonyManager tm, NetworkScanCallback callback, Executor executor) {
         mTelephonyManager = tm;
@@ -168,11 +158,9 @@ public class NetworkScanHelper {
         mContext = context;
         mMaxSearchTimeSec = context.getResources().getInteger(
                 R.integer.config_network_scan_helper_max_search_time_sec);
-// QTI_BEGIN: 2022-11-03: Telephony: Fix NULL pointer exception
         mLegacyIncrScanReceiver =
                 new LegacyIncrementalScanBroadcastReceiver(mContext, mInternalNetworkScanCallback);
         mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
-// QTI_END: 2022-11-03: Telephony: Fix NULL pointer exception
     }
 
     @VisibleForTesting
@@ -204,19 +192,13 @@ public class NetworkScanHelper {
         // a 5G network, which means that it shouldn't scan for 5G at the expense of battery as
         // part of the manual network selection process.
         //
-// QTI_BEGIN: 2020-05-26: Telephony: Enable NetworkScan for 5G SA
         if (networkTypeBitmap3gpp == 0
-// QTI_END: 2020-05-26: Telephony: Enable NetworkScan for 5G SA
                 || (hasNrSaCapability()
                 && (networkTypeBitmap3gpp & TelephonyManager.NETWORK_CLASS_BITMASK_5G) != 0)) {
-// QTI_BEGIN: 2020-05-26: Telephony: Enable NetworkScan for 5G SA
             radioAccessSpecifiers.add(
                     new RadioAccessSpecifier(AccessNetworkType.NGRAN, null, null));
-// QTI_END: 2020-05-26: Telephony: Enable NetworkScan for 5G SA
             Log.d(TAG, "radioAccessSpecifiers add NGRAN.");
-// QTI_BEGIN: 2020-05-26: Telephony: Enable NetworkScan for 5G SA
         }
-// QTI_END: 2020-05-26: Telephony: Enable NetworkScan for 5G SA
         int accessMode = NetworkScanRequest.ACCESS_MODE_PLMN;
         int searchType = NetworkScanRequest.SEARCH_TYPE_PLMN_ONLY;
         if(MobileNetworkUtils.isCagSnpnEnabled(mContext)) {
@@ -239,28 +221,21 @@ public class NetworkScanHelper {
     }
 
     /**
-// QTI_BEGIN: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
      * Performs a network scan for the given type {@code type}.
      * {@link #NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS} is recommended if modem supports
      * {@link TelephonyManager#requestNetworkScan(
      * NetworkScanRequest, Executor, TelephonyScanManager.NetworkScanCallback)}.
-// QTI_END: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
      *
-// QTI_BEGIN: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
      * @param type used to tell which network scan API should be used.
-// QTI_END: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
      */
     public void startNetworkScan(@NetworkQueryType int type) {
-// QTI_BEGIN: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
         Log.d(TAG, "startNetworkScan: " + type);
         if (type == NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS) {
             if (mNetworkScanRequester != null) {
                 return;
             }
             mNetworkScanRequester = mTelephonyManager.requestNetworkScan(
-// QTI_END: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
                     createNetworkScanForPreferredAccessNetworks(),
-// QTI_BEGIN: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
                     mExecutor,
                     mInternalNetworkScanCallback);
             if (mNetworkScanRequester == null) {
@@ -268,17 +243,12 @@ public class NetworkScanHelper {
             }
         } else if (type == NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS_LEGACY) {
             mContext.registerReceiver(mLegacyIncrScanReceiver, filter);
-// QTI_END: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
-// QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
             boolean success = TelephonyUtils.performIncrementalScan(
                     mContext, mTelephonyManager.getSlotIndex());
-// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
-// QTI_BEGIN: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
             Log.d(TAG, "success: " + success);
             if (!success) {
                 onError(NetworkScan.ERROR_RADIO_INTERFACE_ERROR);
             }
-// QTI_END: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
         }
     }
 
@@ -291,7 +261,6 @@ public class NetworkScanHelper {
         if (mNetworkScanRequester != null) {
             mNetworkScanRequester.stopScan();
             mNetworkScanRequester = null;
-// QTI_BEGIN: 2022-03-24: Telephony: Fix PLMN scan abort mechanism
         } else {
             try {
                 int slotIndex = mTelephonyManager.getSlotIndex();
@@ -305,11 +274,8 @@ public class NetworkScanHelper {
                 Log.e(TAG, "abortIncrementalScan Exception: ", ex);
             } catch (IllegalArgumentException ex) {
                 Log.e(TAG, "IllegalArgumentException");
-// QTI_END: 2022-03-24: Telephony: Fix PLMN scan abort mechanism
-// QTI_BEGIN: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
             }
         }
-// QTI_END: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
     }
 
     private void onResults(List<CellInfo> cellInfos) {

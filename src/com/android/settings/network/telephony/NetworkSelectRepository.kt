@@ -113,9 +113,7 @@ class NetworkSelectRepository(context: Context, private val subId: Int) {
             true)
 
         return if (shouldFilter) {
-// QTI_BEGIN: 2024-10-30: Telephony: Add null check for SateliteManager in plmn scan
             satelliteManager?.getSatellitePlmnsForCarrier(subId) ?: emptyList()
-// QTI_END: 2024-10-30: Telephony: Add null check for SateliteManager in plmn scan
         } else {
             emptyList()
         }
