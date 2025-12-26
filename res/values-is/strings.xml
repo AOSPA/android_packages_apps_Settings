@@ -1349,10 +1349,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Há upplausn"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Hámarksupplausn"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Hámarksupplausn gengur meira á rafhlöðuna. Hugsanlega munu einhver forrit endurræsast ef upplausn er breytt."</string>
-    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
-    <skip />
-    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
-    <skip />
+    <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g> Hz)"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"<xliff:g id="WIDTH">%1$s</xliff:g> sinnum <xliff:g id="HEIGHT">%2$s</xliff:g> <xliff:g id="REFRESH_RATE">%3$s</xliff:g> herts"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> með <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2188,14 +2186,10 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Lyklaborð og verkfæri vinnusniðs"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Skjályklaborð fyrir vinnu"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Sjálfgefið"</string>
-    <!-- no translation found for game_controller_settings_title (7088469312082579978) -->
-    <skip />
-    <!-- no translation found for game_controller_remapping_settings_intro (1173670925035985170) -->
-    <skip />
-    <!-- no translation found for game_controller_key_remapping_category (8787322674373090790) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_remapping_category (2566684534140451352) -->
-    <skip />
+    <string name="game_controller_settings_title" msgid="7088469312082579978">"Leikjafjarstýring"</string>
+    <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Sérsníddu aðgerðirnar sem takkar fjarstýringarinnar virkja"</string>
+    <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Takkar"</string>
+    <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Leiðbeiningar"</string>
     <string name="game_controller_button_a" msgid="2138420373137111774">"A-hnappur"</string>
     <string name="game_controller_button_b" msgid="2093089857164437480">"B-hnappur"</string>
     <string name="game_controller_button_x" msgid="3428801081204194655">"X-hnappur"</string>
@@ -2209,14 +2203,10 @@
     <string name="game_controller_dpad" msgid="5352745621298140827">"Stýriflötur"</string>
     <string name="game_controller_stick_left" msgid="1591700901162153956">"Vinstri stýripinni"</string>
     <string name="game_controller_stick_right" msgid="1418791636252375110">"Hægri stýripinni"</string>
-    <!-- no translation found for game_controller_remapping_reset_preference_title (649377683257651371) -->
-    <skip />
-    <!-- no translation found for game_controller_remapping_reset_dialog_title (2983250640475811715) -->
-    <skip />
-    <!-- no translation found for game_controller_remapping_reset_dialog_message (6675448345609566154) -->
-    <skip />
-    <!-- no translation found for game_controller_reset_dialog_button (4119182187827816149) -->
-    <skip />
+    <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Endurstilla á sjálfgefin gildi"</string>
+    <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Endurstilla á sjálfgefin gildi?"</string>
+    <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Allar stillingar fjarstýringarinnar verða endurstilltar á sjálfgefin gildi"</string>
+    <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Endurstilla"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Snertiflötur"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Snertiflötur og mús"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Mús"</string>
@@ -2569,7 +2559,15 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Skjótur aðgangur að aðgengiseiginleikum"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Til að hefjast handa&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Opnaðu aðgengisstillingarnar&lt;br/&gt; {1,number,integer}. Veldu eiginleika og ýttu á flýtileiðina&lt;br/&gt; {2,number,integer}. Veldu hnappinn til að opna eiginleikann&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Staðsetning"</string>
+    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
+    <skip />
+    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
+    <skip />
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Stærð"</string>
+    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
+    <skip />
+    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
+    <skip />
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Deyfa þegar hann er ekki í notkun"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Dofnar eftir nokkrar sekúndur svo að þú sjáir betur á skjáinn"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Gagnsær þegar hann er ekki í notkun"</string>
@@ -2593,8 +2591,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Kveikir á dökku þema í tækinu þínu og forritum sem styðja það"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Framlengt"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Framlengt dökkt þema"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Kveikir sjálfkrafa á dökku þema í flestum forritum sem styðja það ekki, sem hjálpar til við að bæta aðgengi."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"þvinga umsnúning, umsnúningur lita, birtuskil"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Framlengt dökkt þema"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Stillingar fyrir framlengt dökkt þema"</string>
@@ -3223,13 +3220,11 @@
     <string name="add_device_admin" msgid="6252128813507932519">"Virkja þetta forrit tækjastjóra"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Tækjastjóri"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"Ef þetta forrit tækjastjóra er gert virkt verður forritinu <xliff:g id="APP_NAME">%1$s</xliff:g> leyft að framkvæma eftirfarandi aðgerðir:"</string>
-    <!-- no translation found for supervision_role_holder_warning (167724047638694522) -->
-    <skip />
+    <string name="supervision_role_holder_warning" msgid="167724047638694522">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> mun stýra og hafa eftirlit með þessu tæki. \n\n<xliff:g id="APP_NAME_1">%1$s</xliff:g> mun geta stjórnað stillingum barnalæsingar, svo sem útilokun forrita og takmörkunum á efni."</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"<xliff:g id="APP_NAME">%1$s</xliff:g> mun stýra og hafa eftirlit með þessu tæki."</string>
     <string name="device_admin_status" msgid="6332571781623084064">"Forrit tækjastjóra er virkt og leyfir forritinu <xliff:g id="APP_NAME">%1$s</xliff:g> að framkvæma eftirfarandi aðgerðir:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Virkja prófílstjórnanda?"</string>
-    <!-- no translation found for supervision_confirmation_title (8094974031562728585) -->
-    <skip />
+    <string name="supervision_confirmation_title" msgid="8094974031562728585">"Leyfa <xliff:g id="APP_NAME">%1$s</xliff:g> að hafa eftirlit með þessu tæki?"</string>
     <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"Viltu leyfa eftirlit?"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"Með því að halda áfram mun kerfisstjóri hafa umsjón með notandareikningnum þínum og gæti einnig verið fær um að vista tengd gögn, til viðbótar við persónulegu gögnin þín.\n\nKerfisstjórinn getur fylgst með og stjórnað stillingum, aðgengi, forritum og gögnum sem tengjast þessum notanda, þar á meðal netnotkun og staðsetningarupplýsingum tækisins."</string>
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"Kerfisstjóri hefur slökkt á öðrum valkostum"</string>
@@ -3397,12 +3392,9 @@
     <string name="vpn_disconnected" msgid="7694522069957717501">"Aftengdist VPN"</string>
     <string name="vpn_disconnected_summary" msgid="721699709491697712">"Ekkert"</string>
     <string name="vpn_missing_cert" msgid="5397309964971068272">"Vottorð vantar. Prófaðu að breyta sniðinu."</string>
-    <!-- no translation found for vpn_app_exclusion (250431833854129334) -->
-    <skip />
-    <!-- no translation found for vpn_app_exclusion_description (7695809822452196283) -->
-    <skip />
-    <!-- no translation found for vpn_app_exclusion_selected_category_title (4737602697482017631) -->
-    <skip />
+    <string name="vpn_app_exclusion" msgid="250431833854129334">"Undanskilja valin forrit"</string>
+    <string name="vpn_app_exclusion_description" msgid="7695809822452196283">"Undanskilin forrit munu ekki nota þetta VPN"</string>
+    <string name="vpn_app_exclusion_selected_category_title" msgid="4737602697482017631">"Forrit sem eru undanskilin VPN"</string>
     <string name="trusted_credentials_system_tab" msgid="675362923690364722">"Kerfi"</string>
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"Notandi"</string>
     <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"Gera óvirkt"</string>
@@ -3456,6 +3448,8 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Bæta notendum við af lásskjánum"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Bæta við notendum af innskráningarskjánum"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Skipta yfir í stjórnanda þegar tækið er í dokku"</string>
+    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Eyða sjálfum/sjálfri þér?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Viltu eyða þessum notanda?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Fjarlægja þetta snið?"</string>
@@ -3893,8 +3887,6 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Forrit"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Vekjarar &amp; aðrar truflanir"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Tímalengd flýtistillinga"</string>
-    <string name="dnd_sync_title" msgid="2422077702431248079">"Samstilla „Ónáðið ekki“"</string>
-    <string name="dnd_sync_description" msgid="2625638932336262656">"Samstilla stillingar „Ónáðið ekki“ við tengd tæki"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Hljóð vinnusniðs"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Nota hljóð úr einkasniði"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Nota sömu hljóð og eigið snið þitt"</string>
@@ -5072,16 +5064,11 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Viltu slökkva á %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Viltu slökkva á þessari þjónustu?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Vistaðar upplýsingar á borð við aðgangsorð, aðgangslykla, greiðslumáta og aðrar upplýsingar verða ekki fylltar út þegar þú skráir þig inn. Veldu aðgangsorð, aðgangslykil eða gagnaþjónustu til að nota vistuðu upplýsingarnar."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Aðgangsorð, aðgangslyklar og reikningar"</string>
-    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_title (2841026269835953207) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_summary (4126659439608747174) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_manage_accounts_title (1034959782380418930) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_backup_category_title (807568201052547222) -->
-    <skip />
+    <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"Aðgangsorð og aðgangslyklar"</string>
+    <string name="accounts_and_backup_title" msgid="2841026269835953207">"Reikningar og öryggisafrit"</string>
+    <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Öryggisafrita gögn, afrita gögn úr öðru tæki"</string>
+    <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Stjórna reikningum"</string>
+    <string name="accounts_and_backup_backup_category_title" msgid="807568201052547222">"Öryggisafrita eða afrita gögn"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Slökkva á öllum þjónustum?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Aðgangsorð, aðgangslyklar og aðrar vistaðar upplýsingar verða ekki tiltækar fyrir sjálfvirka útfyllingu þegar þú skráir þig inn"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Breyta valinni þjónustu í &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Ný aðgangsorð, aðgangslyklar og aðrar upplýsingar verða vistaðar héðan í frá. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kann að nota það sem er á skjánum hjá þér til að greina hvað er hægt að fylla sjálfkrafa út"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Nota %1$s?"</string>
@@ -6022,8 +6009,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Aðrar reikningsstillingar kunna að gilda þrátt fyrir að slökkt sé á þessum stillingum."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Sláðu inn PIN-númer barnalæsingar"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Veldu PIN-númer fyrir barnalæsingu"</string>
-    <!-- no translation found for supervision_choose_your_new_pin_header (7770532284777963661) -->
-    <skip />
+    <string name="supervision_choose_your_new_pin_header" msgid="7770532284777963661">"Veldu nýtt PIN-númer fyrir barnalæsingu"</string>
     <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"Staðfesta PIN barnalæsingar"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN-númer uppfært"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Opna forrit"</string>
@@ -6085,40 +6071,27 @@
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"Uppfærslur"</string>
-    <!-- no translation found for safety_center_security_update_search_terms (545517841376162382) -->
-    <skip />
+    <string name="safety_center_security_update_search_terms" msgid="545517841376162382">"Uppfærslur, uppfærsla, öryggisuppfærsla, öryggisuppfærslur"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"Tegund netkerfis, dulkóðun, tilkynningastýringar"</string>
-    <!-- no translation found for safety_center_android_lock_screen_search_terms (4741569259158180141) -->
-    <skip />
-    <!-- no translation found for safety_center_fingerprint_unlock_search_terms (954519907845160433) -->
-    <skip />
-    <!-- no translation found for safety_center_face_unlock_search_terms (2994457346086700870) -->
-    <skip />
-    <!-- no translation found for safety_center_wear_unlock_search_terms (6289459571308806285) -->
-    <skip />
-    <!-- no translation found for safety_center_backup_search_terms (5652327131910333830) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_manager_search_terms (1303866079616216426) -->
-    <skip />
-    <!-- no translation found for safety_center_health_connect_search_terms (1323524144779175830) -->
-    <skip />
-    <!-- no translation found for safety_center_app_data_sharing_updates_search_terms (2041373488015575634) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_usage_search_terms (3015527940068111714) -->
-    <skip />
-    <!-- no translation found for safety_center_private_space_search_terms (6748750858253093118) -->
-    <skip />
+    <string name="safety_center_android_lock_screen_search_terms" msgid="4741569259158180141">"Tækjalás, skjálás, læsa skjá, lásskjár, aðgangsorð, PIN-númer, mynstur, læsa, taka úr lás"</string>
+    <string name="safety_center_fingerprint_unlock_search_terms" msgid="954519907845160433">"Fingrafar, fingur, bæta fingrafari við"</string>
+    <string name="safety_center_face_unlock_search_terms" msgid="2994457346086700870">"Andlitskenni, andlit"</string>
+    <string name="safety_center_wear_unlock_search_terms" msgid="6289459571308806285">"Úr, opnun með úri"</string>
+    <string name="safety_center_backup_search_terms" msgid="5652327131910333830">"Öryggisafrit"</string>
+    <string name="safety_center_permission_manager_search_terms" msgid="1303866079616216426">"Heimildir, heimildastjóri"</string>
+    <string name="safety_center_health_connect_search_terms" msgid="1323524144779175830">"Heilsa, Heilsutenging"</string>
+    <string name="safety_center_app_data_sharing_updates_search_terms" msgid="2041373488015575634">"Gögn, gagnadeiling, uppfærslur á gagnadeilingu, uppfærslur á gagnadeilingu varðandi staðsetningu, deiling"</string>
+    <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"Persónuvernd, persónuverndarstjórnborð"</string>
+    <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"Leynirými"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Fleiri viðvaranir"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Færri viðvaranir"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Hunsaðar viðvaranir"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Hunsa þessa viðvörun?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Þú getur farið yfir öryggis- og aðgengisstillingarnar þínar og aukið varnir þínar hvenær sem er"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Aðgerð lokið"</string>
-    <!-- no translation found for safety_center_qs_page_landing (1024103851758565938) -->
-    <skip />
-    <!-- no translation found for privacy_controls_qs (1774718598801606190) -->
-    <skip />
+    <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Flýtistillingar öryggis og persónuverndar"</string>
+    <string name="privacy_controls_qs" msgid="1774718598801606190">"Persónuverndarstillingar þínar"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Parar"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> tengt"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Skanna tæki"</string>
@@ -6137,12 +6110,8 @@
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Opna prufuútgáfu af gervihnattar-SOS"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Gervihnattaforrit"</string>
     <string name="satellite_emergency_sos" msgid="5598135807261930736">"Neyðartilkynning"</string>
-    <!-- no translation found for satellite_tile_prompt_notification_title (208155187034621285) -->
-    <skip />
-    <!-- no translation found for satellite_tile_prompt_notification_summary (1108842668552812176) -->
-    <skip />
-    <!-- no translation found for add_tile_action (5271301747196740442) -->
-    <skip />
-    <!-- no translation found for satellite_tile_prompt_channel_title (5240494188833271282) -->
-    <skip />
+    <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Tengigeta við gervihnött er tiltæk"</string>
+    <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Bættu gervihnattarreitnum við flýtistillingar til að fá greiðan aðgang að gervihnattarupplýsingum"</string>
+    <string name="add_tile_action" msgid="5271301747196740442">"Bæta við reit"</string>
+    <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Skipanir gervihnattarreits"</string>
 </resources>

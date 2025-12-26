@@ -1349,10 +1349,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"हाई रिज़ॉल्यूशन"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"फ़ुल रिज़ॉल्यूशन"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"फ़ुल रिज़ॉल्यूशन में ज़्यादा बैटरी खर्च होती है. रिज़ॉल्यूशन बदलने पर, कुछ ऐप्लिकेशन रीस्टार्ट हो सकते हैं."</string>
-    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
-    <skip />
-    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
-    <skip />
+    <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g> हर्ट्ज़)"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"ऊंचाई <xliff:g id="HEIGHT">%2$s</xliff:g> और चौड़ाई <xliff:g id="WIDTH">%1$s</xliff:g>, <xliff:g id="REFRESH_RATE">%3$s</xliff:g> हर्ट्ज़"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="HEIGHT">%2$s</xliff:g> और <xliff:g id="WIDTH">%1$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> हर्ट्ज़"</string>
@@ -2561,7 +2559,15 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"सुलभता सुविधाओं को तुरंत ऐक्सेस करें"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;शुरू करने के लिए&lt;/b&gt;&lt;br/&gt; {0,number,integer}. सुलभता सेटिंग में जाएं&lt;br/&gt; {1,number,integer}. कोई सुविधा चुनें और शॉर्टकट पर टैप करें&lt;br/&gt; {2,number,integer}. इस सुविधा को ऐक्सेस करने के लिए बटन चुनें&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"सुलभता बटन कहां दिखेगा"</string>
+    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
+    <skip />
+    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
+    <skip />
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"साइज़"</string>
+    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
+    <skip />
+    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
+    <skip />
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"इस्तेमाल न होने पर फ़ेड हो जाए"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"कुछ सेकंड के बाद फ़ेड हो जाएगा, ताकि आप आसानी से अपनी स्क्रीन देख सकें"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"इस्तेमाल न होने पर बटन इतना फ़ेड हो जाए"</string>
@@ -2585,8 +2591,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"इससे गहरे रंग वाली थीम, आपके डिवाइस और उन ऐप के लिए चालू हो जाती है जिनके साथ यह थीम काम करती है"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"एक्सपैंडेड"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"सभी ऐप्लिकेशन पर लागू की गई गहरे रंग वाली थीम"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"इससे ऐसे ज़्यादातर ऐप्लिकेशन पर गहरे रंग वाली थीम अपने-आप लागू हो जाती है जिन पर यह काम नहीं करती. इससे ऐप्लिकेशन को आसानी से ऐक्सेस किया जा सकता है."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"फ़ोर्स इनवर्ट, रंग बदलने की सुविधा, कंट्रास्ट"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"सभी ऐप्लिकेशन पर लागू की गई गहरे रंग वाली थीम"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"सभी ऐप्लिकेशन पर लागू की गई गहरे रंग वाली थीम की सेटिंग"</string>
@@ -3443,6 +3448,8 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"लॉक स्क्रीन से उपयोगकर्ताओं को जोड़ें"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"साइन-इन वाली स्क्रीन से उपयोगकर्ताओं को जोड़ें"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"डिवाइस के डॉक होने पर एडमिन खाते पर जाएं"</string>
+    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"खुद को मिटाएं?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"उपयोगकर्ता को हटाना है?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"इस प्रोफ़ाइल को निकालें?"</string>
@@ -3880,8 +3887,6 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"ऐप्लिकेशन"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"अलार्म और दूसरी सूचनाएं/आवाज़ें"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"क्विक सेटिंग में, \'परेशान न करें\' मोड की अवधि"</string>
-    <string name="dnd_sync_title" msgid="2422077702431248079">"\'परेशान न करें\' मोड की सेटिंग सिंक करने की सुविधा"</string>
-    <string name="dnd_sync_description" msgid="2625638932336262656">"\'परेशान न करें\' मोड की सेटिंग, कनेक्ट किए गए डिवाइसों के साथ सिंक करें"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"वर्क प्रोफ़ाइल पर सेट की गई आवाज़ें"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"निजी प्रोफ़ाइल पर सेट की गई आवाज़ें इस्तेमाल करें"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"निजी प्रोफ़ाइल पर सेट की गई सूचनाओं की आवाज़ें इस्तेमाल करें"</string>
@@ -5059,16 +5064,11 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"क्या आपको %1$s को बंद करना है?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;क्या इस सेवा को बंद करना है?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; साइन इन करने पर, पासवर्ड, पासकी, पेमेंट का तरीका, और सेव की गई अन्य जानकारी, पहले से भरी हुई नहीं होगी. सेव की गई जानकारी इस्तेमाल करने के लिए, कोई पासवर्ड, पासकी या डेटा सेवा को चुनें."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"पासवर्ड, पासकी, और खाते"</string>
-    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_title (2841026269835953207) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_summary (4126659439608747174) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_manage_accounts_title (1034959782380418930) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_backup_category_title (807568201052547222) -->
-    <skip />
+    <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"पासवर्ड और पासकी"</string>
+    <string name="accounts_and_backup_title" msgid="2841026269835953207">"खाते और बैकअप"</string>
+    <string name="accounts_and_backup_summary" msgid="4126659439608747174">"डेटा का बैक अप लें या उसे किसी दूसरे डिवाइस से कॉपी करें"</string>
+    <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"खाते मैनेज करें"</string>
+    <string name="accounts_and_backup_backup_category_title" msgid="807568201052547222">"डेटा का बैक अप लें या उसे कॉपी करें"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;क्या आपको सभी सेवाएं बंद करनी हैं?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; साइन इन करते समय पासवर्ड, पासकी, और सेव की गई अन्य जानकारी अपने-आप नहीं भरी जा सकेगी"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;अपनी पसंदीदा सेवा के तौर पर &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; को चुनना है?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; नए पासवर्ड, पासकी, और अन्य जानकारी अब से यहां सेव की जाएगी. ऐसा हो सकता है कि &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; आपके डिवाइस की स्क्रीन पर मौजूद कॉन्टेंट का इस्तेमाल करे. इससे वह पता लगा सकेगा कि कौनसी जानकारी अपने-आप भरी जा सकती है"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s का इस्तेमाल करना है?"</string>
@@ -6071,40 +6071,27 @@
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"अपडेट"</string>
-    <!-- no translation found for safety_center_security_update_search_terms (545517841376162382) -->
-    <skip />
+    <string name="safety_center_security_update_search_terms" msgid="545517841376162382">"अलग-अलग अपडेट, अपडेट, सुरक्षा से जुड़ा अपडेट, सुरक्षा से जुड़े अपडेट"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"नेटवर्क टाइप, एन्क्रिप्ट करने का तरीका, सूचनाएं कंट्रोल करने की सेटिंग"</string>
-    <!-- no translation found for safety_center_android_lock_screen_search_terms (4741569259158180141) -->
-    <skip />
-    <!-- no translation found for safety_center_fingerprint_unlock_search_terms (954519907845160433) -->
-    <skip />
-    <!-- no translation found for safety_center_face_unlock_search_terms (2994457346086700870) -->
-    <skip />
-    <!-- no translation found for safety_center_wear_unlock_search_terms (6289459571308806285) -->
-    <skip />
-    <!-- no translation found for safety_center_backup_search_terms (5652327131910333830) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_manager_search_terms (1303866079616216426) -->
-    <skip />
-    <!-- no translation found for safety_center_health_connect_search_terms (1323524144779175830) -->
-    <skip />
-    <!-- no translation found for safety_center_app_data_sharing_updates_search_terms (2041373488015575634) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_usage_search_terms (3015527940068111714) -->
-    <skip />
-    <!-- no translation found for safety_center_private_space_search_terms (6748750858253093118) -->
-    <skip />
+    <string name="safety_center_android_lock_screen_search_terms" msgid="4741569259158180141">"डिवाइस लॉक, स्क्रीन लॉक, लॉक स्क्रीन, लॉकस्क्रीन, पासवर्ड, पिन, पैटर्न, लॉक, अनलॉक"</string>
+    <string name="safety_center_fingerprint_unlock_search_terms" msgid="954519907845160433">"फ़िंगरप्रिंट, फ़िंगर, फ़िंगरप्रिंट जोड़ें"</string>
+    <string name="safety_center_face_unlock_search_terms" msgid="2994457346086700870">"फ़ेस अनलॉक, फ़ेस"</string>
+    <string name="safety_center_wear_unlock_search_terms" msgid="6289459571308806285">"स्मार्टवॉच, स्मार्टवॉच से फ़ोन अनलॉक करने की सुविधा"</string>
+    <string name="safety_center_backup_search_terms" msgid="5652327131910333830">"बैकअप"</string>
+    <string name="safety_center_permission_manager_search_terms" msgid="1303866079616216426">"अनुमतियां, अनुमतियां मैनेज करना"</string>
+    <string name="safety_center_health_connect_search_terms" msgid="1323524144779175830">"Health, Health Connect"</string>
+    <string name="safety_center_app_data_sharing_updates_search_terms" msgid="2041373488015575634">"डेटा, डेटा शेयर करना, डेटा शेयर करने से जुड़े अपडेट, जगह की जानकारी का डेटा शेयर करने से जुड़े अपडेट, शेयर करना"</string>
+    <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"प्राइवसी, प्राइवसी डैशबोर्ड"</string>
+    <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"प्राइवेट स्पेस"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"ज़्यादा चेतावनियां"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"कम चेतावनियां"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"खारिज की गई चेतावनियां"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"क्या इस चेतावनी को खारिज करना है?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"डिवाइस की सुरक्षा बढ़ाने के लिए, किसी भी समय अपनी सुरक्षा और निजता सेटिंग की समीक्षा करें"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"कार्रवाई पूरी हुई"</string>
-    <!-- no translation found for safety_center_qs_page_landing (1024103851758565938) -->
-    <skip />
-    <!-- no translation found for privacy_controls_qs (1774718598801606190) -->
-    <skip />
+    <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"सुरक्षा और निजता से जुड़ी क्विक सेटिंग"</string>
+    <string name="privacy_controls_qs" msgid="1774718598801606190">"आपकी निजता सेटिंग"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"कनेक्ट किया जा रहा है"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> से कनेक्ट किया गया"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"डिवाइस स्कैन करें"</string>
