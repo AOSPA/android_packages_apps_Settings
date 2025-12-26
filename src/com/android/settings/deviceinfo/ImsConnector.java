@@ -1,3 +1,4 @@
+// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 /*
 Copyright (c) 2021 The Linux Foundation. All rights reserved.
 
@@ -67,7 +68,9 @@ public class ImsConnector implements FeatureConnector.Listener<ImsManager> {
     }
 
     @Override
+// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
     public void connectionReady(ImsManager manager, int subId) throws ImsException {
+// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
         mImsManager = manager;
         registerListener();
     }
@@ -103,4 +106,4 @@ public class ImsConnector implements FeatureConnector.Listener<ImsManager> {
         Log.d(TAG, "unregisterListener: remove ims registration callback for mSlotId = "
                 + mSlotId + " mImsManager = " + mImsManager);
     }
-}
+}// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
