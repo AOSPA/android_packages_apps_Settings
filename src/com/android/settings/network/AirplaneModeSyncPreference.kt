@@ -31,18 +31,25 @@ import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.PreferenceChangeReason
+import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
 class AirplaneModeSyncPreference :
     SwitchPreference(KEY, R.string.airplane_mode_sync_purpose, R.string.sync_across_devices_title),
-    PreferenceActionMetricsProvider {
+    PreferenceActionMetricsProvider,
+    PreferenceSummaryProvider {
 
     override val icon: Int
         @DrawableRes get() = R.drawable.ic_sync
 
     override fun isEnabled(context: Context) = context.isBluetoothEnabled()
+
+    override fun getSummary(context: Context) =
+        context.getString(R.string.apm_sync_bluetooth_off_summary).takeUnless {
+            context.isBluetoothEnabled()
+        }
 
     override fun getReadPermissions(context: Context) = SettingsGlobalStore.getReadPermissions()
 
