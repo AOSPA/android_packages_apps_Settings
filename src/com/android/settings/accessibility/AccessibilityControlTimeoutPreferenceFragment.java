@@ -17,8 +17,13 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.actiontimeout.ui.ActionTimeoutSettingsScreen;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
@@ -44,11 +49,18 @@ public final class AccessibilityControlTimeoutPreferenceFragment extends Dashboa
         return R.xml.accessibility_control_timeout_settings;
     }
 
+    @Nullable
+    @Override
+    public String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return ActionTimeoutSettingsScreen.KEY;
+    }
+
     @Override
     public int getHelpResource() {
         return R.string.help_url_timeout;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_control_timeout_settings);
+            new BaseSearchIndexProvider(Flags.catalystTimeToTakeActionScreen() ? 0
+                    : R.xml.accessibility_control_timeout_settings);
 }
