@@ -44,7 +44,7 @@ class ManageAccountsScreen : PreferenceScreenMixin, PreferenceIconProvider {
     override val purpose: Int
         get() = R.string.top_level_accounts_and_backup_purpose
 
-    override fun getIcon(context: Context) = R.drawable.ic_account_circle_24dp
+    override fun getIcon(context: Context) = R.drawable.ic_manage_accounts
 
     override val highlightMenuKey: Int
         get() = R.string.menu_key_accounts_and_backup

@@ -47,7 +47,7 @@ class ManageAccountsDashboardFragment : DashboardFragment() {
                 authorities,
                 if (isProfileUser(context)) WORK else PERSONAL,
             )
-        lifecycle.addObserver(accountPrefController)
+        settingsLifecycle.addObserver(accountPrefController)
         controllers.add(accountPrefController)
         return controllers
     }
