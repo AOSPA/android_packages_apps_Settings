@@ -63,6 +63,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_time_to_take_action_screen"
+  namespace: "accessibility"
+  description: "Migrate time to take action screen to Catalyst infrastructure"
+  bug: "440382902"
+}
+
+flag {
   name: "check_prebundled_is_preinstalled"
   namespace: "accessibility"
   description: "Checks that all 'prebundled' components, used for grouping, are also preinstalled"
