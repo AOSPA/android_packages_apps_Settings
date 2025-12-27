@@ -31,6 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
+// LINT.IfChange
 public class DoubleTwistPreferenceController extends GesturePreferenceController {
 
     private final int ON = 1;
@@ -122,3 +123,4 @@ public class DoubleTwistPreferenceController extends GesturePreferenceController
         return Utils.getManagedProfileId(userManager, UserHandle.myUserId());
     }
 }
+// LINT.ThenChange(DoubleTwistGestureApiFirstScreen.kt)

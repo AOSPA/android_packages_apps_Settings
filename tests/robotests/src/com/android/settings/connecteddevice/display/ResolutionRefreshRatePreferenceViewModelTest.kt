@@ -233,4 +233,50 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         assertThat(viewModel.confirmationDialogEvent.value).isNull()
         verify(mMockedInjector).resetUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID)
     }
+
+    @Test
+    fun onResolutionSelected_withDuplicateRefreshRates_deduplicatesRefreshRateItems() {
+        // Setup modes with duplicate refresh rates for the same resolution.
+        // This simulates a scenario where a display might report multiple modes (e.g., HDR and
+        // non-HDR) for the same resolution and refresh rate.
+        val displayId = 456
+        val width = 640
+        val height = 480
+        val activeMode = Mode(99, 1920, 1080, 60f)
+        val supportedModes =
+            listOf(
+                activeMode,
+                Mode(100, width, height, 60f), // 60Hz variant 1
+                Mode(101, width, height, 60f), // 60Hz variant 2 (duplicate refresh rate)
+                Mode(102, width, height, 50f) // 50Hz
+            )
+
+        // Create a new display device with these modes.
+        val displayWithDuplicates =
+            DisplayDevice(
+                displayId,
+                "local:2222222222",
+                "test_duplicates",
+                activeMode,
+                supportedModes,
+                isEnabled = DisplayIsEnabled.YES,
+                isConnectedDisplay = true,
+                rotation = 0
+            )
+        updateDisplaysAndTopology(listOf(displayWithDuplicates))
+
+        // Setup ViewModel and select the resolution with duplicate refresh rates.
+        setupViewModel(displayId)
+        viewModel.onResolutionSelected(ResolutionItem(width, height))
+
+        // Assert that the refresh rate list is correctly deduplicated.
+        val state = viewModel.uiState.value!!
+        assertThat(state.refreshRateItems).hasSize(2)
+        assertThat(state.refreshRateItems)
+            .containsExactly(
+                RefreshRateItem(modeId = 100, refreshRate = 60f),
+                RefreshRateItem(modeId = 102, refreshRate = 50f)
+            )
+            .inOrder()
+    }
 }

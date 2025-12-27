@@ -26,6 +26,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Process
@@ -41,10 +42,12 @@ import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.flags.Flags.FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE
 import com.android.settings.supervision.SupervisionMainSwitchPreference.Companion.REQUEST_CODE_CONFIRM_SUPERVISION_CREDENTIALS
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
+import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.ipc.MessengerService
 import com.android.settingslib.ipc.MessengerServiceRule
 import com.android.settingslib.ipc.PermissionChecker
@@ -91,6 +94,7 @@ class SupervisionDashboardScreenTest {
         )
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockRoleManager = mock<RoleManager>()
+    private val mockResources = mock<Resources>()
 
     @get:Rule val setFlagsRule = SetFlagsRule()
 
@@ -106,6 +110,7 @@ class SupervisionDashboardScreenTest {
             on { preferenceScreenKey } doReturn preferenceScreenCreator.bindingKey
             on { getSystemService(SupervisionManager::class.java) } doReturn mockSupervisionManager
             on { getSystemService(RoleManager::class.java) } doReturn mockRoleManager
+            on { getResources() } doReturn mockResources
         }
 
         ShadowRoleManager.addRoleHolder(
@@ -300,8 +305,25 @@ class SupervisionDashboardScreenTest {
     }
 
     @Test
+    @DisableFlags(FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE)
     fun isIndexable() {
         assertThat(preferenceScreenCreator.indexable).isTrue()
+    }
+
+    @Test
+    @EnableFlags(FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE)
+    fun indexable_inDemoMode_configHidingTrue_isFalse() {
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        SettingsGlobalStore.get(mockLifeCycleContext).setInt(Settings.Global.DEVICE_DEMO_MODE, 1)
+
+        mockResources.stub {
+            on { getBoolean(R.bool.config_hide_supervision_setting_in_demo_mode) }.thenReturn(true)
+        }
+
+        assertThat(preferenceScreenCreator.indexable).isFalse()
+
+        // Ensure reset to non-demo-mode at the end of test.
+        SettingsGlobalStore.get(mockLifeCycleContext).setInt(Settings.Global.DEVICE_DEMO_MODE, 0)
     }
 
     @Test

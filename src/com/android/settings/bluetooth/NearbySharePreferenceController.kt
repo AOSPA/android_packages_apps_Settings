@@ -49,11 +49,13 @@ class NearbySharePreferenceController(private val context: Context, key: String)
         if (TextUtils.isEmpty(componentString)) {
             return
         }
-        nearbyComponentName = ComponentName.unflattenFromString(componentString)?.also {
-            intent.setComponent(it)
-            intent.putExtra(EXTRA_REDIRECT_FROM_SETTINGS, true)
-            nearbyLabel = getNearbyLabel(it)
-        }
+        nearbyComponentName =
+            ComponentName.unflattenFromString(componentString)?.also {
+                intent.setComponent(it)
+                intent.putExtra(EXTRA_REDIRECT_FROM_SETTINGS, true)
+                intent.flags = intent.flags and Intent.FLAG_GRANT_READ_URI_PERMISSION.inv()
+                nearbyLabel = getNearbyLabel(it)
+            }
     }
 
     override fun getAvailabilityStatus(): Int {
@@ -76,12 +78,12 @@ class NearbySharePreferenceController(private val context: Context, key: String)
             SettingsEnums.ACTION_NEARBY_SHARE_ENTRYPOINT_SHOWN,
             SettingsEnums.BLUETOOTH_DEVICE_PICKER,
             "",
-            0
+            0,
         )
         preference.findViewById<View>(R.id.card_container).setOnClickListener {
             FeatureFactory.featureFactory.metricsFeatureProvider.clicked(
                 SettingsEnums.BLUETOOTH_DEVICE_PICKER,
-                preferenceKey
+                preferenceKey,
             )
             context.startActivity(intent)
             true
@@ -93,11 +95,12 @@ class NearbySharePreferenceController(private val context: Context, key: String)
             context.packageManager
                 .getActivityInfo(componentName, PackageManager.GET_META_DATA)
                 .loadLabel(context.packageManager)
-        } catch(_: NameNotFoundException) {
+        } catch (_: NameNotFoundException) {
             null
         }
 
     companion object {
-        private const val EXTRA_REDIRECT_FROM_SETTINGS = "android.intent.extra.REDIRECTED_FROM_BLUETOOTH_SHARE"
+        private const val EXTRA_REDIRECT_FROM_SETTINGS =
+            "android.intent.extra.REDIRECTED_FROM_BLUETOOTH_SHARE"
     }
 }

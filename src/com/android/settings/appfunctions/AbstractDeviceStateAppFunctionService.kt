@@ -42,7 +42,9 @@ import com.android.settings.appfunctions.executors.DeviceStateExecutor
 import com.android.settings.metrics.AppFunctionMetricsLogger
 import com.android.settings.utils.getLocale
 import java.util.Locale
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 /**
  * An abstract [AppFunctionService] that provides device state information.
@@ -145,6 +147,10 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
         }
 
         runBlocking {
+            withContext(Dispatchers.IO) {
+                SettingsPreferenceServiceClientManager.awaitInitialized()
+            }
+
             Trace.beginSection("DeviceStateAppFunction ${request.functionIdentifier}")
             Log.d(TAG, "device state app function ${request.functionIdentifier} called.")
             if (!aggregators.containsKey(appFunctionType)) {

@@ -5195,11 +5195,13 @@
     <string name="keyboard_default_layout">Default</string>
 
     <!-- Title for the button to trigger the 'Game Controller settings' page if only connected with a game controller. [CHAR LIMIT=35] -->
-    <string name="game_controller_settings_title">Game Controllers</string>
+    <string name="game_controller_settings_title">Game Controller</string>
+    <!-- Introduction for game controller remapping page. [CHAR LIMIT=NONE] -->
+    <string name="game_controller_remapping_settings_intro">Customize the actions triggered by your controller\u2019s buttons</string>
     <!-- Title for the preference category for key remapping for game controllers. [CHAR LIMIT=35] -->
-    <string name="game_controller_key_remapping">Keys</string>
+    <string name="game_controller_key_remapping_category">Buttons</string>
     <!-- Title for the preference category for stick remapping for game controllers. [CHAR LIMIT=35] -->
-    <string name="game_controller_stick_remapping">Axes</string>
+    <string name="game_controller_stick_remapping_category">Directions</string>
     <!-- Title for the preference category for button A remapping. Button A is typical game controller button with "A" printed on it. [CHAR LIMIT=35] -->
     <string name="game_controller_button_a">A Button</string>
     <!-- Title for the preference category for button B remapping. Button B is typical game controller button with "B" printed on it. [CHAR LIMIT=35] -->
@@ -5226,6 +5228,14 @@
     <string name="game_controller_stick_left">Left Stick</string>
     <!-- Title for the preference category for right stick remapping. [CHAR LIMIT=35] -->
     <string name="game_controller_stick_right">Right Stick</string>
+    <!-- Button preference title to reset all game controller settings to default. [CHAR LIMIT=35] -->
+    <string name="game_controller_remapping_reset_preference_title">Reset to default</string>
+    <!-- Reset dialog title to reset all game controller settings to default. [CHAR LIMIT=35] -->
+    <string name="game_controller_remapping_reset_dialog_title">Reset to default?</string>
+    <!-- Game controller reset dialog message to reset all game controller settings to default. [CHAR LIMIT=NONE] -->
+    <string name="game_controller_remapping_reset_dialog_message">All your controller settings will be reset to default</string>
+    <!-- Game controller reset dialog confirmation button text [CHAR LIMIT=35] -->
+    <string name="game_controller_reset_dialog_button">Reset</string>
 
     <!-- Title for the button to trigger the 'trackpad settings' page if only connect with a touchpad. [CHAR LIMIT=35] -->
     <string name="trackpad_settings">Touchpad</string>

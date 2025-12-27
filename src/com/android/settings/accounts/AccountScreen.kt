@@ -22,7 +22,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.AccountDashboardActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -38,7 +37,7 @@ open class AccountScreen : PreferenceScreenMixin, PreferenceTitleProvider, Prefe
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.top_level_accounts_purpose
 
@@ -65,8 +64,6 @@ open class AccountScreen : PreferenceScreenMixin, PreferenceTitleProvider, Prefe
         get() = R.string.menu_key_accounts
 
     override fun getMetricsCategory() = SettingsEnums.ACCOUNT
-
-    override fun isFlagEnabled(context: Context): Boolean = Flags.catalystAccountsScreen()
 
     override fun hasCompleteHierarchy() = false
 
