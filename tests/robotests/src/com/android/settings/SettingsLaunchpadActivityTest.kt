@@ -16,12 +16,18 @@
 
 package com.android.settings
 
+import android.content.ComponentName
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import androidx.activity.result.launch
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.testutils.shadow.ShadowActivityEmbeddingUtils
 import com.android.settingslib.metadata.FixedArrayMap
@@ -105,6 +111,36 @@ class SettingsLaunchpadActivityTest {
 
         assertThat(activity.isFinishing).isTrue()
         assertThat(shadowOf(activity).nextStartedActivity).isNull()
+    }
+
+    @Test
+    fun launch_intentFromSearch_shouldLaunchSubSettingsWithCorrectKeyToHighlight() {
+        // Set device is in one-pane mode
+        ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(false)
+        val highlightKeyValue = "preference_to_highlight"
+        val intent =
+            Intent(
+                    ApplicationProvider.getApplicationContext(),
+                    SettingsLaunchpadActivity::class.java,
+                )
+                .apply {
+                    putExtra(EXTRA_FRAGMENT_ARG_KEY, "CS:$TEST_SCREEN_KEY/$highlightKeyValue")
+                }
+
+        ActivityScenario.launch<SettingsLaunchpadActivity>(intent).use { scenario ->
+            // Verify the SettingsLaunchpadActivity is finished
+            assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+        }
+
+        val nextIntent = shadowOf(context as ContextWrapper).nextStartedActivity
+        assertThat(nextIntent).isNotNull()
+        val expectedComponent = ComponentName(context, SubSettings::class.java)
+        assertThat(nextIntent.component).isEqualTo(expectedComponent)
+        assertThat(nextIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+            .isEqualTo(TestFragment::class.java.name)
+        val fragmentArgs = nextIntent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+        assertThat(fragmentArgs).isNotNull()
+        assertThat(fragmentArgs?.getString(EXTRA_FRAGMENT_ARG_KEY)).isEqualTo(highlightKeyValue)
     }
 
     @Test
