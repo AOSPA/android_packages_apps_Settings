@@ -1349,10 +1349,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"고해상도"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"최대 해상도"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"최대 해상도 사용 시 배터리 사용량이 증가합니다. 해상도를 전환하면 일부 앱이 다시 시작될 수 있습니다."</string>
-    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
-    <skip />
-    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
-    <skip />
+    <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g>x<xliff:g id="HEIGHT">%2$s</xliff:g>(<xliff:g id="REFRESH_RATE">%3$s</xliff:g>Hz)"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"가로 <xliff:g id="WIDTH">%1$s</xliff:g> 세로 <xliff:g id="HEIGHT">%2$s</xliff:g> <xliff:g id="REFRESH_RATE">%3$s</xliff:g>헤르츠"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g>x<xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g>x<xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g>Hz"</string>
@@ -2561,7 +2559,15 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"접근성 기능에 빠르게 액세스"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;시작 방법&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 접근성 설정으로 이동합니다.&lt;br/&gt; {1,number,integer}. 기능을 선택하고 단축키를 탭합니다.&lt;br/&gt; {2,number,integer}. 기능에 액세스하는 데 사용할 버튼을 선택합니다.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"위치"</string>
+    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
+    <skip />
+    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
+    <skip />
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"크기"</string>
+    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
+    <skip />
+    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
+    <skip />
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"사용하지 않을 때 사라짐"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"몇 초 후 사라지므로 쉽게 화면을 볼 수 있습니다."</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"사용하지 않을 때 투명도"</string>
@@ -2585,8 +2591,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"어두운 테마를 지원하는 기기 및 앱에 어두운 테마를 사용 설정합니다."</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"확장형"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"확장형 어두운 테마"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"어두운 테마를 지원하지 않는 대부분의 앱에 어두운 테마를 자동으로 적용하여 접근성을 개선합니다."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"강제 반전, 색상 반전, 대비"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"확장형 어두운 테마"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"확장형 어두운 테마 설정"</string>
@@ -3443,6 +3448,8 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"잠금 화면에서 사용자 추가"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"로그인 화면에서 사용자 추가"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"도킹 시 관리자로 전환"</string>
+    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"본인을 삭제하시겠습니까?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"사용자를 삭제하시겠습니까?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"프로필을 삭제할까요?"</string>
@@ -3880,8 +3887,6 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"앱"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"알람 및 기타 방해 요소"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"빠른 설정 지속 시간"</string>
-    <string name="dnd_sync_title" msgid="2422077702431248079">"방해 금지 모드 동기화"</string>
-    <string name="dnd_sync_description" msgid="2625638932336262656">"연결된 기기에 방해 금지 모드 설정을 동기화합니다."</string>
     <string name="sound_work_settings" msgid="752627453846309092">"직장 프로필 소리"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"개인 프로필 소리 사용"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"개인 프로필과 동일한 소리 사용"</string>
@@ -5059,16 +5064,11 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s을(를) 사용 중지하시겠습니까?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;이 서비스를 사용 중지하시겠습니까?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; 로그인할 때 비밀번호, 패스키, 결제 수단 등의 저장된 정보가 채워지지 않습니다. 저장된 정보를 사용하려면 비밀번호, 패스키 또는 데이터 서비스를 선택하세요."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"비밀번호, 패스키, 계정"</string>
-    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_title (2841026269835953207) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_summary (4126659439608747174) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_manage_accounts_title (1034959782380418930) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_backup_category_title (807568201052547222) -->
-    <skip />
+    <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"비밀번호 및 패스키"</string>
+    <string name="accounts_and_backup_title" msgid="2841026269835953207">"계정 및 백업"</string>
+    <string name="accounts_and_backup_summary" msgid="4126659439608747174">"데이터 백업, 다른 기기에서 데이터 복사"</string>
+    <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"계정 관리"</string>
+    <string name="accounts_and_backup_backup_category_title" msgid="807568201052547222">"데이터 백업 또는 복사"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;모든 서비스를 사용 중지하시겠습니까?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; 로그인할 때 비밀번호, 패스키 및 기타 저장된 정보를 자동 입력에 사용할 수 없습니다."</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;기본 서비스를 &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;(으)로 변경하시겠습니까?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; 이제부터 새 비밀번호, 패스키 및 기타 정보가 여기에 저장됩니다. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;에서 자동 완성할 수 있는 항목을 파악하기 위해 화면에 표시된 내용을 사용할 수도 있습니다."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s을(를) 사용하시겠습니까?"</string>
@@ -6071,40 +6071,27 @@
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"업데이트"</string>
-    <!-- no translation found for safety_center_security_update_search_terms (545517841376162382) -->
-    <skip />
+    <string name="safety_center_security_update_search_terms" msgid="545517841376162382">"업데이트, 보안 업데이트"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"네트워크 유형, 암호화, 알림 설정"</string>
-    <!-- no translation found for safety_center_android_lock_screen_search_terms (4741569259158180141) -->
-    <skip />
-    <!-- no translation found for safety_center_fingerprint_unlock_search_terms (954519907845160433) -->
-    <skip />
-    <!-- no translation found for safety_center_face_unlock_search_terms (2994457346086700870) -->
-    <skip />
-    <!-- no translation found for safety_center_wear_unlock_search_terms (6289459571308806285) -->
-    <skip />
-    <!-- no translation found for safety_center_backup_search_terms (5652327131910333830) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_manager_search_terms (1303866079616216426) -->
-    <skip />
-    <!-- no translation found for safety_center_health_connect_search_terms (1323524144779175830) -->
-    <skip />
-    <!-- no translation found for safety_center_app_data_sharing_updates_search_terms (2041373488015575634) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_usage_search_terms (3015527940068111714) -->
-    <skip />
-    <!-- no translation found for safety_center_private_space_search_terms (6748750858253093118) -->
-    <skip />
+    <string name="safety_center_android_lock_screen_search_terms" msgid="4741569259158180141">"기기 잠금, 화면 잠금, 잠금 화면, 잠금화면, 비밀번호, PIN, 패턴, 잠금, 잠금 해제"</string>
+    <string name="safety_center_fingerprint_unlock_search_terms" msgid="954519907845160433">"지문, 손가락, 지문 추가"</string>
+    <string name="safety_center_face_unlock_search_terms" msgid="2994457346086700870">"얼굴 인식 잠금 해제, 얼굴"</string>
+    <string name="safety_center_wear_unlock_search_terms" msgid="6289459571308806285">"시계, 스마트시계 잠금 해제"</string>
+    <string name="safety_center_backup_search_terms" msgid="5652327131910333830">"백업"</string>
+    <string name="safety_center_permission_manager_search_terms" msgid="1303866079616216426">"권한, 권한 관리자"</string>
+    <string name="safety_center_health_connect_search_terms" msgid="1323524144779175830">"건강, 헬스 커넥트"</string>
+    <string name="safety_center_app_data_sharing_updates_search_terms" msgid="2041373488015575634">"데이터, 데이터 공유, 데이터 공유 업데이트, 위치 관련 데이터 공유 업데이트, 공유"</string>
+    <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"개인 정보 보호, 개인 정보 대시보드"</string>
+    <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"비공개 스페이스"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"알림 더보기"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"알림 적게 보기"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"닫은 알림"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"이 알림을 닫으시겠습니까?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"언제든지 보안 및 개인 정보 보호 설정을 검토하고 보안을 추가하세요."</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"작업 완료"</string>
-    <!-- no translation found for safety_center_qs_page_landing (1024103851758565938) -->
-    <skip />
-    <!-- no translation found for privacy_controls_qs (1774718598801606190) -->
-    <skip />
+    <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"보안 및 개인 정보 보호 빠른 설정"</string>
+    <string name="privacy_controls_qs" msgid="1774718598801606190">"개인 정보 보호 설정"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"페어링"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 연결됨"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"기기 스캔"</string>

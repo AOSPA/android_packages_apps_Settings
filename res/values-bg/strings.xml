@@ -1349,10 +1349,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока разделителна способност"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Максимална разделителна способност"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Максималната разделителна способност изразходва батерията ви в по-голяма степен. Превключването на разделителната способност може да доведе до рестартирането на някои приложения."</string>
-    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
-    <skip />
-    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
-    <skip />
+    <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g> Hz)"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"<xliff:g id="WIDTH">%1$s</xliff:g> по <xliff:g id="HEIGHT">%2$s</xliff:g> <xliff:g id="REFRESH_RATE">%3$s</xliff:g> херца"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> от <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2561,7 +2559,15 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Бърз достъп до функциите за достъпност"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;За да започнете&lt;/b&gt;:&lt;br/&gt; {0,number,integer}. Отворете настройките за достъпност.&lt;br/&gt; {1,number,integer}. Изберете функция и докоснете прекия път.&lt;br/&gt; {2,number,integer}. Изберете бутона за достъп до функцията.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Местоположение"</string>
+    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
+    <skip />
+    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
+    <skip />
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Размер"</string>
+    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
+    <skip />
+    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
+    <skip />
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Избледняване при неизползване"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Бутонът избледнява след няколко секунди, за да виждате екрана по-лесно"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Прозрачност при неизползване"</string>
@@ -2585,8 +2591,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Включва тъмната тема за устройството ви и приложенията, които я поддържат"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Разширена"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Разширена тъмна тема"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Автоматично прилага тъмната тема към повечето приложения, които не я поддържат, с цел подобряване на достъпността."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"принудително инвертиране, инвертиране на цветовете, контраст"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Разширена тъмна тема"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Настройки за разширената тъмна тема"</string>
@@ -3443,6 +3448,8 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Добавяне на потребители от заключения екран"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Добавяне на потребители от екрана за вход"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Докинг станция: Превкл. към потр. с админ. достъп"</string>
+    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Искате ли да се изтриете?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Изтриване на потребителя?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Ще прем. ли потр. профил?"</string>
@@ -3880,8 +3887,6 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Приложения"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Будилници и други прекъсвания"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Продължителност за бързите настройки"</string>
-    <string name="dnd_sync_title" msgid="2422077702431248079">"Синхронизиране на режима „Не безпокойте“"</string>
-    <string name="dnd_sync_description" msgid="2625638932336262656">"Синхронизиране на настройките за режима „Не безпокойте“ със свързаните устройства"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Звуци за служебния потребителски профил"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Използване на звуците за личния потребителски профил"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Използване на същите звуци като за личния потребителски профил"</string>
@@ -5059,16 +5064,11 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Искате ли да изключите %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Искате ли да изключите тази услуга?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Запазената информация, като например пароли, ключове за достъп, начини на плащане и други данни, няма да се попълва автоматично, когато влизате в даден профил. За да използвате запазената си информация, изберете услуга за пароли, ключове за достъп или данни."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Пароли, ключове за достъп и профили"</string>
-    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_title (2841026269835953207) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_summary (4126659439608747174) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_manage_accounts_title (1034959782380418930) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_backup_category_title (807568201052547222) -->
-    <skip />
+    <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"Пароли и ключове за достъп"</string>
+    <string name="accounts_and_backup_title" msgid="2841026269835953207">"Профили и резервни копия"</string>
+    <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Създайте резервно копие на данни или копирайте данни от друго устройство"</string>
+    <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Управление на профилите"</string>
+    <string name="accounts_and_backup_backup_category_title" msgid="807568201052547222">"Създ. на рез. копие/копиране на данни"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Да се изключат ли всички услуги?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Паролите, ключовете за достъп и другата запазена информация няма да са налице, когато влезете в профил"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Искате ли да зададете &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; като предпочитана услуга?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; От сега нататък тук ще се запазват новите пароли, ключове за достъп и други данни. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; може да използва съдържанието на екрана ви, за да определи какво може да бъде попълнено автоматично"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Да се използва ли %1$s?"</string>
@@ -6071,40 +6071,27 @@
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"Актуализации"</string>
-    <!-- no translation found for safety_center_security_update_search_terms (545517841376162382) -->
-    <skip />
+    <string name="safety_center_security_update_search_terms" msgid="545517841376162382">"Актуализации, актуализация, системна актуализация, системни актуализации"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"Тип мрежа, шифроване, контроли за известията"</string>
-    <!-- no translation found for safety_center_android_lock_screen_search_terms (4741569259158180141) -->
-    <skip />
-    <!-- no translation found for safety_center_fingerprint_unlock_search_terms (954519907845160433) -->
-    <skip />
-    <!-- no translation found for safety_center_face_unlock_search_terms (2994457346086700870) -->
-    <skip />
-    <!-- no translation found for safety_center_wear_unlock_search_terms (6289459571308806285) -->
-    <skip />
-    <!-- no translation found for safety_center_backup_search_terms (5652327131910333830) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_manager_search_terms (1303866079616216426) -->
-    <skip />
-    <!-- no translation found for safety_center_health_connect_search_terms (1323524144779175830) -->
-    <skip />
-    <!-- no translation found for safety_center_app_data_sharing_updates_search_terms (2041373488015575634) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_usage_search_terms (3015527940068111714) -->
-    <skip />
-    <!-- no translation found for safety_center_private_space_search_terms (6748750858253093118) -->
-    <skip />
+    <string name="safety_center_android_lock_screen_search_terms" msgid="4741569259158180141">"Заключване на устройството, опция за заключване на екрана, заключен екран, парола, ПИН код, фигура, заключване, отключване"</string>
+    <string name="safety_center_fingerprint_unlock_search_terms" msgid="954519907845160433">"Отпечатък, пръст, добавяне на отпечатък"</string>
+    <string name="safety_center_face_unlock_search_terms" msgid="2994457346086700870">"Отключване с лице, лице"</string>
+    <string name="safety_center_wear_unlock_search_terms" msgid="6289459571308806285">"Часовник, отключване чрез часовника"</string>
+    <string name="safety_center_backup_search_terms" msgid="5652327131910333830">"Резервно копие"</string>
+    <string name="safety_center_permission_manager_search_terms" msgid="1303866079616216426">"Разрешения, мениджър на разрешенията"</string>
+    <string name="safety_center_health_connect_search_terms" msgid="1323524144779175830">"здраве, Health Connect"</string>
+    <string name="safety_center_app_data_sharing_updates_search_terms" msgid="2041373488015575634">"данни, споделяне на данни, актуализации за споделянето на данни, актуализации за споделянето на данни за местоположението, споделяне"</string>
+    <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"Поверителност, табло за управление на поверителността"</string>
+    <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"Частно пространство"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Още сигнали"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"По-малко сигнали"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Отхвърлени сигнали"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Да се отхвърли ли сигналът?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Преглеждайте настройките си за сигурност и поверителност по всяко време, за да добавите още защита"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Действието е завършено"</string>
-    <!-- no translation found for safety_center_qs_page_landing (1024103851758565938) -->
-    <skip />
-    <!-- no translation found for privacy_controls_qs (1774718598801606190) -->
-    <skip />
+    <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Бързи настройки за сигурността и поверителността"</string>
+    <string name="privacy_controls_qs" msgid="1774718598801606190">"Контролите ви за поверителност"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Сдвоява се"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Свързахте <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Сканиране на устройството"</string>
