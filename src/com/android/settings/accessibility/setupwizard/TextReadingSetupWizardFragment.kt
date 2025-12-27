@@ -16,7 +16,15 @@
 
 package com.android.settings.accessibility.setupwizard
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.android.settings.R
+import com.android.settings.accessibility.AccessibilitySetupWizardUtils
+import com.android.settings.accessibility.textreading.dialogs.TextReadingResetDialog
+import com.google.android.setupcompat.template.FooterBarMixin
+import com.google.android.setupdesign.GlifLayout
 import com.google.android.setupdesign.items.RecyclerItemAdapter
 
 /** TextReading for Setup Wizard. */
@@ -36,4 +44,28 @@ class TextReadingSetupWizardFragment : BaseSetupWizardFragment() {
     override val fragmentLayoutResId: Int = R.layout.text_reading_suw_screen
 
     override val glifLayoutId: Int = R.id.text_reading_suw_screen_layout
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? =
+        super.onCreateView(inflater, container, savedInstanceState).also { view ->
+            val glifLayout = view as? GlifLayout ?: return@also
+            val mixin = glifLayout.getMixin(FooterBarMixin::class.java)
+
+            // Set Primary Button
+            AccessibilitySetupWizardUtils.setPrimaryButton(requireContext(), mixin, R.string.done) {
+                parentFragmentManager.popBackStack()
+            }
+
+            // Set Secondary Button (Reset)
+            AccessibilitySetupWizardUtils.setSecondaryButton(
+                requireContext(),
+                mixin,
+                R.string.accessibility_text_reading_reset_button_title,
+            ) {
+                TextReadingResetDialog.showDialog(childFragmentManager)
+            }
+        }
 }
