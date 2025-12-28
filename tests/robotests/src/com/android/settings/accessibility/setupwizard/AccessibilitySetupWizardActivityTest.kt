@@ -22,7 +22,10 @@ import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.android.settings.R
 import com.android.settings.accessibility.Flags
+import com.android.settings.testutils.SystemProperty
 import com.google.common.truth.Truth.assertThat
+import org.junit.AfterClass
+import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -50,6 +53,29 @@ class AccessibilitySetupWizardActivityTest {
     fun onCreate_appliesTheme() {
         activityScenarioRule.scenario.onActivity { activity ->
             assertThat(activity.theme).isNotNull()
+        }
+    }
+
+    companion object {
+        private var systemProperty: SystemProperty? = null
+
+        @BeforeClass
+        @JvmStatic
+        fun setup() {
+            // Robolectric by default creates Activity contexts without an associated Display.
+            // This property ensures the Activity context is attached to a simulated display,
+            // preventing UnsupportedOperationException when code calls Context#getDisplay().
+            systemProperty =
+                SystemProperty().apply { override("robolectric.createActivityContexts", "true") }
+        }
+
+        @AfterClass
+        @JvmStatic
+        fun cleanUp() {
+            systemProperty?.let {
+                it.close()
+                systemProperty = null
+            }
         }
     }
 }

@@ -19,6 +19,7 @@ package com.android.settings.accessibility.setupwizard
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import com.android.settings.EmptySetupWizardActivity
 import com.android.settings.display.AutoBrightnessScreen
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
@@ -41,8 +42,7 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class AutoBrightnessSwitchItemControllerTest {
 
-    @get:Rule
-    val activityScenarioRule = ActivityScenarioRule(AccessibilitySetupWizardActivity::class.java)
+    @get:Rule val activityScenarioRule = ActivityScenarioRule(EmptySetupWizardActivity::class.java)
 
     private val mockSwitchItem = mock<SwitchItem>()
     private val mockDataStore = mock<KeyValueStore>()
