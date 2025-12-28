@@ -166,8 +166,9 @@ public class WifiAutoConnectPreferenceController2Test {
     public void displayPreference_NetworkOwned() {
         when(mUserManager.getUserCount()).thenReturn(3);
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mWifiConfiguration);
-        // The creator matches the current user
-        mWifiConfiguration.creatorUid = USER_ID_CURRENT;
+
+        // Stub getCreatorUserId to return the CURRENT user
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
 
         mController.updateState(mPreference);
 
@@ -179,8 +180,9 @@ public class WifiAutoConnectPreferenceController2Test {
     public void displayPreference_NetworkNotOwned() {
         when(mUserManager.getUserCount()).thenReturn(3);
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mWifiConfiguration);
-        // The creator is different from the current user
-        mWifiConfiguration.creatorUid = USER_ID_OTHER;
+
+        // Stub getCreatorUserId to return a DIFFERENT user
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
 
         mController.updateState(mPreference);
 
@@ -192,8 +194,9 @@ public class WifiAutoConnectPreferenceController2Test {
     public void displayPreference_NetworkNotOwned_SingleUser() {
         when(mUserManager.getUserCount()).thenReturn(1);
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mWifiConfiguration);
-        // The creator is different, but there is only 1 user on device
-        mWifiConfiguration.creatorUid = USER_ID_OTHER;
+
+        // Stub getCreatorUserId to return a DIFFERENT user
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
 
         mController.updateState(mPreference);
 

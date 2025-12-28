@@ -17,7 +17,8 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/contacts_storage_settings_title">
+    android:title="@string/contacts_storage_settings_title"
+    android:key="contacts_storage_settings">
 
     <com.android.settingslib.widget.TopIntroPreference
         android:title="@string/contacts_storage_selection_message" />

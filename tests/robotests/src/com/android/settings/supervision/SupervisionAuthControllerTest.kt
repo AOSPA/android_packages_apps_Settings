@@ -17,16 +17,21 @@ package com.android.settings.supervision
 
 import android.app.ActivityManager
 import android.app.role.RoleManager
+import android.app.supervision.flags.Flags
 import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import java.time.Duration
 import kotlin.test.Test
 import org.junit.Before
+import org.junit.Rule
 import org.junit.runner.RunWith
 import org.mockito.Mockito.`when` as whenever
 import org.mockito.kotlin.argumentCaptor
@@ -43,6 +48,8 @@ class SupervisionAuthControllerTest {
     private val mockActivityManager = mock<ActivityManager>()
     private val mockRoleManager = mock<RoleManager>()
     private var mockContext = mock<Context>()
+
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
     @Before
     fun setUp() {
@@ -85,6 +92,7 @@ class SupervisionAuthControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_AUTH_CONTROLLER_UPDATES)
     fun taskLosesFocus_sessionInvalidated() {
         val mockTask =
             mock<ActivityManager.AppTask>().stub {
@@ -99,6 +107,48 @@ class SupervisionAuthControllerTest {
         assertThat(authController.isSessionActive(TASK_ID)).isTrue()
 
         mockTask.stub { on { taskInfo } doReturn NOT_FOCUSED_SUPERVISION_DASHBOARD_TASK_INFO }
+        authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
+        assertThat(authController.isSessionActive(TASK_ID)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_AUTH_CONTROLLER_UPDATES)
+    fun taskLosesFocus_sessionValidated() {
+        val mockTask =
+            mock<ActivityManager.AppTask>().stub {
+                on { taskInfo } doReturn FOCUSED_SUPERVISION_DASHBOARD_TASK_INFO
+            }
+        mockActivityManager.stub { on { appTasks } doReturn listOf(mockTask) }
+
+        val authController = SupervisionAuthController.getInstance(mockContext)
+        authController.startSession(TASK_ID)
+        authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
+        assertThat(authController.isSessionActive(TASK_ID)).isTrue()
+
+        mockTask.stub { on { taskInfo } doReturn NOT_FOCUSED_SUPERVISION_DASHBOARD_TASK_INFO }
+        authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
+        assertThat(authController.isSessionActive(TASK_ID)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_AUTH_CONTROLLER_UPDATES)
+    fun taskNotRunning_sessionInvalidated() {
+        val mockTask =
+            mock<ActivityManager.AppTask>().stub {
+                on { taskInfo } doReturn FOCUSED_SUPERVISION_DASHBOARD_TASK_INFO
+            }
+        mockActivityManager.stub { on { appTasks } doReturn listOf(mockTask) }
+
+        val authController = SupervisionAuthController.getInstance(mockContext)
+        authController.startSession(TASK_ID)
+        authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
+        assertThat(authController.isSessionActive(TASK_ID)).isTrue()
+
+        mockTask.stub { on { taskInfo } doReturn NOT_RUNNING_SUPERVISION_DASHBOARD_TASK_INFO }
         authController.mTaskStackListener.onTaskStackChanged()
         ShadowLooper.idleMainLooper()
         assertThat(authController.isSessionActive(TASK_ID)).isFalse()
@@ -158,7 +208,71 @@ class SupervisionAuthControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_AUTH_CONTROLLER_UPDATES)
     fun supervisionDashboardActivityLosesFocus_sessionInvalidated() {
+        val mockTask =
+            mock<ActivityManager.AppTask>().stub {
+                on { taskInfo } doReturn FOCUSED_SUPERVISION_DASHBOARD_TASK_INFO
+            }
+        mockActivityManager.stub { on { appTasks } doReturn listOf(mockTask) }
+
+        val authController = SupervisionAuthController.getInstance(mockContext)
+        authController.startSession(TASK_ID)
+        authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
+        assertThat(authController.isSessionActive(TASK_ID)).isTrue()
+
+        mockTask.stub { on { taskInfo } doReturn FOCUSED_OTHER_SETTINGS_TASK_INFO }
+        authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
+        assertThat(authController.isSessionActive(TASK_ID)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_AUTH_CONTROLLER_UPDATES)
+    fun supervisionDashboardActivityLosesFocus_sessionValidated() {
+        val mockTask =
+            mock<ActivityManager.AppTask>().stub {
+                on { taskInfo } doReturn FOCUSED_SUPERVISION_DASHBOARD_TASK_INFO
+            }
+        mockActivityManager.stub { on { appTasks } doReturn listOf(mockTask) }
+
+        val authController = SupervisionAuthController.getInstance(mockContext)
+        authController.startSession(TASK_ID)
+        authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
+        assertThat(authController.isSessionActive(TASK_ID)).isTrue()
+
+        mockTask.stub { on { taskInfo } doReturn NOT_FOCUSED_SUPERVISION_DASHBOARD_TASK_INFO }
+        authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
+        assertThat(authController.isSessionActive(TASK_ID)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_AUTH_CONTROLLER_UPDATES)
+    fun supervisionDashboardActivityIsNotRunning_sessionInvalidated() {
+        val mockTask =
+            mock<ActivityManager.AppTask>().stub {
+                on { taskInfo } doReturn FOCUSED_SUPERVISION_DASHBOARD_TASK_INFO
+            }
+        mockActivityManager.stub { on { appTasks } doReturn listOf(mockTask) }
+
+        val authController = SupervisionAuthController.getInstance(mockContext)
+        authController.startSession(TASK_ID)
+        authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
+        assertThat(authController.isSessionActive(TASK_ID)).isTrue()
+
+        mockTask.stub { on { taskInfo } doReturn NOT_RUNNING_SUPERVISION_DASHBOARD_TASK_INFO }
+        authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
+        assertThat(authController.isSessionActive(TASK_ID)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_AUTH_CONTROLLER_UPDATES)
+    fun supervisionDashboardActivityIsRemoved_sessionInvalidated() {
         val mockTask =
             mock<ActivityManager.AppTask>().stub {
                 on { taskInfo } doReturn FOCUSED_SUPERVISION_DASHBOARD_TASK_INFO
@@ -209,6 +323,17 @@ class SupervisionAuthControllerTest {
             ActivityManager.RecentTaskInfo().apply {
                 taskId = TASK_ID
                 isRunning = true
+                isFocused = false
+                topActivity =
+                    ComponentName(
+                        "com.android.settings",
+                        SupervisionDashboardActivity::class.java.name,
+                    )
+            }
+        val NOT_RUNNING_SUPERVISION_DASHBOARD_TASK_INFO =
+            ActivityManager.RecentTaskInfo().apply {
+                taskId = TASK_ID
+                isRunning = false
                 isFocused = false
                 topActivity =
                     ComponentName(

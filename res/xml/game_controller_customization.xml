@@ -14,11 +14,19 @@
   limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="game_controller_remapping">
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:title="@string/game_controller_remapping_settings_intro"
+        android:persistent="false"
+        android:selectable="false"/>
+
     <PreferenceCategory
         android:key="game_controller_key_remapping"
-        android:title="@string/game_controller_key_remapping">
+        android:title="@string/game_controller_key_remapping_category">
 
         <Preference
             android:icon="@drawable/ic_controller_button_a"
@@ -64,7 +72,7 @@
 
     <PreferenceCategory
         android:key="game_controller_axis_remapping"
-        android:title="@string/game_controller_stick_remapping">
+        android:title="@string/game_controller_stick_remapping_category">
 
         <Preference
             android:icon="@drawable/ic_controller_dpad"
@@ -79,4 +87,10 @@
             android:key="controller_stick_right"
             android:title="@string/game_controller_stick_right" />
     </PreferenceCategory>
+
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="reset_to_default"
+        android:title="@string/game_controller_remapping_reset_preference_title"
+        app:buttonPreferenceSize="large"
+        app:buttonPreferenceType="tonal" />
 </PreferenceScreen>

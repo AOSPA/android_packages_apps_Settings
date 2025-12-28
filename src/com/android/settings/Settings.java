@@ -177,7 +177,6 @@ public class Settings extends SettingsActivity {
     public static class AppLanguageSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the regional preferences settings. */
     public static class RegionSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class RegionalPreferencesActivity extends SettingsActivity { /* empty */ }
     public static class TemperatureUnitSettingsActivity extends SettingsActivity { /* empty */ }
     public static class FirstDayOfWeekSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MeasurementSystemSettingsActivity extends SettingsActivity { /* empty */ }

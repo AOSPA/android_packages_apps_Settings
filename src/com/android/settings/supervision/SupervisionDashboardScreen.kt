@@ -31,6 +31,7 @@ import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceGroup
 import com.android.settings.R
+import com.android.settings.Utils
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.appstorefilters.SupervisionAppStoreFiltersScreen
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
@@ -149,7 +150,7 @@ open class SupervisionDashboardScreen :
         get() = R.drawable.ic_account_child_invert
 
     override val indexable
-        get() = true
+        get() = !Utils.shouldHideSupervisionInDemoMode(lifeCycleContext)
 
     override val keywords: Int
         get() = R.string.keywords_supervision_settings
