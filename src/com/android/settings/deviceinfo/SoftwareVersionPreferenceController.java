@@ -71,5 +71,4 @@ public class SoftwareVersionPreferenceController extends BasePreferenceControlle
     public String getPreferenceKey() {
         return PREF_KEY;
     }
-// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
-}
+}// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements

@@ -35,6 +35,7 @@ import java.util.List;
 /**
  * Preference controller for accessibility button preference.
  */
+// LINT.IfChange
 public class AccessibilityButtonPreferenceController extends BasePreferenceController {
     public AccessibilityButtonPreferenceController(Context context, String key) {
         super(context, key);
@@ -87,3 +88,4 @@ public class AccessibilityButtonPreferenceController extends BasePreferenceContr
         return R.string.accessibility_button_title;
     }
 }
+// LINT.ThenChange(buttonshortcutsetting/ui/ButtonShortcutSettingScreen.kt)

@@ -52,7 +52,6 @@ public class NotificationsPreferenceCategoryControllerTest {
     private AbstractPreferenceController mChildController;
 
     @Before
-    @EnableFlags({Flags.FLAG_DATETIME_NOTIFICATIONS})
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         Context context = RuntimeEnvironment.getApplication();
@@ -62,15 +61,6 @@ public class NotificationsPreferenceCategoryControllerTest {
     }
 
     @Test
-    @DisableFlags({Flags.FLAG_DATETIME_NOTIFICATIONS})
-    public void getAvailabilityStatus_featureDisabled() {
-        when(mChildController.isAvailable()).thenReturn(true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
-    }
-
-    @Test
-    @EnableFlags({Flags.FLAG_DATETIME_NOTIFICATIONS})
     public void getAvailabilityStatus_featureEnabled() {
         when(mChildController.isAvailable()).thenReturn(false);
 

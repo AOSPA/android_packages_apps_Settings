@@ -569,5 +569,4 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         }
         return getSubscriptionInfoFromList(getActiveSubscriptionList(), subId);
     }
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-}
+}// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI

@@ -105,5 +105,5 @@ public class DBReadAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
         return true;
     }
-// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
-}
+
+}// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings

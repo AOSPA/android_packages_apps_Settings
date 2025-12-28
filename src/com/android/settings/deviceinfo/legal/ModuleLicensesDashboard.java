@@ -17,10 +17,15 @@
 package com.android.settings.deviceinfo.legal;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 
+// LINT.IfChange
 public class ModuleLicensesDashboard extends DashboardFragment {
     private static final String TAG = "ModuleLicensesDashboard";
 
@@ -43,4 +48,10 @@ public class ModuleLicensesDashboard extends DashboardFragment {
     public int getHelpResource() {
         return 0;
     }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return ModuleLicensesScreen.KEY;
+    }
 }
+// LINT.ThenChange(ModuleLicensesScreen.kt)
