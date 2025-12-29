@@ -21,6 +21,7 @@ import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.android.settings.utils.putSubId
 import com.android.settings.wifi.calling.WifiCallingSettingsForSub.EXTRA_SUB_ID
 import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.google.common.truth.Truth.assertThat
@@ -31,24 +32,28 @@ class WifiCallingScreenTest : SettingsCatalystTestCase() {
 
     @get:Rule val platformFlags = SetFlagsRule()
 
-    override val preferenceScreenCreator = createScreen(Bundle.EMPTY)
+    private val testSubId = 2737
+
+    override val preferenceScreenCreator =
+        createScreen(Bundle().apply { putSubId(EXTRA_SUB_ID, testSubId) })
 
     override val flagName: String
         get() = Flags.FLAG_CATALYST_WIFI_CALLING
 
-    private val testSubId = 2737
-
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_whenFlagIsTrue_isParsedFromString() {
-        val bundle = Bundle().apply { putString(EXTRA_SUB_ID, testSubId.toString()) }
+        val bundle = Bundle().apply { putSubId(EXTRA_SUB_ID, testSubId) }
         val screen = createScreen(bundle)
 
         assertThat(screen.isAvailable(appContext)).isTrue()
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    @DisableFlags(
+        Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
+        CatalystFlags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+    )
     fun subId_whenFlagIsFalse_andSubIdIsString_getsTheSubIdFromString() {
         val bundle = Bundle().apply { putString(EXTRA_SUB_ID, testSubId.toString()) }
         val screen = createScreen(bundle)
@@ -57,7 +62,10 @@ class WifiCallingScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    @DisableFlags(
+        Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
+        CatalystFlags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+    )
     fun subId_whenFlagIsFalse_isParsedFromInt() {
         val bundle = Bundle().apply { putInt(EXTRA_SUB_ID, testSubId) }
         val screen = createScreen(bundle)
@@ -68,13 +76,17 @@ class WifiCallingScreenTest : SettingsCatalystTestCase() {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_whenFlagIsTrue_andSubIdIsInt_getsTheSubIdFromInt() {
-        val bundle = Bundle().apply { putInt(EXTRA_SUB_ID, testSubId) }
+        val bundle = Bundle().apply { putSubId(EXTRA_SUB_ID, testSubId) }
         val screen = createScreen(bundle)
 
         assertThat(screen.isAvailable(appContext)).isTrue()
     }
 
     @Test
+    @DisableFlags(
+        Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
+        CatalystFlags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+    )
     fun subId_whenKeyIsMissing_fallsBackToDefault() {
         val bundle = Bundle() // No subId in bundle
         val screen = createScreen(bundle)

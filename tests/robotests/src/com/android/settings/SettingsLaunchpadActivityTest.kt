@@ -24,7 +24,9 @@ import androidx.fragment.app.Fragment
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.testutils.shadow.ShadowActivityEmbeddingUtils
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.FixedArrayMap
+import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
 import com.android.settingslib.metadata.PreferenceScreenMetadataFactory
@@ -179,9 +181,8 @@ class SettingsLaunchpadActivityTest {
         val nextActivity = shadowOf(activity).nextStartedActivity
         assertThat(nextActivity).isNotNull()
 
-        assertThat(fakeFactory.receivedBundle).isNotNull()
-        assertThat(fakeFactory.receivedBundle?.getString("test_arg_key"))
-            .isEqualTo("test_arg_value")
+        assertThat(fakeFactory.hasParameters()).isTrue()
+        assertThat(fakeFactory.getParameter("test_arg_key")).isEqualTo("test_arg_value")
 
         val fragmentArgs =
             nextActivity.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
@@ -338,8 +339,10 @@ class SettingsLaunchpadActivityTest {
 
     class FakeParameterizedFactory :
         PreferenceScreenMetadataParameterizedFactory, PreferenceScreenMixin {
-        var receivedBundle: Bundle? = null
         var fragmentClassToReturn: Class<out Fragment>? = TestFragment::class.java
+
+        private var receivedBundle: Bundle? = null
+        private var receivedKeyParameters: ValidatedKeyParameters? = null
 
         override fun create(context: Context, args: Bundle): PreferenceScreenMetadata {
             receivedBundle = args
@@ -368,7 +371,8 @@ class SettingsLaunchpadActivityTest {
             context: Context,
             keyParameters: ValidatedKeyParameters,
         ): PreferenceScreenMetadata {
-            throw NotImplementedError("Not needed for this test")
+            this.receivedKeyParameters = keyParameters
+            return this
         }
 
         override fun getPreferenceHierarchy(
@@ -386,7 +390,21 @@ class SettingsLaunchpadActivityTest {
             throw NotImplementedError("Not needed for this test")
         }
 
-        override val parametersSchema: com.android.settingslib.metadata.KeyParametersSchema
-            get() = throw NotImplementedError("Not needed for this test")
+        override val parametersSchema: KeyParametersSchema
+            get() = KeyParametersSchema { parameter("test_arg_key", "The test argument") }
+
+        fun hasParameters(): Boolean =
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
+                receivedKeyParameters != null
+            } else {
+                receivedBundle != null
+            }
+
+        fun getParameter(key: String): String? =
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
+                receivedKeyParameters?.get(key)
+            } else {
+                receivedBundle?.getString(key)
+            }
     }
 }
