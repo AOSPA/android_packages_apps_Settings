@@ -39,6 +39,7 @@ import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.IntroPreference;
 
 import java.util.List;
+import java.util.concurrent.Future;
 
 /** Settings screen for VPN app exclusion. */
 public class AppExclusionFragment extends SettingsPreferenceFragment
@@ -95,8 +96,9 @@ public class AppExclusionFragment extends SettingsPreferenceFragment
                 new ViewModelProvider(this, mViewModelFactory).get(AppExclusionViewModel.class);
 
         // Set ComparisonCallback so we get better animation when list changes.
-        getPreferenceManager().setPreferenceComparisonCallback(
-                new PreferenceManager.SimplePreferenceComparisonCallback());
+        getPreferenceManager()
+                .setPreferenceComparisonCallback(
+                        new PreferenceManager.SimplePreferenceComparisonCallback());
 
         mSelectedAppsCategory = findPreference(PREF_KEY_EXCLUDED_APPS);
         mCandidateAppsCategory = findPreference(PREF_KEY_CANDIDATE_APPS);
@@ -179,7 +181,6 @@ public class AppExclusionFragment extends SettingsPreferenceFragment
     }
 
     private void setVpnAppInfo() {
-        final PackageManager pm = getContext().getPackageManager();
         String label = mVpnPackage;
         final PackageInfo pkgInfo =
                 AppExclusionUtils.getPackageInfo(getContext(), mUserId, mVpnPackage);
@@ -189,17 +190,17 @@ public class AppExclusionFragment extends SettingsPreferenceFragment
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e(TAG, "Cannot find VPN label for " + mVpnPackage, e);
             }
-            ThreadUtils.postOnBackgroundThread(
-                    () -> {
-                        final Drawable icon =
-                                Utils.getBadgedIcon(getContext(), pkgInfo.applicationInfo);
-                        if (icon != null) {
-                            ThreadUtils.postOnMainThread(() -> mVpnApp.setAppIcon(icon));
-                        } else {
-                            ThreadUtils.postOnMainThread(
-                                    () -> mVpnApp.setAppIcon(pm.getDefaultActivityIcon()));
-                        }
-                    });
+            Future<?> unused =
+                    ThreadUtils.postOnBackgroundThread(
+                            () -> {
+                                // Utils.getBadgedIcon() returns the default icon if the app
+                                // doesn't have one.
+                                final Drawable icon =
+                                        Utils.getBadgedIcon(getContext(), pkgInfo.applicationInfo);
+                                getContext()
+                                        .getMainThreadHandler()
+                                        .post(() -> mVpnApp.setAppIcon(icon));
+                            });
         }
         mVpnApp.setTitle(label);
     }

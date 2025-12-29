@@ -83,8 +83,6 @@ public final class AppExclusionActivity extends CollapsingToolbarBaseActivity {
 
         AppExclusionUtils.removeUninstalledApp(this, userId, vpnPackage);
 
-        setContentView(R.layout.vpn_app_exclusion_activity);
-
         if (savedInstanceState == null) {
             final Fragment fragment = new AppExclusionFragment();
             final Bundle args = new Bundle();
@@ -94,7 +92,7 @@ public final class AppExclusionActivity extends CollapsingToolbarBaseActivity {
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.settings_container, fragment)
+                    .replace(R.id.content_frame, fragment)
                     .commit();
         }
     }
