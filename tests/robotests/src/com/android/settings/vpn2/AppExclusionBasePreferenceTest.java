@@ -80,7 +80,7 @@ public class AppExclusionBasePreferenceTest {
         packageInfo.applicationInfo = new ApplicationInfo();
         packageInfo.applicationInfo.packageName = packageName;
         packageInfo.applicationInfo.name = appName;
-        mShadowPackageManager.addPackage(packageInfo);
+        mShadowPackageManager.installPackage(packageInfo);
     }
 
     @Test
@@ -90,7 +90,7 @@ public class AppExclusionBasePreferenceTest {
                 new AppExclusionCandidatePreference(
                         mContext, PACKAGE_NAME, USER_ID, mActionCallback);
         ShadowLooper.idleMainLooper();
-        assertThat(pref.getTitle()).isEqualTo(APP_LABEL);
+        assertThat(pref.getTitle().toString()).isEqualTo(APP_LABEL);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class AppExclusionBasePreferenceTest {
                 new AppExclusionCandidatePreference(
                         mContext, PACKAGE_NAME, USER_ID, mActionCallback);
         ShadowLooper.idleMainLooper();
-        assertThat(pref.getTitle()).isEqualTo(PACKAGE_NAME);
+        assertThat(pref.getTitle().toString()).isEqualTo(PACKAGE_NAME);
     }
 
     @Test

@@ -32,7 +32,7 @@ public class AppExclusionSelectedPreference extends AppExclusionBasePreference {
 
     @Override
     public int getActionIcon() {
-        return com.android.settings.R.drawable.ic_delete;
+        return R.drawable.ic_delete;
     }
 
     @Override
