@@ -25,7 +25,6 @@ import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.PreferenceChangeReason
@@ -33,7 +32,6 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
-import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
@@ -44,18 +42,13 @@ import org.robolectric.shadows.ShadowBluetoothAdapter
 import org.robolectric.shadows.ShadowLooper
 
 @RunWith(AndroidJUnit4::class)
-@Config(shadows = [ShadowBluetoothAdapter::class, SettingsShadowResources::class])
+@Config(shadows = [ShadowBluetoothAdapter::class])
 class AirplaneModeSyncPreferenceTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val preference = AirplaneModeSyncPreference()
     private val bluetoothAdapter: ShadowBluetoothAdapter =
         Shadow.extract(BluetoothAdapter.getDefaultAdapter())
-
-    @After
-    fun tearDown() {
-        SettingsShadowResources.reset()
-    }
 
     @Test
     fun key_returnsCorrectKey() {
@@ -79,6 +72,21 @@ class AirplaneModeSyncPreferenceTest {
         bluetoothAdapter.setEnabled(false)
 
         assertThat(preference.isEnabled(context)).isFalse()
+    }
+
+    @Test
+    fun getSummary_whenBluetoothEnabled_returnsNull() {
+        bluetoothAdapter.setEnabled(true)
+
+        assertThat(preference.getSummary(context)).isNull()
+    }
+
+    @Test
+    fun getSummary_whenBluetoothDisabled_returnsBluetoothOffSummary() {
+        bluetoothAdapter.setEnabled(false)
+
+        assertThat(preference.getSummary(context))
+            .isEqualTo(context.getString(R.string.apm_sync_bluetooth_off_summary))
     }
 
     @Test
