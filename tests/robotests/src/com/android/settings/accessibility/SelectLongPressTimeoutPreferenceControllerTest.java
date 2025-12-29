@@ -48,7 +48,7 @@ public class SelectLongPressTimeoutPreferenceControllerTest {
     public void setUp() {
         mController = new SelectLongPressTimeoutPreferenceController(mContext, "press_timeout");
         mPreference = new ListPreference(mContext);
-        mPreference.setEntries(R.array.long_press_timeout_selector_titles);
+        mPreference.setEntries(R.array.long_press_timeout_selector_list_titles);
         mPreference.setEntryValues(R.array.long_press_timeout_selector_values);
         mPreference.setSummary("%s");
     }

@@ -17,18 +17,27 @@
 package com.android.settings.accessibility.actiontimeout.ui
 
 import android.app.settings.SettingsEnums
+import android.content.Context
 import com.android.settings.R
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.actiontimeout.data.ActionTimeoutOptionDataStore
 import com.android.settings.accessibility.actiontimeout.data.ActionTimeoutOptionDataStore.Companion.DISCRETE_TIMEOUT_OPTIONS
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
 import com.google.testing.junit.testparameterinjector.TestParametersValuesProvider
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
+import org.mockito.kotlin.times
+import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestParameterInjector
+import org.robolectric.shadows.ShadowLooper
 
 @RunWith(RobolectricTestParameterInjector::class)
 class ActionTimeoutSettingsScreenTest : SettingsCatalystTestCase() {
@@ -102,6 +111,69 @@ class ActionTimeoutSettingsScreenTest : SettingsCatalystTestCase() {
             .setInt(ActionTimeoutOptionDataStore.INTERACTIVE_UI_TIMEOUT_SETTING_KEY, -100)
 
         assertThat(preferenceScreenCreator.getSummary(appContext)).isNull()
+    }
+
+    @Test
+    fun onCreate_shownAsEntrypoint_settingChanges_notifyPrefChange() {
+        val mockLifecycleContext =
+            mock<PreferenceLifecycleContext> {
+                on { preferenceScreenKey } doReturn "other_screen_key"
+            }
+
+        preferenceScreenCreator.onCreate(mockLifecycleContext)
+        SettingsSecureStore.get(appContext)
+            .setInt(ActionTimeoutOptionDataStore.INTERACTIVE_UI_TIMEOUT_SETTING_KEY, 10000)
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
+
+        verify(mockLifecycleContext, times(1))
+            .notifyPreferenceChange(preferenceScreenCreator.bindingKey)
+    }
+
+    @Test
+    fun onCreate_shownAsContainer_settingChanges_doNotNotifyPrefChange() {
+        val mockLifecycleContext =
+            mock<PreferenceLifecycleContext> {
+                on { preferenceScreenKey } doReturn preferenceScreenCreator.key
+            }
+
+        preferenceScreenCreator.onCreate(mockLifecycleContext)
+        SettingsSecureStore.get(appContext)
+            .setInt(ActionTimeoutOptionDataStore.INTERACTIVE_UI_TIMEOUT_SETTING_KEY, 10000)
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
+
+        verify(mockLifecycleContext, never()).notifyPreferenceChange(any())
+    }
+
+    @Test
+    fun onDestroy_shownAsEntryPoint_settingChanges_doNotNotifyPrefChange() {
+        val mockLifecycleContext =
+            mock<PreferenceLifecycleContext> {
+                on { preferenceScreenKey } doReturn "other_screen_key"
+            }
+        preferenceScreenCreator.onCreate(mockLifecycleContext)
+        preferenceScreenCreator.onDestroy(mockLifecycleContext)
+
+        SettingsSecureStore.get(appContext)
+            .setInt(ActionTimeoutOptionDataStore.INTERACTIVE_UI_TIMEOUT_SETTING_KEY, 10000)
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
+
+        verify(mockLifecycleContext, never()).notifyPreferenceChange(any())
+    }
+
+    @Test
+    fun onDestroy_shownAsContainer_settingChanges_doNotNotifyPrefChange() {
+        val mockLifecycleContext =
+            mock<PreferenceLifecycleContext> {
+                on { preferenceScreenKey } doReturn preferenceScreenCreator.key
+            }
+        preferenceScreenCreator.onCreate(mockLifecycleContext)
+        preferenceScreenCreator.onDestroy(mockLifecycleContext)
+
+        SettingsSecureStore.get(appContext)
+            .setInt(ActionTimeoutOptionDataStore.INTERACTIVE_UI_TIMEOUT_SETTING_KEY, 10000)
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
+
+        verify(mockLifecycleContext, never()).notifyPreferenceChange(any())
     }
 
     private object TimeoutOptionsProvider : TestParametersValuesProvider() {

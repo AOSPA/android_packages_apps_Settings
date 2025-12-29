@@ -70,6 +70,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_timing_controls_screen"
+  namespace: "accessibility"
+  description: "Migrate timing controls screen to Catalyst infrastructure"
+  bug: "440381971"
+}
+
+flag {
   name: "check_prebundled_is_preinstalled"
   namespace: "accessibility"
   description: "Checks that all 'prebundled' components, used for grouping, are also preinstalled"
