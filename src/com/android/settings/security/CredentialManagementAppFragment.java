@@ -28,6 +28,7 @@ import com.android.settingslib.search.SearchIndexable;
  * Settings fragment containing the credential management app. The credential management app has
  * the ability to manage the user's credentials on unmanaged devices.
  */
+// LINT.IfChange
 @SearchIndexable
 public class CredentialManagementAppFragment extends DashboardFragment {
 
@@ -57,3 +58,4 @@ public class CredentialManagementAppFragment extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.credential_management_app_fragment);
 }
+// LINT.ThenChange(CredentialManagementAppScreenApi.kt)
