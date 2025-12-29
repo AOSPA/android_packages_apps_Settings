@@ -21,9 +21,7 @@ import android.os.SystemProperties;
 import android.text.TextUtils;
 
 import com.android.settings.R;
-// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 import com.android.settings.Utils;
-// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 import com.android.settings.core.BasePreferenceController;
 
 // LINT.IfChange
@@ -46,14 +44,12 @@ public class HardwareRevisionPreferenceController extends BasePreferenceControll
 
     @Override
     public CharSequence getSummary() {
-// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
         if (Utils.isSupportCTPA(mContext)) {
             String hardwareVersion = Utils.getString(mContext, Utils.KEY_HARDWARE_VERSION);
             if (null != hardwareVersion && !hardwareVersion.isEmpty()) {
                 return hardwareVersion;
             }
         }
-// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
         return SystemProperties.get("ro.boot.hardware.revision");
     }
 }

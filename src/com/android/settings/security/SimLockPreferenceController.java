@@ -113,14 +113,10 @@ public class SimLockPreferenceController extends BasePreferenceController {
                     .createForSubscriptionId(subInfo.getSubscriptionId());
             final PersistableBundle bundle = mCarrierConfigManager.getConfigForSubId(
                     subInfo.getSubscriptionId());
-// QTI_BEGIN: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
             final int simState = mTelephonyManager.getSimState(subInfo.getSimSlotIndex());
-// QTI_END: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
             if (telephonyManager.hasIccCard() && bundle != null
-// QTI_BEGIN: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
                     && !bundle.getBoolean(CarrierConfigManager.KEY_HIDE_SIM_LOCK_SETTINGS_BOOL)
                     && (simState != TelephonyManager.SIM_STATE_NOT_READY)) {
-// QTI_END: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
                 // one or more sims show sim lock setting UI.
                 return false;
             }

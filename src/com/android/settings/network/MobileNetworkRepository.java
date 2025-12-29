@@ -51,9 +51,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-// QTI_BEGIN: 2023-06-15: Telephony: Make below HashMap as ConcurrentHashMap
 import java.util.concurrent.ConcurrentHashMap;
-// QTI_END: 2023-06-15: Telephony: Make below HashMap as ConcurrentHashMap
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -84,12 +82,10 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private AirplaneModeObserver mAirplaneModeObserver;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private Map<Integer, SubscriptionInfo> mSubscriptionInfoMap = new ArrayMap<>();
-// QTI_BEGIN: 2023-06-15: Telephony: Make below HashMap as ConcurrentHashMap
     private ConcurrentHashMap<Integer, TelephonyManager> mTelephonyManagerMap =
             new ConcurrentHashMap<>();
     private ConcurrentHashMap<Integer, PhoneCallStateTelephonyCallback> mTelephonyCallbackMap =
             new ConcurrentHashMap<>();
-// QTI_END: 2023-06-15: Telephony: Make below HashMap as ConcurrentHashMap
 
     @NonNull
     public static MobileNetworkRepository getInstance(Context context) {
@@ -533,20 +529,14 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
     }
 
-// QTI_BEGIN: 2023-05-09: Telephony: Refactor data preference
     public boolean isAnyOngoingCallOnDevice() {
         return mTelephonyCallbackMap.values().stream().anyMatch(value -> !value.isCallIdle());
     }
 
-// QTI_END: 2023-05-09: Telephony: Refactor data preference
     private class PhoneCallStateTelephonyCallback extends TelephonyCallback implements
-// QTI_BEGIN: 2024-10-08: Telephony: Pakala DevSP : Fix for Data preference not greyed out during call
             TelephonyCallback.CallStateListener,
-// QTI_END: 2024-10-08: Telephony: Pakala DevSP : Fix for Data preference not greyed out during call
             TelephonyCallback.UserMobileDataStateListener,
-// QTI_BEGIN: 2024-05-16: Telephony: Fix internet preference update issue
             TelephonyCallback.ActiveDataSubscriptionIdListener {
-// QTI_END: 2024-05-16: Telephony: Fix internet preference update issue
 
         private int mSubId;
 
@@ -554,15 +544,12 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             mSubId = subId;
         }
 
-// QTI_BEGIN: 2023-05-09: Telephony: Refactor data preference
         private int mCallState = TelephonyManager.CALL_STATE_IDLE;
 
         public boolean isCallIdle() {
             return mCallState == TelephonyManager.CALL_STATE_IDLE;
         }
 
-// QTI_END: 2023-05-09: Telephony: Refactor data preference
-// QTI_BEGIN: 2024-10-08: Telephony: Pakala DevSP : Fix for Data preference not greyed out during call
         @Override
         public void onCallStateChanged(int state) {
             Log.d(TAG, "onCallStateChanged state : " + state + " on SUB " + mSubId);
@@ -575,7 +562,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             }
         }
 
-// QTI_END: 2024-10-08: Telephony: Pakala DevSP : Fix for Data preference not greyed out during call
         @Override
         public void onUserMobileDataStateChanged(boolean enabled) {
             Log.d(TAG, "onUserMobileDataStateChanged enabled " + enabled + " on SUB " + mSubId);
@@ -584,13 +570,11 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             });
         }
 
-// QTI_BEGIN: 2024-05-16: Telephony: Fix internet preference update issue
         @Override
         public void onActiveDataSubscriptionIdChanged(int subId) {
             insertAvailableSubInfoToEntity(
                     SubscriptionUtil.getSelectableSubscriptionInfoList(mContext));
         }
-// QTI_END: 2024-05-16: Telephony: Fix internet preference update issue
     }
 
     /**
@@ -611,10 +595,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         default void onAirplaneModeChanged(boolean enabled) {
         }
 
-// QTI_BEGIN: 2023-05-09: Telephony: Refactor data preference
         default void onAnyOngoingCallOnDevice(boolean isAnyCallOngoing) {
         }
-// QTI_END: 2023-05-09: Telephony: Refactor data preference
     }
 
     public void dump(IndentingPrintWriter printwriter) {

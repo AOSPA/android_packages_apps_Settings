@@ -50,9 +50,7 @@ public class WifiTetherSwitchBarController implements
     private final SettingsMainSwitchBar mSwitchBar;
     private final ConnectivityManager mConnectivityManager;
     private final WifiManager mWifiManager;
-// QTI_BEGIN: 2023-07-25: Android_UI: Fix sometimes WiFi tethering multiple restarts if configuration changed.
     private final SoftApCallback mSoftApCallback = new SoftApCallback();
-// QTI_END: 2023-07-25: Android_UI: Fix sometimes WiFi tethering multiple restarts if configuration changed.
 
     @VisibleForTesting
     boolean mIsSwitchBusy;
@@ -85,22 +83,18 @@ public class WifiTetherSwitchBarController implements
     public void onStart() {
         mDataSaverBackend.addListener(this);
         mSwitchBar.addOnSwitchChangeListener(this);
-// QTI_BEGIN: 2023-07-25: Android_UI: Fix sometimes WiFi tethering multiple restarts if configuration changed.
 
         // use callback to replace broadcast
         mWifiManager.registerSoftApCallback(mContext.getApplicationContext().getMainExecutor(),
                 mSoftApCallback);
 
-// QTI_END: 2023-07-25: Android_UI: Fix sometimes WiFi tethering multiple restarts if configuration changed.
         handleWifiApStateChanged(mWifiManager.getWifiApState());
     }
 
     @Override
     public void onStop() {
         mDataSaverBackend.remListener(this);
-// QTI_BEGIN: 2023-07-25: Android_UI: Fix sometimes WiFi tethering multiple restarts if configuration changed.
         mWifiManager.unregisterSoftApCallback(mSoftApCallback);
-// QTI_END: 2023-07-25: Android_UI: Fix sometimes WiFi tethering multiple restarts if configuration changed.
     }
 
     @Override
@@ -168,7 +162,6 @@ public class WifiTetherSwitchBarController implements
     public void onDenylistStatusChanged(int uid, boolean isDenylisted) {
         // we don't care, since we just want to read the value
     }
-// QTI_BEGIN: 2023-07-25: Android_UI: Fix sometimes WiFi tethering multiple restarts if configuration changed.
 
     private class SoftApCallback implements WifiManager.SoftApCallback {
         @Override
@@ -177,5 +170,4 @@ public class WifiTetherSwitchBarController implements
             handleWifiApStateChanged(state);
         }
     }
-// QTI_END: 2023-07-25: Android_UI: Fix sometimes WiFi tethering multiple restarts if configuration changed.
 }

@@ -17,10 +17,8 @@
 package com.android.settings.wifi.tether;
 
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
-// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_OWE;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION;
-// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION;
@@ -56,9 +54,7 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
     public static final String KEY_SECURITY_WPA2_WPA3 = "wifi_hotspot_security_wpa2_wpa3";
     public static final String KEY_SECURITY_WPA2 = "wifi_hotspot_security_wpa2";
     public static final String KEY_SECURITY_NONE = "wifi_hotspot_security_none";
-// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
     public static final String KEY_SECURITY_WPA3_OWE = "wifi_hotspot_security_enhanced_open";
-// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
 
     protected Map<Integer, ViewItem> mViewItemMap = new HashMap<>();
     protected MutableLiveData<List<ViewItem>> mViewInfoListData;
@@ -74,9 +70,7 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
         mViewItemMap.put(SECURITY_TYPE_WPA3_SAE_TRANSITION, new ViewItem(KEY_SECURITY_WPA2_WPA3));
         mViewItemMap.put(SECURITY_TYPE_WPA2_PSK, new ViewItem(KEY_SECURITY_WPA2));
         mViewItemMap.put(SECURITY_TYPE_OPEN, new ViewItem(KEY_SECURITY_NONE));
-// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
         mViewItemMap.put(SECURITY_TYPE_WPA3_OWE, new ViewItem(KEY_SECURITY_WPA3_OWE));
-// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
 
         mWifiHotspotRepository = FeatureFactory.getFeatureFactory().getWifiFeatureProvider()
                 .getWifiHotspotRepository();
@@ -102,14 +96,12 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
     protected void onSecurityTypeChanged(int securityType) {
         log("onSecurityTypeChanged(), securityType:" + securityType);
         for (Map.Entry<Integer, ViewItem> entry : mViewItemMap.entrySet()) {
-// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
             if (entry.getKey() == SECURITY_TYPE_WPA3_OWE &&
                 securityType == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
                 entry.getValue().mIsChecked = true;
             } else {
                 entry.getValue().mIsChecked = entry.getKey().equals(securityType);
             }
-// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
         }
         updateViewItemListData();
     }

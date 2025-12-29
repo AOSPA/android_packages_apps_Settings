@@ -183,9 +183,7 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private CharSequence mInitialTitle;
     private int mInitialTitleResId;
-// QTI_BEGIN: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
     private SmqSettings mSMQ;
-// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
 
     private boolean mBatteryPresent = true;
     private final BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
@@ -299,10 +297,8 @@ public class SettingsActivity extends SettingsBaseActivity
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
 
-// QTI_BEGIN: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
         mSMQ = new SmqSettings(getApplicationContext());
 
-// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = getInitialFragmentName(intent);
 
@@ -736,18 +732,14 @@ public class SettingsActivity extends SettingsBaseActivity
      */
     private void switchToFragment(String fragmentName, Bundle args, boolean validate,
             int titleResId, CharSequence title) {
-// QTI_BEGIN: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
         if (fragmentName.equals(getString(R.string.qtifeedback_intent_action))){
              final Intent newIntent = new Intent(getString(R.string.qtifeedback_intent_action));
              newIntent.addCategory("android.intent.category.DEFAULT");
              startActivity(newIntent);
              finish();
-// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
              return;
-// QTI_BEGIN: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
         }
 
-// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
         Log.d(LOG_TAG, "Switching to fragment " + fragmentName);
 
         if (validate && !isValidFragment(fragmentName)) {
@@ -793,11 +785,9 @@ public class SettingsActivity extends SettingsBaseActivity
                 pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH), isAdmin)
                 || somethingChanged;
 
-// QTI_BEGIN: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
         if(mSMQ.isShowSmqSettings()){
             somethingChanged = setTileEnabled(changedList, new ComponentName(packageName, Settings.SMQQtiFeedbackActivity.class.getName()), mSMQ.isShowSmqSettings(), isAdmin) || somethingChanged;
         }
-// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
 
         // Enable DataUsageSummaryActivity if the data plan feature flag is turned on otherwise
         // enable DataPlanUsageSummaryActivity.

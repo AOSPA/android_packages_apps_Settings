@@ -359,9 +359,7 @@ public class WifiCallingSettingsForSub extends DashboardFragment
         final CarrierConfigManager configManager = (CarrierConfigManager)
                 getSystemService(Context.CARRIER_CONFIG_SERVICE);
         boolean isWifiOnlySupported = true;
-// QTI_BEGIN: 2021-04-07: Telephony: Ims: Add suppport for "Ims Preferred" WFC Preference
         boolean isImsPreferredSupported = false;
-// QTI_END: 2021-04-07: Telephony: Ims: Add suppport for "Ims Preferred" WFC Preference
 
         if (configManager != null) {
             final PersistableBundle b = configManager.getConfigForSubId(mSubId);
@@ -378,10 +376,8 @@ public class WifiCallingSettingsForSub extends DashboardFragment
                 mOverrideWfcRoamingModeWhileUsingNtn = b.getBoolean(
                         CarrierConfigManager.KEY_OVERRIDE_WFC_ROAMING_MODE_WHILE_USING_NTN_BOOL,
                         true);
-// QTI_BEGIN: 2021-04-07: Telephony: Ims: Add suppport for "Ims Preferred" WFC Preference
                 isImsPreferredSupported = b.getBoolean(
                         CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_IMS_PREFERRED_BOOL, false);
-// QTI_END: 2021-04-07: Telephony: Ims: Add suppport for "Ims Preferred" WFC Preference
             }
         }
 
@@ -392,13 +388,10 @@ public class WifiCallingSettingsForSub extends DashboardFragment
         mButtonWfcRoamingMode.setDialogTitle(
                 res.getString(R.string.wifi_calling_roaming_mode_dialog_title));
 
-// QTI_BEGIN: 2021-04-07: Telephony: Ims: Add suppport for "Ims Preferred" WFC Preference
         Log.d(TAG, "isWifiOnlySupported = " + isWifiOnlySupported + " isImsPreferredSupported = "
                 + isImsPreferredSupported);
 
-// QTI_END: 2021-04-07: Telephony: Ims: Add suppport for "Ims Preferred" WFC Preference
         if (isWifiOnlySupported) {
-// QTI_BEGIN: 2021-04-07: Telephony: Ims: Add suppport for "Ims Preferred" WFC Preference
             if (isImsPreferredSupported) {
                 mButtonWfcMode.setEntries(res.getStringArray(
                         R.array.wifi_calling_mode_choices_with_ims_preferred));
@@ -429,9 +422,7 @@ public class WifiCallingSettingsForSub extends DashboardFragment
                 mButtonWfcRoamingMode.setEntrySummaries(
                         res.getStringArray(R.array.wifi_calling_mode_summaries));
             }
-// QTI_END: 2021-04-07: Telephony: Ims: Add suppport for "Ims Preferred" WFC Preference
         } else {
-// QTI_BEGIN: 2021-04-07: Telephony: Ims: Add suppport for "Ims Preferred" WFC Preference
             if (isImsPreferredSupported) {
                 mButtonWfcMode.setEntries(res.getStringArray(
                         R.array.wifi_calling_mode_choices_without_wifi_only_with_ims_preferred));
@@ -463,7 +454,6 @@ public class WifiCallingSettingsForSub extends DashboardFragment
                 mButtonWfcRoamingMode.setEntrySummaries(
                         res.getStringArray(R.array.wifi_calling_mode_summaries_without_wifi_only));
             }
-// QTI_END: 2021-04-07: Telephony: Ims: Add suppport for "Ims Preferred" WFC Preference
         }
 
         // NOTE: Buttons will be enabled/disabled in mTelephonyCallback
@@ -751,11 +741,9 @@ public class WifiCallingSettingsForSub extends DashboardFragment
                 case ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED:
                     resId = com.android.internal.R.string.wfc_mode_wifi_preferred_summary;
                     break;
-// QTI_BEGIN: 2021-04-07: Telephony: Ims: Add suppport for "Ims Preferred" WFC Preference
                 case ImsConfig.WfcModeFeatureValueConstants.IMS_PREFERRED:
                     resId = com.android.internal.R.string.wfc_mode_ims_preferred_summary;
                     break;
-// QTI_END: 2021-04-07: Telephony: Ims: Add suppport for "Ims Preferred" WFC Preference
                 default:
                     Log.e(TAG, "Unexpected WFC mode value: " + wfcMode);
             }

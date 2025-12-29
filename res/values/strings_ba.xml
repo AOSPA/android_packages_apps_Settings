@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_BEGIN: 2024-05-22: WConnect/BTHOST: Xpan : Add Xpan UI switch-->
-<!-- QTI_END: 2024-05-22: WConnect/BTHOST: Xpan : Add Xpan UI switch-->
 <!--
 Copyright (c) 2020, The Linux Foundation. All rights reserved.
 
@@ -37,264 +31,104 @@ Changes from Qualcomm Innovation Center are provided under the following license
 Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
 SPDX-License-Identifier: BSD-3-Clause-Clear
 -->
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_search_broadcasters">Search Broadcasters</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_bcast_rcvr_device_name">Broadcast receiver</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_selection_options_detail_title">
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
          Configure Broadcast receiver</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_selection_options_detail" product="default">Broadcast source "
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
         <xliff:g id="device_name">%1$s</xliff:g> is being added to receiver.
         (Leave Broadcast PIN blank if
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
         It is Unencrypted broadcast Source)"</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_grp_source_selection_options_detail" product="default">
        Broadcast source "
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        <xliff:g id="device_name">%1$s</xliff:g> is being added to the connected group members.
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        (Leave Broadcast PIN blank if It is Unencrypted broadcast Source)"</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_col_source_selection_options_detail" product="default">
        Broadcast source "
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        <xliff:g id="device_name">%1$s</xliff:g> is being added to receiver"</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_col_grp_source_selection_options_detail" product="default">
        Broadcast source "
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        <xliff:g id="device_name">%1$s</xliff:g> is being added to the connected
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        group members."</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_search_bcast_sources_pref_title">Search Broadcast
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
      sources</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_scan_source_title">Scan for Broadcast sources
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
      for</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="added_sources_title">Broadcast sources</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="add_source_button_text">Add Broadcast Source</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="update_sourceinfo_btn_txt">Update Source Info</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="remove_sourceinfo_btn_txt">Remove Source Info</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="source_info_details_title">Broadcast source Information</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bcast_source_info_sid">Broadcast Source Id</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bcast_source_address">Broadcast Source Device</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bcast_source_enc_status">Encryption Status</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bcast_source_metadata">Metadata</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bcast_metadata_sync_state">Metadata Sync status</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bcast_enable_metadata_sync">Metadata sync</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bcast_audio_sync_state">Audio Sync status</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bcast_enable_audio_sync">Audio sync</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bcast_update_code_title">Update Broadcast code</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bcast_update_code_summary">Add broadcast code here, and click
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        Update Broadcast Source Info</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bcast_info_update">Update Source Info</string>
     <string name="added_sources_dashboard_title">Added Broadcast Sources</string>
-<!-- QTI_BEGIN: 2021-02-03: Bluetooth: VCP: Settings App changes-->
-<!-- QTI_END: 2021-02-03: Bluetooth: VCP: Settings App changes-->
     <string name="bcast_sink_volume_title">Broadcast sink volume</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="group_update_source_title">Update to all Group members?</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="group_update_source_message">Do you want to Update this source
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        in all group members?</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="group_remove_source_title">Remove from all Group members?</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="group_remove_source_message">Do you want to remove this Broadcast source from
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
         all group members?</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_selection_error_message">Invalid Broadcast
         source selected for Receiver
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        <xliff:g id="device_name">%1$s</xliff:g>.</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_selection_error_src_unavail_message">selected
        source for receiver
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        <xliff:g id="device_name">%1$s</xliff:g>. is Unavailable </string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_addition_error_message">Couldn\'t add the
        Broadcast source to receiver
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        <xliff:g id="device_name">%1$s</xliff:g>.</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_dup_addition_error_message">Couldn\'t add
        the Broadcast
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        source to receiver <xliff:g id="device_name">%1$s</xliff:g>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        . Duplicate source</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_no_empty_slot_error_message">Consider removing
        some source
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        from receiver <xliff:g id="device_name">%1$s</xliff:g>. No empty slot</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_update_error_message">
        Couldn\'t update Broadcast source
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        details of receiver <xliff:g id="device_name">%1$s</xliff:g>.</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_update_invalid_group_op">
        Couldn\'t update the Broadcast
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        Source from <xliff:g id="device_name">%1$s</xliff:g>.Invalid Group operation,
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        Try non-Group operation</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_update_invalid_src_id">
        Couldn\'t update the Broadcast Source from
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        <xliff:g id="device_name">%1$s</xliff:g>.Invalid Source Id</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_setpin_error_message">
        Couldn\'t update the Broadcast PIN code for
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        <xliff:g id="device_name">%1$s</xliff:g>.</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_removal_error_message">
        Couldn\'t remove the Broadcast Source from
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        <xliff:g id="device_name">%1$s</xliff:g>.</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_remove_invalid_group_op">
        Couldn\'t remove the Broadcast Source from
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        <xliff:g id="device_name">%1$s</xliff:g>.Invalid Group operation,
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        Try non-Group operation</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_remove_invalid_src_id">
        Couldn\'t remove the Broadcast Source from
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        <xliff:g id="device_name">%1$s</xliff:g>.Invalid Source Id</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string name="bluetooth_source_added_message">Broadcast source added
        successfully to receiver
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
        <xliff:g id="device_name">%1$s</xliff:g>.</string>
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
     <string-array name="bcast_channel_selection">
     </string-array>
-<!-- QTI_BEGIN: 2022-04-22: Bluetooth: Bluetooth BASS: Add metadata and audio synced strings to resource file-->
-<!-- QTI_END: 2022-04-22: Bluetooth: Bluetooth BASS: Add metadata and audio synced strings to resource file-->
     <string name="metadata_synced">Metadata Synced</string>
-<!-- QTI_BEGIN: 2022-04-22: Bluetooth: Bluetooth BASS: Add metadata and audio synced strings to resource file-->
-<!-- QTI_END: 2022-04-22: Bluetooth: Bluetooth BASS: Add metadata and audio synced strings to resource file-->
     <string name="metadata_not_synced">Metadata not synced</string>
-<!-- QTI_BEGIN: 2022-04-22: Bluetooth: Bluetooth BASS: Add metadata and audio synced strings to resource file-->
-<!-- QTI_END: 2022-04-22: Bluetooth: Bluetooth BASS: Add metadata and audio synced strings to resource file-->
     <string name="audio_synced">Audio Synced</string>
     <string name="audio_not_synced">Audio not synced</string>
-<!-- QTI_BEGIN: 2024-05-22: WConnect/BTHOST: Xpan : Add Xpan UI switch-->
-<!-- QTI_END: 2024-05-22: WConnect/BTHOST: Xpan : Add Xpan UI switch-->
     <string name="bluetooth_xpan_devoption_title">XPAN</string>
-<!-- QTI_BEGIN: 2024-05-22: WConnect/BTHOST: Xpan : Add Xpan UI switch-->
-<!-- QTI_END: 2024-05-22: WConnect/BTHOST: Xpan : Add Xpan UI switch-->
     <string name="bluetooth_xpan_devoption_description">Extended Personal Area Network</string>
 
-<!-- QTI_BEGIN: 2021-01-15: Bluetooth: Add BC support-->
-<!-- QTI_END: 2021-01-15: Bluetooth: Add BC support-->
 </resources>

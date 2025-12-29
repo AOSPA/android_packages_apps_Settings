@@ -66,14 +66,12 @@
 -keepclasseswithmembers class * extends com.android.settings.slices.SliceBackgroundWorker {
     public <init>(android.content.Context, android.net.Uri);
 }
-#  QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 
 # Keep ImsConnector members for FeatureConnector.Listener<ImsManager>
 -keep class com.android.settings.deviceinfo.ImsConnector {
     *;
 }
 
-#  QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 # Keep the com.android.settings.media_drm.FakeFeatureFlagsImpl
 -keep class com.android.settings.media_drm.FakeFeatureFlagsImpl { *; }
 

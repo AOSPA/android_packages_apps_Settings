@@ -1,4 +1,3 @@
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
 /*
  * Copyright (C) 2019 The Android Open Source Project
  *
@@ -20,32 +19,16 @@ package com.android.settings.network.telephony;
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
 import android.content.BroadcastReceiver;
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
 import android.content.Context;
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
 import android.content.Intent;
 import android.content.IntentFilter;
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
 import android.os.Handler;
 import android.os.Looper;
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
 import android.telephony.ServiceState;
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
 import android.util.Log;
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
 
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -54,42 +37,24 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
 import com.android.internal.telephony.TelephonyIntents;
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.network.MobileDataContentObserver;
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
 import com.android.settings.network.RoamingPreferenceContentObserver;
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
 import com.android.settings.network.SubscriptionsChangeListener;
 
 public class DataDuringCallsPreferenceController extends TelephonyTogglePreferenceController
         implements LifecycleObserver,
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
     private static final String TAG = "DataDuringCallsPreferenceController";
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
 
     private SwitchPreference mPreference;
     private SubscriptionsChangeListener mChangeListener;
     private TelephonyManager mManager;
     private MobileDataContentObserver mMobileDataContentObserver;
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
     private RoamingPreferenceContentObserver mRoamingPreferenceContentObserver;
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
     private PreferenceScreen mScreen;
 
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
     private final BroadcastReceiver mDefaultDataChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -101,8 +66,6 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
         }
     };
 
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
     public DataDuringCallsPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
@@ -115,11 +78,7 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
         Log.d(TAG, "onResume");
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
         if (mChangeListener == null) {
             mChangeListener = new SubscriptionsChangeListener(mContext, this);
         }
@@ -130,8 +89,6 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
             mMobileDataContentObserver.setOnMobileDataChangedListener(() -> refreshPreference());
         }
         mMobileDataContentObserver.register(mContext, mSubId);
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
 
         if (mRoamingPreferenceContentObserver == null) {
             mRoamingPreferenceContentObserver = new RoamingPreferenceContentObserver(
@@ -140,31 +97,17 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
                     () -> refreshPreference());
         }
         mRoamingPreferenceContentObserver.register(mContext, mSubId);
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
         final int defaultDataSub = SubscriptionManager.getDefaultDataSubscriptionId();
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
 
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
         if (defaultDataSub != mSubId) {
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
             // Listen to mobile data status of DDS on non-DDS SUB
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
             mMobileDataContentObserver.register(mContext, defaultDataSub);
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
 
             // Listen to roaming UI status of DDS on non-DDS SUB
             mRoamingPreferenceContentObserver.register(mContext, defaultDataSub);
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
         }
         mContext.registerReceiver(mDefaultDataChangedReceiver,
                 new IntentFilter(TelephonyIntents.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED));
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
     }
 
     @OnLifecycleEvent(ON_PAUSE)
@@ -175,16 +118,10 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
         if (mMobileDataContentObserver != null) {
             mMobileDataContentObserver.unRegister(mContext);
         }
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
         if (mRoamingPreferenceContentObserver != null) {
             mRoamingPreferenceContentObserver.unRegister(mContext);
         }
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
         mContext.unregisterReceiver(mDefaultDataChangedReceiver);
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
     }
 
     @Override
@@ -196,13 +133,9 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
 
     @Override
     public boolean isChecked() {
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
         if (mManager == null) {
             return false;
         }
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
         return mManager.isMobileDataPolicyEnabled(
                 TelephonyManager.MOBILE_DATA_POLICY_DATA_ON_NON_DEFAULT_DURING_VOICE_CALL);
     }
@@ -222,18 +155,12 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
 
     @Override
     public int getAvailabilityStatus(int subId) {
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
         Log.d(TAG, "getAvailabilityStatus : subId = " + subId);
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
         if (!SubscriptionManager.isValidSubscriptionId(subId)
                 || SubscriptionManager.getDefaultDataSubscriptionId() == subId
                 || (!hasMobileData())) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
         if (mManager == null) {
             return CONDITIONALLY_UNAVAILABLE;
         }
@@ -246,8 +173,6 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
             return CONDITIONALLY_UNAVAILABLE;
         }
 
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
         boolean isRoamingStateEnabled = mManager.createForSubscriptionId(
                 SubscriptionManager.getDefaultDataSubscriptionId()).isDataRoamingEnabled();
 
@@ -269,23 +194,17 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
             return CONDITIONALLY_UNAVAILABLE;
         }
 
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
-// QTI_BEGIN: 2023-01-12: Telephony: Add value-adds on data during call
         if (TelephonyUtils.isSubsidyFeatureEnabled(mContext) &&
                 !TelephonyUtils.isSubsidySimCard(mContext,
                 SubscriptionManager.getSlotIndex(mSubId))) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-// QTI_END: 2023-01-12: Telephony: Add value-adds on data during call
-// QTI_BEGIN: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
 
         if (!TelephonyUtils.isSmartDdsSwitchFeatureAvailable()) {
             Log.d(TAG, "Smart DDS switch feature is not available");
             return CONDITIONALLY_UNAVAILABLE;
         }
 
-// QTI_END: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
         return AVAILABLE;
     }
 
@@ -311,14 +230,9 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
      */
     @VisibleForTesting
     public void refreshPreference() {
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
         Log.d(TAG, "refreshPreference");
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
-// QTI_BEGIN: 2023-01-04: Telephony: Revert auto data switch UI
         if (mScreen != null) {
             super.displayPreference(mScreen);
         }
     }
 }
-// QTI_END: 2023-01-04: Telephony: Revert auto data switch UI

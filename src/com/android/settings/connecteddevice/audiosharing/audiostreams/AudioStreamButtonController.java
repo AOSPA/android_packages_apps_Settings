@@ -20,10 +20,8 @@ import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssista
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.STREAMING;
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.getLocalSourceState;
 
-// QTI_BEGIN: 2025-04-07: Bluetooth: Make sure scanning is enabled before adding source
 import static java.util.Collections.emptyList;
 
-// QTI_END: 2025-04-07: Bluetooth: Make sure scanning is enabled before adding source
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
@@ -58,9 +56,7 @@ public class AudioStreamButtonController extends BasePreferenceController
     private static final String TAG = "AudioStreamButtonController";
     private static final String KEY = "audio_stream_button";
     private static final int SOURCE_ORIGIN_REPOSITORY = SourceOriginForLogging.REPOSITORY.ordinal();
-// QTI_BEGIN: 2025-04-07: Bluetooth: Make sure scanning is enabled before adding source
     private static final boolean DEBUG = BluetoothUtils.D;
-// QTI_END: 2025-04-07: Bluetooth: Make sure scanning is enabled before adding source
 
     @VisibleForTesting
     final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
@@ -180,14 +176,12 @@ public class AudioStreamButtonController extends BasePreferenceController
                             ThreadUtils.postOnBackgroundThread(
                                     () -> {
                                         mAudioStreamsHelper.removeSource(mBroadcastId);
-// QTI_BEGIN: 2025-04-07: Bluetooth: Make sure scanning is enabled before adding source
                                         if (mLeBroadcastAssistant.isSearchInProgress()) {
                                             if (DEBUG) {
                                                 Log.d(TAG, "Search is in progress, stop scanning");
                                             }
                                             mLeBroadcastAssistant.stopSearchingForSources();
                                         }
-// QTI_END: 2025-04-07: Bluetooth: Make sure scanning is enabled before adding source
                                         mMetricsFeatureProvider.action(
                                                 mContext,
                                                 SettingsEnums
@@ -219,14 +213,12 @@ public class AudioStreamButtonController extends BasePreferenceController
                                                 mAudioStreamsRepository.getSavedMetadata(
                                                         mContext, mBroadcastId);
                                         if (metadata != null) {
-// QTI_BEGIN: 2025-04-07: Bluetooth: Make sure scanning is enabled before adding source
                                             if (!mLeBroadcastAssistant.isSearchInProgress()) {
                                                 if (DEBUG) {
                                                      Log.d(TAG, "Start scanning before addSource");
                                                 }
                                                 mLeBroadcastAssistant.startSearchingForSources(emptyList());
                                             }
-// QTI_END: 2025-04-07: Bluetooth: Make sure scanning is enabled before adding source
                                             mAudioStreamsHelper.addSource(metadata);
                                             mMetricsFeatureProvider.action(
                                                     mContext,

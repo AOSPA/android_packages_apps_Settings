@@ -75,7 +75,6 @@ public class MobileDataSlice implements CustomSliceable {
     public MobileDataSlice(Context context) {
         mContext = context;
         mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
-// QTI_BEGIN: 2021-09-08: Android_UI: Settings: Fix mobile data slice switches back to previous status during changing
 
         // Fix: make sure using the same subId when get and set mobile data status
         final int defaultSubId = getDefaultSubscriptionId(mSubscriptionManager);
@@ -85,7 +84,6 @@ public class MobileDataSlice implements CustomSliceable {
         } else {
             mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         }
-// QTI_END: 2021-09-08: Android_UI: Settings: Fix mobile data slice switches back to previous status during changing
     }
 
     @Override

@@ -197,14 +197,12 @@ public final class BluetoothPairingService extends Service {
         String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
         if (TextUtils.isEmpty(name)) {
             BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-// QTI_BEGIN: 2021-08-02: WConnect/BTHOST: BLE: Showing device address in pop up when remote name is unknown
             if (device != null) {
                 name = device.getAlias() != null ? device.getAlias():
                     device.getAddress();
             } else {
                 name = res.getString(android.R.string.unknownName);
             }
-// QTI_END: 2021-08-02: WConnect/BTHOST: BLE: Showing device address in pop up when remote name is unknown
         }
 
         Log.d(TAG, "Show pairing notification for " + " (" + name + ")");

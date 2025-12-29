@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-// QTI_BEGIN: 2024-06-13: Telephony: Display primary IMEI information
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
  *
@@ -22,20 +21,15 @@
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
-// QTI_END: 2024-06-13: Telephony: Display primary IMEI information
 package com.android.settings.network.telephony
 
 import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
-// QTI_BEGIN: 2024-06-13: Telephony: Display primary IMEI information
 import android.text.TextUtils;
-// QTI_END: 2024-06-13: Telephony: Display primary IMEI information
 import android.util.Log
-// QTI_BEGIN: 2024-06-13: Telephony: Display primary IMEI information
 import android.util.Pair;
-// QTI_END: 2024-06-13: Telephony: Display primary IMEI information
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -52,9 +46,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionInfoListViewModel
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spaprivileged.framework.common.userManager
-// QTI_BEGIN: 2024-06-13: Telephony: Display primary IMEI information
 import com.qti.extphone.QtiImeiInfo;
-// QTI_END: 2024-06-13: Telephony: Display primary IMEI information
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -76,7 +68,6 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
     private var imei = String()
     private var title = String()
     private var imeiList: List<String> = listOf<String>()
-// QTI_BEGIN: 2024-06-13: Telephony: Display primary IMEI information
     private var qtiImeiInfo: Array<QtiImeiInfo?>? = null
 
     private val isMinHalVersion2_1: Boolean
@@ -86,7 +77,6 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
             val halVersion = makeRadioVersion(radioVersion.first, radioVersion.second)
             return halVersion > makeRadioVersion(2, 0)
         }
-// QTI_END: 2024-06-13: Telephony: Display primary IMEI information
 
     fun init(fragment: Fragment, subId: Int) {
         init(fragment, subId, mContext.getImeiList)
@@ -101,10 +91,8 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
                 .getSystemService(TelephonyManager::class.java)
                 ?.createForSubscriptionId(mSubId)!!
         this.imeiList = imeiList
-// QTI_BEGIN: 2024-06-13: Telephony: Display primary IMEI information
         simSlot = mTelephonyManager.slotIndex
         TelephonyUtils.connectExtTelephonyService(mContext)
-// QTI_END: 2024-06-13: Telephony: Display primary IMEI information
     }
 
     override fun getAvailabilityStatus(subId: Int): Int =
@@ -166,7 +154,6 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
 
     private fun getImei(): String {
         val phoneType = getPhoneType()
-// QTI_BEGIN: 2024-06-13: Telephony: Display primary IMEI information
         var imei = String()
 
         if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
@@ -197,7 +184,6 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
             }
         }
         return imei
-// QTI_END: 2024-06-13: Telephony: Display primary IMEI information
     }
 
     /**
@@ -226,12 +212,10 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
         else getTitleForGsmPhone()
     }
 
-// QTI_BEGIN: 2024-06-13: Telephony: Display primary IMEI information
     private fun makeRadioVersion(major: Int, minor: Int): Int {
         return if (major < 0 || minor < 0) 0 else major * 100 + minor
     }
 
-// QTI_END: 2024-06-13: Telephony: Display primary IMEI information
     fun getPhoneType(): Int {
         return mTelephonyManager.currentPhoneType
     }

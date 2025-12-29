@@ -172,10 +172,8 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
                         if (mPreference != null
                                 && mSoftApState == WifiManager.WIFI_AP_STATE_ENABLED) {
                             // Only show the number of clients when state is on
-// QTI_BEGIN: 2022-10-07: WLAN: Settings: Decommission Repeater mode
                             mPreference.setSummary(WifiUtils.
                                     getWifiTetherSummaryForConnectedDevices(mContext,
-// QTI_END: 2022-10-07: WLAN: Settings: Decommission Repeater mode
                                             clients.size()));
                         }
                     }

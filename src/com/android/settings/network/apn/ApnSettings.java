@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
  * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
 package com.android.settings.network.apn;
 
 import static com.android.settings.network.apn.ApnEditPageProviderKt.INSERT_URL;
@@ -30,17 +28,11 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.settings.SettingsEnums;
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
 import android.content.BroadcastReceiver;
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
 import android.content.Context;
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
 import android.content.Intent;
 import android.content.IntentFilter;
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
-// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
 import android.content.res.Resources.NotFoundException;
-// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,12 +41,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Telephony;
 import android.telephony.CarrierConfigManager;
-// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
 import android.telephony.ServiceState;
-// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
 import android.telephony.SubscriptionInfo;
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.data.ApnSetting;
@@ -72,9 +60,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
-// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 import com.android.ims.ImsManager;
-// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
@@ -88,12 +74,10 @@ import com.android.settingslib.metadata.ValidatedKeyParameters;
 import kotlin.Unit;
 
 import java.util.ArrayList;
-// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
 
 
 /** Handle each different apn setting. */
@@ -121,10 +105,8 @@ public class ApnSettings extends RestrictedDashboardFragment
     private static final int APN_INDEX = 2;
     private static final int TYPES_INDEX = 3;
     private static final int EDITED_INDEX = 4;
-// QTI_BEGIN: 2024-12-05: Android_UI: Settings: Fix IllegalStateException when access bearer
     private static final int BEARER_INDEX = 5;
     private static final int BEARER_BITMASK_INDEX = 6;
-// QTI_END: 2024-12-05: Android_UI: Settings: Fix IllegalStateException when access bearer
 
     private static final int MENU_NEW = Menu.FIRST;
     private static final int MENU_RESTORE = Menu.FIRST + 1;
@@ -145,26 +127,19 @@ public class ApnSettings extends RestrictedDashboardFragment
     private boolean mAllowAddingApns;
     private boolean mHidePresetApnDetails;
 
-// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
     private String[] mHideApnsWithRule;
     private String[] mHideApnsWithIccidRule;
     private PersistableBundle mHideApnsGroupByIccid;
-// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
     private SubscriptionManager mSubscriptionManager;
     private IntentFilter mIntentFilter;
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
-// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
     private final static String INCLUDE_COMMON_RULES = "include_common_rules";
     private final static String APN_HIDE_RULE_STRINGS_ARRAY= "apn_hide_rule_strings_array";
     private final static String APN_HIDE_RULE_STRINGS_WITH_ICCIDS_ARRAY = "apn_hide_rule_strings_with_iccids_array";
 
-// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
     public ApnSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
     }
 
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -182,14 +157,8 @@ public class ApnSettings extends RestrictedDashboardFragment
         }
     };
 
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
-// QTI_BEGIN: 2024-03-20: Telephony: Fix APN preference updating issue
     private void loadCarrierConfig() {
-// QTI_END: 2024-03-20: Telephony: Fix APN preference updating issue
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
         final CarrierConfigManager configManager = getSystemService(CarrierConfigManager.class);
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
-// QTI_BEGIN: 2024-03-20: Telephony: Fix APN preference updating issue
         final PersistableBundle b = configManager.getConfigForSubId(mSubId);
         if (b == null) {
             return;
@@ -199,26 +168,17 @@ public class ApnSettings extends RestrictedDashboardFragment
         mHideApnsWithRule = b.getStringArray(APN_HIDE_RULE_STRINGS_ARRAY);
         mHideApnsWithIccidRule = b.getStringArray(APN_HIDE_RULE_STRINGS_WITH_ICCIDS_ARRAY);
         if (mAllowAddingApns) {
-// QTI_END: 2024-03-20: Telephony: Fix APN preference updating issue
             final List<String> readOnlyApnTypes = ApnTypes.getReadOnlyApnTypes(b);
-// QTI_BEGIN: 2024-03-20: Telephony: Fix APN preference updating issue
             // if no apn type can be edited, do not allow adding APNs
-// QTI_END: 2024-03-20: Telephony: Fix APN preference updating issue
             if (ApnTypes.hasAllApnTypes(readOnlyApnTypes)) {
-// QTI_BEGIN: 2024-03-20: Telephony: Fix APN preference updating issue
                 Log.d(TAG, "not allowing adding APN because all APN types are read only");
                 mAllowAddingApns = false;
             }
         }
         mHidePresetApnDetails = b.getBoolean(CarrierConfigManager.KEY_HIDE_PRESET_APN_DETAILS_BOOL);
-// QTI_END: 2024-03-20: Telephony: Fix APN preference updating issue
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
         mHideApnsGroupByIccid = b.getPersistableBundle(getIccid());
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
-// QTI_BEGIN: 2024-03-20: Telephony: Fix APN preference updating issue
    }
 
-// QTI_END: 2024-03-20: Telephony: Fix APN preference updating issue
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.APN;
@@ -229,19 +189,13 @@ public class ApnSettings extends RestrictedDashboardFragment
         super.onCreate(icicle);
         final Activity activity = getActivity();
         mSubId = activity.getIntent().getIntExtra(SUB_ID, getSubIdFromBindingArgs());
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
         mIntentFilter = new IntentFilter(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
         mPreferredApnRepository = new PreferredApnRepository(activity, mSubId);
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
         mSubscriptionManager =  getSystemService(SubscriptionManager.class);
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
 
         setIfOnlyAvailableForAdmins(true);
 
-// QTI_BEGIN: 2024-03-20: Telephony: Fix APN preference updating issue
         loadCarrierConfig();
-// QTI_END: 2024-03-20: Telephony: Fix APN preference updating issue
 
         mUserManager = UserManager.get(activity);
     }
@@ -298,17 +252,14 @@ public class ApnSettings extends RestrictedDashboardFragment
             return;
         }
 
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
         getActivity().registerReceiver(mReceiver, mIntentFilter,
                 Context.RECEIVER_EXPORTED_UNAUDITED);
 
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
         if (!mRestoreDefaultApnMode) {
             fillList();
         }
     }
 
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
     @Override
     public void onPause() {
         super.onPause();
@@ -320,7 +271,6 @@ public class ApnSettings extends RestrictedDashboardFragment
         getActivity().unregisterReceiver(mReceiver);
     }
 
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
     @Override
     public EnforcedAdmin getRestrictionEnforcedAdmin() {
         final UserHandle user = UserHandle.of(mUserManager.getProcessUserId());
@@ -373,24 +323,18 @@ public class ApnSettings extends RestrictedDashboardFragment
         // Remove Emergency type, users should not mess with that
         where.append(" AND NOT (type='emergency')");
 
-// QTI_BEGIN: 2024-05-13: Telephony: Fix for APN list filter issue by radio tech
         int phoneId = SubscriptionManager.getPhoneId(mSubId);
-// QTI_END: 2024-05-13: Telephony: Fix for APN list filter issue by radio tech
-// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
         Context appContext = getActivity().getApplicationContext();
         boolean isVoLTEEnabled = ImsManager.getInstance(appContext, phoneId)
                 .isEnhanced4gLteModeSettingEnabledByUser();
         if (mHideImsApn || (Utils.isSupportCTPA(appContext) && !isVoLTEEnabled)) {
-// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
             where.append(" AND NOT (type='ims')");
         }
 
-// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
         appendFilter(where);
 
         Log.d(TAG, "where = " + where.toString());
 
-// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
         final Cursor cursor = getContentResolver().query(simApnUri,
                 CARRIERS_PROJECTION, where.toString(), null,
                 Telephony.Carriers.DEFAULT_SORT_ORDER);
@@ -403,10 +347,8 @@ public class ApnSettings extends RestrictedDashboardFragment
             final ArrayList<ApnPreference> mmsApnList = new ArrayList<ApnPreference>();
 
             cursor.moveToFirst();
-// QTI_BEGIN: 2024-05-13: Telephony: Fix for APN list filter issue by radio tech
             final int radioTech = networkTypeToRilRidioTechnology(TelephonyManager.getDefault()
                     .getDataNetworkType(mSubId));
-// QTI_END: 2024-05-13: Telephony: Fix for APN list filter issue by radio tech
             while (!cursor.isAfterLast()) {
                 String name = cursor.getString(NAME_INDEX);
                 final String apn = cursor.getString(APN_INDEX);
@@ -414,11 +356,8 @@ public class ApnSettings extends RestrictedDashboardFragment
                 final String type = cursor.getString(TYPES_INDEX);
                 final int edited = cursor.getInt(EDITED_INDEX);
 
-// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
                 //Special requirement of some operators, need change APN name follow language.
-// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
                 String localizedName = Utils.getLocalizedName(getActivity(), cursor.getString(NAME_INDEX));
-// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
 
                 if (!TextUtils.isEmpty(localizedName)) {
                     name = localizedName;
@@ -435,7 +374,6 @@ public class ApnSettings extends RestrictedDashboardFragment
                         continue;
                     }
                 }
-// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
                 final ApnPreference pref = new ApnPreference(getPrefContext());
 
                 pref.setKey(key);
@@ -453,9 +391,7 @@ public class ApnSettings extends RestrictedDashboardFragment
                         ((type == null) || type.contains(ApnSetting.TYPE_DEFAULT_STRING));
                 if (isVoLTEEnabled && defaultSelectable && Utils.isSupportCTPA(appContext)) {
                     defaultSelectable = ((type == null) || !type.equals("ims"));
-// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
                 }
-// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
                 pref.setDefaultSelectable(defaultSelectable);
                 if (defaultSelectable) {
                     pref.setIsChecked(key.equals(mPreferredApnKey));
@@ -476,7 +412,6 @@ public class ApnSettings extends RestrictedDashboardFragment
         }
     }
 
-// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
     private void appendFilter(StringBuilder where){
         boolean includeCommon = true;
         if(mHideApnsGroupByIccid != null && !mHideApnsGroupByIccid.isEmpty()){
@@ -512,11 +447,7 @@ public class ApnSettings extends RestrictedDashboardFragment
         // </string-array>
         if(mHideApnsWithIccidRule != null){
             HashMap<String, String> ruleWithIccid = getApnRuleMap(mHideApnsWithIccidRule);
-// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
             final String iccid = getIccid();
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
-// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
             if(isOperatorIccid(ruleWithIccid, iccid)){
                 String s = ruleWithIccid.get(INCLUDE_COMMON_RULES);
                 includeCommon = !(s != null && s.equalsIgnoreCase(String.valueOf(false)));
@@ -539,8 +470,6 @@ public class ApnSettings extends RestrictedDashboardFragment
         }
     }
 
-// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
-// QTI_BEGIN: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
     private String getIccid() {
         if (mSubscriptionManager == null) {
             Log.e(TAG, "mSubscriptionManager is null");
@@ -551,8 +480,6 @@ public class ApnSettings extends RestrictedDashboardFragment
         return subscriptionInfo == null ? "" : subscriptionInfo.getIccId();
     }
 
-// QTI_END: 2024-12-18: Telephony: LKG: Fix for broken APN settings issue due to AP3A.240426.002 merge
-// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
     private void filterWithKey(Map<String, String> rules, StringBuilder where) {
         Set<String> fields = rules.keySet();
         for(String field : fields){
@@ -634,18 +561,13 @@ public class ApnSettings extends RestrictedDashboardFragment
                 return ServiceState.RIL_RADIO_TECHNOLOGY_IWLAN;
             case TelephonyManager.NETWORK_TYPE_LTE_CA:
                 return ServiceState.RIL_RADIO_TECHNOLOGY_LTE_CA;
-// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
-// QTI_BEGIN: 2021-11-10: Telephony: Add NR RAT to filter up APN entries
             case TelephonyManager.NETWORK_TYPE_NR:
                 return ServiceState.RIL_RADIO_TECHNOLOGY_NR;
-// QTI_END: 2021-11-10: Telephony: Add NR RAT to filter up APN entries
-// QTI_BEGIN: 2018-02-01: Android_UI: Settings: UI customization for APN display
             default:
                 return ServiceState.RIL_RADIO_TECHNOLOGY_UNKNOWN;
         }
     }
 
-// QTI_END: 2018-02-01: Android_UI: Settings: UI customization for APN display
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (!mUnavailable) {
@@ -695,9 +617,7 @@ public class ApnSettings extends RestrictedDashboardFragment
     }
 
     private void restoreDefaultApn() {
-// QTI_BEGIN: 2022-04-26: Android_UI: Settings: Fix restore default apn dialog sometimes not dismissed.
         showRestoreDefaultApnDialog();
-// QTI_END: 2022-04-26: Android_UI: Settings: Fix restore default apn dialog sometimes not dismissed.
         mRestoreDefaultApnMode = true;
 
         mPreferredApnRepository.restorePreferredApn(getViewLifecycleOwner(), () -> {
@@ -744,7 +664,6 @@ public class ApnSettings extends RestrictedDashboardFragment
         }
         return 0;
     }
-// QTI_BEGIN: 2022-04-26: Android_UI: Settings: Fix restore default apn dialog sometimes not dismissed.
 
     private void showRestoreDefaultApnDialog() {
         // try to remove the progress dialog firstly to avoid this dialog sometimes not dismissed.
@@ -753,6 +672,5 @@ public class ApnSettings extends RestrictedDashboardFragment
         removeDialog(DIALOG_RESTORE_DEFAULTAPN);
         showDialog(DIALOG_RESTORE_DEFAULTAPN);
     }
-// QTI_END: 2022-04-26: Android_UI: Settings: Fix restore default apn dialog sometimes not dismissed.
 }
 // LINT.ThenChange(ApnSettingsScreen.kt)
