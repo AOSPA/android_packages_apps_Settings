@@ -88,6 +88,20 @@ class ButtonShortcutSettingScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
+    fun isIndexable_hasButtonShortcutTargets_returnTrue() {
+        shadowA11yManager.setAccessibilityShortcutTargets(SOFTWARE, listOf("Foo"))
+
+        assertThat(preferenceScreenCreator.isIndexable(appContext)).isEqualTo(true)
+    }
+
+    @Test
+    fun isIndexable_noButtonShortcutTargetsAssigned_returnFalse() {
+        shadowA11yManager.setAccessibilityShortcutTargets(SOFTWARE, emptyList())
+
+        assertThat(preferenceScreenCreator.isIndexable(appContext)).isEqualTo(false)
+    }
+
+    @Test
     fun getSummary_hasButtonShortcutTargets_returnsEmpty() {
         shadowA11yManager.setAccessibilityShortcutTargets(SOFTWARE, listOf("Foo"))
 

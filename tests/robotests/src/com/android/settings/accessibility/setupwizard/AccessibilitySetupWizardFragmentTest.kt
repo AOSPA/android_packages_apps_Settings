@@ -27,13 +27,16 @@ import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.testutils.AccessibilityTestUtils
+import com.android.settings.testutils.SystemProperty
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
 import com.google.android.setupdesign.GlifRecyclerLayout
 import com.google.android.setupdesign.items.Item
 import com.google.android.setupdesign.items.RecyclerItemAdapter
 import com.google.common.truth.Truth.assertThat
+import org.junit.AfterClass
 import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
@@ -168,5 +171,26 @@ class AccessibilitySetupWizardFragmentTest {
         private const val TEST_SCREEN_READER_LABEL = "TalkBack"
         private const val TEST_SELECT_TO_SPEAK = "com.test.talkback/.SelectToSpeakService"
         private const val TEST_SELECT_TO_SPEAK_LABEL = "Select to Speak"
+
+        private var systemProperty: SystemProperty? = null
+
+        @BeforeClass
+        @JvmStatic
+        fun setup() {
+            // Robolectric by default creates Activity contexts without an associated Display.
+            // This property ensures the Activity context is attached to a simulated display,
+            // preventing UnsupportedOperationException when code calls Context#getDisplay().
+            systemProperty =
+                SystemProperty().apply { override("robolectric.createActivityContexts", "true") }
+        }
+
+        @AfterClass
+        @JvmStatic
+        fun cleanUp() {
+            systemProperty?.let {
+                it.close()
+                systemProperty = null
+            }
+        }
     }
 }

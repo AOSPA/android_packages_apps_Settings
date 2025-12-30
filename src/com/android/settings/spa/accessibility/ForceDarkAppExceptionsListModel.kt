@@ -18,7 +18,9 @@ package com.android.settings.spa.accessibility
 import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -80,7 +82,36 @@ class ForceDarkAppExceptionsListModel(
 
     init {
         val startTime = now - TimeUnit.DAYS.toMillis(5)
-        usageStatsMap = usageStatsManager.queryAndAggregateUsageStats(startTime, now)
+        usageStatsMap =
+            usageStatsManager.queryAndAggregateUsageStats(startTime, now).toMutableMap().apply {
+                getPackagesToRemove().forEach { pkgName -> remove(pkgName) }
+            }
+    }
+
+    /** Returns packages that should not be included in the recently accessed category. */
+    private fun getPackagesToRemove(): Set<String> {
+        return buildSet {
+            // 1. Exclude the Settings app itself
+            add(context.packageName)
+
+            // 2. Exclude the Default Launcher
+            getDefaultLauncherPackageName(context)?.let { add(it) }
+
+            // 3. Optional: Add specific system packages or hardcoded app list here
+            // add("com.android.systemui")
+        }
+    }
+
+    private fun getDefaultLauncherPackageName(context: Context): String? {
+        val intent = Intent(Intent.ACTION_MAIN).apply { addCategory(Intent.CATEGORY_HOME) }
+
+        // Resolve the activity that handles the HOME intent
+        val resolveInfo =
+            context.packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
+
+        // If multiple launchers exist and none is set as default,
+        // the system might return "android" (the resolver activity).
+        return resolveInfo?.activityInfo?.packageName
     }
 
     override fun transform(userIdFlow: Flow<Int>, appListFlow: Flow<List<ApplicationInfo>>) =

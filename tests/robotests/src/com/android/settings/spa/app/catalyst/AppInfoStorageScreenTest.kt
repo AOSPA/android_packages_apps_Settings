@@ -22,6 +22,7 @@ import android.content.pm.PackageInfo
 import android.os.Bundle
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -42,8 +43,7 @@ class AppInfoStorageScreenTest {
 
     @Test
     fun isAvailable_whenAppIsNotFound_returnsFalse() {
-        val screen =
-            AppInfoStorageScreen(context, Bundle().apply { putString("app", "app.not.found") })
+        val screen = createScreen(Bundle().apply { putString("app", "app.not.found") })
 
         assertThat(screen.isAvailable(context)).isFalse()
     }
@@ -57,8 +57,15 @@ class AppInfoStorageScreenTest {
             }
         shadowPackageManager.installPackage(packageInfo)
 
-        val screen = AppInfoStorageScreen(context, Bundle().apply { putString("app", "app.found") })
+        val screen = createScreen(Bundle().apply { putString("app", "app.found") })
 
         assertThat(screen.isAvailable(context)).isTrue()
     }
+
+    private fun createScreen(args: Bundle): AppInfoStorageScreen =
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            AppInfoStorageScreen(context, AppInfoStorageScreen.parametersSchema.prepare(args))
+        } else {
+            AppInfoStorageScreen(context, args)
+        }
 }

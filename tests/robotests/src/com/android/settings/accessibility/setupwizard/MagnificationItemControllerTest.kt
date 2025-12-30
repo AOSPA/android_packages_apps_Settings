@@ -17,6 +17,7 @@
 package com.android.settings.accessibility.setupwizard
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import com.android.settings.EmptySetupWizardActivity
 import com.android.settings.R
 import com.google.android.setupdesign.items.Item
 import com.google.common.truth.Truth.assertThat
@@ -32,12 +33,12 @@ class MagnificationItemControllerTest {
 
     private val mockItem = mock<Item>()
 
-    @get:Rule
-    val activityScenarioRule = ActivityScenarioRule(AccessibilitySetupWizardActivity::class.java)
+    @get:Rule val activityScenarioRule = ActivityScenarioRule(EmptySetupWizardActivity::class.java)
 
     @Test
     fun onItemSelected_navigatesToMagnificationFragment() {
         activityScenarioRule.scenario.onActivity { activity ->
+            activity.setContentView(R.layout.accessibility_suw_activity)
             val controller = MagnificationItemController(mockItem)
 
             controller.onItemSelected(activity)

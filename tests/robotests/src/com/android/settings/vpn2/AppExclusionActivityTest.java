@@ -125,7 +125,7 @@ public class AppExclusionActivityTest {
         assertThat(mActivity.isFinishing()).isFalse();
 
         Fragment fragment =
-                mActivity.getSupportFragmentManager().findFragmentById(R.id.settings_container);
+                mActivity.getSupportFragmentManager().findFragmentById(R.id.content_frame);
         assertThat(fragment).isInstanceOf(AppExclusionFragment.class);
 
         Bundle args = fragment.getArguments();

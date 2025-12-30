@@ -77,7 +77,7 @@ public class SelectLongPressTimeoutPreferenceController extends BasePreferenceCo
                     R.array.long_press_timeout_selector_values);
             mLongPressTimeoutDefault = Integer.parseInt(timeoutValues[0]);
             final String[] timeoutTitles = mContext.getResources().getStringArray(
-                    R.array.long_press_timeout_selector_titles);
+                    R.array.long_press_timeout_selector_list_titles);
             final int timeoutValueCount = timeoutValues.length;
             for (int i = 0; i < timeoutValueCount; i++) {
                 mLongPressTimeoutValueToTitleMap.put(timeoutValues[i], timeoutTitles[i]);

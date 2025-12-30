@@ -25,6 +25,10 @@ import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.actiontimeout.data.ActionTimeoutOptionDataStore
 import com.android.settings.accessibility.actiontimeout.data.ActionTimeoutOptionDataStore.Companion.DISCRETE_TIMEOUT_OPTIONS
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settingslib.datastore.HandlerExecutor
+import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -33,7 +37,7 @@ import kotlinx.coroutines.CoroutineScope
 /** Preference screen for "Time to take action (Accessibility timeout)" settings. */
 @ProvidePreferenceScreen(ActionTimeoutSettingsScreen.KEY)
 open class ActionTimeoutSettingsScreen(context: Context) :
-    PreferenceScreenMixin, PreferenceSummaryProvider {
+    PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceLifecycleProvider {
     override val highlightMenuKey: Int
         get() = R.string.menu_key_accessibility
 
@@ -53,6 +57,7 @@ open class ActionTimeoutSettingsScreen(context: Context) :
         get() = R.string.a11y_action_timeout_setting_screen_purpose
 
     private val timeoutOptionDataStore by lazy { ActionTimeoutOptionDataStore(context) }
+    private var keyedObserver: KeyedObserver<String>? = null
 
     override fun fragmentClass(): Class<out Fragment> =
         AccessibilityControlTimeoutPreferenceFragment::class.java
@@ -86,6 +91,26 @@ open class ActionTimeoutSettingsScreen(context: Context) :
             context.getString(stringResId)
         } else {
             null
+        }
+    }
+
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        super.onCreate(context)
+        if (!isEntryPoint(context)) return
+        if (keyedObserver == null) {
+            keyedObserver =
+                KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(bindingKey) }
+        }
+        keyedObserver?.let {
+            timeoutOptionDataStore.addObserver(bindingKey, it, HandlerExecutor.main)
+        }
+    }
+
+    override fun onDestroy(context: PreferenceLifecycleContext) {
+        super.onDestroy(context)
+        keyedObserver?.let {
+            timeoutOptionDataStore.removeObserver(bindingKey, it)
+            keyedObserver = null
         }
     }
 
