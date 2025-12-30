@@ -16,7 +16,14 @@
 
 package com.android.settings.accessibility.setupwizard
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.android.settings.R
+import com.android.settings.accessibility.AccessibilitySetupWizardUtils
+import com.google.android.setupcompat.template.FooterBarMixin
+import com.google.android.setupdesign.GlifLayout
 import com.google.android.setupdesign.items.RecyclerItemAdapter
 
 /** Magnification for Setup Wizard. */
@@ -33,4 +40,19 @@ class MagnificationSetupWizardFragment : BaseSetupWizardFragment() {
     override val fragmentLayoutResId: Int = R.layout.magnification_suw_screen
 
     override val glifLayoutId: Int = R.id.magnification_suw_screen_layout
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? =
+        super.onCreateView(inflater, container, savedInstanceState).also { view ->
+            val glifLayout = view as? GlifLayout ?: return@also
+            val mixin = glifLayout.getMixin(FooterBarMixin::class.java)
+
+            // Set Primary Button
+            AccessibilitySetupWizardUtils.setPrimaryButton(requireContext(), mixin, R.string.done) {
+                parentFragmentManager.popBackStack()
+            }
+        }
 }
