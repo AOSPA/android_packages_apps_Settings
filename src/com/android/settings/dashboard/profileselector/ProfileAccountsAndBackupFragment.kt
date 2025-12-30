@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package com.android.settings.backup
+package com.android.settings.dashboard.profileselector
 
-import android.content.Context
-import com.android.settings.core.BasePreferenceController
-import com.android.settings.flags.Flags
+import com.android.settings.backup.AccountsAndBackupDashboardFragment
 
-class TopLevelAccountsAndBackupEntryPreferenceController(context: Context, key: String) :
-    BasePreferenceController(context, key) {
-
-    override fun getAvailabilityStatus(): Int {
-        return if (Flags.enableAccountsAndBackupScreen()) AVAILABLE else CONDITIONALLY_UNAVAILABLE
-    }
+class ProfileAccountsAndBackupFragment : ProfileSelectFragment() {
+    override fun getFragments() =
+        ProfileSelectFragment.getFragments(
+            context,
+            null /* bundle */,
+            { AccountsAndBackupDashboardFragment() },
+            { AccountsAndBackupDashboardFragment() },
+            { AccountsAndBackupDashboardFragment() },
+        )
 }

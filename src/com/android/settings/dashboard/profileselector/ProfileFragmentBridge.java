@@ -20,6 +20,7 @@ import android.util.ArrayMap;
 
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.backup.AccountsAndBackupDashboardFragment;
 import com.android.settings.development.linuxterminal.LinuxTerminalDashboardFragment;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
@@ -56,5 +57,8 @@ public class ProfileFragmentBridge {
         FRAGMENT_MAP.put(
                 LinuxTerminalDashboardFragment.class.getName(),
                 ProfileSelectLinuxTerminalFragment.class.getName());
+        FRAGMENT_MAP.put(
+                AccountsAndBackupDashboardFragment.class.getName(),
+                ProfileAccountsAndBackupFragment.class.getName());
     }
 }

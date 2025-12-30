@@ -18,12 +18,11 @@ package com.android.settings.accounts
 
 import android.app.settings.SettingsEnums
 import android.content.Context
-import android.os.UserManager
 import android.provider.Settings.EXTRA_AUTHORITIES
 import com.android.settings.R
 import com.android.settings.dashboard.DashboardFragment
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment.EXTRA_PROFILE
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.PERSONAL
-import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.WORK
 import com.android.settingslib.core.AbstractPreferenceController
 
 class ManageAccountsDashboardFragment : DashboardFragment() {
@@ -45,15 +44,10 @@ class ManageAccountsDashboardFragment : DashboardFragment() {
                 context,
                 this, /* parent */
                 authorities,
-                if (isProfileUser(context)) WORK else PERSONAL,
+                arguments?.getInt(EXTRA_PROFILE) ?: PERSONAL,
             )
         lifecycle.addObserver(accountPrefController)
         controllers.add(accountPrefController)
         return controllers
-    }
-
-    private fun isProfileUser(context: Context): Boolean {
-        val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
-        return userManager.isProfile
     }
 }
