@@ -66,6 +66,7 @@ import java.util.Set;
  * Allows the user to search for locales using both their native name and their name in the
  * default locale.</p>
  */
+// LINT.IfChange
 public class SystemLocalePickerFragment extends DashboardFragment implements
         SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener {
 
@@ -368,3 +369,4 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.system_language_picker);
 }
+// LINT.ThenChange(SystemLocalePickerApiFirstScreen.kt)
