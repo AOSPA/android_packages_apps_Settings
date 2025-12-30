@@ -28,6 +28,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_audio_adjustment_screen"
+  namespace: "accessibility"
+  description: "Migrate audio adjustment screen to the Catalyst infrastructure"
+  bug: "421227414"
+}
+
+flag {
   name: "catalyst_dark_ui_mode"
   namespace: "accessibility"
   description: "Migrate dark mode screen to the Catalyst infrastructure"
