@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
  *
@@ -22,7 +21,6 @@
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 package com.android.settings.network.telephony.gsm
 
 import android.content.Context
@@ -30,17 +28,13 @@ import android.content.Intent
 import android.provider.Settings
 import android.telephony.ServiceState
 import android.telephony.TelephonyManager
-// QTI_BEGIN: 2024-03-17: Telephony: UI requirement in CU domestic roaming
 import android.util.Log
-// QTI_END: 2024-03-17: Telephony: UI requirement in CU domestic roaming
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.Settings.NetworkSelectActivity
-// QTI_BEGIN: 2024-03-17: Telephony: UI requirement in CU domestic roaming
 import com.android.settings.network.telephony.DomesticRoamUtils
-// QTI_END: 2024-03-17: Telephony: UI requirement in CU domestic roaming
 import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settings.network.telephony.TelephonyBasePreferenceController
 import com.android.settings.network.telephony.allowedNetworkTypesFlow
@@ -50,10 +44,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
 import com.qti.extphone.ExtTelephonyManager
 
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 /** Preference controller for "Open network select" */
 class OpenNetworkSelectPagePreferenceController
 @JvmOverloads
@@ -70,16 +62,12 @@ constructor(
 
     private var preference: Preference? = null
     private var networkSelectionMode: Int = TelephonyManager.NETWORK_SELECTION_MODE_AUTO
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
     private val telephonyManager = context.getSystemService(TelephonyManager::class.java)!!
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 
     /** Initialization based on given subscription id. */
     fun init(subId: Int): OpenNetworkSelectPagePreferenceController {
         mSubId = subId
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
         telephonyManager.createForSubscriptionId(mSubId)
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
         return this
     }
 
@@ -116,31 +104,19 @@ constructor(
             serviceState ->
             preference?.summary =
                 if (serviceState.state == ServiceState.STATE_IN_SERVICE ||
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
                         isSnpnInService(serviceState)) {
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
                     withContext(Dispatchers.Default) {
-// QTI_BEGIN: 2024-03-17: Telephony: UI requirement in CU domestic roaming
                         if (DomesticRoamUtils.isFeatureEnabled(mContext)) {
                             val registeredOperatorName : String = DomesticRoamUtils
                                     .getRegisteredOperatorName(mContext, mSubId)
                             if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != registeredOperatorName) {
                                 registeredOperatorName
-// QTI_END: 2024-03-17: Telephony: UI requirement in CU domestic roaming
-// QTI_BEGIN: 2024-03-19: Telephony: UI requirement in CU domestic roaming
                             } else {
                                 MobileNetworkUtils.getCurrentCarrierNameForDisplay(mContext, mSubId)
-// QTI_END: 2024-03-19: Telephony: UI requirement in CU domestic roaming
-// QTI_BEGIN: 2024-03-17: Telephony: UI requirement in CU domestic roaming
                             }
-// QTI_END: 2024-03-17: Telephony: UI requirement in CU domestic roaming
-// QTI_BEGIN: 2024-03-19: Telephony: UI requirement in CU domestic roaming
                         } else {
                             MobileNetworkUtils.getCurrentCarrierNameForDisplay(mContext, mSubId)
-// QTI_END: 2024-03-19: Telephony: UI requirement in CU domestic roaming
-// QTI_BEGIN: 2024-03-17: Telephony: UI requirement in CU domestic roaming
                         }
-// QTI_END: 2024-03-17: Telephony: UI requirement in CU domestic roaming
                     }
                 } else {
                     mContext.getString(R.string.network_disconnected)
@@ -148,14 +124,12 @@ constructor(
         }
     }
 
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
     private fun isSnpnInService(ss: ServiceState): Boolean {
         return ((MobileNetworkUtils.getAccessMode(mContext, telephonyManager.getSlotIndex())
                 == ExtTelephonyManager.ACCESS_MODE_SNPN)
                 && (ss.getDataRegState() == ServiceState.STATE_IN_SERVICE))
     }
 
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
     override fun onNetworkSelectModeUpdated(mode: Int) {
         this.networkSelectionMode = mode
         updateState(preference)

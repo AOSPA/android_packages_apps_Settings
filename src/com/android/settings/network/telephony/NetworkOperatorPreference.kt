@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
  *
@@ -22,7 +21,6 @@
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 package com.android.settings.network.telephony
 
 import android.content.Context
@@ -41,9 +39,7 @@ import android.telephony.CellInfoLte
 import android.telephony.CellInfoNr
 import android.telephony.CellInfoTdscdma
 import android.telephony.CellInfoWcdma
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
 import android.telephony.CellSignalStrength;
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 import android.telephony.SignalStrength
 import android.telephony.SubscriptionManager;
 import android.util.Log
@@ -68,13 +64,8 @@ open class NetworkOperatorPreference(
     private var cellInfo: CellInfo? = null
     private var cellId: CellIdentity? = null
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-// QTI_BEGIN: 2024-02-18: Telephony: Display signal strength icons in the search results
     private var isAdvancedScanSupported: Boolean = false;
-// QTI_END: 2024-02-18: Telephony: Display signal strength icons in the search results
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
     private val LEVEL_NONE: Int = -1
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
-// QTI_BEGIN: 2024-02-18: Telephony: Display signal strength icons in the search results
 
     init {
         if (TelephonyUtils.isServiceConnected()) {
@@ -82,13 +73,8 @@ open class NetworkOperatorPreference(
         } else {
             Log.d(TAG, "ExtTelephonyService is not connected!");
         }
-// QTI_END: 2024-02-18: Telephony: Display signal strength icons in the search results
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
         CellInfoUtil.context = context
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
-// QTI_BEGIN: 2024-02-18: Telephony: Display signal strength icons in the search results
     }
-// QTI_END: 2024-02-18: Telephony: Display signal strength icons in the search results
 
     /**
      * Change cell information
@@ -115,7 +101,6 @@ open class NetworkOperatorPreference(
      */
     fun refresh() {
         var networkTitle = cellId?.getNetworkTitle() ?: return
-// QTI_BEGIN: 2024-03-17: Telephony: UI requirement in CU domestic roaming
         if (DomesticRoamUtils.isFeatureEnabled(getContext())) {
             val plmnOperatorName: String = DomesticRoamUtils.getMPLMNOperatorName(
                     getContext(), subId, cellId?.getOperatorNumeric())
@@ -124,15 +109,12 @@ open class NetworkOperatorPreference(
                 networkTitle = plmnOperatorName
             }
         }
-// QTI_END: 2024-03-17: Telephony: UI requirement in CU domestic roaming
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
         if (MobileNetworkUtils.isCagSnpnEnabled(getContext()) &&
                 cellId is CellIdentityNr) {
             val networkInfo = CellInfoUtil.getNetworkInfo(cellId as CellIdentityNr?)
             if (DBG) Log.d(TAG, "networkInfo: $networkInfo")
             networkTitle += " $networkInfo"
         }
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
         if (isForbiddenNetwork()) {
             if (DBG) Log.d(TAG, "refresh forbidden network: $networkTitle")
             networkTitle += " ${context.getString(R.string.forbidden_network)}"
@@ -140,7 +122,6 @@ open class NetworkOperatorPreference(
             if (DBG) Log.d(TAG, "refresh the network: $networkTitle")
         }
         title = networkTitle
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
         var level = LEVEL_NONE
         level = if (MobileNetworkUtils.isCagSnpnEnabled(context) &&
                 cellId is CellIdentityNr && (cellId as CellIdentityNr).snpnInfo != null) {
@@ -149,7 +130,6 @@ open class NetworkOperatorPreference(
             val signalStrength: CellSignalStrength? = cellInfo?.cellSignalStrength
             if (signalStrength != null) signalStrength.level else LEVEL_NONE
         }
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
         if (DBG) Log.d(TAG, "refresh level: $level")
         setIcon(level)
     }
@@ -158,10 +138,8 @@ open class NetworkOperatorPreference(
      * Update the icon according to the input signal strength level.
      */
     override fun setIcon(level: Int) {
-// QTI_BEGIN: 2024-02-18: Telephony: Display signal strength icons in the search results
         if (!isAdvancedScanSupported || level < 0
                 || level >= SignalStrength.NUM_SIGNAL_STRENGTH_BINS) {
-// QTI_END: 2024-02-18: Telephony: Display signal strength icons in the search results
             return
         }
         icon = MobileNetworkUtils.getSignalStrengthIcon(
@@ -182,7 +160,6 @@ open class NetworkOperatorPreference(
     /**
      * Operator info of this cell
      */
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
     fun getOperatorInfo() = if (MobileNetworkUtils.isCagSnpnEnabled(getContext())) {
         if (cellId is CellIdentityNr) {
             OperatorInfo(
@@ -210,7 +187,6 @@ open class NetworkOperatorPreference(
             getAccessNetworkTypeFromCellInfo(),
         )
     }
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 
     private fun getIconIdForCell(): Int = when (cellId) {
         is CellIdentityGsm -> R.drawable.signal_strength_g

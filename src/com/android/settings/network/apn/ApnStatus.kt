@@ -22,9 +22,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Telephony
 import android.telephony.CarrierConfigManager
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
 import android.telephony.data.ApnSetting
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
 import android.util.Log
 import com.android.internal.telephony.flags.Flags
 import com.android.settings.R
@@ -277,7 +275,6 @@ fun deleteApn(uri: Uri, context: Context) {
     contentResolver.delete(uri, null, null)
 }
 
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
 fun validateMMSC(validEnabled: Boolean, mmsc: String, context: Context, apnData: ApnData): String? {
     val apnTypes = ApnTypes.splitToList(apnData.apnType)
     var isMmsApnTypeSelected: Boolean =
@@ -288,7 +285,6 @@ fun validateMMSC(validEnabled: Boolean, mmsc: String, context: Context, apnData:
         return null
     }
     return if (validEnabled && (mmsc == "" || !mmsc.matches(Regex("^https?:\\/\\/.+"))))
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
         context.resources.getString(R.string.error_mmsc_valid)
     else null
 }

@@ -51,9 +51,7 @@ object ApnTypes {
         ApnSetting.TYPE_OEM_PRIVATE_STRING,
     )
 
-// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
     fun splitToList(apnType: String): List<String> {
-// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
         val types = apnType.split(',').map { it.trim().toLowerCase(Locale.current) }
         if (hasAllApnTypes(types)) return listOf(ApnSetting.TYPE_ALL_STRING)
         return APN_TYPES.filter { it in types }

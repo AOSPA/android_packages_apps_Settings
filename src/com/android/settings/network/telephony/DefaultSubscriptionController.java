@@ -20,14 +20,10 @@ import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import android.content.Context;
-// QTI_BEGIN: 2020-03-22: Telephony: FR61513: Add support to enable sim on/off feature
 import android.telephony.PhoneStateListener;
-// QTI_END: 2020-03-22: Telephony: FR61513: Add support to enable sim on/off feature
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-// QTI_BEGIN: 2020-03-22: Telephony: FR61513: Add support to enable sim on/off feature
 import android.util.Log;
-// QTI_END: 2020-03-22: Telephony: FR61513: Add support to enable sim on/off feature
 import android.view.View;
 
 import androidx.lifecycle.LifecycleObserver;
@@ -42,19 +38,15 @@ import com.android.settings.R;
 import com.android.settings.flags.Flags;
 import com.android.settings.network.DefaultSubscriptionReceiver;
 import com.android.settings.network.MobileNetworkRepository;
-// QTI_BEGIN: 2023-03-22: Telephony: Fix sim display disorder issue in Settings.
 import com.android.settings.network.SubscriptionUtil;
-// QTI_END: 2023-03-22: Telephony: Fix sim display disorder issue in Settings.
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// QTI_BEGIN: 2020-03-22: Telephony: FR61513: Add support to enable sim on/off feature
 import org.codeaurora.internal.IExtTelephony;
 
-// QTI_END: 2020-03-22: Telephony: FR61513: Add support to enable sim on/off feature
 /**
  * This implements common controller functionality for a Preference letting the user see/change
  * what mobile network subscription is used by default for some service controlled by the
@@ -110,12 +102,8 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         if (Flags.isDualSimOnboardingEnabled()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-// QTI_BEGIN: 2023-05-09: Telephony: Refactor data preference
         final boolean visible = mSubInfoEntityList != null && mSubInfoEntityList.size() > 1;
-// QTI_END: 2023-05-09: Telephony: Refactor data preference
-// QTI_BEGIN: 2020-01-28: Telephony: Hide calls/SMS SIM prefs if SimSettings app is present
         return visible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
-// QTI_END: 2020-01-28: Telephony: Hide calls/SMS SIM prefs if SimSettings app is present
     }
 
     @OnLifecycleEvent(ON_RESUME)
@@ -173,49 +161,35 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         List<SubscriptionInfoEntity> list = getSubscriptionInfoList();
         if (list.isEmpty()) return;
 
-// QTI_BEGIN: 2023-05-09: Telephony: Refactor data preference
         if (list.size() == 1) {
-// QTI_END: 2023-05-09: Telephony: Refactor data preference
             mPreference.setEnabled(false);
-// QTI_BEGIN: 2023-05-09: Telephony: Refactor data preference
             mPreference.setSummaryProvider(pref -> list.get(0).uniqueName);
-// QTI_END: 2023-05-09: Telephony: Refactor data preference
             return;
         }
 
         final int serviceDefaultSubId = getDefaultSubscriptionId();
         boolean subIsAvailable = false;
 
-// QTI_BEGIN: 2023-05-09: Telephony: Refactor data preference
         for (SubscriptionInfoEntity sub : list) {
             if (sub.isOpportunistic) {
-// QTI_END: 2023-05-09: Telephony: Refactor data preference
                 continue;
             }
-// QTI_BEGIN: 2023-05-09: Telephony: Refactor data preference
             displayNames.add(sub.uniqueName);
             final int subId = Integer.parseInt(sub.subId);
             subscriptionIds.add(sub.subId);
-// QTI_END: 2023-05-09: Telephony: Refactor data preference
             if (subId == serviceDefaultSubId) {
                 subIsAvailable = true;
             }
         }
 
         mPreference.setEnabled(true);
-// QTI_BEGIN: 2023-05-09: Telephony: Refactor data preference
         updatePreferenceState(mPreference);
-// QTI_END: 2023-05-09: Telephony: Refactor data preference
 
-// QTI_BEGIN: 2023-05-09: Telephony: Refactor data preference
         if (isAskEverytimeSupported()) {
             // Add the extra "Ask every time" value at the end.
             displayNames.add(mContext.getString(R.string.calls_and_sms_ask_every_time));
             subscriptionIds.add(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
-// QTI_END: 2023-05-09: Telephony: Refactor data preference
-// QTI_BEGIN: 2020-03-22: Telephony: FR61513: Add support to enable sim on/off feature
         }
-// QTI_END: 2020-03-22: Telephony: FR61513: Add support to enable sim on/off feature
 
         mPreference.setEntries(displayNames.toArray(new CharSequence[0]));
         mPreference.setEntryValues(subscriptionIds.toArray(new CharSequence[0]));
@@ -227,11 +201,9 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         }
     }
 
-// QTI_BEGIN: 2023-05-09: Telephony: Refactor data preference
     protected void updatePreferenceState(Preference preference) {
     }
 
-// QTI_END: 2023-05-09: Telephony: Refactor data preference
     @VisibleForTesting
     protected List<SubscriptionInfoEntity> getSubscriptionInfoList() {
         return mSubInfoEntityList;

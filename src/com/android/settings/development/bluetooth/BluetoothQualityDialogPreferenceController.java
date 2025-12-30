@@ -105,10 +105,8 @@ public class BluetoothQualityDialogPreferenceController extends
 
     @Override
     public void onHDAudioEnabled(boolean enabled) {
-// QTI_BEGIN: 2020-04-14: Bluetooth: A2dpSrc: Bluetooth codec Dev-UI support for QVA codecs
         Log.d(TAG, "onHDAudioEnabled: " + enabled);
         mPreference.setEnabled(enabled);
-// QTI_END: 2020-04-14: Bluetooth: A2dpSrc: Bluetooth codec Dev-UI support for QVA codecs
     }
 
     @VisibleForTesting

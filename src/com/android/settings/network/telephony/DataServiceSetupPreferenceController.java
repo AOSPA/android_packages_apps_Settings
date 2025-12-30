@@ -75,11 +75,9 @@ public class DataServiceSetupPreferenceController extends TelephonyBasePreferenc
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-// QTI_BEGIN: 2024-05-05: Telephony: Add null checks to avoid NPE
         if (mTelephonyManager == null) {
             return false;
         }
-// QTI_END: 2024-05-05: Telephony: Add null checks to avoid NPE
         if (getPreferenceKey().equals(preference.getKey())) {
             if (!TextUtils.isEmpty(mSetupUrl)) {
                 String imsi = mTelephonyManager.getSubscriberId();

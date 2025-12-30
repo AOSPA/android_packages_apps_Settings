@@ -57,40 +57,28 @@ public class WifiEntryPreference extends RestrictedPreference implements
             R.string.accessibility_wifi_signal_full
     };
 
-// QTI_BEGIN: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
     private final InternetIconInjector mIconInjector;
-// QTI_END: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
     private WifiEntry mWifiEntry;
     private int mLevel = -1;
-// QTI_BEGIN: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
     private int mWifiStandard;
-// QTI_END: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
     private boolean mShowX; // Shows the Wi-Fi signl icon of Pie+x when it's true.
     private CharSequence mContentDescription;
     private OnButtonClickListener mOnButtonClickListener;
-// QTI_BEGIN: 2024-06-10: WLAN: Settings: Adding control to wifi standard display feature.
     private static Boolean sIsWifiStandardDisplaySupported = null;
-// QTI_END: 2024-06-10: WLAN: Settings: Adding control to wifi standard display feature.
 
     public WifiEntryPreference(@NonNull Context context, @NonNull WifiEntry wifiEntry) {
-// QTI_BEGIN: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
         this(context, wifiEntry, new InternetIconInjector(context));
-// QTI_END: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
     }
 
     @VisibleForTesting
     WifiEntryPreference(@NonNull Context context, @NonNull WifiEntry wifiEntry,
-// QTI_BEGIN: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
             @NonNull InternetIconInjector iconInjector) {
-// QTI_END: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
         super(context);
 
-// QTI_BEGIN: 2024-06-10: WLAN: Settings: Adding control to wifi standard display feature.
         if (sIsWifiStandardDisplaySupported == null) {
             sIsWifiStandardDisplaySupported = context.getResources().getBoolean(
                     R.bool.config_show_wifi_standard);
         }
-// QTI_END: 2024-06-10: WLAN: Settings: Adding control to wifi standard display feature.
         int layoutResId = SettingsThemeHelper.isExpressiveTheme(getContext())
                 ? R.layout.preference_access_point_expressive : R.layout.preference_access_point;
         setLayoutResource(layoutResId);
@@ -207,20 +195,13 @@ public class WifiEntryPreference extends RestrictedPreference implements
         if (mWifiEntry instanceof HotspotNetworkEntry) {
             updateHotspotIcon(((HotspotNetworkEntry) mWifiEntry).getDeviceType());
         } else {
-// QTI_BEGIN: 2024-09-12: WConnect/WLAN_3RDPARTY_GOOGLE: Settings: WiFi icon change for Saved Networks.
                 mLevel = mWifiEntry.getLevel();
                 mWifiStandard = mWifiEntry.getWifiStandard();
                 mShowX = mWifiEntry.shouldShowXLevelIcon();
-// QTI_END: 2024-09-12: WConnect/WLAN_3RDPARTY_GOOGLE: Settings: WiFi icon change for Saved Networks.
-// QTI_BEGIN: 2024-06-10: WLAN: Settings: Adding control to wifi standard display feature.
                 updateIcon(mShowX, mLevel, sIsWifiStandardDisplaySupported ? mWifiStandard : 0);
-// QTI_END: 2024-06-10: WLAN: Settings: Adding control to wifi standard display feature.
-// QTI_BEGIN: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
                 notifyChanged();
-// QTI_END: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
         }
 
-// QTI_BEGIN: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
         String summary = mWifiEntry.getSummary(false /* concise */);
 
         if (mWifiEntry.isPskSaeTransitionMode()) {
@@ -234,7 +215,6 @@ public class WifiEntryPreference extends RestrictedPreference implements
         }
 
         setSummary(summary);
-// QTI_END: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
         mContentDescription = buildContentDescription();
     }
 
@@ -293,16 +273,12 @@ public class WifiEntryPreference extends RestrictedPreference implements
     }
 
     @VisibleForTesting
-// QTI_BEGIN: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
     void updateIcon(boolean showX, int level, int standard) {
-// QTI_END: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
         if (level == -1) {
             setIcon(null);
             return;
         }
-// QTI_BEGIN: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
         setIconWithTint(mIconInjector.getIcon(showX, level, standard));
-// QTI_END: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
     }
 
     @VisibleForTesting
@@ -333,7 +309,6 @@ public class WifiEntryPreference extends RestrictedPreference implements
                         : context.getString(R.string.accessibility_wifi_security_type_secured));
     }
 
-// QTI_BEGIN: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
     static class InternetIconInjector {
         private final Context mContext;
 
@@ -346,7 +321,6 @@ public class WifiEntryPreference extends RestrictedPreference implements
         }
     }
 
-// QTI_END: 2024-04-13: WLAN: Wifi: Use WifiEntryPreferece from Settings implementation.
     /**
      * Set listeners, who want to listen the button client event.
      */

@@ -31,9 +31,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 import com.android.settings.Utils;
-// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 import com.android.settings.bluetooth.BluetoothLengthDeviceNameFilter;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.ValidatedEditTextPreference;
@@ -83,11 +81,9 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     private void initializeDeviceName() {
         mDeviceName = Settings.Global.getString(mContext.getContentResolver(),
                 Settings.Global.DEVICE_NAME);
-// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
         if (Utils.isSupportCTPA(mContext)) {
             mDeviceName = Utils.getString(mContext, Utils.KEY_DEVICE_NAME);
         }
-// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
         if (mDeviceName == null) {
             mDeviceName = Build.MODEL;
         }
@@ -148,12 +144,10 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     private void setSettingsGlobalDeviceName(String deviceName) {
         Settings.Global.putString(mContext.getContentResolver(), Settings.Global.DEVICE_NAME,
                 deviceName);
-// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
         if (Utils.isSupportCTPA(mContext)) {
             Settings.Global.putString(mContext.getContentResolver(), Utils.KEY_DEVICE_NAME,
                     deviceName);
         }
-// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
     }
 
     private void setBluetoothDeviceName(String deviceName) {

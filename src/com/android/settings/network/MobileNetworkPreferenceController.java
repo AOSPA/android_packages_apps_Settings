@@ -23,22 +23,16 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static androidx.lifecycle.Lifecycle.Event;
 
 import android.content.BroadcastReceiver;
-// QTI_BEGIN: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
 import android.content.ComponentName;
-// QTI_END: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
 import android.content.Context;
-// QTI_BEGIN: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
 import android.content.Intent;
-// QTI_END: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
 import android.content.IntentFilter;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
-// QTI_BEGIN: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-// QTI_END: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 
@@ -52,15 +46,11 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
-// QTI_BEGIN: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
 import com.android.settings.Utils;
-// QTI_END: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
 import com.android.settingslib.core.AbstractPreferenceController;
 
-// QTI_BEGIN: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
 import java.util.List;
 
-// QTI_END: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
 public class MobileNetworkPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver {
 
@@ -73,16 +63,12 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
     private Preference mPreference;
     @VisibleForTesting
     MobileNetworkTelephonyCallback mTelephonyCallback;
-// QTI_BEGIN: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
     private SubscriptionManager mSubscriptionManager;
-// QTI_END: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
 
     private BroadcastReceiver mAirplanModeChangedReceiver;
 
-// QTI_BEGIN: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
     private String mSummary;
 
-// QTI_END: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
     public MobileNetworkPreferenceController(Context context) {
         super(context);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
@@ -92,15 +78,11 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
         mAirplanModeChangedReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-// QTI_BEGIN: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
                 updateDisplayName();
-// QTI_END: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
                 updateState(mPreference);
             }
         };
-// QTI_BEGIN: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
         mSubscriptionManager = SubscriptionManager.from(context);
-// QTI_END: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
     }
 
     @Override
@@ -138,10 +120,8 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
 
     @OnLifecycleEvent(Event.ON_START)
     public void onStart() {
-// QTI_BEGIN: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
         if (mSubscriptionManager != null)
             mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
-// QTI_END: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
         if (isAvailable()) {
             if (mTelephonyCallback == null) {
                 mTelephonyCallback = new MobileNetworkTelephonyCallback();
@@ -155,7 +135,6 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
         }
     }
 
-// QTI_BEGIN: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
     private void updateDisplayName() {
         if (mPreference != null) {
             List<SubscriptionInfo> list = mSubscriptionManager.getActiveSubscriptionInfoList();
@@ -196,16 +175,13 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
         }
     };
 
-// QTI_END: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
     @OnLifecycleEvent(Event.ON_STOP)
     public void onStop() {
         if (mTelephonyCallback != null) {
             mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
         }
-// QTI_BEGIN: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
         mSubscriptionManager
                 .removeOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
-// QTI_END: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
         if (mAirplanModeChangedReceiver != null) {
             mContext.unregisterReceiver(mAirplanModeChangedReceiver);
         }
@@ -222,28 +198,20 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
         preference.setEnabled(Settings.Global.getInt(
             mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) == 0);
     }
-// QTI_BEGIN: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-// QTI_END: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
         if (KEY_MOBILE_NETWORK_SETTINGS.equals(preference.getKey())) {
             final Intent intent = new Intent(Settings.ACTION_NETWORK_OPERATOR_SETTINGS);
             intent.setPackage(SETTINGS_PACKAGE_NAME);
-// QTI_BEGIN: 2019-12-30: Telephony: Remove hooks that lauched vendor network settings
             mContext.startActivity(intent);
-// QTI_END: 2019-12-30: Telephony: Remove hooks that lauched vendor network settings
-// QTI_BEGIN: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
             return true;
         }
         return false;
     }
-// QTI_END: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
 
     @Override
     public CharSequence getSummary() {
-// QTI_BEGIN: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
         return mSummary;
-// QTI_END: 2018-05-23: Telephony: Fix to show operator names of both the SIMs
     }
 }

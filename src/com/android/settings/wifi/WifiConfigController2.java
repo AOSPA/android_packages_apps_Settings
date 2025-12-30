@@ -765,14 +765,10 @@ public class WifiConfigController2 implements TextWatcher,
 
                 if (config.enterpriseConfig.isAuthenticationSimBased()
                         && mActiveSubscriptionInfos.size() > 0) {
-// QTI_BEGIN: 2021-09-08: WLAN: Wifi: Set WifiConfiguration.subscriptionId to EAP-SIM based network
                     SubscriptionInfo subInfo =  mActiveSubscriptionInfos
-// QTI_END: 2021-09-08: WLAN: Wifi: Set WifiConfiguration.subscriptionId to EAP-SIM based network
                             .valueAt(mEapSimSpinner.getSelectedItemPosition());
-// QTI_BEGIN: 2021-09-08: WLAN: Wifi: Set WifiConfiguration.subscriptionId to EAP-SIM based network
                     config.carrierId = subInfo.getCarrierId();
                     config.subscriptionId = subInfo.getSubscriptionId();
-// QTI_END: 2021-09-08: WLAN: Wifi: Set WifiConfiguration.subscriptionId to EAP-SIM based network
                 }
 
                 String caCert = (String) mEapCaCertSpinner.getSelectedItem();

@@ -21,10 +21,8 @@ import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 import android.app.ActivityManager;
 import android.app.AppOpsManager;
 import android.app.INotificationManager;
-// QTI_BEGIN: 2018-05-24: Android_UI: Settings: Fix app notification switch keeps off status after resetting
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-// QTI_END: 2018-05-24: Android_UI: Settings: Fix app notification switch keeps off status after resetting
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;

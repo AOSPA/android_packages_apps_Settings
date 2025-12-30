@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
 
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
@@ -22,7 +21,6 @@
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 package com.android.settings.network;
 
 import android.app.settings.SettingsEnums;
@@ -37,9 +35,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsDumpService;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
 import com.android.settings.network.telephony.TelephonyUtils;
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -98,10 +94,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             @Nullable Lifecycle lifecycle) {
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
         // Connect to ExtTelephonyService
         TelephonyUtils.connectExtTelephonyService(context);
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
         final PrivateDnsPreferenceController privateDnsPreferenceController =

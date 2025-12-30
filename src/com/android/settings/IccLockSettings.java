@@ -52,9 +52,7 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// QTI_BEGIN: 2023-03-27: Android_UI: Settings: add SIM PIN input UI protection
 import androidx.fragment.app.DialogFragment;
-// QTI_END: 2023-03-27: Android_UI: Settings: add SIM PIN input UI protection
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
@@ -66,9 +64,7 @@ import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-// QTI_BEGIN: 2023-03-27: Android_UI: Settings: add SIM PIN input UI protection
 import java.util.UUID;
-// QTI_END: 2023-03-27: Android_UI: Settings: add SIM PIN input UI protection
 
 /**
  * Implements the preference screen to enable/disable ICC lock and
@@ -142,9 +138,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
     private int mSlotId = -1;
     private int mSubId;
     private TelephonyManager mTelephonyManager;
-// QTI_BEGIN: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
     private SubscriptionManager mSubscriptionManager;
-// QTI_END: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
 
     // For replies from IccCard interface
     private Handler mHandler = new Handler() {
@@ -200,9 +194,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
         mProxySubscriptionMgr.setLifecycle(getLifecycle());
 
         mTelephonyManager = getContext().getSystemService(TelephonyManager.class);
-// QTI_BEGIN: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
         mSubscriptionManager = getContext().getSystemService(SubscriptionManager.class);
-// QTI_END: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
 
         addPreferencesFromResource(R.xml.sim_lock_settings);
 
@@ -294,15 +286,11 @@ public class IccLockSettings extends SettingsPreferenceFragment
         for (int i = 0; i < numSims; ++i) {
             final SubscriptionInfo subInfo = getVisibleSubscriptionInfoForSimSlotIndex(i);
             if (subInfo != null) {
-// QTI_BEGIN: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
                 final int slot = subInfo.getSimSlotIndex();
-// QTI_END: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
                 if (mTelephonyManager.getSimStateForSlotIndex(slot) !=
-// QTI_BEGIN: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
                         TelephonyManager.SIM_STATE_NOT_READY) {
                     componenterList.add(subInfo);
                 }
-// QTI_END: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
             }
         }
 
@@ -360,9 +348,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
         final SubscriptionInfo sir = getVisibleSubscriptionInfoForSimSlotIndex(mSlotId);
         final int subId = (sir != null) ? sir.getSubscriptionId()
                 : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-// QTI_BEGIN: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
         mTelephonyManager =  mTelephonyManager.createForSubscriptionId(subId);
-// QTI_END: 2020-09-22: Telephony: Fix SIM pin lock showing as disabled for active sub
 
         int cardState = mTelephonyManager.getSimState();
         boolean canInteract = cardState == TelephonyManager.SIM_STATE_READY ||
@@ -820,7 +806,6 @@ public class IccLockSettings extends SettingsPreferenceFragment
         return mTabHost.newTabSpec(tag).setIndicator(title).setContent(
                 mEmptyTabContent);
     }
-// QTI_BEGIN: 2023-03-27: Android_UI: Settings: add SIM PIN input UI protection
 
     @Override
     public void onDisplayPreferenceDialog(Preference preference) {
@@ -838,5 +823,4 @@ public class IccLockSettings extends SettingsPreferenceFragment
         f.setTargetFragment(this, 0);
         f.show(getFragmentManager(), "dialog_preference");
     }
-// QTI_END: 2023-03-27: Android_UI: Settings: add SIM PIN input UI protection
 }

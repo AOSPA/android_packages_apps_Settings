@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
  *
@@ -22,47 +21,34 @@
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 package com.android.settings.network.telephony
 
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
 import android.content.Context
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
-// QTI_BEGIN: 2024-04-01: Telephony: Incremental scan via QCRIL hooks
 import android.telephony.AccessNetworkConstants.AccessNetworkType
-// QTI_END: 2024-04-01: Telephony: Incremental scan via QCRIL hooks
 import android.telephony.CellIdentity
-// QTI_BEGIN: 2024-04-01: Telephony: Incremental scan via QCRIL hooks
 import android.telephony.CellIdentityLte
 import android.telephony.CellIdentityNr
 import android.telephony.CellIdentityWcdma
-// QTI_END: 2024-04-01: Telephony: Incremental scan via QCRIL hooks
 import android.telephony.CellIdentityGsm
 import android.telephony.CellInfo
-// QTI_BEGIN: 2024-04-01: Telephony: Incremental scan via QCRIL hooks
 import android.telephony.CellInfoLte
 import android.telephony.CellInfoNr
 import android.telephony.CellInfoWcdma
-// QTI_END: 2024-04-01: Telephony: Incremental scan via QCRIL hooks
 import android.telephony.CellInfoGsm
 import android.text.BidiFormatter
 import android.text.TextDirectionHeuristics
 import com.android.internal.telephony.OperatorInfo
 
-// QTI_BEGIN: 2024-04-01: Telephony: Incremental scan via QCRIL hooks
 import java.util.Collections
 
-// QTI_END: 2024-04-01: Telephony: Incremental scan via QCRIL hooks
 /**
  * Add static Utility functions to get information from the CellInfo object.
  * TODO: Modify [CellInfo] for simplify those functions
  */
 object CellInfoUtil {
 
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
     var context: Context? = null
 
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
     /**
      * Returns the title of the network obtained in the manual search.
      *
@@ -81,7 +67,6 @@ object CellInfoUtil {
     }
 
     /**
-// QTI_BEGIN: 2024-04-01: Telephony: Incremental scan via QCRIL hooks
      * Creates a CellInfo object from OperatorInfo for Legacy Incremental Scan results.
      */
     @JvmStatic
@@ -217,7 +202,6 @@ object CellInfoUtil {
         return cellInfo
     }
 
-// QTI_END: 2024-04-01: Telephony: Incremental scan via QCRIL hooks
     /**
      * Convert a list of cellInfos to readable string without sensitive info.
      */
@@ -247,7 +231,6 @@ object CellInfoUtil {
      */
     @JvmStatic
     fun CellIdentity.getOperatorNumeric(): String? {
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
         if (this is CellIdentityNr) {
             if (MobileNetworkUtils.isCagSnpnEnabled(context)) {
                 if (snpnInfo != null) {
@@ -255,12 +238,10 @@ object CellInfoUtil {
                 }
             }
         }
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
         val mcc = mccString
         val mnc = mncString
         return if (mcc == null || mnc == null) null else mcc + mnc
     }
-// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
 
     /**
      * Returns the network info obtained in the manual search.
@@ -291,5 +272,4 @@ object CellInfoUtil {
         }
         return info
     }
-// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 }

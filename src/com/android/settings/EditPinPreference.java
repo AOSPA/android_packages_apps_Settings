@@ -18,15 +18,11 @@ package com.android.settings;
 
 import android.app.Dialog;
 import android.content.Context;
-// QTI_BEGIN: 2023-03-27: Android_UI: Settings: add SIM PIN input UI protection
 import android.os.Bundle;
-// QTI_END: 2023-03-27: Android_UI: Settings: add SIM PIN input UI protection
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
-// QTI_BEGIN: 2023-03-27: Android_UI: Settings: add SIM PIN input UI protection
 import android.view.WindowManager;
-// QTI_END: 2023-03-27: Android_UI: Settings: add SIM PIN input UI protection
 import android.widget.EditText;
 
 import com.android.settingslib.CustomEditTextPreferenceCompat;
@@ -86,7 +82,6 @@ class EditPinPreference extends CustomEditTextPreferenceCompat {
             onClick();
         }
     }
-// QTI_BEGIN: 2023-03-27: Android_UI: Settings: add SIM PIN input UI protection
 
     public static class EditPinDialogFragment extends
             CustomPreferenceDialogFragment {
@@ -106,5 +101,4 @@ class EditPinPreference extends CustomEditTextPreferenceCompat {
             return dialog;
         }
     }
-// QTI_END: 2023-03-27: Android_UI: Settings: add SIM PIN input UI protection
 }

@@ -14,18 +14,12 @@
  * limitations under the License.
  */
 
-// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
  *
-// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
-// QTI_BEGIN: 2025-02-12: Telephony: Fix for updating roaming data option greyed out state
  * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
-// QTI_END: 2025-02-12: Telephony: Fix for updating roaming data option greyed out state
-// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
-// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
 package com.android.settings.network.telephony
 
 import android.content.Context
@@ -50,18 +44,14 @@ import com.android.settingslib.spaprivileged.model.enterprise.Restrictions
 import com.android.settingslib.spaprivileged.template.preference.RestrictedSwitchPreference
 
 /** Preference controller for "Roaming" */
-// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
 class RoamingPreferenceController
-// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
 @JvmOverloads
 constructor(
     context: Context,
     key: String,
     private val mobileDataRepository: MobileDataRepository = MobileDataRepository(context),
-// QTI_BEGIN: 2025-02-12: Telephony: Fix for updating roaming data option greyed out state
     private val roamingPreferenceRepository: RoamingPreferenceRepository =
             RoamingPreferenceRepository(context),
-// QTI_END: 2025-02-12: Telephony: Fix for updating roaming data option greyed out state
 ) : ComposePreferenceController(context, key) {
     @VisibleForTesting var fragmentManager: FragmentManager? = null
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
@@ -69,24 +59,18 @@ constructor(
     private var telephonyManager = context.getSystemService(TelephonyManager::class.java)!!
     private val carrierConfigRepository = CarrierConfigRepository(context)
     private val roamingSearchItem = RoamingSearchItem(context)
-// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
     private var dialogType = -1
-// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
 
     fun init(fragmentManager: FragmentManager, subId: Int) {
         this.fragmentManager = fragmentManager
         this.subId = subId
-// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
         Log.d(TAG, "init() subId: $subId");
-// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
         telephonyManager = telephonyManager.createForSubscriptionId(subId)
-// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
         if ((this.subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) ||
                 (telephonyManager == null)) {
             return;
         }
         RoamingPreferenceControllerUtil.init(mContext)
-// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
     }
 
     override fun getAvailabilityStatus() =
@@ -98,28 +82,21 @@ constructor(
         val isDataRoamingEnabled by
             remember { mobileDataRepository.isDataRoamingEnabledFlow(subId) }
                 .collectAsStateWithLifecycle(null)
-// QTI_BEGIN: 2025-02-12: Telephony: Fix for updating roaming data option greyed out state
         val isDisallowed by
             remember { roamingPreferenceRepository.isDisallowedFlow(subId) }
                 .collectAsStateWithLifecycle(initialValue = false)
-// QTI_END: 2025-02-12: Telephony: Fix for updating roaming data option greyed out state
         RestrictedSwitchPreference(
             model =
                 object : SwitchPreferenceModel {
                     override val title = stringResource(R.string.roaming)
                     override val summary = { summary }
-// QTI_BEGIN: 2025-02-12: Telephony: Fix for updating roaming data option greyed out state
                     override val changeable = { !isDisallowed }
-// QTI_END: 2025-02-12: Telephony: Fix for updating roaming data option greyed out state
                     override val checked = { isDataRoamingEnabled }
                     override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
                         if (newChecked && isDialogNeeded()) {
-// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
                             dialogType = RoamingDialogFragment.TYPE_ENABLE_DIALOG
                             showDialog(dialogType, title)
-// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
                         } else {
-// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
                             if (RoamingPreferenceControllerUtil.isDialogNeeded(subId)) {
                                 dialogType = RoamingDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG
                                 showDialog(dialogType, title)
@@ -127,7 +104,6 @@ constructor(
                                 // Update data directly if we don't need dialog
                                 telephonyManager.isDataRoamingEnabled = newChecked
                             }
-// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
                         }
                     }
                 },
@@ -137,30 +113,24 @@ constructor(
 
     @VisibleForTesting
     fun isDialogNeeded(): Boolean {
-// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
         if (telephonyManager == null) {
             return false;
         }
 
-// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
         // Need dialog if we need to turn on roaming and the roaming charge indication is allowed
         return !carrierConfigRepository.getBoolean(
             subId, CarrierConfigManager.KEY_DISABLE_CHARGE_INDICATION_BOOL)
     }
 
-// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
     private fun showDialog(type: Int, preftitle: String) {
         Log.d(TAG, "showDialog type: $type")
         fragmentManager?.let { RoamingDialogFragment.newInstance(preftitle, type, subId,
                 MobileNetworkSettings.isCiwlanModeSupported(subId)).show(it, DIALOG_TAG) }
-// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
     }
 
     companion object {
         private const val DIALOG_TAG = "MobileDataDialog"
-// QTI_BEGIN: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
         private const val TAG = "RoamingPreferenceController"
-// QTI_END: 2024-10-24: Telephony: Use kotlin implementation for roaming preference
 
         class RoamingSearchItem(private val context: Context) : MobileNetworkSettingsSearchItem {
             private val carrierConfigRepository = CarrierConfigRepository(context)

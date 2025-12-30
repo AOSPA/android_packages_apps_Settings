@@ -1,4 +1,3 @@
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
 /*
  * Copyright (C) 2020 The Android Open Source Project
  *
@@ -16,11 +15,7 @@
  */
 
 /*
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-01-29: Telephony: Fix copyright marking
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
-// QTI_END: 2024-01-29: Telephony: Fix copyright marking
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
  * Copyright (c) 2022-2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
@@ -46,11 +41,7 @@ import android.telephony.ims.ImsMmTelManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-11-27: Telephony: Fix NPE when trying to turn on C_IWLAN
 import androidx.annotation.NonNull;
-// QTI_END: 2024-11-27: Telephony: Fix NPE when trying to turn on C_IWLAN
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.DefaultLifecycleObserver;
@@ -61,9 +52,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
 import com.android.settings.network.telephony.mode.NetworkModes;
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 
 import com.qti.extphone.ExtTelephonyManager;
@@ -113,21 +102,13 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     private ServiceCallback mExtTelManagerServiceCallback = new ServiceCallback() {
         @Override
         public void onConnected() {
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-11-27: Telephony: Fix NPE when trying to turn on C_IWLAN
             Log.d(LOG_TAG, "ExtTelephony service connected");
-// QTI_END: 2024-11-27: Telephony: Fix NPE when trying to turn on C_IWLAN
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
             mServiceConnected = true;
         }
 
         @Override
         public void onDisconnected() {
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-11-27: Telephony: Fix NPE when trying to turn on C_IWLAN
             Log.d(LOG_TAG, "ExtTelephony service disconnected");
-// QTI_END: 2024-11-27: Telephony: Fix NPE when trying to turn on C_IWLAN
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
             mServiceConnected = false;
         }
     };
@@ -149,8 +130,6 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         return this;
     }
 
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-11-27: Telephony: Fix NPE when trying to turn on C_IWLAN
     @Override
     public void  onCreate(@NonNull LifecycleOwner owner) {
         Log.d(LOG_TAG, "onCreate subId " + mSubId);
@@ -166,26 +145,16 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         }
     }
 
-// QTI_END: 2024-11-27: Telephony: Fix NPE when trying to turn on C_IWLAN
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
     @Override
     public void onResume(LifecycleOwner owner) {
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         Log.d(LOG_TAG, "onResume subId " + mSubId);
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
         registerCrossSimObserver();
         mTelephonyCallback.register(mContext, mSubId);
     }
 
     @Override
     public void onPause(LifecycleOwner owner) {
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         Log.d(LOG_TAG, "onPause subId " + mSubId);
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
         unregisterCrossSimObserver();
         mTelephonyCallback.unregister();
     }
@@ -233,11 +202,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
             TelephonyCallback.CallStateListener {
         @Override
         public void onCallStateChanged(int state) {
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
             Log.d(LOG_TAG, "onCallStateChanged subId " + mSubId);
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
             mCallState = state;
             updateState(mPreference);
         }
@@ -252,11 +217,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         }
 
         public void unregister() {
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
             Log.d(LOG_TAG, "unregister subId " + mSubId);
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
             mCallState = null;
             if (mTelephonyManager != null) {
                 mTelephonyManager.unregisterTelephonyCallback(this);
@@ -280,12 +241,8 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-11-27: Telephony: Fix NPE when trying to turn on C_IWLAN
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-// QTI_END: 2024-11-27: Telephony: Fix NPE when trying to turn on C_IWLAN
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
     }
 
     /**
@@ -320,8 +277,6 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     }
 
     private boolean isDialogNeeded(boolean isChecked) {
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         // Warn on turning on C_IWLAN when a C_IWLAN-incompatible network is set
         final int DDS = SubscriptionManager.getDefaultDataSubscriptionId();
         final int nDDS = MobileNetworkSettings.getNonDefaultDataSub();
@@ -339,24 +294,12 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
                     isCiwlanIncompatibleNwSelected(DDS);
             Log.d(LOG_TAG, "ciwlanIncompatibleNwSelectedForOtherSub = " +
                     ciwlanIncompatibleNwSelectedForOtherSub);
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
         }
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         boolean isCiwlanIncompatibleNwSelected = ciwlanIncompatibleNwSelectedForCurrentSub ||
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-02-23: RIL: Adjust the C_IWLAN warning dialog criteria
                 ciwlanIncompatibleNwSelectedForOtherSub;
-// QTI_END: 2024-02-23: RIL: Adjust the C_IWLAN warning dialog criteria
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
         Log.d(LOG_TAG, "isDialogNeeded: isChecked = " + isChecked +
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
                 ", isCiwlanIncompatibleNwSelected = " + isCiwlanIncompatibleNwSelected);
         if (isChecked && isCiwlanIncompatibleNwSelected) {
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-03-29: Telephony: Modify C_IWLAN warning behavior to be non-blocking
             if (isDDS) {
                 if (ciwlanIncompatibleNwSelectedForCurrentSub &&
                         ciwlanIncompatibleNwSelectedForOtherSub) {
@@ -393,43 +336,27 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
                 } else {
                     // No warning
                 }
-// QTI_END: 2024-03-29: Telephony: Modify C_IWLAN warning behavior to be non-blocking
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
             }
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
             return true;
         }
         return false;
     }
 
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
     private boolean isCiwlanIncompatibleNwSelected(int subId) {
         TelephonyManager tm = mTelephonyManager.createForSubscriptionId(subId);
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         long preferredRaf = NetworkModes.NETWORK_MODE_UNKNOWN;
-// QTI_BEGIN: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
         try {
             preferredRaf = tm.getAllowedNetworkTypesForReason(
                     TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
         } catch (Exception ex) {
             Log.e(LOG_TAG, "getAllowedNetworkTypesForReason exception", ex);
         }
-// QTI_END: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         return (LTE & preferredRaf) == 0 && (NR & preferredRaf) == 0;
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
     }
 
     private void showDialog(int type) {
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-11-27: Telephony: Fix NPE when trying to turn on C_IWLAN
         final BackupCallingDialogFragment dialogFragment =
                 BackupCallingDialogFragment.newInstance(type);
-// QTI_END: 2024-11-27: Telephony: Fix NPE when trying to turn on C_IWLAN
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
     }
 
@@ -464,21 +391,13 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
         Log.d(LOG_TAG, "updateState subId " + mSubId + ", call state " + mCallState);
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
         if ((mCallState == null) || (preference == null) ||
                 (!(preference instanceof SwitchPreference))) {
             Log.d(LOG_TAG, "Skip update under mCallState = " + mCallState);
             return;
         }
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-02-06: Telephony: Fix C_IWLAN UI not showing
         mCallingPreferenceCategoryController.updateChildVisible(getPreferenceKey(), true);
-// QTI_END: 2024-02-06: Telephony: Fix C_IWLAN UI not showing
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
         SubscriptionInfo subInfo = getSubscriptionInfoFromActiveList(mSubId);
         final SwitchPreference switchPreference = (SwitchPreference) preference;
         // Gray out the setting during calls
@@ -569,4 +488,4 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         }
         return getSubscriptionInfoFromList(getActiveSubscriptionList(), subId);
     }
-}// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
+}

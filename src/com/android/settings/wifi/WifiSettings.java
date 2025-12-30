@@ -183,10 +183,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     // Worker thread used for WifiPickerTracker work
     private HandlerThread mWorkerThread;
-// QTI_BEGIN: 2021-09-03: Android_UI: Settings: Fix NPE in wifi picker tracker callback
     private Handler mMainHandler;
     private Handler mWorkerHandler;
-// QTI_END: 2021-09-03: Android_UI: Settings: Fix NPE in wifi picker tracker callback
 
     @VisibleForTesting
     WifiPickerTracker mWifiPickerTracker;
@@ -289,17 +287,13 @@ public class WifiSettings extends RestrictedSettingsFragment
                 return SystemClock.elapsedRealtime();
             }
         };
-// QTI_BEGIN: 2021-09-03: Android_UI: Settings: Fix NPE in wifi picker tracker callback
 
         mMainHandler = new Handler(Looper.getMainLooper());
         mWorkerHandler = mWorkerThread.getThreadHandler();
-// QTI_END: 2021-09-03: Android_UI: Settings: Fix NPE in wifi picker tracker callback
         mWifiPickerTracker = FeatureFactory.getFeatureFactory()
                 .getWifiTrackerLibProvider()
                 .createWifiPickerTracker(getSettingsLifecycle(), context,
-// QTI_BEGIN: 2021-09-03: Android_UI: Settings: Fix NPE in wifi picker tracker callback
                         mMainHandler, mWorkerHandler,
-// QTI_END: 2021-09-03: Android_UI: Settings: Fix NPE in wifi picker tracker callback
                         elapsedRealtimeClock,
                         MAX_SCAN_AGE_MILLIS,
                         SCAN_INTERVAL_MILLIS,
@@ -354,12 +348,10 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (mWifiEnabler != null) {
             mWifiEnabler.teardownSwitchController();
         }
-// QTI_BEGIN: 2021-09-03: Android_UI: Settings: Fix NPE in wifi picker tracker callback
 
         // remove all msg and callback in main handler and worker handler
         mMainHandler.removeCallbacksAndMessages(null);
         mWorkerHandler.removeCallbacksAndMessages(null);
-// QTI_END: 2021-09-03: Android_UI: Settings: Fix NPE in wifi picker tracker callback
         mWorkerThread.quit();
 
         super.onDestroyView();
@@ -640,9 +632,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     /** Called when the state of Wifi has changed. */
     @Override
     public void onWifiStateChanged() {
-// QTI_BEGIN: 2022-02-07: Android_UI: Settings: Fix force close when rotating screen
         if (mIsRestricted || isFinishingOrDestroyed()) {
-// QTI_END: 2022-02-07: Android_UI: Settings: Fix force close when rotating screen
             return;
         }
         final int wifiState = mWifiPickerTracker.getWifiState();
@@ -680,13 +670,11 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public void onWifiEntriesChanged() {
-// QTI_BEGIN: 2021-09-03: Android_UI: Settings: Fix NPE in wifi picker tracker callback
         if (isFinishingOrDestroyed()) {
             Log.d(TAG, "onWifiEntriesChanged: isFinishingOrDestroyed true");
             return;
         }
 
-// QTI_END: 2021-09-03: Android_UI: Settings: Fix NPE in wifi picker tracker callback
         if (mIsWifiEntryListStale) {
             mIsWifiEntryListStale = false;
             updateWifiEntryPreferences();
@@ -831,12 +819,10 @@ public class WifiSettings extends RestrictedSettingsFragment
             mWifiEntryPreferenceCategory.addPreference(pref);
         } else {
             // Continuing showing progress bar for an additional delay to overlap with animation
-// QTI_BEGIN: 2021-07-26: Android_UI: Settings: fix force close caused by getView return null
             final View view = getView();
             if (null != view) {
                 view.postDelayed(mHideProgressBarRunnable, 1700 /* delay millis */);
             }
-// QTI_END: 2021-07-26: Android_UI: Settings: fix force close caused by getView return null
         }
 
         mAddWifiNetworkPreference.setOrder(index++);
