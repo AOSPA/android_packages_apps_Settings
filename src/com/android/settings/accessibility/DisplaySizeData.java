@@ -29,7 +29,13 @@ import java.util.stream.Collectors;
 
 /**
  * Data class for storing the configurations related to the display size.
+ *
+ * @deprecated We're moving toward using the Catalyst infrastructure to decouple UI and its data.
+ * Use {@link com.android.settings.accessibility.textreading.data.DisplaySizeDataStore} instead.
+ *
  */
+// TODO: When deleting this class, please also delete the reference in proguard.flags.
+@Deprecated
 // LINT.IfChange
 public class DisplaySizeData extends PreviewSizeData<Integer> {
     private final DisplayDensityUtils mDensity;
