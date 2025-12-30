@@ -576,8 +576,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             addFooterPreference(
                     refresh, EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE);
         }
-        if (mInjector.getFlags().displaySizeConnectedDisplaySetting()
-                && !isDisplayInMirroringMode()) {
+        if (!isDisplayInMirroringMode()) {
             addSizePreference(refresh, display, position);
         }
     }
