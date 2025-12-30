@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   Copyright (C) 2025 The Android Open Source Project
 
@@ -16,19 +16,8 @@
 -->
 
 <ItemGroup xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/magnification_screen_in_suw">
-
-    <SectionItem
-        android:id="@+id/magnification_option_in_suw"
-        android:title="@string/accessibility_screen_option">
-
-        <SwitchItem
-            android:id="@+id/magnify_keyboard_in_suw"
-            android:title="@string/accessibility_screen_magnification_nav_ime_title"
-            android:summary="@string/accessibility_screen_magnification_nav_ime_summary"/>
-
-    </SectionItem>
+    android:id="@+id/color_inversion_in_suw">
 
     <com.android.settings.accessibility.setupwizard.items.FooterItem
-        android:id="@+id/magnification_footer_in_suw"/>
+        android:id="@+id/color_inversion_footer_in_suw" />
 </ItemGroup>

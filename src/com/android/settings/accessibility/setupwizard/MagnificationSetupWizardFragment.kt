@@ -28,6 +28,12 @@ class MagnificationSetupWizardFragment : BaseSetupWizardFragment() {
             findItem(adapter, R.id.magnify_keyboard_in_suw)?.let {
                 put(R.id.magnify_keyboard_in_suw, MagnifyKeyboardSwitchItemController(context, it))
             }
+            findItem(adapter, R.id.magnification_footer_in_suw)?.let {
+                put(
+                    R.id.magnification_footer_in_suw,
+                    MagnificationFooterItemController(context, it),
+                )
+            }
         }
 
     override val fragmentLayoutResId: Int = R.layout.magnification_suw_screen
