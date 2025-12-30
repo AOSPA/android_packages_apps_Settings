@@ -15,6 +15,8 @@
  */
 package com.android.settings.location;
 
+import static com.android.settings.testutils.DevicePolicyUtils.DPC_ADMIN;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
@@ -28,20 +30,26 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.PolicyEnforcementInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.text.TextUtils;
 
 import androidx.lifecycle.LifecycleOwner;
 
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
@@ -55,8 +63,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowSecureSettings.class)
+@Config(shadows = {ShadowSecureSettings.class, ShadowDevicePolicyManager.class})
 public class LocationEnablerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private UserManager mUserManager;
@@ -179,8 +190,20 @@ public class LocationEnablerTest {
         assertThat(mEnabler.isManagedProfileRestrictedByBase()).isTrue();
     }
 
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     @Test
     public void setRestriction_getShareLocationEnforcedAdmin_shouldReturnEnforcedAdmin() {
+        int userId = UserHandle.myUserId();
+        ShadowDevicePolicyManager.getShadow().setPolicyEnforcementInfoForUserRestriction(
+                UserManager.DISALLOW_CONFIG_LOCATION,
+                new PolicyEnforcementInfo(List.of(DPC_ADMIN)));
+
+        assertThat(mEnabler.getShareLocationEnforcedAdmin(userId) != null).isTrue();
+    }
+
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @Test
+    public void setRestriction_getShareLocationEnforcedAdmin_shouldReturnEnforcedAdmin_refactorDisabled() {
         int userId = UserHandle.myUserId();
         List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
         // Add two enforcing users so that RestrictedLockUtils.checkIfRestrictionEnforced returns

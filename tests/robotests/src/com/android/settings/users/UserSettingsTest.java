@@ -266,7 +266,32 @@ public class UserSettingsTest {
     }
 
     @Test
+    @EnableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     public void testGetRawDataToIndex_addRestrictedProfileAllowed_addUserTitleIsCorrect() {
+        ShadowUserManager.getShadow().setSupportsMultipleUsers(true);
+        givenUsers(getAdminUser(true));
+        SettingsShadowResources.overrideResource(
+                com.android.settings.R.bool.config_offer_restricted_profiles, true);
+        when(mUserManager.isUserTypeSupported(UserManager.USER_TYPE_FULL_RESTRICTED))
+                .thenReturn(true);
+
+        List<SearchIndexableRaw> rawData =
+                UserSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
+
+        String title = null;
+        for (SearchIndexableRaw rawDataItem : rawData) {
+            if (rawDataItem.key.equals(KEY_ADD_USER)) {
+                title = rawDataItem.title;
+            }
+        }
+
+        assertThat(title).isEqualTo(mContext.getString(
+                com.android.settings.R.string.user_add_user_or_profile_menu));
+    }
+
+    @Test
+    @DisableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    public void testGetRawDataToIndex_addRestrictedProfileAllowed_addUserTitleIsCorrect_refactorDisabled() {
         ShadowUserManager.getShadow().setSupportsMultipleUsers(true);
         givenUsers(getAdminUser(true));
         SettingsShadowResources.overrideResource(
@@ -353,7 +378,38 @@ public class UserSettingsTest {
     }
 
     @Test
+    @EnableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     public void withDisallowRemoveUser_ShouldDisableRemoveUser() {
+        // TODO(b/115781615): Tidy robolectric tests
+        // Arrange
+        ShadowDevicePolicyManager.getShadow().setPolicyEnforcementInfoForUserRestriction(
+                UserManager.DISALLOW_REMOVE_USER, new PolicyEnforcementInfo(List.of(DPC_ADMIN)));
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
+        mUserCapabilities.mIsAdmin = false;
+        mUserCapabilities.mIsMain = false;
+
+        Menu menu = mock(Menu.class);
+        MenuItem menuItem = mock(MenuItem.class);
+        final String title = "title";
+
+        doReturn(title).when(menuItem).getTitle();
+        doReturn(menuItem).when(menu).add(
+                anyInt(), eq(Menu.FIRST), anyInt(), any(CharSequence.class));
+
+        // Act
+        mFragment.onCreateOptionsMenu(menu, mock(MenuInflater.class));
+
+        // Assert
+        // Expect that the click will be overridden and the color will be faded
+        // (by RestrictedLockUtilsInternal)
+        verify(menuItem).setOnMenuItemClickListener(notNull());
+        SpannableStringBuilder defaultTitle = new SpannableStringBuilder(title);
+        verify(menuItem).setTitle(AdditionalMatchers.not(eq(defaultTitle)));
+    }
+
+    @Test
+    @DisableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    public void withDisallowRemoveUser_ShouldDisableRemoveUser_refactorDisabled() {
         // TODO(b/115781615): Tidy robolectric tests
         // Arrange
         final int userId = UserHandle.myUserId();
@@ -369,6 +425,7 @@ public class UserSettingsTest {
 
         doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
         mUserCapabilities.mIsAdmin = false;
+        mUserCapabilities.mIsMain = false;
 
         Menu menu = mock(Menu.class);
         MenuItem menuItem = mock(MenuItem.class);
