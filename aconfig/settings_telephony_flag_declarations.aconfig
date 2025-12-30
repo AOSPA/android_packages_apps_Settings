@@ -14,3 +14,10 @@ flag {
     description: "Enable this flag to keep system dialer enabled"
     bug: "422974529"
 }
+
+flag {
+    name: "show_sim_status_detailed_info"
+    namespace: "settings_experience"
+    description: "Show GID1 and Carrier ID in Sim Status"
+    bug: "471099598"
+}
