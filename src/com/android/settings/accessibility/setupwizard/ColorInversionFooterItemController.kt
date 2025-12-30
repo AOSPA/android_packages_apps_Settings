@@ -1,0 +1,39 @@
+/*
+ * Copyright (C) 2025 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.accessibility.setupwizard
+
+import android.content.Context
+import androidx.fragment.app.FragmentActivity
+import com.android.settings.accessibility.colorinversion.ui.FooterPreference
+import com.google.android.setupdesign.items.Item
+
+/** Controller for the color inversion footer item in the Accessibility Setup Wizard. */
+class ColorInversionFooterItemController(private val context: Context, item: Item) :
+    BaseItemController(item) {
+
+    // helpResource = 0 avoids showing "Learn more" links in Setup Wizard flow
+    private val colorInversionFooterMetadata = FooterPreference(helpResource = 0)
+
+    public override fun bindData(item: Item) {
+        colorInversionFooterMetadata.getTitle(context).let {
+            item.summary = it
+            item.contentDescription = it
+        }
+    }
+
+    override fun onItemSelected(activity: FragmentActivity) {}
+}

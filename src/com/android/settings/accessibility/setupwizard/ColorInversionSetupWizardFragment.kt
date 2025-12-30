@@ -23,7 +23,15 @@ import com.google.android.setupdesign.items.RecyclerItemAdapter
 class ColorInversionSetupWizardFragment : BaseSetupWizardFragment() {
 
     override fun createControllers(adapter: RecyclerItemAdapter): Map<Int, BaseItemController> =
-        emptyMap()
+        buildMap {
+            val context = requireContext()
+            findItem(adapter, R.id.color_inversion_footer_in_suw)?.let {
+                put(
+                    R.id.color_inversion_footer_in_suw,
+                    ColorInversionFooterItemController(context, it),
+                )
+            }
+        }
 
     override val fragmentLayoutResId: Int = R.layout.color_inversion_suw_screen
 
