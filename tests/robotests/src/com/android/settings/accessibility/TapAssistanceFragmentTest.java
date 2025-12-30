@@ -20,6 +20,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.provider.SearchIndexableResource;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -27,6 +32,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -36,6 +42,8 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 /** Tests for {@link TapAssistanceFragment}. */
 public class TapAssistanceFragmentTest {
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private TapAssistanceFragment mFragment;
@@ -51,17 +59,26 @@ public class TapAssistanceFragmentTest {
                 SettingsEnums.ACCESSIBILITY_TAP_ASSISTANCE);
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_TIMING_CONTROLS_SCREEN)
     @Test
     public void getPreferenceScreenResId_returnsCorrectXml() {
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
                 R.xml.accessibility_tap_assistance);
     }
 
+    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_TIMING_CONTROLS_SCREEN)
+    @Test
+    public void getPreferenceScreenResId_returnsZero() {
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(0);
+    }
+
+
     @Test
     public void getLogTag_returnsCorrectTag() {
         assertThat(mFragment.getLogTag()).isEqualTo("TapAssistanceFragment");
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_TIMING_CONTROLS_SCREEN)
     @Test
     public void getNonIndexableKeys_existInXmlLayout() {
         final List<String> niks = TapAssistanceFragment.SEARCH_INDEX_DATA_PROVIDER
@@ -70,5 +87,26 @@ public class TapAssistanceFragmentTest {
                 XmlTestUtils.getKeysFromPreferenceXml(mContext, R.xml.accessibility_tap_assistance);
 
         assertThat(keys).containsAtLeastElementsIn(niks);
+    }
+
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_TIMING_CONTROLS_SCREEN)
+    @Test
+    public void getXmlResourcesToIndex_returnsCorrectXmlLayout() {
+        final List<SearchIndexableResource> searchIndexableResources =
+                TapAssistanceFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(mContext, /* enabled= */ true);
+
+        assertThat(searchIndexableResources.getFirst().xmlResId).isEqualTo(
+                R.xml.accessibility_tap_assistance);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_TIMING_CONTROLS_SCREEN)
+    @Test
+    public void getXmlResourcesToIndex_returnsNull() {
+        final List<SearchIndexableResource> searchIndexableResources =
+                TapAssistanceFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(mContext, /* enabled= */ true);
+
+        assertThat(searchIndexableResources).isNull();
     }
 }
