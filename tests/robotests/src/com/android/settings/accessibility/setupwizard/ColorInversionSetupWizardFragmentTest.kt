@@ -17,10 +17,13 @@
 package com.android.settings.accessibility.setupwizard
 
 import android.content.Context
+import android.view.View
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.google.android.setupcompat.template.FooterBarMixin
+import com.google.android.setupdesign.GlifLayout
 import com.google.android.setupdesign.GlifRecyclerLayout
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
@@ -49,6 +52,44 @@ class ColorInversionSetupWizardFragmentTest {
                             R.string.accessibility_display_inversion_preference_title
                         )
                     )
+            }
+        }
+    }
+
+    @Test
+    fun footerButtons_areInitializedCorrect() {
+        launchFragment().use { scenario ->
+            scenario.onFragment { fragment ->
+                val layout =
+                    fragment
+                        .requireView()
+                        .findViewById<GlifLayout>(R.id.color_inversion_suw_screen_layout)
+
+                val mixin = layout.getMixin(FooterBarMixin::class.java)
+                assertThat(mixin.primaryButton.text).isEqualTo(appContext.getString(R.string.done))
+                assertThat(mixin.primaryButtonView.visibility).isEqualTo(View.VISIBLE)
+            }
+        }
+    }
+
+    @Test
+    fun clickDoneButton_popsBackStack() {
+        launchFragment().use { scenario ->
+            scenario.onFragment { fragment ->
+                val fragmentManager = fragment.parentFragmentManager
+                fragmentManager.beginTransaction().addToBackStack("test_state").commit()
+                fragmentManager.executePendingTransactions()
+                val initialCount = fragmentManager.backStackEntryCount
+                val layout =
+                    fragment
+                        .requireView()
+                        .findViewById<GlifLayout>(R.id.color_inversion_suw_screen_layout)
+                val mixin = layout.getMixin(FooterBarMixin::class.java)
+
+                mixin.primaryButtonView.performClick()
+                fragmentManager.executePendingTransactions()
+
+                assertThat(fragmentManager.backStackEntryCount).isEqualTo(initialCount - 1)
             }
         }
     }
