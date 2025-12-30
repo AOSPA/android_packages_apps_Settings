@@ -25,7 +25,6 @@ import com.android.settings.R
 import com.android.settings.Settings.ColorModeActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.ColorModeUtils.getActiveColorModeName
-import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
@@ -49,7 +48,7 @@ open class ColorModeScreen :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.color_mode_purpose
 
@@ -58,8 +57,6 @@ open class ColorModeScreen :
 
     override val keywords
         get() = R.string.keywords_color_mode
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkDisplayAndTouch25q4()
 
     override fun getMetricsCategory() = SettingsEnums.COLOR_MODE_SETTINGS
 
