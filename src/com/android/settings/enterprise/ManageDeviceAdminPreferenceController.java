@@ -23,7 +23,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.utils.StringUtil;
 
-
+// LINT.IfChange
 public class ManageDeviceAdminPreferenceController extends BasePreferenceController {
 
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
@@ -59,3 +59,4 @@ public class ManageDeviceAdminPreferenceController extends BasePreferenceControl
     }
 
 }
+// LINT.ThenChange(../applications/specialaccess/deviceadmin/DeviceAdminApiScreen.kt)
