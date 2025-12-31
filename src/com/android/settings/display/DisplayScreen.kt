@@ -44,7 +44,7 @@ open class DisplayScreen :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.display_settings_screen_purpose
 
@@ -70,22 +70,43 @@ open class DisplayScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +Category("category_brightness", R.string.category_brightness_purpose, R.string.category_name_brightness) order -200 += {
-                +BrightnessLevelPreference()
-                if (Flags.catalystScreenBrightnessMode()) +AutoBrightnessScreen.KEY
-            }
-            +Category("category_lock_display", R.string.category_lock_display_purpose, R.string.category_name_lock_display) order -190 += {
-                if (Flags.catalystLockscreenFromDisplaySettings()) +LockScreenPreferenceScreen.KEY
-                +AmbientDisplayAlwaysOnPreferenceScreen.KEY
-            }
-            +Category("category_key_appearance", R.string.category_key_appearance_purpose, R.string.category_name_appearance) order -180 += {
-                if (AccessibilityFlags.catalystDarkUiMode()) +DarkModeScreen.KEY
-                if (Flags.catalystTextReadingScreen()) +TextReadingScreen.KEY
-            }
-            +Category("category_other", R.string.category_other_purpose, R.string.category_name_display_controls) order -150 += {
-                +PeakRefreshRateSwitchPreference()
-                if (Flags.catalystScreensaver()) +ScreensaverScreen.KEY
-            }
+            +Category(
+                "category_brightness",
+                R.string.category_brightness_purpose,
+                R.string.category_name_brightness,
+            ) order -200 +=
+                {
+                    +BrightnessLevelPreference()
+                    if (Flags.catalystScreenBrightnessMode()) +AutoBrightnessScreen.KEY
+                }
+            +Category(
+                "category_lock_display",
+                R.string.category_lock_display_purpose,
+                R.string.category_name_lock_display,
+            ) order -190 +=
+                {
+                    if (Flags.catalystLockscreenFromDisplaySettings())
+                        +LockScreenPreferenceScreen.KEY
+                    +AmbientDisplayAlwaysOnPreferenceScreen.KEY
+                }
+            +Category(
+                "category_key_appearance",
+                R.string.category_key_appearance_purpose,
+                R.string.category_name_appearance,
+            ) order -180 +=
+                {
+                    if (AccessibilityFlags.catalystDarkUiMode()) +DarkModeScreen.KEY
+                    +TextReadingScreen.KEY
+                }
+            +Category(
+                "category_other",
+                R.string.category_other_purpose,
+                R.string.category_name_display_controls,
+            ) order -150 +=
+                {
+                    +PeakRefreshRateSwitchPreference()
+                    if (Flags.catalystScreensaver()) +ScreensaverScreen.KEY
+                }
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
