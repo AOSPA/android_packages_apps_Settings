@@ -30,6 +30,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
@@ -74,7 +75,21 @@ public class UserCapabilitiesTest {
     }
 
     @Test
+    @EnableFlags({Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
     public void disallowUserSwitch_restrictionIsSet_true() {
+        PolicyEnforcementInfo policyEnforcementInfo = new PolicyEnforcementInfo(List.of(DPC_ADMIN));
+        mDpm.setPolicyEnforcementInfoForUserRestriction(DISALLOW_USER_SWITCH,
+                policyEnforcementInfo);
+
+        UserCapabilities userCapabilities = UserCapabilities.create(mContext);
+        userCapabilities.updateAddUserCapabilities(mContext);
+
+        assertThat(userCapabilities.mDisallowSwitchUser).isTrue();
+    }
+
+    @Test
+    @DisableFlags({Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
+    public void disallowUserSwitch_restrictionIsSet_true_refactorDisabled() {
         mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
                 UserManager.DISALLOW_USER_SWITCH, true);
 
