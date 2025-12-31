@@ -101,7 +101,8 @@ public class AccountPrivateDashboardFragment extends DashboardFragment {
             Context context,
             String[] authorities,
             List<AbstractPreferenceController> controllers) {
-        if (!Flags.enableAccountsAndBackupScreen()) {
+        boolean enableAccountsAndBackupScreen = Flags.enableAccountsAndBackupScreen();
+        if (!enableAccountsAndBackupScreen) {
             final AccountPreferenceController accountPrefController =
                     new AccountPreferenceController(
                             context,
@@ -110,7 +111,9 @@ public class AccountPrivateDashboardFragment extends DashboardFragment {
                             ProfileSelectFragment.ProfileType.PRIVATE);
             controllers.add(accountPrefController);
         }
-        controllers.add(new AutoSyncDataPreferenceController(context, this));
-        controllers.add(new AutoSyncPrivateDataPreferenceController(context, this));
+        controllers.add(new AutoSyncDataPreferenceController(context, this,
+                /* forceDisable */ enableAccountsAndBackupScreen));
+        controllers.add(new AutoSyncPrivateDataPreferenceController(context, this,
+                /* forceDisable */ enableAccountsAndBackupScreen));
     }
 }

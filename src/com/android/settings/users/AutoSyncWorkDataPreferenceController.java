@@ -21,15 +21,20 @@ import android.os.UserHandle;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.settings.Utils;
-import com.android.settings.flags.Flags;
 
 /** An account sync data preference controller for work */
 public class AutoSyncWorkDataPreferenceController extends AutoSyncDataPreferenceController {
 
     private static final String KEY_AUTO_SYNC_WORK_ACCOUNT = "auto_sync_work_account_data";
 
-    public AutoSyncWorkDataPreferenceController(Context context, PreferenceFragmentCompat parent) {
-        super(context, parent);
+    public AutoSyncWorkDataPreferenceController(Context context,
+            PreferenceFragmentCompat parent) {
+        this(context, parent, /* forceDisable */ false);
+    }
+
+    public AutoSyncWorkDataPreferenceController(Context context,
+            PreferenceFragmentCompat parent, boolean forceDisable) {
+        super(context, parent, forceDisable);
         mUserHandle = Utils.getManagedProfileWithDisabled(mUserManager);
     }
 
@@ -40,7 +45,7 @@ public class AutoSyncWorkDataPreferenceController extends AutoSyncDataPreference
 
     @Override
     public boolean isAvailable() {
-        if (Flags.enableAccountsAndBackupScreen()) {
+        if (mForceDisable) {
             return false;
         }
         mUserHandle = Utils.getManagedProfileWithDisabled(mUserManager);
