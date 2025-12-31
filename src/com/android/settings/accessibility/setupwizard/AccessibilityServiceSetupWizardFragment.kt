@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility.setupwizard
 
+import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ComponentName
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -33,8 +34,37 @@ import com.google.android.setupdesign.items.RecyclerItemAdapter
 /** Color inversion for Setup Wizard. */
 class AccessibilityServiceSetupWizardFragment : BaseSetupWizardFragment() {
 
+    private lateinit var serviceInfo: AccessibilityServiceInfo
+    private lateinit var descriptionText: CharSequence
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val componentName = arguments?.getParcelable(ARG_COMPONENT_NAME, ComponentName::class.java)
+        val info =
+            componentName?.let {
+                AccessibilityRepositoryProvider.get(requireContext())
+                    .getAccessibilityServiceInfo(it)
+            }
+
+        if (info == null) {
+            parentFragmentManager.popBackStack()
+            return
+        }
+
+        serviceInfo = info
+        descriptionText = arguments?.getString(ARG_DESCRIPTION) ?: ""
+    }
+
     override fun createControllers(adapter: RecyclerItemAdapter): Map<Int, BaseItemController> =
-        emptyMap()
+        buildMap {
+            val context = requireContext()
+            findItem(adapter, R.id.accessibility_service_footer_in_suw)?.let { footerItem ->
+                put(
+                    R.id.accessibility_service_footer_in_suw,
+                    AccessibilityServiceFooterItemController(context, serviceInfo, footerItem),
+                )
+            }
+        }
 
     override val fragmentLayoutResId: Int = R.layout.accessibility_service_suw_screen
 
@@ -49,18 +79,10 @@ class AccessibilityServiceSetupWizardFragment : BaseSetupWizardFragment() {
         val glifLayout = view as? GlifLayout ?: return view
 
         val context = requireContext()
-        val componentName = arguments?.getParcelable(ARG_COMPONENT_NAME, ComponentName::class.java)
-        componentName?.let {
-            val serviceInfo =
-                AccessibilityRepositoryProvider.get(context).getAccessibilityServiceInfo(it)
-
-            // Set Header Text
-            glifLayout.headerText = serviceInfo?.getFeatureName(context)
-
-            // Set Description Text
-            glifLayout.descriptionText = arguments?.getString(ARG_DESCRIPTION)
-        }
-
+        // Set Header Text
+        glifLayout.headerText = serviceInfo.getFeatureName(context)
+        // Set Description Text
+        glifLayout.descriptionText = descriptionText
         // Set Primary Button
         val mixin = glifLayout.getMixin(FooterBarMixin::class.java)
         AccessibilitySetupWizardUtils.setPrimaryButton(context, mixin, R.string.done) {
