@@ -11,6 +11,14 @@
     void <init>();
 }
 
+# Keep DisplaySizeData to prevent the contructor hollowing.
+# Constructor hollowing is a code optimization performed by tools like ProGuard or R8
+# where the internal logic of a constructor is removed because the optimizer determines that
+# its work—such as initializing fields—is never actually used by the application.
+-keep class com.android.settings.accessibility.DisplaySizeData {
+    *;
+}
+
 # Keep all preference controllers needed by slice and DashboardFragment.
 -keep class * extends com.android.settings.core.BasePreferenceController {
     *;

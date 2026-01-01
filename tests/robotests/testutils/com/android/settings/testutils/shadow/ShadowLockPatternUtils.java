@@ -21,7 +21,6 @@ import android.app.admin.PasswordMetrics;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.UserInfo;
-import android.os.SystemClock;
 import android.os.UserHandle;
 
 import androidx.annotation.NonNull;
@@ -250,25 +249,12 @@ public class ShadowLockPatternUtils {
     }
 
     /**
-     * Sets the lockout end time for a given user. Stored as a {@link Duration} representing the
-     * time since boot.
-     *
-     * @return the millis since boot of the lockout end time.
-     */
-    @Implementation
-    public Duration setLockoutAttemptDeadline(int userId, Duration deadline) {
-        Duration lockoutEndTime = Duration.ofMillis(SystemClock.elapsedRealtime()).plus(deadline);
-        sUserToLockoutEndTimeMap.put(userId, lockoutEndTime);
-        return lockoutEndTime;
-    }
-
-    /**
      * Gets the lockout end time for a given user.
      *
      * @return the time since boot of the lockout end time.
      */
     @Implementation
     public Duration getLockoutEndTime(int userId) {
-        return sUserToLockoutEndTimeMap.getOrDefault(userId, Duration.ZERO);
+        return Duration.ZERO;
     }
 }

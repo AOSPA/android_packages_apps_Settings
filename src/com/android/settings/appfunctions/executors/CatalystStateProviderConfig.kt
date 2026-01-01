@@ -51,6 +51,7 @@ import com.android.settings.applications.specialaccess.WifiControlAppDetailScree
 import com.android.settings.applications.specialaccess.WifiControlAppListScreen
 import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppDetailScreen
 import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppListScreen
+import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminApiScreen
 import com.android.settings.applications.specialaccess.notificationaccess.AppsNotificationAccessScreen
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppListScreen
@@ -105,6 +106,7 @@ import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.tether.TetherScreen
 import com.android.settings.notification.BubbleNotificationScreen
 import com.android.settings.notification.SoundScreen
+import com.android.settings.notification.SoundWorkApiScreen
 import com.android.settings.notification.SpatialAudioApiScreen
 import com.android.settings.notification.app.ConversationListScreen
 import com.android.settings.notification.modes.ZenModesListScreen
@@ -263,6 +265,11 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(
             enabled = true,
+            screenKey = SoundWorkApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
             screenKey = SpatialAudioApiScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
@@ -330,6 +337,7 @@ private fun getCatalystScreenConfigs() =
                 ": Settings to manage and customize how conversations are displayed in notifications.",
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = DateTimeSettingsScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = DeviceAdminApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,

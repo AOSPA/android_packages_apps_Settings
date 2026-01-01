@@ -16,14 +16,11 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.TextReadingPreferenceFragment.DISPLAY_SIZE_KEY;
 import static com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint.ACCESSIBILITY_SETTINGS;
 import static com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint.DISPLAY_SETTINGS;
 import static com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint.HIGH_CONTRAST_TEXT_NOTIFICATION;
 import static com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint.SUW_ANYTHING_ELSE;
 import static com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint.SUW_VISION_SETTINGS;
-import static com.android.settings.accessibility.TextReadingPreferenceFragment.FONT_SIZE_KEY;
-import static com.android.settings.accessibility.TextReadingPreferenceFragment.RESET_KEY;
 
 import android.content.ComponentName;
 
@@ -68,25 +65,6 @@ public final class AccessibilityStatsLogUtils {
                         com.android.internal.accessibility.util.AccessibilityStatsLogUtils
                                 .ACCESSIBILITY_PRIVACY_WARNING_STATUS_SERVICE_DISABLED,
                         durationMills);
-    }
-
-    /**
-     * Converts to the key name for logging.
-     *
-     * @param prefKey the preference key
-     * @return the int value which maps to the key name
-     */
-    public static int convertToItemKeyName(String prefKey) {
-        switch (prefKey) {
-            case FONT_SIZE_KEY:
-                return SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED__NAME__TEXT_READING_FONT_SIZE;
-            case DISPLAY_SIZE_KEY:
-                return SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED__NAME__TEXT_READING_DISPLAY_SIZE;
-            case RESET_KEY:
-                return SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED__NAME__TEXT_READING_RESET;
-            default:
-                return SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED__NAME__TEXT_READING_UNKNOWN_ITEM;
-        }
     }
 
     /**
