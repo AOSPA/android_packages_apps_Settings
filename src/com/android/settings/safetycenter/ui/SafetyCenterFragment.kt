@@ -111,9 +111,8 @@ class SafetyCenterFragment : DashboardFragment() {
         // associated issue), record that issue's metadata on the SAFETY_CENTER_VIEWED event
         val focusedIssue =
             focusedIssueKey?.let { key ->
-                viewModel.getCurrentSafetyCenterDataAsUiData().getActiveIssues().find { issue ->
-                    key.matchesSafetyCenterIssue(issue)
-                }
+                val uiData = viewModel.safetyCenterUiLiveData.value
+                uiData?.getActiveIssues()?.find { issue -> key.matchesSafetyCenterIssue(issue) }
             }
 
         if (focusedIssue == null) {
