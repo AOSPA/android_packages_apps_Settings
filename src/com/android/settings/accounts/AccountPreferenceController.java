@@ -62,6 +62,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.backup.AccountsAndBackupDashboardFragment;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -675,6 +676,14 @@ public class AccountPreferenceController extends AbstractPreferenceController
                 if (mFragment instanceof AccountWorkProfileDashboardFragment) {
                     new SubSettingLauncher(context)
                             .setDestination(AccountDashboardFragment.class.getName())
+                            .setSourceMetricsCategory(mFragment.getMetricsCategory())
+                            .setTitleRes(-1)
+                            .setIsSecondLayerPage(true)
+                            .launch();
+                    mFragment.getActivity().finish();
+                } else if (mFragment instanceof ManageAccountsDashboardFragment) {
+                    new SubSettingLauncher(context)
+                            .setDestination(AccountsAndBackupDashboardFragment.class.getName())
                             .setSourceMetricsCategory(mFragment.getMetricsCategory())
                             .setTitleRes(-1)
                             .setIsSecondLayerPage(true)
