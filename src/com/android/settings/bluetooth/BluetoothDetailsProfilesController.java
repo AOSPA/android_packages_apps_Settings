@@ -17,6 +17,8 @@
 package com.android.settings.bluetooth;
 
 import static android.bluetooth.BluetoothDevice.METADATA_MODEL_NAME;
+import static android.bluetooth.BluetoothProfile.CONNECTION_POLICY_UNKNOWN;
+import static android.content.pm.PackageManager.FEATURE_PC;
 
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
@@ -46,8 +48,10 @@ import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+import com.android.settingslib.bluetooth.MapClientProfile;
 import com.android.settingslib.bluetooth.MapProfile;
 import com.android.settingslib.bluetooth.PanProfile;
+import com.android.settingslib.bluetooth.PbapClientProfile;
 import com.android.settingslib.bluetooth.PbapServerProfile;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.utils.ThreadUtils;
@@ -355,6 +359,20 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         final int mapPermission = device.getMessageAccessPermission();
         if (mapPermission != BluetoothDevice.ACCESS_UNKNOWN && mapProfile != null) {
             result.add(mapProfile);
+        }
+
+        // On desktop, only show PBAP/MAP client toggles if explicitly set by 1p apps.
+        if (mContext.getPackageManager().hasSystemFeature(FEATURE_PC)) {
+            final PbapClientProfile pcp = mManager.getProfileManager().getPbapClientProfile();
+            if (pcp != null && result.contains(pcp)
+                    && pcp.getConnectionPolicy(device) == CONNECTION_POLICY_UNKNOWN) {
+                result.remove(pcp);
+            }
+            final MapClientProfile mcp = mManager.getProfileManager().getMapClientProfile();
+            if (mcp != null && result.contains(mcp)
+                    && mcp.getConnectionPolicy(device) == CONNECTION_POLICY_UNKNOWN) {
+                result.remove(mcp);
+            }
         }
 
         // Removes phone calls & media audio toggles for dual mode devices
