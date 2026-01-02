@@ -16,26 +16,28 @@
 
 package com.android.settings.wifi
 
+import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Resources
 import android.net.wifi.WifiManager
 import android.os.PowerManager
 import android.os.UserManager
-import android.platform.test.annotations.EnableFlags
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.flags.Flags
 import com.android.settings.network.AirplaneModePreference
 import com.android.settings.testutils.SettingsStoreRule
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
-class ConfigureWifiScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class ConfigureWifiScreenTest {
     @get:Rule(order = 0) val settingsStoreRule = SettingsStoreRule()
 
     private val mockWifiManager = mock<WifiManager>()
@@ -43,6 +45,8 @@ class ConfigureWifiScreenTest : SettingsCatalystTestCase() {
     private val mockUserManager = mock<UserManager>()
 
     private val mockResources = mock<Resources>()
+
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
     private val context =
         object : ContextWrapper(appContext) {
@@ -58,13 +62,9 @@ class ConfigureWifiScreenTest : SettingsCatalystTestCase() {
         }
 
     private val airplaneModeDataStore = AirplaneModePreference.createDataStore(context)
-    override val preferenceScreenCreator = ConfigureWifiScreen(context)
-
-    override val flagName: String
-        get() = Flags.FLAG_CATALYST_CONFIGURE_NETWORK_SETTINGS
+    private val preferenceScreenCreator = ConfigureWifiScreen(context)
 
     @Test
-    @EnableFlags(Flags.FLAG_CATALYST_CONFIGURE_NETWORK_SETTINGS)
     fun isFlagEnabled_nonGuestUser_configIsTrue_shouldBeTrue() {
         mockUserManager.stub { on { isGuestUser } doReturn false }
         mockResources.stub { on { getBoolean(anyInt()) } doReturn true }
@@ -73,7 +73,6 @@ class ConfigureWifiScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CATALYST_CONFIGURE_NETWORK_SETTINGS)
     fun isFlagEnabled_guestUser_configIsTrue_shouldBeFalse() {
         mockUserManager.stub { on { isGuestUser } doReturn true }
         mockResources.stub { on { getBoolean(anyInt()) } doReturn true }
@@ -82,7 +81,6 @@ class ConfigureWifiScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CATALYST_CONFIGURE_NETWORK_SETTINGS)
     fun isFlagEnabled_nonGuestUser_configIsFalse_shouldBeFalse() {
         mockUserManager.stub { on { isGuestUser } doReturn false }
         mockResources.stub { on { getBoolean(anyInt()) } doReturn false }
