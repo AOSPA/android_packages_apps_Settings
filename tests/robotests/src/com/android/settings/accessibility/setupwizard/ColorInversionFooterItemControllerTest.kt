@@ -39,16 +39,22 @@ class ColorInversionFooterItemControllerTest {
     private val controller = ColorInversionFooterItemController(context, mockItem)
 
     @Test
-    fun bindData_setsFooterSummary() {
+    fun bindData_setsFooterSummaryAndContentDescription() {
         // Use 0 to hide help links, matching the implementation logic.
         val metadata = FooterPreference(helpResource = 0)
-        val expectedValue = metadata.getTitle(context)
+        val expectedTitle = metadata.getTitle(context)
+        val intro = context.getString(metadata.introductionTitle)
+        val expectedContentDescription = metadata.getContentDescription(intro, expectedTitle)
 
         controller.bindData(mockItem)
         shadowOf(Looper.getMainLooper()).idle()
 
-        val captor = argumentCaptor<CharSequence>()
-        verify(mockItem).summary = captor.capture()
-        assertThat(captor.firstValue.toString()).isEqualTo(expectedValue.toString())
+        val summaryCaptor = argumentCaptor<CharSequence>()
+        verify(mockItem).summary = summaryCaptor.capture()
+        assertThat(summaryCaptor.firstValue.toString()).isEqualTo(expectedTitle.toString())
+        val contentDescCaptor = argumentCaptor<CharSequence>()
+        verify(mockItem).contentDescription = contentDescCaptor.capture()
+        assertThat(contentDescCaptor.firstValue.toString())
+            .isEqualTo(expectedContentDescription.toString())
     }
 }

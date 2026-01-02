@@ -22,6 +22,7 @@ import android.content.Context
 import android.os.Looper
 import android.view.accessibility.AccessibilityManager
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.R
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
 import com.google.android.setupdesign.items.Item
 import com.google.common.truth.Truth.assertThat
@@ -62,15 +63,19 @@ class AccessibilityServiceFooterItemControllerTest {
 
     @Test
     fun bindData_setsSummaryAndContentDescription() {
+        val expectedSummary = TEST_SUMMARY
+        val introTitle = context.getString(R.string.accessibility_introduction_title, TEST_LABEL)
+        val expectedContentDescription = "$introTitle\n\n$TEST_SUMMARY"
+
         controller.bindData(mockItem)
         shadowOf(Looper.getMainLooper()).idle()
 
         val summaryCaptor = argumentCaptor<CharSequence>()
         verify(mockItem).summary = summaryCaptor.capture()
-        assertThat(summaryCaptor.firstValue.toString()).isEqualTo(TEST_SUMMARY)
+        assertThat(summaryCaptor.firstValue.toString()).isEqualTo(expectedSummary)
         val contentDescCaptor = argumentCaptor<CharSequence>()
         verify(mockItem).contentDescription = contentDescCaptor.capture()
-        assertThat(contentDescCaptor.firstValue.toString()).isEqualTo(TEST_SUMMARY)
+        assertThat(contentDescCaptor.firstValue.toString()).isEqualTo(expectedContentDescription)
     }
 
     companion object {
