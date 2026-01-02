@@ -23,8 +23,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import com.android.settings.R
+import com.android.settings.accessibility.AccessibilitySetupWizardUtils
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.accessibility.extensions.getFeatureName
+import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupdesign.GlifLayout
 import com.google.android.setupdesign.items.RecyclerItemAdapter
 
@@ -57,6 +59,12 @@ class AccessibilityServiceSetupWizardFragment : BaseSetupWizardFragment() {
 
             // Set Description Text
             glifLayout.descriptionText = arguments?.getString(ARG_DESCRIPTION)
+        }
+
+        // Set Primary Button
+        val mixin = glifLayout.getMixin(FooterBarMixin::class.java)
+        AccessibilitySetupWizardUtils.setPrimaryButton(context, mixin, R.string.done) {
+            parentFragmentManager.popBackStack()
         }
 
         return view
