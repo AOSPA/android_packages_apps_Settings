@@ -29,10 +29,10 @@ class MagnificationFooterItemController(private val context: Context, item: Item
     private val magnificationFooterMetadata = MagnificationFooterPreference(helpResource = 0)
 
     public override fun bindData(item: Item) {
-        magnificationFooterMetadata.getTitle(context).let {
-            item.summary = it
-            item.contentDescription = it
-        }
+        val title = magnificationFooterMetadata.getTitle(context)
+        val intro = context.getString(magnificationFooterMetadata.introductionTitle)
+        item.summary = title
+        item.contentDescription = magnificationFooterMetadata.getContentDescription(intro, title)
     }
 
     override fun onItemSelected(activity: FragmentActivity) {}

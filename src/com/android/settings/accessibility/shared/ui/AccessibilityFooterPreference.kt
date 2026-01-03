@@ -93,6 +93,16 @@ interface AccessibilityFooterPreferenceBinding : FooterPreferenceBinding {
         footerPreference.isSelectable = false
     }
 
+    fun getContentDescription(
+        introductionTitle: CharSequence?,
+        textToDescribe: CharSequence?,
+    ): CharSequence? {
+        if (textToDescribe.isNullOrBlank()) return null
+        if (introductionTitle.isNullOrBlank()) return textToDescribe
+
+        return "$introductionTitle\n\n$textToDescribe"
+    }
+
     private fun updateContentDescription(
         footerPreference: AccessibilityFooterPreference,
         introductionTitle: CharSequence?,
@@ -102,7 +112,8 @@ interface AccessibilityFooterPreferenceBinding : FooterPreferenceBinding {
             return
         }
 
-        footerPreference.contentDescription = "$introductionTitle\n\n$textToDescribe"
+        footerPreference.contentDescription =
+            getContentDescription(introductionTitle, textToDescribe)
     }
 
     private fun getPreferenceIntroductionTitle(

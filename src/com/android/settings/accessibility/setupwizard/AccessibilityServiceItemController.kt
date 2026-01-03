@@ -28,6 +28,7 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.accessibility.extensions.getFeatureName
 import com.android.settingslib.utils.ThreadUtils
 import com.google.android.setupdesign.items.Item
 
@@ -49,7 +50,7 @@ class AccessibilityServiceItemController(
         ThreadUtils.postOnBackgroundThread {
             val info = findAccessibilityServiceInfo(serviceComponentString)
             val isVisible = info != null
-            val title = info?.resolveInfo?.loadLabel(context.packageManager)
+            val title = info?.getFeatureName(context)
             val icon = info?.let { getResizedIcon(context, it) }
 
             ThreadUtils.getUiThreadHandler().post {
@@ -64,7 +65,12 @@ class AccessibilityServiceItemController(
     }
 
     override fun onItemSelected(activity: FragmentActivity) {
-        // TODO (b/467926454): Navigate to a new screen or toggle the feature state
+        AccessibilityServiceSetupWizardFragment.show(
+            fragmentManager = activity.supportFragmentManager,
+            containerId = R.id.fragment_container,
+            componentName = ComponentName.unflattenFromString(serviceComponentString)!!,
+            description = targetItem.summary.toString(),
+        )
     }
 
     private fun findAccessibilityServiceInfo(serviceString: String?): AccessibilityServiceInfo? {
