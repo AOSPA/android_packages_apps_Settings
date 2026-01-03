@@ -146,7 +146,8 @@ public class AccountDashboardFragment extends DashboardFragment {
             DashboardFragment parent,
             String[] authorities,
             List<AbstractPreferenceController> controllers) {
-        if (!Flags.enableAccountsAndBackupScreen()) {
+        boolean enableAccountsAndBackupScreen = Flags.enableAccountsAndBackupScreen();
+        if (!enableAccountsAndBackupScreen) {
             final AccountPreferenceController accountPrefController =
                     new AccountPreferenceController(
                             context, parent, authorities, ProfileSelectFragment.ProfileType.ALL);
@@ -155,10 +156,14 @@ public class AccountDashboardFragment extends DashboardFragment {
             }
             controllers.add(accountPrefController);
         }
-        controllers.add(new AutoSyncDataPreferenceController(context, parent));
-        controllers.add(new AutoSyncPersonalDataPreferenceController(context, parent));
-        controllers.add(new AutoSyncWorkDataPreferenceController(context, parent));
-        controllers.add(new AutoSyncPrivateDataPreferenceController(context, parent));
+        controllers.add(new AutoSyncDataPreferenceController(context, parent,
+                /* forceDisable */ enableAccountsAndBackupScreen));
+        controllers.add(new AutoSyncPersonalDataPreferenceController(context, parent,
+                /* forceDisable */ enableAccountsAndBackupScreen));
+        controllers.add(new AutoSyncWorkDataPreferenceController(context, parent,
+                /* forceDisable */ enableAccountsAndBackupScreen));
+        controllers.add(new AutoSyncPrivateDataPreferenceController(context, parent,
+                /* forceDisable */ enableAccountsAndBackupScreen));
     }
 
     private static int getPreferenceLayoutResId(Context context) {

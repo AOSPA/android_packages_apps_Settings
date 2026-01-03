@@ -103,7 +103,8 @@ public class AccountWorkProfileDashboardFragment extends DashboardFragment {
             DashboardFragment parent,
             String[] authorities,
             List<AbstractPreferenceController> controllers) {
-        if (!Flags.enableAccountsAndBackupScreen()) {
+        boolean enableAccountsAndBackupScreen = Flags.enableAccountsAndBackupScreen();
+        if (!enableAccountsAndBackupScreen) {
             final AccountPreferenceController accountPrefController =
                     new AccountPreferenceController(
                             context, parent, authorities, ProfileSelectFragment.ProfileType.WORK);
@@ -112,8 +113,10 @@ public class AccountWorkProfileDashboardFragment extends DashboardFragment {
             }
             controllers.add(accountPrefController);
         }
-        controllers.add(new AutoSyncDataPreferenceController(context, parent));
-        controllers.add(new AutoSyncWorkDataPreferenceController(context, parent));
+        controllers.add(new AutoSyncDataPreferenceController(context, parent,
+                /* forceDisable */ enableAccountsAndBackupScreen));
+        controllers.add(new AutoSyncWorkDataPreferenceController(context, parent,
+                /* forceDisable */ enableAccountsAndBackupScreen));
     }
 
     // TODO: b/141601408. After featureFlag settings_work_profile is launched, unmark this

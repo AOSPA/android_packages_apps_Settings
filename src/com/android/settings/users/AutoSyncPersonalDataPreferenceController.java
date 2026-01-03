@@ -20,20 +20,23 @@ import android.os.UserHandle;
 
 import androidx.preference.PreferenceFragmentCompat;
 
-import com.android.settings.flags.Flags;
-
 public class AutoSyncPersonalDataPreferenceController extends AutoSyncDataPreferenceController {
 
     private static final String KEY_AUTO_SYNC_PERSONAL_ACCOUNT = "auto_sync_personal_account_data";
 
     public AutoSyncPersonalDataPreferenceController(Context context,
             PreferenceFragmentCompat parent) {
-        super(context, parent);
+        this(context, parent, /* forceDisable */ false);
+    }
+
+    public AutoSyncPersonalDataPreferenceController(Context context,
+            PreferenceFragmentCompat parent, boolean forceDisable) {
+        super(context, parent, forceDisable);
     }
 
     @Override
     public boolean isAvailable() {
-        if (Flags.enableAccountsAndBackupScreen()) {
+        if (mForceDisable) {
             return false;
         }
         return !mUserManager.isManagedProfile() && !mUserManager.isLinkedUser()
