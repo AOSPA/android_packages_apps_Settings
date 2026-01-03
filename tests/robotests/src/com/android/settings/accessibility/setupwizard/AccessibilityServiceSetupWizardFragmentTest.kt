@@ -25,6 +25,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
+import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupdesign.GlifLayout
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
@@ -61,6 +62,35 @@ class AccessibilityServiceSetupWizardFragmentTest {
                 val layout = fragment.findGlifLayout()
                 assertThat(layout.headerText.toString()).isEqualTo(TEST_LABEL)
                 assertThat(layout.descriptionText.toString()).isEqualTo(TEST_SUMMARY)
+            }
+        }
+    }
+
+    @Test
+    fun footerButtons_areInitializedCorrectly() {
+        launchFragment(createTestArgs()).use { scenario ->
+            scenario.onFragment { fragment ->
+                val mixin = fragment.findGlifLayout().getMixin(FooterBarMixin::class.java)
+                assertThat(mixin.primaryButton?.text?.toString())
+                    .isEqualTo(context.getString(R.string.done))
+            }
+        }
+    }
+
+    @Test
+    fun clickDoneButton_popsBackStack() {
+        launchFragment(createTestArgs()).use { scenario ->
+            scenario.onFragment { fragment ->
+                val fragmentManager = fragment.parentFragmentManager
+                fragmentManager.beginTransaction().addToBackStack("test_state").commit()
+                fragmentManager.executePendingTransactions()
+                val initialCount = fragmentManager.backStackEntryCount
+
+                val mixin = fragment.findGlifLayout().getMixin(FooterBarMixin::class.java)
+                mixin.primaryButtonView.performClick()
+                fragmentManager.executePendingTransactions()
+
+                assertThat(fragmentManager.backStackEntryCount).isEqualTo(initialCount - 1)
             }
         }
     }
