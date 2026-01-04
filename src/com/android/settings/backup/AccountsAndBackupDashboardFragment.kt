@@ -26,7 +26,6 @@ import androidx.preference.Preference
 import com.android.settings.CatalystFragment
 import com.android.settings.accounts.ManageAccountsScreen
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.EXTRA_PROFILE
-import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.ALL
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.PERSONAL
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.PRIVATE
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.WORK
@@ -60,7 +59,7 @@ class AccountsAndBackupDashboardFragment : CatalystFragment() {
 
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
         if (preference.key == ManageAccountsScreen.KEY) {
-            arguments?.getInt(EXTRA_PROFILE, ALL)?.let { profileType ->
+            arguments?.getInt(EXTRA_PROFILE, PERSONAL)?.let { profileType ->
                 preference.extras.putInt(EXTRA_PROFILE, profileType)
             }
         }

@@ -22,7 +22,7 @@ import android.provider.Settings.EXTRA_AUTHORITIES
 import com.android.settings.R
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.EXTRA_PROFILE
-import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.ALL
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.PERSONAL
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.PRIVATE
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.WORK
 import com.android.settings.users.AutoSyncDataPreferenceController
@@ -46,17 +46,17 @@ class ManageAccountsDashboardFragment : DashboardFragment() {
     override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> {
         val controllers: MutableList<AbstractPreferenceController> = ArrayList()
         val authorities = activity?.intent?.getStringArrayExtra(EXTRA_AUTHORITIES)
+        val profileType = arguments?.getInt(EXTRA_PROFILE, PERSONAL) ?: PERSONAL
         val accountPrefController =
             AccountPreferenceController(
                 context,
                 this, /* parent */
                 authorities,
-                arguments?.getInt(EXTRA_PROFILE, ALL) ?: ALL,
+                profileType,
             )
         settingsLifecycle.addObserver(accountPrefController)
         controllers.add(accountPrefController)
 
-        val profileType = arguments?.getInt(EXTRA_PROFILE, ALL) ?: ALL
         controllers.add(
             AutoSyncDataPreferenceController(
                 context,

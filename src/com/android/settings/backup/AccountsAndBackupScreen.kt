@@ -58,7 +58,7 @@ open class AccountsAndBackupScreen : PreferenceScreenMixin, PreferenceIconProvid
         }
 
     override val highlightMenuKey: Int
-        get() = R.string.menu_key_accounts
+        get() = R.string.menu_key_accounts_and_backup
 
     override fun isFlagEnabled(context: Context): Boolean = Flags.enableAccountsAndBackupScreen()
 
