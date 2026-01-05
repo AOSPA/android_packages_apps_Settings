@@ -347,7 +347,7 @@
     <string name="zone_menu_by_offset" msgid="543648951618438204">"GMT ਆਫ਼ਸੈੱਟ ਮੁਤਾਬਕ ਚੁਣੋ"</string>
     <string name="time_feedback_category_title" msgid="5942621686512255208">"ਵਿਚਾਰ"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"ਵਿਚਾਰ, ਬੱਗ, ਸਮਾਂ, ਜ਼ੋਨ, ਸਮਾਂ ਖੇਤਰ"</string>
-    <string name="time_feedback_title" msgid="7720948068042783614">"ਸਮੇਂ ਬਾਰੇ ਵਿਚਾਰ ਭੇਜਣਾ"</string>
+    <string name="time_feedback_title" msgid="7720948068042783614">"ਸਮੇਂ ਬਾਰੇ ਵਿਚਾਰ ਭੇਜੋ"</string>
     <string name="keywords_time_feedback" msgid="929965356597294030">"ਵਿਚਾਰ, ਬੱਗ, ਸਮਾਂ, ਜ਼ੋਨ, ਸਮਾਂ ਖੇਤਰ"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"ਸਕ੍ਰੀਨ ਬੰਦ ਹੋ ਜਾਣ ਤੋਂ ਬਾਅਦ ਲਾਕ ਕਰੋ"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"ਸਮਾਂ ਸਮਾਪਤ ਹੋਣ ਤੋਂ ਬਾਅਦ <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"ਪਹੁੰਚਯੋਗਤਾ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਤੱਕ ਤੁਰੰਤ ਪਹੁੰਚ ਕਰੋ"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;ਸ਼ੁਰੂਆਤ ਕਰਨ ਲਈ&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ਪਹੁੰਚਯੋਗਤਾ ਸੈਟਿੰਗਾਂ \'ਤੇ ਜਾਓ&lt;br/&gt; {1,number,integer}. ਕੋਈ ਵਿਸ਼ੇਸ਼ਤਾ ਚੁਣੋ ਅਤੇ ਸ਼ਾਰਟਕੱਟ \'ਤੇ ਟੈਪ ਕਰੋ&lt;br/&gt; {2,number,integer}. ਵਿਸ਼ੇਸ਼ਤਾ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਲਈ ਬਟਨ ਨੂੰ ਚੁਣੋ&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"ਟਿਕਾਣਾ"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"ਦੂਜੀਆਂ ਐਪਾਂ \'ਤੇ ਫ਼ਲੋਟਿੰਗ ਬਟਨ"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"ਨੈਵੀਗੇਸ਼ਨ ਵਾਲੀ ਪੱਟੀ"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"ਆਕਾਰ"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"ਵੱਡਾ"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"ਛੋਟਾ"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"ਵਰਤੋਂ ਵਿੱਚ ਨਾ ਹੋਣ \'ਤੇ ਫ਼ੇਡ ਕਰੋ"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"ਕੁਝ ਸਕਿੰਟਾਂ ਬਾਅਦ ਫ਼ੇਡ ਹੋ ਜਾਂਦਾ ਹੈ, ਤਾਂ ਜੋ ਤੁਸੀਂ ਆਸਾਨੀ ਨਾਲ ਸਕ੍ਰੀਨ ਨੂੰ ਦੇਖ ਸਕੋ।"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"ਵਰਤੋਂ ਵਿੱਚ ਨਾ ਹੋਣ \'ਤੇ ਪਾਰਦਰਸ਼ਤਾ"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"ਸਮੇਂ ਸੰਬੰਧੀ ਇਸ ਤਰਜੀਹ ਦਾ ਸਮਰਥਨ ਸਾਰੀਆਂ ਐਪਾਂ ਵੱਲੋਂ ਨਹੀਂ ਕੀਤਾ ਜਾਂਦਾ"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"ਚੁਣੋ ਕਿ ਤੁਹਾਨੂੰ ਕਾਰਵਾਈ ਕਰਨ ਲਈ ਕਹਿਣ ਵਾਲੇ ਅਸਥਾਈ ਸੁਨੇਹਿਆਂ ਨੂੰ ਕਿੰਨੀ ਦੇਰ ਤੱਕ ਦਿਖਾਉਣਾ ਹੈ"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"ਸਪਰਸ਼ ਕਰ ਕੇ ਰੱਖਣ ਵਿੱਚ ਦੇਰੀ"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"ਛੋਟਾ"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"ਦਰਮਿਆਨਾ"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"ਲੰਬਾ"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"ਰੰਗ ਪਲਟਨਾ"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"\'ਰੰਗ ਪਲਟਨਾ\' ਵਿਸ਼ੇਸ਼ਤਾ ਵਰਤੋ"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"\'ਰੰਗ ਪਲਟਨਾ\' ਵਿਸ਼ੇਸ਼ਤਾ ਲਈ ਸ਼ਾਰਟਕੱਟ"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"ਲਾਕ ਸਕ੍ਰੀਨ ਤੋਂ ਵਰਤੋਂਕਾਰਾਂ ਨੂੰ ਸ਼ਾਮਲ ਕਰੋ"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"ਸਾਈਨ-ਇਨ ਸਕ੍ਰੀਨ ਤੋਂ ਵਰਤੋਂਕਾਰ ਸ਼ਾਮਲ ਕਰੋ"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"ਡੌਕ ਕੀਤੇ ਜਾਣ \'ਤੇ ਪ੍ਰਸ਼ਾਸਕ ਵਰਤੋਂਕਾਰ \'ਤੇ ਸਵਿੱਚ ਕਰੋ"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"ਵਰਤੋਂਕਾਰ ਮਿਟਾਇਆ ਗਿਆ"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"ਕੀ ਖੁਦ ਨੂੰ ਹਟਾਉਣਾ ਹੈ?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"ਇਹ ਵਰਤੋਂਕਾਰ ਮਿਟਾਉਣਾ ਹੈ?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"ਕੀ ਇਹ ਪ੍ਰੋਫਾਈਲ ਹਟਾਉਣੀ ਹੈ?"</string>
@@ -5308,6 +5306,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"ਤੁਹਾਡੇ ਫ਼ੋਨ \'ਤੇ ਸਮਰਥਿਤ ਐਪਾਂ"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"ਸਿਮ ਨੂੰ ਸ਼ਾਮਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"ਸਿਮ ਸ਼ਾਮਲ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਸੈਟੇਲਾਈਟ ਕਨੈਕਸ਼ਨ ਨੂੰ ਬੰਦ ਕਰੋ"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"ਬਲੂਟੁੱਥ ਬੰਦ ਹੈ"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"ਬਲੂਟੁੱਥ ਨਾਲ ਕਨੈਕਟ ਹੋਣ \'ਤੇ, ਹਵਾਈ-ਜਹਾਜ਼ ਮੋਡ ਫ਼ੋਨ ਅਤੇ ਘੜੀ ਵਰਗੇ ਸਮਰਥਿਤ ਡੀਵਾਈਸਾਂ \'ਤੇ ਸਿੰਕ ਰਹੇਗਾ"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ਐਕਸੈੱਸ ਪੁਆਇੰਟ ਨਾਮ"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>

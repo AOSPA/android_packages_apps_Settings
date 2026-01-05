@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accedeix ràpidament a les funcions d\'accessibilitat"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Per començar&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Ves a la configuració d\'accessibilitat.&lt;br/&gt; {1,number,integer}. Selecciona una funció i toca la drecera.&lt;br/&gt; {2,number,integer}. Tria el botó per accedir a la funció.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Ubicació"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Flotant sobre altres aplicacions"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Barra de navegació"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Mida"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Gran"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Petit"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Atenua quan no s\'utilitzi"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"S\'atenua al cap d\'uns segons perquè sigui més fàcil veure la pantalla"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Transparència quan no s\'utilitzi"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Aquesta preferència de temps no s\'admet en totes les aplicacions"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Tria durant quant de temps vols que es mostrin els missatges temporals que et demanen que duguis a terme una acció"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Retard de Mantén premut"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Curt"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Mitjà"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Llarg"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversió de colors"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utilitza la inversió de colors"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Drecera de la inversió de colors"</string>
@@ -3137,7 +3136,7 @@
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Utilitza la connectivitat adaptativa"</string>
     <string name="adaptive_connectivity_wifi_switch_title" msgid="8534819376336827298">"Canvia automàticament a la xarxa mòbil"</string>
     <string name="adaptive_connectivity_wifi_switch_summary" msgid="827122572213043364">"Garanteix la connectivitat quan la Wi‑Fi és deficient o no està disponible. Es poden aplicar càrrecs per ús de dades."</string>
-    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="1852172801040818123">"Optimitza la xarxa per allargar la bateria"</string>
+    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="1852172801040818123">"Optimitza la xarxa per a la durada de la bateria"</string>
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Selecciona automàticament la millor connexió de xarxa per allargar la durada de la bateria"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Seguretat de xarxes mòbils"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tipus de xarxa, encriptació, controls de notificacions"</string>
@@ -3450,8 +3449,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Afegeix usuaris des de la pantalla de bloqueig"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Afegeix usuaris des de la pantalla d\'inici de sessió"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Canvia a l\'administrador en acoblar-se a la base"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"S\'ha suprimit l\'usuari"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Et vols suprimir a tu mateix?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vols suprimir l\'usuari?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Vols suprimir el perfil?"</string>
@@ -5310,6 +5308,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Aplicacions admeses al telèfon"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"No es pot afegir una SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Finalitza la connexió per satèl·lit abans d\'afegir una SIM"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"El Bluetooth està desactivat"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Quan tinguis connexió per Bluetooth, el mode d\'avió se sincronitzarà als dispositius compatibles, com ara el telèfon i el rellotge"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Noms de punts d\'accés"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
