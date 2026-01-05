@@ -32,6 +32,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.flags.Flags;
 import com.android.settings.slices.SliceData;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -157,6 +158,7 @@ public class ContactSearchPreferenceController extends TogglePreferenceControlle
 
     @Override
     public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_accounts;
+        return Flags.enableAccountsAndBackupScreen() ? R.string.menu_key_accounts_and_backup
+            : R.string.menu_key_accounts;
     }
 }
