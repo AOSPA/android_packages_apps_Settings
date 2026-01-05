@@ -54,7 +54,14 @@ class IllustrationItemTest {
     }
 
     @Test
-    @TestParameters(value = ["{resId: ${R.raw.accessibility_color_inversion_banner}}"])
+    @TestParameters(
+        value =
+            [
+                "{resId: ${R.raw.accessibility_color_inversion_banner}}",
+                "{resId: ${R.raw.accessibility_magnification_banner}}",
+                "{resId: ${R.raw.accessibility_magnification_banner_expressive}}",
+            ]
+    )
     fun onBindView_setsImageResource(resId: Int) {
         illustrationItem.imageResId = resId
 
