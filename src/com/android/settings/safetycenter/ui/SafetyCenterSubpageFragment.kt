@@ -58,6 +58,9 @@ abstract class SafetyCenterSubpageFragment : DashboardFragment() {
 
     /** Redirects to the Safety Center home page if the subpage is empty. */
     open fun redirectIfEmpty() {
+        if (SafetyCenterSubpageRegistry.hasInjectedTiles(subpageKey)) {
+            return
+        }
         val entries =
             viewModel
                 .getCurrentSafetyCenterDataAsUiData()

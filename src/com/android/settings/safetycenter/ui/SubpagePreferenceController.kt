@@ -148,7 +148,11 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
                 highestSeverityIssueOnlySafetySourceIssue,
                 subpageMaxSeverity,
             )
-        setVisibility(preference, relatedSafetySourcesData.isNotEmpty())
+        setVisibility(
+            preference,
+            relatedSafetySourcesData.isNotEmpty() ||
+                SafetyCenterSubpageRegistry.hasInjectedTiles(preferenceKey),
+        )
         Log.d(TAG, "[$preferenceKey] UI updated with max severity: $subpageMaxSeverity")
     }
 
@@ -326,6 +330,10 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
     }
 
     override fun updateNonIndexableKeys(keys: MutableList<String>) {
+        if (SafetyCenterSubpageRegistry.hasInjectedTiles(preferenceKey)) {
+            return
+        }
+
         val uiData = SafetyCenterSearchIndexUtils.getCurrentSafetyCenterData(mContext)
         if (uiData == null) {
             Log.d(TAG, "[$preferenceKey] No SafetyCenterUiData, adding to non-indexable keys")
