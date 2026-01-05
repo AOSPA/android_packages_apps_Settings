@@ -82,6 +82,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+// LINT.IfChange
 public class AccountPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, AuthenticatorHelper.OnAccountsUpdateListener,
         OnPreferenceClickListener, LifecycleObserver, OnPause, OnResume {
@@ -719,3 +720,4 @@ public class AccountPreferenceController extends AbstractPreferenceController
         }
     }
 }
+// LINT.ThenChange(ManagedProfileApiScreen.kt)
