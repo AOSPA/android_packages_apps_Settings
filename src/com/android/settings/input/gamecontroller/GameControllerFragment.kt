@@ -72,12 +72,11 @@ internal constructor(private var viewModelFactory: ViewModelProvider.Factory? = 
         viewModel.buttonRemapping.observe(viewLifecycleOwner) { newMap -> updatePreferenceStates() }
         viewModel.axisRemapping.observe(viewLifecycleOwner) { newMap -> updatePreferenceStates() }
 
-        findPreference<ButtonPreference>(RESET_BUTTON_PREFERENCE_KEY)
-            ?.setOnPreferenceClickListener {
-                val dialog = GameControllerResetDialogFragment(viewModel)
-                dialog.show(parentFragmentManager, RESET_DIALOG_TAG)
-                true
-            }
+        findPreference<ButtonPreference>(RESET_BUTTON_PREFERENCE_KEY)?.setOnClickListener {
+            val dialog = GameControllerResetDialogFragment(viewModel)
+            dialog.show(parentFragmentManager, RESET_DIALOG_TAG)
+            true
+        }
 
         // Observe requests to show the remapping dialog
         viewLifecycleOwner.lifecycleScope.launch {
