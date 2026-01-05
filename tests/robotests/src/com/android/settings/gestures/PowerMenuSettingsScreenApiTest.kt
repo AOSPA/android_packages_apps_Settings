@@ -105,7 +105,7 @@ class PowerMenuSettingsScreenApiTest {
 
         val failure =
             assertFailsWith<HardwareUnsupportedException> {
-                apiTester.get<GeneratedValue<Int>>(SENSITIVITY_PREFERENCE_KEY)
+                apiTester.get<Int>(SENSITIVITY_PREFERENCE_KEY)
             }
         assertThat(failure.reason)
             .isEqualTo(
@@ -160,7 +160,7 @@ class PowerMenuSettingsScreenApiTest {
 
         val failure =
             assertFailsWith<InvalidPreferenceException> {
-                apiTester.get<GeneratedValue<Int>>(SENSITIVITY_PREFERENCE_KEY)
+                apiTester.get<Int>(SENSITIVITY_PREFERENCE_KEY)
             }
         assertThat(failure.reason)
             .isEqualTo(
@@ -177,7 +177,7 @@ class PowerMenuSettingsScreenApiTest {
 
         val failure =
             assertFailsWith<HardwareUnsupportedException> {
-                apiTester.get<GeneratedValue<Int>>(SENSITIVITY_PREFERENCE_KEY)
+                apiTester.get<Int>(SENSITIVITY_PREFERENCE_KEY)
             }
 
         assertThat(failure.reason)
@@ -195,7 +195,7 @@ class PowerMenuSettingsScreenApiTest {
 
         val failure =
             assertFailsWith<HardwareUnsupportedException> {
-                apiTester.get<GeneratedValue<Int>>(SENSITIVITY_PREFERENCE_KEY)
+                apiTester.get<Int>(SENSITIVITY_PREFERENCE_KEY)
             }
 
         assertThat(failure.reason)
@@ -215,7 +215,7 @@ class PowerMenuSettingsScreenApiTest {
             SettingsGlobalStore.get(context).setInt(DURATION_SETTINGS_KEY, duration)
 
             assertWithMessage("Wrong duration when set to $duration in Settings")
-                .that(apiTester.get<GeneratedValue<Int>>(SENSITIVITY_PREFERENCE_KEY).value)
+                .that(apiTester.get<Int>(SENSITIVITY_PREFERENCE_KEY))
                 .isEqualTo(duration)
         }
     }
@@ -228,7 +228,7 @@ class PowerMenuSettingsScreenApiTest {
         PowerMenuSettingsUtils.setLongPressPowerForAssistant(context)
 
         TEST_DURATIONS.forEach { duration ->
-            apiTester.set(SENSITIVITY_PREFERENCE_KEY, GeneratedValue("", duration))
+            apiTester.set(SENSITIVITY_PREFERENCE_KEY, duration)
 
             assertWithMessage("Wrong duration when set to $duration")
                 .that(SettingsGlobalStore.get(context).getInt(DURATION_SETTINGS_KEY))
@@ -250,7 +250,7 @@ class PowerMenuSettingsScreenApiTest {
 
         PowerMenuSettingsUtils.setLongPressPowerForAssistant(context)
 
-        assertThat(apiTester.get<GeneratedValue<Int>>(SENSITIVITY_PREFERENCE_KEY).value)
+        assertThat(apiTester.get<Int>(SENSITIVITY_PREFERENCE_KEY))
             .isEqualTo(defaultDuration)
     }
 
@@ -261,11 +261,11 @@ class PowerMenuSettingsScreenApiTest {
 
         PowerMenuSettingsUtils.setLongPressPowerForAssistant(context)
 
-        apiTester.set(SENSITIVITY_PREFERENCE_KEY, GeneratedValue("", TEST_DURATIONS[0] - 1))
+        apiTester.set(SENSITIVITY_PREFERENCE_KEY, TEST_DURATIONS[0])
         assertThat(SettingsGlobalStore.get(context).getInt(DURATION_SETTINGS_KEY))
             .isEqualTo(TEST_DURATIONS[0])
 
-        apiTester.set(SENSITIVITY_PREFERENCE_KEY, GeneratedValue("", TEST_DURATIONS[1] + 1))
+        apiTester.set(SENSITIVITY_PREFERENCE_KEY, TEST_DURATIONS[1])
         assertThat(SettingsGlobalStore.get(context).getInt(DURATION_SETTINGS_KEY))
             .isEqualTo(TEST_DURATIONS[1])
     }

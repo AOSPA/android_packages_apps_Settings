@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseR
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.preconditions.MissingPermission
+import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -68,6 +69,12 @@ class InvalidPreferenceException(val reason: String) : FailedPreconditionExcepti
  * no setter.
  */
 class CannotSetException : Exception()
+
+/**
+ * This exception is thrown if there is a value in the get/set operation that does not respect
+ * the type of the associated preference.
+ */
+class InvalidValueException(val reason: String): Exception()
 
 /**
  * This class contains information regarding a screen, retrieved from the underlying infrastructure.
@@ -169,6 +176,16 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         throw FailedPreconditionException()
     }
 
+    private fun <V : Any>  checkPotentialFiniteValue(preference: ApiPreference<V>, value: V) {
+        if(preference.type is FiniteOptionsType<*>)
+        {
+            if(! getPreferenceOptions<V>(preference.key).map{it.first}.contains(value))
+                throw InvalidValueException("Value $value should be among the allowed " +
+                        "finite values for this type.")
+        }
+    }
+
+
     /**
      * Helper method that returns the screen information extracted from the underlying
      * infrastructure.
@@ -189,7 +206,12 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         checkGetPermissions(preference)
         checkGetPreconditions(preference, operationContext)
 
-        return runBlocking { preference.get.execute(operationContext) }
+        return runBlocking{
+            val result = preference.get.execute(operationContext)
+            //TODO(b/470284879) add this functionality in the getter
+            checkPotentialFiniteValue(preference, result)
+            return@runBlocking result
+        }
     }
 
     /**
@@ -207,7 +229,8 @@ class ApiTester(private val instance: PreferencesApiScreen) {
 
         checkSetPermissions(preference)
         checkSetPreconditions(preference, value, operationContext)
-
+        //TODO(b/470285824) add this functionality in the setter
+        checkPotentialFiniteValue(preference, value)
         runBlocking { setConfig.execute.invoke(operationContext, value) }
     }
 
@@ -230,5 +253,19 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         dealWithPreconditionResult(screenPrecondition)
         return instance.getLaunchIntent(context, null)
             ?: throw Exception("Intent should not be null.")
+    }
+
+    /**
+     * Helper method to get all the options of a preference which has the FiniteOptionsType
+     * type.
+     */
+    fun <V: Any> getPreferenceOptions(key:String) : List<Pair<V, String>> {
+        val preference = getPreference<FiniteOptionsType<V>>(key)
+        val type = preference.type
+        if (type is FiniteOptionsType<*>) {
+            val enforcedType = type as FiniteOptionsType<V>
+            return enforcedType.getOptions(context)
+        } else throw Exception("Attempting to get all preference options on a " +
+                "preference with infinite options")
     }
 }
