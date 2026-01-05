@@ -904,7 +904,7 @@
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Activa el Bluetooth para conectarte a dispositivos cercanos que tengan Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Si el Bluetooth está activado, el dispositivo podrá comunicarse con otros dispositivos cercanos que tengan Bluetooth. Las funciones como Quick Share y Encontrar mi dispositivo usan Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Cuando Bluetooth está activado, tu dispositivo puede usarlo para comunicarse con otros dispositivos Bluetooth cercanos.\n\nPara mejorar la experiencia, las apps y los servicios pueden buscar dispositivos cercanos incluso cuando la conexión Bluetooth esté desactivada. Esta función puede usarse, por ejemplo, para mejorar las funciones y los servicios basados en la ubicación. Puedes cambiar esta opción en la configuración de búsqueda de Bluetooth."</string>
-    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Si el Bluetooth está activado, el dispositivo podrá comunicarse con otros dispositivos cercanos que tengan Bluetooth. Las funciones como Quick Share y Encontrar mi dispositivo usan Bluetooth.\n\nLas apps y los servicios pueden seguir buscando dispositivos cercanos en cualquier momento, incluso si el Bluetooth está desactivado. Esto puede usarse, por ejemplo, para mejorar las funciones y los servicios que se basan en la ubicación. Puedes modificar esto en la configuración de búsqueda de dispositivos Bluetooth."</string>
+    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Si el Bluetooth está activado, el dispositivo podrá comunicarse con otros dispositivos cercanos que tengan Bluetooth. Las funciones como Quick Share y Encontrar mi dispositivo usan Bluetooth.\n\nLas apps y los servicios pueden seguir buscando dispositivos cercanos en cualquier momento, incluso si el Bluetooth está desactivado. Esto puede usarse, por ejemplo, para mejorar las funciones y los servicios que se basan en la ubicación. Puedes modificar esta opción en la configuración de búsqueda de dispositivos Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Cambiar"</string>
     <string name="bluetooth_key_missing_title" msgid="8462010102528132965">"No se puede establecer la conexión con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_key_missing_message" msgid="3188093580372443815">"Para obtener más detalles, ve a la configuración del dispositivo"</string>
@@ -1265,7 +1265,7 @@
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz/Compatible con pocos dispositivos"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2.4 y 5 GHz / Compatible con la mayoría de los dispositivos"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_6g" msgid="5903589948734876821">"2.4 y 6 GHz / Compatible con la mayoría de los dispositivos"</string>
-    <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Elige la frecuencia de tu hotspot. La frecuencia afecta la velocidad de conexión y los tipos de dispositivos que pueden encontrar tu hotspot."</string>
+    <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Elige la frecuencia de tu hotspot. Esta afecta la velocidad de conexión y los tipos de dispositivos que pueden encontrar tu hotspot."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Frecuencia preferida"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
     <string name="wifi_hotspot_speed_2g_summary" msgid="6930273933810520155">"Velocidades más lentas. Compatible con la mayoría de los dispositivos."</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accede rápidamente a funciones de accesibilidad"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Para comenzar&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Ve a la configuración de accesibilidad.&lt;br/&gt; {1,number,integer}. Selecciona una función y presiona el atajo.&lt;br/&gt; {2,number,integer}. Elige el botón para acceder a la función.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Ubicación"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Flotando encima de otras apps"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Barra de navegación"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Tamaño"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Grande"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Pequeño"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Atenuar cuando no se usa"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Se atenúa después de unos segundos para que sea más fácil ver la pantalla"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Transparencia cuando no se usa"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Esta preferencia de tiempo no es compatible con todas las apps"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Selecciona el tiempo de visualización de los mensajes temporales que te solicitan que realices una acción"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Tiempo de respuesta táctil"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Corto"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Medio"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Largo"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversión de colores"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usar inversión de colores"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Atajo para inversión de colores"</string>
@@ -3321,8 +3320,8 @@
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Elige el día de inicio de cada ciclo"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"Día de cada mes:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"Establecer"</string>
-    <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Establecer advertencia de uso de datos"</string>
-    <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Establecer límite de uso de datos"</string>
+    <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Establece una advertencia de uso de datos"</string>
+    <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Establece el límite de uso de datos"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Limitar el uso de datos"</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"aviso"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"límite"</font></string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Agregar usuarios desde la pantalla de bloqueo"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Agrega usuarios desde la pantalla de acceso"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Cambiar a usuario administrador cuando se conecte"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Se borró el usuario"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"¿Quieres borrar tu perfil?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"¿Borrar este usuario?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"¿Eliminar este perfil?"</string>
@@ -4688,7 +4686,7 @@
     <string name="cell_data_template" msgid="6077963976103260821">"Datos móviles: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"Datos de Wi-Fi: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"Datos de Ethernet: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
-    <string name="billing_cycle" msgid="6618424022653876279">"Advertencia de límite de datos"</string>
+    <string name="billing_cycle" msgid="6618424022653876279">"Advertencia y límite de datos"</string>
     <string name="app_usage_cycle" msgid="341009528778520583">"Ciclo de uso de datos móviles"</string>
     <string name="cell_data_warning" msgid="5664921950473359634">"Advertencia de datos: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"Límite de datos: <xliff:g id="ID_1">^1</xliff:g>"</string>
@@ -5308,6 +5306,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Apps compatibles en tu teléfono"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"No se puede agregar una SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Finaliza la conexión satelital antes de agregar una SIM"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth desactivado"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Cuando estén conectados por Bluetooth, el modo avión se sincronizará en los dispositivos compatibles, como el teléfono y el reloj"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nombres de puntos de acceso"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>

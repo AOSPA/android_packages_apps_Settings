@@ -1440,7 +1440,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Nukkuma-aikatilan asetukset"</string>
     <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Tilat voivat myös laittaa tumman teeman päälle}=1{{mode_1} laittaa myös tumman teeman päälle}=2{{mode_1} ja {mode_2} laittavat myös tumman teeman päälle.}=3{{mode_1}, {mode_2} ja {mode_3} laittavat myös tumman teeman päälle.}other{{mode_1}, {mode_2} ja # muuta laittavat myös tumman teeman päälle.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Tilojen asetukset"</string>
-    <string name="hdr_brigtness_text" msgid="1912629316654528876">"Kirkasta ja laajenna suuren dynaamisen alueen (HDR) ‑kuvien ja ‑videoiden väriskaalaa ja selkeyttä. HDR-sisältö näyttää kirkkaammalta."</string>
+    <string name="hdr_brigtness_text" msgid="1912629316654528876">"Kirkasta ja laajenna suuren dynaamisen alueen (HDR) kuvien ja videoiden väriskaalaa ja selkeyttä. HDR-sisältö näyttää kirkkaammalta."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Näytön aikakatkaisu"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Laitteen oltua käyttämättä <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Ei asetettu"</string>
@@ -1701,7 +1701,7 @@
     <string name="restore_default_apn" msgid="6596048535642130689">"Palautetaan APN-oletusasetuksia"</string>
     <string name="menu_restore" msgid="4310539620115151551">"Palauta oletukset"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"APN-oletusasetukset on palautettu."</string>
-    <string name="reset_dashboard_title" msgid="7423200250697886918">"Palautusvalinnat"</string>
+    <string name="reset_dashboard_title" msgid="7423200250697886918">"Palautusasetukset"</string>
     <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"Nollaa mobiiliverkkoasetukset"</string>
     <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"Kaikki mobiiliverkkoasetukset nollataan"</string>
     <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"Nollaa mobiiliverkkoasetukset?"</string>
@@ -1921,7 +1921,7 @@
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Yhdistä vähintään <xliff:g id="NUMBER">%d</xliff:g> pistettä. Yritä uudelleen."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Kuvio tallennettu"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Vahvista piirtämällä kuvio uudelleen"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Uusi lukituksenpoistokuvio"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Uusi lukituksenavauskuvio"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"Vahvista"</string>
     <string name="lockpattern_restart_button_text" msgid="255339375151895998">"Piirrä uudelleen"</string>
     <string name="lockpattern_retry_button_text" msgid="4229668933251849760">"Tyhjennä"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Avaa saavutettavuusominaisuudet nopeasti"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Näin pääset alkuun&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Avaa saavutettavuusasetukset&lt;br/&gt; {1,number,integer}. Valitse ominaisuus ja napauta pikanäppäintä&lt;br/&gt; {2,number,integer}. Valitse painike, jolla saat pääsyn ominaisuuteen&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Sijainti"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Kelluu muiden sovellusten päällä"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Navigointipalkki"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Koko"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Suuri"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Pieni"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Häivytys kun ei käytössä"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Häviää muutaman sekunnin päästä, jotta näytön näkee helpommin"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Läpinäkyvyys kun ei käytössä"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Kaikki sovellukset eivät tue tätä ajoitusasetusta"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Valitse, miten pitkään haluat nähdä tilapäiset viestit, joissa kehotetaan toimimaan"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Pitkän kosketuksen viive"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Lyhyt"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Keskipituinen"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Pitkä"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Käänteiset värit"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Käytä käänteisiä värejä"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Käänteisten värien pikakuvake"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Lisää käyttäjiä lukitusnäytöllä"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Lisää käyttäjiä kirjautumisnäytöltä"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Vaihda järjestelmänvalvojakäyttäjään telineessä"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Käyttäjä poistettu"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Haluatko poistaa itsesi?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Poistetaanko käyttäjä?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Poistetaanko profiili?"</string>
@@ -3993,7 +3991,7 @@
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Näytä ilmoitusten koko sisältö"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Näytä arkaluontoinen sisältö, jos lukitus avattu"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Älä näytä ilmoituksia ollenkaan"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="6326229471276829730">"Mitä haluat lukitusnäytön näyttävän?"</string>
+    <string name="lock_screen_notifications_interstitial_message" msgid="6326229471276829730">"Mitä haluat nähdä lukitusnäytöllä?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Lukitusnäyttö"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Näytä kaikki työilmoitussisältö"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Piilota arkaluontoinen työsisältö"</string>
@@ -5308,6 +5306,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Tuetut sovellukset puhelimella"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM-korttia ei voi lisätä"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Katkaise satelliittiyhteys ennen SIM-kortin lisäämistä"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth on pois päältä"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Kun Bluetooth-yhteys on muodostettu, lentokonetila synkronoidaan tuetuille laitteille, kuten puhelimelle ja kellolle"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Tukiasemien nimet"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>

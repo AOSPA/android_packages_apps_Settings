@@ -1440,7 +1440,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Ұйқы режимі параметрлері"</string>
     <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Режимдер қараңғы режимді қоса алады.}=1{{mode_1} қараңғы режимді қоса алады.}=2{{mode_1} және {mode_2} қараңғы режимді қоса алады.}=3{{mode_1}, {mode_2} және {mode_3} қараңғы режимді қоса алады.}other{{mode_1}, {mode_2} және тағы # режим қараңғы режимді қоса алады.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Режим параметрлері"</string>
-    <string name="hdr_brigtness_text" msgid="1912629316654528876">"High Dynamic Range (HDR) әсері бар суреттер мен бейнелерді ашық, қанық әрі анық етуге болады. HDR әсері бар контент ашығырақ болады."</string>
+    <string name="hdr_brigtness_text" msgid="1912629316654528876">"High Dynamic Range (HDR) әсері бар суреттер мен бейнелерді ашық, қанық әрі анық етуге болады."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Экранның өшуі"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Әрекетсіз <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> тұрған соң"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Орнатылмаған"</string>
@@ -1490,7 +1490,7 @@
     <string name="doze_always_on_summary_short" msgid="3301903540897812365">"Уақытты, күнді және т.б. көрсету"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Тұсқағаз опциялары"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Құлып экранының тұсқағазын көрсету"</string>
-    <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Өшпейтін экранда құлып экранының тұсқағазы көрінеді"</string>
+    <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Өшпейтін экранда құлып экранының тұсқағазы көрінеді."</string>
     <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Әрекетсіздік кезінде дисплейді өшіру"</string>
     <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Қуатты үнемдеу үшін пайдаланушы әрекеті анықталмаған кезде, дисплейді өшіреді"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Жуан қаріпті мәтін"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Арнайы мүмкіндіктерге жылдам қол жеткізу"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Функцияны реттеу үшін:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Арнайы мүмкіндіктердің параметрлеріне өтіңіз.&lt;br/&gt; {1,number,integer}. Функцияны таңдап, жылдам пәрменді түртіңіз.&lt;br/&gt; {2,number,integer}. Функцияға түйме тағайындаңыз.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Орны"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Басқа қолданбалардың үстінде"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Навигация жолағы"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Көлемі"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Үлкен"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Кішi"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Пайдаланылмағанда түссіздендіру"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Экран толық көрінуі үшін, бірнеше секундтан кейін түссізденеді."</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Түссіздік деңгейі"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Бұл уақыт белгілеу параметрі қолданбалардың барлығында бола бермейді."</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Әрекет етуді талап ететін уақытша хабарлардың көрсетілу ұзақтығын таңдаңыз."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Басып тұрғандағы кідіріс"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Аз уақыт"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Орташа"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Ұзақ"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Түс инверсиясы"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Түс инверсиясын пайдалану"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Түс инверсиясының жылдам пәрмені"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Құлыптаулы экраннан пайдаланушыларды қосу"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Пайдаланушыларды кіру экранынан қосыңыз"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Қондырылғанда әкімші пайдаланушыға ауысу"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Пайдаланушы жойылды."</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Өзіңізді жоясыз ба?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Пайдаланушы жойылсын ба?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Осы профил. жою керек пе?"</string>
@@ -3503,7 +3501,7 @@
     <string name="nfc_default_payment_workapp_confirmation_message_title" msgid="1533022606333010329">"Жұмыс қолданбасы арқылы төлем жасау:"</string>
     <string name="nfc_default_payment_workapp_confirmation_message_1" msgid="2917430119080702912">"жұмыс профилі қосулы болуы керек;"</string>
     <string name="nfc_default_payment_workapp_confirmation_message_2" msgid="8161184137833245628">"жұмыс PIN кодын, өрнегін немесе құпия сөзін (бар болса) енгізуіңіз қажет."</string>
-    <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Бұл қалай жұмыс істейді?"</string>
+    <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Бұл қалай орындалады?"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Дүкендерде телефонмен төлеңіз"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"Әдепкі төлем қолданбасы"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"Орнатылмаған"</string>
@@ -3801,7 +3799,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Жоқ}=1{1 кесте қойылған}other{# кесте қойылған}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Мазаламау"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Режимдер"</string>
-    <string name="zen_modes_list_intro" msgid="1879511587535247228">"Алаңдататын факторларды азайтып, ұйқыға, жұмысқа, көлік жүргізуге және басқа да әрекеттерге арналған режимдер көмегімен зейініңізді қадағалаңыз."</string>
+    <string name="zen_modes_list_intro" msgid="1879511587535247228">"Ұйқыға, жұмысқа, көлік жүргізуге және басқа да әрекеттерге арналған режимдер көмегімен алаңдататын факторларды азайтып, зейініңізді қадағалаңыз."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Өз режиміңізді жасау"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Хабарландыруды маңызды адамдардан және қолданбалардан ғана алу"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Кесте құру"</string>
@@ -5247,7 +5245,7 @@
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Өшірулі"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="7182341033728911879">"Бұл SIM картасын өшіру үшін оны құрылғыдан алып тастаңыз."</string>
     <string name="mobile_network_tap_to_activate" msgid="5280456487243915465">"<xliff:g id="CARRIER">%1$s</xliff:g> SIM картасын іске қосу үшін түртіңіз."</string>
-    <string name="mobile_network_erase_sim" msgid="5387971155494245850">"eSIM картасын өшіру"</string>
+    <string name="mobile_network_erase_sim" msgid="5387971155494245850">"eSIM картасын тазарту"</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Таңдалған желі түрі"</string>
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"Желі жұмысының режимін өзгерту"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"Таңдалған желі түрі"</string>
@@ -5308,6 +5306,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Телефоныңызда қолдау көрсетілетін қолданбалар"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM картасы қосылмады"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM картасын қоспас бұрын, жерсеріктік байланысты өшіріңіз."</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth өшірулі"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Bluetooth арқылы қосылған кезде, ұшақ режимі телефон мен сағат сияқты қолдау көрсетілетін құрылғыларда синхрондалады"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Кіру нүктесінің атауы"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
@@ -5345,7 +5344,7 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"Өшіру"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM картасын іске қосу мүмкін емес"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"SIM картасын қайтадан қосып көріңіз. Егер ақау жойылмаса, құрылғыны өшіріп қосыңыз."</string>
-    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"SIM карта параметрлерін реттеу"</string>
+    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"SIM параметрлерін реттеу"</string>
     <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Осы құрылғыда бірнеше SIM картасын пайдалану үшін мобильдік желі параметрлерін реттеңіз."</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"SIM карталарын белгілеу"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Бұл белгілерді қоңырау шалғанда, мәтіндік хабарлар жібергенде және деректерді пайдаланған кезде, сондай-ақ параметрлерде көресіз."</string>
@@ -5358,8 +5357,8 @@
     <string name="primary_sim_title" msgid="2508161011657571566">"Негізгі SIM карталары"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"Қоңыраулар"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Мәтіндік хабарлар"</string>
-    <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Мобильдік интернетті автоматты ауыстыру"</string>
-    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Қызмет аясына және қолжетімділігіне қарай қажетті SIM картасының интернетін пайдалану"</string>
+    <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Мобильдік интернетті автоматты түрде ауыстыру"</string>
+    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Қызмет аясына және қолжетімділігіне қарай кез келген SIM картасының интернетін пайдалану"</string>
     <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"2 SIM картасын пайдалану үшін құрылғыны өшіріп қосыңыз"</string>
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Бір уақытта 2 SIM картасын пайдалану үшін құрылғыны өшіріп қосыңыз, содан соң SIM карталарының екеуін де қосыңыз."</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Тек <xliff:g id="CARRIER_NAME">%1$s</xliff:g> пайдалану"</string>

@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Hiter dostop do funkcij za ljudi s posebnimi potrebami."</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Začnete tako:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Odprite nastavitve dostopnosti.&lt;br/&gt; {1,number,integer}. Izberite funkcijo in se dotaknite bližnjice.&lt;br/&gt; {2,number,integer}. Izberite gumb za dostop do funkcije.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokacija"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Prekrivanje drugih aplikacij"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Vrstica za krmarjenje"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Velikost"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Velika"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Majhna"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Pobleditev, ko ni v uporabi"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Pobledi po nekaj sekundah, da boste lažje videli zaslon."</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Prosojnost, ko ni v uporabi"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Ta časovna nastavitev ni podprta v vseh aplikacijah."</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Izberite, kako dolgo naj bodo prikazana začasna sporočila, ki vas pozivajo k ukrepanju."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Časovni zamik za dotik in pridržanje"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Kratko"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Srednje dolgo"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Dolgo"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inverzija barv"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Uporabi inverzijo barv"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Bližnjica za inverzijo barv"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Dodajanje uporabnikov na zaklenjenem zaslonu"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Dodajanje uporabnikov na zaslonu za prijavo"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Preklopi na skrbniš. uporabnika, ko je v nosilcu"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Uporabnik je izbrisan"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Želite izbrisati sebe?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Želite izbrisati uporabnika?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Odstranitev profila?"</string>
@@ -4338,7 +4336,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Povsem se osredotočite"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Za trenutke, ko je pomembna vljudnost"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Vodena uporaba, s katero ste v dobrih rokah"</string>
-    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Optimizirajte svojo napravo za bolj gladko izkušnjo z javnim prevozom"</string>
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Optimizirajte svojo napravo za boljšo izkušnjo z javnim prevozom"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Prevzemite nadzor nad svojo pozornostjo"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Opozorilo"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Zapri"</string>
@@ -5308,6 +5306,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Podprte aplikacije v telefonu"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Kartice SIM ni mogoče dodati"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Preden dodate kartico SIM, prekinite satelitsko povezavo"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth je izklopljen"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Ko so naprave povezane prek Bluetootha, se način za letalo samodejno sinhronizira v vseh podprtih napravah, na primer v telefonu in uri."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Imena dostopnih točk"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>

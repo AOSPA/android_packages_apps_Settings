@@ -1865,7 +1865,7 @@
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Adja meg munkahelyi PIN-kódját"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"A jelszavak nem egyeznek"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"A PIN-kódok nem egyeznek"</string>
-    <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Rajzolja újra a mintát"</string>
+    <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Rajzolja újra a mintát."</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="5669348379247148696">"Feloldás kiválasztása"</string>
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"A jelszó beállítva"</string>
     <string name="lockpassword_pin_set_toast" msgid="5415783847198570890">"A PIN-kód beállítva"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Gyors hozzáférés a kisegítő lehetőségekhez"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Kezdő lépések&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Lépjen a kisegítő lehetőségek beállításaihoz.&lt;br/&gt; {1,number,integer}. Koppintson a kívánt funkcióra, majd a gyorsparancsra.&lt;br/&gt; {2,number,integer}. Válassza ki, hogy melyik gombbal szeretne hozzáférni a funkcióhoz.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Hely"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Lebegés más alkalmazások fölött"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Navigációs sáv"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Méret"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Nagy"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Kicsi"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Elhalványul, ha nincs használatban"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Néhány másodperc után elhalványul, így jobban látható a képernyő"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Átlátszóság, amikor nincs használatban"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Az időzítésbeállítás nem minden alkalmazásban áll rendelkezésre"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Beállíthatja, hogy mennyi ideig legyenek láthatók azok az ideiglenes üzenetek, amelyek művelet végrehajtására kérik."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Érintés és tartási késleltetés"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Rövid"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Közepes"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Hosszú"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Színek invertálása"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Színinvertálás használata"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Színek invertálásának gyorsparancsa"</string>
@@ -3129,7 +3128,7 @@
     <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> nem biztonságos"</string>
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> nem biztonságos"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptív csatlakozás"</string>
-    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"A hálózati kapcsolatok automatikus kezelése megnöveli az akkumulátor élettartamát és javítja az eszköz teljesítményét."</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"A hálózati kapcsolatok automatikus kezelése megnöveli az akkumulátor élettartamát, és javítja az eszköz teljesítményét."</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Be"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Ki"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Adaptív csatlakozás használata"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Felhasználók hozzáadása a lezárási képernyőről"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Felhasználók hozzáadása bejelentkezési képernyőről"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Dokkoláskor váltás adminisztrátor felhasználóra"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Felhasználó törölve"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Törli önmagát?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Törli a felhasználót?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Eltávolítja a profilt?"</string>
@@ -5308,6 +5306,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Támogatott alkalmazások a telefonon"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Nem lehet hozzáadni SIM-et"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM hozzáadása előtt szakítsa meg a műholdas kapcsolatot"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"A Bluetooth ki van kapcsolva"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Aktív Bluetooth-kapcsolat esetén a Repülős üzemmód szinkronizálódik a támogatott eszközökön (pl. telefonon és órán)."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Hozzáférési pontok nevei"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
