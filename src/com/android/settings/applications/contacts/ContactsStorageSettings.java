@@ -55,6 +55,7 @@ import java.util.Map;
 /**
  * Settings page for contacts default account
  */
+// LINT.IfChange
 @SearchIndexable
 public class ContactsStorageSettings extends DashboardFragment
         implements SelectorWithWidgetPreference.OnClickListener, OnPreferenceClickListener,
@@ -303,3 +304,4 @@ public class ContactsStorageSettings extends DashboardFragment
         return SettingsEnums.CONTACTS_STORAGE;
     }
 }
+// LINT.ThenChange(ContactsStorageApiScreen.kt)
