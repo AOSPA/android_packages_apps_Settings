@@ -49,6 +49,9 @@ class NavButtonShortcutPreference(context: Context, targets: Set<String>) :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.shortcut_nav_button_pref_purpose
+
     override val title: Int
         get() = R.string.accessibility_shortcut_edit_dialog_title_software
 

@@ -308,9 +308,9 @@ class SetupSupervisionActivity : FragmentActivity() {
             )
         }
 
-        // Start PIN recovery setup when pin recovery can be launched
-        if (!Flags.enableSupervisionSettingsUiUpdates() || canLaunchPinRecovery()) {
-            startPinRecoveryActivity()
+        // Start PIN recovery setup if a recovery method does not already exist.
+        if (!Flags.enableSupervisionSettingsUiUpdates() || !canLaunchPinRecovery()) {
+            startSetupRecoveryFlow()
         } else {
             setResult(RESULT_OK)
             finish()
@@ -325,7 +325,7 @@ class SetupSupervisionActivity : FragmentActivity() {
         finish()
     }
 
-    private fun startPinRecoveryActivity() {
+    private fun startSetupRecoveryFlow() {
         // prompt user to setup pin recovery if flag is enabled
         if (!Flags.enableSupervisionPinRecoveryScreen()) {
             Log.d(SupervisionLog.TAG, "PIN recovery setup is not enabled.")

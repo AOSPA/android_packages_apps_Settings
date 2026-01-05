@@ -24,12 +24,16 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TopIntroPreference
+import com.android.settings.R
 
 /** Handles fetching and display the introduction text of an [AccessibilityShortcutInfo]. */
 class IntroPreference(private val shortcutInfo: AccessibilityShortcutInfo) :
     PreferenceMetadata, PreferenceBinding, PreferenceTitleProvider, PreferenceAvailabilityProvider {
     override val key: String
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.a11y_activity_detail_screen_top_intro_purpose
 
     override val indexable
         get() = false

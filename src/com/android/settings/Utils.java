@@ -134,6 +134,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.dashboard.profileselector.ProfileFragmentBridge;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType;
+import com.android.settings.flags.Flags;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.Settings.CreateShortcutActivity;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
@@ -1525,6 +1526,9 @@ public final class Utils extends com.android.settingslib.Utils {
      * Returns if dreams are available to the current user.
      */
     public static boolean areDreamsAvailableToCurrentUser(Context context) {
+        if (shouldHideDreamsInDemoMode(context)) {
+            return false;
+        }
         final boolean dreamsSupported = context.getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported);
         final boolean dreamsOnlyEnabledForDockUser = context.getResources().getBoolean(
@@ -1773,6 +1777,15 @@ public final class Utils extends com.android.settingslib.Utils {
                 activity.getResources(), getEffectiveUserId(userManager, userId),
                 hideBackground, null /* data */), requestCode);
     }
+
+    /**
+     * Returns true if the device is in demo mode and should hide settings.
+     */
+    public static boolean shouldHideDreamsInDemoMode(Context context) {
+        return Flags.hideDreamSettingInDemoMode() && UserManager.isDeviceInDemoMode(context)
+            && context.getResources().getBoolean(R.bool.config_hide_dream_setting_in_demo_mode);
+    }
+
 
     private static int getEffectiveUserId(UserManager userManager, int userId) {
         if (userManager != null) {

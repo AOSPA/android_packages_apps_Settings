@@ -30,11 +30,11 @@ import com.android.settings.utils.getSubId
 import com.android.settings.utils.putSubId
 import com.android.settings.wifi.calling.WifiCallingSettingsForSub.EXTRA_SUB_ID
 import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
-import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -52,7 +52,7 @@ private constructor(
         "This property will be removed once the catalyst framework stops passing the arguments as a bundle. Use the keyParameters instead."
     )
     final override val arguments: Bundle?,
-    final override val keyParameters: KeyParameters?,
+    final override val keyParameters: ValidatedKeyParameters?,
 ) : PreferenceScreenMixin, PreferenceAvailabilityProvider {
 
     private val subId: Int =
@@ -67,10 +67,14 @@ private constructor(
     )
     constructor(args: Bundle) : this(args, null)
 
-    constructor(keyParameters: KeyParameters) : this(null, keyParameters)
+    constructor(keyParameters: ValidatedKeyParameters) : this(null, keyParameters)
 
     override val key: String
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.wifi_calling_purpose
 
     override val title: Int
         get() = R.string.wifi_calling_settings_title
@@ -103,7 +107,7 @@ private constructor(
         }
 
         @JvmStatic
-        override fun keyParameters(context: Context): Flow<KeyParameters> {
+        override fun keyParameters(context: Context): Flow<ValidatedKeyParameters> {
             // TODO (b/457649430): when the catalyst framework stops passing the arguments as a
             // bundle: replace the parameters(context) call to the actual implementation,
             // or make this function the primary implementation and the legacy parameters() should

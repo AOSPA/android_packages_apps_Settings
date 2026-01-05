@@ -336,6 +336,15 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
         mRecyclerView = super.onCreateRecyclerView(inflater, parent, bundle);
         mRecyclerView.setFocusable(false);
 
+        if (dreamsV2()) {
+            final int bottomPaddingPx = getResources().getDimensionPixelSize(
+                    R.dimen.dream_settings_padding_bottom);
+            mRecyclerView.setPadding(mRecyclerView.getPaddingLeft(),
+                    mRecyclerView.getPaddingTop(),
+                    mRecyclerView.getPaddingRight(),
+                    bottomPaddingPx);
+        }
+
         return mRecyclerView;
     }
 

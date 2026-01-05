@@ -21,8 +21,6 @@ import static com.android.settings.connecteddevice.display.ExternalDisplaySettin
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
 import static com.android.settings.flags.Flags.FLAG_ENABLE_RESOLUTION_CONFIRM_DIALOG_BUGFIX;
-import static com.android.settings.flags.Flags.FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING;
-import static com.android.settings.flags.Flags.FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING_BUGFIX;
 import static com.android.settings.flags.Flags.FLAG_ENABLE_DISPLAY_BLOCK_ARROW_MOVEMENT_BUGFIX;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -55,6 +53,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
 import com.android.settings.flags.FakeFeatureFlagsImpl;
+import com.android.wm.shell.shared.desktopmode.FakeDesktopState;
 
 import org.junit.Before;
 import org.mockito.Mock;
@@ -86,6 +85,7 @@ public class ExternalDisplayTestBase {
     ActivityTaskManager mActivityTaskManager;
     @Mock
     DevicePolicyManager mDevicePolicyManager;
+    FakeDesktopState mFakeDesktopState = new FakeDesktopState();
 
     /**
      * Setup.
@@ -99,14 +99,13 @@ public class ExternalDisplayTestBase {
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, false);
-        mFlags.setFlag(FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING, true);
-        mFlags.setFlag(FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING_BUGFIX, true);
         mFlags.setFlag(FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING, true);
         mFlags.setFlag(FLAG_ENABLE_RESOLUTION_CONFIRM_DIALOG_BUGFIX, true);
         mFlags.setFlag(FLAG_ENABLE_DISPLAY_BLOCK_ARROW_MOVEMENT_BUGFIX, true);
         updateDisplaysAndTopology(List.of(createExternalDisplay(DisplayIsEnabled.YES),
                 createOverlayDisplay(DisplayIsEnabled.YES)));
         doReturn(mInjectedFlags).when(mMockedInjector).getFlags();
+        doReturn(mFakeDesktopState).when(mMockedInjector).getDesktopState();
         mHandler = new TestHandler(mContext.getMainThreadHandler());
         doReturn(mHandler).when(mMockedInjector).getHandler();
         doReturn("").when(mMockedInjector).getSystemProperty(

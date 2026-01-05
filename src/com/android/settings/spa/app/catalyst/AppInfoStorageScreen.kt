@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.applications.AppStorageSettings
 import com.android.settings.applications.getApplicationInfo
+import com.android.settings.applications.specialaccess.InteractAcrossProfilesAppDetailScreen
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
@@ -33,32 +34,70 @@ import com.android.settings.flags.Flags
 import com.android.settings.spa.app.storage.StorageType
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.applications.StorageStatsSource
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.KeyParametersSchema
+import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
+import com.android.settingslib.spaprivileged.model.app.AppStorageRepository
 import com.android.settingslib.spaprivileged.model.app.AppStorageRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 @ProvidePreferenceScreen(AppInfoStorageScreen.KEY, parameterized = true)
-open class AppInfoStorageScreen(context: Context, override val arguments: Bundle) :
+open class AppInfoStorageScreen
+private constructor(
+    val context: Context,
+    @Deprecated(
+        "This property will be removed once the catalyst framework stops passing the arguments as a bundle. Use the keyParameters instead."
+    )
+    final override val arguments: Bundle?,
+    final override val keyParameters: ValidatedKeyParameters?,
+) :
     PreferenceScreenMixin,
     PreferenceSummaryProvider,
     PreferenceTitleProvider,
     PreferenceAvailabilityProvider {
 
-    private val packageName = arguments.getString("app")!!
+    private val packageName: String =
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            keyParameters!!.getRequired(
+                InteractAcrossProfilesAppDetailScreen.Companion.KEY_APP_PACKAGE_NAME
+            )
+        } else {
+            arguments!!.getString(
+                InteractAcrossProfilesAppDetailScreen.Companion.KEY_APP_PACKAGE_NAME
+            )!!
+        }
+
     private val appInfo = context.getApplicationInfo(packageName)
 
     private val repo = AppStorageRepositoryImpl(context)
 
+    @Deprecated(
+        "This constructor will be removed once the catalyst framework stops passing the arguments as a bundle. Use the other constructor instead."
+    )
+    constructor(context: Context, args: Bundle) : this(context, args, null)
+
+    constructor(
+        context: Context,
+        keyParameters: ValidatedKeyParameters,
+    ) : this(context, null, keyParameters)
+
     override val key: String
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.device_state_app_info_storage_purpose
 
     override val screenTitle: Int
         get() = R.string.storage_label
@@ -81,7 +120,7 @@ open class AppInfoStorageScreen(context: Context, override val arguments: Bundle
     override fun isAvailable(context: Context) = appInfo != null
 
     override fun extras(context: Context): Bundle? =
-        Bundle(1).apply { putString(KEY_EXTRA_PACKAGE_NAME, arguments.getString("app")) }
+        Bundle(1).apply { putString(KEY_EXTRA_PACKAGE_NAME, packageName) }
 
     override fun hasCompleteHierarchy() = false
 
@@ -90,7 +129,11 @@ open class AppInfoStorageScreen(context: Context, override val arguments: Bundle
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         Intent("com.android.settings.APP_STORAGE_SETTINGS").apply {
             data = "package:$packageName".toUri()
-            highlightPreference(arguments, metadata?.key)
+            if (CatalystFlags.catalystUseKeyParameters()) {
+                highlightPreference(keyParameters!!, metadata?.key)
+            } else {
+                highlightPreference(arguments!!, metadata?.key)
+            }
         }
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
@@ -113,16 +156,33 @@ open class AppInfoStorageScreen(context: Context, override val arguments: Bundle
             null
         }
 
-    companion object {
+    companion object : ParameterizedPreferenceScreenArgumentsFactory {
         const val KEY = "device_state_app_info_storage"
-
         const val KEY_EXTRA_PACKAGE_NAME = "package_name"
+        const val KEY_APP_PACKAGE_NAME = "app"
 
+        @JvmStatic
+        override val parametersSchema = KeyParametersSchema {
+            parameter(KEY_APP_PACKAGE_NAME, "The package name of the app", required = true)
+        }
+
+        @JvmStatic
+        override fun keyParameters(context: Context): Flow<ValidatedKeyParameters> {
+            // TODO (b/457649430): when the catalyst framework stops passing the arguments as a
+            //  bundle: replace the parameters(context) call to the actual implementation,
+            // or make this function the primary implementation and the legacy parameters() should
+            // call this one.
+            return parameters(context).map { bundle -> parametersSchema.prepare(bundle) }
+        }
+
+        @Deprecated(
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use keyParameters instead."
+        )
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
             AppListRepositoryImpl(context).loadApps(context.userId).forEach { app ->
                 if (StorageType.Apps.filter(app)) {
-                    emit(Bundle(1).apply { putString("app", app.packageName) })
+                    emit(Bundle(1).apply { putString(KEY_APP_PACKAGE_NAME, app.packageName) })
                 }
             }
         }
@@ -131,11 +191,14 @@ open class AppInfoStorageScreen(context: Context, override val arguments: Bundle
 
 private class AppSizePreference(
     private val stats: StorageStatsSource.AppStorageStats,
-    private val repo: AppStorageRepositoryImpl,
+    private val repo: AppStorageRepository,
 ) : PreferenceMetadata, PreferenceSummaryProvider {
 
     override val key: String
         get() = "app_size"
+
+    override val purpose: Int
+        get() = R.string.app_size_purpose
 
     override val title: Int
         get() = R.string.application_size_label
@@ -145,11 +208,14 @@ private class AppSizePreference(
 
 private class AppUserDataSizePreference(
     private val stats: StorageStatsSource.AppStorageStats,
-    private val repo: AppStorageRepositoryImpl,
+    private val repo: AppStorageRepository,
 ) : PreferenceMetadata, PreferenceSummaryProvider {
 
     override val key: String
         get() = "data_size"
+
+    override val purpose: Int
+        get() = R.string.data_size_purpose
 
     override val title: Int
         get() = R.string.data_size_label
@@ -160,11 +226,14 @@ private class AppUserDataSizePreference(
 
 private class AppCacheSizePreference(
     private val stats: StorageStatsSource.AppStorageStats,
-    private val repo: AppStorageRepositoryImpl,
+    private val repo: AppStorageRepository,
 ) : PreferenceMetadata, PreferenceSummaryProvider {
 
     override val key: String
         get() = "cache_size"
+
+    override val purpose: Int
+        get() = R.string.cache_size_purpose
 
     override val title: Int
         get() = R.string.cache_size_label
@@ -175,11 +244,14 @@ private class AppCacheSizePreference(
 
 private class AppTotalSizePreference(
     private val stats: StorageStatsSource.AppStorageStats,
-    private val repo: AppStorageRepositoryImpl,
+    private val repo: AppStorageRepository,
 ) : PreferenceMetadata, PreferenceSummaryProvider {
 
     override val key: String
         get() = "total_size"
+
+    override val purpose: Int
+        get() = R.string.total_size_purpose
 
     override val title: Int
         get() = R.string.total_size_label

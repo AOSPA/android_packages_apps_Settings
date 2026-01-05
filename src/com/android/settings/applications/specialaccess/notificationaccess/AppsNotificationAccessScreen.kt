@@ -30,10 +30,13 @@ import android.service.notification.NotificationListenerService
 import android.util.Log
 import com.android.settings.R
 import com.android.settings.Settings.NotificationAccessSettingsActivity
+import com.android.settings.applications.specialaccess.notificationaccess.AppInfoNotificationAccessScreen.Companion.KEY_APP_PACKAGE_NAME
+import com.android.settings.applications.specialaccess.notificationaccess.AppInfoNotificationAccessScreen.Companion.KEY_SERVICE_NAME
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -45,6 +48,10 @@ open class AppsNotificationAccessScreen : PreferenceScreenMixin {
 
     override val key: String
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.notification_access_purpose
 
     override val title: Int
         get() = R.string.manage_notification_access_title
@@ -67,12 +74,21 @@ open class AppsNotificationAccessScreen : PreferenceScreenMixin {
         preferenceHierarchy(context) {
             val services = loadNotificationListenerServices(context)
             for (service in services) {
-                val arguments =
-                    Bundle(1).apply {
-                        putString("app", service.packageName)
-                        putString("serviceName", service.name)
-                    }
-                +(AppInfoNotificationAccessScreen.KEY args arguments)
+                if (CatalystFlags.catalystUseKeyParameters()) {
+                    val parameters =
+                        AppInfoNotificationAccessScreen.parametersSchema.prepare(
+                            KEY_APP_PACKAGE_NAME to service.packageName,
+                            KEY_SERVICE_NAME to service.name,
+                        )
+                    +(AppInfoNotificationAccessScreen.KEY withParameters parameters)
+                } else {
+                    val arguments =
+                        Bundle(1).apply {
+                            putString("app", service.packageName)
+                            putString("serviceName", service.name)
+                        }
+                    +(AppInfoNotificationAccessScreen.KEY args arguments)
+                }
             }
         }
 

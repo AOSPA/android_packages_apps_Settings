@@ -39,6 +39,7 @@ import com.android.settings.accessibility.TextReadingPreferenceFragment
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.core.instrumentation.SettingsStatsLog
+import com.android.settings.flags.Flags
 import java.util.Locale
 
 /**
@@ -62,6 +63,12 @@ open class SelectedDisplayPreferenceFragment(
 
     private val prefComponents = mutableListOf<PrefComponent>()
     private val numberFormatter: NumberFormat = NumberFormat.getNumberInstance(Locale.getDefault())
+    private val refreshRateFormatter =
+        NumberFormat.getNumberInstance(Locale.getDefault()).apply {
+            isGroupingUsed = false
+            minimumFractionDigits = 2
+            maximumFractionDigits = 2
+        }
 
     override fun getMetricsCategory(): Int {
         return SettingsEnums.SETTINGS_EXTERNAL_DISPLAY_CATEGORY
@@ -80,8 +87,15 @@ open class SelectedDisplayPreferenceFragment(
             Bundle().apply {
                 putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, displayId)
             }
+        val isRefreshRatePrefEnabled = Flags.enableResolutionRefreshRateSetting()
         SubSettingLauncher(requireContext())
-            .setDestination(ResolutionPreferenceFragment::class.java.name)
+            .setDestination(
+                if (isRefreshRatePrefEnabled) {
+                    ResolutionRefreshRatePreferenceFragment::class.java.name
+                } else {
+                    ResolutionPreferenceFragment::class.java.name
+                }
+            )
             .setArguments(args)
             .setSourceMetricsCategory(metricsCategory)
             .launch()
@@ -131,7 +145,9 @@ open class SelectedDisplayPreferenceFragment(
         preferenceScreen.addPreference(selectedDisplayPreference)
 
         // Built-in display preferences
-        prefComponents.add(PrefComponent(mirroringPreference(), PrefInfo.DISPLAY_MIRRORING))
+        if (viewModel.injector.desktopState?.canEnterDesktopMode == true) {
+            prefComponents.add(PrefComponent(mirroringPreference(), PrefInfo.DISPLAY_MIRRORING))
+        }
         prefComponents.add(
             PrefComponent(
                 includeDefaultDisplayInTopologyPreference(),
@@ -352,14 +368,33 @@ open class SelectedDisplayPreferenceFragment(
         val height = displayMode.physicalHeight
         val formattedWidth = numberFormatter.format(width)
         val formattedHeight = numberFormatter.format(height)
+        val resolutionDisplayText = "$formattedWidth x $formattedHeight"
+        val resolutionA11yText =
+            resources.getString(R.string.screen_resolution_delimiter_a11y, width, height)
         ExternalDisplaySettingsLoggerStore.getLogger(display.id).updateResolution(width, height)
 
-        preference.setSummary(
-            createAccessibleSequence(
-                "$formattedWidth x $formattedHeight",
-                resources.getString(R.string.screen_resolution_delimiter_a11y, width, height),
+        val isRefreshRatePrefEnabled = Flags.enableResolutionRefreshRateSetting()
+        if (isRefreshRatePrefEnabled) {
+            val formattedRefreshRate = refreshRateFormatter.format(displayMode.refreshRate)
+            val refreshRateDisplayText =
+                resources.getString(
+                    R.string.screen_refresh_rate_displayed_text,
+                    formattedRefreshRate,
+                )
+            val refreshRateA11yText =
+                resources.getString(R.string.screen_refresh_rate_a11y, formattedRefreshRate)
+
+            preference.setSummary(
+                createAccessibleSequence(
+                    "$resolutionDisplayText ($refreshRateDisplayText)",
+                    "$resolutionA11yText, $refreshRateA11yText",
+                )
             )
-        )
+        } else {
+            preference.setSummary(
+                createAccessibleSequence(resolutionDisplayText, resolutionA11yText)
+            )
+        }
     }
 
     private fun rotationPreference(): ListPreference {
@@ -530,7 +565,11 @@ open class SelectedDisplayPreferenceFragment(
             ParentPrefCategory.ROOT,
         ),
         DISPLAY_RESOLUTION(
-            R.string.external_display_resolution_settings_title,
+            if (Flags.enableResolutionRefreshRateSetting()) {
+                R.string.external_display_resolution_refresh_rate_settings_title
+            } else {
+                R.string.external_display_resolution_settings_title
+            },
             "pref_key_external_display_resolution",
             DisplayType.EXTERNAL_DISPLAY,
             ParentPrefCategory.ROOT,

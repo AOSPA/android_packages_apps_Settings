@@ -29,8 +29,8 @@
  */
 
 /*
- * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
- * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Changes from Qualcomm Technologies, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -105,11 +105,39 @@ public final class TelephonyUtils {
         return sSlotsInfo == null ? 0 : sSlotsInfo.length;
     }
 
-    public static boolean isDsdsToSsConfigValid(){
+    /**
+     * Gets the number of available slots.
+     *
+     * If the DSDS-to-SS configuration is detected as valid, it returns the count of physical
+     * UICC slots. Otherwise, it returns the number of currently active modems.
+     *
+     * @param context The context to access system services.
+     * @return The number of available slots.
+     */
+    public static int getSlotsCount(Context context){
+        TelephonyManager telephonyManager =
+                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        return isDsdsToSsConfigValid(context) ? getUiccSlotsCount(context) :
+                telephonyManager.getActiveModemCount();
+    }
+
+    /**
+     * Checks if the DSDS-to-SS configuration is valid.
+     *
+     * This configuration is considered valid if:
+     *     The status flag for this configuration is enabled.
+     *     The device has more than one physical UICC slot.
+     *     Information for the second slot (index 1) is available.
+     *
+     * @param context The application context.
+     * @return {@code true} if the DSDS-to-SS configuration is valid, {@code false} otherwise.
+     */
+    public static boolean isDsdsToSsConfigValid(Context context){
         if (sSlotsInfo == null) {
-            return false;
+            sSlotsInfo = getUiccSlotsInfo(context);
         }
-        return sDsdsToSsConfigStatus == 1 && sSlotsInfo.length > 1 && sSlotsInfo[1] != null;
+        return sDsdsToSsConfigStatus == 1 && sSlotsInfo != null
+                && sSlotsInfo.length > 1 && sSlotsInfo[1] != null;
     }
 
     /**

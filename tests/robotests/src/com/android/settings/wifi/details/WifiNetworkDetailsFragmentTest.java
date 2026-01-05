@@ -20,6 +20,7 @@ import static android.net.wifi.sharedconnectivity.app.HotspotNetwork.NETWORK_TYP
 import static android.net.wifi.sharedconnectivity.app.HotspotNetwork.NETWORK_TYPE_ETHERNET;
 import static android.net.wifi.sharedconnectivity.app.HotspotNetwork.NETWORK_TYPE_UNKNOWN;
 import static android.net.wifi.sharedconnectivity.app.HotspotNetwork.NETWORK_TYPE_WIFI;
+import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
 import static android.telephony.SignalStrength.SIGNAL_STRENGTH_GREAT;
 
 import static com.android.settings.network.NetworkProviderSettings.WIFI_DIALOG_ID;
@@ -44,6 +45,9 @@ import static org.mockito.Mockito.verify;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -56,7 +60,9 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.connectivity.Flags;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details2.WifiDetailPreferenceController2;
@@ -76,11 +82,17 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
 import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 public class WifiNetworkDetailsFragmentTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(DEVICE_DEFAULT);
 
     static final String TEST_PREFERENCE_KEY = "TEST_PREFERENCE_KEY";
     static final int BATTERY_PERCENTAGE_MAX = 100;
@@ -142,6 +154,7 @@ public class WifiNetworkDetailsFragmentTest {
         doReturn(mHotspotConnectionCategory).when(mScreen)
                 .findPreference(KEY_HOTSPOT_CONNECTION_CATEGORY);
         mFragment.mNetworkDetailsTracker = mNetworkDetailsTracker;
+        mFragment.mWifiDetailPreferenceController2 = mWifiDetailPreferenceController2;
 
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mWifiFeatureProvider = mFeatureFactory.mWifiFeatureProvider;
@@ -165,6 +178,15 @@ public class WifiNetworkDetailsFragmentTest {
     @Test
     public void getDialogMetricsCategory_withWrongId_shouldReturnZero() {
         assertThat(mFragment.getDialogMetricsCategory(-1 /* dialogId */)).isEqualTo(0);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @Config(shadows = ShadowRestrictedDashboardFragment.class)
+    public void onCreate_isNotMultiUser_setIfOnlyAvailableForAdmins() {
+        mFragment.onCreate(null);
+
+        verify(mFragment).setIfOnlyAvailableForAdmins(true);
     }
 
     @Test
@@ -236,8 +258,6 @@ public class WifiNetworkDetailsFragmentTest {
 
     @Test
     public void onHotspotNetworkChanged_dataNull_hotspotSetVisibleFalse() {
-        mFragment.mWifiDetailPreferenceController2 = mWifiDetailPreferenceController2;
-
         mFragment.onHotspotNetworkChanged(null);
 
         verify(mHotspotDeviceCategory).setVisible(false);
@@ -247,8 +267,6 @@ public class WifiNetworkDetailsFragmentTest {
 
     @Test
     public void onHotspotNetworkChanged_dataNotNull_hotspotSetVisibleTrue() {
-        mFragment.mWifiDetailPreferenceController2 = mWifiDetailPreferenceController2;
-
         mFragment.onHotspotNetworkChanged(mHotspotNetworkData);
 
         verify(mHotspotDeviceCategory).setVisible(true);
@@ -349,6 +367,22 @@ public class WifiNetworkDetailsFragmentTest {
         @Override
         public int getAvailabilityStatus() {
             return AVAILABLE;
+        }
+    }
+
+    @Implements(RestrictedDashboardFragment.class)
+    public static final class ShadowRestrictedDashboardFragment {
+        /** A shadow for {@link RestrictedDashboardFragment} to prevent the
+         * real {@code onCreate} from executing in tests. */
+
+        @Implementation
+        public void onCreate(Bundle icicle) {
+            // do nothing
+        }
+
+        @Implementation
+        public boolean isUiRestricted() {
+            return false;
         }
     }
 }

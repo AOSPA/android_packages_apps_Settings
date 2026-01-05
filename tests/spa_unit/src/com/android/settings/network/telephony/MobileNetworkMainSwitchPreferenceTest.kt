@@ -55,6 +55,7 @@ class MobileNetworkMainSwitchPreferenceTest {
                 MobileNetworkMainSwitchPreference(
                     context,
                     TEST_SUB_ID,
+                    testScope,
                     mockSubscriptionActivationRepository,
                     mockSubscriptionRepository,
                 )

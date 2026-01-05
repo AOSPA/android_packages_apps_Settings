@@ -15,18 +15,24 @@
  */
 package com.android.settings.supervision
 
+import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.pm.PackageManager.MATCH_UNINSTALLED_PACKAGES
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
+import com.android.settings.R
 
 class SupervisionSupportedAppPreference(
     private val titleString: CharSequence?,
     private val summaryString: CharSequence?,
     private val packageName: String,
+    private val preferenceKey: String? = null,
 ) : PreferenceMetadata, PreferenceBinding {
     override val key: String
-        get() = KEY
+        get() = if (Flags.enableSupervisionSettingsUiUpdates()) preferenceKey ?: KEY else KEY
+
+    override val purpose: Int
+        get() = R.string.web_content_filters_supported_app_purpose
 
     override val indexable
         get() = false
@@ -41,6 +47,9 @@ class SupervisionSupportedAppPreference(
 
             title = titleString
             summary = summaryString
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                key = preferenceKey ?: KEY
+            }
             setIcon(icon)
         }
 

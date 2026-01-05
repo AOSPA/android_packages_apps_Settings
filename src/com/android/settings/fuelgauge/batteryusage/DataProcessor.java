@@ -16,11 +16,14 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import static android.app.ActivityManager.PROCESS_STATE_TOP;
+
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.getEffectivePackageName;
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.isSystemConsumer;
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.isUidConsumer;
 import static com.android.settingslib.fuelgauge.BatteryStatus.BATTERY_LEVEL_UNKNOWN;
 
+import android.app.ActivityManager;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageEvents.Event;
@@ -94,6 +97,9 @@ public final class DataProcessor {
     @VisibleForTesting
     static final long DEFAULT_USAGE_DURATION_FOR_INCOMPLETE_INTERVAL =
             DateUtils.SECOND_IN_MILLIS * 30;
+
+    @VisibleForTesting
+    static final long MAX_REVERSE_ORDER_DURATION = DEFAULT_USAGE_DURATION_FOR_INCOMPLETE_INTERVAL;
 
     @VisibleForTesting
     static final int SELECTED_INDEX_ALL = BatteryChartViewModel.SELECTED_INDEX_ALL;
@@ -328,6 +334,7 @@ public final class DataProcessor {
                     case Event.ACTIVITY_RESUMED:
                     case Event.ACTIVITY_STOPPED:
                     case Event.DEVICE_SHUTDOWN:
+                    case Event.SCREEN_NON_INTERACTIVE:
                         final String taskRootClassName = event.getTaskRootClassName();
                         if (!TextUtils.isEmpty(taskRootClassName)
                                 && ignoreScreenOnTimeTaskRootSet.contains(taskRootClassName)) {
@@ -366,6 +373,15 @@ public final class DataProcessor {
                 String.format(
                         "Read %d relevant events (%d total) from UsageStatsManager for all users",
                         numEventsFetched, numAllEventsFetched));
+
+        final List<AppUsageEvent> appOnScreenEvents = getCurrentAppOnTopEvents(context);
+        Log.d(
+                TAG,
+                String.format(
+                        "Read %d current on top events from ActivityManager running app processes",
+                        appOnScreenEvents.size()));
+
+        appUsageEventList.addAll(appOnScreenEvents);
         return appUsageEventList;
     }
 
@@ -714,6 +730,7 @@ public final class DataProcessor {
         // Attributes the list of AppUsagePeriod into device events and instance events for further
         // use.
         final List<AppUsageEvent> deviceEvents = new ArrayList<>();
+        final ArrayMap<Long, List<AppUsageEvent>> appOnTopEventsByUid = new ArrayMap<>();
         final ArrayMap<Integer, List<AppUsageEvent>> usageEventsByInstanceId = new ArrayMap<>();
         for (final AppUsageEvent event : appUsageEvents) {
             final AppUsageEventType eventType = event.getType();
@@ -724,9 +741,16 @@ public final class DataProcessor {
                     usageEventsByInstanceId.put(instanceId, new ArrayList<>());
                 }
                 usageEventsByInstanceId.get(instanceId).add(event);
-            } else if (eventType == AppUsageEventType.DEVICE_SHUTDOWN) {
+            } else if (eventType == AppUsageEventType.DEVICE_SHUTDOWN
+                    || eventType == AppUsageEventType.SCREEN_NON_INTERACTIVE) {
                 // Track device-wide events in their own list as they affect any app.
                 deviceEvents.add(event);
+            } else if (eventType == AppUsageEventType.ACTIVITY_ON_TOP) {
+                final long uid = event.getUid();
+                if (appOnTopEventsByUid.get(uid) == null) {
+                    appOnTopEventsByUid.put(uid, new ArrayList<>());
+                }
+                appOnTopEventsByUid.get(uid).add(event);
             }
         }
         if (usageEventsByInstanceId.isEmpty()) {
@@ -745,16 +769,18 @@ public final class DataProcessor {
             // The same instance must have same userId and packageName.
             final AppUsageEvent firstEvent = usageEvents.get(0);
             final long eventUserId = firstEvent.getUserId();
+            final long uid = firstEvent.getUid();
             final String packageName =
                     getEffectivePackageName(
                             context,
                             sUsageStatsManager,
                             firstEvent.getPackageName(),
                             firstEvent.getTaskRootPackageName());
-            usageEvents.addAll(deviceEvents);
-            // Sorts the usageEvents in ascending order based on the timestamp before computing the
-            // period.
-            Collections.sort(usageEvents, APP_USAGE_EVENT_TIMESTAMP_COMPARATOR);
+
+            // Append the device events to the per-instance app events list, then sort the
+            // usageEvents in ascending order, handling reverse order event cases.
+            combineDeviceEventsToCurrentUsageEvent(usageEvents, deviceEvents,
+                    appOnTopEventsByUid.get(uid));
 
             // A package might have multiple instances. Computes the usage period per instance id
             // and then merges them into the same user-package map.
@@ -790,14 +816,42 @@ public final class DataProcessor {
         for (final AppUsageEvent event : usageEvents) {
             final long eventTime = event.getTimestamp();
 
-            if (event.getType() == AppUsageEventType.ACTIVITY_RESUMED) {
-                // If there is an existing start time, simply ignore this start event.
-                // If there was no start time, then start a new period.
-                if (!pendingUsagePeriod.hasStartTime()) {
+            if (event.getType() == AppUsageEventType.ACTIVITY_RESUMED
+                    || event.getType() == AppUsageEventType.ACTIVITY_ON_TOP) {
+                if (pendingUsagePeriod.hasStartTime()) {
+                    // If there is an existing start time that is further back than the max usage
+                    // duration, then close the previous usage period and start a new one.
+                    // Otherwise, simply ignore this start event.
+                    if (isLastActiveTimeEarlierThanQueryBufferDuration(
+                            pendingUsagePeriod, eventTime)) {
+                        pendingUsagePeriod.setEndTime(
+                                getEndTimeForIncompleteUsagePeriod(pendingUsagePeriod, eventTime));
+                        validateAndAddToPeriodList(
+                                usagePeriodList, pendingUsagePeriod.build(), startTime, endTime);
+                        pendingUsagePeriod.clear();
+                        pendingUsagePeriod.setStartTime(eventTime);
+                    }
+                } else {
+                    // If there was no start time, then start a new period.
                     pendingUsagePeriod.setStartTime(eventTime);
                 }
+                // Always update last active time for period with only start time.
+                pendingUsagePeriod.setLastActiveTimeMs(eventTime);
             } else if (event.getType() == AppUsageEventType.ACTIVITY_STOPPED) {
+                // If there is an existing start time longer than the max query buffer duration,
+                // close the previous usage period by adding a default end time to match the
+                // start event. Treat current end event as an unmatched event.
+                if (pendingUsagePeriod.hasStartTime()
+                        && isLastActiveTimeEarlierThanQueryBufferDuration(
+                                pendingUsagePeriod, eventTime)) {
+                    pendingUsagePeriod.setEndTime(
+                            getEndTimeForIncompleteUsagePeriod(pendingUsagePeriod, eventTime));
+                    validateAndAddToPeriodList(
+                            usagePeriodList, pendingUsagePeriod.build(), startTime, endTime);
+                    pendingUsagePeriod.clear();
+                }
                 pendingUsagePeriod.setEndTime(eventTime);
+                // If there's no start time, then add one for the default duration.
                 if (!pendingUsagePeriod.hasStartTime()) {
                     pendingUsagePeriod.setStartTime(
                             getStartTimeForIncompleteUsagePeriod(pendingUsagePeriod));
@@ -806,7 +860,8 @@ public final class DataProcessor {
                 validateAndAddToPeriodList(
                         usagePeriodList, pendingUsagePeriod.build(), startTime, endTime);
                 pendingUsagePeriod.clear();
-            } else if (event.getType() == AppUsageEventType.DEVICE_SHUTDOWN) {
+            } else if (event.getType() == AppUsageEventType.DEVICE_SHUTDOWN
+                    || event.getType() == AppUsageEventType.SCREEN_NON_INTERACTIVE) {
                 // The end event might be lost when device is shutdown. Use the estimated end
                 // time for the period.
                 if (pendingUsagePeriod.hasStartTime()) {
@@ -818,10 +873,11 @@ public final class DataProcessor {
                 }
             }
         }
-        // If there exists unclosed period, the stop event might happen in the next time
-        // slot. Use the endTime for the period.
+        // If there exists unclosed period, since we already fetched events with query buffer,
+        // the stop event will not happened in the [endTime, endTime + buffer).
         if (pendingUsagePeriod.hasStartTime() && pendingUsagePeriod.getStartTime() < endTime) {
-            pendingUsagePeriod.setEndTime(endTime);
+            pendingUsagePeriod.setEndTime(
+                    getEndTimeForIncompleteUsagePeriod(pendingUsagePeriod, endTime));
             validateAndAddToPeriodList(
                     usagePeriodList, pendingUsagePeriod.build(), startTime, endTime);
             pendingUsagePeriod.clear();
@@ -970,6 +1026,32 @@ public final class DataProcessor {
         return batteryUsageStats;
     }
 
+    @VisibleForTesting
+    static void combineDeviceEventsToCurrentUsageEvent(
+            final List<AppUsageEvent> usageEvents,
+            final List<AppUsageEvent> deviceEvents,
+            @Nullable final List<AppUsageEvent> appOnTopEvents) {
+        usageEvents.addAll(deviceEvents);
+        if (appOnTopEvents != null) {
+            usageEvents.addAll(appOnTopEvents);
+        }
+        Collections.sort(usageEvents, APP_USAGE_EVENT_TIMESTAMP_COMPARATOR);
+
+        // For the top activity with screen-off events, the UsageStatsManager usually records the
+        // screen-off device event first, then records the stop events for activities.
+        // We swap the adjacent screen-off and stop events if they happen within a short duration
+        for (int i = 0; i < usageEvents.size() - 1; i++) {
+            AppUsageEvent firstEvent = usageEvents.get(i);
+            AppUsageEvent secondEvent = usageEvents.get(i + 1);
+            if (firstEvent.getType() == AppUsageEventType.SCREEN_NON_INTERACTIVE
+                    && secondEvent.getType() == AppUsageEventType.ACTIVITY_STOPPED
+                    && secondEvent.getTimestamp() - firstEvent.getTimestamp()
+                        <= MAX_REVERSE_ORDER_DURATION) {
+                Collections.swap(usageEvents, i, i + 1);
+            }
+        }
+    }
+
     /**
      * Generates the list of {@link AppUsageEvent} within the specific time range. The buffer is
      * added to make sure the app usage calculation near the boundaries is correct.
@@ -994,6 +1076,31 @@ public final class DataProcessor {
             }
         }
         return resultList;
+    }
+
+    private static List<AppUsageEvent> getCurrentAppOnTopEvents(final Context context) {
+        final long startTime = System.currentTimeMillis();
+        final long currentTimeMs = getCurrentTimeMillis();
+        final ActivityManager activityManager = context.getSystemService(ActivityManager.class);
+        final List<ActivityManager.RunningAppProcessInfo> runningAppProcesses =
+                activityManager.getRunningAppProcesses();
+        if (runningAppProcesses == null || runningAppProcesses.isEmpty()) {
+            return  new ArrayList<>();
+        }
+        final List<AppUsageEvent> appOnScreenEvents = new ArrayList<>(runningAppProcesses.size());
+        for (ActivityManager.RunningAppProcessInfo appProcessInfo : runningAppProcesses) {
+            if (appProcessInfo.processState == PROCESS_STATE_TOP) {
+                final int uid = appProcessInfo.uid;
+                appOnScreenEvents.add(AppUsageEvent.newBuilder()
+                        .setTimestamp(currentTimeMs)
+                        .setUid(uid)
+                        .setType(AppUsageEventType.ACTIVITY_ON_TOP)
+                        .setUserId(UserHandle.getUserId(uid)).build());
+            }
+        }
+        Log.d(TAG, String.format("getCurrentAppOnTopEvents() from ActivityManager in %d/ms",
+                System.currentTimeMillis() - startTime));
+        return appOnScreenEvents;
     }
 
     private static void validateAndAddToPeriodList(
@@ -1033,17 +1140,25 @@ public final class DataProcessor {
         packageNameMap.get(packageName).addAll(usagePeriodList);
     }
 
-    /** Returns the start time that gives {@code usagePeriod} the default usage duration. */
+    private static boolean isLastActiveTimeEarlierThanQueryBufferDuration(
+            final AppUsagePeriodOrBuilder appUsagePeriod, final long eventTime) {
+        final long lastActiveTimeMs = appUsagePeriod.hasLastActiveTimeMs()
+                ? appUsagePeriod.getLastActiveTimeMs() : appUsagePeriod.getStartTime();
+        return lastActiveTimeMs + DatabaseUtils.USAGE_QUERY_BUFFER_HOURS < eventTime;
+    }
+
+    /** Returns the start time that gives {@code appUsagePeriod} the default usage duration. */
     private static long getStartTimeForIncompleteUsagePeriod(
-            final AppUsagePeriodOrBuilder usagePeriod) {
-        return usagePeriod.getEndTime() - DEFAULT_USAGE_DURATION_FOR_INCOMPLETE_INTERVAL;
+            final AppUsagePeriodOrBuilder appUsagePeriod) {
+        return appUsagePeriod.getEndTime() - DEFAULT_USAGE_DURATION_FOR_INCOMPLETE_INTERVAL;
     }
 
     /** Returns the end time that gives {@code usagePeriod} the default usage duration. */
     private static long getEndTimeForIncompleteUsagePeriod(
-            final AppUsagePeriodOrBuilder usagePeriod, final long eventTime) {
+            final AppUsagePeriodOrBuilder appUsagePeriod, final long eventTime) {
         return Math.min(
-                usagePeriod.getStartTime() + DEFAULT_USAGE_DURATION_FOR_INCOMPLETE_INTERVAL,
+                appUsagePeriod.getLastActiveTimeMs()
+                        + DEFAULT_USAGE_DURATION_FOR_INCOMPLETE_INTERVAL,
                 eventTime);
     }
 
@@ -1083,7 +1198,8 @@ public final class DataProcessor {
                             .setEventTypes(
                                     Event.ACTIVITY_RESUMED,
                                     Event.ACTIVITY_STOPPED,
-                                    Event.DEVICE_SHUTDOWN
+                                    Event.DEVICE_SHUTDOWN,
+                                    Event.SCREEN_NON_INTERACTIVE
                             )
                             .build();
             events = usageStatsManager.queryEventsWithFilter(usageEventsQuery, callingPackage);

@@ -26,6 +26,9 @@ class ExtraDimIllustrationPreference : PreferenceMetadata, PreferenceBinding {
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.reduce_bright_colors_preference_animated_image_purpose
+
     override val indexable
         get() = false
 

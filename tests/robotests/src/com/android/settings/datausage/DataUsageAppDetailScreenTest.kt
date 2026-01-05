@@ -19,8 +19,10 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.os.Bundle
 import androidx.core.net.toUri
+import com.android.settings.datausage.DataUsageAppDetailScreen.Companion.KEY_APP_PACKAGE_NAME
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
@@ -42,16 +44,34 @@ class DataUsageAppDetailScreenTest : SettingsCatalystTestCase() {
     }
 
     private val preferenceScreenCreatorWithInvalidPackage =
-        DataUsageAppDetailScreen(
-            appContext,
-            Bundle().apply { putString("app", INVALID_PACKAGE_NAME) },
-        )
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            DataUsageAppDetailScreen(
+                appContext,
+                DataUsageAppDetailScreen.parametersSchema.prepare(
+                    KEY_APP_PACKAGE_NAME to INVALID_PACKAGE_NAME
+                ),
+            )
+        } else {
+            DataUsageAppDetailScreen(
+                appContext,
+                Bundle().apply { putString("app", INVALID_PACKAGE_NAME) },
+            )
+        }
 
     override val preferenceScreenCreator =
-        DataUsageAppDetailScreen(
-            appContext,
-            Bundle().apply { putString("app", TEST_PACKAGE_NAME) },
-        )
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            DataUsageAppDetailScreen(
+                appContext,
+                DataUsageAppDetailScreen.parametersSchema.prepare(
+                    KEY_APP_PACKAGE_NAME to TEST_PACKAGE_NAME
+                ),
+            )
+        } else {
+            DataUsageAppDetailScreen(
+                appContext,
+                Bundle().apply { putString("app", TEST_PACKAGE_NAME) },
+            )
+        }
 
     override val flagName: String
         get() = Flags.FLAG_DEEPLINK_APPS_25Q4
@@ -133,4 +153,5 @@ class DataUsageAppDetailScreenTest : SettingsCatalystTestCase() {
 private data class TestMetadata(
     override val bindingKey: String,
     override val key: String = "testKey",
+    override val purpose: Int = 0
 ) : PreferenceMetadata

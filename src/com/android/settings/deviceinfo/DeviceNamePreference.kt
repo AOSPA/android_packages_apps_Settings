@@ -51,6 +51,9 @@ class DeviceNamePreference(val context: Context) :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.device_name_purpose
+
     override val title: Int
         get() = R.string.my_device_info_device_name_preference_title
 

@@ -39,6 +39,10 @@ class ButtonNavigationSettingsScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.button_navigation_settings_page_purpose
+
     override val title: Int
         get() = R.string.button_navigation_settings_activity_title
 
@@ -75,7 +79,11 @@ class ButtonNavigationSettingsScreen : PreferenceScreenMixin {
     }
 
     class OrderPreferenceCategory :
-        PreferenceCategory("button_order_group", R.string.button_navigation_settings_order_title) {
+        PreferenceCategory(
+            key = "button_order_group",
+            purpose = R.string.button_order_group_purpose,
+            title = R.string.button_navigation_settings_order_title,
+        ) {
         override val keywords: Int
             get() =
                 if (com.android.settings.flags.Flags.catalystSettingsSearch())

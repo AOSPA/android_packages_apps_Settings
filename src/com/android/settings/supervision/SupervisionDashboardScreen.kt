@@ -27,7 +27,9 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceGroup
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.supervision.appstorefilters.SupervisionAppStoreFiltersScreen
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -80,29 +82,31 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
             this.lifeCycleContext = context
             supervisionManager = context.getSystemService(SupervisionManager::class.java)
             supervisionManager?.registerSupervisionListener(supervisionListener)
-            if (Flags.enableSupervisionSettingsUiUpdates()) {
-                var supervisionAppCount = 0
-                val supervisionAppsGroup =
-                    context.findPreference<PreferenceGroup>(ACTIVE_SUPERVISION_APPS_GROUP)?.apply {
-                        for (supervisionApp in context.supervisionRoleHolders) {
-                            try {
-                                addPreference(
-                                    createSupervisionAppPreference(context, supervisionApp)
-                                )
-                                // Increment the count on successfully adding the preference
-                                supervisionAppCount++
-                            } catch (e: Exception) {
-                                Log.e(
-                                    SupervisionLog.TAG,
-                                    "Error displaying supervision app preference for: $supervisionApp",
-                                    e,
-                                )
-                            }
+        }
+    }
+
+    override fun onResume(context: PreferenceLifecycleContext) {
+        if (Flags.enableSupervisionSettingsUiUpdates()) {
+            var supervisionAppCount = 0
+            val supervisionAppsGroup =
+                context.findPreference<PreferenceGroup>(ACTIVE_SUPERVISION_APPS_GROUP)?.apply {
+                    removeAll()
+                    for (supervisionApp in context.supervisionRoleHolders) {
+                        try {
+                            addPreference(createSupervisionAppPreference(context, supervisionApp))
+                            // Increment the count on successfully adding the preference
+                            supervisionAppCount++
+                        } catch (e: Exception) {
+                            Log.e(
+                                SupervisionLog.TAG,
+                                "Error displaying supervision app preference for: $supervisionApp",
+                                e,
+                            )
                         }
                     }
-                // Set the visibility of the entire group based on whether any apps were found.
-                supervisionAppsGroup?.isVisible = supervisionAppCount > 0
-            }
+                }
+            // Set the visibility of the entire group based on whether any apps were found.
+            supervisionAppsGroup?.isVisible = supervisionAppCount > 0
         }
     }
 
@@ -110,6 +114,10 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
 
     override val key: String
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.top_level_supervision_purpose
 
     override val title: Int
         get() = R.string.supervision_settings_title
@@ -151,19 +159,27 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                 +SupervisionRecoveryBannerPreference() order -250
                 +NonIndexablePreferenceCategory(
                     SUPERVISION_DYNAMIC_GROUP_1,
+                    R.string.supervision_features_group_1_purpose,
                     R.string.device_supervision_features_title,
                 ) order -100
-                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2) order 10 += {
+                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2,
+                R.string.supervision_dynamic_group_2) order 10 += {
                     +SupervisionAppStoreFiltersScreen.KEY order -100
                     +SupervisionWebContentFiltersScreen.KEY order -50
                 }
             } else {
                 +SupervisionMainSwitchPreference(context, supervisionClient) order -200
-                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
+                +UntitledPreferenceCategoryMetadata(
+                    key = SUPERVISION_DYNAMIC_GROUP_1,
+                    purpose = R.string.supervision_features_group_1_purpose,
+                ) order -100 += {
                     +SupervisionWebContentFiltersScreen.KEY order 100
                 }
             }
-            +UntitledPreferenceCategoryMetadata("pin_management_group") order 100 += {
+            +UntitledPreferenceCategoryMetadata(
+                key = "pin_management_group",
+                purpose = R.string.pin_management_group_purpose,
+            ) order 100 += {
                 if (Flags.enableSupervisionSettingsUiUpdates()) {
                     +SupervisionSetUpPinPreference() order 5
                 }
@@ -172,10 +188,12 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
             if (Flags.enableSupervisionSettingsUiUpdates()) {
                 +NonIndexablePreferenceCategory(
                     ACTIVE_SUPERVISION_APPS_GROUP,
+                    R.string.active_supervision_apps_group_purpose,
                     R.string.supervision_apps_managing_this_device_title,
                 ) order 200
                 +AutoHidingPreferenceCategory(
                     AVAILABLE_SUPERVISION_APPS_GROUP,
+                    R.string.available_supervision_apps_group_purpose,
                     R.string.supervision_available_apps_title,
                 ) order 300 +=
                     {
@@ -183,7 +201,10 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                     }
                 +SupervisionAocFooterPreference(supervisionClient) order 400
             } else {
-                +UntitledPreferenceCategoryMetadata("footer_group") order 300 += {
+                +UntitledPreferenceCategoryMetadata(
+                    key = "footer_group",
+                    purpose = R.string.footer_group_purpose,
+                ) order 300 += {
                     +SupervisionPromoFooterPreference(supervisionClient) order 30
                     +SupervisionAocFooterPreference(supervisionClient) order 40
                 }

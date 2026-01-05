@@ -69,6 +69,7 @@ import com.android.settings.spa.SpaActivity;
 import com.android.settings.utils.SubIdBundleUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settings.Utils;
+import com.android.settingslib.metadata.ValidatedKeyParameters;
 
 import kotlin.Unit;
 
@@ -287,16 +288,30 @@ public class ApnSettings extends RestrictedDashboardFragment
     }
 
     private int getSubIdFromBindingArgs() {
-        final Bundle args = getPreferenceScreenBindingArgs(requireContext());
-        if (args == null) {
-            return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        }
+        if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters()) {
+            final ValidatedKeyParameters parameters =
+                    getPreferenceScreenBindingKeyParameters(requireContext());
+            if (parameters == null) {
+                return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+            }
 
-        return SubIdBundleUtils.getSubId(
-                args,
-                SUB_ID,
-                SubscriptionManager.INVALID_SUBSCRIPTION_ID
-        );
+            try {
+                return Integer.parseInt(parameters.get(SUB_ID));
+            } catch (NumberFormatException e) {
+                return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+            }
+        } else {
+            final Bundle args = getPreferenceScreenBindingArgs(requireContext());
+            if (args == null) {
+                return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+            }
+
+            return SubIdBundleUtils.getSubId(
+                    args,
+                    SUB_ID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID
+            );
+        }
     }
 
     private void fillList() {

@@ -68,6 +68,7 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         super.setUp()
         application = ApplicationProvider.getApplicationContext() as Application
 
+        mFakeDesktopState.canEnterDesktopMode = true
         viewModel =
             DisplayPreferenceViewModel(
                 application,
@@ -273,8 +274,10 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         val resolutionPref = category.findPreference<Preference>(PrefInfo.DISPLAY_RESOLUTION.key)!!
         resolutionPref.onPreferenceClickListener!!.onPreferenceClick(resolutionPref)
 
+        val formattedResolution = "${display.mode?.physicalWidth} x ${display.mode?.physicalHeight}"
+        val formattedRefreshRate = "%.2f".format(display.mode?.refreshRate)
         assertThat(resolutionPref.summary.toString())
-            .isEqualTo("${display.mode?.physicalWidth} x ${display.mode?.physicalHeight}")
+            .isEqualTo(("$formattedResolution ($formattedRefreshRate Hz)"))
         assertThat(fragment.writtenMetricsPreference).isEqualTo(resolutionPref)
         assertThat(fragment.resolutionSelectorLaunchDisplayId).isEqualTo(EXTERNAL_DISPLAY_ID)
     }
@@ -331,7 +334,19 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     }
 
     @Test
-    fun testExternalDisplaySelected_lockTaskLocked_disableConnectionPreference() {
+    fun testDefaultDisplaySelected_desktopModeNotSupported_hidesMirroringPreference() {
+        mFakeDesktopState.canEnterDesktopMode = false
+        fragment = initFragment()
+        includeBuiltinDisplay()
+        viewModel.updateEnabledDisplays()
+        viewModel.updateSelectedDisplay(DEFAULT_DISPLAY)
+
+        val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
+        assertNull(category.findPreference(PrefInfo.DISPLAY_MIRRORING.key))
+    }
+
+    @Test
+    fun testDefaultDisplaySelected_lockTaskLocked_disableConnectionPreference() {
         fragment = initFragment()
         verify(mActivityTaskManager).registerTaskStackListener(taskStackListenerCaptor.capture())
         val display = mDisplays.first { it.id == EXTERNAL_DISPLAY_ID }

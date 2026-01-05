@@ -18,11 +18,17 @@ package com.android.settings.supervision
 import android.Manifest
 import android.app.admin.DevicePolicyManager
 import android.app.settings.SettingsEnums
+import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.EXTRA_SUPERVISION_RECOVERY_INFO
+import android.app.supervision.flags.Flags
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.pm.ResolveInfo
 import android.os.Bundle
+import android.os.ServiceManager
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
@@ -61,7 +67,8 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
             ACTION_RECOVERY -> startVerification()
             ACTION_UPDATE -> startConfirmPin()
             ACTION_POST_SETUP_VERIFY -> startConfirmPin()
-            else -> handleError("PIN recovery result unknown actionType: $actionType")
+            else ->
+                setResultCanceledAndFinish("PIN recovery result unknown actionType: $actionType")
         }
     }
 
@@ -74,7 +81,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
         if (setupIntent != null) {
             verificationLauncher.launch(setupIntent)
         } else {
-            handleError("No activity found for SETUP PIN recovery.")
+            setResultCanceledAndFinish("No activity found for SETUP PIN recovery.")
         }
     }
 
@@ -87,27 +94,99 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
         if (confirmPinIntent != null) {
             confirmPinLauncher.launch(confirmPinIntent)
         } else {
-            handleError("No activity found for confirm PIN.")
+            setResultCanceledAndFinish("No activity found for confirm PIN.")
         }
     }
 
     private fun startVerification() {
-        val recoveryIntent =
-            SupervisionIntentProvider.getPinRecoveryIntent(
-                this,
-                SupervisionIntentProvider.PinRecoveryAction.VERIFY,
-            )
-        if (recoveryIntent != null) {
+        if (Flags.enableSupervisionSettingsUiUpdates()) {
             val supervisionManager = getSystemService(SupervisionManager::class.java)
             val recoveryInfo = supervisionManager?.getSupervisionRecoveryInfo()
 
-            recoveryIntent.apply {
-                // Pass along any available recovery information.
-                putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, recoveryInfo)
-                verificationLauncher.launch(this)
+            // If there is a recovery email set, default to the existing email recovery flow.
+            if (recoveryInfo != null) {
+                val verifiedEmailRecoveryIntent =
+                    SupervisionIntentProvider.getPinRecoveryIntent(
+                        this,
+                        SupervisionIntentProvider.PinRecoveryAction.VERIFY,
+                    )
+                if (verifiedEmailRecoveryIntent != null) {
+                    verifiedEmailRecoveryIntent.apply {
+                        putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, recoveryInfo)
+                        verificationLauncher.launch(this)
+                    }
+                    return
+                }
+            }
+
+            // Get other approval methods
+            val binder = ServiceManager.getService(Context.SUPERVISION_SERVICE)
+            val iSupervisionManager = ISupervisionManager.Stub.asInterface(binder)
+            val approvalMethods =
+                iSupervisionManager.querySupervisionApprovalActivities(getUserId())
+
+            when (approvalMethods.size) {
+                0 -> {
+                    setResultCanceledAndFinish("No supervision recovery methods available.")
+                }
+                1 -> {
+                    // If there's only one supervision authentication method, go directly to that
+                    // method.
+                    val resolveInfo = approvalMethods[0]
+                    val activityInfo = resolveInfo.activityInfo
+                    val intent =
+                        Intent(SupervisionManager.ACTION_CONFIRM_SUPERVISION_APPROVAL).apply {
+                            component = ComponentName(activityInfo.packageName, activityInfo.name)
+                            putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, recoveryInfo)
+                        }
+                    verificationLauncher.launch(intent)
+                }
+                else -> {
+                    // If there are multiple available supervision methods, show a picker UI.
+                    showApprovalMethodChooser(approvalMethods)
+                }
             }
         } else {
-            handleError("No activity found for VERIFY PIN recovery.")
+            // Original logic when flag is off
+            val emailRecoveryIntent =
+                SupervisionIntentProvider.getPinRecoveryIntent(
+                    this,
+                    SupervisionIntentProvider.PinRecoveryAction.VERIFY,
+                )
+            if (emailRecoveryIntent != null) {
+                val supervisionManager = getSystemService(SupervisionManager::class.java)
+                val recoveryInfo = supervisionManager?.getSupervisionRecoveryInfo()
+
+                emailRecoveryIntent.apply {
+                    putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, recoveryInfo)
+                    verificationLauncher.launch(this)
+                }
+            } else {
+                setResultCanceledAndFinish("No supervision recovery methods available.")
+            }
+        }
+    }
+
+    private fun showApprovalMethodChooser(approvalMethods: List<ResolveInfo>) {
+        registerApprovalMethodChooserResultListener()
+        val chooserFragment =
+            ApprovalMethodChooserDialogFragment.newInstance(approvalMethods, Bundle())
+        chooserFragment.show(supportFragmentManager, "ApprovalMethodChooser")
+    }
+
+    private fun registerApprovalMethodChooserResultListener() {
+        supportFragmentManager.setFragmentResultListener(
+            ApprovalMethodChooserDialogFragment.REQUEST_KEY_APPROVAL_RESULT,
+            this,
+        ) { requestKey, bundle ->
+            if (requestKey == ApprovalMethodChooserDialogFragment.REQUEST_KEY_APPROVAL_RESULT) {
+                val resultCode =
+                    bundle.getInt(
+                        ApprovalMethodChooserDialogFragment.BUNDLE_KEY_RESULT_CODE,
+                        RESULT_CANCELED,
+                    )
+                onVerification(resultCode, null)
+            }
         }
     }
 
@@ -124,7 +203,9 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                     if (setIntent != null) {
                         verificationLauncher.launch(setIntent)
                     } else {
-                        handleError("No activity found for SET_VERIFIED PIN recovery.")
+                        setResultCanceledAndFinish(
+                            "No activity found for SET_VERIFIED PIN recovery."
+                        )
                     }
                 }
                 ACTION_UPDATE -> {
@@ -136,7 +217,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                     if (updatePinIntent != null) {
                         verificationLauncher.launch(updatePinIntent)
                     } else {
-                        handleError("No activity found for UPDATE PIN recovery.")
+                        setResultCanceledAndFinish("No activity found for UPDATE PIN recovery.")
                     }
                 }
                 ACTION_POST_SETUP_VERIFY -> {
@@ -153,65 +234,89 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                             verificationLauncher.launch(postSetupVerifyIntent)
                         }
                     } else {
-                        handleError("No activity found for post setup PIN recovery verify.")
+                        setResultCanceledAndFinish(
+                            "No activity found for post setup PIN recovery verify."
+                        )
                     }
                 }
-                else -> handleError("Unknown action after PIN confirmation: $nextAction")
+                else ->
+                    setResultCanceledAndFinish("Unknown action after PIN confirmation: $nextAction")
             }
         } else {
-            handleError("PIN confirmation failed with result: $resultCode")
+            setResultCanceledAndFinish("PIN confirmation failed with result: $resultCode")
         }
     }
 
     private fun onVerification(resultCode: Int, data: Intent?) {
-        if (resultCode == RESULT_OK) {
-            val action = intent.action
+        if (intent.action == null) {
+            setResultCanceledAndFinish("Null action received in onVerification.")
+            return
+        }
+
+        val action = intent.action!!
+
+        if (resultCode != RESULT_OK) {
+            logRecoveryResult(action, success = false)
+            setResultCanceledAndFinish(
+                "Verification process failed with result: $resultCode, action: $action"
+            )
+            return
+        }
+
+        val actionNeedsData =
             when (action) {
-                ACTION_RECOVERY -> startResetPinActivity() // reset PIN after verification
                 ACTION_SETUP,
                 ACTION_UPDATE,
                 ACTION_SETUP_VERIFIED,
-                ACTION_POST_SETUP_VERIFY -> {
-                    if (data != null) {
-                        val recoveryInfo =
-                            data.getParcelableExtra(
-                                EXTRA_SUPERVISION_RECOVERY_INFO,
-                                SupervisionRecoveryInfo::class.java,
-                            )
-                        if (recoveryInfo != null) {
-                            val supervisionManager =
-                                getSystemService(SupervisionManager::class.java)
-                            supervisionManager?.setSupervisionRecoveryInfo(recoveryInfo)
-                            handleSuccess()
-                        } else {
-                            handleError(
-                                "Cannot save recovery info, no valid recovery info from result."
-                            )
-                        }
-                    } else {
-                        handleError("Cannot save recovery info, no result data.")
-                    }
+                ACTION_POST_SETUP_VERIFY -> true
+                else -> false
+            }
+
+        if (actionNeedsData && data == null) {
+            setResultCanceledAndFinish("Cannot save recovery info, no result data. Action: $action")
+            return
+        }
+
+        when (action) {
+            ACTION_RECOVERY -> {
+                startResetPinActivity() // reset PIN after verification
+            }
+            ACTION_SETUP,
+            ACTION_UPDATE,
+            ACTION_SETUP_VERIFIED,
+            ACTION_POST_SETUP_VERIFY -> {
+                val recoveryInfo =
+                    data!!.getParcelableExtra(
+                        EXTRA_SUPERVISION_RECOVERY_INFO,
+                        SupervisionRecoveryInfo::class.java,
+                    )
+
+                if (recoveryInfo == null) {
+                    setResultCanceledAndFinish(
+                        "Cannot save recovery info, no valid recovery info from result. Action: $action"
+                    )
+                    return
                 }
-                else -> handleError("Unknown action after verification: $action")
+
+                val supervisionManager = getSystemService(SupervisionManager::class.java)
+                supervisionManager?.setSupervisionRecoveryInfo(recoveryInfo)
+                logRecoveryResult(action, success = true)
+                setResultOkAndFinish()
             }
-        } else {
-            if (intent.action == ACTION_RECOVERY) {
-                logRecoveryResult(false)
+            else -> {
+                setResultCanceledAndFinish("Unknown action after successful verification: $action")
             }
-            handleError(
-                "Verification process failed with result: $resultCode, action: ${intent.action}"
-            )
         }
     }
 
     private fun onPinSet(resultCode: Int) {
         if (resultCode != RESULT_CANCELED) {
             // After the new PIN being set.
-            logRecoveryResult(true)
-            handleSuccess()
+            logRecoveryResult(intent.action, success = true)
+            setResultOkAndFinish()
         } else {
-            logRecoveryResult(false)
-            handleError("Setting new PIN failed with result cancelled.")
+            logRecoveryResult(intent.action, success = false)
+            setResultCanceledAndFinish("Setting new PIN failed with result cancelled.")
         }
     }
 
@@ -221,8 +326,8 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
     )
     private fun startResetPinActivity() {
         if (!resetSupervisionUser()) {
-            handleError("Failed to reset supervision user.")
-            logRecoveryResult(false)
+            setResultCanceledAndFinish("Failed to reset supervision user.")
+            logRecoveryResult(ACTION_RECOVERY, success = false)
             return
         }
         val intent =
@@ -237,26 +342,50 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
     }
 
     /** Helper method to handle errors consistently. */
-    private fun handleError(errorMessage: String) {
+    private fun setResultCanceledAndFinish(errorMessage: String) {
         Log.e(SupervisionLog.TAG, errorMessage)
         setResult(RESULT_CANCELED)
         finish()
     }
 
     /** Helper method to handle success consistently. */
-    private fun handleSuccess() {
+    private fun setResultOkAndFinish() {
         setResult(RESULT_OK)
         finish()
     }
 
     /** Logs the result of the PIN recovery process. */
-    private fun logRecoveryResult(success: Boolean) {
+    private fun logRecoveryResult(action: String?, success: Boolean) {
         val metricsFeatureProvider = FeatureFactory.featureFactory.metricsFeatureProvider
-        metricsFeatureProvider.action(
-            this,
-            SettingsEnums.ACTION_SUPERVISION_PIN_RESET_SUCCEED,
-            success,
-        )
+        when (action) {
+            // Always log for the PIN reset flow
+            ACTION_RECOVERY -> {
+                metricsFeatureProvider.action(
+                    this,
+                    SettingsEnums.ACTION_SUPERVISION_PIN_RESET_SUCCEED,
+                    success,
+                )
+            }
+
+            ACTION_SETUP,
+            ACTION_SETUP_VERIFIED,
+            ACTION_POST_SETUP_VERIFY -> {
+                if (!Flags.enableSupervisionPinMetrics()) {
+                    return
+                }
+                val logAction =
+                    when (action) {
+                        ACTION_SETUP ->
+                            SettingsEnums.ACTION_SUPERVISION_ADD_RECOVERY_ON_SETUP_SUCCESS
+                        ACTION_SETUP_VERIFIED ->
+                            SettingsEnums.ACTION_SUPERVISION_ADD_RECOVERY_POST_SETUP_SUCCESS
+                        ACTION_POST_SETUP_VERIFY ->
+                            SettingsEnums.ACTION_SUPERVISION_VERIFY_RECOVERY_SUCCESS
+                        else -> return
+                    }
+                metricsFeatureProvider.action(this, logAction, success)
+            }
+        }
     }
 
     /**

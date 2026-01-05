@@ -33,8 +33,9 @@ class AvailableHearingDevicePreferenceCategory(
     context: Context,
     val metricsCategory: Int,
     key: String = "available_hearing_devices",
+    purpose: Int = R.string.available_hearing_devices_purpose,
     title: Int = R.string.accessibility_hearing_device_connected_title,
-) : HearingDevicePreferenceCategory(key, title), BluetoothCallback {
+) : HearingDevicePreferenceCategory(key, purpose, title), BluetoothCallback {
     private val localBluetoothManager: LocalBluetoothManager? by lazy {
         Utils.getLocalBluetoothManager(context)
     }

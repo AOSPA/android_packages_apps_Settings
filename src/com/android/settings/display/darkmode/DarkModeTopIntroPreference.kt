@@ -31,6 +31,9 @@ internal class DarkModeTopIntroPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.dark_ui_top_intro_purpose
+
     override val indexable
         get() = false
 

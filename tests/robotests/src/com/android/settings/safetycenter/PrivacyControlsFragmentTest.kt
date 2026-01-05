@@ -234,6 +234,17 @@ class PrivacyControlsFragmentTest {
         }
     }
 
+    @Test
+    fun redirectIfEmpty_withNoSafetySources_doesNotRedirect() {
+        runTest(EMPTY_SC_DATA) { fragment ->
+            // PrivacyControlsFragment remains visible even without safety source preferences
+            // because it contains other privacy settings.
+            val nextIntent = shadowOf(fragment.requireActivity()).nextStartedActivity
+
+            assertThat(nextIntent).isNull()
+        }
+    }
+
     companion object {
         private const val HEALTH_CONNECT_PREFERENCE_KEY = "health_connect"
         private const val APP_FUNCTION_ACCESS_PREFERENCE_KEY = "app_function_access"

@@ -26,6 +26,7 @@ class TouchVibrationIntensitySliderPreference(context: Context) :
     VibrationIntensitySliderPreference(
         context = context,
         key = KEY,
+        purpose = R.string.haptic_feedback_intensity_purpose,
         vibrationUsage = VibrationAttributes.USAGE_TOUCH,
         title = R.string.accessibility_touch_vibration_title,
     ) {

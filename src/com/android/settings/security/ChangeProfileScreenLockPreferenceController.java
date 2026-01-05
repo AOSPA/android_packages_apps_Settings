@@ -17,6 +17,7 @@
 package com.android.settings.security;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -108,7 +109,14 @@ public class ChangeProfileScreenLockPreferenceController extends
         } else {
             // PO may disallow to change profile password, and the profile's password is
             // separated from screen lock password. Disable profile specific "Screen lock" menu.
-            disableIfPasswordQualityManaged(mProfileChallengeUserId);
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                EnforcingAdmin admin =
+                        mScreenLockPreferenceDetailUtils.getPasswordQualityManagedEnforcingAdmin(
+                                mProfileChallengeUserId);
+                mPreference.setDisabledByAdmin(admin);
+            } else {
+                disableIfPasswordQualityManaged(mProfileChallengeUserId);
+            }
         }
     }
 }

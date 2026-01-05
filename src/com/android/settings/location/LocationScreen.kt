@@ -44,6 +44,10 @@ open class LocationScreen :
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.location_settings_purpose
+
     override val title: Int
         get() = R.string.location_settings_title
 
@@ -95,6 +99,9 @@ private class LocationMainSwitch : BooleanValuePreference, MainSwitchPreferenceB
 
     override val key: String
         get() = KEY
+
+    override val purpose: Int
+        get() = R.string.location_main_switch_purpose
 
     override val title: Int
         get() = R.string.location_settings_primary_switch_title

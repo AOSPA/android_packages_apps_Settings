@@ -94,6 +94,9 @@ internal class DisplaySizePreference(context: Context, @EntryPoint private val e
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.display_size_purpose
+
     override val title: Int
         get() = R.string.screen_zoom_title
 

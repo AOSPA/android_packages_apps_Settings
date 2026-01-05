@@ -30,6 +30,8 @@ import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
+import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersBrowserSupportedAppsScreen
+import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersSupportedAppsEntryPointPreference
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -42,7 +44,10 @@ import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /** Web content filters browser filter preference. */
 class SupervisionSafeSitesSwitchPreference(protected val dataStore: SupervisionSafeSitesDataStore) :
-    SwitchPreference(KEY),
+    SwitchPreference(
+        key = KEY,
+        purpose = R.string.web_content_filters_browser_filter_purpose,
+    ),
     SwitchPreferenceBinding,
     Preference.OnPreferenceChangeListener,
     PreferenceLifecycleProvider {

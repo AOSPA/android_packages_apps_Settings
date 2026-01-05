@@ -141,21 +141,11 @@ public class BluetoothDetailsHearingDeviceControllerTest extends
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_HEARING_DEVICES_AMBIENT_VOLUME_CONTROL)
-    public void initSubControllers_flagEnabled_ambientVolumeControllerExist() {
+    public void initSubControllers_ambientVolumeControllerExist() {
         mHearingDeviceController.initSubControllers(false);
 
         assertThat(mHearingDeviceController.getSubControllers().stream().anyMatch(
                 c -> c instanceof BluetoothDetailsAmbientVolumePreferenceController)).isTrue();
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_HEARING_DEVICES_AMBIENT_VOLUME_CONTROL)
-    public void initSubControllers_flagDisabled_ambientVolumeControllerNotExist() {
-        mHearingDeviceController.initSubControllers(false);
-
-        assertThat(mHearingDeviceController.getSubControllers().stream().anyMatch(
-                c -> c instanceof BluetoothDetailsAmbientVolumePreferenceController)).isFalse();
     }
 
     @Test

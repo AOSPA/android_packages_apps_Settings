@@ -32,6 +32,10 @@ open class PictureInPictureAppListScreen : SpecialAccessAppListScreen() {
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.special_access_picture_in_picture_app_list_purpose
+
     override val title: Int
         get() = R.string.picture_in_picture_title
 
@@ -47,8 +51,15 @@ open class PictureInPictureAppListScreen : SpecialAccessAppListScreen() {
     override val appDetailScreenKey
         get() = PictureInPictureAppDetailScreen.KEY
 
+    @Deprecated(
+        message =
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use keyParameters instead."
+    )
     override fun appDetailParameters(context: Context, hierarchyType: Boolean) =
         PictureInPictureAppDetailScreen.parameters(context, hierarchyType)
+
+    override fun appDetailKeyParameters(context: Context, hierarchyType: Boolean) =
+        PictureInPictureAppDetailScreen.keyParameters(context, hierarchyType)
 
     companion object {
         const val KEY = "special_access_picture_in_picture_app_list"

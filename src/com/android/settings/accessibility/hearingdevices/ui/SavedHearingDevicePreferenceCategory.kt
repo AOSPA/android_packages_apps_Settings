@@ -24,8 +24,9 @@ import com.android.settings.bluetooth.BluetoothDeviceUpdater
 class SavedHearingDevicePreferenceCategory(
     val metricsCategory: Int,
     key: String = "previously_connected_hearing_devices",
+    purpose: Int = R.string.previously_connected_hearing_devices_purpose,
     title: Int = R.string.accessibility_hearing_device_saved_title,
-) : HearingDevicePreferenceCategory(key, title) {
+) : HearingDevicePreferenceCategory(key, purpose, title) {
     override fun createDeviceUpdater(context: Context): BluetoothDeviceUpdater? =
         SavedHearingDeviceUpdater(context, this, metricsCategory)
 }

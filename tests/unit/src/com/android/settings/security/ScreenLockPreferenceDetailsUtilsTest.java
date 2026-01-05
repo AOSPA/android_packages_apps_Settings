@@ -16,6 +16,10 @@
 
 package com.android.settings.security;
 
+import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_MANAGED;
+import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+import static android.app.admin.DpcAuthority.DPC_AUTHORITY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertNull;
@@ -26,10 +30,15 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.platform.test.annotations.DisableFlags;
@@ -60,6 +69,8 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class ScreenLockPreferenceDetailsUtilsTest {
@@ -97,6 +108,7 @@ public class ScreenLockPreferenceDetailsUtilsTest {
         when(mContext.getSystemService(StorageManager.class)).thenReturn(mStorageManager);
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
+        when(mContext.getSystemService(DevicePolicyManager.class)).thenReturn(mDevicePolicyManager);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         doNothing().when(mContext).startActivity(any());
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
@@ -243,7 +255,7 @@ public class ScreenLockPreferenceDetailsUtilsTest {
     public void getSummary_unsupportedPasswordQuality_shouldReturnNull() {
         when(mLockPatternUtils.isSecure(USER_ID)).thenReturn(true);
         when(mLockPatternUtils.getKeyguardStoredPasswordQuality(USER_ID))
-                .thenReturn(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
+                .thenReturn(PASSWORD_QUALITY_UNSPECIFIED);
 
         assertNull(mScreenLockPreferenceDetailsUtils.getSummary(USER_ID));
     }
@@ -281,10 +293,33 @@ public class ScreenLockPreferenceDetailsUtilsTest {
         final RestrictedLockUtils.EnforcedAdmin admin = new RestrictedLockUtils.EnforcedAdmin();
 
         when(mDevicePolicyManager.getPasswordQuality(admin.component, USER_ID))
-                .thenReturn(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
+                .thenReturn(PASSWORD_QUALITY_UNSPECIFIED);
 
         assertThat(mScreenLockPreferenceDetailsUtils.isPasswordQualityManaged(USER_ID, admin))
                 .isFalse();
+    }
+
+    @Test
+    public void getPasswordQualityManagedEnforcingAdmin_passwordQualityUnset_shouldReturnNull() {
+        when(mDevicePolicyManager.getPasswordQuality(/* component= */ null, USER_ID)).thenReturn(
+                PASSWORD_QUALITY_UNSPECIFIED);
+
+        assertThat(mScreenLockPreferenceDetailsUtils.getPasswordQualityManagedEnforcingAdmin(
+                USER_ID)).isNull();
+    }
+
+    @Test
+    public void getPasswordQualityManagedEnforcingAdmin_passwordQualityManaged_shouldReturnAdmin() {
+        when(mDevicePolicyManager.getPasswordQuality(/* component= */ null, USER_ID)).thenReturn(
+                PASSWORD_QUALITY_MANAGED);
+        final EnforcingAdmin expectedAdmin = new EnforcingAdmin("package", DPC_AUTHORITY,
+                UserHandle.of(USER_ID), new ComponentName("package", "component"));
+        when(mDevicePolicyManager.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.PASSWORD_QUALITY_POLICY, USER_ID)).thenReturn(
+                    new PolicyEnforcementInfo(List.of(expectedAdmin)));
+
+        assertThat(mScreenLockPreferenceDetailsUtils.getPasswordQualityManagedEnforcingAdmin(
+                USER_ID)).isEqualTo(expectedAdmin);
     }
 
     @Test

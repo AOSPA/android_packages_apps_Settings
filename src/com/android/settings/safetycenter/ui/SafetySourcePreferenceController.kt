@@ -18,14 +18,10 @@ package com.android.settings.safetycenter.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Flags as OsFlags
-import android.os.UserHandle
-import android.os.UserManager
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
-import com.android.permission.flags.Flags as PermissionFlags
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
 import com.android.settingslib.safetycenter.SafetyCenterUiData
@@ -46,23 +42,18 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
     BasePreferenceController(context, preferenceKey) {
 
     private var preference: SafetySourcePreference? = null
-    private val userManager: UserManager = mContext.getSystemService(UserManager::class.java)!!
-    private var viewModel: LiveSafetyCenterViewModel? = null
-    private var activityTaskId: Int? = null
+    var viewModel: LiveSafetyCenterViewModel? = null
+    var activityTaskId: Int? = null
     private lateinit var safetySourceId: String
     private var profileType: SafetySourcePreference.Profile =
         SafetySourcePreference.Profile.PERSONAL
 
-    /**
-     * Sets the ViewModel instance for this controller and registers an observer to update the
-     * preference state when [SafetyCenterUiData] changes.
-     *
-     * @param viewModel The [LiveSafetyCenterViewModel] instance.
-     * @param owner The [LifecycleOwner] to scope the observation.
-     */
-    fun setViewModelAndLifecycle(viewModel: LiveSafetyCenterViewModel, owner: LifecycleOwner) {
-        this.viewModel = viewModel
-        viewModel.safetyCenterUiLiveData.observe(owner) { data ->
+    override fun onViewCreated(owner: LifecycleOwner) {
+        if (viewModel == null) {
+            Log.w(TAG, "[$preferenceKey] ViewModel not set, cannot observe LiveData")
+            return
+        }
+        viewModel!!.safetyCenterUiLiveData.observe(owner) { data ->
             if (data == null) {
                 Log.d(TAG, "[$preferenceKey] LiveData received null")
                 return@observe
@@ -70,15 +61,6 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
             Log.d(TAG, "[$preferenceKey] safetyCenterUiLiveData observer notified")
             preference?.let { updatePreferenceUi(it, data) }
         }
-    }
-
-    /**
-     * Sets the task ID of the hosting Activity.
-     *
-     * @param taskId The task ID of the hosting Activity.
-     */
-    fun setActivityTaskId(taskId: Int) {
-        this.activityTaskId = taskId
     }
 
     override fun getAvailabilityStatus(): Int {
@@ -91,7 +73,13 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
         preference?.let {
             safetySourceId = requireNotNull(it.safetySource)
             profileType = it.profile
-            it.isVisible = false
+            val model = viewModel
+            if (model != null) {
+                updatePreferenceUi(
+                    preference as SafetySourcePreference,
+                    model.getCurrentSafetyCenterDataAsUiData(),
+                )
+            }
         }
     }
 
@@ -108,7 +96,7 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
 
     /** Updates the preference's UI elements based on the provided [SafetyCenterUiData]. */
     private fun updatePreferenceUi(preference: SafetySourcePreference, data: SafetyCenterUiData) {
-        val targetUserHandle = getUserHandleForProfile(profileType)
+        val targetUserHandle = UserProfilesUtils.getUserHandleForProfile(mContext, profileType)
         if (targetUserHandle == null) {
             Log.w(TAG, "[$preferenceKey] No target UserHandle found for profile type $profileType")
             preference.isVisible = false
@@ -140,51 +128,6 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
                 activityTaskId,
             )
         }
-    }
-
-    /**
-     * Finds the [UserHandle] that matches the specified [SafetySourcePreference.Profile] type.
-     *
-     * @param profileType The type of profile (PERSONAL, WORK, PRIVATE) to search for.
-     * @return The [UserHandle] of the matching profile, or null if not found.
-     */
-    private fun getUserHandleForProfile(profileType: SafetySourcePreference.Profile): UserHandle? {
-        return userManager.userProfiles.firstOrNull { userHandle ->
-            isUserMatchingProfileType(userHandle, profileType)
-        }
-    }
-
-    /**
-     * Checks if a given [UserHandle] matches the characteristics of the specified
-     * [SafetySourcePreference.Profile].
-     *
-     * @param userHandle The [UserHandle] to check.
-     * @param profileType The desired profile type.
-     * @return True if the [UserHandle] matches the profile type, false otherwise.
-     */
-    private fun isUserMatchingProfileType(
-        userHandle: UserHandle,
-        profileType: SafetySourcePreference.Profile,
-    ): Boolean {
-        val userInfo = userManager.getUserInfo(userHandle.identifier)
-        if (userInfo == null) {
-            Log.e(TAG, "[$preferenceKey] Failed to get UserInfo for user $userHandle")
-            return false
-        }
-
-        val isPrivate = isPrivateProfileSupported() && userInfo.isPrivateProfile
-        val isManaged = userInfo.isManagedProfile
-
-        return when (profileType) {
-            SafetySourcePreference.Profile.WORK -> isManaged
-            SafetySourcePreference.Profile.PRIVATE -> isPrivate
-            SafetySourcePreference.Profile.PERSONAL -> !userInfo.isProfile
-        }
-    }
-
-    /** Checks if the private profile feature is supported and enabled on the device. */
-    private fun isPrivateProfileSupported(): Boolean {
-        return PermissionFlags.privateProfileSupported() && OsFlags.allowPrivateProfile()
     }
 
     companion object {

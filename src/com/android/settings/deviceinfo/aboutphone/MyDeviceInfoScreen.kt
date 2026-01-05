@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Technologies, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.deviceinfo.aboutphone
 
 import android.app.settings.SettingsEnums
@@ -32,6 +38,7 @@ import com.android.settings.deviceinfo.imei.ImeiPreference
 import com.android.settings.deviceinfo.imei.getImeiList
 import com.android.settings.deviceinfo.simstatus.SimEidPreference
 import com.android.settings.flags.Flags
+import com.android.settings.network.telephony.TelephonyUtils
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.wifi.utils.activeModemCount
 import com.android.settingslib.metadata.PreferenceCategory
@@ -49,6 +56,10 @@ open class MyDeviceInfoScreen :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceIconProvider {
     override val key: String
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.my_device_info_pref_screen_purpose
 
     override val title: Int
         get() = R.string.about_settings
@@ -80,26 +91,28 @@ open class MyDeviceInfoScreen :
         preferenceHierarchy(context) {
             if (Flags.catalystAboutPhoneDeviceName()) {
                 +PreferenceCategory(
-                    BASIC_INFO_CATEGORY,
-                    R.string.my_device_info_basic_info_category_title,
+                    key = BASIC_INFO_CATEGORY,
+                    purpose = R.string.basic_info_category_purpose,
+                    title = R.string.my_device_info_basic_info_category_title,
                 ) +=
                     {
                         +DeviceNamePreference(context) order 1
                     }
             }
             +PreferenceCategory(
-                DEVICE_DETAIL_CATEGORY,
-                R.string.my_device_info_device_details_category_title,
+                key = DEVICE_DETAIL_CATEGORY,
+                purpose = R.string.device_detail_category_purpose,
+                title = R.string.my_device_info_device_details_category_title,
             ) +=
                 {
                     if (Flags.catalystDeviceModel()) +HardwareInfoScreen.KEY order 30
                     addAsync(coroutineScope, Dispatchers.Default) {
                         +SimEidPreference(context) order 31
                     }
-                    val activeModemCount = context.activeModemCount
+                    var slotCount = TelephonyUtils.getSlotsCount(context)
                     val imeiList = context.getImeiList
-                    for (i in 0 until activeModemCount) {
-                        +ImeiPreference(context, i, activeModemCount, imeiList) order (i + 33)
+                    for (i in 0 until slotCount) {
+                        +ImeiPreference(context, i, slotCount, imeiList) order (i + 33)
                     }
                     +FirmwareVersionScreen.KEY order 42
                 }

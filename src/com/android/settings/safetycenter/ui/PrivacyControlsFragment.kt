@@ -16,94 +16,54 @@
 
 package com.android.settings.safetycenter.ui
 
-import android.app.settings.SettingsEnums
 import android.content.Context
-import android.os.Bundle
-import android.util.Log
-import android.view.View
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import com.android.settings.R
-import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
-import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
-import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFactory
 import com.android.settings.search.BaseSearchIndexProvider
-import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.search.SearchIndexableRaw
 
 /**
  * Fragment that displays various privacy controls. This fragment is a sub-page of the main Safety
  * Center UI. It hosts preferences for privacy hosts preferences for privacy-related settings`
  */
 @SearchIndexable
-class PrivacyControlsFragment : DashboardFragment() {
+class PrivacyControlsFragment : SafetyCenterSubpageFragment() {
 
-    private val TAG = "PrivacyControlsFragment"
+    override val subpageKey = SafetyCenterSubpageRegistry.PRIVACY_CONTROLS_SUBPAGE_KEY
 
-    private var safetyIssuesPreferenceController: SafetyIssuesPreferenceController? = null
-    private val viewModel: LiveSafetyCenterViewModel by viewModels {
-        LiveSafetyCenterViewModelFactory(requireActivity().application)
+    override fun getLogTag(): String {
+        return TAG
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupSafetyIssuesPreferenceController(viewLifecycleOwner)
-        setupSafetySourcePreferenceControllers(viewLifecycleOwner)
+    override fun redirectIfEmpty() {
+        // Privacy controls subpage shouldn't be hidden even if safety source preferences in it are
+        // not present, because it contains a lot of other preferences.
+        return
     }
-
-    override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> {
-        val controllers = mutableListOf<AbstractPreferenceController>()
-        safetyIssuesPreferenceController =
-            SafetyIssuesPreferenceController(context, PRIVACY_CONTROLS_ISSUES_KEY)
-        controllers.add(safetyIssuesPreferenceController!!)
-        return controllers
-    }
-
-    private fun setupSafetySourcePreferenceControllers(owner: LifecycleOwner) {
-        val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
-        for (controller in allControllers) {
-            if (controller is SafetySourcePreferenceController) {
-                controller.setViewModelAndLifecycle(viewModel, owner)
-                controller.setActivityTaskId(requireActivity().taskId)
-            }
-        }
-    }
-
-    private fun setupSafetyIssuesPreferenceController(owner: LifecycleOwner) {
-        Log.d(TAG, "Setting up the safety issues preference controller")
-        safetyIssuesPreferenceController?.setViewModelAndLifecycle(viewModel, owner)
-        safetyIssuesPreferenceController?.setFragmentManager(childFragmentManager)
-        safetyIssuesPreferenceController?.setActivityTaskId(requireActivity().taskId)
-
-        val safetySourceIds =
-            SafetyCenterSubpageRegistry.getAllSafetySourceIds(
-                requireContext(),
-                SafetyCenterSubpageRegistry.SubpageKey.PRIVACY_CONTROLS,
-            )
-        safetyIssuesPreferenceController?.setSubpageSafetySourcesAndIllustration(
-            safetySourceIds,
-            illustrationPref = null,
-        )
-    }
-
-    override fun getLogTag(): String = TAG
-
-    override fun getPreferenceScreenResId(): Int {
-        return R.xml.safety_center_privacy_controls_settings
-    }
-
-    override fun getMetricsCategory(): Int = SettingsEnums.SAFETY_CENTER
 
     companion object {
-
-        private const val PRIVACY_CONTROLS_ISSUES_KEY = "privacy_controls_issues_banner_group"
+        private const val TAG = "PrivacyControlsFragment"
 
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER =
             object : BaseSearchIndexProvider(R.xml.safety_center_privacy_controls_settings) {
                 public override fun isPageSearchEnabled(context: Context): Boolean {
                     return Flags.enableSafetyCenterNewUi()
+                }
+
+                override fun getDynamicRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableRaw> {
+                    val rawData = super.getDynamicRawDataToIndex(context, enabled).toMutableList()
+                    rawData.addAll(
+                        SafetyCenterSearchIndexUtils.getDynamicRawDataForIndexingSubpage(
+                            context,
+                            SafetyCenterSubpageRegistry.PRIVACY_CONTROLS_SUBPAGE_KEY,
+                        )
+                    )
+                    return rawData
                 }
             }
     }

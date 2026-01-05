@@ -38,6 +38,10 @@ open class SoundScreen : PreferenceScreenMixin, PreferenceIconProvider {
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.sound_screen_purpose
+
     override val title: Int
         get() = R.string.sound_settings
 
@@ -64,19 +68,27 @@ open class SoundScreen : PreferenceScreenMixin, PreferenceIconProvider {
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             val audioHelper = AudioHelper(context)
-            +UntitledPreferenceCategoryMetadata(VOLUME_CONTROLS_CATEGORY) order -160 += {
+            +UntitledPreferenceCategoryMetadata(
+                key = VOLUME_CONTROLS_CATEGORY,
+                purpose = R.string.volume_controls_category_purpose,
+            ) order -160 += {
                 +MediaVolumePreference(audioHelper) order -180
                 +CallVolumePreference(audioHelper) order -170
                 +SeparateRingVolumePreference(audioHelper) order -155
                 +NotificationVolumePreference(audioHelper) order -150
                 +AlarmVolumePreference(audioHelper) order -140
             }
-            +PreferenceCategory(AUDIO_CATEGORY, R.string.sound_audio_category_title) order -120 += {
+            +PreferenceCategory(
+                key = AUDIO_CATEGORY,
+                purpose = R.string.audio_category_purpose,
+                title = R.string.sound_audio_category_title,
+            ) order -120 += {
                 +MediaControlsScreen.KEY order -100
             }
             +PreferenceCategory(
-                SOUNDS_AND_VIBRATIONS_CATEGORY,
-                R.string.system_sounds_and_vibrations_category_title,
+                key = SOUNDS_AND_VIBRATIONS_CATEGORY,
+                purpose = R.string.system_sounds_and_vibrations_category_purpose,
+                title = R.string.system_sounds_and_vibrations_category_title,
             ) order -111 +=
                 {
                     +DialPadTonePreference() order -50

@@ -28,7 +28,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.testing.launchFragment
 import androidx.fragment.app.testing.withFragment
 import androidx.lifecycle.Lifecycle
-import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
@@ -47,10 +46,11 @@ import org.mockito.kotlin.stub
 private val mockUserManager = mock<UserManager>()
 private val mockTelephonyManager = mock<TelephonyManager>()
 
-private val spyContext: Context = spy(ApplicationProvider.getApplicationContext()) {
-    on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
-    on { userManager } doReturn mockUserManager
-}
+private val spyContext: Context =
+    spy(ApplicationProvider.getApplicationContext()) {
+        on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
+        on { userManager } doReturn mockUserManager
+    }
 
 private val spyResources = spy(spyContext.resources)
 
@@ -61,23 +61,13 @@ class DataUsageListTest {
 
     @Before
     fun setUp() {
-        spyContext.stub {
-            on { resources } doReturn spyResources
-        }
-        mockTelephonyManager.stub {
-            on { isDataCapable } doReturn true
-        }
-        mockUserManager.stub {
-            on { isGuestUser } doReturn false
-        }
+        spyContext.stub { on { resources } doReturn spyResources }
+        mockTelephonyManager.stub { on { isDataCapable } doReturn true }
+        mockUserManager.stub { on { isGuestUser } doReturn false }
 
-	// By default, available
-        spyResources.stub {
-            on { getBoolean(R.bool.config_show_sim_info) } doReturn true
-        }
-        mockTelephonyManager.stub {
-            on { isDataCapable } doReturn true
-        }
+        // By default, available
+        spyResources.stub { on { getBoolean(R.bool.config_show_sim_info) } doReturn true }
+        mockTelephonyManager.stub { on { isDataCapable } doReturn true }
 
         fakeIntent = Intent()
     }
@@ -95,35 +85,35 @@ class DataUsageListTest {
 
     @Test
     fun launchFragment_isGuestUser_finish() {
-        mockUserManager.stub {
-            on { isGuestUser } doReturn true
-        }
-        val fragmentArgs = bundleOf(
-            DataUsageList.EXTRA_NETWORK_TEMPLATE to mock<NetworkTemplate>(),
-            DataUsageList.EXTRA_SUB_ID to 3,
-        )
+        mockUserManager.stub { on { isGuestUser } doReturn true }
+        val fragmentArgs =
+            bundleOf(
+                DataUsageList.EXTRA_NETWORK_TEMPLATE to mock<NetworkTemplate>(),
+                DataUsageList.EXTRA_SUB_ID to 3,
+            )
 
-        val scenario = launchFragment<TestDataUsageList>(
-            fragmentArgs = fragmentArgs,
-            initialState = Lifecycle.State.CREATED,
-        )
+        val scenario =
+            launchFragment<TestDataUsageList>(
+                fragmentArgs = fragmentArgs,
+                initialState = Lifecycle.State.CREATED,
+            )
 
-        scenario.withFragment {
-            assertThat(activity!!.isFinishing).isTrue()
-        }
+        scenario.withFragment { assertThat(activity!!.isFinishing).isTrue() }
     }
 
     @Test
     fun launchFragment_withArguments_getTemplateFromArgument() {
-        val fragmentArgs = bundleOf(
-            DataUsageList.EXTRA_NETWORK_TEMPLATE to mock<NetworkTemplate>(),
-            DataUsageList.EXTRA_SUB_ID to 3,
-        )
+        val fragmentArgs =
+            bundleOf(
+                DataUsageList.EXTRA_NETWORK_TEMPLATE to mock<NetworkTemplate>(),
+                DataUsageList.EXTRA_SUB_ID to 3,
+            )
 
-        val scenario = launchFragment<TestDataUsageList>(
-            fragmentArgs = fragmentArgs,
-            initialState = Lifecycle.State.CREATED,
-        )
+        val scenario =
+            launchFragment<TestDataUsageList>(
+                fragmentArgs = fragmentArgs,
+                initialState = Lifecycle.State.CREATED,
+            )
 
         scenario.withFragment {
             assertThat(template).isNotNull()
@@ -134,10 +124,11 @@ class DataUsageListTest {
 
     @Test
     fun launchFragment_withIntent_getTemplateFromIntent() {
-        fakeIntent = Intent().apply {
-            putExtra(Settings.EXTRA_NETWORK_TEMPLATE, mock<NetworkTemplate>())
-            putExtra(Settings.EXTRA_SUB_ID, 2)
-        }
+        fakeIntent =
+            Intent().apply {
+                putExtra(Settings.EXTRA_NETWORK_TEMPLATE, mock<NetworkTemplate>())
+                putExtra(Settings.EXTRA_SUB_ID, 2)
+            }
 
         val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
 
@@ -151,9 +142,7 @@ class DataUsageListTest {
     @Test
     fun warning_wifiAndHasSim_displayNonCarrierWarning() {
         val template = NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build()
-        fakeIntent = Intent().apply {
-            putExtra(Settings.EXTRA_NETWORK_TEMPLATE, template)
-        }
+        fakeIntent = Intent().apply { putExtra(Settings.EXTRA_NETWORK_TEMPLATE, template) }
 
         val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
 
@@ -168,12 +157,8 @@ class DataUsageListTest {
     @Test
     fun warning_wifiAndNoShowSimInfo_noWarning() {
         val template = NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build()
-        spyResources.stub {
-            on { getBoolean(R.bool.config_show_sim_info) } doReturn false
-        }
-        fakeIntent = Intent().apply {
-            putExtra(Settings.EXTRA_NETWORK_TEMPLATE, template)
-        }
+        spyResources.stub { on { getBoolean(R.bool.config_show_sim_info) } doReturn false }
+        fakeIntent = Intent().apply { putExtra(Settings.EXTRA_NETWORK_TEMPLATE, template) }
 
         val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
 
@@ -187,12 +172,8 @@ class DataUsageListTest {
     @Test
     fun warning_wifiAndNoDataCapable_noWarning() {
         val template = NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build()
-        mockTelephonyManager.stub {
-            on { isDataCapable } doReturn false
-        }
-        fakeIntent = Intent().apply {
-            putExtra(Settings.EXTRA_NETWORK_TEMPLATE, template)
-        }
+        mockTelephonyManager.stub { on { isDataCapable } doReturn false }
+        fakeIntent = Intent().apply { putExtra(Settings.EXTRA_NETWORK_TEMPLATE, template) }
 
         val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
 
@@ -206,9 +187,7 @@ class DataUsageListTest {
     @Test
     fun warning_mobile_operatorWarning() {
         val template = NetworkTemplate.Builder(NetworkTemplate.MATCH_MOBILE).build()
-        fakeIntent = Intent().apply {
-            putExtra(Settings.EXTRA_NETWORK_TEMPLATE, template)
-        }
+        fakeIntent = Intent().apply { putExtra(Settings.EXTRA_NETWORK_TEMPLATE, template) }
 
         val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
 

@@ -37,6 +37,9 @@ class AppInfoHeaderPreference(private val packageInfoProvider: PackageInfoProvid
     override val key
         get() = KEY
 
+    override val purpose: Int
+        get() = com.android.settings.R.string.app_info_header_purpose
+
     override fun createWidget(context: Context): Preference {
         val view = LayoutInflater.from(context).inflate(R.layout.settings_entity_header, null)
         return LayoutPreference(context, view).apply {

@@ -18,6 +18,7 @@ package com.android.settings.spa.app.specialaccess
 
 import android.content.Context
 import androidx.preference.Preference
+import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 
@@ -44,4 +45,7 @@ class ComputerControlAutomationPreferenceController(context: Context, key: Strin
             false
         }
     }
+
+    override fun getSummary() =
+        mContext.getString(R.string.computer_control_automation_page_summary)
 }

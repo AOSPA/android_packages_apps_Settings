@@ -28,6 +28,7 @@ import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemProperties
+import android.os.UserManager
 import android.provider.Settings
 import android.proximity.IProximityResultCallback
 import android.proximity.ProximityResultCode
@@ -97,6 +98,7 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                 context,
                 safetyEvent,
                 context.getSystemService(BiometricManager::class.java),
+                context.getSystemService(UserManager::class.java),
             )
         }
 
@@ -105,10 +107,15 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
             context: Context,
             safetyEvent: SafetyEvent,
             biometricManager: BiometricManager?,
+            userManager: UserManager?,
             isTablet: Boolean = isTablet(),
             isLowRamDevice: Boolean = isLowRam(context),
+            userId: Int = context.userId,
         ) {
             if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
+                return
+            }
+            if (userManager?.isProfile(userId) == true) {
                 return
             }
             if (isTablet) {
@@ -259,6 +266,13 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
             return "tablet" in SystemProperties.get("ro.build.characteristics", "").split(',')
         }
 
+        private fun isIdentityCheckToggleEnabled(context: Context): Boolean =
+            Settings.Secure.getInt(
+                context.contentResolver,
+                Settings.Secure.MANDATORY_BIOMETRICS,
+                0,
+            ) == 1
+
         private fun getIfIdentityCheckPromoNotificationHasBeenClicked(
             context: Context,
             isWatch: Boolean,
@@ -345,7 +359,7 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                 !getIfIdentityCheckPromoNotificationHasBeenClicked(
                     context,
                     issueCardDetails.intentAction == ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS,
-                )
+                ) && isIdentityCheckToggleEnabled(context)
             ) {
                 issue
                     .setCustomNotification(notification)

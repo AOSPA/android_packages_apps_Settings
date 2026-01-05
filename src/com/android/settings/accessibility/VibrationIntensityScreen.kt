@@ -43,6 +43,10 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.vibration_intensity_screen_purpose
+
     override val title: Int
         get() = R.string.accessibility_vibration_settings_title
 
@@ -66,7 +70,7 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +VibrationMainSwitchPreference(VIBRATE_ON)
+            +VibrationMainSwitchPreference(VIBRATE_ON, purpose = R.string.vibrate_on_purpose)
             // The preferences below are migrated behind a different flag from the screen migration.
             // They should only be declared in this screen hierarchy if their migration is enabled.
             if (Flags.catalystVibrationIntensityScreen25q4()) {
@@ -75,6 +79,7 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
                     +RampingRingerVibrationSwitchPreference(
                         context,
                         key = APPLY_RAMPING_RINGER,
+                        purpose = R.string.apply_ramping_ringer_purpose,
                         ringPreferenceKey = RING_VIBRATION_INTENSITY,
                     )
                 }
@@ -85,7 +90,7 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
                 +InteractiveHapticsPreferenceCategory() += {
                     +TouchVibrationIntensitySliderPreference(context)
                     +MediaVibrationIntensitySliderPreference(context)
-                    +KeyboardVibrationSwitchPreference(context, KEYBOARD_VIBRATION_ENABLED)
+                    +KeyboardVibrationSwitchPreference(context, KEYBOARD_VIBRATION_ENABLED, R.string.keyboard_vibration_enabled_purpose)
                 }
             }
         }

@@ -37,7 +37,7 @@ class A11yActivityFooterPreferenceTest {
     @Test
     fun getTitle_nonHtml_returnsCorrectTitle() {
         val preference =
-            A11yActivityFooterPreference(KEY, createFakeShortcutInfo(), loadHtmlFooter = false)
+            A11yActivityFooterPreference(KEY, 0, createFakeShortcutInfo(), loadHtmlFooter = false)
 
         assertThat(preference.getTitle(context)).isEqualTo(FEATURE_FOOTER)
     }
@@ -45,7 +45,7 @@ class A11yActivityFooterPreferenceTest {
     @Test
     fun getTitle_html_returnsCorrectTitle() {
         val preference =
-            A11yActivityFooterPreference(KEY, createFakeShortcutInfo(), loadHtmlFooter = true)
+            A11yActivityFooterPreference(KEY, 0, createFakeShortcutInfo(), loadHtmlFooter = true)
 
         assertThat(preference.getTitle(context).toString())
             .isEqualTo(
@@ -62,7 +62,7 @@ class A11yActivityFooterPreferenceTest {
     @Test
     fun getIntroductionTitle() {
         val preference =
-            A11yActivityFooterPreference(KEY, createFakeShortcutInfo(), loadHtmlFooter = false)
+            A11yActivityFooterPreference(KEY, 0, createFakeShortcutInfo(), loadHtmlFooter = false)
 
         assertThat(preference.getIntroductionTitle(context))
             .isEqualTo(context.getString(R.string.accessibility_introduction_title, FEATURE_NAME))
@@ -71,14 +71,14 @@ class A11yActivityFooterPreferenceTest {
     @Test
     fun isAvailable_hasTitle_returnTrue() {
         val preference =
-            A11yActivityFooterPreference(KEY, createFakeShortcutInfo(), loadHtmlFooter = false)
+            A11yActivityFooterPreference(KEY, 0, createFakeShortcutInfo(), loadHtmlFooter = false)
 
         assertThat(preference.isAvailable(context)).isTrue()
     }
 
     @Test
     fun isAvailable_noTitle_returnFalse() {
-        val preference = A11yActivityFooterPreference(KEY, mock(), loadHtmlFooter = false)
+        val preference = A11yActivityFooterPreference(KEY, 0, mock(), loadHtmlFooter = false)
 
         assertThat(preference.isAvailable(context)).isFalse()
     }

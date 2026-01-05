@@ -15,12 +15,14 @@
  */
 package com.android.settings.spa.accessibility
 
+import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
+import com.android.settingslib.spa.framework.compose.rememberContext
 import com.android.settingslib.spa.framework.util.mapItem
 import com.android.settingslib.spa.lifecycle.collectAsCallbackWithLifecycle
 import com.android.settingslib.spaprivileged.model.app.AppListModel
@@ -37,7 +39,7 @@ object ForceDarkAppExceptionsPageProvider : SettingsPageProvider {
     override fun Page(arguments: Bundle?) {
         AppListPage(
             title = stringResource(R.string.accessibility_expanded_dark_theme_exceptions_title),
-            listModel = ForceDarkAppExceptionsListModel(),
+            listModel = rememberContext(::ForceDarkAppExceptionsListModel),
         )
     }
 }
@@ -48,7 +50,9 @@ data class ForceDarkAppExceptionRecord(
 ) : AppRecord
 
 class ForceDarkAppExceptionsListModel(
-    private val repository: ForceDarkAppExceptionsRepository = ForceDarkAppExceptionsRepository()
+    private val context: Context,
+    private val repository: ForceDarkAppExceptionsRepository =
+        ForceDarkAppExceptionsRepository(context = context),
 ) : AppListModel<ForceDarkAppExceptionRecord> {
 
     override fun transform(userIdFlow: Flow<Int>, appListFlow: Flow<List<ApplicationInfo>>) =
@@ -63,7 +67,11 @@ class ForceDarkAppExceptionsListModel(
     override fun AppListItemModel<ForceDarkAppExceptionRecord>.AppItem() {
         AppListSwitchItem(
             checked = record.controller.isException.collectAsCallbackWithLifecycle(),
-            changeable = { true },
+            changeable = {
+                // TODO(b/448469020): If the app exists in our blocklist, the switch item for the
+                // app should not be changeable.
+                true
+            },
             onCheckedChange = record.controller::setException,
         )
     }

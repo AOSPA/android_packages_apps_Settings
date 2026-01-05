@@ -27,6 +27,7 @@ import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settings.utils.putSubId
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
@@ -42,7 +43,7 @@ class MobileNetworkScreenTest : SettingsCatalystTestCase() {
     private val invalidSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
 
     override val preferenceScreenCreator =
-        MobileNetworkScreen(Bundle().apply { putSubId(Settings.EXTRA_SUB_ID, subId) })
+        createScreen(Bundle().apply { putSubId(Settings.EXTRA_SUB_ID, subId) })
 
     override val flagName: String
         get() = Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4
@@ -74,7 +75,7 @@ class MobileNetworkScreenTest : SettingsCatalystTestCase() {
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_validString_parsedCorrectly() {
         val args = Bundle().apply { putString(Settings.EXTRA_SUB_ID, subId.toString()) }
-        val screen = MobileNetworkScreen(args)
+        val screen = createScreen(args)
         assertThat(screen.getSubId()).isEqualTo(subId)
     }
 
@@ -82,7 +83,7 @@ class MobileNetworkScreenTest : SettingsCatalystTestCase() {
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_invalidString_returnsDefault() {
         val args = Bundle().apply { putString(Settings.EXTRA_SUB_ID, "invalid") }
-        val screen = MobileNetworkScreen(args)
+        val screen = createScreen(args)
         assertThat(screen.getSubId()).isEqualTo(invalidSubId)
     }
 
@@ -90,23 +91,23 @@ class MobileNetworkScreenTest : SettingsCatalystTestCase() {
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_missingKey_returnsDefault() {
         val args = Bundle()
-        val screen = MobileNetworkScreen(args)
+        val screen = createScreen(args)
         assertThat(screen.getSubId()).isEqualTo(invalidSubId)
     }
 
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun subId_flagTrue_subIdIsInt_returnsDefault() {
+    fun subId_flagTrue_subIdIsInt_returnsTheSubIdFromInt() {
         val args = Bundle().apply { putInt(Settings.EXTRA_SUB_ID, subId) }
-        val screen = MobileNetworkScreen(args)
-        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+        val screen = createScreen(args)
+        assertThat(screen.getSubId()).isEqualTo(subId)
     }
 
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagFalse_validInt_parsedCorrectly() {
         val args = Bundle().apply { putInt(Settings.EXTRA_SUB_ID, subId) }
-        val screen = MobileNetworkScreen(args)
+        val screen = createScreen(args)
         assertThat(screen.getSubId()).isEqualTo(subId)
     }
 
@@ -114,16 +115,24 @@ class MobileNetworkScreenTest : SettingsCatalystTestCase() {
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagFalse_missingKey_returnsDefault() {
         val args = Bundle()
-        val screen = MobileNetworkScreen(args)
+        val screen = createScreen(args)
         assertThat(screen.getSubId()).isEqualTo(invalidSubId)
     }
 
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun subId_flagFalse_subIdIsString_returnsDefault() {
+    fun subId_flagFalse_subIdIsString_returnsTheSubIdFromString() {
         val args = Bundle().apply { putString(Settings.EXTRA_SUB_ID, subId.toString()) }
-        val screen = MobileNetworkScreen(args)
-        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+        val screen = createScreen(args)
+        assertThat(screen.getSubId()).isEqualTo(subId)
+    }
+
+    private fun createScreen(args: Bundle): MobileNetworkScreen {
+        return if (CatalystFlags.catalystUseKeyParameters()) {
+            MobileNetworkScreen(MobileNetworkScreen.parametersSchema.prepare(args))
+        } else {
+            MobileNetworkScreen(args)
+        }
     }
 
     private fun MobileNetworkScreen.getSubId(): Int {

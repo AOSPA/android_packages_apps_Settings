@@ -21,6 +21,7 @@ import android.content.Context
 import android.content.Intent
 import android.provider.Settings
 import android.provider.Settings.ACTION_COLOR_INVERSION_SETTINGS
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME
 import com.android.settings.R
@@ -28,6 +29,7 @@ import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.FeedbackManager
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment
+import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.shared.ui.AccessibilityShortcutPreference
 import com.android.settings.accessibility.shared.ui.FeedbackButtonPreference
 import com.android.settings.core.PreferenceScreenMixin
@@ -50,6 +52,10 @@ open class ColorInversionScreen :
 
     override val key: String
         get() = KEY
+
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.toggle_inversion_preference_purpose
 
     override val title: Int
         get() = R.string.accessibility_display_inversion_preference_title
@@ -113,21 +119,28 @@ open class ColorInversionScreen :
             +ColorInversionMainSwitchPreference(context)
             +PreferenceCategory(
                 key = "general_categories",
+                purpose = R.string.general_categories_purpose,
                 title = R.string.accessibility_screen_option,
             ) +=
                 {
                     +AccessibilityShortcutPreference(
                         context = context,
                         key = "color_inversion_shortcut_key",
+                        purpose = R.string.color_inversion_shortcut_key_purpose,
                         title = R.string.accessibility_display_inversion_shortcut_title,
                         componentName = COLOR_INVERSION_COMPONENT_NAME,
                         featureName = R.string.accessibility_display_inversion_preference_title,
                         metricsCategory = metricsCategory,
                     )
                 }
-            +FooterPreference()
+            +FooterPreference(getHelpResourceUri(context))
             +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
         }
+
+    @StringRes
+    private fun getHelpResourceUri(context: Context): Int {
+        return if (context.isInSetupWizard()) 0 else R.string.help_url_color_inversion
+    }
 
     companion object {
         const val KEY = "toggle_inversion_preference"

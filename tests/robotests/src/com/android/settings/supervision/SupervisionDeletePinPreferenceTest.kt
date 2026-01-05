@@ -150,12 +150,9 @@ class SupervisionDeletePinPreferenceTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun getTitle_platformSupervision_currentUserOnlyRequiresPin() {
+    fun getTitle_platformSupervision() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
-        }
-        mockISupervisionManager.stub {
-            on { usersThatRequirePlatformCredential } doReturn listOf(MAIN_USER)
         }
         mockRoleManager.stub {
             on { getRoleHolders(RoleManager.ROLE_SUPERVISION) } doReturn emptyList<String>()
@@ -169,29 +166,9 @@ class SupervisionDeletePinPreferenceTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun getTitle_platformSupervision_usersRequirePin() {
-        mockUserManager.stub {
-            on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
-        }
-        mockISupervisionManager.stub {
-            on { usersThatRequirePlatformCredential } doReturn listOf(MAIN_USER, SECONDARY_USER)
-        }
-        mockRoleManager.stub {
-            on { getRoleHolders(RoleManager.ROLE_SUPERVISION) } doReturn emptyList<String>()
-        }
-
-        assertThat(preference.getTitle(context))
-            .isEqualTo(context.getString(R.string.supervision_delete_pin_preference_title))
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun getTitle_hasSupervisionRoleHolder() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
-        }
-        mockISupervisionManager.stub {
-            on { usersThatRequirePlatformCredential } doReturn listOf(MAIN_USER)
         }
         mockRoleManager.stub {
             on { getRoleHolders(RoleManager.ROLE_SUPERVISION) } doReturn
@@ -279,7 +256,7 @@ class SupervisionDeletePinPreferenceTest {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
         }
         mockISupervisionManager.stub {
-            on { usersThatRequirePlatformCredential } doReturn listOf(SECONDARY_USER)
+            on { usersThatRequirePlatformCredential } doReturn listOf(MAIN_USER, SECONDARY_USER)
         }
         mockRoleManager.stub {
             on { getRoleHolders(RoleManager.ROLE_SUPERVISION) } doReturn emptyList<String>()
@@ -320,6 +297,30 @@ class SupervisionDeletePinPreferenceTest {
 
         assertThat(startedIntent?.dataString).isEqualTo(learnMoreLink)
         assertThat(startedIntent?.action).isEqualTo(Intent.ACTION_VIEW)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun showDeletionDialog_currentUserNotRequiringPin_pinRequiredByAnotherUser_showsCantDeletePinDialog() {
+        mockUserManager.stub {
+            on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
+        }
+        mockISupervisionManager.stub {
+            on { usersThatRequirePlatformCredential } doReturn listOf(SECONDARY_USER)
+        }
+        mockRoleManager.stub {
+            on { getRoleHolders(RoleManager.ROLE_SUPERVISION) } doReturn emptyList<String>()
+        }
+
+        preference.showDeletionDialog(context)
+        shadowOf(Looper.getMainLooper()).idle()
+        val dialog = ShadowAlertDialogCompat.getLatestAlertDialog()
+        val shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog)
+        assertThat(shadowDialog.title)
+            .isEqualTo(
+                appContext.getString(R.string.supervision_delete_pin_supervision_enabled_header)
+            )
+        assertAlertDialogHasMessage(R.string.supervision_cant_delete_pin_in_use_message)
     }
 
     @Test

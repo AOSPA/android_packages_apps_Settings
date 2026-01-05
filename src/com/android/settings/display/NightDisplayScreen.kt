@@ -62,6 +62,10 @@ open class NightDisplayScreen(val context: Context) :
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.night_display_purpose
+
     override val highlightMenuKey: Int
         get() = R.string.menu_key_display
 
@@ -115,6 +119,9 @@ internal class NightDisplayTopIntroPreference :
 
     override val key: String
         get() = "night_display_top_intro"
+
+    override val purpose: Int
+        get() = R.string.night_display_top_intro_purpose
 
     override val title: Int
         get() = R.string.night_display_text

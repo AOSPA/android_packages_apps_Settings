@@ -862,20 +862,26 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     /**
-     * Returns true if the current user owns the network or if there is only a single user
-     * on the device.
+     * Returns true if the current user can modify the network or if there is
+     * only a single user on the device.
      */
     public boolean canModifyNetwork() {
         return WifiUtils.isNetworkEditable(mWifiEntry, mContext);
     }
 
     /**
+     * Returns true if the current user can modify the share settings for a
+     * network.
+     */
+    public boolean canModifyShareSettings() {
+        return WifiUtils.isSharedFieldEditable(mWifiEntry, mContext);
+    }
+
+    /**
      * Returns whether the network represented by this preference can be forgotten.
      */
     public boolean canForgetNetwork() {
-        return mWifiEntry.canForget()
-                && !WifiUtils.isNetworkLockedDown(mContext, mWifiEntry.getWifiConfiguration())
-                    && WifiUtils.isNetworkEditable(mWifiEntry, mContext);
+        return WifiUtils.isNetworkForgettable(mWifiEntry, mContext);
     }
 
     /**
@@ -889,7 +895,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
      * Returns whether the user can share the network represented by this preference with QR code.
      */
     private boolean canShareNetwork() {
-        return mWifiEntry.canShare() && WifiUtils.isNetworkEditable(mWifiEntry, mContext);
+        return WifiUtils.isNetworkShareable(mWifiEntry, mContext);
     }
 
     /**

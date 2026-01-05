@@ -80,6 +80,10 @@ open class WifiHotspotScreen(context: Context) :
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.wifi_tether_purpose
+
     override val title: Int
         get() = R.string.wifi_hotspot_checkbox_text
 

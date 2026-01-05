@@ -15,8 +15,6 @@
  */
 package com.android.settings.security;
 
-import static android.view.contentprotection.flags.Flags.manageDevicePolicyEnabled;
-
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserHandle;
@@ -34,7 +32,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 /** Preference controller for content protection work profile switch bar. */
 public class ContentProtectionWorkSwitchController extends TogglePreferenceController {
 
-    @Nullable private UserHandle mManagedProfile;
+    @Nullable private final UserHandle mManagedProfile;
 
     @DevicePolicyManager.ContentProtectionPolicy
     private int mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
@@ -43,19 +41,14 @@ public class ContentProtectionWorkSwitchController extends TogglePreferenceContr
             @NonNull Context context, @NonNull String preferenceKey) {
         super(context, preferenceKey);
 
-        if (manageDevicePolicyEnabled()) {
-            mManagedProfile = getManagedProfile();
-            if (mManagedProfile != null) {
-                mContentProtectionPolicy = getContentProtectionPolicy(mManagedProfile);
-            }
+        mManagedProfile = getManagedProfile();
+        if (mManagedProfile != null) {
+            mContentProtectionPolicy = getContentProtectionPolicy(mManagedProfile);
         }
     }
 
     @Override
     public int getAvailabilityStatus() {
-        if (!manageDevicePolicyEnabled()) {
-            return getManagedProfile() != null ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
-        }
         if (mManagedProfile == null) {
             return CONDITIONALLY_UNAVAILABLE;
         }
@@ -68,9 +61,6 @@ public class ContentProtectionWorkSwitchController extends TogglePreferenceContr
 
     @Override
     public boolean isChecked() {
-        if (!manageDevicePolicyEnabled()) {
-            return false;
-        }
         return mContentProtectionPolicy == DevicePolicyManager.CONTENT_PROTECTION_ENABLED;
     }
 
@@ -84,12 +74,14 @@ public class ContentProtectionWorkSwitchController extends TogglePreferenceContr
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        UserHandle managedProfile =
-                manageDevicePolicyEnabled() ? mManagedProfile : getManagedProfile();
-        if (managedProfile != null) {
+        if (mManagedProfile != null) {
             RestrictedSwitchPreference switchPreference = screen.findPreference(getPreferenceKey());
-            if (switchPreference != null) {
-                switchPreference.setDisabledByAdmin(getEnforcedAdmin(managedProfile));
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorV2()) {
+                switchPreference.setDisabledByAdmin(
+                        ContentProtectionPreferenceUtils.getContentProtectionEnforcingAdmin(
+                                mContext, mManagedProfile));
+            } else {
+                switchPreference.setDisabledByAdmin(getEnforcedAdmin(mManagedProfile));
             }
         }
     }

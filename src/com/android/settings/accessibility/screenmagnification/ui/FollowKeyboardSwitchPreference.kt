@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.SwitchPreference
 class FollowKeyboardSwitchPreference :
     SwitchPreference(
         KEY,
+        R.string.accessibility_magnification_follow_keyboard_enabled_purpose,
         R.string.accessibility_screen_magnification_follow_keyboard_title,
         R.string.accessibility_screen_magnification_follow_keyboard_summary,
     ),

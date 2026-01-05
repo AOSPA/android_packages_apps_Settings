@@ -38,6 +38,10 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.vibration_screen_purpose
+
     override val title: Int
         get() = R.string.accessibility_vibration_settings_title
 
@@ -60,7 +64,7 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +VibrationMainSwitchPreference(MAIN_SWITCH_KEY)
+            +VibrationMainSwitchPreference(MAIN_SWITCH_KEY, R.string.toggle_vibrate_on_purpose)
             // The preferences below are migrated behind a different flag from the screen migration.
             // They should only be declared in this screen hierarchy if their migration is enabled.
             if (Flags.catalystVibrationIntensityScreen25q4()) {
@@ -68,26 +72,31 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
                     +RingVibrationIntensitySwitchPreference(
                         context,
                         "toggle_ring_vibration_intensity",
+                        R.string.toggle_ring_vibration_intensity_purpose,
                         MAIN_SWITCH_KEY,
                     )
                     +RampingRingerVibrationSwitchPreference(
                         context,
                         key = "toggle_apply_ramping_ringer",
+                        purpose = R.string.toggle_apply_ramping_ringer_purpose,
                         ringPreferenceKey = "toggle_ring_vibration_intensity",
                     )
                 }
                 +NotificationAlarmVibrationPreferenceCategory(
-                    "toggle_vibration_category_notification_alarm"
+                    "toggle_vibration_category_notification_alarm",
+                    purpose = R.string.toggle_vibration_category_notification_alarm_purpose
                 ) +=
                     {
                         +NotificationVibrationIntensitySwitchPreference(
                             context,
                             "toggle_notification_vibration_intensity",
+                            R.string.toggle_notification_vibration_intensity_purpose,
                             MAIN_SWITCH_KEY,
                         )
                         +AlarmVibrationIntensitySwitchPreference(
                             context,
                             "toggle_alarm_vibration_intensity",
+                             R.string.toggle_alarm_vibration_intensity_purpose,
                             MAIN_SWITCH_KEY,
                         )
                     }
@@ -95,16 +104,19 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
                     +TouchVibrationIntensitySwitchPreference(
                         context,
                         "toggle_haptic_feedback_intensity",
+                        R.string.toggle_haptic_feedback_intensity_purpose,
                         MAIN_SWITCH_KEY,
                     )
                     +MediaVibrationIntensitySwitchPreference(
                         context,
                         "toggle_media_vibration_intensity",
+                        R.string.toggle_media_vibration_intensity_purpose,
                         MAIN_SWITCH_KEY,
                     )
                     +KeyboardVibrationSwitchPreference(
                         context,
                         "toggle_keyboard_vibration_enabled",
+                        R.string.toggle_keyboard_vibration_enabled_purpose,
                         MAIN_SWITCH_KEY,
                     )
                 }
@@ -127,20 +139,23 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
 /** Call vibration preferences (e.g. ringtone, ramping ringer, etc). */
 class CallVibrationPreferenceCategory(
     key: String = "vibration_category_call",
+    purpose: Int = R.string.vibration_category_call_purpose,
     title: Int = R.string.accessibility_call_vibration_category_title,
-) : PreferenceCategory(key, title)
+) : PreferenceCategory(key, purpose, title)
 
 /** Notification and alarm vibration preferences. */
 class NotificationAlarmVibrationPreferenceCategory(
     key: String = "vibration_category_notification_alarm",
+    purpose: Int = R.string.vibration_category_notification_alarm_purpose,
     title: Int = R.string.accessibility_notification_alarm_vibration_category_title,
-) : PreferenceCategory(key, title)
+) : PreferenceCategory(key, purpose, title)
 
 /** Interactive haptics preferences (e.g. touch feedback, media, keyboard, etc). */
 class InteractiveHapticsPreferenceCategory(
     key: String = "vibration_category_haptics",
+    purpose: Int = R.string.vibration_category_haptics_purpose,
     title: Int = R.string.accessibility_interactive_haptics_category_title,
-) : PreferenceCategory(key, title)
+) : PreferenceCategory(key, purpose, title)
 
 /** Returns true if the device has a system vibrator, false otherwise. */
 val Context.hasVibrator: Boolean

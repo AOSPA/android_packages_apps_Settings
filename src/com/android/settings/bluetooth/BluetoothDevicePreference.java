@@ -66,7 +66,7 @@ import java.util.stream.Collectors;
  */
 public final class BluetoothDevicePreference extends GearPreference {
     private static final String TAG = "BluetoothDevicePref";
-
+    private static final long ALERT_DIALOG_BLOCKING_TIME_MILLS = 5000L;
     private static int sDimAlpha = Integer.MIN_VALUE;
 
     @Retention(RetentionPolicy.SOURCE)
@@ -432,7 +432,7 @@ public final class BluetoothDevicePreference extends GearPreference {
                                 });
                     });
                 } else if (mCachedDevice.getConnectionFailureTimeMillis()
-                        != mLastConnectionFailureTimeMillis
+                            > mLastConnectionFailureTimeMillis + ALERT_DIALOG_BLOCKING_TIME_MILLS
                         && BluetoothUtils.showConnectionFailure(mCachedDevice)) {
                     ThreadUtils.postOnBackgroundThread(() -> {
                         mBluetoothFeatureProvider.buildBluetoothDiagnosisAlertDialog(

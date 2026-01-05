@@ -23,7 +23,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.ResetDashboardActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.factory_reset.Flags as FactoryResetFlags
 import com.android.settings.flags.Flags
 import com.android.settings.restriction.UserRestrictions
 import com.android.settings.utils.makeLaunchIntent
@@ -44,6 +43,10 @@ open class ResetDashboardScreen :
     PreferenceScreenMixin, PreferenceAvailabilityProvider, PreferenceLifecycleProvider {
     override val key: String
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.reset_dashboard_purpose
 
     override val title: Int
         get() = R.string.reset_dashboard_title
@@ -75,7 +78,6 @@ open class ResetDashboardScreen :
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)
-        if (!FactoryResetFlags.fixFactoryResetPreferenceOnRestrictionChange()) return
         val restrictedPreference: RestrictedPreference =
             context.findPreference(FACTORY_RESET_KEY) ?: return
         factoryResetRestrictionObserver = KeyedObserver { _, _ ->
@@ -94,15 +96,13 @@ open class ResetDashboardScreen :
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
         super.onDestroy(context)
-        if (FactoryResetFlags.fixFactoryResetPreferenceOnRestrictionChange()) {
-            if (factoryResetRestrictionObserver != null) {
-                val userRestrictions = UserRestrictions.get(context)
-                userRestrictions.removeObserver(
-                    UserManager.DISALLOW_FACTORY_RESET,
-                    factoryResetRestrictionObserver!!,
-                )
-                factoryResetRestrictionObserver = null
-            }
+        if (factoryResetRestrictionObserver != null) {
+            val userRestrictions = UserRestrictions.get(context)
+            userRestrictions.removeObserver(
+                UserManager.DISALLOW_FACTORY_RESET,
+                factoryResetRestrictionObserver!!,
+            )
+            factoryResetRestrictionObserver = null
         }
     }
 

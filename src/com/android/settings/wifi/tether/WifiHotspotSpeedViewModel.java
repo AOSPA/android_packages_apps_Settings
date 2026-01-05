@@ -81,9 +81,6 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         mWifiHotspotRepository.getSecurityType().observeForever(mSecurityTypeObserver);
         mCurrentSecurityType = mWifiHotspotRepository.getSecurityType().getValue();
         mWifiHotspotRepository.setAutoRefresh(true);
-
-        // The visibility of the 6 GHz speed option will not change on a Pixel device.
-        mSpeedInfo6g.mIsVisible = mWifiHotspotRepository.is6GHzBandSupported();
     }
 
     @Override
@@ -118,7 +115,11 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         boolean showDualBand = mWifiHotspotRepository.isDualBand() && available;
         if (mCurrentSecurityType == SECURITY_TYPE_WPA3_OWE ||
             mCurrentSecurityType == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
-            mSpeedInfo2g5g.mIsVisible = false;
+            if (!mWifiHotspotRepository.isEnhancedOpenOweOnlyEnabled()) {
+                mSpeedInfo2g5g.mIsVisible = false;
+            } else {
+                mSpeedInfo2g5g.mIsVisible = showDualBand;
+            }
         } else {
             log("on5gAvailableChanged(), showDualBand:" + showDualBand);
             mSpeedInfo2g5g.mIsVisible = showDualBand;
@@ -141,9 +142,11 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
        log("onSecurityTypeChanged(), securityType:" + securityType);
        if (securityType == SECURITY_TYPE_WPA3_OWE ||
            securityType == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
-           mSpeedInfo2g5g.mIsVisible = false;
-           if (mSpeedInfo2g5g.mIsChecked) {
-               mSpeedInfo2g.mIsChecked = true;
+           if (!mWifiHotspotRepository.isEnhancedOpenOweOnlyEnabled()) {
+               mSpeedInfo2g5g.mIsVisible = false;
+               if (mSpeedInfo2g5g.mIsChecked) {
+                   mSpeedInfo2g.mIsChecked = true;
+               }
            }
        }
        updateSpeedInfoMapData();
@@ -173,7 +176,9 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         mSpeedInfoMap.put(SPEED_5GHZ, mSpeedInfo5g);
         mSpeedInfoMap.put(SPEED_2GHZ_5GHZ, mSpeedInfo2g5g);
         mSpeedInfoMap.put(SPEED_6GHZ, mSpeedInfo6g);
-        mSpeedInfoMap.put(SPEED_2GHZ_6GHZ, mSpeedInfo2g6g);
+        if (Flags.enable2And6GhzHotspotSpeed()) {
+            mSpeedInfoMap.put(SPEED_2GHZ_6GHZ, mSpeedInfo2g6g);
+        }
         if (mSpeedInfoMapData != null) {
             mSpeedInfoMapData.setValue(mSpeedInfoMap);
         }

@@ -17,8 +17,10 @@ package com.android.settings.network
 
 import android.companion.AssociationRequest
 import android.companion.CompanionDeviceManager
+import android.companion.CompanionDeviceManager.FEATURE_CROSS_DEVICE_SYNC
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.UserHandle
 import com.android.server.connectivity.Flags
 import com.android.settings.R
 
@@ -30,6 +32,18 @@ fun Context.isAirplaneModeEligible() =
 /** Returns whether there is a paired watch for airplane mode sync. */
 fun Context.hasPairedWatchForAirplaneModeSync() =
     Flags.syncAirplaneModeWithWatches() &&
-        getSystemService(CompanionDeviceManager::class.java).allAssociations.any {
-            AssociationRequest.DEVICE_PROFILE_WATCH == it.deviceProfile
+        android.companion.Flags.enableDataSync() &&
+        getSystemService(CompanionDeviceManager::class.java).run {
+            val selfSupported =
+                getLocalMetadata(UserHandle.USER_ALL)
+                    .getPersistableBundle(FEATURE_CROSS_DEVICE_SYNC)
+                    ?.getBoolean(APM_SYNC_SUPPORTED) ?: false
+            val remoteSupported =
+                allAssociations.any {
+                    AssociationRequest.DEVICE_PROFILE_WATCH == it.deviceProfile &&
+                        it.getMetadata(FEATURE_CROSS_DEVICE_SYNC).getBoolean(APM_SYNC_SUPPORTED)
+                }
+            selfSupported && remoteSupported
         }
+
+const val APM_SYNC_SUPPORTED = "apm_sync_supported"

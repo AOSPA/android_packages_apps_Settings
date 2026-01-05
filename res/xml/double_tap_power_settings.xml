@@ -40,6 +40,7 @@
         <com.android.settingslib.widget.SelectorWithWidgetPreference
             android:key="gesture_double_power_tap_wallet"
             android:title="@string/double_tap_power_wallet_action_title"
+            android:enabled="false"
             settings:keywords="@string/keywords_double_tap_power_wallet_action"
             settings:controller="com.android.settings.gestures.DoubleTapPowerForWalletPreferenceController"/>
     </PreferenceCategory>

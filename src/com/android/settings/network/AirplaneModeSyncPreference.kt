@@ -17,7 +17,9 @@
 package com.android.settings.network
 
 import android.app.settings.SettingsEnums.ACTION_AIRPLANE_MODE_SYNC_TOGGLE
+import android.bluetooth.BluetoothManager
 import android.content.Context
+import android.provider.Settings
 import androidx.annotation.DrawableRes
 import com.android.settings.R
 import com.android.settings.metrics.PreferenceActionMetricsProvider
@@ -27,32 +29,38 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
 class AirplaneModeSyncPreference :
-    SwitchPreference(KEY, R.string.sync_across_devices_title), PreferenceActionMetricsProvider {
+    SwitchPreference(
+        KEY,
+        R.string.airplane_mode_sync_purpose,
+        R.string.sync_across_devices_title,
+    ), PreferenceActionMetricsProvider {
 
     override val icon: Int
         @DrawableRes get() = R.drawable.ic_sync
 
-    // TODO(b/427295832): Check with PWG for the read/write permissions/permit and sensitivityLevel.
+    override fun isEnabled(context: Context) =
+        context.getSystemService(BluetoothManager::class.java).adapter.isEnabled
+
     override fun getReadPermissions(context: Context) = SettingsGlobalStore.getReadPermissions()
 
     override fun getWritePermissions(context: Context) = SettingsGlobalStore.getWritePermissions()
 
+    // TODO(b/420946599): Check with PWG for the read/write permit and sensitivityLevel.
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    // TODO(b/427295832): Add functionality for Airplane Mode Sync and the right place for it.
     override fun storage(context: Context) = SettingsGlobalStore.get(context)
 
     override val sensitivityLevel
-        get() = SensitivityLevel.HIGH_SENSITIVITY
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     override val preferenceActionMetrics: Int
         get() = ACTION_AIRPLANE_MODE_SYNC_TOGGLE
 
     companion object {
-        const val KEY = "airplane_mode_sync"
+        const val KEY = Settings.Global.AIRPLANE_MODE_SYNC
     }
 }

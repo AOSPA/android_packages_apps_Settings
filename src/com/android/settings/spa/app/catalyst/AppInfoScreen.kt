@@ -36,6 +36,7 @@ import com.android.settings.applications.specialaccess.InstallUnknownAppsAppDeta
 import com.android.settings.applications.specialaccess.InstallUnknownAppsAppDetailScreen.Companion.installUnknownAppsFilter
 import com.android.settings.applications.specialaccess.ManageWriteSettingsAppDetailScreen
 import com.android.settings.applications.specialaccess.ManageWriteSettingsAppDetailScreen.Companion.manageWriteSettingsFilter
+import com.android.settings.applications.specialaccess.SpecialAccessAppDetailScreen
 import com.android.settings.applications.specialaccess.SpecialAccessAppDetailScreen.Companion.hasSpecialAccessPermission
 import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppDetailScreen
 import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppDetailScreen.Companion.writeSystemPreferencesFilter
@@ -43,26 +44,61 @@ import com.android.settings.applications.specialaccess.pictureinpicture.PictureI
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen.Companion.pictureInPictureFilter
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.KeyParametersSchema
+import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.ValidatedKeyParameters
+import com.android.settingslib.metadata.packageName
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.withAppPackageName
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
+import kotlin.let
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 @ProvidePreferenceScreen(AppInfoScreen.KEY, parameterized = true)
-open class AppInfoScreen(context: Context, override val arguments: Bundle) :
-    PreferenceScreenMixin, PreferenceTitleProvider, PreferenceAvailabilityProvider {
-    private val packageName = arguments.packageName!!
+open class AppInfoScreen
+private constructor(
+    val context: Context,
+    @Deprecated(
+        "This property will be removed once the catalyst framework stops passing the arguments as a bundle. Use the keyParameters instead."
+    )
+    final override val arguments: Bundle?,
+    final override val keyParameters: ValidatedKeyParameters?,
+) : PreferenceScreenMixin, PreferenceTitleProvider, PreferenceAvailabilityProvider {
+
+    private val packageName: String =
+        if (CatalystFlags.catalystUseKeyParameters()) {
+            keyParameters!!.packageName
+        } else {
+            arguments!!.packageName
+        }
 
     private val appInfo = context.getApplicationInfo(packageName)
 
+    @Deprecated(
+        "This constructor will be removed once the catalyst framework stops passing the arguments as a bundle. Use the other constructor instead."
+    )
+    constructor(context: Context, args: Bundle) : this(context, args, null)
+
+    constructor(
+        context: Context,
+        keyParameters: ValidatedKeyParameters,
+    ) : this(context, null, keyParameters)
+
     override val key: String
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.installed_app_detail_settings_screen_purpose
 
     override fun getMetricsCategory() = SettingsEnums.APPLICATIONS_INSTALLED_APP_DETAILS
 
@@ -91,35 +127,88 @@ open class AppInfoScreen(context: Context, override val arguments: Bundle) :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +PreferenceCategory("advanced_app_info", R.string.advanced_apps) += {
-                arguments.putString("source", SOURCE)
+            +PreferenceCategory("advanced_app_info",R.string.advanced_app_info_purpose, R.string.advanced_apps) += {
+                var newKeyParameters: ValidatedKeyParameters? = null
+                if (CatalystFlags.catalystUseKeyParameters()) {
+                    newKeyParameters =
+                        SpecialAccessAppDetailScreen.Companion.parametersSchema.prepareWith(
+                            keyParameters,
+                            SpecialAccessAppDetailScreen.KEY_INTENT_SOURCE to SOURCE,
+                        )
+                } else {
+                    arguments!!.putString("source", SOURCE)
+                }
+
                 appInfo?.let {
                     if (hasSpecialAccessPermission(context, it, ::displayOverOtherAppsFilter)) {
-                        +(DisplayOverOtherAppsAppDetailScreen.KEY args arguments)
+                        if (CatalystFlags.catalystUseKeyParameters()) {
+                            +(DisplayOverOtherAppsAppDetailScreen.KEY withParameters
+                                newKeyParameters!!)
+                        } else {
+                            +(DisplayOverOtherAppsAppDetailScreen.KEY args arguments!!)
+                        }
                     }
                     if (hasSpecialAccessPermission(context, it, ::manageWriteSettingsFilter)) {
-                        +(ManageWriteSettingsAppDetailScreen.KEY args arguments)
+                        if (CatalystFlags.catalystUseKeyParameters()) {
+                            +(ManageWriteSettingsAppDetailScreen.KEY withParameters
+                                newKeyParameters!!)
+                        } else {
+                            +(ManageWriteSettingsAppDetailScreen.KEY args arguments!!)
+                        }
                     }
                     if (hasSpecialAccessPermission(context, it, ::pictureInPictureFilter)) {
-                        +(PictureInPictureAppDetailScreen.KEY args arguments)
+                        if (CatalystFlags.catalystUseKeyParameters()) {
+                            +(PictureInPictureAppDetailScreen.KEY withParameters newKeyParameters!!)
+                        } else {
+                            +(PictureInPictureAppDetailScreen.KEY args arguments!!)
+                        }
                     }
                     if (hasSpecialAccessPermission(context, it, ::installUnknownAppsFilter)) {
-                        +(InstallUnknownAppsAppDetailScreen.KEY args arguments)
+                        if (CatalystFlags.catalystUseKeyParameters()) {
+                            +(InstallUnknownAppsAppDetailScreen.KEY withParameters
+                                newKeyParameters!!)
+                        } else {
+                            +(InstallUnknownAppsAppDetailScreen.KEY args arguments!!)
+                        }
                     }
                     if (hasSpecialAccessPermission(context, it, ::alarmsAndRemindersFilter)) {
-                        +(AlarmsAndRemindersAppDetailScreen.KEY args arguments)
+                        if (CatalystFlags.catalystUseKeyParameters()) {
+                            +(AlarmsAndRemindersAppDetailScreen.KEY withParameters
+                                newKeyParameters!!)
+                        } else {
+                            +(AlarmsAndRemindersAppDetailScreen.KEY args arguments!!)
+                        }
                     }
                     if (hasSpecialAccessPermission(context, it, ::writeSystemPreferencesFilter)) {
-                        +(WriteSystemPreferencesAppDetailScreen.KEY args arguments)
+                        if (CatalystFlags.catalystUseKeyParameters()) {
+                            +(WriteSystemPreferencesAppDetailScreen.KEY withParameters
+                                newKeyParameters!!)
+                        } else {
+                            +(WriteSystemPreferencesAppDetailScreen.KEY args arguments!!)
+                        }
                     }
                 }
             }
         }
 
-    companion object {
+    companion object : ParameterizedPreferenceScreenArgumentsFactory {
         const val KEY = "installed_app_detail_settings_screen"
         const val SOURCE = "appinfo"
 
+        @JvmStatic override val parametersSchema = KeyParametersSchema { withAppPackageName() }
+
+        @JvmStatic
+        override fun keyParameters(context: Context): Flow<ValidatedKeyParameters> {
+            // TODO (b/457649430): when the catalyst framework stops passing the arguments as a
+            // bundle: replace the parameters(context) call to the actual implementation,
+            // or make this function the primary implementation and the legacy parameters() should
+            // call this one.
+            return parameters(context).map { bundle -> parametersSchema.prepare(bundle) }
+        }
+
+        @Deprecated(
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use keyParameters instead."
+        )
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
             AppListRepositoryImpl(context)

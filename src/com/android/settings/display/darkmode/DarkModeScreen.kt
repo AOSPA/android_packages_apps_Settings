@@ -106,13 +106,21 @@ abstract class BaseDarkModeScreen(context: Context) :
             +DarkModeMainSwitchPreference(darkModeStorage)
             +TwilightLocationPreference()
             if (android.view.accessibility.Flags.forceInvertColor()) {
-                +PreferenceCategory("dark_theme_group", R.string.dark_theme_version_category) += {
+                +PreferenceCategory(
+                    key = "dark_theme_group",
+                    purpose = R.string.dark_theme_group_purpose,
+                    title = R.string.dark_theme_version_category,
+                ) += {
                     val modeStorage = DarkThemeModeStorage(context)
                     +StandardDarkModeSelectorPreference(modeStorage)
                     +ExpandedDarkModeSelectorPreference(modeStorage)
                 }
             }
-            +PreferenceCategory("display_category", R.string.dark_theme_timing_category) += {
+            +PreferenceCategory(
+                key = "display_category",
+                purpose = R.string.display_category_purpose,
+                title = R.string.dark_theme_timing_category,
+            ) += {
                 val uiModeManager = context.getSystemService(UiModeManager::class.java)
                 +DarkModeSchedulePreference(context)
                 +StartTimePreference(uiModeManager)
@@ -176,6 +184,10 @@ open class DarkModeScreen(context: Context) : BaseDarkModeScreen(context) {
     override val key
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.dark_ui_mode_purpose
+
     companion object {
         const val KEY = "dark_ui_mode"
     }
@@ -185,6 +197,10 @@ open class DarkModeScreen(context: Context) : BaseDarkModeScreen(context) {
 open class DarkModeScreenOnAccessibility(context: Context) : BaseDarkModeScreen(context) {
     override val key
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.dark_ui_mode_accessibility_purpose
 
     override val icon: Int
         get() = R.drawable.ic_dark_ui

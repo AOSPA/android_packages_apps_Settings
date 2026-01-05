@@ -153,6 +153,34 @@ public class WifiHotspotSecurityViewModelTest {
     }
 
     @Test
+    public void onSpeedTypeChanged_speed2g6g_wpa3TransitionAllowed_setEnabledCorrectly() {
+        when(mWifiHotspotRepository.isWpa3TransitionAllowedFor2g6gDbs()).thenReturn(true);
+
+        mViewModel.onSpeedTypeChanged(WifiHotspotRepository.SPEED_2GHZ_6GHZ);
+
+        assertItemEnabled(true, true, false, false);
+    }
+
+    @Test
+    public void onSpeedTypeChanged_speed2g6g_wpa3TransitionNotAllowed_setEnabledCorrectly() {
+        when(mWifiHotspotRepository.isWpa3TransitionAllowedFor2g6gDbs()).thenReturn(false);
+
+        mViewModel.onSpeedTypeChanged(WifiHotspotRepository.SPEED_2GHZ_6GHZ);
+
+        assertItemEnabled(true, false, false, false);
+    }
+
+    @Test
+    public void onSpeedTypeChanged_speed2g5g_from6g_wpa3TransitionAllowed_setEnabledCorrectly() {
+        when(mWifiHotspotRepository.isWpa3TransitionAllowedFor2g6gDbs()).thenReturn(true);
+
+        // Simulate coming from a 6Ghz speed to 2Ghz_5Ghz. Ensure all options enabled.
+        mViewModel.onSpeedTypeChanged(WifiHotspotRepository.SPEED_2GHZ_5GHZ);
+
+        assertItemEnabled(true, true, true, true);
+    }
+
+    @Test
     public void handleRadioButtonClicked_keyWpa3_setSecurityTypeCorrectly() {
         mViewModel.handleRadioButtonClicked(KEY_SECURITY_WPA3);
 

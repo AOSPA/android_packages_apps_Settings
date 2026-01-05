@@ -28,22 +28,19 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.`when` as whenever
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
-import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 @UiThreadTest
 class SimDialogActivityTest {
-    @get:Rule
-    val mockito: MockitoRule = MockitoJUnit.rule()
+    @get:Rule val mockito: MockitoRule = MockitoJUnit.rule()
 
-    @Spy
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    @Spy private val context: Context = ApplicationProvider.getApplicationContext()
 
-    @Mock
-    private lateinit var userManager: UserManager
+    @Mock private lateinit var userManager: UserManager
 
     private lateinit var activity: SimDialogActivity
 
@@ -52,6 +49,7 @@ class SimDialogActivityTest {
         activity = MockSimDialogActivity()
         whenever(context.userManager).thenReturn(userManager)
         whenever(userManager.isGuestUser).thenReturn(false)
+        whenever(userManager.isAdminUser).thenReturn(true)
         whenever(userManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS))
             .thenReturn(false)
     }
@@ -62,8 +60,8 @@ class SimDialogActivityTest {
     }
 
     @Test
-    fun isUiRestricted_isGuestUser_returnTrue() {
-        whenever(userManager.isGuestUser).thenReturn(true)
+    fun isUiRestricted_isNotAdminUser_returnTrue() {
+        whenever(userManager.isAdminUser).thenReturn(false)
 
         assertThat(activity.isUiRestricted).isTrue()
     }

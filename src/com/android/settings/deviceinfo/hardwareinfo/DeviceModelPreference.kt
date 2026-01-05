@@ -33,6 +33,9 @@ class DeviceModelPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.hardware_info_device_model_purpose
+
     override val title: Int
         get() = R.string.model_info
 

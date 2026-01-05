@@ -20,6 +20,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.safetycenter.SafetyCenterIssue
 import android.util.Log
+import androidx.annotation.DrawableRes
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
@@ -47,69 +48,31 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
 
     private var bannerGroup: BannerMessagePreferenceGroup? = null
     private var bannerGroupManager: SafetyIssuesBannerGroupManager? = null
-    private var viewModel: LiveSafetyCenterViewModel? = null
-    private var fragmentManager: FragmentManager? = null
-    private var activityTaskId: Int? = null
+    var viewModel: LiveSafetyCenterViewModel? = null
+    var focusedIssueKey: FocusedIssueKey? = null
+    var fragmentManager: FragmentManager? = null
+    var activityTaskId: Int? = null
 
     // Configuration for subpage behavior
-    private var relatedSafetySources: List<String> = emptyList()
-    private var isSubpage = false
-    private var illustrationPreference: IllustrationPreference? = null
+    var isSubpage = false
+    var relatedSafetySources: List<String> = emptyList()
+    var illustrationPreferenceKey: CharSequence? = null
+    @DrawableRes var illustrationResId: Int? = null
+    var illustrationPreference: IllustrationPreference? = null
 
-    /**
-     * Sets the [LiveSafetyCenterViewModel] and [LifecycleOwner] for this controller. Observes
-     * [SafetyCenterUiData] changes to update the UI.
-     *
-     * @param viewModel The ViewModel providing Safety Center data.
-     * @param owner The LifecycleOwner scoping the LiveData observation.
-     */
-    fun setViewModelAndLifecycle(viewModel: LiveSafetyCenterViewModel, owner: LifecycleOwner) {
-        this.viewModel = viewModel
-        viewModel.safetyCenterUiLiveData.observe(owner) { data ->
+    override fun onViewCreated(owner: LifecycleOwner) {
+        if (viewModel == null) {
+            Log.w(TAG, "[$preferenceKey] ViewModel not set, cannot observe LiveData")
+            return
+        }
+        viewModel!!.safetyCenterUiLiveData.observe(owner) { data ->
             if (data == null) {
-                Log.d(TAG, "[$preferenceKey] LiveData received null, hiding bannerGroup")
-                bannerGroup?.isVisible = false
-                if (isSubpage) illustrationPreference?.isVisible = true
+                Log.d(TAG, "[$preferenceKey] LiveData received null")
                 return@observe
             }
             Log.d(TAG, "[$preferenceKey] safetyCenterUiLiveData observer notified")
             bannerGroup?.let { group -> updatePreferenceUi(group, data) }
         }
-    }
-
-    /**
-     * Sets the [FragmentManager] to be used for showing DialogFragments. This should typically be
-     * the childFragmentManager of the hosting fragment.
-     *
-     * @param fragmentManager The FragmentManager instance.
-     */
-    fun setFragmentManager(fragmentManager: FragmentManager) {
-        this.fragmentManager = fragmentManager
-    }
-
-    /**
-     * Sets the task ID of the hosting Activity.
-     *
-     * @param taskId The task ID of the hosting Activity.
-     */
-    fun setActivityTaskId(taskId: Int) {
-        this.activityTaskId = taskId
-    }
-
-    /**
-     * Configures the controller for use on a subpage.
-     *
-     * @param sources A list of safety source IDs to filter issues by.
-     * @param illustrationPref The [IllustrationPreference] to hide when issues are present.
-     */
-    fun setSubpageSafetySourcesAndIllustration(
-        sources: List<String>,
-        illustrationPref: IllustrationPreference?,
-    ) {
-        this.isSubpage = true
-        this.relatedSafetySources = sources
-        this.illustrationPreference = illustrationPref
-        Log.d(TAG, "[$preferenceKey] Configured for subpage with sources: $sources")
     }
 
     override fun getAvailabilityStatus(): Int {
@@ -118,6 +81,10 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
+        if (illustrationPreferenceKey != null) {
+            illustrationPreference = screen.findPreference(illustrationPreferenceKey!!)
+            illustrationPreference?.imageDrawable = mContext.getDrawable(illustrationResId!!)
+        }
         bannerGroup = screen.findPreference(preferenceKey)
         bannerGroup?.let {
             // Set titles for the expand/collapse buttons
@@ -126,9 +93,14 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
             it.setCollapseTitle(
                 mContext.getString(R.string.safety_center_issues_banner_group_collapsible_title)
             )
-        }
-        if (isSubpage) {
-            illustrationPreference?.isVisible = true
+
+            val model = viewModel
+            if (model != null) {
+                updatePreferenceUi(
+                    bannerGroup as BannerMessagePreferenceGroup,
+                    model.getCurrentSafetyCenterDataAsUiData(),
+                )
+            }
         }
     }
 
@@ -207,6 +179,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
             newActiveIssues = activeIssues,
             newDismissedIssues = emptyList(),
             resolvedIssues = data.resolvedIssues,
+            focusedIssueKey = focusedIssueKey,
         )
         bannerGroup.isVisible = !activeIssues.isEmpty()
     }
@@ -230,6 +203,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
             newActiveIssues = activeIssues,
             newDismissedIssues = dismissedIssues,
             resolvedIssues = data.resolvedIssues,
+            focusedIssueKey = focusedIssueKey,
         )
 
         illustrationPreference?.isVisible = activeIssues.isEmpty()

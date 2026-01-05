@@ -17,6 +17,7 @@
 package com.android.settings.network
 
 import android.app.settings.SettingsEnums.ACTION_AIRPLANE_MODE_SYNC_TOGGLE
+import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.provider.Settings
 import androidx.preference.SwitchPreferenceCompat
@@ -30,21 +31,39 @@ import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowBluetoothAdapter
 
 @RunWith(AndroidJUnit4::class)
+@Config(shadows = [ShadowBluetoothAdapter::class])
 class AirplaneModeSyncPreferenceTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val preference = AirplaneModeSyncPreference()
+    private val bluetoothAdapter: ShadowBluetoothAdapter =
+        Shadow.extract(BluetoothAdapter.getDefaultAdapter())
 
     @Test
     fun key_returnsCorrectKey() {
-        assertThat(preference.key).isEqualTo(AirplaneModeSyncPreference.KEY)
+        assertThat(preference.key).isEqualTo(Settings.Global.AIRPLANE_MODE_SYNC)
     }
 
     @Test
     fun title_returnsCorrectTitle() {
         assertThat(preference.title).isEqualTo(R.string.sync_across_devices_title)
+    }
+
+    @Test
+    fun isEnabled_bluetoothEnabled() {
+        bluetoothAdapter.setEnabled(true)
+        assertThat(preference.isEnabled(context)).isTrue()
+    }
+
+    @Test
+    fun isEnabled_bluetoothDisabled() {
+        bluetoothAdapter.setEnabled(false)
+        assertThat(preference.isEnabled(context)).isFalse()
     }
 
     @Test
@@ -76,7 +95,7 @@ class AirplaneModeSyncPreferenceTest {
 
     @Test
     fun sensitivityLevel_isNoSensitivity() {
-        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.HIGH_SENSITIVITY)
+        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.NO_SENSITIVITY)
     }
 
     @Test
@@ -86,40 +105,41 @@ class AirplaneModeSyncPreferenceTest {
 
     @Test
     fun switch_isChecked_whenSettingIsTrue() {
-        Settings.Global.putInt(context.contentResolver, AirplaneModeSyncPreference.KEY, 1)
+        Settings.Global.putInt(context.contentResolver, Settings.Global.AIRPLANE_MODE_SYNC, 1)
         val switchPreference = preference.createAndBindWidget<SwitchPreferenceCompat>(context)
         assertThat(switchPreference.isChecked).isTrue()
     }
 
     @Test
     fun switch_isNotChecked_whenSettingIsNotSet() {
-        Settings.Global.putString(context.contentResolver, AirplaneModeSyncPreference.KEY, null)
+        Settings.Global.putString(context.contentResolver, Settings.Global.AIRPLANE_MODE_SYNC, null)
         val switchPreference = preference.createAndBindWidget<SwitchPreferenceCompat>(context)
         assertThat(switchPreference.isChecked).isFalse()
     }
 
     @Test
     fun switch_isNotChecked_whenSettingIsFalse() {
-        Settings.Global.putInt(context.contentResolver, AirplaneModeSyncPreference.KEY, 0)
+        Settings.Global.putInt(context.contentResolver, Settings.Global.AIRPLANE_MODE_SYNC, 0)
         val switchPreference = preference.createAndBindWidget<SwitchPreferenceCompat>(context)
         assertThat(switchPreference.isChecked).isFalse()
     }
 
     @Test
     fun performClick_togglesSetting() {
-        Settings.Global.putInt(context.contentResolver, AirplaneModeSyncPreference.KEY, 0)
+        bluetoothAdapter.setEnabled(true)
+        Settings.Global.putInt(context.contentResolver, Settings.Global.AIRPLANE_MODE_SYNC, 0)
         val switchPreference = preference.createAndBindWidget<SwitchPreferenceCompat>(context)
 
         switchPreference.performClick()
         assertThat(
-                Settings.Global.getInt(context.contentResolver, AirplaneModeSyncPreference.KEY, 0)
+                Settings.Global.getInt(context.contentResolver, Settings.Global.AIRPLANE_MODE_SYNC)
             )
             .isEqualTo(1)
         assertThat(switchPreference.isChecked).isTrue()
 
         switchPreference.performClick()
         assertThat(
-                Settings.Global.getInt(context.contentResolver, AirplaneModeSyncPreference.KEY, 1)
+                Settings.Global.getInt(context.contentResolver, Settings.Global.AIRPLANE_MODE_SYNC)
             )
             .isEqualTo(0)
         assertThat(switchPreference.isChecked).isFalse()

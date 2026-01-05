@@ -110,7 +110,7 @@ import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
 import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
 import com.android.settings.supervision.SupervisionDashboardScreen
 import com.android.settings.supervision.SupervisionPinManagementScreen
-import com.android.settings.supervision.SupervisionWebContentFiltersScreen
+import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
 import com.android.settings.system.ResetDashboardScreen
 import com.android.settings.system.SystemDashboardScreen
 import com.android.settings.vpn2.VpnSettingsScreen

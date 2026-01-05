@@ -509,8 +509,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     }
 
     private boolean isUseDisplaySettingEnabled() {
-        return mInjector.getFlags().resolutionAndEnableConnectedDisplaySetting()
-                && !mInjector.getFlags().displayTopologyPaneInDisplayList();
+        return !mInjector.getFlags().displayTopologyPaneInDisplayList();
     }
 
     private void showTextWhenNoDisplaysToShow(@NonNull final PrefRefresh screen, int position) {
@@ -563,21 +562,19 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 && mInjector.isProjectedModeEnabled()) {
             addConnectionPreference(refresh, display, position);
         }
-        if (mInjector.getFlags().resolutionAndEnableConnectedDisplaySetting()) {
-            // Do not show the footer about changing resolution affecting apps. This is not in the
-            // UX design for v2, and there is no good place to put it, since (a) if it is on the
-            // bottom of the screen, the external resolution setting must be below the built-in
-            // display options for the per-display fragment, which is too hidden for the per-display
-            // fragment, or (b) the footer is above the Built-in display settings, rather than the
-            // bottom of the screen, which contradicts the visual style and purpose of the
-            // FooterPreference class, or (c) we must hide the built-in display settings, which is
-            // inconsistent with the topology pane, which shows that display.
-            // TODO(b/352648432): probably remove footer once the pane and rest of v2 UI is in
-            // place.
-            if (includeV1Helpers && display.isEnabled() == DisplayIsEnabled.YES) {
-                addFooterPreference(
-                        refresh, EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE);
-            }
+        // Do not show the footer about changing resolution affecting apps. This is not in the
+        // UX design for v2, and there is no good place to put it, since (a) if it is on the
+        // bottom of the screen, the external resolution setting must be below the built-in
+        // display options for the per-display fragment, which is too hidden for the per-display
+        // fragment, or (b) the footer is above the Built-in display settings, rather than the
+        // bottom of the screen, which contradicts the visual style and purpose of the
+        // FooterPreference class, or (c) we must hide the built-in display settings, which is
+        // inconsistent with the topology pane, which shows that display.
+        // TODO(b/352648432): probably remove footer once the pane and rest of v2 UI is in
+        // place.
+        if (includeV1Helpers && display.isEnabled() == DisplayIsEnabled.YES) {
+            addFooterPreference(
+                    refresh, EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE);
         }
         if (mInjector.getFlags().displaySizeConnectedDisplaySetting()
                 && !isDisplayInMirroringMode()) {
@@ -765,8 +762,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             launchResolutionSelector(display.getId());
             return true;
         });
-        pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES
-                && mInjector.getFlags().resolutionAndEnableConnectedDisplaySetting());
+        pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES);
     }
 
     private void addSizePreference(PrefRefresh refresh, DisplayDevice display, int position) {

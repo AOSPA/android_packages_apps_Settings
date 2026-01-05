@@ -16,11 +16,14 @@
 
 package com.android.settings.network
 
+import android.app.Application
 import android.app.settings.SettingsEnums.AIRPLANE_MODE_SETTINGS
 import android.companion.AssociationInfo
 import android.companion.AssociationRequest
 import android.companion.CompanionDeviceManager
-import android.content.Context
+import android.companion.CompanionDeviceManager.FEATURE_CROSS_DEVICE_SYNC
+import android.companion.Flags.FLAG_ENABLE_DATA_SYNC
+import android.content.Context.COMPANION_DEVICE_SERVICE
 import android.os.PersistableBundle
 import android.os.UserHandle
 import android.platform.test.annotations.DisableFlags
@@ -31,7 +34,7 @@ import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.ext.truth.content.IntentSubject.assertThat
-import com.android.server.connectivity.Flags
+import com.android.server.connectivity.Flags.FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES
 import com.android.settings.R
 import com.android.settings.Settings.AirplaneModeSettingsActivity
 import com.android.settings.Settings.NetworkDashboardActivity
@@ -40,6 +43,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.TestScope
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -49,20 +53,30 @@ import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowContextImpl
 
 @RunWith(AndroidJUnit4::class)
 class AirplaneModeSettingsScreenTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
-    private val context = ApplicationProvider.getApplicationContext<Context>()
+    private val context = ApplicationProvider.getApplicationContext<Application>()
     private val screen = AirplaneModeSettingsScreen(context)
-    private val companionDeviceManager =
-        shadowOf(context.getSystemService(CompanionDeviceManager::class.java))
     private val lifecycleContext =
         mock<PreferenceLifecycleContext> {
             on { requirePreference<Preference>(AirplaneModeSettingsScreen.KEY) } doReturn
                 mock<Preference>()
         }
+    private val mockCompanionDeviceManager =
+        mock<CompanionDeviceManager> {
+            on { getLocalMetadata(UserHandle.USER_ALL) } doReturn PersistableBundle()
+        }
+
+    @Before
+    fun setUp() {
+        Shadow.extract<ShadowContextImpl>(context.baseContext)
+            .setSystemService(COMPANION_DEVICE_SERVICE, mockCompanionDeviceManager)
+    }
 
     @Test
     fun key() {
@@ -85,40 +99,37 @@ class AirplaneModeSettingsScreenTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES)
+    @EnableFlags(FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES, FLAG_ENABLE_DATA_SYNC)
     fun hasPairedWatch_isAvailable() {
-        companionDeviceManager.addAssociation(
-            AssociationInfo.Builder(1, UserHandle.myUserId(), context.packageName)
-                .setDeviceProfile(AssociationRequest.DEVICE_PROFILE_WATCH)
-                .setDisplayName("Smart Watch")
-                .setMetadata(PersistableBundle())
-                .build()
-        )
+        addWatchAssociation()
 
         assertThat(screen.isAvailable(context)).isTrue()
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES)
+    @EnableFlags(FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES, FLAG_ENABLE_DATA_SYNC)
     fun noPairedWatch_isNotAvailable() {
         assertThat(screen.isAvailable(context)).isFalse()
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES)
-    fun flagDisabled_isNotAvailable() {
-        companionDeviceManager.addAssociation(
-            AssociationInfo.Builder(1, UserHandle.myUserId(), context.packageName)
-                .setDeviceProfile(AssociationRequest.DEVICE_PROFILE_WATCH)
-                .setDisplayName("Smart Watch")
-                .setMetadata(PersistableBundle())
-                .build()
-        )
+    @EnableFlags(FLAG_ENABLE_DATA_SYNC)
+    @DisableFlags(FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES)
+    fun apmFlagDisabled_isNotAvailable() {
+        addWatchAssociation()
 
         assertThat(screen.isAvailable(context)).isFalse()
     }
 
     @Test
+    @EnableFlags(FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES)
+    @DisableFlags(FLAG_ENABLE_DATA_SYNC)
+    fun dataSyncFlagDisabled_isNotAvailable() {
+        addWatchAssociation()
+
+        assertThat(screen.isAvailable(context)).isFalse()
+    }
+
     fun screen_isIndexable() {
         assertThat(screen.indexable).isTrue()
     }
@@ -253,5 +264,26 @@ class AirplaneModeSettingsScreenTest {
         val footer = AirplaneModeSettingsFooter()
 
         assertThat(footer.title).isEqualTo(R.string.airplane_mode_sync_description)
+    }
+
+    private fun addWatchAssociation() {
+        val metadata =
+            PersistableBundle().apply {
+                putPersistableBundle(
+                    FEATURE_CROSS_DEVICE_SYNC,
+                    PersistableBundle().apply { putBoolean(APM_SYNC_SUPPORTED, true) },
+                )
+            }
+        mockCompanionDeviceManager.stub {
+            on { allAssociations } doReturn
+                listOf(
+                    AssociationInfo.Builder(1, UserHandle.myUserId(), context.packageName)
+                        .setDeviceProfile(AssociationRequest.DEVICE_PROFILE_WATCH)
+                        .setDisplayName("Smart Watch")
+                        .setMetadata(metadata)
+                        .build()
+                )
+            on { getLocalMetadata(UserHandle.USER_ALL) } doReturn metadata
+        }
     }
 }

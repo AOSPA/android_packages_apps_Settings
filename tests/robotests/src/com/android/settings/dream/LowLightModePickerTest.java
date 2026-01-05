@@ -69,12 +69,6 @@ public class LowLightModePickerTest {
                         Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_NONE));
 
         when(mBackend.getLowLightDisplayBehavior())
-                .thenReturn(Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_SCREEN_OFF);
-        assertThat(mPicker.getDefaultKey())
-                .isEqualTo(LowLightModePicker.getKeyFromSetting(
-                        Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_SCREEN_OFF));
-
-        when(mBackend.getLowLightDisplayBehavior())
                 .thenReturn(Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_NO_DREAM);
         assertThat(mPicker.getDefaultKey())
                 .isEqualTo(LowLightModePicker.getKeyFromSetting(
@@ -96,14 +90,6 @@ public class LowLightModePickerTest {
                 Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_NONE);
     }
 
-    @Test
-    public void testSetDefaultKey_ScreenOff() {
-        final String key = LowLightModePicker.getKeyFromSetting(
-                Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_SCREEN_OFF);
-        mPicker.setDefaultKey(key);
-        verify(mBackend).setLowLightDisplayBehavior(
-                Settings.Secure.LOW_LIGHT_DISPLAY_BEHAVIOR_SCREEN_OFF);
-    }
 
     @Test
     public void testSetDefaultKey_LowLightClockDream() {

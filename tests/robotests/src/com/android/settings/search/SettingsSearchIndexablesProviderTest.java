@@ -28,6 +28,7 @@ import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.search.SearchIndexableData;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.After;
 import org.junit.Before;
@@ -185,6 +186,65 @@ public class SettingsSearchIndexablesProviderTest {
     }
 
     @Test
+    public void getInjectionIndexableRawData_withKeywords_keywordsAreSetCorrectly() {
+        // Arrange
+        final ActivityTile tileWithKeywords = createMockTile("title with keywords",
+                new String[]{"key1", "word2"});
+        final DashboardCategory category = new DashboardCategory("key");
+        category.addTile(tileWithKeywords);
+        when(mFakeFeatureFactory.dashboardFeatureProvider.getAllCategories())
+                .thenReturn(Arrays.asList(category));
+
+        // Act
+        final List<SearchIndexableRaw> rawData = mProvider.getInjectionIndexableRawData(mContext);
+
+        // Assert
+        assertThat(rawData).hasSize(1);
+        final SearchIndexableRaw raw = rawData.get(0);
+        assertThat(raw.title).isEqualTo("title with keywords");
+        assertThat(raw.keywords).isEqualTo("key1,word2");
+    }
+
+    @Test
+    public void getInjectionIndexableRawData_withEmptyKeywords_keywordsAreEmpty() {
+        // Arrange
+        final ActivityTile tileWithEmptyKeywords = createMockTile("title with empty keywords",
+                new String[]{});
+        final DashboardCategory category = new DashboardCategory("key");
+        category.addTile(tileWithEmptyKeywords);
+        when(mFakeFeatureFactory.dashboardFeatureProvider.getAllCategories())
+                .thenReturn(Arrays.asList(category));
+
+        // Act
+        final List<SearchIndexableRaw> rawData = mProvider.getInjectionIndexableRawData(mContext);
+
+        // Assert
+        assertThat(rawData).hasSize(1);
+        final SearchIndexableRaw raw = rawData.get(0);
+        assertThat(raw.title).isEqualTo("title with empty keywords");
+        assertThat(raw.keywords).isEmpty();
+    }
+
+    @Test
+    public void getInjectionIndexableRawData_withNullKeywords_keywordsAreEmpty() {
+        // Arrange
+        final ActivityTile tileWithNullKeywords = createMockTile("title with null keywords", null);
+        final DashboardCategory category = new DashboardCategory("key");
+        category.addTile(tileWithNullKeywords);
+        when(mFakeFeatureFactory.dashboardFeatureProvider.getAllCategories())
+                .thenReturn(Arrays.asList(category));
+
+        // Act
+        final List<SearchIndexableRaw> rawData = mProvider.getInjectionIndexableRawData(mContext);
+
+        // Assert
+        assertThat(rawData).hasSize(1);
+        final SearchIndexableRaw raw = rawData.get(0);
+        assertThat(raw.title).isEqualTo("title with null keywords");
+        assertThat(raw.keywords).isEmpty();
+    }
+
+    @Test
     public void isEligibleForIndexing_isSettingsInjectedItem_shouldReturnFalse() {
         final ActivityInfo activityInfo = new ActivityInfo();
         activityInfo.packageName = PACKAGE_NAME;
@@ -217,6 +277,16 @@ public class SettingsSearchIndexablesProviderTest {
                 CategoryKey.CATEGORY_CONNECT);
 
         assertThat(mProvider.isEligibleForIndexing(PACKAGE_NAME, activityTile)).isFalse();
+    }
+
+    private ActivityTile createMockTile(String title, String[] keywords) {
+        final ActivityTile tile = mock(ActivityTile.class);
+        when(tile.getKeywords(mContext)).thenReturn(keywords);
+        when(tile.getTitle(mContext)).thenReturn(title);
+        when(tile.isSearchable()).thenReturn(true);
+        when(tile.getPackageName()).thenReturn("pkg");
+        when(tile.getCategory()).thenReturn("key");
+        return tile;
     }
 
     @Implements(CategoryManager.class)

@@ -50,6 +50,10 @@ class SupervisionPinManagementScreen :
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.supervision_pin_management_purpose
+
     override val preferenceActionMetrics: Int
         get() = ACTION_SUPERVISION_MANAGE_PIN
 
@@ -75,8 +79,14 @@ class SupervisionPinManagementScreen :
 
     // There is an implicit dependency on SupervisionSetupRecoveryPreference due to `getSummary`,
     // which can be removed if `SupervisionManager.supervisionRecoveryInfo` supports
-    // observer/listener mechanism on change.
-    override fun dependencies(context: Context) = arrayOf(SupervisionSetupRecoveryPreference.KEY)
+    // observer/listener mechanism on change. Similarly, the `isAvailable` is dependent on
+    // `SupervisionPinRecoveryPreference` and `SupervisionDeletePinPreference`.
+    override fun dependencies(context: Context) =
+        arrayOf(
+            SupervisionSetupRecoveryPreference.KEY,
+            SupervisionPinRecoveryPreference.KEY,
+            SupervisionDeletePinPreference.KEY,
+        )
 
     override fun isAvailable(context: Context) = context.isSupervisingCredentialSet()
 
@@ -125,12 +135,18 @@ class SupervisionPinManagementScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +SupervisionSetupRecoveryPreference()
-            +UntitledPreferenceCategoryMetadata(GROUP_KEY) += {
+            +UntitledPreferenceCategoryMetadata(
+                key = GROUP_KEY,
+                purpose = R.string.pin_management_group_purpose,
+            ) += {
                 +SupervisionPinRecoveryPreference()
                 +SupervisionChangePinPreference()
                 +SupervisionUpdateRecoveryEmailPreference()
             }
-            +UntitledPreferenceCategoryMetadata("delete_pin_group") += {
+            +UntitledPreferenceCategoryMetadata(
+                key = "delete_pin_group",
+                purpose = R.string.delete_pin_group_purpose,
+            ) += {
                 +SupervisionDeletePinPreference()
             }
             +SupervisionPinManagementFooterPreference()

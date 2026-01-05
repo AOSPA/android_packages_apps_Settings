@@ -52,6 +52,10 @@ open class AirplaneModeSettingsScreen(context: Context) :
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.airplane_mode_settings_purpose
+
     override fun isFlagEnabled(context: Context) = Flags.syncAirplaneModeWithWatches()
 
     override fun isAvailable(context: Context) =
@@ -115,6 +119,9 @@ open class AirplaneModeSettingsScreen(context: Context) :
 class AirplaneModeSettingsFooter : FooterPreferenceMetadata, FooterPreferenceBinding {
     override val key: String
         get() = KEY
+
+    override val purpose: Int
+        @StringRes get() = R.string.airplane_mode_footer_purpose
 
     override val title: Int
         @StringRes get() = R.string.airplane_mode_sync_description

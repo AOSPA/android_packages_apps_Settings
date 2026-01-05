@@ -793,12 +793,12 @@
     <string name="zone_info_offset_and_name"><xliff:g id="time_type" example="Pacific Time">%2$s</xliff:g> (<xliff:g id="offset" example="GMT-08:00">%1$s</xliff:g>)</string>
     <!-- Label describing a time zone and a follow-up sentence [CHAR LIMIT=NONE] -->
     <string name="zone_info_footer_first_sentence">Uses <xliff:g id="offset_and_name" example="Pacific Time (GMT-08:00)">%1$s</xliff:g>. <xliff:g id="second_sentence" example="Pacific Daylight Time starts on Mar 11 2018.">%2$s</xliff:g></string>
-    <!-- Label describing the upcoming daylight savings time change [CHAR LIMIT=NONE] -->
+    <!-- Label describing the upcoming daylight saving time change [CHAR LIMIT=NONE] -->
     <string name="zone_info_footer_second_sentence"><xliff:g id="dst_time_type" example="Pacific Daylight Time">%1$s</xliff:g> starts on <xliff:g id="transition_date" example="Mar 11 2018">%2$s</xliff:g>.</string>
     <!-- Label describing a time zone without DST [CHAR LIMIT=NONE] -->
-    <string name="zone_info_footer_no_dst">Uses <xliff:g id="offset_and_name" example="GMT-08:00 Pacific Time">%1$s</xliff:g>. No daylight savings time.</string>
-    <!-- Describes the time type "daylight savings time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
-    <string name="zone_time_type_dst">Daylight savings time</string>
+    <string name="zone_info_footer_no_dst">Uses <xliff:g id="offset_and_name" example="GMT-08:00 Pacific Time">%1$s</xliff:g>. No daylight saving time.</string>
+    <!-- Describes the time type "daylight saving time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
+    <string name="zone_time_type_dst">Daylight saving time</string>
     <!-- Describes the time type "standard time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
     <string name="zone_time_type_standard">Standard time</string>
     <!-- The menu item to switch to selecting a time zone by region (default) [CHAR LIMIT=30] -->
@@ -2276,6 +2276,12 @@
     <string name="external_display_use_title">Use external display</string>
     <!-- External Display resolution settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="external_display_resolution_settings_title">Display resolution</string>
+    <!-- External Display resolution and refresh rate settings. The title of the screen. -->
+    <string name="external_display_resolution_refresh_rate_settings_title">Resolution and refresh rate</string>
+    <!-- External Display refresh rate options section. -->
+    <string name="external_display_refresh_rate_title">Refresh rate</string>
+    <!-- External Display resolution options section. -->
+    <string name="external_display_resolution_title">Resolution</string>
     <!-- External Display Connection Preference. The preferred method of connection for an external display. [CHAR LIMIT=40] -->
     <string name="external_display_connection_preference">Default connection behavior</string>
     <!-- External Display settings. Always start in desktop mode when display is connected. -->
@@ -3306,6 +3312,10 @@
     <string name="screen_resolution_footer">Max resolution uses more of your battery. Switching your resolution may cause some apps to restart.</string>
     <!-- Screen resolution a11y message announced to replace 'x' in entry e.g. 600 by 800 [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_delimiter_a11y"><xliff:g id="width">%1$s</xliff:g> by <xliff:g id="height">%2$s</xliff:g></string>
+    <!-- Screen refresh rate option displayed text [CHAR LIMIT=NONE] -->
+    <string name="screen_refresh_rate_displayed_text"><xliff:g id="refresh_rate">%1$s</xliff:g> Hz</string>
+    <!-- Screen refresh rate option a11y text -->
+    <string name="screen_refresh_rate_a11y"><xliff:g id="refresh_rate">%1$s</xliff:g> Hertz</string>
     <!-- Display settings screen, Color mode settings title [CHAR LIMIT=30] -->
     <string name="color_mode_title">Colors</string>
     <!-- Display settings screen, Color mode option for "natural(sRGB) color"  [CHAR LIMIT=45] -->
@@ -3571,8 +3581,7 @@
     <string name="low_light_display_behavior_main_switch_title">Use Low Light mode</string>
     <!-- Category title for the settings to control what to show when in low light. [CHAR LIMIT=NONE] -->
     <string name="low_light_display_behavior_subtitle">Choose what to show in Low Light mode</string>
-    <!-- Low light display behavior: turn the screen off [CHAR LIMIT=50] -->
-    <string name="low_light_display_behavior_screen_off">Screen off</string>
+
     <!-- Low light display behavior: show the low light clock [CHAR LIMIT=50] -->
     <string name="low_light_display_behavior_low_light_clock_dream">Low light clock</string>
     <!-- Summary for low light display behavior summary when low light display is enabled [CHAR LIMIT=50] -->
@@ -3581,8 +3590,7 @@
     </string>
     <!-- Summary for low light display behavior summary when low light display is disabled [CHAR LIMIT=20] -->
     <string name="low_light_display_behavior_summary_off">Off</string>
-    <!-- Low light display behavior: full summary for turn the screen off [CHAR LIMIT=NONE] -->
-    <string name="low_light_display_behavior_screen_off_full_summary">Screen will turn off when your environment is dark</string>
+
     <!-- Low light display behavior: full summary for show the low light clock [CHAR LIMIT=NONE] -->
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary">Low Light Clock will show when your environment is dark</string>
 
@@ -3604,7 +3612,9 @@
     <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the always-on ambient display feature with wallpaper not visible on AOD. -->
     <string name="doze_always_on_summary_without_wallpaper">Hide lock screen wallpaper when screen is off</string>
     <!-- [CHAR LIMIT=NONE] Display settings screen, always-on display, long description-->
-    <string name="doze_always_on_summary_long">Always-on display shows the time, date, and more when the screen is off</string>
+    <string name="doze_always_on_summary_long">Shows the time, date, and more when the screen is off</string>
+    <!-- [CHAR LIMIT=NONE] Display settings screen, always-on display, short description-->
+    <string name="doze_always_on_summary_short">Show time, date, and more</string>
     <!-- [CHAR LIMIT=50] Title for a group of settings related to the wallpaper on always-on display-->
     <string name="doze_always_on_wallpaper_options">Wallpaper options</string>
     <!-- [CHAR LIMIT=50] Title for always-on display that will enable the wallpaper to be visible-->
@@ -4441,6 +4451,17 @@
     <!-- Search keywords for the time zone notification category / section in Date & Time settings. [CHAR_LIMIT=NONE] -->
     <string name="keywords_time_notification_category">notification, time, zone, timezone</string>
 
+    <!-- Date&Time settings screen, title of the time zone offset change notification toggle. [CHAR LIMIT=50] -->
+    <string name="time_zone_offset_change_notification_toggle_title">Scheduled clock change</string>
+    <!-- Date&Time settings screen, summary of the time zone offset change notification toggle [CHAR_LIMIT=NONE] -->
+    <string name="time_zone_offset_change_notification_toggle_summary">Receive a notification when your clock performs a scheduled change, for example for daylight saving time</string>
+    <!-- Keywords for the time zone offset change notification toggle. [CHAR_LIMIT=NONE] -->
+    <string name="keywords_time_zone_offset_change_notification_category">dst, daylight saving time, daylight savings, clock change, scheduled clock change</string>
+    <!-- Footer for time zone offset change. [CHAR LIMIT=NONE] -->
+    <string name="footer_time_zone_offset_change_next_change">Next change</string>
+    <!-- Footer for time zone offset change when there is no scheduled change. [CHAR LIMIT=NONE] -->
+    <string name="footer_time_zone_offset_change_no_next_change">No scheduled changes</string>
+
     <!-- Main settings screen, setting summary for the user to go into the About phone screen-->
     <string name="about_settings_summary">View legal info, status, software version</string>
     <!-- About phone settings screen, setting option name to go to dialog that shows legal info -->
@@ -5199,6 +5220,10 @@
     <string name="mouse_keys_seek_bar_decrease_button_description">Decrease</string>
     <!-- Description for the button that increases the seekbar in mouse keys settings page. [CHAR_LIMIT=NONE] -->
     <string name="mouse_keys_seek_bar_increase_button_description">Increase</string>
+    <!-- Start label for the seekbar in mouse keys settings page. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_keys_seek_bar_start_label">Slower</string>
+    <!-- End label for the seekbar in mouse keys settings page. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_keys_seek_bar_end_label">Faster</string>
     <!-- Title for the 'Mouse reverse scrolling' preference switch, which reverses the direction of mouse scroll wheels so that moving the wheel up scrolls the content down. [CHAR LIMIT=60] -->
     <string name="mouse_reverse_vertical_scrolling">Reverse scrolling</string>
     <!-- Title for a toggle switch for 'Use primary keys' under mouse key main page, an accessibility setting that allows the user to use primary keyboard keys to control the cursor instead of using numpad keys. [CHAR LIMIT=35] -->
@@ -5447,6 +5472,8 @@
     <string name="action_corner_action_notifications">Notifications</string>
     <!-- Text for 'Quick settings' action radio button. [CHAR LIMIT=60] -->
     <string name="action_corner_action_quick_settings">Quick settings</string>
+    <!-- Text for 'Note' action radio button. [CHAR LIMIT=60] -->
+    <string name="action_corner_action_note_title">Note</string>
     <!-- Title text for action selection dialog. [CHAR LIMIT=NONE] -->
     <string name="action_corner_action_dialog_title">Choose a shortcut for the <xliff:g id="corner">%1$s</xliff:g></string>
     <!-- Text for 'Bottom-left corner'. [CHAR LIMIT=60] -->
@@ -6121,6 +6148,12 @@
     <string name="accessibility_shortcut_two_finger_double_tap_keyword">%1$d-finger double tap</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_triple_tap_keyword">triple tap</string>
+    <!-- Title for keyboard shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_title_keyboard">Keyboard shortcut</string>
+    <!-- Summary for keyboard shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_keyboard">Press <xliff:g name="meta_key" example="Action">%1$s</xliff:g> + <xliff:g name="secondary_key" example="Alt">%2$s</xliff:g> + <xliff:g name="key_code" example="M">%3$s</xliff:g> to use <xliff:g name="feature" example="Magnification">%4$s</xliff:g></string>
+    <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_keyboard_keyword">keyboard shortcut</string>
     <!-- Title for the accessibility edit shortcut dialog to save the preference when user clicks it. [CHAR LIMIT=20] -->
     <string name="accessibility_shortcut_edit_dialog_title_advance">Advanced</string>
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
@@ -6965,6 +6998,8 @@
     <string name="battery_advance_info_profile_result_2"></string>
     <string name="battery_advance_info_profile_result_3"></string>
     <string name="battery_advance_info_profile_result_4"></string>
+    <!-- Text for battery advance info learn more link [CHAR LIMIT=NONE] -->
+    <string name="battery_advance_info_learn_more"></string>
 
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="battery_details_title">App battery usage</string>
@@ -8790,6 +8825,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary">Bluetooth, Android Auto, NFC</string>
     <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode">Bluetooth, Android Auto</string>
+
+    <!-- Title for setting tile leading to Device settings [CHAR LIMIT=40]-->
+    <string name="device_dashboard_title">Device</string>
+    <!-- Summary for Device settings, explaining it contains Keyboard, Touchpad, Display, and Sound setting [CHAR LIMIT=NONE]-->
+    <string name="device_dashboard_summary">Keyboard, Touchpad, Display, Sound</string>
+
     <!-- Summary for Tap & pay settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary">Unavailable because NFC is off</string>
     <!-- Summary for Tap & pay settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
@@ -8826,7 +8867,7 @@
     <!-- Summary text shown in toast after app is successfully cloned [CHAR LIMIT=40] -->
     <string name="cloned_app_created_toast_summary">Created <xliff:g id="package_label">%1$s</xliff:g> clone</string>
     <!-- Summary text for system preference title, showing important setting items under system setting [CHAR LIMIT=NONE]-->
-    <string name="system_dashboard_summary">Languages, gestures, time, backup</string>
+    <string name="system_dashboard_summary">Languages, gestures, time</string>
     <!-- Summary text for language preference title, showing important setting items under language setting [CHAR LIMIT=NONE]-->
     <string name="languages_setting_summary">System languages, app languages, regional preferences, speech</string>
 
@@ -9091,9 +9132,6 @@
 
     <!-- Sound: Other sounds: Title for the option enabling touch sounds for dial pad tones. [CHAR LIMIT=30] -->
     <string name="dial_pad_tones_title">Dial pad tones</string>
-
-    <!-- Sound: Other sounds: Title for the option enabling tones after call connected. [CHAR LIMIT=30] -->
-    <string name="call_connected_tones_title">Call connected tones</string>
 
     <!-- Sound: Other sounds: Title for the option enabling touch sounds for screen locking sounds. [CHAR LIMIT=30] -->
     <string name="screen_locking_sounds_title">Screen locking sound</string>
@@ -9469,6 +9507,11 @@
     <!-- Do not disturb settings, main screen, field, duration setting where user can specify how
     long dnd will last when toggling dnd on from qs) [CHAR LIMIT=100] -->
     <string name="zen_category_duration">Duration for Quick Settings</string>
+
+    <!-- Do not disturb: Title for the do not disturb sync toggle. When turned on, Do not disturb mode will be synced with other devices. [CHAR LIMIT=80] -->
+    <string name="dnd_sync_title">Do not disturb sync</string>
+    <!-- Do not disturb: Description for the do not disturb sync toggle. [CHAR LIMIT=120] -->
+    <string name="dnd_sync_description">Sync Do not disturb settings to connected devices</string>
 
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>
@@ -11422,18 +11465,20 @@
     <!-- Label for showing apps that can manage external storage[CHAR LIMIT=45] -->
     <string name="filter_manage_external_storage">Can access all files</string>
 
-    <!-- Computer control automation settings title [CHAR LIMIT=40] [SCREENSHOT=screen/3gqAyPwhuTgdoh5] -->
+    <!-- Computer control automation settings title [CHAR LIMIT=40] [SCREENSHOT=screen/7GzP2k3PhF8UTVQ] -->
     <string name="computer_control_automation_page_title">Screen automation</string>
-    <!-- Label for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/3gqAyPwhuTgdoh5] -->
-    <string name="computer_control_automation_switch_title">Allow this app to fully automate other apps</string>
-    <!-- Description for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/3gqAyPwhuTgdoh5] -->
-    <string name="computer_control_automation_footer_description">This app will able control your apps. Apps being controlled can\u2019t be used while screen automation is ongoing, but you can always stop it.</string>
-    <!-- Preference summary text for an app when computer control access must be confirmed every time. [CHAR LIMIT=45] [SCREENSHOT=screen/4HoRqQaeUTunirH] -->
+    <!-- Sub heading for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
+    <string name="computer_control_automation_sub_heading">This app will be able to see and interact with other apps\' screen content to help you complete tasks, even when the apps are in the background</string>
+    <!-- Footer summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
+    <string name="computer_control_automation_footer_summary">If you don\'t allow screen automation, <xliff:g  example="Example App">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g example="Example App">%1$s</xliff:g> in other ways</string>
+    <!-- Summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/55Y5GXxjQJNFvRT] -->
+    <string name="computer_control_automation_page_summary">Allow apps to help you complete tasks by interacting with other apps\' screen content</string>
+    <!-- Preference summary text for an app when computer control access must be confirmed every time. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
     <string name="computer_control_automation_ask_every_time">Ask every time</string>
-    <!-- Preference summary text for an app when computer control access is always allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/4HoRqQaeUTunirH] -->
-    <string name="computer_control_automation_always_allowed">Always allowed</string>
-    <!-- Preference summary text for an app when computer control access is not allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/4HoRqQaeUTunirH] -->
-    <string name="computer_control_automation_dont_allow">Don\u2019t allow</string>
+    <!-- Preference summary text for an app when computer control access is always allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF -->
+    <string name="computer_control_automation_always_allowed">Always allow</string>
+    <!-- Preference summary text for an app when computer control access is not allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
+    <string name="computer_control_automation_dont_allow">Don\'t allow</string>
 
     <!-- Manage full screen intent permission title [CHAR LIMIT=40] -->
     <string name="full_screen_intent_title">Full-screen notifications</string>
@@ -12199,6 +12244,21 @@
 
     <!-- Title text for system navigation [CHAR LIMIT=60] -->
     <string name="system_navigation_title">Navigation mode</string>
+
+    <!-- Title text for update device category in system navigation [CHAR LIMIT=60] -->
+    <string name="update_device_category_title">Update device</string>
+
+    <!-- Title text for interaction category in system navigation [CHAR LIMIT=60] -->
+    <string name="interaction_category_title">Interaction</string>
+
+    <!-- Title text for automation & intelligence category in system navigation [CHAR LIMIT=60] -->
+    <string name="automation_intelligence_category_title">Automation &amp; Intelligence</string>
+
+    <!-- Title text for system management category in system navigation [CHAR LIMIT=60] -->
+    <string name="system_management_category_title">System management</string>
+
+    <!-- Title text for manage data category in system navigation [CHAR LIMIT=60] -->
+    <string name="manage_data_category_title">Manage data</string>
 
     <!-- Title text for swipe up to switch apps [CHAR LIMIT=60] -->
     <string name="swipe_up_to_switch_apps_title">2-button navigation</string>
@@ -12984,9 +13044,9 @@
     <!-- Debugging developer settings: enable angle as system driver? [CHAR LIMIT=50] -->
     <string name="enable_angle_as_system_driver">Experimental: Enable ANGLE</string>
     <!-- Debugging developer settings: enable angle as system driver summary [CHAR LIMIT=NONE] -->
-    <string name="enable_angle_as_system_driver_summary">Warning: Enable ANGLE as default OpenGL ES driver. This feature is in experiment and may not be compatible with some camera and video apps.</string>
+    <string name="enable_angle_as_system_driver_summary">Warning: Enable ANGLE as default OpenGL ES driver. This feature is in experiment and may not be compatible with some camera and video apps. Please backup your device data before turning on the switch</string>
     <!--Dialog body text used to explain a reboot is required after changing ANGLE as system GLES driver setting-->
-    <string name="reboot_dialog_enable_angle_as_system_driver">A reboot is required to change the system OpenGL ES driver</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver">A reboot is required to change the system OpenGL ES driver. Please back up your device data before rebooting. In case the reboot failed, you need a factory reset to restore the device</string>
 
     <!-- Title for App Compatibility Changes dashboard where developers can configure per-app overrides for compatibility changes [CHAR LIMIT=50] -->
     <string name="platform_compat_dashboard_title">App Compatibility Changes</string>
@@ -15206,12 +15266,16 @@
     <string name="supervision_verify_pin_recovery_title">Verify recovery info</string>
     <!-- Title for app store filters entry [CHAR LIMIT=60] -->
     <string name="supervision_app_store_filters_title">App store filters</string>
+    <!-- Search keywords for app store filters entry [CHAR LIMIT=NONE] -->
+    <string name="supervision_app_store_filters_keywords">App filters, Mature app filters, Mature filters, Explicit apps, Block apps, Block explicit apps, Block mature apps</string>
     <!-- Top intro for app store filters [CHAR LIMIT=NONE] -->
     <string name="supervision_app_store_filters_top_intro">Filter apps based on the maturity of their content</string>
     <!-- Title for app store filters footer [CHAR LIMIT=NONE] -->
-    <string name="supervision_app_store_filters_footer_content">Each app may block different types of content. App stores not listed must be managed separately. </string>
+    <string name="supervision_app_store_filters_footer_content">Each store rates content differently. An app\u2019s rating may vary across stores.</string>
     <!-- Learn more link for app store filters footer. [CHAR LIMIT=NONE]-->
     <string name="supervision_app_store_filters_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_app_store_filters</string>
+    <!--Summary for app store filters [CHAR LIMIT=NONE] -->
+    <string name="supervision_app_store_filters_summary">Filter apps by content ratings</string>
     <!-- Title for web content filters entry [CHAR LIMIT=60] [BACKUP_MESSAGE_ID=2412562442507104921] -->
     <string name="supervision_web_content_filters_title">Web content filters</string>
     <!-- Search keywords for web content filters entry [CHAR LIMIT=NONE] -->
@@ -15233,6 +15297,8 @@
         }</string>
     <!-- Floating text for supported apps entry point icon, which displays the number of remaining supported apps. [CHAR LIMIT=10] -->
     <string name="supervision_remaining_supported_apps_count">+<xliff:g id="count" example="2">%d</xliff:g></string>
+    <!-- Title for learn more link button. [CHAR LIMIT=NONE]-->
+    <string name="supervision_web_content_filters_learn_more_title">Learn more</string>
     <!-- Title for web content filters footer. [CHAR LIMIT=NONE]-->
     <string name="supervision_web_content_filters_footer_title">When these settings are off, other account settings may still apply.</string>
     <!-- Learn more link for web content filters footer. [CHAR LIMIT=NONE]-->
@@ -15271,6 +15337,8 @@
     <string name="supervision_delete_button_label">Delete</string>
     <!-- Message on the can't delete pin dialog that shows the role holders requiring the PIN [CHAR_LIMIT=NONE] -->
     <string name="supervision_cant_delete_pin_multiple_role_holders_message">Your parental controls PIN is being used by:\n\n<xliff:g id="role_holder_bullet_list">%1$s</xliff:g></string>
+    <!-- Message on the can't delete pin dialog that says that the PIN is being used by another user on the device [CHAR_LIMIT=NONE] -->
+    <string name="supervision_cant_delete_pin_in_use_message">Your parental controls PIN is active for another user</string>
     <!-- Learn more link for device supervision PIN. [CHAR LIMIT=NONE]-->
     <string name="supervision_pin_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_pin</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
@@ -15425,4 +15493,20 @@
     <string name="satellite_connectivity_topintro">Stay connected when you don\'t have a mobile or Wi-Fi network</string>
     <!-- Label for the satellite landing page activity. [CHAR LIMIT=NONE] -->
     <string name="satellite_landing_page_label">Satellite Landing Page</string>
+    <!-- Title for a button to try a demo of satellite connectivity. [CHAR LIMIT=NONE] -->
+    <string name="try_a_demo">Try a demo</string>
+    <!-- Subitle for the try a demo button. [CHAR LIMIT=NONE] -->
+    <string name="see_how_it_works">See how it works</string>
+    <!-- Footer text for the satellite landing page, explaining how it works for LTE devices. [CHAR LIMIT=NONE] -->
+    <string name="landing_page_footer_text_lte">When you don\'t have a mobile or Wi-Fi network, your phone will automatically connect to a satellite. For the best connection, keep a clear view of the sky. Your phone will reconnect to a mobile network when available. Calling over satellite isn\'t available. Emergency calls may still connect.</string>
+    <!-- Footer text for the satellite landing page, explaining how it works for phones that have to be manually pointed at a satellite that stays in one place in the sky using a UI that guides them to do so. [CHAR LIMIT=NONE] -->
+    <string name="landing_page_footer_text_nbiot">For the best connection, keep a clear view of the sky. Your phone will reconnect to a mobile network when available. Calling over satellite isn\'t available. Emergency calls may still connect.</string>
+    <!-- Text for a link to more information about satellite connectivity. [CHAR LIMIT=NONE] -->
+    <string name="satellite_more_info_text"><u>More about satellite connectivity</u></string>
+    <!-- Content description for the forward arrow on the try a demo button. [CHAR LIMIT=NONE] -->
+    <string name="forward_arrow_content_desc">Open satellite SOS demo</string>
+    <!-- Title for the satellite apps preference category. [CHAR LIMIT=NONE] [SCREENSHOT=screen/4uVGfjXnxQQmMby] -->
+    <string name="satellite_apps_title">Satellite apps</string>
+    <!-- Name for the Emergency SOS app in the satellite landing page. [CHAR LIMIT=NONE] -->
+    <string name="satellite_emergency_sos">Emergency SOS</string>
 </resources>

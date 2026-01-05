@@ -9,6 +9,8 @@ enum AppUsageEventType {
   ACTIVITY_RESUMED = 1;
   ACTIVITY_STOPPED = 2;
   DEVICE_SHUTDOWN = 3;
+  SCREEN_NON_INTERACTIVE = 4;
+  ACTIVITY_ON_TOP = 5;
 }
 
 message AppUsageEvent {
@@ -39,6 +41,8 @@ message AppUsagePeriod {
   optional int64 start_time = 1;
   // End of the usage period.
   optional int64 end_time = 2;
+  // Last interactive event of the usage period.
+  optional int64 last_active_time_ms = 3;
 }
 
 enum AppUsageEndPointType {

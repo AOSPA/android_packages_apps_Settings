@@ -98,8 +98,8 @@ public class SimSelectNotification extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         UserManager userManager = context.getSystemService(UserManager.class);
-        if (userManager != null && !userManager.isMainUser()) {
-            Log.d(TAG, "The userId is not the main user");
+        if (userManager != null && !userManager.isAdminUser()) {
+            Log.d(TAG, "The userId is not an admin user");
             return;
         }
         if (!Utils.isMobileDataCapable(context) && !Utils.isVoiceCapable(context)) {

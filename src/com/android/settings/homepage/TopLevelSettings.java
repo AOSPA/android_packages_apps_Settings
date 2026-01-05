@@ -50,6 +50,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.support.SupportPreferenceController;
+import com.android.settings.utils.DesktopSettingsUtils;
 import com.android.settings.widget.HomepagePreference;
 import com.android.settings.widget.HomepagePreferenceLayoutHelper.HomepagePreferenceLayout;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -352,6 +353,10 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     }
 
     private static int getPreferenceLayoutResId(Context context) {
+        if (DesktopSettingsUtils.shouldShowTopLevelDeviceCategory(context)) {
+            return R.xml.top_level_settings_expressive_desktop;
+        }
+
         return SettingsThemeHelper.isExpressiveTheme(context)
                 ? R.xml.top_level_settings_expressive
                 : R.xml.top_level_settings;

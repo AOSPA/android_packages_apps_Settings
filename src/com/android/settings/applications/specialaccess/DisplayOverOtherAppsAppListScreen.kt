@@ -37,6 +37,10 @@ open class DisplayOverOtherAppsAppListScreen :
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.special_access_draw_overlay_app_list_purpose
+
     override val title: Int
         get() = R.string.system_alert_window_settings
 
@@ -55,8 +59,15 @@ open class DisplayOverOtherAppsAppListScreen :
     override val appDetailScreenKey
         get() = DisplayOverOtherAppsAppDetailScreen.KEY
 
+    @Deprecated(
+        message =
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use appDetailKeyParameters instead."
+    )
     override fun appDetailParameters(context: Context, hierarchyType: Boolean) =
         DisplayOverOtherAppsAppDetailScreen.parameters(context, hierarchyType)
+
+    override fun appDetailKeyParameters(context: Context, hierarchyType: Boolean) =
+        DisplayOverOtherAppsAppDetailScreen.keyParameters(context, hierarchyType)
 
     companion object {
         const val KEY = "special_access_draw_overlay_app_list"

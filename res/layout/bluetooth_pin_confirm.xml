@@ -164,6 +164,18 @@
                 app:layout_constraintTop_toTopOf="parent"
                 style="@style/Widget.SettingsLib.DialogButton.Outline">
 
+                <TextView
+                    android:id="@+id/positive_button_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bluetooth_pairing_accept"
+                    android:textAppearance="@style/TextAppearance.SettingsLib.LabelLarge"
+                    android:textColor="@color/settingslib_materialColorPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <com.google.android.material.progressindicator.CircularProgressIndicator
                     android:id="@+id/positive_button_progress_bar"
                     android:theme="@style/Theme.Material3.DynamicColors.DayNight"
@@ -175,17 +187,18 @@
                     android:visibility="gone"
                     android:text="@string/progress_scanning"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/positive_button_text"
+                    app:layout_constraintEnd_toStartOf="@+id/positive_button_pairing_text"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/positive_button_text"
+                    android:id="@+id/positive_button_pairing_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/bluetooth_pairing_accept"
+                    android:text="@string/bluetooth_pairing_passkey_dialog_pairing_positive_button_text"
                     android:textAppearance="@style/TextAppearance.SettingsLib.LabelLarge"
                     android:textColor="@color/settingslib_materialColorPrimary"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/positive_button_progress_bar"

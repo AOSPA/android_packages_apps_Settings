@@ -56,6 +56,10 @@ open class ExtraDimScreen(context: Context) :
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.reduce_bright_colors_preference_purpose
+
     override val indexable
         get() = true
 
@@ -115,6 +119,7 @@ open class ExtraDimScreen(context: Context) :
             +ExtraDimMainSwitchPreference(context, extraDimStorage)
             +PreferenceCategory(
                 key = "general_categories",
+                purpose = R.string.general_categories_purpose,
                 title = R.string.accessibility_screen_option,
             ) +=
                 {
@@ -123,6 +128,7 @@ open class ExtraDimScreen(context: Context) :
                     +AccessibilityShortcutPreference(
                         context = context,
                         key = "reduce_bright_colors_shortcut",
+                        purpose = R.string.reduce_bright_colors_shortcut_purpose,
                         title = R.string.reduce_bright_colors_shortcut_title,
                         componentName = REDUCE_BRIGHT_COLORS_COMPONENT_NAME,
                         featureName = R.string.reduce_bright_colors_preference_title,

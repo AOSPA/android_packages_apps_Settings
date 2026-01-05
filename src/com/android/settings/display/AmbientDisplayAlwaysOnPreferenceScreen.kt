@@ -84,6 +84,10 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.ambient_display_always_on_screen_purpose
+
     override val keywords: Int
         get() = R.string.keywords_always_show_time_info
 
@@ -121,7 +125,7 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
                     R.string.doze_always_on_summary_without_wallpaper
                 }
             } else {
-                R.string.doze_always_on_summary
+                R.string.doze_always_on_summary_short
             }
         )
 
@@ -158,7 +162,11 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
                 +AmbientInactivityDetectionPreference(context)
             }
             if (context.isAmbientWallpaperOptionsAvailable) {
-                +Category("ambient_wallpaperGroup", R.string.doze_always_on_wallpaper_options) += {
+                +Category(
+                    "ambient_wallpaperGroup",
+                    R.string.ambient_wallpaper_group_purpose,
+                    R.string.doze_always_on_wallpaper_options
+                ) += {
                     +ambientWallpaperPreference
                 }
             }

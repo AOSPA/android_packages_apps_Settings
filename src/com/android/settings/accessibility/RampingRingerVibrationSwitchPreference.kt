@@ -44,10 +44,15 @@ import com.android.settingslib.preference.SwitchPreferenceBinding
 class RampingRingerVibrationSwitchPreference(
     context: Context,
     key: String,
+    purpose: Int,
     private val ringPreferenceKey: String,
     private val deviceConfig: TelephonyConfigProvider = object : TelephonyConfigProvider {},
 ) :
-    SwitchPreference(key = key, title = R.string.vibrate_when_ringing_option_ramping_ringer),
+    SwitchPreference(
+        key = key,
+        purpose = purpose,
+        title = R.string.vibrate_when_ringing_option_ramping_ringer
+    ),
     PreferenceAvailabilityProvider,
     OnPreferenceChangeListener,
     SwitchPreferenceBinding {

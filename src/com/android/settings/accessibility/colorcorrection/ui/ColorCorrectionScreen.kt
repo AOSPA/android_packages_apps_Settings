@@ -53,6 +53,10 @@ class ColorCorrectionScreen :
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.daltonizer_preference_purpose
+
     override val title: Int
         get() = SettingsLibR.string.accessibility_display_daltonizer_preference_title
 
@@ -121,12 +125,14 @@ class ColorCorrectionScreen :
             +GrayscaleModePreference(modeStorage)
             +PreferenceCategory(
                 key = "general_categories",
+                purpose = R.string.general_categories_purpose,
                 title = R.string.accessibility_screen_option,
             ) +=
                 {
                     +AccessibilityShortcutPreference(
                         context = context,
                         key = "daltonizer_shortcut_key",
+                        purpose = R.string.daltonizer_shortcut_key_purpose,
                         title = R.string.accessibility_daltonizer_shortcut_title,
                         componentName = DALTONIZER_COMPONENT_NAME,
                         featureName =

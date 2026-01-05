@@ -29,16 +29,6 @@ flag {
 }
 
 flag {
-  name: "enable_nearby_share_entrypoint"
-  namespace: "cross_device_experiences"
-  description: "Show Nearby Share entrypoint in Bluetooth Sharing page"
-  bug: "381799866"
-  metadata {
-      purpose: PURPOSE_BUGFIX
-  }
-}
-
-flag {
   name: "enable_remove_association_bt_unpair"
   is_exported: true
   namespace: "companion"
@@ -65,16 +55,6 @@ flag {
       purpose: PURPOSE_BUGFIX
   }
   is_fixed_read_only: true
-}
-
-flag {
-  name: "enable_change_le_profile_broadcast_receiver"
-  namespace: "cross_device_experiences"
-  description: "Enable broadcast receiver to enable/disable LE audio profile"
-  bug: "381353150"
-  metadata {
-      purpose: PURPOSE_BUGFIX
-  }
 }
 
 flag {

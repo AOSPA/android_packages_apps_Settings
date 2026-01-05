@@ -36,6 +36,7 @@ import com.android.settingslib.metadata.SwitchPreference
 class WifiHotspotAutoOffSwitchPreference :
     SwitchPreference(
         KEY,
+        purpose = R.string.wifi_tether_auto_turn_off_purpose,
         R.string.wifi_hotspot_auto_off_title,
         R.string.wifi_hotspot_auto_off_summary
     ),

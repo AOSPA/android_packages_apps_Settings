@@ -1,0 +1,168 @@
+/*
+ * Copyright (C) 2025 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings
+
+import android.app.Activity
+import android.content.Intent.FLAG_ACTIVITY_FORWARD_RESULT
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.os.Bundle
+import android.util.Log
+import com.android.settings.activityembedding.ActivityEmbeddingUtils
+import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.getTrampolineIntent
+import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.core.SubSettingLauncher
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.core.instrumentation.Instrumentable.METRICS_CATEGORY_UNKNOWN
+import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
+import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_KEY
+import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.PreferenceScreenCoordinate
+import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.toMap
+
+/**
+ * A trampoline Activity that launches a settings screen based on a generic screen key.
+ *
+ * This activity serves as a secure, generic entry point into the Settings app. Its primary purpose
+ * is to decouple external callers from the internal implementation details of Settings, such as
+ * Fragment or Activity class names.
+ *
+ * ### How it Works
+ * 1. It receives an Intent with a mandatory [EXTRA_SCREEN_KEY].
+ * 2. It uses the [PreferenceScreenRegistry] to resolve this key into screen metadata.
+ * 3. It immediately calls `finish()` on itself.
+ *
+ * ### Usage
+ * To launch a screen, build an Intent targeting this activity and include the following extras:
+ * - **[EXTRA_SCREEN_KEY] (String, Required):** The unique identifier for the target screen.
+ * - **[EXTRA_SCREEN_ARGS] (Bundle, Optional):** Arguments for parameterized screens (e.g., a
+ *   package name for an app-specific screen).
+ * - **[EXTRA_HIGHLIGHT_KEY] (String, Optional):** The key of a preference to scroll to and
+ *   highlight within the target screen.
+ */
+class SettingsLaunchpadActivity : Activity() {
+
+    companion object {
+        const val EXTRA_SCREEN_KEY = "screen_key"
+        const val EXTRA_SCREEN_ARGS = "screen_args"
+        const val EXTRA_HIGHLIGHT_KEY = "highlight_key"
+
+        private const val TAG = "SettingsLaunchpad"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (isFinishing) return
+
+        if (!checkCallerPermission()) {
+            val callingPackage = callingPackage ?: "unknown"
+            Log.w(TAG, "Permission check failed for caller: $callingPackage")
+            finish()
+            return
+        }
+
+        processIntentAndLaunch()
+        finish()
+    }
+
+    private fun processIntentAndLaunch() {
+        val screenKey = intent.getStringExtra(EXTRA_SCREEN_KEY)
+        if (screenKey.isNullOrEmpty()) {
+            Log.e(TAG, "Required extra '$EXTRA_SCREEN_KEY' is missing or empty.")
+            return
+        }
+
+        val screenArgsBundle: Bundle? = intent.getBundleExtra(EXTRA_SCREEN_ARGS)
+        val screenCoordinate =
+            if (
+                CatalystFlags.catalystUseKeyParameters() &&
+                    PreferenceScreenRegistry.isParameterized(this, screenKey)
+            ) {
+                PreferenceScreenCoordinate(
+                    screenKey,
+                    screenArgsBundle?.let { KeyParameters(it.toMap()) },
+                )
+            } else {
+                PreferenceScreenCoordinate(screenKey, screenArgsBundle)
+            }
+
+        // Using PreferenceScreenRegistry.create() to get screen metadata
+        val screenMetadata =
+            PreferenceScreenRegistry.create(this, screenCoordinate)
+                ?: run {
+                    Log.e(TAG, "Cannot find screen metadata for key: $screenKey")
+                    return
+                }
+
+        val fragmentClassName =
+            screenMetadata.fragmentClass()?.name
+                ?: run {
+                    Log.e(TAG, "Fragment class name is null for key: $screenKey")
+                    return
+                }
+
+        val highlightKey = intent.getStringExtra(EXTRA_HIGHLIGHT_KEY)
+        val args =
+            Bundle().apply {
+                putString(EXTRA_BINDING_SCREEN_KEY, screenKey)
+                putBundle(EXTRA_BINDING_SCREEN_ARGS, screenArgsBundle)
+                putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, highlightKey)
+            }
+
+        val subsettingLauncher =
+            SubSettingLauncher(this)
+                .setDestination(fragmentClassName)
+                .addFlags(FLAG_ACTIVITY_FORWARD_RESULT)
+                .setArguments(args)
+                .setSourceMetricsCategory(
+                    METRICS_CATEGORY_UNKNOWN
+                ) // TODO: set a meaningful metrics category
+
+        if (
+            !ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this) ||
+                ActivityEmbeddingUtils.isAlreadyEmbedded(this)
+        ) {
+            // One-pane case: Launch directly
+            subsettingLauncher.addFlags(FLAG_ACTIVITY_NEW_TASK).launch()
+        } else {
+            // Two-pane case: Use the two pane trampoline intent
+            val highlightMenuKey =
+                (screenMetadata as? PreferenceScreenMixin)
+                    ?.highlightMenuKey
+                    ?.takeIf {
+                        it != 0
+                    } // Returns the resource ID only if it's not 0, otherwise null
+                    ?.let { getString(it) }
+            startActivity(
+                getTrampolineIntent(subsettingLauncher.toIntent(), highlightMenuKey)
+                    .addFlags(FLAG_ACTIVITY_NEW_TASK)
+            )
+        }
+    }
+
+    /** A dummy function to check caller's permission. */
+    private fun checkCallerPermission(): Boolean {
+        // TODO: Implement real permission check.
+
+        // Get the UID of the calling process.
+        // If the caller is the system or the app itself, allow it.
+
+        // check permission
+        // check signature
+        return true
+    }
+}

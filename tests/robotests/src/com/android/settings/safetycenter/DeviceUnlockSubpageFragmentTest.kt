@@ -40,6 +40,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.Settings
+import com.android.settings.SubSettings
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_ACTION
 import com.android.settings.safetycenter.SafetyCenterTestUtils.USER_PERSONAL
@@ -49,6 +51,7 @@ import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssue
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssueAction
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createScData
 import com.android.settings.safetycenter.ui.DeviceUnlockSubpageFragment
+import com.android.settings.safetycenter.ui.SafetyCenterFragment
 import com.android.settingslib.safetycenter.SafetySourcePreference
 import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.BannerMessagePreferenceGroup
@@ -850,6 +853,38 @@ class DeviceUnlockSubpageFragmentTest {
             assertThat(banner1?.isVisible).isTrue()
             assertThat(banner2?.isVisible).isFalse()
             assertThat(banner3?.isVisible).isFalse()
+        }
+    }
+
+    @Test
+    fun onCreate_whenNoEntries_redirectsToSafetyCenterHome() {
+        runTest(EMPTY_SC_DATA) { fragment ->
+            val nextIntent = shadowOf(fragment.requireActivity()).nextStartedActivity
+
+            assertThat(nextIntent).isNotNull()
+            assertThat(nextIntent.component?.className).isEqualTo(SubSettings::class.java.name)
+            val extras = nextIntent.extras
+            assertThat(extras).isNotNull()
+            assertThat(extras?.getString(Settings.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(SafetyCenterFragment::class.java.name)
+        }
+    }
+
+    @Test
+    fun onCreate_withEntries_doesNotRedirect() {
+        val entry =
+            createEntry(
+                id = "lockScreenEntry",
+                title = "Screen Lock",
+                userHandle = USER_PERSONAL,
+                sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
+                summary = "set screen lock",
+            )
+
+        runTest(createScData(listOf(entry))) { fragment ->
+            val nextIntent = shadowOf(fragment.requireActivity()).nextStartedActivity
+
+            assertThat(nextIntent).isNull()
         }
     }
 

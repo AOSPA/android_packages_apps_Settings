@@ -43,6 +43,10 @@ open class FlashNotificationsScreen :
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.flash_notifications_purpose
+
     override val title: Int
         get() = R.string.flash_notifications_title
 
@@ -72,7 +76,10 @@ open class FlashNotificationsScreen :
         preferenceHierarchy(context) {
             +FlashNotificationsTopIntroPreference()
             +FlashNotificationsIllustrationPreference()
-            +UntitledPreferenceCategoryMetadata(CATEGORY_KEY) += {
+            +UntitledPreferenceCategoryMetadata(
+                CATEGORY_KEY,
+                purpose = R.string.flash_notifications_category_purpose
+            ) += {
                 +CameraFlashSwitchPreference()
                 +ScreenFlashSwitchPreference()
             }

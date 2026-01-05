@@ -36,6 +36,9 @@ class TwilightLocationPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.dark_ui_location_off_purpose
+
     override val title: Int
         get() = R.string.twilight_mode_location_off_dialog_message
 

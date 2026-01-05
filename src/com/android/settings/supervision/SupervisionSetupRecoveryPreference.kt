@@ -62,6 +62,9 @@ class SupervisionSetupRecoveryPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.supervision_setup_recovery_purpose
+
     override fun getTitle(context: Context): CharSequence {
         return if (hasAccountNameToVerify(context)) {
             context.getString(R.string.supervision_verify_pin_recovery_title)

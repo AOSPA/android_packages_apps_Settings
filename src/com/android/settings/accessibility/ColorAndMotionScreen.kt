@@ -39,6 +39,10 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.accessibility_color_and_motion_purpose
+
     override val title: Int
         get() = R.string.accessibility_color_and_motion_title
 
@@ -72,8 +76,9 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
                 +DarkModeScreenOnAccessibility.KEY
                 +BlurSwitchPreference()
                 +PreferenceCategory(
-                    "experimental_category",
-                    R.string.experimental_category_title,
+                    key = "experimental_category",
+                    purpose = R.string.experimental_category_purpose,
+                    title = R.string.experimental_category_title,
                 ) +=
                     {
                         +ColorCorrectionScreen.KEY

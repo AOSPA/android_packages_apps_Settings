@@ -15,14 +15,11 @@
  */
 package com.android.settings.safetycenter.ui
 
-import android.annotation.StringRes
+import android.annotation.SuppressLint
 import android.app.settings.SettingsEnums
 import android.content.Context
-import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import com.android.settings.R
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
@@ -31,6 +28,7 @@ import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFacto
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.search.SearchIndexableRaw
 
 /**
  * Fragment for the Safety Center UI.
@@ -38,13 +36,30 @@ import com.android.settingslib.search.SearchIndexable
  * This fragment hosts the preferences for the Security & privacy settings page and is searchable
  * when the feature flag is enabled.
  */
+// Suppressing MissingPermission lint: The Settings app holds the MANAGE_SAFETY_CENTER permission,
+// which is required by the SafetyCenterManager APIs used by the ViewModel.
+@SuppressLint("MissingPermission")
 @SearchIndexable
 class SafetyCenterFragment : DashboardFragment() {
-
-    private var safetyIssuesPreferenceController: SafetyIssuesPreferenceController? = null
-
     private val viewModel: LiveSafetyCenterViewModel by viewModels {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
+        for (controller in allControllers) {
+            when (controller) {
+                is StatusBannerPreferenceController ->
+                    setupStatusBannerPreferenceController(controller)
+                is SafetyIssuesPreferenceController ->
+                    setupSafetyIssuesPreferenceController(controller)
+                is SubpagePreferenceController -> setupSubpagePreferenceController(controller)
+                is SafetySourcePreferenceController ->
+                    setupSafetySourcePreferenceController(controller)
+            }
+        }
     }
 
     override fun onDestroy() {
@@ -59,109 +74,46 @@ class SafetyCenterFragment : DashboardFragment() {
         viewModel.pageOpen()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupStatusBannerController(viewLifecycleOwner)
-        setupSafetyIssuesPreferenceController(viewLifecycleOwner)
-        setupSubpagePreferenceControllers(viewLifecycleOwner)
-        setupSafetySourcePreferenceControllers(viewLifecycleOwner)
-    }
+    override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> =
+        listOf(SafetyIssuesPreferenceController(context, SAFETY_ISSUES_BANNER_KEY))
 
-    override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> {
-        val controllers = mutableListOf<AbstractPreferenceController>()
-        safetyIssuesPreferenceController =
-            SafetyIssuesPreferenceController(context, SAFETY_ISSUES_BANNER_KEY)
-        controllers.add(safetyIssuesPreferenceController!!)
-        return controllers
-    }
-
-    private fun setupStatusBannerController(owner: LifecycleOwner) {
+    private fun setupStatusBannerPreferenceController(
+        statusBannerPreferenceController: StatusBannerPreferenceController
+    ) {
         Log.d(TAG, "Setting up StatusBannerPreferenceController")
-
-        val statusBannerController =
-            preferenceControllers.flatten().firstOrNull { it is StatusBannerPreferenceController }
-                as? StatusBannerPreferenceController
-
-        statusBannerController?.setViewModelAndLifecycle(viewModel, owner)
+        statusBannerPreferenceController.viewModel = viewModel
     }
 
-    private fun setupSafetyIssuesPreferenceController(owner: LifecycleOwner) {
+    private fun setupSafetyIssuesPreferenceController(
+        safetyIssuesPreferenceController: SafetyIssuesPreferenceController
+    ) {
         Log.d(TAG, "Setting Up the safety issues preference controller")
-        safetyIssuesPreferenceController?.setViewModelAndLifecycle(viewModel, owner)
-        safetyIssuesPreferenceController?.setFragmentManager(childFragmentManager)
-        safetyIssuesPreferenceController?.setActivityTaskId(requireActivity().taskId)
-    }
-
-    private fun setupSubpagePreferenceControllers(owner: LifecycleOwner) {
-        Log.d(TAG, "Setting Up the sub-page preference controllers")
-        val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
-
-        for (controller in allControllers) {
-            if (controller is SubpagePreferenceController) {
-                when (controller.preferenceKey) {
-                    APP_SECURITY_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.APP_SECURITY,
-                            summaryResId = R.string.safety_center_app_security_summary,
-                            lifecycleOwner = owner,
-                        )
-                    DEVICE_UNLOCK_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.DEVICE_UNLOCK,
-                            summaryResId = R.string.safety_center_device_unlock_summary,
-                            lifecycleOwner = owner,
-                        )
-                    ACCOUNT_SECURITY_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.ACCOUNT_SECURITY,
-                            summaryResId = R.string.safety_center_account_security_summary,
-                            lifecycleOwner = owner,
-                        )
-                    DEVICE_FINDERS_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.DEVICE_FINDERS,
-                            summaryResId = R.string.safety_center_device_finders_summary,
-                            lifecycleOwner = owner,
-                        )
-                    SYSTEM_AND_UPDATES_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.SYSTEM_AND_UPDATES,
-                            summaryResId = R.string.safety_center_system_and_updates_summary,
-                            lifecycleOwner = owner,
-                        )
-                    CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey =
-                                SafetyCenterSubpageRegistry.SubpageKey.CELLULAR_NETWORK_SECURITY,
-                            summaryResId = R.string.safety_center_cellular_network_security_summary,
-                            lifecycleOwner = owner,
-                        )
-                    PRIVACY_CONTROLS_SUBPAGE_KEY ->
-                        initializeSubpagePreferenceController(
-                            controller = controller,
-                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.PRIVACY_CONTROLS,
-                            summaryResId = R.string.privacy_sources_summary,
-                            lifecycleOwner = owner,
-                        )
-                }
-            }
+        val focusedIssue =
+            SafetyCenterIntentParser.getFocusedIssueKeyFromIntent(requireActivity().intent)
+        safetyIssuesPreferenceController.apply {
+            viewModel = this@SafetyCenterFragment.viewModel
+            fragmentManager = childFragmentManager
+            activityTaskId = requireActivity().taskId
+            focusedIssueKey = focusedIssue
         }
     }
 
-    private fun setupSafetySourcePreferenceControllers(owner: LifecycleOwner) {
-        Log.d(TAG, "Setting up the safety source preference controllers")
-        val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
-        for (controller in allControllers) {
-            if (controller is SafetySourcePreferenceController) {
-                controller.setViewModelAndLifecycle(viewModel, owner)
-                controller.setActivityTaskId(requireActivity().taskId)
-            }
+    private fun setupSubpagePreferenceController(
+        subpagePreferenceController: SubpagePreferenceController
+    ) {
+        val preferenceKey = subpagePreferenceController.preferenceKey
+        Log.d(TAG, "Setting Up the sub-page preference controller for [$preferenceKey]")
+        subpagePreferenceController.viewModel = viewModel
+    }
+
+    private fun setupSafetySourcePreferenceController(
+        safetySourcePreferenceController: SafetySourcePreferenceController
+    ) {
+        val preferenceKey = safetySourcePreferenceController.preferenceKey
+        Log.d(TAG, "Setting up the safety source preference controller for [$preferenceKey]")
+        safetySourcePreferenceController.apply {
+            viewModel = this@SafetyCenterFragment.viewModel
+            activityTaskId = requireActivity().taskId
         }
     }
 
@@ -177,39 +129,54 @@ class SafetyCenterFragment : DashboardFragment() {
         return SettingsEnums.SAFETY_CENTER
     }
 
-    private fun initializeSubpagePreferenceController(
-        controller: SubpagePreferenceController,
-        subpageKey: SafetyCenterSubpageRegistry.SubpageKey,
-        @StringRes summaryResId: Int,
-        lifecycleOwner: LifecycleOwner,
-    ) {
-        controller.setRelatedSafetySources(
-            SafetyCenterSubpageRegistry.getXmlSafetySourceIds(requireContext(), subpageKey)
-        )
-        controller.setRelatedIssueOnlySafetySources(
-            SafetyCenterSubpageRegistry.getIssueOnlySafetySourceIds(subpageKey)
-        )
-        controller.setDefaultSummaryResId(summaryResId)
-        controller.setViewModelAndLifecycle(viewModel, lifecycleOwner)
-    }
-
     companion object {
         private const val TAG = "SafetyCenterFragment"
         private const val SAFETY_ISSUES_BANNER_KEY = "issues_banner_group"
-        private const val APP_SECURITY_SUBPAGE_KEY = "app_security_subpage"
-        private const val DEVICE_UNLOCK_SUBPAGE_KEY = "device_unlock_subpage"
-        private const val ACCOUNT_SECURITY_SUBPAGE_KEY = "account_security_subpage"
-        private const val DEVICE_FINDERS_SUBPAGE_KEY = "device_finders_subpage"
-        private const val SYSTEM_AND_UPDATES_SUBPAGE_KEY = "system_and_updates_subpage"
-        private const val CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY =
-            "cellular_network_security_subpage"
-        private const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
+
+        fun initializeSubpagePrefControllerForSearchIndex(
+            context: Context,
+            controller: SubpagePreferenceController,
+        ) {
+            val preferenceKey = controller.preferenceKey
+            controller.relatedSafetySources =
+                SafetyCenterSubpageRegistry.getXmlSafetySourceIds(context, preferenceKey)
+        }
 
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =
             object : BaseSearchIndexProvider(R.xml.safety_center_main_page) {
                 protected override fun isPageSearchEnabled(context: Context?): Boolean {
                     return Flags.enableSafetyCenterNewUi()
+                }
+
+                override fun getDynamicRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableRaw> {
+                    val rawData = super.getDynamicRawDataToIndex(context, enabled).toMutableList()
+
+                    // Add dynamic data for SafetySourcePreferences on the main page
+                    rawData.addAll(
+                        SafetyCenterSearchIndexUtils.getDynamicRawDataForIndexingFromXml(
+                            context,
+                            R.xml.safety_center_main_page,
+                            R.string.safety_center_title,
+                        )
+                    )
+                    return rawData
+                }
+
+                override fun getPreferenceControllers(
+                    context: Context?
+                ): MutableList<AbstractPreferenceController?> {
+                    val allControllers = super.getPreferenceControllers(context)
+
+                    for (controller in allControllers) {
+                        if (controller is SubpagePreferenceController) {
+                            initializeSubpagePrefControllerForSearchIndex(context!!, controller)
+                        }
+                    }
+                    return allControllers
                 }
             }
     }

@@ -30,6 +30,9 @@ internal class MagnificationTopIntroPreference :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.magnification_preference_screen_top_intro_purpose
+
     override val title: Int
         get() = R.string.accessibility_screen_magnification_intro_text
 

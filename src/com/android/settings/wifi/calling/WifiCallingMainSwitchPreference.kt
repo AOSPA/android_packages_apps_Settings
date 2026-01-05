@@ -58,6 +58,9 @@ class WifiCallingMainSwitchPreference(private val subId: Int) :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.wifi_calling_main_switch_title_purpose
+
     override val title: Int
         get() = R.string.wifi_calling_main_switch_title
 

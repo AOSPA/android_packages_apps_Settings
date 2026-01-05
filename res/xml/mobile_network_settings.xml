@@ -62,7 +62,7 @@
             android:enabled="false"
             settings:controller="com.android.settings.network.telephony.SmsDefaultSubscriptionController"/>
 
-        <Preference
+        <com.android.settings.supervision.NonClickablePreference
             android:key="mobile_network_spn"
             android:order="40"
             android:title="@string/mobile_network_spn_title"
@@ -97,6 +97,7 @@
 
         <SwitchPreference
             android:key="data_during_calls"
+            android:order="80"
             android:title="@string/data_during_calls_title"
             android:summary="@string/data_during_calls_summary"
             settings:controller="com.android.settings.network.telephony.DataDuringCallsPreferenceController"/>

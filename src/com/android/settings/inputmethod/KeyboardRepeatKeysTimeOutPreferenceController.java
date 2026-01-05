@@ -60,7 +60,6 @@ public class KeyboardRepeatKeysTimeOutPreferenceController extends SliderPrefere
 
     @Override
     public int getAvailabilityStatus() {
-        return InputSettings.isRepeatKeysFeatureFlagEnabled()
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return AVAILABLE;
     }
 }

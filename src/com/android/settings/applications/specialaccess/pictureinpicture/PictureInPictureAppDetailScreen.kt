@@ -36,15 +36,31 @@ import com.android.settings.applications.specialaccess.SpecialAccessAppDetailScr
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.utils.highlightPreference
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.ValidatedKeyParameters
 
 @ProvidePreferenceScreen(PictureInPictureAppDetailScreen.KEY, parameterized = true)
-open class PictureInPictureAppDetailScreen(context: Context, arguments: Bundle) :
-    SpecialAccessAppDetailScreen(context, arguments) {
+open class PictureInPictureAppDetailScreen : SpecialAccessAppDetailScreen {
+
+    @Deprecated(
+        "This constructor will be removed once the catalyst framework stops passing the arguments as a bundle. Use the other constructor instead."
+    )
+    constructor(context: Context, arguments: Bundle) : super(context, arguments)
+
+    constructor(
+        context: Context,
+        keyArguments: ValidatedKeyParameters,
+    ) : super(context, keyArguments)
 
     override val key
         get() = KEY
+
+    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val purpose: Int
+        get() = R.string.special_access_picture_in_picture_app_detail_purpose
 
     override val bindingKey
         get() = "$KEY-$packageName"
@@ -86,14 +102,33 @@ open class PictureInPictureAppDetailScreen(context: Context, arguments: Bundle) 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         Intent(ACTION_PICTURE_IN_PICTURE_SETTINGS).apply {
             data = "package:$packageName".toUri()
-            highlightPreference(arguments, metadata?.bindingKey)
+
+            if (CatalystFlags.catalystUseKeyParameters()) {
+                highlightPreference(keyParameters!!, metadata?.bindingKey)
+            } else {
+                highlightPreference(arguments!!, metadata?.bindingKey)
+            }
         }
 
-    companion object {
+    companion object :
+        ParameterizedPreferenceScreenArgumentsFactory by SpecialAccessAppDetailScreen.Companion {
         const val KEY = "special_access_picture_in_picture_app_detail"
 
-        @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
+        @JvmStatic
+        override fun keyParameters(context: Context) = keyParameters(context, DEFAULT_SHOW_SYSTEM)
 
+        fun keyParameters(context: Context, showSystemApp: Boolean) =
+            keyParameters(context, showSystemApp, ::pictureInPictureFilter)
+
+        @JvmStatic
+        @Deprecated(
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use keyParameters instead."
+        )
+        fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
+
+        @Deprecated(
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use keyParameters instead."
+        )
         fun parameters(context: Context, showSystemApp: Boolean) =
             parameters(context, showSystemApp, ::pictureInPictureFilter)
 

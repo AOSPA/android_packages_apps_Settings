@@ -21,13 +21,26 @@ import android.app.AppOpsManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.IntState
 import androidx.compose.runtime.asIntState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.core.os.bundleOf
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
@@ -39,14 +52,17 @@ import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.rememberContext
+import com.android.settingslib.spa.framework.compose.rememberDrawablePainter
+import com.android.settingslib.spa.framework.theme.SettingsSpace
 import com.android.settingslib.spa.framework.util.filterItem
 import com.android.settingslib.spa.framework.util.mapItem
-import com.android.settingslib.spa.widget.preference.ListPreferenceModel
 import com.android.settingslib.spa.widget.preference.ListPreferenceOption
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
-import com.android.settingslib.spa.widget.preference.RadioPreferences
-import com.android.settingslib.spa.widget.ui.AnnotatedText
+import com.android.settingslib.spa.widget.preference.Radio2
+import com.android.settingslib.spa.widget.scaffold.RegularScaffold
+import com.android.settingslib.spa.widget.ui.Category
+import com.android.settingslib.spa.widget.ui.Footer
 import com.android.settingslib.spaprivileged.framework.common.appOpsManager
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppOps
@@ -55,8 +71,8 @@ import com.android.settingslib.spaprivileged.model.app.PackageManagers
 import com.android.settingslib.spaprivileged.model.app.PackageManagers.hasRequestPermission
 import com.android.settingslib.spaprivileged.model.app.getOpMode
 import com.android.settingslib.spaprivileged.model.app.opModeFlow
+import com.android.settingslib.spaprivileged.model.app.rememberAppRepository
 import com.android.settingslib.spaprivileged.model.app.toRoute
-import com.android.settingslib.spaprivileged.template.app.AppInfoPage
 import com.android.settingslib.spaprivileged.template.app.AppList
 import com.android.settingslib.spaprivileged.template.app.AppListInput
 import com.android.settingslib.spaprivileged.template.app.AppListItem
@@ -206,18 +222,60 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
     }
 
     @Composable
+    @OptIn(ExperimentalMaterial3ExpressiveApi::class)
     override fun Page(arguments: Bundle?) {
         val model = remember(::ComputerControlAutomationAppListModel)
         val packageName = arguments?.getString(PACKAGE_NAME)!!
         val userId = arguments.getInt(USER_ID)
-        AppInfoPage(
-            title = stringResource(model.pageTitleResId),
-            packageName = packageName,
-            userId = userId,
-            packageManagers = PackageManagers,
-            footerContent = { AnnotatedText(model.footerResId) },
-        ) {
-            applicationInfo?.let { Content(it, model) }
+        val packageInfo =
+            remember(packageName, userId) {
+                PackageManagers.getPackageInfoAsUser(packageName, userId)
+            } ?: return
+        val appRepository = rememberAppRepository()
+        val app = checkNotNull(packageInfo.applicationInfo)
+        val title = appRepository.produceLabel(app).value
+        // Custom composable layout for the app info page to support centered app description
+        // without any app version information.
+        RegularScaffold(title = stringResource(model.pageTitleResId)) {
+            Column(
+                modifier =
+                    Modifier.fillMaxWidth()
+                        .padding(
+                            horizontal = SettingsSpace.small4,
+                            vertical = SettingsSpace.small1,
+                        ),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Image(
+                    painter = rememberDrawablePainter(appRepository.produceIcon(app).value),
+                    contentDescription = appRepository.produceIconContentDescription(app).value,
+                )
+                Spacer(Modifier.height(SettingsSpace.small1))
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleLargeEmphasized,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+                Text(
+                    text = stringResource(model.subHeadingResId),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier =
+                        Modifier.padding(
+                            vertical = SettingsSpace.extraSmall2,
+                            horizontal = SettingsSpace.small4,
+                        ),
+                    textAlign = TextAlign.Center,
+                )
+            }
+            packageInfo.applicationInfo?.let { Content(it, model) }
+            Footer {
+                Text(
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodyMedium,
+                    text = stringResource(model.footerResId, title),
+                )
+            }
         }
     }
 
@@ -225,31 +283,27 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
     @Composable
     fun Content(app: ApplicationInfo, model: ComputerControlAutomationAppListModel) {
         val controller = rememberContext { ComputerAutomationController(it, app, model.appOps) }
-        RadioPreferences(
-            model =
-                object : ListPreferenceModel {
-                    override val title = stringResource(model.switchTitleResId)
-                    override val options =
-                        listOf(
-                            ListPreferenceOption(
-                                id = AppOpsManager.MODE_ALLOWED,
-                                text = stringResource(model.allowedTitleResId),
-                            ),
-                            ListPreferenceOption(
-                                id = AppOpsManager.MODE_DEFAULT,
-                                text = stringResource(model.askTitleResId),
-                            ),
-                            ListPreferenceOption(
-                                id = AppOpsManager.MODE_IGNORED,
-                                text = stringResource(model.deniedTitleResId),
-                            ),
-                        )
-                    override val selectedId: IntState =
-                        controller.modeFlow.collectAsState(controller.mode).asIntState()
-
-                    override val onIdSelected: (id: Int) -> Unit = { controller.setMode(it) }
-                }
-        )
+        val options =
+            listOf(
+                ListPreferenceOption(
+                    id = AppOpsManager.MODE_ALLOWED,
+                    text = stringResource(model.allowedTitleResId),
+                ),
+                ListPreferenceOption(
+                    id = AppOpsManager.MODE_DEFAULT,
+                    text = stringResource(model.askTitleResId),
+                ),
+                ListPreferenceOption(
+                    id = AppOpsManager.MODE_IGNORED,
+                    text = stringResource(model.deniedTitleResId),
+                ),
+            )
+        val selectedId: IntState = controller.modeFlow.collectAsState(controller.mode).asIntState()
+        Category(modifier = Modifier.selectableGroup()) {
+            for (option in options) {
+                Radio2(option, selectedId.intValue, enabled = true) { controller.setMode(it) }
+            }
+        }
     }
 }
 
@@ -265,8 +319,8 @@ class ComputerControlAutomationAppListModel : AppListModel<ComputerControlAppRec
     val askTitleResId = R.string.computer_control_automation_ask_every_time
     val deniedTitleResId = R.string.computer_control_automation_dont_allow
     val pageTitleResId = R.string.computer_control_automation_page_title
-    val switchTitleResId = R.string.computer_control_automation_switch_title
-    val footerResId = R.string.computer_control_automation_footer_description
+    val subHeadingResId = R.string.computer_control_automation_sub_heading
+    val footerResId = R.string.computer_control_automation_footer_summary
     val appOps =
         AppOps(
             op = AppOpsManager.OP_COMPUTER_CONTROL,

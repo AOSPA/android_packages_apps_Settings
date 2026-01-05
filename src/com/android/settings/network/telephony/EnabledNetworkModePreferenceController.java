@@ -15,8 +15,8 @@
  */
 
 /*
- * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
- * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Changes from Qualcomm Technologies, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -33,12 +33,9 @@ import static com.android.settings.network.telephony.mode.NetworkModes.reduceNrT
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.database.ContentObserver;
-import android.os.Handler;
 import android.os.Looper;
 import android.content.res.Resources;
 import android.os.PersistableBundle;
-import android.os.RemoteException;
 import android.provider.Settings;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -404,8 +401,6 @@ public class EnabledNetworkModePreferenceController extends
 
         private boolean mIsGlobalCdma;
         private boolean mIs5gEntryDisplayed;
-        private boolean mAllowed5gNetworkType;
-        private boolean mSupported5gRadioAccessFamily;
         private boolean mShow4gForLTE;
         private boolean mDisplay2gOptions;
         private boolean mDisplay3gOptions;
@@ -430,14 +425,6 @@ public class EnabledNetworkModePreferenceController extends
         public void updateConfig() {
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
             final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
-
-            mAllowed5gNetworkType = checkSupportedRadioBitmask(
-                    mTelephonyManager.getAllowedNetworkTypesForReason(
-                            TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER),
-                    TelephonyManager.NETWORK_TYPE_BITMASK_NR);
-            mSupported5gRadioAccessFamily = checkSupportedRadioBitmask(
-                    mTelephonyManager.getSupportedRadioAccessFamily(),
-                    TelephonyManager.NETWORK_TYPE_BITMASK_NR);
             // Load the network types actually supported by the baseband.
             final long supportedRaf = mTelephonyManager.getSupportedRadioAccessFamily();
             final boolean supported5g = checkSupportedRadioBitmask(supportedRaf, BITMASK_5G);
@@ -462,10 +449,15 @@ public class EnabledNetworkModePreferenceController extends
                 configKeyPrefer2g = carrierConfig.getBoolean(
                         CarrierConfigManager.KEY_PREFER_2G_BOOL);
             }
-            final boolean allowed2gNetworkType =
-                    checkSupportedRadioBitmask(mTelephonyManager.getAllowedNetworkTypesForReason(
-                            TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G),
-                        BITMASK_2G);
+            long allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
+            try {
+                allowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G);
+            } catch (Exception ex) {
+                Log.e(LOG_TAG, "getAllowedNetworkTypesForReason exception", ex);
+            }
+            final boolean allowed2gNetworkType = checkSupportedRadioBitmask(
+                    allowedNetworkTypes, BITMASK_2G);
             final boolean enabledByAdmin2g = !is2gDisabledByAdmin();
             mDisplay2gOptions =
                 supported2g
@@ -523,10 +515,15 @@ public class EnabledNetworkModePreferenceController extends
                     + ", allowed4gNetworkType: " + allowed4gNetworkType);
 
             // 5G option display
+            allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
+            try {
+                allowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER);
+            } catch (Exception ex) {
+                Log.e(LOG_TAG, "getAllowedNetworkTypesForReason exception", ex);
+            }
             final boolean allowed5gNetworkType = checkSupportedRadioBitmask(
-                    mTelephonyManager.getAllowedNetworkTypesForReason(
-                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER),
-                    TelephonyManager.NETWORK_TYPE_BITMASK_NR);
+                    allowedNetworkTypes, TelephonyManager.NETWORK_TYPE_BITMASK_NR);
             mDisplay5gOptions = supported5g && allowed5gNetworkType;
             Log.d(LOG_TAG, "mDisplay5gOptions: " + mDisplay5gOptions
                     + ", supported5g: " + supported5g

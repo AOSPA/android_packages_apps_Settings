@@ -32,6 +32,9 @@ class DarkModeMainSwitchPreference(private val dataStore: DarkModeStorage) :
     override val key: String
         get() = KEY
 
+    override val purpose: Int
+        get() = R.string.dark_ui_activated_purpose
+
     override val title: Int
         get() = R.string.dark_theme_main_switch_title
 
