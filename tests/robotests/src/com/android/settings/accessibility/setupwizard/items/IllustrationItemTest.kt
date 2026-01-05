@@ -27,12 +27,13 @@ import androidx.test.core.app.ApplicationProvider
 import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
+import com.google.testing.junit.testparameterinjector.TestParameters
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import org.robolectric.RobolectricTestParameterInjector
 
 /** Tests for [IllustrationItem]. */
-@RunWith(RobolectricTestRunner::class)
+@RunWith(RobolectricTestParameterInjector::class)
 class IllustrationItemTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
@@ -50,6 +51,18 @@ class IllustrationItemTest {
         val illustrationView =
             rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
         assertThat(illustrationView.drawable).isEqualTo(drawable)
+    }
+
+    @Test
+    @TestParameters(value = ["{resId: ${R.raw.accessibility_color_inversion_banner}}"])
+    fun onBindView_setsImageResource(resId: Int) {
+        illustrationItem.imageResId = resId
+
+        illustrationItem.onBindView(rootView)
+
+        val illustrationView =
+            rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
+        assertThat(illustrationView.drawable).isNotNull()
     }
 
     @Test
@@ -92,12 +105,24 @@ class IllustrationItemTest {
         assertOnlyThisResourceIsSet(expectedDrawable = drawable)
     }
 
+    @Test
+    fun setImageResId_clearsOtherResources() {
+        illustrationItem.imageUri = Uri.parse("content://test")
+
+        val resId = 101
+        illustrationItem.imageResId = resId
+
+        assertOnlyThisResourceIsSet(expectedResId = resId)
+    }
+
     /** Helper to verify that only one resource is active at a time. */
     private fun assertOnlyThisResourceIsSet(
         expectedDrawable: Drawable? = null,
         expectedUri: Uri? = null,
+        expectedResId: Int = 0,
     ) {
         assertThat(illustrationItem.imageDrawable).isEqualTo(expectedDrawable)
         assertThat(illustrationItem.imageUri).isEqualTo(expectedUri)
+        assertThat(illustrationItem.imageResId).isEqualTo(expectedResId)
     }
 }
