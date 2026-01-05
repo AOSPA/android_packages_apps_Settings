@@ -110,6 +110,7 @@ import com.android.settings.notification.SoundWorkApiScreen
 import com.android.settings.notification.SpatialAudioApiScreen
 import com.android.settings.notification.app.ConversationListScreen
 import com.android.settings.notification.modes.ZenModesListScreen
+import com.android.settings.print.PrintSettingsApiScreen
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.sound.MediaControlsScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
@@ -465,6 +466,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = PowerMenuSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiHotspotSecurityApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiHotspotSpeedApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = PrintSettingsApiScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =
