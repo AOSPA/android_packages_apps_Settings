@@ -51,10 +51,12 @@
         settings:controller="com.android.settings.accessibility.HearingDeviceRoutingPreferenceController">
         <SwitchPreferenceCompat
             android:key="hearing_device_notification_routing"
-            android:title="@string/accessibility_hearing_device_notification_routing_title" />
+            android:title="@string/accessibility_hearing_device_notification_routing_title"
+            settings:controller="com.android.settings.accessibility.HearingDeviceNotificationRoutingSwitchPreferenceController" />
         <SwitchPreferenceCompat
             android:key="hearing_device_ringtone_alarm_routing"
-            android:title="@string/accessibility_hearing_device_ringtone_alarm_routing_title" />
+            android:title="@string/accessibility_hearing_device_ringtone_alarm_routing_title"
+            settings:controller="com.android.settings.accessibility.HearingDeviceRingtoneAlarmRoutingSwitchPreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory
