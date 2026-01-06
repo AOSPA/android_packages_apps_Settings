@@ -60,6 +60,7 @@ import com.android.settings.connecteddevice.BluetoothDashboardScreen
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardScreen
 import com.android.settings.connecteddevice.NfcAndPaymentScreen
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceScreen
+import com.android.settings.connecteddevice.usb.UsbDetailsApiScreen
 import com.android.settings.datausage.BillingCycleScreen
 import com.android.settings.datausage.DataSaverScreen
 import com.android.settings.datausage.DataUsageAppDetailScreen
@@ -469,6 +470,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = WifiHotspotSecurityApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiHotspotSpeedApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PrintSettingsApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = UsbDetailsApiScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =
