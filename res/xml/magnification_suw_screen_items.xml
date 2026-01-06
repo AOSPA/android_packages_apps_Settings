@@ -18,6 +18,9 @@
 <ItemGroup xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/magnification_screen_in_suw">
 
+    <com.android.settings.accessibility.setupwizard.items.IllustrationItem
+        android:id="@+id/magnification_illustration_in_suw" />
+
     <SectionItem
         android:id="@+id/magnification_option_in_suw"
         android:title="@string/accessibility_screen_option">
