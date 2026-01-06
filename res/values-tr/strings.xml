@@ -1367,7 +1367,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Kapalı"</string>
     <string name="hdr_brightness_title" msgid="6997980740096282616">"Gelişmiş HDR parlaklığı"</string>
     <string name="hdr_brightness_level_title" msgid="770342878327164738">"Yoğunluk"</string>
-    <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Standart görsel"</string>
+    <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Standart görüntü"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR görüntü"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Bu ayar yalnızca Yüksek Dinamik Aralık (HDR) özelliğini destekleyen görselleri ve videoları etkiler."</string>
     <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Yoğunluk: Yoğunluğu azaltın veya artırın."</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Erişilebilirlik özelliklerine hızlıca erişin"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Başlamak için&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Erişilebilirlik ayarlarına gidin&lt;br/&gt; {1,number,integer}. Bir özellik seçip kısayola dokunun&lt;br/&gt; {2,number,integer}. Özelliğe erişmek için kullanılacak düğmeyi seçin&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Yer"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Diğer uygulamaların üzerinde kayan"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Gezinme çubuğu"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Boyut"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Büyük"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Küçük"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Kullanılmadığında şeffaflaştır"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Ekranı daha rahat görebilmeniz için birkaç saniye içinde şeffaflaşır"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Kullanımda değilken şeffaflık"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Bu zamanlama tercihi bazı uygulamalar tarafından desteklenmez"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"İşlem yapmanızı isteyen ancak geçici olarak görüntülenen mesajların ne kadar süre gösterileceğini seçin"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Dokunma ve basılı tutma süresi"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Kısa"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Orta"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Uzun"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Rengi ters çevirme"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Rengi ters çevirme işlevini kullan"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Rengi ters çevirme kısayolu"</string>
@@ -3449,8 +3448,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Kilit ekranından kullanıcı eklensin"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Oturum açma ekranından kullanıcı ekleyin"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Yuvaya yerleştirildiğinde yönetici kullanıcıya geç"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Kullanıcı silindi"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Kendinizi silmek istiyor musunuz?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Bu kullanıcı silinsin mi?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Bu profil kaldırılsın mı?"</string>
@@ -5309,6 +5307,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Telefonunuzdaki desteklenen uygulamalar"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM eklenemiyor"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM eklemeden önce uydu bağlantısını sonlandırın"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth kapalı"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Bluetooth ile bağlandığında uçak modu, telefon ve kol saati gibi desteklenen cihazlar arasında senkronize edilir"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Erişim Noktası Adları"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>

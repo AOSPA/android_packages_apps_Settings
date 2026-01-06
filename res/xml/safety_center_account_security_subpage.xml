@@ -19,13 +19,16 @@
     android:title="@string/account_security_subpage_title">
     <com.android.settingslib.widget.IllustrationPreference
         android:key="account_security_illustration"
+        android:order="10"
         android:selectable="false" />
 
     <com.android.settingslib.widget.BannerMessagePreferenceGroup
-        android:key="account_security_issues_banner_group" />
+        android:key="account_security_issues_banner_group"
+        android:order="20" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="account_security_checkup_personal"
+        android:order="30"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:keywords="@string/safety_center_account_security_search_terms"
         settings:safetySource="@string/config_safety_center_account_security_source_id"
@@ -33,6 +36,7 @@
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="account_security_checkup_work"
+        android:order="40"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:keywords="@string/safety_center_account_security_search_terms"
         settings:safetySource="@string/config_safety_center_account_security_source_id"
@@ -40,6 +44,7 @@
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="account_security_checkup_private"
+        android:order="50"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:keywords="@string/safety_center_account_security_search_terms"
         settings:safetySource="@string/config_safety_center_account_security_source_id"
@@ -47,18 +52,21 @@
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="password_security_checkup_personal"
+        android:order="60"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:safetySource="@string/config_safety_center_password_security_source_id"
         settings:profile="personal_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="password_security_checkup_work"
+        android:order="70"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:safetySource="@string/config_safety_center_password_security_source_id"
         settings:profile="work_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="password_security_checkup_private"
+        android:order="80"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:safetySource="@string/config_safety_center_password_security_source_id"
         settings:profile="private_profile" />

@@ -64,7 +64,7 @@
     <string name="bluetooth_only_visible_to_paired_devices" msgid="3574936359739213455">"Viditeľné len pre spárované zariadenia"</string>
     <string name="bluetooth_devices" msgid="1063177983261608277">"Zariadenia Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Názov zariadenia"</string>
-    <string name="bluetooth_rename_device" msgid="4219655243836021443">"Premenovať toto zariadenie"</string>
+    <string name="bluetooth_rename_device" msgid="4219655243836021443">"Premenujte toto zariadenie"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Premenovať"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Odpojiť zariadenie?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Spárovať nové zariadenie"</string>
@@ -1440,7 +1440,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Nastavenia režimu večierky"</string>
     <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Tmavý motív môžu zapnúť aj režimy}=1{Režim {mode_1} tiež zapne tmavý motív}=2{Režimy {mode_1} a {mode_2} tiež zapnú tmavý motív}=3{Režimy {mode_1}, {mode_2} a {mode_3} tiež zapnú tmavý motív}few{Režimy {mode_1}, {mode_2} a # ďalšie tiež zapnú tmavý motív}many{{mode_1}, {mode_2}, and # more also turn on dark theme}other{Režimy {mode_1}, {mode_2} a # ďalších tiež zapnú tmavý motív}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Nastavenia režimov"</string>
-    <string name="hdr_brigtness_text" msgid="1912629316654528876">"Rozjasnite a rozšírte farebný rozsah a jasnosť obrázkov a videí s technológiou HDR. Obsah s technológiou HDR bude jasnejší."</string>
+    <string name="hdr_brigtness_text" msgid="1912629316654528876">"Rozjasnite a rozšírte farebný rozsah aj jasnosť obrázkov a videí s technológiou High Dynamic Range (HDR), aby pôsobili jasnejšie."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Časový limit obrazovky"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> nečinnosti"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Nenastavené"</string>
@@ -1489,7 +1489,7 @@
     <string name="doze_always_on_summary_long" msgid="7956866501728946221">"Ukazuje čas, dátum a ďalšie informácie, keď je obrazovka vypnutá"</string>
     <string name="doze_always_on_summary_short" msgid="3301903540897812365">"Zobrazovanie času, dátumu a ďalších informácií"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Možnosti tapety"</string>
-    <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Zobrazenie tapety na uzamknutej obrazovke"</string>
+    <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Zobraziť tapetu na uzamknutej obrazovke"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Tapeta z uzamknutej obrazovky sa zobrazuje na vždy zapnutej obrazovke"</string>
     <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Vypínanie obrazovky pri nečinnosti"</string>
     <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Vypne obrazovku, keď sa nezistí žiadna aktivita používateľa, aby sa šetrila energia"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Rýchly prístup k funkciám dostupnosti"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Ak chcete začať:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Prejdite do nastavení dostupnosti.&lt;br/&gt; {1,number,integer}. Vyberte funkciu a klepnite na odkaz.&lt;br/&gt; {2,number,integer}. Vyberte tlačidlo na prístup k danej funkcii.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Poloha"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Plávajúce nad ostatnými aplikáciami"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Navigačný panel"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Veľkosť"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Veľké"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Malé"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Nechať zmiznúť, keď sa nepoužíva"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Po niekoľkých sekundách zmizne, takže ľahšie uvidíte obrazovku"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Priehľadnosť, keď sa nepoužíva"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Táto predvoľba času nie je podporovaná všetkými aplikáciami."</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Vyberte, ako dlho sa majú zobrazovať dočasné správy s výzvami na akciu"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Oneskorenie pridržania"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Krátke"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Stredné"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Dlhé"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inverzia farieb"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Používať inverziu farieb"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Skratka inverzie farieb"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Pridávať používateľov z uzamknutej obrazovky"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Pridávať používateľov z prihlasovacej obrazovky"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"V doku prepnúť na správcu"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Používateľ bol odobraný"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Chcete odstrániť svoj profil?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Chcete odobrať tohto používateľa?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Odstrániť tento profil?"</string>
@@ -4415,7 +4413,7 @@
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Neboli požadované žiadne povolenia"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Ovládajte prístup aplikácií k údajom"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"Panel ochrany súkromia"</string>
-    <string name="permissions_usage_summary" msgid="6784310472062516454">"Zobraziť, ktoré aplikácie nedávno použili povolenia"</string>
+    <string name="permissions_usage_summary" msgid="6784310472062516454">"Zobrazenie aplikácií, ktoré nedávno použili povolenia"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Nepoužívané aplikácie"</string>
     <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{# nepoužívaná aplikácia}few{# nepoužívané aplikácie}many{# unused apps}other{# nepoužívaných aplikácií}}"</string>
     <string name="unused_apps_category" msgid="8954930958175500851">"Nastavenia nepoužívanej aplikácie"</string>
@@ -5222,7 +5220,7 @@
     <string name="carrier_settings_title" msgid="6959295328730560529">"Nastavenia operátora"</string>
     <string name="cdma_lte_data_service" msgid="6937443423651347345">"Nastaviť dátovú službu"</string>
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Mobilné dáta"</string>
-    <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Prístup k dátam pomocou mobilnej siete"</string>
+    <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Pristupovať k dátam pomocou mobilnej siete"</string>
     <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"Nie je k dispozícii žiadna SIM karta"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Predvolená služba pre hovory"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Predvolená služba pre SMS"</string>
@@ -5308,6 +5306,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Podporované aplikácie vo vašom telefóne"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM kartu sa nepodarilo pridať"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Pred pridaním SIM karty ukončite pripojenie k satelitu"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Rozhranie Bluetooth je vypnuté"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Po pripojení cez Bluetooth sa bude režim v lietadle synchronizovať medzi podporovanými zariadeniami, ako sú telefón a hodinky."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Názvy prístupových bodov"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>

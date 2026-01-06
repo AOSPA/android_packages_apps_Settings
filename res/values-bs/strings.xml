@@ -754,12 +754,12 @@
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Za dodatnu sigurnost postavite PIN, uzorak ili lozinku za ovaj uređaj."</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Dodajte otisak prsta da otključate"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Zaključavanje ekrana"</string>
-    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Odaberite zaključavanje ekrana"</string>
+    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Odaberite otključavanje ekrana"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Odaberite novo zaključavanje ekrana"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Odaberite zaključavanje za poslovne aplikacije"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Odaberite novo zaključavanje radnog profila"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Za dodatnu sigurnost postavite alternativni način zaključavanja ekrana"</string>
-    <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Odaberite rezervni način zaključavanja ekrana"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Za dodatnu sigurnost postavite rezervni način otključavanja ekrana"</string>
+    <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Odaberite rezervni način otključavanja ekrana"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Ako zaboravite radnju za zaključavanje ekrana, vaš IT administrator je neće moći poništiti."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Postavite zasebno zaključavanje za poslovne aplikacije"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Ako zaboravite ovo zaključavanje, tražite od IT administratora da ga poništi"</string>
@@ -780,7 +780,7 @@
     <string name="unlock_set_unlock_pin_title" msgid="5283636759362880407">"PIN"</string>
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Lozinka"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Ne sada"</string>
-    <string name="current_screen_lock" msgid="1367883977261098017">"Trenutni način zaključavanja ekrana"</string>
+    <string name="current_screen_lock" msgid="1367883977261098017">"Trenutni način otključavanja ekrana"</string>
     <string name="unlock_accessibility_pin_area" msgid="437104569661316525">"Područje PIN-a"</string>
     <string name="unlock_accessibility_password" msgid="5404713613573232309">"Lozinka za uređaj"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Uzorak • Otisak prsta"</string>
@@ -2250,7 +2250,7 @@
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Prikaži nedavne aplikacije"</string>
     <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"Otvorite drugu aplikaciju"</string>
     <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"Odaberite s liste instaliranih aplikacija"</string>
-    <string name="gesture_title_go_home" msgid="3682238648647225933">"Idite na početni ekran"</string>
+    <string name="gesture_title_go_home" msgid="3682238648647225933">"Odlazak na početni ekran"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Prevucite nagore s tri prsta bilo gdje na dodirnoj podlozi"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Nazad"</string>
     <string name="gesture_summary_go_back" msgid="4981604277892236888">"Prevucite slijeva ili zdesna s tri prsta"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Brzo pristupite funkcijama pristupačnosti"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Da započnete:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Idite u postavke pristupačnosti.&lt;br/&gt; {1,number,integer}. Odaberite funkciju i dodirnite prečicu.&lt;br/&gt; {2,number,integer}. Odaberite dugme da pristupite funkciji.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokacija"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Plutanje preko drugih aplikacija"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Navigacijska traka"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Veličina"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Veliko"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Malo"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Blijedi kada se ne koristi"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Blijedi nakon nekoliko sekundi da lakše možete vidjeti ekran"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Providno kada se ne koristi"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Ovu postavku za vrijeme ne podržavaju sve aplikacije"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Odaberite koliko dugo želite da se prikazuju privremene poruke koje od vas zahtijevaju da preduzmete radnju"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Odgoda za dodirivanje i držanje"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Kratko"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Srednje"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Dugo"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inverzija boja"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Koristi inverziju boja"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Prečica za inverziju boja"</string>
@@ -3132,7 +3131,7 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Produžava vijek trajanja baterije i poboljšava performanse uređaja automatskim upravljanjem vašim mrežnim vezama"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Uključeno"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Isključeno"</string>
-    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Koristi prilagodljivo povezivanje"</string>
+    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Koristi prilagodljivu povezivost"</string>
     <string name="adaptive_connectivity_wifi_switch_title" msgid="8534819376336827298">"Automatski prebaci na mobilnu mrežu"</string>
     <string name="adaptive_connectivity_wifi_switch_summary" msgid="827122572213043364">"Osigurava povezivost kada je WiFi slab ili nedostupan. Mogući su troškovi prenosa podataka."</string>
     <string name="adaptive_connectivity_mobile_network_switch_title" msgid="1852172801040818123">"Optimiziraj mrežu za vijek trajanja baterije"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Dodavanje korisnika sa zaključanog ekrana"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Dodajte korisnike s ekrana prijave"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Prebaci na administratora kada je uređaj priključen"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Korisnik je izbrisao"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Želite li izbrisati sebe?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Izbrisati ovog korisnika?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Ukloniti ovaj profil?"</string>
@@ -5308,6 +5306,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Podržane aplikacije na telefonu"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Nije moguće dodati SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Prekinite satelitsku vezu prije dodavanja SIM-a"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth je isključen"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Kada su povezani putem Bluetootha, način rada u avionu će se sinhronizirati na podržanim uređajima kao što su telefon i sat"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nazivi pristupne tačke"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
@@ -5345,8 +5344,8 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"Isključi"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Nije moguće aktivirati SIM"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Pokušajte ponovo uključiti SIM. Ako se problem ne riješi, ponovo pokrenite uređaj."</string>
-    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Postavite preference SIM-a"</string>
-    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Postavite preference mobilne mreže da koristite više SIM-ova na uređaju"</string>
+    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Postavite preferencije SIM-a"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Postavite preferencije mobilne mreže da koristite više SIM-ova na uređaju"</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Označite SIM-ove"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Vidjet ćete ove oznake prilikom upućivanja poziva, slanja poruka i korištenja prenosa podataka, kao i u Postavkama"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"Oznaka SIM-a"</string>
@@ -5354,7 +5353,7 @@
     <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"Odaberite SIM-ove za korištenje"</string>
     <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"Možete istovremeno koristiti 2 SIM-a"</string>
     <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Postavite primarne SIM-ove"</string>
-    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Odaberite SIM-ove koji će se prema zadanim postavkama koristiti za pozive, poruke i prijenos podataka"</string>
+    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Odaberite SIM-ove koji će se prema zadanim postavkama koristiti za pozive, poruke i prenos podataka"</string>
     <string name="primary_sim_title" msgid="2508161011657571566">"Primarni SIM-ovi"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"Pozivi"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Poruke"</string>

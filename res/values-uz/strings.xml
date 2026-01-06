@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Maxsus imkoniyatlarni tez ochish"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Boshlash uchun&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Maxsus imkoniyatlar sozlamalarini oching&lt;br/&gt; {1,number,integer}. Funksiyani tanlang va yorliq ustiga bosing&lt;br/&gt; {2,number,integer}. Funksiyadan foydalanish uchun tugmani tanlang&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Joylashuv"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Boshqa ilovalar ustidan chiqishi"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Navigatsiya paneli"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Hajmi"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Yirik"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Kichik"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Ishlatilmagandagi shaffoflashuv"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Ekranni oson koʻrish uchun bir necha soniyada shaffoflashadi"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Ishlatilmagandagi shaffoflik"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Bu vaqt sozlamalari barcha ilovalarda ishlamasligi mumkin"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Amal bajarishni talab qiladigan vaqtinchalik xabarlar qancha vaqt chiqishi kerakligini tanlang."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Bosganda va bosib turganda kechikish"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Qisqa"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Oʻrtacha"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Uzun"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Ranglarni akslantirish"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Ranglarni akslantirish"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Ranglarni akslantirish tezkor tugmasi"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Foydalanuvchilarni ekran qulfidan qo‘shish"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Kirish ekranida foydalanuvchilarni kiriting"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Dok-stantsiyasiga ulanganda administratorga oʻtish"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Foydalanuvchi oʻchirildi"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Profilingiz o‘chirilsinmi?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Olib tashlansinmi?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Profil o‘chirilsinmi?"</string>
@@ -4312,7 +4310,7 @@
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Taqvimdagi tadbirlar"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Uyqu rejimi"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Avtomobilda"</string>
-    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"Tranzitda"</string>
+    <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"Jamoat transportida"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Ilova sozlamalari"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"<xliff:g id="APP_NAME">%1$s</xliff:g> ilovasida axborot va sozlamalar"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"<xliff:g id="APP_NAME">%1$s</xliff:g> tomonidan boshqariladi"</string>
@@ -5308,6 +5306,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Telefoningizdagi mos ilovalar"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM karta kiritilmadi"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM karta qoʻshishdan oldin sputnik aloqasini tugating"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth yoqilmagan"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Bluetooth orqali ulanganda Parvoz rejimi telefon va soat kabi mos qurilmalarda sinxronlanadi"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Internetga ulanish nuqtalari (APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>

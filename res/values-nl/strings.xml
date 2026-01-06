@@ -456,7 +456,7 @@
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Ontgrendelen met vingerafdruk toestaan"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Je vingerafdruk gebruiken"</string>
     <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Meer informatie over Ontgrendelen met vingerafdruk"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Jij hebt het voor het zeggen"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Jij hebt de controle"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Jij en je kind hebben de controle"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Goed om te weten"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Annuleren"</string>
@@ -1647,7 +1647,7 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"Gemeenschappelijke instellingen"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub-modus"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgets op vergrendelscherm"</string>
-    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"Swipe vanaf je vergrendelscherm naar links om toegang te krijgen tot je favoriete widgets. \n\nAls je een app opent met een widget, moet je laten verifiëren dat jij het bent. Houd er ook rekening mee dat iedereen widgets op je vergrendelscherm kan bekijken."</string>
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"Swipe vanaf je vergrendelscherm naar links om toegang te krijgen tot je favoriete widgets. \n\nAls je een app opent met een widget, moet je bevestigen dat jij het bent. Houd er ook rekening mee dat iedereen de widgets op je vergrendelscherm kan zien."</string>
     <string name="settings_beta_tag" msgid="8646243453760353582">"Bèta"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Wanneer automatisch tonen"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nooit"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Krijg snel toegang tot toegankelijkheidsfuncties"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Zo ga je aan de slag:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Ga naar de toegankelijkheidsinstellingen&lt;br/&gt; {1,number,integer}. Kies een functie en tik op de snelkoppeling&lt;br/&gt; {2,number,integer}. Kies de knop waarmee je de functie wilt openen&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Locatie"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Zwevend over andere apps"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Navigatiebalk"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Grootte"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Groot"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Klein"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Vervagen indien niet in gebruik"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Vervaagt na een paar seconden zodat je het scherm beter ziet"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Transparantie indien niet in gebruik"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"De ingestelde duur wordt niet door alle apps ondersteund"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Hoelang wil je tijdelijke berichten tonen waarin je wordt gevraagd iets te doen?"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Vertraging voor ingedrukt houden"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Kort"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Normaal"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Lang"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Kleurinversie"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Kleurinversie gebruiken"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Snelkoppeling voor kleurinversie"</string>
@@ -2777,7 +2776,7 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Over extra dimmen"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Dim het scherm nog wat meer om prettiger te kunnen lezen"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensiteit"</string>
-    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"Helderheid lager"</string>
+    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"Minder helder"</string>
     <string name="brightness_intensity_end_label" msgid="2697495729534414164">"Helderder"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Aanhouden nadat het apparaat opnieuw is opgestart"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Kort ({time} seconde)}other{Kort ({time} seconden)}}"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Gebruikers toevoegen vanaf vergrendelscherm"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Gebruikers toevoegen vanaf het inlogscherm"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Overschakelen naar beheerder indien gedockt"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Gebruiker verwijderd"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Wil je jezelf verwijderen?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Gebruiker verwijderen?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Dit profiel verwijderen?"</string>
@@ -4329,7 +4327,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Blokkeer afleidingen of onderbrekingen van je apparaat zodat je je beter kunt focussen"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimineer afleidingen voor een rustige omgeving"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personaliseer apparaatfuncties en -instellingen voor verschillende gebruikers"</string>
-    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Krijg een betere reis met het openbaar vervoer door automatische aanpassingen van de instellingen"</string>
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Maak je reis met het openbaar vervoer beter met automatische aanpassingen van de instellingen"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimaliseer onderbrekingen door alleen belangrijke mensen en apps toestaan om je te storen"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Stel een modus in die een vast schema volgt"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Houd je apparaat gesynchroniseerd met je dagelijkse afspraken"</string>
@@ -5308,6 +5306,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Ondersteunde apps op je telefoon"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Kan geen simkaart toevoegen"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Beëindig de satellietverbinding voordat je een simkaart toevoegt"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth staat uit"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Als je verbinding hebt via bluetooth, wordt de vliegtuigmodus gesynchroniseerd op de ondersteunde apparaten, zoals je telefoon en smartwatch"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Toegangspuntnamen"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>

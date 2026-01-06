@@ -675,10 +675,7 @@ class DisplayTopologyPreferenceController(
     }
 
     private fun setDisplayToShowArrows(displayId: Int) {
-        if (
-            !injector.flags.showTabbedConnectedDisplaySetting() ||
-                !injector.flags.enableDisplayBlockArrowMovementBugfix()
-        ) {
+        if (!injector.flags.showTabbedConnectedDisplaySetting()) {
             return
         }
         showArrowMovementDisplayId = displayId

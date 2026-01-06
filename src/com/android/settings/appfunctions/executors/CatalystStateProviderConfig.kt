@@ -89,6 +89,7 @@ import com.android.settings.fuelgauge.batteryusage.PowerUsageSummaryScreen
 import com.android.settings.gestures.ButtonNavigationSettingsScreen
 import com.android.settings.gestures.DoubleTapPowerScreen
 import com.android.settings.gestures.DoubleTwistGestureApiFirstScreen
+import com.android.settings.gestures.GestureSettingsApiScreen
 import com.android.settings.gestures.PowerMenuSettingsScreenApi
 import com.android.settings.gestures.SwipeToNotificationApiScreen
 import com.android.settings.gestures.SystemNavigationGestureScreen
@@ -110,6 +111,7 @@ import com.android.settings.notification.SoundWorkApiScreen
 import com.android.settings.notification.SpatialAudioApiScreen
 import com.android.settings.notification.app.ConversationListScreen
 import com.android.settings.notification.modes.ZenModesListScreen
+import com.android.settings.print.PrintSettingsApiScreen
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.sound.MediaControlsScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
@@ -458,6 +460,7 @@ private fun getCatalystScreenConfigs() =
             screenKey = BillingCycleScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
+        PerScreenCatalystConfig(enabled = true, screenKey = GestureSettingsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DoubleTwistGestureApiFirstScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = SwipeToNotificationApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDirectApiScreen.KEY),
@@ -465,6 +468,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = PowerMenuSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiHotspotSecurityApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiHotspotSpeedApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = PrintSettingsApiScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =

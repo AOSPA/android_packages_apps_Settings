@@ -29,6 +29,7 @@ import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.CannotSetException
 import com.android.settings.testutils2.FailedPreconditionException
 import com.android.settings.testutils2.HardwareUnsupportedException
+import com.android.settings.testutils2.InvalidValueException
 import com.android.settings.testutils2.MissingPermissionException
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
@@ -36,6 +37,8 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import com.google.common.truth.Truth
 import kotlin.test.assertFailsWith
 import org.junit.Rule
@@ -176,6 +179,52 @@ class ApiTesterTest {
                         else Allowed
                     }
                     execute { value -> theValue = value }
+                }
+            }
+            preference(
+                key = "preference_with_generated_type",
+                purpose = 0,
+                type = GeneratedType<String>(R.string.generated_type_description) {
+                    listOf(
+                        GeneratedValue<String>("value1", "first"),
+                        GeneratedValue<String>("value2", "second")
+                    )
+                }
+            ) {
+                var theValue = "value1"
+                get {
+                    execute {
+                        theValue
+                    }
+                }
+                set {
+                    execute { value->
+                        theValue = value
+                    }
+                }
+
+            }
+
+            preference(
+                key = "preference_with_generated_type_gets_and_sets_invalid_value",
+                purpose = 0,
+                type = GeneratedType<String>(R.string.generated_type_description) {
+                    listOf(
+                        GeneratedValue<String>("value1", "first"),
+                        GeneratedValue<String>("value2", "second")
+                    )
+                }
+            ) {
+                var theValue = "Hello"
+                get {
+                    execute {
+                        "value3"
+                    }
+                }
+                set {
+                    execute { value ->
+                        theValue = value
+                    }
                 }
             }
         }
@@ -350,4 +399,44 @@ class ApiTesterTest {
     fun launchIntent_correctScreen_hasIntent() {
         Truth.assertThat(tester.getLaunchIntent()).isNotNull()
     }
+
+    @Test
+    fun getPreferenceOptions_generatedType_areCorrect() {
+        Truth.assertThat(
+            tester.getPreferenceOptions<String>("preference_with_generated_type")
+        ).containsExactly(
+            ("value1" to "first"),
+            ("value2" to "second")
+        )
+    }
+
+    @Test
+    fun set_onGeneratedType_isCorrect() {
+        tester.set("preference_with_generated_type", "value1")
+        Truth.assertThat(
+            tester.get<String>("preference_with_generated_type")
+        ).isEqualTo("value1")
+    }
+
+    @Test
+    fun getPreferenceOptions_onInfiniteType_throwsException(){
+        assertFailsWith<Exception> {
+            tester.getPreferenceOptions<String>("preference_which_has_value_hello_and_no_setter")
+        }
+    }
+
+    @Test
+    fun get_onGeneratedValueWithInvalidValue_throwsException() {
+        assertFailsWith<InvalidValueException> {
+            tester.get<String>("preference_with_generated_type_gets_and_sets_invalid_value")
+        }
+    }
+
+    @Test
+    fun set_onGeneratedValueWithInvalidValue_throwsException() {
+        assertFailsWith<InvalidValueException> {
+            tester.set<String>("preference_with_generated_type_gets_and_sets_invalid_value", "value4")
+        }
+    }
+
 }

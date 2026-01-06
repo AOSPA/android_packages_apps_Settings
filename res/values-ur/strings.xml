@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"تیزی سے ایکسیسبیلٹی خصوصیات تک رسائی حاصل کریں"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"‏&lt;b&gt;شروع کرنے کے لیے&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ایکسیسبیلٹی کی ترتیبات پر جائیں&lt;br/&gt; {1,number,integer}. ایک خصوصیت منتخب کریں اور شارٹ کٹ پر تھپتھپائیں&lt;br/&gt; {2,number,integer}. خصوصیت تک رسائی حاصل کرنے کے لیے بٹن کا انتخاب کریں&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"مقام"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"دیگر ایپس پر فلوٹ کر رہا ہے"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"نیویگیشن بار"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"سائز"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"بڑا"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"چھوٹا"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"استعمال نہ ہونے پر فیڈ ہو جاتا ہے"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"یہ کچھ سیکنڈ کے بعد فیڈ ہو جاتا ہے تاکہ آپ کی اسکرین زیادہ آسانی سے دیکھی جا سکے"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"استعمال میں نہ ہونے پر شفافیت"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"وقت کی اس ترجیح کو سبھی ایپس سپورٹ نہیں کرتی ہیں"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"ان عارضی پیغامات کو دکھانے کی مدت منتخب کریں جو آپ سے کارروائی کرنے کا مطالبہ کرتے ہیں"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"چھونے اور دبائے رکھنے کا وقفہ"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"مختصر"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"متوسط"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"طویل"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"رنگوں کی تقلیب"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"رنگوں کی تقلیب استعمال کریں"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"رنگوں کی تقلیب کا شارٹ کٹ"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"مقفل اسکرین سے صارفین کو شامل کریں"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"سائن ان اسکرین سے صارفین کو شامل کریں"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"ڈاک ہونے پر منتظم صارف پر سوئچ کریں"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"صارف کو حذف کر دیا گیا"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"اپنے آپ کو حذف کریں؟"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"اس صارف کو حذف کریں؟"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"یہ پروفائل ہٹا دیں؟"</string>
@@ -5308,6 +5306,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"آپ کے فون پر تعاون یافتہ ایپس"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"‏کوئی SIM شامل نہیں کر سکتے"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"‏‫SIM شامل کرنے سے پہلے سیٹلائٹ کنکشن ختم کر دیں"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"بلوٹوتھ آف ہے"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"بلوٹوتھ کے ذریعے منسلک ہونے پر، ہوائی جہاز وضع تعاون یافتہ آلات جیسے کہ فون اور گھڑی میں مطابقت پذیر ہو جائے گی۔"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"رسائی کی جگہ کے نام"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>

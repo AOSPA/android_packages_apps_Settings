@@ -71,7 +71,7 @@
     <string name="bluetooth_pairing_no_device_button_message" msgid="6429917002249666051">"Finnurðu ekki tækið þitt?"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Kveikja sjálfkrafa á morgun"</string>
-    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Ef þú slekkur á Bluetooth þá kviknar aftur á því næsta dag"</string>
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Ef þú slekkur á Bluetooth kviknar aftur á því næsta dag"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Para hægra eyra"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Para vinstra eyra"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Para hitt eyrað"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Skjótur aðgangur að aðgengiseiginleikum"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Til að hefjast handa&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Opnaðu aðgengisstillingarnar&lt;br/&gt; {1,number,integer}. Veldu eiginleika og ýttu á flýtileiðina&lt;br/&gt; {2,number,integer}. Veldu hnappinn til að opna eiginleikann&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Staðsetning"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Fljótandi yfir öðrum forritum"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Yfirlitsstika"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Stærð"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Stórt"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Lítið"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Deyfa þegar hann er ekki í notkun"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Dofnar eftir nokkrar sekúndur svo að þú sjáir betur á skjáinn"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Gagnsær þegar hann er ekki í notkun"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Ekki er víst að öll forrit styðji þessa stillingu á tímasetningu"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Veldu hversu lengi tímabundin skilaboð sem biðja þig um að grípa til aðgerða eiga að birtast"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Töf þar til snerting er numin"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Stutt"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Miðlungs"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Langt"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Umsnúningur lita"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Nota umsnúning lita"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Flýtileið umsnúnings lita"</string>
@@ -3129,7 +3128,7 @@
     <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> óöruggt"</string>
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> óörugg"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Sjálfstillandi tengigeta"</string>
-    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Eykur endingu rafhlöðunnar og bætir afköst tækisins með því að stjórna nettengingu sjálfkrafa"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Eykur endingu rafhlöðunnar og afköst tækisins með því að stjórna nettengingu sjálfkrafa"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Kveikt"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Slökkt"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Nota aðlögunarhæfa tengingu"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Bæta notendum við af lásskjánum"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Bæta við notendum af innskráningarskjánum"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Skipta yfir í stjórnanda þegar tækið er í dokku"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Notanda eytt"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Eyða sjálfum/sjálfri þér?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Viltu eyða þessum notanda?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Fjarlægja þetta snið?"</string>
@@ -5308,6 +5306,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Studd forrit í símanum"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Ekki tókst að bæta SIM-korti við"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Rjúfðu gervihnattatenginguna áður en þú bætir SIM-korti við"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Slökkt er á Bluetooth"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Þegar tækin þín eru tengd með Bluetooth mun flugstilling samstillast í öllum studdum tækjum, svo sem síma og úri"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Heiti aðgangsstaða"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"Aðgangsstaður"</string>

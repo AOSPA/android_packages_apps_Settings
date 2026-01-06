@@ -66,6 +66,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 /**
  * Fragment with the top level print settings.
  */
@@ -547,3 +548,4 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.print_settings);
 }
+// LINT.ThenChange(PrintSettingsApiScreen.kt)

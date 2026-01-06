@@ -22,6 +22,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.annotation.XmlRes
 import com.android.settings.R
+import com.android.settings.dashboard.DashboardFragmentRegistry
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.safetycenter.SafetySourcePreference
 import org.xmlpull.v1.XmlPullParser
 
@@ -188,6 +190,21 @@ object SafetyCenterSubpageRegistry {
             )
 
         return subpageConfigs[subpageIdToPreferenceKey[subpageId]]?.subpageFragmentClassName
+    }
+
+    /**
+     * Checks if a given subpage has any injected tiles.
+     *
+     * @param preferenceKey The string key for the subpage.
+     * @return `true` if the subpage has injected tiles, `false` otherwise.
+     */
+    fun hasInjectedTiles(preferenceKey: String): Boolean {
+        val subpageClassName =
+            subpageConfigs[preferenceKey]?.subpageFragmentClassName ?: return false
+        val categoryKey =
+            DashboardFragmentRegistry.PARENT_TO_CATEGORY_KEY_MAP[subpageClassName] ?: return false
+        val category = featureFactory.dashboardFeatureProvider.getTilesForCategory(categoryKey)
+        return category?.tiles?.isNotEmpty() ?: false
     }
 
     /**
