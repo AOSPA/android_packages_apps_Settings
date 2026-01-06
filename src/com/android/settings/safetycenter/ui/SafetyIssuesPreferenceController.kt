@@ -94,24 +94,18 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
                 mContext.getString(R.string.safety_center_issues_banner_group_collapsible_title)
             )
 
-            val model = viewModel
-            if (model != null) {
-                updatePreferenceUi(
-                    bannerGroup as BannerMessagePreferenceGroup,
-                    model.getCurrentSafetyCenterDataAsUiData(),
-                )
+            val uiData = viewModel?.safetyCenterUiLiveData?.value
+            if (uiData != null) {
+                updatePreferenceUi(bannerGroup as BannerMessagePreferenceGroup, uiData)
             }
         }
     }
 
     override fun updateState(preference: Preference?) {
         super.updateState(preference)
-        val model = viewModel
-        if (preference != null && model != null) {
-            updatePreferenceUi(
-                preference as BannerMessagePreferenceGroup,
-                model.getCurrentSafetyCenterDataAsUiData(),
-            )
+        val uiData = viewModel?.safetyCenterUiLiveData?.value
+        if (preference != null && uiData != null) {
+            updatePreferenceUi(preference as BannerMessagePreferenceGroup, uiData)
         }
     }
 

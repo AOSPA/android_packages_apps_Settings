@@ -49,6 +49,7 @@ import kotlin.reflect.KClass
  */
 class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
 
+    private val safetyCenterManager = app.getSystemService(SafetyCenterManager::class.java)!!
     private val _safetyCenterLiveData = SafetyCenterLiveData()
     private val _errorLiveData = MutableLiveData<SafetyCenterErrorDetails>()
     private var changingConfigurations = false
@@ -65,8 +66,6 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
         // initialization lazily.
         InteractionLogger(app, safetyCenterManager.safetyCenterConfig)
     }
-
-    private val safetyCenterManager = app.getSystemService(SafetyCenterManager::class.java)!!
 
     private val sourceIdToSubpageTitleResIdMap: Map<String, Int> by lazy {
         SafetyCenterSubpageRegistry.subpageConfigs.entries
@@ -104,6 +103,13 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
         private val safetyCenterDataQueue = ArrayDeque<SafetyCenterData>()
         private var issuesPendingResolution = mapOf<IssueId, ActionId>()
         private val currentResolvedIssues = mutableMapOf<IssueId, ActionId>()
+
+        init {
+            // Initialize the LiveData with the current data so that it is available immediately.
+            // This allows controllers to access the data in displayPreference() before the
+            // LiveData is active.
+            onSafetyCenterDataChanged(safetyCenterManager.safetyCenterData)
+        }
 
         @RequiresPermission(Manifest.permission.MANAGE_SAFETY_CENTER)
         override fun onActive() {
@@ -216,10 +222,6 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
             maybeProcessDataToNextResolvedIssues()
         }
     }
-
-    @RequiresPermission(Manifest.permission.MANAGE_SAFETY_CENTER)
-    override fun getCurrentSafetyCenterDataAsUiData(): SafetyCenterUiData =
-        SafetyCenterDataTransformer.transform(safetyCenterManager.safetyCenterData)
 
     override fun changingConfigurations() {
         changingConfigurations = true

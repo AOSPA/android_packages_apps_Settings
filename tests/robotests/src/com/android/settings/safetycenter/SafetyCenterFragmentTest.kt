@@ -144,9 +144,6 @@ class SafetyCenterFragmentTest {
                 themeResId = R.style.Theme_SubSettings,
             )
         scenario.onFragment { fragment ->
-            // TODO: b/460466023 - remove when fixed (now it serves to initiate live data values)
-            shadowSafetyCenterManager.setSafetyCenterData(data)
-
             ShadowLooper.idleMainLooper()
             testBlock(fragment)
         }
