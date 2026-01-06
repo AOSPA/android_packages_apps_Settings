@@ -1000,4 +1000,53 @@
          This will prevent users from setting a new pattern lock, but does not affect
          existing pattern locks. -->
     <bool name="config_hide_pattern_security_option">false</bool>
+
+    <!-- Light theme customization for lottie illustration in the setup. Not translatable. -->
+    <string-array name="layout_animated_banner_customization" translatable="false">
+        <item>.primary:@sud_system_primary_light</item>
+        <item>.onPrimary:@sud_system_on_primary_light</item>
+        <item>.primaryContainer:@sud_system_primary_container_light</item>
+        <item>.onPrimaryContainer:@sud_system_on_primary_container_light</item>
+        <item>.primaryInverse:@sud_system_primary_inverse_light</item>
+        <item>.primaryFixed:@sud_system_primary_fixed_light</item>
+        <item>.primaryFixedDim:@sud_system_primary_fixed_dim_light</item>
+        <item>.onPrimaryFixed:@sud_system_on_primary_fixed_light</item>
+        <item>.onPrimaryFixedVariant:@sud_system_on_primary_fixed_variant_light</item>
+        <item>.secondary:@sud_system_secondary_light</item>
+        <item>.onSecondary:@sud_system_on_secondary_light</item>
+        <item>.secondaryContainer:@sud_system_secondary_container_light</item>
+        <item>.onSecondaryContainer:@sud_system_on_secondary_container_light</item>
+        <item>.secondaryFixed:@sud_system_secondary_fixed_light</item>
+        <item>.secondaryFixedDim:@sud_system_secondary_fixed_dim_light</item>
+        <item>.onSecondaryFixed:@sud_system_on_secondary_fixed_light</item>
+        <item>.onSecondaryFixedVariant:@sud_system_on_secondary_fixed_variant_light</item>
+        <item>.tertiary:@sud_system_tertiary_light</item>
+        <item>.onTertiary:@sud_system_on_tertiary_light</item>
+        <item>.tertiaryContainer:@sud_system_tertiary_container_light</item>
+        <item>.onTertiaryContainer:@sud_system_on_tertiary_container_light</item>
+        <item>.tertiaryFixed:@sud_system_tertiary_fixed_light</item>
+        <item>.tertiaryFixedDim:@sud_system_tertiary_fixed_dim_light</item>
+        <item>.onTertiaryFixed:@sud_system_on_tertiary_fixed_light</item>
+        <item>.onTertiaryFixedVariant:@sud_system_on_tertiary_fixed_variant_light</item>
+        <item>.error:@sud_system_error_light</item>
+        <item>.onError:@sud_system_on_error_light</item>
+        <item>.errorContainer:@sud_system_error_container_light</item>
+        <item>.onErrorContainer:@sud_system_on_error_container_light</item>
+        <item>.outline:@sud_system_outline_light</item>
+        <item>.outlineVariant:@sud_system_outline_variant_light</item>
+        <item>.onBackground:@sud_system_on_background_light</item>
+        <item>.surface:@sud_system_surface_light</item>
+        <item>.onSurface:@sud_system_on_surface_light</item>
+        <item>.surfaceVariant:@sud_system_surface_variant_light</item>
+        <item>.onSurfaceVariant:@sud_system_on_surface_variant_light</item>
+        <item>.surfaceInverse:@sud_system_surface_inverse_light</item>
+        <item>.onSurfaceInverse:@sud_system_on_surface_inverse_light</item>
+        <item>.surfaceBright:@sud_system_surface_bright_light</item>
+        <item>.surfaceDim:@sud_system_surface_dim_light</item>
+        <item>.surfaceContainer:@sud_system_surface_container_light</item>
+        <item>.surfaceContainerLow:@sud_system_surface_container_low_light</item>
+        <item>.surfaceContainerLowest:@sud_system_surface_container_lowest_light</item>
+        <item>.surfaceContainerHigh:@sud_system_surface_container_high_light</item>
+        <item>.surfaceContainerHighest:@sud_system_surface_container_highest_light</item>
+    </string-array>
 </resources>
