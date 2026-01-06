@@ -115,6 +115,7 @@ import com.android.settings.notification.SpatialAudioApiScreen
 import com.android.settings.notification.app.ConversationListScreen
 import com.android.settings.notification.modes.ZenModesListScreen
 import com.android.settings.print.PrintSettingsApiScreen
+import com.android.settings.safetycenter.ui.AccountSecuritySubpageScreenApi
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.sound.MediaControlsScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
@@ -477,6 +478,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = UserSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PrintSettingsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UsbDetailsApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AccountSecuritySubpageScreenApi.KEY),
     )
 
 private fun getDeviceStateItemList() =
