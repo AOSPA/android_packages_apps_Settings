@@ -301,14 +301,21 @@ class ApiTesterTest {
                 Flags.catalystMigration26q2()
             }
             parameters {
-                parameter("package", R.string.parameter_purpose, type = GeneratedParameterType(
-                    R.string.parameter_type_description
-                ) {
-                    listOf (
-                        GeneratedValue("parameter1", "first parameter description"),
-                        GeneratedValue("parameter2", "second parameter description")
-                    )
-                })
+                parameter(
+                    "package",
+                    R.string.parameter_purpose,
+                    type = GeneratedParameterType(
+                        R.string.parameter_type_description
+                    ) {
+                        listOf (
+                            GeneratedValue("parameter1", "first parameter description"),
+                            GeneratedValue("parameter2", "second parameter description")
+                        )
+                    }
+                )
+                prepareScreenExtras { parameters, extras ->
+                    extras.putString("pkg", parameters["package"])
+                }
             }
             preference<String>(
                 key = "preference_with_parameter_precondition",
@@ -723,6 +730,20 @@ class ApiTesterTest {
                 Parameters("package" to "parameter1")
             )
         ).isEqualTo("Hello")
+    }
+
+    @Test
+    fun getLaunchScreenBundle_onParameterizedScreen_isCorrect() {
+        testerParameterized.initializeScreenParameters(Parameters("package" to "parameter1"))
+        val extras = testerParameterized.getLaunchScreenExtras()
+        Truth.assertThat(extras.getString("pkg")).isEqualTo("parameter1")
+        Truth.assertThat(extras.keySet().size).isEqualTo(1)
+    }
+
+    @Test
+    fun getLaunchScreenBundle_onNonParameterizedScreen_isEmpty() {
+        val extras = tester.getLaunchScreenExtras()
+        Truth.assertThat(extras.keySet().size).isEqualTo(0)
     }
 
 }
