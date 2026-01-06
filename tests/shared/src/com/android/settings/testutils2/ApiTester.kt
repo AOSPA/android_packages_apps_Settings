@@ -192,11 +192,19 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         }
     }
 
-    private fun initializeScreenParameters(values: Map<String, String>) {
+    /**
+     * Initializes the screen with the given [parameters].
+     *
+     * @param parameters The parameters to initialize the screen with.
+     * @throws IllegalStateException if the screen does not have a parameters schema.
+     * @throws IllegalArgumentException if the provided parameters are not among the possible ones
+     *   for this screen.
+     */
+    fun initializeScreenParameters(parameters: Parameters) {
         val schema = instance.parametersSchema ?: throw IllegalStateException(
             "Attempting to initialize parameters on screen without a parameters schema"
         )
-        val validatedKeyParameter = schema.prepare(values)
+        val validatedKeyParameter = schema.prepare(parameters.values)
         if(!possibleParameters.contains(validatedKeyParameter))
             throw IllegalArgumentException (
                 "Received parameters are not among the possible ones for this screen"
@@ -221,7 +229,7 @@ class ApiTester(private val instance: PreferencesApiScreen) {
      */
     fun <V : Any> get(key: String, parameters: Parameters? = null): V {
         val preference = getPreference<V>(key)
-        if(parameters != null) initializeScreenParameters(parameters.values)
+        if(parameters != null) initializeScreenParameters(parameters)
         val keyParameters = preference.getScreenParameters.invoke() ?: ValidatedKeyParameters.EMPTY
         val operationContext = ApiOperationContext(context, keyParameters)
 
@@ -248,7 +256,7 @@ class ApiTester(private val instance: PreferencesApiScreen) {
     fun <V : Any> set(key: String, value: V, parameters: Parameters? = null) {
         val preference = getPreference<V>(key)
         val setConfig = preference.set ?: throw CannotSetException()
-        if(parameters != null) initializeScreenParameters(parameters.values)
+        if(parameters != null) initializeScreenParameters(parameters)
         val keyParameters = preference.getScreenParameters.invoke() ?: ValidatedKeyParameters.EMPTY
         val operationContext = ApiOperationContext(context, keyParameters)
 
@@ -293,6 +301,11 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         } else throw Exception("Attempting to get all preference options on a " +
                 "preference with infinite options")
     }
+
+    /**
+     * Get the screen extras associated with this parameterized screen.
+     */
+    fun getLaunchScreenExtras() = instance.launchScreenExtra
 }
 
 /**
