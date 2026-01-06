@@ -148,6 +148,13 @@ class SatelliteTilePromptUtilsTest {
         val shadowIntent = Shadows.shadowOf(pendingIntent)
         assertThat(shadowIntent.savedIntent.component?.className)
             .isEqualTo(AddSatelliteTileActivity::class.java.name)
+        assertThat(
+                shadowIntent.savedIntent.getIntExtra(
+                    AddSatelliteTileActivity.EXTRA_NOTIFICATION_ID,
+                    0,
+                )
+            )
+            .isEqualTo(R.id.satellite_prompt_notification_id)
         assertThat(shadowIntent.flags)
             .isEqualTo(PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     }
