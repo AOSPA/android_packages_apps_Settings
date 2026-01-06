@@ -50,11 +50,14 @@ class SafetyCenterFragment : DashboardFragment() {
     }
 
     private var focusedIssueKey: FocusedIssueKey? = null
+    private var isQuickSettings: Boolean = false
 
     private var sessionId = INVALID_SESSION_ID
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        arguments?.let { isQuickSettings = it.getBoolean(ARG_IS_QUICK_SETTINGS, false) }
+
         retrieveSessionId()
         configureInteractionLogger()
 
@@ -65,9 +68,14 @@ class SafetyCenterFragment : DashboardFragment() {
                     setupStatusBannerPreferenceController(controller)
                 is SafetyIssuesPreferenceController ->
                     setupSafetyIssuesPreferenceController(controller)
-                is SubpagePreferenceController -> setupSubpagePreferenceController(controller)
+                is SubpagePreferenceController ->
+                    if (!isQuickSettings) {
+                        setupSubpagePreferenceController(controller)
+                    }
                 is SafetySourcePreferenceController ->
-                    setupSafetySourcePreferenceController(controller)
+                    if (!isQuickSettings) {
+                        setupSafetySourcePreferenceController(controller)
+                    }
             }
         }
     }
@@ -100,7 +108,7 @@ class SafetyCenterFragment : DashboardFragment() {
     private fun configureInteractionLogger() {
         viewModel.interactionLogger.apply {
             sessionId = this@SafetyCenterFragment.sessionId
-            viewType = ViewType.FULL
+            viewType = if (isQuickSettings) ViewType.QUICK_SETTINGS else ViewType.FULL
             navigationSource =
                 NavigationSource.fromIntentOrArguments(requireActivity().intent, arguments)
         }
@@ -171,7 +179,11 @@ class SafetyCenterFragment : DashboardFragment() {
     }
 
     protected override fun getPreferenceScreenResId(): Int {
-        return R.xml.safety_center_main_page
+        return if (isQuickSettings) {
+            R.xml.safety_center_quick_settings
+        } else {
+            R.xml.safety_center_main_page
+        }
     }
 
     override fun getLogTag(): String {
@@ -185,6 +197,7 @@ class SafetyCenterFragment : DashboardFragment() {
     companion object {
         private const val TAG = "SafetyCenterFragment"
         private const val SAFETY_ISSUES_BANNER_KEY = "issues_banner_group"
+        private const val ARG_IS_QUICK_SETTINGS = "is_quick_settings"
 
         fun initializeSubpagePrefControllerForSearchIndex(
             context: Context,
@@ -193,6 +206,20 @@ class SafetyCenterFragment : DashboardFragment() {
             val preferenceKey = controller.preferenceKey
             controller.relatedSafetySources =
                 SafetyCenterSubpageRegistry.getXmlSafetySourceIds(context, preferenceKey)
+        }
+
+        /**
+         * Create a new instance of SafetyCenterFragment.
+         *
+         * @param isQuickSettings Boolean indicating if this fragment is for quick settings.
+         * @return A new instance of SafetyCenterFragment.
+         */
+        fun newInstance(isQuickSettings: Boolean): SafetyCenterFragment {
+            val args = Bundle()
+            args.putBoolean(ARG_IS_QUICK_SETTINGS, isQuickSettings)
+            val fragment = SafetyCenterFragment()
+            fragment.arguments = args
+            return fragment
         }
 
         @JvmField
