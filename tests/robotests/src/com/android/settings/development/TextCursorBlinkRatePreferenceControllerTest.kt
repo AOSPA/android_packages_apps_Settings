@@ -26,7 +26,8 @@ import androidx.preference.PreferenceScreen
 import androidx.preference.PreferenceViewHolder
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.accessibility.TextCursorBlinkRateSliderPreference
+import com.android.settings.accessibility.Flags
+import com.android.settings.accessibility.colorandmotion.ui.TextCursorBlinkRateSliderPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -41,8 +42,7 @@ import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class TextCursorBlinkRatePreferenceControllerTest {
-    @get:Rule
-    val setFlagsRule = SetFlagsRule()
+    @get:Rule val setFlagsRule = SetFlagsRule()
     val context: Context = ApplicationProvider.getApplicationContext()
 
     val controller = TextCursorBlinkRatePreferenceController(context)
@@ -69,30 +69,32 @@ class TextCursorBlinkRatePreferenceControllerTest {
 
     @Before
     fun setup() {
-        whenever(preferenceScreen.findPreference<TextCursorBlinkRateSliderPreference>(
-            controller.getPreferenceKey())).thenReturn(preference)
+        whenever(
+                preferenceScreen.findPreference<TextCursorBlinkRateSliderPreference>(
+                    controller.getPreferenceKey()
+                )
+            )
+            .thenReturn(preference)
         controller.displayPreference(preferenceScreen)
 
-        val rootView =
-            View.inflate(context, preference.layoutResource, null /* parent */)
+        val rootView = View.inflate(context, preference.layoutResource, null /* parent */)
         val holder = PreferenceViewHolder.createInstanceForTests(rootView)
         preference.onBindViewHolder(holder)
     }
 
     @Test
-    @DisableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
-    fun getAvailabilityStatus_unavailableWhenFlagDisabled() {
-        assertThat(controller.isAvailable()).isFalse()
-    }
-
-    @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
-    fun getAvailabilityStatus_availableWhenFlagEnabled() {
+    @DisableFlags(Flags.FLAG_TEXT_CURSOR_BLINKING_USER_SETTING)
+    fun getAvailabilityStatus_availableWhenFlagDisabled() {
         assertThat(controller.isAvailable()).isTrue()
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
+    @EnableFlags(Flags.FLAG_TEXT_CURSOR_BLINKING_USER_SETTING)
+    fun getAvailabilityStatus_unavailableWhenFlagEnabled() {
+        assertThat(controller.isAvailable()).isFalse()
+    }
+
+    @Test
     fun onPreferenceChange_zeroValue_noBlink() {
         controller.onPreferenceChange(preference, minSliderValue)
 
@@ -101,7 +103,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun onPreferenceChange_minNonZeroValue_slowBlink() {
         controller.onPreferenceChange(preference, slowBlinkSliderValue)
 
@@ -110,7 +111,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun onPreferenceChange_maxValue_fastBlink() {
         controller.onPreferenceChange(preference, maxSliderValue)
 
@@ -119,7 +119,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun onPreferenceChange_defaultValue_defaultBlink() {
         controller.onPreferenceChange(preference, defaultSliderValue)
 
@@ -128,7 +127,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun onPreferenceChange_customStateDescription_default() {
         controller.onPreferenceChange(preference, defaultSliderValue)
 
@@ -136,7 +134,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun onPreferenceChange_customStateDescription_noBlink() {
         controller.onPreferenceChange(preference, minSliderValue)
 
@@ -144,7 +141,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun onPreferenceChange_customStateDescription_slowBlink() {
         controller.onPreferenceChange(preference, slowBlinkSliderValue)
 
@@ -152,7 +148,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun onPreferenceChange_customStateDescription_fastBlink() {
         controller.onPreferenceChange(preference, maxSliderValue)
 
@@ -160,7 +155,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun updateState_noBlink_zeroValue() {
         setSecureSettingsValue(noBlinkDurationMs)
         controller.updateState(preference)
@@ -169,7 +163,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun updateState_slowBlink_minNonZeroValue() {
         setSecureSettingsValue(slowBlinkDurationMs)
         controller.updateState(preference)
@@ -178,7 +171,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun updateState_fastBlink_maxValue() {
         setSecureSettingsValue(fastBlinkDurationMs)
         controller.updateState(preference)
@@ -187,7 +179,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun updateState_defaultBlink_defaultValue() {
         setSecureSettingsValue(defaultDurationMs)
         controller.updateState(preference)
@@ -196,7 +187,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun updateState_customStateDescription_default() {
         setSecureSettingsValue(defaultDurationMs)
         controller.updateState(preference)
@@ -205,7 +195,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun updateState_customStateDescription_noBlink() {
         setSecureSettingsValue(noBlinkDurationMs)
         controller.updateState(preference)
@@ -214,7 +203,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun updateState_customStateDescription_slowBlink() {
         setSecureSettingsValue(slowBlinkDurationMs)
         controller.updateState(preference)
@@ -223,7 +211,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun updateState_customStateDescription_fastBlink() {
         setSecureSettingsValue(fastBlinkDurationMs)
         controller.updateState(preference)
@@ -232,7 +219,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun onDeveloperOptionsSwitchDisabled_resetsToDefault() {
         // Set a non-default value first to ensure it changes
         setSecureSettingsValue(fastBlinkDurationMs)
@@ -246,7 +232,6 @@ class TextCursorBlinkRatePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
     fun displayPreference_resetClickListener_resetsToDefault() {
         // In setup(), displayPreference() is called, which sets a reset click listener.
         // We capture the listener to invoke it and verify its behavior.
@@ -279,14 +264,15 @@ class TextCursorBlinkRatePreferenceControllerTest {
         return Settings.Secure.getInt(
             context.contentResolver,
             Settings.Secure.ACCESSIBILITY_TEXT_CURSOR_BLINK_INTERVAL_MS,
-            defaultDurationMs
+            defaultDurationMs,
         )
     }
 
     private fun setSecureSettingsValue(value: Int) {
-        Settings.Secure.putInt(context.getContentResolver(),
+        Settings.Secure.putInt(
+            context.getContentResolver(),
             Settings.Secure.ACCESSIBILITY_TEXT_CURSOR_BLINK_INTERVAL_MS,
-            value
+            value,
         )
     }
 

@@ -23,7 +23,7 @@ import android.util.Log
 import android.view.View
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
-import com.android.settings.accessibility.TextCursorBlinkRateSliderPreference
+import com.android.settings.accessibility.colorandmotion.ui.TextCursorBlinkRateSliderPreference
 import com.android.settings.core.PreferenceControllerMixin
 import com.android.settingslib.development.DeveloperOptionsPreferenceController
 import com.google.android.material.slider.Slider
@@ -148,7 +148,8 @@ class TextCursorBlinkRatePreferenceController(val context: Context) :
     }
 
     override fun isAvailable(): Boolean {
-        return android.view.accessibility.Flags.textCursorBlinkInterval()
+        // If the text cursor blinking is in user settings, do not show in developer settings.
+        return !com.android.settings.accessibility.Flags.textCursorBlinkingUserSetting()
     }
 
     private fun setSliderStateDescription(preference: Preference, index: Int) {
