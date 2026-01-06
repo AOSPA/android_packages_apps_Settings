@@ -1138,6 +1138,26 @@ class SafetyCenterFragmentTest {
 
     @Test
     @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun statusBanner_whenSeverityOkAndHasActiveIssues_showsOkStateAndNoButton() {
+        val status =
+            SafetyCenterStatus.Builder("Title OK", "Summary OK")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK)
+                .build()
+        val activeIssue = createIssue(id = "activeIssue", sourceIds = setOf("any"))
+
+        runTest(createScData(status = status, activeIssues = listOf(activeIssue))) { fragment ->
+            val preference = fragment.findPreference<StatusBannerPreference>(STATUS_BANNER_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.title.toString()).isEqualTo("Title OK")
+            assertThat(preference?.summary.toString()).isEqualTo("Summary OK")
+            assertThat(preference?.iconLevel).isEqualTo(BannerStatus.LOW)
+
+            onView(withText(R.string.safety_center_rescan_button)).check(doesNotExist())
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     fun statusBanner_whenSeverityUnknown_showsOkStateAndRescanButton() {
         val status =
             SafetyCenterStatus.Builder("Title OK", "Summary OK")
@@ -1173,6 +1193,26 @@ class SafetyCenterFragmentTest {
 
             onView(withText(R.string.safety_center_rescan_button)).check(matches(isDisplayed()))
             onView(withText(R.string.safety_center_rescan_button)).check(matches(isNotEnabled()))
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun statusBanner_whenSeverityUnknownAndHasActiveIssues_showsOkStateAndNoButton() {
+        val status =
+            SafetyCenterStatus.Builder("Title Unknown", "Summary Unknown")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_UNKNOWN)
+                .build()
+        val activeIssue = createIssue(id = "activeIssue", sourceIds = setOf("any"))
+
+        runTest(createScData(status = status, activeIssues = listOf(activeIssue))) { fragment ->
+            val preference = fragment.findPreference<StatusBannerPreference>(STATUS_BANNER_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.title.toString()).isEqualTo("Title Unknown")
+            assertThat(preference?.summary.toString()).isEqualTo("Summary Unknown")
+            assertThat(preference?.iconLevel).isEqualTo(BannerStatus.LOW)
+
+            onView(withText(R.string.safety_center_rescan_button)).check(doesNotExist())
         }
     }
 

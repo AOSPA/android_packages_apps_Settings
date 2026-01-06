@@ -142,9 +142,12 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
     }
 
     private fun StatusBannerPreference.updateBannerButton(status: StatusUiData) {
+        val uiData = viewModel?.getCurrentSafetyCenterDataAsUiData()
+        val hasActiveIssues = uiData?.getActiveIssues()?.isNotEmpty() == true
         if (
-            status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK ||
-                status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_UNKNOWN
+            (status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK ||
+                status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_UNKNOWN) &&
+                !hasActiveIssues
         ) {
             setButtonText(R.string.safety_center_rescan_button)
             setButtonOnClickListener {
