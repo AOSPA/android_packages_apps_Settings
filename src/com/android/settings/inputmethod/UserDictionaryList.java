@@ -25,12 +25,12 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 @SearchIndexable
 public class UserDictionaryList extends DashboardFragment {
 
@@ -89,3 +89,4 @@ public class UserDictionaryList extends DashboardFragment {
                 }
             };
 }
+// LINT.ThenChange(UserDictionaryListApiScreen.kt)
