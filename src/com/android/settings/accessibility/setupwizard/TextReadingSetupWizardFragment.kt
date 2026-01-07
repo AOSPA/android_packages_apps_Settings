@@ -23,7 +23,15 @@ import com.google.android.setupdesign.items.RecyclerItemAdapter
 class TextReadingSetupWizardFragment : BaseSetupWizardFragment() {
 
     override fun createControllers(adapter: RecyclerItemAdapter): Map<Int, BaseItemController> =
-        emptyMap()
+        buildMap {
+            val context = requireContext()
+            findItem(adapter, R.id.bold_text_in_suw)?.let {
+                put(R.id.bold_text_in_suw, BoldTextSwitchItemController(context, it))
+            }
+            findItem(adapter, R.id.outline_text_in_suw)?.let {
+                put(R.id.outline_text_in_suw, OutlineTextSwitchItemController(context, it))
+            }
+        }
 
     override val fragmentLayoutResId: Int = R.layout.text_reading_suw_screen
 

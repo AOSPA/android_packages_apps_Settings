@@ -1109,9 +1109,9 @@
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Tasodifiy MAC manzil"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Qurilma kiritish"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"“<xliff:g id="SSID">%1$s</xliff:g>” nomli tarmoqqa ulanish uchun kamerani quyidagi QR kodga qarating"</string>
-    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"QR kodni skanerlash"</string>
+    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"QR kodni skanerlang"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"“<xliff:g id="SSID">%1$s</xliff:g>” nomli tarmoqqa ulanish uchun kamerani quyidagi QR kodga qarating"</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Wi-Fi tarmoqqa QR kodni skanerlab ulanish"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Wi-Fi tarmoqqa QR kodni skanerlab ulaning"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Wi‑Fi tarmoqni ulashish"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"“<xliff:g id="SSID">%1$s</xliff:g>” nomli tarmoqqa ulanish uchun boshqa qurilmada bu QR kodni skanerlang"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"“<xliff:g id="SSID">%1$s</xliff:g>” nomli tarmoqqa ulanish uchun mazkur QR kodni skanerlang"</string>
@@ -1349,10 +1349,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Yuqori tiniqlik"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Maksimal aniqlik darajasi"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Maksimal aniqlik darajasi batareya quvvatini koʻproq sarflaydi. Tiniqlik almashtirilsa, ayrim ilovalar qayta ishga tushadi."</string>
-    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
-    <skip />
-    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
-    <skip />
+    <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g> Hz)"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"<xliff:g id="WIDTH">%1$s</xliff:g>, <xliff:g id="HEIGHT">%2$s</xliff:g> <xliff:g id="REFRESH_RATE">%3$s</xliff:g> Hz"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> – <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2561,7 +2559,15 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Maxsus imkoniyatlarni tez ochish"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Boshlash uchun&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Maxsus imkoniyatlar sozlamalarini oching&lt;br/&gt; {1,number,integer}. Funksiyani tanlang va yorliq ustiga bosing&lt;br/&gt; {2,number,integer}. Funksiyadan foydalanish uchun tugmani tanlang&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Joylashuv"</string>
+    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
+    <skip />
+    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
+    <skip />
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Hajmi"</string>
+    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
+    <skip />
+    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
+    <skip />
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Ishlatilmagandagi shaffoflashuv"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Ekranni oson koʻrish uchun bir necha soniyada shaffoflashadi"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Ishlatilmagandagi shaffoflik"</string>
@@ -2585,8 +2591,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Tungi mavzuni dastaklovchi qurilma va ilovalar uchun tungi mavzuni faollashtiradi."</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Yoyilgan"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Kengaytirilgan Tungi mavzu"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Qulaylikni oshirish uchun uni dastaklamaydigan aksariyat ilovalarga tungi mavzuni avtomatik tatbiq etadi."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"majburiy akslantirish, rangni akslantirish, kontrast"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Kengaytirilgan Tungi mavzu"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Kengaytirilgan tungi mavzu sozlamalari"</string>
@@ -3215,7 +3220,7 @@
     <string name="add_device_admin" msgid="6252128813507932519">"Bu qurilma administratori ilovasini faollashtirish"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Qurilma administratori"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"Administrator ilovasi faollashsa, <xliff:g id="APP_NAME">%1$s</xliff:g> ilovasiga quyidagilarni bajarish uchun ruxsat beriladi:"</string>
-    <string name="supervision_role_holder_warning" msgid="167724047638694522">"Bu qirilma <xliff:g id="APP_NAME_0">%1$s</xliff:g> tomonidan boshqariladi va nazorat qilinadi. \n\n<xliff:g id="APP_NAME_1">%1$s</xliff:g> ilovalarni bloklash va kontentni cheklash kabi ota-ona nazorati sozlamalarini boshqara oladi."</string>
+    <string name="supervision_role_holder_warning" msgid="167724047638694522">"Bu qurilma <xliff:g id="APP_NAME_0">%1$s</xliff:g> tomonidan boshqariladi va nazorat qilinadi. \n\n<xliff:g id="APP_NAME_1">%1$s</xliff:g> ilovalarni bloklash va kontentni cheklash kabi ota-ona nazorati sozlamalarini boshqara oladi."</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"Bu qirilma <xliff:g id="APP_NAME">%1$s</xliff:g> tomonidan boshqariladi va nazorat qilinadi."</string>
     <string name="device_admin_status" msgid="6332571781623084064">"Administrator ilovasi faol va u <xliff:g id="APP_NAME">%1$s</xliff:g> ilovasiga quyidagilarni bajarish uchun ruxsat bergan:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Profil boshqaruvchisi faollashtirilsinmi?"</string>
@@ -3443,6 +3448,8 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Foydalanuvchilarni ekran qulfidan qo‘shish"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Kirish ekranida foydalanuvchilarni kiriting"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Dok-stantsiyasiga ulanganda administratorga oʻtish"</string>
+    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Profilingiz o‘chirilsinmi?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Olib tashlansinmi?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Profil o‘chirilsinmi?"</string>
@@ -3880,8 +3887,6 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Ilovalar"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Signallar va boshqa tovushlar"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Tezkor sozlamalar davomiyligi"</string>
-    <string name="dnd_sync_title" msgid="2422077702431248079">"Bezovta qilinmasin rejimi sinxronlanmasin"</string>
-    <string name="dnd_sync_description" msgid="2625638932336262656">"Bezovta qilinmasin sozlamalarini ulangan qurilmalarga sinxronlash"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Ish profilidagi tovushlar"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Shaxsiy profil tovushlaridan foydalanish"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Shaxsiy profildagi bilan bir xil tovushlardan foydalanish"</string>
@@ -5062,16 +5067,11 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s faolsizlantirilsinmi?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Bu xizmat faolsizlantirilsinmi?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Hisobga kirganingizda saqlangan parollar, kalitlar, toʻlov usullari va boshqa maʼlumotlar avtomatik kiritilmaydi. Saqlangan axborotdan foydalanish uchun parol, kalit yoki axborot xizmatini tanlang."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Parollar, kalitlar va hisoblar"</string>
-    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_title (2841026269835953207) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_summary (4126659439608747174) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_manage_accounts_title (1034959782380418930) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_backup_category_title (807568201052547222) -->
-    <skip />
+    <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"Parollar va kirish kalitlari"</string>
+    <string name="accounts_and_backup_title" msgid="2841026269835953207">"Hisoblar va zaxiralash"</string>
+    <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Maʼlumotlarni zaxiralash, boshqa qurilmadan maʼlumotlarni nuxsalash"</string>
+    <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Hisoblarni boshqarish"</string>
+    <string name="accounts_and_backup_backup_category_title" msgid="807568201052547222">"Maʼlumotlarni zaxiralash yoki nusxalash"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Barcha xizmatlar faolsizlantirilsinmi?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Hisobingizga kirganingizda parollar, kalitlar va boshqa saqlangan maʼlumotlar avtomatik toʻldirish uchun chiqmaydi"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Maqbul xizmatingiz quyidagiga oʻzgartirilsinmi: &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Yangi parollar, kalitlar va boshqa maʼlumotlar bundan buyon shu yerda saqlanadi. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; ekrandagi elementlar yordamida avtomatik kiritish mumkin narsalarni aniqlashi mumkin"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s ishlatilsinmi?"</string>
@@ -6074,40 +6074,27 @@
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"Yangilanishlar"</string>
-    <!-- no translation found for safety_center_security_update_search_terms (545517841376162382) -->
-    <skip />
+    <string name="safety_center_security_update_search_terms" msgid="545517841376162382">"Yangilanishlar, yangilanish, xavfsizlik yangilanishi, xavfsizlik yangilanishlari"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"Tarmoq turi, shifrlash, bildirishnomalar boshqaruvi"</string>
-    <!-- no translation found for safety_center_android_lock_screen_search_terms (4741569259158180141) -->
-    <skip />
-    <!-- no translation found for safety_center_fingerprint_unlock_search_terms (954519907845160433) -->
-    <skip />
-    <!-- no translation found for safety_center_face_unlock_search_terms (2994457346086700870) -->
-    <skip />
-    <!-- no translation found for safety_center_wear_unlock_search_terms (6289459571308806285) -->
-    <skip />
-    <!-- no translation found for safety_center_backup_search_terms (5652327131910333830) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_manager_search_terms (1303866079616216426) -->
-    <skip />
-    <!-- no translation found for safety_center_health_connect_search_terms (1323524144779175830) -->
-    <skip />
-    <!-- no translation found for safety_center_app_data_sharing_updates_search_terms (2041373488015575634) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_usage_search_terms (3015527940068111714) -->
-    <skip />
-    <!-- no translation found for safety_center_private_space_search_terms (6748750858253093118) -->
-    <skip />
+    <string name="safety_center_android_lock_screen_search_terms" msgid="4741569259158180141">"Qurilma qulfi, ekran qulfi, ekranni qulflash, ekranqulfi, parol, pin, grafik kalit, qulflash, qulfdan chiqarish"</string>
+    <string name="safety_center_fingerprint_unlock_search_terms" msgid="954519907845160433">"Barmoq izi, barmoq, barmoq izi kiritish"</string>
+    <string name="safety_center_face_unlock_search_terms" msgid="2994457346086700870">"Yuz bilan ochish, yuz"</string>
+    <string name="safety_center_wear_unlock_search_terms" msgid="6289459571308806285">"Soat, soat bilan ochish"</string>
+    <string name="safety_center_backup_search_terms" msgid="5652327131910333830">"Zaxiralash"</string>
+    <string name="safety_center_permission_manager_search_terms" msgid="1303866079616216426">"Ruxsatlar, ruxsatlar menejeri"</string>
+    <string name="safety_center_health_connect_search_terms" msgid="1323524144779175830">"Health, Health Connect"</string>
+    <string name="safety_center_app_data_sharing_updates_search_terms" msgid="2041373488015575634">"Maʼlumotlar, maʼlumotlar ulashuvi, maʼlumotlar ulashuvi yangilanishi, joylashuv axboroti ulashuvida oʻzgarishlar, ulashuv"</string>
+    <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"Maxfiylik, maxfiylik boshqaruv paneli"</string>
+    <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"Maxfiy joy"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Boshqa ogohlantirishlar"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Kamroq ogohlantirishlar"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Ogohlantirishlar yopildi"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Bu ogohlantirish yopilsinmi?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Himoyani kuchaytirish uchun xavfsizlik va maxfiylik sozlamalarini istalgan vaqt tekshiring"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Amal bajarildi"</string>
-    <!-- no translation found for safety_center_qs_page_landing (1024103851758565938) -->
-    <skip />
-    <!-- no translation found for privacy_controls_qs (1774718598801606190) -->
-    <skip />
+    <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Xavfsizlik va maxfiylik tezkor sozlamalari"</string>
+    <string name="privacy_controls_qs" msgid="1774718598801606190">"Daxlsizlik nazorati"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Juftlanmoqda"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ulandi"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Qurilmani skanerlash"</string>

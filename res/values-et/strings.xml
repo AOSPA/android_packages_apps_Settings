@@ -1349,10 +1349,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Kõrge eraldusvõime"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Maksimaalne eraldusvõime"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Maksimaalne eraldusvõime tarbib rohkem akut. Eraldusvõime muutmine võib mõne rakenduse taaskäivitada."</string>
-    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
-    <skip />
-    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
-    <skip />
+    <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g> × <xliff:g id="HEIGHT">%2$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g> Hz)"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"<xliff:g id="WIDTH">%1$s</xliff:g> × <xliff:g id="HEIGHT">%2$s</xliff:g> <xliff:g id="REFRESH_RATE">%3$s</xliff:g> hertsi"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> × <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> korda <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2561,7 +2559,15 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Kiirjuurdepääs juurdepääsufunktsioonidele"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Alustamiseks toimige järgmiselt.&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Avage juurdepääsetavuse seaded.&lt;br/&gt; {1,number,integer}. Valige funktsioon ja puudutage otseteed.&lt;br/&gt; {2,number,integer}. Valige nupp, millega funktsioonile juurde pääseda.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Asukoht"</string>
+    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
+    <skip />
+    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
+    <skip />
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Suurus"</string>
+    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
+    <skip />
+    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
+    <skip />
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Hajuta, kui seda ei kasutata"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Hajub mõne sekundi pärast, et kuva oleks hõlpsam näha"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Läbipaistvus, kui nuppu ei kasutata"</string>
@@ -2585,8 +2591,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Lülitab sisse tumeda teema teie seadmes ja rakendustes, mis tumedat teemat toetavad."</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Laiendatud"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Laiendatud tume teema"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Rakendab automaatselt tumeda teema enamikule rakendustele, mis seda ei toeta, aidates parandada juurdepääsetavust."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"negatiiv, värvide ümberpööramine, kontrast"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Laiendatud tume teema"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Laiendatud tumeda teema seaded"</string>
@@ -3443,6 +3448,8 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Kasutajate lisamine lukustuskuval"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Kasutajate lisamine sisselogimiskuvalt"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Vaheta dokkimisel admin.-õigustega kasutajale"</string>
+    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Kas soovite kustutada iseenda?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Kas kustutada kasutaja?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Kas eemaldada profiil?"</string>
@@ -3880,8 +3887,6 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Rakendused"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Äratused ja muud katkestused"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Kiirseadete kestus"</string>
-    <string name="dnd_sync_title" msgid="2422077702431248079">"Funktsiooni Mitte segada sünkroonimine"</string>
-    <string name="dnd_sync_description" msgid="2625638932336262656">"Funktsiooni Mitte segada seadete sünkroonimine ühendatud seadmetega"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Tööprofiili helid"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Kasuta isikliku profiili helisid"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Kasutage samu helisid, mida kasutate oma isikliku profiiliga"</string>
@@ -5062,8 +5067,7 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Kas lülitada %1$s välja?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Kas lülitada see teenus välja?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Salvestatud teavet, nagu paroolid, pääsuvõtmed, makseviisid ja muu teave, sisselogimisel ei täideta. Salvestatud teabe kasutamiseks valige üks paroolide, pääsuvõtmete või andmete talletamise teenus."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Paroolid, pääsu­võtmed ja kontod"</string>
-    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
-    <skip />
+    <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"Paroolid ja pääsuvõtmed"</string>
     <string name="accounts_and_backup_title" msgid="2841026269835953207">"Kontod ja varundamine"</string>
     <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Andmete varundamine, andmete teisaldamine teisest seadmest."</string>
     <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Kontode haldamine"</string>

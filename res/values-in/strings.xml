@@ -1349,10 +1349,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Resolusi tinggi"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Resolusi maksimum"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Resolusi maksimum menggunakan lebih banyak daya baterai. Mengganti resolusi mungkin menyebabkan beberapa aplikasi dimulai ulang."</string>
-    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
-    <skip />
-    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
-    <skip />
+    <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g> Hz)"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"<xliff:g id="WIDTH">%1$s</xliff:g> kali <xliff:g id="HEIGHT">%2$s</xliff:g> <xliff:g id="REFRESH_RATE">%3$s</xliff:g> Hertz"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2561,7 +2559,15 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Akses fitur aksesibilitas dengan cepat"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Untuk memulai&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Buka setelan aksesibilitas&lt;br/&gt; {1,number,integer}. Pilih fitur dan ketuk pintasan&lt;br/&gt; {2,number,integer}. Pilih tombol untuk mengakses fitur&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokasi"</string>
+    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
+    <skip />
+    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
+    <skip />
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Ukuran"</string>
+    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
+    <skip />
+    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
+    <skip />
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Memudar saat tidak digunakan"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Memudar setelah beberapa detik sehingga layar lebih mudah dilihat"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Transparansi saat tidak digunakan"</string>
@@ -2585,8 +2591,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Mengaktifkan tema gelap untuk perangkat dan aplikasi yang mendukung tema gelap"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Diperluas"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Tema gelap yang diperluas"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Otomatis menerapkan tema gelap ke sebagian besar aplikasi yang tidak mendukungnya, sehingga membantu meningkatkan aksesibilitas."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"paksa inversi, inversi warna, kontras"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema gelap yang diperluas"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Setelan tema gelap yang diperluas"</string>
@@ -3443,6 +3448,8 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Tambahkan pengguna dari layar kunci"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Tambahkan pengguna dari layar login"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Beralih ke pengguna admin saat terpasang ke dok"</string>
+    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Hapus diri Anda sendiri?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Hapus pengguna ini?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Buang profil ini?"</string>
@@ -3880,8 +3887,6 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Aplikasi"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarm &amp; gangguan lain"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Durasi untuk Setelan Cepat"</string>
-    <string name="dnd_sync_title" msgid="2422077702431248079">"Sinkronisasi fitur Jangan ganggu"</string>
-    <string name="dnd_sync_description" msgid="2625638932336262656">"Sinkronkan setelan fitur Jangan ganggu ke perangkat yang terhubung"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Suara profil kerja"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Gunakan suara profil pribadi"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Gunakan suara yang sama dengan profil pribadi"</string>
@@ -5062,16 +5067,11 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Nonaktifkan %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Nonaktifkan layanan ini?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Info tersimpan seperti sandi, kunci sandi, metode pembayaran, dan info lainnya tidak akan diisikan saat Anda login. Untuk menggunakan info tersimpan, pilih sandi, kunci sandi, atau layanan data."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Sandi, kunci sandi &amp; akun"</string>
-    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_title (2841026269835953207) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_summary (4126659439608747174) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_manage_accounts_title (1034959782380418930) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_backup_category_title (807568201052547222) -->
-    <skip />
+    <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"Sandi &amp; kunci sandi"</string>
+    <string name="accounts_and_backup_title" msgid="2841026269835953207">"Akun dan cadangan"</string>
+    <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Cadangkan data, salin data dari perangkat lain"</string>
+    <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Kelola akun"</string>
+    <string name="accounts_and_backup_backup_category_title" msgid="807568201052547222">"Cadangkan atau salin data"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Nonaktifkan semua layanan?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Sandi, kunci sandi, dan info tersimpan lainnya tidak akan tersedia untuk pengisian otomatis saat Anda login"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Ubah layanan pilihan Anda ke &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Sandi, kunci sandi, dan info baru lainnya akan disimpan di sini mulai sekarang. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; mungkin menggunakan konten di layar untuk menentukan item yang dapat diisi otomatis."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Gunakan %1$s?"</string>
@@ -6074,40 +6074,27 @@
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"Update"</string>
-    <!-- no translation found for safety_center_security_update_search_terms (545517841376162382) -->
-    <skip />
+    <string name="safety_center_security_update_search_terms" msgid="545517841376162382">"Update, Update keamanan"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"Jenis jaringan, enkripsi, kontrol notifikasi"</string>
-    <!-- no translation found for safety_center_android_lock_screen_search_terms (4741569259158180141) -->
-    <skip />
-    <!-- no translation found for safety_center_fingerprint_unlock_search_terms (954519907845160433) -->
-    <skip />
-    <!-- no translation found for safety_center_face_unlock_search_terms (2994457346086700870) -->
-    <skip />
-    <!-- no translation found for safety_center_wear_unlock_search_terms (6289459571308806285) -->
-    <skip />
-    <!-- no translation found for safety_center_backup_search_terms (5652327131910333830) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_manager_search_terms (1303866079616216426) -->
-    <skip />
-    <!-- no translation found for safety_center_health_connect_search_terms (1323524144779175830) -->
-    <skip />
-    <!-- no translation found for safety_center_app_data_sharing_updates_search_terms (2041373488015575634) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_usage_search_terms (3015527940068111714) -->
-    <skip />
-    <!-- no translation found for safety_center_private_space_search_terms (6748750858253093118) -->
-    <skip />
+    <string name="safety_center_android_lock_screen_search_terms" msgid="4741569259158180141">"Kunci perangkat, Kunci layar, Layar kunci, Layar saat dikunci, Sandi, PIN, Pola, Kunci, Buka kunci"</string>
+    <string name="safety_center_fingerprint_unlock_search_terms" msgid="954519907845160433">"Sidik jari, Jari, Tambahkan sidik jari"</string>
+    <string name="safety_center_face_unlock_search_terms" msgid="2994457346086700870">"Buka dengan wajah, Wajah"</string>
+    <string name="safety_center_wear_unlock_search_terms" msgid="6289459571308806285">"Smartwatch, Buka dengan smartwatch"</string>
+    <string name="safety_center_backup_search_terms" msgid="5652327131910333830">"Pencadangan"</string>
+    <string name="safety_center_permission_manager_search_terms" msgid="1303866079616216426">"Izin, Pengelola izin"</string>
+    <string name="safety_center_health_connect_search_terms" msgid="1323524144779175830">"Health, Health Connect"</string>
+    <string name="safety_center_app_data_sharing_updates_search_terms" msgid="2041373488015575634">"Data, Berbagi data, Pembaruan berbagi data, Pembaruan berbagi data untuk lokasi, berbagi"</string>
+    <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"Privasi, Dasbor privasi"</string>
+    <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"Ruang Pribadi"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Lebih banyak peringatan"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Lebih sedikit peringatan"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Peringatan yang ditutup"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Tutup peringatan ini?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Tinjau setelan keamanan dan privasi Anda kapan saja untuk menambahkan perlindungan tambahan"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Tindakan selesai"</string>
-    <!-- no translation found for safety_center_qs_page_landing (1024103851758565938) -->
-    <skip />
-    <!-- no translation found for privacy_controls_qs (1774718598801606190) -->
-    <skip />
+    <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Setelan cepat keamanan dan privasi"</string>
+    <string name="privacy_controls_qs" msgid="1774718598801606190">"Kontrol privasi"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Menyambungkan"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> terhubung"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Pindai Perangkat"</string>

@@ -1349,10 +1349,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"High resolution"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Max resolution"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Max resolution uses more of your battery. Switching your resolution may cause some apps to restart."</string>
-    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
-    <skip />
-    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
-    <skip />
+    <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g> Hz)"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"<xliff:g id="WIDTH">%1$s</xliff:g> by <xliff:g id="HEIGHT">%2$s</xliff:g> <xliff:g id="REFRESH_RATE">%3$s</xliff:g> Hertz"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> by <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -1818,7 +1816,7 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Location time zone detection changes are not allowed"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"If your device location is available, it may be used to set your time zone"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Notifications"</string>
-    <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Time zone change"</string>
+    <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Time-zone change"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Receive a notification when your time zone is automatically updated"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notification, time, zone, time zone"</string>
     <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Scheduled clock change"</string>
@@ -2188,14 +2186,10 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Work profile keyboards &amp; tools"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"On-screen keyboard for work"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Default"</string>
-    <!-- no translation found for game_controller_settings_title (7088469312082579978) -->
-    <skip />
-    <!-- no translation found for game_controller_remapping_settings_intro (1173670925035985170) -->
-    <skip />
-    <!-- no translation found for game_controller_key_remapping_category (8787322674373090790) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_remapping_category (2566684534140451352) -->
-    <skip />
+    <string name="game_controller_settings_title" msgid="7088469312082579978">"Game controller"</string>
+    <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Customise the actions triggered by your controller\'s buttons"</string>
+    <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Buttons"</string>
+    <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Directions"</string>
     <string name="game_controller_button_a" msgid="2138420373137111774">"A button"</string>
     <string name="game_controller_button_b" msgid="2093089857164437480">"B button"</string>
     <string name="game_controller_button_x" msgid="3428801081204194655">"X button"</string>
@@ -2209,14 +2203,10 @@
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
     <string name="game_controller_stick_left" msgid="1591700901162153956">"Left stick"</string>
     <string name="game_controller_stick_right" msgid="1418791636252375110">"Right stick"</string>
-    <!-- no translation found for game_controller_remapping_reset_preference_title (649377683257651371) -->
-    <skip />
-    <!-- no translation found for game_controller_remapping_reset_dialog_title (2983250640475811715) -->
-    <skip />
-    <!-- no translation found for game_controller_remapping_reset_dialog_message (6675448345609566154) -->
-    <skip />
-    <!-- no translation found for game_controller_reset_dialog_button (4119182187827816149) -->
-    <skip />
+    <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Reset to default"</string>
+    <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Reset to default?"</string>
+    <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"All your controller settings will be reset to default"</string>
+    <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Reset"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad and mouse"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Mouse"</string>
@@ -2569,7 +2559,15 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Quickly access accessibility features"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;To get started&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Go to accessibility settings&lt;br/&gt; {1,number,integer}. Select a feature and tap the shortcut&lt;br/&gt; {2,number,integer}. Choose the button to access the feature&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Location"</string>
+    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
+    <skip />
+    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
+    <skip />
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Size"</string>
+    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
+    <skip />
+    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
+    <skip />
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Fade when not in use"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Fades after a few seconds so it’s easier to see your screen"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Transparency when not in use"</string>
@@ -2593,8 +2591,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Turns on Dark theme for your device and apps that support Dark theme"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Expanded"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Expanded Dark theme"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Automatically applies Dark theme to most apps that don\'t support it, helping to improve accessibility."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"force invert, colour inversion, contrast"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Expanded Dark theme"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Expanded Dark theme settings"</string>
@@ -3223,13 +3220,11 @@
     <string name="add_device_admin" msgid="6252128813507932519">"Activate this device admin app"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Device admin"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"Activating this admin app will allow the <xliff:g id="APP_NAME">%1$s</xliff:g> app to perform the following operations:"</string>
-    <!-- no translation found for supervision_role_holder_warning (167724047638694522) -->
-    <skip />
+    <string name="supervision_role_holder_warning" msgid="167724047638694522">"This device will be managed and monitored by <xliff:g id="APP_NAME_0">%1$s</xliff:g>. \n\n<xliff:g id="APP_NAME_1">%1$s</xliff:g> will be able to manage parental controls settings, such as app blocking and content restrictions."</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"This device will be managed and monitored by <xliff:g id="APP_NAME">%1$s</xliff:g>."</string>
     <string name="device_admin_status" msgid="6332571781623084064">"This admin app is active and allows the <xliff:g id="APP_NAME">%1$s</xliff:g> app to perform the following operations:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Activate Profile Manager?"</string>
-    <!-- no translation found for supervision_confirmation_title (8094974031562728585) -->
-    <skip />
+    <string name="supervision_confirmation_title" msgid="8094974031562728585">"Allow <xliff:g id="APP_NAME">%1$s</xliff:g> to supervise this device?"</string>
     <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"Allow supervision?"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"By proceeding, your user will be managed by your admin, which may also be able to store associated data, in addition to your personal data.\n\nYour admin has the ability to monitor and manage settings, access, apps and data associated with this user, including network activity and your device\'s location information."</string>
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"Other options are disabled by your admin"</string>
@@ -3397,12 +3392,9 @@
     <string name="vpn_disconnected" msgid="7694522069957717501">"Disconnected from VPN"</string>
     <string name="vpn_disconnected_summary" msgid="721699709491697712">"None"</string>
     <string name="vpn_missing_cert" msgid="5397309964971068272">"A certificate is missing. Try editing the profile."</string>
-    <!-- no translation found for vpn_app_exclusion (250431833854129334) -->
-    <skip />
-    <!-- no translation found for vpn_app_exclusion_description (7695809822452196283) -->
-    <skip />
-    <!-- no translation found for vpn_app_exclusion_selected_category_title (4737602697482017631) -->
-    <skip />
+    <string name="vpn_app_exclusion" msgid="250431833854129334">"Exclude selected apps"</string>
+    <string name="vpn_app_exclusion_description" msgid="7695809822452196283">"Excluded apps won\'t use this VPN"</string>
+    <string name="vpn_app_exclusion_selected_category_title" msgid="4737602697482017631">"Apps excluded from VPN"</string>
     <string name="trusted_credentials_system_tab" msgid="675362923690364722">"System"</string>
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"User"</string>
     <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"Disable"</string>
@@ -3456,6 +3448,8 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Add users from lock screen"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Add users from the sign-in screen"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Switch to admin user when docked"</string>
+    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Delete yourself?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Delete this user?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Remove this profile?"</string>
@@ -3893,8 +3887,6 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarms and other interruptions"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Duration for Quick Settings"</string>
-    <string name="dnd_sync_title" msgid="2422077702431248079">"Do Not Disturb sync"</string>
-    <string name="dnd_sync_description" msgid="2625638932336262656">"Sync Do Not Disturb settings to connected devices"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Work profile sounds"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Use personal profile sounds"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Use the same sounds as your personal profile"</string>
@@ -5075,16 +5067,11 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Turn off %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Turn off this service?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Saved info like passwords, passkeys, payment methods and other info won\'t be filled in when you sign in. To use your saved info, choose a password, passkey or data service."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Passwords, passkeys and accounts"</string>
-    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_title (2841026269835953207) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_summary (4126659439608747174) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_manage_accounts_title (1034959782380418930) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_backup_category_title (807568201052547222) -->
-    <skip />
+    <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"Passwords &amp; passkeys"</string>
+    <string name="accounts_and_backup_title" msgid="2841026269835953207">"Accounts and backup"</string>
+    <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Back up data, copy data from another device"</string>
+    <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Manage accounts"</string>
+    <string name="accounts_and_backup_backup_category_title" msgid="807568201052547222">"Back up or copy data"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Turn off all services?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Passwords, passkeys and other saved info won\'t be available for autofill when you sign in"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Change your preferred service to &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; New passwords, passkeys and other info will be saved here from now on. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; may use what\'s on your screen to determine what can be autofilled."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Use %1$s?"</string>
@@ -6025,8 +6012,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"When these settings are off, other account settings may still apply."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Enter parental controls PIN"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Set a parental controls PIN"</string>
-    <!-- no translation found for supervision_choose_your_new_pin_header (7770532284777963661) -->
-    <skip />
+    <string name="supervision_choose_your_new_pin_header" msgid="7770532284777963661">"Set a new parental controls PIN"</string>
     <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"Confirm parental controls PIN"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN updated"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Open app"</string>
@@ -6088,40 +6074,27 @@
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"Updates"</string>
-    <!-- no translation found for safety_center_security_update_search_terms (545517841376162382) -->
-    <skip />
+    <string name="safety_center_security_update_search_terms" msgid="545517841376162382">"Updates, update, security update, security updates"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"Network type, encryption, notification controls"</string>
-    <!-- no translation found for safety_center_android_lock_screen_search_terms (4741569259158180141) -->
-    <skip />
-    <!-- no translation found for safety_center_fingerprint_unlock_search_terms (954519907845160433) -->
-    <skip />
-    <!-- no translation found for safety_center_face_unlock_search_terms (2994457346086700870) -->
-    <skip />
-    <!-- no translation found for safety_center_wear_unlock_search_terms (6289459571308806285) -->
-    <skip />
-    <!-- no translation found for safety_center_backup_search_terms (5652327131910333830) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_manager_search_terms (1303866079616216426) -->
-    <skip />
-    <!-- no translation found for safety_center_health_connect_search_terms (1323524144779175830) -->
-    <skip />
-    <!-- no translation found for safety_center_app_data_sharing_updates_search_terms (2041373488015575634) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_usage_search_terms (3015527940068111714) -->
-    <skip />
-    <!-- no translation found for safety_center_private_space_search_terms (6748750858253093118) -->
-    <skip />
+    <string name="safety_center_android_lock_screen_search_terms" msgid="4741569259158180141">"Device lock, Screen Lock, lock screen, lockscreen, password, pin, pattern, lock, unlock"</string>
+    <string name="safety_center_fingerprint_unlock_search_terms" msgid="954519907845160433">"Fingerprint, Finger, Add fingerprint"</string>
+    <string name="safety_center_face_unlock_search_terms" msgid="2994457346086700870">"Face Unlock, Face"</string>
+    <string name="safety_center_wear_unlock_search_terms" msgid="6289459571308806285">"Watch, Watch Unlock"</string>
+    <string name="safety_center_backup_search_terms" msgid="5652327131910333830">"Backup"</string>
+    <string name="safety_center_permission_manager_search_terms" msgid="1303866079616216426">"Permissions, permissions manager"</string>
+    <string name="safety_center_health_connect_search_terms" msgid="1323524144779175830">"Health, Health Connect"</string>
+    <string name="safety_center_app_data_sharing_updates_search_terms" msgid="2041373488015575634">"Data, data sharing, data sharing updates, data sharing updates for location, sharing"</string>
+    <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"Privacy, privacy dashboard"</string>
+    <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"Private space"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"More alerts"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Less alerts"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Dismissed alerts"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Dismiss this alert?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Review your security and privacy settings at any time to add more protection"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Action complete"</string>
-    <!-- no translation found for safety_center_qs_page_landing (1024103851758565938) -->
-    <skip />
-    <!-- no translation found for privacy_controls_qs (1774718598801606190) -->
-    <skip />
+    <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Security and privacy quick settings"</string>
+    <string name="privacy_controls_qs" msgid="1774718598801606190">"Your privacy controls"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Pairing"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> connected"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Scan device"</string>
@@ -6140,12 +6113,8 @@
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Open Satellite SOS demo"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Satellite apps"</string>
     <string name="satellite_emergency_sos" msgid="5598135807261930736">"Emergency SOS"</string>
-    <!-- no translation found for satellite_tile_prompt_notification_title (208155187034621285) -->
-    <skip />
-    <!-- no translation found for satellite_tile_prompt_notification_summary (1108842668552812176) -->
-    <skip />
-    <!-- no translation found for add_tile_action (5271301747196740442) -->
-    <skip />
-    <!-- no translation found for satellite_tile_prompt_channel_title (5240494188833271282) -->
-    <skip />
+    <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Satellite connectivity available"</string>
+    <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Easily access satellite info by adding the Satellite tile to Quick Settings"</string>
+    <string name="add_tile_action" msgid="5271301747196740442">"Add tile"</string>
+    <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Satellite tile prompts"</string>
 </resources>

@@ -1349,10 +1349,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока роздільна здатність"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Максимальна роздільна здатність"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Коли екран працює з максимальною роздільною здатністю, акумулятор розряджається швидше. Якщо змінити роздільну здатність, деякі додатки можуть перезапуститися."</string>
-    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
-    <skip />
-    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
-    <skip />
+    <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g> Гц)"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"<xliff:g id="WIDTH">%1$s</xliff:g> на <xliff:g id="HEIGHT">%2$s</xliff:g> <xliff:g id="REFRESH_RATE">%3$s</xliff:g> Гц"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> на <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Гц"</string>
@@ -2561,7 +2559,15 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Швидкий доступ до функцій доступності"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Щоб почати:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Відкрийте налаштування функцій доступності.&lt;br/&gt; {1,number,integer}. Виберіть потрібну функцію й натисніть швидку команду.&lt;br/&gt; {2,number,integer}. Виберіть кнопку для доступу до функції.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Розташування"</string>
+    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
+    <skip />
+    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
+    <skip />
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Розмір"</string>
+    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
+    <skip />
+    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
+    <skip />
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Прихована, коли не використовується"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Стає прозорою за кілька секунд, щоб краще було видно екран"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Прозорість неактивної кнопки"</string>
@@ -2585,8 +2591,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Темна тема вмикатиметься для пристрою і додатків, які її підтримують"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Розширений режим"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Розширена темна тема"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Темна тема автоматично застосовуватиметься до більшості додатків, які її не підтримують, щоб покращити доступність."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"примусова інверсія, інверсія кольорів, контраст"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Розширена темна тема"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Налаштування розширеної темної теми"</string>
@@ -3443,6 +3448,8 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Додавати користувачів на заблокованому екрані"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Додавати користувачів на екрані входу"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Переходити в режим адміністратора в док-станції"</string>
+    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Видалити ваш профіль?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Видалити користувача?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Видалити цей профіль?"</string>
@@ -3880,8 +3887,6 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Додатки"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Будильники й інші сповіщення"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Тривалість дії швидких налаштувань"</string>
-    <string name="dnd_sync_title" msgid="2422077702431248079">"Синхронізувати режим \"Не турбувати\""</string>
-    <string name="dnd_sync_description" msgid="2625638932336262656">"Синхронізувати налаштування режиму \"Не турбувати\" з підключеними пристроями"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Звуки робочого профілю"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Звуки особистого профілю"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Використовувати ті самі звуки, що й в особистому профілі"</string>
@@ -5062,16 +5067,11 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Вимкнути %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Вимкнути цей сервіс?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Збережена інформація, наприклад паролі, ключі доступу, способи оплати тощо, не буде підставлятись автоматично, коли ви ввійдете в обліковий запис. Щоб використовувати збережену інформацію, виберіть сервіс для паролів, ключів доступу або даних."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Паролі, ключі доступу й облікові записи"</string>
-    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_title (2841026269835953207) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_summary (4126659439608747174) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_manage_accounts_title (1034959782380418930) -->
-    <skip />
-    <!-- no translation found for accounts_and_backup_backup_category_title (807568201052547222) -->
-    <skip />
+    <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"Паролі й ключі доступу"</string>
+    <string name="accounts_and_backup_title" msgid="2841026269835953207">"Облікові записи й резервне копіювання"</string>
+    <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Створити резервну копію даних, перенести дані з іншого пристрою"</string>
+    <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Керувати обліковими записами"</string>
+    <string name="accounts_and_backup_backup_category_title" msgid="807568201052547222">"Зробити резервну копію чи перенести дані"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Вимкнути всі сервіси?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Паролі, ключі доступу й інші збережені дані не будуть підставлятись автоматично, коли ви ввійдете в обліковий запис."</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Змінити бажаний сервіс на &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Відтепер тут зберігатимуться нові паролі, ключі доступу й інша інформація. Додаток &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; може використовувати інформацію на екрані, щоб визначати поля, які можна заповнити автоматично."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Використовувати %1$s?"</string>
@@ -6076,40 +6076,27 @@
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"Оновлення"</string>
-    <!-- no translation found for safety_center_security_update_search_terms (545517841376162382) -->
-    <skip />
+    <string name="safety_center_security_update_search_terms" msgid="545517841376162382">"оновлення, оновити, оновлення безпеки, оновлення системи безпеки"</string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"Тип мережі, шифрування, налаштування сповіщень"</string>
-    <!-- no translation found for safety_center_android_lock_screen_search_terms (4741569259158180141) -->
-    <skip />
-    <!-- no translation found for safety_center_fingerprint_unlock_search_terms (954519907845160433) -->
-    <skip />
-    <!-- no translation found for safety_center_face_unlock_search_terms (2994457346086700870) -->
-    <skip />
-    <!-- no translation found for safety_center_wear_unlock_search_terms (6289459571308806285) -->
-    <skip />
-    <!-- no translation found for safety_center_backup_search_terms (5652327131910333830) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_manager_search_terms (1303866079616216426) -->
-    <skip />
-    <!-- no translation found for safety_center_health_connect_search_terms (1323524144779175830) -->
-    <skip />
-    <!-- no translation found for safety_center_app_data_sharing_updates_search_terms (2041373488015575634) -->
-    <skip />
-    <!-- no translation found for safety_center_permission_usage_search_terms (3015527940068111714) -->
-    <skip />
-    <!-- no translation found for safety_center_private_space_search_terms (6748750858253093118) -->
-    <skip />
+    <string name="safety_center_android_lock_screen_search_terms" msgid="4741569259158180141">"блокування пристрою, блокування екрана, блокувати екран, заблокований екран, пароль, PIN-код, ключ, заблокувати, розблокувати"</string>
+    <string name="safety_center_fingerprint_unlock_search_terms" msgid="954519907845160433">"відбиток пальця, палець, додати відбиток пальця"</string>
+    <string name="safety_center_face_unlock_search_terms" msgid="2994457346086700870">"фейс-контроль, обличчя"</string>
+    <string name="safety_center_wear_unlock_search_terms" msgid="6289459571308806285">"годинник, розблокування годинником"</string>
+    <string name="safety_center_backup_search_terms" msgid="5652327131910333830">"резервне копіювання"</string>
+    <string name="safety_center_permission_manager_search_terms" msgid="1303866079616216426">"дозволи, менеджер дозволів"</string>
+    <string name="safety_center_health_connect_search_terms" msgid="1323524144779175830">"Health, Health Connect"</string>
+    <string name="safety_center_app_data_sharing_updates_search_terms" msgid="2041373488015575634">"дані, передавання даних, оновлення способу передавання даних, оновлення способу передавання геоданих, передавання"</string>
+    <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"конфіденційність, панель керування дозволами"</string>
+    <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"приватний простір"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Більше сповіщень"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Менше сповіщень"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Закриті сповіщення"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Закрити це сповіщення?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Щоб посилити захист, ви можете будь-коли переглянути налаштування безпеки й конфіденційності"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Дію виконано"</string>
-    <!-- no translation found for safety_center_qs_page_landing (1024103851758565938) -->
-    <skip />
-    <!-- no translation found for privacy_controls_qs (1774718598801606190) -->
-    <skip />
+    <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Швидкі налаштування безпеки й конфіденційності"</string>
+    <string name="privacy_controls_qs" msgid="1774718598801606190">"Налаштування конфіденційності"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Підключення"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> підключено"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Сканувати пристрій"</string>

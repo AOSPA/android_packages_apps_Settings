@@ -1349,10 +1349,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Peleraian tinggi"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Peleraian maksimum"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Peleraian maksimum menggunakan lebih banyak kuasa bateri. Penukaran peleraian mungkin menyebabkan sesetengah apl dimulakan semula."</string>
-    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
-    <skip />
-    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
-    <skip />
+    <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g> Hz)"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"<xliff:g id="WIDTH">%1$s</xliff:g> kali <xliff:g id="HEIGHT">%2$s</xliff:g> <xliff:g id="REFRESH_RATE">%3$s</xliff:g> Hertz"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> kali <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2561,7 +2559,15 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Akses ciri kebolehaksesan dengan cepat"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Untuk bermula:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Akses tetapan kebolehaksesan&lt;br/&gt; {1,number,integer}. Pilih satu ciri dan ketik pintasan&lt;br/&gt; {2,number,integer}. Pilih butang untuk mengakses ciri&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokasi"</string>
+    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
+    <skip />
+    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
+    <skip />
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Saiz"</string>
+    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
+    <skip />
+    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
+    <skip />
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Lenyap apabila tidak digunakan"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Lenyap selepas beberapa saat supaya skrin lebih mudah dilihat"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Kelutsinaran apabila tidak digunakan"</string>
@@ -2585,8 +2591,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Menghidupkan tema gelap untuk peranti anda dan apl yang menyokong tema gelap"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Dikembangkan"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Tema gelap dikembangkan"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Menggunakan tema gelap secara automatik pada kebanyakan apl yang tidak menyokong ciri ini, sekali gus membantu untuk meningkatkan kebolehaksesan."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"paksa songsang, penyongsangan warna, kontras"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema gelap yang dikembangkan"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Tetapan tema gelap yang dikembangkan"</string>
@@ -3389,7 +3394,7 @@
     <string name="vpn_missing_cert" msgid="5397309964971068272">"Tiada sijil. Cuba edit profil."</string>
     <string name="vpn_app_exclusion" msgid="250431833854129334">"Kecualikan apl yang dipilih"</string>
     <string name="vpn_app_exclusion_description" msgid="7695809822452196283">"Apl yang dikecualikan tidak akan menggunakan VPN ini"</string>
-    <string name="vpn_app_exclusion_selected_category_title" msgid="4737602697482017631">"Apl dikecualikan daripada VPN"</string>
+    <string name="vpn_app_exclusion_selected_category_title" msgid="4737602697482017631">"Apl yang dikecualikan daripada VPN"</string>
     <string name="trusted_credentials_system_tab" msgid="675362923690364722">"Sistem"</string>
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"Pengguna"</string>
     <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"Lumpuhkan"</string>
@@ -3443,6 +3448,8 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Tambahkan pengguna daripada skrin kunci"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Tambahkan pengguna daripada skrin log masuk"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Tukar kepada pengguna pentadbir apabila didok"</string>
+    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Padam diri anda sendiri?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Padamkan pengguna ini?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Alih keluar profil ini?"</string>
@@ -3880,8 +3887,6 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Apl"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Penggera &amp; gangguan lain"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Tempoh bagi Tetapan Pantas"</string>
-    <string name="dnd_sync_title" msgid="2422077702431248079">"Penyegerakan jangan ganggu"</string>
-    <string name="dnd_sync_description" msgid="2625638932336262656">"Segerakkan tetapan Jangan ganggu kepada peranti tersambung"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Bunyi profil kerja"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Gunakan bunyi profil peribadi"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Gunakan bunyi yang sama seperti profil peribadi"</string>
@@ -5062,8 +5067,7 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Matikan %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Matikan perkhidmatan ini?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Maklumat yang disimpan seperti kata laluan, kunci laluan, kaedah pembayaran dan maklumat lain tidak akan diisikan apabila anda log masuk. Untuk menggunakan maklumat anda yang disimpan, pilih kata laluan, kunci laluan atau perkhidmatan data."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Kata laluan, kunci laluan &amp; akaun"</string>
-    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
-    <skip />
+    <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"Kata laluan &amp; kunci laluan"</string>
     <string name="accounts_and_backup_title" msgid="2841026269835953207">"Akaun dan sandaran"</string>
     <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Sandarkan data, salin data daripada peranti lain"</string>
     <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Urus akaun"</string>

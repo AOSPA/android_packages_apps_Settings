@@ -1349,10 +1349,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Visoka rezolucija"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Maksimalna rezolucija"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Maksimalna rezolucija koristi više baterije. Ako pređete na ovu rezoluciju, neke aplikacije će se možda restartovati."</string>
-    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
-    <skip />
-    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
-    <skip />
+    <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g>×<xliff:g id="HEIGHT">%2$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g>Hz)"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"<xliff:g id="WIDTH">%1$s</xliff:g> prema pokazatelju <xliff:g id="HEIGHT">%2$s</xliff:g> <xliff:g id="REFRESH_RATE">%3$s</xliff:g> herca"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g>×<xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> sa <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2561,7 +2559,15 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Brzo pristupajte funkcijama pristupačnosti"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Da biste započeli&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Idite u podešavanja pristupačnosti&lt;br/&gt; {1,number,integer}. Izaberite funkciju i dodirnite prečicu&lt;br/&gt; {2,number,integer}. Odaberite dugme koje ćete koristiti za pristup toj funkciji&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokacija"</string>
+    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
+    <skip />
+    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
+    <skip />
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Veličina"</string>
+    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
+    <skip />
+    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
+    <skip />
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Izbledi kada se ne koristi"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Bledi posle nekoliko sekundi da biste lakše mogli da vidite ekran"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Prozirnost kada se ne koristi"</string>
@@ -2585,8 +2591,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Uključuje tamnu temu za uređaj i aplikacije koje podržavaju tamnu temu"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Prošireno"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Proširena tamna tema"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Automatski primenjuje tamnu temu na većinu aplikacija koje je ne podržavaju, što poboljšava pristupačnost."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"prinudna inverzija, inverzija boja, kontrast"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Proširena tamna tema"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Podešavanja proširene tamne teme"</string>
@@ -3443,6 +3448,8 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Dodaj korisnike sa zaključanog ekrana"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Dodajte korisnike sa ekrana za prijavljivanje"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Prebaci na administratora na baznoj stanici"</string>
+    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Želite li da izbrišete sebe?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Brišete ovog korisnika?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Uklanjate ovaj profil?"</string>
@@ -3880,8 +3887,6 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Aplikacije"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmi i drugi prekidi"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Trajanje za Brza podešavanja"</string>
-    <string name="dnd_sync_title" msgid="2422077702431248079">"Sinhronizacija režima Ne uznemiravaj"</string>
-    <string name="dnd_sync_description" msgid="2625638932336262656">"Sinhronizujte podešavanja režima Ne uznemiravaj sa povezanim uređajima"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Zvukovi za poslovni profil"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Koristi zvukove ličnog profila"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Koristi iste zvukove kao lični profil"</string>
@@ -5062,8 +5067,7 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Želite da isključite: %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Želite da isključite ovu uslugu?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Sačuvane informacije kao što su lozinke, pristupni ključevi, načini plaćanja i drugi podaci se neće popunjavati kada ste prijavljeni. Da biste koristili sačuvane informacije, odaberite uslugu za lozinke, pristupne ključeve ili podatke."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Lozinke, pristupni ključevi i nalozi"</string>
-    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
-    <skip />
+    <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"Lozinke i pristupni ključevi"</string>
     <string name="accounts_and_backup_title" msgid="2841026269835953207">"Nalozi i rezervne kopije"</string>
     <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Napravite rezervnu kopiju podataka ili prenesite podatke sa drugog uređaja"</string>
     <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Upravljaj nalozima"</string>

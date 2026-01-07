@@ -1349,10 +1349,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"കൂടിയ റെസല്യൂഷൻ"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"പരമാവധി റെസല്യൂഷൻ"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"പരമാവധി റെസല്യൂഷൻ കൂടുതൽ ബാറ്ററി ചാർജ് ഉപയോഗിക്കുന്നു. നിങ്ങളുടെ റെസല്യൂഷൻ മാറ്റുന്നത് ചില ആപ്പുകൾ റീസ്റ്റാർട്ട് ചെയ്യാൻ കാരണമായേക്കാം."</string>
-    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
-    <skip />
-    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
-    <skip />
+    <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g> Hz)"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"<xliff:g id="HEIGHT">%2$s</xliff:g> എന്ന ആർട്ടിസ്റ്റിന്റെ <xliff:g id="REFRESH_RATE">%3$s</xliff:g> ഹെർട്‌സ് എന്ന ആൽബത്തിലെ <xliff:g id="WIDTH">%1$s</xliff:g>"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> / <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2561,7 +2559,15 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"ഉപയോഗസഹായി ഫീച്ചറുകൾ അതിവേഗം ആക്‌സസ് ചെയ്യുക"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;ആരംഭിക്കാൻ&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ഉപയോഗസഹായി ക്രമീകരണത്തിലേക്ക് പോകുക&lt;br/&gt; {1,number,integer}. ഒരു ഫീച്ചർ തിരഞ്ഞെടുത്ത് കുറുക്കുവഴി ടാപ്പ് ചെയ്യുക&lt;br/&gt; {2,number,integer}. ഫീച്ചർ ആക്‌സസ് ചെയ്യാനുള്ള ബട്ടൺ തിരഞ്ഞെടുക്കുക&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"ലൊക്കേഷൻ"</string>
+    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
+    <skip />
+    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
+    <skip />
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"വലുപ്പം"</string>
+    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
+    <skip />
+    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
+    <skip />
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"ഉപയോഗിക്കാതിരിക്കുമ്പോൾ മങ്ങിക്കുക"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"കുറച്ച് സെക്കന്റിന് ശേഷം ഇത് മങ്ങുന്നതിനാൽ നിങ്ങളുടെ സ്ക്രീൻ കാണാൻ എളുപ്പമാണ്"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"ഉപയോഗിക്കാതിരിക്കുമ്പോഴുള്ള സുതാര്യത"</string>
@@ -2585,8 +2591,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"നിങ്ങളുടെ ഉപകരണത്തിനും ഡാർക്ക് തീം പിന്തുണയ്ക്കുന്ന ആപ്പുകൾക്കുമായി ഡാർക്ക് തീം ഓണാക്കുന്നു"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"വിപുലമായത്"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"വിപുലീകരിച്ച ഡാർക്ക് തീം"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"ഡാർക്ക് തീം പിന്തുണയ്ക്കാത്ത മിക്ക ആപ്പുകളിലും സ്വയമേവ ഡാർക്ക് തീം ബാധകമാക്കുന്നു, ഇത് ഉപയോഗസഹായി മെച്ചപ്പെടുത്താൻ സഹായിക്കുന്നു."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"ഫോഴ്‌സ് ഇൻവേർട്ട്, നിറം വിപരീതമാക്കൽ, കോൺട്രാസ്റ്റ്"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"വിപുലീകരിച്ച ഡാർക്ക് തീം"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"വിപുലീകരിച്ച ഡാർക്ക് തീം ക്രമീകരണം"</string>
@@ -3443,6 +3448,8 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"ലോക്ക് സ്ക്രീനിൽ നിന്ന് ഉപയോക്താക്കളെ ചേർക്കുക"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"സൈൻ ഇൻ സ്ക്രീനിൽ നിന്ന് ഉപയോക്താക്കളെ ചേർക്കൂ"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"ഡോക്ക് ചെയ്യുമ്പോൾ അഡ്‌മിൻ ഉപയോക്താവിലേക്ക് മാറുക"</string>
+    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"നിങ്ങളെ സ്വയം ഇല്ലാതാക്കണോ?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"ഈ ഉപയോക്താവിനെ ഇല്ലാതാക്കണോ?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"ഈ പ്രൊഫൈൽ നീക്കംചെയ്യണോ?"</string>
@@ -3880,8 +3887,6 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"ആപ്പുകൾ"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"അലാറങ്ങളും മറ്റ് തടസ്സങ്ങളും"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"ദ്രുത ക്രമീകരണത്തിന്റെ സമയ ദൈർഘ്യം"</string>
-    <string name="dnd_sync_title" msgid="2422077702431248079">"\'ശല്യപ്പെടുത്തരുത്\' സമന്വയിപ്പിക്കൽ"</string>
-    <string name="dnd_sync_description" msgid="2625638932336262656">"കണക്റ്റ് ചെയ്ത ഉപകരണങ്ങളിലേക്ക് \'ശല്യപ്പെടുത്തരുത്\' ക്രമീകരണം സമന്വയിപ്പിക്കുക"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"ഔദ്യോഗിക പ്രൊഫൈൽ ശബ്ദങ്ങൾ"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"വ്യക്തിപര പ്രൊഫൈൽ ശബ്ദങ്ങൾ ഉപയോഗിക്കുക"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"നിങ്ങളുടെ വ്യക്തിപര പ്രൊഫൈൽ ഉപയോഗിക്കുന്ന അതേ ശബ്‌ദങ്ങൾ ഉപയോഗിക്കുക"</string>
@@ -5062,8 +5067,7 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s ഓഫാക്കണോ?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;ഈ സേവനം ഓഫാക്കണോ?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; സൈൻ ഇൻ ചെയ്യുമ്പോൾ പാസ്‌വേഡുകൾ, പാസ്‌കീകൾ, പേയ്‌മെന്റ് രീതികൾ എന്നിവ പോലുള്ള സംരക്ഷിച്ച വിവരങ്ങൾ പൂരിപ്പിക്കില്ല. നിങ്ങളുടെ സംരക്ഷിച്ച വിവരങ്ങൾ ഉപയോഗിക്കാൻ, ഒരു പാസ്‌വേഡോ പാസ്‌കീയോ ഡാറ്റാ സേവനമോ തിരഞ്ഞെടുക്കുക."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"പാസ്‍വേഡുകൾ, പാസ്‌കീകൾ, അക്കൗണ്ടുകൾ"</string>
-    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
-    <skip />
+    <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"പാസ്‌വേഡുകളും പാസ്‌കീകളും"</string>
     <string name="accounts_and_backup_title" msgid="2841026269835953207">"അക്കൗണ്ടുകളും ബാക്കപ്പും"</string>
     <string name="accounts_and_backup_summary" msgid="4126659439608747174">"ഡാറ്റ ബാക്കപ്പ് ചെയ്യുക, മറ്റൊരു ഉപകരണത്തിൽ നിന്ന് ഡാറ്റ പകർത്തുക"</string>
     <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"അക്കൗണ്ടുകൾ മാനേജ് ചെയ്യുക"</string>
