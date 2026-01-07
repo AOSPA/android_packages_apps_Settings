@@ -29,13 +29,21 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.Preference
+import com.android.internal.telephony.flags.Flags
 import com.android.settings.R
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.IllustrationPreference
 import com.android.settingslib.widget.SettingsBasePreferenceFragment
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 /**
  * A fragment that displays the satellite landing page.
@@ -49,6 +57,7 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
     private lateinit var packageManager: PackageManager
 
     private var appsRepository: SatelliteAppsRepository? = null
+    private var backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default
 
     @VisibleForTesting
     val viewModel: SatelliteLandingPageViewModel by viewModels {
@@ -56,6 +65,7 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
             requireContext(),
             appsRepository ?: SatelliteAppsRepository(requireContext()),
             packageManager,
+            backgroundDispatcher,
         )
     }
 
@@ -64,11 +74,18 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
      *
      * @param packageManager The [PackageManager] to use for testing.
      * @param appsRepository The [SatelliteAppsRepository] to use for testing.
+     * @param backgroundDispatcher The [CoroutineDispatcher] to use for background work in
+     *   ViewModel.
      */
     @VisibleForTesting
-    constructor(packageManager: PackageManager, appsRepository: SatelliteAppsRepository) : super() {
+    constructor(
+        packageManager: PackageManager,
+        appsRepository: SatelliteAppsRepository,
+        backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
+    ) : super() {
         this.packageManager = packageManager
         this.appsRepository = appsRepository
+        this.backgroundDispatcher = backgroundDispatcher
     }
 
     constructor() : super()
@@ -80,27 +97,58 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
             packageManager = requireContext().packageManager
         }
         setPreferencesFromResource(R.layout.satellite_landing_page_pref, rootKey)
-        activeSubId = SubscriptionManager.getActiveDataSubscriptionId()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        updateActiveSubId()
         Log.d(TAG, "onViewCreated: activeSubId: $activeSubId")
 
-        addIllustrationPreference()
-        updateLandingPageContent()
+        observeViewModel()
+        setUpSatelliteAppsContent()
+        setUpTryADemoButtonListener()
     }
 
     override fun onResume() {
         super.onResume()
+        updateActiveSubId()
         updateLandingPageContent()
     }
 
+    private fun updateActiveSubId() {
+        activeSubId = SubscriptionManager.getActiveDataSubscriptionId()
+    }
+
+    private fun observeViewModel() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.isLteBasedNtnSupported.collectLatest { isLte ->
+                        if (isLte != null) {
+                            addIllustrationPreference(isLte)
+                            updateTryADemoButtonVisibility(isLte)
+                            setUpFooterPreference(isLte)
+                        }
+                    }
+                }
+                launch {
+                    viewModel.isCarrierRoamingNtnSupported.collectLatest { isCarrier ->
+                        updateTryADemoButtonIcon(isCarrier)
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Updates the content of the landing page.
+     *
+     * This method triggers a refresh in the ViewModel, which in turn updates the satellite app list
+     * and support status. It should be called when the fragment becomes visible or when the
+     * subscription ID might have changed.
+     */
     private fun updateLandingPageContent() {
-        viewModel.loadSatelliteAppItems()
-        setUpTryADemoButton()
-        setUpSatelliteAppsContent()
-        setUpFooterPreference()
+        viewModel.refresh(activeSubId)
     }
 
     /**
@@ -108,32 +156,47 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
      *
      * The illustration is not shown if LTE NTN is supported.
      */
-    private fun addIllustrationPreference() {
+    private fun addIllustrationPreference(isLteBasedNtnSupported: Boolean) {
         findPreference<IllustrationPreference>(KEY_ILLUSTRATION)?.apply {
-            isVisible = !shouldDisplayLteBasedLandingPage()
+            isVisible = !isLteBasedNtnSupported
             if (isVisible) {
                 setImageDrawable(context?.getDrawable(R.drawable.ill_satellite_landing))
             }
         }
     }
 
-    /**
-     * Sets up the "Try a demo" button.
-     *
-     * The button is not shown if LTE NTN is supported.
-     */
-    private fun setUpTryADemoButton() {
+    private fun setUpTryADemoButtonListener() {
         val demoButtonPreference = findPreference<Preference>(KEY_TRY_A_DEMO_BUTTON) ?: return
-        val isVisible = !shouldDisplayLteBasedLandingPage()
-        demoButtonPreference.isVisible = isVisible
-        if (isVisible) {
-            demoButtonPreference.setOnPreferenceClickListener {
-                startActivitySafely(
-                    Intent(ACTION_ESOS_DEMO)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        demoButtonPreference.setOnPreferenceClickListener {
+            val action =
+                getString(
+                    com.android.internal.R.string.config_satellite_demo_mode_sos_intent_action
                 )
-                true
-            }
+            startActivitySafely(
+                Intent(action)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            )
+            true
+        }
+    }
+
+    /**
+     * Sets up the "Try a demo" button visibility.
+     *
+     * The button should only be visible if NTN LTE is not supported.
+     */
+    private fun updateTryADemoButtonVisibility(isLteBasedNtnSupported: Boolean) {
+        val demoButtonPreference = findPreference<Preference>(KEY_TRY_A_DEMO_BUTTON) ?: return
+        // Don't show the button if LTE NTN is supported.
+        demoButtonPreference.isVisible = !isLteBasedNtnSupported
+    }
+
+    private fun updateTryADemoButtonIcon(isCarrierSupported: Boolean) {
+        val demoButtonPreference = findPreference<Preference>(KEY_TRY_A_DEMO_BUTTON) ?: return
+        if (isCarrierSupported && Flags.newSatelliteIcon()) {
+            demoButtonPreference.icon = SatelliteIconDrawable(requireContext())
+        } else {
+            demoButtonPreference.icon = requireContext().getDrawable(R.drawable.ic_satellite_demo)
         }
     }
 
@@ -163,10 +226,10 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
     }
 
     /** Sets up the footer preference based on the NTN type. */
-    private fun setUpFooterPreference() {
+    private fun setUpFooterPreference(isLteBasedNtnSupported: Boolean) {
         val footerPreference: FooterPreference? = findPreference(KEY_FOOTER)
         val footerTextResId =
-            if (shouldDisplayLteBasedLandingPage()) {
+            if (isLteBasedNtnSupported) {
                 R.string.landing_page_footer_text_lte
             } else {
                 R.string.landing_page_footer_text_nbiot
@@ -194,21 +257,12 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
         }
     }
 
-    /**
-     * The LTE landing page should be displayed if LTE-based NTN is supported by any of the active
-     * subscription IDs. Otherwise, the NBIOT landing page should be displayed.
-     */
-    private fun shouldDisplayLteBasedLandingPage(): Boolean {
-        return SatelliteUtils.isLteBasedNtnSupportedByDevice(requireContext())
-    }
-
     companion object {
         private const val TAG = "SatelliteLandingPageFragment"
         private const val KEY_ILLUSTRATION = "illustration"
         private const val KEY_TRY_A_DEMO_BUTTON = "try_a_demo_button"
         private const val KEY_FOOTER = "footer"
         private const val KEY_SATELLITE_APPS_LIST = "satellite_apps_list"
-        private const val ACTION_ESOS_DEMO = "com.google.android.apps.stargate.ACTION_ESOS_DEMO"
         private const val EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting"
         private const val EXTRA_SUB_ID = "sub_id"

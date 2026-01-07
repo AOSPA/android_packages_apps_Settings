@@ -55,12 +55,12 @@ object SatelliteUtils {
     }
 
     /**
-     * Returns true if LTE-based NTN is supported for the carrier.
+     * Returns true if Carrier Roaming NTN is supported for the carrier.
      *
-     * If the attach restriction reasons are empty and Satellite Attach is supported in the carrier
-     * config, it means that LTE-based NTN is supported.
+     * This checks if satellite attach is supported by carrier config and there are no attach
+     * restrictions. It does NOT check the connection type (LTE vs NB-IoT).
      */
-    fun isLteBasedNtnSupportedByCarrier(context: Context, activeSubId: Int): Boolean {
+    fun isCarrierRoamingNtnSupported(context: Context, activeSubId: Int): Boolean {
         val satelliteManager: SatelliteManager? =
             context.getSystemService(SatelliteManager::class.java)
         if (satelliteManager == null) {
@@ -76,6 +76,28 @@ object SatelliteUtils {
         val configBundle = fetchCarrierConfigData(context, activeSubId)
         val isSatelliteAttachSupported =
             configBundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)
+        val hasNoAttachRestrictionReasons =
+            satelliteManager.getAttachRestrictionReasonsForCarrier(activeSubId).isEmpty()
+
+        Log.d(
+            TAG,
+            "isCarrierRoamingNtnSupported: isSatelliteAttachSupported: $isSatelliteAttachSupported, hasNoAttachRestrictionReasons: $hasNoAttachRestrictionReasons",
+        )
+        return isSatelliteAttachSupported && hasNoAttachRestrictionReasons
+    }
+
+    /**
+     * Returns true if LTE-based NTN is supported for the carrier.
+     *
+     * If the attach restriction reasons are empty and Satellite Attach is supported in the carrier
+     * config, it means that LTE-based NTN is supported.
+     */
+    fun isLteBasedNtnSupportedByCarrier(context: Context, activeSubId: Int): Boolean {
+        if (!isCarrierRoamingNtnSupported(context, activeSubId)) {
+            return false
+        }
+
+        val configBundle = fetchCarrierConfigData(context, activeSubId)
         // TODO(b/434793872): May need to handle extra logic for if connect type is
         // CARRIER_ROAMING_NTN_CONNECT_HYBRID. In certain cases, we may want to show NBIOT landing
         // page instead of LTE landing page.
@@ -85,30 +107,20 @@ object SatelliteUtils {
                 KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
                 /* default= */ CARRIER_ROAMING_NTN_CONNECT_MANUAL,
             ) != CARRIER_ROAMING_NTN_CONNECT_MANUAL
-        val hasNoAttachRestrictionReasons =
-            satelliteManager.getAttachRestrictionReasonsForCarrier(activeSubId).isEmpty()
-        Log.i(
-            TAG,
-            "isLteBasedNtnSupported: ${hasNoAttachRestrictionReasons && isSatelliteAttachSupported && isCarrierRoamingNtnConnectTypeAutomatic} " +
-                "[hasNoAttachRestrictionReasons=$hasNoAttachRestrictionReasons, " +
-                "isSatelliteAttachSupported=$isSatelliteAttachSupported, " +
-                "isCarrierRoamingNtnConnectTypeAutomatic=$isCarrierRoamingNtnConnectTypeAutomatic]",
-        )
-        return hasNoAttachRestrictionReasons &&
-            isSatelliteAttachSupported &&
-            isCarrierRoamingNtnConnectTypeAutomatic
+
+        Log.d(TAG, "isLteBasedNtnSupported: $isCarrierRoamingNtnConnectTypeAutomatic")
+        return isCarrierRoamingNtnConnectTypeAutomatic
     }
 
     private fun fetchCarrierConfigData(context: Context, subId: Int): PersistableBundle {
         val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)
-        var bundle = CarrierConfigManager.getDefaultConfig()
 
         if (carrierConfigManager == null) {
             Log.e(TAG, "CarrierConfigManager is null, returning default config.")
-            return bundle
+            return CarrierConfigManager.getDefaultConfig()
         }
 
-        try {
+        return try {
             val fetchedBundle =
                 carrierConfigManager.getConfigForSubId(
                     subId,
@@ -116,15 +128,15 @@ object SatelliteUtils {
                     KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
                 )
             if (!fetchedBundle.isEmpty) {
-                bundle = fetchedBundle
+                fetchedBundle
             } else {
                 Log.e(TAG, "Fetched bundle is null or empty, using default config.")
+                CarrierConfigManager.getDefaultConfig()
             }
         } catch (exception: IllegalStateException) {
             Log.e(TAG, "Exception fetching carrier config: $exception")
+            CarrierConfigManager.getDefaultConfig()
         }
-
-        return bundle
     }
 
     private const val TAG = "SatelliteUtils"
