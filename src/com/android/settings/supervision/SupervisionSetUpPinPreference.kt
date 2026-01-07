@@ -22,6 +22,8 @@ import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceClickListener
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
+import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
+import com.android.settings.supervision.shared.isSupervisingCredentialSet
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding

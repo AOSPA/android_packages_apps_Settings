@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -28,6 +29,7 @@ import androidx.preference.Preference;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.flags.Flags;
+import com.android.settings.safetycenter.ui.NavigationSource;
 import com.android.settings.safetycenter.ui.SafetyCenterFragment;
 import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils;
 
@@ -58,11 +60,13 @@ public class TopLevelSafetyCenterEntryPreferenceController extends BasePreferenc
             if (Flags.enableSafetyCenterNewUi()) {
                 Log.d(TAG, "Launching SafetyCenter in Settings");
                 long sessionId = SafetyCenterSessionUtils.INSTANCE.generateValidSessionId();
+                Bundle args = SafetyCenterSessionUtils.INSTANCE.createSessionArgs(sessionId);
+                args.putAll(NavigationSource.SETTINGS.createArgs());
                 new SubSettingLauncher(mContext)
-                    .setDestination(SafetyCenterFragment.class.getName())
-                    .setArguments(SafetyCenterSessionUtils.INSTANCE.createSessionArgs(sessionId))
-                    .setSourceMetricsCategory(SettingsEnums.SETTINGS_HOMEPAGE)
-                    .launch();
+                        .setDestination(SafetyCenterFragment.class.getName())
+                        .setArguments(args)
+                        .setSourceMetricsCategory(SettingsEnums.SETTINGS_HOMEPAGE)
+                        .launch();
             } else {
                 Log.d(TAG, "Launching SafetyCenter in PermissionController");
                 mContext.startActivity(new Intent(Intent.ACTION_SAFETY_CENTER)

@@ -26,6 +26,11 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
+import com.android.settings.supervision.shared.areAnyUsersExceptCurrentSupervised
+import com.android.settings.supervision.shared.deleteSupervisionData
+import com.android.settings.supervision.shared.isSupervisionPackageProfileOwner
+import com.android.settings.supervision.shared.supervisionRoleHolders
+import com.android.settings.supervision.shared.systemSupervisionPackageName
 import com.android.settingslib.supervision.SupervisionLog.TAG
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.launch

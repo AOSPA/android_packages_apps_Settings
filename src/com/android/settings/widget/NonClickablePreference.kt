@@ -20,8 +20,8 @@ import android.util.AttributeSet
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 
-class NonClickablePreference(context: Context, attrs: AttributeSet? = null)
-    : Preference(context, attrs) {
+class NonClickablePreference(context: Context, attrs: AttributeSet? = null) :
+    Preference(context, attrs) {
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
         holder.itemView.isClickable = false

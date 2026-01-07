@@ -101,7 +101,8 @@ class SafetyCenterFragment : DashboardFragment() {
         viewModel.interactionLogger.apply {
             sessionId = this@SafetyCenterFragment.sessionId
             viewType = ViewType.FULL
-            navigationSource = NavigationSource.fromIntent(requireActivity().intent)
+            navigationSource =
+                NavigationSource.fromIntentOrArguments(requireActivity().intent, arguments)
         }
     }
 

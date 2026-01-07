@@ -33,8 +33,8 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.supervision.SupervisionDashboardActivity.Companion.INTERSTITIAL_REDIRECT_ACTION
-import com.android.settings.supervision.SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settings.supervision.shared.SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.ipc.MessengerServiceRule
 import com.google.common.truth.Truth.assertThat

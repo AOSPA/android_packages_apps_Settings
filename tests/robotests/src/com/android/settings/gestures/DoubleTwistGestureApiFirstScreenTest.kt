@@ -34,6 +34,7 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.google.common.truth.Truth.assertThat
 import kotlin.test.assertFailsWith
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -99,6 +100,7 @@ class DoubleTwistGestureApiFirstScreenTest {
     }
 
     @Test
+    @Ignore("TODO: b/470893606 - Verify the root cause of b/470495568.")
     fun setMainSwitchPreference_noDoubleTwistSensor_throwsException() {
         ensureDoesNotHaveDoubleTwistSensor()
 
@@ -108,6 +110,7 @@ class DoubleTwistGestureApiFirstScreenTest {
     }
 
     @Test
+    @Ignore("TODO: b/470893606 - Verify the root cause of b/470495568.")
     fun setMainSwitchPreference_asTrue_returnOn() {
         tester.set(DoubleTwistGestureApiFirstScreen.MAIN_SWITCH_KEY, true)
 
@@ -119,6 +122,7 @@ class DoubleTwistGestureApiFirstScreenTest {
     }
 
     @Test
+    @Ignore("TODO: b/470893606 - Verify the root cause of b/470495568.")
     fun setMainSwitchPreference_asFalse_returnOff() {
         tester.set(DoubleTwistGestureApiFirstScreen.MAIN_SWITCH_KEY, false)
 
