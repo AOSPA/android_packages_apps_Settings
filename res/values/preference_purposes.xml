@@ -510,4 +510,10 @@
 <string name="wifi_hotspot_speed_purpose" translatable="false">Allows users to choose the preferred frequency and connection speed for their personal hotspot.</string>
 <string name="print_settings_purpose" translatable="false">Allows users to manage print services and add new printing options for their device.</string>
 <string name="usb_details_fragment_purpose" translatable="false">Allows users to configure USB preferences, such as file transfer, tethering, and MIDI.</string>
+<!-- User settings screen start -->
+<string name="user_settings_pref_screen_purpose" translatable="false">Allows admin users to manage all users on the device, including creating new users or guests, deleting existing users, switching between users, and modifying multiuser-related preferences. Separately, it allows each user to control their own settings, such as changing their name and avatar or deleting their own account.</string>
+<string name="user_settings_remove_guest_on_exit_pref_purpose" translatable="false">Controls whether the guest user is removed after it is exited. If true, a user is deleted; if false, then it is saved and can be accessed again.</string>
+<string name="user_settings_enable_guest_calling_pref_purpose" translatable="false">Controls whether the guest user can make calls and access call history.</string>
+<string name="user_settings_add_users_when_locked_pref_purpose" translatable="false">Set whether new users can be added from the lock screen, without authentication.</string>
+<!-- User settings screen end-->
 </resources>

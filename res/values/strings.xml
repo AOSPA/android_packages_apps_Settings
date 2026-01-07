@@ -15266,4 +15266,17 @@
     <string name="long_press_power_sensitivity_precondition_set_for_power_button" translatable="false">The device is currently set to launch the Power Menu on long press of the power button</string>
     <string name="long_press_power_sensitivity_no_options" translatable="false">The device does not support setting alternative sensitivities for long pressing power button for Assistant</string>
     <string name="long_press_power_sensitivity_value_description" translatable="false"><xliff:g id="duration_in_millis" example="100">%d</xliff:g>ms</string>
+
+    <!-- User settings screen start -->
+    <string name="user_settings_precondition" translatable="false">Requires multiuser configuration to be enabled.</string>
+    <string name="user_settings_unsupported" translatable="false">This device does not support multiuser feature.</string>
+    <string name="user_settings_remove_guest_on_exit_precondition" translatable="false">Requires admin privileges and device support for configuring guest user data removal.</string>
+    <string name="user_settings_enable_guest_calling_precondition" translatable="false">Requires admin privileges and device support for configuring guest telephony.</string>
+    <string name="user_settings_add_users_from_lockscreen_precondition" translatable="false">Requires admin privileges and device support for configuring adding users from lock screen.</string>
+    <string name="user_settings_unavailable_user_not_admin" translatable="false">Only an admin user can change this setting.</string>
+    <string name="user_settings_restricted_by_work_policy" translatable="false">This setting is restricted by work policy.</string>
+    <string name="user_settings_remove_guest_on_exit_unavailable" translatable="false">This device does not support persisting guest data across sessions.</string>
+    <string name="user_settings_guest_telephony_config_unsupported" translatable="false">This device does not support guest telephony feature.</string>
+    <string name="user_settings_add_users_from_lockscreen_config_unsupported" translatable="false">This device does not support guest telephony feature.</string>
+    <!-- User settings screen end -->
 </resources>
