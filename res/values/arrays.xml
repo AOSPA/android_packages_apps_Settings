@@ -895,9 +895,9 @@
     </integer-array>
 
     <!-- Titles for the accessibility button location. [CHAR LIMIT=35] -->
-    <string-array name="accessibility_button_location_selector_titles">
-        <item>Floating over other apps</item>
-        <item>Navigation bar</item>
+    <string-array name="accessibility_button_location_selector_titles" translatable="false">
+        <item>@string/accessibility_button_location_selector_floating</item>
+        <item>@string/accessibility_button_location_selector_navigation_bar</item>
     </string-array>
 
     <!-- Values for the accessibility button location. -->
@@ -909,10 +909,19 @@
         <item>0</item>
     </string-array>
 
+    <!-- Values for the accessibility button location. -->
+    <!-- Should Keep in sync with Settings.Secure.ACCESSIBILITY_BUTTON_MODE_* -->
+    <integer-array name="accessibility_button_location_selector_int_values" translatable="false">
+        <!-- Floating over other apps -->
+        <item>1</item>
+        <!-- Navigation bar -->
+        <item>0</item>
+    </integer-array>
+
     <!-- Titles for the accessibility button size. [CHAR LIMIT=35] -->
-    <string-array name="accessibility_button_size_selector_titles">
-        <item>Small</item>
-        <item>Large</item>
+    <string-array name="accessibility_button_size_selector_titles" translatable="false">
+        <item>@string/accessibility_button_size_selector_small</item>
+        <item>@string/accessibility_button_size_selector_large</item>
     </string-array>
 
     <!-- Values for the accessibility button size. -->
@@ -922,6 +931,14 @@
         <!-- Large -->
         <item>1</item>
     </string-array>
+
+    <!-- Values for the accessibility button size. -->
+    <integer-array name="accessibility_button_size_selector_int_values" translatable="false" >
+        <!-- Small -->
+        <item>0</item>
+        <!-- Large -->
+        <item>1</item>
+    </integer-array>
 
     <!-- Match this with the array VPN_TYPES in ConfigDialog. --> <skip />
     <!-- Short names for each VPN type, not really translatable. [CHAR LIMIT=20] -->

@@ -6100,8 +6100,16 @@
     </string>
     <!-- Title for the location of the accessibility button. [CHAR LIMIT=35] -->
     <string name="accessibility_button_location_title">Location</string>
+    <!-- One of the location of the accessibility button. Placing the accessibility button floating on the top of screen. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_location_selector_floating">Floating over other apps</string>
+    <!-- One of the location of the accessibility button. Placing the accessibility button on the navigation bar. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_location_selector_navigation_bar">Navigation bar</string>
     <!-- Title for the size of the accessibility button. [CHAR LIMIT=35] -->
     <string name="accessibility_button_size_title">Size</string>
+    <!-- The large option in the accessibility button size selector. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_size_selector_large">Large</string>
+    <!-- The small option in the accessibility button size selector. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_size_selector_small">Small</string>
     <!-- Title for the fade of the accessibility button. [CHAR LIMIT=35] -->
     <string name="accessibility_button_fade_title">Fade when not in use</string>
     <!-- Summary for the fade of the accessibility button. [CHAR LIMIT=80] -->
@@ -8170,6 +8178,8 @@
     <!-- User settings item to allow the system to automatically switch back to the Dock User when
          the device is docked. [CHAR LIMIT=50] -->
     <string name="switch_to_dock_user_when_docked">Switch to admin user when docked</string>
+    <!-- Toast shown when a user is deleted. [CHAR LIMIT=NONE] -->
+    <string name="user_deleted_confirmation_toast">User deleted</string>
 
     <!-- User (self) removal confirmation title [CHAR LIMIT=30] -->
     <string name="user_confirm_remove_self_title">Delete yourself?</string>
@@ -9430,11 +9440,6 @@
     <!-- Do not disturb settings, main screen, field, duration setting where user can specify how
     long dnd will last when toggling dnd on from qs) [CHAR LIMIT=100] -->
     <string name="zen_category_duration">Duration for Quick Settings</string>
-
-    <!-- Do not disturb: Title for the do not disturb sync toggle. When turned on, Do not disturb mode will be synced with other devices. [CHAR LIMIT=80] -->
-    <string name="dnd_sync_title">Do not disturb sync</string>
-    <!-- Do not disturb: Description for the do not disturb sync toggle. [CHAR LIMIT=120] -->
-    <string name="dnd_sync_description">Sync Do not disturb settings to connected devices</string>
 
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>

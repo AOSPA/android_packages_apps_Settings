@@ -25,8 +25,15 @@
 <string name="launch_preference_purpose" translatable="false">launch_preference</string>
 <string name="shortcut_preference_key_purpose" translatable="false">shortcut_preference_key</string>
 <string name="a11y_activity_detail_screen_top_intro_purpose" translatable="false">top_intro</string>
+<string name="a11y_shortcuts_settings_screen_purpose" translatable="false">a screen shows the configurable accessibility shortcuts settings</string>
+<string name="a11y_volume_keys_shortcut_setting_on_lock_screen_purpose" translatable="false">A setting to determine if the user can use the volume keys shortcut to trigger assigned accessibility feature on the lock screen</string>
 <string name="a11y_button_shortcut_setting_screen_purpose" translatable="false">screen to configure a11y button shortcut appearance</string>
 <string name="a11y_button_shortcut_top_intro_purpose" translatable="false">short intro on what Accessibility button is</string>
+<string name="a11y_button_shortcut_location_purpose" translatable="false">set up whether the Accessibility button show show up as floating menu or on the navigation bar</string>
+<string name="a11y_button_shortcut_size_purpose" translatable="false">set up the size of the accessibility floating button shortcut</string>
+<string name="a11y_floating_menu_shortcut_fade_enabled_purpose" translatable="false">configure whether the floating button should fade out when not in use</string>
+<string name="a11y_button_shortcut_transparency_purpose" translatable="false">configure the accessibility floating button\'s transparency</string>
+<string name="a11y_button_shortcut_setting_footer_purpose" translatable="false">provides a guide for users on how to set up the accessibility button as a shortcut for a specific accessibility feature</string>
 <string name="a11y_service_detail_screen_purpose" translatable="false">a11y_service_detail_screen</string>
 <string name="accessibility_service_app_info_purpose" translatable="false">accessibility_service_app_info</string>
 <string name="accessibility_service_settings_purpose" translatable="false">accessibility_service_settings</string>
@@ -152,7 +159,7 @@
 <string name="flash_notifications_preview_purpose" translatable="false">flash_notifications_preview</string>
 <string name="screen_flash_notification_purpose" translatable="false">screen_flash_notification</string>
 <!-- Gestures screen begin -->
-<string name="gesture_settings_screen_purpose" translatable="false">Allows the user to access the camera, switch to selfie mode, see notifications, and more. Gestures can make it easier for users to use their phone.</string>
+<string name="gesture_settings_screen_purpose" translatable="false">Allows the user to access the camera, switch to selfie mode, see notifications, and more. Gestures can make it easier for users to use their device.</string>
 <!-- Gestures screen end -->
 <!-- Double press power button screen begin -->
 <string name="gesture_double_tap_power_input_summary_purpose" translatable="false">Allows the user to open an application when they quickly press the power button twice. The available options are Camera or Wallet</string>
@@ -161,10 +168,16 @@
 <string name="gesture_double_power_tap_camera_purpose" translatable="false">Allows the user to open the Camera application by double-pressing the power button</string>
 <string name="gesture_double_power_tap_wallet_purpose" translatable="false">Allows the user to open the Wallet application by double-pressing the power button</string>
 <!-- Double press power button screen end -->
+<!-- Swipe fingerprint for notifications screen begin -->
+<string name="gesture_swipe_down_fingerprint_screen_purpose" translatable="false">Allows the user to enable or disable the gesture of swiping down on the fingerprint sensor to open the notification panel</string>
+<!-- Swipe fingerprint for notifications screen end -->
 <!-- Flip camera for selfie screen begin -->
 <string name="double_twist_gesture_screen_purpose" translatable="false">Allows the user to toggle the feature that enables switching between the front and rear cameras by twisting the device twice</string>
 <string name="gesture_double_twist_purpose" translatable="false">Enables the gesture to switch cameras by twisting the device</string>
 <!-- Flip camera for selfie screen end -->
+<!-- Battery information screen begin -->
+<string name="battery_info_screen_purpose" translatable="false">Displays the battery manufacturing date and charge cycle count to help users understand its age and usage history</string>
+<!-- Battery information screen end -->
 <string name="gesture_system_navigation_input_summary_purpose" translatable="false">gesture_system_navigation_input_summary</string>
 <string name="audio_routing_purpose" translatable="false">audio_routing</string>
 <string name="available_hearing_devices_purpose" translatable="false">available_hearing_devices</string>

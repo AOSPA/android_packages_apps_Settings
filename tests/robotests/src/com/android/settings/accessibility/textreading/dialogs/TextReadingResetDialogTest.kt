@@ -30,6 +30,7 @@ import com.android.settings.accessibility.shared.dialogs.DisableAccessibilitySer
 import com.android.settings.accessibility.textreading.data.BoldTextDataStore
 import com.android.settings.accessibility.textreading.data.DisplaySizeDataStore
 import com.android.settings.accessibility.textreading.data.FontSizeDataStore
+import com.android.settings.accessibility.textreading.data.FontSizeDataStore.Companion.FONT_SCALE_DEF_VALUE
 import com.android.settings.accessibility.textreading.data.OutlineTextDataStore
 import com.android.settings.accessibility.textreading.ui.BoldTextPreference
 import com.android.settings.accessibility.textreading.ui.DisplaySizePreference
@@ -38,7 +39,6 @@ import com.android.settings.accessibility.textreading.ui.OutlineTextPreference
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
 import com.google.common.truth.Truth.assertThat
-import kotlin.math.abs
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -103,6 +103,10 @@ class TextReadingResetDialogTest {
         val displaySizeDataStore = DisplaySizeDataStore(context)
         val boldTextDataStore = BoldTextDataStore(context)
         val outlineTextDataStore = OutlineTextDataStore(context)
+        val defaultFontSize: Float =
+            fontSizeDataStore
+                .getDefaultValue(FontSizePreference.KEY, Int::class.javaObjectType)
+                ?.toFloat() ?: FONT_SCALE_DEF_VALUE
         fontSizeDataStore.setInt(
             FontSizePreference.KEY,
             fontSizeDataStore.fontSizeData.value.values.size - 1,
@@ -119,8 +123,9 @@ class TextReadingResetDialogTest {
         alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick()
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
-        assertThat(Settings.System.getString(context.contentResolver, Settings.System.FONT_SCALE))
-            .isNull()
+        val fontSizeInSetting =
+            Settings.System.getFloat(context.contentResolver, Settings.System.FONT_SCALE)
+        assertThat(fontSizeInSetting).isWithin(TOLERANCE).of(defaultFontSize)
         assertThat(
                 Settings.Secure.getInt(
                     context.contentResolver,
@@ -180,22 +185,7 @@ class TextReadingResetDialogTest {
         return ShadowDialog.getLatestDialog() as AlertDialog
     }
 
-    private fun FloatArray.indexOf(targetValue: Float): Int {
-        if (this.isEmpty()) {
-            return -1
-        }
-
-        var closestIndex = 0
-        var minDifference = abs(this[0] - targetValue)
-
-        for (i in 1 until this.size) {
-            val currentDifference = abs(this[i] - targetValue)
-            if (currentDifference < minDifference) {
-                minDifference = currentDifference
-                closestIndex = i
-            }
-        }
-
-        return closestIndex
+    companion object {
+        private const val TOLERANCE = 1e-5f
     }
 }

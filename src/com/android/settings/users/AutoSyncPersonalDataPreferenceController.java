@@ -20,6 +20,8 @@ import android.os.UserHandle;
 
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.android.settings.flags.Flags;
+
 public class AutoSyncPersonalDataPreferenceController extends AutoSyncDataPreferenceController {
 
     private static final String KEY_AUTO_SYNC_PERSONAL_ACCOUNT = "auto_sync_personal_account_data";
@@ -31,6 +33,9 @@ public class AutoSyncPersonalDataPreferenceController extends AutoSyncDataPrefer
 
     @Override
     public boolean isAvailable() {
+        if (Flags.enableAccountsAndBackupScreen()) {
+            return false;
+        }
         return !mUserManager.isManagedProfile() && !mUserManager.isLinkedUser()
                 && mUserManager.getProfiles(UserHandle.myUserId()).size() > 1;
     }

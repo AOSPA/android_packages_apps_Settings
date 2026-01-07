@@ -332,6 +332,7 @@ public class WifiEntryPreferenceTest {
         assertThat(Shadows.shadowOf(
                 endIcon.getDrawable()).getCreatedFromResId()).isEqualTo(
                 SHARED_ICON_RES_ID);
+        assertThat(endIcon.getTooltipText()).isNull();
     }
 
     @Test
@@ -355,6 +356,7 @@ public class WifiEntryPreferenceTest {
         assertThat(Shadows.shadowOf(
                 secondEndIcon.getDrawable()).getCreatedFromResId()).isEqualTo(
                 LOCK_ICON_RES_ID);
+        assertThat(firstEndIcon.getTooltipText()).isNull();
     }
 
     @Test

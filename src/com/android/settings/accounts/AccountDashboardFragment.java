@@ -43,6 +43,7 @@ import com.android.settings.applications.defaultapps.DefaultPrivateAutofillPrefe
 import com.android.settings.applications.defaultapps.DefaultWorkAutofillPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.users.AutoSyncDataPreferenceController;
 import com.android.settings.users.AutoSyncPersonalDataPreferenceController;
@@ -145,13 +146,15 @@ public class AccountDashboardFragment extends DashboardFragment {
             DashboardFragment parent,
             String[] authorities,
             List<AbstractPreferenceController> controllers) {
-        final AccountPreferenceController accountPrefController =
-                new AccountPreferenceController(
-                        context, parent, authorities, ProfileSelectFragment.ProfileType.ALL);
-        if (parent != null) {
-            parent.getSettingsLifecycle().addObserver(accountPrefController);
+        if (!Flags.enableAccountsAndBackupScreen()) {
+            final AccountPreferenceController accountPrefController =
+                    new AccountPreferenceController(
+                            context, parent, authorities, ProfileSelectFragment.ProfileType.ALL);
+            if (parent != null) {
+                parent.getSettingsLifecycle().addObserver(accountPrefController);
+            }
+            controllers.add(accountPrefController);
         }
-        controllers.add(accountPrefController);
         controllers.add(new AutoSyncDataPreferenceController(context, parent));
         controllers.add(new AutoSyncPersonalDataPreferenceController(context, parent));
         controllers.add(new AutoSyncWorkDataPreferenceController(context, parent));

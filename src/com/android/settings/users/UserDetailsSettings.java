@@ -37,6 +37,7 @@ import android.os.Trace;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
@@ -619,6 +620,10 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     }
 
     private void removeUser() {
+        if (android.multiuser.Flags.showConfirmationToastOnUserDeletion()) {
+            Toast.makeText(getPrefContext(), R.string.user_deleted_confirmation_toast,
+                    Toast.LENGTH_LONG).show();
+        }
         if (mUserInfo.id == UserHandle.myUserId()) {
             removeThisUser();
         } else {

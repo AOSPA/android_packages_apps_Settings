@@ -42,9 +42,8 @@ public class PrivateBroadcastReceiver extends BroadcastReceiver {
             Log.w(TAG, "Received unexpected intent action.");
             return;
         }
-        if (!Flags.audioStreamMediaServiceByReceiveState()
-                || !BluetoothUtils.isAudioSharingUIAvailable(context)) {
-            Log.d(TAG, "Skip, flag/feature off");
+        if (!BluetoothUtils.isAudioSharingUIAvailable(context)) {
+            Log.d(TAG, "Skip, feature off");
             return;
         }
         PrivateBroadcastReceiveData data = intent.getParcelableExtra(

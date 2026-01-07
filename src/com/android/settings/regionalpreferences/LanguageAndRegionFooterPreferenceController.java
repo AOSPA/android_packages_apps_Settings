@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
@@ -29,15 +30,15 @@ import com.android.settingslib.HelpUtils;
 import com.android.settingslib.widget.FooterPreference;
 
 /**
- * Preference controller for regional preference footer.
+ * Preference controller for LanguageAndRegionFooterPreference.
  */
-@Deprecated
-public class RegionalFooterPreferenceController extends BasePreferenceController {
+public class LanguageAndRegionFooterPreferenceController extends BasePreferenceController {
 
-    private static final String TAG = "RegionalFooterPreferenceController";
+    private static final String TAG = "LanguageAndRegionFooterPreferenceController";
 
-    public RegionalFooterPreferenceController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
+    public LanguageAndRegionFooterPreferenceController(
+            @NonNull Context context, @NonNull String key) {
+        super(context, key);
     }
 
     @Override
@@ -46,7 +47,7 @@ public class RegionalFooterPreferenceController extends BasePreferenceController
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
+    public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
         FooterPreference footerPreference = screen.findPreference(getPreferenceKey());
         setupFooterPreference(footerPreference);

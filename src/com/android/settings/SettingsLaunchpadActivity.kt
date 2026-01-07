@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_KEY
 import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.PreferenceScreenCoordinate
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.toMap
@@ -123,6 +124,10 @@ class SettingsLaunchpadActivity : Activity() {
                     SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
                     intent.getStringExtra(EXTRA_HIGHLIGHT_KEY),
                 )
+
+                // add all values from the launchScreenExtra to this bundle
+                val launchScreenExtra = intent.getBundleExtra(EXTRA_LAUNCH_SCREEN)
+                launchScreenExtra?.let { putAll(it) }
             }
 
         val launcher =

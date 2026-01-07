@@ -15,7 +15,8 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto">
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/accessibility_button_title">
 
     <com.android.settingslib.widget.TopIntroPreference
         android:key="accessibility_button_intro"
@@ -31,8 +32,8 @@
     <ListPreference
         android:entries="@array/accessibility_button_location_selector_titles"
         android:entryValues="@array/accessibility_button_location_selector_values"
-        android:key="accessibility_button_location"
-        android:persistent="false"
+        android:key="accessibility_button_mode"
+        android:persistent="true"
         android:summary="%s"
         android:title="@string/accessibility_button_location_title"
         settings:controller="com.android.settings.accessibility.AccessibilityButtonLocationPreferenceController" />
@@ -40,22 +41,22 @@
     <ListPreference
         android:entries="@array/accessibility_button_size_selector_titles"
         android:entryValues="@array/accessibility_button_size_selector_values"
-        android:key="accessibility_button_size"
-        android:persistent="false"
+        android:key="accessibility_floating_menu_size"
+        android:persistent="true"
         android:summary="%s"
         android:title="@string/accessibility_button_size_title"
         settings:controller="com.android.settings.accessibility.FloatingMenuSizePreferenceController" />
 
     <SwitchPreferenceCompat
-        android:key="accessibility_button_fade"
-        android:persistent="false"
+        android:key="accessibility_floating_menu_fade_enabled"
+        android:persistent="true"
         android:summary="@string/accessibility_button_fade_summary"
         android:title="@string/accessibility_button_fade_title"
         settings:controller="com.android.settings.accessibility.FloatingMenuFadePreferenceController" />
 
     <com.android.settingslib.widget.SliderPreference
-        android:key="accessibility_button_opacity"
-        android:persistent="false"
+        android:key="accessibility_floating_menu_opacity"
+        android:persistent="true"
         android:title="@string/accessibility_button_opacity_title"
         settings:controller="com.android.settings.accessibility.FloatingMenuTransparencyPreferenceController" />
 
