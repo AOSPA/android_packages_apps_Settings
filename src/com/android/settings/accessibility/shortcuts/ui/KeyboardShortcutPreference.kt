@@ -20,6 +20,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.provider.Settings
 import androidx.preference.Preference
+import com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
 import com.android.internal.accessibility.util.ShortcutUtils
@@ -84,6 +85,8 @@ class KeyboardShortcutPreference(context: Context, targets: Set<String>) :
 
         val imageResId =
             when {
+                targetsContainsColorInversion(context) ->
+                    R.drawable.accessibility_shortcut_type_keyboard_colorinversion
                 targetsContainsMagnification() ->
                     R.drawable.accessibility_shortcut_type_keyboard_magnification
                 targetsContainsScreenReader(context) ->
@@ -115,6 +118,8 @@ class KeyboardShortcutPreference(context: Context, targets: Set<String>) :
         return targetsContainsMagnification() ||
             targetsContainsVoiceAccess(context) ||
             targetsContainsScreenReader(context) ||
+            (com.android.hardware.input.Flags.enableColorInversionKeyGestures() &&
+                targetsContainsColorInversion(context)) ||
             (com.android.hardware.input.Flags.enableSelectToSpeakKeyGestures() &&
                 targetsContainsSelectToSpeak(context))
     }
@@ -138,6 +143,10 @@ class KeyboardShortcutPreference(context: Context, targets: Set<String>) :
         observer?.let {
             SettingsSecureStore.get(context).removeObserver(KEYBOARD_SHORTCUT_SETTING, it)
         }
+    }
+
+    private fun targetsContainsColorInversion(context: Context): Boolean {
+        return targets.contains(COLOR_INVERSION_COMPONENT_NAME.flattenToString())
     }
 
     private fun targetsContainsMagnification(): Boolean {

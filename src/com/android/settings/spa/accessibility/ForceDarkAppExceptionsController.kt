@@ -24,15 +24,17 @@ class ForceDarkAppExceptionsController(
     private val app: ApplicationInfo,
     private val repository: ForceDarkAppExceptionsRepository,
 ) {
-    private val isForceDarkExceptionMutableStateFlow =
-        MutableStateFlow<Boolean>(repository.isAppForceDarkAlwaysDisable(app))
+    private val isForceDarkAllowedMutableStateFlow =
+        MutableStateFlow<Boolean>(!repository.isAppForceDarkAlwaysDisable(app))
 
-    // Expose isForceDarkExceptionMutableStateFlow as read-only StateFlow
-    val isException: StateFlow<Boolean> = isForceDarkExceptionMutableStateFlow.asStateFlow()
+    // Expose isForceDarkAllowedMutableStateFlow as read-only StateFlow
+    val isForceDarkAllowed: StateFlow<Boolean> = isForceDarkAllowedMutableStateFlow.asStateFlow()
 
-    fun setException(isException: Boolean) {
-        if (repository.setIsAppForceDarkAlwaysDisable(app, isException)) {
-            isForceDarkExceptionMutableStateFlow.value = isException
+    fun setIsForceDarkAllowed(isForceDarkAllowed: Boolean) {
+        if (
+            repository.setIsAppForceDarkAlwaysDisable(app, /* isException= */ !isForceDarkAllowed)
+        ) {
+            isForceDarkAllowedMutableStateFlow.value = isForceDarkAllowed
         }
     }
 }

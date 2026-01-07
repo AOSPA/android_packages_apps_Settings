@@ -21,6 +21,7 @@ import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
+import com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.shared.utils.getAccessibilityFeatureName
@@ -158,6 +159,21 @@ class KeyboardShortcutPreferenceTest {
     fun isAvailable_whenTargetIsVoiceAccess_returnsTrue() {
         preference =
             KeyboardShortcutPreference(context = appContext, targets = setOf("voice_access"))
+
+        assertThat(preference.isAvailable(appContext)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(
+        com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS,
+        com.android.hardware.input.Flags.FLAG_ENABLE_COLOR_INVERSION_KEY_GESTURES,
+    )
+    fun isAvailable_whenTargetIsColorInversion_returnsTrue() {
+        preference =
+            KeyboardShortcutPreference(
+                context = appContext,
+                targets = setOf(COLOR_INVERSION_COMPONENT_NAME.flattenToString()),
+            )
 
         assertThat(preference.isAvailable(appContext)).isTrue()
     }
