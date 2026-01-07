@@ -21,6 +21,7 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
+import android.os.Looper
 import android.os.PersistableBundle
 import android.provider.Settings
 import android.telephony.CarrierConfigManager
@@ -41,6 +42,7 @@ import com.android.settings.testutils.inflateViewHolder
 import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.IllustrationPreference
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -115,7 +117,11 @@ class SatelliteLandingPageFragmentTest {
         fragmentFactory =
             object : FragmentFactory() {
                 override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
-                    return SatelliteLandingPageFragment(packageManager, appsRepository)
+                    return SatelliteLandingPageFragment(
+                        packageManager,
+                        appsRepository,
+                        Dispatchers.Main,
+                    )
                 }
             }
     }
@@ -150,19 +156,6 @@ class SatelliteLandingPageFragmentTest {
     }
 
     @Test
-    fun onCreate_loadsPreferencesAndSetsIllustration() {
-        val scenario = launchFragment()
-
-        scenario.onFragment { fragment ->
-            val illustrationPreference =
-                fragment.findPreference<IllustrationPreference>(KEY_ILLUSTRATION)
-
-            assertThat(illustrationPreference).isNotNull()
-            assertThat(illustrationPreference?.getImageDrawable()).isNotNull()
-        }
-    }
-
-    @Test
     fun onResume_refreshesAppsList() {
         setLteNtnSupported(true)
         `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(emptyList())
@@ -177,6 +170,7 @@ class SatelliteLandingPageFragmentTest {
         // Trigger onResume via lifecycle
         scenario.moveToState(Lifecycle.State.STARTED)
         scenario.moveToState(Lifecycle.State.RESUMED)
+        waitForAsync()
 
         scenario.onFragment { fragment ->
             assertThat(fragment.viewModel.satelliteAppItems.value).hasSize(1)
@@ -209,8 +203,11 @@ class SatelliteLandingPageFragmentTest {
 
         val startedIntent = shadowOf(context).nextStartedActivity
         assertThat(startedIntent).isNotNull()
-        assertThat(startedIntent.action)
-            .isEqualTo("com.google.android.apps.stargate.ACTION_ESOS_DEMO")
+        val expectedAction =
+            context.getString(
+                com.android.internal.R.string.config_satellite_demo_mode_sos_intent_action
+            )
+        assertThat(startedIntent.action).isEqualTo(expectedAction)
     }
 
     @Test
@@ -234,6 +231,18 @@ class SatelliteLandingPageFragmentTest {
     }
 
     @Test
+    fun tryDemoButton_whenLteNotSupported_isVisible() {
+        setLteNtnSupported(false)
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment ->
+            val demoButton = fragment.findPreference<Preference>("try_a_demo_button")
+
+            assertThat(demoButton?.isVisible).isTrue()
+        }
+    }
+
+    @Test
     fun footerLearnMore_onClick_startsSatelliteSettingsActivity() {
         val scenario = launchFragment()
         scenario.onFragment { fragment ->
@@ -252,6 +261,17 @@ class SatelliteLandingPageFragmentTest {
         assertThat(startedIntent.getIntExtra("sub_id", -1)).isEqualTo(SUB_ID)
         assertThat(startedIntent.getBooleanExtra(":settings:show_fragment_as_subsetting", false))
             .isTrue()
+    }
+
+    @Test
+    fun illustration_whenCreated_isSet() {
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment ->
+            val illustration = fragment.findPreference<IllustrationPreference>("illustration")
+            assertThat(illustration).isNotNull()
+            assertThat(illustration?.isVisible).isTrue()
+        }
     }
 
     @Test
@@ -338,11 +358,18 @@ class SatelliteLandingPageFragmentTest {
         }
     }
 
+    private fun waitForAsync() {
+        shadowOf(Looper.getMainLooper()).idle()
+    }
+
     private fun launchFragment(): FragmentScenario<SatelliteLandingPageFragment> {
-        return launchFragmentInContainer(
-            themeResId = R.style.Theme_Settings,
-            factory = fragmentFactory,
-        )
+        val scenario: FragmentScenario<SatelliteLandingPageFragment> =
+            launchFragmentInContainer(
+                themeResId = R.style.Theme_Settings,
+                factory = fragmentFactory,
+            )
+        waitForAsync()
+        return scenario
     }
 
     private fun setupPackageManagerForApp(packageName: String, appName: String, intent: Intent) {
