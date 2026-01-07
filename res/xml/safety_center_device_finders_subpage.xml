@@ -27,6 +27,7 @@
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="device_finder"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_device_finder_search_terms"
         settings:safetySource="@string/config_safety_center_device_finder_source_id"
         settings:profile="personal_profile" />
 

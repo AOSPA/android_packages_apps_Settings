@@ -25,7 +25,6 @@ import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIF
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.KEY_GESTURE
-import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
@@ -82,42 +81,6 @@ class MagnificationPreferenceControllerTest {
     fun getSummary_magnificationDisabled_returnShortcutOffWithSummary() {
         shadowAccessibilityManager.setAccessibilityShortcutTargets(
             UserShortcutType.TRIPLETAP,
-            listOf(),
-        )
-
-        assertThat(controller.summary.toString())
-            .isEqualTo(
-                context.getString(
-                    SettingsLibR.string.preference_summary_default_combination,
-                    context.getText(R.string.generic_accessibility_feature_shortcut_off),
-                    context.getText(R.string.magnification_feature_summary),
-                )
-            )
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
-    fun getSummary_magnificationGestureEnabled_returnShortcutOnWithSummary() {
-        shadowAccessibilityManager.setAccessibilityShortcutTargets(
-            UserShortcutType.TWOFINGER_DOUBLETAP,
-            listOf(MAGNIFICATION_CONTROLLER_NAME),
-        )
-
-        assertThat(controller.summary.toString())
-            .isEqualTo(
-                context.getString(
-                    SettingsLibR.string.preference_summary_default_combination,
-                    context.getText(R.string.accessibility_summary_shortcut_enabled),
-                    context.getText(R.string.magnification_feature_summary),
-                )
-            )
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
-    fun getSummary_magnificationGestureDisabled_returnShortcutOffWithSummary() {
-        shadowAccessibilityManager.setAccessibilityShortcutTargets(
-            UserShortcutType.TRIPLETAP or UserShortcutType.TWOFINGER_DOUBLETAP,
             listOf(),
         )
 

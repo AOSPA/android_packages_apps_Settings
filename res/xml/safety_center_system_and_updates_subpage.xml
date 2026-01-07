@@ -27,18 +27,21 @@
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="security_update"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_security_update_search_terms"
         settings:safetySource="@string/config_safety_center_security_update_source_id"
         settings:profile="personal_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="system_component_update"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_system_component_update_search_terms"
         settings:safetySource="@string/config_safety_center_system_component_update_source_id"
         settings:profile="personal_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="backup"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_backup_search_terms"
         settings:safetySource="@string/config_safety_center_backup_source_id"
         settings:profile="personal_profile" />
 </PreferenceScreen>

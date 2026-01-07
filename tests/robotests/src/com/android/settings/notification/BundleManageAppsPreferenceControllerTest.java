@@ -55,7 +55,6 @@ public class BundleManageAppsPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mSetFlagsRule.enableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI);
         mController = new BundleManageAppsPreferenceController(mContext, PREFERENCE_KEY);
         mController.mBackend.setNm(mInm);
     }
@@ -68,12 +67,6 @@ public class BundleManageAppsPreferenceControllerTest {
     @Test
     public void isAvailable_flagEnabledNasDoesNotSupport_shouldReturnFalse() throws Exception {
         when(mInm.getUnsupportedAdjustmentTypes()).thenReturn(List.of(Adjustment.KEY_TYPE));
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void isAvailable_flagDisabledNasSupports_shouldReturnFalse() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI);
         assertThat(mController.isAvailable()).isFalse();
     }
 }

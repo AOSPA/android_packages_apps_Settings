@@ -250,10 +250,6 @@ public class PreferredShortcutsTest {
                 sContentResolver,
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
                 AccessibilityUtil.State.OFF);
-        Settings.Secure.putInt(
-                sContentResolver,
-                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
-                AccessibilityUtil.State.OFF);
 
         PreferredShortcuts.clearPreferredShortcuts(ApplicationProvider.getApplicationContext());
     }

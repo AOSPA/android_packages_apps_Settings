@@ -153,7 +153,6 @@ private constructor(
             +GestureShortcutPreference(context, shortcutTargets)
             +NavButtonShortcutPreference(context, shortcutTargets)
             +VolumeKeysShortcutPreference(context, shortcutTargets)
-            +TwoFingerDoubleTapShortcutPreference(context, shortcutTargets)
             +advancedPreference
             +TripleTapShortcutPreference(
                 context,

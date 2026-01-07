@@ -24,6 +24,7 @@ import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.accounts.AccountDetailDashboardFragment;
 import com.android.settings.applications.AppDashboardFragment;
 import com.android.settings.applications.specialaccess.SpecialAccessSettings;
+import com.android.settings.backup.AccountsAndBackupDashboardFragment;
 import com.android.settings.communal.CommunalDashboardFragment;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
@@ -101,6 +102,8 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         PARENT_TO_CATEGORY_KEY_MAP.put(AccountDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_ACCOUNT);
+        PARENT_TO_CATEGORY_KEY_MAP.put(AccountsAndBackupDashboardFragment.class.getName(),
+                CategoryKey.CATEGORY_ACCOUNTS_AND_BACKUP);
         PARENT_TO_CATEGORY_KEY_MAP.put(
                 SystemDashboardFragment.class.getName(), CategoryKey.CATEGORY_SYSTEM);
         // TODO(b/242680328) Tie new category key to LanguageSettings and KeyboardSettings page

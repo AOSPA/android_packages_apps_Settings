@@ -112,7 +112,6 @@ public class AdjustmentKeyPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI})
     public void testIsAvailable_bundle_NasNotSupported() {
         when(mBackend.isNotificationBundlingSupported()).thenReturn(false);
 

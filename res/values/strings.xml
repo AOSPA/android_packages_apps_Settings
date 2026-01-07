@@ -5960,8 +5960,6 @@
     <string name="accessibility_tutorial_dialog_title_volume">Volume keys shortcut</string>
     <!-- Title for the accessibility tutorial dialog in accessibility service with triple tap. [CHAR LIMIT=100] -->
     <string name="accessibility_tutorial_dialog_title_triple">Triple tap shortcut</string>
-    <!-- Title for the accessibility tutorial dialog in accessibility service with two finger double tap. [CHAR LIMIT=100] -->
-    <string name="accessibility_tutorial_dialog_title_two_finger_double">%1$d-finger double tap shortcut</string>
     <!-- Title for the accessibility tutorial dialog in accessibility service with quick setting shortcut. [CHAR LIMIT=100] -->
     <string name="accessibility_tutorial_dialog_title_quick_setting">Quick Settings shortcut</string>
     <!-- Title for the accessibility tutorial dialog in accessibility service with gesture. [CHAR LIMIT=50] -->
@@ -6047,16 +6045,10 @@
     <string name="accessibility_shortcut_hardware_keyword">volume keys</string>
     <!-- Summary for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_hardware">Press &amp; hold both volume keys</string>
-    <!-- Title for 2-finger double tap shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap">%1$d-finger double tap</string>
-    <!-- Summary for 2-finger double tap shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap">Quickly tap the screen twice with %1$d fingers</string>
     <!-- Title for triple tap shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_screen_title_triple_tap">Triple tap</string>
     <!-- Summary for triple tap shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap">Quickly tap the screen %1$d times. This may slow down your device.</string>
-    <!-- 2-finger double tap is shown as part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_two_finger_double_tap_keyword">%1$d-finger double tap</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_triple_tap_keyword">triple tap</string>
     <!-- Title for keyboard shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
@@ -12757,6 +12749,15 @@
     <!-- Title for setting tile leading to saved autofill passwords, passkeys, and account settings [CHAR LIMIT=40]-->
     <string name="account_dashboard_title_with_passkeys">Passwords, passkeys &amp; accounts</string>
 
+    <!-- Title for setting tile leading to accounts & backup settings [CHAR LIMIT=40]-->
+    <string name="accounts_and_backup_title">Accounts and backup</string>
+    <!-- Summary for setting tile leading to accounts & backup settings [CHAR LIMIT=100]-->
+    <string name="accounts_and_backup_summary">Back up data, copy data from another device</string>
+    <!-- Title for setting tile leading to accounts settings [CHAR LIMIT=40]-->
+    <string name="accounts_and_backup_manage_accounts_title">Manage accounts</string>
+    <!-- Title for setting section containing backup and restore settings [CHAR LIMIT=40]-->
+    <string name="accounts_and_backup_backup_category_title">Back up or copy data</string>
+
     <!-- Message of the warning dialog for disabling the credential provider (new strings for 24Q3). [CHAR_LIMIT=NONE] -->
     <string name="credman_confirmation_message_new_ui">
         <![CDATA[
@@ -15344,13 +15345,36 @@
     <!-- Safety Center device finder subpage summary [CHAR LIMIT=NONE] -->
     <string name="safety_center_device_finders_summary"></string>
     <!-- Safety Center device finder source search terms [CHAR LIMIT=NONE] -->
-    <string name="safety_center_device_finders_search_terms"></string>
+    <string name="safety_center_device_finder_search_terms"></string>
     <!-- Safety Center system and updates subpage summary [CHAR LIMIT=NONE] -->
     <string name="safety_center_system_and_updates_summary">Updates</string>
+    <!-- Safety Center security update search terms [CHAR LIMIT=NONE] -->
+    <string name="safety_center_security_update_search_terms">Updates, Update, Security update, Security updates</string>
     <!-- Safety Center system component update search terms [CHAR LIMIT=NONE] -->
     <string name="safety_center_system_component_update_search_terms"></string>
     <!-- Safety Center cellular network security subpage summary [CHAR LIMIT=NONE] -->
     <string name="safety_center_cellular_network_security_summary">Network type, encryption, notification controls</string>
+
+    <!-- Search keywords of the setting for managing the screen lock on the device [CHAR LIMIT=NONE] -->
+    <string name="safety_center_android_lock_screen_search_terms">Device lock, Screen lock, Lock screen, Lockscreen, Password, Pin, Pattern, Lock, Unlock</string>
+    <!-- Search keywords of the setting for managing fingerprint unlock options on the device [CHAR LIMIT=NONE] -->
+    <string name="safety_center_fingerprint_unlock_search_terms">Fingerprint, Finger, Add fingerprint</string>
+    <!-- Search keywords of the setting for managing face unlock options on the device [CHAR LIMIT=NONE] -->
+    <string name="safety_center_face_unlock_search_terms">Face unlock, Face</string>
+    <!-- Search keywords of the setting for managing wear unlock options on the device [CHAR LIMIT=NONE] -->
+    <string name="safety_center_wear_unlock_search_terms">Watch, Watch unlock</string>
+    <!-- Search keywords for the Backup setting [CHAR LIMIT=NONE] -->
+    <string name="safety_center_backup_search_terms">Backup</string>
+    <!-- Permission manager search terms [CHAR LIMIT=NONE] -->
+    <string name="safety_center_permission_manager_search_terms">Permissions, Permissions manager</string>
+    <!-- Health connect search terms [CHAR LIMIT=NONE] -->
+    <string name="safety_center_health_connect_search_terms">Health, Health Connect</string>
+    <!-- App data sharing updates search terms [CHAR LIMIT=NONE] -->
+    <string name="safety_center_app_data_sharing_updates_search_terms">Data, Data sharing, Data sharing updates, Data sharing updates for location, sharing</string>
+    <!-- Permission usage search terms [CHAR LIMIT=NONE] -->
+    <string name="safety_center_permission_usage_search_terms">Privacy, Privacy dashboard</string>
+    <!-- Search keywords of the entry for Private Space settings [CHAR LIMIT=NONE] -->
+    <string name="safety_center_private_space_search_terms">Private Space</string>
 
     <!-- Safety Center issues banner group expandable title  [CHAR LIMIT=NONE] -->
     <string name="safety_center_issues_banner_group_expandable_title">More alerts</string>
@@ -15365,6 +15389,10 @@
     <!-- Issue resolution confirmation text [CHAR LIMIT=NONE]-->
     <string name="safety_center_resolved_issue_fallback">Action complete</string>
 
+    <!-- Content description for the safety center quick settings page landing [CHAR LIMIT=NONE] -->
+    <string name="safety_center_qs_page_landing">Security and privacy quick settings</string>
+    <!-- Label for the privacy controls section of safety center QS page [CHAR LIMIT=30] -->
+    <string name="privacy_controls_qs">Your privacy controls</string>
 
     <!-- Positive button text for the passkey dialog to show the state when accept pairing [CHAR LIMIT=30] -->
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text">Pairing</string>

@@ -101,6 +101,7 @@ object SafetyCenterSearchIndexUtils {
                 raw.title = entry.title.toString()
                 raw.summaryOn = entry.summary?.toString()
                 raw.screenTitle = screenTitle
+                raw.keywords = pref.keywords
                 rawData.add(raw)
             }
         }

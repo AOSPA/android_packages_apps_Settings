@@ -36,8 +36,7 @@ public class BundlePreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return Flags.notificationClassificationUi() && mBackend.isNotificationBundlingSupported()
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return mBackend.isNotificationBundlingSupported() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
