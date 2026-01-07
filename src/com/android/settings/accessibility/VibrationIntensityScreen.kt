@@ -61,8 +61,6 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
     override val highlightMenuKey
         get() = R.string.menu_key_accessibility
 
-    override fun isFlagEnabled(context: Context): Boolean = Flags.catalystVibrationIntensityScreen()
-
     override fun hasCompleteHierarchy() = false
 
     override fun fragmentClass(): Class<out Fragment>? =
