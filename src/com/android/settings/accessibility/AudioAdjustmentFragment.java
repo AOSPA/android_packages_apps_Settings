@@ -17,11 +17,16 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.audioadjustment.ui.AudioAdjustmentScreen;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /** Accessibility settings for audio adjustment. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -36,7 +41,12 @@ public class AudioAdjustmentFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.accessibility_audio_adjustment;
+        return Flags.catalystAudioAdjustmentScreen() ? 0 : R.xml.accessibility_audio_adjustment;
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NotNull Context context) {
+        return AudioAdjustmentScreen.KEY;
     }
 
     @Override
@@ -45,6 +55,7 @@ public class AudioAdjustmentFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_audio_adjustment);
+            new BaseSearchIndexProvider(Flags.catalystAudioAdjustmentScreen() ? 0
+                    : R.xml.accessibility_audio_adjustment);
 
 }

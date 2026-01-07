@@ -18,7 +18,6 @@ package com.android.settings.connecteddevice.display;
 import static android.view.Display.DEFAULT_DISPLAY;
 
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY;
-import static com.android.settings.flags.Flags.FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
 import static com.android.settings.flags.Flags.FLAG_ENABLE_RESOLUTION_CONFIRM_DIALOG_BUGFIX;
 import static com.android.settings.flags.Flags.FLAG_ENABLE_DISPLAY_BLOCK_ARROW_MOVEMENT_BUGFIX;
@@ -99,7 +98,6 @@ public class ExternalDisplayTestBase {
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, false);
-        mFlags.setFlag(FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING, true);
         mFlags.setFlag(FLAG_ENABLE_RESOLUTION_CONFIRM_DIALOG_BUGFIX, true);
         mFlags.setFlag(FLAG_ENABLE_DISPLAY_BLOCK_ARROW_MOVEMENT_BUGFIX, true);
         updateDisplaysAndTopology(List.of(createExternalDisplay(DisplayIsEnabled.YES),

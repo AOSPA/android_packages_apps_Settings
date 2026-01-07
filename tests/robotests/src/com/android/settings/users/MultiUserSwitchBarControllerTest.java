@@ -16,17 +16,25 @@
 
 package com.android.settings.users;
 
+import static com.android.settings.testutils.DevicePolicyUtils.DPC_ADMIN;
+import static com.android.settings.testutils.DevicePolicyUtils.SYSTEM_ADMIN;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -56,6 +64,9 @@ public class MultiUserSwitchBarControllerTest {
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule =  new SetFlagsRule();
+
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
@@ -69,8 +80,20 @@ public class MultiUserSwitchBarControllerTest {
         ShadowUserManager.reset();
     }
 
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     @Test
     public void onStart_disallowUserSwitchEnforcedByAdmin_shouldSetDisabledByAdminUnchecked() {
+        ShadowDevicePolicyManager.getShadow().setPolicyEnforcementInfoForUserRestriction(
+                UserManager.DISALLOW_USER_SWITCH, new PolicyEnforcementInfo(List.of(DPC_ADMIN)));
+
+        new MultiUserSwitchBarController(mContext, mSwitchWidgetController, null);
+        verify(mSwitchWidgetController).setChecked(false);
+        verify(mSwitchWidgetController).setDisabledByAdmin(any(EnforcingAdmin.class));
+    }
+
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @Test
+    public void onStart_disallowUserSwitchEnforcedByAdmin_shouldSetDisabledByAdminUnchecked_refactorDisabled() {
         int userId = UserHandle.myUserId();
         List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
         enforcingUsers.add(new UserManager.EnforcingUser(userId,
@@ -87,8 +110,24 @@ public class MultiUserSwitchBarControllerTest {
                 any(RestrictedLockUtils.EnforcedAdmin.class));
     }
 
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     @Test
     public void onStart_disallowUserSwitch_userNotMain_shouldSetDisabledUnchecked() {
+        ShadowDevicePolicyManager.getShadow().setPolicyEnforcementInfoForUserRestriction(
+                UserManager.DISALLOW_USER_SWITCH, new PolicyEnforcementInfo(List.of(SYSTEM_ADMIN)));
+        mUserManager.addUser(10, "Test", UserInfo.FLAG_ADMIN);
+        mUserManager.switchUser(10);
+
+        new MultiUserSwitchBarController(mContext, mSwitchWidgetController, null);
+
+        verify(mSwitchWidgetController).setChecked(false);
+        verify(mSwitchWidgetController).setEnabled(false);
+        verify(mSwitchWidgetController, never()).setDisabledByAdmin(any(EnforcingAdmin.class));
+    }
+
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @Test
+    public void onStart_disallowUserSwitch_userNotMain_shouldSetDisabledUnchecked_refactorDisabled() {
         mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
                 UserManager.DISALLOW_USER_SWITCH, true);
         new MultiUserSwitchBarController(mContext, mSwitchWidgetController, null);

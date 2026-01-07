@@ -20,6 +20,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.provider.SearchIndexableResource;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -27,6 +32,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -36,6 +42,8 @@ import java.util.List;
 /** Tests for {@link AudioAdjustmentFragment}. */
 @RunWith(RobolectricTestRunner.class)
 public class AudioAdjustmentFragmentTest {
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private AudioAdjustmentFragment mFragment;
@@ -51,10 +59,17 @@ public class AudioAdjustmentFragmentTest {
                 SettingsEnums.ACCESSIBILITY_AUDIO_ADJUSTMENT);
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_AUDIO_ADJUSTMENT_SCREEN)
     @Test
     public void getPreferenceScreenResId_returnsCorrectXml() {
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
                 R.xml.accessibility_audio_adjustment);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_AUDIO_ADJUSTMENT_SCREEN)
+    @Test
+    public void getPreferenceScreenResId_returnsZero() {
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(0);
     }
 
     @Test
@@ -62,6 +77,7 @@ public class AudioAdjustmentFragmentTest {
         assertThat(mFragment.getLogTag()).isEqualTo("AudioAdjustmentFragment");
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_AUDIO_ADJUSTMENT_SCREEN)
     @Test
     public void getNonIndexableKeys_existInXmlLayout() {
         final List<String> niks = AudioAdjustmentFragment.SEARCH_INDEX_DATA_PROVIDER
@@ -71,5 +87,15 @@ public class AudioAdjustmentFragmentTest {
                         R.xml.accessibility_audio_adjustment);
 
         assertThat(keys).containsAtLeastElementsIn(niks);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_AUDIO_ADJUSTMENT_SCREEN)
+    @Test
+    public void getXmlResourcesToIndex_returnsNull() {
+        final List<SearchIndexableResource> searchIndexableResources =
+                AudioAdjustmentFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(mContext, /* enabled= */ true);
+
+        assertThat(searchIndexableResources).isNull();
     }
 }
