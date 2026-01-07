@@ -127,6 +127,7 @@ import com.android.settings.wifi.p2p.WifiDirectApiScreen
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiScreen
 import com.android.settings.wifi.tether.WifiHotspotScreen
 import com.android.settings.wifi.tether.WifiHotspotSecurityApiScreen
+import com.android.settings.wifi.tether.WifiHotspotSpeedApiScreen
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.getPreferenceSummary
 
@@ -449,6 +450,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = ContactsStorageScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PowerMenuSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiHotspotSecurityApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = WifiHotspotSpeedApiScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =
