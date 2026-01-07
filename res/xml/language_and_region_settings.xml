@@ -49,7 +49,7 @@
         android:title="@string/app_locales_picker_menu_title"
         android:summary="@string/app_locale_picker_summary"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:controller="com.android.settings.applications.appinfo.NewAppsLocalePreferenceController">
+        settings:controller="com.android.settings.applications.appinfo.AppsLocalePreferenceController">
       <extra
           android:name="classname"
           android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
@@ -66,7 +66,7 @@
         android:title="@string/terms_of_address_title"
         android:summary="@string/terms_of_address_summary"
         android:fragment="com.android.settings.localepicker.TermsOfAddressFragment"
-        settings:controller="com.android.settings.localepicker.NewTermsOfAddressController"/>
+        settings:controller="com.android.settings.localepicker.TermsOfAddressPreferenceController"/>
   </PreferenceCategory>
 
   <PreferenceCategory

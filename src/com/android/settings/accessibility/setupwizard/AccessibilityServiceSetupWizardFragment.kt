@@ -58,10 +58,16 @@ class AccessibilityServiceSetupWizardFragment : BaseSetupWizardFragment() {
     override fun createControllers(adapter: RecyclerItemAdapter): Map<Int, BaseItemController> =
         buildMap {
             val context = requireContext()
-            findItem(adapter, R.id.accessibility_service_footer_in_suw)?.let { footerItem ->
+            findItem(adapter, R.id.accessibility_service_illustration_in_suw)?.let { item ->
+                put(
+                    R.id.accessibility_service_illustration_in_suw,
+                    AccessibilityServiceIllustrationItemController(context, serviceInfo, item),
+                )
+            }
+            findItem(adapter, R.id.accessibility_service_footer_in_suw)?.let { item ->
                 put(
                     R.id.accessibility_service_footer_in_suw,
-                    AccessibilityServiceFooterItemController(context, serviceInfo, footerItem),
+                    AccessibilityServiceFooterItemController(context, serviceInfo, item),
                 )
             }
         }

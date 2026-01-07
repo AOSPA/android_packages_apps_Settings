@@ -61,11 +61,9 @@ abstract class SafetyCenterSubpageFragment : DashboardFragment() {
         if (SafetyCenterSubpageRegistry.hasInjectedTiles(subpageKey)) {
             return
         }
-        val entries =
-            viewModel
-                .getCurrentSafetyCenterDataAsUiData()
-                .getDynamicEntriesForSources(safetySourceIds)
-        if (entries.isEmpty()) {
+        val uiData = viewModel.safetyCenterUiLiveData.value
+        val entries = uiData?.getDynamicEntriesForSources(safetySourceIds)
+        if (entries?.isEmpty() == true) {
             Log.d(logTag, "Redirecting from an empty subpage to Safety Center home")
             SubSettingLauncher(requireContext())
                 .setDestination(SafetyCenterFragment::class.java.getName())

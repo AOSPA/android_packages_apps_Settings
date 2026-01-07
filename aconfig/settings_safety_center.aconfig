@@ -9,6 +9,13 @@ flag {
 }
 
 flag {
+  name: "enable_safety_center_quick_settings"
+  namespace: "safety_center"
+  description: "Enables the Settings version of SafetyCenter quick settings"
+  bug: "449933150"
+}
+
+flag {
   name: "move_safety_source_refresh_to_background"
   namespace: "safety_center"
   description: "Moves the Safety Center source refresh to the background"

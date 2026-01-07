@@ -112,17 +112,17 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
         relatedIssueOnlySafetySources =
             SafetyCenterSubpageRegistry.getIssueOnlySafetySourceIds(preferenceKey)
         defaultSummaryResId = SafetyCenterSubpageRegistry.getDefaultSummaryResId(preferenceKey)
-        val model = viewModel
-        if (preference != null && model != null) {
-            updatePreferenceUi(preference!!, model.getCurrentSafetyCenterDataAsUiData())
+        val uiData = viewModel?.safetyCenterUiLiveData?.value
+        if (preference != null && uiData != null) {
+            updatePreferenceUi(preference!!, uiData)
         }
     }
 
     override fun updateState(preference: Preference?) {
         super.updateState(preference)
-        val model = viewModel
-        if (preference != null && model != null) {
-            updatePreferenceUi(preference, model.getCurrentSafetyCenterDataAsUiData())
+        val uiData = viewModel?.safetyCenterUiLiveData?.value
+        if (preference != null && uiData != null) {
+            updatePreferenceUi(preference, uiData)
         }
     }
 

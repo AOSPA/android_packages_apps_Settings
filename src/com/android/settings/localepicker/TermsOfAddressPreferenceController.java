@@ -30,9 +30,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class NewTermsOfAddressController extends BasePreferenceController {
+public class TermsOfAddressPreferenceController extends BasePreferenceController {
 
-    public NewTermsOfAddressController(@NonNull Context context, @NonNull String preferenceKey) {
+    public TermsOfAddressPreferenceController(
+            @NonNull Context context, @NonNull String preferenceKey) {
         super(context, preferenceKey);
     }
 

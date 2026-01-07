@@ -22,6 +22,7 @@ import android.os.Bundle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.res.stringResource
+import com.android.settings.flags.Flags
 import com.android.settings.R
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
@@ -75,7 +76,7 @@ fun AllAppListPage(
         title = stringResource(R.string.all_apps),
         listModel = rememberContext(::AllAppListModel),
         showInstantApps = true,
-        matchAnyUserForAdmin = true,
+        matchAnyUserForAdmin = (!android.multiuser.Flags.dontShowOtherUsersAppsToAdmin()),
         moreOptions = { ResetAppPreferences(resetAppDialogPresenter::open) },
         appList = appList,
     )
@@ -138,7 +139,7 @@ class AllAppListModel(
                 summaryList += storageSummaryValue
             }
             when {
-                !record.app.installed && !record.app.isArchived -> {
+                !android.multiuser.Flags.dontShowOtherUsersAppsToAdmin() && !record.app.installed && !record.app.isArchived -> {
                     summaryList += context.getString(R.string.not_installed)
                 }
 

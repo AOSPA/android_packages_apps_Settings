@@ -978,8 +978,6 @@
     <string name="security_settings_face_settings_use_face_category">Use Face Unlock for</string>
     <!-- Description shown on face settings page. -->
     <string name="security_settings_face_description"></string>
-    <!-- Footer description shown on face settings page. -->
-    <string name="security_settings_face_footer_description_class3"></string>
     <!-- Footer learn more description shown on face settings page. -->
     <string name="security_settings_face_footer_learn_more_description"></string>
     <!-- Footer learn more URL shown on face settings page  [DO NOT TRANSLATE] -->
@@ -15196,6 +15194,23 @@
     <string name="safety_center_qs_page_landing">Security and privacy quick settings</string>
     <!-- Label for the privacy controls section of safety center QS page [CHAR LIMIT=30] -->
     <string name="privacy_controls_qs">Your privacy controls</string>
+
+    <!-- Label for opening safety center from quick settings [CHAR LIMIT=NONE] -->
+    <string name="safety_center_qs_open_action">Open</string>
+    <!-- Content description for the privacy controls of the safety center quick settings [CHAR LIMIT=NONE] -->
+    <string name="safety_center_qs_privacy_control">Switch. <xliff:g id="privacy control title" example="Camera">%1$s</xliff:g>. <xliff:g id="privacy control status" example="Available">%2$s</xliff:g></string>
+
+    <!-- Label indicating access is blocked. [CHAR LIMIT=NONE] -->
+    <string name="safety_center_blocked_label">Blocked</string>
+    <!-- Label for toggling controls of the safety center quick settings [CHAR LIMIT=NONE] -->
+    <string name="safety_center_toggle">Toggle</string>
+
+    <!-- Label for the toggle that changes microphone access in safety center QS page [CHAR LIMIT=30] -->
+    <string name="microphone_toggle_label_qs">Mic access</string>
+    <!-- Label for the toggle that changes camera access in safety center QS page [CHAR LIMIT=30] -->
+    <string name="camera_toggle_label_qs">Camera access</string>
+    <!-- Label for the toggle that changes location access in safety center QS page [CHAR LIMIT=30] -->
+    <string name="location_toggle_label_qs">Location access</string>
 
     <!-- Positive button text for the passkey dialog to show the state when accept pairing [CHAR LIMIT=30] -->
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text">Pairing</string>

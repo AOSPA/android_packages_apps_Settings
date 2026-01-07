@@ -29,6 +29,7 @@ import com.android.settings.inputmethod.UserDictionarySettings;
 
 import java.util.TreeSet;
 
+// LINT.IfChange
 public class UserDictionaryPreferenceController extends BasePreferenceController {
 
     public UserDictionaryPreferenceController(Context context, String key) {
@@ -71,3 +72,4 @@ public class UserDictionaryPreferenceController extends BasePreferenceController
         return UserDictionaryListPreferenceController.getUserDictionaryLocalesSet(mContext);
     }
 }
+// LINT.ThenChange(../inputmethod/UserDictionaryListApiScreen.kt)

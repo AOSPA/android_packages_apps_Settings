@@ -31,6 +31,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUns
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.preconditions.MissingPermission
 import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -88,6 +89,12 @@ class ScreenInfo
  */
 class ApiTester(private val instance: PreferencesApiScreen) {
     private val context: Context = ApplicationProvider.getApplicationContext()
+
+    private val possibleParameters by lazy {
+        runBlocking {
+            instance.getAllPossibleParameters(context).toList()
+        }
+    }
 
     private fun <V> getPreference(key: String) =
         instance.preferences.first { it.key == key } as ApiPreference<V>
@@ -185,6 +192,26 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         }
     }
 
+    /**
+     * Initializes the screen with the given [parameters].
+     *
+     * @param parameters The parameters to initialize the screen with.
+     * @throws IllegalStateException if the screen does not have a parameters schema.
+     * @throws IllegalArgumentException if the provided parameters are not among the possible ones
+     *   for this screen.
+     */
+    fun initializeScreenParameters(parameters: Parameters) {
+        val schema = instance.parametersSchema ?: throw IllegalStateException(
+            "Attempting to initialize parameters on screen without a parameters schema"
+        )
+        val validatedKeyParameter = schema.prepare(parameters.values)
+        if(!possibleParameters.contains(validatedKeyParameter))
+            throw IllegalArgumentException (
+                "Received parameters are not among the possible ones for this screen"
+            )
+        instance.initializeParameters(validatedKeyParameter)
+    }
+
 
     /**
      * Helper method that returns the screen information extracted from the underlying
@@ -197,9 +224,12 @@ class ApiTester(private val instance: PreferencesApiScreen) {
      * instance screen.
      *
      * @param key The key of the preference the tester is executing the get operation on.
+     * @param parameters The optional new parameters to be assigned to the api screen this
+     * preference is part of, if the screen is parameterized
      */
-    fun <V : Any> get(key: String): V {
+    fun <V : Any> get(key: String, parameters: Parameters? = null): V {
         val preference = getPreference<V>(key)
+        if(parameters != null) initializeScreenParameters(parameters)
         val keyParameters = preference.getScreenParameters.invoke() ?: ValidatedKeyParameters.EMPTY
         val operationContext = ApiOperationContext(context, keyParameters)
 
@@ -220,10 +250,13 @@ class ApiTester(private val instance: PreferencesApiScreen) {
      *
      * @param key The key of the preference the tester is executing the set operation on
      * @param value The new value to be assigned to the preference
+     * @param parameters The optional new parameters to be assigned to the api screen this
+     * preference is part of, if the screen is parameterized
      */
-    fun <V : Any> set(key: String, value: V) {
+    fun <V : Any> set(key: String, value: V, parameters: Parameters? = null) {
         val preference = getPreference<V>(key)
         val setConfig = preference.set ?: throw CannotSetException()
+        if(parameters != null) initializeScreenParameters(parameters)
         val keyParameters = preference.getScreenParameters.invoke() ?: ValidatedKeyParameters.EMPTY
         val operationContext = ApiOperationContext(context, keyParameters)
 
@@ -268,4 +301,16 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         } else throw Exception("Attempting to get all preference options on a " +
                 "preference with infinite options")
     }
+
+    /**
+     * Get the screen extras associated with this parameterized screen.
+     */
+    fun getLaunchScreenExtras() = instance.launchScreenExtra
+}
+
+/**
+ * Helper class to wrap parameters of an api screen.
+ */
+class Parameters(vararg pairs: Pair<String, String>) {
+    val values: Map<String, String> = pairs.toMap()
 }

@@ -43,9 +43,6 @@ abstract class SafetyCenterViewModel(protected val app: Application) : AndroidVi
     /** Exposes an [InteractionLogger] to record user interactions for metrics. */
     abstract val interactionLogger: InteractionLogger
 
-    /** Returns the [SafetyCenterUiData] currently stored by the Safety Center service. */
-    abstract fun getCurrentSafetyCenterDataAsUiData(): SafetyCenterUiData
-
     /** Triggers a request to refresh all safety sources. */
     abstract fun rescan()
 

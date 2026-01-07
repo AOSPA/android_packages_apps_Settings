@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
+// LINT.IfChange
 @ProvidePreferenceScreen(TetherScreen.KEY)
 open class TetherScreen :
     PreferenceScreenMixin,
@@ -47,7 +48,6 @@ open class TetherScreen :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.tether_settings_purpose
 
@@ -96,3 +96,4 @@ open class TetherScreen :
         const val KEY = "tether_settings"
     }
 }
+// LINT.ThenChange(TetherSettings.java, TetherApiScreen.kt)

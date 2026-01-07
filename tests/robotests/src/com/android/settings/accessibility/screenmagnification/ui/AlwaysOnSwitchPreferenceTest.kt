@@ -18,7 +18,6 @@ package com.android.settings.accessibility.screenmagnification.ui
 
 import android.content.Context
 import android.content.Intent
-import android.provider.DeviceConfig
 import android.provider.Settings
 import android.view.accessibility.AccessibilityManager
 import androidx.activity.ComponentActivity
@@ -43,6 +42,7 @@ import com.android.settingslib.preference.createAndBindWidget
 import com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW
 import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
+import org.junit.Assume.assumeFalse
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -162,6 +162,17 @@ class AlwaysOnSwitchPreferenceTest {
     }
 
     @Test
+    fun toggle_checkedByDefault() {
+        // Should not have cached value by default
+        assumeFalse(
+            getStorage().contains(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED)
+        )
+
+        val preferenceWidget = createAlwaysOnWidget()
+        assertThat(preferenceWidget.isChecked).isEqualTo(true)
+    }
+
+    @Test
     @TestParameters(
         value =
             [
@@ -238,11 +249,9 @@ class AlwaysOnSwitchPreferenceTest {
     }
 
     private fun setAlwaysOnSupported(supported: Boolean) {
-        ShadowDeviceConfig.setProperty(
-            DeviceConfig.NAMESPACE_WINDOW_MANAGER,
-            "AlwaysOnMagnifier__enable_always_on_magnifier",
-            if (supported) "true" else "false",
-            /* makeDefault= */ false,
+        SettingsShadowResources.overrideResource(
+            com.android.internal.R.bool.config_magnification_always_on_enabled,
+            supported,
         )
     }
 
