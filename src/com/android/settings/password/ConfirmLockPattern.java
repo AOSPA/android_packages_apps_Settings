@@ -114,6 +114,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         private static final String FRAGMENT_TAG_CHECK_LOCK_RESULT = "check_lock_result";
 
+        private static final String KEY_INPUT_MODE = "input_mode";
+        private static final String KEY_INPUT_PATTERN = "input_pattern";
+
         private FooterButton mClearButton;
         private FooterButton mNextButton;
         private LockPatternView mLockPatternView;
@@ -269,6 +272,15 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     getActivity().setResult(Activity.RESULT_OK);
                     getActivity().finish();
                 }
+            } else {
+                if (savedInstanceState.containsKey(KEY_INPUT_MODE)) {
+                    mInputMode = LockPatternView.InputMode.valueOf(
+                            savedInstanceState.getString(KEY_INPUT_MODE));
+                }
+                if (savedInstanceState.containsKey(KEY_INPUT_PATTERN)) {
+                    mInputPattern = LockPatternUtils.byteArrayToPattern(
+                            savedInstanceState.getString(KEY_INPUT_PATTERN).getBytes());
+                }
             }
             mAppearAnimationUtils = new AppearAnimationUtils(getContext(),
                     AppearAnimationUtils.DEFAULT_APPEAR_DURATION, 2f /* translationScale */,
@@ -345,6 +357,16 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         @SuppressLint("MissingSuperCall")
         public void onSaveInstanceState(Bundle outState) {
             // deliberately not calling super since we are managing this in full
+
+            if (mInputMode != null) {
+                outState.putString(KEY_INPUT_MODE, mInputMode.name());
+            }
+            if (mInputPattern != null && !mInputPattern.isEmpty()) {
+                byte[] patternBytes = LockPatternUtils.patternToByteArray(mInputPattern);
+                if (patternBytes != null) {
+                    outState.putString(KEY_INPUT_PATTERN, new String(patternBytes));
+                }
+            }
         }
 
         @Override
