@@ -675,27 +675,6 @@
         <item>@string/accessibility_timeout_2mins</item>
     </string-array>
 
-    <!-- Titles for the list of long press timeout options. -->
-    <string-array name="long_press_timeout_selector_titles">
-        <!-- A title for the option for short long-press timeout [CHAR LIMIT=25] -->
-        <item>Short</item>
-        <!-- A title for the option for medium long-press timeout [CHAR LIMIT=25] -->
-        <item>Medium</item>
-        <!-- A title for the option for long long-press timeout [CHAR LIMIT=25] -->
-        <item>Long</item>
-    </string-array>
-
-    <!-- Avoid the gender issue, create the new fork of the string long_press_timeout_selector_titles -->
-    <!-- Titles for the list of long press timeout options in preference. -->
-    <string-array name="long_press_timeout_selector_list_titles">
-        <!-- A title for the option for short long-press timeout [CHAR LIMIT=25] -->
-        <item>Short</item>
-        <!-- A title for the option for medium long-press timeout [CHAR LIMIT=25] -->
-        <item>Medium</item>
-        <!-- A title for the option for long long-press timeout [CHAR LIMIT=25] -->
-        <item>Long</item>
-    </string-array>
-
     <!-- Ethernet IP settings. -->
     <!-- Note that adding/removing/moving the items will need ethernet settings code change. -->
     <string-array name="ethernet_ip_settings">
@@ -705,12 +684,32 @@
         <item>Static</item>
     </string-array>
 
+    <!--
+     Titles for the list of long press timeout options in preference.
+     The option's title should match the order defined in long_press_timeout_selector_int_values array
+    -->
+    <string-array name="long_press_timeout_selector_list_titles" translatable="false">
+        <item>@string/accessibility_long_press_timeout_option_short</item>
+        <item>@string/accessibility_long_press_timeout_option_medium</item>
+        <item>@string/accessibility_long_press_timeout_option_long</item>
+    </string-array>
+
     <!-- Values for the list of long press timeout options. -->
     <string-array name="long_press_timeout_selector_values" translatable="false">
         <item>400</item>
         <item>1000</item>
         <item>1500</item>
     </string-array>
+
+    <!-- Values for the list of long press timeout options. -->
+    <integer-array name="long_press_timeout_selector_int_values" translatable="false">
+        <item>@integer/long_press_timeout_short</item>
+        <item>@integer/long_press_timeout_medium</item>
+        <item>@integer/long_press_timeout_long</item>
+    </integer-array>
+    <integer name="long_press_timeout_short">400</integer>
+    <integer name="long_press_timeout_medium">1000</integer>
+    <integer name="long_press_timeout_long">1500</integer>
 
     <!-- Titles for captioning typeface preference. [CHAR LIMIT=35] -->
     <string-array name="captioning_typeface_selector_titles">

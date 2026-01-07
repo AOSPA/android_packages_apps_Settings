@@ -19,6 +19,7 @@ import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.icu.text.CollationKey
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
@@ -35,9 +36,11 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnit
-import org.mockito.kotlin.any
 import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
@@ -46,6 +49,7 @@ class ForceDarkAppExceptionsListModelTest {
     @get:Rule val composeTestRule = createComposeRule()
 
     @Mock lateinit var repository: ForceDarkAppExceptionsRepository
+    @Mock lateinit var mockPackageManager: PackageManager
     @Mock lateinit var usageStatsManager: UsageStatsManager
     @Mock lateinit var context: Context
     @Mock lateinit var usageStatsA: UsageStats
@@ -55,7 +59,10 @@ class ForceDarkAppExceptionsListModelTest {
 
     @Before
     fun setup() {
-        whenever(usageStatsManager.queryAndAggregateUsageStats(any(), any()))
+        whenever(context.packageName).thenReturn("package.test")
+        whenever(mockPackageManager.resolveActivity(any(), anyInt())).thenReturn(null)
+        whenever(context.packageManager).thenReturn(mockPackageManager)
+        whenever(usageStatsManager.queryAndAggregateUsageStats(anyLong(), anyLong()))
             .thenReturn(
                 mapOf<String, UsageStats>(
                     PACKAGE_NAME_A to usageStatsA,

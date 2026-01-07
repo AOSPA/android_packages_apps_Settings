@@ -22,6 +22,7 @@
     <uses-permission android:name="android.permission.READ_DEVICE_CONFIG" />
 
     <application>
+        <activity android:name="com.android.settings.EmptySetupWizardActivity" android:exported="true" />
         <activity android:name="com.android.settings.security.TestActivity" android:exported="true" />
         <activity android:name="com.android.settings.biometrics.face.FaceEnrollEducationTest$TestFaceEnrollEducation" android:exported="true" />
     </application>

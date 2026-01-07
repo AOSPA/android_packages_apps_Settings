@@ -17,11 +17,16 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.timingcontrols.ui.TimingControlsScreen;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /** Accessibility settings for tap assistance. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -36,7 +41,7 @@ public class TapAssistanceFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.accessibility_tap_assistance;
+        return Flags.catalystTimingControlsScreen() ? 0 : R.xml.accessibility_tap_assistance;
     }
 
     @Override
@@ -44,7 +49,13 @@ public class TapAssistanceFragment extends DashboardFragment {
         return TAG;
     }
 
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NotNull Context context) {
+        return TimingControlsScreen.KEY;
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_tap_assistance);
+            new BaseSearchIndexProvider(
+                    Flags.catalystTimingControlsScreen() ? 0 : R.xml.accessibility_tap_assistance);
 
 }

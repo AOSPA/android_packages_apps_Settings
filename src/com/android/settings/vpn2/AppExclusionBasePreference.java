@@ -32,6 +32,8 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.util.concurrent.Future;
+
 /**
  * Base class for a preference that represents an application.
  *
@@ -107,25 +109,21 @@ public abstract class AppExclusionBasePreference extends Preference {
         int iconRes = getActionIcon();
         if (iconRes != 0) {
             actionButton.setVisibility(View.VISIBLE);
-            actionButton.setImageDrawable(
-                    UiUtils.mutateAndSetTintByColorAttr(
-                            getContext(), iconRes, android.R.attr.colorAccent));
+            actionButton.setImageResource(iconRes);
         } else {
             actionButton.setVisibility(View.GONE);
         }
     }
 
     private void loadIcon(PackageInfo packageInfo) {
-        ThreadUtils.postOnBackgroundThread(
-                () -> {
-                    final PackageManager pm = getContext().getPackageManager();
-                    final Drawable icon =
-                            Utils.getBadgedIcon(getContext(), packageInfo.applicationInfo);
-                    if (icon != null) {
-                        ThreadUtils.postOnMainThread(() -> setIcon(icon));
-                    } else {
-                        ThreadUtils.postOnMainThread(() -> setIcon(pm.getDefaultActivityIcon()));
-                    }
-                });
+        Future<?> unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> {
+                            // Utils.getBadgedIcon() returns the default icon if the app doesn't
+                            // have one.
+                            final Drawable icon =
+                                    Utils.getBadgedIcon(getContext(), packageInfo.applicationInfo);
+                            getContext().getMainThreadHandler().post(() -> setIcon(icon));
+                        });
     }
 }

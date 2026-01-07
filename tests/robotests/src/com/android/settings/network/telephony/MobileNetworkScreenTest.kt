@@ -98,15 +98,18 @@ class MobileNetworkScreenTest : SettingsCatalystTestCase() {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_subIdIsInt_returnsTheSubIdFromInt() {
-        val args = Bundle().apply { putInt(Settings.EXTRA_SUB_ID, subId) }
+        val args = Bundle().apply { putSubId(Settings.EXTRA_SUB_ID, subId) }
         val screen = createScreen(args)
         assertThat(screen.getSubId()).isEqualTo(subId)
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    @DisableFlags(
+        Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
+        CatalystFlags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+    )
     fun subId_flagFalse_validInt_parsedCorrectly() {
-        val args = Bundle().apply { putInt(Settings.EXTRA_SUB_ID, subId) }
+        val args = Bundle().apply { putSubId(Settings.EXTRA_SUB_ID, subId) }
         val screen = createScreen(args)
         assertThat(screen.getSubId()).isEqualTo(subId)
     }

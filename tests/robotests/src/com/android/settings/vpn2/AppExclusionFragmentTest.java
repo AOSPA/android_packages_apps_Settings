@@ -123,7 +123,7 @@ public class AppExclusionFragmentTest {
         packageInfo.applicationInfo = new ApplicationInfo();
         packageInfo.applicationInfo.packageName = packageName;
         packageInfo.applicationInfo.name = appName;
-        mShadowPackageManager.addPackage(packageInfo);
+        mShadowPackageManager.installPackage(packageInfo);
     }
 
     @Test
@@ -183,7 +183,7 @@ public class AppExclusionFragmentTest {
     @Test
     public void setVpnAppInfo_setsTitleAndIcon() {
         IntroPreference vpnAppPref = mFragment.findPreference("vpn_app");
-        assertThat(vpnAppPref.getTitle()).isEqualTo(VPN_LABEL);
+        assertThat(vpnAppPref.getTitle().toString()).isEqualTo(VPN_LABEL);
         assertThat(vpnAppPref.getIcon()).isNotNull();
     }
 }
