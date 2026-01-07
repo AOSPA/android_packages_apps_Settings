@@ -19,22 +19,18 @@ package com.android.settings.accessibility.textreading.ui
 import android.app.settings.SettingsEnums
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.accessibility.TextReadingPreferenceFragment
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 
 /** Tests for [TextReadingScreenOnAccessibility]. */
-class TextReadingScreenOnAccessibilityTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class TextReadingScreenOnAccessibilityTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
-    override val preferenceScreenCreator = TextReadingScreenOnAccessibility()
-
-    override val flagName: String
-        get() = Flags.FLAG_CATALYST_TEXT_READING_SCREEN
-
-    @Test override fun migration() {}
+    private val preferenceScreenCreator = TextReadingScreenOnAccessibility()
 
     @Test
     fun key() {

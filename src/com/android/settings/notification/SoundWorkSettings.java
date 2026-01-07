@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Sounds settings for work profile. */
+// LINT.IfChange
 @SearchIndexable
 public class SoundWorkSettings extends DashboardFragment implements OnActivityResultListener {
 
@@ -166,3 +167,4 @@ public class SoundWorkSettings extends DashboardFragment implements OnActivityRe
                 }
             };
 }
+// LINT.ThenChange(SoundWorkApiScreen.kt)

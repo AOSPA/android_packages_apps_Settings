@@ -19,24 +19,20 @@ import android.app.settings.SettingsEnums
 import android.content.ComponentName
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.accessibility.TextReadingPreferenceFragment
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 
 /** Tests for [TextReadingScreen]. */
-class TextReadingScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class TextReadingScreenTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
-    override val preferenceScreenCreator = TextReadingScreen()
-
-    override val flagName: String
-        get() = Flags.FLAG_CATALYST_TEXT_READING_SCREEN
-
-    @Test override fun migration() {}
+    private val preferenceScreenCreator = TextReadingScreen()
 
     @Test
     fun key() {
