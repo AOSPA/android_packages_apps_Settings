@@ -70,6 +70,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_caption_preferences_screen"
+  namespace: "accessibility"
+  description: "Migrate caption preferences screen to Catalyst infrastructure"
+  bug: "440381963"
+}
+
+flag {
   name: "catalyst_time_to_take_action_screen"
   namespace: "accessibility"
   description: "Migrate time to take action screen to Catalyst infrastructure"
