@@ -29,8 +29,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
+import com.android.internal.telephony.flags.Flags
 import com.android.settings.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.android.settingslib.widget.FooterPreference
@@ -96,6 +102,10 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
         updateLandingPageContent()
     }
 
+    /**
+     * Updates the content of the landing page, including the app list, demo button, and footer.
+     * This is called in `onViewCreated` and `onResume` to ensure the content is up-to-date.
+     */
     private fun updateLandingPageContent() {
         viewModel.loadSatelliteAppItems()
         setUpTryADemoButton()
@@ -133,6 +143,19 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 )
                 true
+            }
+
+            viewLifecycleOwner.lifecycleScope.launch {
+                val isCarrierSupported =
+                    withContext(Dispatchers.Default) {
+                        SatelliteUtils.isCarrierRoamingNtnSupported(requireContext(), activeSubId)
+                    }
+                if (isCarrierSupported && Flags.newSatelliteIcon()) {
+                    demoButtonPreference.icon = SatelliteIconDrawable(requireContext())
+                } else {
+                    demoButtonPreference.icon =
+                        requireContext().getDrawable(R.drawable.ic_satellite_demo)
+                }
             }
         }
     }

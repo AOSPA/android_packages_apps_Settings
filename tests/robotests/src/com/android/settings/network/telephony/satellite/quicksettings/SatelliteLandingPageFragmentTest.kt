@@ -42,6 +42,7 @@ import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.IllustrationPreference
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.MutableStateFlow
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -309,6 +310,31 @@ class SatelliteLandingPageFragmentTest {
             val footer = fragment.findPreference<FooterPreference>("footer")
             assertThat(footer?.title)
                 .isEqualTo(context.getString(R.string.landing_page_footer_text_nbiot))
+        }
+    }
+
+    @Test
+    fun satelliteIconDrawable_hasCorrectIntrinsicSize() {
+        val drawable = SatelliteIconDrawable(context)
+        val density = context.resources.displayMetrics.density
+
+        // Expected: 73dp x 32dp
+        val expectedWidth = (SatelliteIconDrawable.INTRINSIC_WIDTH_DP * density).toInt()
+        val expectedHeight = (SatelliteIconDrawable.INTRINSIC_HEIGHT_DP * density).toInt()
+
+        assertEquals(expectedWidth, drawable.intrinsicWidth)
+        assertEquals(expectedHeight, drawable.intrinsicHeight)
+    }
+
+    @Test
+    fun tryDemoButton_isSatelliteDemoPreference() {
+        setLteNtnSupported(false)
+
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment ->
+            val demoButton = fragment.findPreference<Preference>(KEY_TRY_A_DEMO_BUTTON)
+            assertThat(demoButton).isInstanceOf(SatelliteDemoPreference::class.java)
         }
     }
 
