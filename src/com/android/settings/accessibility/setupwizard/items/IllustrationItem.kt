@@ -31,6 +31,8 @@ import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.android.settings.R
 import com.google.android.setupdesign.items.Item
+import com.google.android.setupdesign.util.LottieAnimationHelper
+import com.google.android.setupdesign.util.ThemeHelper
 
 /**
  * An item that is displayed with an Illustration, with methods to manipulate state of the
@@ -81,8 +83,20 @@ class IllustrationItem : Item {
     override fun getDefaultLayoutResource() = R.layout.setup_illustration_item
 
     override fun onBindView(view: View) {
+        val context = view.context
         val illustrationView = view.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
         handleImageWithAnimation(illustrationView)
+
+        if (ThemeHelper.shouldApplyGlifExpressiveStyle(context)) {
+            LottieAnimationHelper.get()
+                .applyColor(
+                    context,
+                    illustrationView,
+                    context.resources
+                        .getStringArray(R.array.layout_animated_banner_customization)
+                        .toList(),
+                )
+        }
 
         view.contentDescription = contentDescription
     }
