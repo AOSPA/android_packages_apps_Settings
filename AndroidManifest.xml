@@ -1045,6 +1045,19 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 android:value="true" />
         </activity>
 
+        <activity android:name=".vpn2.AppExclusionActivity"
+                  android:label="@string/vpn_app_exclusion"
+                  android:featureFlag="android.provider.expose_vpn_app_exclusion_settings"
+                  android:exported="true"
+                  android:theme="@style/Theme.Settings.NoActionBar">
+            <intent-filter>
+                <action android:name="android.settings.VPN_APP_EXCLUSION_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
         <activity
             android:name="Settings$DataSaverSummaryActivity"
             android:exported="true"
