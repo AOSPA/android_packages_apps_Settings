@@ -139,9 +139,13 @@ open class SatelliteEligibilityJobService : JobService() {
         Log.d(TAG, "Current ServiceState: $state")
 
         if (state == ServiceState.STATE_IN_SERVICE) {
-            Log.d(TAG, "Device is IN_SERVICE, rescheduling job.")
-            schedule(this)
-            return false
+            val isNtn = serviceState?.isUsingNonTerrestrialNetwork() == true
+            if (!isNtn) {
+                Log.d(TAG, "Device is IN_SERVICE (Terrestrial), rescheduling job.")
+                schedule(this)
+                return false
+            }
+            Log.d(TAG, "Device is IN_SERVICE (Satellite), proceeding to monitor.")
         }
 
         // Register callback to listen for state changes
@@ -174,10 +178,18 @@ open class SatelliteEligibilityJobService : JobService() {
 
                 override fun onServiceStateChanged(serviceState: ServiceState) {
                     if (serviceState.state == ServiceState.STATE_IN_SERVICE) {
-                        Log.d(TAG, "Cellular service restored, rescheduling job.")
-                        cleanup()
-                        schedule(this@SatelliteEligibilityJobService)
-                        jobFinished(params, false)
+                        val isNtn = serviceState.isUsingNonTerrestrialNetwork()
+                        if (!isNtn) {
+                            Log.d(TAG, "Cellular service restored (Terrestrial), rescheduling job.")
+                            cleanup()
+                            schedule(this@SatelliteEligibilityJobService)
+                            jobFinished(params, false)
+                        } else {
+                            Log.d(
+                                TAG,
+                                "Device is IN_SERVICE (Satellite), ignoring service restoration.",
+                            )
+                        }
                     }
                 }
 
