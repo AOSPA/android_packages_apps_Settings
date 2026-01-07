@@ -32,7 +32,7 @@ import com.android.settings.accessibility.textreading.ui.TextReadingScreen
 import com.android.settings.accounts.AccountScreen
 import com.android.settings.accounts.ManagedProfileApiScreen
 import com.android.settings.applications.AppDashboardScreen
-import com.android.settings.applications.contacts.ContactsStorageScreenApi
+import com.android.settings.applications.contacts.ContactsStorageApiScreen
 import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppDetailScreen
 import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppListScreen
 import com.android.settings.applications.specialaccess.AllFilesAccessAppDetailScreen
@@ -469,7 +469,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = DoubleTwistGestureApiFirstScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = SwipeToNotificationApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDirectApiScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = ContactsStorageScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ContactsStorageApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PowerMenuSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiHotspotSecurityApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiHotspotSpeedApiScreen.KEY),

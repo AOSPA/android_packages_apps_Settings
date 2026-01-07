@@ -20,10 +20,12 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 
 // LINT.IfChange
-@ProvidePreferenceScreen(ContactsStorageScreenApi.KEY)
-class ContactsStorageScreenApi :
+@ProvidePreferenceScreen(ContactsStorageApiScreen.KEY)
+class ContactsStorageApiScreen :
     PreferencesApiScreen(
         key = KEY,
         topLevelSettingsCategory = Category.APPS,
@@ -31,13 +33,19 @@ class ContactsStorageScreenApi :
         purpose = R.string.contacts_storage_settings_purpose,
     ) {
     init {
-        // TODO(b/464954587): Add preconditions check for the screen.
         // TODO(b/464954587): Add preference migration for the screen.
         flag { Flags.catalystMigration26q2() }
+        preconditions(R.string.contacts_storage_screen_preconditions) {
+            if (ContactsStoragePreferenceController.isContactsStorageAvailable(context)) {
+                Allowed
+            } else {
+                Custom(R.string.contacts_storage_screen_unsupported)
+            }
+        }
     }
 
     companion object {
         const val KEY = "contacts_storage_settings"
     }
 }
-// LINT.ThenChange(ContactsStorageScreenApi.kt)
+// LINT.ThenChange(ContactsStorageSettings.java, ContactsStoragePreferenceController.java)
