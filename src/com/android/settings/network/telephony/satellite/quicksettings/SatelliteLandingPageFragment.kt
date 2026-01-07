@@ -32,7 +32,6 @@ import androidx.fragment.app.viewModels
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.spa.preference.ComposePreference
-import com.android.settingslib.spaprivileged.template.app.AppListItem
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.IllustrationPreference
@@ -143,6 +142,8 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
         val composePreference = findPreference<ComposePreference>(KEY_SATELLITE_APPS_LIST)
         composePreference?.setContent {
             val satelliteAppItems by viewModel.satelliteAppItems.collectAsState()
+            val areAppsEnabled by viewModel.areAppsEnabled.collectAsState()
+
             composePreference.isVisible = satelliteAppItems.isNotEmpty()
             Column {
                 satelliteAppItems.forEach { item ->
@@ -152,8 +153,9 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
                             label = item.getAppLabel(packageManager),
                             summary = { "" },
                         )
-                    appListItemModel.AppListItem(
-                        onClick = { item.intent?.let { startActivitySafely(it) } }
+                    appListItemModel.SatelliteAppListItem(
+                        enabled = areAppsEnabled,
+                        onClick = { item.intent?.let { startActivitySafely(it) } },
                     )
                 }
             }

@@ -7,7 +7,7 @@
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law_ins or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -22,9 +22,13 @@ import android.content.pm.PackageManager
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.android.settings.R
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
 /**
  * ViewModel for the satellite landing page, responsible for preparing and managing the data to be
@@ -34,18 +38,29 @@ class SatelliteLandingPageViewModel(
     private val context: Context,
     private val appsRepository: SatelliteAppsRepository,
     private val packageManager: PackageManager,
+    satelliteStateRepository: SatelliteStateRepository,
 ) : ViewModel() {
 
     private val _satelliteAppItems = MutableStateFlow<List<SatelliteAppItem>>(emptyList())
     val satelliteAppItems: StateFlow<List<SatelliteAppItem>> = _satelliteAppItems
 
+    /**
+     * Whether the satellite apps should be enabled (clickable and fully opaque).
+     *
+     * Apps are enabled if satellite connectivity is either [SatelliteStatus.ACTIVE] or
+     * [SatelliteStatus.AVAILABLE].
+     */
+    val areAppsEnabled: StateFlow<Boolean> =
+        satelliteStateRepository.satelliteStatus
+            .map { it != SatelliteStatus.NOT_AVAILABLE }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
+
     fun loadSatelliteAppItems() {
-        val pm = packageManager
         val items = mutableListOf<SatelliteAppItem>()
 
         // Helper to create and add an item, reducing boilerplate.
         fun addItem(packageName: String, intent: Intent?, appLabel: String? = null) {
-            createSatelliteAppItem(pm, packageName, intent, appLabel)?.let { items.add(it) }
+            createSatelliteAppItem(packageName, intent, appLabel)?.let { items.add(it) }
         }
 
         // Emergency SOS app
@@ -63,7 +78,7 @@ class SatelliteLandingPageViewModel(
                 appsRepository.getAppsPackagesForNbNtnLandingPage()
             }
         appPackages.forEach { packageName ->
-            addItem(packageName, pm.getLaunchIntentForPackage(packageName))
+            addItem(packageName, packageManager.getLaunchIntentForPackage(packageName))
         }
 
         // Settings app
@@ -76,17 +91,16 @@ class SatelliteLandingPageViewModel(
     }
 
     private fun createSatelliteAppItem(
-        pm: PackageManager,
         packageName: String,
         intent: Intent?,
         appLabel: String? = null,
     ): SatelliteAppItem? {
         intent ?: return null
         return try {
-            val appInfo = pm.getApplicationInfo(packageName, 0)
+            val appInfo = packageManager.getApplicationInfo(packageName, 0)
             SatelliteAppItem(appInfo, intent, appLabel)
         } catch (e: PackageManager.NameNotFoundException) {
-            Log.e(TAG, "App not found: $packageName", e)
+            Log.w(TAG, "App not found: $packageName")
             null
         }
     }
@@ -108,7 +122,13 @@ class SatelliteLandingPageViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SatelliteLandingPageViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return SatelliteLandingPageViewModel(context, appsRepository, packageManager) as T
+            return SatelliteLandingPageViewModel(
+                context,
+                appsRepository,
+                packageManager,
+                SatelliteStateRepository.getInstance(context),
+            )
+                as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
