@@ -36,6 +36,8 @@ import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.android.settings.R
 import com.android.settingslib.widget.preference.illustration.R as IllustrationR
+import com.google.android.setupcompat.util.DelightHelper
+import com.google.android.setupdesign.R as SetupR
 import com.google.android.setupdesign.items.Item
 import com.google.android.setupdesign.util.LottieAnimationHelper
 import com.google.android.setupdesign.util.ThemeHelper
@@ -96,6 +98,7 @@ class IllustrationItem : Item {
         private set
 
     private var isLottieAnimationPaused = false
+    private var pendingAnimationRunnable: Runnable? = null
 
     constructor() : super()
 
@@ -156,55 +159,86 @@ class IllustrationItem : Item {
     private fun handleImageWithAnimation(illustrationView: LottieAnimationView) {
         resetAnimations(illustrationView)
         isLottieAnimation = false
+        isLottieAnimationPaused = false
 
-        imageDrawable?.let { drawable ->
-            illustrationView.visibility = View.VISIBLE
-            illustrationView.setImageDrawable(drawable)
-            startAnimatableDrawable(drawable)
-            return
-        }
-
-        imageUri?.let { uri ->
-            illustrationView.visibility = View.VISIBLE
-            illustrationView.setImageURI(uri)
-            val drawable = illustrationView.getDrawable()
-            if (drawable != null) {
-                startAnimatableDrawable(drawable)
-            } else {
-                // The lottie image from the raw folder also returns null because the ImageView
-                // couldn't handle it now.
-                startLottieAnimationWith(illustrationView, uri)
-                isLottieAnimation = true
+        when {
+            imageDrawable != null -> {
+                illustrationView.setImageDrawable(imageDrawable)
+                illustrationView.visibility = View.VISIBLE
+                executeWithThemeDelay(illustrationView) { startAnimatableDrawable(imageDrawable) }
             }
-            return
-        }
-
-        if (imageResId != 0) {
-            try {
-                illustrationView.resources.openRawResource(imageResId).use { inputStream ->
-                    val check = inputStream.read()
-                    // -1 = end of stream. if first read is end of stream, then file is empty
-                    if (check == -1) {
-                        illustrationView.visibility = View.GONE
-                        return
-                    }
+            imageUri != null -> {
+                illustrationView.setImageURI(imageUri)
+                illustrationView.visibility = View.VISIBLE
+                val drawable = illustrationView.drawable
+                if (drawable != null) {
+                    executeWithThemeDelay(illustrationView) { startAnimatableDrawable(drawable) }
+                } else {
+                    // The lottie image from the raw folder also returns null because the
+                    // ImageView
+                    isLottieAnimation = true
+                    illustrationView.prepareAnimation(imageUri!!)
+                    executeWithThemeDelay(illustrationView) { illustrationView.playAnimation() }
                 }
+            }
+            imageResId != 0 -> {
+                if (!isRawResourceValid(illustrationView, imageResId)) {
+                    illustrationView.visibility = View.GONE
+                    return
+                }
+                illustrationView.setImageResource(imageResId)
+                illustrationView.visibility = View.VISIBLE
+                val drawable = illustrationView.drawable
+                if (drawable != null) {
+                    executeWithThemeDelay(illustrationView) { startAnimatableDrawable(drawable) }
+                } else {
+                    // The lottie image from the raw folder also returns null because the
+                    // ImageView
+                    isLottieAnimation = true
+                    illustrationView.prepareAnimation(imageResId)
+                    executeWithThemeDelay(illustrationView) { illustrationView.playAnimation() }
+                }
+            }
+        }
+    }
+
+    private fun LottieAnimationView.prepareAnimation(uri: Uri) {
+        val inputStream: InputStream =
+            try {
+                getInputStreamFromUri(context, uri) ?: return
             } catch (e: IOException) {
-                Log.w(TAG, "Unable to open Lottie raw resource", e)
-                illustrationView.visibility = View.GONE
+                Log.e(TAG, "Error opening InputStream from URI: $uri", e)
                 return
             }
-            illustrationView.visibility = View.VISIBLE
-            illustrationView.setImageResource(imageResId)
-            val drawable = illustrationView.getDrawable()
-            if (drawable != null) {
-                startAnimatableDrawable(drawable)
-            } else {
-                // The lottie image from the raw folder also returns null because the ImageView
-                // couldn't handle it now.
-                startLottieAnimationWith(illustrationView, imageResId)
-                isLottieAnimation = true
+        apply {
+            setAnimation(inputStream, null)
+            repeatCount = LottieDrawable.INFINITE
+            setFailureListener { throwable ->
+                Log.w(TAG, "Failed to load Lottie animation from URI: $uri", throwable)
             }
+        }
+    }
+
+    private fun LottieAnimationView.prepareAnimation(@RawRes resId: Int) {
+        apply {
+            setAnimation(resId)
+            repeatCount = LottieDrawable.INFINITE
+            setFailureListener { throwable ->
+                Log.w(TAG, "Failed to load Lottie animation from resource ID: $resId", throwable)
+            }
+        }
+    }
+
+    private fun executeWithThemeDelay(illustrationView: LottieAnimationView, action: () -> Unit) {
+        val context = illustrationView.context
+
+        if (DelightHelper.shouldApplyAnimatedIcon(context)) {
+            val delay =
+                context.resources.getInteger(SetupR.integer.sud_lottie_animation_delay_ms).toLong()
+            pendingAnimationRunnable =
+                Runnable { action() }.also { illustrationView.postDelayed(it, delay) }
+        } else {
+            action()
         }
     }
 
@@ -264,17 +298,6 @@ class IllustrationItem : Item {
             context.getString(IllustrationR.string.settingslib_action_label_pause)
         }
 
-    private fun startLottieAnimationWith(illustrationView: LottieAnimationView, imageUri: Uri) {
-        val inputStream: InputStream =
-            getInputStreamFromUri(illustrationView.context, imageUri) ?: return
-        illustrationView.setFailureListener { result: Throwable? ->
-            Log.w(TAG, "Invalid illustration image uri: $imageUri", result)
-        }
-        illustrationView.setAnimation(inputStream, /* cacheKey= */ null)
-        illustrationView.setRepeatCount(LottieDrawable.INFINITE)
-        illustrationView.playAnimation()
-    }
-
     private fun getInputStreamFromUri(context: Context, uri: Uri): InputStream? {
         try {
             return context.contentResolver.openInputStream(uri)
@@ -284,21 +307,9 @@ class IllustrationItem : Item {
         }
     }
 
-    private fun startLottieAnimationWith(
-        illustrationView: LottieAnimationView,
-        @RawRes rawRes: Int,
-    ) {
-        illustrationView.setFailureListener { result: Throwable? ->
-            Log.w(TAG, "Invalid illustration resource id: $rawRes", result)
-        }
-        illustrationView.setAnimation(rawRes)
-        illustrationView.setRepeatCount(LottieDrawable.INFINITE)
-        illustrationView.playAnimation()
-    }
-
     private fun resetAnimations(illustrationView: LottieAnimationView) {
-        resetAnimation(illustrationView.getDrawable())
-
+        pendingAnimationRunnable?.let { illustrationView.removeCallbacks(it) }
+        resetAnimation(illustrationView.drawable)
         illustrationView.cancelAnimation()
     }
 
@@ -329,13 +340,10 @@ class IllustrationItem : Item {
         (drawable as Animatable).start()
     }
 
-    private fun showIllustrationView(view: View, isVisible: Boolean) {
-        view.visibility = if (isVisible) View.VISIBLE else View.GONE
-    }
-
     private fun isRawResourceValid(view: View, resId: Int): Boolean {
         return try {
             view.resources.openRawResource(resId).use {
+                // -1 = end of stream. if first read is end of stream, then file is empty
                 it.read() != -1
             }
         } catch (e: IOException) {
