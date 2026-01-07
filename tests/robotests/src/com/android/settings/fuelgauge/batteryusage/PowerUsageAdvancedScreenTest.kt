@@ -15,39 +15,18 @@
  */
 package com.android.settings.fuelgauge.batteryusage
 
-import android.content.Context
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
-import com.android.settingslib.core.AbstractPreferenceController
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import org.robolectric.annotation.Config
-import org.robolectric.annotation.Implementation
-import org.robolectric.annotation.Implements
+import org.junit.runner.RunWith
 
-class PowerUsageAdvancedScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class PowerUsageAdvancedScreenTest {
 
-    override val preferenceScreenCreator = PowerUsageAdvancedScreen()
-
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_BATTERY_25Q4
+    private val preferenceScreenCreator = PowerUsageAdvancedScreen()
 
     @Test
     fun key() {
         assertThat(preferenceScreenCreator.key).isEqualTo(PowerUsageAdvancedScreen.KEY)
-    }
-
-    @Config(shadows = [ShadowPowerUsageAdvanced::class])
-    @Test
-    override fun migration() {
-        super.migration()
-    }
-
-    @Implements(PowerUsageAdvanced::class)
-    class ShadowPowerUsageAdvanced {
-        @Implementation
-        protected fun createPreferenceControllers(
-            context: Context?
-        ): MutableList<AbstractPreferenceController?>? = ArrayList<AbstractPreferenceController?>()
     }
 }
