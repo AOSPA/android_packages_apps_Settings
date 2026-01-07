@@ -162,6 +162,52 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
 
     @Test
     @UiThreadTest
+    public void testShowDisplayList_withExistentDisplayIdArg_showsOnlyThatDisplay() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, false);
+
+        mFragment = new TestableExternalDisplayPreferenceFragment();
+        Bundle args = new Bundle();
+        args.putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, mDisplays.get(1).getId());
+        mFragment.setArguments(args);
+        mFragment.onCreateCallback(null);
+        mFragment.onActivityCreatedCallback(null);
+        mFragment.onStartCallback();
+        mHandler.flush();
+
+        assertDisplayListCount(1);
+        assertThat("" + getExternalDisplayCategory(0).getTitle()).isEqualTo("Overlay #1");
+    }
+
+    @Test
+    @UiThreadTest
+    public void testShowDisplayList_withNonExistentDisplayIdArg_showsNoDisplays() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, false);
+
+        mFragment = new TestableExternalDisplayPreferenceFragment();
+        Bundle args = new Bundle();
+        args.putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, 123456789);
+        mFragment.setArguments(args);
+        mFragment.onCreateCallback(null);
+        mFragment.onActivityCreatedCallback(null);
+        mFragment.onStartCallback();
+        mHandler.flush();
+
+        assertDisplayListCount(0);
+
+        // Verify empty state is shown
+        var mainPref = (MainSwitchPreference) mPreferenceScreen.findPreference(
+                PrefBasics.EXTERNAL_DISPLAY_USE.keyForNth(0));
+        assertThat(mainPref).isNotNull();
+        assertThat(mainPref.isEnabled()).isFalse();
+
+        var footerPref = mPreferenceScreen.findPreference(PrefBasics.FOOTER.key);
+        assertThat(footerPref).isNotNull();
+        assertThat("" + footerPref.getTitle())
+                .isEqualTo(getText(EXTERNAL_DISPLAY_NOT_FOUND_FOOTER_RESOURCE));
+    }
+
+    @Test
+    @UiThreadTest
     public void testShowDisplayList() {
         mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, false);
 
