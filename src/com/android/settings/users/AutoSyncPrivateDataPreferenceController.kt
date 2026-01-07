@@ -19,12 +19,12 @@ import android.content.Context
 import androidx.preference.PreferenceFragmentCompat
 import com.android.settings.Utils
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment
-import com.android.settings.flags.Flags
 
 class AutoSyncPrivateDataPreferenceController(
     context: Context?,
     parent: PreferenceFragmentCompat?,
-) : AutoSyncDataPreferenceController(context, parent) {
+    val forceDisable: Boolean = false,
+) : AutoSyncDataPreferenceController(context, parent, forceDisable) {
     init {
         mUserHandle =
             Utils.getProfileOfType(mUserManager, ProfileSelectFragment.ProfileType.PRIVATE)
@@ -35,7 +35,7 @@ class AutoSyncPrivateDataPreferenceController(
     }
 
     override fun isAvailable(): Boolean {
-        if (Flags.enableAccountsAndBackupScreen()) {
+        if (forceDisable) {
             return false
         }
         return (mUserHandle != null &&

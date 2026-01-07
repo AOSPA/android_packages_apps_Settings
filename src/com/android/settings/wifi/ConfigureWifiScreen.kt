@@ -23,7 +23,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.ConfigureWifiSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.network.AirplaneModePreference
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.wifi.utils.wifiManager
@@ -48,7 +47,7 @@ open class ConfigureWifiScreen(context: Context) :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.configure_network_settings_purpose
 
@@ -61,8 +60,7 @@ open class ConfigureWifiScreen(context: Context) :
     override fun getMetricsCategory() = SettingsEnums.CONFIGURE_WIFI
 
     override fun isFlagEnabled(context: Context) =
-        Flags.catalystConfigureNetworkSettings() &&
-            !ConfigureWifiSettings.isGuestUser(context) &&
+        !ConfigureWifiSettings.isGuestUser(context) &&
             context.resources.getBoolean(R.bool.config_show_wifi_settings)
 
     override fun hasCompleteHierarchy() = false

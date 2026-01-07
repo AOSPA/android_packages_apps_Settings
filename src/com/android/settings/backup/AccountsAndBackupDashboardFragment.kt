@@ -26,21 +26,31 @@ import androidx.preference.Preference
 import com.android.settings.CatalystFragment
 import com.android.settings.accounts.ManageAccountsScreen
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.EXTRA_PROFILE
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.ALL
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.PERSONAL
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.PRIVATE
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.WORK
 import com.android.settingslib.drawer.Tile
 
 class AccountsAndBackupDashboardFragment : CatalystFragment() {
 
-    /* User (personal of work) for which the screen is launched. */
+    /* User (personal, work or private space) for which the screen is launched. */
     private val user: UserHandle by lazy {
-        if (arguments?.getInt(EXTRA_PROFILE, PERSONAL) == PERSONAL) {
-            UserHandle.of(myUserId())
-        } else {
-            val userManager = getSystemService(UserManager::class.java) as UserManager
-            userManager
-                .getProfiles(myUserId())
-                .first { it.isManagedProfile && it.id != myUserId() }
-                ?.userHandle ?: UserHandle.of(myUserId())
+        val userManager = getSystemService(UserManager::class.java) as UserManager
+        (arguments?.getInt(EXTRA_PROFILE) ?: PERSONAL).let { profileType ->
+            when (profileType) {
+                WORK ->
+                    userManager
+                        .getProfiles(myUserId())
+                        .firstOrNull { it.id != myUserId() && it.isManagedProfile }
+                        ?.userHandle ?: UserHandle.of(myUserId())
+                PRIVATE ->
+                    userManager
+                        .getProfiles(myUserId())
+                        .firstOrNull { it.id != myUserId() && it.isPrivateProfile }
+                        ?.userHandle ?: UserHandle.of(myUserId())
+                else -> UserHandle.of(myUserId())
+            }
         }
     }
 
@@ -50,7 +60,7 @@ class AccountsAndBackupDashboardFragment : CatalystFragment() {
 
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
         if (preference.key == ManageAccountsScreen.KEY) {
-            arguments?.getInt(EXTRA_PROFILE)?.let { profileType ->
+            arguments?.getInt(EXTRA_PROFILE, ALL)?.let { profileType ->
                 preference.extras.putInt(EXTRA_PROFILE, profileType)
             }
         }
