@@ -36,7 +36,7 @@ object UserProfilesUtils {
         val userManager = context.getSystemService(UserManager::class.java)
         val userInfo = userManager.getUserInfo(user.identifier) ?: return null
 
-        if (isPrivateProfileSupported() && userInfo.isPrivateProfile) {
+        if (PermissionFlags.privateProfileSupported() && userInfo.isPrivateProfile) {
             return SafetySourcePreference.Profile.PRIVATE
         }
         if (userInfo.isManagedProfile) {
@@ -48,11 +48,6 @@ object UserProfilesUtils {
 
         // The user is some other more special type of profile that we don't need to handle.
         return null
-    }
-
-    /** Checks if the private profile feature is supported and enabled on the device. */
-    fun isPrivateProfileSupported(): Boolean {
-        return PermissionFlags.privateProfileSupported() && OsFlags.allowPrivateProfile()
     }
 
     /**
