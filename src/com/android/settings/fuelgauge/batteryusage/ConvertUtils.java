@@ -293,10 +293,11 @@ public final class ConvertUtils {
     public static AppUsageEvent convertToAppUsageEvent(final Cursor cursor) {
         final AppUsageEvent.Builder eventBuilder = AppUsageEvent.newBuilder();
         eventBuilder.setTimestamp(getLongFromCursor(cursor, AppUsageEventEntity.KEY_TIMESTAMP));
-        eventBuilder.setType(
+        final AppUsageEventType appUsageEventType =
                 AppUsageEventType.forNumber(
-                        getIntegerFromCursor(
-                                cursor, AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE)));
+                        getIntegerFromCursor(cursor, AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE));
+        eventBuilder.setType(
+                appUsageEventType != null ? appUsageEventType : AppUsageEventType.UNKNOWN);
         eventBuilder.setPackageName(
                 getStringFromCursor(cursor, AppUsageEventEntity.KEY_PACKAGE_NAME));
         eventBuilder.setInstanceId(
@@ -322,9 +323,11 @@ public final class ConvertUtils {
     public static BatteryEvent convertToBatteryEvent(final Cursor cursor) {
         final BatteryEvent.Builder eventBuilder = BatteryEvent.newBuilder();
         eventBuilder.setTimestamp(getLongFromCursor(cursor, BatteryEventEntity.KEY_TIMESTAMP));
-        eventBuilder.setType(
+        final BatteryEventType batteryEventType =
                 BatteryEventType.forNumber(
-                        getIntegerFromCursor(cursor, BatteryEventEntity.KEY_BATTERY_EVENT_TYPE)));
+                        getIntegerFromCursor(cursor, BatteryEventEntity.KEY_BATTERY_EVENT_TYPE));
+        eventBuilder.setType(
+                batteryEventType != null ? batteryEventType : BatteryEventType.UNKNOWN_EVENT);
         eventBuilder.setBatteryLevel(
                 getIntegerFromCursor(cursor, BatteryEventEntity.KEY_BATTERY_LEVEL));
         return eventBuilder.build();

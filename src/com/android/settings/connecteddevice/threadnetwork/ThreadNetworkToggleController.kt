@@ -30,7 +30,6 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.TogglePreferenceController
-import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory
 import java.util.concurrent.Executor
 
@@ -75,7 +74,7 @@ class ThreadNetworkToggleController @VisibleForTesting constructor(
     override fun getAvailabilityStatus(): Int {
         val featureProvider = FeatureFactory.featureFactory.threadNetworkFeatureProvider
 
-        return if (!Flags.threadSettingsEnabled() || !featureProvider.isThreadVisible()) {
+        return if (!featureProvider.isThreadVisible()) {
             CONDITIONALLY_UNAVAILABLE
         } else if (!isThreadSupportedOnDevice) {
             UNSUPPORTED_ON_DEVICE

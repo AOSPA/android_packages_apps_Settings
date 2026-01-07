@@ -1349,6 +1349,10 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Rezolucioni i lartë"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Rezolucioni maksimal"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Rezolucioni maksimal përdor më shumë bateri. Ndryshimi i rezolucionit mund të shkaktojë rinisjen e disa aplikacioneve."</string>
+    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
+    <skip />
+    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
+    <skip />
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> me <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2508,7 +2512,6 @@
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Shkurtorja e butonit të qasshmërisë"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Shkurtorja e tasteve të volumit"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Shkurtorja e tri trokitjeve"</string>
-    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Shkurtorja e dy trokitjeve me %1$d gishta"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Shkurtorja e \"Cilësimeve të shpejta\""</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Shkurtorja e gjestit të qasshmërisë"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Për ta përdorur këtë veçori, trokit te butoni i qasshmërisë <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> në fund të ekranit.\n\nPër të ndërruar mes veçorive, mbaj të shtypur butonin e qasshmërisë."</string>
@@ -2544,11 +2547,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Tastet e volumit"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"tastet e volumit"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Shtyp dhe mbaj shtypur të dyja tastet e volumit"</string>
-    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Trokit dy herë me %1$d gishta"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Trokit me shpejtësi tek ekrani dy herë me %1$d gishta"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Trokit tri herë"</string>
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Trokit me shpejtësi tek ekrani %1$d herë. Kjo mund ta ngadalësojë pajisjen."</string>
-    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Trokit dy herë me %1$d gishta"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"trokitja tri herë"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Shkurtorja e tastierës"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Shtyp <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> për të përdorur <xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -2593,7 +2593,8 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Aktivizon temën e errët për pajisjen tënde dhe për aplikacionet që mbështesin temën e errët"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"E zgjeruar"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Tema e errët e zgjeruar"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Zbaton automatikisht temën e errët në shumë apl. ku nuk mbështetet. Kjo mund të përmirësojë qasshmërinë e lexueshmërinë, por mund të dëmtojë paraqitjen e disa apl."</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
+    <skip />
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"detyro anasjelljen, anasjellja e ngjyrës, kontrasti"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema e errët e zgjeruar"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Cilësimet e temës së errët të zgjeruar"</string>
@@ -5074,6 +5075,16 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Të çaktivizohet %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Të çaktivizohet shërbimi?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Informacionet e ruajtura si fjalëkalimet, çelësat e kalimit, mënyrat e pagesës dhe informacione të tjera nuk do të plotësohen kur të identifikohesh. Për të përdorur informacionin tënd të ruajtur, zgjidh një fjalëkalim, çelës kalimi ose shërbim të dhënash."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Fjalëkalimet, çelësat e kalimit dhe llogaritë"</string>
+    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_title (2841026269835953207) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_summary (4126659439608747174) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_manage_accounts_title (1034959782380418930) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_backup_category_title (807568201052547222) -->
+    <skip />
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Të çaktivizohen të gjitha shërbimet?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Fjalëkalimet, çelësat e kalimit dhe informacionet e tjera të ruajtura nuk do të ofrohen për plotësimin automatik kur të identifikohesh"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Të ndryshohet shërbimi i preferuar te &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Fjalëkalimet e reja, çelësat e kalimit dhe informacionet e tjera do të ruhen këtu nga tani e tutje. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; mund të përdorë ato që janë në ekranin tënd për të përcaktuar se çfarë mund të plotësohet automatikisht."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Të përdoret %1$s?"</string>
@@ -6075,16 +6086,42 @@
     <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
-    <string name="safety_center_device_finders_search_terms" msgid="2703625009760905100"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"Përditësimet"</string>
+    <!-- no translation found for safety_center_security_update_search_terms (545517841376162382) -->
+    <skip />
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"Lloji i rrjetit, enkriptimi, kontrollet e njoftimeve"</string>
+    <!-- no translation found for safety_center_android_lock_screen_search_terms (4741569259158180141) -->
+    <skip />
+    <!-- no translation found for safety_center_fingerprint_unlock_search_terms (954519907845160433) -->
+    <skip />
+    <!-- no translation found for safety_center_face_unlock_search_terms (2994457346086700870) -->
+    <skip />
+    <!-- no translation found for safety_center_wear_unlock_search_terms (6289459571308806285) -->
+    <skip />
+    <!-- no translation found for safety_center_backup_search_terms (5652327131910333830) -->
+    <skip />
+    <!-- no translation found for safety_center_permission_manager_search_terms (1303866079616216426) -->
+    <skip />
+    <!-- no translation found for safety_center_health_connect_search_terms (1323524144779175830) -->
+    <skip />
+    <!-- no translation found for safety_center_app_data_sharing_updates_search_terms (2041373488015575634) -->
+    <skip />
+    <!-- no translation found for safety_center_permission_usage_search_terms (3015527940068111714) -->
+    <skip />
+    <!-- no translation found for safety_center_private_space_search_terms (6748750858253093118) -->
+    <skip />
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Më shumë sinjalizime"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Më pak sinjalizime"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Sinjalizimet e hequra"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Të hiqet ky sinjalizim?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Shqyrto cilësimet e sigurisë dhe privatësisë në çdo kohë për të shtuar më shumë mbrojtje"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Veprimi përfundoi"</string>
+    <!-- no translation found for safety_center_qs_page_landing (1024103851758565938) -->
+    <skip />
+    <!-- no translation found for privacy_controls_qs (1774718598801606190) -->
+    <skip />
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Po çiftohet"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> u lidh"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Skano pajisjen"</string>

@@ -1349,6 +1349,10 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Visoka ločljivost"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Najvišja ločljivost"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Za najvišjo ločljivost se porablja več energije baterije. Ob spremembi ločljivosti se bodo morda nekatere aplikacije znova zagnale."</string>
+    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
+    <skip />
+    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
+    <skip />
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> × <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> krat <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2508,7 +2512,6 @@
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Bližnjica gumba za dostopnost"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Bližnjica gumbov za glasnost"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Bližnjica trikratnega dotika"</string>
-    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Bližnjica dvakratnega dotika z %1$d prstoma"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Bližnjica za hitre nastavitve"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Bližnjica poteze za dostopnost"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Če želite uporabiti to funkcijo, se na dnu zaslona dotaknite gumba za dostopnost <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nČe želite preklopiti med funkcijami, pridržite gumb za dostopnost."</string>
@@ -2544,11 +2547,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Tipki za glasnost"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"tipki za glasnost"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Pritisnite in pridržite obe tipki za glasnost."</string>
-    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Dvakratni dotik z %1$d prstoma"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Z %1$d prstoma se dvakrat hitro dotaknite zaslona."</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Trikratni dotik"</string>
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"%1$d-krat se hitro dotaknite zaslona. To bo morda upočasnilo delovanje naprave."</string>
-    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Dvakratni dotik z %1$d prstoma"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"trikratni dotik"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Bližnjične tipke"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Pritisnite <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> za uporabo »<xliff:g id="ID_4">%4$s</xliff:g>«"</string>
@@ -2593,7 +2593,8 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Vklopi temno temo za napravo in aplikacije, ki podpirajo temno temo"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Razširjeno"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Razširjena temna tema"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Samodejno uporabi temno temo za večino aplikacij, ki je ne podpirajo. S tem lahko izboljšate dostopnost in berljivost, vendar so lahko zaradi tega nekatere aplikacije nepravilno prikazane."</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
+    <skip />
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"prisilna inverzija, inverzija barv, kontrast"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Razširjena temna tema"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Nastavitve razširjene temne teme"</string>
@@ -3222,13 +3223,11 @@
     <string name="add_device_admin" msgid="6252128813507932519">"Aktiviraj to skrbniško aplikacijo naprave"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Skrbnik naprave"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"Če aktivirate to skrbniško aplikacijo, boste aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> omogočili izvajanje teh dejanj:"</string>
-    <!-- no translation found for supervision_role_holder_warning (167724047638694522) -->
-    <skip />
+    <string name="supervision_role_holder_warning" msgid="167724047638694522">"To napravo bo upravljala in nadzirala aplikacija <xliff:g id="APP_NAME_0">%1$s</xliff:g>. \n\nAplikacija <xliff:g id="APP_NAME_1">%1$s</xliff:g> bo lahko upravljala nastavitve starševskega nadzora, kot sta blokiranje aplikacij in omejitve vsebine."</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"To napravo bo upravljala in nadzirala aplikacija <xliff:g id="APP_NAME">%1$s</xliff:g>."</string>
     <string name="device_admin_status" msgid="6332571781623084064">"Ta skrbniška aplikacija je aktivna in aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> omogoča izvajanje teh dejanj:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Želite aktivirati Upravitelja profilov?"</string>
-    <!-- no translation found for supervision_confirmation_title (8094974031562728585) -->
-    <skip />
+    <string name="supervision_confirmation_title" msgid="8094974031562728585">"Ali želite aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> dovoliti nadzorovanje te naprave?"</string>
     <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"Želite dovoliti nadzor?"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"Če nadaljujete, bo uporabnika upravljal skrbnik, ki lahko poleg osebnih podatkov shranjuje tudi povezane podatke.\n\nSkrbnik lahko nadzira in upravlja nastavitve, dostop, aplikacije ter podatke, povezane s tem uporabnikom, vključno z omrežno dejavnostjo in podatki o lokaciji naprave."</string>
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"Druge možnosti je onemogočil skrbnik"</string>
@@ -5074,6 +5073,16 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Želite izklopiti »%1$s«?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Želite izklopiti to storitev?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Shranjeni podatki, kot so gesla, ključi za dostop, plačilna sredstva in drugo, ne bodo izpolnjeni ob prijavi. Za uporabo shranjenih podatkov izberite geslo, ključ za dostop ali podatkovno storitev."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Gesla, ključi za dostop in računi"</string>
+    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_title (2841026269835953207) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_summary (4126659439608747174) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_manage_accounts_title (1034959782380418930) -->
+    <skip />
+    <!-- no translation found for accounts_and_backup_backup_category_title (807568201052547222) -->
+    <skip />
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Želite izklopiti vse storitve?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Gesla, ključi za dostop in drugi shranjeni podatki ne bodo na voljo za samodejno izpolnjevanje ob prijavi."</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Želite spremeniti želeno storitev na &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Nova gesla, ključi za dostop in drugi podatki bodo odslej shranjeni tukaj. Aplikacija &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; lahko na podlagi prikaza na zaslonu ugotovi, kaj se lahko samodejno izpolni."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Želite uporabiti ponudnika %1$s?"</string>
@@ -6016,8 +6025,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Ko so te nastavitve izklopljene, so druge nastavitve računa morda še vedno v uporabi."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Vnesite kodo PIN za starševski nadzor"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Nastavitev kode PIN za starševski nadzor"</string>
-    <!-- no translation found for supervision_choose_your_new_pin_header (7770532284777963661) -->
-    <skip />
+    <string name="supervision_choose_your_new_pin_header" msgid="7770532284777963661">"Nastavitev nove kode PIN za starševski nadzor"</string>
     <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"Potrdite kodo PIN za starševski nadzor"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Koda PIN je posodobljena"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Odpiranje aplikacije"</string>
@@ -6077,16 +6085,42 @@
     <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
-    <string name="safety_center_device_finders_search_terms" msgid="2703625009760905100"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_and_updates_summary" msgid="6301092688146734950">"Posodobitve"</string>
+    <!-- no translation found for safety_center_security_update_search_terms (545517841376162382) -->
+    <skip />
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="safety_center_cellular_network_security_summary" msgid="4746047200732665728">"Vrsta omrežja, šifriranje, kontrolniki obvestil"</string>
+    <!-- no translation found for safety_center_android_lock_screen_search_terms (4741569259158180141) -->
+    <skip />
+    <!-- no translation found for safety_center_fingerprint_unlock_search_terms (954519907845160433) -->
+    <skip />
+    <!-- no translation found for safety_center_face_unlock_search_terms (2994457346086700870) -->
+    <skip />
+    <!-- no translation found for safety_center_wear_unlock_search_terms (6289459571308806285) -->
+    <skip />
+    <!-- no translation found for safety_center_backup_search_terms (5652327131910333830) -->
+    <skip />
+    <!-- no translation found for safety_center_permission_manager_search_terms (1303866079616216426) -->
+    <skip />
+    <!-- no translation found for safety_center_health_connect_search_terms (1323524144779175830) -->
+    <skip />
+    <!-- no translation found for safety_center_app_data_sharing_updates_search_terms (2041373488015575634) -->
+    <skip />
+    <!-- no translation found for safety_center_permission_usage_search_terms (3015527940068111714) -->
+    <skip />
+    <!-- no translation found for safety_center_private_space_search_terms (6748750858253093118) -->
+    <skip />
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Več opozoril"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Manj opozoril"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Opuščena opozorila"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Želite opustiti to opozorilo?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Za dodatno zaščito lahko kadar koli pregledate varnostne nastavitve in nastavitve zasebnosti."</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Dejanje končano"</string>
+    <!-- no translation found for safety_center_qs_page_landing (1024103851758565938) -->
+    <skip />
+    <!-- no translation found for privacy_controls_qs (1774718598801606190) -->
+    <skip />
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Seznanjanje"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Naprava <xliff:g id="DEVICE_NAME">%1$s</xliff:g> je povezana"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Preglej napravo"</string>
@@ -6105,12 +6139,8 @@
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Odpri predstavitev funkcije SOS prek satelita"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Satelitske aplikacije"</string>
     <string name="satellite_emergency_sos" msgid="5598135807261930736">"Klic v sili"</string>
-    <!-- no translation found for satellite_tile_prompt_notification_title (208155187034621285) -->
-    <skip />
-    <!-- no translation found for satellite_tile_prompt_notification_summary (1108842668552812176) -->
-    <skip />
-    <!-- no translation found for add_tile_action (5271301747196740442) -->
-    <skip />
-    <!-- no translation found for satellite_tile_prompt_channel_title (5240494188833271282) -->
-    <skip />
+    <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Povezljivost s sateliti je na voljo"</string>
+    <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Preprosto dostopajte do podatkov o satelitih tako, da ploščico Satelit dodate med hitre nastavitve"</string>
+    <string name="add_tile_action" msgid="5271301747196740442">"Dodaj ploščico"</string>
+    <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Pozivi ploščice Satelit"</string>
 </resources>
