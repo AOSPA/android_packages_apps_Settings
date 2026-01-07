@@ -20,7 +20,6 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.android.settings.flags.Flags;
 import com.android.settings.widget.PreferenceCategoryController;
 
 public class RegionalPreferencesCategoryController extends PreferenceCategoryController {
@@ -30,9 +29,6 @@ public class RegionalPreferencesCategoryController extends PreferenceCategoryCon
 
     @Override
     public int getAvailabilityStatus() {
-        if (Flags.regionalPreferencesApiEnabled()) {
-            return AVAILABLE;
-        }
-        return CONDITIONALLY_UNAVAILABLE;
+        return AVAILABLE;
     }
 }

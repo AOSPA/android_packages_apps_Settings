@@ -24,7 +24,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.app.LocaleStore;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.flags.Flags;
 
 import java.util.Locale;
 
@@ -46,9 +45,6 @@ public class RegionPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        if (!Flags.regionalPreferencesApiEnabled()) {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
         return AVAILABLE;
     }
 }
