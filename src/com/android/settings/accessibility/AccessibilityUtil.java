@@ -28,6 +28,7 @@ import static com.android.internal.accessibility.common.ShortcutConstants.UserSh
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.KEY_GESTURE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TOP_ROW_KEY;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
@@ -74,7 +75,8 @@ public final class AccessibilityUtil {
             SOFTWARE, // FAB displays before gesture. Navbar displays without gesture.
             GESTURE,
             HARDWARE,
-            TRIPLETAP
+            TOP_ROW_KEY,
+            TRIPLETAP,
     };
     // LINT.ThenChange(/src/com/android/settings/accessibility/shortcuts/ui/EditShortcutsScreen.kt:shortcut_type_ui_order)
 
