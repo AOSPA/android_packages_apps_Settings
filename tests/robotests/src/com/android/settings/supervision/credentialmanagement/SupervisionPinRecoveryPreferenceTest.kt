@@ -277,7 +277,6 @@ class SupervisionPinRecoveryPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
     fun onRecoveryFlowComplete_showsCorrectToastString() {
         val expectedToastMessage = mContext.getString(R.string.supervision_pin_updated)
         preference.onRecoveryFlowComplete(ActivityResult(Activity.RESULT_OK, null))
@@ -285,14 +284,6 @@ class SupervisionPinRecoveryPreferenceTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
-    fun onRecoveryFlowComplete_flagDisabled_noToast() {
-        preference.onRecoveryFlowComplete(ActivityResult(Activity.RESULT_OK, null))
-        assertThat(ShadowToast.getTextOfLatestToast()).isNull()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
     fun onRecoveryFlowComplete_flowCanceled_noToast() {
         preference.onRecoveryFlowComplete(ActivityResult(Activity.RESULT_CANCELED, null))
         assertThat(ShadowToast.getTextOfLatestToast()).isNull()
