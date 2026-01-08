@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class RegionPickerFragment extends DashboardFragment{
 
@@ -108,3 +109,4 @@ public class RegionPickerFragment extends DashboardFragment{
                 }
             };
 }
+// LINT.ThenChange(RegionPickerApiFirstScreen.kt)

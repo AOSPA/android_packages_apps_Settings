@@ -73,6 +73,7 @@ import java.util.stream.Collectors;
  * Allows the user to search for locales using both their native name and their name in the
  * default locale.</p>
  */
+// LINT.IfChange
 public class AppLocalePickerFragment extends DashboardFragment implements
         SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener {
     public static final String ARG_PACKAGE_NAME = "package";
@@ -458,3 +459,4 @@ public class AppLocalePickerFragment extends DashboardFragment implements
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.app_language_picker);
 }
+// LINT.ThenChange(AppLocalePickerApiFirstScreen.kt)

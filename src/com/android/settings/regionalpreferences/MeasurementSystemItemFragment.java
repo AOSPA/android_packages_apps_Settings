@@ -44,6 +44,7 @@ import java.util.Collection;
 import java.util.List;
 
 /** Main fragment to display measurement system. */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MeasurementSystemItemFragment extends DashboardFragment {
 
@@ -127,3 +128,4 @@ public class MeasurementSystemItemFragment extends DashboardFragment {
                 }
             };
 }
+// LINT.ThenChange(MeasurementSystemApiFirstScreen.kt)

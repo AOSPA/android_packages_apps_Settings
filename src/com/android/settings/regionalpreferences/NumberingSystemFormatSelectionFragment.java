@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Locale;
 
 /** Provides options of numbering system to each language. */
+// LINT.IfChange
 public class NumberingSystemFormatSelectionFragment extends DashboardFragment {
 
     @Override
@@ -79,4 +80,4 @@ public class NumberingSystemFormatSelectionFragment extends DashboardFragment {
         Locale locale = Locale.forLanguageTag(selectedLanguage);
         return LocaleHelper.getDisplayName(locale.stripExtensions(), locale, true);
     }
-}
+}// LINT.ThenChange(NumberingSystemFormatSelectionApiFirstScreen.kt)
