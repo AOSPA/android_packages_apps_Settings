@@ -159,16 +159,14 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             return;
         }
 
-        boolean activityEmbedded = isActivityEmbedded();
         if (icicle != null) {
             mHighlightMixin = icicle.getParcelable(SAVED_HIGHLIGHT_MIXIN);
             if (mHighlightMixin != null) {
-                mScrollNeeded = !mHighlightMixin.isActivityEmbedded() && activityEmbedded;
-                mHighlightMixin.setActivityEmbedded(activityEmbedded);
+                mScrollNeeded = !mHighlightMixin.isActivityEmbedded() && isActivityEmbedded();
             }
         }
         if (mHighlightMixin == null) {
-            mHighlightMixin = new TopLevelHighlightMixin(activityEmbedded);
+            mHighlightMixin = new TopLevelHighlightMixin();
         }
     }
 
@@ -211,6 +209,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mHighlightMixin != null) {
+            mHighlightMixin.setActivityEmbedded(isActivityEmbedded());
             outState.putParcelable(SAVED_HIGHLIGHT_MIXIN, mHighlightMixin);
         }
     }
