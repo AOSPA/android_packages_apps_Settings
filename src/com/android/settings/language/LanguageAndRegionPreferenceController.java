@@ -38,4 +38,4 @@ public class LanguageAndRegionPreferenceController extends BasePreferenceControl
         return AVAILABLE;
     }
 }
-// LINT.ThenChange(LanguageAndRegionScreen.kt)
+// LINT.ThenChange(LanguageAndRegionScreen.kt, LanguageAndRegionApiFirstScreen.kt)

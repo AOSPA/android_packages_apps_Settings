@@ -435,4 +435,4 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
                 }
             };
 }
-// LINT.ThenChange(LanguageAndRegionScreen.kt)
+// LINT.ThenChange(LanguageAndRegionScreen.kt, LanguageAndRegionApiFirstScreen.kt)

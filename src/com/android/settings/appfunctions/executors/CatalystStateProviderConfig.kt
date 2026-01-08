@@ -97,6 +97,7 @@ import com.android.settings.gestures.PowerMenuSettingsScreenApi
 import com.android.settings.gestures.SwipeToNotificationApiScreen
 import com.android.settings.gestures.SystemNavigationGestureScreen
 import com.android.settings.inputmethod.UserDictionaryListApiScreen
+import com.android.settings.language.LanguageAndRegionApiFirstScreen
 import com.android.settings.language.LanguageAndRegionScreen
 import com.android.settings.location.LocationScreen
 import com.android.settings.location.LocationServicesScreen
@@ -219,6 +220,7 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = LanguageAndRegionScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = LanguageAndRegionApiFirstScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ModuleLicensesScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LegalSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationServicesScreen.KEY),
