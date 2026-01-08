@@ -116,6 +116,7 @@ import com.android.settings.notification.app.ConversationListScreen
 import com.android.settings.notification.modes.ZenModesListScreen
 import com.android.settings.print.PrintSettingsApiScreen
 import com.android.settings.security.LockScreenPreferenceScreen
+import com.android.settings.security.trustagent.TrustAgentApiScreen
 import com.android.settings.sound.MediaControlsScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoScreen
@@ -343,6 +344,7 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = DateTimeSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DeviceAdminApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = TrustAgentApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,

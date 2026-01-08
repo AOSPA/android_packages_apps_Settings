@@ -28,6 +28,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settingslib.utils.StringUtil;
 
+// LINT.IfChange
 public class ManageTrustAgentsPreferenceController extends BasePreferenceController {
 
     private static final int MY_USER_ID = UserHandle.myUserId();
@@ -69,3 +70,4 @@ public class ManageTrustAgentsPreferenceController extends BasePreferenceControl
         return mTrustAgentManager.getActiveTrustAgents(mContext, mLockPatternUtils, false).size();
     }
 }
+// LINT.ThenChange(TrustAgentApiScreen.kt)
