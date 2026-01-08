@@ -360,14 +360,12 @@ class SupervisionDeletePinPreference() :
     }
 
     fun showDeletePinSuccessToast(lifecycleContext: PreferenceLifecycleContext) {
-        if (Flags.enableSupervisionPinSnackbarsToastMessage()) {
-            Toast.makeText(
-                    lifecycleContext,
-                    lifecycleContext.getString(R.string.supervision_pin_deleted),
-                    Toast.LENGTH_SHORT,
-                )
-                .show()
-        }
+        Toast.makeText(
+                lifecycleContext,
+                lifecycleContext.getString(R.string.supervision_pin_deleted),
+                Toast.LENGTH_SHORT,
+            )
+            .show()
     }
 
     /**
