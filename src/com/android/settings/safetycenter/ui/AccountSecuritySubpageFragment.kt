@@ -24,6 +24,7 @@ import com.android.settingslib.search.SearchIndexable
 import com.android.settingslib.search.SearchIndexableRaw
 
 /** Fragment for displaying Account Security subpage within the Safety Center in Settings. */
+// LINT.IfChange
 @SearchIndexable
 class AccountSecuritySubpageFragment : SafetyCenterSubpageFragment() {
 
@@ -59,3 +60,4 @@ class AccountSecuritySubpageFragment : SafetyCenterSubpageFragment() {
             }
     }
 }
+// LINT.ThenChange(AccountSecuritySubpageScreenApi.kt)
