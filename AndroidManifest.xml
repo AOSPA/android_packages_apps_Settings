@@ -5157,7 +5157,6 @@
             android:name=".Settings$EmergencyDashboardActivity"
             android:label="@string/emergency_settings_preference_title"
             android:icon="@drawable/ic_homepage_emergency"
-            android:featureFlag="com.android.settings.flags.deeplink_others_25q4"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.settings.EMERGENCY_SETTINGS" />
