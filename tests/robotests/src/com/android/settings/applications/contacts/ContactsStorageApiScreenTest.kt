@@ -28,8 +28,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class ContactsStorageScreenApiTest {
-    private val tester = ApiTester(ContactsStorageScreenApi())
+class ContactsStorageApiScreenTest {
+    private val tester = ApiTester(ContactsStorageApiScreen())
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     @Test
