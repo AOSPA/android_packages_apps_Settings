@@ -67,6 +67,7 @@ import com.android.settings.datausage.BillingCycleScreen
 import com.android.settings.datausage.DataSaverScreen
 import com.android.settings.datausage.DataUsageAppDetailScreen
 import com.android.settings.datausage.DataUsageListScreen
+import com.android.settings.datausage.UnrestrictedDataAccessApiScreen
 import com.android.settings.datetime.DateTimeSettingsScreen
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoScreen
 import com.android.settings.deviceinfo.batteryinfo.BatteryInfoApiScreen
@@ -482,6 +483,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = UserSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PrintSettingsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UsbDetailsApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = UnrestrictedDataAccessApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AccountSecuritySubpageScreenApi.KEY),
     )
 
