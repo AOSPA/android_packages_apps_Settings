@@ -22,6 +22,7 @@ import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
+// LINT.IfChange
 public class CaptioningPreferenceController extends BasePreferenceController {
 
     public CaptioningPreferenceController(Context context, String preferenceKey) {
@@ -41,3 +42,4 @@ public class CaptioningPreferenceController extends BasePreferenceController {
                 R.string.show_captions_disabled);
     }
 }
+// LINT.ThenChange(captionpreferences/ui/CaptioningPropertiesScreen.kt)
