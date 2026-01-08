@@ -43,6 +43,8 @@ import com.android.settings.accessibility.VibrationSettings;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.specialaccess.SpecialAccessSettings;
 import com.android.settings.applications.specialaccess.SpecialAccessSettingsScreen;
+import com.android.settings.backup.AccountsAndBackupDashboardFragment;
+import com.android.settings.backup.AccountsAndBackupScreen;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.communal.CommunalPreferenceController;
 import com.android.settings.core.SubSettingLauncher;
@@ -661,6 +663,11 @@ public class Settings extends SettingsActivity {
     public static class PowerUsageAdvancedActivity extends SettingsActivity { /* empty */ }
     public static class StorageDashboardActivity extends SettingsActivity {}
     public static class AccountDashboardActivity extends SettingsActivity {}
+    public static class AccountsAndBackupDashboardActivity extends CatalystSettingsActivity {
+        public AccountsAndBackupDashboardActivity() {
+            super(AccountsAndBackupScreen.KEY, AccountsAndBackupDashboardFragment.class);
+        }
+    }
     public static class EmergencyDashboardActivity extends CatalystSettingsActivity {
         public EmergencyDashboardActivity() {
             super(EmergencyDashboardScreen.KEY, EmergencyDashboardFragment.class);

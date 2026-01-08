@@ -29,7 +29,6 @@ import static com.android.internal.accessibility.common.ShortcutConstants.UserSh
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
@@ -75,7 +74,6 @@ public final class AccessibilityUtil {
             SOFTWARE, // FAB displays before gesture. Navbar displays without gesture.
             GESTURE,
             HARDWARE,
-            TWOFINGER_DOUBLETAP,
             TRIPLETAP
     };
     // LINT.ThenChange(/src/com/android/settings/accessibility/shortcuts/ui/EditShortcutsScreen.kt:shortcut_type_ui_order)
@@ -296,11 +294,6 @@ public final class AccessibilityUtil {
         final List<CharSequence> list = new ArrayList<>();
 
         for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
-            if (!com.android.server.accessibility.Flags
-                    .enableMagnificationMultipleFingerMultipleTapGesture()) {
-                shortcutTypes = removeTypeFromShortcutTypes(shortcutTypes, TWOFINGER_DOUBLETAP);
-            }
-
             if (!isKeyboardShortcutSettingAvailable()) {
                 shortcutTypes = removeTypeFromShortcutTypes(shortcutTypes, KEY_GESTURE);
             }
@@ -315,8 +308,6 @@ public final class AccessibilityUtil {
                             R.string.accessibility_shortcut_edit_summary_software_gesture);
                     case HARDWARE -> context.getText(
                             R.string.accessibility_shortcut_hardware_keyword);
-                    case TWOFINGER_DOUBLETAP -> context.getString(
-                            R.string.accessibility_shortcut_two_finger_double_tap_keyword, 2);
                     case TRIPLETAP -> context.getText(
                             R.string.accessibility_shortcut_triple_tap_keyword);
                     case KEY_GESTURE -> context.getText(

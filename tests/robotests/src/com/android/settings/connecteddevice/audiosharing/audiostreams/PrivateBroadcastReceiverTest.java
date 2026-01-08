@@ -97,8 +97,7 @@ public class PrivateBroadcastReceiverTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
-            Flags.FLAG_AUDIO_STREAM_MEDIA_SERVICE_BY_RECEIVE_STATE})
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void receiveDataNotValid_doNothing() {
         Intent intent = new Intent(ACTION_LE_AUDIO_PRIVATE_BROADCAST_RECEIVED);
         intent.putExtra(EXTRA_PRIVATE_BROADCAST_RECEIVE_DATA,
@@ -112,8 +111,7 @@ public class PrivateBroadcastReceiverTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
-            Flags.FLAG_AUDIO_STREAM_MEDIA_SERVICE_BY_RECEIVE_STATE})
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void receiveDataValid_startService() {
         Intent intent = new Intent(ACTION_LE_AUDIO_PRIVATE_BROADCAST_RECEIVED);
         intent.putExtra(EXTRA_PRIVATE_BROADCAST_RECEIVE_DATA,

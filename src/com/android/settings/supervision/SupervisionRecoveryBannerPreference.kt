@@ -25,6 +25,10 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
+import com.android.settings.supervision.credentialmanagement.SupervisionPinRecoveryActivity
+import com.android.settings.supervision.shared.isSupervisingCredentialSet
+import com.android.settings.supervision.shared.shouldDisplayPinRecoveryReminders
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider

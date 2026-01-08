@@ -29,8 +29,8 @@ import com.android.settings.R
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE
 import com.android.settings.flags.Flags.FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE
-import com.android.settings.supervision.SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION
 import com.android.settings.supervision.ipc.SupervisionMessengerClient.Companion.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
+import com.android.settings.supervision.shared.SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before

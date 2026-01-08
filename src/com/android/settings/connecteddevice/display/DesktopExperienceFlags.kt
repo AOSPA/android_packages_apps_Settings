@@ -33,26 +33,6 @@ class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) :
     override fun displayTopologyPaneInDisplayList(): Boolean =
         displayTopologyPaneInDisplayListFlag.isTrue
 
-    private val displaySizeConnectedDisplaySettingFlag =
-        DesktopExperienceFlag(
-            featureFlagsImpl::displaySizeConnectedDisplaySetting,
-            /* shouldOverrideByDevOption= */ true,
-            Flags.FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING,
-        )
-
-    override fun displaySizeConnectedDisplaySetting(): Boolean =
-        displaySizeConnectedDisplaySettingFlag.isTrue
-
-    private val showStackedMirroringDisplayConnectedDisplaySettingFlag =
-        DesktopExperienceFlag(
-            featureFlagsImpl::showStackedMirroringDisplayConnectedDisplaySetting,
-            /* shouldOverrideByDevOption= */ true,
-            Flags.FLAG_SHOW_STACKED_MIRRORING_DISPLAY_CONNECTED_DISPLAY_SETTING,
-        )
-
-    override fun showStackedMirroringDisplayConnectedDisplaySetting(): Boolean =
-        showStackedMirroringDisplayConnectedDisplaySettingFlag.isTrue
-
     private val showTabbedConnectedDisplaySettingFlag =
         DesktopExperienceFlag(
             featureFlagsImpl::showTabbedConnectedDisplaySetting,

@@ -21,7 +21,7 @@ import android.util.Log
 import androidx.core.content.edit
 import com.android.settings.supervision.PreferenceDataProvider
 import com.android.settings.supervision.SupportedAppsProvider
-import com.android.settings.supervision.systemSupervisionPackageName
+import com.android.settings.supervision.shared.systemSupervisionPackageName
 import com.android.settingslib.ipc.MessengerServiceClient
 import com.android.settingslib.supervision.SupervisionLog
 import org.json.JSONException

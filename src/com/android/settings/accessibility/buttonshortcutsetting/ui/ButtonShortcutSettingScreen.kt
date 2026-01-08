@@ -24,13 +24,16 @@ import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityButtonFragment
 import com.android.settings.accessibility.Flags
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
+/** Provides the preference screen for the Accessibility Button shortcut settings. */
 @ProvidePreferenceScreen(ButtonShortcutSettingScreen.KEY)
-open class ButtonShortcutSettingScreen : PreferenceScreenMixin, PreferenceSummaryProvider {
+open class ButtonShortcutSettingScreen :
+    PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceIndexableProvider {
     override val title: Int
         get() = R.string.accessibility_button_title
 
@@ -43,7 +46,15 @@ open class ButtonShortcutSettingScreen : PreferenceScreenMixin, PreferenceSummar
     override fun fragmentClass() = AccessibilityButtonFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) {
+            +ButtonShortcutTopIntroPreference()
+            +ButtonShortcutIllustrationPreference()
+            +ButtonLocationPreference(context)
+            +ButtonSizePreference(context)
+            +FloatingMenuFadePreference()
+            +FloatingMenuTransparencyPreference(context)
+            +ButtonShortcutSettingFooterPreference()
+        }
 
     override val key: String
         get() = KEY
@@ -58,6 +69,10 @@ open class ButtonShortcutSettingScreen : PreferenceScreenMixin, PreferenceSummar
             .getSystemService(AccessibilityManager::class.java)
             ?.getAccessibilityShortcutTargets(ShortcutConstants.UserShortcutType.SOFTWARE)
             ?.isNotEmpty() ?: false
+    }
+
+    override fun isIndexable(context: Context): Boolean {
+        return isEnabled(context)
     }
 
     override fun getSummary(context: Context): CharSequence? =

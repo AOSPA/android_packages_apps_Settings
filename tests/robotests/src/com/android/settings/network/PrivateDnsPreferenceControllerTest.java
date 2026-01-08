@@ -28,6 +28,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+import static com.android.settings.testutils.DevicePolicyUtils.DPC_ADMIN;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -44,6 +45,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.withSettings;
 
+import android.app.admin.PolicyEnforcementInfo;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -55,6 +57,9 @@ import android.net.Network;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -67,6 +72,7 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -91,6 +97,9 @@ import java.util.List;
     ShadowDevicePolicyManager.class
 })
 public class PrivateDnsPreferenceControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private final static String HOSTNAME = "dns.example.com";
     private final static List<InetAddress> NON_EMPTY_ADDRESS_LIST;
@@ -121,7 +130,6 @@ public class PrivateDnsPreferenceControllerTest {
     private ShadowContentResolver mShadowContentResolver;
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
-    private ShadowUserManager mShadowUserManager;
 
     @Before
     public void setUp() {
@@ -142,8 +150,6 @@ public class PrivateDnsPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mLifecycle.addObserver(mController);
-
-        mShadowUserManager = ShadowUserManager.getShadow();
     }
 
     private void updateLinkProperties(LinkProperties lp) {
@@ -294,14 +300,26 @@ public class PrivateDnsPreferenceControllerTest {
                 com.android.settingslib.R.string.private_dns_mode_opportunistic));
     }
 
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     @Test
     public void isEnabled_canBeDisabledByAdmin() {
+        ShadowDevicePolicyManager.getShadow().setPolicyEnforcementInfoForUserRestriction(
+                UserManager.DISALLOW_CONFIG_PRIVATE_DNS,
+                new PolicyEnforcementInfo(List.of(DPC_ADMIN)));
+
+        mController.updateState(mPreference);
+        verify(mPreference).setEnabled(false);
+    }
+
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @Test
+    public void isEnabled_canBeDisabledByAdmin_refactorDisabled() {
         final int userId = UserHandle.myUserId();
         final List<UserManager.EnforcingUser> enforcingUsers = Collections.singletonList(
                 new UserManager.EnforcingUser(userId,
                         UserManager.RESTRICTION_SOURCE_DEVICE_OWNER)
         );
-        mShadowUserManager.setUserRestrictionSources(
+        ShadowUserManager.getShadow().setUserRestrictionSources(
                 UserManager.DISALLOW_CONFIG_PRIVATE_DNS,
                 UserHandle.of(userId),
                 enforcingUsers);

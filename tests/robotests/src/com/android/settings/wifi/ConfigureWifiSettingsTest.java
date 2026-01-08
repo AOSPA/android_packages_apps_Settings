@@ -2,7 +2,6 @@ package com.android.settings.wifi;
 
 import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
 
-import static com.android.settings.flags.Flags.FLAG_CATALYST_CONFIGURE_NETWORK_SETTINGS;
 import static com.android.settings.wifi.ConfigureWifiSettings.KEY_INSTALL_CREDENTIALS;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -29,8 +28,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
@@ -79,7 +80,6 @@ public class ConfigureWifiSettingsTest {
 
     @Before
     public void setUp() {
-        mSetFlagsRule.disableFlags(FLAG_CATALYST_CONFIGURE_NETWORK_SETTINGS);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mUserManager.isGuestUser()).thenReturn(false);
         when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
@@ -93,8 +93,10 @@ public class ConfigureWifiSettingsTest {
     }
 
     @Test
+    @Config(shadows = SettingsShadowResources.class)
     public void onAttach_isNotGuestUser_setupController() {
         when(mUserManager.isGuestUser()).thenReturn(false);
+        SettingsShadowResources.overrideResource(R.bool.config_show_wifi_settings, false);
 
         mSettings.onAttach(mContext);
 
@@ -160,7 +162,7 @@ public class ConfigureWifiSettingsTest {
     @Config(qualifiers = "mcc999")
     public void getNonIndexableKeys_ifPageDisabled_shouldNotIndexResource() {
         final List<String> niks =
-            ConfigureWifiSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+                ConfigureWifiSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
         final int xmlId = mSettings.getPreferenceScreenResId();
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);

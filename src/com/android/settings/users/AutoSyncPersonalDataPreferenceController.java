@@ -26,11 +26,19 @@ public class AutoSyncPersonalDataPreferenceController extends AutoSyncDataPrefer
 
     public AutoSyncPersonalDataPreferenceController(Context context,
             PreferenceFragmentCompat parent) {
-        super(context, parent);
+        this(context, parent, /* forceDisable */ false);
+    }
+
+    public AutoSyncPersonalDataPreferenceController(Context context,
+            PreferenceFragmentCompat parent, boolean forceDisable) {
+        super(context, parent, forceDisable);
     }
 
     @Override
     public boolean isAvailable() {
+        if (mForceDisable) {
+            return false;
+        }
         return !mUserManager.isManagedProfile() && !mUserManager.isLinkedUser()
                 && mUserManager.getProfiles(UserHandle.myUserId()).size() > 1;
     }

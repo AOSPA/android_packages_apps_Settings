@@ -27,7 +27,6 @@ import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoi
 import com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard
 import com.android.settings.accessibility.shared.ui.FeedbackButtonPreference
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -53,11 +52,8 @@ abstract class BaseTextReadingScreen : PreferenceScreenMixin {
     override val indexable
         get() = false
 
-    override fun isFlagEnabled(context: Context) = Flags.catalystTextReadingScreen()
-
     override fun fragmentClass(): Class<out Fragment>? = TextReadingPreferenceFragment::class.java
 
-    // LINT.IfChange(ui_hierarchy)
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             val fontSizePreference = FontSizePreference(context, entryPoint)
@@ -76,14 +72,18 @@ abstract class BaseTextReadingScreen : PreferenceScreenMixin {
                     +fontSizePreference
                     +displaySizePreference
                 }
-            +PreferenceCategory(key = "text_style", purpose = R.string.text_style_purpose, title = R.string.category_title_text_style) += {
-                +BoldTextPreference(context, entryPoint)
-                +OutlineTextPreference(context, entryPoint)
-            }
+            +PreferenceCategory(
+                key = "text_style",
+                purpose = R.string.text_style_purpose,
+                title = R.string.category_title_text_style,
+            ) +=
+                {
+                    +BoldTextPreference(context, entryPoint)
+                    +OutlineTextPreference(context, entryPoint)
+                }
             +ResetPreference(entryPoint)
             +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
         }
-    // LINT.ThenChange()
 }
 
 @ProvidePreferenceScreen(TextReadingScreen.KEY)

@@ -41,7 +41,8 @@ class ButtonShortcutSettingScreenTest : SettingsCatalystTestCase() {
         Shadow.extract(appContext.getSystemService(AccessibilityManager::class.java))
 
     override fun migration() {
-        // Temporarily skip the #migration test. Will enable it once the entire screen is migrated
+        shadowA11yManager.setAccessibilityShortcutTargets(SOFTWARE, listOf("Foo"))
+        super.migration()
     }
 
     @Test
@@ -84,6 +85,20 @@ class ButtonShortcutSettingScreenTest : SettingsCatalystTestCase() {
         shadowA11yManager.setAccessibilityShortcutTargets(SOFTWARE, emptyList())
 
         assertThat(preferenceScreenCreator.isEnabled(appContext)).isEqualTo(false)
+    }
+
+    @Test
+    fun isIndexable_hasButtonShortcutTargets_returnTrue() {
+        shadowA11yManager.setAccessibilityShortcutTargets(SOFTWARE, listOf("Foo"))
+
+        assertThat(preferenceScreenCreator.isIndexable(appContext)).isEqualTo(true)
+    }
+
+    @Test
+    fun isIndexable_noButtonShortcutTargetsAssigned_returnFalse() {
+        shadowA11yManager.setAccessibilityShortcutTargets(SOFTWARE, emptyList())
+
+        assertThat(preferenceScreenCreator.isIndexable(appContext)).isEqualTo(false)
     }
 
     @Test

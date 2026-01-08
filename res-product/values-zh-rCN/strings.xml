@@ -49,6 +49,10 @@
     <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="505214056751470551">"某个应用请求开启蓝牙，以便其他设备可检测到您的平板电脑。您可以稍后在“蓝牙”设置中更改此设置。"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="6187216564831513193">"某个应用请求开启蓝牙，以便其他设备可检测到您的手机。您可以稍后在“蓝牙”设置中更改此设置。"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="desktop" msgid="1296067140931944135">"某个应用想要开启蓝牙，并让其他设备可检测到此设备。您之后可以在“蓝牙”设置中更改此设置。"</string>
+    <string name="bluetooth_hearing_device_input_routing_builtin_option" product="default" msgid="604940407490893699">"此手机的麦克风"</string>
+    <string name="bluetooth_hearing_device_input_routing_builtin_option" product="desktop" msgid="899174913125357494">"此设备的麦克风"</string>
+    <string name="bluetooth_audio_routing_summary" product="default" msgid="7087659154407454242">"将声音发送到助听装置或手机扬声器"</string>
+    <string name="bluetooth_audio_routing_summary" product="desktop" msgid="4537882886747949240">"将声音发送到助听装置或设备扬声器"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="3741475436042800617">"手机已加密"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="2220021007677215054">"设备已加密"</string>
     <string name="encryption_and_credential_settings_summary" product="desktop" msgid="2220021007677215054">"设备已加密"</string>
@@ -123,6 +127,26 @@
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="6983939010814873996"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="6983939010814873996"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="desktop" msgid="6983939010814873996"></string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" product="default" msgid="8906620058505772369">"请使用您的面孔解锁手机或批准购买交易。\n\n注意：您无法使用面孔来解锁此设备。要了解详情，请与您所在组织的管理员联系。"</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" product="desktop" msgid="8527453843561896568">"请使用您的面孔解锁设备或批准购买交易。\n\n注意：您无法使用面孔来解锁此设备。要了解详情，请与您所在组织的管理员联系。"</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" product="default" msgid="5667326364825190475">"使用您的面孔解锁手机、授权购买交易或登录应用"</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" product="desktop" msgid="8153291564425666563">"使用您的面孔解锁设备、授权购买交易或登录应用"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" product="default" msgid="827881183869443564">"请删除您当前的脸部模型以重新设置人脸解锁。\n\n系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁手机或在应用内进行身份验证，您将需要使用 PIN 码、解锁图案或密码。"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" product="desktop" msgid="5610667230794771663">"请删除您当前的脸部模型以重新设置人脸解锁。\n\n系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁设备或在应用内进行身份验证，您将需要使用 PIN 码、解锁图案或密码。"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" product="default" msgid="657898108282284896">"请删除您当前的脸部模型以重新设置人脸解锁。\n\n系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁手机或在应用内进行身份验证，您将需要使用指纹、PIN 码、解锁图案或密码。"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" product="desktop" msgid="6944214629283384636">"请删除您当前的脸部模型以重新设置人脸解锁。\n\n系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁设备或在应用内进行身份验证，您将需要使用指纹、PIN 码、解锁图案或密码。"</string>
+    <string name="security_settings_face_settings_require_attention_details" product="default" msgid="9055569538299306139">"必须睁开双眼才能解锁手机"</string>
+    <string name="security_settings_face_settings_require_attention_details" product="desktop" msgid="6708465338217767003">"必须睁开双眼才能解锁设备"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" product="default" msgid="631912351020557148">"系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁手机或在应用内进行身份验证，您将需要使用 PIN 码、解锁图案或密码。"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" product="desktop" msgid="6371830907687898599">"系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁设备或在应用内进行身份验证，您将需要使用 PIN 码、解锁图案或密码。"</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" product="default" msgid="4067458308624865583">"系统会妥善地将您的脸部模型永久删除。\n\n脸部模型删除后，您需要使用 PIN 码、解锁图案或密码来解锁手机。"</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" product="desktop" msgid="8773532142993444478">"系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁设备，您将需要使用 PIN 码、解锁图案或密码。"</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint" product="default" msgid="3697170798827306695">"系统会安全地永久删除您的脸部模型。\n\n删除后，如需解锁手机或在应用内验证身份，您将需要使用指纹、PIN 码、解锁图案或密码。"</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint" product="desktop" msgid="540277269419613514">"系统会安全地永久删除您的脸部模型。\n\n删除后，如需解锁设备或在应用内验证身份，您将需要使用指纹、PIN 码、解锁图案或密码。"</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint_conv" product="default" msgid="7229672458856399521">"系统会安全地永久删除您的脸部模型。\n\n删除后，如需解锁手机，您将需要使用指纹、PIN 码、解锁图案或密码。"</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint_conv" product="desktop" msgid="2106529501669220799">"系统会安全地永久删除您的脸部模型。\n\n删除后，如需解锁设备，您将需要使用指纹、PIN 码、解锁图案或密码。"</string>
+    <string name="security_settings_face_settings_context_subtitle" product="default" msgid="1322898999413079369">"使用人脸解锁功能解锁手机"</string>
+    <string name="security_settings_face_settings_context_subtitle" product="desktop" msgid="8193725713604149575">"使用人脸解锁功能解锁设备"</string>
     <string name="security_settings_face_settings_footer" product="default" msgid="3036403896485044957">"您可以通过刷脸来解锁手机或在应用内验证自己的身份，以便登录应用或批准购买交易等。\n\n注意：\n同一时间只能设置有 1 张脸。如需添加其他人脸，请先删除当前的人脸。\n\n目视手机可能会让手机在您并未要求的情况下解锁。\n\n如果有人将手机对准您的脸，手机可能会解锁。\n\n长相与您非常相似的人（例如孪生兄弟姐妹）可能也能解锁您的手机。"</string>
     <string name="security_settings_face_settings_footer" product="tablet" msgid="3467711032275909082">"您可以通过刷脸来解锁平板电脑或在应用内验证身份，以便登录应用或批准购买交易等。\n\n注意：\n同一时间只能设置有 1 张脸。如需添加其他人脸，请先删除当前的人脸。\n\n目视平板电脑可能会让平板电脑在您并未要求的情况下解锁。\n\n如果有人将平板电脑对准您的脸，平板电脑可能会解锁。\n\n长相与您非常相似的人（例如孪生兄弟姐妹）可能也能解锁您的平板电脑。"</string>
     <string name="security_settings_face_settings_footer" product="device" msgid="6237815625247917310">"您可以通过刷脸来解锁设备或在应用内验证身份，以便登录应用或批准购买交易等。\n\n注意：\n同一时间只能设置有 1 张脸。如需添加其他人脸，请先删除当前的人脸。\n\n目视设备可能会让设备在您并未要求的情况下解锁。\n\n如果有人将设备对准您的脸，设备可能会解锁。\n\n长相与您非常相似的人（例如孪生兄弟姐妹）可能也能解锁您的设备。"</string>
@@ -176,10 +200,96 @@
     <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="7398339851724524558">"您可以使用指纹来解锁设备或验证身份，以便登录应用或执行其他操作"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="5376408603508393038">"您可以使用指纹来解锁手机或验证身份，以便登录应用或执行其他操作"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="desktop" msgid="7398339851724524558">"您可以使用指纹来解锁设备或验证身份，以便登录应用或执行其他操作"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" product="default" msgid="8536395298073746085">"使用指纹解锁手机或批准购买交易。\n\n注意：您无法使用指纹来解锁此设备。如要了解详情，请与贵组织的管理员联系。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" product="desktop" msgid="1449873608291132102">"使用指纹解锁设备或批准购买交易。\n\n注意：您无法使用指纹来解锁此设备。如要了解详情，请与贵组织的管理员联系。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_message" product="default" msgid="548895260855476885">"使用“手表解锁”功能解锁此手机也很便捷。例如，当您的手指潮湿或设备未能识别出您的面孔时，此功能就非常有用。\n\n您可以通过以下方式使用手表解锁此手机："</string>
+    <string name="security_settings_remoteauth_enroll_introduction_message" product="desktop" msgid="6975912914017982596">"使用“手表解锁”功能解锁此设备也很便捷。例如，当您的手指潮湿或设备未能识别出您的面孔时，此功能就非常有用。\n\n您可以通过以下方式使用手表解锁此设备："</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_lock_open" product="default" msgid="5036235531555790028">"手表必须戴在手腕上、处于解锁状态且靠近此手机。只要手表戴在手腕上，您就不必再次解锁手表。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_lock_open" product="desktop" msgid="4379534816294081846">"手表必须戴在手腕上、处于解锁状态且靠近此设备。只要手表戴在手腕上，您就不必再次解锁手表。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" product="default" msgid="8236871030056883849">"此手机解锁时，手表上会显示通知。如果误解锁，只需点按通知即可再次锁定手机。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" product="desktop" msgid="1186235463250896267">"此设备解锁时，手表上会显示通知。如果误解锁，只需点按通知即可再次锁定设备。"</string>
+    <string name="security_settings_remoteauth_enroll_finish_description" product="default" msgid="553477510982159386">"现在，只需在锁定的屏幕上向上滑动或点按通知，即可使用手表解锁此手机"</string>
+    <string name="security_settings_remoteauth_enroll_finish_description" product="desktop" msgid="7745250450395684994">"现在，只需在锁定的屏幕上向上滑动或点按通知，即可使用手表解锁此设备"</string>
+    <string name="security_settings_remoteauth_settings_description" product="default" msgid="507676718189793752">"只需在锁定的屏幕上向上滑动或点按通知，即可使用手表解锁此手机"</string>
+    <string name="security_settings_remoteauth_settings_description" product="desktop" msgid="4266751960630500666">"只需在锁定的屏幕上向上滑动或点按通知，即可使用手表解锁此设备"</string>
+    <string name="security_settings_remoteauth_settings_info_footer" product="default" msgid="7176165099467997157">"如要使用“手表解锁\"功能，手表必须戴在手腕上、处于解锁状态、连接到此手机并位于其附近。如果连接中断，您需要先解锁此手机才能使用“手表解锁”功能。\n\n注意事项：\n一次只能设置一块手表。如要添加其他手表，请先移除当前的手表。"</string>
+    <string name="security_settings_remoteauth_settings_info_footer" product="desktop" msgid="4888346924492807836">"如要使用“手表解锁”功能，手表必须戴在手腕上、处于解锁状态、连接到此设备并位于其附近。如果连接中断，您需要先解锁此设备才能使用“手表解锁”功能。\n\n注意事项：\n一次只能设置一块手表。如要添加其他手表，请先移除当前的手表。"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="9034560319613439593">"请将平板电脑交回给家长"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="2149647165743006307">"请将设备交回给家长"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="2060265104488529949">"请将手机交回给您的家长"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="desktop" msgid="2149647165743006307">"请将设备交回给家长"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="8858463763101227881">"设置人脸解锁和指纹解锁后，如果您戴着口罩或所在位置光线较暗，手机会要求您使用指纹解锁。\n\n手表解锁是解锁手机的另一种便捷方式。例如，当您的手指潮湿或设备未能识别出您的面孔时，手表解锁将非常有用。"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="desktop" msgid="5820941581053148013">"设置人脸解锁和指纹解锁后，如果您戴着口罩或所在位置光线较暗，设备会要求您使用指纹解锁。\n\n手表解锁是解锁设备的另一种便捷方式。例如，当您的手指潮湿或设备未能识别出您的面孔时，手表解锁将非常有用。"</string>
+    <string name="biometric_settings_intro_with_fingerprint" product="default" msgid="7057949977059277103">"手表解锁是解锁手机的另一种便捷方式。例如，当设备未能识别出您的指纹时，手表解锁将非常有用。"</string>
+    <string name="biometric_settings_intro_with_fingerprint" product="desktop" msgid="3405074735777726953">"手表解锁是解锁设备的另一种便捷方式。例如，当设备未能识别出您的指纹时，手表解锁将非常有用。"</string>
+    <string name="biometric_settings_intro_with_face" product="default" msgid="2726655588847229283">"手表解锁是解锁手机的另一种便捷方式。例如，当设备未能识别出您的面孔时，手表解锁将非常有用。"</string>
+    <string name="biometric_settings_intro_with_face" product="desktop" msgid="1265319569297304712">"手表解锁是解锁设备的另一种便捷方式。例如，当设备未能识别出您的面孔时，手表解锁将非常有用。"</string>
+    <string name="biometric_settings_intro" product="default" msgid="1110080686857635531">"设置人脸解锁和指纹解锁后，如果您戴着口罩或所在位置光线较暗，手机会要求您使用指纹解锁"</string>
+    <string name="biometric_settings_intro" product="desktop" msgid="8796499771937952128">"设置人脸解锁和指纹解锁后，如果您戴着口罩或所在位置光线较暗，设备会要求您使用指纹解锁"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" product="default" msgid="3409316849691305012">"解锁手机"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" product="desktop" msgid="6393832544950099600">"解锁设备"</string>
+    <string name="setup_fingerprint_enroll_enrolling_skip_message" product="default" msgid="4979485905634049022">"您已选择使用指纹作为解锁手机的方式之一。如果现在跳过，则需要在以后完成设置。设置过程只需大约一分钟时间。"</string>
+    <string name="setup_fingerprint_enroll_enrolling_skip_message" product="desktop" msgid="2601670958752026992">"您已选择使用指纹作为解锁设备的方式之一。如果现在跳过，则需要在以后完成设置。设置过程只需大约一分钟时间。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" product="default" msgid="5070116742207378028">"手机丢失或被盗时，解锁图案可以保护其中的数据"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" product="desktop" msgid="3828076488822985960">"设备丢失或被盗时，解锁图案可以保护其中的数据"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" product="default" msgid="7919767908076245408">"手机丢失或被盗时，解锁图案可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>这样做也会删除您的设备上存储的指纹模型。您将无法在应用内使用指纹验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" product="desktop" msgid="9116397340044675886">"设备丢失或被盗时，解锁图案可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>这样做也会删除您的设备上存储的指纹模型。您将无法在应用内使用指纹验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face" product="default" msgid="37951657146319620">"手机丢失或被盗时，解锁图案可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>系统也会妥善地将您的脸部模型永久删除。您将无法在应用内使用面部验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face" product="desktop" msgid="5949258661260705528">"设备丢失或被盗时，解锁图案可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>系统也会妥善地将您的脸部模型永久删除。您将无法在应用内使用面部验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" product="default" msgid="2099587344025095004">"手机丢失或被盗时，解锁图案可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>这样做会删除您的设备上存储的指纹模型。系统也会妥善地将您的脸部模型永久删除。您将无法在应用内使用面部或指纹验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" product="desktop" msgid="1894841959198314076">"设备丢失或被盗时，解锁图案可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>这样做会删除您的设备上存储的指纹模型。系统也会妥善地将您的脸部模型永久删除。您将无法在应用内使用面部或指纹验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_pin" product="default" msgid="4884453290870316484">"手机丢失或被盗时，PIN 码可以保护其中的数据"</string>
+    <string name="unlock_disable_frp_warning_content_pin" product="desktop" msgid="2069572855122085869">"设备丢失或被盗时，PIN 码可以保护其中的数据"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" product="default" msgid="2874913409506418991">"手机丢失或被盗时，PIN 码可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>这样做也会删除您的设备上存储的指纹模型。您将无法在应用内使用指纹验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" product="desktop" msgid="6361691886708081331">"设备丢失或被盗时，PIN 码可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>这样做也会删除您的设备上存储的指纹模型。您将无法在应用内使用指纹验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_pin_face" product="default" msgid="263465132877970450">"手机丢失或被盗时，PIN 码可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>系统也会妥善地将您的脸部模型永久删除。您将无法在应用内使用面部验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_pin_face" product="desktop" msgid="1495988088469298632">"设备丢失或被盗时，PIN 码可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>系统也会妥善地将您的脸部模型永久删除。您将无法在应用内使用面部验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" product="default" msgid="476636556062520667">"手机丢失或被盗时，PIN 码可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>这样做会删除您的设备上存储的指纹模型。系统也会妥善地将您的脸部模型永久删除。您将无法在应用内使用面部或指纹验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" product="desktop" msgid="6813575631983953707">"设备丢失或被盗时，PIN 码可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>这样做会删除您的设备上存储的指纹模型。系统也会妥善地将您的脸部模型永久删除。您将无法在应用内使用面部或指纹验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_password" product="default" msgid="1127164258200398958">"手机丢失或被盗时，密码可以保护其中的数据"</string>
+    <string name="unlock_disable_frp_warning_content_password" product="desktop" msgid="8367036366524786060">"设备丢失或被盗时，密码可以保护其中的数据"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" product="default" msgid="4593407083619543775">"手机丢失或被盗时，密码可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>这样做也会删除您的设备上存储的指纹模型。您将无法在应用内使用指纹验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" product="desktop" msgid="1659299201470069003">"设备丢失或被盗时，密码可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>这样做也会删除您的设备上存储的指纹模型。您将无法在应用内使用指纹验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_password_face" product="default" msgid="2765003117110694527">"手机丢失或被盗时，密码可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>系统也会妥善地将您的脸部模型永久删除。您将无法在应用内使用面部验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_password_face" product="desktop" msgid="912428236263888131">"设备丢失或被盗时，密码可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>系统也会妥善地将您的脸部模型永久删除。您将无法在应用内使用面部验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint" product="default" msgid="5660327560346083891">"手机丢失或被盗时，密码可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>这样做会删除您的设备上存储的指纹模型。系统也会妥善地将您的脸部模型永久删除。您将无法在应用内使用面部或指纹验证自己的身份。"</string>
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint" product="desktop" msgid="5615430301170627057">"设备丢失或被盗时，密码可以保护其中的数据。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>这样做会删除您的设备上存储的指纹模型。系统也会妥善地将您的脸部模型永久删除。您将无法在应用内使用面部或指纹验证自己的身份。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7526137517192538870">"系统将不会启用设备保护功能。如果您的平板电脑丢失、被盗或被重置，您将无法防止他人使用此平板电脑。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="1350434793163709209">"系统将不会启用设备保护功能。如果您的设备丢失、被盗或被重置，您将无法防止他人使用此设备。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="8367731653387033354">"系统将不会启用设备保护功能。如果您的手机丢失、被盗或被重置，您将无法防止他人使用此手机。"</string>
@@ -271,6 +381,8 @@
     <string name="encrypt_title" product="tablet" msgid="8915795247786124547">"加密平板电脑"</string>
     <string name="encrypt_title" product="default" msgid="511146128799853404">"加密手机"</string>
     <string name="encrypt_title" product="desktop" msgid="7536236095337188236">"加密设备"</string>
+    <string name="suggested_lock_settings_title" product="default" msgid="2717909185701554381">"保护手机安全"</string>
+    <string name="suggested_lock_settings_title" product="desktop" msgid="2170600598362998798">"保护设备安全"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="8821254377043173267">"设置屏幕锁定方式以保护平板电脑"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="4863929838844014122">"设置屏幕锁定方式以保护设备"</string>
     <string name="suggested_lock_settings_summary" product="default" msgid="8050809409337082738">"设置屏幕锁定方式以保护手机"</string>
@@ -310,6 +422,8 @@
     <string name="wifi_add_app_networks_summary" product="default" msgid="7014504084783236696">"<xliff:g id="APPNAME">%1$s</xliff:g>想将这些网络保存到您的手机"</string>
     <string name="wifi_add_app_networks_summary" product="tablet" msgid="6433255556506891439">"<xliff:g id="APPNAME">%1$s</xliff:g>想将这些网络保存到您的平板电脑"</string>
     <string name="wifi_add_app_networks_summary" product="desktop" msgid="4238956725252527159">"“<xliff:g id="APPNAME">%1$s</xliff:g>”想将这些网络保存到您的设备"</string>
+    <string name="wifi_hidden_network_warning" product="default" msgid="5069866459200615493">"如果您的路由器没有广播某个网络 ID，但是您想在以后连接到该网络，则可以将该网络设为隐藏。\n\n此设置可能会带来安全风险，因为您的手机会定期广播其信号以查找该网络。\n\n将网络设为隐藏将不会更改您的路由器设置。"</string>
+    <string name="wifi_hidden_network_warning" product="desktop" msgid="1145969827779463554">"如果您的路由器没有广播某个网络 ID，但是您想在以后连接到该网络，则可以将该网络设为隐藏。\n\n此设置可能会带来安全风险，因为您的设备会定期广播其信号以查找该网络。\n\n将网络设为隐藏将不会更改您的路由器设置。"</string>
     <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"变换手机持握方向时，自动调整为相应的竖屏或横屏模式"</string>
     <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"变换平板电脑持握方向时，自动调整为相应的竖屏或横屏模式"</string>
     <string name="auto_rotate_screen_summary" product="desktop" msgid="3805199344834364732">"变换设备持握方向时，自动调整为相应的竖屏或横屏模式"</string>
@@ -547,4 +661,52 @@
     <string name="audio_sharing_confirm_dialog_content_with_link" product="desktop" msgid="668964968208427465">"如要开始分享音频，请先将 LE 音频耳机连接到设备。"<annotation id="link">"详细了解兼容设备"</annotation></string>
     <string name="network_dashboard_summary_mobile" product="default" msgid="1856501121269595911">"移动网络、WLAN、热点"</string>
     <string name="network_dashboard_summary_mobile" product="desktop" msgid="8770767156162473221">"WLAN、移动网络、热点"</string>
+    <string name="top_intro_region_title" product="default" msgid="915184646302419632">"您所选择的区域会影响手机显示时间、日期、温度等信息的方式。"</string>
+    <string name="top_intro_region_title" product="desktop" msgid="4176286015398594299">"您所选择的区域会影响设备显示时间、日期、温度等信息的方式。"</string>
+    <string name="private_space_fingerprint_enroll_introduction_footer_message" product="default" msgid="5424764618312876122">"您的私密空间有可能会意外解锁，例如他人用手机去触碰您的手指。"</string>
+    <string name="private_space_fingerprint_enroll_introduction_footer_message" product="desktop" msgid="1777628194784795967">"您的私密空间有可能会意外解锁，例如他人用设备去触碰您的手指。"</string>
+    <string name="private_space_face_enroll_introduction_info_looking" product="default" msgid="305936839337361784">"目视手机可能会让私密空间意外解锁。长相与您非常相似的人（例如孪生兄弟姐妹）也可能会解锁您的私密空间。此外，如果有人将设备对准您的脸部，私密空间也可能会解锁。"</string>
+    <string name="private_space_face_enroll_introduction_info_looking" product="desktop" msgid="7384750093083248112">"目视设备可能会让私密空间意外解锁。长相与您非常相似的人（例如孪生兄弟姐妹）也可能会解锁您的私密空间。此外，如果有人将设备对准您的脸部，私密空间也可能会解锁。"</string>
+    <string name="private_space_face_settings_footer" product="default" msgid="212607111539219116">"您可以通过刷脸来解锁私密空间。\n\n请注意：\n一次只能设置 1 张面孔。如需添加另一张面孔，请先删除当前的面孔。\n\n目视手机可能会让手机意外解锁。\n\n如果有人将设备对准您的脸，您的私密空间可能也会解锁。\n\n长相与您非常相似的人（例如孪生兄弟姐妹）也可能会解锁您的私密空间。"</string>
+    <string name="private_space_face_settings_footer" product="desktop" msgid="5379113827824389147">"您可以通过刷脸来解锁私密空间。\n\n请注意：\n一次只能设置 1 张面孔。如需添加另一张面孔，请先删除当前的面孔。\n\n目视设备可能会让手机意外解锁。\n\n如果有人将设备对准您的脸，您的私密空间可能也会解锁。\n\n长相与您非常相似的人（例如孪生兄弟姐妹）也可能会解锁您的私密空间。"</string>
+    <string name="private_space_delete_summary" product="default" msgid="6731333342020734606">"私密空间将从您的设备上永久删除。\n\n您空间中的所有应用及其数据也将从手机的"<b>"内部存储空间"</b>"中永久删除。"</string>
+    <string name="private_space_delete_summary" product="desktop" msgid="2654261524341800235">"私密空间将从您的设备上永久删除。\n\n您空间中的所有应用及其数据也将从设备的"<b>"内部存储空间"</b>"中永久删除。"</string>
+    <string name="reset_private_space_delete_dialog" product="default" msgid="8929854517683078216">"设备上的私密空间（若有）将被永久删除，添加到您空间中的 Google 账号将被移除。\n\n您空间中的所有应用及其数据也将从手机的"<b>"内部存储空间"</b>"中永久删除。"</string>
+    <string name="reset_private_space_delete_dialog" product="desktop" msgid="212701183647817405">"设备上的私密空间（若有）将被永久删除，添加到您空间中的 Google 账号将被移除。\n\n您空间中的所有应用及其数据也将从设备的"<b>"内部存储空间"</b>"中永久删除。"</string>
+    <string name="style_suggestion_title" product="default" msgid="5542169058581069091">"自定义您的手机"</string>
+    <string name="style_suggestion_title" product="desktop" msgid="6633259602241390541">"自定义您的设备"</string>
+    <string name="storage_os_detail_dialog_system" product="default" msgid="900519793933569665">"这包括操作系统和确保手机顺畅运行所需的文件。为了保护这些文件的完整性，您无法访问它们。"</string>
+    <string name="storage_os_detail_dialog_system" product="desktop" msgid="6775876458851128896">"这包括操作系统和确保设备顺畅运行所需的文件。为了保护这些文件的完整性，您无法访问它们。"</string>
+    <string name="activity_not_found" product="default" msgid="6925342827420626978">"您的手机上未安装此应用。"</string>
+    <string name="activity_not_found" product="desktop" msgid="2440711947892938614">"您的设备中未安装此应用。"</string>
+    <string name="notification_listener_security_warning_summary" product="default" msgid="6430760593378501603">"“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”应用将能够读取所有通知（包括联系人姓名、照片和您收到的消息内容等个人信息），而且还能延后/关闭通知或触发通知中的按钮（包括接听来电）。\n\n该应用因此还能开启或关闭“勿扰”模式，并可以更改相关设置。"</string>
+    <string name="notification_listener_security_warning_summary" product="desktop" msgid="4220921495800674165">"“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”应用将能够读取所有通知（包括联系人姓名、照片和您收到的消息内容等个人信息），而且还能延后/关闭通知或触发通知中的按钮。\n\n该应用因此还能开启或关闭“勿扰”模式，并可以更改相关设置。"</string>
+    <string name="notif_type_ongoing_summary" product="default" msgid="4609736750050399900">"正在使用的应用、导航、通话等来源的实时通信内容"</string>
+    <string name="notif_type_ongoing_summary" product="desktop" msgid="2095885335561216334">"正在使用的应用、导航等来源的实时通信内容"</string>
+    <string name="usb_default_info" product="default" msgid="3102841746337088387">"当您的手机处于解锁状态且连接到其他设备时，系统就会应用这些设置。请只连接到可信设备。"</string>
+    <string name="usb_default_info" product="desktop" msgid="4425262755067415698">"当此设备处于解锁状态且连接到其他设备时，系统就会应用这些设置。请只连接到可信设备。"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" product="default" msgid="1632474961586870159">"如需开始设置此项，请将手机交给你的家长"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" product="desktop" msgid="7693039404410022862">"如需开始设置此项，请将设备交给你的家长"</string>
+    <string name="disabled_by_policy_parental_consent" product="default" msgid="3228137840263314415">"请将手机交给家长，让他们帮助你更改此设置。"</string>
+    <string name="disabled_by_policy_parental_consent" product="desktop" msgid="1779899136601893549">"请将设备交给家长，让他们帮助你更改此设置。"</string>
+    <string name="condition_zen_summary_phone_muted" product="default" msgid="1107174080067940534">"手机已设为静音"</string>
+    <string name="condition_zen_summary_phone_muted" product="desktop" msgid="3749597102905584774">"设备已设为静音"</string>
+    <string name="disabled_feature_reason_slow_down_phone" product="default" msgid="8659735491296581891">"由于此功能会导致您的手机速度变慢，因此系统已将其关闭"</string>
+    <string name="disabled_feature_reason_slow_down_phone" product="desktop" msgid="7800573784344580283">"由于此功能会导致您的设备速度变慢，因此系统已将其关闭"</string>
+    <string name="mobile_data_settings_summary_auto_switch" product="default" msgid="3598846878817104930">"手机会在进入信号覆盖范围时自动切换到此运营商"</string>
+    <string name="mobile_data_settings_summary_auto_switch" product="desktop" msgid="524891657197879512">"设备会在进入信号覆盖范围时自动切换到此运营商"</string>
+    <string name="thread_network_settings_footer_title" product="default" msgid="1317201778097436182">"Thread 有助于连接智能家居设备，从而提升效率和性能。\n\n启用此设置后，此手机就能加入 Thread 网络，并且可用于控制支持 Matter 的设备。"</string>
+    <string name="thread_network_settings_footer_title" product="desktop" msgid="2799861559795140920">"Thread 有助于连接智能家居设备，从而提升效率和性能。\n\n启用此设置后，此设备就能加入 Thread 网络，并且可用于控制支持 Matter 的设备。"</string>
+    <string name="bluetooth_connect_access_dialog_content" product="default" msgid="4057807008863531756">"“<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>”想连接到此手机。\n\n您之前没有连接过“<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>”。"</string>
+    <string name="bluetooth_connect_access_dialog_content" product="desktop" msgid="6980101860822297332">"“<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>”想连接到此设备。\n\n您之前没有连接过“<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>”。"</string>
+    <string name="bluetooth_details_permissions_sync_title" product="default" msgid="8409065081160402814">"从手机同步权限"</string>
+    <string name="bluetooth_details_permissions_sync_title" product="desktop" msgid="2734017312695525620">"从设备同步权限"</string>
+    <string name="bluetooth_details_permissions_sync_summary" product="default" msgid="8315177725634711706">"为手表授予您已在这部手机上授予的那些应用权限"</string>
+    <string name="bluetooth_details_permissions_sync_summary" product="desktop" msgid="6376301353616747859">"为手表授予您已在此设备上授予的那些应用权限"</string>
+    <string name="audio_sharing_comfirm_dialog_content" product="default" msgid="5014698176442588172">"如要开始分享音频，请先将 LE 音频耳机连接到手机"</string>
+    <string name="audio_sharing_comfirm_dialog_content" product="desktop" msgid="162861653770613243">"如要开始分享音频，请先将 LE 音频耳机连接到设备"</string>
+    <string name="supervision_web_content_filters_top_intro" product="default" msgid="4953123663358923689">"帮助滤除此手机上某些应用和浏览器中的露骨内容。露骨内容可能仍会在其他应用、设备或浏览器中显示。"</string>
+    <string name="supervision_web_content_filters_top_intro" product="desktop" msgid="9032662719049305184">"帮助滤除此设备上某些应用和浏览器中的露骨内容。露骨内容可能仍会在其他应用、设备或浏览器中显示。"</string>
+    <string name="dream_setup_description" product="default" msgid="8438386366154615008">"选择平板电脑插入基座时屏幕上显示的内容。使用屏保时，您的设备可能会比较耗电。"</string>
+    <string name="dream_setup_description" product="desktop" msgid="5397812906934631491">"选择设备插入基座时屏幕上显示的内容。使用屏保时，您的设备可能会比较耗电。"</string>
 </resources>

@@ -44,16 +44,6 @@ flag {
 }
 
 flag {
-  name: "extended_screenshots_exclude_nested_scrollables"
-  namespace: "systemui"
-  description: "Sets a flag on the main scrollable container to exclude any nested scrollable views as potential targets for extended screenshots."
-  bug: "399810823"
-  metadata {
-    purpose: PURPOSE_BUGFIX
-  }
-}
-
-flag {
   name: "three_finger_tap_app_launch"
   namespace: "android_settings"
   description: "Use three finger tap to open a custom app"

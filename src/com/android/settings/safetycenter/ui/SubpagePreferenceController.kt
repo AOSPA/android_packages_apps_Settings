@@ -20,6 +20,7 @@ import android.annotation.SuppressLint
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.permission.flags.Flags
 import android.safetycenter.SafetyCenterEntry
 import android.safetycenter.SafetyCenterIssue
@@ -92,9 +93,11 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
             return super.handlePreferenceTreeClick(preference)
         }
 
+        val args: Bundle = createSessionArgs(sessionId)
+        args.putAll(NavigationSource.SAFETY_CENTER.createArgs())
         SubSettingLauncher(mContext)
             .setDestination(preference.fragment)
-            .setArguments(createSessionArgs(sessionId))
+            .setArguments(args)
             .setSourceMetricsCategory(SettingsEnums.SAFETY_CENTER)
             .launch()
 

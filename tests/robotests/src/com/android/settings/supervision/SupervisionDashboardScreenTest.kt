@@ -44,6 +44,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.flags.Flags.FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE
 import com.android.settings.supervision.SupervisionMainSwitchPreference.Companion.REQUEST_CODE_CONFIRM_SUPERVISION_CREDENTIALS
+import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
@@ -347,10 +348,9 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onResume_registersListener() {
+    fun onResume_addsOnRoleHoldersChangedListener() {
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
         preferenceScreenCreator.onResume(mockLifeCycleContext)
-        verify(mockSupervisionManager).registerSupervisionListener(any())
         verify(mockRoleManager)
             .addOnRoleHoldersChangedListenerAsUser(
                 any<Executor>(),
@@ -361,14 +361,19 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onPause_unregistersListener() {
-        val supervisionListenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
+    fun onStart_registerSupervisionListener() {
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onStart(mockLifeCycleContext)
+        verify(mockSupervisionManager).registerSupervisionListener(any())
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onPause_removeOnRoleHoldersChangedListener() {
         val roleListenerCaptor = argumentCaptor<OnRoleHoldersChangedListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
         preferenceScreenCreator.onResume(mockLifeCycleContext)
-        verify(mockSupervisionManager)
-            .registerSupervisionListener(supervisionListenerCaptor.capture())
         verify(mockRoleManager)
             .addOnRoleHoldersChangedListenerAsUser(
                 any<Executor>(),
@@ -377,10 +382,23 @@ class SupervisionDashboardScreenTest {
             )
 
         preferenceScreenCreator.onPause(mockLifeCycleContext)
-        verify(mockSupervisionManager)
-            .unregisterSupervisionListener(supervisionListenerCaptor.firstValue)
         verify(mockRoleManager)
             .removeOnRoleHoldersChangedListenerAsUser(roleListenerCaptor.firstValue, UserHandle.ALL)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onStop_unregisterSupervisionListener() {
+        val supervisionListenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
+
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onStart(mockLifeCycleContext)
+        verify(mockSupervisionManager)
+            .registerSupervisionListener(supervisionListenerCaptor.capture())
+
+        preferenceScreenCreator.onStop(mockLifeCycleContext)
+        verify(mockSupervisionManager)
+            .unregisterSupervisionListener(supervisionListenerCaptor.firstValue)
     }
 
     @Test
@@ -419,7 +437,7 @@ class SupervisionDashboardScreenTest {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
-        preferenceScreenCreator.onResume(mockLifeCycleContext)
+        preferenceScreenCreator.onStart(mockLifeCycleContext)
         verify(mockSupervisionManager).registerSupervisionListener(listenerCaptor.capture())
 
         listenerCaptor.firstValue.onSupervisionDisabled(0 /* userId */)
@@ -435,7 +453,7 @@ class SupervisionDashboardScreenTest {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
-        preferenceScreenCreator.onResume(mockLifeCycleContext)
+        preferenceScreenCreator.onStart(mockLifeCycleContext)
         verify(mockSupervisionManager).registerSupervisionListener(listenerCaptor.capture())
 
         listenerCaptor.firstValue.onSupervisionEnabled(0 /* userId */)

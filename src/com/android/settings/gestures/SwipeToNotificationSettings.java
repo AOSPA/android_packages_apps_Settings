@@ -27,6 +27,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+// LINT.IfChange
 @SearchIndexable
 public class SwipeToNotificationSettings extends DashboardFragment {
 
@@ -68,3 +69,4 @@ public class SwipeToNotificationSettings extends DashboardFragment {
                 }
             };
 }
+// LINT.ThenChange(SwipeToNotificationApiScreen.kt)

@@ -21,6 +21,20 @@ flag {
 }
 
 flag {
+  name: "catalyst_a11y_shortcuts_settings"
+  namespace: "accessibility"
+  description: "Migrate a11y shortcuts settings screen to the Catalyst infrastructure"
+  bug: "440380982"
+}
+
+flag {
+  name: "catalyst_audio_adjustment_screen"
+  namespace: "accessibility"
+  description: "Migrate audio adjustment screen to the Catalyst infrastructure"
+  bug: "421227414"
+}
+
+flag {
   name: "catalyst_dark_ui_mode"
   namespace: "accessibility"
   description: "Migrate dark mode screen to the Catalyst infrastructure"
@@ -53,6 +67,20 @@ flag {
   namespace: "accessibility"
   description: "Migrate magnification screen to the Catalyst infrastructure"
   bug: "413453974"
+}
+
+flag {
+  name: "catalyst_time_to_take_action_screen"
+  namespace: "accessibility"
+  description: "Migrate time to take action screen to Catalyst infrastructure"
+  bug: "440382902"
+}
+
+flag {
+  name: "catalyst_timing_controls_screen"
+  namespace: "accessibility"
+  description: "Migrate timing controls screen to Catalyst infrastructure"
+  bug: "440381971"
 }
 
 flag {

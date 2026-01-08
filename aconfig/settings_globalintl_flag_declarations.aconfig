@@ -36,3 +36,10 @@ flag {
     bug: "423570215"
     is_fixed_read_only: true
 }
+
+flag {
+    name: "owl_v2_enabled"
+    namespace: "globalintl"
+    description: "Feature flag for online wipe in Settings factory reset flow"
+    bug: "465259644"
+}

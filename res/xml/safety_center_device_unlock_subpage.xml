@@ -27,42 +27,49 @@
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_lock_screen"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_android_lock_screen_search_terms"
         settings:safetySource="AndroidLockScreen"
         settings:profile="personal_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_fingerprint_unlock_personal"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_fingerprint_unlock_search_terms"
         settings:safetySource="AndroidFingerprintUnlock"
         settings:profile="personal_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_fingerprint_unlock_work"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_fingerprint_unlock_search_terms"
         settings:safetySource="AndroidFingerprintUnlock"
         settings:profile="work_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_face_unlock_personal"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_face_unlock_search_terms"
         settings:safetySource="AndroidFaceUnlock"
         settings:profile="personal_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_face_unlock_work"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_face_unlock_search_terms"
         settings:safetySource="AndroidFaceUnlock"
         settings:profile="work_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_wear_unlock_personal"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_wear_unlock_search_terms"
         settings:safetySource="AndroidWearUnlock"
         settings:profile="personal_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_wear_unlock_work"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_wear_unlock_search_terms"
         settings:safetySource="AndroidWearUnlock"
         settings:profile="work_profile" />
 

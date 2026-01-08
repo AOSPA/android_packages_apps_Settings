@@ -32,6 +32,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.BiometricPrompt
@@ -50,6 +51,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
+import com.android.settings.supervision.credentialmanagement.SupervisionPinRecoveryActivity
+import com.android.settings.supervision.shared.canLaunchPinRecovery
+import com.android.settings.supervision.shared.isSupervisingCredentialSet
+import com.android.settings.supervision.shared.supervisingUserHandle
 import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /**
@@ -329,7 +334,7 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
                 // supported.
                 builder.addFallbackOption(
                     label.toString(),
-                    BiometricManager.ICON_TYPE_ACCOUNT,
+                    BiometricManager.ICON_TYPE_SUPERVISED,
                     ContextCompat.getMainExecutor(this),
                     listener,
                 )
@@ -350,11 +355,10 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
                     onForgotPinFallbackClicked()
                 }
 
-            // TODO(b/454404010): Use forgot PIN icon once the arbitrary icon is
-            // supported.
             builder.addFallbackOption(
                 getString(R.string.supervision_auth_prompt_forgot_pin_button_label),
-                BiometricManager.ICON_TYPE_ACCOUNT,
+                if (Flags.enableSupervisionSettingsUiUpdates()) BiometricManager.ICON_TYPE_RESET
+                else BiometricManager.ICON_TYPE_ACCOUNT,
                 ContextCompat.getMainExecutor(this),
                 listener,
             )
@@ -414,8 +418,17 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     }
 
     private fun callerIsSystemUid(): Boolean {
-        val callingUid = Binder.getCallingUid()
-        return UserHandle.getAppId(callingUid) == Process.SYSTEM_UID
+        val packageName = getCallingPackage()
+        if (packageName == null) {
+            return false
+        }
+
+        return try {
+            val callingUid = packageManager.getApplicationInfo(packageName, 0).uid
+            UserHandle.getAppId(callingUid) == Process.SYSTEM_UID
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
+        }
     }
 
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])

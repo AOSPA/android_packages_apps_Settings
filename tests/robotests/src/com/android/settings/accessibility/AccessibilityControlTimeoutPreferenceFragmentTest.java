@@ -20,13 +20,20 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.provider.SearchIndexableResource;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.actiontimeout.ui.ActionTimeoutSettingsScreen;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -36,6 +43,8 @@ import java.util.List;
 /** Tests for {@link AccessibilityControlTimeoutPreferenceFragment}. */
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilityControlTimeoutPreferenceFragmentTest {
+    @Rule
+    public CheckFlagsRule mSetFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private AccessibilityControlTimeoutPreferenceFragment mFragment;
@@ -49,6 +58,12 @@ public class AccessibilityControlTimeoutPreferenceFragmentTest {
     public void getMetricsCategory_returnsCorrectCategory() {
         assertThat(mFragment.getMetricsCategory()).isEqualTo(
                 SettingsEnums.ACCESSIBILITY_TIMEOUT);
+    }
+
+    @Test
+    public void getPreferenceScreenBindingKey_returnsCorrectScreenKey() {
+        assertThat(mFragment.getPreferenceScreenBindingKey(mContext)).isEqualTo(
+                ActionTimeoutSettingsScreen.KEY);
     }
 
     @Test
@@ -68,6 +83,7 @@ public class AccessibilityControlTimeoutPreferenceFragmentTest {
                 "AccessibilityControlTimeoutPreferenceFragment");
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_TIME_TO_TAKE_ACTION_SCREEN)
     @Test
     public void getNonIndexableKeys_existInXmlLayout() {
         final List<String> niks =
@@ -78,5 +94,25 @@ public class AccessibilityControlTimeoutPreferenceFragmentTest {
                         R.xml.accessibility_control_timeout_settings);
 
         assertThat(keys).containsAtLeastElementsIn(niks);
+    }
+
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_TIME_TO_TAKE_ACTION_SCREEN)
+    @Test
+    public void getSearchIndexDataProvider_verifyXmlResourcesToIndex() {
+        List<SearchIndexableResource> searchIndexableResource =
+                AccessibilityControlTimeoutPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(mContext, /* enabled= */ true);
+        assertThat(searchIndexableResource.getFirst().xmlResId)
+                .isEqualTo(R.xml.accessibility_control_timeout_settings);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_TIME_TO_TAKE_ACTION_SCREEN)
+    @Test
+    public void getSearchIndexDataProvider_returnsNull() {
+        List<SearchIndexableResource> searchIndexableResource =
+                AccessibilityControlTimeoutPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(mContext, /* enabled= */ true);
+
+        assertThat(searchIndexableResource).isNull();
     }
 }

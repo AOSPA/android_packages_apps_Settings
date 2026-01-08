@@ -17,6 +17,8 @@ package com.android.settings.location;
 
 import static android.app.admin.DpcAuthority.DPC_AUTHORITY;
 
+import static com.android.settings.testutils.DevicePolicyUtils.DPC_ADMIN;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -36,6 +38,8 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.util.ArrayMap;
@@ -133,6 +137,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     public void workProfileDisallowShareLocationOn_getParentUserLocationServicesOnly() {
         final int fakeWorkProfileId = 123;
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(
@@ -141,11 +146,8 @@ public class LocationInjectedServicesPreferenceControllerTest {
         ShadowUserManager.getShadow().addProfile(new UserInfo(fakeWorkProfileId, "",
                 UserInfo.FLAG_MANAGED_PROFILE | UserInfo.FLAG_PROFILE));
         // Mock the admin restriction on the preference.
-        ComponentName componentName = new ComponentName("test", "test");
-        EnforcingAdmin enforcingAdmin = new EnforcingAdmin("test", DPC_AUTHORITY,
-                UserHandle.of(UserHandle.myUserId()), componentName);
         when(mDevicePolicyManager.getEnforcingAdminsForPolicy(any(), anyInt())).thenReturn(
-                new PolicyEnforcementInfo(List.of(enforcingAdmin)));
+                new PolicyEnforcementInfo(List.of(DPC_ADMIN)));
 
         mController.displayPreference(mScreen);
 
@@ -158,6 +160,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     public void workProfileDisallowShareLocationOff_getAllUserLocationServices() {
         final int fakeWorkProfileId = 123;
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(
@@ -179,6 +182,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     public void privateProfileDisallowShareLocationOn_getParentUserLocationServicesOnly() {
         final int fakePrivateProfileId = 123;
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(
@@ -187,11 +191,8 @@ public class LocationInjectedServicesPreferenceControllerTest {
         ShadowUserManager.getShadow().setPrivateProfile(fakePrivateProfileId, "private", 0);
         ShadowUserManager.getShadow().addUserProfile(UserHandle.of(fakePrivateProfileId));
         // Mock the admin restriction on the preference.
-        ComponentName componentName = new ComponentName("test", "test");
-        EnforcingAdmin enforcingAdmin = new EnforcingAdmin("test", DPC_AUTHORITY,
-                UserHandle.of(UserHandle.myUserId()), componentName);
         when(mDevicePolicyManager.getEnforcingAdminsForPolicy(any(), anyInt())).thenReturn(
-                new PolicyEnforcementInfo(List.of(enforcingAdmin)));
+                new PolicyEnforcementInfo(List.of(DPC_ADMIN)));
 
         mController.displayPreference(mScreen);
 
@@ -204,6 +205,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     public void privateProfileDisallowShareLocationOff_getAllUserLocationServices() {
         final int fakePrivateProfileId = 123;
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(
@@ -232,7 +234,122 @@ public class LocationInjectedServicesPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     public void withUserRestriction_shouldDisableLocationAccuracy() {
+        // Mock the admin restriction on the preference.
+        when(mDevicePolicyManager.getEnforcingAdminsForPolicy(any(), anyInt())).thenReturn(
+                new PolicyEnforcementInfo(List.of(DPC_ADMIN)));
+        final List<Preference> preferences = new ArrayList<>();
+        final RestrictedAppPreference pref = new RestrictedAppPreference(mContext,
+                UserManager.DISALLOW_CONFIG_LOCATION);
+        pref.setTitle("Location Accuracy");
+        preferences.add(pref);
+        final Map<Integer, List<Preference>> map = new ArrayMap<>();
+        map.put(UserHandle.myUserId(), preferences);
+        doReturn(map).when(mSettingsInjector)
+                .getInjectedSettings(any(Context.class), any(ArraySet.class));
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(new int[]{UserHandle.myUserId()});
+
+        mController.displayPreference(mScreen);
+
+        assertThat(pref.isEnabled()).isFalse();
+        assertThat(pref.isDisabledByAdmin()).isTrue();
+    }
+
+    @Test
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    public void workProfileDisallowShareLocationOn_getParentUserLocationServicesOnly_refactorDisabled() {
+        final int fakeWorkProfileId = 123;
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(
+                new int[]{UserHandle.myUserId(), fakeWorkProfileId});
+        ShadowUserManager.getShadow().addProfile(new UserInfo(UserHandle.myUserId(), "", 0));
+        ShadowUserManager.getShadow().addProfile(new UserInfo(fakeWorkProfileId, "",
+                UserInfo.FLAG_MANAGED_PROFILE | UserInfo.FLAG_PROFILE));
+        // Mock the admin restriction on the preference.
+        List<UserManager.EnforcingUser> enforcers = new ArrayList<>();
+        enforcers.add(new UserManager.EnforcingUser(fakeWorkProfileId,
+                UserManager.RESTRICTION_SOURCE_PROFILE_OWNER));
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+                UserManager.DISALLOW_SHARE_LOCATION, UserHandle.of(fakeWorkProfileId), enforcers);
+
+        mController.displayPreference(mScreen);
+
+        ArgumentCaptor<ArraySet<UserHandle>> profilesArgumentCaptor =
+                ArgumentCaptor.forClass(ArraySet.class);
+        verify(mSettingsInjector).getInjectedSettings(
+                any(Context.class), profilesArgumentCaptor.capture());
+        assertThat(profilesArgumentCaptor.getValue())
+                .doesNotContain(UserHandle.of(fakeWorkProfileId));
+    }
+
+    @Test
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    public void workProfileDisallowShareLocationOff_getAllUserLocationServices_refactorDisabled() {
+        final int fakeWorkProfileId = 123;
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(
+                new int[]{UserHandle.myUserId(), fakeWorkProfileId});
+        ShadowUserManager.getShadow().addProfile(new UserInfo(UserHandle.myUserId(), "", 0));
+        ShadowUserManager.getShadow().addProfile(new UserInfo(fakeWorkProfileId, "",
+                UserInfo.FLAG_MANAGED_PROFILE | UserInfo.FLAG_PROFILE));
+
+        mController.displayPreference(mScreen);
+
+        ArgumentCaptor<ArraySet<UserHandle>> profilesArgumentCaptor =
+                ArgumentCaptor.forClass(ArraySet.class);
+        verify(mSettingsInjector).getInjectedSettings(
+                any(Context.class), profilesArgumentCaptor.capture());
+        assertThat(profilesArgumentCaptor.getValue()).contains(UserHandle.of(fakeWorkProfileId));
+    }
+
+    @Test
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    public void privateProfileDisallowShareLocationOn_getParentUserLocationServicesOnly_refactorDisabled() {
+        final int fakePrivateProfileId = 123;
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(
+                new int[]{UserHandle.myUserId(), fakePrivateProfileId});
+        ShadowUserManager.getShadow().addProfile(new UserInfo(UserHandle.myUserId(), "", 0));
+        ShadowUserManager.getShadow().setPrivateProfile(fakePrivateProfileId, "private", 0);
+        ShadowUserManager.getShadow().addUserProfile(UserHandle.of(fakePrivateProfileId));
+        // Mock the admin restriction on the preference.
+        List<UserManager.EnforcingUser> enforcers = new ArrayList<>();
+        enforcers.add(new UserManager.EnforcingUser(fakePrivateProfileId,
+                UserManager.RESTRICTION_SOURCE_PROFILE_OWNER));
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+                UserManager.DISALLOW_SHARE_LOCATION, UserHandle.of(fakePrivateProfileId),
+                enforcers);
+
+        mController.displayPreference(mScreen);
+
+        ArgumentCaptor<ArraySet<UserHandle>> profilesArgumentCaptor =
+                ArgumentCaptor.forClass(ArraySet.class);
+        verify(mSettingsInjector).getInjectedSettings(
+                any(Context.class), profilesArgumentCaptor.capture());
+        assertThat(profilesArgumentCaptor.getValue())
+                .doesNotContain(UserHandle.of(fakePrivateProfileId));
+    }
+
+    @Test
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    public void privateProfileDisallowShareLocationOff_getAllUserLocationServices_refactorDisabled() {
+        final int fakePrivateProfileId = 123;
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(
+                new int[]{UserHandle.myUserId(), fakePrivateProfileId});
+        ShadowUserManager.getShadow().addProfile(new UserInfo(UserHandle.myUserId(), "", 0));
+        ShadowUserManager.getShadow().setPrivateProfile(fakePrivateProfileId, "private", 0);
+        ShadowUserManager.getShadow().addUserProfile(UserHandle.of(fakePrivateProfileId));
+
+        mController.displayPreference(mScreen);
+
+        ArgumentCaptor<ArraySet<UserHandle>> profilesArgumentCaptor =
+                ArgumentCaptor.forClass(ArraySet.class);
+        verify(mSettingsInjector).getInjectedSettings(
+                any(Context.class), profilesArgumentCaptor.capture());
+        assertThat(profilesArgumentCaptor.getValue()).contains(UserHandle.of(fakePrivateProfileId));
+    }
+
+    @Test
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    public void withUserRestriction_shouldDisableLocationAccuracy_refactorDisabled() {
         // Mock the admin restriction on the preference.
         ComponentName componentName = new ComponentName("test", "test");
         EnforcingAdmin enforcingAdmin = new EnforcingAdmin("test", DPC_AUTHORITY,
@@ -249,6 +366,13 @@ public class LocationInjectedServicesPreferenceControllerTest {
         doReturn(map).when(mSettingsInjector)
                 .getInjectedSettings(any(Context.class), any(ArraySet.class));
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(new int[]{UserHandle.myUserId()});
+
+        List<UserManager.EnforcingUser> enforcers = new ArrayList<>();
+        enforcers.add(new UserManager.EnforcingUser(UserHandle.myUserId(),
+                UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+                UserManager.DISALLOW_CONFIG_LOCATION, UserHandle.of(UserHandle.myUserId()),
+                enforcers);
 
         mController.displayPreference(mScreen);
 

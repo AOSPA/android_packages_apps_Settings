@@ -73,7 +73,7 @@ private constructor(
 
     private val subId: Int =
         if (CatalystFlags.catalystUseKeyParameters()) {
-            keyParameters!![Settings.EXTRA_SUB_ID]?.toInt()
+            keyParameters!![Settings.EXTRA_SUB_ID]?.toIntOrNull()
                 ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
         } else {
             arguments!!.getSubId(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)

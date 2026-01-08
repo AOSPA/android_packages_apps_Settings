@@ -19,6 +19,7 @@ package com.android.settings.users;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
 import static com.android.settings.testutils.DevicePolicyUtils.DPC_ADMIN;
+import static com.android.settings.testutils.DevicePolicyUtils.SYSTEM_ADMIN;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -28,6 +29,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
+import android.app.admin.EnforcingAdmin;
 import android.app.admin.PolicyEnforcementInfo;
 import android.content.Context;
 import android.content.pm.UserInfo;
@@ -130,7 +132,23 @@ public class MultiUserMainSwitchPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     public void displayPreference_disallowUserSwitch_userNotMain_shouldSetDisabledUnchecked() {
+        ShadowDevicePolicyManager.getShadow().setPolicyEnforcementInfoForUserRestriction(
+                UserManager.DISALLOW_USER_SWITCH, new PolicyEnforcementInfo(List.of(SYSTEM_ADMIN)));
+
+        MultiUserMainSwitchPreferenceController multiUserMainSwitchPreferenceController =
+                new MultiUserMainSwitchPreferenceController(mContext, KEY_USER_SWITCH_TOGGLE);
+        multiUserMainSwitchPreferenceController.displayPreference(mScreen);
+
+        verify(mPreference).setChecked(false);
+        verify(mPreference).setSwitchBarEnabled(false);
+        verify(mPreference, never()).setDisabledByAdmin(any(EnforcingAdmin.class));
+    }
+
+    @Test
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    public void displayPreference_disallowUserSwitch_userNotMain_shouldSetDisabledUnchecked_refactorDisabled() {
         mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
                 UserManager.DISALLOW_USER_SWITCH, true);
 

@@ -89,10 +89,6 @@ public class AudioStreamHeaderController extends BasePreferenceController
                     var localSourceState = getLocalSourceState(state);
                     if (localSourceState == STREAMING) {
                         updateSummary();
-                        if (!Flags.audioStreamMediaServiceByReceiveState()) {
-                            mAudioStreamsHelper.startMediaService(
-                                    mContext, mBroadcastId, mBroadcastName);
-                        }
                     } else if (mHysteresisModeFixAvailable && localSourceState == PAUSED) {
                         // if source paused, only update the summary
                         updateSummary();

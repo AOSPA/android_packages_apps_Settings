@@ -46,15 +46,22 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
     private static final String KEY_AUTO_SYNC_ACCOUNT = "auto_sync_account_data";
 
     protected final UserManager mUserManager;
+    protected final boolean mForceDisable;
     private final PreferenceFragmentCompat mParentFragment;
 
     protected UserHandle mUserHandle;
 
     public AutoSyncDataPreferenceController(Context context, PreferenceFragmentCompat parent) {
+        this(context, parent, /* forceDisable= */ false);
+    }
+
+    public AutoSyncDataPreferenceController(Context context, PreferenceFragmentCompat parent,
+            boolean forceDisable) {
         super(context);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mParentFragment = parent;
         mUserHandle = Process.myUserHandle();
+        mForceDisable = forceDisable;
     }
 
     @Override
@@ -84,6 +91,9 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
 
     @Override
     public boolean isAvailable() {
+        if (mForceDisable) {
+            return false;
+        }
         return !mUserManager.isManagedProfile()
                 && (mUserManager.isRestrictedProfile()
                 || mUserManager.getProfiles(UserHandle.myUserId()).size() == 1);

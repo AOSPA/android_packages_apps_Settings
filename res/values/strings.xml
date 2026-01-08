@@ -3218,6 +3218,10 @@
     <string name="screen_resolution_option_full">Max resolution</string>
     <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_footer">Max resolution uses more of your battery. Switching your resolution may cause some apps to restart.</string>
+    <!-- Screen resolution and refresh rate displayed text [CHAR LIMIT=NONE] -->
+    <string name="screen_resolution_refresh_rate_combined_displayed_text"><xliff:g id="width">%1$s</xliff:g> x <xliff:g id="height">%2$s</xliff:g> (<xliff:g id="refresh_rate">%3$s</xliff:g> Hz)</string>
+    <!-- Screen resolution and refresh rate a11y text. Replaces 600x800 -> 600 by 800, and 'Hz' notation to 'Hertz' [CHAR LIMIT=NONE] -->
+    <string name="screen_resolution_refresh_rate_combined_a11y"><xliff:g id="width">%1$s</xliff:g> by <xliff:g id="height">%2$s</xliff:g> <xliff:g id="refresh_rate">%3$s</xliff:g> Hertz</string>
     <!-- Screen resolution displayed text [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_displayed_text"><xliff:g id="width">%1$s</xliff:g> x <xliff:g id="height">%2$s</xliff:g></string>
     <!-- Screen resolution a11y message announced to replace 'x' in entry e.g. 600 by 800 [CHAR LIMIT=NONE] -->
@@ -5960,8 +5964,6 @@
     <string name="accessibility_tutorial_dialog_title_volume">Volume keys shortcut</string>
     <!-- Title for the accessibility tutorial dialog in accessibility service with triple tap. [CHAR LIMIT=100] -->
     <string name="accessibility_tutorial_dialog_title_triple">Triple tap shortcut</string>
-    <!-- Title for the accessibility tutorial dialog in accessibility service with two finger double tap. [CHAR LIMIT=100] -->
-    <string name="accessibility_tutorial_dialog_title_two_finger_double">%1$d-finger double tap shortcut</string>
     <!-- Title for the accessibility tutorial dialog in accessibility service with quick setting shortcut. [CHAR LIMIT=100] -->
     <string name="accessibility_tutorial_dialog_title_quick_setting">Quick Settings shortcut</string>
     <!-- Title for the accessibility tutorial dialog in accessibility service with gesture. [CHAR LIMIT=50] -->
@@ -6047,16 +6049,10 @@
     <string name="accessibility_shortcut_hardware_keyword">volume keys</string>
     <!-- Summary for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_hardware">Press &amp; hold both volume keys</string>
-    <!-- Title for 2-finger double tap shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap">%1$d-finger double tap</string>
-    <!-- Summary for 2-finger double tap shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap">Quickly tap the screen twice with %1$d fingers</string>
     <!-- Title for triple tap shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_screen_title_triple_tap">Triple tap</string>
     <!-- Summary for triple tap shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap">Quickly tap the screen %1$d times. This may slow down your device.</string>
-    <!-- 2-finger double tap is shown as part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_two_finger_double_tap_keyword">%1$d-finger double tap</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_triple_tap_keyword">triple tap</string>
     <!-- Title for keyboard shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
@@ -6104,8 +6100,16 @@
     </string>
     <!-- Title for the location of the accessibility button. [CHAR LIMIT=35] -->
     <string name="accessibility_button_location_title">Location</string>
+    <!-- One of the location of the accessibility button. Placing the accessibility button floating on the top of screen. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_location_selector_floating">Floating over other apps</string>
+    <!-- One of the location of the accessibility button. Placing the accessibility button on the navigation bar. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_location_selector_navigation_bar">Navigation bar</string>
     <!-- Title for the size of the accessibility button. [CHAR LIMIT=35] -->
     <string name="accessibility_button_size_title">Size</string>
+    <!-- The large option in the accessibility button size selector. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_size_selector_large">Large</string>
+    <!-- The small option in the accessibility button size selector. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_size_selector_small">Small</string>
     <!-- Title for the fade of the accessibility button. [CHAR LIMIT=35] -->
     <string name="accessibility_button_fade_title">Fade when not in use</string>
     <!-- Summary for the fade of the accessibility button. [CHAR LIMIT=80] -->
@@ -6155,7 +6159,7 @@
     <!-- Title in the search result for expanded dark theme mode. [BACKUP_MESSAGE_ID: 7467343853315678576] -->
     <string name="accessibility_expanded_dark_theme_title_in_search">Expanded dark theme</string>
     <!-- Summary for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_expanded_dark_theme_summary">Automatically applies dark theme to most apps that don\'t support it. This can improve accessibility and readability, but may cause some apps to display incorrectly.</string>
+    <string name="accessibility_expanded_dark_theme_summary">Automatically applies dark theme to most apps that don\'t support it, helping to improve accessibility.</string>
     <!-- Search keywords for the Expanded dark theme settings. [CHAR_LIMIT=NONE] -->
     <string name="keywords_expanded_dark_theme">force invert, color inversion, contrast</string>
     <!-- Title for the Expanded dark theme per-app settings page. [CHAR LIMIT=35] -->
@@ -6164,6 +6168,8 @@
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description">Expanded dark theme settings</string>
     <!-- Hint for the Expanded dark theme per-app settings gear icon. [CHAR LIMIT=NONE] -->
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint">Open expanded dark theme settings</string>
+    <!-- header description for the Expanded dark theme per-app settings. [CHAR LIMIT=NONE] [DO NOT TRANSLATE] -->
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description">Expanded dark theme can improve readability, but may cause some apps to display incorrectly. Apps with this setting off will use the standard dark theme option.</string>
     <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
@@ -6214,6 +6220,13 @@
 
     <!-- Title for accessibility preference to choose long-press delay i.e. timeout before it is detected. [CHAR LIMIT=35] -->
     <string name="accessibility_long_press_timeout_preference_title">Touch &amp; hold delay</string>
+    <!-- One of the tap and hold duration before the tap & hold being registered as a long press. Available options are: Short, Medium, Long. [CHAR LIMIT=25] -->
+    <string name="accessibility_long_press_timeout_option_short">Short</string>
+    <!-- One of the tap and hold duration before the tap & hold being registered as a long press. Available options are: Short, Medium, Long. [CHAR LIMIT=25] -->
+    <string name="accessibility_long_press_timeout_option_medium">Medium</string>
+    <!-- One of the tap and hold duration before the tap & hold being registered as a long press. Available options are: Short, Medium, Long. [CHAR LIMIT=25] -->
+    <string name="accessibility_long_press_timeout_option_long">Long</string>
+
     <!-- Title for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_preference_title">Color inversion</string>
     <!-- Used in the accessibility service settings to control turning display color inversion on/off entirely. [CHAR LIMIT=NONE] -->
@@ -8172,6 +8185,8 @@
     <!-- User settings item to allow the system to automatically switch back to the Dock User when
          the device is docked. [CHAR LIMIT=50] -->
     <string name="switch_to_dock_user_when_docked">Switch to admin user when docked</string>
+    <!-- Toast shown when a user is deleted. [CHAR LIMIT=NONE] -->
+    <string name="user_deleted_confirmation_toast">User deleted</string>
 
     <!-- User (self) removal confirmation title [CHAR LIMIT=30] -->
     <string name="user_confirm_remove_self_title">Delete yourself?</string>
@@ -9432,11 +9447,6 @@
     <!-- Do not disturb settings, main screen, field, duration setting where user can specify how
     long dnd will last when toggling dnd on from qs) [CHAR LIMIT=100] -->
     <string name="zen_category_duration">Duration for Quick Settings</string>
-
-    <!-- Do not disturb: Title for the do not disturb sync toggle. When turned on, Do not disturb mode will be synced with other devices. [CHAR LIMIT=80] -->
-    <string name="dnd_sync_title">Do not disturb sync</string>
-    <!-- Do not disturb: Description for the do not disturb sync toggle. [CHAR LIMIT=120] -->
-    <string name="dnd_sync_description">Sync Do not disturb settings to connected devices</string>
 
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>
@@ -12756,6 +12766,17 @@
 
     <!-- Title for setting tile leading to saved autofill passwords, passkeys, and account settings [CHAR LIMIT=40]-->
     <string name="account_dashboard_title_with_passkeys">Passwords, passkeys &amp; accounts</string>
+    <!-- Title for setting tile leading to saved passwords and passkeys settings [CHAR LIMIT=40]-->
+    <string name="dashboard_title_passwords_passkeys">Passwords &amp; passkeys</string>
+
+    <!-- Title for setting tile leading to accounts & backup settings [CHAR LIMIT=40]-->
+    <string name="accounts_and_backup_title">Accounts and backup</string>
+    <!-- Summary for setting tile leading to accounts & backup settings [CHAR LIMIT=100]-->
+    <string name="accounts_and_backup_summary">Back up data, copy data from another device</string>
+    <!-- Title for setting tile leading to accounts settings [CHAR LIMIT=40]-->
+    <string name="accounts_and_backup_manage_accounts_title">Manage accounts</string>
+    <!-- Title for setting section containing backup and restore settings [CHAR LIMIT=40]-->
+    <string name="accounts_and_backup_backup_category_title">Back up or copy data</string>
 
     <!-- Message of the warning dialog for disabling the credential provider (new strings for 24Q3). [CHAR_LIMIT=NONE] -->
     <string name="credman_confirmation_message_new_ui">
@@ -13480,6 +13501,8 @@
     <string name="description_satellite_dialog_for_sim_restriction">End the satellite connection before you add a SIM</string>
 
     <!-- Strings for Airplane mode settings activity -->
+    <!-- Summary for Airplane Mode Sync setting when it is disabled because Bluetooth is off [CHAR LIMIT=40]-->
+    <string name="apm_sync_bluetooth_off_summary">Bluetooth is off</string>
     <!-- Description about the airplane mode sync feature.  [CHAR LIMIT=NONE] -->
     <string name="airplane_mode_sync_description">When connected by Bluetooth, Airplane mode will sync across the supported devices such as phone and watch</string>
 
@@ -15344,13 +15367,36 @@
     <!-- Safety Center device finder subpage summary [CHAR LIMIT=NONE] -->
     <string name="safety_center_device_finders_summary"></string>
     <!-- Safety Center device finder source search terms [CHAR LIMIT=NONE] -->
-    <string name="safety_center_device_finders_search_terms"></string>
+    <string name="safety_center_device_finder_search_terms"></string>
     <!-- Safety Center system and updates subpage summary [CHAR LIMIT=NONE] -->
     <string name="safety_center_system_and_updates_summary">Updates</string>
+    <!-- Safety Center security update search terms [CHAR LIMIT=NONE] -->
+    <string name="safety_center_security_update_search_terms">Updates, Update, Security update, Security updates</string>
     <!-- Safety Center system component update search terms [CHAR LIMIT=NONE] -->
     <string name="safety_center_system_component_update_search_terms"></string>
     <!-- Safety Center cellular network security subpage summary [CHAR LIMIT=NONE] -->
     <string name="safety_center_cellular_network_security_summary">Network type, encryption, notification controls</string>
+
+    <!-- Search keywords of the setting for managing the screen lock on the device [CHAR LIMIT=NONE] -->
+    <string name="safety_center_android_lock_screen_search_terms">Device lock, Screen lock, Lock screen, Lockscreen, Password, Pin, Pattern, Lock, Unlock</string>
+    <!-- Search keywords of the setting for managing fingerprint unlock options on the device [CHAR LIMIT=NONE] -->
+    <string name="safety_center_fingerprint_unlock_search_terms">Fingerprint, Finger, Add fingerprint</string>
+    <!-- Search keywords of the setting for managing face unlock options on the device [CHAR LIMIT=NONE] -->
+    <string name="safety_center_face_unlock_search_terms">Face unlock, Face</string>
+    <!-- Search keywords of the setting for managing wear unlock options on the device [CHAR LIMIT=NONE] -->
+    <string name="safety_center_wear_unlock_search_terms">Watch, Watch unlock</string>
+    <!-- Search keywords for the Backup setting [CHAR LIMIT=NONE] -->
+    <string name="safety_center_backup_search_terms">Backup</string>
+    <!-- Permission manager search terms [CHAR LIMIT=NONE] -->
+    <string name="safety_center_permission_manager_search_terms">Permissions, Permissions manager</string>
+    <!-- Health connect search terms [CHAR LIMIT=NONE] -->
+    <string name="safety_center_health_connect_search_terms">Health, Health Connect</string>
+    <!-- App data sharing updates search terms [CHAR LIMIT=NONE] -->
+    <string name="safety_center_app_data_sharing_updates_search_terms">Data, Data sharing, Data sharing updates, Data sharing updates for location, sharing</string>
+    <!-- Permission usage search terms [CHAR LIMIT=NONE] -->
+    <string name="safety_center_permission_usage_search_terms">Privacy, Privacy dashboard</string>
+    <!-- Search keywords of the entry for Private Space settings [CHAR LIMIT=NONE] -->
+    <string name="safety_center_private_space_search_terms">Private Space</string>
 
     <!-- Safety Center issues banner group expandable title  [CHAR LIMIT=NONE] -->
     <string name="safety_center_issues_banner_group_expandable_title">More alerts</string>
@@ -15365,6 +15411,10 @@
     <!-- Issue resolution confirmation text [CHAR LIMIT=NONE]-->
     <string name="safety_center_resolved_issue_fallback">Action complete</string>
 
+    <!-- Content description for the safety center quick settings page landing [CHAR LIMIT=NONE] -->
+    <string name="safety_center_qs_page_landing">Security and privacy quick settings</string>
+    <!-- Label for the privacy controls section of safety center QS page [CHAR LIMIT=30] -->
+    <string name="privacy_controls_qs">Your privacy controls</string>
 
     <!-- Positive button text for the passkey dialog to show the state when accept pairing [CHAR LIMIT=30] -->
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text">Pairing</string>
@@ -15412,4 +15462,12 @@
     <string name="add_tile_action">Add tile</string>
     <!-- Title for the satellite tile prompt notification channel. [CHAR LIMIT=NONE] -->
     <string name="satellite_tile_prompt_channel_title">Satellite Tile Prompts</string>
+
+    <string name="long_press_power_assistant_sensitivity_ms_description" translatable="false">A length of time in ms.</string>
+    <string name="long_press_power_category_precondition" translatable="false">Requires that long pressing the power button can be configured for Assistant</string>
+    <string name="long_press_power_category_unavailable" translatable="false">This device does not support setting the power button to open assistant on long press</string>
+    <string name="long_press_power_sensitivity_precondition" translatable="false">Requires that the device is currently set to launch the Assistant on long press of the power button, and that there are multiple durations available for the long press.</string>
+    <string name="long_press_power_sensitivity_precondition_set_for_power_button" translatable="false">The device is currently set to launch the Power Menu on long press of the power button</string>
+    <string name="long_press_power_sensitivity_no_options" translatable="false">The device does not support setting alternative sensitivities for long pressing power button for Assistant</string>
+    <string name="long_press_power_sensitivity_value_description" translatable="false"><xliff:g id="duration_in_millis" example="100">%d</xliff:g>ms</string>
 </resources>
