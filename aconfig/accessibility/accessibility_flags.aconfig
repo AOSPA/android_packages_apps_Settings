@@ -4,16 +4,6 @@ container: "system_ext"
 # NOTE: Keep alphabetized to help limit merge conflicts from multiple simultaneous editors.
 
 flag {
-  name: "audio_balance_state_description"
-  namespace: "accessibility"
-  description: "Provides a more valuable state description to the audio balance slider."
-  bug: "319575109"
-  metadata {
-    purpose: PURPOSE_BUGFIX
-  }
-}
-
-flag {
   name: "catalyst_a11y_button_shortcut_setting"
   namespace: "accessibility"
   description: "Migrate a11y button shortcut setting screen to the Catalyst infrastructure"
