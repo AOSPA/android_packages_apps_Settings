@@ -108,7 +108,8 @@ class SatelliteLandingPageFragmentTest {
         `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(listOf())
         `when`(appsRepository.getAppsPackagesForNbNtnLandingPage()).thenReturn(listOf())
         `when`(appsRepository.getEmergencySosIntent()).thenReturn(null)
-        `when`(appsRepository.getSettingsIntent()).thenReturn(null)
+        `when`(appsRepository.getSettingsIntent(org.mockito.ArgumentMatchers.anyBoolean()))
+            .thenReturn(null)
 
         // Mock State Repository
         `when`(satelliteStateRepository.satelliteStatus).thenReturn(satelliteStatusFlow)
@@ -244,6 +245,10 @@ class SatelliteLandingPageFragmentTest {
 
     @Test
     fun footerLearnMore_onClick_startsSatelliteSettingsActivity() {
+        val intent = Intent(Settings.ACTION_SATELLITE_SETTING)
+        `when`(appsRepository.getSettingsIntent(org.mockito.ArgumentMatchers.anyBoolean()))
+            .thenReturn(intent)
+
         val scenario = launchFragment()
         scenario.onFragment { fragment ->
             val footer = fragment.findPreference<FooterPreference>(KEY_FOOTER)
@@ -258,9 +263,6 @@ class SatelliteLandingPageFragmentTest {
         val startedIntent = shadowOf(context).nextStartedActivity
         assertThat(startedIntent).isNotNull()
         assertThat(startedIntent.action).isEqualTo(Settings.ACTION_SATELLITE_SETTING)
-        assertThat(startedIntent.getIntExtra("sub_id", -1)).isEqualTo(SUB_ID)
-        assertThat(startedIntent.getBooleanExtra(":settings:show_fragment_as_subsetting", false))
-            .isTrue()
     }
 
     @Test

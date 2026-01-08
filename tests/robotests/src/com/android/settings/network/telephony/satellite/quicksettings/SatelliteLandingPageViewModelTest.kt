@@ -241,6 +241,17 @@ class SatelliteLandingPageViewModelTest {
         assertThat(viewModel.isCarrierRoamingNtnSupported.value).isTrue()
     }
 
+    @Test
+    fun getSettingsIntent_delegatesToRepository() = runTest {
+        setupCommonPackageManagerApps()
+        val viewModel = createViewModel()
+        val expectedIntent = Intent("expected")
+        viewModel.refresh(SUB_ID)
+        `when`(appsRepository.getSettingsIntent(false)).thenReturn(expectedIntent)
+
+        assertThat(viewModel.getSettingsIntent()).isEqualTo(expectedIntent)
+    }
+
     private fun setupPackageManagerForApp(packageName: String, appName: String, intent: Intent?) {
         val appInfo = mock(ApplicationInfo::class.java)
         `when`(appInfo.loadLabel(packageManager)).thenReturn(appName)
@@ -292,7 +303,8 @@ class SatelliteLandingPageViewModelTest {
         settingsIntent: Intent? = Intent("settings"),
     ) {
         `when`(appsRepository.getEmergencySosIntent()).thenReturn(sosIntent)
-        `when`(appsRepository.getSettingsIntent()).thenReturn(settingsIntent)
+        `when`(appsRepository.getSettingsIntent(org.mockito.ArgumentMatchers.anyBoolean()))
+            .thenReturn(settingsIntent)
     }
 
     private fun setupCommonPackageManagerApps() {
