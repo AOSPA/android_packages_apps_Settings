@@ -608,8 +608,7 @@ public class DashboardFeatureProviderImplTest {
         tile.userHandle = null;
 
         TopLevelSettings largeScreenTopLevelSettings = spy(new TopLevelSettings(
-                new TestTopLevelHighlightMixin(highlightMixinPrefKey,
-                true /* activityEmbedded */)));
+                new TestTopLevelHighlightMixin(highlightMixinPrefKey)));
         doReturn(true).when(largeScreenTopLevelSettings).isActivityEmbedded();
         largeScreenTopLevelSettings.setHighlightPreferenceKey(clickPrefKey);
 
@@ -639,8 +638,7 @@ public class DashboardFeatureProviderImplTest {
         tile.userHandle = null;
 
         TopLevelSettings largeScreenTopLevelSettings = spy(new TopLevelSettings(
-                new TestTopLevelHighlightMixin(highlightMixinPrefKey,
-                true /* activityEmbedded */)));
+                new TestTopLevelHighlightMixin(highlightMixinPrefKey)));
         doReturn(true).when(largeScreenTopLevelSettings).isActivityEmbedded();
         largeScreenTopLevelSettings.setHighlightPreferenceKey(clickPrefKey);
 
@@ -986,9 +984,8 @@ public class DashboardFeatureProviderImplTest {
     private static class TestTopLevelHighlightMixin extends TopLevelHighlightMixin {
         private final String mHighlightPreferenceKey;
 
-        TestTopLevelHighlightMixin(String highlightPreferenceKey,
-                boolean activityEmbedded) {
-            super(activityEmbedded);
+        TestTopLevelHighlightMixin(String highlightPreferenceKey) {
+            super();
             mHighlightPreferenceKey = highlightPreferenceKey;
         }
 
