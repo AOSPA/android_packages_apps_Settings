@@ -18,36 +18,37 @@ package com.android.settings.accessibility.screenmagnification
 
 import android.content.Context
 import android.provider.Settings
-import android.view.accessibility.Flags
 import androidx.lifecycle.DefaultLifecycleObserver
+import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.core.TogglePreferenceController
 import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 
-/** Controller that accesses and switches the preference status of following typing feature */
+/**
+ * Controller that accesses and switches the preference status of following keyboard focus feature
+ */
 // LINT.IfChange
 class FollowKeyboardPreferenceController(context: Context, prefKey: String) :
     TogglePreferenceController(context, prefKey), DefaultLifecycleObserver {
 
     override fun getAvailabilityStatus(): Int {
-        return if (!mContext.isInSetupWizard() && isMagnificationKeyboardFollowingSupported()) {
+        return if (!mContext.isInSetupWizard() && InputPeripheralsSettingsUtils.isHardKeyboard()) {
             AVAILABLE
         } else {
             CONDITIONALLY_UNAVAILABLE
         }
     }
 
-    private fun isMagnificationKeyboardFollowingSupported(): Boolean {
-        return Flags.requestRectangleWithSource() && InputPeripheralsSettingsUtils.isHardKeyboard()
-    }
-
     override fun isChecked(): Boolean {
+        // Default to true if magnification viewport prioritization is enabled to prevent viewport
+        // jitter. False otherwise.
         return Settings.Secure.getInt(
             mContext.getContentResolver(),
             SETTING_KEY,
-            AccessibilityUtil.State.OFF,
+            if (Flags.enableMagnificationViewportPrioritization()) AccessibilityUtil.State.ON
+            else AccessibilityUtil.State.OFF,
         ) == AccessibilityUtil.State.ON
     }
 
@@ -68,8 +69,7 @@ class FollowKeyboardPreferenceController(context: Context, prefKey: String) :
     }
 
     companion object {
-        val SETTING_KEY =
-            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED
+        val SETTING_KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED
     }
 }
 // LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ui/FollowKeyboardSwitchPreference.kt)
