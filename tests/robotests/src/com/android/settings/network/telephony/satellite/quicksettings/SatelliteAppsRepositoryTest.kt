@@ -150,7 +150,7 @@ class SatelliteAppsRepositoryTest {
     }
 
     @Test
-    fun getSettingsIntent_resolvable_returnsIntent() {
+    fun getSettingsIntent_carrierRoamingSupported_returnsSettingsIntent() {
         val resolveInfo =
             ResolveInfo().apply {
                 activityInfo =
@@ -168,10 +168,44 @@ class SatelliteAppsRepositoryTest {
             )
             .thenReturn(resolveInfo)
 
-        val result = satelliteAppsRepository.getSettingsIntent()
+        val result = satelliteAppsRepository.getSettingsIntent(true)
 
         assertThat(result).isNotNull()
         assertThat(result!!.action).isEqualTo(Settings.ACTION_SATELLITE_SETTING)
+    }
+
+    @Test
+    fun getSettingsIntent_carrierRoamingNotSupported_returnsSconeIntent() {
+        val resolveInfo =
+            ResolveInfo().apply {
+                activityInfo =
+                    ActivityInfo().apply {
+                        applicationInfo =
+                            ApplicationInfo().apply {
+                                packageName = SatelliteAppsRepository.PACKAGE_NAME_SCONE
+                            }
+                        name = "SettingsGatewayActivity"
+                    }
+            }
+        `when`(
+                packageManager.resolveActivity(
+                    argThat {
+                        it.component?.packageName == SatelliteAppsRepository.PACKAGE_NAME_SCONE &&
+                            it.component?.className ==
+                                SatelliteAppsRepository.COMPONENT_NAME_SETTINGS_GATEWAY_ACTIVITY
+                    },
+                    anyInt(),
+                )
+            )
+            .thenReturn(resolveInfo)
+
+        val result = satelliteAppsRepository.getSettingsIntent(false)
+
+        assertThat(result).isNotNull()
+        assertThat(result!!.component?.packageName)
+            .isEqualTo(SatelliteAppsRepository.PACKAGE_NAME_SCONE)
+        assertThat(result.component?.className)
+            .isEqualTo(SatelliteAppsRepository.COMPONENT_NAME_SETTINGS_GATEWAY_ACTIVITY)
     }
 
     @Test
@@ -184,7 +218,7 @@ class SatelliteAppsRepositoryTest {
             )
             .thenReturn(null)
 
-        val result = satelliteAppsRepository.getSettingsIntent()
+        val result = satelliteAppsRepository.getSettingsIntent(true)
 
         assertThat(result).isNull()
     }

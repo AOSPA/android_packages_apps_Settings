@@ -20,7 +20,6 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.provider.Settings
 import android.telephony.SubscriptionManager
 import android.util.Log
 import android.view.View
@@ -237,23 +236,15 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
         footerPreference?.setTitle(footerTextResId)
         footerPreference?.setLearnMoreText(getString(R.string.satellite_more_info_text))
         footerPreference?.setLearnMoreAction {
-            // TODO(434793872): This action does nothing for Skylo only NB-IoT devices. For Skylo
-            // only devices, we should launch SettingsGatewayActivity to get to the Satellite SOS
-            // Settings page. Same for "Settings" in the satellite apps.
-            val intent =
-                Intent(Settings.ACTION_SATELLITE_SETTING).apply {
-                    putExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, true)
-                    putExtra(EXTRA_SUB_ID, activeSubId)
-                }
-            startActivitySafely(intent)
+            viewModel.getSettingsIntent()?.let { startActivitySafely(it) }
         }
     }
 
     private fun startActivitySafely(intent: Intent) {
         try {
-            requireContext().startActivity(intent)
+            context?.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
-            Log.e(TAG, "Failed to start activity: $intent", e)
+            Log.e(TAG, "Failed to start activity: ${intent.action ?: intent.component}", e)
         }
     }
 
