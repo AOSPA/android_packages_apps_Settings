@@ -4343,7 +4343,6 @@
         <activity
             android:name="Settings$BubbleNotificationSettingsActivity"
             android:label="@string/bubbles_app_toggle_title"
-            android:featureFlag="com.android.settings.flags.deeplink_notifications_25q4"
             android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_BUBBLE_SETTINGS" />

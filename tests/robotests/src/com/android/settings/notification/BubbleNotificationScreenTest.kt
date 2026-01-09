@@ -17,24 +17,26 @@
 package com.android.settings.notification
 
 import android.app.ActivityManager
+import android.content.Context
 import android.provider.Settings.Secure.NOTIFICATION_BUBBLES
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings.BubbleNotificationSettingsActivity
-import com.android.settings.flags.Flags
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settings.testutils.shadow.ShadowActivityManager
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 
-class BubbleNotificationScreenTest : SettingsCatalystTestCase() {
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_NOTIFICATIONS_25Q4
+@RunWith(AndroidJUnit4::class)
+class BubbleNotificationScreenTest {
+    private val preferenceScreenCreator = BubbleNotificationScreen()
 
-    override val preferenceScreenCreator = BubbleNotificationScreen()
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
     @Test
     fun key_isEqualToStatic() {
