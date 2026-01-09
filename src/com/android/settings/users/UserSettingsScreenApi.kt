@@ -16,7 +16,10 @@
 
 package com.android.settings.users
 
+import android.Manifest.permission.CREATE_USERS
+import android.Manifest.permission.GET_ACCOUNTS_PRIVILEGED
 import android.Manifest.permission.MANAGE_USERS
+import android.Manifest.permission.QUERY_USERS
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.UserHandle
@@ -25,13 +28,17 @@ import android.provider.Settings
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.flags.Flags
+import com.android.settingslib.RestrictedLockUtilsInternal
+import com.android.settingslib.datastore.Permissions.Companion.anyOf
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseRestriction
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
 
 // LINT.IfChange
 @ProvidePreferenceScreen(UserSettingsScreenApi.KEY)
@@ -55,6 +62,100 @@ class UserSettingsScreenApi :
                 Allowed
             } else {
                 HardwareUnsupported(R.string.user_settings_unsupported)
+            }
+        }
+
+        preference(
+            key = "multiple_users_main_switch",
+            purpose = R.string.user_settings_main_switch_purpose,
+            type = AnyBoolean,
+        ) {
+            permissions(anyOf(MANAGE_USERS, CREATE_USERS, QUERY_USERS))
+            // TODO(b/476520565): Tidy this section when the improved way of defining user
+            //  restrictions is added.
+            preconditions(R.string.user_settings_main_switch_precondition) {
+                val userManager = context.getSystemService(UserManager::class.java)
+                if (
+                    !context.resources.getBoolean(
+                        com.android.internal.R.bool.config_allowChangeUserSwitcherEnabled
+                    )
+                ) {
+                    HardwareUnsupported(R.string.user_settings_main_switch_config_unsupported)
+                } else if (userManager.isGuestUser) {
+                    Custom(R.string.user_settings_main_switch_guest_user_unavailable)
+                } else {
+                    Allowed
+                }
+            }
+
+            get { execute { UserCapabilities.create(context).mUserSwitcherEnabled } }
+
+            set {
+                preconditions(R.string.user_settings_main_switch_set_precondition) {
+                    val userCaps = UserCapabilities.create(context)
+                    if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                        if (
+                            !userCaps.mDisallowSwitchUserRestrictionEnforcementInfo
+                                .getAllAdmins()
+                                .isEmpty() &&
+                                !userCaps.mDisallowSwitchUserRestrictionEnforcementInfo
+                                    .isOnlyEnforcedBySystem()
+                        ) {
+                            EnterpriseRestriction(R.string.user_settings_restricted_by_work_policy)
+                        }
+                    } else {
+                        val enforcedAdmin =
+                            RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                                context,
+                                UserManager.DISALLOW_USER_SWITCH,
+                                UserHandle.myUserId(),
+                            )
+                        if (enforcedAdmin != null) {
+                            EnterpriseRestriction(R.string.user_settings_restricted_by_work_policy)
+                        }
+                    }
+                    if (!userCaps.mIsMain) {
+                        Custom(R.string.user_settings_main_switch_non_main_user_restricted)
+                    } else if (userCaps.mDisallowSwitchUser) {
+                        // This one should not ever happen once the flag is released
+                        Custom(R.string.user_settings_main_switch_config_unsupported)
+                    } else {
+                        Allowed
+                    }
+                }
+                execute { value ->
+                    Settings.Global.putInt(
+                        context.contentResolver,
+                        Settings.Global.USER_SWITCHER_ENABLED,
+                        if (value) ON else OFF,
+                    )
+                }
+            }
+        }
+
+        preference(
+            key = "edit_user_name",
+            purpose = R.string.user_settings_name_edit_purpose,
+            type = AnyString,
+        ) {
+            get {
+                permissions(anyOf(MANAGE_USERS, CREATE_USERS, QUERY_USERS, GET_ACCOUNTS_PRIVILEGED))
+                execute { context.getSystemService(UserManager::class.java).userName }
+            }
+
+            set {
+                permissions(MANAGE_USERS)
+                preconditions(R.string.user_settings_edit_name_precondition) {
+                    val userManager = context.getSystemService(UserManager::class.java)
+                    if (userManager.isGuestUser || userManager.isProfile) {
+                        Custom(R.string.user_settings_edit_name_restricted)
+                    } else {
+                        Allowed
+                    }
+                }
+                execute { value ->
+                    context.getSystemService(UserManager::class.java).setUserName(value)
+                }
             }
         }
 
@@ -149,8 +250,8 @@ class UserSettingsScreenApi :
             preconditions(R.string.user_settings_add_users_from_lockscreen_precondition) {
                 val userManager = context.getSystemService(UserManager::class.java)
                 val userCaps = UserCapabilities.create(context)
-                if (userCaps.mDisallowAddUser || userCaps.mDisallowAddUserSetByAdmin) {
-                    Custom(R.string.user_settings_restricted_by_work_policy)
+                if (userCaps.mDisallowAddUser) {
+                    EnterpriseRestriction(R.string.user_settings_restricted_by_work_policy)
                 } else if (
                     context.resources.getBoolean(
                         com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen
