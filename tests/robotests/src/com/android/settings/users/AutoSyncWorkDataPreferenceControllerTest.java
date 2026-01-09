@@ -119,4 +119,23 @@ public class AutoSyncWorkDataPreferenceControllerTest {
         assertThat(mController.mUserHandle.getIdentifier()).isEqualTo(MANAGED_PROFILE_ID);
         assertThat(mController.isAvailable()).isTrue();
     }
+
+    @Test
+    public void isAvailable_forceDisabled_shouldReturnFalse() {
+        // Setup conditions where the controller would normally be available.
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        when(mUserManager.isRestrictedProfile()).thenReturn(false);
+        final List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(UserHandle.USER_SYSTEM, "user 1", 0 /* flags */));
+        infos.add(new UserInfo(
+                MANAGED_PROFILE_ID, "work profile", UserInfo.FLAG_MANAGED_PROFILE));
+        when(mUserManager.getProfiles(eq(UserHandle.USER_SYSTEM))).thenReturn(infos);
+
+        // Create the controller with forceDisable = true.
+        mController = new AutoSyncWorkDataPreferenceController(mContext, mFragment,
+                true /* forceDisable */);
+
+        // The controller should not be available because it's force-disabled.
+        assertThat(mController.isAvailable()).isFalse();
+    }
 }
