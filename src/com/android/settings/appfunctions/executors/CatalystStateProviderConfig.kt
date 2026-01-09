@@ -18,6 +18,8 @@ package com.android.settings.appfunctions
 
 import android.content.Context
 import com.android.server.connectivity.Flags as ConnectivityFlags
+import com.android.settings.TrustedCredentialsScreenApi
+import com.android.settings.UserCredentialsScreenApi
 import com.android.settings.accessibility.AccessibilityScreen
 import com.android.settings.accessibility.ColorAndMotionScreen
 import com.android.settings.accessibility.VibrationIntensityScreen
@@ -119,6 +121,9 @@ import com.android.settings.notification.app.ConversationListScreen
 import com.android.settings.notification.modes.ZenModesListScreen
 import com.android.settings.print.PrintSettingsApiScreen
 import com.android.settings.safetycenter.ui.AccountSecuritySubpageScreenApi
+import com.android.settings.security.CredentialManagementAppScreenApi
+import com.android.settings.security.EncryptionAndCredentialScreenApi
+import com.android.settings.security.InstallCertificateFromStorageScreenApi
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.security.trustagent.TrustAgentApiScreen
 import com.android.settings.sound.MediaControlsScreen
@@ -487,6 +492,14 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = UsbDetailsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UnrestrictedDataAccessApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AccountSecuritySubpageScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = TrustedCredentialsScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = UserCredentialsScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = CredentialManagementAppScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = EncryptionAndCredentialScreenApi.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = InstallCertificateFromStorageScreenApi.KEY,
+        ),
     )
 
 private fun getDeviceStateItemList() =
