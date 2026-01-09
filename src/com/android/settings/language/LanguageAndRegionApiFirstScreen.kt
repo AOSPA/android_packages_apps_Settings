@@ -16,28 +16,116 @@
 
 package com.android.settings.language
 
+import android.content.Context
+import android.os.LocaleList
+import android.util.Log
+import com.android.internal.app.LocalePicker
+import com.android.internal.app.LocaleStore
+import com.android.internal.app.SystemLocaleCollector
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settings.localepicker.LocaleUtils
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
+import java.util.Locale
 
 // LINT.IfChange
 @ProvidePreferenceScreen(LanguageAndRegionApiFirstScreen.KEY)
-class LanguageAndRegionApiFirstScreen : PreferencesApiScreen(
-    key = KEY,
-    topLevelSettingsCategory = Category.SYSTEM,
-    fragment = LanguageAndRegionSettings::class,
-    purpose = R.string.language_and_region_settings_purpose,
-    alreadyPartiallyMigrated = LanguageAndRegionScreen::class
-) {
+class LanguageAndRegionApiFirstScreen :
+    PreferencesApiScreen(
+        key = KEY,
+        topLevelSettingsCategory = Category.SYSTEM,
+        fragment = LanguageAndRegionSettings::class,
+        purpose = R.string.language_and_region_settings_purpose,
+        alreadyPartiallyMigrated = LanguageAndRegionScreen::class,
+    ) {
 
     init {
         flag { Flags.catalystMigration26q2() }
+
+        preference(
+            key = KEY_PREFERENCE,
+            purpose = R.string.default_system_language_purpose,
+            type =
+                GeneratedType(description = R.string.default_system_language_description) {
+                    // value: language code/tag, for example, en-US, fr-CA
+                    // description: Full language name (language with region), for example,
+                    // English (United State), Français (Canada)
+                    val localeInfoList = getLocaleInfoList(context)
+                    // If a language has been added to the user's list, it will not appear in the
+                    // supported list. We need to add it back to ensure the list is complete.
+                    localeInfoList.addAll(LocaleUtils.getUserLocaleList())
+                    localeInfoList.map {
+                        GeneratedValue(it.locale.toLanguageTag(), it.fullNameNative)
+                    }
+                },
+        ) {
+            get { execute { Locale.getDefault().toLanguageTag() } }
+            set {
+                execute { value ->
+                    val locale = Locale.forLanguageTag(value)
+                    // Check whether the country that user inputs is in the user list already
+                    val userLocaleList = LocaleUtils.getUserLocaleList()
+                    val index =
+                        userLocaleList.indexOfFirst {
+                            it?.locale?.toLanguageTag()?.startsWith(locale.toLanguageTag()) == true
+                        }
+                    if (index != -1) {
+                        // In the user list, move the user input to the first position
+                        val defaultLocale = userLocaleList.removeAt(index)
+                        userLocaleList.add(0, defaultLocale)
+                    } else {
+                        // It's not in the user list, check whether it is in the supported list
+                        // If the language is supported, add it to the top of the user list.
+                        getLocaleInfoList(context)
+                            .find {
+                                locale
+                                    .toLanguageTag()
+                                    .startsWith(it.locale.toLanguageTag(), ignoreCase = true)
+                            }
+                            ?.let { localeInfo ->
+                                userLocaleList.add(0, LocaleStore.getLocaleInfo(locale))
+                            }
+                    }
+                    val localeList = LocaleList(*userLocaleList.map { it?.locale }.toTypedArray())
+                    // Update the device settings by the new locale list
+                    LocaleList.setDefault(localeList)
+                    LocalePicker.updateLocales(localeList)
+                }
+            }
+        }
+    }
+
+    private fun getSupportedLanguageList(
+        context: Context,
+        parent: LocaleStore.LocaleInfo?,
+        isForCountryMode: Boolean,
+    ): Set<LocaleStore.LocaleInfo> {
+        return SystemLocaleCollector(context, null)
+            .getSupportedLocaleList(parent, false, isForCountryMode)
+    }
+
+    private fun getLocaleInfoList(context: Context): MutableList<LocaleStore.LocaleInfo> {
+        // The language which is supported on the device, for example, en, es, fr...etc
+        val languageList = getSupportedLanguageList(context, null, false)
+        val localeInfoList: MutableList<LocaleStore.LocaleInfo> = ArrayList()
+        for (language in languageList) {
+            // Use the language to get its region, for example,
+            // en: en-US, en-UK, en-IN...etc
+            // es: es-US, es-ES, es-AR...etc
+            // fr: fr-FR, fr-CA, fr-LU...etc
+            localeInfoList.addAll(getSupportedLanguageList(context, language, true))
+        }
+        return localeInfoList
     }
 
     companion object {
+        const val TAG = "LanguageAndRegionApiFirstScreen"
         const val KEY = "api_language_and_region_settings"
+        const val KEY_PREFERENCE = "default_system_language_preference"
     }
 }
 // LINT.ThenChange(LanguageAndRegionSettings.java, LanguageAndRegionPreferenceController.java)
