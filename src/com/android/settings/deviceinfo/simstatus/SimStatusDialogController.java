@@ -51,6 +51,7 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -58,6 +59,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import kotlin.Unit;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Controller for Sim Status information within the About Phone Settings page.
@@ -96,6 +98,14 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
     final static int IMS_REGISTRATION_STATE_LABEL_ID = R.id.ims_reg_state_label;
     @VisibleForTesting
     final static int IMS_REGISTRATION_STATE_VALUE_ID = R.id.ims_reg_state_value;
+    @VisibleForTesting
+    final static int GID1_VALUE_ID = R.id.gid1_value;
+    @VisibleForTesting
+    final static int GID1_LABEL_ID = R.id.gid1_label;
+    @VisibleForTesting
+    final static int CARRIER_ID_VALUE_ID = R.id.carrier_id_value;
+    @VisibleForTesting
+    final static int CARRIER_ID_LABEL_ID = R.id.carrier_id_label;
 
     @VisibleForTesting
     static final int MAX_PHONE_COUNT_SINGLE_SIM = 1;
@@ -228,6 +238,8 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         updateNetworkType();
         updateRoamingStatus(serviceState);
         updateIccidNumber();
+        updateGid1();
+        updateCarrierId();
 
         if (mSubscriptionInfo == null) {
             updateDataState(TelephonyManager.DATA_UNKNOWN);
@@ -511,22 +523,59 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
     }
 
     private void updateIccidNumber() {
-        // do not show iccid by default
-        boolean showIccId = false;
+        updateCarrierConfigManagedItem(ICCID_INFO_LABEL_ID, ICCID_INFO_VALUE_ID,
+                CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL,
+                () -> getTelephonyManager().getSimSerialNumber());
+    }
+
+    private void updateGid1() {
+        if (Flags.showSimStatusDetailedInfo()) {
+            updateCarrierConfigManagedItem(GID1_LABEL_ID, GID1_VALUE_ID,
+                    CarrierConfigManager.KEY_SHOW_GID1_IN_SIM_STATUS_BOOL,
+                    () -> getTelephonyManager().getGroupIdLevel1());
+        } else {
+            mDialog.removeSettingFromScreen(GID1_LABEL_ID);
+            mDialog.removeSettingFromScreen(GID1_VALUE_ID);
+        }
+    }
+
+    private void updateCarrierId() {
+        if (Flags.showSimStatusDetailedInfo()) {
+            updateCarrierConfigManagedItem(CARRIER_ID_LABEL_ID, CARRIER_ID_VALUE_ID,
+                    CarrierConfigManager.KEY_SHOW_CARRIER_ID_IN_SIM_STATUS_BOOL,
+                    () -> String.valueOf(getTelephonyManager().getSimCarrierId()));
+        } else {
+            mDialog.removeSettingFromScreen(CARRIER_ID_LABEL_ID);
+            mDialog.removeSettingFromScreen(CARRIER_ID_VALUE_ID);
+        }
+    }
+
+
+
+    /**
+     * Updates the visibility and text of a dialog item based on a boolean Carrier Config key.
+     *
+     * @param labelId       The resource ID of the label view.
+     * @param valueId       The resource ID of the value view.
+     * @param key           The CarrierConfig key to check (must be a boolean).
+     * @param valueSupplier A supplier that provides the text value if the item is shown.
+     */
+    private void updateCarrierConfigManagedItem(int labelId, int valueId, String key,
+            Supplier<String> valueSupplier) {
+        boolean show = false;
         if (mSubscriptionInfo != null) {
             final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
             final PersistableBundle carrierConfig =
                     mCarrierConfigManager.getConfigForSubId(subscriptionId);
             if (carrierConfig != null) {
-                showIccId = carrierConfig.getBoolean(
-                        CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL);
+                show = carrierConfig.getBoolean(key);
             }
         }
-        if (!showIccId) {
-            mDialog.removeSettingFromScreen(ICCID_INFO_LABEL_ID);
-            mDialog.removeSettingFromScreen(ICCID_INFO_VALUE_ID);
+        if (!show) {
+            mDialog.removeSettingFromScreen(labelId);
+            mDialog.removeSettingFromScreen(valueId);
         } else {
-            mDialog.setText(ICCID_INFO_VALUE_ID, getTelephonyManager().getSimSerialNumber());
+            mDialog.setText(valueId, valueSupplier.get());
         }
     }
 
