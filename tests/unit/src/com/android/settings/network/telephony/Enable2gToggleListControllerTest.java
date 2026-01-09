@@ -33,6 +33,7 @@ import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -62,6 +63,8 @@ public final class Enable2gToggleListControllerTest {
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Mock
     private SubscriptionManager mSubscriptionManager;
+    @Mock
+    private Fragment mFragment;
 
     private PreferenceCategory mPreferenceCategory;
     private PreferenceScreen mPreferenceScreen;
@@ -86,7 +89,7 @@ public final class Enable2gToggleListControllerTest {
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
 
         mController = new Enable2gToggleListController(mContext, PREFERENCE_KEY);
-
+        mController.init(mFragment);
         mPreferenceCategory = spy(new PreferenceCategory(mContext));
         mPreferenceCategory.setKey(PREFERENCE_KEY);
         RestrictedSwitchPreference preferenceCategory =

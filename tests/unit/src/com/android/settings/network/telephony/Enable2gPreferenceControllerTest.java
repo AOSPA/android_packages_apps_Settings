@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -32,21 +33,28 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Looper;
+import android.os.PersistableBundle;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
+import android.telephony.CarrierConfigManager;
 import android.telephony.RadioAccessFamily;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -68,11 +76,19 @@ public final class Enable2gPreferenceControllerTest {
     private TelephonyManager mInvalidTelephonyManager;
     @Mock
     private SubscriptionManager mSubscriptionManager;
+    @Mock
+    private Fragment mFragment;
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private RestrictedSwitchPreference mPreference;
     private PreferenceScreen mPreferenceScreen;
     private Enable2gPreferenceController mController;
     private Context mContext;
+    @Mock
+    private CarrierConfigManager mCarrierConfigManager;
+
+    private PersistableBundle mCarrierConfig;
 
     @Before
     public void setUp() {
@@ -85,6 +101,10 @@ public final class Enable2gPreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
+        when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
+                mCarrierConfigManager);
+        mCarrierConfig = new PersistableBundle();
+        when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
         Resources resources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(resources);
         when(resources.getString(R.string.enable_2g_summary)).thenReturn(ENABLE_2G_SUMMARY);
@@ -115,12 +135,12 @@ public final class Enable2gPreferenceControllerTest {
         mPreference.setKey(PREFERENCE_KEY);
         mPreferenceScreen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         mPreferenceScreen.addPreference(mPreference);
-        mController.init(SUB_ID);
+        mController.init(mFragment, SUB_ID);
     }
 
     @Test
     public void getAvailabilityStatus_invalidSubId_returnUnavailable() {
-        mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mController.init(mFragment, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
@@ -152,14 +172,34 @@ public final class Enable2gPreferenceControllerTest {
 
     @Test
     public void setChecked_invalidSubIdAndIsCheckedTrue_returnFalse() {
-        mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mController.init(mFragment, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         assertThat(mController.setChecked(true)).isFalse();
     }
 
     @Test
     public void setChecked_invalidSubIdAndIsCheckedFalse_returnFalse() {
-        mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mController.init(mFragment, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         assertThat(mController.setChecked(false)).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_KEY_CARRIER_2G_TOGGLE)
+    public void setCheckedWithFalse_carrierDisabled2gNetwork() {
+        mCarrierConfig.putBoolean(
+                CarrierConfigManager.KEY_CARRIER_DEFAULT_2G_PROTECTION_ENABLED_BOOL, true);
+
+        assertThat(mController.setChecked(false)).isTrue();
+        verify(mPreference, never()).isDisabledByAdmin();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_KEY_CARRIER_2G_TOGGLE)
+    public void setCheckedWithTrue_carrierDisabled2gNetwork() {
+        when2gIsDisabledByAdmin(false);
+        mCarrierConfig.putBoolean(
+                CarrierConfigManager.KEY_CARRIER_DEFAULT_2G_PROTECTION_ENABLED_BOOL, true);
+
+        assertThat(mController.setChecked(true)).isFalse();
     }
 
     @Test
@@ -227,7 +267,7 @@ public final class Enable2gPreferenceControllerTest {
 
     @Test
     public void updateState_notUsableSubscriptionId() {
-        mController.init(-1);
+        mController.init(mFragment, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         when2gIsDisabledByAdmin(false);
 
         mController.updateState((Preference) mPreference);
@@ -256,7 +296,7 @@ public final class Enable2gPreferenceControllerTest {
         List<SubscriptionInfo> subInfos = new ArrayList();
         subInfos.add(subscriptionInfo);
         when(mSubscriptionManager.getAllSubscriptionInfoList()).thenReturn(subInfos);
-        mController.init(SUB_ID, true);
+        mController.init(mFragment, SUB_ID, true);
 
         mController.updateState((Preference) mPreference);
 
@@ -274,7 +314,7 @@ public final class Enable2gPreferenceControllerTest {
         List<SubscriptionInfo> subInfos = new ArrayList();
         subInfos.add(subscriptionInfo);
         when(mSubscriptionManager.getAllSubscriptionInfoList()).thenReturn(subInfos);
-        mController.init(SUB_ID, true);
+        mController.init(mFragment, SUB_ID, true);
 
         mController.updateState((Preference) mPreference);
 

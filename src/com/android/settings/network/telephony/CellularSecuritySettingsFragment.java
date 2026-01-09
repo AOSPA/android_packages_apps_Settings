@@ -38,6 +38,7 @@ public class CellularSecuritySettingsFragment extends DashboardFragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mAdaptiveNetworkPreferenceController = new AdaptiveNetworkPreferenceController(context);
+        use(Enable2gToggleListController.class).init(this);
     }
 
     @Override
