@@ -18,9 +18,15 @@ package com.android.settings.input.gamecontroller
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.ComponentName
 import android.content.Context
+import android.content.pm.ActivityInfo
+import android.content.pm.PackageInfo
 import android.hardware.input.InputDeviceIdentifier
 import android.hardware.input.InputManager
+import android.hardware.input.KeyGlyphMap
+import android.util.SparseArray
+import android.util.SparseIntArray
 import android.view.InputDevice
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
@@ -31,6 +37,7 @@ import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceK
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToButtonMap
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToNameMap
 import com.android.settings.testutils.InstantTaskExecutorRule
+import com.android.settings.testutils.shadow.ShadowInputManager
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -41,48 +48,47 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.mockito.kotlin.any
-import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.spy
-import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.Config
 
 /** Tests for [GameControllerRemappingPreferenceController]. */
 @RunWith(AndroidJUnit4::class)
+@Config(shadows = [ShadowInputManager::class])
 @SuppressLint("MissingPermission")
 class GameControllerRemappingPreferenceControllerTest {
 
     @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
     @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Mock private lateinit var inputManager: InputManager
     @Mock private lateinit var screen: PreferenceScreen
 
     private lateinit var context: Context
     private lateinit var application: Application
+    private lateinit var shadowInputManager: ShadowInputManager
     private lateinit var viewModel: GameControllerViewModel
     private lateinit var controller: GameControllerRemappingPreferenceController
     private lateinit var identifier: InputDeviceIdentifier
-    private lateinit var preferenceMocks: Map<String, Preference>
+    private lateinit var preferences: Map<String, Preference>
 
     @Before
     fun setUp() {
         context = ApplicationProvider.getApplicationContext()
-        application = spy(context.applicationContext as Application)
-        whenever(application.getSystemService(InputManager::class.java)).doReturn(inputManager)
-        // Create a map of mock preferences for all possible keys.
-        preferenceMocks =
-            preferenceKeyToNameMap.keys.associateWith { key ->
-                mock(Preference::class.java).also { whenever(it.key).doReturn(key) }
-            }
+        application = context.applicationContext as Application
 
-        // When findPreference is called, return the corresponding mock from our map.
+        val inputManager = context.getSystemService(InputManager::class.java)
+        shadowInputManager = shadowOf(inputManager) as ShadowInputManager
+
+        preferences =
+            preferenceKeyToNameMap.keys.associateWith { key ->
+                Preference(context).apply { this.key = key }
+            }
         whenever(screen.findPreference<Preference>(any())).thenAnswer { invocation ->
             val key = invocation.arguments[0] as String
-            preferenceMocks[key]
+            preferences[key]
         }
     }
 
@@ -92,9 +98,18 @@ class GameControllerRemappingPreferenceControllerTest {
         axisRemapping: Map<Int, Int> = mapOf(),
     ) {
         identifier = device.identifier
-        whenever(inputManager.getInputDeviceByDescriptor(identifier.descriptor)).doReturn(device)
-        whenever(inputManager.getControllerButtonRemappings(identifier)).doReturn(buttonRemapping)
-        whenever(inputManager.getControllerAxisRemappings(identifier)).doReturn(axisRemapping)
+        shadowInputManager.addInputDevice(device)
+
+        shadowInputManager.clearAllControllerButtonRemappings(identifier)
+        shadowInputManager.clearAllControllerAxisRemappings(identifier)
+
+        val inputManager = context.getSystemService(InputManager::class.java)
+        buttonRemapping.forEach { (from, to) ->
+            inputManager.remapControllerButton(identifier, from, to)
+        }
+        axisRemapping.forEach { (from, to) ->
+            inputManager.remapControllerAxis(identifier, from, to)
+        }
 
         viewModel = GameControllerViewModel(application, identifier)
         controller = GameControllerRemappingPreferenceController(context, viewModel)
@@ -118,8 +133,8 @@ class GameControllerRemappingPreferenceControllerTest {
                 )
         )
 
-        preferenceKeyToButtonMap.keys.forEach { verify(preferenceMocks[it]!!).isVisible = true }
-        preferenceKeyToAxesMap.keys.forEach { verify(preferenceMocks[it]!!).isVisible = true }
+        preferenceKeyToButtonMap.keys.forEach { assertThat(preferences[it]!!.isVisible).isTrue() }
+        preferenceKeyToAxesMap.keys.forEach { assertThat(preferences[it]!!.isVisible).isTrue() }
     }
 
     @Test
@@ -133,8 +148,8 @@ class GameControllerRemappingPreferenceControllerTest {
                 )
         )
 
-        preferenceKeyToButtonMap.keys.forEach { verify(preferenceMocks[it]!!).isVisible = true }
-        preferenceKeyToAxesMap.keys.forEach { verify(preferenceMocks[it]!!).isVisible = false }
+        preferenceKeyToButtonMap.keys.forEach { assertThat(preferences[it]!!.isVisible).isTrue() }
+        preferenceKeyToAxesMap.keys.forEach { assertThat(preferences[it]!!.isVisible).isFalse() }
     }
 
     @Test
@@ -148,8 +163,25 @@ class GameControllerRemappingPreferenceControllerTest {
                 )
         )
 
-        preferenceKeyToButtonMap.keys.forEach { verify(preferenceMocks[it]!!).isVisible = false }
-        preferenceKeyToAxesMap.keys.forEach { verify(preferenceMocks[it]!!).isVisible = true }
+        preferenceKeyToButtonMap.keys.forEach { assertThat(preferences[it]!!.isVisible).isFalse() }
+        preferenceKeyToAxesMap.keys.forEach { assertThat(preferences[it]!!.isVisible).isTrue() }
+    }
+
+    @Test
+    fun displayPreference_withGlyphMap_setsIconAndTitle() {
+        val key = preferenceKeyToButtonMap.keys.first()
+        val keycode = preferenceKeyToButtonMap[key]!!
+        val glyphMap = createGlyphMapForKey(keycode, android.R.drawable.ic_delete, "Custom Button")
+
+        val device = createGameController(deviceId = 1, name = "Test Controller")
+        shadowInputManager.setKeyGlyphMap(device.id, glyphMap)
+
+        setupController(device = device)
+
+        val pref = preferences[key]!!
+        assertThat(pref.icon).isNotNull()
+        assertThat(shadowOf(pref.icon).createdFromResId).isEqualTo(android.R.drawable.ic_delete)
+        assertThat(pref.title).isEqualTo("Custom Button")
     }
 
     @Test
@@ -169,7 +201,8 @@ class GameControllerRemappingPreferenceControllerTest {
             controller.updateState(screen)
 
             // Verify the summary of the "from" preference is now the name of the "to" preference
-            verify(preferenceMocks[fromKey]!!).setSummary(preferenceKeyToNameMap[toKey]!!)
+            assertThat(preferences[fromKey]!!.summary)
+                .isEqualTo(context.getString(preferenceKeyToNameMap[toKey]!!))
         }
     }
 
@@ -191,7 +224,8 @@ class GameControllerRemappingPreferenceControllerTest {
             controller.updateState(screen)
 
             // Verify the summary of the "from" preference is now the name of the "to" preference
-            verify(preferenceMocks[fromKey]!!).setSummary(preferenceKeyToNameMap[toKey]!!)
+            assertThat(preferences[fromKey]!!.summary)
+                .isEqualTo(context.getString(preferenceKeyToNameMap[toKey]!!))
         }
     }
 
@@ -203,8 +237,8 @@ class GameControllerRemappingPreferenceControllerTest {
         controller.updateState(screen)
 
         // Verify that all preferences have their default summary
-        preferenceMocks.forEach { (key, pref) ->
-            verify(pref).setSummary(preferenceKeyToNameMap[key]!!)
+        preferences.forEach { (key, pref) ->
+            assertThat(pref.summary).isEqualTo(context.getString(preferenceKeyToNameMap[key]!!))
         }
     }
 
@@ -224,7 +258,7 @@ class GameControllerRemappingPreferenceControllerTest {
                 }
 
                 // Trigger the action that should emit to the flow.
-                val handled = controller.handlePreferenceTreeClick(preferenceMocks[fromKey]!!)
+                val handled = controller.handlePreferenceTreeClick(preferences[fromKey]!!)
                 assertThat(handled).isTrue()
 
                 // Wait for the collector coroutine to complete.
@@ -243,5 +277,40 @@ class GameControllerRemappingPreferenceControllerTest {
             .setName(name)
             .setDescriptor("device $deviceId")
             .build()
+    }
+
+    private fun createGlyphMapForKey(keycode: Int, glyph: Int, displayName: String): KeyGlyphMap {
+        val componentName =
+            ComponentName(context.packageName, "com.android.settings.test.DummyReceiver")
+
+        val activityInfo = ActivityInfo()
+        activityInfo.packageName = componentName.packageName
+        activityInfo.name = componentName.className
+        activityInfo.applicationInfo = context.applicationInfo
+
+        val pm = shadowOf(context.packageManager)
+
+        val packageInfo = PackageInfo()
+        packageInfo.packageName = context.packageName
+        packageInfo.applicationInfo = context.applicationInfo
+        packageInfo.receivers = arrayOf(activityInfo)
+        pm.installPackage(packageInfo)
+
+        pm.addOrUpdateReceiver(activityInfo)
+
+        val keyGlyphs = SparseIntArray()
+        keyGlyphs.put(keycode, glyph)
+
+        val keyNames = SparseArray<String>()
+        keyNames.put(keycode, displayName)
+
+        return KeyGlyphMap(
+            componentName,
+            keyGlyphs,
+            keyNames,
+            SparseIntArray(),
+            intArrayOf(),
+            emptyMap(),
+        )
     }
 }
