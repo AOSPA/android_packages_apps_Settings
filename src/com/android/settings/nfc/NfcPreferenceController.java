@@ -21,16 +21,18 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.nfc.NfcAdapter;
+import android.os.UserManager;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.slices.SliceBackgroundWorker;
-import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -43,7 +45,6 @@ public class NfcPreferenceController extends TogglePreferenceController
     public static final String KEY_TOGGLE_NFC = "toggle_nfc";
     private final NfcAdapter mNfcAdapter;
     private NfcEnabler mNfcEnabler;
-    private SettingsMainSwitchPreference mPreference;
 
     public NfcPreferenceController(Context context, String key) {
         super(context, key);
@@ -58,9 +59,19 @@ public class NfcPreferenceController extends TogglePreferenceController
             return;
         }
 
-        mPreference = screen.findPreference(getPreferenceKey());
-        mPreference.addOnSwitchChangeListener(this);
-        mNfcEnabler = new NfcEnabler(mContext, mPreference);
+        final RestrictedSwitchPreference preference = screen.findPreference(getPreferenceKey());
+        updateState(preference);
+
+        mNfcEnabler = new NfcEnabler(mContext, preference);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        if (isNfcUserChangeRestricted()) {
+            preference.setEnabled(false);
+        } else {
+            preference.setEnabled(true);
+        }
     }
 
     @Override
@@ -77,11 +88,16 @@ public class NfcPreferenceController extends TogglePreferenceController
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        if (isNfcUserChangeRestricted()) {
+            // Avoid turn on/off NFC if it was restricted.
+            return false;
+        }
         if (isChecked) {
             mNfcAdapter.enable();
         } else {
             mNfcAdapter.disable();
         }
+
         return true;
     }
 
@@ -125,6 +141,16 @@ public class NfcPreferenceController extends TogglePreferenceController
         if (mNfcEnabler != null) {
             mNfcEnabler.pause();
         }
+    }
+
+    private boolean isNfcUserChangeRestricted() {
+        final UserManager userManager = mContext.getSystemService(UserManager.class);
+        if (userManager == null) {
+            Log.e("NfcPreferenceController", "UserManager is null");
+            return false;
+        }
+        return userManager.hasUserRestriction(
+                        UserManager.DISALLOW_CHANGE_NEAR_FIELD_COMMUNICATION_RADIO);
     }
 
     /**

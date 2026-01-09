@@ -19,7 +19,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/nfc_quick_toggle_title">
 
-    <com.android.settings.widget.SettingsMainSwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="toggle_nfc"
         android:title="@string/nfc_main_switch_title"
         settings:userRestriction="no_near_field_communication_radio"
