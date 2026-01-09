@@ -104,7 +104,10 @@ open class CaptioningPropertiesScreen :
     }
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) { +CaptioningAppearanceScreen.KEY }
+        preferenceHierarchy(context) {
+            +CaptioningAppearanceScreen.KEY
+            +CaptioningMoreOptionsScreen.KEY
+        }
 
     companion object {
         const val KEY = "captioning_preference_screen"
