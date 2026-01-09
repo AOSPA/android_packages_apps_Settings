@@ -37,8 +37,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.spy
 import org.mockito.kotlin.any
+import org.mockito.kotlin.clearInvocations
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestParameterInjector
@@ -52,8 +54,6 @@ class IllustrationItemTest {
     private val illustrationItem: IllustrationItem = IllustrationItem()
     private val rootView: View =
         LayoutInflater.from(context).inflate(R.layout.setup_illustration_item, null)
-    private val animationView =
-        spy(rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration))
 
     @Test
     fun onBindView_setsImageDrawable() {
@@ -182,6 +182,37 @@ class IllustrationItemTest {
         illustrationItem.onBindView(rootView)
 
         verify(animationView).setFailureListener(any())
+    }
+
+    @Test
+    fun handleAnimationControl_animatedDrawable_togglesPauseAndResume() {
+        val imageUri = Uri.parse("content://test")
+        // Pass NULL for the drawable to simulate a Lottie raw resource
+        val rootView = setupMockView<AnimationDrawable>(imageUri, mockDrawable = null)
+        val animationView = rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
+        illustrationItem.imageUri = imageUri
+        illustrationItem.onBindView(rootView)
+        clearInvocations(animationView)
+
+        animationView.performClick()
+        verify(animationView).pauseAnimation()
+
+        animationView.performClick()
+        verify(animationView).resumeAnimation()
+    }
+
+    @Test
+    fun handleAnimationControl_staticDrawable_doesNotSetClickListener() {
+        val drawable = ColorDrawable(Color.RED)
+        illustrationItem.imageDrawable = drawable
+        illustrationItem.onBindView(rootView)
+        val illustrationView =
+            spy(rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration))
+
+        illustrationView.performClick()
+
+        verify(illustrationView, never()).pauseAnimation()
+        verify(illustrationView, never()).resumeAnimation()
     }
 
     /** Helper to verify that only one resource is active at a time. */

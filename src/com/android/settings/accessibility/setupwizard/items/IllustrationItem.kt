@@ -73,6 +73,9 @@ class IllustrationItem : Item {
             }
         }
 
+    private var isLottieAnimation = false
+    private var isLottieAnimationPaused = false
+
     constructor() : super()
 
     @JvmOverloads
@@ -89,6 +92,7 @@ class IllustrationItem : Item {
         val context = view.context
         val illustrationView = view.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
         handleImageWithAnimation(illustrationView)
+        handleAnimationControl(illustrationView)
 
         if (ThemeHelper.shouldApplyGlifExpressiveStyle(context)) {
             LottieAnimationHelper.get()
@@ -124,32 +128,55 @@ class IllustrationItem : Item {
     }
 
     private fun handleImageWithAnimation(illustrationView: LottieAnimationView) {
+        resetAnimations(illustrationView)
+        isLottieAnimation = false
+
         imageDrawable?.let { drawable ->
             illustrationView.setImageDrawable(drawable)
-            startAnimation(drawable)
+            startAnimatableDrawable(drawable)
+            return
         }
 
         imageUri?.let { uri ->
             illustrationView.setImageURI(uri)
             val drawable = illustrationView.getDrawable()
             if (drawable != null) {
-                startAnimation(drawable)
+                startAnimatableDrawable(drawable)
             } else {
                 // The lottie image from the raw folder also returns null because the ImageView
                 // couldn't handle it now.
                 startLottieAnimationWith(illustrationView, uri)
+                isLottieAnimation = true
             }
+            return
         }
 
         if (imageResId != 0) {
             illustrationView.setImageResource(imageResId)
             val drawable = illustrationView.getDrawable()
             if (drawable != null) {
-                startAnimation(drawable)
+                startAnimatableDrawable(drawable)
             } else {
                 // The lottie image from the raw folder also returns null because the ImageView
                 // couldn't handle it now.
                 startLottieAnimationWith(illustrationView, imageResId)
+                isLottieAnimation = true
+            }
+        }
+    }
+
+    /** Enable pause and resume abilities to animation only. */
+    private fun handleAnimationControl(illustrationView: LottieAnimationView) {
+        if (!isLottieAnimation) {
+            return
+        }
+
+        illustrationView.setOnClickListener {
+            isLottieAnimationPaused = !isLottieAnimationPaused
+            if (isLottieAnimationPaused) {
+                illustrationView.pauseAnimation()
+            } else {
+                illustrationView.resumeAnimation()
             }
         }
     }
@@ -186,28 +213,47 @@ class IllustrationItem : Item {
         illustrationView.playAnimation()
     }
 
-    private fun startAnimation(drawable: Drawable?) {
+    private fun resetAnimations(illustrationView: LottieAnimationView) {
+        resetAnimation(illustrationView.getDrawable())
+
+        illustrationView.cancelAnimation()
+    }
+
+    private fun resetAnimation(drawable: Drawable?) {
         if (drawable !is Animatable) {
             return
         }
 
         when (drawable) {
-            is Animatable2 -> drawable.registerAnimationCallback(mAnimationCallback)
-            is Animatable2Compat -> drawable.registerAnimationCallback(mAnimationCallbackCompat)
+            is Animatable2 -> drawable.clearAnimationCallbacks()
+            is Animatable2Compat -> drawable.clearAnimationCallbacks()
+        }
+
+        (drawable as Animatable).stop()
+    }
+
+    private fun startAnimatableDrawable(drawable: Drawable?) {
+        if (drawable !is Animatable) {
+            return
+        }
+
+        when (drawable) {
+            is Animatable2 -> drawable.registerAnimationCallback(animationCallback)
+            is Animatable2Compat -> drawable.registerAnimationCallback(animationCallbackCompat)
             is AnimationDrawable -> drawable.isOneShot = false
         }
 
         (drawable as Animatable).start()
     }
 
-    private val mAnimationCallback: Animatable2.AnimationCallback =
+    private val animationCallback: Animatable2.AnimationCallback =
         object : Animatable2.AnimationCallback() {
             override fun onAnimationEnd(drawable: Drawable) {
                 (drawable as Animatable).start()
             }
         }
 
-    private val mAnimationCallbackCompat: Animatable2Compat.AnimationCallback =
+    private val animationCallbackCompat: Animatable2Compat.AnimationCallback =
         object : Animatable2Compat.AnimationCallback() {
             override fun onAnimationEnd(drawable: Drawable) {
                 (drawable as Animatable).start()
