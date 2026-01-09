@@ -18,7 +18,6 @@ package com.android.settings.development;
 
 import static android.app.Activity.RESULT_OK;
 import static android.provider.Settings.Global.DEVELOPMENT_SETTINGS_ENABLED;
-import static android.service.quicksettings.TileService.ACTION_QS_TILE_PREFERENCES;
 import static android.view.flags.Flags.sensitiveContentAppProtectionApi;
 
 import android.app.Activity;
@@ -237,7 +236,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // Restore UI state based on whether developer options is enabled
         if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext())) {
             enableDeveloperOptions();
-            handleQsTileLongPressActionIfAny();
         } else {
             disableDeveloperOptions();
         }
@@ -302,36 +300,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     @Override
     protected boolean shouldSkipForInitialSUW() {
         return true;
-    }
-
-    /**
-     * Long-pressing a developer options quick settings tile will by default (see
-     * QS_TILE_PREFERENCES in the manifest) take you to the developer options page.
-     * Some tiles may want to go into their own page within the developer options.
-     */
-    private void handleQsTileLongPressActionIfAny() {
-        Intent intent = getActivity().getIntent();
-        if (intent == null || !TextUtils.equals(ACTION_QS_TILE_PREFERENCES, intent.getAction())) {
-            return;
-        }
-
-        Log.d(TAG, "Developer options started from qstile long-press");
-        final ComponentName componentName = (ComponentName) intent.getParcelableExtra(
-                Intent.EXTRA_COMPONENT_NAME);
-        if (componentName == null) {
-            return;
-        }
-
-        if (DevelopmentTiles.WirelessDebugging.class.getName().equals(
-                componentName.getClassName()) && getDevelopmentOptionsController(
-                AdbWirelessDebuggingPreferenceController.class).isAvailable()) {
-            Log.d(TAG, "Long press from wireless debugging qstile");
-            new SubSettingLauncher(getContext())
-                    .setDestination(AdbWirelessDebuggingFragment.class.getName())
-                    .setSourceMetricsCategory(SettingsEnums.SETTINGS_ADB_WIRELESS)
-                    .launch();
-        }
-        // Add other qstiles here
     }
 
     @Override

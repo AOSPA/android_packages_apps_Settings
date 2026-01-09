@@ -51,7 +51,6 @@ public class AdbWirelessDebuggingPreferenceController extends DeveloperOptionsPr
         LifecycleObserver, OnResume, OnPause {
     private static final String TAG =
             AdbWirelessDebuggingPreferenceController.class.getSimpleName();
-    private final IAdbManager mAdbManager;
     private final ContentResolver mContentResolver;
     private final ContentObserver mSettingsObserver;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
@@ -64,7 +63,6 @@ public class AdbWirelessDebuggingPreferenceController extends DeveloperOptionsPr
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
-        mAdbManager = IAdbManager.Stub.asInterface(ServiceManager.getService(Context.ADB_SERVICE));
         mSettingsObserver = new ContentObserver(mHandler) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
@@ -81,8 +79,17 @@ public class AdbWirelessDebuggingPreferenceController extends DeveloperOptionsPr
 
     @Override
     public boolean isAvailable() {
+        return isAvailable(mContext);
+    }
+
+    public static boolean isAvailable(Context context) {
+        final IAdbManager adbManager =
+                IAdbManager.Stub.asInterface(ServiceManager.getService(Context.ADB_SERVICE));
+        if (adbManager == null) {
+            return false;
+        }
         try {
-            return mAdbManager.isAdbWifiSupported();
+            return adbManager.isAdbWifiSupported();
         } catch (RemoteException e) {
             Log.e(TAG, "Unable to check if adb wifi is supported.", e);
         }
