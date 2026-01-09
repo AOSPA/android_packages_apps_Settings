@@ -17,10 +17,14 @@
 package com.android.settings.accessibility.shortcuts.ui
 
 import android.app.Application
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.shortcuts.ShortcutOptionPreference as ShortcutOptionWidget
+import com.android.settings.testutils.AccessibilityTestUtils
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.preference.createAndBindWidget
@@ -44,6 +48,7 @@ import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
 class TripleTapShortcutPreferenceTest {
+    @get:Rule val setFlagsRule = SetFlagsRule()
     @get:Rule val settingsStoreRule = SettingsStoreRule()
 
     private val appContext: Application = ApplicationProvider.getApplicationContext()
@@ -184,6 +189,38 @@ class TripleTapShortcutPreferenceTest {
 
     @Test
     fun isAvailable_whenTargetIsMagnification_returnsTrue() {
+        assertThat(preference.isAvailable(appContext)).isTrue()
+    }
+
+    @Test
+    fun isAvailable_whenTouchScreenSupported_returnsTrue() {
+        assertThat(preference.isAvailable(appContext)).isTrue()
+    }
+
+    @Test
+    @DisableFlags(
+        com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
+    )
+    fun isAvailable_whenTouchScreenNotSupportedFlagDisabled_returnsTrue() {
+        AccessibilityTestUtils.setTouchScreenSupported(appContext, false)
+        assertThat(preference.isAvailable(appContext)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(
+        com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
+    )
+    fun isAvailable_whenTouchScreenNotSupportedFlagEnabled_returnsFalse() {
+        AccessibilityTestUtils.setTouchScreenSupported(appContext, false)
+        assertThat(preference.isAvailable(appContext)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(
+        com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
+    )
+    fun isAvailable_whenTouchScreenSupportedFlagEnabled_returnsTrue() {
+        AccessibilityTestUtils.setTouchScreenSupported(appContext, true)
         assertThat(preference.isAvailable(appContext)).isTrue()
     }
 

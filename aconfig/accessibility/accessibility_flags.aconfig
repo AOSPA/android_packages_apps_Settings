@@ -91,6 +91,16 @@ flag {
 }
 
 flag {
+  name: "desktop_magnification_settings_polish"
+  namespace: "accessibility"
+  description: "Enables polish of magnification settings related to input form factors (touch and keyboard)."
+  bug: "422204290"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
+}
+
+flag {
   name: "enable_color_contrast_control"
   namespace: "accessibility"
   description: "Allows users to control color contrast in the Accessibility settings page."

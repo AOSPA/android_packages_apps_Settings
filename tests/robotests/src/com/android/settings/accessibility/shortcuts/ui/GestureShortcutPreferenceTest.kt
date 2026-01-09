@@ -18,6 +18,9 @@ package com.android.settings.accessibility.shortcuts.ui
 
 import android.content.Context
 import android.content.Intent
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.view.accessibility.AccessibilityManager
 import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener
 import androidx.fragment.app.testing.EmptyFragmentActivity
@@ -52,6 +55,7 @@ import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
 class GestureShortcutPreferenceTest {
+    @get:Rule val setFlagsRule = SetFlagsRule()
     @get:Rule val settingsStoreRule = SettingsStoreRule()
     private lateinit var appContext: Context
     private var activityScenario: ActivityScenario<EmptyFragmentActivity>? = null
@@ -171,6 +175,38 @@ class GestureShortcutPreferenceTest {
         )
 
         assertThat(preference.isAvailable(context)).isTrue()
+    }
+
+    @Test
+    fun isAvailable_whenTouchScreenSupported_returnsTrue() {
+        assertThat(preference.isAvailable(appContext)).isTrue()
+    }
+
+    @Test
+    @DisableFlags(
+        com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
+    )
+    fun isAvailable_whenTouchScreenNotSupportedFlagDisabled_returnsTrue() {
+        AccessibilityTestUtils.setTouchScreenSupported(appContext, false)
+        assertThat(preference.isAvailable(appContext)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(
+        com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
+    )
+    fun isAvailable_whenTouchScreenNotSupportedFlagEnabled_returnsFalse() {
+        AccessibilityTestUtils.setTouchScreenSupported(appContext, false)
+        assertThat(preference.isAvailable(appContext)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(
+        com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
+    )
+    fun isAvailable_whenTouchScreenSupportedFlagEnabled_returnsTrue() {
+        AccessibilityTestUtils.setTouchScreenSupported(appContext, true)
+        assertThat(preference.isAvailable(appContext)).isTrue()
     }
 
     @Test
