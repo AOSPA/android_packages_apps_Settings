@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The Android Open Source Project
+ * Copyright (C) 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility
+package com.android.settings.accessibility.colorandmotion.ui
 
 import android.app.settings.SettingsEnums
 import android.content.ComponentName
@@ -23,6 +23,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings.ColorAndMotionActivity
+import com.android.settings.accessibility.ColorAndMotionFragment
 import com.android.settings.core.PreferenceScreenMixin
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
