@@ -45,7 +45,7 @@ class AlwaysOnSwitchPreference :
     SwitchPreference(
         KEY,
         R.string.accessibility_magnification_always_on_enabled_purpose,
-        R.string.accessibility_screen_magnification_always_on_title
+        R.string.accessibility_screen_magnification_always_on_title,
     ),
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider,
@@ -148,4 +148,4 @@ class AlwaysOnSwitchPreference :
         const val KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/AlwaysOnPreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/AlwaysOnPreferenceController.kt)

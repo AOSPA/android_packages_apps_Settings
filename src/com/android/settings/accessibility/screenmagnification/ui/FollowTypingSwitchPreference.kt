@@ -63,4 +63,4 @@ class FollowTypingSwitchPreference :
         const val KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FollowTypingPreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FollowTypingPreferenceController.kt)

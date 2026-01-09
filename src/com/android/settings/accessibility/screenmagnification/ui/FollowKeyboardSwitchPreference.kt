@@ -68,4 +68,4 @@ class FollowKeyboardSwitchPreference :
         const val KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FollowKeyboardPreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FollowKeyboardPreferenceController.kt)
