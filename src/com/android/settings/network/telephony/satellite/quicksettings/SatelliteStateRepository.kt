@@ -50,11 +50,14 @@ import kotlinx.coroutines.flow.stateIn
 open class SatelliteStateRepository
 @VisibleForTesting
 constructor(
-    context: Context,
+    private val context: Context,
     private val telephonyManager: TelephonyManager?,
     private val satelliteManager: SatelliteManager?,
     private val connectivityManager: ConnectivityManager?,
     private val scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default),
+    private val isLteNtnSupportedChecker: (Context) -> Boolean = {
+        SatelliteUtils.isLteBasedNtnSupportedByDevice(it)
+    },
 ) {
 
     // Shared executor for callbacks to avoid thread churn on every collection.
@@ -210,7 +213,11 @@ constructor(
                 val isSatelliteActive = carrierState.isActive || isOemActive
                 val isTerrestrialAvailable = isCellular || isInternet
                 val isSatelliteAvailable =
-                    (carrierState.isEligible || isOemAllowed) && !isTerrestrialAvailable
+                    checkSatelliteAvailability(
+                        isCarrierEligible = carrierState.isEligible,
+                        isOemAllowed = isOemAllowed,
+                        isTerrestrialAvailable = isTerrestrialAvailable,
+                    )
 
                 when {
                     isSatelliteActive -> SatelliteStatus.ACTIVE
@@ -219,6 +226,21 @@ constructor(
                 }
             }
             .stateIn(scope, SharingStarted.WhileSubscribed(), SatelliteStatus.NOT_AVAILABLE)
+
+    /**
+     * Returns true if satellite connectivity is available.
+     *
+     * LTE-based NTN must not supported on the device to be eligible for AVAILABLE state.
+     */
+    private fun checkSatelliteAvailability(
+        isCarrierEligible: Boolean,
+        isOemAllowed: Boolean,
+        isTerrestrialAvailable: Boolean,
+    ): Boolean {
+        return (isCarrierEligible || isOemAllowed) &&
+            !isTerrestrialAvailable &&
+            !isLteNtnSupportedChecker(context)
+    }
 
     /* Returns true if cellular is available and not using a non-terrestrial network. */
     private fun checkInitialCellularAvailability(): Boolean {
