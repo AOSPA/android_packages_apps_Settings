@@ -330,23 +330,8 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
     }
 
     override fun updateNonIndexableKeys(keys: MutableList<String>) {
-        if (SafetyCenterSubpageRegistry.hasInjectedTiles(preferenceKey)) {
-            return
-        }
-
-        val uiData = SafetyCenterSearchIndexUtils.getCurrentSafetyCenterData(mContext)
-        if (uiData == null) {
-            Log.d(TAG, "[$preferenceKey] No SafetyCenterUiData, adding to non-indexable keys")
-            keys.add(preferenceKey)
-            return
-        }
-
-        val relatedSafetySourcesData = getRelatedSafetySourcesData(uiData)
-        if (relatedSafetySourcesData.isEmpty()) {
-            Log.d(
-                TAG,
-                "[$preferenceKey] No related entries for subpage, adding to non-indexable keys",
-            )
+        if (!SafetyCenterSubpageRegistry.isSubpageAvailable(mContext, preferenceKey)) {
+            Log.d(TAG, "[$preferenceKey] Subpage is not available, adding to non-indexable keys")
             keys.add(preferenceKey)
         }
     }

@@ -53,6 +53,7 @@
 <string name="a11y_touch_hold_delay_purpose" translatable="false">Controls how long you must press and hold a screen item before it registers as a long-press</string>
 <string name="a11y_audio_adjustment_screen_purpose" translatable="false">Screen allows the users to customize their device\'s sound output to match their physical hearing needs or their specific listening environment</string>
 <string name="a11y_mono_audio_setting_purpose" translatable="false">combines the left and right audio channels into a single track played through both speakers so that the full sound is audible even if only using one earbud or having limited hearing in one ear.</string>
+<string name="a11y_audio_balance_purpose" translatable="false">A setting lets you shift the volume more toward the left or right speaker so that the sound feels centered and clear for your specific needs</string>
 <string name="animator_duration_scale_purpose" translatable="false">animator_duration_scale</string>
 <string name="disable_window_blurs_purpose" translatable="false">disable_window_blurs</string>
 <string name="accessibility_color_and_motion_feedback_purpose" translatable="false">feedback</string>
@@ -214,6 +215,17 @@
 <string name="wifi_category_purpose" translatable="false">wifi_category</string>
 <string name="wifi_ext_category_purpose" translatable="false">wifi_ext_category</string>
 <string name="language_and_region_settings_purpose" translatable="false">language_and_region_settings</string>
+<string name="system_locale_picker_purpose" translatable="false">system_locale_picker</string>
+<string name="app_locale_picker_purpose" translatable="false">app_locale_picker</string>
+<string name="system_locale_region_picker_purpose" translatable="false">system_locale_region_picker</string>
+<string name="region_numbering_system_purpose" translatable="false">region_numbering_system</string>
+<string name="default_system_language_purpose" translatable="false">default_system_language</string>
+<string name="first_day_of_week_purpose" translatable="false">first_day_of_week</string>
+<string name="regional_preference_numbering_system_purpose" translatable="false">regional_preference_numbering_system</string>
+<string name="terms_of_address_purpose" translatable="false">terms_of_address</string>
+<string name="regional_preference_temperature_purpose" translatable="false">regional_preference_temperature</string>
+<string name="regional_preference_temperature_unit_preference_purpose" translatable="false">temperature_unit_preference</string>
+<string name="regional_preference_measurement_system_purpose" translatable="false">regional_preference_measurement_system</string>
 <string name="copyright_purpose" translatable="false">copyright</string>
 <string name="legal_source_code_purpose" translatable="false">legal_source_code</string>
 <string name="license_purpose" translatable="false">license</string>
@@ -434,7 +446,7 @@
 <string name="toggle_vibration_category_call_purpose" translatable="false">toggle_vibration_category_call</string>
 <string name="toggle_vibration_category_haptics_purpose" translatable="false">toggle_vibration_category_haptics</string>
 <string name="toggle_vibration_category_notification_alarm_purpose" translatable="false">toggle_vibration_category_notification_alarm</string>
-<string name="vibration_screen_purpose" translatable="false">vibration_screen</string>
+<string name="vibration_screen_purpose" translatable="false">Allows users to customize the vibration settings of their device. This includes turning on/off the vibration for call, notification, alarm, media, and keyboard.</string>
 <string name="vpn_settings_purpose" translatable="false">vpn_settings</string>
 <string name="wifi_display_settings_purpose" translatable="false">wifi_display_settings</string>
 <string name="wifi_tether_purpose" translatable="false">wifi_tether</string>
@@ -471,6 +483,7 @@
 <string name="shortcut_triple_tap_pref_purpose" translatable="false">shortcut_triple_tap_pref</string>
 <string name="shortcut_two_finger_double_tap_pref_purpose" translatable="false">shortcut_two_finger_double_tap_pref</string>
 <string name="shortcut_volume_keys_pref_purpose" translatable="false">shortcut_volume_keys_pref</string>
+<string name="shortcut_top_row_key_pref_purpose" translatable="false">shortcut_top_row_key_pref</string>
 <string name="ambient_wallpaper_group_purpose" translatable="false">ambient_wallpaper_group</string>
 <string name="recent_app_location_access_purpose" translatable="false">recent_app_location_access</string>
 <string name="adaptive_connectivity_enabled_purpose" translatable="false">adaptive_connectivity_enabled</string>
@@ -510,4 +523,12 @@
 <string name="wifi_hotspot_speed_purpose" translatable="false">Allows users to choose the preferred frequency and connection speed for their personal hotspot.</string>
 <string name="print_settings_purpose" translatable="false">Allows users to manage print services and add new printing options for their device.</string>
 <string name="usb_details_fragment_purpose" translatable="false">Allows users to configure USB preferences, such as file transfer, tethering, and MIDI.</string>
+<string name="unrestricted_data_settings_purpose" translatable="false">Allows users to manage which apps have unrestricted access to mobile data when Data Saver is on.</string>
+<!-- User settings screen start -->
+<string name="user_settings_pref_screen_purpose" translatable="false">Allows admin users to manage all users on the device, including creating new users or guests, deleting existing users, switching between users, and modifying multiuser-related preferences. Separately, it allows each user to control their own settings, such as changing their name and avatar or deleting their own account.</string>
+<string name="user_settings_remove_guest_on_exit_pref_purpose" translatable="false">Controls whether the guest user is removed after it is exited. If true, a user is deleted; if false, then it is saved and can be accessed again.</string>
+<string name="user_settings_enable_guest_calling_pref_purpose" translatable="false">Controls whether the guest user can make calls and access call history.</string>
+<string name="user_settings_add_users_when_locked_pref_purpose" translatable="false">Set whether new users can be added from the lock screen, without authentication.</string>
+<!-- User settings screen end-->
+<string name="account_security_subpage_screen_purpose" translatable="false">Displays account security status and checkup information from safety sources.</string>
 </resources>

@@ -44,6 +44,7 @@ import java.util.Collection;
 import java.util.List;
 
 /** Main fragment to display first day of week. */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class FirstDayOfWeekItemFragment extends DashboardFragment {
 
@@ -122,3 +123,4 @@ public class FirstDayOfWeekItemFragment extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.regional_preferences_first_day_of_week);
 }
+// LINT.ThenChange(FirstDayOfWeekApiFirstScreen.kt)

@@ -30,7 +30,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
-import com.android.settingslib.metadata.preferencesapi.types.EnumApi
+import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 
@@ -153,7 +153,7 @@ private fun Int.createSensitivityGeneratedValue(context: Context): GeneratedValu
 
 @VisibleForTesting
 enum class LongPressPowerActions(override val asApiValue: Int, override val purpose: Int) :
-    EnumApi<Int> {
+    EnumApiWithRes<Int> {
     POWER_MENU(
         PowerMenuSettingsUtils.LONG_PRESS_POWER_GLOBAL_ACTIONS,
         R.string.power_menu_long_press_for_power_menu_title,

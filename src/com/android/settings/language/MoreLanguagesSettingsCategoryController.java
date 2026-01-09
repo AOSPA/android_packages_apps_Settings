@@ -20,7 +20,6 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.android.settings.flags.Flags;
 import com.android.settings.widget.PreferenceCategoryController;
 
 /**
@@ -34,9 +33,6 @@ public class MoreLanguagesSettingsCategoryController extends PreferenceCategoryC
 
     @Override
     public int getAvailabilityStatus() {
-        if (Flags.regionalPreferencesApiEnabled()) {
-            return AVAILABLE;
-        }
-        return CONDITIONALLY_UNAVAILABLE;
+        return AVAILABLE;
     }
 }

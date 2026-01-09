@@ -23,7 +23,8 @@
     <com.android.settingslib.widget.TopIntroPreference
         android:key="feature_description"
         settings:searchable="false"
-        android:title="@string/notification_summarization_description"/>
+        android:title="@string/notification_summarization_description"
+        settings:controller="com.android.settings.notification.SummarizationSummaryPreferenceController"/>
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="notification_summarization_illustration"

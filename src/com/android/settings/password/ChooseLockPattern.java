@@ -491,6 +491,8 @@ public class ChooseLockPattern extends SettingsActivity {
         static final String KEY_UI_STAGE = "uiStage";
         private static final String KEY_PATTERN_CHOICE = "chosenPattern";
         private static final String KEY_CURRENT_PATTERN = "currentPattern";
+        private static final String KEY_INPUT_MODE = "inputMode";
+        private static final String KEY_INPUT_PATTERN = "inputPattern";
 
         @Nullable
         private static Boolean sIsPatternInputClickSupportedForTesting;
@@ -681,6 +683,14 @@ public class ChooseLockPattern extends SettingsActivity {
                 // restore from previous state
                 mChosenPattern = savedInstanceState.getParcelable(KEY_PATTERN_CHOICE);
                 mCurrentCredential = savedInstanceState.getParcelable(KEY_CURRENT_PATTERN);
+                if (savedInstanceState.containsKey(KEY_INPUT_MODE)) {
+                    mInputMode = LockPatternView.InputMode.valueOf(
+                            savedInstanceState.getString(KEY_INPUT_MODE));
+                }
+                if (savedInstanceState.containsKey(KEY_INPUT_PATTERN)) {
+                    mInputPattern = LockPatternUtils.byteArrayToPattern(
+                            savedInstanceState.getString(KEY_INPUT_PATTERN).getBytes());
+                }
 
                 updateStage(Stage.values()[savedInstanceState.getInt(KEY_UI_STAGE)]);
 
@@ -835,6 +845,17 @@ public class ChooseLockPattern extends SettingsActivity {
 
             if (mCurrentCredential != null) {
                 outState.putParcelable(KEY_CURRENT_PATTERN, mCurrentCredential.duplicate());
+            }
+
+            if (mInputMode != null) {
+                outState.putString(KEY_INPUT_MODE, mInputMode.name());
+            }
+
+            if (mInputPattern != null && !mInputPattern.isEmpty()) {
+                byte[] patternBytes = LockPatternUtils.patternToByteArray(mInputPattern);
+                if (patternBytes != null) {
+                    outState.putString(KEY_INPUT_PATTERN, new String(patternBytes));
+                }
             }
         }
 
