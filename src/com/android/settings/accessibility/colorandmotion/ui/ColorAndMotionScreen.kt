@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The Android Open Source Project
+ * Copyright (C) 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility
+package com.android.settings.accessibility.colorandmotion.ui
 
 import android.app.settings.SettingsEnums
 import android.content.Context
@@ -22,6 +22,8 @@ import android.hardware.display.ColorDisplayManager
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.ColorAndMotionActivity
+import com.android.settings.accessibility.ColorAndMotionFragment
+import com.android.settings.accessibility.FeedbackManager
 import com.android.settings.accessibility.colorcorrection.ui.ColorCorrectionScreen
 import com.android.settings.accessibility.colorinversion.ui.ColorInversionScreen
 import com.android.settings.accessibility.shared.ui.FeedbackButtonPreference
@@ -39,7 +41,7 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.accessibility_color_and_motion_purpose
 
@@ -64,7 +66,6 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            // LINT.IfChange(ui_hierarchy)
             if (ColorDisplayManager.isColorTransformAccelerated(context)) {
                 +ColorCorrectionScreen.KEY
                 +ColorInversionScreen.KEY
@@ -86,7 +87,6 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
                     }
             }
             +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
-            // LINT.ThenChange(/res/xml/accessibility_color_and_motion.xml)
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
