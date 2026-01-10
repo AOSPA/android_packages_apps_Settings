@@ -30,7 +30,6 @@ import com.android.settings.datausage.lib.BillingCycleRepository
 import com.android.settings.datausage.lib.DataUsageLib
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.AllTimeRange
-import com.android.settings.flags.Flags
 import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.telephony.subscriptionManager
 import com.android.settings.utils.getSubId
@@ -91,8 +90,6 @@ private constructor(
         get() = R.string.menu_key_network
 
     override fun getMetricsCategory() = SettingsEnums.DATA_USAGE_LIST
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkNetworkAndInternet25q4()
 
     override fun fragmentClass(): Class<out Fragment> = DataUsageList::class.java
 

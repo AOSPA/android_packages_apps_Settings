@@ -69,7 +69,7 @@ open class MobileNetworkListScreen(context: Context) :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.mobile_network_list_purpose
 
@@ -185,15 +185,13 @@ open class MobileNetworkListScreen(context: Context) :
         preferenceHierarchy(context) {
             +MobileDataPreference()
             addAsync(coroutineScope, Dispatchers.Default) {
-                if (Flags.deeplinkNetworkAndInternet25q4()) {
-                    if (CatalystFlags.catalystUseKeyParameters()) {
-                        MobileNetworkScreen.keyParameters(context).collect {
-                            +(MobileNetworkScreen.KEY withParameters it)
-                        }
-                    } else {
-                        MobileNetworkScreen.parameters(context).collect {
-                            +(MobileNetworkScreen.KEY args it)
-                        }
+                if (CatalystFlags.catalystUseKeyParameters()) {
+                    MobileNetworkScreen.keyParameters(context).collect {
+                        +(MobileNetworkScreen.KEY withParameters it)
+                    }
+                } else {
+                    MobileNetworkScreen.parameters(context).collect {
+                        +(MobileNetworkScreen.KEY args it)
                     }
                 }
             }
