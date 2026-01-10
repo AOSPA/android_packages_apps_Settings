@@ -60,7 +60,7 @@ open class CaptioningAppearanceScreen : PreferenceScreenMixin, PreferenceSummary
     }
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +CaptioningFooterPreference("captioning_appearance_footer") }
 
     companion object {
         const val KEY = "captioning_appearance"
