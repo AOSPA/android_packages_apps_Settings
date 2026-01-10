@@ -23,7 +23,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.BubbleNotificationSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -40,7 +39,7 @@ open class BubbleNotificationScreen :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.notification_bubbles_purpose
 
@@ -49,8 +48,6 @@ open class BubbleNotificationScreen :
 
     override val screenTitle: Int
         get() = R.string.bubbles_app_toggle_title
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkNotifications25q4()
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {}
@@ -84,4 +81,5 @@ open class BubbleNotificationScreen :
         const val KEY = "notification_bubbles"
     }
 }
-// LINT.ThenChange(BubbleNotificationSettings.java, BubbleSummaryNotificationPreferenceController.java)
+// LINT.ThenChange(BubbleNotificationSettings.java,
+//                 BubbleSummaryNotificationPreferenceController.java)
