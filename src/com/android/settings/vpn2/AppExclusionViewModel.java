@@ -193,6 +193,9 @@ public class AppExclusionViewModel extends ViewModel {
                             newList.addAll(enableListResult);
                         }
                         if (add) {
+                            if (newList.contains(targetPackageName)) {
+                                return;
+                            }
                             newList.add(targetPackageName);
                             newList.sort(mComparator);
                         } else {

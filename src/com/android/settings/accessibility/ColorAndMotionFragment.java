@@ -22,6 +22,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.settings.accessibility.colorandmotion.ui.ColorAndMotionScreen;
 import com.android.settings.dashboard.DashboardFragment;
 
 // TODO(b/445978289): Use CatalystFragment

@@ -198,4 +198,4 @@ class MagnificationFooterPreference(override val helpResource: Int) :
         const val KEY = "html_description"
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FooterPreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FooterPreferenceController.kt)

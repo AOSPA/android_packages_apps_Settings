@@ -29,7 +29,6 @@ import com.android.settings.accessibility.audioadjustment.data.AudioBalanceDataS
 import com.android.settings.accessibility.audioadjustment.data.AudioBalanceDataStore.Companion.SETTING_KEY
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.IntRangeValuePreference
-import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.widget.SliderPreference
 import com.android.settingslib.widget.SliderPreferenceBinding
@@ -39,7 +38,7 @@ import kotlin.math.roundToInt
 
 /** Preference for adjusting the audio balance between left and right channels. */
 class AudioBalancePreference(context: Context) :
-    IntRangeValuePreference, SliderPreferenceBinding, PreferenceLifecycleProvider {
+    IntRangeValuePreference, SliderPreferenceBinding {
 
     private val dataStore by lazy { AudioBalanceDataStore(context) }
 

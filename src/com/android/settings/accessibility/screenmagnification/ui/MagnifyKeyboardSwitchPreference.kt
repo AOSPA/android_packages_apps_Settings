@@ -41,7 +41,7 @@ class MagnifyKeyboardSwitchPreference :
     SwitchPreference(
         KEY,
         R.string.accessibility_magnification_magnify_nav_and_ime_purpose,
-        R.string.accessibility_screen_magnification_nav_ime_title
+        R.string.accessibility_screen_magnification_nav_ime_title,
     ),
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider,
@@ -123,4 +123,4 @@ class MagnifyKeyboardSwitchPreference :
                 }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/MagnifyKeyboardPreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/MagnifyKeyboardPreferenceController.kt)

@@ -65,4 +65,4 @@ class FollowTypingSwitchPreference :
             get() = SettingsSecureStore.get(this).apply { setDefaultValue(KEY, true) }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FollowTypingPreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FollowTypingPreferenceController.kt)
