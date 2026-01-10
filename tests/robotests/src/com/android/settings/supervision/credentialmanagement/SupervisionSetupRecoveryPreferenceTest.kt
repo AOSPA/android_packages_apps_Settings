@@ -245,7 +245,6 @@ class SupervisionSetupRecoveryPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
     fun updateRecoveryInfo_addFlow_showsCorrectToastString() {
         val expectedToastMessage = context.getString(R.string.supervision_recovery_email_added)
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
@@ -257,7 +256,6 @@ class SupervisionSetupRecoveryPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
     fun updateRecoveryInfo_verifyFlow_showsCorrectToastString() {
         val expectedToastMessage = context.getString(R.string.supervision_recovery_email_verified)
         val recoveryInfo =
@@ -276,36 +274,6 @@ class SupervisionSetupRecoveryPreferenceTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
-    fun updateRecoveryInfo_addFlow_disableFlags_noToast() {
-        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
-        val widget: Preference = preference.createAndBindWidget(context)
-        widget.performClick()
-        preference.updateRecoveryInfo(ActivityResult(Activity.RESULT_OK, null))
-
-        assertThat(ShadowToast.getTextOfLatestToast()).isNull()
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
-    fun updateRecoveryInfo_verifyFlow_disableFlags_noToast() {
-        val recoveryInfo =
-            SupervisionRecoveryInfo(
-                /* accountName */ "email",
-                /* accountType */ "default",
-                /* state */ STATE_PENDING,
-                /* accountData */ null,
-            )
-        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
-        val widget: Preference = preference.createAndBindWidget(context)
-        widget.performClick()
-        preference.updateRecoveryInfo(ActivityResult(Activity.RESULT_OK, null))
-
-        assertThat(ShadowToast.getTextOfLatestToast()).isNull()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
     fun updateRecoveryInfo_addFlowCanceled_noToast() {
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
         val widget: Preference = preference.createAndBindWidget(context)
@@ -316,7 +284,6 @@ class SupervisionSetupRecoveryPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
     fun updateRecoveryInfo_verifyFlowCanceled_noToast() {
         val recoveryInfo =
             SupervisionRecoveryInfo(

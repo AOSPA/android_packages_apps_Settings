@@ -161,12 +161,10 @@ public class AdbWirelessDebuggingPreferenceController extends DeveloperOptionsPr
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean enabled = (Boolean) newValue;
         if (enabled && !isWifiConnected(mContext)) {
-            // Cannot enable ADB over Wi-Fi if we're not connected to wifi.
             Toast.makeText(
                     mContext, com.android.settingslib.R.string.adb_wireless_no_network_msg,
                             Toast.LENGTH_LONG)
                     .show();
-            return false;
         }
 
         Settings.Global.putInt(mContext.getContentResolver(),

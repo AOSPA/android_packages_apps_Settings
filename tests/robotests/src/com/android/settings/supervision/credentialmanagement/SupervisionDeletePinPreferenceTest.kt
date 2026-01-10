@@ -407,34 +407,6 @@ class SupervisionDeletePinPreferenceTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
-    fun onPinConfirmed_currentUserSupervised_deletesSupervisionData_flagDisabled_noToast() {
-        mockUserManager.stub {
-            on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
-            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn true
-        }
-        mockSupervisionManager.stub {
-            on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
-            on { isSupervisionEnabledForUser(SECONDARY_USER_ID) } doReturn false
-            on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
-        }
-
-        onActivityResult(ActivityResult(Activity.RESULT_OK, null))
-
-        verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
-        verify(mockSupervisionManager).setSupervisionEnabled(false)
-        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
-
-        assertThat(backPressedCalled).isTrue()
-        assertThat(startedIntent).isNull()
-        assertThat(ShadowToast.getTextOfLatestToast()).isNull()
-
-        verify(metricsRule.metricsFeatureProvider)
-            .action(mockLifeCycleContext, ACTION_SUPERVISION_DELETE_PIN)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
     fun onPinConfirmed_currentUserSupervised_deletesSupervisionData_flagEnabled_correctToast() {
         val expectedToastMessage = context.getString(R.string.supervision_pin_deleted)
         mockUserManager.stub {

@@ -194,6 +194,9 @@
 <!-- Device admin screen begin -->
 <string name="device_admin_settings_screen_purpose" translatable="false">Allows users to view and manage applications that have device administrator privileges, which can control the security and settings of the device</string>
 <!-- Device admin screen end -->
+<!-- Trust agents screen begin -->
+<string name="trust_agents_purpose" translatable="false">Allows users to enable or disable trust agents, which are apps that can keep the device unlocked in certain trusted situations.</string>
+<!-- Trust agents screen end -->
 <string name="gesture_system_navigation_input_summary_purpose" translatable="false">gesture_system_navigation_input_summary</string>
 <string name="audio_routing_purpose" translatable="false">audio_routing</string>
 <string name="available_hearing_devices_purpose" translatable="false">available_hearing_devices</string>
@@ -531,4 +534,11 @@
 <string name="user_settings_add_users_when_locked_pref_purpose" translatable="false">Set whether new users can be added from the lock screen, without authentication.</string>
 <!-- User settings screen end-->
 <string name="account_security_subpage_screen_purpose" translatable="false">Displays account security status and checkup information from safety sources.</string>
+<!-- Enterprise owned security screens start -->
+<string name="trusted_credentials_purpose" translatable="false">Allows users to view and manage all trusted digital certificates (Root CAs) on their device. Includes Root CAs shipped as part of the system image, as well as user-added ones.</string>
+<string name="user_credentials_purpose" translatable="false">Allows users to view and manage client certificates.</string>
+<string name="certificate_management_app_purpose" translatable="false">Allows users to choose an app to manage client certificates.</string>
+<string name="install_certificate_from_storage_purpose" translatable="false">Allows users to install different types of digital certificate, including ca certificates, VPN and app certificates, or Wi-Fi certificates.</string>
+<string name="encryption_and_credential_purpose" translatable="false">Allows users to manage disk encryption and credentials on their device, including adding and removing certificates.</string>
+<!-- Enterprise owned security screens end -->
 </resources>

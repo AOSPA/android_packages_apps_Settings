@@ -29,6 +29,10 @@ import static com.android.settings.deviceinfo.simstatus.SimStatusDialogControlle
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.OPERATOR_INFO_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ROAMING_INFO_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SERVICE_STATE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.GID1_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.GID1_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CARRIER_ID_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CARRIER_ID_LABEL_ID;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -42,8 +46,12 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.PersistableBundle;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
+
+import com.android.settings.flags.Flags;
+import org.junit.Rule;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
@@ -74,6 +82,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @RunWith(AndroidJUnit4.class)
 public class SimStatusDialogControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private SimStatusDialogFragment mDialog;
@@ -404,5 +415,64 @@ public class SimStatusDialogControllerTest {
         mController.mOnSubscriptionsChangedListener.onSubscriptionsChanged();
         final String unknownText = ResourcesUtils.getResourcesString(mContext, "radioInfo_unknown");
         verify(mDialog).setText(CELLULAR_NETWORK_STATE, unknownText);
+    }
+
+    @Test
+    public void initialize_doNotShowGid1_shouldRemoveGid1Setting() {
+        mPersistableBundle.putBoolean(
+                CarrierConfigManager.KEY_SHOW_GID1_IN_SIM_STATUS_BOOL, false);
+
+        mController.initialize();
+
+        verify(mDialog).removeSettingFromScreen(GID1_LABEL_ID);
+        verify(mDialog).removeSettingFromScreen(GID1_VALUE_ID);
+    }
+
+    @Test
+    public void initialize_showGid1_shouldSetGid1ToSetting() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_SHOW_SIM_STATUS_DETAILED_INFO);
+        final String gid1 = "test_gid1";
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_SHOW_GID1_IN_SIM_STATUS_BOOL, true);
+        doReturn(gid1).when(mTelephonyManager).getGroupIdLevel1();
+
+        mController.initialize();
+
+        verify(mDialog).setText(GID1_VALUE_ID, gid1);
+    }
+
+    @Test
+    public void initialize_doNotShowCarrierId_shouldRemoveCarrierIdSetting() {
+        mPersistableBundle.putBoolean(
+                CarrierConfigManager.KEY_SHOW_CARRIER_ID_IN_SIM_STATUS_BOOL, false);
+
+        mController.initialize();
+
+        verify(mDialog).removeSettingFromScreen(CARRIER_ID_LABEL_ID);
+        verify(mDialog).removeSettingFromScreen(CARRIER_ID_VALUE_ID);
+    }
+
+    @Test
+    public void initialize_showCarrierId_shouldSetCarrierIdToSetting() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_SHOW_SIM_STATUS_DETAILED_INFO);
+        final int carrierId = 1234;
+        mPersistableBundle.putBoolean(
+                CarrierConfigManager.KEY_SHOW_CARRIER_ID_IN_SIM_STATUS_BOOL, true);
+        doReturn(carrierId).when(mTelephonyManager).getSimCarrierId();
+
+        mController.initialize();
+
+        verify(mDialog).setText(CARRIER_ID_VALUE_ID, String.valueOf(carrierId));
+    }
+
+    @Test
+    public void initialize_flagDisabled_shouldRemoveGid1Setting() {
+        mSetFlagsRule.disableFlags(Flags.FLAG_SHOW_SIM_STATUS_DETAILED_INFO);
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_SHOW_GID1_IN_SIM_STATUS_BOOL, true);
+        doReturn("gid1").when(mTelephonyManager).getGroupIdLevel1();
+
+        mController.initialize();
+
+        verify(mDialog).removeSettingFromScreen(GID1_LABEL_ID);
+        verify(mDialog).removeSettingFromScreen(GID1_VALUE_ID);
     }
 }

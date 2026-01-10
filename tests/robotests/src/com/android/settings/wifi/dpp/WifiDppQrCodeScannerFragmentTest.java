@@ -164,9 +164,20 @@ public class WifiDppQrCodeScannerFragmentTest {
         assertThat(mFragment.isSecurityMatched(SECURITY_PSK, SECURITY_PSK)).isTrue();
     }
 
+    /**
+     * Test SAE QR matching PSK Entry (Transition mode)
+     */
     @Test
-    public void isSecurityMatched_tryPskSaeTransition_returnTrue() {
+    public void isSecurityMatched_trySaeQrToPskEntry_returnTrue() {
         assertThat(mFragment.isSecurityMatched(SECURITY_SAE, SECURITY_PSK)).isTrue();
+    }
+
+    /**
+     * Test PSK QR matching SAE Entry (Transition mode)
+     */
+    @Test
+    public void isSecurityMatched_tryPskQrToSaeEntry_returnTrue() {
+        assertThat(mFragment.isSecurityMatched(SECURITY_PSK, SECURITY_SAE)).isTrue();
     }
 
     @Test

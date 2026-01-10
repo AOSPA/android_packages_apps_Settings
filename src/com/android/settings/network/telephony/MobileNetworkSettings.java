@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -227,7 +228,16 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         if (intent != null) {
             int updateSubscriptionIndex = intent.getIntExtra(Settings.EXTRA_SUB_ID,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-
+            // If the user selects the 'Settings' action button from the 2G network protection
+            // notification, the user will land on the screen, and the below code will dismiss the
+            // notification.
+            int notificationId = intent.getIntExtra(
+                    NetworkChangeNotification.NETWORK_PROTECTION_2G_NOTIFICATION_ID_KEY, -1);
+            if (notificationId != -1) {
+                NotificationManager notificationManager =
+                        context.getSystemService(NotificationManager.class);
+                notificationManager.cancel(notificationId);
+            }
             if (updateSubscriptionIndex != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
                 int oldSubId = mSubId;
                 mSubId = updateSubscriptionIndex;
@@ -309,7 +319,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         }
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
         use(DataServiceSetupPreferenceController.class).init(mSubId);
-        use(Enable2gPreferenceController.class).init(mSubId);
+        use(Enable2gPreferenceController.class).init(this, mSubId);
         use(CarrierWifiTogglePreferenceController.class).init(getLifecycle(), mSubId);
 
         final CallingPreferenceCategoryController callingPreferenceCategoryController =

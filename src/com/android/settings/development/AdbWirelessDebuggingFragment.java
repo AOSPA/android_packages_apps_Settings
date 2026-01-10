@@ -116,6 +116,7 @@ public class AdbWirelessDebuggingFragment extends DashboardFragment
             } else if (AdbManager.WIRELESS_DEBUG_STATE_CHANGED_ACTION.equals(action)) {
                 int status = intent.getIntExtra(AdbManager.WIRELESS_STATUS_EXTRA,
                         AdbManager.WIRELESS_STATUS_DISCONNECTED);
+                mPairingMethodsCategory.setEnabled(status == AdbManager.WIRELESS_STATUS_CONNECTED);
                 if (status == AdbManager.WIRELESS_STATUS_CONNECTED
                         || status == AdbManager.WIRELESS_STATUS_DISCONNECTED) {
                     sAdbIpAddressPreferenceController.updateState(mIpAddrPreference);
@@ -230,8 +231,7 @@ public class AdbWirelessDebuggingFragment extends DashboardFragment
 
         getActivity().registerReceiver(mReceiver, mIntentFilter,
                 Context.RECEIVER_EXPORTED_UNAUDITED);
-
-        fetchAndUpdatePairedDevices();
+        updateUI();
     }
 
     @Override
@@ -320,12 +320,18 @@ public class AdbWirelessDebuggingFragment extends DashboardFragment
         }
         showDebuggingPreferences();
         mAdbManager = IAdbManager.Stub.asInterface(ServiceManager.getService(Context.ADB_SERVICE));
+        updateUI();
+    }
+
+    private void updateUI() {
+        if (mAdbManager == null) {
+            return;
+        }
         try {
             fetchAndUpdatePairedDevices();
             mConnectionPort = mAdbManager.getAdbWirelessPort();
-            if (mConnectionPort > 0) {
-                Log.i(TAG, "onEnabled(): connect_port=" + mConnectionPort);
-            }
+            Log.i(TAG, "updateUI(): connect_port=" + mConnectionPort);
+            mPairingMethodsCategory.setEnabled(mConnectionPort > 0);
         } catch (RemoteException e) {
             Log.e(TAG, "Unable to request the adb wireless port");
         }

@@ -116,20 +116,18 @@ class SupervisionSetupRecoveryPreference :
     fun updateRecoveryInfo(result: ActivityResult) {
         if (result.resultCode == Activity.RESULT_OK) {
             lifeCycleContext.notifyPreferenceChange(KEY)
-            if (Flags.enableSupervisionPinSnackbarsToastMessage()) {
-                val messageResId =
-                    if (isVerificationFlow) {
-                        R.string.supervision_recovery_email_verified
-                    } else {
-                        R.string.supervision_recovery_email_added
-                    }
-                Toast.makeText(
-                        lifeCycleContext,
-                        lifeCycleContext.getString(messageResId),
-                        Toast.LENGTH_SHORT,
-                    )
-                    .show()
-            }
+            val messageResId =
+                if (isVerificationFlow) {
+                    R.string.supervision_recovery_email_verified
+                } else {
+                    R.string.supervision_recovery_email_added
+                }
+            Toast.makeText(
+                    lifeCycleContext,
+                    lifeCycleContext.getString(messageResId),
+                    Toast.LENGTH_SHORT,
+                )
+                .show()
         }
     }
 

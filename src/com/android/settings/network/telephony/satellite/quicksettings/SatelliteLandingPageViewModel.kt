@@ -101,11 +101,26 @@ class SatelliteLandingPageViewModel(
                 }
             _isCarrierRoamingNtnSupported.value = isCarrierSupported
 
-            loadSatelliteAppItems(isLteSupported)
+            loadSatelliteAppItems(isLteSupported, isCarrierSupported)
         }
     }
 
-    private fun loadSatelliteAppItems(isLteBasedNtnSupported: Boolean) {
+    /**
+     * Returns the [Intent] for the Satellite Settings page.
+     *
+     * Delegates the intent creation to [SatelliteAppsRepository], passing the current
+     * [isCarrierRoamingNtnSupported] state.
+     *
+     * @return The resolved [Intent] to launch the settings page, or null if unavailable.
+     */
+    fun getSettingsIntent(): Intent? {
+        return appsRepository.getSettingsIntent(isCarrierRoamingNtnSupported.value)
+    }
+
+    private fun loadSatelliteAppItems(
+        isLteBasedNtnSupported: Boolean,
+        isCarrierRoamingNtnSupported: Boolean,
+    ) {
         val items = mutableListOf<SatelliteAppItem>()
 
         // Emergency SOS app
@@ -135,7 +150,7 @@ class SatelliteLandingPageViewModel(
         // Settings app
         createSatelliteAppItem(
                 packageName = SatelliteAppsRepository.PACKAGE_NAME_SETTINGS,
-                intent = appsRepository.getSettingsIntent(),
+                intent = appsRepository.getSettingsIntent(isCarrierRoamingNtnSupported),
             )
             ?.let { items.add(it) }
 

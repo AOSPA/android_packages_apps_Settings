@@ -211,7 +211,6 @@ class SupervisionUpdateRecoveryEmailPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
     fun onActivityResult_showsCorrectToastString() {
         val expectedToastMessage = context.getString(R.string.supervision_recovery_email_updated)
         preference.onActivityResult(
@@ -225,20 +224,6 @@ class SupervisionUpdateRecoveryEmailPreferenceTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
-    fun onActivityResult_flagDisabled_noToast() {
-        preference.onActivityResult(
-            mockLifeCycleContext,
-            REQUEST_CODE_UPDATE_RECOVERY,
-            Activity.RESULT_OK,
-            null,
-        )
-
-        assertThat(ShadowToast.getTextOfLatestToast()).isNull()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
     fun onActivityResult_resultCanceled_noToast() {
         preference.onActivityResult(
             mockLifeCycleContext,

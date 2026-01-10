@@ -18,7 +18,7 @@ package com.android.settings.accessibility.screenmagnification.ui
 
 import android.content.Context
 import android.provider.Settings
-import android.view.accessibility.Flags
+import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
@@ -38,7 +38,7 @@ class FollowKeyboardSwitchPreference :
     ),
     PreferenceAvailabilityProvider {
 
-    override fun storage(context: Context): KeyValueStore = SettingsSecureStore.get(context)
+    override fun storage(context: Context): KeyValueStore = context.dataStore
 
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 
@@ -57,15 +57,18 @@ class FollowKeyboardSwitchPreference :
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
     override fun isAvailable(context: Context): Boolean {
-        return !context.isInSetupWizard() && isMagnificationKeyboardFollowingSupported()
-    }
-
-    private fun isMagnificationKeyboardFollowingSupported(): Boolean {
-        return Flags.requestRectangleWithSource() && InputPeripheralsSettingsUtils.isHardKeyboard()
+        return !context.isInSetupWizard() && InputPeripheralsSettingsUtils.isHardKeyboard()
     }
 
     companion object {
         const val KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED
+        private val Context.dataStore: KeyValueStore
+            get() =
+                SettingsSecureStore.get(this).apply {
+                    // Default to true if magnification viewport prioritization is enabled to
+                    // prevent viewport jitter. False otherwise.
+                    setDefaultValue(KEY, Flags.enableMagnificationViewportPrioritization())
+                }
     }
 }
 // LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FollowKeyboardPreferenceController.java)

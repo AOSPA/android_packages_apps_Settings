@@ -296,7 +296,6 @@ public abstract class DevelopmentTiles extends TileService {
                 // Close quick shade
                 sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
                 mToast.show();
-                return;
             }
 
             writeAdbWifiSetting(isEnabled);
