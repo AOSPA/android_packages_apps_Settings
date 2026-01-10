@@ -71,4 +71,4 @@ class FollowKeyboardSwitchPreference :
                 }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FollowKeyboardPreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FollowKeyboardPreferenceController.kt)
