@@ -51,6 +51,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.SettingsActivity;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
 import com.android.settings.flags.FakeFeatureFlagsImpl;
 import com.android.wm.shell.shared.desktopmode.FakeDesktopState;
@@ -58,6 +59,7 @@ import com.android.wm.shell.shared.desktopmode.FakeDesktopState;
 import org.junit.Before;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +95,7 @@ public class ExternalDisplayTestBase {
     @Before
     public void setUp() throws RemoteException {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(ApplicationProvider.getApplicationContext());
+        mContext = spy(Robolectric.buildActivity(SettingsActivity.class).get());
         mResources = spy(mContext.getResources());
         doReturn(mResources).when(mContext).getResources();
         mPreferenceManager = new PreferenceManager(mContext);
