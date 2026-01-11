@@ -17,6 +17,7 @@
 package com.android.settings.connecteddevice.display
 
 import android.app.Application
+import android.os.Bundle
 import android.os.SystemClock
 import android.view.InputDevice
 import android.view.MotionEvent
@@ -102,6 +103,100 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
 
         verify(settingsActivity, atLeastOnce()).setOnItemSelectedListener(toolbarListener.capture())
         reset(settingsActivity)
+    }
+
+    @Test
+    fun onCreate_withExistentDisplayIdArg_updatesSelectedDisplay() {
+        val selectedDisplayId = mDisplays[1].id
+        val bundle = Bundle()
+        bundle.putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, selectedDisplayId)
+
+        val newTopologyView = FakeDisplayTopologyPreferenceView(mMockedInjector)
+        val newFragment =
+            TestableTabbedDisplayPreferenceFragment(newTopologyView, settingsActivity, viewModel)
+        newFragment.arguments = bundle
+
+        activityScenarioRule.scenario.onActivity { activity ->
+            activity.supportFragmentManager
+                .beginTransaction()
+                .add(newFragment, "testTagWithArgs")
+                .commitNow()
+        }
+
+        val updatedState = viewModel.uiState.value
+        assertThat(updatedState?.selectedDisplayId).isEqualTo(selectedDisplayId)
+    }
+
+    @Test
+    fun onCreate_withNonExistentDisplayIdArg_doesNotUpdateSelectedDisplay() {
+        val selectedDisplayId = 123456789
+        val bundle = Bundle()
+        bundle.putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, selectedDisplayId)
+
+        val newTopologyView = FakeDisplayTopologyPreferenceView(mMockedInjector)
+        val newFragment =
+            TestableTabbedDisplayPreferenceFragment(newTopologyView, settingsActivity, viewModel)
+        newFragment.arguments = bundle
+
+        activityScenarioRule.scenario.onActivity { activity ->
+            activity.supportFragmentManager
+                .beginTransaction()
+                .add(newFragment, "testTagWithArgs")
+                .commitNow()
+        }
+
+        val updatedState = viewModel.uiState.value
+        assertThat(updatedState?.selectedDisplayId).isNotEqualTo(selectedDisplayId)
+    }
+
+    @Test
+    fun onCreate_withDisabledDisplayIdArg_doesNotUpdateSelectedDisplay() {
+        val disabledDisplay = createExternalDisplay(DisplayIsEnabled.NO)
+        val displays = listOf(disabledDisplay, createOverlayDisplay(DisplayIsEnabled.YES))
+        updateDisplaysAndTopology(displays)
+        val selectedDisplayId = disabledDisplay.id
+        val bundle = Bundle()
+        bundle.putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, selectedDisplayId)
+
+        val newTopologyView = FakeDisplayTopologyPreferenceView(mMockedInjector)
+        val newFragment =
+            TestableTabbedDisplayPreferenceFragment(newTopologyView, settingsActivity, viewModel)
+        newFragment.arguments = bundle
+
+        activityScenarioRule.scenario.onActivity { activity ->
+            activity.supportFragmentManager
+                .beginTransaction()
+                .add(newFragment, "testTagWithArgsDisabled")
+                .commitNow()
+        }
+
+        val updatedState = viewModel.uiState.value
+        assertThat(updatedState?.selectedDisplayId).isNotEqualTo(selectedDisplayId)
+    }
+
+    @Test
+    fun onCreate_withDefaultDisplayIdArg_updatesSelectedDisplay() {
+        // Built-in display is not an external connected display (isConnectedDisplay=false),
+        // but it is the default display, so it should be allowed.
+        val builtinDisplay = includeBuiltinDisplay()
+        val selectedDisplayId = builtinDisplay.id
+        val bundle = Bundle()
+        bundle.putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, selectedDisplayId)
+
+        val newTopologyView = FakeDisplayTopologyPreferenceView(mMockedInjector)
+        val newFragment =
+            TestableTabbedDisplayPreferenceFragment(newTopologyView, settingsActivity, viewModel)
+        newFragment.arguments = bundle
+
+        activityScenarioRule.scenario.onActivity { activity ->
+            activity.supportFragmentManager
+                .beginTransaction()
+                .add(newFragment, "testTagWithArgsDefaultDisplay")
+                .commitNow()
+        }
+
+        val updatedState = viewModel.uiState.value
+        assertThat(updatedState?.selectedDisplayId).isEqualTo(selectedDisplayId)
     }
 
     @Test
@@ -391,20 +486,14 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         }
     }
 
-    class FakeDisplayTopologyPreferenceView(injector: ConnectedDisplayInjector) :
-        DisplayTopologyPreferenceView(injector) {
+    class FakeDisplayTopologyPreferenceView(
+        injector: ConnectedDisplayInjector,
+        initialSelectedDisplayId: Int? = null
+    ) : DisplayTopologyPreferenceView(injector, initialSelectedDisplayId) {
 
         var selectedListener: DisplayTopologyPreferenceController.OnDisplayBlockSelectedListener? =
             null
         var selectedDisplay: Int = -1
-
-        override fun onAttachedToWindow() {
-            super.onAttachedToWindow()
-        }
-
-        override fun onDetachedFromWindow() {
-            super.onDetachedFromWindow()
-        }
 
         override fun setOnDisplayBlockSelectedListener(
             listener: DisplayTopologyPreferenceController.OnDisplayBlockSelectedListener
