@@ -69,6 +69,10 @@ open class SatelliteTilePromptUtils {
         val intent =
             Intent(context, AddSatelliteTileActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                putExtra(
+                    AddSatelliteTileActivity.EXTRA_NOTIFICATION_ID,
+                    R.id.satellite_prompt_notification_id,
+                )
             }
         val pendingIntent =
             PendingIntent.getActivity(

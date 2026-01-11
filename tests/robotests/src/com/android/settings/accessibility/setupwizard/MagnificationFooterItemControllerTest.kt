@@ -42,16 +42,19 @@ class MagnificationFooterItemControllerTest {
     fun bindData_setsFooterSummaryAndContentDescription() {
         // Use 0 to hide help links, matching the implementation logic.
         val metadata = MagnificationFooterPreference(helpResource = 0)
-        val expectedValue = metadata.getTitle(context)
+        val expectedTitle = metadata.getTitle(context)
+        val intro = context.getString(metadata.introductionTitle)
+        val expectedContentDescription = metadata.getContentDescription(intro, expectedTitle)
 
         controller.bindData(mockItem)
         shadowOf(Looper.getMainLooper()).idle()
 
         val summaryCaptor = argumentCaptor<CharSequence>()
         verify(mockItem).summary = summaryCaptor.capture()
-        assertThat(summaryCaptor.firstValue.toString()).isEqualTo(expectedValue.toString())
+        assertThat(summaryCaptor.firstValue.toString()).isEqualTo(expectedTitle.toString())
         val contentDescCaptor = argumentCaptor<CharSequence>()
         verify(mockItem).contentDescription = contentDescCaptor.capture()
-        assertThat(contentDescCaptor.firstValue.toString()).isEqualTo(expectedValue.toString())
+        assertThat(contentDescCaptor.firstValue.toString())
+            .isEqualTo(expectedContentDescription.toString())
     }
 }

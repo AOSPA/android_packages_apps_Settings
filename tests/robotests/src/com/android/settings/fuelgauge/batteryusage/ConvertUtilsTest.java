@@ -557,12 +557,88 @@ public final class ConvertUtilsTest {
     }
 
     @Test
+    public void convertToAppUsageEvent_invalidEventType_returnsUnknownType() {
+        final MatrixCursor cursor =
+                new MatrixCursor(
+                        new String[] {
+                            AppUsageEventEntity.KEY_UID,
+                            AppUsageEventEntity.KEY_USER_ID,
+                            AppUsageEventEntity.KEY_PACKAGE_NAME,
+                            AppUsageEventEntity.KEY_TIMESTAMP,
+                            AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE,
+                            AppUsageEventEntity.KEY_TASK_ROOT_PACKAGE_NAME,
+                            AppUsageEventEntity.KEY_INSTANCE_ID
+                        });
+        cursor.addRow(
+                new Object[] {
+                    101L,
+                    1001L,
+                    "com.android.settings1",
+                    10001L,
+                    -1, // Invalid event type
+                    "com.android.settings2",
+                    100001L
+                });
+        cursor.moveToFirst();
+
+        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(cursor);
+
+        assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.UNKNOWN);
+    }
+
+    @Test
     public void convertToBatteryEvent_normalCase_returnsExpectedResult() {
         final BatteryEvent batteryEvent =
                 ConvertUtils.convertToBatteryEvent(666L, BatteryEventType.POWER_DISCONNECTED, 88);
         assertThat(batteryEvent.getTimestamp()).isEqualTo(666L);
         assertThat(batteryEvent.getType()).isEqualTo(BatteryEventType.POWER_DISCONNECTED);
         assertThat(batteryEvent.getBatteryLevel()).isEqualTo(88);
+    }
+
+    @Test
+    public void convertToBatteryEvent_fromCursor_returnsExpectedResult() {
+        final MatrixCursor cursor =
+                new MatrixCursor(
+                        new String[] {
+                            BatteryEventEntity.KEY_TIMESTAMP,
+                            BatteryEventEntity.KEY_BATTERY_EVENT_TYPE,
+                            BatteryEventEntity.KEY_BATTERY_LEVEL
+                        });
+        cursor.addRow(
+                new Object[] {
+                    10001L, BatteryEventType.POWER_CONNECTED.getNumber(), 66,
+                });
+        cursor.moveToFirst();
+
+        final BatteryEvent batteryEvent = ConvertUtils.convertToBatteryEvent(cursor);
+
+        assertThat(batteryEvent.getTimestamp()).isEqualTo(10001L);
+        assertThat(batteryEvent.getType()).isEqualTo(BatteryEventType.POWER_CONNECTED);
+        assertThat(batteryEvent.getBatteryLevel()).isEqualTo(66);
+    }
+
+    @Test
+    public void convertToBatteryEvent_fromCursorWithInvalidType_returnsUnknownType() {
+        final MatrixCursor cursor =
+                new MatrixCursor(
+                        new String[] {
+                            BatteryEventEntity.KEY_TIMESTAMP,
+                            BatteryEventEntity.KEY_BATTERY_EVENT_TYPE,
+                            BatteryEventEntity.KEY_BATTERY_LEVEL
+                        });
+        cursor.addRow(
+                new Object[] {
+                    10001L,
+                    -1, // Invalid event type
+                    66,
+                });
+        cursor.moveToFirst();
+
+        final BatteryEvent batteryEvent = ConvertUtils.convertToBatteryEvent(cursor);
+
+        assertThat(batteryEvent.getTimestamp()).isEqualTo(10001L);
+        assertThat(batteryEvent.getType()).isEqualTo(BatteryEventType.UNKNOWN_EVENT);
+        assertThat(batteryEvent.getBatteryLevel()).isEqualTo(66);
     }
 
     @Test

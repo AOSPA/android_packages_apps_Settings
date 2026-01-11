@@ -17,7 +17,6 @@
 package com.android.settings.accessibility.screenmagnification.ui
 
 import android.content.Context
-import android.provider.DeviceConfig
 import android.provider.Settings
 import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.internal.accessibility.common.ShortcutConstants
@@ -45,7 +44,7 @@ class AlwaysOnSwitchPreference :
     SwitchPreference(
         KEY,
         R.string.accessibility_magnification_always_on_enabled_purpose,
-        R.string.accessibility_screen_magnification_always_on_title
+        R.string.accessibility_screen_magnification_always_on_title,
     ),
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider,
@@ -55,7 +54,7 @@ class AlwaysOnSwitchPreference :
 
     private lateinit var lifecycleContext: PreferenceLifecycleContext
 
-    override fun storage(context: Context): KeyValueStore = SettingsSecureStore.get(context)
+    override fun storage(context: Context): KeyValueStore = context.dataStore
 
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 
@@ -133,19 +132,20 @@ class AlwaysOnSwitchPreference :
     }
 
     private fun isAlwaysOnSupported(context: Context): Boolean {
-        val defaultValue =
-            context
-                .getResources()
-                .getBoolean(com.android.internal.R.bool.config_magnification_always_on_enabled)
-        return DeviceConfig.getBoolean(
-            DeviceConfig.NAMESPACE_WINDOW_MANAGER,
-            "AlwaysOnMagnifier__enable_always_on_magnifier",
-            defaultValue,
-        )
+        return context
+            .getResources()
+            .getBoolean(com.android.internal.R.bool.config_magnification_always_on_enabled)
     }
 
     companion object {
         const val KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED
+        private val Context.dataStore: KeyValueStore
+            get() =
+                SettingsSecureStore.get(this).apply {
+                    // Enabled by default, see
+                    // MagnificationConstants.ALWAYS_ON_SETTINGS_PREFERENCE_DEFAULT_ENABLED
+                    setDefaultValue(KEY, true)
+                }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/AlwaysOnPreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/AlwaysOnPreferenceController.kt)

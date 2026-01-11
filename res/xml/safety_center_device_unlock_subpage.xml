@@ -19,13 +19,16 @@
     android:title="@string/device_unlock_subpage_title">
     <com.android.settingslib.widget.IllustrationPreference
         android:key="device_unlock_illustration"
+        android:order="10"
         android:selectable="false" />
 
     <com.android.settingslib.widget.BannerMessagePreferenceGroup
-        android:key="device_unlock_issues_banner_group" />
+        android:key="device_unlock_issues_banner_group"
+        android:order="20" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_lock_screen"
+        android:order="30"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:keywords="@string/safety_center_android_lock_screen_search_terms"
         settings:safetySource="AndroidLockScreen"
@@ -33,6 +36,7 @@
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_fingerprint_unlock_personal"
+        android:order="40"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:keywords="@string/safety_center_fingerprint_unlock_search_terms"
         settings:safetySource="AndroidFingerprintUnlock"
@@ -40,6 +44,7 @@
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_fingerprint_unlock_work"
+        android:order="50"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:keywords="@string/safety_center_fingerprint_unlock_search_terms"
         settings:safetySource="AndroidFingerprintUnlock"
@@ -47,6 +52,7 @@
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_face_unlock_personal"
+        android:order="60"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:keywords="@string/safety_center_face_unlock_search_terms"
         settings:safetySource="AndroidFaceUnlock"
@@ -54,6 +60,7 @@
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_face_unlock_work"
+        android:order="70"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:keywords="@string/safety_center_face_unlock_search_terms"
         settings:safetySource="AndroidFaceUnlock"
@@ -61,6 +68,7 @@
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_wear_unlock_personal"
+        android:order="80"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:keywords="@string/safety_center_wear_unlock_search_terms"
         settings:safetySource="AndroidWearUnlock"
@@ -68,6 +76,7 @@
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_wear_unlock_work"
+        android:order="90"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:keywords="@string/safety_center_wear_unlock_search_terms"
         settings:safetySource="AndroidWearUnlock"
@@ -75,6 +84,7 @@
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_theft_protection"
+        android:order="100"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:safetySource="@string/config_safety_center_auto_lock_source_id"
         settings:profile="personal_profile" />

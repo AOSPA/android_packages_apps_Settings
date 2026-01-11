@@ -1112,7 +1112,7 @@
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Սկանավորեք QR կոդը"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"«<xliff:g id="SSID">%1$s</xliff:g>» ցանցին միանալու համար տեսախցիկը պահեք QR կոդի վրա"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Wi‑Fi ցանցին միանալու համար սկանավորեք QR կոդը"</string>
-    <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Կիսվել Wi‑Fi-ով"</string>
+    <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Կիսվեք Wi‑Fi-ով"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"«<xliff:g id="SSID">%1$s</xliff:g>» ցանցին միանալու համար սկանավորեք այս QR կոդը մեկ այլ սարքով"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"«<xliff:g id="SSID">%1$s</xliff:g>» ցանցին միանալու համար սկանավորեք այս QR կոդը"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Նորից փորձեք: Եթե խնդիրը չվերանա, դիմեք սարքի արտադրողին"</string>
@@ -1350,7 +1350,7 @@
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Առավելագույն լուծաչափ"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Առավելագույն լուծաչափը մարտկոցի լիցքն ավելի շատ է սպառում։ Այս լուծաչափին անցնելու դեպքում որոշ հավելվածներ կարող են վերագործարկվել։"</string>
     <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g> Հց)"</string>
-    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"<xliff:g id="WIDTH">%1$s</xliff:g> <xliff:g id="HEIGHT">%2$s</xliff:g> <xliff:g id="REFRESH_RATE">%3$s</xliff:g> Հերց"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"<xliff:g id="WIDTH">%1$s</xliff:g>-ը <xliff:g id="HEIGHT">%2$s</xliff:g>-ի վրա <xliff:g id="REFRESH_RATE">%3$s</xliff:g> Հերց"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> x <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Հց"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Արագ բացեք հատուկ գործառույթները"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Սկսելու համար՝&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Անցեք հատուկ գործառույթների կարգավորումներ&lt;br/&gt; {1,number,integer}. Ընտրեք գործառույթ և հպեք դյուրանցմանը&lt;br/&gt; {2,number,integer}. Ընտրեք կոճակը, որով պետք է միացվի գործառույթը&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Վայրը"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Ցուցադրվում է այլ հավելվածների վրա"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Նավիգացիայի գոտի"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Չափսը"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Մեծ"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Փոքր"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Թաքցնել, երբ չի օգտագործվում"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Մի քանի վայրկյանից անհետանում է էկրանից"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Թափանցիկությունը, երբ չի օգտագործվում"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Ժամանակի այս կարգավորումը ոչ բոլոր հավելվածներում է աջակցվում"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Ընտրեք, թե որքան ժամանակ է ձեզ անհրաժեշտ ավտոմատ անհետացող հաղորդագրությունների հետ կապված գործողություն կատարելու համար"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Սեղմելու և պահելու հապաղումը"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Կարճ"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Միջին"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Երկար"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Գունաշրջում"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Օգտագործել գունաշրջումը"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Գունաշրջման դյուրանցում"</string>
@@ -3144,7 +3143,7 @@
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Ծանուցումներ"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Ցանցային ծանուցումներ"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Ստացեք ծանուցում, երբ ձեր սարքը միանում է չգաղտնագրված ցանցի, կամ երբ ցանցը գրանցում է ձեր սարքի կամ SIM քարտի եզակի նույնացուցիչը"</string>
-    <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Ցանցի սերունդ"</string>
+    <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Ցանցի ստեղծում"</string>
     <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"Երբ 2G ցանցերից պաշտպանությունը միացված է, սարքը խուսափում է 2G ցանցերին միանալուց, քանի որ դրանք պակաս ապահով են։ Արդյունքում բջջային ցանցերի օգտագործումը կարող է որոշ վայրերում սահմանափակվել։ 2G ցանցը միշտ թույլատրված է շտապ կանչերի համար, սակայն դրանք կարող են անհասանելի լինել միջազգային ռոումինգում։"</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"Պաշտպանություն 2G ցանցերից"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Գաղտնագրում"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Ավելացնել օգտատերեր կողպէկրանից"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Ավելացրեք օգտատերեր մուտքի էկրանից"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Դոկ-կայանում անցնել ադմինիստրատորի ռեժիմին"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Օգտատերը հեռացվել է"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Ջնջե՞լ ձեզ:"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Ջնջե՞լ օգտատիրոջը"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Հեռացնե՞լ այս պրոֆիլը:"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Աջակցվող հավելվածներ ձեր հեռախոսում"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Չհաջողվեց ավելացնել SIM քարտը"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Նախքան SIM քարտ ավելացնելը անջատեք արբանյակային կապը"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth-ն անջատված է"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Երբ աջակցվող սարքերը, օրինակ՝ հեռախոսը և ժամացույցը, միացած են Bluetooth-ի միջոցով, ավիառեժիմը համաժամացվում է այդ սարքերում։"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Մուտքի կետերի անունները"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>

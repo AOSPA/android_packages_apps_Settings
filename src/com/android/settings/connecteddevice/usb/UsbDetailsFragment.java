@@ -36,6 +36,7 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 /** Controls the USB device details and provides updates to individual controllers. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class UsbDetailsFragment extends DashboardFragment {
@@ -145,3 +146,4 @@ public class UsbDetailsFragment extends DashboardFragment {
                 }
             };
 }
+// LINT.ThenChange(UsbDetailsApiScreen.kt)

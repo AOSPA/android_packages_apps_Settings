@@ -158,8 +158,9 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
             super.updateStage(stage);
             if (!showMinimalUi() && mOptionsButton != null) {
                 mOptionsButton.setVisibility(
-                        (stage == Stage.Introduction || stage == Stage.HelpScreen ||
-                                stage == Stage.ChoiceTooShort || stage == Stage.FirstChoiceValid)
+                        (stage == Stage.Introduction || stage == Stage.FirstInputInProgress
+                                || stage == Stage.HelpScreen || stage == Stage.ChoiceTooShort
+                                || stage == Stage.FirstChoiceValid)
                                 ? View.VISIBLE : View.INVISIBLE);
             }
 

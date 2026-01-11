@@ -30,6 +30,8 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseR
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.preconditions.MissingPermission
+import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -70,6 +72,12 @@ class InvalidPreferenceException(val reason: String) : FailedPreconditionExcepti
 class CannotSetException : Exception()
 
 /**
+ * This exception is thrown if there is a value in the get/set operation that does not respect
+ * the type of the associated preference.
+ */
+class InvalidValueException(val reason: String): Exception()
+
+/**
  * This class contains information regarding a screen, retrieved from the underlying infrastructure.
  */
 class ScreenInfo
@@ -81,6 +89,12 @@ class ScreenInfo
  */
 class ApiTester(private val instance: PreferencesApiScreen) {
     private val context: Context = ApplicationProvider.getApplicationContext()
+
+    private val possibleParameters by lazy {
+        runBlocking {
+            instance.getAllPossibleParameters(context).toList()
+        }
+    }
 
     private fun <V> getPreference(key: String) =
         instance.preferences.first { it.key == key } as ApiPreference<V>
@@ -169,6 +183,36 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         throw FailedPreconditionException()
     }
 
+    private fun <V : Any>  checkPotentialFiniteValue(preference: ApiPreference<V>, value: V) {
+        if(preference.type is FiniteOptionsType<*>)
+        {
+            if(! getPreferenceOptions<V>(preference.key).map{it.first}.contains(value))
+                throw InvalidValueException("Value $value should be among the allowed " +
+                        "finite values for this type.")
+        }
+    }
+
+    /**
+     * Initializes the screen with the given [parameters].
+     *
+     * @param parameters The parameters to initialize the screen with.
+     * @throws IllegalStateException if the screen does not have a parameters schema.
+     * @throws IllegalArgumentException if the provided parameters are not among the possible ones
+     *   for this screen.
+     */
+    fun initializeScreenParameters(parameters: Parameters) {
+        val schema = instance.parametersSchema ?: throw IllegalStateException(
+            "Attempting to initialize parameters on screen without a parameters schema"
+        )
+        val validatedKeyParameter = schema.prepare(parameters.values)
+        if(!possibleParameters.contains(validatedKeyParameter))
+            throw IllegalArgumentException (
+                "Received parameters are not among the possible ones for this screen"
+            )
+        instance.initializeParameters(validatedKeyParameter)
+    }
+
+
     /**
      * Helper method that returns the screen information extracted from the underlying
      * infrastructure.
@@ -180,16 +224,24 @@ class ApiTester(private val instance: PreferencesApiScreen) {
      * instance screen.
      *
      * @param key The key of the preference the tester is executing the get operation on.
+     * @param parameters The optional new parameters to be assigned to the api screen this
+     * preference is part of, if the screen is parameterized
      */
-    fun <V : Any> get(key: String): V {
+    fun <V : Any> get(key: String, parameters: Parameters? = null): V {
         val preference = getPreference<V>(key)
+        if(parameters != null) initializeScreenParameters(parameters)
         val keyParameters = preference.getScreenParameters.invoke() ?: ValidatedKeyParameters.EMPTY
         val operationContext = ApiOperationContext(context, keyParameters)
 
         checkGetPermissions(preference)
         checkGetPreconditions(preference, operationContext)
 
-        return runBlocking { preference.get.execute(operationContext) }
+        return runBlocking{
+            val result = preference.get.execute(operationContext)
+            //TODO(b/470284879) add this functionality in the getter
+            checkPotentialFiniteValue(preference, result)
+            return@runBlocking result
+        }
     }
 
     /**
@@ -198,16 +250,20 @@ class ApiTester(private val instance: PreferencesApiScreen) {
      *
      * @param key The key of the preference the tester is executing the set operation on
      * @param value The new value to be assigned to the preference
+     * @param parameters The optional new parameters to be assigned to the api screen this
+     * preference is part of, if the screen is parameterized
      */
-    fun <V : Any> set(key: String, value: V) {
+    fun <V : Any> set(key: String, value: V, parameters: Parameters? = null) {
         val preference = getPreference<V>(key)
         val setConfig = preference.set ?: throw CannotSetException()
+        if(parameters != null) initializeScreenParameters(parameters)
         val keyParameters = preference.getScreenParameters.invoke() ?: ValidatedKeyParameters.EMPTY
         val operationContext = ApiOperationContext(context, keyParameters)
 
         checkSetPermissions(preference)
         checkSetPreconditions(preference, value, operationContext)
-
+        //TODO(b/470285824) add this functionality in the setter
+        checkPotentialFiniteValue(preference, value)
         runBlocking { setConfig.execute.invoke(operationContext, value) }
     }
 
@@ -231,4 +287,30 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         return instance.getLaunchIntent(context, null)
             ?: throw Exception("Intent should not be null.")
     }
+
+    /**
+     * Helper method to get all the options of a preference which has the FiniteOptionsType
+     * type.
+     */
+    fun <V: Any> getPreferenceOptions(key:String) : List<Pair<V, String>> {
+        val preference = getPreference<FiniteOptionsType<V>>(key)
+        val type = preference.type
+        if (type is FiniteOptionsType<*>) {
+            val enforcedType = type as FiniteOptionsType<V>
+            return enforcedType.getOptions(context)
+        } else throw Exception("Attempting to get all preference options on a " +
+                "preference with infinite options")
+    }
+
+    /**
+     * Get the screen extras associated with this parameterized screen.
+     */
+    fun getLaunchScreenExtras() = instance.launchScreenExtra
+}
+
+/**
+ * Helper class to wrap parameters of an api screen.
+ */
+class Parameters(vararg pairs: Pair<String, String>) {
+    val values: Map<String, String> = pairs.toMap()
 }

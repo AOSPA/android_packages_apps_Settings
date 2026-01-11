@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Брзо пристапувајте до функциите за пристапност"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;За да започнете&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Одете во поставките за пристапност&lt;br/&gt; {1,number,integer}. Изберете функција и допрете ја кратенката&lt;br/&gt; {2,number,integer}. Изберете го копчето за пристап до функцијата&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Локација"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Лебди над други апликации"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Лента за навигација"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Големина"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Големо"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Мало"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Избледува кога не се користи"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Избледува по неколку секунди, па може полесно да го видите екранот"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Провидност кога не се користи"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Некои апликации не ја поддржуваат поставкава за време"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Изберете колку долго да се прикажуваат привремените пораки што од вас бараат да преземете дејство"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Должина на допир и задржување"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Кратко"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Средно"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Долго"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Инверзија на боите"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Користи „Инверзија на боите“"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Кратенка за „Инверзија на боите“"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Дозволи додавање корисници од заклучен екран"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Додајте корисници од екранот за најавување"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Префрли се на администраторски корисник кога уредот е приклучен на док"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Корисникот е избришан"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Избриши се себеси?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Да се избрише корисникот?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Да се отстрани профилот?"</string>
@@ -4691,7 +4689,7 @@
     <string name="cell_data_template" msgid="6077963976103260821">"Мобилен интернет: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> интернет преку Wi-Fi"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> етернет-податоци"</string>
-    <string name="billing_cycle" msgid="6618424022653876279">"Предупред./огранич. за интернет"</string>
+    <string name="billing_cycle" msgid="6618424022653876279">"Предупредување/ограничување за интернет"</string>
     <string name="app_usage_cycle" msgid="341009528778520583">"Циклус на потрошен мобилен интернет"</string>
     <string name="cell_data_warning" msgid="5664921950473359634">"Предупредување за потрошен интернет: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"Ограничување за интернет: <xliff:g id="ID_1">^1</xliff:g>"</string>
@@ -4924,7 +4922,7 @@
     <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"Повикај за помош"</string>
     <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"Број за повикување помош"</string>
     <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>. Допрете за да промените"</string>
-    <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Ако внесете број што не е за итни случаи:\n • уредот мора да биде отклучен за да користите „Итна помош“\n • можеби нема да ви биде одговорено на повикот"</string>
+    <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Ако внесете број што не е за итни случаи:\n • уредот мора да биде отклучен за да користите „Итна помош“\n • може да не ви одговорат на повикот"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Повлечете отпечаток за известувања"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Повлечете отпечаток"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Видете ги известувањата набрзина"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Поддржани апликации на телефонот"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Не може да се додаде SIM-картичка"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Прекинете ја сателитската врска пред да додадете SIM-картичка"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth е исклучен"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Кога е поврзано преку Bluetooth, „Авионски режим“ ќе се синхронизира на поддржаните уреди како телефонот и часовникот"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Имиња на пристапни точки"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>

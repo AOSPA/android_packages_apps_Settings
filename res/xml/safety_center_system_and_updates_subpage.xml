@@ -19,13 +19,16 @@
     android:title="@string/system_and_updates_subpage_title">
     <com.android.settingslib.widget.IllustrationPreference
         android:key="system_and_updates_illustration"
+        android:order="10"
         android:selectable="false" />
 
     <com.android.settingslib.widget.BannerMessagePreferenceGroup
-        android:key="system_and_updates_issues_banner_group" />
+        android:key="system_and_updates_issues_banner_group"
+        android:order="20" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="security_update"
+        android:order="30"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:keywords="@string/safety_center_security_update_search_terms"
         settings:safetySource="@string/config_safety_center_security_update_source_id"
@@ -33,6 +36,7 @@
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="system_component_update"
+        android:order="40"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:keywords="@string/safety_center_system_component_update_search_terms"
         settings:safetySource="@string/config_safety_center_system_component_update_source_id"
@@ -40,6 +44,7 @@
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="backup"
+        android:order="50"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:keywords="@string/safety_center_backup_search_terms"
         settings:safetySource="@string/config_safety_center_backup_source_id"

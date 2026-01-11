@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Kom snabbt åt tillgänglighetsfunktioner"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Så här kommer du igång&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Öppna tillgänglighetsinställningarna&lt;br/&gt; {1,number,integer}. Välj en funktion och tryck på genvägen&lt;br/&gt; {2,number,integer}. Välj den knapp du vill använda för att komma åt funktionen&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Läge"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Flytande över andra appar"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Navigeringsfält"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Storlek"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Stor"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Liten"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Tona ut när den inte används"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Tonas ut efter några sekunder så att det är enklare att se skärmen"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Genomskinlighet när den inte används"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Tidsinställningen stöds inte i alla appar"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Välj hur länge tillfälliga meddelanden som ber dig att vidta en åtgärd ska visas"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Fördröjning för tryck och håll ned"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Kort"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Medel"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Lång"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inverterade färger"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Använd inverterade färger"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Genväg till inverterade färger"</string>
@@ -2688,7 +2687,7 @@
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"Du kan även lägga till extradimmat i snabbinställningarna i skärmens överkant"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Enhandsläge har lagts till i snabbinställningarna. Du kan när som helst svepa nedåt och aktivera eller inaktivera funktionen."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Du kan även lägga till enhandsläge i snabbinställningarna i skärmens överkant"</string>
-    <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"Teckensnittstorlek har lagts till i snabbinställningarna. Du kan när som helst svepa nedåt för att byta teckensnittstorlek."</string>
+    <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"Fontstorlek har lagts till i snabbinställningarna. Du kan när som helst svepa nedåt för att byta fontstorlek."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Stäng"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Använd färgkorrigering"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Genväg till färgkorrigering"</string>
@@ -2801,7 +2800,7 @@
     <string name="captioning_foreground_opacity" msgid="1395843080697567189">"Textopacitet"</string>
     <string name="captioning_edge_color" msgid="6035818279902597518">"Kantfärg"</string>
     <string name="captioning_edge_type" msgid="5281259280060811506">"Typ av kant"</string>
-    <string name="captioning_typeface" msgid="285325623518361407">"Teckensnittsfamilj"</string>
+    <string name="captioning_typeface" msgid="285325623518361407">"Fontfamilj"</string>
     <string name="captioning_preview_text" msgid="4973475065545995704">"Textstilen kommer att se ut så här"</string>
     <string name="captioning_preview_characters" msgid="7854812443613580460">"Aa"</string>
     <string name="locale_default" msgid="8948077172250925164">"Standard"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Lägg till användare från låsskärmen"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Lägg till användare från inloggningsskärmen"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Byt till administratörsanvändare vid dockning"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Användaren har tagits bort"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Vill du ta bort dig själv?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vill du radera användaren?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Vill du ta bort profilen?"</string>
@@ -3741,7 +3739,7 @@
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, avancerade samtal, 4g-samtal"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, avancerade samtal, 5g-samtal"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"lägg till språk, lägg till ett språk"</string>
-    <string name="keywords_font_size" msgid="1643198841815006447">"textstorlek, stora tecken, stort teckensnitt, stor text, nedsatt syn, göra texten större, teckenförstoring, förstora teckensnitt"</string>
+    <string name="keywords_font_size" msgid="1643198841815006447">"textstorlek, stora tecken, stor font, stor text, nedsatt syn, göra texten större, teckenförstoring, förstora font"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"aktiv låsskärm alltid på, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etikett, läsare"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"tangentbord, haptik, vibrera,"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Appar som stöds på telefonen"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Det går inte att lägga till ett SIM-kort"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Avsluta satellitanslutningen innan du lägger till ett SIM-kort"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth är inaktiverat"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"När de är anslutna till varandra via Bluetooth synkroniseras flygplansläget mellan de enheter som stöds, till exempel telefonen och klockan"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Namn på åtkomstpunkter"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
@@ -5590,7 +5589,7 @@
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Vill du återsluta din internetanslutning?"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"Internetanslutningen återställs …"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"Åtgärda anslutning"</string>
-    <string name="networks_available" msgid="3299512933684383474">"Nätverk är tillgängliga"</string>
+    <string name="networks_available" msgid="3299512933684383474">"Tillgängliga nätverk"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Koppla bort Ethernet för att byta nätverk"</string>
     <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"W+-anslutningar"</string>
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Tillåt att W+-nätverk används för att förbättra hastigheten och täckningen för Google Fi"</string>

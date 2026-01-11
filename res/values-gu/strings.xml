@@ -1021,7 +1021,7 @@
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android બીમ"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"ઍપ્લિકેશન સામગ્રીને NFC મારફતે સંચારિત કરવા માટે તૈયાર"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"બંધ"</string>
-    <string name="nfc_disabled_summary" msgid="8737797364522502351">"NFC બંધ હોવાને કારણે અનુપલબ્ધ છે"</string>
+    <string name="nfc_disabled_summary" msgid="8737797364522502351">"NFC બંધ હોવાને કારણે ઉપલબ્ધ નથી"</string>
     <string name="android_beam_explained" msgid="5684416131846701256">"જ્યારે આ સુવિધા ચાલુ હોય, ત્યારે તમે ઉપકરણોને એકબીજાની નજીક રાખીને ઍપ્લિકેશનના કન્ટેન્ટને બીજા NFC-સક્ષમ ઉપકરણ પર બીમ કરી શકો છો. ઉદાહરણ તરીકે, તમે વેબ પેજ, YouTube વીડિઓ, સંપર્કો અને વધુને બીમ કરી શકો છો.\n\nબસ ઉપકરણોને એકબીજાની નજીક લાવો (સામાન્ય રીતે એકબીજાની પાછળ) અને પછી તમારી સ્ક્રીનને ટૅપ કરો. શું બીમ થાય તે ઍપ્લિકેશન નક્કી કરે છે."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"વાઇ-ફાઇ"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"વાઇ-ફાઇનો ઉપયોગ કરો"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"ઍક્સેસિબિલિટી સુવિધાઓ ઝડપથી ઍક્સેસ કરો"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;શરુ કરવા માટે:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ઍક્સેસિબિલિટી સેટિંગ પર જાઓ&lt;br/&gt; {1,number,integer}. કોઈ સુવિધા પસંદ કરો અને શોર્ટકટ પર ટૅપ કરો&lt;br/&gt; {2,number,integer}. સુવિધાને ઍક્સેસ કરવા માટે બટન પસંદ કરો&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"લોકેશન"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"અન્ય ઍપની ઉપર ફ્લોટિંગ કરતું"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"નૅવિગેશન બાર પર"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"કદ"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"મોટું"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"નાનું"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"ઉપયોગમાં ન હોય ત્યારે ફેડ કરો"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"અમુક સેકન્ડ પછી ફેડ થાય છે જેથી તમારી સ્ક્રીન જોવાનું વધુ સરળ બને"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"ઉપયોગમાં ન હોય ત્યારે પારદર્શિતા"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"સમયની આ પસંદગીઓને બધી ઍપ દ્વારા સપોર્ટ આપવામાં આવતો નથી"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"તમને ઍક્શન લેવાનું કહેતા હોય, તેવા હંગામી રીતે દેખાતા મેસેજને કેટલા સમય સુધી બતાવવા તે પસંદ કરો"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"ટચ કરીને થોડીવાર દબાવી રાખવા પર વિલંબ"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"ટૂંકી"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"મધ્યમ"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"લાંબી"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"વિપરીત રંગમાં બદલવું"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"વિપરીત રંગમાં બદલવાનો ઉપયોગ કરો"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"વિપરીત રંગમાં બદલવાનો શૉર્ટકટ"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"લૉક સ્ક્રીનમાંથી વપરાશકર્તાઓને ઉમેરો"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"સાઇન-ઇન સ્ક્રીનમાંથી વપરાશકર્તાઓ ઉમેરો"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"ડૉક કર્યુ હોય ત્યારે ઍડમિન વપરાશકર્તા પર સ્વિચ કરો"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"વપરાશકર્તાને ડિલીટ કરવામાં આવ્યા"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"તમને પોતાને કાઢી નાખીએ?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"આ વપરાશકર્તા ડિલીટ કરીએ?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"આ પ્રોફાઇલ દૂર કરીએ?"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"તમારા ફોનમાં સપોર્ટ કરતી ઍપ"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"સિમ કાર્ડ ઉમેરી શકાતું નથી"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"તમે સિમ કાર્ડ ઉમેરતાં પહેલાં સૅટલાઇટ કનેક્શન સમાપ્ત કરો"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"બ્લૂટૂથ બંધ છે"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"બ્લૂટૂથ સાથે કનેક્ટ કરેલું હોય ત્યારે એરપ્લેન મોડ ફોન અને વૉચ જેવા સપોર્ટેડ ડિવાઇસ પર સિંક થશે"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ઍક્સેસ પૉઇન્ટના નામ"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>

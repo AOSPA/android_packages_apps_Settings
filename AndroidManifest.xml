@@ -5216,7 +5216,9 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:label="@string/account_dashboard_title"
             android:exported="true"
             android:icon="@drawable/ic_homepage_accounts">
-            <intent-filter android:priority="1">
+            <intent-filter
+                android:featureFlag="!com.android.settings.flags.enable_accounts_and_backup_screen"
+                android:priority="1">
                 <action android:name="android.settings.SYNC_SETTINGS" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -5252,6 +5254,28 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
 
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_accounts_and_backup"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <!-- Allow linking to "Accounts & backup -> Manage accounts" from other surfaces. -->
+        <activity
+            android:name=".Settings$ManageAccountsDashboardActivity"
+            android:label="@string/accounts_and_backup_manage_accounts_title"
+            android:exported="true"
+            android:featureFlag="com.android.settings.flags.enable_accounts_and_backup_screen"
+            android:icon="@drawable/ic_manage_accounts">
+
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SYNC_SETTINGS" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accounts_and_backup"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
         </activity>
 
         <!-- Access to the Credential Manager list. -->
@@ -6204,6 +6228,19 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                    android:value="true" />
             <intent-filter android:priority="200">
                 <action android:name="android.settings.PRIVACY_CONTROLS"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.android.settings.safetycenter.ui.SafetyCenterQsActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:exported="true"
+            android:theme="@style/Theme.Settings.NoActionBar"
+            android:featureFlag="com.android.settings.flags.enable_safety_center_quick_settings">
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.VIEW_SAFETY_CENTER_QS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

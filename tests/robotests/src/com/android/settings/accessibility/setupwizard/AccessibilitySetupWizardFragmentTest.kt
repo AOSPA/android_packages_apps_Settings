@@ -106,11 +106,12 @@ class AccessibilitySetupWizardFragmentTest {
             scenario.onFragment { fragment ->
                 val screenReaderItem = findItem(fragment, R.id.screen_reader_in_suw)
                 assertThat(screenReaderItem?.isVisible).isTrue()
-                assertThat(screenReaderItem?.title).isEqualTo(TEST_SCREEN_READER_LABEL)
+                assertThat(screenReaderItem?.title.toString()).isEqualTo(TEST_SCREEN_READER_LABEL)
 
                 val selectToSpeakItem = findItem(fragment, R.id.select_to_speak_in_suw)
                 assertThat(selectToSpeakItem?.isVisible).isTrue()
-                assertThat(selectToSpeakItem?.title).isEqualTo(TEST_SELECT_TO_SPEAK_LABEL)
+                assertThat(selectToSpeakItem?.title.toString())
+                    .isEqualTo(TEST_SELECT_TO_SPEAK_LABEL)
             }
         }
     }

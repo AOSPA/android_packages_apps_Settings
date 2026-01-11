@@ -19,13 +19,16 @@
     android:title="@string/cellular_network_security_subpage_title">
     <com.android.settingslib.widget.IllustrationPreference
         android:key="cellular_network_security_illustration"
+        android:order="10"
         android:selectable="false" />
 
     <com.android.settingslib.widget.BannerMessagePreferenceGroup
-        android:key="cellular_network_security_issues_banner_group" />
+        android:key="cellular_network_security_issues_banner_group"
+        android:order="20" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_cellular_network_security"
+        android:order="30"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
         settings:safetySource="AndroidCellularNetworkSecurity"
         settings:profile="personal_profile" />

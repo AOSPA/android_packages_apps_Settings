@@ -904,7 +904,7 @@
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Apabila Bluetooth dihidupkan, peranti anda boleh berkomunikasi dengan peranti Bluetooth lain yang berdekatan"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Apabila Bluetooth dihidupkan, peranti anda boleh berkomunikasi dengan peranti Bluetooth lain yang berdekatan. Ciri seperti Quick Share dan Find My Device menggunakan Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Apabila Bluetooth dihidupkan, peranti anda dapat berkomunikasi dengan peranti Bluetooth lain yang berada berdekatan.\n\nUntuk meningkatkan pengalaman peranti, apl dan perkhidmatan masih dapat melakukan pengimbasan untuk mengesan peranti berdekatan pada bila-bila masa, meskipun apabila Bluetooth dimatikan. Tetapan ini boleh digunakan, contohnya, untuk meningkatkan ciri dan perkhidmatan berasaskan lokasi. Anda boleh menukar tetapan ini dalam tetapan pengimbasan Bluetooth."</string>
-    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Apabila Bluetooth dihidupkan, peranti anda boleh berkomunikasi dengan peranti Bluetooth lain yang berdekatan. Ciri seperti Quick Share dan Find My Device menggunakan Bluetooth.\n\nApl dan perkhidmatan masih boleh mengimbas peranti berdekatan pada bila-bila masa walaupun semasa Bluetooth dimatikan. Ciri ini boleh digunakan, sebagai contoh, untuk meningkatkan ciri dan perkhidmatan berasaskan lokasi. Anda boleh menukar ciri ini dalam tetapan pengimbasan Bluetooth."</string>
+    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Apabila Bluetooth dihidupkan, peranti anda boleh berkomunikasi dengan peranti Bluetooth lain yang berdekatan. Ciri seperti Quick Share dan Find My Device menggunakan Bluetooth.\n\nApl dan perkhidmatan masih boleh mengimbas peranti berdekatan pada bila-bila masa walaupun semasa Bluetooth dimatikan. Pengimbasan boleh digunakan, sebagai contoh, untuk meningkatkan ciri dan perkhidmatan berasaskan lokasi. Anda boleh menukar pilihan ini dalam tetapan pengimbasan Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Tukar"</string>
     <string name="bluetooth_key_missing_title" msgid="8462010102528132965">"Tidak dapat menyambungkan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_key_missing_message" msgid="3188093580372443815">"Untuk mendapatkan butiran lanjut, akses tetapan peranti"</string>
@@ -1865,7 +1865,7 @@
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Masukkan PIN profil kerja"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Kata laluan tidak sepadan"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"PIN tidak sepadan"</string>
-    <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Lukis corak anda sekali lagi"</string>
+    <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Lukis corak sekali lagi"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="5669348379247148696">"Pilihan buka kunci"</string>
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"Kata laluan sudah ditetapkan"</string>
     <string name="lockpassword_pin_set_toast" msgid="5415783847198570890">"PIN belum ditetapkan"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Akses ciri kebolehaksesan dengan cepat"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Untuk bermula:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Akses tetapan kebolehaksesan&lt;br/&gt; {1,number,integer}. Pilih satu ciri dan ketik pintasan&lt;br/&gt; {2,number,integer}. Pilih butang untuk mengakses ciri&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokasi"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Terapung di atas apl lain"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Bar navigasi"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Saiz"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Besar"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Kecil"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Lenyap apabila tidak digunakan"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Lenyap selepas beberapa saat supaya skrin lebih mudah dilihat"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Kelutsinaran apabila tidak digunakan"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Pilihan pemasaan ini tidak disokong apl tertentu"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Pilih tempoh untuk menunjukkan mesej sementara yang meminta anda mengambil tindakan"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Lengahan sentuh &amp; tahan"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Ringkas"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Sederhana"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Panjang"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Penyongsangan warna"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Gunakan penyongsangan warna"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Pintasan penyongsangan warna"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Tambahkan pengguna daripada skrin kunci"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Tambahkan pengguna daripada skrin log masuk"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Tukar kepada pengguna pentadbir apabila didok"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Pengguna dipadamkan"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Padam diri anda sendiri?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Padamkan pengguna ini?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Alih keluar profil ini?"</string>
@@ -4485,7 +4483,7 @@
     <string name="share_remote_bugreport_action" msgid="7173093464692893276">"Kongsi"</string>
     <string name="decline_remote_bugreport_action" msgid="1276509879613158895">"Tolak"</string>
     <string name="usb_use_charging_only" msgid="1743303747327057947">"Tiada pindahan data"</string>
-    <string name="usb_use_power_only" msgid="3408055485802114621">"Caskan peranti yang disambungkan"</string>
+    <string name="usb_use_power_only" msgid="3408055485802114621">"Caskan peranti tersambung"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Pemindahan Fail"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
     <string name="usb_use_uvc_webcam" msgid="6595429508472038732">"Kamera web"</string>
@@ -4500,7 +4498,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Pilihan USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB dikawal oleh"</string>
-    <string name="usb_control_host" msgid="7404215921555021871">"Peranti yang disambungkan"</string>
+    <string name="usb_control_host" msgid="7404215921555021871">"Peranti tersambung"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Peranti ini"</string>
     <string name="usb_switching" msgid="3654709188596609354">"Bertukar…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Tidak dapat bertukar"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Apl yang disokong pada telefon anda"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Tidak dapat menambahkan SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Tamatkan sambungan satelit sebelum menambahkan SIM"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth dimatikan"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Apabila disambungkan melalui Bluetooth, mod Pesawat akan disegerakkan pada semua peranti yang disokong seperti telefon dan jam tangan"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nama Titik Akses"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -5604,7 +5603,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"panggilan"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"data mudah alih"</string>
-    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Untuk meningkatkan pengalaman peranti, apl dan perkhidmatan masih dapat melakukan imbasan untuk mengesan rangkaian Wi-Fi pada bila-bila masa, meskipun apabila Wi-Fi dimatikan. Ini dapat digunakan, contohnya, untuk meningkatkan ciri dan perkhidmatan berasaskan lokasi. Anda boleh menukar pilihan ini dalam tetapan pengimbasan Wi-Fi."</string>
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Untuk meningkatkan pengalaman peranti, apl dan perkhidmatan masih dapat mengimbas rangkaian Wi-Fi pada bila-bila masa, meskipun apabila Wi-Fi dimatikan. Ini dapat digunakan, contohnya, untuk meningkatkan ciri dan perkhidmatan berasaskan lokasi. Anda boleh menukar pilihan ini dalam tetapan pengimbasan Wi-Fi."</string>
     <string name="wifi_scan_change" msgid="8438320311511852918">"Tukar"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Disambungkan"</string>
     <string name="mobile_data_temp_connection_active" msgid="3430470299756236413">"Disambungkan buat sementara waktu"</string>
@@ -5637,7 +5636,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Gunakan tempat liputan Wi-Fi"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Gunakan penyematan apl"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Gunakan pilihan pembangun"</string>
-    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Gunakan perkhidmatan cetakan"</string>
+    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Gunakan perkhidmatan cetak"</string>
     <string name="multiple_users_main_switch_title" msgid="9158796544835843201">"Benarkan penukaran pengguna"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"izinkan, beberapa, pengguna, benarkan, banyak"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"berbilang, pengguna, profil, pengguna, akaun, tukar, pelbagai"</string>

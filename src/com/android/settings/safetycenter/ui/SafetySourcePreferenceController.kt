@@ -73,24 +73,18 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
         preference?.let {
             safetySourceId = requireNotNull(it.safetySource)
             profileType = it.profile
-            val model = viewModel
-            if (model != null) {
-                updatePreferenceUi(
-                    preference as SafetySourcePreference,
-                    model.getCurrentSafetyCenterDataAsUiData(),
-                )
+            val uiData = viewModel?.safetyCenterUiLiveData?.value
+            if (uiData != null) {
+                updatePreferenceUi(preference as SafetySourcePreference, uiData)
             }
         }
     }
 
     override fun updateState(preference: Preference?) {
         super.updateState(preference)
-        val model = viewModel
-        if (preference != null && model != null) {
-            updatePreferenceUi(
-                preference as SafetySourcePreference,
-                model.getCurrentSafetyCenterDataAsUiData(),
-            )
+        val uiData = viewModel?.safetyCenterUiLiveData?.value
+        if (preference != null && uiData != null) {
+            updatePreferenceUi(preference as SafetySourcePreference, uiData)
         }
     }
 

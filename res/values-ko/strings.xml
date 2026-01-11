@@ -151,7 +151,7 @@
     <string name="connected_device_saved_title" msgid="5607274378851905959">"저장된 기기"</string>
     <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"계정과 연결됨"</string>
     <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"이전에 계정에 연결하여 사용한 기기"</string>
-    <string name="connected_device_add_device_summary" msgid="8671009879957120802">"페어링을 위해 블루투스가 켜집니다"</string>
+    <string name="connected_device_add_device_summary" msgid="8671009879957120802">"페어링을 위해 블루투스가 켜집니다."</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"연결 환경설정"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"이전에 연결됨"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"블루투스가 사용 설정됨"</string>
@@ -902,7 +902,7 @@
     <string name="bluetooth_connecting" msgid="5315496594905010438">"연결 중"</string>
     <string name="bluetooth_disconnecting" msgid="1643422701532873735">"연결 끊는 중"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"블루투스가 켜져 있으면 기기가 주변의 다른 블루투스 기기와 통신할 수 있습니다."</string>
-    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"블루투스가 켜져 있으면 기기를 통해 근처의 다른 블루투스 기기와 통신할 수 있습니다. Quick Share 및 내 기기 찾기와 같은 기능은 블루투스를 사용합니다."</string>
+    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"블루투스가 켜져 있으면 기기가 근처의 다른 블루투스 기기와 통신할 수 있습니다. Quick Share 및 내 기기 찾기 등의 기능에서 블루투스를 사용합니다."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"블루투스가 켜져 있으면 기기가 근처의 다른 블루투스 기기와 통신할 수 있습니다.\n\n기기 사용 환경을 개선하기 위해 블루투스가 꺼져 있을 때도 앱 및 서비스에서 언제든지 근처에 기기가 있는지 검색할 수 있습니다. 예를 들면 위치 기반 기능 및 서비스를 개선하는 데 이 기능이 사용되기도 합니다. 설정을 변경하려면 블루투스 검색 설정으로 이동하세요."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"블루투스가 켜져 있으면 기기가 근처의 다른 블루투스 기기와 통신할 수 있습니다. Quick Share 및 내 기기 찾기 등의 기능에서 블루투스를 사용합니다.\n\n블루투스가 꺼져 있어도 앱 및 서비스에서 언제든지 근처 기기를 검색할 수 있습니다. 예를 들어 위치 기반 기능 및 서비스를 향상하기 위한 용도로 블루투스가 사용될 수 있습니다. 이 설정은 블루투스 검색 설정에서 변경할 수 있습니다."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"변경"</string>
@@ -1272,7 +1272,7 @@
     <string name="wifi_hotspot_speed_5g" msgid="4058116867148848395">"5GHz"</string>
     <string name="wifi_hotspot_speed_5g_summary" msgid="562987935924535694">"속도가 빠릅니다. 여러 기기와 호환됩니다."</string>
     <string name="wifi_hotspot_speed_2g_5g" msgid="9192756255938408285">"2.4GHz 및 5GHz"</string>
-    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"속도가 빠릅니다. 이 듀얼 밴드 핫스팟은 대부분의 기기와 호환됩니다."</string>
+    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"빠른 속도. 이 듀얼 밴드 핫스팟은 대부분의 기기와 호환됨"</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"속도가 가장 빠릅니다. 일부 기기와 호환됩니다."</string>
     <string name="wifi_hotspot_speed_2g_6g" msgid="7660263835445953086">"2.4GHz 및 6GHz"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"접근성 기능에 빠르게 액세스"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;시작 방법&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 접근성 설정으로 이동합니다.&lt;br/&gt; {1,number,integer}. 기능을 선택하고 단축키를 탭합니다.&lt;br/&gt; {2,number,integer}. 기능에 액세스하는 데 사용할 버튼을 선택합니다.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"위치"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"다른 앱 위에 플로팅"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"탐색 메뉴"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"크기"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"크게"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"작게"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"사용하지 않을 때 사라짐"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"몇 초 후 사라지므로 쉽게 화면을 볼 수 있습니다."</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"사용하지 않을 때 투명도"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"시간 환경설정은 앱에 따라 지원되지 않을 수도 있습니다."</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"행동을 취하도록 요청하는 메시지가 표시되는 시간을 선택합니다."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"길게 터치 지연"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"짧게"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"보통"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"길게"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"색상 반전"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"색상 반전 사용"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"색상 반전 바로가기"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"잠금 화면에서 사용자 추가"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"로그인 화면에서 사용자 추가"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"도킹 시 관리자로 전환"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"사용자가 삭제됨"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"본인을 삭제하시겠습니까?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"사용자를 삭제하시겠습니까?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"프로필을 삭제할까요?"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"휴대전화에 설치된 지원되는 앱"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM을 추가할 수 없음"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM을 추가하기 전에 위성 연결을 종료하세요."</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"블루투스가 사용 중지됨"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"블루투스로 연결되어 있으면 비행기 모드가 휴대전화, 워치 등 지원되는 기기 간에 동기화됩니다."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"액세스 포인트 네임(APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>

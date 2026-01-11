@@ -21,7 +21,6 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.flags.Flags;
 
 /**
  * A controller to update current locale information of application
@@ -34,9 +33,6 @@ public class AppsLocalePreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        if (!Flags.regionalPreferencesApiEnabled()) {
-            return AVAILABLE;
-        }
-        return CONDITIONALLY_UNAVAILABLE;
+        return AVAILABLE;
     }
 }

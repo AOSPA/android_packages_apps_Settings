@@ -104,23 +104,28 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
         setUpFooterPreference()
     }
 
-    /** Adds the satellite landing page illustration. */
+    /**
+     * Adds the satellite landing page PUI illustration.
+     *
+     * The illustration is not shown if LTE NTN is supported.
+     */
     private fun addIllustrationPreference() {
-        val illustrationPreference = findPreference<IllustrationPreference>(KEY_ILLUSTRATION)
-        illustrationPreference?.setImageDrawable(
-            context?.getDrawable(R.drawable.ill_satellite_landing)
-        )
+        findPreference<IllustrationPreference>(KEY_ILLUSTRATION)?.apply {
+            isVisible = !shouldDisplayLteBasedLandingPage()
+            if (isVisible) {
+                setImageDrawable(context?.getDrawable(R.drawable.ill_satellite_landing))
+            }
+        }
     }
 
     /**
      * Sets up the "Try a demo" button.
      *
-     * The button should only be visible if NTN LTE is not supported.
+     * The button is not shown if LTE NTN is supported.
      */
     private fun setUpTryADemoButton() {
         val demoButtonPreference = findPreference<Preference>(KEY_TRY_A_DEMO_BUTTON) ?: return
-        // Don't show the button if LTE NTN is supported.
-        val isVisible = !SatelliteUtils.isLteBasedNtnSupportedByDevice(requireContext())
+        val isVisible = !shouldDisplayLteBasedLandingPage()
         demoButtonPreference.isVisible = isVisible
         if (isVisible) {
             demoButtonPreference.setOnPreferenceClickListener {

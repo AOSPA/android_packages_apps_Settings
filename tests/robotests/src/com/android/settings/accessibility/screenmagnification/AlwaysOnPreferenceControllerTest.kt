@@ -18,7 +18,6 @@ package com.android.settings.accessibility.screenmagnification
 
 import android.content.Context
 import android.content.Intent
-import android.provider.DeviceConfig
 import android.provider.Settings
 import android.view.accessibility.AccessibilityManager
 import androidx.activity.ComponentActivity
@@ -260,11 +259,9 @@ class AlwaysOnPreferenceControllerTest {
     }
 
     private fun setAlwaysOnSupported(supported: Boolean) {
-        ShadowDeviceConfig.setProperty(
-            DeviceConfig.NAMESPACE_WINDOW_MANAGER,
-            "AlwaysOnMagnifier__enable_always_on_magnifier",
-            if (supported) "true" else "false",
-            /* makeDefault= */ false,
+        SettingsShadowResources.overrideResource(
+            com.android.internal.R.bool.config_magnification_always_on_enabled,
+            supported,
         )
     }
 

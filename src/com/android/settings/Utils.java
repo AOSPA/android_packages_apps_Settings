@@ -1420,8 +1420,8 @@ public final class Utils extends com.android.settingslib.Utils {
      *
      * <p> Checks if any user has the property {@link UserProperties#SHOW_IN_SETTINGS_SEPARATE} set.
      */
-    public static boolean isNewTabNeeded(Activity activity) {
-        UserManager userManager = activity.getSystemService(UserManager.class);
+    public static boolean isNewTabNeeded(Context context) {
+        UserManager userManager = context.getSystemService(UserManager.class);
         List<UserHandle> profiles = userManager.getUserProfiles();
         for (UserHandle userHandle : profiles) {
             UserProperties userProperties = userManager.getUserProperties(userHandle);

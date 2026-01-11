@@ -1647,7 +1647,7 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"Komunální nastavení"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Režim centra"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgety na obrazovce uzamčení"</string>
-    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"Své oblíbené widgety zobrazíte přejetím po obrazovce uzamčení vlevo. \n\nK otevření aplikace pomocí widgetu budete muset ověřit svou totožnost. Také mějte na paměti, že widgety uvidí kdokoli."</string>
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"Své oblíbené widgety zobrazíte přejetím po obrazovce uzamčení vlevo. \n\nK otevření aplikace pomocí widgetu budete muset ověřit svou totožnost. Také mějte na paměti, že widgety jsou viditelné pro všechny."</string>
     <string name="settings_beta_tag" msgid="8646243453760353582">"Beta"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Kdy automaticky zobrazovat"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nikdy"</string>
@@ -1873,9 +1873,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Nastavte heslo pro odemknutí obličejem"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Nastavte gesto pro odemknutí obličejem"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Nastavte PIN pro odemknutí obličejem"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Chcete-li používat obličej nebo otisk prstu, nastavte heslo"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Pro použití obličeje nebo otisku prstu je potřeba heslo"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Chcete-li používat obličej nebo otisk prstu, nastavte gesto"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Před použitím obličeje nebo otisku nastavte PIN"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Pro použití obličeje nebo otisku je potřeba PIN"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Zapomněli jste heslo?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Zapomněli jste gesto?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Zapomněli jste PIN?"</string>
@@ -1920,7 +1920,7 @@
     <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Spojte alespoň tento počet bodů: <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Spojte alespoň <xliff:g id="NUMBER">%d</xliff:g> tečky. Zkuste to znovu."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Gesto bylo zaznamenáno"</string>
-    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Gesto znovu zadejte a tím ho potvrďte"</string>
+    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Gesto zadejte ještě jednou, a tím ho potvrďte"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Nové bezpečnostní gesto"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"Potvrdit"</string>
     <string name="lockpattern_restart_button_text" msgid="255339375151895998">"Nakreslit znovu"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Rychlý přístup k funkcím pro usnadnění přístupu"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Jak na to&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Přejděte do nastavení přístupnosti&lt;br/&gt; {1,number,integer}. Vyberte funkci a klepněte na zkratku&lt;br/&gt; {2,number,integer}. Vyberte tlačítko, které chcete použít pro přístup k funkci&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Umístění"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Plovoucí přes ostatní aplikace"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Navigační panel"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Velikost"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Velké"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Malé"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Skrýt, když se nepoužívá"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Po několika sekundách zmizí, takže je obrazovka lépe vidět"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Míra průhlednosti při nepoužívání"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Tuto časovou předvolbu podporují jen některé aplikace."</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Zvolte, jak dlouho se mají zobrazovat dočasné zprávy s výzvami k akci."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Prodleva přidržení"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Krátké"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Střední"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Dlouhé"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Převrácení barev"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Převrátit barvy"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Zkratka pro převrácení barev"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Přidávat uživatele z obrazovky uzamčení"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Přidávejte uživatele z přihlašovací obrazovky"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"V doku přepnout na administrátora"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Uživatel byl smazán"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Chcete se smazat?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Smazat tohoto uživatele?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Odstranit tento profil?"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Podporované aplikace v telefonu"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM kartu nelze přidat"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Před přidáním SIM karty ukončete satelitní připojení"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth je vypnuto"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Když budou hodinky připojené k telefonu přes Bluetooth, režim Letadlo se bude synchronizovat mezi hodinkami a telefonem"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Názvy přístupových bodů"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -5349,7 +5348,7 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM kartu nelze aktivovat"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Zkuste SIM kartu znovu zapnout. Pokud problém přetrvává, restartujte zařízení."</string>
     <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Nastavení předvoleb SIM karty"</string>
-    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Nastavte si předvolby mobilní sítě pro používání několika SIM karet v zařízení"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Nastavte si předvolby mobilní sítě pro používání většího počtu SIM karet v zařízení"</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Štítky SIM karet"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Tyto štítky uvidíte při volání, psaní SMS, používání dat a v Nastavení."</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"Štítek SIM karty"</string>
