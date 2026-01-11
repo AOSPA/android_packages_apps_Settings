@@ -122,9 +122,9 @@
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"‏Bluetooth כבוי"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"יש ללחוץ כדי להפעיל אותו"</string>
     <string name="device_picker" msgid="2427027896389445414">"‏יש לבחור מכשיר Bluetooth"</string>
-    <string name="bluetooth_ask_enablement" msgid="1529030199895339199">"‏<xliff:g id="APP_NAME">%1$s</xliff:g> רוצה להפעיל את ה-Bluetooth"</string>
+    <string name="bluetooth_ask_enablement" msgid="1529030199895339199">"‏האפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> מבקשת להפעיל את ה-Bluetooth"</string>
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"‏<xliff:g id="APP_NAME">%1$s</xliff:g> רוצה לכבות את ה-Bluetooth"</string>
-    <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"‏אפליקציה מסוימת רוצה להפעיל את ה-Bluetooth"</string>
+    <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"‏אפליקציה מסוימת מבקשת להפעיל את ה-Bluetooth"</string>
     <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"‏אפליקציה מסוימת רוצה לכבות את ה-Bluetooth"</string>
     <string name="bluetooth_turning_on" msgid="3842613808709024730">"‏המערכת מפעילה Bluetooth..."</string>
     <string name="bluetooth_turning_off" msgid="7406309124247701148">"‏המערכת משביתה את Bluetooth…"</string>
@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"הגדרת התכונה \'פתיחה ע\"י זיהוי הפנים\'"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"פתיחה ע\"י זיהוי הפנים:"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"זיהוי הפנים"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"פעולות בזיהוי פנים"</string>
@@ -434,7 +433,7 @@
     <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
     <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"תמיד לדרוש אישור"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"כשמשתמשים בפתיחה ע\"י זיהוי הפנים באפליקציות, יש לדרוש תמיד שלב אימות"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"כשמשתמשים בפתיחה בזיהוי הפנים באפליקציות, תמיד יופעל שלב אימות"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"מחיקת התבנית לזיהוי הפנים"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"הגדרת \'פתיחה ע\"י זיהוי הפנים\'"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"למחוק את התבנית לזיהוי הפנים?"</string>
@@ -518,7 +517,7 @@
     <string name="security_settings_remoteauth_enroll_introduction_more" msgid="1644105894631257595">"עוד"</string>
     <string name="security_settings_remoteauth_enroll_introduction_how_title" msgid="6604152528267830349">"איך זה עובד"</string>
     <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title" msgid="7974976673323638524">"השליטה בידיים שלך"</string>
-    <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"אפשר להסיר את השעון מהתכונה \"פתיחת נעילה עם השעון\" בכל שלב בהגדרות"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"בכל שלב אפשר להיכנס להגדרות ולהסיר את השעון מהתכונה \"פתיחת נעילה עם השעון\""</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"לוחצים על התראה"</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"מחליקים כלפי מעלה על מסך הנעילה"</string>
     <string name="security_settings_remoteauth_enroll_enrolling_title" msgid="313016997943607675">"בחירת השעון"</string>
@@ -570,7 +569,7 @@
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"צריך להחזיק את האצבע כך שטביעת האצבע תהיה על החיישן, עד שמרגישים רטט"</string>
     <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"בלי ללחוץ על הכפתור, מניחים את האצבע על החיישן עד שמרגישים רטט.\n\nמזיזים מעט את האצבע כל פעם. כך יתועד חלק גדול יותר מהאצבע."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"צריך ללחוץ לחיצה ארוכה על החיישן"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"עכשיו צריך להרים את האצבע ולגעת בחיישן שוב"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"עכשיו צריך להרים את האצבע ולגעת בו שוב"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"ושוב…"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"עוקבים אחר הסמל של טביעת האצבע"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"יש להרים את האצבע ולגעת בחיישן עם חלקים שונים של האצבע לקבלת טביעת אצבע מלאה"</string>
@@ -700,18 +699,18 @@
     <string name="private_space_cancel_label" msgid="379259667396956886">"ביטול"</string>
     <string name="private_space_setup_button_label" msgid="2094882154623560585">"הגדרה"</string>
     <string name="private_space_setup_title" msgid="2272968244329821450">"המרחב הפרטי"</string>
-    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"‏אפשר להסתיר או לנעול אפליקציות פרטיות במרחב נפרד. מומלץ להשתמש בחשבון Google ייעודי לאבטחה נוספת."</string>
+    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"‏אפשר להסתיר או לנעול אפליקציות פרטיות במרחב נפרד. כדי לשפר את האבטחה, מומלץ להשתמש בחשבון Google ייעודי."</string>
     <string name="private_space_setup_sub_header" msgid="550476876393954356">"איך זה עובד"</string>
-    <string name="private_space_separate_account_text" msgid="790319706810190320">"‏"<b>"יצירת חשבון Google למרחב הפרטי"</b>\n"אם לא רוצים שקבצים, תמונות ואימיילים מסונכרנים יופיעו מחוץ למרחב, מומלץ להשתמש בחשבון ייעודי למרחב הפרטי"</string>
-    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"הגדרת נעילה"</b>\n"אפשר לנעול את המרחב הפרטי כדי למנוע מאנשים אחרים לפתוח אותו"</string>
-    <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"התקנת אפליקציות"</b>\n"במרחב הפרטי אפשר להתקין אפליקציות שרוצים שיישארו פרטיות"</string>
+    <string name="private_space_separate_account_text" msgid="790319706810190320">"‏"<b>"יצירת חשבון Google למרחב הפרטי"</b>\n"לא רוצה שקבצים, תמונות ואימיילים מסונכרנים יופיעו מחוץ למרחב הזה? מומלץ להשתמש בחשבון ייעודי"</string>
+    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"הגדרת נעילה"</b>\n"אפשר לנעול את המרחב הפרטי כדי שאנשים אחרים לא יוכלו לפתוח אותו"</string>
+    <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"התקנת אפליקציות"</b>\n"כאן אפשר להתקין אפליקציות שרוצים לשמור בפרטיות."</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"חשוב לזכור"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"האפליקציות מפסיקות לפעול כשהמרחב הפרטי ננעל"</b>\n"כשנועלים את המרחב הפרטי, האפליקציות במרחב מפסיקות לפעול ולא נשלחות מהן התראות"</string>
-    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"מרחבים פרטיים לא מתאימים לאפליקציות שצריכות לפעול ברקע או לשלוח הודעות קריטיות, כמו אפליקציות רפואיות. הסיבה היא שההתראות והפעילות ברקע מופסקות כשהמרחב שלך נעול.\n\nהאפליקציות במרחב הפרטי שלך לא יופיעו בניהול ההרשאות, במרכז הבקרה להגדרות הפרטיות ובהגדרות אחרות כשהמרחב הפרטי שלך נעול.\n\nלא ניתן להעביר את המרחב הפרטי שלך למכשיר חדש. כדי להשתמש במרחב פרטי במכשיר אחר, צריך להגדיר מרחב פרטי חדש.\n\nכל אדם שיחבר את המכשיר שלך למחשב או יתקין אפליקציות מזיקות במכשיר שלך יוכל לגשת למרחב הפרטי שלך."</string>
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"מרחבים פרטיים לא מתאימים לאפליקציות שצריכות לפעול ברקע או לשלוח הודעות קריטיות, כמו אפליקציות רפואיות. הסיבה היא שההתראות והפעילות ברקע מופסקות כשהמרחב שלך נעול.\n\nכשהמרחב הפרטי נעול, האפליקציות שבו לא יופיעו בניהול ההרשאות, במרכז הבקרה להגדרות הפרטיות ובהגדרות אחרות.\n\nלא ניתן להעביר את המרחב הפרטי מכשיר חדש. כדי להשתמש במרחב כזה במכשיר אחר, צריך להגדיר מרחב פרטי חדש.\n\nכל מי שיחבר את המכשיר שלך למחשב או יתקין בו אפליקציות מזיקות יוכל לגשת למרחב הפרטי שלך."</string>
     <string name="private_space_settings_footer_text" msgid="3742468470394835356">"מרחבים פרטיים לא מתאימים לאפליקציות שצריכות לפעול ברקע או לשלוח הודעות קריטיות, כמו אפליקציות רפואיות. הסיבה היא שההתראות והפעילות ברקע מופסקות כשהמרחב שלך נעול.\n\nהאפליקציות במרחב הפרטי שלך לא יופיעו בניהול ההרשאות, במרכז הבקרה להגדרות הפרטיות ובהגדרות אחרות כשהמרחב הפרטי נעול.\n\nלא ניתן לשחזר את המרחב הפרטי שלך במכשיר חדש. כדי להשתמש במרחב פרטי במכשיר אחר, צריך להגדיר מרחב חדש.\n\nכל אדם שיחבר את המכשיר שלך למחשב או יתקין אפליקציות זדוניות במכשיר שלך יוכל לגשת למרחב הפרטי שלך."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"מידע נוסף על המרחב הפרטי"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"הפעולה הזו תימשך כמה רגעים"</string>
-    <string name="private_space_setting_up_text" msgid="8458035555212009528">"הגדרת המרחב הפרטי מתבצעת…"</string>
+    <string name="private_space_setting_up_text" msgid="8458035555212009528">"המרחב הפרטי מוגדר כרגע…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"לא ניתן להגדיר מרחב פרטי"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"ניסיון נוסף"</string>
     <string name="private_space_exit_label" msgid="2358175237993013881">"יציאה"</string>
@@ -720,9 +719,9 @@
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"רוצה לבחור שיטת נעילה חדשה למרחב הפרטי?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"אפשר להגדיר שיטת נעילה חדשה למרחב הפרטי בלבד, או להשתמש באותה שיטה שמשמשת  לפתיחה של נעילת המכשיר"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"שימוש בנעילת המסך"</string>
-    <string name="private_space_set_lock_label" msgid="1790408277477408475">"בחירת נעילה חדשה"</string>
+    <string name="private_space_set_lock_label" msgid="1790408277477408475">"בחירת שיטת נעילה חדשה"</string>
     <string name="private_space_wait_screen_title" msgid="1535431437075585381">"רק רגע…"</string>
-    <string name="private_space_success_title" msgid="4351904015352046118">"הכול מוכן!"</string>
+    <string name="private_space_success_title" msgid="4351904015352046118">"הכל מוכן!"</string>
     <string name="private_space_access_text" msgid="4433988836344567888">"כדי למצוא את המרחב הפרטי שלך, עליך לעבור לרשימת האפליקציות ואז לגלול למטה"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"סיום"</string>
     <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"צריך לגלול למטה כדי למצוא את המרחב הפרטי"</string>
@@ -755,7 +754,7 @@
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"הוספת טביעת אצבע לביטול הנעילה"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"בחירת שיטה לפתיחת הנעילה"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"בחירת שיטה לפתיחת הנעילה"</string>
-    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"בחירת שיטה חדשה לפתיחת הנעילה"</string>
+    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"בחירת שיטה לפתיחת הנעילה"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"נעילת אפליקציות לעבודה"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"בחירת נעילה חדשה לפרופיל העבודה"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"כדי לשפר את האבטחה, מומלץ להגדיר שיטת גיבוי לנעילת המסך"</string>
@@ -763,7 +762,7 @@
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"‏אם שכחת איך לבטל את נעילת המסך, האדמין ב-IT לא יוכל לאפס אותה."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"אפשר להגדיר נעילה נפרדת לפרופיל העבודה"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"‏שכחת את הנעילה הזו? צריך לבקש מאדמין ב-IT לאפס אותה"</string>
-    <string name="lock_settings_screen_lock_settings_title" msgid="738577630596146754">"הגדרות של נעילת המסך"</string>
+    <string name="lock_settings_screen_lock_settings_title" msgid="738577630596146754">"ההגדרות של נעילת המסך"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"אפשרויות לנעילת המסך"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"אפשרויות לנעילת המסך"</string>
     <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"ביטול נעילה באמצעות אישור אוטומטי"</string>
@@ -798,7 +797,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"קו פתיחת נעילה"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"קוד אימות"</string>
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"סיסמה"</string>
-    <string name="unlock_disable_frp_warning_title" msgid="2545569051372893686">"להסיר את כל הסוגים של פתיחת נעילת המכשיר?"</string>
+    <string name="unlock_disable_frp_warning_title" msgid="2545569051372893686">"למחוק את כל השיטות לפתיחת הנעילה במכשיר?"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"להסיר את הגנת הפרופיל?"</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"התכונות להגנת המכשיר לא יפעלו בלי נעילת המסך."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"התכונות להגנת המכשיר לא יפעלו בלי נעילת המסך.<xliff:g id="EMPTY_LINE">
@@ -810,11 +809,11 @@
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"התכונות להגנת המכשיר לא יפעלו בלי נעילת המסך.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>הפעולה הזו מוחקת את תבנית טביעת האצבע ששמורה במכשיר. בנוסף, התבנית לזיהוי פנים תימחק באופן סופי ומאובטח. לא תהיה לך אפשרות לבצע אימות באמצעות הפנים או טביעת אצבע באפליקציות."</string>
-    <string name="unlock_disable_frp_warning_content_authbound_keys" msgid="6397327696248819663">"נעילת המסך תוסר.<xliff:g id="EMPTY_LINE_0">
+    <string name="unlock_disable_frp_warning_content_authbound_keys" msgid="6397327696248819663">"המסך כבר לא יינעל.<xliff:g id="EMPTY_LINE_0">
 
-</xliff:g>תשלום בטאץ\' לא יהיה זמין.<xliff:g id="EMPTY_LINE_1">
+</xliff:g>לא תהיה אפשרות לשלם בטאץ\'.<xliff:g id="EMPTY_LINE_1">
 
-</xliff:g>יכול להיות שאפליקציית הארנק ואפליקציות תשלום אחרות שדורשות אימות לא יפעלו כראוי."</string>
+</xliff:g>אפליקציית הארנק ואפליקציות תשלום אחרות שדורשות אימות לא יפעלו כראוי."</string>
     <string name="unlock_disable_frp_warning_content_fingerprint_authbound_keys" msgid="7158076544627335461">"נעילת המסך וביטול הנעילה בטביעת אצבע יוסרו.<xliff:g id="EMPTY_LINE_0">
 
 </xliff:g>תשלום בטאץ\' לא יהיה זמין.<xliff:g id="EMPTY_LINE_1">
@@ -849,7 +848,7 @@
     <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{צריכה להכיל לפחות תו אחד (#)}one{צריכה להכיל לפחות # תווים}two{צריכה להכיל לפחות # תווים}other{צריכה להכיל לפחות # תווים}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{אם משתמשים רק במספרים, הסיסמה צריכה לכלול לפחות ספרה אחת}one{אם משתמשים רק במספרים, צריך לפחות # ספרות}two{אם משתמשים רק במספרים, צריך לפחות # ספרות}other{אם משתמשים רק במספרים, צריך לפחות # ספרות}}"</string>
     <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{קוד האימות צריך להכיל לפחות ספרה אחת (#)}one{קוד האימות צריך להיות באורך # ספרות לפחות}two{קוד האימות צריך להיות באורך # ספרות לפחות}other{קוד האימות צריך להיות באורך # ספרות לפחות}}"</string>
-    <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{קוד האימות צריך להיות באורך של ספרה אחת (#) לפחות, אבל כדי לשפר את האבטחה מומלץ להשתמש בקוד אימות באורך של {minAutoConfirmLen} ספרות}one{קוד האימות צריך להיות באורך של # ספרות לפחות, אבל כדי לשפר את האבטחה מומלץ להשתמש בקוד אימות באורך של {minAutoConfirmLen} ספרות}two{קוד האימות צריך להיות באורך של # ספרות לפחות, אבל כדי לשפר את האבטחה מומלץ להשתמש בקוד אימות באורך של {minAutoConfirmLen} ספרות}other{קוד האימות צריך להיות באורך של # ספרות לפחות, אבל כדי לשפר את האבטחה מומלץ להשתמש בקוד אימות באורך של {minAutoConfirmLen} ספרות}}"</string>
+    <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{קוד האימות צריך להיות באורך של ספרה אחת (#) לפחות, אבל כדי לשפר את האבטחה מומלץ להשתמש בקוד של {minAutoConfirmLen} ספרות}one{קוד האימות צריך להיות באורך של # ספרות לפחות, אבל כדי לשפר את האבטחה מומלץ להשתמש בקוד של {minAutoConfirmLen} ספרות}two{קוד האימות צריך להיות באורך של # ספרות לפחות, אבל כדי לשפר את האבטחה מומלץ להשתמש בקוד של {minAutoConfirmLen} ספרות}other{קוד האימות צריך להיות באורך של # ספרות לפחות, אבל כדי לשפר את האבטחה מומלץ להשתמש בקוד של {minAutoConfirmLen} ספרות}}"</string>
     <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{צריכה להיות קצרה מתו אחד (#)}one{צריכה להיות קצרה מ-# תווים}two{צריכה להיות קצרה מ-# תווים}other{צריכה להיות קצרה מ-# תווים}}"</string>
     <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{צריכה להיות קצרה מספרה אחת (#)}one{צריכה להיות קצרה מ-# ספרות}two{צריכה להיות קצרה מ-# ספרות}other{צריכה להיות קצרה מ-# ספרות}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"מנהל המכשיר לא מאפשר להשתמש בקוד גישה שנעשה בו שימוש לאחרונה"</string>
@@ -1510,7 +1509,7 @@
     <string name="sim_reenter_new" msgid="6131418271490374263">"יש להקליד שוב את קוד הגישה החדש"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"‏קוד הגישה ל-SIM"</string>
     <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"יש להקליד קוד אימות שאורכו 4 עד 8 ספרות"</string>
-    <string name="sim_pins_dont_match" msgid="1540348773896609260">"קודי האימות לא תואמים"</string>
+    <string name="sim_pins_dont_match" msgid="1540348773896609260">"קודי האימות לא זהים"</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"‏קוד הגישה של ה-SIM השתנה בהצלחה"</string>
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"לא ניתן להשבית את קוד האימות."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"לא ניתן להפעיל את קוד האימות."</string>
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"כבויה"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"סוג הרשת של חבילת הגלישה"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"סוג הרשת הקולית לנייד"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"נתוני ספק"</string>
@@ -1853,7 +1856,7 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"לשימוש בטביעת אצבע, נדרש קו ביטול נעילה"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"לשיפור האבטחה, מומלץ להגדיר קוד גישה"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"כדי להשתמש בטביעת אצבע יש להגדיר קוד אימות"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="4988519671035171367">"צריך להזין את סיסמת המכשיר"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="4988519671035171367">"צריך להקליד את הסיסמה של המכשיר"</string>
     <string name="lockpassword_reenter_your_password_header" msgid="7257189484651655897">"צריך להזין את הסיסמה שוב"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"צריך להזין מחדש את הסיסמה לפרופיל העבודה"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"צריך להזין את הסיסמה של פרופיל העבודה"</string>
@@ -1863,8 +1866,8 @@
     <string name="lockpassword_reenter_your_pin_header" msgid="373337443492549650">"צריך להזין שוב את קוד האימות"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"צריך להזין מחדש את קוד האימות לעבודה"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"צריך להזין את קוד האימות לפרופיל העבודה"</string>
-    <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"הסיסמאות לא תואמות"</string>
-    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"קודי האימות לא תואמים"</string>
+    <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"הסיסמאות לא זהות"</string>
+    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"קודי האימות לא זהים"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"צריך לשרטט שוב את קו פתיחת הנעילה"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="5669348379247148696">"בחירה בשיטת \'ביטול נעילה\'"</string>
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"הסיסמה הוגדרה"</string>
@@ -1880,8 +1883,8 @@
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"שכחת את קו ביטול הנעילה?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"שכחת את קוד האימות?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="4983618652824112610">"קו פתיחת הנעילה משמש לאימות הזהות שלך"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="45398445305933355">"קוד האימות משמש לאימות הזהות שלך"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1263500907003586594">"הסיסמה מאמתת את הזהות שלך"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="45398445305933355">"קוד האימות משמש כדי לאמת את הזהות שלך"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="1263500907003586594">"הסיסמה משמשת כדי לאמת את הזהות שלך"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="2552062474449423029">"קו פתיחת הנעילה בפרופיל העבודה שלך מאמת את הזהות שלך"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6556640367641079244">"קוד האימות לפרופיל העבודה משמש לאימות הזהות שלך"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5700270644291633820">"הסיסמה של פרופיל העבודה משמשת לאימות הזהות שלך"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"אימות של קוד הגישה"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"אימות סיסמה"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"אימות הזהות שלך"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"‏צריך להזין את קו ביטול הנעילה של המכשיר כדי להעביר את חשבונות Google, ההגדרות ועוד. קו ביטול הנעילה שלך מוצפן."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"‏צריך להזין את קוד האימות של המכשיר השני כדי להעביר את חשבונות Google, ההגדרות ועוד. קוד האימות שלך מוצפן."</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"‏צריך להזין את הסיסמה של המכשיר כדי להעביר את חשבונות Google, ההגדרות ועוד. הסיסמה שלך מוצפנת."</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"שימוש בקו ביטול הנעילה גם במכשיר הזה"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"שימוש גם בקוד אימות לביטול הנעילה במכשיר הזה"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"שימוש בסיסמה גם לביטול הנעילה במכשיר הזה"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"אימות של קו ביטול הנעילה"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"אימות של קוד הגישה"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"אימות הסיסמה"</string>
@@ -1934,7 +1943,7 @@
     <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"השבתת האנימציות כשמזינים קוד אימות"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"הפיכת קו ביטול הנעילה של הפרופיל לגלוי"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"רטט בעת לחיצה"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"כפתור ההפעלה נועל באופן מיידי"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"נעילה מיידית בכפתור ההפעלה"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"אלא אם הנעילה נמנעת על ידי <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"הגדרת קו ביטול נעילה"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"שינוי קו ביטול הנעילה"</string>
@@ -2114,7 +2123,7 @@
     <string name="hardkeyboard_category" msgid="8729780593378161071">"הגדרות מקלדת פיזית"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"יש ללחוץ על מקש הרווח פעמיים כדי להוסיף \'.\'"</string>
     <string name="show_password" msgid="7101900779571040117">"הצגת סיסמאות"</string>
-    <string name="show_password_summary" msgid="9025960283785111619">"התווים יופיעו לכמה רגעים כשאתה מקליד"</string>
+    <string name="show_password_summary" msgid="9025960283785111619">"התווים יופיעו לכמה רגעים בזמן ההקלדה"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"ייתכן שבודק האיות הזה יוכל לאסוף את כל הטקסט שאת או אתה מקלידים, כולל נתונים אישיים כגון סיסמאות ומספרי כרטיס אשראי. הוא מגיע מהאפליקציה <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. להשתמש בבודק איות זה?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"הגדרות"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"שפה"</string>
@@ -2442,10 +2451,10 @@
     <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"מעקב אחר מיקוד המקלדת"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"זכוכית המגדלת עוקבת אחרי הפריט שבו מתמקדים בזמן הניווט בין באמצעות המקלדת"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"הגדלת המקלדת"</string>
-    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"במצב מסך מלא, הגדלת התצוגה תכלול את המקלדת, כדי להקל באיתור סמלי אמוג\'י ואותיות"</string>
+    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"במצב מסך מלא אפשר להגדיל גם את המקלדת, כדי למצוא בקלות סמלי אמוג\'י ואותיות"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"האפשרות לא זמינה כשמגדילים רק חלק מהמסך"</string>
-    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"ההגדלה פועלת גם כשעוברים בין אפליקציות"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="642275893256862796">"כשעוברים בין אפליקציות, הזכוכית המגדלת תמשיך לפעול ותקטין את התצוגה"</string>
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"ההגדרה פועלת גם במעבר בין אפליקציות"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="642275893256862796">"הזכוכית המגדלת תמשיך לפעול ותקטין את התצוגה גם כשעוברים בין אפליקציות"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"לא זמין בזמן הגדלה של רק חלק מהמסך"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"ג\'ויסטיק"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"אפשר להפעיל את זכוכית המגדלת ולהזיז אותה באמצעות ג\'ויסטיק במסך. לוחצים לחיצה ארוכה וגוררים באמצעות הג\'ויסטיק כדי לשלוט בזכוכית המגדלת. לוחצים וגוררים את האצבע כדי להזיז את הג\'ויסטיק עצמו."</string>
@@ -2503,10 +2512,10 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"קיצור דרך באמצעות מקשי עוצמת הקול"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"קיצור דרך באמצעות לחיצה משולשת"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"קיצור דרך להגדרות מהירות"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"קיצור דרך באמצעות תנועה להפעלת תכונות הנגישות"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"קיצור דרך בתנועה לתכונות הנגישות"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"כדי להשתמש בתכונה הזו, צריך ללחוץ על כפתור הנגישות <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> בחלק התחתון של המסך.\n\nכדי לעבור בין התכונות השונות, צריך ללחוץ לחיצה ארוכה על כפתור הנגישות."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"כדי להשתמש בתכונה הזו, צריך ללחוץ על כפתור הנגישות במסך"</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"כדי להשתמש בתכונה הזו, לוחצים לחיצה ארוכה על שני המקשים של עוצמת הקול"</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"כדי להשתמש בתכונה הזו, לוחצים לחיצה ארוכה על שני הכפתורים של עוצמת הקול"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"כדי להפעיל הגדלה ולהפסיק אותה, יש ללחוץ שלוש פעמים במיקום כלשהו במסך."</string>
     <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"‏לחיצה מהירה %1$d פעמים על המסך יכולה להתחיל ולהפסיק את ההגדלה"</string>
     <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"‏כדי להתחיל ולהפסיק את ההגדלה, לוחצים לחיצה כפולה במהירות על המסך עם %1$d אצבעות"</string>
@@ -2527,12 +2536,16 @@
     <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"לחיצה על הכפתור הצף"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"תנועה להפעלת תכונות הנגישות"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"צריך ללחוץ על כפתור הנגישות <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> בחלק התחתון של המסך. כדי לעבור בין תכונות, צריך ללחוץ לחיצה ארוכה על כפתור הנגישות."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{החלקה למעלה מתחתית המסך. החלקה למעלה והחזקה לרגע של האצבע תעביר אותך בין תכונות.}one{החלקה למעלה עם # אצבעות מתחתית המסך. החלקה למעלה עם # אצבעות והחזקה לרגע של האצבעות על המסך תעביר אותך בין תכונות.}two{החלקה למעלה עם # אצבעות מתחתית המסך. החלקה למעלה עם # אצבעות והחזקה לרגע של האצבעות על המסך תעביר אותך בין תכונות.}other{החלקה למעלה עם # אצבעות מתחתית המסך. כהחלקה למעלה עם # אצבעות והחזקה לרגע של האצבעות על המסך תעביר אותך בין תכונות.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{החלקה למעלה מתחתית המסך. כדי לעבור בין תכונות, צריך להחליק למעלה ולהחזיק לרגע את האצבע.}one{החלקה למעלה עם # אצבעות מתחתית המסך. כדי לעבור בין תכונות, צריך להחליק למעלה עם # אצבעות ולהחזיק אותן לרגע על המסך.}two{החלקה למעלה עם # אצבעות מתחתית המסך. כדי לעבור בין תכונות, צריך להחליק למעלה עם # אצבעות ולהחזיק אותן לרגע על המסך.}other{החלקה למעלה עם # אצבעות מתחתית המסך. כדי לעבור בין תכונות, צריך להחליק למעלה עם # אצבעות ולהחזיק אותן לרגע על המסך.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"אפשרויות נוספות"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"מידע נוסף על <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"הגדרות מהירות"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{החלקה למטה מהחלק העליון של המסך}one{החלקה למטה עם # אצבעות מהחלק העליון של המסך}two{החלקה למטה עם # אצבעות מהחלק העליון של המסך}other{החלקה למטה עם # אצבעות מהחלק העליון של המסך}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{מחליקים למטה מהחלק העליון של המסך. קיצור הדרך יהיה זמין כשהגדרת המכשיר תסתיים.}one{מחליקים למטה עם # אצבעות מהחלק העליון של המסך. קיצור הדרך יהיה זמין כשהגדרת המכשיר תסתיים.}two{מחליקים למטה עם # אצבעות מהחלק העליון של המסך. קיצור הדרך יהיה זמין כשהגדרת המכשיר תסתיים.}other{מחליקים למטה עם # אצבעות מהחלק העליון של המסך. קיצור הדרך יהיה זמין כשהגדרת המכשיר תסתיים.}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"הגדרות מהירות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"כפתורי עוצמת הקול"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"כפתורי עוצמת הקול"</string>
@@ -2546,10 +2559,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"מתקדם"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"הכפתור \'נגישות\' מוגדר לשירות <xliff:g id="SERVICE">%1$s</xliff:g>. כדי להשתמש בהגדלה, יש ללחוץ לחיצה ארוכה על כפתור הנגישות ולאחר מכן לבחור בהגדלה."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"תנועת הנגישות מוגדרת לשירות <xliff:g id="SERVICE">%1$s</xliff:g>. כדי להשתמש בהגדלה, יש להחליק מעלה מהחלק התחתון של המסך באמצעות שתי אצבעות ולהחזיק. לאחר מכן יש לבחור באפשרות \'הגדלה\'."</string>
-    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"קיצור דרך באמצעות מקשי עוצמת הקול"</string>
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"קיצור דרך עם מקשי עוצמת הקול"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"הגדרות של קיצורי דרך"</string>
-    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"קיצור דרך באמצעות מקשי עוצמת הקול ממסך הנעילה"</string>
-    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"מקש הקיצור של תכונות הנגישות יפעל ממסך הנעילה. לוחצים על שני הלחצנים של עוצמת הקול למשך מספר שניות."</string>
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"קיצור דרך באמצעות כפתורי עוצמת הקול ממסך הנעילה"</string>
+    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"מקשי הקיצור של תכונות הנגישות יפעלו ממסך הנעילה. לוחצים על שני הכפתורים של עוצמת הקול למשך מספר שניות."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"כפתור הנגישות"</string>
     <string name="accessibility_button_intro_text" msgid="80993874471745687">"גישה מהירה לתכונות הנגישות מכל מסך"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"מידע על כפתור הנגישות"</string>
@@ -2600,7 +2613,7 @@
     <string name="accessibility_text_cursor_blink_rate_faster_desc" msgid="5236406089575390876">"הגברת הקצב של הבהוב סמן הטקסט"</string>
     <string name="accessibility_text_cursor_blink_rate_reset_button_label" msgid="393679766407314372">"איפוס"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"אודיו במונו"</string>
-    <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"שילוב ערוצים כאשר מפעילים אודיו"</string>
+    <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"ערוצי אודיו יושמעו ביחד בערוץ יחיד"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"איזון אודיו"</string>
     <string name="accessibility_toggle_primary_balance_left_label" msgid="6415750010517682014">"שמאל"</string>
     <string name="accessibility_toggle_primary_balance_right_label" msgid="2987443495390104935">"ימין"</string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"משתמשים אחרים"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"מחיקת פעילות האורח"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"כל האפליקציות והנתונים של האורח יימחקו ביציאה ממצב אורח"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"למחוק את הפעילות במצב אורח?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"האפליקציות והנתונים מהגלישה הזו במצב אורח יימחקו עכשיו, וכל פעילות עתידית במצב אורח תימחק בכל יציאה ממצב זה"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"מחיקה, פעילות, אורח, הסרה, נתונים, מבקר, למחוק"</string>
@@ -3819,7 +3838,7 @@
     <string name="zen_mode_not_found_text" msgid="692090778655810329">"לא נמצא מצב"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"הגבלת הפרעות"</string>
     <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"חסימה של הפרעות והסחות דעת"</string>
-    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"להגדרת <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"הגדרת מצב <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"הפעלת המצב \"נא לא להפריע\""</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"שעונים מעוררים וצלילי מדיה יכולים להפריע"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"לוחות זמנים"</string>
@@ -3936,6 +3955,8 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"קבלת תקצירים מהירים של הודעות ארוכות"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"שימוש בסיכומי התראות"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"‏אפשר לסכם הודעות ארוכות ושיחות קבוצתיות כדי לקבל תקצירים מהירים.\n\nהתקצירים נוצרים באמצעות AI במכשיר שלך, ולפעמים עלולות להיות שגיאות. ההודעות שלך אף פעם לא נשלחות ל-Google."</string>
+    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"התראות מהאפליקציות האלה לא יסוכמו"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"ניהול האפליקציות"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"ניהול האפליקציות לסיכומי ההתראות"</string>
@@ -4349,8 +4370,8 @@
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"פועלת"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"מושבתת"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"הצמדת אפליקציה"</string>
-    <string name="app_pinning_intro" msgid="6409063008733004245">"התכונה \"הצמדת אפליקציה\" מאפשרת לקבע את האפליקציה הנוכחית בתצוגה עד לביטול ההצמדה. אפשר להשתמש בתכונה, למשל, כשנותנים לחבר שסומכים עליו לשחק במשחק מסוים."</string>
-    <string name="screen_pinning_description" msgid="5822120806426139396">"‏לאחר הצמדת אפליקציה כלשהי, יכול להיות שייפתחו אפליקציות אחרות מאותה אפליקציה ושתתאפשר גישה למידע האישי. \n\nכדי להשתמש בהצמדת אפליקציה: 	\n{0,number,integer}. מפעילים את התכונה \'הצמדת האפליקציה\' 	\n{1,number,integer}. פותחים את הסקירה הכללית 	\n{2,number,integer}. לוחצים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז לוחצים על \'הצמדה\'"</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"התכונה \"הצמדת אפליקציה\" מאפשרת לקבע את האפליקציה הנוכחית בתצוגה עד שההצמדה מבוטלת. אפשר להשתמש בתכונה, למשל, כשנותנים לחבר שסומכים עליו לשחק במשחק מסוים."</string>
+    <string name="screen_pinning_description" msgid="5822120806426139396">"‏כשאפליקציה מסוימת מוצמדת, יכול להיות שייפתחו דרכה אפליקציות אחרות עם גישה למידע האישי. \n\nכדי להצמיד אפליקציה: 	\n{0,number,integer}. מפעילים את התכונה \"הצמדת האפליקציה\" 	\n{1,number,integer}. פותחים את הסקירה הכללית 	\n{2,number,integer}. לוחצים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז לוחצים על \"הצמדה\""</string>
     <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"‏לאחר הצמדת אפליקציה כלשהי, יכול להיות שייפתחו אפליקציות אחרות מאותה אפליקציה ושתתאפשר גישה למידע האישי. \n\nכדי לשתף את המכשיר באופן מאובטח עם אדם אחר, כדאי להשתמש במשתמש אורח במקום זאת. \n\nכדי להשתמש בהצמדת אפליקציה: 	\n{0,number,integer}. מפעילים את התכונה \'הצמדת האפליקציה\' 	\n{1,number,integer}. פותחים את הסקירה הכללית 	\n{2,number,integer}. לוחצים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז לוחצים על \'הצמדה‘"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"אחרי הצמדת אפליקציה: \n\n•	 יכול להיות שתתאפשר גישה למידע אישי \n		(כמו אנשי קשר ותוכן מהאימייל) \n•	 האפליקציה שהוצמדה עשויה לפתוח אפליקציות אחרות \n\nצריך להשתמש בהצמדת אפליקציה רק עם אנשים מהימנים."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"בקשת קו ביטול נעילה לפני ביטול הצמדה"</string>
@@ -4421,6 +4442,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"הסרת ההרשאות, מחיקה של הקבצים הזמניים, הפסקה של קבלת ההתראות"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"הגבלת האפליקציה כשהיא לא בשימוש"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"ההרשאות יוסרו, הקבצים הזמניים יימחקו, ההתראות יופסקו והאפליקציה תעבור לארכיון"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"כל האפליקציות"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"אפליקציות מותקנות"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"אפליקציות ללא התקנה"</string>
@@ -4867,7 +4894,7 @@
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"ניווט באמצעות תנועות"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"החלקה למעלה מתחתית המסך תעביר אותך למסך הבית. כדי לעבור בין אפליקציות, צריך להחליק למעלה מתחתית המסך, להחזיק ולשחרר. החלקה מהקצה הימני או השמאלי של המסך תחזיר אותך למסך הקודם."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"ניווט ב-3 כפתורים"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"ביצוע פעולות כמו חזרה למסך הקודם, מעבר למסך הבית ומעבר בין אפליקציות באמצעות כפתורים בחלק התחתון של המסך."</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"חזרה למסך הקודם, מעבר למסך הבית ומעבר בין אפליקציות באמצעות הכפתורים בחלק התחתון של המסך."</string>
     <string name="nav_tutorial_button_description" msgid="7195363082216233970">"פתיחת המדריך לניווט באמצעות תנועות."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"ניווט במערכת, ניווט ב-2 כפתורים, ניווט ב-3 כפתורים, ניווט באמצעות תנועות, החלקה"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"העוזר האישי"</string>
@@ -5662,6 +5689,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"‏לצורך זמינות ב-<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> נדרשת רשת 2G"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"מתן הרשאה לרשתות מוצפנות בלבד"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"ההגדרה הזו מאובטחת יותר אבל היא עלולה להוביל לבעיות קליטה במקומות מסוימים. תמיד אפשר לבצע שיחת חירום."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"כל השירותים"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"הצגת גישה ללוח העריכה"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"הצגת הודעה כשאפליקציות ניגשות לטקסט, לתמונות או לתכנים אחרים שהעתקת"</string>
@@ -5810,7 +5851,7 @@
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"בחירת לשון הפנייה"</string>
     <string name="content_protection_preference_title" msgid="5069260032659193074">"סריקה לאיתור אפליקציות מטעות"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"בדיקת הפעילות באפליקציות לאיתור פישינג"</string>
-    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"שימוש בסריקה לגילוי אפליקציות שיש בהן ניסיונות הונאה"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"שימוש בסריקה לגילוי אפליקציות מטעות"</string>
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"שימוש בסריקה לגילוי אפליקציות לצורכי עבודה שיש בהן ניסיונות הונאה"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
@@ -6092,6 +6133,15 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"הפעולה הושלמה"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"הגדרות מהירות של אבטחה ופרטיות"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"אמצעי הבקרה שלך על פרטיות"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"פתיחה"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"מתג. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"אין גישה"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"החלפת מצב"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"גישה למיקרופון"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"גישה למצלמה"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"גישה למיקום"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"התאמה"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"המכשיר <xliff:g id="DEVICE_NAME">%1$s</xliff:g> מחובר"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"סריקת המכשיר"</string>
@@ -6114,4 +6164,6 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"אפשר להוסיף את כפתור הלוויין להגדרות המהירות כדי לגשת בקלות למידע על לוויינים"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"הוספת כפתור"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"הנחיות לכפתור של הלוויין"</string>
+    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <skip />
 </resources>

@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"\'ফেস আনলক\' সেট আপ করুন"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"এর জন্যে \'ফেস আনলক\' ব্যবহার করুন"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"ফেস"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"এখানে ফেস দেখান"</string>
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"বন্ধ আছে"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"মোবাইল ডেটা নেটওয়ার্কের ধরন"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"মোবাইল ভয়েস নেটওয়ার্কের ধরন"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"অপারেটরের তথ্য"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"পিন যাচাই করুন"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"পাসওয়ার্ড যাচাই করুন"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"নিজের পরিচয় যাচাই করুন"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Google অ্যাকাউন্ট, সেটিংস ও আরও অনেক কিছু ট্রান্সফার করতে, অন্য ডিভাইসে ব্যবহার করা প্যাটার্ন দিন। আপনার প্যাটার্ন এনক্রিপ্ট করা আছে।"</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Google অ্যাকাউন্ট, সেটিংস ও আরও অনেক কিছু ট্রান্সফার করতে, অন্য ডিভাইসে ব্যবহার করা পিন লিখুন। আপনার পিন এনক্রিপ্ট করা আছে।"</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Google অ্যাকাউন্ট, সেটিংস ও আরও অনেক কিছু ট্রান্সফার করতে, অন্য ডিভাইসে ব্যবহার করা পাসওয়ার্ড লিখুন। আপনার পাসওয়ার্ড এনক্রিপ্ট করা আছে।"</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"এই ডিভাইস আনলক করতে প্যাটার্নও ব্যবহার করুন"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"এই ডিভাইস আনলক করতে পিনও ব্যবহার করুন"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"এই ডিভাইস আনলক করতে পাসওয়ার্ডও ব্যবহার করুন"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"প্যাটার্ন যাচাই করুন"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"পিন যাচাই করুন"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"পাসওয়ার্ড যাচাই করুন"</string>
@@ -2533,6 +2542,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"দ্রুত সেটিংস"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{আপনার স্ক্রিনের একেবারে উপর থেকে নিচের দিকে সোয়াইপ করুন}one{#টি আঙুল দিয়ে আপনার স্ক্রিনের একেবারে উপর থেকে নিচের দিকে সোয়াইপ করুন}other{#টি আঙুল দিয়ে আপনার স্ক্রিনের একেবারে উপর থেকে নিচের দিকে সোয়াইপ করুন}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{আপনার স্ক্রিনের একেবারে উপর থেকে নিচের দিকে সোয়াইপ করুন। আপনি ডিভাইস সেট-আপ সম্পূর্ণ করার পরে এই শর্টকার্ট উপলভ্য হবে।}one{#টি আঙুল দিয়ে আপনার স্ক্রিনের একেবারে উপর থেকে নিচের দিকে সোয়াইপ করুন। আপনি ডিভাইস সেট-আপ সম্পূর্ণ করার পরে এই শর্টকার্ট উপলভ্য হবে।}other{#টি আঙুল দিয়ে আপনার স্ক্রিনের একেবারে উপর থেকে নিচের দিকে সোয়াইপ করুন। আপনি ডিভাইস সেট-আপ সম্পূর্ণ করার পরে এই শর্টকার্ট উপলভ্য হবে।}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"দ্রুত সেটিংস"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"ভলিউম কী"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"ভলিউম কী"</string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"অন্যান্য ব্যবহারকারী"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"অতিথি অ্যাক্টিভিটি মুছুন"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"\'অতিথি মোড\' ছেড়ে বেরিয়ে আসার সময় সব অতিথি অ্যাপ ও ডেটা মুছুন"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"অতিথি অ্যাক্টিভিটি মুছবেন?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"এই অতিথি সেশন থেকে এখন অ্যাপ এবং ডেটা মুছে দেওয়া হবে ও আপনি প্রত্যেকবার \'অতিথি মোড\' ছেড়ে বেরিয়ে আসার সময় পরবর্তী সব অতিথি অ্যাক্টিভিটি মুছে যাবে"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"মোছা, অতিথি, অ্যাক্টিভিটি, সরানো, ডেটা, দর্শক, মোছা"</string>
@@ -3936,6 +3955,8 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"অপেক্ষাকৃত দীর্ঘ মেসেজের দ্রুত রিক্যাপ পান"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"বিজ্ঞপ্তি সম্পর্কিত সারসংক্ষেপ ব্যবহার করুন"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"দ্রুত রিক্যাপ পেতে, দীর্ঘ মেসেজ এবং গ্রুপ কথোপকথনের সারসংক্ষেপ করুন।\n\nসারসংক্ষেপ আপনার ডিভাইসে AI ব্যবহার করে, যা মাঝে মাঝে ভুল করতে পারে। আপনার মেসেজগুলি কখনও Google-কে পাঠানো হয় না।"</string>
+    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"এইসব অ্যাপ থেকে আসা বিজ্ঞপ্তির সারসংক্ষেপ করা হবে না"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"অ্যাপ ম্যানেজ করুন"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"বিজ্ঞপ্তি সম্পর্কিত সারসংক্ষেপের জন্য অ্যাপ ম্যানেজ করুন"</string>
@@ -4421,6 +4442,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"অনুমতি সরান, অস্থায়ী ফাইল মুছুন এবং বিজ্ঞপ্তি বন্ধ করুন"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"ব্যবহার না করা হলে অ্যাপ ম্যানেজ করুন"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"অনুমতি সরান, অস্থায়ী ফাইল মুছুন এবং বিজ্ঞপ্তি বন্ধ করুন এবং অ্যাপ আর্কাইভ করুন"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"সব অ্যাপ"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ইনস্টল করা অ্যাপ"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ইনস্ট্যান্ট অ্যাপ"</string>
@@ -5661,6 +5688,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>-এর জন্য 2G উপলভ্য থাকতে হবে"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"শুধু এনক্রিপটেড নেটওয়ার্কের অনুমতি রয়েছে"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"এটি আরও বেশি সুরক্ষিত কিন্তু এটির জন্য কিছু লোকেশনে আপনার মোবাইল নেটওয়ার্ক কানেকশন সীমিত হতে পারে। জরুরি কল সবসময় ব্যবহারের অনুমতি রয়েছে।"</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"সব পরিষেবা"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ক্লিপবোর্ড অ্যাক্সেস দেখুন"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"আপনি কপি করেছেন এমন টেক্সট, ছবি বা অন্যান্য কন্টেন্ট, অ্যাপ অ্যাক্সেস করলে মেসেজ দেখুন"</string>
@@ -6091,6 +6132,15 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"অ্যাকশন সম্পূর্ণ হয়েছে"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"সুরক্ষা ও গোপনীয়তা সংক্রান্ত দ্রুত সেটিংস"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"আপনার গোপনীয়তার কন্ট্রোল"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"খুলুন"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"পাল্টান। <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>। <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"ব্লক করা হয়েছে"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"টগল করুন"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"মাইক্রোফোন অ্যাক্সেস"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"ক্যামেরা অ্যাক্সেস"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"লোকেশন অ্যাক্সেস করা"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"পেয়ার করা হচ্ছে"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> কানেক্ট করা হয়েছে"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"ডিভাইস স্ক্যান করুন"</string>
@@ -6113,4 +6163,6 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"\'দ্রুত সেটিংস\'-এ স্যাটেলাইট টাইল যোগ করে সহজেই স্যাটেলাইট সংক্রান্ত তথ্য অ্যাক্সেস করুন"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"টাইল যোগ করুন"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"স্যাটেলাইট টাইল সংক্রান্ত প্রম্পট"</string>
+    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <skip />
 </resources>

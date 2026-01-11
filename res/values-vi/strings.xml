@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Thiết lập tính năng Mở khóa bằng khuôn mặt"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Dùng tính năng mở khóa bằng khuôn mặt cho"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Khuôn mặt"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Dùng khuôn mặt"</string>
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Đang tắt"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"Loại mạng dữ liệu di động"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Loại mạng thoại di động"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Thông tin nhà mạng"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Xác minh mã PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Xác minh mật khẩu"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Xác minh danh tính của bạn"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Để chuyển các Tài khoản Google, chế độ cài đặt và nhiều mục khác, hãy nhập hình mở khoá của thiết bị khác của bạn. Hình mở khoá của bạn được mã hoá."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Để chuyển các Tài khoản Google, chế độ cài đặt và nhiều mục khác, hãy nhập mã PIN của thiết bị khác của bạn. Mã PIN của bạn được mã hoá."</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Để chuyển các Tài khoản Google, chế độ cài đặt và nhiều mục khác, hãy nhập mật khẩu của thiết bị khác của bạn. Mật khẩu của bạn được mã hoá."</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Cũng dùng hình mở khoá để mở khoá thiết bị này"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Cũng dùng mã PIN để mở khoá thiết bị này"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Cũng dùng mật khẩu để mở khoá thiết bị này"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Xác minh hình mở khoá"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Xác minh mã PIN"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Xác minh mật khẩu"</string>
@@ -2503,7 +2512,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Lối tắt cho phím âm lượng"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Lối tắt cho cử chỉ nhấn 3 lần"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Lối tắt Cài đặt nhanh"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Phím tắt cho cử chỉ hỗ trợ tiếp cận"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Lối tắt cho cử chỉ hỗ trợ tiếp cận"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Để sử dụng tính năng này, hãy nhấn vào nút hỗ trợ tiếp cận <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ở cuối màn hình.\n\nĐể chuyển đổi giữa các tính năng, hãy chạm và giữ nút hỗ trợ tiếp cận."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Để sử dụng tính năng này, hãy nhấn vào nút hỗ trợ tiếp cận trên màn hình"</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Để sử dụng tính năng này, hãy nhấn và giữ cả hai phím âm lượng."</string>
@@ -2533,6 +2542,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Cài đặt nhanh"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Vuốt xuống từ đầu màn hình}other{Dùng # ngón tay vuốt xuống từ đầu màn hình}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Vuốt xuống từ đầu màn hình. Bạn sẽ dùng được phím tắt này sau khi hoàn tất việc thiết lập thiết bị.}other{Dùng # ngón tay vuốt xuống từ đầu màn hình. Bạn sẽ dùng được phím tắt này sau khi hoàn tất việc thiết lập thiết bị.}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Cài đặt nhanh"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Phím âm lượng"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"phím âm lượng"</string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Người dùng khác"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Xoá hoạt động ở chế độ khách"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Xoá mọi ứng dụng và dữ liệu ở chế độ khách khi thoát khỏi chế độ khách"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Xoá hoạt động ở chế độ khách?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Các ứng dụng và dữ liệu trong phiên khách này sẽ bị xoá ngay bây giờ, và tất cả hoạt động sau này ở chế độ khách sẽ bị xoá mỗi khi bạn thoát khỏi chế độ khách"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"xoá, khách, hoạt động, dữ liệu, khách truy cập"</string>
@@ -3936,6 +3955,8 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Nhận bản tóm tắt nhanh của các tin nhắn dài"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Sử dụng bản tóm tắt thông báo"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Tóm tắt tin nhắn dài và cuộc trò chuyện nhóm để nhận bản tóm lược nhanh.\n\nTính năng tóm tắt sử dụng AI trên thiết bị của bạn, nên đôi khi có thể xảy ra lỗi. Tin nhắn của bạn sẽ không bao giờ được gửi đến Google."</string>
+    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Thông báo từ các ứng dụng này sẽ không được tóm tắt"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Quản lý ứng dụng"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Quản lý ứng dụng cho tính năng tóm tắt thông báo"</string>
@@ -4421,6 +4442,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Loại bỏ quyền, xoá tệp tạm thời và dừng thông báo"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Quản lý ứng dụng nếu không dùng"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Loại bỏ quyền, xoá tệp tạm thời, dừng thông báo, và lưu trữ ứng dụng"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Tất cả ứng dụng"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Ứng dụng đã cài đặt"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Ứng dụng tức thì"</string>
@@ -5661,6 +5688,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> yêu cầu phải có mạng 2G thì mới sử dụng được"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Chỉ chấp nhận mạng đã mã hoá"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Sử dụng chế độ này sẽ an toàn hơn nhưng có thể hạn chế kết nối mạng di động của bạn ở một số vị trí. Dù vậy, bạn luôn thực hiện được cuộc gọi khẩn cấp."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Tất cả dịch vụ"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Hiện quyền truy cập vào bảng nhớ tạm"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Hiện một thông báo khi có ứng dụng truy cập vào văn bản, hình ảnh hoặc nội dung khác mà bạn đã sao chép"</string>
@@ -6044,7 +6085,7 @@
     <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Thông tin cập nhật:\n"<ul><li>"Khi kết nối đồng hồ, bạn có thể dùng dữ liệu sinh trắc học hoặc mã PIN để truy cập vào ứng dụng khi không ở địa điểm đáng tin cậy"</li>\n<li>"Theo thời gian, tính năng Kiểm tra danh tính có thể thêm nhiều cách xác minh danh tính khác và bảo mật ứng dụng trên thiết bị của bạn. "<a href="https://support.google.com/android?p=identity_check">"Tìm hiểu thêm về thời điểm và địa điểm bạn được bảo vệ"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Chế độ cài đặt khác"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Tự động điền, thông báo và nhiều chế độ cài đặt khác"</string>
-    <string name="privacy_sources_title" msgid="7648842637181479352">"Chế độ kiểm soát quyền riêng tư"</string>
+    <string name="privacy_sources_title" msgid="7648842637181479352">"Kiểm soát quyền riêng tư"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Quyền truy cập, chế độ kiểm soát"</string>
     <string name="app_security_subpage_title" msgid="397183486243670441">"Bảo mật ứng dụng"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Mở khoá thiết bị"</string>
@@ -6090,7 +6131,16 @@
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Hãy xem lại chế độ cài đặt quyền riêng tư và bảo mật bất cứ lúc nào để tăng cường biện pháp bảo vệ"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Hoàn tất hành động"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Chế độ cài đặt nhanh về bảo mật và quyền riêng tư"</string>
-    <string name="privacy_controls_qs" msgid="1774718598801606190">"Chế độ kiểm soát quyền riêng tư"</string>
+    <string name="privacy_controls_qs" msgid="1774718598801606190">"Kiểm soát quyền riêng tư"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Mở"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Chuyển. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"Bị chặn"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"Mở rộng/thu gọn"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"Quyền truy cập micrô"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"Quyền truy cập camera"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"Quyền truy cập vị trí"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Ghép nối"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Đã kết nối <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Quét thiết bị"</string>
@@ -6113,4 +6163,6 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Dễ dàng truy cập thông tin về vệ tinh bằng cách thêm ô Vệ tinh vào trình đơn Cài đặt nhanh"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Thêm ô"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Lời nhắc thêm ô Vệ tinh"</string>
+    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <skip />
 </resources>

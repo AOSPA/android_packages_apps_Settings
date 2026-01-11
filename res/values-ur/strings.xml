@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"فیس اَنلاک سیٹ اپ کریں"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"فیس اَنلاک استعمال کریں"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"چہرہ"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"اس پر چہرہ استعمال کریں"</string>
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"آف"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"موبائل ڈیٹا نیٹ ورک کی قسم"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"موبائل وائس نیٹ ورک کی قسم"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"آپریٹر کی معلومات"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"‏PIN کی توثیق کریں"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"پاس ورڈ کی توثیق کریں"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"توثیق کریں کہ یہ آپ ہیں"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"‏Google اکاؤنٹس، ترتیبات وغیرہ کو منتقل کرنے کیلئے، اپنے دوسرے آلے کا پیٹرن درج کریں۔ آپ کا پیٹرن مرموز کردہ ہے۔"</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"‏Google اکاؤنٹس، ترتیبات وغیرہ کو منتقل کرنے کیلئے، اپنے دوسرے آلے کا PIN درج کریں۔ آپ کا PIN مرموز کردہ ہے۔"</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"‏Google اکاؤنٹ، ترتیبات وغیرہ کو منتقل کرنے کیلئے، اپنے دوسرے آلے کا پاس ورڈ درج کریں۔ آپ کا پاس ورڈ مرموز کردہ ہے۔"</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"اس آلے کو غیر مقفل کرنے کیلئے پیٹرن بھی استعمال کریں"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"‏اس آلے کو غیر مقفل کرنے کیلئے PIN بھی استعمال کریں"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"اس آلے کو غیر مقفل کرنے کیلئے پاس ورڈ بھی استعمال کریں"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"پیٹرن کی توثیق کریں"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"‏PIN کی توثیق کریں"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"پاس ورڈ کی توثیق کریں"</string>
@@ -2533,6 +2542,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"فوری ترتیبات"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{اپنی اسکرین کے اوپر سے نیچے کی طرف سوائپ کریں}other{اپنی اسکرین کے اوپر سے # انگلیوں سے نیچے کی طرف سوائپ کریں}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{اپنی اسکرین کے اوپر سے نیچے کی طرف سوائپ کریں۔ یہ شارٹ کٹ آپ کے آلہ کا سیٹ اپ مکمل کرنے کے بعد دستیاب ہوگا۔}other{اپنی اسکرین کے اوپر سے # انگلیوں سے نیچے کی طرف سوائپ کریں۔ یہ شارٹ کٹ آپ کے آلہ کا سیٹ اپ مکمل کرنے کے بعد دستیاب ہوگا۔}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"فوری ترتیبات"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"والیوم کلیدیں"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"والیوم کلیدیں"</string>
@@ -2790,7 +2803,7 @@
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"معیاری اختیارات"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"زبان"</string>
     <string name="captioning_text_size" msgid="5764254558945371745">"کیپشن کا سائز"</string>
-    <string name="captioning_preset" msgid="4174276086501638524">"کیپشن کا طرز"</string>
+    <string name="captioning_preset" msgid="4174276086501638524">"کیپشن کی طرز"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"حسب ضرورت اختیارات"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"پس منظر کا رنگ"</string>
     <string name="captioning_background_opacity" msgid="6453738649182382614">"پس منظر کا دھندلا پن"</string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"دیگر صارفین"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"مہمان کی سرگرمی کو حذف کریں"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"مہمان وضع سے باہر نکلتے وقت تمام مہمان ایپس اور ڈیٹا کو حذف کریں"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"مہمان کی سرگرمی کو حذف کریں؟"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"اس مہمان سیشن سے ایپس اور ڈیٹا کو اب حذف کر دیا جائے گا، اور ہر دفعہ آپ کے مہمان وضع سے باہر نکلنے پر مہمان کی مستقبل کی تمام سرگرمی حذف کر دی جائے گی"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"حذف کریں، مہمان، سرگرمی، ہٹائیں، ڈیٹا، ملاحظہ کاران، مٹا دیں"</string>
@@ -3936,6 +3955,8 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"طویل پیغامات کے فوری خلاصے حاصل کریں"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"اطلاع کے خلاصے استعمال کریں"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"‏فوری recaps کے لیے طویل پیغامات اور گروپ گفتگوؤں کا خلاصہ کریں۔\n\nخلاصے آپ کے آلے پر AI کا استعمال کرتے ہیں، جس سے بعض اوقات غلطیاں ہو سکتی ہیں۔ آپ کے پیغامات کبھی بھی Google کو نہیں بھیجے جاتے ہیں۔"</string>
+    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"ان ایپس سے حاصل ہونے والی اطلاعات کا خلاصہ نہیں کیا جائے گا"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"ایپس کا نظم کریں"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"اطلاع کے خلاصوں کے لیے ایپس کا نظم کریں"</string>
@@ -4421,6 +4442,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"اجازتیں ہٹائیں، عارضی فائلز حذف کریں اور اطلاعات موقوف کریں"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"اگر غیر استعمال شدہ ہے تو ایپ کا نظم کریں"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"اجازتیں ہٹائیں، عارضی فائلوں کو حذف کریں، اطلاعات کو روکیں اور ایپ کو آرکائیو کریں"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"سبھی ایپس"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"انسٹال کردہ ایپس"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"فوری ایپس"</string>
@@ -5661,6 +5688,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"‏<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> کو دستیاب ہونے کے لیے 2G درکار ہے"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"صرف مرموز کردہ نیٹ ورکس کی اجازت دیں"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"یہ زیادہ محفوظ ہے لیکن کچھ مقامات پر آپ کے موبائل نیٹ ورک کنکشن کو محدود کر سکتا ہے۔ ایمرجنسی کالنگ ہمیشہ اجازت یافتہ ہے۔"</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"تمام سروسز"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"کلپ بورڈ تک رسائی دکھائیں"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"ایپس کے آپ کے کاپی کردہ ٹیکسٹ، تصاویر یا دیگر مواد تک رسائی حاصل کرنے پر پیغام دکھائیں"</string>
@@ -6091,6 +6132,15 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"کارروائی مکمل ہو گئی"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"سیکیورٹی اور رازداری کی فوری ترتیبات"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"آپ کی رازداری سے متعلق کنٹرولز"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"کھولیں"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"سوئچ کریں۔ <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>۔ <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"بلاک کردہ"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"ٹوگل کریں"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"مائیکروفون تک رسائی"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"کیمرا تک رسائی"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"مقام تک رسائی"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"جوڑا بنانا"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> منسلک ہے"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"آلے کو اسکین کریں"</string>
@@ -6113,4 +6163,6 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"فوری ترتیبات میں سیٹلائٹ ٹائل شامل کر کے سیٹلائٹ کی معلومات تک آسانی سے رسائی حاصل کریں"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"ٹائل شامل کریں"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"سیٹلائٹ ٹائل پرامپٹس"</string>
+    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <skip />
 </resources>
