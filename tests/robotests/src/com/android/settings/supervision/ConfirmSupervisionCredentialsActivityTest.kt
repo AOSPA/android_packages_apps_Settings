@@ -146,7 +146,7 @@ class ConfirmSupervisionCredentialsActivityTest {
     fun onCreate_authSessionActive_finishWithResultOK() {
         addSupervisionRoleHolder()
         setupDefaultMocks()
-        SupervisionAuthController.getInstance(context).startSession(mActivity.taskId)
+        setupActiveAuthSession()
 
         mActivityController.setup()
 
@@ -158,7 +158,7 @@ class ConfirmSupervisionCredentialsActivityTest {
     fun onCreate_authSessionActive_forceConfirmation_doesNotFinish() {
         addSupervisionRoleHolder()
         setupDefaultMocks()
-        SupervisionAuthController.getInstance(context).startSession(mActivity.taskId)
+        setupActiveAuthSession()
 
         setUpActivity(forceConfirm = true)
         mActivityController.setup()
@@ -300,6 +300,7 @@ class ConfirmSupervisionCredentialsActivityTest {
         assertThat(nextActivity.component?.className).isEqualTo("ApprovalActivity")
 
         shadowActivity.receiveResult(nextActivity, Activity.RESULT_OK, null)
+        setupDashboardAsRunningTask()
 
         assertThat(mActivity.isFinishing).isTrue()
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
@@ -355,6 +356,7 @@ class ConfirmSupervisionCredentialsActivityTest {
                     Activity.RESULT_OK,
                 )
             }
+        setupDashboardAsRunningTask()
         mActivity.supportFragmentManager.setFragmentResult(
             ApprovalMethodChooserDialogFragment.REQUEST_KEY_APPROVAL_RESULT,
             resultBundle,
@@ -687,6 +689,7 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     fun onAuthenticationSucceeded_startsAuthSession_returnsResultOK() {
         setupDefaultMocks()
+        setupDashboardAsRunningTask()
 
         mActivity.mAuthenticationCallback.onAuthenticationSucceeded(null)
 
@@ -776,6 +779,19 @@ class ConfirmSupervisionCredentialsActivityTest {
         whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(canLaunch)
     }
 
+    private fun setupActiveAuthSession() {
+        SupervisionAuthController.getInstance(context).startSession(mActivity.taskId)
+        setupDashboardAsRunningTask()
+    }
+
+    private fun setupDashboardAsRunningTask() {
+        val mockTask =
+            mock<ActivityManager.AppTask>().stub {
+                on { taskInfo } doReturn SUPERVISION_DASHBOARD_TASK_INFO
+            }
+        whenever(mockActivityManager.appTasks).thenReturn(listOf(mockTask))
+    }
+
     private companion object {
         const val SUPERVISING_USER_ID = 5
         val SUPERVISING_USER_HANDLE = UserHandle.of(SUPERVISING_USER_ID)
@@ -787,5 +803,16 @@ class ConfirmSupervisionCredentialsActivityTest {
                 /* flags */ 0,
                 USER_TYPE_PROFILE_SUPERVISING,
             )
+        val SUPERVISION_DASHBOARD_TASK_INFO =
+            ActivityManager.RecentTaskInfo().apply {
+                taskId = 1
+                isRunning = true
+                isFocused = true
+                topActivity =
+                    ComponentName(
+                        "com.android.settings",
+                        SupervisionDashboardActivity::class.java.name,
+                    )
+            }
     }
 }
