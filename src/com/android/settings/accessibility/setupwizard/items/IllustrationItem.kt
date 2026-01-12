@@ -25,6 +25,7 @@ import android.net.Uri
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import androidx.annotation.RawRes
 import androidx.core.content.withStyledAttributes
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import com.airbnb.lottie.LottieAnimationView
@@ -33,6 +34,8 @@ import com.android.settings.R
 import com.google.android.setupdesign.items.Item
 import com.google.android.setupdesign.util.LottieAnimationHelper
 import com.google.android.setupdesign.util.ThemeHelper
+import java.io.FileNotFoundException
+import java.io.InputStream
 
 /**
  * An item that is displayed with an Illustration, with methods to manipulate state of the
@@ -70,6 +73,9 @@ class IllustrationItem : Item {
             }
         }
 
+    private var isLottieAnimation = false
+    private var isLottieAnimationPaused = false
+
     constructor() : super()
 
     @JvmOverloads
@@ -86,6 +92,7 @@ class IllustrationItem : Item {
         val context = view.context
         val illustrationView = view.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
         handleImageWithAnimation(illustrationView)
+        handleAnimationControl(illustrationView)
 
         if (ThemeHelper.shouldApplyGlifExpressiveStyle(context)) {
             LottieAnimationHelper.get()
@@ -121,48 +128,132 @@ class IllustrationItem : Item {
     }
 
     private fun handleImageWithAnimation(illustrationView: LottieAnimationView) {
-        imageDrawable?.let { drawable -> illustrationView.setImageDrawable(drawable) }
-        imageUri?.let { uri -> illustrationView.setImageURI(uri) }
+        resetAnimations(illustrationView)
+        isLottieAnimation = false
+
+        imageDrawable?.let { drawable ->
+            illustrationView.setImageDrawable(drawable)
+            startAnimatableDrawable(drawable)
+            return
+        }
+
+        imageUri?.let { uri ->
+            illustrationView.setImageURI(uri)
+            val drawable = illustrationView.getDrawable()
+            if (drawable != null) {
+                startAnimatableDrawable(drawable)
+            } else {
+                // The lottie image from the raw folder also returns null because the ImageView
+                // couldn't handle it now.
+                startLottieAnimationWith(illustrationView, uri)
+                isLottieAnimation = true
+            }
+            return
+        }
+
         if (imageResId != 0) {
             illustrationView.setImageResource(imageResId)
             val drawable = illustrationView.getDrawable()
             if (drawable != null) {
-                startAnimation(drawable)
+                startAnimatableDrawable(drawable)
             } else {
                 // The lottie image from the raw folder also returns null because the ImageView
                 // couldn't handle it now.
-                illustrationView.setFailureListener { result: Throwable? ->
-                    Log.w(TAG, "Invalid illustration resource id: $imageResId", result)
-                }
-                illustrationView.setAnimation(imageResId)
-                illustrationView.setRepeatCount(LottieDrawable.INFINITE)
-                illustrationView.playAnimation()
+                startLottieAnimationWith(illustrationView, imageResId)
+                isLottieAnimation = true
             }
         }
     }
 
-    private fun startAnimation(drawable: Drawable?) {
+    /** Enable pause and resume abilities to animation only. */
+    private fun handleAnimationControl(illustrationView: LottieAnimationView) {
+        if (!isLottieAnimation) {
+            return
+        }
+
+        illustrationView.setOnClickListener {
+            isLottieAnimationPaused = !isLottieAnimationPaused
+            if (isLottieAnimationPaused) {
+                illustrationView.pauseAnimation()
+            } else {
+                illustrationView.resumeAnimation()
+            }
+        }
+    }
+
+    private fun startLottieAnimationWith(illustrationView: LottieAnimationView, imageUri: Uri) {
+        val inputStream: InputStream =
+            getInputStreamFromUri(illustrationView.context, imageUri) ?: return
+        illustrationView.setFailureListener { result: Throwable? ->
+            Log.w(TAG, "Invalid illustration image uri: $imageUri", result)
+        }
+        illustrationView.setAnimation(inputStream, /* cacheKey= */ null)
+        illustrationView.setRepeatCount(LottieDrawable.INFINITE)
+        illustrationView.playAnimation()
+    }
+
+    private fun getInputStreamFromUri(context: Context, uri: Uri): InputStream? {
+        try {
+            return context.contentResolver.openInputStream(uri)
+        } catch (e: FileNotFoundException) {
+            Log.w(TAG, "Cannot find content uri: $uri", e)
+            return null
+        }
+    }
+
+    private fun startLottieAnimationWith(
+        illustrationView: LottieAnimationView,
+        @RawRes rawRes: Int,
+    ) {
+        illustrationView.setFailureListener { result: Throwable? ->
+            Log.w(TAG, "Invalid illustration resource id: $rawRes", result)
+        }
+        illustrationView.setAnimation(rawRes)
+        illustrationView.setRepeatCount(LottieDrawable.INFINITE)
+        illustrationView.playAnimation()
+    }
+
+    private fun resetAnimations(illustrationView: LottieAnimationView) {
+        resetAnimation(illustrationView.getDrawable())
+
+        illustrationView.cancelAnimation()
+    }
+
+    private fun resetAnimation(drawable: Drawable?) {
         if (drawable !is Animatable) {
             return
         }
 
         when (drawable) {
-            is Animatable2 -> drawable.registerAnimationCallback(mAnimationCallback)
-            is Animatable2Compat -> drawable.registerAnimationCallback(mAnimationCallbackCompat)
+            is Animatable2 -> drawable.clearAnimationCallbacks()
+            is Animatable2Compat -> drawable.clearAnimationCallbacks()
+        }
+
+        (drawable as Animatable).stop()
+    }
+
+    private fun startAnimatableDrawable(drawable: Drawable?) {
+        if (drawable !is Animatable) {
+            return
+        }
+
+        when (drawable) {
+            is Animatable2 -> drawable.registerAnimationCallback(animationCallback)
+            is Animatable2Compat -> drawable.registerAnimationCallback(animationCallbackCompat)
             is AnimationDrawable -> drawable.isOneShot = false
         }
 
         (drawable as Animatable).start()
     }
 
-    private val mAnimationCallback: Animatable2.AnimationCallback =
+    private val animationCallback: Animatable2.AnimationCallback =
         object : Animatable2.AnimationCallback() {
             override fun onAnimationEnd(drawable: Drawable) {
                 (drawable as Animatable).start()
             }
         }
 
-    private val mAnimationCallbackCompat: Animatable2Compat.AnimationCallback =
+    private val animationCallbackCompat: Animatable2Compat.AnimationCallback =
         object : Animatable2Compat.AnimationCallback() {
             override fun onAnimationEnd(drawable: Drawable) {
                 (drawable as Animatable).start()
