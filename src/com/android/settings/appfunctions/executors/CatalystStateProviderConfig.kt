@@ -18,6 +18,7 @@ package com.android.settings.appfunctions
 
 import android.content.Context
 import com.android.server.connectivity.Flags as ConnectivityFlags
+import com.android.settings.IccLockApiScreen
 import com.android.settings.TrustedCredentialsScreenApi
 import com.android.settings.UserCredentialsScreenApi
 import com.android.settings.accessibility.AccessibilityScreen
@@ -502,6 +503,7 @@ private fun getCatalystScreenConfigs() =
             enabled = true,
             screenKey = InstallCertificateFromStorageScreenApi.KEY,
         ),
+        PerScreenCatalystConfig(enabled = true, screenKey = IccLockApiScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =
