@@ -1918,7 +1918,7 @@
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Πατήστε \"Μενού\" για βοήθεια."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Όταν ολοκλ. σηκώστε το δάχτ. σας"</string>
     <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Συνδέστε τουλάχιστον <xliff:g id="NUMBER">%d</xliff:g> κουκκίδες"</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Τουλάχιστον <xliff:g id="NUMBER">%d</xliff:g> τελείες. Δοκιμάστε ξανά."</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Συνδέστε τουλάχιστον <xliff:g id="NUMBER">%d</xliff:g> κουκκίδες. Δοκιμάστε ξανά."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Το μοτίβο καταγράφηκε"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Σχεδιάστε ξανά για επιβεβαίωση"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Το νέο σας μοτίβο ξεκλειδώματος"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Γρήγορη πρόσβαση σε λειτουργίες προσβασιμότητας"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Για να ξεκινήσετε&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Μεταβείτε στις ρυθμίσεις προσβασιμότητας&lt;br/&gt; {1,number,integer}. Επιλέξτε μια λειτουργία και πατήστε τη συντόμευση&lt;br/&gt; {2,number,integer}. Επιλέξτε το κουμπί για πρόσβαση στη λειτουργία&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Τοποθεσία"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Κινούμενο πάνω από άλλες εφαρμογές"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Γραμμή πλοήγησης"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Μέγεθος"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Μεγάλο"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Μικρό"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Εξαφαν. σταδιακά όταν δεν χρησιμοπ."</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Εξαφανίζεται σταδιακά μετά από λίγα δευτερ. για να βλέπετε πιο εύκολα την οθόνη"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Διαφανές όταν δεν χρησιμοποιείται"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Αυτή η προτίμηση χρονικής διάρκειας δεν υποστηρίζεται από όλες τις εφαρμογές."</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Επιλέξτε τη χρονική διάρκεια εμφάνισης των προσωρινών μηνυμάτων που σας ζητούν να εκτελέσετε μια ενέργεια"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Διάρκεια παρατεταμένου αγγίγματος"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Μικρή"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Μέτρια"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Μεγάλη"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Αντιστροφή χρωμάτων"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Χρήση αντιστροφής χρωμάτων"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Συντόμευση αντιστροφής χρωμάτων"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Προσθήκη χρηστών από την οθόνη κλειδώματος"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Προσθήκη χρηστών από την οθόνη σύνδεσης"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Αλλαγή σε διαχειριστή όταν είναι στη βάση σύνδεσης"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Διαγραφή χρήστη"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Διαγραφή του εαυτού σας;"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Να διαγραφεί ο χρήστης;"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Κατάργηση του προφίλ;"</string>
@@ -4484,7 +4482,7 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="3523877008096439251">"Αυτή η αναφορά σφάλματος κοινοποιείται στο διαχειριστή IT σας. Επικοινωνήστε μαζί του για περισσότερες λεπτομέρειες."</string>
     <string name="share_remote_bugreport_action" msgid="7173093464692893276">"Κοινοποίηση"</string>
     <string name="decline_remote_bugreport_action" msgid="1276509879613158895">"Απόρριψη"</string>
-    <string name="usb_use_charging_only" msgid="1743303747327057947">"Χωρίς μεταφορά αρχείων"</string>
+    <string name="usb_use_charging_only" msgid="1743303747327057947">"Χωρίς μεταφορά δεδομένων"</string>
     <string name="usb_use_power_only" msgid="3408055485802114621">"Φόρτιση συνδεδεμένης συσκευής"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Μεταφορά αρχείων"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Υποστηριζόμενες εφαρμογές στο τηλέφωνό σας"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Δεν είναι δυνατή η προσθήκη μιας SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Τερματίστε τη δορυφορική σύνδεση, προτού προσθέσετε μια κάρτα SIM"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Το Bluetooth είναι απενεργοποιημένο"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Όταν υπάρχει σύνδεση μέσω Bluetooth, η λειτουργία πτήσης θα συγχρονίζεται μεταξύ των υποστηριζόμενων συσκευών, όπως το τηλέφωνο και το ρολόι"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Ονόματα σημείων πρόσβασης"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -5660,7 +5659,7 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Εισαγωγή αριθμού τηλεφώνου"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Ο αριθμός τηλεφώνου απουσιάζει."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ΟΚ"</string>
-    <string name="enable_2g_title" msgid="5657132300321750181">"Προστασία δικτύου 2G"</string>
+    <string name="enable_2g_title" msgid="5657132300321750181">"Προστασία από δίκτυα 2G"</string>
     <string name="enable_2g_summary" msgid="6194875539424151678">"Αποφεύγονται τα δίκτυα 2G, τα οποία είναι λιγότερο ασφαλή. Η συνδεσιμότητα σε ορισμένα μέρη μπορεί να περιοριστεί. Το 2G επιτρέπεται πάντα για κλήσεις έκτακτης ανάγκης, αλλά οι κλήσεις ενδέχεται να μην συνδέονται εάν βρίσκεστε σε κατάσταση διεθνούς περιαγωγής."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Το <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> απαιτεί τη διαθεσιμότητα 2G"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Επιτρέπονται μόνο κρυπτογραφημένα δίκτυα"</string>

@@ -21,13 +21,13 @@ import android.database.ContentObserver
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
-import android.provider.DeviceConfig
 import android.provider.Settings
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.internal.accessibility.AccessibilityShortcutController
+import com.android.internal.accessibility.common.MagnificationConstants
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
 import com.android.internal.accessibility.util.ShortcutUtils
 import com.android.settings.R
@@ -44,8 +44,7 @@ import com.android.settings.core.TogglePreferenceController
  */
 // LINT.IfChange
 class AlwaysOnPreferenceController(context: Context, prefKey: String) :
-    TogglePreferenceController(context, prefKey),
-    DefaultLifecycleObserver {
+    TogglePreferenceController(context, prefKey), DefaultLifecycleObserver {
 
     private var preference: Preference? = null
 
@@ -72,15 +71,17 @@ class AlwaysOnPreferenceController(context: Context, prefKey: String) :
     override fun getAvailabilityStatus(): Int {
         return if (
             !mContext.isInSetupWizard() &&
-            mContext.isWindowMagnificationSupported() &&
-            isAlwaysOnSupported(mContext)
+                mContext.isWindowMagnificationSupported() &&
+                isAlwaysOnSupported(mContext)
         ) {
             // This preference's title "Keep on while switching apps" does not
             // mention magnification so it may confuse users who search a term
             // like "Keep on".
             // So we hide it from search if the user has no magnification shortcut enabled.
-            if (ShortcutUtils.getEnabledShortcutTypes(
-                    mContext, AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
+            if (
+                ShortcutUtils.getEnabledShortcutTypes(
+                    mContext,
+                    AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME,
                 ) == UserShortcutType.DEFAULT
             ) {
                 AVAILABLE_UNSEARCHABLE
@@ -93,23 +94,16 @@ class AlwaysOnPreferenceController(context: Context, prefKey: String) :
     }
 
     private fun isAlwaysOnSupported(context: Context): Boolean {
-        val defaultValue =
-            context
-                .getResources()
-                .getBoolean(com.android.internal.R.bool.config_magnification_always_on_enabled)
-
-        return DeviceConfig.getBoolean(
-            DeviceConfig.NAMESPACE_WINDOW_MANAGER,
-            "AlwaysOnMagnifier__enable_always_on_magnifier",
-            defaultValue,
-        )
+        return context
+            .getResources()
+            .getBoolean(com.android.internal.R.bool.config_magnification_always_on_enabled)
     }
 
     override fun isChecked(): Boolean {
         return Settings.Secure.getInt(
             mContext.getContentResolver(),
             SETTING_KEY,
-            AccessibilityUtil.State.ON,
+            MagnificationConstants.ALWAYS_ON_SETTINGS_PREFERENCE_DEFAULT_ENABLED,
         ) == AccessibilityUtil.State.ON
     }
 
@@ -129,7 +123,7 @@ class AlwaysOnPreferenceController(context: Context, prefKey: String) :
 
             isEnabled =
                 mode == MagnificationCapabilities.MagnificationMode.FULLSCREEN ||
-                        mode == MagnificationCapabilities.MagnificationMode.ALL
+                    mode == MagnificationCapabilities.MagnificationMode.ALL
             refreshSummary(this)
         }
     }
@@ -152,7 +146,8 @@ class AlwaysOnPreferenceController(context: Context, prefKey: String) :
     }
 
     companion object {
-        private const val SETTING_KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED
+        private const val SETTING_KEY =
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED
     }
 }
 // LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ui/AlwaysOnSwitchPreference.kt)

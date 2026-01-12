@@ -40,6 +40,8 @@ import com.android.settings.accessibility.VibrationIntensityScreen;
 import com.android.settings.accessibility.VibrationIntensitySettingsFragment;
 import com.android.settings.accessibility.VibrationScreen;
 import com.android.settings.accessibility.VibrationSettings;
+import com.android.settings.accounts.ManageAccountsDashboardFragment;
+import com.android.settings.accounts.ManageAccountsScreen;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.specialaccess.SpecialAccessSettings;
 import com.android.settings.applications.specialaccess.SpecialAccessSettingsScreen;
@@ -666,6 +668,11 @@ public class Settings extends SettingsActivity {
     public static class AccountsAndBackupDashboardActivity extends CatalystSettingsActivity {
         public AccountsAndBackupDashboardActivity() {
             super(AccountsAndBackupScreen.KEY, AccountsAndBackupDashboardFragment.class);
+        }
+    }
+    public static class ManageAccountsDashboardActivity extends CatalystSettingsActivity {
+        public ManageAccountsDashboardActivity() {
+            super(ManageAccountsScreen.KEY, ManageAccountsDashboardFragment.class);
         }
     }
     public static class EmergencyDashboardActivity extends CatalystSettingsActivity {

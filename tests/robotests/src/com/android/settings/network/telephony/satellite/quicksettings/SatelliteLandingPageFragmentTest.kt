@@ -117,7 +117,8 @@ class SatelliteLandingPageFragmentTest {
     }
 
     @Test
-    fun onCreate_loadsPreferencesAndSetsIllustration() {
+    fun illustration_whenLteNtnSupported_isHidden() {
+        setLteNtnSupported(true)
         val scenario = launchFragment()
 
         scenario.onFragment { fragment ->
@@ -125,7 +126,22 @@ class SatelliteLandingPageFragmentTest {
                 fragment.findPreference<IllustrationPreference>(KEY_ILLUSTRATION)
 
             assertThat(illustrationPreference).isNotNull()
-            assertThat(illustrationPreference?.getImageDrawable()).isNotNull()
+            assertThat(illustrationPreference!!.isVisible).isFalse()
+        }
+    }
+
+    @Test
+    fun illustration_whenLteNtnNotSupported_isVisible() {
+        setLteNtnSupported(false)
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment ->
+            val illustrationPreference =
+                fragment.findPreference<IllustrationPreference>(KEY_ILLUSTRATION)
+
+            assertThat(illustrationPreference).isNotNull()
+            assertThat(illustrationPreference!!.isVisible).isTrue()
+            assertThat(illustrationPreference.getImageDrawable()).isNotNull()
         }
     }
 

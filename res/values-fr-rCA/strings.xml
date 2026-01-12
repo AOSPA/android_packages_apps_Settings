@@ -1021,7 +1021,7 @@
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Prêt à partager le contenu de l\'appli par CCP"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Désactivé"</string>
-    <string name="nfc_disabled_summary" msgid="8737797364522502351">"Non accessible, car la CCP est désactivée"</string>
+    <string name="nfc_disabled_summary" msgid="8737797364522502351">"Non accessible, car la technologie CCP est désactivée"</string>
     <string name="android_beam_explained" msgid="5684416131846701256">"Lorsque cette fonctionnalité est activée, vous pouvez partager le contenu d\'une appli avec un appareil compatible CCP en rapprochant les appareils. Vous pouvez, par exemple, partager des pages Web, des vidéos YouTube, des contacts et plus encore.\n\nIl vous suffit de rapprocher les appareils (en les plaçant généralement dos à dos), puis de toucher votre écran. L\'appli détermine le contenu à transférer."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Utiliser le Wi-Fi"</string>
@@ -1873,9 +1873,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Mot de passe pour déverrouillage facial"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Schéma pour le déverrouillage facial"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Code pour le déverrouillage facial"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Définissez un mot de passe de secours"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Définissez un mot de passe secondaire"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Définir un schéma pour utiliser visage ou empreinte digitale"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Définir un NIP de secours"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Définissez un NIP de secours"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Mot de passe oublié?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Schéma oublié?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"NIP oublié?"</string>
@@ -1918,9 +1918,9 @@
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Appuyez sur Menu pour obtenir de l\'aide."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Relevez le doigt lorsque vous avez terminé"</string>
     <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Connectez au moins <xliff:g id="NUMBER">%d</xliff:g> points"</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Reliez au moins <xliff:g id="NUMBER">%d</xliff:g> points. Veuillez réessayer."</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Reliez au moins <xliff:g id="NUMBER">%d</xliff:g> points; veuillez réessayer"</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Schéma enregistré"</string>
-    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Retracez le schéma pour confirmer."</string>
+    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Retracez le schéma pour confirmer"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Votre nouveau schéma de déverrouillage est le suivant :"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"Confirmer"</string>
     <string name="lockpattern_restart_button_text" msgid="255339375151895998">"Redessiner"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accès rapide aux fonctionnalités d\'accessibilité"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Pour commencer&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Accédez aux paramètres d\'accessibilité.&lt;br/&gt; {1,number,integer}. Sélectionnez une fonctionnalité et touchez le raccourci.&lt;br/&gt; {2,number,integer}. Choisissez le bouton pour accéder à la fonctionnalité.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Position"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Flottant par-dessus d\'autres applis"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Barre de navigation"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Taille"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Grand"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Petit"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Pâlit s\'il n\'est pas utilisé"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Pâlit après quelques secondes pour que vous puissiez mieux voir l\'écran"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Transparence quand il n\'est pas utilisé"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Cette préférence du temps d\'affichage n\'est pas prise en charge par toutes les applis"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Choisissez la durée d\'affichage des messages temporaires qui vous demandent d\'effectuer une action"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Délai de pression"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Courte"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Moyenne"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Longue"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversion des couleurs"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utiliser l\'inversion des couleurs"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Raccourci de l\'inversion des couleurs"</string>
@@ -3318,11 +3317,11 @@
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"Activer synchro auto données?"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"Désactiver synchro auto données?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Cette action limite la consommation de données et l\'utilisation de la pile, mais vous devrez synchroniser manuellement chaque compte pour recueillir les informations récentes. Par ailleurs, vous ne recevrez pas de notifications en cas de mise à jour."</string>
-    <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Date de réinitialisation du cycle de consommation"</string>
+    <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Date de réinitialisation du cycle d\'utilisation"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"Jour du mois :"</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"Définir"</string>
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Définir avertissement d\'utilisation des données"</string>
-    <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Définir la limite de consommation des données"</string>
+    <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Définir la limite d\'utilisation des données"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Limitation de la consommation de données cellulaires"</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"alerte"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limite"</font></string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Ajouter des utilisateurs à partir de l\'écran de verrouillage"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Ajouter des utilisateurs à partir de l\'écran de connexion"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Activer l\'utilisateur administrateur lorsqu\'ancrée"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Utilisateur supprimé"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Vous supprimer?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Supprimer cet utilisateur?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Supprimer ce profil?"</string>
@@ -3833,7 +3831,7 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Modifier"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Horaires"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Horaire"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Quand l\'activer automatiquement"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Activation automatique"</string>
     <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Programme des événements"</string>
     <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Activer lors des événements pour"</string>
     <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Là où la réponse à l\'invitation est"</string>
@@ -4504,7 +4502,7 @@
     <string name="usb_control_device" msgid="527916783743021577">"Cet appareil"</string>
     <string name="usb_switching" msgid="3654709188596609354">"Changement en cours…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Impossible de changer de mode"</string>
-    <string name="usb_summary_charging_only" msgid="678095599403565146">"Recharge de l\'appareil en cours…"</string>
+    <string name="usb_summary_charging_only" msgid="678095599403565146">"Recharge de l\'appareil"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"Chargement de l\'appareil connecté"</string>
     <string name="usb_summary_file_transfers" msgid="5498487271972556431">"Transfert de fichiers"</string>
     <string name="usb_summary_tether" msgid="2554569836525075702">"Partage de connexion par USB"</string>
@@ -4699,12 +4697,12 @@
     <string name="operator_warning" msgid="5672761970087591211">"Le suivi de consommation de données du fournisseur de services peut différer de celui de l\'appareil"</string>
     <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Exclut les données utilisées sur les réseaux cellulaires"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> utilisés"</string>
-    <string name="set_data_warning" msgid="1685771882794205462">"Activer une alerte"</string>
+    <string name="set_data_warning" msgid="1685771882794205462">"Définir un avertissement"</string>
     <string name="data_warning" msgid="2925054658166062884">"Seuil d\'alerte"</string>
-    <string name="data_warning_footnote" msgid="5991901765915710592">"C\'est votre appareil qui mesure l\'utilisation des données pour les limites et les avertissements. Ces mesures peuvent différer de celles de votre fournisseur de services."</string>
+    <string name="data_warning_footnote" msgid="5991901765915710592">"C\'est votre appareil qui mesure l\'utilisation des données pour les limites et les avertissements. Ces mesures peuvent différer de celles de votre opérateur."</string>
     <string name="set_data_limit" msgid="9010326815874642680">"Définir limite consomm. données"</string>
     <string name="data_limit" msgid="8731731657513652363">"Limite de données"</string>
-    <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> utilisés pour la période suivante : <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> utilisés (<xliff:g id="ID_2">%2$s</xliff:g>)"</string>
     <string name="configure" msgid="1499586749829665889">"Configurer"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Autres applis incluses dans l\'utilisation"</string>
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 appli est autorisée à utiliser les données cellulaires sans restrictions lorsque l\'Économiseur de données est activé}one{# appli est autorisée à utiliser les données cellulaires sans restrictions lorsque l\'Économiseur de données est activé}other{# applis sont autorisées à utiliser les données cellulaires sans restrictions lorsque l\'Économiseur de données est activé}}"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Applis prises en charge sur votre téléphone"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Impossible d\'ajouter une carte SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Mettez fin à la connexion satellite avant d\'ajouter une carte SIM"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Le Bluetooth est désactivé"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Lorsque connecté par Bluetooth, le mode Avion se synchronisera sur les appareils pris en charge, comme le téléphone et la montre"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Noms des points d\'accès"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"nom du point d\'accès"</string>
@@ -5356,7 +5355,7 @@
     <string name="sim_onboarding_label_sim_dialog_label" msgid="9020433985426525185">"Étiquette"</string>
     <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"Choix de cartes SIM à utiliser"</string>
     <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"Vous pouvez utiliser deux cartes SIM simultanément"</string>
-    <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Config. cartes SIM primaires"</string>
+    <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Config. cartes SIM principales"</string>
     <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Choisissez les cartes SIM à utiliser par défaut pour les appels, les messages texte et les données"</string>
     <string name="primary_sim_title" msgid="2508161011657571566">"Vos cartes SIM principales"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"Appels"</string>
@@ -6091,7 +6090,7 @@
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Moins d\'alertes"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Alertes fermées"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Fermer cette alerte?"</string>
-    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Passez en revue les paramètres de sécurité et de confidentialité à tout moment pour renforcer votre protection"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Passez en revue les paramètres de sécurité et de confidentialité à tout moment pour renforcer votre protection."</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Action terminée"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Paramètres rapides de sécurité et de confidentialité"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Paramètres de confidentialité"</string>

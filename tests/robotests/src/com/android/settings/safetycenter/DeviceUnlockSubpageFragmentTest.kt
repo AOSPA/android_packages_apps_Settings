@@ -45,6 +45,8 @@ import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.SubSettings
 import com.android.settings.core.instrumentation.SettingsStatsLog
+import com.android.settings.dashboard.DashboardFeatureProvider
+import com.android.settings.overlay.FeatureFactory
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_ACTION
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_SESSION_ID
@@ -64,6 +66,10 @@ import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.EXTRA_SESSI
 import com.android.settings.safetycenter.ui.SafetyCenterSubpageRegistry.DEVICE_UNLOCK_SUBPAGE_KEY
 import com.android.settings.safetycenter.ui.SafetySourceProfileType
 import com.android.settings.safetycenter.ui.ViewType
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider
+import com.android.settingslib.drawer.CategoryKey
+import com.android.settingslib.drawer.DashboardCategory
+import com.android.settingslib.drawer.Tile
 import com.android.settingslib.safetycenter.SafetySourcePreference
 import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.BannerMessagePreferenceGroup
@@ -74,6 +80,10 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.any
+import org.mockito.Mock
+import org.mockito.Mockito.`when`
+import org.mockito.MockitoAnnotations
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
@@ -90,11 +100,18 @@ import org.robolectric.shadows.ShadowUserManager
 @Config(shadows = [SafetyCenterTestUtils.ShadowSettingsStatsLog::class])
 class DeviceUnlockSubpageFragmentTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
+
+    @Mock private lateinit var mockFeatureFactory: FeatureFactory
+    @Mock private lateinit var mockDashboardFeatureProvider: DashboardFeatureProvider
+    @Mock private lateinit var mockMetricsFeatureProvider: MetricsFeatureProvider
+    @Mock private lateinit var mockTile: Tile
+
     private lateinit var application: Application
     private lateinit var shadowSafetyCenterManager: ShadowSafetyCenterManager
 
     @Before
     fun setUp() {
+        MockitoAnnotations.initMocks(this)
         application = ApplicationProvider.getApplicationContext()
         val userManager = application.getSystemService(UserManager::class.java)!!
         val shadowUserManager = Shadow.extract(userManager) as ShadowUserManager
@@ -110,6 +127,10 @@ class DeviceUnlockSubpageFragmentTest {
             UserInfo.FLAG_MANAGED_PROFILE,
         )
         shadowSafetyCenterManager.setSafetyCenterEnabled(true)
+
+        FeatureFactory.setFactory(application, mockFeatureFactory)
+        `when`(mockFeatureFactory.dashboardFeatureProvider).thenReturn(mockDashboardFeatureProvider)
+        `when`(mockFeatureFactory.metricsFeatureProvider).thenReturn(mockMetricsFeatureProvider)
     }
 
     private fun runTest(data: SafetyCenterData, testBlock: (DeviceUnlockSubpageFragment) -> Unit) {
@@ -878,7 +899,8 @@ class DeviceUnlockSubpageFragmentTest {
     }
 
     @Test
-    fun onCreate_whenNoEntries_redirectsToSafetyCenterHome() {
+    fun onCreate_whenNoEntriesAndNoInjectedTiles_redirectsToSafetyCenterHome() {
+        `when`(mockDashboardFeatureProvider.getTilesForCategory(any())).thenReturn(null)
         runTest(EMPTY_SC_DATA) { fragment ->
             val nextIntent = shadowOf(fragment.requireActivity()).nextStartedActivity
 
@@ -888,6 +910,23 @@ class DeviceUnlockSubpageFragmentTest {
             assertThat(extras).isNotNull()
             assertThat(extras?.getString(Settings.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(SafetyCenterFragment::class.java.name)
+        }
+    }
+
+    @Test
+    fun onCreate_whenNoEntriesButHasInjectedTiles_doesNotRedirect() {
+        val categoryWithTiles = DashboardCategory(CategoryKey.CATEGORY_SC_DEVICE_UNLOCK)
+        categoryWithTiles.addTile(mockTile)
+        `when`(
+                mockDashboardFeatureProvider.getTilesForCategory(
+                    CategoryKey.CATEGORY_SC_DEVICE_UNLOCK
+                )
+            )
+            .thenReturn(categoryWithTiles)
+
+        runTest(EMPTY_SC_DATA) { fragment ->
+            val nextIntent = shadowOf(fragment.requireActivity()).nextStartedActivity
+            assertThat(nextIntent).isNull()
         }
     }
 

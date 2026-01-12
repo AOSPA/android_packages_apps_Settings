@@ -1111,7 +1111,7 @@
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Sentreer die QR-kode hier onder om die toestel by “<xliff:g id="SSID">%1$s</xliff:g>” te voeg"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Skandeer QR-kode"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Sentreer die QR-kode hieronder om aan “<xliff:g id="SSID">%1$s</xliff:g>” te koppel"</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Skandeer \'n QR-kode om by wi-fi aan te sluit"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Skandeer ’n QR-kode om by wi-fi aan te sluit"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Deel wi-fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Skandeer hierdie QR-kode met ’n ander toestel om by “<xliff:g id="SSID">%1$s</xliff:g>” aan te sluit"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Skandeer hierdie QR-kode om aan “<xliff:g id="SSID">%1$s</xliff:g>” te koppel"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Kry vinnig toegang tot toeganklikheidskenmerke"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Om te begin&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gaan na toeganklikheidsinstellings&lt;br/&gt; {1,number,integer}. Kies ’n kenmerk en tik op die kortpad&lt;br/&gt; {2,number,integer}. Kies die knoppie om toegang tot die kenmerk te kry&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Ligging"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Sweef oor ander apps"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Navigasiebalk"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Grootte"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Groot"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Klein"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Verdof wanneer nie gebruik word nie"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Verdof ná ’n paar sekondes sodat dit makliker is om jou skerm te sien"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Deursigtigheid wanneer nie gebruik word nie"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Nie alle apps steun hierdie tydsduurvoorkeur nie"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Kies hoe lank om tydelike boodskappe te wys wat jou vra om iets te doen"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Raak-en-hou-vertraging"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Kort"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Medium"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Lank"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Kleuromkering"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Gebruik kleuromkering"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Kleuromkeringkortpad"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Voeg gebruikers van die sluitskerm af by"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Voeg gebruikers by vanaf die aanmeldskerm"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Skakel oor na admingebruiker wanneer gedok"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Gebruiker is uitgevee"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Verwyder jouself?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vee dié gebruiker uit?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Verwyder hierdie profiel?"</string>
@@ -4341,7 +4339,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Kry fokus om jouself te verdiep"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Vir die tye wanneer hoflikheid tel"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Geleide gebruik om jou te help om in goeie hande te bly"</string>
-    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Optimeer jou toestel vir ’n gladder publiekevervoerervaring"</string>
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Optimeer jou toestel vir ’n beter publiekevervoerervaring"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Neem beheer oor jou aandag"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Waarskuwing"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Maak toe"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Gesteunde apps op jou foon"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Kan nie ’n SIM byvoeg nie"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Beëindig die satellietverbinding voordat jy ’n SIM byvoeg"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth is af"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Wanneer jy via Bluetooth gekoppel is, sal vliegtuigmodus sinkroniseer op al die gesteunde toestelle soos foon en horlosie"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Toegangspuntname"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>

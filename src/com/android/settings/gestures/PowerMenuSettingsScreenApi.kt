@@ -120,12 +120,11 @@ class PowerMenuSettingsScreenApi() :
                             ?: context.resources.getInteger(
                                 com.android.internal.R.integer.config_longPressOnPowerDurationMs
                             )
-                    settingsValue.createSensitivityGeneratedValue(context)
+                    settingsValue
                 }
             }
             set {
-                execute { generatedValue ->
-                    val value = generatedValue.value
+                execute { value ->
                     val values = context.resources.getIntArray(DURATIONS_ARRAY_ID)
                     val closestIndex = closestValueIndex(values, value)
                     SettingsGlobalStore.get(context)
@@ -147,8 +146,8 @@ class PowerMenuSettingsScreenApi() :
 
 private fun Int.createSensitivityGeneratedValue(context: Context): GeneratedValue<Int> {
     return GeneratedValue(
-        context.getString(R.string.long_press_power_sensitivity_value_description, this),
         this,
+        context.getString(R.string.long_press_power_sensitivity_value_description, this),
     )
 }
 

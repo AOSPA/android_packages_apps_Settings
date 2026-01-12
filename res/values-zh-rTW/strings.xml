@@ -642,7 +642,7 @@
     <string name="privacy_header" msgid="5526002421324257007">"隱私權"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"工作資料夾"</string>
     <string name="private_space_title" msgid="1752064212078238723">"私人空間"</string>
-    <string name="private_space_summary" msgid="2274405892301976238">"讓私人應用程式保持鎖定及隱藏的狀態"</string>
+    <string name="private_space_summary" msgid="2274405892301976238">"維持鎖定私人應用程式並隱藏"</string>
     <string name="private_space_description" msgid="4059594203775816136">"將私人應用程式隱藏或鎖定於獨立的空間"</string>
     <string name="private_space_lock_title" msgid="7230836881433350526">"私人空間鎖定"</string>
     <string name="private_space_one_lock_summary" msgid="2106513606571219068">"你可以用鎖定裝置的方式來鎖定私人空間，或選擇其他鎖定方式"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"快速使用無障礙功能"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;詳細步驟&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 開啟無障礙設定&lt;br/&gt; {1,number,integer}. 選取功能並輕觸捷徑&lt;br/&gt; {2,number,integer}. 選擇要用來執行該功能的按鈕&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"位置"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"浮動顯示在其他應用程式上"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"導覽列"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"大小"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"大"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"小"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"未使用時淡出"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"在幾秒過後自動淡出，方便你查看整個畫面"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"未使用時的透明度"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"部分應用程式可能不支援這個顯示時間設定值"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"選擇暫時性操作提示的顯示時長"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"長按延遲時間"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"短"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"中"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"長"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"色彩反轉"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"使用色彩反轉"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"色彩反轉捷徑"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"從螢幕鎖定畫面新增使用者"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"從登入畫面新增使用者"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"插入座架後切換成管理員使用者"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"使用者已遭刪除"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"你要刪除自己嗎？"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"要刪除這位使用者嗎？"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"移除這個設定檔？"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"手機支援的應用程式"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"無法新增 SIM 卡"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"請先結束衛星連線再新增 SIM 卡"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"藍牙已關閉"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"透過藍牙連線後，飛航模式會在支援的裝置 (例如手機和手錶) 之間同步"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"存取點名稱"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>

@@ -52,23 +52,26 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
             Log.w(TAG, "[$preferenceKey] ViewModel not set, cannot observe LiveData")
             return
         }
-        viewModel!!.statusUiLiveData.observe(owner) { statusUiData -> updateUi(statusUiData) }
+        viewModel!!.statusUiLiveData.observe(owner) { statusUiData ->
+            Log.d(TAG, "[$preferenceKey] statusUiLiveData observer notified")
+            updateUi(statusUiData)
+        }
     }
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)
-        val model = viewModel
-        if (model != null) {
-            updateUi(StatusUiData(model.getCurrentSafetyCenterDataAsUiData()))
+        val uiData = viewModel?.safetyCenterUiLiveData?.value
+        if (uiData != null) {
+            updateUi(StatusUiData(uiData))
         }
     }
 
     override fun updateState(preference: Preference) {
         super.updateState(preference)
-        val model = viewModel
-        if (model != null) {
-            updateUi(StatusUiData(model.getCurrentSafetyCenterDataAsUiData()))
+        val uiData = viewModel?.safetyCenterUiLiveData?.value
+        if (uiData != null) {
+            updateUi(StatusUiData(uiData))
         }
     }
 
@@ -142,9 +145,12 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
     }
 
     private fun StatusBannerPreference.updateBannerButton(status: StatusUiData) {
+        val uiData = viewModel?.safetyCenterUiLiveData?.value
+        val hasActiveIssues = uiData?.getActiveIssues()?.isNotEmpty() == true
         if (
-            status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK ||
-                status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_UNKNOWN
+            (status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK ||
+                status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_UNKNOWN) &&
+                !hasActiveIssues
         ) {
             setButtonText(R.string.safety_center_rescan_button)
             setButtonOnClickListener {

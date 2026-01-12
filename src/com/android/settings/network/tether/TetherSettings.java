@@ -75,6 +75,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+// LINT.IfChange
 /**
  * Displays preferences for Tethering.
  */
@@ -774,3 +775,4 @@ public class TetherSettings extends RestrictedDashboardFragment
         return isCatalystEnabled() && Flags.catalystTetherSettings26q1();
     }
 }
+// LINT.ThenChange(TetherScreen.kt, TetherApiScreen.kt)

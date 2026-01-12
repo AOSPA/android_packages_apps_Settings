@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"সহজেই অ্যাক্সেসেবিলিটি ফিচার অ্যাক্সেস করুন"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;শুরু করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer} অ্যাক্সেসিবিলিটি সেটিংসে যান।&lt;br/&gt; {1,number,integer} একটি ফিচার বেছে নিয়ে \'শর্টকাট\' বিকল্পে ট্যাপ করুন।&lt;br/&gt; {2,number,integer} ফিচার অ্যাক্সেস করার জন্য বোতাম বেছে নিন।&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"লোকেশন"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"অন্য অ্যাপের উপরে ভেসে থাকা"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"নেভিগেশন বার"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"সাইজ"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"বড়"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"ছোট"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"ব্যবহার না হলে অষ্পষ্ট হয়ে যায়"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"কয়েক সেকেন্ড পরে অষ্পষ্ট হয়ে যায় যাতে আপনার স্ক্রিনটি দেখা আরও সহজ হয়"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"ব্যবহার না হলে ট্রান্সপারেন্ট হয়ে যায়"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"আপনাকে অ্যাকশনের জন্য নির্দেশ দিয়েছে যে মেসেজ সেটি কতক্ষণ দেখা যাবে সেই সংক্রান্ত পছন্দ সব অ্যাপের জন্য পাওয়া যাবে না"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"আপনাকে অ্যাকশনের জন্য নির্দেশ দিয়েছে যে মেসেজ সেটি কতক্ষণ দেখা যাবে তা বেছে নিন"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"স্পর্শ করে ধরে রাখায় বিলম্ব"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"ছোট"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"মাঝারি"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"দীর্ঘ"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"কালার ইনভার্সন"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"কালার ইনভার্সন ব্যবহার করুন"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"কালার ইনভার্সনের শর্টকাট"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"লক স্ক্রিন থেকে ব্যবহারকারীদের যোগ করুন"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"সাইন-ইন স্ক্রিন থেকে ব্যবহারকারী যোগ করুন"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"ডক করা হলে অ্যাডমিন ব্যবহারকারীতে পাল্টান"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"ব্যবহারকারীকে মুছে ফেলা হয়েছে"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"নিজেকে মুছবেন?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"অ্যাকাউন্ট মুছতে চান?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"এই প্রোফাইলটি সরাবেন?"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"আপনার ফোনে যেসব অ্যাপ চলবে"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"কোনও সিম কার্ড যোগ করা যাচ্ছে না"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"কোনও সিম কার্ড যোগ করার আগে স্যাটেলাইট কানেকশন বন্ধ করুন"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"ব্লুটুথ বন্ধ আছে"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"ব্লুটুথের মাধ্যমে কানেক্ট করা থাকলে, বিমান মোড কাজ করে এমন সব ডিভাইস জুড়ে সিঙ্ক করা হবে যেমন ফোন ও স্মার্ট ওয়াচ"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"অ্যাক্সেস পয়েন্টের নাম"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>

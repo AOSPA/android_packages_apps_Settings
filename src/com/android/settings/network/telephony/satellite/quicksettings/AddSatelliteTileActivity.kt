@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.app.Activity
+import android.app.NotificationManager
 import android.app.StatusBarManager
 import android.content.ComponentName
 import android.graphics.drawable.Icon
@@ -41,6 +42,13 @@ class AddSatelliteTileActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Dismiss the notification that launched this activity.
+        val notificationId = intent.getIntExtra(EXTRA_NOTIFICATION_ID, 0)
+        if (notificationId != 0) {
+            getSystemService(NotificationManager::class.java)?.cancel(notificationId)
+        }
+
         val statusBarManager = getSystemService(StatusBarManager::class.java)
         val componentName = ComponentName(this, SatelliteTileService::class.java)
 
@@ -90,5 +98,11 @@ class AddSatelliteTileActivity : Activity() {
 
     companion object {
         private const val TAG = "AddSatelliteTileActivity"
+
+        /**
+         * Intent extra key for the ID of the notification that launched this activity. This is used
+         * to cancel the notification when the user interacts with it.
+         */
+        internal const val EXTRA_NOTIFICATION_ID = "notification_id"
     }
 }

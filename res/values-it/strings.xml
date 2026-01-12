@@ -758,7 +758,7 @@
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Scegli un nuovo blocco schermo"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Scegli blocco per app di lavoro"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Scegli nuovo blocco per profilo lavoro"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Per maggiore sicurezza, imposta un blocco schermo alternativo."</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Per maggiore sicurezza, imposta un blocco schermo alternativo"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Scegli il metodo di blocco schermo alternativo"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Se dimentichi il blocco schermo, l\'amministratore IT non può reimpostarlo."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Imposta un blocco separato per il profilo di lavoro"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accedi rapidamente alle funzioni di accessibilità"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Per iniziare&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Vai alle impostazioni di accessibilità&lt;br/&gt; {1,number,integer}. Seleziona una funzionalità e tocca la scorciatoia&lt;br/&gt; {2,number,integer}. Scegli il pulsante per accedere alla funzionalità&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Posizione"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Mobile sopra altre app"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Barra di navigazione"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Dimensioni"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Grande"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Piccolo"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Dissolvenza quando non in uso"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Si dissolve dopo pochi secondi per poter vedere più facilmente lo schermo"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Trasparenza quando non in uso"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Questa preferenza relativa al tempo non è supportata da tutte le app"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Scegli per quanto tempo mostrare i messaggi temporanei che ti chiedono di compiere un\'azione"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Ritardo pressione prolungata"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Breve"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Media"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Lunga"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversione dei colori"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usa l\'inversione dei colori"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Scorciatoia per l\'inversione dei colori"</string>
@@ -3143,7 +3142,7 @@
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Sicurezza di rete mobile"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notifiche"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Notifiche della rete"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Ricevi una notifica quando il tuo dispositivo si connette a una rete non criptata o quando una rete registra il tuo ID dispositivo univoco o SIM."</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Ricevi una notifica quando il tuo dispositivo si connette a una rete non criptata o quando una rete registra il tuo ID dispositivo univoco o SIM"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Generazione della rete"</string>
     <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"La Protezione rete 2G evita le reti 2G, che sono meno sicure. Questo potrebbe limitare la connettività in alcune località. La rete 2G è sempre consentita per le chiamate di emergenza, ma le chiamate potrebbero non connettersi se hai attivato il roaming internazionale."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"Protezione rete 2G"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Aggiungi utenti da schermata di blocco"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Aggiungi utenti dalla schermata di accesso"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Passa a utente amministratore se inserito nel dock"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Utente eliminato"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Eliminare te stesso?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Eliminare questo utente?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Rimuovere questo profilo?"</string>
@@ -3801,7 +3799,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nessuna}=1{1 pianificazione impostata}other{# pianificazioni impostate}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Non disturbare"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Modalità"</string>
-    <string name="zen_modes_list_intro" msgid="1879511587535247228">"Riduci al minimo le distrazioni e tieni sotto controllo il tuo livello di attenzione con le modalità per dormire, lavorare, guidare e molto altro"</string>
+    <string name="zen_modes_list_intro" msgid="1879511587535247228">"Riduci al minimo le distrazioni e canalizza la tua attenzione con le modalità per dormire, lavorare, guidare e molto altro"</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Crea la tua modalità"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ricevi soltanto le notifiche di app e persone importanti"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Imposta una programmazione"</string>
@@ -3833,7 +3831,7 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Modifica"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Pianificazioni"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Pianificazione"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Quando l\'attivazione deve essere automatica"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Attivazione automatica"</string>
     <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Programmazione dell\'evento"</string>
     <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Attiva durante gli eventi per"</string>
     <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Quando la risposta all\'invito è"</string>
@@ -4332,7 +4330,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Elimina le distrazioni e le interruzioni dal tuo dispositivo per ottenere la concentrazione"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimina tutte le distrazioni per un ambiente tranquillo"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalizza le esperienze e le impostazioni sui dispositivi per i vari utenti"</string>
-    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Sfrutta le regolazioni delle impostazioni automatiche durante i tuoi spostamenti sui mezzi"</string>
+    <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Regola le impostazioni in automatico durante gli spostamenti sui mezzi pubblici"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Riduci al minimo le interruzioni consentendo solo alle app e alle persone importanti di raggiungerti"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Imposta una modalità che segua una programmazione regolare"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Mantieni il dispositivo sincronizzato con gli eventi della giornata"</string>
@@ -4341,7 +4339,7 @@
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Concentrati per entrare nella zona"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Per i momenti in cui la cortesia è importante"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Utilizzo guidato per aiutarti a rimanere in buone mani"</string>
-    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Ottimizza il tuo dispositivo per un\'esperienza di spostamento più fluida sui mezzi pubblici"</string>
+    <string name="zen_mode_inspiration_transit" msgid="773274920037562216">"Ottimizza il tuo dispositivo per un\'esperienza più fluida sui mezzi pubblici"</string>
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Assumi il controllo della tua attenzione"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Avviso"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Chiudi"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"App supportate sullo smartphone"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Impossibile aggiungere una SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Termina la connessione satellitare prima di aggiungere una SIM"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth non attivo"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Quando la connessione avviene tramite Bluetooth, la modalità aereo si sincronizza tra i dispositivi supportati, ad esempio smartphone e smartwatch"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nomi punti di accesso"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>

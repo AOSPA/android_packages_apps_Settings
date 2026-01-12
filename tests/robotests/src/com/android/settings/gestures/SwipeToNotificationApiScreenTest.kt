@@ -18,12 +18,12 @@ package com.android.settings.gestures
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.hardware.fingerprint.FingerprintManager
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.Utils
 import com.android.settings.flags.Flags
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settings.testutils2.ApiTester
@@ -34,7 +34,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
-import org.robolectric.shadows.ShadowFingerprintManager
+import org.robolectric.annotation.Implementation
+import org.robolectric.annotation.Implements
 import org.robolectric.shadows.ShadowPackageManager
 
 @Config(shadows = [SettingsShadowResources::class])
@@ -45,8 +46,6 @@ class SwipeToNotificationApiScreenTest {
     private val tester = ApiTester(SwipeToNotificationApiScreen())
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val shadowPackageManager: ShadowPackageManager = shadowOf(context.packageManager)
-    private val shadowFingerprintManager: ShadowFingerprintManager =
-        shadowOf(context.getSystemService(FingerprintManager::class.java))
 
     @Before
     fun setUp() {
@@ -55,7 +54,6 @@ class SwipeToNotificationApiScreenTest {
             true,
         )
         shadowPackageManager.setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true)
-        shadowFingerprintManager.setIsHardwareDetected(true)
     }
 
     @Test
@@ -71,7 +69,16 @@ class SwipeToNotificationApiScreenTest {
     }
 
     @Test
+    @Config(shadows = [ShadowUtils::class])
     fun getLaunchIntent_hasIntent() {
         assertThat(tester.getLaunchIntent()).isNotNull()
+    }
+}
+
+@Implements(Utils::class)
+class ShadowUtils {
+
+    companion object {
+        @Implementation @JvmStatic fun hasFingerprintHardware(context: Context): Boolean = true
     }
 }

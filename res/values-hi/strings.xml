@@ -152,7 +152,7 @@
     <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"इस खाते से जुड़े डिवाइस"</string>
     <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"आपके खाते के साथ पहले जोड़े गए डिवाइस"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"दूसरे डिवाइस से जुड़ने के लिए, ब्लूटूथ चालू हो जाएगा"</string>
-    <string name="connected_device_connections_title" msgid="4164120115341579170">"कनेक्शन से जुड़ी सेटिंग"</string>
+    <string name="connected_device_connections_title" msgid="4164120115341579170">"कनेक्शन की सेटिंग"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"पहले कनेक्ट किए गए डिवाइस"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"ब्लूटूथ चालू किया गया"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"सभी देखें"</string>
@@ -637,7 +637,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"एन्क्रिप्शन, क्रेडेंशियल वगैरह"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"सुरक्षा, सुरक्षा से जुड़ी और सेटिंग, अन्य सेटिंग, बेहतर सुरक्षा सेटिंग"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"निजता से जुड़ी अन्य सेटिंग"</string>
-    <string name="more_security_privacy_settings" msgid="123465614090328851">"सुरक्षा और निजता से जुड़ी अन्य सेटिंग"</string>
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"अन्य सुरक्षा और निजता सेटिंग"</string>
     <string name="security_header" msgid="961514795852103424">"सुरक्षा"</string>
     <string name="privacy_header" msgid="5526002421324257007">"निजता"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"वर्क प्रोफ़ाइल"</string>
@@ -1440,7 +1440,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"बेडटाइम मोड की सेटिंग"</string>
     <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{मोड से भी गहरे रंग वाली थीम चालू की जा सकती है}=1{{mode_1} से भी गहरे रंग वाली थीम चालू की जा सकती है}=2{{mode_1} और {mode_2} से भी गहरे रंग वाली थीम चालू की जा सकती है}=3{{mode_1}, {mode_2}, और {mode_3} से भी गहरे रंग वाली थीम चालू की जा सकती है}one{{mode_1}, {mode_2}, और # अन्य मोड से भी गहरे रंग वाली थीम चालू की जा सकती है}other{{mode_1}, {mode_2}, और # अन्य मोड से भी गहरे रंग वाली थीम चालू की जा सकती है}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"मोड की सेटिंग"</string>
-    <string name="hdr_brigtness_text" msgid="1912629316654528876">"हाई डाइनैमिक रेंज (एचडीआर) इमेज और वीडियो की चमक, कलर रेंज, और क्वालिटी बढ़ाएं. एचडीआर कॉन्टेंट ज़्यादा चमकदार दिखता है."</string>
+    <string name="hdr_brigtness_text" msgid="1912629316654528876">"हाई डाइनैमिक रेंज (एचडीआर) इमेज और वीडियो की चमक, कलर रेंज, और क्वालिटी बढ़ाएं. इससे, एचडीआर कॉन्टेंट ज़्यादा चमकदार दिखेगा."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"स्क्रीन टाइमआउट"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> तक कोई गतिविधि नहीं होने पर"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"सेट नहीं किया गया है"</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"सुलभता सुविधाओं को तुरंत ऐक्सेस करें"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;शुरू करने के लिए&lt;/b&gt;&lt;br/&gt; {0,number,integer}. सुलभता सेटिंग में जाएं&lt;br/&gt; {1,number,integer}. कोई सुविधा चुनें और शॉर्टकट पर टैप करें&lt;br/&gt; {2,number,integer}. इस सुविधा को ऐक्सेस करने के लिए बटन चुनें&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"सुलभता बटन कहां दिखेगा"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"दूसरे ऐप्लिकेशन के ऊपर फ़्लोट कर रहा है"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"नेविगेशन बार"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"साइज़"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"बड़ा करें"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"छोटा करें"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"इस्तेमाल न होने पर फ़ेड हो जाए"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"कुछ सेकंड के बाद फ़ेड हो जाएगा, ताकि आप आसानी से अपनी स्क्रीन देख सकें"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"इस्तेमाल न होने पर बटन इतना फ़ेड हो जाए"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"किसी सुलभता कंट्रोल पर कार्रवाई करने से जुड़ी अवधि तय करने की सेटिंग, हर ऐप्लिकेशन में उपलब्ध नहीं होती"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"चुनें कि कार्रवाई करने का मैसेज देने वाले प्रॉम्प्ट कितनी देर तक दिखें"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"दबाकर रखने की अवधि"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"कम समय के लिए"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"थोड़ी देर के लिए"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"ज़्यादा समय के लिए"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"रंग बदलने की सुविधा"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"रंग बदलने की सुविधा का इस्तेमाल करें"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"रंग बदलने की सुविधा का शॉर्टकट"</string>
@@ -3129,7 +3128,7 @@
     <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> वीपीएन सुरक्षित नहीं है"</string>
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> वीपीएन सुरक्षित नहीं हैं"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"अडैप्टिव कनेक्टिविटी"</string>
-    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"अडैप्टिव कनेक्टिविटी से, आपका इंटरनेट कनेक्शन अपने-आप मैनेज होता है. साथ ही, डिवाइस की परफ़ॉर्मेंस बेहतर होती है और बैटरी लाइफ़ बढ़ती है"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"अडैप्टिव कनेक्टिविटी से इंटरनेट कनेक्शन अपने-आप मैनेज होता है. इससे डिवाइस की परफ़ॉर्मेंस बेहतर होती है और बैटरी लाइफ़ बढ़ती है"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"चालू है"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"बंद करें"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"अडैप्टिव कनेक्टिविटी सुविधा का इस्तेमाल करें"</string>
@@ -3139,13 +3138,13 @@
     <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"बैटरी लाइफ़ बढ़ाने के लिए, यह सुविधा अपने-आप सबसे अच्छा इंटरनेट कनेक्शन चुनती है"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"मोबाइल नेटवर्क की सुरक्षा"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"नेटवर्क टाइप, एन्क्रिप्शन, सूचनाएं कंट्रोल करने की सेटिंग"</string>
-    <string name="cellular_security_top_intro" msgid="4190908521080878539">"ये सेटिंग, पुराने हो चुके या असुरक्षित नेटवर्क से आपके कॉल, मैसेज, और डेटा को सुरक्षित रखने में मदद करती हैं. ये नेटवर्क, आपकी निगरानी करने या डेटा चोरी करने के लिए इस्तेमाल किए जा सकते हैं."</string>
+    <string name="cellular_security_top_intro" msgid="4190908521080878539">"ये सेटिंग, पुराने या असुरक्षित नेटवर्क से आपके कॉल, मैसेज, और डेटा को सुरक्षित रखती हैं. ये नेटवर्क, आपकी निगरानी करने या डेटा चोरी करने के लिए इस्तेमाल किए जा सकते हैं."</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"मोबाइल नेटवर्क की सुरक्षा"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"सूचनाएं"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"नेटवर्क से जुड़ी सूचनाएं"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"इन मामलों में सूचना मिलेगी: डिवाइस के किसी असुरक्षित नेटवर्क से कनेक्ट होने पर या जब कोई नेटवर्क आपके डिवाइस का यूनीक आईडी या सिम आईडी रिकॉर्ड करे"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"इन मामलों में सूचना मिलेगीः डिवाइस जब किसी असुरक्षित नेटवर्क से कनेक्ट होगा या कोई नेटवर्क उसका यूनीक आईडी या सिम आईडी रिकॉर्ड करेगा"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"नेटवर्क जनरेशन"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"2G नेटवर्क से सुरक्षित रखने वाली सुविधा, डिवाइस को 2G नेटवर्क से कनेक्ट होने से रोकती है, क्योंकि ये कम सुरक्षित होते हैं. इस वजह से, कुछ जगहों पर कनेक्टिविटी खराब हो सकती है. आपातकालीन कॉल के लिए, 2G नेटवर्क का इस्तेमाल हमेशा किया जा सकता है. हालांकि, ऐसा हो सकता है कि अंतरराष्ट्रीय रोमिंग के दौरान कॉल कनेक्ट न हों."</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"2G नेटवर्क से सुरक्षित रखने वाली सुविधा, डिवाइस को ऐसे कनेक्ट होने से रोकती है, क्योंकि ये कम सुरक्षित होते हैं. इस वजह से कुछ जगहों पर कनेक्टिविटी खराब हो सकती है. आपातकालीन कॉल के लिए, 2G नेटवर्क हमेशा उपलब्ध होते हैं. हालांकि, ऐसा हो सकता है कि अंतरराष्ट्रीय रोमिंग के दौरान ऐसे कॉल कनेक्ट न हों."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G नेटवर्क से सुरक्षित रखने वाली सुविधा"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"एन्क्रिप्शन"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"नेटवर्क की जनरेशन"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"लॉक स्क्रीन से उपयोगकर्ताओं को जोड़ें"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"साइन-इन वाली स्क्रीन से उपयोगकर्ताओं को जोड़ें"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"डिवाइस के डॉक होने पर एडमिन खाते पर जाएं"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"उपयोगकर्ता का खाता मिटा दिया गया है"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"खुद को मिटाएं?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"उपयोगकर्ता को हटाना है?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"इस प्रोफ़ाइल को निकालें?"</string>
@@ -3495,7 +3493,7 @@
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"ऐप के लिए सेटिंग का विस्तार करें"</string>
     <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"इंस्टॉल करने के लिए ऐप्लिकेशन चुनें"</string>
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"उपलब्ध ऐप्लिकेशन इंस्टॉल करें"</string>
-    <string name="nfc_payment_settings_title" msgid="2043139180030485500">"टच किए बिना पेमेंट करना"</string>
+    <string name="nfc_payment_settings_title" msgid="2043139180030485500">"टच किए बिना पेमेंट करने की सुविधा"</string>
     <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"पेमेंट के लिए डिफ़ॉल्ट ऐप्लिकेशन"</string>
     <string name="nfc_default_payment_footer" msgid="978535088340021360">"किसी पेमेंट ऐप्लिकेशन से पैसे चुकाने के लिए, डिवाइस के पिछले हिस्से को पेमेंट टर्मिनल के सामने रखें"</string>
     <string name="nfc_more_details" msgid="1700713533074275233">"ज़्यादा जानें"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"फ़ोन पर सैटलाइट सेवा के साथ काम करने वाले ऐप्लिकेशन"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"सिम नहीं जोड़ा जा सकता"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"कोई सिम जोड़ने से पहले, सैटलाइट कनेक्शन बंद करें"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"ब्लूटूथ बंद है"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"ब्लूटूथ से कनेक्ट होने पर, फ़्लाइट मोड आपके फ़ोन और स्मार्टवॉच जैसे उन डिवाइसों पर सिंक हो जाएगा जो इस सुविधा के साथ काम करते हैं"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ऐक्सेस पॉइंट नेम"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"एपीएन"</string>
@@ -5637,7 +5636,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"वाई-फ़ाई हॉटस्पॉट का इस्तेमाल करें"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"ऐप्लिकेशन पिन करने की सुविधा का इस्तेमाल करें"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"डेवलपर के लिए सेटिंग और टूल का इस्तेमाल करें"</string>
-    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"प्रिंट से जुड़ी सेवा का इस्तेमाल करें"</string>
+    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"प्रिंट सेवा का इस्तेमाल करें"</string>
     <string name="multiple_users_main_switch_title" msgid="9158796544835843201">"प्रोफ़ाइलें जोड़ने और स्विच करने की अनुमति दें"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"अनुमति दें, कई, इस्तेमाल करने वाले, मंज़ूरी दें, कई सारे"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"कई, उपयोगकर्ता, प्रोफ़ाइलें, लोग, खाते, स्विच, बहुत"</string>

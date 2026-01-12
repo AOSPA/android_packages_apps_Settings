@@ -205,6 +205,7 @@ class AllAppListTest {
 
     @Test
     fun listModelGetSummary_notInstalled() {
+        if (android.multiuser.Flags.dontShowOtherUsersAppsToAdmin()) return
         val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
         val notInstalledApp = ApplicationInfo().apply {
             packageName = PACKAGE_NAME

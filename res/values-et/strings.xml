@@ -759,7 +759,7 @@
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Valige töörakendustele lukk"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Valige uus tööprofiili lukk"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Lisaturvalisuse huvides seadistage varuekraanilukk."</string>
-    <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Valige oma ekraaniluku varumeetod"</string>
+    <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Valige oma ekraaniluku varumeetod."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Kui unustate oma ekraaniluku, ei saa IT-administraator seda lähtestada."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Seadistage eraldi töökell"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Kui unustate selle luku, paluge IT-administraatoril see lähtestada."</string>
@@ -1489,7 +1489,7 @@
     <string name="doze_always_on_summary_long" msgid="7956866501728946221">"Kuvab kellaaja, kuupäeva ja muud teavet, kui ekraan on välja lülitatud."</string>
     <string name="doze_always_on_summary_short" msgid="3301903540897812365">"Kellaaja, kuupäeva ja muu teabe kuvamine"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Taustapildi valikud"</string>
-    <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Lukustuskuva taustapildi kuvamine"</string>
+    <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Kuva lukustuskuva taustapilt"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Lukustuskuva taustapilt on alati sisse lülitatud ekraani korral nähtav"</string>
     <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Lülita ekraan välja, kui ma midagi ei tee"</string>
     <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Lülitab aku säästmiseks ekraani välja, kui kasutaja tegevust ei tuvastata."</string>
@@ -2559,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Kiirjuurdepääs juurdepääsufunktsioonidele"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Alustamiseks toimige järgmiselt.&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Avage juurdepääsetavuse seaded.&lt;br/&gt; {1,number,integer}. Valige funktsioon ja puudutage otseteed.&lt;br/&gt; {2,number,integer}. Valige nupp, millega funktsioonile juurde pääseda.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Asukoht"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Hõljub teiste rakenduste kohal"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Navigeerimisriba"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Suurus"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Suur"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Väike"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Hajuta, kui seda ei kasutata"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Hajub mõne sekundi pärast, et kuva oleks hõlpsam näha"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Läbipaistvus, kui nuppu ei kasutata"</string>
@@ -2620,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Seda ajastamiseelistust kõikides rakendustes ei toetata."</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Valige, kui kaua kuvatakse ajutisi sõnumeid, milles teil palutakse midagi teha."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Puute ja hoidmise viide"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Lühike"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Keskmine"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Pikk"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Värvide ümberpööramine"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Kasuta värvide ümberpööramist"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Värvide ümber­pööramise otsetee"</string>
@@ -3448,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Kasutajate lisamine lukustuskuval"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Kasutajate lisamine sisselogimiskuvalt"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Vaheta dokkimisel admin.-õigustega kasutajale"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Kasutaja on kustutatud."</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Kas soovite kustutada iseenda?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Kas kustutada kasutaja?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Kas eemaldada profiil?"</string>
@@ -4485,7 +4483,7 @@
     <string name="share_remote_bugreport_action" msgid="7173093464692893276">"Jaga"</string>
     <string name="decline_remote_bugreport_action" msgid="1276509879613158895">"Keeldu"</string>
     <string name="usb_use_charging_only" msgid="1743303747327057947">"Andmeedastus puudub"</string>
-    <string name="usb_use_power_only" msgid="3408055485802114621">"Ühendatud seadme laadimine"</string>
+    <string name="usb_use_power_only" msgid="3408055485802114621">"Lae ühendatud seadet"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Failiedastus"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
     <string name="usb_use_uvc_webcam" msgid="6595429508472038732">"Veebikaamera"</string>
@@ -5311,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Toetatud rakendused teie telefonis"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM-kaarti ei saa lisada"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Enne SIM-kaardi lisamist katkestage satelliitühendus"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth on välja lülitatud."</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Bluetoothi kaudu ühendatuna sünkroonib lennukirežiim toetatud seadmetega, nagu telefon ja kell."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Pääsupunktide nimed"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>

@@ -29,13 +29,18 @@ import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.CannotSetException
 import com.android.settings.testutils2.FailedPreconditionException
 import com.android.settings.testutils2.HardwareUnsupportedException
+import com.android.settings.testutils2.InvalidValueException
 import com.android.settings.testutils2.MissingPermissionException
+import com.android.settings.testutils2.Parameters
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import com.google.common.truth.Truth
 import kotlin.test.assertFailsWith
 import org.junit.Rule
@@ -178,6 +183,52 @@ class ApiTesterTest {
                     execute { value -> theValue = value }
                 }
             }
+            preference(
+                key = "preference_with_generated_type",
+                purpose = 0,
+                type = GeneratedType<String>(R.string.generated_type_description) {
+                    listOf(
+                        GeneratedValue<String>("value1", "first"),
+                        GeneratedValue<String>("value2", "second")
+                    )
+                }
+            ) {
+                var theValue = "value1"
+                get {
+                    execute {
+                        theValue
+                    }
+                }
+                set {
+                    execute { value->
+                        theValue = value
+                    }
+                }
+
+            }
+
+            preference(
+                key = "preference_with_generated_type_gets_and_sets_invalid_value",
+                purpose = 0,
+                type = GeneratedType<String>(R.string.generated_type_description) {
+                    listOf(
+                        GeneratedValue<String>("value1", "first"),
+                        GeneratedValue<String>("value2", "second")
+                    )
+                }
+            ) {
+                var theValue = "Hello"
+                get {
+                    execute {
+                        "value3"
+                    }
+                }
+                set {
+                    execute { value ->
+                        theValue = value
+                    }
+                }
+            }
         }
     }
 
@@ -239,9 +290,159 @@ class ApiTesterTest {
         }
     }
 
+    class ParameterizedScreen : PreferencesApiScreen(
+        key = "D",
+        topLevelSettingsCategory = Category.SYSTEM,
+        fragment = Fragment::class,
+        purpose = 0
+    ) {
+        init {
+            flag {
+                Flags.catalystMigration26q2()
+            }
+            parameters {
+                parameter(
+                    "package",
+                    R.string.parameter_purpose,
+                    type = GeneratedParameterType(
+                        R.string.parameter_type_description
+                    ) {
+                        listOf (
+                            GeneratedValue("parameter1", "first parameter description"),
+                            GeneratedValue("parameter2", "second parameter description")
+                        )
+                    }
+                )
+                prepareScreenExtras { parameters, extras ->
+                    extras.putString("pkg", parameters["package"])
+                }
+            }
+            preference<String>(
+                key = "preference_with_parameter_precondition",
+                purpose = 0,
+                type = AnyString,
+            ) {
+                preconditions(R.string.parameterized_precondition) {
+                    if(parameters["package"] == "parameter1") {
+                        Allowed
+                    }
+                    else Custom(R.string.parameter_must_be_parameter1)
+                }
+                get {
+                    execute {
+                        "hello"
+                    }
+                }
+            }
+            preference<String>(
+                key = "preference_of_parameterized_screen",
+                purpose = 0,
+                type = AnyString
+            ) {
+                var storageForParameter1 = ""
+                var storageForParameter2 = ""
+                get {
+                    execute {
+                        if(parameters["package"] == "parameter1")
+                            storageForParameter1
+                        else if(parameters["package"] == "parameter2")
+                            storageForParameter2
+                        else "Invalid"
+                    }
+                }
+                set {
+                    execute { value ->
+                        if (parameters["package"] == "parameter1")
+                            storageForParameter1 = value
+                        else if(parameters["package"] == "parameter2")
+                            storageForParameter2 = value
+                    }
+                }
+            }
+
+            preference<String>(
+                key = "preference_of_parameterized_screen_with_missing_permission",
+                purpose = 0,
+                type = AnyString
+            ) {
+                get {
+                    permissions(listOf(INTERACT_ACROSS_PROFILES))
+                    execute {
+                        parameters["package"]!!
+                    }
+                }
+                set {
+                    permissions(listOf(INTERACT_ACROSS_PROFILES))
+                    execute { value -> }
+                }
+            }
+
+            preference<String>(
+                key = "get_preference_of_parameterized_screen",
+                purpose = 0,
+                type = AnyString
+            ) {
+                get {
+                    execute {
+                        if(parameters["package"] == "parameter1")
+                            "parameter1_value"
+                        else "parameter2_value"
+                    }
+                }
+            }
+        }
+    }
+
+    class FailingPreconditionParameterizedScreen : PreferencesApiScreen(
+        key = "E",
+        topLevelSettingsCategory = Category.SYSTEM,
+        fragment = Fragment::class,
+        purpose = 0
+    ) {
+        var parameterizedScreenPreconditionSucceeds = true
+        init {
+            flag {
+                Flags.catalystMigration26q2()
+            }
+            parameters {
+                parameter(
+                    "package",
+                    R.string.parameter_purpose,
+                    type = GeneratedParameterType(
+                        R.string.parameter_type_description
+                    ) {
+                        listOf (
+                            GeneratedValue("parameter1", "first parameter description"),
+                            GeneratedValue("parameter2", "second parameter description")
+                        )
+                    })
+            }
+            preconditions(R.string.parameterized_precondition){
+                if(parameters["package"] == "parameter1")
+                    Allowed
+                else HardwareUnsupported(R.string.hardware_unsupported_exception)
+            }
+            preference(
+                key = "main_preference",
+                purpose = 0,
+                type = AnyString
+            ) {
+                get {
+                    execute {
+                        "Hello"
+                    }
+                }
+            }
+        }
+    }
+
     val tester = ApiTester(TestScreen())
     val testerFailingPermissions = ApiTester(FailingPermissionScreen())
     val testerFailingPreconditions = ApiTester(FailingPreconditionScreen())
+    val testerParameterized = ApiTester(ParameterizedScreen())
+    val testerFailingPreconditionsParameterized = ApiTester(
+        FailingPreconditionParameterizedScreen()
+    )
 
     @get:Rule val setFlagsRule = SetFlagsRule()
 
@@ -350,4 +551,199 @@ class ApiTesterTest {
     fun launchIntent_correctScreen_hasIntent() {
         Truth.assertThat(tester.getLaunchIntent()).isNotNull()
     }
+
+    @Test
+    fun getPreferenceOptions_generatedType_areCorrect() {
+        Truth.assertThat(
+            tester.getPreferenceOptions<String>("preference_with_generated_type")
+        ).containsExactly(
+            ("value1" to "first"),
+            ("value2" to "second")
+        )
+    }
+
+    @Test
+    fun set_onGeneratedType_isCorrect() {
+        tester.set("preference_with_generated_type", "value1")
+        Truth.assertThat(
+            tester.get<String>("preference_with_generated_type")
+        ).isEqualTo("value1")
+    }
+
+    @Test
+    fun getPreferenceOptions_onInfiniteType_throwsException(){
+        assertFailsWith<Exception> {
+            tester.getPreferenceOptions<String>("preference_which_has_value_hello_and_no_setter")
+        }
+    }
+
+    @Test
+    fun get_onGeneratedValueWithInvalidValue_throwsException() {
+        assertFailsWith<InvalidValueException> {
+            tester.get<String>("preference_with_generated_type_gets_and_sets_invalid_value")
+        }
+    }
+
+    @Test
+    fun set_onGeneratedValueWithInvalidValue_throwsException() {
+        assertFailsWith<InvalidValueException> {
+            tester.set<String>("preference_with_generated_type_gets_and_sets_invalid_value", "value4")
+        }
+    }
+
+    @Test
+    fun get_onParameterizedPreferenceWithInvalidParameter_throwsException() {
+        assertFailsWith<IllegalArgumentException> {
+            testerParameterized.get<String>(
+                "preference_with_parameter_precondition",
+                Parameters("package" to "parameterInvalid")
+            )
+        }
+    }
+
+    @Test
+    fun get_onParameterizedPreferenceWithWrongParameterPrecondition_throwsException() {
+        assertFailsWith<FailedPreconditionException> {
+            testerParameterized.get<String>(
+                "preference_with_parameter_precondition",
+                Parameters("package" to "parameter2")
+            )
+        }
+    }
+
+    @Test
+    fun get_onParameterizedPreferenceWithCorrectParameterPrecondition_isCorrect() {
+        Truth.assertThat(
+            testerParameterized.get<String>(
+                "preference_with_parameter_precondition",
+                Parameters("package" to "parameter1")
+            )
+        ).isEqualTo("hello")
+    }
+
+    @Test
+    fun get_onParameterizedPreferenceWithParameter1_isCorrect() {
+        Truth.assertThat(
+            testerParameterized.get<String>(
+            "get_preference_of_parameterized_screen",
+            Parameters("package" to "parameter1")
+            )
+        ).isEqualTo("parameter1_value")
+    }
+
+    @Test
+    fun get_onParameterizedPreferenceWithParameter2_isCorrect() {
+        Truth.assertThat(
+            testerParameterized.get<String>(
+            "get_preference_of_parameterized_screen",
+            Parameters("package" to "parameter2")
+            )
+        ).isEqualTo("parameter2_value")
+    }
+
+    @Test
+    fun set_onParameterizedPreferenceWithParameter1_isCorrect() {
+        testerParameterized.set<String>(
+            "preference_of_parameterized_screen",
+            "parameter1_storage",
+            Parameters("package" to "parameter1")
+        )
+        Truth.assertThat(
+            testerParameterized.get<String>(
+                "preference_of_parameterized_screen",
+                Parameters("package" to "parameter1")
+            )
+        ).isEqualTo("parameter1_storage")
+    }
+
+    @Test
+    fun set_onParameterizedPreferenceWithParameter2_isCorrect() {
+        testerParameterized.set<String>("preference_of_parameterized_screen",
+            "parameter2_storage",
+            Parameters("package" to "parameter2")
+        )
+        Truth.assertThat(
+            testerParameterized.get<String>(
+                "preference_of_parameterized_screen",
+                Parameters("package" to "parameter2")
+            )
+        ).isEqualTo("parameter2_storage")
+    }
+
+    @Test
+    fun get_onParameterizedPreferenceWithMissingPermission_throwsException() {
+        assertFailsWith<MissingPermissionException> {
+            testerParameterized.get<String>(
+                "preference_of_parameterized_screen_with_missing_permission",
+                Parameters("package" to "parameter2")
+            )
+        }
+    }
+
+    @Test
+    fun set_onParameterizedPreferenceWithMissingPermission_throwsException() {
+        assertFailsWith<MissingPermissionException> {
+            testerParameterized.set<String>(
+                "preference_of_parameterized_screen_with_missing_permission",
+                "hey",
+                Parameters("package" to "parameter2")
+            )
+        }
+    }
+
+    @Test
+    fun get_withParametersOnNonParameterizedScreen_throwsException() {
+        assertFailsWith<IllegalStateException> {
+            tester.get<String>(
+                "preference_which_has_value_hello_and_no_setter",
+                Parameters("package" to "parameter2")
+            )
+        }
+    }
+
+    @Test
+    fun set_withParametersOnNonParameterizedScreen_throwsException() {
+        assertFailsWith<IllegalStateException> {
+            tester.set<String>(
+                "preference_with_setter_and_getter_cant_set_a",
+                "value",
+                Parameters("package" to "parameter2")
+            )
+        }
+    }
+
+    @Test
+    fun get_onFailingPreconditionParameterizedScreen_throwsException() {
+        assertFailsWith<HardwareUnsupportedException> {
+            testerFailingPreconditionsParameterized.get<String>(
+                "main_preference",
+                Parameters("package" to "parameter2")
+            )
+        }
+    }
+
+    @Test
+    fun get_onPassedPreconditionParameterizedScreen_isCorrect() {
+        Truth.assertThat(
+            testerFailingPreconditionsParameterized.get<String>(
+            "main_preference",
+                Parameters("package" to "parameter1")
+            )
+        ).isEqualTo("Hello")
+    }
+
+    @Test
+    fun getLaunchScreenBundle_onParameterizedScreen_isCorrect() {
+        testerParameterized.initializeScreenParameters(Parameters("package" to "parameter1"))
+        val extras = testerParameterized.getLaunchScreenExtras()
+        Truth.assertThat(extras.getString("pkg")).isEqualTo("parameter1")
+        Truth.assertThat(extras.keySet().size).isEqualTo(1)
+    }
+
+    @Test
+    fun getLaunchScreenBundle_onNonParameterizedScreen_isEmpty() {
+        val extras = tester.getLaunchScreenExtras()
+        Truth.assertThat(extras.keySet().size).isEqualTo(0)
+    }
+
 }

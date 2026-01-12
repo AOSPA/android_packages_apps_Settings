@@ -21,6 +21,7 @@ import android.content.Intent.FLAG_ACTIVITY_FORWARD_RESULT
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import android.util.Log
+import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.activityembedding.ActivityEmbeddingUtils
 import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.getTrampolineIntent
 import com.android.settings.core.PreferenceScreenMixin
@@ -34,6 +35,7 @@ import com.android.settingslib.metadata.PreferenceScreenCoordinate
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.PreferenceSearchIndexablesProvider
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.toMap
 
@@ -83,7 +85,17 @@ class SettingsLaunchpadActivity : Activity() {
     }
 
     private fun processIntentAndLaunch() {
-        val screenKey = intent.getStringExtra(EXTRA_SCREEN_KEY)
+        val screenKey =
+            intent.getStringExtra(EXTRA_SCREEN_KEY)
+                ?: intent.getStringExtra(EXTRA_FRAGMENT_ARG_KEY)?.let {
+                    // update the high light key from the search result intent
+                    intent.putExtra(
+                        EXTRA_HIGHLIGHT_KEY,
+                        PreferenceSearchIndexablesProvider.getHighlightKey(it),
+                    )
+                    PreferenceSearchIndexablesProvider.getScreenKey(it)
+                }
+
         if (screenKey.isNullOrEmpty()) {
             Log.e(TAG, "Required extra '$EXTRA_SCREEN_KEY' is missing or empty.")
             return

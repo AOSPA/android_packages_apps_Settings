@@ -26,6 +26,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.flags.Flags;
 import com.android.settings.slices.SliceData;
 import com.android.settingslib.widget.MainSwitchPreference;
 
@@ -93,6 +94,7 @@ public class WorkModePreferenceController extends BasePreferenceController
 
     @Override
     public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_accounts;
+        return Flags.enableAccountsAndBackupScreen() ? R.string.menu_key_accounts_and_backup
+            : R.string.menu_key_accounts;
     }
 }

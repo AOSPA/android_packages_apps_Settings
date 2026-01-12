@@ -946,7 +946,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"Aktibatuta"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Desaktibatuta"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Kanpoko pantailak"</string>
-    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Pantaila i⁠⁠⁠U+2060ntegratua"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Pantaila i⁠⁠⁠⁠ntegratua"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Kurtsore unibertsala"</string>
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Mugitu sagua pantaila batetik bestera"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Erabili kanpoko pantaila"</string>
@@ -1349,10 +1349,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Bereizmen handia"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Bereizmen handiena"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Bereizmen handienarekin bateria gehiago kontsumitzen da. Bereizmena aldatuz gero, baliteke aplikazio batzuk berrabiaraztea."</string>
-    <!-- no translation found for screen_resolution_refresh_rate_combined_displayed_text (6260746140407821373) -->
-    <skip />
-    <!-- no translation found for screen_resolution_refresh_rate_combined_a11y (235228307723517439) -->
-    <skip />
+    <string name="screen_resolution_refresh_rate_combined_displayed_text" msgid="6260746140407821373">"<xliff:g id="WIDTH">%1$s</xliff:g> × <xliff:g id="HEIGHT">%2$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g> Hz)"</string>
+    <string name="screen_resolution_refresh_rate_combined_a11y" msgid="235228307723517439">"<xliff:g id="HEIGHT">%2$s</xliff:g> × <xliff:g id="WIDTH">%1$s</xliff:g> (<xliff:g id="REFRESH_RATE">%3$s</xliff:g> hertz)"</string>
     <string name="screen_resolution_displayed_text" msgid="5162121376105888005">"<xliff:g id="WIDTH">%1$s</xliff:g> × <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> (<xliff:g id="HEIGHT">%2$s</xliff:g>)"</string>
     <string name="screen_refresh_rate_displayed_text" msgid="8610804817257940684">"<xliff:g id="REFRESH_RATE">%1$s</xliff:g> Hz"</string>
@@ -2561,15 +2559,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Atzitu bizkor erabilerraztasun-eginbideak"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Hasteko:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Joan erabilerraztasun-ezarpenetara.&lt;br/&gt; {1,number,integer}. Hautatu eginbide bat eta sakatu lasterbidea.&lt;br/&gt; {2,number,integer}. Aukeratu eginbidea atzitzeko erabili nahi duzun botoia.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Kokapena"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Beste aplikazio batzuen gainean"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Nabigazio-barra"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Tamaina"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Handia"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Txikia"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Erabili ezean, desagerrarazi apurka"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Segundo batzuen ostean, apurka desagertzen da, pantaila errazago ikusteko"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Gardentasuna, erabiltzen ez duzunean"</string>
@@ -2593,8 +2587,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Gai iluna aktibatzen du hura onartzen duten gailu eta aplikazioetan"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Zabaldua"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Gai ilun zabaldua"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (4726030053236818183) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Gai iluna automatikoki aplikatzen die hura onartzen ez duten aplikazio gehienei, erabilerraztasuna hobetzeko."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"behartu alderantzikatzera, koloreen alderantzikatzea, kontrastea"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Gai ilun zabaldua"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Gai ilun zabalduaren ezarpenak"</string>
@@ -2623,6 +2616,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Aplikazio guztiek ez dute onartzen denboraren hobespen hau"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Aukeratu zenbat denboraz erakutsi behar diren zerbait egiteko eskatzen duten aldi baterako mezuak"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Sakatuta edukitzearen atzerapena"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Laburra"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Ertaina"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Luzea"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Koloreen alderantzikatzea"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Erabili koloreak alderantzikatzeko eginbidea"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Koloreak alderantzikatzeko lasterbidea"</string>
@@ -3451,8 +3447,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Gehitu erabiltzaileak pantaila blokeatutik"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Gehitu erabiltzaileak saioa hasteko pantailan"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Aldatu administratzailea den erabiltzailera gailua oinarrian jarrita dagoenean"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Ezabatu da erabiltzailea"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Zeure burua ezabatu nahi duzu?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Erabiltzaile hau ezabatu?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Profil hau kendu nahi duzu?"</string>
@@ -5070,8 +5065,7 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s desaktibatu nahi duzu?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Zerbitzu hau desaktibatu nahi duzu?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Saioa hasita eduki arren, ez dira automatikoki beteko pasahitzak, sarbide-gakoak, ordainketa-metodoak, etab. Gordeta daukazun informazioa erabili ahal izateko, aukeratu pasahitzen, sarbide-gakoen edo datuen zerbitzu bat."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Pasahitzak, sarbide-gakoak eta kontuak"</string>
-    <!-- no translation found for dashboard_title_passwords_passkeys (1811104856434785799) -->
-    <skip />
+    <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"Pasahitzak eta sarbide-gakoak"</string>
     <string name="accounts_and_backup_title" msgid="2841026269835953207">"Kontuak eta babeskopiak"</string>
     <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Egin datuen babeskopiak edo kopiatu beste gailu bateko datuak"</string>
     <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Kudeatu kontuak"</string>
@@ -5315,6 +5309,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Telefonoko aplikazio bateragarriak"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Ezin da gehitu SIMa"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Amaitu satelite bidezko konexioa SIM bat gehitu aurretik"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetootha desaktibatuta dago"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Bluetooth bidez konektatuta zaudenean, hegaldi modua gailu bateragarrien artean sinkronizatuko da, hala nola erlojuaren eta telefonoaren artean"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Sarbide-puntuen izenak"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APNa"</string>
