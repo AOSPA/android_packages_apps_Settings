@@ -22,6 +22,7 @@ import com.android.settings.TrustedCredentialsScreenApi
 import com.android.settings.UserCredentialsScreenApi
 import com.android.settings.accessibility.AccessibilityScreen
 import com.android.settings.accessibility.VibrationIntensityScreen
+import com.android.settings.accessibility.VibrationIntensityScreenApi
 import com.android.settings.accessibility.VibrationScreen
 import com.android.settings.accessibility.VibrationScreenApi
 import com.android.settings.accessibility.a11yactivity.ui.A11yActivityScreen
@@ -298,6 +299,7 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(enabled = false, screenKey = SupervisionDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = VibrationIntensityScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = VibrationIntensityScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = VibrationScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = VibrationScreenApi.KEY),
         PerScreenCatalystConfig(
