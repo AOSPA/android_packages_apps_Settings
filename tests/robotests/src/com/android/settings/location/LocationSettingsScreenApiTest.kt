@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Android Open Source Project
+ * Copyright (C) 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.android.settings.location
 
+import android.content.Context
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -28,10 +29,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BluetoothScanningApiScreenTest {
+class LocationSettingsScreenApiTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
-    private val tester = ApiTester(BluetoothScanningApiScreen())
+    private val tester = ApiTester(LocationSettingsScreenApi())
 
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
@@ -49,4 +50,6 @@ class BluetoothScanningApiScreenTest {
     fun getLaunchIntent_hasIntent() {
         assertThat(tester.getLaunchIntent()).isNotNull()
     }
+
+    // TODO(b/486770406): Add tests for personal and work profile
 }
