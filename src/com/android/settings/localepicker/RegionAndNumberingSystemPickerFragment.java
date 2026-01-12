@@ -77,7 +77,7 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
     private static final String KEY_PREFERENCE_APP_LOCALE_SUGGESTED_LIST =
             "app_locale_suggested_list";
     private static final String KEY_TOP_INTRO_PREFERENCE = "top_intro_region";
-    private static final String KEY_PREFERENCE_SCREEN = "key_system_language_picker_page";
+    private static final String KEY_PREFERENCE_SCREEN = "key_region_numbering_system";
     private static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
     private static final String EXTRA_SEARCH_VIEW_QUERY = "search_view_query";
 
@@ -344,7 +344,7 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.system_language_picker;
+        return R.xml.region_numbering_system_picker;
     }
 
     @Override

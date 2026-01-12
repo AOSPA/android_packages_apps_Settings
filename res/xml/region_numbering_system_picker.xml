@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2024 The Android Open Source Project
+<!-- Copyright (C) 2026 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -17,7 +17,11 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/language_selection_title"
-    android:key="key_system_language_picker_page">
+    android:key="key_region_numbering_system">
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="top_intro_region"
+        android:title="@string/top_intro_region_title"/>
 
     <PreferenceCategory
         android:key="system_language_suggested_category"
