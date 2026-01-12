@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Konfigurer Ansigts­oplåsning"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Brug ansigtsoplåsning til"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Ansigt"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Brug ansigt til at"</string>
@@ -569,7 +568,7 @@
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Placer fingeren på sensoren, og løft, når du mærker en vibration"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Tryk fingeren helt ned på sensoren, indtil du mærker en vibration"</string>
     <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Uden at trykke på knappen skal du holde dit fingeraftryk på sensoren, indtil du mærker en vibration.\n\nFlyt din finger en smule, hver gang du mærker en vibration. På den måde registreres en større del af dit fingeraftryk."</string>
-    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Hold fingeren på fingeraftrykssensoren"</string>
+    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Hold fingeren på fingerU+00ADaftrykssensoren"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Løft, og berør igen"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Én gang til"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Følg fingeraftryksikonet"</string>
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Fra"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"Netværkstype for mobildata"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Netværkstype for mobiltale"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Oplysninger om udbyder"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verificer pinkode"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verificer adgangskode"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Verificer identitet"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Angiv mønsteret til din anden enhed for at overføre dine Google-konti, indstillinger m.m. Dit mønster er krypteret."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Angiv pinkoden til din anden enhed for at overføre dine Google-konti, indstillinger m.m. Din pinkode er krypteret."</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Angiv adgangskoden til din anden enhed for at overføre dine Google-konti, indstillinger m.m. Din adgangskode er krypteret."</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Brug også mønster til at låse enheden op"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Brug også pinkode til at låse enheden op"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Brug også adgangskode til at låse enheden op"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Verificer mønster"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Verificer pinkode"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Verificer adgangskode"</string>
@@ -2533,6 +2542,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Kvikmenu"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Stryg nedad fra toppen af skærmen}one{Stryg nedad fra toppen af skærmen med # finger.}other{Stryg nedad fra toppen af skærmen med # fingre.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Stryg nedad fra toppen af skærmen. Denne genvej er tilgængelig, når du har gennemført konfigurationen af enheden.}one{Stryg nedad fra toppen af skærmen med # finger. Denne genvej er tilgængelig, når du har gennemført konfigurationen af enheden.}other{Stryg nedad fra toppen af skærmen med # fingre. Denne genvej er tilgængelig, når du har gennemført konfigurationen af enheden.}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Kvikmenu"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Lydstyrkeknapper"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"lydstyrkeknapper"</string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Andre brugere"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Slet gæsteaktivitet"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Slet alle gæsteapps og -data ved afslutning af gæstetilstand"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Vil du slette gæsteaktiviteten?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Apps og data fra denne gæstesession slettes nu, og al fremtidig gæsteaktivitet slettes, hver gang du afslutter gæstetilstand"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"slet, gæst, aktivitet, fjern, data, besøgende, ryd"</string>
@@ -3936,6 +3955,8 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Få hurtige opsummeringer af længere beskeder"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Brug notifikationsoversigter"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Opsummer lange beskeder og gruppesamtaler for at få en hurtig oversigt.\n\nOpsummeringer anvender AI på din enhed, som nogle gange kan begå fejl. Dine beskeder sendes aldrig til Google."</string>
+    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Notifikationer fra disse apps opsummeres ikke"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Administrer apps"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Administrer apps til notifikationsoversigter"</string>
@@ -4421,6 +4442,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Fjern tilladelser, slet midlertidige filer, og stop notifikationer"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Administrer appen, hvis den ikke bruges"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Fjern tilladelser, slet midlertidige filer, deaktiver notifikationer, og arkivér appen"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Alle apps"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Installerede apps"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant-apps"</string>
@@ -5661,6 +5688,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> kræver, at 2G er tilgængeligt"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Tillad kun krypterede netværk"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Dette er mere sikkert, men kan begrænse din mobilnetværksforbindelse på nogle lokationer. Du kan til enhver tid foretage nødopkald."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alle tjenester"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Vis adgang til udklipsholder"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Vis en meddelelse, når apps får adgang til tekst, billeder eller andet indhold, du har kopieret"</string>
@@ -6091,6 +6132,15 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Handlingen er udført"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Kvikmenu for sikkerheds- og privatlivsindstillinger"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Dine privatlivsindstillinger"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Åbn"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Skift. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"Blokeret"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"Slå til/fra"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"Mikrofon­adgang"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"Kamera­adgang"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"Lokationsadgang"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Parrer"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> er forbundet"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Scan enhed"</string>
@@ -6113,4 +6163,6 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Få nem adgang til satellitoplysninger ved at føje handlingsfeltet Satellit til kvikmenuen"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Tilføj et handlingsfelt"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Prompter for handlingsfeltet Satellit"</string>
+    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <skip />
 </resources>
