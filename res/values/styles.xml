@@ -1221,83 +1221,8 @@
         <item name="android:tint">?android:attr/textColorPrimary</item>
     </style>
 
-    <style name="SafetyCenterQsBody">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-    </style>
-
-    <style name="SafetyCenterQsSectionTitle"
-           parent="SafetyCenterQsBaseTextContainer">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">@dimen/sc_spacing_xxlarge</item>
-        <item name="android:textColor">@android:color/system_accent1_100</item>
-        <item name="android:paddingStart">@dimen/sc_spacing_xxxlarge</item>
-        <item name="android:paddingEnd">@dimen/sc_list_margin</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:lineHeight">24sp</item>
-        <item name="android:textAlignment">viewStart</item>
-    </style>
-
     <style name="SafetyCenterQsBaseTextContainer">
         <item name="android:hyphenationFrequency">normalFast</item>
-    </style>
-
-    <style name="SafetyCenterQsPreferences">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">@dimen/sc_spacing_xsmall</item>
-    </style>
-
-    <style name="SafetyCenterQsToggleContainer">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:layout_marginStart">@dimen/sc_list_margin</item>
-        <item name="android:layout_marginEnd">@dimen/sc_list_margin</item>
-        <item name="android:layout_marginTop">@dimen/sc_spacing_large</item>
-        <item name="android:layout_marginBottom">@dimen/sc_spacing_large</item>
-        <item name="android:paddingStart">@dimen/sc_spacing_small</item>
-        <item name="android:paddingEnd">@dimen/sc_spacing_small</item>
-        <item name="android:paddingTop">@dimen/sc_spacing_small</item>
-        <item name="android:paddingBottom">@dimen/sc_spacing_small</item>
-    </style>
-
-    <style name="SafetyCenterQsToggleButton">
-        <item name="android:background">@drawable/safety_center_sensor_toggle_enabled</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">80dp</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:layout_weight">0.5</item>
-        <item name="android:layout_marginStart">@dimen/sc_spacing_xxsmall</item>
-        <item name="android:layout_marginEnd">@dimen/sc_spacing_xxsmall</item>
-        <item name="android:layout_marginTop">@dimen/sc_spacing_xxsmall</item>
-        <item name="android:layout_marginBottom">@dimen/sc_spacing_xxsmall</item>
-    </style>
-
-    <style name="SafetyCenterQsToggleIcon">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">@dimen/sc_spacing_large</item>
-        <item name="android:layout_marginEnd">10dp</item>
-        <item name="android:layout_gravity">start|center_vertical</item>
-        <item name="android:adjustViewBounds">true</item>
-        <item name="android:scaleType">fitCenter</item>
-        <item name="android:maxWidth">20dp</item>
-        <item name="android:maxHeight">20dp</item>
-    </style>
-
-    <style name="SafetyCenterQsToggleTextContainer">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">start|center_vertical</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:layout_weight">1</item>
     </style>
 
     <style name="SafetyCenterQsToggleText"
@@ -1323,14 +1248,6 @@
     <style name="SafetyCenterQsToggleText.Subtitle">
         <item name="android:textColor">?android:attr/textColorSecondary</item>
         <item name="android:lineHeight">@dimen/sc_line_height_medium</item>
-    </style>
-
-    <style name="SafetyCenterQsToggleArrow">
-        <item name="android:layout_width">20dp</item>
-        <item name="android:layout_height">20dp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_gravity">end|center_vertical</item>
-        <item name="android:layout_marginEnd">@dimen/sc_spacing_small</item>
     </style>
 
     <style name="SatelliteLandingPageTheme" parent="Theme.SubSettingsBase">
