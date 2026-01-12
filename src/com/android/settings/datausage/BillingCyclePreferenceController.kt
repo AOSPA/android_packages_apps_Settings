@@ -22,7 +22,6 @@ import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.datausage.lib.DataUsageLib.getMobileTemplate
-import com.android.settings.flags.Flags
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
 
@@ -35,10 +34,7 @@ class BillingCyclePreferenceController(context: Context, preferenceKey: String) 
         this.subId = subId
     }
 
-    override fun getAvailabilityStatus() =
-        if (!Flags.deeplinkNetworkAndInternet25q4() && DataUsageUtils.hasMobileData(mContext))
-            AVAILABLE
-        else CONDITIONALLY_UNAVAILABLE
+    override fun getAvailabilityStatus() = CONDITIONALLY_UNAVAILABLE
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)

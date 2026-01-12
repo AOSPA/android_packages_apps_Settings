@@ -27,7 +27,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.ApnSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.network.CarrierConfigCache
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.MobileNetworkUtils
@@ -101,8 +100,6 @@ private constructor(
     // TODO (b/441290203) - migrate ApnPreferenceController.updateState to catalyst
     override fun isEnabled(context: Context): Boolean =
         super<PreferenceRestrictionMixin>.isEnabled(context)
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkNetworkAndInternet25q4()
 
     override fun getMetricsCategory() = SettingsEnums.APN
 

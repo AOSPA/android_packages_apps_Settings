@@ -16,30 +16,32 @@
 
 package com.android.settings.datausage
 
+import android.content.Context
 import android.os.Bundle
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.telephony.SubscriptionManager
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.Settings
 import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settings.utils.putSubId
 import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.robolectric.util.ReflectionHelpers
 
-class DataUsageListScreenTest : SettingsCatalystTestCase() {
-
+@RunWith(AndroidJUnit4::class)
+class DataUsageListScreenTest {
     @get:Rule val platformFlags = SetFlagsRule()
 
-    override val preferenceScreenCreator =
-        createScreen(Bundle(1).also { it.putSubId(android.provider.Settings.EXTRA_SUB_ID, 1) })
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4
+    private val preferenceScreenCreator =
+        createScreen(Bundle(1).also { it.putSubId(android.provider.Settings.EXTRA_SUB_ID, 1) })
 
     private val testSubId = 2737
     private val invalidSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
@@ -143,7 +145,4 @@ class DataUsageListScreenTest : SettingsCatalystTestCase() {
     private fun DataUsageListScreen.getSubId(): Int {
         return ReflectionHelpers.getField(this, "subId")
     }
-
-    // TODO(b/419311082): Migration test fails as a lot of telephony infra is not mocked.
-    override fun migration() {}
 }

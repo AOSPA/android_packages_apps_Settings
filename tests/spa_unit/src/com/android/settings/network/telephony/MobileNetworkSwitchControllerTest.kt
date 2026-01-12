@@ -17,24 +17,15 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.hasText
-import androidx.compose.ui.test.isOff
-import androidx.compose.ui.test.isOn
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.flags.Flags
-import com.android.settingslib.spa.testutils.waitUntilExists
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import org.junit.Test
@@ -49,7 +40,6 @@ import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class MobileNetworkSwitchControllerTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
     @get:Rule val composeTestRule = createComposeRule()
 
     private val mockSubscriptionManager =
@@ -82,72 +72,6 @@ class MobileNetworkSwitchControllerTest {
             .apply { init(SUB_ID) }
 
     @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
-    fun isVisible_pSimAndCanDisablePhysicalSubscription_returnTrue() {
-        val pSimSubInfo =
-            SubscriptionInfo.Builder()
-                .apply {
-                    setId(SUB_ID)
-                    setEmbedded(false)
-                }
-                .build()
-        mockSubscriptionManager.stub { on { canDisablePhysicalSubscription() } doReturn true }
-        mockSubscriptionRepository.stub {
-            on { getSelectableSubscriptionInfoList() } doReturn listOf(pSimSubInfo)
-        }
-
-        setContent()
-
-        composeTestRule
-            .onNodeWithText(context.getString(R.string.mobile_network_use_sim_on))
-            .assertIsDisplayed()
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
-    fun isVisible_pSimAndCannotDisablePhysicalSubscription_returnFalse() {
-        val pSimSubInfo =
-            SubscriptionInfo.Builder()
-                .apply {
-                    setId(SUB_ID)
-                    setEmbedded(false)
-                }
-                .build()
-        mockSubscriptionManager.stub { on { canDisablePhysicalSubscription() } doReturn false }
-        mockSubscriptionRepository.stub {
-            on { getSelectableSubscriptionInfoList() } doReturn listOf(pSimSubInfo)
-        }
-
-        setContent()
-
-        composeTestRule
-            .onNodeWithText(context.getString(R.string.mobile_network_use_sim_on))
-            .assertDoesNotExist()
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
-    fun isVisible_eSim_returnTrue() {
-        val eSimSubInfo =
-            SubscriptionInfo.Builder()
-                .apply {
-                    setId(SUB_ID)
-                    setEmbedded(true)
-                }
-                .build()
-        mockSubscriptionRepository.stub {
-            on { getSelectableSubscriptionInfoList() } doReturn listOf(eSimSubInfo)
-        }
-
-        setContent()
-
-        composeTestRule
-            .onNodeWithText(context.getString(R.string.mobile_network_use_sim_on))
-            .assertIsDisplayed()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
     fun isVisible_flagOn_returnFalse() {
         val eSimSubInfo =
             SubscriptionInfo.Builder()
@@ -165,34 +89,6 @@ class MobileNetworkSwitchControllerTest {
         composeTestRule
             .onNodeWithText(context.getString(R.string.mobile_network_use_sim_on))
             .assertDoesNotExist()
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
-    fun isChecked_subscriptionEnabled_switchIsOn() {
-        mockSubscriptionRepository.stub {
-            on { isSubscriptionEnabledFlow(SUB_ID) } doReturn flowOf(true)
-        }
-
-        setContent()
-
-        composeTestRule.waitUntilExists(
-            hasText(context.getString(R.string.mobile_network_use_sim_on)) and isOn()
-        )
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
-    fun isChecked_subscriptionNotEnabled_switchIsOff() {
-        mockSubscriptionRepository.stub {
-            on { isSubscriptionEnabledFlow(SUB_ID) } doReturn flowOf(false)
-        }
-
-        setContent()
-
-        composeTestRule.waitUntilExists(
-            hasText(context.getString(R.string.mobile_network_use_sim_on)) and isOff()
-        )
     }
 
     private fun setContent() {
