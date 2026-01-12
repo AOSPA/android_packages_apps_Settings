@@ -25,6 +25,7 @@ import org.robolectric.annotation.Implements;
 
 @Implements(AdbWirelessDebuggingPreferenceController.class)
 public class ShadowWirelessDebuggingPreferenceController {
+    public static boolean sIsAvailable = true;
     private static boolean sIsWifiConnected;
 
     public static void setIsWifiConnected(boolean isConnected) {
@@ -32,11 +33,17 @@ public class ShadowWirelessDebuggingPreferenceController {
     }
 
     public static void reset() {
+        sIsAvailable = true;
         sIsWifiConnected = false;
     }
 
     @Implementation
     protected static boolean isWifiConnected(Context context) {
         return sIsWifiConnected;
+    }
+
+    @Implementation
+    public static boolean isAvailable(Context context) {
+        return sIsAvailable;
     }
 }
