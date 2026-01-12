@@ -40,6 +40,7 @@ import com.google.android.setupdesign.items.Item
 import com.google.android.setupdesign.util.LottieAnimationHelper
 import com.google.android.setupdesign.util.ThemeHelper
 import java.io.FileNotFoundException
+import java.io.IOException
 import java.io.InputStream
 
 /**
@@ -157,12 +158,14 @@ class IllustrationItem : Item {
         isLottieAnimation = false
 
         imageDrawable?.let { drawable ->
+            illustrationView.visibility = View.VISIBLE
             illustrationView.setImageDrawable(drawable)
             startAnimatableDrawable(drawable)
             return
         }
 
         imageUri?.let { uri ->
+            illustrationView.visibility = View.VISIBLE
             illustrationView.setImageURI(uri)
             val drawable = illustrationView.getDrawable()
             if (drawable != null) {
@@ -177,6 +180,21 @@ class IllustrationItem : Item {
         }
 
         if (imageResId != 0) {
+            try {
+                illustrationView.resources.openRawResource(imageResId).use { inputStream ->
+                    val check = inputStream.read()
+                    // -1 = end of stream. if first read is end of stream, then file is empty
+                    if (check == -1) {
+                        illustrationView.visibility = View.GONE
+                        return
+                    }
+                }
+            } catch (e: IOException) {
+                Log.w(TAG, "Unable to open Lottie raw resource", e)
+                illustrationView.visibility = View.GONE
+                return
+            }
+            illustrationView.visibility = View.VISIBLE
             illustrationView.setImageResource(imageResId)
             val drawable = illustrationView.getDrawable()
             if (drawable != null) {
@@ -309,6 +327,21 @@ class IllustrationItem : Item {
         }
 
         (drawable as Animatable).start()
+    }
+
+    private fun showIllustrationView(view: View, isVisible: Boolean) {
+        view.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+
+    private fun isRawResourceValid(view: View, resId: Int): Boolean {
+        return try {
+            view.resources.openRawResource(resId).use {
+                it.read() != -1
+            }
+        } catch (e: IOException) {
+            Log.w(TAG, "Unable to open resource: $resId", e)
+            false
+        }
     }
 
     private val animationCallback: Animatable2.AnimationCallback =

@@ -34,14 +34,17 @@ import com.android.settings.accessibility.setupwizard.setupMockLottieAnimationVi
 import com.android.settingslib.widget.preference.illustration.R as IllustrationR
 import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
+import java.io.ByteArrayInputStream
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.clearInvocations
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestParameterInjector
 
 /** Tests for [IllustrationItem]. */
@@ -301,6 +304,29 @@ class IllustrationItemTest {
         illustrationItem.onBindView(rootView)
 
         assertThat(illustrationItem.isLottieAnimation).isFalse()
+    }
+
+    @Test
+    @TestParameters(
+        "{resId: ${R.raw.accessibility_color_inversion_banner}, data: [], expected: ${View.GONE}}",
+        "{resId: ${R.raw.accessibility_color_inversion_banner}, data: [1], expected: ${View.VISIBLE}}",
+    )
+    fun handleImageWithAnimation_verifyVisibility(resId: Int, data: List<Int>, expected: Int) {
+        val illustrationView =
+            rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
+        val res = spy(context.resources)
+        val spyView = spy(illustrationView)
+        val spyRootView = spy(rootView)
+        doReturn(ByteArrayInputStream(data.map { it.toByte() }.toByteArray()))
+            .whenever(res)
+            .openRawResource(resId)
+        doReturn(res).whenever(spyView).resources
+        doReturn(spyView).whenever(spyRootView).findViewById<View>(R.id.sud_item_illustration)
+
+        illustrationItem.imageResId = resId
+        illustrationItem.onBindView(spyRootView)
+
+        assertThat(spyView.visibility).isEqualTo(expected)
     }
 
     /** Helper to verify that only one resource is active at a time. */
