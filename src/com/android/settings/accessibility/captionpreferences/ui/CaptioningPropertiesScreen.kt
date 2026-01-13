@@ -107,6 +107,7 @@ open class CaptioningPropertiesScreen :
         preferenceHierarchy(context) {
             +CaptioningAppearanceScreen.KEY
             +CaptioningMoreOptionsScreen.KEY
+            +CaptioningFooterPreference("captioning_settings_footer")
         }
 
     companion object {

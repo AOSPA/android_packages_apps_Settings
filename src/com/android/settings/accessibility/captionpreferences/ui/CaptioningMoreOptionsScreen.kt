@@ -52,7 +52,12 @@ open class CaptioningMoreOptionsScreen : PreferenceScreenMixin, PreferenceIndexa
     override fun getMetricsCategory(): Int = SettingsEnums.ACCESSIBILITY_CAPTION_MORE_OPTIONS
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) {
+            // LINT.IfChange(ui_hierarchy)
+            +CaptionLocalePreference(context)
+            +CaptioningFooterPreference("captioning_more_options_footer")
+            // LINT.ThenChange()
+        }
 
     override fun isIndexable(context: Context) =
         SettingsSecureStore.get(context)
