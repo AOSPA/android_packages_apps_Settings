@@ -40,7 +40,8 @@ import java.util.List;
 @Implements(RestrictedLockUtilsInternal.class)
 public class ShadowRestrictedLockUtilsInternal {
 
-    private static boolean sIsRestricted;
+    private static boolean sHasBaseRestriction;
+    private static boolean sIsRestrictedByAdmin;
     private static boolean sHasSystemFeature;
     private static boolean sMaximumTimeToLockIsSet;
     private static boolean sMteOverridden;
@@ -53,7 +54,8 @@ public class ShadowRestrictedLockUtilsInternal {
 
     @Resetter
     public static void reset() {
-        sIsRestricted = false;
+        sHasBaseRestriction = false;
+        sIsRestrictedByAdmin = false;
         sRestrictedPkgs = null;
         sKeyguardDisabledFeatures = 0;
         sDisabledTypes = new String[0];
@@ -66,7 +68,7 @@ public class ShadowRestrictedLockUtilsInternal {
     @Implementation
     protected static EnforcedAdmin checkIfMeteredDataUsageUserControlDisabled(Context context,
             String packageName, int userId) {
-        if (sIsRestricted) {
+        if (sIsRestrictedByAdmin) {
             return new EnforcedAdmin();
         }
         if (ArrayUtils.contains(sRestrictedPkgs, packageName)) {
@@ -111,13 +113,13 @@ public class ShadowRestrictedLockUtilsInternal {
     @Implementation
     protected static boolean hasBaseUserRestriction(Context context,
             String userRestriction, int userId) {
-        return sIsRestricted;
+        return sHasBaseRestriction;
     }
 
     @Implementation
     protected static EnforcedAdmin checkIfRestrictionEnforced(Context context,
             String userRestriction, int userId) {
-        return sIsRestricted ? new EnforcedAdmin() : null;
+        return sIsRestrictedByAdmin ? new EnforcedAdmin() : null;
     }
 
     @Implementation
@@ -151,8 +153,12 @@ public class ShadowRestrictedLockUtilsInternal {
         return false;
     }
 
-    public static void setRestricted(boolean restricted) {
-        sIsRestricted = restricted;
+    public static void setRestrictedByAdmin(boolean restricted) {
+        sIsRestrictedByAdmin = restricted;
+    }
+
+    public static void setHasBaseRestriction(boolean hasBaseRestriction) {
+        sHasBaseRestriction = hasBaseRestriction;
     }
 
     public static void setEcmRestrictedPkgs(String... pkgs) {

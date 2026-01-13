@@ -3503,7 +3503,6 @@
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
-                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -3995,7 +3994,6 @@
         </activity>
         <activity
             android:name="Settings$BillingCycleActivity"
-            android:featureFlag="com.android.settings.flags.deeplink_network_and_internet_25q4"
             android:exported="true"
             android:label="@string/billing_cycle">
             <intent-filter android:priority="1">
@@ -6217,8 +6215,6 @@
             android:featureFlag="com.android.settings.flags.enable_satellite_tile">
         </activity>
 
-
-
         <activity
             android:name=".network.telephony.satellite.quicksettings.AddSatelliteTileActivity"
             android:exported="false"
@@ -6226,6 +6222,16 @@
             android:taskAffinity="com.android.settings.satellite.addtile"
             android:excludeFromRecents="true"
             android:featureFlag="com.android.settings.flags.enable_satellite_tile" />
+
+        <activity
+            android:name=".qstile.QSTileLongPressGatewayActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter android:priority="100">
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
 

@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.display
 
 import android.content.Context
 import android.os.Bundle
+import android.view.Display
 import android.view.InputDevice
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -85,6 +86,24 @@ open class TabbedDisplayPreferenceFragment(
         } else {
             viewModel = ViewModelProvider(this).get(DisplayPreferenceViewModel::class.java)
         }
+
+        arguments?.let { args ->
+            if (args.containsKey(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG)) {
+                val displayId = args.getInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG)
+
+                // Ensure the display is valid and enabled before selecting it to avoid invalid state
+                val isDisplayEnabled =
+                    viewModel.injector.getDisplays().any {
+                        it.id == displayId &&
+                            it.isEnabled == DisplayIsEnabled.YES &&
+                            (it.id == Display.DEFAULT_DISPLAY || it.isConnectedDisplay)
+                    }
+
+                if (isDisplayEnabled) {
+                    viewModel.updateSelectedDisplay(displayId)
+                }
+            }
+        }
     }
 
     override fun onCreateView(
@@ -136,7 +155,12 @@ open class TabbedDisplayPreferenceFragment(
 
     @VisibleForTesting
     internal open fun createDisplayTopologyPreferenceView(): DisplayTopologyPreferenceView {
-        return DisplayTopologyPreferenceView(viewModel.injector)
+        val selectedId = viewModel.uiState.value?.selectedDisplayId
+        return if (selectedId != null && selectedId != -1) {
+            DisplayTopologyPreferenceView(viewModel.injector, selectedId)
+        } else {
+            DisplayTopologyPreferenceView(viewModel.injector)
+        }
     }
 
     @VisibleForTesting

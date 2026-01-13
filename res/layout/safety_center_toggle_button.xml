@@ -18,14 +18,36 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/SafetyCenterQsToggleButton"
-    android:id="@+id/safety_center_toggle_button">
+    android:id="@+id/safety_center_toggle_button"
+    android:background="@drawable/safety_center_sensor_toggle_enabled"
+    android:layout_width="0dp"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_weight="0.5"
+    android:layout_marginStart="@dimen/sc_spacing_xxsmall"
+    android:layout_marginEnd="@dimen/sc_spacing_xxsmall"
+    android:layout_marginTop="@dimen/sc_spacing_xxsmall"
+    android:layout_marginBottom="@dimen/sc_spacing_xxsmall">
     <ImageView
         android:id="@+id/toggle_sensor_icon"
-        style="@style/SafetyCenterQsToggleIcon"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sc_spacing_large"
+        android:layout_marginEnd="10dp"
+        android:layout_gravity="start|center_vertical"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:maxWidth="20dp"
+        android:maxHeight="20dp" />
 
     <LinearLayout
-        style="@style/SafetyCenterQsToggleTextContainer">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_weight="1">
         <TextView
             android:id="@+id/toggle_sensor_name"
             style="@style/SafetyCenterQsToggleText.Title"/>
@@ -38,7 +60,11 @@
     <!-- The X scale controls the direction of the arrow, based on the language direction -->
     <ImageView
         android:id="@+id/arrow_icon"
-        style="@style/SafetyCenterQsToggleArrow"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginEnd="@dimen/sc_spacing_small"
         android:scaleX="@integer/mirror_x_scale"
         android:visibility="gone"/>
 </LinearLayout>

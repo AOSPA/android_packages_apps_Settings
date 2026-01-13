@@ -38,7 +38,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
-import androidx.preference.PreferenceCategory;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.app.LocaleHelper;
@@ -48,8 +47,6 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.TopIntroPreference;
 
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -76,7 +73,6 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
     private static final String KEY_PREFERENCE_SYSTEM_LOCALE_LIST = "system_locale_list";
     private static final String KEY_PREFERENCE_SYSTEM_LOCALE_SUGGESTED_LIST =
             "system_locale_suggested_list";
-    private static final String KEY_TOP_INTRO_PREFERENCE = "top_intro_region";
 
     @Nullable
     private SearchView mSearchView = null;
@@ -116,12 +112,6 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
         Set<LocaleStore.LocaleInfo> localeList = systemLocaleCollector.getSupportedLocaleList(null,
                 false, false);
         mLocaleOptions = new ArrayList<>(localeList.size());
-
-        TopIntroPreference topIntroPreference = findPreference(KEY_TOP_INTRO_PREFERENCE);
-        if (topIntroPreference != null) {
-            topIntroPreference.setVisible(false);
-        }
-
     }
 
     @Override

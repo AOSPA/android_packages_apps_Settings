@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Android Open Source Project
+ * Copyright (C) 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,32 +14,33 @@
  * limitations under the License.
  */
 
-package com.android.settings.vpn2
+package com.android.settings
 
-import android.content.Context
-import androidx.test.core.app.ApplicationProvider
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.Settings
+import com.android.settings.flags.Flags
+import com.android.settings.testutils2.ApiTester
 import com.google.common.truth.Truth.assertThat
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class VpnSettingsScreenTest {
-    private val preferenceScreenCreator = VpnSettingsScreen()
-
-    private val appContext: Context = ApplicationProvider.getApplicationContext()
+class IccLockApiScreenTest {
+    private val tester = ApiTester(IccLockApiScreen())
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
     @Test
-    fun key_isEqualToStatic() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(VpnSettingsScreen.KEY)
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getScreen_flagEnabled_isNotNull() {
+        assertThat(tester.getScreen()).isNotNull()
     }
 
     @Test
-    fun getLaunchIntent_correctActivity() {
-        val underTest = preferenceScreenCreator.getLaunchIntent(appContext, null)
-
-        assertThat(underTest.component?.className)
-            .isEqualTo(Settings.VpnSettingsActivity::class.java.getName())
+    @DisableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getScreen_flagDisabled_isNull() {
+        assertThat(tester.getScreen()).isNull()
     }
 }

@@ -124,7 +124,7 @@ public class DndModeSliceBuilderTest {
 
     @Test
     public void getZenModeSlice_managedByAdmin_shouldNotHaveToggle() {
-        ShadowRestrictedLockUtilsInternal.setRestricted(true);
+        ShadowRestrictedLockUtilsInternal.setRestrictedByAdmin(true);
         final Slice dndSlice = DndModeSliceBuilder.getSlice(mContext);
 
         final SliceMetadata metadata = SliceMetadata.from(mContext, dndSlice);

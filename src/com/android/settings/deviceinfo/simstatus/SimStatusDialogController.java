@@ -69,44 +69,47 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
     private final static String TAG = "SimStatusDialogCtrl";
 
     @VisibleForTesting
-    final static int NETWORK_PROVIDER_VALUE_ID = R.id.operator_name_value;
+    static final int NETWORK_PROVIDER_VALUE_ID = R.id.operator_name_value;
     @VisibleForTesting
-    final static int PHONE_NUMBER_VALUE_ID = R.id.number_value;
+    static final int PHONE_NUMBER_VALUE_ID = R.id.number_value;
     @VisibleForTesting
-    final static int CELLULAR_NETWORK_STATE = R.id.data_state_value;
+    static final int CELLULAR_NETWORK_STATE = R.id.data_state_value;
     @VisibleForTesting
-    final static int OPERATOR_INFO_LABEL_ID = R.id.latest_area_info_label;
+    static final int OPERATOR_INFO_LABEL_ID = R.id.latest_area_info_label;
     @VisibleForTesting
-    final static int OPERATOR_INFO_VALUE_ID = R.id.latest_area_info_value;
+    static final int OPERATOR_INFO_VALUE_ID = R.id.latest_area_info_value;
     @VisibleForTesting
-    final static int SERVICE_STATE_VALUE_ID = R.id.service_state_value;
+    static final int SERVICE_STATE_VALUE_ID = R.id.service_state_value;
     @VisibleForTesting
-    final static int SIGNAL_STRENGTH_LABEL_ID = R.id.signal_strength_label;
+    static final int SIGNAL_STRENGTH_LABEL_ID = R.id.signal_strength_label;
     @VisibleForTesting
-    final static int SIGNAL_STRENGTH_VALUE_ID = R.id.signal_strength_value;
+    static final int SIGNAL_STRENGTH_VALUE_ID = R.id.signal_strength_value;
     @VisibleForTesting
-    final static int CELL_VOICE_NETWORK_TYPE_VALUE_ID = R.id.voice_network_type_value;
+    static final int CELL_VOICE_NETWORK_TYPE_LABEL_ID = R.id.voice_network_type_label;
     @VisibleForTesting
-    final static int CELL_DATA_NETWORK_TYPE_VALUE_ID = R.id.data_network_type_value;
+    static final int CELL_VOICE_NETWORK_TYPE_VALUE_ID = R.id.voice_network_type_value;
     @VisibleForTesting
-    final static int ROAMING_INFO_VALUE_ID = R.id.roaming_state_value;
+    static final int CELL_DATA_NETWORK_TYPE_LABEL_ID = R.id.data_network_type_label;
     @VisibleForTesting
-    final static int ICCID_INFO_LABEL_ID = R.id.icc_id_label;
+    static final int CELL_DATA_NETWORK_TYPE_VALUE_ID = R.id.data_network_type_value;
     @VisibleForTesting
-    final static int ICCID_INFO_VALUE_ID = R.id.icc_id_value;
+    static final int ROAMING_INFO_VALUE_ID = R.id.roaming_state_value;
     @VisibleForTesting
-    final static int IMS_REGISTRATION_STATE_LABEL_ID = R.id.ims_reg_state_label;
+    static final int ICCID_INFO_LABEL_ID = R.id.icc_id_label;
     @VisibleForTesting
-    final static int IMS_REGISTRATION_STATE_VALUE_ID = R.id.ims_reg_state_value;
+    static final int ICCID_INFO_VALUE_ID = R.id.icc_id_value;
     @VisibleForTesting
-    final static int GID1_VALUE_ID = R.id.gid1_value;
+    static final int IMS_REGISTRATION_STATE_LABEL_ID = R.id.ims_reg_state_label;
     @VisibleForTesting
-    final static int GID1_LABEL_ID = R.id.gid1_label;
+    static final int IMS_REGISTRATION_STATE_VALUE_ID = R.id.ims_reg_state_value;
     @VisibleForTesting
-    final static int CARRIER_ID_VALUE_ID = R.id.carrier_id_value;
+    static final int GID1_VALUE_ID = R.id.gid1_value;
     @VisibleForTesting
-    final static int CARRIER_ID_LABEL_ID = R.id.carrier_id_label;
-
+    static final int GID1_LABEL_ID = R.id.gid1_label;
+    @VisibleForTesting
+    static final int CARRIER_ID_VALUE_ID = R.id.carrier_id_value;
+    @VisibleForTesting
+    static final int CARRIER_ID_LABEL_ID = R.id.carrier_id_label;
     @VisibleForTesting
     static final int MAX_PHONE_COUNT_SINGLE_SIM = 1;
 
@@ -449,6 +452,15 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
     }
 
     private void updateNetworkType() {
+        // Update visibilities. At least one of either voice or data will be visible, or otherwise
+        // the whole SIM status dialog would not have been instantiated.
+        boolean isVoiceCapable = com.android.settings.Utils.isVoiceCapable(mContext);
+        mDialog.setSettingVisibility(CELL_VOICE_NETWORK_TYPE_LABEL_ID, isVoiceCapable);
+        mDialog.setSettingVisibility(CELL_VOICE_NETWORK_TYPE_VALUE_ID, isVoiceCapable);
+        boolean isMobileDataCapable = com.android.settings.Utils.isMobileDataCapable(mContext);
+        mDialog.setSettingVisibility(CELL_DATA_NETWORK_TYPE_LABEL_ID, isMobileDataCapable);
+        mDialog.setSettingVisibility(CELL_DATA_NETWORK_TYPE_VALUE_ID, isMobileDataCapable);
+
         // TODO: all of this should be based on TelephonyDisplayInfo instead of just the 5G logic
         if (mSubscriptionInfo == null) {
             final String unknownNetworkType =
@@ -464,11 +476,10 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         final int subId = mSubscriptionInfo.getSubscriptionId();
         int actualDataNetworkType = TelephonyManager.NETWORK_TYPE_UNKNOWN;
         int actualVoiceNetworkType = TelephonyManager.NETWORK_TYPE_UNKNOWN;
-        PackageManager pm = mContext.getPackageManager();
-        if (pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_RADIO_ACCESS)) {
+        if (isMobileDataCapable) {
             actualDataNetworkType = getTelephonyManager().getDataNetworkType();
         }
-        if (pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_CALLING)) {
+        if (isVoiceCapable) {
             actualVoiceNetworkType = getTelephonyManager().getVoiceNetworkType();
         }
 

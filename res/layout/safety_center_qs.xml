@@ -34,11 +34,15 @@
         <LinearLayout
             android:id="@+id/main_page_contents"
             android:layout_height="wrap_content"
-            style="@style/SafetyCenterQsBody">
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal">
 
             <FrameLayout
                 android:id="@+id/safety_center_prefs"
-                style="@style/SafetyCenterQsPreferences">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/sc_spacing_xsmall">
             </FrameLayout>
 
             <TextView
@@ -46,12 +50,32 @@
                 android:text="@string/privacy_controls_qs"
                 android:focusable="true"
                 android:importantForAccessibility="yes"
-                style="@style/SafetyCenterQsSectionTitle"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/sc_spacing_xxlarge"
+                android:textColor="@android:color/system_accent1_100"
+                android:paddingStart="@dimen/sc_spacing_xxxlarge"
+                android:paddingEnd="@dimen/sc_list_margin"
+                android:textSize="14sp"
+                android:lineHeight="24sp"
+                android:textAlignment="viewStart"
+                android:hyphenationFrequency="normalFast"/>
 
             <LinearLayout
                 android:id="@+id/toggle_container"
                 android:background="@drawable/safety_entity_top_large_bottom_large_background"
-                style="@style/SafetyCenterQsToggleContainer" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/sc_list_margin"
+                android:layout_marginEnd="@dimen/sc_list_margin"
+                android:layout_marginTop="@dimen/sc_spacing_large"
+                android:layout_marginBottom="@dimen/sc_spacing_large"
+                android:paddingStart="@dimen/sc_spacing_small"
+                android:paddingEnd="@dimen/sc_spacing_small"
+                android:paddingTop="@dimen/sc_spacing_small"
+                android:paddingBottom="@dimen/sc_spacing_small" />
 
         </LinearLayout>
     </LinearLayout>
