@@ -331,7 +331,8 @@ public class SubscriptionUtil {
             int infoSubId = info.subscriptionInfo.getSubscriptionId();
             String cachedDisplayName = getDisplayNameFromSharedPreference(
                     context, infoSubId);
-            if (isValidCachedDisplayName(cachedDisplayName, info.originalName.toString())) {
+            if (isValidCachedDisplayName(cachedDisplayName, info.originalName.toString())
+                    && !duplicateOriginalNames.isEmpty()) {
                 Log.d(TAG, "use cached display name : for subId : " + infoSubId
                         + "cached display name : " + cachedDisplayName);
                 info.uniqueName = cachedDisplayName;
