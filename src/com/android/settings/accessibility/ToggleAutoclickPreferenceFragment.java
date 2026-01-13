@@ -79,7 +79,7 @@ public class ToggleAutoclickPreferenceFragment extends DashboardFragment {
         use(ToggleAutoclickMainSwitchPreferenceController.class).setFragment(this);
 
         ToggleShortcutPreferenceController shortcutPreferenceController =
-                use(ToggleAutoclickShortcutPreferenceController.class);
+                use(ToggleShortcutPreferenceController.class);
         if (shortcutPreferenceController != null) {
             shortcutPreferenceController.initialize(
                     getFeatureComponentName(),
