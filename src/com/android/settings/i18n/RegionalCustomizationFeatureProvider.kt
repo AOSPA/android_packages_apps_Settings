@@ -19,10 +19,9 @@ package com.android.settings.i18n
 import android.app.backup.BackupHelper
 import android.app.backup.BackupRestoreEventLogger
 import android.content.Context
+import android.content.Intent
 
-/**
- * Provider for I18N related features.
- */
+/** Provider for I18N related features. */
 interface RegionalCustomizationFeatureProvider {
     /**
      * Return a BackupHelper for backup movement related settings.
@@ -31,4 +30,17 @@ interface RegionalCustomizationFeatureProvider {
      * @param logger To log B&R stats.
      */
     fun getMovementBackupHelper(context: Context, logger: BackupRestoreEventLogger): BackupHelper
+
+    /**
+     * Returns an Intent for launching the suitable eMoney online wipe activity. or null if the
+     * feature is not supported.
+     */
+    fun getEmoneyResetIntent(): Intent?
+
+    /**
+     * Returns {@code true} if eMoney online wipe activity should be shown.
+     *
+     * @param context App context
+     */
+    fun isEmoneyResetServiceAvailable(context: Context): Boolean
 }

@@ -45,7 +45,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatteryBroadcastReceiver;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -139,7 +138,7 @@ public class PowerUsageSummaryTest {
     public void initPreference_updateVisibility() {
         mFragment.initPreference();
 
-        if (!mFragment.isCatalystEnabled() || !Flags.deeplinkBattery25q4()) {
+        if (!mFragment.isCatalystEnabled()) {
             verify(mBatteryUsagePreference).setVisible(
                     mFeatureFactory.powerUsageFeatureProvider.isBatteryUsageEnabled());
         } else {

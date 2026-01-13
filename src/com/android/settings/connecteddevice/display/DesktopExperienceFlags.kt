@@ -42,14 +42,4 @@ class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) :
 
     override fun showTabbedConnectedDisplaySetting(): Boolean =
         showTabbedConnectedDisplaySettingFlag.isTrue
-
-    private val enableResolutionConfirmDialogBugfix =
-        DesktopExperienceFlag(
-            featureFlagsImpl::enableResolutionConfirmDialogBugfix,
-            /* shouldOverrideByDevOption= */ false,
-            Flags.FLAG_ENABLE_RESOLUTION_CONFIRM_DIALOG_BUGFIX,
-        )
-
-    override fun enableResolutionConfirmDialogBugfix(): Boolean =
-        enableResolutionConfirmDialogBugfix.isTrue
 }

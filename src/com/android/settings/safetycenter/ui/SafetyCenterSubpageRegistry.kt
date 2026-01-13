@@ -383,6 +383,44 @@ object SafetyCenterSubpageRegistry {
         }
         return safetySourcePrefConfigs
     }
+
+    /**
+     * Checks if a Safety Center subpage has any data to display.
+     *
+     * This is true if the subpage has:
+     * - Any dynamic entries from its related safety sources.
+     * - OR Any injected tiles.
+     *
+     * @param context Context to access resources and system services.
+     * @param preferenceKey The string key identifying the subpage.
+     * @return `true` if the subpage has content to display, `false` otherwise.
+     */
+    fun isSubpageAvailable(context: Context, preferenceKey: String): Boolean {
+        if (hasInjectedTiles(preferenceKey)) {
+            Log.d(TAG, "[$preferenceKey] Has injected tiles, subpage is available")
+            return true
+        }
+
+        val uiData = SafetyCenterSearchIndexUtils.getCurrentSafetyCenterData(context)
+        if (uiData == null) {
+            Log.d(TAG, "[$preferenceKey] No SafetyCenterUiData, subpage not available")
+            return false
+        }
+
+        val relatedSafetySources = getXmlSafetySourceIds(context, preferenceKey)
+        if (relatedSafetySources.isEmpty()) {
+            Log.d(TAG, "[$preferenceKey] No related safety sources, subpage not available")
+            return false
+        }
+
+        val entries = uiData.getDynamicEntriesForSources(relatedSafetySources)
+        val isAvailable = entries.isNotEmpty()
+        Log.d(
+            TAG,
+            "[$preferenceKey] Found ${entries.size} entries, subpage available: $isAvailable",
+        )
+        return isAvailable
+    }
 }
 
 /**

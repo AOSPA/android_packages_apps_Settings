@@ -22,7 +22,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.PowerUsageAdvancedActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -37,7 +36,7 @@ open class PowerUsageAdvancedScreen : PreferenceScreenMixin, PreferenceAvailabil
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.battery_usage_summary_purpose
 
@@ -57,8 +56,6 @@ open class PowerUsageAdvancedScreen : PreferenceScreenMixin, PreferenceAvailabil
 
     override val highlightMenuKey
         get() = R.string.menu_key_battery
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkBattery25q4()
 
     override fun fragmentClass(): Class<out Fragment>? = PowerUsageAdvanced::class.java
 

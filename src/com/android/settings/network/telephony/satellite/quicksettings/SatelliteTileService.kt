@@ -18,238 +18,53 @@ package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.app.PendingIntent
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkCapabilities
-import android.os.Handler
-import android.os.Looper
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
-import android.telephony.ServiceState
-import android.telephony.TelephonyCallback
-import android.telephony.TelephonyManager
-import android.telephony.satellite.SatelliteDisallowedReasonsCallback
-import android.telephony.satellite.SatelliteManager
-import android.telephony.satellite.SatelliteModemStateCallback
 import android.util.Log
 import androidx.annotation.MainThread
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 /**
  * A [TileService] that provides a Quick Settings tile for satellite connectivity.
  *
- * This service monitors both Carrier Roaming NTN (Non-Terrestrial Network) and OEM-based satellite
- * services (e.g., Pixel Satellite SOS) to update the tile state.
- *
- * **State Priority:**
- * 1. **Active (On):** Satellite Modem is connected (Skylo) OR Carrier NTN is active.
- * 2. **Available:** Device is eligible/allowed AND has **NO Terrestrial Connectivity** (No Cellular
- *    Service, No Internet).
- * 3. **Not Available:** Default state.
+ * This service delegates state monitoring to [SatelliteStateRepository] and strictly handles UI
+ * updates.
  */
 open class SatelliteTileService : TileService() {
 
-    private lateinit var telephonyManager: TelephonyManager
-    private var satelliteManager: SatelliteManager? = null
-    private lateinit var connectivityManager: ConnectivityManager
-
     @VisibleForTesting internal var satelliteTilePromptUtils = SatelliteTilePromptUtils()
 
-    // Carrier Roaming NTN states
-    private var isCarrierRoamingNtnEligible = false
-    private var isCarrierRoamingNtnModeActive = false
-
-    // OEM Satellite states
-    private var isOemSatelliteAllowed = false
-    private var isOemSatelliteConnected = false
-
-    // Cellular service state. Used to determine if OEM satellite should be shown as "Available".
-    // Defaulting to true prevents the tile from flashing "Available" transiently during
-    // initialization.
-    private var isCellularAvailable = true
-
-    private var isInternetConnected = false
-
-    private val carrierRoamingNtnCallback = SatelliteCarrierRoamingNtnCallback()
-    private val serviceStateCallback = SatelliteServiceStateCallback()
-    private val satelliteModemStateCallback = SatelliteModemStateCallbackImpl()
-    private val satelliteDisallowedReasonsCallback = SatelliteDisallowedReasonsCallbackImpl()
-
-    private val networkCallback =
-        object : ConnectivityManager.NetworkCallback() {
-            override fun onCapabilitiesChanged(
-                network: Network,
-                networkCapabilities: NetworkCapabilities,
-            ) {
-                val wasConnected = isInternetConnected
-                // We have internet if the default network is VALIDATED
-                isInternetConnected =
-                    networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
-                if (wasConnected != isInternetConnected) {
-                    Log.d(TAG, "onCapabilitiesChanged: isInternetConnected=$isInternetConnected")
-                    updateTile()
-                }
-            }
-
-            override fun onLost(network: Network) {
-                if (isInternetConnected) {
-                    isInternetConnected = false
-                    Log.d(TAG, "onLost: isInternetConnected=false")
-                    updateTile()
-                }
-            }
-        }
-
-    /** Callback for monitoring Carrier Roaming NTN (NB-IoT) states. */
-    private inner class SatelliteCarrierRoamingNtnCallback :
-        TelephonyCallback(), TelephonyCallback.CarrierRoamingNtnListener {
-
-        /** Triggered when the device becomes eligible for carrier roaming NTN (NB-IoT). */
-        override fun onCarrierRoamingNtnEligibleStateChanged(eligible: Boolean) {
-            if (isCarrierRoamingNtnEligible != eligible) {
-                Log.d(TAG, "onCarrierRoamingNtnEligibleStateChanged: $eligible")
-                isCarrierRoamingNtnEligible = eligible
-                updateTile()
-            }
-        }
-
-        /** Triggered when the carrier roaming NTN mode becomes active (LTE or NB-IoT). */
-        override fun onCarrierRoamingNtnModeChanged(active: Boolean) {
-            if (isCarrierRoamingNtnModeActive != active) {
-                Log.d(TAG, "onCarrierRoamingNtnModeChanged: $active")
-                isCarrierRoamingNtnModeActive = active
-                updateTile()
-            }
-        }
-    }
-
-    /**
-     * Callback for monitoring Service State.
-     *
-     * We monitor [ServiceState] because OEM satellite (Skylo) is generally designed as a fallback
-     * when terrestrial networks are unavailable.
-     */
-    private inner class SatelliteServiceStateCallback :
-        TelephonyCallback(), TelephonyCallback.ServiceStateListener {
-
-        /** Monitor service state to determine if regular cellular service is available. */
-        override fun onServiceStateChanged(serviceState: ServiceState) {
-            val isNtn = serviceState.isUsingNonTerrestrialNetwork
-            // We consider cellular is available only if we are In Service AND NOT using satellite
-            // already.
-            isCellularAvailable = (serviceState.state == ServiceState.STATE_IN_SERVICE) && !isNtn
-            Log.d(
-                TAG,
-                "onServiceStateChanged: state=${serviceState.state}, isNtn=$isNtn, isCellularAvailable=$isCellularAvailable",
-            )
-            updateTile()
-        }
-    }
-
-    /** Callback for monitoring the satellite modem state for OEM services (Skylo). */
-    private inner class SatelliteModemStateCallbackImpl : SatelliteModemStateCallback {
-        override fun onSatelliteModemStateChanged(state: Int) {
-            // We consider the satellite "Connected" (Tile Active) if the modem is
-            // actually connected, transferring data, or actively listening.
-            val isConnected =
-                state == SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED ||
-                    state == SatelliteManager.SATELLITE_MODEM_STATE_DATAGRAM_TRANSFERRING ||
-                    state == SatelliteManager.SATELLITE_MODEM_STATE_LISTENING
-            if (isOemSatelliteConnected != isConnected) {
-                Log.d(TAG, "onSatelliteModemStateChanged: state=$state, isConnected=$isConnected")
-                isOemSatelliteConnected = isConnected
-                updateTile()
-            }
-        }
-    }
-
-    /**
-     * Callback for monitoring reasons why satellite might be disallowed.
-     *
-     * If the list of disallowed reasons is empty, OEM satellite (Skylo) is considered "Allowed".
-     */
-    private inner class SatelliteDisallowedReasonsCallbackImpl :
-        SatelliteDisallowedReasonsCallback {
-        override fun onSatelliteDisallowedReasonsChanged(disallowedReasons: IntArray) {
-            val isAllowed = disallowedReasons.isEmpty()
-            if (isOemSatelliteAllowed != isAllowed) {
-                Log.d(
-                    TAG,
-                    "onSatelliteDisallowedReasonsChanged: allowed=$isAllowed, disallowedReasons=[${disallowedReasons.joinToString(", ")}]",
-                )
-                isOemSatelliteAllowed = isAllowed
-                updateTile()
-            }
-        }
-    }
-
-    @MainThread
-    override fun onCreate() {
-        super.onCreate()
-        try {
-            telephonyManager = getSystemService(TelephonyManager::class.java)
-            satelliteManager = getSystemService(SatelliteManager::class.java)
-            connectivityManager = getSystemService(ConnectivityManager::class.java)
-        } catch (e: Exception) {
-            Log.e(TAG, "Error initializing managers", e)
-        }
-        if (satelliteManager == null) {
-            Log.e(TAG, "SatelliteManager is null, OEM satellite features will be unavailable.")
-        }
-
-        refreshCellularState()
-        // Initialize isInternetConnected synchronously
-        val activeNetwork = connectivityManager.activeNetwork
-        isInternetConnected =
-            if (activeNetwork != null) {
-                connectivityManager
-                    .getNetworkCapabilities(activeNetwork)
-                    ?.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) == true
-            } else {
-                false
-            }
-
-        // Register callbacks. All updates MUST happen on the main thread to ensure
-        // thread-safe updates to the Tile.
-        try {
-            telephonyManager.registerTelephonyCallback(mainExecutor, carrierRoamingNtnCallback)
-            telephonyManager.registerTelephonyCallback(mainExecutor, serviceStateCallback)
-        } catch (e: Exception) {
-            Log.e(TAG, "Error registering telephony callbacks", e)
-        }
-
-        try {
-            satelliteManager?.registerForModemStateChanged(
-                mainExecutor,
-                satelliteModemStateCallback,
-            )
-            satelliteManager?.registerForSatelliteDisallowedReasonsChanged(
-                mainExecutor,
-                satelliteDisallowedReasonsCallback,
-            )
-        } catch (e: Exception) {
-            Log.e(TAG, "Error registering satellite callbacks", e)
-        }
-
-        try {
-            connectivityManager.registerDefaultNetworkCallback(
-                networkCallback,
-                Handler(Looper.getMainLooper()),
-            )
-        } catch (e: Exception) {
-            Log.e(TAG, "Error registering connectivity callback", e)
-        }
-    }
+    // Using Main scope for UI updates.
+    private val scope = CoroutineScope(Dispatchers.Main)
+    private var updateJob: Job? = null
 
     override fun onStartListening() {
         super.onStartListening()
-        refreshCellularState()
+        val repo = SatelliteStateRepository.getInstance(this)
+        // Ensure any previous job is cancelled before starting a new one.
+        updateJob?.cancel()
+        updateJob =
+            scope.launch {
+                repo.satelliteStatus.collect { status ->
+                    Log.d(TAG, "onStartListening: status=$status")
+                    updateTile(status)
+                }
+            }
+    }
+
+    override fun onStopListening() {
+        super.onStopListening()
+        updateJob?.cancel()
     }
 
     override fun onTileAdded() {
         super.onTileAdded()
-        // Mark as shown so we don't prompt user to add the tile.
         satelliteTilePromptUtils.setAddTilePromptShown(this, true)
     }
 
@@ -261,9 +76,10 @@ open class SatelliteTileService : TileService() {
     override fun onClick() {
         super.onClick()
         unlockAndRun {
-            // Launch the Satellite Landing Page
-            val intent = Intent(this, SatelliteLandingPageActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val intent =
+                Intent(this, SatelliteLandingPageActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                }
             val pendingIntent =
                 PendingIntent.getActivity(
                     this,
@@ -275,108 +91,32 @@ open class SatelliteTileService : TileService() {
         }
     }
 
-    @MainThread
     override fun onDestroy() {
-        cleanup()
         super.onDestroy()
+        scope.cancel()
     }
 
-    @VisibleForTesting
-    internal fun cleanup() {
-        telephonyManager.unregisterTelephonyCallback(carrierRoamingNtnCallback)
-        telephonyManager.unregisterTelephonyCallback(serviceStateCallback)
-        try {
-            satelliteManager?.unregisterForModemStateChanged(satelliteModemStateCallback)
-            satelliteManager?.unregisterForSatelliteDisallowedReasonsChanged(
-                satelliteDisallowedReasonsCallback
-            )
-            connectivityManager.unregisterNetworkCallback(networkCallback)
-        } catch (e: Exception) {
-            Log.e(TAG, "Error unregistering satellite callbacks", e)
-        }
-    }
-
-    /**
-     * Updates the Quick Settings tile state based on current satellite and cellular signals.
-     *
-     * Logic Priority:
-     * 1. **ACTIVE:** If either Carrier NTN is active OR OEM Satellite is connected.
-     * 2. **AVAILABLE:** If Carrier NTN is eligible OR (OEM Satellite is allowed AND Cellular is
-     *    OOS).
-     * 3. **UNAVAILABLE:** Default state.
-     */
     @MainThread
     @VisibleForTesting
-    fun updateTile() {
+    fun updateTile(status: SatelliteStatus) {
         val qsTile = qsTile ?: return
 
-        val newState: Int
-        val newSubtitle: String
-
-        // 1. Check for Active State first (Priority)
-        val isSatelliteOn = isCarrierRoamingNtnModeActive || isOemSatelliteConnected
-
-        // 2. Check for "Available" State (Inactive)
-        // Eligible/Allowed AND No Terrestrial Connection (No Voice, No Internet)
-        val isTerrestrialAvailable = isCellularAvailable || isInternetConnected
-        val isSatelliteAvailable =
-            (isCarrierRoamingNtnEligible || isOemSatelliteAllowed) && !isTerrestrialAvailable
-
-        when {
-            isSatelliteOn -> {
-                newState = Tile.STATE_ACTIVE
-                newSubtitle = getString(R.string.satellite_tile_subtitle_on)
+        val (newState, newSubtitleRes) =
+            when (status) {
+                SatelliteStatus.ACTIVE -> Tile.STATE_ACTIVE to R.string.satellite_tile_subtitle_on
+                SatelliteStatus.AVAILABLE ->
+                    Tile.STATE_INACTIVE to R.string.satellite_tile_subtitle_available
+                SatelliteStatus.NOT_AVAILABLE ->
+                    Tile.STATE_INACTIVE to R.string.satellite_tile_subtitle_not_available
             }
-            isSatelliteAvailable -> {
-                newState = Tile.STATE_INACTIVE
-                newSubtitle = getString(R.string.satellite_tile_subtitle_available)
-            }
-            else -> {
-                newState = Tile.STATE_INACTIVE
-                newSubtitle = getString(R.string.satellite_tile_subtitle_not_available)
-            }
+
+        val newSubtitle = getString(newSubtitleRes)
+        if (qsTile.state != newState || qsTile.subtitle != newSubtitle) {
+            qsTile.state = newState
+            qsTile.subtitle = newSubtitle
+            qsTile.updateTile()
+            Log.i(TAG, "Updated tile: state=$newState, subtitle=$newSubtitle")
         }
-
-        if (qsTile.state == newState && qsTile.subtitle == newSubtitle) {
-            return
-        }
-
-        qsTile.state = newState
-        qsTile.subtitle = newSubtitle
-        qsTile.updateTile()
-
-        Log.i(
-            TAG,
-            "updateTile: State=${qsTile.state}, Subtitle=${qsTile.subtitle}, " +
-                "NTN[Active=$isCarrierRoamingNtnModeActive, Eligible=$isCarrierRoamingNtnEligible], " +
-                "OEM[Connected=$isOemSatelliteConnected, Allowed=$isOemSatelliteAllowed], " +
-                "CellularAvailable=$isCellularAvailable, InternetConnected=$isInternetConnected",
-        )
-    }
-
-    private fun refreshCellularState() {
-        try {
-            val currentServiceState = telephonyManager.serviceState
-            if (currentServiceState != null) {
-                val isNtn = currentServiceState.isUsingNonTerrestrialNetwork
-                // Cellular is available if IN_SERVICE and NOT using Satellite
-                isCellularAvailable =
-                    (currentServiceState.state == ServiceState.STATE_IN_SERVICE) && !isNtn
-            } else {
-                // If service state is null, we assume no cellular service is available (e.g. No SIM
-                // or Modem not ready).
-                isCellularAvailable = false
-            }
-            Log.d(
-                TAG,
-                "refreshCellularState: state=${currentServiceState?.state}, " +
-                    "isNtn=${currentServiceState?.isUsingNonTerrestrialNetwork}, " +
-                    "isCellularAvailable=$isCellularAvailable",
-            )
-        } catch (e: Exception) {
-            Log.w(TAG, "Failed to refresh ServiceState", e)
-        }
-        updateTile()
     }
 
     companion object {

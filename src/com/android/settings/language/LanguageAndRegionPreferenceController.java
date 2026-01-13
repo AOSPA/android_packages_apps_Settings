@@ -21,7 +21,6 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.flags.Flags;
 
 /**
  * This is a display controller for new language activity entry.
@@ -36,11 +35,7 @@ public class LanguageAndRegionPreferenceController extends BasePreferenceControl
 
     @Override
     public int getAvailabilityStatus() {
-        if (!Flags.regionalPreferencesApiEnabled()) {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
-        // TODO: Add setComponentEnabledSetting after LanguageAndRegionSettingsActivity is created.
         return AVAILABLE;
     }
 }
-// LINT.ThenChange(LanguageAndRegionScreen.kt)
+// LINT.ThenChange(LanguageAndRegionScreen.kt, LanguageAndRegionApiFirstScreen.kt)

@@ -1,0 +1,282 @@
+/*
+ * Copyright (C) 2025 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.network.telephony.satellite.quicksettings
+
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.telephony.ServiceState
+import android.telephony.TelephonyCallback
+import android.telephony.TelephonyManager
+import android.telephony.satellite.SatelliteDisallowedReasonsCallback
+import android.telephony.satellite.SatelliteManager
+import android.telephony.satellite.SatelliteModemStateCallback
+import androidx.test.core.app.ApplicationProvider
+import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.ArgumentCaptor
+import org.mockito.ArgumentMatchers.any
+import org.mockito.Mock
+import org.mockito.Mockito.atLeastOnce
+import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
+import org.mockito.MockitoAnnotations
+import org.robolectric.RobolectricTestRunner
+
+@OptIn(ExperimentalCoroutinesApi::class)
+@RunWith(RobolectricTestRunner::class)
+class SatelliteStateRepositoryTest {
+
+    private val context: Context = ApplicationProvider.getApplicationContext()
+
+    @Mock private lateinit var telephonyManager: TelephonyManager
+    @Mock private lateinit var satelliteManager: SatelliteManager
+    @Mock private lateinit var connectivityManager: ConnectivityManager
+
+    // UnconfinedTestDispatcher executes coroutines eagerly (synchronously) when they are launched.
+    // This ensures that when launchIn(backgroundScope) is called, the entire chain (subscription ->
+    // stateIn -> combine -> upstream flows) executes immediately up to the first suspension point.
+    private val testScope = TestScope(UnconfinedTestDispatcher())
+
+    private lateinit var repository: SatelliteStateRepository
+
+    @Before
+    fun setUp() {
+        MockitoAnnotations.initMocks(this)
+    }
+
+    private fun createRepository(
+        scope: kotlinx.coroutines.CoroutineScope
+    ): SatelliteStateRepository {
+        return SatelliteStateRepository(
+            context,
+            telephonyManager,
+            satelliteManager,
+            connectivityManager,
+            scope,
+        )
+    }
+
+    @Test
+    fun satelliteStatus_defaultsToNotAvailable() =
+        testScope.runTest {
+            repository = createRepository(backgroundScope)
+            val status = repository.satelliteStatus.value
+            assertThat(status).isEqualTo(SatelliteStatus.NOT_AVAILABLE)
+        }
+
+    @Test
+    fun satelliteStatus_whenCarrierNtnActive_returnsActive() =
+        testScope.runTest {
+            repository = createRepository(backgroundScope)
+            val values = mutableListOf<SatelliteStatus>()
+            // Use backgroundScope to ensure the collection is cancelled at the end of the test
+            repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
+            advanceUntilIdle()
+
+            // Trigger Carrier NTN Active
+            val callback = captureCarrierRoamingNtnListener()
+            callback?.onCarrierRoamingNtnModeChanged(true)
+            advanceUntilIdle()
+
+            assertThat(values.last()).isEqualTo(SatelliteStatus.ACTIVE)
+        }
+
+    @Test
+    fun satelliteStatus_whenOemSatelliteActive_returnsActive() =
+        testScope.runTest {
+            repository = createRepository(backgroundScope)
+            val values = mutableListOf<SatelliteStatus>()
+            repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
+            advanceUntilIdle()
+
+            val callback = captureSatelliteModemStateCallback()
+            callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED)
+            advanceUntilIdle()
+
+            assertThat(values.last()).isEqualTo(SatelliteStatus.ACTIVE)
+        }
+
+    @Test
+    fun satelliteStatus_whenCarrierEligibleAndNoTerrestrial_returnsAvailable() =
+        testScope.runTest {
+            repository = createRepository(backgroundScope)
+            val values = mutableListOf<SatelliteStatus>()
+            repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
+            advanceUntilIdle()
+            // Ensure terrestrial is not available
+            setCellularAvailable(false)
+            setInternetConnected(false)
+
+            // Trigger Carrier Eligible
+            val callback = captureCarrierRoamingNtnListener()
+            callback?.onCarrierRoamingNtnEligibleStateChanged(true)
+            advanceUntilIdle()
+
+            assertThat(values.last()).isEqualTo(SatelliteStatus.AVAILABLE)
+        }
+
+    @Test
+    fun satelliteStatus_whenOemAllowedAndNoTerrestrial_returnsAvailable() =
+        testScope.runTest {
+            repository = createRepository(backgroundScope)
+            val values = mutableListOf<SatelliteStatus>()
+            repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
+            advanceUntilIdle()
+            setCellularAvailable(false)
+            setInternetConnected(false)
+
+            val callback = captureSatelliteDisallowedReasonsCallback()
+            callback.onSatelliteDisallowedReasonsChanged(IntArray(0))
+            advanceUntilIdle()
+
+            assertThat(values.last()).isEqualTo(SatelliteStatus.AVAILABLE)
+        }
+
+    @Test
+    fun satelliteStatus_whenCarrierEligibleButCellularAvailable_returnsNotAvailable() =
+        testScope.runTest {
+            repository = createRepository(backgroundScope)
+            val values = mutableListOf<SatelliteStatus>()
+            repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
+            advanceUntilIdle()
+            // Set Carrier Eligible
+            val telephonyCallback = captureCarrierRoamingNtnListener()
+            telephonyCallback?.onCarrierRoamingNtnEligibleStateChanged(true)
+
+            // Set Cellular Available
+            setCellularAvailable(true)
+            advanceUntilIdle()
+
+            assertThat(values.last()).isEqualTo(SatelliteStatus.NOT_AVAILABLE)
+        }
+
+    @Test
+    fun satelliteStatus_whenOemAllowedButInternetConnected_returnsNotAvailable() =
+        testScope.runTest {
+            repository = createRepository(backgroundScope)
+            val values = mutableListOf<SatelliteStatus>()
+            repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
+            advanceUntilIdle()
+            // Set OEM Allowed
+            val satelliteCallback = captureSatelliteDisallowedReasonsCallback()
+            satelliteCallback.onSatelliteDisallowedReasonsChanged(IntArray(0))
+
+            // Set Internet Connected
+            setInternetConnected(true)
+            advanceUntilIdle()
+
+            assertThat(values.last()).isEqualTo(SatelliteStatus.NOT_AVAILABLE)
+        }
+
+    @Test
+    fun satelliteStatus_whenActive_overridesAvailable() =
+        testScope.runTest {
+            repository = createRepository(backgroundScope)
+            val values = mutableListOf<SatelliteStatus>()
+            repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
+            advanceUntilIdle()
+            // Set Carrier Eligible (Available)
+            val telephonyCallback = captureCarrierRoamingNtnListener()
+            telephonyCallback?.onCarrierRoamingNtnEligibleStateChanged(true)
+            setCellularAvailable(false)
+            setInternetConnected(false)
+            advanceUntilIdle()
+            assertThat(values.last()).isEqualTo(SatelliteStatus.AVAILABLE)
+
+            // Set OEM Active (Active)
+            val modemCallback = captureSatelliteModemStateCallback()
+            modemCallback.onSatelliteModemStateChanged(
+                SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED
+            )
+            advanceUntilIdle()
+
+            assertThat(values.last()).isEqualTo(SatelliteStatus.ACTIVE)
+        }
+
+    // Helpers to capture callbacks and trigger updates
+
+    private fun captureCarrierRoamingNtnListener(): TelephonyCallback.CarrierRoamingNtnListener? {
+        val captor = ArgumentCaptor.forClass(TelephonyCallback::class.java)
+        verify(telephonyManager, atLeastOnce()).registerTelephonyCallback(any(), captor.capture())
+        return captor.allValues.find { it is TelephonyCallback.CarrierRoamingNtnListener }
+            as? TelephonyCallback.CarrierRoamingNtnListener
+    }
+
+    private fun captureSatelliteModemStateCallback(): SatelliteModemStateCallback {
+        val captor = ArgumentCaptor.forClass(SatelliteModemStateCallback::class.java)
+        verify(satelliteManager, atLeastOnce())
+            .registerForModemStateChanged(any(), captor.capture())
+        return captor.value
+    }
+
+    private fun captureSatelliteDisallowedReasonsCallback(): SatelliteDisallowedReasonsCallback {
+        val captor = ArgumentCaptor.forClass(SatelliteDisallowedReasonsCallback::class.java)
+        verify(satelliteManager, atLeastOnce())
+            .registerForSatelliteDisallowedReasonsChanged(any(), captor.capture())
+        return captor.value
+    }
+
+    private fun captureNetworkCallback(): ConnectivityManager.NetworkCallback {
+        val captor = ArgumentCaptor.forClass(ConnectivityManager.NetworkCallback::class.java)
+        verify(connectivityManager, atLeastOnce())
+            .registerDefaultNetworkCallback(captor.capture(), any())
+        return captor.value
+    }
+
+    private fun setCellularAvailable(available: Boolean) {
+        val captor = ArgumentCaptor.forClass(TelephonyCallback::class.java)
+        verify(telephonyManager, atLeastOnce()).registerTelephonyCallback(any(), captor.capture())
+        // Find the ServiceStateListener among captured callbacks
+        val callback =
+            captor.allValues.find { it is TelephonyCallback.ServiceStateListener }
+                as? TelephonyCallback.ServiceStateListener
+
+        val serviceState = mock(ServiceState::class.java)
+        doReturn(
+                if (available) ServiceState.STATE_IN_SERVICE else ServiceState.STATE_OUT_OF_SERVICE
+            )
+            .`when`(serviceState)
+            .state
+        doReturn(false).`when`(serviceState).isUsingNonTerrestrialNetwork
+
+        callback?.onServiceStateChanged(serviceState)
+    }
+
+    private fun setInternetConnected(connected: Boolean) {
+        val callback = captureNetworkCallback()
+        val network = mock(Network::class.java)
+        if (connected) {
+            val caps = mock(NetworkCapabilities::class.java)
+            doReturn(true).`when`(caps).hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+            callback.onCapabilitiesChanged(network, caps)
+        } else {
+            callback.onLost(network)
+        }
+    }
+}

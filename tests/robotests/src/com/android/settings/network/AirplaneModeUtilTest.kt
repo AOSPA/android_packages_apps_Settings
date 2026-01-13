@@ -21,6 +21,7 @@ import android.companion.AssociationInfo
 import android.companion.AssociationRequest.DEVICE_PROFILE_WATCH
 import android.companion.CompanionDeviceManager
 import android.companion.CompanionDeviceManager.FEATURE_CROSS_DEVICE_SYNC
+import android.companion.CompanionDeviceManager.FLAG_AIRPLANE_MODE
 import android.companion.Flags.FLAG_ENABLE_DATA_SYNC
 import android.content.Context.COMPANION_DEVICE_SERVICE
 import android.content.pm.PackageManager
@@ -177,6 +178,7 @@ class AirplaneModeUtilTest {
                 .setDeviceProfile(deviceProfile)
                 .setDisplayName("Smart Device")
                 .setMetadata(getMetadata(apmSyncSupported))
+                .setSystemDataSyncFlags(if (apmSyncSupported) FLAG_AIRPLANE_MODE else 0)
                 .build()
         )
     }

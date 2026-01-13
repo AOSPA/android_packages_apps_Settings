@@ -1110,6 +1110,7 @@ class SafetyCenterFragmentTest {
 
             onView(withText(R.string.safety_center_rescan_button)).check(matches(isDisplayed()))
             onView(withText(R.string.safety_center_rescan_button)).check(matches(isEnabled()))
+            onView(withText(R.string.safety_center_review_settings)).check(doesNotExist())
         }
     }
 
@@ -1170,6 +1171,7 @@ class SafetyCenterFragmentTest {
 
             onView(withText(R.string.safety_center_rescan_button)).check(matches(isDisplayed()))
             onView(withText(R.string.safety_center_rescan_button)).check(matches(isEnabled()))
+            onView(withText(R.string.safety_center_review_settings)).check(doesNotExist())
         }
     }
 

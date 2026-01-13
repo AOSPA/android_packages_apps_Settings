@@ -167,4 +167,4 @@ public class ConfigureWifiSettings extends DashboardFragment {
         return ConfigureWifiScreen.KEY;
     }
 }
-// LINT.ThenChange(ConfigureWifiScreen.kt)
+// LINT.ThenChange(ConfigureWifiScreen.kt, ConfigureWifiApiScreen.kt)

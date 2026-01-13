@@ -142,6 +142,7 @@ class SafetyCenterFragment : DashboardFragment() {
     ) {
         Log.d(TAG, "Setting up StatusBannerPreferenceController")
         statusBannerPreferenceController.viewModel = viewModel
+        statusBannerPreferenceController.isQuickSettings = isQuickSettings
     }
 
     private fun setupSafetyIssuesPreferenceController(

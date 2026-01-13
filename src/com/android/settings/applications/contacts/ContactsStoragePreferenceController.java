@@ -23,6 +23,7 @@ import android.os.UserHandle;
 import android.provider.ContactsContract.RawContacts.DefaultAccount.DefaultAccountAndState;
 import android.provider.Flags;
 import android.util.Log;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -31,12 +32,13 @@ import com.android.settingslib.accounts.AuthenticatorHelper;
 /**
  * A preference controller handling the logic for updating summary of contacts default account.
  */
+// LINT.IfChange
 public class ContactsStoragePreferenceController extends BasePreferenceController {
     private static final String TAG = "ContactsStorageController";
 
     private final AuthenticatorHelper mAuthenticatorHelper;
 
-    private DefaultAccountAndState mCurrentDefaultAccountAndState;
+    @Nullable private static DefaultAccountAndState mCurrentDefaultAccountAndState;
 
     public ContactsStoragePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -52,10 +54,26 @@ public class ContactsStoragePreferenceController extends BasePreferenceControlle
         }
     }
 
+    public static boolean isContactsStorageAvailable(Context context) {
+        if (!Flags.newDefaultAccountApiEnabled()) {
+            return false;
+        }
+        try {
+            mCurrentDefaultAccountAndState =
+                    DefaultAccount.getDefaultAccountForNewContacts(context.getContentResolver());
+        } catch (IllegalStateException e) {
+            Log.e(TAG, "The default account is in an invalid state: " + e);
+            return false;
+        } catch (RuntimeException e) {
+            Log.e(TAG, "Failed to look up the default account: " + e);
+            return false;
+        }
+        return mCurrentDefaultAccountAndState != null;
+    }
+
     @Override
     public int getAvailabilityStatus() {
-        return (Flags.newDefaultAccountApiEnabled()
-                && mCurrentDefaultAccountAndState != null) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return isContactsStorageAvailable(mContext) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -94,3 +112,4 @@ public class ContactsStoragePreferenceController extends BasePreferenceControlle
         return "";
     }
 }
+// LINT.ThenChange(ContactsStorageApiScreen.kt)

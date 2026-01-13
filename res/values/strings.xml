@@ -6039,6 +6039,10 @@
         =1      {Swipe down from the top of your screen. This shortcut will be available after you finish device setup.}
         other   {Swipe down with # fingers from the top of your screen. This shortcut will be available after you finish device setup.}
         }</string>
+    <!-- Title for accessibility shortcut present on the top row of some keyboards. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key">Top Row Key</string>
+    <!-- Summary for top row key shortcut option in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key">Press the accessibility key in the keyboard top row</string>
     <!-- Shown as one of the item in the chosen accessibility shortcut types list presented as a label next to the shortcut toggle. [CHAR LIMIT=NONE] -->
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings">Quick Settings</string>
     <!-- Title for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
@@ -9588,6 +9592,7 @@
     <string name="notification_summarization_summary">Get quick recaps of longer messages</string>
     <string name="notification_summarization_main_control_title">Use notification summaries</string>
     <string name="notification_summarization_description">Summarize long messages and group conversations to get quick recaps.\n\nSummaries use AI on your device, which may sometimes make mistakes. Your messages are never sent to Google.</string>
+    <string name="notification_summarization_description_with_apps">Summarize long messages and group conversations to get quick recaps.\n\nSummaries are provided by apps or AI on your device and may contain mistakes. Your messages are never sent to Google.</string>
     <string name="notification_summarization_excluded_description">Notifications from these apps will not be summarized</string>
     <string name="notification_summarization_manage_excluded_apps">Manage apps</string>
     <string name="notification_summarization_manage_excluded_apps_title">Manage apps for notification summaries</string>
@@ -10966,6 +10971,15 @@
 
     <!-- Summary of the switch preference that controls whether the system will pause app activity when the app has not been used for a while [CHAR LIMIT=NONE]-->
     <string name="unused_apps_switch_summary_v2">Remove permissions, delete temporary files, stop notifications, and archive the app</string>
+
+    <!-- Label for category for task continuity settings. [CHAR LIMIT=40] [SCREENSHOT=screen/BFsBbWLhcysYbDr]-->
+    <string name="task_continuity_category">Task continuity</string>
+
+    <!-- Label of a switch preference that controls whether the system will allow this app to be shared across devices [CHAR LIMIT=40] [SCREENSHOT=screen/BFsBbWLhcysYbDr]-->
+    <string name="continue_across_devices_switch">App Tasks</string>
+
+    <!-- Summary of the switch preference that controls whether the system will allow this app to be shared across devices [CHAR LIMIT=NONE] [SCREENSHOT=screen/BFsBbWLhcysYbDr]-->
+    <string name="continue_across_devices_switch_summary">Seamlessly continue where you left off on other devices</string>
 
     <!-- Label for showing all apps in list [CHAR LIMIT=30] -->
     <string name="filter_all_apps">All apps</string>
@@ -15413,6 +15427,8 @@
     <string name="safety_center_qs_page_landing">Security and privacy quick settings</string>
     <!-- Label for the privacy controls section of safety center QS page [CHAR LIMIT=30] -->
     <string name="privacy_controls_qs">Your privacy controls</string>
+    <!--Label for the button that takes the user to Safety center in case of pending actions [CHAR LIMIT=40] -->
+    <string name="safety_center_review_settings">Review settings</string>
 
     <!-- Label for opening safety center from quick settings [CHAR LIMIT=NONE] -->
     <string name="safety_center_qs_open_action">Open</string>
@@ -15477,6 +15493,8 @@
     <string name="add_tile_action">Add tile</string>
     <!-- Title for the satellite tile prompt notification channel. [CHAR LIMIT=NONE] -->
     <string name="satellite_tile_prompt_channel_title">Satellite Tile Prompts</string>
+    <!-- Text displayed inside the Satellite Icon chip. [CHAR LIMIT=3]  -->
+    <string name="satellite_icon_text">SAT</string>
 
     <string name="long_press_power_assistant_sensitivity_ms_description" translatable="false">A length of time in ms.</string>
     <string name="long_press_power_category_precondition" translatable="false">Requires that long pressing the power button can be configured for Assistant</string>
@@ -15485,4 +15503,17 @@
     <string name="long_press_power_sensitivity_precondition_set_for_power_button" translatable="false">The device is currently set to launch the Power Menu on long press of the power button</string>
     <string name="long_press_power_sensitivity_no_options" translatable="false">The device does not support setting alternative sensitivities for long pressing power button for Assistant</string>
     <string name="long_press_power_sensitivity_value_description" translatable="false"><xliff:g id="duration_in_millis" example="100">%d</xliff:g>ms</string>
+
+    <!-- User settings screen start -->
+    <string name="user_settings_precondition" translatable="false">Requires multiuser configuration to be enabled.</string>
+    <string name="user_settings_unsupported" translatable="false">This device does not support multiuser feature.</string>
+    <string name="user_settings_remove_guest_on_exit_precondition" translatable="false">Requires admin privileges and device support for configuring guest user data removal.</string>
+    <string name="user_settings_enable_guest_calling_precondition" translatable="false">Requires admin privileges and device support for configuring guest telephony.</string>
+    <string name="user_settings_add_users_from_lockscreen_precondition" translatable="false">Requires admin privileges and device support for configuring adding users from lock screen.</string>
+    <string name="user_settings_unavailable_user_not_admin" translatable="false">Only an admin user can change this setting.</string>
+    <string name="user_settings_restricted_by_work_policy" translatable="false">This setting is restricted by work policy.</string>
+    <string name="user_settings_remove_guest_on_exit_unavailable" translatable="false">This device does not support persisting guest data across sessions.</string>
+    <string name="user_settings_guest_telephony_config_unsupported" translatable="false">This device does not support guest telephony feature.</string>
+    <string name="user_settings_add_users_from_lockscreen_config_unsupported" translatable="false">This device does not support guest telephony feature.</string>
+    <!-- User settings screen end -->
 </resources>

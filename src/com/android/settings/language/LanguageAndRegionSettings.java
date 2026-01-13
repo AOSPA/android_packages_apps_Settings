@@ -19,7 +19,6 @@ package com.android.settings.language;
 import static android.os.UserManager.DISALLOW_CONFIG_LOCALE;
 
 import static com.android.settings.flags.Flags.localeNotificationEnabled;
-import static com.android.settings.flags.Flags.regionalPreferencesApiEnabled;
 import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_APP_LOCALE;
 import static com.android.settings.localepicker.LocaleDialogFragment.ARG_DIALOG_TYPE;
 import static com.android.settings.localepicker.LocaleDialogFragment.ARG_MENU_ITEM_ID;
@@ -432,11 +431,8 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
             new BaseSearchIndexProvider(R.xml.language_and_region_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    if (regionalPreferencesApiEnabled()) {
-                        return true;
-                    }
-                    return false;
+                    return true;
                 }
             };
 }
-// LINT.ThenChange(LanguageAndRegionScreen.kt)
+// LINT.ThenChange(LanguageAndRegionScreen.kt, LanguageAndRegionApiFirstScreen.kt)

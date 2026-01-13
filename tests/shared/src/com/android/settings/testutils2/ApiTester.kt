@@ -85,10 +85,13 @@ class ScreenInfo
 /**
  * Helper class for testing an api screen, including potential preferences it includes.
  *
- * @param instance - an api screen instance we are performing a test on.
+ * @param instance - The api screen instance we are performing a test on.
+ * @param context - The application context.
  */
-class ApiTester(private val instance: PreferencesApiScreen) {
+class ApiTester(
+    private val instance: PreferencesApiScreen,
     private val context: Context = ApplicationProvider.getApplicationContext()
+) {
 
     private val possibleParameters by lazy {
         runBlocking {
@@ -172,13 +175,13 @@ class ApiTester(private val instance: PreferencesApiScreen) {
         if (result is Allowed) {
             return
         } else if (result is EnterpriseRestriction) {
-            throw EnterpriseRestrictionException(context.getString(result.reason))
+            throw EnterpriseRestrictionException(result.getReason(context))
         } else if (result is HardwareUnsupported) {
-            throw HardwareUnsupportedException(context.getString(result.reason))
+            throw HardwareUnsupportedException(result.getReason(context))
         } else if (result is InvalidPreference) {
-            throw InvalidPreferenceException(context.getString(result.reason))
+            throw InvalidPreferenceException(result.getReason(context))
         } else if (result is MissingPermission) {
-            throw MissingPermissionException(context.getString(result.reason))
+            throw MissingPermissionException(result.getReason(context))
         }
         throw FailedPreconditionException()
     }
@@ -306,6 +309,16 @@ class ApiTester(private val instance: PreferencesApiScreen) {
      * Get the screen extras associated with this parameterized screen.
      */
     fun getLaunchScreenExtras() = instance.launchScreenExtra
+
+    /**
+     * Get all the parameter options for a specific parameter name.
+     */
+    fun getParameterOptions(parameterName: String) : List<String> =
+        possibleParameters.flatMap { validatedKeyParameters ->
+            validatedKeyParameters.values
+                .filter { it.key == parameterName }
+                .values
+        }
 }
 
 /**

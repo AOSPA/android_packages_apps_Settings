@@ -1,5 +1,5 @@
-/*
- * Copyright (C) 2025 The Android Open Source Project
+/**
+ * Copyright (C) 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.applications.contacts
+
+package com.android.settings.regionalpreferences
 
 import com.android.settings.R
 import com.android.settings.flags.Flags
@@ -22,22 +23,21 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 
 // LINT.IfChange
-@ProvidePreferenceScreen(ContactsStorageScreenApi.KEY)
-class ContactsStorageScreenApi :
+@ProvidePreferenceScreen(MeasurementSystemApiFirstScreen.KEY)
+class MeasurementSystemApiFirstScreen :
     PreferencesApiScreen(
         key = KEY,
-        topLevelSettingsCategory = Category.APPS,
-        fragment = ContactsStorageSettings::class,
-        purpose = R.string.contacts_storage_settings_purpose,
+        topLevelSettingsCategory = Category.SYSTEM,
+        fragment = MeasurementSystemItemFragment::class,
+        purpose = R.string.regional_preference_measurement_system_purpose,
     ) {
+
     init {
-        // TODO(b/464954587): Add preconditions check for the screen.
-        // TODO(b/464954587): Add preference migration for the screen.
         flag { Flags.catalystMigration26q2() }
     }
 
     companion object {
-        const val KEY = "contacts_storage_settings"
+        const val KEY = "regional_preference_measurement_system"
     }
 }
-// LINT.ThenChange(ContactsStorageScreenApi.kt)
+// LINT.ThenChange(MeasurementSystemItemFragment.java)

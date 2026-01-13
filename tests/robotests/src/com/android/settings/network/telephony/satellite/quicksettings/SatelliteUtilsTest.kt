@@ -119,6 +119,39 @@ class SatelliteUtilsTest {
     }
 
     @Test
+    fun isCarrierRoamingNtnSupported_allConditionsMet_returnsTrue() {
+        setAttachRestrictionReasons(isLteNtnSupported = true)
+        setupCarrierConfig(
+            isAttachSupported = true,
+            connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
+        )
+
+        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(context, SUB_ID)).isTrue()
+    }
+
+    @Test
+    fun isCarrierRoamingNtnSupported_attachRestricted_returnsFalse() {
+        setAttachRestrictionReasons(isLteNtnSupported = false)
+        setupCarrierConfig(
+            isAttachSupported = true,
+            connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
+        )
+
+        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(context, SUB_ID)).isFalse()
+    }
+
+    @Test
+    fun isCarrierRoamingNtnSupported_satelliteAttachNotSupported_returnsFalse() {
+        setAttachRestrictionReasons(isLteNtnSupported = true)
+        setupCarrierConfig(
+            isAttachSupported = false,
+            connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
+        )
+
+        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(context, SUB_ID)).isFalse()
+    }
+
+    @Test
     fun isLteBasedNtnSupportedByDevice_noActiveSubscriptions_returnsFalse() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(emptyList())
         assertThat(SatelliteUtils.isLteBasedNtnSupportedByDevice(context)).isFalse()

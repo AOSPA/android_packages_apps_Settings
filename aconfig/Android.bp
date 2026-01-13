@@ -16,6 +16,7 @@ aconfig_declarations {
 java_aconfig_library {
     name: "aconfig_settings_flags_lib",
     aconfig_declarations: "aconfig_settings_flags",
+    preserve_legacy_impl_interface: true,
 }
 
 aconfig_declarations {

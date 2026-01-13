@@ -17,6 +17,8 @@ package com.android.settings.safetycenter.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.safetycenter.SafetyCenterEntry
 import android.safetycenter.SafetyCenterStatus
 import android.util.Log
 import android.view.ContextThemeWrapper
@@ -29,6 +31,7 @@ import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
 import com.android.settings.safetycenter.ui.model.StatusUiData
+import com.android.settingslib.safetycenter.SafetyCenterUiData
 import com.android.settingslib.widget.StatusBannerPreference
 
 /**
@@ -46,6 +49,7 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
 
     private var preference: StatusBannerPreference? = null
     var viewModel: LiveSafetyCenterViewModel? = null
+    var isQuickSettings: Boolean = false
 
     override fun onViewCreated(owner: LifecycleOwner) {
         if (viewModel == null) {
@@ -146,11 +150,29 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
 
     private fun StatusBannerPreference.updateBannerButton(status: StatusUiData) {
         val uiData = viewModel?.safetyCenterUiLiveData?.value
-        val hasActiveIssues = uiData?.getActiveIssues()?.isNotEmpty() == true
-        if (
-            (status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK ||
-                status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_UNKNOWN) &&
-                !hasActiveIssues
+        val hasActiveIssues = uiData?.getActiveIssues()?.isNotEmpty() ?: false
+
+        if (uiData != null && hasActiveIssues) {
+            setButtonOnClickListener(null) // This hides the button.
+        } else if (
+            uiData != null &&
+                isQuickSettings &&
+                !status.isRefreshInProgress &&
+                (hasUnknownSeverityEntry(uiData) ||
+                    hasEntryExceedingOverallSeverity(uiData, status.severityLevel))
+        ) {
+            setButtonText(R.string.safety_center_review_settings)
+            setButtonOnClickListener {
+                val intent = Intent(Intent.ACTION_SAFETY_CENTER)
+                NavigationSource.QUICK_SETTINGS_TILE.addToIntent(intent)
+                context.startActivity(intent)
+            }
+            buttonLevel = StatusBannerPreference.BannerStatus.LOW
+            isButtonEnabled = true
+        } else if (
+            uiData == null ||
+                status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK ||
+                status.severityLevel == SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_UNKNOWN
         ) {
             setButtonText(R.string.safety_center_rescan_button)
             setButtonOnClickListener {
@@ -165,6 +187,40 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
             setButtonOnClickListener(null) // This hides the button.
         }
     }
+
+    private fun getAllVisibleEntries(uiData: SafetyCenterUiData): List<SafetyCenterEntry> {
+        return SafetyCenterSubpageRegistry.subpageConfigs.keys.flatMap { subpageKey ->
+            val sourceIds = SafetyCenterSubpageRegistry.getXmlSafetySourceIds(mContext, subpageKey)
+            uiData.getDynamicEntriesForSources(sourceIds)
+        }
+    }
+
+    private fun hasUnknownSeverityEntry(uiData: SafetyCenterUiData): Boolean {
+        return getAllVisibleEntries(uiData).any {
+            it.severityLevel == SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN
+        }
+    }
+
+    private fun hasEntryExceedingOverallSeverity(
+        uiData: SafetyCenterUiData,
+        overallSeverity: Int,
+    ): Boolean {
+        val overallSeverityComparable = overallSeverity.toComparableSeverity()
+        return getAllVisibleEntries(uiData).any { entry ->
+            entry.severityLevel.toComparableSeverity() > overallSeverityComparable
+        }
+    }
+
+    private fun Int.toComparableSeverity(): Int =
+        when (this) {
+            SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING,
+            SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_CRITICAL_WARNING -> 3
+            SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_RECOMMENDATION,
+            SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_RECOMMENDATION -> 2
+            SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK,
+            SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK -> 1
+            else -> 0
+        }
 
     private fun triggerRescan(): Boolean {
         if (viewModel?.statusUiLiveData?.value?.isRefreshInProgress == false) {

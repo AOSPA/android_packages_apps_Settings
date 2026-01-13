@@ -746,4 +746,10 @@ class ApiTesterTest {
         Truth.assertThat(extras.keySet().size).isEqualTo(0)
     }
 
+    @Test
+    fun getParameterOptions_onParameterizedScreen_returnsCorrectValues() {
+        Truth.assertThat(testerParameterized.getParameterOptions("package"))
+            .containsExactly("parameter1", "parameter2")
+    }
+
 }

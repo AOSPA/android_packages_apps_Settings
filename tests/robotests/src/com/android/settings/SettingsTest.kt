@@ -21,6 +21,7 @@ import android.companion.AssociationInfo
 import android.companion.AssociationRequest.DEVICE_PROFILE_WATCH
 import android.companion.CompanionDeviceManager
 import android.companion.CompanionDeviceManager.FEATURE_CROSS_DEVICE_SYNC
+import android.companion.CompanionDeviceManager.FLAG_AIRPLANE_MODE
 import android.companion.Flags.FLAG_ENABLE_DATA_SYNC
 import android.content.Context.COMPANION_DEVICE_SERVICE
 import android.content.Intent
@@ -194,6 +195,7 @@ class SettingsTest {
                         .setDeviceProfile(DEVICE_PROFILE_WATCH)
                         .setDisplayName("Smart Watch")
                         .setMetadata(metadata)
+                        .setSystemDataSyncFlags(FLAG_AIRPLANE_MODE)
                         .build()
                 )
             on { getLocalMetadata(UserHandle.USER_ALL) } doReturn metadata
