@@ -25,12 +25,17 @@ import android.net.Uri
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.view.View.AccessibilityDelegate
+import android.view.View.IMPORTANT_FOR_ACCESSIBILITY_YES
+import android.view.accessibility.AccessibilityNodeInfo
+import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction
 import androidx.annotation.RawRes
 import androidx.core.content.withStyledAttributes
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.android.settings.R
+import com.android.settingslib.widget.preference.illustration.R as IllustrationR
 import com.google.android.setupdesign.items.Item
 import com.google.android.setupdesign.util.LottieAnimationHelper
 import com.google.android.setupdesign.util.ThemeHelper
@@ -73,7 +78,22 @@ class IllustrationItem : Item {
             }
         }
 
-    private var isLottieAnimation = false
+    /** The callback invoked when the [LottieAnimationView] is being bound. */
+    var onBindListener: OnBindListener? = null
+
+    /** Callback to be invoked when the animation view is bound to its View Holder. */
+    fun interface OnBindListener {
+        /**
+         * Called when when [.onBindViewHolder] occurs.
+         *
+         * @param animationView the animation view for this preference.
+         */
+        fun onBind(animationView: LottieAnimationView?)
+    }
+
+    internal var isLottieAnimation = false
+        private set
+
     private var isLottieAnimationPaused = false
 
     constructor() : super()
@@ -91,6 +111,11 @@ class IllustrationItem : Item {
     override fun onBindView(view: View) {
         val context = view.context
         val illustrationView = view.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
+
+        if (!contentDescription.isNullOrBlank()) {
+            illustrationView.contentDescription = contentDescription
+            illustrationView.importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
+        }
         handleImageWithAnimation(illustrationView)
         handleAnimationControl(illustrationView)
 
@@ -105,7 +130,7 @@ class IllustrationItem : Item {
                 )
         }
 
-        view.contentDescription = contentDescription
+        onBindListener?.onBind(illustrationView)
     }
 
     /**
@@ -171,6 +196,18 @@ class IllustrationItem : Item {
             return
         }
 
+        // TODO(b/397340540): list out pages having illustration without a content description.
+        if (contentDescription.isNullOrBlank()) {
+            // Default content description will be attached if there's no content description.
+            illustrationView.apply {
+                contentDescription =
+                    context.getString(
+                        IllustrationR.string.settingslib_illustration_content_description
+                    )
+            }
+            Log.w(TAG, "Animated illustration should have a content description")
+        }
+
         illustrationView.setOnClickListener {
             isLottieAnimationPaused = !isLottieAnimationPaused
             if (isLottieAnimationPaused) {
@@ -178,8 +215,36 @@ class IllustrationItem : Item {
             } else {
                 illustrationView.resumeAnimation()
             }
+            updateAccessibilityAction(illustrationView)
         }
+        updateAccessibilityAction(illustrationView)
     }
+
+    private fun updateAccessibilityAction(illustrationView: LottieAnimationView) {
+        illustrationView.setAccessibilityDelegate(
+            object : AccessibilityDelegate() {
+                override fun onInitializeAccessibilityNodeInfo(
+                    host: View,
+                    info: AccessibilityNodeInfo,
+                ) {
+                    super.onInitializeAccessibilityNodeInfo(host, info)
+                    val clickAction =
+                        AccessibilityAction(
+                            AccessibilityNodeInfo.ACTION_CLICK,
+                            getActionLabelForAnimation(host.context),
+                        )
+                    info.addAction(clickAction)
+                }
+            }
+        )
+    }
+
+    private fun getActionLabelForAnimation(context: Context) =
+        if (isLottieAnimationPaused) {
+            context.getString(IllustrationR.string.settingslib_action_label_resume)
+        } else {
+            context.getString(IllustrationR.string.settingslib_action_label_pause)
+        }
 
     private fun startLottieAnimationWith(illustrationView: LottieAnimationView, imageUri: Uri) {
         val inputStream: InputStream =
