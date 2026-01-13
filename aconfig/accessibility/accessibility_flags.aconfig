@@ -25,6 +25,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_autoclick_screen"
+  namespace: "accessibility"
+  description: "Migrate autoclick screen to the Catalyst infrastructure"
+  bug: "440382182"
+}
+
+flag {
   name: "catalyst_dark_ui_mode"
   namespace: "accessibility"
   description: "Migrate dark mode screen to the Catalyst infrastructure"
