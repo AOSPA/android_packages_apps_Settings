@@ -19,7 +19,6 @@ package com.android.settings.accessibility.setupwizard
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ComponentName
 import android.content.Context
-import android.os.Looper
 import android.view.accessibility.AccessibilityManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
@@ -29,15 +28,15 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.any
-import org.mockito.Mockito.verify
+import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowLooper
 
 /** Tests for [AccessibilityServiceFooterItemController]. */
 @RunWith(RobolectricTestRunner::class)
@@ -68,7 +67,7 @@ class AccessibilityServiceFooterItemControllerTest {
         val expectedContentDescription = "$introTitle\n\n$TEST_SUMMARY"
 
         controller.bindData(mockItem)
-        shadowOf(Looper.getMainLooper()).idle()
+        ShadowLooper.idleMainLooper()
 
         val summaryCaptor = argumentCaptor<CharSequence>()
         verify(mockItem).summary = summaryCaptor.capture()
