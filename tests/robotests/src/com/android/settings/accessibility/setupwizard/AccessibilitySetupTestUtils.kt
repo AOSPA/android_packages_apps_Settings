@@ -21,9 +21,9 @@ import android.content.ComponentName
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import com.android.settings.testutils.AccessibilityTestUtils
-import org.mockito.ArgumentMatchers.any
-import org.mockito.Mockito.doReturn
-import org.mockito.Mockito.spy
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.spy
 import org.mockito.kotlin.whenever
 
 /** Utility for creating mocked Accessibility Services for Setup Wizard tests. */

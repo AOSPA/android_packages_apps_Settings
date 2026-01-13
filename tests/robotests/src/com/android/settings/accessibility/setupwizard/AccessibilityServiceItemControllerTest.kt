@@ -18,7 +18,6 @@ package com.android.settings.accessibility.setupwizard
 
 import android.content.ComponentName
 import android.content.Context
-import android.os.Looper
 import android.view.accessibility.AccessibilityManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.rules.ActivityScenarioRule
@@ -33,14 +32,14 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.verify
 import org.mockito.kotlin.argThat
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowLooper
 
 /** Tests for [AccessibilityServiceItemController]. */
 @RunWith(RobolectricTestRunner::class)
@@ -77,7 +76,7 @@ class AccessibilityServiceItemControllerTest {
         a11yManager.setInstalledAccessibilityServiceList(listOf(serviceInfo))
 
         controller.bindData(mockItem)
-        shadowOf(Looper.getMainLooper()).idle()
+        ShadowLooper.idleMainLooper()
 
         verify(mockItem).title = argThat { this.toString() == TEST_LABEL }
         verify(mockItem).isVisible = true
@@ -87,7 +86,7 @@ class AccessibilityServiceItemControllerTest {
     @Test
     fun bindData_noServicesInstalled_hidesItems() {
         controller.bindData(mockItem)
-        shadowOf(Looper.getMainLooper()).idle()
+        ShadowLooper.idleMainLooper()
 
         verify(mockItem).isVisible = false
         verify(mockItem).notifyItemChanged()
@@ -101,7 +100,7 @@ class AccessibilityServiceItemControllerTest {
         a11yManager.setInstalledAccessibilityServiceList(listOf(serviceInfo))
         mockItem.stub { on { summary } doReturn TEST_SUMMARY }
         controller.bindData(mockItem)
-        shadowOf(Looper.getMainLooper()).idle()
+        ShadowLooper.idleMainLooper()
         activityScenarioRule.scenario.onActivity { activity ->
             activity.setContentView(R.layout.accessibility_suw_activity)
 
