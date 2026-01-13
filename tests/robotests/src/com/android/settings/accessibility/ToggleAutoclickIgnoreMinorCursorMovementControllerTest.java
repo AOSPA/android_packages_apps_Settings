@@ -20,12 +20,10 @@ import static android.view.accessibility.AccessibilityManager.AUTOCLICK_IGNORE_M
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -46,8 +44,6 @@ public class ToggleAutoclickIgnoreMinorCursorMovementControllerTest {
 
     private static final String PREFERENCE_KEY =
             "accessibility_control_autoclick_ignore_minor_cursor_movement";
-
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private ToggleAutoclickIgnoreMinorCursorMovementController mController;
@@ -59,17 +55,9 @@ public class ToggleAutoclickIgnoreMinorCursorMovementControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
-    public void getAvailabilityStatus_availableWhenFlagOn() {
+    public void getAvailabilityStatus_returnsAvailable() {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
-    @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
-    public void getAvailabilityStatus_conditionallyUnavailableWhenFlagOn() {
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

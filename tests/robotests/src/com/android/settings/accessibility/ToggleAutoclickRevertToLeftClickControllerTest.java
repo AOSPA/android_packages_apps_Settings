@@ -24,9 +24,6 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -34,7 +31,6 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -45,8 +41,6 @@ public class ToggleAutoclickRevertToLeftClickControllerTest {
 
     private static final String PREFERENCE_KEY =
             "accessibility_control_autoclick_revert_to_left_click";
-
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private ToggleAutoclickRevertToLeftClickController mController;
 
@@ -57,17 +51,9 @@ public class ToggleAutoclickRevertToLeftClickControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
-    public void getAvailabilityStatus_availableWhenFlagOn() {
+    public void getAvailabilityStatus_returnsAvailable() {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
-    @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
-    public void getAvailabilityStatus_conditionallyUnavailableWhenFlagOn() {
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
