@@ -22,7 +22,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.VibrationSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceCategory
@@ -118,11 +117,7 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        if (Flags.deeplinkSoundAndVibration25q4()) {
-            makeLaunchIntent(context, VibrationSettingsActivity::class.java, metadata?.key)
-        } else {
-            super.getLaunchIntent(context, metadata)
-        }
+        makeLaunchIntent(context, VibrationSettingsActivity::class.java, metadata?.key)
 
     companion object {
         const val KEY = "vibration_screen"
