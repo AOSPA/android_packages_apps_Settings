@@ -50,7 +50,7 @@ constructor(
 
     data class RefreshRateItem(val modeId: Int, val refreshRate: Float)
 
-    data class ConfirmationDialogEvent(val newMode: Mode, val existingMode: Mode)
+    data class ConfirmationDialogEvent(val newMode: Mode, val previousMode: Mode)
 
     private var allowedModes: Map<Int, Mode> = emptyMap()
 
@@ -250,18 +250,18 @@ constructor(
     }
 
     fun onConfirmationResult(confirmed: Boolean) {
-        val currentState = _uiState.value ?: return
-        val currentActiveMode = currentState.currentActiveMode
-        val pendingMode = currentState.pendingMode
+        val event = _confirmationDialogEvent.value ?: return
+        val previousMode = event.previousMode
+        val newMode = event.newMode
         if (confirmed) {
-            logInfo("Mode change confirmed: $pendingMode")
-            injector.setUserPreferredDisplayMode(displayId, pendingMode, storeMode = true)
-            updateState { it.copy(currentActiveMode = it.pendingMode) }
-            logResolutionChange(pendingMode)
+            logInfo("Mode change confirmed: $newMode")
+            injector.setUserPreferredDisplayMode(displayId, newMode, storeMode = true)
+            updateState { it.copy(currentActiveMode = newMode) }
+            logResolutionChange(newMode)
         } else {
-            logInfo("Mode change rejected, reverting to: $currentActiveMode")
+            logInfo("Mode change rejected, reverting to: $previousMode")
             injector.resetUserPreferredDisplayMode(displayId)
-            updateState { it.copy(pendingMode = it.currentActiveMode) }
+            updateState { it.copy(pendingMode = previousMode) }
         }
         _confirmationDialogEvent.value = null
     }
