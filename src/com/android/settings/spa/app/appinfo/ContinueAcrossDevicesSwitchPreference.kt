@@ -17,6 +17,7 @@
 package com.android.settings.spa.app.appinfo
 
 import android.app.AppOpsManager.MODE_ALLOWED
+import android.app.AppOpsManager.MODE_DEFAULT
 import android.app.AppOpsManager.MODE_IGNORED
 import android.app.AppOpsManager.OP_CONTINUE_ACROSS_DEVICES
 import android.companion.datatransfer.continuity.TaskContinuityManager
@@ -100,7 +101,18 @@ private class ContinueAcrossDevicesSwitchPresenter(
         awaitClose { taskContinuityManager.unregisterHandoffFeatureStateListener(listener) }
     }
 
-    private val isChecked = OverridableFlow(flow { emit(true) })
+    private val isChecked =
+        OverridableFlow(
+            flow {
+                val mode =
+                    appOpsManager.checkOpNoThrow(
+                        OP_CONTINUE_ACROSS_DEVICES,
+                        app.uid,
+                        app.packageName,
+                    )
+                emit(mode == MODE_ALLOWED || mode == MODE_DEFAULT)
+            }
+        )
 
     val isCheckedFlow = isChecked.flow
 

@@ -18,8 +18,8 @@ package com.android.settings.spa.app.appinfo
 
 import android.app.AppOpsManager
 import android.app.AppOpsManager.MODE_ALLOWED
+import android.app.AppOpsManager.MODE_DEFAULT
 import android.app.AppOpsManager.MODE_IGNORED
-import android.app.AppOpsManager.OP_AUTO_REVOKE_PERMISSIONS_IF_UNUSED
 import android.app.AppOpsManager.OP_CONTINUE_ACROSS_DEVICES
 import android.companion.CompanionDeviceManager.FLAG_TASK_CONTINUITY
 import android.companion.datatransfer.continuity.TaskContinuityManager
@@ -35,9 +35,12 @@ import android.platform.test.flag.junit.SetFlagsRule
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.assertIsOff
+import androidx.compose.ui.test.assertIsOn
+import androidx.compose.ui.test.isToggleable
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -101,13 +104,7 @@ class ContinueAcrossDevicesSwitchPreferenceTest {
     }
 
     private fun mockOpsMode(mode: Int) {
-        whenever(
-                appOpsManager.checkOpNoThrow(
-                    OP_AUTO_REVOKE_PERMISSIONS_IF_UNUSED,
-                    UID,
-                    PACKAGE_NAME,
-                )
-            )
+        whenever(appOpsManager.checkOpNoThrow(OP_CONTINUE_ACROSS_DEVICES, UID, PACKAGE_NAME))
             .thenReturn(mode)
     }
 
@@ -147,8 +144,37 @@ class ContinueAcrossDevicesSwitchPreferenceTest {
 
         setContent()
         composeTestRule.onRoot().performClick()
-
         verify(appOpsManager).setUidMode(OP_CONTINUE_ACROSS_DEVICES, UID, MODE_IGNORED)
+    }
+
+    @Test
+    @EnableFlags(android.companion.Flags.FLAG_TASK_CONTINUITY)
+    fun `AppOpp ignored - switch is off`() {
+        mockOpsMode(MODE_IGNORED)
+
+        setContent()
+
+        composeTestRule.onNode(isToggleable()).assertIsEnabled().assertIsOff()
+    }
+
+    @Test
+    @EnableFlags(android.companion.Flags.FLAG_TASK_CONTINUITY)
+    fun `AppOpp allowed - switch is on`() {
+        mockOpsMode(MODE_ALLOWED)
+
+        setContent()
+
+        composeTestRule.onNode(isToggleable()).assertIsEnabled().assertIsOn()
+    }
+
+    @Test
+    @EnableFlags(android.companion.Flags.FLAG_TASK_CONTINUITY)
+    fun `AppOpp default - switch is on`() {
+        mockOpsMode(MODE_DEFAULT)
+
+        setContent()
+
+        composeTestRule.onNode(isToggleable()).assertIsEnabled().assertIsOn()
     }
 
     private fun setContent(app: ApplicationInfo = TARGET_APP) {
