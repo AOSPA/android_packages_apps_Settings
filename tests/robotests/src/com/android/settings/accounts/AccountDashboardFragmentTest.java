@@ -27,13 +27,17 @@ import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.SearchIndexableResource;
 
+import com.android.settings.flags.Flags;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Rule;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -50,6 +54,8 @@ public class AccountDashboardFragmentTest {
     private static final String PROFILE_NAME = "User";
     private static final String ACCOUNT_TYPE = "com.android.settings";
     private static final String ACCOUNT_NAME = "test account";
+
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private UserManager mUserManager;
@@ -74,6 +80,7 @@ public class AccountDashboardFragmentTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_ACCOUNTS_AND_BACKUP_SCREEN)
     public void searchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
                 AccountDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
@@ -84,6 +91,7 @@ public class AccountDashboardFragmentTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_ACCOUNTS_AND_BACKUP_SCREEN)
     public void searchIndexProvider_hasManagedProfile_shouldNotIndex() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(PROFILE_ID, PROFILE_NAME, UserInfo.FLAG_MANAGED_PROFILE));
@@ -97,6 +105,7 @@ public class AccountDashboardFragmentTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_ACCOUNTS_AND_BACKUP_SCREEN)
     public void searchIndexProvider_hasAccounts_shouldIndex() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(PROFILE_ID, PROFILE_NAME, UserInfo.FLAG_PRIMARY));
