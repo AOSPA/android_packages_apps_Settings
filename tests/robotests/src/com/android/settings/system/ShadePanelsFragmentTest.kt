@@ -20,7 +20,6 @@ import android.app.Application
 import android.content.Context
 import android.hardware.devicestate.DeviceState
 import android.hardware.devicestate.DeviceStateManager
-import android.os.Build
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -39,28 +38,24 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.`when` as whenever
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
-import org.mockito.Mockito.`when` as whenever
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 
-
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
+@Config(sdk = [36]) // BAKLAVA
 class ShadePanelsFragmentTest {
 
-    @get:Rule
-    val setFlagsRule = SetFlagsRule()
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
-    @get:Rule
-    val mockitoRule: MockitoRule? = MockitoJUnit.rule()
+    @get:Rule val mockitoRule: MockitoRule? = MockitoJUnit.rule()
 
-    @Mock
-    private lateinit var mockDeviceStateManager: DeviceStateManager
+    @Mock private lateinit var mockDeviceStateManager: DeviceStateManager
 
     private lateinit var context: Context
     private lateinit var fragmentScenario: FragmentScenario<ShadePanelsFragment>
@@ -118,9 +113,10 @@ class ShadePanelsFragmentTest {
     fun searchIndexProvider_sceneContainerEnabled_isIndexed() {
         val allKeys =
             ShadePanelsFragment.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
-                /* context = */ context,
-                /* enabled = */ true
-            ).map { it.key }
+                    /* context = */ context,
+                    /* enabled = */ true,
+                )
+                .map { it.key }
         val nonIndexableKeys =
             ShadePanelsFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(context)
 
@@ -133,9 +129,10 @@ class ShadePanelsFragmentTest {
     fun searchIndexProvider_sceneContainerDisabled_isNotIndexed() {
         val allKeys =
             ShadePanelsFragment.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
-                /* context = */ context,
-                /* enabled = */ true
-            ).map { it.key }
+                    /* context = */ context,
+                    /* enabled = */ true,
+                )
+                .map { it.key }
         val nonIndexableKeys =
             ShadePanelsFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(context)
 
@@ -154,7 +151,7 @@ class ShadePanelsFragmentTest {
         Settings.Secure.putInt(
             context.contentResolver,
             Settings.Secure.DUAL_SHADE,
-            if (dualShadeEnabled) 1 else 0
+            if (dualShadeEnabled) 1 else 0,
         )
         fragmentScenario = launchFragmentInContainer(themeResId = R.style.Theme_Panel)
     }
