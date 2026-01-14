@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"ಫೇಸ್ ಅನ್‌ಲಾಕ್ ಅನ್ನು ಸೆಟಪ್ ಮಾಡಿ"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"ಫೇಸ್ ಅನ್‌ಲಾಕ್ ಬಳಸಿ"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"ಫೇಸ್"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"ಫೇಸ್ ಅನ್ನು ಬಳಸಿ"</string>
@@ -625,7 +624,7 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"ಇನ್ನೊಂದನ್ನು ಸೇರಿಸಿ"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"ಮುಂದೆ"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"ಸ್ಕ್ರೀನ್ ಲಾಕ್ ಆಯ್ಕೆಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ. ಇನ್ನಷ್ಟು ತಿಳಿಯಲು, ನಿಮ್ಮ ಸಂಸ್ಥೆಯ ನಿರ್ವಾಹಕರನ್ನು ಸಂಪರ್ಕಿಸಿ."</string>
-    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"ಖರೀದಿಗಳನ್ನು ದೃಢೀಕರಿಸಲು ಮತ್ತು ಆ್ಯಪ್ ಅನ್ನು ಪ್ರವೇಶಿಸಲು ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್ನು ಈಗಲೂ ನೀವು ಬಳಸಬಹುದು."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"ಖರೀದಿಗಳನ್ನು ದೃಢೀಕರಿಸಲು ಮತ್ತು ಆ್ಯಪ್ ಅನ್ನು ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಲು ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್ನು ಈಗಲೂ ನೀವು ಬಳಸಬಹುದು."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ಬೆರಳನ್ನು ಮೇಲಕ್ಕೆ ಎತ್ತಿರಿ, ನಂತರ ಮತ್ತೊಮ್ಮೆ ಸೆನ್ಸರ್ ಅನ್ನು ಸ್ಪರ್ಶಿಸಿ"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಸೆನ್ಸರ್ ಅನ್ನು ಬಳಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"ರಿಪೇರಿ ಮಾಡುವವರನ್ನು ಸಂಪರ್ಕಿಸಿ."</string>
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"ಆಫ್"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"ಮೊಬೈಲ್ ಡೇಟಾ ನೆಟ್‌ವರ್ಕ್‌ ಪ್ರಕಾರ"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"ಮೊಬೈಲ್ ಧ್ವನಿ ನೆಟ್‌ವರ್ಕ್‌ ಪ್ರಕಾರ"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"ಆಪರೇಟರ್ ಮಾಹಿತಿ"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"ಪಿನ್‌ ಪರಿಶೀಲಿಸಿ"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"ಪಾಸ್‌ವರ್ಡ್‌ ಪರಿಶೀಲಿಸಿ"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"ನೀವೆಂದು ದೃಢೀಕರಿಸಿ"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Google ಖಾತೆಗಳು, ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಮತ್ತು ಇನ್ನಷ್ಟನ್ನು ವರ್ಗಾಯಿಸಲು, ನಿಮ್ಮ ಇತರ ಸಾಧನದ ಪ್ಯಾಟರ್ನ್ ಅನ್ನು ನಮೂದಿಸಿ. ನಿಮ್ಮ ಪ್ಯಾಟರ್ನ್ ಅನ್ನು ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಲಾಗಿದೆ."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Google ಖಾತೆಗಳು, ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಮತ್ತು ಇನ್ನಷ್ಟನ್ನು ವರ್ಗಾಯಿಸಲು, ನಿಮ್ಮ ಇತರ ಸಾಧನದ PIN ಅನ್ನು ನಮೂದಿಸಿ. ನಿಮ್ಮ ಪಿನ್ ಅನ್ನು ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಲಾಗಿದೆ."</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Google ಖಾತೆಗಳು, ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಮತ್ತು ಇನ್ನಷ್ಟನ್ನು ವರ್ಗಾಯಿಸಲು, ನಿಮ್ಮ ಇತರ ಸಾಧನದ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ನಮೂದಿಸಿ. ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಲಾಗಿದೆ."</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"ಈ ಸಾಧನವನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಪ್ಯಾಟರ್ನ್ ಬಳಸಿ"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"ಈ ಸಾಧನವನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡುವುದಕ್ಕೂ ಪಿನ್ ಬಳಸಿ"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"ಈ ಸಾಧನವನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಪಾಸ್‌ವರ್ಡ್ ಬಳಸಿ"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"ಪ್ಯಾಟರ್ನ್‌ ಪರಿಶೀಲಿಸಿ"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"ಪಿನ್‌ ಪರಿಶೀಲಿಸಿ"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"ಪಾಸ್‌ವರ್ಡ್‌ ಪರಿಶೀಲಿಸಿ"</string>
@@ -1993,7 +2002,7 @@
     <string name="app_factory_reset" msgid="8974044931667015201">"ನವೀಕರಣಗಳನ್ನು ಅನ್‌ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ"</string>
     <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"ನಿರ್ಬಂಧಿಸಲಾದ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಅನುಮತಿಸಿ"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"ನೀವು ಆಯ್ಕೆ ಮಾಡಿದ ಕೆಲವು ಚಟುವಟಿಕೆಗಳು ಡಿಫಾಲ್ಟ್ ಆಗಿ ಈ ಆ್ಯಪ್‌ನಲ್ಲಿ ತೆರೆಯುತ್ತವೆ."</string>
-    <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"ಈ ಆ್ಯಪ್‌ ಅನ್ನು ಅನುಮತಿಸಲು ನೀವು ವಿಜೆಟ್‌ಗಳನ್ನು ರಚಿಸಲು ಮತ್ತು ಅವುಗಳ ಡೇಟಾವನ್ನು ಪ್ರವೇಶಿಸಲು ಆಯ್ಕೆಮಾಡಿಕೊಂಡಿರುವಿರಿ."</string>
+    <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"ವಿಜೆಟ್‌ಗಳನ್ನು ರಚಿಸಲು ಮತ್ತು ಅವುಗಳ ಡೇಟಾವನ್ನು ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಲು ಈ ಆ್ಯಪ್‌ ಅನ್ನು ಅನುಮತಿಸಲು ನೀವು ಆಯ್ಕೆ ಮಾಡಿಕೊಂಡಿರುವಿರಿ."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"ಡೀಫಾಲ್ಟ್‌ಗಳನ್ನು ಹೊಂದಿಸಲಾಗಿಲ್ಲ."</string>
     <string name="clear_activities" msgid="488089228657585700">"ಡೀಫಾಲ್ಟ್ ಆದ್ಯತೆಗಳನ್ನು ತೆರವುಗೊಳಿಸಿ"</string>
     <string name="screen_compatibility_text" msgid="5915767835411020274">"ಈ ಆ್ಯಪ್ ಅನ್ನು ನಿಮ್ಮ ಪರದೆಗೆ ಅನುಗುಣವಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸದೆ ಇರಬಹುದು. ನಿಮ್ಮ ಪರದೆಗೆ ಇದು ಹೇಗೆ ಹೊಂದಿಕೊಳ್ಳುತ್ತದೆ ಎಂಬುದನ್ನು ನೀವು ಇಲ್ಲಿ ನಿಯಂತ್ರಿಸಬಹುದು."</string>
@@ -2041,8 +2050,8 @@
     <string name="insufficient_storage" msgid="8115088042669030558">"ಸಾಕಷ್ಟು ಸಂಗ್ರಹಣೆ ಸ್ಥಳ ಇಲ್ಲ"</string>
     <string name="does_not_exist" msgid="6499163879348776120">"ಆ್ಯಪ್‌ ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ."</string>
     <string name="invalid_location" msgid="8013853455355520557">"ಸ್ಥಾಪನೆ ಸ್ಥಾನವು ಮಾನ್ಯವಾಗಿಲ್ಲ."</string>
-    <string name="system_package" msgid="7559476279008519360">"ಸಿಸ್ಟಂ ನವೀಕರಣಗಳನ್ನು ಬಾಹ್ಯ ಮಾಧ್ಯಮದಲ್ಲಿ ಸ್ಥಾಪಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
-    <string name="move_error_device_admin" msgid="1561502976834303626">"ಸಾಧನ ನಿರ್ವಹಣಾ ಆ್ಯಪ್‌ ಅನ್ನು ಬಾಹ್ಯ ಮಾಧ್ಯಮದಲ್ಲಿ ಸ್ಥಾಪಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
+    <string name="system_package" msgid="7559476279008519360">"ಸಿಸ್ಟಂ ಅಪ್‌ಡೇಟ್‌ಗಳನ್ನು ಬಾಹ್ಯ ಮಾಧ್ಯಮದಲ್ಲಿ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
+    <string name="move_error_device_admin" msgid="1561502976834303626">"ಸಾಧನ ನಿರ್ವಹಣಾ ಆ್ಯಪ್‌ ಅನ್ನು ಬಾಹ್ಯ ಮಾಧ್ಯಮದಲ್ಲಿ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
     <string name="force_stop_dlg_title" msgid="86745852555490146">"ಬಲವಂತವಾಗಿ ಸ್ಥಗಿತಗೊಳಿಸಬೇಕೆ?"</string>
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"ಆ್ಯಪ್‌ ಅನ್ನು ಬಲವಂತವಾಗಿ ಸ್ಥಗಿತಗೊಳಿಸಿದರೆ, ಅದು ಸರಿಯಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸದಿರಬಹುದು."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"ಆ್ಯಪ್‌ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"</string>
@@ -2352,7 +2361,7 @@
     <string name="widget_picker_title" msgid="7641298325488989676">"ವಿಜೆಟ್ ಅನ್ನು ಆರಿಸಿ"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"ವಿಜೆಟ್ ರಚಿಸಿ ಮತ್ತು ಆ್ಯಕ್ಸೆಸ್ ಅನುಮಿತಿಸಬಹುದೇ?"</string>
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"ನೀವು ವಿಜೆಟ್ ಅನ್ನು ರಚಿಸಿದ ನಂತರ, ಪ್ರದರ್ಶಿಸುವ ಎಲ್ಲಾ ಡೇಟಾವನ್ನು ಆ್ಯಪ್ ಪ್ರವೇಶಿಸಬಹುದು.\n\nಆ್ಯಪ್: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nವಿಜೆಟ್: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
-    <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"ವಿಜೆಟ್‌ಗಳನ್ನು ರಚಿಸಲು ಮತ್ತು ಅವುಗಳ ಡೇಟಾವನ್ನು ಪ್ರವೇಶಿಸಲು <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> ಅನ್ನು ಯಾವಾಗಲೂ ಅನುಮತಿಸಿ"</string>
+    <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"ವಿಜೆಟ್‌ಗಳನ್ನು ರಚಿಸಲು ಮತ್ತು ಅವುಗಳ ಡೇಟಾವನ್ನು ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಲು <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> ಅನ್ನು ಯಾವಾಗಲೂ ಅನುಮತಿಸಿ"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"ಬಳಕೆಯ ಅಂಕಿಅಂಶಗಳು"</string>
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"ಬಳಕೆಯ ಸಮಯದ ಪ್ರಕಾರ ವಿಂಗಡಿಸಿ"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"ಕೊನೆಯ ಬಾರಿ ಬಳಸಿದ ಪ್ರಕಾರ ವಿಂಗಡಿಸಿ"</string>
@@ -2533,6 +2542,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"ತ್ವರಿತ ಸೆಟ್ಟಿಂಗ್‍ಗಳು"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‌ನ ಮೇಲಿನಿಂದ ಕೆಳಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ}one{ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‌ನ ಮೇಲಿನಿಂದ # ಬೆರಳುಗಳಿಂದ ಕೆಳಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ}other{ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‌ನ ಮೇಲಿನಿಂದ # ಬೆರಳುಗಳಿಂದ ಕೆಳಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‌ನ ಮೇಲಿನಿಂದ ಕೆಳಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ. ನೀವು ಸಾಧನದ ಸೆಟಪ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದ ನಂತರ ಈ ಶಾರ್ಟ್‌ಕಟ್ ಲಭ್ಯವಾಗುತ್ತದೆ.}one{ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‌ನ ಮೇಲಿನಿಂದ # ಬೆರಳುಗಳಿಂದ ಕೆಳಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ. ನೀವು ಸಾಧನದ ಸೆಟಪ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದ ನಂತರ ಈ ಶಾರ್ಟ್‌ಕಟ್ ಲಭ್ಯವಾಗುತ್ತದೆ.}other{ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‌ನ ಮೇಲಿನಿಂದ # ಬೆರಳುಗಳಿಂದ ಕೆಳಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ. ನೀವು ಸಾಧನದ ಸೆಟಪ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದ ನಂತರ ಈ ಶಾರ್ಟ್‌ಕಟ್ ಲಭ್ಯವಾಗುತ್ತದೆ.}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"ತ್ವರಿತ ಸೆಟ್ಟಿಂಗ್‍ಗಳು"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"ವಾಲ್ಯೂಮ್ ಕೀಗಳು"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"ವಾಲ್ಯೂಮ್ ಕೀಗಳು"</string>
@@ -3118,7 +3131,7 @@
     <string name="tts_install_voice_title" msgid="5133545696447933812">"ಧ್ವನಿಗಳು"</string>
     <string name="tts_spoken_language" msgid="4652894245474520872">"ಆಡುಭಾಷೆ"</string>
     <string name="tts_install_voices_title" msgid="6505257816336165782">"ಧ್ವನಿಗಳನ್ನು ಸ್ಥಾಪಿಸಿ"</string>
-    <string name="tts_install_voices_text" msgid="902408506519246362">"ಧ್ವನಿಗಳನ್ನು ಸ್ಥಾಪಿಸಲು <xliff:g id="TTS_APP_NAME">%s</xliff:g> ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಮುಂದುವರಿಯಿರಿ"</string>
+    <string name="tts_install_voices_text" msgid="902408506519246362">"ಧ್ವನಿಗಳನ್ನು ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಲು <xliff:g id="TTS_APP_NAME">%s</xliff:g> ಆ್ಯಪ್‌ಗೆ ಮುಂದುವರಿಯಿರಿ"</string>
     <string name="tts_install_voices_open" msgid="919034855418197668">"ಆ್ಯಪ್‌ ತೆರೆಯಿರಿ"</string>
     <string name="tts_install_voices_cancel" msgid="5179154684379560628">"ರದ್ದುಮಾಡಿ"</string>
     <string name="tts_reset" msgid="9047681050813970031">"ಮರುಹೊಂದಿಸಿ"</string>
@@ -3224,7 +3237,7 @@
     <string name="device_admin_status" msgid="6332571781623084064">"ಈ ನಿರ್ವಹಣಾ ಆ್ಯಪ್‌ ಸಕ್ರಿಯವಾಗಿದೆ ಮತ್ತು ಈ ಕೆಳಗಿನ ಕಾರ್ಯಾಚರಣೆಗಳನ್ನು ಮಾಡಲು <xliff:g id="APP_NAME">%1$s</xliff:g> ಗೆ ಅನುಮತಿ ನೀಡುತ್ತದೆ:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"ಪ್ರೊಫೈಲ್ ನಿರ್ವಾಹಕವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುವುದೇ?"</string>
     <string name="supervision_confirmation_title" msgid="8094974031562728585">"ಈ ಸಾಧನವನ್ನು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಲು <xliff:g id="APP_NAME">%1$s</xliff:g> ಗೆ ಅನುಮತಿಸಬೇಕೇ?"</string>
-    <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಲು ಅನುಮತಿಸುವುದೇ?"</string>
+    <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಲು ಅನುಮತಿಸಬೇಕೆ?"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"ಇದನ್ನು ಮುಂದುವರಿಸಿದರೆ, ನಿಮ್ಮ ಬಳಕೆದಾರರನ್ನು ನಿಮ್ಮ ನಿರ್ವಾಹಕರು ನಿರ್ವಹಿಸುತ್ತಾರೆ ಮತ್ತು ಇದು ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಡೇಟಾ ಮಾತ್ರವಲ್ಲದೆ, ಸಂಬಂಧಿತ ಡೇಟಾವನ್ನೂ ಸಹ ಸಂಗ್ರಹಣೆ ಮಾಡಬಲ್ಲದು.\n\nನಿಮ್ಮ ನಿರ್ವಾಹಕರು ನೆಟ್‌ವರ್ಕ್ ಚಟುವಟಿಕೆ ಮತ್ತು ನಿಮ್ಮ ಸಾಧನದ ಸ್ಥಳ ಮಾಹಿತಿ ಸೇರಿದಂತೆ ಈ ಬಳಕೆದಾರರಿಗೆ ಸಂಬಂಧಿಸಿದ ಸೆಟ್ಟಿಂಗ್‌ಗಳು, ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಮತ್ತು ಡೇಟಾದ ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಬಹುದು ಮತ್ತು ನಿರ್ವಹಿಸಬಹುದು."</string>
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"ಇತರ ಆಯ್ಕೆಗಳನ್ನು ನಿಮ್ಮ ನಿರ್ವಾಹಕರು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿದ್ದಾರೆ"</string>
     <string name="admin_more_details" msgid="6091028872148388357">"ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿದ ಸ್ಕ್ರೀನ್ ಟೈಮ್‌ಔಟ್ ಆಯ್ಕೆಗಳ ಕುರಿತು ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ"</string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"ಇತರ ಬಳಕೆದಾರರು"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"ಅತಿಥಿ ಚಟುವಟಿಕೆಯನ್ನು ಅಳಿಸಿ"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ಅತಿಥಿ ಮೋಡ್‌ನಿಂದ ನಿರ್ಗಮಿಸುವಾಗ ಎಲ್ಲಾ ಅತಿಥಿ ಆ್ಯಪ್‌ಗಳು ಮತ್ತು ಡೇಟಾವನ್ನು ಅಳಿಸಿ"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ಅತಿಥಿ ಚಟುವಟಿಕೆಯನ್ನು ಅಳಿಸಬೇಕೆ?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"ಈ ಅತಿಥಿ ಸೆಶನ್‌ನಿಂದ ಆ್ಯಪ್‌ಗಳು ಮತ್ತು ಡೇಟಾವನ್ನು ಈಗ ಅಳಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ನೀವು ಅತಿಥಿ ಮೋಡ್‌ನಿಂದ ನಿರ್ಗಮಿಸಿದ ಪ್ರತಿ ಬಾರಿ ಭವಿಷ್ಯದ ಎಲ್ಲಾ ಅತಿಥಿ ಚಟುವಟಿಕೆಯನ್ನು ಅಳಿಸಲಾಗುತ್ತದೆ"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"ಅಳಿಸಿ, ಅತಿಥಿ, ಚಟುವಟಿಕೆ, ತೆಗೆದುಹಾಕಿ, ಡೇಟಾ, ಸಂದರ್ಶಕರು, ಅಳಿಸಿಹಾಕಿ"</string>
@@ -3936,6 +3955,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"ದೀರ್ಘ ಸಂದೇಶಗಳ ತ್ವರಿತ ರೀಕ್ಯಾಪ್ ಪಡೆಯಿರಿ"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"ನೋಟಿಫಿಕೇಶನ್ ಸಾರಾಂಶಗಳನ್ನು ಬಳಸಿ"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"ತ್ವರಿತ ರೀಕ್ಯಾಪ್‌ಗಳನ್ನು ಪಡೆಯಲು ದೀರ್ಘ ಸಂದೇಶಗಳನ್ನು ಮತ್ತು ಗುಂಪು ಸಂವಾದಗಳನ್ನು ಸಾರಾಂಶಗೊಳಿಸಿ.\n\nಸಾರಾಂಶಗಳು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ AI ಅನ್ನು ಬಳಸುತ್ತವೆ, ಇವು ಕೆಲವೊಮ್ಮೆ ತಪ್ಪುಗಳನ್ನು ಮಾಡಬಹುದು. ನಿಮ್ಮ ಸಂದೇಶಗಳನ್ನು ಎಂದಿಗೂ Google ಗೆ ಕಳುಹಿಸಲಾಗುವುದಿಲ್ಲ."</string>
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"ತ್ವರಿತ ರೀಕ್ಯಾಪ್‌ಗಳನ್ನು ಪಡೆಯಲು ದೀರ್ಘ ಸಂದೇಶಗಳು ಮತ್ತು ಗುಂಪು ಸಂವಾದಗಳ ಸಾರಾಂಶವನ್ನು ಪಡೆಯಿರಿ.\n\nಸಾರಾಂಶಗಳನ್ನು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿನ ಆ್ಯಪ್‌ಗಳು ಅಥವಾ AI ಒದಗಿಸುತ್ತವೆ, ಹಾಗಾಗಿ ಅದರಲ್ಲಿ ತಪ್ಪುಗಳಿರಬಹುದು. ನಿಮ್ಮ ಸಂದೇಶಗಳನ್ನು ಎಂದಿಗೂ Google ಗೆ ಕಳುಹಿಸಲಾಗುವುದಿಲ್ಲ."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"ಈ ಆ್ಯಪ್‌‌ಗಳಿಂದ ಬರುವ ಸಂಭಾಷಣೆ ನೋಟಿಫಿಕೇಶನ್‌ಗಳನ್ನು ಸಾರಾಂಶಗೊಳಿಸಲಾಗುವುದಿಲ್ಲ"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"ಆ್ಯಪ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"ನೋಟಿಫಿಕೇಶನ್ ಸಾರಾಂಶಗಳಿಗೆ ಆ್ಯಪ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ"</string>
@@ -4351,12 +4371,12 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"ಆ್ಯಪ್ ಪಿನ್ನಿಂಗ್"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"ನೀವು ಆ್ಯಪ್ ಅನ್ನು ಅನ್‌ಪಿನ್ ಮಾಡುವವರೆಗೆ ಪ್ರಸ್ತುತ ಆ್ಯಪ್ ಅನ್ನು ನೋಡುತ್ತಿರಲು ಆ್ಯಪ್ ಪಿನ್ನಿಂಗ್ ನಿಮಗೆ ಅನುಮತಿಸುತ್ತದೆ. ಉದಾಹರಣೆಗೆ, ವಿಶ್ವಾಸಾರ್ಹ ಸ್ನೇಹಿತರೊಂದಿಗೆ ನಿರ್ದಿಷ್ಟ ಆಟವನ್ನು ಆಡಲು ನೀವು ಈ ಫೀಚರ್ ಬಳಸಬಹುದು."</string>
     <string name="screen_pinning_description" msgid="5822120806426139396">"ಆ್ಯಪ್ ಅನ್ನು ಪಿನ್ ಮಾಡಿದಾಗ, ಪಿನ್ ಮಾಡಲಾದ ಆ್ಯಪ್ ಇತರ ಆ್ಯಪ್‌ಗಳನ್ನು ತೆರೆಯಬಹುದು ಮತ್ತು ವೈಯಕ್ತಿಕ ಡೇಟಾಗೆ ಆ್ಯಕ್ಸೆಸ್ ದೊರಕಬಹುದು. \n\nಆ್ಯಪ್ ಪಿನ್ನಿಂಗ್ ಅನ್ನು ಬಳಸಲು: 	\n{0,number,integer}. ಆ್ಯಪ್ ಪಿನ್ನಿಂಗ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು 	\n{1,number,integer}. ಸಮಗ್ರ ನೋಟವನ್ನು ತೆರೆಯಿರಿ 	\n{2,number,integer}. ಸ್ಕ್ರೀನ್‌ನ ಮೇಲ್ಭಾಗದಲ್ಲಿರುವ ಆ್ಯಪ್ ಐಕಾನ್ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ, ನಂತರ ಪಿನ್ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
-    <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"ಆ್ಯಪ್ ಅನ್ನು ಪಿನ್ ಮಾಡಿದಾಗ, ಪಿನ್ ಮಾಡಲಾದ ಆ್ಯಪ್ ಇತರ ಆ್ಯಪ್‌ಗಳನ್ನು ತೆರೆಯಬಹುದು ಮತ್ತು ವೈಯಕ್ತಿಕ ಡೇಟಾಗೆ ಆ್ಯಕ್ಸೆಸ್ ದೊರಕಬಹುದು. \n\nನಿಮ್ಮ ಸಾಧನವನ್ನು ಇತರರೊಂದಿಗೆ ಸುರಕ್ಷಿತವಾಗಿ ಹಂಚಿಕೊಳ್ಳಲು ನೀವು ಬಯಸಿದರೆ, ಅದರ ಬದಲಿಗೆ ಅತಿಥಿ ಪ್ರೊಫೈಲ್ ಬಳಸಲು ಪ್ರಯತ್ನಿಸಿ. \n\nಆ್ಯಪ್ ಪಿನ್ನಿಂಗ್ ಅನ್ನು ಬಳಸಲು: 	\n{0,number,integer}. ಆ್ಯಪ್ ಪಿನ್ನಿಂಗ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು 	\n{1,number,integer}. ಸಮಗ್ರ ನೋಟವನ್ನು ತೆರೆಯಿರಿ 	\n{2,number,integer}. ಸ್ಕ್ರೀನ್‌ನ ಮೇಲ್ಭಾಗದಲ್ಲಿರುವ ಆ್ಯಪ್ ಐಕಾನ್ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ, ನಂತರ ಪಿನ್ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
+    <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"ಆ್ಯಪ್ ಅನ್ನು ಪಿನ್ ಮಾಡಿದಾಗ, ಪಿನ್ ಮಾಡಲಾದ ಆ್ಯಪ್ ಇತರ ಆ್ಯಪ್‌ಗಳನ್ನು ತೆರೆಯಬಹುದು ಮತ್ತು ವೈಯಕ್ತಿಕ ಡೇಟಾಗೆ ಆ್ಯಕ್ಸೆಸ್ ದೊರಕಬಹುದು. \n\nನಿಮ್ಮ ಸಾಧನವನ್ನು ಇತರರೊಂದಿಗೆ ಸುರಕ್ಷಿತವಾಗಿ ಹಂಚಿಕೊಳ್ಳಲು ನೀವು ಬಯಸಿದರೆ, ಅದರ ಬದಲಿಗೆ ಅತಿಥಿ ಪ್ರೊಫೈಲ್ ಬಳಸಲು ಪ್ರಯತ್ನಿಸಿ. \n\nಆ್ಯಪ್ ಪಿನ್ನಿಂಗ್ ಅನ್ನು ಬಳಸಲು: 	\n{0,number,integer}. ಆ್ಯಪ್ ಪಿನ್ನಿಂಗ್ ಅನ್ನು ಆನ್ ಮಾಡಿ 	\n{1,number,integer}. ಸಮಗ್ರ ನೋಟವನ್ನು ತೆರೆಯಿರಿ 	\n{2,number,integer}. ಸ್ಕ್ರೀನ್‌ನ ಮೇಲ್ಭಾಗದಲ್ಲಿರುವ ಆ್ಯಪ್ ಐಕಾನ್ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ, ನಂತರ ಪಿನ್ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"ಆ್ಯಪ್ ಅನ್ನು ಪಿನ್ ಮಾಡಿರುವಾಗ: \n\n•		ವೈಯಕ್ತಿಕ ಡೇಟಾವನ್ನು ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಬಹುದು \n		(ಉದಾ, ಸಂಪರ್ಕಗಳು ಮತ್ತು ಇಮೇಲ್ ಕಂಟೆಂಟ್‍) \n•		ಪಿನ್ ಮಾಡಿದ ಆ್ಯಪ್ ಇತರೆ ಆ್ಯಪ್‌ಗಳನ್ನು ತೆರೆಯಬಹುದು\n\nನಿಮ್ಮ ವಿಶ್ವಾಸಾರ್ಹ ಜನರೊಂದಿಗೆ ಮಾತ್ರ ಆ್ಯಪ್ ಪಿನ್ನಿಂಗ್ ಬಳಸಿ."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"ಅನ್‌ಪಿನ್ ಮಾಡಲು ಅನ್‌ಲಾಕ್ ಪ್ಯಾಟರ್ನ್ ಕೇಳಿ"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"ಅನ್‌ಪಿನ್‌ ಮಾಡಲು ಪಿನ್‌ ಕೇಳಿ"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"ಅನ್‌ಪಿನ್ ಮಾಡಲು ಪಾಸ್‌ವರ್ಡ್ ಕೇಳು"</string>
-    <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"ಅನ್‌ಪಿನ್ ಮಾಡುವಾಗ ಸಾಧನ ಲಾಕ್ ಮಾಡು"</string>
+    <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"ಅನ್‌ಪಿನ್ ಮಾಡುವಾಗ ಸಾಧನ ಲಾಕ್ ಮಾಡಿ"</string>
     <string name="confirm_sim_deletion_title" msgid="7262127071183428893">"ನಿಮ್ಮ eSIM ಅನ್ನು ಅಳಿಸಲು ನೀವು ಬಯಸುತ್ತೀರಿ ಎಂಬುದನ್ನು ದೃಢೀಕರಿಸಿ"</string>
     <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"eSIM ಅನ್ನು ಅಳಿಸುವ ಮೊದಲು ಇದು ನೀವೇ ಎಂದು ದೃಢೀಕರಿಸಿ"</string>
     <string name="memtag_title" msgid="5096176296797727201">"ಸುಧಾರಿತ ಮೆಮೊರಿ ರಕ್ಷಣೆ ಬೀಟಾ"</string>
@@ -4421,6 +4441,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"ಅನುಮತಿಗಳನ್ನು ತೆಗೆದುಹಾಕಿ, ತಾತ್ಕಾಲಿಕ ಫೈಲ್‌ಗಳನ್ನು ಅಳಿಸಿ ಹಾಗೂ ಅಧಿಸೂಚನೆಗಳನ್ನು ನಿಲ್ಲಿಸಿ"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"ಬಳಸದಿದ್ದರೆ ಆ್ಯಪ್ ಅನ್ನು ನಿರ್ವಹಿಸಿ"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"ಅನುಮತಿಗಳನ್ನು ತೆಗೆದುಹಾಕಿ, ತಾತ್ಕಾಲಿಕ ಫೈಲ್‌ಗಳನ್ನು ಅಳಿಸಿ, ನೋಟಿಫಿಕೇಶನ್‌ಗಳನ್ನು ನಿಲ್ಲಿಸಿ ಮತ್ತು ಆ್ಯಪ್ ಅನ್ನು ಆರ್ಕೈವ್ ಮಾಡಿ"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"ಎಲ್ಲಾ ಆ್ಯಪ್‍ಗಳು"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ಇನ್‌ಸ್ಟಾಲ್ ಆದ ಆ್ಯಪ್‌ಗಳು"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ಇನ್‌ಸ್ಟಂಟ್ ಆ್ಯಪ್‌ಗಳು"</string>
@@ -4627,7 +4653,7 @@
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"ನಿಮ್ಮ ನಿರ್ವಾಹಕರು ಸೆಟ್ಟಿಂಗ್‌ಗಳು, ಅನುಮತಿಗಳು, ಕಾರ್ಪೊರೇಟ್‌ ಆ್ಯಕ್ಸೆಸ್, ನೆಟ್‌ವರ್ಕ್‌ ಚಟುವಟಿಕೆ ಮತ್ತು ಸಾಧನದ ಸ್ಥಳ ಮಾಹಿತಿಯನ್ನು ಒಳಗೊಂಡಂತೆ ನಿಮ್ಮ ಕೆಲಸದ ಪ್ರೊಫೈಲ್‌ಗೆ ಸಂಬಂಧಿಸಿದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಮತ್ತು ಡೇಟಾವನ್ನು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಬಹುದು ಮತ್ತು ನಿರ್ವಹಿಸಬಹುದು."</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"ನಿಮ್ಮ ನಿರ್ವಾಹಕರು ಸೆಟ್ಟಿಂಗ್‌ಗಳು, ಅನುಮತಿಗಳು, ಕಾರ್ಪೊರೇಟ್‌ ಆ್ಯಕ್ಸೆಸ್, ನೆಟ್‌‌ವರ್ಕ್‌ ಚಟುವಟಿಕೆ ಮತ್ತು ಸಾಧನದ ಸ್ಥಳ ಮಾಹಿತಿಯನ್ನು ಒಳಗೊಂಡಂತೆ ಈ ಬಳಕೆದಾರರಿಗೆ ಸಂಬಂಧಿಸಿದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಮತ್ತು ಡೇಟಾವನ್ನು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಬಹುದು ಮತ್ತು ನಿರ್ವಹಿಸಬಹುದು."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"ನಿಮ್ಮ ನಿರ್ವಾಹಕರು ಸೆಟ್ಟಿಂಗ್‌ಗಳು, ಅನುಮತಿಗಳು, ಕಾರ್ಪೊರೇಟ್‌ ಆ್ಯಕ್ಸೆಸ್, ನೆಟ್‌ವರ್ಕ್‌ ಚಟುವಟಿಕೆ ಮತ್ತು ಸಾಧನದ ಸ್ಥಳ ಮಾಹಿತಿಯನ್ನು ಒಳಗೊಂಡಂತೆ ಈ ಸಾಧನಕ್ಕೆ ಸಂಬಂಧಿಸಿದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಮತ್ತು ಡೇಟಾವನ್ನು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಬಹುದು ಮತ್ತು ನಿರ್ವಹಿಸಬಹುದು."</string>
-    <string name="admin_financed_message" msgid="1156197630834947884">"ನಿಮ್ಮ ಸಾಧನ ನಿರ್ವಾಹಕರಿಗೆ ಈ ಸಾಧನದ ಜೊತೆಗೆ ಸಂಯೋಜಿತವಾಗಿರುವ ಡೇಟಾವನ್ನು ಪ್ರವೇಶಿಸಲು, ಆ್ಯಪ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಲು ಮತ್ತು ಈ ಸಾಧನಗಳ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ."</string>
+    <string name="admin_financed_message" msgid="1156197630834947884">"ನಿಮ್ಮ ಸಾಧನ ನಿರ್ವಾಹಕರಿಗೆ ಈ ಸಾಧನದ ಜೊತೆಗೆ ಸಂಯೋಜಿತವಾಗಿರುವ ಡೇಟಾವನ್ನು ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಲು, ಆ್ಯಪ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಲು ಮತ್ತು ಈ ಸಾಧನಗಳ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ."</string>
     <string name="disabled_by_advanced_protection_title" msgid="9051476417559262469">"ಸುಧಾರಿತ ಸಂರಕ್ಷಣೆಯಿಂದ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ"</string>
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"ನಿಮ್ಮ ಸುರಕ್ಷತೆಗಾಗಿ, ಸುಧಾರಿತ ಸಂರಕ್ಷಣೆಗೆ ಈ ಸೆಟ್ಟಿಂಗ್ ಆನ್‌ನಲ್ಲಿಯೇ ಇರಬೇಕಾಗುತ್ತದೆ"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"ನಿಮ್ಮ ಸುರಕ್ಷತೆಗಾಗಿ, ಸುಧಾರಿತ ಸಂರಕ್ಷಣೆಗೆ ಈ ಸೆಟ್ಟಿಂಗ್ ಆಫ್‌ನಲ್ಲಿಯೇ ಇರಬೇಕಾಗುತ್ತದೆ"</string>
@@ -5614,12 +5640,12 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"ಬೆಡ್‌ಟೈಮ್ ಮೋಡ್ ಆನ್ ಇರುವುದರಿಂದ ಲಭ್ಯವಿಲ್ಲ"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"ರೀಸೆಟ್ ನೋಟಿಫಿಕೇಶನ್ ಪ್ರಾಮುಖ್ಯತೆ ಪೂರ್ಣಗೊಂಡಿದೆ."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"ಆ್ಯಪ್‌ಗಳು"</string>
-    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"ಒಂದು ಸಾಧನವು ನಿಮ್ಮ ಸಂದೇಶಗಳಿಗೆ ಪ್ರವೇಶಿಸಲು ಬಯಸುತ್ತದೆ. ವಿವರಗಳಿಗಾಗಿ ಟ್ಯಾಪ್ ಮಾಡಿ."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"ಒಂದು ಸಾಧನವು ನಿಮ್ಮ ಸಂದೇಶಗಳಿಗೆ ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಲು ಬಯಸುತ್ತದೆ. ವಿವರಗಳಿಗಾಗಿ ಟ್ಯಾಪ್ ಮಾಡಿ."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"ಸಂದೇಶಗಳಿಗೆ ಪ್ರವೇಶವನ್ನು ಅನುಮತಿಸಬೇಕೇ?"</string>
     <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"ಬ್ಲೂಟೂತ್ ಸಾಧನ, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ನಿಮ್ಮ ಸಂದೇಶಗಳಿಗೆ ಪ್ರವೇಶಿಸಲು ಬಯಸುತ್ತದೆ.\n\nನೀವು ಈ ಮೊದಲು <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ಗೆ ಕನೆಕ್ಟ್ ಆಗಿರಲಿಲ್ಲ."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"ಒಂದು ಸಾಧನವು ನಿಮ್ಮ ಸಂಪರ್ಕಗಳು ಮತ್ತು ಕರೆಯ ಲಾಗ್‌ಗೆ ಪ್ರವೇಶಿಸಲು ಬಯಸುತ್ತದೆ. ವಿವರಗಳಿಗಾಗಿ ಟ್ಯಾಪ್ ಮಾಡಿ."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"ಒಂದು ಸಾಧನವು ನಿಮ್ಮ ಸಂಪರ್ಕಗಳು ಮತ್ತು ಕರೆಯ ಲಾಗ್‌ಗೆ ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಲು ಬಯಸುತ್ತದೆ. ವಿವರಗಳಿಗಾಗಿ ಟ್ಯಾಪ್ ಮಾಡಿ."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"ಸಂಪರ್ಕಗಳು ಮತ್ತು ಕರೆಯ ಲಾಗ್‌ಗೆ ಪ್ರವೇಶಿಸಲು ಅನುಮತಿಸಬೇಕೇ?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"ಬ್ಲೂಟೂತ್ ಸಾಧನ, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ನಿಮ್ಮ ಸಂಪರ್ಕಗಳು ಮತ್ತು ಕರೆಯ ಲಾಗ್ ಅನ್ನು ಪ್ರವೇಶಿಸಲು ಬಯಸುತ್ತದೆ. ಇದು ಒಳಬರುವ ಮತ್ತು ಹೊರಹೋಗುವ ಕರೆಗಳ ಡೇಟಾವನ್ನು ಒಳಗೊಂಡಿರುತ್ತದೆ.\n\nನೀವು ಈ ಮೊದಲು <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ಗೆ ಕನೆಕ್ಟ್ ಆಗಿರಲಿಲ್ಲ."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"ಬ್ಲೂಟೂತ್ ಸಾಧನ, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ನಿಮ್ಮ ಸಂಪರ್ಕಗಳು ಮತ್ತು ಕರೆಯ ಲಾಗ್ ಅನ್ನು ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಲು ಬಯಸುತ್ತದೆ. ಇದು ಒಳಬರುವ ಮತ್ತು ಹೊರಹೋಗುವ ಕರೆಗಳ ಡೇಟಾವನ್ನು ಒಳಗೊಂಡಿರುತ್ತದೆ.\n\nನೀವು ಈ ಮೊದಲು <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ಗೆ ಕನೆಕ್ಟ್ ಆಗಿರಲಿಲ್ಲ."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"ಪ್ರಖರತೆ"</string>
     <string name="category_name_lock_display" msgid="8310402558217129670">"ಲಾಕ್ ಡಿಸ್‌ಪ್ಲೇ"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"ನೋಟ"</string>
@@ -5661,6 +5687,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> ಗೆ 2G ಲಭ್ಯವಿರುವ ಅಗತ್ಯವಿದೆ"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"ಎನ್‌ಕ್ರಿಪ್ಟೆಡ್ ನೆಟ್‌ವರ್ಕ್ ಮಾತ್ರ ಅನುಮತಿಸಿ"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"ಇದು ಹೆಚ್ಚು ಸುರಕ್ಷಿತವಾಗಿದೆ ಆದರೆ ಕೆಲವು ಸ್ಥಳಗಳಲ್ಲಿ ನಿಮ್ಮ ಮೊಬೈಲ್ ನೆಟ್‌ವರ್ಕ್ ಕನೆಕ್ಷನ್ ಅನ್ನು ಮಿತಿಗೊಳಿಸಬಹುದು. ತುರ್ತು ಕರೆ ಮಾಡುವಿಕೆಯನ್ನು ಯಾವಾಗಲೂ ಅನುಮತಿಸಲಾಗುತ್ತದೆ."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"ಎಲ್ಲಾ ಸೇವೆಗಳು"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ಕ್ಲಿಪ್‌ಬೋರ್ಡ್ ಆ್ಯಕ್ಸೆಸ್ ಅನ್ನು ತೋರಿಸಿ"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"ಆ್ಯಪ್‌ಗಳು ನೀವು ನಕಲಿಸಿರುವ ಪಠ್ಯ, ಚಿತ್ರಗಳು ಅಥವಾ ಇತರ ವಿಷಯವನ್ನು ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಿದಾಗ ಸಂದೇಶವೊಂದನ್ನು ತೋರಿಸಿ"</string>
@@ -5688,9 +5728,9 @@
     <string name="next_page_content_description" msgid="1641835099813416294">"ಮುಂದಿನದು"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"ಬಣ್ಣ ಪೂರ್ವವೀಕ್ಷಣೆ"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"SIM ಆ್ಯಕ್ಸೆಸ್ ವಿನಂತಿ"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"ಸಾಧನವು ನಿಮ್ಮ SIM ಅನ್ನು ಪ್ರವೇಶಿಸಲು ಬಯಸುತ್ತದೆ. ವಿವರಗಳಿಗಾಗಿ ಟ್ಯಾಪ್ ಮಾಡಿ."</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"ಸಾಧನವು ನಿಮ್ಮ SIM ಅನ್ನು ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಲು ಬಯಸುತ್ತದೆ. ವಿವರಗಳಿಗಾಗಿ ಟ್ಯಾಪ್ ಮಾಡಿ."</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"SIM ಗೆ ಪ್ರವೇಶಾವಕಾಶವನ್ನು ಅನುಮತಿಸುವುದೇ?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"ಬ್ಲೂಟೂತ್ ಸಾಧನ, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ನಿಮ್ಮ SIM ನಿಂದ ಡೇಟಾವನ್ನು ಪ್ರವೇಶಿಸಲು ಬಯಸುತ್ತದೆ. ಇದು ನಿಮ್ಮ ಸಂಪರ್ಕಗಳನ್ನು ಒಳಗೊಂಡಿದೆ.\n\nಕನೆಕ್ಟ್ ಆದಾಗ, <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> ಗೆ ಮಾಡಿದ ಎಲ್ಲಾ ಕರೆಗಳನ್ನು <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ಸ್ವೀಕರಿಸುತ್ತದೆ."</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"ಬ್ಲೂಟೂತ್ ಸಾಧನ, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ನಿಮ್ಮ SIM ನಿಂದ ಡೇಟಾವನ್ನು ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಲು ಬಯಸುತ್ತದೆ. ಇದು ನಿಮ್ಮ ಸಂಪರ್ಕಗಳನ್ನು ಒಳಗೊಂಡಿದೆ.\n\nಕನೆಕ್ಟ್ ಆದಾಗ, <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> ಗೆ ಮಾಡಿದ ಎಲ್ಲಾ ಕರೆಗಳನ್ನು <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ಸ್ವೀಕರಿಸುತ್ತದೆ."</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"ಬ್ಲೂಟೂತ್ ಸಾಧನ ಲಭ್ಯವಿದೆ"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"ಸಂಪರ್ಕಿಸಲು ಬಯಸುವ ಸಾಧನ. ವಿವರಗಳಿಗಾಗಿ ಟ್ಯಾಪ್ ಮಾಡಿ."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"ಬ್ಲೂಟೂತ್‌‌ ಸಾಧನಕ್ಕೆ ಸಂಪರ್ಕಿಸುವುದೇ?"</string>
@@ -6091,6 +6131,15 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"ಆ್ಯಕ್ಷನ್ ಪೂರ್ಣಗೊಂಡಿದೆ"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"ಭದ್ರತೆ ಮತ್ತು ಗೌಪ್ಯತೆಯ ತ್ವರಿತ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"ನಿಮ್ಮ ಗೌಪ್ಯತೆ ನಿಯಂತ್ರಣಗಳು"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"ತೆರೆಯಿರಿ"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"ಬದಲಿಸಿ. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"ಟಾಗಲ್ ಮಾಡಿ"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"ಮೈಕ್ ಆ್ಯಕ್ಸೆಸ್"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"ಕ್ಯಾಮರಾ ಆ್ಯಕ್ಸೆಸ್"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"ಸ್ಥಳದ ಆ್ಯಕ್ಸೆಸ್"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"ಪೇರಿಂಗ್"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಅನ್ನು ಕನೆಕ್ಟ್ ಮಾಡಲಾಗಿದೆ"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"ಸಾಧನವನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡಿ"</string>
@@ -6113,4 +6162,5 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"ತ್ವರಿತ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಸ್ಯಾಟಲೈಟ್ ಟೈಲ್ ಅನ್ನು ಸೇರಿಸುವ ಮೂಲಕ ಸ್ಯಾಟಲೈಟ್ ಮಾಹಿತಿಯನ್ನು ಸುಲಭವಾಗಿ ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಿ"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"ಟೈಲ್ ಸೇರಿಸಿ"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"ಸ್ಯಾಟಲೈಟ್ ಟೈಲ್ ಪ್ರಾಂಪ್ಟ್‌ಗಳು"</string>
+    <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
 </resources>

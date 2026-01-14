@@ -6,7 +6,9 @@ import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.display.ExternalDisplayPreferenceController;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.utils.DesktopSettingsUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Test;
@@ -32,6 +34,13 @@ public class DisplaySettingsTest {
         }
         // Nightmode is currently hidden
         preferenceKeys.remove("night_mode");
+
+        // External display is dynamically added in the ExternalDisplayPreferenceController, not in
+        // the xml.
+        if (DesktopSettingsUtils.shouldShowTopLevelDeviceCategory(context)) {
+            preferenceKeys.remove(
+                    ExternalDisplayPreferenceController.PREF_KEY_EXTERNAL_DISPLAY_CATEGORY);
+        }
 
         assertThat(preferenceScreenKeys).containsAtLeastElementsIn(preferenceKeys);
     }

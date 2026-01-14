@@ -18,9 +18,12 @@ package com.android.settings.localepicker
 
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settings.localepicker.LocaleUtils.isTermsOfAddressAvailable
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 
 // LINT.IfChange
 @ProvidePreferenceScreen(TermsOfAddressApiFirstScreen.KEY)
@@ -33,7 +36,15 @@ class TermsOfAddressApiFirstScreen :
     ) {
 
     init {
-        flag { Flags.catalystMigration26q2() }
+        flag { Flags.catalystMigration26q2() && Flags.termsOfAddressEnabled() }
+
+        preconditions(R.string.terms_of_address_screen_preconditions) {
+            if (isTermsOfAddressAvailable(context)) {
+                Allowed
+            } else {
+                Custom(R.string.terms_of_address_screen_unavailable)
+            }
+        }
     }
 
     companion object {

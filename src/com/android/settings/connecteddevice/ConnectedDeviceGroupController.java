@@ -42,6 +42,7 @@ import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.utils.DesktopSettingsUtils;
 import com.android.settings.flags.FeatureFlags;
 import com.android.settings.flags.FeatureFlagsImpl;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
@@ -197,7 +198,8 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
         return (hasBluetoothFeature()
                 || hasUsbFeature()
                 || hasUsiStylusFeature()
-                || mConnectedDockUpdater != null)
+                || mConnectedDockUpdater != null
+                || mExternalDisplayUpdater != null)
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
@@ -265,7 +267,9 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
         final DockUpdater connectedDockUpdater =
                 dockUpdaterFeatureProvider.getConnectedDockUpdater(context, this);
         final ExternalDisplayUpdater externalDisplayUpdater =
-                new ExternalDisplayUpdater(this, fragment.getMetricsCategory());
+                DesktopSettingsUtils.shouldShowTopLevelDeviceCategory(context)
+                        ? null
+                        : new ExternalDisplayUpdater(this, fragment.getMetricsCategory());
         init(externalDisplayUpdater,
                 hasBluetoothFeature()
                         ? new ConnectedBluetoothDeviceUpdater(context, this,

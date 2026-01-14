@@ -45,6 +45,7 @@ import android.view.ViewManager
 import android.view.WindowManager
 import android.view.WindowManagerGlobal
 import androidx.annotation.OpenForTesting
+import com.android.server.display.feature.flags.Flags
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY
 import com.android.settings.flags.FeatureFlagsImpl
 import com.android.wm.shell.shared.desktopmode.DesktopState
@@ -160,10 +161,16 @@ open class ConnectedDisplayInjector(open val context: Context?) {
             isVirtualDisplayAllowed(display)
 
     private fun isVirtualDisplayAllowed(display: Display): Boolean {
+        if (display.type != Display.TYPE_VIRTUAL) {
+            return false
+        }
+        if (Flags.virtualSecondaryDisplays()) {
+            if ((display.getFlags() and Display.FLAG_ALLOWS_CONTENT_MODE_SWITCH) != 0) {
+                return true
+            }
+        }
         val sysProp = getSystemProperty(VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY)
-        return !sysProp.isEmpty() &&
-            display.type == Display.TYPE_VIRTUAL &&
-            sysProp == display.ownerPackageName
+        return !sysProp.isEmpty() && sysProp == display.ownerPackageName
     }
 
     /** @return all displays including disabled. */

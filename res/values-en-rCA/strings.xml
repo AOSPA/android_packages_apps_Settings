@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Set up Face Unlock"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Use Face Unlock for"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Face"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Use Face to"</string>
@@ -1558,6 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Off"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"Carrier ID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Mobile data network type"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Mobile voice network type"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Operator info"</string>
@@ -1895,12 +1896,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verify PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verify password"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Verify it\'s you"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"To transfer Google Accounts, settings, and more, enter your other device\'s pattern. Your pattern is encrypted."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"To transfer Google Accounts, settings, and more, enter your other device\'s PIN. Your PIN is encrypted."</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"To transfer Google Accounts, settings, and more, enter your other device\'s password. Your password is encrypted."</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Also use pattern to unlock this device"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Also use PIN to unlock this device"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Also use password to unlock this device"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Verify pattern"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Verify PIN"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Verify password"</string>
@@ -2533,6 +2540,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Quick Settings"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Swipe down from the top of your screen}other{Swipe down with # fingers from the top of your screen}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Swipe down from the top of your screen. This shortcut will be available after you finish device setup.}other{Swipe down with # fingers from the top of your screen. This shortcut will be available after you finish device setup.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"Top Row Key"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"Press the accessibility key in the keyboard top row"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Quick Settings"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Volume keys"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"volume keys"</string>
@@ -3466,6 +3475,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Other users"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Delete guest activity"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Delete all guest apps and data when exiting guest mode"</string>
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"Allow guest to use device"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"All guest apps and data will be deleted when exiting guest mode"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"add, guest"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Delete guest activity?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Apps and data from this guest session will be deleted now, and all future guest activity will be deleted each time you exit guest mode"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"delete, guest, activity, remove, data, visitor, erase"</string>
@@ -3936,6 +3948,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Get quick recaps of longer messages"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Use notification summaries"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Summarize long messages and group conversations to get quick recaps.\n\nSummaries use AI on your device, which may sometimes make mistakes. Your messages are never sent to Google."</string>
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"Summarize long messages and group conversations to get quick recaps.\n\nSummaries are provided by apps or AI on your device and may contain mistakes. Your messages are never sent to Google."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Notifications from these apps will not be summarized"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Manage apps"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Manage apps for notification summaries"</string>
@@ -4421,6 +4434,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Remove permissions, delete temporary files, and stop notifications"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Manage app if unused"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Remove permissions, delete temporary files, stop notifications, and archive the app"</string>
+    <string name="task_continuity_category" msgid="3736049711007817178">"Task continuity"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"App Tasks"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"Seamlessly continue where you left off on other devices"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"All apps"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Installed apps"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant apps"</string>
@@ -5661,6 +5677,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> requires 2G to be available"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Allow only encrypted networks"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"This is more secure but may limit your mobile network connection in some locations. Emergency calling is always allowed."</string>
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Turn off 2G network protection?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"Current network for <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM does not support 2G. Turning off 2G protection will put you at risk of connecting to harmful spoofed 2G networks."</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Turn off"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G network protection"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G network protection is on"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"The current network for <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM requires 2G protection to be turned on. You may still choose to disable 2G protection at your own risk."</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Settings"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"All services"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Show clipboard access"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Show a message when apps access text, images, or other content you’ve copied"</string>
@@ -6091,6 +6114,14 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Action complete"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Security and privacy quick settings"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Your privacy controls"</string>
+    <string name="safety_center_review_settings" msgid="295527297192914772">"Review settings"</string>
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Open"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Switch. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"Blocked"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"Toggle"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"Mic access"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"Camera access"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"Location access"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Pairing"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> connected"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Scan Device"</string>
@@ -6113,4 +6144,5 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Easily access satellite info by adding the Satellite tile to Quick Settings"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Add tile"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Satellite Tile Prompts"</string>
+    <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
 </resources>

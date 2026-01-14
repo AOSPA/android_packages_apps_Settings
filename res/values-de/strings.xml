@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Entsperrung per Gesichtserkennung einrichten"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Gesichtsentsperrung für"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Gesicht"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Per Gesichtserkennung"</string>
@@ -711,7 +710,7 @@
     <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Vertrauliche Profile eignen sich nicht für Apps, die im Hintergrund laufen oder wichtige Benachrichtigungen senden müssen, wie z. B. medizinische Apps. Das liegt daran, dass Benachrichtigungen und Hintergrundaktivitäten gestoppt werden, wenn dein Profil gesperrt ist.\n\nWenn dein vertrauliches Profil gesperrt ist, werden Apps darin nicht im Berechtigungsmanager, Privatsphäre-Dashboard und anderen Einstellungen angezeigt.\n\nDein vertrauliches Profil kann nicht auf ein neues Gerät übertragen werden. Wenn du auf einem anderen Gerät ein vertrauliches Profil nutzen möchtest, musst du ein neues einrichten.\n\nPersonen, die dein Gerät mit einem Computer verbinden oder schädliche Apps auf deinem Gerät installieren, haben möglicherweise auch Zugriff auf dein vertrauliches Profil."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Informationen zum vertraulichen Profil"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Das kann einen Moment dauern"</string>
-    <string name="private_space_setting_up_text" msgid="8458035555212009528">"Das vertrauliche Profil wird eingerichtet…"</string>
+    <string name="private_space_setting_up_text" msgid="8458035555212009528">"Vertrauliches Profil wird eingerichtet…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Das vertrauliche Profil konnte nicht eingerichtet werden"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Noch einmal versuchen"</string>
     <string name="private_space_exit_label" msgid="2358175237993013881">"Beenden"</string>
@@ -723,7 +722,7 @@
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Neue Sperre auswählen"</string>
     <string name="private_space_wait_screen_title" msgid="1535431437075585381">"Einen Moment…"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"Fertig!"</string>
-    <string name="private_space_access_text" msgid="4433988836344567888">"Ruf deine App-Liste auf und scrolle nach unten, um auf dein vertrauliches Profil zuzugreifen"</string>
+    <string name="private_space_access_text" msgid="4433988836344567888">"Wenn du auf dein vertrauliches Profil zugreifen möchtest, ruf deine App-Liste auf und scrolle nach unten"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"Fertig"</string>
     <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Scrolle nach unten, um auf das vertrauliche Profil zuzugreifen"</string>
     <string name="private_space_retry_signin_title" msgid="8090276618867918844">"Anmelden"</string>
@@ -814,7 +813,7 @@
 
 </xliff:g>Kontaktloses Bezahlen ist dann nicht mehr verfügbar.<xliff:g id="EMPTY_LINE_1">
 
-</xliff:g>Google Wallet, Google Pay und andere Apps, die eine Authentifizierung erfordern, funktionieren möglicherweise nicht mehr richtig."</string>
+</xliff:g>Google Wallet, Google Pay und andere Apps, die eine Authentifizierung erfordern, funktionieren dann möglicherweise nicht mehr richtig."</string>
     <string name="unlock_disable_frp_warning_content_fingerprint_authbound_keys" msgid="7158076544627335461">"Deine Displaysperre und die Entsperrung per Fingerabdruck werden entfernt.<xliff:g id="EMPTY_LINE_0">
 
 </xliff:g>Kontaktloses Bezahlen ist dann nicht mehr verfügbar.<xliff:g id="EMPTY_LINE_1">
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Aus"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"Typ des Mobilfunknetzes für Daten"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Typ des Mobilfunknetzes für Anrufe"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Details zum Mobilfunkanbieter"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN bestätigen"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Passwort bestätigen"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Identität bestätigen"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Gib das Muster für dein anderes Gerät ein, um Google-Konten, Einstellungen und mehr zu übertragen. Dein Muster wird verschlüsselt."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Gib die PIN für dein anderes Gerät ein, um Google-Konten, Einstellungen und mehr zu übertragen. Deine PIN wird verschlüsselt."</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Gib das Passwort für dein anderes Gerät ein, um Google-Konten, Einstellungen und mehr zu übertragen. Dein Passwort wird verschlüsselt."</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Muster auch zum Entsperren verwenden"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"PIN auch zum Entsperren verwenden"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Passwort auch zum Entsperren verwenden"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Muster bestätigen"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"PIN bestätigen"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Passwort bestätigen"</string>
@@ -2503,7 +2512,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Kurzbefehl: Lautstärketasten"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Kurzbefehl: 3-mal tippen"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Kurzbefehl für die Schnelleinstellungen"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Kurzbefehl für Touchgeste für Bedienungshilfen"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Kurzbefehl: Touchgeste für Bedienungshilfen"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Tippe zum Verwenden dieser Funktion unten auf dem Display auf den Button „Bedienungshilfen“ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nWenn du zwischen den Funktionen wechseln möchtest, halte diesen Button gedrückt."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Tippe zum Verwenden dieser Funktion auf dem Display auf den Button „Bedienungshilfen“"</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Halte zum Verwenden dieser Funktion beide Lautstärketasten gedrückt"</string>
@@ -2533,6 +2542,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Schnelleinstellungen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Wische vom oberen Displayrand nach unten.}other{Wische vom oberen Displayrand mit # Fingern nach unten.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Wische vom oberen Displayrand nach unten. Diese Touchgeste ist nach Abschluss der Geräteeinrichtung verfügbar.}other{Wische vom oberen Displayrand mit # Finger nach unten. Diese Touchgeste ist nach Abschluss der Geräteeinrichtung verfügbar.}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Schnelleinstellungen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Lautstärketasten"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"Lautstärketasten"</string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Andere Nutzer"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Aktivitäten von Gästen löschen"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Beim Beenden des Gastmodus alle Apps und Daten von Gästen löschen"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Aktivitäten von Gästen löschen?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Apps und Daten dieser Gastsitzung werden jetzt gelöscht und alle künftigen Gastaktivitäten werden jeweils beim Beenden des Gastmodus gelöscht"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"löschen, gast, aktivität, entfernen, daten, besucher, löschen"</string>
@@ -3936,6 +3955,8 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Kurze Zusammenfassungen längerer Nachrichten erhalten"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Zusammenfassung von Benachrichtigungen verwenden"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Du kannst lange Nachrichten und Gruppenunterhaltungen zusammenfassen lassen, damit du schnell einen Überblick bekommst.\n\nZusammenfassungen werden mithilfe von KI auf deinem Gerät erstellt, die manchmal Fehler machen kann. Deine Nachrichten werden niemals an Google gesendet."</string>
+    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Benachrichtigungen von diesen Apps werden nicht zusammengefasst"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Apps verwalten"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Apps für Zusammenfassungen von Benachrichtigungen verwalten"</string>
@@ -4349,7 +4370,7 @@
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"An"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Aus"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Bildschirmfixierung"</string>
-    <string name="app_pinning_intro" msgid="6409063008733004245">"Mit der Option „Bildschirmfixierung“ kannst du festlegen, dass auf deinem Gerät vorübergehend nur eine App ausgeführt und angezeigt wird. Auf diese Weise kannst du z. B. jemanden ein bestimmtes Spiel auf deinem Gerät spielen lassen."</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"Mit der Option „Bildschirmfixierung“ kannst du festlegen, dass auf deinem Gerät vorübergehend nur eine App ausgeführt und angezeigt wird. Auf diese Weise kannst du etwa jemanden ein bestimmtes Spiel auf deinem Gerät spielen lassen."</string>
     <string name="screen_pinning_description" msgid="5822120806426139396">"Die App, die während der Bildschirmfixierung angezeigt wird, kann unter Umständen andere Apps öffnen, wodurch private Daten zugänglich gemacht werden können. \n\nSo verwendest du die Funktion „Bildschirmfixierung“: 	\n{0,number,integer}. Aktiviere die Funktion „Bildschirmfixierung“ 	\n{1,number,integer}. Tippe auf „Übersicht“ 	\n{2,number,integer}. Tippe auf das App-Symbol oben auf dem Bildschirm und dann auf „Fixieren“"</string>
     <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"Die App, die während der Bildschirmfixierung angezeigt wird, kann unter Umständen andere Apps öffnen, wodurch private Daten zugänglich gemacht werden können. \n\nWenn du dein Gerät sicher mit jemandem teilen möchtest, kannst du stattdessen ein Gastprofil verwenden. \n\nSo verwendest du die Funktion „Bildschirmfixierung“: 	\n{0,number,integer}. Aktiviere die Funktion „Bildschirmfixierung“ 	\n{1,number,integer}. Tippe auf „Übersicht“ 	\n{2,number,integer}. Tippe auf das App-Symbol oben auf dem Bildschirm und dann auf „Fixieren“"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Wenn eine App auf dem Bildschirm fixiert ist, gilt Folgendes: \n\n•	 Personenbezogene Daten könnten dennoch\nzugänglich sein (z. B. Kontakte oder E-Mails) \n• Eine fixierte App kann andere Apps öffnen \n\nVerwende die Funktion „Bildschirmfixierung“ nur dann, wenn du deinem Gegenüber vertraust."</string>
@@ -4421,6 +4442,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Berechtigungen entfernen, temporäre Dateien löschen und Benachrichtigungen stoppen"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"App bei Nichtnutzung pausieren"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Berechtigungen entfernen, temporäre Dateien löschen, Benachrichtigungen stoppen und die App archivieren"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Alle Apps"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Installierte Apps"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant Apps"</string>
@@ -4866,7 +4893,7 @@
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Notfall-SOS, medizinische Daten, Benachrichtigungen"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Bedienung über Gesten"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Öffne den Startbildschirm, indem du vom unteren Displayrand nach oben wischst. Um zwischen Apps zu wechseln, wische vom unteren Displayrand nach oben, halte das Display gedrückt und lass dann los. Wenn du zurückgehen möchtest, wische vom linken oder vom rechten Rand nach innen."</string>
-    <string name="legacy_navigation_title" msgid="7877402855994423727">"Bedienung über 3 Schaltflächen"</string>
+    <string name="legacy_navigation_title" msgid="7877402855994423727">"Bedienung über 3 Buttons"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Nutze die Schaltflächen unten auf deinem Bildschirm, um zurückzugehen, den Startbildschirm aufzurufen und zwischen Apps zu wechseln."</string>
     <string name="nav_tutorial_button_description" msgid="7195363082216233970">"Anleitung für die Bedienung über Gesten starten."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"Systemsteuerung, Bedienung über 2 Schaltflächen, Bedienung über 3 Schaltflächen, Gestensteuerung, Bedienung über Gesten, wischen"</string>
@@ -5661,6 +5688,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Für <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> muss 2G verfügbar sein"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Nur verschlüsselte Netzwerke zulassen"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Dies ist sicherer, schränkt aber eventuell die Möglichkeit einer Mobilfunkverbindung an manchen Orten ein. Notrufe sind immer erlaubt."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alle Dienste"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Zugriff auf Zwischenablage anzeigen"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Eine Meldung wird angezeigt, wenn Apps auf Text, Bilder oder andere Inhalte zugreifen, die du kopiert hast"</string>
@@ -6091,6 +6132,15 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Aktion abgeschlossen"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Schnelleinstellungen für Sicherheit und Datenschutz"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Datenschutzeinstellungen"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Öffnen"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Schalter. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"Blockiert"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"Umschalten"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"Mikrofonzugriff"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"Kamerazugriff"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"Standortzugriff"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Wird gekoppelt"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verbunden"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Gerät prüfen"</string>
@@ -6113,4 +6163,6 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Du kannst ganz einfach auf Satelliteninformationen zugreifen, indem du den Schnelleinstellungen die Satellitenkachel hinzufügst"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Kachel hinzufügen"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Prompts für Satellitenkachel"</string>
+    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <skip />
 </resources>

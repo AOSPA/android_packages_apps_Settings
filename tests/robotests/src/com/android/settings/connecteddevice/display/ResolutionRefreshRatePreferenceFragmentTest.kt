@@ -302,6 +302,12 @@ class ResolutionRefreshRatePreferenceFragmentTest : ExternalDisplayTestBase() {
                 .performClick()
         }
         shadowOf(Looper.getMainLooper()).idle()
+        scenario.onFragment { fragment ->
+            val (applyButton, _) = getApplyButtonAndMenuFromFragment(fragment)
+            applyButton.performClick()
+        }
+        shadowOf(Looper.getMainLooper()).idle()
+
         val bundle =
             Bundle().apply {
                 putParcelable(
@@ -331,6 +337,12 @@ class ResolutionRefreshRatePreferenceFragmentTest : ExternalDisplayTestBase() {
                 .performClick()
         }
         shadowOf(Looper.getMainLooper()).idle()
+        scenario.onFragment { fragment ->
+            val (applyButton, _) = getApplyButtonAndMenuFromFragment(fragment)
+            applyButton.performClick()
+        }
+        shadowOf(Looper.getMainLooper()).idle()
+
         val bundle =
             Bundle().apply {
                 putParcelable(
