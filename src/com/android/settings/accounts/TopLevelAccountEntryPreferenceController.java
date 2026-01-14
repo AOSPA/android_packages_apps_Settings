@@ -42,11 +42,9 @@ public class TopLevelAccountEntryPreferenceController extends BasePreferenceCont
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (Flags.enableAccountsAndBackupScreen() && CredentialManager.isServiceEnabled(mContext)) {
-            Preference preference = screen.findPreference(getPreferenceKey());
-            if (preference != null) {
-                preference.setTitle(AccountScreen.getAccountScreenTitle(mContext));
-            }
+        Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null) {
+            preference.setTitle(AccountScreen.getAccountScreenTitle(mContext));
         }
     }
 
