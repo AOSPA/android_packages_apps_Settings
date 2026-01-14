@@ -15311,6 +15311,27 @@
     <string name="satellite_tile_prompt_channel_title">Satellite Tile Prompts</string>
     <!-- Text displayed inside the Satellite Icon chip. [CHAR LIMIT=3]  -->
     <string name="satellite_icon_text">SAT</string>
+    <!-- Satellite warning banners -->
+    <!-- Title for the satellite unavailable warning banner. [CHAR LIMIT=50] -->
+    <string name="satellite_not_available_warning_title">Satellite not available</string>
+    <!-- Summary for the satellite cellular network warning banner. [CHAR LIMIT=NONE] -->
+    <string name="satellite_network_connected_warning_summary">Satellite coverage is not available while you are connected to a mobile or Wi\u2011Fi network.</string>
+    <!-- Summary for the satellite unavailable in region warning banner. [CHAR LIMIT=NONE] -->
+    <string name="satellite_unavailable_in_region_warning_summary">Satellite connectivity isn\'t available in this country or region.</string>
+    <!-- Summary for the generic satellite unavailable warning banner when the satellite is not supported for an unspecified reason. [CHAR_LIMIT=NONE] -->
+    <string name="satellite_unavailable_generic_warning_summary"> Satellite connectivity isn\'t available right now. Please try again later.</string>
+    <!-- Summary for the satellite plan warning banner. [CHAR LIMIT=NONE] -->
+    <string name="satellite_plan_warning_summary">Your mobile plan does not include satellite coverage. Contact your carrier for help.</string>
+    <!-- Summary for the satellite default app warning banner. [CHAR LIMIT=NONE] -->
+    <string name="satellite_default_app_warning_summary">To use Satellite messaging, Google Messages must be your default messaging app.</string>
+    <!-- Summary for the satellite carrier enabled info banner. [CHAR LIMIT=NONE] -->
+    <string name="satellite_carrier_enabled_info_summary">Satellite connectivity is enabled by your carrier. Learn more from your carrier\'s satellite settings.</string>
+    <!-- Button text for the satellite unavailable warning banner. [CHAR LIMIT=50] -->
+    <string name="satellite_view_coverage_button">View available locations</string>
+    <!-- Button text for the change default app warning banner. [CHAR LIMIT=50] -->
+    <string name="satellite_change_default_app_button">Change default app</string>
+    <!-- Button text for the view carrier settings info banner. [CHAR LIMIT=50] -->
+    <string name="satellite_view_carrier_settings_button">View carrier settings</string>
 
     <string name="long_press_power_assistant_sensitivity_ms_description" translatable="false">A length of time in ms.</string>
     <string name="long_press_power_category_precondition" translatable="false">Requires that long pressing the power button can be configured for Assistant</string>
