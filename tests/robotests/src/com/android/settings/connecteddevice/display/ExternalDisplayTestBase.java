@@ -15,6 +15,7 @@
  */
 package com.android.settings.connecteddevice.display;
 
+import static android.hardware.display.DisplayManager.HDR_PREFERENCE_HDR_ALLOWED;
 import static android.view.Display.DEFAULT_DISPLAY;
 
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY;
@@ -41,12 +42,12 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.hardware.display.DisplayTopology;
 import android.os.RemoteException;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.view.Display.Mode;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
@@ -102,6 +103,10 @@ public class ExternalDisplayTestBase {
                 createOverlayDisplay(DisplayIsEnabled.YES)));
         doReturn(mInjectedFlags).when(mMockedInjector).getFlags();
         doReturn(mFakeDesktopState).when(mMockedInjector).getDesktopState();
+        doReturn(HDR_PREFERENCE_HDR_ALLOWED)
+                .when(mMockedInjector)
+                .getUserHdrPreference(anyInt());
+        SystemProperties.set(ConnectedDisplayInjector.SYSPROP_ENABLE_HDR_MODE_SPLITTING, "true");
         mHandler = new TestHandler(mContext.getMainThreadHandler());
         doReturn(mHandler).when(mMockedInjector).getHandler();
         doReturn("").when(mMockedInjector).getSystemProperty(
@@ -128,7 +133,8 @@ public class ExternalDisplayTestBase {
                         List.of(mode),
                         DisplayIsEnabled.YES,
                         /* isConnectedDisplay= */ false,
-                        /* rotation= */ 0);
+                        /* rotation= */ 0,
+                        /* isHdrSupported= */ true);
         displays.addFirst(builtinDisplay);
         doReturn(builtinDisplay).when(mMockedInjector).getDisplay(DEFAULT_DISPLAY);
         updateDisplaysAndTopology(displays);
@@ -155,7 +161,8 @@ public class ExternalDisplayTestBase {
                 supportedModes,
                 isEnabled,
                 /* isConnectedDisplay= */ true,
-                /* rotation= */ 0);
+                /* rotation= */ 0,
+                /* isHdrSupported= */ true);
     }
 
     DisplayDevice createOverlayDisplay(DisplayIsEnabled isEnabled) {
@@ -168,7 +175,8 @@ public class ExternalDisplayTestBase {
                 supportedModes,
                 isEnabled,
                 /* isConnectedDisplay= */ true,
-                /* rotation= */ 0);
+                /* rotation= */ 0,
+                /* isHdrSupported= */ true);
     }
 
     void updateDisplaysAndTopology(List<DisplayDevice> displays) {
@@ -187,7 +195,9 @@ public class ExternalDisplayTestBase {
                                                 display.isEnabled(),
                                                 display.isConnectedDisplay(),
                                                 /* rotation= */ 0,
-                                                /* connectionPreference= */ 0))
+                                                /* isHdrSupported= */ true,
+                                                /* connectionPreference= */ 0,
+                                                HDR_PREFERENCE_HDR_ALLOWED))
                         .toList();
         doReturn(displayAdditionalInfoList)
                 .when(mMockedInjector)

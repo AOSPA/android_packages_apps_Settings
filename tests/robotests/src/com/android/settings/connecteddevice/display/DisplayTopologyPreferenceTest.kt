@@ -104,6 +104,7 @@ class DisplayTopologyPreferenceTest {
                         /* isEnabled= */ DisplayIsEnabled.YES,
                         /* isConnectedDisplay= */ true,
                         /* rotation= */ 0,
+                        /* isHdrSupported= */ true,
                     )
                 }
                 .toList()

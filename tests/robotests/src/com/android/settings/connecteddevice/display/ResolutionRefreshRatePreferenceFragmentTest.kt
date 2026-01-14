@@ -147,6 +147,7 @@ class ResolutionRefreshRatePreferenceFragmentTest : ExternalDisplayTestBase() {
                 isEnabled = externalDisplay.isEnabled,
                 isConnectedDisplay = externalDisplay.isConnectedDisplay,
                 rotation = externalDisplay.rotation,
+                isHdrSupported = externalDisplay.isHdrSupported,
             )
         whenever(mMockedInjector.getDisplay(EXTERNAL_DISPLAY_ID))
             .thenReturn(displayWithDifferentInitialMode)

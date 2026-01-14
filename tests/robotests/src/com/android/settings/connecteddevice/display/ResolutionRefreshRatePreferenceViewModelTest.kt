@@ -126,6 +126,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
                 /* isEnabled= */ DisplayIsEnabled.YES,
                 /* isConnectedDisplay= */ true,
                 /* rotation= */ 0,
+                isHdrSupported = externalDisplay.isHdrSupported,
             )
         )
         updateDisplaysAndTopology(updatedEnabledDisplays)
@@ -273,6 +274,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
                 isEnabled = DisplayIsEnabled.YES,
                 isConnectedDisplay = true,
                 rotation = 0,
+                isHdrSupported = externalDisplay.isHdrSupported,
             )
         updateDisplaysAndTopology(listOf(displayWithDuplicates))
 
