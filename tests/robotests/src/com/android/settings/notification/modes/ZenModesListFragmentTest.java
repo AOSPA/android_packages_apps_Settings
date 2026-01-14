@@ -20,17 +20,23 @@ import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS;
+import static com.android.settings.flags.Flags.FLAG_HIDE_MODES_SETTING_IN_DEMO_MODE;
 import static com.android.settings.notification.modes.ZenModesListFragment.REQUEST_NEW_MODE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.fragment.app.FragmentActivity;
@@ -52,8 +58,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowActivity.IntentForResult;
 import org.robolectric.shadows.ShadowDialog;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class ZenModesListFragmentTest {
@@ -76,12 +84,14 @@ public class ZenModesListFragmentTest {
     public ActivityScenarioRule<EmptyFragmentActivity> mActivityScenario =
             new ActivityScenarioRule<>(EmptyFragmentActivity.class);
 
+    private Context mContext;
     private FragmentActivity mActivity;
     private ZenModesListFragment mFragment;
     @Mock private ZenModesBackend mBackend;
 
     @Before
     public void setUp() {
+        mContext = spy(RuntimeEnvironment.application);
         MockitoAnnotations.initMocks(this);
         ZenModesBackend.setInstance(mBackend);
 
@@ -200,5 +210,36 @@ public class ZenModesListFragmentTest {
 
         Intent nextIntent = shadowOf(mActivity).getNextStartedActivity();
         assertThat(nextIntent).isNull();
+    }
+
+    @Test
+    @EnableFlags(FLAG_HIDE_MODES_SETTING_IN_DEMO_MODE)
+    public void isPageSearchEnabled_inDemoMode_returnsFalse() {
+        // Put the device in demo mode.
+        android.provider.Settings.Global.putInt(mContext.getContentResolver(),
+                android.provider.Settings.Global.DEVICE_DEMO_MODE, 1);
+        Resources mockResources = mock(Resources.class);
+        when(mContext.getResources()).thenReturn(mockResources);
+        when(mockResources
+                .getBoolean(com.android.settings.R.bool.config_hide_modes_setting_in_demo_mode))
+                .thenReturn(true);
+
+        assertThat(isPageSearchEnabled()).isFalse();
+
+        // Clean up to the default value.
+        android.provider.Settings.Global.putInt(mContext.getContentResolver(),
+                android.provider.Settings.Global.DEVICE_DEMO_MODE, 0);
+    }
+
+    @Test
+    public void isPageSearchEnabled_notInDemoMode_returnsTrue() {
+        assertThat(isPageSearchEnabled()).isTrue();
+    }
+
+    private boolean isPageSearchEnabled() {
+        return ReflectionHelpers.callInstanceMethod(
+                ZenModesListFragment.SEARCH_INDEX_DATA_PROVIDER,
+                "isPageSearchEnabled",
+                ReflectionHelpers.ClassParameter.from(Context.class, mContext));
     }
 }
