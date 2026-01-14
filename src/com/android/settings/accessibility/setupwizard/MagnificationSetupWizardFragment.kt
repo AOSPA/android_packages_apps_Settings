@@ -32,6 +32,12 @@ class MagnificationSetupWizardFragment : BaseSetupWizardFragment() {
     override fun createControllers(adapter: RecyclerItemAdapter): Map<Int, BaseItemController> =
         buildMap {
             val context = requireContext()
+            findItem(adapter, R.id.magnification_illustration_in_suw)?.let {
+                put(
+                    R.id.magnification_illustration_in_suw,
+                    MagnificationIllustrationItemController(context, it),
+                )
+            }
             findItem(adapter, R.id.magnify_keyboard_in_suw)?.let {
                 put(R.id.magnify_keyboard_in_suw, MagnifyKeyboardSwitchItemController(context, it))
             }

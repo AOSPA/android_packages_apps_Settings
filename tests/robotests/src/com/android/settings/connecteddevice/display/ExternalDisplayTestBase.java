@@ -19,7 +19,6 @@ import static android.view.Display.DEFAULT_DISPLAY;
 
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
-import static com.android.settings.flags.Flags.FLAG_ENABLE_RESOLUTION_CONFIRM_DIALOG_BUGFIX;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -97,7 +96,6 @@ public class ExternalDisplayTestBase {
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, false);
-        mFlags.setFlag(FLAG_ENABLE_RESOLUTION_CONFIRM_DIALOG_BUGFIX, true);
         updateDisplaysAndTopology(List.of(createExternalDisplay(DisplayIsEnabled.YES),
                 createOverlayDisplay(DisplayIsEnabled.YES)));
         doReturn(mInjectedFlags).when(mMockedInjector).getFlags();

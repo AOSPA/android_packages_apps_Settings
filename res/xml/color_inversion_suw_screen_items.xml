@@ -16,7 +16,12 @@
 -->
 
 <ItemGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:id="@+id/color_inversion_in_suw">
+
+    <com.android.settings.accessibility.setupwizard.items.IllustrationItem
+        android:id="@+id/color_inversion_illustration_in_suw"
+        settings:lottie_rawRes="@raw/accessibility_color_inversion_banner"/>
 
     <com.android.settings.accessibility.setupwizard.items.FooterItem
         android:id="@+id/color_inversion_footer_in_suw" />

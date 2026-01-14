@@ -26,7 +26,6 @@ import androidx.annotation.NonNull;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -37,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class RegionPickerFragment extends DashboardFragment{
 
@@ -105,10 +105,8 @@ public class RegionPickerFragment extends DashboardFragment{
             new BaseSearchIndexProvider(R.xml.system_region_picker) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    if (!Flags.regionalPreferencesApiEnabled()) {
-                        return false;
-                    }
                     return true;
                 }
             };
 }
+// LINT.ThenChange(RegionPickerApiFirstScreen.kt)

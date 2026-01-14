@@ -44,6 +44,7 @@ import java.util.Collection;
 import java.util.List;
 
 /** Main fragment to display temperature preferences. */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class TemperatureUnitFragment extends DashboardFragment {
 
@@ -122,3 +123,4 @@ public class TemperatureUnitFragment extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.regional_preferences_temperature);
 }
+// LINT.ThenChange(TemperatureUnitApiFirstScreen.kt)

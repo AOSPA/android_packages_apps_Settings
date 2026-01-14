@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -29,6 +28,7 @@ import com.android.settingslib.applications.AppIconCacheManager;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.search.SearchIndexable;
 
+// LINT.IfChange
 @SearchIndexable
 public class UnrestrictedDataAccess extends DashboardFragment {
 
@@ -111,3 +111,4 @@ public class UnrestrictedDataAccess extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.unrestricted_data_access_settings);
 }
+// LINT.ThenChange(UnrestrictedDataAccessApiScreen.kt)

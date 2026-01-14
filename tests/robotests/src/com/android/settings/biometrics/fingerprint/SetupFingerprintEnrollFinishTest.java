@@ -41,6 +41,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowActivity;
 
 @RunWith(RobolectricTestRunner.class)
@@ -51,6 +52,7 @@ public class SetupFingerprintEnrollFinishTest {
     private ComponentName mComponentName;
     private PartnerCustomizationLayout mLayout;
     private FingerprintManager mFingerprintManager;
+    private ShadowFingerprintManager mShadowFingerprintManager;
 
     @Before
     public void setUp() {
@@ -61,7 +63,8 @@ public class SetupFingerprintEnrollFinishTest {
 
         mFingerprintManager = (FingerprintManager) application.getSystemService(
                 Context.FINGERPRINT_SERVICE);
-        Shadows.shadowOf(mFingerprintManager).setIsHardwareDetected(true);
+        mShadowFingerprintManager = Shadow.extract(mFingerprintManager);
+        mShadowFingerprintManager.setIsHardwareDetected(true);
 
         mComponentName = new ComponentName(
                 application, FINGERPRINT_SUGGESTION_ACTIVITY);
@@ -106,7 +109,7 @@ public class SetupFingerprintEnrollFinishTest {
 
     @Test
     public void onActivityResult_fingerprintCountIsNotOne_fingerprintSuggestionActivityDisabled() {
-        Shadows.shadowOf((FingerprintManager) mFingerprintManager).setDefaultFingerprints(0);
+        mShadowFingerprintManager.setDefaultFingerprints(0);
 
         mActivity.onActivityResult(0, 0, null);
 
@@ -116,7 +119,7 @@ public class SetupFingerprintEnrollFinishTest {
 
     @Test
     public void onActivityResult_fingerprintCountIsOne_fingerprintSuggestionActivityEnabled() {
-        Shadows.shadowOf((FingerprintManager) mFingerprintManager).setDefaultFingerprints(1);
+        mShadowFingerprintManager.setDefaultFingerprints(1);
 
         mActivity.onActivityResult(0, 0, null);
 
@@ -126,7 +129,7 @@ public class SetupFingerprintEnrollFinishTest {
 
     @Test
     public void clickNext_fingerprintCountIsNotOne_fingerprintSuggestionActivityDisabled() {
-        Shadows.shadowOf((FingerprintManager) mFingerprintManager).setDefaultFingerprints(2);
+        mShadowFingerprintManager.setDefaultFingerprints(2);
 
         mLayout.getMixin(FooterBarMixin.class).getPrimaryButtonView().performClick();
 
@@ -136,7 +139,7 @@ public class SetupFingerprintEnrollFinishTest {
 
     @Test
     public void clickNext_fingerprintCountIsOne_fingerprintSuggestionActivityEnabled() {
-        Shadows.shadowOf((FingerprintManager) mFingerprintManager).setDefaultFingerprints(1);
+        mShadowFingerprintManager.setDefaultFingerprints(1);
 
         mLayout.getMixin(FooterBarMixin.class).getPrimaryButtonView().performClick();
 
@@ -146,7 +149,7 @@ public class SetupFingerprintEnrollFinishTest {
 
     @Test
     public void onBackPressed_fingerprintCountIsNotOne_fingerprintSuggestionActivityDisabled() {
-        Shadows.shadowOf((FingerprintManager) mFingerprintManager).setDefaultFingerprints(2);
+        mShadowFingerprintManager.setDefaultFingerprints(2);
 
         mActivity.onBackPressed();
 
@@ -156,7 +159,7 @@ public class SetupFingerprintEnrollFinishTest {
 
     @Test
     public void onBackPressed_fingerprintCountIsOne_fingerprintSuggestionActivityEnabled() {
-        Shadows.shadowOf((FingerprintManager) mFingerprintManager).setDefaultFingerprints(1);
+        mShadowFingerprintManager.setDefaultFingerprints(1);
 
         mActivity.onBackPressed();
 

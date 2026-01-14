@@ -32,6 +32,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
 import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.anyBoolean
 import org.mockito.Mock
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
@@ -107,14 +108,26 @@ class SatelliteEligibilityJobServiceTest {
     }
 
     @Test
-    fun onStartJob_inService_reschedulesAndReturnsFalse() {
+    fun onStartJob_inService_terrestrial_reschedulesAndReturnsFalse() {
         `when`(mockServiceState.state).thenReturn(ServiceState.STATE_IN_SERVICE)
+        `when`(mockServiceState.isUsingNonTerrestrialNetwork()).thenReturn(false)
 
         val result = service.onStartJob(mockJobParameters)
 
         assertThat(result).isFalse()
         verify(mockTelephonyManager, never()).registerTelephonyCallback(any(), any())
         assertThat(shadowJobScheduler.getPendingJob(jobId)).isNotNull()
+    }
+
+    @Test
+    fun onStartJob_inService_satellite_returnsTrueAndRegistersCallback() {
+        `when`(mockServiceState.state).thenReturn(ServiceState.STATE_IN_SERVICE)
+        `when`(mockServiceState.isUsingNonTerrestrialNetwork()).thenReturn(true)
+
+        val result = service.onStartJob(mockJobParameters)
+
+        assertThat(result).isTrue()
+        verify(mockTelephonyManager).registerTelephonyCallback(any(), any())
     }
 
     @Test
@@ -148,7 +161,7 @@ class SatelliteEligibilityJobServiceTest {
     }
 
     @Test
-    fun callback_onServiceStateChanged_toInService_reschedulesAndFinishesJob() {
+    fun callback_onServiceStateChanged_toInService_terrestrial_reschedulesAndFinishesJob() {
         `when`(mockServiceState.state).thenReturn(ServiceState.STATE_OUT_OF_SERVICE)
         service.onStartJob(mockJobParameters)
         // Clear previous schedule call
@@ -161,11 +174,31 @@ class SatelliteEligibilityJobServiceTest {
         // Trigger change to IN_SERVICE
         val newServiceState = mock(ServiceState::class.java)
         `when`(newServiceState.state).thenReturn(ServiceState.STATE_IN_SERVICE)
+        `when`(newServiceState.isUsingNonTerrestrialNetwork()).thenReturn(false)
         callback.onServiceStateChanged(newServiceState)
 
         verify(service).jobFinished(mockJobParameters, false)
         verify(mockTelephonyManager).unregisterTelephonyCallback(any<TelephonyCallback>())
         assertThat(shadowJobScheduler.getPendingJob(jobId)).isNotNull()
+    }
+
+    @Test
+    fun callback_onServiceStateChanged_toInService_satellite_doesNothing() {
+        `when`(mockServiceState.state).thenReturn(ServiceState.STATE_OUT_OF_SERVICE)
+        service.onStartJob(mockJobParameters)
+
+        val callbackCaptor = ArgumentCaptor.forClass(TelephonyCallback::class.java)
+        verify(mockTelephonyManager).registerTelephonyCallback(any(), callbackCaptor.capture())
+        val callback = callbackCaptor.value as TelephonyCallback.ServiceStateListener
+
+        // Trigger change to IN_SERVICE on satellite
+        val newServiceState = mock(ServiceState::class.java)
+        `when`(newServiceState.state).thenReturn(ServiceState.STATE_IN_SERVICE)
+        `when`(newServiceState.isUsingNonTerrestrialNetwork()).thenReturn(true)
+        callback.onServiceStateChanged(newServiceState)
+
+        verify(service, never()).jobFinished(any(), anyBoolean())
+        verify(mockTelephonyManager, never()).unregisterTelephonyCallback(any<TelephonyCallback>())
     }
 
     @Test

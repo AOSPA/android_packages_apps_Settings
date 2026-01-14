@@ -119,6 +119,7 @@ import java.util.stream.Collectors;
  * The first user in the list is always the current user.
  * Owner is the primary user.
  */
+// LINT.IfChange
 @SearchIndexable
 public class UserSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceClickListener,
@@ -2043,3 +2044,4 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
             };
 }
+// LINT.ThenChange(UserSettingsScreenApi.kt)

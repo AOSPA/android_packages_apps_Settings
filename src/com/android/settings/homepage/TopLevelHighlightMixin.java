@@ -45,8 +45,7 @@ public class TopLevelHighlightMixin implements Parcelable, DialogInterface.OnSho
     private HighlightableTopLevelPreferenceAdapter mTopLevelAdapter;
     private boolean mActivityEmbedded;
 
-    public TopLevelHighlightMixin(boolean activityEmbedded) {
-        mActivityEmbedded = activityEmbedded;
+    public TopLevelHighlightMixin() {
     }
 
     public TopLevelHighlightMixin(Parcel source) {

@@ -60,6 +60,23 @@ open class TabbedDisplayPreferenceFragment(
     // Map toolbar indices to display IDs
     private val toolbarIdxToDisplayIdMapping: HashBiMap<Int, Int> = HashBiMap.create()
 
+    private var floatingToolbar: View? = null
+    private val toolbarLayoutListener =
+        View.OnLayoutChangeListener { v, _, _, _, _, _, _, _, _ ->
+            val params = v.layoutParams as? ViewGroup.MarginLayoutParams
+            val bottomMargin = params?.bottomMargin ?: 0
+            val totalPadding = v.height + bottomMargin * 2
+            // Font / display size might be set to be big enough to start obscuring the content
+            // behind. Add toolbar height as pref padding to let scrolling beyond the item list to
+            // show prefs behind the toolbar.
+            selectedDisplayPrefContainer.setPadding(
+                selectedDisplayPrefContainer.paddingLeft,
+                selectedDisplayPrefContainer.paddingTop,
+                selectedDisplayPrefContainer.paddingRight,
+                totalPadding,
+            )
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (testViewModel != null) {
@@ -88,6 +105,12 @@ open class TabbedDisplayPreferenceFragment(
             view.findViewById(R.id.selected_display_preference_container) as FocusAwareFrameLayout
         noDisplayConnectedLayout = view.findViewById(R.id.no_display_connected_layout)
 
+        floatingToolbar =
+            activity.findViewById<View?>(
+                com.android.settingslib.collapsingtoolbar.R.id.floating_toolbar
+            )
+        floatingToolbar?.addOnLayoutChangeListener(toolbarLayoutListener)
+
         setupAppBarLayout()
         setupDisplayTopologyPreferenceView(view)
         setupSelectedDisplayPreferenceFragment(savedInstanceState)
@@ -108,6 +131,7 @@ open class TabbedDisplayPreferenceFragment(
             appBarLayout.setOnGenericMotionListener(null)
         }
         getCurrentActivity()?.removeOnItemSelectedListener()
+        floatingToolbar?.removeOnLayoutChangeListener(toolbarLayoutListener)
     }
 
     @VisibleForTesting
