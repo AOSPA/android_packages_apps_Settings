@@ -49,6 +49,8 @@ import org.mockito.junit.MockitoRule;
 @RunWith(AndroidJUnit4.class)
 public class WifiUtilsTest {
 
+    static final int USER_ID_CURRENT = Process.myUserHandle().getIdentifier();
+    static final int USER_ID_OTHER = USER_ID_CURRENT + 1;
     static final String[] WIFI_REGEXS = {"wifi_regexs"};
 
     @Rule
@@ -203,7 +205,7 @@ public class WifiUtilsTest {
     public void isNetworkEditable_ownedNetwork() {
         final WifiEntry wifiEntry = mock(WifiEntry.class);
         final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
-        wifiConfiguration.creatorUid = Process.myUid();
+        when(wifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
         when(wifiEntry.isModifiableByOtherUsers()).thenReturn(false);
 
@@ -214,7 +216,7 @@ public class WifiUtilsTest {
     public void isNetworkEditable_notOwnedNetwork_singleUser() {
         final WifiEntry wifiEntry = mock(WifiEntry.class);
         final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
-        wifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(wifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(wifiEntry.isModifiableByOtherUsers()).thenReturn(false);
         when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
         when(mUserManager.getUserCount()).thenReturn(1);
@@ -226,7 +228,7 @@ public class WifiUtilsTest {
     public void isNetworkEditable_notOwnedNetwork_multipleUser_networkModifiable() {
         final WifiEntry wifiEntry = mock(WifiEntry.class);
         final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
-        wifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(wifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
         when(wifiEntry.isModifiableByOtherUsers()).thenReturn(true);
         when(mUserManager.getUserCount()).thenReturn(3);
@@ -238,7 +240,7 @@ public class WifiUtilsTest {
     public void isNetworkEditable_guestUser_multipleUser_networkModifiable() {
         final WifiEntry wifiEntry = mock(WifiEntry.class);
         final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
-        wifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(wifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
         when(wifiEntry.isModifiableByOtherUsers()).thenReturn(true);
         when(WifiUtils.isGuestUser(mContext)).thenReturn(true);
@@ -261,7 +263,7 @@ public class WifiUtilsTest {
         final WifiEntry wifiEntry = mock(WifiEntry.class);
         final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
         when(WifiUtils.isGuestUser(mContext)).thenReturn(false);
-        wifiConfiguration.creatorUid = Process.myUid();
+        when(wifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
         when(wifiEntry.isModifiableByOtherUsers()).thenReturn(false);
 
@@ -273,7 +275,7 @@ public class WifiUtilsTest {
         final WifiEntry wifiEntry = mock(WifiEntry.class);
         final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
         when(WifiUtils.isGuestUser(mContext)).thenReturn(false);
-        wifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(wifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
         when(wifiEntry.isModifiableByOtherUsers()).thenReturn(true);
         when(mUserManager.getUserCount()).thenReturn(3);
@@ -285,7 +287,7 @@ public class WifiUtilsTest {
     public void isSharedFieldEditable_ownedNetwork_guestUser_multipleUser() {
         final WifiEntry wifiEntry = mock(WifiEntry.class);
         final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
-        wifiConfiguration.creatorUid = Process.myUid();
+        when(wifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
         when(WifiUtils.isGuestUser(mContext)).thenReturn(true);
         when(mUserManager.getUserCount()).thenReturn(3);

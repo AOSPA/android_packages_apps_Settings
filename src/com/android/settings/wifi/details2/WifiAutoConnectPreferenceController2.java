@@ -33,6 +33,7 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.wifi.WifiUtils;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
@@ -101,15 +102,7 @@ public class WifiAutoConnectPreferenceController2 extends TogglePreferenceContro
             } else {
                 switchPref.setChecked(isChecked());
 
-                boolean enabled = true;
-                if (com.android.settings.connectivity.Flags.wifiMultiuser()
-                        && config != null) {
-                    if (config.getCreatorUserId() != mContext.getUserId()) {
-                        if (mUserManager != null && mUserManager.getUserCount() > 1) {
-                            enabled = false;
-                        }
-                    }
-                }
+                boolean enabled = WifiUtils.isNetworkEditable(mWifiEntry, mContext);
                 preference.setEnabled(enabled);
             }
         }
