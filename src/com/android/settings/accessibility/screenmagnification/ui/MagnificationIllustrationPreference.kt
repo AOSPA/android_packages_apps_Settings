@@ -48,11 +48,7 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
         return IllustrationPreference(context).apply {
             isSelectable = false
             lottieAnimationResId = lottieResId
-            contentDescription =
-                context.getString(
-                    R.string.accessibility_illustration_content_description,
-                    context.getText(R.string.accessibility_screen_magnification_title),
-                )
+            contentDescription = getContentDescription(context)
             applyDynamicColor()
 
             setOnBindListener { view: LottieAnimationView? ->
@@ -60,6 +56,12 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
             }
         }
     }
+
+    fun getContentDescription(context: Context): CharSequence =
+        context.getString(
+            R.string.accessibility_illustration_content_description,
+            context.getText(R.string.accessibility_screen_magnification_title),
+        )
 
     companion object {
         const val KEY = "animated_image"

@@ -19,12 +19,20 @@ package com.android.settings.accessibility.setupwizard
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ComponentName
 import android.content.Context
+import android.graphics.drawable.Animatable
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.view.View
+import com.airbnb.lottie.LottieAnimationView
+import com.android.settings.R
 import com.android.settings.testutils.AccessibilityTestUtils
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 import org.mockito.kotlin.whenever
+import org.robolectric.Shadows.shadowOf
 
 /** Utility for creating mocked Accessibility Services for Setup Wizard tests. */
 fun createMockServiceInfo(
@@ -52,4 +60,29 @@ fun createMockServiceInfo(
                     }
                 }
         }
+}
+
+/**
+ * Sets up a mocked [LottieAnimationView].
+ *
+ * @param isLottieAnimatable If true, the [mockDrawable] is ignored (set to null). This is used to
+ *   simulate a state where the Lottie view is expected to handle its own animation logic or
+ *   transition from a URI, rather than using a static mock.
+ */
+fun <T> setupMockLottieAnimationView(
+    context: Context,
+    imageUri: Uri,
+    mockDrawable: T? = null,
+    isLottieAnimatable: Boolean = false,
+): View where T : Drawable, T : Animatable {
+    shadowOf(context.contentResolver).registerInputStream(imageUri, "".byteInputStream())
+
+    // IllustrationItem sets isLottieAnimation = true ONLY if getDrawable() returns null
+    // after setting a URI/ResId. We return null here to trigger that logic branch.
+    val effectiveDrawable = if (isLottieAnimatable) null else mockDrawable
+
+    return spy(LottieAnimationView(context)).apply {
+        id = R.id.sud_item_illustration
+        stub { on { drawable } doReturn effectiveDrawable }
+    }
 }

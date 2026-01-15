@@ -32,6 +32,12 @@ class ColorInversionSetupWizardFragment : BaseSetupWizardFragment() {
     override fun createControllers(adapter: RecyclerItemAdapter): Map<Int, BaseItemController> =
         buildMap {
             val context = requireContext()
+            findItem(adapter, R.id.color_inversion_illustration_in_suw)?.let {
+                put(
+                    R.id.color_inversion_illustration_in_suw,
+                    ColorInversionIllustrationItemController(context, it),
+                )
+            }
             findItem(adapter, R.id.color_inversion_footer_in_suw)?.let {
                 put(
                     R.id.color_inversion_footer_in_suw,
