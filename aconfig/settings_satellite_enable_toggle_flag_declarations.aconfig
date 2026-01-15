@@ -1,0 +1,12 @@
+package: "com.android.settings.flags"
+container: "system_ext"
+
+flag {
+  name: "enable_satellite_toggle"
+  namespace: "settings_experience"
+  description: "Enable satellite toggle in settings"
+  bug: "475938830"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
+}
