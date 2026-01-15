@@ -57,7 +57,10 @@ class PowerMenuSettingsScreenApi() :
         preference(
             key = "gesture_power_menu_long_press_category",
             purpose = R.string.long_press_power_category_purpose,
-            type = CustomEnum(LongPressPowerActions::class),
+            type = CustomEnum(
+                LongPressPowerActions::class,
+                R.string.long_press_power_actions_description
+            ),
         ) {
             get {
                 execute {

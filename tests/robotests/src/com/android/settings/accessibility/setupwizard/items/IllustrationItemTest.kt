@@ -35,12 +35,12 @@ import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.spy
 import org.mockito.kotlin.any
 import org.mockito.kotlin.clearInvocations
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
+import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestParameterInjector

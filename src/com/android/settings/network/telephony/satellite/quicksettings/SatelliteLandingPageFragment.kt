@@ -23,6 +23,8 @@ import android.os.Bundle
 import android.telephony.SubscriptionManager
 import android.util.Log
 import android.view.View
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.collectAsState
@@ -36,6 +38,7 @@ import com.android.internal.telephony.flags.Flags
 import com.android.settings.R
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
+import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.IllustrationPreference
 import com.android.settingslib.widget.SettingsBasePreferenceFragment
@@ -133,6 +136,11 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
                 launch {
                     viewModel.isCarrierRoamingNtnSupported.collectLatest { isCarrier ->
                         updateTryADemoButtonIcon(isCarrier)
+                    }
+                }
+                launch {
+                    viewModel.bannerState.collect { bannerState ->
+                        updateWarningBanners(bannerState)
                     }
                 }
             }
@@ -240,6 +248,171 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
         }
     }
 
+    /**
+     * Updates the warning banners based on the provided [SatelliteBannerState].
+     *
+     * This method prioritizes the banners to display. Only the first two applicable banners are
+     * shown.
+     *
+     * @param bannerState The current state of satellite conditions affecting banner display.
+     */
+    private fun updateWarningBanners(bannerState: SatelliteBannerState) {
+        val primaryBanner = findPreference<BannerMessagePreference>(KEY_PRIMARY_WARNING_BANNER)
+        val secondaryBanner = findPreference<BannerMessagePreference>(KEY_SECONDARY_WARNING_BANNER)
+
+        // Hide banners by default, they will be shown if a warning is applicable.
+        primaryBanner?.isVisible = false
+        secondaryBanner?.isVisible = false
+
+        val bannersToShow = mutableListOf<BannerMessagePreference.() -> Unit>()
+
+        // Priority 1: Network connection is active (Satellite is not available).
+        if (bannerState.isNetworkConnected) {
+            bannersToShow.add { setupNetworkConnectedBanner(this) }
+        }
+
+        // Priority 2: Satellite service is not available in the current region.
+        if (!bannerState.isSatelliteAvailableInRegion) {
+            bannersToShow.add { setupSatelliteUnavailableInRegionBanner(this) }
+        }
+
+        // Priority 3: User is not entitled to satellite service.
+        if (!bannerState.isEntitled) {
+            bannersToShow.add { setupNotEntitledBanner(this) }
+        }
+
+        // Priority 4: Default messaging app is not set correctly.
+        if (!bannerState.isDefaultMessagingApp) {
+            bannersToShow.add { setupNotDefaultMessagingAppBanner(this) }
+        }
+
+        // Priority 5: Satellite is enabled by carrier (Informational).
+        if (bannerState.isSatelliteEnabledByCarrier) {
+            bannersToShow.add { setupSatelliteEnabledByCarrierBanner(this) }
+        }
+
+        // Priority 6: Satellite is not allowed (Unspecified generic warning).
+        if (!bannerState.isSatelliteAllowed) {
+            bannersToShow.add { setupSatelliteGenericUnavailableBanner(this) }
+        }
+
+        val availableBanners = listOfNotNull(primaryBanner, secondaryBanner)
+        bannersToShow.zip(availableBanners).forEach { (bannerSetup, banner) ->
+            banner.apply(bannerSetup)
+        }
+    }
+
+    private fun setupNetworkConnectedBanner(banner: BannerMessagePreference?) {
+        setupWarningBannerPreference(
+            banner,
+            titleRes = R.string.satellite_not_available_warning_title,
+            summaryRes = R.string.satellite_network_connected_warning_summary,
+            buttonTextRes = 0,
+            intent = null,
+        )
+    }
+
+    private fun setupSatelliteUnavailableInRegionBanner(banner: BannerMessagePreference?) {
+        setupWarningBannerPreference(
+            banner,
+            titleRes = R.string.satellite_not_available_warning_title,
+            summaryRes = R.string.satellite_unavailable_in_region_warning_summary,
+            buttonTextRes = R.string.satellite_view_coverage_button,
+            // TODO(b/465479769): Create an intent to view available locations.
+            intent = null,
+        )
+    }
+
+    private fun setupSatelliteGenericUnavailableBanner(banner: BannerMessagePreference?) {
+        setupWarningBannerPreference(
+            banner,
+            titleRes = R.string.satellite_not_available_warning_title,
+            summaryRes = R.string.satellite_unavailable_generic_warning_summary,
+            buttonTextRes = 0,
+            intent = null,
+        )
+    }
+
+    private fun setupNotEntitledBanner(banner: BannerMessagePreference?) {
+        setupWarningBannerPreference(
+            banner,
+            titleRes = R.string.satellite_not_available_warning_title,
+            summaryRes = R.string.satellite_plan_warning_summary,
+            buttonTextRes = 0,
+            intent = null,
+        )
+    }
+
+    private fun setupNotDefaultMessagingAppBanner(banner: BannerMessagePreference?) {
+        setupWarningBannerPreference(
+            banner,
+            titleRes = R.string.satellite_not_available_warning_title,
+            summaryRes = R.string.satellite_default_app_warning_summary,
+            buttonTextRes = R.string.satellite_change_default_app_button,
+            // TODO(b/465479769): Create intent to change default messaging app.
+            intent = null,
+        )
+    }
+
+    private fun setupSatelliteEnabledByCarrierBanner(banner: BannerMessagePreference?) {
+        setupWarningBannerPreference(
+            banner,
+            titleRes = 0,
+            summaryRes = R.string.satellite_carrier_enabled_info_summary,
+            buttonTextRes = R.string.satellite_view_carrier_settings_button,
+            // TODO(b/465479769): Create intent to view carrier settings.
+            intent = null,
+        )
+    }
+
+    /**
+     * Configures a [BannerMessagePreference] with the given parameters.
+     *
+     * @param banner The banner preference to configure.
+     * @param titleRes The resource ID for the banner title. If 0, the title is hidden.
+     * @param summaryRes The resource ID for the banner summary.
+     * @param buttonTextRes The resource ID for the button text. If 0, the button is hidden.
+     * @param intent The intent to launch when the button is clicked. If null, the button does
+     *   nothing.
+     * @param iconRes The resource ID for the banner icon. Defaults to an info icon.
+     */
+    private fun setupWarningBannerPreference(
+        banner: BannerMessagePreference?,
+        @StringRes titleRes: Int,
+        @StringRes summaryRes: Int,
+        @StringRes buttonTextRes: Int,
+        intent: Intent?,
+        @DrawableRes iconRes: Int = R.drawable.ic_info_outline_24,
+    ) {
+        banner?.apply {
+            isVisible = true
+            setAttentionLevel(BannerMessagePreference.AttentionLevel.NORMAL)
+
+            if (titleRes != 0) {
+                setTitle(titleRes)
+            } else {
+                title = null
+            }
+
+            setSummary(summaryRes)
+            setIcon(iconRes)
+            setPositiveButtonText(null)
+            setPositiveButtonOnClickListener(null)
+
+            if (buttonTextRes != 0) {
+                setNegativeButtonText(getString(buttonTextRes))
+                setNegativeButtonOnClickListener {
+                    if (intent != null) {
+                        startActivitySafely(intent)
+                    }
+                }
+            } else {
+                setNegativeButtonText(null)
+                setNegativeButtonOnClickListener(null)
+            }
+        }
+    }
+
     private fun startActivitySafely(intent: Intent) {
         try {
             context?.startActivity(intent)
@@ -250,6 +423,9 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
 
     companion object {
         private const val TAG = "SatelliteLandingPageFragment"
+        private const val KEY_PRIMARY_WARNING_BANNER = "satellite_settings_warning_banner"
+        private const val KEY_SECONDARY_WARNING_BANNER =
+            "satellite_settings_secondary_warning_banner"
         private const val KEY_ILLUSTRATION = "illustration"
         private const val KEY_TRY_A_DEMO_BUTTON = "try_a_demo_button"
         private const val KEY_FOOTER = "footer"

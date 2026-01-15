@@ -39,6 +39,7 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settings.testutils.inflateViewHolder
+import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.IllustrationPreference
 import com.google.common.truth.Truth.assertThat
@@ -80,6 +81,8 @@ class SatelliteLandingPageFragmentTest {
     private val KEY_TRY_A_DEMO_BUTTON = "try_a_demo_button"
     private val KEY_FOOTER = "footer"
     private val KEY_SATELLITE_APPS_LIST = "satellite_apps_list"
+    private val KEY_PRIMARY_WARNING_BANNER = "satellite_settings_warning_banner"
+    private val KEY_SECONDARY_WARNING_BANNER = "satellite_settings_secondary_warning_banner"
 
     @Mock private lateinit var subInfo: SubscriptionInfo
     @Mock private lateinit var packageManager: PackageManager
@@ -357,6 +360,87 @@ class SatelliteLandingPageFragmentTest {
         scenario.onFragment { fragment ->
             val demoButton = fragment.findPreference<Preference>(KEY_TRY_A_DEMO_BUTTON)
             assertThat(demoButton).isInstanceOf(SatelliteDemoPreference::class.java)
+        }
+    }
+
+    @Test
+    fun updateWarningBanners_whenPrimaryBannerMissing_showsHighPriorityInSecondary() {
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment ->
+            // 1. Remove Primary Banner to simulate layout change/null
+            val primaryBanner =
+                fragment.findPreference<BannerMessagePreference>(KEY_PRIMARY_WARNING_BANNER)
+            fragment.preferenceScreen.removePreference(primaryBanner!!)
+            // 2. Set Banner State: Network Connected (Priority 1) and Unavailable in Region
+            // (Priority 2)
+            val viewModel = fragment.viewModel
+            val bannerStateFlow =
+                ReflectionHelpers.getField<MutableStateFlow<SatelliteBannerState>>(
+                    viewModel,
+                    "_bannerState",
+                )
+
+            bannerStateFlow.value =
+                SatelliteBannerState(
+                    isNetworkConnected = true,
+                    isSatelliteAvailableInRegion = false,
+                )
+        }
+        waitForAsync()
+
+        scenario.onFragment { fragment ->
+            val secondaryBanner =
+                fragment.findPreference<BannerMessagePreference>(KEY_SECONDARY_WARNING_BANNER)
+
+            // Verify Secondary Banner is Visible
+            assertThat(secondaryBanner?.isVisible).isTrue()
+            // Verify it shows Priority 1 Content (Network Connected)
+            val expectedSummary =
+                context.getString(R.string.satellite_network_connected_warning_summary)
+            assertThat(secondaryBanner?.summary).isEqualTo(expectedSummary)
+        }
+    }
+
+    @Test
+    fun updateWarningBanners_whenBothBannersAvailable_showsTopTwoPriorities() {
+        val scenario = launchFragment()
+        scenario.onFragment { fragment ->
+            val viewModel = fragment.viewModel
+            val bannerStateFlow =
+                ReflectionHelpers.getField<MutableStateFlow<SatelliteBannerState>>(
+                    viewModel,
+                    "_bannerState",
+                )
+
+            // Priority 1: Network Connected
+            // Priority 2: Unavailable in Region
+            // Priority 3: Not Entitled
+            bannerStateFlow.value =
+                SatelliteBannerState(
+                    isNetworkConnected = true,
+                    isSatelliteAvailableInRegion = false,
+                    isEntitled = false,
+                )
+        }
+        waitForAsync()
+
+        scenario.onFragment { fragment ->
+            val primaryBanner =
+                fragment.findPreference<BannerMessagePreference>(KEY_PRIMARY_WARNING_BANNER)
+            val secondaryBanner =
+                fragment.findPreference<BannerMessagePreference>(KEY_SECONDARY_WARNING_BANNER)
+
+            assertThat(primaryBanner?.isVisible).isTrue()
+            assertThat(secondaryBanner?.isVisible).isTrue()
+            // Primary shows Priority 1
+            assertThat(primaryBanner?.summary)
+                .isEqualTo(context.getString(R.string.satellite_network_connected_warning_summary))
+            // Secondary shows Priority 2
+            assertThat(secondaryBanner?.summary)
+                .isEqualTo(
+                    context.getString(R.string.satellite_unavailable_in_region_warning_summary)
+                )
         }
     }
 

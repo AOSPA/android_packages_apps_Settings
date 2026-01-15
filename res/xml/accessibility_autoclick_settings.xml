@@ -39,53 +39,7 @@
         android:key="autoclick_shortcut_preference"
         android:title="@string/accessibility_autoclick_shortcut_title"
         android:persistent="false"
-        settings:controller="com.android.settings.accessibility.ToggleAutoclickShortcutPreferenceController"/>
-
-    <!-- Items in a list should not be searchable. -->
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
-        android:key="accessibility_control_autoclick_default"
-        android:title="@string/accessibility_autoclick_default_title"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.ToggleAutoclickPreferenceController"/>
-
-    <!-- Items in a list should not be searchable. -->
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
-        android:key="accessibility_control_autoclick_200ms"
-        android:title="@string/accessibility_autoclick_short_title"
-        android:summary="@string/accessibility_autoclick_short_summary"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.ToggleAutoclickPreferenceController"/>
-
-    <!-- Items in a list should not be searchable. -->
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
-        android:key="accessibility_control_autoclick_600ms"
-        android:title="@string/accessibility_autoclick_medium_title"
-        android:summary="@string/accessibility_autoclick_medium_summary"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.ToggleAutoclickPreferenceController"/>
-
-    <!-- Items in a list should not be searchable. -->
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
-        android:key="accessibility_control_autoclick_1sec"
-        android:title="@string/accessibility_autoclick_long_title"
-        android:summary="@string/accessibility_autoclick_long_summary"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.ToggleAutoclickPreferenceController"/>
-
-    <!-- Items in a list should not be searchable. -->
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
-        android:key="accessibility_control_autoclick_custom"
-        android:title="@string/accessibility_autoclick_custom_title"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.ToggleAutoclickPreferenceController"/>
-
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="autoclick_custom_seekbar"
-        android:layout="@layout/accessibility_autoclick_custom_seekbar"
-        android:selectable="false"
-        android:visibility="gone"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.ToggleAutoclickCustomSeekbarController"/>
+        settings:controller="com.android.settings.accessibility.ToggleShortcutPreferenceController"/>
 
     <Preference
         android:key="accessibility_control_autoclick_delay_before_click"

@@ -37,7 +37,6 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.server.accessibility.Flags;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
@@ -139,7 +138,7 @@ public class ToggleAutoclickCursorAreaSizeController extends BasePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        return Flags.enableAutoclickIndicator() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return AVAILABLE;
     }
 
     @Override

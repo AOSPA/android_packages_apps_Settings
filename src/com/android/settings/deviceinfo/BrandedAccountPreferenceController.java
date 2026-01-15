@@ -27,8 +27,10 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.accounts.AccountFeatureProvider;
+import com.android.settings.accounts.ManageAccountsDashboardFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 
 public class BrandedAccountPreferenceController extends BasePreferenceController {
@@ -75,11 +77,19 @@ public class BrandedAccountPreferenceController extends BasePreferenceController
             return false;
         }
 
-        new SubSettingLauncher(mContext)
-                .setDestination(AccountDashboardFragment.class.getName())
-                .setTitleRes(R.string.account_dashboard_title)
+        if (Flags.enableAccountsAndBackupScreen()) {
+            new SubSettingLauncher(mContext)
+                .setDestination(ManageAccountsDashboardFragment.class.getName())
+                .setTitleRes(R.string.accounts_and_backup_manage_accounts_title)
                 .setSourceMetricsCategory(SettingsEnums.DEVICEINFO)
                 .launch();
+        } else {
+            new SubSettingLauncher(mContext)
+                    .setDestination(AccountDashboardFragment.class.getName())
+                    .setTitleRes(R.string.account_dashboard_title)
+                    .setSourceMetricsCategory(SettingsEnums.DEVICEINFO)
+                    .launch();
+        }
         return true;
     }
 

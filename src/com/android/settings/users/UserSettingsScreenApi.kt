@@ -103,7 +103,7 @@ class UserSettingsScreenApi :
             purpose = R.string.user_settings_enable_guest_calling_pref_purpose,
             type = AnyBoolean,
         ) {
-            permissions(listOf(MANAGE_USERS))
+            permissions(MANAGE_USERS)
             preconditions(R.string.user_settings_enable_guest_calling_precondition) {
                 val userManager = context.getSystemService(UserManager::class.java)
                 // TODO(b/474008291) : Remove HSUM since it is no longer a blocker for telephony

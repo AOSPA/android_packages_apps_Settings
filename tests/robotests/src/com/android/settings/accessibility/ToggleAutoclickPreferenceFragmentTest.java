@@ -28,9 +28,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
@@ -47,7 +44,6 @@ import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -63,9 +59,6 @@ import java.util.Set;
 @RunWith(RobolectricTestRunner.class)
 public class ToggleAutoclickPreferenceFragmentTest {
     private static final String KEY_AUTOCLICK_SHORTCUT_PREFERENCE = "autoclick_shortcut_preference";
-
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private FragmentScenario<ToggleAutoclickPreferenceFragment> mFragScenario = null;
@@ -85,16 +78,6 @@ public class ToggleAutoclickPreferenceFragmentTest {
         }
     }
 
-    @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
-    @Test
-    public void verifyFragmentUI_flagOff_doesNotContainShortcutToggle() {
-        launchFragment();
-        Preference pref = mFragment.findPreference(KEY_AUTOCLICK_SHORTCUT_PREFERENCE);
-        assertThat(pref).isNotNull();
-        assertThat(pref.isVisible()).isFalse();
-    }
-
-    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
     @Test
     public void verifyFragmentUI_containsShortcutToggle() {
         launchFragment();
@@ -105,7 +88,6 @@ public class ToggleAutoclickPreferenceFragmentTest {
                 mContext.getString(R.string.accessibility_autoclick_shortcut_title));
     }
 
-    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
     @Test
     public void shortcutOff_clickShortcutToggle_turnOnShortcutAndShowShortcutTutorial() {
         mA11yManager.enableShortcutsForTargets(
@@ -127,7 +109,6 @@ public class ToggleAutoclickPreferenceFragmentTest {
         assertShortcutsTutorialDialogShown(mFragment);
     }
 
-    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
     @Test
     public void shortcutOn_clickShortcutToggle_turnOffShortcutAndNoTutorialShown() {
         mA11yManager.enableShortcutsForTargets(
@@ -150,7 +131,6 @@ public class ToggleAutoclickPreferenceFragmentTest {
         assertThat(ShadowDialog.getLatestDialog()).isNull();
     }
 
-    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
     @Test
     public void clickShortcutSettings_showEditShortcutsScreenWithoutChangingShortcutToggleState() {
         launchFragment();
@@ -201,16 +181,6 @@ public class ToggleAutoclickPreferenceFragmentTest {
     }
 
     @Test
-    @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
-    public void getNonIndexableKeys_flagDisabled_returnsOnlyShortcutKey() {
-        final List<String> niks = ToggleAutoclickPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
-
-        assertThat(niks).contains(KEY_AUTOCLICK_SHORTCUT_PREFERENCE);
-    }
-
-    @Test
-    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
     public void getNonIndexableKeys_doesNotContainShortcut() {
         final List<String> niks = ToggleAutoclickPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext);
