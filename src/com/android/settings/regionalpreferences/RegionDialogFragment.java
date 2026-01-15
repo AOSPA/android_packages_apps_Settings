@@ -22,6 +22,8 @@ import static android.app.settings.SettingsEnums.ACTION_CHANGE_REGION_DIALOG_NEG
 import static android.app.settings.SettingsEnums.ACTION_CHANGE_REGION_DIALOG_POSITIVE_BTN_CLICKED;
 import static android.app.settings.SettingsEnums.CHANGE_REGION_DIALOG;
 
+import static com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.updateRegion;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -146,7 +148,7 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
             if (mDialogType == DIALOG_CHANGE_SYSTEM_LOCALE_REGION
                     || mDialogType == DIALOG_CHANGE_PREFERRED_LOCALE_REGION) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
-                    updateRegion(mLocaleInfo.getLocale().toLanguageTag());
+                    updateRegion(mLocaleInfo.getLocale());
                     mMetricsFeatureProvider.action(
                             mContext,
                             mDialogType == DIALOG_CHANGE_SYSTEM_LOCALE_REGION
@@ -200,55 +202,6 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
                     break;
             }
             return dialogContent;
-        }
-
-        @VisibleForTesting
-        void updateRegion(String selectedLanguageTag) {
-            Locale[] newLocales = getUpdatedLocales(Locale.forLanguageTag(selectedLanguageTag));
-            LocaleList localeList = new LocaleList(newLocales);
-            LocaleList.setDefault(localeList);
-            LocalePicker.updateLocales(localeList);
-        }
-
-        private Locale[] getUpdatedLocales(Locale selectedLocale) {
-            LocaleList localeList = LocaleList.getDefault();
-            Locale[] newLocales = new Locale[localeList.size()];
-            for (int i = 0; i < localeList.size(); i++) {
-                Locale target = localeList.get(i);
-                if (sameLanguageAndScript(selectedLocale, target)) {
-                    newLocales[i] = appendLocaleExtension(selectedLocale);
-                } else {
-                    newLocales[i] = localeList.get(i);
-                }
-            }
-            return newLocales;
-        }
-
-        private Locale appendLocaleExtension(Locale selectedLocale) {
-            Locale systemLocale = Locale.getDefault();
-            Set<Character> extensionKeys = systemLocale.getExtensionKeys();
-            Locale.Builder builder = new Locale.Builder();
-            builder.setLocale(selectedLocale);
-            if (!extensionKeys.isEmpty()) {
-                for (Character extKey : extensionKeys) {
-                    builder.setExtension(extKey, systemLocale.getExtension(extKey));
-                }
-            }
-            return builder.build();
-        }
-
-        private static boolean sameLanguageAndScript(Locale source, Locale target) {
-            String sourceLanguage = source.getLanguage();
-            String targetLanguage = target.getLanguage();
-            String sourceLocaleScript = source.getScript();
-            String targetLocaleScript = target.getScript();
-            if (sourceLanguage.equals(targetLanguage)) {
-                if (!sourceLocaleScript.isEmpty() && !targetLocaleScript.isEmpty()) {
-                    return sourceLocaleScript.equals(targetLocaleScript);
-                }
-                return true;
-            }
-            return false;
         }
 
         @VisibleForTesting
