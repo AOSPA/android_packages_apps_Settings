@@ -41,6 +41,7 @@ import com.android.settings.supervision.shared.widget.AutoHidingPreferenceCatego
 import com.android.settings.supervision.shared.widget.NonIndexablePreferenceCategory
 import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -62,7 +63,10 @@ import kotlinx.coroutines.CoroutineScope
  */
 @ProvidePreferenceScreen(SupervisionDashboardScreen.KEY)
 open class SupervisionDashboardScreen :
-    PreferenceScreenMixin, PreferenceLifecycleProvider, OnRoleHoldersChangedListener {
+    PreferenceAvailabilityProvider,
+    PreferenceScreenMixin,
+    PreferenceLifecycleProvider,
+    OnRoleHoldersChangedListener {
     private var supervisionClient: SupervisionMessengerClient? = null
     private var supervisionManager: SupervisionManager? = null
     private var lifeCycleContext: PreferenceLifecycleContext? = null
@@ -163,8 +167,7 @@ open class SupervisionDashboardScreen :
     override val icon: Int
         get() = R.drawable.ic_account_child_invert
 
-    override val indexable
-        get() = !Utils.shouldHideSupervisionInDemoMode(lifeCycleContext)
+    override fun isAvailable(context: Context) = !Utils.shouldHideSupervisionInDemoMode(context)
 
     override val keywords: Int
         get() = R.string.keywords_supervision_settings
