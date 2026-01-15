@@ -68,6 +68,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+// LINT.IfChange
 /**
  * Fragment with print service settings.
  */
@@ -763,3 +764,4 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
     }
 }
+// LINT.ThenChange(PrintServiceSettingsApiScreen.kt)
