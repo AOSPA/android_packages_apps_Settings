@@ -55,7 +55,19 @@ class ActionDisabledByAdvancedProtectionDialog : SpaDialogWindowTypeActivity() {
         val featureId = getIntentFeatureId()
         val supportButton = getSupportButtonIfExists()
 
+        val configuration = androidx.compose.ui.platform.LocalConfiguration.current
+
         if (featureId == FEATURE_ID_DISALLOW_INSECURE_WIFI_AUTOJOIN) {
+            // Remove shield icon if very large font in landscape mode
+            val dialogIcon: @Composable (() -> Unit)? =
+                if (shouldShowIcon(configuration)) {
+                    {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_settings_safety_center),
+                            contentDescription = null,
+                        )
+                    }
+                } else null
             // Custom dialog for Wi-Fi Autojoin
             SettingsAlertDialogContent(
                 confirmButton =
@@ -70,12 +82,7 @@ class ActionDisabledByAdvancedProtectionDialog : SpaDialogWindowTypeActivity() {
                         logDialogShown(learnMoreClicked = false)
                     },
                 title = getString(R.string.wifi_autojoin_disabled_title),
-                icon = {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_settings_safety_center),
-                        contentDescription = null,
-                    )
-                },
+                icon = dialogIcon,
                 text = { WifiAutojoinDisabledText(supportButton?.onClick) },
             )
         } else {
@@ -218,8 +225,24 @@ class ActionDisabledByAdvancedProtectionDialog : SpaDialogWindowTypeActivity() {
         return intent.getIntExtra(EXTRA_SUPPORT_DIALOG_TYPE, SUPPORT_DIALOG_TYPE_UNKNOWN)
     }
 
+    /** Determines if the icon should be shown based on screen real estate. */
+    @VisibleForTesting
+    fun shouldShowIcon(configuration: android.content.res.Configuration): Boolean {
+        val isLandscape =
+            configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+
+        if (!isLandscape) return true
+
+        val isFontTooLarge = configuration.fontScale > A11Y_FONT_SCALE_THRESHOLD
+        val isScreenTooShort = configuration.screenHeightDp < MIN_HEIGHT_FOR_ICON_DP
+
+        return !(isFontTooLarge || isScreenTooShort)
+    }
+
     private companion object {
         const val TAG = "AdvancedProtectionDlg"
+        const val A11Y_FONT_SCALE_THRESHOLD = 1.1f
+        const val MIN_HEIGHT_FOR_ICON_DP = 400
         val defaultMessageId = R.string.disabled_by_advanced_protection_action_message
         val featureIdsWithSettingOn = setOf(FEATURE_ID_DISALLOW_CELLULAR_2G, FEATURE_ID_ENABLE_MTE)
         val featureIdsWithSettingOff = setOf(FEATURE_ID_DISALLOW_INSTALL_UNKNOWN_SOURCES)
