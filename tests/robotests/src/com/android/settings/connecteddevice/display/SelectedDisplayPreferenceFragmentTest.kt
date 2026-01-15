@@ -36,6 +36,9 @@ import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceScreen
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FOLLOWER_ARBITRARY_REFRESH_RATE_SELECTION_PLATFORM
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FOLLOWER_DISPLAY_BACKPRESSURE_PLATFORM
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FORCE_SLOWER_FOLLOWER_GPU_COMPOSITION_PLATFORM
 import com.android.settings.RestrictedListPreference
 import com.android.settings.connecteddevice.display.SelectedDisplayPreferenceFragment.PrefInfo
 import com.android.settings.flags.Flags.FLAG_ENABLE_RESOLUTION_REFRESH_RATE_SETTING
@@ -269,7 +272,12 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     }
 
     @Test
-    @EnableFlags(FLAG_ENABLE_RESOLUTION_REFRESH_RATE_SETTING)
+    @EnableFlags(
+        FLAG_ENABLE_RESOLUTION_REFRESH_RATE_SETTING,
+        FLAG_FOLLOWER_ARBITRARY_REFRESH_RATE_SELECTION_PLATFORM,
+        FLAG_FOLLOWER_DISPLAY_BACKPRESSURE_PLATFORM,
+        FLAG_FORCE_SLOWER_FOLLOWER_GPU_COMPOSITION_PLATFORM,
+    )
     fun testExternalDisplaySelected_launchingResolutionSelector() {
         fragment = initFragment()
         val display = mDisplays.first { it.id == EXTERNAL_DISPLAY_ID }
