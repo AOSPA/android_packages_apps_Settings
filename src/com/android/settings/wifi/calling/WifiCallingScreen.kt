@@ -103,7 +103,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(EXTRA_SUB_ID, "The subscription ID", required = true)
+            parameter(EXTRA_SUB_ID, "The subscription ID. If it's not provided, the default system subscription will be used.", required = false)
         }
 
         @JvmStatic

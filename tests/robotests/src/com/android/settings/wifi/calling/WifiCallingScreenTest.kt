@@ -94,6 +94,18 @@ class WifiCallingScreenTest : SettingsCatalystTestCase() {
         assertThat(screen.isAvailable(appContext)).isFalse()
     }
 
+    @Test
+    @EnableFlags(
+        Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
+        CatalystFlags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+    )
+    fun subId_whenFlagAreTrue_whenKeyIsMissing_fallsBackToDefault() {
+        val bundle = Bundle() // No subId in bundle
+        val screen = createScreen(bundle)
+
+        assertThat(screen.isAvailable(appContext)).isFalse()
+    }
+
     private fun createScreen(args: Bundle): WifiCallingScreen {
         return if (CatalystFlags.catalystUseKeyParameters()) {
             WifiCallingScreen(WifiCallingScreen.parametersSchema.prepare(args))
