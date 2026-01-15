@@ -65,6 +65,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.DelightHelper;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.util.LottieAnimationHelper;
@@ -179,7 +180,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
             mIllustrationLottie.addAnimatorListener(mA11yUpdater);
             configureA11yDelegate(true);
-            mIllustrationLottie.playAnimation();
+            playWithDelightAnimationIcon(mIllustrationLottie);
 
             mIllustrationLottie.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -542,6 +543,23 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         return SettingsEnums.FACE_ENROLL_INTRO;
     }
 
+
+    @VisibleForTesting
+    void playWithDelightAnimationIcon(@Nullable LottieAnimationView lottieView) {
+        if (lottieView == null) {
+            return;
+        }
+
+        if (DelightHelper.shouldApplyAnimatedIcon(this)) {
+            lottieView.cancelAnimation();
+            lottieView.postDelayed(lottieView::playAnimation, getResources().getInteger(
+                    com.google.android.setupdesign.R.integer.sud_lottie_animation_delay_ms)
+            );
+        } else {
+            lottieView.playAnimation();
+        }
+    }
+
     private void hideDefaultIllustration() {
         if (mIsUsingLottie) {
             forceConfigureA11yDelegate(false);
@@ -562,8 +580,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
             }
             mIllustrationLottie.setVisibility(View.VISIBLE);
             forceConfigureA11yDelegate(true);
-            mIllustrationLottie.playAnimation();
             mIllustrationLottie.setProgress(0f);
+            playWithDelightAnimationIcon(mIllustrationLottie);
         } else {
             mIllustrationDefault.setVisibility(View.VISIBLE);
             mIllustrationDefault.start();
