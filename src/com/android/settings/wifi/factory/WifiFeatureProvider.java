@@ -19,6 +19,7 @@ package com.android.settings.wifi.factory;
 import android.content.Context;
 import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
+import android.print.PrintManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.android.settings.print.PrintRepository;
 import com.android.settings.wifi.details.WifiNetworkDetailsViewModel;
 import com.android.settings.wifi.dpp.WifiDppQrCodeGeneratorFragment;
 import com.android.settings.wifi.repository.SharedConnectivityRepository;
@@ -45,9 +47,11 @@ public class WifiFeatureProvider {
     private final Context mAppContext;
     private WifiManager mWifiManager;
     private TetheringManager mTetheringManager;
+    private PrintManager mPrintManager;
     private WifiVerboseLogging mWifiVerboseLogging;
     private WifiHotspotRepository mWifiHotspotRepository;
     private SharedConnectivityRepository mSharedConnectivityRepository;
+    private PrintRepository mPrintRepository;
 
     public WifiFeatureProvider(@NonNull Context appContext) {
         mAppContext = appContext;
@@ -72,6 +76,17 @@ public class WifiFeatureProvider {
             verboseLog(TAG, "getTetheringManager():" + mTetheringManager);
         }
         return mTetheringManager;
+    }
+
+    /**
+     * Gets PrintManager
+     */
+    public PrintManager getPrintManager() {
+        if (mPrintManager == null) {
+            mPrintManager = mAppContext.getSystemService(PrintManager.class);
+            verboseLog(TAG, "getPrintManager():" + mPrintManager);
+        }
+        return mPrintManager;
     }
 
     /**
@@ -105,6 +120,17 @@ public class WifiFeatureProvider {
             verboseLog(TAG, "getSharedConnectivityRepository():" + mSharedConnectivityRepository);
         }
         return mSharedConnectivityRepository;
+    }
+
+    /**
+     * Gets PrintRepository
+     */
+    public PrintRepository getPrintRepository() {
+        if (mPrintRepository == null) {
+            mPrintRepository = new PrintRepository(mAppContext);
+            verboseLog(TAG, "getPrintRepository():" + mPrintRepository);
+        }
+        return mPrintRepository;
     }
 
     /**
