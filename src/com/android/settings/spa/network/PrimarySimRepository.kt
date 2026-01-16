@@ -21,8 +21,8 @@ import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.util.Log
 import com.android.settings.R
+import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
-import com.android.settings.network.telephony.CarrierConfigRepository
 import com.android.settingslib.spa.widget.preference.ListPreferenceOption
 
 class PrimarySimRepository(private val context: Context) {
@@ -34,7 +34,14 @@ class PrimarySimRepository(private val context: Context) {
     )
 
     fun getPrimarySimInfo(selectableSubscriptionInfoList: List<SubscriptionInfo>): PrimarySimInfo? {
-        if (selectableSubscriptionInfoList.size < 2) {
+        // Filter out opportunistic subscriptions since opportunistic subscriptions are not
+        // selectable as default subscriptions.
+        val nonOpportunisticSubscriptions =
+            selectableSubscriptionInfoList.filter { subInfo ->
+                !Flags.excludeOpportunisticSubFromDsds() || !subInfo.isOpportunistic
+            }
+
+        if (nonOpportunisticSubscriptions.size < 2) {
             Log.d(TAG, "Hide primary sim")
             return null
         }
@@ -42,7 +49,7 @@ class PrimarySimRepository(private val context: Context) {
         val callsList = mutableListOf<ListPreferenceOption>()
         val smsList = mutableListOf<ListPreferenceOption>()
         val dataList = mutableListOf<ListPreferenceOption>()
-        for (info in selectableSubscriptionInfoList) {
+        for (info in nonOpportunisticSubscriptions) {
             val item = ListPreferenceOption(
                 id = info.subscriptionId,
                 text = "${info.displayName}",
