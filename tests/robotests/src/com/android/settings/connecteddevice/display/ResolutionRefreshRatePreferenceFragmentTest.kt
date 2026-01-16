@@ -19,6 +19,8 @@ package com.android.settings.connecteddevice.display
 import android.app.Application
 import android.os.Bundle
 import android.os.Looper
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -29,6 +31,9 @@ import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.preference.PreferenceCategory
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FOLLOWER_ARBITRARY_REFRESH_RATE_SELECTION_PLATFORM
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FOLLOWER_DISPLAY_BACKPRESSURE_PLATFORM
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FORCE_SLOWER_FOLLOWER_GPU_COMPOSITION_PLATFORM
 import com.android.settings.R
 import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceFragment.Companion.DISPLAY_ID_ARG
 import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceFragment.Companion.MORE_OPTIONS_KEY
@@ -49,9 +54,15 @@ import org.robolectric.Shadows.shadowOf
 
 /** Unit tests for [ResolutionRefreshRatePreferenceFragment] */
 @RunWith(AndroidJUnit4::class)
+@EnableFlags(
+    FLAG_FOLLOWER_ARBITRARY_REFRESH_RATE_SELECTION_PLATFORM,
+    FLAG_FOLLOWER_DISPLAY_BACKPRESSURE_PLATFORM,
+    FLAG_FORCE_SLOWER_FOLLOWER_GPU_COMPOSITION_PLATFORM,
+)
 class ResolutionRefreshRatePreferenceFragmentTest : ExternalDisplayTestBase() {
 
     @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
+    @get:Rule val setFlagsRule: SetFlagsRule = SetFlagsRule()
 
     private lateinit var scenario: FragmentScenario<ResolutionRefreshRatePreferenceFragment>
     private lateinit var viewModel: ResolutionRefreshRatePreferenceViewModel
