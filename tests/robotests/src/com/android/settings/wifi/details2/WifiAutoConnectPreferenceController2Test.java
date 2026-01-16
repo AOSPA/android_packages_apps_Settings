@@ -35,6 +35,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
+import android.os.Process;
 import android.os.UserManager;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
@@ -66,8 +67,8 @@ public class WifiAutoConnectPreferenceController2Test {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
-    private static final int USER_ID_CURRENT = 1;
-    private static final int USER_ID_OTHER = 11;
+    private static final int USER_ID_CURRENT = Process.myUserHandle().getIdentifier();
+    private static final int USER_ID_OTHER = USER_ID_CURRENT + 1;
 
     private WifiAutoConnectPreferenceController2 mController;
 
@@ -97,7 +98,6 @@ public class WifiAutoConnectPreferenceController2Test {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
 
-        when(mContext.getUserId()).thenReturn(USER_ID_CURRENT);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mContext.getSystemService(AdvancedProtectionManager.class))
                 .thenReturn(mAdvancedProtectionManager);

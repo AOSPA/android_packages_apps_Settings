@@ -138,6 +138,8 @@ public class WifiDetailPreferenceController2Test {
     private static final int RSSI = -55;
     private static final int TX_LINK_SPEED = 123;
     private static final int RX_LINK_SPEED = 54;
+    private static final int USER_ID_CURRENT = Process.myUserHandle().getIdentifier();
+    private static final int USER_ID_OTHER = USER_ID_CURRENT + 1;
     private static final String SUMMARY = "summary";
     private static final String SSID = "ssid";
     private static final String MAC_ADDRESS = "01:23:45:67:89:ab";
@@ -1178,7 +1180,7 @@ public class WifiDetailPreferenceController2Test {
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.canForget()).thenReturn(true);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
-        mockWifiConfiguration.creatorUid = Process.myUid();
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         displayAndResume();
 
         mController.onUpdated();
@@ -1204,7 +1206,7 @@ public class WifiDetailPreferenceController2Test {
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.canForget()).thenReturn(true);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
-        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(mMockUserManager.getUserCount()).thenReturn(3);
         when(mMockWifiEntry.isModifiableByOtherUsers()).thenReturn(true);
         setUpForConnectedNetwork();
@@ -1222,7 +1224,7 @@ public class WifiDetailPreferenceController2Test {
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.canForget()).thenReturn(true);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
-        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(mMockUserManager.getUserCount()).thenReturn(3);
         when(mMockUserManager.isAdminUser()).thenReturn(true);
         when(mMockWifiEntry.isModifiableByOtherUsers()).thenReturn(false);
@@ -1254,7 +1256,7 @@ public class WifiDetailPreferenceController2Test {
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.canShare()).thenReturn(true);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
-        mockWifiConfiguration.creatorUid = Process.myUid();
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         displayAndResume();
 
         verify(mMockButtonsPref).setButton4Visible(true);
@@ -1269,7 +1271,7 @@ public class WifiDetailPreferenceController2Test {
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.canShare()).thenReturn(true);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
-        mockWifiConfiguration.creatorUid = Process.myUid();
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         displayAndResume();
 
         verify(mMockButtonsPref).setButton4Visible(false);
@@ -1282,7 +1284,7 @@ public class WifiDetailPreferenceController2Test {
         when(mMockWifiEntry.canShare()).thenReturn(true);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
         when(mMockWifiEntry.isModifiableByOtherUsers()).thenReturn(true);
-        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(mMockUserManager.getUserCount()).thenReturn(3);
         setUpForConnectedNetwork();
         setUpSpyController();
@@ -1350,7 +1352,7 @@ public class WifiDetailPreferenceController2Test {
         setUpSpyController();
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
-        mockWifiConfiguration.creatorUid = Process.myUid();
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
 
         assertThat(mController.canModifyNetwork()).isTrue();
         assertThat(mController.canModifyShareSettings()).isTrue();
@@ -1363,7 +1365,7 @@ public class WifiDetailPreferenceController2Test {
         setUpSpyController();
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
-        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(mMockWifiEntry.isModifiableByOtherUsers()).thenReturn(false);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mMockUserManager);
         when(mMockUserManager.getUserCount()).thenReturn(3);
@@ -1379,7 +1381,7 @@ public class WifiDetailPreferenceController2Test {
         setUpSpyController();
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
-        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(mMockWifiEntry.isModifiableByOtherUsers()).thenReturn(true);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mMockUserManager);
         when(mMockUserManager.getUserCount()).thenReturn(3);
@@ -1395,7 +1397,7 @@ public class WifiDetailPreferenceController2Test {
         setUpSpyController();
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
-        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(mMockUserManager.getUserCount()).thenReturn(1);
 
         assertThat(mController.canModifyNetwork()).isTrue();
@@ -1657,7 +1659,7 @@ public class WifiDetailPreferenceController2Test {
         setUpController();
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
-        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
 
         displayAndResume();
 
@@ -1671,7 +1673,7 @@ public class WifiDetailPreferenceController2Test {
         setUpController();
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
-        mockWifiConfiguration.creatorUid = Process.myUid();
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
 
         displayAndResume();
 
@@ -1688,7 +1690,7 @@ public class WifiDetailPreferenceController2Test {
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
         when(mMockWifiEntry.canSignIn()).thenReturn(true);
-        mockWifiConfiguration.creatorUid = Process.myUid();
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         NetworkCapabilities nc = makeNetworkCapabilities();
         nc = new NetworkCapabilities.Builder(nc)
                 .addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL).build();
@@ -1708,7 +1710,7 @@ public class WifiDetailPreferenceController2Test {
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
         when(mMockWifiEntry.canSignIn()).thenReturn(true);
-        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         NetworkCapabilities nc = makeNetworkCapabilities();
         nc = new NetworkCapabilities.Builder(nc)
                 .addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL).build();
