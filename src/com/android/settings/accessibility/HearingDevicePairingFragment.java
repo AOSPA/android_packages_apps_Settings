@@ -46,6 +46,7 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.hearingdevices.ui.PairHearingDeviceScreen;
 import com.android.settings.bluetooth.BluetoothDevicePreference;
 import com.android.settings.bluetooth.BluetoothProgressCategory;
 import com.android.settings.bluetooth.Utils;
@@ -67,6 +68,7 @@ import java.util.Map;
  * This fragment shows all scanned hearing devices through BLE scanning. Users can
  * pair them in this page.
  */
+// LINT.IfChange
 public class HearingDevicePairingFragment extends RestrictedDashboardFragment implements
         BluetoothCallback {
 
@@ -248,6 +250,10 @@ public class HearingDevicePairingFragment extends RestrictedDashboardFragment im
         return R.xml.hearing_device_pairing_fragment;
     }
 
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return PairHearingDeviceScreen.KEY;
+    }
 
     @Override
     protected String getLogTag() {
@@ -517,3 +523,4 @@ public class HearingDevicePairingFragment extends RestrictedDashboardFragment im
         return (flags & BT_DISCOVERABLE_MASK) != 0;
     }
 }
+// LINT.ThenChange(hearingdevices/ui/PairHearingDeviceScreen.kt)

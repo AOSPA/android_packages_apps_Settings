@@ -32,6 +32,8 @@ import com.android.settings.accessibility.colorcorrection.ui.ColorCorrectionScre
 import com.android.settings.accessibility.colorinversion.ui.ColorInversionScreen
 import com.android.settings.accessibility.extradim.ui.ExtraDimScreen
 import com.android.settings.accessibility.flashnotifications.ui.FlashNotificationsScreen
+import com.android.settings.accessibility.hearingdevices.ui.HearingDevicesScreen
+import com.android.settings.accessibility.hearingdevices.ui.PairHearingDeviceScreen
 import com.android.settings.accessibility.textreading.ui.TextReadingScreen
 import com.android.settings.accounts.AccountScreen
 import com.android.settings.accounts.ManagedProfileApiScreen
@@ -371,7 +373,8 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = DoubleTapPowerScreen.KEY),
-        //        PerScreenCatalystConfig(enabled = true, screenKey = HearingDevicesScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = HearingDevicesScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = PairHearingDeviceScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AppInfoScreen.KEY),
         //        PerScreenCatalystConfig(enabled = true, screenKey = MagnificationScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = MediaControlsScreen.KEY),
