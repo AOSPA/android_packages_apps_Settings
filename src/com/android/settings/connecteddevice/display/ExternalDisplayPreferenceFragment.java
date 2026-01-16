@@ -496,6 +496,13 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                     display -> display.isEnabled() == DisplayIsEnabled.YES).toList();
         }
 
+        var arguments = getArguments();
+        if (arguments != null && arguments.containsKey(DISPLAY_ID_ARG)) {
+            int displayId = arguments.getInt(DISPLAY_ID_ARG);
+            displaysToShow = displaysToShow.stream().filter(
+                    display -> display.getId() == displayId).toList();
+        }
+
         if (displaysToShow.isEmpty()) {
             showTextWhenNoDisplaysToShow(screen, /* position= */ 0);
         } else {

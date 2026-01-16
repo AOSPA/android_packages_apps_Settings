@@ -3553,7 +3553,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
-                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -4045,7 +4044,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         </activity>
         <activity
             android:name="Settings$BillingCycleActivity"
-            android:featureFlag="com.android.settings.flags.deeplink_network_and_internet_25q4"
             android:exported="true"
             android:label="@string/billing_cycle">
             <intent-filter android:priority="1">
@@ -4393,7 +4391,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity
             android:name="Settings$BubbleNotificationSettingsActivity"
             android:label="@string/bubbles_app_toggle_title"
-            android:featureFlag="com.android.settings.flags.deeplink_notifications_25q4"
             android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_BUBBLE_SETTINGS" />
@@ -4631,6 +4628,13 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             <intent-filter>
                 <action android:name="android.telephony.action.PRIMARY_SUBSCRIPTION_LIST_CHANGED"/>
                 <action android:name="android.settings.ENABLE_MMS_DATA_REQUEST"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".network.telephony.NetworkChangeNotification"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.telephony.action.2G_DISABLED_BY_CARRIER"/>
             </intent-filter>
         </receiver>
 
@@ -5201,7 +5205,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:name=".Settings$EmergencyDashboardActivity"
             android:label="@string/emergency_settings_preference_title"
             android:icon="@drawable/ic_homepage_emergency"
-            android:featureFlag="com.android.settings.flags.deeplink_others_25q4"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.settings.EMERGENCY_SETTINGS" />
@@ -6289,8 +6292,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:featureFlag="com.android.settings.flags.enable_satellite_tile">
         </activity>
 
-
-
         <activity
             android:name=".network.telephony.satellite.quicksettings.AddSatelliteTileActivity"
             android:exported="false"
@@ -6298,6 +6299,16 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:taskAffinity="com.android.settings.satellite.addtile"
             android:excludeFromRecents="true"
             android:featureFlag="com.android.settings.flags.enable_satellite_tile" />
+
+        <activity
+            android:name=".qstile.QSTileLongPressGatewayActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter android:priority="100">
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
 

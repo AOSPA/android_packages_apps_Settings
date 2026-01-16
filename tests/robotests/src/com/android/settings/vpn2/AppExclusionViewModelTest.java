@@ -20,10 +20,12 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -205,5 +207,21 @@ public class AppExclusionViewModelTest {
         assertThat(listCaptor.getValue()).containsExactly(PACKAGE_NAME_2);
 
         verify(mSetListObserver).onChanged(true);
+    }
+
+    @Test
+    public void addAppToExclusionList_alreadyExcluded_doesNotAddAgain() {
+        // Arrange
+        final List<String> initialList = new ArrayList<>(Arrays.asList(PACKAGE_NAME_1));
+        when(mVpnManager.getAppExclusionList(USER_ID, VPN_PACKAGE)).thenReturn(initialList);
+        mockIntentResolution(PACKAGE_NAME_1, true);
+
+        // Act
+        mViewModel.addAppToExclusionList(PACKAGE_NAME_1);
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+        // Assert
+        verify(mVpnManager, never()).setAppExclusionList(anyInt(), anyString(), any());
+        verify(mSetListObserver, never()).onChanged(anyBoolean());
     }
 }

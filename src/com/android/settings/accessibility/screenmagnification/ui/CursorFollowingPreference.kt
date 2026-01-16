@@ -145,4 +145,4 @@ class CursorFollowingPreference :
                 }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/CursorFollowingModePreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/CursorFollowingModePreferenceController.kt)

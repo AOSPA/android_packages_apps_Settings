@@ -73,6 +73,7 @@ import java.util.TreeMap;
 
 import javax.crypto.SecretKey;
 
+// LINT.IfChange
 public class UserCredentialsSettings extends SettingsPreferenceFragment
         implements View.OnClickListener {
     private static final String TAG = "UserCredentialsSettings";
@@ -644,3 +645,4 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
         }
     }
 }
+// LINT.ThenChange(UserCredentialsScreenApi.kt)

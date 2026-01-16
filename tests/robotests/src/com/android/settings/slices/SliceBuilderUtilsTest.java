@@ -122,7 +122,7 @@ public class SliceBuilderUtilsTest {
     public void buildToggleSlice_withUserRestrictionAndRestricted_shouldReturnIntentSlice() {
         final SliceData mockData = getMockData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
                 RESTRICTION);
-        ShadowRestrictedLockUtilsInternal.setRestricted(true);
+        ShadowRestrictedLockUtilsInternal.setRestrictedByAdmin(true);
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, mockData);
 

@@ -16,6 +16,7 @@
 
 package com.android.settings.network.telephony.satellite.quicksettings
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -25,6 +26,7 @@ import android.provider.Settings
 import android.telephony.SubscriptionManager
 import android.telephony.satellite.SatelliteManager
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import com.android.settings.R
 
 /** A repository for getting the list of satellite apps for the landing page. */
@@ -32,6 +34,12 @@ open class SatelliteAppsRepository(private val context: Context) {
     companion object {
         const val PACKAGE_NAME_SETTINGS = "com.android.settings"
         const val PACKAGE_NAME_SAFETY_HUB = "com.google.android.apps.safetyhub"
+
+        @VisibleForTesting const val PACKAGE_NAME_SCONE = "com.google.android.apps.scone"
+        @VisibleForTesting
+        const val COMPONENT_NAME_SETTINGS_GATEWAY_ACTIVITY =
+            "com.google.android.apps.scone.satellite.settings.gateway.SettingsGatewayActivity"
+
         private const val TAG = "SatelliteAppsRepository"
         private const val EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting"
@@ -54,13 +62,37 @@ open class SatelliteAppsRepository(private val context: Context) {
         return sosIntent
     }
 
-    /** Returns the intent for the Settings app for satellite settings. */
-    open fun getSettingsIntent(): Intent? {
-        val settingsIntent = Intent(Settings.ACTION_SATELLITE_SETTING)
+    /**
+     * Returns the [Intent] for the Satellite Settings page.
+     *
+     * @param isCarrierRoamingNtnSupported Whether the carrier supports roaming Non-Terrestrial
+     *   Network (NTN).
+     *
+     * If Carrier Roaming NTN is supported, this returns the standard
+     * [Settings.ACTION_SATELLITE_SETTING] intent. Otherwise, it returns an intent targeting the
+     * Scone SettingsGatewayActivity, which handles satellite settings for OEM/Skylo solutions.
+     *
+     * @return The resolved [Intent], or null if no activity can handle it.
+     */
+    open fun getSettingsIntent(isCarrierRoamingNtnSupported: Boolean): Intent? {
+        val settingsIntent =
+            if (isCarrierRoamingNtnSupported) {
+                Intent(Settings.ACTION_SATELLITE_SETTING)
+            } else {
+                Intent()
+                    .setComponent(
+                        ComponentName(PACKAGE_NAME_SCONE, COMPONENT_NAME_SETTINGS_GATEWAY_ACTIVITY)
+                    )
+            }
+
         settingsIntent.putExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, true)
         settingsIntent.putExtra(EXTRA_SUB_ID, SubscriptionManager.getActiveDataSubscriptionId())
+
         if (settingsIntent.resolveActivity(context.packageManager) == null) {
-            Log.d(TAG, "Intent for Settings cannot be resolved.")
+            Log.w(
+                TAG,
+                "Intent for Satellite Settings cannot be resolved: ${settingsIntent.component ?: settingsIntent.action}",
+            )
             return null
         }
         return settingsIntent

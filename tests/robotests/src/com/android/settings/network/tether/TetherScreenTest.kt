@@ -48,7 +48,7 @@ class TetherScreenTest : SettingsCatalystTestCase() {
 
     @Test
     fun getPreferenceTitle_tetherConfigDisallowed_shouldShowAll() {
-        ShadowRestrictedLockUtilsInternal.setRestricted(true)
+        ShadowRestrictedLockUtilsInternal.setRestrictedByAdmin(true)
 
         assertThat(preferenceScreenCreator.getTitle(appContext)).isEqualTo(
                 appContext.getString(R.string.tether_settings_title_all))
@@ -56,7 +56,7 @@ class TetherScreenTest : SettingsCatalystTestCase() {
 
     @Test
     fun getPreferenceTitle_tetherConfigAllowed_shouldShowTetheringLabel() {
-        ShadowRestrictedLockUtilsInternal.setRestricted(false)
+        ShadowRestrictedLockUtilsInternal.setRestrictedByAdmin(false)
         val tm = appContext.getSystemService(TetheringManager::class.java)
 
         assertThat(preferenceScreenCreator.getTitle(appContext)).isEqualTo(
@@ -65,14 +65,14 @@ class TetherScreenTest : SettingsCatalystTestCase() {
 
     @Test
     fun isAvailable_tetherIsAvailable_shouldReturnTrue() {
-        ShadowRestrictedLockUtilsInternal.setRestricted(false)
+        ShadowRestrictedLockUtilsInternal.setHasBaseRestriction(false)
 
         assertThat(preferenceScreenCreator.isAvailable(appContext)).isTrue()
     }
 
     @Test
     fun isAvailable_tetherIsUnavailable_shouldReturnFalse() {
-        ShadowRestrictedLockUtilsInternal.setRestricted(true)
+        ShadowRestrictedLockUtilsInternal.setHasBaseRestriction(true)
 
         assertThat(preferenceScreenCreator.isAvailable(appContext)).isFalse()
     }

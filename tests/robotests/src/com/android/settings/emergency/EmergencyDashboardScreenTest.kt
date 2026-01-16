@@ -16,32 +16,36 @@
 
 package com.android.settings.emergency
 
+import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Resources
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.widget.theme.flags.Flags as LibFlags
 import com.google.common.truth.Truth.assertThat
+import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
-class EmergencyDashboardScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class EmergencyDashboardScreenTest {
+    @get:Rule val setFlagsRule = SetFlagsRule()
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
     private val mockResources = mock<Resources>()
     private val context =
         object : ContextWrapper(appContext) {
             override fun getResources(): Resources = mockResources
         }
 
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_OTHERS_25Q4
-
-    override val preferenceScreenCreator = EmergencyDashboardScreen()
+    private val preferenceScreenCreator = EmergencyDashboardScreen()
 
     @Test
     @EnableFlags(LibFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)

@@ -15,29 +15,19 @@
  */
 package com.android.settings.wifi.savedaccesspoints2
 
-import android.net.wifi.ScanResult
-import android.net.wifi.WifiConfiguration
-import android.net.wifi.WifiManager
-import android.net.wifi.hotspot2.PasspointConfiguration
-import android.net.wifi.hotspot2.pps.Credential
-import android.net.wifi.hotspot2.pps.HomeSp
-import android.os.HandlerThread
-import androidx.fragment.app.testing.FragmentScenario
-import androidx.preference.PreferenceFragmentCompat
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.Settings.SavedAccessPointsSettingsActivity
-import com.android.settings.flags.Flags
-import com.android.settings.testutils.shadow.ShadowWifiManager
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
-import kotlin.test.Test
-import org.robolectric.Shadows.shadowOf
-import org.robolectric.annotation.Config
-import org.robolectric.shadow.api.Shadow.extract
-import org.robolectric.shadows.ShadowLooper
+import org.junit.Test
+import org.junit.runner.RunWith
 
-class SavedAccessPointsWifiScreenTest : SettingsCatalystTestCase() {
-    override val flagName = Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4
-    override val preferenceScreenCreator = SavedAccessPointsWifiScreen()
+@RunWith(AndroidJUnit4::class)
+class SavedAccessPointsWifiScreenTest {
+    private val preferenceScreenCreator = SavedAccessPointsWifiScreen()
+
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
     @Test
     fun getLaunchIntent_returnsCorrectActivity() {
@@ -50,63 +40,5 @@ class SavedAccessPointsWifiScreenTest : SettingsCatalystTestCase() {
     @Test
     fun key_isEqualToStatic() {
         assertThat(preferenceScreenCreator.key).isEqualTo(SavedAccessPointsWifiScreen.KEY)
-    }
-
-    @Test
-    @Config(shadows = [ShadowWifiManager::class])
-    override fun migration() {
-        val wifiManager =
-            shadowOf(appContext.getSystemService(WifiManager::class.java)) as ShadowWifiManager
-        wifiManager.setScanResults(emptyList<ScanResult>())
-
-        // Add a standard wifi configuration to the wifi manager to make sure standard networks are
-        // represented properly on screen.
-        val wifiConfig =
-            WifiConfiguration().apply {
-                networkId = 0
-                SSID = "Test Id"
-                BSSID = "Test Id"
-            }
-        wifiManager.addNetwork(wifiConfig)
-
-        // Add a passpoint configureation to the wifi manager to make sure subscribed networks are
-        // represented properly on screen.
-        val passpointConfig =
-            PasspointConfiguration().apply {
-                homeSp = HomeSp().apply { fqdn = "Test FQDN" }
-                credential =
-                    Credential().apply {
-                        userCredential =
-                            Credential.UserCredential().apply { username = "Test Username" }
-                    }
-            }
-        wifiManager.addOrUpdatePasspointConfiguration(passpointConfig)
-
-        super.migration()
-    }
-
-    override fun launchFragmentScenario(
-        fragmentClass: Class<PreferenceFragmentCompat>
-    ): FragmentScenario<PreferenceFragmentCompat> {
-        val fragmentScenario = FragmentScenario.launch(fragmentClass)
-
-        // Get the worker thread from the fragment.
-        var workerThread: HandlerThread? = null
-        fragmentScenario.onFragment {
-            workerThread = (it as SavedAccessPointsWifiSettings2).mWorkerThread
-        }
-
-        // Get the ShadowLooper instance that is tied to the worker thread in the fragment.
-        val workerThreadLooper = ShadowLooper.getAllLoopers().first { it.thread == workerThread }
-        val workerThreadShadowLooper = extract<ShadowLooper>(workerThreadLooper)
-
-        // Make sure all main thread tasks are run before continuing, so that the work that will run
-        // on the worker thread is triggered.
-        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
-
-        // Make sure worker thread runs it's tasks before proceeding.
-        workerThreadShadowLooper.idle()
-
-        return fragmentScenario
     }
 }

@@ -16,14 +16,9 @@
 
 package com.android.settings.connecteddevice.display;
 
-import static com.android.settings.flags.Flags.showTabbedConnectedDisplaySetting;
-
-import android.app.admin.DevicePolicyIdentifiers;
-import android.app.admin.DevicePolicyManager;
 import android.app.admin.EnforcingAdmin;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.UserHandle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,114 +27,38 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
-import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-public class ExternalDisplayUpdater {
 
-    private static final String PREF_KEY = "external_display_settings";
-    private final int mMetricsCategory;
-    @NonNull
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
-    @NonNull
-    private final Runnable mUpdateRunnable = this::update;
-    @NonNull
-    private final DevicePreferenceCallback mDevicePreferenceCallback;
-    @Nullable
-    private RestrictedPreference mPreference;
-    @Nullable
-    private ConnectedDisplayInjector mInjector;
-    private final DisplayListener mListener =  new DisplayListener() {
-        @Override
-        public void update(int displayId) {
-            refreshPreference();
-        }
-    };
-
-    public ExternalDisplayUpdater(@NonNull DevicePreferenceCallback callback, int metricsCategory) {
-        mDevicePreferenceCallback = callback;
-        mMetricsCategory = metricsCategory;
-        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
-    }
-
-    /**
-     * Set the context to generate the {@link Preference}, so it could get the correct theme.
-     */
-    public void initPreference(@NonNull Context context) {
-        initPreference(context, new ConnectedDisplayInjector(context));
-    }
+public class ExternalDisplayUpdater extends BaseExternalDisplayUpdater {
 
     @VisibleForTesting
-    void initPreference(@NonNull Context context, ConnectedDisplayInjector injector) {
-        mInjector = injector;
+    public static final String PREF_KEY = "external_display_settings";
+    @Nullable
+    private RestrictedPreference mPreference;
+
+    public ExternalDisplayUpdater(@NonNull DevicePreferenceCallback callback, int metricsCategory) {
+        super(callback, metricsCategory);
+    }
+
+    @Override
+    @VisibleForTesting
+    public void initPreference(@NonNull Context context, ConnectedDisplayInjector injector) {
+        super.initPreference(context, injector);
+
         mPreference = new RestrictedPreference(context, null /* AttributeSet */);
         mPreference.setTitle(R.string.external_display_settings_title);
         mPreference.setSummary(getSummary());
         mPreference.setIcon(getDrawable(context));
         mPreference.setKey(PREF_KEY);
-        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
-            mPreference.setDisabledByAdmin(getEnforcingAdminForUsbDataSignaling(context));
-        } else {
-            mPreference.setDisabledByAdmin(checkIfUsbDataSignalingIsDisabled(context));
-        }
+        applyUsbDataSignalingPolicy(mPreference, context);
         mPreference.setOnPreferenceClickListener((Preference p) -> {
-            mMetricsFeatureProvider.logClickedPreference(p, mMetricsCategory);
-            if (showTabbedConnectedDisplaySetting()) {
-                new SubSettingLauncher(context)
-                        .setDestination(TabbedDisplayPreferenceFragment.class.getName())
-                        .setTitleRes(R.string.external_display_settings_title)
-                        .setSourceMetricsCategory(mMetricsCategory)
-                        .launch();
-            } else {
-                new SubSettingLauncher(context)
-                        .setDestination(ExternalDisplayPreferenceFragment.class.getName())
-                        .setTitleRes(R.string.external_display_settings_title)
-                        .setSourceMetricsCategory(mMetricsCategory)
-                        .launch();
-            }
+            metricsFeatureProvider.logClickedPreference(p, metricsCategory);
+            launchSettings(context, /* args= */ null);
             return true;
         });
-    }
-
-    /**
-     * Unregister the display listener.
-     */
-    public void unregisterCallback() {
-        if (mInjector != null) {
-            mInjector.unregisterDisplayListener(mListener);
-        }
-    }
-
-    /**
-     * Register the display listener.
-     */
-    public void registerCallback() {
-        if (mInjector != null) {
-            mInjector.registerDisplayListener(mListener);
-        }
-    }
-
-    @VisibleForTesting
-    @Nullable
-    protected RestrictedLockUtils.EnforcedAdmin checkIfUsbDataSignalingIsDisabled(Context context) {
-        return RestrictedLockUtilsInternal.checkIfUsbDataSignalingIsDisabled(context,
-                    UserHandle.myUserId());
-    }
-
-    @VisibleForTesting
-    @Nullable
-    protected EnforcingAdmin getEnforcingAdminForUsbDataSignaling(Context context) {
-        DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
-        if (dpm == null) {
-            return null;
-        }
-        return dpm.getEnforcingAdminsForPolicy(DevicePolicyIdentifiers.USB_DATA_SIGNALING_POLICY,
-                UserHandle.myUserId()).getMostImportantEnforcingAdmin();
     }
 
     @VisibleForTesting
@@ -149,20 +68,20 @@ public class ExternalDisplayUpdater {
     }
 
     @Nullable
-    protected CharSequence getSummary() {
-        if (mInjector == null) {
+    private CharSequence getSummary() {
+        if (injector == null) {
             return null;
         }
-        var context = mInjector.getContext();
+        var context = injector.getContext();
         if (context == null) {
             return null;
         }
 
-        var allDisplays = mInjector.getDisplays().stream().filter(
+        var allDisplays = injector.getDisplays().stream().filter(
                 DisplayDevice::isConnectedDisplay).toList();
         for (var display : allDisplays) {
             if (display.isEnabled() == DisplayIsEnabled.YES) {
-                if (mInjector.getFlags().displayTopologyPaneInDisplayList()) {
+                if (injector.getFlags().displayTopologyPaneInDisplayList()) {
                     // In the new DisplayTopology settings, "External display" preference should
                     // be displayed without a summary as there's no longer "on" / "off" toggle
                     return "";
@@ -170,7 +89,7 @@ public class ExternalDisplayUpdater {
                 return context.getString(R.string.external_display_on);
             }
         }
-        if (mInjector.getFlags().displayTopologyPaneInDisplayList()) {
+        if (injector.getFlags().displayTopologyPaneInDisplayList()) {
             // In the new DisplayTopology settings, connected display settings should be hidden
             // when there's no enabled connected displays
             return null;
@@ -178,34 +97,17 @@ public class ExternalDisplayUpdater {
         return allDisplays.isEmpty() ? null : context.getString(R.string.external_display_off);
     }
 
-    /**
-     * Updates preference, possibly removing it entirely.
-     */
-    public void refreshPreference() {
-        if (mInjector == null) {
-            return;
-        }
-        unscheduleUpdate();
-        mInjector.getHandler().post(mUpdateRunnable);
-    }
-
-    private void unscheduleUpdate() {
-        if (mInjector == null) {
-            return;
-        }
-        mInjector.getHandler().removeCallbacks(mUpdateRunnable);
-    }
-
-    private void update() {
+    @Override
+    protected void update() {
         var summary = getSummary();
         if (mPreference == null) {
             return;
         }
         mPreference.setSummary(summary);
         if (summary != null) {
-            mDevicePreferenceCallback.onDeviceAdded(mPreference);
+            devicePreferenceCallback.onDeviceAdded(mPreference);
         } else {
-            mDevicePreferenceCallback.onDeviceRemoved(mPreference);
+            devicePreferenceCallback.onDeviceRemoved(mPreference);
         }
     }
 }

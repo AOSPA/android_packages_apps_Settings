@@ -194,6 +194,9 @@
 <!-- Device admin screen begin -->
 <string name="device_admin_settings_screen_purpose" translatable="false">Allows users to view and manage applications that have device administrator privileges, which can control the security and settings of the device</string>
 <!-- Device admin screen end -->
+<!-- Trust agents screen begin -->
+<string name="trust_agents_purpose" translatable="false">Allows users to enable or disable trust agents, which are apps that can keep the device unlocked in certain trusted situations.</string>
+<!-- Trust agents screen end -->
 <string name="gesture_system_navigation_input_summary_purpose" translatable="false">gesture_system_navigation_input_summary</string>
 <string name="audio_routing_purpose" translatable="false">audio_routing</string>
 <string name="available_hearing_devices_purpose" translatable="false">available_hearing_devices</string>
@@ -450,7 +453,7 @@
 <string name="vpn_settings_purpose" translatable="false">vpn_settings</string>
 <string name="wifi_display_settings_purpose" translatable="false">wifi_display_settings</string>
 <string name="wifi_tether_purpose" translatable="false">wifi_tether</string>
-<string name="vibration_intensity_screen_purpose" translatable="false">vibration_intensity_screen</string>
+<string name="vibration_intensity_screen_purpose" translatable="false">Allows users to customize the vibration intensity of their device. This includes turning on/off the vibration, and adjusting the vibration intensity for call, notification, alarm, media, and keyboard.</string>
 <string name="edit_shortcuts_screen_purpose" translatable="false">edit_shortcuts_screen</string>
 <string name="special_access_write_system_preferences_app_detail_purpose" translatable="false">special_access_write_system_preferences_app_detail</string>
 <string name="billing_preference_catalyst_purpose" translatable="false">billing_preference_catalyst</string>
@@ -531,4 +534,12 @@
 <string name="user_settings_add_users_when_locked_pref_purpose" translatable="false">Set whether new users can be added from the lock screen, without authentication.</string>
 <!-- User settings screen end-->
 <string name="account_security_subpage_screen_purpose" translatable="false">Displays account security status and checkup information from safety sources.</string>
+<!-- Enterprise owned security screens start -->
+<string name="trusted_credentials_purpose" translatable="false">Allows users to view and manage all trusted digital certificates (Root CAs) on their device. Includes Root CAs shipped as part of the system image, as well as user-added ones.</string>
+<string name="user_credentials_purpose" translatable="false">Allows users to view and manage client certificates.</string>
+<string name="certificate_management_app_purpose" translatable="false">Allows users to choose an app to manage client certificates.</string>
+<string name="install_certificate_from_storage_purpose" translatable="false">Allows users to install different types of digital certificate, including ca certificates, VPN and app certificates, or Wi-Fi certificates.</string>
+<string name="encryption_and_credential_purpose" translatable="false">Allows users to manage disk encryption and credentials on their device, including adding and removing certificates.</string>
+<!-- Enterprise owned security screens end -->
+<string name="sim_lock_settings_purpose" translatable="false">Allows users to manage the SIM card lock settings, including enabling or disabling the SIM PIN and changing the PIN code.</string>
 </resources>

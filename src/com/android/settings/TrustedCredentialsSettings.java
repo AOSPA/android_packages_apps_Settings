@@ -40,6 +40,7 @@ import java.util.List;
 /**
  * Main fragment to display trusted credentials settings.
  */
+// LINT.IfChange
 public class TrustedCredentialsSettings extends DashboardFragment {
 
     private static final String TAG = "TrustedCredentialsSettings";
@@ -145,3 +146,4 @@ public class TrustedCredentialsSettings extends DashboardFragment {
         }
     }
 }
+// LINT.ThenChange(TrustedCredentialsScreenApi.kt)

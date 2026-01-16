@@ -22,6 +22,7 @@ import android.telephony.SubscriptionManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
@@ -37,10 +38,22 @@ public class Enable2gToggleListController extends BasePreferenceController {
     private static final String LOG_TAG = "Enable2gToggleListController";
     private final SubscriptionManager mSubscriptionManager;
     private final List<Enable2gPreferenceController> mControllers = new ArrayList<>();
+    private Fragment mFragment;
 
     public Enable2gToggleListController(@NonNull Context context, @NonNull String preferenceKey) {
         super(context, preferenceKey);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
+    }
+
+    /**
+     * Initialization based on a given subscription id and preference summary.
+     *
+     * @param host is the current Fragment object
+     * @return this instance after initialization
+     */
+    public @NonNull Enable2gToggleListController init(@NonNull Fragment host) {
+        mFragment = host;
+        return this;
     }
 
     @Override
@@ -85,7 +98,7 @@ public class Enable2gToggleListController extends BasePreferenceController {
         preferenceCategory.addPreference(pref);
         Enable2gPreferenceController enable2gPreferenceController =
                 new Enable2gPreferenceController(mContext, key);
-        enable2gPreferenceController.init(subId, true);
+        enable2gPreferenceController.init(mFragment, subId, true);
         enable2gPreferenceController.displayPreference(screen);
         enable2gPreferenceController.updateState(pref);
         mControllers.add(enable2gPreferenceController);

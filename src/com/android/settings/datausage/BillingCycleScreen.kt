@@ -26,7 +26,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.BillingCycleActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.telephony.subscriptionManager
 import com.android.settings.utils.getSubId
@@ -89,8 +88,6 @@ private constructor(
         get() = R.string.menu_key_network
 
     override fun getMetricsCategory() = SettingsEnums.BILLING_CYCLE
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkNetworkAndInternet25q4()
 
     override fun fragmentClass(): Class<out Fragment> = BillingCycleSettings::class.java
 

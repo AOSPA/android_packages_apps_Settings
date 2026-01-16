@@ -1220,8 +1220,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                         ? R.string.wifi_configure_settings_preference_summary_wakeup_on
                         : R.string.wifi_configure_settings_preference_summary_wakeup_off));
 
-        if (!(isCatalystEnabled()
-                && com.android.settings.flags.Flags.deeplinkNetworkAndInternet25q4())) {
+        if (!isCatalystEnabled()) {
             final int numSavedNetworks = mWifiPickerTracker == null ? 0 :
                     mWifiPickerTracker.getNumSavedNetworks();
             final int numSavedSubscriptions = mWifiPickerTracker == null ? 0 :

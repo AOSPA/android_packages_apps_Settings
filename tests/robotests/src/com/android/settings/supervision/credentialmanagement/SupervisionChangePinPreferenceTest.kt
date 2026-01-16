@@ -25,7 +25,6 @@ import android.content.Intent
 import android.content.pm.UserInfo
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
-import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.activity.result.ActivityResult
@@ -165,7 +164,6 @@ class SupervisionChangePinPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
     fun onChangePinComplete_showsCorrectToastString() {
         val expectedToastMessage = context.getString(R.string.supervision_pin_changed)
         preference.onChangePinComplete(ActivityResult(Activity.RESULT_OK, null))
@@ -173,14 +171,6 @@ class SupervisionChangePinPreferenceTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
-    fun onChangePinComplete_flagDisabled_noToast() {
-        preference.onChangePinComplete(ActivityResult(Activity.RESULT_OK, null))
-        assertThat(ShadowToast.getTextOfLatestToast()).isNull()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
     fun onChangePinComplete_flowCanceled_noToast() {
         preference.onChangePinComplete(ActivityResult(Activity.RESULT_CANCELED, null))
         assertThat(ShadowToast.getTextOfLatestToast()).isNull()

@@ -65,4 +65,4 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
         const val KEY = "animated_image"
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/MagnificationIllustrationPreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/MagnificationIllustrationPreferenceController.kt)

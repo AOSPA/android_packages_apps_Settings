@@ -40,8 +40,6 @@ import android.view.DisplayInfo;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.android.server.display.feature.flags.Flags;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -75,7 +73,6 @@ public class HdrBrightnessPreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_HDR_BRIGHTNESS_SETTING)
     public void getAvailabilityStatus_available() {
         DisplayAdjustments daj = null;
 

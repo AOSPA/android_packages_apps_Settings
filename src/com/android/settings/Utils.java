@@ -636,10 +636,8 @@ public final class Utils extends com.android.settingslib.Utils {
         // The supervising profile is a parentless profile which is considered a valid profile
         // for all full users.
         final boolean isSupervisingProfile =
-                android.multiuser.Flags.allowSupervisingProfile()
-                        && um.getUserInfo(otherUser.getIdentifier())
-                                .userType
-                                .equals(UserManager.USER_TYPE_PROFILE_SUPERVISING);
+                um.getUserInfo(otherUser.getIdentifier())
+                        .userType.equals(UserManager.USER_TYPE_PROFILE_SUPERVISING);
         return (UserHandle.myUserId() == otherUser.getIdentifier())
                 || um.getUserProfiles().contains(otherUser)
                 || isSupervisingProfile;
@@ -820,14 +818,12 @@ public final class Utils extends com.android.settingslib.Utils {
         if (ArrayUtils.contains(profileIds, userId)) {
             return userId;
         }
-        if (android.multiuser.Flags.allowSupervisingProfile()) {
-            for (UserInfo info : um.getUsers()) {
-                // The supervising profile is a parentless profile, and is therefore considered a
-                // valid profile for any full user.
-                if (info.id == userId
-                        && info.userType.equals(UserManager.USER_TYPE_PROFILE_SUPERVISING)) {
-                    return userId;
-                }
+        for (UserInfo info : um.getUsers()) {
+            // The supervising profile is a parentless profile, and is therefore considered a
+            // valid profile for any full user.
+            if (info.id == userId
+                    && info.userType.equals(UserManager.USER_TYPE_PROFILE_SUPERVISING)) {
+                return userId;
             }
         }
         throw new SecurityException("Given user id " + userId + " does not belong to user "
@@ -1587,9 +1583,6 @@ public final class Utils extends com.android.settingslib.Utils {
      * Returns true if the userId is the supervising profile, false otherwise.
      */
     public static boolean isSupervisingProfile(int userId, @NonNull Context context) {
-        if (!android.multiuser.Flags.allowSupervisingProfile()) {
-            return false;
-        }
         final UserManager userManager = context.getSystemService(UserManager.class);
         UserInfo userInfo = userManager.getUserInfo(userId);
         return !Objects.isNull(userInfo)

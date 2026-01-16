@@ -87,6 +87,12 @@ class FollowTypingSwitchPreferenceTest {
     }
 
     @Test
+    fun defaultValue_isTrue() {
+        val preferenceWidget = createFollowTypingWidget()
+        assertThat(preferenceWidget.isChecked).isTrue()
+    }
+
+    @Test
     @TestParameters(
         value =
             [

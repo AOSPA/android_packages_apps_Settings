@@ -37,7 +37,7 @@ class FollowTypingSwitchPreference :
     ),
     PreferenceAvailabilityProvider {
 
-    override fun storage(context: Context): KeyValueStore = SettingsSecureStore.get(context)
+    override fun storage(context: Context): KeyValueStore = context.dataStore
 
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 
@@ -61,6 +61,8 @@ class FollowTypingSwitchPreference :
 
     companion object {
         const val KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED
+        private val Context.dataStore: KeyValueStore
+            get() = SettingsSecureStore.get(this).apply { setDefaultValue(KEY, true) }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FollowTypingPreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FollowTypingPreferenceController.kt)

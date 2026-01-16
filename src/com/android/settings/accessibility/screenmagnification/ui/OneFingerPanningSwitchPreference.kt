@@ -41,7 +41,7 @@ class OneFingerPanningSwitchPreference :
     SwitchPreference(
         KEY,
         R.string.accessibility_single_finger_panning_enabled_purpose,
-        R.string.accessibility_magnification_one_finger_panning_title
+        R.string.accessibility_magnification_one_finger_panning_title,
     ),
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider,
@@ -126,4 +126,4 @@ class OneFingerPanningSwitchPreference :
                 }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/OneFingerPanningPreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/OneFingerPanningPreferenceController.kt)

@@ -26,6 +26,7 @@ import android.os.Build;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -119,16 +120,23 @@ public class AdbIpAddressPreferenceController extends AbstractConnectivityPrefer
     @Override
     protected void updateConnectivity() {
         String ipAddress = getIpv4Address();
-        if (ipAddress != null) {
-            int port = getPort();
-            if (port <= 0) {
-                mAdbIpAddrPref.setSummary(com.android.settingslib.R.string.status_unavailable);
-            } else {
-                ipAddress += ":" + port;
-            }
-            mAdbIpAddrPref.setSummary(ipAddress);
+        int port = getPort();
+        if (ipAddress == null) {
+            // summary is: "Unavailable (Disconnected)"
+            mAdbIpAddrPref.setSummary(
+                    TextUtils.formatSimple("%s (%s)",
+                    mContext.getString(com.android.settingslib.R.string.status_unavailable),
+                    mContext.getString(com.android.settingslib.R.string.wifi_disconnected)));
+        } else if (port <= 0) {
+            // summary is: "Unavailable (Not allowed)"
+            String notAllowed = mContext.getString(
+                    com.android.settings.R.string.app_permission_summary_not_allowed);
+            mAdbIpAddrPref.setSummary(
+                    TextUtils.formatSimple("%s (%s)",
+                            mContext.getString(com.android.settingslib.R.string.status_unavailable),
+                            notAllowed));
         } else {
-            mAdbIpAddrPref.setSummary(com.android.settingslib.R.string.status_unavailable);
+            mAdbIpAddrPref.setSummary(TextUtils.formatSimple("%s:%d", ipAddress, port));
         }
     }
 
