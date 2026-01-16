@@ -696,56 +696,61 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         }
 
         if (mSelectedWifiEntry.canDisconnect()) {
-            if (mSelectedWifiEntry.canShare()) {
-                addShareMenuIfSuitable(menu);
-            }
+            addShareMenuIfSuitable(menu);
             menu.add(Menu.NONE, MENU_ID_DISCONNECT, 1 /* order */,
                     R.string.wifi_disconnect_button_text);
         }
 
         // "forget" for normal saved network. And "disconnect" for ephemeral network because it
         // could only be disconnected and be put in blocklists so it won't be used again.
-        if (canForgetNetwork()) {
-            addForgetMenuIfSuitable(menu);
-        }
-
-        WifiConfiguration config = mSelectedWifiEntry.getWifiConfiguration();
-        // Some configs are ineditable
-        if (WifiUtils.isNetworkLockedDown(getActivity(), config)) {
-            return;
-        }
-
-        addModifyMenuIfSuitable(menu, mSelectedWifiEntry);
+        addForgetMenuIfSuitable(menu);
+        addModifyMenuIfSuitable(menu);
     }
 
-    @VisibleForTesting
     void addShareMenuIfSuitable(ContextMenu menu) {
-        if (mIsAdmin) {
-            menu.add(Menu.NONE, MENU_ID_SHARE, 0 /* order */, R.string.share);
+        if (!WifiUtils.isNetworkShareable(mSelectedWifiEntry, getActivity())) {
             return;
         }
-        Log.w(TAG, "Don't add the Wi-Fi share menu because the user is not an admin.");
-        EventLog.writeEvent(0x534e4554, "206986392", -1 /* UID */, "User is not an admin");
+        if (!com.android.settings.connectivity.Flags.wifiMultiuser()
+                && !mIsAdmin) {
+            Log.w(TAG, "Don't add the Wi-Fi share menu because the user is not an admin.");
+            EventLog.writeEvent(0x534e4554, "206986392", UserHandle.myUserId(),
+                    "User is not an admin");
+            return;
+        }
+        menu.add(Menu.NONE, MENU_ID_SHARE, 0 /* order */, R.string.share);
     }
 
-    @VisibleForTesting
     void addForgetMenuIfSuitable(ContextMenu menu) {
-        if (mIsAdmin) {
-            menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */, R.string.forget);
+        if (!WifiUtils.isNetworkForgettable(mSelectedWifiEntry, getActivity())) {
+            return;
         }
+        if (!com.android.settings.connectivity.Flags.wifiMultiuser()
+                && !mIsAdmin) {
+            Log.w(TAG, "Don't add the Wi-Fi forget menu because the user is not an admin.");
+            EventLog.writeEvent(0x534e4554, "206986392", UserHandle.myUserId(),
+                    "User is not an admin");
+            return;
+        }
+        menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */, R.string.forget);
     }
 
-    @VisibleForTesting
-    void addModifyMenuIfSuitable(ContextMenu menu, WifiEntry wifiEntry) {
-        if (mIsAdmin && wifiEntry.isSaved()
-                && wifiEntry.getConnectedState() != CONNECTED_STATE_CONNECTED) {
-            menu.add(Menu.NONE, MENU_ID_MODIFY, 0 /* order */, R.string.wifi_modify);
+    void addModifyMenuIfSuitable(ContextMenu menu) {
+        WifiConfiguration config = mSelectedWifiEntry.getWifiConfiguration();
+        if (WifiUtils.isNetworkLockedDown(getActivity(), config)
+                || !WifiUtils.isNetworkEditable(mSelectedWifiEntry, getActivity())
+                || !mSelectedWifiEntry.isSaved()
+                || mSelectedWifiEntry.getConnectedState() == CONNECTED_STATE_CONNECTED) {
+            return;
         }
-    }
-
-    private boolean canForgetNetwork() {
-        return mSelectedWifiEntry.canForget() && !WifiUtils.isNetworkLockedDown(getActivity(),
-                mSelectedWifiEntry.getWifiConfiguration());
+        if (!com.android.settings.connectivity.Flags.wifiMultiuser()
+                && !mIsAdmin) {
+            Log.w(TAG, "Don't add the Wi-Fi modify menu because the user is not an admin.");
+            EventLog.writeEvent(0x534e4554, "237672190", UserHandle.myUserId(),
+                    "User isn't admin");
+            return;
+        }
+        menu.add(Menu.NONE, MENU_ID_MODIFY, 0 /* order */, R.string.wifi_modify);
     }
 
     @Override
@@ -765,12 +770,6 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                         () -> launchWifiDppConfiguratorActivity(mSelectedWifiEntry));
                 return true;
             case MENU_ID_MODIFY:
-                if (!mIsAdmin) {
-                    Log.e(TAG, "Can't modify Wi-Fi because the user isn't admin.");
-                    EventLog.writeEvent(0x534e4554, "237672190", UserHandle.myUserId(),
-                            "User isn't admin");
-                    return true;
-                }
                 showDialog(mSelectedWifiEntry, WifiConfigUiBase2.MODE_MODIFY);
                 return true;
             default:

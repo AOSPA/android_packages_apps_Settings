@@ -51,7 +51,6 @@ import com.android.settings.flags.FeatureFlagsImpl
 import com.android.wm.shell.shared.desktopmode.DesktopState
 import java.util.function.Consumer
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -367,7 +366,16 @@ open class ConnectedDisplayInjector(open val context: Context?) {
 
     open fun getSurfaceControlBuilder() = SurfaceControl.Builder()
 
-    private companion object {
+    companion object {
         private const val TAG = "ConnectedDisplayInjector"
+
+        fun isRefreshRateFlagsEnabled() =
+            com.android.settings.flags.Flags.enableResolutionRefreshRateSetting() &&
+                com.android.graphics.surfaceflinger.flags.Flags
+                    .followerArbitraryRefreshRateSelectionPlatform() &&
+                com.android.graphics.surfaceflinger.flags.Flags
+                    .forceSlowerFollowerGpuCompositionPlatform() &&
+                com.android.graphics.surfaceflinger.flags.Flags
+                    .followerDisplayBackpressurePlatform()
     }
 }
