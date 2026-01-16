@@ -174,13 +174,6 @@ class SatelliteLandingPageViewModel(
                 ?.let { items.add(it) }
         }
 
-        // Settings app
-        createSatelliteAppItem(
-                packageName = SatelliteAppsRepository.PACKAGE_NAME_SETTINGS,
-                intent = appsRepository.getSettingsIntent(isCarrierRoamingNtnSupported),
-            )
-            ?.let { items.add(it) }
-
         _satelliteAppItems.value = items
     }
 
