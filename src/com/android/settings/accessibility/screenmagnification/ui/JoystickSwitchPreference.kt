@@ -74,4 +74,4 @@ class JoystickSwitchPreference :
         const val KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/JoystickPreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/JoystickPreferenceController.kt)

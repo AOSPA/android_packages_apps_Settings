@@ -123,14 +123,10 @@ public class AdbWirelessDebuggingEnabler implements SwitchWidgetController.OnSwi
     @Override
     public boolean onSwitchToggled(boolean isChecked) {
         if (isChecked && !AdbWirelessDebuggingPreferenceController.isWifiConnected(mContext)) {
-            // No connected Wi-Fi network. Reset the switch to off.
             Toast.makeText(mContext, com.android.settingslib.R.string.adb_wireless_no_network_msg,
                             Toast.LENGTH_LONG)
                     .show();
-            mSwitchWidget.setChecked(false);
-            return false;
         }
-
         writeAdbWifiSetting(isChecked);
         return true;
     }

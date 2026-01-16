@@ -18,10 +18,14 @@ package com.android.settings.accessibility.screenmagnification.ui
 
 import android.content.Context
 import android.content.Intent
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
+import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.inflateViewHolder
@@ -44,6 +48,7 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestParameterInjector::class)
 class FollowKeyboardSwitchPreferenceTest {
     @get:Rule(order = 0) val settingsStoreRule = SettingsStoreRule()
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val preference = FollowKeyboardSwitchPreference()
@@ -86,6 +91,20 @@ class FollowKeyboardSwitchPreferenceTest {
     @Test
     fun getWritePermit_returnsAllow() {
         assertThat(preference.getWritePermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_VIEWPORT_PRIORITIZATION)
+    @Test
+    fun defaultValue_isFalse() {
+        val preferenceWidget = createFollowKeyboardWidget()
+        assertThat(preferenceWidget.isChecked).isFalse()
+    }
+
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_VIEWPORT_PRIORITIZATION)
+    @Test
+    fun defaultValue_isTrue() {
+        val preferenceWidget = createFollowKeyboardWidget()
+        assertThat(preferenceWidget.isChecked).isTrue()
     }
 
     @Test

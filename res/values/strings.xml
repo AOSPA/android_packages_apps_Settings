@@ -3689,9 +3689,13 @@
     <string name="scanning_status_text_off">Off</string>
     <!-- About phone, status item title.  The phone MEID number of the current LTE/CDMA device. [CHAR LIMIT=30] -->
     <string name="status_meid_number">MEID</string>
-    <!-- About phone, status item title.  The ICCID of the current LTE device. [CHAR LIMIT=30] -->
-    <string name="status_icc_id">ICCID</string>
-    <!-- About phone, status item title for the type of data phone network we're connected to, for example 3G or Edge or GPRS -->
+        <!-- About phone, status item title.  The ICCID of the current LTE device. [CHAR LIMIT=30] -->
+        <string name="status_icc_id">ICCID</string>
+        <!-- About phone, status item title.  The GID1 of the current device. [CHAR LIMIT=30] -->
+        <string name="status_gid1">GID1</string>
+        <!-- About phone, status item title.  The Carrier ID of the current device. [CHAR LIMIT=30] -->
+        <string name="status_carrier_id">Carrier ID</string>
+        <!-- About phone, status item title for the type of data phone network we're connected to, for example 3G or Edge or GPRS -->
     <string name="status_data_network_type">Mobile data network type</string>
     <!-- About phone, status item title for the type of voice phone network we're connected to, for example 3G or Edge or GPRS -->
     <string name="status_voice_network_type">Mobile voice network type</string>
@@ -4557,19 +4561,19 @@
     <!-- Header shown when prompted for remote device credential validation. [CHAR LIMIT=NONE] -->
     <string name="lockpassword_remote_validation_header">Verify it\u0027s you</string>
 
-    <!-- Details shown when pattern is prompted for remote device credential validation. [CHAR LIMIT=160] -->
-    <string name="lockpassword_remote_validation_pattern_details">To transfer Google Accounts, settings, and more, enter your other device\u0027s pattern. Your pattern is encrypted.</string>
-    <!-- Details shown when PIN is prompted for remote device credential validation. [CHAR LIMIT=160] -->
-    <string name="lockpassword_remote_validation_pin_details">To transfer Google Accounts, settings, and more, enter your other device\u0027s PIN. Your PIN is encrypted.</string>
-    <!-- Details shown when password is prompted for remote device credential validation. [CHAR LIMIT=160] -->
-    <string name="lockpassword_remote_validation_password_details">To transfer Google Accounts, settings, and more, enter your other device\u0027s password. Your password is encrypted.</string>
+    <!-- Details shown when pattern is prompted for remote device credential validation. [BACKUP_MESSAGE_ID: 4655537780358707983] [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_remote_validation_pattern_details">Enter your other device\u0027s pattern to transfer Google Accounts, settings, and more. Your pattern is encrypted.</string>
+    <!-- Details shown when PIN is prompted for remote device credential validation. [BACKUP_MESSAGE_ID: 2373654227583206297] [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_remote_validation_pin_details">Enter your other device\u0027s PIN to transfer Google Accounts, settings, and more. Your PIN is encrypted.</string>
+    <!-- Details shown when password is prompted for remote device credential validation. [BACKUP_MESSAGE_ID: 3482328925925888340] [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_remote_validation_password_details">Enter your other device\u0027s password to transfer Google Accounts, settings, and more. Your password is encrypted.</string>
 
-    <!-- Checkbox label to set pattern as new screen lock if remote device credential validation succeeds. [CHAR LIMIT=43] -->
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock">Also use pattern to unlock this device</string>
-    <!-- Checkbox label to set PIN as new screen lock if remote device credential validation succeeds. [CHAR LIMIT=43] -->
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock">Also use PIN to unlock this device</string>
-    <!-- Checkbox label to set password as new screen lock if remote device credential validation succeeds. [CHAR LIMIT=43] -->
-    <string name="lockpassword_remote_validation_set_password_as_screenlock">Also use password to unlock this device</string>
+    <!-- Checkbox label to set pattern as new screen lock if remote device credential validation succeeds. [BACKUP_MESSAGE_ID: 7595104317648465901] [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock">Use the same pattern to unlock this device</string>
+    <!-- Checkbox label to set PIN as new screen lock if remote device credential validation succeeds. [BACKUP_MESSAGE_ID: 509672303005547218] [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock">Use the same PIN to unlock this device</string>
+    <!-- Checkbox label to set password as new screen lock if remote device credential validation succeeds. [BACKUP_MESSAGE_ID: 2066701840753591922] [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_remote_validation_set_password_as_screenlock">Use the same password to unlock this device</string>
 
     <!-- Header shown when pattern needs to be solved before the device exits repair mode. [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_repair_mode_pattern_header">Verify pattern</string>
@@ -8228,6 +8232,12 @@
     <!-- Summary of preference to remove guest on exit option[CHAR LIMIT=NONE] -->
     <string name="remove_guest_on_exit_summary">Delete all guest apps and data
         when exiting guest mode</string>
+    <!-- Title of preference to allow adding guests [CHAR LIMIT=35] -->
+    <string name = "add_guests_from_signin"> Allow guest to use device </string>
+    <!-- Summary of peference to allow adding guests[CHAR LIMIT=NONE] -->
+    <string name="add_guests_from_signin_summary"> All guest apps and data will be deleted when exiting guest mode</string>
+    <!-- Search keywords for the "Delete Guest Activity" section in Multiple Users Screen. [CHAR LIMIT=NONE] -->
+    <string name="add_guests_from_signin_keywords">add, guest</string>
     <!-- Title of dialog shown when remove_guest_on_exit toggle is ON [CHAR LIMIT=35] -->
     <string name="remove_guest_on_exit_dialog_title">Delete guest activity?</string>
     <!-- Message of dialog shown when remove_guest_on_exit toggle is ON [CHAR LIMIT=NONE] -->
@@ -14439,6 +14449,21 @@
     <string name="require_cellular_encryption_title">Allow only encrypted networks</string>
     <!-- Summary for if the user wants to require cellular encryption [CHAR LIMIT=NONE] -->
     <string name="require_cellular_encryption_summary">This is more secure but may limit your mobile network connection in some locations. Emergency calling is always allowed.</string>
+
+    <!-- Alert Dialog title text for 2g network protection [CHAR LIMIT=50]-->
+    <string name="network_protection_2g_off_alert_dialog_title">Turn off 2G network protection?</string>
+    <!-- Alert Dialog description text for 2g network protection [CHAR LIMIT=50]-->
+    <string name="network_protection_2g_off_alert_dialog_desc">Current network for <xliff:g id="carrier provider name">%s</xliff:g> SIM does not support 2G. Turning off 2G protection will put you at risk of connecting to harmful spoofed 2G networks.</string>
+    <!-- Alert Dialog button text when enable 2g network [CHAR LIMIT=50]-->
+    <string name="network_protection_2g_alert_dialog_turn_off_btn">Turn off</string>
+    <!-- Notification channel text for 2g network protection [CHAR LIMIT=50]-->
+    <string name="network_protection_2g_notification_channel_title">2G network protection</string>
+    <!-- Notification title text for 2g network protection [CHAR LIMIT=50]-->
+    <string name="network_protection_2g_on_notification_title">2G network protection is on</string>
+    <!-- Notification summary text for 2g network protection [CHAR LIMIT=50]-->
+    <string name="network_protection_2g_on_notification_summary">The current network for <xliff:g id="carrier provider name">%s</xliff:g> SIM requires 2G protection to be turned on. You may still choose to disable 2G protection at your own risk.</string>
+    <!-- Notification button text when enable 2g network [CHAR LIMIT=50]-->
+    <string name="network_protection_2g_notification_settings_btn">Settings</string>
 
     <!-- Label for All services preference in App info settings [CHAR LIMIT=40] -->
     <string name="app_info_all_services_label">All services</string>

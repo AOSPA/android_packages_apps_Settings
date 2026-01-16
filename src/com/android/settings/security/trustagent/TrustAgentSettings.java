@@ -17,18 +17,13 @@
 package com.android.settings.security.trustagent;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
-import java.util.List;
-
+// LINT.IfChange
 @SearchIndexable
 public class TrustAgentSettings extends DashboardFragment {
     private static final String TAG = "TrustAgentSettings";
@@ -56,3 +51,4 @@ public class TrustAgentSettings extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.trust_agent_settings);
 }
+// LINT.ThenChange(TrustAgentApiScreen.kt)

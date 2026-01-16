@@ -75,6 +75,7 @@ import java.util.UUID;
  * these operations.
  *
  */
+// LINT.IfChange
 public class IccLockSettings extends SettingsPreferenceFragment
         implements EditPinPreference.OnPinEnteredListener {
     private static final String TAG = "IccLockSettings";
@@ -824,3 +825,4 @@ public class IccLockSettings extends SettingsPreferenceFragment
         f.show(getFragmentManager(), "dialog_preference");
     }
 }
+// LINT.ThenChange(IccLockApiScreen.kt)

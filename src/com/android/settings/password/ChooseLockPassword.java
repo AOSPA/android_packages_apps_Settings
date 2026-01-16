@@ -482,8 +482,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 } else {
                     if (profile.equals(ProfileType.Private)) {
                         return context.getString(numericHintForPrivateProfile);
-                    } else if (android.multiuser.Flags.allowSupervisingProfile()
-                            && profile.equals(ProfileType.Supervising)) {
+                    } else if (profile.equals(ProfileType.Supervising)) {
                         if (android.app.supervision.flags.Flags.enableSupervisionSettingsUiUpdates()
                                 && type == TYPE_SUPERVISION_RESET) {
                             return context.getString(numericHintForSupervisingProfileReset);
@@ -513,8 +512,7 @@ public class ChooseLockPassword extends SettingsActivity {
                         return isAlpha ? alphaMessageForBiometrics : numericMessageForBiometrics;
                     case TYPE_SUPERVISION_RESET:
                     case TYPE_NONE:
-                        if (!isAlpha && android.multiuser.Flags.allowSupervisingProfile()
-                                && profile.equals(ProfileType.Supervising)) {
+                        if (!isAlpha && profile.equals(ProfileType.Supervising)) {
                             return numericMessageForSupervisingProfile;
                         }
                         // fall through
@@ -1096,18 +1094,13 @@ public class ChooseLockPassword extends SettingsActivity {
                 mAutoPinConfirmOption.setVisibility(View.GONE);
                 mAutoConfirmSecurityMessage.setVisibility(View.GONE);
             }
-            final int stage = getStageType();
-            if (getStageType() != Stage.TYPE_NONE
-                    || android.multiuser.Flags.allowSupervisingProfile()) {
-                int message = mUiStage.getMessage(mIsAlphaMode, stage, mProfileType);
-                if (message != 0) {
-                    mMessage.setVisibility(View.VISIBLE);
-                    mMessage.setText(message);
-                } else {
-                    mMessage.setVisibility(View.INVISIBLE);
-                }
+
+            int message = mUiStage.getMessage(mIsAlphaMode, getStageType(), mProfileType);
+            if (message != 0) {
+                mMessage.setVisibility(View.VISIBLE);
+                mMessage.setText(message);
             } else {
-                mMessage.setVisibility(View.GONE);
+                mMessage.setVisibility(View.INVISIBLE);
             }
 
             setNextText(mUiStage.buttonText);
@@ -1297,8 +1290,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 return ProfileType.Managed;
             } else if (userManager.isPrivateProfile()) {
                 return ProfileType.Private;
-            } else if (android.multiuser.Flags.allowSupervisingProfile()
-                    && userManager.isUserOfType(USER_TYPE_PROFILE_SUPERVISING)) {
+            } else if (userManager.isUserOfType(USER_TYPE_PROFILE_SUPERVISING)) {
                 return ProfileType.Supervising;
             } else if (userManager.isProfile()) {
                 return ProfileType.Other;
@@ -1307,8 +1299,7 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         private boolean isSupervisingProfile() {
-            return android.multiuser.Flags.allowSupervisingProfile()
-                    && mProfileType.equals(ProfileType.Supervising);
+            return mProfileType.equals(ProfileType.Supervising);
         }
     }
 }

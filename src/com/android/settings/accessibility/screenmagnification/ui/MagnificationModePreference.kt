@@ -109,4 +109,4 @@ class MagnificationModePreference :
         private const val MODE_CHOOSER_REQUEST_KEY = "magnificationModeChooser"
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ModePreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ModePreferenceController.kt)

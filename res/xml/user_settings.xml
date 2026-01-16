@@ -85,6 +85,13 @@
         android:order="55"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
+        android:key="add_guests_from_signin"
+        android:title="@string/add_guests_from_signin"
+        android:summary="@string/add_guests_from_signin_summary"
+        android:order="59"
+        settings:keywords="@string/add_guests_from_signin_keywords"/>
+
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="remove_guest_on_exit"
         android:title="@string/remove_guest_on_exit"
         android:summary="@string/remove_guest_on_exit_summary"

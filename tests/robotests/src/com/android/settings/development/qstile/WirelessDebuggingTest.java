@@ -18,16 +18,11 @@ package com.android.settings.development.qstile;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 import android.app.KeyguardManager;
 import android.content.Context;
-import android.content.Intent;
 import android.provider.Settings.Global;
 import android.widget.Toast;
 
@@ -37,7 +32,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -148,30 +142,6 @@ public class WirelessDebuggingTest {
     }
 
     @Test
-    public void setIsEnabled_true_keyguardUnlocked_WifiDisconnected_shouldDisableAdbWifi() {
-        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        doNothing().when(mWirelessDebugging).sendBroadcast(intentCaptor.capture());
-        // Precondition: set the tile to disabled
-        Global.putInt(mContext.getContentResolver(),
-                Global.ADB_WIFI_ENABLED, 0 /* setting enabled */);
-        // Unlocked keyguard
-        doReturn(false).when(mKeyguardManager).isKeyguardLocked();
-        // Wifi disconnected
-        ShadowWirelessDebuggingPreferenceController.setIsWifiConnected(false);
-
-        mWirelessDebugging.setIsEnabled(true);
-
-        assertThat(mWirelessDebugging.isEnabled()).isFalse();
-        // The notification shade should be hidden by sending a broadcast to SysUI
-        // so the toast can be seen
-        verify(mWirelessDebugging, times(1)).sendBroadcast(eq(intentCaptor.getValue()));
-        assertThat(intentCaptor.getValue().getAction())
-            .isEqualTo(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-        // Should also get a toast that wifi is not connected
-        verify(mToast).show();
-    }
-
-    @Test
     public void setIsEnabled_true_keyguardLocked_WifiDisconnected_shouldDisableAdbWifi() {
         // Precondition: set the tile to disabled
         Global.putInt(mContext.getContentResolver(),
@@ -188,7 +158,7 @@ public class WirelessDebuggingTest {
     }
 
     @Test
-    public void setIsEnabled_true_keyguardUnlocked_WifiConnected_shouldDisableAdbWifi() {
+    public void setIsEnabled_true_keyguardUnlocked_shouldEnableAdbWifi() {
         // Precondition: set the tile to disabled
         Global.putInt(mContext.getContentResolver(),
                 Global.ADB_WIFI_ENABLED, 0 /* setting enabled */);

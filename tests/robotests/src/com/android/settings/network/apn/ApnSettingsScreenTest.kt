@@ -16,6 +16,7 @@
 
 package com.android.settings.network.apn
 
+import android.content.Context
 import android.content.ContextWrapper
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -25,37 +26,33 @@ import android.platform.test.flag.junit.SetFlagsRule
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
-import android.widget.TextView
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.Settings.ApnSettingsActivity
-import com.android.settings.dashboard.RestrictedDashboardFragment
 import com.android.settings.flags.Flags
 import com.android.settings.network.CarrierConfigCache
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settings.utils.putSubId
 import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
-import org.robolectric.annotation.Config
-import org.robolectric.annotation.Implementation
-import org.robolectric.annotation.Implements
 import org.robolectric.util.ReflectionHelpers
 
-class ApnSettingsScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class ApnSettingsScreenTest {
     private val subId = 42
     private val invalidSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
 
     @get:Rule val platformFlags = SetFlagsRule()
 
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
-    override val preferenceScreenCreator =
+    private val preferenceScreenCreator =
         createScreen(Bundle().apply { putSubId(ApnSettings.SUB_ID, subId) })
 
     private val mockTelephonyManager = mock<TelephonyManager>()
@@ -197,19 +194,5 @@ class ApnSettingsScreenTest : SettingsCatalystTestCase() {
         } else {
             ApnSettingsScreen(args)
         }
-    }
-
-    @Test
-    @Config(shadows = [ShadowRestrictedDashboardFragment::class])
-    override fun migration() {
-        super.migration()
-    }
-}
-
-@Implements(RestrictedDashboardFragment::class)
-class ShadowRestrictedDashboardFragment {
-    @Implementation
-    fun getEmptyTextView(): TextView? {
-        return TextView(ApplicationProvider.getApplicationContext())
     }
 }

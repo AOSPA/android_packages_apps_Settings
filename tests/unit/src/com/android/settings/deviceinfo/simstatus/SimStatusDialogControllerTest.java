@@ -16,8 +16,10 @@
 
 package com.android.settings.deviceinfo.simstatus;
 
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CELL_DATA_NETWORK_TYPE_LABEL_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CELL_DATA_NETWORK_TYPE_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CELLULAR_NETWORK_STATE;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CELL_VOICE_NETWORK_TYPE_LABEL_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CELL_VOICE_NETWORK_TYPE_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ICCID_INFO_LABEL_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ICCID_INFO_VALUE_ID;
@@ -29,6 +31,10 @@ import static com.android.settings.deviceinfo.simstatus.SimStatusDialogControlle
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.OPERATOR_INFO_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ROAMING_INFO_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SERVICE_STATE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.GID1_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.GID1_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CARRIER_ID_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CARRIER_ID_LABEL_ID;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -40,8 +46,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.PersistableBundle;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
@@ -56,11 +63,14 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -74,6 +84,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @RunWith(AndroidJUnit4.class)
 public class SimStatusDialogControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private SimStatusDialogFragment mDialog;
@@ -96,7 +109,6 @@ public class SimStatusDialogControllerTest {
 
     private SimStatusDialogController mController;
     private Context mContext;
-    private PackageManager mPackageManager;
     @Mock
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
@@ -113,13 +125,10 @@ public class SimStatusDialogControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
+        Resources resources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(resources);
+        when(resources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
         when(mDialog.getContext()).thenReturn(mContext);
-        mPackageManager = spy(mContext.getPackageManager());
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_RADIO_ACCESS))
-                .thenReturn(true);
-        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_CALLING))
-                .thenReturn(true);
         mLifecycle = new Lifecycle(mLifecycleOwner);
 
         mTelephonyManager = spy(mContext.getSystemService(TelephonyManager.class));
@@ -129,6 +138,7 @@ public class SimStatusDialogControllerTest {
         doReturn(TEST_SUB_ID_1).when(mSubscriptionInfo).getSubscriptionId();
 
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
+        when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
                     mCarrierConfigManager);
         when(mContext.getSystemService(EuiccManager.class)).thenReturn(mEuiccManager);
@@ -141,6 +151,8 @@ public class SimStatusDialogControllerTest {
         doReturn(2).when(mTelephonyManager).getCardIdForDefaultEuicc();
         doReturn(TelephonyManager.NETWORK_TYPE_LTE).when(mTelephonyManager).getVoiceNetworkType();
         doReturn(TelephonyManager.NETWORK_TYPE_LTE).when(mTelephonyManager).getDataNetworkType();
+        doReturn(true).when(mTelephonyManager).isDeviceVoiceCapable();
+        doReturn(true).when(mTelephonyManager).isDataCapable();
 
         mUpdatePhoneNumberCount = new AtomicInteger();
         mEuiccEnabled = new AtomicBoolean(false);
@@ -256,6 +268,8 @@ public class SimStatusDialogControllerTest {
 
         mController.initialize();
 
+        verify(mDialog).setSettingVisibility(CELL_VOICE_NETWORK_TYPE_LABEL_ID, true);
+        verify(mDialog).setSettingVisibility(CELL_VOICE_NETWORK_TYPE_VALUE_ID, true);
         verify(mDialog).setText(CELL_VOICE_NETWORK_TYPE_VALUE_ID,
                 SimStatusDialogController.getNetworkTypeName(TelephonyManager.NETWORK_TYPE_EDGE));
     }
@@ -267,8 +281,30 @@ public class SimStatusDialogControllerTest {
 
         mController.initialize();
 
+        verify(mDialog).setSettingVisibility(CELL_DATA_NETWORK_TYPE_LABEL_ID, true);
+        verify(mDialog).setSettingVisibility(CELL_DATA_NETWORK_TYPE_VALUE_ID, true);
         verify(mDialog).setText(CELL_DATA_NETWORK_TYPE_VALUE_ID,
                 SimStatusDialogController.getNetworkTypeName(TelephonyManager.NETWORK_TYPE_EDGE));
+    }
+
+    @Test
+    public void initialize_notVoiceCapable_shouldHideVoiceNetworkType() {
+        doReturn(false).when(mTelephonyManager).isDeviceVoiceCapable();
+
+        mController.initialize();
+
+        verify(mDialog).setSettingVisibility(CELL_VOICE_NETWORK_TYPE_LABEL_ID, false);
+        verify(mDialog).setSettingVisibility(CELL_VOICE_NETWORK_TYPE_VALUE_ID, false);
+    }
+
+    @Test
+    public void initialize_notDataCapable_shouldHideDataNetworkType() {
+        doReturn(false).when(mTelephonyManager).isDataCapable();
+
+        mController.initialize();
+
+        verify(mDialog).setSettingVisibility(CELL_DATA_NETWORK_TYPE_LABEL_ID, false);
+        verify(mDialog).setSettingVisibility(CELL_DATA_NETWORK_TYPE_VALUE_ID, false);
     }
 
     @Test
@@ -404,5 +440,64 @@ public class SimStatusDialogControllerTest {
         mController.mOnSubscriptionsChangedListener.onSubscriptionsChanged();
         final String unknownText = ResourcesUtils.getResourcesString(mContext, "radioInfo_unknown");
         verify(mDialog).setText(CELLULAR_NETWORK_STATE, unknownText);
+    }
+
+    @Test
+    public void initialize_doNotShowGid1_shouldRemoveGid1Setting() {
+        mPersistableBundle.putBoolean(
+                CarrierConfigManager.KEY_SHOW_GID1_IN_SIM_STATUS_BOOL, false);
+
+        mController.initialize();
+
+        verify(mDialog).removeSettingFromScreen(GID1_LABEL_ID);
+        verify(mDialog).removeSettingFromScreen(GID1_VALUE_ID);
+    }
+
+    @Test
+    public void initialize_showGid1_shouldSetGid1ToSetting() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_SHOW_SIM_STATUS_DETAILED_INFO);
+        final String gid1 = "test_gid1";
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_SHOW_GID1_IN_SIM_STATUS_BOOL, true);
+        doReturn(gid1).when(mTelephonyManager).getGroupIdLevel1();
+
+        mController.initialize();
+
+        verify(mDialog).setText(GID1_VALUE_ID, gid1);
+    }
+
+    @Test
+    public void initialize_doNotShowCarrierId_shouldRemoveCarrierIdSetting() {
+        mPersistableBundle.putBoolean(
+                CarrierConfigManager.KEY_SHOW_CARRIER_ID_IN_SIM_STATUS_BOOL, false);
+
+        mController.initialize();
+
+        verify(mDialog).removeSettingFromScreen(CARRIER_ID_LABEL_ID);
+        verify(mDialog).removeSettingFromScreen(CARRIER_ID_VALUE_ID);
+    }
+
+    @Test
+    public void initialize_showCarrierId_shouldSetCarrierIdToSetting() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_SHOW_SIM_STATUS_DETAILED_INFO);
+        final int carrierId = 1234;
+        mPersistableBundle.putBoolean(
+                CarrierConfigManager.KEY_SHOW_CARRIER_ID_IN_SIM_STATUS_BOOL, true);
+        doReturn(carrierId).when(mTelephonyManager).getSimCarrierId();
+
+        mController.initialize();
+
+        verify(mDialog).setText(CARRIER_ID_VALUE_ID, String.valueOf(carrierId));
+    }
+
+    @Test
+    public void initialize_flagDisabled_shouldRemoveGid1Setting() {
+        mSetFlagsRule.disableFlags(Flags.FLAG_SHOW_SIM_STATUS_DETAILED_INFO);
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_SHOW_GID1_IN_SIM_STATUS_BOOL, true);
+        doReturn("gid1").when(mTelephonyManager).getGroupIdLevel1();
+
+        mController.initialize();
+
+        verify(mDialog).removeSettingFromScreen(GID1_LABEL_ID);
+        verify(mDialog).removeSettingFromScreen(GID1_VALUE_ID);
     }
 }

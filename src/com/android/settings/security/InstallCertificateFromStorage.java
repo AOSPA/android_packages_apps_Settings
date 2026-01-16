@@ -33,6 +33,7 @@ import java.util.List;
 /**
  * Install certificate from storage settings.
  */
+// LINT.IfChange
 @SearchIndexable
 public class InstallCertificateFromStorage extends DashboardFragment {
 
@@ -91,3 +92,4 @@ public class InstallCertificateFromStorage extends DashboardFragment {
                 }
             };
 }
+// LINT.ThenChange(InstallCertificateFromStorageScreenApi.kt)

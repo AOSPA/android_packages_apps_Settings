@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Android Open Source Project
+ * Copyright (C) 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility
+package com.android.settings.accessibility.colorandmotion.ui
 
 import android.content.Context
-import android.provider.Settings
 import android.os.PowerManager
+import android.provider.Settings
 import android.view.CrossWindowBlurListeners.CROSS_WINDOW_BLUR_SUPPORTED
-
 import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsGlobalStore
@@ -61,6 +60,5 @@ class BlurSwitchPreference :
 
         private fun Context.isPowerSaveMode() =
             getSystemService(PowerManager::class.java)?.isPowerSaveMode == true
-
     }
 }

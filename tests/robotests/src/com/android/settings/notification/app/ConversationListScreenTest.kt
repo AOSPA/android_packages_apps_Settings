@@ -16,24 +16,27 @@
 
 package com.android.settings.notification.app
 
+import android.content.Context
 import android.content.pm.ParceledListSlice
 import android.service.notification.ConversationChannelWrapper
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings.ConversationListSettingsActivity
-import com.android.settings.flags.Flags
 import com.android.settings.notification.NotificationBackend
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.Implementation
 import org.robolectric.annotation.Implements
 
-class ConversationListScreenTest : SettingsCatalystTestCase() {
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_NOTIFICATIONS_25Q4
+@RunWith(AndroidJUnit4::class)
+class ConversationListScreenTest {
 
-    override val preferenceScreenCreator = ConversationListScreen()
+    private val preferenceScreenCreator = ConversationListScreen()
+
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
     @Test
     fun key_isEqualToStatic() {
@@ -54,15 +57,6 @@ class ConversationListScreenTest : SettingsCatalystTestCase() {
         assertThat(preferenceScreenCreator.getSummary(appContext))
             .isEqualTo(appContext.getString(R.string.priority_conversation_count_zero))
     }
-
-    @Test
-    @Config(
-        shadows =
-            [ShadowNotificationBackend::class, ShadowRecentConversationsPreferenceController::class]
-    )
-    override fun migration() {
-        super.migration()
-    }
 }
 
 @Implements(NotificationBackend::class)
@@ -70,9 +64,4 @@ class ShadowNotificationBackend {
     @Implementation
     fun getConversations(onlyImportant: Boolean): ParceledListSlice<ConversationChannelWrapper> =
         ParceledListSlice.emptyList()
-}
-
-@Implements(RecentConversationsPreferenceController::class)
-class ShadowRecentConversationsPreferenceController {
-    @Implementation fun updateList(): Boolean = true
 }

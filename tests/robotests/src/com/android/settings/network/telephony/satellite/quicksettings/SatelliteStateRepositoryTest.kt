@@ -71,7 +71,8 @@ class SatelliteStateRepositoryTest {
     }
 
     private fun createRepository(
-        scope: kotlinx.coroutines.CoroutineScope
+        scope: kotlinx.coroutines.CoroutineScope,
+        isLteNtnSupported: Boolean = false,
     ): SatelliteStateRepository {
         return SatelliteStateRepository(
             context,
@@ -79,6 +80,7 @@ class SatelliteStateRepositoryTest {
             satelliteManager,
             connectivityManager,
             scope,
+            isLteNtnSupportedChecker = { isLteNtnSupported },
         )
     }
 
@@ -217,6 +219,24 @@ class SatelliteStateRepositoryTest {
             advanceUntilIdle()
 
             assertThat(values.last()).isEqualTo(SatelliteStatus.ACTIVE)
+        }
+
+    @Test
+    fun satelliteStatus_whenLteNtnSupported_returnsNotAvailable() =
+        testScope.runTest {
+            repository = createRepository(backgroundScope, isLteNtnSupported = true)
+            val values = mutableListOf<SatelliteStatus>()
+            repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
+            advanceUntilIdle()
+
+            // Set Carrier Eligible (would be Available)
+            val telephonyCallback = captureCarrierRoamingNtnListener()
+            telephonyCallback?.onCarrierRoamingNtnEligibleStateChanged(true)
+            setCellularAvailable(false)
+            setInternetConnected(false)
+            advanceUntilIdle()
+
+            assertThat(values.last()).isEqualTo(SatelliteStatus.NOT_AVAILABLE)
         }
 
     // Helpers to capture callbacks and trigger updates

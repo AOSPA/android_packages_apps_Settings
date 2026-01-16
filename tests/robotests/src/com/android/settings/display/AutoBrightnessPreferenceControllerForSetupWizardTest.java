@@ -27,10 +27,13 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.admin.EnforcingAdmin;
 import android.app.admin.PolicyEnforcementInfo;
+import android.app.admin.flags.Flags;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.flag.junit.FlagsParameterization;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -38,13 +41,15 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.ParameterizedRobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -54,14 +59,28 @@ import java.util.List;
 /**
  * Tests for {@link AutoBrightnessPreferenceControllerForSetupWizard}.
  */
-@RunWith(RobolectricTestRunner.class)
-@Config(shadows = {SettingsShadowResources.class, ShadowDevicePolicyManager.class})
+@RunWith(ParameterizedRobolectricTestRunner.class)
+@Config(shadows = {SettingsShadowResources.class, ShadowDevicePolicyManager.class,
+        ShadowRestrictedLockUtilsInternal.class})
 public class AutoBrightnessPreferenceControllerForSetupWizardTest {
 
     private static final String PREFERENCE_KEY = "auto_brightness";
 
     private static final EnforcingAdmin ENFORCING_ADMIN = new EnforcingAdmin("test", DPC_AUTHORITY,
             UserHandle.CURRENT, new ComponentName("test", "test.class"));
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
+    @ParameterizedRobolectricTestRunner.Parameters(name = "{0}")
+    public static List<FlagsParameterization> getParams() {
+        return FlagsParameterization.allCombinationsOf(
+                Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED);
+    }
+
+    public AutoBrightnessPreferenceControllerForSetupWizardTest(FlagsParameterization flags) {
+        mSetFlagsRule.setFlagsParameterization(flags);
+    }
 
     private Context mContext;
     private AutoBrightnessPreferenceControllerForSetupWizard mController;
@@ -124,6 +143,7 @@ public class AutoBrightnessPreferenceControllerForSetupWizardTest {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_automatic_brightness_available, configAvailable);
         setConfigBrightnessPolicyEnforcementInfo(restricted);
+        setConfigBrightnessOnRestrictedLockUtils(restricted);
 
         final PreferenceManager manager = new PreferenceManager(mContext);
         final PreferenceScreen screen = manager.createPreferenceScreen(mContext);
@@ -147,6 +167,10 @@ public class AutoBrightnessPreferenceControllerForSetupWizardTest {
                 Collections.emptyList());
         ShadowDevicePolicyManager.getShadow().setPolicyEnforcementInfoForUserRestriction(
                 UserManager.DISALLOW_CONFIG_BRIGHTNESS, policyEnforcementInfo);
+    }
+
+    private void setConfigBrightnessOnRestrictedLockUtils(boolean restricted) {
+        ShadowRestrictedLockUtilsInternal.setRestrictedByAdmin(restricted);
     }
 }
 
