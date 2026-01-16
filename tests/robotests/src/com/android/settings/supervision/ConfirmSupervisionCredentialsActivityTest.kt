@@ -19,7 +19,6 @@ import android.app.Activity
 import android.app.ActivityManager
 import android.app.Application
 import android.app.KeyguardManager
-import android.app.role.RoleManager.ROLE_SYSTEM_SUPERVISION
 import android.app.settings.SettingsEnums
 import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
@@ -31,12 +30,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.content.pm.ResolveInfo
 import android.content.pm.UserInfo
 import android.hardware.biometrics.BiometricManager
 import android.os.Bundle
-import android.os.Process
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
@@ -67,10 +64,8 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowActivity
-import org.robolectric.shadows.ShadowBinder
 import org.robolectric.shadows.ShadowContextImpl
 import org.robolectric.shadows.ShadowKeyguardManager
-import org.robolectric.shadows.ShadowRoleManager
 import org.robolectric.shadows.ShadowServiceManager
 
 @RunWith(AndroidJUnit4::class)
@@ -96,7 +91,6 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Before
     fun setUp() {
-        ShadowRoleManager.reset()
         setUpActivity(forceConfirm = false)
         SupervisionAuthController.sInstance = null
         ShadowServiceManager.addBinderService(
@@ -109,8 +103,7 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    fun onCreate_callerHasSupervisionRole_doesNotFinish() {
-        addSupervisionRoleHolder()
+    fun onCreate_supervisingCredentialSet_doesNotFinish() {
         setupDefaultMocks()
         mActivityController.setup()
 
@@ -124,7 +117,6 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     fun onCreate_failsToStartSupervisingProfile_finish() {
-        addSupervisionRoleHolder()
         setupDefaultMocks(startProfileResult = false)
         mActivityController.setup()
 
@@ -133,18 +125,7 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    fun onCreate_callerNotHasSupervisionRole_finish() {
-        addSupervisionRoleHolder("com.example.other")
-        setupDefaultMocks()
-        mActivityController.setup()
-
-        assertThat(mActivity.isFinishing).isTrue()
-        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
-    }
-
-    @Test
     fun onCreate_authSessionActive_finishWithResultOK() {
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         setupActiveAuthSession()
 
@@ -156,7 +137,6 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     fun onCreate_authSessionActive_forceConfirmation_doesNotFinish() {
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         setupActiveAuthSession()
 
@@ -173,7 +153,6 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     fun onCreate_userIsRunning_savesPromptShownState() {
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         mockActivityManager.stub { on { isUserRunning(SUPERVISING_USER_ID) } doReturn true }
 
@@ -192,7 +171,6 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     fun onCreate_startsConfirmationActivity_activityFinishing_stopsProfile() {
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         mockActivityManager.stub { on { stopProfile(any()) } doReturn true }
 
@@ -213,7 +191,6 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     fun configurationChange_doesNotStopProfile() {
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         mockActivityManager.stub { on { stopProfile(any()) } doReturn true }
 
@@ -231,23 +208,8 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    fun onCreate_callerIsSystemUid_doesNotFinish() {
-        setupActivityWithCaller(packageName = "android", uid = Process.SYSTEM_UID)
-        assertThat(mActivity.isFinishing).isFalse()
-    }
-
-    @Test
-    fun onCreate_callerIsUnknownUid_finish() {
-        setupActivityWithCaller(uid = Process.NOBODY_UID)
-
-        assertThat(mActivity.isFinishing).isTrue()
-        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
-    }
-
-    @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onCreate_noSupervisingCredential_flagDisabled_startSetupActivity() {
-        addSupervisionRoleHolder()
         setupDefaultMocks(isDeviceSecure = false)
         mActivityController.setup()
 
@@ -258,7 +220,6 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     fun onCreate_noSupervisingCredential_noApprovalMethods_finish() {
-        addSupervisionRoleHolder()
         setupDefaultMocks(isDeviceSecure = false)
         mActivityController.setup()
 
@@ -269,7 +230,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onCreate_noSupervisingCredential_noApprovalMethods_startsSetup() {
-        addSupervisionRoleHolder()
         setupDefaultMocks(isDeviceSecure = false)
         whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
             .thenReturn(emptyList())
@@ -285,7 +245,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onCreate_noSupervisingCredential_oneApprovalMethod_launchesMethodAndHandlesResult() {
-        addSupervisionRoleHolder()
         setupDefaultMocks(isDeviceSecure = false)
         val resolveInfo = createApprovalResolveInfo("com.example.approval", "ApprovalActivity")
         whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
@@ -311,7 +270,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onCreate_noSupervisingCredential_oneApprovalMethod_handlingFailureResult() {
-        addSupervisionRoleHolder()
         setupDefaultMocks(isDeviceSecure = false)
         val resolveInfo = createApprovalResolveInfo("com.example.approval", "ApprovalActivity")
         whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
@@ -333,7 +291,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onCreate_noSupervisingCredential_multipleApprovalMethods_showsChooserAndHandlesResult() {
-        addSupervisionRoleHolder()
         setupDefaultMocks(isDeviceSecure = false)
         val resolveInfo1 =
             createApprovalResolveInfo("com.example.approval", "ApprovalActivity1", "method 1")
@@ -371,7 +328,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onCreate_noSupervisingCredential_multipleApprovalMethods_handlingFailureResult() {
-        addSupervisionRoleHolder()
         setupDefaultMocks(isDeviceSecure = false)
         val resolveInfo1 = createApprovalResolveInfo("com.example.approval", "ApprovalActivity1")
         val resolveInfo2 = createApprovalResolveInfo("com.example.approval", "ApprovalActivity2")
@@ -401,7 +357,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onCreate_onStartSetupActivity_onDestroy_notStopProfile() {
-        addSupervisionRoleHolder()
         setupDefaultMocks(isDeviceSecure = false)
         mActivityController.setup()
 
@@ -417,7 +372,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     fun userStateChangeReceiver_receivesUserStopped_restartsProfileAndShowsPrompt() {
         // Arrange: Set up activity but ensure prompt is not shown in onCreate
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         mockActivityManager.stub { on { isUserRunning(SUPERVISING_USER_ID) } doReturn false }
         mActivityController.setup()
@@ -449,7 +403,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     fun userStateChangeReceiver_receivesUserStopped_startProfileFails_finishesActivity() {
         // Arrange: Set up activity, mock startProfile to fail on the second call
-        addSupervisionRoleHolder()
         setupDefaultMocks(startProfileResult = true) // Initial setup
         whenever(mockActivityManager.startProfile(any()))
             .thenReturn(true) // First call in onCreate succeeds
@@ -476,7 +429,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     fun userStateChangeReceiver_receivesUserStopped_forDifferentUser_doesNothing() {
         // Arrange: Set up activity
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         mockActivityManager.stub { on { isUserRunning(SUPERVISING_USER_ID) } doReturn false }
         mActivityController.setup()
@@ -498,7 +450,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun getBiometricPrompt_recoveryEmailExist_showForgotPinButton_flagDisabled() {
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         val recoveryInfo = SupervisionRecoveryInfo("email", "default", STATE_PENDING, null)
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
@@ -532,7 +483,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun getBiometricPrompt_recoveryEmailExist_showForgotPinButton_flagEnabled() {
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         setCanLaunchPinRecovery(true)
         mActivityController.setup()
@@ -565,7 +515,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun getBiometricPrompt_recoveryInfoEmpty_noForgotPinButton_flagDisabled() {
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
         mActivityController.setup()
@@ -583,7 +532,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun getBiometricPrompt_recoveryInfoEmpty_noForgotPinButton_flagEnabled() {
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         setCanLaunchPinRecovery(false)
         mActivityController.setup()
@@ -601,7 +549,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun getBiometricPrompt_withApprovalMethods_showsFallbackOptions() {
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         val activityInfo1 =
             ActivityInfo().apply {
@@ -653,7 +600,6 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     fun getBiometricPrompt_noApprovalMethods_showsNoFallbackOptions() {
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         mActivityController.setup()
         val biometricPrompt = mActivity.getBiometricPrompt()
@@ -665,7 +611,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun getBiometricPrompt_flagDisabled_withApprovalMethods_showsNoFallbackOptions() {
-        addSupervisionRoleHolder()
         setupDefaultMocks()
         val activityInfo1 =
             ActivityInfo().apply {
@@ -728,34 +673,6 @@ class ConfirmSupervisionCredentialsActivityTest {
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn startProfileResult }
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, isDeviceSecure)
-    }
-
-    private fun addSupervisionRoleHolder(packageName: String = callingPackage) {
-        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, packageName, currentUser)
-    }
-
-    private fun setupActivityWithCaller(packageName: String? = null, uid: Int) {
-        ShadowBinder.setCallingUid(uid)
-
-        if (packageName != null) {
-            shadowActivity.setCallingPackage(packageName)
-            val appInfo =
-                ApplicationInfo().apply {
-                    this.uid = uid
-                    this.packageName = packageName
-                }
-            val pkgInfo =
-                PackageInfo().apply {
-                    this.packageName = packageName
-                    this.applicationInfo = appInfo
-                }
-            shadowOf(context.packageManager).installPackage(pkgInfo)
-        } else {
-            shadowActivity.setCallingPackage(null)
-        }
-
-        setupDefaultMocks()
-        mActivityController.setup()
     }
 
     private fun createApprovalResolveInfo(
