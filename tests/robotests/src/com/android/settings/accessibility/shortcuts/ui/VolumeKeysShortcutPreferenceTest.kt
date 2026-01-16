@@ -17,11 +17,15 @@
 package com.android.settings.accessibility.shortcuts.ui
 
 import android.content.Context
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.shortcuts.ShortcutOptionPreference as ShortcutOptionWidget
 import com.android.settings.testutils.SettingsStoreRule
+import com.android.settings.testutils.shadow.ShadowInputDevice
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -29,10 +33,13 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import org.robolectric.util.ReflectionHelpers
 
+@Config(shadows = [ShadowInputDevice::class])
 @RunWith(RobolectricTestRunner::class)
 class VolumeKeysShortcutPreferenceTest {
+    @get:Rule val setFlagsRule = SetFlagsRule()
     @get:Rule val settingsStoreRule = SettingsStoreRule()
 
     private lateinit var appContext: Context
@@ -65,5 +72,51 @@ class VolumeKeysShortcutPreferenceTest {
         val imageResId = ReflectionHelpers.getField<Int>(widget, "mIntroImageResId")
 
         assertThat(imageResId).isEqualTo(R.drawable.accessibility_shortcut_type_volume_keys)
+    }
+
+    @Test
+    @DisableFlags(
+        com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
+    )
+    fun bind_setsCorrectImageResource_flagOff_mobileImage() {
+        setHardwareKeyboard(false)
+        val widget = preference.createAndBindWidget<ShortcutOptionWidget>(appContext)
+        val imageResId = ReflectionHelpers.getField<Int>(widget, "mIntroImageResId")
+
+        assertThat(imageResId).isEqualTo(R.drawable.accessibility_shortcut_type_volume_keys)
+    }
+
+    @Test
+    @EnableFlags(
+        com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
+    )
+    fun bind_setsCorrectImageResource_keyboardAttached_desktopImage() {
+        setHardwareKeyboard(true)
+        val widget = preference.createAndBindWidget<ShortcutOptionWidget>(appContext)
+        val imageResId = ReflectionHelpers.getField<Int>(widget, "mIntroImageResId")
+
+        assertThat(imageResId)
+            .isEqualTo(R.drawable.accessibility_shortcut_type_keyboard_volume_keys)
+    }
+
+    @Test
+    @EnableFlags(
+        com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
+    )
+    fun bind_setsCorrectImageResource_keyboardDetached_mobileImage() {
+        setHardwareKeyboard(false)
+        val widget = preference.createAndBindWidget<ShortcutOptionWidget>(appContext)
+        val imageResId = ReflectionHelpers.getField<Int>(widget, "mIntroImageResId")
+
+        assertThat(imageResId).isEqualTo(R.drawable.accessibility_shortcut_type_volume_keys)
+    }
+
+    private fun setHardwareKeyboard(hasConnectedKeyboard: Boolean) {
+        if (hasConnectedKeyboard) {
+            val device = ShadowInputDevice.makeFullKeyboardInputDevicebyId(/* id= */ 1)
+            ShadowInputDevice.addDevice(device.id, device)
+        } else {
+            ShadowInputDevice.reset()
+        }
     }
 }
