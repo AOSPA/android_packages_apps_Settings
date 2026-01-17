@@ -34,6 +34,7 @@ import static com.android.internal.accessibility.common.ShortcutConstants.UserSh
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Insets;
 import android.graphics.Rect;
@@ -177,6 +178,16 @@ public final class AccessibilityUtil {
     public static boolean isTouchExploreEnabled(Context context) {
         final AccessibilityManager am = context.getSystemService(AccessibilityManager.class);
         return am.isTouchExplorationEnabled();
+    }
+
+    /** Determines if a touch shortcut should be made available. */
+    public static boolean isTouchShortcutAvailable(Context context) {
+        final boolean isTouchEnabled = context.getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN)
+                || context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FAKETOUCH);
+
+        return isTouchEnabled
+                || !com.android.settings.accessibility.Flags.desktopMagnificationSettingsPolish();
     }
 
     /**
