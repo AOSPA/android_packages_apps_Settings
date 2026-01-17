@@ -31,7 +31,7 @@ import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupdesign.GlifLayout
 import com.google.android.setupdesign.items.RecyclerItemAdapter
 
-/** Color inversion for Setup Wizard. */
+/** Accessibility service for Setup Wizard. */
 class AccessibilityServiceSetupWizardFragment : BaseSetupWizardFragment() {
 
     private lateinit var serviceInfo: AccessibilityServiceInfo

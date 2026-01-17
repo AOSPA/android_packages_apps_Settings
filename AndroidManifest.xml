@@ -4463,7 +4463,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity
             android:name="Settings$VibrationSettingsActivity"
             android:label="@string/accessibility_vibration_settings_title"
-            android:featureFlag="com.android.settings.flags.deeplink_sound_and_vibration_25q4"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -4480,7 +4479,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity
             android:name="Settings$VibrationIntensitySettingsActivity"
             android:label="@string/accessibility_vibration_settings_title"
-            android:featureFlag="com.android.settings.flags.deeplink_sound_and_vibration_25q4"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -46,7 +46,7 @@ open class AccountScreen : PreferenceScreenMixin, PreferenceTitleProvider, Prefe
         get() = R.string.account_dashboard_default_summary
 
     override val keywords: Int
-        get() = R.string.keywords_accounts
+        get() = if (Flags.enableAccountsAndBackupScreen()) 0 else R.string.keywords_accounts
 
     override fun getTitle(context: Context): CharSequence =
         context.getText(context.getAccountScreenTitle())

@@ -20,14 +20,21 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.captionpreferences.ui.CaptioningMoreOptionsScreen;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -39,6 +46,8 @@ import java.util.stream.Collectors;
 /** Tests for {@link CaptioningMoreOptionsFragment}. */
 @RunWith(RobolectricTestRunner.class)
 public class CaptioningMoreOptionsFragmentTest {
+    @Rule
+    public CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
     // Language/locale preference key, from captioning_more_options.xml
     private static final String CAPTIONING_LOCALE_KEY = "captioning_locale";
 
@@ -56,10 +65,17 @@ public class CaptioningMoreOptionsFragmentTest {
                 SettingsEnums.ACCESSIBILITY_CAPTION_MORE_OPTIONS);
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_CAPTION_PREFERENCES_SCREEN)
     @Test
     public void getPreferenceScreenResId_returnsCorrectXml() {
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
                 R.xml.captioning_more_options);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_CAPTION_PREFERENCES_SCREEN)
+    @Test
+    public void getPreferenceScreenResId_returnsZero() {
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(0);
     }
 
     @Test
@@ -67,6 +83,27 @@ public class CaptioningMoreOptionsFragmentTest {
         assertThat(mFragment.getLogTag()).isEqualTo("CaptioningMoreOptionsFragment");
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_CAPTION_PREFERENCES_SCREEN)
+    @Test
+    public void getSearchIndexDataProvider_verifyXmlResourcesToIndex() {
+        List<SearchIndexableResource> searchIndexableResource =
+                CaptioningMoreOptionsFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(mContext, /* enabled= */ true);
+        assertThat(searchIndexableResource.getFirst().xmlResId)
+                .isEqualTo(R.xml.captioning_more_options);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_CAPTION_PREFERENCES_SCREEN)
+    @Test
+    public void getSearchIndexDataProvider_returnsNull() {
+        List<SearchIndexableResource> searchIndexableResource =
+                CaptioningMoreOptionsFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(mContext, /* enabled= */ true);
+
+        assertThat(searchIndexableResource).isNull();
+    }
+
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_CAPTION_PREFERENCES_SCREEN)
     @Test
     public void getNonIndexableKeys_existInXmlLayout() {
         final List<String> niks = CaptioningMoreOptionsFragment.SEARCH_INDEX_DATA_PROVIDER
@@ -78,6 +115,7 @@ public class CaptioningMoreOptionsFragmentTest {
         assertThat(keys).containsAtLeastElementsIn(niks);
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_CAPTION_PREFERENCES_SCREEN)
     @Test
     public void getNonIndexableKeys_captioningEnabled_localeIsSearchable() {
         setCaptioningEnabled(true);
@@ -89,6 +127,7 @@ public class CaptioningMoreOptionsFragmentTest {
         assertThat(niks).doesNotContain(CAPTIONING_LOCALE_KEY);
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_CAPTION_PREFERENCES_SCREEN)
     @Test
     public void getNonIndexableKeys_captioningDisabled_localeIsNotSearchable() {
         setCaptioningEnabled(false);
@@ -98,6 +137,12 @@ public class CaptioningMoreOptionsFragmentTest {
 
         // In NonIndexableKeys == not searchable
         assertThat(niks).contains(CAPTIONING_LOCALE_KEY);
+    }
+
+    @Test
+    public void getPreferenceScreenBindingKey_returnsCaptioningMoreOptionsScreenKey() {
+        assertThat(mFragment.getPreferenceScreenBindingKey(mContext))
+                .isEqualTo(CaptioningMoreOptionsScreen.KEY);
     }
 
     private void setCaptioningEnabled(boolean enabled) {

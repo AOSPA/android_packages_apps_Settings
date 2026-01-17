@@ -15,6 +15,8 @@
  */
 package com.android.settings.system;
 
+import static com.android.settings.flags.Flags.owlV2Enabled;
+
 import android.Manifest;
 import android.annotation.RequiresPermission;
 import android.content.Context;
@@ -27,12 +29,15 @@ import android.util.Log;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.Settings;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.factory_reset.Flags;
+import com.android.settings.i18n.RegionalCustomizationFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 
 public class FactoryResetPreferenceController extends BasePreferenceController {
 
@@ -46,6 +51,8 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
 
     @VisibleForTesting
     ActivityResultLauncher<Intent> mFactoryResetPreparationLauncher;
+    @VisibleForTesting
+    ActivityResultLauncher<Intent> mEmoneyResetLauncher;
 
     public FactoryResetPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -60,24 +67,11 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (mPreferenceKey.equals(preference.getKey())) {
-            if (Flags.enableFactoryResetWizard()) {
-                startFactoryResetPreparationActivity();
-            } else {
-                startFactoryResetActivity();
-            }
-            return true;
+        if (!mPreferenceKey.equals(preference.getKey())) {
+            return false;
         }
-        return false;
-    }
-
-    private void startFactoryResetPreparationActivity() {
-        Intent prepareFactoryResetIntent = getPrepareFactoryResetIntent();
-        if (prepareFactoryResetIntent != null && mFactoryResetPreparationLauncher != null) {
-            mFactoryResetPreparationLauncher.launch(prepareFactoryResetIntent);
-        } else {
-            startFactoryResetActivity();
-        }
+        executeFullResetWorkflow();
+        return true;
     }
 
     // We check that the activity that can handle the factory reset preparation action is indeed
@@ -122,9 +116,51 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
             mFactoryResetPreparationLauncher = fragment.registerForActivityResult(
                     new ActivityResultContracts.StartActivityForResult(),
                     result -> {
+                        executeEmoneyOrSystemReset();
+                    });
+        }
+
+        if (owlV2Enabled()) {
+            mEmoneyResetLauncher = fragment.registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
+                        //  TODO: log the metrics
                         startFactoryResetActivity();
                     });
         }
+    }
+
+    private void executeFullResetWorkflow() {
+        if (Flags.enableFactoryResetWizard()) {
+            Intent prepareIntent = getPrepareFactoryResetIntent();
+            if (prepareIntent != null && mFactoryResetPreparationLauncher != null) {
+                mFactoryResetPreparationLauncher.launch(prepareIntent);
+                return;
+            }
+        }
+        executeEmoneyOrSystemReset();
+    }
+
+    private void executeEmoneyOrSystemReset() {
+        if (owlV2Enabled()) {
+            Intent emoneyIntent = getEmoneyResetIntent();
+            if (emoneyIntent != null && mEmoneyResetLauncher != null) {
+                mEmoneyResetLauncher.launch(emoneyIntent);
+                return;
+            }
+        }
+        startFactoryResetActivity();
+    }
+
+    @Nullable
+    private Intent getEmoneyResetIntent() {
+        RegionalCustomizationFeatureProvider provider =
+                FeatureFactory.getFeatureFactory().getRegionalCustomizationFeatureProvider();
+
+        if (provider != null && provider.isEmoneyResetServiceAvailable(mContext)) {
+            return provider.getEmoneyResetIntent();
+        }
+        return null;
     }
 
     private void startFactoryResetActivity() {

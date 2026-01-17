@@ -20,7 +20,6 @@ import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ComponentName
 import android.content.Context
 import android.net.Uri
-import android.os.Looper
 import android.view.accessibility.AccessibilityManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
@@ -33,8 +32,8 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.stub
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowLooper
 
 /** Tests for [AccessibilityServiceIllustrationItemController]. */
 @RunWith(RobolectricTestRunner::class)
@@ -70,7 +69,7 @@ class AccessibilityServiceIllustrationItemControllerTest {
                 .build()
 
         controller.bindData(illustrationItem)
-        shadowOf(Looper.getMainLooper()).idle()
+        ShadowLooper.idleMainLooper()
 
         assertThat(illustrationItem.imageUri).isEqualTo(expectedUri)
         assertThat(illustrationItem.contentDescription?.toString()).isEqualTo(expectedSummary)

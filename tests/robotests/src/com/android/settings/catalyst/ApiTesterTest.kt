@@ -17,12 +17,16 @@
 package com.android.settings.catalyst
 
 import android.Manifest.permission.INTERACT_ACROSS_PROFILES
+import android.Manifest.permission.INTERACT_ACROSS_USERS
+import android.Manifest.permission.MANAGE_USERS
+import android.app.Application
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.fragment.app.Fragment
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.R;
+import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.flags.Flags.FLAG_CATALYST_MIGRATION_26Q2
 import com.android.settings.testutils2.ApiTester
@@ -32,153 +36,147 @@ import com.android.settings.testutils2.HardwareUnsupportedException
 import com.android.settings.testutils2.InvalidValueException
 import com.android.settings.testutils2.MissingPermissionException
 import com.android.settings.testutils2.Parameters
+import com.android.settingslib.datastore.or
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
-import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import com.google.common.truth.Truth
 import kotlin.test.assertFailsWith
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 
 @RunWith(AndroidJUnit4::class)
 class ApiTesterTest {
 
-    class TestScreen : PreferencesApiScreen(
-        key = "A",
-        topLevelSettingsCategory = Category.SYSTEM,
-        fragment = Fragment::class,
-        purpose = 0
-    ) {
+    class TestScreen :
+        PreferencesApiScreen(
+            key = "A",
+            topLevelSettingsCategory = Category.SYSTEM,
+            fragment = Fragment::class,
+            purpose = 0,
+        ) {
         init {
-            flag {
-                Flags.catalystMigration26q2()
+            flag { Flags.catalystMigration26q2() }
+
+            preference(
+                key =
+                    "preference_which_requires_interact_across_users_and_interact_across_profiles",
+                purpose = 0,
+                type = AnyString,
+            ) {
+                permissions(INTERACT_ACROSS_PROFILES and INTERACT_ACROSS_USERS)
+                get { execute { "Hello" } }
             }
+
+            preference(
+                key = "preference_which_requires_interact_across_users_or_interact_across_profiles",
+                purpose = 0,
+                type = AnyString,
+            ) {
+                permissions(INTERACT_ACROSS_PROFILES or INTERACT_ACROSS_USERS)
+                get { execute { "Hello" } }
+            }
+
+            preference(
+                key =
+                    "preference_which_requires_interact_across_users_and_interact_across_profiles_or_manage_users",
+                purpose = 0,
+                type = AnyString,
+            ) {
+                permissions((INTERACT_ACROSS_PROFILES and INTERACT_ACROSS_USERS) or MANAGE_USERS)
+                get { execute { "Hello" } }
+            }
+
             preference(
                 key = "preference_which_has_value_hello_and_no_setter",
                 purpose = 0,
-                type = AnyString
+                type = AnyString,
             ) {
-                get {
-                    execute {
-                        "Hello"
-                    }
-                }
+                get { execute { "Hello" } }
             }
             preference(
                 key = "preference_which_fails_permissions_in_get",
                 purpose = 0,
-                type = AnyString
+                type = AnyString,
             ) {
                 get {
-                    permissions(listOf(INTERACT_ACROSS_PROFILES))
-                    execute {
-                        "Hello"
-                    }
+                    permissions(INTERACT_ACROSS_PROFILES)
+                    execute { "Hello" }
                 }
             }
             preference(
                 key = "preference_which_fails_permissions_in_set",
                 purpose = 0,
-                type = AnyString
+                type = AnyString,
             ) {
-                get {
-                    execute {
-                        "Hey"
-                    }
-                }
+                get { execute { "Hey" } }
                 set {
-                    permissions(listOf(INTERACT_ACROSS_PROFILES))
-                    execute { }
+                    permissions(INTERACT_ACROSS_PROFILES)
+                    execute {}
                 }
             }
             preference(
                 key = "preference_which_requires_interact_across_profiles",
                 purpose = 0,
-                type = AnyString
+                type = AnyString,
             ) {
-                permissions(listOf(INTERACT_ACROSS_PROFILES))
-                get {
-                    execute {
-                        "Hello"
-                    }
-                }
-                set {
-                    execute { }
-                }
+                permissions(INTERACT_ACROSS_PROFILES)
+                get { execute { "Hello" } }
+                set { execute {} }
             }
             preference(
                 key = "preference_with_fails_precondition_with_hardware",
                 purpose = 0,
-                type = AnyString
+                type = AnyString,
             ) {
-                preconditions(0) {
-                    HardwareUnsupported(R.string.hardware_unsupported_exception)
-                }
-                get {
-                    execute {
-                        "Hello"
-                    }
-                }
-                set {
-                    execute {}
-                }
+                preconditions(0) { HardwareUnsupported(R.string.hardware_unsupported_exception) }
+                get { execute { "Hello" } }
+                set { execute {} }
             }
             preference(
                 key = "preference_with_fails_precondition_with_hardware_in_get",
                 purpose = 0,
-                type = AnyString
+                type = AnyString,
             ) {
                 get {
                     preconditions(0) {
                         HardwareUnsupported(R.string.hardware_unsupported_exception)
                     }
-                    execute {
-                        "Hello"
-                    }
+                    execute { "Hello" }
                 }
-                set {
-                    execute { }
-                }
+                set { execute {} }
             }
             preference(
                 key = "preference_with_fails_precondition_with_hardware_in_set",
                 purpose = 0,
-                type = AnyString
+                type = AnyString,
             ) {
-                get {
-                    execute {
-                        "Hello"
-                    }
-                }
+                get { execute { "Hello" } }
                 set {
                     preconditions(0) {
                         HardwareUnsupported(R.string.hardware_unsupported_exception)
                     }
-                    execute { }
+                    execute {}
                 }
             }
             preference(
                 key = "preference_with_setter_and_getter_cant_set_a",
                 purpose = 0,
-                type = AnyString
+                type = AnyString,
             ) {
                 var theValue = "Hello"
-                get {
-                    execute {
-                        theValue
-                    }
-                }
+                get { execute { theValue } }
                 set {
                     valuePreconditions(0) { value ->
-                        if (value == "a") Custom(R.string.custom_exception)
-                        else Allowed
+                        if (value == "a") Custom(R.string.custom_exception) else Allowed
                     }
                     execute { value -> theValue = value }
                 }
@@ -186,132 +184,91 @@ class ApiTesterTest {
             preference(
                 key = "preference_with_generated_type",
                 purpose = 0,
-                type = GeneratedType<String>(R.string.generated_type_description) {
-                    listOf(
-                        GeneratedValue<String>("value1", "first"),
-                        GeneratedValue<String>("value2", "second")
-                    )
-                }
+                type =
+                    GeneratedType<String>(R.string.generated_type_description) {
+                        listOf(
+                            GeneratedValue<String>("value1", "first"),
+                            GeneratedValue<String>("value2", "second"),
+                        )
+                    },
             ) {
                 var theValue = "value1"
-                get {
-                    execute {
-                        theValue
-                    }
-                }
-                set {
-                    execute { value->
-                        theValue = value
-                    }
-                }
-
+                get { execute { theValue } }
+                set { execute { value -> theValue = value } }
             }
 
             preference(
                 key = "preference_with_generated_type_gets_and_sets_invalid_value",
                 purpose = 0,
-                type = GeneratedType<String>(R.string.generated_type_description) {
-                    listOf(
-                        GeneratedValue<String>("value1", "first"),
-                        GeneratedValue<String>("value2", "second")
-                    )
-                }
+                type =
+                    GeneratedType<String>(R.string.generated_type_description) {
+                        listOf(
+                            GeneratedValue<String>("value1", "first"),
+                            GeneratedValue<String>("value2", "second"),
+                        )
+                    },
             ) {
                 var theValue = "Hello"
-                get {
-                    execute {
-                        "value3"
-                    }
-                }
-                set {
-                    execute { value ->
-                        theValue = value
-                    }
-                }
+                get { execute { "value3" } }
+                set { execute { value -> theValue = value } }
             }
         }
     }
 
-    class FailingPermissionScreen : PreferencesApiScreen(
-        key = "B",
-        topLevelSettingsCategory = Category.SYSTEM,
-        fragment = Fragment::class,
-        purpose = 0
-    ) {
+    class FailingPermissionScreen :
+        PreferencesApiScreen(
+            key = "B",
+            topLevelSettingsCategory = Category.SYSTEM,
+            fragment = Fragment::class,
+            purpose = 0,
+        ) {
         init {
-            flag {
-                Flags.catalystMigration26q2()
-            }
-            permissions(listOf(INTERACT_ACROSS_PROFILES))
-            preference(
-                key = "main_pref",
-                purpose = 0,
-                type = AnyString
-            ) {
-            get {
-                execute {
-                    "Hello"
-                }
-            }
-            set {
-                execute {}
-            }
-        }
-        }
-    }
-
-    class FailingPreconditionScreen : PreferencesApiScreen(
-        key = "C",
-        topLevelSettingsCategory = Category.SYSTEM,
-        fragment = Fragment::class,
-        purpose = 0
-    ) {
-        init {
-            flag {
-                Flags.catalystMigration26q2()
-            }
-            preconditions(0){
-                HardwareUnsupported(R.string.hardware_unsupported_exception)
-            }
-            preference(
-                key = "main_pref",
-                purpose = 0,
-                type = AnyString
-            ) {
-                get {
-                    execute {
-                        "Hello"
-                    }
-                }
-                set {
-                    execute {}
-                }
+            flag { Flags.catalystMigration26q2() }
+            permissions(INTERACT_ACROSS_PROFILES)
+            preference(key = "main_pref", purpose = 0, type = AnyString) {
+                get { execute { "Hello" } }
+                set { execute {} }
             }
         }
     }
 
-    class ParameterizedScreen : PreferencesApiScreen(
-        key = "D",
-        topLevelSettingsCategory = Category.SYSTEM,
-        fragment = Fragment::class,
-        purpose = 0
-    ) {
+    class FailingPreconditionScreen :
+        PreferencesApiScreen(
+            key = "C",
+            topLevelSettingsCategory = Category.SYSTEM,
+            fragment = Fragment::class,
+            purpose = 0,
+        ) {
         init {
-            flag {
-                Flags.catalystMigration26q2()
+            flag { Flags.catalystMigration26q2() }
+            preconditions(0) { HardwareUnsupported(R.string.hardware_unsupported_exception) }
+            preference(key = "main_pref", purpose = 0, type = AnyString) {
+                get { execute { "Hello" } }
+                set { execute {} }
             }
+        }
+    }
+
+    class ParameterizedScreen :
+        PreferencesApiScreen(
+            key = "D",
+            topLevelSettingsCategory = Category.SYSTEM,
+            fragment = Fragment::class,
+            purpose = 0,
+        ) {
+        init {
+            flag { Flags.catalystMigration26q2() }
             parameters {
                 parameter(
                     "package",
                     R.string.parameter_purpose,
-                    type = GeneratedParameterType(
-                        R.string.parameter_type_description
-                    ) {
-                        listOf (
-                            GeneratedValue("parameter1", "first parameter description"),
-                            GeneratedValue("parameter2", "second parameter description")
-                        )
-                    }
+                    type =
+                        GeneratedParameterType(R.string.parameter_type_description) {
+                            listOf(
+                                GeneratedValue("parameter1", "first parameter description"),
+                                GeneratedValue("parameter2", "second parameter description"),
+                            )
+                        },
                 )
                 prepareScreenExtras { parameters, extras ->
                     extras.putString("pkg", parameters["package"])
@@ -323,39 +280,30 @@ class ApiTesterTest {
                 type = AnyString,
             ) {
                 preconditions(R.string.parameterized_precondition) {
-                    if(parameters["package"] == "parameter1") {
+                    if (parameters["package"] == "parameter1") {
                         Allowed
-                    }
-                    else Custom(R.string.parameter_must_be_parameter1)
+                    } else Custom(R.string.parameter_must_be_parameter1)
                 }
-                get {
-                    execute {
-                        "hello"
-                    }
-                }
+                get { execute { "hello" } }
             }
             preference<String>(
                 key = "preference_of_parameterized_screen",
                 purpose = 0,
-                type = AnyString
+                type = AnyString,
             ) {
                 var storageForParameter1 = ""
                 var storageForParameter2 = ""
                 get {
                     execute {
-                        if(parameters["package"] == "parameter1")
-                            storageForParameter1
-                        else if(parameters["package"] == "parameter2")
-                            storageForParameter2
+                        if (parameters["package"] == "parameter1") storageForParameter1
+                        else if (parameters["package"] == "parameter2") storageForParameter2
                         else "Invalid"
                     }
                 }
                 set {
                     execute { value ->
-                        if (parameters["package"] == "parameter1")
-                            storageForParameter1 = value
-                        else if(parameters["package"] == "parameter2")
-                            storageForParameter2 = value
+                        if (parameters["package"] == "parameter1") storageForParameter1 = value
+                        else if (parameters["package"] == "parameter2") storageForParameter2 = value
                     }
                 }
             }
@@ -363,16 +311,14 @@ class ApiTesterTest {
             preference<String>(
                 key = "preference_of_parameterized_screen_with_missing_permission",
                 purpose = 0,
-                type = AnyString
+                type = AnyString,
             ) {
                 get {
-                    permissions(listOf(INTERACT_ACROSS_PROFILES))
-                    execute {
-                        parameters["package"]!!
-                    }
+                    permissions(INTERACT_ACROSS_PROFILES)
+                    execute { parameters["package"]!! }
                 }
                 set {
-                    permissions(listOf(INTERACT_ACROSS_PROFILES))
+                    permissions(INTERACT_ACROSS_PROFILES)
                     execute { value -> }
                 }
             }
@@ -380,12 +326,11 @@ class ApiTesterTest {
             preference<String>(
                 key = "get_preference_of_parameterized_screen",
                 purpose = 0,
-                type = AnyString
+                type = AnyString,
             ) {
                 get {
                     execute {
-                        if(parameters["package"] == "parameter1")
-                            "parameter1_value"
+                        if (parameters["package"] == "parameter1") "parameter1_value"
                         else "parameter2_value"
                     }
                 }
@@ -393,56 +338,47 @@ class ApiTesterTest {
         }
     }
 
-    class FailingPreconditionParameterizedScreen : PreferencesApiScreen(
-        key = "E",
-        topLevelSettingsCategory = Category.SYSTEM,
-        fragment = Fragment::class,
-        purpose = 0
-    ) {
+    class FailingPreconditionParameterizedScreen :
+        PreferencesApiScreen(
+            key = "E",
+            topLevelSettingsCategory = Category.SYSTEM,
+            fragment = Fragment::class,
+            purpose = 0,
+        ) {
         var parameterizedScreenPreconditionSucceeds = true
+
         init {
-            flag {
-                Flags.catalystMigration26q2()
-            }
+            flag { Flags.catalystMigration26q2() }
             parameters {
                 parameter(
                     "package",
                     R.string.parameter_purpose,
-                    type = GeneratedParameterType(
-                        R.string.parameter_type_description
-                    ) {
-                        listOf (
-                            GeneratedValue("parameter1", "first parameter description"),
-                            GeneratedValue("parameter2", "second parameter description")
-                        )
-                    })
+                    type =
+                        GeneratedParameterType(R.string.parameter_type_description) {
+                            listOf(
+                                GeneratedValue("parameter1", "first parameter description"),
+                                GeneratedValue("parameter2", "second parameter description"),
+                            )
+                        },
+                )
             }
-            preconditions(R.string.parameterized_precondition){
-                if(parameters["package"] == "parameter1")
-                    Allowed
+            preconditions(R.string.parameterized_precondition) {
+                if (parameters["package"] == "parameter1") Allowed
                 else HardwareUnsupported(R.string.hardware_unsupported_exception)
             }
-            preference(
-                key = "main_preference",
-                purpose = 0,
-                type = AnyString
-            ) {
-                get {
-                    execute {
-                        "Hello"
-                    }
-                }
+            preference(key = "main_preference", purpose = 0, type = AnyString) {
+                get { execute { "Hello" } }
             }
         }
     }
 
+    val context: Application = ApplicationProvider.getApplicationContext()
     val tester = ApiTester(TestScreen())
     val testerFailingPermissions = ApiTester(FailingPermissionScreen())
     val testerFailingPreconditions = ApiTester(FailingPreconditionScreen())
     val testerParameterized = ApiTester(ParameterizedScreen())
-    val testerFailingPreconditionsParameterized = ApiTester(
-        FailingPreconditionParameterizedScreen()
-    )
+    val testerFailingPreconditionsParameterized =
+        ApiTester(FailingPreconditionParameterizedScreen())
 
     @get:Rule val setFlagsRule = SetFlagsRule()
 
@@ -460,84 +396,111 @@ class ApiTesterTest {
 
     @Test
     fun get_failingScreenPermissions_throwsError() {
-        assertFailsWith<MissingPermissionException> { testerFailingPermissions.get<String>("main_pref") }
+        assertFailsWith<MissingPermissionException> {
+            testerFailingPermissions.get<String>("main_pref")
+        }
     }
 
     @Test
     fun set_failingScreenPermissions_throwsError() {
-        assertFailsWith<MissingPermissionException> { testerFailingPermissions.set<String>("main_pref", "") }
+        assertFailsWith<MissingPermissionException> {
+            testerFailingPermissions.set<String>("main_pref", "")
+        }
     }
 
     @Test
     fun get_failingScreenPreconditions_throwsError() {
-        assertFailsWith<HardwareUnsupportedException> { testerFailingPreconditions.get<String>("main_pref") }
+        assertFailsWith<HardwareUnsupportedException> {
+            testerFailingPreconditions.get<String>("main_pref")
+        }
     }
 
     @Test
     fun set_failingScreenPreconditions_throwsError() {
-        assertFailsWith<HardwareUnsupportedException> { testerFailingPreconditions.set<String>("main_pref", "") }
+        assertFailsWith<HardwareUnsupportedException> {
+            testerFailingPreconditions.set<String>("main_pref", "")
+        }
     }
 
     @Test
     fun get_failingGetPermissions_throwsError() {
-        assertFailsWith<MissingPermissionException> { tester.get<String>("preference_which_fails_permissions_in_get") }
+        assertFailsWith<MissingPermissionException> {
+            tester.get<String>("preference_which_fails_permissions_in_get")
+        }
     }
 
     @Test
     fun get_failingSetPermissions_throwsError() {
-        assertFailsWith<MissingPermissionException> { tester.set<String>("preference_which_fails_permissions_in_set", "") }
+        assertFailsWith<MissingPermissionException> {
+            tester.set<String>("preference_which_fails_permissions_in_set", "")
+        }
     }
 
     @Test
     fun get_returnsCorrectValue() {
-        Truth.assertThat(tester.get<String>("preference_which_has_value_hello_and_no_setter")).isEqualTo("Hello")
+        Truth.assertThat(tester.get<String>("preference_which_has_value_hello_and_no_setter"))
+            .isEqualTo("Hello")
     }
+
     @Test
     fun set_noSetter_throwsException() {
-        assertFailsWith<CannotSetException> { tester.set("preference_which_has_value_hello_and_no_setter", "v") }
+        assertFailsWith<CannotSetException> {
+            tester.set("preference_which_has_value_hello_and_no_setter", "v")
+        }
     }
 
     @Test
     fun get_missingPermission_throwsException() {
-        assertFailsWith<MissingPermissionException> { tester.get<String>("preference_which_requires_interact_across_profiles") }
+        assertFailsWith<MissingPermissionException> {
+            tester.get<String>("preference_which_requires_interact_across_profiles")
+        }
     }
 
     @Test
     fun set_missingPermission_throwsException() {
-        assertFailsWith<MissingPermissionException> { tester.set("preference_which_requires_interact_across_profiles", "v") }
+        assertFailsWith<MissingPermissionException> {
+            tester.set("preference_which_requires_interact_across_profiles", "v")
+        }
     }
 
     @Test
     fun set_missingHardware_throwsException() {
-        assertFailsWith<HardwareUnsupportedException> { tester.set("preference_with_fails_precondition_with_hardware", "v") }
+        assertFailsWith<HardwareUnsupportedException> {
+            tester.set("preference_with_fails_precondition_with_hardware", "v")
+        }
     }
 
     @Test
     fun set_setsValue() {
         tester.set("preference_with_setter_and_getter_cant_set_a", "abc123")
-        Truth.assertThat(tester.get<String>("preference_with_setter_and_getter_cant_set_a")).isEqualTo("abc123")
+        Truth.assertThat(tester.get<String>("preference_with_setter_and_getter_cant_set_a"))
+            .isEqualTo("abc123")
     }
 
     @Test
     fun get_missingHardwareFromSetPrecondition_throwsException() {
-        assertFailsWith<HardwareUnsupportedException> { tester.get<String>("preference_with_fails_precondition_with_hardware_in_get") }
+        assertFailsWith<HardwareUnsupportedException> {
+            tester.get<String>("preference_with_fails_precondition_with_hardware_in_get")
+        }
     }
 
     @Test
     fun set_missingHardwareFromSetPrecondition_throwsException() {
-        assertFailsWith<HardwareUnsupportedException> { tester.set("preference_with_fails_precondition_with_hardware_in_set", "v") }
+        assertFailsWith<HardwareUnsupportedException> {
+            tester.set("preference_with_fails_precondition_with_hardware_in_set", "v")
+        }
     }
 
     @Test
     fun set_failsValuePreconditions_throwsException() {
-        assertFailsWith<FailedPreconditionException> { tester.set("preference_with_setter_and_getter_cant_set_a", "a") }
+        assertFailsWith<FailedPreconditionException> {
+            tester.set("preference_with_setter_and_getter_cant_set_a", "a")
+        }
     }
 
     @Test
     fun launchIntent_onScreenPermissionFailure_fails() {
-        assertFailsWith<MissingPermissionException> {
-            testerFailingPermissions.getLaunchIntent()
-        }
+        assertFailsWith<MissingPermissionException> { testerFailingPermissions.getLaunchIntent() }
     }
 
     @Test
@@ -554,24 +517,18 @@ class ApiTesterTest {
 
     @Test
     fun getPreferenceOptions_generatedType_areCorrect() {
-        Truth.assertThat(
-            tester.getPreferenceOptions<String>("preference_with_generated_type")
-        ).containsExactly(
-            ("value1" to "first"),
-            ("value2" to "second")
-        )
+        Truth.assertThat(tester.getPreferenceOptions<String>("preference_with_generated_type"))
+            .containsExactly(("value1" to "first"), ("value2" to "second"))
     }
 
     @Test
     fun set_onGeneratedType_isCorrect() {
         tester.set("preference_with_generated_type", "value1")
-        Truth.assertThat(
-            tester.get<String>("preference_with_generated_type")
-        ).isEqualTo("value1")
+        Truth.assertThat(tester.get<String>("preference_with_generated_type")).isEqualTo("value1")
     }
 
     @Test
-    fun getPreferenceOptions_onInfiniteType_throwsException(){
+    fun getPreferenceOptions_onInfiniteType_throwsException() {
         assertFailsWith<Exception> {
             tester.getPreferenceOptions<String>("preference_which_has_value_hello_and_no_setter")
         }
@@ -587,7 +544,10 @@ class ApiTesterTest {
     @Test
     fun set_onGeneratedValueWithInvalidValue_throwsException() {
         assertFailsWith<InvalidValueException> {
-            tester.set<String>("preference_with_generated_type_gets_and_sets_invalid_value", "value4")
+            tester.set<String>(
+                "preference_with_generated_type_gets_and_sets_invalid_value",
+                "value4",
+            )
         }
     }
 
@@ -596,7 +556,7 @@ class ApiTesterTest {
         assertFailsWith<IllegalArgumentException> {
             testerParameterized.get<String>(
                 "preference_with_parameter_precondition",
-                Parameters("package" to "parameterInvalid")
+                Parameters("package" to "parameterInvalid"),
             )
         }
     }
@@ -606,7 +566,7 @@ class ApiTesterTest {
         assertFailsWith<FailedPreconditionException> {
             testerParameterized.get<String>(
                 "preference_with_parameter_precondition",
-                Parameters("package" to "parameter2")
+                Parameters("package" to "parameter2"),
             )
         }
     }
@@ -614,31 +574,34 @@ class ApiTesterTest {
     @Test
     fun get_onParameterizedPreferenceWithCorrectParameterPrecondition_isCorrect() {
         Truth.assertThat(
-            testerParameterized.get<String>(
-                "preference_with_parameter_precondition",
-                Parameters("package" to "parameter1")
+                testerParameterized.get<String>(
+                    "preference_with_parameter_precondition",
+                    Parameters("package" to "parameter1"),
+                )
             )
-        ).isEqualTo("hello")
+            .isEqualTo("hello")
     }
 
     @Test
     fun get_onParameterizedPreferenceWithParameter1_isCorrect() {
         Truth.assertThat(
-            testerParameterized.get<String>(
-            "get_preference_of_parameterized_screen",
-            Parameters("package" to "parameter1")
+                testerParameterized.get<String>(
+                    "get_preference_of_parameterized_screen",
+                    Parameters("package" to "parameter1"),
+                )
             )
-        ).isEqualTo("parameter1_value")
+            .isEqualTo("parameter1_value")
     }
 
     @Test
     fun get_onParameterizedPreferenceWithParameter2_isCorrect() {
         Truth.assertThat(
-            testerParameterized.get<String>(
-            "get_preference_of_parameterized_screen",
-            Parameters("package" to "parameter2")
+                testerParameterized.get<String>(
+                    "get_preference_of_parameterized_screen",
+                    Parameters("package" to "parameter2"),
+                )
             )
-        ).isEqualTo("parameter2_value")
+            .isEqualTo("parameter2_value")
     }
 
     @Test
@@ -646,28 +609,31 @@ class ApiTesterTest {
         testerParameterized.set<String>(
             "preference_of_parameterized_screen",
             "parameter1_storage",
-            Parameters("package" to "parameter1")
+            Parameters("package" to "parameter1"),
         )
         Truth.assertThat(
-            testerParameterized.get<String>(
-                "preference_of_parameterized_screen",
-                Parameters("package" to "parameter1")
+                testerParameterized.get<String>(
+                    "preference_of_parameterized_screen",
+                    Parameters("package" to "parameter1"),
+                )
             )
-        ).isEqualTo("parameter1_storage")
+            .isEqualTo("parameter1_storage")
     }
 
     @Test
     fun set_onParameterizedPreferenceWithParameter2_isCorrect() {
-        testerParameterized.set<String>("preference_of_parameterized_screen",
+        testerParameterized.set<String>(
+            "preference_of_parameterized_screen",
             "parameter2_storage",
-            Parameters("package" to "parameter2")
+            Parameters("package" to "parameter2"),
         )
         Truth.assertThat(
-            testerParameterized.get<String>(
-                "preference_of_parameterized_screen",
-                Parameters("package" to "parameter2")
+                testerParameterized.get<String>(
+                    "preference_of_parameterized_screen",
+                    Parameters("package" to "parameter2"),
+                )
             )
-        ).isEqualTo("parameter2_storage")
+            .isEqualTo("parameter2_storage")
     }
 
     @Test
@@ -675,7 +641,7 @@ class ApiTesterTest {
         assertFailsWith<MissingPermissionException> {
             testerParameterized.get<String>(
                 "preference_of_parameterized_screen_with_missing_permission",
-                Parameters("package" to "parameter2")
+                Parameters("package" to "parameter2"),
             )
         }
     }
@@ -686,7 +652,7 @@ class ApiTesterTest {
             testerParameterized.set<String>(
                 "preference_of_parameterized_screen_with_missing_permission",
                 "hey",
-                Parameters("package" to "parameter2")
+                Parameters("package" to "parameter2"),
             )
         }
     }
@@ -696,7 +662,7 @@ class ApiTesterTest {
         assertFailsWith<IllegalStateException> {
             tester.get<String>(
                 "preference_which_has_value_hello_and_no_setter",
-                Parameters("package" to "parameter2")
+                Parameters("package" to "parameter2"),
             )
         }
     }
@@ -707,7 +673,7 @@ class ApiTesterTest {
             tester.set<String>(
                 "preference_with_setter_and_getter_cant_set_a",
                 "value",
-                Parameters("package" to "parameter2")
+                Parameters("package" to "parameter2"),
             )
         }
     }
@@ -717,7 +683,7 @@ class ApiTesterTest {
         assertFailsWith<HardwareUnsupportedException> {
             testerFailingPreconditionsParameterized.get<String>(
                 "main_preference",
-                Parameters("package" to "parameter2")
+                Parameters("package" to "parameter2"),
             )
         }
     }
@@ -725,11 +691,12 @@ class ApiTesterTest {
     @Test
     fun get_onPassedPreconditionParameterizedScreen_isCorrect() {
         Truth.assertThat(
-            testerFailingPreconditionsParameterized.get<String>(
-            "main_preference",
-                Parameters("package" to "parameter1")
+                testerFailingPreconditionsParameterized.get<String>(
+                    "main_preference",
+                    Parameters("package" to "parameter1"),
+                )
             )
-        ).isEqualTo("Hello")
+            .isEqualTo("Hello")
     }
 
     @Test
@@ -747,9 +714,111 @@ class ApiTesterTest {
     }
 
     @Test
+    fun get_preferenceRequiresInteractAcrossUsersAndInteractAcrossProfiles_missingPermissions_throwsException() {
+        assertFailsWith<MissingPermissionException> {
+            tester.get<String>(
+                "preference_which_requires_interact_across_users_and_interact_across_profiles"
+            )
+        }
+    }
+
+    @Test
+    fun get_preferenceRequiresInteractAcrossUsersAndInteractAcrossProfiles_hasInteractAcrossUsers_throwsException() {
+        shadowOf(context).grantPermissions(INTERACT_ACROSS_USERS)
+        assertFailsWith<MissingPermissionException> {
+            tester.get<String>(
+                "preference_which_requires_interact_across_users_and_interact_across_profiles"
+            )
+        }
+    }
+
+    @Test
+    fun get_preferenceRequiresInteractAcrossUsersAndInteractAcrossProfiles_hasInteractAcrossProfiles_throwsException() {
+        shadowOf(context).grantPermissions(INTERACT_ACROSS_PROFILES)
+        assertFailsWith<MissingPermissionException> {
+            tester.get<String>(
+                "preference_which_requires_interact_across_users_and_interact_across_profiles"
+            )
+        }
+    }
+
+    @Test
+    fun get_preferenceRequiresInteractAcrossUsersAndInteractAcrossProfiles_hasBothPermissions_returnsValue() {
+        shadowOf(context).grantPermissions(INTERACT_ACROSS_USERS, INTERACT_ACROSS_PROFILES)
+        Truth.assertThat(
+                tester.get<String>(
+                    "preference_which_requires_interact_across_users_and_interact_across_profiles"
+                )
+            )
+            .isEqualTo("Hello")
+    }
+
+    @Test
+    fun get_preferenceRequiresInteractAcrossUsersOrInteractAcrossProfiles_missingPermissions_throwsException() {
+        assertFailsWith<MissingPermissionException> {
+            tester.get<String>(
+                "preference_which_requires_interact_across_users_or_interact_across_profiles"
+            )
+        }
+    }
+
+    @Test
+    fun get_preferenceRequiresInteractAcrossUsersOrInteractAcrossProfiles_hasInteractAcrossUsers_returnsValue() {
+        shadowOf(context).grantPermissions(INTERACT_ACROSS_USERS)
+        Truth.assertThat(
+                tester.get<String>(
+                    "preference_which_requires_interact_across_users_or_interact_across_profiles"
+                )
+            )
+            .isEqualTo("Hello")
+    }
+
+    @Test
+    fun get_preferenceRequiresInteractAcrossUsersOrInteractAcrossProfiles_hasInteractAcrossProfiles_returnsValue() {
+        shadowOf(context).grantPermissions(INTERACT_ACROSS_PROFILES)
+        Truth.assertThat(
+                tester.get<String>(
+                    "preference_which_requires_interact_across_users_or_interact_across_profiles"
+                )
+            )
+            .isEqualTo("Hello")
+    }
+
+    @Test
+    fun get_preferenceRequiresInteractAcrossUsersAndInteractAcrossProfilesOrManageUsers_missingPermissions_throwsException() {
+        assertFailsWith<MissingPermissionException> {
+            tester.get<String>(
+                "preference_which_requires_interact_across_users_and_interact_across_profiles_or_manage_users"
+            )
+        }
+    }
+
+    @Test
+    fun get_preferenceRequiresInteractAcrossUsersAndInteractAcrossProfilesOrManageUsers_hasInteractAcrossUsersAndInteractAcrossProfiles_returnsValue() {
+        shadowOf(context).grantPermissions(INTERACT_ACROSS_USERS, INTERACT_ACROSS_PROFILES)
+        Truth.assertThat(
+                tester.get<String>(
+                    "preference_which_requires_interact_across_users_and_interact_across_profiles_or_manage_users"
+                )
+            )
+            .isEqualTo("Hello")
+    }
+
+    @Test
+    fun get_preferenceRequiresInteractAcrossUsersAndInteractAcrossProfilesOrManageUsers_hasManageUsers_returnsValue() {
+        shadowOf(context).grantPermissions(MANAGE_USERS)
+
+        Truth.assertThat(
+                tester.get<String>(
+                    "preference_which_requires_interact_across_users_and_interact_across_profiles_or_manage_users"
+                )
+            )
+            .isEqualTo("Hello")
+    }
+
+    @Test
     fun getParameterOptions_onParameterizedScreen_returnsCorrectValues() {
         Truth.assertThat(testerParameterized.getParameterOptions("package"))
             .containsExactly("parameter1", "parameter2")
     }
-
 }

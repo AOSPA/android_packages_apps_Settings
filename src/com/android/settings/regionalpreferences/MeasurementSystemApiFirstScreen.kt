@@ -21,6 +21,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
 
 // LINT.IfChange
 @ProvidePreferenceScreen(MeasurementSystemApiFirstScreen.KEY)
@@ -34,10 +35,52 @@ class MeasurementSystemApiFirstScreen :
 
     init {
         flag { Flags.catalystMigration26q2() }
+
+        preference(
+            key = KEY_MEASUREMENT_SYSTEM_ITEM,
+            purpose = R.string.regional_preference_measurement_system_item_preference_purpose,
+            type = AnyString,
+        ) {
+            get {
+                execute {
+                    // Use the converter to convert the data to a human-readable value,
+                    // for example: "Metric", "US" and "UK"
+                    RegionalPreferencesDataUtils.measurementSystemConverter(
+                        context,
+                        RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(
+                            context,
+                            ExtensionTypes.MEASUREMENT_SYSTEM,
+                        ),
+                    )
+                }
+            }
+            set {
+                execute { value ->
+                    val unitValues = context.resources.getStringArray(R.array.measurement_system)
+                    for (item in unitValues) {
+                        // If the human-readable value contains the input,
+                        // 1. the human-readable value is UK and the input is uk
+                        // 2. the human-readable value is Use default and the input is default
+                        if (
+                            RegionalPreferencesDataUtils.measurementSystemConverter(context, item)
+                                .contains(value, ignoreCase = true)
+                        ) {
+                            RegionalPreferencesDataUtils.savePreference(
+                                context,
+                                ExtensionTypes.MEASUREMENT_SYSTEM,
+                                item,
+                            )
+                            break
+                        }
+                    }
+                }
+            }
+        }
     }
 
     companion object {
         const val KEY = "regional_preference_measurement_system"
+        const val KEY_MEASUREMENT_SYSTEM_ITEM = "measurement_system_item_preference"
     }
 }
 // LINT.ThenChange(MeasurementSystemItemFragment.java)

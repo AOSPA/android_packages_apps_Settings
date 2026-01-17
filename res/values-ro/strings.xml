@@ -384,7 +384,7 @@
     <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Chipul pentru spațiul privat"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Deblocare facială"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Deblocare facială pentru serviciu"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Configurarea Deblocării faciale"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Cum configurezi Deblocarea facială"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Configurează Deblocarea facială"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Folosește-ți chipul pentru autentificare"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Configurezi Deblocarea facială"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Folosește Deblocarea facială pentru"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Chip"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Folosește chipul pentru aceste acțiuni:"</string>
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Dezactivată"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"Tipul rețelei de date mobile"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Tipul rețelei mobile de voce"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Informații operator"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Confirmă codul PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Confirmă parola"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Confirmă-ți identitatea"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Ca să transferi Conturile Google, setările și altele, introdu modelul celuilalt dispozitiv. Modelul este criptat."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Ca să transferi Conturile Google, setările și altele, introdu codul PIN al celuilalt dispozitiv. PIN-ul este criptat."</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Ca să transferi Conturile Google, setările și altele, introdu parola celuilalt dispozitiv. Parola este criptată."</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Folosește și modelul pentru deblocare"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"PIN valabil și pentru acest dispozitiv"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Folosește și parola pentru deblocare"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Confirmă modelul"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Confirmă codul PIN"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Confirmă parola"</string>
@@ -2533,6 +2542,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Setări rapide"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Glisează în jos din partea de sus a ecranului}few{Glisează în jos cu # degete din partea de sus a ecranului}other{Glisează în jos cu # degete din partea de sus a ecranului}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Glisează în jos din partea de sus a ecranului. Această comandă rapidă va fi disponibilă după ce finalizezi configurarea dispozitivului.}few{Glisează în jos cu # degete din partea de sus a ecranului. Această comandă rapidă va fi disponibilă după ce finalizezi configurarea dispozitivului.}other{Glisează în jos cu # degete din partea de sus a ecranului. Această comandă rapidă va fi disponibilă după ce finalizezi configurarea dispozitivului.}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Setări rapide"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Butoane de volum"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"butoane de volum"</string>
@@ -2600,7 +2613,7 @@
     <string name="accessibility_text_cursor_blink_rate_faster_desc" msgid="5236406089575390876">"Mărește viteza de clipire"</string>
     <string name="accessibility_text_cursor_blink_rate_reset_button_label" msgid="393679766407314372">"Resetează"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio mono"</string>
-    <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combină canalele când redai conținutul audio"</string>
+    <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combină canalele când redai conținut audio"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Balans audio"</string>
     <string name="accessibility_toggle_primary_balance_left_label" msgid="6415750010517682014">"Stânga"</string>
     <string name="accessibility_toggle_primary_balance_right_label" msgid="2987443495390104935">"Dreapta"</string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Alți utilizatori"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Șterge activitatea invitatului"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Șterge toate aplicațiile și datele invitatului când ieși din modul pentru invitați"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Ștergi activitatea invitatului?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Aplicațiile și datele din această sesiune pentru invitați vor fi șterse acum și toate activitățile viitoare ale invitaților vor fi șterse de fiecare dată când ieși din modul pentru invitați"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"șterge, invitat, activitate, elimină, date, vizitator, golește"</string>
@@ -3936,6 +3955,8 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Obține rezumate scurte ale mesajelor mai lungi"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Folosește rezumatele notificărilor"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Rezumă mesajele lungi și conversațiile de grup pentru a obține rezumate scurte.\n\nRezumatele folosesc AI pe dispozitiv, care poate uneori să facă greșeli. Mesajele tale nu sunt trimise niciodată la Google."</string>
+    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Notificările de la aceste aplicații nu vor fi rezumate"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Gestionează aplicațiile"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Gestionează aplicațiile pentru rezumatele notificărilor"</string>
@@ -4424,6 +4445,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Elimină permisiunile, șterge fișierele temporare și oprește notificările"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Gestionează aplicația dacă nu e folosită"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Elimină permisiunile, șterge fișierele temporare, oprește notificările și arhivează aplicația"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Toate aplicațiile"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Aplicații instalate"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Aplicații instantanee"</string>
@@ -5665,6 +5692,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> necesită 2G pentru a fi disponibil"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Permite numai rețele criptate"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Această opțiune este mai sigură, dar poate limita conexiunea la rețeaua mobilă în unele locații. Apelarea de urgență este permisă întotdeauna."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Toate serviciile"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Afișează accesările clipboardului"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Afișează un mesaj când aplicațiile accesează text, imagini sau alte tipuri de conținut pe care l-ai copiat"</string>
@@ -6095,6 +6136,15 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Acțiune încheiată"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Setări rapide privind securitatea și confidențialitatea"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Opțiuni de confidențialitate"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Deschide"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Comutator. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"Blocat"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"Comută"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"Acces la microfon"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"Acces la cameră"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"Acces la locație"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Se asociază"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> s-a conectat"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Scanează dispozitivul"</string>
@@ -6117,4 +6167,6 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Accesează cu ușurință informațiile din satelit adăugând cardul Satelit în Setările rapide"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Adaugă un card"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Solicitări pentru cardul Satelit"</string>
+    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <skip />
 </resources>

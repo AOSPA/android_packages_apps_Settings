@@ -21,6 +21,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
 
 // LINT.IfChange
 @ProvidePreferenceScreen(FirstDayOfWeekApiFirstScreen.KEY)
@@ -34,10 +35,52 @@ class FirstDayOfWeekApiFirstScreen :
 
     init {
         flag { Flags.catalystMigration26q2() }
+
+        preference(
+            key = KEY_FIRST_DAY_OF_WEEK,
+            purpose = R.string.first_day_of_week_item_preference_purpose,
+            type = AnyString,
+        ) {
+            get {
+                execute {
+                    // Use the converter to convert the data to a human-readable value,
+                    // for example: "Sunday", "Monday" and "Tuesday"...etc
+                    RegionalPreferencesDataUtils.dayConverter(
+                        context,
+                        RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(
+                            context,
+                            ExtensionTypes.FIRST_DAY_OF_WEEK,
+                        ),
+                    )
+                }
+            }
+            set {
+                execute { value ->
+                    val unitValues = context.resources.getStringArray(R.array.first_day_of_week)
+                    for (item in unitValues) {
+                        // If the human-readable value contains the input,
+                        // 1. the human-readable value is Sunday and the input is sun
+                        // 2. the human-readable value is Use default and the input is default
+                        if (
+                            RegionalPreferencesDataUtils.dayConverter(context, item)
+                                .contains(value, ignoreCase = true)
+                        ) {
+                            RegionalPreferencesDataUtils.savePreference(
+                                context,
+                                ExtensionTypes.FIRST_DAY_OF_WEEK,
+                                item,
+                            )
+                            break
+                        }
+                    }
+                }
+            }
+        }
     }
 
     companion object {
         const val KEY = "regional_preference_first_day_of_week"
+        const val KEY_FIRST_DAY_OF_WEEK = "first_day_of_week_item_preference"
     }
 }
 // LINT.ThenChange(FirstDayOfWeekItemFragment.java)

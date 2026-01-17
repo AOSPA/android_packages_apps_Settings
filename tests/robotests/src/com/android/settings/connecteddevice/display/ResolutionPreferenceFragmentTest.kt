@@ -27,6 +27,7 @@ import androidx.fragment.app.testing.EmptyFragmentActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceScreen
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.annotation.UiThreadTest
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -219,6 +220,19 @@ class ResolutionPreferenceFragmentTest : ExternalDisplayTestBase() {
         activityScenario.scenario.onActivity { activity: EmptyFragmentActivity ->
             assertThat(activity.isFinishing).isTrue()
         }
+    }
+
+    @Test
+    @UiThreadTest
+    fun onStart_setsRecyclerViewNotImportantForAccessibility() {
+        initFragment(mDisplays[0].id)
+        // onStartCallback() is called within initFragment()
+        mHandler.flush()
+
+        // Verify that the RecyclerView is marked as not important for accessibility
+        // to prevent "X of Y" announcements for each resolution option.
+        assertThat(fragment.listView.importantForAccessibility)
+            .isEqualTo(View.IMPORTANT_FOR_ACCESSIBILITY_NO)
     }
 
     @Test

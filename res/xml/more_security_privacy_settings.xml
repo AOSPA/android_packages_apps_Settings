@@ -230,6 +230,16 @@
         android:fragment="com.android.settings.security.MemtagPage"
         settings:controller="com.android.settings.security.MemtagPagePreferenceController" />
 
-
+    <Preference
+        android:order="310"
+        android:key="binary_transparency_settings"
+        android:title="@string/binary_transparency_title"
+        android:summary="@string/binary_transparency_summary"
+        settings:keywords="@string/keywords_binary_transparency"
+        settings:controller="com.android.settings.security.BinaryTransparencyPreferenceController" >
+        <!-- TODO: b/469390058 - Update these values once these are finalized with UX. -->
+        <intent android:action="com.android.binarytransparency.LAUNCHER"
+                android:targetPackage="com.google.attestation.verifier" />
+    </Preference>
 
 </PreferenceScreen>

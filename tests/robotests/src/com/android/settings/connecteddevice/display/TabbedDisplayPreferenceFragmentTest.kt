@@ -22,6 +22,7 @@ import android.os.SystemClock
 import android.view.InputDevice
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -46,6 +47,7 @@ import org.mockito.ArgumentCaptor
 import org.mockito.Captor
 import org.mockito.kotlin.any
 import org.mockito.kotlin.atLeastOnce
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.reset
@@ -68,6 +70,8 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     private lateinit var toolbarItemsCaptor:
         ArgumentCaptor<List<ScrollableToolbarItemLayout.ToolbarItem>>
     @Captor private lateinit var motionEventCaptor: ArgumentCaptor<MotionEvent>
+    @Captor
+    private lateinit var layoutChangeListenerCaptor: ArgumentCaptor<View.OnLayoutChangeListener>
 
     private lateinit var viewModel: DisplayPreferenceViewModel
     private lateinit var fragment: TestableTabbedDisplayPreferenceFragment
@@ -75,6 +79,7 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     private lateinit var topologyView: FakeDisplayTopologyPreferenceView
     private lateinit var appBarLayoutSpy: AppBarLayout
     private lateinit var selectedDisplayPrefContainerSpy: FocusAwareFrameLayout
+    private lateinit var floatingToolbar: View
 
     @Before
     override fun setUp() {
@@ -93,6 +98,7 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
                 mDevicePolicyManager,
             )
         topologyView = FakeDisplayTopologyPreferenceView(mMockedInjector)
+        floatingToolbar = spy(View(application))
         initFragment()
 
         // Spy on the container to verify propagated events
@@ -345,6 +351,39 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     }
 
     @Test
+    fun toolbarLayoutListener_onLayoutChange_updatesPaddingWithMargin() {
+        // Verifies that the toolbar layout listener correctly updates the bottom padding of the
+        // preference container when the toolbar has margins.
+        verify(floatingToolbar).addOnLayoutChangeListener(layoutChangeListenerCaptor.capture())
+        val listener = layoutChangeListenerCaptor.value
+
+        // Define toolbar dimensions
+        val toolbarHeight = 50
+        val bottomMargin = 10
+        val expectedPadding = toolbarHeight + bottomMargin * 2
+        val layoutParams =
+            ViewGroup.MarginLayoutParams(0, 0).apply { this.bottomMargin = bottomMargin }
+        doReturn(toolbarHeight).whenever(floatingToolbar).height
+        doReturn(layoutParams).whenever(floatingToolbar).layoutParams
+
+        // Trigger the layout change
+        listener.onLayoutChange(
+            floatingToolbar,
+            /* left= */ 0,
+            /* top= */ 0,
+            /* right= */ 0,
+            /* bottom= */ 0,
+            /* oldLeft= */ 0,
+            /* oldTop= */ 0,
+            /* oldRight= */ 0,
+            /* oldBottom= */ 0
+        )
+
+        // Verify the padding state was set correctly
+        assertThat(selectedDisplayPrefContainerSpy.paddingBottom).isEqualTo(expectedPadding)
+    }
+
+    @Test
     fun setupAppBarLayout_onNonMouseScrollSource_doesNotPropagateEvent() {
         // Verifies that a scroll event from a non-mouse source is not propagated.
         val containerSpy = fragment.selectedDisplayPrefContainer
@@ -368,14 +407,16 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     }
 
     @Test
-    fun onDestroyView_removesGenericMotionListener() {
-        // Verifies that the motion listener on the app bar is removed when the view is destroyed.
-        val appBarLayoutSpy = spy(fragment.appBarLayout)
-        fragment.appBarLayout = appBarLayoutSpy
+    fun onDestroyView_removesListeners() {
+        // Verifies that listeners on the app bar and floating toolbar are removed when the view is
+        // destroyed.
+        verify(floatingToolbar).addOnLayoutChangeListener(layoutChangeListenerCaptor.capture())
+        val listener = layoutChangeListenerCaptor.value
 
         fragment.onDestroyView()
 
         verify(appBarLayoutSpy).setOnGenericMotionListener(null)
+        verify(floatingToolbar).removeOnLayoutChangeListener(listener)
     }
 
     @Test
@@ -451,6 +492,12 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     private fun initFragment(): TestableTabbedDisplayPreferenceFragment {
         activityScenarioRule.scenario.onActivity { activity ->
             settingsActivity = spy(activity)
+            whenever(
+                    settingsActivity.findViewById<View?>(
+                        com.android.settingslib.collapsingtoolbar.R.id.floating_toolbar
+                    )
+                )
+                .thenReturn(floatingToolbar)
             fragment =
                 TestableTabbedDisplayPreferenceFragment(topologyView, settingsActivity, viewModel)
             activity.supportFragmentManager.beginTransaction().add(fragment, "testTag").commitNow()

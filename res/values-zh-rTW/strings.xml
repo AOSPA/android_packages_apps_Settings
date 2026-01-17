@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"請設定人臉解鎖功能"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"人臉解鎖功能的用途"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"臉部"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"使用臉部"</string>
@@ -718,7 +717,7 @@
     <string name="private_space_error_description" msgid="6591005734266923120">"私人空間目前無法使用。\n查看可能的原因"</string>
     <string name="private_space_error_causes_text" msgid="1649162505129365620">"查看可能原因"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"要為私人空間設定新的鎖定方式嗎？"</string>
-    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"你可以為私人空間設定一個新的鎖定方式，也可以直接使用裝置的螢幕鎖定方式"</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"你可以新設私人空間專用的鎖定方式，也可以沿用裝置原本的螢幕鎖"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"使用螢幕鎖定功能"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"選用新的鎖定方式"</string>
     <string name="private_space_wait_screen_title" msgid="1535431437075585381">"請稍候…"</string>
@@ -734,7 +733,7 @@
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"你可以用指紋解鎖私人空間。為了安全起見，你必須設定備用鎖定方式，才能使用這個選項。"</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"設定私人空間的 PIN 碼"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"設定私人空間的密碼"</string>
-    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"設定私人空間的解鎖圖案"</string>
+    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"設定私人空間解鎖圖案"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"鎖定"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"隱藏"</string>
     <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"確認私人空間的解鎖圖案"</string>
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"關閉"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"行動數據網路類型"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"行動語音網路類型"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"電信業者資訊"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"驗證 PIN 碼"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"驗證密碼"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"驗證你的身分"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"請輸入其他裝置的解鎖圖案，才能轉移 Google 帳戶、設定等內容。請放心，系統會將解鎖圖案加密。"</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"請輸入其他裝置的 PIN 碼，才能轉移 Google 帳戶、設定等內容。請放心，系統會將 PIN 碼加密。"</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"請輸入其他裝置的密碼，才能轉移 Google 帳戶、設定等內容。請放心，密碼會加密。"</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"一併使用圖案解鎖這部裝置"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"一併使用 PIN 碼解鎖這部裝置"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"一併使用密碼解鎖這部裝置"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"驗證解鎖圖案"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"驗證 PIN 碼"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"驗證密碼"</string>
@@ -2114,7 +2123,7 @@
     <string name="hardkeyboard_category" msgid="8729780593378161071">"實體鍵盤設定"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"按空白鍵兩次可插入「.」"</string>
     <string name="show_password" msgid="7101900779571040117">"顯示密碼"</string>
-    <string name="show_password_summary" msgid="9025960283785111619">"輸入密碼時，短暫顯示剛輸入的字元"</string>
+    <string name="show_password_summary" msgid="9025960283785111619">"短暫顯示剛輸入的字元"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"這個拼字檢查程式可能會收集你輸入的所有文字，包括密碼和信用卡號等個人資料。該程式是由應用程式「<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>」所提供，要使用這個拼字檢查程式嗎？"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"設定"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"語言"</string>
@@ -2491,7 +2500,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"輕觸三下即可縮放畫面"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"輕觸按鈕即可縮放"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"快速放大畫面上的內容"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;放大螢幕畫面的方法如下：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 使用捷徑啟動放大功能&lt;br/&gt; {1,number,integer}. 輕觸螢幕&lt;br/&gt; {2,number,integer}. 拖曳 2 指即可四處移動畫面&lt;br/&gt; {3,number,integer}. 使用 2 指撥動即可調整縮放等級&lt;br/&gt; {4,number,integer}. 使用捷徑關閉放大功能&lt;br/&gt;&lt;br/&gt; &lt;b&gt;暫時放大螢幕畫面的方法如下：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 確認放大類型已設為全螢幕&lt;br/&gt; {1,number,integer}. 使用捷徑啟動放大功能&lt;br/&gt; {2,number,integer}. 按住螢幕上的任一處&lt;br/&gt; {3,number,integer}. 拖曳手指即可四處移動畫面&lt;br/&gt; {4,number,integer}. 移開手指即可關閉放大功能"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;放大螢幕畫面的方法如下：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 使用捷徑啟動放大功能&lt;br/&gt; {1,number,integer}. 輕觸螢幕&lt;br/&gt; {2,number,integer}. 拖曳 2 指可在畫面上移動&lt;br/&gt; {3,number,integer}. 用 2 指撥動可調整縮放等級&lt;br/&gt; {4,number,integer}. 使用捷徑關閉放大功能&lt;br/&gt;&lt;br/&gt; &lt;b&gt;暫時放大螢幕畫面的方法如下：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 確認放大類型已設為全螢幕&lt;br/&gt; {1,number,integer}. 使用捷徑啟動放大功能&lt;br/&gt; {2,number,integer}. 按住螢幕上的任一處&lt;br/&gt; {3,number,integer}. 拖曳手指可在畫面上移動&lt;br/&gt; {4,number,integer}. 移開手指後，放大功能就會關閉"</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;放大畫面：&lt;/b&gt;&lt;br/&gt;{0,number,integer}. 使用快速鍵或按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M 鍵啟動放大功能&lt;br/&gt; {1,number,integer}. 按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + 方向鍵，即可在畫面上移動&lt;br/&gt; {2,number,integer}. 按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; 鍵，然後按下「+」或「-」調整縮放比例&lt;br/&gt; {3,number,integer}. 使用快速鍵或按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M 鍵停止放大功能"</string>
     <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;放大畫面：&lt;/b&gt;&lt;br/&gt;{0,number,integer}. 使用快速鍵啟動放大功能&lt;br/&gt;{1,number,integer}. 按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + 方向鍵，即可在畫面上移動&lt;br/&gt; {2,number,integer}. 按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; 鍵，然後按下「+」或「-」調整縮放比例&lt;br/&gt; {3,number,integer}. 使用快速鍵停止放大功能"</string>
     <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;鍵盤&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 使用快速鍵或按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M 鍵啟動放大功能&lt;br/&gt; {1,number,integer}. 按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + 方向鍵，即可在畫面上移動&lt;br/&gt; {2,number,integer}. 按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; 鍵，然後按下「+」或「-」調整縮放比例&lt;br/&gt; {3,number,integer}. 使用快速鍵或按 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M 鍵停止放大功能&lt;br/&gt;&lt;br/&gt; &lt;b&gt;觸控螢幕&lt;/b&gt;&lt;br/&gt; 放大畫面：&lt;br/&gt; {0,number,integer}. 使用快速鍵啟動放大功能&lt;br/&gt;{1,number,integer}. 輕觸螢幕&lt;br/&gt;{2,number,integer}. 拖曳 2 指即可在畫面上移動&lt;br/&gt; {3,number,integer}. 用 2 指撥動調整縮放等級&lt;br/&gt;{4,number,integer}. 使用快速鍵停止放大功能&lt;br/&gt;&lt;br/&gt;暫時放大螢幕畫面：&lt;br/&gt;{0,number,integer}. 確認放大類型已設為全螢幕&lt;br/&gt; {1,number,integer}. 使用快速鍵啟動放大功能&lt;br/&gt; {2,number,integer}. 按住螢幕上的任一處&lt;br/&gt; {3,number,integer}. 拖曳手指即可在畫面上四處移動&lt;br/&gt; {4,number,integer}. 移開手指即可停止放大功能"</string>
@@ -2533,6 +2542,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"快速設定"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{從螢幕頂端向下滑動}other{用 # 指從螢幕頂端向下滑動}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{從螢幕頂端向下滑動。完成裝置設定後即可使用這個捷徑。}other{用 # 指從螢幕頂端向下滑動。完成裝置設定後即可使用這個捷徑。}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"快速設定"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"音量鍵"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"音量鍵"</string>
@@ -2731,7 +2744,7 @@
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"助聽器控制項"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"助聽器捷徑"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"助聽器相容性"</string>
-    <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"提升與電話線圈的相容程度，減少惱人噪音"</string>
+    <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"提升與感應線圈的相容度，減少惱人噪音"</string>
     <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"關於助聽器"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"如要查看 ASHA 或 LE Audio 不支援的其他助聽器，請依序輕觸「配對新裝置」&lt;b&gt;&lt;/b&gt;&gt;「查看更多裝置」&lt;b&gt;&lt;/b&gt;"</string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"其他使用者"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"刪除訪客活動"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"離開訪客模式時，刪除所有訪客應用程式和資料"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"要刪除訪客活動嗎？"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"系統將立即刪除這個訪客工作階段中的應用程式和資料，日後只要你離開訪客模式，系統都會將該次訪客活動全部刪除"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"刪除, 訪客, 活動, 移除, 資料, 清除"</string>
@@ -3936,6 +3955,8 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"快速掌握長訊息的重點"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"使用通知摘要"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"歸納長訊息和群組對話的摘要，方便快速掌握重點。\n\n重點摘要功能採用裝置上的 AI 技術，因此有時可能會出錯。訊息內容絕不會傳送給 Google。"</string>
+    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"系統不會歸納這些應用程式的通知摘要"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"管理應用程式"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"管理適用通知摘要的應用程式"</string>
@@ -4354,7 +4375,7 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"應用程式固定"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"你可以使用應用程式固定功能，將目前使用的應用程式固定在螢幕上，直到你取消固定為止。如果想讓信任的好友用你的手機玩遊戲，就可以使用這個功能。"</string>
     <string name="screen_pinning_description" msgid="5822120806426139396">"應用程式固定後，可能會開啟其他應用程式並存取個人資料。\n\n如何使用應用程式固定功能：	\n{0,number,integer}. 開啟應用程式固定功能 	\n{1,number,integer}. 開啟總覽 	\n{2,number,integer}. 輕觸畫面頂端的應用程式圖示，然後輕觸「固定」"</string>
-    <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"應用程式固定後，可能會開啟其他應用程式並存取個人資料。\n\n如要安全地與人共用裝置，建議你改用訪客使用者設定檔。\n\n如何使用應用程式固定功能：	\n{0,number,integer}. 開啟應用程式固定功能 	\n{1,number,integer}. 開啟總覽 	\n{2,number,integer}. 輕觸畫面頂端的應用程式圖示，然後輕觸「固定」"</string>
+    <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"應用程式固定後，可能會開啟其他應用程式並存取個人資料。\n\n如果想安全地與他人共用裝置，建議你改用訪客使用者設定檔。\n\n如何固定應用程式：	\n{0,number,integer}. 開啟應用程式固定功能 	\n{1,number,integer}. 開啟總覽 	\n{2,number,integer}. 輕觸畫面頂端的應用程式圖示，然後輕觸「固定」"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定應用程式後：\n\n•	 該應用程式可存取個人資料\n		(例如聯絡人和電子郵件內容)\n•		固定的應用程式可開啟其他應用程式\n\n請務必只針對你信任的人使用應用程式固定功能。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"取消固定時必須畫出解鎖圖案"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定時必須輸入 PIN 碼"</string>
@@ -4414,7 +4435,7 @@
     <string name="runtime_permissions_additional_count" msgid="6071909675951786523">"{count,plural, =1{另外 # 項權限}other{另外 # 項權限}}"</string>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"未取得任何授權"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"未要求任何權限"</string>
-    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"控管可存取資料的應用程式"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"控管應用程式的資料存取權"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"隱私資訊主頁"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"顯示最近曾使用權限的應用程式"</string>
     <string name="unused_apps" msgid="4566272194756830656">"未使用的應用程式"</string>
@@ -4424,6 +4445,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"移除權限、刪除暫存檔及停止通知"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"管理未使用的應用程式"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"移除權限、刪除暫存檔、停止通知並封存應用程式"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"所有應用程式"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"已安裝的應用程式"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"免安裝應用程式"</string>
@@ -5664,6 +5691,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"必須啟用 2G 才能使用「<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>」的服務"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"僅允許加密網路"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"這麼做雖然更加安全，但行動網路連線在某些地區可能會受到限制。緊急電話撥號服務則隨時可用，不會受到影響"</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"所有服務"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"顯示剪貼簿存取通知"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"系統會在應用程式存取你複製的文字、圖片或其他內容時顯示通知訊息"</string>
@@ -6094,6 +6135,15 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"動作已完成"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"安全性與隱私快速設定"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"你的隱私權控制項"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"開啟"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"開關。<xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>。<xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"已封鎖"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"切換"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"麥克風存取權"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"相機存取權"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"位置資訊存取權"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"配對中"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"已連結「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"掃描裝置"</string>
@@ -6116,4 +6166,6 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"將衛星設定方塊新增至「快速設定」，即可輕鬆存取衛星資訊"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"新增設定方塊"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"衛星設定方塊提示"</string>
+    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <skip />
 </resources>

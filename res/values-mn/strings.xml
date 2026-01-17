@@ -349,7 +349,7 @@
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"санал хүсэлт, алдаа, цаг, бүс, цагийн бүс"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"Цагийн талаарх санал хүсэлт илгээх"</string>
     <string name="keywords_time_feedback" msgid="929965356597294030">"санал хүсэлт, алдаа, цаг, бүс, цагийн бүс"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Дэлгэцийн хугацаа дууссаны дараа түгжих"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Дэлгэц автоматаар амрах хугацааны дараа түгжих"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"Завсарлагын дараа <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> түгжээгүй байлгаснаас бусад үед завсарлага дууссан дариуд"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> түгжээгүй байлгаснаас бусад үед хугацаа дууссанаас хойш <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Царайгаар түгжээ тайлахыг тохируулна уу"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Царайгаар түгжээ тайлахыг дараахад ашиглах"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Царай"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Дараахад царай ашигла"</string>
@@ -437,7 +436,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Царайгаар түгжээ тайлахыг аппад ашиглахад баталгаажуулах алхмыг тогтмол шаардах"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Нүүрний загвар устгах"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Царайгаар түгжээ тайлахыг тохируулах"</string>
-    <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Нүүрний загварыг устгах уу?"</string>
+    <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Царайн загварыг устгах уу?"</string>
     <string name="security_settings_face_add" msgid="3118249538477856897">"Царай нэмэх"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"Хурууны хээ"</string>
     <string name="security_settings_fingerprint_title" msgid="7564944192711394896">"Хурууны хээ"</string>
@@ -519,7 +518,7 @@
     <string name="security_settings_remoteauth_enroll_introduction_how_title" msgid="6604152528267830349">"Энэ хэрхэн ажилладаг вэ?"</string>
     <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title" msgid="7974976673323638524">"Хяналт таны гарт"</string>
     <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"Та цагаа Тохиргоо хэсэгт Утасны түгжээг цагаараа тайлах онцлогоос хүссэн үедээ хасах боломжтой"</string>
-    <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"Мэдэгдлийг товшоорой"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"Мэдэгдлийг товших"</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"Түгжээтэй дэлгэц дээр дээш шудрах"</string>
     <string name="security_settings_remoteauth_enroll_enrolling_title" msgid="313016997943607675">"Цагаа сонгоно уу"</string>
     <string name="security_settings_remoteauth_enroll_enrolling_list_heading" msgid="8227585438932911013">"Боломжтой цагнууд"</string>
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Унтраалттай"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"Хөдөлгөөнт төхөөрөмжийн датаны сүлжээний төрөл"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Хөдөлгөөнт холбооны дуу хоолойн сүлжээний төрөл"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Операторын мэдээлэл"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"ПИН баталгаажуулах"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Нууц үг баталгаажуулах"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Өөрийгөө мөн болохыг баталгаажуулна уу"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Google Бүртгэлүүд, тохиргоо болон бусад зүйлийг шилжүүлэхийн тулд нөгөө төхөөрөмжийнхөө хээг оруулна уу. Таны хээг шифрлэсэн."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Google Бүртгэлүүд, тохиргоо болон бусад зүйлийг шилжүүлэхийн тулд нөгөө төхөөрөмжийнхөө ПИН-г оруулна уу. Таны ПИН-г шифрлэсэн."</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Google Бүртгэлүүд, тохиргоо болон бусад зүйлийг шилжүүлэхийн тулд нөгөө төхөөрөмжийнхөө нууц үгийг оруулна уу. Таны нууц үгийг шифрлэсэн."</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Мөн энэ төхөөрөмжийн түгжээг тайлахад хээ ашиглах"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Мөн энэ төхөөрөмжийн түгжээг тайлахад ПИН ашиглах"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Мөн энэ төхөөрөмжийн түгжээг тайлахад нууц үг ашиглах"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Хээг баталгаажуулах"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"ПИН баталгаажуулах"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Нууц үг баталгаажуулах"</string>
@@ -2533,6 +2542,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Шуурхай тохиргоо"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Дэлгэцийнхээ дээд талаас доош шударна уу}other{Дэлгэцийнхээ дээд талаас # хуруугаараа доош шударна уу}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Дэлгэцийнхээ дээд талаас доош шударна уу. Таныг төхөөрөмжийн тохируулгаа дуусгасны дараа энэ товчлол боломжтой болно.}other{Дэлгэцийнхээ дээд талаас # хуруугаараа доош шударна уу. Таныг төхөөрөмжийн тохируулгаа дуусгасны дараа энэ товчлол боломжтой болно.}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Шуурхай тохиргоо"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Дууны түвшний товчнууд"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"дууны түвшний товчнууд"</string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Бусад хэрэглэгч"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Зочны үйл ажиллагааг устгах"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Бүх зочны апп болон өгөгдлийг зочны горимоос гарах үед устгана"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Зочны үйл ажиллагааг устгах уу?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Энэ зочны харилцан үйлдлийн аппууд болон өгөгдлийг одоо устгах бөгөөд ирээдүйн бүх зочны үйл ажиллагааг таныг зочны горимоос гарах бүрд устгана"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"устгах, зочин, үйл ажиллагаа, хасах, өгөгдөл, зочин, устгах"</string>
@@ -3936,6 +3955,8 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Урт мессежийн шуурхай тоймыг авах"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Мэдэгдлийн хураангуйг ашиглах"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Шуурхай тоймыг авахын тулд урт мессеж, бүлгийн харилцан яриаг хураангуйлна уу.\n\nХураангуй таны төхөөрөмж дээрх ХОУ-ыг ашигладаг бөгөөд заримдаа алдаа гаргаж болзошгүй. Таны мессежийг Google-д хэзээ ч илгээхгүй."</string>
+    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Эдгээр аппын мэдэгдлийг хураангуйлахгүй"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Аппуудыг удирдах"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Мэдэгдлийн хураангуйн аппыг удирдах"</string>
@@ -4424,6 +4445,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Зөвшөөрлийг хасаж, түр зуурын файлыг устгаж мөн мэдэгдлийг зогсооно"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Хэрэв ашиглаагүй бол аппыг удирдах"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Зөвшөөрлийг хасаж, түр зуурын файлыг устгаж, мэдэгдлийг зогсоож мөн аппыг архивлана"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Бүх апп"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Суулгасан апп"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Шуурхай апп"</string>
@@ -5664,6 +5691,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> 2G-г боломжтой байхыг шаардаж байна"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Зөвхөн шифрлэгдсэн сүлжээг зөвшөөрөх"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Энэ нь илүү аюулгүй хэдий ч зарим байршилд таны хөдөлгөөнт холбооны сүлжээний холболтыг хязгаарлаж магадгүй. Яаралтай дуудлагыг үргэлж зөвшөөрнө."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Бүх үйлчилгээ"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Түр санах ойн хандалтыг харуулах"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Аппууд таны хуулсан текст, зураг эсвэл бусад контентод хандах үед мессеж харуулах"</string>
@@ -6094,6 +6135,15 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Үйлдэл дууссан"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Аюулгүй байдал, нууцлалын шуурхай тохиргоо"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Таны нууцлалын тохиргоо"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Нээх"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Сэлгэх. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"Блоклосон"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"Асаах/унтраах"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"Микрофоны хандалт"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"Камерын хандалт"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"Байршлын хандалт"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Хослуулж байна"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> холбогдсон"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Төхөөрөмжийг скан хийх"</string>
@@ -6116,4 +6166,6 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Хиймэл дагуулын хавтанг Шуурхай тохиргоонд нэмснээр хиймэл дагуулын мэдээлэлд хялбархан хандаарай"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Хавтан нэмэх"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Хиймэл дагуулын хавтангийн заавар"</string>
+    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <skip />
 </resources>

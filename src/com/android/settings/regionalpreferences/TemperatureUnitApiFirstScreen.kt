@@ -56,8 +56,7 @@ class TemperatureUnitApiFirstScreen :
             }
             set {
                 execute { value ->
-                    val unitValues: Array<String> =
-                        context.getResources().getStringArray(R.array.temperature_units)
+                    val unitValues = context.resources.getStringArray(R.array.temperature_units)
                     for (item in unitValues) {
                         // If the human-readable value contains the input,
                         // 1. the human-readable value is Fahrenheit and the input is fahrenhe
