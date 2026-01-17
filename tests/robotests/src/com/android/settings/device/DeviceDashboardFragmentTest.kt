@@ -60,11 +60,11 @@ class DeviceDashboardFragmentTest {
         val displayPreference = fragment.findPreference<Preference>("device_dashboard_display")
         assertThat(displayPreference).isNotNull()
         assertThat(displayPreference?.fragment).isEqualTo("com.android.settings.DisplaySettings")
-        assertThat(displayPreference?.title).isEqualTo(fragment.context?.getString(R.string.display_settings))
+        assertThat(displayPreference?.title).isEqualTo(fragment.context?.getString(R.string.device_dashboard_display_title))
         assertThat(displayPreference?.summary).isEqualTo(fragment.context?.getString(R.string.display_dashboard_summary))
         val icon = displayPreference?.icon
         assertThat(Shadows.shadowOf(icon).createdFromResId)
-            .isEqualTo(R.drawable.ic_settings_display_filled)
+            .isEqualTo(R.drawable.ic_settings_tv_displays)
     }
 
     @Test
@@ -72,10 +72,10 @@ class DeviceDashboardFragmentTest {
         val soundPreference = fragment.findPreference<Preference>("device_dashboard_sound")
         assertThat(soundPreference).isNotNull()
         assertThat(soundPreference?.fragment).isEqualTo("com.android.settings.notification.SoundSettings")
-        assertThat(soundPreference?.title).isEqualTo(fragment.context?.getString(R.string.sound_settings))
+        assertThat(soundPreference?.title).isEqualTo(fragment.context?.getString(R.string.device_dashboard_sound_title))
         assertThat(soundPreference?.summary).isEqualTo(fragment.context?.getString(R.string.sound_dashboard_summary))
         val icon = soundPreference?.icon
-        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_volume_up_filled)
+        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_mic)
     }
 
     @Test
@@ -107,7 +107,7 @@ class DeviceDashboardFragmentTest {
         assertThat(trackpadPreference?.title).isEqualTo(fragment.context?.getString(R.string.trackpad_settings))
         assertThat(trackpadPreference?.summary).isEqualTo(fragment.context?.getString(R.string.trackpad_settings_summary))
         val icon = trackpadPreference?.icon
-        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_touchpad)
+        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_touchpad_mouse)
     }
 
     @Test
@@ -118,6 +118,6 @@ class DeviceDashboardFragmentTest {
         assertThat(touchpadPreference?.title).isEqualTo(fragment.context?.getString(R.string.trackpad_settings))
         assertThat(touchpadPreference?.summary).isEqualTo(fragment.context?.getString(R.string.trackpad_settings_summary))
         val icon = touchpadPreference?.icon
-        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_touchpad)
+        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_touchpad_mouse)
     }
 }
