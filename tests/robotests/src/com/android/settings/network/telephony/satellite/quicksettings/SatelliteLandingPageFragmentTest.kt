@@ -90,7 +90,7 @@ class SatelliteLandingPageFragmentTest {
     @Mock private lateinit var satelliteStateRepository: SatelliteStateRepository
 
     private lateinit var fragmentFactory: FragmentFactory
-    private val satelliteStatusFlow = MutableStateFlow(SatelliteStatus.ACTIVE)
+    private val satelliteStatusFlow = MutableStateFlow(SatelliteStatus.NOT_AVAILABLE)
 
     @Before
     fun setUp() {
@@ -198,6 +198,7 @@ class SatelliteLandingPageFragmentTest {
     @Test
     fun tryDemoButton_onClick_startsDemoActivity() {
         setLteNtnSupported(false) // Make button visible
+        satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
         val scenario = launchFragment()
 
         scenario.onFragment { fragment ->
@@ -360,6 +361,32 @@ class SatelliteLandingPageFragmentTest {
         scenario.onFragment { fragment ->
             val demoButton = fragment.findPreference<Preference>(KEY_TRY_A_DEMO_BUTTON)
             assertThat(demoButton).isInstanceOf(SatelliteDemoPreference::class.java)
+        }
+    }
+
+    @Test
+    fun tryDemoButton_whenStatusActive_isDisabled() {
+        setLteNtnSupported(false) // Make button visible
+        satelliteStatusFlow.value = SatelliteStatus.ACTIVE
+
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment ->
+            val demoButton = fragment.findPreference<Preference>(KEY_TRY_A_DEMO_BUTTON)
+            assertThat(demoButton?.isEnabled).isFalse()
+        }
+    }
+
+    @Test
+    fun tryDemoButton_whenStatusAvailable_isEnabled() {
+        setLteNtnSupported(false) // Make button visible
+        satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
+
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment ->
+            val demoButton = fragment.findPreference<Preference>(KEY_TRY_A_DEMO_BUTTON)
+            assertThat(demoButton?.isEnabled).isTrue()
         }
     }
 

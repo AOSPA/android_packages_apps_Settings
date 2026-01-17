@@ -21,3 +21,10 @@ flag {
     description: "Show GID1 and Carrier ID in Sim Status"
     bug: "471099598"
 }
+
+flag {
+    name: "exclude_opportunistic_sub_from_dsds"
+    namespace: "settings_experience"
+    description: "Exclude opportunistic subscription from primary SIMs section"
+    bug: "474081075"
+}

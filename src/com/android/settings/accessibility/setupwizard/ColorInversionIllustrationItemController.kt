@@ -16,34 +16,24 @@
 
 package com.android.settings.accessibility.setupwizard
 
-import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
-import com.android.settings.accessibility.a11yservice.ui.A11yServiceIllustrationPreference
+import com.android.settings.R
+import com.android.settings.accessibility.colorinversion.ui.ColorInversionIllustrationPreference
 import com.android.settings.accessibility.setupwizard.items.IllustrationItem
-import com.android.settings.accessibility.setupwizard.items.IllustrationItem.OnBindListener
 import com.google.android.setupdesign.items.Item
 
-/** Controller for the accessibility service illustration item in the Accessibility Setup Wizard. */
-class AccessibilityServiceIllustrationItemController(
-    private val context: Context,
-    serviceInfo: AccessibilityServiceInfo,
-    item: Item,
-) : BaseItemController(item) {
+/** Controller for the color inversion illustration item in the Accessibility Setup Wizard. */
+class ColorInversionIllustrationItemController(private val context: Context, item: Item) :
+    BaseItemController(item) {
 
-    private val accessibilityServiceIllustrationMetadata =
-        A11yServiceIllustrationPreference(serviceInfo)
+    private val colorInversionIllustrationMetadata = ColorInversionIllustrationPreference()
 
     public override fun bindData(item: Item) {
         if (item is IllustrationItem) {
-            with(accessibilityServiceIllustrationMetadata) {
-                item.imageUri = getImageUri(context)
-                item.onBindListener = OnBindListener { _ ->
-                    if (item.isLottieAnimation) {
-                        item.contentDescription = getContentDescription(context)
-                    }
-                }
-            }
+            item.imageResId = R.raw.accessibility_color_inversion_banner
+            item.contentDescription =
+                colorInversionIllustrationMetadata.getContentDescription(context)
         }
     }
 

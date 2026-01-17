@@ -18,7 +18,6 @@ package com.android.settings.accessibility.setupwizard.items
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.Animatable
 import android.graphics.drawable.AnimatedImageDrawable
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.AnimationDrawable
@@ -27,12 +26,15 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.FrameLayout
 import androidx.test.core.app.ApplicationProvider
 import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
+import com.android.settings.accessibility.setupwizard.items.IllustrationItem.OnBindListener
+import com.android.settings.accessibility.setupwizard.setupMockLottieAnimationView
+import com.android.settingslib.widget.preference.illustration.R as IllustrationR
 import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
+import java.io.ByteArrayInputStream
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -41,10 +43,9 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.spy
-import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestParameterInjector
-import org.robolectric.Shadows.shadowOf
 
 /** Tests for [IllustrationItem]. */
 @RunWith(RobolectricTestParameterInjector::class)
@@ -87,13 +88,66 @@ class IllustrationItemTest {
     }
 
     @Test
+    fun onBindView_triggersOnBindListener() {
+        val listener = mock<OnBindListener>()
+        illustrationItem.onBindListener = listener
+
+        illustrationItem.onBindView(rootView)
+
+        val illustrationView =
+            rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
+        verify(listener).onBind(illustrationView)
+    }
+
+    @Test
     fun onBindView_setsContentDescription() {
         val testDescription = "Test Description"
         illustrationItem.contentDescription = testDescription
 
         illustrationItem.onBindView(rootView)
 
-        assertThat(rootView.contentDescription).isEqualTo(testDescription)
+        val illustrationView =
+            rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
+        assertThat(illustrationView.contentDescription.toString()).isEqualTo(testDescription)
+    }
+
+    @Test
+    fun onBindView_isLottieAnimationButNoDescription_setsDefaultContentDescription() {
+        val imageUri = Uri.parse("content://test/lottie.json")
+        val rootView =
+            setupMockLottieAnimationView<AnimationDrawable>(
+                context,
+                imageUri,
+                isLottieAnimatable = true,
+            )
+        val illustrationView =
+            rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
+        illustrationItem.imageUri = imageUri
+        illustrationItem.contentDescription = null
+
+        illustrationItem.onBindView(rootView)
+
+        val defaultDescription =
+            context.getString(IllustrationR.string.settingslib_illustration_content_description)
+        assertThat(illustrationView.contentDescription.toString()).isEqualTo(defaultDescription)
+    }
+
+    @Test
+    fun onBindView_updatesAccessibilityActions() {
+        val imageUri = Uri.parse("content://test/lottie.json")
+        val rootView =
+            setupMockLottieAnimationView<AnimationDrawable>(
+                context,
+                imageUri,
+                isLottieAnimatable = true,
+            )
+        val illustrationView =
+            rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
+
+        illustrationItem.imageUri = imageUri
+        illustrationItem.onBindView(rootView)
+
+        assertThat(illustrationView.accessibilityDelegate).isNotNull()
     }
 
     @Test
@@ -140,7 +194,7 @@ class IllustrationItemTest {
     fun playAnimationWithUri_animatedVectorDrawable_success() {
         val mockDrawable = mock<AnimatedVectorDrawable>()
         val imageUri = Uri.parse("content://test")
-        val rootView = setupMockView(imageUri, mockDrawable)
+        val rootView = setupMockLottieAnimationView(context, imageUri, mockDrawable)
 
         illustrationItem.imageUri = imageUri
         illustrationItem.onBindView(rootView)
@@ -152,7 +206,7 @@ class IllustrationItemTest {
     fun playAnimationWithUri_animatedImageDrawable_success() {
         val mockDrawable = mock<AnimatedImageDrawable>()
         val imageUri = Uri.parse("content://test")
-        val rootView = setupMockView(imageUri, mockDrawable)
+        val rootView = setupMockLottieAnimationView(context, imageUri, mockDrawable)
 
         illustrationItem.imageUri = imageUri
         illustrationItem.onBindView(rootView)
@@ -164,7 +218,7 @@ class IllustrationItemTest {
     fun playAnimationWithUri_animationDrawable_success() {
         val mockDrawable = mock<AnimationDrawable>()
         val imageUri = Uri.parse("content://test")
-        val rootView = setupMockView(imageUri, mockDrawable)
+        val rootView = setupMockLottieAnimationView(context, imageUri, mockDrawable)
 
         illustrationItem.imageUri = imageUri
         illustrationItem.onBindView(rootView)
@@ -175,7 +229,12 @@ class IllustrationItemTest {
     @Test
     fun playLottieAnimationWithUri_verifyFailureListener() {
         val imageUri = Uri.parse("content://test")
-        val rootView = setupMockView<AnimatedVectorDrawable>(imageUri, mockDrawable = null)
+        val rootView =
+            setupMockLottieAnimationView<AnimatedVectorDrawable>(
+                context,
+                imageUri,
+                isLottieAnimatable = true,
+            )
         val animationView = rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
 
         illustrationItem.imageUri = imageUri
@@ -186,19 +245,25 @@ class IllustrationItemTest {
 
     @Test
     fun handleAnimationControl_animatedDrawable_togglesPauseAndResume() {
-        val imageUri = Uri.parse("content://test")
-        // Pass NULL for the drawable to simulate a Lottie raw resource
-        val rootView = setupMockView<AnimationDrawable>(imageUri, mockDrawable = null)
-        val animationView = rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
+        val imageUri = Uri.parse("content://test/lottie.json")
+        val rootView =
+            setupMockLottieAnimationView<AnimationDrawable>(
+                context,
+                imageUri,
+                isLottieAnimatable = true,
+            )
+        val illustrationView =
+            rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
         illustrationItem.imageUri = imageUri
         illustrationItem.onBindView(rootView)
-        clearInvocations(animationView)
+        assertThat(illustrationItem.isLottieAnimation).isTrue()
+        clearInvocations(illustrationView)
 
-        animationView.performClick()
-        verify(animationView).pauseAnimation()
+        illustrationView.performClick()
+        verify(illustrationView).pauseAnimation()
 
-        animationView.performClick()
-        verify(animationView).resumeAnimation()
+        illustrationView.performClick()
+        verify(illustrationView).resumeAnimation()
     }
 
     @Test
@@ -215,6 +280,55 @@ class IllustrationItemTest {
         verify(illustrationView, never()).resumeAnimation()
     }
 
+    @Test
+    fun handleImageWithAnimation_withLottieRes_setsIsLottieAnimationTrue() {
+        val imageUri = Uri.parse("content://test/lottie.json")
+        val rootView =
+            setupMockLottieAnimationView<AnimationDrawable>(
+                context,
+                imageUri,
+                isLottieAnimatable = true,
+            )
+
+        illustrationItem.imageUri = imageUri
+        illustrationItem.onBindView(rootView)
+
+        assertThat(illustrationItem.isLottieAnimation).isTrue()
+    }
+
+    @Test
+    fun handleImageWithAnimation_withStaticDrawable_setsIsLottieAnimationFalse() {
+        val drawable = ColorDrawable(Color.RED)
+        illustrationItem.imageDrawable = drawable
+
+        illustrationItem.onBindView(rootView)
+
+        assertThat(illustrationItem.isLottieAnimation).isFalse()
+    }
+
+    @Test
+    @TestParameters(
+        "{resId: ${R.raw.accessibility_color_inversion_banner}, data: [], expected: ${View.GONE}}",
+        "{resId: ${R.raw.accessibility_color_inversion_banner}, data: [1], expected: ${View.VISIBLE}}",
+    )
+    fun handleImageWithAnimation_verifyVisibility(resId: Int, data: List<Int>, expected: Int) {
+        val illustrationView =
+            rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
+        val res = spy(context.resources)
+        val spyView = spy(illustrationView)
+        val spyRootView = spy(rootView)
+        doReturn(ByteArrayInputStream(data.map { it.toByte() }.toByteArray()))
+            .whenever(res)
+            .openRawResource(resId)
+        doReturn(res).whenever(spyView).resources
+        doReturn(spyView).whenever(spyRootView).findViewById<View>(R.id.sud_item_illustration)
+
+        illustrationItem.imageResId = resId
+        illustrationItem.onBindView(spyRootView)
+
+        assertThat(spyView.visibility).isEqualTo(expected)
+    }
+
     /** Helper to verify that only one resource is active at a time. */
     private fun assertOnlyThisResourceIsSet(
         expectedDrawable: Drawable? = null,
@@ -224,18 +338,5 @@ class IllustrationItemTest {
         assertThat(illustrationItem.imageDrawable).isEqualTo(expectedDrawable)
         assertThat(illustrationItem.imageUri).isEqualTo(expectedUri)
         assertThat(illustrationItem.imageResId).isEqualTo(expectedResId)
-    }
-
-    private fun <T> setupMockView(imageUri: Uri, mockDrawable: T?): View
-        where T : Drawable, T : Animatable {
-        shadowOf(context.contentResolver).registerInputStream(imageUri, "".byteInputStream())
-
-        val animationView =
-            spy(LottieAnimationView(context)).apply {
-                id = R.id.sud_item_illustration
-                stub { on { drawable } doReturn mockDrawable }
-            }
-
-        return FrameLayout(context).apply { addView(animationView) }
     }
 }

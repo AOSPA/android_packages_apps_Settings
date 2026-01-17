@@ -95,8 +95,15 @@ class SetupSupervisionActivity : FragmentActivity() {
             handlePinRecoveryResult(result)
         }
 
+    private var mIsEnablingSupervision = false
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (savedInstanceState != null) {
+            mIsEnablingSupervision =
+                savedInstanceState.getBoolean(KEY_IS_ENABLING_SUPERVISION, false)
+        }
 
         if (!Flags.enableSupervisionSettingsUiUpdates()) {
             if (isSupervisingCredentialSet()) {
@@ -144,45 +151,54 @@ class SetupSupervisionActivity : FragmentActivity() {
             return
         }
 
-        if (savedInstanceState == null) {
-            // Default path: start the supervision credential creation flow.
-            ThemeHelper.trySetSuwTheme(this)
-            setContentView(R.layout.supervision_setup_introduction)
+        // Default path: start the supervision credential creation flow.
+        ThemeHelper.trySetSuwTheme(this)
+        setContentView(R.layout.supervision_setup_introduction)
 
-            val layout = findViewById<GlifLayout?>(R.id.supervision_setup_introduction)
-            val iconDrawable = getDrawable(R.drawable.ic_account_child_invert_48)!!
-            iconDrawable.mutate()
-            iconDrawable.setTintList(layout?.getPrimaryColor())
-            layout?.setIcon(iconDrawable)
+        val layout = findViewById<GlifLayout?>(R.id.supervision_setup_introduction)
+        val iconDrawable = getDrawable(R.drawable.ic_account_child_invert_48)!!
+        iconDrawable.mutate()
+        iconDrawable.setTintList(layout?.getPrimaryColor())
+        layout?.setIcon(iconDrawable)
 
-            val footer = layout?.getMixin(FooterBarMixin::class.java)
-            footer?.setPrimaryButton(
-                FooterButton.Builder(this)
-                    .setText(R.string.next_label)
-                    .setButtonType(FooterButton.ButtonType.NEXT)
-                    .setListener {
-                        // Show loading indicator while waiting for the supervising profile to be
-                        // created.
-                        layout?.setProgressBarShown(true)
+        val footer = layout?.getMixin(FooterBarMixin::class.java)
+        footer?.setPrimaryButton(
+            FooterButton.Builder(this)
+                .setText(R.string.next_label)
+                .setButtonType(FooterButton.ButtonType.NEXT)
+                .setListener {
+                    mIsEnablingSupervision = true
+                    // Show loading indicator while waiting for the supervising profile to be
+                    // created.
+                    layout?.setProgressBarShown(true)
 
-                        // Hide the buttons while waiting for the supervising profile to be created.
-                        footer?.getButtonContainer()?.setVisibility(View.GONE)
+                    // Hide the buttons while waiting for the supervising profile to be created.
+                    footer?.getButtonContainer()?.setVisibility(View.GONE)
 
-                        enableSupervision()
-                    }
-                    .build()
-            )
-            footer?.setSecondaryButton(
-                FooterButton.Builder(this)
-                    .setText(R.string.cancel)
-                    .setButtonType(FooterButton.ButtonType.CANCEL)
-                    .setListener {
-                        setResult(RESULT_CANCELED)
-                        finish()
-                    }
-                    .build()
-            )
+                    enableSupervision()
+                }
+                .build()
+        )
+        footer?.setSecondaryButton(
+            FooterButton.Builder(this)
+                .setText(R.string.cancel)
+                .setButtonType(FooterButton.ButtonType.CANCEL)
+                .setListener {
+                    setResult(RESULT_CANCELED)
+                    finish()
+                }
+                .build()
+        )
+
+        if (mIsEnablingSupervision) {
+            layout?.setProgressBarShown(true)
+            footer?.getButtonContainer()?.setVisibility(View.GONE)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(KEY_IS_ENABLING_SUPERVISION, mIsEnablingSupervision)
     }
 
     public override fun onResume() {
@@ -390,5 +406,6 @@ class SetupSupervisionActivity : FragmentActivity() {
 
     companion object {
         @VisibleForTesting var ioDispatcher = Dispatchers.IO
+        private const val KEY_IS_ENABLING_SUPERVISION = "key_is_enabling_supervision"
     }
 }

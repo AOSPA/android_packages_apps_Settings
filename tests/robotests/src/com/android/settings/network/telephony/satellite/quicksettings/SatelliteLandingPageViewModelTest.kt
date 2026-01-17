@@ -96,6 +96,42 @@ class SatelliteLandingPageViewModelTest {
     }
 
     @Test
+    fun isTryADemoButtonEnabled_whenSatelliteActive_isFalse() = runTest {
+        satelliteStatusFlow.value = SatelliteStatus.ACTIVE
+        val viewModel = createViewModel()
+
+        val job = launch { viewModel.isTryADemoButtonEnabled.collect {} }
+        waitForAsync()
+
+        assertThat(viewModel.isTryADemoButtonEnabled.value).isFalse()
+        job.cancel()
+    }
+
+    @Test
+    fun isTryADemoButtonEnabled_whenSatelliteAvailable_isTrue() = runTest {
+        satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
+        val viewModel = createViewModel()
+
+        val job = launch { viewModel.isTryADemoButtonEnabled.collect {} }
+        waitForAsync()
+
+        assertThat(viewModel.isTryADemoButtonEnabled.value).isTrue()
+        job.cancel()
+    }
+
+    @Test
+    fun isTryADemoButtonEnabled_whenSatelliteNotAvailable_isTrue() = runTest {
+        satelliteStatusFlow.value = SatelliteStatus.NOT_AVAILABLE
+        val viewModel = createViewModel()
+
+        val job = launch { viewModel.isTryADemoButtonEnabled.collect {} }
+        waitForAsync()
+
+        assertThat(viewModel.isTryADemoButtonEnabled.value).isTrue()
+        job.cancel()
+    }
+
+    @Test
     fun areAppsEnabled_whenSatelliteActive_isTrue() = runTest {
         satelliteStatusFlow.value = SatelliteStatus.ACTIVE
         val viewModel = createViewModel()
@@ -130,13 +166,9 @@ class SatelliteLandingPageViewModelTest {
         val items = createViewModelAndGetItems()
         waitForAsync()
 
-        assertThat(items).hasSize(3) // SOS, App1, Settings
+        assertThat(items).hasSize(2) // App1, Settings
         assertThat(items.map { it.getAppLabel(packageManager) })
-            .containsExactly(
-                context.getString(com.android.settings.R.string.satellite_emergency_sos),
-                "App1",
-                "Settings",
-            )
+            .containsExactly("App1", "Settings")
             .inOrder()
     }
 
@@ -175,12 +207,9 @@ class SatelliteLandingPageViewModelTest {
         val items = createViewModelAndGetItems()
         waitForAsync()
 
-        assertThat(items).hasSize(2) // SOS, Settings
+        assertThat(items).hasSize(1) // Settings
         assertThat(items.map { it.getAppLabel(packageManager) })
-            .containsExactly(
-                context.getString(com.android.settings.R.string.satellite_emergency_sos),
-                "Settings",
-            )
+            .containsExactly("Settings")
             .inOrder()
     }
 
@@ -197,13 +226,13 @@ class SatelliteLandingPageViewModelTest {
         val items = createViewModelAndGetItems()
         waitForAsync()
 
-        assertThat(items).hasSize(2) // SOS, Settings
+        assertThat(items).hasSize(1) // Settings
     }
 
     @Test
     fun satelliteAppItems_whenSosIntentNull_doesNotLoadSos() = runTest {
-        setLteNtnSupported(true)
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(emptyList())
+        setLteNtnSupported(false)
+        `when`(appsRepository.getAppsPackagesForNbNtnLandingPage()).thenReturn(emptyList())
         mockAppsRepositoryIntents(sosIntent = null)
         setupCommonPackageManagerApps()
 
@@ -224,9 +253,7 @@ class SatelliteLandingPageViewModelTest {
         val items = createViewModelAndGetItems()
         waitForAsync()
 
-        assertThat(items).hasSize(1) // Only SOS
-        assertThat(items[0].getAppLabel(packageManager))
-            .isEqualTo(context.getString(com.android.settings.R.string.satellite_emergency_sos))
+        assertThat(items).isEmpty()
     }
 
     @Test

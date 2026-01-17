@@ -44,6 +44,7 @@ import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
+// LINT.IfChange
 @ProvidePreferenceScreen(MyDeviceInfoScreen.KEY)
 open class MyDeviceInfoScreen :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceIconProvider {
@@ -120,3 +121,4 @@ open class MyDeviceInfoScreen :
         internal const val DEVICE_DETAIL_CATEGORY = "device_detail_category"
     }
 }
+// LINT.ThenChange(MyDeviceInfoFragment.java, MyDeviceInfoApiFirstScreen.kt)
