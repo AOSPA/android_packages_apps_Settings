@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"HDR/SDR रेसियो देखाउनुहोस्"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"हालको HDR/SDR रेसियो देखाउनुहोस्"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"डिभाइस अनलक गरेपछि मात्र NFC प्रयोग गर्न मिल्ने बनाउनुहोस्"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"डिभाइस अनलक गर्नु पर्ने बनाउनुहोस्"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"एन्ड्रोइड बिम"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"NFCको माध्यमबाट एप सामग्री प्रसारित गर्नको लागि तयार"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"बन्द"</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"अफ छ"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"सेवा प्रदायकको ID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"मोबाइल डेटा नेटवर्कको प्रकार"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"मोबाइल भ्वाइस नेटवर्कको प्रकार"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"संचालक जानकारी"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN पुष्टि गर्नुहोस्‌"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"पासवर्ड पुष्टि गर्नुहोस्"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"आफ्नो पहिचान पुष्टि गर्नुहोस्"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Google खाता, सेटिङ तथा अन्य कुरा ट्रान्स्फर गर्न आफ्नो अर्को डिभाइसको प्याटर्न हाल्नुहोस्। तपाईंको प्याटर्न इन्क्रिप्ट गरिन्छ।"</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Google खाता, सेटिङ तथा अन्य कुरा ट्रान्स्फर गर्न आफ्नो अर्को डिभाइसको PIN हाल्नुहोस्। तपाईंको PIN इन्क्रिप्ट गरिन्छ।"</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Google खाता, सेटिङ तथा अन्य कुरा ट्रान्स्फर गर्न आफ्नो अर्को डिभाइसको पासवर्ड हाल्नुहोस्। तपाईंको पासवर्ड इन्क्रिप्ट गरिन्छ।"</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"यो डिभाइस अनलक गर्न पनि उही प्याटर्न प्रयोग गर्नुहोस्"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"यो डिभाइस अनलक गर्न पनि उही PIN प्रयोग गर्नुहोस्"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"यो डिभाइस अनलक गर्न पनि उही पासवर्ड प्रयोग गर्नुहोस्"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"प्याटर्न पुष्टि गर्नुहोस्‌"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"PIN पुष्टि गर्नुहोस्‌"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"पासवर्ड पुष्टि गर्नुहोस्"</string>
@@ -2018,7 +2010,7 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"आपत्‌कालीन एप"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"एपका प्राथमिकताहरू रिसेट गर्नुहोस्"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"एपका प्राथमिकताहरू रिसेट गर्ने हो?"</string>
-    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"तपाईंले यसो गर्नुभयो भने तल दिइएका कुराहरूसँग सम्बन्धित सबै प्राथमिकताहरू रिसेट हुने छन्:\n\n"<li>"अफ गरिएका एपहरू"</li>\n<li>"अफ गरिएका एपका सूचनाहरू"</li>\n<li>"विभिन्न कार्य गर्न प्रयोग गरिने डिफल्ट एपहरू"</li>\n<li>"एपहरूमा ब्याकग्राउन्ड डेटासम्बन्धी प्रतिबन्धहरू"</li>\n<li>"अनुमतिसँग सम्बन्धित सबै प्रतिबन्धहरू"</li>\n<li>"ब्याट्रीको खपतसम्बन्धी सेटिङ"</li>\n\n"तपाईंले एपसम्बन्धी कुनै पनि डेटा गुमाउनु हुने छैन।"</string>
+    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"तपाईंले यसो गर्नुभयो भने तल दिइएका कुराहरूसँग सम्बन्धित सबै प्राथमिकताहरू रिसेट हुने छन्:\n\n"<li>"अफ गरिएका एपहरू"</li>\n<li>"अफ गरिएका एपका सूचनाहरू"</li>\n<li>"विभिन्न कार्य गर्न प्रयोग गरिने डिफल्ट एपहरू"</li>\n<li>"एपहरूमा ब्याकग्राउन्ड डेटासम्बन्धी प्रतिबन्धहरू"</li>\n<li>"अनुमतिसँग सम्बन्धित सबै प्रतिबन्धहरू"</li>\n<li>"ब्याट्रीको खपतसम्बन्धी सेटिङ"</li>\n\n"तपाईंले कनै एप डेटा गुमाउनु हुने छैन।"</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"एपहरू रिसेट गर्नुहोस्"</string>
     <string name="filter" msgid="9039576690686251462">"फिल्टर गर्नुहोस्"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"फिल्टर विकल्पहरू छान्नुहोस्"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"द्रुत सेटिङ"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{स्क्रिनको सिरानबाट तलतिर स्वाइप गर्नुहोस्}other{स्क्रिनको सिरानबाट # वटा औँलाले तलतिर स्वाइप गर्नुहोस्}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{स्क्रिनको सिरानबाट तलतिर स्वाइप गर्नुहोस्। तपाईंले डिभाइस सेटअप गर्ने प्रक्रिया पूरा गरेपछि यो सर्टकट उपलब्ध हुने छ।}other{स्क्रिनको सिरानबाट # औँलाले तलतिर स्वाइप गर्नुहोस्। तपाईंले डिभाइस सेटअप गर्ने प्रक्रिया पूरा गरेपछि यो सर्टकट उपलब्ध हुने छ।}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"सिरानको रोमा भएको की"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"किबोर्डको सिरानको रोमा भएको एक्सेसिबिलिटी की थिच्नुहोस्"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"द्रुत सेटिङ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"भोल्युम बटन"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"भोल्युम बटन"</string>
@@ -3479,12 +3469,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"अन्य प्रयोगकर्ताहरू"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"अतिथि सत्रका क्रियाकलाप मेटाउनुहोस्"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"अतिथि मोडबाट बाहिरिँदा अतिथि सत्रका सबै एप तथा डेटा मेटाउनुहोस्"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"अतिथिलाई डिभाइस प्रयोग गर्न दिनुहोस्"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"अतिथि मोडबाट बाहिरिँदा अतिथि मोडमा भएका सबै एप तथा डेटा मेटाइने छन्"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"सामेल गर्नुहोस्, अतिथि"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"अतिथि सत्रका क्रियाकलाप मेटाउने हो?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"यो अतिथि सत्रका एप तथा डेटा अहिले नै मेटाइने छ र भविष्यमा तपाईं अतिथि मोडबाट बाहिरिँदा हरेक पटक अतिथि सत्रमा गरिने सबै क्रियाकलाप मेटाइने छन्"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"मेट्नुहोस्, अतिथि, क्रियाकलाप, हटाउनुहोस्, डेटा, पाहुना, मेटाउनुहोस्"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"ब्लुटुथ, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"ब्लुटुथ, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"डिभाइस"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"किबोर्ड, टचप्याड, डिस्प्ले, साउन्ड"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC अफ भएकाले उपलब्ध नभएको"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"यो सुवधा प्रयोग गर्न सर्वप्रथम भुक्तानी एप इन्स्टल गर्नुहोस्"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"हालैका एपहरू, डिफल्ट एपहरू"</string>
@@ -3955,8 +3947,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"लामा म्यासेजहरूका छोटा रिक्याप प्राप्त गर्नुहोस्"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"नोटिफिकेसनका सारांश प्रयोग गर्नुहोस्"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"छोटा रिक्याप प्राप्त गर्न लामा म्यासेज र सामूहिक वार्तालापहरूको सारांश बनाउनुहोस्।\n\nसारांश बनाउने सुविधाले तपाईंको डिभाइसमा भएको AI प्रयोग गर्ने भएकाले यो सुविधाले कहिलेकाहीँ गल्ती गर्न सक्छ। तपाईंका म्यासेजहरू कहिले पनि Google मा पठाइँदैनन्।"</string>
-    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
-    <skip />
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"छोटा रिक्याप प्राप्त गर्न लामा म्यासेज र सामूहिक वार्तालापहरूको सारांश बनाउनुहोस्।\n\nसारांशहरू एप वा तपाईंको डिभाइसमा भएको AI ले उपलब्ध गराउने भएकाले तिनमा गल्ती हुन सक्छन्। तपाईंका म्यासेजहरू कहिले पनि Google मा पठाइँदैनन्।"</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"यी एपहरूबाट प्राप्त गरिएका नोटिफिकेसनहरूको सारांश स्वतः बनाइने छैन"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"एपहरू व्यवस्थापन गर्नुहोस्"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"सारांश बनाउने सुविधा प्रयोग गरिने एपहरू व्यवस्थापन गर्नुहोस्"</string>
@@ -4396,6 +4387,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"रिस्टार्ट गर्नु"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"अहिले होइन"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"मेमोरीको सुरक्षा गर्ने उन्नत सुविधाका बारेमा थप जान्नुहोस्।"</string>
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Android OS को डाइग्नोस्टिक्स"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"OS बिल्डहरू पुष्टि गर्नुहोस्"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"डाइग्नोस्टिक्स, पारदर्शिता, बाइनरी"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"यो वर्क प्रोफाइल निम्नद्वारा व्यवस्थित गरिन्छ:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> द्वारा व्यवस्थापन गरिएको"</string>
     <string name="launch_by_default" msgid="892824422067985734">"स्वत: खोल्नुहोस्"</string>
@@ -4442,12 +4436,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"अनुमतिहरू रद्द गर्नुहोस्, अस्थायी फाइलहरू मेटाउनुहोस् र एपसम्बन्धी नोटिफिकेसन नपठाउनुहोस्"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"एप प्रयोग गरिएको छैन भने व्यवस्थापन गर्नुहोस्"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"अनुमति रद्द गर्नुहोस्, अस्थायी फाइलहरू मेटाउनुहोस्, नोटिफिकेसन नपठाउनुहोस् र एप अर्काइभमा राख्नुहोस्"</string>
-    <!-- no translation found for task_continuity_category (3736049711007817178) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
-    <skip />
+    <string name="task_continuity_category" msgid="3736049711007817178">"कार्यको निरन्तरता"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"एपसम्बन्धी कार्यहरू"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"आफूले अन्य डिभाइसमा छाडेकै ठाउँबाट निर्बाध रूपमा जारी राख्नुहोस्"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"सबै एपहरू"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"इन्स्टल गरिएका एपहरू"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"तात्कालिक एपहरू"</string>
@@ -4519,6 +4510,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"USB को डिफल्ट कन्फिगरेसन"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"पावर बटनसम्बन्धी विकल्पहरू"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"फाइल ट्रान्स्फर गर्ने विकल्पहरू"</string>
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"डेटा एक्सेस प्रोटेक्सन"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"PCI टनेलिङ प्रयोग गर्ने अनुमति दिनुहोस्"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"यो विकल्प अन गरिएका बेला USB र Thunderbolt सम्बन्धी सहायक डिभाइसहरूले PCI टनेलहरू बनाउन र सिस्टमको मेमोरी एक्सेस गर्न सक्छन्"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"एड्मिन प्रयोगकर्ता मात्र यो सेटिङ परिवर्तन गर्न सक्नुहुन्छ"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"तपाईंका IT एड्मिनले अफ गर्नुभएको छ"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"सुरक्षासम्बन्धी उन्नत मोडले अफ गरेको छ"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB का प्राथमिकताहरू"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB नियन्त्रण गर्ने डिभाइस"</string>
@@ -5688,20 +5685,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> को सेवा लिन 2G चाहिन्छ"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"इन्क्रिप्ट गरिएका नेटवर्क मात्र प्रयोग गर्न दिनुहोस्"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"यो बढी सुरक्षित छ तर केही लोकेसनमा तपाईंको मोबाइल नेटवर्क कनेक्सनले राम्रोसँग काम नगर्न सक्छ। आपत्‌कालीन कल गर्न भने कहिले पनि रोक लगाइँदैन।"</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"2G नेटवर्कबाट सुरक्षा दिने सुविधा अफ गर्ने हो?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM को हालको नेटवर्कमा 2G चल्दैन। तपाईंले 2G नेटवर्कबाट सुरक्षा दिने सुविधा अफ गर्नुभयो भने स्पुफ गरिएको हानिकारक 2G नेटवर्कमा कनेक्ट हुने जोखिम हुन्छ।"</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"अफ गर्नुहोस्"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G नेटवर्कबाट सुरक्षा दिने सुविधा"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G नेटवर्कबाट सुरक्षा दिने सुविधा अन गरिएको छ"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM को हालको नेटवर्कमा 2G नेटवर्कबाट सुरक्षा दिने सुविधा अन गर्नु पर्ने हुन्छ। तपाईं अझै पनि 2G नेटवर्कबाट सुरक्षा दिने सुविधा अफ गर्न सक्नुहुन्छ तर यसबाट हुन सक्ने जोखिमको जिम्मेवारी तपाईं आफैँले बेहोर्नु पर्छ।"</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"सेटिङ"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"सबै सेवाहरू"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"एपले क्लिपबोर्डमा रहेको सामग्री प्रयोग गर्दा सूचना देखाउनुहोस्"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"मैले कपी गरेका टेक्स्ट, फोटो वा अन्य सामग्री एपहरूले प्रयोग गर्दा म्यासेज देखाउनुहोस्"</string>
@@ -5797,6 +5787,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"४:३"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="DENOMINATOR">%2$s</xliff:g> को <xliff:g id="NUMERATOR">%1$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"तपाईंले एस्पेक्ट रेसियो बदल्नुभयो भने एप रिस्टार्ट हुने छ। तपाईंले सेभ नगरेका परिवर्तनहरू गुम्न सक्छन्। केही एपहरू निश्चित एस्पेक्ट रेसियोका लागि अप्टिमाइज नगरिन सक्छन्।"</string>
+    <string name="app_info_experience_category" msgid="6283332744508784886">"अनुभव"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"गेमप्याड"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"फिंगरप्रिन्ट सेन्सर"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"फ्ल्यास नोटिफिकेसन"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"फ्ल्यास नोटिफिकेसनका बारेमा"</string>
@@ -5869,7 +5861,7 @@
     <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"कल तथा अलार्महरू"</string>
     <string name="audio_sharing_description" msgid="1660255584523640628">"मान्छेहरूलाई आफूसँगै आफ्नो मिडिया सुन्न दिनुहोस्। यसका लागि श्रोतासँग आफ्नै LE अडियो हेडफोन हुनु पर्छ।"</string>
     <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"सक्रिय मिडिया डिभाइसहरू"</string>
-    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"कलको अडियो"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"कल अडियो"</string>
     <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> मा मात्र प्ले गर्नुहोस्"</string>
     <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"परीक्षणका लागि कुनै साउन्ड प्ले गर्नुहोस्"</string>
     <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"अडियो सुनिरहेका सबै मान्छेले यो साउन्ड सुन्नु पर्छ"</string>
@@ -6132,8 +6124,7 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"यो कार्य पूरा भएको छ"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"सुरक्षा र गोपनीयतासम्बन्धी द्रुत सेटिङ"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"तपाईंको गोपनीयतासम्बन्धी सेटिङ"</string>
-    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
-    <skip />
+    <string name="safety_center_review_settings" msgid="295527297192914772">"सेटिङको समीक्षा गर्नुहोस्"</string>
     <string name="safety_center_qs_open_action" msgid="8683771989007581791">"खोल्नुहोस्"</string>
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"स्विच। <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>। <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"ब्लक गरिएको छ"</string>
@@ -6163,6 +6154,15 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"द्रुत सेटिङमा स्याटलाइट टाइल हालेर स्याटलाइटसम्बन्धी जानकारी सजिलैसँग एक्सेस गर्नुहोस्"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"टाइल हाल्नुहोस्"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"स्याटलाइट टाइलसम्बन्धी प्रम्प्टहरू"</string>
-    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
-    <skip />
+    <string name="satellite_icon_text" msgid="1080385642493133372">"स्याटलाइट"</string>
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"स्याटलाइट उपलब्ध छैन"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"तपाईंको डिभाइस मोबाइल वा Wi-Fi नेटवर्कमा कनेक्ट भएका बेला स्याटलाइट कभरेज उपलब्ध हुँदैन।"</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"यो देश वा क्षेत्रमा स्याटलाइट कनेक्टिभिटी उपलब्ध छैन।"</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"स्याटलाइट कनेक्टिभिटी अहिले उपलब्ध छैन। कृपया पछि फेरि प्रयास गर्नुहोस्।"</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"तपाईंको मोबाइल योजनामा स्याटलाइट कभरेज समावेश गरिएको छैन। मद्दत प्राप्त गर्न आफ्नो टेलिफोन कम्पनीमा सम्पर्क गर्नुहोस्।"</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"स्याटलाइटमार्फत म्यासेज पठाउने सुविधा प्रयोग गर्न Google Messages अनिवार्य रूपमा तपाईंको डिफल्ट म्यासेजिङ एप हुनु पर्छ।"</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"तपाईंको टेलिफोन कम्पनीले स्याटलाइट कनेक्टिभिटी अन गरेको छ। आफ्नो टेलिफोन कम्पनीको स्याटलाइटसम्बन्धी सेटिङमा गई थप जान्नुहोस्।"</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"उपलब्ध लोकेसनहरू हेर्नुहोस्"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"डिफल्ट एप परिवर्तन गर्नुहोस्"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"टेलिफोन कम्पनीका सेटिङ हेर्नुहोस्"</string>
 </resources>

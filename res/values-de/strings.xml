@@ -966,7 +966,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Das Ändern der Ausrichtung oder der Auflösung kann dazu führen, dass Apps, die momentan ausgeführt werden, angehalten werden"</string>
     <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"Kein Bildschirm angeschlossen\n\nSchließe einen externen Bildschirm an oder verwende ein anderes Kabel"</string>
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Kein Display angeschlossen"</string>
-    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Schließe ein externes Display an, um zu beginnen, oder verwende ein anderes Kabel"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Schließe ein externes Display an oder verwende ein anderes Kabel"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Weitere Optionen"</string>
     <string name="external_display_pause_topology_hint" msgid="1128908588539457600">"Animation zum Wechseln des Hinweistexts pausieren"</string>
     <string name="external_display_topology_hint" msgid="885396727047321347">"Zum Neuanordnen der Displays halten und ziehen"</string>
@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"HDR/SDR-Verhältnis anzeigen"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"Aktuelles HDR/SDR-Verhältnis anzeigen"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Für NFC muss das Gerät entsperrt werden"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"Geräteentsperrung anfordern"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Bereit zur Übertragung von App-Inhalten über NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Aus"</string>
@@ -1383,8 +1383,8 @@
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"Zugriff auf Kamera erforderlich"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"Für die Funktion „Aufmerksamkeitserkennung“ ist der Zugriff auf die Kamera erforderlich. Tippe, um Berechtigungen für Dienste zur Gerätepersonalisierung zu verwalten"</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"Berechtigungen verwalten"</string>
-    <string name="adaptive_sleep_description" msgid="1835321775327187860">"Verhindert, dass der Bildschirm ausgeschaltet wird, wenn du auf ihn schaust"</string>
-    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Die Funktion „Aufmerksamkeitserkennung“ verwendet die Frontkamera, um zu erkennen, ob jemand den Bildschirm ansieht. Bilder werden dabei weder gespeichert noch an Google gesendet."</string>
+    <string name="adaptive_sleep_description" msgid="1835321775327187860">"Verhindert, dass das Display ausgeschaltet wird, wenn du darauf schaust"</string>
+    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Die Funktion „Aufmerksamkeitserkennung“ verwendet die Frontkamera, um zu erkennen, ob jemand auf das Display sieht. Bilder werden dabei weder gespeichert noch an Google gesendet."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Aufmerksamkeitserkennung aktivieren"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Display aktiviert lassen, solange du es ansiehst"</string>
     <string name="power_consumption_footer_summary" msgid="4901490700555257237">"Wenn das Display länger eingeschaltet bleibt, verkürzt sich dadurch die Akkulaufzeit."</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Aus"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"ID des Mobilfunkanbieters"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Typ des Mobilfunknetzes für Daten"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Typ des Mobilfunknetzes für Anrufe"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Details zum Mobilfunkanbieter"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN bestätigen"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Passwort bestätigen"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Identität bestätigen"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Gib das Muster deines anderen Geräts ein, um unter anderem dein Google-Konto und deine Einstellungen zu übertragen. Dein Muster wird verschlüsselt."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Gib die PIN deines anderen Geräts ein, um unter anderem dein Google-Konto und deine Einstellungen zu übertragen. Deine PIN wird verschlüsselt."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Gib das Passwort deines anderen Geräts ein, um unter anderem dein Google-Konto und deine Einstellungen zu übertragen. Dein Passwort wird verschlüsselt."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"Dasselbe Muster zum Entsperren dieses Geräts verwenden"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"Dieselbe PIN zum Entsperren dieses Geräts verwenden"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"Dasselbe Passwort zum Entsperren dieses Geräts verwenden"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Muster bestätigen"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"PIN bestätigen"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Passwort bestätigen"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Schnelleinstellungen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Wische vom oberen Displayrand nach unten.}other{Wische vom oberen Displayrand mit # Fingern nach unten.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Wische vom oberen Displayrand nach unten. Diese Touchgeste ist nach Abschluss der Geräteeinrichtung verfügbar.}other{Wische vom oberen Displayrand mit # Finger nach unten. Diese Touchgeste ist nach Abschluss der Geräteeinrichtung verfügbar.}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"Taste in der obersten Reihe"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"Drücke die Taste für die Bedienungshilfen in der obersten Reihe der Tastatur"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Schnelleinstellungen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Lautstärketasten"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"Lautstärketasten"</string>
@@ -3479,12 +3469,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Andere Nutzer"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Aktivitäten von Gästen löschen"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Beim Beenden des Gastmodus alle Apps und Daten von Gästen löschen"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"Gästen erlauben, das Gerät zu verwenden"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"Beim Beenden des Gastmodus werden alle Apps und Daten von Gästen gelöscht"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"Hinzufügen, Gast"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Aktivitäten von Gästen löschen?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Apps und Daten dieser Gastsitzung werden jetzt gelöscht und alle künftigen Gastaktivitäten werden jeweils beim Beenden des Gastmodus gelöscht"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"löschen, gast, aktivität, entfernen, daten, besucher, löschen"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Gerät"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"Tastatur, Touchpad, Display, Ton"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Nicht verfügbar, weil NFC deaktiviert ist"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Installiere zuerst eine Zahlungs-App, damit du die Option verwenden kannst"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Kürzlich geöffnete Apps, Standard-Apps"</string>
@@ -3955,8 +3947,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Kurze Zusammenfassungen längerer Nachrichten erhalten"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Zusammenfassung von Benachrichtigungen verwenden"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Du kannst lange Nachrichten und Gruppenunterhaltungen zusammenfassen lassen, damit du schnell einen Überblick bekommst.\n\nZusammenfassungen werden mithilfe von KI auf deinem Gerät erstellt, die manchmal Fehler machen kann. Deine Nachrichten werden niemals an Google gesendet."</string>
-    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
-    <skip />
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"Du kannst lange Nachrichten und Gruppenunterhaltungen zusammenfassen lassen, damit du schnell einen Überblick bekommst.\n\nZusammenfassungen werden von Apps oder KI auf deinem Gerät erstellt und können Fehler enthalten. Deine Nachrichten werden niemals an Google gesendet."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Benachrichtigungen von diesen Apps werden nicht zusammengefasst"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Apps verwalten"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Apps für Zusammenfassungen von Benachrichtigungen verwalten"</string>
@@ -4396,6 +4387,12 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Neu starten"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Nicht jetzt"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Weitere Informationen zum erweiterten Speicherschutz."</string>
+    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
+    <skip />
+    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
+    <skip />
+    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Dieses Arbeitsprofil wird verwaltet von:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Verwaltet von <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Standardmäßig öffnen"</string>
@@ -4442,12 +4439,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Berechtigungen entfernen, temporäre Dateien löschen und Benachrichtigungen stoppen"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"App bei Nichtnutzung pausieren"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Berechtigungen entfernen, temporäre Dateien löschen, Benachrichtigungen stoppen und die App archivieren"</string>
-    <!-- no translation found for task_continuity_category (3736049711007817178) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
-    <skip />
+    <string name="task_continuity_category" msgid="3736049711007817178">"Aufgabenkontinuität"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"App-Aufgaben"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"Auf anderen Geräten nahtlos da weitermachen, wo du aufgehört hast"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Alle Apps"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Installierte Apps"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant Apps"</string>
@@ -4519,6 +4513,18 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Standard-USB-Konfiguration"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Optionen für Stromversorgung"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Optionen zur Dateiübertragung"</string>
+    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
+    <skip />
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB-Einstellungen"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"Gerät, das die USB-Verbindung steuert"</string>
@@ -4876,7 +4882,7 @@
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigationsmodus"</string>
     <string name="update_device_category_title" msgid="6588608879793647296">"Gerät aktualisieren"</string>
     <string name="interaction_category_title" msgid="5712424978503035872">"Interaktion"</string>
-    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"Automatisierung &amp; Intelligenz"</string>
+    <string name="automation_intelligence_category_title" msgid="1154006517484412196">"Automatisierung &amp; intelligente Funktionen"</string>
     <string name="system_management_category_title" msgid="5405726452116686478">"Systemverwaltung"</string>
     <string name="manage_data_category_title" msgid="1663320047422544008">"Daten verwalten"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Bedienung über 2 Schaltflächen"</string>
@@ -5688,20 +5694,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Für <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> muss 2G verfügbar sein"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Nur verschlüsselte Netzwerke zulassen"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Dies ist sicherer, schränkt aber eventuell die Möglichkeit einer Mobilfunkverbindung an manchen Orten ein. Notrufe sind immer erlaubt."</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Schutz vor 2G-Netzen deaktivieren?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"Das aktuelle Netz für die SIM von <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> unterstützt 2G nicht. Wenn du den Schutz vor 2G-Netzen deaktivierst, besteht das Risiko, dass eine Verbindung zu gefälschten 2G-Netzen hergestellt wird, die schädlich für das Gerät sein könnten."</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Deaktivieren"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"Schutz vor 2G-Netzen"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"Schutz vor 2G-Netzen ist aktiviert"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"Das aktuelle Netz für die SIM von <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> erfordert, dass der Schutz vor 2G-Netzen aktiviert ist. Du kannst den Schutz vor 2G-Netzen auf eigenes Risiko deaktivieren."</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Einstellungen"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alle Dienste"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Zugriff auf Zwischenablage anzeigen"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Eine Meldung wird angezeigt, wenn Apps auf Text, Bilder oder andere Inhalte zugreifen, die du kopiert hast"</string>
@@ -5797,6 +5796,10 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> zu <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Wenn du das Seitenverhältnis änderst, wird die App neu gestartet. Dadurch können nicht gespeicherte Änderungen verloren gehen. Einige Apps sind möglicherweise nicht für bestimmte Seitenverhältnisse optimiert."</string>
+    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
+    <skip />
+    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingerabdrucksensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Aufleuchten bei Benachrichtigungen"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Infos zum Aufleuchten bei Benachrichtigungen"</string>
@@ -5877,7 +5880,7 @@
     <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Name"</string>
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Passwort"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Kompatibilität verbessern"</string>
-    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Reduziert die Audioqualität, damit bestimmte Geräte wie z. B. Hörgeräte besser eine Verbindung herstellen können"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Reduziert die Audioqualität, damit bestimmte Geräte wie etwa Hörgeräte besser eine Verbindung herstellen können"</string>
     <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Deaktiviere die Audiofreigabe, um die Einstellungen zu ändern"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Audiostreams in der Nähe anhören"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Die Audiofreigabe unterstützt Auracast™"</string>
@@ -5891,19 +5894,19 @@
     <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Audioinhalte freigeben"</string>
     <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Nein, danke"</string>
     <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Audioinhalte mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> teilen?"</string>
-    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Audioinhalte mit einem anderen Gerät teilen"</string>
-    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> teilen"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Audioinhalte für ein anderes Gerät freigeben"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Für <xliff:g id="DEVICE_NAME">%1$s</xliff:g> freigeben"</string>
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Schließen"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Verbinde ein weiteres Paar kompatibler Kopfhörer oder teile den Namen des Streams und das Passwort mit der anderen Person"</string>
-    <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"Wenn andere Personen diesen Code scannen, können sie deinen Audioinhalt abspielen\n\nStreamname: <xliff:g id="STREAM_NAME">%1$s</xliff:g>\nPasswort: <xliff:g id="PASSWORD">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"Wenn andere Personen diesen Code scannen, können sie deine Audioinhalte abspielen\n\nStreamname: <xliff:g id="STREAM_NAME">%1$s</xliff:g>\nPasswort: <xliff:g id="PASSWORD">%2$s</xliff:g>"</string>
     <string name="audio_sharing_dialog_qr_code_content_no_password" msgid="7824076083031650113">"Wenn andere Personen diesen Code scannen, können sie deinen Audioinhalt abspielen\n\nStreamname: <xliff:g id="STREAM_NAME">%1$s</xliff:g>"</string>
-    <string name="audio_sharing_dialog_pair_new_device_content" msgid="6720472590211440206">"oder ein weiteres Paar kompatibler Kopfhörer koppeln"</string>
+    <string name="audio_sharing_dialog_pair_new_device_content" msgid="6720472590211440206">"Alternativ kannst du ein weiteres Paar kompatibler Kopfhörer koppeln"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Kopple ein weiteres Paar kompatibler Kopfhörer oder teile den QR-Code deines Audiostreams mit der anderen Person"</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Audioinhalte werden freigegeben"</string>
     <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Neues Gerät koppeln"</string>
     <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"QR-Code anzeigen"</string>
     <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Du hast Audioinhalte freigegeben"</string>
-    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Zuhörer können sich deine Medien anhören. Sie können allerdings keine Telefongespräche mithören."</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Zuhörer können deine Medien mit anhören, aber keine Telefongespräche."</string>
     <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Freigabe beenden"</string>
     <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Einstellungen"</string>
     <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Zu trennendes Gerät auswählen"</string>
@@ -5957,7 +5960,7 @@
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Weitere Informationen"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Dieser Audiostream kann nicht auf <xliff:g id="DEVICE_NAME">%1$s</xliff:g> abgespielt werden."</string>
     <string name="audio_streams_dialog_cannot_play_with_link" msgid="3433981166714801237">"Dieser Audiostream kann nicht auf <xliff:g id="DEVICE_NAME">%1$s</xliff:g> abgespielt werden. "<annotation id="link">"Weitere Informationen"</annotation></string>
-    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Wird jetzt abgespielt"</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Aktuelle Audioquelle"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Stream pausiert"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Zuhören beenden"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Kompatible Kopfhörer verbinden"</string>
@@ -6132,8 +6135,7 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Aktion abgeschlossen"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Schnelleinstellungen für Sicherheit und Datenschutz"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Datenschutzeinstellungen"</string>
-    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
-    <skip />
+    <string name="safety_center_review_settings" msgid="295527297192914772">"Einstellungen prüfen"</string>
     <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Öffnen"</string>
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Schalter. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"Blockiert"</string>
@@ -6163,6 +6165,25 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Du kannst ganz einfach auf Satelliteninformationen zugreifen, indem du den Schnelleinstellungen die Satellitenkachel hinzufügst"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Kachel hinzufügen"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Prompts für Satellitenkachel"</string>
-    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <skip />
+    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
+    <skip />
+    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
+    <skip />
+    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
+    <skip />
+    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
+    <skip />
+    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
+    <skip />
+    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
+    <skip />
+    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
     <skip />
 </resources>
