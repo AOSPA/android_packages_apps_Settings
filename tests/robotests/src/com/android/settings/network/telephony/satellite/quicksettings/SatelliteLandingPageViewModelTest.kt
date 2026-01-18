@@ -166,9 +166,9 @@ class SatelliteLandingPageViewModelTest {
         val items = createViewModelAndGetItems()
         waitForAsync()
 
-        assertThat(items).hasSize(2) // App1, Settings
+        assertThat(items).hasSize(1) // App1
         assertThat(items.map { it.getAppLabel(packageManager) })
-            .containsExactly("App1", "Settings")
+            .containsExactly("App1")
             .inOrder()
     }
 
@@ -183,12 +183,11 @@ class SatelliteLandingPageViewModelTest {
         val items = createViewModelAndGetItems()
         waitForAsync()
 
-        assertThat(items).hasSize(3) // SOS, App2, Settings
+        assertThat(items).hasSize(2) // SOS, App2
         assertThat(items.map { it.getAppLabel(packageManager) })
             .containsExactly(
                 context.getString(com.android.settings.R.string.satellite_emergency_sos),
                 "App2",
-                "Settings",
             )
             .inOrder()
     }
@@ -207,10 +206,7 @@ class SatelliteLandingPageViewModelTest {
         val items = createViewModelAndGetItems()
         waitForAsync()
 
-        assertThat(items).hasSize(1) // Settings
-        assertThat(items.map { it.getAppLabel(packageManager) })
-            .containsExactly("Settings")
-            .inOrder()
+        assertThat(items).isEmpty()
     }
 
     @Test
@@ -226,7 +222,7 @@ class SatelliteLandingPageViewModelTest {
         val items = createViewModelAndGetItems()
         waitForAsync()
 
-        assertThat(items).hasSize(1) // Settings
+        assertThat(items).isEmpty()
     }
 
     @Test
@@ -234,20 +230,6 @@ class SatelliteLandingPageViewModelTest {
         setLteNtnSupported(false)
         `when`(appsRepository.getAppsPackagesForNbNtnLandingPage()).thenReturn(emptyList())
         mockAppsRepositoryIntents(sosIntent = null)
-        setupCommonPackageManagerApps()
-
-        val items = createViewModelAndGetItems()
-        waitForAsync()
-
-        assertThat(items).hasSize(1) // Only Settings
-        assertThat(items[0].getAppLabel(packageManager)).isEqualTo("Settings")
-    }
-
-    @Test
-    fun satelliteAppItems_whenSettingsIntentNull_doesNotLoadSettings() = runTest {
-        setLteNtnSupported(true)
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(emptyList())
-        mockAppsRepositoryIntents(settingsIntent = null)
         setupCommonPackageManagerApps()
 
         val items = createViewModelAndGetItems()
@@ -339,11 +321,6 @@ class SatelliteLandingPageViewModelTest {
             SatelliteAppsRepository.PACKAGE_NAME_SAFETY_HUB,
             "SOS",
             Intent("sos"),
-        )
-        setupPackageManagerForApp(
-            SatelliteAppsRepository.PACKAGE_NAME_SETTINGS,
-            "Settings",
-            Intent("settings"),
         )
     }
 }

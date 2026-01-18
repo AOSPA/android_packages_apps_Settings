@@ -21,7 +21,7 @@
         <com.android.settingslib.widget.AdaptiveIconShapeDrawable
             android:width="@dimen/dashboard_tile_image_size"
             android:height="@dimen/dashboard_tile_image_size"
-            android:color="@color/homepage_blue_variant_bg" />
+            android:color="@color/homepage_device_background" />
     </item>
 
     <item
@@ -29,5 +29,5 @@
         android:height="@dimen/dashboard_tile_foreground_image_size"
         android:start="@dimen/dashboard_tile_foreground_image_inset"
         android:top="@dimen/dashboard_tile_foreground_image_inset"
-        android:drawable="@drawable/ic_settings_24dp" />
+        android:drawable="@drawable/ic_settings_device_expressive" />
 </layer-list>
