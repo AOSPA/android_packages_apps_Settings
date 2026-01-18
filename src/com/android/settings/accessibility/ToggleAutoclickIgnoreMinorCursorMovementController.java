@@ -27,7 +27,6 @@ import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 
-import com.android.server.accessibility.Flags;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
@@ -47,7 +46,7 @@ public class ToggleAutoclickIgnoreMinorCursorMovementController extends TogglePr
 
     @Override
     public int getAvailabilityStatus() {
-        return Flags.enableAutoclickIndicator() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return AVAILABLE;
     }
 
     @Override

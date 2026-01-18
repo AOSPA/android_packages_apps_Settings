@@ -190,7 +190,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         val confirmationDialogEvent = viewModel.confirmationDialogEvent.value
         assertThat(confirmationDialogEvent).isNotNull()
         assertThat(confirmationDialogEvent!!.newMode).isEqualTo(pendingMode)
-        assertThat(confirmationDialogEvent.existingMode).isEqualTo(currentActiveMode)
+        assertThat(confirmationDialogEvent.previousMode).isEqualTo(currentActiveMode)
         verify(mMockedInjector).setUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID, pendingMode, false)
     }
 
@@ -248,7 +248,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
                 activeMode,
                 Mode(100, width, height, 60f), // 60Hz variant 1
                 Mode(101, width, height, 60f), // 60Hz variant 2 (duplicate refresh rate)
-                Mode(102, width, height, 50f) // 50Hz
+                Mode(102, width, height, 50f), // 50Hz
             )
 
         // Create a new display device with these modes.
@@ -261,7 +261,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
                 supportedModes,
                 isEnabled = DisplayIsEnabled.YES,
                 isConnectedDisplay = true,
-                rotation = 0
+                rotation = 0,
             )
         updateDisplaysAndTopology(listOf(displayWithDuplicates))
 
@@ -275,7 +275,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         assertThat(state.refreshRateItems)
             .containsExactly(
                 RefreshRateItem(modeId = 100, refreshRate = 60f),
-                RefreshRateItem(modeId = 102, refreshRate = 50f)
+                RefreshRateItem(modeId = 102, refreshRate = 50f),
             )
             .inOrder()
     }

@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Konfigurera ansiktslås"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Använd ansiktslås för att"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Ansikte"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Använd ansiktet för att"</string>
@@ -519,7 +518,7 @@
     <string name="security_settings_remoteauth_enroll_introduction_how_title" msgid="6604152528267830349">"Så fungerar det"</string>
     <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title" msgid="7974976673323638524">"Du bestämmer själv"</string>
     <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"Du kan ta bort klockan när som helst från Upplåsning med klockan i inställningarna."</string>
-    <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"Trycka på en avisering"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"Tryck på en avisering"</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"Svepa uppåt på låsskärmen"</string>
     <string name="security_settings_remoteauth_enroll_enrolling_title" msgid="313016997943607675">"Välj klocka"</string>
     <string name="security_settings_remoteauth_enroll_enrolling_list_heading" msgid="8227585438932911013">"Tillgängliga klockor"</string>
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Av"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"Typ av mobildatanätverk"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Typ av mobiltelefoninätverk"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Operatörsinfo"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Bekräfta pinkoden"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Bekräfta lösenordet"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Styrk vem du är"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Ange den andra enhetens mönster för att överföra Google-konton, inställningar med mera. Mönstret krypteras."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Ange den andra enhetens pinkod för att överföra Google-konton, inställningar med mera. Pinkoden krypteras."</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Ange den andra enhetens lösenord för att överföra Google-konton, inställningar med mera. Lösenordet krypteras."</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Kräv även mönster för att låsa upp enheten"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Kräv även pinkod för att låsa upp enheten"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Kräv även lösenord för att låsa upp enheten"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Bekräfta mönstret"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Bekräfta pinkoden"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Bekräfta lösenordet"</string>
@@ -2533,6 +2542,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Snabbinställningar"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Svep nedåt från skärmens överkant}other{Svep nedåt med # fingrar från skärmens överkant}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Svep nedåt från skärmens överkant. Detta kortkommando blir tillgängligt när du har slutfört konfigureringen av enheten.}other{Svep nedåt med # fingrar från skärmens överkant. Detta kortkommando blir tillgängligt när du har slutfört konfigureringen av enheten.}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Snabbinställningar"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Volymknappar"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"volymknappar"</string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Andra användare"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Radera gästaktivitet"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Radera alla appar och all data för gästen när gästläget avslutas"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Vill du radera gästaktivitet?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Appar och data från den här gästsessionen raderas nu och i fortsättningen raderas all gästaktivitet när du avslutar gästläget"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"radera, gäst, aktivitet, ta bort, data, besökare, rensa"</string>
@@ -3936,6 +3955,8 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Få snabba sammanfattningar av längre meddelanden"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Använd aviseringssammanfattningar"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Sammanfatta långa meddelanden och gruppkonversationer.\n\nSammanfattningar använder AI på enheten, vilket ibland kan leda till fel. Dina meddelanden skickas aldrig till Google."</string>
+    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Aviseringar från dessa appar sammanfattas inte"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Hantera appar"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Hantera appar för aviseringssammanfattningar"</string>
@@ -4424,6 +4445,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Ta bort behörigheter, radera tillfälliga filer och hindra aviseringar"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Hantera appen om den inte används"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Ta bort behörigheter, radera tillfälliga filer, hindra aviseringar och arkivera appen"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Alla appar"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Installerade appar"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Snabbappar"</string>
@@ -5664,6 +5691,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> kräver att 2G är tillgängligt"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Tillåt endast krypterade nätverk"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Detta är säkrare men kan begränsa din mobilnätverksanslutning på vissa platser. Nödsamtal tillåts alltid."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alla tjänster"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Visa åtkomst till urklipp"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Visa ett meddelande när appar får åtkomst till text, bilder eller annat som du har kopierat"</string>
@@ -6094,6 +6135,15 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Åtgärd slutförd"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Snabbinställningar för säkerhet och integritet"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Dina integritetsinställningar"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Öppna"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Reglage. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"Blockerad"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"Aktivera/inaktivera"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"Mikrofon­åtkomst"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"Kameraåtkomst"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"Platsåtkomst"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Parkoppling"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> har anslutits"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Skanna enhet"</string>
@@ -6116,4 +6166,6 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Få enkel åtkomst till satellitinformation genom att lägga till rutan Satellit i snabbinställningarna"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Lägg till en ruta"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Promptar för rutan Satellit"</string>
+    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <skip />
 </resources>

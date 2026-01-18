@@ -167,6 +167,10 @@ public class AccountDashboardFragment extends DashboardFragment {
     }
 
     private static int getPreferenceLayoutResId(Context context) {
+        if (Flags.enableAccountsAndBackupScreen()) {
+            return R.xml.credman_dashboard_settings;
+        }
+
         return (context != null && CredentialManager.isServiceEnabled(context))
                 ? R.xml.accounts_dashboard_settings_credman
                 : R.xml.accounts_dashboard_settings;
@@ -186,8 +190,10 @@ public class AccountDashboardFragment extends DashboardFragment {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
-                    buildAccountPreferenceControllers(
+                    if (!Flags.enableAccountsAndBackupScreen()) {
+                        buildAccountPreferenceControllers(
                             context, null /* parent */, null /* authorities*/, controllers);
+                    }
                     buildAutofillPreferenceControllers(context, controllers, false, false);
                     return controllers;
                 }
@@ -197,6 +203,9 @@ public class AccountDashboardFragment extends DashboardFragment {
                 public List<SearchIndexableRaw> getDynamicRawDataToIndex(
                         Context context, boolean enabled) {
                     final List<SearchIndexableRaw> indexRaws = new ArrayList<>();
+                    if (Flags.enableAccountsAndBackupScreen()) {
+                        return indexRaws;
+                    }
                     final UserManager userManager =
                             (UserManager) context.getSystemService(Context.USER_SERVICE);
                     final List<UserInfo> profiles = userManager.getProfiles(UserHandle.myUserId());

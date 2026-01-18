@@ -45,12 +45,12 @@ import android.view.ViewManager
 import android.view.WindowManager
 import android.view.WindowManagerGlobal
 import androidx.annotation.OpenForTesting
+import com.android.server.display.feature.flags.Flags
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY
 import com.android.settings.flags.FeatureFlagsImpl
 import com.android.wm.shell.shared.desktopmode.DesktopState
 import java.util.function.Consumer
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -160,10 +160,16 @@ open class ConnectedDisplayInjector(open val context: Context?) {
             isVirtualDisplayAllowed(display)
 
     private fun isVirtualDisplayAllowed(display: Display): Boolean {
+        if (display.type != Display.TYPE_VIRTUAL) {
+            return false
+        }
+        if (Flags.virtualSecondaryDisplays()) {
+            if ((display.getFlags() and Display.FLAG_ALLOWS_CONTENT_MODE_SWITCH) != 0) {
+                return true
+            }
+        }
         val sysProp = getSystemProperty(VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY)
-        return !sysProp.isEmpty() &&
-            display.type == Display.TYPE_VIRTUAL &&
-            sysProp == display.ownerPackageName
+        return !sysProp.isEmpty() && sysProp == display.ownerPackageName
     }
 
     /** @return all displays including disabled. */
@@ -360,7 +366,16 @@ open class ConnectedDisplayInjector(open val context: Context?) {
 
     open fun getSurfaceControlBuilder() = SurfaceControl.Builder()
 
-    private companion object {
+    companion object {
         private const val TAG = "ConnectedDisplayInjector"
+
+        fun isRefreshRateFlagsEnabled() =
+            com.android.settings.flags.Flags.enableResolutionRefreshRateSetting() &&
+                com.android.graphics.surfaceflinger.flags.Flags
+                    .followerArbitraryRefreshRateSelectionPlatform() &&
+                com.android.graphics.surfaceflinger.flags.Flags
+                    .forceSlowerFollowerGpuCompositionPlatform() &&
+                com.android.graphics.surfaceflinger.flags.Flags
+                    .followerDisplayBackpressurePlatform()
     }
 }

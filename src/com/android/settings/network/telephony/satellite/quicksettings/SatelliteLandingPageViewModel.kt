@@ -78,6 +78,10 @@ class SatelliteLandingPageViewModel(
             .map { it != SatelliteStatus.NOT_AVAILABLE }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
+    private val _bannerState = MutableStateFlow(SatelliteBannerState())
+    /** The state of the satellite warning banners. */
+    val bannerState: StateFlow<SatelliteBannerState> = _bannerState
+
     /**
      * Refreshes the satellite landing page data.
      *
@@ -102,7 +106,18 @@ class SatelliteLandingPageViewModel(
             _isCarrierRoamingNtnSupported.value = isCarrierSupported
 
             loadSatelliteAppItems(isLteSupported, isCarrierSupported)
+
+            updateBannerState()
         }
+    }
+
+    /**
+     * Updates the state flow for banners.
+     *
+     * TODO(b/465479769): Implement actual checks for [SatelliteBannerState].
+     */
+    fun updateBannerState() {
+        _bannerState.value = SatelliteBannerState()
     }
 
     /**
@@ -202,3 +217,17 @@ class SatelliteLandingPageViewModelFactory(
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
+/**
+ * UI state for satellite warning banners.
+ *
+ * Default values indicate banner is off.
+ */
+data class SatelliteBannerState(
+    val isNetworkConnected: Boolean = false,
+    val isSatelliteAvailableInRegion: Boolean = true,
+    val isEntitled: Boolean = true,
+    val isDefaultMessagingApp: Boolean = true,
+    val isSatelliteEnabledByCarrier: Boolean = false,
+    val isSatelliteAllowed: Boolean = true,
+)

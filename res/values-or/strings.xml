@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"ଫେସ ଅନଲକ ସେଟ ଅପ କରନ୍ତୁ"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"ଏଥିପାଇଁ ଫେସ୍ ଅନଲକ୍ ବ୍ୟବହାର କରନ୍ତୁ"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"ଫେସ"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"ଏଥିପାଇଁ ଫେସର ବ୍ୟବହାର"</string>
@@ -551,7 +550,7 @@
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"ସ୍କ୍ରୀନ୍‌ ଲକ୍‌ ଛାଡ଼ିଦେବେ?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"ଯେ କୌଣସି ଭାବେ ବାଦ ଦିଅନ୍ତୁ"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"ପଛକୁ ଫେରନ୍ତୁ"</string>
-    <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"ବାଦ୍ ଦିଅନ୍ତୁ"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"ବାଦ ଦିଅନ୍ତୁ"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"ବାତିଲ କରନ୍ତୁ"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"ସେନ୍ସରକୁ ସ୍ପର୍ଶ କରନ୍ତୁ"</string>
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"ପାୱାର ବଟନକୁ ନଦବାଇ ସ୍ପର୍ଶ କରନ୍ତୁ"</string>
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"ବନ୍ଦ ଅଛି"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"ମୋବାଇଲ୍‌ ଡାଟା ନେଟୱାର୍କର ପ୍ରକାର"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"ମୋବାଇଲ୍‌ ଭଏସ୍ ନେଟୱାର୍କ ପ୍ରକାର"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"ଅପରେଟର୍‌ଙ୍କ ସୂଚନା"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"ପିନ୍‌ ଯାଞ୍ଚ କରନ୍ତୁ"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"ପାସ୍‌ୱର୍ଡ ଯାଞ୍ଚ କରନ୍ତୁ:"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"ଆପଣ ବୋଲି ଯାଞ୍ଚ କର"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Google ଆକାଉଣ୍ଟ, ସେଟିଂସ ଏବଂ ଆହୁରି ଅନେକ କିଛି ଟ୍ରାନ୍ସଫର କରିବାକୁ ଆପଣଙ୍କ ଅନ୍ୟ ଡିଭାଇସର ପାଟର୍ନ ଲେଖନ୍ତୁ। ଆପଣଙ୍କ ପାଟର୍ନକୁ ଏନକ୍ରିପ୍ଟ କରାଯାଇଛି।"</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Google ଆକାଉଣ୍ଟ, ସେଟିଂସ ଏବଂ ଆହୁରି ଅନେକ କିଛି ଟ୍ରାନ୍ସଫର କରିବାକୁ ଆପଣଙ୍କ ଅନ୍ୟ ଡିଭାଇସର PIN ଲେଖନ୍ତୁ। ଆପଣଙ୍କ PINକୁ ଏନକ୍ରିପ୍ଟ କରାଯାଇଛି।"</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Google ଆକାଉଣ୍ଟ, ସେଟିଂସ ଏବଂ ଆହୁରି ଅନେକ କିଛି ଟ୍ରାନ୍ସଫର କରିବାକୁ ଆପଣଙ୍କ ଅନ୍ୟ ଡିଭାଇସର ପାସୱାର୍ଡ ଲେଖନ୍ତୁ। ଆପଣଙ୍କ ପାସୱାର୍ଡକୁ ଏନକ୍ରିପ୍ଟ କରାଯାଇଛି।"</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"ଏ ଡିଭାଇସ ଅନଲକ ପାଇଁ ପାଟର୍ନ ମଧ୍ୟ ବ୍ୟବହାର କର"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"ଏ ଡିଭାଇସ ଅନଲକ ପାଇଁ PIN ମଧ୍ୟ ବ୍ୟବହାର କରନ୍ତୁ"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"ଏ ଡିଭାଇସ ଅନଲକ ପାଇଁ ପାସୱାର୍ଡ ମଧ୍ୟ ବ୍ୟବହାର କର"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"ପାଟର୍ନ ଯାଞ୍ଚ କରନ୍ତୁ"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"PIN ଯାଞ୍ଚ କରନ୍ତୁ"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"ପାସୱାର୍ଡ ଯାଞ୍ଚ କରନ୍ତୁ"</string>
@@ -2013,7 +2022,7 @@
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"ଆପ୍ସକୁ ରିସେଟ କରନ୍ତୁ"</string>
     <string name="filter" msgid="9039576690686251462">"ଫିଲ୍ଟର୍"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"ଫିଲ୍ଟର ବିକଳ୍ପ ବାଛନ୍ତୁ"</string>
-    <string name="filter_apps_all" msgid="5705421199299914620">"ସମସ୍ତ ଆପସ୍‌"</string>
+    <string name="filter_apps_all" msgid="5705421199299914620">"ସବୁ ଆପ୍ସ"</string>
     <string name="filter_apps_disabled" msgid="5068011814871004105">"ଅକ୍ଷମ ହୋଇଥିବା ଆପ"</string>
     <string name="filter_apps_third_party" msgid="9049447784849114843">"ଡାଉନ୍‌ଲୋଡ୍ ହୋଇଗଲା"</string>
     <string name="filter_apps_running" msgid="535465683273284141">"ଚାଲୁଛି"</string>
@@ -2533,6 +2542,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"କୁଇକ ସେଟିଂସ"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{ଆପଣଙ୍କ ସ୍କ୍ରିନର ଶୀର୍ଷରୁ ତଳକୁ ସ୍ୱାଇପ କରନ୍ତୁ}other{# ଆଙ୍ଗୁଠିରେ ଆପଣଙ୍କ ସ୍କ୍ରିନର ଶୀର୍ଷରୁ ତଳକୁ ସ୍ୱାଇପ କରନ୍ତୁ}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{ଆପଣଙ୍କ ସ୍କ୍ରିନର ଶୀର୍ଷରୁ ତଳକୁ ସ୍ୱାଇପ କରନ୍ତୁ। ଆପଣ ଡିଭାଇସ ସେଟଅପ ସମ୍ପୂର୍ଣ୍ଣ କରିବା ପରେ ଏହି ସର୍ଟକଟ ଉପଲବ୍ଧ ହେବ।}other{# ଆଙ୍ଗୁଠିରେ ଆପଣଙ୍କ ସ୍କ୍ରିନର ଶୀର୍ଷରୁ ତଳକୁ ସ୍ୱାଇପ କରନ୍ତୁ। ଆପଣ ଡିଭାଇସ ସେଟଅପ ସମ୍ପୂର୍ଣ୍ଣ କରିବା ପରେ ଏହି ସର୍ଟକଟ ଉପଲବ୍ଧ ହେବ।}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"କୁଇକ ସେଟିଂସ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"ଭଲ୍ୟୁମ କୀ"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"ଭଲ୍ୟୁମ କୀ"</string>
@@ -3220,7 +3233,7 @@
     <string name="device_admin_add_title" msgid="6087481040932322289">"ଡିଭାଇସ୍‌ ଆଡମିନ୍‌"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"ଏହି ଆଡମିନ୍ ଆପ୍‌କୁ ସକ୍ରିୟ କରିବା ଦ୍ୱାରା <xliff:g id="APP_NAME">%1$s</xliff:g> ଆପ୍‌ଟି ନିମ୍ନ କାର୍ଯ୍ୟଗୁଡ଼ିକ କରିପାରିବ:"</string>
     <string name="supervision_role_holder_warning" msgid="167724047638694522">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> ଏହି ଡିଭାଇସକୁ ପରିଚାଳନା ଏବଂ ମନିଟର କରିବ। ଆପ ବ୍ଲକ କରିବା ଏବଂ ବିଷୟବସ୍ତୁ ପ୍ରତିବନ୍ଧକ ପରି ବାପାମାଙ୍କ ନିୟନ୍ତ୍ରଣଗୁଡ଼ିକର ସେଟିଂସକୁ ପରିଚାଳନା କରିବା ପାଇଁ \n\n<xliff:g id="APP_NAME_1">%1$s</xliff:g> ସକ୍ଷମ ହେବ।"</string>
-    <string name="device_admin_warning_simplified" msgid="2715756519899116115">"<xliff:g id="APP_NAME">%1$s</xliff:g> ଏହି ଡିଭାଇସ୍‌କୁ ପରିଚାଳନା ଏବଂ ତଦାରଖ କରିବ।"</string>
+    <string name="device_admin_warning_simplified" msgid="2715756519899116115">"<xliff:g id="APP_NAME">%1$s</xliff:g> ଏହି ଡିଭାଇସକୁ ପରିଚାଳନା ଏବଂ ମନିଟର କରିବ।"</string>
     <string name="device_admin_status" msgid="6332571781623084064">"ଏହି ଆଡମିନ୍‌ ଆପ୍‌ ସକ୍ରିୟ ଅଛି ଏବଂ <xliff:g id="APP_NAME">%1$s</xliff:g> ଆପ୍‌ ଦ୍ୱାରା ନିମ୍ନଲିଖିତ କାର୍ଯ୍ୟଗୁଡ଼ିକ କରାଉଛି:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"ପ୍ରୋଫାଇଲ୍‌ ମ୍ୟାନେଜର୍‌ ସକ୍ରିୟ କରିବେ?"</string>
     <string name="supervision_confirmation_title" msgid="8094974031562728585">"ଏହି ଡିଭାଇସକୁ ନିରୀକ୍ଷଣ କରିବା ପାଇଁ <xliff:g id="APP_NAME">%1$s</xliff:g>କୁ ଅନୁମତି ଦେବେ?"</string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"ଅନ୍ୟ ୟୁଜରମାନେ"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"ଅତିଥି କାର୍ଯ୍ୟକଳାପକୁ ଡିଲିଟ କରନ୍ତୁ"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ଅତିଥି ମୋଡରୁ ବାହାରକୁ ଯିବା ସମୟରେ ସମସ୍ତ ଅତିଥି ଆପ୍ସ ଏବଂ ଡାଟା ଡିଲିଟ କରନ୍ତୁ"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ଅତିଥି କାର୍ଯ୍ୟକଳାପକୁ ଡିଲିଟ କରିବେ?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"ବର୍ତ୍ତମାନ ଏହି ଅତିଥି ସେସନରୁ ଆପ୍ସ ଏବଂ ଡାଟା ଡିଲିଟ ହୋଇଯିବ ଏବଂ ଆପଣ ପ୍ରତ୍ୟେକ ଥର ଅତିଥି ମୋଡରୁ ବାହାରକୁ ଗଲେ ଭବିଷ୍ୟତର ସମସ୍ତ ଅତିଥି କାର୍ଯ୍ୟକଳାପ ଡିଲିଟ ହୋଇଯିବ"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"ଡିଲିଟ କରନ୍ତୁ, ଅତିଥି, କାର୍ଯ୍ୟକଳାପ, କାଢ଼ି ଦିଅନ୍ତୁ, ଡାଟା, ଭିଜିଟର, ଇରେଜ କରନ୍ତୁ"</string>
@@ -3936,6 +3955,8 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"ଲମ୍ବା ମେସେଜଗୁଡ଼ିକର କ୍ୱିକ ରିକେପ ପାଆନ୍ତୁ"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"ବିଜ୍ଞପ୍ତି ସାରାଂଶ ବ୍ୟବହାର କରନ୍ତୁ"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"କ୍ୱିକ ରିକେପ ପାଇବା ପାଇଁ ଲମ୍ବା ମେସେଜ ଏବଂ ଗ୍ରୁପ ବାର୍ତ୍ତାଳାପଗୁଡ଼ିକର ସାରାଂଶ ତିଆରି କରନ୍ତୁ।\n\nସାରାଂଶଗୁଡ଼ିକ ଆପଣଙ୍କ ଡିଭାଇସରେ AIକୁ ବ୍ୟବହାର କରେ, ଯାହା ବେଳେବେଳେ ଭୁଲ କରିପାରେ। ଆପଣଙ୍କର ମେସେଜଗୁଡ଼ିକୁ କେବେ ବି Googleକୁ ପଠାଯାଏ ନାହିଁ।"</string>
+    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"ଏହି ଆପ୍ସରୁ ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକର ସାରାଂଶ ପ୍ରସ୍ତୁତ ହେବ ନାହିଁ"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"ଆପ୍ସ ପରିଚାଳନା କରନ୍ତୁ"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"ବିଜ୍ଞପ୍ତି ସାରାଂଶଗୁଡ଼ିକ ପାଇଁ ଆପ୍ସକୁ ପରିଚାଳନା କରନ୍ତୁ"</string>
@@ -4352,8 +4373,8 @@
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"ଚାଲୁ ଅଛି"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"ବନ୍ଦ ଅଛି"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"ଆପ ପିନିଂ"</string>
-    <string name="app_pinning_intro" msgid="6409063008733004245">"ବର୍ତ୍ତମାନର ଆପକୁ ଆପଣ ଅନପିନ ନକରିବା ପର୍ଯ୍ୟନ୍ତ ଏହା ସ୍କ୍ରିନରେ ଭ୍ୟୁ ହେବା ପାଇଁ ଆପ ପିନିଂ ଆପଣଙ୍କୁ ଅନୁମତି ଦିଏ। ଏହି ଫିଚର ଏହି କ୍ଷେତ୍ରରେ ବ୍ୟବହୃତ ହୋଇପାରେ, ଉଦାହରଣ ସ୍ଵରୂପ, ଜଣେ ବିଶ୍ୱସ୍ତ ସାଙ୍ଗକୁ ଏକ ନିର୍ଦ୍ଦିଷ୍ଟ ଗେମ ଖେଳିବାକୁ ଦେବା।"</string>
-    <string name="screen_pinning_description" msgid="5822120806426139396">"କୌଣସି ଆପ ପିନ କରାଗଲେ, ପିନ ହୋଇଥିବା ଆପଟି ଅନ୍ୟ ଆପ୍ସକୁ ଖୋଲିପାରେ ଏବଂ ବ୍ୟକ୍ତିଗତ ଡାଟା ଆକ୍ସେସ ଯୋଗ୍ୟ ହୋଇପାରେ। \n\nଆପ ପିନିଂ ବ୍ୟବହାର କରିବାକୁ: 	\n{0,number,integer}। ଆପ ପିନିଂ ଚାଲୁ କରନ୍ତୁ 	\n{1,number,integer}। ଓଭରଭ୍ୟୁ ଖୋଲନ୍ତୁ 	\n{2,number,integer}। ସ୍କ୍ରିନର ଶୀର୍ଷରେ ଥିବା ଆପ ଆଇକନରେ ଟାପ କରି \'ପିନ କରନ୍ତୁ\'ରେ ଟାପ କରନ୍ତୁ"</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"ବର୍ତ୍ତମାନର ଆପକୁ ଆପଣ ଅନପିନ ନକରିବା ପର୍ଯ୍ୟନ୍ତ ଏହାକୁ ସ୍କ୍ରିନରେ ଭ୍ୟୁ ହେବାକୁ ରଖିବା ପାଇଁ ଆପ ପିନିଂ ଆପଣଙ୍କୁ ଅନୁମତି ଦିଏ। ଏହି ଫିଚର ଏହି କ୍ଷେତ୍ରରେ ବ୍ୟବହୃତ ହୋଇପାରେ, ଉଦାହରଣ ସ୍ଵରୂପ, ଜଣେ ବିଶ୍ୱସ୍ତ ସାଙ୍ଗକୁ ଏକ ନିର୍ଦ୍ଦିଷ୍ଟ ଗେମ ଖେଳିବାକୁ ଦେବା।"</string>
+    <string name="screen_pinning_description" msgid="5822120806426139396">"କୌଣସି ଆପ ପିନ କରାଗଲେ, ପିନ ହୋଇଥିବା ଆପଟି ଅନ୍ୟ ଆପ୍ସକୁ ଖୋଲିପାରେ ଏବଂ ବ୍ୟକ୍ତିଗତ ଡାଟା ଆକ୍ସେସ ଯୋଗ୍ୟ ହୋଇପାରେ। \n\nଆପ ପିନିଂ ବ୍ୟବହାର କରିବାକୁ: 	\n{0,number,integer}. ଆପ ପିନିଂ ଚାଲୁ କରନ୍ତୁ 	\n{1,number,integer}. ଓଭରଭ୍ୟୁ ଖୋଲନ୍ତୁ 	\n{2,number,integer}. ସ୍କ୍ରିନର ଶୀର୍ଷରେ ଥିବା ଆପ ଆଇକନରେ ଟାପ କରି \'ପିନ କରନ୍ତୁ\'ରେ ଟାପ କରନ୍ତୁ"</string>
     <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"କୌଣସି ଆପ ପିନ କରାଗଲେ, ପିନ ହୋଇଥିବା ଆପଟି ଅନ୍ୟ ଆପ୍ସକୁ ଖୋଲିପାରେ ଏବଂ ବ୍ୟକ୍ତିଗତ ଡାଟା ଆକ୍ସେସ ଯୋଗ୍ୟ ହୋଇପାରେ। \n\nଯଦି ଆପଣ କୌଣସି ବ୍ୟକ୍ତିଙ୍କ ସହ ଆପଣଙ୍କ ଡିଭାଇସକୁ ସୁରକ୍ଷିତ ଭାବେ ସେୟାର କରିବାକୁ ଚାହୁଁଛନ୍ତି, ତେବେ ଏହା ପରିବର୍ତ୍ତେ ଜଣେ ଅତିଥି ୟୁଜରଙ୍କୁ ବ୍ୟବହାର କରି ଦେଖନ୍ତୁ। \n\nଆପ ପିନିଂ ବ୍ୟବହାର କରିବାକୁ: 	\n{0,number,integer}। ଆପ ପିନିଂ ଚାଲୁ କରନ୍ତୁ 	\n{1,number,integer}। ଓଭରଭ୍ୟୁ ଖୋଲନ୍ତୁ 	\n{2,number,integer}। ସ୍କ୍ରିନର ଶୀର୍ଷରେ ଥିବା ଆପ ଆଇକନରେ ଟାପ କରି \'ପିନ କରନ୍ତୁ\'ରେ ଟାପ କରନ୍ତୁ"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"ଆପ ପିନ କରାଗଲେ: \n\n•		ବ୍ୟକ୍ତିଗତ ଡାଟାକୁ ଆକ୍ସେସ କରାଯାଇପାରେ \n		(ଯେପରି କଣ୍ଟାକ୍ଟ ଏବଂ ଇମେଲ ବିଷୟବସ୍ତୁ) \n•		ପିନ ହୋଇଥିବା ଆପ ଅନ୍ୟ ଆପଗୁଡ଼ିକୁ ଖୋଲିପାରେ \n\nକେବଳ ଆପଣ ବିଶ୍ୱାସ କରୁଥିବା ଲୋକମାନଙ୍କ ସହ ଆପ ପିନିଂ ବ୍ୟବହାର କରନ୍ତୁ।"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"ଅନ୍‌ପିନ୍‌ କରିବା ପୂର୍ବରୁ ଅନ୍‌ଲକ୍ ପାଟର୍ନ ପାଇଁ ପଚାରନ୍ତୁ"</string>
@@ -4424,6 +4445,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"ଅନୁମତିଗୁଡ଼ିକୁ କାଢ଼ି ଦିଅନ୍ତୁ, ଅସ୍ଥାୟୀ ଫାଇଲଗୁଡ଼ିକୁ ଡିଲିଟ କରନ୍ତୁ ଏବଂ ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକୁ ବନ୍ଦ କରନ୍ତୁ"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"ଆପକୁ ବ୍ୟବହାର କରାଯାଉନଥିଲେ ପରିଚାଳନା କରନ୍ତୁ"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"ଅନୁମତିଗୁଡ଼ିକୁ କାଢ଼ି ଦିଅନ୍ତୁ, ଅସ୍ଥାୟୀ ଫାଇଲଗୁଡ଼ିକୁ ଡିଲିଟ କରନ୍ତୁ, ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକୁ ବନ୍ଦ କରନ୍ତୁ ଏବଂ ଆପକୁ ଆର୍କାଇଭ କରନ୍ତୁ"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"ସବୁ ଆପ"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ଇନ୍‌ଷ୍ଟଲ୍‌ ହୋଇଥିବା ଆପ୍‌ଗୁଡ଼ିକ"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ଇନଷ୍ଟାଣ୍ଟ୍ ଆପ୍ସ"</string>
@@ -4431,7 +4458,7 @@
     <string name="advanced_apps" msgid="7643010673326578815">"ଉନ୍ନତ"</string>
     <string name="app_permissions" msgid="8666537659217653626">"ଅନୁମତି ପରିଚାଳକ"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"ଲୋକେସନ ପାଇଁ ଡାଟା ସେୟାରିଂ ଅପଡେଟଗୁଡ଼ିକ"</string>
-    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ଆପଣଙ୍କ ଲୋକେସନ ଡାଟା ସେୟାର କରିବାର ଉପାୟକୁ ପରିବର୍ତ୍ତନ କରିଥିବା ଆପ୍ସକୁ ସମୀକ୍ଷା କରନ୍ତୁ"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ଆପଣଙ୍କ ଲୋକେସନ ଡାଟା ସେୟାର କରିବାର ଉପାୟକୁ ପରିବର୍ତ୍ତନ କରିଥିବା ଆପ୍ସର ରିଭ୍ୟୁ କରନ୍ତୁ"</string>
     <string name="app_function_access_settings_title" msgid="1837117989202166166">"ଏଜେଣ୍ଟ"</string>
     <string name="app_function_access_settings_summary" msgid="3654291845453799170">"ଆପ୍ସରେ ସୂଚନାକୁ ଆକ୍ସେସ କରିପାରୁଥିବା କିମ୍ବା ପଦକ୍ଷେପ ନେଇପାରୁଥିବା ଏଜେଣ୍ଟ"</string>
     <string name="manage_agent_app_function_access_settings_title" msgid="2407736540086293094">"ଆପ ଆକ୍ସେସ"</string>
@@ -5665,6 +5692,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> ପାଇଁ 2G ଉପଲବ୍ଧ ହେବା ଆବଶ୍ୟକ"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"କେବଳ ଏନକ୍ରିପ୍ଟେଡ ନେଟୱାର୍କକୁ ଅନୁମତି ଦିଅ"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"ଏହା ଅଧିକ ସୁରକ୍ଷିତ ଅଟେ କିନ୍ତୁ କିଛି ଲୋକେସନରେ ଆପଣଙ୍କ ମୋବାଇଲ ନେଟୱାର୍କ କନେକ୍ସନକୁ ସୀମିତ କରିପାରେ। ଜରୁରୀକାଳୀନ କଲିଂକୁ ସର୍ବଦା ଅନୁମତି ଦିଆଯାଇଛି।"</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"ସମସ୍ତ ସେବା"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"କ୍ଲିପବୋର୍ଡ ଆକ୍ସେସ୍ ଦେଖାନ୍ତୁ"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"ଯେତେବେଳେ ଆପଣ କପି କରିଥିବା ଟେକ୍ସଟ୍, ଛବି କିମ୍ବା ଅନ୍ୟ ବିଷୟବସ୍ତୁକୁ ଆପଗୁଡ଼ିକ ଆକ୍ସେସ୍ କରେ, ସେତେବେଳେ ଏକ ମେସେଜ୍ ଦେଖାନ୍ତୁ"</string>
@@ -6095,6 +6136,15 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"କାର୍ଯ୍ୟ ସମୂର୍ଣ୍ଣ ହୋଇଛି"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"ସିକ୍ୟୁରିଟି ଏବଂ ଗୋପନୀୟତା କ୍ୱିକ ସେଟିଂସ"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"ଆପଣଙ୍କ ଗୋପନୀୟତା ନିୟନ୍ତ୍ରଣ"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"ଖୋଲନ୍ତୁ"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"ସ୍ୱିଚ କରନ୍ତୁ। <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>। <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"ବ୍ଲକ କରାଯାଇଛି"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"ଟୋଗଲ କରନ୍ତୁ"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"ମାଇକ ଆକ୍ସେସ"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"କେମେରା ଆକ୍ସେସ"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"ଲୋକେସନ ଆକ୍ସେସ"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"ପେୟାରିଂ"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> କନେକ୍ଟ କରାଯାଇଛି"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"ଡିଭାଇସକୁ ସ୍କାନ କରନ୍ତୁ"</string>
@@ -6117,4 +6167,6 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"କ୍ୱିକ ସେଟିଂସରେ ସେଟେଲାଇଟ ଟାଇଲ ଯୋଗ କରି ସେଟେଲାଇଟ ସୂଚନାକୁ ସହଜରେ ଆକ୍ସେସ କରନ୍ତୁ"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"ଟାଇଲ ଯୋଗ କରନ୍ତୁ"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"ସେଟେଲାଇଟ ଟାଇଲ ପ୍ରମ୍ପ୍ଟ"</string>
+    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <skip />
 </resources>

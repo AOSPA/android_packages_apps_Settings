@@ -17,13 +17,19 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.captionpreferences.ui.CaptioningAppearanceScreen;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /** Settings fragment containing font style of captioning properties. */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class CaptioningAppearanceFragment extends DashboardFragment {
 
@@ -36,7 +42,12 @@ public class CaptioningAppearanceFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.captioning_appearance;
+        return Flags.catalystCaptionPreferencesScreen() ? 0 : R.xml.captioning_appearance;
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NotNull Context context) {
+        return CaptioningAppearanceScreen.KEY;
     }
 
     @Override
@@ -50,6 +61,7 @@ public class CaptioningAppearanceFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.captioning_appearance);
+            new BaseSearchIndexProvider(
+                    Flags.catalystCaptionPreferencesScreen() ? 0 : R.xml.captioning_appearance);
 }
-
+// LINT.ThenChange(captionpreferences/ui/CaptioningAppearanceScreen.kt)

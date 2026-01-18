@@ -65,7 +65,7 @@ class DoubleTwistGestureApiFirstScreen :
                 }
             }
             set {
-                permissions(listOf(WRITE_SECURE_SETTINGS))
+                permissions(WRITE_SECURE_SETTINGS)
                 preconditions(R.string.double_twist_gesture_screen_set_preconditions) {
                     val userManager: UserManager? =
                         context.getSystemService(UserManager::class.java)

@@ -16,6 +16,8 @@
 
 package com.android.settings.gestures
 
+import android.Manifest.permission.WRITE_SECURE_SETTINGS
+import android.app.Application
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorManager
@@ -30,11 +32,11 @@ import com.android.settings.flags.Flags
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.HardwareUnsupportedException
+import com.android.settings.testutils2.MissingPermissionException
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.google.common.truth.Truth.assertThat
 import kotlin.test.assertFailsWith
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,12 +53,14 @@ class DoubleTwistGestureApiFirstScreenTest {
 
     private val tester = ApiTester(DoubleTwistGestureApiFirstScreen())
     private val context: Context = ApplicationProvider.getApplicationContext()
+    private val shadowApplication = shadowOf(context as Application)
 
     private val sensorManager = context.getSystemService(SensorManager::class.java)
     private val shadowSensorManager: ShadowSensorManager = shadowOf(sensorManager)
 
     @Before
     fun setUp() {
+        shadowApplication.grantPermissions(WRITE_SECURE_SETTINGS)
         SettingsShadowResources.overrideResource(R.string.gesture_double_twist_sensor_type, "test")
         SettingsShadowResources.overrideResource(
             R.string.gesture_double_twist_sensor_vendor,
@@ -100,7 +104,6 @@ class DoubleTwistGestureApiFirstScreenTest {
     }
 
     @Test
-    @Ignore("TODO: b/470893606 - Verify the root cause of b/470495568.")
     fun setMainSwitchPreference_noDoubleTwistSensor_throwsException() {
         ensureDoesNotHaveDoubleTwistSensor()
 
@@ -110,7 +113,6 @@ class DoubleTwistGestureApiFirstScreenTest {
     }
 
     @Test
-    @Ignore("TODO: b/470893606 - Verify the root cause of b/470495568.")
     fun setMainSwitchPreference_asTrue_returnOn() {
         tester.set(DoubleTwistGestureApiFirstScreen.MAIN_SWITCH_KEY, true)
 
@@ -122,7 +124,6 @@ class DoubleTwistGestureApiFirstScreenTest {
     }
 
     @Test
-    @Ignore("TODO: b/470893606 - Verify the root cause of b/470495568.")
     fun setMainSwitchPreference_asFalse_returnOff() {
         tester.set(DoubleTwistGestureApiFirstScreen.MAIN_SWITCH_KEY, false)
 
@@ -131,6 +132,15 @@ class DoubleTwistGestureApiFirstScreenTest {
                     .getInt(Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED)
             )
             .isEqualTo(DoubleTwistGestureApiFirstScreen.OFF)
+    }
+
+    @Test
+    fun setMainSwitchPreference_noPermission_throwsException() {
+        shadowApplication.denyPermissions(WRITE_SECURE_SETTINGS)
+
+        assertFailsWith<MissingPermissionException> {
+            tester.set(DoubleTwistGestureApiFirstScreen.MAIN_SWITCH_KEY, true)
+        }
     }
 
     private fun ensureHasDoubleTwistSensor() {

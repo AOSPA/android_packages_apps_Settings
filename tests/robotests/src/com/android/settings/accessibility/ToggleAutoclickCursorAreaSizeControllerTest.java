@@ -21,9 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.RadioGroup;
@@ -57,7 +54,6 @@ public class ToggleAutoclickCursorAreaSizeControllerTest {
 
     private static final String PREFERENCE_KEY = "accessibility_control_autoclick_cursor_area_size";
 
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Mock
     private Preference mPreference;
@@ -74,8 +70,7 @@ public class ToggleAutoclickCursorAreaSizeControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
-    public void getAvailabilityStatus_availableWhenFlagOn() {
+    public void getAvailabilityStatus_returnsAvailable() {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
@@ -90,13 +85,6 @@ public class ToggleAutoclickCursorAreaSizeControllerTest {
     }
 
     @Test
-    @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
-    public void getAvailabilityStatus_conditionallyUnavailableWhenFlagOn() {
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
     public void handlePreferenceTreeClick_dialogShows() {
         mController.handlePreferenceTreeClick(mPreference);
 
@@ -106,7 +94,6 @@ public class ToggleAutoclickCursorAreaSizeControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
     public void getProgress_matchesSetting_inRangeValue() {
         updateSetting(mController.RADIO_BUTTON_ID_TO_CURSOR_SIZE.get(
                 R.id.autoclick_cursor_area_size_value_extra_large));

@@ -21,6 +21,7 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceIconProvider
@@ -33,9 +34,12 @@ class ManageAccountsScreen : PreferenceScreenMixin, PreferenceIconProvider {
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = Flags.enableAccountsAndBackupScreen()
+
     // TODO(b/446191970): Add search keywords.
     override val keywords: Int
-        get() = 0
+        get() = if (Flags.enableAccountsAndBackupScreen()) R.string.keywords_accounts else 0
 
     override val title: Int
         get() = R.string.accounts_and_backup_manage_accounts_title
@@ -59,13 +63,7 @@ class ManageAccountsScreen : PreferenceScreenMixin, PreferenceIconProvider {
         context: Context,
         coroutineScope: CoroutineScope,
     ): PreferenceHierarchy {
-        return preferenceHierarchy(context) {
-            +PreferenceCategory(
-                key = "accounts_and_backup_backup_category",
-                purpose = R.string.backup_category_purpose,
-                title = R.string.accounts_and_backup_backup_category_title,
-            )
-        }
+        return preferenceHierarchy(context) {}
     }
 
     companion object {

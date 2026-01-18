@@ -356,7 +356,7 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Ajouter du texte sur l\'écran"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Aucun"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Exemple : Android de Jean"</string>
-    <string name="location_settings_title" msgid="8375074508036087178">"Localisation"</string>
+    <string name="location_settings_title" msgid="8375074508036087178">"Position"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Utiliser la localisation"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Désactivé"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activé / # appli a accès à la position}one{Activé / # appli a accès à la position}other{Activé / # applis ont accès à la position}}"</string>
@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Configurer le déverrouillage par reconnaissance faciale"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Utiliser pour"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Visage"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Utiliser le visage pour"</string>
@@ -702,9 +701,9 @@
     <string name="private_space_setup_title" msgid="2272968244329821450">"Espace privé"</string>
     <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Masquez ou verrouillez vos applis privées en les regroupant dans un espace séparé. Pour plus de sécurité, utilisez un compte Google dédié."</string>
     <string name="private_space_setup_sub_header" msgid="550476876393954356">"Fonctionnement"</string>
-    <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"Créer un compte Google pour votre espace"</b>\n"En utilisant un compte dédié, vous empêchez les fichiers, photos et e-mails synchronisés d\'apparaître en dehors de votre espace"</string>
-    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Configurer un verrouillage"</b>\n"Verrouillez votre espace afin que personne ne puisse y accéder."</string>
-    <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Installer les applis"</b>\n"Installez les applis que vous souhaitez garder privées dans votre espace"</string>
+    <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"Créez un compte Google pour votre espace"</b>\n"En utilisant un compte dédié, vous empêchez les fichiers, photos et e-mails synchronisés d\'apparaître en dehors de votre espace"</string>
+    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Activez le verrouillage"</b>\n"Verrouillez votre espace afin que personne ne puisse y accéder."</string>
+    <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Installez les applis"</b>\n"Installez les applis que vous souhaitez garder privées dans votre espace"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"À noter"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Les applis s\'arrêtent lorsque vous verrouillez votre espace"</b>\n"Lorsque vous verrouillez votre espace, les applis qui s\'y trouvent s\'arrêtent et vous ne recevez plus de notifications de leur part"</string>
     <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Les espaces privés ne sont pas adaptés aux applis qui doivent s\'exécuter en arrière-plan ou envoyer des notifications critiques, comme les applis médicales. En effet, les notifications et les activités en arrière-plan sont interrompues lorsque votre espace est verrouillé.\n\nLes applis contenues dans votre espace privé n\'apparaissent pas dans le gestionnaire d\'autorisations, dans le tableau de bord Confidentialité ni dans d\'autres paramètres quand votre espace privé est verrouillé.\n\nVotre espace privé ne peut pas être transféré vers un nouvel appareil. Si vous souhaitez l\'utiliser sur un autre appareil, vous devrez configurer un nouvel espace privé.\n\nQuiconque connecte votre appareil à un ordinateur ou y installe des applis malveillantes peut avoir accès à votre espace privé."</string>
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Désactivé"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"Type de réseau de données mobiles"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Type de réseau vocal mobile"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Informations sur l\'opérateur"</string>
@@ -1822,7 +1825,7 @@
     <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Changement d\'heure programmé"</string>
     <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Recevoir une notification lorsque votre horloge effectue un changement programmé, par exemple pour l\'heure d\'été"</string>
     <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"dst, heure d\'été, passage à l\'heure d\'été, changement d\'heure, changement d\'heure programmé"</string>
-    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Modification suivante"</string>
+    <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"Prochain changement"</string>
     <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"Aucune modification planifiée"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Informations légales, état et version du logiciel"</string>
     <string name="legal_information" msgid="7509900979811934843">"Informations légales"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Valider le code"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Valider le mot de passe"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Validez votre identité"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Pour transférer les comptes Google, les paramètres et plus, saisissez le schéma de votre autre appareil. Votre schéma est chiffré."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Pour transférer les comptes Google, les paramètres et plus, saisissez le code de votre autre appareil. Votre code est chiffré."</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Pour transférer les comptes Google, les paramètres et plus, saisissez le mot de passe de votre autre appareil. Votre mot de passe est chiffré."</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Utiliser aussi schéma pour déverrouiller appareil"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Utiliser aussi le code pour déverrouiller cet appareil"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Utiliser aussi mot de passe pour déverrouiller appareil"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Valider le schéma"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Valider le code"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Valider le mot de passe"</string>
@@ -2533,6 +2542,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Réglages rapides"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Balayez votre écran depuis le bord supérieur vers le bas}one{Balayez votre écran depuis le bord supérieur vers le bas avec # doigt}other{Balayez votre écran depuis le bord supérieur vers le bas avec # doigts}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Balayez votre écran de haut en bas. Ce raccourci sera disponible une fois que vous aurez fini de configurer votre appareil.}one{Balayez votre écran de haut en bas avec # doigt. Ce raccourci sera disponible une fois que vous aurez fini de configurer votre appareil.}other{Balayez votre écran de haut en bas avec # doigts. Ce raccourci sera disponible une fois que vous aurez fini de configurer votre appareil.}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Réglages rapides"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Boutons de volume"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"boutons de volume"</string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Autres utilisateurs"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Supprimer l\'activité des invités"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Supprimer toutes les applis et données des invités quand ils quittent le mode Invité"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Supprimer l\'activité ?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Les applis et données de cette session Invité seront immédiatement supprimées, et toute l\'activité des futures sessions sera supprimée à chaque fois que vous quitterez le mode Invité"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"supprimer, invité, activité, enlever, données, visiteur, effacer"</string>
@@ -3936,6 +3955,8 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Obtenir un résumé rapide des messages plus longs"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Utiliser les résumés de notifications"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Obtenez des résumés rapides de longs messages et de conversations de groupe.\n\nLes résumés utilisent l\'IA de votre appareil, qui peut parfois se tromper. Vos messages ne sont jamais envoyés à Google."</string>
+    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Les notifications de conversation de ces applis ne seront pas résumées"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Gérer les applications"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Gérer les applis pour les résumés de notifications"</string>
@@ -4424,6 +4445,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Retirer les autorisations, supprimer les fichiers temporaires et arrêter les notifications"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Gérer l\'appli si inutilisée"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Retirer les autorisations, supprimer les fichiers temporaires, arrêter les notifications et archiver l\'appli"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Toutes les applis"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Applications installées"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Applis instantanées"</string>
@@ -5664,6 +5691,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> nécessite que la 2G soit disponible"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Autoriser uniquement les réseaux chiffrés"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Cette option est plus sécurisée mais peut limiter votre connexion au réseau mobile dans certains endroits. Les appels d\'urgence sont toujours autorisés."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Tous les services"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Afficher les accès au presse-papiers"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Afficher un message lorsque les applis accèdent à du texte, à des images ou à d\'autres contenus que vous avez copiés"</string>
@@ -6094,6 +6135,15 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Action terminée"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Réglages rapides de sécurité et de confidentialité"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Vos paramètres de confidentialité"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Ouvrir"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Bouton bascule. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"Bloqué"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"Activer/Désactiver"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"Accès au micro"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"Accès à l\'appareil photo"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"Accès à la position"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Association"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> connecté"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Analyser l\'appareil"</string>
@@ -6116,4 +6166,6 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Accédez facilement aux informations satellite en ajoutant le bloc \"Satellite\" aux Réglages rapides"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Ajouter une carte"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Suggestions relatives au bloc Satellite"</string>
+    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <skip />
 </resources>

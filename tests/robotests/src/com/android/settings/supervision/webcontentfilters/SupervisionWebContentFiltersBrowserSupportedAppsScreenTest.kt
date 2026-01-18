@@ -155,7 +155,7 @@ class SupervisionWebContentFiltersBrowserSupportedAppsScreenTest {
             val viewHolder = recyclerView.findViewHolderForAdapterPosition(position)!!
             val footerLinkView =
                 viewHolder.itemView.findViewById<TextView>(
-                    com.android.settingslib.widget.theme.R.id.settingslib_expressive_link_footer
+                    com.android.settingslib.widget.theme.R.id.settingslib_expressive_footer_text
                 )
             // TODO: b/465520347 - Remove the null check once a solution is found.
             if (footerLinkView != null) {

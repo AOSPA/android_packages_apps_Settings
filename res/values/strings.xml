@@ -700,6 +700,10 @@
     <string name="action_drag_label_move_bottom">Move to bottom</string>
     <!-- Label for an accessibility action that removes the currently selected language from the the ordered language list [CHAR LIMIT=20] -->
     <string name="action_drag_label_remove">Remove language</string>
+    <!-- Description for the set default system language in ApiFirstScreen-->
+    <string name="default_system_language_description" translatable="false">Language code of the chosen language</string>
+    <!-- Description for the set default system grammatical gender in ApiFirstScreen-->
+    <string name="default_system_grammatical_gender_description" translatable="false">Index of the chosen grammatical gender</string>
 
     <!-- The title of the dialog to pick an activity.  This is shown when there are multiple activities that can do a particular action.  For example, suppose you click on the "Share" menu item in the Browser.  Since you can share the webpage URL via many communication methods, this dialog would come up with choices like "Email", "IM", etc.  This is a generic message, and the previous example is a single possible scenario (so please don't assume it's for the browser or anything :) ). -->
     <string name="activity_picker_label">Choose activity</string>
@@ -2349,7 +2353,7 @@
     <string name="nfc_quick_toggle_title">NFC</string>
 
     <!-- Used in the settings screen to secure NFC [CHAR LIMIT=NONE] -->
-    <string name="nfc_secure_settings_title">Require device unlock for NFC</string>
+    <string name="nfc_secure_settings_title">Require device unlock</string>
 
     <!-- Used to enter the Android Beam sharing preferences screen. This phrase is a trademark. [CHAR LIMIT=32] -->
     <string name="android_beam_settings_title">Android Beam</string>
@@ -10849,6 +10853,13 @@
          This is not translatable because it's the technical name for the technology. -->
     <string name="keywords_memtag" translatable="false">MTE, Memory Tagging Extension</string>
 
+    <!-- [CHAR LIMIT=NONE] Label for Android OS Diagnostics setting. -->
+    <string name="binary_transparency_title">Android OS Diagnostics</string>
+    <!-- [CHAR LIMIT=NONE] Summary for Android OS Diagnostics setting. -->
+    <string name="binary_transparency_summary">Validate OS builds</string>
+    <!-- [CHAR LIMIT=NONE] Search keywords for Android OS Diagnostics app. -->
+    <string name="keywords_binary_transparency">diagnostics, transparency, binary</string>
+
     <!-- Opening string on the dialog that prompts the user to confirm that they really want to delete their existing work profile. The administration app icon and name appear after the final colon. [CHAR LIMIT=NONE] -->
     <string name="opening_paragraph_delete_profile_unknown_company">This work profile is managed by:</string>
     <!-- Summary for work profile accounts group. [CHAR LIMIT=25] -->
@@ -14708,6 +14719,16 @@
     <!-- [CHAR LIMIT=NONE] Warning description for app info aspect ratio page -->
     <string name="app_aspect_ratio_footer">The app will restart when you change aspect ratio. You may lose unsaved changes. Some apps may not be optimized for certain aspect ratios.</string>
 
+    <!--
+        [CHAR LIMIT=60] The app info app experience category label. Options that change user
+        experience of the app, such as the virtual gamepad option, may go into this category.
+    -->
+    <string name="app_info_experience_category">Experience</string>
+
+    <!-- Virtual Gamepad user override -->
+    <!-- [CHAR LIMIT=60] Virtual gamepad setting to enable or disable the gamepad. -->
+    <string name="virtual_gamepad_title">Gamepad</string>
+
     <!-- Accessibility label for fingerprint sensor [CHAR LIMIT=NONE] -->
     <string name="accessibility_fingerprint_label">Fingerprint sensor</string>
 
@@ -15520,7 +15541,29 @@
     <string name="satellite_tile_prompt_channel_title">Satellite Tile Prompts</string>
     <!-- Text displayed inside the Satellite Icon chip. [CHAR LIMIT=3]  -->
     <string name="satellite_icon_text">SAT</string>
+    <!-- Satellite warning banners -->
+    <!-- Title for the satellite unavailable warning banner. [CHAR LIMIT=50] -->
+    <string name="satellite_not_available_warning_title">Satellite not available</string>
+    <!-- Summary for the satellite cellular network warning banner. [CHAR LIMIT=NONE] -->
+    <string name="satellite_network_connected_warning_summary">Satellite coverage is not available while you are connected to a mobile or Wi\u2011Fi network.</string>
+    <!-- Summary for the satellite unavailable in region warning banner. [CHAR LIMIT=NONE] -->
+    <string name="satellite_unavailable_in_region_warning_summary">Satellite connectivity isn\'t available in this country or region.</string>
+    <!-- Summary for the generic satellite unavailable warning banner when the satellite is not supported for an unspecified reason. [CHAR_LIMIT=NONE] -->
+    <string name="satellite_unavailable_generic_warning_summary"> Satellite connectivity isn\'t available right now. Please try again later.</string>
+    <!-- Summary for the satellite plan warning banner. [CHAR LIMIT=NONE] -->
+    <string name="satellite_plan_warning_summary">Your mobile plan does not include satellite coverage. Contact your carrier for help.</string>
+    <!-- Summary for the satellite default app warning banner. [CHAR LIMIT=NONE] -->
+    <string name="satellite_default_app_warning_summary">To use Satellite messaging, Google Messages must be your default messaging app.</string>
+    <!-- Summary for the satellite carrier enabled info banner. [CHAR LIMIT=NONE] -->
+    <string name="satellite_carrier_enabled_info_summary">Satellite connectivity is enabled by your carrier. Learn more from your carrier\'s satellite settings.</string>
+    <!-- Button text for the satellite unavailable warning banner. [CHAR LIMIT=50] -->
+    <string name="satellite_view_coverage_button">View available locations</string>
+    <!-- Button text for the change default app warning banner. [CHAR LIMIT=50] -->
+    <string name="satellite_change_default_app_button">Change default app</string>
+    <!-- Button text for the view carrier settings info banner. [CHAR LIMIT=50] -->
+    <string name="satellite_view_carrier_settings_button">View carrier settings</string>
 
+    <string name="long_press_power_actions_description" translatable="false">Actions that can be performed when the power button is long pressed</string>
     <string name="long_press_power_assistant_sensitivity_ms_description" translatable="false">A length of time in ms.</string>
     <string name="long_press_power_category_precondition" translatable="false">Requires that long pressing the power button can be configured for Assistant</string>
     <string name="long_press_power_category_unavailable" translatable="false">This device does not support setting the power button to open assistant on long press</string>

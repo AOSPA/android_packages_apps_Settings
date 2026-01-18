@@ -301,7 +301,7 @@
     <string name="activity_picker_label" msgid="351250401590691126">"Sélectionnez une activité"</string>
     <string name="cancel" msgid="5780102414089664898">"Annuler"</string>
     <string name="okay" msgid="4827099303045669054">"OK"</string>
-    <string name="forget" msgid="3754013654135912783">"Oublier"</string>
+    <string name="forget" msgid="3754013654135912783">"Retirer"</string>
     <string name="save" msgid="3125033126936493822">"Enregistrer"</string>
     <string name="done" msgid="7497982645646431310">"Terminé"</string>
     <string name="apply" msgid="7834684883190163536">"Appliquer"</string>
@@ -425,7 +425,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Configurer le Déverrouillage par reconnaissance faciale"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Utiliser pour"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Visage"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Utilisation du visage"</string>
@@ -434,7 +433,7 @@
     <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
     <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Toujours demander une confirmation"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Toujours confirmer le Déverrouillage par reconnaissance faciale dans les applis"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Toujours confirmer le Déverrouillage par reconnaissance faciale dans les applis."</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Supprimer le modèle facial"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Config. le Déverr. par reconn. faciale"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Supprimer le modèle facial?"</string>
@@ -1558,6 +1557,10 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Désactivée"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <!-- no translation found for status_gid1 (2412033683972134982) -->
+    <skip />
+    <!-- no translation found for status_carrier_id (1053322454411977469) -->
+    <skip />
     <string name="status_data_network_type" msgid="3689772955330665876">"Type de réseau de données cellulaires"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Type de réseau vocal cellulaire"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Informations sur l\'opérateur"</string>
@@ -1842,9 +1845,9 @@
     <string name="settings_license_activity_unavailable" msgid="9014803774391134570">"Un problème est survenu lors du chargement des licences."</string>
     <string name="settings_license_activity_loading" msgid="1653151990366578827">"Chargement en cours..."</string>
     <string name="settings_safetylegal_activity_loading" msgid="1757860124583063395">"Chargement en cours..."</string>
-    <string name="lockpassword_choose_your_password_header" msgid="2407205113298094824">"Définissez un mot de passe"</string>
+    <string name="lockpassword_choose_your_password_header" msgid="2407205113298094824">"Définir un mot de passe"</string>
     <string name="lockpassword_choose_your_profile_password_header" msgid="7038997227611893312">"Définir un mot de passe professionnel"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Définissez un NIP"</string>
+    <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Définir un NIP"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Définir un NIP professionnel"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Définir un schéma"</string>
     <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Pour renforcer la sécurité, définissez un schéma pour déverrouiller l\'appareil"</string>
@@ -1895,12 +1898,18 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Vérifier le NIP"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Vérifier le mot de passe"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Confirmez votre identité"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Pour transférer des comptes Google, des paramètres et autres, entrez le schéma de votre autre appareil. Votre schéma est chiffré."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Pour transférer des comptes Google, des paramètres et plus encore, entrez le NIP de votre autre appareil. Votre NIP est chiffré."</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Pour transférer des comptes Google, des paramètres et autres, entrez le mot de passe de votre autre appareil. Votre mot de passe est chiffré."</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Utiliser un schéma pour déverr. l\'appareil"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Utiliser le NIP pour déverr. l\'appareil"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Utiliser un mot de passe pour déverr. l\'appareil"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
+    <skip />
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Vérifier le schéma"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Vérifier le NIP"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Vérifier le mot de passe"</string>
@@ -2533,6 +2542,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Paramètres rapides"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Balayez l\'écran du haut vers le bas}one{Balayez l\'écran du haut vers le bas avec # doigt}other{Balayez l\'écran du haut vers le bas avec # doigts}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Balayez l\'écran du haut vers le bas. Ce raccourci sera accessible quand vous aurez terminé de configurer l\'appareil.}one{Balayez l\'écran du haut vers le bas avec # doigt. Ce raccourci sera accessible quand vous aurez terminé de configurer l\'appareil.}other{Balayez l\'écran du haut vers le bas avec # doigts. Ce raccourci sera accessible quand vous aurez terminé de configurer l\'appareil.}}"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
+    <skip />
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Paramètres rapides"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Touches de volume"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"touches de volume"</string>
@@ -2549,7 +2562,7 @@
     <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Raccourci des touches de volume"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Paramètres du raccourci"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Raccourci des touches de volume sur l\'écran de verrouillage"</string>
-    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Autorisez l\'activation du raccourci de fonctionnalité depuis l\'écran de verrouillage. Maintenez enfoncées les deux touches de volume pendant quelques secondes."</string>
+    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Autorisez l\'activation du raccourci de fonctionnalité depuis l\'écran de verrouillage; maintenez enfoncées les deux touches de volume pendant quelques secondes"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Bouton d\'accessibilité"</string>
     <string name="accessibility_button_intro_text" msgid="80993874471745687">"Accédez rapidement aux fonctionnalités d\'accessibilité à partir de n\'importe quel écran"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"À propos du bouton d\'accessibilité"</string>
@@ -2734,7 +2747,7 @@
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Améliore la compatibilité avec les phonocapteurs et réduit les bruits indésirables"</string>
     <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"À propos des appareils auditifs"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"Pour trouver d\'autres appareils auditifs qui ne sont pas pris en charge par ASHA ou LE Audio, touchez &lt;b&gt;Associer un autre appareil&lt;b&gt; &gt; &lt;b&gt;Afficher d\'autres appareils&lt;b&gt;"</string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"Pour trouver d\'autres appareils auditifs qui ne sont pas pris en charge par ASHA ou LE Audio, touchez &lt;b&gt;Associer un appareil&lt;b&gt; &gt; &lt;b&gt;Afficher d\'autres appareils&lt;b&gt;"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"Pour trouver d\'autres appareils auditifs qui ne sont pas pris en charge par ASHA ou LE Audio, touchez "<b>"Associer un autre appareil"</b>", puis "<b>"Afficher d\'autres appareils"</b></string>
     <string name="accessibility_hearing_device_footer_asha_only_summary" msgid="3377169209330540616">"Pour trouver d\'autres appareils auditifs qui ne sont pas pris en charge par ASHA, touchez &lt;b&gt;Associer un nouvel appareil&lt;/b&gt; &gt; &lt;b&gt;Afficher d\'autres appareils&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_asha_only_summary_tts" msgid="8192971114504608531">"Pour trouver d\'autres appareils auditifs qui ne sont pas pris en charge par ASHA, touchez "<b>"Associer un appareil"</b>", puis "<b>"Afficher d\'autres appareils"</b></string>
@@ -3466,6 +3479,12 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Autres utilisateurs"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Supprimer l\'activité d\'invité"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Supprimez toutes les applis et données d\'invité en quittant le mode Invité"</string>
+    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
+    <skip />
+    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
+    <skip />
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Supprimer l\'activité d\'invité?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Les applis et les données de cette session d\'invité seront supprimées maintenant, et toutes les activités d\'invité futures seront supprimées chaque fois que vous quitterez le mode Invité"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"supprimer, invité, activité, retirer, données, visiteur, effacer"</string>
@@ -3936,6 +3955,8 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Obtenez des récapitulations rapides de messages plus longs"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Utiliser les résumés des notifications"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Résumez les longs messages et les conversations de groupe pour obtenir des récapitulations rapides.\n\nLes résumés utilisent l\'IA sur votre appareil, et peut parfois faire des erreurs. Vos messages ne sont jamais envoyés à Google."</string>
+    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Les notifications de ces applis ne seront pas résumées"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Gérer les applis"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Gérer les applis pour les résumés de notifications"</string>
@@ -4424,6 +4445,12 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Retirer les autorisations, supprimer les fichiers temporaires et arrêter les notifications"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Gérer l\'appli si inutilisée"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Retirez les autorisations, supprimez les fichiers temporaires, arrêtez les notifications et archivez l\'appli"</string>
+    <!-- no translation found for task_continuity_category (3736049711007817178) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
+    <skip />
+    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Toutes les applis"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Applis installées"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Applis instantanées"</string>
@@ -5664,6 +5691,20 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> requiert que la 2G soit activée"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Autoriser seulement les réseaux chiffrés"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Cette option est plus sûre, mais peut limiter votre connexion au réseau cellulaire dans certains endroits. Les appels d\'urgence sont toujours autorisés."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
+    <skip />
+    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Tous les services"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Afficher l\'accès au presse-papiers"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Un message s\'affiche lorsque les applis accèdent à du texte, à des images ou à d\'autres contenus que vous avez copiés"</string>
@@ -6094,6 +6135,15 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Action terminée"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Paramètres rapides de sécurité et de confidentialité"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Paramètres de confidentialité"</string>
+    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
+    <skip />
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Ouvrir"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Commutateur. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"Bloqué"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"Basculer"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"Accès au microphone"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"Accès à l\'appareil photo"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"Accès à la position"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Association en cours…"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Appareil <xliff:g id="DEVICE_NAME">%1$s</xliff:g> connecté"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Analyser l\'appareil"</string>
@@ -6116,4 +6166,6 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Accédez facilement aux informations sur les satellites en ajoutant la tuile Satellite aux Paramètres rapides"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Ajouter la tuile"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Requêtes de la tuile satellite"</string>
+    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <skip />
 </resources>
