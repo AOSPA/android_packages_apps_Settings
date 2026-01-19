@@ -25,7 +25,6 @@ import com.android.internal.app.LocaleStore;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
 
-import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
@@ -38,7 +37,7 @@ public class NumberingSystemController extends BasePreferenceController {
         super(context, preferenceKey);
         // Initialize the supported languages to LocaleInfos
         LocaleStore.fillCache(context);
-        mLocaleList = getNumberingSystemLocale();
+        mLocaleList = getNumberingSystemLocales();
     }
 
     /**
@@ -57,29 +56,17 @@ public class NumberingSystemController extends BasePreferenceController {
         return mLocaleList.isEmpty() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
-    private static LocaleList getNumberingSystemLocale() {
-        LocaleList localeList = LocaleList.getDefault();
-        Set<Locale> localesHasNumberingSystems = new HashSet<>();
-        for (int i = 0; i < localeList.size(); i++) {
-            Locale locale = localeList.get(i);
-            LocaleStore.LocaleInfo localeInfo = LocaleStore.getLocaleInfo(locale);
-            if (localeInfo.hasNumberingSystems()) {
-                localesHasNumberingSystems.add(locale);
-            }
-        }
-        return convertToLocaleList(localesHasNumberingSystems);
-    }
-
-    private static LocaleList convertToLocaleList(Set<Locale> locales) {
-        if (locales.isEmpty()) {
+    private static LocaleList getNumberingSystemLocales() {
+        Set<Locale> localeList = RegionalPreferencesDataUtils.getNumberingSystemLocales();
+        if (localeList.isEmpty()) {
             return LocaleList.getEmptyLocaleList();
         }
-        return new LocaleList(locales.stream().toArray(Locale[]::new));
+        return new LocaleList(localeList.stream().toArray(Locale[]::new));
     }
 
     @Override
     @NonNull
     public CharSequence getSummary() {
-        return new LocaleFeatureProviderImpl().getLocaleNames(getNumberingSystemLocale());
+        return new LocaleFeatureProviderImpl().getLocaleNames(getNumberingSystemLocales());
     }
 }

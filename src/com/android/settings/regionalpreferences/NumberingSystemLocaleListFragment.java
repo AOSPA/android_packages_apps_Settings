@@ -16,12 +16,12 @@
 
 package com.android.settings.regionalpreferences;
 
+import static com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.getNumberingSystemLocales;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.LocaleList;
 
-import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -29,10 +29,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Set;
 
 /** Provides locale list for numbering system settings. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -70,25 +67,9 @@ public class NumberingSystemLocaleListFragment extends DashboardFragment {
             new BaseSearchIndexProvider(R.xml.regional_preference_numbering_system_page) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    if (isEmptyNumberingSystemLocale()) {
-                        return false;
-                    }
-                    return true;
+                    return !getNumberingSystemLocales().isEmpty();
                 }
             };
-
-    private static boolean isEmptyNumberingSystemLocale() {
-        LocaleList localeList = LocaleList.getDefault();
-        Set<Locale> localesHasNumberingSystems = new HashSet<>();
-        for (int i = 0; i < localeList.size(); i++) {
-            Locale locale = localeList.get(i);
-            LocaleStore.LocaleInfo localeInfo = LocaleStore.getLocaleInfo(locale);
-            if (localeInfo.hasNumberingSystems()) {
-                localesHasNumberingSystems.add(locale);
-            }
-        }
-        return localesHasNumberingSystems.isEmpty();
-    }
 
     private static Bundle getExtraData() {
         Bundle extra = new Bundle();
