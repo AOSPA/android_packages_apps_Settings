@@ -127,7 +127,7 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
             toSettingsPreferenceValue(params.value, currentValue?.type)
                 ?: return SetDeviceStateItemResponse(
                     isSuccessful = false,
-                    currentValue = "",
+                    currentValue = settingsPreferenceValueToString(currentValue),
                     failureReason = "Unsupported value type or value",
                 )
 
@@ -142,8 +142,8 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
                         continuation.resume(
                             SetDeviceStateItemResponse(
                                 isSuccessful = result.resultCode == SetValueResult.RESULT_OK,
-                                // TODO(b/461469319): Set the current value
-                                currentValue = "",
+                                currentValue =
+                                    settingsPreferenceValueToString(settingsPreferenceValue),
                             )
                         )
                     }
