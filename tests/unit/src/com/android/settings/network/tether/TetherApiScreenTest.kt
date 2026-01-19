@@ -21,16 +21,36 @@ import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
+import com.android.settings.network.tether.TetherApiScreen.Companion.USB_TETHER_KEY
+import com.android.settings.network.tether.TetheringRepository.TetherType
+import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils2.ApiTester
+import com.android.settings.wifi.factory.WifiFeatureProvider
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.runBlocking
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class TetherApiScreenTest {
-    private val tester = ApiTester(TetherApiScreen())
+
     @get:Rule val setFlagsRule = SetFlagsRule()
+    private val mockTetheringRepository = mock<TetheringRepository>()
+    private lateinit var provider: WifiFeatureProvider
+    private lateinit var tester: ApiTester
+
+    @Before
+    fun setUp() {
+        provider = FakeFeatureFactory.setupForTest().wifiFeatureProvider
+        provider.stub { on { tetheringRepository } doReturn mockTetheringRepository }
+        tester = ApiTester(TetherApiScreen())
+    }
 
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
@@ -42,5 +62,37 @@ class TetherApiScreenTest {
     @DisableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getScreen_flagDisabled_isNull() {
         assertThat(tester.getScreen()).isNull()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBoolean_noUsbTethering_returnFalse() {
+        mockTetheringRepository.stub { onBlocking { isEnabled(TetherType.USB) } doReturn false }
+
+        assertThat(tester.get<Boolean>(USB_TETHER_KEY)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBoolean_hasUsbTethering_returnTrue() {
+        mockTetheringRepository.stub { onBlocking { isEnabled(TetherType.USB) } doReturn true }
+
+        assertThat(tester.get<Boolean>(USB_TETHER_KEY)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBoolean_enableUsbTethering_verifyEnable() = runBlocking {
+        tester.set(USB_TETHER_KEY, true)
+
+        verify(mockTetheringRepository).setEnabled(TetherType.USB, true)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBoolean_disableUsbTethering_verifyDisable() = runBlocking {
+        tester.set(USB_TETHER_KEY, false)
+
+        verify(mockTetheringRepository).setEnabled(TetherType.USB, false)
     }
 }
