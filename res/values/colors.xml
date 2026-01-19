@@ -196,6 +196,20 @@
     <!-- Fingerprint enrollment color -->
     <color name="fingerprint_enrollment_finish_color_outline">#1A73E8</color>
 
+    <!-- Fingerprint sensor guided enrollment fill colors -->
+    <color name="fingerprint_enrollment_fp_captured_color">#d2e3fc</color> <!-- Blue 100 -->
+    <color name="fingerprint_enrollment_fp_error_color">#fad2cf</color> <!-- Red 100 -->
+    <color name="fingerprint_enrollment_progress_bar_bg_color">#E8EAED</color> <!-- Gray 200 -->
+    <color name="fingerprint_enrollment_progress_bar_fill_color">#1a73e8</color> <!-- Blue 600 -->
+    <color name="fingerprint_enrollment_progress_bar_error_color">#d93025</color> <!-- Red 600 -->
+
+    <!-- Fingerprint sensor guided enrollment fill colors for expressive style -->
+    <color name="fingerprint_enrollment_fp_captured_color_expressive">@android:color/system_primary_light</color>
+    <color name="fingerprint_enrollment_fp_error_color_expressive">@android:color/system_on_error_container_light</color>
+    <color name="fingerprint_enrollment_progress_bar_bg_color_expressive">@android:color/system_outline_variant_light</color>
+    <color name="fingerprint_enrollment_progress_bar_fill_color_expressive">@android:color/system_primary_light</color>
+    <color name="fingerprint_enrollment_progress_bar_error_color_expressive">@android:color/system_error_container_light</color>
+
     <!-- Side fingerprint sensor guided enrollment fill colors -->
     <color name="sfps_enrollment_fp_captured_color">#d2e3fc</color> <!-- Blue 100 -->
     <color name="sfps_enrollment_fp_error_color">#fad2cf</color> <!-- Red 100 -->
