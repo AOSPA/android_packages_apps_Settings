@@ -16,7 +16,10 @@
 
 package com.android.settings.users
 
-import android.Manifest
+import android.Manifest.permission.CREATE_USERS
+import android.Manifest.permission.GET_ACCOUNTS_PRIVILEGED
+import android.Manifest.permission.MANAGE_USERS
+import android.Manifest.permission.QUERY_USERS
 import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
@@ -94,8 +97,89 @@ class UserSettingsScreenApiTest {
     @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun getEnableGuestCalling_doesNotHaveManageUsersPermission_fails() {
         val application: Application = ApplicationProvider.getApplicationContext()
-        shadowOf(application).denyPermissions(Manifest.permission.MANAGE_USERS)
+        shadowOf(application).denyPermissions(MANAGE_USERS)
         assertFailsWith<MissingPermissionException> { tester.get("enable_guest_calling") }
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getMainSwitch_missingPermission_fails() {
+        val application: Application = ApplicationProvider.getApplicationContext()
+        shadowOf(application).denyPermissions(MANAGE_USERS, CREATE_USERS, QUERY_USERS)
+        assertFailsWith<MissingPermissionException> { tester.get("multiple_users_main_switch") }
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getMainSwitch_returnsExpectedResult() {
+        val application: Application = ApplicationProvider.getApplicationContext()
+        shadowOf(application).grantPermissions(MANAGE_USERS, CREATE_USERS, QUERY_USERS)
+        val allowChangeUserSwitcherResId = R.bool.config_allowChangeUserSwitcherEnabled
+        SettingsShadowResources.overrideResource(allowChangeUserSwitcherResId, true)
+
+        shadowUserManager.setUserSwitcherEnabled(true)
+        assertThat(tester.get<AnyBoolean>("multiple_users_main_switch")).isEqualTo(true)
+
+        shadowUserManager.setUserSwitcherEnabled(false)
+        assertThat(tester.get<AnyBoolean>("multiple_users_main_switch")).isEqualTo(false)
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun setMainSwitch_setsExpectedResult() {
+        val application: Application = ApplicationProvider.getApplicationContext()
+
+        shadowOf(application).grantPermissions(MANAGE_USERS, CREATE_USERS, QUERY_USERS)
+        val allowChangeUserSwitcherResId = R.bool.config_allowChangeUserSwitcherEnabled
+        SettingsShadowResources.overrideResource(allowChangeUserSwitcherResId, true)
+
+        tester.set("multiple_users_main_switch", false)
+        assertThat(
+                Settings.Global.getInt(
+                    context.contentResolver,
+                    Settings.Global.USER_SWITCHER_ENABLED,
+                )
+            )
+            .isEqualTo(0)
+
+        tester.set("multiple_users_main_switch", true)
+        assertThat(
+                Settings.Global.getInt(
+                    context.contentResolver,
+                    Settings.Global.USER_SWITCHER_ENABLED,
+                )
+            )
+            .isEqualTo(1)
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getUserName_returnsExpectedValue() {
+        // Set up precondition requirements to pass
+
+        val application: Application = ApplicationProvider.getApplicationContext()
+        shadowOf(application)
+            .grantPermissions(MANAGE_USERS, CREATE_USERS, QUERY_USERS, GET_ACCOUNTS_PRIVILEGED)
+        shadowUserManager.setIsAdminUser(true)
+        val guestAlwaysEphemeralresId = R.bool.config_guestUserEphemeral
+        SettingsShadowResources.overrideResource(guestAlwaysEphemeralresId, false)
+        val allowEphemeralStateChangeResId = R.bool.config_guestUserAllowEphemeralStateChange
+        SettingsShadowResources.overrideResource(allowEphemeralStateChangeResId, true)
+
+        val expectedResult = userManager.userName
+        assertThat(tester.get<AnyBoolean>("edit_user_name")).isEqualTo(expectedResult)
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun setUserName_updatesName() {
+        // Set up precondition requirements to pass
+        val application: Application = ApplicationProvider.getApplicationContext()
+        shadowOf(application).grantPermissions(MANAGE_USERS)
+
+        val newName = "Test"
+        tester.set("edit_user_name", newName)
+        assertThat(userManager.userName).isEqualTo(newName)
     }
 
     @Test
@@ -103,10 +187,9 @@ class UserSettingsScreenApiTest {
     fun getRemoveGuestOnExit_returnsExpectedValue() {
         // Set up precondition requirements to pass
         shadowUserManager.setIsAdminUser(true)
-        val guestAlwaysEphemeralresId = com.android.internal.R.bool.config_guestUserEphemeral
+        val guestAlwaysEphemeralresId = R.bool.config_guestUserEphemeral
         SettingsShadowResources.overrideResource(guestAlwaysEphemeralresId, false)
-        val allowEphemeralStateChangeResId =
-            com.android.internal.R.bool.config_guestUserAllowEphemeralStateChange
+        val allowEphemeralStateChangeResId = R.bool.config_guestUserAllowEphemeralStateChange
         SettingsShadowResources.overrideResource(allowEphemeralStateChangeResId, true)
 
         // Turn the setting ON
@@ -158,7 +241,7 @@ class UserSettingsScreenApiTest {
         ShadowUserManager.setHeadlessSystemUserMode(false)
         shadowPackageManager.setSystemFeature(PackageManager.FEATURE_TELEPHONY, true)
         val application: Application = ApplicationProvider.getApplicationContext()
-        shadowOf(application).grantPermissions(Manifest.permission.MANAGE_USERS)
+        shadowOf(application).grantPermissions(MANAGE_USERS)
 
         // Turn the setting ON
         val guestRestrictions1: Bundle = userManager.getDefaultGuestRestrictions()
@@ -184,7 +267,7 @@ class UserSettingsScreenApiTest {
         ShadowUserManager.setHeadlessSystemUserMode(false)
         shadowPackageManager.setSystemFeature(PackageManager.FEATURE_TELEPHONY, true)
         val application: Application = ApplicationProvider.getApplicationContext()
-        shadowOf(application).grantPermissions(Manifest.permission.MANAGE_USERS)
+        shadowOf(application).grantPermissions(MANAGE_USERS)
 
         // Use set API to turn setting OFF
         tester.set("enable_guest_calling", false)
@@ -212,7 +295,7 @@ class UserSettingsScreenApiTest {
     fun getAddUsersWhenLocked_returnsExpectedValue() {
         // Set up precondition requirements to pass
         shadowUserManager.setIsAdminUser(true)
-        val resId = com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen
+        val resId = R.bool.config_userSwitchingMustGoThroughLoginScreen
         SettingsShadowResources.overrideResource(resId, false)
         userManager.setUserRestriction(UserManager.DISALLOW_ADD_USER, false)
 
@@ -231,7 +314,7 @@ class UserSettingsScreenApiTest {
         // Set up precondition requirements to pass
         shadowUserManager.setIsAdminUser(true)
         Settings.Global.putInt(context.contentResolver, Settings.Global.ADD_USERS_WHEN_LOCKED, ON)
-        val resId = com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen
+        val resId = R.bool.config_userSwitchingMustGoThroughLoginScreen
         SettingsShadowResources.overrideResource(resId, false)
         userManager.setUserRestriction(UserManager.DISALLOW_ADD_USER, false)
 
