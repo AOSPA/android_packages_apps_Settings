@@ -473,11 +473,9 @@ open class SelectedDisplayPreferenceFragment(
                     val displayId =
                         viewModel.uiState.value?.selectedDisplayId
                             ?: return@OnPreferenceClickListener false
-                    viewModel.injector.setUserHdrPreference(
+                    viewModel.updateUserHdrPreference(
                         displayId,
-                        if ((preference as SwitchPreferenceCompat).isChecked())
-                            DisplayManager.HDR_PREFERENCE_HDR_ALLOWED
-                        else DisplayManager.HDR_PREFERENCE_SDR_ONLY,
+                        (preference as SwitchPreferenceCompat).isChecked(),
                     )
                     true
                 }
