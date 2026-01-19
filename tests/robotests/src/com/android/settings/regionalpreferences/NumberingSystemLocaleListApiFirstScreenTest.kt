@@ -28,10 +28,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class NumberingSystemFormatSelectionApiFirstScreenTest {
+class NumberingSystemLocaleListApiFirstScreenTest {
     @get:Rule
     val setFlagsRule = SetFlagsRule()
-    private val tester = ApiTester(NumberingSystemFormatSelectionApiFirstScreen())
+    private val tester = ApiTester(NumberingSystemLocaleListApiFirstScreen())
 
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)

@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Provides locale list for numbering system settings. */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class NumberingSystemLocaleListFragment extends DashboardFragment {
 
@@ -78,3 +79,4 @@ public class NumberingSystemLocaleListFragment extends DashboardFragment {
         return extra;
     }
 }
+// LINT.ThenChange(NumberingSystemLocaleListApiFirstScreen.kt)
