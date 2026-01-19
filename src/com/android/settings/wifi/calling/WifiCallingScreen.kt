@@ -29,7 +29,7 @@ import com.android.settings.network.telephony.wificalling.WifiCallingRepository
 import com.android.settings.utils.getSubId
 import com.android.settings.utils.putSubId
 import com.android.settings.wifi.calling.WifiCallingSettingsForSub.EXTRA_SUB_ID
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -56,7 +56,7 @@ private constructor(
 ) : PreferenceScreenMixin, PreferenceAvailabilityProvider {
 
     private val subId: Int =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!![EXTRA_SUB_ID]?.toIntOrNull() ?: getDefaultSubscriptionId()
         } else {
             arguments!!.getSubId(EXTRA_SUB_ID, getDefaultSubscriptionId())

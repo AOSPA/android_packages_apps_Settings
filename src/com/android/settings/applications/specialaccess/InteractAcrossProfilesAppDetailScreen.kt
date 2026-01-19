@@ -32,10 +32,10 @@ import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -67,7 +67,7 @@ private constructor(
     PreferenceAvailabilityProvider {
 
     private val packageName: String =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!!.getRequired(KEY_APP_PACKAGE_NAME)
         } else {
             arguments!!.getString(KEY_APP_PACKAGE_NAME)!!
@@ -128,7 +128,7 @@ private constructor(
 
     override fun extras(context: Context): Bundle? =
         Bundle(1).apply {
-            if (CatalystFlags.catalystUseKeyParameters()) {
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                 putString(KEY_EXTRA_PACKAGE_NAME, keyParameters!!.getRequired(KEY_APP_PACKAGE_NAME))
             } else {
                 putString(KEY_EXTRA_PACKAGE_NAME, arguments!!.getString(KEY_APP_PACKAGE_NAME))

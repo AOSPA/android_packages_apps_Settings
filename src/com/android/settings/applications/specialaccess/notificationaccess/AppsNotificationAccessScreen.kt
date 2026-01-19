@@ -36,7 +36,7 @@ import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -74,7 +74,7 @@ open class AppsNotificationAccessScreen : PreferenceScreenMixin {
         preferenceHierarchy(context) {
             val services = loadNotificationListenerServices(context)
             for (service in services) {
-                if (CatalystFlags.catalystUseKeyParameters()) {
+                if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                     val parameters =
                         AppInfoNotificationAccessScreen.parametersSchema.prepare(
                             KEY_APP_PACKAGE_NAME to service.packageName,

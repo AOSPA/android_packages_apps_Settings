@@ -18,7 +18,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -52,7 +52,7 @@ class AppInfoScreenTest {
     }
 
     private fun createScreen(context: Context, args: Bundle): AppInfoScreen {
-        return if (CatalystFlags.catalystUseKeyParameters()) {
+        return if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             AppInfoScreen(context, AppInfoScreen.parametersSchema.prepare(args))
         } else {
             AppInfoScreen(context, args)

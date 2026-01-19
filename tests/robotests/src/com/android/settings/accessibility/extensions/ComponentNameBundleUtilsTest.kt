@@ -23,7 +23,11 @@ import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
+import com.android.settingslib.metadata.CatalystFlagProvider
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -38,6 +42,18 @@ class ComponentNameBundleUtilsTest {
     private val testClass = "com.example.package.TestClass"
     private val testComponentName = ComponentName(testPackage, testClass)
 
+    private lateinit var originalProvider: CatalystFlagProvider
+
+    @Before
+    fun setUp() {
+        originalProvider = CatalystFlagProviderFactory.getInstance()
+    }
+
+    @After
+    fun tearDown() {
+        CatalystFlagProviderFactory.setProvider(originalProvider)
+    }
+
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun putComponentName_whenFlagIsEnabled_putsString() {
@@ -51,7 +67,9 @@ class ComponentNameBundleUtilsTest {
 
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun putComponentName_whenFlagIsDisabled_putsParcelable() {
+    fun putComponentName_whenFlagsAreDisabled_putsParcelable() {
+        setCatalystUseKeyParameters(false)
+
         val bundle = Bundle()
         bundle.putComponentName(testKey, testComponentName)
 
@@ -59,6 +77,19 @@ class ComponentNameBundleUtilsTest {
             .isEqualTo(testComponentName)
         assertThat(bundle.containsKey(testKey)).isTrue()
         assertThat(bundle.getString(testKey)).isNull()
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun putComponentName_whenFlagIsDisabled_butCatalystKeyParametersFlagIsEnabled_putsString() {
+        setCatalystUseKeyParameters(true)
+
+        val bundle = Bundle()
+        bundle.putComponentName(testKey, testComponentName)
+
+        assertThat(bundle.getString(testKey)).isEqualTo(testComponentName.flattenToString())
+        assertThat(bundle.containsKey(testKey)).isTrue()
+        assertThat(bundle.getParcelable(testKey, ComponentName::class.java)).isNull()
     }
 
     @Test
@@ -72,8 +103,21 @@ class ComponentNameBundleUtilsTest {
 
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun getComponentName_whenFlagIsDisabled_readsParcelableCorrectly() {
+    fun getComponentName_whenFlagsAreDisabled_readsParcelableCorrectly() {
+        setCatalystUseKeyParameters(false)
+
         val bundle = Bundle().apply { putParcelable(testKey, testComponentName) }
+        val result = bundle.getComponentName(testKey)
+
+        assertThat(result).isEqualTo(testComponentName)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun getComponentName_whenFlagIsDisabled_butCatalystKeyParametersFlagIsEnabled_readsStringCorrectly() {
+        setCatalystUseKeyParameters(true)
+
+        val bundle = Bundle().apply { putString(testKey, testComponentName.flattenToString()) }
         val result = bundle.getComponentName(testKey)
 
         assertThat(result).isEqualTo(testComponentName)
@@ -94,5 +138,11 @@ class ComponentNameBundleUtilsTest {
         val result = bundle.getComponentName(testKey)
 
         assertThat(result).isNull()
+    }
+
+    private fun setCatalystUseKeyParameters(value: Boolean) {
+        CatalystFlagProviderFactory.setProvider(object : CatalystFlagProvider {
+            override fun catalystUseKeyParameters() = value
+        })
     }
 }

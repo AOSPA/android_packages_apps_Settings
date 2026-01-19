@@ -37,7 +37,7 @@ import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.utils.putSubId
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -71,7 +71,7 @@ private constructor(
     PreferenceRestrictionMixin {
 
     private val subId: Int =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!![Settings.EXTRA_SUB_ID]?.toIntOrNull()
                 ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
         } else {
@@ -123,12 +123,12 @@ private constructor(
                 +EnabledNetworkModePreference(data)
                 val imeiList = context.getImeiList
                 +MobileNetworkImeiPreference(context, subId, imeiList)
-                if (CatalystFlags.catalystUseKeyParameters()) {
+                if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                     +(DataUsageListScreen.KEY withParameters keyParameters!!)
                 } else {
                     +(DataUsageListScreen.KEY args arguments!!)
                 }
-                if (CatalystFlags.catalystUseKeyParameters()) {
+                if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                     +(BillingCycleScreen.KEY withParameters keyParameters!!) order 115
                 } else {
                     +(BillingCycleScreen.KEY args arguments!!) order 115
@@ -138,7 +138,7 @@ private constructor(
                     R.string.mobile_network_apn_and_protection_purpose,
                 ) +=
                     {
-                        if (CatalystFlags.catalystUseKeyParameters()) {
+                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                             val newParameters =
                                 ApnSettingsScreen.parametersSchema.prepare(
                                     ApnSettings.SUB_ID to subId.toString()
@@ -154,7 +154,7 @@ private constructor(
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
         val intent =
-            if (CatalystFlags.catalystUseKeyParameters()) {
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                 makeLaunchIntent(
                     context,
                     MobileNetworkActivity::class.java,

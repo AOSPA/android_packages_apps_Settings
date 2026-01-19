@@ -22,7 +22,7 @@ import android.content.pm.PackageInfo
 import android.os.Bundle
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -63,7 +63,7 @@ class AppInfoStorageScreenTest {
     }
 
     private fun createScreen(args: Bundle): AppInfoStorageScreen =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             AppInfoStorageScreen(context, AppInfoStorageScreen.parametersSchema.prepare(args))
         } else {
             AppInfoStorageScreen(context, args)

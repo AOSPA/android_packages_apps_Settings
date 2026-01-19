@@ -19,13 +19,15 @@ package com.android.settings.utils
 
 import android.os.Bundle
 import com.android.settings.flags.Flags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 
 /**
  * Retrieves a subscription ID from a [Bundle] by a given [key].
  *
- * This function first attempts to retrieve the value as `String` and if the `String` value is not
- * found, then attempts to retrieve the value as 'Int'. This dual approach provides compatibility
- * for cases where the subscription ID might be stored in either format.
+ * This function retrieves the value associated with the key and checks its type.
+ * If the value is a [String], it attempts to parse it as an integer.
+ * If the value is an [Int], it is returned directly.
+ * This provides compatibility for cases where the subscription ID might be stored in either format.
  *
  * @param key The key to look up in the Bundle.
  * @param defaultValue The value to return if the key is not found or if the `String` value cannot
@@ -34,21 +36,26 @@ import com.android.settings.flags.Flags
  *   parsing error occurs.
  */
 fun Bundle.getSubId(key: String, defaultValue: Int): Int {
-    return getString(key)?.let { it.toIntOrNull() ?: defaultValue } ?: getInt(key, defaultValue)
+    return when (@Suppress("DEPRECATION") val value = get(key)) {
+        is String -> value.toIntOrNull() ?: defaultValue
+        is Int -> value
+        else -> defaultValue
+    }
 }
 
 /**
  * Puts an integer subscription ID (`subId`) into a [Bundle] with a given [key].
  *
  * This function is the counterpart to [getSubId] and is useful for migrations where a feature flag
- * controls the data type of a parameter. It checks the `Flags.catalystUseStringBundle()` flag to
- * determine whether to store the value as a `String` or an `Int`.
+ * controls the data type of a parameter. It checks [Flags.catalystUseStringBundle] and
+ * [CatalystFlagProviderFactory.catalystUseKeyParameters] to determine whether to store the value as
+ * a `String` or an `Int`.
  *
  * @param key The key with which to associate the value.
  * @param subId The integer value to store.
  */
 fun Bundle.putSubId(key: String, subId: Int) {
-    if (Flags.catalystUseStringBundle()) {
+    if (Flags.catalystUseStringBundle() || CatalystFlagProviderFactory.catalystUseKeyParameters()) {
         putString(key, subId.toString())
     } else {
         putInt(key, subId)

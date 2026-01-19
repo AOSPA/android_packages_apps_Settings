@@ -42,10 +42,10 @@ import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.spa.app.catalyst.AppInfoScreen
 import com.android.settings.widget.FooterPreferenceBinding
 import com.android.settings.widget.FooterPreferenceMetadata
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -129,7 +129,7 @@ private constructor(
 
     override val packageName
         get() =
-            if (CatalystFlags.catalystUseKeyParameters()) {
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                 keyParameters!!.packageName
             } else {
                 arguments!!.packageName
@@ -312,7 +312,7 @@ private constructor(
      * If it's from the AppInfo page, we will remove the icon and also update the entry title.
      */
     private fun isFromAppInfo(): Boolean =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!![KEY_INTENT_SOURCE] == AppInfoScreen.SOURCE
         } else {
             arguments!!.source == AppInfoScreen.SOURCE

@@ -31,7 +31,7 @@ import com.android.settings.applications.getPackageInfoWithPermissions
 import com.android.settings.applications.isPermissionRequested
 import com.android.settings.flags.Flags
 import com.android.settings.utils.highlightPreference
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -87,7 +87,7 @@ open class InstallUnknownAppsAppDetailScreen : SpecialAccessAppDetailScreen {
         Intent(ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
             data = "package:$packageName".toUri()
 
-            if (CatalystFlags.catalystUseKeyParameters()) {
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                 highlightPreference(keyParameters!!, metadata?.bindingKey)
             } else {
                 highlightPreference(arguments!!, metadata?.bindingKey)

@@ -25,7 +25,7 @@ import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.core.SubSettingLauncher
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -51,7 +51,7 @@ private constructor(
 ) : PreferenceScreenMixin, PreferenceTitleProvider {
 
     private val wifiEntryKey: String =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!!.getRequired(KEY_ARGUMENT_WIFI_ENTRY_KEY)
         } else {
             arguments!!.getString(KEY_ARGUMENT_WIFI_ENTRY_KEY)!!
@@ -94,7 +94,7 @@ private constructor(
             .setTitleRes(R.string.pref_title_network_details)
             .setDestination(WifiNetworkDetailsFragment::class.java.getName())
             .setArguments(
-                if (CatalystFlags.catalystUseKeyParameters()) {
+                if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                     Bundle().apply { putString(KEY_ARGUMENT_WIFI_ENTRY_KEY, wifiEntryKey) }
                 } else {
                     parametersSchema.prepare(KEY_ARGUMENT_WIFI_ENTRY_KEY to wifiEntryKey).toBundle()
