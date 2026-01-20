@@ -31,6 +31,7 @@ import java.util.List;
 /**
  * A page that configures the Bluetooth scanning setting.
  */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class BluetoothScanningFragment extends DashboardFragment {
     private static final String TAG = "BluetoothScanningFragment";
@@ -79,3 +80,4 @@ public class BluetoothScanningFragment extends DashboardFragment {
                 }
             };
 }
+// LINT.ThenChange(BluetoothScanningApiScreen.kt)
