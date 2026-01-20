@@ -21,6 +21,7 @@ import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
+import com.android.settings.network.tether.TetherApiScreen.Companion.ETH_TETHER_KEY
 import com.android.settings.network.tether.TetherApiScreen.Companion.USB_TETHER_KEY
 import com.android.settings.network.tether.TetheringRepository.TetherType
 import com.android.settings.testutils.FakeFeatureFactory
@@ -94,5 +95,39 @@ class TetherApiScreenTest {
         tester.set(USB_TETHER_KEY, false)
 
         verify(mockTetheringRepository).setEnabled(TetherType.USB, false)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBoolean_noEthernetTethering_returnFalse() {
+        mockTetheringRepository.stub {
+            onBlocking { isEnabled(TetherType.ETHERNET) } doReturn false
+        }
+
+        assertThat(tester.get<Boolean>(ETH_TETHER_KEY)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBoolean_hasEthernetTethering_returnTrue() {
+        mockTetheringRepository.stub { onBlocking { isEnabled(TetherType.ETHERNET) } doReturn true }
+
+        assertThat(tester.get<Boolean>(ETH_TETHER_KEY)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBoolean_enableEthernetTethering_verifyEnable() = runBlocking {
+        tester.set(ETH_TETHER_KEY, true)
+
+        verify(mockTetheringRepository).setEnabled(TetherType.ETHERNET, true)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBoolean_disableEthernetTethering_verifyDisable() = runBlocking {
+        tester.set(ETH_TETHER_KEY, false)
+
+        verify(mockTetheringRepository).setEnabled(TetherType.ETHERNET, false)
     }
 }

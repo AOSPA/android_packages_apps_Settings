@@ -49,12 +49,22 @@ class TetherApiScreen :
                 execute { value -> tetheringRepository.setEnabled(TetherType.USB, value) }
             }
         }
+
+        preference(ETH_TETHER_KEY, ETH_TETHER_PURPOSE, AnyBoolean) {
+            get { execute { tetheringRepository.isEnabled(TetherType.ETHERNET) } }
+            set {
+                permissions(Manifest.permission.TETHER_PRIVILEGED)
+                execute { value -> tetheringRepository.setEnabled(TetherType.ETHERNET, value) }
+            }
+        }
     }
 
     companion object {
         const val KEY = "api_tether_settings"
         const val USB_TETHER_KEY = "usb_tether_settings"
         private val USB_TETHER_PURPOSE = R.string.usb_tether_switch_purpose
+        const val ETH_TETHER_KEY = "enable_ethernet_tethering"
+        private val ETH_TETHER_PURPOSE = R.string.ether_tether_switch_purpose
     }
 }
 // LINT.ThenChange(TetherSettings.java, TetherScreen.kt)
