@@ -17,12 +17,11 @@
 package com.android.settings.regionalpreferences
 
 import android.content.Context
-import android.os.LocaleList
-import com.android.internal.app.LocalePicker
 import com.android.internal.app.LocaleStore
 import com.android.internal.app.SystemLocaleCollector
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.updateRegion
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
@@ -79,59 +78,10 @@ class RegionPickerApiFirstScreen :
     private fun getSupportedLanguageList(
         context: Context,
         parent: LocaleStore.LocaleInfo?,
-    ): MutableList<LocaleStore.LocaleInfo> {
-        return SystemLocaleCollector(context, null)
+    ): MutableList<LocaleStore.LocaleInfo> =
+        SystemLocaleCollector(context, null)
             .getSupportedLocaleList(parent, false, true)
             .toMutableList()
-    }
-
-    private fun updateRegion(selectedLocale: Locale) {
-        val newLocales = getUpdatedLocales(selectedLocale)
-        val localeList = LocaleList(*newLocales)
-        LocaleList.setDefault(localeList)
-        LocalePicker.updateLocales(localeList)
-    }
-
-    private fun getUpdatedLocales(selectedLocale: Locale): Array<Locale?> {
-        val localeList = LocaleList.getDefault()
-        val newLocales = arrayOfNulls<Locale>(localeList.size())
-        for (i in 0..<localeList.size()) {
-            val target = localeList.get(i)
-            if (sameLanguageAndScript(selectedLocale, target!!)) {
-                newLocales[i] = appendLocaleExtension(selectedLocale)
-            } else {
-                newLocales[i] = localeList.get(i)
-            }
-        }
-        return newLocales
-    }
-
-    private fun appendLocaleExtension(selectedLocale: Locale): Locale {
-        val systemLocale = Locale.getDefault()
-        val extensionKeys = systemLocale.getExtensionKeys()
-        val builder = Locale.Builder()
-        builder.setLocale(selectedLocale)
-        if (!extensionKeys.isEmpty()) {
-            for (extKey in extensionKeys) {
-                builder.setExtension(extKey, systemLocale.getExtension(extKey))
-            }
-        }
-        return builder.build()
-    }
-
-    private fun sameLanguageAndScript(source: Locale, target: Locale): Boolean {
-        val sourceLanguage = source.language
-        val targetLanguage = target.language
-        val sourceLocaleScript = source.script
-        val targetLocaleScript = target.script
-        if (sourceLanguage == targetLanguage) {
-            if (!sourceLocaleScript.isEmpty() && !targetLocaleScript.isEmpty()) {
-                return sourceLocaleScript == targetLocaleScript
-            }
-            return true
-        }
-        return false
-    }
 
     companion object {
         const val TAG = "RegionPickerApiFirstScreen"
