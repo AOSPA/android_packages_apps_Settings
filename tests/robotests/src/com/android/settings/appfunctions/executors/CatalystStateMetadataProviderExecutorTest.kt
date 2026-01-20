@@ -102,6 +102,26 @@ class CatalystStateMetadataProviderExecutorTest {
         assertThat(result.deviceStateItemsMetadata[0].writable).isFalse()
     }
 
+    @Test
+    fun buildPerScreenDeviceStatesMetadata_purposeIsCorrect() = runTest {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val metadata =
+            TestPreferenceMetadata(
+                bindingKey = "test_key_writable",
+                isPersistent = true,
+                writePermit = ReadWritePermit.ALLOW,
+                purpose = android.R.string.yes,
+            )
+        val preferencesHierarchy = listOf(createPreferenceHierarchyNode(metadata))
+
+        val result =
+            callBuildPerScreenDeviceStatesMetadata(testScreenMetadata, preferencesHierarchy)
+
+        assertThat(result.deviceStateItemsMetadata).hasSize(1)
+        assertThat(result.deviceStateItemsMetadata[0].purpose)
+            .isEqualTo(context.getString(android.R.string.yes))
+    }
+
     private fun CoroutineScope.callBuildPerScreenDeviceStatesMetadata(
         screenMetadata: PreferenceScreenMetadata,
         preferencesHierarchy: List<PreferenceHierarchyNode>,
@@ -154,12 +174,12 @@ class CatalystStateMetadataProviderExecutorTest {
         override val bindingKey: String,
         private val isPersistent: Boolean,
         val writePermit: Int?,
+        override val purpose: Int = 0,
     ) : PersistentPreference<Any> {
         override val key: String
             get() = bindingKey
 
         override val title: Int = android.R.string.ok
-        override val purpose: Int = 0
 
         override fun isPersistent(context: Context): Boolean = isPersistent
 
