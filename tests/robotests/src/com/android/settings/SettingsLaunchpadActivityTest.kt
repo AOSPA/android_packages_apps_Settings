@@ -41,6 +41,8 @@ import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.Flow
 import org.junit.Before
@@ -59,6 +61,8 @@ class SettingsLaunchpadActivityTest {
     companion object {
         const val TEST_SCREEN_KEY = "test_screen_key"
         const val API_SCREEN_KEY = "api_screen_key"
+
+        var preconditionsAreMet = true
     }
 
     private lateinit var context: Context
@@ -68,19 +72,36 @@ class SettingsLaunchpadActivityTest {
     // Dummy class for testing fragment launching
     class TestFragment : Fragment()
 
-    /** A fake [PreferencesApiScreen] for testing the category mapping logic. */
+    /**
+     * A fake [PreferencesApiScreen] for testing the category mapping logic.
+     * It contains screen preconditions which by default are met, but they can be set through
+     * [preconditionsAreMet] variable in tests.
+     */
     class FakePreferencesApiScreen :
         PreferencesApiScreen(
             key = API_SCREEN_KEY,
             topLevelSettingsCategory = Category.APPS,
             fragment = TestFragment::class,
             purpose = 0,
-        )
+        ) {
+        init {
+            preconditions("Test preconditions") {
+                if (preconditionsAreMet) {
+                    Allowed
+                } else {
+                    Disallowed("Test preconditions not met")
+                }
+            }
+        }
+    }
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         context = ApplicationProvider.getApplicationContext()
+
+        // default value for preconditions variable
+        preconditionsAreMet = true
 
         fakeFactory = FakeParameterizedFactory()
         fakeApiFactory = PreferenceScreenMetadataFactory { FakePreferencesApiScreen() }
@@ -107,6 +128,21 @@ class SettingsLaunchpadActivityTest {
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
                 putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, "non_existent_key")
+            }
+        val activity =
+            Robolectric.buildActivity(SettingsLaunchpadActivity::class.java, intent).create().get()
+
+        assertThat(activity.isFinishing).isTrue()
+        assertThat(shadowOf(activity).nextStartedActivity).isNull()
+    }
+
+    @Test
+    fun onCreate_preconditionsNotMet_shouldFinish() {
+        preconditionsAreMet = false
+
+        val intent =
+            Intent(context, SettingsLaunchpadActivity::class.java).apply {
+                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, API_SCREEN_KEY)
             }
         val activity =
             Robolectric.buildActivity(SettingsLaunchpadActivity::class.java, intent).create().get()
