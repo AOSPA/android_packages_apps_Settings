@@ -122,19 +122,13 @@ public class AdbIpAddressPreferenceController extends AbstractConnectivityPrefer
         String ipAddress = getIpv4Address();
         int port = getPort();
         if (ipAddress == null) {
-            // summary is: "Unavailable (Disconnected)"
-            mAdbIpAddrPref.setSummary(
-                    TextUtils.formatSimple("%s (%s)",
-                    mContext.getString(com.android.settingslib.R.string.status_unavailable),
-                    mContext.getString(com.android.settingslib.R.string.wifi_disconnected)));
+            mAdbIpAddrPref.setSummary(mContext.getString(
+                    com.android.settingslib.R.string.adb_wireless_unavailable_disconnected
+            ));
         } else if (port <= 0) {
-            // summary is: "Unavailable (Not allowed)"
-            String notAllowed = mContext.getString(
-                    com.android.settings.R.string.app_permission_summary_not_allowed);
-            mAdbIpAddrPref.setSummary(
-                    TextUtils.formatSimple("%s (%s)",
-                            mContext.getString(com.android.settingslib.R.string.status_unavailable),
-                            notAllowed));
+            mAdbIpAddrPref.setSummary(mContext.getString(
+                    com.android.settingslib.R.string.adb_wireless_unavailable_not_allowed
+            ));
         } else {
             mAdbIpAddrPref.setSummary(TextUtils.formatSimple("%s:%d", ipAddress, port));
         }
