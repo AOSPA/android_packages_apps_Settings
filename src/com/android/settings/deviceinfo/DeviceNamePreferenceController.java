@@ -188,4 +188,4 @@ public class DeviceNamePreferenceController extends BasePreferenceController
         void showDeviceNameWarningDialog(String deviceName);
     }
 }
-// LINT.ThenChange(DeviceNamePreference.kt, aboutphone/MyDeviceInfoApiFirstScreen.kt)
+// LINT.ThenChange(aboutphone/MyDeviceInfoApiFirstScreen.kt)
