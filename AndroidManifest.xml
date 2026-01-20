@@ -5360,7 +5360,7 @@
         </service>
 
         <service
-            android:name=".development.qstile.DevelopmentTiles$WirelessDebugging"
+            android:name=".development.qstile.AdbWirelessDebuggingDevelopmentTile"
             android:label="@string/enable_adb_wireless"
             android:icon="@drawable/tile_icon_debugging_wireless"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
