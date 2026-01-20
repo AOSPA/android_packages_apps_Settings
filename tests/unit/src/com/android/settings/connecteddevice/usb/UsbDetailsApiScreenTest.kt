@@ -16,21 +16,43 @@
 
 package com.android.settings.connecteddevice.usb
 
+import android.hardware.usb.UsbManager.FUNCTION_MIDI
+import android.hardware.usb.UsbManager.FUNCTION_MTP
+import android.hardware.usb.UsbManager.FUNCTION_PTP
+import android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.connecteddevice.usb.UsbDetailsApiScreen.Companion.PREFERENCE_KEY_CONVERT_VIDEOS_TO_AVC
 import com.android.settings.flags.Flags
+import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils2.ApiTester
+import com.android.settings.testutils2.FailedPreconditionException
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class UsbDetailsApiScreenTest {
-    private val tester = ApiTester(UsbDetailsApiScreen())
     @get:Rule val setFlagsRule = SetFlagsRule()
+
+    private lateinit var tester: ApiTester
+    private val mockUsbDetailsRepository = mock<UsbDetailsRepository>()
+    private lateinit var usbFeatureProvider: UsbFeatureProvider
+
+    @Before
+    fun setUp() {
+        usbFeatureProvider = FakeFeatureFactory.setupForTest().usbFeatureProvider
+        usbFeatureProvider.stub { on { usbDetailsRepository } doReturn mockUsbDetailsRepository }
+        tester = ApiTester(UsbDetailsApiScreen())
+    }
 
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
@@ -42,5 +64,83 @@ class UsbDetailsApiScreenTest {
     @DisableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getScreen_flagDisabled_isNull() {
         assertThat(tester.getScreen()).isNull()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBoolean_mtpEnabled_returnTrue() {
+        mockUsbDetailsRepository.stub {
+            on { isMtpTranscodeEnabled() } doReturn true
+            on { getCurrentFunction() } doReturn FUNCTION_MTP
+            on { getDataRole() } doReturn DATA_ROLE_DEVICE
+        }
+
+        assertThat(tester.get<Boolean>(PREFERENCE_KEY_CONVERT_VIDEOS_TO_AVC)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBoolean_mtpDisabled_returnFalse() {
+        mockUsbDetailsRepository.stub {
+            on { isMtpTranscodeEnabled() } doReturn false
+            on { getCurrentFunction() } doReturn FUNCTION_MTP
+            on { getDataRole() } doReturn DATA_ROLE_DEVICE
+        }
+
+        assertThat(tester.get<Boolean>(PREFERENCE_KEY_CONVERT_VIDEOS_TO_AVC)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBoolean_ptpFunctionAndMtpDisabled_returnFalse() {
+        mockUsbDetailsRepository.stub {
+            on { isMtpTranscodeEnabled() } doReturn false
+            on { getCurrentFunction() } doReturn FUNCTION_PTP
+            on { getDataRole() } doReturn DATA_ROLE_DEVICE
+        }
+
+        assertThat(tester.get<Boolean>(PREFERENCE_KEY_CONVERT_VIDEOS_TO_AVC)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBoolean_midiFunctionAndMtpDisabled_failedException() {
+        mockUsbDetailsRepository.stub {
+            on { isMtpTranscodeEnabled() } doReturn false
+            on { getCurrentFunction() } doReturn FUNCTION_MIDI
+            on { getDataRole() } doReturn DATA_ROLE_DEVICE
+        }
+
+        try {
+            tester.get<Boolean>(PREFERENCE_KEY_CONVERT_VIDEOS_TO_AVC)
+        } catch (e: FailedPreconditionException) {
+            // no Crash
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBoolean_turnOnAvc_success() {
+        mockUsbDetailsRepository.stub {
+            on { getCurrentFunction() } doReturn FUNCTION_MTP
+            on { getDataRole() } doReturn DATA_ROLE_DEVICE
+        }
+
+        tester.set(PREFERENCE_KEY_CONVERT_VIDEOS_TO_AVC, true)
+
+        verify(mockUsbDetailsRepository).setMtpTranscodeState(true)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBoolean_turnOffAvc_success() {
+        mockUsbDetailsRepository.stub {
+            on { getCurrentFunction() } doReturn FUNCTION_MTP
+            on { getDataRole() } doReturn DATA_ROLE_DEVICE
+        }
+
+        tester.set(PREFERENCE_KEY_CONVERT_VIDEOS_TO_AVC, false)
+
+        verify(mockUsbDetailsRepository).setMtpTranscodeState(false)
     }
 }
