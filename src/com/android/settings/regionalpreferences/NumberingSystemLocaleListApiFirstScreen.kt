@@ -16,28 +16,42 @@
 
 package com.android.settings.regionalpreferences
 
+import android.os.LocaleList
+import com.android.internal.app.LocaleStore
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.getNumberingSystemLocales
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import java.util.Locale
 
 // LINT.IfChange
-@ProvidePreferenceScreen(NumberingSystemFormatSelectionApiFirstScreen.KEY)
-class NumberingSystemFormatSelectionApiFirstScreen :
+@ProvidePreferenceScreen(NumberingSystemLocaleListApiFirstScreen.KEY)
+class NumberingSystemLocaleListApiFirstScreen :
     PreferencesApiScreen(
         key = KEY,
         topLevelSettingsCategory = Category.SYSTEM,
-        fragment = NumberingSystemFormatSelectionFragment::class,
+        fragment = NumberingSystemLocaleListFragment::class,
         purpose = R.string.regional_preference_numbering_system_purpose,
     ) {
 
     init {
         flag { Flags.catalystMigration26q2() }
+
+        preconditions(R.string.numbering_system_screen_preconditions) {
+            if (getNumberingSystemLocales().isNotEmpty()) {
+                Allowed
+            } else {
+                Custom(R.string.numbering_system_screen_unavailable)
+            }
+        }
     }
 
     companion object {
         const val KEY = "regional_preference_numbering_system"
     }
 }
-// LINT.ThenChange(NumberingSystemFormatSelectionFragment.java)
+// LINT.ThenChange(NumberingSystemLocaleListFragment.java)
