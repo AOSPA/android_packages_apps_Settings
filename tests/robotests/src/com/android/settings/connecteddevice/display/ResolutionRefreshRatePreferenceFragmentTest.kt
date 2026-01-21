@@ -34,6 +34,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FOLLOWER_ARBITRARY_REFRESH_RATE_SELECTION_PLATFORM
 import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FOLLOWER_DISPLAY_BACKPRESSURE_PLATFORM
 import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FORCE_SLOWER_FOLLOWER_GPU_COMPOSITION_PLATFORM
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_SYNCED_RESOLUTION_SWITCH
 import com.android.settings.R
 import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceFragment.Companion.DISPLAY_ID_ARG
 import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceFragment.Companion.MORE_OPTIONS_KEY
@@ -58,6 +59,7 @@ import org.robolectric.Shadows.shadowOf
     FLAG_FOLLOWER_ARBITRARY_REFRESH_RATE_SELECTION_PLATFORM,
     FLAG_FOLLOWER_DISPLAY_BACKPRESSURE_PLATFORM,
     FLAG_FORCE_SLOWER_FOLLOWER_GPU_COMPOSITION_PLATFORM,
+    FLAG_SYNCED_RESOLUTION_SWITCH,
 )
 class ResolutionRefreshRatePreferenceFragmentTest : ExternalDisplayTestBase() {
 
