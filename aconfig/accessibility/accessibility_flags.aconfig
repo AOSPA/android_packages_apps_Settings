@@ -171,10 +171,3 @@ flag {
     purpose: PURPOSE_BUGFIX
   }
 }
-
-flag {
-  name: "voice_access_locale_notifications"
-  namespace: "accessibility"
-  description: "Provides notification to users when the chosen locale doesn't have an associated model."
-  bug: "453531997"
-}
