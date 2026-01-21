@@ -30,6 +30,7 @@ import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProv
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.connecteddevice.threadnetwork.ThreadNetworkFeatureProvider
+import com.android.settings.connecteddevice.usb.UsbFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
@@ -174,5 +175,8 @@ class FakeFeatureFactory : FeatureFactory() {
         get() = TODO("Not yet implemented")
 
     override val audioSharingFeatureProvider: AudioSharingFeatureProvider
+        get() = TODO("Not yet implemented")
+
+    override val usbFeatureProvider: UsbFeatureProvider
         get() = TODO("Not yet implemented")
 }
