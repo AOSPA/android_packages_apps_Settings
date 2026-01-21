@@ -103,6 +103,7 @@ import com.android.settings.deviceinfo.legal.ModuleLicensesScreen
 import com.android.settings.deviceinfo.storage.StoragePreferenceScreen
 import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceScreen
 import com.android.settings.display.AutoBrightnessScreen
+import com.android.settings.display.ColorContrastApiScreen
 import com.android.settings.display.ColorModeScreen
 import com.android.settings.display.ColorModeApiScreen
 import com.android.settings.display.DisplayScreen
@@ -403,6 +404,7 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorModeScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ColorContrastApiScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = ConfigureWifiScreen.KEY,
