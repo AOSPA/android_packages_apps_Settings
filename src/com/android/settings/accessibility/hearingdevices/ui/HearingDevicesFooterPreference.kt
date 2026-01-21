@@ -21,8 +21,8 @@ import android.text.Html
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.accessibility.HearingAidHelper
-import com.android.settings.widget.FooterPreferenceBinding
-import com.android.settings.widget.FooterPreferenceMetadata
+import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceBinding
+import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceMetadata
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -33,8 +33,8 @@ class HearingDevicesFooterPreference(
     private val context: Context,
     private val helper: HearingAidHelper = HearingAidHelper(context),
 ) :
-    FooterPreferenceMetadata,
-    FooterPreferenceBinding,
+    AccessibilityFooterPreferenceMetadata,
+    AccessibilityFooterPreferenceBinding,
     PreferenceTitleProvider,
     PreferenceAvailabilityProvider {
     override val key: String
@@ -43,15 +43,18 @@ class HearingDevicesFooterPreference(
     override val purpose: Int
         get() = R.string.hearing_device_footer_purpose
 
+    override val introductionTitle: Int
+        get() = R.string.accessibility_hearing_device_about_title
+
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
 
         val footerPreference = preference as FooterPreference
         footerPreference.isSelectable = false
 
-        val aboutTitle = context.getString(R.string.accessibility_hearing_device_about_title)
-        footerPreference.contentDescription =
-            "$aboutTitle\n${context.getString(getSummaryResId(true))}"
+        val aboutTts = context.getString(introductionTitle)
+        val summaryTts = context.getString(getSummaryResId(true))
+        footerPreference.contentDescription = "$aboutTts\n$summaryTts"
     }
 
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)

@@ -24,6 +24,7 @@ import com.android.settings.accessibility.Flags
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.android.settingslib.bluetooth.BluetoothEventManager
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager
 import com.android.settingslib.bluetooth.HapClientProfile
@@ -74,6 +75,7 @@ class HearingDevicesScreenTest : SettingsCatalystTestCase() {
         mock<LocalBluetoothManager> {
             on { profileManager } doReturn mockProfileManager
             on { cachedDeviceManager } doReturn mockDeviceManager
+            on { eventManager } doReturn mock<BluetoothEventManager>()
         }
     val mockPreferenceLifecycleContext = mock<PreferenceLifecycleContext>()
     val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
@@ -94,8 +96,6 @@ class HearingDevicesScreenTest : SettingsCatalystTestCase() {
     fun setUp() {
         bluetoothAdapter?.enable()
     }
-
-    @Test override fun migration() {}
 
     @Test
     fun getSummary_connectedAshaHearingAidRightSide_connectedRightSideSummary() {

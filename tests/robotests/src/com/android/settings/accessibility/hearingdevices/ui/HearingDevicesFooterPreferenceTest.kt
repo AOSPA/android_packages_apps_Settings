@@ -20,15 +20,15 @@ import android.content.Context
 import android.text.Html
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.android.settings.accessibility.AccessibilityFooterPreference
 import com.android.settings.accessibility.HearingAidHelper
-import com.android.settingslib.widget.FooterPreference
+import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
-import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
@@ -117,13 +117,12 @@ class HearingDevicesFooterPreferenceTest {
             on { isHapClientProfileSupported } doReturn true
         }
 
-        val footerPreference = mock<FooterPreference> { on { context } doReturn context }
-        preference.bind(footerPreference, preference)
-
+        val footerPreference =
+            preference.createAndBindWidget<AccessibilityFooterPreference>(context)
         val aboutTitle = context.getString(R.string.accessibility_hearing_device_about_title)
         val expectedResId = R.string.accessibility_hearing_device_footer_summary_tts
         val expectedString = "$aboutTitle\n${context.getString(expectedResId)}"
-        verify(footerPreference).contentDescription = expectedString
+        assertThat(footerPreference.contentDescription).isEqualTo(expectedString)
     }
 
     @Test
@@ -133,13 +132,12 @@ class HearingDevicesFooterPreferenceTest {
             on { isHapClientProfileSupported } doReturn false
         }
 
-        val footerPreference = mock<FooterPreference> { on { context } doReturn context }
-        preference.bind(footerPreference, preference)
-
+        val footerPreference =
+            preference.createAndBindWidget<AccessibilityFooterPreference>(context)
         val aboutTitle = context.getString(R.string.accessibility_hearing_device_about_title)
         val expectedResId = R.string.accessibility_hearing_device_footer_asha_only_summary_tts
         val expectedString = "$aboutTitle\n${context.getString(expectedResId)}"
-        verify(footerPreference).contentDescription = expectedString
+        assertThat(footerPreference.contentDescription).isEqualTo(expectedString)
     }
 
     @Test
@@ -149,12 +147,11 @@ class HearingDevicesFooterPreferenceTest {
             on { isHapClientProfileSupported } doReturn true
         }
 
-        val footerPreference = mock<FooterPreference> { on { context } doReturn context }
-        preference.bind(footerPreference, preference)
-
+        val footerPreference =
+            preference.createAndBindWidget<AccessibilityFooterPreference>(context)
         val aboutTitle = context.getString(R.string.accessibility_hearing_device_about_title)
         val expectedResId = R.string.accessibility_hearing_device_footer_hap_only_summary_tts
         val expectedString = "$aboutTitle\n${context.getString(expectedResId)}"
-        verify(footerPreference).contentDescription = expectedString
+        assertThat(footerPreference.contentDescription).isEqualTo(expectedString)
     }
 }
