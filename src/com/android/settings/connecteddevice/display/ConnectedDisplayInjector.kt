@@ -378,7 +378,8 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     open fun getSurfaceControlBuilder() = SurfaceControl.Builder()
 
     companion object {
-        const val SYSPROP_ENABLE_HDR_MODE_SPLITTING = "persist.sys.enable_hdr_mode_splitting"
+        const val SYSPROP_ENABLE_HDR_MODE_SPLITTING =
+            "persist.sys.display.enable_hdr_mode_splitting"
         private const val TAG = "ConnectedDisplayInjector"
 
         fun isRefreshRateFlagsEnabled() =
