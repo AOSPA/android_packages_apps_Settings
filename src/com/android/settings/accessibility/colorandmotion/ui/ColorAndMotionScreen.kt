@@ -72,6 +72,7 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
                 +DarkModeScreenOnAccessibility.KEY
                 +BlurSwitchPreference()
                 +RemoveAnimationsPreference()
+                +TextCursorBlinkRatePreference(context)
             } else {
                 +ColorInversionScreen.KEY
                 +DarkModeScreenOnAccessibility.KEY
@@ -84,6 +85,7 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
                     {
                         +ColorCorrectionScreen.KEY
                         +RemoveAnimationsPreference()
+                        +TextCursorBlinkRatePreference(context)
                     }
             }
             +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
