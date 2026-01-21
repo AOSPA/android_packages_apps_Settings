@@ -105,6 +105,7 @@ import com.android.settings.gestures.SystemNavigationGestureScreen
 import com.android.settings.inputmethod.UserDictionaryListApiScreen
 import com.android.settings.language.LanguageAndRegionApiFirstScreen
 import com.android.settings.language.LanguageAndRegionScreen
+import com.android.settings.location.BluetoothScanningApiScreen
 import com.android.settings.location.LocationScreen
 import com.android.settings.location.LocationServicesScreen
 import com.android.settings.location.RecentLocationAccessScreen
@@ -508,6 +509,7 @@ private fun getCatalystScreenConfigs() =
             screenKey = InstallCertificateFromStorageScreenApi.KEY,
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = IccLockApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = BluetoothScanningApiScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =

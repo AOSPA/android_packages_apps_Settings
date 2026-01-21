@@ -22,6 +22,7 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+// LINT.IfChange
 public class BluetoothScanningPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
 
@@ -59,3 +60,4 @@ public class BluetoothScanningPreferenceController extends AbstractPreferenceCon
         return false;
     }
 }
+// LINT.ThenChange(BluetoothScanningApiScreen.kt)
