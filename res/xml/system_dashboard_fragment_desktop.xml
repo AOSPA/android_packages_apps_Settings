@@ -117,6 +117,16 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="advanced_category"
+        android:title="@string/advanced_apps"
+        android:order="-350"
+        settings:controller="com.android.settings.widget.SystemAdvancedCategoryController">
+        <com.android.settings.spa.preference.ComposePreference
+            android:key="developer_options"
+            settings:controller="com.android.settings.system.DeveloperOptionsController"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="manage_data_category"
         android:title="@string/manage_data_category_title"
         android:order="-340">
@@ -134,15 +144,5 @@
             android:fragment="com.android.settings.system.ResetDashboardFragment"
             settings:controller="com.android.settings.system.ResetPreferenceController"/>
 
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="advanced_category"
-        android:title="@string/advanced_apps"
-        android:order="-340"
-        settings:controller="com.android.settings.widget.SystemAdvancedCategoryController">
-        <com.android.settings.spa.preference.ComposePreference
-            android:key="developer_options"
-            settings:controller="com.android.settings.system.DeveloperOptionsController"/>
     </PreferenceCategory>
 </PreferenceScreen>
