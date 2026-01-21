@@ -29,6 +29,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.spa.SpaActivity
 import com.android.settings.testutils.shadow.ShadowActivityEmbeddingUtils
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.FixedArrayMap
@@ -43,6 +44,7 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.spa.framework.util.KEY_DESTINATION
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.Flow
 import org.junit.Before
@@ -61,6 +63,8 @@ class SettingsLaunchpadActivityTest {
     companion object {
         const val TEST_SCREEN_KEY = "test_screen_key"
         const val API_SCREEN_KEY = "api_screen_key"
+        const val SPA_SCREEN_KEY = "spa_screen_key"
+        const val SPA_ROUTE_PREFIX = "spa_route_prefix"
 
         var preconditionsAreMet = true
     }
@@ -68,20 +72,39 @@ class SettingsLaunchpadActivityTest {
     private lateinit var context: Context
     private lateinit var fakeFactory: FakeParameterizedFactory
     private lateinit var fakeApiFactory: PreferenceScreenMetadataFactory
+    private lateinit var fakeSpaApiFactory: PreferenceScreenMetadataFactory
 
     // Dummy class for testing fragment launching
     class TestFragment : Fragment()
 
     /**
-     * A fake [PreferencesApiScreen] for testing the category mapping logic.
-     * It contains screen preconditions which by default are met, but they can be set through
-     * [preconditionsAreMet] variable in tests.
+     * A fake [PreferencesApiScreen] for testing the category mapping logic. It contains screen
+     * preconditions which by default are met, but they can be set through [preconditionsAreMet]
+     * variable in tests.
      */
-    class FakePreferencesApiScreen :
+    class FakeApiScreen :
         PreferencesApiScreen(
             key = API_SCREEN_KEY,
             topLevelSettingsCategory = Category.APPS,
             fragment = TestFragment::class,
+            purpose = 0,
+        ) {
+        init {
+            preconditions("Test preconditions") {
+                if (preconditionsAreMet) {
+                    Allowed
+                } else {
+                    Disallowed("Test preconditions not met")
+                }
+            }
+        }
+    }
+
+    class FakeSpaScreen :
+        PreferencesApiScreen(
+            key = SPA_SCREEN_KEY,
+            topLevelSettingsCategory = Category.APPS,
+            spaRoutePrefix = SPA_ROUTE_PREFIX,
             purpose = 0,
         ) {
         init {
@@ -104,11 +127,13 @@ class SettingsLaunchpadActivityTest {
         preconditionsAreMet = true
 
         fakeFactory = FakeParameterizedFactory()
-        fakeApiFactory = PreferenceScreenMetadataFactory { FakePreferencesApiScreen() }
+        fakeApiFactory = PreferenceScreenMetadataFactory { FakeApiScreen() }
+        fakeSpaApiFactory = PreferenceScreenMetadataFactory { FakeSpaScreen() }
 
         PreferenceScreenRegistry.preferenceScreenMetadataFactories =
-            FixedArrayMap(2) {
+            FixedArrayMap(3) {
                 it.put(API_SCREEN_KEY, fakeApiFactory)
+                it.put(SPA_SCREEN_KEY, fakeSpaApiFactory)
                 it.put(TEST_SCREEN_KEY, fakeFactory)
             }
     }
@@ -201,6 +226,26 @@ class SettingsLaunchpadActivityTest {
         assertThat(nextActivity.component?.className).isEqualTo(SubSettings::class.java.name)
         assertThat(nextActivity.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
             .isEqualTo(TestFragment::class.java.name)
+        assertThat(activity.isFinishing).isTrue()
+    }
+
+    @Test
+    fun launch_withSpaRoutePrefix_shouldLaunchSpaActivity() {
+        // Arrange
+        val intent =
+            Intent(context, SettingsLaunchpadActivity::class.java).apply {
+                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, SPA_SCREEN_KEY)
+            }
+
+        // Act
+        val activity =
+            Robolectric.buildActivity(SettingsLaunchpadActivity::class.java, intent).create().get()
+
+        // Assert
+        val nextActivity = shadowOf(activity).nextStartedActivity
+        assertThat(nextActivity).isNotNull()
+        assertThat(nextActivity.component?.className).isEqualTo(SpaActivity::class.java.name)
+        assertThat(nextActivity.getStringExtra(KEY_DESTINATION)).isEqualTo(SPA_ROUTE_PREFIX)
         assertThat(activity.isFinishing).isTrue()
     }
 
