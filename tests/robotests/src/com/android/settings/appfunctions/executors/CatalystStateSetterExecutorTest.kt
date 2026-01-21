@@ -15,18 +15,31 @@
  */
 package com.android.settings.appfunctions.executors
 
+import android.app.appsearch.GenericDocument
+import android.os.OutcomeReceiver
+import android.service.settings.preferences.GetValueResult
+import android.service.settings.preferences.SettingsPreferenceServiceClient
 import android.service.settings.preferences.SettingsPreferenceValue
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
+import com.android.settings.appfunctions.SettingsPreferenceServiceClientManager
 import com.google.common.truth.Truth.assertThat
 import java.lang.reflect.Method
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.any
+import org.mockito.Mockito.doAnswer
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when`
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class CatalystStateSetterExecutorTest {
     private lateinit var executor: CatalystStateSetterExecutor
     private lateinit var toSettingsPreferenceValueMethod: Method
+    private lateinit var settingsPreferenceValueToStringMethod: Method
+    private lateinit var mockClient: SettingsPreferenceServiceClient
 
     @Before
     fun setUp() {
@@ -40,6 +53,80 @@ class CatalystStateSetterExecutorTest {
                     Int::class.javaObjectType,
                 )
                 .apply { isAccessible = true }
+        settingsPreferenceValueToStringMethod =
+            executor::class
+                .java
+                .getDeclaredMethod(
+                    "settingsPreferenceValueToString",
+                    SettingsPreferenceValue::class.java,
+                )
+                .apply { isAccessible = true }
+
+        mockClient = mock(SettingsPreferenceServiceClient::class.java)
+        val clientField =
+            SettingsPreferenceServiceClientManager::class.java.getDeclaredField("client")
+        clientField.isAccessible = true
+        clientField.set(null, mockClient)
+    }
+
+    @Test
+    fun execute_setPreferenceValueFails_returnsOldValue() = runTest {
+        val oldValue =
+            SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_BOOLEAN)
+                .setBooleanValue(true)
+                .build()
+        doAnswer { invocation ->
+                val receiver =
+                    invocation.getArgument(2) as OutcomeReceiver<GetValueResult, Exception>
+                val result = mock(GetValueResult::class.java)
+                `when`(result.value).thenReturn(oldValue)
+                receiver.onResult(result)
+                null
+            }
+            .`when`(mockClient)
+            .getPreferenceValue(any(), any(), any())
+        //  Mock setPreferenceValue to fail (onError)
+        doAnswer { invocation ->
+                val receiver = invocation.getArgument(2) as OutcomeReceiver<*, Exception>
+                receiver.onError(Exception("Set failed"))
+                null
+            }
+            .`when`(mockClient)
+            .setPreferenceValue(any(), any(), any())
+        val innerDoc =
+            GenericDocument.Builder<GenericDocument.Builder<*>>("namespace", "id", "schema")
+                .setPropertyString("key", "screen/key")
+                .setPropertyString("value", "false")
+                .build()
+        val params =
+            GenericDocument.Builder<GenericDocument.Builder<*>>("namespace", "id", "schema")
+                .setPropertyDocument("setDeviceStateItemParams", innerDoc)
+                .build()
+
+        val result = executor.execute(DeviceStateAppFunctionType.SET_DEVICE_STATE, params)
+
+        assertThat(result.result?.isSuccessful).isFalse()
+        assertThat(result.result?.currentValue).isEqualTo("true")
+    }
+
+    @Test
+    fun settingsPreferenceValueToString_booleanValue_returnsCorrectString() {
+        val value =
+            SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_BOOLEAN)
+                .setBooleanValue(true)
+                .build()
+        val result = settingsPreferenceValueToStringMethod.invoke(executor, value) as String
+        assertThat(result).isEqualTo("true")
+    }
+
+    @Test
+    fun settingsPreferenceValueToString_intValue_returnsCorrectString() {
+        val value =
+            SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_INT)
+                .setIntValue(123)
+                .build()
+        val result = settingsPreferenceValueToStringMethod.invoke(executor, value) as String
+        assertThat(result).isEqualTo("123")
     }
 
     @Test
