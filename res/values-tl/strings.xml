@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"Ipakita ang ratio ng HDR/SDR"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"Ipakita ang kasalukuyang ratio ng HDR/SDR"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Hingin ang pag-unlock ng device para sa NFC"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"Nangangailangan ng pag-unlock ng device"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Handa nang maglipat ng content ng app sa pamamagitan ng NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"I-off"</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Naka-off"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"Carrier ID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Uri ng mobile data network"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Uri ng mobile voice network"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Impormasyon ng operator"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"I-verify ang PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"I-verify ang password"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"I-verify na ikaw"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Ilagay ang pattern ng kabilang device mo para mailipat ang mga Google Account, setting, at higit pa. Naka-encrypt ang pattern mo."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Ilagay ang PIN ng kabilang device mo para mailipat ang mga Google Account, setting, at higit pa. Naka-encrypt ang PIN mo."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Ilagay ang password ng kabilang device mo para mailipat ang mga Google Account, setting, at higit pa. Naka-encrypt ang password mo."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"Gamitin ang parehong pattern para i-unlock ang device na ito"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"Gamitin ang parehong PIN para i-unlock ang device na ito"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"Gamitin ang parehong password para i-unlock ang device na ito"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"I-verify ang pattern"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"I-verify ang PIN"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"I-verify ang password"</string>
@@ -2016,7 +2008,7 @@
     <string name="show_running_services" msgid="8666008279959853318">"Mga tumatakbong serbisyo"</string>
     <string name="show_background_processes" msgid="5682856012453562151">"Ipakita\'ng cached process"</string>
     <string name="default_emergency_app" msgid="1929974800666613803">"Emergency app"</string>
-    <string name="reset_app_preferences" msgid="8861758340732716573">"I-reset ang kagustuhan sa app"</string>
+    <string name="reset_app_preferences" msgid="8861758340732716573">"I-reset ang mga preference sa app"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"I-reset ang preferences sa app?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Ire-reset nito ang lahat ng preference para sa:\n\n"<li>"Mga naka-disable na app"</li>\n<li>"Mga naka-disable na notification ng app"</li>\n<li>"Mga default na application para sa mga pagkilos"</li>\n<li>"Mga paghihigpit sa data sa background para sa mga app"</li>\n<li>"Anumang paghihigpit sa pahintulot"</li>\n<li>"Mga setting ng paggamit ng baterya"</li>\n\n"Hindi ka mawawalan ng anumang data ng app."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"I-reset ang apps"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Mga Mabilisang Setting"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Mag-swipe pababa mula sa itaas ng screen}one{Mag-swipe pababa gamit ang # daliri mula sa itaas ng screen.}other{Mag-swipe pababa gamit ang # na daliri mula sa itaas ng screen.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Mag-swipe pababa mula sa itaas ng screen. Magiging available ang shortcut na ito pagkatapos mong tapusin ang pag-set up ng device.}one{Mag-swipe pababa gamit ang # daliri mula sa itaas ng iyong screen. Magiging available ang shortcut na ito pagkatapos mong tapusin ang pag-set up ng device.}other{Mag-swipe pababa gamit ang # na daliri mula sa itaas ng iyong screen. Magiging available ang shortcut na ito pagkatapos mong tapusin ang pag-set up ng device.}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"Key ng Row sa Itaas"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"Pindutin ang accessibility key sa itaas na row ng keyboard"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Mga Mabilisang Setting"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Mga volume key"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"mga volume key"</string>
@@ -3479,12 +3469,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Iba pang user"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"I-delete ang aktibidad ng bisita"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"I-delete ang lahat ng app at data ng bisita kapag umaalis sa guest mode"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"Ipagamit sa bisita ang device"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"Made-delete ang lahat ng app at data ng bisita kapag umaalis sa guest mode"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"magdagdag, bisita"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"I-delete ang aktibidad ng bisita?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Made-delete na ngayon ang mga app at data mula sa session na ito ng bisita, at made-delete ang lahat ng aktibidad ng bisita sa hinaharap sa tuwing aalis ka ng guest mode"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"i-delete, bisita, aktibidad, alisin, data, bumibisita, burahin"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Device"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"Keyboard, Touchpad, Display, Tunog"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Hindi available dahil naka-off ang NFC"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para magamit, mag-install muna ng app sa pagbabayad"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Mga kamakailang app, mga default na app"</string>
@@ -3955,8 +3947,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Kumuha ng maiikling recap ng mahahabang mensahe"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Gumamit ng mga buod ng notification"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Ibuod ang mahahabang mensahe at igrupo ang mga pag-uusap para makakuha ng maiikling recap.\n\nGumagamit ang mga buod ng AI sa iyong device, na kung minsan ay posibleng magkamali. Hindi kailanman ipinapadala sa Google ang iyong mga mensahe."</string>
-    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
-    <skip />
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"Magbuod ng mga mahabang mensahe at panggrupong pag-uusap para makakuha ng maiikling recap.\n\nAng mga buod ay ibinibigay ng mga app o AI sa iyong device at posibleng may mga pagkakamali. Hindi kailanman ipinapadala sa Google ang iyong mga mensahe."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Hindi ibubuod ang mga notification mula sa mga app na ito"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Pamahalaan ang mga app"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Pamahalaan ang mga app para sa mga buod ng notification"</string>
@@ -4396,6 +4387,12 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"I-restart"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Huwag muna"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Matuto pa tungkol sa Advanced na proteksyon sa memory."</string>
+    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
+    <skip />
+    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
+    <skip />
+    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Ang profile sa trabahong ito ay pinapamahalaan ng:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Pinapamahalaan ng <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Buksan bilang default"</string>
@@ -4442,12 +4439,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Alisin ang mga pahintulot, i-delete ang mga pansamantalang file, at ihinto ang mga notification"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Pamahalaan ang app kung hindi ginagamit"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Alisin ang mga pahintulot, i-delete ang mga pansamantalang file, ihinto ang mga notification, at i-archive ang app"</string>
-    <!-- no translation found for task_continuity_category (3736049711007817178) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
-    <skip />
+    <string name="task_continuity_category" msgid="3736049711007817178">"Pagpapatuloy ng gawain"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"Mga Gawain sa App"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"Walang kahirap-hirap na magpatuloy kung saan ka huminto sa iba pang device"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Lahat ng app"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Mga naka-install na app"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Mga instant na app"</string>
@@ -4519,6 +4513,18 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Default na USB Configuration"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Mga opsyon sa power"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Mga opsyon sa paglilipat ng file"</string>
+    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
+    <skip />
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Mga Preference sa USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"Kinokontrol ang USB ng"</string>
@@ -5688,20 +5694,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Kailangan ng <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> na available ang 2G"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Payagan lang ang mga encrypted network"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Mas secure ito pero posibleng limitahan nito ang iyong koneksyon sa mobile network sa ilang lokasyon. Palaging pinapayagan ang emergency na tawag."</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"I-off ang proteksyon sa 2G network?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"Hindi sinusuportahan ng kasalukuyang network para sa <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM ang 2G. Kapag na-off ang proteksyon sa 2G, malalagay ka sa panganib na kumonekta sa mga mapaminsalang na-spoof na 2G network."</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"I-off"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"Proteksyon sa 2G network"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"Naka-on ang proteksyon sa 2G network"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"Kailangang naka-on ang proteksyon sa 2G sa kasalukuyang network para sa <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM. Puwede mo pa ring piliing i-disable ang proteksyon sa 2G sa sarili mong pagpapasya."</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Mga Setting"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Lahat ng serbisyo"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Ipakita ang access sa clipboard"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Magpakita ng mensahe kapag ina-access ng mga app ang text, mga larawan, o iba pang content na nakopya mo"</string>
@@ -5797,6 +5796,10 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> by <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Magre-restart ang app kapag binago mo ang aspect ratio. Posibleng mawala ang mga hindi na-save na pagbabago. Posibleng hindi naka-optimize ang ilang app para sa ilang partikular na aspect ratio."</string>
+    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
+    <skip />
+    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor para sa fingerprint"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Mga flash notification"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Tungkol sa mga flash notification"</string>
@@ -5864,8 +5867,8 @@
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Na-convert sa eSIM. Alisin at itapon."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"I-sync sa lahat ng device"</string>
     <string name="device_diagnostics_title" msgid="2914523189695727897">"Mga diagnostic ng device"</string>
-    <string name="audio_sharing_title" msgid="4144157137502923821">"Pagbabahagi ng audio"</string>
-    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Ibahagi ang Audio"</string>
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Pag-share ng audio"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"I-share ang audio"</string>
     <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Mga tawag at alarm"</string>
     <string name="audio_sharing_description" msgid="1660255584523640628">"Hayaang makinig ang mga tao sa iyong media kasama mo. Kailangan ng mga makikinig ng sarili nilang LE Audio headphones."</string>
     <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Mga aktibong media device"</string>
@@ -5886,13 +5889,13 @@
     <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Iba pang media device"</string>
     <string name="audio_sharing_summary_on" msgid="611197542982323788">"Naka-on"</string>
     <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Naka-off"</string>
-    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Ibahagi ang iyong audio"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"I-share ang iyong audio"</string>
     <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> at <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
-    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Ibahagi ang audio"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"I-share ang audio"</string>
     <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Huwag na lang"</string>
     <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Ibahagi ang audio sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Ibahagi ang audio sa isa pang device"</string>
-    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Ibahagi sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"I-share ang audio sa isa pang device"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"I-share sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Isara"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Magkonekta ng isa pang pares ng compatible na headphones, o ibahagi ang pangalan at password ng iyong stream sa ibang tao"</string>
     <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"Bigyang-daan ang iba na ma-scan ang code na ito at pakinggan ang iyong audio\n\nPangalan ng stream: <xliff:g id="STREAM_NAME">%1$s</xliff:g>\nPassword: <xliff:g id="PASSWORD">%2$s</xliff:g>"</string>
@@ -5902,12 +5905,12 @@
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Ibinabahagi ang audio"</string>
     <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Magpares ng bagong device"</string>
     <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Ipakita ang QR code"</string>
-    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Nagbabahagi ka ng audio"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Nagshe-share ka ng audio"</string>
     <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Maririnig ng mga taong nakikinig ang iyong media. Hindi nila maririnig ang mga tawag."</string>
     <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Ihinto ang pagshe-share"</string>
     <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Mga Setting"</string>
     <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Pumili ng device na ididiskonekta"</string>
-    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"2 device lang ang mababahagian ng audio sa isang pagkakataon"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"2 device lang ang puwedeng mag-share sa audio sa isang pagkakataon"</string>
     <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Idiskonekta ang <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Ikonekta ang <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ?"</string>
     <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Ihihinto mo ang pagbabahagi ng audio sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
@@ -6132,8 +6135,7 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Tapos na ang aksyon"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Mga mabilisang setting ng seguridad at privacy"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Iyong mga kontrol sa privacy"</string>
-    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
-    <skip />
+    <string name="safety_center_review_settings" msgid="295527297192914772">"Suriin ang mga setting"</string>
     <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Buksan"</string>
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Lumipat. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"Naka-block"</string>
@@ -6163,6 +6165,25 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Madaling i-access ang impormasyon ng satellite sa pamamagitan ng pagdaragdag ng tile ng Satellite sa Mga Mabilisang Setting"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Magdagdag ng tile"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Mga Prompt ng Tile ng Satellite"</string>
-    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <skip />
+    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
+    <skip />
+    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
+    <skip />
+    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
+    <skip />
+    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
+    <skip />
+    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
+    <skip />
+    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
+    <skip />
+    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
     <skip />
 </resources>
