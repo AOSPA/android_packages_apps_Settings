@@ -18,18 +18,18 @@ package com.android.settings.system;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import android.provider.SearchIndexableResource;
-
 import com.android.settings.utils.DesktopSettingsUtils;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -39,6 +39,8 @@ import java.util.List;
 // LINT.IfChange
 @SearchIndexable
 public class SystemDashboardFragment extends DashboardFragment {
+
+    private static final String KEY_ADVANCED = "advanced_category";
 
     private static final String TAG = "SystemDashboardFrag";
 
@@ -51,6 +53,39 @@ public class SystemDashboardFragment extends DashboardFragment {
         if (getVisiblePreferenceCount(screen) == screen.getInitialExpandedChildrenCount() + 1) {
             screen.setInitialExpandedChildrenCount(Integer.MAX_VALUE);
         }
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
+
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null) {
+            return;
+        }
+
+        // Move any remaining preferences that are not in a category to the Advanced category.
+        // Temporary fallback until all external dependencies are propagated to AOSP
+        final PreferenceCategory advancedCategory = findPreference(KEY_ADVANCED);
+        if (advancedCategory != null) {
+            for (int i = screen.getPreferenceCount() - 1; i >= 0; i--) {
+                final Preference preference = screen.getPreference(i);
+                if (!(preference instanceof PreferenceCategory)) {
+                    // This is a stray preference, move it to the advanced category
+                    movePreference(preference, advancedCategory);
+                }
+            }
+        }
+    }
+
+    private void movePreference(Preference preference, PreferenceCategory targetCategory) {
+        if (preference == null || targetCategory == null) {
+            return; // Don't move if the preference or category doesn't exist
+        }
+
+        // Remove from the root screen and add to the target category
+        getPreferenceScreen().removePreference(preference);
+        targetCategory.addPreference(preference);
     }
 
     @Override
