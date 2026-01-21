@@ -25,6 +25,7 @@ import com.android.internal.app.SystemLocaleCollector
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.localepicker.LocaleUtils
+import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.appendLocaleExtension
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
@@ -57,7 +58,11 @@ class LanguageAndRegionApiFirstScreen :
                     val localeInfoList = getLocaleInfoList(context)
                     // If a language has been added to the user's list, it will not appear in the
                     // supported list. We need to add it back to ensure the list is complete.
-                    localeInfoList.addAll(LocaleUtils.getUserLocaleList())
+                    localeInfoList.addAll(
+                        LocaleUtils.getUserLocaleList().map {
+                            LocaleStore.getLocaleInfo(it.locale.stripExtensions())
+                        }
+                    )
                     localeInfoList.map {
                         GeneratedValue(it.locale.toLanguageTag(), it.fullNameNative)
                     }
@@ -66,13 +71,11 @@ class LanguageAndRegionApiFirstScreen :
             get { execute { Locale.getDefault().toLanguageTag() } }
             set {
                 execute { value ->
-                    val locale = Locale.forLanguageTag(value)
+                    val locale = appendLocaleExtension(Locale.forLanguageTag(value))
                     // Check whether the country that user inputs is in the user list already
                     val userLocaleList = LocaleUtils.getUserLocaleList()
                     val index =
-                        userLocaleList.indexOfFirst {
-                            it?.locale?.toLanguageTag()?.startsWith(locale.toLanguageTag()) == true
-                        }
+                        userLocaleList.indexOfFirst { it?.locale?.equals(locale) == true }
                     if (index != -1) {
                         // In the user list, move the user input to the first position
                         val defaultLocale = userLocaleList.removeAt(index)

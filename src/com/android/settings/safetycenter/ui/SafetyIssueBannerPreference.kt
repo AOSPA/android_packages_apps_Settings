@@ -17,6 +17,7 @@
 package com.android.settings.safetycenter.ui
 
 import android.content.Context
+import android.content.res.Configuration
 import android.safetycenter.SafetyCenterIssue
 import android.util.Log
 import android.view.View
@@ -53,7 +54,11 @@ class SafetyIssueBannerPreference(
 
     init {
         key = bannerKey
-        setButtonOrientation(LinearLayout.VERTICAL)
+        if (context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setButtonOrientation(LinearLayout.HORIZONTAL)
+        } else {
+            setButtonOrientation(LinearLayout.VERTICAL)
+        }
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {

@@ -150,4 +150,50 @@ public class RegionalPreferencesDataUtils {
         }
         return localesHasNumberingSystems;
     }
+
+    public static Locale appendLocaleExtension(Locale selectedLocale) {
+        Locale systemLocale = Locale.getDefault();
+        Set<Character> extensionKeys = systemLocale.getExtensionKeys();
+        Locale.Builder builder = new Locale.Builder();
+        builder.setLocale(selectedLocale);
+        for (Character extKey : extensionKeys) {
+            builder.setExtension(extKey, systemLocale.getExtension(extKey));
+        }
+        return builder.build();
+    }
+
+    static void updateRegion(Locale selectedLocale) {
+        Locale[] newLocales = getUpdatedLocales(selectedLocale);
+        LocaleList localeList = new LocaleList(newLocales);
+        LocaleList.setDefault(localeList);
+        LocalePicker.updateLocales(localeList);
+    }
+
+    private static Locale[] getUpdatedLocales(Locale selectedLocale) {
+        LocaleList localeList = LocaleList.getDefault();
+        Locale[] newLocales = new Locale[localeList.size()];
+        for (int i = 0; i < localeList.size(); i++) {
+            Locale target = localeList.get(i);
+            if (sameLanguageAndScript(selectedLocale, target)) {
+                newLocales[i] = appendLocaleExtension(selectedLocale);
+            } else {
+                newLocales[i] = localeList.get(i);
+            }
+        }
+        return newLocales;
+    }
+
+    private static boolean sameLanguageAndScript(Locale source, Locale target) {
+        String sourceLanguage = source.getLanguage();
+        String targetLanguage = target.getLanguage();
+        String sourceLocaleScript = source.getScript();
+        String targetLocaleScript = target.getScript();
+        if (sourceLanguage.equals(targetLanguage)) {
+            if (!sourceLocaleScript.isEmpty() && !targetLocaleScript.isEmpty()) {
+                return sourceLocaleScript.equals(targetLocaleScript);
+            }
+            return true;
+        }
+        return false;
+    }
 }

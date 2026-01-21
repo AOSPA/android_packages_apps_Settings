@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.android.settings.network.tether.TetheringRepository;
 import com.android.settings.print.PrintRepository;
 import com.android.settings.wifi.details.WifiNetworkDetailsViewModel;
 import com.android.settings.wifi.dpp.WifiDppQrCodeGeneratorFragment;
@@ -50,6 +51,7 @@ public class WifiFeatureProvider {
     private PrintManager mPrintManager;
     private WifiVerboseLogging mWifiVerboseLogging;
     private WifiHotspotRepository mWifiHotspotRepository;
+    private TetheringRepository mTetheringRepository;
     private SharedConnectivityRepository mSharedConnectivityRepository;
     private PrintRepository mPrintRepository;
 
@@ -97,6 +99,17 @@ public class WifiFeatureProvider {
             mWifiVerboseLogging = new WifiVerboseLogging(mAppContext, getWifiManager());
         }
         return mWifiVerboseLogging;
+    }
+
+    /**
+     * Gets TetheringRepository
+     */
+    public TetheringRepository getTetheringRepository() {
+        if (mTetheringRepository == null) {
+            mTetheringRepository = new TetheringRepository(mAppContext, getTetheringManager());
+            verboseLog(TAG, "getTetheringRepository():" + mTetheringRepository);
+        }
+        return mTetheringRepository;
     }
 
     /**

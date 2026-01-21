@@ -36,8 +36,13 @@ import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.PreferenceSearchIndexablesProvider
+import com.android.settingslib.metadata.ValidatedKeyParameters
+import com.android.settingslib.metadata.preferencesapi.ApiOperationContext
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
 import com.android.settingslib.metadata.toMap
+import kotlinx.coroutines.runBlocking
 
 /**
  * A trampoline Activity that launches a settings screen based on a generic screen key.
@@ -111,6 +116,26 @@ class SettingsLaunchpadActivity : Activity() {
                     Log.e(TAG, "Cannot find screen metadata for key: $screenKey")
                     return
                 }
+
+        if (screenMetadata is PreferencesApiScreen) {
+            val opContext = ApiOperationContext(
+                context = this@SettingsLaunchpadActivity.applicationContext,
+                parameters = screenMetadata.keyParameters ?: ValidatedKeyParameters.EMPTY,
+            )
+
+            // Precondition checks are suspend functions. Since this is a trampoline
+            // activity that should execute quickly, we use runBlocking. This assumes
+            // the precondition checks are fast and won't cause ANRs.
+            val result = runBlocking { screenMetadata.screenPreconditions?.check(opContext) } ?: Allowed
+            if (result != Allowed) { // Do not launch the screen if preconditions are not met.
+                val reason = (result as Disallowed).getReason(opContext.context)
+                Log.e(
+                    TAG,
+                    "Screen preconditions not met for key '$screenKey' with reason: $reason. Aborting launch."
+                )
+                return
+            }
+        }
 
         val fragmentClassName =
             screenMetadata.fragmentClass()?.name

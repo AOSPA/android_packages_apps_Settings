@@ -119,6 +119,34 @@ class LanguageAndRegionApiFirstScreenTest {
         assertThat(Locale.getDefault().toLanguageTag()).isEqualTo("fr-CA")
     }
 
+    @Test
+    fun setDefaultSystemLanguageFromUserList_isSet_withExtension() {
+        setupLocaleInfoList(
+            Locale.forLanguageTag("en-US-u-ms-ussystem"),
+            "en-US-u-ms-ussystem" to LOCALE_NAME_EN_US,
+            "es-US-u-ms-ussystem" to LOCALE_NAME_ES_US
+        )
+        tester.set(KEY_PREFERENCE, LOCALE_CODE_ES_US)
+
+        assertThat(
+            Locale.getDefault().toLanguageTag()
+        ).isEqualTo("es-US-u-ms-ussystem")
+    }
+
+    @Test
+    fun setDefaultSystemLanguageNotInUserList_isSet_withExtension() {
+        setupLocaleInfoList(
+            Locale.forLanguageTag("en-US-u-ms-ussystem"),
+            "en-US-u-ms-ussystem" to LOCALE_NAME_EN_US,
+            "es-US-u-ms-ussystem" to LOCALE_NAME_ES_US
+        )
+        tester.set(KEY_PREFERENCE, LOCALE_CODE_FR_FR)
+
+        assertThat(
+            Locale.getDefault().toLanguageTag()
+        ).isEqualTo("fr-FR-u-ms-ussystem")
+    }
+
     private fun getLocaleList(vararg languages: Pair<String, String>): LocaleList {
         val localeInfoList = languages.map { (languageTag, languageName) ->
             mock<LocaleStore.LocaleInfo>().apply {
