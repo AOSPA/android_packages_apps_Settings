@@ -510,6 +510,7 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = IccLockApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothScanningApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = DateTimeSettingsScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =
