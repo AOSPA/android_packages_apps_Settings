@@ -22,8 +22,6 @@ import android.app.job.JobScheduler
 import android.app.job.JobService
 import android.content.ComponentName
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import android.telephony.ServiceState
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyCallback
@@ -31,6 +29,11 @@ import android.telephony.TelephonyManager
 import android.util.Log
 import com.android.internal.annotations.VisibleForTesting
 import com.android.settings.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 private const val TAG = "SatelliteEligibilityJobService"
 
@@ -55,8 +58,10 @@ open class SatelliteEligibilityJobService : JobService() {
          *
          * The job will be triggered when the data registration state changes (e.g., losing
          * service).
+         *
+         * @param forceImmediate If true, the job runs immediately (override deadline 0).
          */
-        fun schedule(context: Context) {
+        fun schedule(context: Context, forceImmediate: Boolean = false) {
             val subId = SubscriptionManager.getDefaultDataSubscriptionId()
             if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
                 Log.d(TAG, "Invalid subscription ID, skipping job scheduling.")
@@ -82,7 +87,7 @@ open class SatelliteEligibilityJobService : JobService() {
                     subId,
                     "data_reg_state",
                 )
-            val jobInfo =
+            val builder =
                 JobInfo.Builder(
                         jobId,
                         ComponentName(context, SatelliteEligibilityJobService::class.java),
@@ -95,9 +100,12 @@ open class SatelliteEligibilityJobService : JobService() {
                     )
                     .setTriggerContentUpdateDelay(1000) // Debounce 1s
                     .setTriggerContentMaxDelay(10000) // Max delay 10s
-                    .build()
 
-            val result = jobScheduler.schedule(jobInfo)
+            if (forceImmediate) {
+                builder.setOverrideDeadline(0)
+            }
+
+            val result = jobScheduler.schedule(builder.build())
             if (result == JobScheduler.RESULT_SUCCESS) {
                 Log.d(TAG, "Successfully scheduled SatelliteEligibilityJobService for subId=$subId")
             } else {
@@ -108,15 +116,14 @@ open class SatelliteEligibilityJobService : JobService() {
 
     private var telephonyManager: TelephonyManager? = null
     private var telephonyCallback: TelephonyCallback? = null
-    private val handler = Handler(Looper.getMainLooper())
-    private var timeoutRunnable: Runnable? = null
+    private var scope: CoroutineScope? = null
 
     override fun onStartJob(params: JobParameters): Boolean {
         Log.d(TAG, "onStartJob: ${params.jobId}")
 
         val subId = SubscriptionManager.getDefaultDataSubscriptionId()
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            Log.d(TAG, "Invalid subscription ID, finishing job.")
+            Log.w(TAG, "Invalid subscription ID, finishing job.")
             return false
         }
 
@@ -141,24 +148,37 @@ open class SatelliteEligibilityJobService : JobService() {
         if (state == ServiceState.STATE_IN_SERVICE) {
             val isNtn = serviceState?.isUsingNonTerrestrialNetwork() == true
             if (!isNtn) {
-                Log.d(TAG, "Device is IN_SERVICE (Terrestrial), rescheduling job.")
+                Log.i(TAG, "Device is IN_SERVICE (Terrestrial), rescheduling job.")
                 schedule(this)
                 return false
             }
-            Log.d(TAG, "Device is IN_SERVICE (Satellite), proceeding to monitor.")
+            Log.i(TAG, "Device is IN_SERVICE (Satellite), proceeding to monitor.")
+        }
+
+        scope = CoroutineScope(Dispatchers.Main + Job())
+        scope?.launch {
+            // Schedule timeout
+            launch {
+                kotlinx.coroutines.delay(TIMEOUT_MS)
+                Log.i(TAG, "Timed out waiting for satellite eligibility.")
+                cleanup()
+                schedule(this@SatelliteEligibilityJobService)
+                jobFinished(params, false)
+            }
+
+            // Monitor satellite status
+            SatelliteStateRepository.getInstance(this@SatelliteEligibilityJobService)
+                .satelliteStatus
+                .collect { status ->
+                    if (status == SatelliteStatus.AVAILABLE || status == SatelliteStatus.ACTIVE) {
+                        Log.i(TAG, "Satellite Status: $status. Showing prompt.")
+                        showPromptAndFinish(params)
+                    }
+                }
         }
 
         // Register callback to listen for state changes
         registerTelephonyCallback(params)
-
-        // Schedule timeout
-        timeoutRunnable = Runnable {
-            Log.d(TAG, "Timed out waiting for satellite eligibility.")
-            cleanup()
-            schedule(this@SatelliteEligibilityJobService)
-            jobFinished(params, false)
-        }
-        handler.postDelayed(timeoutRunnable!!, TIMEOUT_MS)
 
         return true // Work is ongoing
     }
@@ -171,10 +191,7 @@ open class SatelliteEligibilityJobService : JobService() {
 
     private fun registerTelephonyCallback(params: JobParameters) {
         telephonyCallback =
-            object :
-                TelephonyCallback(),
-                TelephonyCallback.CarrierRoamingNtnListener,
-                TelephonyCallback.ServiceStateListener {
+            object : TelephonyCallback(), TelephonyCallback.ServiceStateListener {
 
                 override fun onServiceStateChanged(serviceState: ServiceState) {
                     if (serviceState.state == ServiceState.STATE_IN_SERVICE) {
@@ -190,20 +207,6 @@ open class SatelliteEligibilityJobService : JobService() {
                                 "Device is IN_SERVICE (Satellite), ignoring service restoration.",
                             )
                         }
-                    }
-                }
-
-                override fun onCarrierRoamingNtnEligibleStateChanged(available: Boolean) {
-                    if (available) {
-                        Log.d(TAG, "Satellite eligible. Showing prompt.")
-                        showPromptAndFinish(params)
-                    }
-                }
-
-                override fun onCarrierRoamingNtnModeChanged(active: Boolean) {
-                    if (active) {
-                        Log.d(TAG, "Satellite mode active. Showing prompt.")
-                        showPromptAndFinish(params)
                     }
                 }
             }
@@ -225,13 +228,11 @@ open class SatelliteEligibilityJobService : JobService() {
     }
 
     private fun cleanup() {
+        scope?.cancel()
+        scope = null
         if (telephonyCallback != null) {
             telephonyManager?.unregisterTelephonyCallback(telephonyCallback!!)
             telephonyCallback = null
-        }
-        if (timeoutRunnable != null) {
-            handler.removeCallbacks(timeoutRunnable!!)
-            timeoutRunnable = null
         }
     }
 }

@@ -67,13 +67,14 @@ open class SatelliteTileStateReceiver(
 
     override fun onReceive(context: Context, intent: Intent) {
         if (!isSatelliteTileFeatureEnabled(context)) {
+            Log.v(TAG, "Satellite tile feature is disabled. Ignoring intent.")
             return
         }
 
         val action = intent.action
         Log.d(TAG, "onReceive: $action")
 
-        val handler: (suspend () -> Unit)? =
+        val job: (suspend () -> Unit)? =
             when (action) {
                 Intent.ACTION_BOOT_COMPLETED,
                 Intent.ACTION_MY_PACKAGE_REPLACED -> { -> handleBootOrAppUpdate(context) }
@@ -85,17 +86,17 @@ open class SatelliteTileStateReceiver(
                 else -> null
             }
 
-        if (handler != null) {
+        if (job != null) {
             val pendingResult = goAsync()
             CoroutineScope(defaultDispatcher).launch {
                 try {
-                    handler()
+                    job()
                 } finally {
                     pendingResult.finish()
                 }
             }
         } else {
-            Log.d(TAG, "onReceive: unsupported action: $action")
+            Log.w(TAG, "Received unsupported action: $action")
         }
     }
 
@@ -110,6 +111,7 @@ open class SatelliteTileStateReceiver(
      * 3. Schedule the Satellite Eligibility Job to monitor data loss events.
      */
     private suspend fun handleBootOrAppUpdate(context: Context) {
+        Log.i(TAG, "Handling boot or app update.")
         SatelliteSupportedStateChangeHandler.register(context, defaultDispatcher)
         updateTileServiceEnabledState(context, isAnyNtnSupported(context))
         scheduleEligibilityJob(context)
@@ -122,6 +124,7 @@ open class SatelliteTileStateReceiver(
      * so we refresh the tile's enabled state.
      */
     private suspend fun handleSubscriptionOrConfigChanged(context: Context) {
+        Log.i(TAG, "Handling subscription or config change.")
         updateTileServiceEnabledState(context, isAnyNtnSupported(context))
         scheduleEligibilityJob(context)
     }
@@ -139,7 +142,7 @@ open class SatelliteTileStateReceiver(
             jobScheduler?.cancel(jobId)
             Log.d(TAG, "Default data subscription is invalid, cancelled job.")
         } else {
-            SatelliteEligibilityJobService.schedule(context)
+            SatelliteEligibilityJobService.schedule(context, forceImmediate = true)
         }
     }
 
