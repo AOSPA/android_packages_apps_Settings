@@ -50,6 +50,7 @@ import androidx.preference.Preference;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
+import com.android.settings.metrics.CredmanMetricsLogger;
 import com.android.settingslib.RestrictedSelectorWithWidgetPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.widget.CandidateInfo;
@@ -238,6 +239,8 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         final Context context = getPrefContext();
         final SectionButtonPreference preference = new SectionButtonPreference(context);
         preference.setOnClickListener(v -> {
+            CredmanMetricsLogger credmanMetricsLogger = new CredmanMetricsLogger(context);
+            credmanMetricsLogger.logAddPreferredServiceEvent();
             context.startActivityAsUser(addNewServiceIntent, UserHandle.of(getUser()));
             return Unit.INSTANCE;
         });
@@ -294,7 +297,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
         final String selectedAutofillProvider =
                 CredentialManagerPreferenceController
-                    .getSelectedAutofillProvider(context, userId, TAG);
+                        .getSelectedAutofillProvider(context, userId, TAG);
         return CombinedProviderInfo.buildMergedList(
                 autofillProviders, credManProviders, selectedAutofillProvider);
     }
@@ -546,6 +549,6 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
     }
 
     protected int getUser() {
-       return  UserUtils.getUser(mIsWorkProfile, mIsPrivateSpace, getContext());
+        return UserUtils.getUser(mIsWorkProfile, mIsPrivateSpace, getContext());
     }
 }
