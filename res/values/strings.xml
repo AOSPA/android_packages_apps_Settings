@@ -2605,10 +2605,6 @@
     <string name="wifi_dpp_qr_code_is_not_valid_format">QR code isn\u0027t a valid format</string>
     <!-- Label for the try again button [CHAR LIMIT=20]-->
     <string name="retry">Retry</string>
-    <!-- Label for the shared wifi message -->
-    <string name="shared_message">shared</string>
-    <!-- Label for the private wifi message -->
-    <string name="private_message">private</string>
     <!-- Label for the conflict wifi dialog switch button [CHAR LIMIT=12] [SCREENSHOT=screen/WDcGQEccdjdc5es] -->
     <string name="wifi_conflict_dialog_switch">Switch</string>
     <!-- Label for the conflict wifi dialog cancel button [CHAR LIMIT=12] [SCREENSHOT=screen/WDcGQEccdjdc5es] -->
@@ -2617,10 +2613,14 @@
     <string name="wifi_share_preference_title">Share network</string>
     <!-- Summary for the preference to share a network with other users on the same device [CHAR LIMIT=NONE] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
     <string name="wifi_share_preference_summary">Other users on this device can access this network</string>
-    <!-- Alert dialog title, informing the user to switch to the conflicting network which already has the desired share toggle value. [CHAR LIMIT=30] [SCREENSHOT=screen/WDcGQEccdjdc5es] -->
-    <string name="wifi_conflict_dialog_title">Switch to <xliff:g id="shared">%1$s</xliff:g> network?</string>
-    <!-- Alert dialog summary, informing the user to switch to the conflicting network which already has the desired share toggle value. [CHAR LIMIT=NONE] [SCREENSHOT=screen/WDcGQEccdjdc5es]-->
-    <string name="wifi_conflict_dialog_message">A <xliff:g id="shared">%1$s</xliff:g> network with the name \"<xliff:g id="network_name">%2$s</xliff:g>\" already exists. If you switch to the <xliff:g id="shared">%1$s</xliff:g> network, you will leave your <xliff:g id="private">%3$s</xliff:g> network and you may temporarily have no internet.</string>
+    <!-- Alert dialog title, informing the user to switch to the conflicting shared network which already has the desired share toggle value. [CHAR LIMIT=30] [SCREENSHOT=screen/A4k2sHWVQnPFW2o] -->
+    <string name="wifi_share_conflict_dialog_title">Switch to shared network?</string>
+    <!-- Alert dialog summary, informing the user to switch to the conflicting shared network which already has the desired share toggle value. [CHAR LIMIT=NONE] [SCREENSHOT=screen/A4k2sHWVQnPFW2o] -->
+    <string name="wifi_share_conflict_dialog_message">A shared network with the name \"<xliff:g id="network_name">%1$s</xliff:g>\" already exists. If you switch to the shared network, you will leave your private network and you may temporarily have no internet.</string>
+    <!-- Alert dialog title, informing the user to switch to the conflicting private network which already has the desired share toggle value. [CHAR LIMIT=30] [SCREENSHOT=screen/6UD4VvccnEEswUY] -->
+    <string name="wifi_private_conflict_dialog_title">Switch to private network?</string>
+    <!-- Alert dialog summary, informing the user to switch to the conflicting private network which already has the desired share toggle value. [CHAR LIMIT=NONE] [SCREENSHOT=screen/6UD4VvccnEEswUY]-->
+    <string name="wifi_private_conflict_dialog_message">A private network with the name \"<xliff:g id="network_name">%1$s</xliff:g>\" already exists. If you switch to the private network, you will leave your shared network and you may temporarily have no internet.</string>
     <!-- Hint for unchanged fields -->
     <string name="wifi_unchanged">(unchanged)</string>
     <!-- Label for the check box to allow other device users to edit network details [CHAR LIMIT=30] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
