@@ -31,8 +31,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
@@ -58,7 +61,8 @@ class WifiSwitchPreferenceTest {
                 }
         }
 
-    private val wifiSwitchPreference = WifiSwitchPreference(TestScope(StandardTestDispatcher()))
+    private val testScope = TestScope(StandardTestDispatcher())
+    private val wifiSwitchPreference = WifiSwitchPreference(testScope)
 
     @Test
     fun getValue_defaultOn_returnOn() {
@@ -124,6 +128,24 @@ class WifiSwitchPreferenceTest {
 
         assertThat(preference.isChecked).isTrue()
     }
+
+    @Test
+    fun setValue_fromMainThread_wifiEnabledStateChanged() {
+        wifiSwitchPreference.storage(context).setBoolean(WifiSwitchPreference.KEY, true)
+
+        verify(mockWifiManager).setWifiEnabled(true)
+    }
+
+    @Test
+    fun setValue_fromBackgroundThread_wifiEnabledStateChanged() =
+        testScope.runTest {
+            launch {
+                wifiSwitchPreference.storage(context).setBoolean(WifiSwitchPreference.KEY, true)
+            }
+            advanceUntilIdle()
+
+            verify(mockWifiManager).setWifiEnabled(true)
+        }
 
     private fun getSwitchPreference(): SwitchPreferenceCompat =
         wifiSwitchPreference.createAndBindWidget(context)
