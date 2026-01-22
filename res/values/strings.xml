@@ -15382,6 +15382,12 @@
     <string name="satellite_change_default_app_button">Change default app</string>
     <!-- Button text for the view carrier settings info banner. [CHAR LIMIT=50] -->
     <string name="satellite_view_carrier_settings_button">View carrier settings</string>
+    <!-- Warning text for the banner when location services is disabled. [CHAR_LIMIT=NONE] -->
+    <string name="unknown_location_warning"> To see if Satellite SOS is available in your current location, turn on location in Settings</string>
+    <!-- Button text to open Location Settings. [CHAR_LIMIT=NONE] -->
+    <string name="unknown_location_warning_button">Turn on location</string>
+    <!-- Warning text for the banner when device is not provisioned for satellite SOS. [CHAR_LIMIT=NONE] -->
+    <string name="unprovisioned_device_warning">Your device isn\'t registered for Satellite SOS. Make sure you\'re connected to the internet for your device to automatically complete registration</string>
 
     <string name="long_press_power_actions_description" translatable="false">Actions that can be performed when the power button is long pressed</string>
     <string name="long_press_power_assistant_sensitivity_ms_description" translatable="false">A length of time in ms.</string>

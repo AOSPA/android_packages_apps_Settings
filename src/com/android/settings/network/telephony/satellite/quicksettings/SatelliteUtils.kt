@@ -17,7 +17,10 @@
 package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.PersistableBundle
+import android.provider.Settings
 import android.telephony.CarrierConfigManager
 import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
 import android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT
@@ -139,5 +142,32 @@ object SatelliteUtils {
         }
     }
 
+    /**
+     * Returns the Intent to view the Satellite SOS supported countries Google Help Center Article
+     */
+    fun getSatelliteCoverageIntent(): Intent {
+        return Intent(Intent.ACTION_VIEW, Uri.parse(SATELLITE_SOS_COVERAGE_URL))
+    }
+
+    /** Returns the Intent to change the default SMS application. */
+    fun getDefaultSmsAppIntent(): Intent {
+        return Intent(android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+    }
+
+    /** Returns the Intent to view the location source settings. */
+    fun getLocationSourceSettingsIntent(): Intent {
+        return Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+    }
+
+    /** Returns the Intent for the carrier satellite settings. */
+    fun getCarrierSettingsIntent(context: Context): Intent {
+        val intent = Intent(Settings.ACTION_SATELLITE_SETTING)
+        intent.putExtra(":settings:show_fragment_as_subsetting", true)
+        intent.putExtra("sub_id", SubscriptionManager.getActiveDataSubscriptionId())
+        return intent
+    }
+
     private const val TAG = "SatelliteUtils"
+    private const val SATELLITE_SOS_COVERAGE_URL =
+        "https://support.google.com/pixelphone?p=satellitesos"
 }
