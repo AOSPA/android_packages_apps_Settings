@@ -537,7 +537,7 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Gezicht en vingerafdruk toegevoegd"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Manieren om te ontgrendelen"</string>
     <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Gezicht of vingerafdruk gebruiken voor"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Voor verificatie dat jij het bent in apps"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Verifiëren dat jij het bent in apps"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Gezicht gebruiken"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Met je vingerafdruk"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Met je gezicht of vingerafdruk"</string>
@@ -947,7 +947,7 @@
     <string name="external_display_settings_title" msgid="3865786552022665355">"Externe beeldschermen"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"In­ge­bouwd scherm"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Universele cursor"</string>
-    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Je muis tussen schermen bewegen"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Beweeg je muis tussen schermen"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Extern scherm gebruiken"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Schermresolutie"</string>
     <string name="external_display_resolution_refresh_rate_settings_title" msgid="4331709890849304277">"Resolutie en vernieuwingssnelheid"</string>
@@ -956,7 +956,7 @@
     <string name="external_display_connection_preference" msgid="3337612335495542718">"Standaard verbindingsgedrag"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Gebruiken als afzonderlijk scherm"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Ingebouwd scherm mirroren"</string>
-    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Dialoogvenster Verbinding tonen"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Toon dialoogvenster Verbinding"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Extern scherm is losgekoppeld"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Rotatie"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Standaard"</string>
@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"HDR/SDR-ratio tonen"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"Toon de huidige HDR/SDR-ratio"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Apparaatontgrendeling vereisen voor NFC"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"Apparaatontgrendeling vereisen"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Klaar om app-content te verzenden via NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Uit"</string>
@@ -1484,7 +1484,7 @@
     <string name="doze_always_on_title2" msgid="6806855871175589465">"Scherm dat altijd actief is"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Hoger batterijgebruik"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Achtergrond van vergrendelscherm tonen als scherm uitstaat"</string>
-    <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"Achtergrond van vergrendelscherm verbergen als scherm uitstaat"</string>
+    <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"Verberg achtergrond van vergrendelscherm als scherm uitstaat"</string>
     <string name="doze_always_on_summary_long" msgid="7956866501728946221">"Toont onder andere de tijd en datum wanneer het scherm uitstaat"</string>
     <string name="doze_always_on_summary_short" msgid="3301903540897812365">"Tijd, datum en meer tonen"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Achtergrondopties"</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Uit"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"ID van provider"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Type mobiele-datanetwerk"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Type mobiele-telefoonnetwerk"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Operatorinfo"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Pincode verifiëren"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Wachtwoord verifiëren"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Laat verifiëren dat jij het bent"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Geef het patroon van je andere apparaat op om onder meer Google-accounts en instellingen over te zetten. Je patroon is versleuteld."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Geef de pincode van je andere apparaat op om onder meer Google-accounts en instellingen over te zetten. Je pincode is versleuteld."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Geef het wachtwoord van je andere apparaat op om onder meer Google-accounts en instellingen over te zetten. Je wachtwoord is versleuteld."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"Gebruik hetzelfde patroon om dit apparaat te ontgrendelen"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"Gebruik dezelfde pincode om dit apparaat te ontgrendelen"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"Gebruik hetzelfde wachtwoord om dit apparaat te ontgrendelen"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Patroon verifiëren"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Pincode verifiëren"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Wachtwoord verifiëren"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Snelle instellingen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Swipe omlaag vanaf de bovenkant van het scherm}other{Swipe met # vingers omlaag vanaf de bovenkant van het scherm}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Swipe omlaag vanaf de bovenkant van het scherm. Dit snelle gebaar is beschikbaar nadat je het apparaat hebt ingesteld.}other{Swipe met # vingers omlaag vanaf de bovenkant van het scherm. Dit snelle gebaar is beschikbaar nadat je het apparaat hebt ingesteld.}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"Toets op bovenste rij"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"Druk op de toegankelijkheidstoets op de bovenste rij van het toetsenbord"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Snelle instellingen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Volumeknoppen"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"volumeknoppen"</string>
@@ -3479,12 +3469,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Andere gebruikers"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Gastactiviteit verwijderen"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Verwijder alle gast-apps en -gegevens bij het afsluiten van de gastmodus"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"Gast toestaan apparaat te gebruiken"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"Alle gast-apps en -gegevens worden verwijderd bij het afsluiten van de gastmodus"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"toevoegen, gast"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Gastactiviteit verwijderen?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Apps en gegevens van deze gastsessie worden nu verwijderd en alle toekomstige gastactiviteit wordt verwijderd telkens wanneer je de gastmodus afsluit"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"verwijderen, gast, activiteit, wissen, gegevens, bezoeker, weggooien"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Apparaat"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"Toetsenbord, touchpad, scherm, geluid"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Niet beschikbaar omdat NFC uitstaat"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Als je dit wilt gebruiken, installeer je eerst een betaal-app"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Recente apps, standaard-apps"</string>
@@ -3955,7 +3947,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Krijg korte samenvattingen van langere berichten"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Meldingssamenvattingen gebruiken"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Vat lange berichten en groepsgesprekken samen om snel op de hoogte te komen.\n\nSamenvattingen gebruiken AI op je apparaat, die soms fouten kan maken. Je berichten worden nooit naar Google gestuurd."</string>
-    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"Vat lange berichten en groepsgesprekken samen om snel op de hoogte te komen.\n\nSamenvattingen worden geleverd door apps of AI op je apparaat en kunnen fouten bevatten. Je berichten worden nooit naar Google gestuurd."</string>
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"Vat lange berichten en groepsgesprekken samen om snel op de hoogte te zijn.\n\nSamenvattingen worden geleverd door apps of AI op je apparaat en kunnen fouten bevatten. Je berichten worden nooit naar Google gestuurd."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Meldingen van deze apps worden niet samengevat"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Apps beheren"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Apps beheren voor meldingssamenvattingen"</string>
@@ -4395,6 +4387,12 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Opnieuw opstarten"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Niet nu"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Bekijk meer informatie over Geavanceerde geheugenbescherming."</string>
+    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
+    <skip />
+    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
+    <skip />
+    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Dit werkprofiel wordt beheerd door:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Beheerd door <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Standaard openen"</string>
@@ -4441,12 +4439,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Verwijder rechten en tijdelijke bestanden, en stop meldingen"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"App beheren indien ongebruikt"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Verwijder rechten en tijdelijke bestanden, stop meldingen en archiveer de app"</string>
-    <!-- no translation found for task_continuity_category (3736049711007817178) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
-    <skip />
+    <string name="task_continuity_category" msgid="3736049711007817178">"Taakcontinuïteit"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"Taken-app"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"Ga naadloos verder waar je gebleven was op andere apparaten"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Alle apps"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Geïnstalleerde apps"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant-apps"</string>
@@ -4518,6 +4513,18 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Standaard USB-instellingen"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Voedingsopties"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opties voor bestandsoverdracht"</string>
+    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
+    <skip />
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB-voorkeuren"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB beheerd door"</string>
@@ -5687,20 +5694,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> vereist dat 2G beschikbaar is"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Alleen versleutelde netwerken toestaan"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"De beveiliging is beter maar op sommige locaties kan je mobiele netwerkverbinding beperkt zijn. Noodoproepen zijn altijd toegestaan"</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"2G-netwerkbeveiliging uitzetten?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"Het huidige netwerk voor de simkaart van <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> ondersteunt geen 2G. Als je 2G-beveiliging uitzet, loop je het risico verbinding te maken met schadelijke gespoofte 2G-netwerken."</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Uitzetten"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G-netwerkbeveiliging"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G-netwerkbeveiliging staat aan"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"Voor het huidige netwerk voor de simkaart van <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> moet 2G-beveiliging aanstaan. Je kunt er nog steeds voor kiezen om 2G-beveiliging uit te zetten, maar dit is op eigen risico."</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Instellingen"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alle services"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Toegang tot klembord tonen"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Toon een bericht als apps toegang hebben tot tekst, afbeeldingen of andere content die je hebt gekopieerd"</string>
@@ -5796,6 +5796,10 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> bij <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"De app wordt opnieuw opgestart als je de beeldverhouding wijzigt. Niet-opgeslagen wijzigingen kunnen verloren gaan. Sommige apps zijn misschien niet geoptimaliseerd voor bepaalde beeldverhoudingen."</string>
+    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
+    <skip />
+    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Vingerafdruksensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Meldingen met flits"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Over meldingen met flits"</string>
@@ -5905,7 +5909,7 @@
     <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Mensen die luisteren, kunnen je media horen. Ze horen geen gesprekken."</string>
     <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Delen stoppen"</string>
     <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Instellingen"</string>
-    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Kies een apparaat waarmee je de verbinding wilt verbreken"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Kies het apparaat waarmee je de verbinding wilt verbreken"</string>
     <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Er kunnen maar 2 apparaten tegelijk audio delen"</string>
     <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Verbinding met <xliff:g id="DEVICE_NAME">%1$s</xliff:g> verbreken"</string>
     <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Verbinden met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
@@ -6131,8 +6135,7 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Actie afgerond"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Snelle instellingen voor beveiliging en privacy"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Je privacyopties"</string>
-    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
-    <skip />
+    <string name="safety_center_review_settings" msgid="295527297192914772">"Instellingen checken"</string>
     <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Openen"</string>
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Schakelaar. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"Geblokkeerd"</string>
@@ -6163,4 +6166,24 @@
     <string name="add_tile_action" msgid="5271301747196740442">"Tegel toevoegen"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Prompts voor tegel Satelliet"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <skip />
+    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
+    <skip />
+    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
+    <skip />
+    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
+    <skip />
+    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
+    <skip />
+    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
+    <skip />
+    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
+    <skip />
+    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <skip />
 </resources>

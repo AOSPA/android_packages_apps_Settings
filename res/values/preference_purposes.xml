@@ -91,6 +91,7 @@
 <string name="battery_saver_schedule_category_purpose" translatable="false">battery_saver_schedule_category</string>
 <string name="extreme_battery_saver_purpose" translatable="false">extreme_battery_saver</string>
 <string name="battery_usage_summary_purpose" translatable="false">battery_usage_summary</string>
+<string name="bluetooth_scanning_screen_purpose" translatable="false">Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services.</string>
 <string name="bluetooth_screen_bt_pair_rename_devices_purpose" translatable="false">bluetooth_screen_bt_pair_rename_devices</string>
 <string name="bluetooth_screen_footer_purpose" translatable="false">bluetooth_screen_footer</string>
 <string name="bluetooth_switchbar_screen_purpose" translatable="false">bluetooth_switchbar_screen</string>
@@ -133,7 +134,6 @@
 <string name="display_category_purpose" translatable="false">display_category</string>
 <string name="expanded_dark_theme_purpose" translatable="false">expanded_dark_theme</string>
 <string name="standard_dark_theme_purpose" translatable="false">standard_dark_theme</string>
-<string name="date_time_settings_purpose" translatable="false">date_time_settings</string>
 <string name="device_model_purpose" translatable="false">device_model</string>
 <string name="hardware_info_device_model_purpose" translatable="false">hardware_info_device_model</string>
 <string name="hardware_info_device_revision_purpose" translatable="false">hardware_info_device_revision</string>
@@ -222,22 +222,21 @@
 <string name="non_carrier_data_usage_purpose" translatable="false">non_carrier_data_usage</string>
 <string name="wifi_category_purpose" translatable="false">wifi_category</string>
 <string name="wifi_ext_category_purpose" translatable="false">wifi_ext_category</string>
-<string name="language_and_region_settings_purpose" translatable="false">language_and_region_settings</string>
-<string name="system_locale_picker_purpose" translatable="false">system_locale_picker</string>
-<string name="app_locale_picker_purpose" translatable="false">app_locale_picker</string>
-<string name="system_locale_region_picker_purpose" translatable="false">system_locale_region_picker</string>
+<string name="language_and_region_settings_purpose" translatable="false">Allows user to set the default system language</string>
+<string name="system_locale_picker_purpose" translatable="false">Allows user to choose the default system language from list</string>
+<string name="app_locale_picker_purpose" translatable="false">Allows user to set the default app\'s language</string>
+<string name="system_locale_region_picker_purpose" translatable="false">Allows user to set the region for the default system language</string>
 <string name="system_locale_region_picker_preference_purpose" translatable="false">system_locale_region_picker_preference</string>
-<string name="region_numbering_system_purpose" translatable="false">region_numbering_system</string>
-<string name="default_system_language_purpose" translatable="false">default_system_language</string>
-<string name="first_day_of_week_purpose" translatable="false">first_day_of_week</string>
-<string name="first_day_of_week_item_preference_purpose" translatable="false">first_day_of_week_item_preference</string>
+<string name="default_system_language_purpose" translatable="false">Your device, apps, and websites will use the default system language</string>
+<string name="first_day_of_week_purpose" translatable="false">Allows user to set the preference of the first day of week</string>
+<string name="first_day_of_week_item_preference_purpose" translatable="false">Set the first day of week and apps will use your preferences where possible</string>
 <string name="regional_preference_numbering_system_purpose" translatable="false">regional_preference_numbering_system</string>
-<string name="terms_of_address_purpose" translatable="false">terms_of_address</string>
-<string name="terms_of_address_preference_purpose" translatable="false">terms_of_address_preference</string>
-<string name="regional_preference_temperature_purpose" translatable="false">regional_preference_temperature</string>
-<string name="regional_preference_temperature_unit_preference_purpose" translatable="false">temperature_unit_preference</string>
-<string name="regional_preference_measurement_system_purpose" translatable="false">regional_preference_measurement_system</string>
-<string name="regional_preference_measurement_system_item_preference_purpose" translatable="false">measurement_system_item_preference</string>
+<string name="terms_of_address_purpose" translatable="false">Allows users to personalize how they\’re addressed</string>
+<string name="terms_of_address_preference_purpose" translatable="false">Set how you\’re addressed</string>
+<string name="regional_preference_temperature_purpose" translatable="false">Allows user to set the preference of the temperature unit</string>
+<string name="regional_preference_temperature_unit_preference_purpose" translatable="false">Set the temperature unit and apps will use your preferences where possible</string>
+<string name="regional_preference_measurement_system_purpose" translatable="false">Allows user to set the preference of the measurement system</string>
+<string name="regional_preference_measurement_system_item_preference_purpose" translatable="false">Set the measurement system and apps will use your preferences where possible</string>
 <string name="copyright_purpose" translatable="false">copyright</string>
 <string name="legal_source_code_purpose" translatable="false">legal_source_code</string>
 <string name="license_purpose" translatable="false">license</string>
@@ -541,7 +540,10 @@
 <string name="print_service_parameter_purpose" translatable="false">The print component name</string>
 <string name="print_service_parameter_description" translatable="false">A component name pointing to a service exposed as a print service</string>
 <!-- Print settings screen end -->
+<!-- Usb details screen start -->
 <string name="usb_details_fragment_purpose" translatable="false">Allows users to configure USB preferences, such as file transfer, tethering, and MIDI.</string>
+<string name="usb_transcode_files_purpose" translatable="false">Allows users to convert videos to AVC format during USB transfer to ensure they can be played on more media players.</string>
+<!-- Usb details screen end -->
 <string name="unrestricted_data_settings_purpose" translatable="false">Allows users to manage which apps have unrestricted access to mobile data when Data Saver is on.</string>
 <!-- User settings screen start -->
 <string name="user_settings_pref_screen_purpose" translatable="false">Allows admin users to manage all users on the device, including creating new users or guests, deleting existing users, switching between users, and modifying multiuser-related preferences. Separately, it allows each user to control their own settings, such as changing their name and avatar or deleting their own account.</string>
@@ -560,4 +562,7 @@
 <string name="encryption_and_credential_purpose" translatable="false">Allows users to manage disk encryption and credentials on their device, including adding and removing certificates.</string>
 <!-- Enterprise owned security screens end -->
 <string name="sim_lock_settings_purpose" translatable="false">Allows users to manage the SIM card lock settings, including enabling or disabling the SIM PIN and changing the PIN code.</string>
+<!-- Date and Time Settings screen begin -->
+<string name="date_time_settings_purpose"  translatable="false">Allows users to manage the device\'s date, time, and time zone settings. This includes configuring automatic date, time, and time zone detection; manually setting the date, time, and time zone; configuring if location should be used to determine the time zone; and choosing between 12-hour and 24-hour time formats. Users can also configure whether to receive notifications for time zone changes or upcoming scheduled clock changes, such as Daylight Saving Time.</string>
+<!-- Date and Time Settings screen end -->
 </resources>

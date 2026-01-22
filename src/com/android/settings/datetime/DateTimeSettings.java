@@ -142,4 +142,4 @@ public class DateTimeSettings extends DashboardFragment implements
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.date_time_prefs);
 }
-// LINT.ThenChange(DateTimeSettingsScreen.kt)
+// LINT.ThenChange(DateTimeSettingsScreen.kt, DateTimeSettingsApiScreen.kt)
