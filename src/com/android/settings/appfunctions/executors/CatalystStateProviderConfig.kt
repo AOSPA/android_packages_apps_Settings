@@ -134,6 +134,7 @@ import com.android.settings.security.InstallCertificateFromStorageScreenApi
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.security.trustagent.TrustAgentApiScreen
 import com.android.settings.sound.MediaControlsScreen
+import com.android.settings.spa.app.appcompat.UserAspectRatioAppsApiScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
@@ -505,6 +506,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = AccountSecuritySubpageScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = TrustedCredentialsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UserCredentialsScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = UserAspectRatioAppsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CredentialManagementAppScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = EncryptionAndCredentialScreenApi.KEY),
         PerScreenCatalystConfig(
