@@ -37,6 +37,8 @@ import android.util.Size
 import android.view.Display
 import android.view.Display.DEFAULT_DISPLAY
 import android.view.Display.INVALID_DISPLAY
+import android.view.Display.Mode.FLAG_ANISOTROPY_CORRECTION
+import android.view.Display.Mode.FLAG_SIZE_OVERRIDE
 import android.view.DisplayInfo
 import android.view.IWindowManager
 import android.view.SurfaceControl
@@ -136,15 +138,27 @@ open class ConnectedDisplayInjector(open val context: Context?) {
             isEnabled,
             isConnectedDisplay,
             display.rotation,
+            display.supportedModes.any { !it.supportedHdrTypes.isEmpty() },
         )
 
     private fun getDisplayMode(display: Display): Display.Mode {
         val userPreferredMode = display.userPreferredDisplayMode
+        if (userPreferredMode != null && (userPreferredMode.flags and FLAG_SIZE_OVERRIDE) != 0) {
+            return userPreferredMode
+        }
         if (
             userPreferredMode != null &&
-                (userPreferredMode.flags and Display.Mode.FLAG_SIZE_OVERRIDE) != 0
+                (userPreferredMode.flags and FLAG_ANISOTROPY_CORRECTION) != 0
         ) {
-            return userPreferredMode
+            val parentMode =
+                display.supportedModes.find { it.modeId == userPreferredMode.parentModeId }
+            // active mode size matches with parent mode size
+            if (
+                parentMode != null &&
+                    display.mode.matches(parentMode.physicalWidth, parentMode.physicalHeight)
+            ) {
+                return userPreferredMode
+            }
         }
         return display.mode
     }
@@ -203,6 +217,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
                     // Fetch concurrently
                     async(Dispatchers.IO) {
                         val connectionPreference = getDisplayConnectionPreference(display.uniqueId)
+                        val hdrPreference = getUserHdrPreference(display.id)
                         DisplayDeviceAdditionalInfo(
                             display.id,
                             display.uniqueId,
@@ -212,7 +227,9 @@ open class ConnectedDisplayInjector(open val context: Context?) {
                             display.isEnabled,
                             display.isConnectedDisplay,
                             display.rotation,
+                            display.isHdrSupported,
                             connectionPreference,
+                            hdrPreference,
                         )
                     }
                 }
@@ -271,6 +288,13 @@ open class ConnectedDisplayInjector(open val context: Context?) {
 
     open fun updateDisplayConnectionPreference(uniqueId: String, connectionPreference: Int) =
         displayManager?.setExternalDisplayConnectionPreference(uniqueId, connectionPreference)
+
+    open fun setUserHdrPreference(displayId: Int, hdrPreference: Int) =
+        displayManager?.setUserPreferredHdrMode(displayId, hdrPreference)
+
+    open fun getUserHdrPreference(displayId: Int): Int =
+        displayManager?.getUserPreferredHdrMode(displayId)
+            ?: DisplayManager.HDR_PREFERENCE_HDR_ALLOWED
 
     /**
      * Freeze rotation of the display in the specified rotation.
@@ -367,6 +391,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     open fun getSurfaceControlBuilder() = SurfaceControl.Builder()
 
     companion object {
+        const val SYSPROP_ENABLE_HDR_MODE_SPLITTING = "persist.sys.enable_hdr_mode_splitting"
         private const val TAG = "ConnectedDisplayInjector"
 
         fun isRefreshRateFlagsEnabled() =
@@ -377,5 +402,9 @@ open class ConnectedDisplayInjector(open val context: Context?) {
                     .forceSlowerFollowerGpuCompositionPlatform() &&
                 com.android.graphics.surfaceflinger.flags.Flags
                     .followerDisplayBackpressurePlatform()
+
+        fun isUserPreferredHdrModeEnabled() =
+            com.android.window.flags.Flags.enableUserPreferredHdrMode() &&
+                SystemProperties.getBoolean(SYSPROP_ENABLE_HDR_MODE_SPLITTING, false)
     }
 }

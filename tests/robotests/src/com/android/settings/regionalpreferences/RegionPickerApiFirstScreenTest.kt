@@ -16,32 +16,158 @@
 
 package com.android.settings.regionalpreferences
 
+import android.app.IActivityManager
+import android.content.Context
+import android.content.res.Configuration
+import android.os.LocaleList
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import android.telephony.TelephonyManager
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.internal.app.LocalePicker
+import com.android.internal.app.LocaleStore
 import com.android.settings.flags.Flags
+import com.android.settings.testutils.shadow.ShadowActivityManager
 import com.android.settings.testutils2.ApiTester
-import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.MockitoAnnotations
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
+import org.robolectric.Shadows
+import org.robolectric.annotation.Config
+import org.robolectric.shadows.ShadowTelephonyManager
+import java.util.Locale
 
 @RunWith(AndroidJUnit4::class)
+@Config(shadows = [ShadowActivityManager::class])
 class RegionPickerApiFirstScreenTest {
     @get:Rule
     val setFlagsRule = SetFlagsRule()
+    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val iActivityManager = mock<IActivityManager>()
     private val tester = ApiTester(RegionPickerApiFirstScreen())
+    private val cacheLocaleList: LocaleList = LocaleList.getDefault()
+    private val cacheLocale: Locale = Locale.getDefault(Locale.Category.FORMAT)
+
+    @Before
+    @Throws(java.lang.Exception::class)
+    fun setUp() {
+        MockitoAnnotations.openMocks(this)
+        setupLocaleInfoList(
+            Locale.forLanguageTag("zh-Hant-TW"),
+            "zh-Hant-TW" to "繁體中文（台灣)",
+            "es-US" to "Español (Estados Unidos)"
+        )
+        val shadowTelephonyManager: ShadowTelephonyManager =
+            Shadows.shadowOf(context.getSystemService(TelephonyManager::class.java))
+        shadowTelephonyManager.setSimCountryIso("us")
+        shadowTelephonyManager.setNetworkCountryIso("us")
+    }
+
+    @After
+    @Throws(Exception::class)
+    fun tearDown() {
+        Locale.setDefault(cacheLocale)
+        LocalePicker.updateLocales(cacheLocaleList)
+    }
 
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getScreen_flagEnabled_isNotNull() {
-        Truth.assertThat(tester.getScreen()).isNotNull()
+        assertThat(tester.getScreen()).isNotNull()
     }
 
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getScreen_flagDisabled_isNull() {
-        Truth.assertThat(tester.getScreen()).isNull()
+        assertThat(tester.getScreen()).isNull()
+    }
+
+    @Test
+    fun systemLocaleRegion_getDefault_returnDefaultLanguageTag() {
+        setupLocaleInfoList(
+            Locale.forLanguageTag("fr-FR"),
+            "fr-FR" to "Français (France)",
+            "zh-Hant-TW" to "繁體中文（台灣)"
+        )
+
+        assertThat(tester.get<String>(KEY_PREFERENCE)).isEqualTo("FR")
+    }
+
+    @Test
+    fun setDefaultSystemLanguageRegion_isSet() {
+        tester.set(KEY_PREFERENCE, "TW")
+
+        assertThat(Locale.getDefault().toLanguageTag()).isEqualTo("zh-Hant-TW")
+        assertThat(
+            LocaleStore.getLocaleInfo(
+                Locale.forLanguageTag("zh-Hant-TW")
+            ).fullCountryNameNative
+        )
+            .isEqualTo("台灣")
+
+        Locale.setDefault(Locale.forLanguageTag("fr-FR"))
+        tester.set(KEY_PREFERENCE, "FR")
+
+        assertThat(Locale.getDefault().toLanguageTag()).isEqualTo("fr-FR")
+        assertThat(LocaleStore.getLocaleInfo(Locale.getDefault()).fullCountryNameNative)
+            .isEqualTo("France")
+    }
+
+    @Test
+    fun setDefaultSystemLanguageRegion_isSet_withExtension() {
+        RegionalPreferenceTestUtils.setSettingsProviderContent(context, "")
+        Locale.setDefault(Locale.forLanguageTag("zh-Hant-TW-u-ms-ussystem"))
+        tester.set(KEY_PREFERENCE, "MO")
+
+        assertThat(
+            Locale.getDefault().toLanguageTag()
+        ).isEqualTo("zh-Hant-MO-u-ms-ussystem")
+        assertThat(LocaleStore.getLocaleInfo(Locale.getDefault()).fullCountryNameNative)
+            .isEqualTo("澳門")
+    }
+
+    @Test
+    fun systemLocaleRegion_optionsAreInSupportedList() {
+        Locale.setDefault(Locale.forLanguageTag("zh-Hant-TW"))
+
+        assertThat(tester.getPreferenceOptions<String>(KEY_PREFERENCE))
+            .containsExactly(
+                ("TW" to "台灣"),
+                ("HK" to "香港"),
+                ("MO" to "澳門"),
+            )
+    }
+
+    private fun setupLocaleInfoList(defaultLocale: Locale, vararg languages: Pair<String, String>) {
+        val config = Configuration()
+        config.setLocales(getLocaleList(*languages))
+        whenever(iActivityManager.getConfiguration()).thenReturn(config)
+        ShadowActivityManager.setService(iActivityManager)
+        Locale.setDefault(defaultLocale);
+    }
+
+    private fun getLocaleList(vararg languages: Pair<String, String>): LocaleList {
+        val localeInfoList = languages.map { (languageTag, languageName) ->
+            mock<LocaleStore.LocaleInfo>().apply {
+                whenever(fullNameNative).thenReturn(languageName)
+                whenever(isTranslated).thenReturn(true)
+                whenever(locale).thenReturn(Locale.forLanguageTag(languageTag))
+            }
+        }
+
+        val locales = localeInfoList.map { it.locale }.toTypedArray()
+        return LocaleList(*locales)
+    }
+
+    companion object {
+        const val KEY_PREFERENCE = "default_system_language_region_preference"
     }
 }

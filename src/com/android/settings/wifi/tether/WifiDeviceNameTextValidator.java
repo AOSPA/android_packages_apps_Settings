@@ -30,4 +30,21 @@ public class WifiDeviceNameTextValidator implements ValidatedEditTextPreference.
         return !TextUtils.isEmpty(value) && !value.trim().isEmpty() && !WifiUtils.isSSIDTooLong(
                 value) && !WifiUtils.isSSIDTooShort(value);
     }
+
+    /**
+     * Returns the specific error message if isTextValid returns false.
+     */
+    public String getErrorMessage(String value) {
+        if (TextUtils.isEmpty(value)) {
+            return "Device name is required.";
+        }
+        if (value.trim().isEmpty()) {
+            return "Device name cannot be empty.";
+        }
+        if (WifiUtils.isSSIDTooLong(value)) {
+            return "Device name is too long.";
+        } else {
+            return "Device name is too short.";
+        }
+    }
 }

@@ -91,7 +91,8 @@
     <PreferenceCategory
         android:key="automation_intelligence_category"
         android:title="@string/automation_intelligence_category_title"
-        android:order="-370">
+        android:order="-370"
+        settings:controller="com.android.settings.widget.SystemCategoryController">
     </PreferenceCategory>
 
     <PreferenceCategory

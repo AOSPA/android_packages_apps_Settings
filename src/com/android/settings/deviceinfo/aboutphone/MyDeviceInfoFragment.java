@@ -32,7 +32,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -79,6 +78,7 @@ import android.content.IntentFilter;
 import com.android.internal.telephony.IccCardConstants;
 import com.android.internal.telephony.TelephonyIntents;
 
+// LINT.IfChange
 @SearchIndexable
 public class MyDeviceInfoFragment extends DashboardFragment
         implements DeviceNamePreferenceController.DeviceNamePreferenceHost {
@@ -100,8 +100,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
 
     private BuildNumberPreferenceController mBuildNumberPreferenceController;
 
-    private DeviceInfoViewModel mDeviceInfoViewModel;
-
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.DEVICEINFO;
@@ -119,12 +117,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
         mBuildNumberPreferenceController = use(BuildNumberPreferenceController.class);
         mBuildNumberPreferenceController.setHost(this /* parent */);
         use(PhoneNumberPreferenceController.class).init(getSettingsLifecycle());
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle icicle) {
-        super.onCreate(icicle);
-        mDeviceInfoViewModel = new ViewModelProvider(getActivity()).get(DeviceInfoViewModel.class);
     }
 
     @Override
@@ -309,24 +301,13 @@ public class MyDeviceInfoFragment extends DashboardFragment
 
     @Override
     public void showDeviceNameWarningDialog(String deviceName) {
-        mDeviceInfoViewModel.setDeviceName(deviceName);
         DeviceNameWarningDialog.show(this);
     }
 
     public void onSetDeviceNameConfirm(boolean confirm) {
-        if (!isCatalystEnabled() || !Flags.catalystAboutPhoneDeviceName()) {
-            final DeviceNamePreferenceController controller = use(
-                    DeviceNamePreferenceController.class);
-            controller.updateDeviceName(confirm);
-        } else {
-            if (confirm) {
-                final String deviceName = mDeviceInfoViewModel.getDeviceName();
-                if (deviceName != null) {
-                    UtilsKt.updateDeviceName(getActivity(), deviceName);
-                }
-            }
-        }
-        mDeviceInfoViewModel.clearDeviceNme();
+        final DeviceNamePreferenceController controller = use(
+                DeviceNamePreferenceController.class);
+        controller.updateDeviceName(confirm);
     }
 
     @Override
@@ -348,3 +329,4 @@ public class MyDeviceInfoFragment extends DashboardFragment
                 }
             };
 }
+// LINT.ThenChange(MyDeviceInfoScreen.kt, MyDeviceInfoApiFirstScreen.kt)

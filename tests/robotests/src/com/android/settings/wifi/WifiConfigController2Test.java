@@ -97,6 +97,8 @@ import java.util.stream.IntStream;
 @Config(shadows = {WifiConfigController2Test.ShadowWifiUtils.class})
 public class WifiConfigController2Test {
 
+    static final int USER_ID_CURRENT = Process.myUserHandle().getIdentifier();
+    static final int USER_ID_OTHER = USER_ID_CURRENT + 1;
     static final String WIFI_EAP_TLS_V1_3 = "TLS v1.3";
 
     @Rule
@@ -367,7 +369,7 @@ public class WifiConfigController2Test {
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
@@ -382,7 +384,7 @@ public class WifiConfigController2Test {
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
@@ -397,7 +399,7 @@ public class WifiConfigController2Test {
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Process.myUid();
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
@@ -412,7 +414,7 @@ public class WifiConfigController2Test {
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View proxySettingsSpinner = mView.findViewById(R.id.proxy_settings);
@@ -427,7 +429,7 @@ public class WifiConfigController2Test {
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View proxySettingsSpinner = mView.findViewById(R.id.proxy_settings);
@@ -442,7 +444,7 @@ public class WifiConfigController2Test {
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Process.myUid();
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View proxySettingsSpinner = mView.findViewById(R.id.proxy_settings);
@@ -457,7 +459,7 @@ public class WifiConfigController2Test {
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         // Check sharing switches
@@ -517,7 +519,7 @@ public class WifiConfigController2Test {
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Process.myUid();
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
         shadowOf(Looper.getMainLooper()).idle();
 

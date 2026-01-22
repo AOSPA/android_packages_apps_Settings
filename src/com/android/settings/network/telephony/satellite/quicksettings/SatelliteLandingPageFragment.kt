@@ -143,6 +143,11 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
                         updateWarningBanners(bannerState)
                     }
                 }
+                launch {
+                    viewModel.isTryADemoButtonEnabled.collectLatest { isEnabled ->
+                        updateTryADemoButtonEnabledState(isEnabled)
+                    }
+                }
             }
         }
     }
@@ -205,6 +210,11 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
         } else {
             demoButtonPreference.icon = requireContext().getDrawable(R.drawable.ic_satellite_demo)
         }
+    }
+
+    private fun updateTryADemoButtonEnabledState(isEnabled: Boolean) {
+        val demoButtonPreference = findPreference<Preference>(KEY_TRY_A_DEMO_BUTTON) ?: return
+        demoButtonPreference.isEnabled = isEnabled
     }
 
     /** Populates the list of satellite-enabled apps by observing the ViewModel. */

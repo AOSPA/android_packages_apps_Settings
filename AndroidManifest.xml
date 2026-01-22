@@ -1567,7 +1567,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
 
         <activity
             android:name="Settings$DndDisplaySettingsActivity"
-            android:featureFlag="com.android.settings.flags.deeplink_modes_25q4"
             android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.DND_DISPLAY_SETTINGS" />
@@ -1583,7 +1582,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
 
         <activity
             android:name="Settings$DndPeopleSettingsActivity"
-            android:featureFlag="com.android.settings.flags.deeplink_modes_25q4"
             android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.DND_PEOPLE_SETTINGS" />
@@ -1599,7 +1597,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
 
         <activity
             android:name="Settings$DndCallsSettingsActivity"
-            android:featureFlag="com.android.settings.flags.deeplink_modes_25q4"
             android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.DND_CALLS_SETTINGS" />

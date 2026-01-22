@@ -19,10 +19,10 @@ package com.android.settings.accessibility.setupwizard
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ComponentName
 import android.content.Context
+import android.graphics.drawable.AnimationDrawable
 import android.net.Uri
 import android.view.accessibility.AccessibilityManager
 import androidx.test.core.app.ApplicationProvider
-import com.android.settings.R
 import com.android.settings.accessibility.setupwizard.items.IllustrationItem
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
 import com.google.common.truth.Truth.assertThat
@@ -30,6 +30,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.shadow.api.Shadow
@@ -58,9 +59,7 @@ class AccessibilityServiceIllustrationItemControllerTest {
     }
 
     @Test
-    fun bindData_setsImageUriAndContentDescription() {
-        val expectedSummary =
-            context.getString(R.string.accessibility_illustration_content_description, TEST_LABEL)
+    fun bindData_setsImageUri() {
         val expectedUri =
             Uri.Builder()
                 .scheme("android.resource")
@@ -72,13 +71,49 @@ class AccessibilityServiceIllustrationItemControllerTest {
         ShadowLooper.idleMainLooper()
 
         assertThat(illustrationItem.imageUri).isEqualTo(expectedUri)
-        assertThat(illustrationItem.contentDescription?.toString()).isEqualTo(expectedSummary)
+    }
+
+    @Test
+    fun onBind_itemIsAnimatable_setsContentDescription() {
+        val imageUri = Uri.parse("content://test/lottie.json")
+        illustrationItem.imageUri = imageUri
+        val rootView =
+            setupMockLottieAnimationView<AnimationDrawable>(
+                context,
+                imageUri,
+                isLottieAnimatable = true,
+            )
+
+        controller.bindData(illustrationItem)
+        illustrationItem.onBindView(rootView)
+        ShadowLooper.idleMainLooper()
+
+        assertThat(illustrationItem.contentDescription).isNotNull()
+    }
+
+    @Test
+    fun onBind_itemNotAnimatable_doesNotSetContentDescription() {
+        val imageUri = Uri.parse("content://test/lottie.json")
+        illustrationItem.imageUri = imageUri
+        val rootView =
+            setupMockLottieAnimationView(
+                context,
+                imageUri,
+                mock<AnimationDrawable>(),
+                isLottieAnimatable = false,
+            )
+
+        controller.bindData(illustrationItem)
+        illustrationItem.onBindView(rootView)
+        ShadowLooper.idleMainLooper()
+
+        assertThat(illustrationItem.contentDescription).isNull()
     }
 
     companion object {
         private val TEST_COMPONENT_NAME = ComponentName("com.test.pkg", ".TestService")
         private const val TEST_LABEL = "Test Service"
         private const val TEST_SUMMARY = "This is a test summary description."
-        private val TEST_IMAGE_RES = 101
+        private const val TEST_IMAGE_RES = 101
     }
 }

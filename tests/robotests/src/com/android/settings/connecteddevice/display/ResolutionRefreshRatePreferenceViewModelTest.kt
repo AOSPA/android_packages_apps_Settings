@@ -17,10 +17,15 @@
 package com.android.settings.connecteddevice.display
 
 import android.app.Application
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.view.Display.Mode
 import androidx.lifecycle.Observer
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FOLLOWER_ARBITRARY_REFRESH_RATE_SELECTION_PLATFORM
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FOLLOWER_DISPLAY_BACKPRESSURE_PLATFORM
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FORCE_SLOWER_FOLLOWER_GPU_COMPOSITION_PLATFORM
 import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceViewModel.RefreshRateItem
 import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceViewModel.ResolutionItem
 import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceViewModel.UiState
@@ -37,10 +42,16 @@ import org.mockito.kotlin.whenever
 
 /** Unit test for [ResolutionRefreshRatePreferenceViewModel] */
 @RunWith(AndroidJUnit4::class)
+@EnableFlags(
+    FLAG_FOLLOWER_ARBITRARY_REFRESH_RATE_SELECTION_PLATFORM,
+    FLAG_FOLLOWER_DISPLAY_BACKPRESSURE_PLATFORM,
+    FLAG_FORCE_SLOWER_FOLLOWER_GPU_COMPOSITION_PLATFORM,
+)
 class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
 
     // Rule to execute LiveData operations synchronously
     @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
+    @get:Rule val setFlagsRule: SetFlagsRule = SetFlagsRule()
 
     @Mock private lateinit var uiStateObserver: Observer<UiState?>
 
@@ -115,6 +126,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
                 /* isEnabled= */ DisplayIsEnabled.YES,
                 /* isConnectedDisplay= */ true,
                 /* rotation= */ 0,
+                isHdrSupported = externalDisplay.isHdrSupported,
             )
         )
         updateDisplaysAndTopology(updatedEnabledDisplays)
@@ -262,6 +274,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
                 isEnabled = DisplayIsEnabled.YES,
                 isConnectedDisplay = true,
                 rotation = 0,
+                isHdrSupported = externalDisplay.isHdrSupported,
             )
         updateDisplaysAndTopology(listOf(displayWithDuplicates))
 

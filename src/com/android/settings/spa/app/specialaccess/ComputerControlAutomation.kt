@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
@@ -53,6 +54,7 @@ import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.rememberContext
 import com.android.settingslib.spa.framework.compose.rememberDrawablePainter
+import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.framework.theme.SettingsSpace
 import com.android.settingslib.spa.framework.util.filterItem
 import com.android.settingslib.spa.framework.util.mapItem
@@ -249,6 +251,7 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
                 Image(
                     painter = rememberDrawablePainter(appRepository.produceIcon(app).value),
                     contentDescription = appRepository.produceIconContentDescription(app).value,
+                    modifier = Modifier.size(SettingsDimension.itemIconContainerSize),
                 )
                 Spacer(Modifier.height(SettingsSpace.small1))
                 Text(

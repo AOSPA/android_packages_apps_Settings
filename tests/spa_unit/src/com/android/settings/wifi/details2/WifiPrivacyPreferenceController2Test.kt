@@ -19,7 +19,7 @@ package com.android.settings.wifi.details2
 import android.content.Context
 import android.content.ContextWrapper
 import android.net.wifi.WifiConfiguration
-import android.os.UserHandle.PER_USER_RANGE
+import android.os.Process
 import android.os.UserManager
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -47,6 +47,10 @@ import org.mockito.kotlin.whenever
 @RunWith(AndroidJUnit4::class)
 class WifiPrivacyPreferenceController2Test {
     @get:Rule val setFlagsRule = SetFlagsRule()
+
+    private val USER_ID_CURRENT = Process.myUserHandle().getIdentifier()
+
+    private val USER_ID_OTHER = USER_ID_CURRENT + 1
 
     private var mockWifiEntry = mock<WifiEntry>()
 
@@ -177,7 +181,7 @@ class WifiPrivacyPreferenceController2Test {
     fun displayPreference_networkOwned() {
         if (UserManager.isHeadlessSystemUserMode()) {
             mockWifiEntry.stub { on { getWifiConfiguration() } doReturn mockWifiConfiguration }
-            mockWifiConfiguration.creatorUid = PER_USER_RANGE * 10
+            whenever(mockWifiConfiguration.getCreatorUserId()) doReturn USER_ID_CURRENT
             userManager = mock { on { getUserCount() } doReturn 3 }
 
             controller.updateState(preference)
@@ -190,7 +194,7 @@ class WifiPrivacyPreferenceController2Test {
     @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
     fun displayPreference_networkNotOwned_singleUser() {
         mockWifiEntry.stub { on { getWifiConfiguration() } doReturn mockWifiConfiguration }
-        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE
+        whenever(mockWifiConfiguration.getCreatorUserId()) doReturn USER_ID_OTHER
         userManager = mock { on { getUserCount() } doReturn 1 }
 
         controller.updateState(preference)
@@ -202,7 +206,7 @@ class WifiPrivacyPreferenceController2Test {
     @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
     fun displayPreference_networkNotOwned() {
         mockWifiEntry.stub { on { getWifiConfiguration() } doReturn mockWifiConfiguration }
-        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE
+        whenever(mockWifiConfiguration.getCreatorUserId()) doReturn USER_ID_OTHER
         userManager = mock { on { getUserCount() } doReturn 3 }
 
         controller.updateState(preference)

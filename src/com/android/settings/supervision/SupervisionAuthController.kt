@@ -56,8 +56,14 @@ class SupervisionAuthController private constructor(private val appContext: Cont
         object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 handler.post {
-                    if (currentTaskId != null) {
-                        invalidateSession()
+                    if (Flags.enableSupervisionAuthControllerUpdatesBugfix()) {
+                        if (sessionStartTime != null) {
+                            invalidateSession()
+                        }
+                    } else {
+                        if (currentTaskId != null) {
+                            invalidateSession()
+                        }
                     }
                 }
             }
@@ -68,7 +74,7 @@ class SupervisionAuthController private constructor(private val appContext: Cont
         object : TaskStackListener() {
             override fun onTaskStackChanged() {
                 handler.post {
-                    if (Flags.enableSupervisionAuthControllerUpdates()) {
+                    if (Flags.enableSupervisionAuthControllerUpdatesBugfix()) {
                         if (sessionStartTime != null && !isSupervisionActivityRunning()) {
                             invalidateSession()
                         }
@@ -108,8 +114,8 @@ class SupervisionAuthController private constructor(private val appContext: Cont
             invalidateSession()
             return false
         }
-        if (Flags.enableSupervisionAuthControllerUpdates()) {
-            return isSupervisionActivityRunning()
+        if (Flags.enableSupervisionAuthControllerUpdatesBugfix()) {
+            return sessionStartTime != null && isSupervisionActivityRunning()
         }
         return currentTaskId == taskId
     }
@@ -147,7 +153,10 @@ class SupervisionAuthController private constructor(private val appContext: Cont
      * activity.
      */
     private fun isSupervisionActivityFocused(): Boolean {
-        if (currentTaskId == null) return false
+        if (!Flags.enableSupervisionAuthControllerUpdatesBugfix() && currentTaskId == null)
+            return false
+        if (Flags.enableSupervisionAuthControllerUpdatesBugfix() && sessionStartTime == null)
+            return false
         val appTasks = activityManager.appTasks ?: emptyList()
         val task = appTasks.find { it.taskInfo?.taskId == currentTaskId }
         if (task == null) return false

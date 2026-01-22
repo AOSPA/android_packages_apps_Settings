@@ -387,13 +387,10 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
 
         UserManager userManager = context.getSystemService(UserManager.class);
         int userCount = userManager.getUserCount();
-        UserHandle currentUserHandle = Process.myUserHandle();
-        int currentUserId = currentUserHandle.getIdentifier();
-        int creatorUid = wifiEntry.getWifiConfiguration().creatorUid;
-        UserHandle userHandle = UserHandle.getUserHandleForUid(creatorUid);
+        int currentUserId = Process.myUserHandle().getIdentifier();
+        int creatorUserId = wifiEntry.getWifiConfiguration().getCreatorUserId();
 
-        return (userCount == 1)
-                || (userHandle != null && (currentUserId == userHandle.getIdentifier()));
+        return (userCount == 1) || (currentUserId == creatorUserId);
     }
 
     /**
@@ -450,8 +447,8 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
     public static boolean isNetworkShareable(
             @NonNull WifiEntry wifiEntry, @NonNull Context context) {
         return wifiEntry.canShare()
-                && (isCurrentUserNetworkOwner(wifiEntry, context)
-                && !isGuestUser(context));
+                && isCurrentUserNetworkOwner(wifiEntry, context)
+                && !isGuestUser(context);
     }
 
     /**

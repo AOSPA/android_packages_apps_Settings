@@ -20,7 +20,6 @@ import android.Manifest.permission.MANAGE_USERS
 import android.Manifest.permission.SET_BIOMETRIC_DIALOG_ADVANCED
 import android.Manifest.permission.USE_BIOMETRIC_INTERNAL
 import android.app.ActivityManager
-import android.app.role.RoleManager
 import android.app.settings.SettingsEnums
 import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
@@ -32,15 +31,12 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.BiometricPrompt
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
-import android.os.Binder
 import android.os.Bundle
 import android.os.CancellationSignal
-import android.os.Process
 import android.os.ServiceManager
 import android.os.UserHandle
 import android.util.Log
@@ -165,12 +161,6 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (!callerHasSupervisionRole() && !callerIsSystemUid()) {
-            errorHandler(
-                "Calling uid ${Binder.getCallingUid()} is not supervision role holder or SYSTEM_UID."
-            )
-            return
-        }
 
         val supervisingUser = supervisingUserHandle()
         val isSupervisingCredentialSet = isSupervisingCredentialSet(supervisingUser)
@@ -403,31 +393,6 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
         } else {
             setResult(RESULT_CANCELED)
             finish()
-        }
-    }
-
-    private fun callerHasSupervisionRole(): Boolean {
-        val roleManager = getSystemService(RoleManager::class.java)
-        if (roleManager == null) {
-            Log.w(TAG, "null RoleManager")
-            return false
-        }
-        return roleManager
-            .getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION)
-            .contains(callingPackage)
-    }
-
-    private fun callerIsSystemUid(): Boolean {
-        val packageName = getCallingPackage()
-        if (packageName == null) {
-            return false
-        }
-
-        return try {
-            val callingUid = packageManager.getApplicationInfo(packageName, 0).uid
-            UserHandle.getAppId(callingUid) == Process.SYSTEM_UID
-        } catch (e: PackageManager.NameNotFoundException) {
-            false
         }
     }
 

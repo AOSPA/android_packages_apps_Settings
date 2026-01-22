@@ -127,6 +127,8 @@ public class NetworkProviderSettingsTest {
 
     private static final int XML_RES = R.xml.wifi_tether_settings;
     private static final int NUM_NETWORKS = 4;
+    private static final int USER_ID_CURRENT = Process.myUserHandle().getIdentifier();
+    private static final int USER_ID_OTHER = USER_ID_CURRENT + 1;
     private static final String FAKE_URI_STRING = "fakeuri";
 
     @Rule
@@ -232,10 +234,11 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.onCreateContextMenu(mContextMenu, view, null /* info */);
     }
 
-    private void createNetworkConfigWithCreatorUid(int creatorUid) {
-        final WifiConfiguration config = new WifiConfiguration();
-        config.creatorUid = creatorUid;
+    private void createNetworkConfig(boolean isOwner) {
+        final WifiConfiguration config = spy(new WifiConfiguration());
+        final int creatorUserId = isOwner ? USER_ID_CURRENT : USER_ID_OTHER;
         when(mWifiEntry.getWifiConfiguration()).thenReturn(config);
+        when(config.getCreatorUserId()).thenReturn(creatorUserId);
         when(mUserManager.getUserCount()).thenReturn(2);
     }
 
@@ -482,7 +485,7 @@ public class NetworkProviderSettingsTest {
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canShare()).thenReturn(true);
         when(mWifiEntry.canForget()).thenReturn(true);
-        createNetworkConfigWithCreatorUid(Process.myUid());
+        createNetworkConfig(true);
         when(mWifiEntry.isSaved()).thenReturn(true);
         when(mWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_DISCONNECTED);
         createContextMenu();
@@ -500,7 +503,7 @@ public class NetworkProviderSettingsTest {
     public void onCreateContextMenu_multiUserEnabled_notOwnedNetwork_hidesShare() {
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canShare()).thenReturn(true);
-        createNetworkConfigWithCreatorUid(Integer.MAX_VALUE);
+        createNetworkConfig(false);
         createContextMenu();
 
         verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_SHARE), anyInt(),
@@ -512,7 +515,7 @@ public class NetworkProviderSettingsTest {
     public void onCreateContextMenu_multiUserEnabled_ownedNetwork_guestUser_hidesShare() {
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canShare()).thenReturn(true);
-        createNetworkConfigWithCreatorUid(Process.myUid());
+        createNetworkConfig(true);
         when(mUserManager.isGuestUser()).thenReturn(true);
         createContextMenu();
 
@@ -524,7 +527,7 @@ public class NetworkProviderSettingsTest {
     @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_notOwnedNetwork_hidesForget() {
         when(mWifiEntry.canForget()).thenReturn(true);
-        createNetworkConfigWithCreatorUid(Integer.MAX_VALUE);
+        createNetworkConfig(false);
         createContextMenu();
 
         verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_FORGET),
@@ -536,7 +539,7 @@ public class NetworkProviderSettingsTest {
     @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_notOwnedNetwork_adminUser_showsForget() {
         when(mWifiEntry.canForget()).thenReturn(true);
-        createNetworkConfigWithCreatorUid(Integer.MAX_VALUE);
+        createNetworkConfig(false);
         when(mUserManager.isAdminUser()).thenReturn(true);
         createContextMenu();
 
@@ -547,7 +550,7 @@ public class NetworkProviderSettingsTest {
     @Test
     @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_modifiableNetwork_showsModify() {
-        createNetworkConfigWithCreatorUid(Integer.MAX_VALUE);
+        createNetworkConfig(false);
         when(mWifiEntry.isModifiableByOtherUsers()).thenReturn(true);
         when(mWifiEntry.isSaved()).thenReturn(true);
         when(mWifiEntry.getConnectedState()).thenReturn(
@@ -561,7 +564,7 @@ public class NetworkProviderSettingsTest {
     @Test
     @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_modifiableNetwork_guestUser_hidesModify() {
-        createNetworkConfigWithCreatorUid(Integer.MAX_VALUE);
+        createNetworkConfig(false);
         when(mWifiEntry.isModifiableByOtherUsers()).thenReturn(true);
         when(mWifiEntry.isSaved()).thenReturn(true);
         when(mWifiEntry.getConnectedState()).thenReturn(
@@ -576,7 +579,7 @@ public class NetworkProviderSettingsTest {
     @Test
     @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_notModifiableNetwork_hidesModify() {
-        createNetworkConfigWithCreatorUid(Integer.MAX_VALUE);
+        createNetworkConfig(false);
         when(mWifiEntry.isModifiableByOtherUsers()).thenReturn(false);
         when(mWifiEntry.isSaved()).thenReturn(true);
         when(mWifiEntry.getConnectedState()).thenReturn(
@@ -590,7 +593,7 @@ public class NetworkProviderSettingsTest {
     @Test
     @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_notSaved_hidesModify() {
-        createNetworkConfigWithCreatorUid(Process.myUid());
+        createNetworkConfig(true);
         when(mWifiEntry.isSaved()).thenReturn(false);
         when(mWifiEntry.getConnectedState()).thenReturn(
                 WifiEntry.CONNECTED_STATE_DISCONNECTED);
@@ -603,7 +606,7 @@ public class NetworkProviderSettingsTest {
     @Test
     @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_isConnected_hidesModify() {
-        createNetworkConfigWithCreatorUid(Process.myUid());
+        createNetworkConfig(true);
         when(mWifiEntry.isSaved()).thenReturn(true);
         when(mWifiEntry.getConnectedState()).thenReturn(
                 WifiEntry.CONNECTED_STATE_CONNECTED);

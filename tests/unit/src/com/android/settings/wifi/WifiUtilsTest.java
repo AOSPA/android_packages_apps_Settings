@@ -29,11 +29,16 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Process;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.R;
+import com.android.settings.connectivity.Flags;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
@@ -49,10 +54,15 @@ import org.mockito.junit.MockitoRule;
 @RunWith(AndroidJUnit4.class)
 public class WifiUtilsTest {
 
+    static final int USER_ID_CURRENT = Process.myUserHandle().getIdentifier();
+    static final int USER_ID_OTHER = USER_ID_CURRENT + 1;
     static final String[] WIFI_REGEXS = {"wifi_regexs"};
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
     @Spy
     Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
@@ -63,6 +73,10 @@ public class WifiUtilsTest {
     UserManager mUserManager;
     @Mock
     TetheringManager mTetheringManager;
+    @Mock
+    WifiEntry mWifiEntry;
+    @Mock
+    WifiConfiguration mWifiConfiguration;
 
     @Before
     public void setUp() {
@@ -72,6 +86,7 @@ public class WifiUtilsTest {
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mContext.getSystemService(TetheringManager.class)).thenReturn(mTetheringManager);
         when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(WIFI_REGEXS);
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(mWifiConfiguration);
     }
 
     @Test
@@ -200,96 +215,221 @@ public class WifiUtilsTest {
     }
 
     @Test
-    public void isNetworkEditable_ownedNetwork() {
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
-        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
-        wifiConfiguration.creatorUid = Process.myUid();
-        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
-        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(false);
-
-        assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isTrue();
+    @RequiresFlagsDisabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isCurrentUserNetworkOwner_multiUserDisabled() {
+        assertThat(WifiUtils.isCurrentUserNetworkOwner(mWifiEntry, mContext)).isTrue();
     }
 
     @Test
-    public void isNetworkEditable_notOwnedNetwork_singleUser() {
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
-        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
-        wifiConfiguration.creatorUid = Integer.MAX_VALUE;
-        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(false);
-        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isCurrentUserNetworkOwner_nullWifiConfiguration() {
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(null);
+
+        assertThat(WifiUtils.isCurrentUserNetworkOwner(mWifiEntry, mContext)).isTrue();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isCurrentUserNetworkOwner_singleUser() {
         when(mUserManager.getUserCount()).thenReturn(1);
 
-        assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isTrue();
+        assertThat(WifiUtils.isCurrentUserNetworkOwner(mWifiEntry, mContext)).isTrue();
     }
 
     @Test
-    public void isNetworkEditable_notOwnedNetwork_multipleUser_networkModifiable() {
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
-        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
-        wifiConfiguration.creatorUid = Integer.MAX_VALUE;
-        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
-        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(true);
-        when(mUserManager.getUserCount()).thenReturn(3);
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isCurrentUserNetworkOwner_multipleUsers_notOwnedNetwork() {
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
+        when(mUserManager.getUserCount()).thenReturn(2);
 
-        assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isTrue();
+        assertThat(WifiUtils.isCurrentUserNetworkOwner(mWifiEntry, mContext)).isFalse();
     }
 
     @Test
-    public void isNetworkEditable_guestUser_multipleUser_networkModifiable() {
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
-        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
-        wifiConfiguration.creatorUid = Integer.MAX_VALUE;
-        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
-        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(true);
-        when(WifiUtils.isGuestUser(mContext)).thenReturn(true);
-        when(mUserManager.getUserCount()).thenReturn(3);
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isCurrentUserNetworkOwner_multipleUsers_ownedNetwork() {
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
+        when(mUserManager.getUserCount()).thenReturn(2);
 
-        assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isFalse();
+        assertThat(WifiUtils.isCurrentUserNetworkOwner(mWifiEntry, mContext)).isTrue();
     }
 
     @Test
-    public void isNetworkEditable_nullWifiConfiguration_returnsTrue() {
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
-        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(false);
-        when(wifiEntry.getWifiConfiguration()).thenReturn(null);
-
-        assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isTrue();
+    @RequiresFlagsDisabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isNetworkEditable_multiUserDisabled() {
+        assertThat(WifiUtils.isNetworkEditable(mWifiEntry, mContext)).isTrue();
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isNetworkEditable_ownedNetwork() {
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
+        when(mUserManager.getUserCount()).thenReturn(2);
+        when(mWifiEntry.isModifiableByOtherUsers()).thenReturn(false);
+
+        assertThat(WifiUtils.isNetworkEditable(mWifiEntry, mContext)).isTrue();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isNetworkEditable_notOwnedNetwork_networkModifiable() {
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
+        when(mUserManager.getUserCount()).thenReturn(2);
+        when(mWifiEntry.isModifiableByOtherUsers()).thenReturn(true);
+
+        assertThat(WifiUtils.isNetworkEditable(mWifiEntry, mContext)).isTrue();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isNetworkEditable_notOwnedNetwork_networkNotModifiable() {
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
+        when(mUserManager.getUserCount()).thenReturn(2);
+        when(mWifiEntry.isModifiableByOtherUsers()).thenReturn(false);
+
+        assertThat(WifiUtils.isNetworkEditable(mWifiEntry, mContext)).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isNetworkEditable_guestUser_notOwnedNetwork_networkModifiable() {
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
+        when(mUserManager.getUserCount()).thenReturn(2);
+        when(mWifiEntry.isModifiableByOtherUsers()).thenReturn(true);
+        when(mUserManager.isGuestUser()).thenReturn(true);
+
+        assertThat(WifiUtils.isNetworkEditable(mWifiEntry, mContext)).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isSharedFieldEditable_multiuserDisabled() {
+        assertThat(WifiUtils.isSharedFieldEditable(mWifiEntry, mContext)).isFalse();
+    }
+
+    @Test
+    public void isSharedFieldEditable_guestUser() {
+        when(mUserManager.isGuestUser()).thenReturn(true);
+
+        assertThat(WifiUtils.isSharedFieldEditable(mWifiEntry, mContext)).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isSharedFieldEditable_newNetwork() {
+        assertThat(WifiUtils.isSharedFieldEditable(null, mContext)).isTrue();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
     public void isSharedFieldEditable_ownedNetwork() {
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
-        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
-        when(WifiUtils.isGuestUser(mContext)).thenReturn(false);
-        wifiConfiguration.creatorUid = Process.myUid();
-        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
-        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(false);
+        when(mUserManager.isGuestUser()).thenReturn(false);
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
+        when(mUserManager.getUserCount()).thenReturn(2);
 
-        assertThat(WifiUtils.isSharedFieldEditable(wifiEntry, mContext)).isTrue();
+        assertThat(WifiUtils.isSharedFieldEditable(mWifiEntry, mContext)).isTrue();
     }
 
     @Test
-    public void isSharedFieldEditable_notOwnedNetwork_multipleUser() {
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
-        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
-        when(WifiUtils.isGuestUser(mContext)).thenReturn(false);
-        wifiConfiguration.creatorUid = Integer.MAX_VALUE;
-        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
-        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(true);
-        when(mUserManager.getUserCount()).thenReturn(3);
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isSharedFieldEditable_notOwnedNetwork() {
+        when(mUserManager.isGuestUser()).thenReturn(false);
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
+        when(mUserManager.getUserCount()).thenReturn(2);
 
-        assertThat(WifiUtils.isSharedFieldEditable(wifiEntry, mContext)).isFalse();
+        assertThat(WifiUtils.isSharedFieldEditable(mWifiEntry, mContext)).isFalse();
     }
 
     @Test
-    public void isSharedFieldEditable_ownedNetwork_guestUser_multipleUser() {
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
-        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
-        wifiConfiguration.creatorUid = Process.myUid();
-        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
-        when(WifiUtils.isGuestUser(mContext)).thenReturn(true);
-        when(mUserManager.getUserCount()).thenReturn(3);
+    @RequiresFlagsDisabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isNetworkShareable_canShare_multiuserDisabled() {
+        when(mWifiEntry.canShare()).thenReturn(true);
 
-        assertThat(WifiUtils.isSharedFieldEditable(wifiEntry, mContext)).isFalse();
+        assertThat(WifiUtils.isNetworkShareable(mWifiEntry, mContext)).isTrue();
+    }
+
+    @Test
+    public void isNetworkShareable_cannotShare() {
+        when(mWifiEntry.canShare()).thenReturn(false);
+
+        assertThat(WifiUtils.isNetworkShareable(mWifiEntry, mContext)).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isNetworkShareable_canShare_notOwnedNetwork() {
+        when(mWifiEntry.canShare()).thenReturn(true);
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
+        when(mUserManager.getUserCount()).thenReturn(2);
+
+        assertThat(WifiUtils.isNetworkShareable(mWifiEntry, mContext)).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isNetworkShareable_canShare_ownedNetwork() {
+        when(mWifiEntry.canShare()).thenReturn(true);
+        when(mUserManager.isGuestUser()).thenReturn(false);
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
+        when(mUserManager.getUserCount()).thenReturn(2);
+
+        assertThat(WifiUtils.isNetworkShareable(mWifiEntry, mContext)).isTrue();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isNetworkShareable_canShare_ownedNetwork_guestUser() {
+        when(mWifiEntry.canShare()).thenReturn(true);
+        when(mUserManager.isGuestUser()).thenReturn(true);
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
+        when(mUserManager.getUserCount()).thenReturn(2);
+
+        assertThat(WifiUtils.isNetworkShareable(mWifiEntry, mContext)).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isNetworkForgettable_canForget_multiuserDisabled() {
+        when(mWifiEntry.canForget()).thenReturn(true);
+
+        assertThat(WifiUtils.isNetworkForgettable(mWifiEntry, mContext)).isTrue();
+    }
+
+    @Test
+    public void isNetworkForgettable_cannotForget() {
+        when(mWifiEntry.canForget()).thenReturn(false);
+
+        assertThat(WifiUtils.isNetworkForgettable(mWifiEntry, mContext)).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isNetworkForgettable_canForget_ownedNetwork() {
+        when(mWifiEntry.canForget()).thenReturn(true);
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
+        when(mUserManager.getUserCount()).thenReturn(2);
+
+        assertThat(WifiUtils.isNetworkForgettable(mWifiEntry, mContext)).isTrue();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isNetworkForgettable_canForget_notOwnedNetwork() {
+        when(mWifiEntry.canForget()).thenReturn(true);
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
+        when(mUserManager.getUserCount()).thenReturn(2);
+
+        assertThat(WifiUtils.isNetworkForgettable(mWifiEntry, mContext)).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    public void isNetworkForgettable_canForget_notOwnedNetwork_adminUser() {
+        when(mWifiEntry.canForget()).thenReturn(true);
+        when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
+        when(mUserManager.getUserCount()).thenReturn(2);
+        when(mUserManager.isAdminUser()).thenReturn(true);
+
+        assertThat(WifiUtils.isNetworkForgettable(mWifiEntry, mContext)).isTrue();
     }
 }

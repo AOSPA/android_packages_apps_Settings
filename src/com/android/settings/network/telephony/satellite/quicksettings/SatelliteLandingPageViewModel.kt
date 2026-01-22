@@ -68,6 +68,16 @@ class SatelliteLandingPageViewModel(
         _isCarrierRoamingNtnSupported.asStateFlow()
 
     /**
+     * Whether the "Try a demo" button should be enabled.
+     *
+     * The button is disabled if satellite connectivity is [SatelliteStatus.ACTIVE].
+     */
+    val isTryADemoButtonEnabled: StateFlow<Boolean> =
+        satelliteStateRepository.satelliteStatus
+            .map { it != SatelliteStatus.ACTIVE }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
+
+    /**
      * Whether the satellite apps should be enabled (clickable and fully opaque).
      *
      * Apps are enabled if satellite connectivity is either [SatelliteStatus.ACTIVE] or
@@ -76,7 +86,7 @@ class SatelliteLandingPageViewModel(
     val areAppsEnabled: StateFlow<Boolean> =
         satelliteStateRepository.satelliteStatus
             .map { it != SatelliteStatus.NOT_AVAILABLE }
-            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
 
     private val _bannerState = MutableStateFlow(SatelliteBannerState())
     /** The state of the satellite warning banners. */
@@ -139,12 +149,14 @@ class SatelliteLandingPageViewModel(
         val items = mutableListOf<SatelliteAppItem>()
 
         // Emergency SOS app
-        createSatelliteAppItem(
-                packageName = SatelliteAppsRepository.PACKAGE_NAME_SAFETY_HUB,
-                intent = appsRepository.getEmergencySosIntent(),
-                appLabel = context.getString(R.string.satellite_emergency_sos),
-            )
-            ?.let { items.add(it) }
+        if (!isLteBasedNtnSupported) {
+            createSatelliteAppItem(
+                    packageName = SatelliteAppsRepository.PACKAGE_NAME_SAFETY_HUB,
+                    intent = appsRepository.getEmergencySosIntent(),
+                    appLabel = context.getString(R.string.satellite_emergency_sos),
+                )
+                ?.let { items.add(it) }
+        }
 
         // Configurable apps based on NTN support
         val appPackages =
@@ -161,13 +173,6 @@ class SatelliteLandingPageViewModel(
                 )
                 ?.let { items.add(it) }
         }
-
-        // Settings app
-        createSatelliteAppItem(
-                packageName = SatelliteAppsRepository.PACKAGE_NAME_SETTINGS,
-                intent = appsRepository.getSettingsIntent(isCarrierRoamingNtnSupported),
-            )
-            ?.let { items.add(it) }
 
         _satelliteAppItems.value = items
     }

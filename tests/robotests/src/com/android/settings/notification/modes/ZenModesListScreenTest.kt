@@ -16,22 +16,22 @@
 package com.android.settings.notification.modes
 
 import android.app.settings.SettingsEnums
+import android.content.Context
 import android.os.UserManager.DISALLOW_ADJUST_VOLUME
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
 import android.provider.Settings
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings.ModesSettingsActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.notification.modes.ZenMode
 import com.android.settingslib.notification.modes.ZenModesBackend
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.mock
@@ -41,15 +41,15 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.robolectric.Shadows.shadowOf
 
-class ZenModesListScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class ZenModesListScreenTest {
 
     private lateinit var zenModesBackend: ZenModesBackend
     private lateinit var mockLifeCycleContext: PreferenceLifecycleContext
 
-    override val preferenceScreenCreator = ZenModesListScreen()
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_MODES_25Q4
+    private val preferenceScreenCreator = ZenModesListScreen()
 
     @Before
     fun setUp() {
@@ -111,18 +111,6 @@ class ZenModesListScreenTest : SettingsCatalystTestCase() {
     fun tags_correct() {
         assertThat(preferenceScreenCreator.tags(appContext).toList())
             .containsExactly(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_DEEPLINK_MODES_25Q4)
-    fun isFlagEnabled_enabled() {
-        assertThat(preferenceScreenCreator.isFlagEnabled(appContext)).isTrue()
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_MODES_25Q4)
-    fun isFlagEnabled_disabled() {
-        assertThat(preferenceScreenCreator.isFlagEnabled(appContext)).isFalse()
     }
 
     @Test

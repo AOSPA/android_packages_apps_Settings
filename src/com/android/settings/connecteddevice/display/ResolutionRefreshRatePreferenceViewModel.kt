@@ -174,7 +174,8 @@ constructor(
         peakWidth = res.getInteger(com.android.internal.R.integer.config_externalDisplayPeakWidth)
         peakHeight = res.getInteger(com.android.internal.R.integer.config_externalDisplayPeakHeight)
         isRefreshRateSyncEnabled =
-            res.getBoolean(com.android.internal.R.bool.config_refreshRateSynchronizationEnabled)
+            res.getBoolean(com.android.internal.R.bool.config_refreshRateSynchronizationEnabled) ||
+                (!ConnectedDisplayInjector.isRefreshRateFlagsEnabled())
 
         val resolutionsArray = res.getIntArray(R.array.config_resolutionsShownOnExternalDisplay)
         allowedResolutions =
