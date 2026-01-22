@@ -63,7 +63,9 @@ import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import com.google.android.setupdesign.util.ThemeHelper;
 
+import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.shadows.ShadowPackageManager;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -209,5 +211,17 @@ public class AccessibilityTestUtils {
         });
 
         return fragmentScenario;
+    }
+
+    /**
+     * Set touch screen support in the shadow package manager.
+     *
+     * @param context context for the package manager.
+     * @param supported true if touch screen support should be enabled, false otherwise.
+     */
+    public static void setTouchScreenSupported(Context context, boolean supported) {
+        ShadowPackageManager shadowPackageManager = Shadows.shadowOf(context.getPackageManager());
+        shadowPackageManager.setSystemFeature(PackageManager.FEATURE_TOUCHSCREEN, supported);
+        shadowPackageManager.setSystemFeature(PackageManager.FEATURE_FAKETOUCH, supported);
     }
 }

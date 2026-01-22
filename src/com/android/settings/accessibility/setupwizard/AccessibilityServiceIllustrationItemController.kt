@@ -21,6 +21,7 @@ import android.content.Context
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.accessibility.a11yservice.ui.A11yServiceIllustrationPreference
 import com.android.settings.accessibility.setupwizard.items.IllustrationItem
+import com.android.settings.accessibility.setupwizard.items.IllustrationItem.OnBindListener
 import com.google.android.setupdesign.items.Item
 
 /** Controller for the accessibility service illustration item in the Accessibility Setup Wizard. */
@@ -37,7 +38,11 @@ class AccessibilityServiceIllustrationItemController(
         if (item is IllustrationItem) {
             with(accessibilityServiceIllustrationMetadata) {
                 item.imageUri = getImageUri(context)
-                item.contentDescription = getContentDescription(context)
+                item.onBindListener = OnBindListener { _ ->
+                    if (item.isLottieAnimation) {
+                        item.contentDescription = getContentDescription(context)
+                    }
+                }
             }
         }
     }

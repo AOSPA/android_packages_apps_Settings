@@ -40,4 +40,9 @@
     <PreferenceCategory
         android:key="usb_details_power_role"
         android:title="@string/usb_power_title"/>
+
+    <PreferenceCategory
+        android:featureFlag="android.hardware.usb.flag.enable_pci_tunnel_control"
+        android:key="usb_details_pci_tunnel"
+        android:title="@string/usb_pci_tunnel_title"/>
 </PreferenceScreen>

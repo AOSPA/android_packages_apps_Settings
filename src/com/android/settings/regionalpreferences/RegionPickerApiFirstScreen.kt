@@ -16,11 +16,18 @@
 
 package com.android.settings.regionalpreferences
 
+import android.content.Context
+import com.android.internal.app.LocaleStore
+import com.android.internal.app.SystemLocaleCollector
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.updateRegion
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
+import java.util.Locale
 
 // LINT.IfChange
 @ProvidePreferenceScreen(RegionPickerApiFirstScreen.KEY)
@@ -34,10 +41,52 @@ class RegionPickerApiFirstScreen :
 
     init {
         flag { Flags.catalystMigration26q2() }
+
+        preference(
+            key = KEY_PREFERENCE,
+            purpose = R.string.system_locale_region_picker_preference_purpose,
+            type =
+                GeneratedType(description = R.string.default_system_language_region_description) {
+                    val defaultLocaleInfo = LocaleStore.getLocaleInfo(Locale.getDefault())
+                    val parentLocale = defaultLocaleInfo.parent
+                    val parentLocaleInfo = LocaleStore.getLocaleInfo(parentLocale)
+                    val localeInfoList = getSupportedLanguageList(context, parentLocaleInfo)
+                    // Only show the default system language's region
+                    // value: country code, for example, US, UK, IN
+                    // description: full country name, for example, United State, United Kingdom,
+                    // India
+                    localeInfoList.add(defaultLocaleInfo)
+                    localeInfoList.map {
+                        GeneratedValue(it.locale.country, it.fullCountryNameNative)
+                    }
+                },
+        ) {
+            get { execute { Locale.getDefault().country } }
+            set {
+                execute { value ->
+                    val locale =
+                        Locale.Builder()
+                            .setLocale(Locale.getDefault())
+                            .setRegion(value)
+                            .build()
+                    updateRegion(locale)
+                }
+            }
+        }
     }
 
+    private fun getSupportedLanguageList(
+        context: Context,
+        parent: LocaleStore.LocaleInfo?,
+    ): MutableList<LocaleStore.LocaleInfo> =
+        SystemLocaleCollector(context, null)
+            .getSupportedLocaleList(parent, false, true)
+            .toMutableList()
+
     companion object {
+        const val TAG = "RegionPickerApiFirstScreen"
         const val KEY = "key_system_region_picker_page"
+        const val KEY_PREFERENCE = "default_system_language_region_preference"
     }
 }
 // LINT.ThenChange(RegionPickerFragment.java)

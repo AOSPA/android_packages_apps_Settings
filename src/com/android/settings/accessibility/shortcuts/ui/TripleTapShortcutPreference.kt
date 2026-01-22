@@ -21,6 +21,7 @@ import androidx.preference.Preference
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
 import com.android.settings.R
+import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.shortcuts.ShortcutOptionPreference as ShortcutOptionWidget
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -75,7 +76,9 @@ class TripleTapShortcutPreference(
         // Its UI visibility, however, depends on the expandable state of the shortcut options.
         // We handle the UI visibility in #bind to reflect this, ensuring the preference is only
         // shown when expanded and applicable.
-        return targets.size == 1 && targets.contains(MAGNIFICATION_CONTROLLER_NAME)
+        return targets.size == 1 &&
+            targets.contains(MAGNIFICATION_CONTROLLER_NAME) &&
+            AccessibilityUtil.isTouchShortcutAvailable(context)
     }
 
     override fun onCreate(context: PreferenceLifecycleContext) {

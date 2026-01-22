@@ -21,7 +21,6 @@ import android.content.Context
 import android.net.wifi.SoftApConfiguration
 import android.net.wifi.WifiManager
 import android.provider.Settings.Global.DEVICE_NAME
-import androidx.lifecycle.ViewModel
 import com.android.settings.deviceinfo.DeviceNamePreferenceController.getFilteredBluetoothString
 import com.android.settings.wifi.utils.wifiManager
 import com.android.settingslib.datastore.SettingsGlobalStore
@@ -32,12 +31,4 @@ fun Context.updateDeviceName(deviceName: String) {
     val manager: WifiManager = wifiManager ?: return
     manager.softApConfiguration =
         SoftApConfiguration.Builder(manager.softApConfiguration).setSsid(deviceName).build()
-}
-
-class DeviceInfoViewModel : ViewModel() {
-    var deviceName: String? = null
-
-    fun clearDeviceNme() {
-        deviceName = null
-    }
 }

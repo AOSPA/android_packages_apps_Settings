@@ -32,7 +32,6 @@ import com.android.settings.R
 /** A repository for getting the list of satellite apps for the landing page. */
 open class SatelliteAppsRepository(private val context: Context) {
     companion object {
-        const val PACKAGE_NAME_SETTINGS = "com.android.settings"
         const val PACKAGE_NAME_SAFETY_HUB = "com.google.android.apps.safetyhub"
 
         @VisibleForTesting const val PACKAGE_NAME_SCONE = "com.google.android.apps.scone"

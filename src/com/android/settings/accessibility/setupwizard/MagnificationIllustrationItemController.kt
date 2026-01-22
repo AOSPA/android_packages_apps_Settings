@@ -19,6 +19,7 @@ package com.android.settings.accessibility.setupwizard
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.R
+import com.android.settings.accessibility.screenmagnification.ui.MagnificationIllustrationPreference
 import com.android.settings.accessibility.setupwizard.items.IllustrationItem
 import com.google.android.setupdesign.items.Item
 import com.google.android.setupdesign.util.ThemeHelper
@@ -27,6 +28,8 @@ import com.google.android.setupdesign.util.ThemeHelper
 class MagnificationIllustrationItemController(private val context: Context, item: Item) :
     BaseItemController(item) {
 
+    private val magnificationIllustrationMetadata = MagnificationIllustrationPreference()
+
     public override fun bindData(item: Item) {
         if (item is IllustrationItem) {
             if (ThemeHelper.shouldApplyGlifExpressiveStyle(context)) {
@@ -34,6 +37,8 @@ class MagnificationIllustrationItemController(private val context: Context, item
             } else {
                 item.imageResId = R.raw.accessibility_magnification_banner
             }
+            item.contentDescription =
+                magnificationIllustrationMetadata.getContentDescription(context)
         }
     }
 

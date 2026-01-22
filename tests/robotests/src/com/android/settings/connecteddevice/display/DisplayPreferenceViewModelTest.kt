@@ -238,6 +238,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
                 DisplayIsEnabled.YES,
                 /* isConnectedDisplay= */ false,
                 /* rotation= */ 0,
+                /* isHdrSupported= */ true,
             )
         )
         updateDisplaysAndTopology(updatedEnabledDisplays)
@@ -267,6 +268,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
                 DisplayIsEnabled.NO,
                 /* isConnectedDisplay= */ true,
                 /* rotation= */ 0,
+                /* isHdrSupported= */ true,
             )
         )
         updateDisplaysAndTopology(updatedEnabledDisplays)

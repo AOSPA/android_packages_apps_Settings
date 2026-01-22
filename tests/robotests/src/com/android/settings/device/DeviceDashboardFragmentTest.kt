@@ -17,23 +17,31 @@
 package com.android.settings.device
 
 import android.app.settings.SettingsEnums
+import android.content.Context
 import androidx.preference.Preference
+import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.android.settings.testutils.shadow.ShadowDesktopSettingsUtils
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
+import org.robolectric.annotation.Config
 import org.robolectric.shadows.androidx.fragment.FragmentController
+import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
+@Config(shadows = [ShadowDesktopSettingsUtils::class])
 class DeviceDashboardFragmentTest {
 
     private lateinit var fragment: DeviceDashboardFragment
+    private lateinit var context: Context
 
     @Before
     fun setUp() {
+        context = ApplicationProvider.getApplicationContext()
         fragment = FragmentController.of(DeviceDashboardFragment()).create().visible().get()
     }
 
@@ -60,11 +68,11 @@ class DeviceDashboardFragmentTest {
         val displayPreference = fragment.findPreference<Preference>("device_dashboard_display")
         assertThat(displayPreference).isNotNull()
         assertThat(displayPreference?.fragment).isEqualTo("com.android.settings.DisplaySettings")
-        assertThat(displayPreference?.title).isEqualTo(fragment.context?.getString(R.string.display_settings))
+        assertThat(displayPreference?.title).isEqualTo(fragment.context?.getString(R.string.device_dashboard_display_title))
         assertThat(displayPreference?.summary).isEqualTo(fragment.context?.getString(R.string.display_dashboard_summary))
         val icon = displayPreference?.icon
         assertThat(Shadows.shadowOf(icon).createdFromResId)
-            .isEqualTo(R.drawable.ic_settings_display_filled)
+            .isEqualTo(R.drawable.ic_settings_tv_displays)
     }
 
     @Test
@@ -72,10 +80,10 @@ class DeviceDashboardFragmentTest {
         val soundPreference = fragment.findPreference<Preference>("device_dashboard_sound")
         assertThat(soundPreference).isNotNull()
         assertThat(soundPreference?.fragment).isEqualTo("com.android.settings.notification.SoundSettings")
-        assertThat(soundPreference?.title).isEqualTo(fragment.context?.getString(R.string.sound_settings))
+        assertThat(soundPreference?.title).isEqualTo(fragment.context?.getString(R.string.device_dashboard_sound_title))
         assertThat(soundPreference?.summary).isEqualTo(fragment.context?.getString(R.string.sound_dashboard_summary))
         val icon = soundPreference?.icon
-        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_volume_up_filled)
+        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_mic)
     }
 
     @Test
@@ -107,7 +115,7 @@ class DeviceDashboardFragmentTest {
         assertThat(trackpadPreference?.title).isEqualTo(fragment.context?.getString(R.string.trackpad_settings))
         assertThat(trackpadPreference?.summary).isEqualTo(fragment.context?.getString(R.string.trackpad_settings_summary))
         val icon = trackpadPreference?.icon
-        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_touchpad)
+        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_touchpad_mouse)
     }
 
     @Test
@@ -118,6 +126,49 @@ class DeviceDashboardFragmentTest {
         assertThat(touchpadPreference?.title).isEqualTo(fragment.context?.getString(R.string.trackpad_settings))
         assertThat(touchpadPreference?.summary).isEqualTo(fragment.context?.getString(R.string.trackpad_settings_summary))
         val icon = touchpadPreference?.icon
-        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_touchpad)
+        assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_touchpad_mouse)
+    }
+
+    @Test
+    fun getXmlResourcesToIndex_enabled_returnsResId() {
+        ShadowDesktopSettingsUtils.setShouldShow(true)
+
+        val result = DeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(context, true)
+
+        assertThat(result).hasSize(1)
+        assertThat(result[0].xmlResId).isEqualTo(R.xml.device_dashboard_fragment)
+    }
+
+    @Test
+    fun getXmlResourcesToIndex_disabled_returnsEmpty() {
+        ShadowDesktopSettingsUtils.setShouldShow(false)
+
+        val result = DeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(context, true)
+
+        assertThat(result).isEmpty()
+    }
+
+    @Test
+    fun isPageSearchEnabled_enabled_returnsTrue() {
+        ShadowDesktopSettingsUtils.setShouldShow(true)
+
+        val provider = DeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
+        val result = ReflectionHelpers.callInstanceMethod<Boolean>(
+            provider, "isPageSearchEnabled",
+            ReflectionHelpers.ClassParameter(Context::class.java, context)
+        )
+        assertThat(result).isTrue()
+    }
+
+    @Test
+    fun isPageSearchEnabled_disabled_returnsFalse() {
+        ShadowDesktopSettingsUtils.setShouldShow(false)
+
+        val provider = DeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
+        val result = ReflectionHelpers.callInstanceMethod<Boolean>(
+            provider, "isPageSearchEnabled",
+            ReflectionHelpers.ClassParameter(Context::class.java, context)
+        )
+        assertThat(result).isFalse()
     }
 }
