@@ -45,6 +45,7 @@ import com.android.internal.R;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.systemui.Flags;
 
 public class ForceEnableNotesRolePreferenceController
         extends DeveloperOptionsPreferenceController
@@ -100,7 +101,13 @@ public class ForceEnableNotesRolePreferenceController
     protected void setEnabled(boolean enabled) {
         try {
             for (UserInfo user : mUserManager.getUsers()) {
-                if (user.isFull() || user.isProfile()) {
+                if (user.isFull() || user.isProfile()
+                        || // Enable the overlay in system user for HSUM device. There are multiple
+                        // code paths that query this overlay while HSUM System user is active, see
+                        // b/462400157.
+                        (Flags.enableNoteHsumDevOptionFix()
+                                && UserManager.isHeadlessSystemUserMode()
+                                && user.getUserHandle().isSystem())) {
                     mOverlayManager.setEnabled(OVERLAY_PACKAGE_NAME, enabled, user.id);
                 }
             }
