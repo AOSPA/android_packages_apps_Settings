@@ -957,6 +957,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"別のディスプレイとして使用する"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"内蔵ディスプレイをミラーリングする"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"接続ダイアログを表示する"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"HDR を使用"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"色域を広げハイライトを明るくします"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"外部ディスプレイに接続されていません"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"回転"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"標準"</string>
@@ -2116,6 +2118,14 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"英語: Spaceキー2回でピリオド(.)を挿入"</string>
     <string name="show_password" msgid="7101900779571040117">"パスワードを表示"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"入力した文字を一瞬だけ表示します"</string>
+    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <skip />
+    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"このスペルチェッカーを選択すると、入力する全文字列の収集をアプリ（<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>）に許可することになります。これにはパスワードやクレジットカード番号などの個人情報も含まれます。このスペルチェッカーを使用しますか？"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"設定"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"言語"</string>
@@ -2267,7 +2277,7 @@
     <string name="gesture_button_done" msgid="6387900351203032188">"完了"</string>
     <string name="action_corner_title" msgid="7411160165577367757">"コーナー ショートカットをカスタマイズ"</string>
     <string name="action_corner_summary" msgid="695618538930535335">"カーソルを使用してシステムを操作します"</string>
-    <string name="action_corner_intro" msgid="2170609118659718140">"コーナー ショートカットをカスタマイズするには、次の領域を選択します"</string>
+    <string name="action_corner_intro" msgid="2170609118659718140">"角を選択してショートカットをカスタマイズできます"</string>
     <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"左下の角"</string>
     <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"右下の角"</string>
     <string name="action_corner_top_left_title" msgid="4633975226092344210">"左上の角"</string>
@@ -2393,7 +2403,7 @@
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"お問い合わせ"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"出張報告書"</string>
     <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"サポートが必要な場合は担当者までお問い合わせください。このレポートは以下に送付されます:"</string>
-    <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Client Expenses"</string>
+    <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"クライアント関連費用"</string>
     <string name="color_contrast_about_title" msgid="5939566801408667867">"色のコントラストについて"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"画面を暗くする"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"操作のコントロール"</string>
@@ -2658,15 +2668,15 @@
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"軽微なカーソルの動きを無視する"</string>
     <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"左クリックをデフォルトの操作として使用する"</string>
     <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"他の操作を行うと、自動クリックは自動的に左クリックに戻ります"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"3 ボタン ナビゲーションで自動クリックを有効活用"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"自動クリックを使用しているときに、戻る、ホームに移動する、アプリを切り替えるなどの操作を行うには、ジェスチャー ナビゲーションではなく 3 ボタン ナビゲーションを使用してください"</string>
-    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"ジェスチャー ナビゲーションを維持する"</string>
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"3 ボタン ナビゲーションで自動クリックがもっと便利に"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"自動クリックを使用して、戻る、ホームに移動する、アプリを切り替えるなどの操作を行うには、ジェスチャー ナビゲーションではなく 3 ボタン ナビゲーションが便利です"</string>
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"ジェスチャー ナビゲーションを使い続ける"</string>
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"ナビゲーションの設定"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"バイブレーションとハプティクス"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"用途に合わせてバイブレーションの強さを調整します"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"ON / 着信、通知、アラームのバイブレーション レベルを設定します"</string>
     <string name="accessibility_vibration_settings_state_off" msgid="113565506991847845">"OFF / 着信、通知、アラームのバイブレーション レベルを設定する"</string>
-    <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"デバイスがサイレント モードに設定されているため、設定は無効です"</string>
+    <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"デバイスがマナーモードに設定されているため、設定は無効です"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"通話"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"通知とアラーム"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"操作時のハプティクス"</string>
@@ -2917,11 +2927,6 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"過去 24 時間の使用状況を確認できます"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"前回のフル充電以降の使用を表示"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"アプリのバッテリー使用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"使用状況の詳細"</string>
@@ -3621,12 +3626,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth、Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"デバイス"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"キーボード、タッチパッド、ディスプレイ、サウンド"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"ディスプレイ"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"サウンド"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC が OFF のため使用できません"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"使用するには、まずお支払いアプリをインストールしてください"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使ったアプリ、デフォルトのアプリ"</string>
@@ -3755,6 +3757,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, タグ, リーダー"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"キーボード、ハプティクス、振動"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"外部ディスプレイ, 接続済みのディスプレイ, 拡張ディスプレイ, 2 台目のディスプレイ, 内蔵ディスプレイ, ディスプレイの配置, ミラーリング, 表示サイズ, 回転, 解像度, リフレッシュ レート"</string>
+    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"音量とバイブレーション"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"メディアの音量"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast の音量"</string>
@@ -4045,7 +4049,7 @@
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"会話の優先度を高く設定したり、設定を変更したりすると、ここに表示されます。\n\n会話の設定を変更するには: \n画面の上から下にスワイプし、プルダウン シェードを開いて、会話を長押しします。"</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"最小化"</string>
     <string name="notification_importance_high_title" msgid="394129291760607808">"ポップアップ"</string>
-    <string name="notification_silence_title" msgid="4085829874452944989">"サイレント"</string>
+    <string name="notification_silence_title" msgid="4085829874452944989">"マナー"</string>
     <string name="notification_alert_title" msgid="1632401211722199217">"デフォルト"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"割り込みを許可"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"音やバイブレーションによる通知、または画面のポップアップ通知をアプリに許可します"</string>
@@ -4087,7 +4091,7 @@
     <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS やテキスト メッセージなどのコミュニケーション"</string>
     <string name="notif_type_alerting" msgid="4713073696855718576">"通知"</string>
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"スマートフォンの設定を基に着信音またはバイブレーションが有効になります"</string>
-    <string name="notif_type_silent" msgid="6273951794420331010">"消音"</string>
+    <string name="notif_type_silent" msgid="6273951794420331010">"マナー"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"通知があっても、着信音は鳴らず、バイブレーションも作動しません"</string>
     <string name="notification_listener_allowed" msgid="5536962633536318551">"許可されているアプリ"</string>
     <string name="notification_listener_not_allowed" msgid="3352962779597846538">"許可されてないアプリ"</string>
@@ -4387,12 +4391,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"再起動"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"後で"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"高度なメモリ保護の詳細"</string>
-    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
-    <skip />
-    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
-    <skip />
-    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
-    <skip />
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Android OS 診断"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"OS ビルドを検証する"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"診断, 透明性, バイナリ"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"この仕事用プロファイルを管理するアプリ:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>によって管理されています"</string>
     <string name="launch_by_default" msgid="892824422067985734">"デフォルトで開く"</string>
@@ -4513,18 +4514,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"デフォルトの USB 設定"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"電源オプション"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"ファイル転送オプション"</string>
-    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
-    <skip />
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"データアクセスの保護"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"PCI トンネリングを許可"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"有効にすると、USB と Thunderbolt 周辺機器は PCI トンネルを作成してシステムメモリにアクセスできます"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"この設定を変更するには、管理者ユーザーである必要があります"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"IT 管理者により無効になっています"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"高度な保護機能モードにより無効になっています"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB の設定"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB のコントロール"</string>
@@ -5796,10 +5791,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> by <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"アスペクト比を変更すると、アプリが再起動します。保存されていない変更は失われる可能性があります。アプリによっては特定のアスペクト比で最適化できない場合があります。"</string>
-    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
-    <skip />
-    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
-    <skip />
+    <string name="app_info_experience_category" msgid="6283332744508784886">"エクスペリエンス"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"ゲームパッド"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指紋認証センサー"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"点滅による通知"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"点滅による通知について"</string>
@@ -6093,7 +6086,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"アプリのセキュリティ"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"デバイスのロック解除"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"アカウントのセキュリティ"</string>
-    <string name="device_finders_subpage_title" msgid="2390688647994924006">"デバイスの検索"</string>
+    <string name="device_finders_subpage_title" msgid="2390688647994924006">"デバイスの探索"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"システムとアップデート"</string>
     <string name="cellular_network_security_subpage_title" msgid="1191202157978621337">"モバイル ネットワークのセキュリティ"</string>
     <string name="location_settings" msgid="6833222354060094170">"位置情報へのアクセス"</string>
@@ -6129,7 +6122,7 @@
     <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"プライベート スペース"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"アラートを開く"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"アラートを閉じる"</string>
-    <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"削除したアラート"</string>
+    <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"確認済みのアラート"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"このアラートを削除しますか？"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"セキュリティとプライバシーの設定を適宜確認し、保護を強化しましょう"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"操作が完了しました"</string>
@@ -6155,7 +6148,8 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"衛星のランディング ページ"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"デモを試す"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"仕組みを確認"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"モバイル ネットワークや Wi-Fi ネットワークが利用できない場合、スマートフォンは自動的に衛星に接続します。接続を最大限良好にするには、外に出て、空がよく見える場所に移動してください。モバイル ネットワークが利用できる状態になると再接続されます。衛星による通話はご利用いただけません。緊急通報はつながる場合があります。"</string>
+    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
+    <skip />
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"接続を最大限良好にするには、外に出て、空がよく見える場所に移動してください。モバイル ネットワークが利用できる状態になると再接続されます。衛星による通話はご利用いただけません。緊急通報はつながる場合があります。"</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"衛星接続の詳細"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"衛星 SOS のデモを開く"</string>
@@ -6166,24 +6160,20 @@
     <string name="add_tile_action" msgid="5271301747196740442">"タイルを追加"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"衛星タイルのメッセージ"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
-    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"衛星通信を利用できません"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"モバイル ネットワークまたは Wi-Fi ネットワークに接続しているときは、衛星通信を利用できません。"</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"この国または地域では衛星接続を利用できません。"</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"衛星接続は現在ご利用いただけません。しばらくしてからもう一度お試しください。"</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"ご利用のモバイルプランには衛星通信が含まれていません。携帯通信会社にお問い合わせください。"</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"衛星通信メッセージを使用するには、Google メッセージがデフォルトのメッセージ アプリに設定されている必要があります。"</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"衛星接続が携帯通信会社によって有効になっています。詳しくは、ご利用の携帯通信会社の衛星設定をご確認ください。"</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"利用できる地域を確認"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"デフォルトのアプリを変更"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"携帯通信会社の設定を確認"</string>
+    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
     <skip />
-    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
     <skip />
-    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
-    <skip />
-    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
-    <skip />
-    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
-    <skip />
-    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
-    <skip />
-    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
-    <skip />
-    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
-    <skip />
-    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
-    <skip />
-    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
     <skip />
 </resources>

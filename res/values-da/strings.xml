@@ -957,6 +957,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Brug som separat skærm"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Spejl indbygget skærm"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Vis dialogboks for forbindelse"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"Brug HDR"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"Giver mulighed for flere farver og klarere lyse områder"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Forbindelse til ekstern skærm afbrudt"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Rotation"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Standard"</string>
@@ -2047,7 +2049,7 @@
     <string name="force_stop_dlg_title" msgid="86745852555490146">"Tving til at standse?"</string>
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"Hvis du tvinger en app til at standse, kan det medføre, at den ikke fungerer korrekt."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Deaktiver appen"</string>
-    <string name="app_disable_dlg_text" msgid="2449382902751908916">"Hvis du deaktiverer denne app, kan det medføre, at Android-apps og andre apps ikke fungerer korrekt. Vær opmærksom på, at du ikke kan slette denne app, da den er forudinstalleret på din enhed. Hvis du slår appen fra, deaktiveres og skjules den på din enhed."</string>
+    <string name="app_disable_dlg_text" msgid="2449382902751908916">"Hvis du deaktiverer denne app, kan det medføre, at Android og andre apps ikke fungerer korrekt. Vær opmærksom på, at du ikke kan slette denne app, da den er forudinstalleret på din enhed. Hvis du slår appen fra, deaktiveres og skjules den på din enhed."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Butik"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Info om appen"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Appen er installeret fra <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2116,6 +2118,14 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Tryk på mellemrumstasten to gange for at indsætte punktum"</string>
     <string name="show_password" msgid="7101900779571040117">"Vis adgangskoder"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Vis kort tegnene, mens du skriver"</string>
+    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <skip />
+    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Denne stavekontrol kan muligvis indsamle al den tekst, som du skriver, også personlige data som adgangskoder og kreditkortnumre. Den kommer fra appen <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Vil du bruge denne stavekontrol?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Indstillinger"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Sprog"</string>
@@ -2917,11 +2927,6 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Se forbrug for de seneste 24 timer"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Se forbrug siden sidste fulde opladning"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Appens batteriforbrug"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Brugsdetaljer"</string>
@@ -3621,12 +3626,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Enhed"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"Tastatur, touchplade, skærm, lyd"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Skærm"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Lyd"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Ikke tilgængelig, fordi NFC er slået fra"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Du skal først installere en app til betalinger"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Seneste apps, standardapps"</string>
@@ -3755,6 +3757,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, læser"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"tastatur, haptisk teknologi, vibration"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"ekstern skærm, forbundet skærm, udvidet skærm, anden skærm, indbygget skærm, organiser skærme, spejl, skærmstørrelse, rotation, opløsning, opdateringshastighed"</string>
+    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Lydstyrke og vibration"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Lydstyrke for medier"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast-lydstyrke"</string>
@@ -3777,9 +3781,9 @@
     <string name="spatial_audio_title" msgid="1775370104206884711">"Rumlig lyd"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Toner for tastatur"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Lyd ved skærmlåsning"</string>
-    <string name="charging_sounds_title" msgid="5261683808537783668">"Lyd og vibration ved opladning"</string>
+    <string name="charging_sounds_title" msgid="5261683808537783668">"Lyde og vibration ved opladning"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Lyde for dockingstation"</string>
-    <string name="touch_sounds_title" msgid="826964355109667449">"Lyd ved berøring"</string>
+    <string name="touch_sounds_title" msgid="826964355109667449">"Lyde ved berøring og klik"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"Vis altid ikonet, når vibration er aktiveret"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Dockhøjttaler afspiller"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Al lyd"</string>
@@ -3894,7 +3898,7 @@
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 minut}one{# minut}other{# minutter}}"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Personer"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
-    <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmer og andre afbrydelser"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmer og andre forstyrrelser"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Varighed af Kvikmenu"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Lyde for arbejdsprofil"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Brug lyde fra din personlige profil"</string>
@@ -4255,10 +4259,10 @@
     <string name="zen_mode_media_summary" msgid="7174081803853351461">"Lyde fra videoer, spil og andre medier"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"medier"</string>
     <string name="zen_mode_media_list_first" msgid="7824427062528618442">"Medier"</string>
-    <string name="zen_mode_system" msgid="7301665021634204942">"Lyd ved berøring"</string>
+    <string name="zen_mode_system" msgid="7301665021634204942">"Lyde ved berøring"</string>
     <string name="zen_mode_system_summary" msgid="7225581762792177522">"Lyde fra tastaturet og andre knapper"</string>
-    <string name="zen_mode_system_list" msgid="2256218792042306434">"lyd ved berøring"</string>
-    <string name="zen_mode_system_list_first" msgid="8590078626001067855">"Lyd ved berøring"</string>
+    <string name="zen_mode_system_list" msgid="2256218792042306434">"lyde ved berøring"</string>
+    <string name="zen_mode_system_list_first" msgid="8590078626001067855">"Lyde ved berøring"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Påmindelser"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"Fra opgaver og påmindelser"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"påmindelser"</string>
@@ -4340,7 +4344,7 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Fjern alle forstyrrelser for at få ro"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Tilpas brugeroplevelser og indstillinger på enheden til forskellige brugere"</string>
     <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Få en bedre rejse med offentlig transport ved hjælp af automatiske justeringer af indstillinger"</string>
-    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimer afbrydelser ved kun at tillade, at vigtige personer og apps kan få fat på dig"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimer forstyrrelser ved kun at tillade, at vigtige personer og apps kan få fat på dig"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Indstil en tilstand, der følger en fast tidsplan"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Hold din enhed synkroniseret med dagens begivenheder"</string>
     <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Vågn op frisk og veloplagt"</string>
@@ -4387,12 +4391,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Genstart"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Ikke nu"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Få flere oplysninger om avanceret beskyttelse af hukommelsen."</string>
-    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
-    <skip />
-    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
-    <skip />
-    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
-    <skip />
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Android OS-diagnostik"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"Valider OS-builds"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"diagnostik, gennemsigtighed, binært program"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Denne arbejdsprofil administreres af:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Administreret af <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Åbn som standard"</string>
@@ -4513,18 +4514,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Standardkonfiguration for USB"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Strømstyring"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Muligheder for filoverførsel"</string>
-    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
-    <skip />
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Beskyttelse af dataadgang"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Tillad PCI-tunnelføring"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Når denne indstilling er aktiveret, kan eksterne USB- og Thunderbolt-enheder oprette PCI-tunneler og få adgang til systemhukommelsen"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Du skal være administrator for at ændre denne indstilling"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"Deaktiveret af din it-administrator"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Deaktiveret af tilstanden Avanceret beskyttelse"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB-præferencer"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB styres af"</string>
@@ -5796,10 +5791,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g>:<xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Denne app genstartes, når du ændrer billedformatet. Du mister muligvis ændringer, der ikke er gemt. Visse apps er muligvis ikke optimeret til bestemte billedformater."</string>
-    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
-    <skip />
-    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
-    <skip />
+    <string name="app_info_experience_category" msgid="6283332744508784886">"Brugeroplevelse"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Gamepad"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingeraftrykssensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Lysnotifikationer"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Om lysnotifikationer"</string>
@@ -6155,7 +6148,8 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Satellitlandingsside"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"Prøv en demo"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"Se, hvordan det fungerer"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"Når du ikke har forbindelse til et mobil- eller Wi-Fi-netværk, opretter din telefon automatisk forbindelse til en satellit. Du opnår den bedste forbindelse, hvis du har frit udsyn til himlen. Din telefon opretter forbindelse til et mobilnetværk igen, når det er tilgængeligt. Du kan ikke foretage satellitopkald. Nødopkald går muligvis stadig igennem."</string>
+    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
+    <skip />
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"Du opnår den bedste forbindelse, hvis du har frit udsyn til himlen. Din telefon opretter forbindelse til et mobilnetværk igen, når det er tilgængeligt. Du kan ikke foretage satellitopkald. Nødopkald går muligvis stadig igennem."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Mere om satellitforbindelse"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Åbn demoen af SOS-meldinger via satellit"</string>
@@ -6166,24 +6160,20 @@
     <string name="add_tile_action" msgid="5271301747196740442">"Tilføj et handlingsfelt"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Prompter for handlingsfeltet Satellit"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
-    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satellitforbindelse er ikke tilgængelig"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"Satellitdækning er ikke tilgængelig, mens du har forbindelse til et mobil- eller Wi-Fi-netværk."</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"Satellitforbindelse er ikke tilgængelig i dette land eller denne region"</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"Satellitforbindelse er ikke tilgængelig lige nu. Prøv igen senere."</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Dit mobilabonnement omfatter ikke satellitdækning. Kontakt dit mobilselskab for at få hjælp."</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Hvis du vil bruge satellitbeskeder, skal Google Beskeder være din standardapp til beskeder."</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"Satellitforbindelse er aktiveret af dit mobilselskab. Få flere oplysninger i satellitindstillingerne for dit mobilselskab."</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Se tilgængelige lokationer"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Skift standardapp"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"Se indstillinger for mobilselskab"</string>
+    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
     <skip />
-    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
     <skip />
-    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
-    <skip />
-    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
-    <skip />
-    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
-    <skip />
-    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
-    <skip />
-    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
-    <skip />
-    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
-    <skip />
-    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
-    <skip />
-    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
     <skip />
 </resources>
