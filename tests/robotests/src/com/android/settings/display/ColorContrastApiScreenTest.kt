@@ -16,12 +16,17 @@
 
 package com.android.settings.display
 
+import android.app.UiModeManager
+import android.content.Context
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import android.provider.Settings.Secure.CONTRAST_LEVEL
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags.FLAG_CATALYST_MIGRATION_26Q2
 import com.android.settings.testutils2.ApiTester
+import com.android.settingslib.datastore.SettingsSecureStore
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -29,6 +34,8 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class ColorContrastApiScreenTest {
+
+    private val context: Context = ApplicationProvider.getApplicationContext()
     private val tester = ApiTester(ColorContrastApiScreen())
     @get:Rule val setFlagsRule = SetFlagsRule()
 
@@ -42,5 +49,43 @@ class ColorContrastApiScreenTest {
     @DisableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun getScreen_flagDisabled_isNull() {
         assertThat(tester.getScreen()).isNull()
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getContrastLevel() {
+        listOf(
+                UiModeManager.ContrastUtils.CONTRAST_LEVEL_MEDIUM,
+                UiModeManager.ContrastUtils.CONTRAST_LEVEL_HIGH,
+                UiModeManager.ContrastUtils.CONTRAST_LEVEL_STANDARD,
+            )
+            .forEach { testContrast ->
+                SettingsSecureStore.get(context)
+                    .setFloat(
+                        CONTRAST_LEVEL,
+                        UiModeManager.ContrastUtils.fromContrastLevel(testContrast),
+                    )
+                assertThat(
+                        tester.get<ContrastLevelApiWithRes>("color_contrast_selector").asApiValue
+                    )
+                    .isEqualTo(testContrast)
+            }
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun setContrastLevel() {
+        listOf(
+                ContrastLevelApiWithRes.MEDIUM,
+                ContrastLevelApiWithRes.HIGH,
+                ContrastLevelApiWithRes.DEFAULT,
+            )
+            .forEach { testContrast ->
+                tester.set("color_contrast_selector", testContrast)
+                val contrastFromSettings = SettingsSecureStore.get(context).getFloat(CONTRAST_LEVEL)
+                assertThat(contrastFromSettings).isNotNull()
+                assertThat(UiModeManager.ContrastUtils.toContrastLevel(contrastFromSettings!!))
+                    .isEqualTo(testContrast.asApiValue)
+            }
     }
 }
