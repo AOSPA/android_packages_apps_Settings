@@ -49,7 +49,7 @@ import java.util.ArrayList;
 public class NfcPaymentPreferenceControllerTest {
 
     private static final String USER_TEST = "user_test";
-    private static final String PREF_KEY = PaymentSettingsTest.PAYMENT_KEY;
+    private static final String PREF_KEY = "nfc_payment_app";
 
     @Mock
     private PaymentBackend mPaymentBackend;
