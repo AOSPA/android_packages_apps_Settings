@@ -16,30 +16,27 @@
 
 package com.android.settings.display
 
+import android.content.Context
 import android.content.ContextWrapper
 import android.hardware.display.ColorDisplayManager
 import android.provider.Settings.Secure
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.Settings.ColorModeActivity
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
-import org.robolectric.annotation.Config
-import org.robolectric.annotation.Implementation
-import org.robolectric.annotation.Implements
 
-class ColorModeScreenTest : SettingsCatalystTestCase() {
-
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_DISPLAY_AND_TOUCH_25Q4
-
-    override val preferenceScreenCreator = ColorModeScreen()
+@RunWith(AndroidJUnit4::class)
+class ColorModeScreenTest {
+    private val preferenceScreenCreator = ColorModeScreen()
     private val mockColorDisplayManager = mock<ColorDisplayManager>()
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
     private val context =
         object : ContextWrapper(appContext) {
@@ -93,15 +90,4 @@ class ColorModeScreenTest : SettingsCatalystTestCase() {
         mockColorDisplayManager.stub { on { isDeviceColorManaged } doReturn true }
         assertThat(preferenceScreenCreator.isAvailable(context)).isEqualTo(true)
     }
-
-    @Test
-    @Config(shadows = [ShadowColorDisplayManager::class])
-    override fun migration() {
-        super.migration()
-    }
-}
-
-@Implements(ColorDisplayManager::class)
-class ShadowColorDisplayManager {
-    @Implementation fun isDeviceColorManaged(): Boolean = true
 }

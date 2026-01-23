@@ -25,7 +25,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Flags;
 import android.app.NotificationChannel;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -74,8 +73,7 @@ public class ZenModeAddBypassingAppsPreferenceControllerTest {
 
     @ParameterizedRobolectricTestRunner.Parameters(name = "{0}")
     public static List<FlagsParameterization> getParams() {
-        return FlagsParameterization.allCombinationsOf(
-                Flags.FLAG_NM_BINDER_PERF_GET_APPS_WITH_CHANNELS);
+        return FlagsParameterization.allCombinationsOf();
     }
 
     public ZenModeAddBypassingAppsPreferenceControllerTest(FlagsParameterization flags) {
@@ -145,7 +143,6 @@ public class ZenModeAddBypassingAppsPreferenceControllerTest {
                 appWithChannelsNoneBypassing.info.uid))
                 .thenReturn(new ParceledListSlice<>(new ArrayList<>()));
 
-        // used when NM_BINDER_PERF_GET_APPS_WITH_CHANNELS flag is true
         when(mBackend.getPackagesWithAnyChannels(anyInt())).thenReturn(
                 Set.of("appWithBypassingChannels", "appWithChannelsNoneBypassing"));
         when(mHelperBackend.getPackagesBypassingDnd(anyInt())).thenReturn(

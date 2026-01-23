@@ -43,6 +43,8 @@ import com.android.settings.accessibility.VibrationSettings;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.specialaccess.SpecialAccessSettings;
 import com.android.settings.applications.specialaccess.SpecialAccessSettingsScreen;
+import com.android.settings.backup.AccountsAndBackupDashboardFragment;
+import com.android.settings.backup.AccountsAndBackupScreen;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.communal.CommunalPreferenceController;
 import com.android.settings.core.SubSettingLauncher;
@@ -64,6 +66,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.safetycenter.SafetyCenterUtils;
 import com.android.settings.safetycenter.ui.PrivacyControlsFragment;
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils;
 import com.android.settings.safetycenter.ui.SafetyCenterSubpageRegistry;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen;
@@ -176,7 +179,6 @@ public class Settings extends SettingsActivity {
     public static class AppLanguageSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the regional preferences settings. */
     public static class RegionSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class RegionalPreferencesActivity extends SettingsActivity { /* empty */ }
     public static class TemperatureUnitSettingsActivity extends SettingsActivity { /* empty */ }
     public static class FirstDayOfWeekSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MeasurementSystemSettingsActivity extends SettingsActivity { /* empty */ }
@@ -661,6 +663,11 @@ public class Settings extends SettingsActivity {
     public static class PowerUsageAdvancedActivity extends SettingsActivity { /* empty */ }
     public static class StorageDashboardActivity extends SettingsActivity {}
     public static class AccountDashboardActivity extends SettingsActivity {}
+    public static class AccountsAndBackupDashboardActivity extends CatalystSettingsActivity {
+        public AccountsAndBackupDashboardActivity() {
+            super(AccountsAndBackupScreen.KEY, AccountsAndBackupDashboardFragment.class);
+        }
+    }
     public static class EmergencyDashboardActivity extends CatalystSettingsActivity {
         public EmergencyDashboardActivity() {
             super(EmergencyDashboardScreen.KEY, EmergencyDashboardFragment.class);
@@ -737,6 +744,7 @@ public class Settings extends SettingsActivity {
     public static class SafetyCenterActivity extends SettingsActivity {
 
         private static final String TAG = "SafetyCenterActivity";
+        long mSessionId = SafetyCenterSessionUtils.INSTANCE.generateValidSessionId();
 
         @Override
         protected void onCreate(Bundle savedState) {
@@ -749,6 +757,16 @@ public class Settings extends SettingsActivity {
             super.onNewIntent(intent);
             setIntent(intent);
             handleIntent();
+        }
+
+        @Override
+        public Intent getIntent() {
+            Intent intent = super.getIntent();
+            if (intent != null && !intent.hasExtra(SafetyCenterSessionUtils.EXTRA_SESSION_ID)) {
+                intent.putExtra(SafetyCenterSessionUtils.EXTRA_SESSION_ID, mSessionId);
+                Log.d(TAG, "Added sessionId to Activity's Intent: " + mSessionId);
+            }
+            return intent;
         }
 
         private void handleIntent() {
@@ -766,6 +784,8 @@ public class Settings extends SettingsActivity {
                 Log.d(TAG, "Redirecting to Privacy controls subpage");
                 new SubSettingLauncher(this)
                         .setDestination(PrivacyControlsFragment.class.getName())
+                        .setArguments(SafetyCenterSessionUtils.INSTANCE
+                                .createSessionArgs(mSessionId))
                         .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                         .launch();
             }
@@ -793,6 +813,7 @@ public class Settings extends SettingsActivity {
             Log.d(TAG, "Redirecting to a subpage based on EXTRA_SAFETY_SOURCES_GROUP_ID");
             new SubSettingLauncher(this)
                     .setDestination(fragmentClassName)
+                    .setArguments(SafetyCenterSessionUtils.INSTANCE.createSessionArgs(mSessionId))
                     .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                     .launch();
         }

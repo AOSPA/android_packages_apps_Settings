@@ -27,11 +27,8 @@ import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.view.View;
 
@@ -56,8 +53,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowLooper;
-
-import java.util.List;
 
 /** Tests for {@link ToggleColorInversionPreferenceFragment} */
 @Config(shadows = SettingsShadowResources.class)
@@ -146,8 +141,7 @@ public class ToggleColorInversionPreferenceFragmentTest extends
     public void getPreferenceScreenResId_returnsCorrectXml() {
         launchFragment();
 
-        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
-                R.xml.accessibility_color_inversion_settings);
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(0);
     }
 
     @Test
@@ -188,54 +182,6 @@ public class ToggleColorInversionPreferenceFragmentTest extends
 
             assertThat(isLearnMoreTextVisible(mFragment)).isFalse();
         }
-    }
-
-    @RequiresFlagsDisabled({
-            Flags.FLAG_CATALYST_COLOR_INVERSION,
-            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH
-    })
-    @Test
-    public void getNonIndexableKeys_containsNonIndexableItems() {
-        final List<String> niks = ToggleColorInversionPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
-        final List<String> keys = List.of(
-                "top_intro",
-                "animated_image",
-                "general_categories",
-                "html_description",
-                "feedback"
-        );
-
-        assertThat(niks).containsExactlyElementsIn(keys);
-    }
-
-    @RequiresFlagsDisabled({
-            Flags.FLAG_CATALYST_COLOR_INVERSION,
-            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH
-    })
-    @Test
-    public void getXmlResourceToIndex() {
-        final List<SearchIndexableResource> indexableResources =
-                ToggleColorInversionPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
-                        .getXmlResourcesToIndex(mContext, true);
-
-        assertThat(indexableResources).isNotNull();
-        assertThat(indexableResources.size()).isEqualTo(1);
-        assertThat(indexableResources.getFirst().xmlResId).isEqualTo(
-                R.xml.accessibility_color_inversion_settings);
-    }
-
-    @RequiresFlagsEnabled({
-            Flags.FLAG_CATALYST_COLOR_INVERSION,
-            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH
-    })
-    @Test
-    public void getXmlResourceToIndex_catalystSearch() {
-        final List<SearchIndexableResource> indexableResources =
-                ToggleColorInversionPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
-                        .getXmlResourcesToIndex(mContext, true);
-
-        assertThat(indexableResources).isNull();
     }
 
     private TwoStatePreference getMainSwitch() {

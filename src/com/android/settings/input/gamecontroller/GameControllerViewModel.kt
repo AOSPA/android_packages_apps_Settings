@@ -25,7 +25,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToAxesMap
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToButtonMap
-import kotlin.collections.forEachIndexed
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 
@@ -111,6 +110,14 @@ class GameControllerViewModel(
 
     private fun applyAxisRemapping(fromAxis: Int, toAxis: Int) {
         inputManager.remapControllerAxis(identifier, fromAxis, toAxis)
+        _axisRemapping.postValue(inputManager.getControllerAxisRemappings(identifier))
+    }
+
+    fun resetRemapping() {
+        inputManager.clearAllControllerButtonRemappings(identifier)
+        _buttonRemapping.postValue(inputManager.getControllerButtonRemappings(identifier))
+
+        inputManager.clearAllControllerAxisRemappings(identifier)
         _axisRemapping.postValue(inputManager.getControllerAxisRemappings(identifier))
     }
 

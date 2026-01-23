@@ -23,6 +23,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.CancellationSignal
 import android.os.OutcomeReceiver
+import android.os.SystemClock
 import android.os.Trace
 import android.util.Log
 import androidx.annotation.Keep
@@ -38,9 +39,12 @@ import com.android.settings.appfunctions.executors.CatalystStateMetadataProvider
 import com.android.settings.appfunctions.executors.CatalystStateProviderExecutor
 import com.android.settings.appfunctions.executors.CatalystStateSetterExecutor
 import com.android.settings.appfunctions.executors.DeviceStateExecutor
+import com.android.settings.metrics.AppFunctionMetricsLogger
 import com.android.settings.utils.getLocale
 import java.util.Locale
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 /**
  * An abstract [AppFunctionService] that provides device state information.
@@ -50,6 +54,8 @@ import kotlinx.coroutines.runBlocking
  */
 @Keep
 abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
+    open val metricsLogger = AppFunctionMetricsLogger()
+
     protected lateinit var englishContext: Context
         private set
 
@@ -118,6 +124,11 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
     ) {
         val appFunctionType = DeviceStateAppFunctionType.fromId(request.functionIdentifier)
         if (appFunctionType == null) {
+            metricsLogger.logAppFunctionError(
+                callingPackage,
+                ERROR_FUNCTION_NOT_FOUND,
+                applicationContext,
+            )
             callback.onError(
                 AppFunctionException(
                     ERROR_FUNCTION_NOT_FOUND,
@@ -131,6 +142,12 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
             shouldCheckForDeviceLock(request.parameters, appFunctionType) &&
                 applicationContext.getSystemService(KeyguardManager::class.java).isDeviceLocked
         ) {
+            metricsLogger.logAppFunctionError(
+                callingPackage,
+                ERROR_DENIED,
+                applicationContext,
+                appFunctionType,
+            )
             callback.onError(
                 AppFunctionException(
                     ERROR_DENIED,
@@ -141,9 +158,19 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
         }
 
         runBlocking {
+            withContext(Dispatchers.IO) {
+                SettingsPreferenceServiceClientManager.awaitInitialized()
+            }
+
             Trace.beginSection("DeviceStateAppFunction ${request.functionIdentifier}")
             Log.d(TAG, "device state app function ${request.functionIdentifier} called.")
             if (!aggregators.containsKey(appFunctionType)) {
+                metricsLogger.logAppFunctionError(
+                    callingPackage,
+                    ERROR_FUNCTION_NOT_FOUND,
+                    applicationContext,
+                    appFunctionType,
+                )
                 callback.onError(
                     AppFunctionException(
                         ERROR_FUNCTION_NOT_FOUND,
@@ -151,6 +178,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                     )
                 )
             }
+            val startMs = SystemClock.elapsedRealtime()
             val responseData =
                 aggregators[appFunctionType]!!.aggregate(
                     appFunctionType,
@@ -159,8 +187,17 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                 )
             val response = buildResponse(responseData)
             callback.onResult(response)
+
+            val executeDurationMs = SystemClock.elapsedRealtime() - startMs
             Log.d(TAG, "app function ${request.functionIdentifier} fulfilled.")
             Trace.endSection()
+
+            metricsLogger.logAppFunction(
+                appFunctionType,
+                callingPackage,
+                executeDurationMs,
+                applicationContext,
+            )
         }
     }
 

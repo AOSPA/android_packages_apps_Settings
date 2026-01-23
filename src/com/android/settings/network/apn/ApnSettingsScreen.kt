@@ -67,7 +67,7 @@ private constructor(
 
     private val subId: Int =
         if (CatalystFlags.catalystUseKeyParameters()) {
-            keyParameters!![ApnSettings.SUB_ID]?.toInt() ?: INVALID_SUBSCRIPTION_ID
+            keyParameters!![ApnSettings.SUB_ID]?.toIntOrNull() ?: INVALID_SUBSCRIPTION_ID
         } else {
             arguments!!.getSubId(ApnSettings.SUB_ID, INVALID_SUBSCRIPTION_ID)
         }
@@ -82,7 +82,7 @@ private constructor(
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.telephony_apn_key_purpose
 

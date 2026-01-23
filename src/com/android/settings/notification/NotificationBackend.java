@@ -21,10 +21,6 @@ import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_CACHED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY_ANY_LAUNCHER;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-
-import android.annotation.FlaggedApi;
 import android.annotation.Nullable;
 import android.annotation.UserIdInt;
 import android.app.Flags;
@@ -58,7 +54,6 @@ import android.service.notification.NotificationListenerFilter;
 import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -377,7 +372,6 @@ public class NotificationBackend {
     /**
      * Returns a set of all apps that have any notification channels (not including deleted ones).
      */
-    @FlaggedApi(Flags.FLAG_NM_BINDER_PERF_GET_APPS_WITH_CHANNELS)
     public @NonNull Set<String> getPackagesWithAnyChannels(int userId) {
         try {
             List<String> packages = sINM.getPackagesWithAnyChannels(userId);
@@ -828,8 +822,7 @@ public class NotificationBackend {
     }
 
     public boolean showSummarizationSettings() {
-        boolean nasSupported = (Flags.nmSummarization() || Flags.nmSummarizationUi())
-                && isNotificationSummarizationSupported();
+        boolean nasSupported = isNotificationSummarizationSupported();
         return nasSupported || Flags.nmSummarizationAll();
     }
 

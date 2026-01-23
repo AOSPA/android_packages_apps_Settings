@@ -18,8 +18,6 @@ package com.android.settings.accessibility;
 
 import static android.app.Activity.RESULT_CANCELED;
 
-import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.DIALOG_RESET_SETTINGS;
-
 import android.app.settings.SettingsEnums;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -35,7 +33,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.accessibility.textreading.dialogs.TextReadingResetDialog;
-import com.android.settings.flags.Flags;
 import com.android.settingslib.Utils;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
@@ -87,11 +84,7 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
             AccessibilitySetupWizardUtils.setSecondaryButton(getContext(), mixin,
                     R.string.accessibility_text_reading_reset_button_title,
                     () -> {
-                        if (Flags.catalystTextReadingScreen()) {
-                            TextReadingResetDialog.showDialog(getChildFragmentManager());
-                        } else {
-                            showDialog(DIALOG_RESET_SETTINGS);
-                        }
+                        TextReadingResetDialog.showDialog(getChildFragmentManager());
                     }
             );
         }

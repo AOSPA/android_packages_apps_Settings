@@ -60,12 +60,14 @@ class SafetyIssuesBannerGroupManager(
      * @param focusedIssueKey An optional key identifying a specific issue to bring to the user's
      *   attention. If provided and found, this issue will be reordered to the top or second
      *   position in the active issues list.
+     * @param issueIdToHeaderResIdMap A map of Issue ID to the String Resource ID for the header.
      */
     fun updateBannerGroup(
         newActiveIssues: List<SafetyCenterIssue>,
         newDismissedIssues: List<SafetyCenterIssue>,
         resolvedIssues: Map<String, String>,
         focusedIssueKey: FocusedIssueKey?,
+        issueIdToHeaderResIdMap: Map<String, Int>,
     ) {
         val reorderResult = calculateReorderedIssues(newActiveIssues, focusedIssueKey)
         val reorderedNewActiveIssues = reorderResult.issues
@@ -77,6 +79,7 @@ class SafetyIssuesBannerGroupManager(
             currentActiveIssueBanners,
             isDismissed = false,
             resolvedIssues,
+            issueIdToHeaderResIdMap,
         )
 
         val newDismissedIssueKeys = newDismissedIssues.map { getDismissedBannerKey(it.id) }.toSet()
@@ -91,6 +94,7 @@ class SafetyIssuesBannerGroupManager(
                 currentDismissedIssueBanners,
                 isDismissed = true,
                 resolvedIssues,
+                issueIdToHeaderResIdMap,
             )
         } else {
             bannerGroup.removeSubsection()
@@ -151,28 +155,12 @@ class SafetyIssuesBannerGroupManager(
         issues: MutableList<SafetyCenterIssue>,
         focusedIssueKey: FocusedIssueKey,
     ): SafetyCenterIssue? {
-        val index = issues.indexOfFirst { matchesFocusedIssue(it, focusedIssueKey) }
+        val index = issues.indexOfFirst { focusedIssueKey.matchesSafetyCenterIssue(it) }
         return if (index != -1) {
             issues.removeAt(index)
         } else {
             null
         }
-    }
-
-    /**
-     * Checks if the given [SafetyCenterIssue] matches the provided [FocusedIssueKey].
-     *
-     * @param issue The [SafetyCenterIssue] to check.
-     * @param focusedIssueKey The [FocusedIssueKey] to match against.
-     * @return True if the issue matches the key, false otherwise.
-     */
-    private fun matchesFocusedIssue(
-        issue: SafetyCenterIssue,
-        focusedIssueKey: FocusedIssueKey,
-    ): Boolean {
-        return issue.safetySourceIssueId == focusedIssueKey.sourceIssueId &&
-            issue.safetySourceIds.contains(focusedIssueKey.sourceId) &&
-            issue.user == focusedIssueKey.userHandle
     }
 
     /**
@@ -198,12 +186,14 @@ class SafetyIssuesBannerGroupManager(
      * @param currentIssueBanners The mutable map storing the current banners.
      * @param isDismissed True if these issues are dismissed, false otherwise.
      * @param resolvedIssues A map of successfully resolved issue IDs to action IDs.
+     * @param issueIdToHeaderResIdMap A map of Issue ID to the String Resource ID for the header.
      */
     private fun createOrUpdateBanners(
         newIssues: List<SafetyCenterIssue>,
         currentIssueBanners: MutableMap<String, SafetyIssueBannerPreference>,
         isDismissed: Boolean,
         resolvedIssues: Map<String, String>,
+        issueIdToHeaderResIdMap: Map<String, Int>,
     ) {
         newIssues.forEachIndexed { index, issue ->
             val bannerKey =
@@ -220,7 +210,8 @@ class SafetyIssuesBannerGroupManager(
                     )
                 }
 
-            banner.updateBanner(issue, isDismissed, resolvedIssues)
+            val headerResId = issueIdToHeaderResIdMap[issue.id] ?: R.string.safety_center_title
+            banner.updateBanner(issue, isDismissed, resolvedIssues, headerResId)
             banner.order = index
 
             if (isDismissed) {

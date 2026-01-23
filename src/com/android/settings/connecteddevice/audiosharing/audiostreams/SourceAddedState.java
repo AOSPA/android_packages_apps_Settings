@@ -57,12 +57,6 @@ class SourceAddedState extends AudioStreamStateHandler {
         if (cached != null) {
             mAudioStreamsRepository.saveMetadata(context, cached);
         }
-        if (!Flags.audioStreamMediaServiceByReceiveState()) {
-            helper.startMediaService(
-                    context,
-                    preference.getAudioStreamBroadcastId(),
-                    String.valueOf(preference.getTitle()));
-        }
         mMetricsFeatureProvider.action(
                 preference.getContext(),
                 SettingsEnums.ACTION_AUDIO_STREAM_JOIN_SUCCEED,

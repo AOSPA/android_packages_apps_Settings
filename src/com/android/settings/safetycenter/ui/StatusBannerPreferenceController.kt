@@ -19,8 +19,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.safetycenter.SafetyCenterStatus
 import android.util.Log
+import android.view.ContextThemeWrapper
 import androidx.annotation.DrawableRes
-import androidx.core.content.ContextCompat
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
@@ -87,11 +88,19 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
 
         val iconResId: Int =
             if (status.isRefreshInProgress) {
-                getShieldOnlyIconResId(status.severityLevel)
+                playIconAnimationInLoop = true
+                showIconBackground = false
+                getShieldOnlyAnimatedIconResId(status.severityLevel)
             } else {
+                playIconAnimationInLoop = false
+                showIconBackground = true
                 getShieldWithGlyphIconResId(status.severityLevel)
             }
-        icon = ContextCompat.getDrawable(context, iconResId)
+        icon =
+            AppCompatResources.getDrawable(
+                ContextThemeWrapper(context, R.style.ThemeOverlay_SafetyCenterColors),
+                iconResId,
+            )
     }
 
     @DrawableRes
@@ -114,20 +123,20 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
     }
 
     @DrawableRes
-    private fun getShieldOnlyIconResId(severityLevel: Int): Int {
+    private fun getShieldOnlyAnimatedIconResId(severityLevel: Int): Int {
         return when (severityLevel) {
             SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK ->
-                R.drawable.safety_center_expressive_shield_status_level_low
+                R.drawable.safety_center_expressive_shield_status_level_low_anim
             SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_RECOMMENDATION ->
-                R.drawable.safety_center_expressive_shield_status_level_medium
+                R.drawable.safety_center_expressive_shield_status_level_medium_anim
             SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING ->
-                R.drawable.safety_center_expressive_shield_status_level_high
+                R.drawable.safety_center_expressive_shield_status_level_high_anim
             else -> {
                 Log.w(
                     TAG,
                     "Unexpected OverallSeverityLevel: $severityLevel, defaulting to low shield",
                 )
-                R.drawable.safety_center_expressive_shield_status_level_low
+                R.drawable.safety_center_expressive_shield_status_level_low_anim
             }
         }
     }
@@ -141,6 +150,7 @@ class StatusBannerPreferenceController(context: Context, preferenceKey: String) 
             setButtonOnClickListener {
                 if (triggerRescan()) {
                     isButtonEnabled = false
+                    viewModel?.interactionLogger?.record(Action.SCAN_INITIATED)
                 }
             }
             buttonLevel = StatusBannerPreference.BannerStatus.LOW

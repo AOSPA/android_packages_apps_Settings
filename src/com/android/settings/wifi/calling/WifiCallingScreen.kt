@@ -57,7 +57,7 @@ private constructor(
 
     private val subId: Int =
         if (CatalystFlags.catalystUseKeyParameters()) {
-            keyParameters!![EXTRA_SUB_ID]?.toInt() ?: getDefaultSubscriptionId()
+            keyParameters!![EXTRA_SUB_ID]?.toIntOrNull() ?: getDefaultSubscriptionId()
         } else {
             arguments!!.getSubId(EXTRA_SUB_ID, getDefaultSubscriptionId())
         }
@@ -72,7 +72,7 @@ private constructor(
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.wifi_calling_purpose
 

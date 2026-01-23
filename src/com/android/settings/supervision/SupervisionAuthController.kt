@@ -19,6 +19,7 @@ import android.annotation.MainThread
 import android.app.ActivityManager
 import android.app.ActivityTaskManager
 import android.app.TaskStackListener
+import android.app.supervision.flags.Flags
 import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
@@ -28,6 +29,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
 import androidx.annotation.VisibleForTesting
+import com.android.settings.supervision.shared.systemSupervisionPackageName
 
 /**
  * Manages a supervision authentication session.
@@ -66,8 +68,14 @@ class SupervisionAuthController private constructor(private val appContext: Cont
         object : TaskStackListener() {
             override fun onTaskStackChanged() {
                 handler.post {
-                    if (currentTaskId != null && !isSupervisionActivityFocused()) {
-                        invalidateSession()
+                    if (Flags.enableSupervisionAuthControllerUpdates()) {
+                        if (sessionStartTime != null && !isSupervisionActivityRunning()) {
+                            invalidateSession()
+                        }
+                    } else {
+                        if (currentTaskId != null && !isSupervisionActivityFocused()) {
+                            invalidateSession()
+                        }
                     }
                 }
             }
@@ -100,6 +108,9 @@ class SupervisionAuthController private constructor(private val appContext: Cont
             invalidateSession()
             return false
         }
+        if (Flags.enableSupervisionAuthControllerUpdates()) {
+            return isSupervisionActivityRunning()
+        }
         return currentTaskId == taskId
     }
 
@@ -115,6 +126,17 @@ class SupervisionAuthController private constructor(private val appContext: Cont
         } catch (e: IllegalArgumentException) {
             // Ignore exception if receiver is not registered.
         }
+    }
+
+    /** Whether there is a task running a supervision activity. */
+    private fun isSupervisionActivityRunning(): Boolean {
+        val appTasks = activityManager.appTasks ?: emptyList()
+        for (task in appTasks) {
+            if (task.taskInfo.isRunning && isSupervisionActivity(task.taskInfo.topActivity)) {
+                return true
+            }
+        }
+        return false
     }
 
     /**

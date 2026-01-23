@@ -43,6 +43,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.preference.PreferenceBindingPlaceholder
+import com.android.telephony.Rlog
 
 import com.qti.extphone.QtiImeiInfo;
 
@@ -144,7 +145,8 @@ val Context.getImeiList: List<String>
                     }
                 }
             }
-            Log.d(ImeiPreference.TAG, "each slot's IMEI:$imeiListFromSlot")
+            Log.d(ImeiPreference.TAG, "each slot's IMEI: " +
+                    "${imeiListFromSlot.map {Rlog.pii(ImeiPreference.TAG, it)}}")
 
             imeiListFromSlot.sorted()
             if (primaryImei.isNotEmpty() && imeiListFromSlot.size >= 2) {

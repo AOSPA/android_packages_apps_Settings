@@ -21,13 +21,20 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.content.res.Resources
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
+import android.provider.Settings
 import androidx.preference.Preference
+import com.android.settings.R
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE
-import com.android.settings.supervision.SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION
+import com.android.settings.flags.Flags.FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE
 import com.android.settings.supervision.ipc.SupervisionMessengerClient.Companion.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
+import com.android.settings.supervision.shared.SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION
+import com.android.settingslib.datastore.SettingsGlobalStore
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -50,6 +57,8 @@ class TopLevelSupervisionPreferenceControllerTest {
         }
 
     private val preference = Preference(context)
+
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
     @Before
     fun setUp() {
@@ -99,6 +108,23 @@ class TopLevelSupervisionPreferenceControllerTest {
 
         val preferenceController = TopLevelSupervisionPreferenceController(context, PREFERENCE_KEY)
         assertThat(preferenceController.availabilityStatus).isEqualTo(AVAILABLE)
+    }
+
+    @Test
+    @EnableFlags(FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE)
+    fun inDemoMode_configHidingTrue_returnUnsupported() {
+        setupMessengerServiceActionResolution(true)
+        setUpSupervisionInstallActionResolution(false)
+
+        SettingsGlobalStore.get(context).setInt(Settings.Global.DEVICE_DEMO_MODE, 1)
+        mockResources.stub {
+            on { getBoolean(R.bool.config_hide_supervision_setting_in_demo_mode) }.thenReturn(true)
+        }
+
+        val preferenceController = TopLevelSupervisionPreferenceController(context, PREFERENCE_KEY)
+        assertThat(preferenceController.availabilityStatus).isEqualTo(UNSUPPORTED_ON_DEVICE)
+
+        SettingsGlobalStore.get(context).setInt(Settings.Global.DEVICE_DEMO_MODE, 0)
     }
 
     private fun setupMessengerServiceActionResolution(canResolve: Boolean) {

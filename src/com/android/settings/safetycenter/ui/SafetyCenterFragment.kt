@@ -18,11 +18,15 @@ package com.android.settings.safetycenter.ui
 import android.annotation.SuppressLint
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.viewModels
 import com.android.settings.R
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.EXTRA_SESSION_ID
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.INVALID_SESSION_ID
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.getOrGenerateSessionId
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFactory
 import com.android.settings.search.BaseSearchIndexProvider
@@ -45,8 +49,14 @@ class SafetyCenterFragment : DashboardFragment() {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
     }
 
+    private var focusedIssueKey: FocusedIssueKey? = null
+
+    private var sessionId = INVALID_SESSION_ID
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        retrieveSessionId()
+        configureInteractionLogger()
 
         val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
         for (controller in allControllers) {
@@ -62,6 +72,18 @@ class SafetyCenterFragment : DashboardFragment() {
         }
     }
 
+    private fun retrieveSessionId() {
+        val intentSessionId =
+            requireActivity().intent?.getLongExtra(EXTRA_SESSION_ID, INVALID_SESSION_ID)
+        if (intentSessionId != null && intentSessionId != INVALID_SESSION_ID) {
+            sessionId = intentSessionId
+            Log.d(TAG, "Session ID retrieved from Intent: $sessionId")
+        } else {
+            sessionId = getOrGenerateSessionId(arguments ?: Bundle())
+            Log.d(TAG, "Session ID not found in Intent, fallback to fragment arguments: $sessionId")
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         if (requireActivity().isChangingConfigurations) {
@@ -72,6 +94,37 @@ class SafetyCenterFragment : DashboardFragment() {
     override fun onResume() {
         super.onResume()
         viewModel.pageOpen()
+        logSafetyCenterViewedEvent()
+    }
+
+    private fun configureInteractionLogger() {
+        viewModel.interactionLogger.apply {
+            sessionId = this@SafetyCenterFragment.sessionId
+            viewType = ViewType.FULL
+            navigationSource =
+                NavigationSource.fromIntentOrArguments(requireActivity().intent, arguments)
+        }
+    }
+
+    private fun logSafetyCenterViewedEvent() {
+        // If Safety Center was opened due to an associated notification click (i.e. intent has an
+        // associated issue), record that issue's metadata on the SAFETY_CENTER_VIEWED event
+        val focusedIssue =
+            focusedIssueKey?.let { key ->
+                viewModel.getCurrentSafetyCenterDataAsUiData().getActiveIssues().find { issue ->
+                    key.matchesSafetyCenterIssue(issue)
+                }
+            }
+
+        if (focusedIssue == null) {
+            viewModel.interactionLogger.record(Action.SAFETY_CENTER_VIEWED)
+        } else {
+            viewModel.interactionLogger.recordForIssue(
+                Action.SAFETY_CENTER_VIEWED,
+                focusedIssue,
+                isDismissed = false,
+            )
+        }
     }
 
     override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> =
@@ -88,13 +141,13 @@ class SafetyCenterFragment : DashboardFragment() {
         safetyIssuesPreferenceController: SafetyIssuesPreferenceController
     ) {
         Log.d(TAG, "Setting Up the safety issues preference controller")
-        val focusedIssue =
+        focusedIssueKey =
             SafetyCenterIntentParser.getFocusedIssueKeyFromIntent(requireActivity().intent)
         safetyIssuesPreferenceController.apply {
             viewModel = this@SafetyCenterFragment.viewModel
             fragmentManager = childFragmentManager
             activityTaskId = requireActivity().taskId
-            focusedIssueKey = focusedIssue
+            focusedIssueKey = this@SafetyCenterFragment.focusedIssueKey
         }
     }
 
@@ -104,6 +157,7 @@ class SafetyCenterFragment : DashboardFragment() {
         val preferenceKey = subpagePreferenceController.preferenceKey
         Log.d(TAG, "Setting Up the sub-page preference controller for [$preferenceKey]")
         subpagePreferenceController.viewModel = viewModel
+        subpagePreferenceController.sessionId = sessionId
     }
 
     private fun setupSafetySourcePreferenceController(

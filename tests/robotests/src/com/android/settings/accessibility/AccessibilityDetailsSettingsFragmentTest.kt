@@ -26,8 +26,8 @@ import android.view.accessibility.AccessibilityManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.settings.SettingsActivity
+import com.android.settings.accessibility.a11yservice.A11yServicePreferenceFragment
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
-import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment
 import com.android.settings.accessibility.screenmagnification.ui.MagnificationPreferenceFragment
 import com.android.settings.testutils.AccessibilityTestUtils
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager

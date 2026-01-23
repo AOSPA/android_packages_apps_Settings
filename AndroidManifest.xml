@@ -591,8 +591,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity
             android:name="Settings$ColorModeActivity"
             android:label="@string/color_mode_title"
-            android:exported="true"
-            android:featureFlag="com.android.settings.flags.deeplink_display_and_touch_25q4">
+            android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.COLOR_MODE_SETTINGS"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -1045,6 +1044,19 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 android:value="true" />
         </activity>
 
+        <activity android:name=".vpn2.AppExclusionActivity"
+                  android:label="@string/vpn_app_exclusion"
+                  android:featureFlag="android.provider.expose_vpn_app_exclusion_settings"
+                  android:exported="true"
+                  android:theme="@style/Theme.Settings.NoActionBar">
+            <intent-filter>
+                <action android:name="android.settings.VPN_APP_EXCLUSION_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
         <activity
             android:name="Settings$DataSaverSummaryActivity"
             android:exported="true"
@@ -1195,6 +1207,10 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
             <intent-filter android:priority="1">
+              <action android:name="android.settings.REGIONAL_PREFERENCES_SETTINGS" />
+              <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.LOCALE_SETTINGS" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1293,22 +1309,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         </activity>
 
         <activity
-            android:name=".Settings$RegionalPreferencesActivity"
-            android:label="@string/regional_preferences_title"
-            android:exported="true" >
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.REGIONAL_PREFERENCES_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                android:value="@string/menu_key_system"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true"/>
-        </activity>
-
-        <activity
             android:name=".Settings$TemperatureUnitSettingsActivity"
             android:label="@string/temperature_preferences_title"
             android:exported="true" >
@@ -1375,7 +1375,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity
             android:name="Settings$ManageAssistActivity"
             android:exported="true"
-            android:label="@string/assist_and_voice_input_title">
+            android:label="@string/assist_and_voice_input_title"
+            android:featureFlag="!android.permission.flags.assist_settings_privacy_improvements_enabled">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VOICE_INPUT_SETTINGS" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -2325,7 +2326,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="com.android.settings.notification.BundlePreferenceFragment" />
         </activity>
 
-
         <activity
             android:name="Settings$NotificationSummarizationActivity"
             android:exported="true">
@@ -2739,10 +2739,23 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="@string/menu_key_accessibility"/>
         </activity>
 
+        <activity android:name=".accessibility.setupwizard.AccessibilitySetupWizardActivity"
+            android:icon="@drawable/ic_accessibility_suggestion"
+            android:label="@string/vision_settings_title"
+            android:theme="@style/SudThemeGlif.DayNight"
+            android:exported="true"
+            android:featureFlag="com.android.settings.accessibility.enable_setuplib_in_a11y_setup_page">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ACCESSIBILITY_SETTINGS_FOR_SUW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".accessibility.AccessibilitySettingsForSetupWizardActivity"
-                android:icon="@drawable/ic_accessibility_suggestion"
-                android:label="@string/vision_settings_title"
-                android:exported="true">
+            android:icon="@drawable/ic_accessibility_suggestion"
+            android:label="@string/vision_settings_title"
+            android:exported="true"
+            android:featureFlag="!com.android.settings.accessibility.enable_setuplib_in_a11y_setup_page">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS_FOR_SUW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2756,7 +2769,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity-alias
             android:name=".FontSizeSettingsForSetupWizardActivity"
             android:exported="true"
-            android:targetActivity=".accessibility.AccessibilitySettingsForSetupWizardActivity">
+            android:targetActivity=".accessibility.AccessibilitySettingsForSetupWizardActivity"
+            android:featureFlag="!com.android.settings.accessibility.enable_setuplib_in_a11y_setup_page">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -2772,7 +2786,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:name=".TextReadingForSetupWizardActivity"
             android:exported="true"
             android:icon="@drawable/ic_font_download"
-            android:targetActivity=".accessibility.AccessibilitySettingsForSetupWizardActivity">
+            android:targetActivity=".accessibility.AccessibilitySettingsForSetupWizardActivity"
+            android:featureFlag="!com.android.settings.accessibility.enable_setuplib_in_a11y_setup_page">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!-- TODO(b/1352717): Consider replacing it with another category, temporarily
@@ -3082,7 +3097,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:exported="false" />
 
         <activity
-            android:name=".supervision.SupervisionPinRecoveryActivity"
+            android:name=".supervision.credentialmanagement.SupervisionPinRecoveryActivity"
             android:excludeFromRecents="true"
             android:exported="false" />
 
@@ -5223,6 +5238,22 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="true" />
         </activity>
 
+        <activity
+            android:name=".Settings$AccountsAndBackupDashboardActivity"
+            android:label="@string/accounts_and_backup_title"
+            android:exported="true"
+            android:featureFlag="com.android.settings.flags.enable_accounts_and_backup_screen"
+            android:icon="@drawable/ic_homepage_accounts_and_backup">
+
+            <intent-filter>
+                <action android:name="com.android.settings.action.ACCOUNTS_AND_BACKUP_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accounts_and_backup"/>
+        </activity>
+
         <!-- Access to the Credential Manager list. -->
         <activity android:name=".applications.credentials.CredentialsPickerActivity"
                 android:excludeFromRecents="true"
@@ -6180,13 +6211,22 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <receiver
             android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteTileStateReceiver"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false"
+            android:featureFlag="com.android.settings.flags.enable_satellite_tile">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.telephony.action.DEFAULT_DATA_SUBSCRIPTION_CHANGED"/>
                 <action android:name="android.telephony.action.CARRIER_CONFIG_CHANGED"/>
                 <action android:name="android.telephony.action.SIM_CARD_STATE_CHANGED"/>
             </intent-filter>
         </receiver>
+
+        <service
+            android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteEligibilityJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false"
+            android:featureFlag="com.android.settings.flags.enable_satellite_tile" />
 
         <service
             android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteTileService"
@@ -6194,7 +6234,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:icon="@drawable/ic_satellite_tile"
             android:label="@string/satellite_tile_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:exported="true"
+            android:featureFlag="com.android.settings.flags.enable_satellite_tile">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -6207,8 +6248,19 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:label="@string/satellite_landing_page_label"
             android:exported="false"
             android:theme="@style/SatelliteLandingPageTheme"
-            android:taskAffinity=".network.telephony.satellite.quicksettings.SatelliteLandingPageActivity">
+            android:taskAffinity=".network.telephony.satellite.quicksettings.SatelliteLandingPageActivity"
+            android:featureFlag="com.android.settings.flags.enable_satellite_tile">
         </activity>
+
+
+
+        <activity
+            android:name=".network.telephony.satellite.quicksettings.AddSatelliteTileActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:taskAffinity="com.android.settings.satellite.addtile"
+            android:excludeFromRecents="true"
+            android:featureFlag="com.android.settings.flags.enable_satellite_tile" />
 
         <!-- This is the longest AndroidManifest.xml ever. -->
 

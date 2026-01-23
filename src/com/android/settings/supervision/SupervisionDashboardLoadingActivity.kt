@@ -32,6 +32,9 @@ import com.android.settings.R
 import com.android.settings.core.CategoryMixin
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settings.supervision.shared.getSupervisionAppInstallActivityInfo
+import com.android.settings.supervision.shared.getSupervisionAppInstallIntent
+import com.android.settings.supervision.shared.hasNecessarySupervisionComponent
 import com.android.settingslib.collapsingtoolbar.R.drawable.settingslib_expressive_icon_back as EXPRESSIVE_BACK_ICON
 import com.android.settingslib.drawer.CategoryKey.CATEGORY_SUPERVISION
 import com.android.settingslib.supervision.SupervisionLog.TAG

@@ -785,8 +785,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             } else {
                 if (timeout.isPositive()) {
                     refreshLockScreen();
-                    long deadline = mLockPatternUtils.setLockoutAttemptDeadline(
-                            effectiveUserId, timeout).toMillis();
+                    long deadline = mLockPatternUtils.getLockoutEndTime(
+                            effectiveUserId).toMillis();
                     handleAttemptLockout(deadline);
                 } else {
                     updateStage(Stage.NeedToUnlockWrong);

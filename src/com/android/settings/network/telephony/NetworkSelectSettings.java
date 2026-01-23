@@ -373,6 +373,11 @@ public class NetworkSelectSettings extends DashboardFragment implements
             Log.d(TAG, "handleMessage, msg.what: " + msg.what);
             switch (msg.what) {
                 case EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE:
+                    Context context = getContext();
+                    if (context == null || isFinishingOrDestroyed()) {
+                        Log.d(TAG, "Activity finished or context null, skipping UI update");
+                        return;
+                    }
                     final boolean isSucceed = (boolean) msg.obj;
                     setProgressBarVisible(false);
                     enablePreferenceScreen(true);
@@ -384,7 +389,7 @@ public class NetworkSelectSettings extends DashboardFragment implements
 
                         if (isSucceed && mSubscriptionManager.isActiveSubscriptionId(mSubId)) {
                             final OperatorInfo operator = mSelectedPreference.getOperatorInfo();
-                            MobileNetworkUtils.setCarrierName(getContext(),
+                            MobileNetworkUtils.setCarrierName(context,
                                     operator.getOperatorAlphaLong(), mSubId);
                         }
                     } else {

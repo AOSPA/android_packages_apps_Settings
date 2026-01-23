@@ -22,6 +22,7 @@ import android.hardware.input.InputManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -41,6 +42,13 @@ public abstract class InputDeviceSettingsController extends BasePreferenceContro
     public InputDeviceSettingsController(@NonNull Context context, @NonNull String key) {
         super(context, key);
         mIm = context.getSystemService(InputManager.class);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        // Cache the preference so that it can be refreshed by the InputDeviceListener callbacks.
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override

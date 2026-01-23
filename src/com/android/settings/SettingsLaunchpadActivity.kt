@@ -31,7 +31,10 @@ import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_KEY
 import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.PreferenceScreenCoordinate
+import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.toMap
 
 /**
@@ -86,19 +89,8 @@ class SettingsLaunchpadActivity : Activity() {
             return
         }
 
-        val screenArgsBundle: Bundle? = intent.getBundleExtra(EXTRA_SCREEN_ARGS)
-        val screenCoordinate =
-            if (
-                CatalystFlags.catalystUseKeyParameters() &&
-                    PreferenceScreenRegistry.isParameterized(this, screenKey)
-            ) {
-                PreferenceScreenCoordinate(
-                    screenKey,
-                    screenArgsBundle?.let { KeyParameters(it.toMap()) },
-                )
-            } else {
-                PreferenceScreenCoordinate(screenKey, screenArgsBundle)
-            }
+        val screenArgsBundle = intent.getBundleExtra(EXTRA_SCREEN_ARGS)
+        val screenCoordinate = createScreenCoordinate(screenKey, screenArgsBundle)
 
         // Using PreferenceScreenRegistry.create() to get screen metadata
         val screenMetadata =
@@ -115,43 +107,78 @@ class SettingsLaunchpadActivity : Activity() {
                     return
                 }
 
-        val highlightKey = intent.getStringExtra(EXTRA_HIGHLIGHT_KEY)
-        val args =
+        launchFragment(fragmentClassName, screenKey, screenArgsBundle, screenMetadata)
+    }
+
+    private fun launchFragment(
+        fragmentClass: String,
+        key: String,
+        args: Bundle?,
+        metadata: PreferenceScreenMetadata,
+    ) {
+        val launchArgs =
             Bundle().apply {
-                putString(EXTRA_BINDING_SCREEN_KEY, screenKey)
-                putBundle(EXTRA_BINDING_SCREEN_ARGS, screenArgsBundle)
-                putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, highlightKey)
+                putString(EXTRA_BINDING_SCREEN_KEY, key)
+                putBundle(EXTRA_BINDING_SCREEN_ARGS, args)
+                putString(
+                    SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
+                    intent.getStringExtra(EXTRA_HIGHLIGHT_KEY),
+                )
+
+                // add all values from the launchScreenExtra to this bundle
+                val launchScreenExtra = intent.getBundleExtra(EXTRA_LAUNCH_SCREEN)
+                launchScreenExtra?.let { putAll(it) }
             }
 
-        val subsettingLauncher =
+        val launcher =
             SubSettingLauncher(this)
-                .setDestination(fragmentClassName)
+                .setDestination(fragmentClass)
                 .addFlags(FLAG_ACTIVITY_FORWARD_RESULT)
-                .setArguments(args)
+                .setArguments(launchArgs)
                 .setSourceMetricsCategory(
                     METRICS_CATEGORY_UNKNOWN
-                ) // TODO: set a meaningful metrics category
+                ) // TODO(b/465855195): set a meaningful metrics category
 
-        if (
-            !ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this) ||
-                ActivityEmbeddingUtils.isAlreadyEmbedded(this)
-        ) {
-            // One-pane case: Launch directly
-            subsettingLauncher.addFlags(FLAG_ACTIVITY_NEW_TASK).launch()
+        if (shouldLaunchDeepLinkTrampoline()) {
+            val menuKey = resolveMenuKey(metadata)
+            val deepLinkIntent =
+                getTrampolineIntent(launcher.toIntent(), menuKey).addFlags(FLAG_ACTIVITY_NEW_TASK)
+            startActivity(deepLinkIntent)
         } else {
-            // Two-pane case: Use the two pane trampoline intent
-            val highlightMenuKey =
-                (screenMetadata as? PreferenceScreenMixin)
-                    ?.highlightMenuKey
-                    ?.takeIf {
-                        it != 0
-                    } // Returns the resource ID only if it's not 0, otherwise null
-                    ?.let { getString(it) }
-            startActivity(
-                getTrampolineIntent(subsettingLauncher.toIntent(), highlightMenuKey)
-                    .addFlags(FLAG_ACTIVITY_NEW_TASK)
-            )
+            launcher.addFlags(FLAG_ACTIVITY_NEW_TASK).launch()
         }
+    }
+
+    private fun resolveMenuKey(metadata: PreferenceScreenMetadata): String? =
+        when (metadata) {
+            is PreferencesApiScreen -> metadata.topLevelSettingsCategory.value
+            is PreferenceScreenMixin ->
+                metadata.highlightMenuKey.takeIf { it != 0 }?.let { getString(it) }
+            else -> null
+        }
+
+    private fun shouldLaunchDeepLinkTrampoline(): Boolean {
+        return ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this) &&
+            !ActivityEmbeddingUtils.isAlreadyEmbedded(this)
+    }
+
+    private fun createScreenCoordinate(
+        screenKey: String,
+        screenArgsBundle: Bundle?,
+    ): PreferenceScreenCoordinate {
+        val screenCoordinate =
+            if (
+                CatalystFlags.catalystUseKeyParameters() &&
+                    PreferenceScreenRegistry.isParameterized(this, screenKey)
+            ) {
+                PreferenceScreenCoordinate(
+                    screenKey,
+                    screenArgsBundle?.let { KeyParameters(it.toMap()) },
+                )
+            } else {
+                PreferenceScreenCoordinate(screenKey, screenArgsBundle)
+            }
+        return screenCoordinate
     }
 
     /** A dummy function to check caller's permission. */

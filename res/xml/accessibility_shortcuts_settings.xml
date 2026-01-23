@@ -30,8 +30,8 @@
         settings:controller="com.android.settings.accessibility.AccessibilityButtonPreferenceController"/>
 
     <SwitchPreferenceCompat
-        android:key="accessibility_shortcut_preference"
-        android:persistent="false"
+        android:key="accessibility_shortcut_on_lock_screen"
+        android:persistent="true"
         android:title="@string/accessibility_shortcut_service_on_lock_screen_title"
         android:summary="@string/accessibility_shortcut_description"
         settings:controller="com.android.settings.accessibility.HardwareShortcutFromLockscreenPreferenceController"/>

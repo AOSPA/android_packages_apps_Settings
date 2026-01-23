@@ -368,29 +368,36 @@ open class SelectedDisplayPreferenceFragment(
         val height = displayMode.physicalHeight
         val formattedWidth = numberFormatter.format(width)
         val formattedHeight = numberFormatter.format(height)
-        val resolutionDisplayText = "$formattedWidth x $formattedHeight"
-        val resolutionA11yText =
-            resources.getString(R.string.screen_resolution_delimiter_a11y, width, height)
         ExternalDisplaySettingsLoggerStore.getLogger(display.id).updateResolution(width, height)
 
         val isRefreshRatePrefEnabled = Flags.enableResolutionRefreshRateSetting()
         if (isRefreshRatePrefEnabled) {
             val formattedRefreshRate = refreshRateFormatter.format(displayMode.refreshRate)
-            val refreshRateDisplayText =
+            val displayText =
                 resources.getString(
-                    R.string.screen_refresh_rate_displayed_text,
+                    R.string.screen_resolution_refresh_rate_combined_displayed_text,
+                    formattedWidth,
+                    formattedHeight,
                     formattedRefreshRate,
                 )
-            val refreshRateA11yText =
-                resources.getString(R.string.screen_refresh_rate_a11y, formattedRefreshRate)
-
-            preference.setSummary(
-                createAccessibleSequence(
-                    "$resolutionDisplayText ($refreshRateDisplayText)",
-                    "$resolutionA11yText, $refreshRateA11yText",
+            val a11yText =
+                resources.getString(
+                    R.string.screen_resolution_refresh_rate_combined_a11y,
+                    formattedWidth,
+                    formattedHeight,
+                    formattedRefreshRate,
                 )
-            )
+
+            preference.setSummary(createAccessibleSequence(displayText, a11yText))
         } else {
+            val resolutionDisplayText =
+                resources.getString(
+                    R.string.screen_resolution_displayed_text,
+                    formattedWidth,
+                    formattedHeight,
+                )
+            val resolutionA11yText =
+                resources.getString(R.string.screen_resolution_delimiter_a11y, width, height)
             preference.setSummary(
                 createAccessibleSequence(resolutionDisplayText, resolutionA11yText)
             )

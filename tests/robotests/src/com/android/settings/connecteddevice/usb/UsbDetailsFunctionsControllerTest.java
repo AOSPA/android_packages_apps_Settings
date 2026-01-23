@@ -19,6 +19,8 @@ package com.android.settings.connecteddevice.usb;
 import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
 import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
 
+import static com.android.settings.testutils.DevicePolicyUtils.DPC_ADMIN;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -31,14 +33,16 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.KeyguardManager;
+import android.app.admin.PolicyEnforcementInfo;
 import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.net.TetheringManager;
-import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceCategory;
@@ -92,6 +96,9 @@ public class UsbDetailsFunctionsControllerTest {
 
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() {
@@ -198,6 +205,7 @@ public class UsbDetailsFunctionsControllerTest {
     }
 
     @Test
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     public void displayRefresh_fileTransferRestricted_shouldDisablePref() {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
         setUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER);
@@ -212,6 +220,7 @@ public class UsbDetailsFunctionsControllerTest {
     }
 
     @Test
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     public void displayRefresh_tetheringRestricted_shouldDisablePref() {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
         setUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING);
@@ -299,13 +308,9 @@ public class UsbDetailsFunctionsControllerTest {
     }
 
     private void setUserRestriction(String userRestriction) {
-        // For RestrictedLockUtils.checkIfRestrictionEnforced
-        final int userId = UserHandle.myUserId();
-        List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
-        enforcingUsers.add(
-                new UserManager.EnforcingUser(userId, UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
-        ShadowUserManager.getShadow()
-                .setUserRestrictionSources(userRestriction, UserHandle.of(userId), enforcingUsers);
+        PolicyEnforcementInfo policyEnforcementInfo = new PolicyEnforcementInfo(List.of(DPC_ADMIN));
+        ShadowDevicePolicyManager.getShadow().setPolicyEnforcementInfoForUserRestriction(
+                userRestriction, policyEnforcementInfo);
     }
 
     @Test

@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Application;
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -31,6 +30,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,17 +39,16 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowDevicePolicyManager.class})
 public class EncryptionAndCredentialTest {
 
     @Mock
     private UserManager mUserManager;
-    @Mock
-    private DevicePolicyManager mDevicePolicyManager;
-
     private Context mContext;
 
     @Before
@@ -57,7 +56,6 @@ public class EncryptionAndCredentialTest {
         MockitoAnnotations.initMocks(this);
         ShadowApplication application =
                 shadowOf((Application) ApplicationProvider.getApplicationContext());
-        application.setSystemService(Context.DEVICE_POLICY_SERVICE, mDevicePolicyManager);
         application.setSystemService(Context.USER_SERVICE, mUserManager);
         mContext = RuntimeEnvironment.application;
     }

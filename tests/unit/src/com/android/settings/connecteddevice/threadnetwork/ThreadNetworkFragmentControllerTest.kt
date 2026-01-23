@@ -16,7 +16,6 @@
 package com.android.settings.connecteddevice.threadnetwork
 
 import android.content.Context
-import android.platform.test.flag.junit.SetFlagsRule
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.test.core.app.ApplicationProvider
@@ -24,12 +23,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE
 import com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE
-import com.android.settings.flags.Flags
 import com.android.settings.testutils.FakeFeatureFactory
 import com.google.common.truth.Truth.assertThat
 import com.google.common.util.concurrent.MoreExecutors
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
@@ -41,8 +38,6 @@ import org.junit.Ignore
 /** Unit tests for [ThreadNetworkFragmentController].  */
 @RunWith(AndroidJUnit4::class)
 class ThreadNetworkFragmentControllerTest {
-    @get:Rule
-    val mSetFlagsRule = SetFlagsRule()
     private lateinit var context: Context
     private lateinit var executor: Executor
     private lateinit var fakeFeatureFactory: FakeFeatureFactory
@@ -52,7 +47,6 @@ class ThreadNetworkFragmentControllerTest {
 
     @Before
     fun setUp() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_THREAD_SETTINGS_ENABLED)
         context = spy(ApplicationProvider.getApplicationContext<Context>())
         executor = MoreExecutors.directExecutor()
 
@@ -78,14 +72,6 @@ class ThreadNetworkFragmentControllerTest {
     @Test
     fun availabilityStatus_threadSetInvisible_returnsConditionallyUnavailable() {
         whenever(mockFeatureProvider.isThreadVisible()).thenReturn(false)
-        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
-    }
-
-    @Test
-    fun availabilityStatus_flagDisabled_returnsConditionallyUnavailable() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_THREAD_SETTINGS_ENABLED)
-        startController(controller)
-
         assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
     }
 

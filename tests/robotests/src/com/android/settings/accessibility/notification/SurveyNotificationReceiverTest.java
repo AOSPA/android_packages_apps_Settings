@@ -30,11 +30,7 @@ import static org.mockito.Mockito.verify;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 
-import com.android.server.accessibility.Flags;
 import com.android.settings.accessibility.AccessibilitySurveyNotificationJobService;
 
 import org.junit.Before;
@@ -52,8 +48,6 @@ import org.robolectric.RuntimeEnvironment;
 public class SurveyNotificationReceiverTest {
 
     @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-    @Rule
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock
@@ -70,18 +64,6 @@ public class SurveyNotificationReceiverTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    public void onReceiveNotificationShown_disableHaTS_notScheduleJob() {
-        final Intent intent = new Intent(ACTION_SCHEDULE_SURVEY_NOTIFICATION)
-                .setPackage(mContext.getPackageName());
-
-        mReceiver.onReceive(mContext, intent);
-
-        verify(mJobService, never()).scheduleJob(any(Context.class), anyInt(), anyLong());
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void onReceiveNotificationShown_withDarkUiSettingsPageId_scheduleJob() {
         int pageId = SettingsEnums.DARK_UI_SETTINGS;
         final Intent intent = new Intent(ACTION_SCHEDULE_SURVEY_NOTIFICATION)
@@ -94,7 +76,6 @@ public class SurveyNotificationReceiverTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void onReceiveNotificationShown_withoutPageId_notScheduleJob() {
         final Intent intent = new Intent(ACTION_SCHEDULE_SURVEY_NOTIFICATION)
                 .setPackage(mContext.getPackageName());
@@ -105,7 +86,6 @@ public class SurveyNotificationReceiverTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void onReceiveNotificationShown_withUnknownPageId_notScheduleJob() {
         final Intent intent = new Intent(ACTION_SCHEDULE_SURVEY_NOTIFICATION)
                 .setPackage(mContext.getPackageName())
@@ -117,7 +97,6 @@ public class SurveyNotificationReceiverTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void onReceiveNotificationDismiss_withDarkUiSettingsPageId_cancelJobAndNotification() {
         int pageId = SettingsEnums.DARK_UI_SETTINGS;
         final Intent scheduleIntent = new Intent(ACTION_SCHEDULE_SURVEY_NOTIFICATION)

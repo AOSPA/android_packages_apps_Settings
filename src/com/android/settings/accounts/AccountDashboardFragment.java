@@ -17,6 +17,8 @@ package com.android.settings.accounts;
 
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
+import static com.android.settings.accounts.TopLevelAccountEntryPreferenceController.maybeAddTopLevelAccountEntryPreferenceController;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.settings.SettingsEnums;
@@ -41,6 +43,7 @@ import com.android.settings.applications.defaultapps.DefaultPrivateAutofillPrefe
 import com.android.settings.applications.defaultapps.DefaultWorkAutofillPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.users.AutoSyncDataPreferenceController;
 import com.android.settings.users.AutoSyncPersonalDataPreferenceController;
@@ -103,6 +106,7 @@ public class AccountDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        maybeAddTopLevelAccountEntryPreferenceController(context, controllers);
         buildAutofillPreferenceControllers(context, controllers,
                 /*isWorkProfile=*/false, /*isPrivateSpace=*/ false);
         final String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
@@ -142,17 +146,24 @@ public class AccountDashboardFragment extends DashboardFragment {
             DashboardFragment parent,
             String[] authorities,
             List<AbstractPreferenceController> controllers) {
-        final AccountPreferenceController accountPrefController =
-                new AccountPreferenceController(
-                        context, parent, authorities, ProfileSelectFragment.ProfileType.ALL);
-        if (parent != null) {
-            parent.getSettingsLifecycle().addObserver(accountPrefController);
+        boolean enableAccountsAndBackupScreen = Flags.enableAccountsAndBackupScreen();
+        if (!enableAccountsAndBackupScreen) {
+            final AccountPreferenceController accountPrefController =
+                    new AccountPreferenceController(
+                            context, parent, authorities, ProfileSelectFragment.ProfileType.ALL);
+            if (parent != null) {
+                parent.getSettingsLifecycle().addObserver(accountPrefController);
+            }
+            controllers.add(accountPrefController);
         }
-        controllers.add(accountPrefController);
-        controllers.add(new AutoSyncDataPreferenceController(context, parent));
-        controllers.add(new AutoSyncPersonalDataPreferenceController(context, parent));
-        controllers.add(new AutoSyncWorkDataPreferenceController(context, parent));
-        controllers.add(new AutoSyncPrivateDataPreferenceController(context, parent));
+        controllers.add(new AutoSyncDataPreferenceController(context, parent,
+                /* forceDisable */ enableAccountsAndBackupScreen));
+        controllers.add(new AutoSyncPersonalDataPreferenceController(context, parent,
+                /* forceDisable */ enableAccountsAndBackupScreen));
+        controllers.add(new AutoSyncWorkDataPreferenceController(context, parent,
+                /* forceDisable */ enableAccountsAndBackupScreen));
+        controllers.add(new AutoSyncPrivateDataPreferenceController(context, parent,
+                /* forceDisable */ enableAccountsAndBackupScreen));
     }
 
     private static int getPreferenceLayoutResId(Context context) {

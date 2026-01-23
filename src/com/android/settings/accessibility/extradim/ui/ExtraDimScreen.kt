@@ -24,7 +24,6 @@ import android.provider.Settings
 import androidx.fragment.app.Fragment
 import com.android.internal.accessibility.AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_COMPONENT_NAME
 import com.android.settings.R
-import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment
 import com.android.settings.accessibility.extradim.data.ExtraDimDataStore
 import com.android.settings.accessibility.shared.ui.AccessibilityShortcutPreference
@@ -56,7 +55,7 @@ open class ExtraDimScreen(context: Context) :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.reduce_bright_colors_preference_purpose
 
@@ -77,8 +76,6 @@ open class ExtraDimScreen(context: Context) :
 
     override fun fragmentClass(): Class<out Fragment> =
         ToggleReduceBrightColorsPreferenceFragment::class.java
-
-    override fun isFlagEnabled(context: Context): Boolean = Flags.catalystExtraDim()
 
     override fun getMetricsCategory(): Int = SettingsEnums.REDUCE_BRIGHT_COLORS_SETTINGS
 

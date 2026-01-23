@@ -36,6 +36,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresPermission
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
@@ -43,6 +44,10 @@ import com.android.internal.widget.LockPatternUtils
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.password.ChooseLockGeneric
+import com.android.settings.supervision.credentialmanagement.SupervisionPinRecoveryActivity
+import com.android.settings.supervision.shared.canLaunchPinRecovery
+import com.android.settings.supervision.shared.isSupervisingCredentialSet
+import com.android.settings.supervision.shared.supervisingUserHandle
 import com.android.settingslib.HelpUtils
 import com.android.settingslib.collapsingtoolbar.R.drawable.settingslib_expressive_icon_back as EXPRESSIVE_BACK_ICON
 import com.android.settingslib.supervision.SupervisionLog
@@ -209,7 +214,7 @@ class SetupSupervisionActivity : FragmentActivity() {
     @RequiresPermission(anyOf = [CREATE_USERS, MANAGE_USERS])
     private fun enableSupervision() {
         // Create user profile in the background to avoid blocking the loading indicator UI
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(ioDispatcher) {
             val supervisingUser: UserHandle? = setupSupervisingUser()
 
             // Update UI on the main thread
@@ -381,5 +386,9 @@ class SetupSupervisionActivity : FragmentActivity() {
         } else {
             Log.w(SupervisionLog.TAG, "HelpIntent is null")
         }
+    }
+
+    companion object {
+        @VisibleForTesting var ioDispatcher = Dispatchers.IO
     }
 }

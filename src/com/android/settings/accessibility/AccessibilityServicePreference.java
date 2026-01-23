@@ -30,7 +30,7 @@ import androidx.core.content.ContextCompat;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment;
+import com.android.settings.accessibility.a11yservice.A11yServicePreferenceFragment;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.utils.ThreadUtils;
 

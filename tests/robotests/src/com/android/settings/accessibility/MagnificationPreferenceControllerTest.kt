@@ -25,10 +25,10 @@ import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIF
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.KEY_GESTURE
-import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
+import com.android.settings.testutils.shadow.ShadowInputDevice
 import com.android.settingslib.R as SettingsLibR
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -36,8 +36,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
 
+@Config(shadows = [ShadowInputDevice::class])
 @RunWith(RobolectricTestRunner::class)
 class MagnificationPreferenceControllerTest {
     @get:Rule val setFlagsRule: SetFlagsRule = SetFlagsRule()
@@ -93,42 +95,6 @@ class MagnificationPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
-    fun getSummary_magnificationGestureEnabled_returnShortcutOnWithSummary() {
-        shadowAccessibilityManager.setAccessibilityShortcutTargets(
-            UserShortcutType.TWOFINGER_DOUBLETAP,
-            listOf(MAGNIFICATION_CONTROLLER_NAME),
-        )
-
-        assertThat(controller.summary.toString())
-            .isEqualTo(
-                context.getString(
-                    SettingsLibR.string.preference_summary_default_combination,
-                    context.getText(R.string.accessibility_summary_shortcut_enabled),
-                    context.getText(R.string.magnification_feature_summary),
-                )
-            )
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
-    fun getSummary_magnificationGestureDisabled_returnShortcutOffWithSummary() {
-        shadowAccessibilityManager.setAccessibilityShortcutTargets(
-            UserShortcutType.TRIPLETAP or UserShortcutType.TWOFINGER_DOUBLETAP,
-            listOf(),
-        )
-
-        assertThat(controller.summary.toString())
-            .isEqualTo(
-                context.getString(
-                    SettingsLibR.string.preference_summary_default_combination,
-                    context.getText(R.string.generic_accessibility_feature_shortcut_off),
-                    context.getText(R.string.magnification_feature_summary),
-                )
-            )
-    }
-
-    @Test
     fun getSummary_defaultShortcut_returnShortcutOffWithSummary() {
         shadowAccessibilityManager.setAccessibilityShortcutTargets(
             DEFAULT,
@@ -166,7 +132,27 @@ class MagnificationPreferenceControllerTest {
 
     @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
     @Test
-    fun getSummary_keyGestureShortcut_returnShortcutOnWithSummary() {
+    fun getSummary_keyGestureShortcut_noKeyboard_returnShortcutOffWithSummary() {
+        setHardwareKeyboard(false)
+        shadowAccessibilityManager.setAccessibilityShortcutTargets(
+            KEY_GESTURE,
+            listOf(MAGNIFICATION_CONTROLLER_NAME),
+        )
+
+        assertThat(controller.summary.toString())
+            .isEqualTo(
+                context.getString(
+                    SettingsLibR.string.preference_summary_default_combination,
+                    context.getText(R.string.generic_accessibility_feature_shortcut_off),
+                    context.getText(R.string.magnification_feature_summary),
+                )
+            )
+    }
+
+    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    fun getSummary_keyGestureShortcut_hasKeyboard_returnShortcutOnWithSummary() {
+        setHardwareKeyboard(true)
         shadowAccessibilityManager.setAccessibilityShortcutTargets(
             KEY_GESTURE,
             listOf(MAGNIFICATION_CONTROLLER_NAME),
@@ -180,5 +166,14 @@ class MagnificationPreferenceControllerTest {
                     context.getText(R.string.magnification_feature_summary),
                 )
             )
+    }
+
+    private fun setHardwareKeyboard(hasConnectedKeyboard: Boolean) {
+        if (hasConnectedKeyboard) {
+            val device = ShadowInputDevice.makeFullKeyboardInputDevicebyId(/* id= */ 1)
+            ShadowInputDevice.addDevice(device.id, device)
+        } else {
+            ShadowInputDevice.reset()
+        }
     }
 }

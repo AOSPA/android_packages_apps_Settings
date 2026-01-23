@@ -18,6 +18,8 @@ package com.android.settings.appfunctions.executors
 
 import android.app.appsearch.GenericDocument
 import android.os.OutcomeReceiver
+import android.service.settings.preferences.GetValueRequest
+import android.service.settings.preferences.GetValueResult
 import android.service.settings.preferences.SetValueRequest
 import android.service.settings.preferences.SetValueResult
 import android.service.settings.preferences.SettingsPreferenceValue
@@ -106,14 +108,6 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
         }
 
         val params = genericParams.getSetDeviceStateItemParams()
-        val settingsPreferenceValue =
-            toSettingsPreferenceValue(params.value)
-                ?: return SetDeviceStateItemResponse(
-                    isSuccessful = false,
-                    currentValue = "",
-                    failureReason = "Unsupported value type",
-                )
-
         val fullKey = params.key
         val keyParts = fullKey.split("/", limit = 2)
         val screenKey = keyParts.getOrNull(0)
@@ -127,13 +121,17 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
                 failureReason = "Unsupported key value",
             )
         }
-        val request =
-            SetValueRequest.Builder(
-                    screenKey,
-                    key,
-                    settingsPreferenceValue, // mPreferenceValue
+
+        val currentValue = getPreference(screenKey, key)
+        val settingsPreferenceValue =
+            toSettingsPreferenceValue(params.value, currentValue?.type)
+                ?: return SetDeviceStateItemResponse(
+                    isSuccessful = false,
+                    currentValue = "",
+                    failureReason = "Unsupported value type or value",
                 )
-                .build()
+
+        val request = SetValueRequest.Builder(screenKey, key, settingsPreferenceValue).build()
 
         return suspendCancellableCoroutine { continuation ->
             client.setPreferenceValue(
@@ -153,10 +151,10 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
                     override fun onError(error: Exception) {
                         Log.e(TAG, "Error setting preference value", error)
                         continuation.resume(
-                            // TODO(461469319): set the failure reason and the current value
+                            // TODO(461469319): set the failure reason
                             SetDeviceStateItemResponse(
                                 isSuccessful = false,
-                                currentValue = "",
+                                currentValue = settingsPreferenceValueToString(currentValue),
                                 failureReason = "Error: ${error.message}",
                             )
                         )
@@ -166,24 +164,57 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
         }
     }
 
-    private fun toSettingsPreferenceValue(value: String): SettingsPreferenceValue? =
-        when {
-            value.equals("true", ignoreCase = true) || value.equals("false", ignoreCase = true) -> {
+    // This should probably be moved to a common file when getDeviceStateItem is implemented in
+    // order to reuse this.
+    private suspend fun getPreference(screenKey: String, key: String): SettingsPreferenceValue? {
+        val client = SettingsPreferenceServiceClientManager.client ?: return null
+        val request = GetValueRequest.Builder(screenKey, key).build()
+        return suspendCancellableCoroutine { continuation ->
+            client.getPreferenceValue(
+                request,
+                Dispatchers.Default.asExecutor(),
+                object : OutcomeReceiver<GetValueResult, Exception> {
+                    override fun onResult(result: GetValueResult) {
+                        continuation.resume(result.value)
+                    }
 
-                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_BOOLEAN)
-                    .setBooleanValue(value.toBoolean())
-                    .build()
-            }
-            value.toIntOrNull() != null -> {
-                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_INT)
-                    .setIntValue(value.toInt())
-                    .build()
-            }
-            else -> {
-                Log.e(TAG, "Unsupported value type: $value")
-                null
-            } // Unsupported type
+                    override fun onError(error: Exception) {
+                        Log.e(TAG, "Error getting preference value", error)
+                        continuation.resume(null)
+                    }
+                },
+            )
         }
+    }
+
+    private fun toSettingsPreferenceValue(value: String, type: Int?): SettingsPreferenceValue? {
+        return when (type) {
+            SettingsPreferenceValue.TYPE_BOOLEAN ->
+                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_BOOLEAN)
+                    .setBooleanValue(value.toBooleanStrictOrNull() ?: return null)
+                    .build()
+            SettingsPreferenceValue.TYPE_INT ->
+                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_INT)
+                    .setIntValue(value.toIntOrNull() ?: return null)
+                    .build()
+            SettingsPreferenceValue.TYPE_STRING ->
+                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_STRING)
+                    .setStringValue(value)
+                    .build()
+            SettingsPreferenceValue.TYPE_LONG ->
+                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_LONG)
+                    .setLongValue(value.toLongOrNull() ?: return null)
+                    .build()
+            SettingsPreferenceValue.TYPE_DOUBLE ->
+                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_DOUBLE)
+                    .setDoubleValue(value.toDoubleOrNull() ?: return null)
+                    .build()
+            else -> {
+                Log.e(TAG, "Unsupported value type from preference: $type")
+                null
+            }
+        }
+    }
 
     private fun offsetNumericDeviceStateByValue(
         genericParams: GenericDeviceStateItemSetterParams
@@ -192,6 +223,15 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
         // TODO: call into appropriate setter APIs
 
         return null
+    }
+
+    private fun settingsPreferenceValueToString(value: SettingsPreferenceValue?): String {
+        return when (value?.type) {
+            SettingsPreferenceValue.TYPE_BOOLEAN -> value.booleanValue.toString()
+            SettingsPreferenceValue.TYPE_INT -> value.intValue.toString()
+            SettingsPreferenceValue.TYPE_STRING -> value.stringValue ?: ""
+            else -> ""
+        }
     }
 
     private fun adjustNumericDeviceStateByPercentage(

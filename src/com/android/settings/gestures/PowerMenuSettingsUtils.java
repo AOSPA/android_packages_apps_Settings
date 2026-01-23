@@ -42,7 +42,7 @@ final class PowerMenuSettingsUtils {
      * <p>If this value matches long press power for Assistant, then it falls back to Global Actions
      * panel (i.e., the Power Menu), depending on their respective settings.
      */
-    private static final int POWER_BUTTON_LONG_PRESS_DEFAULT_VALUE_RESOURCE =
+    static final int POWER_BUTTON_LONG_PRESS_DEFAULT_VALUE_RESOURCE =
             com.android.internal.R.integer.config_longPressOnPowerBehavior;
 
     /**
@@ -52,8 +52,8 @@ final class PowerMenuSettingsUtils {
     private static final int KEY_CHORD_POWER_VOLUME_UP_DEFAULT_VALUE_RESOURCE =
             com.android.internal.R.integer.config_keyChordPowerVolumeUp;
 
-    private static final int LONG_PRESS_POWER_GLOBAL_ACTIONS = 1; // a.k.a., Power Menu
-    private static final int LONG_PRESS_POWER_ASSISTANT_VALUE = 5; // Settings.Secure.ASSISTANT
+    static final int LONG_PRESS_POWER_GLOBAL_ACTIONS = 1; // a.k.a., Power Menu
+    static final int LONG_PRESS_POWER_ASSISTANT_VALUE = 5; // Settings.Secure.ASSISTANT
 
     private static final int KEY_CHORD_POWER_VOLUME_UP_GLOBAL_ACTIONS = 2;
 

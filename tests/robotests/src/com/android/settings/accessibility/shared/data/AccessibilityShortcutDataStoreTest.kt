@@ -18,6 +18,9 @@ package com.android.settings.accessibility.shared.data
 
 import android.content.ComponentName
 import android.content.Context
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.view.accessibility.AccessibilityManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME
@@ -25,19 +28,22 @@ import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIF
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.internal.accessibility.common.ShortcutConstants
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.KEY_GESTURE
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP
-import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP
+import com.android.server.accessibility.Flags
 import com.android.settings.accessibility.PreferredShortcut
 import com.android.settings.accessibility.PreferredShortcuts
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
+import com.android.settings.testutils.shadow.ShadowInputDevice
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.google.common.truth.Truth.assertThat
+import com.google.testing.junit.testparameterinjector.TestParameters
 import java.util.concurrent.Executor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestScope
@@ -49,13 +55,16 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
-import org.robolectric.RobolectricTestRunner
+import org.robolectric.RobolectricTestParameterInjector
+import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
 
 const val TEST_KEY = "testKey"
 
-@RunWith(RobolectricTestRunner::class)
+@Config(shadows = [ShadowInputDevice::class])
+@RunWith(RobolectricTestParameterInjector::class)
 class AccessibilityShortcutDataStoreTest {
+    @get:Rule val setFlagsRule = SetFlagsRule()
     @get:Rule val settingStoreRule = SettingsStoreRule()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
@@ -99,11 +108,7 @@ class AccessibilityShortcutDataStoreTest {
         assertThat(a11yManager.getAccessibilityShortcutTargets(SOFTWARE)).isEmpty()
         assertThat(a11yManager.getAccessibilityShortcutTargets(HARDWARE)).isEmpty()
         assertThat(a11yManager.getAccessibilityShortcutTargets(TRIPLETAP)).isEmpty()
-        assertThat(a11yManager.getAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP)).isEmpty()
-        setPreferredShortcuts(
-            SOFTWARE or HARDWARE or TRIPLETAP or TWOFINGER_DOUBLETAP,
-            MAGNIFICATION_CONTROLLER_NAME,
-        )
+        setPreferredShortcuts(SOFTWARE or HARDWARE or TRIPLETAP, MAGNIFICATION_CONTROLLER_NAME)
         val dataStore = createDataStoreFromTestScope(this, MAGNIFICATION_COMPONENT_NAME)
 
         dataStore.setBoolean(TEST_KEY, true)
@@ -114,24 +119,16 @@ class AccessibilityShortcutDataStoreTest {
             .contains(MAGNIFICATION_CONTROLLER_NAME)
         assertThat(a11yManager.getAccessibilityShortcutTargets(TRIPLETAP))
             .contains(MAGNIFICATION_CONTROLLER_NAME)
-        assertThat(a11yManager.getAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP))
-            .contains(MAGNIFICATION_CONTROLLER_NAME)
     }
 
     @Test
     fun setValue_false_magnificationPreferredShortcutDisabled() = runTest {
-        enableShortcuts(
-            true,
-            SOFTWARE or HARDWARE or TRIPLETAP or TWOFINGER_DOUBLETAP,
-            MAGNIFICATION_CONTROLLER_NAME,
-        )
+        enableShortcuts(true, SOFTWARE or HARDWARE or TRIPLETAP, MAGNIFICATION_CONTROLLER_NAME)
         assertThat(a11yManager.getAccessibilityShortcutTargets(SOFTWARE))
             .contains(MAGNIFICATION_CONTROLLER_NAME)
         assertThat(a11yManager.getAccessibilityShortcutTargets(HARDWARE))
             .contains(MAGNIFICATION_CONTROLLER_NAME)
         assertThat(a11yManager.getAccessibilityShortcutTargets(TRIPLETAP))
-            .contains(MAGNIFICATION_CONTROLLER_NAME)
-        assertThat(a11yManager.getAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP))
             .contains(MAGNIFICATION_CONTROLLER_NAME)
         val dataStore = createDataStoreFromTestScope(this, MAGNIFICATION_COMPONENT_NAME)
 
@@ -140,18 +137,121 @@ class AccessibilityShortcutDataStoreTest {
         assertThat(a11yManager.getAccessibilityShortcutTargets(SOFTWARE)).isEmpty()
         assertThat(a11yManager.getAccessibilityShortcutTargets(HARDWARE)).isEmpty()
         assertThat(a11yManager.getAccessibilityShortcutTargets(TRIPLETAP)).isEmpty()
-        assertThat(a11yManager.getAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP)).isEmpty()
+    }
+
+    @DisableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    @TestParameters(
+        "{hasKeyboard: true, initialValue: false, newValue: true, shortcutExpectedValue: false}",
+        "{hasKeyboard: true, initialValue: true, newValue: false, shortcutExpectedValue: true}",
+    )
+    fun setValue_flagOff_isKeyGestureShortcutUpdated(
+        hasKeyboard: Boolean,
+        initialValue: Boolean,
+        newValue: Boolean,
+        shortcutExpectedValue: Boolean,
+    ) = runTest {
+        setHardwareKeyboard(hasKeyboard)
+        assertThat(a11yManager.getAccessibilityShortcutTargets(KEY_GESTURE)).isEmpty()
+
+        val dataStore = createDataStoreFromTestScope(this)
+        setPreferredShortcuts(KEY_GESTURE, testComponentString)
+        if (initialValue) {
+            enableShortcuts(true, KEY_GESTURE)
+            assertThat(a11yManager.getAccessibilityShortcutTargets(KEY_GESTURE))
+                .contains(testComponentString)
+        }
+        dataStore.setBoolean(TEST_KEY, newValue)
+        assertThat(
+                a11yManager
+                    .getAccessibilityShortcutTargets(KEY_GESTURE)
+                    .contains(testComponentString)
+            )
+            .isEqualTo(shortcutExpectedValue)
+    }
+
+    @EnableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    @TestParameters(
+        "{hasKeyboard: true, initialValue: false, newValue: true, shortcutExpectedValue: true}",
+        "{hasKeyboard: true, initialValue: true, newValue: false, shortcutExpectedValue: false}",
+        "{hasKeyboard: false, initialValue: false, newValue: true, shortcutExpectedValue: false}",
+    )
+    fun setValue_flagOn_isKeyGestureShortcutUpdated(
+        hasKeyboard: Boolean,
+        initialValue: Boolean,
+        newValue: Boolean,
+        shortcutExpectedValue: Boolean,
+    ) = runTest {
+        setHardwareKeyboard(hasKeyboard)
+        assertThat(a11yManager.getAccessibilityShortcutTargets(KEY_GESTURE)).isEmpty()
+
+        val dataStore = createDataStoreFromTestScope(this)
+        setPreferredShortcuts(KEY_GESTURE, testComponentString)
+        if (initialValue) {
+            enableShortcuts(true, KEY_GESTURE)
+            assertThat(a11yManager.getAccessibilityShortcutTargets(KEY_GESTURE))
+                .contains(testComponentString)
+        }
+        dataStore.setBoolean(TEST_KEY, newValue)
+        assertThat(
+                a11yManager
+                    .getAccessibilityShortcutTargets(KEY_GESTURE)
+                    .contains(testComponentString)
+            )
+            .isEqualTo(shortcutExpectedValue)
     }
 
     @Test
-    fun getValue_assertValueCorrect() = runTest {
+    fun getValue_assertValueTrue() = runTest {
         val dataStore = createDataStoreFromTestScope(this)
 
         enableShortcuts(true, QUICK_SETTINGS)
         assertThat(dataStore.getBoolean(TEST_KEY)).isTrue()
+    }
+
+    @Test
+    fun getValue_assertValueFalse() = runTest {
+        val dataStore = createDataStoreFromTestScope(this)
 
         enableShortcuts(false, QUICK_SETTINGS)
         assertThat(dataStore.getBoolean(TEST_KEY)).isFalse()
+    }
+
+    @DisableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    @TestParameters(
+        "{hasKeyboard: false, value: true, expectedValue: false}",
+        "{hasKeyboard: true, value: true, expectedValue: false}",
+    )
+    fun getValue_flagOff_enableKeyGestureShortcut_assertValueCorrect(
+        hasKeyboard: Boolean,
+        value: Boolean,
+        expectedValue: Boolean,
+    ) = runTest {
+        setHardwareKeyboard(hasKeyboard)
+        val dataStore = createDataStoreFromTestScope(this)
+
+        enableShortcuts(value, KEY_GESTURE)
+        assertThat(dataStore.getBoolean(TEST_KEY)).isEqualTo(expectedValue)
+    }
+
+    @EnableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    @TestParameters(
+        "{hasKeyboard: false, value: true, expectedValue: false}",
+        "{hasKeyboard: true, value: true, expectedValue: true}",
+    )
+    fun getValue_flagOn_enableKeyGestureShortcut_assertValueCorrect(
+        hasKeyboard: Boolean,
+        value: Boolean,
+        expectedValue: Boolean,
+    ) = runTest {
+        setHardwareKeyboard(hasKeyboard)
+        val dataStore = createDataStoreFromTestScope(this)
+
+        enableShortcuts(value, KEY_GESTURE)
+        assertThat(dataStore.getBoolean(TEST_KEY)).isEqualTo(expectedValue)
     }
 
     @Test
@@ -271,4 +371,13 @@ class AccessibilityShortcutDataStoreTest {
             testScope.backgroundScope,
             settingsStore,
         )
+
+    private fun setHardwareKeyboard(hasConnectedKeyboard: Boolean) {
+        if (hasConnectedKeyboard) {
+            val device = ShadowInputDevice.makeFullKeyboardInputDevicebyId(/* id= */ 1)
+            ShadowInputDevice.addDevice(device.id, device)
+        } else {
+            ShadowInputDevice.reset()
+        }
+    }
 }

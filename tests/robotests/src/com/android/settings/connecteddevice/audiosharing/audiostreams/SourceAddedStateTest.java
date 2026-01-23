@@ -114,38 +114,14 @@ public class SourceAddedStateTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_AUDIO_STREAM_MEDIA_SERVICE_BY_RECEIVE_STATE)
-    public void testPerformAction_startService() {
+    public void testPerformAction_doesNotStartService() {
         mInstance.setAudioStreamsRepositoryForTesting(mRepository);
         BluetoothLeBroadcastMetadata mockMetadata = mock(BluetoothLeBroadcastMetadata.class);
         when(mRepository.getCachedMetadata(anyInt())).thenReturn(mockMetadata);
         when(mPreference.getContext()).thenReturn(mContext);
         when(mPreference.getSourceOriginForLogging())
                 .thenReturn(SourceOriginForLogging.QR_CODE_SCAN_SETTINGS);
-
         mInstance.onEnter(mPreference, mController, mHelper, mScanHelper);
-
-        verify(mRepository).saveMetadata(eq(mContext), eq(mockMetadata));
-        verify(mFeatureFactory.metricsFeatureProvider)
-                .action(
-                        eq(mContext),
-                        eq(SettingsEnums.ACTION_AUDIO_STREAM_JOIN_SUCCEED),
-                        eq(SourceOriginForLogging.QR_CODE_SCAN_SETTINGS.ordinal()));
-        verify(mHelper).startMediaService(eq(mContext), eq(BROADCAST_ID), eq(BROADCAST_TITLE));
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_AUDIO_STREAM_MEDIA_SERVICE_BY_RECEIVE_STATE)
-    public void testPerformAction_skipStartService() {
-        mInstance.setAudioStreamsRepositoryForTesting(mRepository);
-        BluetoothLeBroadcastMetadata mockMetadata = mock(BluetoothLeBroadcastMetadata.class);
-        when(mRepository.getCachedMetadata(anyInt())).thenReturn(mockMetadata);
-        when(mPreference.getContext()).thenReturn(mContext);
-        when(mPreference.getSourceOriginForLogging())
-                .thenReturn(SourceOriginForLogging.QR_CODE_SCAN_SETTINGS);
-
-        mInstance.onEnter(mPreference, mController, mHelper, mScanHelper);
-
         verify(mRepository).saveMetadata(eq(mContext), eq(mockMetadata));
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(

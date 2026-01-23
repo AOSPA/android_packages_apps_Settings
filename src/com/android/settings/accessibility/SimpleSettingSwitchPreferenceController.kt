@@ -27,7 +27,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import androidx.preference.TwoStatePreference
-import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.settings.core.BasePreferenceController
 
 /**
@@ -103,20 +102,4 @@ abstract class SimpleSettingSwitchPreferenceController(context: Context, prefKey
         }
         return false
     }
-}
-
-class ColorInversionMainSwitchPreferenceController(context: Context, prefKey: String) :
-    SimpleSettingSwitchPreferenceController(context, prefKey) {
-    override fun getSettingKey(): String = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED
-
-    override fun getComponentName(): ComponentName =
-        AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME
-}
-
-class DaltonizerMainSwitchPreferenceController(context: Context, prefKey: String) :
-    SimpleSettingSwitchPreferenceController(context, prefKey) {
-    override fun getSettingKey(): String = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED
-
-    override fun getComponentName(): ComponentName =
-        AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME
 }

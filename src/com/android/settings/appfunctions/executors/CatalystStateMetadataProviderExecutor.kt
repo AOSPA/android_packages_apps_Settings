@@ -153,7 +153,9 @@ class CatalystStateMetadataProviderExecutor(
                             localized = metadata.getPreferenceTitle(context).toString(),
                         ),
                     sensitivity = sensitivityLevel,
-                    writable = metadataProto.readWritePermit == ReadWritePermit.ALLOW,
+                    writable =
+                        ReadWritePermit.getWritePermit(metadataProto.readWritePermit) ==
+                            ReadWritePermit.ALLOW && metadataProto.persistent,
                     // TODO: properly expose possible values
                     possibleValues = metadataProto.valueDescriptor.toDeviceStateString(),
                     hintText = config?.hintText(englishContext, metadata),

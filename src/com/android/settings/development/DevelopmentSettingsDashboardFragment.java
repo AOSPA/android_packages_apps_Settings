@@ -34,7 +34,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
-import android.hardware.biometrics.Flags;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -138,7 +137,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             Log.d(TAG, "mBluetoothA2dpReceiver.onReceive intent=" + intent);
             String action = intent.getAction();
 
-            if (BluetoothA2dp.ACTION_CODEC_CONFIG_CHANGED.equals(action)) {
+            if (BluetoothA2dp.ACTION_CODEC_CONFIG_CHANGED.equals(action)
+                    || BluetoothA2dp.ACTION_ACTIVE_DEVICE_CHANGED.equals(action)) {
                 BluetoothCodecStatus codecStatus = intent.getParcelableExtra(
                         BluetoothCodecStatus.EXTRA_CODEC_STATUS);
                 Log.d(TAG, "Received BluetoothCodecStatus=" + codecStatus);
@@ -383,26 +383,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                                 getContext(),
                                 mIsBiometricsAuthenticated,
                                 userId);
-                if (Flags.bpFallbackOptions()) {
-                    if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                        mSwitchBar.setChecked(false);
-                        Utils.launchBiometricPromptForMandatoryBiometrics(this,
-                                REQUEST_BIOMETRIC_PROMPT, userId, false /* hideBackground */);
-                        return;
-                    } else {
-                        //Reset biometrics once enable dialog is shown
-                        mIsBiometricsAuthenticated = false;
-                        EnableDevelopmentSettingWarningDialog.show(this /* host */);
-                    }
-                } else if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
                     mSwitchBar.setChecked(false);
                     Utils.launchBiometricPromptForMandatoryBiometrics(this,
-                            REQUEST_BIOMETRIC_PROMPT,
-                            userId, false /* hideBackground */);
-                } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                    mSwitchBar.setChecked(false);
-                    IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
-                            biometricAuthStatus, false /* twoFactorAuthentication */);
+                            REQUEST_BIOMETRIC_PROMPT, userId, false /* hideBackground */);
+                    return;
                 } else {
                     //Reset biometrics once enable dialog is shown
                     mIsBiometricsAuthenticated = false;
@@ -628,6 +613,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                         AdbPreferenceController.ACTION_ENABLE_ADB_STATE_CHANGED));
 
         final IntentFilter filter = new IntentFilter();
+        filter.addAction(BluetoothA2dp.ACTION_ACTIVE_DEVICE_CHANGED);
         filter.addAction(BluetoothA2dp.ACTION_CODEC_CONFIG_CHANGED);
         getActivity().registerReceiver(mBluetoothA2dpReceiver, filter);
     }

@@ -27,8 +27,14 @@ public class AutoSyncWorkDataPreferenceController extends AutoSyncDataPreference
 
     private static final String KEY_AUTO_SYNC_WORK_ACCOUNT = "auto_sync_work_account_data";
 
-    public AutoSyncWorkDataPreferenceController(Context context, PreferenceFragmentCompat parent) {
-        super(context, parent);
+    public AutoSyncWorkDataPreferenceController(Context context,
+            PreferenceFragmentCompat parent) {
+        this(context, parent, /* forceDisable */ false);
+    }
+
+    public AutoSyncWorkDataPreferenceController(Context context,
+            PreferenceFragmentCompat parent, boolean forceDisable) {
+        super(context, parent, forceDisable);
         mUserHandle = Utils.getManagedProfileWithDisabled(mUserManager);
     }
 
@@ -39,6 +45,9 @@ public class AutoSyncWorkDataPreferenceController extends AutoSyncDataPreference
 
     @Override
     public boolean isAvailable() {
+        if (mForceDisable) {
+            return false;
+        }
         mUserHandle = Utils.getManagedProfileWithDisabled(mUserManager);
         return mUserHandle != null && !mUserManager.isManagedProfile() && !mUserManager.isLinkedUser()
                 && mUserManager.getProfiles(UserHandle.myUserId()).size() > 1;

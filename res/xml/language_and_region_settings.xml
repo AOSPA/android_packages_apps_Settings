@@ -85,7 +85,7 @@
         android:key="temperature_preference"
         android:title="@string/temperature_preferences_title"
         android:summary="@string/default_string_of_regional_preference"
-        settings:controller="com.android.settings.regionalpreferences.NewTemperatureUnitController"
+        settings:controller="com.android.settings.regionalpreferences.TemperatureUnitPreferenceController"
         settings:fragment="com.android.settings.regionalpreferences.TemperatureUnitFragment">
       <extra
           android:name="arg_key_regional_preference"
@@ -107,7 +107,7 @@
         android:key="first_day_of_week_preference"
         android:title="@string/first_day_of_week_preferences_title"
         android:summary="@string/default_string_of_regional_preference"
-        settings:controller="com.android.settings.regionalpreferences.NewFirstDayOfWeekController"
+        settings:controller="com.android.settings.regionalpreferences.FirstDayOfWeekPreferenceController"
         settings:fragment="com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment">
       <extra
           android:name="arg_key_regional_preference"
@@ -118,7 +118,7 @@
         android:key="numbering_system_preference"
         android:title="@string/numbers_preferences_title"
         android:summary="@string/default_string_of_regional_preference"
-        settings:controller="com.android.settings.regionalpreferences.NewNumberingSystemController"
+        settings:controller="com.android.settings.regionalpreferences.NumberingSystemController"
         settings:fragment="com.android.settings.regionalpreferences.NumberingSystemLocaleListFragment">
       <extra
           android:name="arg_key_regional_preference"
@@ -127,8 +127,8 @@
   </PreferenceCategory>
 
   <com.android.settingslib.widget.FooterPreference
-      android:key="new_regional_pref_footer"
+      android:key="language_and_region_footer_preference"
       android:title="@string/title_regional_pref_footer"
       settings:searchable="false"
-      settings:controller="com.android.settings.regionalpreferences.NewRegionalFooterPreferenceController"/>
+      settings:controller="com.android.settings.regionalpreferences.LanguageAndRegionFooterPreferenceController"/>
 </PreferenceScreen>

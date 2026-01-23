@@ -26,6 +26,7 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -58,7 +59,7 @@ public class TextReadingPreviewPreferenceTest {
     @Before
     public void setUp() {
         final Context context = ApplicationProvider.getApplicationContext();
-        final int[] previewSamples = TextReadingPreviewController.getPreviewSampleLayouts(context);
+        final int[] previewSamples = getPreviewSampleLayouts(context);
         mPreviewSampleCount = previewSamples.length;
         final Configuration[] configurations = createConfigurations(mPreviewSampleCount);
         mTextReadingPreviewPreference = new TextReadingPreviewPreference(context);
@@ -191,5 +192,17 @@ public class TextReadingPreviewPreferenceTest {
         }
 
         return configurations;
+    }
+
+    private static int[] getPreviewSampleLayouts(Context context) {
+        TypedArray previews = context.getResources().obtainTypedArray(
+                R.array.config_text_reading_preview_samples);
+        int previewCount = previews.length();
+        int[] previewSamples = new int[previewCount];
+        for (int i = 0; i < previewCount; i++) {
+            previewSamples[i] = previews.getResourceId(i, R.layout.screen_zoom_preview_1);
+        }
+        previews.recycle();
+        return previewSamples;
     }
 }

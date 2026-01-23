@@ -25,7 +25,7 @@ import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterManager
-import androidx.fragment.app.testing.FragmentScenario
+import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.swipeUp
@@ -86,7 +86,7 @@ class PrivacyControlsFragmentTest {
 
     private fun runTest(data: SafetyCenterData, testBlock: (PrivacyControlsFragment) -> Unit) {
         shadowSafetyCenterManager.setSafetyCenterData(data)
-        val scenario = FragmentScenario.launchInContainer(PrivacyControlsFragment::class.java)
+        val scenario = launchFragmentInContainer<PrivacyControlsFragment>()
         scenario.onFragment { fragment ->
             ShadowLooper.idleMainLooper()
             testBlock(fragment)
@@ -112,6 +112,7 @@ class PrivacyControlsFragmentTest {
             onView(withText(mApplication.getString(R.string.mic_toggle_title)))
                 .check(matches(isDisplayed()))
 
+            onView(isRoot()).perform(swipeUp())
             onView(withText(mApplication.getString(R.string.show_clip_access_notification)))
                 .check(matches(isDisplayed()))
 

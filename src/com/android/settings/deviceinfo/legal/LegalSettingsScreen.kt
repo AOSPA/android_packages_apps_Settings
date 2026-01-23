@@ -21,7 +21,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.LegalSettings
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
@@ -31,7 +30,7 @@ open class LegalSettingsScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.legal_information_purpose
 
@@ -42,8 +41,6 @@ open class LegalSettingsScreen : PreferenceScreenMixin {
         get() = R.string.menu_key_about_device
 
     override fun getMetricsCategory() = SettingsEnums.ABOUT_LEGAL_SETTINGS
-
-    override fun isFlagEnabled(context: Context) = Flags.catalystLegalInformation()
 
     override fun fragmentClass(): Class<out Fragment>? = LegalSettings::class.java
 

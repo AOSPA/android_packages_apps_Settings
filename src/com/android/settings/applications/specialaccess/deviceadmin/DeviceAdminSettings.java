@@ -27,6 +27,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+// LINT.IfChange
 @SearchIndexable
 public class DeviceAdminSettings extends DashboardFragment {
     static final String TAG = "DeviceAdminSettings";
@@ -57,3 +58,4 @@ public class DeviceAdminSettings extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.device_admin_settings);
 }
+// LINT.ThenChange(DeviceAdminApiScreen.kt)

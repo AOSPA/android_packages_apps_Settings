@@ -18,8 +18,6 @@ package com.android.settings.accessibility.screenmagnification
 
 import android.content.Context
 import android.content.Intent
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import android.provider.Settings.Secure.AccessibilityMagnificationCursorFollowingMode
@@ -35,7 +33,6 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
-import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.MagnificationCapabilities
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode
 import com.android.settings.accessibility.screenmagnification.dialogs.CursorFollowingModeChooser
@@ -143,7 +140,6 @@ class CursorFollowingModePreferenceControllerTest {
             .isEmpty()
     }
 
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG)
     @Test
     fun clickPreference_triggerShowDialog() {
         controller.handlePreferenceTreeClick(preference)
@@ -153,7 +149,6 @@ class CursorFollowingModePreferenceControllerTest {
         }
     }
 
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG)
     @Test
     fun getAvailabilityStatus_inSetupWizard_returnConditionallyUnavailable() {
         assertGetAvailability(
@@ -163,17 +158,6 @@ class CursorFollowingModePreferenceControllerTest {
         )
     }
 
-    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG)
-    @Test
-    fun getAvailabilityStatus_flagOff_returnConditionallyUnavailable() {
-        assertGetAvailability(
-            inSetupWizard = false,
-            hasConnectedMouse = true,
-            expectedAvailability = CONDITIONALLY_UNAVAILABLE,
-        )
-    }
-
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG)
     @Test
     fun getAvailabilityStatus_hasConnectedMouse_returnAvailable() {
         assertGetAvailability(
@@ -183,7 +167,6 @@ class CursorFollowingModePreferenceControllerTest {
         )
     }
 
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG)
     @Test
     fun getAvailabilityStatus_noConnectedMouse_returnConditionallyUnavailable() {
         assertGetAvailability(

@@ -28,11 +28,13 @@
         android:title="@string/app_permissions"
         android:summary="@string/runtime_permissions_summary_control_app_access"
         settings:controller="com.android.settings.privacy.ManagePermissionsPreferenceController"
+        settings:keywords="@string/safety_center_permission_manager_search_terms"
         android:order="10" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="health_connect"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_health_connect_search_terms"
         settings:safetySource="AndroidHealthConnect"
         settings:profile="personal_profile"
         android:order="25" />
@@ -47,6 +49,7 @@
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="location_data_sharing_updates"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:keywords="@string/safety_center_app_data_sharing_updates_search_terms"
         settings:safetySource="AndroidPrivacyAppDataSharingUpdates"
         settings:profile="personal_profile"
         android:order="35" />

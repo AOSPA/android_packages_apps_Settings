@@ -23,7 +23,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
-import com.android.server.accessibility.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.DeviceInfoUtils;
 
@@ -47,12 +46,8 @@ public class FeedbackManager {
      */
     public FeedbackManager(@NonNull Context context, int pageId) {
         this(DeviceInfoUtils.getFeedbackReporterPackage(context),
-                FeatureFactory.getFeatureFactory()
-                        .getAccessibilityFeedbackFeatureProvider()
-                        .getCategory(pageId),
-                FeatureFactory.getFeatureFactory()
-                        .getAccessibilityFeedbackFeatureProvider()
-                        .getTriggerId(pageId));
+                getCategorySafely(pageId),
+                getTriggerIdSafely(pageId));
     }
 
     /**
@@ -76,10 +71,6 @@ public class FeedbackManager {
      * @return {@code true} if feedback is available, {@code false} otherwise.
      */
     public boolean isAvailable() {
-        if (!Flags.enableLowVisionGenericFeedback()) {
-            return false;
-        }
-
         return !TextUtils.isEmpty(mReporterPackage)
                 && !TextUtils.isEmpty(mCategoryTag);
     }
@@ -103,5 +94,25 @@ public class FeedbackManager {
             intent.putExtra(TRIGGER_ID_EXTRA, mTriggerId);
         }
         return intent;
+    }
+
+    @Nullable
+    private static String getCategorySafely(int pageId) {
+        AccessibilityFeedbackFeatureProvider provider =
+                FeatureFactory.getFeatureFactory().getAccessibilityFeedbackFeatureProvider();
+        if (provider == null) {
+            return null;
+        }
+        return provider.getCategory(pageId);
+    }
+
+    @Nullable
+    private static String getTriggerIdSafely(int pageId) {
+        AccessibilityFeedbackFeatureProvider provider =
+                FeatureFactory.getFeatureFactory().getAccessibilityFeedbackFeatureProvider();
+        if (provider == null) {
+            return null;
+        }
+        return provider.getTriggerId(pageId);
     }
 }

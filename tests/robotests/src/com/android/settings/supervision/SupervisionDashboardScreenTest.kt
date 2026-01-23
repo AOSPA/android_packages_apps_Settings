@@ -17,6 +17,7 @@ package com.android.settings.supervision
 
 import android.app.Activity
 import android.app.Application
+import android.app.role.OnRoleHoldersChangedListener
 import android.app.role.RoleManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
@@ -25,9 +26,11 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Process
+import android.os.UserHandle
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -39,10 +42,13 @@ import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.flags.Flags.FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE
 import com.android.settings.supervision.SupervisionMainSwitchPreference.Companion.REQUEST_CODE_CONFIRM_SUPERVISION_CREDENTIALS
+import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
+import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.ipc.MessengerService
 import com.android.settingslib.ipc.MessengerServiceRule
 import com.android.settingslib.ipc.PermissionChecker
@@ -50,6 +56,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.preference.launchFragmentScenario
 import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
+import java.util.concurrent.Executor
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -88,6 +95,7 @@ class SupervisionDashboardScreenTest {
         )
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockRoleManager = mock<RoleManager>()
+    private val mockResources = mock<Resources>()
 
     @get:Rule val setFlagsRule = SetFlagsRule()
 
@@ -103,6 +111,7 @@ class SupervisionDashboardScreenTest {
             on { preferenceScreenKey } doReturn preferenceScreenCreator.bindingKey
             on { getSystemService(SupervisionManager::class.java) } doReturn mockSupervisionManager
             on { getSystemService(RoleManager::class.java) } doReturn mockRoleManager
+            on { getResources() } doReturn mockResources
         }
 
         ShadowRoleManager.addRoleHolder(
@@ -297,17 +306,36 @@ class SupervisionDashboardScreenTest {
     }
 
     @Test
+    @DisableFlags(FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE)
     fun isIndexable() {
         assertThat(preferenceScreenCreator.indexable).isTrue()
     }
 
     @Test
+    @EnableFlags(FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE)
+    fun indexable_inDemoMode_configHidingTrue_isFalse() {
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        SettingsGlobalStore.get(mockLifeCycleContext).setInt(Settings.Global.DEVICE_DEMO_MODE, 1)
+
+        mockResources.stub {
+            on { getBoolean(R.bool.config_hide_supervision_setting_in_demo_mode) }.thenReturn(true)
+        }
+
+        assertThat(preferenceScreenCreator.indexable).isFalse()
+
+        // Ensure reset to non-demo-mode at the end of test.
+        SettingsGlobalStore.get(mockLifeCycleContext).setInt(Settings.Global.DEVICE_DEMO_MODE, 0)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onCreate_registersListener() {
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
         verify(mockSupervisionManager).registerSupervisionListener(any())
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun onDestroy_unregistersListener() {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
@@ -316,6 +344,61 @@ class SupervisionDashboardScreenTest {
 
         preferenceScreenCreator.onDestroy(mockLifeCycleContext)
         verify(mockSupervisionManager).unregisterSupervisionListener(listenerCaptor.firstValue)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onResume_addsOnRoleHoldersChangedListener() {
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onResume(mockLifeCycleContext)
+        verify(mockRoleManager)
+            .addOnRoleHoldersChangedListenerAsUser(
+                any<Executor>(),
+                any<OnRoleHoldersChangedListener>(),
+                any<UserHandle>(),
+            )
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onStart_registerSupervisionListener() {
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onStart(mockLifeCycleContext)
+        verify(mockSupervisionManager).registerSupervisionListener(any())
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onPause_removeOnRoleHoldersChangedListener() {
+        val roleListenerCaptor = argumentCaptor<OnRoleHoldersChangedListener>()
+
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onResume(mockLifeCycleContext)
+        verify(mockRoleManager)
+            .addOnRoleHoldersChangedListenerAsUser(
+                any<Executor>(),
+                roleListenerCaptor.capture(),
+                any<UserHandle>(),
+            )
+
+        preferenceScreenCreator.onPause(mockLifeCycleContext)
+        verify(mockRoleManager)
+            .removeOnRoleHoldersChangedListenerAsUser(roleListenerCaptor.firstValue, UserHandle.ALL)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onStop_unregisterSupervisionListener() {
+        val supervisionListenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
+
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onStart(mockLifeCycleContext)
+        verify(mockSupervisionManager)
+            .registerSupervisionListener(supervisionListenerCaptor.capture())
+
+        preferenceScreenCreator.onStop(mockLifeCycleContext)
+        verify(mockSupervisionManager)
+            .unregisterSupervisionListener(supervisionListenerCaptor.firstValue)
     }
 
     @Test
@@ -354,6 +437,7 @@ class SupervisionDashboardScreenTest {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onStart(mockLifeCycleContext)
         verify(mockSupervisionManager).registerSupervisionListener(listenerCaptor.capture())
 
         listenerCaptor.firstValue.onSupervisionDisabled(0 /* userId */)
@@ -369,6 +453,7 @@ class SupervisionDashboardScreenTest {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onStart(mockLifeCycleContext)
         verify(mockSupervisionManager).registerSupervisionListener(listenerCaptor.capture())
 
         listenerCaptor.firstValue.onSupervisionEnabled(0 /* userId */)
@@ -413,6 +498,7 @@ class SupervisionDashboardScreenTest {
             } doReturn supervisionAppsGroup
         }
 
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
         preferenceScreenCreator.onResume(mockLifeCycleContext)
 
         assertThat(supervisionAppsGroup.isVisible).isTrue()
@@ -436,6 +522,7 @@ class SupervisionDashboardScreenTest {
             } doReturn supervisionAppsGroup
         }
 
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
         preferenceScreenCreator.onResume(mockLifeCycleContext)
 
         assertThat(supervisionAppsGroup.isVisible).isFalse()

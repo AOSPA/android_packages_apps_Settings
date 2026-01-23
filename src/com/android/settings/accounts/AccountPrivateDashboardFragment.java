@@ -19,6 +19,7 @@ package com.android.settings.accounts;
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
 import static com.android.settings.accounts.AccountDashboardFragment.buildAutofillPreferenceControllers;
+import static com.android.settings.accounts.TopLevelAccountEntryPreferenceController.maybeAddTopLevelAccountEntryPreferenceController;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -29,6 +30,7 @@ import com.android.settings.applications.autofill.PasswordsPreferenceController;
 import com.android.settings.applications.credentials.CredentialManagerPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.users.AutoSyncDataPreferenceController;
 import com.android.settings.users.AutoSyncPrivateDataPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -87,6 +89,7 @@ public class AccountPrivateDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        maybeAddTopLevelAccountEntryPreferenceController(context, controllers);
         buildAutofillPreferenceControllers(
                 context, controllers, /*isWorkProfile=*/ false, /*isPrivateSpace=*/ true);
         final String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
@@ -98,14 +101,19 @@ public class AccountPrivateDashboardFragment extends DashboardFragment {
             Context context,
             String[] authorities,
             List<AbstractPreferenceController> controllers) {
-        final AccountPreferenceController accountPrefController =
-                new AccountPreferenceController(
-                        context,
-                        this,
-                        authorities,
-                        ProfileSelectFragment.ProfileType.PRIVATE);
-        controllers.add(accountPrefController);
-        controllers.add(new AutoSyncDataPreferenceController(context, this));
-        controllers.add(new AutoSyncPrivateDataPreferenceController(context, this));
+        boolean enableAccountsAndBackupScreen = Flags.enableAccountsAndBackupScreen();
+        if (!enableAccountsAndBackupScreen) {
+            final AccountPreferenceController accountPrefController =
+                    new AccountPreferenceController(
+                            context,
+                            this,
+                            authorities,
+                            ProfileSelectFragment.ProfileType.PRIVATE);
+            controllers.add(accountPrefController);
+        }
+        controllers.add(new AutoSyncDataPreferenceController(context, this,
+                /* forceDisable */ enableAccountsAndBackupScreen));
+        controllers.add(new AutoSyncPrivateDataPreferenceController(context, this,
+                /* forceDisable */ enableAccountsAndBackupScreen));
     }
 }

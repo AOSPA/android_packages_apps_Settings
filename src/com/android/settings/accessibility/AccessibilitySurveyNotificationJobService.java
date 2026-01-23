@@ -32,7 +32,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
-import com.android.server.accessibility.Flags;
 import com.android.settings.accessibility.notification.NotificationHelper;
 
 /**
@@ -78,10 +77,6 @@ public class AccessibilitySurveyNotificationJobService extends JobService {
      * @param delayMillis The minimum time in milliseconds to wait before showing the notification.
      */
     public void scheduleJob(@NonNull Context context, int pageId, long delayMillis) {
-        if (!Flags.enableLowVisionHats()) {
-            return;
-        }
-
         final JobScheduler jobScheduler = context.getSystemService(JobScheduler.class);
         if (jobScheduler == null) {
             return;

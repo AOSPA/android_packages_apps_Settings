@@ -25,7 +25,6 @@ import static com.android.internal.accessibility.common.ShortcutConstants.UserSh
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
 import static com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment.SHORTCUT_SETTINGS;
 
 import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_DEFERRED_SETUP;
@@ -329,26 +328,6 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario.onFragment(fragment -> {
             TwoStatePreference preference = fragment.findPreference(
                     mContext.getString(R.string.accessibility_shortcut_triple_tap_pref));
-            assertThat(preference.isChecked()).isTrue();
-        });
-    }
-
-    @Test
-    public void onTwoFingersShortcutSettingChanged_twoFingersDoubleTapShortcutControllerUpdated() {
-        mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
-        mFragmentScenario.moveToState(Lifecycle.State.CREATED);
-
-        mShadowA11yManager.setAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP, List.of(TARGET));
-        Settings.Secure.putInt(
-                mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
-                AccessibilityUtil.State.ON);
-        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
-
-        mFragmentScenario.onFragment(fragment -> {
-            TwoStatePreference preference = fragment.findPreference(
-                    mContext.getString(
-                            R.string.accessibility_shortcut_two_finger_double_tap_pref));
             assertThat(preference.isChecked()).isTrue();
         });
     }

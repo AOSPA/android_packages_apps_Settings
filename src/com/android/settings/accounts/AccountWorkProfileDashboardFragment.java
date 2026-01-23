@@ -19,6 +19,7 @@ package com.android.settings.accounts;
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
 import static com.android.settings.accounts.AccountDashboardFragment.buildAutofillPreferenceControllers;
+import static com.android.settings.accounts.TopLevelAccountEntryPreferenceController.maybeAddTopLevelAccountEntryPreferenceController;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -29,6 +30,7 @@ import com.android.settings.applications.autofill.PasswordsPreferenceController;
 import com.android.settings.applications.credentials.CredentialManagerPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.users.AutoSyncDataPreferenceController;
 import com.android.settings.users.AutoSyncWorkDataPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -88,6 +90,7 @@ public class AccountWorkProfileDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        maybeAddTopLevelAccountEntryPreferenceController(context, controllers);
         buildAutofillPreferenceControllers(
                 context, controllers, /*isWorkProfile=*/ true, /*isPrivateSpace=*/ false);
         final String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
@@ -100,15 +103,20 @@ public class AccountWorkProfileDashboardFragment extends DashboardFragment {
             DashboardFragment parent,
             String[] authorities,
             List<AbstractPreferenceController> controllers) {
-        final AccountPreferenceController accountPrefController =
-                new AccountPreferenceController(
-                        context, parent, authorities, ProfileSelectFragment.ProfileType.WORK);
-        if (parent != null) {
-            parent.getSettingsLifecycle().addObserver(accountPrefController);
+        boolean enableAccountsAndBackupScreen = Flags.enableAccountsAndBackupScreen();
+        if (!enableAccountsAndBackupScreen) {
+            final AccountPreferenceController accountPrefController =
+                    new AccountPreferenceController(
+                            context, parent, authorities, ProfileSelectFragment.ProfileType.WORK);
+            if (parent != null) {
+                parent.getSettingsLifecycle().addObserver(accountPrefController);
+            }
+            controllers.add(accountPrefController);
         }
-        controllers.add(accountPrefController);
-        controllers.add(new AutoSyncDataPreferenceController(context, parent));
-        controllers.add(new AutoSyncWorkDataPreferenceController(context, parent));
+        controllers.add(new AutoSyncDataPreferenceController(context, parent,
+                /* forceDisable */ enableAccountsAndBackupScreen));
+        controllers.add(new AutoSyncWorkDataPreferenceController(context, parent,
+                /* forceDisable */ enableAccountsAndBackupScreen));
     }
 
     // TODO: b/141601408. After featureFlag settings_work_profile is launched, unmark this

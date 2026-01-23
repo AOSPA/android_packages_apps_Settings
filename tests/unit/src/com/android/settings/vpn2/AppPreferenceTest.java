@@ -26,23 +26,32 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.PolicyEnforcementInfo;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.UserHandle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Collections;
+
 /** Unittest for AppPreference */
 @RunWith(AndroidJUnit4.class)
 public class AppPreferenceTest {
-    // Additional mocking of the underying classes is necsesary if another user id is used.
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    // Additional mocking of the underlying classes is necessary if another user id is used.
     private static final int USER_ID = UserHandle.USER_NULL;
     private static final String PACKAGE_NAME = "test_package";
     private static final String DIFFERENT_PACKAGE_NAME = "not_test_package";
@@ -61,6 +70,10 @@ public class AppPreferenceTest {
         doReturn(mContext).when(mContext).createContextAsUser(any(), anyInt());
         doReturn(mContext).when(mContext).createPackageContextAsUser(any(), anyInt(), any());
         when(mContext.getSystemService(DevicePolicyManager.class)).thenReturn(mDevicePolicyManager);
+        PolicyEnforcementInfo policyEnforcementInfo = new PolicyEnforcementInfo(
+                Collections.emptyList());
+        doReturn(policyEnforcementInfo).when(mDevicePolicyManager).getEnforcingAdminsForPolicy(
+                any(), anyInt());
     }
 
     @Test
@@ -72,7 +85,17 @@ public class AppPreferenceTest {
     }
 
     @Test
-    public void disableIfConfiguredByAdmin_packageNameNotEqualsAlwaysOn_shouldEnable() {
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    public void disableIfConfiguredByAdmin_packageNameNotEqualsAlwaysOn_shouldEnable_dpmRefactorEnabled() {
+        doReturn(DIFFERENT_PACKAGE_NAME).when(mDevicePolicyManager).getAlwaysOnVpnPackage();
+
+        mAppPreference = spy(new AppPreference(mContext, USER_ID, PACKAGE_NAME));
+        assertFalse(mAppPreference.isDisabledByAdmin());
+    }
+
+    @Test
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    public void disableIfConfiguredByAdmin_packageNameNotEqualsAlwaysOn_shouldEnable_dpmRefactorDisabled() {
         doReturn(DIFFERENT_PACKAGE_NAME).when(mDevicePolicyManager).getAlwaysOnVpnPackage();
 
         mAppPreference = spy(new AppPreference(mContext, USER_ID, PACKAGE_NAME));

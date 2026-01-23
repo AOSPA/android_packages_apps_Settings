@@ -27,7 +27,6 @@ import com.android.internal.accessibility.AccessibilityShortcutController.COLOR_
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.FeedbackManager
-import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.shared.ui.AccessibilityShortcutPreference
@@ -76,8 +75,6 @@ open class ColorInversionScreen :
 
     override fun fragmentClass(): Class<out Fragment>? =
         ToggleColorInversionPreferenceFragment::class.java
-
-    override fun isFlagEnabled(context: Context) = Flags.catalystColorInversion()
 
     override fun getMetricsCategory() = SettingsEnums.ACCESSIBILITY_COLOR_INVERSION_SETTINGS
 

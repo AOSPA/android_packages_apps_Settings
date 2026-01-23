@@ -30,9 +30,7 @@ public class TouchpadSystemGesturesPreferenceController extends TogglePreference
 
     @Override
     public int getAvailabilityStatus() {
-        return InputSettings.isTouchpadSystemGestureDisableFeatureFlagEnabled()
-                && InputPeripheralsSettingsUtils.isTouchpad() ? AVAILABLE
-                                                              : CONDITIONALLY_UNAVAILABLE;
+        return InputPeripheralsSettingsUtils.isTouchpad() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -43,7 +41,6 @@ public class TouchpadSystemGesturesPreferenceController extends TogglePreference
     @Override
     public boolean setChecked(boolean isChecked) {
         InputSettings.setTouchpadSystemGesturesEnabled(mContext, isChecked);
-        // TODO(b/353947750): add a metric for when the setting changes.
         return true;
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ package com.android.settings.regionalpreferences;
 import android.content.Context;
 import android.os.LocaleList;
 
+import androidx.annotation.NonNull;
+
 import com.android.internal.app.LocaleStore;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
@@ -28,12 +30,11 @@ import java.util.Locale;
 import java.util.Set;
 
 /** A controller for the entry of Numbering System's page */
-@Deprecated
 public class NumberingSystemController extends BasePreferenceController {
     private static final String TAG = NumberingSystemController.class.getSimpleName();
 
     private LocaleList mLocaleList;
-    public NumberingSystemController(Context context, String preferenceKey) {
+    public NumberingSystemController(@NonNull Context context, @NonNull String preferenceKey) {
         super(context, preferenceKey);
         // Initialize the supported languages to LocaleInfos
         LocaleStore.fillCache(context);
@@ -77,6 +78,7 @@ public class NumberingSystemController extends BasePreferenceController {
     }
 
     @Override
+    @NonNull
     public CharSequence getSummary() {
         return new LocaleFeatureProviderImpl().getLocaleNames(getNumberingSystemLocale());
     }

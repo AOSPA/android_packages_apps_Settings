@@ -48,7 +48,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.hardware.biometrics.BiometricManager;
-import android.hardware.biometrics.Flags;
 import android.hardware.face.Face;
 import android.hardware.face.FaceEnrollOptions;
 import android.hardware.face.FaceManager;
@@ -57,7 +56,6 @@ import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.face.IFaceAuthenticatorsRegisteredCallback;
 import android.os.Looper;
 import android.os.UserHandle;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -810,7 +808,6 @@ public class FaceEnrollIntroductionTest {
     }
 
     @Test
-    @RequiresFlagsEnabled({Flags.FLAG_BP_FALLBACK_OPTIONS})
     public void onActivityResult_identityCheckActiveAndHardwareError_checkConfirmCredentialActivityStarted() {
         setupActivityForIdentityCheck();
         mBiometricManager.setAuthenticatorType(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
@@ -828,7 +825,6 @@ public class FaceEnrollIntroductionTest {
     }
 
     @Test
-    @RequiresFlagsEnabled({Flags.FLAG_BP_FALLBACK_OPTIONS})
     public void onActivityResult_identityCheckActiveNotActive_noConfirmCredentialActivityStarted() {
         setupActivityForIdentityCheck();
         mBiometricManager.setAuthenticatorType(BIOMETRIC_ERROR_IDENTITY_CHECK_NOT_ACTIVE);

@@ -29,7 +29,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
-import com.android.server.accessibility.Flags;
 import com.android.settings.accessibility.AccessibilitySurveyNotificationJobService;
 
 import java.util.Objects;
@@ -72,10 +71,6 @@ public class SurveyNotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
-        if (!Flags.enableLowVisionHats()) {
-            return;
-        }
-
         int pageId = intent.getIntExtra(EXTRA_PAGE_ID, SettingsEnums.PAGE_UNKNOWN);
         if (pageId == SettingsEnums.PAGE_UNKNOWN) {
             return;

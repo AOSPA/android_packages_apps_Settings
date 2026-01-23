@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2025 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="spatial_audio_screen_preconditions" translatable="false">The device must have a spatializer.</string>
+    <string name="spatial_audio_screen_hardware_unsupported" translatable="false">The spatialization is not enabled.</string>
+    <string name="gesture_settings_screen_preconditions" translatable="false">The device must have an available gesture controller.</string>
+    <string name="gesture_settings_screen_all_controllers_not_available" translatable="false">The device has no available gesture controllers.</string>
+    <string name="double_twist_gesture_screen_preconditions" translatable="false">The device must have a Double Twist sensor.</string>
+    <string name="double_twist_gesture_screen_hardware_unsupported" translatable="false">This device does not support the Double Twist sensor.</string>
+    <string name="double_twist_gesture_screen_set_preconditions" translatable="false">The set API needs UserManager to be available.</string>
+    <string name="double_twist_gesture_screen_usermanager_not_available" translatable="false">UserManager is null.</string>
+    <string name="gesture_swipe_down_fingerprint_screen_preconditions" translatable="false">The device must have the fingerprint hardware.</string>
+    <string name="gesture_swipe_down_fingerprint_screen_hardware_unsupported" translatable="false">This device does not support the fingerprint hardware.</string>
+    <string name="device_admin_settings_screen_preconditions" translatable="false">Allow to show the device admin settings screen.</string>
+    <string name="device_admin_settings_screen_not_available" translatable="false">The config of the device admin settings is not available.</string>
+    <string name="battery_info_screen_preconditions" translatable="false">The battery settings provider must provide the battery information feature.</string>
+    <string name="battery_info_screen_battery_information_feature_disabled" translatable="false">The battery information feature is not enabled.</string>
+    <string name="sound_work_screen_preconditions" translatable="false">The device must have a work profile and must not use a single volume for all audio streams.</string>
+    <string name="sound_work_screen_not_supported" translatable="false">The work profile is not supported on this device.</string>
+</resources>

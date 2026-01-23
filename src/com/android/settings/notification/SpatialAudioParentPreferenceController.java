@@ -27,6 +27,7 @@ import com.android.settings.core.BasePreferenceController;
 /**
  * Parent menu summary of the Spatial audio settings
  */
+// LINT.IfChange
 public class SpatialAudioParentPreferenceController extends BasePreferenceController {
     private static final String TAG = "SpatialAudioSetting";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -75,3 +76,4 @@ public class SpatialAudioParentPreferenceController extends BasePreferenceContro
         }
     }
 }
+// LINT.ThenChange(SpatialAudioApiScreen.kt)

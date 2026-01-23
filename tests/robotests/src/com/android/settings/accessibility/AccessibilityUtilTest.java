@@ -37,6 +37,7 @@ import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutT
 import com.android.server.accessibility.Flags;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowInputDevice;
+import com.android.settings.utils.LocaleUtils;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -47,6 +48,8 @@ import org.robolectric.annotation.Config;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 @Config(shadows = ShadowInputDevice.class)
@@ -149,6 +152,40 @@ public final class AccessibilityUtilTest {
         assertThat(result.toString()).isEqualTo(summary.toString());
     }
 
+    @EnableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    public void getShortcutSummaryList_softwareAndKeyGestureShortcut_hasKeyboard_shouldReturnConcatenatedString() {
+        setHardwareKeyboard(true);
+        final CharSequence result = AccessibilityUtil.getShortcutSummaryList(mContext,
+                UserShortcutType.SOFTWARE | UserShortcutType.KEY_GESTURE);
+
+        assertThat(result.isEmpty()).isEqualTo(false);
+        final List<CharSequence> list = new ArrayList<>();
+        list.add(mContext.getText(R.string.accessibility_shortcut_keyboard_keyword));
+        list.add(mContext.getText(R.string.accessibility_shortcut_edit_summary_software));
+
+        list.sort(CharSequence::compare);
+        final CharSequence summary = CaseMap.toTitle().wholeString().noLowercase().apply(
+                Locale.getDefault(), /* iter= */
+                null, LocaleUtils.getConcatenatedString(list));
+        assertThat(result.toString()).isEqualTo(summary.toString());
+    }
+
+    @EnableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    public void getShortcutSummaryList_softwareAndKeyGestureShortcut_noKeyboard_shouldReturnSoftwareString() {
+        setHardwareKeyboard(false);
+        final CharSequence result = AccessibilityUtil.getShortcutSummaryList(mContext,
+                UserShortcutType.SOFTWARE | UserShortcutType.KEY_GESTURE);
+
+        assertThat(result.isEmpty()).isEqualTo(false);
+        final CharSequence summary = CaseMap.toTitle().wholeString().noLowercase().apply(
+                Locale.getDefault(),
+                /* iter= */ null,
+                mContext.getText(R.string.accessibility_shortcut_edit_summary_software));
+        assertThat(result.toString()).isEqualTo(summary.toString());
+    }
+
     @Test
     public void getShortcutSummaryList_softwareShortcut_shouldReturnNonEmptyString() {
         final CharSequence result = AccessibilityUtil.getShortcutSummaryList(mContext,
@@ -193,6 +230,62 @@ public final class AccessibilityUtilTest {
 
         assertThat(AccessibilityUtil.getAccessibilityServiceFragmentType(info)).isEqualTo(
                 AccessibilityUtil.AccessibilityServiceFragmentType.TOGGLE);
+    }
+
+    @DisableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    public void isKeyboardShortcutSettingAvailable_noKeyboardFlagOff_returnsFalse() {
+        setHardwareKeyboard(false);
+        assertThat(AccessibilityUtil.isKeyboardShortcutSettingAvailable()).isFalse();
+    }
+
+    @DisableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    public void isKeyboardShortcutSettingAvailable_hasKeyboardFlagOff_returnsFalse() {
+        setHardwareKeyboard(true);
+        assertThat(AccessibilityUtil.isKeyboardShortcutSettingAvailable()).isFalse();
+    }
+
+    @EnableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    public void isKeyboardShortcutSettingAvailable_noKeyboardFlagOn_returnsFalse() {
+        setHardwareKeyboard(false);
+        assertThat(AccessibilityUtil.isKeyboardShortcutSettingAvailable()).isFalse();
+    }
+
+    @EnableFlags(Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
+    @Test
+    public void isKeyboardShortcutSettingAvailable_hasKeyboardFlagOn_returnsTrue() {
+        setHardwareKeyboard(true);
+        assertThat(AccessibilityUtil.isKeyboardShortcutSettingAvailable()).isTrue();
+    }
+
+    @Test
+    public void removeTypeFromShortcutTypes_defaultShortcut() {
+        assertThat(AccessibilityUtil.removeTypeFromShortcutTypes(UserShortcutType.DEFAULT,
+                UserShortcutType.KEY_GESTURE))
+                .isEqualTo(UserShortcutType.DEFAULT);
+    }
+
+    @Test
+    public void removeTypeFromShortcutTypes_defaultAndKeyboardShortcut() {
+        assertThat(AccessibilityUtil.removeTypeFromShortcutTypes(UserShortcutType.DEFAULT
+                | UserShortcutType.KEY_GESTURE, UserShortcutType.KEY_GESTURE))
+                .isEqualTo(UserShortcutType.DEFAULT);
+    }
+
+    @Test
+    public void removeTypeFromShortcutTypes_keyboardShortcut() {
+        assertThat(AccessibilityUtil.removeTypeFromShortcutTypes(
+                UserShortcutType.KEY_GESTURE, UserShortcutType.KEY_GESTURE))
+                .isEqualTo(UserShortcutType.DEFAULT);
+    }
+
+    @Test
+    public void removeTypeFromShortcutTypes_softwareAndKeyboardShortcut() {
+        assertThat(AccessibilityUtil.removeTypeFromShortcutTypes(UserShortcutType.SOFTWARE
+                | UserShortcutType.KEY_GESTURE, UserShortcutType.KEY_GESTURE))
+                .isEqualTo(UserShortcutType.SOFTWARE);
     }
 
     private AccessibilityServiceInfo getMockAccessibilityServiceInfo() {

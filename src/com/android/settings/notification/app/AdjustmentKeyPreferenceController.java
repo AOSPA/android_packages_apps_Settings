@@ -56,18 +56,8 @@ public class AdjustmentKeyPreferenceController extends
     }
 
     static boolean isAvailable(String key, NotificationBackend backend, String pkg, int uid) {
-        if (!(Flags.notificationClassificationUi() || Flags.nmSummarizationUi()
-                || Flags.nmSummarization())) {
-            return false;
-        }
         boolean isBundlePref = Adjustment.KEY_TYPE.equals(key);
         boolean isSummarizePref = Adjustment.KEY_SUMMARIZATION.equals(key);
-        if (!Flags.notificationClassificationUi() && isBundlePref) {
-            return false;
-        }
-        if (!(Flags.nmSummarizationUi() || Flags.nmSummarization()) && isSummarizePref) {
-            return false;
-        }
         if (!isSummarizePref && !isBundlePref) {
             return false;
         }

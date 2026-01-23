@@ -24,6 +24,7 @@ import android.util.Log
 import androidx.fragment.app.viewModels
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.dashboard.DashboardFragment
+import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.getOrGenerateSessionId
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFactory
 import com.android.settingslib.core.AbstractPreferenceController
@@ -72,6 +73,7 @@ abstract class SafetyCenterSubpageFragment : DashboardFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        configureInteractionLogger()
 
         val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
         for (controller in allControllers) {
@@ -91,6 +93,25 @@ abstract class SafetyCenterSubpageFragment : DashboardFragment() {
                 SafetyCenterSubpageRegistry.getIssuesBannerGroupPrefKey(subpageKey)!!,
             )
         )
+
+    override fun onResume() {
+        super.onResume()
+        logSafetyCenterViewedEvent()
+    }
+
+    private fun configureInteractionLogger() {
+        viewModel.interactionLogger.apply {
+            sessionId = getOrGenerateSessionId(arguments ?: Bundle())
+            viewType = ViewType.SUBPAGE
+            navigationSource =
+                NavigationSource.fromIntentOrArguments(requireActivity().intent, arguments)
+            subpageId = this@SafetyCenterSubpageFragment.subpageKey
+        }
+    }
+
+    private fun logSafetyCenterViewedEvent() {
+        viewModel.interactionLogger.record(Action.SAFETY_CENTER_VIEWED)
+    }
 
     private fun setupSafetyIssuesPreferenceController(
         safetyIssuesPreferenceController: SafetyIssuesPreferenceController

@@ -28,6 +28,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settings.supervision.shared.SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.drawer.DashboardCategory
@@ -164,7 +165,7 @@ class SupervisionDashboardLoadingActivityTest {
     fun enableSupervisionApp_noSupervisionComponent_startInstallActivity() =
         testScope.runTest {
             val activityComponentName = ComponentName(testSupervisionPackage, "FakeClassName")
-            val intentFilter = IntentFilter(SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION)
+            val intentFilter = IntentFilter(INSTALL_SUPERVISION_APP_ACTION)
 
             shadowPackageManager.addActivityIfNotPresent(activityComponentName)
             shadowPackageManager.addIntentFilterForActivity(activityComponentName, intentFilter)
@@ -175,8 +176,7 @@ class SupervisionDashboardLoadingActivityTest {
 
             activityScenario.onActivity { activity ->
                 val nextActivity = shadowOf(activity).nextStartedActivity
-                assertThat(nextActivity.action)
-                    .isEqualTo(SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION)
+                assertThat(nextActivity.action).isEqualTo(INSTALL_SUPERVISION_APP_ACTION)
                 assertThat(activity.isFinishing).isTrue()
             }
         }
