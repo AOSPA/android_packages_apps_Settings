@@ -60,17 +60,15 @@ object SatelliteUtils {
     /**
      * Returns true if Carrier Roaming NTN is supported for the carrier.
      *
-     * This checks if satellite attach is supported by carrier config and there are no attach
-     * restrictions. It does NOT check the connection type (LTE vs NB-IoT).
+     * This checks if satellite attach is supported by carrier config. It does NOT check the
+     * connection type (LTE vs NB-IoT).
+     *
+     * "Support" is defined as inherent capability REGARDLESS of current availability or status.
+     *
+     * @param context The context to use for fetching carrier config.
+     * @param activeSubId The active subscription ID to check carrier support for.
      */
     fun isCarrierRoamingNtnSupported(context: Context, activeSubId: Int): Boolean {
-        val satelliteManager: SatelliteManager? =
-            context.getSystemService(SatelliteManager::class.java)
-        if (satelliteManager == null) {
-            Log.w(TAG, "SatelliteManager is null")
-            return false
-        }
-
         if (activeSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.w(TAG, "ActiveSubId is invalid")
             return false
@@ -79,24 +77,40 @@ object SatelliteUtils {
         val configBundle = fetchCarrierConfigData(context, activeSubId)
         val isSatelliteAttachSupported =
             configBundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)
-        val hasNoAttachRestrictionReasons =
-            satelliteManager.getAttachRestrictionReasonsForCarrier(activeSubId).isEmpty()
 
         Log.d(
             TAG,
-            "isCarrierRoamingNtnSupported: isSatelliteAttachSupported: $isSatelliteAttachSupported, hasNoAttachRestrictionReasons: $hasNoAttachRestrictionReasons",
+            "isCarrierRoamingNtnSupported: isSatelliteAttachSupported: $isSatelliteAttachSupported",
         )
-        return isSatelliteAttachSupported && hasNoAttachRestrictionReasons
+        return isSatelliteAttachSupported
     }
 
     /**
      * Returns true if LTE-based NTN is supported for the carrier.
      *
-     * If the attach restriction reasons are empty and Satellite Attach is supported in the carrier
-     * config, it means that LTE-based NTN is supported.
+     * If carrier roaming NTN is supported by carrier, attach restriction reasons are empty and
+     * carrier roaming NTN connect type is automatic, it means that LTE-based NTN is supported.
      */
     fun isLteBasedNtnSupportedByCarrier(context: Context, activeSubId: Int): Boolean {
         if (!isCarrierRoamingNtnSupported(context, activeSubId)) {
+            return false
+        }
+
+        val satelliteManager: SatelliteManager =
+            context.getSystemService(SatelliteManager::class.java) ?: return false
+        try {
+            val attachRestrictionReasons =
+                satelliteManager.getAttachRestrictionReasonsForCarrier(activeSubId)
+            if (attachRestrictionReasons.isNotEmpty()) {
+                Log.d(
+                    TAG,
+                    "isLteBasedNtnSupportedByCarrier: Attach restriction reasons are not empty: $attachRestrictionReasons",
+                )
+                return false
+            }
+        } catch (e: Exception) {
+            // Log the exception and assume not supported/available to prevent crashes
+            Log.e(TAG, "Error checking attach restriction reasons", e)
             return false
         }
 
@@ -111,7 +125,7 @@ object SatelliteUtils {
                 /* default= */ CARRIER_ROAMING_NTN_CONNECT_MANUAL,
             ) != CARRIER_ROAMING_NTN_CONNECT_MANUAL
 
-        Log.d(TAG, "isLteBasedNtnSupported: $isCarrierRoamingNtnConnectTypeAutomatic")
+        Log.d(TAG, "isLteBasedNtnSupportedByCarrier: $isCarrierRoamingNtnConnectTypeAutomatic")
         return isCarrierRoamingNtnConnectTypeAutomatic
     }
 
