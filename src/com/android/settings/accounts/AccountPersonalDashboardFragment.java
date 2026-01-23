@@ -28,9 +28,13 @@ import android.credentials.CredentialManager;
 import com.android.settings.R;
 import com.android.settings.applications.autofill.PasswordsPreferenceController;
 import com.android.settings.applications.credentials.CredentialManagerPreferenceController;
+import com.android.settings.applications.credentials.DefaultCombinedPreferenceController;
+import com.android.settings.applications.credentials.DefaultPrivateCombinedPreferenceController;
+import com.android.settings.applications.credentials.DefaultWorkCombinedPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.flags.Flags;
+import com.android.settings.metrics.CredmanMetricsLogger;
 import com.android.settings.users.AutoSyncDataPreferenceController;
 import com.android.settings.users.AutoSyncPersonalDataPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -69,6 +73,15 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if (CredentialManager.isServiceEnabled(context)) {
+            CredmanMetricsLogger credmanMetricsLogger = new CredmanMetricsLogger(context,
+                    getSettingsLifecycle());
+            use(DefaultCombinedPreferenceController.class).setCredmanMetricsLogger(
+                    credmanMetricsLogger);
+            use(DefaultPrivateCombinedPreferenceController.class).setCredmanMetricsLogger(
+                    credmanMetricsLogger);
+            use(DefaultWorkCombinedPreferenceController.class).setCredmanMetricsLogger(
+                    credmanMetricsLogger);
+
             CredentialManagerPreferenceController cmpp =
                     use(CredentialManagerPreferenceController.class);
             CredentialManagerPreferenceController.Delegate delegate =

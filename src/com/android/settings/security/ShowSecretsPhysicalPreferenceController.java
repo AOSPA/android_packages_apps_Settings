@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2025 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.android.settings.security;
 
 import android.app.compat.CompatChanges;
 import android.content.Context;
-import android.provider.Settings;
+import android.os.Process;
 import android.text.ShowSecretsSetting;
 
 import androidx.annotation.VisibleForTesting;
@@ -27,34 +27,35 @@ import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.text.flags.Flags;
 
-public class ShowPasswordPreferenceController extends TogglePreferenceController {
+public class ShowSecretsPhysicalPreferenceController extends TogglePreferenceController {
 
-    private static final String KEY_SHOW_PASSWORD = "show_password";
+    private static final String KEY_SHOW_SECRETS_PHYSICAL = "show_secrets_physical";
 
-    public ShowPasswordPreferenceController(Context context) {
-        super(context, KEY_SHOW_PASSWORD);
+    public ShowSecretsPhysicalPreferenceController(Context context) {
+        super(context, KEY_SHOW_SECRETS_PHYSICAL);
     }
 
     @Override
     public boolean isChecked() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.TEXT_SHOW_PASSWORD, 1) != 0;
+        return ShowSecretsSetting.shouldShowPhysicalInputForUser(
+                mContext.getContentResolver(), Process.myUserHandle());
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        Settings.System.putInt(mContext.getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
-                isChecked ? 1 : 0);
+        ShowSecretsSetting.setShouldShowPhysicalInputForUser(
+                mContext.getContentResolver(), isChecked, Process.myUserHandle());
         return true;
     }
 
     @Override
     public int getAvailabilityStatus() {
-        if (areSplitSettingsEnabled()) {
+        if (!areSplitSettingsEnabled()) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        return mContext.getResources().getBoolean(R.bool.config_show_show_password)
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return mContext.getResources().getBoolean(R.bool.config_show_show_secrets_physical)
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @VisibleForTesting

@@ -33,6 +33,8 @@ import com.android.settings.accessibility.colorcorrection.ui.ColorCorrectionScre
 import com.android.settings.accessibility.colorinversion.ui.ColorInversionScreen
 import com.android.settings.accessibility.extradim.ui.ExtraDimScreen
 import com.android.settings.accessibility.flashnotifications.ui.FlashNotificationsScreen
+import com.android.settings.accessibility.hearingdevices.ui.HearingDevicesScreen
+import com.android.settings.accessibility.hearingdevices.ui.PairHearingDeviceScreen
 import com.android.settings.accessibility.textreading.ui.TextReadingScreen
 import com.android.settings.accounts.AccountScreen
 import com.android.settings.accounts.ManagedProfileApiScreen
@@ -132,6 +134,7 @@ import com.android.settings.security.InstallCertificateFromStorageScreenApi
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.security.trustagent.TrustAgentApiScreen
 import com.android.settings.sound.MediaControlsScreen
+import com.android.settings.spa.app.appcompat.UserAspectRatioAppsApiScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
@@ -376,7 +379,8 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = DoubleTapPowerScreen.KEY),
-        //        PerScreenCatalystConfig(enabled = true, screenKey = HearingDevicesScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = HearingDevicesScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = PairHearingDeviceScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AppInfoScreen.KEY),
         //        PerScreenCatalystConfig(enabled = true, screenKey = MagnificationScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = MediaControlsScreen.KEY),
@@ -502,6 +506,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = AccountSecuritySubpageScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = TrustedCredentialsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UserCredentialsScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = UserAspectRatioAppsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CredentialManagementAppScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = EncryptionAndCredentialScreenApi.KEY),
         PerScreenCatalystConfig(
