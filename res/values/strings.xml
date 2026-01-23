@@ -15456,6 +15456,18 @@
     <string name="user_settings_edit_name_precondition" translatable="false">Only full users who are not guests can modify their user name.</string>
     <string name="user_settings_edit_name_restricted" translatable="false">Modifying user name is not allowed for this user.</string>
     <!-- User settings screen end -->
+    <!-- User details settings screen start -->
+    <string name="user_details_settings_user_name_description" translatable="false">All users that can have details page.</string>
+    <string name="user_details_settings_precondition" translatable="false">Opening user details page is available only if multiuser feature is enabled.</string>
+    <string name="user_details_settings_unsupported" translatable="false">This device does not support multiuser feature.</string>
+    <string name="user_details_settings_for_self_unavailable" translatable="false">Opening user details page for yourself is not supported on this device.</string>
+    <string name="user_details_enable_calling_precondition" translatable="false">Requires that the device supports telephony, the requesting user is admin and selected user is not an owner or restricted user.</string>
+    <string name="user_details_enable_calling_unsupported" translatable="false">This device does not support telephony.</string>
+    <string name="user_details_setting_unavailable_user_not_admin" translatable="false">Only an admin user can change this setting.</string>
+    <string name="user_details_setting_unavailable_for_selected_user" translatable="false">This setting is unavailable for selected user.</string>
+    <string name="user_details_grant_admin_precondition" translatable="false">Admins can change admin status of other full users who are not guests or owner users if the device supports multiple admins and no relevant restrictions are enforced.</string>
+    <string name="user_details_grant_admin_unsupported" translatable="false">This device does not support multiple admins.</string>
+    <!-- User details settings screen end -->
 
     <!-- Enable WebApp Minter -->
     <string name="enable_webapp_minter_title">Enable Web App Installer Service</string>

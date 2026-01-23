@@ -23,9 +23,7 @@ import android.Manifest.permission.QUERY_USERS
 import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.os.Bundle
-import android.os.SystemProperties
 import android.os.UserManager
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
@@ -39,6 +37,7 @@ import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settings.testutils.shadow.ShadowUserManager
 import com.android.settings.testutils.shadow.ShadowUtils
 import com.android.settings.testutils2.ApiTester
+import com.android.settings.testutils2.HardwareUnsupportedException
 import com.android.settings.testutils2.MissingPermissionException
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.google.common.truth.Truth.assertThat
@@ -73,14 +72,6 @@ class UserSettingsScreenApiTest {
         shadowUserManager.setSupportsMultipleUsers(true)
     }
 
-    fun supportsMultipleUsers(): Boolean {
-        return (UserManager.getMaxSwitchableUsers() > 1 &&
-            SystemProperties.getBoolean(
-                "fw.show_multiuserui",
-                Resources.getSystem().getBoolean(R.bool.config_enableMultiUserUI),
-            ))
-    }
-
     @Test
     @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun getScreen_isNotNull() {
@@ -91,6 +82,16 @@ class UserSettingsScreenApiTest {
     @DisableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun getScreen_flagDisabled_isNull() {
         assertThat(tester.getScreen()).isNull()
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getLaunchIntent_settingUnavailable_fails() {
+        ShadowUtils.setIsUserAMonkey(true)
+        shadowUserManager.setSupportsMultipleUsers(false)
+
+        val failure = assertFailsWith<HardwareUnsupportedException> { tester.getLaunchIntent() }
+        assertThat(failure.reason).isEqualTo("This device does not support multiuser feature.")
     }
 
     @Test
