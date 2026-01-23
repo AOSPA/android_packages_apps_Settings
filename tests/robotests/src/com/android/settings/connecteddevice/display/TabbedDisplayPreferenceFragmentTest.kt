@@ -299,9 +299,7 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     }
 
     @Test
-    fun setupAppBarLayout_onMouseScroll_propagatesEventWithClampedY() {
-        // Verifies that a mouse scroll event is propagated to the container below the app bar.
-        // Also verifies that the Y coordinate of the event is clamped to the container's height.
+    fun setupAppBarLayout_onMouseScroll_propagatesEvent() {
         val containerSpy = fragment.selectedDisplayPrefContainer
         val containerHeight = 100
         whenever(containerSpy.height).thenReturn(containerHeight)
@@ -322,8 +320,8 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         assertThat(result).isTrue()
         verify(containerSpy).dispatchGenericMotionEvent(motionEventCaptor.capture())
         val capturedEvent = motionEventCaptor.value
-        // Expected Y is min(150f, 100 - 1) = 99f. The event is offset to have this new Y.
-        assertThat(capturedEvent.y).isEqualTo(99f)
+        // Expected Y is containerHeight / 2.
+        assertThat(capturedEvent.y).isEqualTo(50.0f)
         motionEvent.recycle()
     }
 
@@ -376,7 +374,7 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
             /* oldLeft= */ 0,
             /* oldTop= */ 0,
             /* oldRight= */ 0,
-            /* oldBottom= */ 0
+            /* oldBottom= */ 0,
         )
 
         // Verify the padding state was set correctly
@@ -535,7 +533,7 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
 
     class FakeDisplayTopologyPreferenceView(
         injector: ConnectedDisplayInjector,
-        initialSelectedDisplayId: Int? = null
+        initialSelectedDisplayId: Int? = null,
     ) : DisplayTopologyPreferenceView(injector, initialSelectedDisplayId) {
 
         var selectedListener: DisplayTopologyPreferenceController.OnDisplayBlockSelectedListener? =
