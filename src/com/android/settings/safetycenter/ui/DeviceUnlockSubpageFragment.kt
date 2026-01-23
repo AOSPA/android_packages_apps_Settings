@@ -23,6 +23,7 @@ import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.search.SearchIndexable
 import com.android.settingslib.search.SearchIndexableRaw
 
+// LINT.IfChange
 /** Fragment for displaying device unlock subpage within the Safety Center in Settings. */
 @SearchIndexable
 class DeviceUnlockSubpageFragment : SafetyCenterSubpageFragment() {
@@ -59,3 +60,4 @@ class DeviceUnlockSubpageFragment : SafetyCenterSubpageFragment() {
             }
     }
 }
+// LINT.ThenChange(DeviceUnlockApiScreen.kt)
