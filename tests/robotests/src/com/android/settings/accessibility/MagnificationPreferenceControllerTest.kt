@@ -112,7 +112,6 @@ class MagnificationPreferenceControllerTest {
     }
 
     @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
-    @EnableFlags(com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
     @Test
     fun getSummary_keyGestureShortcut_returnShortcutOffWithSummary() {
         shadowAccessibilityManager.setAccessibilityShortcutTargets(
