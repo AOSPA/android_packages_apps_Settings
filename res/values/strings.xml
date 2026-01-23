@@ -11204,12 +11204,12 @@
 
     <!-- The title used in USB Preferences which provides the user with control over this
          device's Data Access Protection Settings -->
-    <string name="usb_pci_tunnel_title">Data Access Protection</string>
+    <string name="usb_pci_tunnel_title">Data access protection</string>
     <!-- The option in USB Preferences for enabling PCI tunneling. -->
-    <string name="usb_pci_tunnel_control">Allow PCI Tunneling</string>
+    <string name="usb_pci_tunnel_control">PCI tunneling</string>
     <!-- The summary text that appears when the user enables the 'Allow PCI Tunneling' option.
          [CHAR LIMIT=NONE] -->
-    <string name="usb_pci_tunnel_control_summary">When enabled, USB and Thunderbolt peripherals can create PCI tunnels and access system memory</string>
+    <string name="usb_pci_tunnel_control_summary">Allow USB and Thunderbolt devices to access system memory directly for maximum hardware speeds.\n\nNote: This poses a security risk, so only connect devices you trust.</string>
     <!-- The summary text that appears when 'Allow PCI Tunneling' is disabled because the current user is not an admin user.
          [CHAR LIMIT=NONE] -->
     <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary">Must be admin user to modify this setting</string>
