@@ -72,3 +72,10 @@ flag {
     description: "Controls whether to hide parental control setting in demo mode."
     bug: "447029270"
 }
+
+flag {
+    name: "show_detailed_fingerprint_sensor_location"
+    namespace: "android_settings"
+    description: "Controls whether to show detailed fingerprint sensor location instructions to user during fingerprint enrollment process in SetupWizard on Desktop devices"
+    bug: "459527436"
+}
