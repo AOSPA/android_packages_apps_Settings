@@ -19,6 +19,7 @@ package com.android.settings.network.telephony.satellite.quicksettings
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.telephony.satellite.SatelliteManager
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -47,7 +48,7 @@ class SatelliteLandingPageViewModel(
     private val context: Context,
     private val appsRepository: SatelliteAppsRepository,
     private val packageManager: PackageManager,
-    satelliteStateRepository: SatelliteStateRepository,
+    private val satelliteStateRepository: SatelliteStateRepository,
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : ViewModel() {
 
@@ -117,17 +118,68 @@ class SatelliteLandingPageViewModel(
 
             loadSatelliteAppItems(isLteSupported, isCarrierSupported)
 
-            updateBannerState()
+            updateBannerState(subId)
         }
     }
 
-    /**
-     * Updates the state flow for banners.
-     *
-     * TODO(b/465479769): Implement actual checks for [SatelliteBannerState].
-     */
-    fun updateBannerState() {
-        _bannerState.value = SatelliteBannerState()
+    /** Updates the state flow for banners. */
+    private suspend fun updateBannerState(subId: Int) {
+        val isTerrestrialNetworkConnected = satelliteStateRepository.isTerrestrialConnected.value
+        val isSatelliteEnabledByCarrier =
+            SatelliteUtils.isCarrierRoamingNtnSupported(context, subId)
+
+        val isLteSupported = isLteBasedNtnSupported.value
+        val isSatelliteAvailableInRegion: Boolean
+        val isEntitled: Boolean
+        val isLocationEnabled: Boolean
+        val isProvisioned: Boolean
+        val isDefaultMessagingApp: Boolean
+
+        if (isLteSupported == true) {
+            // Branch A: LTE Mode
+            val restrictions = satelliteStateRepository.getAttachRestrictionReasons(subId)
+            isSatelliteAvailableInRegion =
+                !restrictions.contains(
+                    SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_GEOLOCATION
+                )
+            isEntitled =
+                !restrictions.contains(
+                    SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_ENTITLEMENT
+                )
+            // Not tracked by attach restrictions
+            isLocationEnabled = true
+            isProvisioned = true
+            isDefaultMessagingApp = true
+        } else {
+            // Branch B: NB-IoT Mode
+            val reasons = satelliteStateRepository.satelliteDisallowedReasons.value
+            isSatelliteAvailableInRegion =
+                !reasons.contains(
+                    SatelliteManager.SATELLITE_DISALLOWED_REASON_NOT_IN_ALLOWED_REGION
+                )
+            isLocationEnabled =
+                !reasons.contains(SatelliteManager.SATELLITE_DISALLOWED_REASON_LOCATION_DISABLED)
+            isProvisioned =
+                !reasons.contains(SatelliteManager.SATELLITE_DISALLOWED_REASON_NOT_PROVISIONED)
+            isDefaultMessagingApp =
+                !reasons.contains(
+                    SatelliteManager.SATELLITE_DISALLOWED_REASON_UNSUPPORTED_DEFAULT_MSG_APP
+                )
+            // Entitlement is not a disallowed reason in NB-IoT mode yet/handled differently
+            isEntitled = true
+        }
+
+        _bannerState.value =
+            SatelliteBannerState(
+                isNetworkConnected = isTerrestrialNetworkConnected,
+                isSatelliteAvailableInRegion = isSatelliteAvailableInRegion,
+                isEntitled = isEntitled,
+                isDefaultMessagingApp = isDefaultMessagingApp,
+                isSatelliteEnabledByCarrier = isSatelliteEnabledByCarrier,
+                isProvisioned = isProvisioned,
+                isLocationEnabled = isLocationEnabled,
+            )
+        Log.i(TAG, "Banner state: ${_bannerState.value}")
     }
 
     /**
@@ -234,5 +286,6 @@ data class SatelliteBannerState(
     val isEntitled: Boolean = true,
     val isDefaultMessagingApp: Boolean = true,
     val isSatelliteEnabledByCarrier: Boolean = false,
-    val isSatelliteAllowed: Boolean = true,
+    val isProvisioned: Boolean = true,
+    val isLocationEnabled: Boolean = true,
 )

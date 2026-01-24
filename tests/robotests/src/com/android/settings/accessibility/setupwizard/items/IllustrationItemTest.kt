@@ -29,22 +29,26 @@ import android.view.View
 import androidx.test.core.app.ApplicationProvider
 import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
+import com.android.settings.accessibility.setupwizard.clearPartnerConfigCache
 import com.android.settings.accessibility.setupwizard.items.IllustrationItem.OnBindListener
 import com.android.settings.accessibility.setupwizard.setupMockLottieAnimationView
+import com.android.settings.accessibility.setupwizard.setupPartnerConfigMock
 import com.android.settingslib.widget.preference.illustration.R as IllustrationR
+import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper
 import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
 import java.io.ByteArrayInputStream
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.clearInvocations
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
-import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestParameterInjector
 
 /** Tests for [IllustrationItem]. */
@@ -314,19 +318,88 @@ class IllustrationItemTest {
     fun handleImageWithAnimation_verifyVisibility(resId: Int, data: List<Int>, expected: Int) {
         val illustrationView =
             rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
-        val res = spy(context.resources)
-        val spyView = spy(illustrationView)
-        val spyRootView = spy(rootView)
-        doReturn(ByteArrayInputStream(data.map { it.toByte() }.toByteArray()))
-            .whenever(res)
-            .openRawResource(resId)
-        doReturn(res).whenever(spyView).resources
-        doReturn(spyView).whenever(spyRootView).findViewById<View>(R.id.sud_item_illustration)
+        val spyRes =
+            spy(context.resources).stub {
+                on { openRawResource(resId) } doReturn
+                    ByteArrayInputStream(data.map { it.toByte() }.toByteArray())
+            }
+        val spyView = spy(illustrationView).stub { on { resources } doReturn spyRes }
+        val spyRootView =
+            spy(rootView).stub {
+                on { findViewById<View>(R.id.sud_item_illustration) } doReturn spyView
+            }
 
         illustrationItem.imageResId = resId
         illustrationItem.onBindView(spyRootView)
 
         assertThat(spyView.visibility).isEqualTo(expected)
+    }
+
+    @Test
+    fun handleImageWithAnimation_animatedIconEnabled_startsAnimationAfterDelay() {
+        val spyContext = spy(context)
+        try {
+            setupPartnerConfigMock(
+                spyContext,
+                PartnerConfigHelper.IS_ANIMATED_ICON_ENABLED,
+                enabled = true,
+            )
+            val mockDrawable = mock<AnimationDrawable>()
+            val illustrationView =
+                rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
+            val runnableCaptor = argumentCaptor<Runnable>()
+            val spyView =
+                spy(illustrationView).stub {
+                    on { context } doReturn spyContext
+                    on { drawable } doReturn mockDrawable
+                    on { postDelayed(runnableCaptor.capture(), any()) } doReturn true
+                }
+            val spyRootView =
+                spy(rootView).stub {
+                    on { findViewById<View>(R.id.sud_item_illustration) } doReturn spyView
+                }
+
+            illustrationItem.imageResId = R.raw.accessibility_color_inversion_banner
+            illustrationItem.onBindView(spyRootView)
+
+            verify(mockDrawable, never()).start()
+            verify(spyView).postDelayed(any(), any())
+            runnableCaptor.firstValue.run()
+            verify(mockDrawable).start()
+        } finally {
+            clearPartnerConfigCache()
+        }
+    }
+
+    @Test
+    fun handleImageWithAnimation_animatedIconDisabled_startsAnimationImmediately() {
+        val spyContext = spy(context)
+        try {
+            setupPartnerConfigMock(
+                spyContext,
+                PartnerConfigHelper.IS_ANIMATED_ICON_ENABLED,
+                enabled = false,
+            )
+            val mockDrawable = mock<AnimationDrawable>()
+            val illustrationView =
+                rootView.findViewById<LottieAnimationView>(R.id.sud_item_illustration)
+            val spyView =
+                spy(illustrationView).stub {
+                    on { context } doReturn spyContext
+                    on { drawable } doReturn mockDrawable
+                }
+            val spyRootView =
+                spy(rootView).stub {
+                    on { findViewById<View>(R.id.sud_item_illustration) } doReturn spyView
+                }
+
+            illustrationItem.imageResId = R.raw.accessibility_color_inversion_banner
+            illustrationItem.onBindView(spyRootView)
+
+            verify(mockDrawable).start()
+        } finally {
+            clearPartnerConfigCache()
+        }
     }
 
     /** Helper to verify that only one resource is active at a time. */

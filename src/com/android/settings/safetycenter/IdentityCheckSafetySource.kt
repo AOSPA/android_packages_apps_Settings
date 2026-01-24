@@ -134,10 +134,6 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                 sendNullData(context, safetyEvent)
                 return
             }
-            if (!Flags.identityCheckAllSurfaces()) {
-                sendNullData(context, safetyEvent)
-                return
-            }
             if (Flags.identityCheckWatch()) {
                 if (!isWatchRangingSupportedValueUpdated(context)) {
                     sendNullData(context, safetyEvent)

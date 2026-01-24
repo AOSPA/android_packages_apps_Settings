@@ -391,46 +391,7 @@ class SatelliteLandingPageFragmentTest {
     }
 
     @Test
-    fun updateWarningBanners_whenPrimaryBannerMissing_showsHighPriorityInSecondary() {
-        val scenario = launchFragment()
-
-        scenario.onFragment { fragment ->
-            // 1. Remove Primary Banner to simulate layout change/null
-            val primaryBanner =
-                fragment.findPreference<BannerMessagePreference>(KEY_PRIMARY_WARNING_BANNER)
-            fragment.preferenceScreen.removePreference(primaryBanner!!)
-            // 2. Set Banner State: Network Connected (Priority 1) and Unavailable in Region
-            // (Priority 2)
-            val viewModel = fragment.viewModel
-            val bannerStateFlow =
-                ReflectionHelpers.getField<MutableStateFlow<SatelliteBannerState>>(
-                    viewModel,
-                    "_bannerState",
-                )
-
-            bannerStateFlow.value =
-                SatelliteBannerState(
-                    isNetworkConnected = true,
-                    isSatelliteAvailableInRegion = false,
-                )
-        }
-        waitForAsync()
-
-        scenario.onFragment { fragment ->
-            val secondaryBanner =
-                fragment.findPreference<BannerMessagePreference>(KEY_SECONDARY_WARNING_BANNER)
-
-            // Verify Secondary Banner is Visible
-            assertThat(secondaryBanner?.isVisible).isTrue()
-            // Verify it shows Priority 1 Content (Network Connected)
-            val expectedSummary =
-                context.getString(R.string.satellite_network_connected_warning_summary)
-            assertThat(secondaryBanner?.summary).isEqualTo(expectedSummary)
-        }
-    }
-
-    @Test
-    fun updateWarningBanners_whenBothBannersAvailable_showsTopTwoPriorities() {
+    fun bannerState_updatesBannerController() {
         val scenario = launchFragment()
         scenario.onFragment { fragment ->
             val viewModel = fragment.viewModel
@@ -440,34 +401,18 @@ class SatelliteLandingPageFragmentTest {
                     "_bannerState",
                 )
 
-            // Priority 1: Network Connected
-            // Priority 2: Unavailable in Region
-            // Priority 3: Not Entitled
-            bannerStateFlow.value =
-                SatelliteBannerState(
-                    isNetworkConnected = true,
-                    isSatelliteAvailableInRegion = false,
-                    isEntitled = false,
-                )
+            // Trigger a state that should show a banner
+            bannerStateFlow.value = SatelliteBannerState(isNetworkConnected = true)
         }
         waitForAsync()
 
         scenario.onFragment { fragment ->
             val primaryBanner =
                 fragment.findPreference<BannerMessagePreference>(KEY_PRIMARY_WARNING_BANNER)
-            val secondaryBanner =
-                fragment.findPreference<BannerMessagePreference>(KEY_SECONDARY_WARNING_BANNER)
 
             assertThat(primaryBanner?.isVisible).isTrue()
-            assertThat(secondaryBanner?.isVisible).isTrue()
-            // Primary shows Priority 1
             assertThat(primaryBanner?.summary)
                 .isEqualTo(context.getString(R.string.satellite_network_connected_warning_summary))
-            // Secondary shows Priority 2
-            assertThat(secondaryBanner?.summary)
-                .isEqualTo(
-                    context.getString(R.string.satellite_unavailable_in_region_warning_summary)
-                )
         }
     }
 

@@ -25,6 +25,7 @@ import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -56,6 +57,7 @@ class SatelliteEligibilityJobServiceTest {
     @Mock private lateinit var mockTelephonyManager: TelephonyManager
     @Mock private lateinit var mockSatelliteTilePromptUtils: SatelliteTilePromptUtils
     @Mock private lateinit var mockServiceState: ServiceState
+    @Mock private lateinit var mockSatelliteStateRepository: SatelliteStateRepository
 
     private lateinit var service: SatelliteEligibilityJobService
     private lateinit var context: Context
@@ -63,6 +65,7 @@ class SatelliteEligibilityJobServiceTest {
     private lateinit var shadowJobScheduler: ShadowJobScheduler
     private val subId = 1
     private var jobId = 0
+    private val satelliteStatusFlow = MutableStateFlow(SatelliteStatus.NOT_AVAILABLE)
 
     @Before
     fun setUp() {
@@ -100,11 +103,16 @@ class SatelliteEligibilityJobServiceTest {
 
         // Default JobParameters
         `when`(mockJobParameters.jobId).thenReturn(jobId)
+
+        // Mock Repository
+        SatelliteStateRepository.setInstance(mockSatelliteStateRepository)
+        `when`(mockSatelliteStateRepository.satelliteStatus).thenReturn(satelliteStatusFlow)
     }
 
     @After
     fun tearDown() {
         SatelliteEligibilityJobService.satelliteTilePromptUtils = SatelliteTilePromptUtils()
+        SatelliteStateRepository.setInstance(null)
     }
 
     @Test
@@ -202,18 +210,15 @@ class SatelliteEligibilityJobServiceTest {
     }
 
     @Test
-    fun callback_onCarrierRoamingNtnEligibleStateChanged_true_showsPromptAndFinishesJob_reschedules() {
+    fun satelliteStatus_available_showsPromptAndFinishesJob_reschedules() {
         `when`(mockServiceState.state).thenReturn(ServiceState.STATE_OUT_OF_SERVICE)
         service.onStartJob(mockJobParameters)
         // Clear previous schedule call
         jobScheduler.cancel(jobId)
 
-        val callbackCaptor = ArgumentCaptor.forClass(TelephonyCallback::class.java)
-        verify(mockTelephonyManager).registerTelephonyCallback(any(), callbackCaptor.capture())
-        val callback = callbackCaptor.value as TelephonyCallback.CarrierRoamingNtnListener
-
-        // Trigger eligibility
-        callback.onCarrierRoamingNtnEligibleStateChanged(true)
+        // Trigger status available
+        satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
+        ShadowLooper.runUiThreadTasks()
 
         verify(mockSatelliteTilePromptUtils)
             .showSatelliteTileAvailableNotification(any(Context::class.java) ?: context)
@@ -223,17 +228,15 @@ class SatelliteEligibilityJobServiceTest {
     }
 
     @Test
-    fun callback_onCarrierRoamingNtnModeChanged_true_showsPromptAndFinishesJob_reschedules() {
+    fun satelliteStatus_active_showsPromptAndFinishesJob_reschedules() {
         `when`(mockServiceState.state).thenReturn(ServiceState.STATE_OUT_OF_SERVICE)
         service.onStartJob(mockJobParameters)
         // Clear previous schedule call
         jobScheduler.cancel(jobId)
-        val callbackCaptor = ArgumentCaptor.forClass(TelephonyCallback::class.java)
-        verify(mockTelephonyManager).registerTelephonyCallback(any(), callbackCaptor.capture())
-        val callback = callbackCaptor.value as TelephonyCallback.CarrierRoamingNtnListener
 
-        // Trigger mode active
-        callback.onCarrierRoamingNtnModeChanged(true)
+        // Trigger status active
+        satelliteStatusFlow.value = SatelliteStatus.ACTIVE
+        ShadowLooper.runUiThreadTasks()
 
         verify(mockSatelliteTilePromptUtils)
             .showSatelliteTileAvailableNotification(any(Context::class.java) ?: context)
@@ -249,8 +252,8 @@ class SatelliteEligibilityJobServiceTest {
         // Clear previous schedule call
         jobScheduler.cancel(jobId)
 
-        // Fast forward time
-        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
+        // Fast forward time to trigger timeout
+        ShadowLooper.idleMainLooper(10 * 60 * 1000L + 1000)
 
         verify(service).jobFinished(mockJobParameters, false)
         verify(mockTelephonyManager).unregisterTelephonyCallback(any<TelephonyCallback>())
