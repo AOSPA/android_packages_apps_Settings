@@ -36,6 +36,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.telephony.RILConstants;
 import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.network.AllowedNetworkTypesListener;
@@ -260,12 +261,25 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
             return true;
         }
 
+        if (!SubscriptionManager.isUsableSubscriptionId(mSubId)) {
+            return false;
+        }
+
         if (mTelephonyManager == null) {
             Log.w(LOG_TAG, "isChecked: Telephony manager not yet initialized");
             return false;
         }
         long currentlyAllowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
                 mTelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G);
+
+        // Check for corrupted network types and fix if necessary
+        if (currentlyAllowedNetworkTypes == 0) {
+            long defaultNetworkTypes = RadioAccessFamily.getRafFromNetworkType(
+                    RILConstants.PREFERRED_NETWORK_MODE);
+            mTelephonyManager.setAllowedNetworkTypesForReason(
+                    mTelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G, defaultNetworkTypes);
+            currentlyAllowedNetworkTypes = defaultNetworkTypes;
+        }
         return (currentlyAllowedNetworkTypes & BITMASK_2G) == 0;
     }
 

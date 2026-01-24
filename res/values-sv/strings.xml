@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"Visa HDR/SDR-förhållande"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"Visa aktuellt HDR/SDR-förhållande"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Enheten måste låsas upp för NFC"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"Kräv enhetsupplåsning"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Redo att överföra appinnehåll via NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Av"</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Av"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"Operatörs-id"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Typ av mobildatanätverk"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Typ av mobiltelefoninätverk"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Operatörsinfo"</string>
@@ -1704,7 +1702,7 @@
     <string name="restore_default_apn" msgid="6596048535642130689">"Återställer standardinställningar för APN."</string>
     <string name="menu_restore" msgid="4310539620115151551">"Återställ standardinst."</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Återställning av standardinställningar för APN har slutförts."</string>
-    <string name="reset_dashboard_title" msgid="7423200250697886918">"Återställningsalt."</string>
+    <string name="reset_dashboard_title" msgid="7423200250697886918">"Återställningsalternativ"</string>
     <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"Återställ mobilnätverksinställningar"</string>
     <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"Detta återställer alla mobilnätverksinställningar"</string>
     <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"Återställa mobilnätverksinställningar?"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Bekräfta pinkoden"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Bekräfta lösenordet"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Styrk vem du är"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Ange andra enhetens mönster och överför t.ex. Google-konton och inställningar. Mönstret krypteras."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Ange andra enhetens pinkod och överför t.ex. Google-konton och inställningar. Pinkoden krypteras."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Ange andra enhetens lösenord och överför t.ex. Google-konton och inställningar. Lösenordet krypteras."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"Använd samma mönster för att låsa upp den här enheten"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"Använd samma pinkod för att låsa upp den här enheten"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"Använd samma lösenord för att låsa upp den här enheten"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Bekräfta mönstret"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Bekräfta pinkoden"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Bekräfta lösenordet"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Snabbinställningar"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Svep nedåt från skärmens överkant}other{Svep nedåt med # fingrar från skärmens överkant}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Svep nedåt från skärmens överkant. Detta kortkommando blir tillgängligt när du har slutfört konfigureringen av enheten.}other{Svep nedåt med # fingrar från skärmens överkant. Detta kortkommando blir tillgängligt när du har slutfört konfigureringen av enheten.}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"Tangent på översta raden"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"Tryck på tillgänglighetstangenten på tangentbordets översta rad"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Snabbinställningar"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Volymknappar"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"volymknappar"</string>
@@ -3479,12 +3469,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Andra användare"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Radera gästaktivitet"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Radera alla appar och all data för gästen när gästläget avslutas"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"Tillåt att gäster använder enheten"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"Alla appar och all data för gästen raderas när gästläget avslutas"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"lägg till, gäst"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Vill du radera gästaktivitet?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Appar och data från den här gästsessionen raderas nu och i fortsättningen raderas all gästaktivitet när du avslutar gästläget"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"radera, gäst, aktivitet, ta bort, data, besökare, rensa"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Enhet"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"Tangentbord, styrplatta, skärm, ljud"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Inte tillgängligt eftersom NFC är inaktiverat"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Först behöver du installera en betalningsapp"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Senaste apparna, standardappar"</string>
@@ -3955,8 +3947,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Få snabba sammanfattningar av längre meddelanden"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Använd aviseringssammanfattningar"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Sammanfatta långa meddelanden och gruppkonversationer.\n\nSammanfattningar använder AI på enheten, vilket ibland kan leda till fel. Dina meddelanden skickas aldrig till Google."</string>
-    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
-    <skip />
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"Sammanfatta långa meddelanden och gruppkonversationer.\n\nSammanfattningar tillhandahålls av appar eller AI på enheten och kan innehålla fel. Dina meddelanden skickas aldrig till Google."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Aviseringar från dessa appar sammanfattas inte"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Hantera appar"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Hantera appar för aviseringssammanfattningar"</string>
@@ -4399,6 +4390,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Starta om"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Inte nu"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Läs mer om Avancerat minnesskydd."</string>
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Diagnostik för operativsystemet Android"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"Validera operativsystemversioner"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"diagnostik, insyn, binär"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Den här jobbprofilen hanteras av:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Hanteras av <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Öppna som standard"</string>
@@ -4445,12 +4439,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Ta bort behörigheter, radera tillfälliga filer och hindra aviseringar"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Hantera appen om den inte används"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Ta bort behörigheter, radera tillfälliga filer, hindra aviseringar och arkivera appen"</string>
-    <!-- no translation found for task_continuity_category (3736049711007817178) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
-    <skip />
+    <string name="task_continuity_category" msgid="3736049711007817178">"Kontinuitet i uppgifter"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"Appuppgifter"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"Fortsätt smidigt där du slutade på andra enheter"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Alla appar"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Installerade appar"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Snabbappar"</string>
@@ -4522,6 +4513,18 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Standardkonfiguration för USB"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Strömalternativ"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Alternativ för filöverföring"</string>
+    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
+    <skip />
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB-inställningar"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB styrs av"</string>
@@ -5691,20 +5694,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> kräver att 2G är tillgängligt"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Tillåt endast krypterade nätverk"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Detta är säkrare men kan begränsa din mobilnätverksanslutning på vissa platser. Nödsamtal tillåts alltid."</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Vill du inaktivera 2G-nätverksskydd?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"Nätverket för SIM-kortet från <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> har inte stöd för 2G. Om du inaktiverar 2G-skyddet kan du ansluta till skadliga förfalskade 2G-nätverk."</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Stäng av"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G-nätverksskydd"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G-nätverksskydd är aktiverat"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"Nätverket för SIM-kortet från <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> kräver att 2G-skydd är aktiverat. Du kan fortfarande välja att inaktivera 2G-skydd på egen risk."</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Inställningar"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alla tjänster"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Visa åtkomst till urklipp"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Visa ett meddelande när appar får åtkomst till text, bilder eller annat som du har kopierat"</string>
@@ -5800,6 +5796,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> av <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Appen startas om när du ändrar bildformatet. Du kan förlora ändringar som inte har sparats. Vissa appar kanske inte är optimerade för vissa bildformat."</string>
+    <string name="app_info_experience_category" msgid="6283332744508784886">"Erfarenhet"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Gamepad"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingeravtryckssensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Blinkande aviseringar"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Om blinkande aviseringar"</string>
@@ -6135,8 +6133,7 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Åtgärd slutförd"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Snabbinställningar för säkerhet och integritet"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Dina integritetsinställningar"</string>
-    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
-    <skip />
+    <string name="safety_center_review_settings" msgid="295527297192914772">"Granska inställningar"</string>
     <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Öppna"</string>
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Reglage. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"Blockerad"</string>
@@ -6166,6 +6163,15 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Få enkel åtkomst till satellitinformation genom att lägga till rutan Satellit i snabbinställningarna"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Lägg till en ruta"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Promptar för rutan Satellit"</string>
-    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
-    <skip />
+    <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satellit är inte tillgänglig"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"Satellittäckning är inte tillgänglig när du är ansluten till ett mobil- eller wifi-nätverk."</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"Satellitanslutning är inte tillgängligt i det här landet eller den här regionen."</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"Satellitanslutning är inte tillgängligt just nu. Försök igen senare."</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Satellittäckning ingår inte i ditt mobilabonnemang. Kontakta operatören och be om hjälp."</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Om du vill använda satellitmeddelanden måste Google Messages vara din standardapp för meddelanden."</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"Satellitanslutning har aktiverats av operatören. Läs mer i operatörens satellitinställningar."</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Visa tillgängliga platser"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Ändra standardapp"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"Visa operatörsinställningar"</string>
 </resources>

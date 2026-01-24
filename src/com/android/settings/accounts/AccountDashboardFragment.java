@@ -44,6 +44,7 @@ import com.android.settings.applications.defaultapps.DefaultWorkAutofillPreferen
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.flags.Flags;
+import com.android.settings.metrics.CredmanMetricsLogger;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.users.AutoSyncDataPreferenceController;
 import com.android.settings.users.AutoSyncPersonalDataPreferenceController;
@@ -85,17 +86,27 @@ public class AccountDashboardFragment extends DashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if (CredentialManager.isServiceEnabled(context)) {
+            CredmanMetricsLogger credmanMetricsLogger = new CredmanMetricsLogger(context,
+                    getSettingsLifecycle());
+            use(DefaultCombinedPreferenceController.class).setCredmanMetricsLogger(
+                    credmanMetricsLogger);
+            use(DefaultPrivateCombinedPreferenceController.class).setCredmanMetricsLogger(
+                    credmanMetricsLogger);
+            use(DefaultWorkCombinedPreferenceController.class).setCredmanMetricsLogger(
+                    credmanMetricsLogger);
+
             CredentialManagerPreferenceController cmpp =
                     use(CredentialManagerPreferenceController.class);
             CredentialManagerPreferenceController.Delegate delegate =
                     new CredentialManagerPreferenceController.Delegate() {
-                public void setActivityResult(int resultCode) {
-                    getActivity().setResult(resultCode);
-                }
-                public void forceDelegateRefresh() {
-                    forceUpdatePreferences();
-                }
-            };
+                        public void setActivityResult(int resultCode) {
+                            getActivity().setResult(resultCode);
+                        }
+
+                        public void forceDelegateRefresh() {
+                            forceUpdatePreferences();
+                        }
+                    };
             cmpp.init(this, getFragmentManager(), getIntent(), delegate,
                     /*isWorkProfile=*/false, /*isPrivateSpace=*/ false);
         } else {

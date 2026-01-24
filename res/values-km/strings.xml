@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"បង្ហាញសមាមាត្រ HDR/SDR"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"បង្ហាញសមាមាត្រ HDR/SDR បច្ចុប្បន្ន"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"តម្រូវ​ឱ្យ​ដោះសោ​ឧបករណ៍​សម្រាប់ NFC"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"តម្រូវឱ្យដោះសោឧបករណ៍"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android បញ្ជូន"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"រួចរាល់​ដើម្បី​បញ្ជូន​ខ្លឹមសារ​កម្មវិធី​តាម NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"បិទ"</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"បិទ"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"លេខកូដសម្គាល់ក្រុមហ៊ុនសេវាទូរសព្ទ"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"ប្រភេទ​បណ្តាញទិន្នន័យទូរសព្ទចល័ត"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"ប្រភេទ​បណ្តាញ​សំឡេងចល័ត"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"ព័ត៌មាន​​ប្រតិបត្តិ​ករ"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"ផ្ទៀងផ្ទាត់កូដ​PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"ផ្ទៀងផ្ទាត់​ពាក្យសម្ងាត់"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"ផ្ទៀងផ្ទាត់ថាជាអ្នក"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"បញ្ចូលលំនាំឧបករណ៍ផ្សេងទៀតរបស់អ្នក ដើម្បីផ្ទេរគណនី Google ការកំណត់ និងច្រើនទៀត។ លំនាំរបស់អ្នកត្រូវបានអ៊ីនគ្រីប។"</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"បញ្ចូលកូដ PIN ឧបករណ៍ផ្សេងទៀតរបស់អ្នក ដើម្បីផ្ទេរគណនី Google ការកំណត់ និងច្រើនទៀត។ កូដ PIN របស់អ្នកត្រូវបានអ៊ីនគ្រីប។"</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"បញ្ចូលពាក្យសម្ងាត់ឧបករណ៍ផ្សេងទៀតរបស់អ្នក ដើម្បីផ្ទេរគណនី Google ការកំណត់ និងច្រើនទៀត។ ពាក្យសម្ងាត់របស់អ្នកត្រូវបានអ៊ីនគ្រីប។"</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"ប្រើលំនាំដូចគ្នា ដើម្បីដោះសោឧបករណ៍នេះ"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"ប្រើកូដ PIN ដូចគ្នា ដើម្បីដោះសោឧបករណ៍នេះ"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"ប្រើពាក្យសម្ងាត់ដូចគ្នា ដើម្បីដោះសោឧបករណ៍នេះ"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"ផ្ទៀងផ្ទាត់​លំនាំ"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"ផ្ទៀងផ្ទាត់កូដ​PIN"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"ផ្ទៀងផ្ទាត់​ពាក្យសម្ងាត់"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"ការកំណត់រហ័ស"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{អូស​ពីផ្នែកខាងលើនៃ​អេក្រង់​របស់អ្នក​ចុះក្រោម}other{អូសពីផ្នែកខាងលើនៃអេក្រង់របស់អ្នកចុះក្រោមដោយប្រើម្រាមដៃ #}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{អូស​ពីផ្នែកខាងលើនៃ​អេក្រង់​របស់អ្នកចុះក្រោម។ អ្នកនឹងអាចប្រើផ្លូវកាត់នេះ បន្ទាប់ពីអ្នកបញ្ចប់ការរៀបចំឧបករណ៍។}other{អូសពីផ្នែកខាងលើនៃអេក្រង់របស់អ្នកចុះក្រោមដោយប្រើម្រាមដៃ #។ អ្នកនឹងអាចប្រើផ្លូវកាត់នេះ បន្ទាប់ពីអ្នកបញ្ចប់ការរៀបចំឧបករណ៍។}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"គ្រាប់ចុចនៅជួរដេកខាងលើគេ"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"ចុចគ្រាប់ចុចភាពងាយស្រួលនៅជួរដេកខាងលើគេនៃក្ដារចុច"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"ការកំណត់រហ័ស"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"គ្រាប់ចុច​កម្រិតសំឡេង"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"គ្រាប់ចុច​កម្រិតសំឡេង"</string>
@@ -3479,12 +3469,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"អ្នក​ប្រើ​ប្រាស់ផ្សេងទៀត"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"លុបសកម្មភាពភ្ញៀវ"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"លុបទិន្នន័យ និងកម្មវិធីភ្ញៀវទាំងអស់ នៅពេលចាកចេញពីមុខងារភ្ញៀវ"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"អនុញ្ញាតឱ្យភ្ញៀវប្រើឧបករណ៍"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"កម្មវិធី និងទិន្នន័យភ្ញៀវទាំងអស់នឹងត្រូវបានលុប នៅពេលចាកចេញពីមុខងារភ្ញៀវ"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"បញ្ចូល, ភ្ញៀវ"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"លុបសកម្មភាពភ្ញៀវឬ?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"កម្មវិធី និងទិន្នន័យពីវគ្គភ្ញៀវនេះនឹងត្រូវបានលុបឥឡូវនេះ ហើយសកម្មភាពភ្ញៀវនាពេលអនាគតទាំងអស់នឹងត្រូវបានលុប នៅរាល់ពេលដែលអ្នកចាកចេញពីមុខងារភ្ញៀវ"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"លុប, ភ្ញៀវ, សកម្មភាព, ដកចេញ, ទិន្នន័យ, អ្នកចូលមើល, លុបចេញ"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"ប៊្លូធូស, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"ប៊្លូធូស Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"ឧបករណ៍"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"ក្ដារចុច, ផ្ទាំងប៉ះ, ផ្ទាំងអេក្រង់, សំឡេង"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"មិនអាចប្រើបានទេ ដោយសារ NFC ត្រូវបានបិទ"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ដើម្បី​ប្រើ សូមដំឡើង​កម្មវិធី​បង់ប្រាក់​ជាមុនសិន"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"កម្មវិធី​ថ្មីៗ កម្មវិធីលំនាំដើម"</string>
@@ -3955,8 +3947,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"ទទួលបានការសង្ខេបខ្លីៗអំពីសារកាន់តែវែង"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"ប្រើការសង្ខេបការ​ជូនដំណឹង"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"សង្ខេបសារវែងៗ និងការសន្ទនាជាក្រុម ដើម្បីទទួលបានការសង្ខេបខ្លីៗ។\n\nការសង្ខេបប្រើ AI នៅលើឧបករណ៍របស់អ្នក ដែលជួនកាលអាចមានកំហុស។ សាររបស់អ្នកមិនត្រូវបានផ្ញើទៅ Google ទេ។"</string>
-    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
-    <skip />
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"សង្ខេបសារវែងៗ និងការសន្ទនាជាក្រុម ដើម្បីទទួលបានការសង្ខេបខ្លីៗ។\n\nការសង្ខេបត្រូវបានផ្ដល់ដោយកម្មវិធី ឬ AI នៅលើឧបករណ៍របស់អ្នក និងអាចមានកំហុស។ សាររបស់អ្នកពុំត្រូវបានផ្ញើទៅ Google ទេ។"</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"ការជូនដំណឹងពីកម្មវិធីទាំងនេះនឹងមិនត្រូវបានសង្ខេបទេ"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"គ្រប់គ្រង​កម្មវិធី"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"គ្រប់គ្រងកម្មវិធីសម្រាប់ការសង្ខេបការជូនដំណឹង"</string>
@@ -4399,6 +4390,12 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"ចាប់ផ្ដើម​ឡើង​វិញ"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"កុំទាន់"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"ស្វែងយល់បន្ថែមអំពីការការពារអង្គចងចាំកម្រិតខ្ពស់។"</string>
+    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
+    <skip />
+    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
+    <skip />
+    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"កម្រងព័ត៌មានការងារនេះត្រូវបានគ្រប់គ្រងដោយ៖"</string>
     <string name="managing_admin" msgid="2633920317425356619">"គ្រប់គ្រងដោយ <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"បើកតាមលំនាំដើម"</string>
@@ -4445,12 +4442,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"ដកការអនុញ្ញាតចេញ លុបឯកសារបណ្ដោះអាសន្ន និងបញ្ឈប់ការជូនដំណឹង"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"គ្រប់គ្រងកម្មវិធី ប្រសិនបើមិនបានប្រើ"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"ដកការអនុញ្ញាតចេញ លុបឯកសារបណ្ដោះអាសន្ន បញ្ឈប់ការជូនដំណឹង និងទុកកម្មវិធីក្នុងបណ្ណសារ"</string>
-    <!-- no translation found for task_continuity_category (3736049711007817178) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
-    <skip />
+    <string name="task_continuity_category" msgid="3736049711007817178">"ការបន្តកិច្ចការ"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"កិច្ចការកម្មវិធី"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"បន្តយ៉ាងរលូនពីចំណុចដែលអ្នកបានឈប់នៅលើឧបករណ៍ផ្សេងទៀត"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"កម្មវិធីទាំងអស់"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"កម្មវិធី​ដែល​បាន​ដំឡើង"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"កម្មវិធី​ប្រើ​ភ្លាមៗ"</string>
@@ -4522,6 +4516,18 @@
     <string name="usb_default_label" msgid="3372838450371060750">"ការកំណត់​រចនាសម្ព័ន្ធ USB លំនាំ​ដើម"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"ជម្រើស​ថាមពល"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"ជម្រើស​ផ្ទេរ​ឯកសារ"</string>
+    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
+    <skip />
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"ចំណូលចិត្ត USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB ត្រូវបានគ្រប់គ្រងដោយ"</string>
@@ -5691,20 +5697,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> តម្រូវឱ្យ​មាន 2G"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"អនុញ្ញាតបណ្ដាញដែលបានអ៊ីនគ្រីបតែប៉ុណ្ណោះ"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"ការធ្វើបែបនេះកាន់តែមានសុវត្ថិភាព ប៉ុន្តែអាចដាក់កំហិតការតភ្ជាប់បណ្ដាញ​ទូរសព្ទ​ចល័តរបស់អ្នកនៅក្នុងទីតាំងមួយចំនួន។ ការហៅទៅលេខសង្គ្រោះបន្ទាន់ត្រូវបានអនុញ្ញាតជានិច្ច។"</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"បិទការការពារបណ្ដាញ 2G ឬ?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"បណ្ដាញបច្ចុប្បន្នសម្រាប់ស៊ីម <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> មិនអាចប្រើ 2G ទេ។ ការបិទការការពារ 2G នឹងនាំឱ្យអ្នកប្រឈមនឹងហានិភ័យនៃការភ្ជាប់ទៅបណ្ដាញ 2G បញ្ឆោតដែលបង្កគ្រោះថ្នាក់។"</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"បិទ"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"ការការពារបណ្ដាញ 2G"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"ការការពារបណ្ដាញ 2G ត្រូវបានបើក"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"បណ្ដាញបច្ចុប្បន្នសម្រាប់ស៊ីម <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> តម្រូវឱ្យបើកការការពារ 2G។ អ្នកនៅតែអាចជ្រើសរើសបិទការការពារ 2G ដោយទទួលខុសត្រូវដោយខ្លួនឯង។"</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"ការកំណត់"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"សេវាកម្មទាំងអស់"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"បង្ហាញការចូលប្រើឃ្លីបបត"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"បង្ហាញសារ នៅពេលកម្មវិធីចូលប្រើអត្ថបទ រូបភាព ឬខ្លឹមសារផ្សេងទៀតដែលអ្នកបានចម្លង"</string>
@@ -5800,6 +5799,10 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> ដោយ <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"កម្មវិធីនេះ​នឹងចាប់ផ្ដើមឡើងវិញ នៅពេលអ្នកប្ដូរសមាមាត្រ។ អ្នកអាចនឹងបាត់បង់​ការផ្លាស់ប្ដូរ​ដែលមិនបានរក្សាទុក។ កម្មវិធីមួយចំនួនប្រហែលជាមិនស័ក្ដិសមសម្រាប់សមាមាត្រជាក់លាក់ទេ។"</string>
+    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
+    <skip />
+    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"សេនស័រចាប់ស្នាមម្រាមដៃ"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ការជូនដំណឹងបាញ់ពន្លឺ"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"អំពីការជូនដំណឹងបាញ់ពន្លឺ"</string>
@@ -6135,8 +6138,7 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"សកម្មភាពបានបញ្ចប់"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"ការកំណត់រហ័សសម្រាប់សុវត្ថិភាព និងឯកជនភាព"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"ការគ្រប់គ្រង​ឯកជនភាពរបស់អ្នក"</string>
-    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
-    <skip />
+    <string name="safety_center_review_settings" msgid="295527297192914772">"ពិនិត្យមើល​ការកំណត់"</string>
     <string name="safety_center_qs_open_action" msgid="8683771989007581791">"បើក"</string>
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"ប៊ូតុង​បិទបើក។ <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>។ <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"បាន​ទប់ស្កាត់"</string>
@@ -6166,6 +6168,25 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"ងាយស្រួលចូលប្រើព័ត៌មានផ្កាយរណបដោយបញ្ចូលប្រអប់ផ្កាយរណបទៅក្នុងការកំណត់រហ័ស"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"បញ្ចូល​ប្រអប់"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"សារតម្រុយប្រអប់ផ្កាយរណប"</string>
-    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <skip />
+    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
+    <skip />
+    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
+    <skip />
+    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
+    <skip />
+    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
+    <skip />
+    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
+    <skip />
+    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
+    <skip />
+    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
     <skip />
 </resources>

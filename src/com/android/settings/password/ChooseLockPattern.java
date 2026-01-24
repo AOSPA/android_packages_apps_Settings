@@ -41,7 +41,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.accessibility.AccessibilityEvent;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -349,12 +348,10 @@ public class ChooseLockPattern extends SettingsActivity {
             }
         }
 
-
         @Override
         public int getMetricsCategory() {
             return SettingsEnums.CHOOSE_LOCK_PATTERN;
         }
-
 
         /**
          * The states of the left footer button.
@@ -627,6 +624,7 @@ public class ChooseLockPattern extends SettingsActivity {
             super.onViewCreated(view, savedInstanceState);
             final GlifLayout layout = getActivity().findViewById(R.id.setup_wizard_layout);
             mHeaderText = layout.getDescriptionTextView();
+            mHeaderText.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
             mHeaderText.setMinLines(2);
             mDefaultHeaderColorList = mHeaderText.getTextColors();
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
@@ -866,7 +864,6 @@ public class ChooseLockPattern extends SettingsActivity {
          * @param stage
          */
         protected void updateStage(Stage stage) {
-            final Stage previousStage = mUiStage;
             final GlifLayout layout = getActivity().findViewById(R.id.setup_wizard_layout);
             mUiStage = stage;
 
@@ -924,6 +921,8 @@ public class ChooseLockPattern extends SettingsActivity {
                 case Introduction:
                     mLockPatternView.clearPattern();
                     break;
+                case FirstInputInProgress:
+                    break;
                 case HelpScreen:
                     mLockPatternView.setPattern(DisplayMode.Animate, mAnimatePattern);
                     break;
@@ -940,8 +939,6 @@ public class ChooseLockPattern extends SettingsActivity {
                 case ChoiceConfirmed:
                     break;
             }
-
-            mHeaderText.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
         }
 
         protected void updateFooterLeftButton(Stage stage) {

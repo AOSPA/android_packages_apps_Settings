@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"Mostrar relação HDR/SDR"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"Mostre a relação HDR/SDR atual"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Pedir o desbloqueio do dispositivo para o NFC"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"Exigir desbloqueio do dispositivo"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Pronto para transmitir conteúdo da aplicação via NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Desativado"</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Desativada"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"ID da operadora"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Tipo de rede de dados móveis"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Tipo de rede de voz móvel"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Informações do operador"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Validar o PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Validar palavra-passe"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Valide a sua identidade"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Introduza o padrão do seu outro dispositivo para transferir Contas Google, definições e muito mais. O padrão é encriptado."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Introduza o PIN do seu outro dispositivo para transferir Contas Google, definições e muito mais. O PIN é encriptado."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Introduza a palavra-passe do seu outro dispositivo para transferir Contas Google, definições e muito mais. A palavra-passe é encriptada."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"Usar o mesmo padrão para desbloquear este dispositivo"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"Usar o mesmo PIN para desbloquear este dispositivo"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"Usar a mesma palavra-passe para desbloquear este dispositivo"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Valide o padrão"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Valide o PIN"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Valide a palavra-passe"</string>
@@ -2222,7 +2214,7 @@
     <string name="mouse_settings_summary" msgid="2593803007491750229">"Veloc. cursor, person. dos botões"</string>
     <string name="trackpad_settings_summary" msgid="2984582991609553396">"Velocidade do cursor, gestos"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tocar para clicar"</string>
-    <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Tocar e arraste para mover itens"</string>
+    <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Tocar e arrastar para mover itens"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Toque 2 vezes e arraste o dedo no touchpad p/ mover objetos"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Gestos do touchpad"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Personalize gestos de navegação individuais do touchpad"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Definições rápidas"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Deslize para baixo a partir da parte superior do ecrã}other{Deslize para baixo com # dedos a partir da parte superior do ecrã}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Deslize rapidamente para baixo a partir da parte superior do ecrã. Este atalho está disponível depois de concluir a configuração do dispositivo.}other{Deslize rapidamente para baixo com # dedos a partir da parte superior do ecrã. Este atalho está disponível depois de concluir a configuração do dispositivo.}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"Tecla da linha superior"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"Prima a tecla de acessibilidade na linha superior do teclado"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Definições rápidas"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Teclas de volume"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"teclas de volume"</string>
@@ -3479,12 +3469,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Outros utilizadores"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Eliminar atividade de convidado"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Elimina todas as apps e dados de convidado ao sair do modo convidado"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"Permitir que convidado use o disp."</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"Todas as apps e os dados de convidado são eliminados quando sair do modo convidado"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"adicionar, convidado"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Eliminar a atividade de convidado?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"As apps e os dados desta sessão de convidado vão ser eliminados agora e toda a atividade de convidado futura é eliminada sempre que sair do modo convidado"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"eliminar, convidado, atividade, remover, dados, visitante, apagar"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Dispositivo"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"Teclado, touchpad, ecrã, som"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Não disponível com o NFC desativado"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar, instale primeiro uma app de pagamento"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Apps recentes, apps predefinidas"</string>
@@ -4398,6 +4390,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Reiniciar"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Agora não"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Saiba mais sobre a proteção de memória avançada."</string>
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Diagnóstico do SO Android"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"Validar compilações do SO"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"diagnóstico, transparência, binário"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Este perfil de trabalho é gerido por:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Gerido por <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Abrir por predefinição"</string>
@@ -4518,6 +4513,18 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Configuração USB predefinida"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Opções de carregamento"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opções de transferência de ficheiros"</string>
+    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
+    <skip />
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Preferências de USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB controlado por"</string>
@@ -5687,20 +5694,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"O operador <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> requer que o 2G esteja disponível"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Permitir apenas redes encriptadas"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Esta opção é mais segura, mas pode limitar a sua ligação de rede móvel em alguns locais. As chamadas de emergência são sempre permitidas."</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Desativar a proteção de rede 2G?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"A rede atual do SIM da <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> não é compatível com 2G. Se desativar a proteção 2G, corre o risco de se ligar a redes 2G com spoofing prejudiciais."</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Desativar"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"Proteção de rede 2G"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"A proteção de rede 2G está ativada"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"A rede atual do SIM da <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> requer que a proteção 2G esteja ativada. Continua a poder optar por desativar a proteção 2G por sua conta e risco."</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Definições"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Todos os serviços"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Mostrar acesso à área de transferência"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Apresente uma mensagem quando as apps acedem a texto, imagens ou outro conteúdo que copiou"</string>
@@ -5796,6 +5796,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> de <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"A app vai reiniciar quando alterar o formato. Pode perder alterações não guardadas. Algumas apps podem não estar otimizadas para determinados formatos."</string>
+    <string name="app_info_experience_category" msgid="6283332744508784886">"Experiência"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Gamepad"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor de impressões digitais"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notificações com flash"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Acerca das notificações com flash"</string>
@@ -6162,4 +6164,14 @@
     <string name="add_tile_action" msgid="5271301747196740442">"Adicionar cartão"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Comandos do mosaico Satélite"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satélite não disponível"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"A cobertura por satélite não está disponível enquanto tiver uma ligação a uma rede móvel ou Wi‑Fi."</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"A conetividade por satélite não está disponível neste país ou região."</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"De momento, a conetividade por satélite não está disponível. Tente mais tarde."</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"O seu plano de dados móveis não inclui cobertura por satélite. Contacte a operadora para obter ajuda."</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Para usar as mensagens por satélite, a app Mensagens Google tem de ser a sua app de mensagens predefinida."</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"A conetividade por satélite é ativada pela sua operadora. Saiba mais nas definições de satélite da sua operadora."</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Ver localizações disponíveis"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Alterar app predefinida"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"Ver definições da operadora"</string>
 </resources>

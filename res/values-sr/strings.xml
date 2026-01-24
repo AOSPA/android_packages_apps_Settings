@@ -537,7 +537,7 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Лице и отисак прста су додати"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Начини за откључавање"</string>
     <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Користите лице или отисак прста за"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Потврда идентитета у апликацијама"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Потврде идентитета у апликацијама"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Коришћење лица"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Помоћу отиска прста"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Коришћење лица или отиска прста"</string>
@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"Прикажи HDR или SDR размеру"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"Приказује актуелну HDR или SDR размеру"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Тражи да се откључа уређај за коришћење NFC-а"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"Захтевај откључавање уређаја"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Спремно за пренос садржаја апликација преко NFC-а"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Искључено"</string>
@@ -1375,7 +1375,7 @@
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Настави са коришћењем апликација по затварању"</string>
     <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Онемогући подразумевану брзину кадрова"</string>
     <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Онемогућите ограничавање максималне брзине кадрова за игре на <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz."</string>
-    <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Течни приказ"</string>
+    <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Течан приказ"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Аутоматски подиже учесталост освежавања до <xliff:g id="ID_1">%1$d</xliff:g> Hz за одређени садржај. Повећава потрошњу батерије."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Наметни максималну учесталост освежавања"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Највећа учесталост освежавања за побољшан одзив на додир и квалитет анимације. Повећава потрошњу батерије."</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Искључено"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"ИД мобилног оператера"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Тип мреже за пренос података"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Тип мреже за гласовне позиве"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Информације о мобилном оператеру"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Верификујте PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Верификујте лозинку"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Потврдите идентитет"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Унесите шаблон другог уређаја за пренос Google налога, подешавања и другог садржаја. Шаблон је шифрован."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Унесите PIN другог уређаја за пренос Google налога, подешавања и другог садржаја. PIN је шифрован."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Унесите лозинку другог уређаја за пренос Google налога, подешавања и другог садржаја. Лозинка је шифрована."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"Користите исти шаблон за откључавање овог уређаја"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"Користите исти PIN за откључавање овог уређаја"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"Користите исту лозинку за откључавање овог уређаја"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Верификујте шаблон"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Верификујте PIN"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Верификујте лозинку"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Брза подешавања"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Превуците надоле од врха екрана}one{Превуците надоле од врха екрана помоћу # прста}few{Превуците надоле од врха екрана помоћу # прста}other{Превуците надоле од врха екрана помоћу # прстију}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Превуците надоле од врха екрана. Ова пречица ће бити доступна када завршите са подешавањем уређаја.}one{Превуците надоле од врха екрана помоћу # прста. Ова пречица ће бити доступна када завршите са подешавањем уређаја.}few{Превуците надоле од врха екрана помоћу # прста. Ова пречица ће бити доступна када завршите са подешавањем уређаја.}other{Превуците надоле од врха екрана помоћу # прстију. Ова пречица ће бити доступна када завршите са подешавањем уређаја.}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"Кључ горњег реда"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"Притисните тастер за приступачност у горњем реду тастатуре"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Брза подешавања"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Тастери за јачину звука"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"тастери за јачину звука"</string>
@@ -3479,12 +3469,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Остали корисници"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Избриши активности госта"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Избришите све апликације и податке госта при излазу из режима госта"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"Дозволи госту да користи уређај"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"Све апликације и подаци госта биће избрисани када изађете из режима госта"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"додај, гост"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Избрисаћете активности госта?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Апликације и подаци из ове сесије госта биће одмах избрисане, а све будуће активности госта биће избрисане сваки пут када изађете из режима госта"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"избрисати, гост, активност, уклонити, подаци, посетилац, обрисати"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Уређај"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"Тастатура, тачпед, екран, звук"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Није доступно зато што је NFC искључен"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Да бисте ово користили, прво инсталирајте апликацију за плаћање"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Недавне апликације, подразумеване апликације"</string>
@@ -3955,8 +3947,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Добијајте брзе прегледе дужих порука"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Користи резимее обавештења"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Направите резиме дугих порука и групних конверзацијa да бисте видели брзе прегледе.\n\nРезимеи користе вештачку интелигенцију на уређају, која понекад може да погреши. Поруке се никада не шаљу Google-у."</string>
-    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
-    <skip />
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"Правите резимее дугих порука и групних конверзацијa да бисте добијали брзе прегледе.\n\nРезимее пружају апликације или AI на уређају и могу да садрже грешке. Поруке се никада не шаљу Google-у."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Обавештења из ових апликација неће бити резимирана"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Управљајте апликацијама"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Управљајте апликацијама за резимее обавештења"</string>
@@ -4399,6 +4390,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Рестартуј"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Не сада"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Сазнајте више о Напредној заштити меморије."</string>
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Дијагностика Android ОС-а"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"Проверите верзије ОС-а"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"дијагностика, транспарентност, бинарни програм"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Овим пословним профилом управља:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Управља <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Подразумевано отварај"</string>
@@ -4519,6 +4513,18 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Подразумевана USB конфигурација"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Опције напајања"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Опције за пренос фајлова"</string>
+    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
+    <skip />
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Подешавања USB-а"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB контролише:"</string>
@@ -4862,7 +4868,7 @@
     <string name="double_tap_power_enabled" msgid="7609935047996304482">"Користи двоструки притисак"</string>
     <string name="double_tap_power_target_action_category" msgid="2568741597095863728">"Двапут притисните дугме за укључивање да бисте отворили:"</string>
     <string name="double_tap_power_camera_action_title" msgid="6641206739933181509">"Камера"</string>
-    <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Отворите Камеру"</string>
+    <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Отвара Камеру"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Новчаник"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Отворите Новчаник"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Желите да промените пречицу за закључани екран?"</string>
@@ -4871,7 +4877,7 @@
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Промените подразумевани новчаник"</string>
     <string name="keywords_double_tap_power" msgid="1238828843085517844">"покрети, пречица"</string>
     <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"плати, плаћање"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Обрните камеру да бисте снимили селфи"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Трзај обрће камеру за селфи"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Режим навигације"</string>
     <string name="update_device_category_title" msgid="6588608879793647296">"Ажурирајте уређај"</string>
@@ -5689,20 +5695,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> захтева да 2G буде доступан"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Дозволи само шифроване мреже"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Ово је безбедније, али може да ограничи везу са мобилном мрежом на неким локацијама. Хитни позиви су увек дозвољени."</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Желите да искључите заштиту од 2G мреже?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"Актуелна мрежа за <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM не подржава 2G. Ако искључите заштиту од 2G мреже, ризикујете да се повежете на штетне лажне 2G мреже."</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Искључи"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"Заштита од 2G мреже"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"Заштита од 2G мреже је укључена"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"Актуелна мрежа за <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM захтева да буде укључена 2G заштита. И даље можете да онемогућите 2G заштиту на сопствени ризик."</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Подешавања"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Све услуге"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Приказуј приступ привременој меморији"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Приказује поруку када апликације приступају тексту, сликама или другом садржају који сте копирали"</string>
@@ -5798,6 +5797,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> пута <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Апликација ће се рестартовати када промените размеру. Можда ћете изгубити несачуване промене. Неке апликације можда неће бити оптимизоване за одређене размере."</string>
+    <string name="app_info_experience_category" msgid="6283332744508784886">"Искуство"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Џојпед"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Сензор за отисак прста"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Треперућа обавештења"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"О треперућим обавештењима"</string>
@@ -6163,6 +6164,15 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Лако приступајте информацијама са сателита тако што ћете додати плочицу Сателит у Брза подешавања"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Додај плочицу"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Упити за плочицу Сателит"</string>
-    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
-    <skip />
+    <string name="satellite_icon_text" msgid="1080385642493133372">"SAT (Тестови за пријемни испит за факултет)"</string>
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Сателит није доступан"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"Покривеност сателитом није доступна док сте повезани на мобилну или WiFi мрежу."</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"Сателитска веза није доступна у овој земљи или региону"</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"Сателитска веза тренутно није доступна. Пробајте поново касније."</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Пакет за мобилни телефон не обухвата покривеност сателитом. Обратите се мобилном оператеру за помоћ."</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Да бисте користили размену порука преко сателита, Google Messages мора да буде подразумевана апликација за размену порука."</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"Сателитску везу омогућава мобилни оператер. Више информација потражите у подешавањима мобилног оператера која се односе на сателит."</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Прикажи доступне локације"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Промени подразумевану апликацију"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"Прикажи подешавања мобилног оператера"</string>
 </resources>
