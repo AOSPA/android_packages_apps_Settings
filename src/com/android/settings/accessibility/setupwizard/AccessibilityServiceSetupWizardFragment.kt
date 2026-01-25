@@ -64,6 +64,12 @@ class AccessibilityServiceSetupWizardFragment : BaseSetupWizardFragment() {
                     AccessibilityServiceIllustrationItemController(context, serviceInfo, item),
                 )
             }
+            findItem(adapter, R.id.accessibility_service_main_switch_in_suw)?.let { item ->
+                put(
+                    R.id.accessibility_service_main_switch_in_suw,
+                    AccessibilityServiceMainSwitchItemController(context, serviceInfo, item),
+                )
+            }
             findItem(adapter, R.id.accessibility_service_footer_in_suw)?.let { item ->
                 put(
                     R.id.accessibility_service_footer_in_suw,

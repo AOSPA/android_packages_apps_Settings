@@ -163,8 +163,11 @@ flag {
 }
 
 flag {
-  name: "voice_access_locale_notifications"
+  name: "text_cursor_blinking_user_setting"
   namespace: "accessibility"
-  description: "Provides notification to users when the chosen locale doesn't have an associated model."
-  bug: "453531997"
+  description: "Moves the text cursor blinking setting to the Color and Motion settings page."
+  bug: "405251212"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
 }

@@ -16,8 +16,6 @@
 
 package com.android.settings.applications.credentials;
 
-import static androidx.lifecycle.Lifecycle.Event.ON_CREATE;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.EnforcingAdmin;
@@ -55,9 +53,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
@@ -69,6 +66,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.metrics.CredmanMetricsLogger;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.utils.ThreadUtils;
@@ -84,8 +82,8 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 
 /** Queries available credential manager providers and adds preferences for them. */
-public class CredentialManagerPreferenceController extends BasePreferenceController
-        implements LifecycleObserver {
+public class CredentialManagerPreferenceController extends BasePreferenceController implements
+        DefaultLifecycleObserver {
     public static final String ADD_SERVICE_DEVICE_CONFIG = "credential_manager_service_search_uri";
 
     private static final String TAG = "CredentialManagerPreferenceController";
@@ -122,6 +120,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private boolean mIsWorkProfile = false;
     private boolean mIsPrivateSpace = false;
     private boolean mSimulateConnectedForTests = false;
+    private CredmanMetricsLogger mCredmanMetricsLogger;
 
     public CredentialManagerPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -211,6 +210,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         mFragmentManager = fragmentManager;
         mIsWorkProfile = isWorkProfile;
         mIsPrivateSpace = isPrivateSpace;
+        mCredmanMetricsLogger = new CredmanMetricsLogger(mContext, fragment.getSettingsLifecycle());
 
         setDelegate(delegate);
         verifyReceivedIntent(launchIntent);
@@ -316,8 +316,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         fragment.show(mFragmentManager, NewProviderConfirmationDialogFragment.TAG);
     }
 
-    @OnLifecycleEvent(ON_CREATE)
-    void onCreate(LifecycleOwner lifecycleOwner) {
+    @Override
+    public void onCreate(@NonNull LifecycleOwner owner) {
         update();
     }
 
@@ -771,6 +771,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                                 }
 
                                 fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
+                                mCredmanMetricsLogger.logHitAdditionalServiceLimitEvent(
+                                        packageName);
                                 return false;
                             }
 
@@ -780,8 +782,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                             if (mPrefs.containsKey(packageName)) {
                                 mPrefs.get(packageName).setChecked(true);
                             }
+
+                            mCredmanMetricsLogger.logEnableAdditionalServiceEvent(packageName);
                         } else {
                             togglePackageNameDisabled(packageName);
+                            mCredmanMetricsLogger.logDisableAdditionalServiceEvent(packageName);
                         }
 
                         return true;
@@ -789,8 +794,10 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
                     @Override
                     public void onLeftSideClicked() {
-                        CombinedProviderInfo.launchSettingsActivityIntent(
-                                mContext, packageName, settingsActivity, getUser());
+                        if (CombinedProviderInfo.launchSettingsActivityIntent(mContext, packageName,
+                                settingsActivity, getUser())) {
+                            mCredmanMetricsLogger.recordOutboundIntentLaunch(packageName);
+                        }
                     }
                 });
 
@@ -837,9 +844,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     /** Create the new provider confirmation dialog. */
     private @Nullable NewProviderConfirmationDialogFragment
             newNewProviderConfirmationDialogFragment(
-                    @NonNull String packageName,
-                    @NonNull CharSequence appName,
-                    boolean shouldSetActivityResult) {
+            @NonNull String packageName,
+            @NonNull CharSequence appName,
+            boolean shouldSetActivityResult) {
         DialogHost host =
                 new DialogHost() {
                     @Override

@@ -67,7 +67,7 @@ open class HearingDevicesScreen(context: Context) :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.hearing_devices_purpose
 
@@ -160,7 +160,11 @@ open class HearingDevicesScreen(context: Context) :
         preferenceHierarchy(context) {
             +HearingDevicesTopIntroPreference(context)
             +AvailableHearingDevicePreferenceCategory(context, metricsCategory)
-            +AddDevicePreference(context)
+            if (com.android.settings.flags.Flags.catalystMigration26q2()) {
+                +PairHearingDeviceScreen.KEY
+            } else {
+                +AddDevicePreference(context)
+            }
             +SavedHearingDevicePreferenceCategory(metricsCategory)
             +HearingDeviceOptionsPreferenceCategory() += {
                 +AudioRoutingPreference()
@@ -237,7 +241,7 @@ open class HearingDevicesScreen(context: Context) :
         key: String = "hearing_options_category",
         purpose: Int = R.string.hearing_options_category_purpose,
         title: Int = R.string.accessibility_screen_option,
-    ) : PreferenceCategory(key,purpose, title)
+    ) : PreferenceCategory(key, purpose, title)
 
     class HearingDeviceShortcutPreference(context: Context, metricsCategory: Int) :
         AccessibilityShortcutPreference(

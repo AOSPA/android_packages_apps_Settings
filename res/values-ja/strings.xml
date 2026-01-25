@@ -644,7 +644,7 @@
     <string name="private_space_summary" msgid="2274405892301976238">"プライベート アプリをロック / 非表示状態に保ちます"</string>
     <string name="private_space_description" msgid="4059594203775816136">"非表示またはロックできる個別のスペースにプライベート アプリを保持できます"</string>
     <string name="private_space_lock_title" msgid="7230836881433350526">"プライベート スペースのロック"</string>
-    <string name="private_space_one_lock_summary" msgid="2106513606571219068">"デバイスのロック解除と同じ方法でプライベート スペースのロックを解除するか、別のロックを選択できます"</string>
+    <string name="private_space_one_lock_summary" msgid="2106513606571219068">"デバイスのロック解除と同じ方法でプライベート スペースのロックを解除するか、別のロックを設定できます"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"デバイスの画面ロックを使用"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"顔認証と指紋認証によるロック解除"</string>
     <string name="private_space_fingerprint_title" msgid="5989254643211889931">"指紋認証"</string>
@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"HDR/SDR 比を表示"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"現在の HDR/SDR 比を表示する"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"NFC の使用にロック解除を要求"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"デバイスのロック解除を必須にする"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android ビーム"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"アプリコンテンツをNFCで転送できます"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"OFF"</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"OFF"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"携帯通信会社 ID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"モバイルデータ ネットワークの種類"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"モバイル音声ネットワークの種類"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"携帯通信会社の情報"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN の確認"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"パスワードの確認"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"本人確認"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Google アカウントや設定などを移行するため、他のデバイスのパターンを入力してください。パターンは暗号化されます。"</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Google アカウントや設定などを移行するため、他のデバイスの PIN を入力してください。PIN は暗号化されます。"</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Google アカウントや設定などを移行するため、他のデバイスのパスワードを入力してください。パスワードは暗号化されます。"</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"同じパターンでこのデバイスもロック解除する"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"同じ PIN でこのデバイスもロック解除する"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"同じパスワードでこのデバイスもロック解除する"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"パターンの確認"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"PIN の確認"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"パスワードの確認"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"クイック設定"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{画面の上部から下にスワイプします}other{# 本の指で画面の上部から下にスワイプします}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{画面の上部から下にスワイプします。このショートカットは、デバイスのセットアップを完了すると利用できるようになります。}other{# 本の指で画面の上部から下にスワイプします。このショートカットは、デバイスのセットアップを完了すると利用できるようになります。}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"最上段のキー"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"キーボードの最上段にあるユーザー補助キーを押します"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"クイック設定"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"音量ボタン"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"音量ボタン"</string>
@@ -3477,18 +3467,15 @@
     <string name="guest_category_title" msgid="5562663588315329152">"ゲスト（自分）"</string>
     <string name="user_category_title" msgid="4368580529662699083">"ユーザー"</string>
     <string name="other_user_category_title" msgid="7089976887307643217">"その他のユーザー"</string>
-    <string name="remove_guest_on_exit" msgid="8202972371459611066">"ゲストアクティビティを削除"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"ゲスト アクティビティを削除"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ゲストモードの終了時にゲストのすべてのアプリとデータを削除します"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"デバイスの使用をゲストに許可する"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"ゲストモードを終了すると、ゲストのアプリとデータがすべて削除されます"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"追加, ゲスト"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ゲストのアクティビティを削除しますか？"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"今回のゲスト セッションのアプリとデータが今すぐ削除され、今後のゲストのアクティビティはすべて、ゲストモードを終了するたびに削除されます"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"削除, ゲスト, アクティビティ, 消す, データ, ビジター, 消去"</string>
-    <string name="enable_guest_calling" msgid="4620657197834392094">"ゲストに通話を許可する"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"ゲストに通話を許可"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"通話履歴がゲストユーザーと共有されます"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"通話と SMS を ON"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"このユーザーを管理者にする"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth、Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"デバイス"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"キーボード、タッチパッド、ディスプレイ、音"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC が OFF のため使用できません"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"使用するには、まずお支払いアプリをインストールしてください"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使ったアプリ、デフォルトのアプリ"</string>
@@ -3955,8 +3947,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"長いメッセージをすばやく要約できます"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"通知の要約を使用する"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"長いメッセージやグループ会話を要約して、内容をすばやく確認できます。\n\n要約の作成にはデバイス上の AI を使用しているため、不正確な情報が表示されることがあります。メッセージの内容が Google に送信されることはありません。"</string>
-    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
-    <skip />
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"長いメッセージやグループ会話を要約して、内容をすばやく確認できます。\n\nデバイス上のアプリまたは AI による要約のため、間違った情報が含まれる可能性があります。メッセージの内容が Google に送信されることはありません。"</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"これらのアプリの会話の通知は要約されません"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"アプリの管理"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"通知の要約の対象アプリを管理する"</string>
@@ -4399,6 +4390,12 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"再起動"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"後で"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"高度なメモリ保護の詳細"</string>
+    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
+    <skip />
+    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
+    <skip />
+    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"この仕事用プロファイルを管理するアプリ:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>によって管理されています"</string>
     <string name="launch_by_default" msgid="892824422067985734">"デフォルトで開く"</string>
@@ -4445,12 +4442,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"権限と一時ファイルを削除し、通知を停止します"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"使用していないアプリを管理する"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"権限と一時ファイルを削除し、通知を停止し、アプリをアーカイブします"</string>
-    <!-- no translation found for task_continuity_category (3736049711007817178) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
-    <skip />
+    <string name="task_continuity_category" msgid="3736049711007817178">"タスクの再開"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"アプリのタスク"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"他のデバイスで中断したところから再開できます"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"すべてのアプリ"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"インストール済みアプリ"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant Apps"</string>
@@ -4522,6 +4516,18 @@
     <string name="usb_default_label" msgid="3372838450371060750">"デフォルトの USB 設定"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"電源オプション"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"ファイル転送オプション"</string>
+    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
+    <skip />
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB の設定"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB のコントロール"</string>
@@ -5178,7 +5184,7 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> の再生先:"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"音声の再生先"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"このデバイス"</string>
-    <string name="media_output_audio_sharing" msgid="8169294522817470115">"音声を共有中"</string>
+    <string name="media_output_audio_sharing" msgid="8169294522817470115">"音声を共有しています"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"通話中は利用できません"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"通話するデバイス"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"この APN は変更できません。"</string>
@@ -5651,7 +5657,7 @@
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"連絡先と通話履歴へのアクセスを許可しますか？"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Bluetooth デバイス <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> が連絡先と通話履歴にアクセスしようとしています。これには着信や発信に関するデータも含まれます。\n\nこれまでに <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> に接続したことはありません。"</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"明るさ"</string>
-    <string name="category_name_lock_display" msgid="8310402558217129670">"ディスプレイのロック"</string>
+    <string name="category_name_lock_display" msgid="8310402558217129670">"ロック画面"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"デザイン"</string>
     <string name="category_name_color" msgid="937514550918977151">"カラー"</string>
     <string name="category_name_display_controls" msgid="7046581691184725216">"その他のディスプレイ コントロール"</string>
@@ -5691,20 +5697,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> を利用するには、2G が必要です"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"暗号化されたネットワークのみを許可する"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"セキュリティは強化されますが、場所によってモバイル ネットワーク接続が制限される可能性があります。緊急通報は常に許可されます。"</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"2G ネットワークからの保護を無効にしますか？"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM の現在のネットワークは 2G に対応していません。2G 保護を無効にすると、偽装された危険な 2G ネットワークに接続する恐れがあります。"</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"OFF にする"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G ネットワークからの保護"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G ネットワークからの保護が有効です"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM の現在のネットワークでは、2G 保護を有効にする必要があります。ご自身の責任で、2G 保護を無効にすることもできます。"</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"設定"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"すべてのサービス"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"クリップボードへのアクセスを表示"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"クリップボードにコピーしたテキストや画像などにアプリがアクセスした際に、メッセージを表示します"</string>
@@ -5800,6 +5799,10 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> by <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"アスペクト比を変更すると、アプリが再起動します。保存されていない変更は失われる可能性があります。アプリによっては特定のアスペクト比で最適化できない場合があります。"</string>
+    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
+    <skip />
+    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指紋認証センサー"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"点滅による通知"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"点滅による通知について"</string>
@@ -5874,7 +5877,7 @@
     <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"有効なメディア デバイス"</string>
     <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"通話の音声"</string>
     <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>でのみ再生されます"</string>
-    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"テスト音声の再生"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"テスト音声を再生"</string>
     <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"聴いている人全員に聞こえます"</string>
     <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"音声ストリームの設定"</string>
     <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"名前"</string>
@@ -5894,7 +5897,7 @@
     <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"音声を共有"</string>
     <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"利用しない"</string>
     <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> と音声を共有しますか？"</string>
-    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"別のデバイスとの音声の共有"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"別のデバイスと音声を共有"</string>
     <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>と共有"</string>
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"閉じる"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"対応する別のヘッドフォンを接続するか、ストリームの名前とパスワードを相手と共有してください"</string>
@@ -5902,14 +5905,14 @@
     <string name="audio_sharing_dialog_qr_code_content_no_password" msgid="7824076083031650113">"このコードをスキャンすると、他のユーザーも音声を聴くことができます\n\nストリーム名: <xliff:g id="STREAM_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_dialog_pair_new_device_content" msgid="6720472590211440206">"または対応する別のヘッドフォンをペア設定してください"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"対応する別のヘッドフォンをペア設定するか、音声ストリームの QR コードを共有してください"</string>
-    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"音声を共有中"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"音声を共有しています"</string>
     <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"新しいデバイスとペア設定"</string>
     <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"QR コードを表示"</string>
     <string name="audio_sharing_notification_title" msgid="1204798942946033005">"音声を共有中"</string>
     <string name="audio_sharing_notification_content" msgid="1577180829878785642">"あなたのメディアの音声は共有相手に聞こえますが、通話は聞こえません。"</string>
     <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"共有を停止"</string>
     <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"設定"</string>
-    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"接続を解除するデバイスの選択"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"接続を解除するデバイスを選択"</string>
     <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"音声を共有できるのは一度に 2 台のデバイスのみです"</string>
     <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>の接続を解除"</string>
     <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>を接続しますか？"</string>
@@ -5917,7 +5920,7 @@
     <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g>、<xliff:g id="DEVICE_NAME2">%2$s</xliff:g>との音声の共有を停止します"</string>
     <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"接続されているヘッドフォンとの音声の共有を停止します"</string>
     <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"接続"</string>
-    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"音声の共有を停止済み"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"音声の共有を停止しました"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"対応デバイスを接続"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>に切り替える"</string>
     <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"音声ストリームを開始しています…"</string>
@@ -5961,7 +5964,7 @@
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ではこの音声ストリームを再生できません。"</string>
     <string name="audio_streams_dialog_cannot_play_with_link" msgid="3433981166714801237">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ではこの音声ストリームを再生できません。"<annotation id="link">"詳細"</annotation></string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"現在再生しています"</string>
-    <string name="audio_streams_present_now" msgid="7519818719382756366">"ストリームを一時停止"</string>
+    <string name="audio_streams_present_now" msgid="7519818719382756366">"ストリームを一時停止中"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"受信を停止"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"対応するヘッドフォンを接続"</string>
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"TalkBack を一時的に OFF にする"</string>
@@ -5982,7 +5985,7 @@
     <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"対応するヘッドフォンを接続してください"</string>
     <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"近くの音声ストリーム"</string>
     <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"QR コードをスキャン"</string>
-    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"聴き始めるには、ストリームの QR コードをスキャンします"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"ストリームの QR コードをスキャンして視聴を開始します"</string>
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"ストリームを聴く"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>で聴くには、音声ストリームの QR コードをスキャンします"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"共有中はパスワードを編集できません。パスワードを変更するには、まず音声の共有を OFF にしてください。"</string>
@@ -6135,8 +6138,7 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"操作が完了しました"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"セキュリティとプライバシーのクイック設定"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"お客様によるプライバシーの管理"</string>
-    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
-    <skip />
+    <string name="safety_center_review_settings" msgid="295527297192914772">"設定を確認"</string>
     <string name="safety_center_qs_open_action" msgid="8683771989007581791">"開く"</string>
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"スイッチ。<xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>。<xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"ブロック中"</string>
@@ -6166,6 +6168,25 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"クイック設定に衛星タイルを追加すると、衛星情報を簡単に確認できます"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"タイルを追加"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"衛星タイルのメッセージ"</string>
-    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <skip />
+    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
+    <skip />
+    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
+    <skip />
+    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
+    <skip />
+    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
+    <skip />
+    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
+    <skip />
+    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
+    <skip />
+    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
     <skip />
 </resources>

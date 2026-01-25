@@ -26,6 +26,7 @@ import android.app.admin.DevicePolicyIdentifiers
 import android.app.admin.DevicePolicyManager
 import android.app.admin.EnforcingAdmin
 import android.database.ContentObserver
+import android.hardware.display.DisplayManager
 import android.os.UserHandle
 import android.provider.Settings
 import android.provider.Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY
@@ -157,6 +158,35 @@ constructor(
                     selectedDisplayId = selectedId,
                 )
             }
+        }
+    }
+
+    fun updateUserHdrPreference(displayId: Int, enable: Boolean) {
+        val preference =
+            if (enable) DisplayManager.HDR_PREFERENCE_HDR_ALLOWED
+            else DisplayManager.HDR_PREFERENCE_SDR_ONLY
+        injector.setUserHdrPreference(displayId, preference)
+
+        // Setting user HDR preference doesn't trigger display listener update, manually update
+        // state here
+        updateState { state ->
+            val newDisplays = state.enabledDisplays.toMutableMap()
+            val display = newDisplays[displayId] ?: return@updateState state
+            newDisplays[displayId] =
+                DisplayDeviceAdditionalInfo(
+                    display.id,
+                    display.uniqueId,
+                    display.name,
+                    display.mode,
+                    display.supportedModes,
+                    display.isEnabled,
+                    display.isConnectedDisplay,
+                    display.rotation,
+                    display.isHdrSupported,
+                    display.connectionPreference,
+                    preference,
+                )
+            state.copy(enabledDisplays = newDisplays)
         }
     }
 

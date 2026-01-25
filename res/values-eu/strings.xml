@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"Erakutsi HDR/SDR erlazioa"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"Erakutsi oraingo HDR/SDR erlazioa"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFCa"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Behartu gailua desblokeatzera NFCa erabiltzeko"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"Eskatu gailua desblokeatzeko"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Aplikazioaren edukia NFC bidez transmititzeko prest"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Desaktibatuta"</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Desaktibatuta"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"Operadore-identifikatzailea"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Datuetarako sare mugikor mota"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Ahots-deietarako sare mugikor mota"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Operadorearen informazioa"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Egiaztatu PINa"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Egiaztatu pasahitza"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Egiaztatu zeu zarela"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Idatzi beste gailuaren eredua Google-ko kontuak, ezarpenak eta abar transferitzeko. Enkriptatuta dago eredua."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Idatzi beste gailuaren PINa Google-ko kontuak, ezarpenak eta abar transferitzeko. Enkriptatuta dago PINa."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Idatzi beste gailuaren pasahitza Google-ko kontuak, ezarpenak eta abar transferitzeko. Enkriptatuta dago pasahitza."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"Erabili eredu bera gailua desblokeatzeko"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"Erabili PIN bera gailua desblokeatzeko"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"Erabili pasahitz bera gailua desblokeatzeko"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Egiaztatu eredua"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Egiaztatu PINa"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Egiaztatu pasahitza"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Ezarpen bizkorrak"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Pasatu hatza pantailaren goialdetik beherantz}other{Pasatu # hatz pantailaren goialdetik beherantz}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Pasatu hatza pantailaren goialdetik beherantz. Gailuaren konfigurazio-prozesua amaitzean egongo da erabilgarri lasterbidea.}other{Pasatu # hatz pantailaren goialdetik beherantz. Gailuaren konfigurazio-prozesua amaitzean egongo da erabilgarri lasterbidea.}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"Goiko errenkadako tekla"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"Sakatu teklatuaren goiko errenkadako erabilerraztasun-tekla"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Ezarpen bizkorrak"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Bolumen-botoiak"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"bolumen-botoiak"</string>
@@ -3479,12 +3469,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Beste erabiltzaileak"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Ezabatu gonbidatuaren jarduerak"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Gonbidatu modutik irtetean, ezabatu gonbidatuaren aplikazio eta datu guztiak"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"Eman gailua erabiltzeko baimena gonbidatuari"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"Gonbidatu modutik irtetean, gonbidatuaren aplikazio eta datu guztiak ezabatuko dira"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"gehitu, gonbidatua"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Gonbidatuaren jarduerak ezabatu nahi dituzu?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Gonbidatuentzako saio honetako aplikazio eta datuak orain ezabatuko dira; bestalde, etorkizuneko gonbidatuen jarduera guztiak gonbidatu modutik irteten zaren bakoitzean ezabatuko dira"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"ezabatu, gonbidatu, jarduera, kendu, datuak, bisitari"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetootha, Android Auto, NFCa"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetootha, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Gailua"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"Teklatua, ukipen-panela, pantaila, soinua"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Ez dago erabilgarri NFCa desaktibatuta dagoelako"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Erabiltzeko, instalatu ordainketak egiteko aplikazio bat"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Azkenaldiko aplikazioak, aplikazio lehenetsiak"</string>
@@ -3955,8 +3947,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Jaso mezu luzeen laburpen bizkorrak"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Erabili jakinarazpenen laburpenak"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Laburbildu mezu luzeak eta taldeko elkarrizketak laburpen bizkorrak jasotzeko.\n\nLaburpenek AA erabiltzen dute zure gailuan, eta baliteke hanka sartzea. Mezuak ez dira inoiz bidaltzen Google-ra."</string>
-    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
-    <skip />
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"Laburbildu mezu luzeak eta taldeko elkarrizketak laburpen bizkorrak jasotzeko.\n\nZure gailuko aplikazioek edo AAk ematen dituzte laburpenak, eta baliteke akatsak edukitzea. Mezuak ez dira inoiz bidaltzen Google-ra."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Aplikazio hauen jakinarazpenak ez dira laburbilduko"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Kudeatu aplikazioak"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Kudeatu jakinarazpenen laburpenen aplikazioak"</string>
@@ -4399,6 +4390,12 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Berrabiarazi"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Orain ez"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Lortu Memoriaren babes aurreratua eginbideari buruzko informazio gehiago."</string>
+    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
+    <skip />
+    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
+    <skip />
+    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Honek kudeatzen du laneko profil hau:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Kudeatzailea: <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Ireki modu lehenetsian"</string>
@@ -4445,12 +4442,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Kendu baimenak, ezabatu aldi baterako fitxategiak eta geldiarazi jakinarazpenak"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Kudeatu aplikazioa erabiltzen ez bada"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Kendu baimenak, ezabatu aldi baterako fitxategiak, geldiarazi jakinarazpenak eta artxibatu aplikazioa"</string>
-    <!-- no translation found for task_continuity_category (3736049711007817178) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
-    <skip />
+    <string name="task_continuity_category" msgid="3736049711007817178">"Zereginen jarraitutasuna"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"Aplikazioen zereginak"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"Jarraitu utzi zenuen tokitik beste gailuetan erraz asko"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Aplikazio guztiak"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Instalatutako aplikazioak"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Zuzeneko aplikazioak"</string>
@@ -4522,6 +4516,18 @@
     <string name="usb_default_label" msgid="3372838450371060750">"USB bidezko konfigurazio lehenetsia"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Bateria kontrolatzeko aukerak"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Fitxategiak transferitzeko aukerak"</string>
+    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
+    <skip />
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB bidezko konexioaren hobespenak"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"Honek kontrolatzen du USB bidezko konexioa:"</string>
@@ -4530,7 +4536,7 @@
     <string name="usb_switching" msgid="3654709188596609354">"Aldatzen…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Ezin izan da aldatu"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"Gailua kargatzen"</string>
-    <string name="usb_summary_power_only" msgid="4901734938857822887">"Konektatutako gailua kargatzea"</string>
+    <string name="usb_summary_power_only" msgid="4901734938857822887">"Konektatutako gailua kargatzen"</string>
     <string name="usb_summary_file_transfers" msgid="5498487271972556431">"Fitxategi-transferentzia"</string>
     <string name="usb_summary_tether" msgid="2554569836525075702">"Konexioa USB bidez partekatzea"</string>
     <string name="usb_summary_photo_transfers" msgid="7331503733435780492">"PTP"</string>
@@ -5691,20 +5697,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> operadoreak aktibatuta eduki behar du 2G sarea"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Onartu sare enkriptatuak soilik"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Aukera hau seguruagoa da, baina baliteke kokapen batzuetan sare mugikorreko konexioa mugatuta edukitzea. Beti egin ahal izango dituzu larrialdi-deiak."</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"2G sareen aurreko babesa desaktibatu nahi duzu?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> operadorearen SIMaren oraingo sareak ez du onartzen 2G. 2Garen babesa desaktibatzen baduzu, 2G sare kaltegarri eta faltsuetara konektatzeko arriskua izango duzu."</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Desaktibatu"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G sareen aurreko babesa"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G sareen aurreko babesa aktibatuta dago"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> operadorearen SIMaren oraingo sarea erabiltzeko, 2G sareen aurreko babesa aktibatuta egon behar da. Hala ere, 2Garen babesa desgaitzea aukera dezakezu, zure ardurapean."</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Ezarpenak"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Zerbitzu guztiak"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Erakutsi arbela erabiltzen denean"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Erakutsi mezu bat aplikazio batek kopiatu duzun testua, irudiak edo edukiak atzitzen dituenean"</string>
@@ -5800,6 +5799,10 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> bider <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Aspektu-erlazioa aldatzean, aplikazioa berrabiarazi egingo da. Litekeena da gorde ez diren aldaketak galtzea. Aplikazio guztiak ez daude aspektu-erlazio jakin batzuetarako optimizatuta."</string>
+    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
+    <skip />
+    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Hatz-marken sentsorea"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Argi-jakinarazpenak"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Argi-jakinarazpenei buruz"</string>
@@ -6135,8 +6138,7 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Osatu da ekintza"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Segurtasunari eta pribatutasunari buruzko ezarpen bizkorrak"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Pribatutasun-ezarpenak"</string>
-    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
-    <skip />
+    <string name="safety_center_review_settings" msgid="295527297192914772">"Berrikusi ezarpenak"</string>
     <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Ireki"</string>
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Aldatu. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"Blokeatuta"</string>
@@ -6166,6 +6168,25 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Satelite bidezko informazioa atzitzea errazagoa izan dadin, gehitu satelitearen lauza Ezarpen bizkorrak menuan"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Gehitu lauza"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Satelitearen lauzako eskaera-mezuak"</string>
-    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <skip />
+    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
+    <skip />
+    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
+    <skip />
+    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
+    <skip />
+    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
+    <skip />
+    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
+    <skip />
+    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
+    <skip />
+    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
     <skip />
 </resources>

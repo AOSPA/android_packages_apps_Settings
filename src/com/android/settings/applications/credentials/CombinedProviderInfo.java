@@ -396,21 +396,27 @@ public final class CombinedProviderInfo {
         return intent;
     }
 
-    /** Launches the settings activity intent. */
-    public static void launchSettingsActivityIntent(
+    /**
+     * Launches the settings activity intent.
+     *
+     * @return {@code true} if the activity started successfully, {@code false} otherwise.
+     */
+    public static boolean launchSettingsActivityIntent(
             @NonNull Context context,
             @Nullable CharSequence packageName,
             @Nullable CharSequence settingsActivity,
             int userId) {
         Intent settingsIntent = createSettingsActivityIntent(packageName, settingsActivity);
         if (settingsIntent == null) {
-            return;
+            return false;
         }
 
         try {
             context.startActivityAsUser(settingsIntent, UserHandle.of(userId));
+            return true;
         } catch (ActivityNotFoundException e) {
             Log.e(TAG, "Failed to open settings activity", e);
+            return false;
         }
     }
 }

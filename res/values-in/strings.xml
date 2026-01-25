@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"Tampilkan rasio HDR/SDR"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"Tampilkan rasio HDR/SDR saat ini"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Wajibkan kunci perangkat dibuka untuk menggunakan NFC"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"Memerlukan pembukaan kunci perangkat"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Siap mentransmisikan konten apl melalui NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Mati"</string>
@@ -1896,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verifikasi PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verifikasi sandi"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Verifikasi diri Anda"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Masukkan pola perangkat Anda yang lain untuk mentransfer Akun Google, setelan, dan lainnya. Pola Anda dienkripsi."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Masukkan PIN perangkat Anda yang lain untuk mentransfer Akun Google, setelan, dan lainnya. PIN Anda dienkripsi."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Masukkan sandi perangkat Anda yang lain untuk mentransfer Akun Google, setelan, dan lainnya. Sandi Anda dienkripsi."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"Gunakan pola yang sama untuk membuka kunci perangkat ini"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"Gunakan PIN yang sama untuk membuka kunci perangkat ini"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"Gunakan sandi yang sama untuk membuka kunci perangkat ini"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Verifikasi pola"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Verifikasi PIN"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Verifikasi sandi"</string>
@@ -3627,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Perangkat"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"Keyboard, Touchpad, Layar, Suara"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Tidak tersedia karena NFC nonaktif"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Untuk menggunakannya, instal aplikasi pembayaran terlebih dahulu"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Aplikasi baru-baru ini, aplikasi default"</string>
@@ -3948,8 +3947,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Dapatkan ringkasan cepat dari pesan yang panjang"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Gunakan ringkasan notifikasi"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Ringkas pesan panjang dan percakapan grup untuk mendapatkan rangkuman singkat.\n\nRingkasan menggunakan AI di perangkat Anda, yang terkadang dapat membuat kesalahan. Pesan Anda tidak pernah dikirim ke Google."</string>
-    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
-    <skip />
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"Ringkas pesan panjang dan percakapan grup untuk mendapatkan rangkuman singkat.\n\nRingkasan disediakan oleh aplikasi atau AI di perangkat Anda dan mungkin berisi kesalahan. Pesan Anda tidak pernah dikirim ke Google."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Notifikasi dari aplikasi ini tidak akan diringkas"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Kelola aplikasi"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Kelola aplikasi untuk ringkasan notifikasi"</string>
@@ -4392,6 +4390,12 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Mulai ulang"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Lain kali"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Pelajari lebih lanjut Perlindungan memori lanjutan."</string>
+    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
+    <skip />
+    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
+    <skip />
+    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Profil kerja ini dikelola oleh:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Dikelola oleh <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Buka secara default"</string>
@@ -4512,6 +4516,18 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Konfigurasi USB default"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Opsi daya"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opsi transfer file"</string>
+    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
+    <skip />
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Preferensi USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB dikontrol oleh"</string>
@@ -5783,6 +5799,10 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> kali <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Aplikasi akan dimulai ulang saat Anda mengubah rasio aspek. Anda mungkin akan kehilangan perubahan yang belum disimpan. Beberapa aplikasi mungkin tidak dioptimalkan untuk rasio aspek tertentu."</string>
+    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
+    <skip />
+    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor sidik jari"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notifikasi flash"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Tentang notifikasi flash"</string>
@@ -5892,9 +5912,9 @@
     <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Orang yang mendengarkan dapat mendengar media Anda, tetapi tidak audio dalam panggilan."</string>
     <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Berhenti berbagi"</string>
     <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Setelan"</string>
-    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Pilih perangkat yang ingin diputuskan hubungannya"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Pilih perangkat yang ingin diputus hubungannya"</string>
     <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Hanya 2 perangkat yang dapat berbagi audio pada satu waktu"</string>
-    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Putuskan hubungan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Putus hubungan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Hubungkan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Anda akan berhenti berbagi audio dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Anda akan berhenti berbagi audio dengan <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> dan <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
@@ -5934,7 +5954,7 @@
     <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Tutup"</string>
     <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Dengarkan"</string>
     <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Coba lagi"</string>
-    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Mendengarkan streaming audio"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Dengarkan streaming audio"</string>
     <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Streaming audio akan diputar di <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Gunakan perangkat ini untuk mengontrol volume."</string>
     <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Tidak dapat mendengarkan streaming audio"</string>
     <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"headphone kompatibel yang terhubung"</string>
@@ -6148,6 +6168,25 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Akses info satelit dengan mudah dengan menambahkan kartu Satelit ke Setelan Cepat"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Tambahkan kartu"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Perintah Kartu Satelit"</string>
-    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <skip />
+    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
+    <skip />
+    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
+    <skip />
+    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
+    <skip />
+    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
+    <skip />
+    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
+    <skip />
+    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
+    <skip />
+    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
     <skip />
 </resources>

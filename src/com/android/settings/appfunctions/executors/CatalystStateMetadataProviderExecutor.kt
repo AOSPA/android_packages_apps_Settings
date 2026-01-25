@@ -19,12 +19,14 @@ package com.android.settings.appfunctions.executors
 import android.app.appsearch.GenericDocument
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Binder
 import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateMetadataProviderExecutorResult
 import com.android.settingslib.graph.PreferenceGetterFlags
+import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.toProto
 import com.android.settingslib.metadata.PreferenceHierarchyNode
@@ -146,7 +148,7 @@ class CatalystStateMetadataProviderExecutor(
                 DeviceStateItemMetadata(
                     // TODO: Expose parameterization
                     key = "${screenMetaData.key}/${metadataProto.key}",
-                    purpose = metadataProto.key,
+                    purpose = metadataProto.getPurposeString(),
                     name =
                         LocalizedString(
                             english = metadata.getPreferenceTitle(englishContext).toString(),
@@ -177,6 +179,18 @@ class CatalystStateMetadataProviderExecutor(
             itemizationType = if (isParameterized) "ITEMIZED SCREEN" else null,
         )
     }
+
+    private fun PreferenceProto.getPurposeString(): String =
+        if (this.purpose != 0) {
+            try {
+                context.getString(this.purpose)
+            } catch (e: Resources.NotFoundException) {
+                Log.w(TAG, "Cannot get purpose for: ${this.key}", e)
+                this.key
+            }
+        } else {
+            this.key
+        }
 
     companion object {
         private const val TAG = "CatalystStateMetadataProviderExecutor"

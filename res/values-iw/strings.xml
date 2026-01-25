@@ -653,7 +653,7 @@
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"הגדרת פתיחת הנעילה בטביעת אצבע למרחב הפרטי"</string>
     <string name="private_space_fingerprint_unlock_title_new" msgid="5524309056115678364">"זיהוי טביעת אצבע כדי לפתוח את המרחב הפרטי"</string>
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"הגדרה של פתיחת המרחב הפרטי על ידי זיהוי הפנים"</string>
-    <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"ביטול נעילה בטביעת אצבע ובזיהוי הפנים למרחב הפרטי"</string>
+    <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"פתיחת המרחב הפרטי בטביעת אצבע וזיהוי פנים"</string>
     <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"הגדרה של ביטול הנעילה בטביעת אצבע למרחב הפרטי"</string>
     <string name="private_space_fingerprint_enroll_introduction_message" msgid="9092068873421435300">"אפשר להשתמש בטביעת האצבע כדי לפתוח את הנעילה של המרחב הפרטי או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות או באישור רכישה"</string>
     <string name="private_space_fingerprint_enroll_finish_message" msgid="4754797926493316965">"אפשר להשתמש בטביעת אצבע כדי לבטל את הנעילה של המרחב הפרטי או כדי לאשר רכישות"</string>
@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"‏הצגת יחס HDR/SDR"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"‏הצגת יחס ה-HDR/SDR הנוכחי"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"‏דרישה לפתיחה של נעילת המכשיר בשביל NFC"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"נדרשת פתיחת הנעילה במכשיר"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"‏מוכן לשדר תוכן אפליקציה באמצעות NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"כבוי"</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"כבויה"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"מזהה הספק"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"סוג הרשת של חבילת הגלישה"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"סוג הרשת הקולית לנייד"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"נתוני ספק"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"אימות של קוד הגישה"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"אימות סיסמה"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"אימות הזהות שלך"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"‏כדי להעביר את חשבונות Google, הגדרות ועוד, צריך להזין את קו פתיחת הנעילה של המכשיר האחר. קו פתיחת הנעילה שלך מוצפן."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"‏כדי להעביר את חשבונות Google, הגדרות ועוד, צריך להזין את קוד האימות של המכשיר האחר. קוד האימות שלך מוצפן."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"‏כדי להעביר את חשבונות Google, הגדרות ועוד, צריך להזין את הסיסמה של המכשיר האחר. הסיסמה שלך מוצפנת."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"כדי לפתוח את הנעילה של המכשיר הזה, צריך להשתמש באותו קו פתיחת נעילה"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"כדי לפתוח את הנעילה של המכשיר הזה, צריך להשתמש באותו קוד אימות"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"כדי לפתוח את הנעילה של המכשיר הזה, צריך להשתמש באותה סיסמה"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"אימות של קו ביטול הנעילה"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"אימות של קוד הגישה"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"אימות הסיסמה"</string>
@@ -2488,7 +2480,7 @@
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"שינוי התצוגה של הטקסט"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"נושא: עיצובים של כדור פורח"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"מאת: יובל"</string>
-    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"בוקר טוב!\n\nרציתי לבדוק איך מתקדמות התוכניות. הן יהיו מוכנות לפני שנתחיל לעצב את הבלונים החדשים?"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"בוקר טוב!\n\nרציתי לבדוק איך מתקדמות התוכניות. הן יהיו מוכנות לפני שנתחיל לעצב את הכדורים החדשים?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"איפוס ההגדרות"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"הגדרות גודל התצוגה והטקסט אופסו"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"לאפס את גודל התצוגה והטקסט?"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"הגדרות מהירות"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{החלקה למטה מהחלק העליון של המסך}one{החלקה למטה עם # אצבעות מהחלק העליון של המסך}two{החלקה למטה עם # אצבעות מהחלק העליון של המסך}other{החלקה למטה עם # אצבעות מהחלק העליון של המסך}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{מחליקים למטה מהחלק העליון של המסך. קיצור הדרך יהיה זמין כשהגדרת המכשיר תסתיים.}one{מחליקים למטה עם # אצבעות מהחלק העליון של המסך. קיצור הדרך יהיה זמין כשהגדרת המכשיר תסתיים.}two{מחליקים למטה עם # אצבעות מהחלק העליון של המסך. קיצור הדרך יהיה זמין כשהגדרת המכשיר תסתיים.}other{מחליקים למטה עם # אצבעות מהחלק העליון של המסך. קיצור הדרך יהיה זמין כשהגדרת המכשיר תסתיים.}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"מקש בשורה העליונה"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"צריך ללחוץ על מקש הנגישות בשורה העליונה של המקלדת"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"הגדרות מהירות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"כפתורי עוצמת הקול"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"כפתורי עוצמת הקול"</string>
@@ -3479,12 +3469,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"משתמשים אחרים"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"מחיקת פעילות האורח"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"כל האפליקציות והנתונים של האורח יימחקו ביציאה ממצב אורח"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"לאפשר לאורח להשתמש במכשיר"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"כל האפליקציות והנתונים של האורח יימחקו ביציאה ממצב אורח"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"הוספת אורח"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"למחוק את הפעילות במצב אורח?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"האפליקציות והנתונים מהגלישה הזו במצב אורח יימחקו עכשיו, וכל פעילות עתידית במצב אורח תימחק בכל יציאה ממצב זה"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"מחיקה, פעילות, אורח, הסרה, נתונים, מבקר, למחוק"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"‏Bluetooth, ‏Android Auto, ‏NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"‏Bluetooth, ‏Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"מכשיר"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"מקלדת, לוח מגע, מסך, צליל"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"‏לא זמין כי NFC כבוי"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"כדי להשתמש, יש להתקין תחילה אפליקציה לתשלום"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"אפליקציות אחרונות, אפליקציות ברירת מחדל"</string>
@@ -3955,8 +3947,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"קבלת תקצירים מהירים של הודעות ארוכות"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"שימוש בסיכומי התראות"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"‏אפשר לסכם הודעות ארוכות ושיחות קבוצתיות כדי לקבל תקצירים מהירים.\n\nהתקצירים נוצרים באמצעות AI במכשיר שלך, ולפעמים עלולות להיות שגיאות. ההודעות שלך אף פעם לא נשלחות ל-Google."</string>
-    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
-    <skip />
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"‏אפשר לסכם הודעות ארוכות ושיחות קבוצתיות כדי לקבל תקצירים מהירים.\n\nהתקצירים נוצרים על ידי אפליקציות או AI במכשיר שלך ועלולים להכיל שגיאות. ההודעות שלך אף פעם לא נשלחות ל-Google."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"התראות מהאפליקציות האלה לא יסוכמו"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"ניהול האפליקציות"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"ניהול האפליקציות לסיכומי ההתראות"</string>
@@ -4399,6 +4390,12 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"הפעלה מחדש"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"לא עכשיו"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"מידע נוסף על הגנת הזיכרון המתקדמת"</string>
+    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
+    <skip />
+    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
+    <skip />
+    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"פרופיל העבודה הזה מנוהל על ידי:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"מנוהל על ידי <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"פתיחה כברירת מחדל"</string>
@@ -4445,12 +4442,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"הסרת ההרשאות, מחיקה של הקבצים הזמניים, הפסקה של קבלת ההתראות"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"הגבלת האפליקציה כשהיא לא בשימוש"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"ההרשאות יוסרו, הקבצים הזמניים יימחקו, ההתראות יופסקו והאפליקציה תעבור לארכיון"</string>
-    <!-- no translation found for task_continuity_category (3736049711007817178) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
-    <skip />
+    <string name="task_continuity_category" msgid="3736049711007817178">"המשכיות המשימות"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"משימות באפליקציה"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"להמשיך בצורה חלקה מהנקודה שבה הפסקת במכשירים אחרים"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"כל האפליקציות"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"אפליקציות מותקנות"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"אפליקציות ללא התקנה"</string>
@@ -4522,6 +4516,18 @@
     <string name="usb_default_label" msgid="3372838450371060750">"‏ברירת המחדל של תצורת USB"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"אספקת חשמל"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"אפשרויות העברת קבצים"</string>
+    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
+    <skip />
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"‏העדפות USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"‏USB נשלט על ידי:"</string>
@@ -5692,20 +5698,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"‏לצורך זמינות ב-<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> נדרשת רשת 2G"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"מתן הרשאה לרשתות מוצפנות בלבד"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"ההגדרה הזו מאובטחת יותר אבל היא עלולה להוביל לבעיות קליטה במקומות מסוימים. תמיד אפשר לבצע שיחת חירום."</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"‏להשבית את ההגנה ברשתות 2G?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"‏הרשת הנוכחית של כרטיס ה-SIM של <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> לא תומכת ב-2G. אם משביתים את ההגנה ברשת 2G, יש סיכון להתחברות לרשתות 2G מזויפות מזיקות."</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"השבתה"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"‏הגנה ברשתות 2G"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"‏ההגנה ברשתות 2G מופעלת"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"‏כדי להשתמש בכרטיס ה-SIM של <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> ברשת הנוכחית, צריך להפעיל את ההגנה ברשתות 2G. עדיין יש לך אפשרות להשבית את ההגנה על 2G באחריותך בלבד."</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"הגדרות"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"כל השירותים"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"הצגת גישה ללוח העריכה"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"הצגת הודעה כשאפליקציות ניגשות לטקסט, לתמונות או לתכנים אחרים שהעתקת"</string>
@@ -5801,6 +5800,10 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> על <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"אחרי שמשנים את יחס הגובה-רוחב האפליקציה מופעלת מחדש. אם שינויים לא יישמרו לפני ההפעלה מחדש, יכול להיות שהם יימחקו. אפליקציות מסוימות לא יעבדו בצורה אופטימלית בחלק מיחסי הגובה-רוחב."</string>
+    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
+    <skip />
+    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"חיישן טביעות אצבע"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"הבהוב על התראות"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"מידע על הבהוב על התראות"</string>
@@ -6136,8 +6139,7 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"הפעולה הושלמה"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"הגדרות מהירות של אבטחה ופרטיות"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"אמצעי הבקרה שלך על פרטיות"</string>
-    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
-    <skip />
+    <string name="safety_center_review_settings" msgid="295527297192914772">"בדיקת ההגדרות"</string>
     <string name="safety_center_qs_open_action" msgid="8683771989007581791">"פתיחה"</string>
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"מתג. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"אין גישה"</string>
@@ -6167,6 +6169,25 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"אפשר להוסיף את כפתור הלוויין להגדרות המהירות כדי לגשת בקלות למידע על לוויינים"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"הוספת כפתור"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"הנחיות לכפתור של הלוויין"</string>
-    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <skip />
+    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
+    <skip />
+    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
+    <skip />
+    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
+    <skip />
+    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
+    <skip />
+    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
+    <skip />
+    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
+    <skip />
+    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
     <skip />
 </resources>

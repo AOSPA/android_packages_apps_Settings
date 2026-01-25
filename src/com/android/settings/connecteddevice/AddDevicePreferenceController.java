@@ -36,6 +36,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
  * device. It monitor Bluetooth's status(on/off) and decide if need
  * to show summary or not.
  */
+// LINT.IfChange
 public class AddDevicePreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
@@ -93,3 +94,4 @@ public class AddDevicePreferenceController extends BasePreferenceController
         return mBluetoothAdapter != null && mBluetoothAdapter.isEnabled();
     }
 }
+// LINT.ThenChange(../accessibility/hearingdevices/ui/PairHearingDeviceScreen.kt)

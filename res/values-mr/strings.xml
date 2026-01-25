@@ -263,7 +263,7 @@
     <string name="numbers_preferences_title" msgid="8197418984391195446">"क्रमांकांची प्राधान्ये"</string>
     <string name="measurement_system_preferences_title" msgid="5539250190895110890">"मापनाशी संबंधित सिस्टीम"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"डीफॉल्ट वापरा"</string>
-    <string name="celsius_temperature_unit" msgid="8896459071273084507">"सेल्सियस (°C)"</string>
+    <string name="celsius_temperature_unit" msgid="8896459071273084507">"सेल्सिअस (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"फॅरेनहाइट (°F)"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"रविवार"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"सोमवार"</string>
@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"HDR/SDR रेशो दाखवा"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"सध्याचा HDR/SDR रेशो दाखवा"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"NFC साठी डिव्हाइस अनलॉक आवश्यक आहे"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"डिव्हाइस अनलॉक आवश्यक आहे"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android बीम"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"NFC द्वारे अ‍ॅप आशय प्रक्षेपित करण्यास तयार"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"बंद"</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"बंद"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"वाहक आयडी"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"मोबाइल डेटा नेटवर्क प्रकार"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"मोबाइल व्हॉइस नेटवर्क प्रकार"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"ऑपरेटर माहिती"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"पिनची पडताळणी करा"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"पासवर्डची पडताळणी करा"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"तुमची ओळख पडताळा"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Google खाती, सेटिंग्ज आणि आणखी बऱ्याच गोष्टी ट्रान्सफर करण्यासाठी तुमच्या दुसऱ्या डिव्हाइसचा पॅटर्न एंटर करा. तुमचा पॅटर्न एंक्रिप्ट केलेला आहे."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Google खाते, सेटिंग्ज आणि आणखी बऱ्याच गोष्टी ट्रान्सफर करण्यासाठी तुमच्या दुसऱ्या डिव्हाइसचा पिन एंटर करा. तुमचा पिन एंक्रिप्ट केलेला आहे."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Google खाती, सेटिंग्ज आणि आणखी बऱ्याच गोष्टी ट्रान्सफर करण्यासाठी तुमच्या दुसऱ्या डिव्हाइसचा पासवर्ड एंटर करा. तुमचा पासवर्ड एंक्रिप्ट केलेला आहे."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"हे डिव्हाइस अनलॉक करण्यासाठी तोच पॅटर्न वापरा"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"हे डिव्हाइस अनलॉक करण्यासाठी तोच पिन वापरा"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"हे डिव्हाइस अनलॉक करण्यासाठी तोच पासवर्ड वापरा"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"पॅटर्नची पडताळणी करा"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"पिनची पडताळणी करा"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"पासवर्डची पडताळणी करा"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"क्विक सेटिंग्ज"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{तुमच्या स्क्रीनच्या सर्वात वरून खाली स्वाइप करा}other{# बोटांनी तुमच्या स्क्रीनच्या सर्वात वरून खाली स्वाइप करा}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{तुमच्या स्क्रीनच्या सर्वात वरून खाली स्वाइप करा. तुम्ही डिव्हाइसचे सेटअप पूर्ण केल्यानंतर हा शॉर्टकट उपलब्ध होईल.}other{# बोटांनी तुमच्या स्क्रीनच्या सर्वात वरून खाली स्वाइप करा. तुम्ही डिव्हाइसचे सेटअप पूर्ण केल्यानंतर हा शॉर्टकट उपलब्ध होईल.}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"सर्वात वरच्या पंक्तीची की"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"कीबोर्डच्या सर्वात वरील पंक्तीमध्ये अ‍ॅक्सेसिबिलिटी की प्रेस करा"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"क्विक सेटिंग्ज"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"व्हॉल्यूम की"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"व्हॉल्यूम की"</string>
@@ -3479,12 +3469,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"इतर वापरकर्ते"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"अतिथी अ‍ॅक्टिव्हिटी हटवा"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"अतिथी मोडमधून बाहेर पडताना सर्व अतिथी अ‍ॅप्स आणि डेटा हटवा"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"अतिथीला डिव्हाइस वापरण्याची अनुमती द्या"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"अतिथी मोडमधून बाहेर पडताना सर्व अतिथी अ‍ॅप्स आणि डेटा हटवला जाईल"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"जोडा, अतिथी"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"अतिथी अ‍ॅक्टिव्हिटी हटवायची का?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"या अतिथी सत्रातील अ‍ॅप्स आणि डेटा आता हटवला जाईल व प्रत्येक वेळी तुम्ही अतिथी मोडमधून बाहेर पडाल, तेव्हा भविष्यातील सर्व अतिथी अ‍ॅक्टिव्हिटी हटवली जाईल"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"हटवा, अतिथी, अ‍ॅक्टिव्हिटी, काढून टाका, डेटा, मिटवा"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"ब्लूटूथ, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"ब्लूटूथ, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"डिव्हाइस"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"कीबोर्ड, टचपॅड, डिस्प्ले, आवाज"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC बंद असल्याने उपलब्ध नाही"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"वापरण्यासाठी आधी एक पेमेंट अ‍ॅप इंस्टॉल करा"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"अलीकडील अ‍ॅप्स, डीफॉल्ट अ‍ॅप्स"</string>
@@ -4398,6 +4390,12 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"रीस्टार्ट करा"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"आता नको"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"प्रगत मेमरी संरक्षणाबद्दल अधिक जाणून घ्या."</string>
+    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
+    <skip />
+    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
+    <skip />
+    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"ही कार्य प्रोफाइल याद्वारे व्यवस्थापित केली आहे:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> द्वारे व्यवस्थापित"</string>
     <string name="launch_by_default" msgid="892824422067985734">"बाय डीफॉल्ट उघडा"</string>
@@ -4444,12 +4442,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"परवानग्या काढून टाका, तात्पुरत्या फाइल हटवा आणि सूचना थांबवा"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"न वापरल्यास, ॲप व्यवस्थापित करा"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"परवानग्या काढून टाका, तात्पुरत्या फाइल हटवा, नोटिफिकेशन थांबवा आणि ॲप संग्रहित करा"</string>
-    <!-- no translation found for task_continuity_category (3736049711007817178) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
-    <skip />
+    <string name="task_continuity_category" msgid="3736049711007817178">"टास्कशी संबंधित सातत्य"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"अ‍ॅप टास्क"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"तुम्ही इतर डिव्हाइसवर जिथे सोडले होते, तिथून पुढे अखंडपणे सुरू ठेवा"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"सर्व अ‍ॅप्स"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"इंस्टॉल केलेली अ‍ॅप्स"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"इन्स्टंट अ‍ॅप्स"</string>
@@ -4521,6 +4516,18 @@
     <string name="usb_default_label" msgid="3372838450371060750">"डीफॉल्ट USB काँफिगरेशन"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"पॉवरशी संबंधित पर्याय"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"फाइल ट्रान्सफर पर्याय"</string>
+    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
+    <skip />
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB प्राधान्ये"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB वर यांचे नियंत्रण आहे"</string>
@@ -5661,12 +5668,12 @@
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"रिंग होण्यापासून थांबवणे वापरा"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"वाय-फाय हॉटस्पॉट वापरा"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"ॲप पिनिंग वापरणे"</string>
-    <string name="developer_options_main_switch_title" msgid="1720074589554152501">"डेव्हलपर पर्याय वापरणे"</string>
+    <string name="developer_options_main_switch_title" msgid="1720074589554152501">"डेव्हलपर पर्याय वापरा"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"प्रिंट सेवा वापरा"</string>
     <string name="multiple_users_main_switch_title" msgid="9158796544835843201">"वापरकर्ता स्विच करण्याची अनुमती द्या"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"अनुमती द्या, एकाहून अधिक, वापरकर्ता, परवानगी द्या, बरेच"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"एकाहून अधिक, वापरकर्ते, प्रोफाइल, लोक, खाती, स्विच करा, अनेक"</string>
-    <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"वायरलेस डीबगिंग वापरणे"</string>
+    <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"वायरलेस डीबगिंग वापरा"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"ग्राफिक ड्रायव्हर प्राधान्ये वापरणे"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"रात्रीचा प्रकाश वापरणे"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"NFC वापरणे"</string>
@@ -5690,20 +5697,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> साठी 2G उपलब्ध असण्याची आवश्यकता आहे"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"एन्क्रिप्ट केलेल्या नेटवर्कनाच अनुमती द्या"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"हे आणखी सुरक्षित आहे, पण काही ठिकाणी तुमच्या मोबाइल नेटवर्कचे कनेक्शन मर्यादित करू शकते. आणीबाणी कॉलला नेहमी अनुमती दिलेली असते."</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"2G नेटवर्क संरक्षण बंद करायचे आहे का?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> सिमसाठीचे सद्य नेटवर्क 2G ला सपोर्ट करत नाही. 2G संरक्षण बंद केल्याने तुम्हाला हानिकारक स्पूफ केलेल्या 2G नेटवर्कशी कनेक्ट होण्याचा धोका निर्माण होईल."</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"बंद करा"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G नेटवर्क संरक्षण"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G नेटवर्क संरक्षण सुरू आहे"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> सिमसाठी सद्य नेटवर्ककरिता 2G संरक्षण सुरू केलेले असणे आवश्यक आहे. तुम्ही तरीही तुमच्या स्वतःच्या जोखमीवर 2G संरक्षण बंद करणे निवडू शकता."</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"सेटिंग्ज"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"सर्व सेवा"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"क्लिपबोर्डचा अ‍ॅक्सेस दाखवा"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"तुम्ही कॉपी केलेला मजकूर, इमेज किंवा इतर आशय ॲप्स अ‍ॅक्सेस करतात, तेव्हा मेसेज दाखवा"</string>
@@ -5799,6 +5799,10 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"४:३"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="DENOMINATOR">%2$s</xliff:g> बाय <xliff:g id="NUMERATOR">%1$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"तुम्ही आस्पेक्ट रेशो बदलता, तेव्हा ॲप रीस्टार्ट होईल. तुम्ही सेव्ह न केलेले बदल गमावू शकता. काही अ‍ॅप्स विशिष्ट आस्पेक्ट रेशोसाठी ऑप्टिमाइझ केली जाऊ शकत नाहीत."</string>
+    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
+    <skip />
+    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"फिंगरप्रिंट सेन्सर"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"फ्लॅश नोटिफिकेशन"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"फ्लॅश सूचनांबद्दल"</string>
@@ -5916,7 +5920,7 @@
     <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"तुम्ही <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> आणि <xliff:g id="DEVICE_NAME2">%2$s</xliff:g> सह ऑडिओ शेअर करणे थांबवाल"</string>
     <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"तुम्ही कनेक्ट केलेल्या हेडफोनसह ऑडिओ शेअर करणे थांबवाल"</string>
     <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"कनेक्ट करा"</string>
-    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"ऑडिओ शेअर करणे थांबवले आहे"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"ऑडिओ शेअरिंग थांबवले आहे"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"कंपॅटिबल डिव्हाइस कनेक्ट करा"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> वर स्विच करा"</string>
     <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"ऑडिओ स्ट्रीम सुरू होत आहे…"</string>
@@ -5979,7 +5983,7 @@
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"ऑडिओ शेअर करणारे डिव्हाइस किंवा जवळपासचे Auracast ब्रॉडकास्ट ऐका"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"तुमचे ऑडिओ डिव्हाइस"</string>
     <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"कंपॅटिबल हेडफोन कनेक्ट करा"</string>
-    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"जवळपासचे ऑडिओ स्ट्रीम"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"जवळपासची ऑडिओ स्ट्रीम"</string>
     <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"QR कोड स्कॅन करा"</string>
     <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"स्ट्रीमचा QR कोड स्कॅन करून ऐकणे सुरू करा"</string>
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"स्ट्रीम ऐका"</string>
@@ -6134,8 +6138,7 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"कृती पूर्ण झाली आहे"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"सुरक्षा आणि गोपनीयता क्विक सेटिंग्ज"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"तुमची गोपनीयता नियंत्रणे"</string>
-    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
-    <skip />
+    <string name="safety_center_review_settings" msgid="295527297192914772">"सेटिंग्जचे पुनरावलोकन करा"</string>
     <string name="safety_center_qs_open_action" msgid="8683771989007581791">"उघडा"</string>
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"स्विच करा. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"ब्लॉक केला आहे"</string>
@@ -6166,4 +6169,24 @@
     <string name="add_tile_action" msgid="5271301747196740442">"टाइल जोडा"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"सॅटेलाइट टाइल प्रॉम्प्ट"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"सॅटेलाइट"</string>
+    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <skip />
+    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
+    <skip />
+    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
+    <skip />
+    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
+    <skip />
+    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
+    <skip />
+    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
+    <skip />
+    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
+    <skip />
+    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <skip />
 </resources>

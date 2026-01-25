@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"HDR/SDR রেশিও দেখুন"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"বর্তমান HDR/SDR রেশিও দেখুন"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"NFC-এর জন্য ডিভাইস আনলক প্রয়োজন"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"ডিভাইস আনলক করতে হবে"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android বীম"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"NFC এর মাধ্যমে অ্যাপ্লিকেশন কন্টেন্ট পাঠাতে প্রস্তুত"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"বন্ধ আছে"</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"বন্ধ আছে"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID১"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"পরিষেবা প্রদানকারী আইডি"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"মোবাইল ডেটা নেটওয়ার্কের ধরন"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"মোবাইল ভয়েস নেটওয়ার্কের ধরন"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"অপারেটরের তথ্য"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"পিন যাচাই করুন"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"পাসওয়ার্ড যাচাই করুন"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"নিজের পরিচয় যাচাই করুন"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Google অ্যাকাউন্ট, সেটিংস ও আরও অনেক কিছু ট্রান্সফার করতে অন্য ডিভাইসে ব্যবহার করা প্যাটার্ন দিন। আপনার প্যাটার্ন এনক্রিপ্ট করা আছে।"</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Google অ্যাকাউন্ট, সেটিংস ও আরও অনেক কিছু ট্রান্সফার করতে অন্য ডিভাইসে ব্যবহার করা পিন লিখুন। আপনার পিন এনক্রিপ্ট করা আছে।"</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Google অ্যাকাউন্ট, সেটিংস ও আরও অনেক কিছু ট্রান্সফার করতে অন্য ডিভাইসে ব্যবহার করা পাসওয়ার্ড লিখুন। আপনার পাসওয়ার্ড এনক্রিপ্ট করা আছে।"</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"এই ডিভাইস আনলক করতে একই প্যাটার্ন ব্যবহার করুন"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"এই ডিভাইস আনলক করতে একই পিন ব্যবহার করুন"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"এই ডিভাইস আনলক করতে একই পাসওয়ার্ড ব্যবহার করুন"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"প্যাটার্ন যাচাই করুন"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"পিন যাচাই করুন"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"পাসওয়ার্ড যাচাই করুন"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"দ্রুত সেটিংস"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{আপনার স্ক্রিনের একেবারে উপর থেকে নিচের দিকে সোয়াইপ করুন}one{#টি আঙুল দিয়ে আপনার স্ক্রিনের একেবারে উপর থেকে নিচের দিকে সোয়াইপ করুন}other{#টি আঙুল দিয়ে আপনার স্ক্রিনের একেবারে উপর থেকে নিচের দিকে সোয়াইপ করুন}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{আপনার স্ক্রিনের একেবারে উপর থেকে নিচের দিকে সোয়াইপ করুন। আপনি ডিভাইস সেট-আপ সম্পূর্ণ করার পরে এই শর্টকার্ট উপলভ্য হবে।}one{#টি আঙুল দিয়ে আপনার স্ক্রিনের একেবারে উপর থেকে নিচের দিকে সোয়াইপ করুন। আপনি ডিভাইস সেট-আপ সম্পূর্ণ করার পরে এই শর্টকার্ট উপলভ্য হবে।}other{#টি আঙুল দিয়ে আপনার স্ক্রিনের একেবারে উপর থেকে নিচের দিকে সোয়াইপ করুন। আপনি ডিভাইস সেট-আপ সম্পূর্ণ করার পরে এই শর্টকার্ট উপলভ্য হবে।}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"উপরের সারির \'কী\'"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"কীবোর্ডের উপরের সারিতে অ্যাক্সেসিবিলিটি কী প্রেস করুন"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"দ্রুত সেটিংস"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"ভলিউম কী"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"ভলিউম কী"</string>
@@ -3479,12 +3469,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"অন্যান্য ব্যবহারকারী"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"অতিথি অ্যাক্টিভিটি মুছুন"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"\'অতিথি মোড\' ছেড়ে বেরিয়ে আসার সময় সব অতিথি অ্যাপ ও ডেটা মুছুন"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"অতিথিকে ডিভাইস ব্যবহারের অনুমতি দিন"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"\'অতিথি মোড\' ছেড়ে বেরিয়ে আসার সময় সব অতিথি অ্যাপ ও ডেটা মুছে যাবে"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"অতিথি যোগ করুন"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"অতিথি অ্যাক্টিভিটি মুছবেন?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"এই অতিথি সেশন থেকে এখন অ্যাপ এবং ডেটা মুছে দেওয়া হবে ও আপনি প্রত্যেকবার \'অতিথি মোড\' ছেড়ে বেরিয়ে আসার সময় পরবর্তী সব অতিথি অ্যাক্টিভিটি মুছে যাবে"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"মোছা, অতিথি, অ্যাক্টিভিটি, সরানো, ডেটা, দর্শক, মোছা"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"ব্লুটুথ, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"ব্লুটুথ, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"ডিভাইস"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"কীবোর্ড, টাচপ্যাড, ডিসপ্লে, সাউন্ড"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC বন্ধ থাকার জন্য উপলভ্য নেই"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ব্যবহার করার জন্য প্রথমে কোনও পেমেন্ট অ্যাপ ইনস্টল করতে হবে"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"সাম্প্রতিক অ্যাপ, ডিফল্ট অ্যাপ"</string>
@@ -3955,8 +3947,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"অপেক্ষাকৃত দীর্ঘ মেসেজের দ্রুত রিক্যাপ পান"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"বিজ্ঞপ্তি সম্পর্কিত সারসংক্ষেপ ব্যবহার করুন"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"দ্রুত রিক্যাপ পেতে, দীর্ঘ মেসেজ এবং গ্রুপ কথোপকথনের সারসংক্ষেপ করুন।\n\nসারসংক্ষেপ আপনার ডিভাইসে AI ব্যবহার করে, যা মাঝে মাঝে ভুল করতে পারে। আপনার মেসেজগুলি কখনও Google-কে পাঠানো হয় না।"</string>
-    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
-    <skip />
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"দ্রুত রিক্যাপ পেতে, দীর্ঘ মেসেজ এবং গ্রুপ কথোপকথনের সারসংক্ষেপ করুন।\n\nআপনার ডিভাইসে অ্যাপ বা AI সারসংক্ষেপ প্রদান করে এবং এতে ভুল থাকতে পারে। আপনার মেসেজগুলি কখনও Google-কে পাঠানো হয় না।"</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"এইসব অ্যাপ থেকে আসা বিজ্ঞপ্তির সারসংক্ষেপ করা হবে না"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"অ্যাপ ম্যানেজ করুন"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"বিজ্ঞপ্তি সম্পর্কিত সারসংক্ষেপের জন্য অ্যাপ ম্যানেজ করুন"</string>
@@ -4399,6 +4390,12 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"রিস্টার্ট করুন"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"এখন নয়"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"\'উন্নত মেমরি সুরক্ষা\' সম্পর্কে আরও জানুন।"</string>
+    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
+    <skip />
+    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
+    <skip />
+    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"এর দ্বারা এই অফিস প্রোফাইলটি পরিচালিত হয়:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> এর দ্বারা পরিচালিত"</string>
     <string name="launch_by_default" msgid="892824422067985734">"ডিফল্ট হিসেবে খোলে"</string>
@@ -4445,12 +4442,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"অনুমতি সরান, অস্থায়ী ফাইল মুছুন এবং বিজ্ঞপ্তি বন্ধ করুন"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"ব্যবহার না করা হলে অ্যাপ ম্যানেজ করুন"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"অনুমতি সরান, অস্থায়ী ফাইল মুছুন এবং বিজ্ঞপ্তি বন্ধ করুন এবং অ্যাপ আর্কাইভ করুন"</string>
-    <!-- no translation found for task_continuity_category (3736049711007817178) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
-    <skip />
+    <string name="task_continuity_category" msgid="3736049711007817178">"টাস্ক কন্টিনিউটি"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"অ্যাপ টাস্ক"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"অন্য ডিভাইসে যেখানে ছেড়ে গিয়েছিলেন সেখান থেকেই নির্বিঘ্নে চালিয়ে যান"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"সব অ্যাপ"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ইনস্টল করা অ্যাপ"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ইনস্ট্যান্ট অ্যাপ"</string>
@@ -4522,6 +4516,18 @@
     <string name="usb_default_label" msgid="3372838450371060750">"ডিফল্ট ইউএসবি কনফিগারেশন"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"পাওয়ারের বিভিন্ন বিকল্প"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"ফাইল ট্রান্সফার করার বিকল্প"</string>
+    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
+    <skip />
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB সংক্রান্ত পছন্দ"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB যে ডিভাইস দ্বারা নিয়ন্ত্রিত"</string>
@@ -5691,20 +5697,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>-এর জন্য 2G উপলভ্য থাকতে হবে"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"শুধু এনক্রিপটেড নেটওয়ার্কের অনুমতি রয়েছে"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"এটি আরও বেশি সুরক্ষিত কিন্তু এটির জন্য কিছু লোকেশনে আপনার মোবাইল নেটওয়ার্ক কানেকশন সীমিত হতে পারে। জরুরি কল সবসময় ব্যবহারের অনুমতি রয়েছে।"</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"2G নেটওয়ার্ক সুরক্ষা বন্ধ করবেন?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> সিম কার্ডে বর্তমান নেটওয়ার্কে 2G চলে না। 2G সুরক্ষা বন্ধ করলে, ক্ষতিকর স্পুফ করা 2G নেটওয়ার্কের সাথে কানেক্ট হওয়ার ঝুঁকি তৈরি হবে।"</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"বন্ধ করুন"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G নেটওয়ার্ক সংক্রান্ত সুরক্ষা"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G নেটওয়ার্ক সুরক্ষা চালু আছে"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g>-এর বর্তমান সিম কার্ডে 2G সুরক্ষা চালু করতে হবে। আপনি এখনও নিজের ঝুঁকিতে 2G সুরক্ষা বন্ধ করার বিকল্প বেছে নিতে পারেন।"</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"সেটিংস"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"সব পরিষেবা"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ক্লিপবোর্ড অ্যাক্সেস দেখুন"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"আপনি কপি করেছেন এমন টেক্সট, ছবি বা অন্যান্য কন্টেন্ট, অ্যাপ অ্যাক্সেস করলে মেসেজ দেখুন"</string>
@@ -5800,6 +5799,10 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"৪:৩"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="DENOMINATOR">%2$s</xliff:g>:<xliff:g id="NUMERATOR">%1$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"আপনি অ্যাস্পেক্ট রেশিও পরিবর্তন করলে, অ্যাপ রিস্টার্ট হবে। সেভ না করা পরিবর্তন আপনি হারাতে পারেন। নির্দিষ্ট কোনও অ্যাস্পেক্ট রেশিওতে কিছু অ্যাপ অপ্টিমাইজ করা নাও যেতে পারে।"</string>
+    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
+    <skip />
+    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"ফিঙ্গারপ্রিন্ট সেন্সর"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ফ্ল্যাশ নোটিফিকেশন"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ফ্ল্যাশ বিজ্ঞপ্তি সম্পর্কে"</string>
@@ -6135,8 +6138,7 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"অ্যাকশন সম্পূর্ণ হয়েছে"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"সুরক্ষা ও গোপনীয়তা সংক্রান্ত দ্রুত সেটিংস"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"আপনার গোপনীয়তার কন্ট্রোল"</string>
-    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
-    <skip />
+    <string name="safety_center_review_settings" msgid="295527297192914772">"সেটিংস পর্যালোচনা করুন"</string>
     <string name="safety_center_qs_open_action" msgid="8683771989007581791">"খুলুন"</string>
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"পাল্টান। <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>। <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"ব্লক করা হয়েছে"</string>
@@ -6166,6 +6168,25 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"\'দ্রুত সেটিংস\'-এ স্যাটেলাইট টাইল যোগ করে সহজেই স্যাটেলাইট সংক্রান্ত তথ্য অ্যাক্সেস করুন"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"টাইল যোগ করুন"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"স্যাটেলাইট টাইল সংক্রান্ত প্রম্পট"</string>
-    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <skip />
+    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
+    <skip />
+    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
+    <skip />
+    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
+    <skip />
+    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
+    <skip />
+    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
+    <skip />
+    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
+    <skip />
+    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
     <skip />
 </resources>

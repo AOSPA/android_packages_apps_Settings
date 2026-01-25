@@ -1016,7 +1016,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"ສະແດງອັດຕາສ່ວນ HDR/SDR"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"ສະແດງອັດຕາສ່ວນ HDR/SDR ປັດຈຸບັນ"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"ຕ້ອງປົດລັອກອຸປະກອນສຳລັບ NFC"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"ຕ້ອງປົດລັອກອຸປະກອນ"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"ພ້ອມທີ່ຈະສົ່ງເນື້ອຫາແອັບຯຜ່ານ NFC ແລ້ວ"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"ປິດ"</string>
@@ -1557,10 +1557,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"ປິດ"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <!-- no translation found for status_gid1 (2412033683972134982) -->
-    <skip />
-    <!-- no translation found for status_carrier_id (1053322454411977469) -->
-    <skip />
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"ID ຜູ້ໃຫ້ບໍລິການ"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"ປະ​ເພດ​ເຄືອຂ່າຍອິນ​ເຕີ​ເນັດ​ມື​ຖື"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"ປະເພດເຄືອຂ່າຍສຽງມືຖື"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"ຂໍ້ມູນຜູ່ໃຫ້ບໍລິການ"</string>
@@ -1898,18 +1896,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"ຢັ້ງຢືນລະຫັດ PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"ຢັ້ງຢືນລະຫັດຜ່ານ"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"ຢັ້ງຢືນວ່າແມ່ນທ່ານ"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (8348747138206521324) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (174386531179588449) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (2015394005797749659) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (8904754912508423524) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (5342076966047671535) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (3576706480264804892) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"ລະບຸຮູບແບບຂອງອຸປະກອນອີກເຄື່ອງຂອງທ່ານເພື່ອໂອນຍ້າຍບັນຊີ Google, ການຕັ້ງຄ່າ ແລະ ອື່ນໆ. ໂດຍຈະມີການເຂົ້າລະຫັດໃຫ້ກັບຮູບແບບຂອງທ່ານ."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"ລະບຸ PIN ຂອງອຸປະກອນອີກເຄື່ອງຂອງທ່ານເພື່ອໂອນຍ້າຍບັນຊີ Google, ການຕັ້ງຄ່າ ແລະ ອື່ນໆ. ໂດຍຈະມີການເຂົ້າລະຫັດໃຫ້ກັບ PIN ຂອງທ່ານ."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"ລະບຸລະຫັດຜ່ານຂອງອຸປະກອນອີກເຄື່ອງຂອງທ່ານເພື່ອໂອນຍ້າຍບັນຊີ Google, ການຕັ້ງຄ່າ ແລະ ອື່ນໆ. ໂດຍຈະມີການເຂົ້າລະຫັດໃຫ້ກັບລະຫັດຜ່ານຂອງທ່ານ."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"ໃຊ້ຮູບແບບດຽວກັນເພື່ອປົດລັອກອຸປະກອນນີ້"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"ໃຊ້ PIN ດຽວກັນເພື່ອປົດລັອກອຸປະກອນນີ້"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"ໃຊ້ລະຫັດຜ່ານດຽວກັນເພື່ອປົດລັອກອຸປະກອນນີ້"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"ຢັ້ງຢືນຮູບແບບ"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"ຢັ້ງຢືນ PIN"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"ຢັ້ງຢືນລະຫັດຜ່ານ"</string>
@@ -2542,10 +2534,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"ການຕັ້ງຄ່າດ່ວນ"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{ປັດລົງຈາກເທິງສຸດຂອງໜ້າຈໍຂອງທ່ານ}other{ໃຊ້ # ນິ້ວປັດລົງຈາກເທິງສຸດຂອງໜ້າຈໍຂອງທ່ານ}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{ປັດລົງຈາກເທິງສຸດຂອງໜ້າຈໍຂອງທ່ານ. ທາງລັດນີ້ຈະພ້ອມໃຫ້ໃຊ້ຫຼັງຈາກທີ່ທ່ານຕັ້ງຄ່າອຸປະກອນຂອງທ່ານສຳເລັດແລ້ວ.}other{ໃຊ້ # ນິ້ວປັດລົງຈາກເທິງສຸດຂອງໜ້າຈໍຂອງທ່ານ. ທາງລັດນີ້ຈະພ້ອມໃຫ້ໃຊ້ຫຼັງຈາກທີ່ທ່ານຕັ້ງຄ່າອຸປະກອນຂອງທ່ານສຳເລັດແລ້ວ.}}"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_top_row_key (9079252650426357718) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_top_row_key (8621163788222109641) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"ກະແຈແຖວເທິງສຸດ"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"ກົດປຸ່ມການຊ່ວຍເຂົ້າເຖິງໃນແຖວເທິງສຸດຂອງແປ້ນພິມ"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"ການຕັ້ງຄ່າດ່ວນ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"ປຸ່ມລະດັບສຽງ"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"ປຸ່ມລະດັບສຽງ"</string>
@@ -3479,12 +3469,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"ຜູ້ໃຊ້ອື່ນໆ"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"ລຶບການເຄື່ອນໄຫວແຂກ"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ລຶບແອັບ ແລະ ຂໍ້ມູນແຂກທັງໝົດອອກໃນເວລາອອກຈາກໂໝດແຂກ"</string>
-    <!-- no translation found for add_guests_from_signin (7216948985431552154) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_summary (5247734217614267234) -->
-    <skip />
-    <!-- no translation found for add_guests_from_signin_keywords (9148491870475695341) -->
-    <skip />
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"ອະນຸຍາດໃຫ້ແຂກໃຊ້ອຸປະກອນ"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"ແອັບ ແລະ ຂໍ້ມູນແຂກທັງໝົດຈະຖືກລຶບອອກເມື່ອອອກຈາກໂໝດແຂກ"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"ເພີ່ມ, ແຂກ"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ລຶບການເຄື່ອນໄຫວແຂກບໍ?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"ແອັບ ແລະ ຂໍ້ມູນຈາກເຊດຊັນແຂກຈະຖືກລຶບອອກຕອນນີ້ ແລະ ການເຄື່ອນໄຫວແຂກໃນອະນາຄົດທັງໝົດຈະຖືກລຶບອອກໃນແຕ່ລະເທື່ອທີ່ທ່ານອອກຈາກໂໝດແຂກ"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"ລຶບ, ຜູ້ຢ້ຽມຢາມ, ການເຄື່ອນໄຫວ, ລຶບອອກ, ຂໍ້ມູນ, ແຂກຜູ້ຢ້ຽມຢາມ, ລຶບ"</string>
@@ -3634,7 +3621,12 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"ອຸປະກອນ"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"ແປ້ນພິມ, ແຜ່ນສຳຜັດ, ຈໍສະແດງຜົນ, ສຽງ"</string>
+    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
+    <skip />
+    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
+    <skip />
+    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
+    <skip />
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"ບໍ່ສາມາດໃຊ້ໄດ້ເນື່ອງຈາກ NFC ປິດຢູ່"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ກະລຸນາຕິດຕັ້ງແອັບການຈ່າຍເງິນກ່ອນຈຶ່ງຈະໃຊ້ໄດ້"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"ແອັບຫຼ້າສຸດ, ແອັບເລີ່ມຕົ້ນ"</string>
@@ -3955,8 +3947,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"ຮັບສະຫຼຸບຂໍ້ຄວາມຍາວໆຢ່າງວ່ອງໄວ"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"ໃຊ້ສະຫຼຸບການແຈ້ງເຕືອນ"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"ສະຫຼຸບຂໍ້ຄວາມຂະໜາດຍາວ ແລະ ການສົນທະນາກຸ່ມເພື່ອຮັບຂໍ້ມູນສະຫຼຸບຢ່າງວ່ອງໄວ.\n\nການສະຫຼຸບຈະໃຊ້ AI ຢູ່ອຸປະກອນຂອງທ່ານ, ເຊິ່ງບາງເທື່ອອາດມີຂໍ້ຜິດພາດໄດ້. ຂໍ້ຄວາມຂອງທ່ານຈະບໍ່ຖືກສົ່ງໄປໃຫ້ Google."</string>
-    <!-- no translation found for notification_summarization_description_with_apps (3914029781564962054) -->
-    <skip />
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"ສະຫຼຸບຂໍ້ຄວາມຍາວໆ ແລະ ການສົນທະນາກຸ່ມເພື່ອຮັບຂໍ້ມູນສະຫຼຸບຢ່າງວ່ອງໄວ.\n\nຂໍ້ມູນສະຫຼຸບມາຈາກແອັບ ຫຼື AI ຢູ່ອຸປະກອນຂອງທ່ານ ແລະ ອາດມີຂໍ້ຜິດພາດ. ລະບົບຈະບໍ່ສົ່ງຂໍ້ຄວາມຂອງທ່ານໄປຫາ Google."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"ຈະບໍ່ສະຫຼຸບການແຈ້ງເຕືອນຈາກແອັບເຫຼົ່ານີ້"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"ຈັດການແອັບ"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"ຈັດການແອັບສຳລັບສະຫຼຸບການແຈ້ງເຕືອນ"</string>
@@ -4399,6 +4390,12 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"ຣີສະຕາດ"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"ບໍ່ຟ້າວເທື່ອ"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"ສຶກສາເພີ່ມເຕີມກ່ຽວກັບການປ້ອງກັນໜ່ວຍຄວາມຈຳຂັ້ນສູງ."</string>
+    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
+    <skip />
+    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
+    <skip />
+    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"ໂປຣໄຟລບ່ອນເຮັດວຽກນີ້ຖືກຈັດການໂດຍ:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"ຈັດ​ການ​ໂດຍ <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"ເປີດ​ຕາມ​ມາດ​ຕະ​ຖານ"</string>
@@ -4445,12 +4442,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"ລຶບການອະນຸຍາດອອກ, ລຶບໄຟລ໌ຊົ່ວຄາວ ແລະ ຢຸດການແຈ້ງເຕືອນ"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"ຈັດການແອັບຫາກບໍ່ໄດ້ໃຊ້"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"ລຶບການອະນຸຍາດອອກ, ລຶບໄຟລ໌ຊົ່ວຄາວ, ຢຸດການແຈ້ງເຕືອນ ແລະ ເກັບແອັບໄວ້ໃນແຟ້ມ"</string>
-    <!-- no translation found for task_continuity_category (3736049711007817178) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch (3276869201367526007) -->
-    <skip />
-    <!-- no translation found for continue_across_devices_switch_summary (1967904656230859035) -->
-    <skip />
+    <string name="task_continuity_category" msgid="3736049711007817178">"ຄວາມຕໍ່ເນື່ອງຂອງໜ້າວຽກ"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"ໜ້າວຽກແອັບ"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"ສືບຕໍ່ຈາກຈຸດທີ່ທ່ານຄ້າງໄວ້ຢູ່ອຸປະກອນອື່ນໆໄດ້ຢ່າງລ່ຽນໄຫຼ"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"ແອັບທັງໝົດ"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ແອັບທີ່ຕິດຕັ້ງແລ້ວ"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ອິນສະແຕນແອັບ"</string>
@@ -4522,6 +4516,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"ການຕັ້ງຄ່າ USB ເລີ່ມຕົ້ນ"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"ຕົວເລືອກພະລັງງານ"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"ຕົວເລືອກການໂອນຍ້າຍໄຟລ໌"</string>
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"ການປ້ອງກັນການເຂົ້າເຖິງຂໍ້ມູນ"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"ອະນຸຍາດ PCI Tunneling"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"ເມື່ອເປີດການນຳໃຊ້ແລ້ວ, ອຸປະກອນຕໍ່ພ່ວງ USB ແລະ Thunderbolt ສາມາດສ້າງອຸໂມງ PCI ແລະ ເຂົ້າເຖິງໜ່ວຍຄວາມຈຳຂອງລະບົບໄດ້"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"ຕ້ອງເປັນຜູ້ໃຊ້ຜູ້ເບິ່ງແຍງເພື່ອແກ້ໄຂການຕັ້ງຄ່ານີ້"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"ປິດການນຳໃຊ້ແລ້ວໂດຍຜູ້ເບິ່ງແຍງໄອທີຂອງທ່ານ"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"ປິດການນຳໃຊ້ແລ້ວໂດຍໂໝດການປົກປ້ອງຂັ້ນສູງ"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"ການຕັ້ງຄ່າ USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB ຖືກຄວບຄຸມໂດຍ"</string>
@@ -5691,20 +5691,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> ຕ້ອງການໃຫ້ໃຊ້ 2G ໄດ້"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"ອະນຸຍາດສະເພາະເຄືອຂ່າຍທີ່ໄດ້ຖືກເຂົ້າລະຫັດ"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"ວິທີນີ້ມີຄວາມປອດໄພຫຼາຍກວ່າ ແຕ່ອາດຈຳກັດການເຊື່ອມຕໍ່ເຄືອຂ່າຍມືຖືຂອງທ່ານໃນບາງສະຖານທີ່. ການໂທສຸກເສີນແມ່ນອະນຸຍາດທຸກເທື່ອ."</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_title (7957970817801353563) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (1741533494609270306) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_alert_dialog_turn_off_btn (4730685657471161010) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_channel_title (8691263963046740086) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_title (2244012861602551260) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_on_notification_summary (5572748453651863580) -->
-    <skip />
-    <!-- no translation found for network_protection_2g_notification_settings_btn (2531645174083640421) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"ປິດການປົກປ້ອງເຄືອຂ່າຍ 2G ບໍ?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"ເຄືອຂ່າຍປັດຈຸບັນສຳລັບຊິມ <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> ບໍ່ຮອງຮັບ 2G. ການປິດການປົກປ້ອງ 2G ຈະເຮັດໃຫ້ທ່ານມີຄວາມສ່ຽງໃນການເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍ 2G ທີ່ປອມແປງເຊິ່ງເປັນອັນຕະລາຍ."</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"ປິດ"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"ການປົກປ້ອງເຄືອຂ່າຍ 2G"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"ການປົກປ້ອງເຄືອຂ່າຍ 2G ເປີດຢູ່"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"ເຄືອຂ່າຍປັດຈຸບັນສຳລັບຊິມ <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> ກໍານົດໃຫ້ຕ້ອງເປີດການປົກປ້ອງ 2G. ທ່ານອາດຍັງຄົງເລືອກທີ່ຈະປິດການນຳໃຊ້ການປົກປ້ອງ 2G ໂດຍຮັບຜິດຊອບຄວາມສ່ຽງເອງ."</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"ການຕັ້ງຄ່າ"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"ບໍລິການທັງໝົດ"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ສະແດງການເຂົ້າເຖິງຄລິບບອດ"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"ສະແດງຂໍ້ຄວາມເມື່ອແອັບເຂົ້າເຖິງຂໍ້ຄວາມ, ຮູບພາບ ຫຼື ເນື້ອຫາອື່ນທີ່ທ່ານສຳເນົາໄວ້"</string>
@@ -5800,6 +5793,10 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> ໂດຍ <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"ແອັບຈະຣີສະຕາດເມື່ອທ່ານປ່ຽນອັດຕາສ່ວນຮູບ. ທ່ານອາດສູນເສຍການປ່ຽນແປງທີ່ຍັງບໍ່ໄດ້ບັນທຶກໄວ້. ບາງແອັບອາດບໍ່ໄດ້ຮັບການປັບອັດຕາສ່ວນຮູບບາງຢ່າງໃຫ້ເໝາະສົມ."</string>
+    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
+    <skip />
+    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"ເຊັນເຊີລາຍນິ້ວມື"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ການແຈ້ງເຕືອນດ້ວຍແຟລດ"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ກ່ຽວກັບການແຈ້ງເຕືອນດ້ວຍແຟລດ"</string>
@@ -6135,8 +6132,7 @@
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"ຄຳສັ່ງສຳເລັດ"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"ການຕັ້ງຄ່າດ່ວນຄວາມປອດໄພ ແລະ ຄວາມເປັນສ່ວນຕົວ"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"ການຄວບຄຸມຄວາມເປັນສ່ວນຕົວຂອງທ່ານ"</string>
-    <!-- no translation found for safety_center_review_settings (295527297192914772) -->
-    <skip />
+    <string name="safety_center_review_settings" msgid="295527297192914772">"ກວດເບິ່ງການຕັ້ງຄ່າ"</string>
     <string name="safety_center_qs_open_action" msgid="8683771989007581791">"ເປີດ"</string>
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"ປ່ຽນ. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"ຖືກບລັອກ"</string>
@@ -6166,6 +6162,25 @@
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"ເຂົ້າເຖິງຂໍ້ມູນດາວທຽມໄດ້ຢ່າງງ່າຍດາຍໂດຍການເພີ່ມແຜ່ນດາວທຽມໃສ່ໃນການຕັ້ງຄ່າດ່ວນ"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"ເພີ່ມແຜ່ນ"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"ພຣອມແຜ່ນດາວທຽມ"</string>
-    <!-- no translation found for satellite_icon_text (1080385642493133372) -->
+    <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <skip />
+    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
+    <skip />
+    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
+    <skip />
+    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
+    <skip />
+    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
+    <skip />
+    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
+    <skip />
+    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
+    <skip />
+    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
+    <skip />
+    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
     <skip />
 </resources>

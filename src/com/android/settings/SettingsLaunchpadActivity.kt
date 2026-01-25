@@ -26,6 +26,7 @@ import com.android.settings.activityembedding.ActivityEmbeddingUtils
 import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.getTrampolineIntent
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.core.SubSettingLauncher
+import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.core.instrumentation.Instrumentable.METRICS_CATEGORY_UNKNOWN
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
@@ -118,21 +119,29 @@ class SettingsLaunchpadActivity : Activity() {
                 }
 
         if (screenMetadata is PreferencesApiScreen) {
-            val opContext = ApiOperationContext(
-                context = this@SettingsLaunchpadActivity.applicationContext,
-                parameters = screenMetadata.keyParameters ?: ValidatedKeyParameters.EMPTY,
-            )
+            val opContext =
+                ApiOperationContext(
+                    context = this@SettingsLaunchpadActivity.applicationContext,
+                    parameters = screenMetadata.keyParameters ?: ValidatedKeyParameters.EMPTY,
+                )
 
             // Precondition checks are suspend functions. Since this is a trampoline
             // activity that should execute quickly, we use runBlocking. This assumes
             // the precondition checks are fast and won't cause ANRs.
-            val result = runBlocking { screenMetadata.screenPreconditions?.check(opContext) } ?: Allowed
+            val result =
+                runBlocking { screenMetadata.screenPreconditions?.check(opContext) } ?: Allowed
             if (result != Allowed) { // Do not launch the screen if preconditions are not met.
                 val reason = (result as Disallowed).getReason(opContext.context)
                 Log.e(
                     TAG,
-                    "Screen preconditions not met for key '$screenKey' with reason: $reason. Aborting launch."
+                    "Screen preconditions not met for key '$screenKey' with reason: $reason. Aborting launch.",
                 )
+                return
+            }
+
+            val spaRoutePrefix = screenMetadata.spaRoutePrefix
+            if (!spaRoutePrefix.isNullOrEmpty()) {
+                startSpaActivity(spaRoutePrefix, screenMetadata.topLevelSettingsCategory.value)
                 return
             }
         }
