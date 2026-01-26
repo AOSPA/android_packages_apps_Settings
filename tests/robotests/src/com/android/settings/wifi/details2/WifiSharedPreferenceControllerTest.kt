@@ -53,6 +53,7 @@ class WifiSharedPreferenceControllerTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     private var mockWifiEntry = mock<WifiEntry>()
+    private var mockWifiConfig = mock<WifiConfiguration>()
 
     private val context: Context = spy(RuntimeEnvironment.application)
 
@@ -71,7 +72,7 @@ class WifiSharedPreferenceControllerTest {
 
     @Before
     fun setUp() {
-        mockWifiEntry.stub { on { getWifiConfiguration() } doReturn WifiConfiguration() }
+        mockWifiEntry.stub { on { getWifiConfiguration() } doReturn mockWifiConfig }
         mockWifiEntry.stub { on { getSsid() } doReturn "testSSID" }
         mockWifiEntry.stub { on { getKey() } doReturn "testKey" }
 
@@ -86,7 +87,8 @@ class WifiSharedPreferenceControllerTest {
     }
 
     @Test
-    fun setChecked_conflictingEntry_showsAlertDialog_validateMessages() {
+    fun setChecked_conflictingSharedEntry_showsAlertDialog_validateMessages() {
+        mockWifiConfig.shared = true
         mockWifiPickerTrackerHelper.stub {
             on { getWifiPickerTracker() } doReturn mockWifiPickerTracker
         }
@@ -99,20 +101,34 @@ class WifiSharedPreferenceControllerTest {
         val shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog)
         assertThat(shadowDialog).isNotNull()
         assertThat(shadowDialog.getTitle().toString())
-            .isEqualTo(context.getString(R.string.wifi_conflict_dialog_title, "shared"))
+            .isEqualTo(context.getString(R.string.wifi_share_conflict_dialog_title))
         assertThat(shadowDialog.getMessage().toString())
-            .isEqualTo(
-                context.getString(
-                    R.string.wifi_conflict_dialog_message,
-                    "shared",
-                    "testSSID",
-                    "private",
-                )
-            )
+            .isEqualTo(context.getString(R.string.wifi_share_conflict_dialog_message, "testSSID"))
+    }
+
+    @Test
+    fun setChecked_conflictingPrivateEntry_showsAlertDialog_validateMessages() {
+        mockWifiConfig.shared = false
+        mockWifiPickerTrackerHelper.stub {
+            on { getWifiPickerTracker() } doReturn mockWifiPickerTracker
+        }
+        whenever(mockWifiPickerTracker.wifiEntries).thenReturn(listOf(mockWifiEntry))
+        ShadowAlertDialogCompat.reset()
+
+        controller.setChecked(false)
+
+        val dialog = ShadowAlertDialogCompat.getLatestAlertDialog()
+        val shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog)
+        assertThat(shadowDialog).isNotNull()
+        assertThat(shadowDialog.getTitle().toString())
+            .isEqualTo(context.getString(R.string.wifi_private_conflict_dialog_title))
+        assertThat(shadowDialog.getMessage().toString())
+            .isEqualTo(context.getString(R.string.wifi_private_conflict_dialog_message, "testSSID"))
     }
 
     @Test
     fun setChecked_conflictingConnectedEntry_showsAlertDialog() {
+        mockWifiConfig.shared = true
         mockWifiPickerTrackerHelper.stub {
             on { getWifiPickerTracker() } doReturn mockWifiPickerTracker
         }
@@ -128,6 +144,7 @@ class WifiSharedPreferenceControllerTest {
 
     @Test
     fun setChecked_conflictingEntry_showsAlertDialog_clickNegativeButton() {
+        mockWifiConfig.shared = true
         mockWifiPickerTrackerHelper.stub {
             on { getWifiPickerTracker() } doReturn mockWifiPickerTracker
         }
