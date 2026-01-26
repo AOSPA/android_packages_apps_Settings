@@ -38,6 +38,9 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -62,6 +65,8 @@ public final class InstalledAppCounterTest {
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String APP_1 = "app1";
     private static final String APP_2 = "app2";
@@ -198,7 +203,18 @@ public final class InstalledAppCounterTest {
     }
 
     @Test
-    public void testCountInstalledApps_archivingEnabled() {
+    @DisableFlags(android.multiuser.Flags.FLAG_DONT_SHOW_OTHER_USERS_APPS_TO_ADMIN)
+    public void testCountInstalledApps_archivingEnabled_forNonHsum() {
+        testCountInstalledApps_archivingEnabled(true);
+    }
+
+    @Test
+    @EnableFlags(android.multiuser.Flags.FLAG_DONT_SHOW_OTHER_USERS_APPS_TO_ADMIN)
+    public void testCountInstalledApps_archivingEnabled_forHsum() {
+        testCountInstalledApps_archivingEnabled(false);
+    }
+
+    private void testCountInstalledApps_archivingEnabled(boolean matchAnyUser) {
         when(mUserManager.getProfiles(UserHandle.myUserId())).thenReturn(List.of(
                 new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN)));
         // The user has four apps installed:
@@ -209,7 +225,7 @@ public final class InstalledAppCounterTest {
                         ApplicationInfoFlags.of(
                                 PackageManager.GET_DISABLED_COMPONENTS
                                         | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                                        | PackageManager.MATCH_ANY_USER
+                                        | (matchAnyUser ? PackageManager.MATCH_ANY_USER : 0)
                                         | PackageManager.MATCH_ARCHIVED_PACKAGES))),
                 eq(MAIN_USER_ID))).thenReturn(Arrays.asList(mApp2, mApp7));
 
