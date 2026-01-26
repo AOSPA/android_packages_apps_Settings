@@ -20,10 +20,11 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.provider.Settings
-import android.provider.Settings.ACTION_CAPTIONING_SETTINGS
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
+import com.android.settings.accessibility.CaptioningAppearanceFragment
+import com.android.settings.accessibility.CaptioningMoreOptionsFragment
 import com.android.settings.accessibility.CaptioningPropertiesFragment
 import com.android.settings.accessibility.Flags
 import com.android.settings.core.PreferenceScreenMixin
@@ -31,6 +32,7 @@ import com.android.settings.utils.highlightPreference
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -39,10 +41,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
-/**
- * Screens that allow users to customize the visual appearance—such as text size, font style, color
- * and language—of captions for apps that support system-wide accessibility settings.
- */
+/** Main settings screen for caption preferences. */
 @ProvidePreferenceScreen(CaptioningPropertiesScreen.KEY)
 open class CaptioningPropertiesScreen :
     PreferenceScreenMixin, PreferenceLifecycleProvider, PreferenceSummaryProvider {
@@ -73,16 +72,15 @@ open class CaptioningPropertiesScreen :
     override fun isFlagEnabled(context: Context): Boolean = Flags.catalystCaptionPreferencesScreen()
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        Intent(ACTION_CAPTIONING_SETTINGS).apply { highlightPreference(metadata?.key) }
+        Intent(Settings.ACTION_CAPTIONING_SETTINGS).apply { highlightPreference(metadata?.key) }
 
-    override fun getSummary(context: Context): CharSequence? {
-        return AccessibilityUtil.getSummary(
+    override fun getSummary(context: Context): CharSequence? =
+        AccessibilityUtil.getSummary(
             context,
             MAIN_SETTING_KEY,
             R.string.show_captions_enabled,
             R.string.show_captions_disabled,
         )
-    }
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)
@@ -115,3 +113,80 @@ open class CaptioningPropertiesScreen :
         private const val MAIN_SETTING_KEY = Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED
     }
 }
+
+/** Screens where the user can customize the size and style of the caption. */
+@ProvidePreferenceScreen(CaptioningAppearanceScreen.KEY)
+open class CaptioningAppearanceScreen : PreferenceScreenMixin, PreferenceSummaryProvider {
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_accessibility
+
+    override val key: String
+        get() = KEY
+
+    override val title: Int
+        get() = R.string.captioning_appearance_title
+
+    override val indexable: Boolean
+        get() = true
+
+    override val purpose: Int
+        get() = R.string.caption_preferences_appearance_purpose
+
+    override fun isFlagEnabled(context: Context): Boolean = Flags.catalystCaptionPreferencesScreen()
+
+    override fun fragmentClass(): Class<out Fragment>? = CaptioningAppearanceFragment::class.java
+
+    override fun getMetricsCategory(): Int = SettingsEnums.ACCESSIBILITY_CAPTION_APPEARANCE
+
+    override fun getSummary(context: Context): CharSequence? {
+        // Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE -- onFontScaleChanged
+        // Secure.ACCESSIBILITY_CAPTIONING_PRESET -- onUserStyleChanged
+        // TODO: Update summary based on the selected caption size and style
+        return null
+    }
+
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) { +CaptioningFooterPreference("captioning_appearance_footer") }
+
+    companion object {
+        const val KEY = "captioning_appearance"
+    }
+}
+
+/** Displays "More options" in captioning settings. */
+// LINT.IfChange(more_options_screen)
+@ProvidePreferenceScreen(CaptioningMoreOptionsScreen.KEY)
+open class CaptioningMoreOptionsScreen : PreferenceScreenMixin, PreferenceIndexableProvider {
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_accessibility
+
+    override val key: String
+        get() = KEY
+
+    override val title: Int
+        get() = R.string.captioning_more_options_title
+
+    override val purpose: Int
+        get() = R.string.caption_preferences_more_options_screen_purpose
+
+    override fun isFlagEnabled(context: Context): Boolean = Flags.catalystCaptionPreferencesScreen()
+
+    override fun fragmentClass(): Class<out Fragment>? = CaptioningMoreOptionsFragment::class.java
+
+    override fun getMetricsCategory(): Int = SettingsEnums.ACCESSIBILITY_CAPTION_MORE_OPTIONS
+
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
+            +CaptionLocalePreference(context)
+            +CaptioningFooterPreference("captioning_more_options_footer")
+        }
+
+    override fun isIndexable(context: Context) =
+        SettingsSecureStore.get(context)
+            .getBoolean(Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED) ?: false
+
+    companion object {
+        const val KEY = "captioning_more_options"
+    }
+}
+// LINT.ThenChange()
