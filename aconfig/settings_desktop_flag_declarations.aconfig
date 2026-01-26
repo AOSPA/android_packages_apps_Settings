@@ -79,3 +79,10 @@ flag {
     description: "Controls whether to show detailed fingerprint sensor location instructions to user during fingerprint enrollment process in SetupWizard on Desktop devices"
     bug: "459527436"
 }
+
+flag {
+    name: "show_footer_buttons_on_password_confirm"
+    namespace: "android_settings"
+    description: "Controls whether to show Clear and Confirm buttons during password confirmation in Settings."
+    bug: "436650475"
+}
