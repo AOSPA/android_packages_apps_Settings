@@ -30,6 +30,8 @@ import android.content.Context;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 
+import com.android.internal.telephony.IPhoneStateListener;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,6 +60,8 @@ public class SignalStrengthListenerTest {
     private TelephonyManager mManager2;
     @Mock
     private TelephonyManager mManager3;
+    @Mock
+    private IPhoneStateListener mPhoneStateListener;
 
     private Context mContext;
     private SignalStrengthListener mListener;
@@ -191,5 +195,17 @@ public class SignalStrengthListenerTest {
 
         assertThat(captor2.getAllValues().get(0) == captor2.getAllValues().get(1)).isTrue();
         assertThat(captor2.getAllValues().get(0) == captor2.getAllValues().get(2)).isTrue();
+    }
+
+    @Test
+    public void resume_callbackRegistered_notRegisteredAgain() {
+        mListener.updateSubscriptionIds(Sets.newSet(SUB_ID_1));
+        // Callback is already registered, should not register again.
+        mListener.mTelephonyCallbacks.get(SUB_ID_1).callback = mPhoneStateListener;
+
+        mListener.resume();
+
+        verify(mManager1, times(1)).registerTelephonyCallback(
+                any(Executor.class), any(TelephonyCallback.class));
     }
 }
