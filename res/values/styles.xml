@@ -734,9 +734,11 @@
     </style>
 
     <style name="TextAppearance.NotificationImportanceButton">
-        <item name="android:textSize">@dimen/notification_importance_button_text</item>
+        <item name="android:textSize">14sp</item>
 
         <item name="android:fontFamily">variable-title-small-emphasized</item>
+
+        <item name="android:textColor">@color/materialColorOnSurface</item>
 
         <item name="android:gravity">center</item>
     </style>
