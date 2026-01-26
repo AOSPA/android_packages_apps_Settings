@@ -3375,11 +3375,11 @@
     <!-- Dark UI screen footer summary text shown to indicate Modes may turn on/off Dark theme automatically according to their triggers. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_modes_footer_summary">
         {count, plural, offset:2
-        =0    {Modes can also turn on dark theme}
-        =1    {{mode_1} also turns on dark theme}
-        =2    {{mode_1} and {mode_2} also turn on dark theme}
-        =3    {{mode_1}, {mode_2}, and {mode_3} also turn on dark theme}
-        other {{mode_1}, {mode_2}, and # more also turn on dark theme}
+        =0    {Modes can also turn on dark theme.}
+        =1    {{mode_1} also turns on dark theme.}
+        =2    {{mode_1} and {mode_2} also turn on dark theme.}
+        =3    {{mode_1}, {mode_2}, and {mode_3} also turn on dark theme.}
+        other {{mode_1}, {mode_2}, and # more also turn on dark theme.}
         }
     </string>
     <!-- Dark UI screen footer action text linking to Modes settings. [CHAR LIMIT=NONE] -->
@@ -6141,6 +6141,8 @@
     <string name="accessibility_expanded_dark_theme_title_in_search">Expanded dark theme</string>
     <!-- Summary for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=NONE] -->
     <string name="accessibility_expanded_dark_theme_summary">Automatically applies dark theme to most apps that don\'t support it, helping to improve accessibility</string>
+    <!-- Footer for the feature of forcing all apps to use dark theme. [CHAR LIMIT=35] -->
+    <string name="accessibility_expanded_dark_theme_footer">If you experience issues with the expanded option, use the standard option.</string>
     <!-- Search keywords for the Expanded dark theme settings. [CHAR_LIMIT=NONE] -->
     <string name="keywords_expanded_dark_theme">force invert, color inversion, contrast</string>
     <!-- Title for the Expanded dark theme per-app settings page. [CHAR LIMIT=35] -->
