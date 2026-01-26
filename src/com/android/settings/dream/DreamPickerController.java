@@ -119,7 +119,7 @@ public class DreamPickerController extends BasePreferenceController {
         return mActiveDream;
     }
 
-    public List<DreamInfo> getSelectedDreams() {
+    List<DreamInfo> getSelectedDreams() {
         return mSelectedDreams;
     }
 
@@ -198,7 +198,7 @@ public class DreamPickerController extends BasePreferenceController {
             if (dreamsSwitcher()) {
                 int selectedIndex = findIndex(mSelectedDreams,
                         d -> d.componentName.equals(mDreamInfo.componentName));
-                if (selectedIndex == -1) {
+                if (selectedIndex == DreamInfo.ORDER_UNSELECTED) {
                     // Select the dream if it was not selected, and set the order of the dream to
                     // the last index.
                     mSelectedDreams.add(mDreamInfo);
@@ -215,11 +215,11 @@ public class DreamPickerController extends BasePreferenceController {
                     }
                 }
 
-                final List<ComponentName> activeComponents = mSelectedDreams.stream()
+                final ComponentName[] activeComponents = mSelectedDreams.stream()
                         .map(d -> d.componentName)
-                        .collect(Collectors.toList());
+                        .toArray(ComponentName[]::new);
 
-                mBackend.setActiveDreams(activeComponents.toArray(new ComponentName[0]));
+                mBackend.setActiveDreams(activeComponents);
 
                 // Update views
                 for (int i = 0; i < mDreamInfos.size(); i++) {
@@ -230,7 +230,13 @@ public class DreamPickerController extends BasePreferenceController {
                         continue;
                     }
                     // Update the affected dreamCards.
-                    final int idx = activeComponents.indexOf(info.componentName);
+                    int idx = -1;
+                    for (int j = 0; j < activeComponents.length; j++) {
+                        if (activeComponents[j].equals(info.componentName)) {
+                            idx = j;
+                            break;
+                        }
+                    }
                     if (selectedIndex != -1 && idx >= selectedIndex) {
                         mAdapter.notifyItemChanged(i);
                     }
@@ -270,10 +276,8 @@ public class DreamPickerController extends BasePreferenceController {
                 return mDreamInfo.isActive;
             }
 
-            if (mActiveDream == null) {
-                return false;
-            }
-            return mDreamInfo.componentName.equals(mActiveDream.componentName);
+            return mActiveDream != null
+                    && mDreamInfo.componentName.equals(mActiveDream.componentName);
         }
 
         @Override
