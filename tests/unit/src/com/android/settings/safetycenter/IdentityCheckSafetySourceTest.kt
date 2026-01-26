@@ -91,7 +91,6 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
     fun refreshSafetySources_whenSafetyCenterIsDisabled_doesNotSetData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(false)
 
@@ -108,7 +107,6 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
     fun refreshSafetySources_whenUserIsProfile_doesNotSetData() {
         val profileUserId = 10
 
@@ -129,7 +127,6 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
     @RequiresFlagsDisabled(Flags.FLAG_IDENTITY_CHECK_WATCH)
     fun refreshSafetySources_whenPromoCardAlreadyShown_setsNullData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
@@ -153,30 +150,6 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
-    fun refreshSafetySources_whenFlagDisabled_setsNullData() {
-        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
-
-        setIdentityCheckPromoCardShown(false)
-
-        IdentityCheckSafetySource.setSafetySourceData(
-            applicationContext,
-            refreshSafetyEvent,
-            biometricManager,
-            userManager,
-        )
-
-        verify(safetyCenterManagerWrapper)
-            .setSafetySourceData(
-                eq(applicationContext),
-                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
-                eq(null),
-                eq(refreshSafetyEvent),
-            )
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
     fun refreshSafetySources_whenInvalidDevice_setsNullData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
         whenever(biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG))
@@ -200,7 +173,6 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
     fun refreshSafetySources_whenDeviceIsATablet_setsNullData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
         setIdentityCheckPromoCardShown(false)
@@ -223,7 +195,6 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
     fun refreshSafetySources_whenDeviceIsALowRamTablet_setsNullData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
         setIdentityCheckPromoCardShown(false)
@@ -246,7 +217,7 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_WATCH)
     fun refreshSafetySources_whenWatchSupportedValueNotSet_setsNullData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
@@ -270,7 +241,6 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
     fun refreshSafetySources_notificationNotClicked_setsSafetySourceDataWithNotification() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
@@ -302,7 +272,6 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
     fun refreshSafetySources_identityCheckNotEnabled_setsSafetySourceDataWithoutNotification() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
@@ -335,7 +304,6 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
     fun refreshSafetySources_notificationClicked_setsSafetySourceDataWithoutNotification() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
@@ -367,7 +335,7 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_WATCH)
     fun refreshSafetySources_whenWatchPromoCardAlreadyShown_setsNullData() {
         assume()
             .that(
@@ -401,7 +369,7 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_WATCH)
     fun refreshSafetySources_whenWatchPromoCardNotShownAndGeneralPromoCardShown_setsWatchData() {
         assume()
             .that(
@@ -440,7 +408,7 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_WATCH)
     fun refreshSafetySources_watchAvailable_notificationNotClicked_setsDataWithNotification() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
@@ -481,7 +449,7 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_WATCH)
     fun refreshSafetySources_watchAvailable_notificationClicked_setsDataWithoutNotification() {
         assume()
             .that(
@@ -522,7 +490,7 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_WATCH)
     fun watchContentObserver_onChange_setsSafetySourceData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 

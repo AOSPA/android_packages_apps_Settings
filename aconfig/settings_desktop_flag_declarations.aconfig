@@ -9,13 +9,6 @@ flag {
 }
 
 flag {
-    name: "hide_user_list_for_non_admins"
-    namespace: "desktop_users_and_accounts"
-    description: "Controls whether to hide the user list in Settings for non-admins."
-    bug: "406686772"
-}
-
-flag {
     name: "pattern_input_click_support"
     namespace: "android_settings"
     description: "Feature flag for click support in pattern input."
@@ -38,10 +31,23 @@ flag {
     description: " Show the user details settings for own account."
     bug: "425579387"
 }
+flag {
+    name: "show_user_details_settings_for_self_2"
+    namespace: "users_and_accounts"
+    description: " Show the user details settings for own account."
+    bug: "425579387"
+}
 
 flag {
     name: "show_add_users_from_signin_toggle"
     namespace: "desktop_users_and_accounts"
+    description: "Controls whether to show the 'add users from the sign-in screen' toggle in Settings."
+    bug: "391862614"
+}
+
+flag {
+    name: "show_add_users_from_signin_toggle_2"
+    namespace: "users_and_accounts"
     description: "Controls whether to show the 'add users from the sign-in screen' toggle in Settings."
     bug: "391862614"
 }
@@ -65,4 +71,11 @@ flag {
     namespace: "android_settings"
     description: "Controls whether to hide parental control setting in demo mode."
     bug: "447029270"
+}
+
+flag {
+    name: "show_detailed_fingerprint_sensor_location"
+    namespace: "android_settings"
+    description: "Controls whether to show detailed fingerprint sensor location instructions to user during fingerprint enrollment process in SetupWizard on Desktop devices"
+    bug: "459527436"
 }

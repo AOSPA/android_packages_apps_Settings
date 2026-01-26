@@ -38,7 +38,7 @@
         <Preference
             android:key="default_payment_app"
             android:title="@string/nfc_payment_settings_title"
-            android:fragment="com.android.settings.nfc.PaymentSettings"
+            android:fragment="com.android.settings.connecteddevice.NfcAndPaymentFragment"
             settings:keywords="@string/keywords_default_payment_app"
             settings:controller="com.android.settings.applications.specialaccess.DefaultPaymentSettingsPreferenceController"/>
         <com.android.settingslib.RestrictedSwitchPreference

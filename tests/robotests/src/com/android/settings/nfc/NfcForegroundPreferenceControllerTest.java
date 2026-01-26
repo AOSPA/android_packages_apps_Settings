@@ -50,7 +50,7 @@ import java.util.ArrayList;
 @RequiresFlagsDisabled(android.permission.flags.Flags.FLAG_WALLET_ROLE_ENABLED)
 public class NfcForegroundPreferenceControllerTest {
 
-    private static final String PREF_KEY = PaymentSettingsTest.FOREGROUND_KEY;
+    private static final String PREF_KEY = "nfc_foreground";
 
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();

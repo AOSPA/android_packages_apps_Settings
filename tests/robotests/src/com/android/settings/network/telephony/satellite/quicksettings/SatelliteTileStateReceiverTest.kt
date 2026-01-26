@@ -436,5 +436,7 @@ class SatelliteTileStateReceiverTest {
             .isEqualTo(SatelliteEligibilityJobService::class.java.name)
         assertThat(jobInfo.isPersisted).isFalse()
         assertThat(jobInfo.triggerContentUris).isNotEmpty()
+        // Verify that the job is scheduled immediately (override deadline is set to 0)
+        assertThat(jobInfo.maxExecutionDelayMillis).isEqualTo(0)
     }
 }

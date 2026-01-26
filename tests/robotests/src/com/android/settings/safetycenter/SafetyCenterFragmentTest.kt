@@ -131,12 +131,32 @@ class SafetyCenterFragmentTest {
         `when`(mockFeatureFactory.dashboardFeatureProvider).thenReturn(mockDashboardFeatureProvider)
     }
 
-    private fun runTest(data: SafetyCenterData, testBlock: (SafetyCenterFragment) -> Unit) {
+    @Test
+    fun newInstance_withQuickSettingsTrue_setsArgument() {
+        val fragment = SafetyCenterFragment.newInstance(isQuickSettings = true)
+
+        assertThat(fragment.arguments?.getBoolean(ARG_IS_QUICK_SETTINGS)).isTrue()
+    }
+
+    @Test
+    fun newInstance_withQuickSettingsFalse_setsArgument() {
+        val fragment = SafetyCenterFragment.newInstance(isQuickSettings = false)
+
+        assertThat(fragment.arguments?.getBoolean(ARG_IS_QUICK_SETTINGS, false)).isFalse()
+    }
+
+    private fun runTest(
+        data: SafetyCenterData,
+        isQuickSettings: Boolean = false,
+        navigationSource: NavigationSource = NavigationSource.SETTINGS,
+        testBlock: (SafetyCenterFragment) -> Unit,
+    ) {
         shadowSafetyCenterManager.setSafetyCenterData(data)
         val fragmentArgs =
             Bundle().apply {
                 putLong(EXTRA_SESSION_ID, TEST_SESSION_ID)
-                putAll(NavigationSource.SETTINGS.createArgs())
+                putAll(navigationSource.createArgs())
+                putBoolean(ARG_IS_QUICK_SETTINGS, isQuickSettings)
             }
         val scenario =
             launchFragmentInContainer<SafetyCenterFragment>(
@@ -222,6 +242,42 @@ class SafetyCenterFragmentTest {
 
             onView(withText(mApplication.getString(R.string.more_security_privacy_settings)))
                 .check(matches(isDisplayed()))
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun fragment_onLaunchQuickSettings_showsIssuesAndStatusButNotSubpages() {
+        val activeIssue =
+            createIssue(
+                id = "activeIssue",
+                title = "Active Issue Title",
+                sourceIds = setOf("any"),
+            )
+        val entry =
+            createEntry(
+                id = "TestEntry",
+                title = "Entry with Severity Level OK",
+                sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+            )
+
+        runTest(
+            createScData(entries = listOf(entry), activeIssues = listOf(activeIssue)),
+            isQuickSettings = true,
+            navigationSource = NavigationSource.QUICK_SETTINGS_TILE,
+        ) { _ ->
+            // Status banner and issues should be present in quick settings.
+            onView(withId(StatusBannerR.id.banner_container)).check(matches(isDisplayed()))
+            onView(withText(activeIssue.title.toString())).check(matches(isDisplayed()))
+
+            // Subpage preferences should NOT be displayed in quick settings.
+            onView(withText(mApplication.getString(R.string.device_unlock_subpage_title)))
+                .check(doesNotExist())
+            onView(withText(mApplication.getString(R.string.privacy_dashboard_title)))
+                .check(doesNotExist())
+            onView(withText(mApplication.getString(R.string.more_security_privacy_category_title)))
+                .check(doesNotExist())
         }
     }
 
@@ -1437,6 +1493,26 @@ class SafetyCenterFragmentTest {
     }
 
     @Test
+    fun interactionLogger_onLaunchWithQuickSettings_logsViewTypeAndNavigationSource() {
+        runTest(
+            EMPTY_SC_DATA,
+            isQuickSettings = true,
+            navigationSource = NavigationSource.QUICK_SETTINGS_TILE,
+        ) {
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            assertThat(events).hasSize(1)
+            val event = events[0]
+
+            assertThat(event.atomId).isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(event.action).isEqualTo(Action.SAFETY_CENTER_VIEWED.statsLogValue)
+            assertThat(event.viewType).isEqualTo(ViewType.QUICK_SETTINGS.statsLogValue)
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.QUICK_SETTINGS_TILE.statsLogValue)
+        }
+    }
+
+    @Test
     fun interactionLogger_onLaunchWithIntent_usesSessionIdFromIntent() {
         val intent =
             Intent(mApplication, SafetyCenterActivity::class.java).apply {
@@ -1629,6 +1705,7 @@ class SafetyCenterFragmentTest {
     }
 
     companion object {
+        private const val ARG_IS_QUICK_SETTINGS = "is_quick_settings"
         private const val DEVICE_UNLOCK_KEY = "device_unlock_subpage"
         private const val NETWORK_SECURITY_KEY = "cellular_network_security_subpage"
         private const val STATUS_BANNER_KEY = "safety_center_status_banner"

@@ -18,10 +18,13 @@ package com.android.settings.biometrics.fingerprint;
 
 import static android.text.Layout.HYPHENATION_FREQUENCY_NORMAL;
 
+import static com.android.settings.flags.Flags.showDetailedFingerprintSensorLocation;
+
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.hardware.biometrics.fingerprint.location.PhysicalSensorLocation;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
@@ -69,12 +72,19 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     private boolean mNextClicked;
     private boolean mCanAssumeUdfps;
     private boolean mCanAssumeSfps;
+    private boolean mCanAssumeStandaloneFps;
 
     private OrientationEventListener mOrientationEventListener;
     private int mPreviousRotation = 0;
     private ScreenSizeFoldProvider mScreenSizeFoldProvider;
     private boolean mIsFolded;
     private boolean mIsReverseDefaultRotation;
+
+    private boolean isDesktopFingerprintSensorLocationEnabled() {
+        return showDetailedFingerprintSensorLocation()
+                && getApplicationContext().getResources().getBoolean(
+                R.bool.config_show_detailed_fingerprint_find_sensor_instructions);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +95,13 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                 fingerprintManager.getSensorPropertiesInternal();
         mCanAssumeUdfps = props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
         mCanAssumeSfps = props != null && props.size() == 1 && props.get(0).isAnySidefpsType();
+        mCanAssumeStandaloneFps = props != null && props.size() == 1 && props.get(
+                0).isStandalone();
+        byte location = 0;
+        if (mCanAssumeStandaloneFps) {
+            location = props.get(0).getLocation().getStandalonePhysicalLocation();
+        }
+
         setContentView(getContentView());
         mScreenSizeFoldProvider = new ScreenSizeFoldProvider(getApplicationContext());
         mScreenSizeFoldProvider.registerCallback(this, getApplicationContext().getMainExecutor());
@@ -117,6 +134,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
             setDescriptionText(R.string.security_settings_sfps_enroll_find_sensor_message);
             mIsReverseDefaultRotation = getApplicationContext().getResources().getBoolean(
                     com.android.internal.R.bool.config_reverseDefaultRotation);
+        } else if (mCanAssumeStandaloneFps && isDesktopFingerprintSensorLocationEnabled()) {
+            setTitleAndDescriptionForStandaloneFps(location);
         } else {
             setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_fingerprint_enroll_find_sensor_message);
@@ -159,6 +178,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         mAnimation = null;
         if (mCanAssumeUdfps) {
             enableUdfpsLottieAndNextButton();
+        } else if (mCanAssumeStandaloneFps && isDesktopFingerprintSensorLocationEnabled()) {
+            setAnimationForStandaloneFps(location);
         } else if (!mCanAssumeSfps) {
             View animationView = findViewById(R.id.fingerprint_sensor_location_animation);
             if (animationView instanceof FingerprintFindSensorAnimation) {
@@ -496,5 +517,58 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     public void onFoldUpdated(boolean isFolded) {
         Log.d(TAG, "onFoldUpdated= " + isFolded);
         mIsFolded = isFolded;
+    }
+
+    private void setTitleAndDescriptionForStandaloneFps(byte location) {
+        setHeaderText(R.string.security_settings_enroll_find_sensor_standalone_default_title);
+
+        // Set the right description text based on the sensor location.
+        if (location == PhysicalSensorLocation.UNKNOWN) {
+            setDescriptionText(
+                    R.string.security_settings_enroll_find_sensor_standalone_default_message);
+        } else if (location == PhysicalSensorLocation.KEYBOARD_BOTTOM_LEFT) {
+            setDescriptionText(
+                    R.string.security_settings_enroll_find_sensor_keyboard_bottom_left_message);
+        } else if (location == PhysicalSensorLocation.KEYBOARD_BOTTOM_RIGHT) {
+            setDescriptionText(
+                    R.string.security_settings_enroll_find_sensor_keyboard_bottom_right_message);
+        } else if (location == PhysicalSensorLocation.KEYBOARD_TOP_RIGHT) {
+            setDescriptionText(
+                    R.string.security_settings_enroll_find_sensor_keyboard_top_right_message);
+        } else if (location == PhysicalSensorLocation.RIGHT_SIDE) {
+            setDescriptionText(
+                    R.string.security_settings_enroll_find_sensor_right_side_message);
+        } else if (location == PhysicalSensorLocation.LEFT_SIDE) {
+            setDescriptionText(
+                    R.string.security_settings_enroll_find_sensor_left_side_message);
+        } else if (location == PhysicalSensorLocation.LEFT_OF_POWER_BUTTON_TOP_RIGHT) {
+            setDescriptionText(R.string
+                    .security_settings_enroll_find_sensor_left_of_power_button_top_right_message);
+        } else {
+            setDescriptionText(
+                    R.string.security_settings_enroll_find_sensor_standalone_default_message);
+        }
+    }
+
+    private void setAnimationForStandaloneFps(byte location) {
+        mIllustrationLottie = findViewById(R.id.illustration_lottie);
+        if (mIllustrationLottie == null) {
+            return;
+        }
+
+        if (location == PhysicalSensorLocation.KEYBOARD_BOTTOM_LEFT) {
+            mIllustrationLottie.setAnimation(R.raw.fingerprint_edu_keyboard_bottom_left_lottie);
+        } else if (location == PhysicalSensorLocation.KEYBOARD_BOTTOM_RIGHT) {
+            mIllustrationLottie.setAnimation(R.raw.fingerprint_edu_keyboard_bottom_right_lottie);
+        } else if (location == PhysicalSensorLocation.KEYBOARD_TOP_RIGHT) {
+            mIllustrationLottie.setAnimation(R.raw.fingerprint_edu_keyboard_top_right_lottie);
+        } else if (location == PhysicalSensorLocation.RIGHT_SIDE) {
+            mIllustrationLottie.setAnimation(R.raw.fingerprint_edu_right_side_lottie);
+        } else if (location == PhysicalSensorLocation.LEFT_SIDE) {
+            mIllustrationLottie.setAnimation(R.raw.fingerprint_edu_left_side_lottie);
+        } else if (location == PhysicalSensorLocation.LEFT_OF_POWER_BUTTON_TOP_RIGHT) {
+            mIllustrationLottie.setAnimation(
+                    R.raw.fingerprint_edu_keyboard_left_of_power_button_top_right_lottie);
+        }
     }
 }

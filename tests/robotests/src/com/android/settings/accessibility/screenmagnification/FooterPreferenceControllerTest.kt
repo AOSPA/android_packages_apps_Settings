@@ -119,23 +119,6 @@ class FooterPreferenceControllerTest {
                 Html.FROM_HTML_MODE_COMPACT,
             )
             .toString()
-    private val keyboardOnlyShortcutsFlagOffSummary =
-        Html.fromHtml(
-                MessageFormat.format(
-                    context.getString(
-                        R.string
-                            .accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary,
-                        metaString,
-                        altString,
-                    ),
-                    1,
-                    2,
-                    3,
-                    4,
-                ),
-                Html.FROM_HTML_MODE_COMPACT,
-            )
-            .toString()
     private val keyboardTouchSummary =
         Html.fromHtml(
                 MessageFormat.format(
@@ -209,24 +192,9 @@ class FooterPreferenceControllerTest {
             .isEqualTo("About magnification\n\n$defaultSummary")
     }
 
-    @DisableFlags(
-        Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE,
-        com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES,
-    )
-    @Test
-    fun touchScreenSupported_hasHardKeyboard_oneFingerPanningFlagOff_shortcutsFlagOff_verifySummary() {
-        assertSummary(
-            touchScreenSupported = true,
-            hardKeyboardAvailable = true,
-            oneFingerPanningEnabled = false,
-            expectedSummary = "$keyboardOnlyShortcutsFlagOffSummary\n\n$defaultSummary",
-        )
-    }
-
     @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
-    @EnableFlags(com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
     @Test
-    fun touchScreenSupported_hasHardKeyboard_oneFingerPanningFlagOff_shortcutsFlagOn_verifySummary() {
+    fun touchScreenSupported_hasHardKeyboard_oneFingerPanningFlagOff_verifySummary() {
         assertSummary(
             touchScreenSupported = true,
             hardKeyboardAvailable = true,
@@ -246,24 +214,9 @@ class FooterPreferenceControllerTest {
         )
     }
 
-    @DisableFlags(
-        Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE,
-        com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES,
-    )
-    @Test
-    fun touchScreenNotSupported_hasHardKeyboard_oneFingerPanningFlagOff_shortcutsFlagOff_verifySummary() {
-        assertSummary(
-            touchScreenSupported = false,
-            hardKeyboardAvailable = true,
-            oneFingerPanningEnabled = false,
-            expectedSummary = keyboardOnlyShortcutsFlagOffSummary,
-        )
-    }
-
     @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
-    @EnableFlags(com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
     @Test
-    fun touchScreenNotSupported_hasHardKeyboard_oneFingerPanningFlagOff_shortcutsFlagOn_verifySummary() {
+    fun touchScreenNotSupported_hasHardKeyboard_oneFingerPanningFlagOff_verifySummary() {
         assertSummary(
             touchScreenSupported = false,
             hardKeyboardAvailable = true,
@@ -284,24 +237,8 @@ class FooterPreferenceControllerTest {
     }
 
     @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
-    @DisableFlags(com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
     @Test
-    fun touchScreenSupported_hasHardKeyboard_oneFingerSettingsOff_shortcutsFlagOff_verifySummary() {
-        assertSummary(
-            touchScreenSupported = true,
-            hardKeyboardAvailable = true,
-            oneFingerPanningEnabled = false,
-            expectedSummary =
-                "$keyboardOnlyShortcutsFlagOffSummary\n\n$oneFingerPanningOffDefaultSummary",
-        )
-    }
-
-    @EnableFlags(
-        Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE,
-        com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES,
-    )
-    @Test
-    fun touchScreenSupported_hasHardKeyboard_oneFingerSettingsOff_shortcutsFlagOn_verifySummary() {
+    fun touchScreenSupported_hasHardKeyboard_oneFingerSettingsOff_verifySummary() {
         assertSummary(
             touchScreenSupported = true,
             hardKeyboardAvailable = true,
@@ -322,23 +259,8 @@ class FooterPreferenceControllerTest {
     }
 
     @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
-    @DisableFlags(com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
     @Test
-    fun touchScreenNotSupported_hasHardKeyboard_oneFingerSettingsOff_shortcutsFlagOff_verifySummary() {
-        assertSummary(
-            touchScreenSupported = false,
-            hardKeyboardAvailable = true,
-            oneFingerPanningEnabled = false,
-            expectedSummary = keyboardOnlyShortcutsFlagOffSummary,
-        )
-    }
-
-    @EnableFlags(
-        Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE,
-        com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES,
-    )
-    @Test
-    fun touchScreenNotSupported_hasHardKeyboard_oneFingerSettingsOff_shortcutsFlagOn_verifySummary() {
+    fun touchScreenNotSupported_hasHardKeyboard_oneFingerSettingsOff_verifySummary() {
         assertSummary(
             touchScreenSupported = false,
             hardKeyboardAvailable = true,

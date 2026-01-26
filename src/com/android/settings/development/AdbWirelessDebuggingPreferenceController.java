@@ -147,8 +147,7 @@ public class AdbWirelessDebuggingPreferenceController extends DeveloperOptionsPr
      * Returns true if connected to Wi-Fi network.
      */
     public static boolean isWifiConnected(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(
-                Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
         if (cm == null) {
             return false;
         }
@@ -157,7 +156,9 @@ public class AdbWirelessDebuggingPreferenceController extends DeveloperOptionsPr
             if (nc == null) {
                 continue;
             }
-            if (nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+            if (nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                    // NET_CAPABILITY_INTERNET to filter out hotspot networks.
+                    && nc.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)) {
                 return true;
             }
         }
