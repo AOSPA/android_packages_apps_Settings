@@ -189,7 +189,6 @@ class ToggleShortcutPreferenceControllerTest {
     }
 
     @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
-    @EnableFlags(Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
     @Test
     fun displayPreferenceAndUpdateState_keyGestureShortcutNoKeyboardFlagOff_doNotUpdateCheckStateAndSummary() {
         setHardwareKeyboard(false)
@@ -210,7 +209,6 @@ class ToggleShortcutPreferenceControllerTest {
     }
 
     @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
-    @EnableFlags(Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
     @Test
     fun displayPreferenceAndUpdateState_keyGestureShortcutHasKeyboardFlagOff_doNotUpdateCheckStateAndSummary() {
         setHardwareKeyboard(true)
@@ -230,10 +228,7 @@ class ToggleShortcutPreferenceControllerTest {
             .isEqualTo(context.getText(R.string.accessibility_shortcut_state_off))
     }
 
-    @EnableFlags(
-        com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS,
-        Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES,
-    )
+    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_KEY_GESTURE_SHORTCUT_SETTINGS)
     @Test
     fun displayPreferenceAndUpdateState_keyGestureShortcutNoKeyboardFlagOn_doNotUpdateCheckStateAndSummary() {
         setHardwareKeyboard(false)

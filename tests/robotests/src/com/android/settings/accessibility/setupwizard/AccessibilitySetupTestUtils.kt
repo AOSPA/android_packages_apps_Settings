@@ -18,17 +18,22 @@ package com.android.settings.accessibility.setupwizard
 
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ComponentName
+import android.content.ContentResolver
 import android.content.Context
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Bundle
 import android.view.View
 import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
 import com.android.settings.testutils.AccessibilityTestUtils
+import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper
 import org.mockito.kotlin.any
+import org.mockito.kotlin.anyOrNull
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.whenever
@@ -84,5 +89,49 @@ fun <T> setupMockLottieAnimationView(
     return spy(LottieAnimationView(context)).apply {
         id = R.id.sud_item_illustration
         stub { on { drawable } doReturn effectiveDrawable }
+    }
+}
+
+/**
+ * Configures a mocked [ContentResolver] to simulate Partner Customization flags.
+ *
+ * This setup is essential for testing UI components that change behavior based on external partner
+ * configurations (e.g., Setup Wizard or OEM-specific themes).
+ *
+ * @param spyContext A [Context] spy used to intercept [Context.getContentResolver].
+ * @param flagName The name of the boolean configuration flag to mock.
+ * @param enabled The value to be returned when the [flagName] is queried.
+ */
+fun setupPartnerConfigMock(spyContext: Context, flagName: String, enabled: Boolean) {
+    clearPartnerConfigCache()
+    val resultBundle = Bundle().apply { putBoolean(flagName, enabled) }
+    val mockContentResolver =
+        mock<ContentResolver> {
+            on {
+                call(any<Uri>(), any<String>(), anyOrNull<String>(), anyOrNull<Bundle>())
+            } doReturn resultBundle
+        }
+    spyContext.stub { on { contentResolver } doReturn mockContentResolver }
+}
+
+/**
+ * Force-clears the internal static caches of [PartnerConfigHelper] using reflection.
+ *
+ * [PartnerConfigHelper] often caches configuration values in static fields to improve performance.
+ * In a unit test environment, these cached values can leak between tests, causing flaky results.
+ * This method resets the animation-related bundles to null to ensure the next test fetch hits the
+ * mocked [ContentResolver].
+ *
+ * @throws NoSuchFieldException If the field names in [PartnerConfigHelper] is not exist
+ */
+fun clearPartnerConfigCache() {
+    val fields = listOf("enableAnimatedIconBundle", "enableAnimatedQrCodeBundle")
+    fields.forEach { fieldName ->
+        runCatching {
+                val field = PartnerConfigHelper::class.java.getDeclaredField(fieldName)
+                field.isAccessible = true
+                field.set(null, null)
+            }
+            .onFailure { println("Could not clear field: $fieldName") }
     }
 }

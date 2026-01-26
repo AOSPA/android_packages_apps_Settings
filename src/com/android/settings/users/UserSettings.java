@@ -17,7 +17,9 @@
 package com.android.settings.users;
 
 import static com.android.settings.flags.Flags.showAddUsersFromSigninToggle;
+import static com.android.settings.flags.Flags.showAddUsersFromSigninToggle2;
 import static com.android.settings.flags.Flags.showUserDetailsSettingsForSelf;
+import static com.android.settings.flags.Flags.showUserDetailsSettingsForSelf2;
 import static com.android.settingslib.Utils.getColorAttrDefaultColor;
 
 import android.Manifest;
@@ -406,7 +408,7 @@ public class UserSettings extends SettingsPreferenceFragment
         mMePreference = new UserPreference(getPrefContext(), null /* attrs */, myUserId);
         mMePreference.setKey(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
-        if (showUserDetailsSettingsForSelf()) {
+        if (flagShowUserDetailsSettingsForSelf()) {
             mMePreference.setOnEditClickListener((view) -> showDialog(DIALOG_USER_PROFILE_EDITOR));
         }
 
@@ -513,7 +515,7 @@ public class UserSettings extends SettingsPreferenceFragment
         if (!mUserCaps.mIsMain
                 && !isCurrentUserGuest()
                 && !mUserManager.isProfile()
-                && !showUserDetailsSettingsForSelf()) {
+                && !flagShowUserDetailsSettingsForSelf()) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
@@ -722,7 +724,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private void onUserCreated(UserInfo userInfo, Context context) {
         hideUserCreatingDialog();
         mAddingUser = false;
-        if (showAddUsersFromSigninToggle()
+        if (flagShowAddUsersFromSigninToggle()
                 && getPrefContext()
                         .getResources()
                         .getBoolean(
@@ -1056,7 +1058,7 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private boolean canEditUserInfo() {
-        return !showAddUsersFromSigninToggle()
+        return !flagShowAddUsersFromSigninToggle()
                 || !getPrefContext()
                         .getResources()
                         .getBoolean(com.android.internal.R.bool.config_enableUserInfoSetupInSuw);
@@ -1858,7 +1860,7 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         if (pref == mMePreference) {
             if (!isCurrentUserGuest()) {
-                if (showUserDetailsSettingsForSelf()) {
+                if (flagShowUserDetailsSettingsForSelf()) {
                     UserInfo userInfo = mUserManager.getUserInfo(UserHandle.myUserId());
                     openUserDetails(userInfo, false);
                 } else {
@@ -2061,5 +2063,13 @@ public class UserSettings extends SettingsPreferenceFragment
                     return niks;
                 }
             };
+
+    private boolean flagShowAddUsersFromSigninToggle() {
+        return showAddUsersFromSigninToggle() || showAddUsersFromSigninToggle2();
+    }
+
+    private boolean flagShowUserDetailsSettingsForSelf() {
+        return showUserDetailsSettingsForSelf() || showUserDetailsSettingsForSelf2();
+    }
 }
 // LINT.ThenChange(UserSettingsScreenApi.kt)

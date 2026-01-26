@@ -1278,6 +1278,24 @@
     <string name="security_settings_sfps_enroll_find_sensor_title">Touch the power button without pressing it</string>
     <!-- Introduction title shown in UDFPS enrollment dialog to locate the sensor [CHAR LIMIT=60] -->
     <string name="security_settings_udfps_enroll_find_sensor_title">How to set up your fingerprint</string>
+
+    <!-- Strings shown during find sensor step for the Standalone sensor location type -->
+    <!-- Title shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=60] -->
+    <string name="security_settings_enroll_find_sensor_standalone_default_title">Touch the fingerprint sensor</string>
+    <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
+    <string name="security_settings_enroll_find_sensor_standalone_default_message">The sensor is on your keyboard, power button, or the side of your device.</string>
+    <!-- Message shown in fingerprint enrollment dialog to locate the sensor when the sensor is located on the bottom-left corner of the keyboard -->
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_left_message">The fingerprint sensor is on the bottom-left corner of your keyboard</string>
+    <!-- Message shown in fingerprint enrollment dialog to locate the sensor when the sensor is located on the bottom-right corner of the keyboard -->
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_right_message">The fingerprint sensor is on the bottom-right corner of your keyboard</string>
+    <!-- Message shown in fingerprint enrollment dialog to locate the sensor when the sensor is located on the top-right corner of the keyboard -->
+    <string name="security_settings_enroll_find_sensor_keyboard_top_right_message">The fingerprint sensor is on the top-right corner of your keyboard</string>
+    <!-- Message shown in fingerprint enrollment dialog to locate the sensor when the sensor is located on the right-hand side of the device -->
+    <string name="security_settings_enroll_find_sensor_right_side_message">The fingerprint sensor is on the right-hand side of your device</string>
+    <!-- Message shown in fingerprint enrollment dialog to locate the sensor when the sensor is located on the left-hand side of the device -->
+    <string name="security_settings_enroll_find_sensor_left_side_message">The fingerprint sensor is on the left-hand side of your device</string>
+    <!-- Message shown in fingerprint enrollment dialog to locate the sensor when the sensor is located on the top-right corner of your keyboard, next to the power button -->
+    <string name="security_settings_enroll_find_sensor_left_of_power_button_top_right_message">The fingerprint sensor is on the top-right corner of your keyboard, next to the power button</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
     <string name="security_settings_fingerprint_enroll_find_sensor_message">It\u2019s on the back of your phone. Use your index finger.</string>
     <!-- Message shown in UDFPS enrollment dialog to locate the sensor [CHAR LIMIT=NONE]-->
@@ -3593,6 +3611,44 @@
     <string name="sim_enter_ok">OK</string>
     <!-- SIM card lock settings screen, SIM PIN dialog button labels: [CHAR LIMIT=40] -->
     <string name="sim_enter_cancel">Cancel</string>
+
+    <!-- More security and Privacy, SIM protection setting option name  [CHAR LIMIT=40] -->
+    <string name="automatic_sim_lock_settings_title">Protect SIM card</string>
+    <!-- More security and Privacy, SIM protection setting screen title  [CHAR LIMIT=40] -->
+    <string name="automatic_sim_lock_protection">Automatic SIM lock protection</string>
+    <!-- SIM protection settings screen, primary setting for turning on automatic PIN management. [CHAR LIMIT=40] -->
+    <string name="sim_auto_pin_management_toggle">Automatic PIN management</string>
+    <!-- SIM protection settings screen, primary setting, description for automatic PIN management on [CHAR LIMIT=NONE] -->
+    <string name="sim_pin_auto_management_on">Managed by Android</string>
+    <!-- SIM protection settings screen, primary setting, description for auto PIN management off [CHAR LIMIT=NONE] -->
+    <string name="sim_pin_auto_management_off">Not managed by Android</string>
+    <!-- Enrollment into the automatic SIM card PIN management feature succeeded. [CHAR LIMIT=NONE] -->
+    <string name="sim_enrollment_succeeded">Enrollment succeeded</string>
+    <!-- Enrollment into the automatic SIM card PIN management feature failed. [CHAR LIMIT=NONE] -->
+    <string name="sim_enrollment_failed">Enrollment failed</string>
+    <!-- Automatic SIM lock protection screen, preference to show the platform-managed PIN. [CHAR LIMIT=NONE] -->
+    <string name="sim_display_platform_managed_pin_title">Show Android-managed PIN</string>
+    <!-- Dialog for showing the platform-managed PIN, title. [CHAR LIMIT=40] -->
+    <string name="sim_display_platform_managed_pin">Android-managed PIN</string>
+    <!-- Dialog for showing the platform-managed PIN, text. [CHAR LIMIT=NONE] -->
+    <string name="sim_platform_managed_pin_value">Value of the Android-managed PIN: </string>
+    <!-- Dialog for showing the platform-managed PIN, text when there's a failure. [CHAR LIMIT=NONE] -->
+    <string name="sim_platform_managed_pin_failure">Failed getting PIN</string>
+    <!-- Automatic SIM card lock protection screen, preference summary when nothing is set. [CHAR LIMIT=NONE] -->
+    <string name="sim_choose_protection_mode_title">Protect SIM card from theft</string>
+    <!-- Automatic SIM card lock protection screen, preference summary when the SIM PIN is platform-managed. [CHAR LIMIT=NONE] -->
+    <string name="sim_protection_mode_protected_by_platform">SIM PIN managed by Android</string>
+    <!-- Automatic SIM card lock protection screen, preference summary when the SIM PIN is manually managed. [CHAR LIMIT=NONE] -->
+    <string name="sim_protection_mode_manually_managed">SIM PIN manually managed</string>
+    <!-- Automatic SIM card lock protection screen, preference summary when there is no lockscreen so the feature cannot be turned on. [CHAR LIMIT=NONE] -->
+    <string name="sim_protection_mode_lskf_required">Lockscreen must be set up to turn on SIM protection</string>
+    <!-- Enrollment into automatic SIM PIN management dialog, title. [CHAR LIMIT=40] -->
+    <string name="provide_current_sim_pin_title">Enter current SIM PIN</string>
+    <!-- Enrollment into automatic SIM PIN management dialog, text. [CHAR LIMIT=NONE] -->
+    <string name="provide_current_sim_pin">Enter the SIM card current PIN</string>
+    <!-- Enrollment into automatic SIM PIN management dialog, button for using carrier default PIN. [CHAR LIMIT=25] -->
+    <string name="use_carrier_default_pin">Use carrier default</string>
+
     <!-- Title asking user if they wish to change the default sim for cellular data.  [CHAR LIMIT=40] -->
     <string name="sim_change_data_title">
         Use <xliff:g id="carrier" example="Verizon">%1$s</xliff:g> for mobile data?
@@ -5917,16 +5973,6 @@
         {3,number,integer}. Use shortcut or <xliff:g id="meta">%1$s</xliff:g> + <xliff:g id="alt">%2$s</xliff:g> + M to stop magnification
         ]]>
     </string>
-    <!-- Instructions on the accessibility preference screen teaching the user how to control magnification with a keyboard when the feature flag for keyboard shortcuts is off. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary">
-        <![CDATA[
-        <b>To zoom in:</b><br/>
-        {0,number,integer}. Use shortcut to start magnification<br/>
-        {1,number,integer}. Press <xliff:g id="meta">%1$s</xliff:g> + <xliff:g id="alt">%2$s</xliff:g> + arrow keys to move around screen<br/>
-        {2,number,integer}. Press <xliff:g id="meta">%1$s</xliff:g> + <xliff:g id="alt">%2$s</xliff:g> and \"+\" or \"-\" to adjust zoom<br/>
-        {3,number,integer}. Use shortcut to stop magnification
-        ]]>
-    </string>
     <!-- Instructions on the accessibility preference screen teaching the user how to control magnification with both keyboard and touch. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_keyboard_touch_summary">
         <![CDATA[
@@ -6939,13 +6985,6 @@
 
     <!-- Title for the battery advance info tip [CHAR LIMIT=NONE] -->
     <string name="battery_advance_info"></string>
-    <!-- Preference summary for advanced battery loading usage [CHAR LIMIT=NONE] -->
-    <string name="battery_advance_preference_loading_summary"></string>
-    <!-- Description of battery advance info profile results [CHAR LIMIT=NONE] -->
-    <string name="battery_advance_info_profile_result_1"></string>
-    <string name="battery_advance_info_profile_result_2"></string>
-    <string name="battery_advance_info_profile_result_3"></string>
-    <string name="battery_advance_info_profile_result_4"></string>
     <!-- Text for battery advance info learn more link [CHAR LIMIT=NONE] -->
     <string name="battery_advance_info_learn_more"></string>
 
@@ -15559,7 +15598,7 @@
     <!-- Subitle for the try a demo button. [CHAR LIMIT=NONE] -->
     <string name="see_how_it_works">See how it works</string>
     <!-- Footer text for the satellite landing page, explaining how it works for LTE devices. [CHAR LIMIT=NONE] -->
-    <string name="landing_page_footer_text_lte">When you don\'t have a mobile or Wi-Fi network, your phone will automatically connect to a satellite. For the best connection, keep a clear view of the sky. Your phone will reconnect to a mobile network when available. Calling over satellite isn\'t available. Emergency calls may still connect.</string>
+    <string name="landing_page_footer_text_lte">When you lose mobile and Wi-Fi signal, your phone will try to connect to satellite. Your phone will reconnect to a mobile or Wi-Fi network when one is available.\n\nImportant: Calling over satellite is not available. However, emergency calls may still connect.</string>
     <!-- Footer text for the satellite landing page, explaining how it works for phones that have to be manually pointed at a satellite that stays in one place in the sky using a UI that guides them to do so. [CHAR LIMIT=NONE] -->
     <string name="landing_page_footer_text_nbiot">For the best connection, keep a clear view of the sky. Your phone will reconnect to a mobile network when available. Calling over satellite isn\'t available. Emergency calls may still connect.</string>
     <!-- Text for a link to more information about satellite connectivity. [CHAR LIMIT=NONE] -->
@@ -15601,6 +15640,12 @@
     <string name="satellite_change_default_app_button">Change default app</string>
     <!-- Button text for the view carrier settings info banner. [CHAR LIMIT=50] -->
     <string name="satellite_view_carrier_settings_button">View carrier settings</string>
+    <!-- Warning text for the banner when location services is disabled. [CHAR_LIMIT=NONE] -->
+    <string name="unknown_location_warning"> To see if Satellite SOS is available in your current location, turn on location in Settings</string>
+    <!-- Button text to open Location Settings. [CHAR_LIMIT=NONE] -->
+    <string name="unknown_location_warning_button">Turn on location</string>
+    <!-- Warning text for the banner when device is not provisioned for satellite SOS. [CHAR_LIMIT=NONE] -->
+    <string name="unprovisioned_device_warning">Your device isn\'t registered for Satellite SOS. Make sure you\'re connected to the internet for your device to automatically complete registration</string>
 
     <string name="long_press_power_actions_description" translatable="false">Actions that can be performed when the power button is long pressed</string>
     <string name="long_press_power_assistant_sensitivity_ms_description" translatable="false">A length of time in ms.</string>

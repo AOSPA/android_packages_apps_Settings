@@ -158,7 +158,6 @@ import com.android.settings.network.telephony.MobileNetworkSettings;
 import com.android.settings.network.telephony.NetworkSelectSettings;
 import com.android.settings.network.telephony.satellite.SatelliteSetting;
 import com.android.settings.network.tether.TetherSettings;
-import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.BubbleNotificationSettings;
 import com.android.settings.notification.BundlePreferenceFragment;
 import com.android.settings.notification.ConfigureNotificationSettings;
@@ -324,7 +323,6 @@ public class SettingsGateway {
             PrintSettingsFragment.class.getName(),
             PrintJobSettingsFragment.class.getName(),
             TrustedCredentialsSettings.class.getName(),
-            PaymentSettings.class.getName(),
             PhysicalKeyboardFragment.class.getName(),
             SoundSettings.class.getName(),
             ConversationListSettings.class.getName(),

@@ -60,12 +60,14 @@ class SatelliteLandingPageViewModelTest {
     private lateinit var shadowSatelliteManager: ShadowSatelliteManager
     private val SUB_ID = 1
 
-    @Mock private lateinit var subInfo: SubscriptionInfo
+    private lateinit var subInfo: SubscriptionInfo
     @Mock private lateinit var packageManager: PackageManager
     @Mock private lateinit var appsRepository: SatelliteAppsRepository
     @Mock private lateinit var satelliteStateRepository: SatelliteStateRepository
 
     private val satelliteStatusFlow = MutableStateFlow(SatelliteStatus.NOT_AVAILABLE)
+    private val isTerrestrialConnectedFlow = MutableStateFlow(true)
+    private val satelliteDisallowedReasonsFlow = MutableStateFlow(intArrayOf())
 
     @Before
     fun setUp() {
@@ -74,13 +76,19 @@ class SatelliteLandingPageViewModelTest {
         shadowSatelliteManager =
             Shadow.extract(context.getSystemService(SatelliteManager::class.java))
         ShadowSubscriptionManager.setActiveDataSubscriptionId(SUB_ID)
-        `when`(subInfo.subscriptionId).thenReturn(SUB_ID)
+
+        subInfo = SubscriptionInfo.Builder().setId(SUB_ID).build()
         val subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
         shadowOf(subscriptionManager).setActiveSubscriptionInfoList(listOf(subInfo))
         val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
         shadowOf(carrierConfigManager).setConfigForSubId(SUB_ID, PersistableBundle())
 
         `when`(satelliteStateRepository.satelliteStatus).thenReturn(satelliteStatusFlow)
+        `when`(satelliteStateRepository.isTerrestrialConnected)
+            .thenReturn(isTerrestrialConnectedFlow)
+        `when`(satelliteStateRepository.satelliteDisallowedReasons)
+            .thenReturn(satelliteDisallowedReasonsFlow)
+        `when`(satelliteStateRepository.getAttachRestrictionReasons(SUB_ID)).thenReturn(emptySet())
     }
 
     @Test

@@ -142,27 +142,30 @@ constructor(
         awaitClose { runCatching { satelliteManager?.unregisterForModemStateChanged(callback) } }
     }
 
-    private val isOemSatelliteAllowedFlow = callbackFlow {
-        var isAllowed = false
-        val callback = SatelliteDisallowedReasonsCallback { reasons ->
-            val newAllowed = reasons.isEmpty()
-            if (isAllowed != newAllowed) {
-                Log.i(TAG, "onSatelliteDisallowedReasonsChanged: isOemSatelliteAllowed=$newAllowed")
-                isAllowed = newAllowed
-                trySend(newAllowed)
-            }
-        }
+    /**
+     * A flow that emits whether satellite is allowed by the OEM.
+     *
+     * This represents the check for OEM NB-IoT availability.
+     */
+    /** A flow that emits the list of disallowed reasons for satellite service. */
+    open val satelliteDisallowedReasons: StateFlow<IntArray> =
+        callbackFlow {
+                val callback = SatelliteDisallowedReasonsCallback { reasons ->
+                    Log.d(TAG, "onSatelliteDisallowedReasonsChanged: $reasons")
+                    trySend(reasons)
+                }
 
-        // Emit initial state
-        trySend(isAllowed)
-
-        satelliteManager?.registerForSatelliteDisallowedReasonsChanged(callbackExecutor, callback)
-        awaitClose {
-            runCatching {
-                satelliteManager?.unregisterForSatelliteDisallowedReasonsChanged(callback)
+                satelliteManager?.registerForSatelliteDisallowedReasonsChanged(
+                    callbackExecutor,
+                    callback,
+                )
+                awaitClose {
+                    runCatching {
+                        satelliteManager?.unregisterForSatelliteDisallowedReasonsChanged(callback)
+                    }
+                }
             }
-        }
-    }
+            .stateIn(scope, SharingStarted.WhileSubscribed(), intArrayOf())
 
     private val isInternetConnectedFlow = callbackFlow {
         var isConnected = checkInitialInternetAvailability()
@@ -197,6 +200,11 @@ constructor(
         awaitClose { runCatching { connectivityManager?.unregisterNetworkCallback(callback) } }
     }
 
+    /** Indicates if a terrestrial network (Cellular or Wi-Fi) is connected. */
+    open val isTerrestrialConnected: StateFlow<Boolean> =
+        combine(isCellularAvailableFlow, isInternetConnectedFlow) { cell, wifi -> cell || wifi }
+            .stateIn(scope, SharingStarted.WhileSubscribed(), false)
+
     /**
      * The current status of satellite connectivity.
      *
@@ -205,18 +213,17 @@ constructor(
     open val satelliteStatus: StateFlow<SatelliteStatus> =
         combine(
                 carrierRoamingNtnStateFlow,
-                isCellularAvailableFlow,
                 isOemSatelliteActiveFlow,
-                isOemSatelliteAllowedFlow,
-                isInternetConnectedFlow,
-            ) { carrierState, isCellular, isOemActive, isOemAllowed, isInternet ->
+                satelliteDisallowedReasons,
+                isTerrestrialConnected,
+            ) { carrierState, isOemActive, disallowedReasons, isTerrestrial ->
                 val isSatelliteActive = carrierState.isActive || isOemActive
-                val isTerrestrialAvailable = isCellular || isInternet
+                val isOemAllowed = disallowedReasons.isEmpty()
                 val isSatelliteAvailable =
                     checkSatelliteAvailability(
                         isCarrierEligible = carrierState.isEligible,
                         isOemAllowed = isOemAllowed,
-                        isTerrestrialAvailable = isTerrestrialAvailable,
+                        isTerrestrialConnected = isTerrestrial,
                     )
 
                 when {
@@ -228,6 +235,21 @@ constructor(
             .stateIn(scope, SharingStarted.WhileSubscribed(), SatelliteStatus.NOT_AVAILABLE)
 
     /**
+     * Returns the attach restriction reasons for the carrier.
+     *
+     * @param subId The subscription ID.
+     * @return A set of restriction reasons.
+     */
+    open fun getAttachRestrictionReasons(subId: Int): Set<Int> {
+        return try {
+            satelliteManager?.getAttachRestrictionReasonsForCarrier(subId) ?: emptySet()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting attach restriction reasons", e)
+            emptySet()
+        }
+    }
+
+    /**
      * Returns true if satellite connectivity is available.
      *
      * LTE-based NTN must not supported on the device to be eligible for AVAILABLE state.
@@ -235,10 +257,10 @@ constructor(
     private fun checkSatelliteAvailability(
         isCarrierEligible: Boolean,
         isOemAllowed: Boolean,
-        isTerrestrialAvailable: Boolean,
+        isTerrestrialConnected: Boolean,
     ): Boolean {
         return (isCarrierEligible || isOemAllowed) &&
-            !isTerrestrialAvailable &&
+            !isTerrestrialConnected &&
             !isLteNtnSupportedChecker(context)
     }
 
