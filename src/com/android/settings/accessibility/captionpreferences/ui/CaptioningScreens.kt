@@ -116,7 +116,8 @@ open class CaptioningPropertiesScreen :
 
 /** Screens where the user can customize the size and style of the caption. */
 @ProvidePreferenceScreen(CaptioningAppearanceScreen.KEY)
-open class CaptioningAppearanceScreen : PreferenceScreenMixin, PreferenceSummaryProvider {
+open class CaptioningAppearanceScreen(context: Context) :
+    PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceLifecycleProvider {
     override val highlightMenuKey: Int
         get() = R.string.menu_key_accessibility
 
@@ -132,6 +133,11 @@ open class CaptioningAppearanceScreen : PreferenceScreenMixin, PreferenceSummary
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_purpose
 
+    private val captionFontSizeMetadata by lazy { CaptionFontSizePreference(context) }
+    private val captionStyleSizeMetadata by lazy { CaptionStylePreference(context) }
+
+    private var appearanceChangeObserver: KeyedObserver<String?>? = null
+
     override fun isFlagEnabled(context: Context): Boolean = Flags.catalystCaptionPreferencesScreen()
 
     override fun fragmentClass(): Class<out Fragment>? = CaptioningAppearanceFragment::class.java
@@ -139,14 +145,40 @@ open class CaptioningAppearanceScreen : PreferenceScreenMixin, PreferenceSummary
     override fun getMetricsCategory(): Int = SettingsEnums.ACCESSIBILITY_CAPTION_APPEARANCE
 
     override fun getSummary(context: Context): CharSequence? {
-        // Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE -- onFontScaleChanged
-        // Secure.ACCESSIBILITY_CAPTIONING_PRESET -- onUserStyleChanged
-        // TODO: Update summary based on the selected caption size and style
-        return null
+        return context.getString(
+            com.android.settingslib.R.string.preference_summary_default_combination,
+            captionFontSizeMetadata.getSummary(context),
+            captionStyleSizeMetadata.getSummary(context),
+        )
+    }
+
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        super.onCreate(context)
+        if (isEntryPoint(context)) {
+            val observer =
+                KeyedObserver<String?> { _, _ -> context.notifyPreferenceChange(bindingKey) }
+            captionFontSizeMetadata.storage(context).addObserver(observer, HandlerExecutor.main)
+            captionStyleSizeMetadata.storage(context).addObserver(observer, HandlerExecutor.main)
+            appearanceChangeObserver = observer
+        }
+    }
+
+    override fun onDestroy(context: PreferenceLifecycleContext) {
+        super.onDestroy(context)
+        appearanceChangeObserver?.let {
+            captionFontSizeMetadata.storage(context).removeObserver(it)
+            captionStyleSizeMetadata.storage(context).removeObserver(it)
+            appearanceChangeObserver = null
+        }
     }
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) { +CaptioningFooterPreference("captioning_appearance_footer") }
+        preferenceHierarchy(context) {
+            +CaptionAppearancePreviewPreference(context)
+            +CaptionFontSizePreference(context)
+            +CaptionStylePreference(context)
+            +CaptioningFooterPreference("captioning_appearance_footer")
+        }
 
     companion object {
         const val KEY = "captioning_appearance"
