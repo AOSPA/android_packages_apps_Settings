@@ -32,6 +32,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
@@ -106,6 +107,9 @@ public final class BatteryChartPreferenceControllerTest {
         doReturn(Set.of("com.android.gms.persistent"))
                 .when(mFeatureFactory.powerUsageFeatureProvider)
                 .getHideApplicationSet();
+        doReturn(false)
+                .when(mFeatureFactory.powerUsageFeatureProvider)
+                .isBatteryAdvanceInfoEnabled();
         doReturn(mLayoutParams).when(mDailyChartView).getLayoutParams();
         doReturn(mIntent).when(mContext).registerReceiver(any(), any());
         doReturn(100).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_SCALE), anyInt());
@@ -341,6 +345,45 @@ public final class BatteryChartPreferenceControllerTest {
         verify(mChartSummaryTextView).setVisibility(View.GONE);
         verify(mDailyChartView).setVisibility(View.GONE);
         verify(mHourlyChartView).setVisibility(View.GONE);
+    }
+
+    @Test
+    public void onBatteryLevelDataUpdate_featureEnabledAndFirstLaunch_selectDailyIndex() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isBatteryAdvanceInfoEnabled())
+                .thenReturn(true);
+        BatteryLevelData batteryLevelData =
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0);
+
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(batteryLevelData);
+
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex).isEqualTo(2);
+    }
+
+    @Test
+    public void onBatteryLevelDataUpdate_featureEnabledButNotFirstLaunch_doesNotSelectIndex() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isBatteryAdvanceInfoEnabled())
+                .thenReturn(true);
+        Bundle savedState = new Bundle();
+        savedState.putBoolean("first_launch_state", false);
+        mBatteryChartPreferenceController.onCreate(savedState);
+
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0));
+
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex)
+                .isEqualTo(SELECTED_INDEX_ALL);
+    }
+
+    @Test
+    public void onBatteryLevelDataUpdate_featureDisabledAndFirstLaunch_doesNotSelectIndex() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isBatteryAdvanceInfoEnabled())
+                .thenReturn(false);
+
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0));
+
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex)
+                .isEqualTo(SELECTED_INDEX_ALL);
     }
 
     @Test
