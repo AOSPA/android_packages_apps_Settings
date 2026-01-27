@@ -29,9 +29,9 @@ import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -68,7 +68,7 @@ private constructor(
     private lateinit var keyedObserver: KeyedObserver<String>
 
     private val packageName: String =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!!.getRequired(KEY_APP_PACKAGE_NAME)
         } else {
             arguments!!.getString(KEY_APP_PACKAGE_NAME)!!
@@ -120,7 +120,7 @@ private constructor(
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent {
         val intent =
-            if (CatalystFlags.catalystUseKeyParameters()) {
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                 makeLaunchIntent(
                     context,
                     AppDataUsageActivity::class.java,

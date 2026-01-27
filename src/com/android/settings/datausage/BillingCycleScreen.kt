@@ -30,7 +30,7 @@ import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.telephony.subscriptionManager
 import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -60,7 +60,7 @@ private constructor(
     PreferenceBindingPlaceholder {
 
     private val subId: Int =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!![Settings.EXTRA_SUB_ID]?.toIntOrNull()
                 ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
         } else {
@@ -97,7 +97,7 @@ private constructor(
         preferenceHierarchy(context) {}
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             makeLaunchIntent(
                 context,
                 BillingCycleActivity::class.java,

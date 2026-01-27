@@ -22,7 +22,7 @@ import androidx.core.net.toUri
 import com.android.settings.datausage.DataUsageAppDetailScreen.Companion.KEY_APP_PACKAGE_NAME
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
@@ -44,7 +44,7 @@ class DataUsageAppDetailScreenTest : SettingsCatalystTestCase() {
     }
 
     private val preferenceScreenCreatorWithInvalidPackage =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             DataUsageAppDetailScreen(
                 appContext,
                 DataUsageAppDetailScreen.parametersSchema.prepare(
@@ -59,7 +59,7 @@ class DataUsageAppDetailScreenTest : SettingsCatalystTestCase() {
         }
 
     override val preferenceScreenCreator =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             DataUsageAppDetailScreen(
                 appContext,
                 DataUsageAppDetailScreen.parametersSchema.prepare(
