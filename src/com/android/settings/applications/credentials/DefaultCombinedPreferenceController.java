@@ -149,7 +149,8 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
                         public void onOpenButtonClicked() {
                             if (CombinedProviderInfo.launchSettingsActivityIntent(mContext,
                                     packageName, settingsActivity, getUser())) {
-                                mCredmanMetricsLogger.recordOutboundIntentLaunch(packageName);
+                                mCredmanMetricsLogger.recordPreferredServiceOutboundLaunch(
+                                        packageName);
                             }
                         }
 
