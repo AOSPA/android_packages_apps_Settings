@@ -146,6 +146,7 @@ import com.android.settings.supervision.credentialmanagement.SupervisionPinManag
 import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
 import com.android.settings.system.ResetDashboardScreen
 import com.android.settings.system.SystemDashboardScreen
+import com.android.settings.users.UserDetailsSettingsScreenApi
 import com.android.settings.users.UserSettingsScreenApi
 import com.android.settings.vpn2.VpnSettingsScreen
 import com.android.settings.wfd.WifiDisplayScreen
@@ -501,6 +502,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = WifiHotspotSecurityApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiHotspotSpeedApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UserSettingsScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = UserDetailsSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PrintSettingsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PrintServiceApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UsbDetailsApiScreen.KEY),
