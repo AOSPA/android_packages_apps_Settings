@@ -46,7 +46,6 @@ import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.safetycenter.MoreSecurityPrivacyFragment;
 import com.android.settings.safetycenter.ui.AccountSecuritySubpageFragment;
 import com.android.settings.safetycenter.ui.AppSecuritySubpageFragment;
-import com.android.settings.safetycenter.ui.CellularNetworkSecuritySubpageFragment;
 import com.android.settings.safetycenter.ui.DeviceFindersSubpageFragment;
 import com.android.settings.safetycenter.ui.DeviceUnlockSubpageFragment;
 import com.android.settings.safetycenter.ui.PrivacyControlsFragment;
@@ -157,8 +156,6 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_SC_DEVICE_FINDERS);
         PARENT_TO_CATEGORY_KEY_MAP.put(SystemAndUpdatesSubpageFragment.class.getName(),
                 CategoryKey.CATEGORY_SC_SYSTEM_AND_UPDATES);
-        PARENT_TO_CATEGORY_KEY_MAP.put(CellularNetworkSecuritySubpageFragment.class.getName(),
-                CategoryKey.CATEGORY_SC_CELLULAR_NETWORK_SECURITY);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());
 
