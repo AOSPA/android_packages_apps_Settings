@@ -119,6 +119,15 @@ class SettingsLaunchpadActivity : Activity() {
                 }
 
         if (screenMetadata is PreferencesApiScreen) {
+            val checkScreenFlag = screenMetadata.flag?.check() ?: true
+            if (!checkScreenFlag) { // Do not launch the screen if flag is disabled.
+                Log.w(
+                    TAG,
+                    "Screen flag is disabled for key '$screenKey'. Aborting launch.",
+                )
+                return
+            }
+
             val opContext =
                 ApiOperationContext(
                     context = this@SettingsLaunchpadActivity.applicationContext,
@@ -128,11 +137,11 @@ class SettingsLaunchpadActivity : Activity() {
             // Precondition checks are suspend functions. Since this is a trampoline
             // activity that should execute quickly, we use runBlocking. This assumes
             // the precondition checks are fast and won't cause ANRs.
-            val result =
+            val screenPreconditionsCheck =
                 runBlocking { screenMetadata.screenPreconditions?.check(opContext) } ?: Allowed
-            if (result != Allowed) { // Do not launch the screen if preconditions are not met.
-                val reason = (result as Disallowed).getReason(opContext.context)
-                Log.e(
+            if (screenPreconditionsCheck != Allowed) { // Do not launch the screen if preconditions are not met.
+                val reason = (screenPreconditionsCheck as Disallowed).getReason(opContext.context)
+                Log.w(
                     TAG,
                     "Screen preconditions not met for key '$screenKey' with reason: $reason. Aborting launch.",
                 )

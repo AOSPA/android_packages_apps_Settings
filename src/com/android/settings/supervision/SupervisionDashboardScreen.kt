@@ -169,6 +169,9 @@ open class SupervisionDashboardScreen :
 
     override fun isAvailable(context: Context) = !Utils.shouldHideSupervisionInDemoMode(context)
 
+    override val indexable
+        get() = true
+
     override val keywords: Int
         get() = R.string.keywords_supervision_settings
 

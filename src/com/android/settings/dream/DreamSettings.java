@@ -16,6 +16,7 @@
 
 package com.android.settings.dream;
 
+import static android.service.dreams.Flags.dreamsSwitcher;
 import static android.service.dreams.Flags.dreamsV2;
 
 import static com.android.settings.dream.DreamMainSwitchPreferenceController.MAIN_SWITCH_PREF_KEY;
@@ -361,6 +362,11 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
      * dream.
      */
     private void updateSelectedDreamSettingsState(boolean dreamsEnabled) {
+        if (dreamsSwitcher()) {
+            updateMultiSelectedDreamsSettingsState(dreamsEnabled);
+            return;
+        }
+
         if (mDreamPickerController == null) {
             return;
         }
@@ -379,6 +385,40 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
                                 & DreamService.DREAM_CATEGORY_HOME_PANEL) == 0)
                                 && mDreamHomeControlsPreferenceController
                                     .getAvailabilityStatus() == BasePreferenceController.AVAILABLE;
+            mHomeControllerTogglePreference.setEnabled(isEnabled);
+        }
+    }
+
+    /**
+     * Updates the visibility and enabled state of preferences that depend on the currently selected
+     * dreams.
+     *
+     * <p>For multi-select, the complications toggle is visible when at least one dream supports
+     * complications, and the home controls toggle is enabled when the selected dreams are not all
+     * in the HOME_PANEL dream category.
+     */
+    private void updateMultiSelectedDreamsSettingsState(boolean dreamsEnabled) {
+        if (mDreamPickerController == null) {
+            return;
+        }
+
+        final List<DreamBackend.DreamInfo> selectedDreams =
+                mDreamPickerController.getSelectedDreams();
+
+        if (mComplicationsTogglePreference != null) {
+            boolean showComplicationsToggle = selectedDreams != null && selectedDreams.stream()
+                    .anyMatch(dream -> dream.supportsComplications);
+            mComplicationsTogglePreference.setVisible(showComplicationsToggle);
+        }
+
+        if (mHomeControllerTogglePreference != null) {
+            boolean anyCompatible = selectedDreams == null || selectedDreams.isEmpty()
+                    || selectedDreams.stream().anyMatch(dream -> (dream.dreamCategory
+                    & DreamService.DREAM_CATEGORY_HOME_PANEL) == 0);
+            boolean isEnabled = dreamsEnabled
+                    && anyCompatible
+                    && mDreamHomeControlsPreferenceController
+                    .getAvailabilityStatus() == BasePreferenceController.AVAILABLE;
             mHomeControllerTogglePreference.setEnabled(isEnabled);
         }
     }

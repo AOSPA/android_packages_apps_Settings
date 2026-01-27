@@ -16,11 +16,13 @@
 
 package com.android.settings.dream;
 
+import static android.service.dreams.Flags.dreamsSwitcher;
 import static android.service.dreams.Flags.dreamsV2;
 
 import android.annotation.LayoutRes;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.icu.text.MessageFormat;
 import android.text.TextUtils;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -37,12 +39,15 @@ import com.android.settings.R;
 import com.android.settingslib.utils.ColorUtil;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * RecyclerView adapter which displays list of items for the user to select.
  */
 public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<IDreamItem> mItemList;
+  private final MessageFormat mOrdinalFormat =
+      new MessageFormat("{0,ordinal}", Locale.getDefault());
     private int mLastSelectedPos = -1;
     private boolean mEnabled = true;
     private SparseIntArray mLayouts = new SparseIntArray();
@@ -82,9 +87,15 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 mSummaryView.setVisibility(View.VISIBLE);
             }
 
-            final Drawable icon = item.isActive()
-                    ? mContext.getDrawable(R.drawable.ic_dream_check_circle)
-                    : item.getIcon().mutate();
+            final Drawable icon;
+            if (dreamsSwitcher() && item.getOrder() >= 0) {
+                icon = new NumberedIconDrawable(
+                    mContext, item.getOrder() + 1, R.color.dream_card_color_state_list);
+            } else {
+                icon = item.isActive()
+                        ? mContext.getDrawable(R.drawable.ic_dream_check_circle)
+                        : item.getIcon().mutate();
+            }
             final int iconSize = mContext.getResources().getDimensionPixelSize(
                     R.dimen.dream_item_icon_size);
             icon.setBounds(0, 0, iconSize, iconSize);
@@ -101,19 +112,29 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             itemView.setOnClickListener(v -> {
                 item.onItemClicked();
-                if (mLastSelectedPos > -1 && mLastSelectedPos != position) {
-                    notifyItemChanged(mLastSelectedPos);
+                if (!dreamsSwitcher()) {
+                    if (mLastSelectedPos > -1 && mLastSelectedPos != position) {
+                        notifyItemChanged(mLastSelectedPos);
+                    }
+                    notifyItemChanged(position);
                 }
-                notifyItemChanged(position);
             });
 
-            if (item.isActive()) {
-                mLastSelectedPos = position;
-                itemView.setSelected(true);
-                itemView.setClickable(false);
-            } else {
-                itemView.setSelected(false);
+            final boolean isActive = item.isActive();
+            itemView.setSelected(isActive);
+            if (dreamsSwitcher()) {
                 itemView.setClickable(true);
+                if (item.getOrder() >= 0) {
+                    String ordinal = mOrdinalFormat.format(new Object[]{item.getOrder() + 1});
+                    itemView.setContentDescription(item.getTitle() + ", " + ordinal);
+                } else {
+                    itemView.setContentDescription(item.getTitle());
+                }
+            } else {
+                if (isActive) {
+                    mLastSelectedPos = position;
+                }
+                itemView.setClickable(!isActive);
             }
 
             if (item.viewType() != DreamItemViewTypes.NO_DREAM_ITEM) {
