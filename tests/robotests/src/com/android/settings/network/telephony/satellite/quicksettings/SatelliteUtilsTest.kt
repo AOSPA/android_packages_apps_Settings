@@ -28,7 +28,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
+import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
@@ -97,6 +99,41 @@ class SatelliteUtilsTest {
     }
 
     @Test
+    fun isCarrierRoamingNtnSupported_invalidSubId_returnsFalse() {
+        assertThat(
+                SatelliteUtils.isCarrierRoamingNtnSupported(
+                    context,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID,
+                )
+            )
+            .isFalse()
+    }
+
+    @Test
+    fun isLteBasedNtnSupportedByCarrier_satelliteManagerThrowsException_returnsFalse() {
+        val mockSatelliteManager = mock(SatelliteManager::class.java)
+        setupCarrierConfig(
+            isAttachSupported = true,
+            connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
+        )
+        // Force exception on SatelliteManager
+        `when`(mockSatelliteManager.getAttachRestrictionReasonsForCarrier(anyInt()))
+            .thenThrow(RuntimeException("Test Exception"))
+        // Use ContextWrapper to inject the mock SatelliteManager
+        val wrapperContext =
+            object : android.content.ContextWrapper(context) {
+                override fun getSystemService(name: String): Any? {
+                    if (getSystemServiceName(SatelliteManager::class.java) == name) {
+                        return mockSatelliteManager
+                    }
+                    return super.getSystemService(name)
+                }
+            }
+
+        assertThat(SatelliteUtils.isLteBasedNtnSupportedByCarrier(wrapperContext, SUB_ID)).isFalse()
+    }
+
+    @Test
     fun isLteBasedNtnSupportedByCarrier_satelliteAttachNotSupported_returnsFalse() {
         setAttachRestrictionReasons(isLteNtnSupported = true)
         setupCarrierConfig(
@@ -120,7 +157,6 @@ class SatelliteUtilsTest {
 
     @Test
     fun isCarrierRoamingNtnSupported_allConditionsMet_returnsTrue() {
-        setAttachRestrictionReasons(isLteNtnSupported = true)
         setupCarrierConfig(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
@@ -130,19 +166,18 @@ class SatelliteUtilsTest {
     }
 
     @Test
-    fun isCarrierRoamingNtnSupported_attachRestricted_returnsFalse() {
+    fun isCarrierRoamingNtnSupported_attachRestricted_stillReturnsTrue() {
         setAttachRestrictionReasons(isLteNtnSupported = false)
         setupCarrierConfig(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
         )
 
-        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(context, SUB_ID)).isFalse()
+        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(context, SUB_ID)).isTrue()
     }
 
     @Test
     fun isCarrierRoamingNtnSupported_satelliteAttachNotSupported_returnsFalse() {
-        setAttachRestrictionReasons(isLteNtnSupported = true)
         setupCarrierConfig(
             isAttachSupported = false,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
@@ -194,9 +229,9 @@ class SatelliteUtilsTest {
             subId = SUB_ID,
         )
         // SUB_ID_2 is not supported
-        setAttachRestrictionReasons(isLteNtnSupported = false, subId = SUB_ID_2)
+        setAttachRestrictionReasons(isLteNtnSupported = true, subId = SUB_ID_2)
         setupCarrierConfig(
-            isAttachSupported = true,
+            isAttachSupported = false,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
             subId = SUB_ID_2,
         )
