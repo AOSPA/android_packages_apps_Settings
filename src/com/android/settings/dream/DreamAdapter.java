@@ -46,8 +46,8 @@ import java.util.Locale;
  */
 public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<IDreamItem> mItemList;
-  private final MessageFormat mOrdinalFormat =
-      new MessageFormat("{0,ordinal}", Locale.getDefault());
+    private final MessageFormat mOrdinalFormat =
+        new MessageFormat("{0,ordinal}", Locale.getDefault());
     private int mLastSelectedPos = -1;
     private boolean mEnabled = true;
     private SparseIntArray mLayouts = new SparseIntArray();
