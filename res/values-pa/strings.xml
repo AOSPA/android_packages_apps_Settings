@@ -957,6 +957,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"ਵੱਖਰੀ ਡਿਸਪਲੇ ਵਜੋਂ ਵਰਤੋ"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"ਬਿਲਟ-ਇਨ ਡਿਸਪਲੇ ਨੂੰ ਪ੍ਰਤਿਬਿੰਬਿਤ ਕਰੋ"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"ਕਨੈਕਸ਼ਨ ਵਿੰਡੋ ਦਿਖਾਓ"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"HDR ਦੀ ਵਰਤੋਂ ਕਰੋ"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"ਰੰਗਾਂ ਦੀ ਵਿਆਪਕ ਰੇਂਜ ਅਤੇ ਚਮਕਦਾਰ ਹਾਈਲਾਈਟਾਂ ਦੀ ਆਗਿਆ ਦਿੰਦਾ ਹੈ"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"ਬਾਹਰੀ ਡਿਸਪਲੇ ਡਿਸਕਨੈਕਟ ਹੈ"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"ਘੁਮਾਅ"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"ਮਿਆਰੀ"</string>
@@ -2046,7 +2048,7 @@
     <string name="move_error_device_admin" msgid="1561502976834303626">"ਡੀਵਾਈਸ ਪ੍ਰਸ਼ਾਸਕ ਐਪ ਬਾਹਰੀ ਮੀਡੀਆ \'ਤੇ ਸਥਾਪਤ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ"</string>
     <string name="force_stop_dlg_title" msgid="86745852555490146">"ਕੀ ਜ਼ਬਰਦਸਤੀ ਬੰਦ ਕਰਨਾ ਹੈ?"</string>
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"ਜੇ ਤੁਸੀਂ ਕਿਸੇ ਐਪ ਨੂੰ ਜ਼ਬਰਦਸਤੀ ਬੰਦ ਕਰਦੇ ਹੋ, ਤਾਂ ਹੋ ਸਕਦਾ ਹੈ ਇਹ ਠੀਕ ਤਰ੍ਹਾਂ ਕਾਰਜ ਨਾ ਕਰੇ।"</string>
-    <string name="app_disable_dlg_positive" msgid="1414218905322009505">"ਐਪ ਨੂੰ ਅਸਮਰੱਥ ਬਣਾਓ"</string>
+    <string name="app_disable_dlg_positive" msgid="1414218905322009505">"ਐਪ ਬੰਦ ਕਰੋ"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"ਜੇ ਤੁਸੀਂ ਇਸ ਐਪ ਨੂੰ ਬੰਦ ਕਰਦੇ ਹੋ, ਤਾਂ ਹੋ ਸਕਦਾ ਹੈ ਕਿ Android ਅਤੇ ਹੋਰ ਐਪਾਂ ਉਸ ਤਰ੍ਹਾਂ ਕੰਮ ਨਾ ਕਰਨ ਜਿਵੇਂ ਇਨ੍ਹਾਂ ਤੋਂ ਉਮੀਦ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਧਿਆਨ ਵਿੱਚ ਰੱਖੋ, ਤੁਹਾਡੇ ਡੀਵਾਈਸ ਵਿੱਚ ਇਹ ਐਪ ਪਹਿਲਾਂ ਤੋਂ ਸਥਾਪਤ ਮਿਲੀ ਹੋਣ ਕਰਕੇ ਤੁਸੀਂ ਇਸ ਨੂੰ ਮਿਟਾ ਨਹੀਂ ਸਕਦੇ। ਇਸਨੂੰ ਬੰਦ ਕਰ ਕੇ, ਤੁਸੀਂ ਆਪਣੇ ਡੀਵਾਈਸ \'ਤੇ ਇਹ ਐਪ ਬੰਦ ਕਰ ਅਤੇ ਲੁਕਾ ਰਹੇ ਹੋ।"</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"ਸਟੋਰ"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"ਐਪ ਵੇਰਵੇ"</string>
@@ -2116,6 +2118,14 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"\" \" ਦਰਜ ਕਰਨ ਲਈ ਸਪੇਸ ਕੁੰਜੀ ਦੋ ਵਾਰ ਦਬਾਓ।"</string>
     <string name="show_password" msgid="7101900779571040117">"ਪਾਸਵਰਡ ਦਿਖਾਓ"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"ਟਾਈਪ ਕਰਨ ਵੇਲੇ ਅੱਖਰ-ਚਿੰਨ੍ਹਾਂ ਨੂੰ ਥੋੜ੍ਹੇ ਸਮੇਂ ਲਈ ਦਿਖਾਓ"</string>
+    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <skip />
+    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"ਇਹ ਸਪੈੱਲ-ਚੈਕਰ ਤੁਹਾਡੇ ਵੱਲੋਂ ਟਾਈਪ ਕੀਤਾ ਜਾਣ ਵਾਲੀ ਸਾਰੀ ਲਿਖਤ ਇਕੱਤਰ ਕਰਨ ਵਿੱਚ ਸਮਰੱਥ ਹੋ ਸਕਦਾ ਹੈ, ਨਿੱਜੀ ਡਾਟਾ ਸਮੇਤ ਜਿਵੇਂ ਪਾਸਵਰਡ ਅਤੇ ਕ੍ਰੈਡਿਟ ਕਾਰਡ ਨੰਬਰ। ਇਹ <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> ਐਪ ਤੋਂ ਆਉਂਦਾ ਹੈ। ਕੀ ਇਸ ਸਪੈੱਲ-ਚੈਕਰ ਨੂੰ ਵਰਤਣਾ ਹੈ?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"ਸੈਟਿੰਗਾਂ"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"ਭਾਸ਼ਾ"</string>
@@ -2590,7 +2600,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"ਤੁਹਾਡੇ ਡੀਵਾਈਸ ਅਤੇ ਉਨ੍ਹਾਂ ਐਪਾਂ ਲਈ ਗੂੜ੍ਹਾ ਥੀਮ ਚਾਲੂ ਕਰਦਾ ਹੈ, ਜੋ ਗੂੜ੍ਹੇ ਥੀਮ ਦਾ ਸਮਰਥਨ ਕਰਦੀਆਂ ਹਨ"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"ਵਿਸਤ੍ਰਿਤ"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"ਵਿਸਤ੍ਰਿਤ ਗੂੜ੍ਹਾ ਥੀਮ"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"ਉਨ੍ਹਾਂ ਜ਼ਿਆਦਾਤਰ ਐਪਾਂ \'ਤੇ ਗੂੜ੍ਹਾ ਥੀਮ ਲਾਗੂ ਕਰਦਾ ਹੈ ਜੋ ਇਸਦਾ ਸਮਰਥਨ ਨਹੀਂ ਕਰਦੀਆਂ, ਜਿਸ ਨਾਲ ਪਹੁੰਚਯੋਗਤਾ ਨੂੰ ਬਿਹਤਰ ਬਣਾਉਣ ਵਿੱਚ ਮਦਦ ਮਿਲਦੀ ਹੈ।"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"ਉਨ੍ਹਾਂ ਜ਼ਿਆਦਾਤਰ ਐਪਾਂ \'ਤੇ ਗੂੜ੍ਹਾ ਥੀਮ ਆਪਣੇ ਆਪ ਲਾਗੂ ਕਰਦਾ ਹੈ ਜੋ ਇਸਦਾ ਸਮਰਥਨ ਨਹੀਂ ਕਰਦੀਆਂ, ਜਿਸ ਨਾਲ ਪਹੁੰਚਯੋਗਤਾ ਨੂੰ ਬਿਹਤਰ ਬਣਾਉਣ ਵਿੱਚ ਮਦਦ ਮਿਲਦੀ ਹੈ।"</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"ਜ਼ਬਰਦਸਤੀ ਪਲਟਾਓ, ਰੰਗ ਪਲਟਨਾ, ਕੰਟ੍ਰਾਸਟ"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"ਵਿਸਤ੍ਰਿਤ ਗੂੜ੍ਹਾ ਥੀਮ"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"ਵਿਸਤ੍ਰਿਤ ਗੂੜ੍ਹੇ ਥੀਮ ਦੀਆਂ ਸੈਟਿੰਗਾਂ"</string>
@@ -2917,11 +2927,6 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"ਪਿਛਲੇ 24 ਘੰਟਿਆਂ ਦੌਰਾਨ ਹੋਈ ਵਰਤੋਂ ਦੇਖੋ"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"ਪਿਛਲੀ ਵਾਰ ਪੂਰਾ ਚਾਰਜ ਕਰਨ ਤੋਂ ਬਾਅਦ ਵਰਤੋਂ ਨੂੰ ਦੇਖੋ"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"ਐਪ ਬੈਟਰੀ ਵਰਤੋਂ"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"ਵਰਤੋਂ ਵੇਰਵੇ"</string>
@@ -3621,12 +3626,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"ਬਲੂਟੁੱਥ, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"ਬਲੂਟੁੱਥ, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"ਡੀਵਾਈਸ"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"ਕੀ-ਬੋਰਡ, ਟੱਚਪੈਡ, ਡਿਸਪਲੇ, ਧੁਨੀ"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"ਡਿਸਪਲੇ"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"ਧੁਨੀ"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC ਬੰਦ ਹੋਣ ਕਰਕੇ ਅਣਉਪਲਬਧ"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ਵਰਤਣ ਲਈ, ਪਹਿਲਾਂ ਇੱਕ ਭੁਗਤਾਨ ਐਪ ਸਥਾਪਤ ਕਰੋ"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"ਹਾਲੀਆ ਐਪਾਂ, ਪੂਰਵ-ਨਿਰਧਾਰਤ ਐਪਾਂ"</string>
@@ -3755,6 +3757,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, ਟੈਗ, ਰੀਡਰ"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"ਕੀ-ਬੋਰਡ, ਹੈਪਟਿਕਸ, ਥਰਥਰਾਹਟ,"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"ਬਾਹਰੀ ਡਿਸਪਲੇ, ਕਨੈਕਟ ਕੀਤਾ ਡਿਸਪਲੇ, ਐਕਸਟੈਂਡੇਡ ਡਿਸਪਲੇ, ਦੂਜੀ ਡਿਸਪਲੇ, ਬਿਲਟ-ਇਨ ਡਿਸਪਲੇ, ਡਿਸਪਲੇਆਂ ਨੂੰ ਵਿਵਸਥਿਤ ਕਰਨਾ, ਡਿਸਪਲੇ ਪ੍ਰਤਿਬਿੰਬਤ ਕਰਨਾ, ਡਿਸਪਲੇ ਸਾਈਜ਼, ਰੋਟੇਸ਼ਨ, ਰੈਜ਼ੋਲਿਊਸ਼ਨ, ਰਿਫ੍ਰੈਸ਼ ਦਰ"</string>
+    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"ਅਵਾਜ਼ ਅਤੇ ਥਰਥਰਾਹਟ"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"ਮੀਡੀਆ ਦੀ ਅਵਾਜ਼"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast ਦੀ ਆਵਾਜ਼"</string>
@@ -3797,7 +3801,7 @@
     <string name="live_caption_on_summary" msgid="8921561021882989495">"ਚਾਲੂ ਹੈ / ਕਾਲਾਂ, ਵੀਡੀਓ ਅਤੇ ਹੋਰ ਮੀਡੀਆ ਲਈ ਸੁਰਖੀਆਂ ਪ੍ਰਾਪਤ ਕਰੋ"</string>
     <string name="live_caption_off_summary" msgid="6761535729357010911">"ਬੰਦ ਹੈ / ਕਾਲਾਂ, ਵੀਡੀਓ ਅਤੇ ਹੋਰ ਮੀਡੀਆ ਲਈ ਸੁਰਖੀਆਂ ਪ੍ਰਾਪਤ ਕਰੋ"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"ਤਾਰ ਵਾਲੇ ਹੈੱਡਫ਼ੋਨ"</string>
-    <string name="spatial_audio_text" msgid="8201387855375146000">"ਅਨੁਰੂਪ ਮੀਡੀਆ ਤੋਂ ਆਡੀਓ ਵਧੇਰੇ ਇਮਰਸਿਵ ਬਣ ਜਾਂਦੀ ਹੈ"</string>
+    <string name="spatial_audio_text" msgid="8201387855375146000">"ਅਨੁਰੂਪ ਮੀਡੀਆ ਤੋਂ ਆਡੀਓ ਜ਼ਿਆਦਾ ਬਿਹਤਰ ਹੋ ਜਾਂਦੀ ਹੈ"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"ਬੰਦ"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"ਚਾਲੂ / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"ਚਾਲੂ / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> ਅਤੇ <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
@@ -3873,7 +3877,7 @@
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"ਲੋਕ, ਐਪਾਂ ਅਤੇ ਧੁਨੀਆਂ ਰੁਕਾਵਟ ਪੈਦਾ ਕਰ ਸਕਦੀਆਂ ਹਨ"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"ਫਿਲਟਰ ਕੀਤੀਆਂ ਸੂਚਨਾਵਾਂ ਲਈ ਡਿਸਪਲੇ ਵਿਕਲਪ"</string>
     <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"ਸੂਚਨਾਵਾਂ ਦਿਖਾਈਆਂ ਗਈਆਂ"</string>
-    <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"ਸੂਚਨਾਵਾਂ ਨੂੰ ਅੰਸ਼ਕ ਤੌਰ ਤੇ ਲੁਕਾਇਆ ਗਿਆ"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"ਸੂਚਨਾਵਾਂ ਨੂੰ ਅੰਸ਼ਕ ਤੌਰ \'ਤੇ ਲੁਕਾਇਆ ਗਿਆ"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="2157279412167366119">"ਸੂਚਨਾਵਾਂ ਨੂੰ ਲੁਕਾਇਆ ਗਿਆ"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"ਵਿਉਂਤਬੱਧ ਪਾਬੰਦੀਆਂ"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"ਜਦੋਂ ਸਕ੍ਰੀਨ ਚਾਲੂ ਹੋਵੇ"</string>
@@ -4387,12 +4391,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"ਮੁੜ-ਸ਼ੁਰੂ ਕਰੋ"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"ਹੁਣੇ ਨਹੀਂ"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"ਅਡਵਾਂਸ ਮੈਮੋਰੀ ਸੁਰੱਖਿਆ ਬਾਰੇ ਹੋਰ ਜਾਣੋ।"</string>
-    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
-    <skip />
-    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
-    <skip />
-    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
-    <skip />
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Android OS ਤਸ਼ਖੀਸਾਂ"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"OS ਬਿਲਡਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"ਤਸ਼ਖੀਸਾਂ, ਪਾਰਦਰਸ਼ਤਾ, ਬਾਈਨਰੀ"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"ਇਸ ਕੰਮ ਸੰਬੰਧੀ ਪ੍ਰੋਫਾਈਲ ਦਾ ਇਨ੍ਹਾਂ ਵੱਲੋਂ ਪ੍ਰਬੰਧਨ ਕੀਤਾ ਜਾਂਦਾ ਹੈ:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> ਦੁਆਰਾ ਪ੍ਰਬੰਧਿਤ"</string>
     <string name="launch_by_default" msgid="892824422067985734">"ਪੂਰਵ-ਨਿਰਧਾਰਿਤ ਵਜੋਂ ਖੋਲ੍ਹੋ"</string>
@@ -4513,18 +4514,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"ਪੂਰਵ-ਨਿਰਧਾਰਿਤ USB ਸੰਰੂਪਣ"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"ਪਾਵਰ ਵਿਕਲਪ"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"ਫ਼ਾਈਲ ਟ੍ਰਾਂਸਫ਼ਰ ਵਿਕਲਪ"</string>
-    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
-    <skip />
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"ਡਾਟਾ ਪਹੁੰਚ ਸੁਰੱਖਿਆ"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"PCI ਟਨਲਿੰਗ ਦੀ ਆਗਿਆ ਦਿਓ"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"ਚਾਲੂ ਹੋਣ \'ਤੇ, USB ਅਤੇ Thunderbolt ਪੈਰੀਫੈਰਲ PCI ਟਨਲਾਂ ਬਣਾ ਸਕਦੇ ਹਨ ਅਤੇ ਸਿਸਟਮ ਮੈਮੋਰੀ ਤੱਕ ਪਹੁੰਚ ਕਰ ਸਕਦੇ ਹਨ"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"ਇਸ ਸੈਟਿੰਗ ਨੂੰ ਸੋਧਣ ਲਈ ਪ੍ਰਸ਼ਾਸਕ ਵਰਤੋਂਕਾਰ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"ਤੁਹਾਡੇ ਆਈ.ਟੀ. ਪ੍ਰਸ਼ਾਸਕ ਵੱਲੋਂ ਬੰਦ ਕੀਤੀ ਗਈ"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"ਅਡਵਾਂਸ ਸੁਰੱਖਿਆ ਮੋਡ ਵੱਲੋਂ ਬੰਦ ਕੀਤੀ ਗਈ"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB ਤਰਜੀਹਾਂ"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"ਇਸ ਵੱਲੋਂ USB ਨੂੰ ਕੰਟਰੋਲ ਕੀਤਾ ਜਾਂਦਾ ਹੈ"</string>
@@ -5796,10 +5791,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="DENOMINATOR">%2$s</xliff:g> ਦਾ <xliff:g id="NUMERATOR">%1$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"ਤੁਹਾਡੇ ਵੱਲੋਂ ਆਕਾਰ ਅਨੁਪਾਤ ਨੂੰ ਬਦਲਣ \'ਤੇ ਐਪ ਮੁੜ-ਸ਼ੁਰੂ ਹੋ ਜਾਵੇਗੀ। ਤੁਸੀਂ ਅਣਰੱਖਿਅਤ ਤਬਦੀਲੀਆਂ ਗੁਆ ਸਕਦੇ ਹੋ। ਸ਼ਾਇਦ ਕੁਝ ਐਪਾਂ ਨੂੰ ਕੁਝ ਵਿਸ਼ੇਸ਼ ਆਕਾਰ ਅਨੁਪਾਤ ਲਈ ਸੁਯੋਗ ਨਾ ਕੀਤਾ ਜਾਵੇ।"</string>
-    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
-    <skip />
-    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
-    <skip />
+    <string name="app_info_experience_category" msgid="6283332744508784886">"ਅਨੁਭਵ"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"ਗੇਮਪੈਡ"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"ਫਿੰਗਰਪ੍ਰਿੰਟ ਸੈਂਸਰ"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ਫਲੈਸ਼ ਸੂਚਨਾਵਾਂ"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ਫਲੈਸ਼ ਸੂਚਨਾਵਾਂ ਬਾਰੇ"</string>
@@ -6155,7 +6148,8 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"ਸੈਟੇਲਾਈਟ ਲੈਂਡਿੰਗ ਪੰਨਾ"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"ਡੈਮੋ ਵਰਤ ਕੇ ਦੇਖੋ"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"ਦੇਖੋ ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"ਮੋਬਾਈਲ ਜਾਂ ਵਾਈ-ਫਾਈ ਨੈੱਟਵਰਕ ਨਾ ਹੋਣ \'ਤੇ, ਤੁਹਾਡਾ ਫ਼ੋਨ ਸਵੈਚਲਿਤ ਤੌਰ \'ਤੇ ਸੈਟੇਲਾਈਟ ਨਾਲ ਕਨੈਕਟ ਹੋ ਜਾਵੇਗਾ। ਵਧੀਆ ਕਨੈਕਸ਼ਨ ਲਈ, ਤੁਸੀਂ ਕਿਸੇ ਖੁੱਲ੍ਹੀ ਥਾਂ \'ਤੇ ਹੋਣੇ ਚਾਹੀਦੇ ਹੋ ਅਤੇ ਅਸਮਾਨ ਸਾਫ਼ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ। ਉਪਲਬਧ ਹੋਣ \'ਤੇ ਤੁਹਾਡਾ ਫ਼ੋਨ ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ ਨਾਲ ਮੁੜ-ਕਨੈਕਟ ਹੋ ਜਾਵੇਗਾ। ਸੈਟੇਲਾਈਟ ਰਾਹੀਂ ਕਾਲ ਕਰਨ ਦੀ ਸੁਵਿਧਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਐਮਰਜੈਂਸੀ ਕਾਲਾਂ ਹਾਲੇ ਵੀ ਕਨੈਕਟ ਹੋ ਸਕਦੀਆਂ ਹਨ।"</string>
+    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
+    <skip />
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"ਵਧੀਆ ਕਨੈਕਸ਼ਨ ਲਈ, ਤੁਸੀਂ ਕਿਸੇ ਖੁੱਲ੍ਹੀ ਥਾਂ \'ਤੇ ਹੋਣੇ ਚਾਹੀਦੇ ਹੋ ਅਤੇ ਅਸਮਾਨ ਸਾਫ਼ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ। ਉਪਲਬਧ ਹੋਣ \'ਤੇ ਤੁਹਾਡਾ ਫ਼ੋਨ ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ ਨਾਲ ਮੁੜ-ਕਨੈਕਟ ਹੋ ਜਾਵੇਗਾ। ਸੈਟੇਲਾਈਟ ਰਾਹੀਂ ਕਾਲ ਕਰਨ ਦੀ ਸੁਵਿਧਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਐਮਰਜੈਂਸੀ ਕਾਲਾਂ ਹਾਲੇ ਵੀ ਕਨੈਕਟ ਹੋ ਸਕਦੀਆਂ ਹਨ।"</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"ਸੈਟੇਲਾਈਟ ਕਨੈਕਟੀਵਿਟੀ ਬਾਰੇ ਹੋਰ ਜਾਣਕਾਰੀ"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"ਸੈਟੇਲਾਈਟ SOS ਡੈਮੋ ਖੋਲ੍ਹੋ"</string>
@@ -6166,24 +6160,20 @@
     <string name="add_tile_action" msgid="5271301747196740442">"ਟਾਇਲ ਸ਼ਾਮਲ ਕਰੋ"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"ਸੈਟੇਲਾਈਟ ਟਾਇਲ ਪ੍ਰੋਂਪਟ"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"ਸੈਟੇਲਾਈਟ"</string>
-    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"ਸੈਟੇਲਾਈਟ ਉਪਲਬਧ ਨਹੀਂ ਹੈ"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"ਤੁਹਾਡੇ ਮੋਬਾਈਲ ਜਾਂ ਵਾਈ-ਫਾਈ ਨੈੱਟਵਰਕ ਨਾਲ ਕਨੈਕਟ ਹੋਣ ਦੌਰਾਨ ਸੈਟੇਲਾਈਟ ਕਵਰੇਜ ਉਪਲਬਧ ਨਹੀਂ ਹੁੰਦੀ।"</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"ਸੈਟੇਲਾਈਟ ਕਨੈਕਟੀਵਿਟੀ ਦੀ ਸੁਵਿਧਾ ਇਸ ਦੇਸ਼ ਜਾਂ ਖੇਤਰ ਵਿੱਚ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।"</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"ਸੈਟੇਲਾਈਟ ਕਨੈਕਟੀਵਿਟੀ ਦੀ ਸੁਵਿਧਾ ਫ਼ਿਲਹਾਲ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਬਾਅਦ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"ਤੁਹਾਡੇ ਮੋਬਾਈਲ ਪਲਾਨ ਵਿੱਚ ਸੈਟੇਲਾਈਟ ਕਵਰੇਜ ਸ਼ਾਮਲ ਨਹੀਂ ਹੈ। ਮਦਦ ਲਈ ਆਪਣੇ ਕੈਰੀਅਰ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"ਸੈਟੇਲਾਈਟ ਸੁਨੇਹਾ ਸੇਵਾ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ, Google Messages ਤੁਹਾਡੀ ਪੂਰਵ-ਨਿਰਧਾਰਿਤ ਸੁਨੇਹਾ ਐਪ ਹੋਣੀ ਲਾਜ਼ਮੀ ਹੈ।"</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"ਸੈਟੇਲਾਈਟ ਕਨੈਕਟੀਵਿਟੀ ਦੀ ਸੁਵਿਧਾ ਤੁਹਾਡੇ ਕੈਰੀਅਰ ਵੱਲੋਂ ਚਾਲੂ ਕੀਤੀ ਗਈ ਹੈ। ਆਪਣੇ ਕੈਰੀਅਰ ਦੀਆਂ ਸੈਟੇਲਾਈਟ ਸੈਟਿੰਗਾਂ ਤੋਂ ਹੋਰ ਜਾਣੋ।"</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"ਉਪਲਬਧ ਟਿਕਾਣੇ ਦੇਖੋ"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"ਪੂਰਵ-ਨਿਰਧਾਰਿਤ ਐਪ ਬਦਲੋ"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"ਕੈਰੀਅਰ ਸੈਟਿੰਗਾਂ ਦੇਖੋ"</string>
+    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
     <skip />
-    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
     <skip />
-    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
-    <skip />
-    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
-    <skip />
-    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
-    <skip />
-    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
-    <skip />
-    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
-    <skip />
-    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
-    <skip />
-    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
-    <skip />
-    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
     <skip />
 </resources>

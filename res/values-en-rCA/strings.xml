@@ -957,6 +957,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Use as separate display"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Mirror built-in display"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Show connection dialog"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"Use HDR"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"Allows for a wider range of colors and brighter highlights"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"External display is disconnected"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Rotation"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Standard"</string>
@@ -2116,6 +2118,10 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Press Space key twice to insert \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Show passwords"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Display characters briefly as you type"</string>
+    <string name="show_secrets_touch_title" msgid="5683959933564965700">"Show secrets from touch input"</string>
+    <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Display characters briefly as you type on the touchscreen"</string>
+    <string name="show_secrets_physical_title" msgid="4109609431714381217">"Show secrets from physical input"</string>
+    <string name="show_secrets_physical_summary" msgid="4781058146462080269">"Display characters briefly as you enter using a physical device"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"This spell checker may be able to collect all the text you type, including personal data like passwords and credit card numbers. It comes from the app <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Use this spell checker?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Settings"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Language"</string>
@@ -2917,11 +2923,6 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"View usage for past 24 hours"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"View usage since last full charge"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"App battery usage"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Use details"</string>
@@ -3621,12 +3622,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Device"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"Keyboard, touchpad, display, sound"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Display"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Sound"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Unavailable because NFC is off"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"To use, first install a payment app"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Recent apps, default apps"</string>
@@ -3755,6 +3753,7 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, reader"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"keyboard, haptics, vibrate,"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"external display, connected display, extended display, second display, built-in display, arrange displays, mirror, display size, rotation, resolution, refresh rate"</string>
+    <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"caret, text caret, text cursor, cursor, blinking, blink interval, blink rate, animation, reduce animation, remove animation"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volume and vibration"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Media volume"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast volume"</string>
@@ -6144,7 +6143,8 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Satellite Landing Page"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"Try a demo"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"See how it works"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"When you don\'t have a mobile or Wi-Fi network, your phone will automatically connect to a satellite. For the best connection, keep a clear view of the sky. Your phone will reconnect to a mobile network when available. Calling over satellite isn\'t available. Emergency calls may still connect."</string>
+    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
+    <skip />
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"For the best connection, keep a clear view of the sky. Your phone will reconnect to a mobile network when available. Calling over satellite isn\'t available. Emergency calls may still connect."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"More about satellite connectivity"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Open satellite SOS demo"</string>
@@ -6165,4 +6165,10 @@
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"View available locations"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Change default app"</string>
     <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"View carrier settings"</string>
+    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
+    <skip />
+    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
+    <skip />
+    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
+    <skip />
 </resources>

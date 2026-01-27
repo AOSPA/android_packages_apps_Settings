@@ -957,6 +957,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Bruk som separat skjerm"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Speil den innebygde skjermen"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Vis dialogboksen for tilkobling"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"Bruk HDR"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"Gir et bredere fargespekter og lysere høylysområder"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Ekstern skjerm er frakoblet"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Rotasjon"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Standard"</string>
@@ -2116,6 +2118,14 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Trykk mellomromstasten to ganger for å skrive punktum"</string>
     <string name="show_password" msgid="7101900779571040117">"Vis passord"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Vis tegnene et øyeblikk mens du skriver"</string>
+    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <skip />
+    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Denne stavekontrollen kan være i stand til å samle all tekst du skriver, herunder personlige opplysninger som passord og kredittkortnumre. Den kommer fra appen <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Vil du bruke denne stavekontrollen?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Innstillinger"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Språk"</string>
@@ -2917,11 +2927,6 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Se bruk de siste 24 timene"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Se bruk siden sist batteriet var fulladet"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Batteribruk for apper"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Bruksdetaljer"</string>
@@ -3621,12 +3626,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Enhet"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"Tastatur, styreflate, skjerm, lyd"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Skjerm"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Lyd"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Utilgjengelig fordi NFC er av"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Du må installere en betalingsapp for å bruke denne funksjonen"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Nylige apper, standardapper"</string>
@@ -3755,6 +3757,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, brikke, leser"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"tastatur, haptisk teknologi, vibrer,"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"ekstern skjerm, tilkoblet skjerm, utvidet skjerm, sekundær skjerm, innebygd skjerm, ordne skjermer, speiling, visningsstørrelse, rotasjon, oppløsning, oppdateringsfrekvens"</string>
+    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volum og vibrering"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medievolum"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast-volum"</string>
@@ -4387,12 +4391,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Start på nytt"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Ikke nå"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Finn ut mer om avansert minnebeskyttelse."</string>
-    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
-    <skip />
-    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
-    <skip />
-    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
-    <skip />
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Android OS-diagnostikk"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"Valider OS-versjoner"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"diagnostikk, åpenhet, binær"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Denne jobbprofilen administreres av:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Administrert av <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Åpne som standard"</string>
@@ -4513,18 +4514,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Standard USB-konfigurasjon"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Strømalternativer"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Alternativer for filoverføring"</string>
-    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
-    <skip />
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Beskyttelse av datatilgang"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Tillat PCI-tunnelering"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Når dette er slått på, kan eksterne USB- og Thunderbolt-enheter opprette PCI-tunneler og bruke systemminnet"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Du må være administratorbruker for å endre denne innstillingen"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"Deaktivert av IT-administratoren"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Deaktivert av modusen for avansert beskyttelse"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB-innstillinger"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB kontrolleres av"</string>
@@ -5099,7 +5094,7 @@
     <string name="accounts_and_backup_title" msgid="2841026269835953207">"Kontoer og sikkerhetskopiering"</string>
     <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Sikkerhetskopier data, kopier data fra en annen enhet"</string>
     <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Administrer kontoer"</string>
-    <string name="accounts_and_backup_backup_category_title" msgid="807568201052547222">"Sikkerhetskopier eller kopier data"</string>
+    <string name="accounts_and_backup_backup_category_title" msgid="807568201052547222">"Sikkerhetskopier eller kopier"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Vil du slå av alle tjenester?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Passord, passnøkler og annen lagret informasjon kommer ikke til å være tilgjengelig for autofyll når du logger på"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Bytt foretrukket tjeneste til &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Fra nå av lagres nye passord, passnøkler og annen informasjon her. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kan bruke det som er på skjermen, for å avgjøre hva som kan fylles ut automatisk."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Vil du bruke %1$s?"</string>
@@ -5796,10 +5791,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> av <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Appen starter på nytt når du endrer høyde/bredde-forholdet. Du kan miste endringer som ikke er lagret. Enkelte apper er kanskje ikke optimalisert for visse høyde/bredde-forhold."</string>
-    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
-    <skip />
-    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
-    <skip />
+    <string name="app_info_experience_category" msgid="6283332744508784886">"Opplevelse"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Spillkontroller"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingeravtrykkssensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Blitsvarsler"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Om blitsvarsler"</string>
@@ -6155,7 +6148,8 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Landingsside for satellitt"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"Prøv en demo"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"Se hvordan det fungerer"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"Når du ikke har mobil- eller wifi-nettverk, kobles telefonen automatisk til en satellitt. Du får best tilkobling på steder med åpen himmel. Telefonen kobles til et mobilnettverk igjen når det er tilgjengelig. Anrop via satellitt er ikke tilgjengelig. Nødanrop kan fortsatt kobles til."</string>
+    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
+    <skip />
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"Du får best tilkobling på steder med åpen himmel. Telefonen kobles til et mobilnettverk igjen når det er tilgjengelig. Anrop via satellitt er ikke tilgjengelig. Nødanrop kan fortsatt kobles til."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Mer om satellittilkobling"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Åpne demoen av SOS-alarm via satellitt"</string>
@@ -6166,24 +6160,20 @@
     <string name="add_tile_action" msgid="5271301747196740442">"Legg til brikke"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Forespørsler om Satellitt-brikke"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
-    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satellitt er ikke tilgjengelig"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"Satellittdekning er ikke tilgjengelig mens du er koblet til et mobil- eller wifi-nettverk."</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"Satellittilkobling er ikke tilgjengelig i dette landet eller denne regionen"</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"Satellittilkobling er ikke tilgjengelig akkurat nå. Prøv på nytt senere."</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Mobilabonnementet ditt inkluderer ikke satellittdekning. Kontakt operatøren din for å få hjelp."</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"For å bruke satellittmeldinger må Google Meldinger være standard meldingsapp."</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"Operatøren din har aktivert satellittilkobling. Finn ut mer i operatørens satellittinnstillinger."</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Se tilgjengelige steder"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Bytt standardapp"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"Se operatørinnstillinger"</string>
+    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
     <skip />
-    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
     <skip />
-    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
-    <skip />
-    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
-    <skip />
-    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
-    <skip />
-    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
-    <skip />
-    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
-    <skip />
-    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
-    <skip />
-    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
-    <skip />
-    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
     <skip />
 </resources>
