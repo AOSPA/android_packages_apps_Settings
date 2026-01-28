@@ -17,6 +17,7 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.ArgumentMatchers.notNull;
@@ -24,13 +25,16 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.util.Pair;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.shadow.ShadowDashboardFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,6 +45,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -52,6 +57,7 @@ import java.util.function.Predicate;
 public final class PowerUsageAdvancedTest {
 
     private Context mContext;
+    private FakeFeatureFactory mFeatureFactory;
     private PowerUsageAdvanced mPowerUsageAdvanced;
 
     private Predicate<PowerAnomalyEvent> mCardFilterPredicate;
@@ -60,6 +66,7 @@ public final class PowerUsageAdvancedTest {
 
     @Mock private BatteryTipsController mBatteryTipsController;
     @Mock private ScreenOnTimeController mScreenOnTimeController;
+    @Mock private BatteryAdvanceInfoController mBatteryAdvanceInfoController;
     @Mock private BatteryUsageBreakdownController mBatteryUsageBreakdownController;
     @Mock private SettingsActivity mSettingsActivity;
 
@@ -67,6 +74,7 @@ public final class PowerUsageAdvancedTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mContext = spy(RuntimeEnvironment.application);
 
         mPowerUsageAdvanced = spy(new PowerUsageAdvanced());
@@ -78,6 +86,7 @@ public final class PowerUsageAdvancedTest {
         mPowerUsageAdvanced.mBatteryChartPreferenceController = mBatteryChartPreferenceController;
         mPowerUsageAdvanced.mScreenOnTimeController = mScreenOnTimeController;
         mPowerUsageAdvanced.mBatteryUsageBreakdownController = mBatteryUsageBreakdownController;
+        mPowerUsageAdvanced.mBatteryAdvanceInfoController = mBatteryAdvanceInfoController;
         mPowerUsageAdvanced.mBatteryLevelData =
                 Optional.of(
                         new BatteryLevelData(
@@ -90,20 +99,27 @@ public final class PowerUsageAdvancedTest {
     }
 
     @Test
+    public void createPreferenceControllers_containsBatteryAdvanceInfoController() {
+        when(mFeatureFactory.powerUsageFeatureProvider
+                .getBatteryAdvanceInfoController(any(), any(), any()))
+                .thenReturn(mBatteryAdvanceInfoController);
+        List<AbstractPreferenceController> controllers =
+                mPowerUsageAdvanced.createPreferenceControllers(mContext);
+
+        assertThat(controllers).contains(mBatteryAdvanceInfoController);
+    }
+
+    @Test
     public void getFilterAnomalyEvent_withEmptyOrNullList_getNull() {
         prepareCardFilterPredicate(null);
         assertThat(PowerUsageAdvanced.getAnomalyEvent(null, mCardFilterPredicate)).isNull();
         assertThat(PowerUsageAdvanced.getAnomalyEvent(null, mSlotFilterPredicate)).isNull();
-        assertThat(
-                        PowerUsageAdvanced.getAnomalyEvent(
-                                BatteryTestUtils.createEmptyPowerAnomalyEventList(),
-                                mCardFilterPredicate))
-                .isNull();
-        assertThat(
-                        PowerUsageAdvanced.getAnomalyEvent(
-                                BatteryTestUtils.createEmptyPowerAnomalyEventList(),
-                                mSlotFilterPredicate))
-                .isNull();
+        assertThat(PowerUsageAdvanced.getAnomalyEvent(
+                BatteryTestUtils.createEmptyPowerAnomalyEventList(),
+                mCardFilterPredicate)).isNull();
+        assertThat(PowerUsageAdvanced.getAnomalyEvent(
+                BatteryTestUtils.createEmptyPowerAnomalyEventList(),
+                mSlotFilterPredicate)).isNull();
     }
 
     @Test
