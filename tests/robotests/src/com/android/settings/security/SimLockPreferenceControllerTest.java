@@ -16,6 +16,7 @@
 
 package com.android.settings.security;
 
+import static android.security.Flags.FLAG_AUTO_SIM_PIN_MANAGEMENT;
 import static android.telephony.TelephonyManager.SIM_STATE_READY;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -31,6 +32,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.PersistableBundle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -44,6 +48,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -57,6 +62,8 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class SimLockPreferenceControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private SubscriptionManager mSubscriptionManager;
@@ -142,6 +149,7 @@ public class SimLockPreferenceControllerTest {
                 .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
+    @DisableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     @Test
     public void isAvailable_true() {
         setupMockIcc();
@@ -151,6 +159,18 @@ public class SimLockPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
+
+    @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
+    @Test
+    public void isAvailableAndFlagOn_false() {
+        setupMockIcc();
+        final PersistableBundle pb = new PersistableBundle();
+        when(mCarrierManager.getConfigForSubId(anyInt())).thenReturn(pb);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+    }
+
 
     @Test
     public void displayPreference_simReady_enablePreference() {

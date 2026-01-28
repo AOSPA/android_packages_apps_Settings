@@ -201,8 +201,8 @@
         android:order="255"
         android:key="automatic_sim_lock_protection"
         android:title="@string/automatic_sim_lock_settings_title"
-        settings:controller="com.android.settings.security.AutoSimPinPreferenceController"
-        android:fragment="com.android.settings.security.AutomaticSimPinLockFragment"/>
+        settings:controller="com.android.settings.security.ProtectSimPreferenceController"
+        android:fragment="com.android.settings.security.ProtectSimPrimaryScreenFragment"/>
 
     <Preference
         android:order="260"
