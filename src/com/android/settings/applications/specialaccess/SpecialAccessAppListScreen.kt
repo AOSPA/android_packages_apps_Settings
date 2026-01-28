@@ -22,7 +22,7 @@ import androidx.fragment.app.Fragment
 import com.android.settings.applications.AppListScreen
 import com.android.settings.applications.CatalystAppListFragment
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
@@ -62,7 +62,7 @@ abstract class SpecialAccessAppListScreen : AppListScreen() {
             addAsync(coroutineScope, Dispatchers.Default) {
                 val screenKey = appDetailScreenKey
 
-                if (CatalystFlags.catalystUseKeyParameters()) {
+                if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                     appDetailKeyParameters(context, hierarchyType)
                         .onEmpty { +NoAppPreference() }
                         .collect { +(screenKey withParameters it) }

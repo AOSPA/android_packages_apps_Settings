@@ -44,9 +44,9 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.RestrictedPreference
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceCategory
@@ -94,7 +94,7 @@ private constructor(
     ) : this(context, null, keyParameters)
 
     private val featureComponentName: ComponentName by lazy {
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             val componentNameString =
                 requireNotNull(keyParameters!![AccessibilitySettings.EXTRA_COMPONENT_NAME])
             requireNotNull(ComponentName.unflattenFromString(componentNameString))
@@ -237,7 +237,7 @@ private constructor(
         return Intent(Settings.ACTION_ACCESSIBILITY_DETAILS_SETTINGS).apply {
             putExtra(Intent.EXTRA_COMPONENT_NAME, featureComponentName.flattenToString())
 
-            if (CatalystFlags.catalystUseKeyParameters()) {
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                 highlightPreference(keyParameters!!, metadata?.bindingKey)
             } else {
                 highlightPreference(arguments!!, metadata?.bindingKey)

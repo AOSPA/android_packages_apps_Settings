@@ -56,11 +56,12 @@ public class SecureNfcPreferenceController extends TogglePreferenceController
 
     @Override
     public void updateState(Preference preference) {
-        if (isNfcUserChangeRestricted()) {
+        if (isNfcUserChangeRestricted() || !mNfcAdapter.isEnabled()) {
             preference.setEnabled(false);
         } else {
             preference.setEnabled(true);
         }
+        super.updateState(preference);
     }
 
     private boolean isNfcUserChangeRestricted() {

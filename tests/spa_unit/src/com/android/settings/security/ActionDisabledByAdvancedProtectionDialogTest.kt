@@ -23,6 +23,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import android.content.res.Configuration
 import android.os.Bundle
 import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.CheckFlagsRule
@@ -44,8 +45,10 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Assume.assumeTrue
 import org.junit.Before
 import org.junit.Rule
@@ -383,6 +386,71 @@ class ActionDisabledByAdvancedProtectionDialogTest {
 
                 assertEquals(HELP_INTENT_ACTION, launchedIntent.action)
                 assertEquals(HELP_INTENT_PKG_NAME, launchedIntent.`package`)
+            }
+        }
+    }
+
+    @Test
+    fun shouldShowIcon_portraitMode_returnsTrue() {
+        // We use launchDialogActivity to get a valid activity instance on the main thread
+        launchDialogActivity(defaultIntent) { scenario ->
+            scenario.onActivity { activity ->
+                val config =
+                    Configuration().apply {
+                        orientation = Configuration.ORIENTATION_PORTRAIT
+                        fontScale = 2.0f // Even huge font is fine in portrait (scrolls)
+                        screenHeightDp = 800
+                    }
+
+                assertTrue(activity.shouldShowIcon(config))
+            }
+        }
+    }
+
+    @Test
+    fun shouldShowIcon_landscape_normalConfig_returnsTrue() {
+        launchDialogActivity(defaultIntent) { scenario ->
+            scenario.onActivity { activity ->
+                val config =
+                    Configuration().apply {
+                        orientation = Configuration.ORIENTATION_LANDSCAPE
+                        fontScale = 1.0f
+                        screenHeightDp = 420 // Taller than threshold
+                    }
+
+                assertTrue(activity.shouldShowIcon(config))
+            }
+        }
+    }
+
+    @Test
+    fun shouldShowIcon_landscape_largeFont_returnsFalse() {
+        launchDialogActivity(defaultIntent) { scenario ->
+            scenario.onActivity { activity ->
+                val config =
+                    Configuration().apply {
+                        orientation = Configuration.ORIENTATION_LANDSCAPE
+                        fontScale = 1.2f // Larger than 1.1f threshold
+                        screenHeightDp = 420
+                    }
+
+                assertFalse(activity.shouldShowIcon(config))
+            }
+        }
+    }
+
+    @Test
+    fun shouldShowIcon_landscape_smallDisplaySize_returnsFalse() {
+        launchDialogActivity(defaultIntent) { scenario ->
+            scenario.onActivity { activity ->
+                val config =
+                    Configuration().apply {
+                        orientation = Configuration.ORIENTATION_LANDSCAPE
+                        fontScale = 1.0f
+                        screenHeightDp = 320 // Smaller than 400dp threshold
+                    }
+
+                assertFalse(activity.shouldShowIcon(config))
             }
         }
     }

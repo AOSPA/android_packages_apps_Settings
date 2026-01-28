@@ -26,6 +26,7 @@ import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Rect;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +35,7 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
@@ -418,22 +420,32 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     }
 
     @VisibleForTesting
-    public boolean adjustIllustrationLottiePosition() {
-        boolean alreadyAdjustedPos = false;
+    public void adjustIllustrationLottiePosition() {
         final GlifLayout glifLayout = findViewById(R.id.setup_wizard_layout);
         final TextView descView =  glifLayout.getDescriptionTextView();
-        final int descBottomPos = getOnScreenPositionTop(descView) + descView.getHeight();
-        final int illustrationLottieTop = getOnScreenPositionTop(mIllustrationLottie);
-        if (illustrationLottieTop < descBottomPos) {
-            final int posDiff = descBottomPos - illustrationLottieTop;
-            FrameLayout.LayoutParams layoutParams =
-                    (FrameLayout.LayoutParams) mIllustrationLottie.getLayoutParams();
-            layoutParams.topMargin += posDiff;
-            mIllustrationLottie.setLayoutParams(layoutParams);
-            mIllustrationLottie.requestLayout();
-            alreadyAdjustedPos = true;
-        }
-        return alreadyAdjustedPos;
+        Rect rectDescView = new Rect();
+        descView.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        descView.getGlobalVisibleRect(rectDescView);
+                        final int descBottomPos = getOnScreenPositionTop(descView)
+                                + descView.getHeight();
+                        final int illustrationLottieTop = getOnScreenPositionTop(
+                                mIllustrationLottie);
+                        if (illustrationLottieTop < descBottomPos) {
+                            final int posDiff = descBottomPos - illustrationLottieTop;
+                            FrameLayout.LayoutParams layoutParams =
+                                    (FrameLayout.LayoutParams)
+                                            mIllustrationLottie.getLayoutParams();
+                            layoutParams.topMargin += posDiff;
+                            mIllustrationLottie.setLayoutParams(layoutParams);
+                            mIllustrationLottie.requestLayout();
+                        }
+
+                        descView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
     }
 
     @VisibleForTesting

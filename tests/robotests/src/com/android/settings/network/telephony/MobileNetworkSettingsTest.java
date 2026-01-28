@@ -45,8 +45,11 @@ import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.metadata.CatalystFlagProvider;
+import com.android.settingslib.metadata.CatalystFlagProviderFactory;
 import com.android.settingslib.metadata.ValidatedKeyParameters;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -82,6 +85,7 @@ public class MobileNetworkSettingsTest {
 
     private Context mContext;
     private MobileNetworkSettings mFragment;
+    private CatalystFlagProvider mOriginalProvider;
 
     private static final int SUBSCRIPTION_ID = 1234;
 
@@ -89,6 +93,7 @@ public class MobileNetworkSettingsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mOriginalProvider = CatalystFlagProviderFactory.INSTANCE.getInstance();
 
         when(mActivity.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
@@ -111,6 +116,11 @@ public class MobileNetworkSettingsTest {
         when(mActivity.isFinishing()).thenReturn(false);
         when(mActivity.getSystemService(NetworkPolicyManager.class)).thenReturn(
                 mNetworkPolicyManager);
+    }
+
+    @After
+    public void tearDown() {
+        CatalystFlagProviderFactory.INSTANCE.setProvider(mOriginalProvider);
     }
 
     @Test
@@ -150,6 +160,7 @@ public class MobileNetworkSettingsTest {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     public void getPreferenceScreenBindingArgs_flagIsTrue_putsString() {
+        setCatalystUseKeyParameters(false);
         Bundle args = mFragment.getPreferenceScreenBindingArgs(mContext);
 
         assertThat(args).isNotNull();
@@ -165,6 +176,7 @@ public class MobileNetworkSettingsTest {
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     public void getPreferenceScreenBindingArgs_flagIsFalse_putsInt() {
+        setCatalystUseKeyParameters(false);
         Bundle args = mFragment.getPreferenceScreenBindingArgs(mContext);
 
         assertThat(args).isNotNull();
@@ -172,6 +184,22 @@ public class MobileNetworkSettingsTest {
         assertThat(args.containsKey(Settings.EXTRA_SUB_ID)).isTrue();
         // Verify it's not stored as a String
         assertThat(args.getString(Settings.EXTRA_SUB_ID)).isNull();
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    public void getPreferenceScreenBindingArgs_flagIsFalse_butKeyParametersFlagIsTrue_putsString() {
+        setCatalystUseKeyParameters(true);
+        Bundle args = mFragment.getPreferenceScreenBindingArgs(mContext);
+
+        assertThat(args).isNotNull();
+        assertThat(args.getString(Settings.EXTRA_SUB_ID)).isEqualTo(
+                String.valueOf(SUBSCRIPTION_ID)
+        );
+        assertThat(args.containsKey(Settings.EXTRA_SUB_ID)).isTrue();
+        // Verify it's not stored as an Int
+        assertThat(args.getInt(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID))
+                .isEqualTo(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
     }
 
     @Test
@@ -183,6 +211,15 @@ public class MobileNetworkSettingsTest {
         assertThat(keyParameters.get(Settings.EXTRA_SUB_ID)).isEqualTo(
                 String.valueOf(SUBSCRIPTION_ID)
         );
+    }
+
+    private void setCatalystUseKeyParameters(boolean value) {
+        CatalystFlagProviderFactory.INSTANCE.setProvider(new CatalystFlagProvider() {
+            @Override
+            public boolean catalystUseKeyParameters() {
+                return value;
+            }
+        });
     }
 
     public static class TestPreferenceController extends TelephonyBasePreferenceController {

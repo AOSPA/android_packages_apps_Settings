@@ -17,7 +17,7 @@ package com.android.settings.wifi.details
 
 import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -38,7 +38,7 @@ class WifiNetworkDetailsScreenTest {
     }
 
     private fun createScreen(args: Bundle): WifiNetworkDetailsScreen {
-        return if (CatalystFlags.catalystUseKeyParameters()) {
+        return if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             WifiNetworkDetailsScreen(WifiNetworkDetailsScreen.parametersSchema.prepare(args))
         } else {
             WifiNetworkDetailsScreen(args)

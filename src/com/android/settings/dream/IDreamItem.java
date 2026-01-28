@@ -82,9 +82,9 @@ public interface IDreamItem {
     }
 
     /**
-     * Gets the selection order of the dream. 0 if not selected.
+     * Gets the selection order of the dream. -1 if not selected.
      */
     default int getOrder() {
-        return 0;
+        return -1;
     }
 }

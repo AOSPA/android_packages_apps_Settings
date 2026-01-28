@@ -27,8 +27,8 @@ import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.getTrampolin
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.core.instrumentation.Instrumentable.METRICS_CATEGORY_UNKNOWN
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_KEY
 import com.android.settingslib.metadata.KeyParameters
@@ -223,7 +223,7 @@ class SettingsLaunchpadActivity : Activity() {
     ): PreferenceScreenCoordinate {
         val screenCoordinate =
             if (
-                CatalystFlags.catalystUseKeyParameters() &&
+                CatalystFlagProviderFactory.catalystUseKeyParameters() &&
                     PreferenceScreenRegistry.isParameterized(this, screenKey)
             ) {
                 PreferenceScreenCoordinate(

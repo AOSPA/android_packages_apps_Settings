@@ -175,9 +175,7 @@ class SatelliteLandingPageViewModelTest {
         waitForAsync()
 
         assertThat(items).hasSize(1) // App1
-        assertThat(items.map { it.getAppLabel(packageManager) })
-            .containsExactly("App1")
-            .inOrder()
+        assertThat(items.map { it.getAppLabel(packageManager) }).containsExactly("App1").inOrder()
     }
 
     @Test

@@ -24,7 +24,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.applications.specialaccess.notificationaccess.AppInfoNotificationAccessScreen.Companion.KEY_APP_PACKAGE_NAME
 import com.android.settings.applications.specialaccess.notificationaccess.AppInfoNotificationAccessScreen.Companion.KEY_SERVICE_NAME
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -78,7 +78,7 @@ class AppInfoNotificationAccessScreenTest {
     }
 
     private fun createScreen(packageName: String): AppInfoNotificationAccessScreen {
-        return if (CatalystFlags.catalystUseKeyParameters()) {
+        return if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             AppInfoNotificationAccessScreen(
                 context,
                 AppInfoNotificationAccessScreen.parametersSchema.prepare(
