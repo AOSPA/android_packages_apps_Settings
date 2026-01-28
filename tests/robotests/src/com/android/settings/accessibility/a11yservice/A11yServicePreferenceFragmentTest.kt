@@ -48,6 +48,7 @@ import com.android.settings.accessibility.PreferredShortcut
 import com.android.settings.accessibility.PreferredShortcuts
 import com.android.settings.accessibility.ShortcutPreference
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
+import com.android.settings.accessibility.extensions.putComponentName
 import com.android.settings.accessibility.shared.dialogs.AccessibilityServiceWarningDialogFragment
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment
 import com.android.settings.testutils.AccessibilityTestUtils
@@ -594,7 +595,7 @@ class A11yServicePreferenceFragmentTest :
             a11yManager.setAccessibilityServiceWarningExempted(a11yServiceInfo.componentName)
         }
         val bundle = Bundle()
-        bundle.putParcelable(
+        bundle.putComponentName(
             AccessibilitySettings.EXTRA_COMPONENT_NAME,
             a11yServiceInfo.componentName,
         )

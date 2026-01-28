@@ -40,8 +40,11 @@ import com.android.settings.testutils.AccessibilityTestUtils
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.android.settingslib.metadata.CatalystFlagProvider
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.any
@@ -75,8 +78,15 @@ class EditShortcutsScreenTest : SettingsCatalystTestCase() {
                 "[${COLOR_INVERSION_COMPONENT_NAME.flattenToString()}]"
         )
 
+    private lateinit var originalProvider: CatalystFlagProvider
+
+    @Before
+    fun setUp() {
+        originalProvider = CatalystFlagProviderFactory.getInstance()
+    }
+
     override val preferenceScreenCreator: EditShortcutsScreen by lazy {
-        if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             EditShortcutsScreen(keyParameters)
         } else {
             EditShortcutsScreen(arguments)
@@ -86,6 +96,7 @@ class EditShortcutsScreenTest : SettingsCatalystTestCase() {
     @After
     fun cleanUp() {
         AccessibilityRepositoryProvider.resetInstanceForTesting()
+        CatalystFlagProviderFactory.setProvider(originalProvider)
     }
 
     override fun migration() {
@@ -181,7 +192,7 @@ class EditShortcutsScreenTest : SettingsCatalystTestCase() {
     }
 
     private fun createScreen(targets: Array<String>): EditShortcutsScreen {
-        return if (com.android.settingslib.catalyst.flags.Flags.catalystUseKeyParameters()) {
+        return if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             EditShortcutsScreen(
                 EditShortcutsScreen.parametersSchema.prepare(
                     EditShortcutsPreferenceFragment.ARG_KEY_SHORTCUT_TARGETS to

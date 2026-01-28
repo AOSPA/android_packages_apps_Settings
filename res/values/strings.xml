@@ -2657,10 +2657,6 @@
     <string name="wifi_dpp_qr_code_is_not_valid_format">QR code isn\u0027t a valid format</string>
     <!-- Label for the try again button [CHAR LIMIT=20]-->
     <string name="retry">Retry</string>
-    <!-- Label for the shared wifi message -->
-    <string name="shared_message">shared</string>
-    <!-- Label for the private wifi message -->
-    <string name="private_message">private</string>
     <!-- Label for the conflict wifi dialog switch button [CHAR LIMIT=12] [SCREENSHOT=screen/WDcGQEccdjdc5es] -->
     <string name="wifi_conflict_dialog_switch">Switch</string>
     <!-- Label for the conflict wifi dialog cancel button [CHAR LIMIT=12] [SCREENSHOT=screen/WDcGQEccdjdc5es] -->
@@ -2669,10 +2665,14 @@
     <string name="wifi_share_preference_title">Share network</string>
     <!-- Summary for the preference to share a network with other users on the same device [CHAR LIMIT=NONE] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
     <string name="wifi_share_preference_summary">Other users on this device can access this network</string>
-    <!-- Alert dialog title, informing the user to switch to the conflicting network which already has the desired share toggle value. [CHAR LIMIT=30] [SCREENSHOT=screen/WDcGQEccdjdc5es] -->
-    <string name="wifi_conflict_dialog_title">Switch to <xliff:g id="shared">%1$s</xliff:g> network?</string>
-    <!-- Alert dialog summary, informing the user to switch to the conflicting network which already has the desired share toggle value. [CHAR LIMIT=NONE] [SCREENSHOT=screen/WDcGQEccdjdc5es]-->
-    <string name="wifi_conflict_dialog_message">A <xliff:g id="shared">%1$s</xliff:g> network with the name \"<xliff:g id="network_name">%2$s</xliff:g>\" already exists. If you switch to the <xliff:g id="shared">%1$s</xliff:g> network, you will leave your <xliff:g id="private">%3$s</xliff:g> network and you may temporarily have no internet.</string>
+    <!-- Alert dialog title, informing the user to switch to the conflicting shared network which already has the desired share toggle value. [CHAR LIMIT=30] [SCREENSHOT=screen/A4k2sHWVQnPFW2o] -->
+    <string name="wifi_share_conflict_dialog_title">Switch to shared network?</string>
+    <!-- Alert dialog summary, informing the user to switch to the conflicting shared network which already has the desired share toggle value. [CHAR LIMIT=NONE] [SCREENSHOT=screen/A4k2sHWVQnPFW2o] -->
+    <string name="wifi_share_conflict_dialog_message">A shared network with the name \"<xliff:g id="network_name">%1$s</xliff:g>\" already exists. If you switch to the shared network, you will leave your private network and you may temporarily have no internet.</string>
+    <!-- Alert dialog title, informing the user to switch to the conflicting private network which already has the desired share toggle value. [CHAR LIMIT=30] [SCREENSHOT=screen/6UD4VvccnEEswUY] -->
+    <string name="wifi_private_conflict_dialog_title">Switch to private network?</string>
+    <!-- Alert dialog summary, informing the user to switch to the conflicting private network which already has the desired share toggle value. [CHAR LIMIT=NONE] [SCREENSHOT=screen/6UD4VvccnEEswUY]-->
+    <string name="wifi_private_conflict_dialog_message">A private network with the name \"<xliff:g id="network_name">%1$s</xliff:g>\" already exists. If you switch to the private network, you will leave your shared network and you may temporarily have no internet.</string>
     <!-- Hint for unchanged fields -->
     <string name="wifi_unchanged">(unchanged)</string>
     <!-- Label for the check box to allow other device users to edit network details [CHAR LIMIT=30] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
@@ -6229,7 +6229,7 @@
     <!-- Title in the search result for expanded dark theme mode. [BACKUP_MESSAGE_ID: 7467343853315678576] -->
     <string name="accessibility_expanded_dark_theme_title_in_search">Expanded dark theme</string>
     <!-- Summary for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_expanded_dark_theme_summary">Automatically applies dark theme to most apps that don\'t support it, helping to improve accessibility.</string>
+    <string name="accessibility_expanded_dark_theme_summary">Automatically applies dark theme to most apps that don\'t support it, helping to improve accessibility</string>
     <!-- Search keywords for the Expanded dark theme settings. [CHAR_LIMIT=NONE] -->
     <string name="keywords_expanded_dark_theme">force invert, color inversion, contrast</string>
     <!-- Title for the Expanded dark theme per-app settings page. [CHAR LIMIT=35] -->
@@ -6238,8 +6238,8 @@
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description">Expanded dark theme settings</string>
     <!-- Hint for the Expanded dark theme per-app settings gear icon. [CHAR LIMIT=NONE] -->
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint">Open expanded dark theme settings</string>
-    <!-- header description for the Expanded dark theme per-app settings. [CHAR LIMIT=NONE] [DO NOT TRANSLATE] -->
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description">Expanded dark theme can improve readability, but may cause some apps to display incorrectly. Apps with this setting off will use the standard dark theme option.</string>
+    <!-- header description for the Expanded dark theme per-app settings. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description">Expanded dark theme can improve readability, but may cause some apps to display incorrectly.\n\nApps with this setting off will use the standard dark theme option.</string>
     <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
@@ -15675,4 +15675,8 @@
     <string name="user_settings_edit_name_precondition" translatable="false">Only full users who are not guests can modify their user name.</string>
     <string name="user_settings_edit_name_restricted" translatable="false">Modifying user name is not allowed for this user.</string>
     <!-- User settings screen end -->
+
+    <!-- Enable WebApp Minter -->
+    <string name="enable_webapp_minter_title">Enable Web App Installer Service</string>
+    <string name="enable_webapp_minter_summary">Enable this service to install websites directly to your home screen, to use them like regular apps.</string>
 </resources>

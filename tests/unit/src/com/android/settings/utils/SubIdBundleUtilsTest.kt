@@ -22,7 +22,11 @@ import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
+import com.android.settingslib.metadata.CatalystFlagProvider
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,6 +39,18 @@ class SubIdBundleUtilsTest {
     private val testKey = "test_sub_id"
     private val testSubId = 2737
     private val defaultSubId = -1
+
+    private lateinit var originalProvider: CatalystFlagProvider
+
+    @Before
+    fun setUp() {
+        originalProvider = CatalystFlagProviderFactory.getInstance()
+    }
+
+    @After
+    fun tearDown() {
+        CatalystFlagProviderFactory.setProvider(originalProvider)
+    }
 
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
@@ -49,13 +65,28 @@ class SubIdBundleUtilsTest {
 
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun putSubId_whenFlagIsFalse_putsInt() {
+    fun putSubId_whenFlagsAreFalse_putsInt() {
+        setCatalystUseKeyParameters(false)
+
         val bundle = Bundle()
         bundle.putSubId(testKey, testSubId)
 
         assertThat(bundle.getInt(testKey)).isEqualTo(testSubId)
         assertThat(bundle.containsKey(testKey)).isTrue()
         assertThat(bundle.getString(testKey)).isNull()
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun putSubId_whenFlagIsFalse_butCatalystKeyParametersFlagIsTrue_putsString() {
+        setCatalystUseKeyParameters(true)
+
+        val bundle = Bundle()
+        bundle.putSubId(testKey, testSubId)
+
+        assertThat(bundle.getString(testKey)).isEqualTo(testSubId.toString())
+        assertThat(bundle.containsKey(testKey)).isTrue()
+        assertThat(bundle.getInt(testKey, defaultSubId)).isEqualTo(defaultSubId)
     }
 
     @Test
@@ -69,8 +100,21 @@ class SubIdBundleUtilsTest {
 
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun getSubId_whenFlagIsFalse_readsIntCorrectly() {
+    fun getSubId_whenFlagsAreFalse_readsIntCorrectly() {
+        setCatalystUseKeyParameters(false)
+
         val bundle = Bundle().apply { putInt(testKey, testSubId) }
+        val result = bundle.getSubId(testKey, defaultSubId)
+
+        assertThat(result).isEqualTo(testSubId)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun getSubId_whenFlagIsFalse_butCatalystKeyParametersFlagIsTrue_readsStringCorrectly() {
+        setCatalystUseKeyParameters(true)
+
+        val bundle = Bundle().apply { putString(testKey, testSubId.toString()) }
         val result = bundle.getSubId(testKey, defaultSubId)
 
         assertThat(result).isEqualTo(testSubId)
@@ -92,5 +136,11 @@ class SubIdBundleUtilsTest {
         val result = bundle.getSubId(testKey, defaultSubId)
 
         assertThat(result).isEqualTo(defaultSubId)
+    }
+
+    private fun setCatalystUseKeyParameters(value: Boolean) {
+        CatalystFlagProviderFactory.setProvider(object : CatalystFlagProvider {
+            override fun catalystUseKeyParameters() = value
+        })
     }
 }

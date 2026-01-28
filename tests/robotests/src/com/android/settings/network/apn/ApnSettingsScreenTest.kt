@@ -32,8 +32,10 @@ import com.android.settings.Settings.ApnSettingsActivity
 import com.android.settings.flags.Flags
 import com.android.settings.network.CarrierConfigCache
 import com.android.settings.utils.putSubId
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProvider
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -52,8 +54,8 @@ class ApnSettingsScreenTest {
 
     private val appContext: Context = ApplicationProvider.getApplicationContext()
 
-    private val preferenceScreenCreator =
-        createScreen(Bundle().apply { putSubId(ApnSettings.SUB_ID, subId) })
+    private lateinit var originalProvider: CatalystFlagProvider
+    private lateinit var preferenceScreenCreator: ApnSettingsScreen
 
     private val mockTelephonyManager = mock<TelephonyManager>()
 
@@ -70,10 +72,23 @@ class ApnSettingsScreenTest {
 
     @Before
     fun setup() {
+        originalProvider = CatalystFlagProviderFactory.getInstance()
         mockTelephonyManager.stub {
             on { createForSubscriptionId(subId) } doReturn mockTelephonyManager
         }
         CarrierConfigCache.setTestInstance(context, mockCarrierConfigCache)
+        preferenceScreenCreator = createScreen(Bundle().apply { putSubId(ApnSettings.SUB_ID, subId) })
+    }
+
+    @After
+    fun tearDown() {
+        CatalystFlagProviderFactory.setProvider(originalProvider)
+    }
+
+    private fun setCatalystUseKeyParameters(value: Boolean) {
+        CatalystFlagProviderFactory.setProvider(object : CatalystFlagProvider {
+            override fun catalystUseKeyParameters() = value
+        })
     }
 
     @Test
@@ -121,6 +136,7 @@ class ApnSettingsScreenTest {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_validString_parsedCorrectly() {
+        setCatalystUseKeyParameters(true)
         val args = Bundle().apply { putString(ApnSettings.SUB_ID, subId.toString()) }
         val screen = createScreen(args)
 
@@ -130,6 +146,7 @@ class ApnSettingsScreenTest {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_invalidString_returnsDefault() {
+        setCatalystUseKeyParameters(true)
         val args = Bundle().apply { putString(ApnSettings.SUB_ID, "invalid") }
         val screen = createScreen(args)
 
@@ -139,6 +156,7 @@ class ApnSettingsScreenTest {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_missingKey_returnsDefault() {
+        setCatalystUseKeyParameters(true)
         val args = Bundle()
         val screen = createScreen(args)
 
@@ -148,6 +166,7 @@ class ApnSettingsScreenTest {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_subIdIsInt_returnsTheSubId() {
+        setCatalystUseKeyParameters(true)
         val args = Bundle().apply { putSubId(ApnSettings.SUB_ID, subId) }
         val screen = createScreen(args)
 
@@ -156,10 +175,10 @@ class ApnSettingsScreenTest {
 
     @Test
     @DisableFlags(
-        Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        CatalystFlags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun subId_flagFalse_validInt_parsedCorrectly() {
+        setCatalystUseKeyParameters(false)
         val args = Bundle().apply { putSubId(ApnSettings.SUB_ID, subId) }
         val screen = createScreen(args)
 
@@ -169,6 +188,7 @@ class ApnSettingsScreenTest {
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagFalse_missingKey_returnsDefault() {
+        setCatalystUseKeyParameters(false)
         val args = Bundle()
         val screen = createScreen(args)
 
@@ -178,6 +198,7 @@ class ApnSettingsScreenTest {
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagFalse_subIdIsString_returnsTheSubId() {
+        setCatalystUseKeyParameters(false)
         val args = Bundle().apply { putString(ApnSettings.SUB_ID, subId.toString()) }
         val screen = createScreen(args)
 
@@ -189,7 +210,7 @@ class ApnSettingsScreenTest {
     }
 
     private fun createScreen(args: Bundle): ApnSettingsScreen {
-        return if (CatalystFlags.catalystUseKeyParameters()) {
+        return if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             ApnSettingsScreen(ApnSettingsScreen.parametersSchema.prepare(args))
         } else {
             ApnSettingsScreen(args)

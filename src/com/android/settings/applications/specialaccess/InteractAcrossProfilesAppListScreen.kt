@@ -28,7 +28,7 @@ import com.android.settings.applications.specialaccess.InteractAcrossProfilesApp
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -75,7 +75,7 @@ open class InteractAcrossProfilesAppListScreen : PreferenceScreenMixin {
                     crossProfileApps,
                 )
                 .forEach { app_user ->
-                    if (CatalystFlags.catalystUseKeyParameters()) {
+                    if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                         val parameters =
                             InteractAcrossProfilesAppDetailScreen.parametersSchema.prepare(
                                 KEY_APP_PACKAGE_NAME to app_user.first.packageName

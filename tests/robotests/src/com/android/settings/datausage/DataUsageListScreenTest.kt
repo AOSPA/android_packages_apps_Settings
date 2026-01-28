@@ -27,8 +27,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.Settings
 import com.android.settings.flags.Flags
 import com.android.settings.utils.putSubId
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProvider
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -40,15 +43,33 @@ class DataUsageListScreenTest {
 
     private val appContext: Context = ApplicationProvider.getApplicationContext()
 
-    private val preferenceScreenCreator =
-        createScreen(Bundle(1).also { it.putSubId(android.provider.Settings.EXTRA_SUB_ID, 1) })
+    private lateinit var originalProvider: CatalystFlagProvider
+    private lateinit var preferenceScreenCreator: DataUsageListScreen
 
     private val testSubId = 2737
     private val invalidSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
 
+    @Before
+    fun setUp() {
+        originalProvider = CatalystFlagProviderFactory.getInstance()
+        preferenceScreenCreator = createScreen(Bundle(1).also { it.putSubId(android.provider.Settings.EXTRA_SUB_ID, 1) })
+    }
+
+    @After
+    fun tearDown() {
+        CatalystFlagProviderFactory.setProvider(originalProvider)
+    }
+
+    private fun setCatalystUseKeyParameters(value: Boolean) {
+        CatalystFlagProviderFactory.setProvider(object : CatalystFlagProvider {
+            override fun catalystUseKeyParameters() = value
+        })
+    }
+
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_validString_parsedCorrectly() {
+        setCatalystUseKeyParameters(true)
         val args =
             Bundle().apply {
                 putString(android.provider.Settings.EXTRA_SUB_ID, testSubId.toString())
@@ -61,6 +82,7 @@ class DataUsageListScreenTest {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_invalidString_returnsDefault() {
+        setCatalystUseKeyParameters(true)
         val args = Bundle().apply { putString(android.provider.Settings.EXTRA_SUB_ID, "invalid") }
         val screen = createScreen(args)
 
@@ -70,6 +92,7 @@ class DataUsageListScreenTest {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_missingKey_returnsDefault() {
+        setCatalystUseKeyParameters(true)
         val args = Bundle()
         val screen = createScreen(args)
 
@@ -79,6 +102,7 @@ class DataUsageListScreenTest {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_subIdIsInt_returnsTheSubIdFromInt() {
+        setCatalystUseKeyParameters(true)
         val args = Bundle().apply { putSubId(android.provider.Settings.EXTRA_SUB_ID, testSubId) }
         val screen = createScreen(args)
 
@@ -87,10 +111,10 @@ class DataUsageListScreenTest {
 
     @Test
     @DisableFlags(
-        Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        CatalystFlags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun subId_flagFalse_validInt_parsedCorrectly() {
+        setCatalystUseKeyParameters(false)
         val args = Bundle().apply { putInt(android.provider.Settings.EXTRA_SUB_ID, testSubId) }
         val screen = createScreen(args)
 
@@ -99,10 +123,10 @@ class DataUsageListScreenTest {
 
     @Test
     @DisableFlags(
-        Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        CatalystFlags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun subId_flagFalse_subIdIsString_returnsTheSubIdFromString() {
+        setCatalystUseKeyParameters(false)
         val args =
             Bundle().apply {
                 putString(android.provider.Settings.EXTRA_SUB_ID, testSubId.toString())
@@ -114,10 +138,10 @@ class DataUsageListScreenTest {
 
     @Test
     @DisableFlags(
-        Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        CatalystFlags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun subId_flagFalse_missingKey_returnsDefault() {
+        setCatalystUseKeyParameters(false)
         val args = Bundle()
         val screen = createScreen(args)
 
@@ -135,7 +159,7 @@ class DataUsageListScreenTest {
     }
 
     private fun createScreen(args: Bundle): DataUsageListScreen {
-        return if (CatalystFlags.catalystUseKeyParameters()) {
+        return if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             DataUsageListScreen(DataUsageListScreen.parametersSchema.prepare(args))
         } else {
             DataUsageListScreen(args)

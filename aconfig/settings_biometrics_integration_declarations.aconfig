@@ -54,3 +54,13 @@ flag {
       purpose: PURPOSE_BUGFIX
   }
 }
+
+flag {
+  name: "show_face_enroll_intro_timeout_dialog"
+  namespace: "biometrics_integration"
+  description: "This flag controls whether to show an error dialog when it takes too long to be ready during Face Enroll Introduction"
+  bug: "447278355"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}

@@ -27,7 +27,7 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen.Companion.KEY_APP_PACKAGE_NAME
 import com.android.settings.spa.app.storage.StorageType
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PreferenceHierarchyGenerator
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -79,7 +79,7 @@ open class AppStorageAppListScreen : PreferenceScreenMixin, PreferenceHierarchyG
                     .loadAndMaybeExcludeSystemApps(context.userId, type)
                     .forEach { app ->
                         if (StorageType.Apps.filter(app)) {
-                            if (CatalystFlags.catalystUseKeyParameters()) {
+                            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                                 val parameters =
                                     AppInfoStorageScreen.parametersSchema.prepare(
                                         KEY_APP_PACKAGE_NAME to app.packageName

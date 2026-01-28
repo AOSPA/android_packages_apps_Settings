@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.face;
 
+import static android.os.Looper.getMainLooper;
 import static android.util.DisplayMetrics.DENSITY_DEFAULT;
 import static android.util.DisplayMetrics.DENSITY_XXXHIGH;
 
@@ -31,6 +32,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
 import android.content.Intent;
@@ -317,6 +319,9 @@ public class FaceEnrollEducationTest {
         setupActivity();
 
         mScenario.onActivity(activity -> {
+            activity.adjustIllustrationLottiePosition();
+            shadowOf(getMainLooper()).idle();
+
             final GlifLayout glifLayout = activity.findViewById(R.id.setup_wizard_layout);
             final TextView descView =  glifLayout.getDescriptionTextView();
             final int descBottomPos = activity.getOnScreenPositionTop(descView)
@@ -324,11 +329,8 @@ public class FaceEnrollEducationTest {
             final LottieAnimationView illustrationLottie = activity.findViewById(
                     R.id.illustration_lottie);
             final int illustrationLottieTop = activity.getOnScreenPositionTop(illustrationLottie);
-            if (illustrationLottieTop < descBottomPos) {
-                assertThat(activity.adjustIllustrationLottiePosition()).isTrue();
-            } else {
-                assertThat(activity.adjustIllustrationLottiePosition()).isFalse();
-            }
+
+            assertThat(illustrationLottieTop).isAtLeast(descBottomPos);
         });
     }
 }
