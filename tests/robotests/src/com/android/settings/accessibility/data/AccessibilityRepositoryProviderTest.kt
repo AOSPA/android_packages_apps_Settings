@@ -22,6 +22,9 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
@@ -38,6 +41,16 @@ class AccessibilityRepositoryProviderTest {
         val instance1 = AccessibilityRepositoryProvider.get(context)
         val instance2 = AccessibilityRepositoryProvider.get(context)
         assertThat(instance1).isSameInstanceAs(instance2)
+    }
+
+    @Test
+    fun get_usesApplicationContext() {
+        AccessibilityRepositoryProvider.resetInstanceForTesting()
+        val mockContext: Context = mock { on { applicationContext } doReturn context }
+
+        AccessibilityRepositoryProvider.get(mockContext)
+
+        verify(mockContext).applicationContext
     }
 
     @Test
