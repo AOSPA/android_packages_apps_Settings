@@ -254,7 +254,8 @@ class DisplayTopologyPreferenceController(
             TopologyScale(
                 paneContent.width,
                 minEdgeLength = DisplayTopology.dpToPx(MIN_EDGE_LENGTH_DP, injector.densityDpi),
-                maxEdgeLength = DisplayTopology.dpToPx(MAX_EDGE_LENGTH_DP, injector.densityDpi),
+                maxEdgeLength =
+                    DisplayTopology.dpToPx(getMaxEdgeLengthDp(newBounds.size), injector.densityDpi),
                 newBounds.map { it.second },
             )
         setupDisplayPaneAndBlocks(
@@ -717,7 +718,17 @@ class DisplayTopologyPreferenceController(
     }
 
     private companion object {
+        private fun getMaxEdgeLengthDp(displayCount: Int): Float {
+            // Larger size is important to depict the relative size between 1 display with another,
+            // if the size of large display is capped too small, the other display will look very
+            // small in proportion.
+            // However, when there is only a single display, this relative size is not important,
+            // and it's better to give the extra space to show the display settings.
+            return if (displayCount > 1) MAX_EDGE_LENGTH_DP else MAX_EDGE_LENGTH_DP_SINGLE_DISPLAY
+        }
+
         private const val MIN_EDGE_LENGTH_DP = 48f
+        private const val MAX_EDGE_LENGTH_DP_SINGLE_DISPLAY = 128f
         private const val MAX_EDGE_LENGTH_DP = 256f
         private const val MIRRORING_DIAGONAL_STACK_OFFSET_DP = 120f
         private const val TAG = "DisplayTopologyPreferenceController"
