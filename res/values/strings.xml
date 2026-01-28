@@ -11196,6 +11196,8 @@
     <!-- The title used in USB Preferences which lets the user select whether USB
          should be in host or device mode. -->
     <string name="usb_control_title">USB controlled by</string>
+    <!-- The title of connected devices section which lets to monitor and manage USB devices. -->
+    <string name="usb_connected_devices">Connected devices</string>
     <!-- The option in USB Preferences for selecting USB to be in host mode. This allows
          the user to connect peripherals such as a mouse or flash drive to the device. -->
     <string name="usb_control_host">Connected device</string>
@@ -11238,6 +11240,14 @@
     <!-- Settings item summary for USB preference when set to entering UVC mode
          and powering other device [CHAR LIMIT=NONE] -->
     <string name="usb_summary_UVC_power">Webcam and supplying power</string>
+
+    <!-- String that is used as UsbDevice name if it doesn't have product name
+         and has manufacturer name [CHAR LIMIT=NONE] -->
+    <string name="usb_device_name_unknown_with_manufacturer_name">Unknown device from <xliff:g id="manufacturer_name" example="Google">%1$s</xliff:g></string>
+    <!-- String that is used as UsbDevice name if it doesn't have product name
+         and manufacturer name (vendor and product IDs are displayed in hexadecimal)
+         [CHAR LIMIT=NONE] -->
+    <string name="usb_device_name_unknown_with_vendor_id_and_product_id">Unknown device [<xliff:g id="vendor_id" example="8087">%1$04x</xliff:g>:<xliff:g id="product_id" example="0033">%2$04x</xliff:g>]</string>
 
     <!-- Settings item title for background check prefs [CHAR LIMIT=35] -->
     <string name="background_check_pref">Background check</string>
