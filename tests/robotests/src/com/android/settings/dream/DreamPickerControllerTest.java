@@ -19,10 +19,17 @@ package com.android.settings.dream;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.ComponentName;
 import android.content.Context;
-
+import android.graphics.drawable.Drawable;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
+import android.service.dreams.Flags;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.core.app.ApplicationProvider;
@@ -33,9 +40,11 @@ import com.android.settingslib.dream.DreamBackend.DreamInfo;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -43,9 +52,14 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RunWith(RobolectricTestRunner.class)
 public class DreamPickerControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private DreamBackend mBackend;
     private Context mContext;
@@ -104,5 +118,109 @@ public class DreamPickerControllerTest {
         when(mBackend.getDreamInfos()).thenReturn(Arrays.asList(new DreamInfo(), new DreamInfo()));
         controller.refreshDreamsList();
         assertThat(view.getAdapter().getItemCount()).isEqualTo(2);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_DREAMS_SWITCHER)
+    public void onItemClicked_dreamsSwitcherDisabled_setsActiveDream() {
+        final DreamInfo dream1 = new DreamInfo();
+        dream1.componentName = new ComponentName("pkg", "dream1");
+        dream1.isActive = true;
+        dream1.icon = mock(Drawable.class);
+        when(dream1.icon.mutate()).thenReturn(dream1.icon);
+        final DreamInfo dream2 = new DreamInfo();
+        dream2.componentName = new ComponentName("pkg", "dream2");
+        dream2.isActive = false;
+        dream2.icon = mock(Drawable.class);
+        when(dream2.icon.mutate()).thenReturn(dream2.icon);
+        when(mBackend.getDreamInfos()).thenReturn(Arrays.asList(dream1, dream2));
+        final DreamPickerController controller = buildController();
+        controller.updateState(mPreference);
+        final RecyclerView recyclerView = mPreference.findViewById(R.id.dream_list);
+        recyclerView.measure(0, 0);
+        recyclerView.layout(0, 0, 100, 1000);
+        assertThat(controller.getActiveDreamInfo()).isEqualTo(dream1);
+
+        // act: select dream2
+        recyclerView.findViewHolderForAdapterPosition(1).itemView.performClick();
+
+        // verify
+        verify(mBackend).setActiveDream(dream2.componentName);
+        assertThat(controller.getActiveDreamInfo()).isEqualTo(dream2);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
+    public void onItemClicked_notSelected_dreamsSwitcherEnabled_selectsDream() {
+        // setup
+        final DreamInfo dream1 = new DreamInfo();
+        dream1.componentName = new ComponentName("pkg", "dream1");
+        dream1.isActive = false;
+        dream1.icon = mock(Drawable.class);
+        when(dream1.icon.mutate()).thenReturn(dream1.icon);
+        final DreamInfo dream2 = new DreamInfo();
+        dream2.componentName = new ComponentName("pkg", "dream2");
+        dream2.isActive = true;
+        dream2.order = 0;
+        dream2.icon = mock(Drawable.class);
+        when(dream2.icon.mutate()).thenReturn(dream2.icon);
+        when(mBackend.getDreamInfos()).thenReturn(Arrays.asList(dream1, dream2));
+        final DreamPickerController controller = buildController();
+        controller.updateState(mPreference);
+        final RecyclerView recyclerView = mPreference.findViewById(R.id.dream_list);
+        recyclerView.measure(0, 0);
+        recyclerView.layout(0, 0, 100, 1000);
+
+        // act: select an inactive dream
+        recyclerView.findViewHolderForAdapterPosition(0).itemView.performClick();
+
+        // verify
+        final ArgumentCaptor<ComponentName[]> captor =
+                ArgumentCaptor.forClass(ComponentName[].class);
+        verify(mBackend).setActiveDreams(captor.capture());
+
+        final List<ComponentName> activeComponents = Arrays.asList(captor.getValue());
+        assertThat(activeComponents).containsExactly(dream2.componentName, dream1.componentName);
+        assertThat(controller.getSelectedDreams().stream().map(
+                d -> d.componentName).collect(Collectors.toList()))
+                .containsExactly(dream2.componentName, dream1.componentName);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
+    public void onItemClicked_selected_dreamsSwitcherEnabled_deselectsDream() {
+        // setup
+        final DreamInfo dream1 = new DreamInfo();
+        dream1.componentName = new ComponentName("pkg", "dream1");
+        dream1.isActive = true;
+        dream1.order = 1;
+        dream1.icon = mock(Drawable.class);
+        when(dream1.icon.mutate()).thenReturn(dream1.icon);
+        final DreamInfo dream2 = new DreamInfo();
+        dream2.componentName = new ComponentName("pkg", "dream2");
+        dream2.isActive = true;
+        dream2.order = 0;
+        dream2.icon = mock(Drawable.class);
+        when(dream2.icon.mutate()).thenReturn(dream2.icon);
+        when(mBackend.getDreamInfos()).thenReturn(Arrays.asList(dream1, dream2));
+        final DreamPickerController controller = buildController();
+        controller.updateState(mPreference);
+        final RecyclerView recyclerView = mPreference.findViewById(R.id.dream_list);
+        recyclerView.measure(0, 0);
+        recyclerView.layout(0, 0, 100, 1000);
+
+        // act: deselect an active dream (dream1 at index 0)
+        recyclerView.findViewHolderForAdapterPosition(0).itemView.performClick();
+
+        // verify
+        final ArgumentCaptor<ComponentName[]> captor =
+                ArgumentCaptor.forClass(ComponentName[].class);
+        verify(mBackend).setActiveDreams(captor.capture());
+
+        final List<ComponentName> activeComponents = Arrays.asList(captor.getValue());
+        assertThat(activeComponents).containsExactly(dream2.componentName);
+        assertThat(controller.getSelectedDreams().stream().map(
+                d -> d.componentName).collect(Collectors.toList()))
+                .containsExactly(dream2.componentName);
     }
 }

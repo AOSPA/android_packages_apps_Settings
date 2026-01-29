@@ -769,6 +769,11 @@
             android:title="@string/enable_notes_role_title"
             android:summary="@string/enable_notes_role_summary" />
 
+        <SwitchPreferenceCompat
+            android:key="enable_webapp_minter"
+            android:title="@string/enable_webapp_minter_title"
+            android:summary="@string/enable_webapp_minter_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

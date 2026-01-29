@@ -80,4 +80,11 @@ public interface IDreamItem {
      */
     default void onPreviewClicked() {
     }
+
+    /**
+     * Gets the selection order of the dream. -1 if not selected.
+     */
+    default int getOrder() {
+        return -1;
+    }
 }

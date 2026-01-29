@@ -70,24 +70,15 @@ class WifiSharedPreferenceController(
     }
 
     private fun showAlertDialog(ssid: String, shared: Boolean, key: String) {
+        val title =
+            if (shared) mContext.getString(R.string.wifi_share_conflict_dialog_title)
+            else mContext.getString(R.string.wifi_private_conflict_dialog_title)
+        val message =
+            if (shared) mContext.getString(R.string.wifi_share_conflict_dialog_message, ssid)
+            else mContext.getString(R.string.wifi_private_conflict_dialog_message, ssid)
         AlertDialog.Builder(mContext)
-            .setTitle(
-                mContext.getString(
-                    R.string.wifi_conflict_dialog_title,
-                    if (shared) mContext.getString(R.string.shared_message)
-                    else mContext.getString(R.string.private_message),
-                )
-            )
-            .setMessage(
-                mContext.getString(
-                    R.string.wifi_conflict_dialog_message,
-                    if (shared) mContext.getString(R.string.shared_message)
-                    else mContext.getString(R.string.private_message),
-                    ssid,
-                    if (shared) mContext.getString(R.string.private_message)
-                    else mContext.getString(R.string.shared_message),
-                )
-            )
+            .setTitle(title)
+            .setMessage(message)
             .setPositiveButton(mContext.getString(R.string.wifi_conflict_dialog_switch)) {
                 dialog: DialogInterface,
                 which: Int ->

@@ -34,7 +34,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.spa.app.storage.StorageType
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.applications.StorageStatsSource
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -68,7 +68,7 @@ private constructor(
     PreferenceAvailabilityProvider {
 
     private val packageName: String =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!!.getRequired(
                 InteractAcrossProfilesAppDetailScreen.Companion.KEY_APP_PACKAGE_NAME
             )
@@ -129,7 +129,7 @@ private constructor(
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         Intent("com.android.settings.APP_STORAGE_SETTINGS").apply {
             data = "package:$packageName".toUri()
-            if (CatalystFlags.catalystUseKeyParameters()) {
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                 highlightPreference(keyParameters!!, metadata?.key)
             } else {
                 highlightPreference(arguments!!, metadata?.key)

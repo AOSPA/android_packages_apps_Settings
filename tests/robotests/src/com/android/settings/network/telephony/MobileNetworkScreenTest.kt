@@ -29,9 +29,12 @@ import com.android.settings.Settings.MobileNetworkActivity
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.flags.Flags
 import com.android.settings.utils.putSubId
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProvider
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -47,8 +50,19 @@ class MobileNetworkScreenTest {
     private val subId = 123
     private val invalidSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
 
-    private val preferenceScreenCreator =
-        createScreen(Bundle().apply { putSubId(Settings.EXTRA_SUB_ID, subId) })
+    private lateinit var originalProvider: CatalystFlagProvider
+    private lateinit var preferenceScreenCreator: MobileNetworkScreen
+
+    @Before
+    fun setUp() {
+        originalProvider = CatalystFlagProviderFactory.getInstance()
+        preferenceScreenCreator = createScreen(Bundle().apply { putSubId(Settings.EXTRA_SUB_ID, subId) })
+    }
+
+    @After
+    fun tearDown() {
+        CatalystFlagProviderFactory.setProvider(originalProvider)
+    }
 
     @Test
     fun getKey_returnsCorrectKey() {
@@ -106,11 +120,10 @@ class MobileNetworkScreenTest {
     }
 
     @Test
-    @DisableFlags(
-        Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        CatalystFlags.FLAG_CATALYST_USE_KEY_PARAMETERS,
-    )
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagFalse_validInt_parsedCorrectly() {
+        setCatalystUseKeyParameters(false)
+
         val args = Bundle().apply { putSubId(Settings.EXTRA_SUB_ID, subId) }
         val screen = createScreen(args)
         assertThat(screen.getSubId()).isEqualTo(subId)
@@ -133,11 +146,17 @@ class MobileNetworkScreenTest {
     }
 
     private fun createScreen(args: Bundle): MobileNetworkScreen {
-        return if (CatalystFlags.catalystUseKeyParameters()) {
+        return if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             MobileNetworkScreen(MobileNetworkScreen.parametersSchema.prepare(args))
         } else {
             MobileNetworkScreen(args)
         }
+    }
+
+    private fun setCatalystUseKeyParameters(value: Boolean) {
+        CatalystFlagProviderFactory.setProvider(object : CatalystFlagProvider {
+            override fun catalystUseKeyParameters() = value
+        })
     }
 
     private fun MobileNetworkScreen.getSubId(): Int {

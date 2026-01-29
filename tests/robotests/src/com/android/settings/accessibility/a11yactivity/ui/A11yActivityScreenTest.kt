@@ -38,7 +38,8 @@ import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
-import com.android.settingslib.catalyst.flags.Flags
+import com.android.settingslib.metadata.CatalystFlagProvider
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.TwoTargetPreference
@@ -73,18 +74,15 @@ class A11yActivityScreenTest {
             AccessibilitySettings.EXTRA_COMPONENT_NAME to A11Y_ACTIVITY_COMPONENT.flattenToString()
         )
 
-    private val preferenceScreenCreator: A11yActivityScreen by lazy {
-        if (Flags.catalystUseKeyParameters()) {
-            A11yActivityScreen(appContext, keyParameters)
-        } else {
-            A11yActivityScreen(appContext, arguments)
-        }
-    }
+    private lateinit var originalProvider: CatalystFlagProvider
+    private lateinit var preferenceScreenCreator: A11yActivityScreen
+
     private val a11yManager: ShadowAccessibilityManager =
         Shadow.extract(appContext.getSystemService(AccessibilityManager::class.java))
 
     @Before
     fun setUp() {
+        originalProvider = CatalystFlagProviderFactory.getInstance()
         FakeFeatureFactory.setupForTest()
         val mockInfo: AccessibilityShortcutInfo = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT)
         val activityInfo =
@@ -97,11 +95,18 @@ class A11yActivityScreenTest {
         whenever(mockInfo.activityInfo).thenReturn(activityInfo)
         whenever(mockInfo.loadSummary(any())).thenReturn(DEFAULT_SUMMARY)
         a11yManager.setInstalledAccessibilityShortcutListAsUser(listOf(mockInfo))
+
+        preferenceScreenCreator = if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
+            A11yActivityScreen(appContext, keyParameters)
+        } else {
+            A11yActivityScreen(appContext, arguments)
+        }
     }
 
     @After
     fun cleanUp() {
         AccessibilityRepositoryProvider.resetInstanceForTesting()
+        CatalystFlagProviderFactory.setProvider(originalProvider)
     }
 
     @Test
@@ -171,10 +176,11 @@ class A11yActivityScreenTest {
 
     @Test
     @DisableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun parameters_hasTwoA11yActivities_returnTwoItems_bundleArguments() = runTest {
+        setCatalystUseKeyParameters(false)
+
         AccessibilityRepositoryProvider.resetInstanceForTesting()
         val shortcutInfo1 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT)
         val shortcutInfo2 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT2)
@@ -204,10 +210,11 @@ class A11yActivityScreenTest {
 
     @Test
     @EnableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun parameters_hasTwoA11yActivities_returnTwoItems_keyParameters() = runTest {
+        setCatalystUseKeyParameters(true)
+
         AccessibilityRepositoryProvider.resetInstanceForTesting()
         val shortcutInfo1 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT)
         val shortcutInfo2 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT2)
@@ -237,8 +244,9 @@ class A11yActivityScreenTest {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    @DisableFlags(Flags.FLAG_CATALYST_USE_KEY_PARAMETERS)
     fun featureComponentName_flagTrue_validString_parsedCorrectly() {
+        setCatalystUseKeyParameters(false)
+
         val args =
             Bundle().apply {
                 putString(
@@ -253,10 +261,11 @@ class A11yActivityScreenTest {
 
     @Test
     @EnableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun featureComponentName_flagTrue_validString_parsedCorrectly_usingKeyParameters() {
+        setCatalystUseKeyParameters(true)
+
         val keyParameters =
             A11yActivityScreen.parametersSchema.prepare(
                 AccessibilitySettings.EXTRA_COMPONENT_NAME to
@@ -270,8 +279,9 @@ class A11yActivityScreenTest {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    @DisableFlags(Flags.FLAG_CATALYST_USE_KEY_PARAMETERS)
     fun featureComponentName_flagTrue_invalidString_throwsException() {
+        setCatalystUseKeyParameters(false)
+
         val args =
             Bundle().apply {
                 putString(AccessibilitySettings.EXTRA_COMPONENT_NAME, "invalidComponent")
@@ -285,10 +295,11 @@ class A11yActivityScreenTest {
 
     @Test
     @EnableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun featureComponentName_flagTrue_invalidString_throwsException_usingKeyParameters() {
+        setCatalystUseKeyParameters(true)
+
         val keyParameters =
             A11yActivityScreen.parametersSchema.prepare(
                 AccessibilitySettings.EXTRA_COMPONENT_NAME to "invalidComponent"
@@ -302,8 +313,9 @@ class A11yActivityScreenTest {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    @DisableFlags(Flags.FLAG_CATALYST_USE_KEY_PARAMETERS)
     fun featureComponentName_flagTrue_missingKey_throwsException() {
+        setCatalystUseKeyParameters(false)
+
         val args = Bundle()
 
         assertThrows(IllegalArgumentException::class.java) {
@@ -314,8 +326,9 @@ class A11yActivityScreenTest {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    @DisableFlags(Flags.FLAG_CATALYST_USE_KEY_PARAMETERS)
     fun featureComponentName_flagTrue_canRetrieveTheComponentNameFromParcelable() {
+        setCatalystUseKeyParameters(false)
+
         val args =
             Bundle().apply {
                 putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_ACTIVITY_COMPONENT)
@@ -328,10 +341,11 @@ class A11yActivityScreenTest {
 
     @Test
     @DisableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun featureComponentName_flagFalse_validParcelable_parsedCorrectly() {
+        setCatalystUseKeyParameters(false)
+
         val args =
             Bundle().apply {
                 putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_ACTIVITY_COMPONENT)
@@ -343,10 +357,11 @@ class A11yActivityScreenTest {
 
     @Test
     @DisableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun featureComponentName_flagFalse_missingKey_throwsException() {
+        setCatalystUseKeyParameters(false)
+
         val args = Bundle()
 
         assertThrows(IllegalArgumentException::class.java) {
@@ -357,10 +372,11 @@ class A11yActivityScreenTest {
 
     @Test
     @DisableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun featureComponentName_flagFalse_canRetrieveTheComponentNameFromString() {
+        setCatalystUseKeyParameters(false)
+
         val args =
             Bundle().apply {
                 putString(
@@ -376,10 +392,11 @@ class A11yActivityScreenTest {
 
     @Test
     @EnableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun parameters_flagTrue_emitsKeyParametersWithString() = runTest {
+        setCatalystUseKeyParameters(true)
+
         AccessibilityRepositoryProvider.resetInstanceForTesting()
         val shortcutInfo1 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT)
         val shortcutInfo2 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT2)
@@ -406,8 +423,9 @@ class A11yActivityScreenTest {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    @DisableFlags(Flags.FLAG_CATALYST_USE_KEY_PARAMETERS)
     fun parameters_flagTrue_emitsBundleWithString() = runTest {
+        setCatalystUseKeyParameters(false)
+
         AccessibilityRepositoryProvider.resetInstanceForTesting()
         val shortcutInfo1 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT)
         val shortcutInfo2 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT2)
@@ -443,10 +461,11 @@ class A11yActivityScreenTest {
 
     @Test
     @DisableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun parameters_flagFalse_emitsBundleWithParcelable() = runTest {
+        setCatalystUseKeyParameters(false)
+
         AccessibilityRepositoryProvider.resetInstanceForTesting()
         val shortcutInfo1 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT)
         val shortcutInfo2 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT2)
@@ -478,6 +497,12 @@ class A11yActivityScreenTest {
             .isEqualTo(A11Y_ACTIVITY_COMPONENT2)
         assertThat(collectedBundles[1].getString(AccessibilitySettings.EXTRA_COMPONENT_NAME))
             .isNull()
+    }
+
+    private fun setCatalystUseKeyParameters(value: Boolean) {
+        CatalystFlagProviderFactory.setProvider(object : CatalystFlagProvider {
+            override fun catalystUseKeyParameters() = value
+        })
     }
 
     companion object {

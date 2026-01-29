@@ -39,7 +39,7 @@ import com.android.settings.datausage.lib.BillingCycleRepository
 import com.android.settings.datausage.lib.NetworkUsageData
 import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settings.utils.getSubId
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.widget.LayoutPreference
@@ -194,7 +194,7 @@ open class DataUsageList : DashboardFragment() {
     }
 
     private fun getSubIdFromBindingArgs(): Int {
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             val parameters = getPreferenceScreenBindingKeyParameters(requireContext())
 
             return parameters?.get(Settings.EXTRA_SUB_ID)?.toIntOrNull()

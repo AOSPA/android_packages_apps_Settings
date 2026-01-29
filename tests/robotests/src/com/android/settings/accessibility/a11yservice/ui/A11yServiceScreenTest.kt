@@ -39,7 +39,8 @@ import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
 import com.android.settingslib.RestrictedPreference
-import com.android.settingslib.catalyst.flags.Flags
+import com.android.settingslib.metadata.CatalystFlagProvider
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
@@ -72,26 +73,36 @@ class A11yServiceScreenTest {
             AccessibilitySettings.EXTRA_COMPONENT_NAME to A11Y_SERVICE_COMPONENT.flattenToString()
         )
 
-    private val preferenceScreenCreator: A11yServiceScreen by lazy {
-        if (Flags.catalystUseKeyParameters()) {
-            A11yServiceScreen(appContext, keyParameters)
-        } else {
-            A11yServiceScreen(appContext, arguments)
-        }
-    }
+    private lateinit var originalProvider: CatalystFlagProvider
+    private lateinit var preferenceScreenCreator: A11yServiceScreen
+
     private val a11yManager: ShadowAccessibilityManager =
         Shadow.extract(appContext.getSystemService(AccessibilityManager::class.java))
     private val packageManager: ShadowPackageManager = shadowOf(appContext.packageManager)
 
     @Before
     fun setUp() {
+        originalProvider = CatalystFlagProviderFactory.getInstance()
         FakeFeatureFactory.setupForTest()
         a11yManager.setInstalledAccessibilityServiceList(listOf(createA11yServiceInfo()))
+
+        preferenceScreenCreator = if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
+            A11yServiceScreen(appContext, keyParameters)
+        } else {
+            A11yServiceScreen(appContext, arguments)
+        }
     }
 
     @After
     fun cleanUp() {
         AccessibilityRepositoryProvider.resetInstanceForTesting()
+        CatalystFlagProviderFactory.setProvider(originalProvider)
+    }
+
+    private fun setCatalystUseKeyParameters(value: Boolean) {
+        CatalystFlagProviderFactory.setProvider(object : CatalystFlagProvider {
+            override fun catalystUseKeyParameters() = value
+        })
     }
 
     @Test
@@ -158,10 +169,10 @@ class A11yServiceScreenTest {
 
     @Test
     @DisableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun parameters_hasTwoA11yServices_returnTwoItems_bundleArguments() {
+        setCatalystUseKeyParameters(false)
         AccessibilityRepositoryProvider.resetInstanceForTesting()
         runTest {
             val serviceInfo1 = createA11yServiceInfo(serviceComponent = A11Y_SERVICE_COMPONENT)
@@ -191,10 +202,10 @@ class A11yServiceScreenTest {
 
     @Test
     @EnableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun parameters_hasTwoA11yServices_returnTwoItems() {
+        setCatalystUseKeyParameters(true)
         AccessibilityRepositoryProvider.resetInstanceForTesting()
         runTest {
             val serviceInfo1 = createA11yServiceInfo(serviceComponent = A11Y_SERVICE_COMPONENT)
@@ -230,8 +241,8 @@ class A11yServiceScreenTest {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    @DisableFlags(Flags.FLAG_CATALYST_USE_KEY_PARAMETERS)
     fun featureComponentName_flagTrue_validString_parsedCorrectly() {
+        setCatalystUseKeyParameters(false)
         val args =
             Bundle().apply {
                 putString(
@@ -245,10 +256,10 @@ class A11yServiceScreenTest {
 
     @Test
     @EnableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun featureComponentName_flagTrue_validString_parsedCorrectly_usingKeyParameters() {
+        setCatalystUseKeyParameters(true)
         val keyParameters =
             A11yServiceScreen.parametersSchema.prepare(
                 AccessibilitySettings.EXTRA_COMPONENT_NAME to
@@ -260,8 +271,8 @@ class A11yServiceScreenTest {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    @DisableFlags(Flags.FLAG_CATALYST_USE_KEY_PARAMETERS)
     fun featureComponentName_flagTrue_invalidString_throwsException() {
+        setCatalystUseKeyParameters(false)
         val args =
             Bundle().apply {
                 putString(AccessibilitySettings.EXTRA_COMPONENT_NAME, "invalidComponent")
@@ -273,10 +284,10 @@ class A11yServiceScreenTest {
 
     @Test
     @EnableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun featureComponentName_flagTrue_invalidString_throwsException_usingKeyParameters() {
+        setCatalystUseKeyParameters(true)
         val keyParameters =
             A11yServiceScreen.parametersSchema.prepare(
                 AccessibilitySettings.EXTRA_COMPONENT_NAME to "invalidComponent"
@@ -288,8 +299,8 @@ class A11yServiceScreenTest {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    @DisableFlags(Flags.FLAG_CATALYST_USE_KEY_PARAMETERS)
     fun featureComponentName_flagTrue_missingKey_throwsException() {
+        setCatalystUseKeyParameters(false)
         val args = Bundle()
         val screen = A11yServiceScreen(appContext, args)
 
@@ -298,8 +309,8 @@ class A11yServiceScreenTest {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    @DisableFlags(Flags.FLAG_CATALYST_USE_KEY_PARAMETERS)
     fun featureComponentName_flagTrue_canRetrieveTheComponentNameFromParcelable() {
+        setCatalystUseKeyParameters(false)
         val args =
             Bundle().apply {
                 putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_SERVICE_COMPONENT)
@@ -311,10 +322,10 @@ class A11yServiceScreenTest {
 
     @Test
     @DisableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun featureComponentName_flagFalse_validParcelable_parsedCorrectly() {
+        setCatalystUseKeyParameters(false)
         val args =
             Bundle().apply {
                 putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_SERVICE_COMPONENT)
@@ -325,10 +336,10 @@ class A11yServiceScreenTest {
 
     @Test
     @DisableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun featureComponentName_flagFalse_missingKey_throwsException() {
+        setCatalystUseKeyParameters(false)
         val args = Bundle()
         val screen = A11yServiceScreen(appContext, args)
 
@@ -337,10 +348,10 @@ class A11yServiceScreenTest {
 
     @Test
     @DisableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun featureComponentName_flagFalse_canRetrieveTheComponentNameFromString() {
+        setCatalystUseKeyParameters(false)
         val args =
             Bundle().apply {
                 putString(
@@ -355,10 +366,10 @@ class A11yServiceScreenTest {
 
     @Test
     @EnableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun parameters_flagTrue_emitsKeyParametersWithString() = runTest {
+        setCatalystUseKeyParameters(true)
         AccessibilityRepositoryProvider.resetInstanceForTesting()
         val serviceInfo1 = createA11yServiceInfo(serviceComponent = A11Y_SERVICE_COMPONENT)
         val serviceInfo2 = createA11yServiceInfo(serviceComponent = A11Y_SERVICE_COMPONENT2)
@@ -383,8 +394,8 @@ class A11yServiceScreenTest {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    @DisableFlags(Flags.FLAG_CATALYST_USE_KEY_PARAMETERS)
     fun parameters_flagTrue_emitsBundleWithString() = runTest {
+        setCatalystUseKeyParameters(false)
         AccessibilityRepositoryProvider.resetInstanceForTesting()
         val serviceInfo1 = createA11yServiceInfo(serviceComponent = A11Y_SERVICE_COMPONENT)
         val serviceInfo2 = createA11yServiceInfo(serviceComponent = A11Y_SERVICE_COMPONENT2)
@@ -418,10 +429,10 @@ class A11yServiceScreenTest {
 
     @Test
     @DisableFlags(
-        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE,
-        Flags.FLAG_CATALYST_USE_KEY_PARAMETERS,
+        com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE
     )
     fun parameters_flagFalse_emitsBundleWithParcelable() = runTest {
+        setCatalystUseKeyParameters(false)
         AccessibilityRepositoryProvider.resetInstanceForTesting()
         val serviceInfo1 = createA11yServiceInfo(serviceComponent = A11Y_SERVICE_COMPONENT)
         val serviceInfo2 = createA11yServiceInfo(serviceComponent = A11Y_SERVICE_COMPONENT2)

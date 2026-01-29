@@ -16,13 +16,16 @@
 
 package com.android.settings.print
 
+import android.Manifest
 import android.util.Log
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settings.print.PrintRepository.PrintServiceDisplayInfo
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import kotlinx.coroutines.flow.first
@@ -47,40 +50,57 @@ class PrintServiceApiScreen :
     init {
         flag { Flags.catalystMigration26q2() }
 
-        if (printRepository == null) {
-            Log.e(TAG, "printRepository is null, no screen parameters can be provided.")
-        } else {
-            parameters {
-                parameter(
-                    name = EXTRA_SERVICE_COMPONENT_NAME,
-                    purpose = R.string.print_service_parameter_purpose,
-                    type =
-                        GeneratedParameterType(R.string.print_service_parameter_description) {
-                            runBlocking {
-                                printRepository.printServiceDisplayInfosFlow().first().map {
-                                    GeneratedValue(it.componentName, it.title)
-                                }
-                            }
-                        },
-                )
+        parameters {
+            parameter(
+                name = EXTRA_SERVICE_COMPONENT_NAME,
+                purpose = R.string.print_service_parameter_purpose,
+                type =
+                    GeneratedParameterType(R.string.print_service_parameter_description) {
+                        fetchDisplayInfos().map { GeneratedValue(it.componentName, it.title) }
+                    },
+            )
 
-                prepareScreenExtras { keyParameters, extras ->
-                    val componentName =
-                        keyParameters[EXTRA_SERVICE_COMPONENT_NAME] ?: return@prepareScreenExtras
+            prepareScreenExtras { keyParameters, extras ->
+                val componentName =
+                    keyParameters[EXTRA_SERVICE_COMPONENT_NAME] ?: return@prepareScreenExtras
+                findDisplayInfo(componentName)?.let { info ->
+                    extras.putString(EXTRA_SERVICE_COMPONENT_NAME, componentName)
+                    extras.putString(EXTRA_TITLE, info.title)
+                    extras.putBoolean(EXTRA_CHECKED, info.isEnabled)
+                } ?: Log.e(TAG, "Service info not found: $componentName")
+            }
+        }
 
-                    runBlocking {
-                            printRepository.printServiceDisplayInfosFlow().first().find {
-                                it.componentName == componentName
-                            }
-                        }
-                        ?.let { info ->
-                            extras.putString(EXTRA_SERVICE_COMPONENT_NAME, componentName)
-                            extras.putString(EXTRA_TITLE, info.title)
-                            extras.putBoolean(EXTRA_CHECKED, info.isEnabled)
-                        } ?: Log.e(TAG, "Print service info not found for: $componentName")
+        preference(PRINT_SWITCH_KEY, PRINT_SWITCH_PURPOSE, AnyBoolean) {
+            get {
+                permissions(Manifest.permission.READ_PRINT_SERVICES)
+                execute {
+                    keyParameters?.get(EXTRA_SERVICE_COMPONENT_NAME)?.let {
+                        printRepository.isEnabled(it)
+                    } ?: false
+                }
+            }
+            set {
+                // No permission required to set print service state.
+                execute { value ->
+                    keyParameters?.get(EXTRA_SERVICE_COMPONENT_NAME)?.let {
+                        printRepository.setEnabled(it, value)
+                    }
                 }
             }
         }
+    }
+
+    private fun fetchDisplayInfos(): List<PrintServiceDisplayInfo> = runBlocking {
+        printRepository?.printServiceDisplayInfosFlow()?.first()
+            ?: emptyList<PrintServiceDisplayInfo>().also {
+                Log.e(TAG, "printRepository is null or empty")
+            }
+    }
+
+    private fun findDisplayInfo(componentName: String?): PrintServiceDisplayInfo? {
+        if (componentName == null) return null
+        return fetchDisplayInfos().find { it.componentName == componentName }
     }
 
     companion object {
@@ -89,6 +109,8 @@ class PrintServiceApiScreen :
         const val EXTRA_SERVICE_COMPONENT_NAME = "EXTRA_SERVICE_COMPONENT_NAME"
         const val EXTRA_TITLE = "EXTRA_TITLE"
         const val EXTRA_CHECKED = "EXTRA_CHECKED"
+        const val PRINT_SWITCH_KEY = "print_service_switch"
+        private val PRINT_SWITCH_PURPOSE = R.string.print_switch_purpose
     }
 }
 // LINT.ThenChange(PrintServiceSettingsFragment.java)

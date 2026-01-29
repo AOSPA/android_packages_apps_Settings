@@ -66,6 +66,7 @@ class SettingsLaunchpadActivityTest {
         const val SPA_SCREEN_KEY = "spa_screen_key"
         const val SPA_ROUTE_PREFIX = "spa_route_prefix"
 
+        var screenEnabled = true
         var preconditionsAreMet = true
     }
 
@@ -90,6 +91,7 @@ class SettingsLaunchpadActivityTest {
             purpose = 0,
         ) {
         init {
+            flag { screenEnabled }
             preconditions("Test preconditions") {
                 if (preconditionsAreMet) {
                     Allowed
@@ -123,6 +125,9 @@ class SettingsLaunchpadActivityTest {
         MockitoAnnotations.initMocks(this)
         context = ApplicationProvider.getApplicationContext()
 
+        // screen is enabled by default
+        screenEnabled = true
+
         // default value for preconditions variable
         preconditionsAreMet = true
 
@@ -153,6 +158,21 @@ class SettingsLaunchpadActivityTest {
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
                 putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, "non_existent_key")
+            }
+        val activity =
+            Robolectric.buildActivity(SettingsLaunchpadActivity::class.java, intent).create().get()
+
+        assertThat(activity.isFinishing).isTrue()
+        assertThat(shadowOf(activity).nextStartedActivity).isNull()
+    }
+
+    @Test
+    fun onCreate_screenIsDisabled_shouldFinish() {
+        screenEnabled = false
+
+        val intent =
+            Intent(context, SettingsLaunchpadActivity::class.java).apply {
+                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, API_SCREEN_KEY)
             }
         val activity =
             Robolectric.buildActivity(SettingsLaunchpadActivity::class.java, intent).create().get()

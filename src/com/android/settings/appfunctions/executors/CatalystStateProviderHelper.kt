@@ -21,7 +21,7 @@ import android.os.Bundle
 import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateItemConfig
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
@@ -62,7 +62,7 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
 
     val hierarchies =
         if (PreferenceScreenRegistry.isParameterized(context, screenKey)) {
-            if (CatalystFlags.catalystUseKeyParameters()) {
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                 if (removeDuplicates) {
                     listOf(
                         getPreferenceHierarchy(
@@ -134,7 +134,7 @@ private suspend fun CoroutineScope.getPreferenceHierarchy(
     settingConfigMap: Map<String, DeviceStateItemConfig>,
 ): Pair<PreferenceScreenMetadata, List<PreferenceHierarchyNode>>? {
     val screenMetaData =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             PreferenceScreenRegistry.createWithKeyParameters(context, screenKey, keyParameters)
         } else {
             PreferenceScreenRegistry.create(context, screenKey, args)

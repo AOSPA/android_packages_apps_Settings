@@ -40,8 +40,8 @@ import com.android.settings.spa.network.startAddSimFlow
 import com.android.settings.spa.network.startSatelliteWarningDialogFlow
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.RestrictedPreference
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.datastore.HandlerExecutor
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -185,7 +185,7 @@ open class MobileNetworkListScreen(context: Context) :
         preferenceHierarchy(context) {
             +MobileDataPreference()
             addAsync(coroutineScope, Dispatchers.Default) {
-                if (CatalystFlags.catalystUseKeyParameters()) {
+                if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                     MobileNetworkScreen.keyParameters(context).collect {
                         +(MobileNetworkScreen.KEY withParameters it)
                     }
