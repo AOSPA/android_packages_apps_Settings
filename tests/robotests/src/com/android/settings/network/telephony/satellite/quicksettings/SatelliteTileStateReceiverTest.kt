@@ -25,6 +25,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.PersistableBundle
+import android.os.UserHandle
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -62,6 +63,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowDeviceConfig
+import org.robolectric.shadows.ShadowProcess
 import org.robolectric.shadows.ShadowSatelliteManager
 import org.robolectric.shadows.ShadowSubscriptionManager
 
@@ -134,6 +136,16 @@ class SatelliteTileStateReceiverTest {
 
         verify(packageManager, never()).setComponentEnabledSetting(any(), anyInt(), anyInt())
         verify(pendingResult, never()).finish()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
+    fun onReceive_notSystemUser_doesNothing() {
+        // UID for user 1. USER_SYSTEM is 0.
+        ShadowProcess.setUid(100000)
+        sendBootCompletedBroadcast()
+
+        verify(receiver, never()).goAsync()
     }
 
     @Test
