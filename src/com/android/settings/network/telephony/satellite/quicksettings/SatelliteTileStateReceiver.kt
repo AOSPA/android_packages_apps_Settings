@@ -22,6 +22,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.OutcomeReceiver
+import android.os.UserHandle
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
@@ -66,6 +67,11 @@ open class SatelliteTileStateReceiver(
 ) : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
+        if (UserHandle.myUserId() != UserHandle.USER_SYSTEM) {
+            Log.d(TAG, "Not running on system user, ignoring.")
+            return
+        }
+
         if (!isSatelliteTileFeatureEnabled(context)) {
             Log.v(TAG, "Satellite tile feature is disabled. Ignoring intent.")
             return

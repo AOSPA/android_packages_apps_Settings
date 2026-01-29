@@ -22,6 +22,7 @@ import android.app.job.JobScheduler
 import android.app.job.JobService
 import android.content.ComponentName
 import android.content.Context
+import android.os.UserHandle
 import android.telephony.ServiceState
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyCallback
@@ -119,6 +120,10 @@ open class SatelliteEligibilityJobService : JobService() {
     private var scope: CoroutineScope? = null
 
     override fun onStartJob(params: JobParameters): Boolean {
+        if (UserHandle.myUserId() != UserHandle.USER_SYSTEM) {
+            Log.d(TAG, "Not running on system user, ignoring.")
+            return false
+        }
         Log.d(TAG, "onStartJob: ${params.jobId}")
 
         val subId = SubscriptionManager.getDefaultDataSubscriptionId()
