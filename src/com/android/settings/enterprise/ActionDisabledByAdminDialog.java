@@ -16,8 +16,10 @@
 
 package com.android.settings.enterprise;
 
+import static android.provider.Settings.ACTION_SHOW_SUSPENDED_PACKAGE_ADMIN_SUPPORT_DETAILS;
 import static android.security.advancedprotection.AdvancedProtectionManager.ADVANCED_PROTECTION_SYSTEM_ENTITY;
 
+import android.annotation.NonNull;
 import android.app.Activity;
 import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
@@ -29,6 +31,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.security.advancedprotection.AdvancedProtectionManager;
 
 import androidx.annotation.Nullable;
@@ -136,6 +139,12 @@ public class ActionDisabledByAdminDialog extends Activity
         if (intent == null) {
             return null;
         }
+        // Suspended package dialog is handled specially with a separate action due to complex
+        // policy enforcement model.
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()
+                && ACTION_SHOW_SUSPENDED_PACKAGE_ADMIN_SUPPORT_DETAILS.equals(intent.getAction())) {
+            return getEnforcingAdminForSuspendedPackage(intent);
+        }
         if (android.app.admin.flags.Flags.enforcingAdminExtraEnabled()
                 && intent.hasExtra(DevicePolicyManager.EXTRA_ENFORCING_ADMIN)) {
             return intent.getParcelableExtra(DevicePolicyManager.EXTRA_ENFORCING_ADMIN,
@@ -160,6 +169,33 @@ public class ActionDisabledByAdminDialog extends Activity
         }
 
         return dpm.getEnforcingAdmin(userId, restriction);
+    }
+
+    private EnforcingAdmin getEnforcingAdminForSuspendedPackage(@NonNull Intent intent) {
+        final DevicePolicyManager dpm = getSystemService(DevicePolicyManager.class);
+
+        if (dpm == null) {
+            return null;
+        }
+
+        final int userId = getUserIdFromIntent(intent);
+        // If a package is suspended by admin, it can either be suspended by the admin on its
+        // current user by PACKAGES_SUSPENDED_POLICY or suspended on parent (and connected profiles)
+        // by PERSONAL_APPS_SUSPENDED_POLICY.
+        PolicyEnforcementInfo packageSuspendedPolicy = dpm.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.PACKAGES_SUSPENDED_POLICY, userId);
+        if (packageSuspendedPolicy.isEnforced()) {
+            return packageSuspendedPolicy.getMostImportantEnforcingAdmin();
+        }
+        // PERSONAL_APPS_SUSPENDED_POLICY affects the parent of managed user and all
+        // other profiles that are connected to the parent e.g. private profile and clone
+        // profile.
+        final UserHandle parent = getSystemService(UserManager.class).getProfileParent(
+                UserHandle.of(userId));
+        int targetUserId = parent == null ? userId : parent.getIdentifier();
+        PolicyEnforcementInfo personalAppsSuspendedPolicy = dpm.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.PERSONAL_APPS_SUSPENDED_POLICY, targetUserId);
+        return personalAppsSuspendedPolicy.getMostImportantEnforcingAdmin();
     }
 
     @VisibleForTesting
