@@ -957,6 +957,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"ໃຊ້ເປັນຈໍແຍກ"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"ສະທ້ອນຈໍແບບໃນຕົວ"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"ສະແດງກ່ອງໂຕ້ຕອບການເຊື່ອມຕໍ່"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"ໃຊ້ HDR"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"ຊ່ວຍໃຫ້ສະແດງສີໄດ້ຫຼາກຫຼາຍຂຶ້ນ ແລະ ໄຮໄລ້ແຈ້ງຂຶ້ນ"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"ຍົກເລີກການເຊື່ອມຕໍ່ຈໍສະແດງຜົນພາຍນອກແລ້ວ"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"ການໝຸນ"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"ມາດຕະຖານ"</string>
@@ -2116,6 +2118,14 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"ກົດປຸ່ມຍະຫວ່າງສອງຄັ້ງເພື່ອໃສ່ເຄື່ອງໝາຍ \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"ສະແດງລະຫັດຜ່ານ"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"ສະແດງຕົວອັກສອນເປັນເວລາສັ້ນໆໃນເວລາພິມ"</string>
+    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <skip />
+    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"ໂຕກວດໂຕສະກົດນີ້ ອາດສາມາດເກັບກຳທຸກຂໍ້ຄວາມທີ່ທ່ານພິມໄດ້, ຮວມເຖິງຂໍ້ມູນສ່ວນໂຕ ເຊັ່ນ: ລະຫັດຜ່ານ ແລະໝາຍເລກບັດເຄຣດິດ. ມັນມາຈາກແອັບຯ <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. ໃຊ້ໂຕກວດໂຕສະກົດນີ້ບໍ່?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"ການຕັ້ງຄ່າ"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"ພາສາ"</string>
@@ -2917,11 +2927,6 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"ເບິ່ງການນຳໃຊ້ໃນຮອບ 24 ຊົ່ວໂມງທີ່ຜ່ານມາ"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"ເບິ່ງການນຳໃຊ້ຕັ້ງແຕ່ສາກຈົນເຕັມຫຼ້າສຸດ"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"ການໃຊ້ແບັດເຕີຣີຂອງແອັບ"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"ໃຊ້ລາຍລະອຽດ"</string>
@@ -3621,12 +3626,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"ອຸປະກອນ"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"ແປ້ນພິມ, ແຜ່ນສຳຜັດ, ຈໍສະແດງຜົນ, ສຽງ"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"ການສະແດງຜົນ"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"ສຽງ"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"ບໍ່ສາມາດໃຊ້ໄດ້ເນື່ອງຈາກ NFC ປິດຢູ່"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ກະລຸນາຕິດຕັ້ງແອັບການຈ່າຍເງິນກ່ອນຈຶ່ງຈະໃຊ້ໄດ້"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"ແອັບຫຼ້າສຸດ, ແອັບເລີ່ມຕົ້ນ"</string>
@@ -3755,6 +3757,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, ແທັກ, ຕົວອ່ານ"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"ແປ້ນພິມ, ການສຳຜັດ, ສັ່ນເຕືອນ,"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"ຈໍສະແດງຜົນພາຍນອກ, ຈໍສະແດງຜົນທີ່ເຊື່ອມຕໍ່, ຈໍສະແດງຜົນທີ່ຂະຫຍາຍ, ຈໍສະແດງຜົນທີສອງ, ຈໍສະແດງຜົນໃນຕົວ, ຈັດຮຽງຈໍສະແດງຜົນ, ສະທ້ອນ, ຂະໜາດຂອງການສະແດງຜົນ, ການໝຸນ, ຄວາມລະອຽດ, ອັດຕາການຣີເຟຣຊ"</string>
+    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"ລະດັບສຽງ ແລະ ການສັ່ນເຕືອນ"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"​ລະ​ດັບ​ສຽງ​ມີ​ເດຍ"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"ລະດັບສຽງ Google Cast"</string>
@@ -4387,12 +4391,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"ຣີສະຕາດ"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"ບໍ່ຟ້າວເທື່ອ"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"ສຶກສາເພີ່ມເຕີມກ່ຽວກັບການປ້ອງກັນໜ່ວຍຄວາມຈຳຂັ້ນສູງ."</string>
-    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
-    <skip />
-    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
-    <skip />
-    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
-    <skip />
+    <string name="binary_transparency_title" msgid="8669346926803868809">"ການວິນິໄສ Android OS"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"ກວດສອບເວີຊັນຂອງລະບົບປະຕິບັດການ"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"ການວິນິໄສ, ຄວາມໂປ່ງໃສ, ໄບນາຣີ"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"ໂປຣໄຟລບ່ອນເຮັດວຽກນີ້ຖືກຈັດການໂດຍ:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"ຈັດ​ການ​ໂດຍ <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"ເປີດ​ຕາມ​ມາດ​ຕະ​ຖານ"</string>
@@ -5790,10 +5791,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> ໂດຍ <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"ແອັບຈະຣີສະຕາດເມື່ອທ່ານປ່ຽນອັດຕາສ່ວນຮູບ. ທ່ານອາດສູນເສຍການປ່ຽນແປງທີ່ຍັງບໍ່ໄດ້ບັນທຶກໄວ້. ບາງແອັບອາດບໍ່ໄດ້ຮັບການປັບອັດຕາສ່ວນຮູບບາງຢ່າງໃຫ້ເໝາະສົມ."</string>
-    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
-    <skip />
-    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
-    <skip />
+    <string name="app_info_experience_category" msgid="6283332744508784886">"ປະສົບການ"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"ມືເກມ"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"ເຊັນເຊີລາຍນິ້ວມື"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ການແຈ້ງເຕືອນດ້ວຍແຟລດ"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ກ່ຽວກັບການແຈ້ງເຕືອນດ້ວຍແຟລດ"</string>
@@ -6149,7 +6148,8 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"ໜ້າທຳອິດທີ່ພົບເຫັນຂອງດາວທຽມ"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"ລອງໃຊ້ເດໂມ"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"ເບິ່ງວ່າມັນເຮັດວຽກແນວໃດ"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"ເມື່ອທ່ານບໍ່ມີເຄືອຂ່າຍມືຖື ຫຼື Wi-Fi, ໂທລະສັບຂອງທ່ານຈະເຊື່ອມຕໍ່ກັບດາວທຽມໂດຍອັດຕະໂນມັດ. ສຳລັບການເຊື່ອມຕໍ່ທີ່ດີທີ່ສຸດ, ກະລຸນາຢູ່ໃນພື້ນທີ່ທີ່ເບິ່ງເຫັນທ້ອງຟ້າໄດ້ຢ່າງຊັດເຈນ. ໂທລະສັບຂອງທ່ານຈະເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍມືຖືອີກຄັ້ງເມື່ອມີໃຫ້ໃຊ້. ການໂທຜ່ານທາງດາວທຽມໃຊ້ບໍ່ໄດ້. ການໂທສຸກເສີນອາດຍັງເຊື່ອມຕໍ່ຢູ່."</string>
+    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
+    <skip />
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"ສຳລັບການເຊື່ອມຕໍ່ທີ່ດີທີ່ສຸດ, ກະລຸນາຢູ່ໃນພື້ນທີ່ທີ່ເບິ່ງເຫັນທ້ອງຟ້າໄດ້ຢ່າງຊັດເຈນ. ໂທລະສັບຂອງທ່ານຈະເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍມືຖືອີກຄັ້ງເມື່ອມີໃຫ້ໃຊ້. ການໂທຜ່ານທາງດາວທຽມໃຊ້ບໍ່ໄດ້. ການໂທສຸກເສີນອາດຍັງເຊື່ອມຕໍ່ຢູ່."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"ເພີ່ມເຕີມກ່ຽວກັບການເຊື່ອມຕໍ່ຜ່ານດາວທຽມ"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"ເປີດເດໂມ SOS ດາວທຽມ"</string>
@@ -6160,24 +6160,20 @@
     <string name="add_tile_action" msgid="5271301747196740442">"ເພີ່ມແຜ່ນ"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"ພຣອມແຜ່ນດາວທຽມ"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
-    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"ດາວທຽມບໍ່ພ້ອມໃຫ້ບໍລິການ"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"ສັນຍານດາວທຽມບໍ່ພ້ອມໃຫ້ບໍລິການໃນລະຫວ່າງທີ່ທ່ານເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍມືຖື ຫຼື Wi‑Fi."</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"ການເຊື່ອມຕໍ່ຜ່ານດາວທຽມບໍ່ພ້ອມໃຫ້ບໍລິການໃນປະເທດ ຫຼື ພາກພື້ນນີ້."</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"ການເຊື່ອມຕໍ່ຜ່ານດາວທຽມບໍ່ພ້ອມໃຫ້ບໍລິການໃນຕອນນີ້. ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ."</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"ແພັກເກດມືຖືຂອງທ່ານບໍ່ຄອບຄຸມການໃຊ້ສັນຍານດາວທຽມ. ກະລຸນາຕິດຕໍ່ຜູ້ໃຫ້ບໍລິການຂອງທ່ານເພື່ອຂໍຄວາມຊ່ວຍເຫຼືອ."</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"ເພື່ອໃຊ້ການຮັບສົ່ງຂໍ້ຄວາມຜ່ານດາວທຽມ, ທ່ານຕ້ອງຕັ້ງຄ່າ Google Messages ເປັນແອັບຮັບສົ່ງຂໍ້ຄວາມເລີ່ມຕົ້ນຂອງທ່ານ."</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"ຜູ້ໃຫ້ບໍລິການຂອງທ່ານເປີດການນຳໃຊ້ການເຊື່ອມຕໍ່ຜ່ານດາວທຽມ. ສຶກສາເພີ່ມເຕີມໄດ້ຈາກການຕັ້ງຄ່າດາວທຽມຂອງຜູ້ໃຫ້ບໍລິການຂອງທ່ານ."</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"ເບິ່ງສະຖານທີ່ໃຫ້ບໍລິການ"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"ປ່ຽນແອັບເລີ່ມຕົ້ນ"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"ເບິ່ງການຕັ້ງຄ່າຜູ້ໃຫ້ບໍລິການ"</string>
+    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
     <skip />
-    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
     <skip />
-    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
-    <skip />
-    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
-    <skip />
-    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
-    <skip />
-    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
-    <skip />
-    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
-    <skip />
-    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
-    <skip />
-    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
-    <skip />
-    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
     <skip />
 </resources>

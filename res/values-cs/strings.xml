@@ -766,7 +766,7 @@
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Možnosti zámku obrazovky"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Možnosti zámku obrazovky"</string>
     <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"Automatické potvrzování odemknutí"</string>
-    <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Nechte si zařízení odemknout automaticky, když zadáte správný PIN o délce minimálně 6 číslic. Tato možnost je o něco méně bezpečná než potvrzení klepnutím na Enter."</string>
+    <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Po zadání správného PINu o délce minimálně 6 číslic odemykat automaticky. Tato možnost je o něco méně bezpečná než potvrzení klepnutím na Enter."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Automaticky potvrzovat správný kód PIN"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Potvrzení kódu PIN klepnutím na Enter je bezpečnější než používání automatického potvrzení"</string>
     <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Pokud chcete zapnout automatické potvrzování, zadejte PIN zařízení"</string>
@@ -957,6 +957,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Používat jako samostatný displej"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Zrcadlit vestavěný displej"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Zobrazit dialogové okno připojení"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"Použít HDR"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"Umožňuje širší rozsah barev a jasnější světla"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Externí displej je odpojen"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Otočení"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Standardní"</string>
@@ -1818,7 +1820,7 @@
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Pokud je k dispozici poloha vašeho zařízení, může být použita k nastavení časového pásma"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Oznámení"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Změna časového pásma"</string>
-    <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Oznamovat automatické aktualizace časového pásma"</string>
+    <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Dostávat upozornění, když se časové pásmo automaticky aktualizuje"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"oznámení, čas, pásmo, časové pásmo"</string>
     <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Naplánovaná změna hodin"</string>
     <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Oznamovat, když hodiny provedou naplánovanou změnu, například kvůli letnímu času"</string>
@@ -1935,7 +1937,7 @@
     <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Deaktivovat animace při zadávání kódu PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Zobrazit gesto profilu"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrovat při klepnutí"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Okamžitě zamknout vypínačem"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Okamžitě zamykat vypínačem"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Pokud odemknutí není udržováno funkcí <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Nastavení bezpečnostního gesta"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Změna bezpečnostního gesta"</string>
@@ -2116,6 +2118,14 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Znak „.“ lze vložit dvojím stisknutím klávesy Mezerník."</string>
     <string name="show_password" msgid="7101900779571040117">"Zobrazovat hesla"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Při psaní se budou krátce zobrazovat zadané znaky"</string>
+    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <skip />
+    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Prostřednictvím této kontroly pravopisu lze shromažďovat zadaný text včetně osobních údajů, jako jsou hesla a čísla kreditních karet. Kontrola pravopisu je součástí aplikace <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Chcete tuto kontrolu pravopisu použít?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Nastavení"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Jazyk"</string>
@@ -2587,7 +2597,7 @@
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Načasování"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standardní"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Standardní tmavý motiv"</string>
-    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Zapne tmavý motiv pro zařízení a aplikace, které ho podporují"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Zapne tmavý motiv pro zařízení a aplikace, které ho podporují."</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Rozšířený"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Rozšířený tmavý motiv"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Automaticky použije tmavý motiv u většiny aplikací, které ho nepodporují, což pomáhá zlepšit přístupnost."</string>
@@ -2917,11 +2927,6 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Využití za posledních 24 hodin"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Zobrazit využití od posledního úplného nabití"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Využití baterie aplikací"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Podrobnosti využívání"</string>
@@ -3621,12 +3626,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Zařízení"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"Klávesnice, touchpad, displej, zvuk"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Displej"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Zvuk"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Nejsou dostupné, protože funkce NFC je vypnutá"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Před použitím nejprve nainstalujte platební aplikaci"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Nedávné aplikace, výchozí aplikace"</string>
@@ -3755,6 +3757,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, štítek, čtečka"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"klávesnice, hmatová odezva, vibrace,"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"externí displej, připojený displej, rozšířený displej, druhý displej, vestavěný displej, uspořádání displejů, zrcadlení, velikost zobrazení, otočení, rozlišení, obnovovací frekvence"</string>
+    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Hlasitost a vibrace"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Hlasitost médií"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Hlasitost Google Cast"</string>
@@ -4343,7 +4347,7 @@
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Omezte vyrušení pouze na důležité lidi a aplikace"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Nastavte si režim s pravidelný plánem"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Synchronizujte své zařízení s událostmi v kalendáři"</string>
-    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Probuďte se plní energie"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Probouzejte se plní energie"</string>
     <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Na cestách dbejte především na bezpečnost"</string>
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Nenechte se vyrušovat"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Pro chvíle, které vyžadují vybrané chování"</string>
@@ -4387,12 +4391,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Restartovat"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Teď ne"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Další informace o pokročilé ochraně paměti."</string>
-    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
-    <skip />
-    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
-    <skip />
-    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
-    <skip />
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Diagnostika Android OS"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"Ověřit sestavení OS"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"diagnostika, transparentnost, binární kód"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Tento pracovní profil spravuje aplikace:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Spravováno aplikací <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Otevírání ve výchozím nastavení"</string>
@@ -4513,18 +4514,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Výchozí konfigurace USB"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Možnosti napájení"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Možnosti přenosu souborů"</string>
-    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
-    <skip />
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Ochrana přístupu k datům"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Povolit tunelování PCI"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Když je tato možnost povolena, periferní zařízení USB a Thunderbolt můžou vytvářet tunely PCI a přistupovat k systémové paměti"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Ke změně tohoto nastavení musíte být administrátor"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"Zakázáno administrátorem IT"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Zakázáno režimem pokročilé ochrany"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Předvolby USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"Zařízení ovládající USB:"</string>
@@ -5661,7 +5656,7 @@
     <string name="category_name_color" msgid="937514550918977151">"Barva"</string>
     <string name="category_name_display_controls" msgid="7046581691184725216">"Další ovládací prvky obrazovky"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Obecné"</string>
-    <string name="dark_theme_main_switch_title" msgid="4570920398981775904">"Použít tmavý motiv"</string>
+    <string name="dark_theme_main_switch_title" msgid="4570920398981775904">"Používat tmavý motiv"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Používat Bluetooth"</string>
     <string name="hdr_brightness_main_switch_title" msgid="1850974699921514297">"Používat vylepšený jas HDR"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Blokovat vyzvánění"</string>
@@ -5798,10 +5793,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4 : 3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="DENOMINATOR">%2$s</xliff:g>: <xliff:g id="NUMERATOR">%1$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Když změníte poměr stran, aplikace se restartuje. Můžete přijít o neuložené změny. Některé aplikace nemusí být optimalizované pro určité poměry stran."</string>
-    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
-    <skip />
-    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
-    <skip />
+    <string name="app_info_experience_category" msgid="6283332744508784886">"Prostředí"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Gamepad"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Snímač otisků prstů"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Světelná oznámení"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Informace o světelných oznámeních"</string>
@@ -6142,8 +6135,8 @@
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Přepínač. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"Blokováno"</string>
     <string name="safety_center_toggle" msgid="3349093870782510158">"Přepnout"</string>
-    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"Přístup k mikrofonu"</string>
-    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"Přístup k fotoaparátu"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"Mikrofon"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"Fotoaparát"</string>
     <string name="location_toggle_label_qs" msgid="1593489235177619829">"Přístup k poloze"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Párování"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> je připojeno"</string>
@@ -6157,7 +6150,8 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Vstupní stránka – satelit"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"Vyzkoušet ukázku"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"Jak to funguje"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"Když nebudete mít mobilní síť ani Wi-Fi, telefon se automaticky připojí k satelitu. Nejlepšího připojení dosáhnete na otevřeném prostranství. Až bude k dispozici mobilní síť, telefon se k ní zase připojí. Volání přes satelit není k dispozici. Tísňová volání se přesto můžou spojit."</string>
+    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
+    <skip />
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"Nejlepšího připojení dosáhnete na otevřeném prostranství. Až bude k dispozici mobilní síť, telefon se k ní zase připojí. Volání přes satelit není k dispozici. Tísňová volání se přesto můžou spojit."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Další informace o satelitním připojení"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Otevřít ukázku SOS přes satelit"</string>
@@ -6168,24 +6162,20 @@
     <string name="add_tile_action" msgid="5271301747196740442">"Přidat dlaždici"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Pokyny dlaždice satelitního připojení"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
-    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satelitní připojení není k dispozici"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"Při připojení k mobilní síti nebo k Wi-Fi není připojení přes satelit k dispozici."</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"Satelitní připojení není v této zemi nebo oblasti k dispozici."</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"Satelitní připojení momentálně není k dispozici. Zkuste to znovu později."</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Váš mobilní tarif satelitní připojení nezahrnuje. Požádejte o pomoc operátora."</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Pokud chcete používat satelitní zprávy, musí být jako výchozí aplikace na odesílání zpráv nastavené Google zprávy."</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"Satelitní připojení aktivoval váš operátor. Další informace najdete v nastavení satelitního připojení svého operátora."</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Zobrazit dostupné lokality"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Změnit výchozí aplikaci"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"Zobrazit nastavení operátora"</string>
+    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
     <skip />
-    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
     <skip />
-    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
-    <skip />
-    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
-    <skip />
-    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
-    <skip />
-    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
-    <skip />
-    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
-    <skip />
-    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
-    <skip />
-    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
-    <skip />
-    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
     <skip />
 </resources>

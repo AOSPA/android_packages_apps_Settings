@@ -31,6 +31,11 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.permission.flags.Flags;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -41,6 +46,7 @@ import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -53,6 +59,8 @@ import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class AssistFlashScreenPreferenceControllerTest {
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mMockContext;
@@ -80,6 +88,19 @@ public class AssistFlashScreenPreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ASSIST_SETTINGS_PRIVACY_IMPROVEMENTS_ENABLED)
+    @Config(shadows = {ShadowSecureSettings.class})
+    public void isAvailable_assistSettingsPrivacyImprovementsEnabled_shouldReturnFalse() {
+        ReflectionHelpers.setField(mController, "mContext", mMockContext);
+        final ContentResolver cr = mContext.getContentResolver();
+        Settings.Secure.putString(cr, Settings.Secure.ASSISTANT, "com.android.settings/assist");
+        doReturn(true).when(mController).allowDisablingAssistDisclosure();
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_ASSIST_SETTINGS_PRIVACY_IMPROVEMENTS_ENABLED)
     @Config(shadows = {ShadowSecureSettings.class})
     public void isAvailable_hasAssistantAndAllowDisclosure_shouldReturnTrue() {
         ReflectionHelpers.setField(mController, "mContext", mMockContext);

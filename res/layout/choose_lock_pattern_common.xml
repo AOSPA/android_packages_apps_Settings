@@ -18,9 +18,11 @@
 <!-- Used in phone portrait and tablet, as referenced in alias.xml. -->
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:sudAnimationIcon="@raw/icon_lock"
     android:icon="@drawable/ic_lock">
 
     <!-- takes up all space above button bar at bottom -->

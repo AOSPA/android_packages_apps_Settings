@@ -33,6 +33,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
@@ -455,6 +456,19 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
         return mContext.getString(
                 R.string.battery_usage_day_and_hour, selectedDayText, selectedHourText);
+    }
+
+    @Nullable
+    String getDailyInformation() {
+        if (mDailyViewModel == null || mHourlyViewModels == null) {
+            // No data
+            return null;
+        }
+        if (isAllSelected()) {
+            return null;
+        }
+
+        return mDailyViewModel.getFullText(mDailyChartIndex);
     }
 
     @VisibleForTesting

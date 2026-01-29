@@ -957,6 +957,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"പ്രത്യേക ഡിസ്പ്ലേ ആയി ഉപയോഗിക്കുക"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"ബിൽറ്റ്-ഇൻ ഡിസ്‌പ്ലേ മിറർ ചെയ്യുക"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"കണക്ഷൻ ഡയലോഗ് കാണിക്കുക"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"HDR ഉപയോഗിക്കുക"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"വൈവിധ്യമാർന്ന നിറങ്ങളും തെളിച്ചമുള്ള ഹൈലൈറ്റുകളും അനുവദിക്കുന്നു"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"ബാഹ്യ ഡിസ്പ്ലേ വിച്ഛേദിച്ചിരിക്കുന്നു"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"റൊട്ടേഷൻ"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"സ്‌റ്റാൻഡേർഡ്"</string>
@@ -2116,6 +2118,14 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"\".\" ചേർക്കുന്നതിന് സ്‌പേസ് കീ രണ്ടുതവണ അമർത്തുക"</string>
     <string name="show_password" msgid="7101900779571040117">"പാസ്‌വേ‌ഡുകൾ കാണിക്കുക"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"ടൈപ്പ് ചെയ്യുന്ന അക്ഷരങ്ങൾ പ്രദർശിപ്പിക്കുക"</string>
+    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <skip />
+    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"പാസ്‌വേഡുകൾ, ക്രെഡിറ്റ് കാർഡ് നമ്പറുകൾ എന്നിവ പോലുള്ള വ്യക്തിഗതമായ ഡാറ്റയുൾപ്പെടെ നിങ്ങൾ ടൈപ്പുചെയ്യുന്ന എല്ലാ വാചകവും ഈ അക്ഷരത്തെറ്റ് പരിശോധനയ്‌ക്ക് ശേഖരിക്കാനായേക്കും. ഇത് <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> അപ്ലിക്കേഷനിൽ നിന്നും വരുന്നു. ഈ അക്ഷരത്തെറ്റ് പരിശോധന ഉപയോഗിക്കണോ?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"ക്രമീകരണം"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"ഭാഷ"</string>
@@ -2917,11 +2927,6 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"കഴിഞ്ഞ 24 മണിക്കൂറിലെ ഉപയോഗം കാണുക"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"അവസാനം ചാർജ് ചെയ്ത ശേഷമുള്ള ഉപയോഗം കാണുക"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"ആപ്പിന്റെ ബാറ്ററി ഉപയോഗം"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"വിശദാംശം ഉപയോഗിക്കൂ"</string>
@@ -3621,12 +3626,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"ഉപകരണം"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"കീബോർഡ്, ടച്ച്‌പാഡ്, ഡിസ്‌പ്ലേ, ശബ്‌ദം"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"ഡിസ്‌പ്ലേ"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"ശബ്‌ദം"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC ഓഫായതിനാൽ ലഭ്യമല്ല"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ഉപയോഗിക്കാൻ, ആദ്യം പേയ്മെന്റ് ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യുക"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"സമീപകാല ആപ്പുകൾ, ഡിഫോൾട്ട് ആപ്പുകൾ"</string>
@@ -3755,6 +3757,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, ടാഗ്, റീഡർ"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"കീബോർഡ്, ഹാപ്റ്റിക്‌സ്, വൈബ്രേറ്റ് ചെയ്യൽ,"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"ബാഹ്യ ഡിസ്പ്ലേ, കണക്റ്റ് ചെയ്‌ത ഡിസ്പ്ലേ, വിപുലീകരിച്ച ഡിസ്പ്ലേ, രണ്ടാമത്തെ ഡിസ്പ്ലേ, ബിൽറ്റ്-ഇൻ ഡിസ്പ്ലേ, ഡിസ്പ്ലേകൾ ക്രമീകരിക്കുക, മിറർ, ഡിസ്പ്ലേ വലുപ്പം, റൊട്ടേഷൻ, റെസല്യൂഷൻ, റീഫ്രഷ് തോത്"</string>
+    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"ശബ്ദവും വൈബ്രേഷനും"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"മീഡിയാ വോളിയം"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast വോളിയം"</string>
@@ -4387,12 +4391,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"റീസ്റ്റാർട്ട്"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"ഇപ്പോൾ വേണ്ട"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"വിപുലമായ മെമ്മറി പരിരക്ഷയെ കുറിച്ച് കൂടുതലറിയുക."</string>
-    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
-    <skip />
-    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
-    <skip />
-    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
-    <skip />
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Android OS ഡയഗ്‌നോസ്റ്റിക്‌സ്"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"OS ബിൽഡുകൾ സാധൂകരിക്കുക"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"ഡയഗ്‌നോസ്‌റ്റിക്‌സ്, സുതാര്യത, ബൈനറി"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"ഈ ഔദ്യോഗിക പ്രൊഫൈൽ നിയന്ത്രിക്കുന്നത്:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> നിയന്ത്രിക്കുന്നു"</string>
     <string name="launch_by_default" msgid="892824422067985734">"ഡിഫോൾട്ടായി തുറക്കുക"</string>
@@ -4513,18 +4514,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"ഡിഫോൾട്ട് USB കോൺഫിഗറേഷൻ"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"പവർ ഓപ്ഷനുകൾ"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"ഫയൽ കൈമാറാനുള്ള ഓപ്ഷനുകൾ"</string>
-    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
-    <skip />
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"ഡാറ്റാ ആക്‌സസ് പരിരക്ഷ"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"PCI ടണലിംഗ് അനുവദിക്കുക"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"പ്രവർത്തനക്ഷമമാക്കുമ്പോൾ, USB പെരിഫറലിനും Thunderbolt പെരിഫറലിനും PCI ടണലുകൾ സൃഷ്ടിക്കാനും സിസ്റ്റം മെമ്മറി ആക്‌സസ് ചെയ്യാനും കഴിയും"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"ഈ ക്രമീകരണം പരിഷ്‌കരിക്കാൻ അഡ്‌മിൻ ഉപയോക്താവായിരിക്കണം"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"നിങ്ങളുടെ ഐടി അഡ്‌മിൻ പ്രവർത്തനരഹിതമാക്കി"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"വിപുലമായ പരിരക്ഷാ മോഡ് പ്രവർത്തനരഹിതമാക്കി"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB മുൻഗണനകൾ"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB നിയന്ത്രിക്കുന്നത്"</string>
@@ -5796,10 +5791,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> / <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"നിങ്ങൾ വീക്ഷണ അനുപാതം മാറ്റുകയാണെങ്കിൽ ആപ്പ് റീസ്റ്റാർട്ട് ചെയ്യും. സംരക്ഷിക്കാത്ത മാറ്റങ്ങൾ നഷ്‌ടമായേക്കാം. ചില ആപ്പുകൾ നിർദ്ദിഷ്ട വീക്ഷണ അനുപാതങ്ങൾക്കായി ഒപ്റ്റിമൈസ് ചെയ്തേക്കില്ല."</string>
-    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
-    <skip />
-    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
-    <skip />
+    <string name="app_info_experience_category" msgid="6283332744508784886">"അനുഭവം"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"ഗെയിംപാഡ്"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"ഫിംഗർപ്രിന്റ് സെൻസർ"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ഫ്ലാഷ് അറിയിപ്പുകൾ"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ഫ്ലാഷ് അറിയിപ്പുകളെ കുറിച്ച്"</string>
@@ -6155,7 +6148,8 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"സാറ്റലൈറ്റ് ലാൻഡിംഗ് പേജ്"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"ഡെമോ പരീക്ഷിക്കുക"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"എങ്ങനെയാണ് ഇത് പ്രവർത്തിക്കുന്നതെന്ന് കാണൂ"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"മൊബൈൽ നെറ്റ്‌വർക്കോ വൈഫൈ നെറ്റ്‌വർക്കോ ഇല്ലാത്തപ്പോൾ, നിങ്ങളുടെ ഫോൺ ഒരു സാറ്റലൈറ്റിലേക്ക് സ്വയമേവ കണക്റ്റ് ചെയ്യും. മികച്ച കണക്ഷൻ ലഭിക്കാൻ, ആകാശം വ്യക്തമായി കാണുന്നിടത്ത് നിൽക്കുക. ഒരു മൊബൈൽ നെറ്റ്‌വർക്ക് ലഭ്യമാകുമ്പോൾ നിങ്ങളുടെ ഫോൺ അതിലേക്ക് വീണ്ടും കണക്‌റ്റ് ചെയ്യും. സാറ്റലൈറ്റ് വഴിയുള്ള കോളിംഗ് ലഭ്യമല്ല. എമർജൻസി കോളുകൾ തുടർന്നും കണക്റ്റ് ചെയ്‌തേക്കാം."</string>
+    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
+    <skip />
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"മികച്ച കണക്ഷൻ ലഭിക്കാൻ, ആകാശം വ്യക്തമായി കാണുന്നിടത്ത് നിൽക്കുക. ഒരു മൊബൈൽ നെറ്റ്‌വർക്ക് ലഭ്യമാകുമ്പോൾ നിങ്ങളുടെ ഫോൺ അതിലേക്ക് വീണ്ടും കണക്‌റ്റ് ചെയ്യും. സാറ്റലൈറ്റ് വഴിയുള്ള കോളിംഗ് ലഭ്യമല്ല. എമർജൻസി കോളുകൾ തുടർന്നും കണക്റ്റ് ചെയ്‌തേക്കാം."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"സാറ്റലൈറ്റ് കണക്റ്റിവിറ്റിയെ കുറിച്ച് കൂടുതൽ"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"സാറ്റലൈറ്റ് SOS ഡെമോ തുറക്കുക"</string>
@@ -6166,24 +6160,20 @@
     <string name="add_tile_action" msgid="5271301747196740442">"ടൈൽ ചേർക്കുക"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"സാറ്റലൈറ്റ് ടൈൽ പ്രോംപ്റ്റുകൾ"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
-    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"സാറ്റലൈറ്റ് ലഭ്യമല്ല"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"നിങ്ങൾ മൊബൈൽ അല്ലെങ്കിൽ വൈഫൈ നെറ്റ്‌വർക്കിലേക്ക് കണക്റ്റ് ചെയ്തിരിക്കുമ്പോൾ സാറ്റലൈറ്റ് കവറേജ് ലഭ്യമാകില്ല."</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"ഈ രാജ്യത്ത് അല്ലെങ്കിൽ പ്രദേശത്ത് സാറ്റലൈറ്റ് കണക്റ്റിവിറ്റി ലഭ്യമല്ല."</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"സാറ്റലൈറ്റ് കണക്റ്റിവിറ്റി ഇപ്പോൾ ലഭ്യമല്ല. പിന്നീട് വീണ്ടും ശ്രമിക്കുക."</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"നിങ്ങളുടെ മൊബൈൽ പ്ലാനിൽ സാറ്റലൈറ്റ് കവറേജ് ഉൾപ്പെടുന്നില്ല. സഹായത്തിന് സേവനദാതാവിനെ ബന്ധപ്പെടുക."</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"സാറ്റലൈറ്റ് സഹായത്തോടെ സന്ദേശമയയ്ക്കൽ ഉപയോഗിക്കാൻ, Google Messages നിങ്ങളുടെ ഡിഫോൾട്ട് സന്ദേശമയയ്ക്കൽ ആപ്പ് ആയിരിക്കണം."</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"നിങ്ങളുടെ സേവനദാതാവ് സാറ്റലൈറ്റ് കണക്റ്റിവിറ്റി പ്രവർത്തനക്ഷമമാക്കി. നിങ്ങളുടെ സേവനദാതാവിന്റെ സാറ്റലൈറ്റ് ക്രമീകരണത്തിൽ നിന്ന് കൂടുതലറിയുക."</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"ലഭ്യമായ ലൊക്കേഷനുകൾ കാണുക"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"ഡിഫോൾട്ട് ആപ്പ് മാറ്റുക"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"സേവനദാതാവിന്റെ ക്രമീകരണം കാണുക"</string>
+    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
     <skip />
-    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
     <skip />
-    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
-    <skip />
-    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
-    <skip />
-    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
-    <skip />
-    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
-    <skip />
-    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
-    <skip />
-    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
-    <skip />
-    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
-    <skip />
-    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
     <skip />
 </resources>

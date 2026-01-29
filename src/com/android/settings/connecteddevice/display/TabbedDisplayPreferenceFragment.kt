@@ -36,7 +36,6 @@ import com.android.settingslib.search.SearchIndexable
 import com.android.settingslib.search.SearchIndexableRaw
 import com.google.android.material.appbar.AppBarLayout
 import com.google.common.collect.HashBiMap
-import kotlin.math.min
 
 /**
  * The main fragment that holds both the DisplayTopologyPreferenceView and the
@@ -91,7 +90,8 @@ open class TabbedDisplayPreferenceFragment(
             if (args.containsKey(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG)) {
                 val displayId = args.getInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG)
 
-                // Ensure the display is valid and enabled before selecting it to avoid invalid state
+                // Ensure the display is valid and enabled before selecting it to avoid invalid
+                // state
                 val isDisplayEnabled =
                     viewModel.injector.getDisplays().any {
                         it.id == displayId &&
@@ -220,9 +220,10 @@ open class TabbedDisplayPreferenceFragment(
             // Propagate scroll events to selectedDisplayPrefContainer to match the
             // `appbar_scrolling_view_behavior` property
             val newEvent = MotionEvent.obtain(event)
-            // Limit the Y position as any yCoord >= target.height will be ignored
-            val maxY = min(newEvent.y, (selectedDisplayPrefContainer.height - 1).toFloat())
-            newEvent.offsetLocation(/* deltaX= */ 0f, maxY - newEvent.y)
+            newEvent.setLocation(
+                (selectedDisplayPrefContainer.width / 2).toFloat(),
+                (selectedDisplayPrefContainer.height / 2).toFloat(),
+            )
             selectedDisplayPrefContainer.dispatchGenericMotionEvent(newEvent)
             newEvent.recycle()
             return@setOnGenericMotionListener true

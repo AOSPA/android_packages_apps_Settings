@@ -957,6 +957,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"用作獨立顯示屏"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"鏡像內置顯示屏"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"顯示連線對話框"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"使用 HDR"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"可呈現更廣闊的色域和更明亮的焦點"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"外部顯示屏已解除連接"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"旋轉"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"標準"</string>
@@ -1142,7 +1144,7 @@
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"自動連線"</string>
     <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"允許裝置在進入此網絡覆蓋範圍時連線"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"新增裝置"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"使用 QR 碼，在此網絡中加入裝置"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"使用二維碼，在此網絡中加入裝置"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"二維條碼格式無效"</string>
     <string name="retry" msgid="7542103800274026915">"重試"</string>
     <string name="shared_message" msgid="2104244057926025072">"共用"</string>
@@ -2116,6 +2118,14 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"按兩下空格鍵即可插入「.」"</string>
     <string name="show_password" msgid="7101900779571040117">"顯示密碼"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"輸入時短暫顯示字元"</string>
+    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <skip />
+    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"這個拼字檢查程式可能會收集你輸入的所有文字，包括密碼和信用卡號碼等個人資料。程式是由應用程式「<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>」提供，你要使用嗎？"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"設定"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"語言"</string>
@@ -2917,11 +2927,6 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"查看過去 24 小時的使用情況"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"查看上次充滿電後的使用情況"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"應用程式電池用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"詳細使用狀況"</string>
@@ -3621,12 +3626,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"藍牙、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"藍牙、Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"裝置"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"鍵盤、觸控板、顯示、音效"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"顯示"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"音效"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"由於 NFC 已關閉，因此無法使用"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"如要使用，請先安裝付款應用程式"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使用的應用程式、預設應用程式"</string>
@@ -3755,6 +3757,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, 標籤, 閱讀器"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"鍵盤、觸感反應、震動、"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"外部顯示屏, 已連接的顯示屏, 延伸顯示屏, 次要顯示屏, 內置顯示屏, 排列顯示屏, 鏡像, 顯示大小, 旋轉, 解像度, 更新率"</string>
+    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"音量和震動"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"媒體音量"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast 音量"</string>
@@ -4387,12 +4391,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"重新啟動"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"暫時不要"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"進一步瞭解進階記憶體保護功能。"</string>
-    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
-    <skip />
-    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
-    <skip />
-    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
-    <skip />
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Android OS 診斷"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"驗證 OS 版本"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"診斷, 透明度, 二進位程式"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"這個工作設定檔由以下應用程式管理："</string>
     <string name="managing_admin" msgid="2633920317425356619">"由<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>管理"</string>
     <string name="launch_by_default" msgid="892824422067985734">"預設開啟"</string>
@@ -4513,18 +4514,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"預設 USB 設定"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"電源選項"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"檔案傳輸選項"</string>
-    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
-    <skip />
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"資料存取保護"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"允許 PCI 穿隧"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"啟用後，USB 和 Thunderbolt 周邊裝置可建立 PCI 穿隧並存取系統記憶體"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"此設定必須由管理員使用者修改"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"已由 IT 管理員停用"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"已由「進階保護功能模式」停用"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB 偏好設定"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB 由以下裝置控制"</string>
@@ -5796,10 +5791,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="DENOMINATOR">%2$s</xliff:g>嘅《<xliff:g id="NUMERATOR">%1$s</xliff:g>》"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"變更長寬比後，應用程式會重新啟動。你可能會遺失未儲存的變更內容。部分應用程式可能並未針對特定長寬比進行優化。"</string>
-    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
-    <skip />
-    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
-    <skip />
+    <string name="app_info_experience_category" msgid="6283332744508784886">"體驗"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"遊戲手掣"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指紋感應器"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"閃光燈通知"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"關於閃光燈通知"</string>
@@ -6155,7 +6148,8 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"衛星到達網頁"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"試用示範"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"查看運作方式"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"在沒有流動網絡或 Wi-Fi 網絡時，手機將自動連接衛星。在清楚看到天空的的地方可獲得最佳連線。如果有可用的流動網絡，手機就會重新連線。不支援衛星電話，但緊急電話可能仍能接通。"</string>
+    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
+    <skip />
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"在清楚看到天空的的地方可獲得最佳連線。如果有可用的流動網絡，手機就會重新連線。不支援衛星電話，但緊急電話可能仍能接通。"</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"進一步瞭解衛星連接"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"開啟「緊急衛星連接」示範"</string>
@@ -6166,24 +6160,20 @@
     <string name="add_tile_action" msgid="5271301747196740442">"新增圖塊"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"衛星圖塊提示"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
-    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"無法使用衛星"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"連線至流動網絡或 Wi-Fi 網絡後，便無法使用衛星連接。"</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"此國家或地區不支援衛星連接。"</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"目前無法使用衛星連接。請稍後再試。"</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"你的流動服務計劃不包括衛星連接。請聯絡你的流動網絡供應商尋求協助。"</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"你必須將「Google 訊息」設定為預設訊息應用程式，才能使用衛星訊息。"</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"你的流動網絡供應商已啟用衛星連接。請前往流動網絡供應商的衛星設定瞭解詳情。"</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"查看支援的地區"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"變更預設應用程式"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"查看流動網絡供應商設定"</string>
+    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
     <skip />
-    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
     <skip />
-    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
-    <skip />
-    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
-    <skip />
-    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
-    <skip />
-    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
-    <skip />
-    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
-    <skip />
-    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
-    <skip />
-    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
-    <skip />
-    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
     <skip />
 </resources>

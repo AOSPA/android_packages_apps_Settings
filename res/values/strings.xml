@@ -3375,11 +3375,11 @@
     <!-- Dark UI screen footer summary text shown to indicate Modes may turn on/off Dark theme automatically according to their triggers. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_modes_footer_summary">
         {count, plural, offset:2
-        =0    {Modes can also turn on dark theme}
-        =1    {{mode_1} also turns on dark theme}
-        =2    {{mode_1} and {mode_2} also turn on dark theme}
-        =3    {{mode_1}, {mode_2}, and {mode_3} also turn on dark theme}
-        other {{mode_1}, {mode_2}, and # more also turn on dark theme}
+        =0    {Modes can also turn on dark theme.}
+        =1    {{mode_1} also turns on dark theme.}
+        =2    {{mode_1} and {mode_2} also turn on dark theme.}
+        =3    {{mode_1}, {mode_2}, and {mode_3} also turn on dark theme.}
+        other {{mode_1}, {mode_2}, and # more also turn on dark theme.}
         }
     </string>
     <!-- Dark UI screen footer action text linking to Modes settings. [CHAR LIMIT=NONE] -->
@@ -6141,6 +6141,8 @@
     <string name="accessibility_expanded_dark_theme_title_in_search">Expanded dark theme</string>
     <!-- Summary for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=NONE] -->
     <string name="accessibility_expanded_dark_theme_summary">Automatically applies dark theme to most apps that don\'t support it, helping to improve accessibility</string>
+    <!-- Footer for the feature of forcing all apps to use dark theme. [CHAR LIMIT=35] -->
+    <string name="accessibility_expanded_dark_theme_footer">If you experience issues with the expanded option, use the standard option.</string>
     <!-- Search keywords for the Expanded dark theme settings. [CHAR_LIMIT=NONE] -->
     <string name="keywords_expanded_dark_theme">force invert, color inversion, contrast</string>
     <!-- Title for the Expanded dark theme per-app settings page. [CHAR LIMIT=35] -->
@@ -6436,6 +6438,18 @@
     <string name="accessibility_hearing_device_saved_title">Saved devices</string>
     <!-- Title for the preference category containing the controls of the hearing device. [CHAR LIMIT=35] -->
     <string name="accessibility_hearing_device_control">Hearing device controls</string>
+    <!-- Title for the preference category containing the controls of the audio routing. [CHAR LIMIT=35] -->
+    <string name="accessibility_hearing_device_routing_title">Sounds</string>
+    <!-- Title for the "Notifications" toggle in the Sounds category. [CHAR LIMIT=35] -->
+    <string name="accessibility_hearing_device_notification_routing_title">Notifications</string>
+    <!-- Title for the "Ringtones and alarms" toggle in the Sounds category. [CHAR LIMIT=35] -->
+    <string name="accessibility_hearing_device_ringtone_alarm_routing_title">Ringtones and alarms</string>
+    <!-- Summary for when audio is routed to the hearing device. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hearing_device_routing_hearing_device_summary">Sounds will play through hearing devices</string>
+    <!-- Summary for when audio is routed to the device speaker. (user's device speaker, e.g. phone, tablet, car) [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hearing_device_routing_device_speaker_summary">Sounds will play through device speaker</string>
+    <!-- Summary for when audio is routed to both the hearing device and the device speaker. (user's device speaker, e.g. phone, tablet, car) [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hearing_device_routing_duplicate_both_summary">Sounds will play through hearing devices and device speaker</string>
     <!-- Title for the accessibility preference for hearing devices. [CHAR LIMIT=35] -->
     <string name="accessibility_hearing_device_shortcut_title">Hearing device shortcut</string>
     <!-- Title for the Hearing Aid Compatibility preference in the accessibility page. [CHAR LIMIT=35] -->
@@ -15318,7 +15332,7 @@
     <!-- Safety Center issues banner group expandable title  [CHAR LIMIT=NONE] -->
     <string name="safety_center_issues_banner_group_expandable_title">More alerts</string>
     <!-- Safety Center issues banner group collapsible title  [CHAR LIMIT=NONE] -->
-    <string name="safety_center_issues_banner_group_collapsible_title">Less alerts</string>
+    <string name="safety_center_issues_banner_group_collapsible_title">Fewer alerts</string>
     <!-- Safety Center issues banner group subsection (for dismissed issues) title  [CHAR LIMIT=NONE] -->
     <string name="safety_center_dismissed_issues_subsection_title">Dismissed alerts</string>
     <!-- Title for a dialog confirming if a user wants to dismiss a safety center issue [CHAR LIMIT=NONE] -->
@@ -15456,6 +15470,18 @@
     <string name="user_settings_edit_name_precondition" translatable="false">Only full users who are not guests can modify their user name.</string>
     <string name="user_settings_edit_name_restricted" translatable="false">Modifying user name is not allowed for this user.</string>
     <!-- User settings screen end -->
+    <!-- User details settings screen start -->
+    <string name="user_details_settings_user_name_description" translatable="false">All users that can have details page.</string>
+    <string name="user_details_settings_precondition" translatable="false">Opening user details page is available only if multiuser feature is enabled.</string>
+    <string name="user_details_settings_unsupported" translatable="false">This device does not support multiuser feature.</string>
+    <string name="user_details_settings_for_self_unavailable" translatable="false">Opening user details page for yourself is not supported on this device.</string>
+    <string name="user_details_enable_calling_precondition" translatable="false">Requires that the device supports telephony, the requesting user is admin and selected user is not an owner or restricted user.</string>
+    <string name="user_details_enable_calling_unsupported" translatable="false">This device does not support telephony.</string>
+    <string name="user_details_setting_unavailable_user_not_admin" translatable="false">Only an admin user can change this setting.</string>
+    <string name="user_details_setting_unavailable_for_selected_user" translatable="false">This setting is unavailable for selected user.</string>
+    <string name="user_details_grant_admin_precondition" translatable="false">Admins can change admin status of other full users who are not guests or owner users if the device supports multiple admins and no relevant restrictions are enforced.</string>
+    <string name="user_details_grant_admin_unsupported" translatable="false">This device does not support multiple admins.</string>
+    <!-- User details settings screen end -->
 
     <!-- Enable WebApp Minter -->
     <string name="enable_webapp_minter_title">Enable Web App Installer Service</string>

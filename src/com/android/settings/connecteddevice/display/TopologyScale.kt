@@ -91,11 +91,9 @@ class TopologyScale(
                 // requirements.
                 .atLeast(minEdgeLength / smallestDisplayDim)
 
-        // A tall pane is likely to result in more scrolling. So we
-        // prevent the height from growing too large here, by limiting vertical padding to
-        // 1.75x of the minEdgeLength on each side. This keeps a comfortable amount of
-        // padding without it resulting in too much deadspace.
-        paneHeight = blockRatio * displayBounds.height() + minEdgeLength * 3.5f
+        paneHeight =
+            blockRatio * displayBounds.height() +
+                minEdgeLength * getVerticalPaddingMultiplier(displaysPos.size)
 
         // Set originPaneXY (the location of 0,0 in display space in the pane's coordinate system)
         // such that the display bounds rect is centered in the pane.
@@ -130,5 +128,21 @@ class TopologyScale(
             originPaneY,
             paneHeight,
         )
+    }
+
+    companion object {
+        fun getVerticalPaddingMultiplier(displayCount: Int): Float {
+            // A tall pane is likely to result in more scrolling. So we prevent the height from
+            // growing too large here, by limiting vertical padding to 1.75x of the minEdgeLength
+            // on each side. This keeps a comfortable amount of padding without it resulting in too
+            // much deadspace.
+            // When there's only one display topology hint text will be hidden and display dragging
+            // is not possible, so the extra space is not needed.
+            return if (displayCount > 1) MULTI_DISPLAY_VERTICAL_PADDING_MULTIPLIER
+            else SINGLE_DISPLAY_VERTICAL_PADDING_MULTIPLIER
+        }
+
+        const val MULTI_DISPLAY_VERTICAL_PADDING_MULTIPLIER = 3.5f
+        const val SINGLE_DISPLAY_VERTICAL_PADDING_MULTIPLIER = 1f
     }
 }

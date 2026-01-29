@@ -22,6 +22,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PIN_ATTEMPT_BEFORE_WIPE;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
+import static com.android.settings.flags.Flags.showFooterButtonsOnPasswordConfirm;
 import static com.android.settings.biometrics.GatekeeperPasswordProvider.containsGatekeeperPasswordHandle;
 import static com.android.settings.biometrics.GatekeeperPasswordProvider.getGatekeeperPasswordHandle;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE;
@@ -77,6 +78,8 @@ import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.time.Duration;
@@ -138,6 +141,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private DisappearAnimationUtils mDisappearAnimationUtils;
         private boolean mIsManagedProfile;
         private CharSequence mCheckBoxLabel;
+        private boolean mIsExpressiveStyle;
 
         // required constructor for fragments
         public ConfirmLockPasswordFragment() {
@@ -150,7 +154,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             final int storedQuality = mLockPatternUtils.getKeyguardStoredPasswordQuality(
                     mEffectiveUserId);
             final ConfirmLockPassword activity = (ConfirmLockPassword) getActivity();
-            final boolean isExpressiveStyle = getActivity().getIntent().getBooleanExtra(
+            mIsExpressiveStyle = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE, false) || (
                     activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.EXPRESSIVE);
             int layoutId = switch (activity.getConfirmCredentialTheme()) {
@@ -191,7 +195,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == storedQuality
                         || DevicePolicyManager.PASSWORD_QUALITY_MANAGED == storedQuality;
             }
-            if (isExpressiveStyle && mPasswordEntryLayout != null) {
+            if (mIsExpressiveStyle && mPasswordEntryLayout != null) {
                 final int textEntryLayoutHintId = mIsAlpha
                         ? R.string.unlock_set_unlock_mode_password
                         : R.string.unlock_set_unlock_mode_pin;
@@ -276,6 +280,27 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         @Override
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+
+            if (mIsExpressiveStyle && showFooterButtonsOnPasswordConfirm()
+                    && getResources().getBoolean(
+                        R.bool.config_show_footer_buttons_on_password_confirmation_screen)) {
+                mFooterBarMixin = mGlifLayout.getMixin(FooterBarMixin.class);
+                mFooterBarMixin.setSecondaryButton(
+                    new FooterButton.Builder(getActivity())
+                        .setText(R.string.lockpassword_clear_label)
+                        .setListener(this::onClearButtonClick)
+                        .setButtonType(FooterButton.ButtonType.CANCEL)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
+                        .build());
+                mFooterBarMixin.setPrimaryButton(
+                    new FooterButton.Builder(getActivity())
+                        .setText(R.string.lockpassword_confirm_label)
+                        .setListener(this::onConfirmButtonClick)
+                        .setButtonType(FooterButton.ButtonType.NEXT)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
+                        .build());
+            }
+
             if (mRemoteValidation) {
                 if (mCheckBox != null) {
                     mCheckBox.setText(TextUtils.isEmpty(mCheckBoxLabel)
@@ -306,6 +331,14 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         ? R.string.lockpassword_forgot_password
                         : R.string.lockpassword_forgot_pin);
             }
+        }
+
+        private void onConfirmButtonClick(View view) {
+            handleNext();
+        }
+
+        private void onClearButtonClick(View view) {
+            mPasswordEntry.setText(null);
         }
 
         @Override

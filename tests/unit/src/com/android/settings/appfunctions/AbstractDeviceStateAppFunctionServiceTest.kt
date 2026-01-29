@@ -25,21 +25,20 @@ import com.android.extensions.appfunctions.AppFunctionException
 import com.android.extensions.appfunctions.ExecuteAppFunctionRequest
 import com.android.extensions.appfunctions.ExecuteAppFunctionResponse
 import com.android.settings.appfunctions.executors.DeviceStateExecutor
-import com.android.settings.metrics.AppFunctionMetricsLogger
-import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
-import com.google.common.truth.Truth.assertThat
-import java.util.Locale
+import com.android.settings.metrics.toMetricsId
+import com.android.settingslib.metadata.AppFunctionMetricsLoggerInterface
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentCaptor
-import org.mockito.Captor
 import org.mockito.Mock
 import org.mockito.Mockito.verify
-import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
+import org.mockito.kotlin.any
+import org.mockito.kotlin.anyOrNull
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class AbstractDeviceStateAppFunctionServiceTest {
@@ -50,89 +49,60 @@ class AbstractDeviceStateAppFunctionServiceTest {
     @Mock
     private lateinit var mockCallback:
         OutcomeReceiver<ExecuteAppFunctionResponse, AppFunctionException>
-    @Captor private lateinit var responseCaptor: ArgumentCaptor<ExecuteAppFunctionResponse>
-    @Captor private lateinit var exceptionCaptor: ArgumentCaptor<AppFunctionException>
-    @Captor private lateinit var latencyCaptor: ArgumentCaptor<Long>
+    @Mock private lateinit var mockMetricsLogger: AppFunctionMetricsLoggerInterface
 
     private lateinit var service: TestDeviceStateAppFunctionService
-    private lateinit var metricsLogger: AppFunctionMetricsLogger
 
     // Test implementation of the abstract class that allows injecting mocks
     private class TestDeviceStateAppFunctionService(
         override val deviceStateProviderExecutors: List<DeviceStateExecutor>,
-        private val logger: AppFunctionMetricsLogger,
+        private val logger: AppFunctionMetricsLoggerInterface,
     ) : AbstractDeviceStateAppFunctionService() {
-        override val metricsLogger: AppFunctionMetricsLogger
+        override val metricsLogger: AppFunctionMetricsLoggerInterface
             get() = logger
 
         init {
             // Attach a base context to allow applicationContext to be used
             attachBaseContext(ApplicationProvider.getApplicationContext<Context>())
         }
-
-        // Helper to access protected property in tests
-        fun getEnglishContextForTest(): Context = englishContext
     }
 
     @Before
     fun setUp() {
-        metricsLogger = AppFunctionMetricsLogger()
-        service = TestDeviceStateAppFunctionService(listOf(mockProvider), metricsLogger)
+        service = TestDeviceStateAppFunctionService(listOf(mockProvider), mockMetricsLogger)
         service.onCreate()
     }
 
     @Test
-    fun onCreate_createsEnglishContext() {
-        val context = service.getEnglishContextForTest()
-        assertThat(context.resources.configuration.locales[0]).isEqualTo(Locale.US)
-    }
-
-    @Test
-    fun onExecuteFunction_invalidFunctionId_callsOnError() = runTest {
+    fun onExecuteFunction_invalidFunctionId_logsError() = runTest {
         val request = ExecuteAppFunctionRequest.Builder("test.package", "invalidFunction").build()
 
         service.onExecuteFunction(request, "test.package", CancellationSignal(), mockCallback)
 
-        verify(mockCallback).onError(exceptionCaptor.capture())
-        val exception = exceptionCaptor.value
-        assertThat(exception.errorCode).isEqualTo(AppFunctionException.ERROR_FUNCTION_NOT_FOUND)
-        assertThat(exception.message).contains("invalidFunction not supported")
+        verify(mockMetricsLogger)
+            .logAppFunctionError(
+                "test.package",
+                AppFunctionException.ERROR_FUNCTION_NOT_FOUND,
+                service.applicationContext,
+                null,
+            )
     }
 
     @Test
-    fun onExecuteFunction_validFunctionId_callsOnResult() = runTest {
-        // Arrange
+    fun onExecuteFunction_validFunctionId_logsSuccess() = runTest {
         val request =
-            ExecuteAppFunctionRequest.Builder(
-                    "test.package",
-                    DeviceStateAppFunctionType.GET_STORAGE.functionId,
-                )
-                .build()
-        val providerResult =
-            DeviceStateProviderExecutorResult(
-                states = listOf(PerScreenDeviceStates(description = "Storage State")),
-                hintText = "Storage Hint",
-            )
-        `when`(mockProvider.execute(DeviceStateAppFunctionType.GET_STORAGE))
-            .thenReturn(providerResult)
+            ExecuteAppFunctionRequest.Builder("test.package", "getUncategorizedDeviceState").build()
+        whenever(mockProvider.execute(any<DeviceStateAppFunctionType>(), anyOrNull()))
+            .thenReturn(DeviceStateProviderExecutorResult(emptyList()))
 
-        // Act
         service.onExecuteFunction(request, "test.package", CancellationSignal(), mockCallback)
 
-        // Assert
-        verify(mockCallback).onResult(responseCaptor.capture())
-        val response = responseCaptor.value
-        assertThat(response).isNotNull()
-
-        // Verify the returned document has the expected schema type.
-        val returnedDoc =
-            response
-                .getResultDocument()
-                .getPropertyDocument(ExecuteAppFunctionResponse.PROPERTY_RETURN_VALUE)
-        assertThat(returnedDoc).isNotNull()
-        assertThat(returnedDoc!!.schemaType)
-            .isEqualTo(
-                "com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateResponse"
+        verify(mockMetricsLogger)
+            .logAppFunction(
+                eq(DeviceStateAppFunctionType.GET_UNCATEGORIZED.toMetricsId()),
+                eq("test.package"),
+                any(),
+                eq(service.applicationContext),
             )
     }
 }
