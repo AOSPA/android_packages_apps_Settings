@@ -301,7 +301,9 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     @Test
     fun setupAppBarLayout_onMouseScroll_propagatesEvent() {
         val containerSpy = fragment.selectedDisplayPrefContainer
+        val containerWidth = 100
         val containerHeight = 100
+        whenever(containerSpy.width).thenReturn(containerWidth)
         whenever(containerSpy.height).thenReturn(containerHeight)
         val uptime = SystemClock.uptimeMillis()
         val motionEvent =
@@ -320,8 +322,8 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         assertThat(result).isTrue()
         verify(containerSpy).dispatchGenericMotionEvent(motionEventCaptor.capture())
         val capturedEvent = motionEventCaptor.value
-        // Expected Y is containerHeight / 2.
-        assertThat(capturedEvent.y).isEqualTo(50.0f)
+        assertThat(capturedEvent.x).isEqualTo(50.0f)
+        assertThat(capturedEvent.y).isEqualTo(0.0f)
         motionEvent.recycle()
     }
 
