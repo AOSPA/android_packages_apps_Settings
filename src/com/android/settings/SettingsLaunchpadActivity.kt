@@ -17,6 +17,7 @@
 package com.android.settings
 
 import android.app.Activity
+import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_FORWARD_RESULT
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
@@ -26,6 +27,7 @@ import com.android.settings.activityembedding.ActivityEmbeddingUtils
 import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.getTrampolineIntent
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.core.SubSettingLauncher
+import com.android.settings.spa.SpaActivity.Companion.getSpaActivityIntent
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.core.instrumentation.Instrumentable.METRICS_CATEGORY_UNKNOWN
@@ -141,7 +143,11 @@ class SettingsLaunchpadActivity : Activity() {
 
             val spaRoutePrefix = screenMetadata.spaRoutePrefix
             if (!spaRoutePrefix.isNullOrEmpty()) {
-                startSpaActivity(spaRoutePrefix, screenMetadata.topLevelSettingsCategory.value)
+                startScreen(
+                    screenMetadata,
+                    { getSpaActivityIntent(spaRoutePrefix) },
+                    { startSpaActivity(spaRoutePrefix) },
+                )
                 return
             }
         }
@@ -185,13 +191,25 @@ class SettingsLaunchpadActivity : Activity() {
                     METRICS_CATEGORY_UNKNOWN
                 ) // TODO(b/465855195): set a meaningful metrics category
 
+        startScreen(
+            metadata,
+            { launcher.toIntent() },
+            { launcher.addFlags(FLAG_ACTIVITY_NEW_TASK).launch() },
+        )
+    }
+
+    private fun startScreen(
+        metadata: PreferenceScreenMetadata,
+        intent: () -> Intent,
+        launch: () -> Unit,
+    ) {
         if (shouldLaunchDeepLinkTrampoline()) {
             val menuKey = resolveMenuKey(metadata)
             val deepLinkIntent =
-                getTrampolineIntent(launcher.toIntent(), menuKey).addFlags(FLAG_ACTIVITY_NEW_TASK)
+                getTrampolineIntent(intent(), menuKey).addFlags(FLAG_ACTIVITY_NEW_TASK)
             startActivity(deepLinkIntent)
         } else {
-            launcher.addFlags(FLAG_ACTIVITY_NEW_TASK).launch()
+            launch()
         }
     }
 
