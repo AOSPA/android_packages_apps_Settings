@@ -262,9 +262,9 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
     override fun executeIssueAction(
         issue: SafetyCenterIssue,
         action: SafetyCenterIssue.Action,
-        launchTaskId: Int,
+        launchTaskId: Int?,
     ) {
-        if (Flags.openSafetyCenterApis()) {
+        if (Flags.openSafetyCenterApis() && launchTaskId != null) {
             safetyCenterManager.executeSafetyCenterIssueAction(issue.id, action.id, launchTaskId)
         } else {
             safetyCenterManager.executeSafetyCenterIssueAction(issue.id, action.id)
