@@ -16,6 +16,8 @@
 
 package com.android.settings.localepicker;
 
+import static com.android.settings.localepicker.LocaleUtils.canDisplayLocaleUi;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -25,7 +27,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -55,7 +56,6 @@ import com.android.settings.applications.AppLocaleUtil;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -130,7 +130,7 @@ public class AppLocalePickerFragment extends DashboardFragment implements
             return;
         }
 
-        if (!canDisplayLocaleUi()) {
+        if (!canDisplayLocaleUi(mActivity, mPackageName)) {
             Log.w(TAG, "Not allow to display Locale Settings UI.");
             return;
         }
@@ -256,20 +256,6 @@ public class AppLocalePickerFragment extends DashboardFragment implements
             Log.w(TAG, "Application info not found for: " + packageName);
             return null;
         }
-    }
-
-    private boolean canDisplayLocaleUi() {
-        try {
-            PackageManager packageManager = getPackageManager();
-            return AppLocaleUtil.canDisplayLocaleUi(mActivity,
-                    packageManager.getApplicationInfo(mPackageName, 0),
-                    packageManager.queryIntentActivities(AppLocaleUtil.LAUNCHER_ENTRY_INTENT,
-                            PackageManager.GET_META_DATA));
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "Unable to find info for package: " + mPackageName);
-        }
-
-        return false;
     }
 
     private void filterSearch(@Nullable String query) {
