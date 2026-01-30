@@ -49,8 +49,8 @@ abstract class SafetyCenterViewModel(protected val app: Application) : AndroidVi
     /** Signals configuration change destruction to the ViewModel. */
     abstract fun changingConfigurations()
 
-    /** Triggering data refresh when Safety Center page opens. */
-    abstract fun pageOpen()
+    /** Triggering data refresh when Safety Center homepage or subpage opens. */
+    abstract fun pageOpen(safetySourceIds: List<String> = emptyList())
 
     /** Clears the current error state. */
     abstract fun clearError()
