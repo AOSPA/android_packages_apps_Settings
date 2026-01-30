@@ -66,9 +66,8 @@ class TemperatureUnitApiFirstScreen :
                                 .contains(value, ignoreCase = true)
                         ) {
                             RegionalPreferencesDataUtils.savePreference(
-                                context,
-                                ExtensionTypes.TEMPERATURE_UNIT,
-                                item,
+                                context, ExtensionTypes.TEMPERATURE_UNIT,
+                                item.takeIf { it != RegionalPreferencesDataUtils.DEFAULT_VALUE }
                             )
                             break
                         }
