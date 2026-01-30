@@ -25,7 +25,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 /** The view model of {@code BatteryChartView} */
-class BatteryChartViewModel {
+public class BatteryChartViewModel {
     private static final String TAG = "BatteryChartViewModel";
 
     public static final int SELECTED_INDEX_ALL = -1;
