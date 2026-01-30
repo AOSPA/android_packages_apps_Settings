@@ -14,13 +14,12 @@
      limitations under the License.
 -->
 
-<inset xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+<inset xmlns:android="http://schemas.android.com/apk/res/android">
     <ripple android:color="?android:attr/colorControlHighlight">
         <item>
             <shape android:shape="rectangle">
                 <corners android:radius="360dp" />
-                <solid android:color="@androidprv:color/materialColorPrimary" />
+                <solid android:color="@color/materialColorPrimary" />
             </shape>
         </item>
     </ripple>
