@@ -16,6 +16,7 @@
 
 package com.android.settings.network.telephony.satellite.quicksettings
 
+import android.app.ActivityManager
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
 import android.content.BroadcastReceiver
@@ -61,11 +62,17 @@ import org.mockito.junit.MockitoJUnit
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.Config
+import org.robolectric.annotation.Implementation
+import org.robolectric.annotation.Implements
+import org.robolectric.annotation.Resetter
 import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowActivityManager
 import org.robolectric.shadows.ShadowDeviceConfig
 import org.robolectric.shadows.ShadowProcess
 import org.robolectric.shadows.ShadowSatelliteManager
 import org.robolectric.shadows.ShadowSubscriptionManager
+import org.robolectric.shadows.ShadowSystemProperties
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(RobolectricTestRunner::class)
@@ -127,15 +134,16 @@ class SatelliteTileStateReceiverTest {
     @After
     fun tearDown() {
         ShadowDeviceConfig.reset()
+        ShadowSystemProperties.reset()
     }
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_flagDisabled_doesNothing() = runTest {
+    fun onReceive_flagDisabled_disablesTile() = runTest {
         sendBootCompletedBroadcast()
 
-        verify(packageManager, never()).setComponentEnabledSetting(any(), anyInt(), anyInt())
-        verify(pendingResult, never()).finish()
+        verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
+        verify(receiver, never()).goAsync()
     }
 
     @Test
@@ -150,13 +158,13 @@ class SatelliteTileStateReceiverTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_configIsFalse_doesNothing() = runTest {
+    fun onReceive_configIsFalse_disablesTile() = runTest {
         `when`(resources.getBoolean(R.bool.config_show_satellite_tile)).thenReturn(false)
 
         sendBootCompletedBroadcast()
 
+        verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
         verify(receiver, never()).goAsync()
-        verify(packageManager, never()).setComponentEnabledSetting(any(), anyInt(), anyInt())
     }
 
     @Test
@@ -205,14 +213,14 @@ class SatelliteTileStateReceiverTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_noSatelliteFeature_doesNothing() = runTest {
+    fun onReceive_noSatelliteFeature_disablesTile() = runTest {
         `when`(packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_SATELLITE))
             .thenReturn(false)
 
         sendBootCompletedBroadcast()
 
+        verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
         verify(receiver, never()).goAsync()
-        verify(packageManager, never()).setComponentEnabledSetting(any(), anyInt(), anyInt())
     }
 
     @Test
@@ -391,6 +399,23 @@ class SatelliteTileStateReceiverTest {
         SatelliteSupportedStateChangeHandler.register(context, testDispatcher)
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
+    fun isSatelliteTileFeatureEnabled_inTestHarness_returnsFalse() {
+        ShadowSystemProperties.override("ro.test_harness", "true")
+
+        assertThat(SatelliteTileStateReceiver.isSatelliteTileFeatureEnabled(context)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
+    @Config(shadows = [TestShadowActivityManager::class])
+    fun isSatelliteTileFeatureEnabled_inUserTestHarness_returnsFalse() {
+        TestShadowActivityManager.setIsRunningInUserTestHarness(true)
+
+        assertThat(SatelliteTileStateReceiver.isSatelliteTileFeatureEnabled(context)).isFalse()
+    }
+
     private fun sendBootCompletedBroadcast() {
         val intent = Intent(Intent.ACTION_BOOT_COMPLETED)
         receiver.onReceive(context, intent)
@@ -450,5 +475,28 @@ class SatelliteTileStateReceiverTest {
         assertThat(jobInfo.triggerContentUris).isNotEmpty()
         // Verify that the job is scheduled immediately (override deadline is set to 0)
         assertThat(jobInfo.maxExecutionDelayMillis).isEqualTo(0)
+    }
+
+    @Implements(ActivityManager::class)
+    class TestShadowActivityManager : ShadowActivityManager() {
+        companion object {
+            private var isRunningInUserTestHarness = false
+
+            @JvmStatic
+            fun setIsRunningInUserTestHarness(value: Boolean) {
+                isRunningInUserTestHarness = value
+            }
+
+            @JvmStatic
+            @Implementation
+            fun isRunningInUserTestHarness(): Boolean {
+                return isRunningInUserTestHarness
+            }
+
+            @Resetter
+            fun reset() {
+                isRunningInUserTestHarness = false
+            }
+        }
     }
 }

@@ -63,6 +63,12 @@ open class SatelliteEligibilityJobService : JobService() {
          * @param forceImmediate If true, the job runs immediately (override deadline 0).
          */
         fun schedule(context: Context, forceImmediate: Boolean = false) {
+            // Guard against scheduling if the feature is disabled (or in test harness)
+            if (!SatelliteTileStateReceiver.isSatelliteTileFeatureEnabled(context)) {
+                Log.d(TAG, "Feature disabled. Skipping job scheduling.")
+                return
+            }
+
             val subId = SubscriptionManager.getDefaultDataSubscriptionId()
             if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
                 Log.d(TAG, "Invalid subscription ID, skipping job scheduling.")
@@ -125,6 +131,12 @@ open class SatelliteEligibilityJobService : JobService() {
             return false
         }
         Log.d(TAG, "onStartJob: ${params.jobId}")
+
+        // Guard against executing if the feature is disabled (kills legacy jobs)
+        if (!SatelliteTileStateReceiver.isSatelliteTileFeatureEnabled(this)) {
+            Log.d(TAG, "Feature disabled. Stopping job.")
+            return false // Job is done, do not reschedule
+        }
 
         val subId = SubscriptionManager.getDefaultDataSubscriptionId()
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
