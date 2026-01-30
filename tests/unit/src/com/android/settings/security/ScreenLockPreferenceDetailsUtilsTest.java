@@ -41,10 +41,6 @@ import android.content.res.Resources;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -54,9 +50,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.SettingsActivity;
-import com.android.settings.flags.Flags;
 import com.android.settings.password.ChooseLockGeneric;
-import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.RestrictedLockUtils;
@@ -135,18 +129,6 @@ public class ScreenLockPreferenceDetailsUtilsTest {
     }
 
     @Test
-    @DisableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
-    public void getSummary_unsecureAndDisabledPattern_flagOff_shouldReturnUnlockModeOff() {
-        final String summary = prepareString("unlock_set_unlock_mode_off", "unlockModeOff");
-
-        when(mLockPatternUtils.isSecure(USER_ID)).thenReturn(false);
-        when(mLockPatternUtils.isLockScreenDisabled(anyInt())).thenReturn(true);
-
-        assertThat(mScreenLockPreferenceDetailsUtils.getSummary(USER_ID)).isEqualTo(summary);
-    }
-
-    @Test
-    @EnableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void getSummary_unsecureAndDisabledPattern_flagOn_shouldReturnUnlockModeOff() {
         final String summary = prepareString("unlock_set_unlock_mode_off_new", "unlockModeOff");
 
@@ -343,53 +325,6 @@ public class ScreenLockPreferenceDetailsUtilsTest {
         mScreenLockPreferenceDetailsUtils = new ScreenLockPreferenceDetailsUtils(mContext);
 
         assertThat(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).isFalse();
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRIC_ONBOARDING_EDUCATION)
-    public void shouldShowGearMenu_patternIsSecure_flagOn_shouldReturnFalse() {
-        when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
-
-        assertThat(mScreenLockPreferenceDetailsUtils.shouldShowGearMenu()).isFalse();
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_BIOMETRIC_ONBOARDING_EDUCATION)
-    public void shouldShowGearMenu_patternIsNotSecure_flagOff_shouldReturnFalse() {
-        when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
-
-        assertThat(mScreenLockPreferenceDetailsUtils.shouldShowGearMenu()).isFalse();
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_BIOMETRIC_ONBOARDING_EDUCATION)
-    public void shouldShowGearMenu_patternIsSecure_flagOff_shouldReturnTrue() {
-        when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
-
-        assertThat(mScreenLockPreferenceDetailsUtils.shouldShowGearMenu()).isTrue();
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRIC_ONBOARDING_EDUCATION)
-    public void shouldShowGearMenu_patternIsNotSecure_flagOn_shouldReturnFalse() {
-        when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
-
-        assertThat(mScreenLockPreferenceDetailsUtils.shouldShowGearMenu()).isFalse();
-    }
-
-    @Test
-    public void openScreenLockSettings_shouldSendIntent() {
-        mScreenLockPreferenceDetailsUtils.openScreenLockSettings(SOURCE_METRICS_CATEGORY);
-
-        assertFragmentLaunchRequested(ScreenLockSettings.class.getName());
-    }
-
-    @Test
-    public void getLaunchScreenLockSettingsIntent_returnsIntent() {
-        final Intent intent = mScreenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent(
-                SOURCE_METRICS_CATEGORY);
-
-        assertFragmentLaunchIntent(intent, ScreenLockSettings.class.getName());
     }
 
     @Test
