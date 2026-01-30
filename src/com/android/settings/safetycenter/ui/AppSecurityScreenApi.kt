@@ -21,23 +21,20 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 
 /**
- * API definition for the Account Security Subpage screen. This class exposes the screen to the
- * Settings API framework.
+ * API definition for the App Security Subpage screen. This class exposes the screen to the Settings
+ * API framework.
  */
-
-// LINT.IfChange
-@ProvidePreferenceScreen(AccountSecuritySubpageScreenApi.KEY)
-class AccountSecuritySubpageScreenApi :
+@ProvidePreferenceScreen(AppSecurityScreenApi.KEY)
+class AppSecurityScreenApi :
     SubpageScreenApi(
         key = KEY,
         topLevelSettingsCategory = Category.SAFETY_CENTER,
-        fragment = AccountSecuritySubpageFragment::class,
-        purpose = R.string.account_security_subpage_screen_purpose,
-        subpageRegistryKey = SafetyCenterSubpageRegistry.ACCOUNT_SECURITY_SUBPAGE_KEY,
+        fragment = AppSecuritySubpageFragment::class,
+        purpose = R.string.app_security_subpage_screen_purpose,
+        subpageRegistryKey = SafetyCenterSubpageRegistry.APP_SECURITY_SUBPAGE_KEY,
     ) {
 
     companion object {
-        const val KEY = "account_security_subpage_screen"
+        const val KEY = "app_security_subpage"
     }
 }
-// LINT.ThenChange(AccountSecuritySubpageFragment.kt)
