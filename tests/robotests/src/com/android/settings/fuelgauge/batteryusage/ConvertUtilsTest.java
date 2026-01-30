@@ -652,13 +652,10 @@ public final class ConvertUtilsTest {
         final List<BatteryEvent> batteryEventList =
                 ConvertUtils.convertToBatteryEventList(batteryLevelData);
 
-        assertThat(batteryEventList).hasSize(2);
-        assertThat(batteryEventList.get(0).getTimestamp()).isEqualTo(1691589600000L);
+        assertThat(batteryEventList).hasSize(1);
+        assertThat(batteryEventList.get(0).getTimestamp()).isEqualTo(1691596800000L);
         assertThat(batteryEventList.get(0).getType()).isEqualTo(BatteryEventType.EVEN_HOUR);
-        assertThat(batteryEventList.get(0).getBatteryLevel()).isEqualTo(98);
-        assertThat(batteryEventList.get(1).getTimestamp()).isEqualTo(1691596800000L);
-        assertThat(batteryEventList.get(1).getType()).isEqualTo(BatteryEventType.EVEN_HOUR);
-        assertThat(batteryEventList.get(1).getBatteryLevel()).isEqualTo(90);
+        assertThat(batteryEventList.get(0).getBatteryLevel()).isEqualTo(90);
     }
 
     @Test
@@ -673,16 +670,13 @@ public final class ConvertUtilsTest {
         final List<BatteryEvent> batteryEventList =
                 ConvertUtils.convertToBatteryEventList(batteryLevelData);
 
-        assertThat(batteryEventList).hasSize(3);
-        assertThat(batteryEventList.get(0).getTimestamp()).isEqualTo(1713909600000L);
+        assertThat(batteryEventList).hasSize(2);
+        assertThat(batteryEventList.get(0).getTimestamp()).isEqualTo(1713916800000L);
         assertThat(batteryEventList.get(0).getType()).isEqualTo(BatteryEventType.EVEN_HOUR);
-        assertThat(batteryEventList.get(0).getBatteryLevel()).isEqualTo(98);
-        assertThat(batteryEventList.get(1).getTimestamp()).isEqualTo(1713916800000L);
+        assertThat(batteryEventList.get(0).getBatteryLevel()).isEqualTo(90);
+        assertThat(batteryEventList.get(1).getTimestamp()).isEqualTo(1713924000000L);
         assertThat(batteryEventList.get(1).getType()).isEqualTo(BatteryEventType.EVEN_HOUR);
-        assertThat(batteryEventList.get(1).getBatteryLevel()).isEqualTo(90);
-        assertThat(batteryEventList.get(2).getTimestamp()).isEqualTo(1713924000000L);
-        assertThat(batteryEventList.get(2).getType()).isEqualTo(BatteryEventType.EVEN_HOUR);
-        assertThat(batteryEventList.get(2).getBatteryLevel()).isEqualTo(83);
+        assertThat(batteryEventList.get(1).getBatteryLevel()).isEqualTo(83);
     }
 
 
