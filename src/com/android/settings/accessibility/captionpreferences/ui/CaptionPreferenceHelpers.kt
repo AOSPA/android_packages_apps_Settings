@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-@file:Suppress("ktlint:standard:filename")
-
 package com.android.settings.accessibility.captionpreferences.ui
 
 import android.content.Context
 import androidx.annotation.ArrayRes
+import androidx.preference.Preference
+import com.android.settings.accessibility.ColorPreference
 
 /**
  * A helper class for managing lazy-initialized maps that associate preference values with their
@@ -57,3 +57,10 @@ class SummaryMap<K>(
         return currentMap[currentValue]
     }
 }
+
+/** Helper for creating a [ColorPreference] widget. */
+fun createColorWidget(context: Context, valuesRes: Int, titlesRes: Int): Preference =
+    ColorPreference(context, null).apply {
+        setTitles(context.resources.getStringArray(titlesRes))
+        setValues(context.resources.getIntArray(valuesRes))
+    }

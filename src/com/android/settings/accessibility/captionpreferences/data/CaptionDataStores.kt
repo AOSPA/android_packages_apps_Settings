@@ -25,20 +25,26 @@ import androidx.core.content.getSystemService
 import com.android.settings.accessibility.CaptionHelper
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.DataChangeReason
-import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 
 /** Base data store for caption preferences. */
-sealed class CaptionDataStore(context: Context) :
+sealed class CaptionDataStore(protected val context: Context, protected val settingKey: String) :
     AbstractKeyedDataObservable<String>(), KeyValueStore {
     protected val settingsSecureStore = SettingsSecureStore.get(context)
     protected val captionHelper by lazy { CaptionHelper(context) }
+
+    override fun contains(key: String) = settingsSecureStore.contains(settingKey)
+
+    // Whenever a style of a caption is changed, we'll turn on captioning. See b/221051127
+    protected fun enableCaptioning() {
+        captionHelper.isEnabled = true
+    }
 }
 
 /** Data store for caption font size preference. */
-class CaptionFontSizeDataStore(context: Context) : CaptionDataStore(context) {
+class CaptionFontSizeDataStore(context: Context) :
+    CaptionDataStore(context, Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE) {
     private val captionManager = context.getSystemService<CaptioningManager>()
     private val captioningChangeListener by lazy {
         object : CaptioningManager.CaptioningChangeListener() {
@@ -47,8 +53,6 @@ class CaptionFontSizeDataStore(context: Context) : CaptionDataStore(context) {
             }
         }
     }
-
-    override fun contains(key: String): Boolean = settingsSecureStore.contains(SETTING_KEY)
 
     override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>): T? =
         when (valueType) {
@@ -69,10 +73,10 @@ class CaptionFontSizeDataStore(context: Context) : CaptionDataStore(context) {
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
         when (valueType) {
             String::class.javaObjectType ->
-                setFloat(SETTING_KEY, (value as? String)?.toFloatOrNull())
+                setFloat(settingKey, (value as? String)?.toFloatOrNull())
             Float::class.javaObjectType -> {
-                settingsSecureStore.setFloat(SETTING_KEY, value as Float?)
-                captionHelper.isEnabled = true
+                settingsSecureStore.setFloat(settingKey, value as Float?)
+                enableCaptioning()
             }
         }
     }
@@ -87,41 +91,5 @@ class CaptionFontSizeDataStore(context: Context) : CaptionDataStore(context) {
 
     companion object {
         const val DEFAULT_CAPTION_SIZE = 1f
-        private const val SETTING_KEY = Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE
-    }
-}
-
-/** Data store for caption style preference. */
-class CaptionStyleDataStore(context: Context) : CaptionDataStore(context) {
-    private val observer by lazy { KeyedObserver<String> { _, reason -> notifyChange(reason) } }
-
-    override fun contains(key: String): Boolean = settingsSecureStore.contains(SETTING_KEY)
-
-    override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>): T? =
-        DEFAULT_STYLE as? T
-
-    override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
-        if (valueType != Int::class.javaObjectType) return null
-        return captionHelper.rawUserStyle as T
-    }
-
-    override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
-        if (valueType != Int::class.javaObjectType) return
-        captionHelper.rawUserStyle = value as Int
-        // Always turn on captioning whenever there's a style change. See: b/221051127
-        captionHelper.isEnabled = true
-    }
-
-    override fun onFirstObserverAdded() {
-        settingsSecureStore.addObserver(SETTING_KEY, observer, HandlerExecutor.main)
-    }
-
-    override fun onLastObserverRemoved() {
-        settingsSecureStore.removeObserver(SETTING_KEY, observer)
-    }
-
-    companion object {
-        const val DEFAULT_STYLE = 0
-        private const val SETTING_KEY = Settings.Secure.ACCESSIBILITY_CAPTIONING_PRESET
     }
 }
