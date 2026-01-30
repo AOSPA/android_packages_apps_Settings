@@ -103,8 +103,7 @@ public class WidgetsOnLockscreenPreferenceController extends TogglePreferenceCon
             return 1;
         }
 
-        return Flags.glanceableHubEnabledByDefault()
-                || context.getResources().getBoolean(
+        return context.getResources().getBoolean(
                 com.android.internal.R.bool.config_glanceableHubEnabledByDefault) ? 1 : 0;
     }
 
