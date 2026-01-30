@@ -72,7 +72,7 @@ abstract class SafetyCenterViewModel(protected val app: Application) : AndroidVi
     abstract fun executeIssueAction(
         issue: SafetyCenterIssue,
         action: SafetyCenterIssue.Action,
-        launchTaskId: Int,
+        launchTaskId: Int?,
     )
 
     /**
