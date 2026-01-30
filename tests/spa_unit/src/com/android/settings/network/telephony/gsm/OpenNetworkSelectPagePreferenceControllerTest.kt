@@ -21,22 +21,17 @@ import android.telephony.ServiceState
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
-import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.testutils.TestEnvironment
+import com.android.settings.testutils.runTestWithDispatcher
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -141,31 +136,15 @@ class OpenNetworkSelectPagePreferenceControllerTest {
         assertThat(preference.summary).isEqualTo(context.getString(R.string.network_disconnected))
     }
 
-    private interface Scope {
-        fun advanceUntilIdle()
+    private class ControllerTestScope(
+        base: TestEnvironment,
+        val controller: OpenNetworkSelectPagePreferenceController,
+    ) : TestEnvironment by base
 
-        val controller: OpenNetworkSelectPagePreferenceController
-        val testLifecycleOwner: TestLifecycleOwner
-    }
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    private fun runTestWithController(testBody: Scope.() -> Unit) = runTest {
-        val testDispatcher = StandardTestDispatcher(testScheduler)
-        Dispatchers.setMain(testDispatcher)
-        val scope =
-            object : Scope {
-                override fun advanceUntilIdle() {
-                    testScheduler.advanceUntilIdle()
-                }
-
-                override val controller = createController(testDispatcher)
-
-                override val testLifecycleOwner =
-                    TestLifecycleOwner(coroutineDispatcher = testDispatcher)
-            }
-        scope.testBody()
-        Dispatchers.resetMain()
-    }
+    private fun runTestWithController(testBody: suspend ControllerTestScope.() -> Unit) =
+        runTestWithDispatcher {
+            ControllerTestScope(this, createController(testDispatcher)).testBody()
+        }
 
     private companion object {
         const val TEST_KEY = "test_key"
